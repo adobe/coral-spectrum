@@ -1,0 +1,2 @@
+// Base namespace
+var CUI = {};

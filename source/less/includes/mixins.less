@@ -1,0 +1,100 @@
+/**
+ * Mixin: .font-face
+ * Quickly declare a font face
+ */
+.font-face(@font-name, @font-file) {
+	@font-face {
+		font-family: @font-name;
+		src: url(~"@{font-folder}/@{font-file}-webfont.eot");
+		src: url(~"@{font-folder}/@{font-file}-webfont.eot?#iefix") format("embedded-opentype"),
+			 url(~"@{font-folder}/@{font-file}-webfont.woff") format("woff"),
+			 url(~"@{font-folder}/@{font-file}-webfont.ttf") format("truetype"),
+			 url(~"@{font-folder}/@{font-file}-webfont.svg#@{font-name}") format("svg");
+		font-weight: normal;
+		font-style: normal;
+	}
+}
+
+
+/**
+ * Mixin: .columns
+ * A CSS3 column layout
+ */
+.columns(@count: 4, @gap: 0) {
+	-moz-column-count: @count;
+	-webkit-column-count: @count;
+	column-count: @count;
+	
+	-moz-column-gap: @gap;
+	-webkit-column-gap: @gap;
+	column-gap: @gap;	
+	
+	/* unsupported */
+	-moz-column-fill: balanced;
+	-webkit-column-fill: balanced;
+	column-fill: balanced;
+	
+	> * {
+		display: inline-block;
+		width: 100%;
+	}
+}
+
+
+/**
+ * Mixin: .gradient
+ * TBD: Ripped from Twitter Bootstrap: replace with actual Bootstrap include
+ */
+.gradient(@startColor: white, @endColor: black) {
+    background-color: mix(@startColor, @endColor, 60%);
+    background-image: -moz-linear-gradient(top, @startColor, @endColor); // FF 3.6+
+    background-image: -ms-linear-gradient(top, @startColor, @endColor); // IE10
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@startColor), to(@endColor)); // Safari 4+, Chrome 2+
+    background-image: -webkit-linear-gradient(top, @startColor, @endColor); // Safari 5.1+, Chrome 10+
+    background-image: -o-linear-gradient(top, @startColor, @endColor); // Opera 11.10
+    background-image: linear-gradient(top, @startColor, @endColor); // The standard
+    background-repeat: repeat-x;
+    filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",@startColor,@endColor)); // IE9 and down
+}
+
+/**
+ * Mixin: .border-radius
+ * TBD: Ripped from Twitter Bootstrap: replace with actual Bootstrap include
+ */
+.border-radius(@radius) {
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+          border-radius: @radius;
+}
+
+/**
+ * Mixin: .box-shadow
+ * TBD: Ripped from Twitter Bootstrap: replace with actual Bootstrap include
+ */
+.box-shadow(@shadow) {
+  -webkit-box-shadow: @shadow;
+     -moz-box-shadow: @shadow;
+          box-shadow: @shadow;
+}
+
+/**
+ * Mixin: .shadow
+ * A simpler syntax for shadow with defaults
+ */
+.shadow(@distance: 0.1em, @spread: 0.1em, @weight: 0.25) {
+	.box-shadow(@distance @distance @spread rgba(0, 0, 0, @weight));
+}
+
+
+/**
+ * Mixin: .ellipsis
+ * Truncate overflowed text using ellipsis: ...
+ */
+.ellipsis() {
+	display: inline-block; /* needs inline-block to display correctly */
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+

@@ -1,0 +1,31 @@
+// We're acting as an app, so we should always fill the screen completely
+html,
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+}
+
+
+// Set the default background color and font
+body {
+    background-color: @body-background-color;
+
+    font-family: @body-font-family;
+	color: @body-font-color;
+	font-size: @base-size + 0px; // the base size in pixels
+}
+
+
+// Double our base size for retina devices
+// TBD: break this out into retina.less? conditionally import?
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-device-pixel-ratio: 2) {
+	body {
+		font-size: @base-size * 2;
+	}
+	
+	// TBD: handle icons resizing here or in icons.less/retina.less?
+}

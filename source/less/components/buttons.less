@@ -1,0 +1,63 @@
+/**
+ * CUI Button styles
+ */
+
+// Button: Default (gray)
+button,
+a.button {
+	min-width: 135*@px;
+	
+	padding: 0.313em 1em;
+	border: 0.071em solid;
+
+	border-color: @button-gray-border-color;
+
+	color: @button-text-color;
+	text-decoration: none; // Reset underline on a.button
+	
+	.gradient(@button-gray-gradient-start-color, @button-gray-gradient-end-color);
+
+	&:active {
+		.gradient(@button-gray-down-gradient-start-color, @button-gray-down-gradient-end-color);
+	}
+}
+
+
+// Button: Primary (blue)
+button.primary,
+a.button.primary {
+	border-color: @button-blue-border-color;
+	
+	.gradient(@button-blue-gradient-start-color, @button-blue-gradient-end-color);
+
+	&:active {
+		.gradient(@button-blue-down-gradient-start-color, @button-blue-down-gradient-end-color);
+	}
+}
+
+
+// Button: Warning (red)
+button.warning,
+a.button.warning {
+	border-color: @button-red-border-color;
+	
+	.gradient(@button-red-gradient-start-color, @button-red-gradient-end-color);
+
+	&:active {
+		.gradient(@button-red-down-gradient-start-color, @button-red-down-gradient-end-color);
+	}
+}
+
+
+// Button: Disabled
+button.disabled,
+button[disabled],
+a.button.disabled,
+button.disabled:active,
+button[disabled]:active,
+a.button.disabled:active {
+	cursor: default;
+	border-color: @button-disabled-border-color;
+
+	.gradient(@button-disabled-gradient-start-color, @button-disabled-gradient-end-color);
+}
