@@ -93,3 +93,42 @@ Results in documentation,
 ```
 grunt watch
 ```
+
+
+## Suggestions from Granite folks
+
+* Build tasks that support Granite integration
+    * Creates zip file in CRX form
+    * Creates zip file in deployment form
+    * Create CRX content package
+        * Instead of copying CSS/LESS/JS directly into Granite Git repository
+        * Content package is a zip that mimics structure in repo, top level folder is jcr_root, installed into running instance
+        * Creates Maven artifact
+            * deployed to local Maven
+            * deployed to central Maven repository
+        * Talk to Christanto & Tobias
+* Move effort under the Reef organization
+    * Eventually, move the repository under the Reef org (next to Granite repository)
+    * Wait to move until we've proposed this to the Granite list
+* Re-use part of Bootstrap widgets, not style
+
+
+## Next steps
+
+* Tobias, Aaron, Ondrej, review of existing structure in lawdavis/CloudUI
+* Create CRX content package
+* Decide what we're providing with CloudUI/GraniteUI and what is expected to be implemented by individual products
+* Begin creating HTML style guide 
+    * Basic components
+        * Header
+        * Rail
+        * Toolbar
+    * A widget or two:
+        * Contextual alerts
+        * Modals
+        * Tooltips
+        * Checkbox
+* Propose concept to Granite mailing list
+    * Cover potentially controversial decisions
+        * EMs vs Px
+    
