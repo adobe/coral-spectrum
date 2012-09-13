@@ -6,6 +6,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-contrib-copy');
   //grunt.loadNpmTasks('grunt-contrib-handlebars'); // waiting on fix for hb4
+  grunt.loadNpmTasks('grunt-contrib-mincss');
   grunt.loadNpmTasks('grunt-contrib-less');
 
   grunt.initConfig({
@@ -18,7 +19,8 @@ module.exports = function(grunt) {
     dirs: {
       build: 'build/',
       source: 'source/',
-      temp: 'temp/'
+      temp: 'temp/',
+      components: 'components/'
     },
 
     // Configuration
@@ -36,11 +38,11 @@ module.exports = function(grunt) {
         browser: true,
         smarttabs: true,
         predef: [
-          '$',        // jQuery
-          'jQuery',     // jQuery
+          '$',            // jQuery
+          'jQuery',       // jQuery
           'console',      // console.log...
           'Backbone',     // Backbone
-          '_',        // Underscore
+          '_',            // Underscore
           'Handlebars'    // Handlebars
         ]
       },
@@ -74,10 +76,18 @@ module.exports = function(grunt) {
         },
         files: {
           '<%= dirs.build %>js/libs': [
-            './components/backbone/backbone.js',
-            './components/underscore/underscore.js',
-            './components/jquery/jquery.js'
+            '<%= dirs.components %>backbone/backbone.js',
+            '<%= dirs.components %>underscore/underscore.js',
+            '<%= dirs.components %>jquery/jquery.js'
           ]
+        }
+      }
+    },
+    
+    mincss: {
+      main: {
+        files: {
+          '<%= dirs.build %>css/cui.min.css': '<%= dirs.build %>css/cui.css'
         }
       }
     },
@@ -85,14 +95,14 @@ module.exports = function(grunt) {
     handlebars: {
       compile: {
         options: {
-          namespace: "this",
+          namespace: 'this',
           processName: function(path) {
             // Pull the filename out as the template name
             return path.split('/').pop().split('.').shift();
           }
         },
         files: {
-          "<%= dirs.temp %>Templates.js": "<%= dirs.source %>templates/*"
+          '<%= dirs.build %>js/CUI.Templates.js': '<%= dirs.source %>templates/*'
         }
       }
     },
@@ -115,7 +125,8 @@ module.exports = function(grunt) {
     
     jsdoc: {
       cui: {
-        src: ['js/**'],
+        jsdoc: '<%= dirs.components %>JSDoc/jsdoc',
+        src: ['<%= dirs.source %>js/**'],
         dest: '<%= dirs.build %>jsdoc'
       }
     },
@@ -130,8 +141,8 @@ module.exports = function(grunt) {
     concat: {
       js: {
         src: [
-          '<%= dirs.source %>js/CUI.js',    // Namespace
-          '<%= dirs.temp %>Templates.js'    // Templates
+          '<%= dirs.source %>js/CUI.js',          // Namespace
+          '<%= dirs.build %>js/CUI.Templates.js'  // Templates
         ],
         dest: '<%= dirs.build %>js/cui.js'
       }
@@ -143,15 +154,15 @@ module.exports = function(grunt) {
         dest: '<%= dirs.build %>js/cui.min.js'
       }, // TBD: minify individual JS files?
       jquery: {
-        src: 'components/jquery/jquery.js',
+        src: '<%= dirs.components %>jquery/jquery.js',
         dest: '<%= dirs.build %>js/libs/jquery.min.js'
       },
       backbone: {
-        src: 'components/backbone/backbone.js',
+        src: '<%= dirs.components %>backbone/backbone.js',
         dest: '<%= dirs.build %>js/libs/backbone.min.js'
       },
       underscore: {
-        src: 'components/underscore/underscore.js',
+        src: '<%= dirs.components %>underscore/underscore.js',
         dest: '<%= dirs.build %>js/libs/underscore.min.js'
       }
     },
@@ -159,7 +170,10 @@ module.exports = function(grunt) {
     less: {
       compile: {
         options: {
-          paths: ['source/less/'] // must hardcore source here, grunt-contrib-less doesn't support config!
+          paths: [
+            'source/less/', // must hardcore paths here, grunt-contrib-less doesn't support config
+            'components/bootstrap/less'
+          ]
         },
         files: {
           '<%= dirs.build %>css/cui.css': '<%= dirs.source %>less/cui.less'
@@ -200,9 +214,7 @@ module.exports = function(grunt) {
   grunt.registerTask('partial', 'clean less lint copy handlebars concat');
 
   // Full build with docs and compressed file
-  // TODO: some sort of clean JSDoc install?
-  //grunt.registerTask('full', 'clean less lint copy handlebars concat min jsdoc compress');
-  grunt.registerTask('full', 'clean less lint copy handlebars concat min compress');
+  grunt.registerTask('full', 'clean less mincss lint copy handlebars concat min jsdoc compress');
   
   // Default task
   grunt.registerTask('default', 'partial');
