@@ -5,47 +5,56 @@
 // Button: Default (gray)
 button,
 a.button {
-	min-width: 135*@px;
-	
-	padding: 0.313em 1em;
-	border: 0.071em solid;
+  display: inline-block;
+  .box-sizing(border-box); // Makes 135px min-width apply consistently between anchor/button
+  
+  min-width: 135*@px;
+  
+  margin: 0; // reset default margin on button tag
+  padding: 0.313em 1em;
+  border: @px solid;
 
-	border-color: @button-gray-border-color;
+  border-color: @button-gray-border-color;
 
-	color: @button-text-color;
-	text-decoration: none; // Reset underline on a.button
-	
-	.gradient(@button-gray-gradient-start-color, @button-gray-gradient-end-color);
+  font-family: @body-font-family;
+  font-size: @button-text-size;
+  color: @button-text-color;
+  text-decoration: none; // Reset underline on a.button
+  text-align: center;
+  
+  cursor: pointer; // give hand cursor
+  
+  .gradient(@button-gray-gradient-start-color, @button-gray-gradient-end-color);
 
-	&:active {
-		.gradient(@button-gray-down-gradient-start-color, @button-gray-down-gradient-end-color);
-	}
+  &:active {
+    .gradient(@button-gray-down-gradient-start-color, @button-gray-down-gradient-end-color);
+  }
 }
 
 
 // Button: Primary (blue)
 button.primary,
 a.button.primary {
-	border-color: @button-blue-border-color;
-	
-	.gradient(@button-blue-gradient-start-color, @button-blue-gradient-end-color);
+  border-color: @button-blue-border-color;
+  
+  .gradient(@button-blue-gradient-start-color, @button-blue-gradient-end-color);
 
-	&:active {
-		.gradient(@button-blue-down-gradient-start-color, @button-blue-down-gradient-end-color);
-	}
+  &:active {
+    .gradient(@button-blue-down-gradient-start-color, @button-blue-down-gradient-end-color);
+  }
 }
 
 
 // Button: Warning (red)
 button.warning,
 a.button.warning {
-	border-color: @button-red-border-color;
-	
-	.gradient(@button-red-gradient-start-color, @button-red-gradient-end-color);
+  border-color: @button-red-border-color;
+  
+  .gradient(@button-red-gradient-start-color, @button-red-gradient-end-color);
 
-	&:active {
-		.gradient(@button-red-down-gradient-start-color, @button-red-down-gradient-end-color);
-	}
+  &:active {
+    .gradient(@button-red-down-gradient-start-color, @button-red-down-gradient-end-color);
+  }
 }
 
 
@@ -56,8 +65,8 @@ a.button.disabled,
 button.disabled:active,
 button[disabled]:active,
 a.button.disabled:active {
-	cursor: default;
-	border-color: @button-disabled-border-color;
+  cursor: default;
+  border-color: @button-disabled-border-color;
 
-	.gradient(@button-disabled-gradient-start-color, @button-disabled-gradient-end-color);
+  .gradient(@button-disabled-gradient-start-color, @button-disabled-gradient-end-color);
 }

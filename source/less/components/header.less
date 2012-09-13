@@ -1,0 +1,54 @@
+/**
+ * Class: div#header
+ * Appears at the top of each page
+ */
+header {
+  .flexbox;           // it's a flexbox
+  .flex-row;          // that spans horizontally
+  .flex-pack-start;   // with items packed to the left
+  .flex-align-center; // and items centered vertically
+  
+  height: @header-height;
+  background-color: @header-background-color;
+  
+  color: @header-item-font-color;
+  
+  div.logo {
+    padding: 0 0.75em;
+    
+    .box-sizing(border-box);
+    text-align: center;
+    
+    img {
+      height: @header-height / 5 * 3; /* 3/5 the height of the header */
+    }
+  }
+  
+  nav {
+    .flex-ratio(4);
+    
+    a {
+      display: inline-block;
+      height: @header-height;
+
+      /*
+      Spacing as a function of header item spacing
+      Give some to padding, and some to margin
+      */
+      padding: 0 @header-item-spacing / 4;
+      margin-right: @header-item-spacing / 2;
+      
+      line-height: @header-height;
+      
+      text-decoration: none;
+      
+      &.down {
+        color: @header-item-down-font-color;
+      }
+    }
+  }
+  
+  div.drawer {
+    text-align: right;
+  }
+}

@@ -1,0 +1,52 @@
+/**
+ * Class: ul.grid
+ * A table-like grid that displays items in a responsive grid. 
+ *
+ * Notes:
+ *  You should override the height and width of the list items to meet your needs
+ *  Use a masonry grid when the presentation/content is importan
+ */
+ul.grid {
+  list-style: none;
+  padding: 0;
+  margin: 0.5em;
+  
+  &.edit {
+    /// TODO: add diagonally striped grid using gradients or image
+    background-color: @grid-edit-background-color;
+  }
+  
+  li {
+    display: inline-block;
+    // TBD: decide default width/heights
+    height: 6em;
+    width: 6em;
+    padding: 0;
+    margin: @grid-spacing;
+    
+    background-color: @grid-item-background-color;
+    border: @px solid @grid-item-border-color;
+  }
+}
+
+/**
+ * Class: ul.grid.masonry
+ * A masonry grid that packs items regardless of differences in height.
+ * Note that this approach is not compatible with IE 9
+ * TBD: implement a fallback for older browsers
+ * TBD: investigate multi-column spanning items
+ */
+ul.grid.masonry {
+  .columns(@grid-columns, @grid-spacing); /* A four column layout spaced by 1em */
+  
+  li {
+    width: 100%;
+    height: auto;
+    margin: 0 0 @grid-spacing 0;
+    
+    /*
+    This screws alignment up, possibly related to http://code.google.com/p/chromium/issues/detail?id=129178
+    */
+    .shadow(0, 0.5em);
+  }
+}
