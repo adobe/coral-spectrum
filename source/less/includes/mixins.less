@@ -1,18 +1,20 @@
+@import 'flexbox';  // CSS3 2009/2012 flexbox mixins
+
 /**
  * Mixin: .font-face
  * Quickly declare a font face
  */
 .font-face(@font-name, @font-file) {
-	@font-face {
-		font-family: @font-name;
-		src: url(~"@{font-folder}/@{font-file}-webfont.eot");
-		src: url(~"@{font-folder}/@{font-file}-webfont.eot?#iefix") format("embedded-opentype"),
-			 url(~"@{font-folder}/@{font-file}-webfont.woff") format("woff"),
-			 url(~"@{font-folder}/@{font-file}-webfont.ttf") format("truetype"),
-			 url(~"@{font-folder}/@{font-file}-webfont.svg#@{font-name}") format("svg");
-		font-weight: normal;
-		font-style: normal;
-	}
+  @font-face {
+    font-family: @font-name;
+    src: url(~"@{font-folder}/@{font-file}-webfont.eot");
+    src: url(~"@{font-folder}/@{font-file}-webfont.eot?#iefix") format("embedded-opentype"),
+         url(~"@{font-folder}/@{font-file}-webfont.woff") format("woff"),
+         url(~"@{font-folder}/@{font-file}-webfont.ttf") format("truetype"),
+         url(~"@{font-folder}/@{font-file}-webfont.svg#@{font-name}") format("svg");
+    font-weight: normal;
+    font-style: normal;
+  }
 }
 
 
@@ -21,23 +23,23 @@
  * A CSS3 column layout
  */
 .columns(@count: 4, @gap: 0) {
-	-moz-column-count: @count;
-	-webkit-column-count: @count;
-	column-count: @count;
-	
-	-moz-column-gap: @gap;
-	-webkit-column-gap: @gap;
-	column-gap: @gap;	
-	
-	/* unsupported */
-	-moz-column-fill: balanced;
-	-webkit-column-fill: balanced;
-	column-fill: balanced;
-	
-	> * {
-		display: inline-block;
-		width: 100%;
-	}
+  -moz-column-count: @count;
+  -webkit-column-count: @count;
+  column-count: @count;
+  
+  -moz-column-gap: @gap;
+  -webkit-column-gap: @gap;
+  column-gap: @gap; 
+  
+  /* unsupported */
+  -moz-column-fill: balanced;
+  -webkit-column-fill: balanced;
+  column-fill: balanced;
+  
+  > * {
+    display: inline-block;
+    width: 100%;
+  }
 }
 
 
@@ -82,7 +84,7 @@
  * A simpler syntax for shadow with defaults
  */
 .shadow(@distance: 0.1em, @spread: 0.1em, @weight: 0.25) {
-	.box-shadow(@distance @distance @spread rgba(0, 0, 0, @weight));
+  .box-shadow(@distance @distance @spread rgba(0, 0, 0, @weight));
 }
 
 
@@ -91,10 +93,19 @@
  * Truncate overflowed text using ellipsis: ...
  */
 .ellipsis() {
-	display: inline-block; /* needs inline-block to display correctly */
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
+  display: inline-block; /* needs inline-block to display correctly */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
-
+/**
+ * Mixin: box-sizing
+ * TBD: Ripped from Twitter Bootstrap: replace with actual Bootstrap include
+ */
+.box-sizing(@boxmodel) {
+  -webkit-box-sizing: @boxmodel;
+     -moz-box-sizing: @boxmodel;
+      -ms-box-sizing: @boxmodel;
+          box-sizing: @boxmodel;
+}

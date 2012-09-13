@@ -1,0 +1,171 @@
+/** 
+CSS3 Flexbox Layout Module Helper Classes 
+Copyright (c) 2011 David Zarlengo
+https://github.com/politician/csswg-flexbox-less
+*/
+
+// box-lines: single | multiple
+.compat-box-lines(@lines) {
+  -webkit-box-lines: @lines;
+     -moz-box-lines: @lines;
+    -ms-box-lines: @lines;
+      box-lines: @lines;  
+}
+
+// box-orient: horizontal | vertical
+.compat-box-orient(@orientation) {
+  -webkit-box-orient: @orientation;
+     -moz-box-orient: @orientation;
+    -ms-box-orient: @orientation;
+      box-orient: @orientation;
+}
+
+// box-direction: normal | reverse
+.compat-box-direction(@direction) {
+  -webkit-box-direction: @direction;
+     -moz-box-direction: @direction;
+    -ms-box-direction: @direction;
+      box-direction: @direction;
+}
+
+// box-flex: <number>
+.compat-box-flex(@ratio) {
+  -webkit-box-flex: @ratio;
+     -moz-box-flex: @ratio;
+    -ms-box-flex: @ratio;
+      box-flex: @ratio;
+}
+
+// box-align: center (w/ ms fix)
+.compat-box-align-center {
+  -webkit-box-align: center;
+     -moz-box-align: center;
+    -ms-box-align: middle;
+      box-align: center;
+}
+
+.compat-flexbox {
+  display: -webkit-box;
+  display:  -moz-box;
+  display:   -ms-box;
+  display:     box;
+}
+
+.flexbox {
+  display: flexbox;
+  
+  .compat-flexbox();
+}
+
+.flex-ratio(@ratio) {
+  /*width: flex(@ratio);*/
+  .compat-box-flex(@ratio);
+}
+
+// same-axis alignment
+.flex-pack(@pack) {
+  flex-pack: @pack;
+  -webkit-box-pack: @pack;
+     -moz-box-pack: @pack;
+    -ms-box-pack: @pack;
+      box-pack: @pack;
+}
+
+.flex-pack-start    { .flex-pack(start); }
+.flex-pack-end      { .flex-pack(end); }
+.flex-pack-center   { .flex-pack(center); }
+.flex-pack-justify    { .flex-pack(justify); }
+
+// cross-axis alignment
+.flex-align(@align) {
+  flex-align: @align;
+  -webkit-box-align: @align;
+     -moz-box-align: @align;
+    -ms-box-align: @align;
+      box-align: @align;
+}
+
+.flex-align-start   { .flex-align(start); }
+.flex-align-end     { .flex-align(end); }
+.flex-align-baseline  { .flex-align(baseline); }
+.flex-align-stretch   { .flex-align(stretch); }
+.flex-align-center    { flex-align: center; .compat-box-align-center; }
+
+// flow
+.flex-row {
+  flex-flow: row;
+
+  .compat-box-orient(horizontal);
+  .compat-box-direction(normal);
+  .compat-box-lines(single);
+}
+
+.flex-row-wrap {
+  flex-flow: row wrap;
+
+  .compat-box-orient(horizontal);
+  .compat-box-direction(normal);
+  .compat-box-lines(multiple);
+}
+
+.flex-row-reverse {
+  flex-flow: row-reverse;
+
+  .compat-box-orient(horizontal);
+  .compat-box-direction(reverse);
+  .compat-box-lines(single);
+}
+
+.flex-row-reverse-wrap {
+  flex-flow: row-reverse wrap;
+
+  .compat-box-orient(horizontal);
+  .compat-box-direction(reverse);
+  .compat-box-lines(multiple);
+}
+
+.flex-column {
+  flex-flow: column;
+
+  .compat-box-orient(vertical);
+  .compat-box-direction(normal);
+  .compat-box-lines(single);
+}
+
+.flex-column-wrap {
+  flex-flow: column wrap;
+
+  .compat-box-orient(vertical);
+  .compat-box-direction(reverse);
+  .compat-box-lines(multiple);
+}
+
+.flex-column-reverse {
+  flex-flow: column-reverse;
+
+  .compat-box-orient(vertical);
+  .compat-box-direction(reverse);
+  .compat-box-lines(single);
+}
+
+.flex-column-reverse-wrap {
+  flex-flow: column-reverse wrap;
+
+  .compat-box-orient(vertical);
+  .compat-box-direction(reverse);
+  .compat-box-lines(multiple);
+}
+
+// this is an item style, not a box style
+.flex-order(@group) {
+  flex-order: @group;
+  -webkit-box-ordinal-group: @group;
+     -moz-box-ordinal-group: @group;
+    -ms-box-ordinal-group: @group;
+      box-ordinal-group: @group;
+}
+
+// alias for .flex-order
+.flex-item-group(@group) {
+  .flex-order(@group);
+}
