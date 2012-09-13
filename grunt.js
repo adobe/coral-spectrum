@@ -209,10 +209,10 @@ module.exports = function(grunt) {
   });
   
   // Partial build for development
-  grunt.registerTask('partial', 'clean less lint copy handlebars concat min:cui mincss');
+  grunt.registerTask('partial', 'clean copy lint handlebars concat min:cui less mincss');
   
   // Full build with docs and compressed file
-  grunt.registerTask('full', 'clean less lint copy handlebars concat min mincss jsdoc compress');
+  grunt.registerTask('full', 'clean copy lint handlebars concat min less mincss jsdoc compress');
   
   // Default task
   grunt.registerTask('default', 'partial');
