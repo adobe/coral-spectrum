@@ -4,6 +4,9 @@
 All the CSS and JS you need for the CloudUI look & feel.
 
 
+## More Information
+See the [CloudUI Wiki](https://git.corp.adobe.com/lawdavis/CloudUI/wiki) for more information.
+
 ## Building
 
 ### Initial install
