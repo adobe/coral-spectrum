@@ -9,17 +9,15 @@ See the [CloudUI Wiki](https://git.corp.adobe.com/lawdavis/CloudUI/wiki) for mor
 
 ## Building
 
-### Initial install
+### Build dependencies
 
-To install dependencies only:
-```
-bower install
-npm install
-```
+You must have NodeJS and NPM installed to build CloudUI. 
 
-Or, fetch dependencies and perform a full build from scratch:
+### Initial install and build
+
+To fetch dependencies and perform a full build from scratch:
 ```
-./build.sh
+./install.sh
 ```
 
 ###To build for development:
