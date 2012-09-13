@@ -11,16 +11,28 @@ header {
   height: @header-height;
   background-color: @header-background-color;
   
+  .box-shadow(0 0.1em 0.45em rgba(0, 0, 0, .35)); // TBD: make sure this matches mocks...
+    
   color: @header-item-font-color;
   
   div.logo {
     padding: 0 0.75em;
+    
+    .flexbox;           // it's a flexbox
+    .flex-row;          // that spans horizontally
+    .flex-pack-start;   // with items packed to the left
+    .flex-align-center; // and items centered vertically
     
     .box-sizing(border-box);
     text-align: center;
     
     img {
       height: @header-height / 5 * 3; /* 3/5 the height of the header */
+    }
+    
+    img+div {
+      margin-left: 0.5em; // For logo text
+      color: @header-item-down-font-color;
     }
   }
   
@@ -30,6 +42,8 @@ header {
     a {
       display: inline-block;
       height: @header-height;
+
+      color: @header-item-font-color;
 
       /*
       Spacing as a function of header item spacing
@@ -42,6 +56,7 @@ header {
       
       text-decoration: none;
       
+      &:active, // TBD: is this what UX wants?
       &.down {
         color: @header-item-down-font-color;
       }
@@ -49,6 +64,5 @@ header {
   }
   
   div.drawer {
-    text-align: right;
   }
 }
