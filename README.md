@@ -51,7 +51,7 @@ grunt watch
 `grunt partial` performs: clean less lint copy handlebars concat
 
 #### watch
-`grunt watch` watches for updates to LESS, JS, templates and lints/compiles accordinly
+`grunt watch` watches for updates to LESS, JS, templates and lints/compiles accordingly
 
 
 ## Directory structure
@@ -59,15 +59,15 @@ grunt watch
 * **build/** Contains output of build process
     * **css/** Output CSS
         * **components/** Individual CSS files for each component
-        * **cui.css** Rolled up CSS file
+        * *cui.css* Rolled up CSS file
     * **examples/** Example and test HTML files
-       * **index.html** CloudUI Style Guide
+       * *index.html* CloudUI Style Guide
     * **fonts/** Custom fonts (Adobe Clean, etc)
     * **js/** Output JS
         * **libs/** Front-facing JS dependencies
         * **components/** Individual JS files for each component
-            * **cui.js** All JS files rolled up in order
-    * **cui.zip** Zip of build files for deployment (js/, css/, images/, fonts/)
+            * *cui.js* All JS files rolled up in order
+    * *cui.zip* Zip of build files for deployment (js/, css/, images/, fonts/)
 * **components/** Front-facing JS dependencies fetched by Bower (TODO: change name once Bower supports it)
 * **node_modules/** Node dependencies fetched by NPM
 * **source/**
@@ -75,20 +75,20 @@ grunt watch
     * **fonts/** Custom fonts (Adobe Clean, etc)
     * **js/** JavaScript files
         * **components**: JS files for widgets with filenames=class name, i.e. `CUI.Slider.js` defines `CUI.Slider`
-        * **CUI.js** defines JavaScript namespace
+        * *CUI.js* defines JavaScript namespace
     * **less/** LESS CSS files
         * **base/** Layout, fonts, media queries for retina displays, etc
         * **components/** Actual components, either widgets, header, buttons, etc
         * **includes/** Variables and mixins. No actual CSS classes are be defined here
-        * **cui.less** Manages includes for all LESS files required for full build
+        * *cui.less* Manages includes for all LESS files required for full build
     * **templates/** Handlesbars templates (.hbs files) for components and widgets
 * **tasks/** Custom grunt tasks
 * **temp/** Temporary files used by the build process
-* **build.sh** One purpose: quickly install dependencies and perform a full build
-* **component.json** Defines the Bower dependencies (jQuery, Underscore, etc)
-* **grunt.js** Defines build process
-* **package.json** Defines the NPM dependencies and package information
-* **README.md** You're lookin' at it!
+* *build.sh* One purpose: quickly install dependencies and perform a full build
+* *component.json* Defines the Bower dependencies (jQuery, Underscore, etc)
+* *grunt.js* Defines build process
+* *package.json* Defines the NPM dependencies and package information
+* *README.md* You're lookin' at it!
 
 
 ##Dependencies
