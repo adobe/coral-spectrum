@@ -25,6 +25,34 @@ module.exports = function(grunt) {
     return name.substr(1, name.length);                       // strips leading _ character
   };
 
+  var matchSquareBrackets = /\[/;
+  
+  var escapeQuote = function(name) { return name.replace("'","\\'"); };
+  
+  function getNsInfo(ns) {
+    if (matchSquareBrackets.test(ns)) { // error out if namespace contains square brackets already
+      grunt.log.error('Handlebars options.namespace must be defined with dot notation');
+      grunt.fail.warn("Handlebars failed to compile.");
+    }
+    
+    var output = [];
+    var curPath = 'this';
+    if (ns !== 'this') {
+      var nsParts = ns.split('.');
+      nsParts.forEach(function(curPart, index) {
+        if (curPart !== 'this') {
+          curPath += "['"+escapeQuote(curPart)+"']";
+          output.push(curPath + ' = ' + curPath + ' || {};');
+        }
+      });
+    }
+    
+    return {
+      base: curPath,
+      declaration: output.join('\n')
+    };
+  }
+  
   grunt.registerMultiTask("handlebars", "Compile handlebars templates and partials.", function() {
 
     var helpers = require('grunt-contrib-lib').init(grunt);
@@ -39,8 +67,8 @@ module.exports = function(grunt) {
     var partials = [];
     var templates = [];
     var output = [];
-    var namespace = options.namespace;
-
+    var namespace = getNsInfo(options.namespace);
+      
     // assign regex for partial detection
     var isPartial = options.partialRegex || /^_/;
 
@@ -67,17 +95,17 @@ module.exports = function(grunt) {
 
         // register partial or add template to namespace
         if(isPartial.test(_.last(file.split("/")))) {
-          filename = processPartialName(file);
+          filename = escapeQuote(processPartialName(file));
           partials.push("Handlebars.registerPartial('"+filename+"', "+compiled+");");
         } else {
-          filename = processName(file);
-          templates.push(namespace+"['"+filename+"'] = "+compiled+";");
+          filename = escapeQuote(processName(file));
+          templates.push(namespace.base+"['"+filename+"'] = "+compiled+";");
         }
       });
       output = output.concat(partials, templates);
 
       if (output.length > 0) {
-        output.unshift(namespace + " = " + namespace + " || {};");
+        output.unshift(namespace.declaration);
         grunt.file.write(files.dest, output.join("\n\n"));
         grunt.log.writeln("File '" + files.dest + "' created.");
       }
