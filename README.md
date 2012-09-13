@@ -1,5 +1,7 @@
 # GUI
 
+## What is CloudUI?
+All the CSS and JS you need for the CloudUI look & feel.
 
 ## Building
 
@@ -11,7 +13,7 @@ bower install
 npm install
 ```
 
-Or, for a full build from scratch:
+Or, fetch dependencies and perform a full build from scratch:
 ```
 ./build.sh
 ```
@@ -22,19 +24,34 @@ Or, for a full build from scratch:
 grunt
 ```
 
-###To build for deployment:
-
-```
-grunt full
-```
-
-Results in documentation, 
-
 ###To watch changes and lint, compile, check automatically:
 
 ```
 grunt watch
 ```
+
+### Build Tasks
+
+* **clean**: delete the contents the build folder
+* **less**: check LESS files for errors and compile to build folder
+* **lint**: check JS files for errors and style problems
+* **copy**: copy examples, images, and fonts to build folder
+* **handlebars**: check template files for errors, precompile
+* **concat**: concatenate JS files into build folder
+* **min**: minify concatenated JS files into build folder
+* **jsdoc**: generate documentation (TBD)
+* **nodeunit**: run unit tests (TBD)
+
+### Build Profiles
+
+#### full
+`grunt full` performs: clean less lint copy handlebars concat min compress
+
+#### partial (default)
+`grunt partial` performs: clean less lint copy handlebars concat
+
+#### watch
+`grunt watch` watches for updates to LESS, JS, templates and lints/compiles accordinly
 
 
 ## Directory structure
@@ -94,28 +111,6 @@ grunt watch
 * **NodeUnit** + ??? for local unit tests (TBD, decide test harness)
 * **JSTestDriver** + ??? for distributed unit tests (TBD, decide test harness)
 * **JSTestDriver** + **LCOV** for code coverage (TBD, any other options?)
-
-
-## Build Tasks
-
-* **clean**: delete the contents the build folder
-* **less**: check LESS files for errors and compile to build folder
-* **lint**: check JS files for errors and style problems
-* **copy**: copy examples, images, and fonts to build folder
-* **handlebars**: check template files for errors, precompile
-* **concat**: concatenate JS files into build folder
-* **min**: minify concatenated JS files into build folder
-* **jsdoc**: generate documentation (TBD)
-* **nodeunit**: run unit tests (TBD)
-
-
-### Build Profiles
-
-#### full
-`grunt full` performs: clean less lint copy handlebars concat min compress
-
-#### partial (default)
-`grunt partial` performs: clean less lint copy handlebars concat
 
 
 ## TODO
