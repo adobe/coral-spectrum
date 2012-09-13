@@ -8,9 +8,12 @@ a.button {
   display: inline-block;
   .box-sizing(border-box); // Makes 135px min-width apply consistently between anchor/button
   
+  vertical-align: top; // Make buttons line up when placed next to each other
+  
   min-width: 135*@px;
   
-  margin: 0; // reset default margin on button tag
+  margin: 0.125em 0;  // Reset default margin on button tag
+                      // Give a top/bottom margin so they stack right
   padding: 0.313em 1em;
   border: @px solid;
 
@@ -22,7 +25,7 @@ a.button {
   text-decoration: none; // Reset underline on a.button
   text-align: center;
   
-  cursor: pointer; // give hand cursor
+  cursor: pointer; // Give hand cursor
   
   .gradient(@button-gray-gradient-start-color, @button-gray-gradient-end-color);
 
