@@ -1,3 +1,68 @@
-.rail {
+/**
+ * Class: div.rail
+ * The side rail for pages
+ */
+div.rail {
+  background-color: @rail-background-color;
+
+  // Add shadow to left/right rail
+  &:first-child {
+    .box-shadow(inset -1*@rail-shadow-distance 0 @rail-shadow-spread rgba(0, 0, 0, @rail-shadow-opacity)); // TBD: make sure this matches mocks...
+  }
+  
+  &:last-child {
+    .box-shadow(inset @rail-shadow-distance 0 @rail-shadow-spread rgba(0, 0, 0, @rail-shadow-opacity));
+  }
+  
+  section {
+    margin: 0;
     
+    border-top: @px solid @rail-section-border-color;
+    box-shadow: inset 0 @px 0 @rail-section-highlight-color;
+    
+    &:first-child { // First section does not have border/highlight
+      border-top: none;
+      box-shadow: none;
+    }
+    
+    &.links {
+      overflow: hidden; // contain margins from strong
+      
+      >strong {
+          display: block;
+          margin: 0.25em 0 0.15em 0;
+          
+          font-size: 0.95em;
+          //text-shadow: 0 -2*@px 0 black;
+          
+          a {
+            color: rgb(137, 147, 149);
+            
+            padding: 0.25em 0.7em;
+          }
+      }
+      
+      a {
+        text-decoration: none;
+        
+        display: block;
+        
+        &:active {
+          background-color: @rail-well-background-color;
+        }
+      }
+      
+      nav {
+        margin: 0 0 0.25em 0;
+        
+        a {
+          padding: 0.35em 1.5em;
+        
+          font-size: 0.85em;
+          //text-shadow: 0 2*@px 0 black;
+          color: @rail-section-link-color;
+        }
+      }
+    }
+  }
 }
