@@ -141,7 +141,7 @@ module.exports = function(grunt) {
       js: {
         src: ['<config:concat.js.dest>'],
         dest: '<%= dirs.build %>js/cui.min.js'
-      },
+      }, // TBD: minify individual JS files?
       jquery: {
         src: 'components/jquery/jquery.js',
         dest: '<%= dirs.build %>js/libs/jquery.min.js'
