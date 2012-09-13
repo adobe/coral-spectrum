@@ -61,6 +61,9 @@ module.exports = function(grunt) {
         }
       },
       images: {
+        options: {
+          basePath: 'images'
+        },
         files: {
           '<%= dirs.build %>images': '<%= dirs.source %>images/**'
         }
@@ -144,14 +147,14 @@ module.exports = function(grunt) {
           '<%= dirs.source %>js/CUI.js',          // Namespace
           '<%= dirs.build %>js/CUI.Templates.js'  // Templates
         ],
-        dest: '<%= dirs.build %>js/cui.js'
+        dest: '<%= dirs.build %>js/CUI.js'
       }
     },
 
     min: {
       cui: {
         src: ['<config:concat.js.dest>'],
-        dest: '<%= dirs.build %>js/cui.min.js'
+        dest: '<%= dirs.build %>js/CUI.min.js'
       }, // TBD: minify individual JS files?
       jquery: {
         src: '<%= dirs.components %>jquery/jquery.js',
