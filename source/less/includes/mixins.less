@@ -66,8 +66,20 @@
  * Truncate overflowed text using ellipsis: ...
  */
 .ellipsis() {
-  display: inline-block; /* needs inline-block to display correctly */
+  display: inline-block; // Needs inline-block to display correctly
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+
+/**
+ * Mixin: .scrollable
+ * Make an area scrollable when the contents overflow
+ * TODO: fix this for flexbox children in Chrome
+ */
+.scrollable() {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; // Enable iOS-style scrolling
+  min-height: 1px; // Enable scrolling in flexbox children in Firefox
 }
