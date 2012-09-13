@@ -39,15 +39,3 @@ grunt watch
 ```
 grunt full
 ```
-
-
-## TODO
-
-* Import Twitter Bootstrap LESS files in gui.less for mixins/grid etc
-* Get JSDoc3 downloading/working
-* Don't manually minify dependencies, find a way to get Bower to fetch minified jQuery?
-* Decide TBDs
-    * JS minification: UglifyJS vs Closure Compiler
-    * Documentation: JSDoc3 vs ???
-    * CSS minification: YUI Compressor vs ???
-    * Unit testing: Decide test harness
