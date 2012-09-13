@@ -2,20 +2,27 @@
  * The main LESS file that manages all imports for CUI
  */
 
-// Variables & Mixins
+// Bootstrap: CSS Reset
+@import "reset";
+
+// Bootstrap: Core variables and mixins
+@import "variables";
+@import "mixins";
+
+// CloudUI: Variables & Mixins
 @import 'includes/config';
 @import 'includes/variables';
 @import 'includes/mixins';
 
-// Base styles
+// CloudUI: Base styles
 @import 'base/fonts';
 @import 'base/body';
+@import 'base/tags';
 @import 'base/misc';
 
-// Components
+// CloudUI: Components
 @import 'components/buttons';
 @import 'components/header';
-@import 'components/section';
 @import 'components/rail';
 @import 'components/list';
 @import 'components/crumbs';
