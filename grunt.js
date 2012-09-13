@@ -149,7 +149,7 @@ module.exports = function(grunt) {
     },
 
     min: {
-      js: {
+      cui: {
         src: ['<config:concat.js.dest>'],
         dest: '<%= dirs.build %>js/cui.min.js'
       }, // TBD: minify individual JS files?
@@ -188,33 +188,28 @@ module.exports = function(grunt) {
         tasks: 'copy:examples'
       },
 
-      lint: {
+      lint_js: {
         files: '<config:lint.files>',
         tasks: 'lint'
       },
 
-      concatjs: {
+      concat_min_js: {
         files: '<%= dirs.source %>js/**',
-        tasks: 'concat:js'
+        tasks: 'concat:js min:cui'
       },
-
-      min: {
-        files: '<config:concat.js.dest>',
-        tasks: 'min'
-      },
-
-      less: {
-        files: ['<%= dirs.source %>less/**'],
-        tasks: 'less'
+      
+      compile_less_min_css: {
+        files: '<%= dirs.source %>less/**',
+        tasks: 'less mincss'
       }
     }
   });
   
   // Partial build for development
-  grunt.registerTask('partial', 'clean less lint copy handlebars concat');
-
+  grunt.registerTask('partial', 'clean less lint copy handlebars concat min:cui mincss');
+  
   // Full build with docs and compressed file
-  grunt.registerTask('full', 'clean less mincss lint copy handlebars concat min jsdoc compress');
+  grunt.registerTask('full', 'clean less lint copy handlebars concat min mincss jsdoc compress');
   
   // Default task
   grunt.registerTask('default', 'partial');
