@@ -1,40 +1,16 @@
-# CloudUI
+# What is CUI?
+CUI (pronounced "cooey"), is an implementation of the XD CloudUI visual style. CUI provides everything your product needs to adopt the CloudUI visual style.
 
-## What is CloudUI?
-All the CSS and JS you need for the CloudUI look & feel.
+# Demo & Download
+Check out the [Style Guide](https://git.corp.adobe.com/pages/lawdavis/CloudUI/), to see CUI in action, download releases, and learn how to use CUI in your project.
 
 
-## More Information
-See the [CloudUI Wiki](https://git.corp.adobe.com/lawdavis/CloudUI/wiki) for more information.
+# Contributing
+CUI is an internal open source effort with backing from XD and product development teams, and we encourage issues, feature requests, and pull requests from anyone on any team.
 
 ## Building
 
-### Build dependencies
+Check out the [Build Process wiki](https://git.corp.adobe.com/lawdavis/CloudUI/wiki/Build-Process-&-Technology) for information on building CUI.
 
-You must have NodeJS/NPM installed to build CloudUI.  
-http://nodejs.org/download/
-
-### Initial install and build
-
-To fetch dependencies and perform a full build from scratch:
-```
-./install.sh
-```
-
-###To build for development:
-
-```
-grunt
-```
-
-###To watch changes and lint, compile, check automatically:
-
-```
-grunt watch
-```
-
-###To build for deployment:
-
-```
-grunt full
-```
+## More Information
+See the [CUI Wiki](https://git.corp.adobe.com/lawdavis/CloudUI/wiki) for more information on contributing. If you'd like to be assigned issues for feature rqeuest, contact [Larry Davis](mailto:lawdavis@adobe.com).
