@@ -83,16 +83,37 @@ module.exports = function(grunt) {
         src: ['<%= dirs.source %>less/**'],
         dest: '<%= dirs.build %>less'
       },
-      libs: {
+      jquery: {
         options: {
-          flatten: true // don't create backbone/jquery/underscore folders inside of libs/
+          flatten: true,
+          processName: function(filename) {
+            return 'jquery.js';
+          }
         },
         files: {
-          '<%= dirs.build %>js/libs': [
-            '<%= dirs.components %>backbone/backbone.js',
-            '<%= dirs.components %>underscore/underscore.js',
-            '<%= dirs.components %>jquery/jquery.js'
-          ]
+          '<%= dirs.build %>js/libs': '<%= dirs.components %>jquery/index.js'
+        }
+      },
+      underscore: {
+        options: {
+          flatten: true,
+          processName: function(filename) {
+            return 'underscore.js';
+          }
+        },
+        files: {
+          '<%= dirs.build %>js/libs': '<%= dirs.components %>underscore/index.js'
+        }
+      },
+      handlebars: {
+        options: {
+          flatten: true,
+          processName: function(filename) {
+            return 'handlebars.js';
+          }
+        },
+        files: {
+          '<%= dirs.build %>js/libs': '<%= dirs.components %>handlebars/index.js'
         }
       }
     },
@@ -166,19 +187,7 @@ module.exports = function(grunt) {
       cui: {
         src: ['<config:concat.js.dest>'],
         dest: '<%= dirs.build %>js/CUI.min.js'
-      }, // TBD: minify individual JS files?
-      jquery: {
-        src: '<%= dirs.components %>jquery/jquery.js',
-        dest: '<%= dirs.build %>js/libs/jquery.min.js'
-      },
-      backbone: {
-        src: '<%= dirs.components %>backbone/backbone.js',
-        dest: '<%= dirs.build %>js/libs/backbone.min.js'
-      },
-      underscore: {
-        src: '<%= dirs.components %>underscore/underscore.js',
-        dest: '<%= dirs.build %>js/libs/underscore.min.js'
-      }
+      } // TBD: minify individual JS files?
     },
 
     less: {
