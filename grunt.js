@@ -73,6 +73,18 @@ module.exports = function(grunt) {
           '<%= dirs.build %>fonts': '<%= dirs.source %>fonts/**'
         }
       },
+      less_bootstrap_tmp: {
+        src: ['<%= dirs.components %>bootstrap/less/*'],
+        dest: '<%= dirs.temp %>less/bootstrap'
+      },
+      less_bootstrap_build: {
+        src: ['<%= dirs.components %>bootstrap/less/*'],
+        dest: '<%= dirs.build %>less/bootstrap'
+      },
+      less_cui: {
+        src: ['<%= dirs.source %>less/**'],
+        dest: '<%= dirs.build %>less'
+      },
       libs: {
         options: {
           flatten: true // don't create backbone/jquery/underscore folders inside of libs/
@@ -174,8 +186,8 @@ module.exports = function(grunt) {
       compile: {
         options: {
           paths: [
-            'source/less/', // must hardcore paths here, grunt-contrib-less doesn't support config
-            'components/bootstrap/less'
+            'source/less/', // must hardcore paths here, grunt-contrib-less doesn't support template tags
+            'temp/less/' // must hardcore paths here, grunt-contrib-less doesn't support template tags
           ]
         },
         files: {
