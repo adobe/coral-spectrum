@@ -55,18 +55,16 @@ module.exports = function(grunt) {
     },
 
     copy: {
-      examples: {
-        files: {
-          '<%= dirs.build %>examples': '<%= dirs.source %>examples/**'
-        }
+      guide: {
+        src: '<%= dirs.source %>guide/**',
+        dest: '<%= dirs.build %>'
       },
       images: {
         options: {
           basePath: 'images'
         },
-        files: {
-          '<%= dirs.build %>images': '<%= dirs.source %>images/**'
-        }
+        src: '<%= dirs.source %>images/**',
+        dest: '<%= dirs.build %>images'
       },
       fonts: {
         files: {
@@ -131,6 +129,7 @@ module.exports = function(grunt) {
           '<%= dirs.build %>cui.zip': [
             '<%= dirs.build %>/js/**',
             '<%= dirs.build %>/css/**',
+            '<%= dirs.build %>/less/**',
             '<%= dirs.build %>/images/**',
             '<%= dirs.build %>/fonts/**'
           ]
@@ -198,9 +197,9 @@ module.exports = function(grunt) {
 
     // Watch operations
     watch: {
-      copy_examples: {
-        files: '<%= dirs.source %>examples/**',
-        tasks: 'copy:examples'
+      copy_guide: {
+        files: '<%= dirs.source %>guide/**',
+        tasks: 'copy:guide'
       },
 
       lint_js: {
@@ -221,7 +220,7 @@ module.exports = function(grunt) {
   });
   
   // Partial build for development
-  grunt.registerTask('partial', 'clean copy lint handlebars concat min:cui less mincss');
+  grunt.registerTask('partial', 'copy lint handlebars concat min:cui less mincss');
   
   // Full build with docs and compressed file
   grunt.registerTask('full', 'clean copy lint handlebars concat min less mincss jsdoc compress');
