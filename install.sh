@@ -4,7 +4,7 @@
 npm install
 
 # Install JS libraries with Bower
-node_modules/bower/bin/bower install
+bower install
 
 # Build
 grunt full
