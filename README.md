@@ -11,7 +11,8 @@ See the [CloudUI Wiki](https://git.corp.adobe.com/lawdavis/CloudUI/wiki) for mor
 
 ### Build dependencies
 
-You must have NodeJS and NPM installed to build CloudUI. 
+You must have NodeJS/NPM installed to build CloudUI.  
+http://nodejs.org/download/
 
 ### Initial install and build
 
