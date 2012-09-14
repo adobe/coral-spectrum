@@ -26,14 +26,14 @@ div.rail {
     }
     
     &.links {
-      overflow: hidden; // contain margins from strong
+      padding: 0.25em 0;
       
+      // TBD: fix margin collapse for strong
       >strong {
           display: block;
-          margin: 0.25em 0 0.15em 0;
+          margin: 0 0 0.15em 0;
           
           font-size: 0.95em;
-          //text-shadow: 0 -2*@px 0 black;
           
           a {
             color: rgb(137, 147, 149);
@@ -53,8 +53,6 @@ div.rail {
       }
       
       nav {
-        margin: 0 0 0.25em 0;
-        
         a {
           padding: 0.35em 1.5em;
         

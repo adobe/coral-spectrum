@@ -2,19 +2,21 @@
  *
  */
 .page {
-  .flexbox;             // it's a flexbox
-  .flex-row;            // that spans horizontally
+  .flexbox;     // it's a flexbox
+  .flex-row;    // that spans horizontally
   
   .flex-ratio(1);
   
   .rail {
-    .scrollable();
+    .flexbox;     // Enables scrolling
+    .flex-column;
+    
+    .scrollable;
   }
   
   .content {
-    // TODO: figure out how to make this scroll
-    .flex-ratio(1);
+    .flex-ratio(3);
     
-    .scrollable();
+    .scrollable;
   }
 }

@@ -18,21 +18,14 @@ header {
   div.logo {
     padding: 0 0.75em;
     
-    .flexbox;           // it's a flexbox
-    .flex-row;          // that spans horizontally
-    .flex-pack-start;   // with items packed to the left
-    .flex-align-center; // and items centered vertically
-    
     .box-sizing(border-box);
     text-align: center;
     
     img {
-      height: @header-height / 5 * 3; /* 3/5 the height of the header */
-    }
-    
-    img+div {
-      margin-left: 0.5em; // For logo text
-      color: @header-item-down-font-color;
+      vertical-align: -0.45em; // Make logo text line up
+      
+      height: @header-logo-size;
+      width: @header-logo-size; 
     }
   }
   
