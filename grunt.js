@@ -5,7 +5,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  //grunt.loadNpmTasks('grunt-contrib-handlebars'); // waiting on fix for hb4
+  grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-contrib-mincss');
   grunt.loadNpmTasks('grunt-contrib-less');
 
@@ -17,10 +17,10 @@ module.exports = function(grunt) {
       appWebSite: 'git.corp.adobe.com/lazd/CloudUI'
     },
     dirs: {
-      build: 'build/',
-      source: 'source/',
-      temp: 'temp/',
-      components: 'components/'
+      build: 'build',
+      source: 'source',
+      temp: 'temp',
+      components: 'components'
     },
 
     // Configuration
@@ -56,32 +56,31 @@ module.exports = function(grunt) {
 
     copy: {
       guide: {
-        src: '<%= dirs.source %>guide/**',
-        dest: '<%= dirs.build %>'
+        src: '<%= dirs.source %>/guide/**',
+        dest: '<%= dirs.build %>/'
       },
       images: {
         options: {
           basePath: 'images'
         },
-        src: '<%= dirs.source %>images/**',
-        dest: '<%= dirs.build %>images'
+        src: '<%= dirs.source %>/images/**',
+        dest: '<%= dirs.build %>/images/'
       },
       fonts: {
-        files: {
-          '<%= dirs.build %>fonts': '<%= dirs.source %>fonts/**'
-        }
+        src: '<%= dirs.source %>/fonts/**',
+        dest: '<%= dirs.build %>/fonts/'
       },
       less_bootstrap_tmp: {
-        src: ['<%= dirs.components %>bootstrap/less/*'],
-        dest: '<%= dirs.temp %>less/bootstrap'
+        src: '<%= dirs.components %>/bootstrap/less/*',
+        dest: '<%= dirs.temp %>/less/bootstrap/'
       },
       less_bootstrap_build: {
-        src: ['<%= dirs.components %>bootstrap/less/*'],
-        dest: '<%= dirs.build %>less/bootstrap'
+        src: '<%= dirs.components %>/bootstrap/less/*',
+        dest: '<%= dirs.build %>/less/bootstrap/'
       },
       less_cui: {
-        src: ['<%= dirs.source %>less/**'],
-        dest: '<%= dirs.build %>less'
+        src: '<%= dirs.source %>/less/**',
+        dest: '<%= dirs.build %>/less/'
       },
       jquery: {
         options: {
@@ -91,7 +90,7 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          '<%= dirs.build %>js/libs': '<%= dirs.components %>jquery/index.js'
+          '<%= dirs.build %>/js/libs': '<%= dirs.components %>/jquery/index.js'
         }
       },
       underscore: {
@@ -102,7 +101,7 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          '<%= dirs.build %>js/libs': '<%= dirs.components %>underscore/index.js'
+          '<%= dirs.build %>/js/libs': '<%= dirs.components %>/underscore/index.js'
         }
       },
       handlebars: {
@@ -113,7 +112,7 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          '<%= dirs.build %>js/libs': '<%= dirs.components %>handlebars/index.js'
+          '<%= dirs.build %>/js/libs': '<%= dirs.components %>/handlebars/index.js'
         }
       }
     },
@@ -121,7 +120,7 @@ module.exports = function(grunt) {
     mincss: {
       main: {
         files: {
-          '<%= dirs.build %>css/cui.min.css': '<%= dirs.build %>css/cui.css'
+          '<%= dirs.build %>/css/cui.min.css': '<%= dirs.build %>/css/cui.css'
         }
       }
     },
@@ -136,7 +135,7 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          '<%= dirs.build %>js/CUI.Templates.js': '<%= dirs.source %>templates/*'
+          '<%= dirs.build %>/js/CUI.Templates.js': '<%= dirs.source %>/templates/*'
         }
       }
     },
@@ -147,7 +146,7 @@ module.exports = function(grunt) {
           mode: 'zip'
         },
         files: {
-          '<%= dirs.build %>cui.zip': [
+          '<%= dirs.build %>/cui.zip': [
             '<%= dirs.build %>/js/**',
             '<%= dirs.build %>/css/**',
             '<%= dirs.build %>/less/**',
@@ -160,33 +159,33 @@ module.exports = function(grunt) {
     
     jsdoc: {
       cui: {
-        jsdoc: '<%= dirs.components %>JSDoc/jsdoc',
-        src: ['<%= dirs.source %>js/**'],
-        dest: '<%= dirs.build %>jsdoc'
+        jsdoc: '<%= dirs.components %>/JSDoc/jsdoc',
+        src: ['<%= dirs.source %>/js/**'],
+        dest: '<%= dirs.build %>/jsdoc'
       }
     },
 
     lint: {
       files: [
         'grunt.js',
-        '<%= dirs.source %>js/**'
+        '<%= dirs.source %>/js/**'
       ]
     },
 
     concat: {
       js: {
         src: [
-          '<%= dirs.source %>js/CUI.js',          // Namespace
-          '<%= dirs.build %>js/CUI.Templates.js'  // Templates
+          '<%= dirs.source %>/js/CUI.js',          // Namespace
+          '<%= dirs.build %>/js/CUI.Templates.js'  // Templates
         ],
-        dest: '<%= dirs.build %>js/CUI.js'
+        dest: '<%= dirs.build %>/js/CUI.js'
       }
     },
 
     min: {
       cui: {
         src: ['<config:concat.js.dest>'],
-        dest: '<%= dirs.build %>js/CUI.min.js'
+        dest: '<%= dirs.build %>/js/CUI.min.js'
       } // TBD: minify individual JS files?
     },
 
@@ -199,7 +198,7 @@ module.exports = function(grunt) {
           ]
         },
         files: {
-          '<%= dirs.build %>css/cui.css': '<%= dirs.source %>less/cui.less'
+          '<%= dirs.build %>/css/cui.css': '<%= dirs.source %>/less/cui.less'
         }
       }
     },
@@ -207,7 +206,7 @@ module.exports = function(grunt) {
     // Watch operations
     watch: {
       copy_guide: {
-        files: '<%= dirs.source %>guide/**',
+        files: '<%= dirs.source %>/guide/**',
         tasks: 'copy:guide'
       },
 
@@ -217,12 +216,12 @@ module.exports = function(grunt) {
       },
 
       concat_min_js: {
-        files: '<%= dirs.source %>js/**',
+        files: '<%= dirs.source %>/js/**',
         tasks: 'concat:js min:cui'
       },
       
       compile_less_min_css: {
-        files: '<%= dirs.source %>less/**',
+        files: '<%= dirs.source %>/less/**',
         tasks: 'less mincss'
       }
     }
