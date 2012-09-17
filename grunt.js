@@ -82,37 +82,11 @@ module.exports = function(grunt) {
         src: '<%= dirs.source %>/less/**',
         dest: '<%= dirs.build %>/less/'
       },
-      jquery: {
-        options: {
-          flatten: true,
-          processName: function(filename) {
-            return 'jquery.js';
-          }
-        },
+      libs: {
         files: {
-          '<%= dirs.build %>/js/libs': '<%= dirs.components %>/jquery/index.js'
-        }
-      },
-      underscore: {
-        options: {
-          flatten: true,
-          processName: function(filename) {
-            return 'underscore.js';
-          }
-        },
-        files: {
-          '<%= dirs.build %>/js/libs': '<%= dirs.components %>/underscore/index.js'
-        }
-      },
-      handlebars: {
-        options: {
-          flatten: true,
-          processName: function(filename) {
-            return 'handlebars.js';
-          }
-        },
-        files: {
-          '<%= dirs.build %>/js/libs': '<%= dirs.components %>/handlebars/index.js'
+          '<%= dirs.build %>/js/libs/jquery.js': '<%= dirs.components %>/jquery/index.js',
+          '<%= dirs.build %>/js/libs/underscore.js': '<%= dirs.components %>/underscore/index.js',
+          '<%= dirs.build %>/js/libs/handlebars.js': '<%= dirs.components %>/handlebars/index.js'
         }
       }
     },
