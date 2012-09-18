@@ -3,10 +3,11 @@
  * Appears at the top of each page
  */
 header {
-  .flexbox;           // it's a flexbox
-  .flex-row;          // that spans horizontally
-  .flex-pack-start;   // with items packed to the left
-  .flex-align-center; // and items centered vertically
+  .flex;                // be a flex box
+  .flex-direction(row); // span horizontally
+  .flex-align(center);  // center flex items vertically
+  
+  width: 100%; // Otherwise does not span screen width in Firefox
   
   height: @header-height;
   background-color: @header-background-color;

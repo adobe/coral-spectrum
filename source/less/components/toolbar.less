@@ -6,10 +6,9 @@ div.toolbar {
   border-bottom: @px solid @toolbar-border-color;
   margin: 0.25em; // TODO: get exact margins
   
-  .flexbox;           // it's a flexbox
-  .flex-row;          // that spans horizontally
-  .flex-pack-start;   // with items packed to the left
-  .flex-align-center; // and items centered vertically
+  .flex;                // be a flex box
+  .flex-direction(row); // span horizontally
+  .flex-align(center);  // center flex items vertically
   
   div:first-child {
     .flex-ratio(2);

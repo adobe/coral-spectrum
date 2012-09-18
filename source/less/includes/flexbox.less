@@ -1,171 +1,317 @@
-/** 
-CSS3 Flexbox Layout Module Helper Classes 
-Copyright (c) 2011 David Zarlengo
-https://github.com/politician/csswg-flexbox-less
-*/
+/****************************
+Configuration
+****************************/
+@flexbox-bare: false;     // Include Flexbox 2012 without prefixes
+@flexbox-prefix: false;   // Include Flexbox 2012 with prefixes
+@flexbox-compat: true;    // Include Flexbox 2009
+
+
+/****************************
+Prefix mixins for Flexbox 2009
+****************************/
+.prefix-display-box {
+  display: -webkit-box;
+  display:    -moz-box;
+  display:     -ms-box;
+  display:         box;
+}
 
 // box-lines: single | multiple
-.compat-box-lines(@lines) {
+.prefix-box-lines(@lines) {
   -webkit-box-lines: @lines;
      -moz-box-lines: @lines;
-    -ms-box-lines: @lines;
-      box-lines: @lines;  
+      -ms-box-lines: @lines;
+          box-lines: @lines;  
 }
 
 // box-orient: horizontal | vertical
-.compat-box-orient(@orientation) {
+.prefix-box-orient(@orientation) {
   -webkit-box-orient: @orientation;
      -moz-box-orient: @orientation;
-    -ms-box-orient: @orientation;
-      box-orient: @orientation;
+      -ms-box-orient: @orientation;
+          box-orient: @orientation;
 }
 
 // box-direction: normal | reverse
-.compat-box-direction(@direction) {
+.prefix-box-direction(@direction) {
   -webkit-box-direction: @direction;
      -moz-box-direction: @direction;
-    -ms-box-direction: @direction;
-      box-direction: @direction;
+      -ms-box-direction: @direction;
+          box-direction: @direction;
 }
 
 // box-flex: <number>
-.compat-box-flex(@ratio) {
+.prefix-box-flex(@ratio) {
   -webkit-box-flex: @ratio;
      -moz-box-flex: @ratio;
-    -ms-box-flex: @ratio;
-      box-flex: @ratio;
+      -ms-box-flex: @ratio;
+          box-flex: @ratio;
 }
 
-// box-align: center (w/ ms fix)
-.compat-box-align-center {
-  -webkit-box-align: center;
-     -moz-box-align: center;
-    -ms-box-align: middle;
-      box-align: center;
-}
-
-.compat-flexbox {
-  display: -webkit-box;
-  display:  -moz-box;
-  display:   -ms-box;
-  display:     box;
-}
-
-.flexbox {
-  display: flexbox;
-  
-  .compat-flexbox();
-}
-
-.flex-ratio(@ratio) {
-  /*width: flex(@ratio);*/
-  .compat-box-flex(@ratio);
-}
-
-// same-axis alignment
-.flex-pack(@pack) {
-  flex-pack: @pack;
-  -webkit-box-pack: @pack;
-     -moz-box-pack: @pack;
-    -ms-box-pack: @pack;
-      box-pack: @pack;
-}
-
-.flex-pack-start    { .flex-pack(start); }
-.flex-pack-end      { .flex-pack(end); }
-.flex-pack-center   { .flex-pack(center); }
-.flex-pack-justify    { .flex-pack(justify); }
-
-// cross-axis alignment
-.flex-align(@align) {
-  flex-align: @align;
-  -webkit-box-align: @align;
-     -moz-box-align: @align;
-    -ms-box-align: @align;
-      box-align: @align;
-}
-
-.flex-align-start   { .flex-align(start); }
-.flex-align-end     { .flex-align(end); }
-.flex-align-baseline  { .flex-align(baseline); }
-.flex-align-stretch   { .flex-align(stretch); }
-.flex-align-center    { flex-align: center; .compat-box-align-center; }
-
-// flow
-.flex-row {
-  flex-flow: row;
-
-  .compat-box-orient(horizontal);
-  .compat-box-direction(normal);
-  .compat-box-lines(single);
-}
-
-.flex-row-wrap {
-  flex-flow: row wrap;
-
-  .compat-box-orient(horizontal);
-  .compat-box-direction(normal);
-  .compat-box-lines(multiple);
-}
-
-.flex-row-reverse {
-  flex-flow: row-reverse;
-
-  .compat-box-orient(horizontal);
-  .compat-box-direction(reverse);
-  .compat-box-lines(single);
-}
-
-.flex-row-reverse-wrap {
-  flex-flow: row-reverse wrap;
-
-  .compat-box-orient(horizontal);
-  .compat-box-direction(reverse);
-  .compat-box-lines(multiple);
-}
-
-.flex-column {
-  flex-flow: column;
-
-  .compat-box-orient(vertical);
-  .compat-box-direction(normal);
-  .compat-box-lines(single);
-}
-
-.flex-column-wrap {
-  flex-flow: column wrap;
-
-  .compat-box-orient(vertical);
-  .compat-box-direction(reverse);
-  .compat-box-lines(multiple);
-}
-
-.flex-column-reverse {
-  flex-flow: column-reverse;
-
-  .compat-box-orient(vertical);
-  .compat-box-direction(reverse);
-  .compat-box-lines(single);
-}
-
-.flex-column-reverse-wrap {
-  flex-flow: column-reverse wrap;
-
-  .compat-box-orient(vertical);
-  .compat-box-direction(reverse);
-  .compat-box-lines(multiple);
-}
-
-// this is an item style, not a box style
-.flex-order(@group) {
-  flex-order: @group;
+// box-ordinal-group: <number>
+.prefix-box-ordinal-group(@group) {
   -webkit-box-ordinal-group: @group;
      -moz-box-ordinal-group: @group;
-    -ms-box-ordinal-group: @group;
-      box-ordinal-group: @group;
+      -ms-box-ordinal-group: @group;
+          box-ordinal-group: @group;
 }
 
-// alias for .flex-order
-.flex-item-group(@group) {
-  .flex-order(@group);
+// box-pack: start | end | center | justify
+.prefix-box-pack(@pack) {
+  -webkit-box-pack: @pack;
+     -moz-box-pack: @pack;
+      -ms-box-pack: @pack;
+          box-pack: @pack;
+}
+
+// box-align: start | end | center | baseline | stretch
+.prefix-box-align(@align) {
+  -webkit-box-align: @align;
+     -moz-box-align: @align;
+      -ms-box-align: @align;
+          box-align: @align;
+}
+
+
+/****************************
+Compat mixins for Flexbox 2009
+****************************/
+
+// Supports: flex-start, flex-end, center, space-between
+.compat-flex-justify(@pack) when (@pack = center) {
+  .prefix-box-pack(@pack);
+}
+.compat-flex-justify(@pack) when (@pack = flex-start) {
+  .prefix-box-pack(start);
+}
+.compat-flex-justify(@pack) when (@pack = flex-end) {
+  .prefix-box-pack(end);
+}
+.compat-flex-justify(@pack) when (@pack = space-between) {
+  .prefix-box-pack(justify);
+}
+
+
+// Supports: flex-start, flex-end, center, stretch, baseline, stretch
+.compat-flex-align(@align) when (@align = baseline), (@align = stretch) {
+  .prefix-box-align(@align);
+}
+.compat-flex-align(@align) when (@align = flex-start) {
+  .prefix-box-align(start);
+}
+.compat-flex-align(@align) when (@align = flex-end) {
+  .prefix-box-align(end);
+}
+.compat-flex-align(@align) when (@align = center) {
+  -webkit-box-align: center;
+     -moz-box-align: center;
+      -ms-box-align: middle;  // IE fix
+          box-align: center;
+}
+
+
+// Supports: wrap, nowrap, wrap-reverse
+.compat-flex-wrap(@wrap) when (@wrap = wrap) {
+  .prefix-box-lines(multiple);
+}
+.compat-flex-wrap(@wrap) when (@wrap = nowrap) {
+  .prefix-box-lines(single);
+}
+.compat-flex-wrap(@wrap) when (@wrap = wrap-reverse) {
+  .prefix-box-lines(single);
+  .prefix-box-direction(reverse);
+}
+
+
+// Supports: row, row-reverse, column, column-reverse
+.compat-flex-direction(@direction) when (@direction = row) {
+  .prefix-box-orient(horizontal);
+}
+.compat-flex-direction(@direction) when (@direction = row-reverse) {
+  .prefix-box-orient(horizontal);
+  .prefix-box-direction(reverse);
+}
+.compat-flex-direction(@direction) when (@direction = column) {
+  .prefix-box-orient(vertical);
+}
+.compat-flex-direction(@direction) when (@direction = column-reverse) {
+  .prefix-box-orient(vertical);
+  .prefix-box-direction(reverse);
+}
+
+.compat-flex() {
+  .prefix-display-box;
+}
+
+.compat-flex-ratio(@ratio) {
+   .prefix-box-flex(@ratio);
+}
+
+
+/****************************
+Prefix mixins for Flexbox 2012
+****************************/
+.prefix-display-flex {
+  display: -webkit-flex;
+  display:    -moz-flex;
+}
+
+.prefix-flex-justify(@justify) {
+  -webkit-justify-content: @justify;
+     -moz-justify-content: @justify;
+}
+
+.prefix-flex-align(@align) {
+  -webkit-align-items: @align;
+     -moz-align-items: @align;
+}
+
+.prefix-flex-direction(@direction) {
+  -webkit-flex-direction: @direction;
+     -moz-flex-direction: @direction;
+}
+
+.prefix-flex-wrap(@wrap) {
+  -webkit-flex-wrap: @wrap;
+     -moz-flex-wrap: @wrap;
+}
+
+.prefix-flex(@ratio) {
+  -webkit-flex: @ratio;
+     -moz-flex: @ratio;
+}
+
+.prefix-flex-order(@order) {
+  -webkit-order: @order;
+     -moz-order: @order;
+}
+
+
+/****************************
+Actual mixins
+****************************/
+
+/**
+ * Mixin: .flex
+ * Make a box into a flex box that will contain flex items.
+ */
+.flex() when (@flexbox-compat) {
+  .compat-flex;
+}
+.flex() when (@flexbox-prefix) {
+  .prefix-display-flex;
+}
+.flex() when (@flexbox-bare) { 
+  display: flex;  // go last to override box, might not be necessary
+}
+
+
+/**
+ * Mixin: .flex-justify
+ * Apply to a flex box to set the same-axis alignment of its flex items.
+ * 
+ * Arguments:
+ *  @justify: flex-start, flex-end, center, space-between
+ *
+ * Unsupported arguments:
+ *  @justify: space-around
+ */
+.flex-justify(@justify) when (@flexbox-compat) {
+  .compat-flex-justify(@justify);
+}
+.flex-justify(@justify) when (@flexbox-prefix) {
+  .prefix-flex-justify(@justify);
+}
+.flex-justify(@justify) when (@flexbox-bare) {
+  justify-content: @justify;
+}
+
+
+/**
+ * Mixin: .flex-align
+ * Apply to a flex box to set the cross-axis alignment of its flex items.
+ * 
+ * Arguments:
+ *  @align: flex-start, flex-end, center, stretch, baseline
+ */
+.flex-align(@align) when (@flexbox-compat) {
+  .compat-flex-align(@align);
+}
+.flex-align(@align) when (@flexbox-prefix) {
+  .prefix-flex-align(@align);
+}
+.flex-align(@align) when (@flexbox-bare) {
+  align-items: @align;
+}
+
+
+/**
+ * Mixin: .flex-direction
+ * Apply to flex boxes to set direction. Row arranges flex items horizontally, column arranges flex items vertically.
+ *
+ * Arguments:
+ *  @direction: row, row-reverse, column, column-reverse
+ */
+.flex-direction(@direction) when (@flexbox-compat) {
+ .compat-flex-direction(@direction);
+}
+.flex-direction(@direction) when (@flexbox-prefix) {
+  .prefix-flex-direction(@direction);
+}
+.flex-direction(@direction) when (@flexbox-bare) {
+  flex-direction: @direction;
+}
+
+
+/**
+ * Mixin: .flex-wrap
+ * Apply to flex boxes to set wrapping
+ *
+ * Arguments:
+ *  @wrap: nowrap, wrap, wrap-reverse
+ */
+.flex-wrap(@wrap) when (@flexbox-compat) {
+  .compat-flex-wrap(@wrap);
+}
+.flex-wrap(@wrap) when (@flexbox-prefix) {
+  .prefix-flex-wrap(@wrap);
+}
+.flex-wrap(@wrap) when (@flexbox-bare) {
+  flex-wrap: @wrap;
+}
+
+
+/**
+ * Mixin: .flex-ratio
+ * Apply to flex items to set their span ratio, or how much of the available space they will take up.
+ * 
+ * Arguments:
+ *  @ratio: <number>
+ */
+.flex-ratio(@ratio) when (@flexbox-compat) {
+  .compat-flex-ratio(@ratio);
+}
+.flex-ratio(@ratio) when (@flexbox-prefix) {
+  .prefix-flex(@ratio);
+}
+.flex-ratio(@ratio) when (@flexbox-bare) {
+  flex: @ratio;
+}
+
+
+/**
+ * Mixin: .flex-order
+ * Apply to a flex item to set its order in the flex box, with the lowest order being displayed first.
+ * 
+ * Arguments:
+ *  @order: <number>
+ */
+.flex-order(@order) when (@flexbox-compat) {
+  .compat-box-ordinal-group(@order);
+}
+.flex-order(@order) when (@flexbox-prefix) {
+  .prefix-flex-order(@order);
+}
+.flex-order(@order) when (@flexbox-bare) {
+  order: @order;
 }
