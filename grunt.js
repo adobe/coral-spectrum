@@ -215,7 +215,7 @@ module.exports = function(grunt) {
       },
       
       compile_guide_less: {
-        files: '<%= dirs.source %>/less/**',
+        files: '<%= dirs.source %>/guide/examples/assets/guide.less',
         tasks: 'less:guide'
       }
     }
