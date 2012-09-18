@@ -182,11 +182,12 @@ module.exports = function(grunt) {
       guide: {
         options: {
           paths: [
-            'source/less/' // must hardcode paths here, grunt-contrib-less doesn't support template tags
+            'source/less/', // must hardcode paths here, grunt-contrib-less doesn't support template tags
+            'temp/less/' // must hardcode paths here, grunt-contrib-less doesn't support template tags
           ]
         },
         files: {
-          '<%= dirs.build %>/examples/assets/guide.css': '<%= dirs.source %>/examples/assets/guide.less'
+          '<%= dirs.build %>/examples/assets/guide.css': '<%= dirs.source %>/guide/examples/assets/guide.less'
         }
       }
     },
@@ -210,7 +211,12 @@ module.exports = function(grunt) {
       
       compile_less_min_css: {
         files: '<%= dirs.source %>/less/**',
-        tasks: 'less mincss'
+        tasks: 'less:cui mincss'
+      },
+      
+      compile_guide_less: {
+        files: '<%= dirs.source %>/less/**',
+        tasks: 'less:guide'
       }
     }
   });
