@@ -4,10 +4,14 @@
   <title>CUI Style Guide</title>
 
   <link rel="stylesheet" href="css/cui.min.css">
+  <link rel="stylesheet" href="guide/google-code-prettify/prettify.css">
   
   <script src="js/cui.min.js"></script>
+  <script src="guide/google-code-prettify/prettify.js"></script>
+
+
 </head>
-<body>
+<body onload="prettyPrint()">
 
   <header>
     
@@ -21,6 +25,7 @@
     </nav>
 
     <div class="drawer">
+      <div class="left"><a class="code-toggle" href="#code_toggle">Show Code</a></div>
       <div class="badge">v0.1</div>
     </div>
     
@@ -118,6 +123,14 @@
         <a class="button">Action</a>
         <button class="primary">Primary Action</button>
         <button class="warning">Warning</button>
+
+<pre class="prettyprint linenums">
+&lt;h3&gt;Buttons&lt;/h3&gt; 
+&lt;a class=&quot;button&quot;&gt;Action&lt;/a&gt; 
+&lt;button class=&quot;primary&quot;&gt;Primary Action&lt;/button&gt; 
+&lt;button class=&quot;warning&quot;&gt;Warning&lt;/button&gt;
+</pre>
+
       </section>
 
       <section id="TextStyles">
