@@ -41,7 +41,7 @@
           <strong><a href="#General">General</a></strong>
           
           <nav>
-            <a href="#WhatIsCUI">What is CUI?</a>
+            <a href="#WhatIsCUI">What is CoralUI?</a>
           </nav>
       </section>
       
@@ -102,10 +102,11 @@
       </section>
       
       <section class="links">
-          <strong><a href="#Misc">Misc</a></strong>
+          <strong><a href="#Miscellaneous">Miscellaneous</a></strong>
           
           <nav>
-          </nav>
+            <a href="#Spinner">Spinner</a>
+         </nav>
       </section>
       
     </div>
@@ -113,8 +114,10 @@
     <div class="content">
       
       <section id="General">
-        <h1 class="line" id="WhatIsCUI">What is CUI?</h1>
-        <p>CUI (pronounced "cooey"), is an implementation of the XD CloudUI visual style. CUI provides everything your product needs to adopt the CloudUI visual style.</p>
+        <h1 class="line" id="WhatIsCUI">What is CoralUI?</h1>
+        <p>CoralUI or CUI (pronounced "cooey") is an implementation of the CloudUI visual style from Adobe XD.</p>
+        
+        <o>CoralUI's aim is to provid everything your product needs to adopt the CloudUI visual style.</p>
       </section>
       
       
@@ -123,10 +126,9 @@
         
         <section id="Headings">
           <h2 class="line">Headings</h2>
-          <p>Use the <code>&lt;h1&gt;</code> through <code>&lt;h5&gt;</code> tags to add headings to sections on your page.</p>
-          
-          <!-- Example -->
-          <div class="well">
+          <p>Use the <code class="prettyprint">&lt;h1&gt;</code> through <code class="prettyprint">&lt;h5&gt;</code> tags to add headings to sections on your page.</p>
+
+          <div class="demo noCode headingExample">
             <h1>Heading 1 (Page Title)</h1>
             <h2>Heading 2 (Section Title)</h3>
             <h3>Heading 3 (Sub-section Title)</h3>
@@ -138,10 +140,10 @@
         
         <section id="Links">
           <h2 class="line">Links</h2>
-          <p>The <code>&lt;a&gt;</code> tag comes styled for you out of the box.</p>
+          <p>The <code class="prettyprint">&lt;a&gt;</code> tag comes styled for you out of the box.</p>
           
-          <div class="well">
-            <p>Lorem ipsum dolor sit amet consectetur <a href="#">inline link</a> adipisicing do tempor incididunt ut labore.</p>
+          <div class="demo noCode">
+            Lorem ipsum dolor sit amet consectetur <a href="#">inline link</a> adipisicing do tempor incididunt ut labore.
           </div>
         </section>
         
@@ -220,25 +222,25 @@
         
         <section id="Header">
           <h2 class="line">Header</h2>
-          <p>The top navigation header that appears on every page. It leaves space for a logo, navigation, and badge.</p>
+          <p>The top navigation header that appears on every page. It supports a logo, navigation, and drawer (which can contain a badge or other information).</p>
           
-          <!-- Example -->
-          <header>
-            <div class="logo"><img src="images/theme/dms.png"></div>
-
-            <nav>
-              <a href="#" class="selected">Home</a>
-              <a href="#">Activities</a>
-              <a href="#">Admin</a>
-            </nav>
-
-            <div class="drawer">
-              <div class="badge">5</div>
+          <div class="demo">
+            <div class="example">
+          
+              <header>
+                <div class="logo"><img src="images/theme/dms.png"></div>
+                <nav>
+                  <a href="#" class="selected">Home</a>
+                  <a href="#">Activities</a>
+                  <a href="#">Admin</a>
+                </nav>
+                <div class="drawer">
+                  <div class="badge">5</div>
+                </div>
+              </header>
+              
             </div>
-          </header>
-          
-          <!-- Code -->
-          <pre class="prettyprint linenums">
+            <pre class="prettyprint linenums">
 &lt;header&gt;
   &lt;div class=&quot;logo&quot;&gt;&lt;img src=&quot;images/theme/dms.png&quot;&gt;&lt;/div&gt;
   &lt;nav&gt;
@@ -249,8 +251,8 @@
   &lt;div class=&quot;drawer&quot;&gt;
     &lt;div class=&quot;badge&quot;&gt;5&lt;/div&gt;
   &lt;/div&gt;
-&lt;/header&gt;
-          </pre>
+&lt;/header&gt;</pre>
+          </div>
         </section>
 
         
@@ -258,30 +260,27 @@
           <h2 class="line">Rail</h2>
           <p>The side panel used for metadata and feeds.</p>
           
-          <!-- Example -->
-          <div class="fakeBody">
-            
-            <div class="page">
-              <div class="content">
-                <p>(content)</p>
+          <div class="demo">
+            <div class="example">
+              
+              <div class="page demoBorder">
+                <div class="content">
+                  <p>&nbsp;(content)</p>
+                </div>
+                <div class="rail">
+                  <section>
+                      <strong>Update Feed</strong>
+                  </section>
+                  <section>
+                      <h4>Revised asset ready for review</h4>
+                      <div class="small grey light">Modified yesterday by Rob Cobourn</div>
+                      <p class="small">I created a new segment thing for the Chance campaign because we left out the Foursquare that will be checking in at Olympic events.</p>
+                  </section>
+                </div>
               </div>
-          
-              <div class="rail">
-                <section>
-                    <strong>Update Feed</strong>
-                </section>
-                <section>
-                    <h4>Revised asset ready for review</h4>
-                    <div class="small grey light">Modified yesterday by Rob Cobourn</div>
-                    <p class="small">I created a new segment thing for the Chance campaign because we left out the Foursquare that will be checking in at Olympic events.</p>
-                </section>
+              
               </div>
-            </div>
-            
-          </div>
-          
-          <!-- Code -->
-<pre class="prettyprint linenums">
+              <pre class="prettyprint linenums">
 &lt;div class=&quot;page&quot;&gt;
   &lt;div class=&quot;content&quot;&gt;
     &lt;p&gt;(content)&lt;/p&gt;
@@ -299,76 +298,78 @@
         in at Olympic events.&lt;/p&gt;
     &lt;/section&gt;
   &lt;/div&gt;
-&lt;/div&gt;
-</pre>
-
+&lt;/div&gt;</pre>
+          </div>
         </section>
         
         <section id="Buttons">
           <h2 class="line">Buttons</h2>
-          <p>The <code>&lt;button&gt;</code> tag is styled automatically, and you can apply the <code>button</code> CSS class to any element (such as <code>&lt;a&gt;</code>) to turn it into a button.</p>
+          <p>The <code class="prettyprint">&lt;button&gt;</code> tag is styled automatically, and you can apply the <code class="atv">button</code> CSS class to any element (such as <code class="prettyprint">&lt;a&gt;</code>) to turn it into a button.</p>
           
-          <!-- Example -->
-          <a class="button" href="#">Action</a>
-          <button class="primary">Primary Action</button>
-          <button class="warning">Warning</button>
-          
-          <!-- Code -->
-<pre class="prettyprint linenums">
+          <div class="demo">
+            <div class="example">
+
+              <a class="button" href="#">Action</a>
+              <button class="primary">Primary Action</button>
+              <button class="warning">Warning</button>
+
+            </div>
+            <pre class="prettyprint linenums">
 &lt;a class=&quot;button&quot;&gt;Action&lt;/a&gt; 
 &lt;button class=&quot;primary&quot;&gt;Primary Action&lt;/button&gt; 
-&lt;button class=&quot;warning&quot;&gt;Warning&lt;/button&gt;
-</pre>
+&lt;button class=&quot;warning&quot;&gt;Warning&lt;/button&gt;</pre>
+          </div>
         </section>
 
         <section id="Table">
           <h2 class="line">Table</h2>
           
-          <!-- Example -->
-          <table class="data" style="width: 50%">
-            <thead>
-              <tr>
-                <th class="check"><input type="checkbox"></th>
-                <th>Text</th>
-                <th>Date</th>
-                <th class="num">Numbers</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td>Alpha</td>
-                <td>normal</td>
-                <td class="num">912</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td>Bravo</td>
-                <td>January 28th, 2012</td>
-                <td class="num">1,049</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td>Charlie</td>
-                <td>April 10th, 2012</td>
-                <td class="num">11,130</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td>Delta</td>
-                <td>June 17th, 2012</td>
-                <td class="num">731,422</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td>Echo</td>
-                <td>June 5th, 2012</td>
-                <td class="num">2,700,120</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="demo">
+            <div class="example">
+              <table class="data" style="width: 50%">
+                <thead>
+                  <tr>
+                    <th class="check"><input type="checkbox"></th>
+                    <th>Text</th>
+                    <th>Date</th>
+                    <th class="num">Numbers</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><input type="checkbox"></td>
+                    <td>Alpha</td>
+                    <td>normal</td>
+                    <td class="num">912</td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox"></td>
+                    <td>Bravo</td>
+                    <td>January 28th, 2012</td>
+                    <td class="num">1,049</td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox"></td>
+                    <td>Charlie</td>
+                    <td>April 10th, 2012</td>
+                    <td class="num">11,130</td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox"></td>
+                    <td>Delta</td>
+                    <td>June 17th, 2012</td>
+                    <td class="num">731,422</td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox"></td>
+                    <td>Echo</td>
+                    <td>June 5th, 2012</td>
+                    <td class="num">2,700,120</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
           
-          <!-- Code -->
 <pre class="prettyprint linenums">
 &lt;table class=&quot;data&quot;&gt;
  &lt;thead&gt;
@@ -389,23 +390,20 @@
  &lt;/tbody&gt;
 &lt;/table&gt;
 </pre>
+          </div>
+          
         </section>
         
       </section>
 
 
-      <section id="Misc">
-        <h1 class="line">Misc</h1>
+      <section id="Miscellaneous">
+        <h1 class="line">Miscellaneous</h1>
         <p></p>
-
-        <section id="Alerts">
-          <h2 class="line">Contextual Alerts</h2>
-        </section>
         
         <section id="Spinner">
           <h2 class="line">Spinner</h2>
         </section>
-        
       </section>
       
     </div><!-- /content -->

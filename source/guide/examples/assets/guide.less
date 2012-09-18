@@ -7,6 +7,14 @@
 @import 'includes/variables';
 @import 'includes/mixins';
 
+@demo-background-color: rgb(247, 247, 247);
+@demo-border-color: rgb(187, 187, 187);
+
+// Rail
+body > div.page > div.rail {
+  width: 10em;
+}
+
 // Headings
 h1.line,
 h2.line {
@@ -53,11 +61,6 @@ h2.line {
   font-style: italic;
 }
 
-// Prettify
-ol.linenums {
-  margin: 0;
-}
-
 // Heading link
 #SectionAnchor {
   display: inline-block;
@@ -68,18 +71,89 @@ ol.linenums {
 }
 
 // Code 
+code.prettyprint,
 code {
   font-size: 0.8em;
   
-  .border-radius(0.5em);
-  padding: 0 0.25em;
+  .border-radius(0.35em);
+  padding: 0.1em 0.25em;
 
-  border: (1/0.8)*@px solid @table-border-color;
-  background: @table-cell-background-color;
+  border: (1/0.8)*@px solid @demo-border-color;
+  background: @demo-background-color;
+}
+
+div.demoBorder,
+div.exampleBox,
+div.shadowBox,
+.prettyprint,
+div.demo {
+  border: @px solid @demo-border-color;
+
+  .box-shadow(0 0 0.5em rgba(0, 0, 0, 0.1));
+}
+
+// Preserve normal line nums
+.prettyprint.linenums {
+  border: @px solid @demo-border-color;
+  
+  .box-shadow(inset 2.75em 0 0 #FBFBFC, inset 2.75em+@px 0 0 #ECECF0, 0 0 0.5em rgba(0, 0, 0, 0.1));
+
+  ol.linenums {
+    margin: 0;
+    padding-left: 2.75em;
+  }
+}
+
+// Box with a border for putting above code samples
+div.demo {
+  margin: 0.75em 0 0 0;
+  
+  background: @demo-background-color;
+  
+  &.noCode {
+    padding: 0.75em;
+    display: inline-block;
+  }
+  
+  .example {
+    background: rgb(251, 251, 251);
+    
+    padding: 1em;
+    border-bottom: @px solid lighten(@demo-border-color, 10%);
+  }
+  
+  .prettyprint {
+    margin: 0;
+    border: none;
+    
+    &.linenums {
+      // remove top shadow
+      .box-shadow(inset 2.75em 0 0 #FBFBFC, inset 2.75em+@px 0 0 #ECECF0);
+    }
+  }
 }
 
 // Fake body element
 div.fakeBody {
-  background-color: @body-background-color;
-  box-shadow: 0 0 0.25em rgba(0, 0, 0, 0.5);
+  display: block !important;
+  padding: 0 !important;
+}
+
+// Contains h1-h5 etc
+div.headingExample {
+  * {
+    margin: 0.5em 0;
+    
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  h4, h5 {
+    margin: 0.75em 0;
+  }
 }
