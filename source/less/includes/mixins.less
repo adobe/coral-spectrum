@@ -4,17 +4,17 @@
  * Mixin: .font-face
  * Quickly declare a font face
  */
-.font-face(@font-name, @font-file) {
-  @font-face {
-    font-family: @font-name;
-    src: url(~"@{font-folder}/@{font-file}-webfont.eot");
-    src: url(~"@{font-folder}/@{font-file}-webfont.eot?#iefix") format("embedded-opentype"),
-         url(~"@{font-folder}/@{font-file}-webfont.woff") format("woff"),
-         url(~"@{font-folder}/@{font-file}-webfont.ttf") format("truetype"),
-         url(~"@{font-folder}/@{font-file}-webfont.svg#@{font-name}") format("svg");
-    font-weight: normal;
-    font-style: normal;
-  }
+.font(@font-name, @font-file, @font-weight: normal, @font-style: normal) {
+  font-family: @font-name;
+
+  src: url(~"@{font-folder}/@{font-file}-webfont.eot");
+  src: url(~"@{font-folder}/@{font-file}-webfont.eot?#iefix") format("embedded-opentype"),
+       url(~"@{font-folder}/@{font-file}-webfont.woff") format("woff"),
+       url(~"@{font-folder}/@{font-file}-webfont.ttf") format("truetype"),
+       url(~"@{font-folder}/@{font-file}-webfont.svg#@{font-name}") format("svg");
+  
+  font-weight: @font-weight;
+  font-style: @font-style;
 }
 
 
