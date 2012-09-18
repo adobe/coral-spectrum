@@ -1,0 +1,5 @@
+# currently does not work, as less parser cannot import files missing the .less extension
+#less/cui.less
+
+# fallback to recompiled css
+css/cui.css

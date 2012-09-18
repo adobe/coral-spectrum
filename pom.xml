@@ -1,0 +1,144 @@
+<!--
+
+  ADOBE CONFIDENTIAL
+  __________________
+
+   Copyright 2012 Adobe Systems Incorporated
+   All Rights Reserved.
+
+  NOTICE:  All information contained herein is, and remains
+  the property of Adobe Systems Incorporated and its suppliers,
+  if any.  The intellectual and technical concepts contained
+  herein are proprietary to Adobe Systems Incorporated and its
+  suppliers and are protected by trade secret or copyright law.
+  Dissemination of this information or reproduction of this material
+  is strictly forbidden unless prior written permission is obtained
+  from Adobe Systems Incorporated.
+  -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- ======================================================================= -->
+    <!-- P A R E N T   P R O J E C T                                             -->
+    <!-- ======================================================================= -->
+    <parent>
+        <groupId>com.adobe.granite</groupId>
+        <artifactId>parent</artifactId>
+        <version>26</version>
+        <relativePath />
+    </parent>
+
+    <!-- ======================================================================= -->
+    <!-- P R O J E C T                                                           -->
+    <!-- ======================================================================= -->
+    <artifactId>com.adobe.granite.ui.coral-pkg</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>content-package</packaging>
+
+    <name>Adobe Reef / Adobe Granite UI / Coral Content Package</name>
+    
+    <scm>
+        <connection>scm:git:git@git.corp.adobe.com:lawdavis/CloudUI.git</connection>
+        <developerConnection>scm:git:git@git.corp.adobe.com:lawdavis/CloudUI.git</developerConnection>
+        <url>https://git.corp.adobe.com/lawdavis/CloudUI/master</url>
+    </scm>
+
+    <properties>
+        <content.dir>${basedir}/content</content.dir>
+    </properties>
+
+    <!-- ====================================================================== -->
+    <!-- B U I L D   D E S C R I P T I O N                                      -->
+    <!-- ====================================================================== -->
+    <build>
+        <resources>
+            <!-- define the resources that will go into the package -->
+            <resource>
+                <!--
+                    we want to keep some of the META-INF files and not configure
+                    everything in the plugin.
+                -->
+                <directory>${content.dir}/src/main/content/META-INF</directory>
+                <targetPath>${project.build.directory}/vault-work/META-INF</targetPath>
+            </resource>
+
+            <!-- for now, we just include the entire build directory to the clientlib. -->
+            <!-- we might try to have a clearer distinction between source and build files later -->
+            <resource>
+                <directory>${basedir}/build</directory>
+                <targetPath>${project.build.directory}/vault-work/jcr_root/libs/coral/clientlib</targetPath>
+                <excludes>
+                    <!-- directories that don't go into the clientlib -->
+                    <!--<exclude>guide/**</exclude>-->
+                </excludes>
+            </resource>
+
+            <!-- include package sources -->
+            <resource>
+                <directory>${content.dir}/src/main/content/jcr_root</directory>
+                <excludes>
+                    <!-- exclude .vlt control files in the package -->
+                    <exclude>**/.vlt</exclude>
+                    <exclude>**/.vltignore</exclude>
+                    <exclude>**/.gitignore</exclude>
+                </excludes>
+            </resource>
+        </resources>
+
+        <plugins>
+            <!-- we don't want the remote resources copied to target/classes
+                 (attached) this would add them below the jcr_root, too.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-remote-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/vault-work</outputDirectory>
+                            <attached>false</attached>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- ====================================================================== -->
+            <!-- V A U L T   P A C K A G E   P L U G I N                                -->
+            <!-- ====================================================================== -->
+            <plugin>
+                <groupId>com.day.jcr.vault</groupId>
+                <artifactId>content-package-maven-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <filters>
+                        <filter>
+                            <root>/libs/coral</root>
+                        </filter>
+                    </filters>
+                </configuration>
+            </plugin>
+
+            <!-- ====================================================================== -->
+            <!-- A S S E M B L Y   P L U G I N                                          -->
+            <!-- ====================================================================== -->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/assemble/distribution.xml</descriptor>
+                    </descriptors>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- ====================================================================== -->
+    <!-- D E P E N D E N C I E S                                                -->
+    <!-- ====================================================================== -->
+
+    <dependencies>
+    </dependencies>
+</project>
