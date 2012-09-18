@@ -2,14 +2,13 @@
  *
  */
 .page {
-  .flexbox;     // it's a flexbox
-  .flex-row;    // that spans horizontally
-  
+  .flex;                  // it's a flexbox
+  .flex-direction(row);   // that spans horizontally
   .flex-ratio(1);
   
   .rail {
-    .flexbox;     // Enables scrolling
-    .flex-column;
+    .flex;  // Enables scrolling
+    .flex-direction(column);
     
     .scrollable;
   }
