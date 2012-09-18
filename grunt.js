@@ -91,7 +91,7 @@ module.exports = function(grunt) {
       },
       prettyify: {
         src: '<%= dirs.components %>/bootstrap/docs/assets/js/google-code-prettify/*',
-        dest: '<%= dirs.build %>/guide/google-code-prettify/'
+        dest: '<%= dirs.build %>/examples/assets/google-code-prettify/'
       }
     },
     
@@ -168,15 +168,25 @@ module.exports = function(grunt) {
     },
 
     less: {
-      compile: {
+      cui: {
         options: {
           paths: [
-            'source/less/', // must hardcore paths here, grunt-contrib-less doesn't support template tags
-            'temp/less/' // must hardcore paths here, grunt-contrib-less doesn't support template tags
+            'source/less/', // must hardcode paths here, grunt-contrib-less doesn't support template tags
+            'temp/less/' // must hardcode paths here, grunt-contrib-less doesn't support template tags
           ]
         },
         files: {
           '<%= dirs.build %>/css/cui.css': '<%= dirs.source %>/less/cui.less'
+        }
+      },
+      guide: {
+        options: {
+          paths: [
+            'source/less/' // must hardcode paths here, grunt-contrib-less doesn't support template tags
+          ]
+        },
+        files: {
+          '<%= dirs.build %>/examples/assets/guide.css': '<%= dirs.source %>/examples/assets/guide.less'
         }
       }
     },
