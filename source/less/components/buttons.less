@@ -4,7 +4,7 @@
 
 // Button: Default (gray)
 button,
-a.button {
+.button {
   display: inline-block;
   .box-sizing(border-box); // Makes 135px min-width apply consistently between anchor/button
   
@@ -19,10 +19,10 @@ a.button {
 
   border-color: @button-gray-border-color;
 
-  font-family: @body-font-family;
+  font-family: @font-base-family;
   font-size: @button-text-size;
   color: @button-text-color;
-  text-decoration: none; // Reset underline on a.button
+  text-decoration: none; // Reset underline on anchor
   text-align: center;
   
   cursor: pointer; // Give hand cursor
@@ -32,12 +32,16 @@ a.button {
   &:active {
     .gradient(@button-gray-down-gradient-start-color, @button-gray-down-gradient-end-color);
   }
+  
+  &:hover {
+    text-decoration: none; // Reset underline on anchor
+  }
 }
 
 
 // Button: Primary (blue)
 button.primary,
-a.button.primary {
+.button.primary {
   border-color: @button-blue-border-color;
   
   .gradient(@button-blue-gradient-start-color, @button-blue-gradient-end-color);
@@ -50,7 +54,7 @@ a.button.primary {
 
 // Button: Warning (red)
 button.warning,
-a.button.warning {
+.button.warning {
   border-color: @button-red-border-color;
   
   .gradient(@button-red-gradient-start-color, @button-red-gradient-end-color);
@@ -64,10 +68,10 @@ a.button.warning {
 // Button: Disabled
 button.disabled,
 button[disabled],
-a.button.disabled,
+.button.disabled,
 button.disabled:active,
 button[disabled]:active,
-a.button.disabled:active {
+.button.disabled:active {
   cursor: default;
   border-color: @button-disabled-border-color;
 
