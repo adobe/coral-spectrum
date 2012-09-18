@@ -1,4 +1,22 @@
 /**
+ * Element: form
+ * No margin or padding by default
+ */
+form {
+  margin: 0;
+  padding: 0;
+}
+
+
+/**
+ * Element: img
+ * Bootstrap's reset needs to be massaged a bit for images
+ */
+img {
+  max-width: none; // Otherwise, images can get squished in funny ways when base size increases
+}
+
+/**
  * Classes: .left & .right
  * Basic float left/right classes
  */
@@ -9,6 +27,7 @@
   float: right;
 }
 
+
 /**
  * Class: .hidden
  * Hide something without affecting its width/height (can be measured while hidden)
@@ -18,4 +37,40 @@
   left: -9999px;
   top: -9999px;
   visibility: hidden;
+}
+
+
+/**
+ * Class: .grey
+ * Used for secondary or help text
+ */
+.grey {
+  color: @font-secondary-color;
+}
+
+
+/**
+ * Class: .small
+ * Used for smaller text
+ */
+.small {
+  font-size: 0.8em;
+}
+
+
+/**
+ * Class: .light
+ * Used for light text
+ */
+.light {
+  font-family: AdobeCleanLight;
+}
+
+
+/**
+ * Class: .light
+ * Used for light text
+ */
+.light {
+  font-family: AdobeCleanLight;
 }
