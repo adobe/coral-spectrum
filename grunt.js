@@ -88,6 +88,10 @@ module.exports = function(grunt) {
           '<%= dirs.build %>/js/libs/underscore.js': '<%= dirs.components %>/underscore/index.js',
           '<%= dirs.build %>/js/libs/handlebars.js': '<%= dirs.components %>/handlebars/index.js'
         }
+      },
+      prettyify: {
+        src: '<%= dirs.components %>/bootstrap/docs/assets/js/google-code-prettify/*',
+        dest: '<%= dirs.build %>/guide/google-code-prettify/'
       }
     },
     
