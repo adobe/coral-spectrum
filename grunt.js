@@ -13,8 +13,8 @@ module.exports = function(grunt) {
     // Meta and build configuration
     meta: {
       version: '0.1.0',
-      appName: 'CloudUI',
-      appWebSite: 'git.corp.adobe.com/lazd/CloudUI'
+      appName: 'CoralUI',
+      appWebSite: 'git.corp.adobe.com/Reef/CoralUI'
     },
     dirs: {
       build: 'build',

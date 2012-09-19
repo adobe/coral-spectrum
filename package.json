@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "repository": {
     "type": "git",
-    "url": "https://git.corp.adobe.com/lawdavis/CloudUI"
+    "url": "https://git.corp.adobe.com/Reef/CoralUI"
   },
   "dependencies": {
     "grunt-contrib-clean": "0.2",

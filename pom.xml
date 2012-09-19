@@ -37,9 +37,9 @@
     <name>Adobe Reef / Adobe Granite UI / Coral Content Package</name>
     
     <scm>
-        <connection>scm:git:git@git.corp.adobe.com:lawdavis/CloudUI.git</connection>
-        <developerConnection>scm:git:git@git.corp.adobe.com:lawdavis/CloudUI.git</developerConnection>
-        <url>https://git.corp.adobe.com/lawdavis/CloudUI/master</url>
+        <connection>scm:git:git@git.corp.adobe.com:Reef/CoralUI.git</connection>
+        <developerConnection>scm:git:git@git.corp.adobe.com:Reef/CoralUI.git</developerConnection>
+        <url>https://git.corp.adobe.com/Reef/CoralUI/master</url>
     </scm>
 
     <properties>
