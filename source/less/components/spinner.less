@@ -1,0 +1,19 @@
+/**
+ * Class: .spinner
+ */
+.spinner { 
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+
+  background-position: center center;
+  background-image: url(~"@{component-images-folder}/spinner/spinner_small.png");
+
+  .spin(0.75s);
+
+  &.large {
+    width: 2em;
+    height: 2em;
+    background-image: url(~"@{component-images-folder}/spinner/spinner_large.png");
+  }
+}
