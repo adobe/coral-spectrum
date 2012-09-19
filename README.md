@@ -4,7 +4,7 @@ CoralUI or CUI (pronounced "cooey") is an implementation of the XD CloudUI visua
 CoralUI provides everything your product needs to adopt the CloudUI visual style.
 
 # Demo & Download
-Check out the [Style Guide](https://git.corp.adobe.com/pages/lawdavis/CoralUI/), to see CoralUI in action, download releases, and learn how to use CoralUI in your project.
+Check out the [Style Guide](https://git.corp.adobe.com/pages/Reef/CoralUI/), to see CoralUI in action, download releases, and learn how to use CoralUI in your project.
 
 
 # Contributing
@@ -12,7 +12,7 @@ CoralUI is an internal open source effort with backing from XD and product devel
 
 ## Building
 
-Check out the [Build Process wiki](https://git.corp.adobe.com/lawdavis/CoralUI/wiki/Build-Process-&-Technology) for information on building CoralUI.
+Check out the [Build Process wiki](https://git.corp.adobe.com/Reef/CoralUI/wiki/Build-Process-&-Technology) for information on building CoralUI.
 
 ## More Information
-See the [CoralUI Wiki](https://git.corp.adobe.com/lawdavis/CoralUI/wiki) for more information on contributing. If you'd like to be assigned issues for feature rqeuest, contact [Larry Davis](mailto:lawdavis@adobe.com).
+See the [CoralUI Wiki](https://git.corp.adobe.com/Reef/CoralUI/wiki) for more information on contributing. If you'd like to be assigned issues for feature rqeuest, contact [Larry Davis](mailto:lawdavis@adobe.com).
