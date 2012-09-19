@@ -6,17 +6,17 @@
   <link rel="stylesheet" href="css/cui.min.css">
   <link rel="stylesheet" href="examples/assets/google-code-prettify/prettify.css">
   <link rel="stylesheet" href="examples/assets/guide.css">
-  
+
   <script src="js/libs/jquery.js"></script>
   <script src="js/cui.min.js"></script>
   <script src="examples/assets/guide.js"></script>
   <script src="examples/assets/google-code-prettify/prettify.js"></script>
-  
+
 </head>
 <body onload="prettyPrint()">
 
   <header>
-    
+
     <div class="logo"><img src="images/theme/cloudui.png"></div>
 
     <nav>
@@ -27,38 +27,38 @@
     </nav>
 
     <div class="drawer">
-      <div class="left"><a class="code-toggle" href="#code_toggle">Show Code</a></div>
       <div class="badge">v0.1</div>
     </div>
-    
+
   </header>
-  
+
   <div class="page">
-    
+
     <div class="rail">
-      
+
       <section class="links">
           <strong><a href="#General">General</a></strong>
-          
+
           <nav>
             <a href="#WhatIsCUI">What is CoralUI?</a>
           </nav>
       </section>
-      
+
       <section class="links">
           <strong><a href="#TextStyles">Text styles</a></strong>
-          
+
           <nav>
             <a href="#Headings">Headings</a>
             <a href="#Links">Links</a>
             <a href="#Fonts">Fonts</a>
           </nav>
       </section>
-      
+
       <section class="links">
           <strong><a href="#PageComponents">Page&nbsp;Components</a></strong>
-          
+
           <nav>
+            <a href="#Buttons">Buttons</a>
             <a href="#Header">Header</a>
             <a href="#Rail">Rail</a>
             <a href="#Breadcrumbs">Breadcrumbs</a>
@@ -70,10 +70,10 @@
             <a href="#Grid">Grid</a>
           </nav>
       </section>
-      
+
       <section class="links">
           <strong><a href="#FormFields">Form Fields</a></strong>
-          
+
           <nav>
             <a href="#TextFields">Text field</a>
             <a href="#Checkbox">Checkbox</a>
@@ -86,10 +86,10 @@
             <a href="#Draggables">Draggable</a>
           </nav>
       </section>
-      
+
       <section class="links">
           <strong><a href="#Containers">Containers</a></strong>
-          
+
           <nav>
             <a href="#Tabs">Tabs</a>
             <a href="#Popdowns">Popdown</a>
@@ -100,57 +100,57 @@
             <a href="#Tooltips">Tooltip</a>
          </nav>
       </section>
-      
+
       <section class="links">
           <strong><a href="#Miscellaneous">Miscellaneous</a></strong>
-          
+
           <nav>
             <a href="#Spinner">Spinner</a>
          </nav>
       </section>
-      
+
     </div>
 
     <div class="content">
-      
+
       <section id="General">
         <h1 class="line" id="WhatIsCUI">What is CoralUI?</h1>
         <p>CoralUI or CUI (pronounced "cooey") is an implementation of the CloudUI visual style from Adobe XD.</p>
-        
+
         <o>CoralUI's aim is to provid everything your product needs to adopt the CloudUI visual style.</p>
       </section>
-      
-      
+
       <section id="TextStyles">
-        <h1 class="line">Text Styles</h2>
-        
+        <h1 class="line">Text Styles</h1>
+        <p>CUI provides basic text styles suitable for paragraph. When laying out your page, you might need to override the margins on the heading elements.</p>
+
         <section id="Headings">
           <h2 class="line">Headings</h2>
           <p>Use the <code class="prettyprint">&lt;h1&gt;</code> through <code class="prettyprint">&lt;h5&gt;</code> tags to add headings to sections on your page.</p>
 
-          <div class="demo noCode headingExample">
+          <div class="componentSample noCode headingExample">
             <h1>Heading 1 (Page Title)</h1>
             <h2>Heading 2 (Section Title)</h3>
             <h3>Heading 3 (Sub-section Title)</h3>
             <h4>Heading 4 (List Title)</h4>
             <h5>Heading 5 (Captions, help text)</h4>
           </div>
-          
+
         </section>
-        
+
         <section id="Links">
           <h2 class="line">Links</h2>
           <p>The <code class="prettyprint">&lt;a&gt;</code> tag comes styled for you out of the box.</p>
-          
-          <div class="demo noCode">
+
+          <div class="componentSample noCode">
             Lorem ipsum dolor sit amet consectetur <a href="#">inline link</a> adipisicing do tempor incididunt ut labore.
           </div>
         </section>
-        
+
         <section id="Fonts">
           <h2 class="line">Fonts</h2>
           <p>Three variations of the Adobe Clean font are provided. Reference the table below to determine the CSS properties to apply for each font style.</p>
-          
+
           <table class="data">
             <thead>
               <tr>
@@ -212,21 +212,41 @@
             </tbody>
           </table>
         </section>  
-      </section>
+        
+      </section><!-- /Text Styles -->
 
 
       <section id="PageComponents">
         <h1 class="line">Page Components</h1>
         <p>Page components include header, rail, toolbar, buttons, breadcrumbs, etc.</p>
 
-        
+        <section id="Buttons">
+          <h2 class="line">Buttons</h2>
+          <p>The <code class="prettyprint">&lt;button&gt;</code> tag is styled automatically, and you can apply the <code class="atv">button</code> CSS class to any element (such as <code class="prettyprint">&lt;a&gt;</code> or <code class="prettyprint">&lt;input&gt;</code>) to turn it into a styled button.</p>
+
+          <div class="componentSample">
+            <div class="example">
+
+              <a class="button" href="#">Action</a>
+              <button class="primary">Primary Action</button>
+              <button class="warning">Warning</button>
+
+            </div>
+            <pre class="prettyprint linenums">
+&lt;a class=&quot;button&quot;&gt;Action&lt;/a&gt; 
+&lt;button class=&quot;primary&quot;&gt;Primary Action&lt;/button&gt; 
+&lt;button class=&quot;warning&quot;&gt;Warning&lt;/button&gt;</pre>
+          </div>
+        </section>
+
         <section id="Header">
           <h2 class="line">Header</h2>
           <p>The top navigation header that appears on every page. It supports a logo, navigation, and drawer (which can contain a badge or other information).</p>
-          
-          <div class="demo">
+          <p>The HTML5 <code class="prettyprint">&lt;header&gt;</code> tag reserved for the application header and should not be used elsewhere.</p>
+
+          <div class="componentSample">
             <div class="example">
-          
+
               <header>
                 <div class="logo"><img src="images/theme/dms.png"></div>
                 <nav>
@@ -238,7 +258,7 @@
                   <div class="badge">5</div>
                 </div>
               </header>
-              
+
             </div>
             <pre class="prettyprint linenums">
 &lt;header&gt;
@@ -255,15 +275,14 @@
           </div>
         </section>
 
-        
         <section id="Rail">
           <h2 class="line">Rail</h2>
           <p>The side panel used for metadata and feeds.</p>
-          
-          <div class="demo">
+
+          <div class="componentSample">
             <div class="example">
-              
-              <div class="page demoBorder">
+
+              <div class="page shadowBox">
                 <div class="content">
                   <p>&nbsp;(content)</p>
                 </div>
@@ -278,9 +297,9 @@
                   </section>
                 </div>
               </div>
-              
-              </div>
-              <pre class="prettyprint linenums">
+
+            </div>
+            <pre class="prettyprint linenums">
 &lt;div class=&quot;page&quot;&gt;
   &lt;div class=&quot;content&quot;&gt;
     &lt;p&gt;(content)&lt;/p&gt;
@@ -293,38 +312,83 @@
     &lt;section&gt;
         &lt;h4&gt;Revised asset ready for review&lt;/h4&gt;
         &lt;div class=&quot;small grey light&quot;&gt;Modified yesterday by Rob Cobourn&lt;/div&gt;
-        &lt;p class=&quot;small&quot;&gt;I created a new segment thing for the Chance
-        campaign because we left out the Foursquare that will be checking
-        in at Olympic events.&lt;/p&gt;
+        &lt;p class=&quot;small&quot;&gt;I created a new segment thing for the...&lt;/p&gt;
     &lt;/section&gt;
   &lt;/div&gt;
 &lt;/div&gt;</pre>
           </div>
         </section>
-        
-        <section id="Buttons">
-          <h2 class="line">Buttons</h2>
-          <p>The <code class="prettyprint">&lt;button&gt;</code> tag is styled automatically, and you can apply the <code class="atv">button</code> CSS class to any element (such as <code class="prettyprint">&lt;a&gt;</code>) to turn it into a button.</p>
-          
-          <div class="demo">
+
+        <section class="hidden" id="Toolbar">
+          <h2 class="line">Toolbar</h2>
+          <p>The toolbar contains action buttons.</p>
+
+          <div class="componentSample">
             <div class="example">
 
-              <a class="button" href="#">Action</a>
-              <button class="primary">Primary Action</button>
-              <button class="warning">Warning</button>
+              <div class="toolbar">
+              </div>
+
+            </div>
+            <pre class="prettyprint linenums"></pre>
+          </div>
+        </section>
+
+        <section class="hidden" id="Search">
+          <h2 class="line">Search</h2>
+          <p>Search.</p>
+
+          <div class="componentSample">
+            <div class="example">
+
+              <div class="search">
+              </div>
+
+            </div>
+            <pre class="prettyprint linenums"></pre>
+          </div>
+        </section>
+
+        <section id="Wells">
+          <h2 class="line">Wells</h2>
+          <p>Wells are used to separate field groups or large blocks of text.</p>
+
+          <div class="componentSample">
+            <div class="example">
+
+              <section class="well">
+                Content goes here.
+              </section>
 
             </div>
             <pre class="prettyprint linenums">
-&lt;a class=&quot;button&quot;&gt;Action&lt;/a&gt; 
-&lt;button class=&quot;primary&quot;&gt;Primary Action&lt;/button&gt; 
-&lt;button class=&quot;warning&quot;&gt;Warning&lt;/button&gt;</pre>
+&lt;section class=&quot;well&quot;&gt;
+  Content goes here.
+&lt;/section&gt;
+</pre>
+          </div>
+        </section>
+
+        <section class="hidden" id="List">
+          <h2 class="line">List</h2>
+          <p>List.</p>
+
+          <div class="componentSample">
+            <div class="example">
+
+              <ul class="list">
+                <li>Item</li>
+              </ul>
+
+            </div>
+            <pre class="prettyprint linenums"></pre>
           </div>
         </section>
 
         <section id="Table">
           <h2 class="line">Table</h2>
-          
-          <div class="demo">
+
+          <div class="componentSample">
             <div class="example">
               <table class="data" style="width: 50%">
                 <thead>
@@ -369,7 +433,7 @@
                 </tbody>
               </table>
           </div>
-          
+
 <pre class="prettyprint linenums">
 &lt;table class=&quot;data&quot;&gt;
  &lt;thead&gt;
@@ -391,25 +455,53 @@
 &lt;/table&gt;
 </pre>
           </div>
-          
+
+        </section>
+
+        <section class="hidden" id="Grid">
+          <h2 class="line">Grid</h2>
+          <p>Grid.</p>
+
+          <div class="componentSample">
+            <div class="example">
+
+              <ul class="grid">
+                <li>Item</li>
+              </ul>
+
+            </div>
+            <pre class="prettyprint linenums"></pre>
+          </div>
+        </section>
+
+      </section><!-- /Page Components -->
+
+
+      <section class="hidden" id="FormFields">
+        <h1 class="line">Form Fields</h1>
+        <p>CUI provides many useful styles and widgets for form fields.</p>
+
+        <section id="TextField">
+          <h2 class="line">Text Field</h2>
         </section>
         
-      </section>
+      </section><!-- /Form Fields -->
 
 
-      <section id="Miscellaneous">
+      <section class="hidden" id="Miscellaneous">
         <h1 class="line">Miscellaneous</h1>
         <p></p>
-        
+
         <section id="Spinner">
           <h2 class="line">Spinner</h2>
         </section>
-      </section>
-      
+        
+      </section><!-- /Miscellaneous -->
+
     </div><!-- /content -->
   </div><!-- /page -->
-  
-  <a id="SectionAnchor" style="display: none;">&para;</a>
+
+  <a id="SectionAnchor" style="display: none;" target="_blank" title="Right click to copy section URL">&para;</a>
 
 </body>
 </html>
