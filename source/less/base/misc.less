@@ -68,9 +68,26 @@ img {
 
 
 /**
- * Class: .light
- * Used for light text
+ * Class: .close
+ * Used for close buttons with an &times; entity inside of them
  */
-.light {
-  font-family: AdobeCleanLight;
+.close {
+  font-size: @close-font-size;
+  
+  margin: 0;
+  
+  text-decoration: none !important; // override for anchor
+  line-height: @close-factor*1.125em;
+  
+  cursor: pointer;
+  
+  border: none;
+  background: none;
+  .box-shadow(none);
+  
+  .opacity(@close-opacity);
+  
+  &:hover {
+    .opacity(100);
+  }
 }
