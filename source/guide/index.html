@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <title>CUI Style Guide</title>
+  <title>CoralUI Style Guide</title>
 
   <link rel="stylesheet" href="css/cui.min.css">
   <link rel="stylesheet" href="examples/assets/google-code-prettify/prettify.css">
@@ -45,11 +45,11 @@
       </section>
 
       <section class="links">
-          <strong><a href="#TextStyles">Text styles</a></strong>
+          <strong><a href="#TextStyles">Text Styles</a></strong>
 
           <nav>
             <a href="#Headings">Headings</a>
-            <a href="#Links">Links</a>
+            <a href="#Link">Link</a>
             <a href="#Fonts">Fonts</a>
           </nav>
       </section>
@@ -58,13 +58,16 @@
           <strong><a href="#PageComponents">Page&nbsp;Components</a></strong>
 
           <nav>
-            <a href="#Buttons">Buttons</a>
             <a href="#Header">Header</a>
             <a href="#Rail">Rail</a>
-            <a href="#Breadcrumbs">Breadcrumbs</a>
-            <a href="#Rail">Toolbar</a>
-            <a href="#Search">Search</a>
-            <a href="#Wells">Wells</a>
+            <a href="#Well">Well</a>
+          </nav>
+      </section>
+
+      <section class="links">
+          <strong><a href="#DataPresentation">Data&nbsp;Presentation</a></strong>
+
+          <nav>
             <a href="#List">List</a>
             <a href="#Table">Table</a>
             <a href="#Grid">Grid</a>
@@ -72,40 +75,58 @@
       </section>
 
       <section class="links">
-          <strong><a href="#FormFields">Form Fields</a></strong>
+          <strong><a href="#ButtonsAndControls">Buttons &amp; Controls</a></strong>
 
           <nav>
+            <a href="#Buttons">Buttons</a>
             <a href="#TextFields">Text field</a>
+            <a href="#SearchField">Search field</a>
             <a href="#Checkbox">Checkbox</a>
             <a href="#RadioButtons">Radio buttons</a>
-            <a href="#Selector">Selector</a>
             <a href="#Toggle">Toggle</a>
+            <a href="#Selector">Selector</a>
             <a href="#Slider">Slider</a>
-            <a href="#Dropdowns">Dropdown</a>
-            <a href="#RadioButtons">Toggle</a>
-            <a href="#Draggables">Draggable</a>
+            <a href="#Dropdown">Dropdown</a>
+            <a href="#Draggable">Draggable</a>
           </nav>
       </section>
 
       <section class="links">
-          <strong><a href="#Containers">Containers</a></strong>
+          <strong><a href="#Dialogs">Dialogs</a></strong>
 
           <nav>
-            <a href="#Tabs">Tabs</a>
-            <a href="#Popdowns">Popdown</a>
-            <a href="#Modals">Modal</a>
-            <a href="#Popovers">Popover</a>
-            <a href="#Cards">Card</a>
-            <a href="#Alerts">Alert</a>
-            <a href="#Tooltips">Tooltip</a>
+            <a href="#Modal">Modal</a>
+            <a href="#Popover">Popover</a>
          </nav>
       </section>
 
       <section class="links">
+          <strong><a href="#Navigation">Navigation</a></strong>
+
+          <nav>
+            <a href="#Rail">Toolbar</a>
+            <a href="#Breadcrumbs">Breadcrumbs</a>
+            <a href="#Tabs">Tabs</a>
+            <a href="#Wizard">Wizard</a>
+         </nav>
+      </section>
+
+      <section class="links">
+          <strong><a href="#StatusIndicators">Status Indicators</a></strong>
+
+          <nav>
+            <a href="#Alert">Alert</a>
+            <a href="#Tooltip">Tooltip</a>
+            <a href="#Badge">Badge</a>
+            <a href="#Spinner">Spinner</a>
+            <a href="#ProgressBar">Progress Bar</a>
+         </nav>
+      </section>
+
+      <section class="links hidden">
           <strong><a href="#Miscellaneous">Miscellaneous</a></strong>
 
           <nav>
-            <a href="#Spinner">Spinner</a>
          </nav>
       </section>
 
@@ -128,7 +149,7 @@
           <h2 class="line">Headings</h2>
           <p>Use the <code class="prettyprint">&lt;h1&gt;</code> through <code class="prettyprint">&lt;h5&gt;</code> tags to add headings to sections on your page.</p>
 
-          <div class="componentSample noCode headingExample">
+          <div class="componentSample noCode headingSample">
             <h1>Heading 1 (Page Title)</h1>
             <h2>Heading 2 (Section Title)</h3>
             <h3>Heading 3 (Sub-section Title)</h3>
@@ -139,8 +160,8 @@
         </section>
 
         <section id="Links">
-          <h2 class="line">Links</h2>
-          <p>The <code class="prettyprint">&lt;a&gt;</code> tag comes styled for you out of the box.</p>
+          <h2 class="line">Link</h2>
+          <p>The <code class="prettyprint">&lt;a&gt;</code> tag comes with a default color and behavior.</p>
 
           <div class="componentSample noCode">
             Lorem ipsum dolor sit amet consectetur <a href="#">inline link</a> adipisicing do tempor incididunt ut labore.
@@ -212,32 +233,12 @@
             </tbody>
           </table>
         </section>  
-        
-      </section><!-- /Text Styles -->
 
+      </section><!-- /Text Styles -->
 
       <section id="PageComponents">
         <h1 class="line">Page Components</h1>
-        <p>Page components include header, rail, toolbar, buttons, breadcrumbs, etc.</p>
-
-        <section id="Buttons">
-          <h2 class="line">Buttons</h2>
-          <p>The <code class="prettyprint">&lt;button&gt;</code> tag is styled automatically, and you can apply the <code class="atv">button</code> or <code class="atv">btn</code> CSS class to any element (such as <code class="prettyprint">&lt;a&gt;</code> or <code class="prettyprint">&lt;input&gt;</code>) to turn it into a styled button.</p>
-
-          <div class="componentSample">
-            <div class="example">
-
-              <a class="button" href="#">Action</a>
-              <button class="primary">Primary Action</button>
-              <button class="warning">Warning</button>
-
-            </div>
-            <pre class="prettyprint linenums">
-&lt;a class=&quot;button&quot;&gt;Action&lt;/a&gt; 
-&lt;button class=&quot;primary&quot;&gt;Primary Action&lt;/button&gt; 
-&lt;button class=&quot;warning&quot;&gt;Warning&lt;/button&gt;</pre>
-          </div>
-        </section>
+        <p>Page components include header, rail, etc.</p>
 
         <section id="Header">
           <h2 class="line">Header</h2>
@@ -271,7 +272,8 @@
   &lt;div class=&quot;drawer&quot;&gt;
     &lt;div class=&quot;badge&quot;&gt;5&lt;/div&gt;
   &lt;/div&gt;
-&lt;/header&gt;</pre>
+&lt;/header&gt;
+</pre>
           </div>
         </section>
 
@@ -288,7 +290,7 @@
                 </div>
                 <div class="rail">
                   <section>
-                      <strong>Update Feed</strong>
+                      <strong>News Feed</strong>
                   </section>
                   <section>
                       <h4>Revised asset ready for review</h4>
@@ -315,42 +317,13 @@
         &lt;p class=&quot;small&quot;&gt;I created a new segment thing for the...&lt;/p&gt;
     &lt;/section&gt;
   &lt;/div&gt;
-&lt;/div&gt;</pre>
+&lt;/div&gt;
+</pre>
           </div>
         </section>
 
-        <section class="hidden" id="Toolbar">
-          <h2 class="line">Toolbar</h2>
-          <p>The toolbar contains action buttons.</p>
-
-          <div class="componentSample">
-            <div class="example">
-
-              <div class="toolbar">
-              </div>
-
-            </div>
-            <pre class="prettyprint linenums"></pre>
-          </div>
-        </section>
-
-        <section class="hidden" id="Search">
-          <h2 class="line">Search</h2>
-          <p>Search.</p>
-
-          <div class="componentSample">
-            <div class="example">
-
-              <div class="search">
-              </div>
-
-            </div>
-            <pre class="prettyprint linenums"></pre>
-          </div>
-        </section>
-
-        <section id="Wells">
-          <h2 class="line">Wells</h2>
+        <section id="Well">
+          <h2 class="line">Well</h2>
           <p>Wells are used to separate field groups or large blocks of text.</p>
 
           <div class="componentSample">
@@ -365,7 +338,7 @@
               <section class="well">
                 More content goes here.
               </section>
-              
+
             </div>
             <pre class="prettyprint linenums">
 &lt;strong&gt;Label&lt;/strong&gt;
@@ -374,7 +347,13 @@
 &lt;/section&gt;
 </pre>
           </div>
-        </section><!-- all's well that /well -->
+        </section>
+
+      </section><!-- /Page Components -->
+
+      <section id="DataPresentation">
+        <h1 class="line">Data Presentation</h1>
+        <p>CUI provides basic grids, tables, and lists for data presentation.</p>
 
         <section class="hidden" id="List">
           <h2 class="line">List</h2>
@@ -384,6 +363,22 @@
             <div class="example">
 
               <ul class="list">
+                <li>Item</li>
+              </ul>
+
+            </div>
+            <pre class="prettyprint linenums"></pre>
+          </div>
+        </section>
+
+        <section class="hidden" id="Grid">
+          <h2 class="line">Grid</h2>
+          <p>Grid.</p>
+
+          <div class="componentSample">
+            <div class="example">
+
+              <ul class="grid">
                 <li>Item</li>
               </ul>
 
@@ -441,7 +436,7 @@
               </table>
           </div>
 
-<pre class="prettyprint linenums">
+          <pre class="prettyprint linenums">
 &lt;table class=&quot;data&quot;&gt;
  &lt;thead&gt;
    &lt;tr&gt;
@@ -465,45 +460,204 @@
 
         </section>
 
-        <section class="hidden" id="Grid">
-          <h2 class="line">Grid</h2>
-          <p>Grid.</p>
+      </section><!-- /DataPresentation -->
+
+      <section id="ButtonsAndControls">
+        <h1 class="line">Buttons &amp; Controls</h1>
+        <p>CUI provides many useful styles and widgets for form fields.</p>
+
+        <section id="Buttons">
+          <h2 class="line">Buttons</h2>
+          <p>The <code class="prettyprint">&lt;button&gt;</code> tag is styled automatically, and you can apply the <code class="atv">button</code> or <code class="atv">btn</code> CSS class to any element to turn it into a styled button.</p>
+
+          <div class="componentSample buttonSample">
+            <div class="example">
+
+              <a class="button" href="#">Action</a>
+              <button class="primary">Primary Action</button>
+              <button class="warning">Warning</button>
+
+            </div>
+            <pre class="prettyprint linenums">
+&lt;a class=&quot;button&quot;&gt;Action&lt;/a&gt; 
+&lt;button class=&quot;primary&quot;&gt;Primary Action&lt;/button&gt; 
+&lt;button class=&quot;warning&quot;&gt;Warning&lt;/button&gt;
+</pre>
+          </div>
+        </section>
+
+        <section class="hidden" id="TextField">
+          <h2 class="line">Text Field</h2>
+          <p>A generic text field.</p>
 
           <div class="componentSample">
             <div class="example">
 
-              <ul class="grid">
-                <li>Item</li>
-              </ul>
+              <input type="text">
+
+            </div>
+            <pre class="prettyprint linenums">
+&lt;input type=&quot;text&quot;&gt;
+</pre>
+          </div>
+        </section>
+
+        <section class="hidden" id="SearchField">
+          <h2 class="line">Search Field</h2>
+          <p>Search.</p>
+
+          <div class="componentSample">
+            <div class="example">
+
+              <div class="search">
+              </div>
 
             </div>
             <pre class="prettyprint linenums"></pre>
           </div>
         </section>
 
-      </section><!-- /Page Components -->
+      </section><!-- /ButtonsAndControls -->
 
+      <section id="Navigation">
+        <h1 class="line">Navigation</h1>
+        <p>CUI provides various controls that enable navigation.</p>
 
-      <section class="hidden" id="FormFields">
-        <h1 class="line">Form Fields</h1>
-        <p>CUI provides many useful styles and widgets for form fields.</p>
+        <section id="Breadcrumbs">
+          <h2 class="line">Breadcrumbs</h2>
+          <p>Breadcrumbs provide an actionable indication of a user's current location within an application.</p>
 
-        <section id="TextField">
-          <h2 class="line">Text Field</h2>
+          <div class="componentSample">
+            <div class="example">
+
+              <ul class="crumbs">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Admin</a></li>
+                <li><a href="#">Settings</a></li>
+              </ul>
+
+            </div>
+            <pre class="prettyprint linenums">
+&lt;ul class=&quot;crumbs&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Admin&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Settings&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+          </div>
         </section>
         
-      </section><!-- /Form Fields -->
+        <section class="hidden" id="Toolbar">
+          <h2 class="line">Toolbar</h2>
+          <p>The toolbar contains action buttons.</p>
 
+          <div class="componentSample">
+            <div class="example">
 
-      <section class="hidden" id="Miscellaneous">
-        <h1 class="line">Miscellaneous</h1>
-        <p></p>
+              <div class="toolbar">
+              </div>
+
+            </div>
+            <pre class="prettyprint linenums"></pre>
+          </div>
+        </section>
+
+      </section><!-- /FormFields -->
+
+      <section id="StatusIndicators">
+        <h1 class="line">Status Indicators</h1>
+        <p>Status indicators provide a way of conveying the progress of an ongoing process or the result of a process that has finished.</p>
+
+        <section id="Alert">
+          <h2 class="line">Alert</h2>
+          <p>Alerts show the user the result of an action.</p>
+
+          <div class="componentSample">
+            <div class="example">
+              <div class="alert error">
+                <div class="close">&times;</div>
+                <strong>ERROR</strong>Uh oh, something went wrong with the whozit!
+              </div>
+              
+              <div class="alert notice">
+                <div class="close">&times;</div>
+                <strong>NOTICE</strong>Something is about to go wrong with the whozit!
+              </div>
+
+              <div class="alert success">
+                <div class="close">&times;</div>
+                <strong>Success</strong>Everything went better than expected with the whozit.
+              </div>
+
+              <div class="alert help">
+                <div class="close">&times;</div>
+                <strong>HELP</strong>If you are struggling with the whozit, read <a href="#">the manual</a>.
+              </div>
+
+              <div class="alert info">
+                <div class="close">&times;</div>
+                <strong>INFO</strong>For great success, configure the whozit correctly.
+              </div>
+            </div>
+            <pre class="prettyprint linenums">
+&lt;div class=&quot;alert error&quot;&gt;&lt;strong&gt;
+  Process Failed&lt;/strong&gt;Uh oh, something went wrong with the whozit.
+&lt;/div&gt;
+</pre>
+          </div>
+        </section>
+        
+        
+        <section id="Badge">
+          <h2 class="line">Badge</h2>
+          <p>Badges can be used to indicate a number of items that require the users attention.</p>
+
+          <div class="componentSample">
+            <div class="example">
+              <div class="badge">8</div>
+            </div>
+            <pre class="prettyprint linenums">
+&lt;div class=&quot;badge&quot;&gt;8&lt;/div&gt;
+</pre>
+          </div>
+        </section>
 
         <section id="Spinner">
           <h2 class="line">Spinner</h2>
+          <p>Use a spinner to indicate a process is in progress that will occur for an indefinite amount of time.</p>
+          <p>Applying the CSS class <code class="atv">spinner</code> to an element will make it inline-block.</p>
+
+          <div class="componentSample spinnerSample">
+            <div class="example">
+              <div class="spinner"></div>
+              <div class="spinner large"></div>
+            </div>
+            <pre class="prettyprint linenums">
+&lt;div class=&quot;spinner&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;spinner large&quot;&gt;&lt;/div&gt;
+</pre>
+          </div>
         </section>
-        
-      </section><!-- /Miscellaneous -->
+
+        <section class="hidden" id="ProgressBar">
+          <h2 class="line">Progress Bar</h2>
+          <p>Use a spinner to indicate the progress of a process.</p>
+
+          <div class="componentSample spinnerSample">
+            <div class="example">
+              <div class="progress">
+                <div class="bar" style="width: 40%;"></div>
+              </div>
+            </div>
+            <pre class="prettyprint linenums">
+&lt;div class=&quot;progress&quot;&gt;
+  &lt;div class=&quot;bar&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+          </div>
+        </section>
+
+      </section><!-- /StatusIndicators -->
 
     </div><!-- /content -->
   </div><!-- /page -->
