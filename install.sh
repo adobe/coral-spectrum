@@ -12,7 +12,7 @@ green() {
 }
 
 red() {
-  echoe "\031[32m$1\033[0m$2"
+  echoe "\033[31m$1\033[0m$2"
 }
 
 echo "Checking for build dependencies..."
@@ -20,7 +20,7 @@ echo "Checking for build dependencies..."
 # Check for node, error if not available
 if ! which node >/dev/null 2>&1; then
   red " [X] " "\c"
-  echo "Node must be installed to build CoralUI, exiting"
+  echo "Node must be installed to build CoralUI. Visit nodejs.org to download Node"
   exit 1
 else
   green " [√] " "\c"
@@ -30,7 +30,7 @@ fi
 # Check for npm, error if not available
 if ! which npm >/dev/null 2>&1; then
   red " [X] " "\c"
-  echo "npm must be installed to build CoralUI, exiting"
+  echo "npm must be installed to build CoralUI"
   exit 1
 else
   green " [√] " "\c"
@@ -51,12 +51,12 @@ if ! echo $npmList | grep grunt@ >/dev/null 2>&1; then
     
     if [ $? -ne 0 ]; then
       red " [X] " "\c"
-      echo "Failed to install grunt, exiting"
+      echo "Failed to install grunt"
       exit 1
     fi
   else
     red " [X] " "\c"
-    echo "grunt must be installed to build CoralUI, exiting"
+    echo "grunt must be installed to build CoralUI"
     exit 1
   fi
 else
@@ -75,12 +75,12 @@ if ! echo $npmList | grep bower@ >/dev/null 2>&1; then
     
     if [ $? -ne 0 ]; then
       red " [X] " "\c"
-      echo "Failed to install Bower, exiting"
+      echo "Failed to install Bower"
       exit 1
     fi
   else
     red " [X] " "\c"
-    echo "Bower must be installed to build CoralUI, exiting"
+    echo "Bower must be installed to build CoralUI"
     exit 1
   fi
 else
