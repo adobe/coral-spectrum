@@ -1,0 +1,55 @@
+/**
+ * Class: .alert
+ * Used for alert messages
+ */
+.alert {
+  background-color: @alert-blue-background-color;
+  border: @px solid @alert-blue-border-color;
+  
+  margin: 0.5em 0;
+  padding: 0.5em;
+  
+  &.error,
+  &.notice,
+  &.success,
+  &.help,
+  &.info {
+    padding-left: 2em;
+  }
+  
+  .close {
+    float: right;
+    font-weight: bold;
+  }
+  
+  strong {
+    // Heading text
+    margin-right: 0.25em;
+    text-transform: uppercase;
+  }
+  
+  &.error {
+    background-color: @alert-red-background-color;
+    border-color: @alert-red-border-color;
+  }
+  
+  &.notice {
+    background-color: @alert-yellow-background-color;
+    border-color: @alert-yellow-border-color;
+  }
+  
+  &.success {
+    background-color: @alert-green-background-color;
+    border-color: @alert-green-border-color;
+  }
+  
+  &.help {
+    background-color: @alert-blue-background-color;
+    border-color: @alert-blue-border-color;
+  }
+  
+  &.info {
+    background-color: @alert-blue-background-color;
+    border-color: @alert-blue-border-color;
+  }
+}
