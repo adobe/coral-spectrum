@@ -64,8 +64,10 @@ h2.line {
 // Heading link
 #SectionAnchor {
   display: inline-block;
-  
-  width: 1.25em;
+  width: 1.25em;  // extra padding for iceberging
+
+  font-family: monospace; // Adobe clean has bad looking para symbol
+  line-height: 1em; // prevent jump  
   text-align: center;
   text-decoration: none;
 }
@@ -74,7 +76,7 @@ h2.line {
 code.prettyprint,
 code {
   font-size: 0.8em;
-  
+
   .border-radius(0.35em);
   padding: 0.1em 0.25em;
 
@@ -82,50 +84,56 @@ code {
   background: @demo-background-color;
 }
 
-div.demoBorder,
-div.exampleBox,
+// Give everyone a nice shadow and border
 div.shadowBox,
 .prettyprint,
-div.demo {
+div.componentSample {
   border: @px solid @demo-border-color;
 
   .box-shadow(0 0 0.5em rgba(0, 0, 0, 0.1));
 }
 
-// Preserve normal line nums
+// Preserve gutter for line numbers
 .prettyprint.linenums {
   border: @px solid @demo-border-color;
-  
+
   .box-shadow(inset 2.75em 0 0 #FBFBFC, inset 2.75em+@px 0 0 #ECECF0, 0 0 0.5em rgba(0, 0, 0, 0.1));
 
+  // Make the gutter a little bigger
   ol.linenums {
     margin: 0;
     padding-left: 2.75em;
   }
 }
 
-// Box with a border for putting above code samples
-div.demo {
+// Box with a border that contains examples and code samples
+div.componentSample {
   margin: 0.75em 0 0 0;
-  
+
   background: @demo-background-color;
-  
+
+  .border-radius(0.25em);
+  overflow: hidden;
+
+  // Demo boxes without code need padding and don't have to span the screen
   &.noCode {
     padding: 0.75em;
     display: inline-block;
   }
-  
+
+  // The actual live demo code should be in div.example
   .example {
     background: rgb(251, 251, 251);
-    
+
     padding: 1em;
     border-bottom: @px solid lighten(@demo-border-color, 10%);
   }
-  
+
+  // The markup or JavaScript required should be in pre.prettypring
   .prettyprint {
     margin: 0;
     border: none;
-    
+
     &.linenums {
       // remove top shadow
       .box-shadow(inset 2.75em 0 0 #FBFBFC, inset 2.75em+@px 0 0 #ECECF0);
@@ -143,7 +151,7 @@ div.fakeBody {
 div.headingExample {
   * {
     margin: 0.5em 0;
-    
+
     &:first-child {
       margin-top: 0;
     }
@@ -152,7 +160,7 @@ div.headingExample {
       margin-bottom: 0;
     }
   }
-  
+
   h4, h5 {
     margin: 0.75em 0;
   }
