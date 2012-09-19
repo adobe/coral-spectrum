@@ -83,3 +83,25 @@
   -webkit-overflow-scrolling: touch; // Enable iOS-style scrolling
   min-height: 1px; // Enable scrolling in flexbox children in Firefox
 }
+
+/**
+ * Mixin: .spin
+ * Rotate an element forever
+ */
+.spin(@time: 1s) {
+  -webkit-transition-property: -webkit-transform;
+  -webkit-transition-duration: @time;
+  
+  -moz-transition-property: -moz-transform;
+  -moz-transition-duration: @time;
+  
+  -webkit-animation-name: rotate;
+  -webkit-animation-duration: @time;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  
+  -moz-animation-name: rotate;
+  -moz-animation-duration: @time;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: linear;
+}
