@@ -1,9 +1,16 @@
 /**
-  CUI well styles 
-*/
+ * Class: .well
+ * A content well
+ */
+.well {
+  margin: 0;
+  padding: 0.5em;
+  
+  border: @px solid @well-border-color;
+  
+  background: @well-background-color;
+}
 
-.content-well {
-	background-color: @well-background-color;
-	border: @px solid @well-border-color;
-    padding: .5em;	
+strong + .well {
+  margin-top: 0.25em;
 }
