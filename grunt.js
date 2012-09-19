@@ -191,6 +191,10 @@ module.exports = function(grunt) {
         }
       }
     },
+    
+    mvn: {
+      build: {}
+    },
 
     // Watch operations
     watch: {
@@ -222,10 +226,19 @@ module.exports = function(grunt) {
   });
   
   // Partial build for development
-  grunt.registerTask('partial', 'copy lint handlebars concat min:cui less mincss');
+  grunt.registerTask('partial', 'lint copy handlebars concat min:cui less mincss');
   
   // Full build with docs and compressed file
-  grunt.registerTask('full', 'clean copy lint handlebars concat min less mincss jsdoc compress');
+  grunt.registerTask('full', 'clean lint copy handlebars concat min less mincss jsdoc compress');
+  
+  // Rename mvn task so we can override it
+  grunt.task.renameTask('mvn', 'mvn-install');
+  
+  // Almost full build, just the stuff needed for Granite install
+  grunt.registerTask('mvn-build', 'clean lint copy:images copy:fonts copy:less_bootstrap_tmp copy:less_bootstrap_build copy:less_cui handlebars concat less:cui');
+  
+  // Full build with docs and compressed file
+  grunt.registerTask('mvn', 'mvn-build mvn-install');
   
   // Default task
   grunt.registerTask('default', 'partial');
