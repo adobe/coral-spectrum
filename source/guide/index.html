@@ -13,7 +13,7 @@
   <script src="examples/assets/google-code-prettify/prettify.js"></script>
 
 </head>
-<body onload="prettyPrint()">
+<body>
 
   <header>
 
@@ -41,6 +41,7 @@
 
           <nav>
             <a href="#WhatIsCUI">What is CoralUI?</a>
+            <a href="#ResolutionIndependence">Resolution Independence</a>
           </nav>
       </section>
 
@@ -135,10 +136,17 @@
     <div class="content">
 
       <section id="General">
-        <h1 class="line" id="WhatIsCUI">What is CoralUI?</h1>
+        <h2 class="line" id="WhatIsCUI">What is CoralUI?</h2>
         <p>CoralUI or CUI (pronounced "cooey") is an implementation of the CloudUI visual style from Adobe XD.</p>
 
-        <o>CoralUI's aim is to provide everything your product needs to adopt the CloudUI visual style.</p>
+        <p>CoralUI's aim is to provide everything your product needs to adopt the CloudUI visual style.</p>
+         
+        <h2 class="line" id="ResolutionIndependence">Resolution Independence</h2>
+        <p>CoralUI is resolution independent. By using elastic measurement units to define sizes, CoralUI can be scaled instantly to fit any display.</p>
+        
+        <div class="res-buttons"><label>Try it:</label>
+          <button id="res-minus" class="warning">-</button><button id="res-reset">=</button><button id="res-plus" class="primary">+</button>
+        </div>
       </section>
 
       <section id="TextStyles">
@@ -639,7 +647,7 @@
           </div>
         </section>
 
-        <section class="hidden" id="ProgressBar">
+        <section id="ProgressBar">
           <h2 class="line">Progress Bar</h2>
           <p>Use a spinner to indicate the progress of a process.</p>
 
@@ -648,11 +656,13 @@
               <div class="progress">
                 <div class="bar" style="width: 40%;"></div>
               </div>
+              <label>40%</label>
             </div>
             <pre class="prettyprint linenums">
 &lt;div class=&quot;progress&quot;&gt;
   &lt;div class=&quot;bar&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
+&lt;label&gt;40%&lt;/label&gt;
 </pre>
           </div>
         </section>

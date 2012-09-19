@@ -78,7 +78,7 @@ code {
   font-size: 0.8em;
 
   .border-radius(0.35em);
-  padding: 0.1em 0.25em;
+  padding: 0 0.25em;
 
   border: (1/0.8)*@px solid @demo-border-color;
   background: @demo-background-color;
@@ -103,6 +103,10 @@ div.componentSample {
   ol.linenums {
     margin: 0;
     padding-left: 2.75em;
+    
+    li {
+      line-height: 1.375em;
+    }
   }
 }
 
@@ -183,6 +187,20 @@ div.fakeBody {
   }
 }
 
-div.well-example-empty {
-  padding: 3em;
+.res-buttons {
+  label {
+    line-height: 1.25em;
+    font-size: 1.25em;
+    font-weight: bold;
+    display: inline-block;
+  }
+  
+  button {
+    width: 2em;
+    min-width: 0;
+    padding: 0 0;
+  }
+  button + button {
+    border-left: none;
+  }
 }
