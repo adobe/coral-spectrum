@@ -43,7 +43,8 @@ module.exports = function(grunt) {
           'console',      // console.log...
           'Backbone',     // Backbone
           '_',            // Underscore
-          'Handlebars'    // Handlebars
+          'Handlebars',   // Handlebars
+          'prettyPrint'   // google-code-prettify
         ]
       },
       globals: {}
@@ -146,7 +147,8 @@ module.exports = function(grunt) {
     lint: {
       files: [
         'grunt.js',
-        '<%= dirs.source %>/js/**'
+        '<%= dirs.source %>/js/**',
+        '<%= dirs.source %>/guide/examples/assets/guide.js'
       ]
     },
 
@@ -237,8 +239,14 @@ module.exports = function(grunt) {
   // Almost full build, just the stuff needed for Granite install
   grunt.registerTask('mvn-build', 'clean lint copy:images copy:fonts copy:less_bootstrap_tmp copy:less_bootstrap_build copy:less_cui handlebars concat less:cui');
   
-  // Full build with docs and compressed file
+  // Custom build for maven
   grunt.registerTask('mvn', 'mvn-build mvn-install');
+  
+  // Rename watch task so we can override it
+  grunt.task.renameTask('watch', 'watch-start');
+  
+  // Redefine watch to build partial first
+  grunt.registerTask('watch', 'partial watch-start');
   
   // Default task
   grunt.registerTask('default', 'partial');
