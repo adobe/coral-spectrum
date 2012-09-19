@@ -1,0 +1,29 @@
+/**
+ * Class: nav.crumbs
+ * Used for printing a breadcrumb trail. 
+ */
+ul.crumbs {
+  padding: 0 0 0 0.5em;
+  margin: 0;
+  
+  list-style: none;
+
+  li {
+    padding: 0;
+    display: inline-block;
+  
+    // Add chevrons to crumbs
+    &:after {
+      margin: 0 0.5em;
+
+      content: "/";
+
+      color: @crumb-chevron-color;
+    }
+
+    a {
+      display: inline-block;
+      padding: 0.5em 0;
+    }
+  }
+}
