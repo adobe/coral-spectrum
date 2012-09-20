@@ -14,18 +14,40 @@
   &.success,
   &.help,
   &.info {
-    padding-left: 2em;
+    //padding-left: 2em;
   }
   
   .close {
     float: right;
     font-weight: bold;
+    line-height: 1em;
   }
   
   strong {
     // Heading text
     margin-right: 0.25em;
     text-transform: uppercase;
+  }
+  
+  .icon {
+    font-size: 1.35em;
+    display: inline-block;
+    .box-sizing(border-box);
+    width: 1.25em;
+    height: 1.25em;
+    padding: 0.1em 0.025em 0 0;
+    margin-right: 0.5em;
+    
+    background: rgba(0, 0, 0, 0.2);
+    
+    .border-radius(1em);
+    
+    overflow: hidden;
+    
+    vertical-align: -0.075em;
+
+    text-align: center;
+    color: white;
   }
   
   &.error {
