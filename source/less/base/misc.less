@@ -72,18 +72,18 @@ img {
  * Used for close buttons with an &times; entity inside of them
  */
 .close {
-  font-size: @close-font-size;
-  
   margin: 0;
-  
-  text-decoration: none !important; // override for anchor
-  line-height: 1.125rem;
-  
-  cursor: pointer;
   
   border: none;
   background: none;
   .box-shadow(none);
+  
+  font-size: @close-font-size;
+  font-weight: bold;
+  text-decoration: none !important; // override for anchor
+  line-height: 0.55;
+  
+  cursor: pointer;
   
   .opacity(@close-opacity);
   
