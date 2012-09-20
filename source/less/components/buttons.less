@@ -15,7 +15,7 @@ button,
   
   margin: 0.125rem 0;  // Reset default margin on button tag
                       // Give a top/bottom margin so they stack right
-  padding: 0.313rem 1rem;
+  padding: 0.4375rem 1rem;
   border: @px solid;
 
   border-color: @button-gray-border-color;
@@ -33,11 +33,15 @@ button,
   .gradient(@button-gray-gradient-start-color, @button-gray-gradient-end-color);
 
   &:active {
-    .gradient(@button-gray-down-gradient-start-color, @button-gray-down-gradient-end-color);
+    border-color: @button-gray-down-border-color;
+    background: @button-gray-down-background-color;
+    
+    .box-shadow(inset 0 0 0.5rem rgba(0, 0, 0, 0.25));
   }
   
   &:hover {
     text-decoration: none; // Reset underline on anchor
+    background: @button-gray-hover-background-color;
   }
 }
 
@@ -51,7 +55,12 @@ button.primary,
   .gradient(@button-blue-gradient-start-color, @button-blue-gradient-end-color);
 
   &:active {
-    .gradient(@button-blue-down-gradient-start-color, @button-blue-down-gradient-end-color);
+    border-color: @button-blue-down-border-color;
+    background: @button-blue-down-background-color;
+  }
+  
+  &:hover {
+    background: @button-blue-hover-background-color;
   }
 }
 
@@ -65,7 +74,12 @@ button.warning,
   .gradient(@button-red-gradient-start-color, @button-red-gradient-end-color);
 
   &:active {
-    .gradient(@button-red-down-gradient-start-color, @button-red-down-gradient-end-color);
+    border-color: @button-red-down-border-color;
+    background: @button-red-down-background-color;
+  }
+  
+  &:hover {
+    background: @button-red-hover-background-color;
   }
 }
 
@@ -80,7 +94,11 @@ button[disabled]:active,
 .button.disabled:active,
 .btn.disabled:active {
   cursor: default;
+  
   border-color: @button-disabled-border-color;
+  
+  color: @button-disabled-text-color;
+  text-shadow: none;
 
-  .gradient(@button-disabled-gradient-start-color, @button-disabled-gradient-end-color);
+  background: @button-disabled-background-color;
 }

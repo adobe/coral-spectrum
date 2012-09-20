@@ -484,12 +484,14 @@
               <a class="button" href="#">Action</a>
               <button class="primary">Primary Action</button>
               <button class="warning">Warning</button>
+              <button disabled>Disabled</button>
 
             </div>
             <pre class="prettyprint linenums">
 &lt;a class=&quot;button&quot;&gt;Action&lt;/a&gt; 
 &lt;button class=&quot;primary&quot;&gt;Primary Action&lt;/button&gt; 
 &lt;button class=&quot;warning&quot;&gt;Warning&lt;/button&gt;
+&lt;button disabled&gt;Disabled&lt;/button&gt;
 </pre>
           </div>
         </section>
@@ -501,12 +503,14 @@
           <div class="componentSample">
             <div class="example">
 
-              <label>Normal</label><input class="textfield" type="text"/>
-              <!-- label>Error</label><input class="textfield error" type="text"/ -->
+              <label>Normal</label><input type="text"><br>
+              <input type="text" placeholder="Titleless"><br>
+              <label>Error</label><input class="error" type="text"><br>
 
             </div>
             <pre class="prettyprint linenums">
-&lt;input type=&quot;text&quot; class=&quot;textfield&quot;&gt;
+&lt;label&gt;Normal&lt;/label&gt;&lt;input type=&quot;text&quot;&gt;
+&lt;label&gt;Error&lt;/label&gt;&lt;input type=&quot;text&quot;&gt;
 </pre>
           </div>
         </section>
