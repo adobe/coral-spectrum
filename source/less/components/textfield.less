@@ -1,35 +1,38 @@
 /**
- * Class: .textField
- * A basic text input field. 
+* Class: .textField
+* A basic text input field.
+*/
 
-box model
-border
-background
-text
-other
+label {
+  font-size: 0.8125rem;
+  padding: 0 0.5rem;
+}
 
- */
+input[type=text] {
+  .box-sizing(border-box);
+  
+  font-size: 0.8125rem;
+  
+  height: 2rem;
+  padding: 0.25rem 0.5rem;
+  margin: 0.5em 0;
 
-.textfield {
-    margin: 0.25em 1em;
-    padding: 0.8em;
+  border: @px solid @textfield-border-color; 
+  background-color: @textfield-background-color;
+  
+  &:disabled {
+    background-color: @textfield-disabled-background-color;
+  }
 
-    border: @px solid @textfield-border-color; 
-    background-color: @textfield-background-color;
+  &:focus {
+    border: @px solid @textfield-focused-border-color;
+    .box-shadow(0 0 0.35rem @textfield-focused-border-color);
+    outline: none;
+  }
 
- }
-
- .textfield:focus {
-    border: @px solid @textfield-border-color-focused;
- }
-
- .textfield.error {
-    border: @px solid @textfield-border-color-error;
-    background-color: @textfield-background-color-error;
- }
-
-/* this doesn't work sad face
- .textfield.error:focus {
-    border: @px solid @textfield-border-color-error;
-    background-color: @textfield-background-color-error;
- } */
+  &.error,
+  &.error:focus {
+    border-color: @textfield-error-border-color;
+    .box-shadow(0 0 0.35rem @textfield-error-border-color);
+  }
+}
