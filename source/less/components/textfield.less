@@ -1,0 +1,35 @@
+/**
+ * Class: .textField
+ * A basic text input field. 
+
+box model
+border
+background
+text
+other
+
+ */
+
+.textfield {
+    margin: 0.25em 1em;
+    padding: 0.8em;
+
+    border: @px solid @textfield-border-color; 
+    background-color: @textfield-background-color;
+
+ }
+
+ .textfield:focus {
+    border: @px solid @textfield-border-color-focused;
+ }
+
+ .textfield.error {
+    border: @px solid @textfield-border-color-error;
+    background-color: @textfield-background-color-error;
+ }
+
+/* this doesn't work sad face
+ .textfield.error:focus {
+    border: @px solid @textfield-border-color-error;
+    background-color: @textfield-background-color-error;
+ } */
