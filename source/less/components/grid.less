@@ -9,7 +9,7 @@
 ul.grid {
   list-style: none;
   padding: 0;
-  margin: 0.5em;
+  margin: 0.5rem;
   
   &.edit {
     /// TODO: add diagonally striped grid using gradients or image
@@ -19,8 +19,8 @@ ul.grid {
   li {
     display: inline-block;
     // TBD: decide default width/heights
-    height: 6em;
-    width: 6em;
+    height: 6rem;
+    width: 6rem;
     padding: 0;
     margin: @grid-spacing;
     
@@ -37,7 +37,7 @@ ul.grid {
  * TBD: investigate multi-column spanning items
  */
 ul.grid.masonry {
-  .columns(@grid-columns, @grid-spacing); /* A four column layout spaced by 1em */
+  .columns(@grid-columns, @grid-spacing); /* A four column layout spaced by 1rem */
   
   li {
     width: 100%;
@@ -47,6 +47,6 @@ ul.grid.masonry {
     /*
     This screws alignment up, possibly related to http://code.google.com/p/chromium/issues/detail?id=129178
     */
-    .shadow(0, 0.5em);
+    .shadow(0, 0.5rem);
   }
 }

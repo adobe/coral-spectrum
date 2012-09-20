@@ -1,7 +1,7 @@
 function changeSize(by) {
-  var newSize = (by === 0) ? '16px' : (parseInt(document.body.style.fontSize || 16, 10)+by)+'px';
+  var newSize = (by === 0) ? '16px' : (parseInt($('html').css('fontSize') || 16, 10)+by)+'px';
 
-  document.body.style.fontSize = newSize;
+  $('html').css('fontSize', newSize);
 }
 
 $(function() {

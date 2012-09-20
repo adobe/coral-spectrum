@@ -7,7 +7,7 @@ body {
   width: 100%;
   
   /*
-  // Not working in Chrome 21 or Canary
+  // Adding goofy right border when scrolling for Chrome/Canary, works in FF
   .flex;
   .flex-direction(column);
   .flex-align(stretch);
@@ -15,13 +15,16 @@ body {
 }
 
 
+html { 
+  font-size: @base-size + 0px; // the base size in pixels
+}
+
 // Set the default background color and font
 body {
   background-color: @body-background-color;
 
   font-family: @font-base-family;
   color: @font-base-color;
-  font-size: @base-size + 0px; // the base size in pixels
 }
 
 

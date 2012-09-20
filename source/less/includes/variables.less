@@ -13,12 +13,12 @@
 
 
 // Header
-@header-height: 2.5em;
+@header-height: 2.5rem;
 @header-background-color: rgb(34, 34, 34);
 @header-font-family: AdobeClean;
 
 @header-item-font-color: rgb(153, 153, 153);
-@header-item-spacing: 1em;
+@header-item-spacing: 1rem;
 
 @header-item-down-font-color: white;
 
@@ -27,12 +27,12 @@
 
 // Toolbar
 @toolbar-border-color: rgb(215, 215, 215);
-@toolbar-icon-margin: 0.25em;
+@toolbar-icon-margin: 0.25rem;
 @toolbar-spacer-color: rgb(198, 198, 198);
 
 
 // Grid
-@grid-spacing: 1em;
+@grid-spacing: 1rem;
 @grid-columns: 4;
 
 @grid-background-color: white;
@@ -52,12 +52,12 @@
 
 
 // Icons
-@icon-size: 1.5em;
+@icon-size: 1.5em;  // Define with em so it changes with font-size
 @icon-color: rgb(68, 68, 68);
 
 
 // Buttons
-@button-text-size: 1em;
+@button-text-size: 1em;   // TBD: make rem so they stay the same size, or let them scale with fonts?
 @button-text-color: rgb(255, 255, 255);
 
 // Button: Blue
@@ -90,8 +90,8 @@
 // Rail
 @rail-background-color: rgb(72, 76, 77);
 
-@rail-shadow-distance: 0.1em;
-@rail-shadow-spread: 0.45em;
+@rail-shadow-distance: 0.1rem;
+@rail-shadow-spread: 0.45rem;
 @rail-shadow-opacity: 0.35;
 
 @rail-section-border-color: rgb(49, 52, 52);
@@ -139,16 +139,15 @@
 
 
 // Close button
-@close-font-size: 1.5em;
-@close-factor: (1/@close-font-size);
+@close-font-size: 1.5rem;
 @close-opacity: 75;
 
 
 // Progress bar
-@progress-height: 1.375em;
+@progress-height: 1.375rem;  // TBD: leave as em so it scales with font size?
 @progress-border-color: rgb(141, 141, 141);
 
-@progress-stripe-size: 0.375em;
+@progress-stripe-size: 0.375rem;
 @progress-stripe-offset: 2%;
 
 @progress-background-color: rgb(187, 187, 187);

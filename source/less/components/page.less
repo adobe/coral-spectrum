@@ -1,19 +1,30 @@
 /**
- *
+ * Class: .page
+ * Used for the main page layout for content and rail
  */
 .page {
   .flex;                  // it's a flexbox
   .flex-direction(row);   // that spans horizontally
+
   .flex-ratio(1);
   
   .rail {
+    /*
+    // Adding goofy right border when scrolling for Chrome/Canary, works in FF
     .flex;  // Enables scrolling
     .flex-direction(column);
+    */
     
     .scrollable;
   }
   
   .content {
+    /*
+    // Adding goofy right border when scrolling for Chrome/Canary, works in FF
+    .flex;  // Enables scrolling
+    .flex-direction(column);
+    */
+    
     .flex-ratio(3);
     
     .scrollable;
