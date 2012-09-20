@@ -14,10 +14,10 @@ header {
   
   .box-shadow(0 0.1rem 0.45rem rgba(0, 0, 0, .35)); // TBD: make sure this matches mocks...
     
-  color: @header-item-font-color;
+  color: @header-nav-font-color;
   
   div.logo {
-    padding: 0 0.75rem;
+    padding: 0 1rem;
     
     .box-sizing(border-box);
     text-align: center;
@@ -37,26 +37,28 @@ header {
       display: inline-block;
       height: @header-height;
 
-      color: @header-item-font-color;
+      color: @header-nav-font-color;
 
       /*
       Spacing as a function of header item spacing
       Give some to padding, and some to margin
       */
-      padding: 0 @header-item-spacing / 4;
-      margin-right: @header-item-spacing / 2;
+      padding: 0 @header-nav-spacing / 4;
+      margin-right: @header-nav-spacing / 2;
       
       line-height: @header-height;
+      font-size: @header-nav-font-size;  // 18px
       
       text-decoration: none;
       
       &:active, // TBD: does UX wants the active state (mousedown) to look like the selected item?
       &.selected {
-        color: @header-item-down-font-color;
+        color: @header-nav-down-font-color;
       }
     }
   }
   
   div.drawer {
+    padding-right: 1em;
   }
 }
