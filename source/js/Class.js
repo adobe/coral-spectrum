@@ -8,7 +8,7 @@
  * @param {Object} descriptor.extend        The class to extend
  * @param {Function} descriptor.construct     The constructor (setup) method for the new class
  * @param {Function} descriptor.destruct      The destructor (teardown) method for the new class
- * @param {Anything} descriptor.*         Other methods and properties for the new class
+ * @param {Mixed} descriptor.*         Other methods and properties for the new class
  *
  * @returns {BaseClass} The created class.
 */
