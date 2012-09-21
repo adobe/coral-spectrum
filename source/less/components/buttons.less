@@ -4,8 +4,7 @@
 
 // Button: Default (gray)
 button,
-.button,
-.btn {
+.button {
   display: inline-block;
   .box-sizing(border-box); // Makes 135px min-width apply consistently between anchor/button
   
@@ -22,6 +21,7 @@ button,
 
   font-family: @font-base-family;
   font-size: @button-text-size;
+  font-weight: bold;
   color: @button-text-color;
   text-decoration: none; // Reset underline on anchor
   text-align: center;
@@ -43,13 +43,16 @@ button,
     text-decoration: none; // Reset underline on anchor
     background: @button-gray-hover-background-color;
   }
+  
+  &:focus {
+    .glow();
+  }
 }
 
 
 // Button: Primary (blue)
 button.primary,
-.button.primary,
-.btn.primary {
+.button.primary {
   border-color: @button-blue-border-color;
   
   .gradient(@button-blue-gradient-start-color, @button-blue-gradient-end-color);
@@ -67,8 +70,7 @@ button.primary,
 
 // Button: Warning (red)
 button.warning,
-.button.warning,
-.btn.warning {
+.button.warning {
   border-color: @button-red-border-color;
   
   .gradient(@button-red-gradient-start-color, @button-red-gradient-end-color);
@@ -88,11 +90,9 @@ button.warning,
 button.disabled,
 button[disabled],
 .button.disabled,
-.btn.disabled,
 button.disabled:active,
 button[disabled]:active,
-.button.disabled:active,
-.btn.disabled:active {
+.button.disabled:active {
   cursor: default;
   
   border-color: @button-disabled-border-color;
