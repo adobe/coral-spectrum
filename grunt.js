@@ -163,6 +163,8 @@ module.exports = function(grunt) {
           '<%= dirs.build %>/js/CUI.Templates.js', // Templates
           
           // Components
+          '<%= dirs.source %>/js/CUI.Util.js',
+          '<%= dirs.source %>/js/components/CUI.Widget.js',
           '<%= dirs.source %>/js/components/CUI.Modal.js'
         ],
         dest: '<%= dirs.build %>/js/CUI.js'
@@ -218,7 +220,7 @@ module.exports = function(grunt) {
       },
 
       concat_min_js: {
-        files: '<%= dirs.source %>/js/**',
+        files: ['<%= dirs.source %>/js/**', '<%= dirs.build %>/js/CUI.Templates.js'],
         tasks: 'concat:js min:cui'
       },
       
