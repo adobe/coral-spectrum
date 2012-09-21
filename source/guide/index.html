@@ -42,8 +42,9 @@
 
           <nav>
             <a href="#WhatIsCUI">What is CoralUI?</a>
-            <a href="#ResolutionIndependence">Res. Independence</a>
-            <a href="#JavaScriptAPI">JavaScript API</a>
+            <a href="#ResolutionIndependence">Resolution Independence</a>
+            <a href="#BrowserSupport">Browser Support</a>
+            <a href="#WidgetPhilosophy">Widget Philosophy</a>
           </nav>
       </section>
 
@@ -150,9 +151,12 @@
           <button id="res-minus" class="warning">-</button><button id="res-reset">=</button><button id="res-plus" class="primary">+</button>
         </div>
         
+        <h2 class="line" id="BrowserSupport">Browser Support</h2>
+        <p>CoralUI supports all modern browsers, including IE 9+, Firefox (latest), Chrome (latest), Safari (latest).</p>
+        <p>Prevalent mobile devices are also be supported, including Android 2.1+ and iOS 5+.</p>
         
-        <h2 class="line" id="JavaScriptAPI">JavaScript API</h2>
-        <p>All CoralUI widgets are guaranteed to fulfill 6 promises:</p>
+        <h2 class="line" id="WidgetPhilosophy">Widget Philosophy</h2>
+        <p>All CoralUI widgets are guaranteed to fulfill 7 promises:</p>
         
         <ol>
           <li>Widgets will be available as a jQuery plugin: <code class="prettyprint">$('#myModal').modal()</code></li>
@@ -160,7 +164,8 @@
           <li>Widget APIs will always be fully documented <a href="jsdoc/index.html">here</a>.</li>
           <li>Widgets will always be easily extendable with <code class="prettyprint">CUI.Modal.extend()</code>.</li>
           <li>Widgets will progressively enhance existing markup, or render a template using passed options if no markup is present.</li>
-          <li>Widgets will take advantage of declarative markup.</li>
+          <li>Widgets will take advantage of declarative markup using <code>data-*</code> attributes.</li>
+          <li>Widgets will work on both desktop and mobile.</li>
         </ol>
         
       </section>
