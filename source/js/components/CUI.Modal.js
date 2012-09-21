@@ -75,7 +75,6 @@
       
       this.toggleBackdrop();
       this.handleEscape();
-      this.center();
       
       // Add to body if this element isn't in the DOM already
       if (!this.$element.parent().length) {
@@ -83,6 +82,8 @@
       }
 
       this.$element.addClass('in').attr('aria-hidden', false).fadeIn().focus();
+      
+      this.center();
       
       return this;
     },
