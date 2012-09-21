@@ -18,14 +18,6 @@
   left: 0;
   z-index: @zindexModalBackdrop;
   background-color: @modal-underlay-background-color;
-  
-  // Fade for backdrop
-  &.fade { opacity: 0; }
-}
-
-.modal-backdrop,
-.modal-backdrop.fade.in {
-  .opacity(80);
 }
 
 // Base modal
@@ -43,10 +35,6 @@
   
   background-color: @modal-body-background-color;
   .background-clip(padding-box);
-  
-  &.in {
-    display: block;
-  }
   
   .modal-header {
     height: 3.25rem;

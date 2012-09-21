@@ -33,6 +33,10 @@
       // Make focusable
       this.$element.attr('tabIndex', -1);
       
+      // Accessibility
+      this.$element.attr('role', 'dialog'); // needed?
+      this.$element.attr('aria-hidden', true);
+      
       // Render template, if necessary
       if (this.$element.children().length === 0) {
         this.$element.html(CUI.Templates['modal']($.extend({}, this.options, { buttons: '' })));
@@ -78,7 +82,7 @@
         this.$element.appendTo(document.body);
       }
 
-      this.$element.addClass('in').attr('aria-hidden', false).show().focus();
+      this.$element.addClass('in').attr('aria-hidden', false).fadeIn().focus();
       
       return this;
     },
@@ -104,7 +108,7 @@
 
       this.$element.removeClass('in').attr('aria-hidden', true);
       
-      this.$element.hide().trigger('hidden');
+      this.$element.fadeOut().trigger('hidden');
 
       this.toggleBackdrop();
       this.handleEscape();
@@ -136,15 +140,17 @@
     },
     toggleBackdrop: function () {
       if (this.isShown && this.options.backdrop) {
-        this.$backdrop = $('<div class="modal-backdrop" />').appendTo(document.body);
+        this.$backdrop = $('<div class="modal-backdrop" style="display: none;" />').appendTo(document.body).fadeIn();
 
         if (this.options.backdrop !== 'static') {
           this.$backdrop.click(this.hide);
         }
       }
       else if (!this.isShown && this.$backdrop) {
-        this.$backdrop.remove();
-        this.$backdrop = null;
+        this.$backdrop.fadeOut(function() {
+          this.$backdrop.remove();
+          this.$backdrop = null;
+        }.bind(this));
       }
     },
       
