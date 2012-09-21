@@ -7,8 +7,9 @@
   <link rel="stylesheet" href="examples/assets/google-code-prettify/prettify.css">
   <link rel="stylesheet" href="examples/assets/guide.css">
 
+  <script src="js/libs/handlebars.js"></script>
   <script src="js/libs/jquery.js"></script>
-  <script src="js/cui.min.js"></script>
+  <script src="js/CUI.min.js"></script>
   <script src="examples/assets/guide.js"></script>
   <script src="examples/assets/google-code-prettify/prettify.js"></script>
 
@@ -476,12 +477,12 @@
 
         <section id="Buttons">
           <h2 class="line">Buttons</h2>
-          <p>The <code class="prettyprint">&lt;button&gt;</code> tag is styled automatically, and you can apply the <code class="atv">button</code> or <code class="atv">btn</code> CSS class to any element to turn it into a styled button.</p>
+          <p>The <code class="prettyprint">&lt;button&gt;</code> tag is styled automatically, and you can apply the <code class="atv">button</code> CSS class to any element to turn it into a styled button.</p>
 
           <div class="componentSample buttonSample">
             <div class="example">
 
-              <a class="button" href="#">Action</a>
+              <a class="button" href="#Buttons">Action</a>
               <button class="primary">Primary Action</button>
               <button class="warning">Warning</button>
               <button disabled>Disabled</button>
@@ -550,6 +551,123 @@
 
       </section><!-- /ButtonsAndControls -->
 
+      <section id="Dialogs">
+        <h1 class="line">Dialogs</h1>
+        <p>CUI provides various dialogs.</p>
+
+        <section id="Modal">
+          <h2 class="line">Modal</h2>
+          <p>Modals pop over the whole application and prevent interaction underneath them.</p>
+          <p>A modal can be created from markup or with JS.<p>
+
+          <div class="componentSample">
+            <div class="example">
+              
+              <a href="#modal_JS" class="button" data-toggle="modal">Show Modal (JS)</a>
+              <a href="#modal_HTML" class="button" data-toggle="modal">Show Modal (Markup)</a>
+              
+              <!-- Created from Markup -->
+              <div id="modal_HTML" class="modal">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h2>Modal from Markup</h2>
+                </div>
+                <div class="modal-body">
+                  <p>This modal was created from markup.</p>
+                </div>
+                <div class="modal-footer">
+                  <button data-dismiss="modal">Close</button>
+                  <button class="primary" data-dismiss="modal">Save</button>
+                </div>
+              </div>
+              
+              <!-- Created with JavaScript -->
+              <div id="modal_JS"></div>
+              
+              <script type="text/javascript">
+                $('#modal_JS').modal({
+                  heading: 'Modal from JS',
+                  content: '<p>This modal was created with JS.</p>',
+                  buttons: [
+                    {
+                      label: 'Close',
+                      click: 'close',
+                    },
+                    {
+                      label: 'Save',
+                      className: 'primary',
+                      click: function(evt) {
+                        console.log('Modal: This would usually trigger a save...');
+                        evt.dialog.hide();
+                      }
+                    }
+                  ],
+                  visible: false
+                });
+              </script>
+              
+            </div>
+            <pre class="prettyprint linenums">
+&lt;a href=&quot;#modal_JS&quot; class=&quot;button&quot; data-toggle=&quot;modal&quot;&gt;Show Modal (JS)&lt;/a&gt;
+&lt;a href=&quot;#modal_HTML&quot; class=&quot;button&quot; data-toggle=&quot;modal&quot;&gt;Show Modal (Markup)&lt;/a&gt;
+
+&lt;!-- Created from Markup --&gt;
+&lt;div id=&quot;modal_HTML&quot; class=&quot;modal&quot;&gt;
+  &lt;div class=&quot;modal-header&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot;&gt;&amp;times;&lt;/button&gt;
+    &lt;h2&gt;Modal from Markup&lt;/h2&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;modal-body&quot;&gt;
+    &lt;p&gt;This modal was created from markup.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;modal-footer&quot;&gt;
+    &lt;button data-dismiss=&quot;modal&quot;&gt;Close&lt;/button&gt;
+    &lt;button class=&quot;primary&quot; data-dismiss=&quot;modal&quot;&gt;Save&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Created with JavaScript --&gt;
+&lt;div id=&quot;modal_JS&quot;&gt;&lt;/div&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+  $(&#x27;#modal_JS&#x27;).modal({
+    heading: &#x27;Modal from JS&#x27;,
+    content: &#x27;&lt;p&gt;This modal was created with JS.&lt;/p&gt;&#x27;,
+    buttons: [
+      {
+        label: &#x27;Close&#x27;,
+        click: &#x27;close&#x27;,
+      },
+      {
+        label: &#x27;Save&#x27;,
+        className: &#x27;primary&#x27;,
+        click: function(evt) {
+          console.log(&#x27;Modal: This would usually trigger a save...&#x27;);
+          evt.dialog.hide();
+        }
+      }
+    ],
+    visible: false
+  });
+&lt;/script&gt;
+</pre>
+          </div>
+        </section>
+        
+        <section class="hidden" id="Popover">
+          <h2 class="line">Popover</h2>
+          <p>Popovers.</p>
+
+          <div class="componentSample">
+            <div class="example">
+            </div>
+            <pre class="prettyprint linenums"></pre>
+          </div>
+        </section>
+
+      </section><!-- /Dialogs -->
+      
+
       <section id="Navigation">
         <h1 class="line">Navigation</h1>
         <p>CUI provides various controls that enable navigation.</p>
@@ -566,6 +684,7 @@
                 <li><a href="#">Admin</a></li>
                 <li><a href="#">Settings</a></li>
               </ul>
+              <h1>Current Page Title</h1>
 
             </div>
             <pre class="prettyprint linenums">
@@ -574,6 +693,7 @@
   &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Admin&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Settings&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h1&gt;Current Page Title&lt;/h1&gt;
 </pre>
           </div>
         </section>
@@ -593,7 +713,7 @@
           </div>
         </section>
 
-      </section><!-- /FormFields -->
+      </section><!-- /Navigation -->
 
       <section id="StatusIndicators">
         <h1 class="line">Status Indicators</h1>

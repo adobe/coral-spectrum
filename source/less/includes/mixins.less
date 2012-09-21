@@ -134,3 +134,22 @@
 .background-size(@size) { 
   .background-size(@size, @size);
 }
+
+/**
+ * Mixin: .glow
+ * Make an element glow
+ */
+.glow(@radius: 0.357rem, @glowColor: @focus-glow-color, @borderColor: @focus-border-color) {
+  outline: none;
+  .box-shadow(0 0 @radius @glowColor);
+  border: @px solid @borderColor;
+}
+
+/**
+ * Mixin: .glow-text
+ * Make text or a font icon glow
+ */
+.glow-text(@radius: 0.357rem, @glowColor: @focus-glow-color, @textColor: @focus-border-color) {
+  color: @textColor;
+  text-shadow: 0 0 @radius @glowColor;
+}

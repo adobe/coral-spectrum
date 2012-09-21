@@ -44,7 +44,9 @@ module.exports = function(grunt) {
           'Backbone',     // Backbone
           '_',            // Underscore
           'Handlebars',   // Handlebars
-          'prettyPrint'   // google-code-prettify
+          'prettyPrint',  // google-code-prettify
+          'CUI',          // CoralUI
+          'Class'         // Class 
         ]
       },
       globals: {}
@@ -107,7 +109,8 @@ module.exports = function(grunt) {
     handlebars: {
       compile: {
         options: {
-          namespace: 'this',
+          wrapped: true,
+          namespace: 'CUI.Templates',
           processName: function(path) {
             // Pull the filename out as the template name
             return path.split('/').pop().split('.').shift();
@@ -155,8 +158,12 @@ module.exports = function(grunt) {
     concat: {
       js: {
         src: [
+          '<%= dirs.source %>/js/Class.js',        // Class system
           '<%= dirs.source %>/js/CUI.js',          // Namespace
-          '<%= dirs.build %>/js/CUI.Templates.js'  // Templates
+          '<%= dirs.build %>/js/CUI.Templates.js', // Templates
+          
+          // Components
+          '<%= dirs.source %>/js/components/CUI.Modal.js'
         ],
         dest: '<%= dirs.build %>/js/CUI.js'
       }
@@ -223,6 +230,11 @@ module.exports = function(grunt) {
       compile_guide_less: {
         files: '<%= dirs.source %>/guide/examples/assets/guide.less',
         tasks: 'less:guide'
+      },
+      
+      compile_handlebars: {
+        files: '<%= dirs.source %>/templates/*',
+        tasks: 'handlebars'
       }
     }
   });

@@ -5,7 +5,7 @@
  * Note: Define with em so it changes with font-size
  */
 ul.crumbs {
-  padding: 0 0 0 0.5em;
+  padding: 0;
   margin: 0;
   
   list-style: none;
@@ -13,10 +13,10 @@ ul.crumbs {
   li {
     padding: 0;
     display: inline-block;
-  
+
     // Add chevrons to crumbs
     &:after {
-      margin: 0 0.5em;
+      margin: 0 0.5rem;
 
       content: "/";
 
@@ -25,7 +25,11 @@ ul.crumbs {
 
     a {
       display: inline-block;
-      padding: 0.5em 0;
+      padding: 0.25rem 0;
     }
+  }
+  
+  & + h1 {
+    margin: 0.5rem 0;
   }
 }
