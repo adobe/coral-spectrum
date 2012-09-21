@@ -1,25 +1,20 @@
 (function($) {
   CUI.Modal = new Class(/** @lends CUI.Modal# */{
+    extend: CUI.Widget,
+    
     /**
      * Modal dialog
      *
      * @constructs
+     * @extends CUI.Widget
      *
      * @param {Object} options  Component options
-     * @param {String} options.heading   Title of the modal dialog (HTML)
-     * @param {String} options.content   Content of the dialog (HTML)
-     * @param {Array} options.buttons   Array of button descriptors
+     * @param {String} options.heading    Title of the modal dialog (HTML)
+     * @param {String} options.content    Content of the dialog (HTML)
+     * @param {Array} options.buttons     Array of button descriptors
+     * @param {Mixed} options.backdrop    False to not display transparent underlay, True to display and close when clicked, 'static' to display and not close when clicked
      */
     construct: function(options) {
-      // Store options
-      this.options = options;
-      
-      // Store jQuery object
-      this.$element = $(options.element);
-      
-      // Always execute hide in proper scope
-      this.bind(this.hide);
-      
       // Catch clicks to dismiss modal
       this.$element.delegate('[data-dismiss="modal"]', 'click.dismiss.modal', this.hide);
 
@@ -37,44 +32,51 @@
       this.$element.attr('role', 'dialog'); // needed?
       this.$element.attr('aria-hidden', true);
       
+      // Listen to changes to configuration
+      this.$element.on('change:buttons', this._setButtons.bind(this));
+      this.$element.on('change:heading', this._setHeading.bind(this));
+      this.$element.on('change:content', this._setContent.bind(this));
+      
       // Render template, if necessary
       if (this.$element.children().length === 0) {
         this.$element.html(CUI.Templates['modal']($.extend({}, this.options, { buttons: '' })));
-        
-        this.setButtons(this.options.buttons);
+        // Only set buttons, heading/content are applied when template is rendered
+        this._setButtons();
       }
       else {
-        // Apply options otherwise
-        if (this.options.content)
-          this.$element.find('.modal-body').html(this.options.content);
-        if (this.options.heading)
-          this.$element.find('.modal-header h2').html(this.options.heading);
-        if (this.options.buttons)
-          this.setButtons(this.options.buttons);
+        // Set all options
+        this._setContent();
+        this._setHeading();
+        this._setButtons();
       }
-      
-      this.isShown = false;
     },
-  
-    /**
-     * Show the modal
-     *
-     * @returns {CUI.Modal} this, chainable
-     */
-    show: function() {
-      // Handle jQuery eventing
-      var e = $.Event('show');
-      this.$element.trigger(e);
+    
+    /** @ignore */
+    _setContent: function() {
+      if (typeof this.options.content !== 'string') return;
       
-      // Do nothing if event is prevented or we're already visible
-      if (this.isShown || e.isDefaultPrevented()) return this;
+      this.$element.find('.modal-body').html(this.options.content);
       
-      $('body').addClass('modal-open');
+      // Re-center when content changes
+      this.center();
+    },
+    
+    /** @ignore */
+    _setHeading: function() {
+      if (typeof this.options.heading !== 'string') return;
 
-      this.isShown = true;
+      this.$element.find('.modal-header h2').html(this.options.heading);
       
-      this.toggleBackdrop();
-      this.handleEscape();
+      // Re-center when content changes
+      this.center();
+    },
+    
+    /** @ignore */
+    _show: function() {
+      $('body').addClass('modal-open');
+      
+      this._toggleBackdrop(true);
+      this._setEscapeHandler(true);
       
       // Add to body if this element isn't in the DOM already
       if (!this.$element.parent().length) {
@@ -84,73 +86,62 @@
       this.$element.addClass('in').attr('aria-hidden', false).fadeIn().focus();
       
       this.center();
-      
-      return this;
     },
       
-    /**
-     * Hide the modal
-     *
-     * @returns {CUI.Modal} this, chainable
-     */
-    hide: function(e) {
-      if (e)
-        e.preventDefault(); // Stop submit buttons from doing their thing
-      
-      // Handle jQuery eventing
-      e = $.Event('hide');
-      this.$element.trigger(e);
-
-      if (!this.isShown || e.isDefaultPrevented()) return this;
-
-      this.isShown = false;
-
+    /** @ignore */
+    _hide: function() {
       $('body').removeClass('modal-open');
 
       this.$element.removeClass('in').attr('aria-hidden', true);
       
       this.$element.fadeOut().trigger('hidden');
 
-      this.toggleBackdrop();
-      this.handleEscape();
+      this._toggleBackdrop(false);
+      this._setEscapeHandler(false);
         
       return this;
-    },
-      
-    /**
-     * Toggle the visibility of the modal
-     *
-     * @returns {CUI.Modal} this, chainable
-     */
-    toggle: function() {
-      return this[!this.isShown ? 'show' : 'hide']();
     },
     
       
     /** @ignore */
-    handleEscape: function () {
-      if (this.isShown && this.options.keyboard) {
+    _setEscapeHandler: function(show) {
+      if (show && this.options.keyboard) {
         $('body').on('keyup', function (e) {
           if (e.which === 27)
             this.hide();
         }.bind(this));
       }
-      else if (!this.isShown) {
+      else if (!show) {
         this.$element.off('keyup');
       }
     },
-    toggleBackdrop: function () {
-      if (this.isShown && this.options.backdrop) {
-        this.$backdrop = $('<div class="modal-backdrop" style="display: none;" />').appendTo(document.body).fadeIn();
-
-        if (this.options.backdrop !== 'static') {
-          this.$backdrop.click(this.hide);
-        }
-      }
-      else if (!this.isShown && this.$backdrop) {
-        this.$backdrop.fadeOut(function() {
+    
+    /** @ignore */
+    _removeBackdrop: function() {
+        if (this.$backdrop && !this.get('visible')) {
+          // Remove from the DOM
           this.$backdrop.remove();
           this.$backdrop = null;
+        }
+    },
+    
+    /** @ignore */
+    _toggleBackdrop: function(show) {
+      if (show && this.options.backdrop) {
+        if (this.$backdrop)
+          this.$backdrop.fadeIn();
+        else {
+          this.$backdrop = $('<div class="modal-backdrop" style="display: none;" />').appendTo(document.body).fadeIn();
+          
+          // Note: If this option is changed before the fade completes, it won't apply
+          if (this.options.backdrop !== 'static') {
+            this.$backdrop.click(this.hide);
+          }
+        }
+      }
+      else if (!show && this.$backdrop) {
+        this.$backdrop.fadeOut(function() {
+          this._removeBackdrop();
         }.bind(this));
       }
     },
@@ -170,20 +161,17 @@
       return this;
     },
       
-    /**
-     * Change the modal's buttons
-     *
-     * @param {Array} buttons   Array of button descriptors
-     *
-     * @returns {CUI.Modal} this, chainable
-     */
-    setButtons: function(buttons) {
+    /** @ignore */
+    _setButtons: function() {
+      if (!$.isArray(this.options.buttons))  return;
+      
       var $footer = this.$element.find('.modal-footer');
       
       // Remove existing children
       $footer.children().remove();
       
-      $.each(buttons, function(index, button) {
+      $.each(this.options.buttons, function(index, button) {
+        // Create an anchor if href is provided
         var el = $(button.href ? '<a class="button" />' : '<button type="button" />');
 
         // Add label
@@ -223,13 +211,13 @@
       
       if (typeof optionsIn === 'string') // Call method
         instance[optionsIn]();
-      else if (options.visible) // show immediately
-        instance.show();
+      else if ($.isPlainObject(optionsIn)) // Apply options
+        instance.set(optionsIn);
     });
   };
 
   $.fn.modal.defaults = {
-    backdrop: true,
+    backdrop: 'static',
     keyboard: true,
     visible: true
   };
@@ -239,17 +227,24 @@
   // Data API
   $(function() {
     $('body').on('click.modal.data-api', '[data-toggle="modal"]', function (e) {
-      var $this = $(this);
-      var href = $this.attr('href');
-      var $target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))); //strip for ie7
-      var option = $target.data('modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data());
+      var $trigger = $(this);
+      
+      // Get the target from data attributes
+      var $target = CUI.util.getDataTarget($trigger);
 
+      var href = $trigger.attr('href');
+
+      // If a modal already exists, toggle its visibility
+      // Otherwise, pass configuration based on data attributes in the triggering link
+      var option = $target.data('modal') ? 'toggleVisibility' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $trigger.data());
+
+      // Stop links from navigating
       e.preventDefault();
 
-      $target.modal(option).one('hide', function () {
-          $this.focus();
+      // When the dialog is closed, focus on the button that triggered its display
+      $target.modal(option).one('hide', function() {
+          $trigger.focus();
       });
     });
   });
-  
 }(window.jQuery));
