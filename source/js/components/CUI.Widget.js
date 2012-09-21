@@ -202,15 +202,16 @@ CUI.Widget = new Class(/** @lends CUI.Widget# */{
    */
    
   /**
-   * Triggered when an option is changed
+   * Triggered when before an option is changed
    *
    * @name CUI.Widget#beforeChange:*
    * @event
    *
-   * @param {Object} evt                Event object
-   * @param {Mixed} evt.option          The option that changed
-   * @param {Mixed} evt.currentValue    The current value
-   * @param {Mixed} evt.value           The value this option will be changed to
+   * @param {Object} evt                    Event object
+   * @param {Mixed} evt.option              The option that changed
+   * @param {Mixed} evt.currentValue        The current value
+   * @param {Mixed} evt.value               The value this option will be changed to
+   * @param {Function} evt.preventDefault   Call to prevent the option from changing
    */
    
   /**
