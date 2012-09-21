@@ -81,7 +81,7 @@
  * Truncate overflowed text using ellipsis: ...
  */
 .ellipsis() {
-  display: inline-block; // Needs inline-block to display correctly
+  // display: inline-block; // Works without in Chrome
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -135,6 +135,7 @@
   .background-size(@size, @size);
 }
 
+
 /**
  * Mixin: .glow
  * Make an element glow
@@ -144,6 +145,7 @@
   .box-shadow(0 0 @radius @glowColor);
   border: @px solid @borderColor;
 }
+
 
 /**
  * Mixin: .glow-text
