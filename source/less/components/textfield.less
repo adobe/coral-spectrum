@@ -15,7 +15,7 @@ input[type=text] {
   
   height: 2rem;
   padding: 0.25rem 0.5rem;
-  margin: 0.5em 0;
+  margin: 0.5rem 0;
 
   border: @px solid @textfield-border-color; 
   background-color: @textfield-background-color;
@@ -25,14 +25,12 @@ input[type=text] {
   }
 
   &:focus {
-    border: @px solid @textfield-focused-border-color;
-    .box-shadow(0 0 0.35rem @textfield-focused-border-color);
+    .glow();
     outline: none;
   }
 
   &.error,
   &.error:focus {
-    border-color: @textfield-error-border-color;
-    .box-shadow(0 0 0.35rem @textfield-error-border-color);
+    .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
   }
 }
