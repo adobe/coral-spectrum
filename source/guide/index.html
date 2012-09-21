@@ -143,21 +143,21 @@
         <p>CoralUI or CUI (pronounced "cooey") is an implementation of the CloudUI visual style from Adobe XD.</p>
 
         <p>CoralUI's aim is to provide everything your product needs to adopt the CloudUI visual style.</p>
-         
+
         <h2 class="line" id="ResolutionIndependence">Resolution Independence</h2>
         <p>CoralUI is resolution independent. By using elastic measurement units (em and rem) to define sizes, CoralUI can be scaled  to the perfect size for any display, regardless of size or pixel density.</p>
-        
+
         <div class="res-buttons"><label>Try it:</label>
           <button id="res-minus" class="warning">-</button><button id="res-reset">=</button><button id="res-plus" class="primary">+</button>
         </div>
-        
+
         <h2 class="line" id="BrowserSupport">Browser Support</h2>
         <p>CoralUI supports all modern browsers, including IE 9+, Firefox (latest), Chrome (latest), Safari (latest).</p>
         <p>Prevalent mobile devices are also be supported, including Android 2.1+ and iOS 5+.</p>
-        
+
         <h2 class="line" id="WidgetPhilosophy">Widget Philosophy</h2>
         <p>All CoralUI widgets are guaranteed to fulfill 7 promises:</p>
-        
+
         <ol>
           <li>Widgets will be available as a jQuery plugin: <code class="prettyprint">$('#myModal').modal()</code></li>
           <li>Widgets will be available as a class: <code class="prettyprint">myModal = new CUI.Modal({ element: '#myModal' })</code>.</li>
@@ -167,7 +167,7 @@
           <li>Widgets will take advantage of declarative markup using <code>data-*</code> attributes.</li>
           <li>Widgets will work on both desktop and mobile.</li>
         </ol>
-        
+
       </section>
 
       <section id="TextStyles">
@@ -582,10 +582,10 @@
 
           <div class="componentSample">
             <div class="example">
-              
+
               <a href="#modal_JS" class="button" data-toggle="modal">Show Modal (JS)</a>
               <a href="#modal_HTML" class="button" data-toggle="modal">Show Modal (Markup)</a>
-              
+
               <!-- Created from Markup -->
               <div id="modal_HTML" class="modal">
                 <div class="modal-header">
@@ -600,10 +600,10 @@
                   <button class="primary" data-dismiss="modal">Save</button>
                 </div>
               </div>
-              
+
               <!-- Created with JavaScript -->
               <div id="modal_JS"></div>
-              
+
               <script type="text/javascript">
                 $('#modal_JS').modal({
                   heading: 'Modal from JS',
@@ -625,7 +625,7 @@
                   visible: false
                 });
               </script>
-              
+
             </div>
             <pre class="prettyprint linenums">
 &lt;a href=&quot;#modal_JS&quot; class=&quot;button&quot; data-toggle=&quot;modal&quot;&gt;Show Modal (JS)&lt;/a&gt;
@@ -673,7 +673,7 @@
 </pre>
           </div>
         </section>
-        
+
         <section class="hidden" id="Popover">
           <h2 class="line">Popover</h2>
           <p>Popovers.</p>
@@ -686,7 +686,6 @@
         </section>
 
       </section><!-- /Dialogs -->
-      
 
       <section id="Navigation">
         <h1 class="line">Navigation</h1>
@@ -717,7 +716,7 @@
 </pre>
           </div>
         </section>
-        
+
         <section class="hidden" id="Toolbar">
           <h2 class="line">Toolbar</h2>
           <p>The toolbar contains action buttons.</p>
@@ -741,7 +740,7 @@
 
         <section id="Alert">
           <h2 class="line">Alert</h2>
-          <p>Alerts show the user the result of an action.</p>
+          <p>Alerts show the user the result of an action. <em>Note:</em> Icons are placeholders.</p>
 
           <div class="componentSample">
             <div class="example">
@@ -749,7 +748,7 @@
                 <div class="close">&times;</div>
                 <div class="icon">!</div><strong>ERROR</strong>Uh oh, something went wrong with the whozit!
               </div>
-              
+
               <div class="alert notice">
                 <div class="close">&times;</div>
                 <div class="icon">!</div><strong>NOTICE</strong>Something is about to go wrong with the whozit!
@@ -777,11 +776,10 @@
 </pre>
           </div>
         </section>
-        
-        
+
         <section id="Badge">
           <h2 class="line">Badge</h2>
-          <p>Badges can be used to indicate a number of items that require the users attention.</p>
+          <p>Badges can be used to indicate a number of items that require the user's attention.</p>
 
           <div class="componentSample">
             <div class="example">
