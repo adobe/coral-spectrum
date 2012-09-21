@@ -43,6 +43,7 @@
           <nav>
             <a href="#WhatIsCUI">What is CoralUI?</a>
             <a href="#ResolutionIndependence">Res. Independence</a>
+            <a href="#JavaScriptAPI">JavaScript API</a>
           </nav>
       </section>
 
@@ -148,6 +149,20 @@
         <div class="res-buttons"><label>Try it:</label>
           <button id="res-minus" class="warning">-</button><button id="res-reset">=</button><button id="res-plus" class="primary">+</button>
         </div>
+        
+        
+        <h2 class="line" id="JavaScriptAPI">JavaScript API</h2>
+        <p>All CoralUI widgets are guaranteed to fulfill 6 promises:</p>
+        
+        <ol>
+          <li>Widgets will be available as a jQuery plugin: <code class="prettyprint">$('#myModal').modal()</code></li>
+          <li>Widgets will be available as a class: <code class="prettyprint">myModal = new CUI.Modal({ element: '#myModal' })</code>.</li>
+          <li>Widget APIs will always be fully documented <a href="jsdoc/index.html">here</a>.</li>
+          <li>Widgets will always be easily extendable with <code class="prettyprint">CUI.Modal.extend()</code>.</li>
+          <li>Widgets will progressively enhance existing markup, or render a template using passed options if no markup is present.</li>
+          <li>Widgets will take advantage of declarative markup.</li>
+        </ol>
+        
       </section>
 
       <section id="TextStyles">
