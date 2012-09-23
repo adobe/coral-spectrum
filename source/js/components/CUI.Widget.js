@@ -1,10 +1,12 @@
 CUI.Widget = new Class(/** @lends CUI.Widget# */{
   /**
-   * Base widget class
-   *
-   * @constructs
-   *
-   * @param {Object} options  Widget options
+    @classdesc The base class for all widgets
+    
+    @desc Creates a new widget
+    @constructs
+    
+    @param {Object} options                     Widget options
+    @param {Boolean} [options.visible=false]    If True, show the widget immediately
    */
   construct: function(options) {
     // Store options
@@ -24,17 +26,30 @@ CUI.Widget = new Class(/** @lends CUI.Widget# */{
     }.bind(this));
     
     if (this.options.visible) {
-      // Initial show
+      // Show immediately
       this.options.visible = false;
       this.show();
     }
   },
 
   /**
-   * Set an option
+   * Set a number of options using an object
+   * @name set
+   * @memberOf CUI.Widget#
+   * @function
    *
-   * @param {Mixed} optionOrObj     The option 
-   * @param {String} func           The function that will be called when the event is triggered
+   * @param {Object} optionHash     An object with keys are option names and values as option values.
+   *
+   * @returns {CUI.Widget} this, chainable
+   */
+  /**
+   * Set an option by name
+   * @name set
+   * @memberOf CUI.Widget#
+   * @function
+   *
+   * @param {String} option     The option to set, or an object 
+   * @param {String} value      The value to set the option to
    *
    * @returns {CUI.Widget} this, chainable
    */

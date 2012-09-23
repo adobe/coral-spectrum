@@ -1,18 +1,82 @@
 (function($) {
   CUI.Modal = new Class(/** @lends CUI.Modal# */{
     extend: CUI.Widget,
-    
     /**
-     * Modal dialog
-     *
-     * @constructs
-     * @extends CUI.Widget
-     *
-     * @param {Object} options  Component options
-     * @param {String} options.heading    Title of the modal dialog (HTML)
-     * @param {String} options.content    Content of the dialog (HTML)
-     * @param {Array} options.buttons     Array of button descriptors
-     * @param {Mixed} options.backdrop    False to not display transparent underlay, True to display and close when clicked, 'static' to display and not close when clicked
+      @extends CUI.Widget
+      @classdesc A dialog that prevents interaction with page elements while displayed.<br>
+      
+      <h2 class="line">Example</h2>
+      <a href="#myModal" class="button" data-toggle="modal">Show Modal</a>
+      <div id="myModal" class="modal">
+        <div class="modal-header">
+          <h2>Modal from Markup</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>This modal was created from markup.</p>
+        </div>
+        <div class="modal-footer">
+          <button data-dismiss="modal">Close</button>
+          <button class="primary" data-dismiss="modal">Save</button>
+        </div>
+      </div>
+      
+      @example <caption>Instantiate directly</caption>
+var modal = new CUI.Modal({
+  element: '#myModal'
+});
+
+      @example <caption>Instantiate with jQuery</caption>
+$('#myModal').modal();
+
+      @example <caption>Data API: Show modal</caption>
+&lt;a href=&quot;#myModal&quot; data-toggle=&quot;modal&quot;&gt;Show Modal&lt;/a&gt;
+
+      @example <caption>Data API: Show and load content asynchronouysly</caption>
+&lt;a href=&quot;content.html&quot; data-target="#myModal" data-toggle=&quot;modal&quot;&gt;Show&lt;/a&gt;
+
+      @example <caption>Markup</caption>
+&lt;div id=&quot;myModal&quot; class=&quot;modal&quot;&gt;
+  &lt;div class=&quot;modal-header&quot;&gt;
+    &lt;h2&gt;Heading&lt;/h2&gt;
+    &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot;&gt;&amp;times;&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;modal-body&quot;&gt;
+    Content
+  &lt;/div&gt;
+  &lt;div class=&quot;modal-footer&quot;&gt;
+    &lt;button data-dismiss=&quot;modal&quot;&gt;Close&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+      
+      @example <caption>Markup with &lt;form&gt; tag</caption>
+&lt;form id=&quot;myModal&quot; class=&quot;modal&quot; action="/users" method="post"&gt;
+  &lt;div class=&quot;modal-header&quot;&gt;
+    &lt;h2&gt;Create User&lt;/h2&gt;
+    &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot;&gt;&amp;times;&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;modal-body&quot;&gt;
+    &lt;label for=&quot;name&quot;&gt;Name&lt;/label&gt;&lt;input id=&quot;name&quot; name=&quot;name&quot; type=&quot;text&quot;&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;modal-footer&quot;&gt;
+    &lt;button type="button" data-dismiss=&quot;modal&quot;&gt;Cancel&lt;/button&gt;
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+
+
+      @desc Creates a new modal dialog     
+      @constructs
+      
+      @param {Object} options             Component options
+      @param {Mixed} options.element     jQuery selector or DOM element to use for dialog
+      @param {String} options.heading     Title of the modal dialog (HTML)
+      @param {String} options.content     Content of the dialog (HTML)
+      @param {Array} [options.buttons]      Array of button descriptors
+      @param {String} [options.remote]      URL to asynchronously load content from the first time the modal is shown
+      @param {Boolean} [options.keyboard=true]  True to hide modal when escape key is pressed
+      @param {Mixed} [options.backdrop=static]     False to not display transparent underlay, True to display and close when clicked, 'static' to display and not close when clicked
+      @param {Mixed} [options.visible=true]     True to display immediately, False to defer display until show() called
      */
     construct: function(options) {
       // Catch clicks to dismiss modal
@@ -147,9 +211,9 @@
     },
       
     /**
-     * Center the modal in the screen
-     *
-     * @returns {CUI.Modal} this, chainable
+      Center the modal in the screen
+      
+      @returns {CUI.Modal} this, chainable
      */
     center: function() {
       var width = this.$element.outerWidth();
