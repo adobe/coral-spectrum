@@ -115,8 +115,9 @@ else
   exit 1
 fi
 
-# Temporary: add link to template in JSDoc folder
-rm components/JSDoc/customTemplate
+# Temporary: clone from git and add link to template in JSDoc folder
+rm -rf components/JSDoc
+git clone https://github.com/jsdoc3/jsdoc.git components/JSDoc >/dev/null
 ln -s ../../source/jsdocTemplate/ components/JSDoc/customTemplate
 
 echo ""
