@@ -54,7 +54,8 @@ module.exports = function(grunt) {
 
     // Task definitions
     clean: {
-      build: '<%= dirs.build %>'
+      build: '<%= dirs.build %>',
+      jsdoc: '<%= dirs.build %>/jsdoc'
     },
 
     copy: {
@@ -139,8 +140,11 @@ module.exports = function(grunt) {
       }
     },
     
-    jsdoc: {
+    jsdoc3: {
       cui: {
+        // template: '<%= dirs.source %>/jsdocTemplate',
+        // template: '<%= dirs.components %>/JSDoc/templates/default',
+        template: 'customTemplate',
         jsdoc: '<%= dirs.components %>/JSDoc/jsdoc',
         src: ['<%= dirs.source %>/js/**'],
         dest: '<%= dirs.build %>/jsdoc'
@@ -261,6 +265,13 @@ module.exports = function(grunt) {
   
   // Redefine watch to build partial first
   grunt.registerTask('watch', 'partial watch-start');
+  
+  // Rename jsdoc task so we can override it
+  grunt.task.renameTask('jsdoc', 'jsdoc3');
+  
+  // Redefine jsdoc task to clean first
+  grunt.registerTask('jsdoc', 'clean:jsdoc jsdoc3');
+  
   
   // Default task
   grunt.registerTask('default', 'partial');
