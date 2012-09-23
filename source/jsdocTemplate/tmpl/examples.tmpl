@@ -1,0 +1,10 @@
+<?js
+    data.forEach(function(example) {
+        if (example.caption) {
+    ?>
+        <h3><?js= example.caption ?></h3>
+    <?js } ?>
+    <pre class="prettyprint linenums"><?js= example.code ?></pre>
+<?js
+    });
+?>

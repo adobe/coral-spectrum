@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: <?js= title ?></title>
+    
+    <link rel="stylesheet" href="../examples/assets/google-code-prettify/prettify.css">
+    <link type="text/css" rel="stylesheet" href="../css/cui.css">
+    <link type="text/css" rel="stylesheet" href="../examples/assets/guide.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="../js/libs/handlebars.js"></script>
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/CUI.js"></script>
+</head>
+
+<body>
+
+
+  <header>
+
+    <div class="logo"><img src="../images/theme/cloudui.png"></div>
+
+    <nav>
+      <a href="../index.html">Guide</a>
+      <a href="index.html" class="selected">Docs</a>
+      <a href="https://git.corp.adobe.com/Reef/CoralUI/">Github</a>
+      <a href="../cui.zip">Download</a>
+    </nav>
+
+    <div class="drawer">
+      <div class="badge">Generated <?js var d = new Date(); ?><?js= (d.getMonth()+1)+'/'+(d.getDate())+' at '+d.getHours()+':'+d.getMinutes() ?></div>
+    </div>
+
+  </header>
+
+  <div class="page">
+    <div class="rail">
+        <?js= this.nav ?>
+    </div>
+
+    <div class="content">
+        <!--<?js if (title) { ?><h1 class="line"><?js= title ?></h1><?js } ?>-->
+    
+        <?js= content ?>
+    </div>
+  </div>
+
+  <script> prettyPrint(); </script>
+</body>
+</html>
