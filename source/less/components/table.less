@@ -52,14 +52,14 @@ table.data {
   }
   
   tr:hover {
-    td {
+    >td {
         background: @table-cell-hover-background-color;
 
         border-color: @table-cell-hover-border-color;
     }
 
     & + tr {
-      td {
+      >td {
         // Change the top border color of cells in the next row
         border-top: @px solid @table-cell-hover-border-color;
       }
@@ -67,7 +67,7 @@ table.data {
   }
   
   tr.selected {
-    td {
+    >td {
       background: @table-cell-selected-background-color;
       
       border-left-color: @table-cell-selected-border-color;
@@ -75,8 +75,23 @@ table.data {
     }
     
     & + tr {
-      td {
+      >td {
         border-top-color: @table-cell-selected-border-color;
+      }
+    }
+  }
+  
+  &.noHover {
+    tr:hover {
+      >td {
+        background: @table-cell-background-color;
+        border-color:@table-cell-border-color;
+      }
+    
+      & + tr {
+        >td {
+          border-color: @table-cell-border-color;
+        }
       }
     }
   }
