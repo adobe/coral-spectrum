@@ -117,8 +117,16 @@ fi
 
 # Temporary: clone from git and add link to template in JSDoc folder
 rm -rf components/JSDoc
-git clone https://github.com/jsdoc3/jsdoc.git components/JSDoc >/dev/null
-ln -s ../../source/jsdocTemplate/ components/JSDoc/customTemplate
+git clone https://github.com/jsdoc3/jsdoc.git components/JSDoc >/dev/null 2>&1
+if [ $? -eq 0 ]; then
+  green " [√] " "\c"
+  echo "JSDoc"
+else
+  red " [X] " "\c"
+  echo "JSDoc";
+  exit 1
+fi
+ln -s ../../source/docTemplate/ components/JSDoc/customTemplate
 
 echo ""
 echo "Run one of the following commands to build CoralUI:"
