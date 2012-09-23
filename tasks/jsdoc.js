@@ -5,12 +5,14 @@ module.exports = function(grunt) {
     var src = grunt.file.expandFiles(this.data.src);
     var dest = grunt.template.process(this.data.dest, config);
     var jsdoc = grunt.template.process(this.data.jsdoc, config);
+    var template = this.data.template ? grunt.template.process(this.data.template, config) : undefined;
     
     var options = {
       done: this.async(),
       src: src,
       dest: dest,
-      jsdoc: jsdoc
+      jsdoc: jsdoc,
+      template: template
     };
     
     grunt.helper('jsdoc', options);
@@ -24,7 +26,16 @@ module.exports = function(grunt) {
     ];
     
     // Add source files
-    args = args.concat(options.src);
+    args = options.src.concat(args);
+    
+    if (options.template) {
+      // args.push('-t', process.cwd()+'/'+options.template); // creates 19 folders...
+      // args.push('-t', '../../'+options.template);  // doesn't work
+      args.push('-t', options.template);
+    }
+    
+    // Dump command:
+    // console.log(options.jsdoc+' '+args.join(" "));
     
     return grunt.utils.spawn(
       {
