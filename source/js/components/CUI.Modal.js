@@ -29,11 +29,11 @@ var modal = new CUI.Modal({
       @example <caption>Instantiate with jQuery</caption>
 $('#myModal').modal();
 
-      @example <caption>Data API: Show modal</caption>
-&lt;a href=&quot;#myModal&quot; data-toggle=&quot;modal&quot;&gt;Show Modal&lt;/a&gt;
+      @example <caption>Data API: Instantiate and show modal</caption>
+&lt;button data-target=&quot;#myModal&quot; data-toggle=&quot;modal&quot;&gt;Show Modal&lt;/button&gt;
 
-      @example <caption>Data API: Show and load content asynchronouysly</caption>
-&lt;a href=&quot;content.html&quot; data-target="#myModal" data-toggle=&quot;modal&quot;&gt;Show&lt;/a&gt;
+      @example <caption>Data API: Instantiate, load content asynchronously, and show modal</caption>
+&lt;button data-target="#myModal" data-toggle=&quot;modal&quot; href=&quot;content.html&quot;&gt;Show&lt;/button&gt;
 
       @example <caption>Markup</caption>
 &lt;div id=&quot;myModal&quot; class=&quot;modal&quot;&gt;
