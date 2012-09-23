@@ -115,6 +115,10 @@ else
   exit 1
 fi
 
+# Temporary: add link to template in JSDoc folder
+rm components/JSDoc/customTemplate
+ln -s ../../source/jsdocTemplate/ components/JSDoc/customTemplate
+
 echo ""
 echo "Run one of the following commands to build CoralUI:"
 echo ""
