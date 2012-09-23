@@ -10,19 +10,19 @@
   @param {Function} descriptor.destruct             The destructor (teardown) method for the new class
   @param {Mixed} descriptor.*                       Other methods and properties for the new class
   
-  @returns {BaseClass} The created class.
+  @returns {Base} The created class.
 */
 var Class;
 
 (function() {
   /**
-    @name BaseClass
+    @name Base
     
-    @classdesc The abstract class blueprint which contains the methods that all classes will automatically have.
-    BaseClass cannot be extended or instantiated and does not exist in the global namespace.
-    If you create a class using <code class="prettyprint">new Class()</code> or <code class="prettyprint">MyClass.extend()</code>, it will come with BaseClass' methods.
+    @classdesc The abstract class which contains methods that all classes will inherit.
+    Base cannot be extended or instantiated and does not exist in the global namespace.
+    If you create a class using <code class="prettyprint">new Class()</code> or <code class="prettyprint">MyClass.extend()</code>, it will come with Base' methods.
     
-    @desc BaseClass is an abstract class and cannot be instantiated directly. Constructors are chained automatically, so you never need to call the constructor of an inherited class directly
+    @desc Base is an abstract class and cannot be instantiated directly. Constructors are chained automatically, so you never need to call the constructor of an inherited class directly
     @constructs
     
     @param {Object} options  Instance options. Guaranteed to be defined as at least an empty Object
@@ -32,7 +32,7 @@ var Class;
     Binds a method of this instance to the execution scope of this instance.
     
     @name bind
-    @memberOf BaseClass.prototype
+    @memberOf Base.prototype
     @function
     
     @param {Function} func The this.method you want to bind
@@ -57,7 +57,7 @@ var Class;
     Any class created using Class will have this static method on the class itself.
     
     @name extend
-    @memberOf BaseClass
+    @memberOf Base
     @function
     @static
     
@@ -135,7 +135,7 @@ var Class;
       Call the superclass method with the same name as the currently executing method
       
       @name inherited
-      @memberOf BaseClass.prototype
+      @memberOf Base.prototype
       @function
       
       @param {Arguments} args  Unadulterated arguments array from calling function
@@ -192,7 +192,7 @@ var Class;
       Destroys this instance and frees associated memory. Destructors are chained automatically, so the <code class="prettyprint">destruct()</code> method of all inherited classes will be called for you
     
       @name destruct
-      @memberOf BaseClass.prototype
+      @memberOf Base.prototype
       @function
      */
     prototype.destruct = function() {
