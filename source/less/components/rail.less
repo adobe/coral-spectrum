@@ -45,17 +45,17 @@ div.rail {
       padding: 0.25rem 0;
       
       // TBD: fix margin collapse for strong
-      >strong {
-          display: block;
-          margin: 0 0 0.15rem 0;
-          
-          font-size: 0.95rem;
-          
-          a {
-            color: @rail-font-color;
-            
-            padding: 0.25rem 0.7rem;
-          }
+      >strong,
+      >a.heading {
+        font-weight: bold;
+        display: block;
+        margin: 0 0 0.15rem 0;
+      
+        font-size: 0.95rem;
+      
+        color: @rail-font-color;
+      
+        padding: 0.25rem 0.7rem;
       }
       
       a {
