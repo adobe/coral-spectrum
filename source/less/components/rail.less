@@ -8,12 +8,14 @@ div.rail {
   background-color: @rail-background-color;
 
   // Add shadow to left/right rail
-  &:first-child {
+  &.left {
     .box-shadow(inset -1*@rail-shadow-distance 0 @rail-shadow-spread rgba(0, 0, 0, @rail-shadow-opacity)); // TBD: make sure this matches mocks...
+    float: left;
   }
   
-  &:last-child {
+  &.right {
     .box-shadow(inset @rail-shadow-distance 0 @rail-shadow-spread rgba(0, 0, 0, @rail-shadow-opacity));
+    float: right;
   }
   
   section {

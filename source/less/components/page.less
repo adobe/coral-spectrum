@@ -3,28 +3,21 @@
  * Used for the main page layout for content and rail
  */
 .page {
-  .flex;                  // it's a flexbox
-  .flex-direction(row);   // that spans horizontally
-
-  .flex-ratio(1);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: @header-height;
+  bottom: 0;
   
   .rail {
-    /*
-    // Adding goofy right border when scrolling for Chrome/Canary, works in FF
-    .flex;  // Enables scrolling
-    .flex-direction(column);
-    */
-    
+    float: left;
+    height: 100%;
+    width: 15.5rem;
     .scrollable;
   }
   
   .content {
-    /*
-    // Adding goofy right border when scrolling for Chrome/Canary, works in FF
-    .flex;  // Enables scrolling
-    .flex-direction(column);
-    */
-    
-    .flex-ratio(3);
+    height: 100%;
+    .scrollable;
   }
 }
