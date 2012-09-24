@@ -10,11 +10,6 @@
 @demo-background-color: rgb(247, 247, 247);
 @demo-border-color: rgb(187, 187, 187);
 
-// Rail
-body > div.page > div.rail {
-  width: 12rem;
-}
-
 // Headings
 h1.line,
 h2.line,
@@ -210,6 +205,20 @@ div.fakeBody {
   button + button,
   a.button + button {
     margin-left: 1rem;
+  }
+}
+
+.headerSample,
+.railSample {
+  header {
+    position: static;
+  }
+}
+
+.railSample {
+  .page {
+    position: static;
+    height: 10em;
   }
 }
 

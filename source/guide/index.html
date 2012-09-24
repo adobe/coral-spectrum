@@ -145,7 +145,7 @@
         <p>CoralUI's aim is to provide everything your product needs to adopt the CloudUI visual style.</p>
 
         <h2 class="line" id="ResolutionIndependence">Resolution Independence</h2>
-        <p>CoralUI is resolution independent. By using elastic measurement units (em and rem) to define sizes, CoralUI can be scaled  to the perfect size for any display, regardless of size or pixel density.</p>
+        <p>CoralUI is resolution independent. By using elastic measurement units to define sizes (em and rem), CoralUI can be scaled to the perfect size for any display, regardless of size or pixel density.</p>
 
         <div class="res-buttons"><label>Try it:</label>
           <button id="res-minus" class="warning">-</button><button id="res-reset">=</button><button id="res-plus" class="primary">+</button>
@@ -191,10 +191,10 @@
 
         <section id="Links">
           <h2 class="line">Link</h2>
-          <p>The <code class="prettyprint">&lt;a&gt;</code> tag comes with a default color and behavior.</p>
+          <p>The <code class="prettyprint">&lt;a&gt;</code> tag comes with a default color and behavior. Links remain the same color after they are visited.</p>
 
           <div class="componentSample noCode">
-            Lorem ipsum dolor sit amet consectetur <a href="#">inline link</a> adipisicing do tempor incididunt ut labore.
+            Lorem ipsum dolor sit amet consectetur <a href="#Links">inline link</a> adipisicing do tempor incididunt ut labore.
           </div>
         </section>
 
@@ -268,14 +268,14 @@
 
       <section id="PageComponents">
         <h1 class="line">Page Components</h1>
-        <p>Page components include header, rail, etc.</p>
+        <p>Page components include g, rail, etc.</p>
 
         <section id="Header">
           <h2 class="line">Header</h2>
           <p>The top navigation header that appears on every page. It supports a logo, navigation, and drawer (which can contain a badge or other information).</p>
           <p>The HTML5 <code class="prettyprint">&lt;header&gt;</code> tag reserved for the application header and should not be used elsewhere.</p>
 
-          <div class="componentSample">
+          <div class="componentSample headerSample">
             <div class="example">
 
               <header>
@@ -311,14 +311,11 @@
           <h2 class="line">Rail</h2>
           <p>The side panel used for metadata and feeds.</p>
 
-          <div class="componentSample">
+          <div class="componentSample railSample">
             <div class="example">
 
               <div class="page shadowBox">
-                <div class="content">
-                  <p>&nbsp;(content)</p>
-                </div>
-                <div class="rail">
+                <div class="rail right">
                   <section>
                       <strong>News Feed</strong>
                   </section>
@@ -328,16 +325,15 @@
                       <p class="small">I created a new segment thing for the Chance campaign because we left out the Foursquare that will be checking in at Olympic events.</p>
                   </section>
                 </div>
+                <div class="content">
+                  <p>&nbsp;(content)</p>
+                </div>
               </div>
 
             </div>
             <pre class="prettyprint linenums">
 &lt;div class=&quot;page&quot;&gt;
-  &lt;div class=&quot;content&quot;&gt;
-    &lt;p&gt;(content)&lt;/p&gt;
-  &lt;/div&gt;
-
-  &lt;div class=&quot;rail&quot;&gt;
+  &lt;div class=&quot;rail right&quot;&gt;
     &lt;section&gt;
         &lt;strong&gt;Update Feed&lt;/strong&gt;
     &lt;/section&gt;
@@ -346,6 +342,9 @@
         &lt;div class=&quot;small grey light&quot;&gt;Modified yesterday by Rob Cobourn&lt;/div&gt;
         &lt;p class=&quot;small&quot;&gt;I created a new segment thing for the...&lt;/p&gt;
     &lt;/section&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;p&gt;(content)&lt;/p&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 </pre>
