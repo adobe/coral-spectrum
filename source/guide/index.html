@@ -3,13 +3,13 @@
 <head>
   <title>CoralUI Style Guide</title>
 
-  <link rel="stylesheet" href="css/cui.min.css">
+  <link rel="stylesheet" href="css/cui.css">
   <link rel="stylesheet" href="examples/assets/google-code-prettify/prettify.css">
   <link rel="stylesheet" href="examples/assets/guide.css">
 
   <script src="js/libs/handlebars.js"></script>
   <script src="js/libs/jquery.js"></script>
-  <script src="js/CUI.min.js"></script>
+  <script src="js/CUI.js"></script>
   <script src="examples/assets/guide.js"></script>
   <script src="examples/assets/google-code-prettify/prettify.js"></script>
 
@@ -424,7 +424,7 @@
               <table class="data" style="width: 50%">
                 <thead>
                   <tr>
-                    <th class="check"><input type="checkbox"></th>
+                    <th class="check"><label><input type="checkbox"><span></span></label></th>
                     <th>Text</th>
                     <th>Date</th>
                     <th class="num">Numbers</th>
@@ -432,31 +432,31 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><input type="checkbox"></td>
+                    <td><label><input type="checkbox"><span></span></label></td>
                     <td>Alpha</td>
                     <td>December 12th, 2011</td>
                     <td class="num">912</td>
                   </tr>
                   <tr>
-                    <td><input type="checkbox"></td>
+                    <td><label><input type="checkbox"><span></span></label></td>
                     <td>Bravo</td>
                     <td>January 28th, 2012</td>
                     <td class="num">1,049</td>
                   </tr>
                   <tr>
-                    <td><input type="checkbox"></td>
+                    <td><label><input type="checkbox"><span></span></label></td>
                     <td>Charlie</td>
                     <td>April 10th, 2012</td>
                     <td class="num">11,130</td>
                   </tr>
                   <tr>
-                    <td><input type="checkbox"></td>
+                    <td><label><input type="checkbox"><span></span></label></td>
                     <td>Delta</td>
                     <td>June 17th, 2012</td>
                     <td class="num">731,422</td>
                   </tr>
                   <tr>
-                    <td><input type="checkbox"></td>
+                    <td><label><input type="checkbox"><span></span></label></td>
                     <td>Echo</td>
                     <td>June 5th, 2012</td>
                     <td class="num">2,700,120</td>
@@ -493,7 +493,7 @@
 
       <section id="ButtonsAndControls">
         <h1 class="line">Buttons &amp; Controls</h1>
-        <p>CUI provides many useful styles and widgets for form fields.</p>
+        <p>CUI provides many useful styles and widgets for buttons &amp; controls.</p>
 
         <section id="Buttons">
           <h2 class="line">Buttons</h2>
@@ -566,6 +566,27 @@
             <pre class="prettyprint linenums"></pre>
           </div>
         </section>
+        
+        <section id="Checkbox">
+          <h2 class="line">Checkbox</h2>
+          <p>Checkboxes are styling using pure CSS, and a <code class="atv">partial</code> class is provided to indicate a "half-checked" state.</p>
+
+          <div class="componentSample">
+              <div class="example">
+                <input type="checkbox" name="c" id="c"><label for="c">Unchecked</label><br>
+                <input type="checkbox" name="c2" id="c2" checked><label for="c2">Checked</label><br>
+                <input type="checkbox" name="c3" id="c3" class="partial"><label for="c3">Partially checked</label><br>
+                <label><input type="checkbox" name="c4"><span>Inside &lt;label&gt; tag</span></label><br>
+                <label><input type="checkbox" name="c5"><span></span></label><!-- By itself -->
+              </div>
+              <pre class="prettyprint linenums">
+&lt;input type=&quot;checkbox&quot; name=&quot;c&quot; id=&quot;c&quot;&gt;&lt;label for=&quot;c&quot;&gt;Unchecked&lt;/label&gt;&lt;br&gt;
+&lt;input type=&quot;checkbox&quot; name=&quot;c2&quot; id=&quot;c2&quot; checked&gt;&lt;label for=&quot;c2&quot;&gt;Checked&lt;/label&gt;&lt;br&gt;
+&lt;input type=&quot;checkbox&quot; name=&quot;c3&quot; id=&quot;c3&quot; class=&quot;partial&quot;&gt;&lt;label for=&quot;c3&quot;&gt;Partially checked&lt;/label&gt;&lt;br&gt;
+&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c4&quot;&gt;&lt;span&gt;Inside &amp;lt;label&amp;gt; tag&lt;/span&gt;&lt;/label&gt;&lt;br&gt;
+&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c5&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/label&gt;&lt;!-- By itself --&gt;</pre>
+          </div>
+        </section>
 
       </section><!-- /ButtonsAndControls -->
 
@@ -575,23 +596,22 @@
 
         <section id="Modal">
           <h2 class="line">Modal</h2>
-          <p>Modals pop over the whole application and prevent interaction underneath them.</p>
-          <p>A modal can be created from markup or with JS.<p>
+          <p>Modals pop over the whole page and prevent interaction underneath them.</p>
+          <p>Modals will progressively enhance existing markup or render their own template if no markup is present. See <a href="jsdoc/index.html">the documentation</a> for more examples.<p>
 
           <div class="componentSample">
             <div class="example">
 
-              <a href="#modal_JS" class="button" data-toggle="modal">Show Modal (JS)</a>
-              <a href="#modal_HTML" class="button" data-toggle="modal">Show Modal (Markup)</a>
-
-              <!-- Created from Markup -->
-              <div id="modal_HTML" class="modal">
+              <a href="#modal" class="button" data-toggle="modal">Show Modal</a>
+              
+              <div id="modal" class="modal">
                 <div class="modal-header">
                   <h2>Modal from Markup</h2>
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                  <p>This modal was created from markup.</p>
+                  <p>This modal was created from markup. Modals can also be created with JavaScript.</p>
+                  <p>See <a href="jsdoc/index.html">the documentation</a> for more examples.</p>
                 </div>
                 <div class="modal-footer">
                   <button data-dismiss="modal">Close</button>
@@ -599,38 +619,11 @@
                 </div>
               </div>
 
-              <!-- Created with JavaScript -->
-              <div id="modal_JS"></div>
-
-              <script type="text/javascript">
-                $('#modal_JS').modal({
-                  heading: 'Modal from JS',
-                  content: '<p>This modal was created with JS.</p>',
-                  buttons: [
-                    {
-                      label: 'Close',
-                      click: 'close',
-                    },
-                    {
-                      label: 'Save',
-                      className: 'primary',
-                      click: function(evt) {
-                        console.log('Modal: This would usually trigger a save...');
-                        evt.dialog.hide();
-                      }
-                    }
-                  ],
-                  visible: false
-                });
-              </script>
-
             </div>
             <pre class="prettyprint linenums">
-&lt;a href=&quot;#modal_JS&quot; class=&quot;button&quot; data-toggle=&quot;modal&quot;&gt;Show Modal (JS)&lt;/a&gt;
-&lt;a href=&quot;#modal_HTML&quot; class=&quot;button&quot; data-toggle=&quot;modal&quot;&gt;Show Modal (Markup)&lt;/a&gt;
+&lt;a href=&quot;#modal&quot; class=&quot;button&quot; data-toggle=&quot;modal&quot;&gt;Show Modal&lt;/a&gt;
 
-&lt;!-- Created from Markup --&gt;
-&lt;div id=&quot;modal_HTML&quot; class=&quot;modal&quot;&gt;
+&lt;div id=&quot;modal&quot; class=&quot;modal&quot;&gt;
   &lt;div class=&quot;modal-header&quot;&gt;
     &lt;h2&gt;Modal from Markup&lt;/h2&gt;
     &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot;&gt;&amp;times;&lt;/button&gt;
@@ -643,31 +636,6 @@
     &lt;button class=&quot;primary&quot; data-dismiss=&quot;modal&quot;&gt;Save&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;
-
-&lt;!-- Created with JavaScript --&gt;
-&lt;div id=&quot;modal_JS&quot;&gt;&lt;/div&gt;
-
-&lt;script type=&quot;text/javascript&quot;&gt;
-  $(&#x27;#modal_JS&#x27;).modal({
-    heading: &#x27;Modal from JS&#x27;,
-    content: &#x27;&lt;p&gt;This modal was created with JS.&lt;/p&gt;&#x27;,
-    buttons: [
-      {
-        label: &#x27;Close&#x27;,
-        click: &#x27;close&#x27;,
-      },
-      {
-        label: &#x27;Save&#x27;,
-        className: &#x27;primary&#x27;,
-        click: function(evt) {
-          console.log(&#x27;Modal: This would usually trigger a save...&#x27;);
-          evt.dialog.hide();
-        }
-      }
-    ],
-    visible: false
-  });
-&lt;/script&gt;
 </pre>
           </div>
         </section>
