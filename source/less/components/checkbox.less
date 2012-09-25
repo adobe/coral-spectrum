@@ -54,6 +54,15 @@ input[type=checkbox] {
   &:checked + span:before {
     content: '\2713'; // Todo: replace with icon
   }
+  
+  &:disabled + label:before,
+  &:disabled + span:before {
+    border-color: @checkbox-disabled-border-color;
+    
+    background-color: @checkbox-disabled-background-color;
+    
+    color: @checkbox-disabled-check-color;
+  }
 }
 
 th,

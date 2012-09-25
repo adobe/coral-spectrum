@@ -69,13 +69,14 @@
       </section>
 
       <section class="links">
-          <a class="heading" href="#DataPresentation">Data&nbsp;Presentation</a>
+          <a class="heading" href="#Navigation">Navigation</a>
 
           <nav>
-            <a href="#List">List</a>
-            <a href="#Table">Table</a>
-            <a href="#Grid">Grid</a>
-          </nav>
+            <a href="#Rail">Toolbar</a>
+            <a href="#Breadcrumbs">Breadcrumbs</a>
+            <a href="#Tabs">Tabs</a>
+            <a href="#Wizard">Wizard</a>
+         </nav>
       </section>
 
       <section class="links">
@@ -96,22 +97,21 @@
       </section>
 
       <section class="links">
+          <a class="heading" href="#DataPresentation">Data&nbsp;Presentation</a>
+
+          <nav>
+            <a href="#List">List</a>
+            <a href="#Table">Table</a>
+            <a href="#Grid">Grid</a>
+          </nav>
+      </section>
+      
+      <section class="links">
           <a class="heading" href="#Dialogs">Dialogs</a>
 
           <nav>
             <a href="#Modal">Modal</a>
             <a href="#Popover">Popover</a>
-         </nav>
-      </section>
-
-      <section class="links">
-          <a class="heading" href="#Navigation">Navigation</a>
-
-          <nav>
-            <a href="#Rail">Toolbar</a>
-            <a href="#Breadcrumbs">Breadcrumbs</a>
-            <a href="#Tabs">Tabs</a>
-            <a href="#Wizard">Wizard</a>
          </nav>
       </section>
 
@@ -380,6 +380,164 @@
 
       </section><!-- /Page Components -->
 
+
+      <section id="Navigation">
+        <h1 class="line">Navigation</h1>
+        <p>CUI provides various controls that enable navigation.</p>
+
+        <section class="hidden" id="Toolbar">
+          <h2 class="line">Toolbar</h2>
+          <p>The toolbar contains action buttons.</p>
+
+          <div class="componentSample">
+            <div class="example">
+
+              <nav class="toolbar">
+                <a href="#"><!-- text or image --></a>
+              </nav>
+
+            </div>
+            <pre class="prettyprint linenums"></pre>
+          </div>
+        </section>
+        
+        <section id="Breadcrumbs">
+          <h2 class="line">Breadcrumbs</h2>
+          <p>Breadcrumbs provide an actionable indication of a user's current location within an application.</p>
+
+          <div class="componentSample">
+            <div class="example">
+
+              <ul class="crumbs">
+                <li><a href="#"><img src="images/theme/cloudui.png"></a></li>
+                <li><a href="#">Admin</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Current Page Title</a></li>
+              </ul>
+
+            </div>
+            <pre class="prettyprint linenums">
+&lt;ul class=&quot;crumbs&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/theme/cloudui.png&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Admin&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Settings&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Current Page Title&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+          </div>
+        </section>
+
+      </section><!-- /Navigation -->
+
+
+      <section id="ButtonsAndControls">
+        <h1 class="line">Buttons &amp; Controls</h1>
+        <p>CUI provides many useful styles and widgets for buttons &amp; controls.</p>
+
+        <section id="Buttons">
+          <h2 class="line">Buttons</h2>
+          <p>The <code class="prettyprint">&lt;button&gt;</code> tag is styled automatically, and you can apply the <code class="atv">button</code> CSS class to any element to turn it into a styled button.</p>
+
+          <div class="componentSample buttonSample">
+            <div class="example">
+
+              <a class="button" href="#Buttons">Action</a>
+              <button class="primary">Primary Action</button>
+              <button class="warning">Warning</button>
+              <button disabled>Disabled</button>
+
+            </div>
+            <pre class="prettyprint linenums">
+&lt;a class=&quot;button&quot;&gt;Action&lt;/a&gt; 
+&lt;button class=&quot;primary&quot;&gt;Primary Action&lt;/button&gt; 
+&lt;button class=&quot;warning&quot;&gt;Warning&lt;/button&gt;
+&lt;button disabled&gt;Disabled&lt;/button&gt;
+</pre>
+          </div>
+        </section>
+        
+        <section id="TextField">
+          <h2 class="line">Text Field</h2>
+          <p>Text input variants.</p>
+
+          <div class="componentSample">
+              <div class="example">
+                  <div class="textfieldSample">
+                      <div class="sampleTitle left">Standard</div>
+                      <label>Text Field</label>
+                      <input type="text">
+                  </div>
+                  <div class="textfieldSample">
+                      <div class="sampleTitle left">Title-less</div>
+                      <label>&nbsp;</label>
+                      <input type="text" placeholder="Text Field">
+                  </div>
+                  <div class="textfieldSample">
+                      <div class="sampleTitle left">Error</div>
+                      <label>&nbsp;</label>
+                      <input class="error" type="text">
+                  </div>
+                  <div class="textfieldSample">
+                      <div class="sampleTitle left">Disabled</div>
+                      <label>&nbsp;</label>
+                      <input class="textfield" disabled type="text">
+                  </div>
+              </div>
+              <pre class="prettyprint linenums">
+&lt;input type=&quot;text&quot;&gt;
+&lt;input type=&quot;text&quot; placeholder=&quot;Text Field&quot;&gt;
+&lt;input type=&quot;text&quot; class=&quot;error&quot;&gt;
+&lt;input type=&quot;text&quot; disabled&gt;</pre>
+          </div>
+        </section>
+
+        <section class="hidden" id="SearchField">
+          <h2 class="line">Search Field</h2>
+          <p>Search.</p>
+
+          <div class="componentSample">
+            <div class="example">
+
+              <div class="search">
+              </div>
+
+            </div>
+            <pre class="prettyprint linenums"></pre>
+          </div>
+        </section>
+        
+        <section id="Checkbox">
+          <h2 class="line">Checkbox</h2>
+          <p>Checkboxes are styling using pure CSS, and a <code class="atv">partial</code> class is provided to indicate a "half-checked" state.</p>
+
+          <div class="componentSample">
+              <div class="example clearfix">
+                <div class="left">
+                  <input type="checkbox" name="c" id="c"><label for="c">Unchecked</label><br>
+                  <input type="checkbox" name="c2" id="c2" checked><label for="c2">Checked</label><br>
+                  <input type="checkbox" name="c3" id="c3" class="partial"><label for="c3">Partially checked</label><br>
+                  <input type="checkbox" name="c4" id="c4" disabled><label for="c4">Disabled</label>
+                </div>
+                <div class="left">
+                  <label><input type="checkbox" name="c5"><span>Inside &lt;label&gt; tag</span></label><br>
+                  <label><input type="checkbox" name="c6"><span></span></label><!-- By itself -->
+                </div>
+              </div>
+              <pre class="prettyprint linenums">
+&lt;input type=&quot;checkbox&quot; name=&quot;c&quot; id=&quot;c&quot;&gt;&lt;label for=&quot;c&quot;&gt;Unchecked&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; name=&quot;c2&quot; id=&quot;c2&quot; checked&gt;&lt;label for=&quot;c2&quot;&gt;Checked&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; name=&quot;c3&quot; id=&quot;c3&quot; class=&quot;partial&quot;&gt;&lt;label for=&quot;c3&quot;&gt;Partially checked&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; name=&quot;c4&quot; id=&quot;c4&quot; disabled&gt;&lt;label for=&quot;c4&quot;&gt;Disabled&lt;/label&gt;
+
+&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c4&quot;&gt;&lt;span&gt;Inside label tag&lt;/span&gt;&lt;/label&gt;
+&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c5&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/label&gt;&lt;!-- By itself --&gt;</pre>
+          </div>
+        </section>
+
+      </section><!-- /ButtonsAndControls -->
+      
+      
       <section id="DataPresentation">
         <h1 class="line">Data Presentation</h1>
         <p>CUI provides basic grids, tables, and lists for data presentation.</p>
@@ -491,104 +649,6 @@
 
       </section><!-- /DataPresentation -->
 
-      <section id="ButtonsAndControls">
-        <h1 class="line">Buttons &amp; Controls</h1>
-        <p>CUI provides many useful styles and widgets for buttons &amp; controls.</p>
-
-        <section id="Buttons">
-          <h2 class="line">Buttons</h2>
-          <p>The <code class="prettyprint">&lt;button&gt;</code> tag is styled automatically, and you can apply the <code class="atv">button</code> CSS class to any element to turn it into a styled button.</p>
-
-          <div class="componentSample buttonSample">
-            <div class="example">
-
-              <a class="button" href="#Buttons">Action</a>
-              <button class="primary">Primary Action</button>
-              <button class="warning">Warning</button>
-              <button disabled>Disabled</button>
-
-            </div>
-            <pre class="prettyprint linenums">
-&lt;a class=&quot;button&quot;&gt;Action&lt;/a&gt; 
-&lt;button class=&quot;primary&quot;&gt;Primary Action&lt;/button&gt; 
-&lt;button class=&quot;warning&quot;&gt;Warning&lt;/button&gt;
-&lt;button disabled&gt;Disabled&lt;/button&gt;
-</pre>
-          </div>
-        </section>
-        
-        <section id="TextField">
-          <h2 class="line">Text Field</h2>
-          <p>Text input variants.</p>
-
-          <div class="componentSample">
-              <div class="example">
-                  <div class="textfieldSample">
-                      <div class="sampleTitle left">Standard</div>
-                      <label>Text Field</label>
-                      <input type="text">
-                  </div>
-                  <div class="textfieldSample">
-                      <div class="sampleTitle left">Title-less</div>
-                      <label>&nbsp;</label>
-                      <input type="text" placeholder="Text Field">
-                  </div>
-                  <div class="textfieldSample">
-                      <div class="sampleTitle left">Error</div>
-                      <label>&nbsp;</label>
-                      <input class="error" type="text">
-                  </div>
-                  <div class="textfieldSample">
-                      <div class="sampleTitle left">Disabled</div>
-                      <label>&nbsp;</label>
-                      <input class="textfield" disabled type="text">
-                  </div>
-              </div>
-              <pre class="prettyprint linenums">
-&lt;input type=&quot;text&quot;&gt;
-&lt;input type=&quot;text&quot; placeholder=&quot;Text Field&quot;&gt;
-&lt;input type=&quot;text&quot; class=&quot;error&quot;&gt;
-&lt;input type=&quot;text&quot; disabled&gt;</pre>
-          </div>
-        </section>
-
-        <section class="hidden" id="SearchField">
-          <h2 class="line">Search Field</h2>
-          <p>Search.</p>
-
-          <div class="componentSample">
-            <div class="example">
-
-              <div class="search">
-              </div>
-
-            </div>
-            <pre class="prettyprint linenums"></pre>
-          </div>
-        </section>
-        
-        <section id="Checkbox">
-          <h2 class="line">Checkbox</h2>
-          <p>Checkboxes are styling using pure CSS, and a <code class="atv">partial</code> class is provided to indicate a "half-checked" state.</p>
-
-          <div class="componentSample">
-              <div class="example">
-                <input type="checkbox" name="c" id="c"><label for="c">Unchecked</label><br>
-                <input type="checkbox" name="c2" id="c2" checked><label for="c2">Checked</label><br>
-                <input type="checkbox" name="c3" id="c3" class="partial"><label for="c3">Partially checked</label><br>
-                <label><input type="checkbox" name="c4"><span>Inside &lt;label&gt; tag</span></label><br>
-                <label><input type="checkbox" name="c5"><span></span></label><!-- By itself -->
-              </div>
-              <pre class="prettyprint linenums">
-&lt;input type=&quot;checkbox&quot; name=&quot;c&quot; id=&quot;c&quot;&gt;&lt;label for=&quot;c&quot;&gt;Unchecked&lt;/label&gt;&lt;br&gt;
-&lt;input type=&quot;checkbox&quot; name=&quot;c2&quot; id=&quot;c2&quot; checked&gt;&lt;label for=&quot;c2&quot;&gt;Checked&lt;/label&gt;&lt;br&gt;
-&lt;input type=&quot;checkbox&quot; name=&quot;c3&quot; id=&quot;c3&quot; class=&quot;partial&quot;&gt;&lt;label for=&quot;c3&quot;&gt;Partially checked&lt;/label&gt;&lt;br&gt;
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c4&quot;&gt;&lt;span&gt;Inside &amp;lt;label&amp;gt; tag&lt;/span&gt;&lt;/label&gt;&lt;br&gt;
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c5&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/label&gt;&lt;!-- By itself --&gt;</pre>
-          </div>
-        </section>
-
-      </section><!-- /ButtonsAndControls -->
 
       <section id="Dialogs">
         <h1 class="line">Dialogs</h1>
@@ -653,54 +713,6 @@
 
       </section><!-- /Dialogs -->
 
-      <section id="Navigation">
-        <h1 class="line">Navigation</h1>
-        <p>CUI provides various controls that enable navigation.</p>
-
-        <section id="Breadcrumbs">
-          <h2 class="line">Breadcrumbs</h2>
-          <p>Breadcrumbs provide an actionable indication of a user's current location within an application.</p>
-
-          <div class="componentSample">
-            <div class="example">
-
-              <ul class="crumbs">
-                <li><a href="#"><img src="images/theme/cloudui.png"></a></li>
-                <li><a href="#">Admin</a></li>
-                <li><a href="#">Settings</a></li>
-                <li><a href="#">Current Page Title</a></li>
-              </ul>
-
-            </div>
-            <pre class="prettyprint linenums">
-&lt;ul class=&quot;crumbs&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/theme/cloudui.png&quot;&gt;&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Admin&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Settings&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Current Page Title&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</pre>
-          </div>
-        </section>
-
-        <section class="hidden" id="Toolbar">
-          <h2 class="line">Toolbar</h2>
-          <p>The toolbar contains action buttons.</p>
-
-          <div class="componentSample">
-            <div class="example">
-
-              <div class="toolbar">
-              </div>
-
-            </div>
-            <pre class="prettyprint linenums"></pre>
-          </div>
-        </section>
-
-      </section><!-- /Navigation -->
-
       <section id="StatusIndicators">
         <h1 class="line">Status Indicators</h1>
         <p>Status indicators provide a way of conveying the progress of an ongoing process or the result of a process that has finished.</p>
@@ -737,8 +749,8 @@
               </div>
             </div>
             <pre class="prettyprint linenums">
-&lt;div class=&quot;alert error&quot;&gt;&lt;strong&gt;
-  Process Failed&lt;/strong&gt;Uh oh, something went wrong with the whozit.
+&lt;div class=&quot;alert error&quot;&gt;
+  &lt;strong&gt;Process Failed&lt;/strong&gt;Uh oh, something went wrong with the whozit.
 &lt;/div&gt;
 </pre>
           </div>
