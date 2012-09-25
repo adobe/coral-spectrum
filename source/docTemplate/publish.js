@@ -226,16 +226,18 @@ exports.publish = function(taffyData, opts, tutorials) {
         
         if (doclet.examples) {
             doclet.examples = doclet.examples.map(function(example) {
-                var caption, code;
+                var caption, description, code;
                 
-                if (example.match(/^\s*<caption>([\s\S]+?)<\/caption>(\s*[\n\r])([\s\S]+)$/i)) {
+                if (example.match(/^\s*(?:<caption>([\s\S]+?)<\/caption>)?[\s\n\r]*(?:<description>([\s\S]+?)<\/description>)?(?:\s*[\n\r])([\s\S]+)$/i)) {
                     caption = RegExp.$1;
+                    description = RegExp.$2;
                     code    = RegExp.$3.replace(/\s+$/, '');
                 }
                 
                 return {
                     caption: caption || '',
-                    code: code || example
+                    code: code || example,
+                    description: description || ''
                 };
             });
         }
