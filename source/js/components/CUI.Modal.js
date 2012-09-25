@@ -3,39 +3,95 @@
     extend: CUI.Widget,
     /**
       @extends CUI.Widget
-      @classdesc A dialog that prevents interaction with page elements while displayed.<br>
+      @classdesc A dialog that prevents interaction with page elements while displayed. Modal will use existing markup if it is present, or create markup if <code>options.element</code> has no children.
       
       <h2 class="line">Example</h2>
       <a href="#myModal" class="button" data-toggle="modal">Show Modal</a>
       <div id="myModal" class="modal">
         <div class="modal-header">
-          <h2>Modal from Markup</h2>
+          <h2>A Sample Modal</h2>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-          <p>This modal was created from markup.</p>
+          <p>Some sample content.</p>
         </div>
         <div class="modal-footer">
-          <button data-dismiss="modal">Close</button>
-          <button class="primary" data-dismiss="modal">Save</button>
+          <button data-dismiss="modal">Ok</button>
         </div>
       </div>
       
-      @example <caption>Instantiate directly</caption>
+      @example
+<caption>Instantiate with Class</caption>
 var modal = new CUI.Modal({
-  element: '#myModal'
+  element: '#myModal',
+  heading: 'My Modal',
+  content: '&lt;p&gt;Content here.&lt;/p&gt;',
+  buttons: [
+    {
+      label: 'Save',
+      className: 'primary',
+      click: function(evt) {
+        console.log('Modal: This would usually trigger a save...');
+        this.hide(); // could also use evt.dialog.hide();
+      }
+    }
+  ]
 });
 
-      @example <caption>Instantiate with jQuery</caption>
-$('#myModal').modal();
+// Hide the modal, change the heading, then show it again
+modal.hide().set({ heading: 'My Modal Again'}).show();
 
-      @example <caption>Data API: Instantiate and show modal</caption>
+// jQuery style works as well
+$('#myModal').modal('hide');
+
+      @example
+<caption>Instantiate with jQuery</caption>
+$('#myModal').modal({
+  heading: 'My Modal',
+  content: '&lt;p&gt;Content here.&lt;/p&gt;',
+  buttons: [
+    {
+      label: 'Close',
+      click: 'hide', // Specifying 'hide' causes the dialog to close when clicked
+    }
+  ]
+});
+
+// Hide the modal, change the heading, then show it again
+$('#myModal').modal('hide').modal({ heading: 'My Modal Again'}).modal('show');
+
+// A reference to the element's modal instance is stored as data-modal
+var modal = $('#myModal').data('modal');
+modal.hide();
+
+
+      @example 
+<caption>Data API: Instantiate and show modal</caption>
+<description>When using a <code class="prettify">&lt;button&gt;</code>, specify the jQuery selector for the element using <code>data-target</code>. Markup should exist already if no options are specified.</description>
 &lt;button data-target=&quot;#myModal&quot; data-toggle=&quot;modal&quot;&gt;Show Modal&lt;/button&gt;
 
-      @example <caption>Data API: Instantiate, load content asynchronously, and show modal</caption>
-&lt;button data-target="#myModal" data-toggle=&quot;modal&quot; href=&quot;content.html&quot;&gt;Show&lt;/button&gt;
+      @example
+<caption>Data API: Instantiate, set options, and show</caption>
+<description>When using an <code class="prettify">&lt;a&gt;</code>, specify the jQuery selector for the element using <code>href</code>. Markup is optional since options are specified as data attributes.</description>
+&lt;a 
+  href=&quot;#modal&quot;
+  data-toggle=&quot;modal&quot;
+  data-heading=&quot;Test Modal&quot;
+  data-content=&quot;&amp;lt;p&amp;gt;Test content&amp;lt;/p&amp;gt;&quot;
+  data-buttons=&#x27;[{ &quot;label&quot;: &quot;Close&quot;, &quot;click&quot;: &quot;close&quot; }]&#x27;
+&gt;Show Modal&lt;/a&gt;
 
-      @example <caption>Markup</caption>
+      @example
+<caption>Data API: Instantiate, load content asynchronously, and show</caption>
+<description>When loading content asynchronously, regardless of what tag is used, specify the jQuery selector for the element using <code>data-target</code> and the URL of the content to load with <code>href</code>.</description>
+&lt;button
+  data-target="#myModal"
+  data-toggle=&quot;modal&quot;
+  href=&quot;content.html&quot;
+&gt;Show Modal&lt;/button&gt;
+
+      @example
+<caption>Markup</caption>
 &lt;div id=&quot;myModal&quot; class=&quot;modal&quot;&gt;
   &lt;div class=&quot;modal-header&quot;&gt;
     &lt;h2&gt;Heading&lt;/h2&gt;
@@ -49,7 +105,9 @@ $('#myModal').modal();
   &lt;/div&gt;
 &lt;/div&gt;
       
-      @example <caption>Markup with &lt;form&gt; tag</caption>
+      @example
+<caption>Markup with &lt;form&gt; tag</caption>
+<description>Modals can be created from the <code class="prettify">&lt;form&gt;</code> tag as well. Make sure to set <code class="prettify">type="button"</code> on buttons that should not perform a submit.</description>
 &lt;form id=&quot;myModal&quot; class=&quot;modal&quot; action="/users" method="post"&gt;
   &lt;div class=&quot;modal-header&quot;&gt;
     &lt;h2&gt;Create User&lt;/h2&gt;
@@ -81,10 +139,12 @@ $('#myModal').modal();
     construct: function(options) {
       // Catch clicks to dismiss modal
       this.$element.delegate('[data-dismiss="modal"]', 'click.dismiss.modal', this.hide);
-
-      // TODO: Uh, does this fetch content asynchronously?
-      if (this.options.remote)
+      
+      // Fetch content asynchronously
+      if (this.options.remote) {
+        // Todo: show spinner
         this.$element.find('.modal-body').load(this.options.remote);
+      }
       
       // Add modal class to give styling
       this.$element.addClass('modal');
@@ -113,6 +173,14 @@ $('#myModal').modal();
         this._setHeading();
         this._setButtons();
       }
+    },
+    
+    // Todo: fetch content method?
+    
+    defaults: {
+      backdrop: 'static',
+      keyboard: true,
+      visible: true
     },
     
     /** @ignore */
@@ -147,9 +215,12 @@ $('#myModal').modal();
         this.$element.appendTo(document.body);
       }
 
-      this.$element.addClass('in').attr('aria-hidden', false).fadeIn().focus();
-      
+      // Get width/height right
+      this.$element.css('visibility', 'hidden').css('left', '0').show();
       this.center();
+      this.$element.css('visibility', 'visible').css('left', '50%').hide();
+      
+      this.$element.addClass('in').attr('aria-hidden', false).fadeIn().focus();
     },
       
     /** @ignore */
@@ -242,7 +313,7 @@ $('#myModal').modal();
         el.html(button.label);
         
         if (button.click) {
-          if (button.click === 'close')
+          if (button.click === 'hide')
             el.attr('data-dismiss', 'modal');
           else if (typeof button.click === 'function')
             el.on('click', button.click.bind(this, { dialog: this }));
@@ -268,7 +339,7 @@ $('#myModal').modal();
       var instance = $this.data('modal');
       
       // Combine defaults, data, options, and element config
-      var options = $.extend({}, $.fn.modal.defaults, $this.data(), typeof optionsIn === 'object' && optionsIn, { element: this });
+      var options = $.extend({}, $this.data(), typeof optionsIn === 'object' && optionsIn, { element: this });
     
       if (!instance)
         $this.data('modal', (instance = new CUI.Modal(options)));
@@ -279,13 +350,6 @@ $('#myModal').modal();
         instance.set(optionsIn);
     });
   };
-
-  $.fn.modal.defaults = {
-    backdrop: 'static',
-    keyboard: true,
-    visible: true
-  };
-
   $.fn.modal.Constructor = CUI.Modal;
 
   // Data API
@@ -304,6 +368,11 @@ $('#myModal').modal();
 
       // Stop links from navigating
       e.preventDefault();
+
+      // Parse buttons
+      if (typeof option.buttons === 'string') {
+        option.buttons = JSON.parse(option.buttons);
+      }
 
       // When the dialog is closed, focus on the button that triggered its display
       $target.modal(option).one('hide', function() {
