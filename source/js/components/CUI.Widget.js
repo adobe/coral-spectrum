@@ -10,7 +10,7 @@ CUI.Widget = new Class(/** @lends CUI.Widget# */{
    */
   construct: function(options) {
     // Store options
-    this.options = $.extend({}, options);
+    this.options = $.extend({}, typeof this.defaults === 'object' && this.defaults, options);
     
     // Store jQuery object
     this.$element = $(options.element);
