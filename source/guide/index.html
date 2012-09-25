@@ -83,7 +83,7 @@
 
           <nav>
             <a href="#Buttons">Buttons</a>
-            <a href="#TextFields">Text field</a>
+            <a href="#TextField">Text field</a>
             <a href="#SearchField">Search field</a>
             <a href="#Checkbox">Checkbox</a>
             <a href="#RadioButtons">Radio buttons</a>
@@ -176,7 +176,7 @@
 
         <section id="Headings">
           <h2 class="line">Headings</h2>
-          <p>Use the <code class="prettyprint">&lt;h1&gt;</code> through <code class="prettyprint">&lt;h5&gt;</code> tags to add headings to sections on your page.</p>
+          <p>Use the <code class="prettyprint">&lt;h1&gt;</code> through <code class="prettyprint">&lt;h6&gt;</code> tags to add headings to sections on your page.</p>
 
           <div class="componentSample noCode headingSample">
             <h1>Heading 1 (Page title)</h1>
@@ -268,7 +268,7 @@
 
       <section id="PageComponents">
         <h1 class="line">Page Components</h1>
-        <p>Page components include g, rail, etc.</p>
+        <p>Page components are top level pieces that appear on nearly every page.</p>
 
         <section id="Header">
           <h2 class="line">Header</h2>
@@ -516,41 +516,39 @@
 </pre>
           </div>
         </section>
+        
+        <section id="TextField">
+          <h2 class="line">Text Field</h2>
+          <p>Text input variants.</p>
 
-        <section id="TextFields">
-
-<h2 class="line">Text Field</h2>
-            <p>Text input variants.</p>
-
-            <div class="componentSample">
-                <div class="example">
-                    <div class="textfieldSample">
-                        <div class="sampleTitle left">Standard</div>
-                        <label>Text Field</label>
-                        <input type="text">
-                    </div>
-                    <div class="textfieldSample">
-                        <div class="sampleTitle left">Title-less</div>
-                        <label>&nbsp;</label>
-                        <input type="text" placeholder="Text Field">
-                    </div>
-                    <div class="textfieldSample">
-                        <div class="sampleTitle left">Error</div>
-                        <label>&nbsp;</label>
-                        <input class="error" type="text">
-                    </div>
-                    <div class="textfieldSample">
-                        <div class="sampleTitle left">Disabled</div>
-                        <label>&nbsp;</label>
-                        <input class="textfield" disabled type="text">
-                    </div>
-                </div>
-<pre class="prettyprint linenums">
+          <div class="componentSample">
+              <div class="example">
+                  <div class="textfieldSample">
+                      <div class="sampleTitle left">Standard</div>
+                      <label>Text Field</label>
+                      <input type="text">
+                  </div>
+                  <div class="textfieldSample">
+                      <div class="sampleTitle left">Title-less</div>
+                      <label>&nbsp;</label>
+                      <input type="text" placeholder="Text Field">
+                  </div>
+                  <div class="textfieldSample">
+                      <div class="sampleTitle left">Error</div>
+                      <label>&nbsp;</label>
+                      <input class="error" type="text">
+                  </div>
+                  <div class="textfieldSample">
+                      <div class="sampleTitle left">Disabled</div>
+                      <label>&nbsp;</label>
+                      <input class="textfield" disabled type="text">
+                  </div>
+              </div>
+              <pre class="prettyprint linenums">
 &lt;input type=&quot;text&quot;&gt;
 &lt;input type=&quot;text&quot; placeholder=&quot;Text Field&quot;&gt;
 &lt;input type=&quot;text&quot; class=&quot;error&quot;&gt;
-&lt;input type=&quot;text&quot; disabled&gt;
-</pre>
+&lt;input type=&quot;text&quot; disabled&gt;</pre>
           </div>
         </section>
 
