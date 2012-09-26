@@ -74,16 +74,25 @@ input[type=radio] {
 input[type=checkbox] {
   &.partial + label:before,
   &.partial + span:before {
-    //content: "-"; // Todo: replace with icon
     background-image: url('../images/components/checkbox/dash.png');
   }
 
   &:checked + label:before,
   &:checked + span:before {
-    //content: '\2713'; // Todo: replace with icon
     background-image: url('../images/components/checkbox/check.png');
   }
 
+  &:disabled {
+    &.partial + label:before,
+    &.partial + span:before {
+      background-image: url('../images/components/checkbox/dash_disabled.png');
+    }
+
+    &:checked + label:before,
+    &:checked + span:before {
+      background-image: url('../images/components/checkbox/check_disabled.png');
+    }
+  }
 }
 
 input[type=radio] {
@@ -94,8 +103,14 @@ input[type=radio] {
   
   &:checked + span:before,
   &:checked + label:before {
-    //content: '\2022'; // Todo: replace with icon?
     background-image: url('../images/components/radio/dot.png');
+  }
+  
+  &:disabled {
+    &:checked + span:before,
+    &:checked + label:before {
+      background-image: url('../images/components/radio/dot_disabled.png');
+    }
   }
 }
 

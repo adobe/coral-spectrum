@@ -512,17 +512,25 @@
           <p>Checkboxes are styling using pure CSS, and a <code class="atv">partial</code> class is provided to indicate a "half-checked" state.</p>
 
           <div class="componentSample">
-              <div class="example">
-                  <label><input type="checkbox" name="c2" checked><span>Checked</span></label>
-                  <label><input type="checkbox" name="c1"><span>Unchecked</span></label>
-                  <label><input type="checkbox" name="c3" class="partial"><span>Partially checked</span></label>
-                  <label><input type="checkbox" name="c4" disabled><span>Disabled</span></label>
+              <div class="example clearfix">
+                <div class="left">
+                  <label><input type="checkbox" name="c1" value="1" checked><span>Checked</span></label><br>
+                  <label><input type="checkbox" name="c2" value="2"><span>Unchecked</span></label><br>
+                  <label><input type="checkbox" name="c3" value="3" class="partial"><span>Partially checked</span></label>
+                </div>
+                <div class="left">
+                  <label><input type="checkbox" name="c4" value="4" disabled checked><span>Disabled Checked</span></label><br>
+                  <label><input type="checkbox" name="c5" value="5" disabled><span>Disabled Unchecked</span></label><br>
+                  <label><input type="checkbox" name="c6" value="6" class="partial" disabled><span>Disabled Partially Checked</span></label>
+                </div>
               </div>
               <pre class="prettyprint linenums">
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c2&quot; checked&gt;&lt;span&gt;Checked&lt;/span&gt;&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c1&quot;&gt;&lt;span&gt;Unchecked&lt;/span&gt;&lt;/label&gt;
+&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c1&quot; checked&gt;&lt;span&gt;Checked&lt;/span&gt;&lt;/label&gt;
+&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c2&quot;&gt;&lt;span&gt;Unchecked&lt;/span&gt;&lt;/label&gt;
 &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c3&quot; class=&quot;partial&quot;&gt;&lt;span&gt;Partially checked&lt;/span&gt;&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c4&quot; disabled&gt;&lt;span&gt;Disabled&lt;/span&gt;&lt;/label&gt;
+&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c4&quot; disabled checked&gt;&lt;span&gt;Disabled Checked&lt;/span&gt;&lt;/label&gt;
+&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c5&quot; disabled&gt;&lt;span&gt;Disabled Unchecked&lt;/span&gt;&lt;/label&gt;
+&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c6&quot; disabled&gt;&lt;span&gt;Disabled Partially Checked&lt;/span&gt;&lt;/label&gt;
 </pre>
           </div>
         </section>
@@ -535,15 +543,19 @@
           <div class="componentSample">
               <div class="example clearfix">
                 <div class="left">
-                  <label><input type="radio" name="radio" value="1" checked><span>Checked</span></label>
-                  <label><input type="radio" name="radio" value="2"><span>Unchecked</span></label>
-                  <label><input type="radio" name="radio" value="3" disabled><span>Disabled</span></label>
+                  <label><input type="radio" name="r1" value="1" checked><span>Checked</span></label><br>
+                  <label><input type="radio" name="r1" value="2"><span>Unchecked</span></label>
+                </div>
+                <div class="left">
+                  <label><input type="radio" name="r2" value="1" disabled checked><span>Disabled Checked</span></label><br>
+                  <label><input type="radio" name="r2" value="2" disabled><span>Disabled Unchecked</span></label>
                 </div>
               </div>
               <pre class="prettyprint linenums">
-&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;radio&quot; value=&quot;1&quot; checked&gt;&lt;span&gt;&lt;/span&gt;Value 1&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;radio&quot; value=&quot;2&quot;&gt;&lt;span&gt;&lt;/span&gt;Value 2&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;radio&quot; value=&quot;3&quot; disabled&gt;&lt;span&gt;&lt;/span&gt;Value 3&lt;/label&gt;
+&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;r1&quot; value=&quot;1&quot; checked&gt;&lt;span&gt;&lt;/span&gt;Value 1&lt;/label&gt;
+&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;r1&quot; value=&quot;2&quot;&gt;&lt;span&gt;&lt;/span&gt;Value 2&lt;/label&gt;
+&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;r2&quot; value=&quot;1&quot; disabled checked&gt;&lt;span&gt;Disabled Checked&lt;/span&gt;&lt;/label&gt;
+&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;r2&quot; value=&quot;2&quot; disabled&gt;&lt;span&gt;Disabled Unchecked&lt;/span&gt;&lt;/label&gt;
 </pre>
           </div>
         </section>
