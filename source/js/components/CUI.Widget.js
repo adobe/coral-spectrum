@@ -69,9 +69,13 @@ CUI.Widget = new Class(/** @lends CUI.Widget# */{
   },
   /** @ignore */
   _set: function(option, value) {
+    /*
     // Don't set if values are identical
+    // This is problematic when options are set from markup
+    // Leave this out for now
     if (this.options[option] === value)
       return this;
+    */
     
     // Trigger a change event
     var e = $.Event('beforeChange:'+option, {
