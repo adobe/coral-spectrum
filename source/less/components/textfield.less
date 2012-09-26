@@ -29,8 +29,11 @@ input[type=text] {
     outline: none;
   }
 
-  &.error,
-  &.error:focus {
+  &.error {
     .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+    
+    &:focus {
+     .glow;
+    }
   }
 }
