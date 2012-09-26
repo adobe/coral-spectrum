@@ -65,7 +65,7 @@
             <!-- we might try to have a clearer distinction between source and build files later -->
             <resource>
                 <directory>${basedir}/build</directory>
-                <targetPath>${project.build.directory}/vault-work/jcr_root/libs/coralui/clientlib</targetPath>
+                <targetPath>${project.build.directory}/vault-work/jcr_root/etc/clientlibs/granite/coralui</targetPath>
                 <excludes>
                     <!-- directories that don't go into the clientlib -->
                     <!--<exclude>guide/**</exclude>-->
@@ -114,7 +114,7 @@
                 <configuration>
                     <filters>
                         <filter>
-                            <root>/libs/coralui</root>
+                            <root>/etc/clientlibs/granite/coralui</root>
                         </filter>
                     </filters>
                 </configuration>
