@@ -115,4 +115,67 @@
       margin-left: 0rem;
     }
   }
+  
+  &.error,
+  &.notice,
+  &.success,
+  &.help,
+  &.info {
+    .modal-header {
+      padding-left: 2rem;
+      
+      background-repeat: no-repeat;
+      background-position: 1rem center;
+    }
+  }
+  
+  &.error {
+    .modal-header {
+      background-color: @alert-red-background-color;
+      
+      .box-shadow(inset 0 -1*@px 0 @alert-red-border-color);
+      
+      background-image: url('../images/components/alert/exclaimation.png');
+    }
+  }
+
+  &.notice {
+    .modal-header {
+      background-color: @alert-yellow-background-color;
+
+      .box-shadow(inset 0 -1*@px 0 @alert-yellow-border-color);
+
+      background-image: url('../images/components/alert/exclaimation.png');
+    }
+  }
+
+  &.success {
+    .modal-header {
+      background-color: @alert-green-background-color;
+
+      .box-shadow(inset 0 -1*@px 0 @alert-green-border-color);
+
+      background-image: url('../images/components/alert/check.png');
+    }
+  }
+
+  &.help {
+    .modal-header {
+      background-color: @alert-blue-background-color;
+
+      .box-shadow(inset 0 -1*@px 0 @alert-blue-border-color);
+
+      background-image: url('../images/components/alert/question.png');
+    }
+  }
+
+  &.info {
+    .modal-header {
+      background-color: @alert-blue-background-color;
+
+      .box-shadow(inset 0 -1*@px 0 @alert-blue-border-color);
+
+      background-image: url('../images/components/alert/i.png');
+    }
+  }
 }

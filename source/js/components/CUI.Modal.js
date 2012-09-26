@@ -160,18 +160,21 @@ modal.hide();
       this.$element.on('change:buttons', this._setButtons.bind(this));
       this.$element.on('change:heading', this._setHeading.bind(this));
       this.$element.on('change:content', this._setContent.bind(this));
+      this.$element.on('change:type', this._setType.bind(this));
       
       // Render template, if necessary
       if (this.$element.children().length === 0) {
         this.$element.html(CUI.Templates['modal']($.extend({}, this.options, { buttons: '' })));
         // Only set buttons, heading/content are applied when template is rendered
         this._setButtons();
+        this._setType();
       }
       else {
         // Set all options
         this._setContent();
         this._setHeading();
         this._setButtons();
+        this._setType();
       }
     },
     
@@ -180,7 +183,31 @@ modal.hide();
     defaults: {
       backdrop: 'static',
       keyboard: true,
-      visible: true
+      visible: true,
+      type: 'default'
+    },
+    
+    _validTypes: [
+      'default',
+      'error',
+      'notice',
+      'success',
+      'help',
+      'info'
+    ],
+    
+    /** @ignore */
+    _setType: function() {
+      if (typeof this.options.type !== 'string' || this._validTypes.indexOf(this.options.type) === -1) return;
+      
+      // Remove old type
+      this.$element.removeClass(this._validTypes.join(' '));
+
+      // Add new type
+      this.$element.addClass(this.options.type);
+      
+      // Re-center when heading, adds some left padding
+      this.center();
     },
     
     /** @ignore */
@@ -360,24 +387,33 @@ modal.hide();
       // Get the target from data attributes
       var $target = CUI.util.getDataTarget($trigger);
 
+      // Pass configuration based on data attributes in the triggering link
       var href = $trigger.attr('href');
-
-      // If a modal already exists, toggle its visibility
-      // Otherwise, pass configuration based on data attributes in the triggering link
-      var option = $target.data('modal') ? 'toggleVisibility' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $trigger.data());
+      var options = $.extend({ remote: !/#/.test(href) && href }, $target.data(), $trigger.data());
 
       // Stop links from navigating
       e.preventDefault();
 
       // Parse buttons
-      if (typeof option.buttons === 'string') {
-        option.buttons = JSON.parse(option.buttons);
+      if (typeof options.buttons === 'string') {
+        options.buttons = JSON.parse(options.buttons);
       }
-
+      
+      // If a modal already exists, show it
+      var instance = $target.data('modal');
+      var show = true;
+      if (instance && instance.get('visible'))
+        show = false;
+      
+      // Apply the options from the data attributes of the trigger
       // When the dialog is closed, focus on the button that triggered its display
-      $target.modal(option).one('hide', function() {
+      $target.modal(options).one('hide', function() {
           $trigger.focus();
       });
+      
+      // Perform visibility toggle if we're creating a new instance
+      if (instance)
+        $target.data('modal').set({ visible: show });
     });
   });
 }(window.jQuery));

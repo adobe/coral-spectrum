@@ -34,24 +34,22 @@
   .icon {
     // Temporary until we get icons
     display: inline-block;
-    .box-sizing(border-box);
     width: 1rem;
     height: 1rem;
-    padding: 0.1rem 0 0 0;
     margin-right: 0.5rem;
     
-    background: rgba(0, 0, 0, 0.5);
+    background-position: center center;
+    background-repeat: no-repeat;
+    .background-size(100% 100%);
     
-    .border-radius(1rem);
-    
-    overflow: hidden;
-    
-    vertical-align: -0.075rem;
-
-    font-size: 0.8125rem;
-    line-height: 1.2;
-    text-align: center;
-    color: white;
+    vertical-align: -0.175rem;
+  }
+  
+  &.error,
+  &.notice {
+   .icon {
+      background-image: url('../images/components/alert/exclaimation.png');
+    }
   }
   
   &.error {
@@ -67,15 +65,27 @@
   &.success {
     background-color: @alert-green-background-color;
     border-color: @alert-green-border-color;
+    
+   .icon {
+      background-image: url('../images/components/alert/check.png');
+    }
   }
   
   &.help {
     background-color: @alert-blue-background-color;
     border-color: @alert-blue-border-color;
+    
+   .icon {
+      background-image: url('../images/components/alert/question.png');
+    }
   }
   
   &.info {
     background-color: @alert-blue-background-color;
     border-color: @alert-blue-border-color;
+    
+   .icon {
+      background-image: url('../images/components/alert/i.png');
+    }
   }
 }

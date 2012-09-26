@@ -683,12 +683,26 @@
           <h2 class="line">Modal</h2>
           <p>Modals pop over the whole page and prevent interaction underneath them.</p>
           <p>Modals will progressively enhance existing markup or render their own template if no markup is present. See <a href="jsdoc/index.html">the documentation</a> for more examples.<p>
+          <p>Modals can be styled to display alert messages by adding one of the following classes to the modal element or by setting the <code>type</code> option.</p>
+          <ul>
+            <li><code class="atv">default</code>: Grey heading, no icon
+            <li><code class="atv">error</code>: Red heading, exclamation point icon
+            <li><code class="atv">notice</code>: Yellow heading, exclamation point icon
+            <li><code class="atv">success</code>: Green heading, checkmark icon
+            <li><code class="atv">help</code>: Blue heading, question mark icon
+            <li><code class="atv">info</code>: Blue heading, info icon
+          </ul>
 
           <div class="componentSample">
             <div class="example">
 
-              <a href="#modal" class="button" data-toggle="modal">Show Modal</a>
-              
+              <a href="#modal" class="button primary" data-toggle="modal" data-heading="Default Modal" data-type="default">Default</a>
+              <a href="#modal" class="button" data-toggle="modal" data-heading="Error" data-type="error">Error</a>
+              <a href="#modal" class="button" data-toggle="modal" data-heading="Notice" data-type="notice">Notice</a>
+              <a href="#modal" class="button" data-toggle="modal" data-heading="Success" data-type="success">Success</a>
+              <a href="#modal" class="button" data-toggle="modal" data-heading="Help" data-type="help">Help</a>
+              <a href="#modal" class="button" data-toggle="modal" data-heading="Info" data-type="info">Info</a>
+
               <div id="modal" class="modal">
                 <div class="modal-header">
                   <h2>Modal from Markup</h2>
@@ -744,33 +758,33 @@
 
         <section id="Alert">
           <h2 class="line">Alert</h2>
-          <p>Alerts show the user the result of an action. <em>Note:</em> Icons are placeholders.</p>
+          <p>Alerts show the user the result of an action.</p>
 
           <div class="componentSample">
             <div class="example">
               <div class="alert error">
                 <div class="close">&times;</div>
-                <div class="icon">!</div><strong>ERROR</strong>Uh oh, something went wrong with the whozit!
+                <div class="icon"></div><strong>ERROR</strong>Uh oh, something went wrong with the whozit!
               </div>
 
               <div class="alert notice">
                 <div class="close">&times;</div>
-                <div class="icon">!</div><strong>NOTICE</strong>Something is about to go wrong with the whozit!
+                <div class="icon"></div><strong>NOTICE</strong>Something is about to go wrong with the whozit!
               </div>
 
               <div class="alert success">
                 <div class="close">&times;</div>
-                <div class="icon">&check;</div><strong>Success</strong>Everything went better than expected with the whozit.
+                <div class="icon"></div><strong>Success</strong>Everything went better than expected with the whozit.
               </div>
 
               <div class="alert help">
                 <div class="close">&times;</div>
-                <div class="icon">?</div><strong>HELP</strong>If you are struggling with the whozit, read <a href="#">the manual</a>.
+                <div class="icon"></div><strong>HELP</strong>If you are struggling with the whozit, read <a href="#">the manual</a>.
               </div>
 
               <div class="alert info">
                 <div class="close">&times;</div>
-                <div class="icon">i</div><strong>INFO</strong>For great success, configure the whozit correctly.
+                <div class="icon"></div><strong>INFO</strong>For great success, configure the whozit correctly.
               </div>
             </div>
             <pre class="prettyprint linenums">
