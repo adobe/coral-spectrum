@@ -126,7 +126,6 @@ else
   echo "JSDoc";
   exit 1
 fi
-ln -s ../../source/docTemplate/ components/JSDoc/customTemplate
 
 echo ""
 echo "Run one of the following commands to build CoralUI:"
