@@ -142,9 +142,7 @@ module.exports = function(grunt) {
     
     jsdoc3: {
       cui: {
-        // template: '<%= dirs.source %>/jsdocTemplate',
-        // template: '<%= dirs.components %>/JSDoc/templates/default',
-        template: 'customTemplate',
+        template: '<%= dirs.source %>/docTemplate',
         jsdoc: '<%= dirs.components %>/JSDoc/jsdoc',
         src: ['<%= dirs.source %>/js/**'],
         dest: '<%= dirs.build %>/jsdoc'
