@@ -208,9 +208,8 @@ function buildNav(members) {
 exports.publish = function(taffyData, opts, tutorials) {
     data = taffyData;
 
-    var defaultTemplatePath = 'templates/default',
-        templatePath = (opts.template) ? opts.template : defaultTemplatePath;
-    view = new template.Template(env.dirname + '/' + templatePath + '/tmpl');
+    var templatePath = opts.template;
+    view = new template.Template(templatePath + '/tmpl');
     
     // set up templating
     view.layout = 'layout.tmpl';
@@ -256,7 +255,7 @@ exports.publish = function(taffyData, opts, tutorials) {
     fs.mkPath(outdir);
 
     // copy static files to outdir
-    var fromDir = env.dirname.replace(/\\/g, "/") + '/' + templatePath + '/static',
+    var fromDir = templatePath + '/static',
         staticFiles = fs.ls(fromDir, 3);
         
     staticFiles.forEach(function(fileName) {
