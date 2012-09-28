@@ -2,6 +2,16 @@
  * Class: .alert
  * Used for alert messages
  */
+
+.alert,
+.alert.large > strong { 
+  background-position: 0.5rem 0.5rem;
+  background-repeat: no-repeat;
+  .background-size(1rem 1rem);
+}
+
+
+
 .alert {
   margin: 0.5rem 0;
   padding: 0.5rem;
@@ -10,20 +20,16 @@
   border: @px solid @alert-blue-border-color;
   background-color: @alert-blue-background-color;  
   
-  background-position: 0.5rem 0.5rem;
-  background-repeat: no-repeat;
-  .background-size(1rem 1rem);
-  
   font-size: 0.875rem; // 14px
   
-  .close {
+  > .close {
     float: right;
     font-weight: bold;
     padding: 0.125em;
   }
   
   // Heading text
-  strong {
+  > strong {
     display: inline-block;
     margin-right: 0.25rem;
     text-transform: uppercase;
@@ -32,7 +38,7 @@
   // Feels weird, but we want to use a div here in case
   // the content has a block level element
   // We'll make it inline so it renders right
-  div {
+  > div {
     display: inline;
   }
   
@@ -77,9 +83,105 @@
   }
   
   &.info {
-    background-color: @alert-blue-background-color;
-    border-color: @alert-blue-border-color;
-    
     background-image: url('../images/components/alert/i.png');
+  }
+  
+  // Large alerts
+  &.large {
+    position: relative;
+    
+    padding: 0;
+    
+    background-image: none;
+    
+    > .close {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+    }
+    
+    > strong {
+      display: block;
+      height: @alert-header-height;
+      margin: 0;
+      
+      line-height: @alert-header-height;
+      text-transform: none;
+
+      border-bottom: @px solid @alert-blue-border-color;
+    }
+
+    > div { 
+      display: block;
+      padding: 0.5rem;
+    }
+    
+    &.error,
+    &.notice,
+    &.success,
+    &.help,
+    &.info {
+      > strong {
+        padding-left: 2rem;
+      }
+    }
+
+    &.error,
+    &.notice {
+      > strong {
+        background-image: url('../images/components/alert/exclaimation.png');
+      }
+    }
+
+    &.error {
+      background-color: @alert-red-background-light-color;
+      
+      > strong {
+        background-color: @alert-red-background-color;
+        border-color: @alert-red-border-color;
+      }
+    }
+
+    &.notice {
+      background-color: @alert-yellow-background-light-color;
+    
+      > strong {
+        background-color: @alert-yellow-background-color;
+        border-color: @alert-yellow-border-color;
+      }
+    }
+
+    &.success {
+      background-color: @alert-green-background-light-color;
+    
+      > strong {
+        background-color: @alert-green-background-color;
+        border-color: @alert-green-border-color;
+
+        background-image: url('../images/components/alert/check.png');
+      }
+    }
+
+    &.help,
+    &.info {
+      background-color: @alert-blue-background-light-color;
+    
+      > strong {
+        background-color: @alert-blue-background-color;
+        border-color: @alert-blue-border-color;
+      }
+    }
+
+    &.help {
+      > strong {
+        background-image: url('../images/components/alert/question.png');
+      }
+    }
+
+    &.info {
+      > strong {
+        background-image: url('../images/components/alert/i.png');
+      }
+    }
   }
 }

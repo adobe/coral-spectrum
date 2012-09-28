@@ -61,7 +61,8 @@ alert.hide();
       @param {String} [options.heading=Type, capitalized]   Title of the alert (HTML)
       @param {String} options.content                       Content of the alert (HTML)
       @param {Boolean} options.closable                     Array of button descriptors
-      @param {String} [options.type=error]                  Type of Alert to display. One of error, notice, success, help, or info
+      @param {String} [options.size=small]                  Size of the alert. Either large or small.
+      @param {String} [options.type=error]                  Type of alert to display. One of error, notice, success, help, or info
     */
     construct: function(options) {
       // Catch clicks to dismiss alert
@@ -75,22 +76,40 @@ alert.hide();
       this.$element.on('change:content', this._setContent.bind(this));
       this.$element.on('change:type', this._setType.bind(this));
       this.$element.on('change:closable', this._setClosable.bind(this));
+      this.$element.on('change:size', this._setSize.bind(this));
+      
+      // Read in options "set" by markup so we don't override the values they set
+      $.each(this._validTypes, function(index, type) {
+        if (this.$element.hasClass(type)) {
+          this.options.type = type;
+          return false;
+        }
+      }.bind(this));
+      
+      $.each(this._validSizes, function(index, size) {
+        if (this.$element.hasClass(size)) {
+          this.options.size = size;
+          return false;
+        }
+      }.bind(this));
       
       // Render template, if necessary
       if (this.$element.children().length === 0) {
         // Set default heading
         this.options.heading = this.options.heading === undefined ? this.options.type.toUpperCase() : this.options.heading;
-      
+        
         this.$element.html(CUI.Templates['alert'](this.options));
-        this.applyOptions(true);
+        
+        this.applyOptions();
       }
       else {
-        this.applyOptions();
+        this.applyOptions(true);
       }
     },
     
     defaults: {
       type: 'error',
+      size: 'small',
       heading: undefined,
       visible: true,
       closable: true
@@ -104,6 +123,11 @@ alert.hide();
       'info'
     ],
     
+    _validSizes: [
+      'small',
+      'large'
+    ],
+    
     applyOptions: function(partial) {
       if (!partial) {
         this._setHeading();
@@ -111,6 +135,7 @@ alert.hide();
       }
       this._setClosable();
       this._setType();
+      this._setSize();
     },
     
     /** @ignore */
@@ -136,6 +161,16 @@ alert.hide();
 
       // Add new type
       this.$element.addClass(this.options.type);
+    },
+    
+    /** @ignore */
+    _setSize: function() {
+      if (typeof this.options.size !== 'string' || this._validSizes.indexOf(this.options.size) === -1) return;
+      
+      if (this.options.size === 'small')
+        this.$element.removeClass('large');
+      else
+        this.$element.addClass('large');
     },
     
     /** @ignore */
