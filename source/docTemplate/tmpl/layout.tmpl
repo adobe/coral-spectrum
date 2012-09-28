@@ -46,8 +46,12 @@
 
     <div class="content">
         <!--<?js if (title) { ?><h1 class="line"><?js= title ?></h1><?js } ?>-->
-    
-        <?js= content ?>
+        <?js if (title === 'Index') { ?>
+          <?js= this.partial('index.tmpl') ?>
+        <?js }
+        else { ?>
+          <?js= content ?>
+        <?js } ?>
     </div>
   </div>
 
