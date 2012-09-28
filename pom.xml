@@ -31,7 +31,7 @@
     <!-- P R O J E C T                                                           -->
     <!-- ======================================================================= -->
     <artifactId>com.adobe.coralui-pkg</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
     <packaging>content-package</packaging>
 
     <name>Adobe Reef / CoralUI Content Package</name>
@@ -40,7 +40,8 @@
         <connection>scm:git:git@git.corp.adobe.com:Reef/CoralUI.git</connection>
         <developerConnection>scm:git:git@git.corp.adobe.com:Reef/CoralUI.git</developerConnection>
         <url>https://git.corp.adobe.com/Reef/CoralUI/master</url>
-    </scm>
+      <tag>com.adobe.coralui-pkg-0.1.0</tag>
+  </scm>
 
     <properties>
         <content.dir>${basedir}/content</content.dir>
