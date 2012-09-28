@@ -9,7 +9,7 @@
 ul.grid {
   list-style: none;
   padding: 0;
-  margin: 0.5rem;
+  margin: 0; // given by @grid-spacing
   
   &.edit {
     /// TODO: add diagonally striped grid using gradients or image
@@ -19,8 +19,8 @@ ul.grid {
   li {
     display: inline-block;
     // TBD: decide default width/heights
-    height: 6rem;
-    width: 6rem;
+    height: 16rem;
+    width: 16rem;
     padding: 0;
     margin: @grid-spacing;
     
