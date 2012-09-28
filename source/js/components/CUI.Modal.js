@@ -255,6 +255,9 @@ modal.hide();
       this.$element.css('visibility', 'visible').css('left', '50%').hide();
       
       this.$element.addClass('in').attr('aria-hidden', false).fadeIn().focus();
+      
+      // IE9 fix for modals that suddenly expand
+      this.$element.css('width', this.$element.innerWidth());
     },
       
     /** @ignore */
