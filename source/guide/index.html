@@ -28,7 +28,7 @@
     </nav>
 
     <div class="drawer">
-      <div class="badge">v0.1</div>
+      <div class="badge">v0.1.1</div>
     </div>
 
   </header>
@@ -746,8 +746,7 @@
                   <p>See <a href="jsdoc/index.html">the documentation</a> for more examples.</p>
                 </div>
                 <div class="modal-footer">
-                  <button data-dismiss="modal">Close</button>
-                  <button class="primary" data-dismiss="modal">Save</button>
+                  <button data-dismiss="modal">Close</button><button class="primary" data-dismiss="modal">Save</button>
                 </div>
               </div>
 
@@ -796,33 +795,34 @@
           <div class="componentSample">
             <div class="example">
               <div class="alert error">
-                <div class="close">&times;</div>
-                <div class="icon"></div><strong>ERROR</strong>Uh oh, something went wrong with the whozit!
+                <button class="close" data-dismiss="alert">&times;</button>
+                <strong>ERROR</strong><div>Uh oh, something went wrong with the whozit!</div>
               </div>
 
               <div class="alert notice">
-                <div class="close">&times;</div>
-                <div class="icon"></div><strong>NOTICE</strong>Something is about to go wrong with the whozit!
+                <button class="close" data-dismiss="alert">&times;</button>
+                <strong>NOTICE</strong><div>Something is about to go wrong with the whozit!</div>
               </div>
 
               <div class="alert success">
-                <div class="close">&times;</div>
-                <div class="icon"></div><strong>Success</strong>Everything went better than expected with the whozit.
+                <button class="close" data-dismiss="alert">&times;</button>
+                <strong>Success</strong><div>Everything went better than expected with the whozit.</div>
               </div>
 
               <div class="alert help">
-                <div class="close">&times;</div>
-                <div class="icon"></div><strong>HELP</strong>If you are struggling with the whozit, read <a href="#">the manual</a>.
+                <button class="close" data-dismiss="alert">&times;</button>
+                <strong>HELP</strong><div>If you are struggling with the whozit, read <a href="#">the manual</a>.</div>
               </div>
 
               <div class="alert info">
-                <div class="close">&times;</div>
-                <div class="icon"></div><strong>INFO</strong>For great success, configure the whozit correctly.
+                <button class="close" data-dismiss="alert">&times;</button>
+                <strong>INFO</strong><div>For great success, configure the whozit correctly.</div>
               </div>
             </div>
             <pre class="prettyprint linenums">
 &lt;div class=&quot;alert error&quot;&gt;
-  &lt;strong&gt;Process Failed&lt;/strong&gt;Uh oh, something went wrong with the whozit.
+  &lt;button class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;&amp;times;&lt;/button&gt;
+  &lt;strong&gt;ERROR&lt;/strong&gt;&lt;div&gt;Uh oh, something went wrong with the whozit!&lt;/div&gt;
 &lt;/div&gt;
 </pre>
           </div>

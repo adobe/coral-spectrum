@@ -1,5 +1,7 @@
 (function($) {
   CUI.Modal = new Class(/** @lends CUI.Modal# */{
+    toString: 'Modal',
+    
     extend: CUI.Widget,
     /**
       @extends CUI.Widget
@@ -126,14 +128,15 @@ modal.hide();
       @desc Creates a new modal dialog     
       @constructs
       
-      @param {Object} options             Component options
-      @param {Mixed} options.element     jQuery selector or DOM element to use for dialog
-      @param {String} options.heading     Title of the modal dialog (HTML)
-      @param {String} options.content     Content of the dialog (HTML)
-      @param {Array} [options.buttons]      Array of button descriptors
-      @param {String} [options.remote]      URL to asynchronously load content from the first time the modal is shown
+      @param {Object} options                   Component options
+      @param {Mixed} options.element            jQuery selector or DOM element to use for dialog
+      @param {String} options.heading           Title of the modal dialog (HTML)
+      @param {String} options.content           Content of the dialog (HTML)
+      @param {String} [options.type=default]    Type of dialog to display. One of default, error, notice, success, help, or info
+      @param {Array} [options.buttons]          Array of button descriptors
+      @param {String} [options.remote]          URL to asynchronously load content from the first time the modal is shown
       @param {Boolean} [options.keyboard=true]  True to hide modal when escape key is pressed
-      @param {Mixed} [options.backdrop=static]     False to not display transparent underlay, True to display and close when clicked, 'static' to display and not close when clicked
+      @param {Mixed} [options.backdrop=static]  False to not display transparent underlay, True to display and close when clicked, 'static' to display and not close when clicked
       @param {Mixed} [options.visible=true]     True to display immediately, False to defer display until show() called
      */
     construct: function(options) {
@@ -165,16 +168,10 @@ modal.hide();
       // Render template, if necessary
       if (this.$element.children().length === 0) {
         this.$element.html(CUI.Templates['modal']($.extend({}, this.options, { buttons: '' })));
-        // Only set buttons, heading/content are applied when template is rendered
-        this._setButtons();
-        this._setType();
+        this.applyOptions(true);
       }
       else {
-        // Set all options
-        this._setContent();
-        this._setHeading();
-        this._setButtons();
-        this._setType();
+        this.applyOptions();
       }
     },
     
@@ -195,6 +192,16 @@ modal.hide();
       'help',
       'info'
     ],
+    
+    applyOptions: function(partial) {
+      // Set all options
+      if (!partial) {
+        this._setContent();
+        this._setHeading();
+      }
+      this._setButtons();
+      this._setType();
+    },
     
     /** @ignore */
     _setType: function() {
@@ -357,7 +364,7 @@ modal.hide();
     }
   });
 
-  CUI.util.jqueryPluginFromClass('modal', CUI.Modal);
+  CUI.util.plugClass(CUI.Modal);
 
   // Data API
   $(function() {
@@ -370,9 +377,6 @@ modal.hide();
       // Pass configuration based on data attributes in the triggering link
       var href = $trigger.attr('href');
       var options = $.extend({ remote: !/#/.test(href) && href }, $target.data(), $trigger.data());
-
-      // Stop links from navigating
-      e.preventDefault();
 
       // Parse buttons
       if (typeof options.buttons === 'string') {
@@ -391,9 +395,12 @@ modal.hide();
           $trigger.focus();
       });
       
-      // Perform visibility toggle if we're creating a new instance
+      // Perform visibility toggle if we're not creating a new instance
       if (instance)
         $target.data('modal').set({ visible: show });
+        
+      // Stop links from navigating
+      e.preventDefault();
     });
   });
 }(window.jQuery));

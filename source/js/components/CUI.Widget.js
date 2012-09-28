@@ -1,4 +1,6 @@
 CUI.Widget = new Class(/** @lends CUI.Widget# */{
+  toString: 'Widget',
+  
   /**
     @classdesc The base class for all widgets
     
@@ -15,6 +17,9 @@ CUI.Widget = new Class(/** @lends CUI.Widget# */{
     // Store jQuery object
     this.$element = $(options.element);
     
+    // Add instance to element's data
+    this.$element.data(CUI.util.deCapitalize(this.toString()), this);
+
     // Bind functions commonly called by listeners
     this.bind(this.hide);
     this.bind(this.show);
@@ -25,6 +30,7 @@ CUI.Widget = new Class(/** @lends CUI.Widget# */{
       this[evt.value ? '_show' : '_hide']();
     }.bind(this));
     
+    // TBD: break out into applyOptions? Could cause problems if not called
     if (this.options.visible) {
       // Show immediately
       this.options.visible = false;

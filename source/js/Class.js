@@ -238,6 +238,8 @@ var Class;
 
       return instance;
     };
+    
+    instanceGenerator.toString = prototype.toString;
 
     // Set the prototype of our instance generator to the prototype of our new class so things like MyClass.prototype.method.apply(this) work
     instanceGenerator.prototype = prototype;
