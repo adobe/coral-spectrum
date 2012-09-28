@@ -357,27 +357,7 @@ modal.hide();
     }
   });
 
-  // jQuery plugin
-  $.fn.modal = function(optionsIn) {
-    return this.each(function () {
-      var $this = $(this);
-      
-      // Get instance, if present already
-      var instance = $this.data('modal');
-      
-      // Combine defaults, data, options, and element config
-      var options = $.extend({}, $this.data(), typeof optionsIn === 'object' && optionsIn, { element: this });
-    
-      if (!instance)
-        $this.data('modal', (instance = new CUI.Modal(options)));
-      
-      if (typeof optionsIn === 'string') // Call method
-        instance[optionsIn]();
-      else if ($.isPlainObject(optionsIn)) // Apply options
-        instance.set(optionsIn);
-    });
-  };
-  $.fn.modal.Constructor = CUI.Modal;
+  CUI.util.jqueryPluginFromClass('modal', CUI.Modal);
 
   // Data API
   $(function() {

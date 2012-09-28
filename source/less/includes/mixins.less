@@ -155,3 +155,22 @@
   color: @textColor;
   text-shadow: 0 0 @radius @glowColor;
 }
+
+/**
+ * Mixin: .clearfix
+ * Force container div to adjust to height of floated element.
+ */
+.clearfix {
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    content: "";
+    // Fixes Opera/contenteditable bug:
+    // http://nicolasgallagher.com/micro-clearfix-hack/#comment-36952
+    line-height: 0;
+  }
+  &:after {
+    clear: both;
+  }
+}

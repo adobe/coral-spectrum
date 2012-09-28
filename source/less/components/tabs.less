@@ -1,0 +1,113 @@
+.tabs {
+  > nav {
+    .clearfix();
+
+    > a {
+      color: @tab-disabled-font-color;
+      float: left;
+      padding: 0.5rem 0.75rem 0.5rem 0.75rem;
+      margin: 0 0.125rem -0.0625rem 0;
+      white-space: nowrap;
+
+      &.active {
+        border: 0.0625rem solid @tab-outline-color;
+        border-bottom: none;
+        .gradient(@tab-background-gradient-start-color, @tab-background-gradient-end-color);
+      }
+      
+      &.active, &:hover {
+        color: @font-base-color;
+        text-decoration: none;
+      }
+
+      &.disabled {
+        color: @tab-disabled-font-color;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+
+      &.active {
+        font-weight: bold;
+      }
+    }
+  }
+
+  > section {
+    overflow: auto;
+    display: none;
+    background-color: @tab-background-gradient-end-color;
+    margin: 0;
+    border: 0.0625rem solid @tab-outline-color;
+    padding: 1rem;
+
+    &.active {
+      display: block;
+    }
+  }
+
+  &.white {
+    > nav > a.active {
+      .gradient(@tab-white-background-gradient-start-color, @tab-white-background-gradient-end-color);
+    }
+
+    > section {
+      background-color: @tab-white-background-gradient-end-color;
+    }
+  }
+
+  &.nav {
+    > nav {
+      border-bottom: 0.0625rem solid @tab-outline-color;
+
+      > a {
+        margin-bottom: -0.125rem; // TODO breaks slightly at higher base font sizes
+
+        &.active {
+          .gradient(lighten(@body-background-color, 7%), @body-background-color);
+          border-bottom: 2px solid @body-background-color;
+        }
+
+        &:first-child {
+          margin-left: 1.25rem;
+        }
+      }
+    }
+
+    > section {
+      border-left: none;
+      border-right: none;
+      border-bottom: none;
+      border-color: @tab-nav-second-border-color;
+      background-color: @body-background-color;
+    }
+  }
+
+  &.stacked {
+
+    > nav {
+      float: left;
+      display: block;
+      .clearfix();
+
+      > a {
+        float: none;
+        display: block;
+        margin: 0 -0.0625rem 0.125rem 0;
+
+        &.active {
+          border-bottom: 0.0625rem solid @tab-outline-color;
+          border-right: none;
+          .gradient(@tab-white-background-gradient-end-color, @tab-white-background-gradient-end-color);
+        }
+      }
+    }
+
+    > section {
+      float: none;
+      clear: none;
+      background-color: @tab-white-background-gradient-end-color;
+    }
+  }
+}
