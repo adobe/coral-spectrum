@@ -12,7 +12,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     // Meta and build configuration
     meta: {
-      version: '0.1.0',
+      version: '0.1.1',
       appName: 'CoralUI',
       appWebSite: 'git.corp.adobe.com/Reef/CoralUI'
     },
@@ -124,17 +124,34 @@ module.exports = function(grunt) {
     },
     
     compress: {
-      zip: {
+      release: {
         options: {
           mode: 'zip'
         },
         files: {
-          '<%= dirs.build %>/cui.zip': [
-            '<%= dirs.build %>/js/**',
+          '<%= dirs.build %>/cui-<%= meta.version %>.zip': [
             '<%= dirs.build %>/css/**',
-            '<%= dirs.build %>/less/**',
+            '<%= dirs.build %>/fonts/**',
             '<%= dirs.build %>/images/**',
-            '<%= dirs.build %>/fonts/**'
+            '<%= dirs.build %>/js/**',
+            '<%= dirs.build %>/less/**'
+          ]
+        }
+      },
+      full: {
+        options: {
+          mode: 'zip'
+        },
+        files: {
+          '<%= dirs.build %>/cui-<%= meta.version %>-full.zip': [
+            '<%= dirs.build %>/css/**',
+            '<%= dirs.build %>/examples/**',
+            '<%= dirs.build %>/fonts/**',
+            '<%= dirs.build %>/images/**',
+            '<%= dirs.build %>/js/**',
+            '<%= dirs.build %>/jsdoc/**',
+            '<%= dirs.build %>/less/**',
+            '<%= dirs.build %>/index.html'
           ]
         }
       }
