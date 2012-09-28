@@ -48,4 +48,4 @@ CUI.util.capitalize = function(str) {
 
     $.fn[pluginName].Constructor = PluginClass;
   };
-}(jQuery));
+}(window.jQuery));
