@@ -7,7 +7,7 @@
   });
 
   // jQuery plugin
-  CUI.util.jqueryPluginFromClass('tabs', CUI.Tabs);
+  CUI.util.plugClass(CUI.Tabs);
 
   $(function() {
     //$('.tabs > ')
