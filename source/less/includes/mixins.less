@@ -152,6 +152,6 @@
  * Make text or a font icon glow
  */
 .glow-text(@radius: 0.357rem, @glowColor: @focus-glow-color, @textColor: @focus-border-color) {
-  color: @textColor;
+  color: darken(@textColor, 35%);
   text-shadow: 0 0 @radius @glowColor;
 }
