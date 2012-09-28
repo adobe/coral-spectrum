@@ -3,43 +3,36 @@
  * Appears at the top of each page
  */
 header {
-  /*
-  // Breaks flexbox in firefox, not necessary for layout
-  position: absolute;
-  left: 0;
-  right: 0;
-  */
+  position: relative;
   
   width: 100%; // Otherwise does not span screen width in Firefox
-
-  .flex;                // be a flex box
-  .flex-direction(row); // span horizontally
-  .flex-align(center);  // center flex items vertically
-
   height: @header-height;
+  
   background-color: @header-background-color;
 
   .box-shadow(0 0.1rem 0.45rem rgba(0, 0, 0, .35)); // TBD: make sure this matches mocks...
 
   color: @header-nav-font-color;
 
+  white-space: nowrap;
+
   div.logo {
+    display: inline-block;
+    height: @header-height;
     padding: 0 1rem;
 
-    .box-sizing(border-box);
+    line-height: @header-height;
     text-align: center;
 
     img {
-      vertical-align: -0.45rem; // Make logo text line up
-
       height: @header-logo-size;
       width: @header-logo-size; 
     }
   }
 
   nav {
-    .flex-ratio(4);
-
+    display: inline-block;
+    
     a {
       display: inline-block;
       height: @header-height;
@@ -66,6 +59,14 @@ header {
   }
 
   div.drawer {
+    position: absolute;
+    right: 0;
+    top: 0;
+    
+    display: inline-block;
+    height: @header-height;
     padding-right: 1em;
+    
+    line-height: @header-height;
   }
 }

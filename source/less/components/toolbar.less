@@ -6,12 +6,11 @@ div.toolbar {
   border-bottom: @px solid @toolbar-border-color;
   margin: 0.25rem; // TODO: get exact margins
   
-  .flex;                // be a flex box
-  .flex-direction(row); // span horizontally
-  .flex-align(center);  // center flex items vertically
+  // Don't use flexbox here. inline-block + absolute positioning might work well enough
+  // See header.less for an example of the above technique
   
   div:first-child {
-    .flex-ratio(2);
+    
   }
   
   div.buttons {
