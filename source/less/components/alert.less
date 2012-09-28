@@ -3,21 +3,18 @@
  * Used for alert messages
  */
 .alert {
-  background-color: @alert-blue-background-color;
-  border: @px solid @alert-blue-border-color;
-  
   margin: 0.5rem 0;
   padding: 0.5rem;
+
+  // Default is blue
+  border: @px solid @alert-blue-border-color;
+  background-color: @alert-blue-background-color;  
   
-  font-size: 0.8125rem; // 13px
+  background-position: 0.5rem 0.5rem;
+  background-repeat: no-repeat;
+  .background-size(1rem 1rem);
   
-  &.error,
-  &.notice,
-  &.success,
-  &.help,
-  &.info {
-    //padding-left: 2rem;
-  }
+  font-size: 0.875rem; // 14px
   
   .close {
     float: right;
@@ -25,31 +22,31 @@
     padding: 0.125em;
   }
   
+  // Heading text
   strong {
-    // Heading text
+    display: inline-block;
     margin-right: 0.25rem;
     text-transform: uppercase;
   }
   
-  .icon {
-    // Temporary until we get icons
-    display: inline-block;
-    width: 1rem;
-    height: 1rem;
-    margin-right: 0.5rem;
-    
-    background-position: center center;
-    background-repeat: no-repeat;
-    .background-size(100% 100%);
-    
-    vertical-align: -0.175rem;
+  // Feels weird, but we want to use a div here in case
+  // the content has a block level element
+  // We'll make it inline so it renders right
+  div {
+    display: inline;
+  }
+  
+  &.error,
+  &.notice,
+  &.success,
+  &.help,
+  &.info {
+    padding-left: 2rem;
   }
   
   &.error,
   &.notice {
-   .icon {
-      background-image: url('../images/components/alert/exclaimation.png');
-    }
+    background-image: url('../images/components/alert/exclaimation.png');
   }
   
   &.error {
@@ -66,26 +63,23 @@
     background-color: @alert-green-background-color;
     border-color: @alert-green-border-color;
     
-   .icon {
-      background-image: url('../images/components/alert/check.png');
-    }
+    background-image: url('../images/components/alert/check.png');
   }
   
-  &.help {
+  &.help,
+  &.info {
     background-color: @alert-blue-background-color;
     border-color: @alert-blue-border-color;
-    
-   .icon {
-      background-image: url('../images/components/alert/question.png');
-    }
+  }
+  
+  &.help{
+    background-image: url('../images/components/alert/question.png');
   }
   
   &.info {
     background-color: @alert-blue-background-color;
     border-color: @alert-blue-border-color;
     
-   .icon {
-      background-image: url('../images/components/alert/i.png');
-    }
+    background-image: url('../images/components/alert/i.png');
   }
 }
