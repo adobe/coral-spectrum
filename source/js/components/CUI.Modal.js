@@ -128,15 +128,15 @@ modal.hide();
       @desc Creates a new modal dialog     
       @constructs
       
-      @param {Object} options             Component options
-      @param {Mixed} options.element     jQuery selector or DOM element to use for dialog
-      @param {String} options.heading     Title of the modal dialog (HTML)
-      @param {String} options.content     Content of the dialog (HTML)
-      @param {String} options.type        Type of dialog to display. One of default, error, notice, success, help, or info
-      @param {Array} [options.buttons]      Array of button descriptors
-      @param {String} [options.remote]      URL to asynchronously load content from the first time the modal is shown
+      @param {Object} options                   Component options
+      @param {Mixed} options.element            jQuery selector or DOM element to use for dialog
+      @param {String} options.heading           Title of the modal dialog (HTML)
+      @param {String} options.content           Content of the dialog (HTML)
+      @param {String} [options.type=default]    Type of dialog to display. One of default, error, notice, success, help, or info
+      @param {Array} [options.buttons]          Array of button descriptors
+      @param {String} [options.remote]          URL to asynchronously load content from the first time the modal is shown
       @param {Boolean} [options.keyboard=true]  True to hide modal when escape key is pressed
-      @param {Mixed} [options.backdrop=static]     False to not display transparent underlay, True to display and close when clicked, 'static' to display and not close when clicked
+      @param {Mixed} [options.backdrop=static]  False to not display transparent underlay, True to display and close when clicked, 'static' to display and not close when clicked
       @param {Mixed} [options.visible=true]     True to display immediately, False to defer display until show() called
      */
     construct: function(options) {
@@ -168,7 +168,6 @@ modal.hide();
       // Render template, if necessary
       if (this.$element.children().length === 0) {
         this.$element.html(CUI.Templates['modal']($.extend({}, this.options, { buttons: '' })));
-        // Only set buttons, heading/content are applied when template is rendered
         this.applyOptions(true);
       }
       else {
