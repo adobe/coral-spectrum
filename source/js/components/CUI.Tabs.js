@@ -1,8 +1,66 @@
 (function($) {
   CUI.Tabs = new Class(/** @lends CUI.Tabs# */{
+    toString: 'Tabs',
     extend: CUI.Widget,
     construct: function(options) {
-      // TODO
+      // Add tabs class to give styling
+      this.$element.addClass('tabs');
+      
+      // Accessibility
+      this.$element.attr('role', 'tabpanel');
+
+      // sane defaults for the options
+      this.options = $.extend({}, {tabs: []}, this.options);
+
+      if (this.options.tabs.length > 0) {
+        var hasActive = false;
+
+        this.options.tabs.forEach(function(t) { 
+          if (t.active) {
+            hasActive = true;
+            return false;
+          }
+        });
+
+        if (!hasActive) {
+          this.options.tabs[0].active = true;
+        }
+      }
+
+      // Render template, if necessary
+      if (this.$element.children().length === 0) {
+        this.$element.html(CUI.Templates['tabs'](this.options));
+        this.applyOptions(true);
+      } else {
+        this.applyOptions();
+      }
+    },
+    _types: [
+      'white',
+      'nav',
+      'stacked'
+    ],
+    applyOptions: function(partial) {
+      // Set all options
+      if (!partial) {
+        //this._setContent();
+      }
+      this._setType();
+    },
+    /** @ignore */
+    _setType: function() {
+      if (typeof this.options.type !== 'string' || this._types.indexOf(this.options.type) === -1) return;
+      
+      // Remove old type
+      this.$element.removeClass(this._types.join(' '));
+
+      // Add new type
+      this.$element.addClass(this.options.type);
+    },
+    _setContent: function() {
+      if (typeof this.options.content !== 'string') return;
+      
+      this.$element.find('.modal-body').html(this.options.content);
     }
   });
 
@@ -48,7 +106,7 @@
       // and show/hide the relevant tabs
       $trigger.siblings('a[data-toggle="tab"]').removeClass('active');
       $trigger.addClass('active');
-      $target.siblings('section').removeClass('active');
+      $target.siblings('section').removeClass('active').attr('aria-hidden', true);
       $target.addClass('active');
     });
   });

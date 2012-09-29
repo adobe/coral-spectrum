@@ -1,0 +1,8 @@
+<nav role="tablist">
+  {{#each tabs}}
+  <a href="{{#if this.remote}}{{this.remote}}{{else}}#{{this.id}}{{/if}}" {{#if this.remote}}data-target="#{{this.id}}"{{/if}} data-toggle="tab" role="tab" class="{{#if this.active}}active{{/if}} {{#if this.disabled}}disabled{{/if}}">{{this.label}}</a>
+  {{/each}}
+</nav>
+{{#each tabs}}
+<section {{#if this.id}}id="{{this.id}}" aria-labelledby="{{this.id}}{{/if}} role="tabpanel" {{#if this.active}}class="active"{{/if}}>{{this.content}}</section>
+{{/each}}
