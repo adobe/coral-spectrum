@@ -273,12 +273,12 @@ tabs.hide();
   $(function() {
     // onload handle activating tabs, so remote content is loaded if set to active initially
     // this also handles tab setups that do not have the correct aria fields, &c.
-    $('div.tabs').each(function() {
+    $('.tabs').each(function() {
       var $element = $(this), $trigger;
-
+      
       // find the first active tab (to trigger a load),
       // or set the first tab to be active
-      if (!($trigger = $element.find('nav > a.active').first()))
+      if (($trigger = $element.find('nav > a.active').first()).length === 0)
         $trigger = $element.find('nav > a').first();
 
       _activateTab($trigger);

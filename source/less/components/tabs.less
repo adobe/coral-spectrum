@@ -3,8 +3,8 @@
     .clearfix();
 
     > a {
-      color: @tab-inactive-font-color;
-      .light-font;
+      .light;
+      color: @font-captions-help-color;
       float: left;
       padding: 0.5rem 0.75rem 0.5rem 0.75rem;
       margin: 0 0.125rem -0.0625rem 0;
@@ -34,7 +34,7 @@
       }
 
       &.active {
-        .base-font;
+        .regular;
         color: @tab-active-font-color;
       }
     }
@@ -92,7 +92,6 @@
   }
 
   &.stacked {
-    .clearfix();
     display: table;
 
     > nav {
