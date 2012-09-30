@@ -3,7 +3,8 @@
     .clearfix();
 
     > a {
-      color: @tab-disabled-font-color;
+      color: @tab-inactive-font-color;
+      .light-font;
       float: left;
       padding: 0.5rem 0.75rem 0.5rem 0.75rem;
       margin: 0 0.125rem -0.0625rem 0;
@@ -16,7 +17,6 @@
       }
       
       &.active, &:hover {
-        color: @font-base-color;
         text-decoration: none;
       }
 
@@ -24,12 +24,18 @@
         color: @tab-disabled-font-color;
 
         &:hover {
-          text-decoration: none;
+          cursor: default;
+          color: @tab-disabled-font-color;
         }
       }
 
+      &:hover {
+        color: @tab-hover-font-color;
+      }
+
       &.active {
-        font-weight: bold;
+        .base-font;
+        color: @tab-active-font-color;
       }
     }
   }
@@ -40,7 +46,7 @@
     background-color: @tab-background-gradient-end-color;
     margin: 0;
     border: 0.0625rem solid @tab-outline-color;
-    padding: 1rem;
+    padding: 0.85rem;
 
     &.active {
       display: block;
@@ -62,6 +68,7 @@
       border-bottom: 0.0625rem solid @tab-outline-color;
 
       > a {
+        font-size: @tab-nav-font-size;
         margin-bottom: -0.125rem; // TODO breaks slightly at higher base font sizes
 
         &.active {
@@ -86,9 +93,11 @@
 
   &.stacked {
     .clearfix();
+    display: table;
+
     > nav {
       float: left;
-      display: block;
+      display: table-cell;
 
       > a {
         float: none;
@@ -100,6 +109,10 @@
           border-right: none;
           .gradient(@tab-white-background-gradient-end-color, @tab-white-background-gradient-end-color);
         }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
       }
     }
 
@@ -107,6 +120,12 @@
       float: none;
       clear: none;
       background-color: @tab-white-background-gradient-end-color;
+
+      &.active {
+        display: table-cell;
+        vertical-align: top;
+        width: 100%;
+      }
     }
   }
 }

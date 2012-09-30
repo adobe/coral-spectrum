@@ -8,9 +8,27 @@
 
 // Fonts
 @font-base-family: AdobeClean;
+@font-base-weight: normal;
 @font-base-color: rgb(51, 51, 51);
 @font-secondary-color: rgb(150, 150, 150);
+@font-light-family: AdobeCleanLight;
+@font-light-weight: lighter;
+@font-condensed-family: AdobeCleanCondensed;
+@font-condensed-weight: normal;
 
+// font mixins
+.base-font {
+  font-family: @font-base-family;
+  font-weight: @font-base-weight;
+}
+.light-font {
+  font-family: @font-light-family;
+  font-weight: @font-light-weight;
+}
+.condensed-font {
+  font-family: @font-condensed-family;
+  font-weight: @font-condensed-weight;
+}
 
 // Links
 @link-color: rgb(100, 135, 195);
@@ -210,7 +228,11 @@
 @tab-outline-color: rgba(0, 0, 0, 0.20);
 @tab-background-gradient-start-color: rgb(240, 240, 240);
 @tab-background-gradient-end-color: rgb(230, 230, 230);
-@tab-disabled-font-color: rgb(180, 180, 180);
+@tab-active-font-color: rgb(105, 105, 105);
+@tab-hover-font-color: rgb(30, 30, 30);
+@tab-inactive-font-color: rgb(135, 135, 135);
+@tab-disabled-font-color: rgb(195, 195, 195);
 @tab-white-background-gradient-start-color: rgb(255, 255, 255);
 @tab-white-background-gradient-end-color: rgb(245, 245, 245);
 @tab-nav-second-border-color: rgb(255, 255, 255, 0.8);
+@tab-nav-font-size: 1.125rem;

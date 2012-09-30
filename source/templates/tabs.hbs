@@ -1,6 +1,6 @@
 <nav role="tablist">
   {{#each tabs}}
-  <a href="{{#if this.remote}}{{this.remote}}{{else}}#{{this.id}}{{/if}}" {{#if this.remote}}data-target="#{{this.id}}"{{/if}} data-toggle="tab" role="tab" class="{{#if this.active}}active{{/if}} {{#if this.disabled}}disabled{{/if}}">{{this.label}}</a>
+  <a href="{{#if this.remote}}{{this.remote}}{{else}}#{{/if}}" {{#if this.id}}data-target="#{{this.id}}"{{/if}} data-toggle="tab" role="tab" class="{{#if this.active}}active{{/if}} {{#if this.disabled}}disabled{{/if}}">{{this.label}}</a>
   {{/each}}
 </nav>
 {{#each tabs}}
