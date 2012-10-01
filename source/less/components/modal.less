@@ -17,6 +17,7 @@
   bottom: 0;
   left: 0;
   z-index: @zindexModalBackdrop;
+
   background-color: @modal-underlay-background-color;
 }
 
@@ -26,9 +27,10 @@
   top: 50%;
   left: 50%;
   z-index: @zindexModal;
+  
+  display: none;
   min-width: 20rem;
   max-width: 90%;
-  display: none;
   
   overflow: auto;
   
@@ -40,48 +42,55 @@
   .background-clip(padding-box);
   
   .modal-header {
+    position: relative;
+    
+    .box-sizing(border-box);
+    width: 100%;
+    height: @modal-header-height;
+    
     background: @modal-header-background-color;
 
     border: @px solid @modal-outline-color;
     border-bottom: 0;
     
-    .box-sizing(border-box);
-    width: 100%;
-    
-    .flex;                // be a flex box
-    .flex-direction(row); // span horizontally
-    .flex-align(center);  // center flex items vertically
-  
     // Bottom border, easiest with a box shadow
     .box-shadow(inset 0 -1*@px 0 @modal-header-border-color);
     
     h2 {
+      position: absolute;
+      left: 0;
+      top: 0;
+      
+      .box-sizing(border-box);
+      width: 100%;
       height: 3.25rem;
       margin: 0;
-      padding: 0 1rem;
+      padding: 0 2rem 0 1rem;
       
       line-height: 3.25rem;
       
-      .flex-ratio(1);
-      
       .ellipsis();
-      
-      // border-bottom: @px solid @modal-header-border-color;
     }
     
     .close {
-      font-size: 1.65rem;
+      position: absolute;
+      right: 0;
+      top: 0;
+      
       padding: 0.5rem;
       margin: 0.6875rem;
+      
+      font-size: 1.65rem;
     }
   }
 
   // Body (where all modal content resides)
   .modal-body {
-    width: 100%;
     .box-sizing(border-box);
-    overflow-y: auto;
+    width: 100%;
     padding: 1rem;
+    
+    overflow-y: auto;
     
     border: @px solid @modal-outline-color;
     border-top: 0;
@@ -90,17 +99,17 @@
   
   // Footer (for actions)
   .modal-footer {
-    text-align: right; // right align buttons
-    
     border: @px solid @modal-outline-color;
     border-top: 0;
     
-    .clearfix(); // clear it in case folks use .pull-* classes on buttons
+    .clearfix(); // clear so buttons can be floated left/right
+
+    text-align: right; // right align buttons
 
     button,
     .button {
       margin: 0.5rem;
-      min-width: 100*@px;
+      min-width: 6.25rem; // 100px
     }
     
     .button:first-child,
@@ -122,10 +131,12 @@
   &.help,
   &.info {
     .modal-header {
-      padding-left: 2rem;
-      
       background-repeat: no-repeat;
       background-position: 1rem center;
+      
+      h2 {
+        padding-left: 3rem;
+      }
     }
   }
   

@@ -804,36 +804,188 @@
           <p>Alerts show the user the result of an action.</p>
 
           <div class="componentSample">
-            <div class="example">
-              <div class="alert error">
-                <button class="close" data-dismiss="alert">&times;</button>
-                <strong>ERROR</strong><div>Uh oh, something went wrong with the whozit!</div>
-              </div>
+            <div class="example clearfix">
+              
+              <div class="left column">
+                <div class="alert error">
+                  <button class="close" data-dismiss="alert">&times;</button>
+                  <strong>ERROR</strong><div>Uh oh, something went wrong with the whozit!</div>
+                </div>
 
-              <div class="alert notice">
-                <button class="close" data-dismiss="alert">&times;</button>
-                <strong>NOTICE</strong><div>Something is about to go wrong with the whozit!</div>
-              </div>
+                <div class="alert notice">
+                  <button class="close" data-dismiss="alert">&times;</button>
+                  <strong>NOTICE</strong><div>Something is about to go wrong with the whozit!</div>
+                </div>
 
-              <div class="alert success">
-                <button class="close" data-dismiss="alert">&times;</button>
-                <strong>Success</strong><div>Everything went better than expected with the whozit.</div>
-              </div>
+                <div class="alert success">
+                  <button class="close" data-dismiss="alert">&times;</button>
+                  <strong>Success</strong><div>Everything went better than expected with the whozit.</div>
+                </div>
 
-              <div class="alert help">
-                <button class="close" data-dismiss="alert">&times;</button>
-                <strong>HELP</strong><div>If you are struggling with the whozit, read <a href="#">the manual</a>.</div>
-              </div>
+                <div class="alert help">
+                  <button class="close" data-dismiss="alert">&times;</button>
+                  <strong>HELP</strong><div>If you are struggling with the whozit, read <a href="#">the manual</a>.</div>
+                </div>
 
-              <div class="alert info">
-                <button class="close" data-dismiss="alert">&times;</button>
-                <strong>INFO</strong><div>For great success, configure the whozit correctly.</div>
+                <div class="alert info">
+                  <button class="close" data-dismiss="alert">&times;</button>
+                  <strong>INFO</strong><div>For great success, configure the whozit correctly.</div>
+                </div>
+              
               </div>
+              
+              <div class="left column">
+              
+                <div class="alert error large">
+                  <button class="close" data-dismiss="alert">&times;</button>
+                  <strong>You have missed the deadline</strong><div>In order to prevent taking responsibility, please reset your device using a hammer. The story is, your kid got a hold of it and you need until next week.</div>
+                </div>
+                
+                <div class="alert notice large">
+                  <button class="close" data-dismiss="alert">&times;</button>
+                  <strong>Water detected in hard drive bay</strong><div>It seems a flood may be in progress. Please evacuate the building immediately if you're not already doing so. Have a nice day!</div>
+                </div>
+                
+                <div class="alert success large">
+                  <button class="close" data-dismiss="alert">&times;</button>
+                  <strong>Everything went better than expected</strong><div>It looks like you pulled through, despite your inability to read the manual. Please attribute your success to this system's intuitive design.</div>
+                </div>
+                
+                <div class="alert help large">
+                  <button class="close" data-dismiss="alert">&times;</button>
+                  <strong>It looks like you need help</strong><div>Being of a sound and stable mind state is crucial to performing in the workplace. We suggest you see a psychologist immediately.</div>
+                </div>
+                
+                <div class="alert info large">
+                  <button class="close" data-dismiss="alert">&times;</button>
+                  <strong>New feature: Mind reading module</strong><div>By popular demand of our enterprise customers, we have implemented the new Microsloth mind reading module. Think and it shall be!</div>
+                </div>
+                
+              </div>
+              
             </div>
             <pre class="prettyprint linenums">
+&lt;!-- Small --&gt;
 &lt;div class=&quot;alert error&quot;&gt;
   &lt;button class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;&amp;times;&lt;/button&gt;
-  &lt;strong&gt;ERROR&lt;/strong&gt;&lt;div&gt;Uh oh, something went wrong with the whozit!&lt;/div&gt;
+  &lt;strong&gt;HEADING&lt;/strong&gt;&lt;div&gt;Content.&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Large --&gt;
+&lt;div class=&quot;alert error large&quot;&gt;
+  &lt;button class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;&amp;times;&lt;/button&gt;
+  &lt;strong&gt;Heading&lt;/strong&gt;&lt;div&gt;Content.&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+          </div>
+        </section>
+        
+        <section id="Tooltip">
+          <h2 class="line">Tooltip</h2>
+          <p>Tooltips may give the user a quick help or immediate quick feedback in forms</p>
+
+          <div class="componentSample">
+            <div class="example clearfix">
+              
+              <div class="left column">
+              	<div class="tooltip info large arrow-bottom">
+                  <span>Keffiyeh laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque non <strong>LARGE</strong>. Maecenas cursus erat eget sem adipiscing aliquet.</span>
+                </div>
+                
+                <div class="tooltip info medium arrow-bottom">
+                  <span>Keffiyeh laboris. Lorem ipsum dolor sit <strong>MEDIUM</strong>, consectetur adipiscing elit.</span>
+                </div> 
+              
+              </div>
+              
+              <div class="left column">
+              
+                <div class="tooltip error arrow-top">
+                  <span>Every time</span>
+                </div>
+                
+                <div class="tooltip error arrow-bottom">
+                  <span>you see me</span>
+                </div>
+                
+                <div class="tooltip error arrow-right">
+                  <span>Hammer is</span>
+                </div>
+                
+                <div class="tooltip error arrow-left">
+                  <span>just so hype</span>
+                </div>
+                
+                <div class="tooltip notice arrow-top">
+                  <span>Hammer</span>
+                </div>
+                
+                <div class="tooltip notice arrow-bottom">
+                  <span>time!</span>
+                </div>
+                
+                <div class="tooltip notice arrow-right">
+                  <span>Break it</span>
+                </div>
+                
+                <div class="tooltip notice arrow-left">
+                  <span>down!</span>
+                </div>
+                
+                <div class="tooltip success arrow-top">
+                  <span>Yo</span>
+                </div>
+                
+                <div class="tooltip success arrow-bottom">
+                  <span>I told you</span>
+                </div>
+                
+                <div class="tooltip success arrow-right">
+                  <span>You can't</span>
+                </div>
+                
+                <div class="tooltip success arrow-left">
+                  <span>touch this.</span>
+                </div>
+
+                <div class="tooltip info arrow-top">
+                  <span>Hammer</span>
+                </div>
+                
+                <div class="tooltip info arrow-bottom">
+                  <span>time!</span>
+                </div>
+                
+                <div class="tooltip info arrow-right">
+                  <span>Break it</span>
+                </div>
+                
+                <div class="tooltip info arrow-left">
+                  <span>down!</span>
+                </div>
+                
+              </div>
+              
+            </div>
+            <pre class="prettyprint linenums">
+&lt;!-- Small --&gt;
+&lt;div class=&quot;tooltip info arrow-bottom&quot;&gt;
+	&lt;span&gt;Content&lt;/span&gt;	
+&lt;/div&gt;
+
+&lt;!-- Medium --&gt;
+&lt;div class=&quot;tooltip success medium arrow-right&quot;&gt;
+	&lt;span&gt;Content&lt;/span&gt;	
+&lt;/div&gt;
+
+&lt;!-- Large --&gt;
+&lt;div class=&quot;tooltip error large arrow-top&quot;&gt;
+	&lt;span&gt;Content&lt;/span&gt;	
+&lt;/div&gt;
+
+&lt;!-- Arrow direction --&gt;
+&lt;div class=&quot;tooltip arrow-left&quot;&gt;
+	&lt;span&gt;Content&lt;/span&gt;	
 &lt;/div&gt;
 </pre>
           </div>

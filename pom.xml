@@ -30,7 +30,7 @@
     <!-- ======================================================================= -->
     <!-- P R O J E C T                                                           -->
     <!-- ======================================================================= -->
-    <artifactId>com.adobe.coralui-pkg</artifactId>
+    <artifactId>com.adobe.coralui.content</artifactId>
     <version>0.2.0-SNAPSHOT</version>
     <packaging>content-package</packaging>
 

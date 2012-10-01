@@ -209,13 +209,6 @@ div.fakeBody {
   }
 }
 
-.headerSample,
-.railSample {
-  header {
-    position: static;
-  }
-}
-
 .railSample {
   .page {
     position: static;
@@ -277,3 +270,15 @@ ul.grid.componentGrid {
   }
 }
 
+
+div.left.column {
+  width: 50%;
+  .box-sizing(border-box);
+  
+  &:first-child {
+    padding-right: 0.5rem; 
+  }
+  &:last-child {
+    padding-left: 0.5rem; 
+  }
+}
