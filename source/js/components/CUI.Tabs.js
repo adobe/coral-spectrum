@@ -291,6 +291,9 @@ tabs.hide();
 
       // and show/hide the relevant tabs
       _activateTab($(this));
+
+      // return false for good measure
+      return false;
     });
   });
 }(window.jQuery));
