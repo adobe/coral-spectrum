@@ -46,7 +46,7 @@ CUI.util.capitalize = function(str) {
     
     @param {Class} PluginClass                              The class to create to create the plugin for
     @param {String} [pluginName=PluginClass.toString()]     The name of the plugin to create. The de-capitalized return value of PluginClass.toString() is used if left undefined
-    @param {Function} callback                              A function to execute in the scope of the jQuery object when the plugin is activated. Used for tacking on additional initialization procedures or behaviors for other plugin functionality.
+    @param {Function} [callback]                              A function to execute in the scope of the jQuery object when the plugin is activated. Used for tacking on additional initialization procedures or behaviors for other plugin functionality.
   */
   CUI.util.plugClass = function(PluginClass, pluginName, callback) {
     pluginName = pluginName || CUI.util.deCapitalize(PluginClass.toString());
@@ -72,5 +72,40 @@ CUI.util.capitalize = function(str) {
     };
 
     $.fn[pluginName].Constructor = PluginClass;
+  };
+
+  /**
+    $.load with a CUI spinner
+    
+    @param {String} remote                                  The remote URL to pass to $.load
+    @param {Boolean} [force]                                Set force to true to force the load to happen with every call, even if it has succeeded already. Otherwise, subsequent calls will simply return.
+    @param {Function} [callback]                            A function to execute in the scope of the jQuery $.load call when the load finishes (whether success or failure). The arguments to the callback are the load results: response, status, xhr.
+  */
+  $.fn.loadWithSpinner = function(remote, force, callback) {
+    var $target = $(this);
+
+    // load remote link, if necessary
+    if (remote && (force || $target.data('loaded-remote') !== remote)) {
+      // only show the spinner if the request takes an appreciable amount of time, otherwise
+      // the flash of the spinner is a little ugly
+      var timer = setTimeout(function() {
+        $target.html('<div class="spinner large"></div>');
+      }, 50);
+
+      $target.load(remote, function(response, status, xhr) {
+        clearTimeout(timer); // no need for the spinner anymore!
+
+        if (status === 'error') {
+          $target.html('<div class="alert error"><div class="icon"></div> '+xhr.statusText+'</div>');
+          $target.data('loaded-remote', '');
+        }
+
+        if (typeof callback === 'function') {
+          callback.call(this, response, status, xhr);
+        }
+      });
+
+      $target.data('loaded-remote', remote);
+    }
   };
 }(window.jQuery));

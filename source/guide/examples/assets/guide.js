@@ -20,6 +20,10 @@ $(function() {
   $('#res-reset').on('click', function(evt) {
     changeSize(0);
   });
+
+  $('.tab-variant').on('click', function() {
+    $('#tabsExample').attr('class', $(this).data('variant'));
+  });
   
  /**
   * Show the paragraph link icon when a heading is hovered on that is within a named section
