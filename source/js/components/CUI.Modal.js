@@ -143,11 +143,8 @@ modal.hide();
       // Catch clicks to dismiss modal
       this.$element.delegate('[data-dismiss="modal"]', 'click.dismiss.modal', this.hide);
       
-      // Fetch content asynchronously
-      if (this.options.remote) {
-        // Todo: show spinner
-        this.$element.find('.modal-body').load(this.options.remote);
-      }
+      // Fetch content asynchronously, if remote is defined
+      this.$element.find('.modal-body').loadWithSpinner(this.options.remote);
       
       // Add modal class to give styling
       this.$element.addClass('modal');
