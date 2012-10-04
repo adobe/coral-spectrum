@@ -1,0 +1,39 @@
+/**
+* Class: .textField
+* A basic text input field.
+*/
+
+label {
+  font-size: 0.8125rem;
+  padding: 0 0.5rem;
+}
+
+input[type=text] {
+  .box-sizing(border-box);
+  
+  font-size: 0.8125rem;
+  
+  height: 2rem;
+  padding: 0.25rem 0.5rem;
+  margin: 0.5rem 0;
+
+  border: @px solid @textfield-border-color; 
+  background-color: @textfield-background-color;
+  
+  &:disabled {
+    background-color: @textfield-disabled-background-color;
+  }
+
+  &:focus {
+    .glow();
+    outline: none;
+  }
+
+  &.error {
+    .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+    
+    &:focus {
+     .glow;
+    }
+  }
+}
