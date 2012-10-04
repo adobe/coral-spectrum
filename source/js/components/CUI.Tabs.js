@@ -152,7 +152,7 @@ tabs.hide();
       @param {Object} options                       Component options
       @param {Mixed} options.element                jQuery selector or DOM element to use for panel
       @param {String} [options.type=""]             Type of the tabs. Can be blank, or one of white, stacked, or nav
-      @param {String or Integer} [options.active=0] ID or index of the active tab. This can also be specified in the tabs array.
+      @param {Mixed} [options.active=0]             ID string or numeric index of the active tab. This can also be specified in the tabs array.
       @param {Array} options.tabs                   Array of tab descriptors.
       @param {String} options.tabs.label            Label of the tab
       @param {String} options.tabs.content          Content of the tab
@@ -168,7 +168,7 @@ tabs.hide();
       this.$element.attr('role', 'tabpanel');
 
       // sane defaults for the options
-      this.options = $.extend({}, {tabs: []}, this.options);
+      this.options = $.extend({}, this.defaults, this.options);
 
       // ensure the type is set correctly
       this._setType();
@@ -205,11 +205,17 @@ tabs.hide();
       this.$element.on('change:tabs', this._render.bind(this));
       this.$element.on('change:active', this._setActive.bind(this));
     },
+    
+    defaults: {
+      tabs: []
+    },
+    
     _types: [
       'white',
       'nav',
       'stacked'
     ],
+    
     /** @ignore */
     _setType: function() {
       if (typeof this.options.type !== 'string' || this._types.indexOf(this.options.type) === -1) return;
@@ -220,13 +226,15 @@ tabs.hide();
       // Add new type
       this.$element.addClass(this.options.type);
     },
+    
     /** @ignore */
     _render: function() {
-      if (window.toString.call(this.options.tabs) !== '[object Array]') return;
+      if (!$.isArray(this.options.tabs)) return;
 
       // render the tabs
       this.$element.html(CUI.Templates['tabs'](this.options));
     },
+    
     /** @ignore */
     _setActive: function() {
       var $trigger;
