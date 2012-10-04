@@ -538,19 +538,22 @@
 
           <section id="Filters">
               <h2 class="line">Filters</h2>
-              <p>Text input variants.</p>
+              <p>Filters &amp; Tags input variants.</p>
 
               <div class="componentSample">
                   <div class="example">
                       <div class="textfieldSample">
-                          <div class="sampleTitle left">Standard</div>
-                          <label>Text Field</label>
-                          <input type="text">
-                      </div>
-                      <div class="textfieldSample">
                           <div class="sampleTitle left">Title-less</div>
                           <label>&nbsp;</label>
-                          <input type="text" placeholder="Text Field">
+                          
+                          <div class="filters">
+                              <input type="text" placeholder="Filters">
+                              <ul>
+                                  <li><button data-dismiss="filter">&times;</button> Term One</li>
+                                  <li><button data-dismiss="filter">&times;</button> Term Two</li>
+                                  <li><button data-dismiss="filter">&times;</button> Term Three</li>
+                              </ul>
+                          </div>
                       </div>
                       <div class="textfieldSample">
                           <div class="sampleTitle left">Error</div>
@@ -564,10 +567,10 @@
                       </div>
                   </div>
               <pre class="prettyprint linenums">
-&lt;input type=&quot;text&quot;&gt;
-&lt;input type=&quot;text&quot; placeholder=&quot;Text Field&quot;&gt;
+&lt;input type=&quot;text&quot; placeholder=&quot;Text Field&quot; class=&quot;&quot;&gt;
 &lt;input type=&quot;text&quot; class=&quot;error&quot;&gt;
 &lt;input type=&quot;text&quot; disabled&gt;</pre>
+                  
               </div>
           </section>
         
