@@ -93,34 +93,34 @@ img {
   margin: 0;
   padding: 0;
   min-width: 0;
-  
+
   border: none !important;
   background: none !important;
   .box-shadow(none);
-  
+
   color: black;
   font-size: @close-font-size;
   font-weight: bold;
   text-decoration: none !important; // override for anchor
   text-shadow: none;
   line-height: 0.55;
-  
+
   cursor: pointer;
-  
+
   .opacity(@close-opacity);
-  
+
   &:hover {
     .opacity(85);
   }
-  
+
   &:active {
     .box-shadow(none); // override button
   }
-  
+
   &:focus {
     .box-shadow(none); // override button
     border: none;
-    
+
     .glow-text();
   } 
 }

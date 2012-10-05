@@ -1,6 +1,8 @@
 /**
- *
- */
+  Class: .modal
+  Provides a dialog with an backdrop
+*/
+
 // Recalculate z-index where appropriate
 .modal-open {
   .dropdown-menu {  z-index: @zindexDropdown + @zindexModal; }
@@ -27,59 +29,59 @@
   top: 50%;
   left: 50%;
   z-index: @zindexModal;
-  
+
   display: none;
   min-width: 20rem;
   max-width: 90%;
-  
+
   overflow: auto;
-  
+
   outline: none; // Firefox shows focus outline
-  
+
   border: 0.625rem solid @modal-border-color;
-  
+
   background-color: @modal-body-background-color;
   .background-clip(padding-box);
-  
+
   .modal-header {
     position: relative;
-    
+
     .box-sizing(border-box);
     width: 100%;
     height: @modal-header-height;
-    
+
     background: @modal-header-background-color;
 
     border: @px solid @modal-outline-color;
     border-bottom: 0;
-    
+
     // Bottom border, easiest with a box shadow
     .box-shadow(inset 0 -1*@px 0 @modal-header-border-color);
-    
+
     h2 {
       position: absolute;
       left: 0;
       top: 0;
-      
+
       .box-sizing(border-box);
       width: 100%;
       height: 3.25rem;
       margin: 0;
       padding: 0 2rem 0 1rem;
-      
+
       line-height: 3.25rem;
-      
+
       .ellipsis();
     }
-    
+
     .close {
       position: absolute;
       right: 0;
       top: 0;
-      
+
       padding: 0.5rem;
       margin: 0.6875rem;
-      
+
       font-size: 1.65rem;
     }
   }
@@ -89,19 +91,19 @@
     .box-sizing(border-box);
     width: 100%;
     padding: 1rem;
-    
+
     overflow-y: auto;
-    
+
     border: @px solid @modal-outline-color;
     border-top: 0;
     border-bottom: 0;
   }
-  
+
   // Footer (for actions)
   .modal-footer {
     border: @px solid @modal-outline-color;
     border-top: 0;
-    
+
     .clearfix(); // clear so buttons can be floated left/right
 
     text-align: right; // right align buttons
@@ -111,12 +113,12 @@
       margin: 0.5rem;
       min-width: 6.25rem; // 100px
     }
-    
+
     .button:first-child,
     button:first-child {
       margin-left: 0;
     }
-    
+
     .button + button,
     .button + .button,
     button + .button,
@@ -124,7 +126,7 @@
       margin-left: 0rem;
     }
   }
-  
+
   &.error,
   &.notice,
   &.success,
@@ -133,19 +135,19 @@
     .modal-header {
       background-repeat: no-repeat;
       background-position: 1rem center;
-      
+
       h2 {
         padding-left: 3rem;
       }
     }
   }
-  
+
   &.error {
     .modal-header {
       background-color: @alert-red-background-color;
-      
+
       .box-shadow(inset 0 -1*@px 0 @alert-red-border-color);
-      
+
       background-image: url('../images/components/alert/exclaimation.png');
     }
   }

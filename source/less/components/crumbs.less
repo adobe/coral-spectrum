@@ -1,9 +1,7 @@
 /**
- * Class: nav.crumbs
- * Used for printing a breadcrumb trail. 
- *
- * Note: Define with em so it changes with font-size
- */
+  Class: nav.crumbs
+  Used for printing a breadcrumb trail. 
+*/
 ul.crumbs {
   padding: 0;
   margin: 0;
@@ -37,23 +35,23 @@ ul.crumbs {
       color: @crumb-text-color;
       text-decoration: none;
       font-family: AdobeCleanLight;
-      
+
       &:hover {
         color: @crumb-hover-text-color;
         //text-decoration: underline;
       }
     }
-    
+
     img {
       height: 2rem;
     }
   }
-  
+
   li:last-child {
     &:after {
       content: "";
     }
-    
+
     a {
       font-family: AdobeClean;
     }

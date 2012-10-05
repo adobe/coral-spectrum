@@ -12,7 +12,7 @@
        url(~"@{font-folder}/@{font-file}-webfont.woff") format("woff"),
        url(~"@{font-folder}/@{font-file}-webfont.ttf") format("truetype"),
        url(~"@{font-folder}/@{font-file}-webfont.svg#@{font-name}") format("svg");
-  
+
   font-weight: @font-weight;
   font-style: @font-style;
 }
@@ -26,16 +26,16 @@
   -moz-column-count: @count;
   -webkit-column-count: @count;
   column-count: @count;
-  
+
   -moz-column-gap: @gap;
   -webkit-column-gap: @gap;
   column-gap: @gap; 
-  
+
   /* unsupported */
   -moz-column-fill: balanced;
   -webkit-column-fill: balanced;
   column-fill: balanced;
-  
+
   > * {
     display: inline-block;
     width: 100%;
@@ -106,15 +106,15 @@
 .spin(@time: 1s) {
   -webkit-transition-property: -webkit-transform;
   -webkit-transition-duration: @time;
-  
+
   -moz-transition-property: -moz-transform;
   -moz-transition-duration: @time;
-  
+
   -webkit-animation-name: rotate;
   -webkit-animation-duration: @time;
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-timing-function: linear;
-  
+
   -moz-animation-name: rotate;
   -moz-animation-duration: @time;
   -moz-animation-iteration-count: infinite;

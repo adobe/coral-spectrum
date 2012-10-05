@@ -1,7 +1,7 @@
 /**
- * Element: Checkbox
- * Must be styled using an adjacent label or span tag
- */
+  Element: Checkbox
+  Must be styled using an adjacent label or span tag
+*/
 
 input[type=checkbox] + span:before {
   background: red;
@@ -13,7 +13,7 @@ input[type=radio] {
   overflow: hidden;
   width: 1rem;
   height: 1rem;
-  
+
   /*
   // Breaks accessibility
   z-index: -100;
@@ -39,7 +39,7 @@ input[type=radio] {
 
     border: @px solid @checkbox-border-color;
     .box-shadow(inset @px @px 0 rgba(0,0,0,0.05));
-  
+
     background-color: @checkbox-background-color;
     background-position: center center;
     background-repeat: no-repeat;
@@ -53,7 +53,7 @@ input[type=radio] {
     text-align: center;
     font-weight: bold;
   }
-  
+
   &:focus + label:before,
   &:focus + span:before {
     .glow;
@@ -62,9 +62,9 @@ input[type=radio] {
   &:disabled + label:before,
   &:disabled + span:before {
     border-color: @checkbox-disabled-border-color;
-    
+
     background-color: @checkbox-disabled-background-color;
-    
+
     color: @checkbox-disabled-check-color;
   }
 }
@@ -98,12 +98,12 @@ input[type=radio] {
   & + label:before {
     .border-radius(1rem);
   }
-  
+
   &:checked + span:before,
   &:checked + label:before {
     background-image: url('../images/components/radio/dot.png');
   }
-  
+
   &:disabled {
     &:checked + span:before,
     &:checked + label:before {
@@ -118,7 +118,7 @@ td {
   label {
     padding: 0;
   }
-  
+
   input[type=radio],
   input[type=checkbox] {
     & + label:before,

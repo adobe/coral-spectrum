@@ -1,17 +1,18 @@
 /**
- * CUI Button styles
- */
+  Element: button
+  CUI button styles
+*/
 
 // Button: Default (gray)
 button,
 .button {
   display: inline-block;
   .box-sizing(border-box); // Makes 135px min-width apply consistently between anchor/button
-  
+
   vertical-align: top; // Make buttons line up when placed next to each other
-  
+
   min-width: 135*@px;
-  
+
   margin: 0.125rem 0;  // Reset default margin on button tag
                       // Give a top/bottom margin so they stack right
   padding: 0.4375rem 1rem;
@@ -25,25 +26,25 @@ button,
   color: @button-text-color;
   text-decoration: none; // Reset underline on anchor
   text-align: center;
-  
+
   text-shadow: 0 -1*@px 0 rgba(0, 0, 0, 0.35);
-  
+
   cursor: pointer; // Give hand cursor
-  
+
   .gradient(@button-gray-gradient-start-color, @button-gray-gradient-end-color);
 
   &:active {
     border-color: @button-gray-down-border-color;
     background: @button-gray-down-background-color;
-    
+
     .box-shadow(inset 0 0 0.5rem rgba(0, 0, 0, 0.25));
   }
-  
+
   &:hover {
     text-decoration: none; // Reset underline on anchor
     background: @button-gray-hover-background-color;
   }
-  
+
   &:focus {
     .glow();
   }
@@ -54,14 +55,14 @@ button,
 button.primary,
 .button.primary {
   border-color: @button-blue-border-color;
-  
+
   .gradient(@button-blue-gradient-start-color, @button-blue-gradient-end-color);
 
   &:active {
     border-color: @button-blue-down-border-color;
     background: @button-blue-down-background-color;
   }
-  
+
   &:hover {
     background: @button-blue-hover-background-color;
   }
@@ -72,14 +73,14 @@ button.primary,
 button.warning,
 .button.warning {
   border-color: @button-red-border-color;
-  
+
   .gradient(@button-red-gradient-start-color, @button-red-gradient-end-color);
 
   &:active {
     border-color: @button-red-down-border-color;
     background: @button-red-down-background-color;
   }
-  
+
   &:hover {
     background: @button-red-hover-background-color;
   }
@@ -94,9 +95,9 @@ button.disabled:active,
 button[disabled]:active,
 .button.disabled:active {
   cursor: default;
-  
+
   border-color: @button-disabled-border-color;
-  
+
   color: @button-disabled-text-color;
   text-shadow: none;
 

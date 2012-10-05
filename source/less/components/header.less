@@ -1,13 +1,13 @@
 /**
- * Class: header.top
- * Appears at the top of each page
- */
+  Class: header.top
+  Appears at the top of each page
+*/
 header.top {
   position: relative;
-  
+
   width: 100%; // Otherwise does not span screen width in Firefox
   height: @header-height;
-  
+
   background-color: @header-background-color;
 
   .box-shadow(0 0.1rem 0.45rem rgba(0, 0, 0, .35)); // TBD: make sure this matches mocks...
@@ -32,7 +32,7 @@ header.top {
 
   nav {
     display: inline-block;
-    
+
     a {
       display: inline-block;
       height: @header-height;
@@ -62,11 +62,11 @@ header.top {
     position: absolute;
     right: 0;
     top: 0;
-    
+
     display: inline-block;
     height: @header-height;
     padding-right: 1em;
-    
+
     line-height: @header-height;
   }
 }
