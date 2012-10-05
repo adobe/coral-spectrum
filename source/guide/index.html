@@ -10,10 +10,10 @@
   <!-- Dependencies -->
   <script src="js/libs/handlebars.js"></script>
   <script src="js/libs/jquery.js"></script>
-  
+
   <!-- CoralUI -->
   <script src="js/CUI.js"></script>
-  
+
   <!-- Guide JS -->
   <script src="examples/assets/guide.js"></script>
   <script src="examples/assets/google-code-prettify/prettify.js"></script>
@@ -21,7 +21,7 @@
 </head>
 <body>
 
-  <header>
+  <header class="top">
 
     <div class="logo"><img src="images/theme/cloudui.png"></div>
 
@@ -77,7 +77,7 @@
           <a class="heading" href="#Navigation">Navigation</a>
 
           <nav>
-            <a href="#Rail">Toolbar</a>
+            <a href="#Toolbar">Toolbar</a>
             <a href="#Breadcrumbs">Breadcrumbs</a>
             <a href="#Tabs">Tabs</a>
             <a href="#Wizard">Wizard</a>
@@ -110,7 +110,7 @@
             <a href="#Grid">Grid</a>
           </nav>
       </section>
-      
+
       <section class="links">
           <a class="heading" href="#Dialogs">Dialogs</a>
 
@@ -278,12 +278,11 @@
         <section id="Header">
           <h2 class="line">Header</h2>
           <p>The top navigation header that appears on every page. It supports a logo, navigation, and drawer (which can contain a badge or other information).</p>
-          <p>The HTML5 <code class="prettyprint">&lt;header&gt;</code> tag reserved for the application header and should not be used elsewhere.</p>
 
           <div class="componentSample headerSample">
             <div class="example">
 
-              <header>
+              <header class="top">
                 <div class="logo"><img src="images/theme/dms.png"></div>
                 <nav>
                   <a href="#" class="selected">Home</a>
@@ -315,6 +314,14 @@
         <section id="Rail">
           <h2 class="line">Rail</h2>
           <p>The side panel used for metadata and feeds.</p>
+          
+          <h3>Positioning</h3>
+          <p>The rail can be placed on the left or the right by applying the <code class="atv">left</code> or <code class="atv">right</code> class.</p>
+          
+          <h3>Sections</h3>
+          <p>By using the <code class="prettyprint">&lt;section&gt;</code> tag, the rail can contain multiple sections separated by a border.</p>
+          <p>The <code class="atv">bare</code> and <code class="atv">thin</code> CSS classes can be added to remove the border or padding on each section respectively.</p>
+          <p>Section headings should be contained within the <code class="prettyprint">&lt;h4&gt;</code> tag.</p>
 
           <div class="componentSample railSample">
             <div class="example">
@@ -322,7 +329,7 @@
               <div class="page shadowBox">
                 <div class="rail right">
                   <section>
-                      <strong>News Feed</strong>
+                      <h4>News Feed</h4>
                   </section>
                   <section>
                       <h4>Revised asset ready for review</h4>
@@ -331,7 +338,7 @@
                   </section>
                 </div>
                 <div class="content">
-                  <p>&nbsp;(content)</p>
+                  
                 </div>
               </div>
 
@@ -340,7 +347,7 @@
 &lt;div class=&quot;page&quot;&gt;
   &lt;div class=&quot;rail right&quot;&gt;
     &lt;section&gt;
-        &lt;strong&gt;Update Feed&lt;/strong&gt;
+        &lt;h4&gt;Update Feed&lt;/h4&gt;
     &lt;/section&gt;
     &lt;section&gt;
         &lt;h4&gt;Revised asset ready for review&lt;/h4&gt;
@@ -349,7 +356,7 @@
     &lt;/section&gt;
   &lt;/div&gt;
   &lt;div class=&quot;content&quot;&gt;
-    &lt;p&gt;(content)&lt;/p&gt;
+    &lt;p&gt;Content.&lt;/p&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 </pre>
@@ -385,7 +392,6 @@
 
       </section><!-- /Page Components -->
 
-
       <section id="Navigation">
         <h1 class="line">Navigation</h1>
         <p>CUI provides various controls that enable navigation.</p>
@@ -405,7 +411,7 @@
             <pre class="prettyprint linenums"></pre>
           </div>
         </section>
-        
+
         <section id="Breadcrumbs">
           <h2 class="line">Breadcrumbs</h2>
           <p>Breadcrumbs provide an actionable indication of a user's current location within an application.</p>
@@ -435,7 +441,10 @@
 
         <section id="Tabs">
           <h2 class="line">Tabs</h2>
-          <p>A simple markup-driven tab bar used to separate sections of content. In addition to the default style, there are 3 variations that can be applied using the following CSS classes:</p>
+          <p>A simple markup-driven tab bar used to separate sections of content.</p>
+          
+          <h3>Variations</h3>
+          <p>In addition to the default style, there are 3 variations that can be applied using the following CSS classes:</p>
           <ul>
             <li><a href="#" class="tab-variant" data-variant="tabs"> Default tabs</a>: Used in a modal dialog or as sub-tabs</li>
             <li><code class="atv">nav</code> <a href="#" class="tab-variant" data-variant="tabs nav">Page tabs</a>: For when tabs are used to divide content on a page level</li>
@@ -452,10 +461,10 @@
                   <a href="examples/remote.html" data-target="#" data-toggle="tab">Tab 3</a>
                   <a hrf="#" data-toggle="tab" class="disabled">Disabled Tab</a>
                  </nav>
-                <section class="active">Lorizzle ipsizzle fo shizzle mah nizzle fo rizzle, mah home g-dizzle pizzle own yo', consectetuer adipiscing bow wow wow. Nullizzle izzle velizzle, gizzle volutpat, suscipit quis, tellivizzle phat, gangster. Pellentesque uhuh ... yih! tortor. Shiznit erizzle. Fusce sizzle dolizzle i saw beyonces tizzles and my pizzle went crizzle fo tempus the bizzle. Maurizzle pellentesque brizzle izzle turpis. Vestibulum izzle its fo rizzle. Pellentesque eleifend rhoncizzle that's the shizzle. Boom shackalack hac habitasse fo shizzle mah nizzle fo rizzle, mah home g-dizzle dictumst. Sheezy dapibus. Break yo neck, yall ass urna, pretium check out this, mattizzle funky fresh, shizzlin dizzle vitae, nunc. Pimpin' suscipit. Integizzle dawg velizzle dang purizzle.</section>
-                <section>Nulla gangsta. Brizzle shizzlin dizzle pharetra neque. Vestibulizzle vulputate arcu izzle mauris. Own yo' accumsizzle odio et yippiyo. Curabitizzle dope nibh funky fresh stuff. Crizzle laorizzle, go to hizzle egizzle eleifend dope, sizzle owned orci, dawg placerizzle quam maurizzle pot mi. Etiam adipiscing, lectizzle izzle go to hizzle aliquam, tellus nisl lacinia orci, sagittizzle nulla mi pizzle purizzle. Sheezy hizzle mattis fo shizzle. In pulvinizzle aliquet cool. Praesent brizzle enim, tempizzle dawg, facilisizzle check it out, laorizzle in, sizzle. Pimpin' eget massa crunk break yo neck, yall blandizzle shit. Vestibulizzle ullamcorper turpis izzle sizzle funky fresh lobortizzle. Phasellus yo mauris. Maecenizzle check out this. Vivamizzle bow wow wow ma nizzle enim. Pellentesque mi. Lorem gangsta dolor sit amizzle, crazy adipiscing elit. Maurizzle urna arcu, shiz egizzle, boofron brizzle, pharetra dope, bizzle. Lorem ipsum dolizzle sit pimpin', ghetto adipiscing doggy.</section>
-                <section>This will be replaced :)</section>
-                <section>This section will never be shown :(</section>
+                <section class="active">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. Pellentesque congue diam ac nisl vehicula ornare. Cras eu consectetur enim. Aliquam orci augue, sollicitudin nec aliquam sit amet, imperdiet ac leo. Donec aliquam tellus nec ipsum porttitor ut viverra odio luctus. Curabitur in turpis sed nunc consequat ornare eget in nulla. Nam dignissim lectus sed velit sagittis vehicula. Maecenas interdum, quam vel luctus sagittis, mi nisl commodo sapien, eget accumsan nunc metus ac ipsum. Mauris rutrum lectus turpis. Nullam at neque non quam tincidunt fringilla. Nunc egestas mollis nulla tempor fringilla. Etiam dapibus arcu nec risus tempus dapibus.</section>
+                <section>Aenean faucibus ornare laoreet. Cras luctus purus at ipsum rhoncus et gravida diam malesuada. In ut ante sapien. Nulla fringilla hendrerit laoreet. Proin dolor dolor, suscipit vitae ultrices in, dapibus eget nulla. Aenean varius, sapien id mollis pretium, orci erat ornare tortor, vel molestie diam velit in dolor. Sed sit amet pellentesque justo. Pellentesque tristique felis id arcu malesuada posuere pellentesque lacus varius. Nunc egestas lacinia est, non eleifend lectus varius in. In hac habitasse platea dictumst. Quisque ac ipsum enim. Morbi ut est at mi mattis tincidunt. Praesent nec magna eu augue scelerisque posuere. In erat sapien, tristique ac semper elementum, lacinia non quam.</section>
+                <section>This will be replaced by content from examples/remote.html.</section>
+                <section>This will not be shown as the corresponding tab is disabled.</section>
               </div>
             </div>
 
@@ -467,18 +476,16 @@
     &lt;a href=&quot;/remote.html&quot; data-target=&quot;#&quot; data-toggle=&quot;tab&quot;&gt;Tab 3&lt;/a&gt;
     &lt;a hrf=&quot;#&quot; data-toggle=&quot;tab&quot; class=&quot;disabled&quot;&gt;Disabled Tab&lt;/a&gt;
   &lt;/nav&gt;
-  &lt;section class=&quot;active&quot;&gt;Lorizzle ipsizzle fo shizzle mah nizzle fo rizzle.&lt;/section&gt;
-  &lt;section&gt;Nulla gangsta. Brizzle shizzlin dizzle pharetra neque. &lt;/section&gt;
-  &lt;section&gt;This will be replaced :)&lt;/section&gt;
-  &lt;section&gt;This section will never be shown :(&lt;/section&gt;
+  &lt;section class=&quot;active&quot;&gt;Lorem ipsum dolor sit amet.&lt;/section&gt;
+  &lt;section&gt;Aenean faucibus ornare laoreet. Cras luctus purus.&lt;/section&gt;
+  &lt;section&gt;This will be replaced by content from /remote.html.&lt;/section&gt;
+  &lt;section&gt;This will not be shown as the corresponding tab is disabled.&lt;/section&gt;
 &lt;/div&gt;
 </pre>
           </div>
         </section>
 
-
       </section><!-- /Navigation -->
-
 
       <section id="ButtonsAndControls">
         <h1 class="line">Buttons &amp; Controls</h1>
@@ -487,7 +494,8 @@
         <section id="Buttons">
           <h2 class="line">Buttons</h2>
           <p>The <code class="prettyprint">&lt;button&gt;</code> tag is styled automatically, and you can apply the <code class="atv">button</code> CSS class to any element to turn it into a styled button.</p>
-
+          
+          <h3>Variations</h3>
           <p>By default, buttons are gray. There are two CSS classes that can be added to change the look of the button:</p>
           <ul>
             <li><code class="atv">primary</code> A blue button, used to indicate primary actions such as OK or save</li>
@@ -511,7 +519,7 @@
 </pre>
           </div>
         </section>
-        
+
         <section id="TextField">
           <h2 class="line">Text Field</h2>
           <p>Text input variants.</p>
@@ -561,7 +569,7 @@
             <pre class="prettyprint linenums"></pre>
           </div>
         </section>
-        
+
         <section id="Checkbox">
           <h2 class="line">Checkbox</h2>
           <p>Checkboxes are styling using pure CSS, and a <code class="atv">partial</code> class is provided to indicate a "half-checked" state.</p>
@@ -589,8 +597,7 @@
 </pre>
           </div>
         </section>
-        
-        
+
         <section id="RadioButtons">
           <h2 class="line">Radio buttons</h2>
           <p>Radio buttons are styling using pure CSS.</p>
@@ -616,8 +623,7 @@
         </section>
 
       </section><!-- /ButtonsAndControls -->
-      
-      
+
       <section id="DataPresentation">
         <h1 class="line">Data Presentation</h1>
         <p>CUI provides basic grids, tables, and lists for data presentation.</p>
@@ -729,7 +735,6 @@
 
       </section><!-- /DataPresentation -->
 
-
       <section id="Dialogs">
         <h1 class="line">Dialogs</h1>
         <p>CUI provides various dialogs.</p>
@@ -738,6 +743,8 @@
           <h2 class="line">Modal</h2>
           <p>Modals pop over the whole page and prevent interaction underneath them.</p>
           <p>Modals will progressively enhance existing markup or render their own template if no markup is present. See <a href="jsdoc/index.html">the documentation</a> for more examples.<p>
+            
+          <h3>Variations</h3>
           <p>Modals can be styled to display alert messages by adding one of the following classes to the modal element or by setting the <code>type</code> option.</p>
           <ul>
             <li><code class="atv">default</code> Grey heading, no icon
@@ -812,11 +819,26 @@
 
         <section id="Alert">
           <h2 class="line">Alert</h2>
-          <p>Alerts show the user the result of an action.</p>
+          <p>Alerts indicate to the result of an operation or that a new information is present.</p>
+          
+          <h3>Variations</h3>
+          <p>There are 5 different styles of alerts:</p>
+          <ul>
+            <li><code class="atv">error</code> Indicate that an operation has failed or that a critical problem is present
+            <li><code class="atv">notice</code> Indicate that an operation completed with warnings, or that a potential problem is present
+            <li><code class="atv">success</code> Indicate that an operation completed without errors or warnings
+            <li><code class="atv">info</code> Provide information to the user, such as indicating that new reports are available
+            <li><code class="atv">help</code> Provide guidance to the user, such as links to help documentation
+          </ul>
+          
+          <h3>Sizing</h3>
+          <p>Alerts usually contain concise messages, but can accommodate larger messages when the <code class="atv">large</code> CSS class is added.</p>
+          
+          <p>The <code class="prettyprint">&lt;button class="close"&gt;</code> tag can be omitted if an alert should not be dismissible.</p>
 
           <div class="componentSample">
             <div class="example clearfix">
-              
+
               <div class="left column">
                 <div class="alert error">
                   <button class="close" data-dismiss="alert">&times;</button>
@@ -842,169 +864,132 @@
                   <button class="close" data-dismiss="alert">&times;</button>
                   <strong>INFO</strong><div>For great success, configure the whozit correctly.</div>
                 </div>
-              
+
               </div>
-              
+
               <div class="left column">
-              
+
                 <div class="alert error large">
                   <button class="close" data-dismiss="alert">&times;</button>
                   <strong>You have missed the deadline</strong><div>In order to prevent taking responsibility, please reset your device using a hammer. The story is, your kid got a hold of it and you need until next week.</div>
                 </div>
-                
+
                 <div class="alert notice large">
                   <button class="close" data-dismiss="alert">&times;</button>
                   <strong>Water detected in hard drive bay</strong><div>It seems a flood may be in progress. Please evacuate the building immediately if you're not already doing so. Have a nice day!</div>
                 </div>
-                
+
                 <div class="alert success large">
                   <button class="close" data-dismiss="alert">&times;</button>
                   <strong>Everything went better than expected</strong><div>It looks like you pulled through, despite your inability to read the manual. Please attribute your success to this system's intuitive design.</div>
                 </div>
-                
+
                 <div class="alert help large">
                   <button class="close" data-dismiss="alert">&times;</button>
                   <strong>It looks like you need help</strong><div>Being of a sound and stable mind state is crucial to performing in the workplace. We suggest you see a psychologist immediately.</div>
                 </div>
-                
+
                 <div class="alert info large">
                   <button class="close" data-dismiss="alert">&times;</button>
                   <strong>New feature: Mind reading module</strong><div>By popular demand of our enterprise customers, we have implemented the new Microsloth mind reading module. Think and it shall be!</div>
                 </div>
-                
+
               </div>
-              
+
             </div>
             <pre class="prettyprint linenums">
-&lt;!-- Small --&gt;
 &lt;div class=&quot;alert error&quot;&gt;
   &lt;button class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;&amp;times;&lt;/button&gt;
   &lt;strong&gt;HEADING&lt;/strong&gt;&lt;div&gt;Content.&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;!-- Large --&gt;
-&lt;div class=&quot;alert error large&quot;&gt;
-  &lt;button class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;&amp;times;&lt;/button&gt;
-  &lt;strong&gt;Heading&lt;/strong&gt;&lt;div&gt;Content.&lt;/div&gt;
-&lt;/div&gt;
 </pre>
           </div>
         </section>
-        
+
         <section id="Tooltip">
           <h2 class="line">Tooltip</h2>
-          <p>Tooltips may give the user a quick help or immediate quick feedback in forms</p>
-
+          <p>Tooltips give the user small pieces of information in context by pointing at objects on the page. Tooltips are often used to draw the user's attention to problems in form fields or suggested actions.</p>
+          
+          <h3>Variations</h3>
+          <p>Tooltips are blue by default to indicate they contain helpful information. When tooltips contain other information, such as errors or alerts, the following CSS classes can be applied:</p>
+          <ul>
+            <li><code class="atv">error</code> Draw attention to critical problems
+            <li><code class="atv">notice</code> Draw attention to potential problems
+            <li><code class="atv">success</code> Draw attention to a success state
+          </ul>
+          
+          <h3>Arrow Direction</h3>
+          <p>Tooltips can point different directions by applying the following CSS classes:</p>
+          <ul>
+            <li><code class="atv">arrow-top</code> Point upward
+            <li><code class="atv">arrow-bottom</code> Point downward
+            <li><code class="atv">arrow-left</code> Point left
+            <li><code class="atv">arrow-right</code> Point right
+          </ul>
+          
           <div class="componentSample">
             <div class="example clearfix">
-              
-              <div class="left column">
-              	<div class="tooltip info large arrow-bottom">
-                  <span>Keffiyeh laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque non <strong>LARGE</strong>. Maecenas cursus erat eget sem adipiscing aliquet.</span>
-                </div>
-                
-                <div class="tooltip info medium arrow-bottom">
-                  <span>Keffiyeh laboris. Lorem ipsum dolor sit <strong>MEDIUM</strong>, consectetur adipiscing elit.</span>
-                </div> 
-              
-              </div>
-              
-              <div class="left column">
-              
-                <div class="tooltip error arrow-top">
-                  <span>Every time</span>
-                </div>
-                
-                <div class="tooltip error arrow-bottom">
-                  <span>you see me</span>
-                </div>
-                
-                <div class="tooltip error arrow-right">
-                  <span>Hammer is</span>
-                </div>
-                
-                <div class="tooltip error arrow-left">
-                  <span>just so hype</span>
-                </div>
-                
-                <div class="tooltip notice arrow-top">
-                  <span>Hammer</span>
-                </div>
-                
-                <div class="tooltip notice arrow-bottom">
-                  <span>time!</span>
-                </div>
-                
-                <div class="tooltip notice arrow-right">
-                  <span>Break it</span>
-                </div>
-                
-                <div class="tooltip notice arrow-left">
-                  <span>down!</span>
-                </div>
-                
-                <div class="tooltip success arrow-top">
-                  <span>Yo</span>
-                </div>
-                
-                <div class="tooltip success arrow-bottom">
-                  <span>I told you</span>
-                </div>
-                
-                <div class="tooltip success arrow-right">
-                  <span>You can't</span>
-                </div>
-                
-                <div class="tooltip success arrow-left">
-                  <span>touch this.</span>
-                </div>
 
-                <div class="tooltip info arrow-top">
-                  <span>Hammer</span>
-                </div>
-                
-                <div class="tooltip info arrow-bottom">
-                  <span>time!</span>
-                </div>
-                
-                <div class="tooltip info arrow-right">
-                  <span>Break it</span>
-                </div>
-                
-                <div class="tooltip info arrow-left">
-                  <span>down!</span>
-                </div>
+              <div class="left">
+
+                <div class="tooltip error arrow-top">Lorem ipsum.</div>
+
+                <div class="tooltip error arrow-bottom">Lorem ipsum.</div>
+
+                <div class="tooltip error arrow-right">Lorem ipsum.</div>
+
+                <div class="tooltip error arrow-left">Lorem ipsum.</div><br>
+
+                <div class="tooltip notice arrow-top">Lorem ipsum.</div>
+
+                <div class="tooltip notice arrow-bottom">Lorem ipsum.</div>
+
+                <div class="tooltip notice arrow-right">Lorem ipsum.</div>
+
+                <div class="tooltip notice arrow-left">Lorem ipsum.</div>
+
+              </div>
+
+              <div class="left">
+
+                <div class="tooltip success arrow-top">Lorem ipsum.</div>
+
+                <div class="tooltip success arrow-bottom">Lorem ipsum.</div>
+
+                <div class="tooltip success arrow-right">Lorem ipsum.</div>
+
+                <div class="tooltip success arrow-left">Lorem ipsum.</div><br>
+
+                <div class="tooltip info arrow-top">Lorem ipsum.</div>
+
+                <div class="tooltip info arrow-bottom">Lorem ipsum.</div>
+
+                <div class="tooltip info arrow-right">Lorem ipsum.</div>
+
+                <div class="tooltip info arrow-left">Lorem ipsum.</div>
                 
               </div>
               
+              <div class="clear largeToolTipSample">
+                <input type="text" class="error" value="Some invalid input">
+                <div class="tooltip error arrow-left">
+                  When tooltips contain a large amount of text, they will wrap automatically.
+                </div>
+              </div>
+
             </div>
             <pre class="prettyprint linenums">
-&lt;!-- Small --&gt;
-&lt;div class=&quot;tooltip info arrow-bottom&quot;&gt;
-	&lt;span&gt;Content&lt;/span&gt;	
-&lt;/div&gt;
-
-&lt;!-- Medium --&gt;
-&lt;div class=&quot;tooltip success medium arrow-right&quot;&gt;
-	&lt;span&gt;Content&lt;/span&gt;	
-&lt;/div&gt;
-
-&lt;!-- Large --&gt;
-&lt;div class=&quot;tooltip error large arrow-top&quot;&gt;
-	&lt;span&gt;Content&lt;/span&gt;	
-&lt;/div&gt;
-
-&lt;!-- Arrow direction --&gt;
-&lt;div class=&quot;tooltip arrow-left&quot;&gt;
-	&lt;span&gt;Content&lt;/span&gt;	
-&lt;/div&gt;
+&lt;div class=&quot;tooltip error arrow-bottom&quot;&gt;Content&lt;/div&gt;
 </pre>
           </div>
         </section>
 
         <section id="Badge">
           <h2 class="line">Badge</h2>
-          <p>Badges can be used to indicate a number of items that require the user's attention.</p>
+          <p>Badges can be used to indicate a number of items that require attention.</p>
+
+          <h3>Variations</h3>
+          <p>When a badge is showing 0 items, the <code class="atv">empty</code> CSS class should be added.</p>
 
           <div class="componentSample">
             <div class="example">
@@ -1020,9 +1005,11 @@
 
         <section id="Spinner">
           <h2 class="line">Spinner</h2>
-          <p>Use a spinner to indicate a process is in progress that will occur for an indefinite amount of time.</p>
-          <p>Applying the CSS class <code class="atv">spinner</code> to an element will make it inline-block.</p>
+          <p>Use a spinner to indicate a process is in progress that will occur for an indefinite amount of time by applying the CSS class <code class="atv">spinner</code> to an element.</p>
 
+          <h3>Sizing</h3>
+          <p>Adding the <code class="atv">large</code> CSS class will result in a larger spinner.</p>
+          
           <div class="componentSample spinnerSample">
             <div class="example">
               <div class="spinner"></div>
@@ -1037,7 +1024,8 @@
 
         <section id="ProgressBar">
           <h2 class="line">Progress Bar</h2>
-          <p>Use a spinner to indicate the progress of a process.</p>
+          <p>Use a progress bar to indicate the progress of a process.</p>
+          <p>A <code class="prettyprint">&lt;label&gt;</code> tag included immediately after the progress bar can be used to display the numeric value.</p>
 
           <div class="componentSample spinnerSample">
             <div class="example">
