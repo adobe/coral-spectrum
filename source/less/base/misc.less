@@ -1,7 +1,7 @@
 /**
- * Element: form
- * No margin or padding by default
- */
+  Element: form
+  No margin or padding by default
+*/
 form {
   margin: 0;
   padding: 0;
@@ -9,17 +9,17 @@ form {
 
 
 /**
- * Element: img
- * Bootstrap's reset needs to be massaged a bit for images
- */
+  Element: img
+  Bootstrap's reset needs to be massaged a bit for images
+*/
 img {
   max-width: none; // Otherwise, images can get squished in funny ways when base size increases
 }
 
 /**
- * Classes: .left & .right
- * Basic float left/right classes
- */
+  Classes: .left .right
+  Basic float left/right classes
+*/
 .left {
   float: left;
 }
@@ -27,11 +27,19 @@ img {
   float: right;
 }
 
+/*
+  Class: clear
+  Clear floats before and after an element
+*/
+.clear {
+  clear: both;
+}
+
 
 /**
- * Class: .hidden
- * Hide something without affecting its width/height (can be measured while hidden)
- */
+  Class: .hidden
+  Hide something without affecting its width/height (can be measured while hidden)
+*/
 .hidden {
   position: absolute;
   left: -9999px;
@@ -41,36 +49,36 @@ img {
 
 
 /**
- * Class: .grey
- * Used for secondary or help text
- */
+  Class: .grey
+  Used for secondary or help text
+*/
 .grey {
   color: @font-secondary-color;
 }
 
 
 /**
- * Class: .small
- * Used for smaller text
- */
+  Class: .small
+  Used for smaller text
+*/
 .small {
   font-size: 0.8rem;
 }
 
 
 /**
- * Class: .light
- * Used for light text
- */
+  Class: .light
+  Used for light text
+*/
 .light {
   font-family: AdobeCleanLight;
   font-weight: lighter;
 }
 
 /**
- * Class: .regular
- * Used for regular text (as a reset)
- */
+  Class: .regular
+  Used for regular text (as a reset)
+*/
 .regular {
   font-family: AdobeClean;
   font-weight: normal;
@@ -78,9 +86,9 @@ img {
 
 
 /**
- * Class: .close
- * Used for close buttons with an &times; entity inside of them
- */
+  Class: .close
+  Used for close buttons with an &times; entity inside of them
+*/
 .close {
   margin: 0;
   padding: 0;
