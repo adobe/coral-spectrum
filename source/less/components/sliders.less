@@ -1,0 +1,78 @@
+/**
+ * Class: .slider
+ * Displays a slider
+ */
+.slider {
+  position: relative;
+  display: inline-block;
+  .box-sizing(border-box);
+  padding: 0;
+  .border-radius(0.25rem);
+  border: @px solid @slider-border-color;
+  background-color: @slider-background-color;
+
+  .handle {
+        position: absolute;
+        .gradient(@slider-handle-gradient-start-color, @slider-handle-gradient-end-color);
+        .border-radius(0.25rem);
+        border: @px solid @slider-border-color;
+        &:hover {
+            .gradient(lighten(@slider-handle-gradient-start-color, 15%), lighten(@slider-handle-gradient-end-color, 15%));
+        }
+  }
+
+  .tick {
+    position: absolute;
+    background-color: @slider-border-color;
+  }
+
+  .range {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: @slider-range-color;
+    height: 0.5rem;
+    border: @px;
+    .border-radius(0.25rem);
+  }
+  
+  &.horizontal {
+        width: 20rem;  
+        height: 0.5rem;
+        margin: 0.5rem 0.25rem;
+        .handle {
+            width: 0.5rem;
+            margin: -0.5rem -0.25rem;
+            height: 1.5rem;            
+        }
+        .tick {
+            top: 0;
+            left: 0;
+            width: @px;
+            height: 0.5rem;
+        }
+        .tooltip {
+            position: absolute;
+            right: -5rem;
+            top: -1.25rem;
+            width: 2rem;
+        }
+  }
+  &.vertical {
+        width: 0.5rem;  
+        height: 20rem;
+        margin: 0.25rem 0.5rem;
+        .handle {
+            width: 1.5rem;
+            margin: -0.25rem -0.5rem;
+            height: 0.5rem;            
+        }
+        .tick {
+            top: 0;
+            left: 0;
+            width: 0.5rem;
+            height: @px;
+        }
+  }
+
+}

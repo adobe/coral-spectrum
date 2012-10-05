@@ -185,7 +185,8 @@ module.exports = function(grunt) {
           '<%= dirs.source %>/js/CUI.Util.js',
           '<%= dirs.source %>/js/components/CUI.Widget.js',
           '<%= dirs.source %>/js/components/CUI.Modal.js',
-          '<%= dirs.source %>/js/components/CUI.Alert.js'
+          '<%= dirs.source %>/js/components/CUI.Alert.js',
+          '<%= dirs.source %>/js/components/CUI.Filters.js'
         ],
         dest: '<%= dirs.build %>/js/CUI.js'
       }

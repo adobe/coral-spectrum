@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Filters &amp; Tags – Single Term examples</title>
+
+        <link rel="stylesheet" href="../../css/cui.css">
+
+        <script src="../../js/libs/handlebars.js"></script>
+        <script src="../../js/libs/jquery.js"></script>
+        <script src="../../js/CUI.js"></script>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <h1>Single Term Filter Field</h1>
+        
+        Filter me: <input type="text" name="filter">
+            
+        <script type="text/javascript">
+            $(document).ready(function() {
+               $("input[name=filter]").filters({
+                   options: ["Watermelon",
+                        "Figs", 
+                        "Dates", 
+                        "Olive", 
+                        "Jujube", 
+                        "Pomegranate", 
+                        "Lemon", 
+                        "Lime",
+                        "Key Lime", 
+                        "Mandarin", 
+                        "Orange", 
+                        "Sweet Lime", 
+                        "Tangerine", 
+                        "Avocado", 
+                        "Guava", 
+                        "Kumquat" ]
+               }); 
+            });
+        </script>
+    </body>
+</html>
