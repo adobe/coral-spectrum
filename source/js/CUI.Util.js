@@ -96,7 +96,7 @@ CUI.util.capitalize = function(str) {
         clearTimeout(timer); // no need for the spinner anymore!
 
         if (status === 'error') {
-          $target.html('<div class="alert error"><div class="icon"></div> '+xhr.statusText+'</div>');
+          $target.html('<div class="alert error"><strong>ERROR</strong> Failed to load content: '+xhr.statusText+' ('+xhr.status+')</div>');
           $target.data('loaded-remote', '');
         }
 
