@@ -46,20 +46,6 @@ div.rail {
     &.links {
       padding: 0.25rem 0;
       
-      // TBD: fix margin collapse for strong
-      >strong,
-      >a.heading {
-        font-weight: bold;
-        display: block;
-        margin: 0 0 0.15rem 0;
-      
-        font-size: 0.95rem;
-      
-        color: @rail-font-color;
-      
-        padding: 0.25rem 0.7rem;
-      }
-      
       a {
         text-decoration: none;
         
@@ -70,8 +56,21 @@ div.rail {
         }
       }
       
-      nav {
-        a {
+      // TBD: fix margin collapse for strong
+      >h4,
+      >a.heading {
+        font-weight: bold;
+        margin: 0 0 0.15rem 0;
+      
+        font-size: 0.95rem;
+      
+        color: @rail-font-color;
+      
+        padding: 0.25rem 0.7rem;
+      }
+      
+      >nav {
+        >a {
           padding: 0.35rem 1.5rem;
         
           font-size: 0.85rem;
