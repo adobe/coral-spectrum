@@ -7,9 +7,14 @@
   <link rel="stylesheet" href="examples/assets/google-code-prettify/prettify.css">
   <link rel="stylesheet" href="examples/assets/guide.css">
 
+  <!-- Dependencies -->
   <script src="js/libs/handlebars.js"></script>
   <script src="js/libs/jquery.js"></script>
+  
+  <!-- CoralUI -->
   <script src="js/CUI.js"></script>
+  
+  <!-- Guide JS -->
   <script src="examples/assets/guide.js"></script>
   <script src="examples/assets/google-code-prettify/prettify.js"></script>
 
@@ -430,12 +435,12 @@
 
         <section id="Tabs">
           <h2 class="line">Tabs</h2>
-          <p>Tabs provide a simple markup-driven tab bar, with several variants to choose from.</p>
+          <p>A simple markup-driven tab bar used to separate sections of content. In addition to the default style, there are 3 variations that can be applied using the following CSS classes:</p>
           <ul>
-            <li><code class="atv">tabs</code> <a href="#" class="tab-variant" data-variant="tabs"> standard tabs</a></li>
-            <li><code class="atv">white</code> <a href="#" class="tab-variant" data-variant="tabs white">white tabs</a></li>
-            <li><code class="atv">nav</code> <a href="#" class="tab-variant" data-variant="tabs nav">top nav tabs</a></li>
-            <li><code class="atv">finger</code> <a href="#" class="tab-variant" data-variant="tabs stacked">stacked tabs</a></li>
+            <li><a href="#" class="tab-variant" data-variant="tabs"> Default tabs</a>: Used in a modal dialog or as sub-tabs</li>
+            <li><code class="atv">nav</code> <a href="#" class="tab-variant" data-variant="tabs nav">Page tabs</a>: For when tabs are used to divide content on a page level</li>
+            <li><code class="atv">white</code> <a href="#" class="tab-variant" data-variant="tabs white"> White tabs</a>: Used in a modal dialog or as sub-tabs</li>
+            <li><code class="atv">finger</code> <a href="#" class="tab-variant" data-variant="tabs stacked">Finger tabs</a>: Useful for tabs that have long titles</li>
           </ul>
 
           <div class="componentSample">
@@ -444,7 +449,7 @@
                 <nav>
                   <a href="#" data-toggle="tab" class="active">Tab 1</a>
                   <a href="#" data-toggle="tab">Tab 2</a>
-                  <a href="remote.html" data-target="#" data-toggle="tab">Tab 3</a>
+                  <a href="examples/remote.html" data-target="#" data-toggle="tab">Tab 3</a>
                   <a hrf="#" data-toggle="tab" class="disabled">Disabled Tab</a>
                  </nav>
                 <section class="active">Lorizzle ipsizzle fo shizzle mah nizzle fo rizzle, mah home g-dizzle pizzle own yo', consectetuer adipiscing bow wow wow. Nullizzle izzle velizzle, gizzle volutpat, suscipit quis, tellivizzle phat, gangster. Pellentesque uhuh ... yih! tortor. Shiznit erizzle. Fusce sizzle dolizzle i saw beyonces tizzles and my pizzle went crizzle fo tempus the bizzle. Maurizzle pellentesque brizzle izzle turpis. Vestibulum izzle its fo rizzle. Pellentesque eleifend rhoncizzle that's the shizzle. Boom shackalack hac habitasse fo shizzle mah nizzle fo rizzle, mah home g-dizzle dictumst. Sheezy dapibus. Break yo neck, yall ass urna, pretium check out this, mattizzle funky fresh, shizzlin dizzle vitae, nunc. Pimpin' suscipit. Integizzle dawg velizzle dang purizzle.</section>
@@ -459,7 +464,7 @@
   &lt;nav&gt;
     &lt;a href=&quot;#&quot; data-toggle=&quot;tab&quot; class=&quot;active&quot; &gt;Tab 1&lt;/a&gt;
     &lt;a href=&quot;#&quot; data-toggle=&quot;tab&quot;&gt;Tab 2&lt;/a&gt;
-    &lt;a href=&quot;remote.html&quot; data-target=&quot;#&quot; data-toggle=&quot;tab&quot;&gt;Tab 3&lt;/a&gt;
+    &lt;a href=&quot;/remote.html&quot; data-target=&quot;#&quot; data-toggle=&quot;tab&quot;&gt;Tab 3&lt;/a&gt;
     &lt;a hrf=&quot;#&quot; data-toggle=&quot;tab&quot; class=&quot;disabled&quot;&gt;Disabled Tab&lt;/a&gt;
   &lt;/nav&gt;
   &lt;section class=&quot;active&quot;&gt;Lorizzle ipsizzle fo shizzle mah nizzle fo rizzle.&lt;/section&gt;
@@ -467,7 +472,7 @@
   &lt;section&gt;This will be replaced :)&lt;/section&gt;
   &lt;section&gt;This section will never be shown :(&lt;/section&gt;
 &lt;/div&gt;
-            </pre>
+</pre>
           </div>
         </section>
 
