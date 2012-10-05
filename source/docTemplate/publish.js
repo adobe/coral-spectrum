@@ -88,25 +88,8 @@ function buildNav(members) {
     var nav = '',
         seen = {};
 
-      <section class="links">
-          <strong><a href="#ButtonsAndControls">Buttons &amp; Controls</a></strong>
-
-          <nav>
-            <a href="#Buttons">Buttons</a>
-            <a href="#TextFields">Text field</a>
-            <a href="#SearchField">Search field</a>
-            <a href="#Checkbox">Checkbox</a>
-            <a href="#RadioButtons">Radio buttons</a>
-            <a href="#Toggle">Toggle</a>
-            <a href="#Selector">Selector</a>
-            <a href="#Slider">Slider</a>
-            <a href="#Dropdown">Dropdown</a>
-            <a href="#Draggable">Draggable</a>
-          </nav>
-      </section>
-      
     if (members.modules.length) {
-        nav += '<section class="links"><strong>Modules</strong><nav>';
+        nav += '<section class="links"><h4>Modules</h4><nav>';
         members.modules.forEach(function(m) {
             if ( !hasOwnProp.call(seen, m.longname) ) {
                 nav += linkto(m.longname, m.name);
@@ -118,7 +101,7 @@ function buildNav(members) {
     }
     
     if (members.externals.length) {
-        nav += '<section class="links"><strong>Externals</strong><nav>';
+        nav += '<section class="links"><h4>Externals</h4><nav>';
         members.externals.forEach(function(e) {
             if ( !hasOwnProp.call(seen, e.longname) ) {
                 nav += linkto( e.longname, e.name.replace(/(^"|"$)/g, '') );
@@ -139,7 +122,7 @@ function buildNav(members) {
                 moduleSameName[0].module = c;
             }
             if (moduleClasses !== -1 && moduleClasses < members.classes.length) {
-                nav += '<section class="links"><strong>Classes</strong><nav>';
+                nav += '<section class="links"><h4>Classes</h4><nav>';
                 moduleClasses = -1;
             }
             if ( !hasOwnProp.call(seen, c.longname) ) {
@@ -152,7 +135,7 @@ function buildNav(members) {
     }
     
     if (members.namespaces.length) {
-        nav += '<section class="links"><strong>Namespaces</strong><nav>';
+        nav += '<section class="links"><h4>Namespaces</h4><nav>';
         members.namespaces.forEach(function(n) {
             if ( !hasOwnProp.call(seen, n.longname) ) {
                 nav += linkto(n.longname, n.name);
@@ -164,7 +147,7 @@ function buildNav(members) {
     }
     
     if (members.mixins.length) {
-        nav += '<section class="links"><strong>Mixins</strong><nav>';
+        nav += '<section class="links"><h4>Mixins</h4><nav>';
         members.mixins.forEach(function(m) {
             if ( !hasOwnProp.call(seen, m.longname) ) {
                 nav += linkto(m.longname, m.name);
@@ -176,7 +159,7 @@ function buildNav(members) {
     }
 
     if (members.tutorials.length) {
-        nav += '<section class="links"><strong>Tutorials</strong><nav>';
+        nav += '<section class="links"><h4>Tutorials</h4><nav>';
         members.tutorials.forEach(function(t) {
             nav += tutoriallink(t.name);
         });
@@ -185,7 +168,7 @@ function buildNav(members) {
     }
     
     if (members.globals.length) {
-        nav += '<section class="links"><strong>Global</strong><nav>';
+        nav += '<section class="links"><h4>Global</h4><nav>';
         members.globals.forEach(function(g) {
             if ( g.kind !== 'typedef' && !hasOwnProp.call(seen, g.longname) ) {
                 nav += linkto(g.longname, g.name);
