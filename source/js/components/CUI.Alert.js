@@ -79,14 +79,14 @@ alert.hide();
       this.$element.on('change:size', this._setSize.bind(this));
       
       // Read in options "set" by markup so we don't override the values they set
-      $.each(this._validTypes, function(index, type) {
+      $.each(this._types, function(index, type) {
         if (this.$element.hasClass(type)) {
           this.options.type = type;
           return false;
         }
       }.bind(this));
       
-      $.each(this._validSizes, function(index, size) {
+      $.each(this._sizes, function(index, size) {
         if (this.$element.hasClass(size)) {
           this.options.size = size;
           return false;
@@ -115,7 +115,7 @@ alert.hide();
       closable: true
     },
     
-    _validTypes: [
+    _types: [
       'error',
       'notice',
       'success',
@@ -123,7 +123,7 @@ alert.hide();
       'info'
     ],
     
-    _validSizes: [
+    _sizes: [
       'small',
       'large'
     ],
@@ -154,10 +154,10 @@ alert.hide();
     
     /** @ignore */
     _setType: function() {
-      if (typeof this.options.type !== 'string' || this._validTypes.indexOf(this.options.type) === -1) return;
+      if (typeof this.options.type !== 'string' || this._types.indexOf(this.options.type) === -1) return;
       
       // Remove old type
-      this.$element.removeClass(this._validTypes.join(' '));
+      this.$element.removeClass(this._types.join(' '));
 
       // Add new type
       this.$element.addClass(this.options.type);
@@ -165,7 +165,7 @@ alert.hide();
     
     /** @ignore */
     _setSize: function() {
-      if (typeof this.options.size !== 'string' || this._validSizes.indexOf(this.options.size) === -1) return;
+      if (typeof this.options.size !== 'string' || this._sizes.indexOf(this.options.size) === -1) return;
       
       if (this.options.size === 'small')
         this.$element.removeClass('large');
@@ -189,9 +189,11 @@ alert.hide();
   CUI.util.plugClass(CUI.Alert);
   
   // Data API
-  $(function() {
-    $('body').on('click.alert.data-api', '[data-dismiss="alert"]', function(evt) {
-      $(evt.target).parent().hide();
+  if (CUI.options.dataAPI) {
+    $(function() {
+      $('body').on('click.alert.data-api', '[data-dismiss="alert"]', function(evt) {
+        $(evt.target).parent().hide();
+      });
     });
-  });
+  }
 }(window.jQuery));

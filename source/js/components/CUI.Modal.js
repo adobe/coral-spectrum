@@ -128,16 +128,19 @@ modal.hide();
       @desc Creates a new modal dialog     
       @constructs
       
-      @param {Object} options                   Component options
-      @param {Mixed} options.element            jQuery selector or DOM element to use for dialog
-      @param {String} options.heading           Title of the modal dialog (HTML)
-      @param {String} options.content           Content of the dialog (HTML)
-      @param {String} [options.type=default]    Type of dialog to display. One of default, error, notice, success, help, or info
-      @param {Array} [options.buttons]          Array of button descriptors
-      @param {String} [options.remote]          URL to asynchronously load content from the first time the modal is shown
-      @param {Boolean} [options.keyboard=true]  True to hide modal when escape key is pressed
-      @param {Mixed} [options.backdrop=static]  False to not display transparent underlay, True to display and close when clicked, 'static' to display and not close when clicked
-      @param {Mixed} [options.visible=true]     True to display immediately, False to defer display until show() called
+      @param {Object} options                     Component options
+      @param {Mixed} options.element              jQuery selector or DOM element to use for dialog
+      @param {String} options.heading             Title of the modal dialog (HTML)
+      @param {String} options.content             Content of the dialog (HTML)
+      @param {String} [options.type=default]      Type of dialog to display. One of default, error, notice, success, help, or info
+      @param {Array} [options.buttons]            Array of button descriptors
+      @param {String} [options.buttons.label]     Button label (HTML)
+      @param {String} [options.buttons.className] CSS class name to apply to the button
+      @param {Mixed} [options.buttons.click]      Click handler function or string 'hide' to hide the dialog
+      @param {String} [options.remote]            URL to asynchronously load content from the first time the modal is shown
+      @param {Boolean} [options.keyboard=true]    True to hide modal when escape key is pressed
+      @param {Mixed} [options.backdrop=static]    False to not display transparent underlay, True to display and close when clicked, 'static' to display and not close when clicked
+      @param {Mixed} [options.visible=true]       True to display immediately, False to defer display until show() called
      */
     construct: function(options) {
       // Catch clicks to dismiss modal
@@ -181,7 +184,7 @@ modal.hide();
       type: 'default'
     },
     
-    _validTypes: [
+    _types: [
       'default',
       'error',
       'notice',
@@ -202,10 +205,10 @@ modal.hide();
     
     /** @ignore */
     _setType: function() {
-      if (typeof this.options.type !== 'string' || this._validTypes.indexOf(this.options.type) === -1) return;
+      if (typeof this.options.type !== 'string' || this._types.indexOf(this.options.type) === -1) return;
       
       // Remove old type
-      this.$element.removeClass(this._validTypes.join(' '));
+      this.$element.removeClass(this._types.join(' '));
 
       // Add new type
       this.$element.addClass(this.options.type);
@@ -367,40 +370,42 @@ modal.hide();
   CUI.util.plugClass(CUI.Modal);
 
   // Data API
-  $(function() {
-    $('body').on('click.modal.data-api', '[data-toggle="modal"]', function (e) {
-      var $trigger = $(this);
+  if (CUI.options.dataAPI) {
+    $(function() {
+      $('body').on('click.modal.data-api', '[data-toggle="modal"]', function (e) {
+        var $trigger = $(this);
       
-      // Get the target from data attributes
-      var $target = CUI.util.getDataTarget($trigger);
+        // Get the target from data attributes
+        var $target = CUI.util.getDataTarget($trigger);
 
-      // Pass configuration based on data attributes in the triggering link
-      var href = $trigger.attr('href');
-      var options = $.extend({ remote: !/#/.test(href) && href }, $target.data(), $trigger.data());
+        // Pass configuration based on data attributes in the triggering link
+        var href = $trigger.attr('href');
+        var options = $.extend({ remote: !/#/.test(href) && href }, $target.data(), $trigger.data());
 
-      // Parse buttons
-      if (typeof options.buttons === 'string') {
-        options.buttons = JSON.parse(options.buttons);
-      }
+        // Parse buttons
+        if (typeof options.buttons === 'string') {
+          options.buttons = JSON.parse(options.buttons);
+        }
       
-      // If a modal already exists, show it
-      var instance = $target.data('modal');
-      var show = true;
-      if (instance && instance.get('visible'))
-        show = false;
+        // If a modal already exists, show it
+        var instance = $target.data('modal');
+        var show = true;
+        if (instance && instance.get('visible'))
+          show = false;
       
-      // Apply the options from the data attributes of the trigger
-      // When the dialog is closed, focus on the button that triggered its display
-      $target.modal(options).one('hide', function() {
-          $trigger.focus();
-      });
+        // Apply the options from the data attributes of the trigger
+        // When the dialog is closed, focus on the button that triggered its display
+        $target.modal(options).one('hide', function() {
+            $trigger.focus();
+        });
       
-      // Perform visibility toggle if we're not creating a new instance
-      if (instance)
-        $target.data('modal').set({ visible: show });
+        // Perform visibility toggle if we're not creating a new instance
+        if (instance)
+          $target.data('modal').set({ visible: show });
         
-      // Stop links from navigating
-      e.preventDefault();
+        // Stop links from navigating
+        e.preventDefault();
+      });
     });
-  });
+  }
 }(window.jQuery));

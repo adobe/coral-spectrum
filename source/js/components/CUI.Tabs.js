@@ -15,7 +15,7 @@
           <a href="#" data-toggle="tab" class="active">Tab 1</a>
           <a href="#" data-toggle="tab">Tab 2</a>
           <a href="/remote.html" data-target="#" data-toggle="tab">Tab 3</a>
-          <a hrf="#" data-toggle="tab" class="disabled">Disabled Tab</a>
+          <a href="#" data-toggle="tab" class="disabled">Disabled Tab</a>
         </nav>
         <section class="active">Lorizzle ipsizzle fo shizzle mah nizzle fo rizzle.</section>
         <section>Nulla gangsta. Brizzle shizzlin dizzle pharetra neque. </section>
@@ -28,7 +28,7 @@
         <nav>
           <a href="#" data-toggle="tab" class="active">Tab 1</a>
           <a href="#" data-toggle="tab">Tab 2</a>
-          <a hrf="#" data-toggle="tab" class="disabled">Disabled Tab</a>
+          <a href="#" data-toggle="tab" class="disabled">Disabled Tab</a>
         </nav>
         <section class="active">Lorizzle ipsizzle fo shizzle mah nizzle fo rizzle.</section>
         <section>Nulla gangsta. Brizzle shizzlin dizzle pharetra neque. </section>
@@ -40,7 +40,7 @@
         <nav>
           <a href="#" data-toggle="tab" class="active">Stacked Tab 1</a>
           <a href="#" data-toggle="tab">Stacked Tab 2</a>
-          <a hrf="#" data-toggle="tab" class="disabled">Stacked Disabled Tab</a>
+          <a href="#" data-toggle="tab" class="disabled">Stacked Disabled Tab</a>
         </nav>
         <section class="active">Lorizzle ipsizzle fo shizzle mah nizzle fo rizzle.</section>
         <section>Nulla gangsta. Brizzle shizzlin dizzle pharetra neque. </section>
@@ -52,7 +52,7 @@
         <nav>
           <a href="#" data-toggle="tab" class="active">Menu Item One</a>
           <a href="#" data-toggle="tab">Menu Item Two</a>
-          <a hrf="#" data-toggle="tab" class="disabled">Disabled Menu Item</a>
+          <a href="#" data-toggle="tab" class="disabled">Disabled Menu Item</a>
         </nav>
         <section class="active">Lorizzle ipsizzle fo shizzle mah nizzle fo rizzle.</section>
         <section>Nulla gangsta. Brizzle shizzlin dizzle pharetra neque. </section>
@@ -138,7 +138,7 @@ tabs.hide();
   &lt;nav&gt;
     &lt;a href=&quot;#&quot; data-toggle=&quot;tab&quot; class=&quot;active&quot;&gt;Menu Item One&lt;/a&gt;
     &lt;a href=&quot;#&quot; data-toggle=&quot;tab&quot;&gt;Menu Item Two&lt;/a&gt;
-    &lt;a hrf=&quot;#&quot; data-toggle=&quot;tab&quot; class=&quot;disabled&quot;&gt;Disabled Menu Item&lt;/a&gt;
+    &lt;a href=&quot;#&quot; data-toggle=&quot;tab&quot; class=&quot;disabled&quot;&gt;Disabled Menu Item&lt;/a&gt;
   &lt;/nav&gt;
   &lt;section class=&quot;active&quot;&gt;Lorizzle ipsizzle fo shizzle mah nizzle fo rizzle.&lt;/section&gt;
   &lt;section&gt;Nulla gangsta. Brizzle shizzlin dizzle pharetra neque. &lt;/section&gt;
@@ -278,30 +278,32 @@ tabs.hide();
   // jQuery plugin
   CUI.util.plugClass(CUI.Tabs);
 
-  $(function() {
-    // onload handle activating tabs, so remote content is loaded if set to active initially
-    // this also handles tab setups that do not have the correct aria fields, &c.
-    $('.tabs').each(function() {
-      var $element = $(this), $trigger;
+  if (CUI.options.dataAPI) {
+    $(function() {
+      // onload handle activating tabs, so remote content is loaded if set to active initially
+      // this also handles tab setups that do not have the correct aria fields, &c.
+      $('.tabs').each(function() {
+        var $element = $(this), $trigger;
       
-      // find the first active tab (to trigger a load),
-      // or set the first tab to be active
-      if (($trigger = $element.find('nav > a.active').first()).length === 0)
-        $trigger = $element.find('nav > a').first();
+        // find the first active tab (to trigger a load),
+        // or set the first tab to be active
+        if (($trigger = $element.find('nav > a.active').first()).length === 0)
+          $trigger = $element.find('nav > a').first();
 
-      _activateTab($trigger);
+        _activateTab($trigger);
+      });
+
+      // Data API
+      $('body').on('click.tabs.data-api', '.tabs > nav > a[data-toggle="tab"]:not(".disabled")', function (e) {
+        // Stop links from navigating
+        e.preventDefault();
+
+        // and show/hide the relevant tabs
+        _activateTab($(this));
+
+        // return false for good measure
+        return false;
+      });
     });
-
-    // Data API
-    $('body').on('click.tabs.data-api', '.tabs > nav > a[data-toggle="tab"]:not(".disabled")', function (e) {
-      // Stop links from navigating
-      e.preventDefault();
-
-      // and show/hide the relevant tabs
-      _activateTab($(this));
-
-      // return false for good measure
-      return false;
-    });
-  });
+  }
 }(window.jQuery));

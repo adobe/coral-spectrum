@@ -1,13 +1,29 @@
 /** 
-  The main CUI namespace.
-   
+  @classdesc The main CUI namespace.
   @namespace
   
-  @property {Object} options           Main options for CloudUI components.
-  @property {Boolean} options.debug    If true, show debug messages for all components.
-*/
-var CUI = {};
+  @property {Object} options            Main options for CloudUI components.
+  @property {Boolean} options.debug     If true, show debug messages for all components.
+  @property {Boolean} options.dataAPI   If true, add listeners for widget data APIs.
+  @property {Object} Templates          Contains templates used by CUI widgets
+  
+  @example
+<caption>Change CUI options</caption>
+<description>You can change CUI options by defining <code>CUI.options</code> before you load CUI.js</description>
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var CUI = {
+    options: {
+      debug: false,
+      dataAPI: true
+    }
+  };
+&lt;/script&gt;
+&lt;script src=&quot;js/CUI.js&quot;&gt;&lt;/script&gt;
 
-CUI.options = {
-  debug: false
-};
+*/
+var CUI = CUI || {};
+
+CUI.options = $.extend({
+  debug: false,
+  dataAPI: true
+}, CUI.options);
