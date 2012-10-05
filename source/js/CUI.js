@@ -1,12 +1,12 @@
 /** 
   @classdesc The main CUI namespace.
   @namespace
-  
+
   @property {Object} options            Main options for CloudUI components.
   @property {Boolean} options.debug     If true, show debug messages for all components.
   @property {Boolean} options.dataAPI   If true, add listeners for widget data APIs.
   @property {Object} Templates          Contains templates used by CUI widgets
-  
+
   @example
 <caption>Change CUI options</caption>
 <description>You can change CUI options by defining <code>CUI.options</code> before you load CUI.js</description>

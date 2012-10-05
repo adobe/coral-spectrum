@@ -2,16 +2,16 @@
   CUI.Alert = new Class(/** @lends CUI.Alert# */{
     toString: 'Alert',
     extend: CUI.Widget,
-    
+
     /**
       @extends CUI.Widget
       @classdesc An optionally closable alert message.
-      
+
       <div class="alert error">
         <button class="close" data-dismiss="alert">&times;</button>
         <strong>ERROR</strong><div>Uh oh, something went wrong with the whozit!</div>
       </div>
-      
+
       @example
 <caption>Instantiate with Class</caption>
 var alert = new CUI.Alert({
@@ -56,7 +56,7 @@ alert.hide();
 
       @desc Creates a new alert
       @constructs
-      
+
       @param {Object} options                               Component options
       @param {String} [options.heading=Type, capitalized]   Title of the alert (HTML)
       @param {String} options.content                       Content of the alert (HTML)
@@ -70,14 +70,14 @@ alert.hide();
 
       // Add alert class to give styling
       this.$element.addClass('alert');
-      
+
       // Listen to changes to configuration
       this.$element.on('change:heading', this._setHeading.bind(this));
       this.$element.on('change:content', this._setContent.bind(this));
       this.$element.on('change:type', this._setType.bind(this));
       this.$element.on('change:closable', this._setClosable.bind(this));
       this.$element.on('change:size', this._setSize.bind(this));
-      
+
       // Read in options "set" by markup so we don't override the values they set
       $.each(this._types, function(index, type) {
         if (this.$element.hasClass(type)) {
@@ -85,28 +85,28 @@ alert.hide();
           return false;
         }
       }.bind(this));
-      
+
       $.each(this._sizes, function(index, size) {
         if (this.$element.hasClass(size)) {
           this.options.size = size;
           return false;
         }
       }.bind(this));
-      
+
       // Render template, if necessary
       if (this.$element.children().length === 0) {
         // Set default heading
         this.options.heading = this.options.heading === undefined ? this.options.type.toUpperCase() : this.options.heading;
-        
+
         this.$element.html(CUI.Templates['alert'](this.options));
-        
+
         this.applyOptions();
       }
       else {
         this.applyOptions(true);
       }
     },
-    
+
     defaults: {
       type: 'error',
       size: 'small',
@@ -114,7 +114,7 @@ alert.hide();
       visible: true,
       closable: true
     },
-    
+
     _types: [
       'error',
       'notice',
@@ -122,12 +122,12 @@ alert.hide();
       'help',
       'info'
     ],
-    
+
     _sizes: [
       'small',
       'large'
     ],
-    
+
     applyOptions: function(partial) {
       if (!partial) {
         this._setHeading();
@@ -137,42 +137,42 @@ alert.hide();
       this._setType();
       this._setSize();
     },
-    
+
     /** @ignore */
     _setContent: function() {
       if (typeof this.options.content !== 'string') return;
-      
+
       this.$element.find('div').html(this.options.content);
     },
-    
+
     /** @ignore */
     _setHeading: function() {
       if (typeof this.options.content !== 'string') return;
-    
+
       this.$element.find('strong').html(this.options.heading);
     },
-    
+
     /** @ignore */
     _setType: function() {
       if (typeof this.options.type !== 'string' || this._types.indexOf(this.options.type) === -1) return;
-      
+
       // Remove old type
       this.$element.removeClass(this._types.join(' '));
 
       // Add new type
       this.$element.addClass(this.options.type);
     },
-    
+
     /** @ignore */
     _setSize: function() {
       if (typeof this.options.size !== 'string' || this._sizes.indexOf(this.options.size) === -1) return;
-      
+
       if (this.options.size === 'small')
         this.$element.removeClass('large');
       else
         this.$element.addClass('large');
     },
-    
+
     /** @ignore */
     _setClosable: function() {
       var el = this.$element.find('.close');
@@ -187,7 +187,7 @@ alert.hide();
   });
 
   CUI.util.plugClass(CUI.Alert);
-  
+
   // Data API
   if (CUI.options.dataAPI) {
     $(function() {

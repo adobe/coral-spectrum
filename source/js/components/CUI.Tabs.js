@@ -6,7 +6,7 @@
     /**
       @extends CUI.Widget
       @classdesc A tabbed panel with several variants. A tabs instance ($.tabs or new CUI.Tabs) is not needed for basic functionality, only if programmatic access is necessary.
-      
+
       <h2 class="line">Examples</h2>
 
       <h3>Default</h3>
@@ -34,7 +34,7 @@
         <section>Nulla gangsta. Brizzle shizzlin dizzle pharetra neque. </section>
         <section>This section will never be shown :(</section>
       </div>
-  
+
       <h3>Stacked</h3>
       <div class="tabs stacked">
         <nav>
@@ -46,7 +46,7 @@
         <section>Nulla gangsta. Brizzle shizzlin dizzle pharetra neque. </section>
         <section>This section will never be shown :(</section>
       </div>
-      
+
       <h3>Nav</h3>
       <div class="tabs nav">
         <nav>
@@ -58,7 +58,7 @@
         <section>Nulla gangsta. Brizzle shizzlin dizzle pharetra neque. </section>
         <section>This section will never be shown :(</section>
       </div>
-            
+
       @example
 <caption>Instantiate with Class</caption>
 var tabs = new CUI.Tabs({
@@ -148,7 +148,7 @@ tabs.hide();
 
       @desc Creates a new tab panel    
       @constructs
-      
+
       @param {Object} options                       Component options
       @param {Mixed} options.element                jQuery selector or DOM element to use for panel
       @param {String} [options.type=""]             Type of the tabs. Can be blank, or one of white, stacked, or nav
@@ -163,7 +163,7 @@ tabs.hide();
     construct: function(options) {
       // Add tabs class to give styling
       this.$element.addClass('tabs');
-      
+
       // Accessibility
       this.$element.attr('role', 'tabpanel');
 
@@ -205,28 +205,28 @@ tabs.hide();
       this.$element.on('change:tabs', this._render.bind(this));
       this.$element.on('change:active', this._setActive.bind(this));
     },
-    
+
     defaults: {
       tabs: []
     },
-    
+
     _types: [
       'white',
       'nav',
       'stacked'
     ],
-    
+
     /** @ignore */
     _setType: function() {
       if (typeof this.options.type !== 'string' || this._types.indexOf(this.options.type) === -1) return;
-      
+
       // Remove old type
       this.$element.removeClass(this._types.join(' '));
 
       // Add new type
       this.$element.addClass(this.options.type);
     },
-    
+
     /** @ignore */
     _render: function() {
       if (!$.isArray(this.options.tabs)) return;
@@ -234,7 +234,7 @@ tabs.hide();
       // render the tabs
       this.$element.html(CUI.Templates['tabs'](this.options));
     },
-    
+
     /** @ignore */
     _setActive: function() {
       var $trigger;
@@ -248,7 +248,7 @@ tabs.hide();
       _activateTab($trigger);
     }
   });
-  
+
   // utility function used both in the event handler and the class proper
   // this is to avoid instantiating new classes for every tab instance
   var _activateTab = function($trigger) {
@@ -284,7 +284,7 @@ tabs.hide();
       // this also handles tab setups that do not have the correct aria fields, &c.
       $('.tabs').each(function() {
         var $element = $(this), $trigger;
-      
+
         // find the first active tab (to trigger a load),
         // or set the first tab to be active
         if (($trigger = $element.find('nav > a.active').first()).length === 0)

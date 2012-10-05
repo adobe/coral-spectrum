@@ -25,8 +25,8 @@ $(function() {
     $('#tabsExample').attr('class', $(this).data('variant'));
   });
   
- /**
-  * Show the paragraph link icon when a heading is hovered on that is within a named section
+  /**
+    Show the paragraph link icon when a heading is hovered on that is within a named section
   */
   (function() {
     var anchor = $('#SectionAnchor');
