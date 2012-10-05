@@ -3,51 +3,57 @@
 * A filters or tags input field.
 */
 
+.filters input[type=text],
+input[type=text].filter {
+  .box-sizing(border-box);
+
+  width: 13rem;  /* Fixed width to correspond to sourounding div.filters */
+
+  font-size: 0.8125rem;
+
+  height: 2rem;
+  padding: 0.25rem 0.5rem 0.25rem 2rem;
+  margin: 0.5rem 0;
+
+  border: @px solid @textfield-border-color; 
+  background: @textfield-background-color url('../images/components/filters/magnifier.png') no-repeat 0.5rem 0.4rem;
+  background-size: 1.1rem;
+
+  &:disabled {
+    background: @textfield-disabled-background-color url('../images/components/filters/magnifier.png') no-repeat 0.5rem 0.4rem;
+    background-size: 1.1rem;
+  }
+
+  &:focus {
+    .glow();
+    outline: none;
+  }
+
+  &.error {
+    .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+
+    &:focus {
+     .glow;
+    }
+  }
+}
+
 .filters {
-    margin-left: -1px;
-    overflow: auto;
+    display: inline-block;
+    width: 13rem;  /* Needs fixed width for floating term elements */
 
     input[type=text] {
-      .box-sizing(border-box);
-
-      font-size: 0.8125rem;
-
-      height: 2rem;
-      padding: 0.25rem 0.5rem 0.25rem 2rem;
-      margin: 0.5rem 0;
-
-      border: @px solid @textfield-border-color; 
-      background: @textfield-background-color url('../images/components/filters/magnifier.png') no-repeat 0.5rem 0.4rem;
-      background-size: 1.1rem;
-
-      &:disabled {
-        background-color: @textfield-disabled-background-color;
-      }
-
-      &:focus {
-        .glow();
-        outline: none;
-      }
-
-      &.error {
-        .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
-
-        &:focus {
-         .glow;
-        }
-      }
+        width: 100%;
     }
 
-
-
-
     ul {
-        font-size: 0.8125rem;
+        font-size: 0; /* Eliminate white space */
         padding: 0;
         margin: 0 0 0.5rem 0;
 
     }
     ul li {
+        font-size: 0.8125rem;
         padding: 0.25rem 0.5rem;
         margin: 0 0.2rem 0.2rem 0;
 
@@ -71,4 +77,27 @@
         margin: 0;
     }
 
+}
+
+.filters.stacking {
+    input[type=text] {
+        border: 0;
+        background: transparent;
+        padding: 0;
+        margin: 0;
+    }
+
+    border: @px solid @textfield-border-color; 
+    background: @textfield-background-color url('../images/components/filters/magnifier.png') no-repeat 0.5rem 0.4rem;
+    background-size: 1.1rem;
+
+    &:disabled {
+      background: @textfield-disabled-background-color url('../images/components/filters/magnifier.png') no-repeat 0.5rem 0.4rem;
+      background-size: 1.1rem;
+    }
+
+    &:focus {
+      .glow();
+      outline: none;
+    }
 }
