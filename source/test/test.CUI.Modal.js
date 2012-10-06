@@ -22,46 +22,46 @@ describe('CUI.Modal', function() {
   };
   
   it('should be defined in CUI namespace', function() {
-    expect(CUI).to.have.property('Modal');
+    CUI.should.have.property('Modal');
   });
   
   it('should be defined on jQuery object', function() {
     var div = $('<div/>');
-    expect(div).to.have.property('modal');
+    div.should.have.property('modal');
   });
   
   describe('modal from template', function() {
     var el = $('<div/>').modal(modalConfig);
   
     it('should have correct CSS classname', function() {
-      expect(el.hasClass('modal')).to.be.true;
+      el.hasClass('modal').should.be.true;
     });
     
     it('should have correct markup', function() {
-      expect(el.find('.modal-header')).to.have.length(1);
-      expect(el.find('.modal-body')).to.have.length(1);
-      expect(el.find('.modal-footer')).to.have.length(1);
+      el.find('.modal-header').should.have.length(1);
+      el.find('.modal-body').should.have.length(1);
+      el.find('.modal-footer').should.have.length(1);
     });
     
     it('should have correct heading', function() {
-      expect(el.find('.modal-header h2').html()).to.equal('TestHeading');
+      el.find('.modal-header h2').html().should.equal('TestHeading');
     });
     
     it('should have correct content', function() {
-      expect(el.find('.modal-body').html()).to.equal('TestContent');
+      el.find('.modal-body').html().should.equal('TestContent');
     });
     
     it('should have buttons', function() {
-      expect(el.find('.modal-footer button')).to.have.length(2);
+      el.find('.modal-footer button').should.have.length(2);
     });
     
     it('should have button with correct class names', function() {
-      expect(el.find('.modal-footer button.myCloseButton')).to.have.length(1);
-      expect(el.find('.modal-footer button.mySaveButton')).to.have.length(1);
+      el.find('.modal-footer button.myCloseButton').should.have.length(1);
+      el.find('.modal-footer button.mySaveButton').should.have.length(1);
     });
     
     it('should be visible by default', function() {
-      expect(el.hasClass('in')).to.be.true;
+      el.hasClass('in').should.be.true;
     });
   });
   
@@ -84,11 +84,11 @@ describe('CUI.Modal', function() {
     });
   
     it('should not overwrite heading', function() {
-      expect(el.find('.modal-header h2').html()).to.equal('TestHeading');
+      el.find('.modal-header h2').html().should.equal('TestHeading');
     });
     
     it('should not overwrite content', function() {
-      expect(el.find('.modal-body').html()).to.equal('TestContent');
+      el.find('.modal-body').html().should.equal('TestContent');
     });
   });
   
@@ -97,14 +97,14 @@ describe('CUI.Modal', function() {
       var el = $('<div/>').modal(modalConfig);
       el.find('.modal-header button.close').click();
       
-      expect(el.hasClass('in')).to.be.false;
+      el.hasClass('in').should.be.false;
     });
     
     it('should hide with custom button', function() {
       var el = $('<div/>').modal(modalConfig);
       el.find('.modal-footer button.myCloseButton').click();
       
-      expect(el.hasClass('in')).to.be.false;
+      el.hasClass('in').should.be.false;
     });
     
     it('should execute button click handlers', function() {
