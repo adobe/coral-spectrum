@@ -8,6 +8,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-contrib-mincss');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-mocha');
 
   grunt.initConfig({
     // Meta and build configuration
@@ -20,7 +21,8 @@ module.exports = function(grunt) {
       build: 'build',
       source: 'source',
       temp: 'temp',
-      components: 'components'
+      components: 'components',
+      modules: 'node_modules'
     },
 
     // Configuration
@@ -96,6 +98,21 @@ module.exports = function(grunt) {
       prettyify: {
         src: '<%= dirs.components %>/bootstrap/docs/assets/js/google-code-prettify/*',
         dest: '<%= dirs.build %>/examples/assets/google-code-prettify/'
+      },
+      test: {
+        src: '<%= dirs.source %>/test/**',
+        dest: '<%= dirs.build %>/test/'
+      },
+      test_libs: {
+        files: {
+          '<%= dirs.build %>/test/libs/mocha/': [
+            '<%= dirs.modules %>/mocha/mocha.js',
+            '<%= dirs.modules %>/mocha/mocha.css'
+          ],
+          '<%= dirs.build %>/test/libs/chai/': [
+            '<%= dirs.modules %>/chai/chai.js'
+          ]
+        }
       }
     },
     
@@ -228,6 +245,16 @@ module.exports = function(grunt) {
       build: {}
     },
 
+    mocha: {
+      cui: {
+        run: true,
+        
+        src: [
+          '<%= dirs.build %>/test/index.html'
+        ]
+      }
+    },
+
     // Watch operations
     watch: {
       copy_guide: {
@@ -258,6 +285,20 @@ module.exports = function(grunt) {
       compile_handlebars: {
         files: '<%= dirs.source %>/templates/*',
         tasks: 'handlebars'
+      },
+      
+      copy_tests: {
+        files: '<%= dirs.source %>/test/**',
+        tasks: 'copy:test'
+      },
+      
+      run_tests: {
+        files: [
+          '<%= dirs.source %>/js/**',
+          '<%= dirs.build %>/js/CUI.Templates.js',
+          '<%= dirs.source %>/test/**'
+        ],
+        tasks: 'mocha'
       }
     }
   });

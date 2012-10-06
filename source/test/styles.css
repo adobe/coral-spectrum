@@ -1,0 +1,8 @@
+/* Don't show any artifacts from tests */
+body > * {
+  display: none !important;
+}
+/* Make sure mocha's div displays */
+div#mocha {
+  display: block !important;
+}
