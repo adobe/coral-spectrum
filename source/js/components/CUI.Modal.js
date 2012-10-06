@@ -274,7 +274,6 @@ modal.hide();
       return this;
     },
 
-
     /** @ignore */
     _setEscapeHandler: function(show) {
       if (show && this.options.keyboard) {
