@@ -106,16 +106,20 @@ input[type=text].filters {
 .autocomplete-results {
     margin: 0;
     padding: 0;
-    border-left: @px solid @textfield-border-color;
-    border-right: @px solid @textfield-border-color;
-    border-top: @px solid @textfield-border-color;
+
     li {
         list-style-type: none;
         padding: 0.5rem 0.5rem;
         margin: 0;
         background-color: @textfield-background-color;
-        border-bottom: @px solid @textfield-border-color;
+        border-top: @px solid @textfield-border-color;
+        border-left: @px solid @textfield-border-color;
+        border-right: @px solid @textfield-border-color;
         cursor: pointer;
+
+        &:last-child {
+            border-bottom: @px solid @textfield-border-color;
+        }
 
         &:hover {
             background-color: darken(@textfield-background-color, 10%);

@@ -12,13 +12,18 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <h1>Single Term Filter Field</h1>
+
+        <div class="content">
+            <h1>Single Term Filter Field</h1>
         
-        Filter me: <input type="text" name="filter">
-            
+            <p>
+            Filter me: <input type="text" name="filter">
+            </p>
+        </div>
+        
         <script type="text/javascript">
             $(document).ready(function() {
-               $("input[name=filter]").filters({
+               /*$("input[name=filter]").filters({
                    options: ["Watermelon",
                         "Figs", 
                         "Dates", 
@@ -35,7 +40,31 @@
                         "Avocado", 
                         "Guava", 
                         "Kumquat" ]
-               }); 
+               });*/
+               
+               var filters = new CUI.Filters({
+                            element: 'input[name=filter]',
+                            options: ["Watermelon",
+                                     "Figs", 
+                                     "Dates", 
+                                     "Olive", 
+                                     "Jujube", 
+                                     "Pomegranate", 
+                                     "Lemon", 
+                                     "Lime",
+                                     "Key Lime", 
+                                     "Mandarin", 
+                                     "Orange", 
+                                     "Sweet Lime", 
+                                     "Tangerine", 
+                                     "Avocado", 
+                                     "Guava", 
+                                     "Kumquat" ]
+                });
+                
+                filters.setSelectedIndex(2);
+               
+               
             });
         </script>
     </body>
