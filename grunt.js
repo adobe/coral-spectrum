@@ -1,5 +1,50 @@
 /*global module:false*/
 module.exports = function(grunt) {
+  
+  /**
+   JavaScript file include order
+   Add new components to this array _after_ the components they inherit from
+  */
+  var includeOrder = [
+    // Class system
+    'Class.js',
+    
+    // Namespace 
+    'CUI.js',
+    
+    // Utilities
+    'CUI.Util.js',
+
+    // Components
+    'components/CUI.Widget.js',
+    'components/CUI.Modal.js',
+    'components/CUI.Tabs.js',
+    'components/CUI.Alert.js'
+  ];
+  
+  /**
+    Build directories
+    Any directories used by the build should be defined here
+  */
+  var dirs = {
+    build: 'build',
+    source: 'source',
+    temp: 'temp',
+    components: 'components',
+    modules: 'node_modules'
+  };
+
+  /**
+    Get array of CUI includes in the correct order
+    
+    @param jsPath   Base path to prepend to each include
+  */
+  function getIncludes(jsPath) {
+    var includes = [dirs.build+'/js/CUI.Templates.js'];
+    includeOrder.forEach(function(file) { includes.push(jsPath+file); });
+    return includes;
+  }
+
   // External tasks
   grunt.loadTasks('tasks');
   grunt.loadNpmTasks('grunt-contrib-clean');
@@ -17,13 +62,7 @@ module.exports = function(grunt) {
       appName: 'CoralUI',
       appWebSite: 'git.corp.adobe.com/Reef/CoralUI'
     },
-    dirs: {
-      build: 'build',
-      source: 'source',
-      temp: 'temp',
-      components: 'components',
-      modules: 'node_modules'
-    },
+    dirs: dirs,
 
     // Configuration
     jshint: {
@@ -57,7 +96,8 @@ module.exports = function(grunt) {
     // Task definitions
     clean: {
       build: '<%= dirs.build %>',
-      jsdoc: '<%= dirs.build %>/jsdoc'
+      jsdoc: '<%= dirs.build %>/jsdoc',
+      tests: '<%= dirs.build %>/test'
     },
 
     copy: {
@@ -99,7 +139,7 @@ module.exports = function(grunt) {
         src: '<%= dirs.components %>/bootstrap/docs/assets/js/google-code-prettify/*',
         dest: '<%= dirs.build %>/examples/assets/google-code-prettify/'
       },
-      test: {
+      tests: {
         src: '<%= dirs.source %>/test/**',
         dest: '<%= dirs.build %>/test/'
       },
@@ -192,26 +232,19 @@ module.exports = function(grunt) {
     },
 
     concat: {
-      js: {
-        src: [
-          '<%= dirs.source %>/js/Class.js',        // Class system
-          '<%= dirs.source %>/js/CUI.js',          // Namespace
-          '<%= dirs.build %>/js/CUI.Templates.js', // Templates
-          
-          // Components
-          '<%= dirs.source %>/js/CUI.Util.js',
-          '<%= dirs.source %>/js/components/CUI.Widget.js',
-          '<%= dirs.source %>/js/components/CUI.Modal.js',
-          '<%= dirs.source %>/js/components/CUI.Tabs.js',
-          '<%= dirs.source %>/js/components/CUI.Alert.js'
-        ],
+      cui: {
+        src: getIncludes(dirs.source+'/js/'),
         dest: '<%= dirs.build %>/js/CUI.js'
+      },
+      cui_cc: {
+        src: getIncludes(dirs.temp+'/js_instrumented/'),
+        dest: '<%= dirs.temp %>/js_instrumented/CUI_cc.js'
       }
     },
 
     min: {
       cui: {
-        src: ['<config:concat.js.dest>'],
+        src: ['<config:concat.cui.dest>'],
         dest: '<%= dirs.build %>/js/CUI.min.js'
       } // TBD: minify individual JS files?
     },
@@ -219,9 +252,9 @@ module.exports = function(grunt) {
     less: {
       cui: {
         options: {
-          paths: [
-            'source/less/', // must hardcode paths here, grunt-contrib-less doesn't support template tags
-            'temp/less/' // must hardcode paths here, grunt-contrib-less doesn't support template tags
+          paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
+            dirs.source+'/less/',
+            dirs.temp+'/less/'
           ]
         },
         files: {
@@ -230,9 +263,9 @@ module.exports = function(grunt) {
       },
       guide: {
         options: {
-          paths: [
-            'source/less/', // must hardcode paths here, grunt-contrib-less doesn't support template tags
-            'temp/less/' // must hardcode paths here, grunt-contrib-less doesn't support template tags
+          paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
+            dirs.source+'/less/', // must hardcode paths here, grunt-contrib-less doesn't support template tags
+            dirs.temp+'/less/' // must hardcode paths here, grunt-contrib-less doesn't support template tags
           ]
         },
         files: {
@@ -269,7 +302,7 @@ module.exports = function(grunt) {
 
       concat_min_js: {
         files: ['<%= dirs.source %>/js/**', '<%= dirs.build %>/js/CUI.Templates.js'],
-        tasks: 'concat:js min:cui'
+        tasks: 'concat:cui min:cui'
       },
       
       compile_less_min_css: {
@@ -289,7 +322,7 @@ module.exports = function(grunt) {
       
       copy_tests: {
         files: '<%= dirs.source %>/test/**',
-        tasks: 'copy:test'
+        tasks: 'clean:tests copy:tests'
       },
       
       run_tests: {
@@ -304,16 +337,16 @@ module.exports = function(grunt) {
   });
   
   // Partial build for development
-  grunt.registerTask('partial', 'lint copy handlebars concat min:cui less mincss');
+  grunt.registerTask('partial', 'lint copy handlebars concat:cui min:cui less mincss');
   
   // Full build with docs and compressed file
-  grunt.registerTask('full', 'clean lint copy handlebars concat min less mincss jsdoc compress');
+  grunt.registerTask('full', 'clean lint copy handlebars concat:cui min less mincss jsdoc compress');
   
   // Rename mvn task so we can override it
   grunt.task.renameTask('mvn', 'mvn-install');
   
   // Almost full build, just the stuff needed for Granite install
-  grunt.registerTask('mvn-build', 'clean lint copy:images copy:fonts copy:less_bootstrap_tmp copy:less_bootstrap_build copy:less_cui handlebars concat less:cui');
+  grunt.registerTask('mvn-build', 'clean lint copy:images copy:fonts copy:less_bootstrap_tmp copy:less_bootstrap_build copy:less_cui handlebars concat:cui less:cui');
   
   // Custom build for maven
   grunt.registerTask('mvn', 'mvn-build mvn-install');
