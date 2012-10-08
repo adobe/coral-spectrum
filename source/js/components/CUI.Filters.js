@@ -14,45 +14,23 @@
       
       @example
 <caption>Instantiate with Class</caption>
-var alert = new CUI.Alert({
-  element: '#myAlert',
-  heading: 'ERROR',
-  content: 'An error has occurred.',
-  closable: true
+var filters = new CUI.Filters({
+  element: '#myFilter',
+  options: ["Apples", "Pears", "Oranges"]
 });
 
-// Hide the alert, change the content, then show it again
-alert.hide().set({ content: 'Another error has occurred.'}).show();
-
-// jQuery style works as well
-$('#myAlert').alert('hide');
-
+// Set the selected option
+filters.setSelectedIndex(1);
+        
       @example
 <caption>Instantiate with jQuery</caption>
-$('#myAlert').alert({
-  heading: 'ERROR',
-  content: 'An error has occurred.',
-  closable: true
+$('#myFilters').alert({
+  options: ["Apples", "Pears", "Oranges"]
 });
 
-// Hide the alert, change the content, then show it again
-$('#myAlert').alert('hide').alert({ heading: 'Another error has occurred.'}).alert('show');
-
-// A reference to the element's alert instance is stored as data-alert
-var alert = $('#myAlert').data('alert');
-alert.hide();
-
-      @example
-<caption>Data API: Hide alert</caption>
-<description>When an element within the alert has <code><span class="atn">data-dismiss</span>=<span class="atv">"alert"</span></code>, it will hide the alert.</description>
-&lt;a data-dismiss=&quot;alert&quot;&gt;Dismiss&lt;/a&gt;
-
-      @example
-<caption>Markup</caption>
-&lt;div class=&quot;alert error&quot;&gt;
-  &lt;button class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;&amp;times;&lt;/button&gt;
-  &lt;strong&gt;ERROR&lt;/strong&gt;&lt;div&gt;Uh oh, something went wrong with the whozit!&lt;/div&gt;
-&lt;/div&gt;
+// A reference to the element's filters instance is stored as data-filters
+var filters = $('#myFilters').data('filters');
+var index = filters.getSelectedIndex();
 
       @desc Creates a filters field
       @constructs
@@ -69,7 +47,9 @@ alert.hide();
         
         // Set callback to default if there is none
         if (!this.options.autocompleteCallback) this.options.autocompleteCallback = this._defaultAutocompleteCallback.bind(this);
-        
+
+
+        // Listen to events
         this.$element.on("input", "", function() {
             if (this.typeTimeout) clearTimeout(this.typeTimeout);
             this.typeTimeout = setTimeout(this._inputChanged.bind(this), this.options.delay);
@@ -78,7 +58,7 @@ alert.hide();
         this.$element.on("blur", "", function() {
             if (this.typeTimeout) clearTimeout(this.typeTimeout);
             this.typeTimeout = null;
-            setTimeout(this._hideResults.bind(this), 200); // Use timeout to have a chance to select from list
+            setTimeout(this._hideAutocompleter.bind(this), 200); // Use timeout to have a chance to select from list
         }.bind(this));
         
         this.$element.on("keydown", "", this._keyPressed.bind(this));
@@ -93,73 +73,120 @@ alert.hide();
         highlight: true
     },
     
-    listElement: null,
+    /**
+     * @param {int} index     Sets the currently selected option by its index
+     */
+    setSelectedIndex: function(index) {
+        if (index < 0 || index >= this.options.options.length) return;
+        this.selectedIndex = index;
+        var option = this.options.options[index];
+        this.$element.attr("value", option);
+    },
+    
+    /**
+     * @return {int} The currently selected options by index or -1 if none is selected
+     */
+    getSelectedIndex: function() {
+        return this.selectedIndex;
+    },
+
+    autocompleteElement: null,
     typeTimeout: null,
+    selectedIndex: -1, // For single term only
     
     _keyPressed: function(event) {        
         var key = event.keyCode;
-        if (!this.listElement) return;
+                
+        // Only listen to keys if there is an autocomplete box right now
+        if (!this.autocompleteElement) return;
 
-        var current = this.listElement.find("li.selected").index();
+        var currentIndex = this.autocompleteElement.find("li.selected").index();
         
-        if (key === 38) {
+        if (key === 38) { // up
             event.preventDefault();
-            if (current > 0) current--;
+            if (currentIndex > 0) currentIndex--;
         }
         
-        if (key === 40) {
+        if (key === 40) { // down
             event.preventDefault();
-            if (current < (this.listElement.children().length - 1)) current++;
+            if (currentIndex < (this.autocompleteElement.children().length - 1)) currentIndex++;
         }
         
-        if (key === 13) {
+        if (key === 27) { // escape
+            event.preventDefault();
+            this._hideAutocompleter();
+            return;
+        }
+        
+        if (key === 13) { // return
            event.preventDefault();
-           if (current >= 0) {
-                this.$element.attr("value",  $(this.listElement.children().get(current)).text());
-                this._hideResults();
+           if (currentIndex >= 0) {
+                this.setSelectedIndex($(this.autocompleteElement.children().get(currentIndex)).attr("data-id"));
+                this._hideAutocompleter();
                 this.$element.focus();
+                return;
            }
         }
         
-        this.listElement.children().removeClass("selected");
-        if (current >= 0) $(this.listElement.children().get(current)).addClass("selected");
+        // Set new css classes
+        this.autocompleteElement.children().removeClass("selected");
+        if (currentIndex >= 0) $(this.autocompleteElement.children().get(currentIndex)).addClass("selected");
         
         return;
     },
+
     _inputChanged: function() {
         var searchFor = this.$element.attr("value");
+        
         var results = this.options.autocompleteCallback(searchFor);
-        this._renderResults(results, searchFor);
+        this._showAutocompleter(results, searchFor);
 
     },
     
-    _renderResults: function(results, searchFor) {
+    _showAutocompleter: function(results, searchFor) {
+        // Hide old list (if any!)
+        this._hideAutocompleter();
+        if (results.length === 0) return;
+        
         var that = this;
         var list = $("<ul class=\"autocomplete-results\">");
         list.width(this.$element.outerWidth());
-        $.each(results, function(key, value) {
+        $.each(results, function(key, index) {
+            var value = this.options.options[index];
+            
             if (this.options.highlight) {
                 var i = value.toLowerCase().indexOf(searchFor.toLowerCase());
                 if (i >= 0) {
                     value = value.substr(0, i) + "<em>" + value.substr(i, searchFor.length) + "</em>" + value.substr(i + searchFor.length);
                 }
             }
-            list.append("<li>" + value + "</li>");
+            list.append("<li data-id=\"" + index + "\">" + value + "</li>");
         }.bind(this));
+        
         list.find("li").click(function() {
-           that.$element.attr("value", $(this).text());
-           that._hideResults();
+           that.setSelectedIndex($(this).attr("data-id"));
+           that._hideAutocompleter();
            that.$element.focus();
         });
-        this._hideResults();
-        this.listElement = list;
+        
+        // Calculate correct position and size on screen
+        var left = this.$element.position().left + parseFloat(this.$element.css("margin-left"));
+        var top = this.$element.position().top + this.$element.outerHeight(true) - parseFloat(this.$element.css("margin-bottom"));
+        var width = this.$element.outerWidth(false);
+        
+        list.css({position: "absolute",
+                  left: left + "px", 
+                  top: top + "px", 
+                  width: width + "px"});
+
+        this.autocompleteElement = list;
         this.$element.after(list);
     },
     
-    _hideResults: function() {
-        if (this.listElement) {
-            this.listElement.detach();
-            this.listElement = null;
+    _hideAutocompleter: function() {
+        if (this.autocompleteElement) {
+            this.autocompleteElement.detach();
+            this.autocompleteElement = null;
         }    
     },
     
@@ -167,7 +194,7 @@ alert.hide();
         var result = [];
         
         $.each(this.options.options, function(key, value) {
-            if (value.toLowerCase().indexOf(searchFor.toLowerCase(), 0) >= 0 ) result.push(value);
+            if (value.toLowerCase().indexOf(searchFor.toLowerCase(), 0) >= 0 ) result.push(key);
         });
         
         return result;
