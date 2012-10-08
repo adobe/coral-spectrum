@@ -1,6 +1,5 @@
 /*global module:false*/
 module.exports = function(grunt) {
-  
   /**
    JavaScript file include order
    Add new components to this array _after_ the components they inherit from
@@ -55,12 +54,15 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-mocha');
 
+  // Read in package.json
+  var pkg = grunt.file.readJSON('package.json');
+
   grunt.initConfig({
     // Meta and build configuration
     meta: {
-      version: '0.1.1',
-      appName: 'CoralUI',
-      appWebSite: 'git.corp.adobe.com/Reef/CoralUI'
+      version: pkg.version,
+      appName: pkg.name,
+      appWebSite: pkg.repository.url
     },
     dirs: dirs,
 
