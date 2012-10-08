@@ -79,7 +79,7 @@ fi
 # Install jade if necessary
 if [ ! -d node_modules/jade ]; then
   red " [X] " "\c"
-  echo "jade not installed, installing with bower"
+  echo "jade not installed, installing with npm"
   npm install jade
   
   if [ $? -ne 0 ]; then
