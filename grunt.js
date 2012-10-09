@@ -210,6 +210,7 @@ module.exports = function(grunt) {
             '<%= dirs.build %>/js/**',
             '<%= dirs.build %>/jsdoc/**',
             '<%= dirs.build %>/less/**',
+            '<%= dirs.build %>/test/**',
             '<%= dirs.build %>/index.html'
           ]
         }
@@ -289,6 +290,8 @@ module.exports = function(grunt) {
         ]
       }
     },
+    
+    coverage: {},
 
     // Watch operations
     watch: {
@@ -342,7 +345,14 @@ module.exports = function(grunt) {
   grunt.registerTask('partial', 'lint copy handlebars concat:cui min:cui less mincss');
   
   // Full build with docs and compressed file
-  grunt.registerTask('full', 'clean lint copy handlebars concat:cui min less mincss jsdoc compress');
+  grunt.registerTask('full-build', 'lint copy handlebars concat:cui min less mincss jsdoc');
+  
+  // Full build with docs and compressed file
+  grunt.registerTask('full', 'clean full-build');
+  
+  // Release build
+  // TODO: add maven?
+  grunt.registerTask('release', 'clean full-build coverage compress');
   
   // Rename mvn task so we can override it
   grunt.task.renameTask('mvn', 'mvn-install');
