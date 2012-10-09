@@ -11,7 +11,7 @@ module.exports = function(grunt) {
   grunt.registerHelper('coverage', function(options) {
     return grunt.utils.spawn(
       {
-        cmd: __dirname+'/../genCoverageReport.sh', // TODO: replace this with something more sane
+        cmd: __dirname+'/../util/genCoverageReport.sh', // TODO: replace this with something more sane
         args: []
       },
       function(err, result, code) {
