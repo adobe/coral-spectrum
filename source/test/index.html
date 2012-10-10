@@ -23,6 +23,10 @@
   <script>mocha.setup('bdd')</script>
   
   <!-- CoralUI files -->
+  <script>
+    // Force polyfill to be used
+    Object.create = undefined;
+  </script>
   <script src="../js/CUI.js"></script>
 </head>
 <body>

@@ -172,13 +172,19 @@ describe('Class', function() {
   
   describe('Polyfills', function() {
     describe('Function.bind', function() {
-      (function bindArray() {
-        Function.prototype.bind.call([], window);
-      }).should.throw(TypeError);
+      it('should throw when called on a non-function', function() {
+        (function bindArray() {
+          Function.prototype.bind.call([], window);
+        }).should.throw(TypeError);
+      });
     });
     
     describe('Object.create', function() {
-      // TODO: figure out how to test?
+      it('should throw when called with more than more argument', function() {
+        (function() {
+          Object.create({}, {});
+        }).should.throw(Error);
+      });
     });
   });
 });
