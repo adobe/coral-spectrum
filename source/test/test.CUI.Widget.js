@@ -66,8 +66,7 @@ describe('CUI.Widget', function() {
   describe('events', function() {
     var div = $('<div/>');
     var widget = new CUI.Widget({
-      element: div,
-      visible: true // TODO: figure out why false here causes bad JSON
+      element: div
     });
     
     // Start hidden, since we set visible:true above
@@ -98,8 +97,7 @@ describe('CUI.Widget', function() {
     var div = $('<div/>');
     
     var widget = new CUI.Widget({
-      element: div,
-      visible: true // TODO: figure out why false here causes bad JSON
+      element: div
     });
     
     it('should show element', function() {
@@ -125,7 +123,6 @@ describe('CUI.Widget', function() {
       widget.set('visible', true);
       div.css('display').should.equal('block');
     });
-    
     
     it('should stay hidden when hidden twice', function() {
       widget.hide();
