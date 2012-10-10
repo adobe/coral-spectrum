@@ -2,21 +2,21 @@ describe('CUI.Util', function() {
   
   describe('capitalize()', function() {
     it("should capitalize lowercase string", function() {
-      CUI.util.capitalize("testString").should.equal("TestString");
+      expect(CUI.util.capitalize("testString")).to.equal("TestString");
     });
     
     it("should not break already capitalized string", function() {
-      CUI.util.capitalize("TestString").should.equal("TestString");
+      expect(CUI.util.capitalize("TestString")).to.equal("TestString");
     });
   });
   
   describe('decapitalize()', function() {
     it("should decapitalize uppercase string", function() {
-      CUI.util.decapitalize("TestString").should.equal("testString");
+      expect(CUI.util.decapitalize("TestString")).to.equal("testString");
     });
     
     it("should not break already decapitalized string", function() {
-      CUI.util.decapitalize("testString").should.equal("testString");
+      expect(CUI.util.decapitalize("testString")).to.equal("testString");
     });
   });
   

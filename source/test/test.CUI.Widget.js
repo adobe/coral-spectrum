@@ -1,6 +1,6 @@
 describe('CUI.Widget', function() {
   it('should be defined in CUI namespace', function() {
-    CUI.should.have.property('Widget');
+    expect(CUI).to.have.property('Widget');
   });
   
   describe('options', function() {
@@ -16,7 +16,7 @@ describe('CUI.Widget', function() {
     
     it('can set and get options one at a time', function() {
       widget.set('newOption', 'testVal');
-      widget.get('newOption').should.equal('testVal');
+      expect(widget.get('newOption')).to.equal('testVal');
     });
     
     it('can set and get multiple options at once', function() {
@@ -24,12 +24,12 @@ describe('CUI.Widget', function() {
         batchOption1: 1,
         batchOption2: 2
       });
-      widget.get('batchOption1').should.equal(1);
-      widget.get('batchOption2').should.equal(2);
+      expect(widget.get('batchOption1')).to.equal(1);
+      expect(widget.get('batchOption2')).to.equal(2);
     });
     
     it('can get options set with constructor', function() {
-      widget.get('option2').should.equal(2);
+      expect(widget.get('option2')).to.equal(2);
     });
     
     it('should fire events when options change', function() {
@@ -40,14 +40,14 @@ describe('CUI.Widget', function() {
       
       widget.set('option3', 13);
       
-      optionChanged.should.be.true;
+      expect(optionChanged).to.be.true;
     });
     
     it('should provide option name, old value, and new value before option changes', function() {
       widget.on('beforeChange:option4', function(evt) {
-        evt.currentValue.should.equal(4);
-        evt.value.should.equal(5);
-        evt.option.should.equal('option4');
+        expect(evt.currentValue).to.equal(4);
+        expect(evt.value).to.equal(5);
+        expect(evt.option).to.equal('option4');
       });
       
       widget.set('option3', 5);
@@ -55,8 +55,8 @@ describe('CUI.Widget', function() {
     
     it('should provide option name and new value when option changes', function() {
       widget.on('change:option5', function(evt) {
-        evt.value.should.equal(6);
-        evt.option.should.equal('option5');
+        expect(evt.value).to.equal(6);
+        expect(evt.option).to.equal('option5');
       });
 
       widget.set('option5', 6);
@@ -81,7 +81,7 @@ describe('CUI.Widget', function() {
     
     it('should fire added listeners', function() {
       widget.show();
-      optionChanged.should.be.true;
+      expect(optionChanged).to.be.true;
     });
     
     it('should not fire removed listeners', function() {
@@ -89,7 +89,7 @@ describe('CUI.Widget', function() {
       widget.hide();
       widget.off('show', logChanged);
       widget.show();
-      optionChanged.should.be.false;
+      expect(optionChanged).to.be.false;
     });
   });
   
@@ -102,38 +102,38 @@ describe('CUI.Widget', function() {
     
     it('should show element', function() {
       widget.show();
-      div.css('display').should.equal('block');
+      expect(div.css('display')).to.equal('block');
     });
     
     it('should hide element', function() {
       widget.hide();
-      div.css('display').should.equal('none');
+      expect(div.css('display')).to.equal('none');
     });
     
     it('should toggle visibility', function() {
       widget.toggleVisibility();
-      div.css('display').should.equal('block');
+      expect(div.css('display')).to.equal('block');
       widget.toggleVisibility();
-      div.css('display').should.equal('none');
+      expect(div.css('display')).to.equal('none');
     });
     
     it('should change visibility when options.visible set', function() {
       widget.set('visible', false);
-      div.css('display').should.equal('none');
+      expect(div.css('display')).to.equal('none');
       widget.set('visible', true);
-      div.css('display').should.equal('block');
+      expect(div.css('display')).to.equal('block');
     });
     
     it('should stay visible when shown twice', function() {
       widget.show();
       widget.show();
-      div.css('display').should.equal('block');
+      expect(div.css('display')).to.equal('block');
     });
     
     it('should stay hidden when hidden twice', function() {
       widget.hide();
       widget.hide();
-      div.css('display').should.equal('none');
+      expect(div.css('display')).to.equal('none');
     });
   });
 });

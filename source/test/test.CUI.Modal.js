@@ -22,46 +22,46 @@ describe('CUI.Modal', function() {
   };
   
   it('should be defined in CUI namespace', function() {
-    CUI.should.have.property('Modal');
+    expect(CUI).to.have.property('Modal');
   });
   
   it('should be defined on jQuery object', function() {
     var div = $('<div/>');
-    div.should.have.property('modal');
+    expect(div).to.have.property('modal');
   });
   
   describe('modal from template', function() {
     var el = $('<div/>').modal(modalConfig);
   
     it('should have correct CSS classname', function() {
-      el.hasClass('modal').should.be.true;
+      expect(el.hasClass('modal')).to.be.true;
     });
     
     it('should have correct markup', function() {
-      el.find('.modal-header').should.have.length(1);
-      el.find('.modal-body').should.have.length(1);
-      el.find('.modal-footer').should.have.length(1);
+      expect(el.find('.modal-header')).to.have.length(1);
+      expect(el.find('.modal-body')).to.have.length(1);
+      expect(el.find('.modal-footer')).to.have.length(1);
     });
     
     it('should have correct heading', function() {
-      el.find('.modal-header h2').html().should.equal('TestHeading');
+      expect(el.find('.modal-header h2').html()).to.equal('TestHeading');
     });
     
     it('should have correct content', function() {
-      el.find('.modal-body').html().should.equal('TestContent');
+      expect(el.find('.modal-body').html()).to.equal('TestContent');
     });
     
     it('should have buttons', function() {
-      el.find('.modal-footer button').should.have.length(2);
+      expect(el.find('.modal-footer button')).to.have.length(2);
     });
     
     it('should have button with correct class names', function() {
-      el.find('.modal-footer button.myCloseButton').should.have.length(1);
-      el.find('.modal-footer button.mySaveButton').should.have.length(1);
+      expect(el.find('.modal-footer button.myCloseButton')).to.have.length(1);
+      expect(el.find('.modal-footer button.mySaveButton')).to.have.length(1);
     });
     
     it('should be visible by default', function() {
-      el.hasClass('in').should.be.true;
+      expect(el.hasClass('in')).to.be.true;
     });
   });
   
@@ -84,11 +84,11 @@ describe('CUI.Modal', function() {
     });
   
     it('should not overwrite heading', function() {
-      el.find('.modal-header h2').html().should.equal('TestHeading');
+      expect(el.find('.modal-header h2').html()).to.equal('TestHeading');
     });
     
     it('should not overwrite content', function() {
-      el.find('.modal-body').html().should.equal('TestContent');
+      expect(el.find('.modal-body').html()).to.equal('TestContent');
     });
   });
   
@@ -97,21 +97,21 @@ describe('CUI.Modal', function() {
       var el = $('<div/>').modal(modalConfig);
       el.find('.modal-header button.close').click();
       
-      el.hasClass('in').should.be.false;
+      expect(el.hasClass('in')).to.be.false;
     });
     
     it('should hide with custom button', function() {
       var el = $('<div/>').modal(modalConfig);
       el.find('.modal-footer button.myCloseButton').click();
       
-      el.hasClass('in').should.be.false;
+      expect(el.hasClass('in')).to.be.false;
     });
     
     it('should execute button click handlers', function() {
       var el = $('<div/>').modal(modalConfig);
       el.find('.modal-footer button.mySaveButton').click();
 
-      saveClicked.should.be.true;
+      expect(saveClicked).to.be.true;
     });
   });
   
@@ -124,14 +124,14 @@ describe('CUI.Modal', function() {
       });
       modal.set('heading', 'TestHeading');
       
-      el.find('.modal-header h2').html().should.equal('TestHeading');
+      expect(el.find('.modal-header h2').html()).to.equal('TestHeading');
     });
     
     it('can set heading with jQuery', function() {
       var el = $('<div/>').modal();
       el.modal({ heading: 'TestHeading' });
       
-      el.find('.modal-header h2').html().should.equal('TestHeading');
+      expect(el.find('.modal-header h2').html()).to.equal('TestHeading');
     });
     
     it('can set content with class', function() {
@@ -141,14 +141,14 @@ describe('CUI.Modal', function() {
       });
       modal.set('content', 'TestContent');
       
-      el.find('.modal-body').html().should.equal('TestContent');
+      expect(el.find('.modal-body').html()).to.equal('TestContent');
     });
 
     it('can set content with jQuery', function() {
       var el = $('<div/>').modal();
       el.modal({ content: 'TestContent' });
       
-      el.find('.modal-body').html().should.equal('TestContent');
+      expect(el.find('.modal-body').html()).to.equal('TestContent');
     });
     
     it('can set type with class', function() {
@@ -158,14 +158,14 @@ describe('CUI.Modal', function() {
       });
       modal.set('type', 'error');
       
-      el.hasClass('error').should.be.true;
+      expect(el.hasClass('error')).to.be.true;
     });
 
     it('can set type with jQuery', function() {
       var el = $('<div/>').modal();
       el.modal({ type: 'error' });
       
-      el.hasClass('error').should.be.true;
+      expect(el.hasClass('error')).to.be.true;
     });
   });
   
