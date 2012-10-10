@@ -19,13 +19,13 @@ CUI.util.getDataTarget = function($element) {
 };
 
 /**
-  De-capitalize a string by converting the first letter to lowercase.
+  Decapitalize a string by converting the first letter to lowercase.
 
   @param {String} str     The string to de-capitalize
 
   @returns {String}       The de-capitalized string
 */
-CUI.util.deCapitalize = function(str) {
+CUI.util.decapitalize = function(str) {
   return str.slice(0,1).toLowerCase()+str.slice(1);
 };
 
@@ -49,7 +49,7 @@ CUI.util.capitalize = function(str) {
     @param {Function} [callback]                              A function to execute in the scope of the jQuery object when the plugin is activated. Used for tacking on additional initialization procedures or behaviors for other plugin functionality.
   */
   CUI.util.plugClass = function(PluginClass, pluginName, callback) {
-    pluginName = pluginName || CUI.util.deCapitalize(PluginClass.toString());
+    pluginName = pluginName || CUI.util.decapitalize(PluginClass.toString());
 
     $.fn[pluginName] = function(optionsIn) {
       return this.each(function() {
