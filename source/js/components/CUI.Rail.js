@@ -94,7 +94,7 @@
       if (_.active) { // loading state
         ev.preventDefault();
 
-        //_.loading = true;
+        _.waiting = true;
 
         _.release.css('opacity', 0);
         _.pull.css('opacity', 0);
