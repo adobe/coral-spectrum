@@ -18,7 +18,7 @@ CUI.Widget = new Class(/** @lends CUI.Widget# */{
     this.$element = $(options.element);
 
     // Add instance to element's data
-    this.$element.data(CUI.util.deCapitalize(this.toString()), this);
+    this.$element.data(CUI.util.decapitalize(this.toString()), this);
 
     // Bind functions commonly called by listeners
     this.bind(this.hide);

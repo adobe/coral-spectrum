@@ -15,6 +15,7 @@
   @returns {Base} The created class.
 */
 var Class;
+var Exception;
 
 (function() {
   /**
@@ -80,7 +81,7 @@ var Class;
     descriptor = descriptor || {};
 
     if (descriptor.hasOwnProperty('extend') && !descriptor.extend) {
-      console.warn('Class: %s is attempting to extend a non-truthy thing', descriptor.toString === 'function' ? descriptor.toString : descriptor.toString, descriptor.extend);
+      throw new Class.NonTruthyExtendError(descriptor.toString === 'function' ? descriptor.toString() : descriptor.toString);
     }
 
     // Extend Object by default
@@ -150,8 +151,7 @@ var Class;
       var methodName = caller._methodName;
 
       if (!methodName) {
-        console.error("Class.inherited: can't call inherited method: calling method did not have _methodName", args.callee);
-        return;
+        throw new Class.MissingCalleeError(this.toString());
       }
 
       // Start iterating at the prototype that this function is defined in
@@ -183,7 +183,7 @@ var Class;
         return retVal;
       }
       else {
-        console.warn("Class.inherited: can't call inherited method for '%s': no method by that name found", methodName);
+        throw new Class.InheritedMethodNotFoundError(this.toString(), methodName);
       }
     };
 
@@ -302,4 +302,39 @@ var Class;
       return fBound;
     };
   }
+  
+  Exception = new Class({
+    extend: Error,
+    construct: function() {
+      this.name = 'Error';
+      this.message = 'General exception';
+    },
+
+    toString: function() {
+      return this.name+': '+this.message;
+    }
+  });
+  
+  var ClassException = Exception.extend({
+    name: 'Class Exception'
+  });
+  
+  // Exceptions
+  Class.NonTruthyExtendError = ClassException.extend({
+    construct: function(className) {
+      this.message = className+' attempted to extend a non-truthy object';
+    }
+  });
+  
+  Class.InheritedMethodNotFoundError = ClassException.extend({
+    construct: function(className, methodName) {
+      this.message = className+" can't call method '"+methodName+"', no method defined in parent classes";
+    }
+  });
+  
+  Class.MissingCalleeError = ClassException.extend({
+    construct: function(className) {
+      this.message = className+" can't call inherited method: calling method did not have _methodName";
+    }
+  });
 }());
