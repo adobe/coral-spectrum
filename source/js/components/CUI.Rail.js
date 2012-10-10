@@ -5,7 +5,7 @@
     
     /**
       @extends CUI.Widget
-      @classdesc TEMP: contructs a rail with a refreshable feature, [DOCS will follow the next days]
+      @classdesc TEMP: constructs a rail with a refreshable feature, [DOCS will follow the next days]
     */
     construct: function(options) {
       var e = this.$element, 
@@ -34,7 +34,7 @@
       // add pullable class to apply styling
       _.rail.addClass('pullable');
 
-      // enable scorlling to top from point 0
+      // enable scrolling to top from point 0
       _.content.on('touchstart', $.proxy(this._handleTouchstart, this))
               .on('touchmove', $.proxy(this._handleTouchmove, this))
               .on('touchend', $.proxy(this._handleTouchend, this));    
