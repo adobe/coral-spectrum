@@ -172,6 +172,30 @@ describe('Class', function() {
   
   describe('Polyfills', function() {
     describe('Function.bind', function() {
+      it('should bind the execution context of a function', function() {
+        var obj = {
+          value1: 1
+        };
+        
+        var func = function() {
+          return this.value1;
+        };
+        
+        var boundFunc = func.bind(obj);
+        
+        boundFunc().should.equal(1);
+      });
+      
+      it('should bind arguments and always pass when called', function() {
+        var func = function(arg1, arg2, arg3) {
+          return arg1+arg2+arg3;
+        };
+        
+        var boundFunc = func.bind(window, '1','2','3');
+        
+        boundFunc().should.equal('123');
+      });
+      
       it('should throw when called on a non-function', function() {
         (function bindArray() {
           Function.prototype.bind.call([], window);
@@ -180,6 +204,11 @@ describe('Class', function() {
     });
     
     describe('Object.create', function() {
+      it('should create object with passed prototype', function() {
+        var arr = Object.create(Array.prototype);
+        arr.should.have.property('push');
+      });
+      
       it('should throw when called with more than more argument', function() {
         (function() {
           Object.create({}, {});
