@@ -124,6 +124,12 @@ describe('CUI.Widget', function() {
       div.css('display').should.equal('block');
     });
     
+    it('should stay visible when shown twice', function() {
+      widget.show();
+      widget.show();
+      div.css('display').should.equal('block');
+    });
+    
     it('should stay hidden when hidden twice', function() {
       widget.hide();
       widget.hide();
