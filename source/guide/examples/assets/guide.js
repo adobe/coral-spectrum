@@ -43,7 +43,8 @@ $(function() {
   (function() {
     var anchor = $('#SectionAnchor');
 
-    $('h1, h2, h3').on('mouseenter', function(evt) {
+    // Not linking any H3s in this fashion
+    $('h1, h2').on('mouseenter', function(evt) {
       var heading = evt.target;
       var section = heading.parentNode;
 
