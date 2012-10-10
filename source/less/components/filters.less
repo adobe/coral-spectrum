@@ -3,17 +3,16 @@
 * A filters or tags input field.
 */
 
-.filters input[type=text],
-input[type=text].filters {
+.filters input[type=text] {
   .box-sizing(border-box);
 
-  width: 13rem;  /* Fixed width to correspond to sourounding div.filters */
+  width: 100%;
 
   font-size: 0.8125rem;
 
   height: 2rem;
   padding: 0.25rem 0.5rem 0.25rem 2rem;
-  margin: 0.5rem 0;
+  margin: 0 0 0.5rem 0;
 
   border: @px solid @textfield-border-color; 
   background: @textfield-background-color url('../images/components/filters/magnifier.png') no-repeat 0.5rem 0.4rem;
@@ -41,15 +40,15 @@ input[type=text].filters {
 .filters {
     display: inline-block;
     width: 13rem;  /* Needs fixed width for floating term elements */
-
-    input[type=text] {
-        width: 100%;
-    }
+    vertical-align: top;
+    position: relative;
+    top: -0.5rem;
 
     ul {
         font-size: 0; /* Eliminate white space */
         padding: 0;
         margin: 0 0 0.5rem 0;
+        display: inline;
 
     }
     ul li {
@@ -61,6 +60,7 @@ input[type=text].filters {
         background-color: @filters-background-color;
         color: @filters-text-color;
     }
+   
 
     button {
         font-size: 1rem;
@@ -77,35 +77,61 @@ input[type=text].filters {
         margin: 0;
     }
 
+    &.disabled input {
+      background: @textfield-disabled-background-color url('../images/components/filters/magnifier.png') no-repeat 0.5rem 0.4rem;
+      background-size: 1.1rem;
+    }
+
 }
 
 .filters.stacking {
     input[type=text] {
         border: 0;
         background: transparent;
-        padding: 0 0 0 2rem;
-        margin: 0 -0.2rem 0 -0.2rem;
+        padding: 0;
+        margin: 0 0.2rem 0.2rem 0;
+        height: 1.6rem;
+        &:focus {
+            .glow(0);
+            border: 0;
+        }
+        &:first-child {
+            margin-left: 2rem;
+        }
     }
-    padding: 0rem 0rem 0.2rem 0.2rem;
+
+    padding: 0.2rem 0rem 0rem 0.2rem;
 
     border: @px solid @textfield-border-color; 
     background: @textfield-background-color url('../images/components/filters/magnifier.png') no-repeat 0.5rem 0.4rem;
     background-size: 1.1rem;
 
-    &:disabled {
+    &.disabled {
       background: @textfield-disabled-background-color url('../images/components/filters/magnifier.png') no-repeat 0.5rem 0.4rem;
       background-size: 1.1rem;
     }
+    
+    &.error {
+        .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
 
-    &:focus {
-      .glow();
-      outline: none;
+        &:focus {
+         .glow;
+        }
+    }
+
+    &.focus {
+     .glow;
+    }
+    
+    ul li:first-child {
+        margin-left: 2rem;
     }
 }
 
 .autocomplete-results {
     margin: 0;
     padding: 0;
+    z-index: 1000;
 
     li {
         list-style-type: none;
