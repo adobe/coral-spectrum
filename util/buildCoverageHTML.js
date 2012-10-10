@@ -15,10 +15,17 @@ var str = fs.readFileSync(file, 'utf8');
 var fn = jade.compile(str, { filename: file });
 
 // Read JSON from stdin
-var cov = JSON.parse(fs.readFileSync('/dev/stdin').toString());
+var json = fs.readFileSync('/dev/stdin').toString();
 
-// Dump HTML
-console.log(fn({
-    cov: cov,
-    coverageClass: coverageClass
-}));
+try {
+  var cov = JSON.parse(json);
+  // Dump HTML
+  console.log(fn({
+      cov: cov,
+      coverageClass: coverageClass
+  }));
+}
+catch (err) {
+  console.error('Failed to parse input JSON!');
+  process.exit(1);
+}
