@@ -18,7 +18,8 @@ module.exports = function(grunt) {
     'components/CUI.Widget.js',
     'components/CUI.Modal.js',
     'components/CUI.Tabs.js',
-    'components/CUI.Alert.js'
+    'components/CUI.Alert.js',
+    'components/CUI.Rail.js'
   ];
   
   /**

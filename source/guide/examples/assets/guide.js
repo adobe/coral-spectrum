@@ -24,6 +24,18 @@ $(function() {
   $('.tab-variant').on('click', function() {
     $('#tabsExample').attr('class', $(this).data('variant'));
   });
+
+  // make rail pullable
+  $('#main-rail').rail({
+    callback: function() {
+      var def = $.Deferred();
+      setTimeout(function() {
+        def.resolve();      
+      }, 3000); 
+
+      return def.promise();
+    }
+  });
   
   /**
     Show the paragraph link icon when a heading is hovered on that is within a named section
