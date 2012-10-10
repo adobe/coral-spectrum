@@ -9,11 +9,11 @@
     */
     construct: function(options) {
       var e = this.$element, 
-  	      _ = { // fill all locals
-  	        rail: e,
-  	        content: e.find('.wrap'),
-  	        ptr: e.find('.pull-to-refresh') 
-  	      };
+          _ = { // fill all locals
+            rail: e,
+            content: e.find('.wrap'),
+            ptr: e.find('.pull-to-refresh') 
+          };
 
       _ = $.extend(_, {
         arrow: _.ptr.find('.arrow'),
@@ -47,7 +47,7 @@
         return true;
       }
 
-      if (_.rail.scrollTop() == 0) {
+      if (_.rail.scrollTop() === 0) {
         _.rail.scrollTop(1);
       } 
     },
