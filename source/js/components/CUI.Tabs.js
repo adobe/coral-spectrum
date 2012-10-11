@@ -310,8 +310,10 @@ tabs.hide();
     $tab.siblings('a[data-toggle="tab"]')
       // Set as inactive
       .removeClass('active')
-      .attr('aria-selected', false)
-      .attr('tabIndex', -1); // remove from tab order
+      .attr('aria-selected', false);
+
+    $tab.siblings('a[data-toggle="tab"]:not(".disabled")')
+      .attr('tabIndex', -1); // remove from tab order if not disabled
     
     // Active tab panel
     $target
