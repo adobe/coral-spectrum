@@ -27,7 +27,7 @@ $(function() {
 
   // make rail pullable
   $('#main-rail').rail({
-    callback: function() {
+    refreshCallback: function() {
       var def = $.Deferred();
       setTimeout(function() {
         def.resolve();      
