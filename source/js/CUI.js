@@ -27,3 +27,11 @@ CUI.options = $.extend({
   debug: false,
   dataAPI: true
 }, CUI.options);
+
+// Register partials for all templates
+// Note: this requires the templates to be included BEFORE CUI.js
+(function() {
+  for (var template in CUI.Templates) {
+    Handlebars.registerPartial(template, CUI.Templates[template]);
+  }
+}());
