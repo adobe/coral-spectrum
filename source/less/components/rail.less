@@ -13,7 +13,6 @@ div.rail {
   &.pullable {
     position: relative;
     background-color: transparent; 
-    //-webkit-transform: translateZ(0);
 
     >.pull-to-refresh {
       display: block;
@@ -155,6 +154,32 @@ div.rail {
             font-size: 0.85rem;
             //text-shadow: 0 2*@px 0 black;
             color: @rail-section-link-color;
+          }
+        }
+      }
+
+      // the is foldable
+      &.foldable {
+        >.heading {
+          &:before {
+            content: "\25B8";
+            padding-right: 0.5rem;
+          }
+        }
+
+        >.fold {
+          height: 0;
+          overflow: hidden;
+        }
+
+        &.open {
+          >.fold {
+            height: auto;
+            overflow: auto;
+          }
+
+          >.heading:before {
+            content: "\25BE";
           }
         }
       }

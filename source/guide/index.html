@@ -42,7 +42,6 @@
 
     <div id="main-rail" class="rail left">
       <div class="pull-to-refresh">
-        <div class="icon"></div>
         <div class="message">
           <i class="arrow"></i>
           <i class="spinner large"></i>
@@ -63,30 +62,30 @@
             </nav>
         </section>
 
-        <section class="links">
+        <section class="links foldable open">
             <a class="heading" href="#TextStyles">Text Styles</a>
 
-            <nav>
+            <nav class="fold">
               <a href="#Headings">Headings</a>
               <a href="#Link">Link</a>
               <a href="#Fonts">Fonts</a>
             </nav>
         </section>
 
-        <section class="links">
+        <section class="links foldable open">
             <a class="heading" href="#PageComponents">Page&nbsp;Components</a>
 
-            <nav>
+            <nav class="fold">
               <a href="#Header">Header</a>
               <a href="#Rail">Rail</a>
               <a href="#Well">Well</a>
             </nav>
         </section>
 
-        <section class="links">
+        <section class="links foldable open">
             <a class="heading" href="#Navigation">Navigation</a>
 
-            <nav>
+            <nav class="fold">
               <a href="#Toolbar">Toolbar</a>
               <a href="#Breadcrumbs">Breadcrumbs</a>
               <a href="#Tabs">Tabs</a>
@@ -94,10 +93,10 @@
            </nav>
         </section>
 
-        <section class="links">
+        <section class="links foldable">
             <a class="heading" href="#ButtonsAndControls">Buttons &amp; Controls</a>
 
-            <nav>
+            <nav class="fold">
               <a href="#Buttons">Buttons</a>
               <a href="#TextField">Text field</a>
               <a href="#SearchField">Search field</a>
@@ -111,29 +110,29 @@
             </nav>
         </section>
 
-        <section class="links">
+        <section class="links foldable">
             <a class="heading" href="#DataPresentation">Data&nbsp;Presentation</a>
 
-            <nav>
+            <nav class="fold">
               <a href="#List">List</a>
               <a href="#Table">Table</a>
               <a href="#Grid">Grid</a>
             </nav>
         </section>
 
-        <section class="links">
+        <section class="links foldable">
             <a class="heading" href="#Dialogs">Dialogs</a>
 
-            <nav>
+            <nav class="fold">
               <a href="#Modal">Modal</a>
               <a href="#Popover">Popover</a>
            </nav>
         </section>
 
-        <section class="links">
+        <section class="links foldable">
             <a class="heading" href="#StatusIndicators">Status Indicators</a>
 
-            <nav>
+            <nav class="fold">
               <a href="#Alert">Alert</a>
               <a href="#Tooltip">Tooltip</a>
               <a href="#Badge">Badge</a>
@@ -359,6 +358,15 @@
             <pre class="prettyprint linenums">
 &lt;div class=&quot;page&quot; role=&quot;main&quot;&gt;
   &lt;div class=&quot;rail right&quot; role=&quot;complementary&quot;&gt;
+    &lt;div class=&quot;pull-to-refresh&quot;&gt;
+      &lt;div class=&quot;message&quot;;&gt;
+        &lt;i class=&quot;arrow&quot;;&gt;&lt;/i;&gt;
+        &lt;i class=&quot;spinner large&quot;;&gt;&lt;/i;&gt;
+        &lt;span class=&quot;pull&quot;;&gt;Pull to refresh&lt;/span;&gt;
+        &lt;span class=&quot;release&quot;;&gt;Release to refresh&lt;/span;&gt;
+        &lt;span class=&quot;loading&quot;;&gt;Loading&lt;/span;&gt;
+      &lt;/div;&gt;
+    &lt;/div&gt;
     &lt;div class=&quot;wrap&quot;&gt;
       &lt;section&gt;
           &lt;h4&gt;Update Feed&lt;/h4&gt;
@@ -369,9 +377,9 @@
           &lt;p class=&quot;small&quot;&gt;I created a new segment thing for the...&lt;/p&gt;
       &lt;/section&gt;
     &lt;/div&gt;
-    &lt;div class=&quot;content&quot;&gt;
-      &lt;p&gt;Content.&lt;/p&gt;
-    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;p&gt;Content.&lt;/p&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 </pre>
