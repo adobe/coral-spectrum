@@ -8,8 +8,16 @@
       @classdesc TEMP: constructs a rail with a refreshable feature, [DOCS will follow the next days]
     */
     construct: function(options) {
-      var e = this.$element, 
-          _ = { // fill all locals
+      var e = this.$element;
+      
+      // TODO: option for enabling/disabling pull to refresh
+      // TODO: programmatically add the necessary divs when pull to refresh is enabled?
+      // TODO: render handlebars for rail template if no children
+
+      // Accessibility
+      _makeAccessible(this.$element);
+      
+      var _ = { // fill all locals
             rail: e,
             content: e.find('.wrap'),
             ptr: e.find('.pull-to-refresh') 
@@ -124,6 +132,12 @@
     
   });
 
+  var _makeAccessible = function($element) {
+    // The rail is complementary content
+    // See: http://www.w3.org/TR/wai-aria/roles#complementary
+    $element.attr('role', 'complementary');
+  };
+  
   CUI.util.plugClass(CUI.Rail);
 
 }(window.jQuery));
