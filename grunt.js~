@@ -19,8 +19,11 @@ module.exports = function(grunt) {
     'components/CUI.Modal.js',
     'components/CUI.Tabs.js',
     'components/CUI.Alert.js',
-    'components/CUI.Rail.js',
+<<<<<<< HEAD
+    'components/CUI.Rail.js'
+=======
     'components/CUI.Filters.js'
+>>>>>>> a33199bb35ee9c56b039d252700c95a98438c299
   ];
   
   /**

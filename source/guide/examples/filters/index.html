@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Filters &amp; Tags – Single Term examples</title>
+
+        <link rel="stylesheet" href="../../css/cui.css">
+ 
+        <script src="../../js/libs/underscore.js"></script>
+        <script src="../../js/libs/handlebars.js"></script>
+        <script src="../../js/libs/jquery.js"></script>
+        <script src="../../js/CUI.js"></script>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+
+        <div class="content">
+            <h1>Filters &amp; Tags</h1>
+        
+            <p>
+            Filter me: <input type="text" name="single-term" placeholder="Single Term">
+            </p>
+            <p>
+            Filter me: <input type="text" name="multiple" placeholder="Multiple">
+            </p>
+            <p>
+            Filter me: <input type="text" name="stacking" placeholder="Stacking">
+            </p>
+            <p>
+                From select: <select><option>One</option><option>Two</option><option>Three</option></select>
+            </p>
+            <p>
+                From select: <select multiple><option>One</option><option>Two</option><option>Three</option></select>
+            </p>
+            <p>
+                <a data-action="disable">Disable all</a>
+                <a data-action="enable">Enable all</a>
+                
+            </p>
+        </div>
+        
+        <script type="text/javascript">
+            $(document).ready(function() {
+               var options =  ["Watermelon",
+                                     "Figs", 
+                                     "Dates", 
+                                     "Olive", 
+                                     "Jujube", 
+                                     "Pomegranate", 
+                                     "Lemon", 
+                                     "Lime",
+                                     "Key Lime", 
+                                     "Mandarin", 
+                                     "Orange", 
+                                     "Sweet Lime", 
+                                     "Tangerine", 
+                                     "Avocado", 
+                                     "Guava", 
+                                     "Kumquat" ];
+                
+               var filters1 = new CUI.Filters({
+                            element: 'input[name=single-term]',
+                            multiple: false,
+                            stacking: false,
+                            disabled: false,
+                            options: options
+                });
+               var filters2 = new CUI.Filters({
+                            element: 'input[name=multiple]',
+                            multiple: true,
+                            stacking: false,
+                            disabled: false,
+                            options: options
+                });
+               var filters3 = new CUI.Filters({
+                            element: 'input[name=stacking]',
+                            multiple: true,
+                            stacking: true,
+                            disabled: false,
+                            options: options
+                });
+
+                $("select").filters({placeholder: "select me!"});
+
+                filters1.setSelectedIndex(2);
+                
+                $("[data-action=disable]").click(function() {
+                    filters1.set("disabled", true);
+                    filters2.set("disabled", true);
+                    filters3.set("disabled", true);
+                })
+                $("[data-action=enable]").click(function() {
+                    filters1.set("disabled", false);
+                    filters2.set("disabled", false);
+                    filters3.set("disabled", false);
+                })
+                
+                filters2.set("options", ["red", "green", "blue"])
+               
+            });
+            
+        </script>
+    </body>
+</html>
