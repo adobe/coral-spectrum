@@ -744,6 +744,87 @@
           </div>
         </section>
 
+        <section id="Toggle">
+            <h2 class="line">Toggles & Selectors</h2>
+            <h3>Switch</h3>
+            <p>Mutually exclusive, for use in tables.</p>
+
+            <div class="componentSample">
+                <div class="example clearfix">
+                    <div class="left">
+                        <input type="checkbox" class="switch">
+                        <input type="checkbox" class="switch" checked>
+                        <input type="checkbox" class="switch" disabled>
+                    </div>
+                </div>
+               <pre class="prettyprint linenums">
+&lt;input type=&quot;checkbox&quot; class=&quot;switch&quot;&gt;
+&lt;input type=&quot;checkbox&quot; class=&quot;switch&quot; checked&gt;
+&lt;input type=&quot;checkbox&quot; class=&quot;switch&quot; disabled&gt;
+</pre>
+            </div>
+
+            <h3>Selector</h3>
+            <p>Mutually exclusive.</p>
+
+            <div class="componentSample">
+                <div class="example clearfix">
+                    <div class="left">
+                        <div class="selector">
+                            <label><input type="radio">Yes</label>
+                            <label><input type="radio">No</label>
+                        </div>
+                        <div class="selector disabled">
+                            <label><input type="radio">Yes</label>
+                            <label><input type="radio">No</label>
+                        </div>
+                    </div>
+                </div>
+               <pre class="prettyprint linenums">
+&lt;div class=&quot;selector&quot;&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot;&gt;Yes&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot;&gt;No&lt;/label&gt;
+&lt;/div&gt;
+&lt;div class=&quot;selector disabled&quot;&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot;&gt;Yes&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot;&gt;No&lt;/label&gt;
+&lt;/div&gt;
+</pre>
+            </div>
+
+            <h3>Multi-Selector</h3>
+            <p>Not mutually exclusive.</p>
+
+            <div class="componentSample">
+                <div class="example clearfix">
+                    <div class="left">
+                        <div class="selector">
+                            <label><input type="checkbox">Chicken</label>
+                            <label><input type="checkbox">Steak</label>
+                            <label><input type="checkbox">Pork</label>
+                        </div>
+                        <div class="selector disabled">
+                            <label><input type="checkbox">Chicken</label>
+                            <label><input type="checkbox">Steak</label>
+                            <label><input type="checkbox">Pork</label>
+                        </div>
+                    </div>
+                </div>
+               <pre class="prettyprint linenums">
+&lt;div class=&quot;selector&quot;&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot;&gt;Chicken&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot;&gt;Steak&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot;&gt;Pork&lt;/label&gt;
+&lt;/div&gt;
+&lt;div class=&quot;selector disabled&quot;&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot;&gt;Chicken&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot;&gt;Steak&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot;&gt;Pork&lt;/label&gt;
+&lt;/div&gt;
+</pre>
+            </div>
+        </section>
+
       </section><!-- /ButtonsAndControls -->
 
       <section id="DataPresentation">
