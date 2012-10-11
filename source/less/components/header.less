@@ -21,6 +21,8 @@ header.top {
     height: @header-height;
     padding: 0 1rem;
 
+    vertical-align: top;
+
     line-height: @header-height;
     text-align: center;
 
@@ -29,8 +31,13 @@ header.top {
       width: @header-logo-size; 
     }
   }
+  
+  div.logo + nav {
+    margin-left: 0;
+  }
 
   nav {
+    margin-left: 0.5rem;
     display: inline-block;
 
     a {
