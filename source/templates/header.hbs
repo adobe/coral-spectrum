@@ -1,5 +1,3 @@
-<header>
-    <div class="logo">{{logo}}</div>
-    <nav>{{nav}}</nav>
-    <div class="drawer">{{drawer}}</div>
-</header>
+{{#if logo}}<div class="logo">{{{logo}}}</div>{{/if}}
+<nav role="tablist">{{#each navItems}}{{> header_navItem}}{{/each}}</nav>
+{{#if drawer}}<div class="drawer">{{> header_drawer this.drawer}}</div>{{/if}}

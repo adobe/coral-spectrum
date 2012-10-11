@@ -36,6 +36,17 @@
       &:hover {
         color: @tab-hover-font-color;
       }
+      
+      &:focus {
+        // TODO: write as a mixin
+        outline: none;
+        .box-shadow(
+            -@partial-glow-radius -@partial-glow-radius/2 @partial-glow-radius @partial-glow-color,
+            @partial-glow-radius -@partial-glow-radius/2 @partial-glow-radius @partial-glow-color
+        );
+        border: @px solid @focus-border-color;
+        border-bottom: none;
+      }
 
       &.active {
         .regular;
@@ -111,6 +122,17 @@
           border-bottom: 0.0625rem solid @tab-outline-color;
           border-right: none;
           .gradient(@tab-white-background-gradient-end-color, @tab-white-background-gradient-end-color);
+        }
+
+        &:focus {
+          // TODO: write as a mixin
+          outline: none;
+          .box-shadow(
+              -@partial-glow-radius/2 -@partial-glow-radius @partial-glow-radius @partial-glow-color,
+              -@partial-glow-radius/2 @partial-glow-radius @partial-glow-radius @partial-glow-color
+          );
+          border: @px solid @focus-border-color;
+          border-right: none;
         }
 
         &:last-child {

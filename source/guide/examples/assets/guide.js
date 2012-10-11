@@ -24,6 +24,18 @@ $(function() {
   $('.tab-variant').on('click', function() {
     $('#tabsExample').attr('class', $(this).data('variant'));
   });
+
+  // make rail pullable
+  $('#main-rail').rail({
+    refreshCallback: function() {
+      var def = $.Deferred();
+      setTimeout(function() {
+        def.resolve();      
+      }, 3000); 
+
+      return def.promise();
+    }
+  });
   
   /**
     Show the paragraph link icon when a heading is hovered on that is within a named section
@@ -31,7 +43,8 @@ $(function() {
   (function() {
     var anchor = $('#SectionAnchor');
 
-    $('h1, h2, h3').on('mouseenter', function(evt) {
+    // Not linking any H3s in this fashion
+    $('h1, h2').on('mouseenter', function(evt) {
       var heading = evt.target;
       var section = heading.parentNode;
 

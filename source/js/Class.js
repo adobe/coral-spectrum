@@ -72,9 +72,8 @@ var Exception;
     @param {Anything} descriptor.*                    Other methods and properties for the new class
    */
   var extendClass = function(descriptor) {
-    return new Class(_.extend({}, descriptor, {
-      extend: this
-    }));
+    descriptor.extend = this;
+    return new Class(descriptor);
   };
 
   Class = function(descriptor) {

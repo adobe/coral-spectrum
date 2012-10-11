@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -23,6 +24,11 @@
   <script>mocha.setup('bdd')</script>
   
   <!-- CoralUI files -->
+  <script>
+    // Force polyfills to be used
+    Function.bind = undefined;
+    Object.create = undefined;
+  </script>
   <script src="../js/CUI.js"></script>
 </head>
 <body>
@@ -37,7 +43,7 @@
   <script src="test.CUI.Tabs.js"></script>
   
   <!-- Do test run -->
-  <script type="text/javascript">
+  <script>
     (window.mochaPhantomJS || mocha).run();
   </script>
 </body>

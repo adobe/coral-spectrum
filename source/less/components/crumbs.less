@@ -1,20 +1,17 @@
 /**
   Class: nav.crumbs
-  Used for printing a breadcrumb trail. 
+  Displays a breadcrumb trail. 
 */
-ul.crumbs {
-  padding: 0;
-  margin: 0;
 
-  list-style: none;
-
-  li {
-    margin: 0;
-    padding: 0;
-    display: inline-block;
-
+nav.crumbs {
+  a {
+    padding: 0.25rem 0;
+    
+    color: @crumb-text-color;
     font-weight: normal;
     font-size: 1.35rem;
+    text-decoration: none;
+    font-family: AdobeCleanLight;
 
     // Add chevrons to crumbs
     &:after {
@@ -28,36 +25,21 @@ ul.crumbs {
       color: @crumb-chevron-color;
     }
 
-    a {
-      display: inline-block;
-      padding: 0.25rem 0;
-
-      color: @crumb-text-color;
-      text-decoration: none;
-      font-family: AdobeCleanLight;
-
-      &:hover {
-        color: @crumb-hover-text-color;
-        //text-decoration: underline;
-      }
+    &:hover {
+      color: @crumb-hover-text-color;
     }
-
+    
     img {
       height: 2rem;
     }
   }
 
-  li:last-child {
+  // The last crumb should not have a chevron and should be bolder
+  a:last-child {
+    font-family: AdobeClean;
+    
     &:after {
       content: "";
     }
-
-    a {
-      font-family: AdobeClean;
-    }
-  }
-
-  & + h1 {
-    margin: 0.5rem 0;
   }
 }

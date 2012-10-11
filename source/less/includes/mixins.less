@@ -140,12 +140,13 @@
  * Mixin: .glow
  * Make an element glow
  */
-.glow(@radius: 0.357rem, @glowColor: @focus-glow-color, @borderColor: @focus-border-color) {
+.glow(@radius: @focus-glow-radius, @glowColor: @focus-glow-color, @borderColor: @focus-border-color) {
   outline: none;
   .box-shadow(0 0 @radius @glowColor);
   border: @px solid @borderColor;
 }
 
+// TODO: add partial glow mixin
 
 /**
  * Mixin: .glow-text

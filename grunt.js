@@ -18,7 +18,8 @@ module.exports = function(grunt) {
     'components/CUI.Widget.js',
     'components/CUI.Modal.js',
     'components/CUI.Tabs.js',
-    'components/CUI.Alert.js'
+    'components/CUI.Alert.js',
+    'components/CUI.Rail.js'
   ];
   
   /**
@@ -99,7 +100,10 @@ module.exports = function(grunt) {
     clean: {
       build: '<%= dirs.build %>',
       jsdoc: '<%= dirs.build %>/jsdoc',
-      tests: '<%= dirs.build %>/test'
+      tests: [
+        '<%= dirs.build %>/test/*.js',
+        '<%= dirs.build %>/test/*.html'
+      ]
     },
 
     copy: {
@@ -306,7 +310,9 @@ module.exports = function(grunt) {
       },
 
       concat_min_js: {
-        files: ['<%= dirs.source %>/js/**', '<%= dirs.build %>/js/CUI.Templates.js'],
+        files: [
+          '<%= dirs.source %>/js/**'
+        ],
         tasks: 'concat:cui min:cui'
       },
       
@@ -322,7 +328,7 @@ module.exports = function(grunt) {
       
       compile_handlebars: {
         files: '<%= dirs.source %>/templates/*',
-        tasks: 'handlebars'
+        tasks: 'handlebars concat:cui min:cui'
       },
       
       copy_tests: {
@@ -336,16 +342,16 @@ module.exports = function(grunt) {
           '<%= dirs.build %>/js/CUI.Templates.js',
           '<%= dirs.source %>/test/**'
         ],
-        tasks: 'mocha'
+        tasks: 'mocha coverage'
       }
     }
   });
   
   // Partial build for development
-  grunt.registerTask('partial', 'lint copy handlebars concat:cui min:cui less mincss');
+  grunt.registerTask('partial', 'lint copy handlebars concat:cui min:cui less mincss mocha');
   
   // Full build with docs and compressed file
-  grunt.registerTask('full-build', 'lint copy handlebars concat:cui min less mincss jsdoc');
+  grunt.registerTask('full-build', 'lint copy handlebars concat:cui min less mincss mocha jsdoc');
   
   // Full build with docs and compressed file
   grunt.registerTask('full', 'clean full-build');
