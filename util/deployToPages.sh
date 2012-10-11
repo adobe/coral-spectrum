@@ -1,8 +1,9 @@
 #!/usr/bin/env sh
 
-pagesLoc="../../CoralUI-pages"
+pagesLoc="../CoralUI-pages"
 
-cwd=`pwd`
+# Get out of util folder
+cd ..
 
 # Build
 echo "Performing release build..."
@@ -11,14 +12,17 @@ grunt release
 echo "Copying build files..."
 cp -rp build/* $pagesLoc
 
-cd $pagesLoc
-
 # Copy zip files as latest
-for file in `find . | grep cui.*zip`; do
-	newName=${file/[0-9].[0-9].[0-9]/latest}
+for file in `find ./build/ | grep cui.*zip`; do
+  filename=$(basename "$fullfile")
+  
+	newName=${filename/[0-9].[0-9].[0-9]/latest}
 	echo "Copying $file to releases/$newName..."
-	cp $file releases/$newName
+	cp $file $pagesLoc/releases/$newName
 done
+
+# Get into the pages folder
+cd $pagesLoc
 
 # Move zip files
 echo "Moving zip files to release/..."
