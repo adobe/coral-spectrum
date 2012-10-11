@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
   <title>CoralUI Style Guide</title>
@@ -23,7 +23,7 @@
 
   <header class="top">
 
-    <div class="logo"><img src="images/theme/cloudui.png"></div>
+    <div class="logo"><img src="images/theme/cloudui.png" alt="CoralUI logo"></div>
 
     <nav>
       <a href="#" class="selected">Guide</a>
@@ -38,7 +38,7 @@
 
   </header>
 
-  <div class="page">
+  <div class="page" role="main">
 
     <div id="main-rail" class="rail left">
       <div class="pull-to-refresh">
@@ -294,7 +294,7 @@
             <div class="example">
 
               <header class="top">
-                <div class="logo"><img src="images/theme/dms.png"></div>
+                <div class="logo"><img src="images/theme/dms.png" alt="DMS logo"></div>
                 <nav>
                   <a href="#" class="selected">Home</a>
                   <a href="#">Activities</a>
@@ -308,7 +308,7 @@
             </div>
             <pre class="prettyprint linenums">
 &lt;header class="top"&gt;
-  &lt;div class=&quot;logo&quot;&gt;&lt;img src=&quot;images/theme/dms.png&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;logo&quot;&gt;&lt;img src=&quot;images/theme/dms.png&quot; alt="DMS logo"&gt;&lt;/div&gt;
   &lt;nav&gt;
     &lt;a href=&quot;#&quot; class=&quot;selected&quot;&gt;Home&lt;/a&gt;
     &lt;a href=&quot;#&quot;&gt;Activities&lt;/a&gt;
@@ -337,8 +337,8 @@
           <div class="componentSample railSample">
             <div class="example">
 
-              <div class="page shadowBox">
-                <div class="rail right">
+              <div class="page shadowBox" role="main">
+                <div class="rail right" role="complementary">
                   <div class="wrap">
                     <section>
                         <h4>News Feed</h4>
@@ -357,8 +357,8 @@
 
             </div>
             <pre class="prettyprint linenums">
-&lt;div class=&quot;page&quot;&gt;
-  &lt;div class=&quot;rail right&quot;&gt;
+&lt;div class=&quot;page&quot; role=&quot;main&quot;&gt;
+  &lt;div class=&quot;rail right&quot; role=&quot;complementary&quot;&gt;
     &lt;div class=&quot;wrap&quot;&gt;
       &lt;section&gt;
           &lt;h4&gt;Update Feed&lt;/h4&gt;
@@ -506,7 +506,7 @@
 
         <section id="Buttons">
           <h2 class="line">Buttons</h2>
-          <p>The <code class="prettyprint">&lt;button&gt;</code> tag is styled automatically, and you can apply the <code class="atv">button</code> CSS class to any element to turn it into a styled button.</p>
+          <p>The <code class="prettyprint">&lt;button&gt;</code> tag is styled automatically. You can apply the <code class="atv">button</code> CSS class to any element to style it as a button, but be sure to add <code><span class="atn">role</span><span class="pun">=</span><span class="atv">"button"</span></code> for accessibility.</p>
           
           <h3>Variations</h3>
           <p>By default, buttons are gray. There are two CSS classes that can be added to change the look of the button:</p>
@@ -518,7 +518,7 @@
           <div class="componentSample buttonSample">
             <div class="example">
 
-              <a class="button" href="#Buttons">Action</a>
+              <a class="button" role="button" href="#Buttons">Action</a>
               <button class="primary">Primary Action</button>
               <button class="warning">Warning</button>
               <button disabled>Disabled</button>
