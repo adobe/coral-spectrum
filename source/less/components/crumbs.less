@@ -1,6 +1,6 @@
 /**
-  Classes: nav.crumbs and ul.crumbs
-  Used for printing a breadcrumb trail. 
+  Class: nav.crumbs
+  Displays a breadcrumb trail. 
 */
 
 nav.crumbs {
@@ -27,7 +27,6 @@ nav.crumbs {
 
     &:hover {
       color: @crumb-hover-text-color;
-      //text-decoration: underline;
     }
     
     img {
@@ -35,6 +34,7 @@ nav.crumbs {
     }
   }
 
+  // The last crumb should not have a chevron and should be bolder
   a:last-child {
     font-family: AdobeClean;
     
