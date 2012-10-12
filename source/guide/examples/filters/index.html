@@ -80,10 +80,14 @@
                             options: options
                 });
 
-                $("select").filters({placeholder: "select me!"});
 
                 filters1.setSelectedIndex(2);
-                
+
+                $("select").filters({placeholder: "select me!"});
+                $("select").each(function() {
+                    $(this).data("filters").setSelectedIndices([0,1]);
+                })
+
                 $("[data-action=disable]").click(function() {
                     filters1.set("disabled", true);
                     filters2.set("disabled", true);
