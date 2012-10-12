@@ -74,7 +74,11 @@ var index = filters.getSelectedIndex();
             this.typeTimeout = null;
             // Set to existing selection for single term use
             if (!this.options.multiple && this.selectedIndex >=0) {
-                this.inputElement.attr("value", this.options.options[this.selectedIndex]);
+                if (this.inputElement.attr("value") === "") {
+                    this.setSelectedIndex(-1);
+                } else {
+                    this._update();
+                }
             }
             setTimeout(this._hideAutocompleter.bind(this), 200); // Use timeout to have a chance to select from list
         }.bind(this));
@@ -186,6 +190,7 @@ var index = filters.getSelectedIndex();
             this.options.multiple = this.$element.attr("multiple") ? true : false;
             if (this.$element.attr("data-stacking")) this.options.stacking = true;
             if (this.$element.attr("data-placeholder")) this.options.placeholder = this.$element.attr("data-placeholder");
+            if (this.$element.attr("disabled")) this.options.disabled = true;
             
             this.options.options = [];
             this.$element.find("option").each(function(i, e) {
@@ -202,6 +207,8 @@ var index = filters.getSelectedIndex();
         // if current element is input field -> wrap it into DIV
         if (this.$element.get(0).tagName === "INPUT") {
             var div = $("<div></div>");
+            if (this.$element.attr("data-stacking")) this.options.stacking = true;
+            if (this.$element.attr("disabled")) this.options.disabled = true;
             this.$element.after(div);
             this.$element.detach();
             div.append(this.$element);

@@ -594,39 +594,34 @@
         
         <section id="Filters">
               <h2 class="line">Filters</h2>
-              <p>Filters &amp; Tags input variants. Filter input fields can be crated by markup directly or by JavaScript.</p>
+              <p>Filters &amp; Tags input variants. Filter input fields can be created by markup directly or by JavaScript, though
+              the full funcationality can only be achieved by using the corresponding widget.</p>
+              <p>You can use an input field or a select field as template for the widget.</p>
 
               <div class="componentSample">
                   <div class="example">
                       <div class="filterSample">
                           <div class="sampleTitle left">Single</div>
-                          <input class="filter" type="text" placeholder="Single Term Filter">
+                          <input type="text" placeholder="Single Term Filter" id="filters-singleterm">
                       </div>
                       
                       <div class="filterSample">
                           <div class="sampleTitle extended left">Standard</div>
-                          
-                          <span class="filters">
-                              <input type="text" placeholder="Add Filter">
-                              <ul>
-                                  <li><button data-dismiss="filter">&times;</button> Term One</li>
-                                  <li><button data-dismiss="filter">&times;</button> Term Two</li>
-                                  <li><button data-dismiss="filter">&times;</button> Term Three</li>
-                              </ul>
-                          </span>
+                          <select data-placeholder="Add Filter" multiple id="filters-standard">
+                              <option>Apple</option>
+                              <option>Pear</option>
+                              <option>Banana</option>
+                          </select>
+                              
                       </div>
                       
                       <div class="filterSample">
                           <div class="sampleTitle extended left">Stacking</div>
-                          
-                          <span class="filters stacking">
-                              <input type="text" placeholder="Add Filter">
-                              <ul>
-                                  <li><button data-dismiss="filter">&times;</button> Term One</li>
-                                  <li><button data-dismiss="filter">&times;</button> Term Two</li>
-                                  <li><button data-dismiss="filter">&times;</button> Term Three</li>
-                              </ul>
-                          </span>
+                          <select data-placeholder="Add Filter" multiple data-stacking="true" id="filters-stacking">
+                              <option>Apple</option>
+                              <option>Pear</option>
+                              <option>Banana</option>
+                          </select> 
                       </div>
                       
                       <div class="filterSample">
@@ -641,11 +636,34 @@
                   </div>
                   
                   
-              <pre class="prettyprint linenums">
-&lt;input type=&quot;text&quot; placeholder=&quot;Text Field&quot; class=&quot;&quot;&gt;
-&lt;input type=&quot;text&quot; class=&quot;error&quot;&gt;
-&lt;input type=&quot;text&quot; disabled&gt;</pre>
-                  
+                <pre class="prettyprint linenums">
+    &lt;!-- Single term filters with input field as template --&gt;
+    &lt;input type="text" placeholder="Single Term Filter"&gt;
+
+    &lt;!-- Standard filters with select as template --&gt;
+    &lt;select data-placeholder="Add Filter" multiple&gt;
+        &lt;option&gt;Apple&lt;/option&gt;
+        &lt;option&gt;Pear&lt;/option&gt;
+        &lt;option&gt;Banana&lt;/option&gt;
+    &lt;/select&gt;
+
+    &lt;!-- Stacking filters with select as template --&gt;
+    &lt;select data-placeholder="Add Filter" multiple data-stacking="true"&gt;
+        &lt;option&gt;Apple&lt;/option&gt;
+        &lt;option&gt;Pear&lt;/option&gt;
+        &lt;option&gt;Banana&lt;/option&gt;
+    &lt;/select&gt;
+
+    &lt;!-- &hellip; and don't forget to initialise your Widget! --&gt;
+    &lt;script type="text/javascript"&gt;
+        $(document).ready(function() {
+            $("select").filters(); // Or a similar selector corresponding to your DOM
+        })
+    &lt;/script&gt;
+                </pre>
+                <script type="text/javascript">
+                    $("#filters-singleterm,#filters-standard,#filters-stacking,.filter").filters();
+                </script>
               </div>
           </section>
         <section id="Slider">
@@ -666,51 +684,8 @@
                           </div>
 
                       </div>
-                      
-                      <div class="filterSample">
-                          <div class="sampleTitle extended left">Standard</div>
-                          
-                          <span class="filters">
-                              <input type="text" placeholder="Add Filter">
-                              <ul>
-                                  <li><button data-dismiss="filter">&times;</button> Term One</li>
-                                  <li><button data-dismiss="filter">&times;</button> Term Two</li>
-                                  <li><button data-dismiss="filter">&times;</button> Term Three</li>
-                              </ul>
-                          </span>
-                      </div>
-                      
-                      <div class="filterSample">
-                          <div class="sampleTitle extended left">Stacking</div>
-                          
-                          <span class="filters stacking">
-                              <input type="text" placeholder="Add Filter">
-                              <ul>
-                                  <li><button data-dismiss="filter">&times;</button> Term One</li>
-                                  <li><button data-dismiss="filter">&times;</button> Term Two</li>
-                                  <li><button data-dismiss="filter">&times;</button> Term Three</li>
-                              </ul>
-                          </span>
-                      </div>
-                      
-                      <div class="filterSample">
-                          <div class="sampleTitle left">Error</div>
-                          <input class="filter error" type="text">
-                      </div>
-                      
-                      <div class="filterSample">
-                          <div class="sampleTitle left">Disabled</div>
-                          <input class="filter" disabled type="text">
-                      </div>
                   </div>
                   
-                  
-              <pre class="prettyprint linenums">
-&lt;input type=&quot;text&quot; placeholder=&quot;Text Field&quot; class=&quot;&quot;&gt;
-&lt;input type=&quot;text&quot; class=&quot;error&quot;&gt;
-&lt;input type=&quot;text&quot; disabled&gt;</pre>
-                  
-              </div>
           </section>
 
         <section id="Checkbox">
