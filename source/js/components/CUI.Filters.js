@@ -72,6 +72,14 @@ var index = filters.getSelectedIndex();
             if (this.options.disabled) return;
             if (this.typeTimeout) clearTimeout(this.typeTimeout);
             this.typeTimeout = null;
+            // Set to existing selection for single term use
+            if (!this.options.multiple && this.selectedIndex >=0) {
+                if (this.inputElement.attr("value") === "") {
+                    this.setSelectedIndex(-1);
+                } else {
+                    this._update();
+                }
+            }
             setTimeout(this._hideAutocompleter.bind(this), 200); // Use timeout to have a chance to select from list
         }.bind(this));
        
@@ -108,7 +116,7 @@ var index = filters.getSelectedIndex();
         
         this.$element.on("click", "", function() {
             if (this.options.disabled) return;
-            this.$element.find("input").focus();
+            this.inputElement.focus();
             this._inputChanged();
         }.bind(this));
        
@@ -126,10 +134,11 @@ var index = filters.getSelectedIndex();
     
 
     autocompleteElement: null,
+    syncSelectElement: null,
+    inputElement: null,
     typeTimeout: null,
     selectedIndex: -1, // For single term only
     selectedIndices: null, // For multiple terms
-    syncSelectElement: null,
     triggeredBackspace: false,
  
     /**
@@ -137,10 +146,10 @@ var index = filters.getSelectedIndex();
      *                          adds it to the list of selected indices
      */
     setSelectedIndex: function(index) {
-        if (index < 0 || index >= this.options.options.length) return;
-        this.$element.find("input").attr("value", "");
+        if (index < -1 || index >= this.options.options.length) return;
+        this.inputElement.attr("value", "");
         this.selectedIndex = index;
-        if (this.options.multiple && this.selectedIndices.indexOf(index * 1) < 0) {
+        if (this.options.multiple && index >=0 && this.selectedIndices.indexOf(index * 1) < 0) {
             this.selectedIndices.push(index * 1); // force numeric
         }
         this._update();
@@ -161,11 +170,12 @@ var index = filters.getSelectedIndex();
     },
     
     setSelectedIndices: function(indices) {
-        this.selectedIndices = indices;
+        this.selectedIndices = indices.slice(0); // Make copy of parameter!
+        this._update();
     },
     
     getSelectedIndices: function() {
-        return this.selectedIndices;
+        return this.selectedIndices.slice(0); // Make copy before returning!
     },
     
     _changeOptions: function() {
@@ -178,6 +188,10 @@ var index = filters.getSelectedIndex();
         // if current element is select field -> turn into input field, but hold reference to select to update it on change
         if (this.$element.get(0).tagName === "SELECT") {
             this.options.multiple = this.$element.attr("multiple") ? true : false;
+            if (this.$element.attr("data-stacking")) this.options.stacking = true;
+            if (this.$element.attr("data-placeholder")) this.options.placeholder = this.$element.attr("data-placeholder");
+            if (this.$element.attr("disabled")) this.options.disabled = true;
+            
             this.options.options = [];
             this.$element.find("option").each(function(i, e) {
                 this.options.options.push($(e).text());
@@ -185,14 +199,16 @@ var index = filters.getSelectedIndex();
             
             var input = $("<input type=\"text\">");
             this.$element.after(input);
-            this.syncSelectField = this.$element;
+            this.syncSelectElement = this.$element;
             this.$element = input;
-            this.syncSelectField.hide();
+            this.syncSelectElement.hide();
         }
         
         // if current element is input field -> wrap it into DIV
         if (this.$element.get(0).tagName === "INPUT") {
             var div = $("<div></div>");
+            if (this.$element.attr("data-stacking")) this.options.stacking = true;
+            if (this.$element.attr("disabled")) this.options.disabled = true;
             this.$element.after(div);
             this.$element.detach();
             div.append(this.$element);
@@ -201,26 +217,47 @@ var index = filters.getSelectedIndex();
         
         this.$element.addClass("filters");
         this.$element.removeClass("focus");
+        
+        this.inputElement = this.$element.find("input");
 
         if (this.options.stacking) this.$element.addClass("stacking"); else this.$element.removeClass("stacking");
-        if (this.options.placeholder) this.$element.find("input").attr("placeholder", this.options.placeholder);
+        if (this.options.placeholder) this.inputElement.attr("placeholder", this.options.placeholder);
         if (this.options.disabled) {
             this.$element.addClass("disabled");
-            this.$element.find("input").attr("disabled", "disabled");
+            this.inputElement.attr("disabled", "disabled");
         } else {
            this.$element.removeClass("disabled");
-           this.$element.find("input").removeAttr("disabled");
+           this.inputElement.removeAttr("disabled");
             
         }
         
+       
         this._update();
     },
     
     _update: function() {
+        
+        
         if (!this.options.multiple) {
-            var option = this.options.options[this.selectedIndex];
-            this.$element.find("input").attr("value", option);
+            if (this.syncSelectElement) this.syncSelectElement.find("option:selected").removeAttr("selected");
+            if (this.selectedIndex >= 0) {
+                if (this.syncSelectElement) $(this.syncSelectElement.find("option").get(this.selectedIndex)).attr("selected", "selected");
+                var option = this.options.options[this.selectedIndex];
+                this.inputElement.attr("value", option);
+            } else {
+                this.inputElement.attr("value", "");
+            }
             return;
+        }
+
+        if (this.syncSelectElement) {
+            this.syncSelectElement.find("option:selected").removeAttr("selected");
+            
+            for(var i = 0; i < this.selectedIndices.length; i++) {
+                var index = this.selectedIndices[i];
+                $(this.syncSelectElement.find("option").get(index)).attr("selected", "selected");
+                
+            }
         }
         
         var ul = $("<ul></ul>");
@@ -254,7 +291,7 @@ var index = filters.getSelectedIndex();
         var key = event.keyCode;
         if (key === 8) { 
             if (this.triggeredBackspace === false && this.options.multiple && this.selectedIndices.length > 0 &&
-                this.$element.find("input").attr("value").length === 0) {
+                this.inputElement.attr("value").length === 0) {
                 event.preventDefault();
                 this.removeSelectedIndex(this.selectedIndices[this.selectedIndices.length - 1]);    
             }
@@ -293,7 +330,7 @@ var index = filters.getSelectedIndex();
            if (currentIndex >= 0) {
                 this.setSelectedIndex($(this.autocompleteElement.children().get(currentIndex)).attr("data-id"));
                 this._hideAutocompleter();
-                this.$element.find("input").focus();
+                this.inputElement.focus();
                 return;
            }
         }
@@ -306,7 +343,7 @@ var index = filters.getSelectedIndex();
     },
 
     _inputChanged: function() {
-        var searchFor = this.$element.find("input").attr("value");
+        var searchFor = this.inputElement.attr("value");
         
         var results = this.options.autocompleteCallback(searchFor);
         this._showAutocompleter(results, searchFor);
@@ -315,7 +352,7 @@ var index = filters.getSelectedIndex();
     _correctInputFieldWidth: function() {
         if (!this.options.stacking) return;
         
-        var i = this.$element.find("input");
+        var i = this.inputElement;
         var text = i.attr("value");
         if (text.length === 0) text = i.attr("placeholder");
         var styles = ["font-family", "font-weight", "font-style", "font-size", "letter-spacing", "line-height", "text-transform"];
