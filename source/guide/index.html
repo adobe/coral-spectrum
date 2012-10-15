@@ -62,30 +62,30 @@
             </nav>
         </section>
 
-        <section class="links">
+        <section class="links foldable open">
             <a class="heading" href="#TextStyles">Text Styles</a>
 
-            <nav>
+            <nav class="fold">
               <a href="#Headings">Headings</a>
               <a href="#Link">Link</a>
               <a href="#Fonts">Fonts</a>
             </nav>
         </section>
 
-        <section class="links">
+        <section class="links foldable open">
             <a class="heading" href="#PageComponents">Page&nbsp;Components</a>
 
-            <nav>
+            <nav class="fold">
               <a href="#Header">Header</a>
               <a href="#Rail">Rail</a>
               <a href="#Well">Well</a>
             </nav>
         </section>
 
-        <section class="links">
+        <section class="links foldable open">
             <a class="heading" href="#Navigation">Navigation</a>
 
-            <nav>
+            <nav class="fold">
               <a href="#Toolbar">Toolbar</a>
               <a href="#Breadcrumbs">Breadcrumbs</a>
               <a href="#Tabs">Tabs</a>
@@ -101,7 +101,6 @@
             <a href="#TextField">Text field</a>
             <a href="#SearchField">Search field</a>
             <a href="#Filters">Filters</a>
-            <a href="#Dropdown">Dropdowns</a>
             <a href="#Slider">Slider</a>
             <a href="#Checkbox">Checkbox</a>
             <a href="#RadioButtons">Radio buttons</a>
@@ -112,35 +111,39 @@
           </nav>
       </section>
 
-        <section class="links">
+        <section class="links foldable">
             <a class="heading" href="#DataPresentation">Data&nbsp;Presentation</a>
 
-            <nav>
+            <nav class="fold">
               <a href="#List">List</a>
               <a href="#Table">Table</a>
               <a href="#Grid">Grid</a>
             </nav>
         </section>
 
-        <section class="links">
+        <section class="links foldable">
             <a class="heading" href="#Dialogs">Dialogs</a>
 
-            <nav>
+            <nav class="fold">
               <a href="#Modal">Modal</a>
               <a href="#Popover">Popover</a>
            </nav>
         </section>
 
-        <section class="links">
+        <section class="links foldable">
             <a class="heading" href="#StatusIndicators">Status Indicators</a>
 
-            <nav>
+            <nav class="fold">
               <a href="#Alert">Alert</a>
               <a href="#Tooltip">Tooltip</a>
               <a href="#Badge">Badge</a>
               <a href="#Spinner">Spinner</a>
               <a href="#ProgressBar">Progress Bar</a>
            </nav>
+        </section>
+
+        <section class="links foldable">
+            Foo
         </section>
 
         <section class="links hidden">
@@ -678,13 +681,21 @@
                       <div class="filterSample">
                           <div class="sampleTitle left">Standard</div>
                           <div>
-                              <select name="dropdown">
+                              <select name="dropdown" data-init="dropdown" data-placeholder="Single Select">
                                   <option>One</option>
                                   <option>Two</option>
                                   <option>Three</option>
                               </select>
                           </div>
+                          <div class="sampleTitle left">Multiselect</div>
+                          <div>
+                              <select name="dropdown2" multiple data-init="dropdown" data-placeholder="Multi Select">
+                                  <option>One</option>
+                                  <option>Two</option>
+                                  <option>Three</option>
+                              </select>
 
+                          </div>
                       </div>
                   </div>
                   
@@ -773,16 +784,20 @@
 
             <div class="componentSample">
                 <div class="example clearfix">
-                    <div class="left">
-                        <input type="checkbox" class="switch">
-                        <input type="checkbox" class="switch" checked>
-                        <input type="checkbox" class="switch" disabled>
+                    <div class="switch">
+                        <label><input type="checkbox" name="s1"><span>Off</span><span>On</span></label>
+                    </div>
+                    <div class="switch">
+                        <label><input type="checkbox" name="s2" disabled><span>Off</span><span>On</span></label>
                     </div>
                 </div>
                <pre class="prettyprint linenums">
-&lt;input type=&quot;checkbox&quot; class=&quot;switch&quot;&gt;
-&lt;input type=&quot;checkbox&quot; class=&quot;switch&quot; checked&gt;
-&lt;input type=&quot;checkbox&quot; class=&quot;switch&quot; disabled&gt;
+&lt;div class=&quot;switch&quot;&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s1&quot;&gt;&lt;span&gt;Off&lt;/span&gt;&lt;span&gt;On&lt;/span&gt;&lt;/label&gt;
+&lt;/div&gt;
+&lt;div class=&quot;switch&quot;&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s2&quot; disabled&gt;&lt;span&gt;Off&lt;/span&gt;&lt;span&gt;On&lt;/span&gt;&lt;/label&gt;
+&lt;/div&gt;
 </pre>
             </div>
 
@@ -793,23 +808,23 @@
                 <div class="example clearfix">
                     <div class="left">
                         <div class="selector">
-                            <label><input type="radio">Yes</label>
-                            <label><input type="radio">No</label>
+                            <label><input type="radio" name="s3"><span>Yes</span></label>
+                            <label><input type="radio" name="s3"><span>No</span></label>
                         </div>
-                        <div class="selector disabled">
-                            <label><input type="radio">Yes</label>
-                            <label><input type="radio">No</label>
+                        <div class="selector">
+                            <label><input type="radio" name="s4" disabled><span>Yes</span></label>
+                            <label><input type="radio" name="s4" disabled><span>No</span></label>
                         </div>
                     </div>
                 </div>
                <pre class="prettyprint linenums">
 &lt;div class=&quot;selector&quot;&gt;
-  &lt;label&gt;&lt;input type=&quot;radio&quot;&gt;Yes&lt;/label&gt;
-  &lt;label&gt;&lt;input type=&quot;radio&quot;&gt;No&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;s3&quot;&gt;&lt;span&gt;Yes&lt;/span&gt;&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;s3&quot;&gt;&lt;span&gt;No&lt;/span&gt;&lt;/label&gt;
 &lt;/div&gt;
-&lt;div class=&quot;selector disabled&quot;&gt;
-  &lt;label&gt;&lt;input type=&quot;radio&quot;&gt;Yes&lt;/label&gt;
-  &lt;label&gt;&lt;input type=&quot;radio&quot;&gt;No&lt;/label&gt;
+&lt;div class=&quot;selector&quot;&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;s4&quot; disabled&gt;&lt;span&gt;Yes&lt;/span&gt;&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;s4&quot; disabled&gt;&lt;span&gt;No&lt;/span&gt;&lt;/label&gt;
 &lt;/div&gt;
 </pre>
             </div>
@@ -821,27 +836,27 @@
                 <div class="example clearfix">
                     <div class="left">
                         <div class="selector">
-                            <label><input type="checkbox">Chicken</label>
-                            <label><input type="checkbox">Steak</label>
-                            <label><input type="checkbox">Pork</label>
+                            <label><input type="checkbox" name="s5"><span>Chicken</span></label>
+                            <label><input type="checkbox" name="s5"><span>Steak</span></label>
+                            <label><input type="checkbox" name="s5"><span>Pork</span></label>
                         </div>
-                        <div class="selector disabled">
-                            <label><input type="checkbox">Chicken</label>
-                            <label><input type="checkbox">Steak</label>
-                            <label><input type="checkbox">Pork</label>
+                        <div class="selector">
+                            <label><input type="checkbox" name="s6" disabled><span>Chicken</span></label>
+                            <label><input type="checkbox" name="s6" disabled><span>Steak</span></label>
+                            <label><input type="checkbox" name="s6" disabled><span>Pork</span></label>
                         </div>
                     </div>
                 </div>
                <pre class="prettyprint linenums">
 &lt;div class=&quot;selector&quot;&gt;
-  &lt;label&gt;&lt;input type=&quot;checkbox&quot;&gt;Chicken&lt;/label&gt;
-  &lt;label&gt;&lt;input type=&quot;checkbox&quot;&gt;Steak&lt;/label&gt;
-  &lt;label&gt;&lt;input type=&quot;checkbox&quot;&gt;Pork&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s5&quot;&gt;&lt;span&gt;Chicken&lt;/span&gt;&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s5&quot;&gt;&lt;span&gt;Steak&lt;/span&gt;&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s5&quot;&gt;&lt;span&gt;Pork&lt;/span&gt;&lt;/label&gt;
 &lt;/div&gt;
-&lt;div class=&quot;selector disabled&quot;&gt;
-  &lt;label&gt;&lt;input type=&quot;checkbox&quot;&gt;Chicken&lt;/label&gt;
-  &lt;label&gt;&lt;input type=&quot;checkbox&quot;&gt;Steak&lt;/label&gt;
-  &lt;label&gt;&lt;input type=&quot;checkbox&quot;&gt;Pork&lt;/label&gt;
+&lt;div class=&quot;selector&quot;&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s6&quot; disabled&gt;&lt;span&gt;Chicken&lt;/span&gt;&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s6&quot; disabled&gt;&lt;span&gt;Steak&lt;/span&gt;&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s6&quot; disabled&gt;&lt;span&gt;Pork&lt;/span&gt;&lt;/label&gt;
 &lt;/div&gt;
 </pre>
             </div>

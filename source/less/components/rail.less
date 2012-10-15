@@ -13,11 +13,14 @@ div.rail {
   &.pullable {
     position: relative;
     background-color: transparent; 
-    //-webkit-transform: translateZ(0);
 
     >.pull-to-refresh {
       display: block;
     }   
+
+    >.wrap {
+      padding-bottom: 1px; // this is necessary to enable scrolling
+    }
   }
 
   // Add shadow to left/right rail
@@ -94,6 +97,9 @@ div.rail {
     // -> because the outer div is the scrolling div
     -webkit-transform: translateZ(0);
 
+    // stretch to screen height
+    min-height: 100%;
+
     // necessary of pull-to-refresh is possible
     background-color: @rail-background-color;
 
@@ -155,6 +161,30 @@ div.rail {
             font-size: 0.85rem;
             //text-shadow: 0 2*@px 0 black;
             color: @rail-section-link-color;
+          }
+        }
+      }
+
+      // the is foldable
+      &.foldable {
+        >.heading:before {
+          content: "\25B8";
+          padding-right: 0.5rem;  
+        }
+
+        >.fold {
+          height: 0;
+          overflow: hidden;
+        }
+
+        &.open {
+          >.fold {
+            height: auto;
+            overflow: auto;
+          }
+
+          >.heading:before {
+            content: "\25BE";
           }
         }
       }
