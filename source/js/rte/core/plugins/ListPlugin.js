@@ -212,20 +212,20 @@ CUI.rte.plugins.ListPlugin = new Class({
             "keepStructureOnUnlist": false,
             "tooltips": {
                 "insertunorderedlist": {
-                    "title": CQ.I18n.getMessage("Bullet List"),
-                    "text": CQ.I18n.getMessage("Start a bulleted list.")
+                    "title": CUI.rte.Utils.i18n("Bullet List"),
+                    "text": CUI.rte.Utils.i18n("Start a bulleted list.")
                 },
                 "insertorderedlist": {
-                    "title": CQ.I18n.getMessage("Numbered List"),
-                    "text": CQ.I18n.getMessage("Start a numbered list.")
+                    "title": CUI.rte.Utils.i18n("Numbered List"),
+                    "text": CUI.rte.Utils.i18n("Start a numbered list.")
                 },
                 "indent": {
-                    "title": CQ.I18n.getMessage("Indent"),
-                    "text": CQ.I18n.getMessage("Indents the selected paragraph(s) or list item(s).")
+                    "title": CUI.rte.Utils.i18n("Indent"),
+                    "text": CUI.rte.Utils.i18n("Indents the selected paragraph(s) or list item(s).")
                 },
                 "outdent": {
-                    "title": CQ.I18n.getMessage("Outdent"),
-                    "text": CQ.I18n.getMessage("Outdents the current paragraph(s) or list item(s).")
+                    "title": CUI.rte.Utils.i18n("Outdent"),
+                    "text": CUI.rte.Utils.i18n("Outdents the current paragraph(s) or list item(s).")
                 }
             }
         });

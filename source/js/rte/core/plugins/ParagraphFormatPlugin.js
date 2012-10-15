@@ -57,16 +57,16 @@ CUI.rte.plugins.ParagraphFormatPlugin = new Class({
 [
     {
         "tag": "p",
-        "description": CQ.I18n.getMessage("Paragraph")
+        "description": CUI.rte.Utils.i18n("Paragraph")
     }, {
         "tag": "h1",
-        "description": CQ.I18n.getMessage("Heading 1")
+        "description": CUI.rte.Utils.i18n("Heading 1")
     }, {
         "tag": "h2",
-        "description": CQ.I18n.getMessage("Heading 2")
+        "description": CUI.rte.Utils.i18n("Heading 2")
     }, {
         "tag": "h3",
-        "description": CQ.I18n.getMessage("Heading 3")
+        "description": CUI.rte.Utils.i18n("Heading 3")
     }
 ]
 </pre>
@@ -139,16 +139,16 @@ CUI.rte.plugins.ParagraphFormatPlugin = new Class({
         var defaults = {
             "formats": [ {
                     "tag": "p",
-                    "description": CQ.I18n.getMessage("Paragraph")
+                    "description": CUI.rte.Utils.i18n("Paragraph")
                 }, {
                     "tag": "h1",
-                    "description": CQ.I18n.getMessage("Heading 1")
+                    "description": CUI.rte.Utils.i18n("Heading 1")
                 }, {
                     "tag": "h2",
-                    "description": CQ.I18n.getMessage("Heading 2")
+                    "description": CUI.rte.Utils.i18n("Heading 2")
                 }, {
                     "tag": "h3",
-                    "description": CQ.I18n.getMessage("Heading 3")
+                    "description": CUI.rte.Utils.i18n("Heading 3")
                 }
             ]
         };

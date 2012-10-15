@@ -1064,23 +1064,23 @@ CUI.rte.EditorKernel = new Class({
             } catch (e) {
                 if (e.message == "Cannot paste.") {
                     this.editorKernel.getDialogManager().alert(
-                            CQ.I18n.getMessage("Paste"),
-                            CQ.I18n.getMessage("Could not paste due to security restrictions of the browser.<br>Please use Ctrl+V to paste directly."),
+                            CUI.rte.Utils.i18n("Paste"),
+                            CUI.rte.Utils.i18n("Could not paste due to security restrictions of the browser.<br>Please use Ctrl+V to paste directly."),
                             CUI.rte.Utils.scope(this.deferFocus, this));
                 } else if (e.message == "Cannot copy.") {
                     this.editorKernel.getDialogManager().alert(
-                            CQ.I18n.getMessage("Copy"),
-                            CQ.I18n.getMessage("Could not copy due to security restrictions of the browser.<br>Please use Ctrl+C to copy directly."),
+                            CUI.rte.Utils.i18n("Copy"),
+                            CUI.rte.Utils.i18n("Could not copy due to security restrictions of the browser.<br>Please use Ctrl+C to copy directly."),
                             CUI.rte.Utils.scope(this.deferFocus, this));
                 } else if (e.message == "Cannot cut.") {
                     this.editorKernel.getDialogManager().alert(
-                            CQ.I18n.getMessage("Cut"),
-                            CQ.I18n.getMessage("Could not cut due to security restrictions of the browser.<br>Please use Ctrl+X to cut directly."),
+                            CUI.rte.Utils.i18n("Cut"),
+                            CUI.rte.Utils.i18n("Could not cut due to security restrictions of the browser.<br>Please use Ctrl+X to cut directly."),
                             CUI.rte.Utils.scope(this.deferFocus, this));
                 } else if (e.message == "Could not insert html due to IE limitations.") {
                     this.editorKernel.getDialogManager().alert(
-                            CQ.I18n.getMessage("Error"),
-                            CQ.I18n.getMessage("Could not insert text due to internal Internet Explorer limitations. Please try to select a smaller text fragment and try again."),
+                            CUI.rte.Utils.i18n("Error"),
+                            CUI.rte.Utils.i18n("Could not insert text due to internal Internet Explorer limitations. Please try to select a smaller text fragment and try again."),
                             CUI.rte.Utils.scope(this.deferFocus, this));
                 } else {
                     throw e;

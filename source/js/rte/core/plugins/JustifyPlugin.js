@@ -47,16 +47,16 @@ CUI.rte.plugins.JustifyPlugin = new Class({
             "features": "*",
             "tooltips": {
                 "justifyleft": {
-                    "title": CQ.I18n.getMessage("Align Text Left"),
-                    "text": CQ.I18n.getMessage("Align text to the left.")
+                    "title": CUI.rte.Utils.i18n("Align Text Left"),
+                    "text": CUI.rte.Utils.i18n("Align text to the left.")
                 },
                 "justifycenter": {
-                    "title": CQ.I18n.getMessage("Center Text"),
-                    "text": CQ.I18n.getMessage("Center text in the editor.")
+                    "title": CUI.rte.Utils.i18n("Center Text"),
+                    "text": CUI.rte.Utils.i18n("Center text in the editor.")
                 },
                 "justifyright": {
-                    "title": CQ.I18n.getMessage("Align Text Right"),
-                    "text": CQ.I18n.getMessage("Align text to the right.")
+                    "title": CUI.rte.Utils.i18n("Align Text Right"),
+                    "text": CUI.rte.Utils.i18n("Align text to the right.")
                 }
             }
         });

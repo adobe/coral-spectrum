@@ -257,8 +257,8 @@ CUI.rte.commands.Paste = new Class({
                 if (e.message == "Invalid table structure.") {
                     // todo implement nicely
                     this.editorKernel.getDialogManager().alert(
-                            CQ.I18n.getMessage("Paste"),
-                            CQ.I18n.getMessage("You are trying to paste table data into an existing table.<br>As this operation would result in invalid HTML, it has been cancelled.<br>Please try to simplify the table's structure and try again."));
+                            CUI.rte.Utils.i18n("Paste"),
+                            CUI.rte.Utils.i18n("You are trying to paste table data into an existing table.<br>As this operation would result in invalid HTML, it has been cancelled.<br>Please try to simplify the table's structure and try again."));
                     return;
                 }
                 throw e;
@@ -304,8 +304,8 @@ CUI.rte.commands.Paste = new Class({
             var cellSel = destMatrix.createSelection(selection.cellSelection.cells);
             if (!cellSel.selectionProps.isRect) {
                 this.editorKernel.getDialogManager().alert(
-                        CQ.I18n.getMessage("Paste"),
-                        CQ.I18n.getMessage("You are trying to paste table data into an non-rectangular cell selection.<br>Please choose a rectangular cell selection and try again."));
+                        CUI.rte.Utils.i18n("Paste"),
+                        CUI.rte.Utils.i18n("You are trying to paste table data into an non-rectangular cell selection.<br>Please choose a rectangular cell selection and try again."));
                 return;
             }
             try {
@@ -317,8 +317,8 @@ CUI.rte.commands.Paste = new Class({
                 if (e.message == "Invalid table structure.") {
                     // todo implement nicely
                     this.editorKernel.getDialogManager().alert(
-                            CQ.I18n.getMessage("Paste"),
-                            CQ.I18n.getMessage("You are trying to paste table data into an existing table.<br>As this operation would result in invalid HTML, it has been cancelled.<br>Please try to simplify the table's structure and try again."));
+                            CUI.rte.Utils.i18n("Paste"),
+                            CUI.rte.Utils.i18n("You are trying to paste table data into an existing table.<br>As this operation would result in invalid HTML, it has been cancelled.<br>Please try to simplify the table's structure and try again."));
                     return;
                 }
                 throw e;

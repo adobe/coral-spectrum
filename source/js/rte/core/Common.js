@@ -2593,12 +2593,12 @@ CUI.rte.Common = function() {
             if (!isLogEnabled) {
                 return;
             }
-            var div = document.getElementById("cqRTEdebug");
+            var div = document.getElementById("cuiRTEdebug");
             if (!div && enforceDebuggingDiv) {
                 var doc = window.document;
                 var width = doc.body.clientWidth - 310;
                 div = doc.createElement("div");
-                div.id = "cqRTEdebug";
+                div.id = "cuiRTEdebug";
                 div.style.width = "300px";
                 div.style.height = "300px";
                 div.style.position = "absolute";

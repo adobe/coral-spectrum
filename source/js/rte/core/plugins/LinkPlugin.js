@@ -177,7 +177,7 @@ CUI.rte.plugins.LinkPlugin = new Class({
                         dialogConfig.additionalFields = { };
                     }
                     var targetItem = dialogHelper.createItem(dh.TYPE_TEXTFIELD, "target",
-                            CQ.I18n.getMessage("Anchor"));
+                            CUI.rte.Utils.i18n("Anchor"));
                     dialogConfig.additionalFields.push({
                         "item": targetItem,
                         "fromModel": function(obj, field) {
@@ -310,16 +310,16 @@ CUI.rte.plugins.LinkPlugin = new Class({
             },
             "tooltips": {
                 "modifylink": {
-                    "title": CQ.I18n.getMessage("Hyperlink"),
-                    "text": CQ.I18n.getMessage("Create or modify a hyperlink.")
+                    "title": CUI.rte.Utils.i18n("Hyperlink"),
+                    "text": CUI.rte.Utils.i18n("Create or modify a hyperlink.")
                 },
                 "unlink": {
-                    "title": CQ.I18n.getMessage("Unlink"),
-                    "text": CQ.I18n.getMessage("Remove an existing hyperlink from the selected text.")
+                    "title": CUI.rte.Utils.i18n("Unlink"),
+                    "text": CUI.rte.Utils.i18n("Remove an existing hyperlink from the selected text.")
                 },
                 "anchor": {
-                    "title": CQ.I18n.getMessage("Anchor"),
-                    "text": CQ.I18n.getMessage("Add or edit an anchor.")
+                    "title": CUI.rte.Utils.i18n("Anchor"),
+                    "text": CUI.rte.Utils.i18n("Add or edit an anchor.")
                 }
             }
         });

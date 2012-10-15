@@ -142,12 +142,12 @@ CUI.rte.plugins.UndoRedoPlugin = new Class({
             "maxUndoSteps": 50,
             "tooltips": {
                 "undo": {
-                    "title": CQ.I18n.getMessage("Undo"),
-                    "text": CQ.I18n.getMessage("Undo the last change.")
+                    "title": CUI.rte.Utils.i18n("Undo"),
+                    "text": CUI.rte.Utils.i18n("Undo the last change.")
                 },
                 "redo": {
-                    "title": CQ.I18n.getMessage("Redo"),
-                    "text": CQ.I18n.getMessage("Redo previously undone changes.")
+                    "title": CUI.rte.Utils.i18n("Redo"),
+                    "text": CUI.rte.Utils.i18n("Redo previously undone changes.")
                 }
             }
         };

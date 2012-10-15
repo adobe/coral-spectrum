@@ -674,36 +674,36 @@ CUI.rte.plugins.TablePlugin = new Class({
             },
             "tooltips": {
                 "table": {
-                    "title": CQ.I18n.getMessage("Table"),
-                    "text": CQ.I18n.getMessage("Creates a new table or edits the properties of an existing table.")
+                    "title": CUI.rte.Utils.i18n("Table"),
+                    "text": CUI.rte.Utils.i18n("Creates a new table or edits the properties of an existing table.")
                 },
                 "cellprops": {
-                    "title": CQ.I18n.getMessage("Cell"),
-                    "text": CQ.I18n.getMessage("Edit the properties of a selected cell.")
+                    "title": CUI.rte.Utils.i18n("Cell"),
+                    "text": CUI.rte.Utils.i18n("Edit the properties of a selected cell.")
                 },
                 "insertrow-before": {
-                    "title": CQ.I18n.getMessage("Insert Above"),
-                    "text": CQ.I18n.getMessage("Insert a new row above the current row.")
+                    "title": CUI.rte.Utils.i18n("Insert Above"),
+                    "text": CUI.rte.Utils.i18n("Insert a new row above the current row.")
                 },
                 "insertrow-after": {
-                    "title": CQ.I18n.getMessage("Insert Below"),
-                    "text": CQ.I18n.getMessage("Insert a new row below the current row.")
+                    "title": CUI.rte.Utils.i18n("Insert Below"),
+                    "text": CUI.rte.Utils.i18n("Insert a new row below the current row.")
                 },
                 "removerow":  {
-                    "title": CQ.I18n.getMessage("Delete Row"),
-                    "text": CQ.I18n.getMessage("Delete the current row.")
+                    "title": CUI.rte.Utils.i18n("Delete Row"),
+                    "text": CUI.rte.Utils.i18n("Delete the current row.")
                 },
                 "insertcolumn-before": {
-                    "title": CQ.I18n.getMessage("Insert Left"),
-                    "text": CQ.I18n.getMessage("Insert a new column to the left of the current column.")
+                    "title": CUI.rte.Utils.i18n("Insert Left"),
+                    "text": CUI.rte.Utils.i18n("Insert a new column to the left of the current column.")
                 },
                 "insertcolumn-after": {
-                    "title": CQ.I18n.getMessage("Insert Right"),
-                    "text": CQ.I18n.getMessage("Insert a new column to the right of the current column.")
+                    "title": CUI.rte.Utils.i18n("Insert Right"),
+                    "text": CUI.rte.Utils.i18n("Insert a new column to the right of the current column.")
                 },
                 "removecolumn":  {
-                    "title": CQ.I18n.getMessage("Delete Column"),
-                    "text": CQ.I18n.getMessage("Delete the current column.")
+                    "title": CUI.rte.Utils.i18n("Delete Column"),
+                    "text": CUI.rte.Utils.i18n("Delete the current column.")
                 }
             }
         });
@@ -875,7 +875,7 @@ CUI.rte.plugins.TablePlugin = new Class({
         if (isSingleCell) {
             if (this.isFeatureEnabled("cellprops")) {
                 cellSubItems.push({
-                    "text": CQ.I18n.getMessage("Cell properties"),
+                    "text": CUI.rte.Utils.i18n("Cell properties"),
                     "plugin": this,
                     "cmd": "cellprops",
                     "iconCls": "rte-cellprops"
@@ -886,7 +886,7 @@ CUI.rte.plugins.TablePlugin = new Class({
             if (this.isFeatureEnabled("mergecells")) {
                 if (cellSel.selectionProps.isRect) {
                     cellSubItems.push({
-                        "text": CQ.I18n.getMessage("Merge cells"),
+                        "text": CUI.rte.Utils.i18n("Merge cells"),
                         "plugin": this,
                         "cmd": "mergecells",
                         "cmdValue": cellSel,
@@ -901,7 +901,7 @@ CUI.rte.plugins.TablePlugin = new Class({
                     cellSel = tableMatrix.createSelection(singleCell);
                     cellSel.expand(1, 0);
                     cellSubItems.push({
-                        "text": CQ.I18n.getMessage("Merge right"),
+                        "text": CUI.rte.Utils.i18n("Merge right"),
                         "plugin": this,
                         "cmd": "mergecells",
                         "cmdValue": cellSel,
@@ -912,7 +912,7 @@ CUI.rte.plugins.TablePlugin = new Class({
                     cellSel = tableMatrix.createSelection(singleCell);
                     cellSel.expand(0, 1);
                     cellSubItems.push({
-                        "text": CQ.I18n.getMessage("Merge down"),
+                        "text": CUI.rte.Utils.i18n("Merge down"),
                         "plugin": this,
                         "cmd": "mergecells",
                         "cmdValue": cellSel,
@@ -924,14 +924,14 @@ CUI.rte.plugins.TablePlugin = new Class({
         if (isSingleCell) {
             if (this.isFeatureEnabled("splitcell")) {
                 cellSubItems.push({
-                    "text": CQ.I18n.getMessage("Split cell horizontally"),
+                    "text": CUI.rte.Utils.i18n("Split cell horizontally"),
                     "plugin": this,
                     "cmd": "splitcell",
                     "cmdValue": "horizontal",
                     "iconCls": "rte-cellsplit-horizontal"
                 });
                 cellSubItems.push({
-                    "text": CQ.I18n.getMessage("Split cell vertically"),
+                    "text": CUI.rte.Utils.i18n("Split cell vertically"),
                     "plugin": this,
                     "cmd": "splitcell",
                     "cmdValue": "vertical",
@@ -941,7 +941,7 @@ CUI.rte.plugins.TablePlugin = new Class({
         }
         if (cellSubItems.length > 0) {
             menuBuilder.addItem(menuBuilder.createItem({
-                "text": CQ.I18n.getMessage("Cell"),
+                "text": CUI.rte.Utils.i18n("Cell"),
                 "subItems": cellSubItems,
                 "iconCls": "rte-cell"
             }));
@@ -951,14 +951,14 @@ CUI.rte.plugins.TablePlugin = new Class({
             var colSubItems = [ ];
             if (this.isFeatureEnabled("insertcolumn")) {
                 colSubItems.push({
-                    "text": CQ.I18n.getMessage("Insert before"),
+                    "text": CUI.rte.Utils.i18n("Insert before"),
                     "plugin": this,
                     "cmd": "insertcolumn",
                     "cmdValue": "before",
                     "iconCls": "rte-insertcolumn-before"
                 });
                 colSubItems.push({
-                    "text": CQ.I18n.getMessage("Insert after"),
+                    "text": CUI.rte.Utils.i18n("Insert after"),
                     "plugin": this,
                     "cmd": "insertcolumn",
                     "cmdValue": "after",
@@ -967,7 +967,7 @@ CUI.rte.plugins.TablePlugin = new Class({
             }
             if (this.isFeatureEnabled("removecolumn") && canRemoveCol) {
                 colSubItems.push({
-                    "text": CQ.I18n.getMessage("Remove"),
+                    "text": CUI.rte.Utils.i18n("Remove"),
                     "plugin": this,
                     "cmd": "removecolumn",
                     "iconCls": "rte-removecolumn"
@@ -975,7 +975,7 @@ CUI.rte.plugins.TablePlugin = new Class({
             }
             if (colSubItems.length > 0) {
                 menuBuilder.addItem(menuBuilder.createItem({
-                    "text": CQ.I18n.getMessage("Column"),
+                    "text": CUI.rte.Utils.i18n("Column"),
                     "subItems": colSubItems,
                     "iconCls": "rte-column"
                 }));
@@ -985,14 +985,14 @@ CUI.rte.plugins.TablePlugin = new Class({
             var rowSubItems = [ ];
             if (this.isFeatureEnabled("insertrow")) {
                 rowSubItems.push({
-                    "text": CQ.I18n.getMessage("Insert before"),
+                    "text": CUI.rte.Utils.i18n("Insert before"),
                     "plugin": this,
                     "cmd": "insertrow",
                     "cmdValue": "before",
                     "iconCls": "rte-insertrow-before"
                 });
                 rowSubItems.push({
-                    "text": CQ.I18n.getMessage("Insert after"),
+                    "text": CUI.rte.Utils.i18n("Insert after"),
                     "plugin": this,
                     "cmd": "insertrow",
                     "cmdValue": "after",
@@ -1001,7 +1001,7 @@ CUI.rte.plugins.TablePlugin = new Class({
             }
             if (this.isFeatureEnabled("removerow") && canRemoveRow) {
                 rowSubItems.push({
-                    "text": CQ.I18n.getMessage("Remove"),
+                    "text": CUI.rte.Utils.i18n("Remove"),
                     "plugin": this,
                     "cmd": "removerow",
                     "iconCls": "rte-removerow"
@@ -1009,14 +1009,14 @@ CUI.rte.plugins.TablePlugin = new Class({
             }
             if (rowSubItems.length > 0) {
                 menuBuilder.addItem(menuBuilder.createItem({
-                    "text": CQ.I18n.getMessage("Row"),
+                    "text": CUI.rte.Utils.i18n("Row"),
                     "subItems": rowSubItems,
                     "iconCls": "rte-row"
                 }));
             }
             if (this.isFeatureEnabled("table")) {
                 menuBuilder.addItem(menuBuilder.createItem({
-                    "text": CQ.I18n.getMessage("Table properties"),
+                    "text": CUI.rte.Utils.i18n("Table properties"),
                     "plugin": this,
                     "cmd": "table",
                     "iconCls": "rte-tableprops"
@@ -1024,7 +1024,7 @@ CUI.rte.plugins.TablePlugin = new Class({
             }
             if (this.isFeatureEnabled("removetable") && !isTableMode) {
                 menuBuilder.addItem(menuBuilder.createItem({
-                    "text": CQ.I18n.getMessage("Remove table"),
+                    "text": CUI.rte.Utils.i18n("Remove table"),
                     "plugin": this,
                     "cmd": "removetable",
                     "iconCls": "rte-removetable"
@@ -1032,7 +1032,7 @@ CUI.rte.plugins.TablePlugin = new Class({
             }
             if (this.isFeatureEnabled("table")) {
                 menuBuilder.addItem(menuBuilder.createItem({
-                    "text": CQ.I18n.getMessage("Create nested table"),
+                    "text": CUI.rte.Utils.i18n("Create nested table"),
                     "plugin": this,
                     "cmd": "createtable",
                     "iconCls": "rte-createtable"
@@ -1045,7 +1045,7 @@ CUI.rte.plugins.TablePlugin = new Class({
                     hasSeparator = true;
                 }
                 menuBuilder.addItem(menuBuilder.createItem({
-                    "text": CQ.I18n.getMessage("Select entire row"),
+                    "text": CUI.rte.Utils.i18n("Select entire row"),
                     "plugin": this,
                     "cmd": "selectrow",
                     "cmdValue": {
@@ -1060,7 +1060,7 @@ CUI.rte.plugins.TablePlugin = new Class({
                     hasSeparator = true;
                 }
                 menuBuilder.addItem(menuBuilder.createItem({
-                    "text": CQ.I18n.getMessage("Select entire column"),
+                    "text": CUI.rte.Utils.i18n("Select entire column"),
                     "plugin": this,
                     "cmd": "selectcolumn",
                     "cmdValue": {
@@ -1076,7 +1076,7 @@ CUI.rte.plugins.TablePlugin = new Class({
                     if ((tableIndex == 0)
                             || com.isTag(pNode.childNodes[tableIndex - 1], "table")) {
                         menuBuilder.addItem(menuBuilder.createItem({
-                            "text": CQ.I18n.getMessage("Insert paragraph before table"),
+                            "text": CUI.rte.Utils.i18n("Insert paragraph before table"),
                             "plugin": this,
                             "cmd": "ensureparagraph",
                             "cmdValue": "before"
@@ -1085,7 +1085,7 @@ CUI.rte.plugins.TablePlugin = new Class({
                     if ((tableIndex == (pNode.childNodes.length - 1))
                             || com.isTag(pNode.childNodes[tableIndex + 1], "table")) {
                         menuBuilder.addItem(menuBuilder.createItem({
-                            "text": CQ.I18n.getMessage("Insert paragraph after table"),
+                            "text": CUI.rte.Utils.i18n("Insert paragraph after table"),
                             "plugin": this,
                             "cmd": "ensureparagraph",
                             "cmdValue": "after"
@@ -1099,7 +1099,7 @@ CUI.rte.plugins.TablePlugin = new Class({
         if (!isTable && !isObject) {
             if (this.isFeatureEnabled("table") && !isTableMode) {
                 menuBuilder.addItem(menuBuilder.createItem({
-                    "text": CQ.I18n.getMessage("Create table"),
+                    "text": CUI.rte.Utils.i18n("Create table"),
                     "plugin": this,
                     "cmd": "table",
                     "iconCls": "rte-createtable"

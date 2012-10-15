@@ -69,7 +69,7 @@ CUI.rte.ui.cui.StyleSelectorImpl = new Class({
         }
         this.initializeSelector();
         toolbar.add(
-            CQ.I18n.getMessage("Style"),
+            CUI.rte.Utils.i18n("Style"),
             " ",
             this.styleSelector.dom,
             this.createRemoveButton()

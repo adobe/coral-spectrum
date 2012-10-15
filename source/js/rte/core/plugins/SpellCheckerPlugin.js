@@ -117,8 +117,8 @@ CUI.rte.plugins.SpellCheckerPlugin = new Class({
         }
         if (isError) {
             this.editorKernel.getDialogManager().alert(
-                    CQ.I18n.getMessage("Spell checking"),
-                    CQ.I18n.getMessage("Spell checking failed."));
+                    CUI.rte.Utils.i18n("Spell checking"),
+                    CUI.rte.Utils.i18n("Spell checking failed."));
             return;
         }
         var hasErrors = false;
@@ -137,16 +137,16 @@ CUI.rte.plugins.SpellCheckerPlugin = new Class({
         }
         if (!hasErrors) {
             this.editorKernel.getDialogManager().alert(
-                    CQ.I18n.getMessage("Spell checking"),
-                    CQ.I18n.getMessage("No spelling mistakes found."));
+                    CUI.rte.Utils.i18n("Spell checking"),
+                    CUI.rte.Utils.i18n("No spelling mistakes found."));
         }
     },
 
     checkFailure: function() {
         this.checkTextUI.setSelected(false);
         this.editorKernel.getDialogManager().alert(
-                CQ.I18n.getMessage("Spell checking"),
-                CQ.I18n.getMessage("Spell checking failed."));
+                CUI.rte.Utils.i18n("Spell checking"),
+                CUI.rte.Utils.i18n("Spell checking failed."));
     },
 
     markInvalidWord: function(context, startPos, charCnt, suggestions) {
@@ -258,8 +258,8 @@ CUI.rte.plugins.SpellCheckerPlugin = new Class({
             "spellcheckerUrl": "/libs/cq/ui/rte/spellcheck",
             "tooltips": {
                 "checktext": {
-                    "title": CQ.I18n.getMessage("Check spelling"),
-                    "text": CQ.I18n.getMessage("Checks the spelling of the entire text.")
+                    "title": CUI.rte.Utils.i18n("Check spelling"),
+                    "text": CUI.rte.Utils.i18n("Checks the spelling of the entire text.")
                 }
             }
         });
@@ -331,12 +331,12 @@ CUI.rte.plugins.SpellCheckerPlugin = new Class({
                 }
             } else {
                 subItems.push({
-                    "text": CQ.I18n.getMessage("No suggestions available."),
+                    "text": CUI.rte.Utils.i18n("No suggestions available."),
                     "disabled": true
                 });
             }
             menuBuilder.addItem(menuBuilder.createItem({
-                "text": CQ.I18n.getMessage("Spelling suggestions"),
+                "text": CUI.rte.Utils.i18n("Spelling suggestions"),
                 "subItems": subItems
             }));
         }

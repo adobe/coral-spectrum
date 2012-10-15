@@ -603,24 +603,24 @@ CUI.rte.plugins.EditToolsPlugin = new Class({
             },
             "tooltips": {
                 "cut": {
-                    "title": CQ.I18n.getMessage("Cut (Ctrl+X)"),
-                    "text": CQ.I18n.getMessage("Cuts the currently selected text and puts it in to the clipboard.")
+                    "title": CUI.rte.Utils.i18n("Cut (Ctrl+X)"),
+                    "text": CUI.rte.Utils.i18n("Cuts the currently selected text and puts it in to the clipboard.")
                 },
                 "copy": {
-                    "title": CQ.I18n.getMessage("Copy (Ctrl+C)"),
-                    "text": CQ.I18n.getMessage("Copies the currently selected text to the clipboard.")
+                    "title": CUI.rte.Utils.i18n("Copy (Ctrl+C)"),
+                    "text": CUI.rte.Utils.i18n("Copies the currently selected text to the clipboard.")
                 },
                 "paste-default": {
-                    "title": CQ.I18n.getMessage("Paste (Ctrl+V)"),
-                    "text": CQ.I18n.getMessage("Pastes the clipboard content with the default paste method.")
+                    "title": CUI.rte.Utils.i18n("Paste (Ctrl+V)"),
+                    "text": CUI.rte.Utils.i18n("Pastes the clipboard content with the default paste method.")
                 },
                 "paste-plaintext": {
-                    "title": CQ.I18n.getMessage("Paste as text"),
-                    "text": CQ.I18n.getMessage("Pastes the clipboard content as plain text.")
+                    "title": CUI.rte.Utils.i18n("Paste as text"),
+                    "text": CUI.rte.Utils.i18n("Pastes the clipboard content as plain text.")
                 },
                 "paste-wordhtml": {
-                    "title": CQ.I18n.getMessage("Paste from Word"),
-                    "text": CQ.I18n.getMessage("Pastes the clipboard content from Word, applying some cleanup.")
+                    "title": CUI.rte.Utils.i18n("Paste from Word"),
+                    "text": CUI.rte.Utils.i18n("Pastes the clipboard content from Word, applying some cleanup.")
                 }
             }
         });

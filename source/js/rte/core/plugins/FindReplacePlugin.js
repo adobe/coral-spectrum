@@ -73,7 +73,7 @@ CUI.rte.plugins.FindReplacePlugin = new Class({
         if (!this.findDialog || dm.mustRecreate(this.findDialog)) {
             var config = {
                 "editContext": context,
-                "title": CQ.I18n.getMessage("Find"),
+                "title": CUI.rte.Utils.i18n("Find"),
                 "isReplace": false,
                 "findFn": CUI.rte.Utils.scope(this.execFind, this),
                 "cancelFn": CUI.rte.Utils.scope(this.execCancel, this)
@@ -137,8 +137,8 @@ CUI.rte.plugins.FindReplacePlugin = new Class({
         if (!match) {
             dialog.setMode(false, false);
             this.editorKernel.getDialogManager().alert(
-                    CQ.I18n.getMessage("Find/Replace"),
-                    CQ.I18n.getMessage("No more occurences of '{0}' found in document.<br>Search will be continued from the top.", [ findText ]),
+                    CUI.rte.Utils.i18n("Find/Replace"),
+                    CUI.rte.Utils.i18n("No more occurences of '{0}' found in document.<br>Search will be continued from the top.", [ findText ]),
                     CUI.rte.Utils.scope(this.findDialog.focusFindField, this.findDialog));
 
             this.currentSearchDef.doc.create(context.root);
@@ -261,15 +261,15 @@ CUI.rte.plugins.FindReplacePlugin = new Class({
             dm.hide(dialog);
             if (replaceCnt > 0) {
                 this.editorKernel.getDialogManager().alert(
-                        CQ.I18n.getMessage("Replace all"),
-                        CQ.I18n.getMessage("Text '{0}' has been replaced {1} time(s).",
+                        CUI.rte.Utils.i18n("Replace all"),
+                        CUI.rte.Utils.i18n("Text '{0}' has been replaced {1} time(s).",
                                 [ options.findText, replaceCnt ]),
                         CUI.rte.Utils.scope(this.editorKernel.focus,
                                 this.editorKernel));
             } else {
                 this.editorKernel.getDialogManager().alert(
-                        CQ.I18n.getMessage("Replace all"),
-                        CQ.I18n.getMessage("Text '{0}' not found."),
+                        CUI.rte.Utils.i18n("Replace all"),
+                        CUI.rte.Utils.i18n("Text '{0}' not found."),
                         CUI.rte.Utils.scope(this.editorKernel.focus,
                                 this.editorKernel));
             }
@@ -286,8 +286,8 @@ CUI.rte.plugins.FindReplacePlugin = new Class({
             } catch (e) {
                 if (e.message == "Could not insert html due to IE limitations.") {
                     this.editorKernel.getDialogManager().alert(
-                            CQ.I18n.getMessage("Replace"),
-                            CQ.I18n.getMessage("Could not replace due to limited functionality in Internet Explorer."));
+                            CUI.rte.Utils.i18n("Replace"),
+                            CUI.rte.Utils.i18n("Could not replace due to limited functionality in Internet Explorer."));
                     preventFind = true;
                 } else {
                     throw e;
@@ -338,12 +338,12 @@ CUI.rte.plugins.FindReplacePlugin = new Class({
         CQ.Util.applyDefaults(pluginConfig, {
             "tooltips": {
                 "find": {
-                    "title": CQ.I18n.getMessage("Find"),
-                    "text": CQ.I18n.getMessage("Finds a text fragment in the text being edited.")
+                    "title": CUI.rte.Utils.i18n("Find"),
+                    "text": CUI.rte.Utils.i18n("Finds a text fragment in the text being edited.")
                 },
                 "replace": {
-                    "title": CQ.I18n.getMessage("Replace"),
-                    "text": CQ.I18n.getMessage("Replaces a text fragment with another fragment.")
+                    "title": CUI.rte.Utils.i18n("Replace"),
+                    "text": CUI.rte.Utils.i18n("Replaces a text fragment with another fragment.")
                 }
             }
         });

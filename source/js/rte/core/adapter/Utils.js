@@ -65,6 +65,20 @@ CUI.rte.Utils = function() {
                 str = str.replace(/<\/?[a-z][a-z0-9]*[^<>]*>/gi, "");
             }
             return str;
+        },
+
+        i18n: function(str, values) {
+            // TODO replace with correct internationalization when available ...
+            if (values) {
+                if (CUI.rte.Utils.isArray(values)) {
+                    str = str.replace("{0}", values);
+                } else {
+                    for (var s = 0; s < values.length; s++) {
+                        str = str.replace("{" + s + "}", values[s])
+                    }
+                }
+            }
+            return str;
         }
 
     };

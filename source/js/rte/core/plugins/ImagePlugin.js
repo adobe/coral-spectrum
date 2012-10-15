@@ -65,28 +65,28 @@ CUI.rte.plugins.ImagePlugin = new Class({
             if (this.editorKernel.queryState("image")) {
                 subItems = [
                     {
-                        "text": CQ.I18n.getMessage("Left"),
+                        "text": CUI.rte.Utils.i18n("Left"),
                         "plugin": this,
                         "cmd": "image",
                         "cmdValue": {
                             "style.float": "left"
                         }
                     }, {
-                        "text": CQ.I18n.getMessage("Right"),
+                        "text": CUI.rte.Utils.i18n("Right"),
                         "plugin": this,
                         "cmd": "image",
                         "cmdValue": {
                             "style.float": "right"
                         }
                     }, {
-                        "text": CQ.I18n.getMessage("None"),
+                        "text": CUI.rte.Utils.i18n("None"),
                         "plugin": this,
                         "cmd": "image",
                         "cmdValue": {
                             "style.float": "none"
                         }
                     }, {
-                        "text": CQ.I18n.getMessage("No alignment"),
+                        "text": CUI.rte.Utils.i18n("No alignment"),
                         "plugin": this,
                         "cmd": "image",
                         "cmdValue": {
@@ -95,7 +95,7 @@ CUI.rte.plugins.ImagePlugin = new Class({
                     }
                 ];
                 menuBuilder.addItem(menuBuilder.createItem({
-                    "text": CQ.I18n.getMessage("Image alignment"),
+                    "text": CUI.rte.Utils.i18n("Image alignment"),
                     "subItems": subItems
                 }));
             }
