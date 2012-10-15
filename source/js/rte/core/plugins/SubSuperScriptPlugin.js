@@ -1,0 +1,109 @@
+/*************************************************************************
+*
+* ADOBE CONFIDENTIAL
+* ___________________
+*
+*  Copyright 2012 Adobe Systems Incorporated
+*  All Rights Reserved.
+*
+* NOTICE:  All information contained herein is, and remains
+* the property of Adobe Systems Incorporated and its suppliers,
+* if any.  The intellectual and technical concepts contained
+* herein are proprietary to Adobe Systems Incorporated and its
+* suppliers and are protected by trade secret or copyright law.
+* Dissemination of this information or reproduction of this material
+* is strictly forbidden unless prior written permission is obtained
+* from Adobe Systems Incorporated.
+**************************************************************************/
+
+/**
+ * @class CQ.form.rte.plugins.SubSuperScriptPlugin
+ * @extends CQ.form.rte.plugins.Plugin
+ * <p>This class implements sub- and superscript as a plugin.</p>
+ * <p>The plugin ID is "<b>subsuperscript</b>".</p>
+ * <p><b>Features</b></p>
+ * <ul>
+ *   <li><b>subscript</b> - adds a button to format the selected text with subscript</li>
+ *   <li><b>superscript</b> - adds a button to format the selected text with superscript
+ *     </li>
+ * </ul>
+ */
+CQ.form.rte.plugins.SubSuperScriptPlugin = new Class({
+
+    toString: "SubSuperScriptPlugin",
+
+    extend: CQ.form.rte.plugins.Plugin,
+
+    /**
+     * @private
+     */
+    subscriptUI: null,
+
+    /**
+     * @private
+     */
+    superscriptUI: null,
+
+
+    getFeatures: function() {
+        return [ "subscript", "superscript" ];
+    },
+
+    initializeUI: function(tbGenerator) {
+        var plg = CQ.form.rte.plugins;
+        var ui = CQ.form.rte.ui;
+        if (this.isFeatureEnabled("subscript")) {
+            this.subscriptUI = tbGenerator.createElement("subscript", this, true,
+                    this.getTooltip("subscript"));
+            tbGenerator.addElement("format", plg.Plugin.SORT_FORMAT, this.subscriptUI, 100);
+        }
+        if (this.isFeatureEnabled("superscript")) {
+            this.superscriptUI = tbGenerator.createElement("superscript", this, true,
+                    this.getTooltip("superscript"));
+            tbGenerator.addElement("format", plg.Plugin.SORT_FORMAT, this.superscriptUI,
+                    110);
+        }
+    },
+
+    execute: function(id) {
+        this.editorKernel.relayCmd(id);
+    },
+
+    updateState: function(selDef) {
+        var hasSubscript = this.editorKernel.queryState("subscript", selDef);
+        var hasSuperscript = this.editorKernel.queryState("superscript", selDef);
+        if (this.subscriptUI != null) {
+            this.subscriptUI.setDisabled(!selDef.isSelection);
+            this.subscriptUI.setSelected(hasSubscript);
+        }
+        if (this.superscriptUI != null) {
+            this.superscriptUI.setDisabled(!selDef.isSelection);
+            this.superscriptUI.setSelected(hasSuperscript);
+        }
+    },
+
+    notifyPluginConfig: function(pluginConfig) {
+        // configuring "special characters" dialog
+        pluginConfig = pluginConfig || { };
+        var defaults = {
+            "tooltips": {
+                "subscript": {
+                    "title": CQ.I18n.getMessage("Subscript"),
+                    "text": CQ.I18n.getMessage("Formats the selected text as subscript.")
+                },
+                "superscript": {
+                    "title": CQ.I18n.getMessage("Superscript"),
+                    "text": CQ.I18n.getMessage("Formats the selected text as superscript.")
+                }
+            }
+        };
+        CQ.Util.applyDefaults(pluginConfig, defaults);
+        this.config = pluginConfig;
+    }
+
+});
+
+
+// register plugin
+CQ.form.rte.plugins.PluginRegistry.register("subsuperscript",
+        CQ.form.rte.plugins.SubSuperScriptPlugin);
