@@ -670,27 +670,87 @@
                 </script>
               </div>
           </section>
+
         <section id="Slider">
-              <h2 class="line">Slider</h2>
-              <p>Different types of sliders.</p>
+            <h2 class="line">Sliders</h2>
+            <p>Different types of horizontal sliders.</p>
 
-              <div class="componentSample">
-                  <div class="example">
-                      <div class="filterSample">
-                          <div class="sampleTitle left">Standard</div>
-                          <div class="slider horizontal">
-                              <div class="range" style="width: 20%"></div>
-                              <span class="tick" style="left: 20%"></span>
-                              <div class="handle" style="left: 45%"></div>
-                              <div class="tooltip info arrow-left">
-                                    <span>45%</span>	
-                               </div>
-                          </div>
+            <div class="componentSample">
+                <div class="example clearfix">
+                    <div class="left">
+                        <div class="slider" data-init="slider">
+                            <input type="range" value="14" min="10" max="20" step="2">
+                        </div>
+                        <div class="slider ticked filled" data-init="slider">
+                            <input type="number" value="14" min="10" max="20" step="2">
+                        </div>
+                        <div class="slider ticked filled" data-init="slider">
+                            <input type="number" value="14" min="10" max="20" step="2">
+                            <input type="number" value="16" min="10" max="20" step="2">
+                        </div>
+                        <div class="slider ticked filled" data-init="slider">
+                            <input type="number" value="14" min="10" max="20" step="2" disabled>
+                            <input type="number" value="16" min="10" max="20" step="2" disabled>
+                        </div>
+                    </div>
+                </div>
+              <pre class="prettyprint linenums">
+&lt;div class=&quot;slider&quot; data-init=&quot;slider&quot;&gt;
+  &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;slider ticked filled&quot; data-init=&quot;slider&quot;&gt;
+  &lt;input type=&quot;number&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;slider ticked filled&quot; data-init=&quot;slider&quot;&gt;
+  &lt;input type=&quot;number&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+  &lt;input type=&quot;number&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;slider ticked filled&quot; data-init=&quot;slider&quot;&gt;
+  &lt;input type=&quot;number&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;
+  &lt;input type=&quot;number&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;
+&lt;/div&gt;
+</pre>
+            </div>
 
-                      </div>
-                  </div>
-                  
-          </section>
+            <p>Different types of vertical sliders.</p>
+
+            <div class="componentSample">
+                <div class="example clearfix">
+                    <div class="left">
+                        <div class="slider vertical" data-init="slider">
+                            <input type="range" value="14" min="10" max="20" step="2">
+                        </div>
+                        <div class="slider vertical ticked filled" data-init="slider">
+                            <input type="number" value="14" min="10" max="20" step="2">
+                        </div>
+                        <div class="slider vertical ticked filled" data-init="slider">
+                            <input type="number" value="14" min="10" max="20" step="2">
+                            <input type="number" value="16" min="10" max="20" step="2">
+                        </div>
+                        <div class="slider vertical ticked filled" data-init="slider">
+                            <input type="number" value="14" min="10" max="20" step="2" disabled>
+                            <input type="number" value="16" min="10" max="20" step="2" disabled>
+                        </div>
+                    </div>
+                </div>
+              <pre class="prettyprint linenums">
+&lt;div class=&quot;slider vertical&quot; data-init=&quot;slider&quot;&gt;
+  &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;slider vertical ticked filled&quot; data-init=&quot;slider&quot;&gt;
+  &lt;input type=&quot;number&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;slider vertical ticked filled&quot; data-init=&quot;slider&quot;&gt;
+  &lt;input type=&quot;number&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+  &lt;input type=&quot;number&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;slider vertical ticked filled&quot; data-init=&quot;slider&quot;&gt;
+  &lt;input type=&quot;number&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;
+  &lt;input type=&quot;number&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;
+&lt;/div&gt;
+</pre>
+            </div>
+        </section>
 
         <section id="Checkbox">
           <h2 class="line">Checkbox</h2>
