@@ -17,17 +17,17 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.DomProcessor
+ * @class CUI.rte.DomProcessor
  * @static
  * @private
  * The WhitespaceProcessor provides utility functions to remove unnecessary whitespace
  * from the DOM.
  */
-CQ.form.rte.WhitespaceProcessor = function() {
+CUI.rte.WhitespaceProcessor = function() {
 
-    var com = CQ.form.rte.Common;
+    var com = CUI.rte.Common;
 
-    var dpr = CQ.form.rte.DomProcessor;
+    var dpr = CUI.rte.DomProcessor;
 
     return {
 
@@ -45,7 +45,7 @@ CQ.form.rte.WhitespaceProcessor = function() {
          * @return {String} The normalized text
          */
         normalizeWhitespace: function(text, trimLeft, trimRight) {
-            var wsp = CQ.form.rte.WhitespaceProcessor;
+            var wsp = CUI.rte.WhitespaceProcessor;
             text = text.replace(wsp.WHITESPACE_REGEX, " ");
             text = text.replace(wsp.MULTISPACE_REGEX, " ");
             var charPos;
@@ -91,7 +91,7 @@ CQ.form.rte.WhitespaceProcessor = function() {
          */
         handleTextBlock: function(text, children, startIndex, endIndex, nodesToRemove,
                                   trimEdges) {
-            var wsp = CQ.form.rte.WhitespaceProcessor;
+            var wsp = CUI.rte.WhitespaceProcessor;
             var childCnt = children.length;
             var trimLeft = (startIndex == 0) && trimEdges;
             if (!trimLeft && trimEdges) {
@@ -121,13 +121,13 @@ CQ.form.rte.WhitespaceProcessor = function() {
          * have text nodes (directly) under it. For example, text under a "table" node
          * must not have (editable) text, hence all text nodes under it can safely be
          * removed.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom The "no text" parent node
          * @param {Object[]} removalRules Rules that define the nodes that have to be
          *        removed before whitespace processing is being applied
          */
         handleNoTextStructure: function(context, dom, removalRules) {
-            var wsp = CQ.form.rte.WhitespaceProcessor;
+            var wsp = CUI.rte.WhitespaceProcessor;
             var children = dom.childNodes;
             var childCnt = children.length;
             // remove all text nodes if the current node is a "no text" tag
@@ -148,7 +148,7 @@ CQ.form.rte.WhitespaceProcessor = function() {
          * and leading whitespace (as specified by the trimEdges parameter) should only be
          * trimmed for edit block parent nodes such as "p", "h1", "td", etc.</p>
          * <p>Note that adjacent text nodes are merged by this method.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom The parental structural node
          * @param {Boolean} trimEdges True if trailing and leading whitspace has to be
          *        trimmed
@@ -156,7 +156,7 @@ CQ.form.rte.WhitespaceProcessor = function() {
          *        removed before whitespace processing is being applied
          */
         cleanTextNodes: function(context, dom, trimEdges, removalRules) {
-            var wsp = CQ.form.rte.WhitespaceProcessor;
+            var wsp = CUI.rte.WhitespaceProcessor;
             var children = dom.childNodes;
             // join all text nodes as far as possible and execute whitespace processing on
             // them
@@ -195,11 +195,11 @@ CQ.form.rte.WhitespaceProcessor = function() {
          * "Some.&lt;b&gt;.text.&lt;/b&gt;" should be normalized to
          * "Some.&lt;b&gt;text&lt;/b&gt;", which can only be done by considering text
          * nodes on different hierarchical levels.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom The structural node to be normalized
          */
         normalizeSuperStructural: function(context, dom) {
-            var wsp = CQ.form.rte.WhitespaceProcessor;
+            var wsp = CUI.rte.WhitespaceProcessor;
             var children = dom.childNodes;
             var childCnt = children.length;
             var childrenToRemove = [ ];
@@ -248,11 +248,11 @@ CQ.form.rte.WhitespaceProcessor = function() {
          * normalized to "&lt;td&gt;&lt;p&gt;Para&lt;/p&gt;&lt;/td&gt;";
          * "&lt;td&gt;..Text..&lt;p&gt;Para&lt;/p&gt;..Text..&lt;/td&gt;" to
          * "&lt;td&gt;Text&lt;p&gt;Para&lt;/p&gt;Text&lt;/td&gt;"
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom The parent node to be processed
          */
         handleTextNodesBetweenBlocks: function(context, dom) {
-            var wsp = CQ.form.rte.WhitespaceProcessor;
+            var wsp = CUI.rte.WhitespaceProcessor;
             var children = dom.childNodes;
             var childCnt = children.length;
             // remove all empty text nodes if they are preceded or succeed by a block
@@ -292,7 +292,7 @@ CQ.form.rte.WhitespaceProcessor = function() {
 
         /**
          * <p>Removes all child nodes that match the specified removal rules.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom The parent node
          * @param {Object[]} removalRules Rules that define the nodes that have to be
          *        removed before whitespace processing is being applied
@@ -315,7 +315,7 @@ CQ.form.rte.WhitespaceProcessor = function() {
                         var namespace = com.getNamespace(child);
                         if (namespace != null) {
                             var nspcRules = rule.namespace;
-                            if (!CQ.form.rte.Utils.isArray(nspcRules)) {
+                            if (!CUI.rte.Utils.isArray(nspcRules)) {
                                 nspcRules = [ nspcRules ];
                             }
                             var nspcRuleCnt = nspcRules.length;
@@ -354,7 +354,7 @@ CQ.form.rte.WhitespaceProcessor = function() {
          * <p>Processes a DOM structure recursively.</p>
          * <p>Note that leading and trailing whitespace (as specified by the trimEdges
          * parameter) should be trimmed for edit block elements only.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom The structural DOM node to be processed
          * @param {Boolean} trimEdges True if trailing and leading whitespace must be
          *        trimmed
@@ -363,7 +363,7 @@ CQ.form.rte.WhitespaceProcessor = function() {
          * @private
          */
         processStructure: function(context, dom, trimEdges, removalRules) {
-            var wsp = CQ.form.rte.WhitespaceProcessor;
+            var wsp = CUI.rte.WhitespaceProcessor;
             // keep "as is tags" as they are (don't change anything for "pre" tag, etc.)
             if (com.isTag(dom, wsp.AS_IS_TAGS)) {
                 return;
@@ -381,7 +381,7 @@ CQ.form.rte.WhitespaceProcessor = function() {
         /**
          * <p>Processes the specified node recursively by removing all unnecessary
          * whitespace.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom The element to be processed
          * @param {Object[]} removalRules Rules that define what nodes will be removed
          *        before whitespace rules are applied
@@ -389,7 +389,7 @@ CQ.form.rte.WhitespaceProcessor = function() {
          *        omitted; false if default remove rules have to be be applied
          */
         process: function(context, dom, removalRules, omitDefaultRemoveRules) {
-            var wsp = CQ.form.rte.WhitespaceProcessor;
+            var wsp = CUI.rte.WhitespaceProcessor;
             if (!omitDefaultRemoveRules) {
                 if (removalRules != null) {
                     removalRules = com.arrayCopy(removalRules);

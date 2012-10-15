@@ -17,22 +17,22 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.commands.Indent
- * @extends CQ.form.rte.commands.Command
+ * @class CUI.rte.commands.Indent
+ * @extends CUI.rte.commands.Command
  * @private
  */
-CQ.form.rte.commands.Indent = new Class({
+CUI.rte.commands.Indent = new Class({
 
     toString: "Indent",
 
-    extend: CQ.form.rte.commands.Command,
+    extend: CUI.rte.commands.Command,
 
     isCommand: function(cmdStr) {
         return (cmdStr.toLowerCase() == "indent");
     },
 
     getProcessingOptions: function() {
-        var cmd = CQ.form.rte.commands.Command;
+        var cmd = CUI.rte.commands.Command;
         return cmd.PO_SELECTION | cmd.PO_BOOKMARK | cmd.PO_NODELIST;
     },
 
@@ -42,12 +42,12 @@ CQ.form.rte.commands.Indent = new Class({
                 collapse: true
             }
         };
-        var com = CQ.form.rte.Common;
-        var dpr = CQ.form.rte.DomProcessor;
+        var com = CUI.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
         var selection = execDef.selection;
         var nodeList = execDef.nodeList;
         var context = execDef.editContext;
-        var tagExcl = CQ.form.rte.commands.Indent.TAGEXCL;
+        var tagExcl = CUI.rte.commands.Indent.TAGEXCL;
         var indents = nodeList.getTags(context, [ {
             "matcher": function(dom) {
                 if (com.isTag(dom, com.BLOCK_TAGS) && !com.isTag(dom, tagExcl)) {
@@ -80,11 +80,11 @@ CQ.form.rte.commands.Indent = new Class({
                     marginLeft = parseInt(dom.style.marginLeft);
                 }
                 marginLeft += execDef.value
-                        || CQ.form.rte.commands.Indent.DEFAULT_INDENT_SIZE;
+                        || CUI.rte.commands.Indent.DEFAULT_INDENT_SIZE;
                 dom.style.marginLeft = marginLeft + "px";
             } else {
                 // list items
-                var listProcessor = new CQ.form.rte.ListRepresentation();
+                var listProcessor = new CUI.rte.ListRepresentation();
                 listProcessor.fromItem(context, dom);
                 listProcessor.ensureHierarchy(context);
                 listProcessor.indent(context, dom);
@@ -94,9 +94,9 @@ CQ.form.rte.commands.Indent = new Class({
     },
 
     queryState: function(selectionDef, cmd) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var context = selectionDef.editContext;
-        var tagExcl = CQ.form.rte.commands.Indent.TAGEXCL;
+        var tagExcl = CUI.rte.commands.Indent.TAGEXCL;
         var indents = selectionDef.nodeList.getTags(context, [ {
                 "matcher": function(dom) {
                     if (com.isTag(dom, com.BLOCK_TAGS) && !com.isTag(dom, tagExcl)) {
@@ -118,7 +118,7 @@ CQ.form.rte.commands.Indent = new Class({
  * @type String[]
  * @private
  */
-CQ.form.rte.commands.Indent.TAGEXCL = [ "ul", "ol", "table" ];
+CUI.rte.commands.Indent.TAGEXCL = [ "ul", "ol", "table" ];
 
 /**
  * Default indent size
@@ -127,8 +127,8 @@ CQ.form.rte.commands.Indent.TAGEXCL = [ "ul", "ol", "table" ];
  * @type Number
  * @private
  */
-CQ.form.rte.commands.Indent.DEFAULT_INDENT_SIZE = 40;
+CUI.rte.commands.Indent.DEFAULT_INDENT_SIZE = 40;
 
 
 // register command
-CQ.form.rte.commands.CommandRegistry.register("indent", CQ.form.rte.commands.Indent);
+CUI.rte.commands.CommandRegistry.register("indent", CUI.rte.commands.Indent);

@@ -17,15 +17,15 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.commands.CutCopy
- * @extends CQ.form.rte.commands.Command
+ * @class CUI.rte.commands.CutCopy
+ * @extends CUI.rte.commands.Command
  * @private
  */
-CQ.form.rte.commands.CutCopy = new Class({
+CUI.rte.commands.CutCopy = new Class({
 
     toString: "CutCopy",
 
-    extend: CQ.form.rte.commands.Command,
+    extend: CUI.rte.commands.Command,
 
     isCommand: function(cmdStr) {
         var cmdLC = cmdStr.toLowerCase();
@@ -47,4 +47,4 @@ CQ.form.rte.commands.CutCopy = new Class({
 });
 
 // register command
-CQ.form.rte.commands.CommandRegistry.register("cutcopy", CQ.form.rte.commands.CutCopy);
+CUI.rte.commands.CommandRegistry.register("cutcopy", CUI.rte.commands.CutCopy);

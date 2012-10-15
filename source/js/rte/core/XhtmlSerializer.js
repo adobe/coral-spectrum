@@ -17,19 +17,19 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.XhtmlSerializer
- * @extends CQ.form.rte.HtmlSerializer
+ * @class CUI.rte.XhtmlSerializer
+ * @extends CUI.rte.HtmlSerializer
  * The XhtmlSerializer is used to serialize a DOM (sub-) tree to its XHTML (String)
  * equivalent.
  * @constructor
  * Creates a new XHtmlSerializer.
  * @param {Object} config The configuration object
  */
-CQ.form.rte.XhtmlSerializer = new Class({
+CUI.rte.XhtmlSerializer = new Class({
 
     toString: "XhtmlSerializer",
 
-    extend: CQ.form.rte.HtmlSerializer,
+    extend: CUI.rte.HtmlSerializer,
 
     /**
      * @cfg {String[]} nonClosingTags
@@ -72,7 +72,7 @@ CQ.form.rte.XhtmlSerializer = new Class({
     },
 
     isShortTag: function(dom) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         if (com.isTag(dom, "a") && com.isAttribDefined(dom, "name")) {
             return false;
         }
@@ -80,7 +80,7 @@ CQ.form.rte.XhtmlSerializer = new Class({
     },
 
     serializeNodeEnter: function(dom) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         if (dom.nodeType == 1) {
             if (this.useShortTags && this.isShortTag(dom)) {
                 // Handle short tags that are no edit blocks here. If the empty
@@ -106,7 +106,7 @@ CQ.form.rte.XhtmlSerializer = new Class({
     },
 
     serializeNodeLeave: function(dom) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         if (dom.nodeType == 1) {
             if (!com.isTag(dom, com.EDITBLOCK_TAGS)) {
                 if (this.useShortTags && this.isShortTag(dom)) {

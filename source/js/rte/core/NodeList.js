@@ -17,7 +17,7 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.NodeList
+ * @class CUI.rte.NodeList
  * @private
  * <p>Class that implements a node list that can be used to manipulate document ranges
  * more easily.</p>
@@ -25,7 +25,7 @@
  * <ul>
  *   <li>Document range - is a fragment of a document, determined by its first character
  *   position and the number of characters. This is the same model as used by
- *   {@link CQ.form.rte.Selection}.</li>
+ *   {@link CUI.rte.Selection}.</li>
  *   <li>Common ancestor - refers to the DOM node that is the direct parent of all nodes of
  *   the represented document range.</li>
  *   <li>"Aligned" - most often, document ranges will start and end in the middle of a DOM
@@ -34,7 +34,7 @@
  * </ul>
  * <p>Some explanation on how this class works:</p>
  * <ul>
- *   <li>Use {@link CQ.form.rte.DomProcessor#createNodeList} to create a corresponding
+ *   <li>Use {@link CUI.rte.DomProcessor#createNodeList} to create a corresponding
  *   node list.</li>
  *   <li>Use {@link #surround} to surround the document range with a certain tag. For
  *   example, you could surround the document range with a "span" tag that contains
@@ -43,7 +43,7 @@
  *   {@link #surround} for further information about what is supported.</li>
  * </ul>
  */
-CQ.form.rte.NodeList = new Class({
+CUI.rte.NodeList = new Class({
 
     toString: "NodeList",
 
@@ -77,7 +77,7 @@ CQ.form.rte.NodeList = new Class({
         CQ.Util.applyDefaults(config, {
             "removeExistingStructuresOnSurround": true
         });
-        CQ.form.rte.Utils.apply(this, config);
+        CUI.rte.Utils.apply(this, config);
         this.nodes = [ ];
         this.nodesChanged = [ ];
     },
@@ -111,7 +111,7 @@ CQ.form.rte.NodeList = new Class({
      * @private
      */
     createTextNode: function(dom, startOffs, endOffs, parentNode) {
-        var textLen = CQ.form.rte.Common.getNodeCharacterCnt(dom);
+        var textLen = CUI.rte.Common.getNodeCharacterCnt(dom);
         if (textLen > 0) {
             var offset = 0;
             var charCnt = textLen;
@@ -128,7 +128,7 @@ CQ.form.rte.NodeList = new Class({
             if ((offset + charCnt) > textLen) {
                 charCnt = textLen - offset;
             }
-            var textNode = new CQ.form.rte.DomProcessor.TextNode(dom, offset, charCnt);
+            var textNode = new CUI.rte.DomProcessor.TextNode(dom, offset, charCnt);
             if (!parentNode) {
                 this.addChildNode(textNode, this);
             } else {
@@ -141,7 +141,7 @@ CQ.form.rte.NodeList = new Class({
      * @private
      */
     createStructuralNode: function(dom, parentNode) {
-        var strucNode = new CQ.form.rte.DomProcessor.StructuralNode(dom);
+        var strucNode = new CUI.rte.DomProcessor.StructuralNode(dom);
         if (!parentNode) {
             this.addChildNode(strucNode, this);
         } else {
@@ -154,7 +154,7 @@ CQ.form.rte.NodeList = new Class({
      * @private
      */
     createAncestors: function(context, node, startOffs, endOffs) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var isInitialNodeSkipped = com.isOneCharacterNode(node) && (startOffs == 0);
         var addNode = !isInitialNodeSkipped;
         var path = [ ];
@@ -214,7 +214,7 @@ CQ.form.rte.NodeList = new Class({
      * @private
      */
     createList: function(context, selection) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var startNode = selection.startNode;
         var endNode = selection.endNode;
         if (endNode == null) {
@@ -291,8 +291,8 @@ CQ.form.rte.NodeList = new Class({
     },
 
     createFromDocument: function(context, selection) {
-        var dpr = CQ.form.rte.DomProcessor;
-        var sel = CQ.form.rte.Selection;
+        var dpr = CUI.rte.DomProcessor;
+        var sel = CUI.rte.Selection;
         this.nodes.length = 0;
         // corner case: invalid selection - may happen on IE while focus transfer
         if (!selection.startNode) {
@@ -355,11 +355,11 @@ CQ.form.rte.NodeList = new Class({
     },
 
     createFromDomNodes: function(context, domNodes) {
-        var dpr = CQ.form.rte.DomProcessor;
+        var dpr = CUI.rte.DomProcessor;
         this.commonAncestor = domNodes[0];
         var nodeCnt = domNodes.length;
         for (var i = 1; i < nodeCnt; i++) {
-            if (!CQ.form.rte.Common.isAncestor(context, this.commonAncestor, domNodes[i])) {
+            if (!CUI.rte.Common.isAncestor(context, this.commonAncestor, domNodes[i])) {
                 this.commonAncestor = dpr.getCommonAncestor(context, this.commonAncestor,
                         domNodes[i]);
             }
@@ -380,7 +380,7 @@ CQ.form.rte.NodeList = new Class({
      * the last character of an editing block.</p>
      */
     removeEmptySideStructures: function() {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         if (this.nodes.length > 0) {
             var nodeToCheck = this.nodes[0];
             if (nodeToCheck.isEmptySideStructure()) {
@@ -443,13 +443,13 @@ CQ.form.rte.NodeList = new Class({
 
     /**
      * Creates a list of all edit blocks contained in the node list.
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      * @param {Boolean} considerAncestors True if ancestor nodes should also be considered
      *        if no edit blocks were found in the node list itself
      */
     getEditBlocksByAuxRoots: function(context, considerAncestors) {
-        var com = CQ.form.rte.Common;
-        var dpr = CQ.form.rte.DomProcessor;
+        var com = CUI.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
         var nodeCnt = this.nodes.length;
         var b, editBlocks;
         var segmentedBlocks = [ ];
@@ -556,15 +556,15 @@ CQ.form.rte.NodeList = new Class({
      * that will be created if for example <i>|this is &lt;b&gt;bold&lt;/b&gt;|</i> is
      * surrounded by another "b" tag (the result would then be
      * <i>&lt;b&gt;this is &lt;b&gt;bold&lt;/b&gt;&lt;/b&gt;</i>).</p>
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      * @param {String} tag Name of tag the document range has to be surrounded with
      * @param {Object} attribs Table of attributes to be used with the surrounding tag
      * @return {Array} Array with all additionally created nodes
      */
     surround: function(context, tag, attribs) {
-        var dpr = CQ.form.rte.DomProcessor;
-        var com = CQ.form.rte.Common;
-        var sel = CQ.form.rte.Selection;
+        var dpr = CUI.rte.DomProcessor;
+        var com = CUI.rte.Common;
+        var sel = CUI.rte.Selection;
         this.removeEmptySideStructures();
         this.nodesChanged.length = 0;
         var nodeCnt, nodeIndex;
@@ -648,8 +648,8 @@ CQ.form.rte.NodeList = new Class({
 
     removeUnnecessaryLinebreaks: function(context, processAncestors) {
         var ancestorContainer;
-        var dpr = CQ.form.rte.DomProcessor;
-        var com = CQ.form.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
+        var com = CUI.rte.Common;
         if (processAncestors) {
             var dom = this.commonAncestor;
             while (dom) {
@@ -727,7 +727,7 @@ CQ.form.rte.NodeList = new Class({
      * @private
      */
     isolateNode: function(node, leftTarget, rightTarget) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var childIndex = com.getChildIndex(node);
         var parent = node.parentNode;
         var childToMove, c;
@@ -748,7 +748,7 @@ CQ.form.rte.NodeList = new Class({
      * @private
      */
     handleAlignment: function(context, parentNodes) {
-        var dpr = CQ.form.rte.DomProcessor;
+        var dpr = CUI.rte.DomProcessor;
         var parentLeft = parentNodes[1];
         var parentRight = parentNodes[2];
         // handle node list
@@ -764,15 +764,15 @@ CQ.form.rte.NodeList = new Class({
 
     /**
      * Removes all instances the specified element from the node list.
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      * @param {String} tag Name of the tag to be removed
      * @param {Object} attribs Attribute list; may be null
      * @param {Boolean} processAncestors True, if the node list's ancestor nodes should also
      *        be considered for removing
      */
     removeNodesByTag: function(context, tag, attribs, processAncestors) {
-        var dpr = CQ.form.rte.DomProcessor;
-        var com = CQ.form.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
+        var com = CUI.rte.Common;
         // normalize text nodes
         this.normalize();
         var c, childCnt;
@@ -841,7 +841,7 @@ CQ.form.rte.NodeList = new Class({
         }
         // DOM processing
         if (!node.isInvalidatedByNormalization) {
-            CQ.form.rte.DomProcessor.removeWithoutChildren(node.dom);
+            CUI.rte.DomProcessor.removeWithoutChildren(node.dom);
         }
         // node list processing
         this.nodes.splice(removeIndex, 1);
@@ -857,7 +857,7 @@ CQ.form.rte.NodeList = new Class({
     },
 
     getAnchors: function(context, anchors, checkAncestors) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         if (checkAncestors) {
             var nodeToCheck = this.commonAncestor;
             while (nodeToCheck) {
@@ -889,14 +889,14 @@ CQ.form.rte.NodeList = new Class({
         var nodeCnt = this.nodes.length;
         for (var nodeIndex = 0; nodeIndex < nodeCnt; nodeIndex++) {
             var nodeToProcess = this.nodes[nodeIndex];
-            if (nodeToProcess.nodeType == CQ.form.rte.DomProcessor.DOM_NODE) {
+            if (nodeToProcess.nodeType == CUI.rte.DomProcessor.DOM_NODE) {
                 nodeToProcess.getAnchors(anchors);
             }
         }
     },
 
     getNamedAnchors: function(context, namedAnchors, checkAncestors) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         if (checkAncestors) {
             var nodeToCheck = this.commonAncestor;
             while (nodeToCheck) {
@@ -904,7 +904,7 @@ CQ.form.rte.NodeList = new Class({
                     if (com.isRootNode(context, nodeToCheck)) {
                         break;
                     }
-                    var anchorDef = CQ.form.rte.DomProcessor.checkNamedAnchor(nodeToCheck);
+                    var anchorDef = CUI.rte.DomProcessor.checkNamedAnchor(nodeToCheck);
                     if (anchorDef) {
                         namedAnchors.push(anchorDef);
                     }
@@ -915,14 +915,14 @@ CQ.form.rte.NodeList = new Class({
         var nodeCnt = this.nodes.length;
         for (var nodeIndex = 0; nodeIndex < nodeCnt; nodeIndex++) {
             var nodeToProcess = this.nodes[nodeIndex];
-            if (nodeToProcess.nodeType == CQ.form.rte.DomProcessor.DOM_NODE) {
+            if (nodeToProcess.nodeType == CUI.rte.DomProcessor.DOM_NODE) {
                 nodeToProcess.getNamedAnchors(namedAnchors);
             }
         }
     },
 
     getStyles: function(context, stylesDef, checkAncestors) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var styles = stylesDef.styles;
         if (!styles) {
             styles = [ ];
@@ -955,9 +955,9 @@ CQ.form.rte.NodeList = new Class({
         var nodeCnt = this.nodes.length;
         for (var nodeIndex = 0; nodeIndex < nodeCnt; nodeIndex++) {
             var nodeToProcess = this.nodes[nodeIndex];
-            if (nodeToProcess.nodeType == CQ.form.rte.DomProcessor.DOM_NODE) {
+            if (nodeToProcess.nodeType == CUI.rte.DomProcessor.DOM_NODE) {
                 var nodeState = nodeToProcess.getStyles(styles);
-                continuousStyle = CQ.form.rte.NodeList.calcNewContState(
+                continuousStyle = CUI.rte.NodeList.calcNewContState(
                         continuousStyle, nodeState);
             } else {
                 hasTopLevelText = true;
@@ -975,7 +975,7 @@ CQ.form.rte.NodeList = new Class({
         var nodeCnt = this.nodes.length;
         for (var nodeIndex = 0; nodeIndex < nodeCnt; nodeIndex++) {
             var nodeToProcess = this.nodes[nodeIndex];
-            if (nodeToProcess.nodeType == CQ.form.rte.DomProcessor.DOM_NODE) {
+            if (nodeToProcess.nodeType == CUI.rte.DomProcessor.DOM_NODE) {
                 if (nodeToProcess.containsTag(tagName)) {
                     return true;
                 }
@@ -988,7 +988,7 @@ CQ.form.rte.NodeList = new Class({
      * @private
      */
     executeMatcherOnDom: function(dom, tagMatcher) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var isMatching = false;
         var matcherCnt = tagMatcher.length;
         for (var matcherIndex = 0; matcherIndex < matcherCnt; matcherIndex++) {
@@ -1032,7 +1032,7 @@ CQ.form.rte.NodeList = new Class({
      * <p>This behaviour is suitable for getting the most suitable, selected element(s)
      * inside nested structures; for example the actually selected cell(s) of a table or
      * item(s) of a list, rather than including all parent cells/list items.</p>
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      * @param {Object[]} tagMatcher Array of tag matchers to be applied
      * @param {Boolean} checkAncestors True, if suitable ancestor elements should also be
      *        included in the results
@@ -1044,8 +1044,8 @@ CQ.form.rte.NodeList = new Class({
      *         dom)
      */
     getTags: function(context, tagMatcher, checkAncestors, breakOnFound) {
-        var dpr = CQ.form.rte.DomProcessor;
-        var com = CQ.form.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
+        var com = CUI.rte.Common;
         var tags = [ ];
         var nodeCnt = this.nodes.length;
         for (var nodeIndex = 0; nodeIndex < nodeCnt; nodeIndex++) {
@@ -1085,7 +1085,7 @@ CQ.form.rte.NodeList = new Class({
     hasContent: function() {
         var nodeCnt = this.nodes.length;
         for (var nodeIndex = 0; nodeIndex < nodeCnt; nodeIndex++) {
-            if (this.nodes[nodeIndex].nodeType == CQ.form.rte.DomProcessor.TEXT_NODE) {
+            if (this.nodes[nodeIndex].nodeType == CUI.rte.DomProcessor.TEXT_NODE) {
                 return true;
             } else {
                 if (this.nodes[nodeIndex].hasContent()) {
@@ -1108,7 +1108,7 @@ CQ.form.rte.NodeList = new Class({
 
     /**
      * Gets the first node (deep) of the node list.
-     * @return {CQ.form.rte.DomProcessor.TextNode|CQ.form.rte.DomProcessor.StructuralNode}
+     * @return {CUI.rte.DomProcessor.TextNode|CUI.rte.DomProcessor.StructuralNode}
      *         The first node (deep) of the node list; null if the node list is empty
      */
     getFirstNode: function() {
@@ -1116,7 +1116,7 @@ CQ.form.rte.NodeList = new Class({
             return null;
         }
         var node = this.nodes[0];
-        while (node.nodeType == CQ.form.rte.DomProcessor.DOM_NODE) {
+        while (node.nodeType == CUI.rte.DomProcessor.DOM_NODE) {
             if (!node.childNodes || (node.childNodes.length == 0)) {
                 break;
             }
@@ -1127,7 +1127,7 @@ CQ.form.rte.NodeList = new Class({
 
     /**
      * Gets the last node (deep) of the node list.
-     * @return {CQ.form.rte.DomProcessor.TextNode|CQ.form.rte.DomProcessor.StructuralNode}
+     * @return {CUI.rte.DomProcessor.TextNode|CUI.rte.DomProcessor.StructuralNode}
      *         The last node (deep) of the node list; null if the node list is empty
      */
     getLastNode: function() {
@@ -1136,7 +1136,7 @@ CQ.form.rte.NodeList = new Class({
             return null;
         }
         var node = this.nodes[nodeCnt - 1];
-        while (node.nodeType == CQ.form.rte.DomProcessor.DOM_NODE) {
+        while (node.nodeType == CUI.rte.DomProcessor.DOM_NODE) {
             if (!node.childNodes) {
                 break;
             }
@@ -1171,15 +1171,15 @@ CQ.form.rte.NodeList = new Class({
 
 
 /**
- * @class CQ.form.rte.DomProcessor.TextNode
+ * @class CUI.rte.DomProcessor.TextNode
  * @private
  * This class represents a text node inside a node list.
  */
-CQ.form.rte.DomProcessor.TextNode = new Class({
+CUI.rte.DomProcessor.TextNode = new Class({
 
     toString: "TextNode",
 
-    nodeType: CQ.form.rte.DomProcessor.TEXT_NODE,
+    nodeType: CUI.rte.DomProcessor.TEXT_NODE,
 
     nodeList: null,
 
@@ -1204,7 +1204,7 @@ CQ.form.rte.DomProcessor.TextNode = new Class({
         this.dom = dom;
         this.startPos = startPos;
         this.charCnt = charCnt;
-        this.nodeLength = CQ.form.rte.Common.getNodeCharacterCnt(dom);
+        this.nodeLength = CUI.rte.Common.getNodeCharacterCnt(dom);
     },
 
     /**
@@ -1317,7 +1317,7 @@ CQ.form.rte.DomProcessor.TextNode = new Class({
      * node to an existing "surrounding node" in a suitable way.
      * <p>
      * The method handles the possibly necessary splitting of the node accordingly.
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      * @param {Node} surroundingNode "surrounding node" to work on; <code>null</code> if no
      *                               "surrounding node" is yet existing
      * @param {String} tagName tag name of the "surrounding node" (if one has to be created)
@@ -1338,7 +1338,7 @@ CQ.form.rte.DomProcessor.TextNode = new Class({
         }
         if (splitPoints.length > 0) {
             // this.dom gets invalid here
-            var splitNodes = CQ.form.rte.DomProcessor.splitTextNode(context, this.dom,
+            var splitNodes = CUI.rte.DomProcessor.splitTextNode(context, this.dom,
                     splitPoints);
             insertNode = splitNodes[splitNodeIndex];
         }
@@ -1346,7 +1346,7 @@ CQ.form.rte.DomProcessor.TextNode = new Class({
             insertNode.parentNode.removeChild(insertNode);
             surroundingNode.appendChild(insertNode);
         } else {
-            surroundingNode = CQ.form.rte.DomProcessor.insertAsParent(context,
+            surroundingNode = CUI.rte.DomProcessor.insertAsParent(context,
                     insertNode, tagName, attributes);
             this.nodeList.nodesChanged.push(surroundingNode);
         }
@@ -1357,7 +1357,7 @@ CQ.form.rte.DomProcessor.TextNode = new Class({
 
     /**
      * Creates a new DOM text node from the actual text of the node.
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      * @return {HTMLElement} The DOM text node
      */
     createNewTextNode: function(context) {
@@ -1365,7 +1365,7 @@ CQ.form.rte.DomProcessor.TextNode = new Class({
     },
 
     split: function(context, outerLeft, outerRight) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var nodeText = this.dom.nodeValue;
         if (!this.isAligned()) {
             this.dom.nodeValue = nodeText.substring(this.startPos,
@@ -1410,7 +1410,7 @@ CQ.form.rte.DomProcessor.TextNode = new Class({
  * @private
  * @static
  */
-CQ.form.rte.NodeList.calcNewContState = function(state, stateToAdd) {
+CUI.rte.NodeList.calcNewContState = function(state, stateToAdd) {
     if (state == null) {
         state = stateToAdd;
     } else if ((state == "unstyled") || (state == "single")) {
@@ -1426,15 +1426,15 @@ CQ.form.rte.NodeList.calcNewContState = function(state, stateToAdd) {
 };
 
 /**
- * @class CQ.form.rte.DomProcessor.StructuralNode
+ * @class CUI.rte.DomProcessor.StructuralNode
  * @private
  * This class represents a structural node (= tag) inside a node list.
  */
-CQ.form.rte.DomProcessor.StructuralNode = new Class({
+CUI.rte.DomProcessor.StructuralNode = new Class({
 
     toString: "DomProcessor.StructuralNode",
 
-    nodeType: CQ.form.rte.DomProcessor.DOM_NODE,
+    nodeType: CUI.rte.DomProcessor.DOM_NODE,
 
     parentNode: null,
 
@@ -1459,7 +1459,7 @@ CQ.form.rte.DomProcessor.StructuralNode = new Class({
     construct: function(dom) {
         this.dom = dom;
         this.tagName = dom.tagName.toLowerCase();
-        this.type = CQ.form.rte.DomProcessor.getTagType(dom);
+        this.type = CUI.rte.DomProcessor.getTagType(dom);
     },
 
     /**
@@ -1556,7 +1556,7 @@ CQ.form.rte.DomProcessor.StructuralNode = new Class({
     },
 
     hasContainers: function(excludeSelf) {
-        var dpr = CQ.form.rte.DomProcessor;
+        var dpr = CUI.rte.DomProcessor;
         var isContainer;
         if (this.type == dpr.DYNAMIC) {
             isContainer = true;
@@ -1591,7 +1591,7 @@ CQ.form.rte.DomProcessor.StructuralNode = new Class({
             var childCnt = this.childNodes.length;
             for (var childIndex = 0; childIndex < childCnt; childIndex++) {
                 var childToProcess = this.childNodes[childIndex];
-                if (childToProcess.nodeType == CQ.form.rte.DomProcessor.DOM_NODE) {
+                if (childToProcess.nodeType == CUI.rte.DomProcessor.DOM_NODE) {
                     if (childToProcess.containsTag(tagName)) {
                         return true;
                     }
@@ -1602,8 +1602,8 @@ CQ.form.rte.DomProcessor.StructuralNode = new Class({
     },
 
     getTags: function(tagMatcher, tags) {
-        var dpr = CQ.form.rte.DomProcessor;
-        var com = CQ.form.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
+        var com = CUI.rte.Common;
         var matcherCnt = tagMatcher.length;
         var preventSubTreeRecursion = false;
         for (var matcherIndex = 0; matcherIndex < matcherCnt; matcherIndex++) {
@@ -1657,7 +1657,7 @@ CQ.form.rte.DomProcessor.StructuralNode = new Class({
         var childCnt = this.childNodes.length;
         for (var childIndex = 0; childIndex < childCnt; childIndex++) {
             var childToProcess = this.childNodes[childIndex];
-            if (childToProcess.nodeType == CQ.form.rte.DomProcessor.TEXT_NODE) {
+            if (childToProcess.nodeType == CUI.rte.DomProcessor.TEXT_NODE) {
                 return true;
             } else {
                 if (childToProcess.hasContent()) {
@@ -1669,7 +1669,7 @@ CQ.form.rte.DomProcessor.StructuralNode = new Class({
     },
 
     hasCharacterNodes: function() {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         if (com.isCharacterNode(this.dom)) {
             return true;
         }
@@ -1684,7 +1684,7 @@ CQ.form.rte.DomProcessor.StructuralNode = new Class({
     },
 
     isEmptySideStructure: function(excludeSelf) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         if (!excludeSelf) {
             if (com.isCharacterNode(this.dom)) {
                 return false;
@@ -1705,7 +1705,7 @@ CQ.form.rte.DomProcessor.StructuralNode = new Class({
     },
 
     getAnchors: function(anchors) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         if ((this.tagName == "a") && !this.isEmptySideStructure(true)) {
             if (com.isAttribDefined(this.dom, "href")) {
                 var anchor = {
@@ -1723,7 +1723,7 @@ CQ.form.rte.DomProcessor.StructuralNode = new Class({
             var childCnt = this.childNodes.length;
             for (var childIndex = 0; childIndex < childCnt; childIndex++) {
                 var childToProcess = this.childNodes[childIndex];
-                if (childToProcess.nodeType == CQ.form.rte.DomProcessor.DOM_NODE) {
+                if (childToProcess.nodeType == CUI.rte.DomProcessor.DOM_NODE) {
                     childToProcess.getAnchors(anchors);
                 }
             }
@@ -1731,7 +1731,7 @@ CQ.form.rte.DomProcessor.StructuralNode = new Class({
     },
 
     getNamedAnchors: function(anchors) {
-        var anchorDef = CQ.form.rte.DomProcessor.checkNamedAnchor(this.dom);
+        var anchorDef = CUI.rte.DomProcessor.checkNamedAnchor(this.dom);
         if (anchorDef) {
             anchors.push(anchorDef);
         }
@@ -1739,7 +1739,7 @@ CQ.form.rte.DomProcessor.StructuralNode = new Class({
             var childCnt = this.childNodes.length;
             for (var childIndex = 0; childIndex < childCnt; childIndex++) {
                 var childToProcess = this.childNodes[childIndex];
-                if (childToProcess.nodeType == CQ.form.rte.DomProcessor.DOM_NODE) {
+                if (childToProcess.nodeType == CUI.rte.DomProcessor.DOM_NODE) {
                     childToProcess.getNamedAnchors(anchors);
                 }
             }
@@ -1763,9 +1763,9 @@ CQ.form.rte.DomProcessor.StructuralNode = new Class({
             var childCnt = this.childNodes.length;
             for (var childIndex = 0; childIndex < childCnt; childIndex++) {
                 var childToProcess = this.childNodes[childIndex];
-                if (childToProcess.nodeType == CQ.form.rte.DomProcessor.DOM_NODE) {
+                if (childToProcess.nodeType == CUI.rte.DomProcessor.DOM_NODE) {
                     var childState = childToProcess.getStyles(styles);
-                    childrenState = CQ.form.rte.NodeList.calcNewContState(childrenState,
+                    childrenState = CUI.rte.NodeList.calcNewContState(childrenState,
                             childState);
                 } else {
                     hasText = true;
@@ -1820,7 +1820,7 @@ CQ.form.rte.DomProcessor.StructuralNode = new Class({
      */
     surroundStructure: function(context, surroundingNode, tag, attribs, nodesAdded,
                                 config) {
-        var dpr = CQ.form.rte.DomProcessor;
+        var dpr = CUI.rte.DomProcessor;
         var isApplicable = true;
         if (config && config.isApplicable) {
             isApplicable = config.isApplicable(this.dom, tag, attribs);
@@ -1869,7 +1869,7 @@ CQ.form.rte.DomProcessor.StructuralNode = new Class({
      */
     surroundContainer: function(context, surroundingNode, tag, attribs, nodesAdded,
                                 config) {
-        var dpr = CQ.form.rte.DomProcessor;
+        var dpr = CUI.rte.DomProcessor;
         var isApplicable = true;
         if (config && config.isApplicable) {
             isApplicable = config.isApplicable(this.dom, tag, attribs);
@@ -1922,7 +1922,7 @@ CQ.form.rte.DomProcessor.StructuralNode = new Class({
      * node" in a suitable way.
      * <p>
      * The method handles the possibly necessary splitting of text nodes accordingly.
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      * @param {Node} surroundingNode "surrounding node" to work on; <code>null</code> if no
      *                               "surrounding node" is yet existing
      * @param {String} tag tag name of the "surrounding node" (if one has to be created)
@@ -1932,7 +1932,7 @@ CQ.form.rte.DomProcessor.StructuralNode = new Class({
      * @return {Node} the "surrounding node" to continue working on
      */
     surround: function(context, surroundingNode, tag, attribs, nodesAdded) {
-        var dpr = CQ.form.rte.DomProcessor;
+        var dpr = CUI.rte.DomProcessor;
         switch (this.type) {
             case dpr.STRUCTURE:
                 surroundingNode = this.surroundStructure(context, surroundingNode, tag,
@@ -1999,13 +1999,13 @@ CQ.form.rte.DomProcessor.StructuralNode = new Class({
      * <li>Returns the copied DOM structure, including the split text node, so the caller
      * can use this for executing the surrounding operation.</li>
      * </ul>
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      * @param {HTMLElement} subTreeRoot (optional) root node to start with
      * @return {HTMLElement} the DOM subtree to be used for the surrounding operation
      */
     processLeftSubtree: function(context, subTreeRoot) {
-        var dpr = CQ.form.rte.DomProcessor;
-        var com = CQ.form.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
+        var com = CUI.rte.Common;
         // we'll create a clone of the current node as part of the subtree that actually
         // gets surrounded
         var clonedNode = this.dom.cloneNode(false);
@@ -2084,13 +2084,13 @@ CQ.form.rte.DomProcessor.StructuralNode = new Class({
      * <li>Returns the copied DOM structure, including the split text node, so the caller
      * can use this for executing the surrounding operation.</li>
      * </ul>
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      * @param {HTMLElement} subTreeRoot (optional) root node to start with
      * @return {HTMLElement} the DOM subtree to be used for the surrounding operation
      */
     processRightSubtree: function(context, subTreeRoot) {
-        var dpr = CQ.form.rte.DomProcessor;
-        var com = CQ.form.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
+        var com = CUI.rte.Common;
         var clonedNode = this.dom.cloneNode(false);
         if (!subTreeRoot) {
             subTreeRoot = clonedNode;
@@ -2149,15 +2149,15 @@ CQ.form.rte.DomProcessor.StructuralNode = new Class({
      * <p>
      * This method works similar to <code>processLeftContainer()</code>, but is
      * adjusted to work with containers correctly (other move rules apply there).
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      * @param {HTMLElement} subTreeRoot root node to start with
      * @param {Boolean} skipContent True if the content of <code>this</code>
      *                              should be skipped, so only the content of child nodes
      *                              is getting processed
      */
     processLeftContainerSubtree: function(context, subTreeRoot, skipContent) {
-        var dpr = CQ.form.rte.DomProcessor;
-        var com = CQ.form.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
+        var com = CUI.rte.Common;
         var baseNode;
         if (!skipContent) {
             if (this.isAligned()) {
@@ -2206,15 +2206,15 @@ CQ.form.rte.DomProcessor.StructuralNode = new Class({
      * <p>
      * This method works similar to <code>processRightContainer()</code>, but is
      * adjusted to work with containers correctly (other move rules apply there).
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      * @param {HTMLElement} subTreeRoot root node to start with
      * @param {Boolean} skipContent True if the content of <code>this</code>
      *                              should be skipped, so only the content of child nodes
      *                              is getting processed
      */
     processRightContainerSubtree: function(context, subTreeRoot, skipContent) {
-        var dpr = CQ.form.rte.DomProcessor;
-        var com = CQ.form.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
+        var com = CUI.rte.Common;
         var baseNode;
         if (!skipContent) {
             if (this.isAligned()) {
@@ -2259,7 +2259,7 @@ CQ.form.rte.DomProcessor.StructuralNode = new Class({
     },
 
     matches: function(tag, attribs) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         if (com.isTag(this.dom, tag)) {
             if (!attribs || com.hasAttributes(attribs)) {
                 return true;
@@ -2269,7 +2269,7 @@ CQ.form.rte.DomProcessor.StructuralNode = new Class({
     },
 
     removeNodesByTag: function(context, tag, attribs, nodeList) {
-        var dpr = CQ.form.rte.DomProcessor;
+        var dpr = CUI.rte.DomProcessor;
         if (this.childNodes) {
             var childCnt = this.childNodes.length;
             for (var c = childCnt - 1; c >= 0; c--) {
@@ -2304,8 +2304,8 @@ CQ.form.rte.DomProcessor.StructuralNode = new Class({
     },
 
     getUnnecessaryLinebreaks: function(container, nodesToRemove) {
-        var dpr = CQ.form.rte.DomProcessor;
-        var com = CQ.form.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
+        var com = CUI.rte.Common;
         if (this.tagName == "br") {
             // this node may potentially be removed if:
             // - there is a container node
@@ -2356,7 +2356,7 @@ CQ.form.rte.DomProcessor.StructuralNode = new Class({
             if (removeIndex >= 0) {
                 // DOM processing
                 if (!childToRemove.isInvalidatedByNormalization) {
-                    CQ.form.rte.DomProcessor.removeWithoutChildren(childToRemove.dom);
+                    CUI.rte.DomProcessor.removeWithoutChildren(childToRemove.dom);
                 }
                 // node list processing
                 this.childNodes.splice(removeIndex, 1);

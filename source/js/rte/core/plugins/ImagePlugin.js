@@ -17,8 +17,8 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.plugins.ImagePlugin
- * @extends CQ.form.rte.plugins.Plugin
+ * @class CUI.rte.plugins.ImagePlugin
+ * @extends CUI.rte.plugins.Plugin
  * <p>This class implements the editing of image properties as a plugin.</p>
  * <p>The plugin ID is "<b>image</b>".</p>
  * <p><b>Features</b></p>
@@ -28,11 +28,11 @@
  * </ul>
  * @since 5.3
  */
-CQ.form.rte.plugins.ImagePlugin = new Class({
+CUI.rte.plugins.ImagePlugin = new Class({
 
     toString: "ImagePlugin",
 
-    extend: CQ.form.rte.plugins.Plugin,
+    extend: CUI.rte.plugins.Plugin,
 
 
     getFeatures: function() {
@@ -60,7 +60,7 @@ CQ.form.rte.plugins.ImagePlugin = new Class({
 
     handleContextMenu: function(menuBuilder, selDef, context) {
         var subItems;
-        var ui = CQ.form.rte.ui;
+        var ui = CUI.rte.ui;
         if (this.isFeatureEnabled("image")) {
             if (this.editorKernel.queryState("image")) {
                 subItems = [
@@ -106,4 +106,4 @@ CQ.form.rte.plugins.ImagePlugin = new Class({
 
 
 // register plugin
-CQ.form.rte.plugins.PluginRegistry.register("image", CQ.form.rte.plugins.ImagePlugin);
+CUI.rte.plugins.PluginRegistry.register("image", CUI.rte.plugins.ImagePlugin);

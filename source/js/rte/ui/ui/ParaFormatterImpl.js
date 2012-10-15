@@ -16,11 +16,11 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CQ.form.rte.ui.cui.ParaFormatterImpl = new Class({
+CUI.rte.ui.cui.ParaFormatterImpl = new Class({
 
     toString: "ParaFormatterImpl",
 
-    extend: CQ.form.rte.ui.TbParaFormatter,
+    extend: CUI.rte.ui.TbParaFormatter,
 
 
     // Stuff -------------------------------------------------------------------------------
@@ -52,7 +52,7 @@ CQ.form.rte.ui.cui.ParaFormatterImpl = new Class({
     },
 
     createToolbarDef: function() {
-        var tk = CQ.form.rte.ui.ToolkitRegistry.get("cui");
+        var tk = CUI.rte.ui.ToolkitRegistry.get("cui");
         this.dom = $CQ(document.createElement("span"));
         this.formatSelector = tk.createDropDown({
             "parent": this.dom,

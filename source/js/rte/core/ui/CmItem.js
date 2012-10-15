@@ -17,10 +17,10 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.ui.CmItem
+ * @class CUI.rte.ui.CmItem
  * @private
  */
-CQ.form.rte.ui.CmItem = Class({
+CUI.rte.ui.CmItem = Class({
 
     toString: "CmItem",
 

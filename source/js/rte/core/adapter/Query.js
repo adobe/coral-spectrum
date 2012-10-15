@@ -16,9 +16,9 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CQ.form.rte.Query = function() {
+CUI.rte.Query = function() {
 
-    return (CQ.form.rte._adapter == "ext" ? {
+    return (CUI.rte._adapter == "ext" ? {
 
         selectNode: function(q, dom) {
             return CQ.Ext.DomQuery.selectNode(q, dom);

@@ -17,8 +17,8 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.plugins.StylesPlugin
- * @extends CQ.form.rte.plugins.Plugin
+ * @class CUI.rte.plugins.StylesPlugin
+ * @extends CUI.rte.plugins.Plugin
  * <p>This class implements styling text fragments with a CSS class (using "span" tags) as a
  * plugin.</p>
  * <p>The plugin ID is "<b>styles</b>".</p>
@@ -29,17 +29,17 @@
  * </ul>
  * <p><b>Additional config requirements</b></p>
  * <p>The following plugin-specific settings must be configured through the corresponding
- * {@link CQ.form.rte.EditorKernel} instance:</p>
+ * {@link CUI.rte.EditorKernel} instance:</p>
  * <ul>
  *   <li>The stylesheets to be used must be provided through
  *     {@link CQ.form.RichText#externalStyleSheets}.</li>
  * </ul>
  */
-CQ.form.rte.plugins.StylesPlugin = new Class({
+CUI.rte.plugins.StylesPlugin = new Class({
 
     toString: "StylePlugin",
 
-    extend: CQ.form.rte.plugins.Plugin,
+    extend: CUI.rte.plugins.Plugin,
 
     /**
      * @cfg {Object/Object[]} styles
@@ -82,7 +82,7 @@ CQ.form.rte.plugins.StylesPlugin = new Class({
     },
 
     getStyles: function() {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         if (!this.cachedStyles) {
             this.cachedStyles = this.config.styles || { };
             com.removeJcrData(this.cachedStyles);
@@ -92,8 +92,8 @@ CQ.form.rte.plugins.StylesPlugin = new Class({
     },
 
     initializeUI: function(tbGenerator) {
-        var plg = CQ.form.rte.plugins;
-        var ui = CQ.form.rte.ui;
+        var plg = CUI.rte.plugins;
+        var ui = CUI.rte.ui;
         if (this.isFeatureEnabled("styles")) {
             this.stylesUI = new tbGenerator.createStyleSelector("styles", this, null,
                     this.getStyles());
@@ -138,14 +138,14 @@ CQ.form.rte.plugins.StylesPlugin = new Class({
         if (!this.stylesUI) {
             return;
         }
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var styles = selDef.styles;
         var actualStyles = [ ];
         var indexToSelect, s;
         var styleableObject = selDef.selectedDom;
         if (styleableObject) {
-            if (!CQ.form.rte.Common.isTag(selDef.selectedDom,
-                    CQ.form.rte.plugins.StylesPlugin.STYLEABLE_OBJECTS)) {
+            if (!CUI.rte.Common.isTag(selDef.selectedDom,
+                    CUI.rte.plugins.StylesPlugin.STYLEABLE_OBJECTS)) {
                 styleableObject = null;
             }
         }
@@ -215,10 +215,10 @@ CQ.form.rte.plugins.StylesPlugin = new Class({
  * @final
  * @type String[]
  */
-CQ.form.rte.plugins.StylesPlugin.STYLEABLE_OBJECTS = [
+CUI.rte.plugins.StylesPlugin.STYLEABLE_OBJECTS = [
     "img"
 ];
 
 
 // register plugin
-CQ.form.rte.plugins.PluginRegistry.register("styles", CQ.form.rte.plugins.StylesPlugin);
+CUI.rte.plugins.PluginRegistry.register("styles", CUI.rte.plugins.StylesPlugin);

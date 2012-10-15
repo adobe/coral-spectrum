@@ -17,15 +17,15 @@
 **************************************************************************/
 
 /**
- * This class implaments a {@link CQ.form.rte.EditorEvent} for the ExtJS toolkit.
- * @class CQ.form.rte.adapter.ExtEvent
- * @extends CQ.form.rte.EditorEvent
+ * This class implaments a {@link CUI.rte.EditorEvent} for the ExtJS toolkit.
+ * @class CUI.rte.adapter.ExtEvent
+ * @extends CUI.rte.EditorEvent
  */
-CQ.form.rte.adapter.ExtEvent = new Class({
+CUI.rte.adapter.ExtEvent = new Class({
 
     toString: "ExtEvent",
 
-    extend: CQ.form.rte.EditorEvent,
+    extend: CUI.rte.EditorEvent,
 
     /**
      * The native ExtJS event
@@ -37,7 +37,7 @@ CQ.form.rte.adapter.ExtEvent = new Class({
     /**
      * Creates a new editor event from the specified ExtJS event.
      * @param {CQ.Ext.EventObject} extEvent The underlying, native ExtJS event
-     * @param {CQ.form.rte.EditContext} editContext The editor context for the event
+     * @param {CUI.rte.EditContext} editContext The editor context for the event
      */
     construct: function(extEvent, editContext) {
         // console.log(extEvent);
@@ -60,39 +60,39 @@ CQ.form.rte.adapter.ExtEvent = new Class({
         this._init(cfg);
     },
 
-    // overrides CQ.form.rte.EdittorEvent#isTab
+    // overrides CUI.rte.EdittorEvent#isTab
     isTab: function() {
         return this.native.getKey() == this.native.TAB;
     },
 
-    // overrides CQ.form.rte.EdittorEvent#isEnter
+    // overrides CUI.rte.EdittorEvent#isEnter
     isEnter: function() {
         return this.native.getKey() == this.native.ENTER;
     },
 
-    // overrides CQ.form.rte.EdittorEvent#isSpace
+    // overrides CUI.rte.EdittorEvent#isSpace
     isSpace: function() {
         return this.native.getKey() == this.native.SPACE;
     },
 
-    // overrides CQ.form.rte.EdittorEvent#isBackSpace
+    // overrides CUI.rte.EdittorEvent#isBackSpace
     isBackSpace: function() {
         return this.native.getKey() == this.native.BACKSPACE;
     },
 
-    // overrides CQ.form.rte.EdittorEvent#isDelete
+    // overrides CUI.rte.EdittorEvent#isDelete
     isDelete: function() {
         return this.native.getKey() == this.native.DELETE;
     },
 
-     // overrides CQ.form.rte.EdittorEvent#isCaretKey
+     // overrides CUI.rte.EdittorEvent#isCaretKey
     isCaretKey: function() {
         var key = this.native.getKey();
         return (key == this.native.UP) || (key == this.native.DOWN)
                 || (key == this.native.LEFT) || (key == this.native.RIGHT);
     },
 
-    // overrides CQ.form.rte.EdittorEvent#isCaretMovement
+    // overrides CUI.rte.EdittorEvent#isCaretMovement
     isCaretMovement: function() {
         var key = this.native.getKey();
         return this.isCaretKey()
@@ -100,17 +100,17 @@ CQ.form.rte.adapter.ExtEvent = new Class({
                 || (key == this.native.HOME) || (key == this.native.END);
     },
 
-    // overrides CQ.form.rte.EdittorEvent#preventDefault
+    // overrides CUI.rte.EdittorEvent#preventDefault
     preventDefault: function() {
         this.native.preventDefault();
     },
 
-    // overrides CQ.form.rte.EdittorEvent#stopPropagation
+    // overrides CUI.rte.EdittorEvent#stopPropagation
     stopPropagation: function() {
         this.native.stopPropagation();
     },
 
-    // overrides CQ.form.rte.EdittorEvent#stopEvent
+    // overrides CUI.rte.EdittorEvent#stopEvent
     stopEvent: function() {
         this.native.stopEvent();
     }

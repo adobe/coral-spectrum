@@ -17,15 +17,15 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.commands.Delete
- * @extends CQ.form.rte.commands.Command
+ * @class CUI.rte.commands.Delete
+ * @extends CUI.rte.commands.Command
  * @private
  */
-CQ.form.rte.commands.Delete = new Class({
+CUI.rte.commands.Delete = new Class({
 
     toString: "Delete",
 
-    extend: CQ.form.rte.commands.Command,
+    extend: CUI.rte.commands.Command,
 
     isCommand: function(cmdStr) {
         var cmdLC = cmdStr.toLowerCase();
@@ -33,7 +33,7 @@ CQ.form.rte.commands.Delete = new Class({
     },
 
     execute: function(execDef) {
-        CQ.form.rte.commands.Delete.executeDelete(execDef.editContext);
+        CUI.rte.commands.Delete.executeDelete(execDef.editContext);
     }
 
 });
@@ -44,13 +44,13 @@ CQ.form.rte.commands.Delete = new Class({
  * <p>Use this to delete the current (already preprocessed) selection from another command
  * and ensure that the editor is kept in a usable state (at least an empty block will be
  * available afterwards).</p>
- * @param {CQ.form.rte.EditContext} editContext The edit context
+ * @param {CUI.rte.EditContext} editContext The edit context
  * @private
  */
-CQ.form.rte.commands.Delete.executeDelete = function(editContext) {
+CUI.rte.commands.Delete.executeDelete = function(editContext) {
     editContext.doc.execCommand("delete", false, null);
-    CQ.form.rte.DomProcessor.ensureMinimumContent(editContext);
+    CUI.rte.DomProcessor.ensureMinimumContent(editContext);
 };
 
 // register command
-CQ.form.rte.commands.CommandRegistry.register("delete", CQ.form.rte.commands.Delete);
+CUI.rte.commands.CommandRegistry.register("delete", CUI.rte.commands.Delete);

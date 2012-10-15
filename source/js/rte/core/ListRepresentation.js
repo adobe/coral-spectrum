@@ -23,7 +23,7 @@
 // to recreate the representation from DOM after processing it)
 
 /**
- * @class CQ.form.rte.ListRepresentation
+ * @class CUI.rte.ListRepresentation
  * @private
  * <p>This class implements an abstract representation of a list for easier processing
  * &amp; editing (especially hierarchical management, such as indenting and outdenting
@@ -33,17 +33,17 @@
  * executed on the represented list.</p>
  * @constructor
  * Creates a new ListRepresentation.
- * @param {CQ.form.rte.ListRepresentation} parentList The parent list (if any)
+ * @param {CUI.rte.ListRepresentation} parentList The parent list (if any)
  * @param {Boolean} isCorrectHierarchy (optional) True if the list is correctly nested
  *        (defaults to true)
  */
-CQ.form.rte.ListRepresentation = new Class({
+CUI.rte.ListRepresentation = new Class({
 
     toString: "ListRepresentation",
 
     /**
      * Parent list (if available)
-     * @type CQ.form.rte.ListRepresentation
+     * @type CUI.rte.ListRepresentation
      * @private
      */
     parentList: null,
@@ -57,7 +57,7 @@ CQ.form.rte.ListRepresentation = new Class({
 
     /**
      * Array containing the items of the list.
-     * @type CQ.form.rte.ListRepresentation.Item[]
+     * @type CUI.rte.ListRepresentation.Item[]
      * @private
      */
     items: null,
@@ -81,7 +81,7 @@ CQ.form.rte.ListRepresentation = new Class({
      *        representation is to be build; must be of type "ul" or "ol"
      */
     fromList: function(listDom) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         this.items.length = 0;
         this.listDom = listDom;
         var children = listDom.childNodes;
@@ -92,14 +92,14 @@ CQ.form.rte.ListRepresentation = new Class({
             if (com.isTag(childToProcess, com.LIST_TAGS)) {
                 // detected an invalidly nested list
                 if (validItem == null) {
-                    validItem = new CQ.form.rte.ListRepresentation.Item(this, this.listDom);
+                    validItem = new CUI.rte.ListRepresentation.Item(this, this.listDom);
                     this.items.push(validItem);
                 }
-                var subList = new CQ.form.rte.ListRepresentation(this, false);
+                var subList = new CUI.rte.ListRepresentation(this, false);
                 subList.fromList(childToProcess);
                 validItem.addSubList(subList);
             } else if (com.isTag(childToProcess, "li")) {
-                var item = new CQ.form.rte.ListRepresentation.Item(this, childToProcess);
+                var item = new CUI.rte.ListRepresentation.Item(this, childToProcess);
                 this.items.push(item);
                 item.detectSubLists();
                 validItem = item;
@@ -112,12 +112,12 @@ CQ.form.rte.ListRepresentation = new Class({
      * </p>
      * <p>Note that actually the top-level list is used - not the list that actually
      * contains the list item if the item is part of a nested list.</p>
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      * @param {HTMLElement} itemDom The DOM element representing the list item (must be of
      *        type "li")
      */
     fromItem: function(context, itemDom) {
-        var listDom = CQ.form.rte.ListUtils.getTopListForItem(context, itemDom);
+        var listDom = CUI.rte.ListUtils.getTopListForItem(context, itemDom);
         if (listDom == null) {
             throw new Error("Could not detect list node.");
         }
@@ -125,12 +125,12 @@ CQ.form.rte.ListRepresentation = new Class({
     },
 
     /**
-     * <p>Gets the {@link CQ.form.rte.ListRepresentation.Item Item} that represents the
+     * <p>Gets the {@link CUI.rte.ListRepresentation.Item Item} that represents the
      * specified (DOM) list item.</p>
      * <p>The item is looked up recursively - you can always use the top-most list
      * representation to get a list item that is contained in a nested list.</p>
      * @param {HTMLElement} dom The DOM list item (must be of type "li")
-     * @return {CQ.form.rte.ListRepresentation.Item} The Item representation; null if there
+     * @return {CUI.rte.ListRepresentation.Item} The Item representation; null if there
      *         is no suitable
      */
     getItemByDom: function(dom) {
@@ -146,26 +146,26 @@ CQ.form.rte.ListRepresentation = new Class({
 
     /**
      * <p>Gets the index (position in this list) of the specified
-     * {@link CQ.form.rte.ListRepresentation.Item Item} in the represented list.</p>
+     * {@link CUI.rte.ListRepresentation.Item Item} in the represented list.</p>
      * <p>Note that this method does not work resursively, i.e. you must call it on the
-     *{@link CQ.form.rte.ListRepresentation ListRepresentation} that actually contains the
-     * specified {@link CQ.form.rte.ListRepresentation.Item Item}.</p>
-     * @param {CQ.form.rte.ListRepresentation.Item} item The item
+     *{@link CUI.rte.ListRepresentation ListRepresentation} that actually contains the
+     * specified {@link CUI.rte.ListRepresentation.Item Item}.</p>
+     * @param {CUI.rte.ListRepresentation.Item} item The item
      * @return {Number} The index (list position) of the specified list item
      */
     getItemIndex: function(item) {
-        return CQ.form.rte.Common.arrayIndex(this.items, item);
+        return CUI.rte.Common.arrayIndex(this.items, item);
     },
 
     /**
-     * <p>Removes the specified {@link CQ.form.rte.ListRepresentation.Item Item} from this
+     * <p>Removes the specified {@link CUI.rte.ListRepresentation.Item Item} from this
      * list.</p>
      * <p>Note that this method removes the item from the list representation only, keeping
      * the DOM as it is.</p>
-     * @param {CQ.form.rte.ListRepresentation.Item} itemToRemove The item to remove
+     * @param {CUI.rte.ListRepresentation.Item} itemToRemove The item to remove
      */
     removeItem: function(itemToRemove) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var removeIndex = com.arrayIndex(this.items, itemToRemove);
         if (removeIndex >= 0) {
             this.items.splice(removeIndex, 1);
@@ -174,8 +174,8 @@ CQ.form.rte.ListRepresentation = new Class({
 
     /**
      * Inserts the specified item after the specified reference item.
-     * @param {CQ.form.rte.ListRepresentation.Item} itemToInsert The item to be inserted
-     * @param {CQ.form.rte.ListRepresentation.Item} refItem The reference item; if null,
+     * @param {CUI.rte.ListRepresentation.Item} itemToInsert The item to be inserted
+     * @param {CUI.rte.ListRepresentation.Item} refItem The reference item; if null,
      *        the item is inserted at the beginning of the item list
      */
     insertItemAfter: function(itemToInsert, refItem) {
@@ -191,11 +191,11 @@ CQ.form.rte.ListRepresentation = new Class({
     },
 
     /**
-     * <p>Removes the specified {@link CQ.form.rte.ListRepresentation nested list} from this
+     * <p>Removes the specified {@link CUI.rte.ListRepresentation nested list} from this
      * list.</p>
      * <p>Note that this method removes the nested list from the list representation only,
      * keeping the DOM as it is.</p>
-     * @param {CQ.form.rte.ListRepresentation} subList The nested list to remove
+     * @param {CUI.rte.ListRepresentation} subList The nested list to remove
      */
     removeSubList: function(subList) {
         var itemCnt = this.items.length;
@@ -221,7 +221,7 @@ CQ.form.rte.ListRepresentation = new Class({
 
     /**
      * Indents the specified DOM list item.
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      * @param {HTMLElement} itemDom The list item to indent (must be of type "li")
      */
     indent: function(context, itemDom) {
@@ -234,11 +234,11 @@ CQ.form.rte.ListRepresentation = new Class({
 
     /**
      * Outdents the specified DOM list items.
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      * @param {HTMLElement[]} items The list items to outdent (must be of type "li")
      */
     outdent: function(context, items) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         // outdent each item
         var itemCnt = items.length;
         for (var i = 0; i < itemCnt; i++) {
@@ -264,7 +264,7 @@ CQ.form.rte.ListRepresentation = new Class({
      * list items (&lt;li&gt;...&lt;/li&gt;&lt;ul&gt;...&lt;/ul&gt;) instead of appending
      * them to an existing list item (&lt;li&gt;...&lt;ul&gt;...&lt;/ul&gt;&lt;/li&gt;).
      * </p>
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      */
     ensureHierarchy: function(context) {
         var itemCnt = this.items.length;
@@ -276,11 +276,11 @@ CQ.form.rte.ListRepresentation = new Class({
 
     /**
      * Flattens the represented list to a series of paragraphs.
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      */
     flatten: function(context, topLevelList) {
         if (topLevelList == null) {
-            topLevelList = CQ.form.rte.ListUtils.getTopListForItem(context, this.listDom);
+            topLevelList = CUI.rte.ListUtils.getTopListForItem(context, this.listDom);
         }
         var itemCnt = this.items.length;
         for (var i = 0; i < itemCnt; i++) {
@@ -317,25 +317,25 @@ CQ.form.rte.ListRepresentation = new Class({
 });
 
 /**
- * @class CQ.form.rte.ListRepresentation.Item
+ * @class CUI.rte.ListRepresentation.Item
  * @private
  * <p>This class represents a single list item as part of a
- * {@link CQ.form.rte.ListRepresentation ListRepresentation}.</p>
+ * {@link CUI.rte.ListRepresentation ListRepresentation}.</p>
  * <p>Note that most processing methods of this class do not adjust the data model (but only
  * the DOM), hence the list representation has to be recreated before another processing is
  * executed on the represented list.</p>
  * @constructor
  * Creates a new ListRepresentation.Item.
- * @param {CQ.form.rte.ListRepresentation} list The list the item is contained
+ * @param {CUI.rte.ListRepresentation} list The list the item is contained
  * @param {HTMLElement} itemDom DOM representation of the list item (must be of type "li")
  */
-CQ.form.rte.ListRepresentation.Item = new Class({
+CUI.rte.ListRepresentation.Item = new Class({
 
     toString: "ListRepresentation.Item",
 
     /**
      * Back reference to the list the item is contained
-     * @type CQ.form.rte.ListRepresentation
+     * @type CUI.rte.ListRepresentation
      * @private
      */
     list: null,
@@ -349,7 +349,7 @@ CQ.form.rte.ListRepresentation.Item = new Class({
 
     /**
      * Subordinate list (if any)
-     * @type CQ.form.rte.ListRepresentation[]
+     * @type CUI.rte.ListRepresentation[]
      * @private
      */
     subLists: null,
@@ -364,7 +364,7 @@ CQ.form.rte.ListRepresentation.Item = new Class({
      * <p>Adds the specified nested list explicitly.</p>
      * <p>Note that the specified list is not inspected for further nested lists. Use
      * {@link #detectSubLists} explicitly on the specified list.</P>
-     * @param {CQ.form.rte.ListRepresentation} subList The list representation to add
+     * @param {CUI.rte.ListRepresentation} subList The list representation to add
      */
     addSubList: function(subList) {
         this.subLists.push(subList);
@@ -377,12 +377,12 @@ CQ.form.rte.ListRepresentation.Item = new Class({
      *        DOM element representing the list item
      */
     detectSubLists: function(subItem) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         if (!subItem) {
             subItem = this.itemDom;
         }
         if (com.isTag(subItem, com.LIST_TAGS)) {
-            var subList = new CQ.form.rte.ListRepresentation(this.list, true);
+            var subList = new CUI.rte.ListRepresentation(this.list, true);
             subList.fromList(subItem);
             this.subLists.push(subList);
         } else if (subItem.nodeType == 1) {
@@ -414,7 +414,7 @@ CQ.form.rte.ListRepresentation.Item = new Class({
 
     /**
      * Gets the item that is located before "this" on the same hierarchical list level.
-     * @return {CQ.form.rte.ListRepresentation.Item} The preceding list item; null if "this"
+     * @return {CUI.rte.ListRepresentation.Item} The preceding list item; null if "this"
      *         is the first item of the list
      */
     getPreviousItem: function() {
@@ -465,7 +465,7 @@ CQ.form.rte.ListRepresentation.Item = new Class({
 
     /**
      * Indents the item.
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      */
     indent: function(context) {
         var prevItem = this.getPreviousItem();
@@ -492,7 +492,7 @@ CQ.form.rte.ListRepresentation.Item = new Class({
         prevItem.itemDom.appendChild(newList);
         this.itemDom.parentNode.removeChild(this.itemDom);
         newList.appendChild(this.itemDom);
-        var newSubList = new CQ.form.rte.ListRepresentation(prevItem.list, true);
+        var newSubList = new CUI.rte.ListRepresentation(prevItem.list, true);
         prevItem.addSubList(newSubList);
         newSubList.listDom = newList;
         newSubList.items.push(this);
@@ -502,11 +502,11 @@ CQ.form.rte.ListRepresentation.Item = new Class({
 
     /**
      * Outdents the item.
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      */
     outdent: function(context) {
-        var com = CQ.form.rte.Common;
-        var lut = CQ.form.rte.ListUtils;
+        var com = CUI.rte.Common;
+        var lut = CUI.rte.ListUtils;
         var slCnt, s, slItemCnt, itemToMove, listDom;
         var outdentedChildren = [ ];
         var listLevel = com.getListLevel(context, this.itemDom);
@@ -613,7 +613,7 @@ CQ.form.rte.ListRepresentation.Item = new Class({
                 if (this.subLists.length == 0) {
                     insertListDom = context.createElement(this.list.listDom.tagName);
                     this.itemDom.appendChild(insertListDom);
-                    insertSubList = new CQ.form.rte.ListRepresentation(this.list, true);
+                    insertSubList = new CUI.rte.ListRepresentation(this.list, true);
                     insertSubList.listDom = insertListDom;
                     this.subLists.push(insertSubList);
                 } else {
@@ -641,11 +641,11 @@ CQ.form.rte.ListRepresentation.Item = new Class({
 
     /**
      * Ensures the correct nesting of lists that are subordinate to this list.
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      */
     ensureHierarchy: function(context) {
-        var com = CQ.form.rte.Common;
-        var dpr = CQ.form.rte.DomProcessor;
+        var com = CUI.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
         var listCnt = this.subLists.length;
         for (var l = 0; l < listCnt; l++) {
             var subListToProcess = this.subLists[l];
@@ -669,10 +669,10 @@ CQ.form.rte.ListRepresentation.Item = new Class({
     /**
      * Flattens the represented item to a paragraph. The paragraph is inserted before the
      * specified top-level list.
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      */
     flatten: function(context, topLevelList) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         // flatten item
         var paraNode = context.createElement("p");
         topLevelList.parentNode.insertBefore(paraNode, topLevelList);
@@ -697,12 +697,12 @@ CQ.form.rte.ListRepresentation.Item = new Class({
     /**
      * Flattens a single list item by adding its content to the prevoius sibling or parent
      * list item as a new line.
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      */
     flattenToParent: function(context) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var listDom = this.list.listDom;
-        var auxRoot = CQ.form.rte.DomProcessor.getAuxRootNode(context, listDom);
+        var auxRoot = CUI.rte.DomProcessor.getAuxRootNode(context, listDom);
         if (auxRoot == listDom.parentNode) {
             // use outdent if we are "unlisting" a first-level list item
             this.outdent(context);
@@ -757,7 +757,7 @@ CQ.form.rte.ListRepresentation.Item = new Class({
      * @param {Number} indent (optional) Indentation level
      */
     createDump: function(indent) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         if (indent == null) {
             indent = 0;
         }

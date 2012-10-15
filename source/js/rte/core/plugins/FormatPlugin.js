@@ -17,8 +17,8 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.plugins.FormatPlugin
- * @extends CQ.form.rte.plugins.SimpleFormatPlugin
+ * @class CUI.rte.plugins.FormatPlugin
+ * @extends CUI.rte.plugins.SimpleFormatPlugin
  * <p>This class implements simple character formatting (bold, italic, underlined) as a
  * plugin.</p>
  * <p>The plugin ID is "<b>format</b>".</p>
@@ -29,14 +29,14 @@
  *   <li><b>underline</b> - adds the "underline" button</li>
  * </ul>
  */
-CQ.form.rte.plugins.FormatPlugin = new Class({
+CUI.rte.plugins.FormatPlugin = new Class({
 
     toString: "FormatPlugin",
 
-    extend: CQ.form.rte.plugins.SimpleFormatPlugin,
+    extend: CUI.rte.plugins.SimpleFormatPlugin,
 
     _init: function(editorKernel) {
-        var plg = CQ.form.rte.plugins;
+        var plg = CUI.rte.plugins;
         plg.FormatPlugin.prototype.superClass._init.call(this, editorKernel, "format",
                 plg.Plugin.SORT_FORMAT, [ {
                     "command": "bold",
@@ -76,4 +76,4 @@ CQ.form.rte.plugins.FormatPlugin = new Class({
 
 
 // register plugin
-CQ.form.rte.plugins.PluginRegistry.register("format", CQ.form.rte.plugins.FormatPlugin);
+CUI.rte.plugins.PluginRegistry.register("format", CUI.rte.plugins.FormatPlugin);

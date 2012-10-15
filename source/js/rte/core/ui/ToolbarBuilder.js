@@ -17,7 +17,7 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.ui.ToolbarBuilder
+ * @class CUI.rte.ui.ToolbarBuilder
  * @private
  * <p>This class is used to build toolbars from plugins.</p>
  * <p>Each toolbar consists of several groups of toolbar items. Each group is separated
@@ -27,7 +27,7 @@
  * @constructor
  * Creates a new ToolbarBuilder
  */
-CQ.form.rte.ui.ToolbarBuilder = new Class({
+CUI.rte.ui.ToolbarBuilder = new Class({
 
     toString: "ToolbarBuilder",
 
@@ -71,7 +71,7 @@ CQ.form.rte.ui.ToolbarBuilder = new Class({
      * Add a new toolbar item.
      * @param {String} groupId ID of the group the item belongs to
      * @param {Number} groupSort Group sorting index
-     * @param {CQ.form.rte.ui.TbElement} element Toolbar item to add
+     * @param {CUI.rte.ui.TbElement} element Toolbar item to add
      * @param {Number} elementSort Element sorting index
      */
     addElement: function(groupId, groupSort, element, elementSort) {
@@ -122,7 +122,7 @@ CQ.form.rte.ui.ToolbarBuilder = new Class({
  * @type Number
  * @private
  */
-CQ.form.rte.ui.ToolbarBuilder.MAIN_TOOLBAR = 0;
+CUI.rte.ui.ToolbarBuilder.MAIN_TOOLBAR = 0;
 
 /**
  * @static
@@ -130,4 +130,4 @@ CQ.form.rte.ui.ToolbarBuilder.MAIN_TOOLBAR = 0;
  * @type Number
  * @private
  */
-CQ.form.rte.ui.ToolbarBuilder.STYLE_TOOLBAR = 1;
+CUI.rte.ui.ToolbarBuilder.STYLE_TOOLBAR = 1;

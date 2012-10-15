@@ -17,8 +17,8 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.plugins.TablePlugin
- * @extends CQ.form.rte.plugins.Plugin
+ * @class CUI.rte.plugins.TablePlugin
+ * @extends CUI.rte.plugins.Plugin
  * <p>This class implements table functionality as a plugin.</p>
  * <p>The plugin ID is "<b>table</b>".</p>
  * <p><b>Features</b></p>
@@ -42,11 +42,11 @@
  *     (added in 5.3)</li>
  * </ul>
  */
-CQ.form.rte.plugins.TablePlugin = new Class({
+CUI.rte.plugins.TablePlugin = new Class({
 
     toString: "TablePlugin",
 
-    extend: CQ.form.rte.plugins.Plugin,
+    extend: CUI.rte.plugins.Plugin,
 
     /**
      * @cfg {String} editMode
@@ -241,15 +241,15 @@ CQ.form.rte.plugins.TablePlugin = new Class({
     },
 
     isTableMode: function() {
-        return (this.config.editMode == CQ.form.rte.plugins.TablePlugin.EDITMODE_TABLE);
+        return (this.config.editMode == CUI.rte.plugins.TablePlugin.EDITMODE_TABLE);
     },
 
     handleTableKeys: function(e) {
         if (e.cancelKey) {
             return;
         }
-        var com = CQ.form.rte.Common;
-        var sel = CQ.form.rte.Selection;
+        var com = CUI.rte.Common;
+        var sel = CUI.rte.Selection;
         var context = e.editContext;
         var selection;
 
@@ -283,7 +283,7 @@ CQ.form.rte.plugins.TablePlugin = new Class({
             }
             if (!sel.isSelection(selection)) {
                 this.editorKernel.execCmd("addundostep");
-                var tableCell = CQ.form.rte.commands.Table.getCellFromSelection(
+                var tableCell = CUI.rte.commands.Table.getCellFromSelection(
                         context, selection);
                 if (tableCell) {
                     var nextCell;
@@ -336,15 +336,15 @@ CQ.form.rte.plugins.TablePlugin = new Class({
      * @private
      */
     addSelectionHandler: function(e) {
-        var com = CQ.form.rte.Common;
-        var sel = CQ.form.rte.Selection;
+        var com = CUI.rte.Common;
+        var sel = CUI.rte.Selection;
         var cancelEvent = false;
         var addToSelection = (e.getType() == "mouseup") && (e.getButton() == 0)
                 && e.isCtrl();
         if (addToSelection && (com.ua.isIE || com.ua.isWebKit)) {
             var context = e.editContext;
             var pSelection = sel.createProcessingSelection(context);
-            var cell = CQ.form.rte.commands.Table.getCellFromSelection(context, pSelection);
+            var cell = CUI.rte.commands.Table.getCellFromSelection(context, pSelection);
             if (cell) {
                 if (cell) {
                     this.addCellToSelection(cell);
@@ -360,7 +360,7 @@ CQ.form.rte.plugins.TablePlugin = new Class({
      * @private
      */
     clearSelectionHandler: function(e) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var context = e.editContext;
         var type = e.getType();
         var addToSelection = (type == "mousedown") && (e.getButton() == 0)
@@ -411,7 +411,7 @@ CQ.form.rte.plugins.TablePlugin = new Class({
                     }
                 }
                 if (flushSelection) {
-                    CQ.form.rte.Selection.flushSelection(e.editContext, true);
+                    CUI.rte.Selection.flushSelection(e.editContext, true);
                 }
             }
         }
@@ -421,7 +421,7 @@ CQ.form.rte.plugins.TablePlugin = new Class({
      * @private
      */
     addTableSelection: function(selectionDef) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         if (this.tableSelection) {
             this.removeTableSelection();
         }
@@ -437,7 +437,7 @@ CQ.form.rte.plugins.TablePlugin = new Class({
      * @private
      */
     addCellToSelection: function(cellToAdd) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         if (!this.tableSelection) {
             this.tableSelection = [ ];
         }
@@ -449,7 +449,7 @@ CQ.form.rte.plugins.TablePlugin = new Class({
      * @private
      */
     removeTableSelection: function() {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var cellCnt = this.tableSelection.length;
         for (var c = 0; c < cellCnt; c++) {
             var cell = this.tableSelection[c];
@@ -462,7 +462,7 @@ CQ.form.rte.plugins.TablePlugin = new Class({
      * @private
      */
     clearSelectionContent: function(context) {
-        var dpr = CQ.form.rte.DomProcessor;
+        var dpr = CUI.rte.DomProcessor;
         var cellCnt = this.tableSelection.length;
         for (var c = 0; c < cellCnt; c++) {
             var cell = this.tableSelection[c];
@@ -496,7 +496,7 @@ CQ.form.rte.plugins.TablePlugin = new Class({
             };
         } else {
             // create new table
-            tableTemplate = CQ.form.rte.Compatibility.getConfigValue(this.config,
+            tableTemplate = CUI.rte.Compatibility.getConfigValue(this.config,
                     "defaultValues.tableTemplate");
             if (!tableTemplate) {
                 propConfig = {
@@ -526,9 +526,9 @@ CQ.form.rte.plugins.TablePlugin = new Class({
             // display table properties dialog
             propConfig.editContext = context;
             propConfig.pluginConfig = this.config;
-            propConfig.execFn = CQ.form.rte.Utils.scope(this.execCreateOrEditTable, this);
+            propConfig.execFn = CUI.rte.Utils.scope(this.execCreateOrEditTable, this);
             var dm = this.editorKernel.getDialogManager();
-            var dialog = dm.create(CQ.form.rte.ui.DialogManager.DLG_TABLEPROPS, propConfig);
+            var dialog = dm.create(CUI.rte.ui.DialogManager.DLG_TABLEPROPS, propConfig);
             dm.show(dialog);
         }
     },
@@ -556,7 +556,7 @@ CQ.form.rte.plugins.TablePlugin = new Class({
             // selection handling is way too buggy to get/set a valid range/selection at
             // this point, so prefer selection if provided on plugin call
             var selectionContext = options.selectionContext;
-            cell = CQ.form.rte.commands.Table.getCellFromNodeList(context,
+            cell = CUI.rte.commands.Table.getCellFromNodeList(context,
                     selectionContext.nodeList);
         } else {
             // it is safe to use queryState for toolbar-invoked plugin calls
@@ -569,10 +569,10 @@ CQ.form.rte.plugins.TablePlugin = new Class({
             "editContext": context,
             "pluginConfig": this.config,
             "cell": cell,
-            "execFn": CQ.form.rte.Utils.scope(this.execEditCellProps, this)
+            "execFn": CUI.rte.Utils.scope(this.execEditCellProps, this)
         };
         var dm = this.editorKernel.getDialogManager();
-        var dialog = dm.create(CQ.form.rte.ui.DialogManager.DLG_CELLPROPS, cfg);
+        var dialog = dm.create(CUI.rte.ui.DialogManager.DLG_CELLPROPS, cfg);
         dm.show(dialog);
     },
 
@@ -629,7 +629,7 @@ CQ.form.rte.plugins.TablePlugin = new Class({
     },
 
     reportStyles: function() {
-        var compat = CQ.form.rte.Compatibility;
+        var compat = CUI.rte.Compatibility;
         var styles = [ ];
         var tableStyles = this.config.tableStyles;
         if (tableStyles != null) {
@@ -714,8 +714,8 @@ CQ.form.rte.plugins.TablePlugin = new Class({
      * @private
      */
     initializeUI: function(tbGenerator) {
-        var plg = CQ.form.rte.plugins;
-        var ui = CQ.form.rte.ui;
+        var plg = CUI.rte.plugins;
+        var ui = CUI.rte.ui;
         // todo use correct tooltips for table mode buttons
         if (!this.isTableMode()) {
             if (this.isFeatureEnabled("table")) {
@@ -821,14 +821,14 @@ CQ.form.rte.plugins.TablePlugin = new Class({
     updateState: function(selDef) {
         if (this.isTableMode()) {
             var context = selDef.editContext;
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             var nodeList = selDef.nodeList;
-            var singleCell = CQ.form.rte.commands.Table.getCellFromNodeList(context,
+            var singleCell = CUI.rte.commands.Table.getCellFromNodeList(context,
                     nodeList);
             var isSingleCell = (singleCell != null);
             var tableDom = com.getTagInPath(context, nodeList.commonAncestor, "table");
             if (tableDom) {
-                var tableMatrix = new CQ.form.rte.TableMatrix();
+                var tableMatrix = new CUI.rte.TableMatrix();
                 tableMatrix.createTableMatrix(tableDom);
                 var size = tableMatrix.getTableSize();
                 this.removeRowUI.setDisabled((size.rows == 1) || !isSingleCell);
@@ -846,10 +846,10 @@ CQ.form.rte.plugins.TablePlugin = new Class({
      */
     handleContextMenu: function(menuBuilder, selDef, context) {
         var isTableMode = this.isTableMode();
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var nodeList = selDef.nodeList;
         var selection = selDef.selection;
-        var singleCell = CQ.form.rte.commands.Table.getCellFromNodeList(context, nodeList);
+        var singleCell = CUI.rte.commands.Table.getCellFromNodeList(context, nodeList);
         var isSingleCell = (singleCell != null);
         var tableDom = com.getTagInPath(context, nodeList.commonAncestor, "table");
         var isTable = isSingleCell || (tableDom != null);
@@ -858,7 +858,7 @@ CQ.form.rte.plugins.TablePlugin = new Class({
         var canRemoveCol = true;
         var canRemoveRow = true;
         if (isTable) {
-            tableMatrix = new CQ.form.rte.TableMatrix();
+            tableMatrix = new CUI.rte.TableMatrix();
             tableMatrix.createTableMatrix(tableDom);
             if (isTableMode) {
                 var size = tableMatrix.getTableSize();
@@ -1162,7 +1162,7 @@ CQ.form.rte.plugins.TablePlugin = new Class({
                 if ((attrib != "columns") && (attrib != "rows") && (attrib != "header")
                         && !hasInvalidPrefix) {
                     tableHtml += " " + attrib + "=\""
-                            + CQ.form.rte.Utils.htmlEncode(tableInit[attrib]) + "\"";
+                            + CUI.rte.Utils.htmlEncode(tableInit[attrib]) + "\"";
                 }
             }
         }
@@ -1170,7 +1170,7 @@ CQ.form.rte.plugins.TablePlugin = new Class({
         for (var r = 0; r < rowCnt; r++) {
             tableHtml += "<tr>";
             for (var c = 0; c < colCnt; c++) {
-                tableHtml += CQ.form.rte.TableMatrix.createEmptyCellMarkup();
+                tableHtml += CUI.rte.TableMatrix.createEmptyCellMarkup();
             }
             tableHtml += "</tr>";
         }
@@ -1179,8 +1179,8 @@ CQ.form.rte.plugins.TablePlugin = new Class({
     },
 
     interceptContent: function(contentType, defs) {
-        var com = CQ.form.rte.Common;
-        var dpr = CQ.form.rte.DomProcessor;
+        var com = CUI.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
         if (!this.isTableMode()) {
             return null;
         }
@@ -1188,13 +1188,13 @@ CQ.form.rte.plugins.TablePlugin = new Class({
         if (contentType == "emptyContent") {
             return this.createEmptyTableHTML();
         } else if (contentType == "postprocessDom") {
-            CQ.form.rte.DomProcessor.removeNonTableBlocks(context);
+            CUI.rte.DomProcessor.removeNonTableBlocks(context);
         } else if (contentType == "cleanDom") {
             if (this.tableSelection) {
                 this.removeTableSelection();
             }
             var body = defs.root;
-            var table = CQ.form.rte.Query.select("table:first", body);
+            var table = CUI.rte.Query.select("table:first", body);
             if (table && (table.length == 1)) {
                 var isEmpty = true;
                 table = table[0];
@@ -1225,7 +1225,7 @@ CQ.form.rte.plugins.TablePlugin = new Class({
  * @final
  * @type String
  */
-CQ.form.rte.plugins.TablePlugin.EDITMODE_DEFAULT = "default";
+CUI.rte.plugins.TablePlugin.EDITMODE_DEFAULT = "default";
 
 /**
  * Constant that defines "table editing mode" (will allow table content only; some other
@@ -1234,8 +1234,8 @@ CQ.form.rte.plugins.TablePlugin.EDITMODE_DEFAULT = "default";
  * @final
  * @type String
  */
-CQ.form.rte.plugins.TablePlugin.EDITMODE_TABLE = "table";
+CUI.rte.plugins.TablePlugin.EDITMODE_TABLE = "table";
 
 
 // register plugin
-CQ.form.rte.plugins.PluginRegistry.register("table", CQ.form.rte.plugins.TablePlugin);
+CUI.rte.plugins.PluginRegistry.register("table", CUI.rte.plugins.TablePlugin);

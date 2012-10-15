@@ -17,8 +17,8 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.plugins.MiscToolsPlugin
- * @extends CQ.form.rte.plugins.Plugin
+ * @class CUI.rte.plugins.MiscToolsPlugin
+ * @extends CUI.rte.plugins.Plugin
  * <p>This class implements miscellaneous tools (sourceview, special chars) as a plugin.</p>
  * <p>The plugin ID is "<b>misctools</b>".</p>
  * <p><b>Features</b></p>
@@ -28,11 +28,11 @@
  *   <li><b>sourceedit</b> - adds an icon that allows to switch to source edit mode</li>
  * </ul>
  */
-CQ.form.rte.plugins.MiscToolsPlugin = new Class({
+CUI.rte.plugins.MiscToolsPlugin = new Class({
 
     toString: "MiscToolsPlugin",
 
-    extend: CQ.form.rte.plugins.Plugin,
+    extend: CUI.rte.plugins.Plugin,
 
     /**
      * @cfg {Object} specialCharsConfig
@@ -113,8 +113,8 @@ CQ.form.rte.plugins.MiscToolsPlugin = new Class({
     },
 
     initializeUI: function(tbGenerator) {
-        var plg = CQ.form.rte.plugins;
-        var ui = CQ.form.rte.ui;
+        var plg = CUI.rte.plugins;
+        var ui = CUI.rte.ui;
         if (this.isFeatureEnabled("specialchars")) {
             this.specialCharsUI = tbGenerator.createElement("specialchars", this, false,
                     this.getTooltip("specialchars"));
@@ -132,17 +132,17 @@ CQ.form.rte.plugins.MiscToolsPlugin = new Class({
      * @private
      */
     insertSpecialChars: function(context) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var dm = this.editorKernel.getDialogManager();
         if (!this.specialCharsDialog || dm.mustRecreate(this.specialCharsDialog)) {
             var defaultConfig = {
-                "insertCharacter": CQ.form.rte.Utils.scope(function(charToInsert) {
+                "insertCharacter": CUI.rte.Utils.scope(function(charToInsert) {
                     this.insertCharacter(this.editContext, charToInsert);
                 }, this)
             };
             var dialogConfig = this.config.specialCharsConfig || { };
             CQ.Util.applyDefaults(dialogConfig, defaultConfig);
-            this.specialCharsDialog = dm.create(CQ.form.rte.ui.DialogManager.DLG_SPECCHARS,
+            this.specialCharsDialog = dm.create(CUI.rte.ui.DialogManager.DLG_SPECCHARS,
                     dialogConfig);
             // would throw a SecurityError if set in dialogConfig/CQ.WCM.getDialog()
             this.specialCharsDialog.editContext = context;
@@ -154,7 +154,7 @@ CQ.form.rte.plugins.MiscToolsPlugin = new Class({
     },
 
     insertCharacter: function(context, charToInsert) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         if (com.ua.isIE) {
             this.savedRange.select();
         }
@@ -206,7 +206,7 @@ CQ.form.rte.plugins.MiscToolsPlugin = new Class({
             this.insertSpecialChars(context);
         } else if ((id == "sourceedit") && this.sourceEditUI) {
             // defer is required for correct temporary focus handling
-            CQ.form.rte.Utils.defer(this.editorKernel.requestSourceEdit, 1,
+            CUI.rte.Utils.defer(this.editorKernel.requestSourceEdit, 1,
                     this.editorKernel, [ this.sourceEditUI.isSelected() ]);
         }
     },
@@ -227,5 +227,5 @@ CQ.form.rte.plugins.MiscToolsPlugin = new Class({
 
 
 // register plugin
-CQ.form.rte.plugins.PluginRegistry.register("misctools",
-        CQ.form.rte.plugins.MiscToolsPlugin);
+CUI.rte.plugins.PluginRegistry.register("misctools",
+        CUI.rte.plugins.MiscToolsPlugin);

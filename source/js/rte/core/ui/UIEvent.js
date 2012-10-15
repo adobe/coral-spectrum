@@ -23,9 +23,9 @@
  * events when it is shown or hidden to inform the editor's core about such actions.
  * The editor core then dispatches the event to registered listeners - allowing
  * other plugins to react on events triggered by an originating plugin.</p>
- * @type CQ.form.rte.ui.UIEvent
+ * @type CUI.rte.ui.UIEvent
  */
-CQ.form.rte.ui.UIEvent = new Class({
+CUI.rte.ui.UIEvent = new Class({
 
     toString: "UIEvent",
 
@@ -45,14 +45,14 @@ CQ.form.rte.ui.UIEvent = new Class({
     /**
      * Creates a new UI-related event.
      * @param {String} type The event type
-     * @param {CQ.form.rte.EditContext} editContext The edit context
+     * @param {CUI.rte.EditContext} editContext The edit context
      * @param {Object} params The parameters (content is dependent on the event type)
      */
     construct: function(type, editContext, params) {
         params = params || { };
         this.type = type;
         this.editContext = editContext;
-        CQ.form.rte.Utils.apply(this, params);
+        CUI.rte.Utils.apply(this, params);
     },
 
     /**

@@ -17,15 +17,15 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.ui.TbParaFormatter
- * @extends CQ.form.rte.ui.TbElement
+ * @class CUI.rte.ui.TbParaFormatter
+ * @extends CUI.rte.ui.TbElement
  * @private
  * This class represents a paragraph formatter element for use in
- * {@link CQ.form.rte.ui.ToolbarBuilder}.
+ * {@link CUI.rte.ui.ToolbarBuilder}.
  */
-CQ.form.rte.ui.TbParaFormatter = new Class({
+CUI.rte.ui.TbParaFormatter = new Class({
 
-    extend: CQ.form.rte.ui.TbElement,
+    extend: CUI.rte.ui.TbElement,
 
     formatSelector: null,
 
@@ -41,7 +41,7 @@ CQ.form.rte.ui.TbParaFormatter = new Class({
     },
 
     getToolbar: function() {
-        return CQ.form.rte.ui.ToolbarBuilder.STYLE_TOOLBAR;
+        return CUI.rte.ui.ToolbarBuilder.STYLE_TOOLBAR;
     },
 
     initializeSelector: function() {

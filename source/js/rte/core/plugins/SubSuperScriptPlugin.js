@@ -17,8 +17,8 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.plugins.SubSuperScriptPlugin
- * @extends CQ.form.rte.plugins.Plugin
+ * @class CUI.rte.plugins.SubSuperScriptPlugin
+ * @extends CUI.rte.plugins.Plugin
  * <p>This class implements sub- and superscript as a plugin.</p>
  * <p>The plugin ID is "<b>subsuperscript</b>".</p>
  * <p><b>Features</b></p>
@@ -28,11 +28,11 @@
  *     </li>
  * </ul>
  */
-CQ.form.rte.plugins.SubSuperScriptPlugin = new Class({
+CUI.rte.plugins.SubSuperScriptPlugin = new Class({
 
     toString: "SubSuperScriptPlugin",
 
-    extend: CQ.form.rte.plugins.Plugin,
+    extend: CUI.rte.plugins.Plugin,
 
     /**
      * @private
@@ -50,8 +50,8 @@ CQ.form.rte.plugins.SubSuperScriptPlugin = new Class({
     },
 
     initializeUI: function(tbGenerator) {
-        var plg = CQ.form.rte.plugins;
-        var ui = CQ.form.rte.ui;
+        var plg = CUI.rte.plugins;
+        var ui = CUI.rte.ui;
         if (this.isFeatureEnabled("subscript")) {
             this.subscriptUI = tbGenerator.createElement("subscript", this, true,
                     this.getTooltip("subscript"));
@@ -105,5 +105,5 @@ CQ.form.rte.plugins.SubSuperScriptPlugin = new Class({
 
 
 // register plugin
-CQ.form.rte.plugins.PluginRegistry.register("subsuperscript",
-        CQ.form.rte.plugins.SubSuperScriptPlugin);
+CUI.rte.plugins.PluginRegistry.register("subsuperscript",
+        CUI.rte.plugins.SubSuperScriptPlugin);

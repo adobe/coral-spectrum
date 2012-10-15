@@ -17,14 +17,14 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.ui.ext.CmSeparatorImpl
+ * @class CUI.rte.ui.ext.CmSeparatorImpl
  * @private
  */
-CQ.form.rte.ui.cui.CmSeparatorImpl = new Class({
+CUI.rte.ui.cui.CmSeparatorImpl = new Class({
 
     toString: "CmSeparatorImpl",
 
-    extend: CQ.form.rte.ui.CmSeparator,
+    extend: CUI.rte.ui.CmSeparator,
 
     build: function(items) {
         // TODO implement

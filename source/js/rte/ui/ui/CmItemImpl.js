@@ -17,14 +17,14 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.ui.cui.CmItemImpl
+ * @class CUI.rte.ui.cui.CmItemImpl
  * @private
  */
-CQ.form.rte.ui.cui.CmItemImpl = new Class({
+CUI.rte.ui.cui.CmItemImpl = new Class({
 
     toString: "CmItemImpl",
 
-    extend: CQ.form.rte.ui.CmItem,
+    extend: CUI.rte.ui.CmItem,
 
     /**
      * @cfg {Object} text Descriptive text for the context menu item
@@ -52,7 +52,7 @@ CQ.form.rte.ui.cui.CmItemImpl = new Class({
 
     /**
      * The edit context to be used
-     * @type CQ.form.rte.EditContext
+     * @type CUI.rte.EditContext
      * @private
      */
     editContext: null,
@@ -74,11 +74,11 @@ CQ.form.rte.ui.cui.CmItemImpl = new Class({
         if (config.subItems) {
             var subCnt = config.subItems.length;
             for (var i = 0; i < subCnt; i++) {
-                this.subItems.push(new CQ.form.rte.ui.ext.CmItemImpl(config.subItems[i]));
+                this.subItems.push(new CUI.rte.ui.ext.CmItemImpl(config.subItems[i]));
             }
             delete config.subItems;
         }
-        this.defaultHandlerFn = CQ.form.rte.Utils.scope(function(comp, evt) {
+        this.defaultHandlerFn = CUI.rte.Utils.scope(function(comp, evt) {
             evt.stopEvent();
             var envOptions = {
                 "selectionContext": this.selectionContext,
@@ -95,7 +95,7 @@ CQ.form.rte.ui.cui.CmItemImpl = new Class({
                 this.plugin.execute(this.cmd, this.cmdValue, envOptions);
             }
         }, this);
-        CQ.form.rte.Utils.apply(this, config);
+        CUI.rte.Utils.apply(this, config);
     },
 
     build: function(items, editorKernel, editContext, selectionContext) {

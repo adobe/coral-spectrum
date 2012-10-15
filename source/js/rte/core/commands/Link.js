@@ -17,15 +17,15 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.commands.Link
- * @extends CQ.form.rte.commands.Command
+ * @class CUI.rte.commands.Link
+ * @extends CUI.rte.commands.Command
  * @private
  */
-CQ.form.rte.commands.Link = new Class({
+CUI.rte.commands.Link = new Class({
 
     toString: "Link",
 
-    extend: CQ.form.rte.commands.Command,
+    extend: CUI.rte.commands.Command,
 
     /**
      * Creates a styled link from the current selection.
@@ -47,8 +47,8 @@ CQ.form.rte.commands.Link = new Class({
             }
         } else {
             // create new link
-            var sel = CQ.form.rte.Selection;
-            var dpr = CQ.form.rte.DomProcessor;
+            var sel = CUI.rte.Selection;
+            var dpr = CUI.rte.DomProcessor;
             if (execDef.value.trimLinkSelection === true) {
                 var range = sel.getLeadRange(context);
                 range = sel.trimRangeWhitespace(context, range);
@@ -61,7 +61,7 @@ CQ.form.rte.commands.Link = new Class({
             var helperSpan = context.createElement("span");
             helperSpan.innerHTML = "<a href=\"" + url + "\"></a>";
             attributes.href = helperSpan.childNodes[0].href;
-            attributes[CQ.form.rte.Common.HREF_ATTRIB] = url;
+            attributes[CUI.rte.Common.HREF_ATTRIB] = url;
             if (styleName) {
                 attributes.className = styleName;
             }
@@ -74,7 +74,7 @@ CQ.form.rte.commands.Link = new Class({
                 if (attributes.hasOwnProperty(key)) {
                     var attribValue = attributes[key];
                     if ((attribValue == null) || (attribValue.length == 0)
-                            || (attribValue == CQ.form.rte.commands.Link.REMOVE_ATTRIBUTE)) {
+                            || (attribValue == CUI.rte.commands.Link.REMOVE_ATTRIBUTE)) {
                         delete attributes[key];
                     }
                 }
@@ -93,9 +93,9 @@ CQ.form.rte.commands.Link = new Class({
      * @private
      */
     applyLinkProperties: function(dom, url, styleName, target, addAttributes) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         dom.href = url;
-        dom.setAttribute(CQ.form.rte.Common.HREF_ATTRIB, url);
+        dom.setAttribute(CUI.rte.Common.HREF_ATTRIB, url);
         if (target) {
             com.setAttribute(dom, "target", target);
         } else {
@@ -110,7 +110,7 @@ CQ.form.rte.commands.Link = new Class({
             if (addAttributes.hasOwnProperty(attribName)) {
                 var attribValue = addAttributes[attribName];
                 if (attribValue && (attribValue.length > 0)
-                        && (attribValue != CQ.form.rte.commands.Link.REMOVE_ATTRIBUTE)) {
+                        && (attribValue != CUI.rte.commands.Link.REMOVE_ATTRIBUTE)) {
                     com.setAttribute(dom, attribName, attribValue);
                 } else {
                     com.removeAttribute(dom, attribName);
@@ -124,7 +124,7 @@ CQ.form.rte.commands.Link = new Class({
      * @private
      */
     removeLinkFromDom: function(execDef) {
-        var dpr = CQ.form.rte.DomProcessor;
+        var dpr = CUI.rte.DomProcessor;
         var context = execDef.editContext;
         var nodeList = execDef.nodeList;
         var links = [ ];
@@ -140,7 +140,7 @@ CQ.form.rte.commands.Link = new Class({
     },
 
     getProcessingOptions: function() {
-        var cmd = CQ.form.rte.commands.Command;
+        var cmd = CUI.rte.commands.Command;
         return cmd.PO_BOOKMARK | cmd.PO_SELECTION | cmd.PO_NODELIST;
     },
 
@@ -164,8 +164,8 @@ CQ.form.rte.commands.Link = new Class({
 /**
  * Placeholder object for explicitly removing an attribute
  */
-CQ.form.rte.commands.Link.REMOVE_ATTRIBUTE = new Object();
+CUI.rte.commands.Link.REMOVE_ATTRIBUTE = new Object();
 
 
 // register command
-CQ.form.rte.commands.CommandRegistry.register("link", CQ.form.rte.commands.Link);
+CUI.rte.commands.CommandRegistry.register("link", CUI.rte.commands.Link);

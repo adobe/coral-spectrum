@@ -17,8 +17,8 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.plugins.ParagraphFormatPlugin
- * @extends CQ.form.rte.plugins.Plugin
+ * @class CUI.rte.plugins.ParagraphFormatPlugin
+ * @extends CUI.rte.plugins.Plugin
  * <p>This class implements paragraph formats (h1, h2, p, etc.)  as a plugin.</p>
  * <p>The plugin ID is "<b>paraformat</b>".</p>
  * <p><b>Features</b></p>
@@ -27,11 +27,11 @@
  *     scope).</li>
  * </ul>
  */
-CQ.form.rte.plugins.ParagraphFormatPlugin = new Class({
+CUI.rte.plugins.ParagraphFormatPlugin = new Class({
 
     toString: "ParagraphFormatPlugin",
 
-    extend: CQ.form.rte.plugins.Plugin,
+    extend: CUI.rte.plugins.Plugin,
 
     /**
      * @cfg {Object/Object[]} formats
@@ -49,7 +49,7 @@ CQ.form.rte.plugins.ParagraphFormatPlugin = new Class({
      *     The text that represents the paragraph format in the format selector</li>
      * </uL>
      * <p>Note that this configuration only takes effect if the
-     * {@link CQ.form.rte.plugins.ParagraphFormatPlugin "paraformat" plugin} is enabled.
+     * {@link CUI.rte.plugins.ParagraphFormatPlugin "paraformat" plugin} is enabled.
      * Also note that you can't set additional DOM attributes using the "paraformat"
      * plugin.</p>
      * <p>Defaults to:</p>
@@ -104,7 +104,7 @@ CQ.form.rte.plugins.ParagraphFormatPlugin = new Class({
     },
 
     getFormats: function() {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         if (this.cachedFormats == null) {
             this.cachedFormats = this.config.formats || { };
             com.removeJcrData(this.cachedFormats);
@@ -124,8 +124,8 @@ CQ.form.rte.plugins.ParagraphFormatPlugin = new Class({
     },
 
     initializeUI: function(tbGenerator) {
-        var plg = CQ.form.rte.plugins;
-        var ui = CQ.form.rte.ui;
+        var plg = CUI.rte.plugins;
+        var ui = CUI.rte.ui;
         if (this.isFeatureEnabled("paraformat")) {
             this.formatUI = tbGenerator.createParaFormatter("paraformat", this, null,
                     this.getFormats());
@@ -175,8 +175,8 @@ CQ.form.rte.plugins.ParagraphFormatPlugin = new Class({
         if (!this.formatUI) {
             return;
         }
-        var com = CQ.form.rte.Common;
-        var dpr = CQ.form.rte.DomProcessor;
+        var com = CUI.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
         var formatToSelect = null;
         var nodeList = selDef.nodeList;
         var nodeToCheck = nodeList.commonAncestor;
@@ -231,5 +231,5 @@ CQ.form.rte.plugins.ParagraphFormatPlugin = new Class({
 
 
 // register plugin
-CQ.form.rte.plugins.PluginRegistry.register("paraformat",
-        CQ.form.rte.plugins.ParagraphFormatPlugin);
+CUI.rte.plugins.PluginRegistry.register("paraformat",
+        CUI.rte.plugins.ParagraphFormatPlugin);

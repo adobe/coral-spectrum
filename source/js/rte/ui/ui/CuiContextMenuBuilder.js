@@ -16,11 +16,11 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CQ.form.rte.ui.cui.CuiContextMenuBuilder = new Class({
+CUI.rte.ui.cui.CuiContextMenuBuilder = new Class({
 
     toString: "CuiContextMenuBuilder",
 
-    extend: CQ.form.rte.ui.ContextMenuBuilder,
+    extend: CUI.rte.ui.ContextMenuBuilder,
 
     posContainer: null,
 
@@ -31,7 +31,7 @@ CQ.form.rte.ui.cui.CuiContextMenuBuilder = new Class({
     },
 
     build: function(selectionContext, context) {
-        var tk = CQ.form.rte.ui.ToolkitRegistry.get("cui");
+        var tk = CUI.rte.ui.ToolkitRegistry.get("cui");
         this.posContainer = $CQ(document.createElement("div"));
         this.posContainer.css("position", "absolute");
         this.posContainer.css("z-index", "15000");
@@ -53,11 +53,11 @@ CQ.form.rte.ui.cui.CuiContextMenuBuilder = new Class({
     },
 
     createItem: function(config) {
-        return new CQ.form.rte.ui.cui.CmItemImpl(config);
+        return new CUI.rte.ui.cui.CmItemImpl(config);
     },
 
     createSeparator: function() {
-        return new CQ.form.rte.ui.cui.CmSeparatorImpl();
+        return new CUI.rte.ui.cui.CmSeparatorImpl();
     },
 
     showAt: function(x, y) {

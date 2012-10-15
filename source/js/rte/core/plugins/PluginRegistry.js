@@ -17,13 +17,13 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.plugins.PluginRegistry
+ * @class CUI.rte.plugins.PluginRegistry
  * This class is used to manage plugins available for rich text editing. Each plugin has a
  * respective identifier by which it can be referenced.
  * @private
  * @since 5.3
  */
-CQ.form.rte.plugins.PluginRegistry = function() {
+CUI.rte.plugins.PluginRegistry = function() {
 
     var pluginRegistry = { };
 
@@ -33,7 +33,7 @@ CQ.form.rte.plugins.PluginRegistry = function() {
          * Registers the specified class as a rich text editing plugin.
          * @param {String} pluginId The plugin ID
          * @param {Function} cls The plugin class (must implement
-         *        {@link CQ.form.rte.plugins.Plugin})
+         *        {@link CUI.rte.plugins.Plugin})
          */
         register: function(pluginId, cls) {
             pluginRegistry[pluginId] = cls;
@@ -42,9 +42,9 @@ CQ.form.rte.plugins.PluginRegistry = function() {
         /**
          * <p>Creates an associatve array, containing instances of all currently registered
          * plugins.</p>
-         * <p>The created object may be used by a single {@link CQ.form.rte.EditorKernel}
+         * <p>The created object may be used by a single {@link CUI.rte.EditorKernel}
          * instance.</p>
-         * @param {CQ.form.rte.EditorKernel} editorKernel The EditorKernel the plugins are
+         * @param {CUI.rte.EditorKernel} editorKernel The EditorKernel the plugins are
          *        used by
          * @return {Object} Instantiated plugins
          */

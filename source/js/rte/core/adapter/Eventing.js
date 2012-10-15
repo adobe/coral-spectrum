@@ -16,15 +16,15 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CQ.form.rte.Eventing = function() {
+CUI.rte.Eventing = function() {
 
     var handlerMap = [ ];
 
-    return (CQ.form.rte._adapter == "ext" ? {
+    return (CUI.rte._adapter == "ext" ? {
 
         on: function(editContext, obj, eventName, handler, scope, options) {
             var wrapper = function(extEvent) {
-                var evt = new CQ.form.rte.adapter.ExtEvent(extEvent, editContext);
+                var evt = new CUI.rte.adapter.ExtEvent(extEvent, editContext);
                 handler.call(this, evt);
             };
             handlerMap.push({
@@ -61,7 +61,7 @@ CQ.form.rte.Eventing = function() {
                 var delay = (options.buffer ? options.buffer : 0);
                 scope = scope || options.scope || $obj;
                 var wrapper = function(jqEvent) {
-                    var evt = new CQ.form.rte.adapter.JQueryEvent(jqEvent, editContext);
+                    var evt = new CUI.rte.adapter.JQueryEvent(jqEvent, editContext);
                     if (delay > 0) {
                         for (var s = delayed.length - 1; s >= 0; s--) {
                             var toCheck = delayed[s];

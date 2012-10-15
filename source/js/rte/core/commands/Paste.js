@@ -17,35 +17,35 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.commands.Paste
- * @extends CQ.form.rte.commands.Command
+ * @class CUI.rte.commands.Paste
+ * @extends CUI.rte.commands.Command
  * @private
  */
-CQ.form.rte.commands.Paste = new Class({
+CUI.rte.commands.Paste = new Class({
 
     toString: "Paste",
 
-    extend: CQ.form.rte.commands.Command,
+    extend: CUI.rte.commands.Command,
 
     /**
      * Pre-processing module (DOM-based)
      * @private
-     * @type CQ.form.rte.DomCleanup
+     * @type CUI.rte.DomCleanup
      */
     domPreProcessor: null,
 
     construct: function() {
-        this.domPreProcessor = new CQ.form.rte.DomCleanup({
+        this.domPreProcessor = new CUI.rte.DomCleanup({
             "tagsToRemove": [ "font" ]
         });
     },
 
     pasteAsPlainText: function(execDef) {
 
-        var hpr = CQ.form.rte.HtmlProcessor;
-        var dpr = CQ.form.rte.DomProcessor;
-        var sel = CQ.form.rte.Selection;
-        var com = CQ.form.rte.Common;
+        var hpr = CUI.rte.HtmlProcessor;
+        var dpr = CUI.rte.DomProcessor;
+        var sel = CUI.rte.Selection;
+        var com = CUI.rte.Common;
 
         var html = execDef.value.html;
         var text = execDef.value.text;
@@ -59,8 +59,8 @@ CQ.form.rte.commands.Paste = new Class({
             plainText = (new hpr.StripTags()).strip(html);
             plainText = hpr.stripSurroundingWhitespace(plainText, true);
             if (execDef.value.stripHtmlTags) {
-                plainText = CQ.form.rte.Utils.htmlDecode(plainText);
-                plainText = CQ.form.rte.Utils.stripTags(plainText);
+                plainText = CUI.rte.Utils.htmlDecode(plainText);
+                plainText = CUI.rte.Utils.stripTags(plainText);
             }
         }
 
@@ -147,14 +147,14 @@ CQ.form.rte.commands.Paste = new Class({
     /**
      * Cleans up DOM by adjusting the DOM structure (remove unnecessary whitespace,
      * correcting list nesting, removing invalid tags, etc.).
-     * @param {CQ.form.rte.EditContext} context The edit context
-     * @param {CQ.form.rte.EditorKernel} editorKernel The editor kernel
+     * @param {CUI.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditorKernel} editorKernel The editor kernel
      * @param {HTMLElement} dom Root node to clean up
      * @param {Object} pasteRules The paste rules, as configured through the plugin
      * @private
      */
     cleanUpDom: function(context, editorKernel, dom, pasteRules) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var pasteRemovalRules = [ {
                 // extended additional cleanup for paste
                 "fn": function(dom) {
@@ -184,7 +184,7 @@ CQ.form.rte.commands.Paste = new Class({
                 "keepChildren": true
             }
         ];
-        CQ.form.rte.WhitespaceProcessor.process(context, dom, pasteRemovalRules, false);
+        CUI.rte.WhitespaceProcessor.process(context, dom, pasteRemovalRules, false);
         this.domPreProcessor.prepareHtmlPaste(editorKernel, dom, pasteRules);
     },
 
@@ -194,7 +194,7 @@ CQ.form.rte.commands.Paste = new Class({
      * @private
      */
     pasteTableToTable: function(execDef) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var context = execDef.editContext;
         var html;
         var pastedDom = execDef.value.dom;
@@ -207,10 +207,10 @@ CQ.form.rte.commands.Paste = new Class({
         var selection = execDef.selection;
         var nodeList = execDef.nodeList;
         var destTable = com.getTagInPath(context, nodeList.commonAncestor, "table");
-        var pasteMatrix = new CQ.form.rte.TableMatrix();
+        var pasteMatrix = new CUI.rte.TableMatrix();
         pasteMatrix.createTableMatrix(pastedTable[0]);
         pasteMatrix.createFullMatrix();
-        var destMatrix = new CQ.form.rte.TableMatrix();
+        var destMatrix = new CUI.rte.TableMatrix();
         destMatrix.createTableMatrix(destTable);
         var selectedCell = null;
         var cells = null;
@@ -279,7 +279,7 @@ CQ.form.rte.commands.Paste = new Class({
                         // as dynamic table handling is completely screwed up in IE, we'll
                         // have to do it the hard way here ...
                         helperSpan.innerHTML = "<table><tr><td></td></tr></table>";
-                        var tdDom = CQ.form.rte.Query.selectNode("td:first", helperSpan);
+                        var tdDom = CUI.rte.Query.selectNode("td:first", helperSpan);
                         var trDom = tdDom.parentNode;
                         com.replaceNode(tdDom, cellDom);
                         html = trDom.innerHTML;
@@ -289,7 +289,7 @@ CQ.form.rte.commands.Paste = new Class({
                         if (com.ua.isIE) {
                             com.removeAllChildren(helperSpan);
                             helperSpan.innerHTML = "<table><tr>" + html + "</tr></table>";
-                            trDom = CQ.form.rte.Query.selectNode("tr:first", helperSpan);
+                            trDom = CUI.rte.Query.selectNode("tr:first", helperSpan);
                         } else {
                             trDom.innerHTML = html;
                         }
@@ -338,7 +338,7 @@ CQ.form.rte.commands.Paste = new Class({
      */
     // todo move to DomCleanup?
     preprocessDiv: function(divDom) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var c, divChildCnt, divChild;
         // recurse first
         divChildCnt = divDom.childNodes.length;
@@ -380,9 +380,9 @@ CQ.form.rte.commands.Paste = new Class({
     },
 
     insertInExistingNode: function(context, insertDef, insertParent) {
-        var com = CQ.form.rte.Common;
-        var dpr = CQ.form.rte.DomProcessor;
-        var sel = CQ.form.rte.Selection;
+        var com = CUI.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
+        var sel = CUI.rte.Selection;
         var insertNode = insertDef.startNode;
         var insertOffset = insertDef.startOffset;
         // we can't use insert node and offset if we are pointing behind the end of a
@@ -465,14 +465,14 @@ CQ.form.rte.commands.Paste = new Class({
         var def = dpr.removeDuplicateStructures(context, insertChildren[0], dupCheckEnd);
         return {
             "startNode": def.endNode,
-            "startOffset": CQ.form.rte.Selection.getLastSelectionOffset(context,
+            "startOffset": CUI.rte.Selection.getLastSelectionOffset(context,
                     def.endNode, false)
         };
     },
 
     insertAsSingleLine: function(context, insertDef, insertParent) {
-        var com = CQ.form.rte.Common;
-        var dpr = CQ.form.rte.DomProcessor;
+        var com = CUI.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
         var emptyBlock = dpr.getEmptyLine(context, insertDef);
         if (emptyBlock != null) {
             // this one is easy: simply replace the empty block
@@ -489,7 +489,7 @@ CQ.form.rte.commands.Paste = new Class({
 
     // todo move to DomCleanup?
     ensureBlockStructure: function(context, dom) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var children = dom.childNodes;
         var childCnt = children.length;
         for (var c = childCnt - 1; c >= 0; c--) {
@@ -516,7 +516,7 @@ CQ.form.rte.commands.Paste = new Class({
     },
 
     preprocessPastedDom: function(editorKernel, pastedDom, pasteRules) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var context = editorKernel.getEditContext();
         // preprocess: ensure correct top-level DOM structure of pasted content
         var childCnt = pastedDom.childNodes.length;
@@ -534,9 +534,9 @@ CQ.form.rte.commands.Paste = new Class({
     },
 
     splitExistingNode: function(context, node, offset) {
-        var com = CQ.form.rte.Common;
-        var dpr = CQ.form.rte.DomProcessor;
-        var sel = CQ.form.rte.Selection;
+        var com = CUI.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
+        var sel = CUI.rte.Selection;
         // handle begin and end of editing block correctly (must not split there)
         var editBlock = com.getTagInPath(context, node, com.EDITBLOCK_TAGS);
         if (!editBlock) {
@@ -585,10 +585,10 @@ CQ.form.rte.commands.Paste = new Class({
      */
     insertHtml: function(execDef) {
 
-        var dpr = CQ.form.rte.DomProcessor;
-        var sel = CQ.form.rte.Selection;
-        var com = CQ.form.rte.Common;
-        var atomicBlocks = CQ.form.rte.commands.Paste.ATOMIC_PROCESSING_BLOCKS;
+        var dpr = CUI.rte.DomProcessor;
+        var sel = CUI.rte.Selection;
+        var com = CUI.rte.Common;
+        var atomicBlocks = CUI.rte.commands.Paste.ATOMIC_PROCESSING_BLOCKS;
 
         var context = execDef.editContext;
         var pastedDom = execDef.value.dom;
@@ -795,8 +795,8 @@ CQ.form.rte.commands.Paste = new Class({
      */
     pasteAsWordHtml: function(execDef) {
 
-        var sel = CQ.form.rte.Selection;
-        var com = CQ.form.rte.Common;
+        var sel = CUI.rte.Selection;
+        var com = CUI.rte.Common;
 
         var context = execDef.editContext;
 
@@ -845,7 +845,7 @@ CQ.form.rte.commands.Paste = new Class({
         // <h1>Heading</h1><p>Paragraph</p>. Select all. Paste something like <p>para1</p>
         // <p>para2</p>. This will unexpectedly result in <h1><p>para1</p><p>para2</p></h1>.
         // todo check: this should not be necessary anymore, as paste implementation has changed and should handle this differently
-        // CQ.form.rte.DomProcessor.cleanupNestedBlocks(context.root);
+        // CUI.rte.DomProcessor.cleanupNestedBlocks(context.root);
         execDef.bookmark = bookmark;
     },
 
@@ -856,16 +856,16 @@ CQ.form.rte.commands.Paste = new Class({
     },
 
     getProcessingOptions: function() {
-        var cmd = CQ.form.rte.commands.Command;
+        var cmd = CUI.rte.commands.Command;
         return cmd.PO_BOOKMARK;
     },
 
     execute: function(execDef) {
 
-        var com = CQ.form.rte.Common;
-        var sel = CQ.form.rte.Selection;
-        var dpr = CQ.form.rte.DomProcessor;
-        var pcmd = CQ.form.rte.commands.Paste;
+        var com = CUI.rte.Common;
+        var sel = CUI.rte.Selection;
+        var dpr = CUI.rte.DomProcessor;
+        var pcmd = CUI.rte.commands.Paste;
         var context = execDef.editContext;
         var value = execDef.value;
         var mode = value.mode;
@@ -891,7 +891,7 @@ CQ.form.rte.commands.Paste = new Class({
                 var pSel = execDef.component.createQualifiedSelection(context);
                 var cells = (pSel.cellSelection ? pSel.cellSelection.cells : undefined);
                 if (!cells || cells.length == 0) {
-                    CQ.form.rte.commands.Delete.executeDelete(context);
+                    CUI.rte.commands.Delete.executeDelete(context);
                 } else {
                     for (var c = 0; c < cells.length; c++) {
                         var cell = cells[c];
@@ -952,23 +952,23 @@ CQ.form.rte.commands.Paste = new Class({
  * Paste mode: use browser's paste implementation (should usually not be used, as this may
  * introduce unwanted markup)
  */
-CQ.form.rte.commands.Paste.MODE_BROWSER = "browser";
+CUI.rte.commands.Paste.MODE_BROWSER = "browser";
 
 /**
  * Paste mode: plain text inserts
  */
-CQ.form.rte.commands.Paste.MODE_PLAINTEXT = "plaintext";
+CUI.rte.commands.Paste.MODE_PLAINTEXT = "plaintext";
 
 /**
  * Paste mode: Word-compatible HTML inserting
  */
-CQ.form.rte.commands.Paste.MODE_WORDHTML = "wordhtml";
+CUI.rte.commands.Paste.MODE_WORDHTML = "wordhtml";
 
 /**
  * Block nodes that require atomic pasting
  */
-CQ.form.rte.commands.Paste.ATOMIC_PROCESSING_BLOCKS = [ "table", "ul", "ol" ];
+CUI.rte.commands.Paste.ATOMIC_PROCESSING_BLOCKS = [ "table", "ul", "ol" ];
 
 
 // register command
-CQ.form.rte.commands.CommandRegistry.register("paste", CQ.form.rte.commands.Paste);
+CUI.rte.commands.CommandRegistry.register("paste", CUI.rte.commands.Paste);

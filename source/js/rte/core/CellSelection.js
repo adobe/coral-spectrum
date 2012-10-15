@@ -17,22 +17,22 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.CellSelection
+ * @class CUI.rte.CellSelection
  * @private
  * This class represents a cell-based table selection as used internally by the table
  * plugin.
  * @constructor
- * @param {CQ.form.rte.TableMatrix} tableMatrix Table matrix that underlies the
+ * @param {CUI.rte.TableMatrix} tableMatrix Table matrix that underlies the
  *        selection
  */
-CQ.form.rte.CellSelection = new Class({
+CUI.rte.CellSelection = new Class({
 
     toString: "CellSelection",
 
     /**
      * The table matrix the selection has been created from
      * @private
-     * @type CQ.form.rte.TableMatrix
+     * @type CUI.rte.TableMatrix
      */
     tableMatrix: null,
 
@@ -61,7 +61,7 @@ CQ.form.rte.CellSelection = new Class({
     /**
      * Adds the cell specified by its cell definition to the current selection.
      * @param {Object} cellDef cell definition (as used/created by various mathods of
-     *        {@link CQ.form.rte.TableMatrix})
+     *        {@link CUI.rte.TableMatrix})
      */
     addCell: function(cellDef) {
         this.cells.push(cellDef);
@@ -86,7 +86,7 @@ CQ.form.rte.CellSelection = new Class({
         if (this.tableMatrix.fullMatrix == null) {
             this.tableMatrix.createFullMatrix();
         }
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         // first, add all cells that are really required to expand the selection
         var cellsToAdd = [ ];
         var baseCol = this.selectionProps.minCol;

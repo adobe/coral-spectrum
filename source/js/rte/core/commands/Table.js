@@ -17,8 +17,8 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.commands.Table
- * @extends CQ.form.rte.commands.Command
+ * @class CUI.rte.commands.Table
+ * @extends CUI.rte.commands.Command
  * @private
  * <p>This class implements the RichText commands for creating and editing a table.</p>
  * <p>The following commands are supported (in parantheses: valid command values)</p>
@@ -36,17 +36,17 @@
  *   <li>ensureparagraph (before, after)</li>
  * </ul>
  */
-CQ.form.rte.commands.Table = new Class({
+CUI.rte.commands.Table = new Class({
 
     toString: "Table",
 
-    extend: CQ.form.rte.commands.Command,
+    extend: CUI.rte.commands.Command,
 
     /**
      * @private
      */
     getTable: function(execDef) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var context = execDef.editContext;
         return com.getTagInPath(context, execDef.nodeList.commonAncestor, "table");
     },
@@ -55,15 +55,15 @@ CQ.form.rte.commands.Table = new Class({
      * @private
      */
     createEmptyCell: function(execDef, refNode) {
-       return CQ.form.rte.TableMatrix.createEmptyCell(execDef.editContext, refNode);
+       return CUI.rte.TableMatrix.createEmptyCell(execDef.editContext, refNode);
     },
 
     /**
      * @private
      */
     transferConfigToTable: function(dom, config) {
-        var com = CQ.form.rte.Common;
-        var noneConfig = CQ.form.rte.commands.Table.CONFIG_NONE;
+        var com = CUI.rte.Common;
+        var noneConfig = CUI.rte.commands.Table.CONFIG_NONE;
         if (config.cellpadding) {
             com.setAttribute(dom, "cellpadding", config.cellpadding);
         } else {
@@ -110,9 +110,9 @@ CQ.form.rte.commands.Table = new Class({
      * @private
      */
     createTable: function(execDef) {
-        var dpr = CQ.form.rte.DomProcessor;
-        var sel = CQ.form.rte.Selection;
-        var com = CQ.form.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
+        var sel = CUI.rte.Selection;
+        var com = CUI.rte.Common;
         var context = execDef.editContext;
         var selection = execDef.selection;
         var insertNode = selection.startNode;
@@ -166,7 +166,7 @@ CQ.form.rte.commands.Table = new Class({
             removeDom.parentNode.removeChild(removeDom);
         }
         if (config.html) {
-            var tables = CQ.form.rte.Query.select("table", spanHelperDom);
+            var tables = CUI.rte.Query.select("table", spanHelperDom);
             for (var t = 0; t < tables.length; t++) {
                 if (tables[t].border == 0) {
                     com.addClass(tables[t], CQ.themes.RichText.TABLE_NOBORDER_CLASS);
@@ -211,8 +211,8 @@ CQ.form.rte.commands.Table = new Class({
      * @private
      */
     modifyTable: function(execDef) {
-        var sel = CQ.form.rte.Selection;
-        var com = CQ.form.rte.Common;
+        var sel = CUI.rte.Selection;
+        var com = CUI.rte.Common;
         var table = this.getTable(execDef);
         var config = execDef.value;
         if (table && config) {
@@ -229,9 +229,9 @@ CQ.form.rte.commands.Table = new Class({
      * @private
      */
     removeTable: function(execDef) {
-        var sel = CQ.form.rte.Selection;
-        var com = CQ.form.rte.Common;
-        var dpr = CQ.form.rte.DomProcessor;
+        var sel = CUI.rte.Selection;
+        var com = CUI.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
         var context = execDef.editContext;
         var table = this.getTable(execDef);
         if (table) {
@@ -260,7 +260,7 @@ CQ.form.rte.commands.Table = new Class({
      * @private
      */
     getTableBody: function(execDef) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var table = this.getTable(execDef);
         var rows = com.getChildNodesByType(table, "tr", true);
         if (rows.length > 0) {
@@ -277,14 +277,14 @@ CQ.form.rte.commands.Table = new Class({
      * @private
      */
     isEmptyCell: function(cellDom) {
-        return CQ.form.rte.DomProcessor.isEmptyLineBlock(cellDom);
+        return CUI.rte.DomProcessor.isEmptyLineBlock(cellDom);
     },
 
     /**
      * @private
      */
     getSelectedRows: function(execDef) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var context = execDef.editContext;
         return execDef.nodeList.getTags(context, [{
                 "matcher": function(dom) {
@@ -301,7 +301,7 @@ CQ.form.rte.commands.Table = new Class({
      */
     getEntireRowForCell: function(execDef, cell) {
         var tableDom = this.getTable(execDef);
-        var tableMatrix = new CQ.form.rte.TableMatrix();
+        var tableMatrix = new CUI.rte.TableMatrix();
         tableMatrix.createTableMatrix(tableDom);
         var cellDef = tableMatrix.getCellDef(cell);
         var baseRow = cellDef.row;
@@ -330,7 +330,7 @@ CQ.form.rte.commands.Table = new Class({
      */
     getEntireColumnForCell: function(execDef, cell) {
         var tableDom = this.getTable(execDef);
-        var tableMatrix = new CQ.form.rte.TableMatrix();
+        var tableMatrix = new CUI.rte.TableMatrix();
         tableMatrix.createTableMatrix(tableDom);
         var cellDef = tableMatrix.getCellDef(cell);
         var baseColumn = cellDef.col;
@@ -355,7 +355,7 @@ CQ.form.rte.commands.Table = new Class({
      * @private
      */
     insertRow: function(execDef, insertBefore, caretPosition) {
-        var sel = CQ.form.rte.Selection;
+        var sel = CUI.rte.Selection;
         var context = execDef.editContext;
         var rows = this.getSelectedRows(execDef);
         if (rows.length == 1) {
@@ -364,7 +364,7 @@ CQ.form.rte.commands.Table = new Class({
             }
             var cells = this.getSelectedCells(execDef);
             var tableDom = this.getTable(execDef);
-            var tableMatrix = new CQ.form.rte.TableMatrix();
+            var tableMatrix = new CUI.rte.TableMatrix();
             tableMatrix.createTableMatrix(tableDom);
             var refCellDef = tableMatrix.getCellDef(cells[0].dom);
             var refRow = (insertBefore ? refCellDef.row
@@ -430,13 +430,13 @@ CQ.form.rte.commands.Table = new Class({
      * @private
      */
     removeRow: function(execDef) {
-        var sel = CQ.form.rte.Selection;
-        var dpr = CQ.form.rte.DomProcessor;
+        var sel = CUI.rte.Selection;
+        var dpr = CUI.rte.DomProcessor;
         var context = execDef.editContext;
         var table = this.getTable(execDef);
         var rows = this.getSelectedRows(execDef);
         if (rows.length == 1) {
-            var tableMatrix = new CQ.form.rte.TableMatrix();
+            var tableMatrix = new CUI.rte.TableMatrix();
             tableMatrix.createTableMatrix(table);
             var tableSize = tableMatrix.getTableSize();
             if (tableSize.rows == 1) {
@@ -525,7 +525,7 @@ CQ.form.rte.commands.Table = new Class({
             return cellsSelected;
         }
         var nodeList = execDef.nodeList;
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var isTableFound = false;
         return nodeList.getTags(context, [{
                 "matcher": function(dom) {
@@ -545,12 +545,12 @@ CQ.form.rte.commands.Table = new Class({
      * @private
      */
     insertCol: function(execDef, insertBefore) {
-        var sel = CQ.form.rte.Selection;
+        var sel = CUI.rte.Selection;
         var context = execDef.editContext;
         var cells = this.getSelectedCells(execDef);
         if (cells.length == 1) {
             var tableDom = this.getTable(execDef);
-            var tableMatrix = new CQ.form.rte.TableMatrix();
+            var tableMatrix = new CUI.rte.TableMatrix();
             tableMatrix.createTableMatrix(tableDom);
             var refCellDef = tableMatrix.getCellDef(cells[0].dom);
             var refCol = (insertBefore ? refCellDef.col
@@ -601,13 +601,13 @@ CQ.form.rte.commands.Table = new Class({
      * @private
      */
     removeCol: function(execDef) {
-        var sel = CQ.form.rte.Selection;
-        var dpr = CQ.form.rte.DomProcessor;
+        var sel = CUI.rte.Selection;
+        var dpr = CUI.rte.DomProcessor;
         var context = execDef.editContext;
         var table = this.getTable(execDef);
         var cells = this.getSelectedCells(execDef);
         if (cells.length == 1) {
-            var tableMatrix = new CQ.form.rte.TableMatrix();
+            var tableMatrix = new CUI.rte.TableMatrix();
             tableMatrix.createTableMatrix(table);
             var tableSize = tableMatrix.getTableSize();
             if (tableSize.cols == 1) {
@@ -670,8 +670,8 @@ CQ.form.rte.commands.Table = new Class({
      * @private
      */
     transferConfigToCell: function(context, dom, config) {
-        var com = CQ.form.rte.Common;
-        var noneConfig = CQ.form.rte.commands.Table.CONFIG_NONE;
+        var com = CUI.rte.Common;
+        var noneConfig = CUI.rte.commands.Table.CONFIG_NONE;
         if (config.cellType && (config.cellType != noneConfig)) {
             if (!com.isTag(dom, config.cellType)) {
                 var changedDom = context.createElement(config.cellType);
@@ -718,8 +718,8 @@ CQ.form.rte.commands.Table = new Class({
      * @private
      */
     modifyCell: function(execDef) {
-        var sel = CQ.form.rte.Selection;
-        var com = CQ.form.rte.Common;
+        var sel = CUI.rte.Selection;
+        var com = CUI.rte.Common;
         var context = execDef.editContext;
         var cell = this.getSelectedCells(execDef);
         if (cell.length != 1) {
@@ -758,8 +758,8 @@ CQ.form.rte.commands.Table = new Class({
      * @private
      */
     mergeCells: function(execDef) {
-        var com = CQ.form.rte.Common;
-        var sel = CQ.form.rte.Selection;
+        var com = CUI.rte.Common;
+        var sel = CUI.rte.Selection;
         var context = execDef.editContext;
         var selProps = execDef.value.selectionProps;
         var anchorCell = (selProps ? selProps.anchorCell : null);
@@ -798,7 +798,7 @@ CQ.form.rte.commands.Table = new Class({
                 anchorDom.appendChild(contentNodes[i]);
             }
             // optimize spans & table structure
-            var tableMatrix = new CQ.form.rte.TableMatrix();
+            var tableMatrix = new CUI.rte.TableMatrix();
             tableMatrix.createTableMatrix(table);
             tableMatrix.optimizeSpans();
             // Gecko keeps the table handles drawn, so play around with the
@@ -815,7 +815,7 @@ CQ.form.rte.commands.Table = new Class({
      * @private
      */
     splitCellHorizontally: function(execDef) {
-        var sel = CQ.form.rte.Selection;
+        var sel = CUI.rte.Selection;
         var context = execDef.editContext;
         var table = this.getTable(execDef);
         var cells = this.getSelectedCells(execDef);
@@ -832,7 +832,7 @@ CQ.form.rte.commands.Table = new Class({
             } else {
                 // if the cell to be split has no colspan, increase colspan of all
                 // cells in this cell's column by 1
-                var tableMatrix = new CQ.form.rte.TableMatrix();
+                var tableMatrix = new CUI.rte.TableMatrix();
                 tableMatrix.createTableMatrix(table);
                 tableMatrix.createFullMatrix();
                 var cellDef = tableMatrix.getCellDef(cell);
@@ -860,7 +860,7 @@ CQ.form.rte.commands.Table = new Class({
      * @private
      */
     splitCellVertically: function(execDef) {
-        var sel = CQ.form.rte.Selection;
+        var sel = CUI.rte.Selection;
         var context = execDef.editContext;
         var table = this.getTable(execDef);
         var cells = this.getSelectedCells(execDef);
@@ -870,7 +870,7 @@ CQ.form.rte.commands.Table = new Class({
             if (cell.colSpan && cell.colSpan > 1) {
                 newCell.colSpan = cell.colSpan;
             }
-            var tableMatrix = new CQ.form.rte.TableMatrix();
+            var tableMatrix = new CUI.rte.TableMatrix();
             tableMatrix.createTableMatrix(table);
             tableMatrix.createFullMatrix();
             var cellDef = tableMatrix.getCellDef(cell);
@@ -911,9 +911,9 @@ CQ.form.rte.commands.Table = new Class({
     },
 
     ensureParagraph: function(execDef, ensureBefore) {
-        var dpr = CQ.form.rte.DomProcessor;
-        var com = CQ.form.rte.Common;
-        var sel = CQ.form.rte.Selection;
+        var dpr = CUI.rte.DomProcessor;
+        var com = CUI.rte.Common;
+        var sel = CUI.rte.Selection;
         var context = execDef.editContext;
         var insertNode = null;
         var tableDom = this.getTable(execDef);
@@ -945,7 +945,7 @@ CQ.form.rte.commands.Table = new Class({
      * @private
      */
     isCommand: function(cmdStr) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var cmdLC = cmdStr.toLowerCase();
         return com.strEndsWith(cmdLC, "table") || com.strEndsWith(cmdLC, "column")
                 || com.strEndsWith(cmdLC, "row") || com.strEndsWith(cmdLC, "cell")
@@ -956,7 +956,7 @@ CQ.form.rte.commands.Table = new Class({
      * @private
      */
     getProcessingOptions: function() {
-        var cmd = CQ.form.rte.commands.Command;
+        var cmd = CUI.rte.commands.Command;
         return cmd.PO_BOOKMARK | cmd.PO_SELECTION | cmd.PO_NODELIST;
     },
 
@@ -1031,12 +1031,12 @@ CQ.form.rte.commands.Table = new Class({
      * @private
      */
     queryState: function(selectionDef, cmd) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var context = selectionDef.editContext;
         if (cmd == "table") {
             return com.getTagInPath(context, selectionDef.nodeList.commonAncestor, "table");
         } else if (cmd == "modifycell") {
-            return CQ.form.rte.commands.Table.getCellFromNodeList(context,
+            return CUI.rte.commands.Table.getCellFromNodeList(context,
                     selectionDef.nodeList);
         }
         // todo find a meaningful implementation for other commands
@@ -1048,13 +1048,13 @@ CQ.form.rte.commands.Table = new Class({
 /**
  * Gets the table cell where the current selection resides from the specified processing
  * selection.
- * @param {CQ.form.rte.EditContext} context The edit context
+ * @param {CUI.rte.EditContext} context The edit context
  * @param {Object} selection The processing selection to get the cell from
  * @return {HTMLElement} The cell corresponding to the processing selection; null if the
  *         selection is not cell-related or spans more than one table cell
  */
-CQ.form.rte.commands.Table.getCellFromSelection = function(context, selection) {
-    var com = CQ.form.rte.Common;
+CUI.rte.commands.Table.getCellFromSelection = function(context, selection) {
+    var com = CUI.rte.Common;
     if (selection.cellSelection && selection.cellSelection.cells) {
         if (selection.cellSelection.cells.length == 1) {
             return selection.cellSelection.cells[0];
@@ -1073,13 +1073,13 @@ CQ.form.rte.commands.Table.getCellFromSelection = function(context, selection) {
 
 /**
  * Gets the table cell that is represented by the specified node list.
- * @param {CQ.form.rte.EditContext} context The edit context
- * @param {CQ.form.rte.NodeList} nodeList The node list to get the cell from
+ * @param {CUI.rte.EditContext} context The edit context
+ * @param {CUI.rte.NodeList} nodeList The node list to get the cell from
  * @return {HTMLElement} The cell corresponding to the node list; null if the
  *         node.list is not cell-related or contains more than one table cell
  */
-CQ.form.rte.commands.Table.getCellFromNodeList = function(context, nodeList) {
-    var com = CQ.form.rte.Common;
+CUI.rte.commands.Table.getCellFromNodeList = function(context, nodeList) {
+    var com = CUI.rte.Common;
     var cell = com.getTagInPath(context, nodeList.commonAncestor, com.TABLE_CELLS);
     // on IE, we might also have a single empty cell node in the list
     if (cell == null) {
@@ -1100,8 +1100,8 @@ CQ.form.rte.commands.Table.getCellFromNodeList = function(context, nodeList) {
  * @final
  * @type Object
  */
-CQ.form.rte.commands.Table.CONFIG_NONE = new Object();
+CUI.rte.commands.Table.CONFIG_NONE = new Object();
 
 
 // register command
-CQ.form.rte.commands.CommandRegistry.register("table", CQ.form.rte.commands.Table);
+CUI.rte.commands.CommandRegistry.register("table", CUI.rte.commands.Table);

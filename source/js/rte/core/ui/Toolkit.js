@@ -18,9 +18,9 @@
 
 /**
  * This class defines the toolkit abstraction layer for the underlying UI toolkit.
- * @class CQ.form.rte.ui.Toolkit
+ * @class CUI.rte.ui.Toolkit
  */
-CQ.form.rte.ui.Toolkit = new Class({
+CUI.rte.ui.Toolkit = new Class({
 
     toString: "Toolkit",
 
@@ -50,6 +50,6 @@ CQ.form.rte.ui.Toolkit = new Class({
 
 });
 
-CQ.form.rte.ui.Toolkit.TBHINT_LOCAL = "local";
+CUI.rte.ui.Toolkit.TBHINT_LOCAL = "local";
 
-CQ.form.rte.ui.Toolkit.TBHINT_GLOBAL = "global";
+CUI.rte.ui.Toolkit.TBHINT_GLOBAL = "global";

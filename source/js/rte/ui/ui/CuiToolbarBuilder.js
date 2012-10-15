@@ -16,11 +16,11 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CQ.form.rte.ui.cui.CuiToolbarBuilder = new Class({
+CUI.rte.ui.cui.CuiToolbarBuilder = new Class({
 
     toString: "CuiToolbarBuilder",
 
-    extend: CQ.form.rte.ui.ToolbarBuilder,
+    extend: CUI.rte.ui.ToolbarBuilder,
 
 
     // Toolbar management ------------------------------------------------------------------
@@ -46,7 +46,7 @@ CQ.form.rte.ui.cui.CuiToolbarBuilder = new Class({
                     var element = groupElements[elIndex].def;
                     var toolbarDef = element.createToolbarDef();
                     if (toolbarDef != null) {
-                        if (!CQ.form.rte.Utils.isArray(toolbarDef)) {
+                        if (!CUI.rte.Utils.isArray(toolbarDef)) {
                             toolbarDef = [ toolbarDef ];
                         }
                         var itemCnt = toolbarDef.length;
@@ -80,24 +80,24 @@ CQ.form.rte.ui.cui.CuiToolbarBuilder = new Class({
         // TODO add toolbar to DOM in a more specific way ...
         $CQ("#CQ .x-html-editor-tb").append(toolbarDiv);
         // $CQ(document.body).append(toolbarDiv);
-        return new CQ.form.rte.ui.cui.ToolbarImpl(toolbarDiv, elementMap);
+        return new CUI.rte.ui.cui.ToolbarImpl(toolbarDiv, elementMap);
     },
 
 
     // Creating elements -------------------------------------------------------------------
 
     createElement: function(id, plugin, toggle, tooltip, css, cmdDef) {
-        return new CQ.form.rte.ui.cui.ElementImpl(id, plugin, toggle, tooltip, css,
+        return new CUI.rte.ui.cui.ElementImpl(id, plugin, toggle, tooltip, css,
                 cmdDef);
     },
 
     createParaFormatter: function(id, plugin, tooltip, formats) {
-        return new CQ.form.rte.ui.cui.ParaFormatterImpl(id, plugin, false, tooltip, false,
+        return new CUI.rte.ui.cui.ParaFormatterImpl(id, plugin, false, tooltip, false,
                 undefined, formats);
     },
 
     createStyleSelector: function(id, plugin, tooltip, styles) {
-        return new CQ.form.rte.ui.cui.StyleSelectorImpl(id, plugin, false, tooltip, false,
+        return new CUI.rte.ui.cui.StyleSelectorImpl(id, plugin, false, tooltip, false,
                 undefined, styles);
     }
 

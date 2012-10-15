@@ -17,19 +17,19 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.commands.Anchor
- * @extends CQ.form.rte.commands.Command
+ * @class CUI.rte.commands.Anchor
+ * @extends CUI.rte.commands.Command
  * @private
  */
-CQ.form.rte.commands.Anchor = new Class({
+CUI.rte.commands.Anchor = new Class({
 
     toString: "Anchor",
 
-    extend: CQ.form.rte.commands.Command,
+    extend: CUI.rte.commands.Command,
 
     addAnchorToDom: function(execDef) {
-        var com = CQ.form.rte.Common;
-        var dpr = CQ.form.rte.DomProcessor;
+        var com = CUI.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
         var nodeList = execDef.nodeList;
         var name = execDef.value;
         var context = execDef.editContext;
@@ -67,7 +67,7 @@ CQ.form.rte.commands.Anchor = new Class({
      * @private
      */
     applyAnchorProperties: function(dom, name) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         // some browsers may use a substitute, so we'll have to use a special attribute
         // instead
         if (!com.isTag(dom, "a")) {
@@ -79,7 +79,7 @@ CQ.form.rte.commands.Anchor = new Class({
     },
 
     removeAnchorFromDom: function(execDef) {
-        var dpr = CQ.form.rte.DomProcessor;
+        var dpr = CUI.rte.DomProcessor;
         var context = execDef.editContext;
         var nodeList = execDef.nodeList;
         var anchors = [ ];
@@ -95,7 +95,7 @@ CQ.form.rte.commands.Anchor = new Class({
     },
 
     getProcessingOptions: function() {
-        var cmd = CQ.form.rte.commands.Command;
+        var cmd = CUI.rte.commands.Command;
         return cmd.PO_BOOKMARK | cmd.PO_SELECTION | cmd.PO_NODELIST;
     },
 
@@ -114,4 +114,4 @@ CQ.form.rte.commands.Anchor = new Class({
 });
 
 // register command
-CQ.form.rte.commands.CommandRegistry.register("anchor", CQ.form.rte.commands.Anchor);
+CUI.rte.commands.CommandRegistry.register("anchor", CUI.rte.commands.Anchor);

@@ -16,11 +16,11 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CQ.form.rte.ui.cui.ToolkitImpl = new Class({
+CUI.rte.ui.cui.ToolkitImpl = new Class({
 
     toString: "ToolkitImpl",
 
-    extend: CQ.form.rte.ui.Toolkit,
+    extend: CUI.rte.ui.Toolkit,
 
     dropDownCls: null,
 
@@ -35,8 +35,8 @@ CQ.form.rte.ui.cui.ToolkitImpl = new Class({
     },
 
     createToolbarBuilder: function(hint) {
-        var tk = CQ.form.rte.ui.Toolkit;
-        var cui = CQ.form.rte.ui.cui;
+        var tk = CUI.rte.ui.Toolkit;
+        var cui = CUI.rte.ui.cui;
         switch(hint) {
             case tk.TBHINT_LOCAL:
                 return new cui.CuiToolbarBuilder();
@@ -45,7 +45,7 @@ CQ.form.rte.ui.cui.ToolkitImpl = new Class({
     },
 
     createContextMenuBuilder: function(editorKernel) {
-        return new CQ.form.rte.ui.cui.CuiContextMenuBuilder(editorKernel);
+        return new CUI.rte.ui.cui.CuiContextMenuBuilder(editorKernel);
     },
 
 
@@ -61,4 +61,4 @@ CQ.form.rte.ui.cui.ToolkitImpl = new Class({
 
 });
 
-CQ.form.rte.ui.ToolkitRegistry.register("cui", CQ.form.rte.ui.cui.ToolkitImpl);
+CUI.rte.ui.ToolkitRegistry.register("cui", CUI.rte.ui.cui.ToolkitImpl);

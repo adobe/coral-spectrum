@@ -17,7 +17,7 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.Selection
+ * @class CUI.rte.Selection
  * @static
  * @private
  * <p>The RichText.Selection provides utility functions to handle
@@ -34,9 +34,9 @@
  *     present in the DOM at all!</li>
  *   <li>Each character of a text node is counted "as is".</li>
  *   <li>Several structural nodes (such as "br") are counted as a single character. These
- *     node types are defined by {@link CQ.form.rte.Common#ONE_CHARACTER_NODES}.</li>
+ *     node types are defined by {@link CUI.rte.Common#ONE_CHARACTER_NODES}.</li>
  *   <li>At the end of each edit block ("p", "h1", ...), an additional character is added.
- *     Edit blocks are defined by {@link CQ.form.rte.Common#EDITBLOCK_TAGS}.</li>
+ *     Edit blocks are defined by {@link CUI.rte.Common#EDITBLOCK_TAGS}.</li>
  *   <li>Special attention should be put on nested structures: If there are paragraphs
  *     ("p") present in a table cell ("td"/"th"), two character positions are added
  *     after the last paragraph of that cell (one for the closing "p", the other for the
@@ -46,18 +46,18 @@
  *     actually closed over the hierarchy).</li>
  * </ul>
  */
-CQ.form.rte.Selection = function() {
+CUI.rte.Selection = function() {
 
-    var com = CQ.form.rte.Common;
+    var com = CUI.rte.Common;
 
-    var dpr = CQ.form.rte.DomProcessor;
+    var dpr = CUI.rte.DomProcessor;
 
     /**
      * Checks if the specified node definition is directly following up a DOM structure.
      * If so, the node definition is corrected to point behind the last character of that
      * structure (instead of pointing before the first character of the follow-up, which
      * is basically the same position, but described by a differend node/offset combination.
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      * @param {Object} nodeDef Node definition (will be adjusted accordingly)
      */
     var correctToPreviousStructure = function(context, nodeDef) {
@@ -97,7 +97,7 @@ CQ.form.rte.Selection = function() {
      * This format is required by Gecko/Webkit to correctly handle selection on structural
      * nodes, such as "br" (which are handled as characters, but actually are structural
      * nodes).
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      * @param {Object} nodeDef Node definition (will be adjusted accordingly)
      */
     var adjustNodeAndOffsetToParent = function(context, nodeDef) {
@@ -170,7 +170,7 @@ CQ.form.rte.Selection = function() {
      * necessary.
      */
     var mapToCharNodeEquiv = function(context, node, offset, isEndOfSelection) {
-        var sel = CQ.form.rte.Selection;
+        var sel = CUI.rte.Selection;
         if (node == null) {
             return null;
         }
@@ -258,14 +258,14 @@ CQ.form.rte.Selection = function() {
         },
 
         bookmarkFromProcessingSelection: function(context, selection) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             selection = {
                 "startNode": selection.startNode,
                 "startOffset": selection.startOffset,
                 "endNode": selection.endNode,
                 "endOffset": selection.endOffset
             };
-            CQ.form.rte.Selection.normalizeProcessingSelection(context, selection);
+            CUI.rte.Selection.normalizeProcessingSelection(context, selection);
             var startPos = com.getCharacterOffsetForNode(context, selection.startNode);
             if (com.isOneCharacterNode(selection.startNode)) {
                 if ((selection.startOffset != null) && (selection.startOffset === 0)) {
@@ -297,9 +297,9 @@ CQ.form.rte.Selection = function() {
         /**
          * Compares the specified bookmarks.
          * @param {Object} bookmark1 First bookmark to compare (as created by
-         *        {@link CQ.form.rte.Selection#createSelectionBookmark})
+         *        {@link CUI.rte.Selection#createSelectionBookmark})
          * @param {Object} bookmark2 Second bookmark to compare (as created by
-         *        {@link CQ.form.rte.Selection#createSelectionBookmark})
+         *        {@link CUI.rte.Selection#createSelectionBookmark})
          */
         compareBookmarks: function(bookmark1, bookmark2) {
             if (bookmark1 == null) {
@@ -321,7 +321,7 @@ CQ.form.rte.Selection = function() {
             if (dom.nodeType != 1) {
                 return false;
             }
-            var lineDelimiters = CQ.form.rte.Selection.LINE_DELIMITING_TAGS;
+            var lineDelimiters = CUI.rte.Selection.LINE_DELIMITING_TAGS;
             var lineDelTagCnt = lineDelimiters.length;
             var tagName = dom.tagName.toLowerCase();
             for (var tagIndex = 0; tagIndex < lineDelTagCnt; tagIndex++) {
@@ -338,7 +338,7 @@ CQ.form.rte.Selection = function() {
         getLineDelimiter: function(context, dom) {
             while (dom) {
                 if (dom.nodeType == 1) {
-                    if (CQ.form.rte.Selection.isLineDelimiter(dom)) {
+                    if (CUI.rte.Selection.isLineDelimiter(dom)) {
                         return dom;
                     }
                 }
@@ -353,11 +353,11 @@ CQ.form.rte.Selection = function() {
          * is not actually included in the selection, this method is required if you need
          * a hold on the last item that is actually included in the selection.</p>
          * @param {Object} selection The selection as created by
-         *        {@link CQ.form.rte.Selection#createProcessingSelection}
+         *        {@link CUI.rte.Selection#createProcessingSelection}
          * @return {Object} The adapted selections
          */
         adaptToInclusiveEndNode: function(context, selection) {
-            var sel = CQ.form.rte.Selection;
+            var sel = CUI.rte.Selection;
             var adapted = {
                 startNode: selection.startNode,
                 startOffset: selection.startOffset
@@ -465,12 +465,12 @@ CQ.form.rte.Selection = function() {
          * <p>Multiline selections are handled correctly. Note that the trailing linefeed
          * (&lt;br&gt;) is included in the selection and has to be handled by the calling
          * method.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {Object} selection The selection to be expanded
          */
         expandToLineBorders: function(context, selection) {
-            var isLineDelimiter = CQ.form.rte.Selection.isLineDelimiter;
-            var getLineDelimiter = CQ.form.rte.Selection.getLineDelimiter;
+            var isLineDelimiter = CUI.rte.Selection.isLineDelimiter;
+            var getLineDelimiter = CUI.rte.Selection.getLineDelimiter;
             var prevNode, tagNameLC;
             var startNode = selection.startNode;
             var endNode = selection.endNode;
@@ -567,7 +567,7 @@ CQ.form.rte.Selection = function() {
             if (node.nodeType == 3) {
                 return false;
             }
-            var tagList = CQ.form.rte.Selection.NO_INSERT_TAGS;
+            var tagList = CUI.rte.Selection.NO_INSERT_TAGS;
             for (var i = 0; i < tagList.length; i++) {
                 var isMatching = com.matchesTagDef(node, tagList[i]);
                 if (isMatching) {
@@ -584,7 +584,7 @@ CQ.form.rte.Selection = function() {
          * is selected or the selection currently represents the caret. Note that this
          * method returns true if table cells are selected.</p>
          * @param {Object} selection The processing selection to be analyzed (as created by
-         *        {@link CQ.form.rte.Selection#createProcessingSelection})
+         *        {@link CUI.rte.Selection#createProcessingSelection})
          * @return {Boolean} True if the specified processing selection represents an
          *         actual text selection as described above
          */
@@ -598,7 +598,7 @@ CQ.form.rte.Selection = function() {
          * <p>Note that this method only returns a valid DOM object if it is the only
          * selected object and no text selection exists.</p>
          * @param {Object} selection The processing selection to be analyzed (as created by
-         *        {@link CQ.form.rte.Selection#createProcessingSelection})
+         *        {@link CUI.rte.Selection#createProcessingSelection})
          * @return {HTMLElement} The solely selected DOM element; null if there is no such
          *         element selected
          */
@@ -614,7 +614,7 @@ CQ.form.rte.Selection = function() {
         /**
          * <p>Gets the first possible selectable offset for the specified node.</p>
          * <p>This is 0 for a text node and null for structural nodes.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} node The node to check
          * @return {Number} The last possible selection offset for the specified node
          */
@@ -626,7 +626,7 @@ CQ.form.rte.Selection = function() {
          * <p>Gets the last possible selectable offset for the specified node.</p>
          * <p>This is the length of a text node, null for structural nodes, 0 for
          * structural nodes that are representing a character (img, a name, br).</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} node The node to check
          * @param {Boolean} isEndOfSelection (optional) True if the last selection offset
          *        for the end of a selection should be determined. Due to limitations in a
@@ -653,15 +653,15 @@ CQ.form.rte.Selection = function() {
 
         /**
          * <p>Checks if the selection should be normalized before it is used for creating a
-         * {@link CQ.form.rte.NodeList}).</p>
+         * {@link CUI.rte.NodeList}).</p>
          * <p>A selection should be normalized if it represents a selection rather than
          * a caret and in some corner cases even if it is representing a caret (for example,
          * if it points behind a "br").</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {Object} selection The processing selection to check
          */
         shouldNormalizePSelForNodeList: function(context, selection) {
-            var sel = CQ.form.rte.Selection;
+            var sel = CUI.rte.Selection;
             if (sel.isSelection(selection)) {
                 return true;
             }
@@ -693,11 +693,11 @@ CQ.form.rte.Selection = function() {
          * <p>A selection should be normalized if it represents a selection rather than
          * a caret and in some corner cases even if it is representing a caret (for example,
          * if it represents an EOB/EOT situation).</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {Object} selection The processing selection to check
          */
         shouldNormalizePSel: function(context, selection) {
-            if (CQ.form.rte.Selection.isSelection(selection)) {
+            if (CUI.rte.Selection.isSelection(selection)) {
                 return true;
             }
             var startNode = selection.startNode;
@@ -712,12 +712,12 @@ CQ.form.rte.Selection = function() {
          * <p>Normalizes the specified processing selection as far as possible.</p>
          * <p>It is ensured that start and end node both point to character nodes as far
          * as it is somehow possible.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {Object} selection The processing selection to be normalized (will be
          *        modified directly)
          */
         normalizeProcessingSelection: function(context, selection) {
-            var sel = CQ.form.rte.Selection;
+            var sel = CUI.rte.Selection;
             var startNode = selection.startNode;
             var startOffset = selection.startOffset;
             var endNode = selection.endNode;
@@ -801,7 +801,7 @@ CQ.form.rte.Selection = function() {
     };
 
     // create browser specific variant of the helper class
-    return CQ.form.rte.Utils.apply(sharedProps, com.ua.isOldIE ? {
+    return CUI.rte.Utils.apply(sharedProps, com.ua.isOldIE ? {
 
         /**
          * @private
@@ -873,7 +873,7 @@ CQ.form.rte.Selection = function() {
          * @private
          */
         setRangePosition: function(context, charPos, ensureEndPoint) {
-            var sel = CQ.form.rte.Selection;
+            var sel = CUI.rte.Selection;
             var range = context.doc.selection.createRange();
             var nodeDef = com.getNodeAtPosition(context, charPos);
             if (nodeDef == null) {
@@ -964,11 +964,11 @@ CQ.form.rte.Selection = function() {
 
         getCaretPos: function(context) {
             var range = context.doc.selection.createRange();
-            return CQ.form.rte.Selection.getRangePosition(context, range);
+            return CUI.rte.Selection.getRangePosition(context, range);
         },
 
         setCaretPos: function(context, charPos) {
-            var range = CQ.form.rte.Selection.setRangePosition(context, charPos);
+            var range = CUI.rte.Selection.setRangePosition(context, charPos);
             if (range) {
                 range.select();
             }
@@ -1000,7 +1000,7 @@ CQ.form.rte.Selection = function() {
         },
 
         createSelectionBookmark: function(context) {
-            var sel = CQ.form.rte.Selection;
+            var sel = CUI.rte.Selection;
             var range = context.doc.selection.createRange();
             var selectionObject = null;
             var insertObject = null;
@@ -1028,7 +1028,7 @@ CQ.form.rte.Selection = function() {
                     }
                 }
             }
-            return CQ.form.rte.Utils.apply({
+            return CUI.rte.Utils.apply({
                 "startPos": startPos,
                 "charCnt": (endPos - startPos),
                 "object": selectionObject,
@@ -1037,7 +1037,7 @@ CQ.form.rte.Selection = function() {
         },
 
         selectBookmark: function(context, bookmark) {
-            var sel = CQ.form.rte.Selection;
+            var sel = CUI.rte.Selection;
             var objectToSelect = null;
             var isControlRange = false;
             if (bookmark.object) {
@@ -1086,12 +1086,12 @@ CQ.form.rte.Selection = function() {
 
         /**
          * Trims leading and trailing whitespace from the given range.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {TextRange} range The range to trim
          * @return {TextRange} A range that has no more trailing and/or leading whitespace
          */
         trimRangeWhitespace: function(context, range) {
-            var sel = CQ.form.rte.Selection;
+            var sel = CUI.rte.Selection;
             var checkRange, tempRange;
             // don't do anything on object selections
             if (range.item) {
@@ -1142,8 +1142,8 @@ CQ.form.rte.Selection = function() {
             // workaround for another IE bug: if the range is reported to be in some
             // container tags as <a name="">, take the first character of the next text node
             // as selection anchor
-            var com = CQ.form.rte.Common;
-            var sel = CQ.form.rte.Selection;
+            var com = CUI.rte.Common;
+            var sel = CUI.rte.Selection;
             var offset;
             var parentNode = range.parentElement();
             var parentRoot = (com.isRootNode(context, parentNode) ? parentNode : null);
@@ -1329,7 +1329,7 @@ CQ.form.rte.Selection = function() {
         },
 
         createProcessingSelection: function(context) {
-            var sel = CQ.form.rte.Selection;
+            var sel = CUI.rte.Selection;
             var range = context.doc.selection.createRange();
             if (range.item) {
                 return {
@@ -1477,12 +1477,12 @@ CQ.form.rte.Selection = function() {
                 throw new Error("Selecting a text node is not supported.");
             }
             var range = context.doc.selection.createRange();
-            CQ.form.rte.Selection.setNodeToRange(context, range, dom, asInsertPoint);
+            CUI.rte.Selection.setNodeToRange(context, range, dom, asInsertPoint);
             range.select();
         },
 
         resetSelection: function(context, mode) {
-            var sel = CQ.form.rte.Selection;
+            var sel = CUI.rte.Selection;
             var range = context.doc.selection.createRange();
             var nodeToSelect = context.root;
             if (mode == "all") {
@@ -1603,7 +1603,7 @@ CQ.form.rte.Selection = function() {
          */
         calcNodeAndOffsetForPosition: function(context, charPos, handleSelectionEnd, dom,
                                                calcPos) {
-            var sel = CQ.form.rte.Selection;
+            var sel = CUI.rte.Selection;
             // Parameters dom and calcPos are optional (used for recursion)
             if (!dom) {
                 dom = context.root;
@@ -1671,7 +1671,7 @@ CQ.form.rte.Selection = function() {
             var childCnt = dom.childNodes.length;
             for (var c = 0; c < childCnt; c++) {
                 var childToProcess = dom.childNodes[c];
-                var ret = CQ.form.rte.Selection.calcNodeAndOffsetForPosition(context,
+                var ret = CUI.rte.Selection.calcNodeAndOffsetForPosition(context,
                         charPos, handleSelectionEnd, childToProcess, calcPos);
                 if (typeof(ret) == "object") {
                     return ret;
@@ -1819,7 +1819,7 @@ CQ.form.rte.Selection = function() {
                     || (selection.anchorOffset != selection.focusOffset)) {
                 return -1;
             }
-            return CQ.form.rte.Selection.getCharPosition(
+            return CUI.rte.Selection.getCharPosition(
                     context, selection.anchorNode, selection.anchorOffset);
         },
 
@@ -1829,7 +1829,7 @@ CQ.form.rte.Selection = function() {
             }
             var selection = context.win.getSelection();
             var range = context.doc.createRange();
-            var nodeAndOffset = CQ.form.rte.Selection.calcNodeAndOffsetForPosition(
+            var nodeAndOffset = CUI.rte.Selection.calcNodeAndOffsetForPosition(
                     context, charPos);
             // to get similar results to IE, correct to previous structure if we are at the
             // character directly following such a structure
@@ -1927,15 +1927,15 @@ CQ.form.rte.Selection = function() {
                 if (!nodeToProcess) {
                     break;
                 }
-                textContent += CQ.form.rte.Selection.getNodeCharacters(nodeToProcess);
+                textContent += CUI.rte.Selection.getNodeCharacters(nodeToProcess);
             }
             return textContent;
         },
 
         createSelectionBookmark: function(context) {
-            var sel = CQ.form.rte.Selection;
+            var sel = CUI.rte.Selection;
             var selection = context.win.getSelection();
-            var selectionObject = CQ.form.rte.Selection.getSelectionObject(selection);
+            var selectionObject = CUI.rte.Selection.getSelectionObject(selection);
             var insertObject = null;
             var cells = null;
             var startPos, endPos, range;
@@ -1980,23 +1980,23 @@ CQ.form.rte.Selection = function() {
                     if ((childCnt == 0) || ((childCnt == 1)
                             && com.isTag(parentEl.childNodes[0], "br"))) {
                         insertObject = parentEl;
-                        if (CQ.form.rte.Selection.isNoInsertNode(insertObject)) {
+                        if (CUI.rte.Selection.isNoInsertNode(insertObject)) {
                             insertObject = null;
                         }
                     }
                 }
             }
-            return CQ.form.rte.Utils.apply({
+            return CUI.rte.Utils.apply({
                 "startPos": startPos,
                 "charCnt": endPos - startPos,
                 "object": selectionObject,
                 "insertObject": insertObject,
                 "cells": cells
-            }, CQ.form.rte.Selection.getScrollOffsets(context));
+            }, CUI.rte.Selection.getScrollOffsets(context));
         },
 
         selectBookmark: function(context, bookmark) {
-            var sel = CQ.form.rte.Selection;
+            var sel = CUI.rte.Selection;
             var doc = context.doc;
             var objectToSelect = null;
             var range, selection;
@@ -2110,7 +2110,7 @@ CQ.form.rte.Selection = function() {
          * @return {TextRange} A range that has no more trailing and/or leading whitespace
          */
         trimRangeWhitespace: function(context, range) {
-            var sel = CQ.form.rte.Selection;
+            var sel = CUI.rte.Selection;
             var rangeText = sel.getRangeTextContent(context, range);
             var leadingWhitespaceCnt = 0;
             var checkPos = 1;
@@ -2155,7 +2155,7 @@ CQ.form.rte.Selection = function() {
         createProcessingSelection: function(context) {
             var startNode, startOffset, endNode, endOffset;
             var selection = context.win.getSelection();
-            var sel = CQ.form.rte.Selection;
+            var sel = CUI.rte.Selection;
             // table cell selection "support"
             var cellSelection = null;
             var isSingleCellSelected = false;
@@ -2330,7 +2330,7 @@ CQ.form.rte.Selection = function() {
          * caret getting out of the visible area of the editor iframe.
          */
         ensureCaretVisibility: function(context, preferredScrollOffset) {
-            var sel = CQ.form.rte.Selection;
+            var sel = CUI.rte.Selection;
             var range = sel.getLeadRange(context).cloneRange();
             // workaround for selected cells (insertNode() doesn't handle them as expected)
             if (range.startContainer.nodeType == 1) {

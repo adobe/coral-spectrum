@@ -17,14 +17,14 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.EditorKernel
+ * @class CUI.rte.EditorKernel
  * @private
  * This class implements the core functionality each rich text-based editor requires.
  * It abstracts that core functionality from the component implementation - hence rich text
  * functionality may be used in different contexts, for example as a widget vs. inplace
  * editing.
  */
-CQ.form.rte.EditorKernel = new Class({
+CUI.rte.EditorKernel = new Class({
 
     toString: "EditorKernel",
 
@@ -39,7 +39,7 @@ CQ.form.rte.EditorKernel = new Class({
      * element before they are edited in a CQ 5.2 instance. By setting this option to true,
      * this automatically added "p" tag will get removed before the text is saved, at least
      * if no other paragraphs or containers were added.
-     * @deprecated Use {@link CQ.form.rte.HtmlRules.BlockHandling#removeSingleParagraphContainer} instead
+     * @deprecated Use {@link CUI.rte.HtmlRules.BlockHandling#removeSingleParagraphContainer} instead
      */
     removeSingleParagraphContainer: false,
 
@@ -49,7 +49,7 @@ CQ.form.rte.EditorKernel = new Class({
      * be simply removed because it carries additional info (for example, alignment and/or
      * CSS classes; defaults to "div"). Note that this setting only takes effect if
      * {@link #removeSingleParagraphContainer} is set to true.
-     * @deprecated Use {@link CQ.form.rte.HtmlRules.BlockHandling#singleParagraphContainerReplacement} instead
+     * @deprecated Use {@link CUI.rte.HtmlRules.BlockHandling#singleParagraphContainerReplacement} instead
      */
     singleParagraphContainerReplacement: null,
 
@@ -107,7 +107,7 @@ CQ.form.rte.EditorKernel = new Class({
      */
 
     /**
-     * @cfg {CQ.form.rte.HtmlRules} htmlRules
+     * @cfg {CUI.rte.HtmlRules} htmlRules
      * This object defines how to create/process HTML. Defaults to null (uses default
      * HTML rules).
      * @since 5.3
@@ -117,7 +117,7 @@ CQ.form.rte.EditorKernel = new Class({
     /**
      * Processing module used for pre-processing HTML before editing
      * @private
-     * @type CQ.form.rte.DomCleanup
+     * @type CUI.rte.DomCleanup
      */
     preProcessor: null,
 
@@ -125,13 +125,13 @@ CQ.form.rte.EditorKernel = new Class({
      * Processing module used for post-processing HTML before submitting or editing as
      * source code
      * @private
-     * @type CQ.form.rte.DomCleanup
+     * @type CUI.rte.DomCleanup
      */
     postProcessor: null,
 
     /**
      * Associative array of registered commands; values of type
-     * {@link CQ.form.rte.commands.Commands}
+     * {@link CUI.rte.commands.Commands}
      * @private
      * @type Object
      */
@@ -139,7 +139,7 @@ CQ.form.rte.EditorKernel = new Class({
 
     /**
      * Associative array of registered plugins; values of type
-     * {@link CQ.form.rte.plugins.Plugin}
+     * {@link CUI.rte.plugins.Plugin}
      * @private
      * @type Object
      */
@@ -149,7 +149,7 @@ CQ.form.rte.EditorKernel = new Class({
      * Current edit context. This should never be accessed directly, but only through
      * {@link #getEditContext}.
      * @private
-     * @type CQ.form.rte.EditContext
+     * @type CUI.rte.EditContext
      */
     editContext: null,
 
@@ -184,14 +184,14 @@ CQ.form.rte.EditorKernel = new Class({
     /**
      * The toolbar (toolkit-independent)
      * @private
-     * @type CQ.form.rte.ui.Toolbar
+     * @type CUI.rte.ui.Toolbar
      */
     toolbar: null,
 
     /**
      * Context menu builder
      * @private
-     * @type CQ.form.rte.ui.ContextMenuBuilder
+     * @type CUI.rte.ui.ContextMenuBuilder
      */
     contextMenuBuilder: null,
 
@@ -300,28 +300,28 @@ CQ.form.rte.EditorKernel = new Class({
         this.keyboardShortcuts = { };
         // commands
         this.registeredCommands =
-            CQ.form.rte.commands.CommandRegistry.createRegisteredCommands();
+            CUI.rte.commands.CommandRegistry.createRegisteredCommands();
         // plugins
         this.registeredPlugins =
-            CQ.form.rte.plugins.PluginRegistry.createRegisteredPlugins(this);
-        CQ.form.rte.Compatibility.moveDeprecatedPluginConfig(config);
-        CQ.form.rte.Compatibility.moveDeprecatedHtmlRules(config);
-        CQ.form.rte.Compatibility.configurePlugins(config, this);
+            CUI.rte.plugins.PluginRegistry.createRegisteredPlugins(this);
+        CUI.rte.Compatibility.moveDeprecatedPluginConfig(config);
+        CUI.rte.Compatibility.moveDeprecatedHtmlRules(config);
+        CUI.rte.Compatibility.configurePlugins(config, this);
         delete config.rtePlugins;
         // Initialize HTML rules
         if (config.htmlRules) {
-            this.htmlRules = new CQ.form.rte.HtmlRules(config.htmlRules);
+            this.htmlRules = new CUI.rte.HtmlRules(config.htmlRules);
             delete config.htmlRules;
         } else {
-            this.htmlRules = new CQ.form.rte.HtmlRules();
+            this.htmlRules = new CUI.rte.HtmlRules();
         }
         // Toolkit ...
         if (config.uiToolkit) {
             this.uiToolkit = config.uiToolkit;
             delete config.uiToolkit;
         } else {
-            this.uiToolkit = CQ.form.rte._toolkit
-                    || CQ.form.rte.EditorKernel.DEFAULT_TOOLKIT;
+            this.uiToolkit = CUI.rte._toolkit
+                    || CUI.rte.EditorKernel.DEFAULT_TOOLKIT;
         }
         // other config
         this.linkInternalize = config.linkInternalize;
@@ -340,14 +340,14 @@ CQ.form.rte.EditorKernel = new Class({
             }
         }
         // Processing HTML code/DOM
-        this.preProcessor = new CQ.form.rte.DomCleanup({
+        this.preProcessor = new CUI.rte.DomCleanup({
             "tagsToRemove": [ "font" ]
         });
-        this.postProcessor = new CQ.form.rte.DomCleanup({
+        this.postProcessor = new CUI.rte.DomCleanup({
             "tagsToRemove": [ "font" ]
         });
         // other stuff
-        var tk = CQ.form.rte.ui.ToolkitRegistry.get(this.uiToolkit);
+        var tk = CUI.rte.ui.ToolkitRegistry.get(this.uiToolkit);
         this.contextMenuBuilder = tk.createContextMenuBuilder(this);
         this.dialogManager = tk.createDialogManager(this);
         this.registeredHandlers = [ ];
@@ -360,19 +360,19 @@ CQ.form.rte.EditorKernel = new Class({
 
     /**
      * Returns a suitable edit context for this EditorKernel's instance.
-     * @return {CQ.form.rte.EditContext} The edit context for this instance
+     * @return {CUI.rte.EditContext} The edit context for this instance
      */
     getEditContext: function() {
         // may be overridden by implementing EditorKernels
         if (this.editContext == null) {
-            this.editContext = new CQ.form.rte.EditContext();
+            this.editContext = new CUI.rte.EditContext();
         }
         return this.editContext;
     },
 
     /**
      * Gets the HTML rules valid for this EditorKernel.
-     * @return {CQ.form.rte.HtmlRules} The HTML rules
+     * @return {CUI.rte.HtmlRules} The HTML rules
      */
     getHtmlRules: function() {
         return this.htmlRules;
@@ -389,7 +389,7 @@ CQ.form.rte.EditorKernel = new Class({
 
     /**
      * Get the DOM element that is responsible for focus handling.
-     * @param {CQ.form.rte.EditContext} context (optional) The edit context
+     * @param {CUI.rte.EditContext} context (optional) The edit context
      * @return {HTMLElement} The DOM element that is responsible for focus handling
      */
     getFocusDom: function(context) {
@@ -399,7 +399,7 @@ CQ.form.rte.EditorKernel = new Class({
 
     /**
      * Focusses the DOM element responsible for rich text editing.
-     * @param {CQ.form.rte.EditContext} context (optional) The edit context
+     * @param {CUI.rte.EditContext} context (optional) The edit context
      */
     focus: function(context) {
         // must be overridden by implementing EditorKernels
@@ -407,7 +407,7 @@ CQ.form.rte.EditorKernel = new Class({
 
     /**
      * Blurs the focus.
-     * @param {CQ.form.rte.EditContext} context (optional) The edit context
+     * @param {CUI.rte.EditContext} context (optional) The edit context
      */
     blurFocus: function(context) {
         // must be overridden by implementing EditorKernels
@@ -426,7 +426,7 @@ CQ.form.rte.EditorKernel = new Class({
 
     /**
      * Calculates a suitable position for the context menu.
-     * @param {CQ.form.rte.EditorEvent} event The event that invoked the context menu
+     * @param {CUI.rte.EditorEvent} event The event that invoked the context menu
      * @return {Number[]} The XY position for the context menu (e.g., [100, 200])
      */
     calculateContextMenuPosition: function(event) {
@@ -446,7 +446,7 @@ CQ.form.rte.EditorKernel = new Class({
 
     /**
      * Gets the dialog manager for this editor kernel.
-     * @return {CQ.form.rte.ui.DialogManager} The dialog manager
+     * @return {CUI.rte.ui.DialogManager} The dialog manager
      * @since 5.6
      */
     getDialogManager: function() {
@@ -462,7 +462,7 @@ CQ.form.rte.EditorKernel = new Class({
      */
     deferFocus: function(addFn) {
         // may be overridden if necessary
-        CQ.form.rte.Utils.defer(function() {
+        CUI.rte.Utils.defer(function() {
             this.focus();
             if (addFn && (typeof(addFn) == "function")) {
                 addFn();
@@ -505,7 +505,7 @@ CQ.form.rte.EditorKernel = new Class({
      * table editing handles provided by Gecko browsers.
      */
     initializeGeckoSpecific: function() {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
 
         if (com.ua.isGecko && this.isEnabled) {
             var context = this.getEditContext();
@@ -546,8 +546,8 @@ CQ.form.rte.EditorKernel = new Class({
      * ignored.</p>
      */
     restoreSelectionToLastKnownBookmark: function() {
-        var sel = CQ.form.rte.Selection;
-        var com = CQ.form.rte.Common;
+        var sel = CUI.rte.Selection;
+        var com = CUI.rte.Common;
         var context = this.getEditContext();
         if (com.ua.isIE && this.lastKnownBookmark) {
             if (!this.hasFocus) {
@@ -569,7 +569,7 @@ CQ.form.rte.EditorKernel = new Class({
      * @param {Object} options (optional) Options
      */
     registerHandler: function(obj, eventName, handler, scope, options) {
-        CQ.form.rte.Eventing.on(this.editContext, obj, eventName, handler, scope, options);
+        CUI.rte.Eventing.on(this.editContext, obj, eventName, handler, scope, options);
         this.registeredHandlers.push({
             "obj": obj,
             "eventName": eventName,
@@ -603,7 +603,7 @@ CQ.form.rte.EditorKernel = new Class({
         var handlerCnt = this.registeredHandlers.length;
         for (var h = 0; h < handlerCnt; h++) {
             var def = this.registeredHandlers[h];
-            CQ.form.rte.Eventing.un(def.obj, def.eventName, def.handler, def.scope);
+            CUI.rte.Eventing.un(def.obj, def.eventName, def.handler, def.scope);
         }
         this.registeredHandlers.length = 0;
     },
@@ -614,7 +614,7 @@ CQ.form.rte.EditorKernel = new Class({
      * </p>
      */
     initializeEventHandling: function() {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var context = this.getEditContext();
         if (context.isInitialized() && this.isEnabled) {
             var doc = context.doc;
@@ -817,7 +817,7 @@ CQ.form.rte.EditorKernel = new Class({
      * @param {HTMLElement} dom The DOM element
      */
     addFeatureClasses: function(dom) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         function addConditionally(cond, cssClass) {
             if (cond) {
                 com.addClass(dom, cssClass);
@@ -848,7 +848,7 @@ CQ.form.rte.EditorKernel = new Class({
      * @private
      */
     onFocus: function(e) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
 
         if (!this.hasFocus) {
             if (com.ua.isOldIE) {
@@ -857,7 +857,7 @@ CQ.form.rte.EditorKernel = new Class({
                 // point to the editor's window object
                 var context = this.getEditContext();
                 var editorWin = context.win;
-                var range = CQ.form.rte.Selection.getLeadRange(context);
+                var range = CUI.rte.Selection.getLeadRange(context);
                 var rangeWin;
                 if (range.item) {
                     rangeWin = range.item(0).ownerDocument.parentWindow;
@@ -895,7 +895,7 @@ CQ.form.rte.EditorKernel = new Class({
             this.isTemporaryBlur = false;
             this.hasFocus = false;
             if (!this.isFocusHandlingDisabled) {
-                CQ.form.rte.Utils.defer(function() {
+                CUI.rte.Utils.defer(function() {
                     if (this.isEventingDisabled && !this.isTemporaryBlur) {
                         this.disableToolbar();
                     }
@@ -936,7 +936,7 @@ CQ.form.rte.EditorKernel = new Class({
      * @private
      */
     onEditorEvent: function(e) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var ignoreEventForContextMenu = false;
         if (com.ua.isIE) {
             if (e.getType() == "selectionchange") {
@@ -944,7 +944,7 @@ CQ.form.rte.EditorKernel = new Class({
                 // store current bookmark to have it available later
                 var context = this.getEditContext();
                 if (context.isInitialized() && this.hasFocus) {
-                    this.lastKnownBookmark = CQ.form.rte.Selection.createSelectionBookmark(
+                    this.lastKnownBookmark = CUI.rte.Selection.createSelectionBookmark(
                             context);
                 }
             }
@@ -989,7 +989,7 @@ CQ.form.rte.EditorKernel = new Class({
         var context = this.getEditContext();
         this.htmlRules.serializer.deserialize(context, html, context.root,
                 this.htmlRules.docType);
-        CQ.form.rte.WhitespaceProcessor.process(context, context.root);
+        CUI.rte.WhitespaceProcessor.process(context, context.root);
         this.preProcessor.preprocess(this, context.root);
         this.execContentInterception("postprocessDom", {
             "editContext": context
@@ -1038,10 +1038,10 @@ CQ.form.rte.EditorKernel = new Class({
         if (!this.isEnabled) {
             return;
         }
-        CQ.form.rte.Utils.defer(function() {
+        CUI.rte.Utils.defer(function() {
             var context = this.getEditContext();
-            var sel = CQ.form.rte.Selection;
-            var com = CQ.form.rte.Common;
+            var sel = CUI.rte.Selection;
+            var com = CUI.rte.Common;
 
             if (context.isInitialized()) {
                 this.focus(context);
@@ -1066,22 +1066,22 @@ CQ.form.rte.EditorKernel = new Class({
                     this.editorKernel.getDialogManager().alert(
                             CQ.I18n.getMessage("Paste"),
                             CQ.I18n.getMessage("Could not paste due to security restrictions of the browser.<br>Please use Ctrl+V to paste directly."),
-                            CQ.form.rte.Utils.scope(this.deferFocus, this));
+                            CUI.rte.Utils.scope(this.deferFocus, this));
                 } else if (e.message == "Cannot copy.") {
                     this.editorKernel.getDialogManager().alert(
                             CQ.I18n.getMessage("Copy"),
                             CQ.I18n.getMessage("Could not copy due to security restrictions of the browser.<br>Please use Ctrl+C to copy directly."),
-                            CQ.form.rte.Utils.scope(this.deferFocus, this));
+                            CUI.rte.Utils.scope(this.deferFocus, this));
                 } else if (e.message == "Cannot cut.") {
                     this.editorKernel.getDialogManager().alert(
                             CQ.I18n.getMessage("Cut"),
                             CQ.I18n.getMessage("Could not cut due to security restrictions of the browser.<br>Please use Ctrl+X to cut directly."),
-                            CQ.form.rte.Utils.scope(this.deferFocus, this));
+                            CUI.rte.Utils.scope(this.deferFocus, this));
                 } else if (e.message == "Could not insert html due to IE limitations.") {
                     this.editorKernel.getDialogManager().alert(
                             CQ.I18n.getMessage("Error"),
                             CQ.I18n.getMessage("Could not insert text due to internal Internet Explorer limitations. Please try to select a smaller text fragment and try again."),
-                            CQ.form.rte.Utils.scope(this.deferFocus, this));
+                            CUI.rte.Utils.scope(this.deferFocus, this));
                 } else {
                     throw e;
                 }
@@ -1098,13 +1098,13 @@ CQ.form.rte.EditorKernel = new Class({
      * explicitly flagged for use in unitialized state.</b>
      * @param {String} command The Midas command
      * @param {Object} value (optional) The value to pass to the command (defaults to null)
-     * @param {CQ.form.rte.EditContext} context (optional) The edit context
+     * @param {CUI.rte.EditContext} context (optional) The edit context
      */
     execCmd: function(command, value, context){
-        var sel = CQ.form.rte.Selection;
-        var dpr = CQ.form.rte.DomProcessor;
-        var cmd = CQ.form.rte.commands.Command;
-        var com = CQ.form.rte.Common;
+        var sel = CUI.rte.Selection;
+        var dpr = CUI.rte.DomProcessor;
+        var cmd = CUI.rte.commands.Command;
+        var com = CUI.rte.Common;
         // init
         if (!this.isEnabled) {
             return null;
@@ -1312,7 +1312,7 @@ CQ.form.rte.EditorKernel = new Class({
      * @private
      */
     createQualifiedSelection: function(context) {
-        var selection = CQ.form.rte.Selection.createProcessingSelection(context);
+        var selection = CUI.rte.Selection.createProcessingSelection(context);
         if (!selection || (selection.startNode == null)) {
             return null;
         }
@@ -1333,7 +1333,7 @@ CQ.form.rte.EditorKernel = new Class({
      * @private
      */
     createQualifiedRangeBookmark: function(context) {
-        var bookmark = CQ.form.rte.Selection.createRangeBookmark(context);
+        var bookmark = CUI.rte.Selection.createRangeBookmark(context);
         for (var pluginId in this.registeredPlugins) {
             if (this.registeredPlugins.hasOwnProperty(pluginId)) {
                 var plugin = this.registeredPlugins[pluginId];
@@ -1351,7 +1351,7 @@ CQ.form.rte.EditorKernel = new Class({
      * @private
      */
     selectQualifiedRangeBookmark: function(context, bookmark) {
-        CQ.form.rte.Selection.selectRangeBookmark(context, bookmark);
+        CUI.rte.Selection.selectRangeBookmark(context, bookmark);
         for (var pluginId in this.registeredPlugins) {
             if (this.registeredPlugins.hasOwnProperty(pluginId)) {
                 var plugin = this.registeredPlugins[pluginId];
@@ -1373,7 +1373,7 @@ CQ.form.rte.EditorKernel = new Class({
      *   <li>namedAnchors - definition of all anchors (a name="...") intersected by the
      *     current selection</li>
      *   <li>nodeList - List of nodes the selection consists of (see
-     *     {@link CQ.form.rte.NodeList})</li>
+     *     {@link CUI.rte.NodeList})</li>
      *   <li>styleCount - number of different CSS styles (classes) that are present in the
      *     current selection</li>
      *   <li>styles - CSS styles (classes) that are present in the current
@@ -1393,8 +1393,8 @@ CQ.form.rte.EditorKernel = new Class({
      * @private
      */
     analyzeSelection: function(context) {
-        var sel = CQ.form.rte.Selection;
-        var dpr = CQ.form.rte.DomProcessor;
+        var sel = CUI.rte.Selection;
+        var dpr = CUI.rte.DomProcessor;
         if (!context) {
             context = this.getEditContext();
         }
@@ -1477,7 +1477,7 @@ CQ.form.rte.EditorKernel = new Class({
      * @param {String} eventName Event name (see doc for supported values)
      * @param {Function} fn Event handler function
      * @param {Object} scope Scope for fn
-     * @param {CQ.form.rte.plugins.Plugin} plugin Plugin that registers the event handler
+     * @param {CUI.rte.plugins.Plugin} plugin Plugin that registers the event handler
      * @param {Boolean} isDeferred True if the listener should be executed
      *        "deferred"
      * @param {Number} priority (optional) The listener's priority; defaults to 1000
@@ -1496,7 +1496,7 @@ CQ.form.rte.EditorKernel = new Class({
         var listeners = this.internalListeners[eventName];
         var listenerCnt = listeners.length;
         var listenerDef = {
-            "fn": scope ? CQ.form.rte.Utils.scope(fn, scope) : fn,
+            "fn": scope ? CUI.rte.Utils.scope(fn, scope) : fn,
             "plugin": plugin,
             "deferred": isDeferred,
             "priority": priority
@@ -1516,7 +1516,7 @@ CQ.form.rte.EditorKernel = new Class({
      * plugin.
      * @param {String} eventName Event name (see {@link #addPluginListener} for supported
      *        values)
-     * @param {CQ.form.rte.plugins.Plugin} plugin Plugin that unregisters its event handlers
+     * @param {CUI.rte.plugins.Plugin} plugin Plugin that unregisters its event handlers
      * @private
      */
     removePluginListener: function(eventName, plugin) {
@@ -1534,14 +1534,14 @@ CQ.form.rte.EditorKernel = new Class({
 
     /**
      * <p>Fires an editor-related event.</p>
-     * <p>Both {@link CQ.form.rte.EditorEvent}s and "higher level"/custom events can be
+     * <p>Both {@link CUI.rte.EditorEvent}s and "higher level"/custom events can be
      * sent to the registered listeners using this method. To dispatch a custom event,
      * provide a suitable Object as parameter param. Note that the eventName parameter is
-     * ignored if a {@link CQ.form.rte.EditorEvent} is provided as param.</p>
+     * ignored if a {@link CUI.rte.EditorEvent} is provided as param.</p>
      * @param {String} eventName Event name (see {@link #addPluginListener} for supported
      *        values)
-     * @param {Object|CQ.form.rte.EditorEvent} param Event specific parameter: either an
-     *        Object for a custom event, or a CQ.form.rte.EditorEvent for forwarding
+     * @param {Object|CUI.rte.EditorEvent} param Event specific parameter: either an
+     *        Object for a custom event, or a CUI.rte.EditorEvent for forwarding
      *        editor events.
      * @param {Boolean} isDeferred True if the Event is fired from a deferred
      *        context (note that the event is always dispatched immediately, but it is
@@ -1556,10 +1556,10 @@ CQ.form.rte.EditorKernel = new Class({
         // the listeners to manipulate EditorEvents (mainly: cancel the event) directly
         // and the callee to react on it appropriately
         var event;
-        if (param instanceof CQ.form.rte.EditorEvent) {
+        if (param instanceof CUI.rte.EditorEvent) {
             event = param;
         } else {
-            event = new CQ.form.rte.plugins.PluginEvent(eventName, this.getEditContext(),
+            event = new CUI.rte.plugins.PluginEvent(eventName, this.getEditContext(),
                     param);
         }
         var listenerCnt = this.internalListeners[eventName].length;
@@ -1629,7 +1629,7 @@ CQ.form.rte.EditorKernel = new Class({
             this.uiListeners[eventName] = [ ];
         }
         this.uiListeners[eventName].push({
-            "fn": scope ? CQ.form.rte.Utils.scope(fn, scope) : fn
+            "fn": scope ? CUI.rte.Utils.scope(fn, scope) : fn
         });
     },
 
@@ -1657,7 +1657,7 @@ CQ.form.rte.EditorKernel = new Class({
         if (!this.uiListeners || !this.uiListeners[eventName]) {
             return;
         }
-        var event = new CQ.form.rte.ui.UIEvent(eventName, this.getEditContext(), param);
+        var event = new CUI.rte.ui.UIEvent(eventName, this.getEditContext(), param);
         var listenerCnt = this.uiListeners[eventName].length;
         for (var l = 0; l < listenerCnt; l++) {
             var listenerDef = this.uiListeners[eventName][l];
@@ -1703,8 +1703,8 @@ CQ.form.rte.EditorKernel = new Class({
     },
 
     /**
-     * Create a kernel-specific instance of {@link CQ.form.rte.ui.ToolbarBuilder}.
-     * @return {CQ.form.rte.ui.ToolbarBuilder} The kernel-specific toolbar builde instance
+     * Create a kernel-specific instance of {@link CUI.rte.ui.ToolbarBuilder}.
+     * @return {CUI.rte.ui.ToolbarBuilder} The kernel-specific toolbar builde instance
      *         to be used
      */
     createToolbarBuilder: function() {
@@ -1762,7 +1762,7 @@ CQ.form.rte.EditorKernel = new Class({
      * @private
      */
     handleContextMenu: function(event) {
-        var dpr = CQ.form.rte.DomProcessor;
+        var dpr = CUI.rte.DomProcessor;
         this.contextMenuBuilder.clear();
         var context = this.getEditContext();
         var selection = this.createQualifiedSelection(context);
@@ -1797,4 +1797,4 @@ CQ.form.rte.EditorKernel = new Class({
  * The default UI toolkit to be used
  * @type String
  */
-CQ.form.rte.EditorKernel.DEFAULT_TOOLKIT = "ext";
+CUI.rte.EditorKernel.DEFAULT_TOOLKIT = "ext";

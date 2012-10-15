@@ -17,16 +17,16 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.commands
+ * @class CUI.rte.commands
  * @private
  * The Command should be implemented by all RTE commands that cannot be handled by the
  * browser's implementation itself.
  */
-CQ.form.rte.commands.UndoRedo = new Class({
+CUI.rte.commands.UndoRedo = new Class({
 
     toString: "UndoRedo",
 
-    extend: CQ.form.rte.commands.Command,
+    extend: CUI.rte.commands.Command,
 
     /**
      * The undo manager object for this RichText instance
@@ -35,7 +35,7 @@ CQ.form.rte.commands.UndoRedo = new Class({
     undoManager: null,
 
     construct: function() {
-        this.undoManager = new CQ.form.rte.UndoManager(50);
+        this.undoManager = new CUI.rte.UndoManager(50);
     },
 
     isCommand: function(cmdStr) {
@@ -54,7 +54,7 @@ CQ.form.rte.commands.UndoRedo = new Class({
     },
 
     getProcessingOptions: function() {
-        return CQ.form.rte.commands.Command.PO_NONE;
+        return CUI.rte.commands.Command.PO_NONE;
     },
 
     execute: function(execDef) {
@@ -76,7 +76,7 @@ CQ.form.rte.commands.UndoRedo = new Class({
                 this.undoManager.initialize(context);
                 break;
             case "addundostep":
-                this.undoManager.addStep(new CQ.form.rte.UndoManager.Step(context));
+                this.undoManager.addStep(new CUI.rte.UndoManager.Step(context));
                 break;
             case "clearredohistory":
                 this.undoManager.clearRedoHistory();
@@ -102,4 +102,4 @@ CQ.form.rte.commands.UndoRedo = new Class({
 
 
 // register command
-CQ.form.rte.commands.CommandRegistry.register("undoredo", CQ.form.rte.commands.UndoRedo);
+CUI.rte.commands.CommandRegistry.register("undoredo", CUI.rte.commands.UndoRedo);

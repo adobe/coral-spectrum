@@ -17,15 +17,15 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.commands.Style
- * @extends CQ.form.rte.commands.Command
+ * @class CUI.rte.commands.Style
+ * @extends CUI.rte.commands.Command
  * @private
  */
-CQ.form.rte.commands.Style = new Class({
+CUI.rte.commands.Style = new Class({
 
     toString: "Style",
 
-    extend: CQ.form.rte.commands.Command,
+    extend: CUI.rte.commands.Command,
 
     /**
      * Formats the currently selected text fragment with the given CSS style.
@@ -38,13 +38,13 @@ CQ.form.rte.commands.Style = new Class({
      * @private
      */
     addStyle: function(execDef) {
-        var sel = CQ.form.rte.Selection;
-        var com = CQ.form.rte.Common;
+        var sel = CUI.rte.Selection;
+        var com = CUI.rte.Common;
         var styleName = execDef.value;
         var selection = execDef.selection;
         // handle DOM elements
         var selectedDom = sel.getSelectedDom(selection);
-        var styleableObjects = CQ.form.rte.plugins.StylesPlugin.STYLEABLE_OBJECTS;
+        var styleableObjects = CUI.rte.plugins.StylesPlugin.STYLEABLE_OBJECTS;
         if (selectedDom && com.isTag(selectedDom, styleableObjects)) {
             com.removeAllClasses(selectedDom);
             com.addClass(selectedDom, styleName);
@@ -67,16 +67,16 @@ CQ.form.rte.commands.Style = new Class({
      * @private
      */
     removeStyle: function(execDef) {
-        var com = CQ.form.rte.Common;
-        var dpr = CQ.form.rte.DomProcessor;
-        var sel = CQ.form.rte.Selection;
+        var com = CUI.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
+        var sel = CUI.rte.Selection;
         var selection = execDef.selection;
         var context = execDef.editContext;
         var styleToRemove = execDef.value;
         var styleName, styleCnt, s;
         // handle DOM elements
         var selectedDom = sel.getSelectedDom(selection);
-        var styleableObjects = CQ.form.rte.plugins.StylesPlugin.STYLEABLE_OBJECTS;
+        var styleableObjects = CUI.rte.plugins.StylesPlugin.STYLEABLE_OBJECTS;
         if (selectedDom && com.isTag(selectedDom, styleableObjects)) {
             if (styleToRemove && !styleToRemove.styles) {
                 com.removeClass(selectedDom, styleToRemove);
@@ -139,7 +139,7 @@ CQ.form.rte.commands.Style = new Class({
     },
 
     getProcessingOptions: function() {
-        var cmd = CQ.form.rte.commands.Command;
+        var cmd = CUI.rte.commands.Command;
         return cmd.PO_BOOKMARK | cmd.PO_SELECTION | cmd.PO_NODELIST;
     },
 
@@ -163,4 +163,4 @@ CQ.form.rte.commands.Style = new Class({
 
 
 // register command
-CQ.form.rte.commands.CommandRegistry.register("style", CQ.form.rte.commands.Style);
+CUI.rte.commands.CommandRegistry.register("style", CUI.rte.commands.Style);

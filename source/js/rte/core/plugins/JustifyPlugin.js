@@ -17,8 +17,8 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.plugins.JustifyPlugin
- * @extends CQ.form.rte.plugins.SimpleFormatPlugin
+ * @class CUI.rte.plugins.JustifyPlugin
+ * @extends CUI.rte.plugins.SimpleFormatPlugin
  * <p>This class implements simple character formatting (bold, italic, underlined) as a
  * plugin.</p>
  * <p>The plugin ID is "<b>justify</b>".</p>
@@ -29,14 +29,14 @@
  *   <li><b>justifycenter</b> - adds a button to center the selected block</li>
  * </ul>
  */
-CQ.form.rte.plugins.JustifyPlugin = new Class({
+CUI.rte.plugins.JustifyPlugin = new Class({
 
     toString: "JustifyPlugin",
 
-    extend: CQ.form.rte.plugins.SimpleFormatPlugin,
+    extend: CUI.rte.plugins.SimpleFormatPlugin,
 
     _init: function(editorKernel) {
-        var plg = CQ.form.rte.plugins;
+        var plg = CUI.rte.plugins;
         plg.JustifyPlugin.prototype.superClass._init.call(this, editorKernel, "justify",
                 plg.Plugin.SORT_JUSTIFY, [ "justifyleft", "justifycenter", "justifyright"]);
     },
@@ -67,4 +67,4 @@ CQ.form.rte.plugins.JustifyPlugin = new Class({
 
 
 // register plugin
-CQ.form.rte.plugins.PluginRegistry.register("justify", CQ.form.rte.plugins.JustifyPlugin);
+CUI.rte.plugins.PluginRegistry.register("justify", CUI.rte.plugins.JustifyPlugin);

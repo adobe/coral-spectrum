@@ -17,12 +17,12 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.SearchableDocument
+ * @class CUI.rte.SearchableDocument
  * @private
  * The RichText.SearchableDocument provides means to execute
  * a plaintext search on a HTML document or fragment.
  */
-CQ.form.rte.SearchableDocument = new Class({
+CUI.rte.SearchableDocument = new Class({
 
     toString: "SearchableDocument",
 
@@ -42,7 +42,7 @@ CQ.form.rte.SearchableDocument = new Class({
      * @private
      */
     createInternally: function(dom) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         if (dom.nodeType == 3) {
             var text = com.getNodeText(dom);
             if (text) {
@@ -55,7 +55,7 @@ CQ.form.rte.SearchableDocument = new Class({
             }
         } else if (dom.nodeType == 1) {
             var addWhitespace =
-                    (com.isTag(dom, CQ.form.rte.SearchableDocument.WHITESPACE_TAGS)
+                    (com.isTag(dom, CUI.rte.SearchableDocument.WHITESPACE_TAGS)
                     || com.isTag(dom, com.EDITBLOCK_TAGS))
                     && (!com.strEndsWith(this.plainText, " "));
             if ((this.plainText.length > 0) && addWhitespace) {
@@ -156,7 +156,7 @@ CQ.form.rte.SearchableDocument = new Class({
 
     createDump: function() {
         var dump = "Searchable text:\n" + this.plainText + "\n\n";
-        dump += "References:\n" + CQ.form.rte.Common.dumpObject(this.refs);
+        dump += "References:\n" + CUI.rte.Common.dumpObject(this.refs);
         return dump;
     }
 
@@ -170,4 +170,4 @@ CQ.form.rte.SearchableDocument = new Class({
  * @type String[]
  * @private
  */
-CQ.form.rte.SearchableDocument.WHITESPACE_TAGS =  [ "br", "img" ];
+CUI.rte.SearchableDocument.WHITESPACE_TAGS =  [ "br", "img" ];

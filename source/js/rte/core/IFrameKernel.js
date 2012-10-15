@@ -17,19 +17,19 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.IFrameKernel
- * @extends CQ.form.rte.EditorKernel
+ * @class CUI.rte.IFrameKernel
+ * @extends CUI.rte.EditorKernel
  * @private
  * This class implements an EditorKernel for iFrame-based rich text editing.
  * @constructor
  * Creates a new IFrameKernel for rich text editing.
  * @param {Object} config The kernel's configuration
  */
-CQ.form.rte.IFrameKernel = new Class({
+CUI.rte.IFrameKernel = new Class({
 
     toString: "IFrameKernel",
 
-    extend: CQ.form.rte.EditorKernel,
+    extend: CUI.rte.EditorKernel,
 
     /**
      * Path to content being edited
@@ -49,7 +49,7 @@ CQ.form.rte.IFrameKernel = new Class({
      * @param {HTMLElement} root The root element (the "body" element of the iFrame)
      */
     initializeEditContext: function(iFrame, win, doc, root) {
-        this.editContext = new CQ.form.rte.EditContext(iFrame, win, doc, root);
+        this.editContext = new CUI.rte.EditContext(iFrame, win, doc, root);
         this.addFeatureClasses(root);
     },
 
@@ -59,8 +59,8 @@ CQ.form.rte.IFrameKernel = new Class({
      * optionally on next focus gain.</p>
      */
     initializeCaret: function(enforceInit) {
-        var com = CQ.form.rte.Common;
-        var sel = CQ.form.rte.Selection;
+        var com = CUI.rte.Common;
+        var sel = CUI.rte.Selection;
         if (this.hasFocus) {
             var context = this.getEditContext();
             sel.resetSelection(context, "start");
@@ -82,7 +82,7 @@ CQ.form.rte.IFrameKernel = new Class({
 
     /**
      * Get the DOM element that is responsible for focus handling.
-     * @param {CQ.form.rte.EditContext} context (optional) The edit context
+     * @param {CUI.rte.EditContext} context (optional) The edit context
      * @return {HTMLElement} The DOM element that is responsible for focus handling
      */
     getFocusDom: function(context) {
@@ -94,7 +94,7 @@ CQ.form.rte.IFrameKernel = new Class({
 
     /**
      * Focusses the DOM element responsible for rich text editing.
-     * @param {CQ.form.rte.EditContext} context (optional) The edit context
+     * @param {CUI.rte.EditContext} context (optional) The edit context
      */
     focus: function(context) {
         if (!context) {
@@ -107,7 +107,7 @@ CQ.form.rte.IFrameKernel = new Class({
 
     /**
      * Blurs the focus.
-     * @param {CQ.form.rte.EditContext} context (optional) The edit context
+     * @param {CUI.rte.EditContext} context (optional) The edit context
      */
     blurFocus: function(context) {
         if (!context) {
@@ -134,12 +134,12 @@ CQ.form.rte.IFrameKernel = new Class({
         return winPos || [ 0, 0 ];
     },
 
-    // overrides CQ.form.rte.EditorKernel#calculateContextMenuPosition
+    // overrides CUI.rte.EditorKernel#calculateContextMenuPosition
     calculateContextMenuPosition: function(event) {
         var editContext = this.getEditContext();
         var editorPos = this.getEditorPosition();
         var scrollPos = [ 0, 0 ];
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
 
         if (!com.ua.isOldIE) {
             scrollPos = [ editContext.root.scrollLeft, editContext.root.scrollTop ];
@@ -155,14 +155,14 @@ CQ.form.rte.IFrameKernel = new Class({
                 editorPos[1] + eventPos.y - scrollPos[1] ];
     },
 
-    // overrides CQ.form.rte.EditorKernel#createToolbarBuilder
+    // overrides CUI.rte.EditorKernel#createToolbarBuilder
     createToolbarBuilder: function() {
-        var ui = CQ.form.rte.ui;
+        var ui = CUI.rte.ui;
         return ui.ToolkitRegistry.get(this.uiToolkit).createToolbarBuilder(
                 ui.Toolkit.TBHINT_LOCAL);
     },
 
-    // overrides CQ.form.rte.EditorKernel#canEditSource
+    // overrides CUI.rte.EditorKernel#canEditSource
     canEditSource: function() {
         return true;
     },
@@ -189,7 +189,7 @@ CQ.form.rte.IFrameKernel = new Class({
         if (!context.iFrame) {
             return null;
         }
-        return CQ.form.rte.Utils.getPagePosition(context.iFrame);
+        return CUI.rte.Utils.getPagePosition(context.iFrame);
     }
 
 });

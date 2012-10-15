@@ -16,7 +16,7 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CQ.form.rte.ui.ToolkitRegistry = function() {
+CUI.rte.ui.ToolkitRegistry = function() {
 
     var toolkits = { };
 

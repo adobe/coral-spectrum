@@ -17,8 +17,8 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.plugins.LinkPlugin
- * @extends CQ.form.rte.plugins.Plugin
+ * @class CUI.rte.plugins.LinkPlugin
+ * @extends CUI.rte.plugins.Plugin
  * <p>This class implements links and anchors as a plugin.</p>
  * <p>The plugin ID is "<b>links</b>".</p>
  * <p><b>Features</b></p>
@@ -38,11 +38,11 @@
  *     {@link CQ.form.RichText#anchordialogConfig}.</li>
  * </ul>
  */
-CQ.form.rte.plugins.LinkPlugin = new Class({
+CUI.rte.plugins.LinkPlugin = new Class({
 
     toString: "LinkPlugin",
 
-    extend: CQ.form.rte.plugins.Plugin,
+    extend: CUI.rte.plugins.Plugin,
 
     /**
      * @cfg {Boolean} trimLinkSelection
@@ -98,9 +98,9 @@ CQ.form.rte.plugins.LinkPlugin = new Class({
      * @private
      */
     modifyLink: function(context) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var dm = this.editorKernel.getDialogManager();
-        var dh = CQ.form.rte.ui.DialogHelper;
+        var dh = CUI.rte.ui.DialogHelper;
         if (!this.linkDialog || dm.mustRecreate(this.linkDialog)) {
             var dialogHelper = dm.createDialogHelper();
             var linkRules = this.editorKernel.htmlRules.links;
@@ -152,7 +152,7 @@ CQ.form.rte.plugins.LinkPlugin = new Class({
                                     obj.attributes[attribName] = value;
                                 } else {
                                     obj.attributes[attribName] =
-                                        CQ.form.rte.commands.Link.REMOVE_ATTRIBUTE;
+                                        CUI.rte.commands.Link.REMOVE_ATTRIBUTE;
                                 }
                             }
                         };
@@ -213,7 +213,7 @@ CQ.form.rte.plugins.LinkPlugin = new Class({
         if (typeof linkToEdit.attributes === 'undefined')
             linkToEdit.attributes = { };
         this.linkDialog.initializeEdit(this.editorKernel, linkToEdit,
-                CQ.form.rte.Utils.scope(this.applyLink, this));
+                CUI.rte.Utils.scope(this.applyLink, this));
         if (com.ua.isIE) {
             this.savedRange = context.doc.selection.createRange();
         }
@@ -221,7 +221,7 @@ CQ.form.rte.plugins.LinkPlugin = new Class({
     },
 
     applyLink: function(context) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var linkObj = this.linkDialog.objToEdit;
         if (linkObj) {
             var linkUrl = linkObj.href;
@@ -245,7 +245,7 @@ CQ.form.rte.plugins.LinkPlugin = new Class({
      * @private
      */
     modifyAnchor: function(context) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var dm = this.editorKernel.getDialogManager();
         if (!this.anchorDialog || dm.mustRecreate(this.anchorDialog)) {
             var editorKernel = this.editorKernel;
@@ -260,7 +260,7 @@ CQ.form.rte.plugins.LinkPlugin = new Class({
             };
             var dialogConfig = this.config.anchorDialogConfig || { };
             CQ.Util.applyDefaults(dialogConfig, defaultConfig);
-            this.anchorDialog = dm.create(CQ.form.rte.ui.DialogManager.DLG_ANCHOR,
+            this.anchorDialog = dm.create(CUI.rte.ui.DialogManager.DLG_ANCHOR,
                     dialogConfig);
         } else {
             this.anchorDialog.resetValues();
@@ -276,8 +276,8 @@ CQ.form.rte.plugins.LinkPlugin = new Class({
     },
 
     initializeUI: function(tbGenerator) {
-        var plg = CQ.form.rte.plugins;
-        var ui = CQ.form.rte.ui;
+        var plg = CUI.rte.plugins;
+        var ui = CUI.rte.ui;
         if (this.isFeatureEnabled("modifylink")) {
             this.linkUI = tbGenerator.createElement("modifylink", this, false,
                     this.getTooltip("modifylink"));
@@ -342,8 +342,8 @@ CQ.form.rte.plugins.LinkPlugin = new Class({
         var selectedNode = selDef.selectedDom;
         var isLinkableObject = false;
         if (selectedNode) {
-            isLinkableObject = CQ.form.rte.Common.isTag(selectedNode,
-                    CQ.form.rte.plugins.LinkPlugin.LINKABLE_OBJECTS);
+            isLinkableObject = CUI.rte.Common.isTag(selectedNode,
+                    CUI.rte.plugins.LinkPlugin.LINKABLE_OBJECTS);
         }
         var isCreateLinkEnabled = hasSingleAnchor
                 || ((selDef.isSelection || isLinkableObject) && hasNoAnchor);
@@ -368,10 +368,10 @@ CQ.form.rte.plugins.LinkPlugin = new Class({
  * @final
  * @type String[]
  */
-CQ.form.rte.plugins.LinkPlugin.LINKABLE_OBJECTS = [
+CUI.rte.plugins.LinkPlugin.LINKABLE_OBJECTS = [
     "img"
 ];
 
 
 // register plugin
-CQ.form.rte.plugins.PluginRegistry.register("links", CQ.form.rte.plugins.LinkPlugin);
+CUI.rte.plugins.PluginRegistry.register("links", CUI.rte.plugins.LinkPlugin);

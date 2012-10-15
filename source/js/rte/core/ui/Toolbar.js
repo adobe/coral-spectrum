@@ -16,7 +16,7 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CQ.form.rte.ui.Toolbar = new Class({
+CUI.rte.ui.Toolbar = new Class({
 
     toString: "Toolbar",
 

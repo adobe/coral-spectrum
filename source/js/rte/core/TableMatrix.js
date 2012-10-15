@@ -17,7 +17,7 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.TableMatrix
+ * @class CUI.rte.TableMatrix
  * @private
  * <p>This class implements an abstract representation of a table for easier processing
  * &amp; editing (especially regarding colspan/rowspan settings).</p>
@@ -26,7 +26,7 @@
  * actually adressable via their linear row/column numbers, even with
  * complex rowspan/colspan settings.</p>
  */
-CQ.form.rte.TableMatrix = new Class({
+CUI.rte.TableMatrix = new Class({
 
     toString: "TableMatrix",
 
@@ -92,7 +92,7 @@ CQ.form.rte.TableMatrix = new Class({
      * @param {HTMLElement} tableDom DOM node that represents the table
      */
     createTableMatrix: function(tableDom) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         this.tableDom = tableDom;
         this.matrix = [ ];
         this.fullMatrix = null;
@@ -143,7 +143,7 @@ CQ.form.rte.TableMatrix = new Class({
 
     /**
      * <p>Creates a "full" matrix from the (basic) matrix previously created by
-     * {@link CQ.form.rte.TableMatrix#createTableMatrix}.</p>
+     * {@link CUI.rte.TableMatrix#createTableMatrix}.</p>
      * <p>The "full matrix" is a different representation of the table. You usually don't
      * have to call this method explicitly, as all methods requiring the full matrix will
      * invoke it implicitly if necessary.</p>
@@ -272,17 +272,17 @@ CQ.form.rte.TableMatrix = new Class({
     },
 
     /**
-     * Creates a cell selection object ({@link CQ.form.rte.CellSelection}) from the
+     * Creates a cell selection object ({@link CUI.rte.CellSelection}) from the
      * specified array of table cells.
      * @param {Array} selectedDomCells Array of table cells to create the selection from;
      *        elements of type HTMLTableCellElement
-     * @return {CQ.form.rte.CellSelection} The cell selection object
+     * @return {CUI.rte.CellSelection} The cell selection object
      */
     createSelection: function(selectedDomCells) {
-        if (!CQ.form.rte.Utils.isArray(selectedDomCells)) {
+        if (!CUI.rte.Utils.isArray(selectedDomCells)) {
             selectedDomCells = [ selectedDomCells ];
         }
-        var cellSelection = new CQ.form.rte.CellSelection(this);
+        var cellSelection = new CUI.rte.CellSelection(this);
         for (var i = 0; i < selectedDomCells.length; i++) {
             var cellDef = this.getCellDef(selectedDomCells[i]);
             if (!cellDef) {
@@ -312,7 +312,7 @@ CQ.form.rte.TableMatrix = new Class({
      *         are: col, row, colSpan, rowSpan, cellDom)
      */
     getColumn: function(colIndex) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         if (this.fullMatrix == null) {
             this.createFullMatrix();
         }
@@ -338,7 +338,7 @@ CQ.form.rte.TableMatrix = new Class({
      *         are: col, row, colSpan, rowSpan, cellDom)
      */
     getRow: function(rowIndex) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         if (this.fullMatrix == null) {
             this.createFullMatrix();
         }
@@ -409,12 +409,12 @@ CQ.form.rte.TableMatrix = new Class({
      * <p>Note that all cells are added with a colspan/rowspan of 1, so this is probably
      * not what the user expects when extending the table via "add column/row" commands.
      * </p>
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      * @param {Number} cols Number of columns to add
      * @param {Number} rows Number of rows to add
      */
     extendBy: function(context, cols, rows) {
-        var tm = CQ.form.rte.TableMatrix;
+        var tm = CUI.rte.TableMatrix;
         var cellToAdd, cellDef, rowDef, fmRowDef, c, r;
         // first, add missing rows
         var size = this.getTableSize();
@@ -483,8 +483,8 @@ CQ.form.rte.TableMatrix = new Class({
      * matrix itself is not adjusted accordingly; this operation processes DOM only.</p>
      */
     mergeToSingleCell: function(context, startCol, startRow, cols, rows) {
-        var tm = CQ.form.rte.TableMatrix;
-        var com = CQ.form.rte.Common;
+        var tm = CUI.rte.TableMatrix;
+        var com = CUI.rte.Common;
         if (!this.fullMatrix) {
             this.createFullMatrix();
         }
@@ -584,7 +584,7 @@ CQ.form.rte.TableMatrix = new Class({
         if (this.matrix == null) {
             throw new Error("No basic matrix calculated; use createTableMatrix() before.");
         }
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var tableSize = this.getTableSize();
         var rows = tableSize.rows;
         var cols = tableSize.cols;
@@ -684,7 +684,7 @@ CQ.form.rte.TableMatrix = new Class({
  * @private
  * @static
  */
-CQ.form.rte.TableMatrix.createEmptyCell = function(context, refNode) {
+CUI.rte.TableMatrix.createEmptyCell = function(context, refNode) {
     var tagName = "td";
     if (typeof(refNode) == "string") {
         tagName = refNode;
@@ -692,7 +692,7 @@ CQ.form.rte.TableMatrix.createEmptyCell = function(context, refNode) {
         tagName = refNode.tagName;
     }
     var tdDom = context.createElement(tagName);
-    var placeholder = CQ.form.rte.DomProcessor.createEmptyLinePlaceholder(context, false);
+    var placeholder = CUI.rte.DomProcessor.createEmptyLinePlaceholder(context, false);
     if (placeholder) {
         tdDom.appendChild(placeholder);
     }
@@ -703,16 +703,16 @@ CQ.form.rte.TableMatrix.createEmptyCell = function(context, refNode) {
  * @private
  * @static
  */
-CQ.form.rte.TableMatrix.addCellPlaceholder = function(context, cellDom) {
-    cellDom.appendChild(context.createTextNode(CQ.form.rte.DomProcessor.NBSP));
+CUI.rte.TableMatrix.addCellPlaceholder = function(context, cellDom) {
+    cellDom.appendChild(context.createTextNode(CUI.rte.DomProcessor.NBSP));
 };
 
 /**
  * @private
  * @static
  */
-CQ.form.rte.TableMatrix.createEmptyCellMarkup = function() {
-    var com = CQ.form.rte.Common;
+CUI.rte.TableMatrix.createEmptyCellMarkup = function() {
+    var com = CUI.rte.Common;
     if (com.ua.isIE) {
         return "<td></td>";
     }

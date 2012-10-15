@@ -17,12 +17,12 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.Common
+ * @class CUI.rte.Common
  * @static
  * @private
  * The Common provides some commonly used utility functionality.
  */
-CQ.form.rte.Common = function() {
+CUI.rte.Common = function() {
 
     var docMode = window.document.documentMode, // documentMode property explaination: http://msdn.microsoft.com/en-us/library/ie/cc196988%28v=vs.85%29.aspx
         ua = navigator.userAgent.toLowerCase(),
@@ -52,7 +52,7 @@ CQ.form.rte.Common = function() {
      * Recursive part of getNodeAtPosition.
      */
     var getNodeAtPositionRec = function(context, node, state, pos) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         if (node.nodeType == 3) {
             var textLen = com.getNodeCharacterCnt(node);
             var endPos = state.charPos + textLen;
@@ -164,7 +164,7 @@ CQ.form.rte.Common = function() {
      * @param {Node} processingNode
      */
     var getCharacterOffsetForNodeRec = function(context, node, charPos, processingNode) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         // if we got the first item of an irregularily nested edit block (nested lists),
         // we'll have to correct one character position before we calculate anything
         if (com.isTag(processingNode, com.EDITBLOCK_UNREGNEST_TAGS)) {
@@ -319,7 +319,7 @@ CQ.form.rte.Common = function() {
 
         /**
          * Check if the given DOM node is the root node of the current editing context.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {Node} dom DOM node to check
          * @return {Boolean} True if the given Node is a body node
          */
@@ -343,7 +343,7 @@ CQ.form.rte.Common = function() {
                 return false;
             }
             var domTag = dom.tagName.toLowerCase();
-            if (!CQ.form.rte.Utils.isArray(tagName)) {
+            if (!CUI.rte.Utils.isArray(tagName)) {
                 return (domTag == tagName.toLowerCase());
             }
             var tagCnt = tagName.length;
@@ -362,7 +362,7 @@ CQ.form.rte.Common = function() {
          *         is available (= default HTML namespace)
          */
         getNamespace: function(dom) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
 
             if (dom && dom.nodeType == 1) {
                 // IE 10 doesn't support scopeName in Standards mode anymore, so check
@@ -419,7 +419,7 @@ CQ.form.rte.Common = function() {
                     if ((name == "_class") || (name == "className")) {
                         name = "class";
                     }
-                    var cmpValue = CQ.form.rte.Common.getAttribute(dom, name);
+                    var cmpValue = CUI.rte.Common.getAttribute(dom, name);
                     if (cmpValue != attribs[name]) {
                         return false;
                     }
@@ -440,7 +440,7 @@ CQ.form.rte.Common = function() {
          * @return {Boolean} True, if the attribute is defined for the DOM node
          */
         isAttribDefined: function(dom, attribName) {
-            var attribValue = CQ.form.rte.Common.getAttribute(dom, attribName, true);
+            var attribValue = CUI.rte.Common.getAttribute(dom, attribName, true);
             return (attribValue != null);
         },
 
@@ -456,7 +456,7 @@ CQ.form.rte.Common = function() {
          * @return {String} The attribute's value
          */
         getAttribute: function(dom, attribName, normalize) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
 
             if (!dom) {
                 return null;
@@ -474,7 +474,7 @@ CQ.form.rte.Common = function() {
                     attribValue = dom.attributes["name"].nodeValue;
                 } else {
                     attribValue = dom.getAttribute(
-                            CQ.form.rte.Common.getIEAttributeName(attribName));
+                            CUI.rte.Common.getIEAttributeName(attribName));
                 }
             }
             if (normalize && ((attribValue != null) && (attribValue.length == 0))) {
@@ -504,7 +504,7 @@ CQ.form.rte.Common = function() {
          * @param {String} attribValue The attribute value to be set
          */
         setAttribute: function(dom, attribName, attribValue) {
-            var com = CQ.form.rte.Common,
+            var com = CUI.rte.Common,
                 attribNameLC = attribName.toLowerCase();
             if (typeof attribValue != String) {
                 attribValue = String(attribValue);
@@ -520,7 +520,7 @@ CQ.form.rte.Common = function() {
                 dom.attributes["name"].nodeValue = attribValue;
                 return;
             }
-            attribName = CQ.form.rte.Common.getIEAttributeName(attribName);
+            attribName = CUI.rte.Common.getIEAttributeName(attribName);
             dom.setAttribute(attribName, attribValue);
         },
 
@@ -530,7 +530,7 @@ CQ.form.rte.Common = function() {
          * @param {String} attribName Name of attribute to remove
          */
         removeAttribute: function(dom, attribName) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
 
             if (com.ua.isOldIE) {
                 if (attribName == "style") {
@@ -538,7 +538,7 @@ CQ.form.rte.Common = function() {
                     return;
                 }
             }
-            dom.removeAttribute(CQ.form.rte.Common.getIEAttributeName(attribName));
+            dom.removeAttribute(CUI.rte.Common.getIEAttributeName(attribName));
         },
 
         /**
@@ -562,7 +562,7 @@ CQ.form.rte.Common = function() {
          *        excluded from copying
          */
         copyAttributes: function(dom1, dom2, excludedAttribs) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             var a, attributeCnt, attrib, attribName;
             if (com.ua.isIE6 || com.ua.isIE7) {
                 // IE needs a special way of handling things again ...
@@ -629,7 +629,7 @@ CQ.form.rte.Common = function() {
          * @return {Boolean} True if both elements share the same attributes
          */
         compareAttributes: function(dom1, dom2) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             var name, value, cmpValue;
             var attribs1 = dom1.attributes;
             var attribs2 = dom2.attributes;
@@ -670,10 +670,10 @@ CQ.form.rte.Common = function() {
          * @return {String[]} Array with all attribute names
          */
         getAttributeNames: function(dom, keepCase, filter) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
 
             if (com.ua.isOldIE) {
-                return CQ.form.rte.Common.getIEAttributeNames(dom, keepCase, filter);
+                return CUI.rte.Common.getIEAttributeNames(dom, keepCase, filter);
             }
             // this is the correct method to determine valid DOM attributes on other
             // browsers
@@ -704,7 +704,7 @@ CQ.form.rte.Common = function() {
             if (!nodes) {
                 nodes = [ ];
             }
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             if (com.isTag(dom, tagName)) {
                 nodes.push(dom);
             }
@@ -724,7 +724,7 @@ CQ.form.rte.Common = function() {
          * @param {String} tagName Tag name of the specified type
          */
         containsTag: function(dom, tagName) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             if (com.isTag(dom, tagName)) {
                 return true;
             }
@@ -749,7 +749,7 @@ CQ.form.rte.Common = function() {
          *         specified above
          */
         equals: function(dom1, dom2) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             if (dom1.nodeType != dom2.nodeType) {
                 return false;
             }
@@ -858,7 +858,7 @@ CQ.form.rte.Common = function() {
             if (!dom || (dom.nodeType == 3)) {
                 return false;
             }
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             var tagList = com.ONE_CHARACTER_NODES;
             for (var i = 0; i < tagList.length; i++) {
                 var isMatching = com.matchesTagDef(dom, tagList[i]);
@@ -881,7 +881,7 @@ CQ.form.rte.Common = function() {
             if (!dom) {
                 return false;
             }
-            return (dom.nodeType == 3) || CQ.form.rte.Common.isOneCharacterNode(dom);
+            return (dom.nodeType == 3) || CUI.rte.Common.isOneCharacterNode(dom);
         },
 
         /**
@@ -894,7 +894,7 @@ CQ.form.rte.Common = function() {
             if (!dom) {
                 return false;
             }
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             return com.isCharacterNode(dom) || com.isEmptyEditingBlock(dom, true);
         },
 
@@ -905,7 +905,7 @@ CQ.form.rte.Common = function() {
          * @return {Boolean} True if the DOM element contains at least one character
          */
         containsCharacterNode: function(dom) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             if (com.isCharacterNode(dom)) {
                 return true;
             }
@@ -928,7 +928,7 @@ CQ.form.rte.Common = function() {
          * @return {HTMLElement[]} Array containing all character nodes
          */
         getCharacterNodes: function(dom, array) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             if (!array) {
                 array = [ ];
             }
@@ -955,7 +955,7 @@ CQ.form.rte.Common = function() {
          * @return {Boolean} True if the DOM element is an empty edit block
          */
         isEmptyEditingBlock: function(dom, checkDeep) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             if (dom.nodeType == 3) {
                 return false;
             }
@@ -973,12 +973,12 @@ CQ.form.rte.Common = function() {
          * calculation of character positions.
          * <p>
          * Note that this method does not work recursively.
-         * @see CQ.form.rte.Common.getNodeText
+         * @see CUI.rte.Common.getNodeText
          * @param {Node} node DOM node
          * @return {Number} Number of relevant characters
          */
         getNodeCharacterCnt: function(node) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             if (node.nodeType == 1) {
                 if (com.isOneCharacterNode(node)) {
                     return 1;
@@ -989,7 +989,7 @@ CQ.form.rte.Common = function() {
                 }
                 return 0;
             }
-            var nodeText = CQ.form.rte.Common.getNodeText(node);
+            var nodeText = CUI.rte.Common.getNodeText(node);
             if (nodeText) {
                 return nodeText.length;
             }
@@ -1002,12 +1002,12 @@ CQ.form.rte.Common = function() {
          * <p>Note that this method works recursively and doesn't consider edit block roots
          * ("p", "td", "li").</p>
          * .
-         * @see CQ.form.rte.Common.getNodeText
+         * @see CUI.rte.Common.getNodeText
          * @param {Node} node DOM node
          * @return {Number} Number of relevant characters
          */
         getNodeTextLength: function(node) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             if (node.nodeType == 3) {
                 return com.getNodeCharacterCnt(node);
             } else if (node.nodeType == 1) {
@@ -1024,7 +1024,7 @@ CQ.form.rte.Common = function() {
 
         /**
          * Get the node at the given character position.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {Number} pos character position to be calculated
          * @return {Object} definition of the DOM node at the given character position
          */
@@ -1050,7 +1050,7 @@ CQ.form.rte.Common = function() {
 
         /**
          * Calculates the character position of the given node.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {Node} node DOM node for which the character offset is to be calculated
          * @return {Number} Character position for the given node
          */
@@ -1063,7 +1063,7 @@ CQ.form.rte.Common = function() {
          * <p>This method considers multiple hierarchical levels (whereas
          * HTMLElement.nextSibling only works on the same hierarchical level) and can be
          * used for DOM walking.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} node The DOM node
          * @return {HTMLElement} previous sibling of dom; <code>null</code> if
          *         there is no previous sibling
@@ -1079,7 +1079,7 @@ CQ.form.rte.Common = function() {
                     node = node.childNodes[childCnt - 1];
                 }
             }
-            return CQ.form.rte.Common.getParentNode(context, node);
+            return CUI.rte.Common.getParentNode(context, node);
         },
 
         /**
@@ -1090,13 +1090,13 @@ CQ.form.rte.Common = function() {
          * break tags are specified and the initial node's type is one of the break tags.
          * This is contrary to the behaviour of {@link #getNextTextNode}, but correct in
          * the context of DOM traversal.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} node The DOM node
          * @return {HTMLElement} previous text sibling of dom; null if there is no previous
          *         sibling
          */
         getPreviousTextNode: function(context, node, breakTags) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             if (breakTags && com.isTag(node, breakTags)) {
                 return null;
             }
@@ -1119,14 +1119,14 @@ CQ.form.rte.Common = function() {
          * break tags are specified and the initial node's type is one of the break tags.
          * This is contrary to the behaviour of {@link #getNextCharacterNode}, but
          * correct in the context of DOM traversal.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} node The DOM node
          * @return {HTMLElement} previous sibling of dom that is a text node or has to be
          *         handled like a character for caret positioning; null if there is no
          *         previous sibling
          */
         getPreviousCharacterNode: function(context, node, breakTags) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             // if we're looking for a previous node, we'll have to check the starting
             // node also, contrary to getNextCharacterNode
             if (breakTags && com.isTag(node, breakTags)) {
@@ -1150,14 +1150,14 @@ CQ.form.rte.Common = function() {
          * break tags are specified and the initial node's type is one of the break tags.
          * This is contrary to the behaviour of {@link #getNextTextNode}, but correct in
          * the context of DOM traversal.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} node The DOM node
          * @return {HTMLElement} next sibling of dom that is a text node or has to be
          *         handled like a character for caret positioning; null if there is no
          *         next sibling
          */
         getPreviousEditableNode: function(context, node, breakTags) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             if (!node) {
                 return null;
             }
@@ -1179,7 +1179,7 @@ CQ.form.rte.Common = function() {
          * <p>This method considers multiple hierarchical levels (whereas
          * HTMLElement.nextSibling only works on the same hierarchical level) and can be
          * used for DOM walking.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} node The DOM node
          * @return {HTMLElement} next sibling of dom; null if there is no next sibling
          */
@@ -1191,7 +1191,7 @@ CQ.form.rte.Common = function() {
                 return node.nextSibling;
             }
             while (true) {
-                node = CQ.form.rte.Common.getParentNode(context, node);
+                node = CUI.rte.Common.getParentNode(context, node);
                 if (!node) {
                     return null;
                 }
@@ -1209,13 +1209,13 @@ CQ.form.rte.Common = function() {
          * are specified and the initial node's type is one of the break tags. This is
          * contrary to the behaviour of {@link #getPreviousTextNode}, but correct in
          * the context of DOM traversal.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} node The DOM node
          * @return {HTMLElement} next text sibling of dom; null if there is no previous
          *         sibling
          */
         getNextTextNode: function(context, node, breakTags) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             do {
                 node = com.getNextNode(context, node);
                 if (breakTags && com.isTag(node, breakTags)) {
@@ -1235,14 +1235,14 @@ CQ.form.rte.Common = function() {
          * are specified and the initial node's type is one of the break tags. This is
          * contrary to the behaviour of {@link #getPreviousCharacterNode}, but correct in
          * the context of DOM traversal.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} node The DOM node
          * @return {HTMLElement} next sibling of dom that is a text node or has to be
          *         handled like a character for caret positioning; null if there is no
          *         next sibling
          */
         getNextCharacterNode: function(context, node, breakTags) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             do {
                 node = com.getNextNode(context, node);
                 if (breakTags && com.isTag(node, breakTags)) {
@@ -1261,14 +1261,14 @@ CQ.form.rte.Common = function() {
          * are specified and the initial node's type is one of the break tags. This is
          * contrary to the behaviour of {@link #getPreviousEditableNode}, but correct in
          * the context of DOM traversal.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} node The DOM node
          * @return {HTMLElement} next sibling of dom that is a text node or has to be
          *         handled like a character for caret positioning; null if there is no
          *         next sibling
          */
         getNextEditableNode: function(context, node, breakTags) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             if (!node) {
                 return null;
             }
@@ -1292,7 +1292,7 @@ CQ.form.rte.Common = function() {
          */
         isAncestor: function(context, dom1, dom2) {
             do {
-                dom2 = CQ.form.rte.Common.getParentNode(context, dom2);
+                dom2 = CUI.rte.Common.getParentNode(context, dom2);
                 if (dom2) {
                     if (dom2 == dom1) {
                         return true;
@@ -1309,7 +1309,7 @@ CQ.form.rte.Common = function() {
          * @param {String/String[]} tags The tag(s) to check against
          */
         isLastChildDeep: function(subTreeRoot, tags) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             var checkNode = subTreeRoot;
             do {
                 if (checkNode.nodeType != 1) {
@@ -1329,11 +1329,11 @@ CQ.form.rte.Common = function() {
         /**
          * Checks if the specified element is the last element of a nesting level, for
          * example the last cell of a table that is nested into another table.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} node The node to check
          */
         isLastElementOfNestingLevel: function(context, node) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             // get the corresponding nesting element
             while (!com.isTag(node, com.EDITBLOCK_NESTED_TAGS)
                     && !com.isTag(node, com.EDITBLOCK_UNREGNEST_TAGS)) {
@@ -1407,7 +1407,7 @@ CQ.form.rte.Common = function() {
          *         descendant nodes
          */
         getLastChild: function(node, isRecCall) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             if (node.nodeType == 3) {
                 return node;
             }
@@ -1427,7 +1427,7 @@ CQ.form.rte.Common = function() {
          *         descendant nodes
          */
         getFirstChild: function(node, isRecCall) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             if (node.nodeType == 3) {
                 return node;
             }
@@ -1451,7 +1451,7 @@ CQ.form.rte.Common = function() {
          * @return {Boolean} True if the given node has a textual descendant, else false
          */
         hasTextChild: function(node, useTextLen) {
-            return (CQ.form.rte.Common.getFirstTextChild(node, useTextLen) != null);
+            return (CUI.rte.Common.getFirstTextChild(node, useTextLen) != null);
         },
 
         /**
@@ -1468,7 +1468,7 @@ CQ.form.rte.Common = function() {
          *         text node available
          */
         getFirstTextChild: function(node, useTextLen, includeSelf) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             if (includeSelf) {
                 if (useTextLen) {
                     if (com.getNodeCharacterCnt(node) > 0) {
@@ -1499,7 +1499,7 @@ CQ.form.rte.Common = function() {
          *         text node available
          */
         getLastTextChild: function(node, useTextLen, includeSelf) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             if (includeSelf) {
                 if (useTextLen) {
                     if (com.getNodeCharacterCnt(node) > 0) {
@@ -1538,7 +1538,7 @@ CQ.form.rte.Common = function() {
         /**
          * Get the parent node of the given DOM node, up to (and including) the
          * document's root node.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} node DOM node for which the parent node has to be determined
          * @return {HTMLElement} parent node; <code>null</code> if the given node has no
          *         more "content" parent nodes
@@ -1555,7 +1555,7 @@ CQ.form.rte.Common = function() {
          * <p>Later Gecko versions introduced the behaviour that sometimes nodes get
          * referenced (for example by the selection) that are not connected to the
          * document anymore. This method can be used to detect such cases.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom The DOM node to check
          * @return {Boolean} True if the specified node is a zombie node
          */
@@ -1575,13 +1575,13 @@ CQ.form.rte.Common = function() {
          * Note that this method does only return the ancestor node (of <code>dom</code>)
          * that is a direct child of the document's root element. For proper block node
          * detection see the {@link #BLOCK_TAGS} array.
-         * @see CQ.form.rte.DomProcessor#getScopedBlockNode
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @see CUI.rte.DomProcessor#getScopedBlockNode
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom DOM node for which the "block node" has to be determined
          * @deprecated Use proper detection of block nodes instead
          */
         getBlockNode: function(context, dom) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             while (dom) {
                 if (com.getParentNode(context, dom.parentNode) == null) {
                     return dom;
@@ -1597,7 +1597,7 @@ CQ.form.rte.Common = function() {
          * Note that this method only checks if the given node is a direct child of the
          * document's body tag. For proper block node detection see the {@link #BLOCK_TAGS}
          * array.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom DOM node to check
          * @return {Boolean} True if the given DOM node is a direct child of
          *         the document's body element
@@ -1605,14 +1605,14 @@ CQ.form.rte.Common = function() {
          */
         isBlockNode: function(context, dom) {
             return (dom && dom.parentNode
-                    && CQ.form.rte.Common.isRootNode(context, dom.parentNode));
+                    && CUI.rte.Common.isRootNode(context, dom.parentNode));
         },
 
         /**
          * @deprecated Use proper detection of block nodes instead
          */
         getLastBlockNode: function(context, dom) {
-            while (!CQ.form.rte.Common.isRootNode(context, dom)) {
+            while (!CUI.rte.Common.isRootNode(context, dom)) {
                 dom = dom.parentNode;
             }
             var blocks = context.root.childNodes;
@@ -1639,7 +1639,7 @@ CQ.form.rte.Common = function() {
                         return true;
                     }
                 } else {
-                    var hasChildContent = CQ.form.rte.Common.hasContent(
+                    var hasChildContent = CUI.rte.Common.hasContent(
                             childToProcess);
                     if (hasChildContent) {
                         return true;
@@ -1654,7 +1654,7 @@ CQ.form.rte.Common = function() {
          * definition (tag name and attributes).</p>
          * <p>If the specified DOM matches the tag definition itself, it is returned instead
          * of any super matching element.</p>
-         * @param {CQ.form.rte.EditContext} context
+         * @param {CUI.rte.EditContext} context
          * @param {HTMLElement} dom The DOM element to start DOM traversal with
          * @param {String} tagName The tag name to check for
          * @param {Object} attribs Attribute definition
@@ -1662,7 +1662,7 @@ CQ.form.rte.Common = function() {
          *         tag definition; null if no such element exists
          */
         getTagInPath: function(context, dom, tagName, attribs) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             while (dom) {
                 if (dom.nodeType == 1) {
                     if (dom == context.root) {
@@ -1680,18 +1680,18 @@ CQ.form.rte.Common = function() {
         },
 
         containsTagInPath: function(context, dom, tagName, attribs) {
-            return (CQ.form.rte.Common.getTagInPath(context, dom, tagName, attribs)
+            return (CUI.rte.Common.getTagInPath(context, dom, tagName, attribs)
                     != null);
         },
 
         matchesTagDefs: function(dom, tagDefs) {
-            var com = CQ.form.rte.Common;
-            if (!CQ.form.rte.Utils.isArray(tagDefs)) {
+            var com = CUI.rte.Common;
+            if (!CUI.rte.Utils.isArray(tagDefs)) {
                 return com.matchesTagDef(dom, tagDefs);
             }
             var defCnt = tagDefs.length;
             for (var t = 0; t < defCnt; t++) {
-                if (CQ.form.rte.Common.matchesTagDef(dom, tagDefs[t])) {
+                if (CUI.rte.Common.matchesTagDef(dom, tagDefs[t])) {
                     return true;
                 }
             }
@@ -1699,7 +1699,7 @@ CQ.form.rte.Common = function() {
         },
 
         matchesTagDef: function(dom, tagDef) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             if (!com.isTag(dom, tagDef.tagName)) {
                 return false;
             }
@@ -1748,12 +1748,12 @@ CQ.form.rte.Common = function() {
          * <p>Gets the list nesting level for the specified DOM element.</p>
          * <p>If the specified DOM element is a list itself, it does not add as another
          * list level.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom The DOM element to determine list nesting for
          * @return {Number} The list nesting level of the specified DOM element
          */
         getListLevel: function(context, dom) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             var indentLevel = 0;
             while (dom) {
                 dom = com.getParentNode(context, dom);
@@ -1771,7 +1771,7 @@ CQ.form.rte.Common = function() {
          */
         isFirstNestedList: function(context, listDom) {
             // todo adapt if other unregular nested structures are supported in the future
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             var itemDom = com.getTagInPath(context, listDom, "li");
             if (!itemDom) {
                 return false;
@@ -1795,7 +1795,7 @@ CQ.form.rte.Common = function() {
          * @return {Boolean} True if the specified list DOM is the first nested list
          */
         isLastNestedList: function(context, listDom) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             var itemDom = com.getTagInPath(context, listDom, "li");
             if (!itemDom) {
                 return false;
@@ -1826,7 +1826,7 @@ CQ.form.rte.Common = function() {
          *         criteria
          */
         getChildNodesByType: function(dom, tagName, isRecursive, stopTag, result) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             result = result || [ ];
             var children = dom.childNodes;
             var childCnt = children.length;
@@ -1851,7 +1851,7 @@ CQ.form.rte.Common = function() {
             var consistentStyle;
             for (var nodeIndex = 0; nodeIndex < nodeCnt; nodeIndex++) {
                 var dom = domList[nodeIndex];
-                var styleAttrib = CQ.form.rte.Common.getStyleProp(context, dom, styleName);
+                var styleAttrib = CUI.rte.Common.getStyleProp(context, dom, styleName);
                 styleAttrib = (styleAttrib ? styleAttrib : defaultValue);
                 if (nodeIndex == 0) {
                     consistentStyle = styleAttrib;
@@ -1866,7 +1866,7 @@ CQ.form.rte.Common = function() {
         // --- DOM processing --------------------------------------------------------------
 
         insertNode: function(dom, node, offset) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             if (node.nodeType == 1) {
                 if (!offset) {
                     node.parentNode.insertBefore(dom, node);
@@ -1927,7 +1927,7 @@ CQ.form.rte.Common = function() {
          *        end of the destination node's existing child nodes
          */
         moveChildren: function(src, dest, startIndex, insertAtEnd) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             if (startIndex == null) {
                 startIndex = 0;
             }
@@ -1966,11 +1966,11 @@ CQ.form.rte.Common = function() {
         /**
          * Removes all nodes with no child nodes "up the hierarchy", starting from the
          * given DOM node.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {Node} dom DOM node to start
          */
         removeNodesWithoutContent: function(context, dom) {
-            while (dom && !CQ.form.rte.Common.isRootNode(context, dom)) {
+            while (dom && !CUI.rte.Common.isRootNode(context, dom)) {
                 if (dom.childNodes.length > 0) {
                     break;
                 }
@@ -1984,7 +1984,7 @@ CQ.form.rte.Common = function() {
          * Get the value for the given style attribute name that is actually valid for
          * the specified DOM element. If necessary, the value is taken from a parent element
          * accordingly.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom DOM element
          * @param {String} styleName Name of the style attribute
          * @return {String} Style value; null if no applicable style value has been found
@@ -1999,7 +1999,7 @@ CQ.form.rte.Common = function() {
                         return dom.style[styleName];
                     }
                 }
-                dom = CQ.form.rte.Common.getParentNode(context, dom);
+                dom = CUI.rte.Common.getParentNode(context, dom);
             }
             return null;
         },
@@ -2017,7 +2017,7 @@ CQ.form.rte.Common = function() {
             if (dom.nodeType != 1) {
                 return [ ];
             }
-            var classNames = CQ.form.rte.Common.getAttribute(dom, "class");
+            var classNames = CUI.rte.Common.getAttribute(dom, "class");
             if (!classNames) {
                 return [ ];
             }
@@ -2035,7 +2035,7 @@ CQ.form.rte.Common = function() {
             if (dom.nodeType != 1) {
                 return false;
             }
-            var classes = CQ.form.rte.Common.parseCSS(dom);
+            var classes = CUI.rte.Common.parseCSS(dom);
             var clsCnt = classes.length;
             for (var c = 0; c < clsCnt; c++) {
                 if (classes[c] == className) {
@@ -2053,7 +2053,7 @@ CQ.form.rte.Common = function() {
          * @param {String} className CSS class name to be applied
          */
         addClass: function(dom, className) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             if (!com.hasCSS(dom, className)) {
                 var domClassName = com.getAttribute(dom, "class");
                 if (domClassName) {
@@ -2073,7 +2073,7 @@ CQ.form.rte.Common = function() {
          * @param {String} className CSS class name to be removed
          */
         removeClass: function(dom, className) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             var classNames = com.parseCSS(dom);
             var recreateStr = "";
             var mustSet = false;
@@ -2103,7 +2103,7 @@ CQ.form.rte.Common = function() {
          * @param {HTMLElement} dom DOM node
          */
         removeAllClasses: function(dom) {
-            CQ.form.rte.Common.removeAttribute(dom, "class");
+            CUI.rte.Common.removeAttribute(dom, "class");
         },
 
 
@@ -2120,7 +2120,7 @@ CQ.form.rte.Common = function() {
          * @return {String} The attribute name as suitable for IE
          */
         getIEAttributeName: function(attribName) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
 
             if (com.ua.isOldIE) {
                 var attribNameLC = attribName.toLowerCase();
@@ -2131,7 +2131,7 @@ CQ.form.rte.Common = function() {
                     return "className";
                 }
                 // use table for other attribute names
-                var translatedAttribName = CQ.form.rte.Common.IE_ATTRIB_NAMES[attribNameLC];
+                var translatedAttribName = CUI.rte.Common.IE_ATTRIB_NAMES[attribNameLC];
                 if (translatedAttribName != null) {
                     attribName = translatedAttribName;
                 }
@@ -2159,7 +2159,7 @@ CQ.form.rte.Common = function() {
             var domHtml = dom.outerHTML;
             var tagEndPos = domHtml.indexOf(">");
             domHtml = domHtml.substring(0, tagEndPos + 1);
-            var parsed = CQ.form.rte.HtmlProcessor.parseTag(domHtml);
+            var parsed = CUI.rte.HtmlProcessor.parseTag(domHtml);
             var attributes = parsed.attributes;
             for (var attribName in attributes) {
                 var isFilteredOut = false;
@@ -2191,7 +2191,7 @@ CQ.form.rte.Common = function() {
          */
         removeJcrData: function(coll) {
             for (var key in coll) {
-                if (CQ.form.rte.Common.strStartsWith(key, "jcr:")) {
+                if (CUI.rte.Common.strStartsWith(key, "jcr:")) {
                     delete coll[key];
                 } else if (key == "xtype") {
                     delete coll[key];
@@ -2209,7 +2209,7 @@ CQ.form.rte.Common = function() {
          *         <code>array/code>
          */
         arrayContains: function(array, object, cmp) {
-            return (CQ.form.rte.Common.arrayIndex(array, object, cmp) >= 0);
+            return (CUI.rte.Common.arrayIndex(array, object, cmp) >= 0);
         },
 
         /**
@@ -2285,7 +2285,7 @@ CQ.form.rte.Common = function() {
             if (!obj) {
                 return null;
             }
-            if (CQ.form.rte.Utils.isArray(obj)) {
+            if (CUI.rte.Utils.isArray(obj)) {
                 return obj;
             }
             if (typeof(obj) == "object") {
@@ -2386,17 +2386,17 @@ CQ.form.rte.Common = function() {
          * An index path consists of the respective child positions up to the body node.
          * The index path may be used to determine if a node is "before" or "behind"
          * another node.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {Node} node DOM node for which the index path has to be created
          * @return {Array} index path for the given node
          */
         createIndexPath: function(context, node) {
-            var parentNode = CQ.form.rte.Common.getParentNode(context, node);
+            var parentNode = CUI.rte.Common.getParentNode(context, node);
             if (!parentNode) {
                 return [];
             }
-            var sortIndex = CQ.form.rte.Common.getChildIndex(node);
-            var sortIndices = CQ.form.rte.Common.createIndexPath(context, parentNode);
+            var sortIndex = CUI.rte.Common.getChildIndex(node);
+            var sortIndices = CUI.rte.Common.createIndexPath(context, parentNode);
             sortIndices.push(sortIndex);
             return sortIndices;
         },
@@ -2457,11 +2457,11 @@ CQ.form.rte.Common = function() {
         /**
          * Gets the "outer html" of the specified DOM node (= the HTML code that represents
          * the specified node and all of its child nodes, recursively).
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom The HTML element to get the outer HTML for
          */
         getOuterHTML: function(context, dom) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
 
             if (com.ua.isIE) {
                 return dom.outerHTML;
@@ -2480,7 +2480,7 @@ CQ.form.rte.Common = function() {
         dumpNode: function(node, prefix, suffix) {
             var text = (prefix ? prefix : "");
             if (node) {
-                var childNo = CQ.form.rte.Common.getChildIndex(node);
+                var childNo = CUI.rte.Common.getChildIndex(node);
                 if (node.nodeType == 1) {
                     text += node.tagName;
                 } else if (node.nodeType == 3) {
@@ -2513,11 +2513,11 @@ CQ.form.rte.Common = function() {
             for (var indentIndex = 0; indentIndex < indent; indentIndex++) {
                 text += "   ";
             }
-            text += CQ.form.rte.Common.dumpNode(node) + "\n";
+            text += CUI.rte.Common.dumpNode(node) + "\n";
             if (node && (node.nodeType == 1)) {
                 var childCnt = node.childNodes.length;
                 for (var childIndex = 0; childIndex < childCnt; childIndex++) {
-                    text += CQ.form.rte.Common.dumpNodeRecursively(
+                    text += CUI.rte.Common.dumpNodeRecursively(
                             node.childNodes[childIndex], indent + 1);
                 }
             }
@@ -2532,7 +2532,7 @@ CQ.form.rte.Common = function() {
          *        contained in the object hierarchy should be dumped recursively
          */
         dumpObject: function(obj, indent, dumpDomRecursively) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             var dump = "";
             if (!indent) {
                 indent = 0;
@@ -2616,7 +2616,7 @@ CQ.form.rte.Common = function() {
                 if (!msg) {
                     msg = "";
                 }
-                msg = CQ.form.rte.Utils.htmlEncode(msg);
+                msg = CUI.rte.Utils.htmlEncode(msg);
                 var addBr = true;
                 if ((msg.length > 0) && (msg.charAt(msg.length - 1) == "\n")) {
                     addBr = false;
@@ -2634,7 +2634,7 @@ CQ.form.rte.Common = function() {
         setLogEnabled: function(isEnabled) {
             isLogEnabled = isEnabled;
             if (isLogEnabled) {
-                CQ.form.rte.Common.ieLog(null, true);
+                CUI.rte.Common.ieLog(null, true);
             }
         },
 
@@ -2761,7 +2761,7 @@ CQ.form.rte.Common = function() {
          * @param {String} attribNameLC Lower case version of the attribute name
          */
         FILTER_GECKO_TEMPORARY_ATTRIBS: function(dom, attribName, attribNameLC) {
-            var com = CQ.form.rte.Common;
+            var com = CUI.rte.Common;
             // exclude temporary Mozilla attributes (as far as currently known)
             return com.strStartsWith(attribNameLC, "_moz")
                 || (com.isTag(dom, "br") && (attribNameLC == "type"));

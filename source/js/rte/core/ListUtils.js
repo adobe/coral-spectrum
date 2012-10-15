@@ -17,16 +17,16 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.ListUtils
+ * @class CUI.rte.ListUtils
  * @static
  * @private
  * The ListUtils provides utility functions for handling lists.
  */
-CQ.form.rte.ListUtils = function() {
+CUI.rte.ListUtils = function() {
 
-    var com = CQ.form.rte.Common;
+    var com = CUI.rte.Common;
 
-    var dpr = CQ.form.rte.DomProcessor;
+    var dpr = CUI.rte.DomProcessor;
 
     return {
 
@@ -34,13 +34,13 @@ CQ.form.rte.ListUtils = function() {
 
         /**
          * <p>Postprocesses a list of selected items that was created from a
-         * {@link CQ.form.rte.NodeList NodeList}, using the
-         * {@link CQ.form.rte.NodeList#getTags getTags} method.</p>
+         * {@link CUI.rte.NodeList NodeList}, using the
+         * {@link CUI.rte.NodeList#getTags getTags} method.</p>
          * <p>This is required to remove parent items that are included in the node list
          * (as they are actually part of the DOM structure), but are not really selected
          * (instead, one or more nested list item is selected).</p>
          * @param {Object[]} listItems Array containing list items, as created by
-         *        {@link CQ.form.rte.NodeList#getTags}
+         *        {@link CUI.rte.NodeList#getTags}
          */
         postprocessSelectedItems: function(listItems) {
             var nodeCnt = listItems.length;
@@ -76,13 +76,13 @@ CQ.form.rte.ListUtils = function() {
          * <p>Creates a new list from the specified list of edit blocks.</p>
          * <p>This method handles auxiliary root correctly by adding their content as
          * separate lists.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement[]} blockList List with edit blocks to be used for creating
          *        the list
          * @param {String} listType The list type ("ul", "ol")
          */
         createList: function(context, blockList, listType) {
-            var lut = CQ.form.rte.ListUtils;
+            var lut = CUI.rte.ListUtils;
             // preprocess if a table cell is reported as the only edit block
             if ((blockList.length == 1) && com.isTag(blockList[0], com.TABLE_CELLS)) {
                 var tempBlock = context.createElement("div");
@@ -165,7 +165,7 @@ CQ.form.rte.ListUtils = function() {
         /**
          * Converts the specified list item (which must be part of a top-level list) to
          * a edit block of the specified type.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} liDom The list item to be converted
          * @param {String} tagName The edit block tag to convert the item to
          * @param {Object} attribs Attribute definition for the edit block tag
@@ -198,7 +198,7 @@ CQ.form.rte.ListUtils = function() {
          * </p>
          * <p>If the specified DOM element is a list item, the DOM element (and not its
          * "super item") is returned.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom The DOM element to determine the list item for
          * @return {HTMLElement} The respective list item; null if the DOM element is not
          *         contained in a list item
@@ -218,12 +218,12 @@ CQ.form.rte.ListUtils = function() {
          * <p>The specified list item may be any DOM element of the corresponding list item.
          * If a list is specified as list item, the "super list" (if available) is returned.
          * </p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} itemDom The list item to determine the corresponding list
          *        for; null if the DOM element is not contained in a list
          */
         getListForItem: function(context, itemDom) {
-            itemDom = CQ.form.rte.ListUtils.getItemForDom(context, itemDom);
+            itemDom = CUI.rte.ListUtils.getItemForDom(context, itemDom);
             var listDom = (itemDom ? com.getParentNode(context, itemDom) : null);
             if (listDom && !com.isTag(listDom, com.LIST_TAGS)) {
                 listDom = null;
@@ -233,7 +233,7 @@ CQ.form.rte.ListUtils = function() {
 
         /**
          * Gets the top-level list the specified DOM element is part of.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom The DOM element
          * @return {HTMLElement} The top-level list element; null if the specified DOM
          *         element is not part of a list
@@ -251,7 +251,7 @@ CQ.form.rte.ListUtils = function() {
 
         /**
          * Gets the nesting level of the specified DOM element.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom The DOM element
          * @return {Number} Nesting level (0 for top-level list; -1 if the specified DOM
          *         element is not part of a list
@@ -269,24 +269,24 @@ CQ.form.rte.ListUtils = function() {
 
         /**
          * Checks if the specified DOM element is part of a top-level list.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom The DOM element
          * @return {Boolean} True if the DOM element is part of a top-level list
          */
         isTopLevelList: function(context, dom) {
-            return (CQ.form.rte.ListUtils.getNestingLevel(context, dom) == 0);
+            return (CUI.rte.ListUtils.getNestingLevel(context, dom) == 0);
         },
 
         /**
          * Checks if the specified DOM element is (part of) the very first list item of its
          * top-level list.
-         * @param {CQ.form.rte.EditContext} context
+         * @param {CUI.rte.EditContext} context
          * @param {HTMLElement} dom The DOM element to check
          * @return {Boolean} true if the specified DOM element is the very first list item
          *         of its top-level list
          */
         isFirstListItem: function(context, dom) {
-            var lut = CQ.form.rte.ListUtils;
+            var lut = CUI.rte.ListUtils;
             var tll = lut.getTopListForItem(context, dom);
             if (tll == null) {
                 return false;
@@ -298,13 +298,13 @@ CQ.form.rte.ListUtils = function() {
         /**
          * Checks if the specified DOM element is (part of) the very last list item of its
          * top-level list.
-         * @param {CQ.form.rte.EditContext} context
+         * @param {CUI.rte.EditContext} context
          * @param {HTMLElement} dom The DOM element to check
          * @return {Boolean} true if the specified DOM element is the very last list item
          *         of its top-level list
          */
         isLastListItem: function(context, dom) {
-            var lut = CQ.form.rte.ListUtils;
+            var lut = CUI.rte.ListUtils;
             var tll = lut.getTopListForItem(context, dom);
             var lastListNode = com.getLastChild(tll);
             if (lastListNode == null) {
@@ -349,7 +349,7 @@ CQ.form.rte.ListUtils = function() {
          * <p>Checks if the specified list is empty.</p>
          * <p>A list is considered empty if it is actually empty or all items and nested
          * lists are empty.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} listDom The list's DOM element
          * @return {Boolean} True if the specified list is empty
          */
@@ -365,7 +365,7 @@ CQ.form.rte.ListUtils = function() {
                     for (var c = 0; c < childCnt; c++) {
                         var nodeToCheck = itemToCheck.childNodes[c];
                         if (com.isTag(nodeToCheck, com.LIST_TAGS)) {
-                            var isListEmpty = CQ.form.rte.ListUtils.isListEmpty(context,
+                            var isListEmpty = CUI.rte.ListUtils.isListEmpty(context,
                                     nodeToCheck);
                             if (!isListEmpty) {
                                 return false;
@@ -387,11 +387,11 @@ CQ.form.rte.ListUtils = function() {
         /**
          * Checks if the specified list item is empty (has no content or only empty
          * nested lists).
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom The list item to check
          */
         isItemEmpty: function(context, dom) {
-            var lut = CQ.form.rte.ListUtils;
+            var lut = CUI.rte.ListUtils;
             dom = lut.getItemForDom(context, dom);
             var childCnt = dom.childNodes.length;
             for (var c = 0; c < childCnt; c++) {
@@ -410,13 +410,13 @@ CQ.form.rte.ListUtils = function() {
         /**
          * Cleans up the specified list by removing empty list items (and empty nested
          * lists as well).
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} listDom The list to be cleaned
          * @param {Boolean} removeHelperAttribs True if helper attributes on list items have
          *        also to be removed
          */
         cleanUpList: function(context, listDom, removeHelperAttribs) {
-            var lut = CQ.form.rte.ListUtils;
+            var lut = CUI.rte.ListUtils;
             var itemCnt = listDom.childNodes.length;
             for (var i = itemCnt - 1; i >= 0; i--) {
                 var itemToProcess = listDom.childNodes[i];
@@ -476,14 +476,14 @@ CQ.form.rte.ListUtils = function() {
 
         /**
          * Removes the specified item from the list.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement[]} items Array of items to unlist; items must be adjacent
          *        (but may be on different hierarchical levels)
          * @param {Boolean} keepStructure True if the list structure should be kept if
          *        list splitting is required
          */
         unlistItems: function(context, items, keepStructure) {
-            var lut = CQ.form.rte.ListUtils;
+            var lut = CUI.rte.ListUtils;
             var itemCnt = items.length;
             if (itemCnt == 0) {
                 return;
@@ -733,7 +733,7 @@ CQ.form.rte.ListUtils = function() {
         /**
          * Checks if the specified node/offset (as provided by a processing selection)
          * determines the position before a nested list.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} node The node
          * @param {Number} offset The offset
          * @return {Boolean} True if the specified node/offset determines the position
@@ -767,7 +767,7 @@ CQ.form.rte.ListUtils = function() {
          * @private
          * @type String
          */
-        REMOVAL_MARKER: CQ.form.rte.Common.RTE_ATTRIB_PREFIX + "_invalid",
+        REMOVAL_MARKER: CUI.rte.Common.RTE_ATTRIB_PREFIX + "_invalid",
 
         /**
          * Marker attribute for list items that were cloned when an original list has been
@@ -775,7 +775,7 @@ CQ.form.rte.ListUtils = function() {
          * @private
          * @type String
          */
-        CLONED_MARKER: CQ.form.rte.Common.RTE_ATTRIB_PREFIX + "_cloned"
+        CLONED_MARKER: CUI.rte.Common.RTE_ATTRIB_PREFIX + "_cloned"
 
     };
 

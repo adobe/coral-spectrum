@@ -17,19 +17,19 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.DomProcessor
+ * @class CUI.rte.DomProcessor
  * @static
  * @private
  * The DomProcessor provides utility functions to manipulate the DOM directly.
  */
-CQ.form.rte.DomProcessor = function() {
+CUI.rte.DomProcessor = function() {
 
-    var com = CQ.form.rte.Common;
+    var com = CUI.rte.Common;
 
     return {
 
         getTagType: function(dom) {
-            var dpr = CQ.form.rte.DomProcessor;
+            var dpr = CUI.rte.DomProcessor;
             var tagName = (dom instanceof String ? dom : dom.tagName).toLowerCase();
             var type = dpr.STRUCTURE;
             var typeTable = dpr.TYPE_TABLE;
@@ -43,7 +43,7 @@ CQ.form.rte.DomProcessor = function() {
         },
 
         resolveTagType: function(dom) {
-            var dpr = CQ.form.rte.DomProcessor;
+            var dpr = CUI.rte.DomProcessor;
             var tagName = (dom instanceof String ? dom : dom.tagName).toLowerCase();
             var type = dpr.STRUCTURE;
             var typeTable = dpr.TYPE_TABLE;
@@ -65,7 +65,7 @@ CQ.form.rte.DomProcessor = function() {
         },
 
         createNodeList: function(context, selection) {
-            var nodeList = new CQ.form.rte.NodeList();
+            var nodeList = new CUI.rte.NodeList();
             if (selection.cellSelection && selection.cellSelection.cells) {
                 nodeList.createFromDomNodes(context, selection.cellSelection.cells);
             } else {
@@ -99,7 +99,7 @@ CQ.form.rte.DomProcessor = function() {
 
         /**
          * Splits the specified text node at the specified offset(s).
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} textNode The text node to be split
          * @param {Number|Number[]} splitPoints Offsets to split the node
          * @return {HTMLElement[]} Array containing all split nodes in correct order
@@ -108,7 +108,7 @@ CQ.form.rte.DomProcessor = function() {
             if (textNode.nodeType != 3) {
                 throw new Error("splitTextNode() may only operate on text nodes.");
             }
-            if (!CQ.form.rte.Utils.isArray(splitPoints)) {
+            if (!CUI.rte.Utils.isArray(splitPoints)) {
                 splitPoints = [ splitPoints ];
             }
             splitPoints.sort(function(c1, c2) {
@@ -141,7 +141,7 @@ CQ.form.rte.DomProcessor = function() {
          * independent way.</p>
          * <p>Note that you can use "class" or "className" for specifying the "class"
          * attribute and "style" to specify the "style" attribute.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {String} tagName The tag of the element to be created
          * @param {Object} attribs Attribute definition (key: attribute name; value:
          *        attribute value); null for a DOM element without attributes
@@ -163,11 +163,11 @@ CQ.form.rte.DomProcessor = function() {
                     if (attribs.hasOwnProperty(name)) {
                         var value = attribs[name];
                         if (useInnerHTML) {
-                            value = CQ.form.rte.Utils.htmlEncode(value);
+                            value = CUI.rte.Utils.htmlEncode(value);
                             tagStr += " " + name  + "=\"" + value + "\"";
                         } else {
                             name = (name == "className" ? "class" : name);
-                            CQ.form.rte.Common.setAttribute(node, name, value);
+                            CUI.rte.Common.setAttribute(node, name, value);
                         }
                     }
                 }
@@ -183,14 +183,14 @@ CQ.form.rte.DomProcessor = function() {
          * Inserts a new element with the specified tag name and attributes as a direct
          * parent node of the specified node. The specified node will be the only child
          * node of the newly created element.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} node The node that will be the child of the newly created
          *        element
          * @param {String} tagName Tag name of the element to be created
          * @param {Object} attribs Attributes of the element to be created
          */
         insertAsParent: function(context, node, tagName, attribs) {
-            var dpr = CQ.form.rte.DomProcessor;
+            var dpr = CUI.rte.DomProcessor;
             var nodeToInsert = dpr.createNode(context, tagName, attribs);
             var parentNode = node.parentNode;
             parentNode.insertBefore(nodeToInsert, node);
@@ -218,7 +218,7 @@ CQ.form.rte.DomProcessor = function() {
         /**
          * Moves the nodes, specified by the "nodes" list, to a newly created node, which
          * is created before the first node of the "nodes" list.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} baseNode The parent of the nodes to be moved
          * @param {HTMLElement[]} nodes List of nodes to be moved (must be child nodes of
          *        baseNode)
@@ -226,7 +226,7 @@ CQ.form.rte.DomProcessor = function() {
          * @param {Object} attribs Attributes of the node to be created
          */
         restructureAsChild: function(context, baseNode, nodes, tagName, attribs) {
-            var dpr = CQ.form.rte.DomProcessor;
+            var dpr = CUI.rte.DomProcessor;
             var nodeToInsert = dpr.createNode(context, tagName, attribs);
             baseNode.insertBefore(nodeToInsert, nodes[0]);
             var nodeCnt = nodes.length;
@@ -247,12 +247,12 @@ CQ.form.rte.DomProcessor = function() {
         isPlaceholderObject: function(node) {
             if (com.ua.isIE) {
                 return ((node.nodeType == 3)
-                        && (node.nodeValue == CQ.form.rte.DomProcessor.NBSP));
+                        && (node.nodeValue == CUI.rte.DomProcessor.NBSP));
             } else {
                 var isPlaceholder = com.isTag(node, "br");
                 if (!isPlaceholder && com.isTag(node.parentNode, [ "td", "th" ])) {
                     isPlaceholder = ((node.nodeType == 3)
-                            && (node.nodeValue == CQ.form.rte.DomProcessor.NBSP));
+                            && (node.nodeValue == CUI.rte.DomProcessor.NBSP));
                 }
                 return isPlaceholder;
             }
@@ -269,7 +269,7 @@ CQ.form.rte.DomProcessor = function() {
                 return null;
             }
             var child = node.childNodes[0];
-            if (CQ.form.rte.DomProcessor.isPlaceholderObject(child)) {
+            if (CUI.rte.DomProcessor.isPlaceholderObject(child)) {
                 return child;
             }
             return null;
@@ -282,12 +282,12 @@ CQ.form.rte.DomProcessor = function() {
          * @param {HTMLElement} node Node to check
          */
         isEmptyLinePlaceholder: function(node) {
-            return (CQ.form.rte.DomProcessor.getEmptyLinePlaceholder(node) != null);
+            return (CUI.rte.DomProcessor.getEmptyLinePlaceholder(node) != null);
         },
 
         /**
          * Creates a browser-specific empty line placeholder.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {Boolean} createBlock True if a surrounding paragraph node has also to
          *        be created
          * @param {String} blockType (optional) The type of block to create; if none is
@@ -298,7 +298,7 @@ CQ.form.rte.DomProcessor = function() {
         createEmptyLinePlaceholder: function(context, createBlock, blockType) {
             var placeholder;
             if (!com.ua.isIE) {
-                placeholder = CQ.form.rte.DomProcessor.createGeckoPlaceholder(context);
+                placeholder = CUI.rte.DomProcessor.createGeckoPlaceholder(context);
             }
             if (createBlock) {
                 var para = context.createElement(blockType || "p");
@@ -312,7 +312,7 @@ CQ.form.rte.DomProcessor = function() {
 
         /**
          * Creates a Gecko-compatible placeholder br. Can also be used for Webkit browsers.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @return {HTMLElement} The placeholder element
          */
         createGeckoPlaceholder: function(context) {
@@ -325,7 +325,7 @@ CQ.form.rte.DomProcessor = function() {
 
         /**
          * Ensures that a placeholder is available for an empty edit block.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} editBlockDom The edit block
          */
         ensureValidEmptyEditBlock: function(context, editBlockDom) {
@@ -334,7 +334,7 @@ CQ.form.rte.DomProcessor = function() {
                 throw new Error("No valid edit block provided");
             }
             if (editBlockDom.childNodes.length == 0) {
-                var dpr = CQ.form.rte.DomProcessor;
+                var dpr = CUI.rte.DomProcessor;
                 if (!com.ua.isIE) {
                     editBlockDom.appendChild(dpr.createGeckoPlaceholder(context));
                 }
@@ -347,8 +347,8 @@ CQ.form.rte.DomProcessor = function() {
          */
         ensureEmptyLinePlaceholders: function(context, node) {
             if (node.nodeType == 1) {
-                var dpr = CQ.form.rte.DomProcessor;
-                var sel = CQ.form.rte.Selection;
+                var dpr = CUI.rte.DomProcessor;
+                var sel = CUI.rte.Selection;
                 if (dpr.getTagType(node) == dpr.CONTAINER) {
                     var textChild = com.getFirstTextChild(node, true);
                     if (textChild == null) {
@@ -399,7 +399,7 @@ CQ.form.rte.DomProcessor = function() {
          * @return {Boolean} True if the specified block node represents an empty line
          */
         isEmptyLineBlock: function(blockNode) {
-            var dpr = CQ.form.rte.DomProcessor;
+            var dpr = CUI.rte.DomProcessor;
             var isEmpty = dpr.isEmptyLinePlaceholder(blockNode);
             if (!isEmpty) {
                 // handle completely empty blocks + Blocks containing a single &nbsp; node
@@ -432,7 +432,7 @@ CQ.form.rte.DomProcessor = function() {
          * additional &amp;nbsp; is visible - the outerHTML changes to
          * &lt;p&gt;&amp;nbsp;&lt;/p&gt;. The additional &amp;nbsp; is not actually present
          * in the DOM, cannot be iterated or removed.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} editBlock The editing block
          */
         fixEmptyEditingBlockIE: function(context, editBlock) {
@@ -444,7 +444,7 @@ CQ.form.rte.DomProcessor = function() {
                     // not required and throwing an exception on table cells
                     return;
                 }
-                var dpr = CQ.form.rte.DomProcessor;
+                var dpr = CUI.rte.DomProcessor;
                 // we'll have to provide another node before the span that is used for
                 // "persisting" the block, as IE would remove the paragraph otherwise
                 // if there is a "a name" at the end of the previous block
@@ -466,12 +466,12 @@ CQ.form.rte.DomProcessor = function() {
         /**
          * This fixes empty lines at the end of a block similar to the way
          * {@link #fixEmptyEditingBlockIE} does for empty blocks.
-         * @param {CQ.form.rte.EditContext} context The editing context
+         * @param {CUI.rte.EditContext} context The editing context
          * @param {HTMLElement} brDom The linefeed (&lt;br&gt;) to be fixed
          */
         fixEmptyLinefeedIE: function(context, brDom) {
             if (com.ua.isIE) {
-                var dpr = CQ.form.rte.DomProcessor;
+                var dpr = CUI.rte.DomProcessor;
                 var helperNode = context.createElement("span");
                 var insertRef = brDom.nextSibling;
                 insertRef ? brDom.parentNode.insertBefore(helperNode, insertRef)
@@ -489,9 +489,9 @@ CQ.form.rte.DomProcessor = function() {
          * @private
          */
         ensureMinimumContent: function(context) {
-            var dpr = CQ.form.rte.DomProcessor;
-            var com = CQ.form.rte.Common;
-            var sel = CQ.form.rte.Selection;
+            var dpr = CUI.rte.DomProcessor;
+            var com = CUI.rte.Common;
+            var sel = CUI.rte.Selection;
             var pNode = null;
             if (context.root.childNodes.length == 1) {
                 var nodeToCheck = context.root.childNodes[0];
@@ -518,14 +518,14 @@ CQ.form.rte.DomProcessor = function() {
         /**
          * Checks if the specified selection represents an empty line and returns the
          * block node for the empty line if there is one.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {Object} selection Processing selection to check (as createad by
-         *        {@link CQ.form.rte.Selection#createProcessingSelection})
+         *        {@link CUI.rte.Selection#createProcessingSelection})
          * @return {HTMLElement} The edit block node if there is an empty line; null if the
          *         selection doesn't specify an empty line
          */
         getEmptyLine: function(context, selection) {
-            var dpr = CQ.form.rte.DomProcessor;
+            var dpr = CUI.rte.DomProcessor;
             var blockNode = dpr.getEditBlock(context, selection.startNode);
             if (!blockNode) {
                 return null;
@@ -542,13 +542,13 @@ CQ.form.rte.DomProcessor = function() {
 
         /**
          * Checks if the specified selection represents an empty line.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {Object} selection Processing selection to check (as createad by
-         *        {@link CQ.form.rte.Selection#createProcessingSelection})
+         *        {@link CUI.rte.Selection#createProcessingSelection})
          * @return {Boolean} True if the selection represents an empty line
          */
         isEmptyLine: function(context, selection) {
-            return (CQ.form.rte.DomProcessor.getEmptyLine(context, selection) != null);
+            return (CUI.rte.DomProcessor.getEmptyLine(context, selection) != null);
         },
 
         /**
@@ -556,7 +556,7 @@ CQ.form.rte.DomProcessor = function() {
          * <p>This is the case for "br" nodes that have either another "br" node as
          * "previous character sibling" or no direct "previous character subling". The
          * latter condition is valid for IE only.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} node The DOM element to check
          * @return {Boolean} True if the specified node determines an empty linefeed node
          */
@@ -573,7 +573,7 @@ CQ.form.rte.DomProcessor = function() {
          * edit context.</p>
          * <p>Tables that are nested in paragraphs are moved out of this paragraph. Header
          * cells are moved from the "thead" section to the "tbody" section.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          */
         adjustTables: function(context) {
             var root = context.root;
@@ -617,7 +617,7 @@ CQ.form.rte.DomProcessor = function() {
 
         /**
          * Removes all non-table blocks to ensure that only tables are left for editing.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          */
         removeNonTableBlocks: function(context) {
             var root = context.root;
@@ -633,7 +633,7 @@ CQ.form.rte.DomProcessor = function() {
          * @private
          */
         hasSimilarParent: function(context, dom) {
-            var dpr = CQ.form.rte.DomProcessor;
+            var dpr = CUI.rte.DomProcessor;
             if (!dom || (dom.nodeType != 1)) {
                 return false;
             }
@@ -655,14 +655,14 @@ CQ.form.rte.DomProcessor = function() {
         /**
          * Removes duplicate DOM nodes. For example, the inner "b" node in &lt;b&gt;A bold
          * &lt;b&gt;text&lt;/b&gt;.&lt;/b&gt; gets removed, as it is unnecessary.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} startNode first node to check (inclusive)
          * @param {HTMLElement} endNode last node to check (inclusive)
          * @return {Object} Object that contains the valid start/end node after duplicates
          *         have been removed (properties: startNode, endNode)
          */
         removeDuplicateStructures: function(context, startNode, endNode) {
-            var dpr = CQ.form.rte.DomProcessor;
+            var dpr = CUI.rte.DomProcessor;
             var node = startNode;
             while (node) {
                 var isProcessed = false;
@@ -699,7 +699,7 @@ CQ.form.rte.DomProcessor = function() {
          * structurally if possible.</p>
          * <p>For example: &lt;b&gt;ABC &lt;/b&gt;&lt;b&gt;DEF&lt;/b&gt; can be joined to
          * &lt;b&gt;ABC DEF&lt;/b&gt;</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom node t0 check; if this is no text node, the first
          *        descendant text node will be used instead
          * @param {Boolean} joinPreceding True if the specified DOM node should be joined
@@ -707,7 +707,7 @@ CQ.form.rte.DomProcessor = function() {
          *        for joining
          */
         joinIdenticalStructures: function(context, dom, joinPreceding) {
-            var dpr = CQ.form.rte.DomProcessor;
+            var dpr = CUI.rte.DomProcessor;
             if (dom.nodeType == 1) {
                 dom = com.getFirstTextChild(dom) || dom;
             }
@@ -760,7 +760,7 @@ CQ.form.rte.DomProcessor = function() {
         },
 
         splitToParent: function(splitParent, node, offset) {
-            var sel = CQ.form.rte.Selection;
+            var sel = CUI.rte.Selection;
             var isNoInsertNode = sel.isNoInsertNode(node) && (offset == null);
             var clonedNode, parentNode, nodeToMove;
             var nodesToMove = [ ];
@@ -844,7 +844,7 @@ CQ.form.rte.DomProcessor = function() {
             if (node.nodeType == 1) {
                 var childCnt = node.childNodes.length;
                 for (var c = childCnt - 1; c >= 0; c--) {
-                    CQ.form.rte.DomProcessor.removeUnwantedEmptyTags(node.childNodes[c],
+                    CUI.rte.DomProcessor.removeUnwantedEmptyTags(node.childNodes[c],
                             tagList);
                 }
             }
@@ -872,13 +872,13 @@ CQ.form.rte.DomProcessor = function() {
          *     <li>A value of null determines that the paragraph has to be inserted at
          *     the end of the child list of a structural node.</li>
          * </ul>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} node Node that determines the insert position
          * @param {Number} offset (optional) Offset which determines the insert position
          * @return {HTMLElement} The newly created paragraph
          */
         insertParagraph: function(context, node, offset) {
-            var dpr = CQ.form.rte.DomProcessor;
+            var dpr = CUI.rte.DomProcessor;
             var newPara;
             // inserting "behind" a one-character node must be handled differently:
             // use the next text node in the block if available or offset to parent DOM
@@ -962,13 +962,13 @@ CQ.form.rte.DomProcessor = function() {
          * <p>Note that in &lt;p&gt;&lt;b&gt;Test&lt;/b&gt;text&lt;/p&gt; both the
          * "b" tag and the first character of "Test" are recognized as residing at the
          * beginning of the "p" block.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom The HTML element to check
          * @param {Number} offset The character offest (if dom is a text node) or the
          *        offset in dom's childNodes array
          */
         isBlockStart: function(context, dom, offset) {
-            var dpr = CQ.form.rte.DomProcessor;
+            var dpr = CUI.rte.DomProcessor;
             var scopedBlock = dpr.getScopedBlockNode(context, dom);
             if (!scopedBlock) {
                 return false;
@@ -1000,13 +1000,13 @@ CQ.form.rte.DomProcessor = function() {
          * <p>Note that in &lt;p&gt;Test &lt;b&gt;text&lt;/b&gt;&lt;/p&gt; both the
          * "b" tag and the last character of "text" are recognized as residing at the
          * end of the "p" block.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom The HTML element to check
          * @param {Number} offset The character offest (if dom is a text node) or the
          *        offset in dom's childNodes array
          */
         isBlockEnd: function(context, dom, offset) {
-            var dpr = CQ.form.rte.DomProcessor;
+            var dpr = CUI.rte.DomProcessor;
             var scopedBlock = dpr.getScopedBlockNode(context, dom);
             if (!scopedBlock) {
                 return false;
@@ -1039,12 +1039,12 @@ CQ.form.rte.DomProcessor = function() {
          * <p>Note that only container nodes that are directly under the body node are
          * taken into account. "Auxiliary root nodes" (such as td, th) will not be included.
          * </p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom DOM element to determine container node for
          * @return {HTMLElement} container DOM node; null if no container node is present
          */
         getContainerNode: function(context, dom) {
-            var dpr = CQ.form.rte.DomProcessor;
+            var dpr = CUI.rte.DomProcessor;
             while (dom) {
                 if (dom.nodeType == 1) {
                     if (!com.isTag(dom, dpr.AUXILIARY_ROOT_TAGS)) {
@@ -1060,7 +1060,7 @@ CQ.form.rte.DomProcessor = function() {
 
         /**
          * Gets the edit block for the specified node.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom The DOM element to get the edit block for
          */
         getEditBlock: function(context, dom) {
@@ -1075,7 +1075,7 @@ CQ.form.rte.DomProcessor = function() {
          * @return {HTMLElement[]}  The array containing all edit blocks found
          */
         getEditBlocks: function(auxRoot, editBlocks) {
-            var dpr = CQ.form.rte.DomProcessor;
+            var dpr = CUI.rte.DomProcessor;
             if (editBlocks === undefined) {
                 editBlocks = [ ];
             }
@@ -1098,7 +1098,7 @@ CQ.form.rte.DomProcessor = function() {
          * @return {Boolean} True if there are editable blocks available
          */
         hasEditBlocks: function(auxRoot) {
-            var dpr = CQ.form.rte.DomProcessor;
+            var dpr = CUI.rte.DomProcessor;
             var childCnt = auxRoot.childNodes.length;
             for (var c = 0; c < childCnt; c++) {
                 var child = auxRoot.childNodes[c];
@@ -1116,7 +1116,7 @@ CQ.form.rte.DomProcessor = function() {
          * <p>Gets the "auxiliary root" for the specified node.</p>
          * <p>This is either one of the elements that is specified as an aux root (table
          * cells, etc.) or the document's body node.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom The DOM element to determine the aux root for; if the
          *        specified element is an auxiliary root by itself, dom (and not dom's super
          *        auxiliary root) is returned
@@ -1127,7 +1127,7 @@ CQ.form.rte.DomProcessor = function() {
                 if (com.isRootNode(context, dom)) {
                     return dom;
                 }
-                if (com.isTag(dom, CQ.form.rte.DomProcessor.AUXILIARY_ROOT_TAGS)) {
+                if (com.isTag(dom, CUI.rte.DomProcessor.AUXILIARY_ROOT_TAGS)) {
                     return dom;
                 }
                 dom = com.getParentNode(context, dom);
@@ -1146,7 +1146,7 @@ CQ.form.rte.DomProcessor = function() {
          * @return {HTMLElement} container DOM node; null if no container node is present
          */
         getLastContainerNode: function(context, dom) {
-            var dpr = CQ.form.rte.DomProcessor;
+            var dpr = CUI.rte.DomProcessor;
             var node = com.getLastChild(dom);
             while (node && (node != dom)) {
                 if (node.nodeType == 1) {
@@ -1165,7 +1165,7 @@ CQ.form.rte.DomProcessor = function() {
          * @private
          */
         getSiblingContainerNode: function(context, dom, delimiterDom, fn) {
-            var dpr = CQ.form.rte.DomProcessor;
+            var dpr = CUI.rte.DomProcessor;
             while (dom) {
                 if (dom == delimiterDom) {
                     return null;
@@ -1207,15 +1207,15 @@ CQ.form.rte.DomProcessor = function() {
          * <p>Note that only container nodes that are directly under the body node are
          * taken into account. "Auxiliary root nodes" (such as td, th) will not be included.
          * Also note that this method only includes "container" nodes (nodes that are
-         * explicitly marked as such through {@link CQ.form.rte.DomProcessor.TYPE_TABLE}),
+         * explicitly marked as such through {@link CUI.rte.DomProcessor.TYPE_TABLE}),
          * not block nodes.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {Object} selection Selection to create container list from (as created by
-         *        CQ.form.rte.Selection.createProcessingSelection()
+         *        CUI.rte.Selection.createProcessingSelection()
          */
         createContainerList: function(context, selection) {
-            var sel = CQ.form.rte.Selection;
-            var dpr = CQ.form.rte.DomProcessor;
+            var sel = CUI.rte.Selection;
+            var dpr = CUI.rte.DomProcessor;
             selection = sel.adaptToInclusiveEndNode(context, selection);
             var startNode = selection.startNode;
             var endNode = selection.endNode;
@@ -1273,13 +1273,13 @@ CQ.form.rte.DomProcessor = function() {
         /**
          * <p>Creates a list of all block nodes (such as p, h1, etc.), covered by the
          * specified selection.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {Object} selection Selection to create block list from (as created by
-         *        CQ.form.rte.Selection.createProcessingSelection()
+         *        CUI.rte.Selection.createProcessingSelection()
          * @deprecated
          */
         createBlockList: function(context, selection) {
-            var sel = CQ.form.rte.Selection;
+            var sel = CUI.rte.Selection;
             selection = sel.adaptToInclusiveEndNode(context, selection);
             var startNode = selection.startNode;
             var endNode = selection.endNode;
@@ -1321,7 +1321,7 @@ CQ.form.rte.DomProcessor = function() {
          * @private
          */
         hasContainerChildNodes: function(dom) {
-            var dpr = CQ.form.rte.DomProcessor;
+            var dpr = CUI.rte.DomProcessor;
             var childCnt = dom.childNodes.length;
             for (var c = 0; c < childCnt; c++) {
                 var child = dom.childNodes[c];
@@ -1340,13 +1340,13 @@ CQ.form.rte.DomProcessor = function() {
          * returned. For example: &lt;td&gt;text&lt;/td&gt; is reported as an auxiliary
          * root, whereas &lt;td&gt;&gt;p&lt;para 1&gt;/p&lt;&gt;p&lt;para 2&gt;/p&lt;
          * &lt;/td&gt; is not reported as an auxiliary root.</p>
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {Object} selection Processing selection
          * @return {Array} List of auxiliary roots
          */
         getAuxRoots: function(context, selection) {
-            var sel = CQ.form.rte.Selection;
-            var dpr = CQ.form.rte.DomProcessor;
+            var sel = CUI.rte.Selection;
+            var dpr = CUI.rte.DomProcessor;
             var auxRoots = [ ];
             // handle cell selection separately
             if (selection.cellSelection) {
@@ -1400,7 +1400,7 @@ CQ.form.rte.DomProcessor = function() {
 
         changeContainerTag: function(context, containerList, blueprintDom,
                 ensurePlaceholder) {
-            var dpr = CQ.form.rte.DomProcessor;
+            var dpr = CUI.rte.DomProcessor;
             var elCnt = containerList.length;
             var isToPre = com.isTag(blueprintDom, "pre");
             for (var elIndex = 0; elIndex < elCnt; elIndex++) {
@@ -1447,7 +1447,7 @@ CQ.form.rte.DomProcessor = function() {
         },
 
         getScopedBlockNode: function(context, dom) {
-            var dpr = CQ.form.rte.DomProcessor;
+            var dpr = CUI.rte.DomProcessor;
             while (dom) {
                 if (com.isTag(dom, com.BLOCK_TAGS)) {
                     return {
@@ -1474,9 +1474,9 @@ CQ.form.rte.DomProcessor = function() {
 
         ensureBlockContent: function(context, tagName, attribs, brAsParDelimiter,
                                      createBookmark) {
-            var com = CQ.form.rte.Common;
-            var dpr = CQ.form.rte.DomProcessor;
-            var sel = CQ.form.rte.Selection;
+            var com = CUI.rte.Common;
+            var dpr = CUI.rte.DomProcessor;
+            var sel = CUI.rte.Selection;
             var bookmark = null;
             var pNode = null;
             var root = context.root;
@@ -1519,7 +1519,7 @@ CQ.form.rte.DomProcessor = function() {
 
         /**
          * Inserts the specified plain text at the specified position.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} node The node where the text will be inserted
          * @param {Number} offset Inserting offset; null (in conjunction with a structural
          *        node) means "insert at the first possible child position; for example
@@ -1625,11 +1625,11 @@ CQ.form.rte.DomProcessor = function() {
          * recursively.
          * @param {HTMLElement} rootEl The root element to execute the removal on
          * @param {Object} tagDefsToRemove The definition of the tags to be removed. See
-         *        {@link CQ.form.rte.Common#matchesTagDefs} for an explanation
+         *        {@link CUI.rte.Common#matchesTagDefs} for an explanation
          */
         removeTagsFromHierarchy: function(rootEl, tagDefsToRemove) {
-            var dpr = CQ.form.rte.DomProcessor;
-            var com = CQ.form.rte.Common;
+            var dpr = CUI.rte.DomProcessor;
+            var com = CUI.rte.Common;
             var childCnt = rootEl.childNodes.length;
             for (var childIndex = childCnt - 1; childIndex >= 0; childIndex--) {
                 var childToProcess = rootEl.childNodes[childIndex];
@@ -1652,7 +1652,7 @@ CQ.form.rte.DomProcessor = function() {
                 };
                 savedChildren.push(savedChild);
                 if (child.nodeType == 1) {
-                    savedChild.children = CQ.form.rte.DomProcessor.saveChildNodes(
+                    savedChild.children = CUI.rte.DomProcessor.saveChildNodes(
                             child);
                 } else {
                     savedChild.text = child.nodeValue;
@@ -1674,14 +1674,14 @@ CQ.form.rte.DomProcessor = function() {
                 var children = child.children;
                 dom.appendChild(domChild);
                 if (children) {
-                    CQ.form.rte.DomProcessor.restoreChildNodes(domChild, children);
+                    CUI.rte.DomProcessor.restoreChildNodes(domChild, children);
                 }
             }
         },
 
         /**
          * Inserts the specified DOM node at the specified location.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom Element to insert
          * @param {HTMLElement} insertNode Node of insert location
          * @param {Number} insertOffset Offset of insert location
@@ -1695,7 +1695,7 @@ CQ.form.rte.DomProcessor = function() {
                 } else if (insertOffset >= com.getNodeCharacterCnt(insertNode)) {
                     parent.insertBefore(dom, insertNode.nextSibling);
                 } else {
-                    var splitNodes = CQ.form.rte.DomProcessor.splitTextNode(context,
+                    var splitNodes = CUI.rte.DomProcessor.splitTextNode(context,
                             insertNode, insertOffset);
                     parent.insertBefore(dom, splitNodes[1]);
                 }
@@ -1719,20 +1719,20 @@ CQ.form.rte.DomProcessor = function() {
 
         /**
          * Creates a marker span.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} node Node the marker is to be added
          * @param {Number} offset Offset of the marker (relative to node)
          * @return {HTMLElement} The marker span
          */
         createMarker: function(context, node, offset) {
             var markerDom = context.createElement("span");
-            CQ.form.rte.DomProcessor.insertElement(context, markerDom, node, offset);
+            CUI.rte.DomProcessor.insertElement(context, markerDom, node, offset);
             return markerDom;
         },
 
         /**
          * Removes a marker span previously set by {@link #createMarker}.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} markerDom The marker span to be removed
          */
         removeMarker: function(context, markerDom) {
@@ -1751,7 +1751,7 @@ CQ.form.rte.DomProcessor = function() {
          * Gecko has several bugs (row-in-row, no table root element) that have to be
          * corrected. As content may theoretically be copied from Gecko to IE, this
          * method should also be called in IE's pasting mechanisms.
-         * @param {CQ.form.rte.EditContext} context The edit context
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom The DOM element that contains the pasted DOM to be
          *        corrected
          */
@@ -1769,7 +1769,7 @@ CQ.form.rte.DomProcessor = function() {
                 var row = rows[r];
                 var childRows = com.getChildNodesByType(row, "tr", false);
                 if (childRows.length > 0) {
-                    CQ.form.rte.DomProcessor.removeWithoutChildren(row);
+                    CUI.rte.DomProcessor.removeWithoutChildren(row);
                 }
             }
         },
@@ -1816,13 +1816,13 @@ CQ.form.rte.DomProcessor = function() {
         },
 
         /**
-         * Main node type of a {@link CQ.form.rte.NodeList}'s node: Text node
+         * Main node type of a {@link CUI.rte.NodeList}'s node: Text node
          * @type String
          */
         TEXT_NODE: "text",
 
         /**
-         * Main node type of a {@link CQ.form.rte.NodeList}'s node: Structural node
+         * Main node type of a {@link CUI.rte.NodeList}'s node: Structural node
          * @type String
          */
         DOM_NODE: "dom",
@@ -1900,27 +1900,27 @@ CQ.form.rte.DomProcessor = function() {
  * may be changed if required. <i>But don't do so unless you are absolutely sure
  * about what you are doing!</i>
  */
-CQ.form.rte.DomProcessor.TYPE_TABLE = {
-    "h1": CQ.form.rte.DomProcessor.CONTAINER,
-    "h2": CQ.form.rte.DomProcessor.CONTAINER,
-    "h3": CQ.form.rte.DomProcessor.CONTAINER,
-    "h4": CQ.form.rte.DomProcessor.CONTAINER,
-    "h5": CQ.form.rte.DomProcessor.CONTAINER,
-    "h6": CQ.form.rte.DomProcessor.CONTAINER,
-    "p": CQ.form.rte.DomProcessor.CONTAINER,
-    "div": CQ.form.rte.DomProcessor.CONTAINER,
-    "li": CQ.form.rte.DomProcessor.CONTAINER,
-    "ul": CQ.form.rte.DomProcessor.IGNORE,
-    "ol": CQ.form.rte.DomProcessor.IGNORE,
-    "table": CQ.form.rte.DomProcessor.IGNORE,
-    "tbody": CQ.form.rte.DomProcessor.IGNORE,
-    "thead": CQ.form.rte.DomProcessor.IGNORE,
-    "tfoot": CQ.form.rte.DomProcessor.IGNORE,
-    "tr": CQ.form.rte.DomProcessor.IGNORE,
-    "td": CQ.form.rte.DomProcessor.CONTAINER,
-    "th": CQ.form.rte.DomProcessor.CONTAINER,
-    "caption": CQ.form.rte.DomProcessor.CONTAINER,
-    "address": CQ.form.rte.DomProcessor.CONTAINER,
-    "blockquote": CQ.form.rte.DomProcessor.CONTAINER,
-    "pre": CQ.form.rte.DomProcessor.CONTAINER
+CUI.rte.DomProcessor.TYPE_TABLE = {
+    "h1": CUI.rte.DomProcessor.CONTAINER,
+    "h2": CUI.rte.DomProcessor.CONTAINER,
+    "h3": CUI.rte.DomProcessor.CONTAINER,
+    "h4": CUI.rte.DomProcessor.CONTAINER,
+    "h5": CUI.rte.DomProcessor.CONTAINER,
+    "h6": CUI.rte.DomProcessor.CONTAINER,
+    "p": CUI.rte.DomProcessor.CONTAINER,
+    "div": CUI.rte.DomProcessor.CONTAINER,
+    "li": CUI.rte.DomProcessor.CONTAINER,
+    "ul": CUI.rte.DomProcessor.IGNORE,
+    "ol": CUI.rte.DomProcessor.IGNORE,
+    "table": CUI.rte.DomProcessor.IGNORE,
+    "tbody": CUI.rte.DomProcessor.IGNORE,
+    "thead": CUI.rte.DomProcessor.IGNORE,
+    "tfoot": CUI.rte.DomProcessor.IGNORE,
+    "tr": CUI.rte.DomProcessor.IGNORE,
+    "td": CUI.rte.DomProcessor.CONTAINER,
+    "th": CUI.rte.DomProcessor.CONTAINER,
+    "caption": CUI.rte.DomProcessor.CONTAINER,
+    "address": CUI.rte.DomProcessor.CONTAINER,
+    "blockquote": CUI.rte.DomProcessor.CONTAINER,
+    "pre": CUI.rte.DomProcessor.CONTAINER
 };

@@ -17,22 +17,22 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.commands.Outdent
- * @extends CQ.form.rte.commands.Command
+ * @class CUI.rte.commands.Outdent
+ * @extends CUI.rte.commands.Command
  * @private
  */
-CQ.form.rte.commands.Outdent = new Class({
+CUI.rte.commands.Outdent = new Class({
 
     toString: "Outdent",
 
-    extend: CQ.form.rte.commands.Command,
+    extend: CUI.rte.commands.Command,
 
     isCommand: function(cmdStr) {
         return (cmdStr.toLowerCase() == "outdent");
     },
 
     getProcessingOptions: function() {
-        var cmd = CQ.form.rte.commands.Command;
+        var cmd = CUI.rte.commands.Command;
         return cmd.PO_SELECTION | cmd.PO_BOOKMARK | cmd.PO_NODELIST;
     },
 
@@ -43,10 +43,10 @@ CQ.form.rte.commands.Outdent = new Class({
                 "collapse": true
             }
         };
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var nodeList = execDef.nodeList;
         var context = execDef.editContext;
-        var tagExcl = CQ.form.rte.commands.Indent.TAGEXCL;
+        var tagExcl = CUI.rte.commands.Indent.TAGEXCL;
         var indents = nodeList.getTags(context, [ {
                 "matcher": function(dom) {
                     if (com.isTag(dom, com.BLOCK_TAGS) && !com.isTag(dom, tagExcl)) {
@@ -58,7 +58,7 @@ CQ.form.rte.commands.Outdent = new Class({
         ], true, true);
         // check each item if it is actually contained in the selection (may be not the
         // case for nested lists in several situations)
-        CQ.form.rte.ListUtils.postprocessSelectedItems(indents);
+        CUI.rte.ListUtils.postprocessSelectedItems(indents);
         // finally, execute the outdenting
         var nodeCnt = indents.length;
         var lists = [ ];
@@ -72,7 +72,7 @@ CQ.form.rte.commands.Outdent = new Class({
                 if (dom.style.marginLeft) {
                     marginLeft = parseInt(dom.style.marginLeft);
                     marginLeft -= execDef.value
-                        || CQ.form.rte.commands.Indent.DEFAULT_INDENT_SIZE;
+                        || CUI.rte.commands.Indent.DEFAULT_INDENT_SIZE;
                     if (marginLeft <= 0) {
                         dom.style.marginLeft = null;
                     } else {
@@ -81,7 +81,7 @@ CQ.form.rte.commands.Outdent = new Class({
                 }
             } else {
                 // list items
-                var listDom = CQ.form.rte.ListUtils.getTopListForItem(context, dom);
+                var listDom = CUI.rte.ListUtils.getTopListForItem(context, dom);
                 var listIndex = com.arrayIndex(lists, listDom);
                 if (listIndex < 0) {
                     lists.push(listDom);
@@ -93,7 +93,7 @@ CQ.form.rte.commands.Outdent = new Class({
         }
         for (var l = 0; l < lists.length; l++) {
             // outdent list items (per top level list)
-            var listProcessor = new CQ.form.rte.ListRepresentation();
+            var listProcessor = new CUI.rte.ListRepresentation();
             listProcessor.fromList(lists[l]);
             listProcessor.ensureHierarchy(context);
             listProcessor.outdent(context, listItemsToOutdent[l]);
@@ -105,4 +105,4 @@ CQ.form.rte.commands.Outdent = new Class({
 
 
 // register command
-CQ.form.rte.commands.CommandRegistry.register("outdent", CQ.form.rte.commands.Outdent);
+CUI.rte.commands.CommandRegistry.register("outdent", CUI.rte.commands.Outdent);

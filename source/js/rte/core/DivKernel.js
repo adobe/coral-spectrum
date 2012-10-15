@@ -17,19 +17,19 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.DivKernel
- * @extends CQ.form.rte.EditorKernel
+ * @class CUI.rte.DivKernel
+ * @extends CUI.rte.EditorKernel
  * @private
  * This class implements an EditorKernel for div-based rich text editing.
  * @constructor
  * Creates a new DivKernel for rich text editing.
  * @param {Object} config The kernel's configuration
  */
-CQ.form.rte.DivKernel = new Class({
+CUI.rte.DivKernel = new Class({
 
     toString: "DivKernel",
 
-    extend: CQ.form.rte.EditorKernel,
+    extend: CUI.rte.EditorKernel,
 
     /**
      * Path to content being edited
@@ -48,7 +48,7 @@ CQ.form.rte.DivKernel = new Class({
      * @param {HTMLElement} root The root element (the "div" element being edited)
      */
     initializeEditContext: function(win, doc, root) {
-        this.editContext = new CQ.form.rte.EditContext(null, win, doc, root);
+        this.editContext = new CUI.rte.EditContext(null, win, doc, root);
         this.addFeatureClasses(root);
     },
 
@@ -58,16 +58,16 @@ CQ.form.rte.DivKernel = new Class({
      * optionally on next focus gain.</p>
      */
     initializeCaret: function(enforceInit, emptyTextPara) {
-        var com = CQ.form.rte.Common;
-        var sel = CQ.form.rte.Selection;
+        var com = CUI.rte.Common;
+        var sel = CUI.rte.Selection;
         var context = this.getEditContext();
         if (com.ua.isGecko || com.ua.isWebKit) {
-            this.deferFocus(CQ.form.rte.Utils.scope(function() {
+            this.deferFocus(CUI.rte.Utils.scope(function() {
                 sel.resetSelection(context, "start");
                 this.fireUIEvent("updatestate");
             }, this));
         } else if (com.ua.isIE) {
-            CQ.form.rte.Utils.defer(function() {
+            CUI.rte.Utils.defer(function() {
                 this.focus();
                 // workaround: EditorKernel does not always get first focus, so manually
                 // ensuring that editorKernel.hasFocus is set correctly
@@ -91,7 +91,7 @@ CQ.form.rte.DivKernel = new Class({
 
     /**
      * Get the DOM element that is responsible for focus handling.
-     * @param {CQ.form.rte.EditContext} context (optional) The edit context
+     * @param {CUI.rte.EditContext} context (optional) The edit context
      * @return {HTMLElement} The DOM element that is responsible for focus handling
      */
     getFocusDom: function(context) {
@@ -103,7 +103,7 @@ CQ.form.rte.DivKernel = new Class({
 
     /**
      * Focusses the DOM element responsible for rich text editing.
-     * @param {CQ.form.rte.EditContext} context (optional) The edit context
+     * @param {CUI.rte.EditContext} context (optional) The edit context
      */
     focus: function(context) {
         if (!context) {
@@ -121,7 +121,7 @@ CQ.form.rte.DivKernel = new Class({
 
     /**
      * Blurs the focus.
-     * @param {CQ.form.rte.EditContext} context (optional) The edit context
+     * @param {CUI.rte.EditContext} context (optional) The edit context
      */
     blurFocus: function(context) {
         if (!context) {
@@ -150,15 +150,15 @@ CQ.form.rte.DivKernel = new Class({
         return winPos || [ 0, 0 ];
     },
 
-    // overrides CQ.form.rte.EditorKernel#calculateContextMenuPosition
+    // overrides CUI.rte.EditorKernel#calculateContextMenuPosition
     calculateContextMenuPosition: function(event) {
         var eventPos = event.getPos();
         return [ eventPos.x, eventPos.y ];
     },
 
-    // overrides CQ.form.rte.EditorKernel#createToolbarBuilder
+    // overrides CUI.rte.EditorKernel#createToolbarBuilder
     createToolbarBuilder: function() {
-        var ui = CQ.form.rte.ui;
+        var ui = CUI.rte.ui;
         return ui.ToolkitRegistry.get(this.uiToolkit).createToolbarBuilder(
                 ui.Toolkit.TBHINT_GLOBAL);
     },

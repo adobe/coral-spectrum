@@ -17,15 +17,15 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.commands.Image
- * @extends CQ.form.rte.commands.Command
+ * @class CUI.rte.commands.Image
+ * @extends CUI.rte.commands.Command
  * @private
  */
-CQ.form.rte.commands.Image = new Class({
+CUI.rte.commands.Image = new Class({
 
     toString: "Image",
 
-    extend: CQ.form.rte.commands.Command,
+    extend: CUI.rte.commands.Command,
 
     createImage: function(execDef) {
         var value = execDef.value;
@@ -39,7 +39,7 @@ CQ.form.rte.commands.Image = new Class({
         // todo encoding(?)
         if (url) {
             var imgHtml = "<img src=\"" + url + "\" alt=\"" + alt + "\"";
-            imgHtml += " " + CQ.form.rte.Common.SRC_ATTRIB + "=\"" + value.path + "\"";
+            imgHtml += " " + CUI.rte.Common.SRC_ATTRIB + "=\"" + value.path + "\"";
             if (width) {
                 imgHtml += " width=\"" + width + "\"";
             }
@@ -53,7 +53,7 @@ CQ.form.rte.commands.Image = new Class({
 
     applyProperties: function(execDef) {
         var props = execDef.value;
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var selection = execDef.selection;
         if (selection.startNode && (selection.startOffset == undefined)
                 && !selection.endNode) {
@@ -83,7 +83,7 @@ CQ.form.rte.commands.Image = new Class({
                 }
             }
             if (com.ua.isGecko) {
-                CQ.form.rte.Selection.flushSelection(execDef.editContext);
+                CUI.rte.Selection.flushSelection(execDef.editContext);
             }
         }
     },
@@ -93,7 +93,7 @@ CQ.form.rte.commands.Image = new Class({
     },
 
     getProcessingOptions: function() {
-        var cmd = CQ.form.rte.commands.Command;
+        var cmd = CUI.rte.commands.Command;
         return cmd.PO_BOOKMARK | cmd.PO_SELECTION;
     },
 
@@ -109,7 +109,7 @@ CQ.form.rte.commands.Image = new Class({
     },
 
     queryState: function(selectionDef, cmd) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         if (cmd.toLowerCase() == "image") {
             var selection = selectionDef.selection;
             if (selection.startNode && (selection.startOffset == undefined)
@@ -125,4 +125,4 @@ CQ.form.rte.commands.Image = new Class({
 
 
 // register command
-CQ.form.rte.commands.CommandRegistry.register("image", CQ.form.rte.commands.Image);
+CUI.rte.commands.CommandRegistry.register("image", CUI.rte.commands.Image);

@@ -17,18 +17,18 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.Compatibility
+ * @class CUI.rte.Compatibility
  * @private
  * @since 5.3
  */
-CQ.form.rte.Compatibility = function() {
+CUI.rte.Compatibility = function() {
 
-    var com = CQ.form.rte.Common;
+    var com = CUI.rte.Common;
 
     return {
 
         moveDeprecatedPluginConfig: function(config) {
-            var compat = CQ.form.rte.Compatibility;
+            var compat = CUI.rte.Compatibility;
             compat.correctConfigOption(config, "defaultPasteMode",
                     "rtePlugins.edit.defaultPasteMode");
             compat.correctConfigOption(config, "stripHtmlTags",
@@ -73,7 +73,7 @@ CQ.form.rte.Compatibility = function() {
         },
 
         moveDeprecatedHtmlRules: function(config) {
-            var compat = CQ.form.rte.Compatibility;
+            var compat = CUI.rte.Compatibility;
             var filteredConfig = compat.createFilteredConfig(config, "linkbrowseConfig", [
                 "cssInternal",
                 "cssExternal",
@@ -84,7 +84,7 @@ CQ.form.rte.Compatibility = function() {
             var ruleConfig = filteredConfig[0];
             if (ruleConfig != null) {
                 compat.setConfigValue(config, "htmlRules.links",
-                        new CQ.form.rte.HtmlRules.Links(ruleConfig));
+                        new CUI.rte.HtmlRules.Links(ruleConfig));
             }
             var dialogConfig = filteredConfig[1];
             if (dialogConfig != null) {
@@ -98,7 +98,7 @@ CQ.form.rte.Compatibility = function() {
         },
 
         createFilteredConfig: function(config, path, filterIncl, removeJcrLeftovers) {
-            var compat = CQ.form.rte.Compatibility;
+            var compat = CUI.rte.Compatibility;
             var configObj = compat.getConfigValue(config, path);
             if (configObj == null) {
                 return [ null, null ];
@@ -134,7 +134,7 @@ CQ.form.rte.Compatibility = function() {
         },
 
         correctConfigOption: function(config, deprecatedPath, currentPath) {
-            var compat = CQ.form.rte.Compatibility;
+            var compat = CUI.rte.Compatibility;
             var deprecatedValue = compat.getConfigValue(config, deprecatedPath);
             if (deprecatedValue != null) {
                 compat.setConfigValue(config, currentPath, deprecatedValue);
@@ -191,9 +191,9 @@ CQ.form.rte.Compatibility = function() {
         /**
          * This method provides backwards-compatibility for the "enableXXX"-style
          * configuration that is now deprecated in favor of
-         * {@link CQ.form.RichText#rtePlugins}.
+         * {@link CUI.rte.RichText#rtePlugins}.
          * @param {Object} config The config object to be used for configuration
-         * @param {CQ.form.rte.EditorKernel} editorKernel The editor kernel
+         * @param {CUI.rte.EditorKernel} editorKernel The editor kernel
          * @private
          */
         configurePlugins: function(config, editorKernel) {
@@ -278,7 +278,7 @@ CQ.form.rte.Compatibility = function() {
                         }
                     }
                     if (pluginConfig && pluginConfig[pluginId]) {
-                        CQ.form.rte.Utils.apply(plgConfig, pluginConfig[pluginId]);
+                        CUI.rte.Utils.apply(plgConfig, pluginConfig[pluginId]);
                     }
                     plugin.notifyPluginConfig(plgConfig);
                 }
@@ -301,7 +301,7 @@ CQ.form.rte.Compatibility = function() {
                 return null;
             }
             com.removeJcrData(obj);
-            if (CQ.form.rte.Utils.isArray(obj)) {
+            if (CUI.rte.Utils.isArray(obj)) {
                 return obj;
             }
             var array = [ ];
@@ -371,7 +371,7 @@ CQ.form.rte.Compatibility = function() {
         adjustRegExp: function(obj, prop, defaultValue) {
             if (obj[prop] == null) {
                 obj[prop] = defaultValue;
-            } else if (CQ.form.rte.Util.isString(obj[prop])) {
+            } else if (CUI.rte.Util.isString(obj[prop])) {
                 var propValue = obj[prop];
                 var opts = undefined;
                 if (com.strStartsWith(propValue, "/")) {

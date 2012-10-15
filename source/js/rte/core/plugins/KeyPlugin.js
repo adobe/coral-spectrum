@@ -17,8 +17,8 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.plugins.KeyPlugin
- * @extends CQ.form.rte.plugins.Plugin
+ * @class CUI.rte.plugins.KeyPlugin
+ * @extends CUI.rte.plugins.Plugin
  * <p>This class implements the basic key handling as a plugin.</p>
  * <p>The plugin ID is "<b>keys</b>".</p>
  * <p><b>Features</b></p>
@@ -26,11 +26,11 @@
  * @since 5.3
  */
 
-CQ.form.rte.plugins.KeyPlugin = new Class({
+CUI.rte.plugins.KeyPlugin = new Class({
 
     toString: "KeyPlugin",
 
-    extend: CQ.form.rte.plugins.Plugin,
+    extend: CUI.rte.plugins.Plugin,
 
     /**
      * @cfg {Number} tabSize
@@ -65,21 +65,21 @@ CQ.form.rte.plugins.KeyPlugin = new Class({
      */
     isEOB: function(context, selection) {
         var nodeToCheck, offsetToCheck;
-        if (CQ.form.rte.Selection.isSelection(selection)) {
+        if (CUI.rte.Selection.isSelection(selection)) {
             nodeToCheck = selection.endNode;
             offsetToCheck = selection.endOffset;
         } else {
             nodeToCheck = selection.startNode;
             offsetToCheck = selection.startOffset;
         }
-        return CQ.form.rte.DomProcessor.isBlockEnd(context, nodeToCheck, offsetToCheck);
+        return CUI.rte.DomProcessor.isBlockEnd(context, nodeToCheck, offsetToCheck);
     },
 
     /**
      * @private
      */
     isTempBR: function(br) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         return (com.isAttribDefined(br, com.BR_TEMP_ATTRIB)
                 || (com.isAttribDefined(br, "type")
                     && (com.getAttribute(br, "type", false) == "_moz")));
@@ -97,10 +97,10 @@ CQ.form.rte.plugins.KeyPlugin = new Class({
         }
 
         var context = e.editContext;
-        var dpr = CQ.form.rte.DomProcessor;
-        var sel = CQ.form.rte.Selection;
-        var com = CQ.form.rte.Common;
-        var lut = CQ.form.rte.ListUtils;
+        var dpr = CUI.rte.DomProcessor;
+        var sel = CUI.rte.Selection;
+        var com = CUI.rte.Common;
+        var lut = CUI.rte.ListUtils;
         var ek = this.editorKernel;
 
         // IE allows invalid caret positions - we cancel key strokes other than caret keys
@@ -152,7 +152,7 @@ CQ.form.rte.plugins.KeyPlugin = new Class({
                 try {
                     selection = ensureSelection();
                     if (sel.isSelection(selection)) {
-                        CQ.form.rte.commands.executeDelete(context);
+                        CUI.rte.commands.executeDelete(context);
                     }
                     selection = ek.createQualifiedSelection(context);
                     var node = selection.startNode;
@@ -224,7 +224,7 @@ CQ.form.rte.plugins.KeyPlugin = new Class({
                 // handle Shift + Enter for WebKit & Gecko
                 selection = ensureSelection();
                 if (sel.isSelection(selection)) {
-                    CQ.form.rte.commands.executeDelete(context);
+                    CUI.rte.commands.executeDelete(context);
                 }
                 selection = ek.createQualifiedSelection(context);
                 var selNode = selection.startNode;
@@ -287,9 +287,9 @@ CQ.form.rte.plugins.KeyPlugin = new Class({
      */
     handleKeyUp: function(e) {
 
-        var sel = CQ.form.rte.Selection;
-        var com = CQ.form.rte.Common;
-        var dpr = CQ.form.rte.DomProcessor;
+        var sel = CUI.rte.Selection;
+        var com = CUI.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
         var context = e.editContext;
         var node, selection;
 
@@ -408,15 +408,15 @@ CQ.form.rte.plugins.KeyPlugin = new Class({
      * @private
      */
     handleIEAutoLinks: function(context) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         // remove all links that don't have a _rte_href attribute
         var aTags = context.root.getElementsByTagName("A");
         var aCnt = aTags.length;
         for (var a = aCnt - 1; a >= 0; a--) {
             var anchor = aTags[a];
             if (com.isAttribDefined(anchor, "href")
-                    && !com.isAttribDefined(anchor, CQ.form.rte.Common.HREF_ATTRIB)) {
-                CQ.form.rte.DomProcessor.removeWithoutChildren(anchor);
+                    && !com.isAttribDefined(anchor, CUI.rte.Common.HREF_ATTRIB)) {
+                CUI.rte.DomProcessor.removeWithoutChildren(anchor);
             }
         }
     },
@@ -430,7 +430,7 @@ CQ.form.rte.plugins.KeyPlugin = new Class({
      * @private
      */
     handleBRPlaceholders: function(context) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var brTags = context.root.getElementsByTagName("BR");
         var brCnt = brTags.length;
         for (var i = 0; i < brCnt; i++) {
@@ -472,4 +472,4 @@ CQ.form.rte.plugins.KeyPlugin = new Class({
 
 
 // register plugin
-CQ.form.rte.plugins.PluginRegistry.register("keys", CQ.form.rte.plugins.KeyPlugin);
+CUI.rte.plugins.PluginRegistry.register("keys", CUI.rte.plugins.KeyPlugin);

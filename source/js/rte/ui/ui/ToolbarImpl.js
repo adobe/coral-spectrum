@@ -16,11 +16,11 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CQ.form.rte.ui.cui.ToolbarImpl = new Class({
+CUI.rte.ui.cui.ToolbarImpl = new Class({
 
     toString: "ToolbarImpl",
 
-    extend: CQ.form.rte.ui.Toolbar,
+    extend: CUI.rte.ui.Toolbar,
 
     toolbarParent: null,
 

@@ -17,20 +17,20 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.UndoManager
+ * @class CUI.rte.UndoManager
  * @private
  * This class implements undo/redo functionality for the RichText component.
  * @constructor
  * Creates a new UndoManager.
  * @param {Number} maxUndoSteps Number of maximum undo steps
  */
-CQ.form.rte.UndoManager = new Class({
+CUI.rte.UndoManager = new Class({
 
     toString: "UndoManager",
 
     /**
      * Array that contains all currently available undo steps
-     * @type CQ.form.rte.UndoManager.Step
+     * @type CUI.rte.UndoManager.Step
      * @private
      */
     undoHistory: null,
@@ -59,7 +59,7 @@ CQ.form.rte.UndoManager = new Class({
      * <p>Adds the specified undo step to the undo history.</p>
      * <p>The undo step is only added if it is different from the currently active
      * undo step.</p>
-     * @param {CQ.form.rte.UndoManager.Step} stepToAdd The undo step to add
+     * @param {CUI.rte.UndoManager.Step} stepToAdd The undo step to add
      * @return {Boolean} True if the step has actually been added
      */
     addStep: function(stepToAdd) {
@@ -113,12 +113,12 @@ CQ.form.rte.UndoManager = new Class({
 
     /**
      * Executes a one-step undo, if there are undoable steps available.
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      */
     undo: function(context) {
         // try to add another undo step to reflect the changes that may have been
         // made since the last undo step was recorded
-        if (this.addStep(new CQ.form.rte.UndoManager.Step(context))) {
+        if (this.addStep(new CUI.rte.UndoManager.Step(context))) {
             // window.console.log("Recorded additional undo step");
         }
         if (this.canUndo()) {
@@ -131,10 +131,10 @@ CQ.form.rte.UndoManager = new Class({
 
     /**
      * Executes a one-step redo, if there are redoable steps available.
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      */
     redo: function(context) {
-        if (this.addStep(new CQ.form.rte.UndoManager.Step(context))) {
+        if (this.addStep(new CUI.rte.UndoManager.Step(context))) {
             // window.console.log("Recorded additional undo step");
         }
         if (this.canRedo()) {
@@ -148,13 +148,13 @@ CQ.form.rte.UndoManager = new Class({
      * <p>Initializes the undo manager from the given editor's iframe.</p>
      * <p>The undo history is cleared and re-initialized with a snapshot of the specified
      * editor content.</p>
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      */
     initialize: function(context) {
         // window.console.log("Initializing undo manager");
         this.undoHistory.length = 0;
         this.activeUndoStep = 0;
-        this.addStep(new CQ.form.rte.UndoManager.Step(context));
+        this.addStep(new CUI.rte.UndoManager.Step(context));
     },
 
     /**
@@ -199,16 +199,16 @@ CQ.form.rte.UndoManager = new Class({
 
 
 /**
- * @class CQ.form.rte.UndoManager.Step
+ * @class CUI.rte.UndoManager.Step
  * @private
  * The UndoManager.Step represents a single undoable step of the undo history.
  * @constructor
  * Creates a new UndoManager.Step from the specified RichText edit frame.
- * @param {CQ.form.rte.EditContext} context The edit context
+ * @param {CUI.rte.EditContext} context The edit context
  * @param {Object} bookmark (optional) A selection bookmark to be used; if none is
  *        specified, the bookmark is created through the specified edit context
  */
-CQ.form.rte.UndoManager.Step = new Class({
+CUI.rte.UndoManager.Step = new Class({
 
     toString: "UndoManager.Step",
 
@@ -223,7 +223,7 @@ CQ.form.rte.UndoManager.Step = new Class({
     bookmark: null,
 
     construct: function(context, bookmark) {
-        var sel = CQ.form.rte.Selection;
+        var sel = CUI.rte.Selection;
         this.bookmark = (bookmark ? bookmark : sel.createSelectionBookmark(context));
         // delete object references from bookmark, as they would point to "zombie nodes"
         // after a undo/redo
@@ -239,7 +239,7 @@ CQ.form.rte.UndoManager.Step = new Class({
      * @private
      */
     cleanup: function(dom) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         if (dom.nodeType == 1) {
             com.removeClass(dom, CQ.themes.RichText.TABLESELECTION_CLASS);
             var childCnt = dom.childNodes.length;
@@ -252,17 +252,17 @@ CQ.form.rte.UndoManager.Step = new Class({
     /**
      * Sets the represented undo step to the RichText represented by the specified edit
      * context.
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      */
     set: function(context) {
         context.root.innerHTML = this.htmlSnapshot;
-        CQ.form.rte.Selection.selectBookmark(context, this.bookmark);
+        CUI.rte.Selection.selectBookmark(context, this.bookmark);
     },
 
     /**
      * Compares the HTML snapshot of this undo step with the snapshot of the specified
      * undo step.
-     * @param {CQ.form.rte.UndoManager.Step} stepToCompareWith The undo step to compare with
+     * @param {CUI.rte.UndoManager.Step} stepToCompareWith The undo step to compare with
      * @return {Boolean} True if both steps have the same HTML snapshot
      */
     hasEqualSnapshot: function(stepToCompareWith) {
@@ -271,11 +271,11 @@ CQ.form.rte.UndoManager.Step = new Class({
 
     /**
      * Compares this undo step with the specified undo step.
-     * @param {CQ.form.rte.UndoManager.Step} stepToCompareWith The undo step to compare with
+     * @param {CUI.rte.UndoManager.Step} stepToCompareWith The undo step to compare with
      * @return {Boolean} True if both steps are identical
      */
     equals: function(stepToCompareWith) {
-        var sel = CQ.form.rte.Selection;
+        var sel = CUI.rte.Selection;
         if (this.htmlSnapshot != stepToCompareWith.htmlSnapshot) {
             return false;
         }

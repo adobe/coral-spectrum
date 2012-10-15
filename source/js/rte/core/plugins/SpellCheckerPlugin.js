@@ -17,8 +17,8 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.plugins.SpellCheckerPlugin
- * @extends CQ.form.rte.plugins.Plugin
+ * @class CUI.rte.plugins.SpellCheckerPlugin
+ * @extends CUI.rte.plugins.Plugin
  * <p>This class implements the spellchecker functionality as a plugin.</p>
  * <p>The plugin ID is "<b>spellcheck</b>".</p>
  * <p><b>Features</b></p>
@@ -27,11 +27,11 @@
  * </ul>
  * @since 5.3
  */
-CQ.form.rte.plugins.SpellCheckerPlugin = new Class({
+CUI.rte.plugins.SpellCheckerPlugin = new Class({
 
     toString: "SpellCheckerPlugin",
 
-    extend: CQ.form.rte.plugins.Plugin,
+    extend: CUI.rte.plugins.Plugin,
 
     /**
      * @private
@@ -103,12 +103,12 @@ CQ.form.rte.plugins.SpellCheckerPlugin = new Class({
             var method = this.config.method.toLowerCase();
             if (method == "post") {
                 if (response && response.headers && response.headers.json) {
-                    spellcheckResults = CQ.form.rte.Utils.jsonDecode(response.headers.json);
+                    spellcheckResults = CUI.rte.Utils.jsonDecode(response.headers.json);
                     isError = false;
                 }
             } else if (method == "get") {
                 if (response && response.body) {
-                    spellcheckResults = CQ.form.rte.Utils.jsonDecode(response.body);
+                    spellcheckResults = CUI.rte.Utils.jsonDecode(response.body);
                     isError = false;
                 }
             }
@@ -150,8 +150,8 @@ CQ.form.rte.plugins.SpellCheckerPlugin = new Class({
     },
 
     markInvalidWord: function(context, startPos, charCnt, suggestions) {
-        var com = CQ.form.rte.Common;
-        var dpr = CQ.form.rte.DomProcessor;
+        var com = CUI.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
         var startDef = com.getNodeAtPosition(context, startPos);
         var endDef = com.getNodeAtPosition(context, startPos + charCnt);
         // handle EOP situations correctly
@@ -199,7 +199,7 @@ CQ.form.rte.plugins.SpellCheckerPlugin = new Class({
     },
 
     clearInvalidationMarks: function(context) {
-        var dpr = CQ.form.rte.DomProcessor;
+        var dpr = CUI.rte.DomProcessor;
         dpr.removeTagsFromHierarchy(context.root, {
             "tagName": "span",
             "attribValues": { "_rtetemp": "spchk" }
@@ -214,9 +214,9 @@ CQ.form.rte.plugins.SpellCheckerPlugin = new Class({
     },
 
     handleOnKey: function(e) {
-        var com = CQ.form.rte.Common;
-        var sel = CQ.form.rte.Selection;
-        var dpr = CQ.form.rte.DomProcessor;
+        var com = CUI.rte.Common;
+        var sel = CUI.rte.Selection;
+        var dpr = CUI.rte.DomProcessor;
         var context = e.editContext;
         if (!e.isCaretMovement()) {
             var pSel = sel.createProcessingSelection(context);
@@ -271,8 +271,8 @@ CQ.form.rte.plugins.SpellCheckerPlugin = new Class({
     },
 
     initializeUI: function(tbGenerator) {
-        var plg = CQ.form.rte.plugins;
-        var ui = CQ.form.rte.ui;
+        var plg = CUI.rte.plugins;
+        var ui = CUI.rte.ui;
         if (this.isFeatureEnabled("checktext")) {
             this.checkTextUI = tbGenerator.createElement("checktext", this, true,
                     this.getTooltip("checktext"));
@@ -282,7 +282,7 @@ CQ.form.rte.plugins.SpellCheckerPlugin = new Class({
     },
 
     execute: function(id, value, env) {
-        var dpr = CQ.form.rte.DomProcessor;
+        var dpr = CUI.rte.DomProcessor;
         switch (id) {
             case "checktext":
                 if (this.checkTextUI.isSelected()) {
@@ -306,8 +306,8 @@ CQ.form.rte.plugins.SpellCheckerPlugin = new Class({
      * @private
      */
     handleContextMenu: function(menuBuilder, selDef, context) {
-        var com = CQ.form.rte.Common;
-        var ui = CQ.form.rte.ui;
+        var com = CUI.rte.Common;
+        var ui = CUI.rte.ui;
         var nodeList = selDef.nodeList;
         var spchkSpan = com.getTagInPath(context, nodeList.commonAncestor, "span", {
             "_rtetemp": "spchk"
@@ -346,5 +346,5 @@ CQ.form.rte.plugins.SpellCheckerPlugin = new Class({
 
 
 // register plugin
-CQ.form.rte.plugins.PluginRegistry.register("spellcheck",
-        CQ.form.rte.plugins.SpellCheckerPlugin);
+CUI.rte.plugins.PluginRegistry.register("spellcheck",
+        CUI.rte.plugins.SpellCheckerPlugin);

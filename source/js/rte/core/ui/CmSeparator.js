@@ -17,10 +17,10 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.ui.CmSeparator
+ * @class CUI.rte.ui.CmSeparator
  * @private
  */
-CQ.form.rte.ui.CmSeparator = new Class({
+CUI.rte.ui.CmSeparator = new Class({
 
     toString: "CmSeparator",
 

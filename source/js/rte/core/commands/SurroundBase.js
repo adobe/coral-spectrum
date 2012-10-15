@@ -17,15 +17,15 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.commands.SurroundBase
- * @extends CQ.form.rte.commands.Command
+ * @class CUI.rte.commands.SurroundBase
+ * @extends CUI.rte.commands.Command
  * @private
  */
-CQ.form.rte.commands.SurroundBase = new Class({
+CUI.rte.commands.SurroundBase = new Class({
 
     toString: "SurroundBase",
 
-    extend: CQ.form.rte.commands.Command,
+    extend: CUI.rte.commands.Command,
 
     tagName: null,
 
@@ -40,7 +40,7 @@ CQ.form.rte.commands.SurroundBase = new Class({
      * @private
      */
     containsTag: function(list, tagName) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         for (var key in list) {
             var dom = list[key];
             if (com.isTag(dom, tagName)) {
@@ -55,12 +55,12 @@ CQ.form.rte.commands.SurroundBase = new Class({
     },
 
     getProcessingOptions: function() {
-        var cmd = CQ.form.rte.commands.Command;
+        var cmd = CUI.rte.commands.Command;
         return cmd.PO_SELECTION | cmd.PO_BOOKMARK | cmd.PO_NODELIST;
     },
 
     execute: function(execDef) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var nodeList = execDef.nodeList;
         var context = execDef.editContext;
         var isActive = com.containsTagInPath(context, nodeList.commonAncestor,

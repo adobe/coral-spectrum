@@ -17,7 +17,7 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.HtmlProcessor
+ * @class CUI.rte.HtmlProcessor
  * @static
  * @private
  * <p>The RichText.HtmlProcessor provides the means to process HTML based on its String
@@ -26,7 +26,7 @@
  * if you plan to process large chunks of HTML, you should better use DOM-based processing
  * instead.</p>
  */
-CQ.form.rte.HtmlProcessor = function() {
+CUI.rte.HtmlProcessor = function() {
 
     return {
 
@@ -41,11 +41,11 @@ CQ.form.rte.HtmlProcessor = function() {
          * @return {String} The result of the replacement
          */
         replace: function(text, startPos, endPosIncl, replacement) {
-            return CQ.form.rte.Common.strReplace(text, startPos, endPosIncl, replacement);
+            return CUI.rte.Common.strReplace(text, startPos, endPosIncl, replacement);
         },
 
         isBlockTag: function(tagName) {
-            var tags = CQ.form.rte.Common.BLOCK_TAGS;
+            var tags = CUI.rte.Common.BLOCK_TAGS;
             var tagNameLC = tagName.toLowerCase();
             var tagCnt = tags.length;
             for (var tagIndex = 0; tagIndex < tagCnt; tagIndex++) {
@@ -161,7 +161,7 @@ CQ.form.rte.HtmlProcessor = function() {
          * @return {Object} An object representation of the tag String
          */
         parseTag: function(tagStr) {
-            var hpr = CQ.form.rte.HtmlProcessor;
+            var hpr = CUI.rte.HtmlProcessor;
             // some preparations ...
             tagStr = tagStr.replace(/\r\n/g, " ");
             tagStr = tagStr.replace(/[\r\n\t]/g, " ");
@@ -316,18 +316,18 @@ CQ.form.rte.HtmlProcessor = function() {
          * @type Object
          */
         parseStyleDef: function(styleStr) {
-            styleStr = CQ.form.rte.Utils.htmlDecode(styleStr);
+            styleStr = CUI.rte.Utils.htmlDecode(styleStr);
             var processPos = 0;
             var styleDef = { };
             while (true) {
                 processPos =
-                        CQ.form.rte.HtmlProcessor.skipWhitespace(styleStr, processPos);
+                        CUI.rte.HtmlProcessor.skipWhitespace(styleStr, processPos);
                 if (processPos < 0) {
                     return styleDef;
                 }
                 var sepPos = styleStr.indexOf(":", processPos + 1);
                 var styleName = styleStr.substring(processPos, sepPos);
-                styleName = CQ.form.rte.HtmlProcessor
+                styleName = CUI.rte.HtmlProcessor
                             .stripSurroundingWhitespace(styleName);
                 if (styleName.length == 0) {
                     return styleDef;
@@ -337,7 +337,7 @@ CQ.form.rte.HtmlProcessor = function() {
                     defEndPos = styleStr.length;
                 }
                 var styleCode = styleStr.substring(sepPos + 1, defEndPos);
-                styleCode = CQ.form.rte.HtmlProcessor
+                styleCode = CUI.rte.HtmlProcessor
                         .stripSurroundingWhitespace(styleCode);
                 styleDef[styleName] = styleCode;
                 processPos = defEndPos + 1;
@@ -372,7 +372,7 @@ CQ.form.rte.HtmlProcessor = function() {
                 return noReplacementRet;
             }
             var delta = replaceStr.length - (endPos - startPos);
-            htmlStr = CQ.form.rte.HtmlProcessor.replace(
+            htmlStr = CUI.rte.HtmlProcessor.replace(
                     htmlStr, startPos, endPos - 1, replaceStr);
             return {
                 "html": htmlStr,
@@ -484,7 +484,7 @@ CQ.form.rte.HtmlProcessor = function() {
          * @return {String} HTML after processing
          */
         parseHtml: function(htmlStr, callback) {
-            var hpr = CQ.form.rte.HtmlProcessor;
+            var hpr = CUI.rte.HtmlProcessor;
             var processingPos = 0;
             var textPos = 0;
             var textHandlerResult;
@@ -607,7 +607,7 @@ CQ.form.rte.HtmlProcessor = function() {
          * Checks if the given attribute definitions equal each other.
          * <p>
          * Both attribute definitions must be in the format that is created by
-         * <code>CQ.form.rte.HtmlProcessor.parseTag()</code>.
+         * <code>CUI.rte.HtmlProcessor.parseTag()</code>.
          * @param {Object} attribs attribute set
          * @param {Object} cmpAttribs attribute set to compare
          * @return {Boolean} True if the given attribute definitions equal each other
@@ -649,11 +649,11 @@ CQ.form.rte.HtmlProcessor = function() {
          */
         parseStyleTag: function(tagStr) {
             var tagReplacement = null;
-            var tagDef = CQ.form.rte.HtmlProcessor.parseTag(tagStr);
+            var tagDef = CUI.rte.HtmlProcessor.parseTag(tagStr);
             var styleDef = tagDef.attributes["style"];
             if (styleDef) {
                 styleDef = styleDef.value;
-                var styleDefs = CQ.form.rte.HtmlProcessor.parseStyleDef(styleDef);
+                var styleDefs = CUI.rte.HtmlProcessor.parseStyleDef(styleDef);
                 if (styleDefs["font-weight"] == "bold") {
                     if (!tagReplacement) {
                         tagReplacement = new Array();
@@ -736,7 +736,7 @@ CQ.form.rte.HtmlProcessor = function() {
                                 replaceIndex >= 0; replaceIndex--) {
                             replaceText += "</" + tagsToReplace[replaceIndex] + ">";
                         }
-                        value = CQ.form.rte.HtmlProcessor.replace(
+                        value = CUI.rte.HtmlProcessor.replace(
                                 value, closingTagPos, closingTagPos + 6, replaceText);
                         closingTagPos += replaceText.length;
                         // correct replacePos by the difference between old and new
@@ -755,7 +755,7 @@ CQ.form.rte.HtmlProcessor = function() {
                     }
                 }
                 if (tag) {
-                    tagsToReplace = CQ.form.rte.HtmlProcessor.parseStyleTag(tag);
+                    tagsToReplace = CUI.rte.HtmlProcessor.parseStyleTag(tag);
                     if (tagsToReplace) {
                         replaceText = "";
                         var tagCnt = tagsToReplace.length;
@@ -765,7 +765,7 @@ CQ.form.rte.HtmlProcessor = function() {
                             closingTagInfo.push(tagToReplace);
                             replaceText += "<" + tagToReplace + ">";
                         }
-                        value = CQ.form.rte.HtmlProcessor.replace(
+                        value = CUI.rte.HtmlProcessor.replace(
                             value, replacePos, tagEndPos, replaceText);
                         replacePos += replaceText.length;
                         spanEndTags.push(closingTagInfo);
@@ -811,7 +811,7 @@ CQ.form.rte.HtmlProcessor = function() {
                             tagStr = value.substring(replacePos, tagEndPos + 1);
                         }
                         if (tagStr) {
-                            var tagDef = CQ.form.rte.HtmlProcessor.parseTag(tagStr);
+                            var tagDef = CUI.rte.HtmlProcessor.parseTag(tagStr);
                             if (tagDef) {
                                 var attribDef = tagDef.attributes[attribute];
                                 if (attribDef && !attribDef.shortAttrib) {
@@ -819,13 +819,13 @@ CQ.form.rte.HtmlProcessor = function() {
                                     var attribPos = attribDef.pos;
                                     var attribCharCnt = attribDef.cnt;
                                     var isQuoted = attribDef.quoted;
-                                    var url = CQ.form.rte.HtmlRules.Links
+                                    var url = CUI.rte.HtmlRules.Links
                                             .removePrefixForInternalLinks(attribValue);
                                     if (url != attribValue) {
                                         if (!isQuoted) {
                                             url = "\"" + url + "\"";
                                         }
-                                        value = CQ.form.rte.HtmlProcessor.replace(
+                                        value = CUI.rte.HtmlProcessor.replace(
                                                 value, replacePos + attribPos,
                                                 replacePos + attribPos + attribCharCnt - 1,
                                                 url);
@@ -854,7 +854,7 @@ CQ.form.rte.HtmlProcessor = function() {
          * Creates HTML code for the specified tag definition.
          * @param {String} tagName Name of the tag
          * @param {Object} attribs Attribute definition as created by
-         *        {@link CQ.form.rte.HtmlProcessor.parseHtml}
+         *        {@link CUI.rte.HtmlProcessor.parseHtml}
          * @param {Boolean} isClosingTag True if a closing tag should be created
          * @param {Boolean} isShortTag True if the tag is a "short tag" (for example
          *        &lt;br /&gt;)
@@ -872,7 +872,7 @@ CQ.form.rte.HtmlProcessor = function() {
             }
             tag += (normalizeTag ? tagName.toLowerCase() : tagName);
             if (attribs && !isClosingTag) {
-                tag += CQ.form.rte.HtmlProcessor.createAttributes(attribs, normalizeTag);
+                tag += CUI.rte.HtmlProcessor.createAttributes(attribs, normalizeTag);
             }
             if (isShortTag) {
                 tag += " /";
@@ -930,12 +930,12 @@ CQ.form.rte.HtmlProcessor = function() {
 
 
 /**
- * @class CQ.form.rte.HtmlProcessor.StripTags
+ * @class CUI.rte.HtmlProcessor.StripTags
  * @private
  * This class implements a "Tag strip" processor, which removes all tags from a given
  * HTML fragment.
  */
-CQ.form.rte.HtmlProcessor.StripTags = new Class({
+CUI.rte.HtmlProcessor.StripTags = new Class({
 
     toString: "HtmlProcessor.StripTags",
 
@@ -950,7 +950,7 @@ CQ.form.rte.HtmlProcessor.StripTags = new Class({
      * @return {String} the plain text code
      */
     strip: function(html) {
-        return CQ.form.rte.HtmlProcessor.parseHtml(html, this);
+        return CUI.rte.HtmlProcessor.parseHtml(html, this);
     },
 
     /**

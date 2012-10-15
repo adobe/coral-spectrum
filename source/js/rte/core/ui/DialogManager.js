@@ -19,7 +19,7 @@
 /**
  * This class should be overridden by toolkit-specific dialog implementations.
  */
-CQ.form.rte.ui.DialogManager = new Class({
+CUI.rte.ui.DialogManager = new Class({
 
     // TODO define
 
@@ -53,40 +53,40 @@ CQ.form.rte.ui.DialogManager = new Class({
  * ID for the "link" dialog
  * @type {String}
  */
-CQ.form.rte.ui.DialogManager.DLG_LINK = "linkDialog";
+CUI.rte.ui.DialogManager.DLG_LINK = "linkDialog";
 
 /**
  * ID for the "anchor" dialog
  * @type {String}
  */
-CQ.form.rte.ui.DialogManager.DLG_ANCHOR = "anchorDialog";
+CUI.rte.ui.DialogManager.DLG_ANCHOR = "anchorDialog";
 
 /**
  * ID for the "find &amp; replace" dialog
  * @type {String}
  */
-CQ.form.rte.ui.DialogManager.DLG_FINDREPLACE = "findReplaceDialog";
+CUI.rte.ui.DialogManager.DLG_FINDREPLACE = "findReplaceDialog";
 
 /**
  * ID for the "paste" dialog
  * @type {String}
  */
-CQ.form.rte.ui.DialogManager.DLG_PASTE = "pasteDialog";
+CUI.rte.ui.DialogManager.DLG_PASTE = "pasteDialog";
 
 /**
  * ID for the "special chars" dialog
  * @type {String}
  */
-CQ.form.rte.ui.DialogManager.DLG_SPECCHARS = "specCharsDialog";
+CUI.rte.ui.DialogManager.DLG_SPECCHARS = "specCharsDialog";
 
 /**
  * ID for the "table properties" dialog
  * @type {String}
  */
-CQ.form.rte.ui.DialogManager.DLG_TABLEPROPS = "tablePropsDialog";
+CUI.rte.ui.DialogManager.DLG_TABLEPROPS = "tablePropsDialog";
 
 /**
  * ID for the "cell properties" dialog
  * @type {String}
  */
-CQ.form.rte.ui.DialogManager.DLG_CELLPROPS = "cellPropsDialog";
+CUI.rte.ui.DialogManager.DLG_CELLPROPS = "cellPropsDialog";

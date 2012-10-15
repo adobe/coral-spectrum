@@ -16,22 +16,21 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-window.CQ = window.CQ || { };
-CQ.form = CQ.form || { };
-CQ.form.rte = {};
-CQ.form.rte.commands = {};
-CQ.form.rte.plugins = {};
-CQ.form.rte.adapter = {};
-CQ.form.rte.ui = {};
-CQ.form.rte.ui.ext = {};
-CQ.form.rte.ui.cui = {};
+window.CUI = window.CUI || { };
+CUI.rte = {};
+CUI.rte.commands = {};
+CUI.rte.plugins = {};
+CUI.rte.adapter = {};
+CUI.rte.ui = {};
+CUI.rte.ui.ext = {};
+CUI.rte.ui.cui = {};
 
 (function() {
 
     // determine which implementation to use
-    CQ.form.rte._adapter = (CQ.Ext ? "ext" : "jquery");
+    CUI.rte._adapter = (CQ.Ext ? "ext" : "jquery");
     // TODO remove after development
-    CQ.form.rte._adapter = "jquery";
-    CQ.form.rte._toolkit = (CQ.Ext ? "ext" : "cui");
+    CUI.rte._adapter = "jquery";
+    CUI.rte._toolkit = (CQ.Ext ? "ext" : "cui");
 
 })();

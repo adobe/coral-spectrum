@@ -17,12 +17,12 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.ui.ContextMenuBuilder
+ * @class CUI.rte.ui.ContextMenuBuilder
  * @private
  * This class is used to build the context menu from plugins in a implementation-independent
  * way.
  */
-CQ.form.rte.ui.ContextMenuBuilder = new Class({
+CUI.rte.ui.ContextMenuBuilder = new Class({
 
     toString: "ContextMenuBuilder",
 

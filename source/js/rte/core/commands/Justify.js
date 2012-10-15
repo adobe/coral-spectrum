@@ -17,28 +17,28 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.commands.Justify
- * @extends CQ.form.rte.commands.Command
+ * @class CUI.rte.commands.Justify
+ * @extends CUI.rte.commands.Command
  * @private
  */
-CQ.form.rte.commands.Justify = new Class({
+CUI.rte.commands.Justify = new Class({
 
     toString: "Justify",
 
-    extend: CQ.form.rte.commands.Command,
+    extend: CUI.rte.commands.Command,
 
     isCommand: function(cmdStr) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         return com.strStartsWith(cmdStr.toLowerCase(), "justify");
     },
 
     getProcessingOptions: function() {
-        var cmd = CQ.form.rte.commands.Command;
+        var cmd = CUI.rte.commands.Command;
         return cmd.PO_SELECTION | cmd.PO_BOOKMARK;
     },
 
     alignTableCells: function(context, cellSelection, alignment) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var cells = cellSelection.cells;
         var cellCnt = cells.length;
         for (var c = 0; c < cellCnt; c++) {
@@ -54,8 +54,8 @@ CQ.form.rte.commands.Justify = new Class({
     },
 
     execute: function(execDef) {
-        var dpr = CQ.form.rte.DomProcessor;
-        var com = CQ.form.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
+        var com = CUI.rte.Common;
         var selection = execDef.selection;
         var cmd = execDef.command;
         var context = execDef.editContext;
@@ -104,7 +104,7 @@ CQ.form.rte.commands.Justify = new Class({
     },
 
     queryState: function(selectionDef, cmd) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var context = selectionDef.editContext;
         var containerList = com.arrayCopy(selectionDef.containerList);
         var auxRoots = selectionDef.auxRoots;
@@ -125,4 +125,4 @@ CQ.form.rte.commands.Justify = new Class({
 
 
 // register command
-CQ.form.rte.commands.CommandRegistry.register("justify", CQ.form.rte.commands.Justify);
+CUI.rte.commands.CommandRegistry.register("justify", CUI.rte.commands.Justify);

@@ -17,21 +17,21 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.commands.DefaultFormatting
- * @extends CQ.form.rte.commands.Command
+ * @class CUI.rte.commands.DefaultFormatting
+ * @extends CUI.rte.commands.Command
  * @private
  */
-CQ.form.rte.commands.DefaultFormatting = new Class({
+CUI.rte.commands.DefaultFormatting = new Class({
 
     toString: "DefaultFormatting",
 
-    extend: CQ.form.rte.commands.Command,
+    extend: CUI.rte.commands.Command,
 
     /**
      * @private
      */
     containsTag: function(list, tagName) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         for (var key in list) {
             var dom = list[key];
             if (com.isTag(dom, tagName)) {
@@ -74,16 +74,16 @@ CQ.form.rte.commands.DefaultFormatting = new Class({
     },
 
     getProcessingOptions: function() {
-        var cmd = CQ.form.rte.commands.Command;
+        var cmd = CUI.rte.commands.Command;
         return cmd.PO_SELECTION | cmd.PO_BOOKMARK | cmd.PO_NODELIST;
     },
 
     execute: function(execDef) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var nodeList = execDef.nodeList;
         var selection = execDef.selection;
         var context = execDef.editContext;
-        if (!CQ.form.rte.Selection.isSelection(selection)) {
+        if (!CUI.rte.Selection.isSelection(selection)) {
             execDef.editContext.doc.execCommand(execDef.command, false, null);
             return;
         }
@@ -99,7 +99,7 @@ CQ.form.rte.commands.DefaultFormatting = new Class({
     },
 
     queryState: function(selectionDef, cmd) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         if (!selectionDef.isSelection) {
             return selectionDef.editContext.doc.queryCommandState(cmd);
         }
@@ -114,5 +114,5 @@ CQ.form.rte.commands.DefaultFormatting = new Class({
 });
 
 // register command
-CQ.form.rte.commands.CommandRegistry.register("defaultfmt",
-        CQ.form.rte.commands.DefaultFormatting);
+CUI.rte.commands.CommandRegistry.register("defaultfmt",
+        CUI.rte.commands.DefaultFormatting);

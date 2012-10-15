@@ -17,15 +17,15 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.commands.List
- * @extends CQ.form.rte.commands.Command
+ * @class CUI.rte.commands.List
+ * @extends CUI.rte.commands.Command
  * @private
  */
-CQ.form.rte.commands.List = new Class({
+CUI.rte.commands.List = new Class({
 
     toString: "List",
 
-    extend: CQ.form.rte.commands.Command,
+    extend: CUI.rte.commands.Command,
 
     isCommand: function(cmdStr) {
         var cmdStrLC = cmdStr.toLowerCase();
@@ -33,7 +33,7 @@ CQ.form.rte.commands.List = new Class({
     },
 
     getProcessingOptions: function() {
-        var cmd = CQ.form.rte.commands.Command;
+        var cmd = CUI.rte.commands.Command;
         return cmd.PO_SELECTION | cmd.PO_BOOKMARK | cmd.PO_NODELIST;
     },
 
@@ -47,7 +47,7 @@ CQ.form.rte.commands.List = new Class({
         return execDef.nodeList.getTags(context, [ {
                 "extMatcher": function(dom) {
                     return {
-                        "isMatching": CQ.form.rte.Common.isTag(dom, "li"),
+                        "isMatching": CUI.rte.Common.isTag(dom, "li"),
                         "preventRecursionIfMatching": true
                     };
                 }
@@ -64,24 +64,24 @@ CQ.form.rte.commands.List = new Class({
         var context = execDef.editContext;
         var allItems = execDef.nodeList.getTags(context, [ {
                 "matcher": function(dom) {
-                    return CQ.form.rte.Common.isTag(dom, "li");
+                    return CUI.rte.Common.isTag(dom, "li");
                 }
             }
         ], true, true);
-        CQ.form.rte.ListUtils.postprocessSelectedItems(allItems);
+        CUI.rte.ListUtils.postprocessSelectedItems(allItems);
         return allItems;
     },
 
     /**
      * Gets the defining list element for the specified node list. The defining list element
      * is the list element that belongs to the first node contained in the list.
-     * @param {CQ.form.rte.EditContext} context The edit context
-     * @param {CQ.form.rte.NodeList} nodeList The node list
+     * @param {CUI.rte.EditContext} context The edit context
+     * @param {CUI.rte.NodeList} nodeList The node list
      * @return {HTMLElement} The defining list DOM; null if the first node of the list
      *         is not part of a list
      */
     getDefiningListDom: function(context, nodeList) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var determNode = nodeList.getFirstNode();
         if (determNode == null) {
             return null;
@@ -108,8 +108,8 @@ CQ.form.rte.commands.List = new Class({
         var itemCnt = listItems.length;
         for (var i = 0; i < itemCnt; i++) {
             var itemToCheck = listItems[i];
-            var listDom = CQ.form.rte.ListUtils.getTopListForItem(context, itemToCheck.dom);
-            var listIndex = CQ.form.rte.Common.arrayIndex(topLevelLists, listDom);
+            var listDom = CUI.rte.ListUtils.getTopListForItem(context, itemToCheck.dom);
+            var listIndex = CUI.rte.Common.arrayIndex(topLevelLists, listDom);
             if (listIndex < 0) {
                 topLevelLists.push(listDom);
                 itemsPerList.push([ itemToCheck ]);
@@ -126,7 +126,7 @@ CQ.form.rte.commands.List = new Class({
      * @private
      */
     changeItemsListType: function(execDef, listItems, listType) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var context = execDef.editContext;
         var itemCnt = listItems.length;
         for (var i = 0; i < itemCnt; i++) {
@@ -193,7 +193,7 @@ CQ.form.rte.commands.List = new Class({
         var blockLists = nodeList.getEditBlocksByAuxRoots(context, true);
         var listCnt = blockLists.length;
         for (var l = 0; l < listCnt; l++) {
-            CQ.form.rte.ListUtils.createList(context, blockLists[l], listType);
+            CUI.rte.ListUtils.createList(context, blockLists[l], listType);
         }
     },
 
@@ -212,12 +212,12 @@ CQ.form.rte.commands.List = new Class({
         for (var i = 0; i < itemCnt; i++) {
             itemsDom.push(listItems[i].dom);
         }
-        CQ.form.rte.ListUtils.unlistItems(context, itemsDom, keepStructure);
+        CUI.rte.ListUtils.unlistItems(context, itemsDom, keepStructure);
     },
 
 
     execute: function(execDef) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var context = execDef.editContext;
         var nodeList = execDef.nodeList;
         var command = execDef.command;
@@ -257,7 +257,7 @@ CQ.form.rte.commands.List = new Class({
     },
 
     queryState: function(selectionDef, cmd) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var context = selectionDef.editContext;
         var nodeList = selectionDef.nodeList;
         var tagName;
@@ -278,8 +278,8 @@ CQ.form.rte.commands.List = new Class({
 /**
  * Placeholder for "no list functionality available"
  */
-CQ.form.rte.commands.List.NO_LIST_AVAILABLE = new Object();
+CUI.rte.commands.List.NO_LIST_AVAILABLE = new Object();
 
 
 // register command
-CQ.form.rte.commands.CommandRegistry.register("list", CQ.form.rte.commands.List);
+CUI.rte.commands.CommandRegistry.register("list", CUI.rte.commands.List);

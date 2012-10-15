@@ -17,8 +17,8 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.plugins.UndoRedoPlugin
- * @extends CQ.form.rte.plugins.Plugin
+ * @class CUI.rte.plugins.UndoRedoPlugin
+ * @extends CUI.rte.plugins.Plugin
  * <p>This class implements undo/redo functionality as a plugin.</p>
  * <p>The plugin ID is "<b>undo</b>".</p>
  * <p><b>Features</b></p>
@@ -28,11 +28,11 @@
  * </ul>
  * @since 5.3
  */
-CQ.form.rte.plugins.UndoRedoPlugin = new Class({
+CUI.rte.plugins.UndoRedoPlugin = new Class({
 
     toString: "UndoRedoPlugin",
 
-    extend: CQ.form.rte.plugins.Plugin,
+    extend: CUI.rte.plugins.Plugin,
 
     undoUI: null,
 
@@ -160,7 +160,7 @@ CQ.form.rte.plugins.UndoRedoPlugin = new Class({
     },
 
     initializeUI: function(tbGenerator) {
-        var plg = CQ.form.rte.plugins;
+        var plg = CUI.rte.plugins;
         if (this.isFeatureEnabled("undo")) {
             this.undoUI = new tbGenerator.createElement("undo", this, false,
                     this.getTooltip("undo"));
@@ -194,4 +194,4 @@ CQ.form.rte.plugins.UndoRedoPlugin = new Class({
 
 
 // register plugin
-CQ.form.rte.plugins.PluginRegistry.register("undo", CQ.form.rte.plugins.UndoRedoPlugin);
+CUI.rte.plugins.PluginRegistry.register("undo", CUI.rte.plugins.UndoRedoPlugin);

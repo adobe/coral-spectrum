@@ -17,12 +17,12 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.ui.TbElement
+ * @class CUI.rte.ui.TbElement
  * @private
  * This class represents a single element for use in
- * {@link CQ.form.rte.ui.ToolbarBuilder}.
+ * {@link CUI.rte.ui.ToolbarBuilder}.
  */
-CQ.form.rte.ui.TbElement = new Class({
+CUI.rte.ui.TbElement = new Class({
 
     toString: "TbElement",
 
@@ -55,7 +55,7 @@ CQ.form.rte.ui.TbElement = new Class({
     },
 
     getToolbar: function() {
-        return CQ.form.rte.ui.ToolbarBuilder.MAIN_TOOLBAR;
+        return CUI.rte.ui.ToolbarBuilder.MAIN_TOOLBAR;
     },
 
     addToToolbar: function(toolbar) {

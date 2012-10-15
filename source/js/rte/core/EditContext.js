@@ -17,7 +17,7 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.EditContext
+ * @class CUI.rte.EditContext
  * This class is used to abstract the context the editor is used in.
  * @constructor
  * @param {HTMLElement} iFrame iframe the editor is running in (if any)
@@ -26,7 +26,7 @@
  * @param {HTMLElement} root The "root" element (the iframe's body tag or the div that is
  *        made editable)
  */
-CQ.form.rte.EditContext = new Class({
+CUI.rte.EditContext = new Class({
 
     toString: "EditContext",
 

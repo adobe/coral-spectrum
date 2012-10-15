@@ -17,18 +17,18 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.HtmlDeserializer
- * @extends CQ.form.rte.Deserializer
+ * @class CUI.rte.HtmlDeserializer
+ * @extends CUI.rte.Deserializer
  * The HtmlDeserializer is used to deserialize HTML code to a suitable DOM tree.
  * @constructor
  * Creates a new HtmlDeserializer.
  * @param {Object} config The configuration object
  */
-CQ.form.rte.HtmlDeserializer = new Class({
+CUI.rte.HtmlDeserializer = new Class({
 
     toString: "HtmlDeserializer",
 
-    extend: CQ.form.rte.Deserializer,
+    extend: CUI.rte.Deserializer,
 
     construct: function(config) {
         this._init(config);
@@ -48,7 +48,7 @@ CQ.form.rte.HtmlDeserializer = new Class({
      * @return {String} The processed HTML code
      */
     duplicateReferences: function(html) {
-        var rules = CQ.form.rte.HtmlDeserializer.DUPLICATE_RULES;
+        var rules = CUI.rte.HtmlDeserializer.DUPLICATE_RULES;
         var ruleCnt = rules.length;
         for (var r = 0; r < ruleCnt; r++) {
             var rule = rules[r];
@@ -59,7 +59,7 @@ CQ.form.rte.HtmlDeserializer = new Class({
 
     /**
      * Deserializes the specified HTML code to the specified DOM element.
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      * @param {String} html The HTML to be deserialized
      * @param {HTMLElement} rootDom The DOM (sub-) tree to deserialize the HTML to
      */
@@ -79,11 +79,11 @@ CQ.form.rte.HtmlDeserializer = new Class({
  * @type Object[][]
  * @private
  */
-CQ.form.rte.HtmlDeserializer.DUPLICATE_RULES = [ [
+CUI.rte.HtmlDeserializer.DUPLICATE_RULES = [ [
         /(<a[^>]*?href=")([^"]*?)(")((.|\n|\r)*?>)/gi,
-        "$1$2$3 " + CQ.form.rte.Common.HREF_ATTRIB + "=\"$2\"$4"
+        "$1$2$3 " + CUI.rte.Common.HREF_ATTRIB + "=\"$2\"$4"
     ], [
         /(<img[^>]*?src=")([^"]*?)(")((.|\n|\r)*?>)/gi,
-        "$1$2$3 " + CQ.form.rte.Common.SRC_ATTRIB + "=\"$2\"$4"
+        "$1$2$3 " + CUI.rte.Common.SRC_ATTRIB + "=\"$2\"$4"
     ]
 ];

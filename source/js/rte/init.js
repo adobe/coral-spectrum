@@ -17,5 +17,5 @@
 **************************************************************************/
 
 (function() {
-    CQ.form.rte.ui.ToolkitRegistry.initialize(CQ.form.rte._toolkit);
+    CUI.rte.ui.ToolkitRegistry.initialize(CUI.rte._toolkit);
 })();

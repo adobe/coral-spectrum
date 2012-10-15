@@ -17,7 +17,7 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.ui.DialogHelper
+ * @class CUI.rte.ui.DialogHelper
  * @private
  * <p>The DialogHelper provides helper functionality for creating extensible dialogs from
  * inside the richtext editor. It should be used by plugins to create and display
@@ -31,10 +31,10 @@
  * @constructor
  * Creates a new DialogHelper with the specified configuration.
  * @param {Object} dialogConfig The dialog's configuration
- * @param {CQ.form.rte.EditorKernel} editorKernel The editor kernel the dialog is used from
+ * @param {CUI.rte.EditorKernel} editorKernel The editor kernel the dialog is used from
  * @since 5.3
  */
-CQ.form.rte.ui.DialogHelper = new Class({
+CUI.rte.ui.DialogHelper = new Class({
 
     toString: "DialogHelper",
 
@@ -118,7 +118,7 @@ CQ.form.rte.ui.DialogHelper = new Class({
     /**
      * The editor kernel the dialog is used from
      * @publicProp
-     * @type CQ.form.rte.EditorKernel
+     * @type CUI.rte.EditorKernel
      */
     editorKernel: null,
 
@@ -142,7 +142,7 @@ CQ.form.rte.ui.DialogHelper = new Class({
                 "customDialog": dialogConfig
             };
         }
-        CQ.form.rte.Utils.apply(this, dialogConfig);
+        CUI.rte.Utils.apply(this, dialogConfig);
     },
 
     /**
@@ -163,7 +163,7 @@ CQ.form.rte.ui.DialogHelper = new Class({
 
     /**
      * <p>Adds the additional fields to the specified dialog item configuration.</p>
-     * <p>This method is used by {@link CQ.form.rte.ui.Window.BaseWindow} to apply custom
+     * <p>This method is used by {@link CUI.rte.ui.Window.BaseWindow} to apply custom
      * configuration. It should not be called directly.</p>
      * @private
      */
@@ -206,12 +206,12 @@ CQ.form.rte.ui.DialogHelper = new Class({
 
     /**
      * <p>Removes the disabled fields from the specified dialog item configuration.</p>
-     * <p>This method is used by {@link CQ.form.rte.ui.Window.BaseWindow} to apply custom
+     * <p>This method is used by {@link CUI.rte.ui.Window.BaseWindow} to apply custom
      * configuration. It should not be called directly.</p>
      * @private
      */
     removeDisabledItems: function(dialogItems) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         if (this.disabledDefaultFields) {
             var itemCnt = dialogItems.length;
             for (var i = itemCnt - 1; i >= 0; i--) {
@@ -227,7 +227,7 @@ CQ.form.rte.ui.DialogHelper = new Class({
      * @private
      */
     createExtensibleDialog: function() {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         if (!this.defaultDialog) {
             throw new Error("Invalid dialogConfig; missing property defaultDialog");
         }
@@ -332,16 +332,16 @@ CQ.form.rte.ui.DialogHelper = new Class({
  * The dialog's type for indirect instantiation
  * @type {String}
  */
-CQ.form.rte.ui.DialogHelper.TYPE_DIALOG = "rtelinkdialog";
+CUI.rte.ui.DialogHelper.TYPE_DIALOG = "rtelinkdialog";
 
 /**
  * Item type: Text field
  * @type {String}
  */
-CQ.form.rte.ui.DialogHelper.TYPE_TEXTFIELD = "textfield";
+CUI.rte.ui.DialogHelper.TYPE_TEXTFIELD = "textfield";
 
 /**
  * Item type: Hidden field
  * @type {String}
  */
-CQ.form.rte.ui.DialogHelper.TYPE_HIDDEN = "hidden";
+CUI.rte.ui.DialogHelper.TYPE_HIDDEN = "hidden";

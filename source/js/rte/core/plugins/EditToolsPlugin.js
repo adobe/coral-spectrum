@@ -17,8 +17,8 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.plugins.EditToolsPlugin
- * @extends CQ.form.rte.plugins.Plugin
+ * @class CUI.rte.plugins.EditToolsPlugin
+ * @extends CUI.rte.plugins.Plugin
  * <p>This class implements the basic editing functions (cut, copy, paste) as a plugin.</p>
  * <p>The plugin ID is "<b>edit</b>".</p>
  * <p><b>Features</b></p>
@@ -34,11 +34,11 @@
  *     pasting content from Microsoft Word.</li>
  * </ul>
  */
-CQ.form.rte.plugins.EditToolsPlugin = new Class({
+CUI.rte.plugins.EditToolsPlugin = new Class({
 
     toString: "EditToolsPlugin",
 
-    extend: CQ.form.rte.plugins.Plugin,
+    extend: CUI.rte.plugins.Plugin,
 
     /**
      * @cfg {String} defaultPasteMode
@@ -203,7 +203,7 @@ CQ.form.rte.plugins.EditToolsPlugin = new Class({
 
     /**
      * Value that determines the preferred scrolling offset (Gecko only, for ensuring
-     * caret visibility through {@link CQ.form.rte.Selection#ensureCaretVisibility}
+     * caret visibility through {@link CUI.rte.Selection#ensureCaretVisibility}
      * @type Number
      * @private
      */
@@ -251,7 +251,7 @@ CQ.form.rte.plugins.EditToolsPlugin = new Class({
 
     _init: function(editorKernel) {
         this.inherited(arguments);
-        if (!CQ.form.rte.Common.ua.isWebKit) {
+        if (!CUI.rte.Common.ua.isWebKit) {
             editorKernel.addPluginListener("beforekeydown", this.handleKeyDown, this, this,
                     false);
         } else {
@@ -263,7 +263,7 @@ CQ.form.rte.plugins.EditToolsPlugin = new Class({
         if (e.cancelKey) {
             return;
         }
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var key = e.getKey();
         if (this.config.defaultPasteMode != "browser") {
             var isPasteKey = false;
@@ -300,7 +300,7 @@ CQ.form.rte.plugins.EditToolsPlugin = new Class({
             return;
         }
 
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
 
         this.isPasteOperation = true;
         this.pasteRange = this.editorKernel.createQualifiedRangeBookmark(context);
@@ -324,7 +324,7 @@ CQ.form.rte.plugins.EditToolsPlugin = new Class({
             clipRange.select();
         } else {
             this.geckoPreferredScrollingOffset =
-                    CQ.form.rte.Selection.getPreferredScrollOffset(context);
+                    CUI.rte.Selection.getPreferredScrollOffset(context);
             clipRange = context.doc.createRange();
             clipRange.selectNodeContents(this.clipboard);
             var sel = context.win.getSelection();
@@ -332,7 +332,7 @@ CQ.form.rte.plugins.EditToolsPlugin = new Class({
             sel.addRange(clipRange);
         }
 
-        CQ.form.rte.Utils.defer(this.afterPaste, 1, this, [ context ]);
+        CUI.rte.Utils.defer(this.afterPaste, 1, this, [ context ]);
     },
 
     /**
@@ -343,14 +343,14 @@ CQ.form.rte.plugins.EditToolsPlugin = new Class({
      */
     afterPaste: function(context) {
 
-        var sel = CQ.form.rte.Selection;
-        var com = CQ.form.rte.Common;
+        var sel = CUI.rte.Selection;
+        var com = CUI.rte.Common;
 
-        CQ.form.rte.DomProcessor.correctGeckoCopyBugs(context, this.clipboard);
+        CUI.rte.DomProcessor.correctGeckoCopyBugs(context, this.clipboard);
         var clipboardHtml = this.clipboard.innerHTML;
         this.clipboard.parentNode.removeChild(this.clipboard);
         if (com.ua.isSafari) {
-            CQ.form.rte.Selection.resetSelection(context, "start");
+            CUI.rte.Selection.resetSelection(context, "start");
         }
         var execRet = this.editorKernel.execCmd("paste", {
             "html": clipboardHtml,
@@ -372,7 +372,7 @@ CQ.form.rte.plugins.EditToolsPlugin = new Class({
             }
         } else if (com.ua.isWebKit) {
             if (execRet.geckoEnsureCaretVisibility && context.iFrame) {
-                CQ.form.rte.Utils.defer(function() {
+                CUI.rte.Utils.defer(function() {
                     sel.ensureCaretVisibility(context, context.iframe,
                         this.geckoPreferredScrollingOffset);
                 }, 1, this);
@@ -392,13 +392,13 @@ CQ.form.rte.plugins.EditToolsPlugin = new Class({
         var cfg = {
             "type": type,
             "editContext": context,
-            "pasteFn": CQ.form.rte.Utils.scope(pasteFn, this),
-            "cancelFn": CQ.form.rte.Utils.scope(function() {
+            "pasteFn": CUI.rte.Utils.scope(pasteFn, this),
+            "cancelFn": CUI.rte.Utils.scope(function() {
                 this.pasteRange = null;
             }, this)
         };
         return this.editorKernel.getDialogManager().create(
-                CQ.form.rte.ui.DialogManager.DLG_PASTE, cfg);
+                CUI.rte.ui.DialogManager.DLG_PASTE, cfg);
     },
 
     /**
@@ -413,7 +413,7 @@ CQ.form.rte.plugins.EditToolsPlugin = new Class({
      * @private
      */
     pasteDefault: function(context) {
-        var pcmd = CQ.form.rte.commands.Paste;
+        var pcmd = CUI.rte.commands.Paste;
         var pasteMode = this.config.defaultPasteMode;
         var pasteDialogMode;
         switch (pasteMode) {
@@ -464,7 +464,7 @@ CQ.form.rte.plugins.EditToolsPlugin = new Class({
      * @private
      */
     execPastePlainText: function(context, value) {
-        var pcmd = CQ.form.rte.commands.Paste;
+        var pcmd = CUI.rte.commands.Paste;
         this.editorKernel.relayCmd("paste", {
             "mode": pcmd.MODE_PLAINTEXT,
             "text": value,
@@ -489,7 +489,7 @@ CQ.form.rte.plugins.EditToolsPlugin = new Class({
      * @private
      */
     execPasteWordHtml: function(context, value, isHtml, dom) {
-        var pcmd = CQ.form.rte.commands.Paste;
+        var pcmd = CUI.rte.commands.Paste;
         this.editorKernel.relayCmd("paste", {
             "mode": pcmd.MODE_WORDHTML,
             "html": value,
@@ -506,8 +506,8 @@ CQ.form.rte.plugins.EditToolsPlugin = new Class({
     },
 
     initializeUI: function(tbGenerator) {
-        var plg = CQ.form.rte.plugins;
-        var ui = CQ.form.rte.ui;
+        var plg = CUI.rte.plugins;
+        var ui = CUI.rte.ui;
         if (this.isFeatureEnabled("cut")) {
             this.cutUI = tbGenerator.createElement("cut", this, false,
                     this.getTooltip("cut"));
@@ -670,4 +670,4 @@ CQ.form.rte.plugins.EditToolsPlugin = new Class({
 
 
 // register plugin
-CQ.form.rte.plugins.PluginRegistry.register("edit", CQ.form.rte.plugins.EditToolsPlugin);
+CUI.rte.plugins.PluginRegistry.register("edit", CUI.rte.plugins.EditToolsPlugin);

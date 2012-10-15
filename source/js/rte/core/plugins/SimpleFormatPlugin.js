@@ -17,16 +17,16 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.plugins.SimpleFormatPlugin
- * @extends CQ.form.rte.plugins.Plugin
+ * @class CUI.rte.plugins.SimpleFormatPlugin
+ * @extends CUI.rte.plugins.Plugin
  * This class provides the plugin functionality that is required by simple formatting
  * operations.
  */
-CQ.form.rte.plugins.SimpleFormatPlugin = new Class({
+CUI.rte.plugins.SimpleFormatPlugin = new Class({
 
     toString: "SimpleFormatPlugin",
 
-    extend: CQ.form.rte.plugins.Plugin,
+    extend: CUI.rte.plugins.Plugin,
 
     /**
      * @private

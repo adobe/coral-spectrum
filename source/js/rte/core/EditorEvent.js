@@ -18,9 +18,9 @@
 
 /**
  * This class represents basic editor-related events, such as keystrokes or mouseclicks.
- * @class CQ.form.rte.EditorEvent
+ * @class CUI.rte.EditorEvent
  */
-CQ.form.rte.EditorEvent = new Class({
+CUI.rte.EditorEvent = new Class({
 
     toString: "EditorEvent",
 
@@ -76,7 +76,7 @@ CQ.form.rte.EditorEvent = new Class({
 
     /**
      * The edit context for the event
-     * @property {CQ.form.rte.EditContext} editContext
+     * @property {CUI.rte.EditContext} editContext
      */
     editContext: null,
 
@@ -86,7 +86,7 @@ CQ.form.rte.EditorEvent = new Class({
      * @private
      */
     _init: function(cfg) {
-        CQ.form.rte.Utils.apply(this, cfg);
+        CUI.rte.Utils.apply(this, cfg);
     },
 
     /**

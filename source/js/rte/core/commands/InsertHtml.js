@@ -17,27 +17,27 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.commands.InsertHtml
- * @extends CQ.form.rte.commands.Command
+ * @class CUI.rte.commands.InsertHtml
+ * @extends CUI.rte.commands.Command
  * @private
  */
-CQ.form.rte.commands.InsertHtml = new Class({
+CUI.rte.commands.InsertHtml = new Class({
 
     toString: "InsertHtml",
 
-    extend: CQ.form.rte.commands.Command,
+    extend: CUI.rte.commands.Command,
 
     isCommand: function(cmdStr) {
         return (cmdStr.toLowerCase() == "inserthtml");
     },
 
     getProcessingOptions: function() {
-        var cmd = CQ.form.rte.commands.Command;
+        var cmd = CUI.rte.commands.Command;
         return cmd.PO_SELECTION;
     },
 
     execute: function(execDef) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var htmlToInsert = execDef.value;
         if (htmlToInsert && (htmlToInsert.length > 0)) {
             if (com.ua.isIE) {
@@ -64,5 +64,5 @@ CQ.form.rte.commands.InsertHtml = new Class({
 
 
 // register command
-CQ.form.rte.commands.CommandRegistry.register("inserthtml",
-        CQ.form.rte.commands.InsertHtml);
+CUI.rte.commands.CommandRegistry.register("inserthtml",
+        CUI.rte.commands.InsertHtml);

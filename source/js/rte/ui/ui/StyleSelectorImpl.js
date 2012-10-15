@@ -16,11 +16,11 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CQ.form.rte.ui.cui.StyleSelectorImpl = new Class({
+CUI.rte.ui.cui.StyleSelectorImpl = new Class({
 
     toString: "StyleSelectorImpl",
 
-    extend: CQ.form.rte.ui.TbStyleSelector,
+    extend: CUI.rte.ui.TbStyleSelector,
 
     // Helpers -----------------------------------------------------------------------------
 
@@ -50,7 +50,7 @@ CQ.form.rte.ui.cui.StyleSelectorImpl = new Class({
     // Interface implementation ------------------------------------------------------------
 
     addToToolbar: function(toolbar) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         // TODO remove Ext dependency once we can ...
         this.toolbar = toolbar;
         if (com.ua.isIE) {

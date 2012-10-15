@@ -17,7 +17,7 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.Serializer
+ * @class CUI.rte.Serializer
  * <p>The Serializer class works as an "interface" for providing fully customized HTML
  * serializers.</p>
  * <p>Serializers are used to convert the DOM of the edited document (resp. its "body" part)
@@ -25,7 +25,7 @@
  * repository or editing using HTML source view.</p>
  * <p>You should only consider implementing this interface directly if you have very special
  * requirements. Usually, it should make more sense to extend one of the default
- * serializers, {@link CQ.form.rte.HtmlSerializer} or {@link CQ.form.rte.XhtmlSerializer}.
+ * serializers, {@link CUI.rte.HtmlSerializer} or {@link CUI.rte.XhtmlSerializer}.
  * </p>
  * <p>Serializers should usually do the following cleanup/adjustments:</p>
  * <ul>
@@ -33,14 +33,14 @@
  *     should be lowercase)</li>
  * </ul>
  */
-CQ.form.rte.Serializer = new Class({
+CUI.rte.Serializer = new Class({
 
     toString: "Serializer",
 
     /**
      * <p>Serializes the specified DOM (sub-) tree.</p>
      * <p>Note that the specified DOM element itself must not get serialized.</p>
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      * @param {HTMLElement} dom The DOM (sub-) tree to serialize
      * @return {String} The serialized representation of the DOM (sub-) tree
      */

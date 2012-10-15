@@ -17,17 +17,17 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.ui.TbStyleSelector
- * @extends CQ.form.rte.ui.TbElement
+ * @class CUI.rte.ui.TbStyleSelector
+ * @extends CUI.rte.ui.TbElement
  * @private
  * This class represents a style selecting element for use in
- * {@link CQ.form.rte.ui.ToolbarBuilder}.
+ * {@link CUI.rte.ui.ToolbarBuilder}.
  */
-CQ.form.rte.ui.TbStyleSelector = new Class({
+CUI.rte.ui.TbStyleSelector = new Class({
 
     toString: "TbStyleSelector",
 
-    extend: CQ.form.rte.ui.TbElement,
+    extend: CUI.rte.ui.TbElement,
 
     styleSelector: null,
 
@@ -61,7 +61,7 @@ CQ.form.rte.ui.TbStyleSelector = new Class({
     },
 
     getToolbar: function() {
-        return CQ.form.rte.ui.ToolbarBuilder.STYLE_TOOLBAR;
+        return CUI.rte.ui.ToolbarBuilder.STYLE_TOOLBAR;
     },
 
     initializeSelector: function() {

@@ -17,23 +17,23 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.XhtmlDeserializer
- * @extends CQ.form.rte.HtmlDeserializer
+ * @class CUI.rte.XhtmlDeserializer
+ * @extends CUI.rte.HtmlDeserializer
  * The HtmlDeserializer is used to deserialize XHTML code to a suitable DOM tree.
  * @constructor
  * Creates a new XhtmlDeserializer.
  * @param {Object} config The configuration object
  */
-CQ.form.rte.XhtmlDeserializer = new Class({
+CUI.rte.XhtmlDeserializer = new Class({
 
     toString: "XhtmlDeserializer",
 
-    extend: CQ.form.rte.HtmlDeserializer,
+    extend: CUI.rte.HtmlDeserializer,
 
     _init: function() {
         this.inherited(arguments)
         // build Regex to remove unnecessary/harmful closing tags
-        var nct = CQ.form.rte.HtmlSerializer.NON_CLOSING_TAGS;
+        var nct = CUI.rte.HtmlSerializer.NON_CLOSING_TAGS;
         var regExpStr = "<\\/(";
         for (var n = 0; n < nct.length; n++) {
             if (n > 0) {
@@ -51,7 +51,7 @@ CQ.form.rte.XhtmlDeserializer = new Class({
      * @return {String} The expanded XHTML
      */
     expandShortTags: function(xhtml) {
-        var xds = CQ.form.rte.XhtmlDeserializer;
+        var xds = CUI.rte.XhtmlDeserializer;
         var expanded = xhtml.replace(xds.EXPAND_SHORT_XHTML,
                 xds.XHTML_EXPANSION_REPLACEMENT);
         return expanded.replace(this.regExp, "");
@@ -60,7 +60,7 @@ CQ.form.rte.XhtmlDeserializer = new Class({
     /**
      * Deserializes the specified XHTML-compliant HTML code to the specified DOM element.
      * </p>
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      * @param {String} xhtml The HTML to be deserialized
      * @param {HTMLElement} rootDom The DOM (sub-) tree to deserialize the HTML to
      */
@@ -77,9 +77,9 @@ CQ.form.rte.XhtmlDeserializer = new Class({
  * Regular expression that is used to expand XHTML short tags
  * (&lt;a name="xyz"/&gt; -&gt; &lt;a name="xyz&gt;&lt;/a&gt;
  */
-CQ.form.rte.XhtmlDeserializer.EXPAND_SHORT_XHTML = /<([^\/][^\n\r\t >]*)([^>]*)(\/>)/gi;
+CUI.rte.XhtmlDeserializer.EXPAND_SHORT_XHTML = /<([^\/][^\n\r\t >]*)([^>]*)(\/>)/gi;
 
 /**
  * Replacement pattern that is used to expand XHTML short tags
  */
-CQ.form.rte.XhtmlDeserializer.XHTML_EXPANSION_REPLACEMENT = "<$1$2></$1>";
+CUI.rte.XhtmlDeserializer.XHTML_EXPANSION_REPLACEMENT = "<$1$2></$1>";

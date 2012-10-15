@@ -17,12 +17,12 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.commands.Command
+ * @class CUI.rte.commands.Command
  * @private
  * The Command should be implemented by all RTE commands that cannot be handled by the
  * browser's implementation itself.
  */
-CQ.form.rte.commands.Command = new Class({
+CUI.rte.commands.Command = new Class({
 
     toString: "Command",
 
@@ -44,7 +44,7 @@ CQ.form.rte.commands.Command = new Class({
     },
 
     getProcessingOptions: function() {
-        return CQ.form.rte.commands.Command.PO_NONE;
+        return CUI.rte.commands.Command.PO_NONE;
     },
 
     execute: function(execDef) {
@@ -64,7 +64,7 @@ CQ.form.rte.commands.Command = new Class({
  * @type Number
  * @private
  */
-CQ.form.rte.commands.Command.PO_NONE = 0;
+CUI.rte.commands.Command.PO_NONE = 0;
 
 /**
  * @static
@@ -72,7 +72,7 @@ CQ.form.rte.commands.Command.PO_NONE = 0;
  * @type Number
  * @private
  */
-CQ.form.rte.commands.Command.PO_SELECTION = 1;
+CUI.rte.commands.Command.PO_SELECTION = 1;
 
 /**
  * @static
@@ -80,7 +80,7 @@ CQ.form.rte.commands.Command.PO_SELECTION = 1;
  * @type Number
  * @private
  */
-CQ.form.rte.commands.Command.PO_BOOKMARK = 2;
+CUI.rte.commands.Command.PO_BOOKMARK = 2;
 
 /**
  * @static
@@ -88,4 +88,4 @@ CQ.form.rte.commands.Command.PO_BOOKMARK = 2;
  * @type Number
  * @private
  */
-CQ.form.rte.commands.Command.PO_NODELIST = 4;
+CUI.rte.commands.Command.PO_NODELIST = 4;

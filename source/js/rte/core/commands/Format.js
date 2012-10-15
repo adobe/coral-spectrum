@@ -17,28 +17,28 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.commands.Format
- * @extends CQ.form.rte.commands.Command
+ * @class CUI.rte.commands.Format
+ * @extends CUI.rte.commands.Command
  * @private
  */
-CQ.form.rte.commands.Format = new Class({
+CUI.rte.commands.Format = new Class({
 
     toString: "Format",
 
-    extend: CQ.form.rte.commands.Command,
+    extend: CUI.rte.commands.Command,
 
     isCommand: function(cmdStr) {
         return (cmdStr.toLowerCase() == "format");
     },
 
     getProcessingOptions: function() {
-        var cmd = CQ.form.rte.commands.Command;
+        var cmd = CUI.rte.commands.Command;
         return cmd.PO_BOOKMARK | cmd.PO_SELECTION;
     },
 
     execute: function(execDef) {
-        var dpr = CQ.form.rte.DomProcessor;
-        var com = CQ.form.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
+        var com = CUI.rte.Common;
         var dom;
         var selection = execDef.selection;
         var context = execDef.editContext;
@@ -70,4 +70,4 @@ CQ.form.rte.commands.Format = new Class({
 
 
 // register command
-CQ.form.rte.commands.CommandRegistry.register("format", CQ.form.rte.commands.Format);
+CUI.rte.commands.CommandRegistry.register("format", CUI.rte.commands.Format);

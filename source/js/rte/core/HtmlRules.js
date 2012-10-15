@@ -17,7 +17,7 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.HtmlRules
+ * @class CUI.rte.HtmlRules
  * This class and its sublasses represents the rules to be applied on HTML processing
  * from inside the {@link CQ.form.RichText RichText} component.
  * @since 5.3
@@ -25,7 +25,7 @@
  * Creates a HtmlRules object.
  * @param {Object} config The configuration
  */
-CQ.form.rte.HtmlRules = new Class({
+CUI.rte.HtmlRules = new Class({
 
     toString: "HtmlRules",
 
@@ -36,7 +36,7 @@ CQ.form.rte.HtmlRules = new Class({
     /**
      * @property links
      * Defines how links are created/handled.
-     * @type CQ.form.rte.HtmlRules.Links
+     * @type CUI.rte.HtmlRules.Links
      */
     links: null,
 
@@ -47,7 +47,7 @@ CQ.form.rte.HtmlRules = new Class({
     /**
      * @property serializer
      * Defines HTML serialization
-     * @type CQ.form.rte.HtmlRules.Serializer
+     * @type CUI.rte.HtmlRules.Serializer
      */
     serializer: null,
 
@@ -58,7 +58,7 @@ CQ.form.rte.HtmlRules = new Class({
     /**
      * @property docType
      * Defines the doctype
-     * @type CQ.form.rte.HtmlRules.DocType
+     * @type CUI.rte.HtmlRules.DocType
      */
     docType: null,
 
@@ -69,7 +69,7 @@ CQ.form.rte.HtmlRules = new Class({
     /**
      * @property blockHandling
      * Defines the rules for handling blocks (edit blocks, aux roots, and so on).
-     * @type CQ.form.rte.HtmlRules.BlockHandling
+     * @type CUI.rte.HtmlRules.BlockHandling
      */
     blockHandling: null,
 
@@ -77,7 +77,7 @@ CQ.form.rte.HtmlRules = new Class({
 
     construct: function(config) {
         config = config || { };
-        var hrls = CQ.form.rte.HtmlRules;
+        var hrls = CUI.rte.HtmlRules;
         this.links = new hrls.Links(config.links);
         this.serializer = new hrls.Serializer(config.serializer);
         this.docType = new hrls.DocType(config.docType);
@@ -91,21 +91,21 @@ CQ.form.rte.HtmlRules = new Class({
             "defaultEditBlockType": "p"
         });
         */
-        CQ.form.rte.Utils.apply(this, config);
+        CUI.rte.Utils.apply(this, config);
     }
 
 });
 
 
 /**
- * @class CQ.form.rte.HtmlRules.Links
+ * @class CUI.rte.HtmlRules.Links
  * The HtmlRules.Links class represents the HTML rules used for creating links.
  * @since 5.3
  * @constructor
  * Creates a HtmlRules.Links object.
  * @param {Object} config The configuration
  */
-CQ.form.rte.HtmlRules.Links = new Class({
+CUI.rte.HtmlRules.Links = new Class({
 
     toString: "HtmlRules.Links",
 
@@ -205,10 +205,10 @@ CQ.form.rte.HtmlRules.Links = new Class({
             "ensureInternalLinkExt": true
         };
         CQ.Util.applyDefaults(config, defaults);
-        CQ.form.rte.Utils.apply(this, config);
+        CUI.rte.Utils.apply(this, config);
         // adjust regexp
-        CQ.form.rte.Compatibility.adjustRegExp(this, "relativeLinkRegExp",
-                CQ.form.rte.HtmlRules.Links.REL_LINK_DEFAULT_REGEXP);
+        CUI.rte.Compatibility.adjustRegExp(this, "relativeLinkRegExp",
+                CUI.rte.HtmlRules.Links.REL_LINK_DEFAULT_REGEXP);
     },
 
     /**
@@ -221,7 +221,7 @@ CQ.form.rte.HtmlRules.Links = new Class({
             var pCnt = this.protocols.length;
             for (var p = 0; p < pCnt; p++) {
                 var protocol = this.protocols[p];
-                if (CQ.form.rte.Common.strStartsWith(href, protocol)) {
+                if (CUI.rte.Common.strStartsWith(href, protocol)) {
                     return protocol;
                 }
             }
@@ -236,7 +236,7 @@ CQ.form.rte.HtmlRules.Links = new Class({
      * @return {Boolean} True, if a protocol has been detected for the specified HREF
      */
     hasProtocol: function(href) {
-        return CQ.form.rte.HtmlRules.Links.hasProtocol(href);
+        return CUI.rte.HtmlRules.Links.hasProtocol(href);
     },
 
     /**
@@ -245,7 +245,7 @@ CQ.form.rte.HtmlRules.Links = new Class({
      * @return {Boolean} True, if the specified HREF represents an internal link
      */
     isInternalLink: function(href) {
-        return CQ.form.rte.HtmlRules.Links.isInternalLink(href);
+        return CUI.rte.HtmlRules.Links.isInternalLink(href);
     },
 
     /**
@@ -253,7 +253,7 @@ CQ.form.rte.HtmlRules.Links = new Class({
      * @param {String} href the HREF (i.e. "http://host.domain.tld/path/to/file.ext")
      */
     isRelativeLink: function(href) {
-        return CQ.form.rte.HtmlRules.Links.isRelativeLink(href, this.relativeLinkRegExp);
+        return CUI.rte.HtmlRules.Links.isRelativeLink(href, this.relativeLinkRegExp);
     },
 
     /**
@@ -296,11 +296,11 @@ CQ.form.rte.HtmlRules.Links = new Class({
      *        to
      */
     applyToObject: function(obj) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var isDomObject = (obj.nodeType && (obj.nodeType == 1));
         var href;
         if (isDomObject) {
-            href = CQ.form.rte.HtmlRules.Links.getLinkHref(obj);
+            href = CUI.rte.HtmlRules.Links.getLinkHref(obj);
         } else {
             href = obj.href;
         }
@@ -400,7 +400,7 @@ CQ.form.rte.HtmlRules.Links = new Class({
                 // relative internal link to a page; doesn't need a protocol added
             } else {
                 var hostname = href.substring(0, href.indexOf("/"));
-                if (CQ.form.rte.HtmlRules.Links.PROBABLE_HOST_REGEXP.test(hostname)) {
+                if (CUI.rte.HtmlRules.Links.PROBABLE_HOST_REGEXP.test(hostname)) {
                     // user forgot to type a protocol; give them a default one:
                     var protocol = this.defaultProtocol || "http://";
                     obj.href = protocol + href;
@@ -451,14 +451,14 @@ CQ.form.rte.HtmlRules.Links = new Class({
 /**
  * The default regular expression used for detecting hostnames
  */
-CQ.form.rte.HtmlRules.Links.PROBABLE_HOST_REGEXP = /^(localhost)|([\w\d\-\u0081-\uffff]+\.[\w\d\-\u0081-\uffff]+\.[\w\d\-\u0081-\uffff]+)$/;
+CUI.rte.HtmlRules.Links.PROBABLE_HOST_REGEXP = /^(localhost)|([\w\d\-\u0081-\uffff]+\.[\w\d\-\u0081-\uffff]+\.[\w\d\-\u0081-\uffff]+)$/;
 
 /**
  * Checks if the specified HREF has a protocol prefix (http://, mailto:, etc.).
  * @param {String} href HREF to check
  * @return {Boolean} <i>true</i> if the specified HREF has a protocol prefix
  */
-CQ.form.rte.HtmlRules.Links.hasProtocol = function(href) {
+CUI.rte.HtmlRules.Links.hasProtocol = function(href) {
     return /^[A-Za-z][A-Za-z\d+\-.]*:(\/\/)?([^\d]|[\d]+@|$)/.test(href);
 };
 
@@ -466,7 +466,7 @@ CQ.form.rte.HtmlRules.Links.hasProtocol = function(href) {
  * Checks if the specified HREF defines an internal link.
  * @param {String} href HREF to check
  */
-CQ.form.rte.HtmlRules.Links.isInternalLink = function(href) {
+CUI.rte.HtmlRules.Links.isInternalLink = function(href) {
     return (href.length > 0) && ((href.charAt(0) == "/") || (href.charAt(0) == '#'));
 };
 
@@ -476,7 +476,7 @@ CQ.form.rte.HtmlRules.Links.isInternalLink = function(href) {
  * @param {RegExp} regEx The regular expression to be used for detecting the relative link;
  *        if null, no relative link detection is applied on the HREF.
  */
-CQ.form.rte.HtmlRules.Links.isRelativeLink = function(href, regEx) {
+CUI.rte.HtmlRules.Links.isRelativeLink = function(href, regEx) {
     if (!regEx) {
         return false;
     }
@@ -487,7 +487,7 @@ CQ.form.rte.HtmlRules.Links.isRelativeLink = function(href, regEx) {
 /**
  * The default regular expression used for detecting relative links
  */
-CQ.form.rte.HtmlRules.Links.REL_LINK_DEFAULT_REGEXP = /^\.{1,2}\/(.*)/;
+CUI.rte.HtmlRules.Links.REL_LINK_DEFAULT_REGEXP = /^\.{1,2}\/(.*)/;
 
 /**
  * <p>Returns the HREF of the specified DOM element.</p>
@@ -497,15 +497,15 @@ CQ.form.rte.HtmlRules.Links.REL_LINK_DEFAULT_REGEXP = /^\.{1,2}\/(.*)/;
  * @param {HTMLElement} dom The link element to check
  * @return {String} The link element's HREF attribute
  */
-CQ.form.rte.HtmlRules.Links.getLinkHref = function(dom) {
-    var com = CQ.form.rte.Common;
+CUI.rte.HtmlRules.Links.getLinkHref = function(dom) {
+    var com = CUI.rte.Common;
     var href;
     if (com.isAttribDefined(dom, com.HREF_ATTRIB)) {
         href = com.getAttribute(dom, com.HREF_ATTRIB);
     } else {
         href = com.getAttribute(dom, "href");
         if (href) {
-            href = CQ.form.rte.HtmlRules.Links.removePrefixForInternalLinks(href);
+            href = CUI.rte.HtmlRules.Links.removePrefixForInternalLinks(href);
         }
     }
     return href;
@@ -518,7 +518,7 @@ CQ.form.rte.HtmlRules.Links.getLinkHref = function(dom) {
  * @return {String} adjusted URL ("/content/foo/bar" for internal links;
  *         "http://hostname[:port]/foo/bar" for external links
  */
-CQ.form.rte.HtmlRules.Links.removePrefixForInternalLinks = function(href) {
+CUI.rte.HtmlRules.Links.removePrefixForInternalLinks = function(href) {
     var currentUrl = location.href;
     var currentServerPrefix = CQ.HTTP.getSchemeAndAuthority(currentUrl) + "/";
     var prefixLen = currentServerPrefix.length;
@@ -553,7 +553,7 @@ CQ.form.rte.HtmlRules.Links.removePrefixForInternalLinks = function(href) {
 
 
 /**
- * @class CQ.form.rte.HtmlRules.Serializer
+ * @class CUI.rte.HtmlRules.Serializer
  * The HtmlRules.Serializer class represents the rules used for serializing and
  * deserializing HTML from/to DOM objects.
  * @since 5.3
@@ -561,7 +561,7 @@ CQ.form.rte.HtmlRules.Links.removePrefixForInternalLinks = function(href) {
  * Creates a HtmlRules.Serializer object.
  * @param {Object} config The configuration
  */
-CQ.form.rte.HtmlRules.Serializer = new Class({
+CUI.rte.HtmlRules.Serializer = new Class({
 
     toString: "HtmlRules.Serializer",
 
@@ -579,21 +579,21 @@ CQ.form.rte.HtmlRules.Serializer = new Class({
 
     /**
      * @cfg {Object} config
-     * Configuration if a standard serializer ({@link CQ.form.rte.HtmlSerializer},
-     * {@link CQ.form.rte.XhtmlSerializer} is used. See the corresponding class for
+     * Configuration if a standard serializer ({@link CUI.rte.HtmlSerializer},
+     * {@link CUI.rte.XhtmlSerializer} is used. See the corresponding class for
      * respective config options. Ignored if mode == "customized". Defaults to null to use
      * the serializer's default configuration.
      */
     config: null,
 
     /**
-     * @cfg {CQ.form.rte.Serializer} serializer
+     * @cfg {CUI.rte.Serializer} serializer
      * Provides a customized serializer. Ignored if mode != "customized". Defaults to null.
      */
     serializer: null,
 
     /**
-     * @cfg {CQ.form.rte.Serializer} deserializer
+     * @cfg {CUI.rte.Serializer} deserializer
      * Provides a customized deserializer. Ignored if mode != "customized". Defaults to
      * null.
      */
@@ -608,15 +608,15 @@ CQ.form.rte.HtmlRules.Serializer = new Class({
             "serializer": null,
             "deserializer": null
         });
-        CQ.form.rte.Utils.apply(this, config);
+        CUI.rte.Utils.apply(this, config);
     },
 
     /**
      * Serializes the specified DOM tree.
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      * @param {HTMLElement} dom The root node of the DOM tree to be serialized; the root
      *        node itself is not serialized
-     * @param {CQ.form.rte.HtmlRules.DocType} docType The doc type
+     * @param {CUI.rte.HtmlRules.DocType} docType The doc type
      * @return {String} The serialized representation of the DOM tree
      */
     serialize: function(context, dom, docType) {
@@ -625,9 +625,9 @@ CQ.form.rte.HtmlRules.Serializer = new Class({
             switch (this.mode) {
                 case "auto":
                     if (docType.baseType == "html") {
-                        this.serializer = new CQ.form.rte.HtmlSerializer(this.config);
+                        this.serializer = new CUI.rte.HtmlSerializer(this.config);
                     } else if (docType.baseType == "xhtml") {
-                        this.serializer = new CQ.form.rte.XhtmlSerializer(this.config);
+                        this.serializer = new CUI.rte.XhtmlSerializer(this.config);
                     }
                     break;
                 case "customized":
@@ -645,10 +645,10 @@ CQ.form.rte.HtmlRules.Serializer = new Class({
 
     /**
      * Deserializes the specified HTML fragment to the specified root DOM element.
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      * @param {String} html The HTML code to deserialize
      * @param {HTMLElement} dom The root node of the DOM tree the HTML is deserialized to
-     * @param {CQ.form.rte.HtmlRules.DocType} docType The doc type
+     * @param {CUI.rte.HtmlRules.DocType} docType The doc type
      */
     deserialize: function(context, html, dom, docType) {
         // create deserializer if necessary
@@ -656,9 +656,9 @@ CQ.form.rte.HtmlRules.Serializer = new Class({
             switch (this.mode) {
                 case "auto":
                     if (docType.baseType == "html") {
-                        this.deserializer = new CQ.form.rte.HtmlDeserializer(this.config);
+                        this.deserializer = new CUI.rte.HtmlDeserializer(this.config);
                     } else if (docType.baseType == "xhtml") {
-                        this.deserializer = new CQ.form.rte.XhtmlDeserializer(this.config);
+                        this.deserializer = new CUI.rte.XhtmlDeserializer(this.config);
                     }
                     break;
                 case "customized":
@@ -678,16 +678,16 @@ CQ.form.rte.HtmlRules.Serializer = new Class({
 
 
 /**
- * @class CQ.form.rte.HtmlRules.DocType
+ * @class CUI.rte.HtmlRules.DocType
  * <p>The HtmlRules.DocType class represents some rules regarding document types.</p>
  * <p>It mostly influences the way HTML code is generated from the DOM (using some of the
- * {@link CQ.form.rte.HtmlProcessor} modules, especially the Postprocessor that is
+ * {@link CUI.rte.HtmlProcessor} modules, especially the Postprocessor that is
  * responsible for the final HTML result.</p>
  * @constructor
  * Creates a new HtmlRules.DocType object.
  * @param {Object} config The configuration object
  */
-CQ.form.rte.HtmlRules.DocType = new Class({
+CUI.rte.HtmlRules.DocType = new Class({
 
     toString: "HtmlRules.DocType",
 
@@ -745,7 +745,7 @@ CQ.form.rte.HtmlRules.DocType = new Class({
                 }
             }
         });
-        CQ.form.rte.Utils.apply(this, config);
+        CUI.rte.Utils.apply(this, config);
         if ((this.baseType != "html") && (this.baseType != "xhtml")) {
             throw new Error("Invalid doctype; must be 'html' or 'xhtml'");
         }
@@ -773,7 +773,7 @@ CQ.form.rte.HtmlRules.DocType = new Class({
      * @return {Boolean} True if the specified tag name is allowed for the doctype
      */
     isAllowed: function(tagName) {
-        return !CQ.form.rte.Common.arrayContains(this.tagBlackList, tagName.toLowerCase());
+        return !CUI.rte.Common.arrayContains(this.tagBlackList, tagName.toLowerCase());
     },
 
     /**
@@ -847,7 +847,7 @@ CQ.form.rte.HtmlRules.DocType = new Class({
 
 });
 
-CQ.form.rte.HtmlRules.BlockHandling = new Class({
+CUI.rte.HtmlRules.BlockHandling = new Class({
 
     toString: "HtmlRules.BlockHandling",
 
@@ -894,7 +894,7 @@ CQ.form.rte.HtmlRules.BlockHandling = new Class({
             "removeSingleParagraphContainer": false,
             "singleParagraphContainerReplacement": "div"
         });
-        CQ.form.rte.Utils.apply(this, config);
+        CUI.rte.Utils.apply(this, config);
     }
 
 });

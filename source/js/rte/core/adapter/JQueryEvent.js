@@ -17,15 +17,15 @@
 **************************************************************************/
 
 /**
- * This class implaments a {@link CQ.form.rte.EditorEvent} for the jQuery toolkit.
- * @class CQ.form.rte.adapter.ExtEvent
- * @extends CQ.form.rte.EditorEvent
+ * This class implaments a {@link CUI.rte.EditorEvent} for the jQuery toolkit.
+ * @class CUI.rte.adapter.ExtEvent
+ * @extends CUI.rte.EditorEvent
  */
-CQ.form.rte.adapter.JQueryEvent = new Class({
+CUI.rte.adapter.JQueryEvent = new Class({
 
     toString: "JQueryEvent",
 
-    extend: CQ.form.rte.EditorEvent,
+    extend: CUI.rte.EditorEvent,
 
     /**
      * The native jQuery event
@@ -37,10 +37,10 @@ CQ.form.rte.adapter.JQueryEvent = new Class({
     /**
      * Creates a new editor event from the specified jQuery event.
      * @param {CQ.Ext.EventObject} jqEvent The underlying, native jQuery event
-     * @param {CQ.form.rte.EditContext} editContext The editor context for the event
+     * @param {CUI.rte.EditContext} editContext The editor context for the event
      */
     construct: function(jqEvent, editContext) {
-        var isMac = CQ.form.rte.Common.ua.isMac;
+        var isMac = CUI.rte.Common.ua.isMac;
         this.native = jqEvent;
         var key = (jqEvent.key ? jqEvent.key : jqEvent.keyCode);
         // map to common properties
@@ -61,53 +61,53 @@ CQ.form.rte.adapter.JQueryEvent = new Class({
         this._init(cfg);
     },
 
-    // overrides CQ.form.rte.EdittorEvent#isTab
+    // overrides CUI.rte.EdittorEvent#isTab
     isTab: function() {
         return (this.charCode == 9);
     },
 
-    // overrides CQ.form.rte.EdittorEvent#isEnter
+    // overrides CUI.rte.EdittorEvent#isEnter
     isEnter: function() {
         return (this.charCode == 13);
     },
 
-    // overrides CQ.form.rte.EdittorEvent#isSpace
+    // overrides CUI.rte.EdittorEvent#isSpace
     isSpace: function() {
         return (this.charCode == 32);
     },
 
-    // overrides CQ.form.rte.EdittorEvent#isBackSpace
+    // overrides CUI.rte.EdittorEvent#isBackSpace
     isBackSpace: function() {
         return (this.charCode == 8);
     },
 
-    // overrides CQ.form.rte.EdittorEvent#isDelete
+    // overrides CUI.rte.EdittorEvent#isDelete
     isDelete: function() {
         return (this.charCode == 46);
     },
 
-     // overrides CQ.form.rte.EdittorEvent#isCaretKey
+     // overrides CUI.rte.EdittorEvent#isCaretKey
     isCaretKey: function() {
         return (this.charCode >= 37) && (this.charCode <= 40);
     },
 
-    // overrides CQ.form.rte.EdittorEvent#isCaretMovement
+    // overrides CUI.rte.EdittorEvent#isCaretMovement
     isCaretMovement: function() {
         return this.isCaretKey()
                 || ((this.charCode >= 33) && (this.charCode <= 36));
     },
 
-    // overrides CQ.form.rte.EdittorEvent#preventDefault
+    // overrides CUI.rte.EdittorEvent#preventDefault
     preventDefault: function() {
         this.native.preventDefault();
     },
 
-    // overrides CQ.form.rte.EdittorEvent#stopPropagation
+    // overrides CUI.rte.EdittorEvent#stopPropagation
     stopPropagation: function() {
         this.native.stopPropagation();
     },
 
-    // overrides CQ.form.rte.EdittorEvent#stopEvent
+    // overrides CUI.rte.EdittorEvent#stopEvent
     stopEvent: function() {
         this.native.preventDefault();
         this.native.stopPropagation();

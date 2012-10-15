@@ -16,7 +16,7 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CQ.form.rte.Utils = function() {
+CUI.rte.Utils = function() {
 
     var commons = {
 
@@ -69,7 +69,7 @@ CQ.form.rte.Utils = function() {
 
     };
 
-    var specific = (CQ.form.rte._adapter == "ext" ? {
+    var specific = (CUI.rte._adapter == "ext" ? {
 
         isArray: function(obj) {
             return CQ.Ext.isArray(obj);

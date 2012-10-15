@@ -16,11 +16,11 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CQ.form.rte.ui.cui.ElementImpl = new Class({
+CUI.rte.ui.cui.ElementImpl = new Class({
 
     toString: "ElementImpl",
 
-    extend: CQ.form.rte.ui.TbElement,
+    extend: CUI.rte.ui.TbElement,
 
     dom: null,
 
@@ -60,7 +60,7 @@ CQ.form.rte.ui.cui.ElementImpl = new Class({
             self.plugin.execute(cmd, cmdValue, env);
         });
         var img = $CQ(document.createElement("img"));
-        var src = CQ.shared.HTTP.externalize(CQ.form.rte.Utils.BLANK_IMAGE_URL);
+        var src = CQ.shared.HTTP.externalize(CUI.rte.Utils.BLANK_IMAGE_URL);
         img.attr("src", src);
         img.attr("style", "width: 16px; height: 16px;");
         img.addClass(this.css);

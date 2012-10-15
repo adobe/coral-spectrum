@@ -17,24 +17,24 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.HtmlSerializer
- * @extends CQ.form.rte.Serializer
+ * @class CUI.rte.HtmlSerializer
+ * @extends CUI.rte.Serializer
  * The HtmlSerializer is used to serialize a DOM (sub-) tree to its HTML (String)
  * equivalent.
  * @constructor
  * Creates a new HtmlSerializer.
  * @param {Object} config The configuration object
  */
-CQ.form.rte.HtmlSerializer = new Class({
+CUI.rte.HtmlSerializer = new Class({
 
     toString: "HtmlSerializer",
 
-    extend: CQ.form.rte.Serializer,
+    extend: CUI.rte.Serializer,
 
     /**
      * The edit context
      * @private
-     * @type CQ.form.rte.EditContext
+     * @type CUI.rte.EditContext
      */
     context: null,
 
@@ -103,19 +103,19 @@ CQ.form.rte.HtmlSerializer = new Class({
     _init: function(config) {
         config = config || { };
         CQ.Util.applyDefaults(config, {
-            "nonClosingTags": CQ.form.rte.HtmlSerializer.NON_CLOSING_TAGS,
+            "nonClosingTags": CUI.rte.HtmlSerializer.NON_CLOSING_TAGS,
             "tagCase": "lower",
             "attribNameCase": "lower",
             "styleAttribNameCase": "lower",
             "idAttribMode": "remove",
-            "beautifier": CQ.form.rte.HtmlSerializer.defaultBeautifier
+            "beautifier": CUI.rte.HtmlSerializer.defaultBeautifier
         });
-        CQ.form.rte.Utils.apply(this, config);
+        CUI.rte.Utils.apply(this, config);
     },
 
     /**
      * <p>Browser-independent way to get attribute values.</p>
-     * <p>Contrary to {@link CQ.form.rte.Common#getAttribute}, this method does not do
+     * <p>Contrary to {@link CUI.rte.Common#getAttribute}, this method does not do
      * any attribute-name translations, but works around an IE bug with cloned nodes (some
      * attributes are returned as 0 if accessed regularily) that the former method doesn't
      * work around.</p>
@@ -124,11 +124,11 @@ CQ.form.rte.HtmlSerializer = new Class({
      * @return {String} The attribute's value
      */
     getAttribValue: function(dom, attribName) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         // IE <= 7 handles named anchors differently; see bug #36231
         if (com.ua.isIE6 || com.ua.isIE7) {
             var nameLC = attribName.toLowerCase();
-            if (CQ.form.rte.Common.isTag(dom, "a") && (nameLC == "name")) {
+            if (CUI.rte.Common.isTag(dom, "a") && (nameLC == "name")) {
                 return dom.attributes["name"].nodeValue;
             }
         }
@@ -142,12 +142,12 @@ CQ.form.rte.HtmlSerializer = new Class({
      * @return {Boolean} True if the attribute must not be serialized
      */
     ignoreAttribute: function(attrib) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var attrName = attrib.nodeName.toLowerCase();
         if ((attrName == "id") && (this.idAttribMode == "remove")) {
             return true;
         }
-        if (com.arrayContains(CQ.form.rte.HtmlSerializer.HELPER_ATTRIBUTES, attrName)) {
+        if (com.arrayContains(CUI.rte.HtmlSerializer.HELPER_ATTRIBUTES, attrName)) {
             return true;
         }
         return false;
@@ -187,7 +187,7 @@ CQ.form.rte.HtmlSerializer = new Class({
         name = this.adjustCase(name, this.attribNameCase);
         var nameLC = name.toLowerCase();
         if ((nameLC == "style") && (this.styleAttribNameCase != "keep")) {
-            var styleDef = CQ.form.rte.HtmlProcessor.parseStyleDef(value);
+            var styleDef = CUI.rte.HtmlProcessor.parseStyleDef(value);
             value = "";
             for (var styleName in styleDef) {
                 if (styleDef.hasOwnProperty(styleName)) {
@@ -213,7 +213,7 @@ CQ.form.rte.HtmlSerializer = new Class({
                 return "";
             }
         }
-        return name + "=\"" + CQ.form.rte.Utils.htmlEncode(value) + "\"";
+        return name + "=\"" + CUI.rte.Utils.htmlEncode(value) + "\"";
     },
 
     /**
@@ -221,7 +221,7 @@ CQ.form.rte.HtmlSerializer = new Class({
      * @param {HTMLElement} dom The DOM element
      */
     serializeAttributes: function(dom) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var attribFilter = (com.ua.isGecko ? com.FILTER_GECKO_TEMPORARY_ATTRIBS : null);
         var attributeNames = com.getAttributeNames(dom, true, attribFilter);
         var attribCnt = attributeNames.length;
@@ -244,7 +244,7 @@ CQ.form.rte.HtmlSerializer = new Class({
                 }
                 // handle helper attributes
                 var tagNameLC = dom.tagName.toLowerCase();
-                var attribMapping = CQ.form.rte.HtmlSerializer.HELPER_ATTRIB_MAPPINGS[
+                var attribMapping = CUI.rte.HtmlSerializer.HELPER_ATTRIB_MAPPINGS[
                         tagNameLC];
                 if (attribMapping) {
                     for (var m = 0; m < attribMapping.length; m += 2) {
@@ -276,7 +276,7 @@ CQ.form.rte.HtmlSerializer = new Class({
      * @return {String} The serialized representation of the text node
      */
     serializeTextNode: function(dom) {
-        var markup = CQ.form.rte.Utils.htmlEncode(dom.nodeValue);
+        var markup = CUI.rte.Utils.htmlEncode(dom.nodeValue);
         return markup.replace(/\u00A0/g, "&nbsp;");
     },
 
@@ -287,7 +287,7 @@ CQ.form.rte.HtmlSerializer = new Class({
      * @return {String} The serialized representation of the DOM node
      */
     serializeNodeEnter: function(dom) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         if (dom.nodeType == 3) {
             return this.serializeTextNode(dom);
         }
@@ -324,7 +324,7 @@ CQ.form.rte.HtmlSerializer = new Class({
         if (dom.nodeType == 3) {
             return "";
         }
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var html = "";
         if (!com.isTag(dom, this.nonClosingTags)) {
             html = "</" + this.createTagStr(dom) + ">";
@@ -379,7 +379,7 @@ CQ.form.rte.HtmlSerializer = new Class({
     /**
      * <p>Serializes the specified DOM (sub-) tree.</p>
      * <p>Note that the specified DOM element itself doesn't get serialized.</p>
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      * @param {HTMLElement} dom The DOM (sub-) tree to serialize
      * @return {String} The serialized representation of the DOM (sub-) tree
      */
@@ -401,16 +401,16 @@ CQ.form.rte.HtmlSerializer = new Class({
  * @type String[]
  * @private
  */
-CQ.form.rte.HtmlSerializer.NON_CLOSING_TAGS = [ "br", "hr", "img", "area", "input", "col" ];
+CUI.rte.HtmlSerializer.NON_CLOSING_TAGS = [ "br", "hr", "img", "area", "input", "col" ];
 
 /**
  * Array that defines helper attributes that will not be serialized
  * @type String[]
  * @private
  */
-CQ.form.rte.HtmlSerializer.HELPER_ATTRIBUTES = [
-    CQ.form.rte.Common.HREF_ATTRIB,
-    CQ.form.rte.Common.SRC_ATTRIB
+CUI.rte.HtmlSerializer.HELPER_ATTRIBUTES = [
+    CUI.rte.Common.HREF_ATTRIB,
+    CUI.rte.Common.SRC_ATTRIB
 ];
 
 /**
@@ -418,13 +418,13 @@ CQ.form.rte.HtmlSerializer.HELPER_ATTRIBUTES = [
  * @type Object
  * @private
  */
-CQ.form.rte.HtmlSerializer.HELPER_ATTRIB_MAPPINGS = {
-    "a": [ "href", CQ.form.rte.Common.HREF_ATTRIB ],
-    "img": [ "src", CQ.form.rte.Common.SRC_ATTRIB ]
+CUI.rte.HtmlSerializer.HELPER_ATTRIB_MAPPINGS = {
+    "a": [ "href", CUI.rte.Common.HREF_ATTRIB ],
+    "img": [ "src", CUI.rte.Common.SRC_ATTRIB ]
 };
 
-CQ.form.rte.HtmlSerializer.defaultBeautifier = function(context, dom, isNodeEnter) {
-    var com = CQ.form.rte.Common;
+CUI.rte.HtmlSerializer.defaultBeautifier = function(context, dom, isNodeEnter) {
+    var com = CUI.rte.Common;
     if (com.isTag(dom, com.BLOCK_TAGS)) {
         if (isNodeEnter) {
             if (!com.isTag(dom, com.EDITBLOCK_TAGS)) {

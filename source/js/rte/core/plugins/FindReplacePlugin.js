@@ -17,8 +17,8 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.plugins.FindReplacePlugin
- * @extends CQ.form.rte.plugins.Plugin
+ * @class CUI.rte.plugins.FindReplacePlugin
+ * @extends CUI.rte.plugins.Plugin
  * <p>This class implements find and replace as a plugin.</p>
  * <p>The plugin ID is "<b>findreplace</b>".</p>
  * <p><b>Features</b></p>
@@ -27,11 +27,11 @@
  *   <li><b>replace</b> - adds a button to find text and replace it with another text</li>
  * </ul>
  */
-CQ.form.rte.plugins.FindReplacePlugin = new Class({
+CUI.rte.plugins.FindReplacePlugin = new Class({
 
     toString: "FindReplacePlugin",
 
-    extend: CQ.form.rte.plugins.Plugin,
+    extend: CUI.rte.plugins.Plugin,
 
     /**
      * @private
@@ -65,7 +65,7 @@ CQ.form.rte.plugins.FindReplacePlugin = new Class({
 
 
     find: function(context) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var dm = this.editorKernel.getDialogManager();
         if (com.ua.isIE) {
             this.savedRange = context.doc.selection.createRange();
@@ -75,10 +75,10 @@ CQ.form.rte.plugins.FindReplacePlugin = new Class({
                 "editContext": context,
                 "title": CQ.I18n.getMessage("Find"),
                 "isReplace": false,
-                "findFn": CQ.form.rte.Utils.scope(this.execFind, this),
-                "cancelFn": CQ.form.rte.Utils.scope(this.execCancel, this)
+                "findFn": CUI.rte.Utils.scope(this.execFind, this),
+                "cancelFn": CUI.rte.Utils.scope(this.execCancel, this)
             };
-            this.findDialog = dm.create(CQ.form.rte.ui.DialogManager.DLG_FINDREPLACE,
+            this.findDialog = dm.create(CUI.rte.ui.DialogManager.DLG_FINDREPLACE,
                     config);
         }
         this.findDialog.setMode(true, false);
@@ -86,9 +86,9 @@ CQ.form.rte.plugins.FindReplacePlugin = new Class({
     },
 
     execFind: function(context, options, dialog) {
-        var com = CQ.form.rte.Common;
-        var sel = CQ.form.rte.Selection;
-        var dpr = CQ.form.rte.DomProcessor;
+        var com = CUI.rte.Common;
+        var sel = CUI.rte.Selection;
+        var dpr = CUI.rte.DomProcessor;
         if (com.ua.isIE && this.savedRange) {
             this.savedRange.select();
         }
@@ -115,7 +115,7 @@ CQ.form.rte.plugins.FindReplacePlugin = new Class({
                     startOffset = null;
                 }
             }
-            var searchDoc = new CQ.form.rte.SearchableDocument();
+            var searchDoc = new CUI.rte.SearchableDocument();
             searchDoc.create(context.root);
             var config = {
                 "ignoreCase": !matchCase
@@ -139,7 +139,7 @@ CQ.form.rte.plugins.FindReplacePlugin = new Class({
             this.editorKernel.getDialogManager().alert(
                     CQ.I18n.getMessage("Find/Replace"),
                     CQ.I18n.getMessage("No more occurences of '{0}' found in document.<br>Search will be continued from the top.", [ findText ]),
-                    CQ.form.rte.Utils.scope(this.findDialog.focusFindField, this.findDialog));
+                    CUI.rte.Utils.scope(this.findDialog.focusFindField, this.findDialog));
 
             this.currentSearchDef.doc.create(context.root);
         }
@@ -203,7 +203,7 @@ CQ.form.rte.plugins.FindReplacePlugin = new Class({
     },
 
     replace: function(context) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var dm = this.editorKernel.getDialogManager();
         if (com.ua.isIE) {
             this.savedRange = context.doc.selection.createRange();
@@ -212,11 +212,11 @@ CQ.form.rte.plugins.FindReplacePlugin = new Class({
             var config = {
                 "editContext": context,
                 "isReplace": true,
-                "findFn": CQ.form.rte.Utils.scope(this.execFind, this),
-                "replaceFn": CQ.form.rte.Utils.scope(this.execReplace, this),
-                "cancelFn": CQ.form.rte.Utils.scope(this.execCancel, this)
+                "findFn": CUI.rte.Utils.scope(this.execFind, this),
+                "replaceFn": CUI.rte.Utils.scope(this.execReplace, this),
+                "cancelFn": CUI.rte.Utils.scope(this.execCancel, this)
             };
-            this.replaceDialog = dm.create(CQ.form.rte.ui.DialogManager.DLG_FINDREPLACE,
+            this.replaceDialog = dm.create(CUI.rte.ui.DialogManager.DLG_FINDREPLACE,
                     config);
         }
         this.replaceDialog.setMode(true, false);
@@ -224,15 +224,15 @@ CQ.form.rte.plugins.FindReplacePlugin = new Class({
     },
 
     execReplace: function(context, options, dialog) {
-        var com = CQ.form.rte.Common;
+        var com = CUI.rte.Common;
         var dm = this.editorKernel.getDialogManager();
         if (com.ua.isIE) {
             this.savedRange.select();
         }
-        var sel = CQ.form.rte.Selection;
+        var sel = CUI.rte.Selection;
         if (options.replaceAll) {
             this.editorKernel.focus(context);
-            var searchDoc = new CQ.form.rte.SearchableDocument();
+            var searchDoc = new CUI.rte.SearchableDocument();
             searchDoc.create(context.root);
             var config = {
                 "ignoreCase": !options.matchCase
@@ -250,7 +250,7 @@ CQ.form.rte.plugins.FindReplacePlugin = new Class({
                 };
                 var bookmark = sel.bookmarkFromProcessingSelection(context, selection);
                 sel.selectBookmark(context, bookmark);
-                this.editorKernel.execCmd("inserthtml", CQ.form.rte.Utils.htmlEncode(
+                this.editorKernel.execCmd("inserthtml", CUI.rte.Utils.htmlEncode(
                         options.replaceText));
                 searchDoc.adjustToReplace(options.replaceText);
                 replaceCnt++;
@@ -264,13 +264,13 @@ CQ.form.rte.plugins.FindReplacePlugin = new Class({
                         CQ.I18n.getMessage("Replace all"),
                         CQ.I18n.getMessage("Text '{0}' has been replaced {1} time(s).",
                                 [ options.findText, replaceCnt ]),
-                        CQ.form.rte.Utils.scope(this.editorKernel.focus,
+                        CUI.rte.Utils.scope(this.editorKernel.focus,
                                 this.editorKernel));
             } else {
                 this.editorKernel.getDialogManager().alert(
                         CQ.I18n.getMessage("Replace all"),
                         CQ.I18n.getMessage("Text '{0}' not found."),
-                        CQ.form.rte.Utils.scope(this.editorKernel.focus,
+                        CUI.rte.Utils.scope(this.editorKernel.focus,
                                 this.editorKernel));
             }
             this.editorKernel.focus(context);
@@ -278,7 +278,7 @@ CQ.form.rte.plugins.FindReplacePlugin = new Class({
             var preventFind = false;
             try {
                 this.editorKernel.focus(context);
-                this.editorKernel.execCmd("inserthtml", CQ.form.rte.Utils.htmlEncode(
+                this.editorKernel.execCmd("inserthtml", CUI.rte.Utils.htmlEncode(
                         options.replaceText));
                 this.currentSearchDef.doc.adjustToReplace(options.replaceText);
                 // todo find a more efficient way than to recreate the entire searchable doc
@@ -318,7 +318,7 @@ CQ.form.rte.plugins.FindReplacePlugin = new Class({
     },
 
     initializeUI: function(tbGenerator) {
-        var plg = CQ.form.rte.plugins;
+        var plg = CUI.rte.plugins;
         if (this.isFeatureEnabled("find")) {
             this.findUI = tbGenerator.createElement("find", this, false,
                     this.getTooltip("find"));
@@ -370,5 +370,5 @@ CQ.form.rte.plugins.FindReplacePlugin = new Class({
 
 
 // register plugin
-CQ.form.rte.plugins.PluginRegistry.register("findreplace",
-        CQ.form.rte.plugins.FindReplacePlugin);
+CUI.rte.plugins.PluginRegistry.register("findreplace",
+        CUI.rte.plugins.FindReplacePlugin);

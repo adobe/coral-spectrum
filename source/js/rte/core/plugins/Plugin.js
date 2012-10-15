@@ -17,19 +17,19 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.plugins.Plugin
+ * @class CUI.rte.plugins.Plugin
  * <p>This class works as an interface and hence must be extended by all plugin
  * implementations.</p>
  * <p>Each plugin may provide one or more "features", that represent the actual editing
  * action and usually map 1:1 to a UI element (for example, a toolbar button or a context
  * menu entry).</p>
  * <p>Plugins should not be instantiated directly, but registred with
- * {@link CQ.form.rte.plugins.PluginRegistry} for implicit instantiation.</p>
+ * {@link CUI.rte.plugins.PluginRegistry} for implicit instantiation.</p>
  * @constructor
  * Creates a new Plugin.
- * @param {CQ.form.rte.EditorKernel} editorKernel The editor kernel the plugin is used by
+ * @param {CUI.rte.EditorKernel} editorKernel The editor kernel the plugin is used by
  */
-CQ.form.rte.plugins.Plugin = new Class({
+CUI.rte.plugins.Plugin = new Class({
 
     /**
      * @cfg {String/String[]} features
@@ -138,7 +138,7 @@ CQ.form.rte.plugins.Plugin = new Class({
  * @type Number
  * @private
  */
-CQ.form.rte.plugins.Plugin.SORT_TABLE_TABLEMODE = 0;
+CUI.rte.plugins.Plugin.SORT_TABLE_TABLEMODE = 0;
 
 /**
  * Default sort index for edit tools (cut, copy, paste)
@@ -147,7 +147,7 @@ CQ.form.rte.plugins.Plugin.SORT_TABLE_TABLEMODE = 0;
  * @final
  * @type Number
  */
-CQ.form.rte.plugins.Plugin.SORT_EDIT = 110;
+CUI.rte.plugins.Plugin.SORT_EDIT = 110;
 
 /**
  * Default sort index for undo/redo
@@ -156,7 +156,7 @@ CQ.form.rte.plugins.Plugin.SORT_EDIT = 110;
  * @final
  * @type Number
  */
-CQ.form.rte.plugins.Plugin.SORT_UNDO = 120;
+CUI.rte.plugins.Plugin.SORT_UNDO = 120;
 
 /**
  * Default sort index for format tools (bold, italic, underlined)
@@ -165,7 +165,7 @@ CQ.form.rte.plugins.Plugin.SORT_UNDO = 120;
  * @final
  * @type Number
  */
-CQ.form.rte.plugins.Plugin.SORT_FORMAT = 130;
+CUI.rte.plugins.Plugin.SORT_FORMAT = 130;
 
 /**
  * Default sort index for justification (left, center, right)
@@ -174,7 +174,7 @@ CQ.form.rte.plugins.Plugin.SORT_FORMAT = 130;
  * @final
  * @type Number
  */
-CQ.form.rte.plugins.Plugin.SORT_JUSTIFY = 140;
+CUI.rte.plugins.Plugin.SORT_JUSTIFY = 140;
 
 /**
  * Default sort index for link controls
@@ -183,7 +183,7 @@ CQ.form.rte.plugins.Plugin.SORT_JUSTIFY = 140;
  * @final
  * @type Number
  */
-CQ.form.rte.plugins.Plugin.SORT_LINKS = 150;
+CUI.rte.plugins.Plugin.SORT_LINKS = 150;
 
 /**
  * Default sort index for list controls
@@ -192,7 +192,7 @@ CQ.form.rte.plugins.Plugin.SORT_LINKS = 150;
  * @final
  * @type Number
  */
-CQ.form.rte.plugins.Plugin.SORT_LISTS = 160;
+CUI.rte.plugins.Plugin.SORT_LISTS = 160;
 
 /**
  * Default sort index for image controls
@@ -201,7 +201,7 @@ CQ.form.rte.plugins.Plugin.SORT_LISTS = 160;
  * @final
  * @type Number
  */
-CQ.form.rte.plugins.Plugin.SORT_IMAGE = 170;
+CUI.rte.plugins.Plugin.SORT_IMAGE = 170;
 
 /**
  * Default sort index for table controls
@@ -210,7 +210,7 @@ CQ.form.rte.plugins.Plugin.SORT_IMAGE = 170;
  * @type Number
  * @private
  */
-CQ.form.rte.plugins.Plugin.SORT_TABLE = 180;
+CUI.rte.plugins.Plugin.SORT_TABLE = 180;
 
 /**
  * Default sort index for styles
@@ -219,7 +219,7 @@ CQ.form.rte.plugins.Plugin.SORT_TABLE = 180;
  * @final
  * @type Number
  */
-CQ.form.rte.plugins.Plugin.SORT_STYLES = 350;
+CUI.rte.plugins.Plugin.SORT_STYLES = 350;
 
 /**
  * Default sort index for paragraph formats
@@ -228,7 +228,7 @@ CQ.form.rte.plugins.Plugin.SORT_STYLES = 350;
  * @final
  * @type Number
  */
-CQ.form.rte.plugins.Plugin.SORT_PARAFORMAT = 360;
+CUI.rte.plugins.Plugin.SORT_PARAFORMAT = 360;
 
 /**
  * Default sort index for the spellchecker
@@ -237,7 +237,7 @@ CQ.form.rte.plugins.Plugin.SORT_PARAFORMAT = 360;
  * @final
  * @type Number
  */
-CQ.form.rte.plugins.Plugin.SORT_SPELLCHECK = 370;
+CUI.rte.plugins.Plugin.SORT_SPELLCHECK = 370;
 
 /**
  * Default sort index for misc tools
@@ -246,4 +246,4 @@ CQ.form.rte.plugins.Plugin.SORT_SPELLCHECK = 370;
  * @final
  * @type Number
  */
-CQ.form.rte.plugins.Plugin.SORT_MISC = 1000;
+CUI.rte.plugins.Plugin.SORT_MISC = 1000;

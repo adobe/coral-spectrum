@@ -19,12 +19,12 @@
 /**
  * <p>This class is used for dispatching plugin-related events, mostly used for
  * communications between editor core and plugins.</p>
- * <p>For example, a widget implementation (such as CQ.form.rte.RichText) may request
+ * <p>For example, a widget implementation (such as CUI.rte.RichText) may request
  * the source view from a "suitable" plugin (= a plugin that feels resposible for
  * the respective event type) by sending a "sourceedit" event.
- * @class CQ.form.rte.plugins.PluginEvent
+ * @class CUI.rte.plugins.PluginEvent
  */
-CQ.form.rte.plugins.PluginEvent = new Class({
+CUI.rte.plugins.PluginEvent = new Class({
 
     toString: "PluginEvent",
 
@@ -42,7 +42,7 @@ CQ.form.rte.plugins.PluginEvent = new Class({
         params = params || { };
         this.type = type;
         this.editContext = editContext;
-        CQ.form.rte.Utils.apply(this, params);
+        CUI.rte.Utils.apply(this, params);
     },
 
     getType: function() {

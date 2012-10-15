@@ -17,8 +17,8 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.plugins.ListPlugin
- * @extends CQ.form.rte.plugins.Plugin
+ * @class CUI.rte.plugins.ListPlugin
+ * @extends CUI.rte.plugins.Plugin
  * <p>This class implements the list functionality as a plugin.</p>
  * <p>The plugin ID is "<b>lists</b>".</p>
  * <p><b>Features</b></p>
@@ -37,11 +37,11 @@
  *     {@link CQ.form.RichText#indentSize}.</li>
  * </ul>
  */
-CQ.form.rte.plugins.ListPlugin = new Class({
+CUI.rte.plugins.ListPlugin = new Class({
 
     toString: "ListPlugin",
 
-    extend: CQ.form.rte.plugins.Plugin,
+    extend: CUI.rte.plugins.Plugin,
 
     /**
      * @cfg {Number} indentSize
@@ -137,7 +137,7 @@ CQ.form.rte.plugins.ListPlugin = new Class({
         if (event.isEnter() && event.isCtrl()) {
             try {
                 if (window.getSelection) {  // all browsers, except IE before version 9
-                    range = CQ.form.rte.Selection.getLeadRange(event.editContext);
+                    range = CUI.rte.Selection.getLeadRange(event.editContext);
                 }
                 else {
                     if (document.selection) {   // Internet Explorer 6/7/8
@@ -166,7 +166,7 @@ CQ.form.rte.plugins.ListPlugin = new Class({
                         parentParentNode.appendChild(newListNode);
                     }
 
-                    CQ.form.rte.Selection.selectNode(event.editContext, newListNode, 1);
+                    CUI.rte.Selection.selectNode(event.editContext, newListNode, 1);
                 }
             } catch (err) {
                 // sometimes a node might be undefined
@@ -179,8 +179,8 @@ CQ.form.rte.plugins.ListPlugin = new Class({
     },
 
     initializeUI: function(tbGenerator) {
-        var plg = CQ.form.rte.plugins;
-        var ui = CQ.form.rte.ui;
+        var plg = CUI.rte.plugins;
+        var ui = CUI.rte.ui;
         if (this.isFeatureEnabled("unordered")) {
             this.unorderedListUI = tbGenerator.createElement("insertunorderedlist", this,
                     true, this.getTooltip("insertunorderedlist"));
@@ -236,7 +236,7 @@ CQ.form.rte.plugins.ListPlugin = new Class({
         var value = undefined;
         if ((id == "indent") || (id == "outdent")) {
             value = this.config.indentSize;
-        } else if (CQ.form.rte.Common.strStartsWith(id, "insert")) {
+        } else if (CUI.rte.Common.strStartsWith(id, "insert")) {
             value = this.config.keepStructureOnUnlist;
         }
         this.editorKernel.relayCmd(id, value);
@@ -248,14 +248,14 @@ CQ.form.rte.plugins.ListPlugin = new Class({
         if (this.orderedListUI) {
             state = this.editorKernel.queryState("insertorderedlist", selDef);
             isDisabled = (state == null)
-                    || (state == CQ.form.rte.commands.List.NO_LIST_AVAILABLE);
+                    || (state == CUI.rte.commands.List.NO_LIST_AVAILABLE);
             this.orderedListUI.setSelected((state === true) || (state == null));
             this.orderedListUI.setDisabled(isDisabled);
         }
         if (this.unorderedListUI) {
             state = this.editorKernel.queryState("insertunorderedlist", selDef);
             isDisabled = (state == null)
-                    || (state == CQ.form.rte.commands.List.NO_LIST_AVAILABLE);
+                    || (state == CUI.rte.commands.List.NO_LIST_AVAILABLE);
             this.unorderedListUI.setSelected((state === true) || (state == null));
             this.unorderedListUI.setDisabled(isDisabled);
         }
@@ -269,7 +269,7 @@ CQ.form.rte.plugins.ListPlugin = new Class({
             var isEnabled = true;
             var listItems = selDef.nodeList.getTags(context, [ {
                     "matcher": function(dom) {
-                        return CQ.form.rte.Common.isTag(dom, "li");
+                        return CUI.rte.Common.isTag(dom, "li");
                     }
                 }
             ], true, true);
@@ -299,4 +299,4 @@ CQ.form.rte.plugins.ListPlugin = new Class({
 
 
 // register plugin
-CQ.form.rte.plugins.PluginRegistry.register("lists", CQ.form.rte.plugins.ListPlugin);
+CUI.rte.plugins.PluginRegistry.register("lists", CUI.rte.plugins.ListPlugin);

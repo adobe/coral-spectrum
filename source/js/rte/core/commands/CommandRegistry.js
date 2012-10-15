@@ -17,14 +17,14 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.commands.CommandRegistry
+ * @class CUI.rte.commands.CommandRegistry
  * This class is used to manage commands used for rich text editing. Each command has a
  * respective identifier by which it can be executed
- * {@link CQ.form.rte.EditorKernel#execCmd}.
+ * {@link CUI.rte.EditorKernel#execCmd}.
  * @since 5.3
  * @private
  */
-CQ.form.rte.commands.CommandRegistry = function() {
+CUI.rte.commands.CommandRegistry = function() {
 
     var cmdRegistry = { };
 
@@ -34,7 +34,7 @@ CQ.form.rte.commands.CommandRegistry = function() {
          * Registers the specified class as a rich text editing command.
          * @param {String} command The command identifier
          * @param {Function} cls The command class (must extend
-         *        {@link CQ.form.rte.commands.Command})
+         *        {@link CUI.rte.commands.Command})
          */
         register: function(command, cls) {
             cmdRegistry[command] = cls;
@@ -43,7 +43,7 @@ CQ.form.rte.commands.CommandRegistry = function() {
         /**
          * <p>Creates an associative array, containing instances of all currently
          * registered commands.</p>
-         * <p>The created object may be used by a single {@link CQ.form.rte.EditorKernel}
+         * <p>The created object may be used by a single {@link CUI.rte.EditorKernel}
          * instance.</p>
          * @return {Object} Associative array of instantiated commands
          */

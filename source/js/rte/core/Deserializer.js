@@ -17,29 +17,29 @@
 **************************************************************************/
 
 /**
- * @class CQ.form.rte.Deserializer
+ * @class CUI.rte.Deserializer
  * <p>The Serializer class works as an "interface" for providing fully customized HTML
  * deserializers.</p>
  * <p>Deserializers are used to convert persisted HTML into a suitable DOM tree before
  * they are being edited.</p>
  * <p>You should only consider implementing this interface directly if you have very special
  * requirements. Usually, it should make more sense to extend one of the default
- * serializers, {@link CQ.form.rte.HtmlDeserializer} or
- * {@link CQ.form.rte.XhtmlDeserializer}.</p>
+ * serializers, {@link CUI.rte.HtmlDeserializer} or
+ * {@link CUI.rte.XhtmlDeserializer}.</p>
  * <p>Deserializers should usually do the following cleanup/adjustments:</p>
  * <ul>
  *   <li>Correct the incoming (X)HTML to be browser-compatible. For example, IE chokes if
  *     XHTML is directly set to the DOM.</li>
  * </ul>
  */
-CQ.form.rte.Deserializer = new Class({
+CUI.rte.Deserializer = new Class({
 
     toString: "Deserializer",
 
     /**
      * <p>Deserializes the specified HTML to the sppecified DOM root element.</p>
      * <p>Note that the specified DOM element itself is kept as is.</p>
-     * @param {CQ.form.rte.EditContext} context The edit context
+     * @param {CUI.rte.EditContext} context The edit context
      * @param {String} html The HTML to be deserialized
      * @param {HTMLElement} rootDom The DOM (sub-) tree to deserialize the HTML to
      */
