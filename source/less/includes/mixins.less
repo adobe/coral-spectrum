@@ -121,6 +121,25 @@
   -moz-animation-timing-function: linear;
 }
 
+/**
+ * Mixin: .transisiton
+ */
+.transition(@property:all, @duration:0.2s, @ease:ease-out) {
+  -webkit-transition: @property @duration @ease;
+  -moz-transition: @property @duration @ease;
+  -ms-transition: @property @duration @ease;
+  transition: @property @duration @ease;
+}
+
+/**
+ * Mixin: .transform
+ */
+.transform(@property) {
+  -webkit-transform: @property;
+  -moz-transform: @property;
+  -ms-transform: @property;
+  transform: @property;
+}
 
 /**
  * Mixin: .background-size

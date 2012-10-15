@@ -5,7 +5,9 @@
     
     /**
       @extends CUI.Widget
-      @classdesc optionally pull-to-refresh functionality for the rail
+      @classdesc this widget extends the rail to the following features
+        - enables foldable sections
+        - optionally pull-to-refresh functionality for the rail
 
       <div id="myRail" class="rail">
         <div class="pull-to-refresh">
@@ -67,9 +69,9 @@ $('#myRail').rail({
     &lt;section&gt;
         &lt;h4&gt;Update Feed&lt;/h4&gt;
     &lt;/section&gt;
-    &lt;section&gt;
-        &lt;h4&gt;Revised asset ready for review&lt;/h4&gt;
-        &lt;div class=&quot;small grey light&quot;&gt;Modified yesterday by Rob Cobourn&lt;/div&gt;
+    &lt;section class=&quot;foldable&quot;&gt;
+        &lt;h4 class=&quot;heading&quot;&gt;Revised asset ready for review&lt;/h4&gt;
+        &lt;div class=&quot;fold small grey light&quot;&gt;Modified yesterday by Rob Cobourn&lt;/div&gt;
         &lt;p class=&quot;small&quot;&gt;I created a new segment thing for the...&lt;/p&gt;
     &lt;/section&gt;
   &lt;/div&gt;
@@ -78,7 +80,7 @@ $('#myRail').rail({
   &lt;p&gt;Content.&lt;/p&gt;
 &lt;/div&gt;
 
-      @desc extends to rail to functionality
+      @desc extends the functionality of a rail
       @constructs
 
       @param {Object} options                               Component options
@@ -97,12 +99,22 @@ $('#myRail').rail({
             rail: e,
             content: e.find('.wrap'),
             ptr: e.find('.pull-to-refresh') 
-          };
+          }, foldable = _.content.find('section.foldable');
           
       if (options.refreshCallback) { // the refreshable option will be activated of the refreshCallback is set
         //if (!_.ptr) { // add markup if there is non
 
         //}
+
+        // enable foldable section
+        foldable.each(function (i, e) {
+          var f = $(e),
+              trigger = f.find('.heading');
+
+          trigger.on('click', function (ev) { // TODO make that for touch
+            f.toggleClass('open');
+          });
+        });
 
 
         _ = $.extend(_, {
