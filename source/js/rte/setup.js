@@ -28,9 +28,9 @@ CUI.rte.ui.cui = {};
 (function() {
 
     // determine which implementation to use
-    CUI.rte._adapter = (CQ.Ext ? "ext" : "jquery");
+    CUI.rte._adapter = ((typeof(CQ) !== "undefined") && CQ.Ext ? "ext" : "jquery");
     // TODO remove after development
-    CUI.rte._adapter = "jquery";
-    CUI.rte._toolkit = (CQ.Ext ? "ext" : "cui");
+    // CUI.rte._adapter = "jquery";
+    CUI.rte._toolkit = ((typeof(CQ) !== "undefined") && CQ.Ext ? "ext" : "cui");
 
 })();

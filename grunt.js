@@ -8,6 +8,9 @@ module.exports = function(grunt) {
     "base": [
       'Class.js'
     ],
+    "cui-templates": [
+      '{build}/CUI.Templates.js'
+    ],
     "cui": [
       // Class system
       'Class.js',
@@ -26,13 +29,12 @@ module.exports = function(grunt) {
       'components/CUI.Rail.js'
     ],
     "rte-core": [
-      'rte/core/setup.js',
+      'rte/setup.js',
+
       'rte/core/adapter/Utils.js',
       'rte/core/adapter/Hooks.js',
       'rte/core/adapter/Eventing.js',
       'rte/core/adapter/Query.js',
-      'rte/core/adapter/JQueryEvent.js',
-      'rte/core/adapter/ExtEvent.js',
       'rte/core/adapter/Constants.js',
 
       'rte/core/EditContext.js',
@@ -102,6 +104,9 @@ module.exports = function(grunt) {
       'rte/core/plugins/UndoRedoPlugin.js',
       'rte/core/plugins/SpellCheckerPlugin.js',
 
+      'rte/core/adapter/JQueryEvent.js',
+      'rte/core/adapter/ExtEvent.js',
+
       'rte/core/ui/Toolkit.js',
       'rte/core/ui/ToolkitRegistry.js',
       'rte/core/ui/UIEvent.js',
@@ -136,9 +141,9 @@ module.exports = function(grunt) {
   };
 
   var packages = {
-    "cui": [ "base", "cui"],
+    "cui": [ "cui-templates", "base", "cui"],
     "rte-core": [ "base", "rte-core", "rte-trailer" ],
-    "cui-with-rte": [ "base", "rte-core", "cui", "rte-cui", "rte-trailer" ]
+    "cui-with-rte": [ "cui-templates", "base", "rte-core", "cui", "rte-cui", "rte-trailer" ]
   };
 
   /**
@@ -160,10 +165,17 @@ module.exports = function(grunt) {
     @param jsPath   Base path to prepend to each include
   */
   function getIncludes(pkg, jsPath) {
-    var includes = [dirs.build+'/js/CUI.Templates.js'];
+    var includes = [ ];
     var def = packages[pkg];
     def.forEach(function(_set) {
-        includeOrder[_set].forEach(function(_file) { includes.push(jsPath + _file); });
+        includeOrder[_set].forEach(function(_file) {
+          var pref = "{build}";
+          var prefLen = pref.length;
+          if ((_file.length >= prefLen) && (_file.substring(0, prefLen) === pref)) {
+            includes.push(dirs.build + "/js/" + _file.substring(prefLen + 1));
+          }
+          includes.push(jsPath + _file);
+        });
     });
     return includes;
   }
@@ -390,11 +402,11 @@ module.exports = function(grunt) {
       },
       "rte-core": {
         src: ['<config:concat.rte-core.dest>'],
-        dest: '<%= dirs.build %>/js/rte-core.js'
+        dest: '<%= dirs.build %>/js/rte-core.min.js'
       },
       "cui-with-rte": {
         src: ['<config:concat.cui-with-rte.dest>'],
-        dest: '<%= dirs.build %>/js/CUI-with-rte.js'
+        dest: '<%= dirs.build %>/js/CUI-with-rte.min.js'
       }
       // TBD: minify individual JS files?
     },

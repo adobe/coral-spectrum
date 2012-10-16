@@ -160,8 +160,7 @@ CUI.rte.Utils = function() {
                 return $.parseJSON(str);
             },
 
-            // TODO use ...?
-            BLANK_IMAGE_URL: CQ.Ext.BLANK_IMAGE_URL
+            BLANK_IMAGE_URL: "../images/components/rte/blank.png"
 
         };
 

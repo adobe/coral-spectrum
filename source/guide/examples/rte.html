@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CUI RichTextEditor</title>
+
+  <link rel="stylesheet" href="../css/cui.css">
+  <link rel="stylesheet" href="assets/google-code-prettify/prettify.css">
+  <link rel="stylesheet" href="assets/guide.css">
+
+  <!-- Dependencies -->
+  <script src="../js/libs/handlebars.js"></script>
+  <script src="../js/libs/jquery.js"></script>
+
+  <!-- CoralUI, including RTE -->
+  <script src="../js/CUI-with-rte.js"></script>
+
+  <!-- Guide JS -->
+  <script src="assets/guide.js"></script>
+  <script src="assets/google-code-prettify/prettify.js"></script>
+
+</head>
+<body>
+
+  <header class="top">
+
+    <div class="logo"><img src="../images/theme/cloudui.png" alt="CoralUI logo"></div>
+
+    <nav>
+      <a href="#" class="selected">RichTextEditing</a>
+      <a href="https://git.corp.adobe.com/Reef/CoralUI/">Github</a>
+    </nav>
+
+    <div class="drawer">
+      <div class="badge">v0.3.0-SNAPSHOT</div>
+    </div>
+
+  </header>
+
+  <div class="page" role="main">
+
+    <div id="main-rail" class="rail left">
+      <div class="pull-to-refresh">
+        <div class="message">
+          <i class="arrow"></i>
+          <i class="spinner large"></i>
+          <span class="pull">Pull to refresh</span>
+          <span class="release">Release to refresh</span>
+          <span class="loading">Loading</span>
+        </div>
+      </div>
+      <div class="wrap">
+        <section class="links">
+            <a class="heading" href="#General">General</a>
+
+            <nav>
+              <a href="#rte01">Simple RTE</a>
+            </nav>
+        </section>
+
+      </div>
+    </div>
+
+    <div class="content">
+
+      <section id="General">
+        <h2 class="line" id="rte01">Simple RTE</h2>
+        <p>...</p>
+
+          <div id="modal" class="modal">
+            <div class="modal-header">
+              <h2>Modal from Markup</h2>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <p>This modal was created from markup. Modals can also be created with JavaScript.</p>
+              <p>See <a href="jsdoc/index.html">the documentation</a> for more examples.</p>
+            </div>
+            <div class="modal-footer">
+              <button data-dismiss="modal">Close</button><button class="primary" data-dismiss="modal">Save</button>
+            </div>
+          </div>
+
+          <pre class="prettyprint linenums">
+&lt;a href=&quot;#modal&quot; class=&quot;button&quot; data-toggle=&quot;modal&quot;&gt;Show Modal&lt;/a&gt;
+
+&lt;div id=&quot;modal&quot; class=&quot;modal&quot;&gt;
+  &lt;div class=&quot;modal-header&quot;&gt;
+    &lt;h2&gt;Modal from Markup&lt;/h2&gt;
+    &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot;&gt;&amp;times;&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;modal-body&quot;&gt;
+    &lt;p&gt;This modal was created from markup.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;modal-footer&quot;&gt;
+    &lt;button data-dismiss=&quot;modal&quot;&gt;Close&lt;/button&gt;
+    &lt;button class=&quot;primary&quot; data-dismiss=&quot;modal&quot;&gt;Save&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+        </section>
+
+    </div><!-- /content -->
+  </div><!-- /page -->
+
+  <a id="SectionAnchor" style="display: none;" title="Right click to copy section URL">&para;</a>
+
+</body>
+</html>

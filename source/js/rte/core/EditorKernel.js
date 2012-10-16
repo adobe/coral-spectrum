@@ -321,7 +321,7 @@ CUI.rte.EditorKernel = new Class({
             delete config.uiToolkit;
         } else {
             this.uiToolkit = CUI.rte._toolkit
-                    || CUI.rte.EditorKernel.DEFAULT_TOOLKIT;
+                    || CUI.rte.EditorKernel.DEFAULT_TOOLKIT;
         }
         // other config
         this.linkInternalize = config.linkInternalize;
