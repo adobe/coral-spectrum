@@ -51,7 +51,8 @@
     
     defaults: {
         multiple: false,
-        placeholder: "Select"
+        placeholder: "Select",
+        disabled: false
     },
     
     dropdownList: null,
@@ -72,6 +73,7 @@
     _render: function() {
         if (this.$element.get(0).tagName === "SELECT") {
 
+            if (this.$element.attr("disabled")) this.options.disabled = true;
             if (this.$element.attr("multiple")) this.options.multiple = true;
             if (this.$element.attr("data-placeholder")) this.options.placeholder = this.$element.attr("data-placeholder");
             
@@ -87,6 +89,14 @@
             this.syncSelectElement = this.$element;
             this.$element = button;
             this.syncSelectElement.hide();            
+        }
+        this._update();
+    },
+    _update: function() {
+        if (this.options.disabled) {
+            this.$element.attr("disabled", "disabled");
+        } else {
+            this.$element.removeAttr("disabled");            
         }
     }
     

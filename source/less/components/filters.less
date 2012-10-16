@@ -46,23 +46,22 @@
     width: 13rem;  /* Needs fixed width for floating term elements */
     vertical-align: top;
 
-    ul {
+    ul.tags {
         font-size: 0; /* Eliminate white space */
         padding: 0;
         margin: 0 0 0.5rem 0;
         display: inline;
 
-    }
-    ul li {
-        font-size: 0.8125rem;
-        padding: 0.25rem 0.5rem;
-        margin: 0 0.2rem 0.2rem 0;
+        li {
+            font-size: 0.8125rem;
+            padding: 0.25rem 0.5rem;
+            margin: 0 0.2rem 0.2rem 0;
 
-        display: inline-block;
-        background-color: @filters-background-color;
-        color: @filters-text-color;
+            display: inline-block;
+            background-color: @filters-background-color;
+            color: @filters-text-color;
+        }
     }
-   
 
     button {
         font-size: 1rem;
@@ -131,8 +130,7 @@
 }
 
 .autocomplete-results {
-    .dropdown-list;
-
+    margin-left: 0; // Correct from above
     em {
         font-weight: bold;
         letter-spacing: 0.1rem;

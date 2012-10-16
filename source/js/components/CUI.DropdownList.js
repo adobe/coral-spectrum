@@ -17,9 +17,8 @@
       
     */
     construct: function(options) {
-        this.selectedIndices = []; // Initialise fresh array
-        this.$element.on('change:options', this._changeOptions.bind(this));
-        
+        this.$element.on('change:options change:optionRenderer', this.update.bind(this));
+
         // Listen to events 
         this.$element.on("keydown", "", this._keyPressed.bind(this));
         
@@ -37,11 +36,11 @@
     },
     
     defaults: {
+        positioningElement: null,
         optionRenderer: null,
         options: ["Apples", "Pears", "Bananas", "Strawberries"],
-        placeholder: "Select me"
+        cssClass: null
     },
-    
     listElement: null,
     currentIndex: -1,
         
@@ -62,6 +61,10 @@
         return null;
     },
     
+    isVisible: function() {
+        return (this.listElement !== null);
+    },
+    
     toggle: function() {
       if (this.listElement) {
           this.hide();
@@ -71,14 +74,10 @@
     },
     
     update: function() {
-        this._unrender();
-        this._render();
-    },
-    
-    _changeOptions: function() {
-        this.selectedIndex = -1;
-        this.selectedIndices = [];
-        this._render();
+        if (this.listElement) {
+            this._unrender();
+            this._render();
+        }
     },
     
     _keyPressed: function(event) {        
@@ -135,6 +134,8 @@
                
         var list = $("<ul class=\"dropdown-list\">");
         list.width(this.$element.outerWidth());
+        if (this.cssClass) list.addClass(this.cssClass);
+        
         
         $.each(options, function(index, value) {
             var el = (this.options.optionRenderer) ? this.options.optionRenderer(index, value) : $("<span>" + value + "</span>");
@@ -149,7 +150,7 @@
         }.bind(this));
         
         // Calculate correct position and size on screen
-        var el = this.$element;
+        var el = (this.options.positioningElement) ? this.options.positioningElement : this.$element;
         var left = el.position().left + parseFloat(el.css("margin-left"));
         var top = el.position().top + el.outerHeight(true) - parseFloat(el.css("margin-bottom"));
         var width = el.outerWidth(false);
@@ -160,7 +161,7 @@
                   width: width + "px"});
 
         this.listElement = list;
-        this.$element.after(list);
+        el.after(list);
 
     },
     
@@ -168,7 +169,8 @@
     // Trigger a change event
         this.$element.focus();
         var e = $.Event('dropdown-list:select', {
-          selectedIndex: index
+          selectedIndex: index,
+          selectedValue: this.options.options[index]
         });
         this.$element.trigger(e);    
     }

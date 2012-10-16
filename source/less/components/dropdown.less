@@ -38,7 +38,7 @@ select,
         background: url('../images/components/dropdown/handle.svg') no-repeat center center;
     }
 
-    &:hover {
+    &:hover:not([disabled]) {
         border: @px solid @dropdown-border-color;
         background: @dropdown-gradient-start-color;
         .gradient(@dropdown-gradient-start-color, @dropdown-gradient-start-color);    
@@ -48,7 +48,7 @@ select,
         .glow();
     }
 
-    &:active {
+    &:active:not([disabled]) {
         border: @px solid @dropdown-border-color;
         background: @dropdown-gradient-end-color;
         .gradient(@dropdown-gradient-end-color, @dropdown-gradient-end-color);

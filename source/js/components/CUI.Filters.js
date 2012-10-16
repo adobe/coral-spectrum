@@ -80,7 +80,6 @@ var index = filters.getSelectedIndex();
                     this._update();
                 }
             }
-            setTimeout(this._hideAutocompleter.bind(this), 200); // Use timeout to have a chance to select from list
         }.bind(this));
        
         this.$element.on("keydown", "input", this._keyPressed.bind(this));
@@ -90,6 +89,11 @@ var index = filters.getSelectedIndex();
             if (this.options.disabled) return;
             this._inputChanged();
         }.bind(this));
+        
+        this.inputElement.on("dropdown-list:select", "", function(event) {
+            this.dropdownList.hide(200);
+            this.setSelectedIndex(event.selectedValue * 1);
+        }.bind(this));        
         
         this.$element.on("click", "[data-dismiss=filter]", function(event) {
             if (this.options.disabled) return;
@@ -133,7 +137,7 @@ var index = filters.getSelectedIndex();
     },
     
 
-    autocompleteElement: null,
+    dropdownList: null,
     syncSelectElement: null,
     inputElement: null,
     typeTimeout: null,
@@ -219,6 +223,12 @@ var index = filters.getSelectedIndex();
         this.$element.removeClass("focus");
         
         this.inputElement = this.$element.find("input");
+        this.dropdownList = new CUI.DropdownList({
+            element: this.inputElement,
+            positioningElement: (this.options.stacking) ? this.$element : this.inputElement,
+            cssClass: "autocomplete-results"
+        });
+
 
         if (this.options.stacking) this.$element.addClass("stacking"); else this.$element.removeClass("stacking");
         if (this.options.placeholder) this.inputElement.attr("placeholder", this.options.placeholder);
@@ -260,7 +270,7 @@ var index = filters.getSelectedIndex();
             }
         }
         
-        var ul = $("<ul></ul>");
+        var ul = $("<ul class=\"tags\"></ul>");
         
         $.each(this.selectedIndices, function(k, index) {
             var option = this.options.options[index];
@@ -298,55 +308,12 @@ var index = filters.getSelectedIndex();
             this.triggeredBackspace = true; // Remember this key down event
         }
         
-        // Only listen to keys if there is an autocomplete box right now
-        if (!this.autocompleteElement) {
+        if (!this.dropdownList.isVisible()) {
             if (key === 40) {
                 this._inputChanged(); // Show box now!
                 event.preventDefault();
             }
-            return;
         }
-
-        var currentIndex = this.autocompleteElement.find("li.selected").index();
-        
-        if (key === 38) { // up
-            event.preventDefault();
-            if (currentIndex > 0) currentIndex--;
-        }
-        
-        if (key === 40) { // down
-            event.preventDefault();
-            if (currentIndex < (this.autocompleteElement.children().length - 1)) currentIndex++;
-        }
-        
-        if (key === 27) { // escape
-            event.preventDefault();
-            this._hideAutocompleter();
-            return;
-        }
-        
-        if (key === 13) { // return
-           event.preventDefault();
-           if (currentIndex >= 0) {
-                this.setSelectedIndex($(this.autocompleteElement.children().get(currentIndex)).attr("data-id"));
-                this._hideAutocompleter();
-                this.inputElement.focus();
-                return;
-           }
-        }
-        
-        // Set new css classes
-        this.autocompleteElement.children().removeClass("selected");
-        if (currentIndex >= 0) $(this.autocompleteElement.children().get(currentIndex)).addClass("selected");
-        
-        return;
-    },
-
-    _inputChanged: function() {
-        var searchFor = this.inputElement.attr("value");
-        
-        var results = this.options.autocompleteCallback(searchFor);
-        this._showAutocompleter(results, searchFor);
     },
     
     _correctInputFieldWidth: function() {
@@ -372,19 +339,29 @@ var index = filters.getSelectedIndex();
         i.width(w);
     },
     
-    _showAutocompleter: function(results, searchFor) {
-        // Hide old list (if any!)
-        this._hideAutocompleter();
-        if (results.length === 0) return;
+    _inputChanged: function() {
+        var searchFor = this.inputElement.attr("value");
         
-        var that = this;
-        var list = $("<ul class=\"autocomplete-results\">");
-        list.width(this.$element.outerWidth());
-        $.each(results, function(key, index) {
-            
+        var results = this.options.autocompleteCallback(searchFor);
+        this._showAutocompleter(results, searchFor);
+    },
+    
+    _showAutocompleter: function(results, searchFor) {
+        
+        this.dropdownList.hide();
+        
+        if (this.options.multiple) {
             // Do not show already selected indices
-            if (this.options.multiple && this.selectedIndices.indexOf(index) >= 0) return;
-            
+            var l = [];            
+            $.each(results, function(key, index) {
+                if (this.selectedIndices.indexOf(index) >= 0) return;
+                l.push(index);
+            }.bind(this));  
+            results = l;
+        }        
+        if (results.length === 0) return;
+
+        var optionRenderer = function(key, index) {            
             var value = this.options.options[index];
             
             if (this.options.highlight) {
@@ -393,41 +370,17 @@ var index = filters.getSelectedIndex();
                     value = value.substr(0, i) + "<em>" + value.substr(i, searchFor.length) + "</em>" + value.substr(i + searchFor.length);
                 }
             }
-            list.append("<li data-id=\"" + index + "\">" + value + "</li>");
-        }.bind(this));
+            return $("<span>" + value + "</span>");
+        };
         
-        list.on("click", "li", function(event) {
-           that.setSelectedIndex($(event.target).attr("data-id"));
-           that._hideAutocompleter();
-           that.$element.focus();
-        });
+        // Due to a current bug (in CUI.Widget?) it seems to be impossible to use the "set"-method inherited from the widget class
+        //this.dropdownList.set("optionRenderer", this._optionRenderer.bind(this));
+        //this.dropdownList.set("options", results);
+        this.dropdownList.options.optionRenderer = optionRenderer.bind(this);
+        this.dropdownList.options.options = results;
         
-        // Calculate correct position and size on screen
-        var el = this.$element;
-        var left = el.position().left + parseFloat(el.css("margin-left"));
-        var top = 0;
-        if (this.options.stacking) {
-            top = el.position().top + el.outerHeight(true) - parseFloat(el.css("margin-bottom"));
-        } else {
-            top = el.position().top + parseFloat(el.css("margin-top")) + parseFloat(el.css("padding-top")) +
-                el.find("input").outerHeight(false) + parseFloat(el.find("input").css("margin-top"));
-        }
-        var width = el.outerWidth(false);
+        this.dropdownList.show();
         
-        list.css({position: "absolute",
-                  left: left + "px", 
-                  top: top + "px", 
-                  width: width + "px"});
-
-        this.autocompleteElement = list;
-        this.$element.after(list);
-    },
-    
-    _hideAutocompleter: function() {
-        if (this.autocompleteElement) {
-            this.autocompleteElement.remove();
-            this.autocompleteElement = null;
-        }    
     },
     
     _defaultAutocompleteCallback: function(searchFor) {

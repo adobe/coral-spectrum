@@ -29,7 +29,7 @@
         // add range
         var range = $("<div></div>")
             .addClass('range');
-        this.$element.append(tick);
+        this.$element.append(range);
 
         // add ticks
         var tick = $("<span></span>")
@@ -39,7 +39,7 @@
         // add tooltip
         var tooltip = $("<div></div>")
             .addClass('tooltip');
-        this.$element.append(tick);
+        this.$element.append(tooltip);
 
 
     },
