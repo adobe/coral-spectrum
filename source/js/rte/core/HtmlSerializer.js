@@ -102,7 +102,7 @@ CUI.rte.HtmlSerializer = new Class({
 
     _init: function(config) {
         config = config || { };
-        CQ.Util.applyDefaults(config, {
+        CUI.rte.Utils.applyDefaults(config, {
             "nonClosingTags": CUI.rte.HtmlSerializer.NON_CLOSING_TAGS,
             "tagCase": "lower",
             "attribNameCase": "lower",
@@ -147,10 +147,7 @@ CUI.rte.HtmlSerializer = new Class({
         if ((attrName == "id") && (this.idAttribMode == "remove")) {
             return true;
         }
-        if (com.arrayContains(CUI.rte.HtmlSerializer.HELPER_ATTRIBUTES, attrName)) {
-            return true;
-        }
-        return false;
+        return com.arrayContains(CUI.rte.HtmlSerializer.HELPER_ATTRIBUTES, attrName);
     },
 
     /**

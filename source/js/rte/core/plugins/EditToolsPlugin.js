@@ -542,7 +542,7 @@ CUI.rte.plugins.EditToolsPlugin = new Class({
         if (pluginConfig.htmlPasteRules) {
             removeLinkRemoveRegEx = (pluginConfig.htmlPasteRules.linkRemoveRegEx === "");
         }
-        CQ.Util.applyDefaults(pluginConfig, {
+        CUI.rte.Utils.applyDefaults(pluginConfig, {
             "defaultPasteMode": "wordhtml",
             "stripHtmlTags": true,
             "htmlPasteRules": {

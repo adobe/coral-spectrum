@@ -43,7 +43,7 @@ CUI.rte.plugins.JustifyPlugin = new Class({
 
     notifyPluginConfig: function(pluginConfig) {
         pluginConfig = pluginConfig || { };
-        CQ.Util.applyDefaults(pluginConfig, {
+        CUI.rte.Utils.applyDefaults(pluginConfig, {
             "features": "*",
             "tooltips": {
                 "justifyleft": {

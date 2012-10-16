@@ -288,7 +288,7 @@ CUI.rte.EditorKernel = new Class({
 
     construct: function(config) {
         config = config || { };
-        CQ.Util.applyDefaults(config, {
+        CUI.rte.Utils.applyDefaults(config, {
             "linkInternalize": [ {
                 "tag": "a",
                 "attribute": "href"

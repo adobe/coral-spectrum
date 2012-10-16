@@ -251,7 +251,7 @@ CUI.rte.plugins.SpellCheckerPlugin = new Class({
 
     notifyPluginConfig: function(pluginConfig) {
         pluginConfig = pluginConfig || { };
-        CQ.Util.applyDefaults(pluginConfig, {
+        CUI.rte.Utils.applyDefaults(pluginConfig, {
             "invalidStyle": "background-color: #ffffaa;",
             "invalidClass": null,
             "method": "POST",

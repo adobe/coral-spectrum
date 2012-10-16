@@ -74,7 +74,7 @@ CUI.rte.NodeList = new Class({
 
     construct: function(config) {
         config = config || { };
-        CQ.Util.applyDefaults(config, {
+        CUI.rte.Utils.applyDefaults(config, {
             "removeExistingStructuresOnSurround": true
         });
         CUI.rte.Utils.apply(this, config);

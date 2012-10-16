@@ -43,7 +43,7 @@ CUI.rte.plugins.Plugin = new Class({
 
     /**
      * Back reference to the editor kernel the plugin is used from
-     * @type CQ.form.RichText
+     * @type CUI.rte.EditorKernel
      * @private
      */
     editorKernel: null,

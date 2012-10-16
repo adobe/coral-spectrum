@@ -92,7 +92,7 @@ CUI.rte.ui.ToolbarBuilder = new Class({
 
     /**
      * Create the toolbar as a suitable Ext component.
-     * @return {CQ.WrappingToolbar[]} Array with physically available toolbar components
+     * @return {CUI.rte.ui.Toolbar} The toolbar
      */
     createToolbar: function(editorKernel, options) {
         // must be overridden by the implementing class

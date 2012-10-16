@@ -28,6 +28,7 @@ module.exports = function(grunt) {
     "rte-core": [
       'rte/core/setup.js',
       'rte/core/adapter/Utils.js',
+      'rte/core/adapter/Hooks.js',
       'rte/core/adapter/Eventing.js',
       'rte/core/adapter/Query.js',
       'rte/core/adapter/JQueryEvent.js',

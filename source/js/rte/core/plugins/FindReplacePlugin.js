@@ -335,7 +335,7 @@ CUI.rte.plugins.FindReplacePlugin = new Class({
 
     notifyPluginConfig: function(pluginConfig) {
         pluginConfig = pluginConfig || { };
-        CQ.Util.applyDefaults(pluginConfig, {
+        CUI.rte.Utils.applyDefaults(pluginConfig, {
             "tooltips": {
                 "find": {
                     "title": CUI.rte.Utils.i18n("Find"),

@@ -151,7 +151,7 @@ CUI.rte.plugins.UndoRedoPlugin = new Class({
                 }
             }
         };
-        CQ.Util.applyDefaults(pluginConfig, defaults);
+        CUI.rte.Utils.applyDefaults(pluginConfig, defaults);
         this.config = pluginConfig;
         var commandCfg = {
             "maxUndoSteps": this.config.maxUndoSteps

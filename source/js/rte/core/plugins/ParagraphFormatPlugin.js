@@ -157,7 +157,7 @@ CUI.rte.plugins.ParagraphFormatPlugin = new Class({
         if (pluginConfig.formats) {
             delete defaults.formats;
         }
-        CQ.Util.applyDefaults(pluginConfig, defaults);
+        CUI.rte.Utils.applyDefaults(pluginConfig, defaults);
         this.config = pluginConfig;
     },
 

@@ -97,7 +97,7 @@ CUI.rte.plugins.SubSuperScriptPlugin = new Class({
                 }
             }
         };
-        CQ.Util.applyDefaults(pluginConfig, defaults);
+        CUI.rte.Utils.applyDefaults(pluginConfig, defaults);
         this.config = pluginConfig;
     }
 

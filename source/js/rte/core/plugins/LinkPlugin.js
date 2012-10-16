@@ -161,7 +161,7 @@ CUI.rte.plugins.LinkPlugin = new Class({
                         delete attrib.xtype;
                         delete attrib.label;
                         delete attrib.fieldLabel;
-                        CQ.Util.applyDefaults(itemData.item, attrib);
+                        CUI.rte.Utils.applyDefaults(itemData.item, attrib);
                         dialogConfig.additionalFields.push(itemData);
                     }
                     delete addDialogConfig.linkAttributes;
@@ -199,7 +199,7 @@ CUI.rte.plugins.LinkPlugin = new Class({
                     });
                 }
             }
-            CQ.Util.applyDefaults(dialogConfig, this.config.linkDialogConfig || { });
+            CUI.rte.Utils.applyDefaults(dialogConfig, this.config.linkDialogConfig || { });
             dialogHelper.configure(dialogConfig);
             this.linkDialog = dialogHelper.create();
             dialogHelper.calculateInitialPosition();
@@ -259,7 +259,7 @@ CUI.rte.plugins.LinkPlugin = new Class({
                 }
             };
             var dialogConfig = this.config.anchorDialogConfig || { };
-            CQ.Util.applyDefaults(dialogConfig, defaultConfig);
+            CUI.rte.Utils.applyDefaults(dialogConfig, defaultConfig);
             this.anchorDialog = dm.create(CUI.rte.ui.DialogManager.DLG_ANCHOR,
                     dialogConfig);
         } else {
@@ -297,7 +297,7 @@ CUI.rte.plugins.LinkPlugin = new Class({
 
     notifyPluginConfig: function(pluginConfig) {
         pluginConfig = pluginConfig || { };
-        CQ.Util.applyDefaults(pluginConfig, {
+        CUI.rte.Utils.applyDefaults(pluginConfig, {
             "features": "*",
             "trimLinkSelection": true,
             "linkDialogConfig": {

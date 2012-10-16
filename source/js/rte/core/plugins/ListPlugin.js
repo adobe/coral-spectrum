@@ -206,7 +206,7 @@ CUI.rte.plugins.ListPlugin = new Class({
 
     notifyPluginConfig: function(pluginConfig) {
         pluginConfig = pluginConfig || { };
-        CQ.Util.applyDefaults(pluginConfig, {
+        CUI.rte.Utils.applyDefaults(pluginConfig, {
             "features": "*",
             "indentSize": 40,
             "keepStructureOnUnlist": false,

@@ -62,7 +62,7 @@ CUI.rte.XhtmlSerializer = new Class({
         delete config.tagCase;
         delete config.attribNameCase;
         delete config.nonClosingTags;
-        CQ.Util.applyDefaults(config, {
+        CUI.rte.Utils.applyDefaults(config, {
             "tagCase": "lower",
             "attribNameCase": "lower",
             "useShortTags": false,

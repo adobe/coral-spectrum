@@ -141,7 +141,7 @@ CUI.rte.plugins.MiscToolsPlugin = new Class({
                 }, this)
             };
             var dialogConfig = this.config.specialCharsConfig || { };
-            CQ.Util.applyDefaults(dialogConfig, defaultConfig);
+            CUI.rte.Utils.applyDefaults(dialogConfig, defaultConfig);
             this.specialCharsDialog = dm.create(CUI.rte.ui.DialogManager.DLG_SPECCHARS,
                     dialogConfig);
             // would throw a SecurityError if set in dialogConfig/CQ.WCM.getDialog()
@@ -196,7 +196,7 @@ CUI.rte.plugins.MiscToolsPlugin = new Class({
         if (pluginConfig.specialCharsConfig && pluginConfig.specialCharsConfig.chars) {
             delete defaults.specialCharsConfig.chars;
         }
-        CQ.Util.applyDefaults(pluginConfig, defaults);
+        CUI.rte.Utils.applyDefaults(pluginConfig, defaults);
         this.config = pluginConfig;
     },
 

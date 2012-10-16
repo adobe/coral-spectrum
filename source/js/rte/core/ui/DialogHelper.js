@@ -224,6 +224,31 @@ CUI.rte.ui.DialogHelper = new Class({
     },
 
     /**
+     * <p>Merges two objects recursively.</p>
+     * <p>Note that this method does not work with top-level Arrays.</p>
+     * @param {Object} obj The base object
+     * @param {Object} objToAppend The object that is merged into obj
+     * @private
+     */
+    mergeObjects: function(obj, objToAppend) {
+        for (var key in objToAppend) {
+            if (objToAppend.hasOwnProperty(key)) {
+                var value = objToAppend[key];
+                if (typeof(value) == "object") {
+                    var copyObj = CUI.rte.Utils.copyObject(value);
+                    if (obj[key]) {
+                        CUI.rte.Utils.applyDefaults(obj[key], copyObj);
+                    } else {
+                        obj[key] = copyObj;
+                    }
+                } else {
+                    obj[key] = value;
+                }
+            }
+        }
+    },
+
+    /**
      * @private
      */
     createExtensibleDialog: function() {
@@ -232,12 +257,12 @@ CUI.rte.ui.DialogHelper = new Class({
             throw new Error("Invalid dialogConfig; missing property defaultDialog");
         }
         if (this.defaultDialog.dialogClass) {
-            var dialogConfig = CQ.Util.copyObject(this.defaultDialog.dialogClass);
+            var dialogConfig = CUI.rte.Utils.copyObject(this.defaultDialog.dialogClass);
             if (this.defaultDialog.dialogProperties) {
-                com.objectMerge(dialogConfig, this.defaultDialog.dialogProperties);
+                this.mergeObjects(dialogConfig, this.defaultDialog.dialogProperties);
             }
             if (this.dialogProperties) {
-                com.objectMerge(dialogConfig, this.dialogProperties);
+                this.mergeObjects(dialogConfig, this.dialogProperties);
             }
             if (this.parameters) {
                 dialogConfig.parameters = this.parameters;

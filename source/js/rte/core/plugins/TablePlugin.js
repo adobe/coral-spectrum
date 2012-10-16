@@ -654,7 +654,7 @@ CUI.rte.plugins.TablePlugin = new Class({
 
     notifyPluginConfig: function(pluginConfig) {
         pluginConfig = pluginConfig || { };
-        CQ.Util.applyDefaults(pluginConfig, {
+        CUI.rte.Utils.applyDefaults(pluginConfig, {
             "tableStyles": null,
             "cellStyles": null,
             "defaultValues": {

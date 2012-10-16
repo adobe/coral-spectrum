@@ -204,7 +204,7 @@ CUI.rte.HtmlRules.Links = new Class({
             },
             "ensureInternalLinkExt": true
         };
-        CQ.Util.applyDefaults(config, defaults);
+        CUI.rte.Utils.applyDefaults(config, defaults);
         CUI.rte.Utils.apply(this, config);
         // adjust regexp
         CUI.rte.Compatibility.adjustRegExp(this, "relativeLinkRegExp",
@@ -602,7 +602,7 @@ CUI.rte.HtmlRules.Serializer = new Class({
 
     construct: function(config) {
         config = config || { };
-        CQ.Util.applyDefaults(config, {
+        CUI.rte.Utils.applyDefaults(config, {
             "mode": "auto",
             "config": null,
             "serializer": null,
@@ -734,7 +734,7 @@ CUI.rte.HtmlRules.DocType = new Class({
 
     construct: function(config) {
         config = config || { };
-        CQ.Util.applyDefaults(config, {
+        CUI.rte.Utils.applyDefaults(config, {
             "baseType": "html",
             "version": "4.0",
             "typeConfig": {
@@ -889,7 +889,7 @@ CUI.rte.HtmlRules.BlockHandling = new Class({
 
     construct: function(config) {
         config = config || { };
-        CQ.Util.applyDefaults(config, {
+        CUI.rte.Utils.applyDefaults(config, {
             "defaultEditBlockType": "p",
             "removeSingleParagraphContainer": false,
             "singleParagraphContainerReplacement": "div"

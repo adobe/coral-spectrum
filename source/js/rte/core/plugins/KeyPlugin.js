@@ -462,7 +462,7 @@ CUI.rte.plugins.KeyPlugin = new Class({
 
     notifyPluginConfig: function(pluginConfig) {
         pluginConfig = pluginConfig || { };
-        CQ.Util.applyDefaults(pluginConfig, {
+        CUI.rte.Utils.applyDefaults(pluginConfig, {
             "tabSize": 4
         });
         this.config = pluginConfig;

@@ -32,7 +32,7 @@ CUI.rte.ui.cui.CuiContextMenuBuilder = new Class({
 
     build: function(selectionContext, context) {
         var tk = CUI.rte.ui.ToolkitRegistry.get("cui");
-        this.posContainer = $CQ(document.createElement("div"));
+        this.posContainer = $(document.createElement("div"));
         this.posContainer.css("position", "absolute");
         this.posContainer.css("z-index", "15000");
         this.menu = this.menu = tk.createMenu({
@@ -61,7 +61,7 @@ CUI.rte.ui.cui.CuiContextMenuBuilder = new Class({
     },
 
     showAt: function(x, y) {
-        var parent = $CQ(document.body);
+        var parent = $(document.body);
         this.posContainer.offset({
             "left": x,
             "top": y

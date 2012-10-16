@@ -45,7 +45,7 @@ CUI.rte.ui.cui.ElementImpl = new Class({
     },
 
     createToolbarDef: function() {
-        this.dom = $CQ(document.createElement("button"));
+        this.dom = $(document.createElement("button"));
         this.dom.addClass("CUI_Selector_button");
         this.dom.attr("tabindex", "-1");
         this.dom.attr("type", "button");
@@ -59,7 +59,7 @@ CUI.rte.ui.cui.ElementImpl = new Class({
             };
             self.plugin.execute(cmd, cmdValue, env);
         });
-        var img = $CQ(document.createElement("img"));
+        var img = $(document.createElement("img"));
         var src = CQ.shared.HTTP.externalize(CUI.rte.Utils.BLANK_IMAGE_URL);
         img.attr("src", src);
         img.attr("style", "width: 16px; height: 16px;");

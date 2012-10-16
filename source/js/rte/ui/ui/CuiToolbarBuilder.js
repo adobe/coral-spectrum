@@ -78,7 +78,7 @@ CUI.rte.ui.cui.CuiToolbarBuilder = new Class({
             }
         }
         // TODO add toolbar to DOM in a more specific way ...
-        $CQ("#CQ .x-html-editor-tb").append(toolbarDiv);
+        $("#CQ .x-html-editor-tb").append(toolbarDiv);
         // $CQ(document.body).append(toolbarDiv);
         return new CUI.rte.ui.cui.ToolbarImpl(toolbarDiv, elementMap);
     },

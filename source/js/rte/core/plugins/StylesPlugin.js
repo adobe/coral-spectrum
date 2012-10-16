@@ -103,7 +103,7 @@ CUI.rte.plugins.StylesPlugin = new Class({
 
     notifyPluginConfig: function(pluginConfig) {
         pluginConfig = pluginConfig || { };
-        CQ.Util.applyDefaults(pluginConfig, {
+        CUI.rte.Utils.applyDefaults(pluginConfig, {
             "styles": {
                 // empty default value
             }

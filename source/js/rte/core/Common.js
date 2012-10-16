@@ -2308,30 +2308,6 @@ CUI.rte.Common = function() {
         },
 
         /**
-         * <p>Merges two objects recursively.</p>
-         * <p>Note that this method does not work with top-level Arrays.</p>
-         * @param {Object} obj The base object
-         * @param {Object} objToAppend The object that is merged into obj
-         */
-        objectMerge: function(obj, objToAppend) {
-            for (var key in objToAppend) {
-                if (objToAppend.hasOwnProperty(key)) {
-                    var value = objToAppend[key];
-                    if (typeof(value) == "object") {
-                        var copyObj = CQ.Util.copyObject(value);
-                        if (obj[key]) {
-                            CQ.Util.applyDefaults(obj[key], copyObj);
-                        } else {
-                            obj[key] = copyObj;
-                        }
-                    } else {
-                        obj[key] = value;
-                    }
-                }
-            }
-        },
-
-        /**
          * Check if the given string starts with the given partial string.
          * @param {String} str String to check
          * @param {String} partialStr partial String

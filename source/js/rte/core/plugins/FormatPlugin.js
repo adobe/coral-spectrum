@@ -52,7 +52,7 @@ CUI.rte.plugins.FormatPlugin = new Class({
 
     notifyPluginConfig: function(pluginConfig) {
         pluginConfig = pluginConfig || { };
-        CQ.Util.applyDefaults(pluginConfig, {
+        CUI.rte.Utils.applyDefaults(pluginConfig, {
             "features": "*",
             "tooltips": {
                 "bold": {

@@ -18,6 +18,14 @@
 
 CUI.rte.Utils = function() {
 
+    var hooks = null;
+    var getHooks = function() {
+        if (!hooks) {
+            hooks = new CUI.rte.Hooks();
+        }
+        return hooks;
+    };
+
     var commons = {
 
         scope: function(fn, scope) {
@@ -79,6 +87,14 @@ CUI.rte.Utils = function() {
                 }
             }
             return str;
+        },
+
+        copyObject: function(obj) {
+            return getHooks().copyObject(obj);
+        },
+
+        applyDefaults: function(obj, defaults) {
+            return getHooks().applyDefaults(obj, defaults);
         }
 
     };
