@@ -44,7 +44,7 @@ CUI.rte.commands.Anchor = new Class({
             // create new anchor
             var tagName;
             var attributes =  {
-                "class": CQ.themes.RichText.ANCHOR_CLASS
+                "class": CUI.rte.Theme.ANCHOR_CLASS
             };
             // Webkit can't edit "a" elements directly, hence substitute to "img" element
             if (com.ua.isWebKit) {
@@ -75,7 +75,7 @@ CUI.rte.commands.Anchor = new Class({
         } else {
             com.setAttribute(dom, "name", name);
         }
-        com.setAttribute(dom, "class", CQ.themes.RichText.ANCHOR_CLASS);
+        com.setAttribute(dom, "class", CUI.rte.Theme.ANCHOR_CLASS);
     },
 
     removeAnchorFromDom: function(execDef) {

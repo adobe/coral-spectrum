@@ -77,13 +77,13 @@ CUI.rte.commands.Table = new Class({
         if (config.border) {
             dom.border = config.border;
             if (config.border == 0) {
-                com.addClass(dom, CQ.themes.RichText.TABLE_NOBORDER_CLASS);
+                com.addClass(dom, CUI.rte.Theme.TABLE_NOBORDER_CLASS);
             } else {
-                com.removeClass(dom, CQ.themes.RichText.TABLE_NOBORDER_CLASS);
+                com.removeClass(dom, CUI.rte.Theme.TABLE_NOBORDER_CLASS);
             }
         } else {
             com.removeAttribute(dom, "border");
-            com.addClass(dom, CQ.themes.RichText.TABLE_NOBORDER_CLASS);
+            com.addClass(dom, CUI.rte.Theme.TABLE_NOBORDER_CLASS);
         }
         if (config.width) {
             com.setAttribute(dom, "width", config.width);
@@ -97,7 +97,7 @@ CUI.rte.commands.Table = new Class({
         }
         var classNames = com.parseCSS(dom);
         for (var i = 0; i < classNames.length; i++) {
-            if (classNames[i] != CQ.themes.RichText.TABLE_NOBORDER_CLASS) {
+            if (classNames[i] != CUI.rte.Theme.TABLE_NOBORDER_CLASS) {
                 com.removeClass(dom, classNames[i]);
             }
         }
@@ -169,7 +169,7 @@ CUI.rte.commands.Table = new Class({
             var tables = CUI.rte.Query.select("table", spanHelperDom);
             for (var t = 0; t < tables.length; t++) {
                 if (tables[t].border == 0) {
-                    com.addClass(tables[t], CQ.themes.RichText.TABLE_NOBORDER_CLASS);
+                    com.addClass(tables[t], CUI.rte.Theme.TABLE_NOBORDER_CLASS);
                 }
             }
             dpr.removeWithoutChildren(spanHelperDom);

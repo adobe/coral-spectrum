@@ -452,21 +452,21 @@ CUI.rte.DomCleanup = new Class({
                         com.insertBefore(parentDom, children[0], insertRef);
                     }
                     if (!com.ua.isWebKit) {
-                        com.addClass(dom, CQ.themes.RichText.ANCHOR_CLASS);
+                        com.addClass(dom, CUI.rte.Theme.ANCHOR_CLASS);
                     } else {
                         var imgReplacement = this.context.createElement("img");
                         com.setAttribute(imgReplacement, "src",
                                 CUI.rte.Utils.BLANK_IMAGE_URL);
                         com.setAttribute(imgReplacement, com.A_NAME_REPLACEMENT_ATTRIB,
                                 nameAttrib);
-                        com.addClass(imgReplacement, CQ.themes.RichText.ANCHOR_CLASS);
+                        com.addClass(imgReplacement, CUI.rte.Theme.ANCHOR_CLASS);
                         this.elementsToChange.push({
                             "domToChange": dom,
                             "changedDom": imgReplacement
                         });
                     }
                 } else if (this.processingMode == dcu.POST) {
-                    com.removeClass(dom, CQ.themes.RichText.ANCHOR_CLASS);
+                    com.removeClass(dom, CUI.rte.Theme.ANCHOR_CLASS);
                 }
             }
             if (hrefAttrib) {
@@ -506,8 +506,8 @@ CUI.rte.DomCleanup = new Class({
         if ((this.processingMode == dcu.PRE) && com.isTag(dom, "img")) {
             srcAttrib = com.getAttribute(dom, CUI.rte.Common.SRC_ATTRIB);
             srcAttrib = (srcAttrib ? srcAttrib : com.getAttribute(dom, "src", true));
-            com.setAttribute(dom, "src", CQ.shared.HTTP.getXhrHookedURL(
-                    CQ.HTTP.externalize(srcAttrib)));
+            com.setAttribute(dom, "src", CUI.rte.Utils.processUrl(srcAttrib,
+                    CUI.rte.Utils.URL_IMAGE));
         }
         if (this.processingMode == dcu.PASTE_PREPARE) {
             if (com.isTag(dom, "img")) {
@@ -545,14 +545,14 @@ CUI.rte.DomCleanup = new Class({
             }
             if (!hasBorder) {
                 if (this.isPreProcessing()) {
-                    com.addClass(dom, CQ.themes.RichText.TABLE_NOBORDER_CLASS);
+                    com.addClass(dom, CUI.rte.Theme.TABLE_NOBORDER_CLASS);
                 } else if (this.processingMode == dcu.POST) {
-                    com.removeClass(dom, CQ.themes.RichText.TABLE_NOBORDER_CLASS);
+                    com.removeClass(dom, CUI.rte.Theme.TABLE_NOBORDER_CLASS);
                 }
             }
         } else if (com.isTag(dom, [ "td", "th"] )) {
             if (this.processingMode == dcu.POST) {
-                com.removeClass(dom, CQ.themes.RichText.TABLESELECTION_CLASS);
+                com.removeClass(dom, CUI.rte.Theme.TABLESELECTION_CLASS);
             }
         }
     },

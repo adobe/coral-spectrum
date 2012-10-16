@@ -33,6 +33,7 @@ module.exports = function(grunt) {
       'rte/core/adapter/Query.js',
       'rte/core/adapter/JQueryEvent.js',
       'rte/core/adapter/ExtEvent.js',
+      'rte/core/adapter/Constants.js',
 
       'rte/core/EditContext.js',
       'rte/core/EditorKernel.js',
@@ -116,6 +117,7 @@ module.exports = function(grunt) {
       'rte/core/ui/DialogHelper.js'
     ],
     "rte-cui": [
+      'rte/ui/Theme.js',
       'rte/ui/ui/ToolkitImpl.js',
       'rte/ui/ui/ToolbarImpl.js',
       'rte/ui/ui/ElementImpl.js',
@@ -124,7 +126,9 @@ module.exports = function(grunt) {
       'rte/ui/ui/CuiToolbarBuilder.js',
       'rte/ui/ui/CmItemImpl.js',
       'rte/ui/ui/CmSeparatorImpl.js',
-      'rte/ui/ui/CuiContextMenuBuilder.js'
+      'rte/ui/ui/CuiContextMenuBuilder.js',
+
+      'rte/CUI.RichText.js'
     ],
     "rte-trailer": [
       'rte/init.js'
@@ -487,10 +491,10 @@ module.exports = function(grunt) {
   });
 
   // Partial build for development
-  grunt.registerTask('partial', 'lint copy handlebars concat:cui concat:rte-core concat:cui-with-rte min:cui min:rte-core min:cui-with-rte less mincss mocha');
+  grunt.registerTask('partial', 'lint copy handlebars concat:cui concat:rte-core concat:cui-with-rte min less mincss mocha');
 
   // Full build with docs and compressed file
-  grunt.registerTask('full-build', 'lint copy handlebars concat:cui min less mincss mocha jsdoc');
+  grunt.registerTask('full-build', 'lint copy handlebars concat:cui concat:rte-core concat:cui-with-rte min less mincss mocha jsdoc');
 
   // Full build with docs and compressed file
   grunt.registerTask('full', 'clean full-build');

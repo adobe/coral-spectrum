@@ -29,14 +29,14 @@ CUI.rte.adapter.JQueryEvent = new Class({
 
     /**
      * The native jQuery event
-     * @type CQ.Ext.EventObject
+     * @type jQuery.Event
      * @private
      */
     native: null,
 
     /**
      * Creates a new editor event from the specified jQuery event.
-     * @param {CQ.Ext.EventObject} jqEvent The underlying, native jQuery event
+     * @param {jQuery.Event} jqEvent The underlying, native jQuery event
      * @param {CUI.rte.EditContext} editContext The editor context for the event
      */
     construct: function(jqEvent, editContext) {

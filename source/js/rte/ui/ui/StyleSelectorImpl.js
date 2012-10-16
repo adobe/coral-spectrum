@@ -53,6 +53,7 @@ CUI.rte.ui.cui.StyleSelectorImpl = new Class({
         var com = CUI.rte.Common;
         // TODO remove Ext dependency once we can ...
         this.toolbar = toolbar;
+        /*
         if (com.ua.isIE) {
             // the regular way doesn't work for IE anymore with Ext 3.1.1, hence working
             // around
@@ -67,6 +68,11 @@ CUI.rte.ui.cui.StyleSelectorImpl = new Class({
                 html: this.createStyleOptions()
             }));
         }
+        */
+        // TODO rmeove dummy implementation
+        this.styleSelector = {
+            dom: { }
+        };
         this.initializeSelector();
         toolbar.add(
             CUI.rte.Utils.i18n("Style"),
@@ -87,7 +93,9 @@ CUI.rte.ui.cui.StyleSelectorImpl = new Class({
                     "afterrender": function() {
                         var item = this.toolbar.items.get(this.id);
                         if (item && item.body) {
-                            this.styleSelector = CQ.Ext.get(item.body.dom.childNodes[0]);
+                            // this.styleSelector = CQ.Ext.get(item.body.dom.childNodes[0]);
+                            // TODO remove dummy implementation
+                            this.styleSelector = { };
                             this.initializeSelector();
                         }
                     },

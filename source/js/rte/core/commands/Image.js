@@ -31,7 +31,7 @@ CUI.rte.commands.Image = new Class({
         var value = execDef.value;
         var url = null;
         if (value.path) {
-            url = CQ.shared.HTTP.getXhrHookedURL(CQ.HTTP.externalize(value.path));
+            url = CUI.rte.Utils.processUrl(value.path, CUI.rte.Utils.URL_IMAGE);
         }
         var alt = (value.alt ? value.alt : "");
         var width = (value.width ? value.width : null);

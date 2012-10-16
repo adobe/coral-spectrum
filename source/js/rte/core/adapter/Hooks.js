@@ -62,6 +62,14 @@
                 }
             }
             return obj;
+        },
+
+        getMainWindow: function() {
+            return window;
+        },
+
+        processUrl: function(url, type) {
+            return url;
         }
 
     });

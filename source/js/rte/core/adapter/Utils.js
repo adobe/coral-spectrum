@@ -89,13 +89,25 @@ CUI.rte.Utils = function() {
             return str;
         },
 
+        // "hooked" calls
+
         copyObject: function(obj) {
             return getHooks().copyObject(obj);
         },
 
         applyDefaults: function(obj, defaults) {
             return getHooks().applyDefaults(obj, defaults);
-        }
+        },
+
+        getMainWindow: function() {
+            return getHooks().getMainWindow();
+        },
+
+        processUrl: function(url, type) {
+            return getHooks().processUrl(url, type);
+        },
+
+        URL_IMAGE: "image"
 
     };
 

@@ -27,13 +27,6 @@
  *   <li><b>styles</b> - adds a style selector (styles will be applied on selection scope)
  *     </li>
  * </ul>
- * <p><b>Additional config requirements</b></p>
- * <p>The following plugin-specific settings must be configured through the corresponding
- * {@link CUI.rte.EditorKernel} instance:</p>
- * <ul>
- *   <li>The stylesheets to be used must be provided through
- *     {@link CQ.form.RichText#externalStyleSheets}.</li>
- * </ul>
  */
 CUI.rte.plugins.StylesPlugin = new Class({
 

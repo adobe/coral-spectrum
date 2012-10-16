@@ -144,7 +144,7 @@ CUI.rte.IFrameKernel = new Class({
         if (!com.ua.isOldIE) {
             scrollPos = [ editContext.root.scrollLeft, editContext.root.scrollTop ];
         } else {
-            var contentWindow = CQ.WCM.getContentWindow() || CQ.WCM.getTopWindow();
+            var contentWindow = CUI.rte.Utils.getMainWindow();
             var doc = contentWindow.document;
             var body = doc.body;
             scrollPos = [ doc.documentElement.scrollLeft || body.scrollLeft,

@@ -27,16 +27,6 @@
  *   <li><b>unlink</b> - adds a button to remove existing links</li>
  *   <li><b>anchor</b> - adds a button to define anchors</li>
  * </ul>
- * <p><b>Additional config requirements (CQ 5.2)</b></p>
- * <p>Plugin configuration has not been moved to the respective plugin completely yet.
- * Therefore, the following plugin-specific settings must currently (CQ 5.2) be configured
- * through the corresponding {@link CQ.form.RichText} widget:</p>
- * <ul>
- *   <li>The dialog that is used to create and modify links must be configured using
- *     {@link CQ.form.RichText#linkbrowseConfig}.</li>
- *   <li>The dialog that is used to define an anchor must be provided through
- *     {@link CQ.form.RichText#anchordialogConfig}.</li>
- * </ul>
  */
 CUI.rte.plugins.LinkPlugin = new Class({
 
@@ -59,7 +49,7 @@ CUI.rte.plugins.LinkPlugin = new Class({
     /**
      * @cfg {Object} anchorDialogConfig
      * Configuration of the anchor dialog (defaults to { }). You may specify the same
-     * config options as for {@link CQ.Dialog}. Note that the default value
+     * config options as for a dialog in the toolkit used. Note that the default value
      * of null implies using a default dialog.
      * @since 5.3
      */

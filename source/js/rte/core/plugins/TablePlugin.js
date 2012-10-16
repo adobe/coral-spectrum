@@ -428,7 +428,7 @@ CUI.rte.plugins.TablePlugin = new Class({
         var cellCnt = selectionDef.length;
         for (var c = 0; c < cellCnt; c++) {
             var cell = selectionDef[c];
-            com.addClass(cell, CQ.themes.RichText.TABLESELECTION_CLASS);
+            com.addClass(cell, CUI.rte.Theme.TABLESELECTION_CLASS);
         }
         this.tableSelection = selectionDef;
     },
@@ -441,7 +441,7 @@ CUI.rte.plugins.TablePlugin = new Class({
         if (!this.tableSelection) {
             this.tableSelection = [ ];
         }
-        com.addClass(cellToAdd, CQ.themes.RichText.TABLESELECTION_CLASS);
+        com.addClass(cellToAdd, CUI.rte.Theme.TABLESELECTION_CLASS);
         this.tableSelection.push(cellToAdd);
     },
 
@@ -453,7 +453,7 @@ CUI.rte.plugins.TablePlugin = new Class({
         var cellCnt = this.tableSelection.length;
         for (var c = 0; c < cellCnt; c++) {
             var cell = this.tableSelection[c];
-            com.removeClass(cell, CQ.themes.RichText.TABLESELECTION_CLASS);
+            com.removeClass(cell, CUI.rte.Theme.TABLESELECTION_CLASS);
         }
         this.tableSelection = null;
     },

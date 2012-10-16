@@ -27,12 +27,11 @@ CUI.rte.ui.cui.CuiToolbarBuilder = new Class({
 
     /**
      * Create the toolbar as a suitable Ext component.
-     * @return {Array} Array with physically available toolbar component; elements of type
-     *         {@link CQ.WrappingToolbar}
+     * @return {CUI.rte.ui.Toolbar} The toolbar
      */
     createToolbar: function(options) {
         var elementMap = { };
-        var toolbarDiv = $CQ(document.createElement("div"));
+        var toolbarDiv = $(document.createElement("div"));
         toolbarDiv.addClass("CUI_FormField");
         toolbarDiv.addClass("CUI_Selector");
         var elementsToNotify = [ ];

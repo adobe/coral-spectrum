@@ -67,10 +67,10 @@ CUI.rte.plugins.MiscToolsPlugin = new Class({
      * <p>Defaults to:</p>
 <pre>
 {
-    "tableCls": "cq-rte-scd-table",
-    "cellCls": "cq-rte-scd-cell",
-    "overCls": "cq-rte-scd-cell-over",
-    "magnifyCls": "cq-rte-scd-magnify",
+    "tableCls": "cui-rte-scd-table",
+    "cellCls": "cui-rte-scd-cell",
+    "overCls": "cui-rte-scd-cell-over",
+    "magnifyCls": "cui-rte-scd-magnify",
     "chars": {
         "copyright": {
             "entity": "&copy;"
@@ -144,7 +144,8 @@ CUI.rte.plugins.MiscToolsPlugin = new Class({
             CUI.rte.Utils.applyDefaults(dialogConfig, defaultConfig);
             this.specialCharsDialog = dm.create(CUI.rte.ui.DialogManager.DLG_SPECCHARS,
                     dialogConfig);
-            // would throw a SecurityError if set in dialogConfig/CQ.WCM.getDialog()
+            // would throw a SecurityError if set in dialogConfig or while creating the
+            // dialog
             this.specialCharsDialog.editContext = context;
         }
         if (com.ua.isIE) {
@@ -166,10 +167,10 @@ CUI.rte.plugins.MiscToolsPlugin = new Class({
         pluginConfig = pluginConfig || { };
         var defaults = {
             "specialCharsConfig": {
-                "tableCls": "cq-rte-scd-table",
-                "cellCls": "cq-rte-scd-cell",
-                "overCls": "cq-rte-scd-cell-over",
-                "magnifyCls": "cq-rte-scd-magnify",
+                "tableCls": "cui-rte-scd-table",
+                "cellCls": "cui-rte-scd-cell",
+                "overCls": "cui-rte-scd-cell-over",
+                "magnifyCls": "cui-rte-scd-magnify",
                 "chars": {
                     "copyright": {
                         "entity": "&copy;"

@@ -28,14 +28,6 @@
  *   <li><b>indent</b> - adds a button to indent list items or blocks</li>
  *   <li><b>outdent</b> - adds a button to outdent list items or blocks</li>
  * </ul>
- * <p><b>Additional config requirements (CQ 5.2)</b></p>
- * <p>Plugin configuration has not been moved to the respective plugin completely yet.
- * Therefore, the following plugin-specific settings must currently (CQ 5.2) be configured
- * through the corresponding {@link CQ.form.RichText} widget:</p>
- * <ul>
- *   <li>The indentation offset that is used outside lists must be configured through
- *     {@link CQ.form.RichText#indentSize}.</li>
- * </ul>
  */
 CUI.rte.plugins.ListPlugin = new Class({
 

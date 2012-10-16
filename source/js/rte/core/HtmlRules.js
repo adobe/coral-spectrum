@@ -87,7 +87,7 @@ CUI.rte.HtmlRules = new Class({
         delete config.docType;
         delete config.blockHandling;
         /*
-        CQ.Util.applyDefaults(config, {
+        CUI.rte.Utils.applyDefaults(config, {
             "defaultEditBlockType": "p"
         });
         */
@@ -386,7 +386,7 @@ CUI.rte.HtmlRules.Links = new Class({
                 var slashPos = href.lastIndexOf("/");
                 var hasClosingSlash = (slashPos == (href.length - 1));
                 if (((extSepPos <= 0) || (extSepPos < slashPos)) && !hasClosingSlash) {
-                    obj.href = href + CQ.HTTP.EXTENSION_HTML + query + anchor;
+                    obj.href = href + CUI.rte.Constants.EXTENSION_HTML + query + anchor;
                 }
             }
         } else if ((this.getProtocol(href) == null) && !this.hasProtocol(href)) {

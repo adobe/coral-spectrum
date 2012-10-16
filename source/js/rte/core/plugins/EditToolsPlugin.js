@@ -26,7 +26,7 @@
  *   <li><b>cut</b> - adds the "cut" button</li>
  *   <li><b>copy</b> - adds the "copy" button</li>
  *   <li><b>paste-default</b> - adds a button that allows pasting using the default paste
- *     behaviour (see {@link CQ.form.RichText#defaultPasteMode})</li>
+ *     behaviour (see {@link #defaultPasteMode})</li>
  *   <li><b>paste-plaintext</b> - adds a button that allows pasting the clipboard content
  *     as plain text</li>
  *   <li><b>paste-wordhtml</b> - adds a button that allows pasting HTML-based content. Note
@@ -537,7 +537,7 @@ CUI.rte.plugins.EditToolsPlugin = new Class({
 
     notifyPluginConfig: function(pluginConfig) {
         pluginConfig = pluginConfig || { };
-        // workaround for a CQ.Util#applyDefaults problem (as it seems)
+        // workaround for a CUI.rte.Utils#applyDefaults problem (as it seems)
         var removeLinkRemoveRegEx = false;
         if (pluginConfig.htmlPasteRules) {
             removeLinkRemoveRegEx = (pluginConfig.htmlPasteRules.linkRemoveRegEx === "");

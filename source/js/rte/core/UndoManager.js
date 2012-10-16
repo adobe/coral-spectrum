@@ -241,7 +241,7 @@ CUI.rte.UndoManager.Step = new Class({
     cleanup: function(dom) {
         var com = CUI.rte.Common;
         if (dom.nodeType == 1) {
-            com.removeClass(dom, CQ.themes.RichText.TABLESELECTION_CLASS);
+            com.removeClass(dom, CUI.rte.Theme.TABLESELECTION_CLASS);
             var childCnt = dom.childNodes.length;
             for (var c = 0; c < childCnt; c++) {
                 this.cleanup(dom.childNodes[c]);

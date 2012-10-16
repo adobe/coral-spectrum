@@ -109,8 +109,8 @@ CUI.rte.ui.DialogHelper = new Class({
      * customized dialog.</p>
      * <p>The config object is a typical Ext component definition. If a jcr:primaryType
      * property is included, the customized dialog will be instantiated using the
-     * {@link CQ.WCM#getDialog} method. Otherwise it is instantiated directly using Ext's
-     * standard component builder.</p>
+     * respective toolkit's default method for instantiating dialogs indirectly. Otherwise
+     * it is instantiated directly using the toolkit's standard component builder.</p>
      * <p>Note that all other config options are ignored if a custom dialog is used.</p>
      */
     customDialog: null,
