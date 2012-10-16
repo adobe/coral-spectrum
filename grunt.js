@@ -159,6 +159,9 @@ module.exports = function(grunt) {
           ],
           '<%= dirs.build %>/test/libs/chai/': [
             '<%= dirs.modules %>/chai/chai.js'
+          ],
+          '<%= dirs.build %>/test/libs/chai-jquery/': [
+            '<%= dirs.modules %>/chai-jquery/chai-jquery.js'
           ]
         }
       }
