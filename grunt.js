@@ -142,7 +142,9 @@ module.exports = function(grunt) {
         files: {
           '<%= dirs.build %>/js/libs/jquery.js': '<%= dirs.components %>/jquery/index.js',
           '<%= dirs.build %>/js/libs/underscore.js': '<%= dirs.components %>/underscore/index.js',
-          '<%= dirs.build %>/js/libs/handlebars.js': '<%= dirs.components %>/handlebars/index.js'
+          '<%= dirs.build %>/js/libs/handlebars.js': '<%= dirs.components %>/handlebars/index.js',
+          '<%= dirs.build %>/js/libs/toe.js': '<%= dirs.components %>/toejs/index.js',
+          '<%= dirs.build %>/js/libs/fingerpointer.js': '<%= dirs.components %>/fingerpointer/index.js'
         }
       },
       prettyify: {
@@ -161,6 +163,9 @@ module.exports = function(grunt) {
           ],
           '<%= dirs.build %>/test/libs/chai/': [
             '<%= dirs.modules %>/chai/chai.js'
+          ],
+          '<%= dirs.build %>/test/libs/chai-jquery/': [
+            '<%= dirs.modules %>/chai-jquery/chai-jquery.js'
           ]
         }
       }
