@@ -1,6 +1,9 @@
 describe('Class', function() {
-  it('should be defined in global namespace', function() {
-    expect(window).to.have.property('Class');
+  describe('definition', function() {
+    // 'definition' block is a temporary workaround for kmiyashiro/grunt-mocha/issues/22
+    it('should be defined in global namespace', function() {
+      expect(window).to.have.property('Class');
+    });
   });
   
   describe('Base methods', function() {
