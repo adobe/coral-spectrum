@@ -275,23 +275,25 @@ tabs.hide();
   // this is to avoid instantiating new classes for every tab instance
   var _activateTab = function($tab, noFocus) {
     var $target = CUI.util.getDataTarget($tab);
+
+    // oops!
+    if (!$tab || !$target) return;
     
-    // Don't select already selected or disabled tabs
+    // ignore already selected tabs
     if ($tab.hasClass('active')) {
       return false;
     }
     
-    // Don't select disabled tabs
-    if ($tab.hasClass('disabled'))
+    // don't select and blur disabled tabs
+    if ($tab.hasClass('disabled')) {
+      $tab.blur(); // ensure disabled tabs do not receive focus
       return false;
+    }
 
     // allow for non-id'd section switching
     if ($target.selector === '#') {
       $target = $tab.parents('.tabs').first().find('section:eq('+$tab.index()+')');
     }
-
-    // oops!
-    if (!$tab || !$target) return;
 
     // test for remote load
     var href = $tab.attr('href');
@@ -310,10 +312,8 @@ tabs.hide();
     $tab.siblings('a[data-toggle="tab"]')
       // Set as inactive
       .removeClass('active')
-      .attr('aria-selected', false);
-
-    $tab.siblings('a[data-toggle="tab"]:not(".disabled")')
-      .attr('tabIndex', -1); // remove from tab order if not disabled
+      .attr('aria-selected', false)
+      .attr('tabIndex', -1); // remove siblings from tab order
     
     // Active tab panel
     $target
@@ -354,7 +354,7 @@ tabs.hide();
       });
 
       // Data API
-      $('body').on('click.tabs.data-api focus.tabs.data-api', '.tabs > nav > a[data-toggle="tab"]:not(".disabled")', function (e) {
+      $('body').on('click.tabs.data-api focus.tabs.data-api', '.tabs > nav > a[data-toggle="tab"]', function (e) {
         var $tab = $(this);
 
         // and show/hide the relevant tabs
