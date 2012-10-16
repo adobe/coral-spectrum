@@ -38,9 +38,9 @@ describe('CUI.Modal', function() {
     });
     
     it('should have correct markup', function() {
-      expect(el.find('.modal-header')).to.have.length(1);
-      expect(el.find('.modal-body')).to.have.length(1);
-      expect(el.find('.modal-footer')).to.have.length(1);
+      expect(el.find('.modal-header')).with.length(1);
+      expect(el.find('.modal-body')).with.length(1);
+      expect(el.find('.modal-footer')).with.length(1);
     });
     
     it('should have correct heading', function() {
@@ -52,12 +52,12 @@ describe('CUI.Modal', function() {
     });
     
     it('should have buttons', function() {
-      expect(el.find('.modal-footer button')).to.have.length(2);
+      expect(el.find('.modal-footer button')).with.length(2);
     });
     
     it('should have button with correct class names', function() {
-      expect(el.find('.modal-footer button.myCloseButton')).to.have.length(1);
-      expect(el.find('.modal-footer button.mySaveButton')).to.have.length(1);
+      expect(el.find('.modal-footer button.myCloseButton')).with.length(1);
+      expect(el.find('.modal-footer button.mySaveButton')).with.length(1);
     });
     
     it('should be visible by default', function() {
