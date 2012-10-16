@@ -11,9 +11,12 @@
       @desc Creates a dropdown list appended to any DOM element
       @constructs
       
-      @param {Object}   options                               Component options
-      @param {Array}   options.options                Array of options in the list
-      @param {Array}   options.optionRenderer                Callback function to render one option
+      @param {Object}          options                               Component options
+      @param {Array}           [options.options]                Array of options in the list
+      @param {Function}        [options.optionRenderer=null]                Callback function to render one option
+      @param {jQuery Object}   [options.positioningElement=null]     If this optional element is given, the dropdown list
+                                                                     will be placed beyond it instead of the standard element
+      @param {String}   [options.cssClass=null]     An optional CSS class string that will be added to the list.
       
     */
     construct: function(options) {
@@ -43,7 +46,10 @@
     },
     listElement: null,
     currentIndex: -1,
-        
+    
+    /**
+     * Show this list
+     */
     show: function() {
         // Hide old list (if any!)
         this._unrender();
@@ -52,6 +58,11 @@
         this._render();
     },
     
+    /**
+     * Hide this list with an optional delay in millis
+     * @param int delay Delay before hiding element in milliseconds
+     * @return void or timeout object if a delay was given
+     */
     hide: function(delay) {
         if (delay > 0) {
             return setTimeout(this._unrender.bind(this), delay);
@@ -61,10 +72,16 @@
         return null;
     },
     
+    /**
+     * @return boolean true, if this list is currently visible
+     */
     isVisible: function() {
         return (this.listElement !== null);
     },
     
+    /**
+     * Toggles this list from visible to hidden and vice versa.
+     */
     toggle: function() {
       if (this.listElement) {
           this.hide();
@@ -73,6 +90,9 @@
       }
     },
     
+    /**
+     * Updates the rendering of this widget.
+     */
     update: function() {
         if (this.listElement) {
             this._unrender();
@@ -80,6 +100,7 @@
         }
     },
     
+    /** @ignore */    
     _keyPressed: function(event) {        
         var key = event.keyCode;
         
@@ -122,12 +143,14 @@
         
         return;
     },
+    /** @ignore */    
     _unrender: function() {
         if (this.listElement) {
             this.listElement.remove();
             this.listElement = null;        
         }
     },
+    /** @ignore */    
     _render: function() {
         var options = this.options.options;
         if (options.length === 0) return;
@@ -165,6 +188,7 @@
 
     },
     
+    /** @ignore */    
     _triggerSelect: function(index) {
     // Trigger a change event
         this.$element.focus();

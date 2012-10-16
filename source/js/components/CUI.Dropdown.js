@@ -5,13 +5,16 @@
     
     /**
       @extends CUI.Widget
-      @classdesc A dropdown list widget
+      @classdesc A dropdown widget
       
       
       @desc Creates a dropdown from any select element
       @constructs
       
       @param {Object}   options                               Component options
+      @param {boolean} [options.multiple=false]      Is this a multiselect widget?
+      @param {String} [options.placeholder="Select"]      Placeholder string to display in empty widget
+      @param {boolean} [options.disabled=false]      Is this widget disabled?
       
     */
     construct: function(options) {
@@ -57,7 +60,8 @@
     
     dropdownList: null,
     syncSelectElement: null,
-    
+
+    /** @ignore */    
     _optionRenderer: function(index, option) {
         var el = $("<span>" + option + "</span>");
         if (this.options.multiple) {
@@ -70,6 +74,7 @@
         return el;
     },
     
+    /** @ignore */
     _render: function() {
         if (this.$element.get(0).tagName === "SELECT") {
 
@@ -92,6 +97,7 @@
         }
         this._update();
     },
+    /** @ignore */
     _update: function() {
         if (this.options.disabled) {
             this.$element.attr("disabled", "disabled");
