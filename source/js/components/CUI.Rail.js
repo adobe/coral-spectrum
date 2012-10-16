@@ -11,18 +11,18 @@
 
       <div id="myRail" class="rail">
         <div class="pull-to-refresh">
-              <div class="icon"></div>
-              <div class="message">
-                <i class="arrow"></i>
-                <i class="spinner large"></i>
-                <span class="pull">Pull to refresh</span>
-                <span class="release">Release to refresh</span>
-                <span class="loading">Loading</span>
-              </div>
-            </div>
-            <div class="wrap">
-              Place your content here.
-            </div>
+          <div class="icon"></div>
+          <div class="message">
+            <i class="arrow"></i>
+            <i class="spinner large"></i>
+            <span class="pull">Pull to refresh</span>
+            <span class="release">Release to refresh</span>
+            <span class="loading">Loading</span>
+          </div>
+        </div>
+        <div class="wrap">
+          Place your content here.
+        </div>
       </div>
       @example
 <caption>Instantiate with Class</caption>
@@ -87,10 +87,18 @@ $('#myRail').rail({
       @param {Function} options.refreshCallback             Callback to be called after a refresh is triggered
     */
     construct: function(options) {
-      var e = this.$element;
-      
-      // TODO: programmatically add the necessary divs when pull to refresh is enabled?
-      // TODO: render handlebars for rail template if no children
+      var e = this.$element,
+          opt = $.extend(true, {}, this.defaults, options),
+          html = '<div class="pull-to-refresh">' +
+                  '<div class="icon"></div>' +
+                  '<div class="message">' +
+                    '<i class="arrow"></i>' +
+                    '<i class="spinner large"></i>' +
+                    '<span class="pull">' + opt.message.pull + '</span>' +
+                    '<span class="release">' + opt.message.release + '</span>' +
+                    '<span class="loading">' + opt.message.loading + '</span>' +
+                  '</div>' +
+                '</div>';
 
       // Accessibility
       _makeAccessible(this.$element);
@@ -102,9 +110,10 @@ $('#myRail').rail({
           }, foldable = _.content.find('section.foldable');
           
       if (options.refreshCallback) { // the refreshable option will be activated of the refreshCallback is set
-        //if (!_.ptr) { // add markup if there is non
-
-        //}
+        if (!_.ptr.get(0)) { // add markup if there is non
+          _.rail.prepend(html);  
+          _.ptr = e.find('.pull-to-refresh');
+        }
 
         // enable foldable section
         foldable.each(function (i, e) {
@@ -143,6 +152,14 @@ $('#myRail').rail({
       }
     },
 
+    defaults: {
+      message: {
+        pull: 'Pull to refresh',
+        release: 'Release to refresh',
+        loading: 'Loading'
+      }
+    },
+
     _handleTouchstart: function (ev) {
       var _ = this._;
 
@@ -157,7 +174,7 @@ $('#myRail').rail({
 
     _handleTouchmove: function (ev) {
       var _ = this._,
-          delay = _.h / 2, // spacing where the arrow is not moved
+          delay = _.h / 3 * 2, // spacing where the arrow is not moved
           top = _.rail.scrollTop(), // current scrollTop
           deg = 180 - (top < -_.h ? 180 : // degrees to move for the arrow (starts at 180° and decreases)
                       (top < -delay ? Math.round(180 / (_.h - delay) * (-top - delay)) 
@@ -171,7 +188,7 @@ $('#myRail').rail({
       _.arrow.show();
       _.arrow.css('transform', 'rotate('+ deg + 'deg)');
 
-      // hide spinner while showing the error
+      // hide spinner while showing the arrow
       _.spinner.hide();
 
 

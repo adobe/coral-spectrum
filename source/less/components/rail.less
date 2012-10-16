@@ -165,7 +165,7 @@ div.rail {
         }
       }
 
-      // the is foldable
+      // the section is foldable
       &.foldable {
         >.heading:before {
           content: "\25B8";
@@ -187,6 +187,12 @@ div.rail {
             content: "\25BE";
           }
         }
+      }
+
+      // the section should be on the bottom of the rail
+      &.fixed {
+        position: fixed;
+        bottom: 0;
       }
     }
   }
