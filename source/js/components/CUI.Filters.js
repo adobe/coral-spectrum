@@ -1,6 +1,6 @@
 (function($) {
   CUI.Filters = new Class(/** @lends CUI.Filters# */{
-    toString: 'Filters',
+    toString: 'Filters', // Plural here as jQuery already has a method "filter"
     extend: CUI.Widget,
     
     /**
@@ -19,7 +19,7 @@ var filters = new CUI.Filters({
   options: ["Apples", "Pears", "Oranges"]
 });
 
-// Set the selected option
+// Set the currently selected option
 filters.setSelectedIndex(1);
         
       @example
@@ -137,7 +137,7 @@ var index = filters.getSelectedIndex();
     },
     
 
-    dropdownList: null,
+    dropdownList: null, // Reference to instance of CUI.DropdownList
     syncSelectElement: null,
     inputElement: null,
     typeTimeout: null,
@@ -147,7 +147,8 @@ var index = filters.getSelectedIndex();
  
     /**
      * @param {int} index     Sets the currently selected option by its index or, if options.multiple ist set,
-     *                          adds it to the list of selected indices
+     *                          adds it to the list of selected indices. -1 is valid for single term use and removes any
+     *                          selected index.
      */
     setSelectedIndex: function(index) {
         if (index < -1 || index >= this.options.options.length) return;
@@ -159,6 +160,9 @@ var index = filters.getSelectedIndex();
         this._update();
     },
     
+    /**
+     *  Removes the given index from the list of selected indices. Only applies to multi term use.
+     **/
     removeSelectedIndex: function(index) {
         var i = this.selectedIndices.indexOf(index * 1);
         if (i < 0) return;
@@ -173,21 +177,30 @@ var index = filters.getSelectedIndex();
         return this.selectedIndex;
     },
     
+
+    /**
+     * @param {array} Replace the list of currently selected indices. Only applies to multi term use.
+     */
     setSelectedIndices: function(indices) {
         this.selectedIndices = indices.slice(0); // Make copy of parameter!
         this._update();
     },
     
+    /**
+     * @return {array} The currently selected options by index or an empty array if none is selected
+     */
     getSelectedIndices: function() {
         return this.selectedIndices.slice(0); // Make copy before returning!
     },
     
+    /** @ignore */
     _changeOptions: function() {
         this.selectedIndex = -1;
         this.selectedIndices = [];
         this._render();
     },
-    
+
+    /** @ignore */
     _render: function() {
         // if current element is select field -> turn into input field, but hold reference to select to update it on change
         if (this.$element.get(0).tagName === "SELECT") {
@@ -245,6 +258,7 @@ var index = filters.getSelectedIndex();
         this._update();
     },
     
+    /** @ignore */
     _update: function() {
         
         
@@ -290,6 +304,7 @@ var index = filters.getSelectedIndex();
 
     },
 
+    /** @ignore */
     _keyUp: function(event) {
         var key = event.keyCode;
         if (key === 8) {  
@@ -297,6 +312,7 @@ var index = filters.getSelectedIndex();
         }
     },
     
+    /** @ignore */
     _keyPressed: function(event) {        
         var key = event.keyCode;
         if (key === 8) { 
@@ -316,6 +332,7 @@ var index = filters.getSelectedIndex();
         }
     },
     
+    /** @ignore */
     _correctInputFieldWidth: function() {
         if (!this.options.stacking) return;
         
@@ -339,6 +356,7 @@ var index = filters.getSelectedIndex();
         i.width(w);
     },
     
+    /** @ignore */
     _inputChanged: function() {
         var searchFor = this.inputElement.attr("value");
         
@@ -346,6 +364,7 @@ var index = filters.getSelectedIndex();
         this._showAutocompleter(results, searchFor);
     },
     
+    /** @ignore */
     _showAutocompleter: function(results, searchFor) {
         
         this.dropdownList.hide();
@@ -383,6 +402,7 @@ var index = filters.getSelectedIndex();
         
     },
     
+    /** @ignore */
     _defaultAutocompleteCallback: function(searchFor) {
         var result = [];
         
@@ -398,9 +418,7 @@ var index = filters.getSelectedIndex();
   CUI.util.plugClass(CUI.Filters);
   
   // Data API
-  //$(function() {
-  //  $('body').on('click.alert.data-api', '[data-dismiss="alert"]', function(evt) {
-  //    $(evt.target).parent().hide();
-  //  });
-  //});
+  $(document).ready(function() {
+    $('[data-init=filters').filters();
+  });
 }(window.jQuery));
