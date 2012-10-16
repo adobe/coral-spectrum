@@ -54,13 +54,20 @@ var index = filters.getSelectedIndex();
 
         // Adjust DOM to our needs
         this._render();
- 
-        // Listen to proprty changes
+        
+        // Generate Dropdown List widget
+        this.dropdownList = new CUI.DropdownList({
+            element: this.inputElement,
+            positioningElement: (this.options.stacking) ? this.$element : this.inputElement,
+            cssClass: "autocomplete-results"
+        });
+        
+        // Listen to property changes
         this.$element.on('change:disabled', this._render.bind(this));
         this.$element.on('change:placeholder', this._render.bind(this));
-        this.$element.on('change:options', this._changeOptions.bind(this));
-
- 
+        //this.$element.on('change:options', this._changeOptions.bind(this));
+        // Bug by design: How can we distinguish events from different widgets on the same element?
+        
         // Listen to events
         this.$element.on("input", "input", function() {
             if (this.options.disabled) return;
@@ -85,12 +92,12 @@ var index = filters.getSelectedIndex();
         this.$element.on("keydown", "input", this._keyPressed.bind(this));
         this.$element.on("keyup", "input", this._keyUp.bind(this));
         
-        this.$element.on("click", "input", function() {
+        /*this.$element.on("click", "input", function() {
             if (this.options.disabled) return;
             this._inputChanged();
-        }.bind(this));
+        }.bind(this));*/
         
-        this.inputElement.on("dropdown-list:select", "", function(event) {
+        this.dropdownList.on("dropdown-list:select", "", function(event) {
             this.dropdownList.hide(200);
             this.setSelectedIndex(event.selectedValue * 1);
         }.bind(this));        
@@ -194,7 +201,8 @@ var index = filters.getSelectedIndex();
     },
     
     /** @ignore */
-    _changeOptions: function() {
+    _changeOptions: function(event) {
+        console.log(event);
         this.selectedIndex = -1;
         this.selectedIndices = [];
         this._render();
@@ -236,11 +244,6 @@ var index = filters.getSelectedIndex();
         this.$element.removeClass("focus");
         
         this.inputElement = this.$element.find("input");
-        this.dropdownList = new CUI.DropdownList({
-            element: this.inputElement,
-            positioningElement: (this.options.stacking) ? this.$element : this.inputElement,
-            cssClass: "autocomplete-results"
-        });
 
 
         if (this.options.stacking) this.$element.addClass("stacking"); else this.$element.removeClass("stacking");
@@ -393,8 +396,9 @@ var index = filters.getSelectedIndex();
         };
         
         // Due to a current bug (in CUI.Widget?) it seems to be impossible to use the "set"-method inherited from the widget class
-        //this.dropdownList.set("optionRenderer", this._optionRenderer.bind(this));
-        //this.dropdownList.set("options", results);
+        this.dropdownList.set("optionRenderer", optionRenderer.bind(this));
+        this.dropdownList.set("options", results);
+        console.log(new Error("dummy").stack, this.dropdownList.options, optionRenderer);
         this.dropdownList.options.optionRenderer = optionRenderer.bind(this);
         this.dropdownList.options.options = results;
         
@@ -419,6 +423,6 @@ var index = filters.getSelectedIndex();
   
   // Data API
   $(document).ready(function() {
-    $('[data-init=filters').filters();
+    $('[data-init=filters]').filters();
   });
 }(window.jQuery));
