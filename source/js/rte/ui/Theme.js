@@ -46,7 +46,7 @@ CUI.rte.Theme = function() {
         DEFAULT_REQCSS_PATH: "/libs/cq/ui/rte/themes/default/internal",
 
         /**
-         * CSS class to be used for styling an anchor (defauls to "cq-rte-anchor")
+         * CSS class to be used for styling an anchor (defauls to "cui-rte-anchor")
          * @static
          * @final
          * @type String
