@@ -237,12 +237,12 @@ tabs.hide();
 
     /** @ignore */
     _setActive: function() {
-      var $tab;
+      var $tab, active = this.options.active;
 
-      if (typeof this.options.active === 'number' && this.options.active < this.options.tabs.length && this.options.active >= 0) {
-        $tab = this.$element.find('nav > a[data-toggle="tab"]:eq('+this.options.active+')');
-      } else if (typeof this.options.active === 'string' && this.options.active.length > 0) {
-        $tab = this.$element.find('nav > a[data-toggle="tab"]').find('[data-target="#'+this.options.active+'"], [href="#'+this.options.active+'"]');
+      if (typeof active === 'number' && active < this.options.tabs.length && active >= 0) {
+        $tab = this.$element.find('nav > a[data-toggle="tab"]:eq('+active+')');
+      } else if (typeof active === 'string' && active.length > 0) {
+        $tab = this.$element.find('nav > a[data-toggle="tab"]').find('[data-target="#'+active+'"], [href="#'+active+'"]');
       }
 
       // Activate the tab, but don't focus
