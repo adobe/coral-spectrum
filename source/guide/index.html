@@ -3,6 +3,8 @@
 <head>
   <title>CoralUI Style Guide</title>
 
+  <meta charset="utf-8"/>
+
   <link rel="stylesheet" href="css/cui.css">
   <link rel="stylesheet" href="examples/assets/google-code-prettify/prettify.css">
   <link rel="stylesheet" href="examples/assets/guide.css">
@@ -10,6 +12,8 @@
   <!-- Dependencies -->
   <script src="js/libs/handlebars.js"></script>
   <script src="js/libs/jquery.js"></script>
+  <script src="js/libs/fingerpointer.js"></script>
+  <script src="js/libs/toe.js"></script>
 
   <!-- CoralUI -->
   <script src="js/CUI.js"></script>
@@ -41,15 +45,6 @@
   <div class="page" role="main">
 
     <div id="main-rail" class="rail left">
-      <div class="pull-to-refresh">
-        <div class="message">
-          <i class="arrow"></i>
-          <i class="spinner large"></i>
-          <span class="pull">Pull to refresh</span>
-          <span class="release">Release to refresh</span>
-          <span class="loading">Loading</span>
-        </div>
-      </div>
       <div class="wrap">
         <section class="links">
             <a class="heading" href="#General">General</a>
@@ -139,6 +134,10 @@
               <a href="#Spinner">Spinner</a>
               <a href="#ProgressBar">Progress Bar</a>
            </nav>
+        </section>
+
+        <section class="links foldable">
+            Foo
         </section>
 
         <section class="links hidden">
