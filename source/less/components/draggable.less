@@ -1,0 +1,72 @@
+/**
+ * Class: .draggable
+ * Used for draggable list component
+ */
+
+[draggable] 
+{
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.draggable
+{
+	font-size: 0.8125rem; // 13px
+}
+
+/* close button for list items */
+.close 
+{
+  float: right;
+  font-weight: bold;	
+  padding: 0.375em;
+  margin-top: 0.4em;
+}
+
+ul.draggable
+{
+	list-style: none;
+	width: 170px; //10.625em
+	padding: 0 0;
+	margin: 0 0;
+	border: 1px solid @draggable-list-border-color; //0.063em
+	background-color: @draggable-list-background-color;	
+}
+
+ul.draggable li
+{
+	background-color: @draggable-list-background-color;
+	height: 40px; //2.500em; // 40px;
+	line-height: 40px; //2.500em; // 40px
+    border-bottom: 1px solid @draggable-list-border-color;
+	border-top: solid .063em transparent;
+	border-right: solid .063em transparent;
+	border-left: solid 4px @draggable-list-border-handle-color; //4px 0.250em
+	padding: 0 0 0 0.875em; //14px
+	color: @draggable-list-text-normal-color;
+	margin-top: 0;
+}
+
+ul.draggable li:last-child
+{
+	border-bottom: 0px solid transparent;
+}
+
+ul.draggable li:hover
+{
+	cursor: url(../cursors/openhand.cur), default;
+	background-color: @draggable-list-background-hover-color;
+}
+
+ul.draggable li:active
+{
+	cursor: url(../cursors/closedhand.cur), default;
+} 
+
+ul.draggable li:disabled
+{
+	background-color: @draggable-list-background-disabled-color;
+	color: @draggable-list-text-disabled-color;
+}
