@@ -85,6 +85,7 @@ CUI.Widget = new Class(/** @lends CUI.Widget# */{
 
     // Trigger a change event
     var e = $.Event('beforeChange:'+option, {
+      widget: this, // We want to know who fired this event (used by CUI.Filters, CUI.DropdownList)
       option: option,
       currentValue: this.options[option],
       value: value
@@ -98,6 +99,7 @@ CUI.Widget = new Class(/** @lends CUI.Widget# */{
     this.options[option] = value;
 
     e = $.Event('change:'+option, {
+      widget: this,
       option: option,
       value: value
     });

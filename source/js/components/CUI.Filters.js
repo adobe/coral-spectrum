@@ -7,11 +7,26 @@
       @extends CUI.Widget
       @classdesc An autocompletable filters&tags widget
       
-      <div class="alert error">
-        <button class="close" data-dismiss="alert">&times;</button>
-        <strong>ERROR</strong><div>Uh oh, something went wrong with the whozit!</div>
-      </div>
+      <p>
+      <select data-init="filters" data-placeholder="Add filter" multiple data-stacking="true">
+            <option>red</option>
+            <option>green</option>
+            <option>blue</option>
+            <option>yellow</option>
+            <option>orange</option>
+      </select>
+      </p>
       
+    @example
+    <caption>Instantiate with Data API</caption>
+      &lt;select data-init="filters" data-placeholder="Add filter" multiple data-stacking="true"&gt;
+            &lt;option&gt;red&lt;/option&gt;
+            &lt;option&gt;green&lt;/option&gt;
+            &lt;option&gt;blue&lt;/option&gt;
+            &lt;option&gt;yellow&lt;/option&gt;
+            &lt;option&gt;orange&lt;/option&gt;
+      &lt;/select&gt;
+        
       @example
 <caption>Instantiate with Class</caption>
 var filters = new CUI.Filters({
@@ -65,8 +80,8 @@ var index = filters.getSelectedIndex();
         // Listen to property changes
         this.$element.on('change:disabled', this._render.bind(this));
         this.$element.on('change:placeholder', this._render.bind(this));
-        //this.$element.on('change:options', this._changeOptions.bind(this));
-        // Bug by design: How can we distinguish events from different widgets on the same element?
+        
+        this.$element.on('change:options', this._changeOptions.bind(this));
         
         // Listen to events
         this.$element.on("input", "input", function() {
@@ -202,7 +217,7 @@ var index = filters.getSelectedIndex();
     
     /** @ignore */
     _changeOptions: function(event) {
-        console.log(event);
+        if (event.widget !== this) return;
         this.selectedIndex = -1;
         this.selectedIndices = [];
         this._render();

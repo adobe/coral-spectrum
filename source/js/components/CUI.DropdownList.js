@@ -7,6 +7,11 @@
       @extends CUI.Widget
       @classdesc A dropdown list widget
       
+      <p>
+        Dropdown lists are meant to be used by other widgets like Filters and Dropdowns.
+        Dropdown lists are invisible by default and can only be made visible by explicitly calling the methods
+        "show" (resp. "hide") on the widget.
+      </p>
       
       @desc Creates a dropdown list appended to any DOM element
       @constructs
@@ -20,7 +25,11 @@
       
     */
     construct: function(options) {
-        this.$element.on('change:options change:optionRenderer', this.update.bind(this));
+        this.$element.on('change:options change:optionRenderer', function (event) {
+            if (event.widget !== this) return; // Only listen to own events
+            this.update();
+        }.bind(this));
+     
 
         // Listen to events 
         this.$element.on("keydown", "", this._keyPressed.bind(this));
@@ -42,7 +51,8 @@
         positioningElement: null,
         optionRenderer: null,
         options: ["Apples", "Pears", "Bananas", "Strawberries"],
-        cssClass: null
+        cssClass: null,
+        visible: false
     },
     listElement: null,
     currentIndex: -1,
@@ -76,18 +86,7 @@
      * @return boolean true, if this list is currently visible
      */
     isVisible: function() {
-        return (this.listElement !== null);
-    },
-    
-    /**
-     * Toggles this list from visible to hidden and vice versa.
-     */
-    toggle: function() {
-      if (this.listElement) {
-          this.hide();
-      } else {
-          this.show();
-      }
+        return this.options.visible;
     },
     
     /**
@@ -147,8 +146,9 @@
     _unrender: function() {
         if (this.listElement) {
             this.listElement.remove();
-            this.listElement = null;        
+            this.listElement = null;  
         }
+        this.options.visible = false;
     },
     /** @ignore */    
     _render: function() {
@@ -185,6 +185,8 @@
 
         this.listElement = list;
         el.after(list);
+        
+        this.options.visible = true;
 
     },
     

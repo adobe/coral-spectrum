@@ -592,7 +592,7 @@
         </section>
         
         <section id="Filters">
-              <h2 class="line">Filters</h2>
+              <h2 class="line">Filters (Work in progress - not for production use)</h2>
               <p>Filters &amp; Tags input variants. Filter input fields can be created by markup directly or by JavaScript, though
               the full funcationality can only be achieved by using the corresponding widget.</p>
               <p>You can use an input field or a select field as template for the widget.</p>
@@ -653,7 +653,7 @@
         &lt;option&gt;Banana&lt;/option&gt;
     &lt;/select&gt;
 
-    &lt;!-- &hellip; and don't forget to initialise your Widget! --&gt;
+    &lt;!-- &hellip; and don't forget to initialise your Widget (if you are not using data-init) --&gt;
     &lt;script type="text/javascript"&gt;
         $(document).ready(function() {
             $("select").filters(); // Or a similar selector corresponding to your DOM
@@ -668,7 +668,7 @@
         
         
         <section id="Dropdown">
-              <h2 class="line">Dropdowns (WIP)</h2>
+              <h2 class="line">Dropdowns (Work in progress - not for production use)</h2>
               <p>Different types of dropdowns.</p>
 
               <div class="componentSample">
@@ -677,9 +677,9 @@
                           <div class="sampleTitle left">Standard</div>
                           <div>
                               <select name="dropdown" data-init="dropdown" data-placeholder="Single Select">
-                                  <option>One</option>
-                                  <option>Two</option>
-                                  <option>Three</option>
+                                  <option>Single One</option>
+                                  <option>Single Two</option>
+                                  <option>Single Three</option>
                               </select>
                           </div>
                       </div>
@@ -687,6 +687,28 @@
                           <div class="sampleTitle left">Multiselect</div>
                           <div>
                               <select name="dropdown2" multiple data-init="dropdown" data-placeholder="Multi Select">
+                                  <option>Multi One</option>
+                                  <option>Multi Two</option>
+                                  <option>Multi Three</option>
+                              </select>
+
+                          </div>
+                      </div>
+                      <div class="filterSample">
+                          <div class="sampleTitle left">Editable</div>
+                          <div>
+                              <select name="dropdown3" data-editable="true" data-init="dropdown" data-placeholder="Editable Select">
+                                  <option>Edit One</option>
+                                  <option>Edit Two</option>
+                                  <option>Edit Three</option>
+                              </select>
+
+                          </div>
+                      </div>
+                      <div class="filterSample">
+                          <div class="sampleTitle left">Disabled</div>
+                          <div>
+                              <select name="dropdown4" data-init="dropdown" data-placeholder="Disabled Select" disabled>
                                   <option>One</option>
                                   <option>Two</option>
                                   <option>Three</option>
@@ -695,14 +717,13 @@
                           </div>
                       </div>
                       <div class="filterSample">
-                          <div class="sampleTitle left">Disabled</div>
+                          <div class="sampleTitle left">Error</div>
                           <div>
-                              <select name="dropdown2" multiple data-init="dropdown" data-placeholder="Multi Select" disabled>
+                              <select name="dropdown5" data-init="dropdown" data-placeholder="Error" class="error">
                                   <option>One</option>
                                   <option>Two</option>
                                   <option>Three</option>
                               </select>
-
                           </div>
                       </div>
                   </div>
