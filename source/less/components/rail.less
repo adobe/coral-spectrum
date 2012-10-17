@@ -17,6 +17,10 @@ div.rail {
     >.pull-to-refresh {
       display: block;
     }   
+
+    >.wrap {
+      padding-bottom: 1px; // this is necessary to enable scrolling
+    }
   }
 
   // Add shadow to left/right rail
@@ -93,6 +97,9 @@ div.rail {
     // -> because the outer div is the scrolling div
     -webkit-transform: translateZ(0);
 
+    // stretch to screen height
+    min-height: 100%;
+
     // necessary of pull-to-refresh is possible
     background-color: @rail-background-color;
 
@@ -158,13 +165,11 @@ div.rail {
         }
       }
 
-      // the is foldable
+      // the section is foldable
       &.foldable {
-        >.heading {
-          &:before {
-            content: "\25B8";
-            padding-right: 0.5rem;
-          }
+        >.heading:before {
+          content: "\25B8";
+          padding-right: 0.5rem;  
         }
 
         >.fold {
@@ -182,6 +187,12 @@ div.rail {
             content: "\25BE";
           }
         }
+      }
+
+      // the section should be on the bottom of the rail
+      &.fixed {
+        position: fixed;
+        bottom: 0;
       }
     }
   }

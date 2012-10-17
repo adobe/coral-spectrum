@@ -2,6 +2,28 @@
   Class: .tabs
   Provides navigation tabs
 */
+
+.tab-focus(@tab_type) {
+  outline: none;
+  border: @px solid @focus-border-color;
+}
+
+.tab-focus(@tab_type) when (@tab_type = top) {
+  .box-shadow(
+      -@partial-glow-radius -@partial-glow-radius/2 @partial-glow-radius @partial-glow-color,
+      @partial-glow-radius -@partial-glow-radius/2 @partial-glow-radius @partial-glow-color
+  );
+  border-bottom: none;
+}
+
+.tab-focus(@tab_type) when (@tab_type = stacked) {
+  .box-shadow(
+    -@partial-glow-radius/2 -@partial-glow-radius @partial-glow-radius @partial-glow-color,
+    -@partial-glow-radius/2 @partial-glow-radius @partial-glow-radius @partial-glow-color
+  );
+  border-right: none;
+}
+
 .tabs {
   > nav {
     .clearfix();
@@ -37,15 +59,8 @@
         color: @tab-hover-font-color;
       }
       
-      &:focus {
-        // TODO: write as a mixin
-        outline: none;
-        .box-shadow(
-            -@partial-glow-radius -@partial-glow-radius/2 @partial-glow-radius @partial-glow-color,
-            @partial-glow-radius -@partial-glow-radius/2 @partial-glow-radius @partial-glow-color
-        );
-        border: @px solid @focus-border-color;
-        border-bottom: none;
+      &:focus:not(:active) {
+        .tab-focus(top);
       }
 
       &.active {
@@ -124,15 +139,8 @@
           .gradient(@tab-white-background-gradient-end-color, @tab-white-background-gradient-end-color);
         }
 
-        &:focus {
-          // TODO: write as a mixin
-          outline: none;
-          .box-shadow(
-              -@partial-glow-radius/2 -@partial-glow-radius @partial-glow-radius @partial-glow-color,
-              -@partial-glow-radius/2 @partial-glow-radius @partial-glow-radius @partial-glow-color
-          );
-          border: @px solid @focus-border-color;
-          border-right: none;
+        &:focus:not(:active) {
+          .tab-focus(stacked);
         }
 
         &:last-child {

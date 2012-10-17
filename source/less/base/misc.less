@@ -37,10 +37,12 @@ img {
 
 
 /**
-  Class: .hidden
+  Class: .hidden and .hidden-accessibility
   Hide something without affecting its width/height (can be measured while hidden)
+  To hide accessibility features from being visually displayed use .hidden-accessibility (e.g. CSS image alt text)
 */
-.hidden {
+.hidden,
+.hidden-accessibility {
   position: absolute;
   left: -9999px;
   top: -9999px;
