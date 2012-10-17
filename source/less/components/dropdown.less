@@ -8,9 +8,10 @@ select,
     display: inline-block;
     .box-sizing(border-box);
 
-    vertical-align: top; // Make buttons line up when placed next to each other
+    vertical-align: middle;
 
     min-width: 135*@px;
+    height: 2rem;
 
     margin: 0.125rem 0;  // Reset default margin on button tag
                         // Give a top/bottom margin so they stack right
@@ -33,7 +34,7 @@ select,
         content: "";
         float: right;
         display: inline;
-        padding-left: 1.5rem;
+        padding-left: 1rem;
         height: @dropdown-text-size;
         background: url('../images/components/dropdown/handle.svg') no-repeat center center;
     }
@@ -47,6 +48,9 @@ select,
     &:focus {
         .glow();
     }
+    &.error {
+      .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+    }
 
     &:active:not([disabled]) {
         border: @px solid @dropdown-border-color;
@@ -56,75 +60,43 @@ select,
     }
 }
 
-
-/**
-* Also used by auto completers, see filters.less
-*/
-.dropdown-list {
-    margin: 0;
+.dropdown-editable {
+    display: inline-block;
     padding: 0;
-    z-index: 1000;
-    font-size: @dropdown-text-size;
+    margin: 0;
 
-    li {
-        list-style-type: none;
-        padding: 0.5rem 0.5rem;
+    .dropdown {
+        min-width: 2rem;
+        width: 2rem;
+        font-size: 0;
         margin: 0;
-        background-color: @dropdown-background-color;
-        border: @px solid @dropdown-border-color;
-        border-bottom: none;
-        border-top: @px solid lighten(@dropdown-border-color, 20%);
-
-        cursor: pointer;
-
-        &:first-child {
-            border-top: @px solid @dropdown-border-color;
-        }
-        &:last-child {
-            border-bottom: @px solid @dropdown-border-color;
-        }
-
-        &.selected {
-            background-color: lighten(@dropdown-active-background-color, 10%);
-            color: @dropdown-active-text-color;            
-        }
-
-        &:hover,
-        &.selected:hover {
-            background-color: @dropdown-active-background-color;
-            color: @dropdown-active-text-color;
-            border: @px solid darken(@dropdown-active-background-color, 20%);
-            border-bottom: none;
-            &:last-child {
-                border-bottom: @px solid darken(@dropdown-active-background-color, 20%);            
-            }
-            + li {
-                border-top: @px solid darken(@dropdown-active-background-color, 20%);                            
-            }
+        height: 2rem;
+        padding: 0.4375rem;
+        &:focus {
+            .glow(0);
         }
     }
 
-    .checkbox {
-        display: inline-block;
-        width: 1rem;
-        height: 1rem;
-        border: @px solid @checkbox-border-color;
-        background: @checkbox-background-color;
-        .background-size(contain);
-        margin-right: .5rem;
-        vertical-align: baseline;
+    input[type=text] {
+        .box-sizing(border-box);
+        vertical-align: middle;
+        height: 2rem;
+
+        font-family: @font-base-family;
+        font-size: @dropdown-text-size;
+        line-height: @dropdown-text-size;
+
+        padding: 0.4375rem;
+        margin: 0;
+        border-right: 0;
     }
 
-    .checkbox.checked {
-        content: "\a0";
-        display: inline-block;
-        width: 1rem;
-        height: 1rem;
-        border: @px solid @checkbox-border-color;
-        background: @checkbox-background-color url('../images/components/checkbox/check.png') no-repeat center;
-        .background-size(contain);
-        margin-right: .5rem;
-        vertical-align: baseline;
-    }    
+    &.focus {
+        .glow();
+    }
+    &.error {
+      .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+    }
 }
+
 
