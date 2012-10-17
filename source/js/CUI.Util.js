@@ -1,4 +1,4 @@
-/** 
+/**
   Utility functions used by CoralUI widgets
 
   @namespace
@@ -67,7 +67,7 @@ CUI.util.capitalize = function(str) {
           instance.set(optionsIn);
 
         if (typeof callback === 'function')
-          callback.call(this);
+          callback.call(this, instance);
       });
     };
 

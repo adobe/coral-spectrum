@@ -6,54 +6,126 @@
 
         extend:CUI.Widget,
 
+        editorKernel: null,
+
         construct:function (options) {
-            this.options = options || { }
+            this.options = options || { };
             // TODO ...
+        },
+
+        // Helpers -----------------------------------------------------------------------------------------------------
+
+        getTextDiv: function(parentEl) {
+            return parentEl;
+        },
+
+        isEmptyText: function() {
+            return false;
+            /*
+            var spanDom = CQ.Ext.DomQuery.selectNode("span:first", this.textContainer);
+            if (!spanDom) {
+                return false;
+            }
+            var spanEl = CQ.Ext.get(spanDom);
+            return spanEl.hasClass(CQ.themes.TextEditor.EMPTY_COMPONENT_CLASS);
+            */
+        },
+
+        prepareForNewText: function() {
+            /*
+            CQ.form.rte.Common.removeAllChildren(this.textContainer);
+            */
+        },
+
+        handleKeyUp: function(e) {
+            /*
+            if (!window.CQ_inplaceEditDialog) {
+                if (e.getCharCode() == 27) {
+                    this.editComponent.cancelInplaceEditing();
+                } else {
+                    this.checkBoxChanged(true);
+                }
+            }
+            */
+        },
+
+        initializeEditorKernel: function(initialContent) {
+            this.editorKernel.addUIListener("updatestate", this.updateState, this);
+            this.editorKernel.addUIListener("dialogshow", this.onDialogShow, this);
+            this.editorKernel.addUIListener("dialoghide", this.onDialogHide, this);
+            this.editorKernel.initializeEditContext(window, document, this.textContainer);
+            this.editorKernel.initializeEventHandling();
+            this.editorKernel.setUnprocessedHtml(initialContent || "");
+            this.editorKernel.initializeCaret(true);
+            this.editorKernel.execCmd("initializeundo");
+        },
+
+        onDialogShow: function() {
+            /*
+            var context = this.editorKernel.getEditContext();
+            this.savedSelection = this.editorKernel.createQualifiedRangeBookmark(context);
+            this.editorKernel.disableEventHandling();
+            window.CQ_inplaceEditDialog = true;
+            */
+        },
+
+        onDialogHide: function() {
+            /*
+            CQ.form.rte.Utils.defer(function() {
+                window.CQ_inplaceEditDialog = false;
+                this.editorKernel.reenableEventHandling();
+                var context = this.editorKernel.getEditContext();
+                this.editorKernel.selectQualifiedRangeBookmark(context, this.savedSelection);
+            }, 1, this);
+            */
+        },
+
+
+        // Interface ---------------------------------------------------------------------------------------------------
+
+        start: function() {
+            console.log("Starting instance ...", this.$element);
+            /*
+            if (this.editorKernel == null) {
+                this.editorKernel = new CUI.rte.DivKernel(this.config);
+            }
+            this.editorKernel.createToolbar();
+            this.textContainer = this.getTextDiv(this.$element);
+            this.currentSize = this.textContainer.getSize();
+            var pos = el.getXY();
+            this.currentPosition = {
+                "x": pos[0],
+                "y": pos[1]
+            };
+            // if the component includes the "empty text placeholder", the placeholder
+            // has to be removed and prepared for richtext editing
+            this.isEmptyContent = this.isEmptyText();
+            if (this.isEmptyContent) {
+                this.prepareForNewText();
+            }
+            this.savedSpellcheckAttrib = document.body.spellcheck;
+            document.body.spellcheck = false;
+            CUI.rte.Eventing.on(document.body, "keyup", this.handleKeyUp, this);
+            this.textContainer.contentEditable = "true";
+            if (CQ.Ext.isGecko) {
+                this.savedOutlineStyle = this.textContainer.style.outlineStyle;
+                this.textContainer.style.outlineStyle = "none";
+            }
+            this.initializeEditorKernel(initialContent);
+            */
         }
     });
 
     // Register ...
-    CUI.util.plugClass(CUI.RichText); // TODO check that it works as expected ...
+    CUI.util.plugClass(CUI.RichText, "richEdit", function(rte) {
+        rte.start();
+    });
 
     // Data API
     if (CUI.options.dataAPI) {
         $(function () {
             $('body').on('click.rte.data-api', '.editable', function (e) {
-
-                alert("Start editing ...");
-                /*
-                var $trigger = $(this);
-
-                // Get the target from data attributes
-                var $target = CUI.util.getDataTarget($trigger);
-
-                // Pass configuration based on data attributes in the triggering link
-                var href = $trigger.attr('href');
-                var options = $.extend({ remote:!/#/.test(href) && href }, $target.data(), $trigger.data());
-
-                // Parse buttons
-                if (typeof options.buttons === 'string') {
-                    options.buttons = JSON.parse(options.buttons);
-                }
-
-                // If a modal already exists, show it
-                var instance = $target.data('modal');
-                var show = true;
-                if (instance && instance.get('visible'))
-                    show = false;
-
-                // Apply the options from the data attributes of the trigger
-                // When the dialog is closed, focus on the button that triggered its display
-                $target.modal(options).one('hide', function () {
-                    $trigger.focus();
-                });
-
-                // Perform visibility toggle if we're not creating a new instance
-                if (instance)
-                    $target.data('modal').set({ visible:show });
-                */
-
-                // Stop links from navigating
+                $(this).richEdit();
                 e.preventDefault();
             });
         });
