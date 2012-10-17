@@ -12,13 +12,19 @@
   background-color: @slider-background-color;
 
   .handle {
-        position: absolute;
-        .gradient(@slider-handle-gradient-start-color, @slider-handle-gradient-end-color);
-        .border-radius(0.25rem);
-        border: @px solid @slider-border-color;
-        &:hover {
-            .gradient(lighten(@slider-handle-gradient-start-color, 15%), lighten(@slider-handle-gradient-end-color, 15%));
-        }
+    position: absolute;
+    left: 0;
+    display: inline-block;
+    .gradient(@slider-handle-gradient-start-color, @slider-handle-gradient-end-color);
+    .border-radius(0.25rem);
+    border: @px solid @slider-border-color;
+    cursor: pointer;
+    &:hover {
+      .gradient(lighten(@slider-handle-gradient-start-color, 15%), lighten(@slider-handle-gradient-end-color, 15%));
+      .tooltip {
+        display: inline-block;
+      }
+    }
   }
 
   .tick {
@@ -26,53 +32,80 @@
     background-color: @slider-border-color;
   }
 
-  .range {
+  .tooltip {
+    display: none;
+    z-index: 1;
+  }
+
+  input[type=range],
+  input[type=number] {
+    opacity: 0.000001;
+    cursor: default;
+    width: @px;
+    height: @px;
+  }
+
+  .fill {
     position: absolute;
-    left: 0;
-    top: 0;
-    background-color: @slider-range-color;
-    height: 0.5rem;
+    background-color: @slider-fill-color;
     border: @px;
     .border-radius(0.25rem);
   }
-  
+
   &.horizontal {
-        width: 20rem;  
-        height: 0.5rem;
-        margin: 0.5rem 0.25rem;
-        .handle {
-            width: 0.5rem;
-            margin: -0.5rem -0.25rem;
-            height: 1.5rem;            
-        }
-        .tick {
-            top: 0;
-            left: 0;
-            width: @px;
-            height: 0.5rem;
-        }
-        .tooltip {
-            position: absolute;
-            right: -5rem;
-            top: -1.25rem;
-            width: 2rem;
-        }
+    width: 20rem;
+    height: 0.5rem;
+    margin: 0.5rem 0.25rem;
+    .handle {
+      width: 0.5rem;
+      margin: -0.6rem -0.25rem;
+      height: 1.5rem;
+    }
+    .tick {
+      top: 0;
+      left: 0;
+      width: @px;
+      height: 0.4rem;
+    }
+    .tooltip {
+      left: -20*@px;
+      top: -50*@px;
+    }
+    .fill {
+      height: 0.4rem;
+      left: 0;
+    }
+    .value {
+      display: inline-block;
+    }
   }
   &.vertical {
-        width: 0.5rem;  
-        height: 20rem;
-        margin: 0.25rem 0.5rem;
-        .handle {
-            width: 1.5rem;
-            margin: -0.25rem -0.5rem;
-            height: 0.5rem;            
-        }
-        .tick {
-            top: 0;
-            left: 0;
-            width: 0.5rem;
-            height: @px;
-        }
-  }
+    width: 0.5rem;
+    height: 20rem;
+    margin: 0.25rem 0.6rem;
 
+    input[type=range],
+    input[type=number] {
+      float: left;
+    }
+    .handle {
+      width: 1.5rem;
+      margin: -0.25rem -0.5rem;
+      height: 0.5rem;
+    }
+    .tick {
+      bottom: 0;
+      left: 0;
+      width: 0.4rem;
+      height: @px;
+    }
+    .tooltip {
+      left: 25*@px;
+      top: -20*@px;
+    }
+    .fill {
+      width: 0.4rem;
+      bottom: 0;
+    }
+  }
 }

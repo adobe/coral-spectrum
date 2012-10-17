@@ -47,7 +47,7 @@ var index = filters.getSelectedIndex();
     */
     construct: function(options) {
         this.selectedIndices = []; // Initialise fresh array
-        
+
         // Set callback to default if there is none
         if (!this.options.autocompleteCallback) this.options.autocompleteCallback = this._defaultAutocompleteCallback.bind(this);
         if (this.options.stacking) this.options.multiple = true;
