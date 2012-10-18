@@ -1,1 +1,1 @@
-This is a feature branch to port the RichTextEditor to CoralUI.
+This is a longer living branch used to port the RichTextEditor to CoralUI.
