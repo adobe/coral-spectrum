@@ -211,8 +211,23 @@ CUI.Widget = new Class(/** @lends CUI.Widget# */{
   */
   toggleVisibility: function() {
     return this[!this.options.visible ? 'show' : 'hide']();
-  }
+  },
+ 
+  /**
+    Set a custom name for this widget.
 
+    @param {String} customName	Component name
+
+    @returns {CUI.Widget}	this, chainable
+  */
+  setName: function(customName) {
+    /** @ignore */
+    this.toString = function() {
+      return customName;
+    };
+
+    return this;
+  }
 
   /**
     Triggered when the widget is shown

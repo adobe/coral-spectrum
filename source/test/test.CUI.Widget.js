@@ -1,6 +1,9 @@
 describe('CUI.Widget', function() {
-  it('should be defined in CUI namespace', function() {
-    expect(CUI).to.have.property('Widget');
+  describe('definition', function() {
+    // 'definition' block is a temporary workaround for kmiyashiro/grunt-mocha/issues/22
+    it('should be defined in CUI namespace', function() {
+      expect(CUI).to.have.property('Widget');
+    });
   });
   
   describe('options', function() {
@@ -102,38 +105,38 @@ describe('CUI.Widget', function() {
     
     it('should show element', function() {
       widget.show();
-      expect(div.css('display')).to.equal('block');
+      expect(div).to.have.css('display', 'block');
     });
     
     it('should hide element', function() {
       widget.hide();
-      expect(div.css('display')).to.equal('none');
+      expect(div).to.have.css('display', 'none');
     });
     
     it('should toggle visibility', function() {
       widget.toggleVisibility();
-      expect(div.css('display')).to.equal('block');
+      expect(div).to.have.css('display', 'block');
       widget.toggleVisibility();
-      expect(div.css('display')).to.equal('none');
+      expect(div).to.have.css('display', 'none');
     });
     
     it('should change visibility when options.visible set', function() {
       widget.set('visible', false);
-      expect(div.css('display')).to.equal('none');
+      expect(div).to.have.css('display', 'none');
       widget.set('visible', true);
-      expect(div.css('display')).to.equal('block');
+      expect(div).to.have.css('display', 'block');
     });
     
     it('should stay visible when shown twice', function() {
       widget.show();
       widget.show();
-      expect(div.css('display')).to.equal('block');
+      expect(div).to.have.css('display', 'block');
     });
     
     it('should stay hidden when hidden twice', function() {
       widget.hide();
       widget.hide();
-      expect(div.css('display')).to.equal('none');
+      expect(div).to.have.css('display', 'none');
     });
   });
 });

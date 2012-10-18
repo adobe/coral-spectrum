@@ -24,10 +24,13 @@ body {
 
 
 // Double our base size for retina devices
-// TBD: break this out into retina.less? conditionally import?
+// also keep in mind that some devices have a DPPX of 1.5, they also deserve high-rez icons
+// Note: the standard way "min-resolution: 1.5dppx" causes LESS to die
 @media
-only screen and (-webkit-min-device-pixel-ratio: 2),
-only screen and (min-device-pixel-ratio: 2) {
+only screen and (-webkit-min-device-pixel-ratio: 1.5),
+only screen and (min--moz-device-pixel-ratio: 1.5),
+only screen and (-o-min-device-pixel-ratio: 1.5),
+only screen and (min-device-pixel-ratio: 1.5) {
   body {
     font-size: @base-size * 2;
   }
