@@ -16,21 +16,37 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-window.CUI = window.CUI || { };
-CUI.rte = {};
-CUI.rte.commands = {};
-CUI.rte.plugins = {};
-CUI.rte.adapter = {};
-CUI.rte.ui = {};
-CUI.rte.ui.ext = {};
-CUI.rte.ui.cui = {};
-CUI.rte.ui.stub = {};
+CUI.rte.ui.stub.ToolkitImpl = new Class({
 
-(function() {
+    toString: "ToolkitImpl",
 
-    // determine which implementations to use
-    CUI.rte._adapter = ((typeof(CQ) !== "undefined") && CQ.Ext ? "ext" : "jquery");
-    // CUI.rte._toolkit = ((typeof(CQ) !== "undefined") && CQ.Ext ? "ext" : "cui");
-    CUI.rte._toolkit = ((typeof(CQ) !== "undefined") && CQ.Ext ? "ext" : "stub");
+    extend: CUI.rte.ui.Toolkit,
 
-})();
+    dropDownCls: null,
+
+    menuCls: null,
+
+    initialize: function(cb) {
+        // currently not required
+    },
+
+    requiresInit: function() {
+        return false;
+    },
+
+    createToolbarBuilder: function(hint) {
+        return new CUI.rte.ui.stub.StubToolbarBuilder();
+    },
+
+    createContextMenuBuilder: function(editorKernel) {
+        return new CUI.rte.ui.stub.StubContextMenuBuilder(editorKernel);
+    },
+
+    createDialogManager: function(editorKernel) {
+        return new CUI.rte.ui.stub.StubDialogManager(editorKernel)
+    }
+
+
+});
+
+CUI.rte.ui.ToolkitRegistry.register("stub", CUI.rte.ui.stub.ToolkitImpl);

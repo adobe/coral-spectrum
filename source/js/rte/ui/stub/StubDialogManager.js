@@ -16,21 +16,34 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-window.CUI = window.CUI || { };
-CUI.rte = {};
-CUI.rte.commands = {};
-CUI.rte.plugins = {};
-CUI.rte.adapter = {};
-CUI.rte.ui = {};
-CUI.rte.ui.ext = {};
-CUI.rte.ui.cui = {};
-CUI.rte.ui.stub = {};
+CUI.rte.ui.stub.StubDialogManager = new Class({
 
-(function() {
+    toString: "StubDialogManager",
 
-    // determine which implementations to use
-    CUI.rte._adapter = ((typeof(CQ) !== "undefined") && CQ.Ext ? "ext" : "jquery");
-    // CUI.rte._toolkit = ((typeof(CQ) !== "undefined") && CQ.Ext ? "ext" : "cui");
-    CUI.rte._toolkit = ((typeof(CQ) !== "undefined") && CQ.Ext ? "ext" : "stub");
+    extend: CUI.rte.ui.DialogManager,
 
-})();
+    create: function(dialogId, config) {
+        return { };
+    },
+
+    mustRecreate: function(dialog) {
+        return false;
+    },
+
+    show: function(dialog) {
+        // TODO ...?
+    },
+
+    hide: function(dialog) {
+        // TODO ...?
+    },
+
+    alert: function(title, message, fn) {
+        // TODO ...?
+    },
+
+    createDialogHelper: function() {
+        return new CUI.rte.ui.stub.StubDialogHelper();
+    }
+
+});

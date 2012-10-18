@@ -21,8 +21,6 @@
  */
 CUI.rte.ui.DialogManager = new Class({
 
-    // TODO define
-
     create: function(dialogId, config) {
         throw new Error("DialogManager#create must be implemented")
     },

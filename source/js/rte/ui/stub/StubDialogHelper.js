@@ -16,21 +16,40 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-window.CUI = window.CUI || { };
-CUI.rte = {};
-CUI.rte.commands = {};
-CUI.rte.plugins = {};
-CUI.rte.adapter = {};
-CUI.rte.ui = {};
-CUI.rte.ui.ext = {};
-CUI.rte.ui.cui = {};
-CUI.rte.ui.stub = {};
+CUI.rte.ui.stub.StubDialogHelper = new Class({
 
-(function() {
+    toString: "StubDialogHelper",
 
-    // determine which implementations to use
-    CUI.rte._adapter = ((typeof(CQ) !== "undefined") && CQ.Ext ? "ext" : "jquery");
-    // CUI.rte._toolkit = ((typeof(CQ) !== "undefined") && CQ.Ext ? "ext" : "cui");
-    CUI.rte._toolkit = ((typeof(CQ) !== "undefined") && CQ.Ext ? "ext" : "stub");
+    extend: CUI.rte.ui.DialogHelper,
 
-})();
+    /**
+     * @protected
+     */
+    instantiateDialog: function(dialogConfig) {
+        return { };
+    },
+
+    createItem: function(type, name, label) {
+        return { };
+    },
+
+    getItemType: function(item) {
+        return "unknown";
+    },
+
+    getItemName: function(item) {
+        if (!item.id) {
+            item.id = "id-" + new Date().getTime();
+        }
+        return item.id;
+    },
+
+    getItemValue: function(item) {
+        return item.value;
+    },
+
+    setItemValue: function(item, value) {
+        item.value = value;
+    }
+
+});

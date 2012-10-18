@@ -8,6 +8,11 @@
 
         editorKernel: null,
 
+        savedSpellcheckAttrib: null,
+
+        savedOutlineStyle: null,
+
+
         construct:function (options) {
             this.options = options || { };
             // TODO ...
@@ -84,19 +89,20 @@
         // Interface ---------------------------------------------------------------------------------------------------
 
         start: function() {
-            console.log("Starting instance ...", this.$element);
-            /*
             if (this.editorKernel == null) {
                 this.editorKernel = new CUI.rte.DivKernel(this.config);
             }
             this.editorKernel.createToolbar();
-            this.textContainer = this.getTextDiv(this.$element);
+            this.$textContainer = this.getTextDiv(this.$element);
+            this.textContainer = this.$textContainer[0];
+            /*
             this.currentSize = this.textContainer.getSize();
             var pos = el.getXY();
             this.currentPosition = {
                 "x": pos[0],
                 "y": pos[1]
             };
+            */
             // if the component includes the "empty text placeholder", the placeholder
             // has to be removed and prepared for richtext editing
             this.isEmptyContent = this.isEmptyText();
@@ -106,13 +112,13 @@
             this.savedSpellcheckAttrib = document.body.spellcheck;
             document.body.spellcheck = false;
             CUI.rte.Eventing.on(document.body, "keyup", this.handleKeyUp, this);
-            this.textContainer.contentEditable = "true";
-            if (CQ.Ext.isGecko) {
+            var initialContent = this.options.initialContent || this.$textContainer.html();
+            this.$textContainer[0].contentEditable = "true";
+            if (CUI.rte.Common.ua.isGecko || CUI.rte.Common.ua.isWebKit) {
                 this.savedOutlineStyle = this.textContainer.style.outlineStyle;
                 this.textContainer.style.outlineStyle = "none";
             }
             this.initializeEditorKernel(initialContent);
-            */
         }
     });
 

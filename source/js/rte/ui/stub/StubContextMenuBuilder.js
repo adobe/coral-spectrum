@@ -16,21 +16,40 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-window.CUI = window.CUI || { };
-CUI.rte = {};
-CUI.rte.commands = {};
-CUI.rte.plugins = {};
-CUI.rte.adapter = {};
-CUI.rte.ui = {};
-CUI.rte.ui.ext = {};
-CUI.rte.ui.cui = {};
-CUI.rte.ui.stub = {};
+CUI.rte.ui.stub.StubContextMenuBuilder = new Class({
 
-(function() {
+    toString: "StubContextMenuBuilder",
 
-    // determine which implementations to use
-    CUI.rte._adapter = ((typeof(CQ) !== "undefined") && CQ.Ext ? "ext" : "jquery");
-    // CUI.rte._toolkit = ((typeof(CQ) !== "undefined") && CQ.Ext ? "ext" : "cui");
-    CUI.rte._toolkit = ((typeof(CQ) !== "undefined") && CQ.Ext ? "ext" : "stub");
+    extend: CUI.rte.ui.ContextMenuBuilder,
 
-})();
+
+    construct: function(editorKernel) {
+        // TODO ...?
+    },
+
+    build: function(selectionContext, context) {
+        // TODO ...?
+        return { };
+    },
+
+    createItem: function(config) {
+        return new CUI.rte.ui.stub.CmItemImpl(config);
+    },
+
+    createSeparator: function() {
+        return new CUI.rte.ui.stub.CmSeparatorImpl();
+    },
+
+    showAt: function(x, y) {
+        // TODO ...?
+    },
+
+    hideAll: function() {
+        // TODO ...?
+    },
+
+    isVisible: function() {
+        return false;
+    }
+
+});
