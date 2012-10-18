@@ -52,13 +52,14 @@ var index = filters.getSelectedIndex();
       
       @param {Object}   options                               Component options
       @param {Function} [options.autocompleteCallback=use options]      Callback for autocompletion
-      @param {Array}    [options.options=example array]                     Array of available options if no autocomplete callback is used
+      @param {Array}    [options.options=empty array]                     Array of available options if no autocomplete callback is used
       @param {boolean}  [options.multiple=false]                     Can the user select more than one option?
       @param {boolean}  [options.stacking=false]                     Uses a slightly different style, implies multiple
       @param {boolean}  [options.placeholder=null]                     Define a placeholder for the input field
       @param {int}      [options.delay=200]                     Delay before starting autocomplete when typing
       @param {int}      [options.disabled=false]                     Is this component disabled?
       @param {boolean}  [options.highlight=true]                     Highlight search string in results
+      @param {String}   [options.name=null]                     (Optional) name for an underlying form field.
     */
     construct: function(options) {
         this.selectedIndices = []; // Initialise fresh array
@@ -78,8 +79,8 @@ var index = filters.getSelectedIndex();
         });
         
         // Listen to property changes
-        this.$element.on('change:disabled', this._render.bind(this));
-        this.$element.on('change:placeholder', this._render.bind(this));
+        this.$element.on('change:disabled', this._update.bind(this));
+        this.$element.on('change:placeholder', this._update.bind(this));
         
         this.$element.on('change:options', this._changeOptions.bind(this));
         
@@ -150,7 +151,7 @@ var index = filters.getSelectedIndex();
     
     defaults: {
         autocompleteCallback: null,
-        options: ["Apples", "Pears", "Bananas", "Strawberries"],
+        options: [],
         multiple: false,
         delay: 200,
         highlight: true,
@@ -220,62 +221,75 @@ var index = filters.getSelectedIndex();
         if (event.widget !== this) return;
         this.selectedIndex = -1;
         this.selectedIndices = [];
-        this._render();
+        this._update();
     },
 
     /** @ignore */
-    _render: function() {
-        // if current element is select field -> turn into input field, but hold reference to select to update it on change
-        if (this.$element.get(0).tagName === "SELECT") {
-            this.options.multiple = this.$element.attr("multiple") ? true : false;
-            if (this.$element.attr("data-stacking")) this.options.stacking = true;
-            if (this.$element.attr("data-placeholder")) this.options.placeholder = this.$element.attr("data-placeholder");
-            if (this.$element.attr("disabled")) this.options.disabled = true;
-            
-            this.options.options = [];
-            this.$element.find("option").each(function(i, e) {
-                this.options.options.push($(e).text());
-            }.bind(this));
-            
-            var input = $("<input type=\"text\">");
-            this.$element.after(input);
-            this.syncSelectElement = this.$element;
-            this.$element = input;
-            this.syncSelectElement.hide();
-        }
+    _render: function() {        
+        this._readDataFromMarkup();
         
-        // if current element is input field -> wrap it into DIV
-        if (this.$element.get(0).tagName === "INPUT") {
+        // if current element is select field -> turn into input field, but hold reference to select to update it on change
+        if (this.$element.get(0).tagName === "SELECT") {        
             var div = $("<div></div>");
-            if (this.$element.attr("data-stacking")) this.options.stacking = true;
-            if (this.$element.attr("disabled")) this.options.disabled = true;
             this.$element.after(div);
             this.$element.detach();
             div.append(this.$element);
             this.$element = div;
         }
         
+        // if current element is input field -> wrap it into DIV
+        if (this.$element.get(0).tagName === "INPUT") {
+            var div = $("<div></div>");
+            this.$element.after(div);
+            this.$element.detach();
+            div.prepend(this.$element);
+            this.$element = div;
+        }
+
+        // If there was an select in markup: use it for generating options
+        if (this.$element.find("select option").length > 0 && this.options.options.length == 0) {
+            this.options.options = [];
+            this.$element.find("select option").each(function(i, e) {
+                this.options.options.push($(e).text());
+            }.bind(this));
+        }
+
+        this._createMissingElements();
+        
+        this.syncSelectElement = this.$element.find("select");
+        this.inputElement = this.$element.find("input");
+        
         this.$element.addClass("filters");
         this.$element.removeClass("focus");
-        
-        this.inputElement = this.$element.find("input");
 
-
+        if (!this.options.placeholder) this.options.placeholder = this.inputElement.attr("placeholder");
+        if (this.options.name) this.syncSelectElement.attr("name", this.options.name);
         if (this.options.stacking) this.$element.addClass("stacking"); else this.$element.removeClass("stacking");
-        if (this.options.placeholder) this.inputElement.attr("placeholder", this.options.placeholder);
-        if (this.options.disabled) {
-            this.$element.addClass("disabled");
-            this.inputElement.attr("disabled", "disabled");
-        } else {
-           this.$element.removeClass("disabled");
-           this.inputElement.removeAttr("disabled");
-            
-        }
-        
+
        
         this._update();
     },
     
+    _createMissingElements: function() {
+        if (this.$element.find("select").length == 0) {
+            this.$element.append($("<select></select>"));
+        }
+        if (this.$element.find("input").length == 0) {
+            this.$element.prepend($("<input type=\"text\">"));
+        }
+    },
+
+    /** @ignore */
+    _readDataFromMarkup: function() {
+            if (this.$element.attr("multiple")) this.options.multiple = true;
+            if (this.$element.attr("data-multiple")) this.options.multiple = true;
+            if (this.$element.attr("data-stacking")) this.options.stacking = true;
+            if (this.$element.attr("placeholder")) this.options.placeholder = this.$element.attr("data-placeholder");
+            if (this.$element.attr("data-placeholder")) this.options.placeholder = this.$element.attr("data-placeholder");
+            if (this.$element.attr("disabled")) this.options.disabled = true;
+            if (this.$element.attr("data-disabled")) this.options.disabled = true;
+   },
+   
     /** @ignore */
     _update: function() {
         
@@ -318,8 +332,18 @@ var index = filters.getSelectedIndex();
                 this.$element.append(ul);
             }
         }
+        
+        if (this.options.placeholder) this.inputElement.attr("placeholder", this.options.placeholder);
+        if (this.options.disabled) {
+            this.$element.addClass("disabled");
+            this.inputElement.attr("disabled", "disabled");
+        } else {
+           this.$element.removeClass("disabled");
+           this.inputElement.removeAttr("disabled");
+        }
+        
         this._correctInputFieldWidth();
-
+        
     },
 
     /** @ignore */
@@ -337,7 +361,8 @@ var index = filters.getSelectedIndex();
             if (this.triggeredBackspace === false && this.options.multiple && this.selectedIndices.length > 0 &&
                 this.inputElement.attr("value").length === 0) {
                 event.preventDefault();
-                this.removeSelectedIndex(this.selectedIndices[this.selectedIndices.length - 1]);    
+                this.removeSelectedIndex(this.selectedIndices[this.selectedIndices.length - 1]);
+                this._inputChanged();
             }
             this.triggeredBackspace = true; // Remember this key down event
         }

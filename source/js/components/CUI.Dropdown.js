@@ -44,6 +44,7 @@
       @constructs
       
       @param {Object}   options                               Component options
+      @param {Array} [options.options=empty array]      Selectable options
       @param {boolean} [options.multiple=false]      Is this a multiselect widget?
       @param {boolean} [options.editable=false]      May the user edit the option text?
       @param {String} [options.placeholder="Select"]      Placeholder string to display in empty widget
@@ -80,6 +81,7 @@
     },
     
     defaults: {
+        options: [],
         multiple: false,
         placeholder: "Select",
         disabled: false,
@@ -128,44 +130,69 @@
     
     /** @ignore */
     _render: function() {
-        if (this.$element.get(0).tagName === "SELECT") {
-            if (this.$element.attr("disabled")) this.options.disabled = true;
-            if (this.$element.attr("multiple")) this.options.multiple = true;
-            if (this.$element.attr("data-placeholder")) this.options.placeholder = this.$element.attr("data-placeholder");
-            if (this.$element.attr("data-editable")) this.options.editable = true;
-            if (this.$element.hasClass("error")) this.options.hasError = true;
-            
-            this.options.options = [];
-            this.$element.find("option").each(function(i, e) {
-                this.options.options.push($(e).html());
-            }.bind(this));
-            
-            var button = $("<button>" + this.options.placeholder + "</button>");
-            button.addClass("dropdown");
-            this.buttonElement = button;
-            this.positioningElement = button;
-            
-            this.$element.after(button);
-            this.syncSelectElement = this.$element;
-            this.$element = button;
-            this.syncSelectElement.hide();            
-        }
+        this._readDataFromMarkup();
         
-        if (this.options.editable) {
+        if (this.$element.get(0).tagName !== "DIV") {
             var div = $("<div></div>");
-            div.addClass("dropdown-editable");
-            var input = $("<input type=\"text\">");
-            div.append(input);
-            if (this.syncSelectElement) input.attr("name", this.syncSelectElement.attr("name") + "-edit");
             this.$element.after(div);
+            this.$element.detach();
             div.append(this.$element);
             this.$element = div;
-            this.positioningElement = div;
-            this.inputElement = input;
+        }
+
+        this._createMissingElements();
+        this.buttonElement = this.$element.find("button");
+        this.syncSelectElement = this.$element.find("select");
+        this.inputElement = this.$element.find("input");
+        this.positioningElement = (this.options.editable) ? this.$element : this.buttonElement;
+        
+        if (!this.inputElement.attr("name")) this.inputElement.attr("name", this.syncSelectElement.attr("name") + ".edit");
+        if (this.syncSelectElement.attr("multiple")) this.options.multiple = true;
+        
+        this.$element.addClass("dropdown");
+        if (this.options.editable) this.$element.addClass("dropdown-editable");
+        
+
+        if (this.$element.find("select option").length > 0 && this.options.options.length == 0) {
+            this.options.options = [];
+            this.$element.find("select option").each(function(i, e) {
+                this.options.options.push($(e).html());
+            }.bind(this));            
         }
 
         this._update(true);
     },
+    
+    /** @ignore */
+    _readDataFromMarkup: function() {
+        if (this.$element.attr("disabled")) this.options.disabled = true;
+        if (this.$element.attr("data-disabled")) this.options.disabled = true;
+        if (this.$element.attr("multiple")) this.options.multiple = true;
+        if (this.$element.attr("data-multiple")) this.options.multiple = true;
+        if (this.$element.attr("placeholder")) this.options.placeholder = this.$element.attr("data-placeholder");
+        if (this.$element.attr("data-placeholder")) this.options.placeholder = this.$element.attr("data-placeholder");
+        if (this.$element.attr("data-editable")) this.options.editable = true;
+        if (this.$element.attr("data-error")) this.options.hasError = true;
+        if (this.$element.hasClass("error")) this.options.hasError = true;        
+    },
+    
+    /** @ignore */
+    _createMissingElements: function() {
+        if (this.$element.find("button").length == 0) {
+            var button = $("<button>" + this.options.placeholder + "</button>");
+            button.addClass("dropdown");        
+            this.$element.append(button);
+        }
+        if (this.options.editable && this.$element.find("input").length == 0) {
+            var input = $("<input type=\"text\">");
+            this.$element.prepend(input);
+        }
+        if (this.$element.find("select").length == 0) {
+            var select = $("<select>");
+            this.$element.append(select);
+        }
+    },
+    
     /** @ignore */
     _update: function(updateContent) {
         if (updateContent) {
@@ -183,9 +210,11 @@
         }
         
         if (this.options.disabled) {
-            this.$element.attr("disabled", "disabled");
+            this.buttonElement.attr("disabled", "disabled");
+            this.inputElement.attr("disabled", "disabled");
         } else {
-            this.$element.removeAttr("disabled");            
+            this.buttonElement.removeAttr("disabled");            
+            this.inputElement.removeAttr("disabled");            
         }
         if (this.hasFocus) {
             this.$element.addClass("focus");
@@ -208,7 +237,7 @@
   // Data API
   if (CUI.options.dataAPI) {
     $(document).ready(function() {
-        $("select[data-init=dropdown]").dropdown();
+        $("[data-init=dropdown]").dropdown();
     });
   }  
 }(window.jQuery));

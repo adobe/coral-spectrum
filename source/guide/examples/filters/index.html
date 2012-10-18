@@ -27,16 +27,25 @@
             Filter me: <input type="text" name="stacking" placeholder="Stacking">
             </p>
             <p>
-                From select: <select><option>One</option><option>Two</option><option>Three</option></select>
+                From select: <select class="filters"><option>One very long <b>tag</b> line</option><option>Two</option><option>Three</option></select>
             </p>
             <p>
-                From select: <select multiple><option>One</option><option>Two</option><option>Three</option></select>
+                From select: <select class="filters" multiple><option>One very long <b>tag</b> line with at least one line break</option><option>Two</option><option>Three</option></select>
             </p>
             <p>
                 <a data-action="disable">Disable all</a>
                 <a data-action="enable">Enable all</a>
                 
             </p>
+            <div class="filters" data-init="filters" data-multiple="true">
+                <select>
+                    <option>sad</opion>
+                    <option>angry</opion>
+                    <option>happy</opion>    
+                </select>
+                <input type="text">
+            </div>
+            
         </div>
         
         <script type="text/javascript">
@@ -83,8 +92,8 @@
 
                 filters1.setSelectedIndex(2);
 
-                $("select").filters({placeholder: "select me!"});
-                $("select").each(function() {
+                $("select.filters").filters({placeholder: "select me!", stacking: true});
+                $("select.filters").each(function() {
                     $(this).data("filters").setSelectedIndices([0,1]);
                 })
 
