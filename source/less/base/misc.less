@@ -39,12 +39,20 @@ img {
 /**
   Class: .hidden
   Hide element from visual browsers as well as from accessibilty, but without affecting its width/height (can be measured while hidden).
-  Take care not to use that inside elements that can get focus (like inside links), or the focus rectangle will not look as expectd.
+  Known Limitation: In case you need the width/height, avoid to place it inside an element that can be focused (like a link),
+  or it will lose it's dimensions when focused!
 */
 .hidden {
   position: absolute;
   clip: rect(0, 0, 0, 0);
   visibility: hidden;
+}
+:focus .hidden {
+  // Workaround for the focus rectangle in Webkit
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: 1px;
 }
 
 /**
@@ -54,6 +62,7 @@ img {
 .hidden-accessible {
   position: absolute;
   clip: rect(0, 0, 0, 0);
+  // Workaround for the focus rectangle in Webkit
   overflow: hidden;
   width: 1px;
   height: 1px;
