@@ -9,6 +9,18 @@ div.rail {
 
   @pull-to-request-size: 3rem;
 
+  // make it scrollable
+  &.scroll {
+    height: 100%;
+    .scrollable;
+  }
+
+  // fixed content
+  &.fixed {
+    height: 100%;
+    overflow-y: hidden;  
+  }
+
   // if pull to request is possible, then the background needs to transparent
   &.pullable {
     position: relative;
@@ -103,6 +115,36 @@ div.rail {
     // necessary of pull-to-refresh is possible
     background-color: @rail-background-color;
 
+    // cloasable sections
+    .closeable() {
+      >.heading:before {
+        content: "\25B8";
+        padding-right: 0.5rem;  
+      }  
+
+      >.fold {
+        height: 0;
+        overflow: hidden;
+      }
+
+      &.open {
+        >.heading:before {
+          content: "\25BE";
+        }
+      }
+    }
+
+    // accordion mode
+    &.accordion {
+      section {
+        .closeable;
+
+        >.fold {
+          .transition (all 0.5s ease-out);
+        }
+      } 
+    }
+
     section {
       margin: 0;
       padding: 0.5rem;
@@ -167,32 +209,14 @@ div.rail {
 
       // the section is foldable
       &.foldable {
-        >.heading:before {
-          content: "\25B8";
-          padding-right: 0.5rem;  
-        }
-
-        >.fold {
-          height: 0;
-          overflow: hidden;
-        }
+        .closeable;
 
         &.open {
           >.fold {
             height: auto;
             overflow: auto;
           }
-
-          >.heading:before {
-            content: "\25BE";
-          }
         }
-      }
-
-      // the section should be on the bottom of the rail
-      &.fixed {
-        position: fixed;
-        bottom: 0;
       }
     }
   }
