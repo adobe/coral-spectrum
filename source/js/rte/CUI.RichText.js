@@ -94,6 +94,7 @@
             }
             this.editorKernel.createToolbar();
             this.$textContainer = this.getTextDiv(this.$element);
+            this.$textContainer.addClass("edited");
             this.textContainer = this.$textContainer[0];
             /*
             this.currentSize = this.textContainer.getSize();
@@ -131,8 +132,11 @@
     if (CUI.options.dataAPI) {
         $(function () {
             $('body').on('click.rte.data-api', '.editable', function (e) {
-                $(this).richEdit();
-                e.preventDefault();
+                var $this = $(this);
+                if (!$this.hasClass("edited")) {
+                    $this.richEdit();
+                    e.preventDefault();
+                }
             });
         });
     }
