@@ -65,6 +65,10 @@
             this.editorKernel.execCmd("initializeundo");
         },
 
+        updateState: function() {
+            this.editorKernel.updateToolbar();
+        },
+
         onDialogShow: function() {
             /*
             var context = this.editorKernel.getEditContext();
