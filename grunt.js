@@ -153,7 +153,7 @@ module.exports = function(grunt) {
 
   var packages = {
     "cui": [ "cui-templates", "base", "cui"],
-    "rte-core": [ "base", "rte-core", "rte-trailer" ],
+    "rte-core": [ "base", "rte-core" ],
     "cui-with-rte": [ "cui-templates", "base", "rte-core", "cui", "rte-cui", "rte-trailer" ]
   };
 
