@@ -20,7 +20,7 @@ module.exports = function(grunt) {
     'components/CUI.Tabs.js',
     'components/CUI.Alert.js',
     'components/CUI.Rail.js',
-    'components/CUI.Popover.js'
+    'components/CUI.Popover.js',
     'components/CUI.DropdownList.js',
     'components/CUI.Dropdown.js',
     'components/CUI.Filters.js',
