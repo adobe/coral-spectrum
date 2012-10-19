@@ -50,22 +50,24 @@ var index = filters.getSelectedIndex();
       @desc Creates a filters field
       @constructs
       
-      @param {Object}   options                               Component options
-      @param {Function} [options.autocompleteCallback=use options]      Callback for autocompletion
-      @param {Array}    [options.options=empty array]                     Array of available options if no autocomplete callback is used
-      @param {boolean}  [options.multiple=false]                     Can the user select more than one option?
-      @param {boolean}  [options.stacking=false]                     Uses a slightly different style, implies multiple
-      @param {boolean}  [options.placeholder=null]                     Define a placeholder for the input field
-      @param {int}      [options.delay=200]                     Delay before starting autocomplete when typing
-      @param {int}      [options.disabled=false]                     Is this component disabled?
-      @param {boolean}  [options.highlight=true]                     Highlight search string in results
-      @param {String}   [options.name=null]                     (Optional) name for an underlying form field.
+      @param {Object}   options                                    Component options
+      @param {Function} [options.autocompleteCallback=use options] Callback for autocompletion
+      @param {Array}    [options.options=empty array]              Array of available options if no autocomplete callback is used
+      @param {boolean}  [options.multiple=false]                   Can the user select more than one option?
+      @param {boolean}  [options.stacking=false]                   Uses a slightly different style, implies multiple
+      @param {boolean}  [options.placeholder=null]                 Define a placeholder for the input field
+      @param {int}      [options.delay=200]                        Delay before starting autocomplete when typing
+      @param {int}      [options.disabled=false]                   Is this component disabled?
+      @param {boolean}  [options.highlight=true]                   Highlight search string in results
+      @param {String}   [options.name=null]                        (Optional) name for an underlying form field.
+      @param {Function} [options.optionRenderer=default renderer]  (Optional) Renderer for the autocompleter and the tag badges
     */
     construct: function(options) {
         this.selectedIndices = []; // Initialise fresh array
 
         // Set callback to default if there is none
         if (!this.options.autocompleteCallback) this.options.autocompleteCallback = this._defaultAutocompleteCallback.bind(this);
+        if (!this.options.optionRenderer) this.options.optionRenderer = CUI.Filters.defaultOptionRenderer;
         if (this.options.stacking) this.options.multiple = true;
 
         // Adjust DOM to our needs
@@ -156,7 +158,8 @@ var index = filters.getSelectedIndex();
         delay: 200,
         highlight: true,
         stacking: false,
-        placeholder: null
+        placeholder: null,
+        optionRenderer: null
     },
     
 
@@ -289,6 +292,10 @@ var index = filters.getSelectedIndex();
             if (this.$element.attr("data-placeholder")) this.options.placeholder = this.$element.attr("data-placeholder");
             if (this.$element.attr("disabled")) this.options.disabled = true;
             if (this.$element.attr("data-disabled")) this.options.disabled = true;
+            if (this.$element.attr("data-option-renderer")) {
+                // Allow to choose from default option Renderers
+                this.options.optionRenderer = CUI.Filters[this.$element.attr("data-option-renderer")];
+            }
    },
    
     /** @ignore */
@@ -331,10 +338,13 @@ var index = filters.getSelectedIndex();
         // Create selected tag list
         var ul = $("<ul class=\"tags\"></ul>");
         
-        $.each(this.selectedIndices, function(k, index) {
-            var option = this.options.options[index];
-            ul.append("<li data-id=\"" + index + "\"><button data-dismiss=\"filter\">&times;</button> " + option + "</li>");
-        
+        $.each(this.selectedIndices, function(iterator, index) {
+            //var option = this.options.options[index];
+            var el = (this.options.optionRenderer.bind(this))(iterator, index, false);
+            var li = $("<li data-id=\"" + index + "\"><button data-dismiss=\"filter\">&times;</button></li>");
+            ul.append(li);
+            li.append(el);
+            
         }.bind(this));
         
         // Add new list to widget
@@ -421,7 +431,7 @@ var index = filters.getSelectedIndex();
         if (this.options.multiple) {
             // Do not show already selected indices
             var l = [];            
-            $.each(results, function(key, index) {
+            $.each(results, function(iterator, index) {
                 if (this.selectedIndices.indexOf(index) >= 0) return;
                 l.push(index);
             }.bind(this));  
@@ -429,24 +439,14 @@ var index = filters.getSelectedIndex();
         }        
         if (results.length === 0) return;
 
-        var optionRenderer = function(key, index) {            
-            var value = this.options.options[index];
-            
-            if (this.options.highlight) {
-                var i = value.toLowerCase().indexOf(searchFor.toLowerCase());
-                if (i >= 0) {
-                    value = value.substr(0, i) + "<em>" + value.substr(i, searchFor.length) + "</em>" + value.substr(i + searchFor.length);
-                }
-            }
-            return $("<span>" + value + "</span>");
+        var optionRenderer = function(iterator, value) {            
+            return (this.options.optionRenderer.bind(this))(iterator, value, this.options.highlight);
         };
         
-        // Due to a current bug (in CUI.Widget?) it seems to be impossible to use the "set"-method inherited from the widget class
         this.dropdownList.set("optionRenderer", optionRenderer.bind(this));
         this.dropdownList.set("options", results);
-        console.log(new Error("dummy").stack, this.dropdownList.options, optionRenderer);
-        this.dropdownList.options.optionRenderer = optionRenderer.bind(this);
-        this.dropdownList.options.options = results;
+        //this.dropdownList.options.optionRenderer = optionRenderer.bind(this);
+        //this.dropdownList.options.options = results;
         
         this.dropdownList.show();
         
@@ -472,3 +472,42 @@ var index = filters.getSelectedIndex();
     $('[data-init=filters]').filters();
   });
 }(window.jQuery));
+
+
+CUI.Filters.defaultOptionRenderer = function(iterator, index, hightlight) {            
+    var value = this.options.options[index];
+    var searchFor = this.inputElement.val();
+
+    if (hightlight) {
+        var i = value.toLowerCase().indexOf(searchFor.toLowerCase());
+        if (i >= 0) {
+            value = value.substr(0, i) + "<em>" + value.substr(i, searchFor.length) + "</em>" + value.substr(i + searchFor.length);
+        }
+    }
+    return $("<span>" + value + "</span>");
+};
+
+CUI.Filters.cqTagOptionRenderer = function(iterator, index, highlight) {            
+    var value = this.options.options[index];
+    var searchFor = this.inputElement.val();
+    
+    var pathParts = value.split("/");
+    value = "";
+    for(var q = 0; q < pathParts.length; q++) {
+        var part = pathParts[q];
+        
+        if (highlight) {
+            var i = part.toLowerCase().indexOf(searchFor.toLowerCase());
+            if (i >= 0) {
+                part = part.substr(0, i) + "<em>" + part.substr(i, searchFor.length) + "</em>" + part.substr(i + searchFor.length);
+            }
+        }
+        if (value !== "") value += " / ";
+        if (q === pathParts.length - 1) part = "<b>" + part + "</b>";
+        value = value + part;
+    }
+    
+
+    
+    return $("<span>" + value + "</span>");
+};
