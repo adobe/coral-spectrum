@@ -89,16 +89,17 @@ describe('CUI.Tabs', function() {
         expect(el.find('#disabled-tab')).not.to.have.class('active');
       });
 
-      it('should load content remotely', function() {
+      it('should load content remotely', function(done) {
         var third_section = el.find('#third-tab');
         third_tab.click();
         expect(third_tab).to.have.class('active');
         expect(third_section).to.have.class('active');
         // this call will fail, but that's ok - this checks both the error handling
         // and the remote call
-        third_section.bind('load', function() {
-          expect(third_section).to.have.class('div.alert.error');
-          expect(third_section).to.contain.class('Failed to load content');
+        third_section.ajaxComplete(function() {
+          third_section.unbind('ajaxComplete');
+          expect(third_section).to.have('div.alert.error');
+          done();
         });
       });
     });
