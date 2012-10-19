@@ -19,7 +19,8 @@ module.exports = function(grunt) {
     'components/CUI.Modal.js',
     'components/CUI.Tabs.js',
     'components/CUI.Alert.js',
-    'components/CUI.Rail.js'
+    'components/CUI.Rail.js',
+    'components/CUI.Popover.js'
   ];
   
   /**
@@ -347,7 +348,7 @@ module.exports = function(grunt) {
           '<%= dirs.build %>/js/CUI.Templates.js',
           '<%= dirs.source %>/test/**'
         ],
-        tasks: 'mocha coverage'
+        tasks: 'mocha'
       }
     }
   });
