@@ -14,9 +14,9 @@
     </head>
     <body>
 
-        <div class="content">
-            <h1>Filters &amp; Tags</h1>
-        
+        <section>
+        <h1>Filters &amp; Tags</h1>
+        <h2>Create from Class</h2>
             <p>
             Filter me: <input type="text" name="single-term" placeholder="Single Term">
             </p>
@@ -26,6 +26,7 @@
             <p>
             Filter me: <input type="text" name="stacking" placeholder="Stacking">
             </p>
+        <h2>Create from jQuery</h2>            
             <p>
                 From select: <select class="filters"><option>One very long <b>tag</b> line</option><option>Two</option><option>Three</option></select>
             </p>
@@ -37,6 +38,8 @@
                 <a data-action="enable">Enable all</a>
                 
             </p>
+            
+            <h2>Create from markup</h2>
             <div class="filters" data-init="filters" data-multiple="true">
                 <select>
                     <option>sad</opion>
@@ -46,8 +49,8 @@
                 <input type="text">
             </div>
             
-        </div>
-        
+        </section>
+            
         <script type="text/javascript">
             $(document).ready(function() {
                var options =  ["Watermelon",
@@ -101,11 +104,13 @@
                     filters1.set("disabled", true);
                     filters2.set("disabled", true);
                     filters3.set("disabled", true);
+                    $("select.filters").filters({disabled: true});
                 })
                 $("[data-action=enable]").click(function() {
                     filters1.set("disabled", false);
                     filters2.set("disabled", false);
                     filters3.set("disabled", false);
+                    $("select.filters").filters({disabled: false});
                 })
                 
                 filters2.set("options", ["red", "green", "blue"])

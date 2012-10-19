@@ -228,9 +228,10 @@ var index = filters.getSelectedIndex();
     _render: function() {        
         this._readDataFromMarkup();
         
+        var div;
         // if current element is select field -> turn into input field, but hold reference to select to update it on change
         if (this.$element.get(0).tagName === "SELECT") {        
-            var div = $("<div></div>");
+            div = $("<div></div>");
             this.$element.after(div);
             this.$element.detach();
             div.append(this.$element);
@@ -239,7 +240,7 @@ var index = filters.getSelectedIndex();
         
         // if current element is input field -> wrap it into DIV
         if (this.$element.get(0).tagName === "INPUT") {
-            var div = $("<div></div>");
+            div = $("<div></div>");
             this.$element.after(div);
             this.$element.detach();
             div.prepend(this.$element);
@@ -247,7 +248,7 @@ var index = filters.getSelectedIndex();
         }
 
         // If there was an select in markup: use it for generating options
-        if (this.$element.find("select option").length > 0 && this.options.options.length == 0) {
+        if (this.$element.find("select option").length > 0 && this.options.options.length === 0) {
             this.options.options = [];
             this.$element.find("select option").each(function(i, e) {
                 this.options.options.push($(e).text());
@@ -271,10 +272,10 @@ var index = filters.getSelectedIndex();
     },
     
     _createMissingElements: function() {
-        if (this.$element.find("select").length == 0) {
+        if (this.$element.find("select").length === 0) {
             this.$element.append($("<select></select>"));
         }
-        if (this.$element.find("input").length == 0) {
+        if (this.$element.find("input").length === 0) {
             this.$element.prepend($("<input type=\"text\">"));
         }
     },
@@ -284,7 +285,7 @@ var index = filters.getSelectedIndex();
             if (this.$element.attr("multiple")) this.options.multiple = true;
             if (this.$element.attr("data-multiple")) this.options.multiple = true;
             if (this.$element.attr("data-stacking")) this.options.stacking = true;
-            if (this.$element.attr("placeholder")) this.options.placeholder = this.$element.attr("data-placeholder");
+            if (this.$element.attr("placeholder")) this.options.placeholder = this.$element.attr("placeholder");
             if (this.$element.attr("data-placeholder")) this.options.placeholder = this.$element.attr("data-placeholder");
             if (this.$element.attr("disabled")) this.options.disabled = true;
             if (this.$element.attr("data-disabled")) this.options.disabled = true;
@@ -293,7 +294,17 @@ var index = filters.getSelectedIndex();
     /** @ignore */
     _update: function() {
         
+        if (this.options.placeholder) this.inputElement.attr("placeholder", this.options.placeholder);
+                
+        if (this.options.disabled) {
+            this.$element.addClass("disabled");
+            this.inputElement.attr("disabled", "disabled");
+        } else {
+           this.$element.removeClass("disabled");
+           this.inputElement.removeAttr("disabled");
+        }
         
+        // Update single term fields
         if (!this.options.multiple) {
             if (this.syncSelectElement) this.syncSelectElement.find("option:selected").removeAttr("selected");
             if (this.selectedIndex >= 0) {
@@ -306,6 +317,7 @@ var index = filters.getSelectedIndex();
             return;
         }
 
+        // Update multiple term fields
         if (this.syncSelectElement) {
             this.syncSelectElement.find("option:selected").removeAttr("selected");
             
@@ -316,6 +328,7 @@ var index = filters.getSelectedIndex();
             }
         }
         
+        // Create selected tag list
         var ul = $("<ul class=\"tags\"></ul>");
         
         $.each(this.selectedIndices, function(k, index) {
@@ -324,6 +337,7 @@ var index = filters.getSelectedIndex();
         
         }.bind(this));
         
+        // Add new list to widget
         this.$element.find("ul").remove();
         if (ul.children().length > 0) {
             if (this.options.stacking) {
@@ -333,15 +347,7 @@ var index = filters.getSelectedIndex();
             }
         }
         
-        if (this.options.placeholder) this.inputElement.attr("placeholder", this.options.placeholder);
-        if (this.options.disabled) {
-            this.$element.addClass("disabled");
-            this.inputElement.attr("disabled", "disabled");
-        } else {
-           this.$element.removeClass("disabled");
-           this.inputElement.removeAttr("disabled");
-        }
-        
+        // Correct input field length of stacking fields
         this._correctInputFieldWidth();
         
     },
