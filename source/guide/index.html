@@ -23,7 +23,7 @@
   <script src="examples/assets/google-code-prettify/prettify.js"></script>
 
 </head>
-<body>
+<body class="desktop">
 
   <header class="top">
 
@@ -44,12 +44,13 @@
 
   <div class="page" role="main">
 
-    <div id="main-rail" class="rail left">
-      <div class="wrap">
+    <div id="main-rail" class="rail left fixed">
+      <div class="wrap accordion">
+
         <section class="links">
             <a class="heading" href="#General">General</a>
 
-            <nav>
+            <nav class="fold">
               <a href="#WhatIsCUI">What is CoralUI?</a>
               <a href="#ResolutionIndependence">Resolution Independence</a>
               <a href="#BrowserSupport">Browser Support</a>
@@ -57,7 +58,7 @@
             </nav>
         </section>
 
-        <section class="links foldable open">
+        <section class="links">
             <a class="heading" href="#TextStyles">Text Styles</a>
 
             <nav class="fold">
@@ -67,7 +68,7 @@
             </nav>
         </section>
 
-        <section class="links foldable open">
+        <section class="links">
             <a class="heading" href="#PageComponents">Page&nbsp;Components</a>
 
             <nav class="fold">
@@ -77,7 +78,7 @@
             </nav>
         </section>
 
-        <section class="links foldable open">
+        <section class="links">
             <a class="heading" href="#Navigation">Navigation</a>
 
             <nav class="fold">
@@ -88,13 +89,14 @@
            </nav>
         </section>
 
-        <section class="links foldable">
+        <section class="links">
             <a class="heading" href="#ButtonsAndControls">Buttons &amp; Controls</a>
 
             <nav class="fold">
               <a href="#Buttons">Buttons</a>
               <a href="#TextField">Text field</a>
               <a href="#SearchField">Search field</a>
+              <a href="#Filters">Filters</a>
               <a href="#Checkbox">Checkbox</a>
               <a href="#RadioButtons">Radio buttons</a>
               <a href="#Toggle">Toggle</a>
@@ -105,7 +107,7 @@
             </nav>
         </section>
 
-        <section class="links foldable">
+        <section class="links">
             <a class="heading" href="#DataPresentation">Data&nbsp;Presentation</a>
 
             <nav class="fold">
@@ -115,7 +117,7 @@
             </nav>
         </section>
 
-        <section class="links foldable">
+        <section class="links">
             <a class="heading" href="#Dialogs">Dialogs</a>
 
             <nav class="fold">
@@ -124,7 +126,7 @@
            </nav>
         </section>
 
-        <section class="links foldable">
+        <section class="links">
             <a class="heading" href="#StatusIndicators">Status Indicators</a>
 
             <nav class="fold">
@@ -135,17 +137,7 @@
               <a href="#ProgressBar">Progress Bar</a>
            </nav>
         </section>
-
-        <section class="links foldable">
-            Foo
-        </section>
-
-        <section class="links hidden">
-            <a class="heading" href="#Miscellaneous">Miscellaneous</a>
-
-            <nav>
-           </nav>
-        </section>
+        
       </div>
     </div>
 
@@ -589,6 +581,231 @@
             <pre class="prettyprint linenums"></pre>
           </div>
         </section>
+        
+        <section id="Filters">
+              <h2 class="line">Filters (Work in progress - not for production use)</h2>
+              <p>Filters &amp; Tags input variants. Filter input fields can be created by markup directly or by JavaScript, though
+              the full funcationality can only be achieved by using the corresponding widget.</p>
+              <p>You can use an input field or a select field as template for the widget.</p>
+
+              <div class="componentSample">
+                  <div class="example">
+                      <div class="filterSample">
+                          <div class="sampleTitle left">Single</div>
+                          <input type="text" placeholder="Single Term Filter" id="filters-singleterm">
+                      </div>
+                      
+                      <div class="filterSample">
+                          <div class="sampleTitle extended left">Standard</div>
+                          <select data-placeholder="Add Filter" multiple id="filters-standard">
+                              <option>Apple</option>
+                              <option>Pear</option>
+                              <option>Banana</option>
+                          </select>
+                              
+                      </div>
+                      
+                      <div class="filterSample">
+                          <div class="sampleTitle extended left">Stacking</div>
+                          <select data-placeholder="Add Filter" multiple data-stacking="true" id="filters-stacking">
+                              <option>Apple</option>
+                              <option>Pear</option>
+                              <option>Banana</option>
+                          </select> 
+                      </div>
+                      
+                      <div class="filterSample">
+                          <div class="sampleTitle left">Error</div>
+                          <input class="filter error" type="text">
+                      </div>
+                      
+                      <div class="filterSample">
+                          <div class="sampleTitle left">Disabled</div>
+                          <input class="filter" disabled type="text">
+                      </div>
+                  </div>
+                  
+                  
+                <pre class="prettyprint linenums">
+    &lt;!-- Single term filters with input field as template --&gt;
+    &lt;input type="text" placeholder="Single Term Filter"&gt;
+
+    &lt;!-- Standard filters with select as template --&gt;
+    &lt;select data-placeholder="Add Filter" multiple&gt;
+        &lt;option&gt;Apple&lt;/option&gt;
+        &lt;option&gt;Pear&lt;/option&gt;
+        &lt;option&gt;Banana&lt;/option&gt;
+    &lt;/select&gt;
+
+    &lt;!-- Stacking filters with select as template --&gt;
+    &lt;select data-placeholder="Add Filter" multiple data-stacking="true"&gt;
+        &lt;option&gt;Apple&lt;/option&gt;
+        &lt;option&gt;Pear&lt;/option&gt;
+        &lt;option&gt;Banana&lt;/option&gt;
+    &lt;/select&gt;
+
+    &lt;!-- &hellip; and don't forget to initialise your Widget (if you are not using data-init) --&gt;
+    &lt;script type="text/javascript"&gt;
+        $(document).ready(function() {
+            $("select").filters(); // Or a similar selector corresponding to your DOM
+        })
+    &lt;/script&gt;
+                </pre>
+                <script type="text/javascript">
+                    $("#filters-singleterm,#filters-standard,#filters-stacking,.filter").filters();
+                </script>
+              </div>
+          </section>
+        
+        
+        <section id="Dropdown">
+              <h2 class="line">Dropdowns (Work in progress - not for production use)</h2>
+              <p>Different types of dropdowns.</p>
+
+              <div class="componentSample">
+                  <div class="example">
+                      <div class="filterSample">
+                          <div class="sampleTitle left">Standard</div>
+                          <div>
+                              <select name="dropdown" data-init="dropdown" data-placeholder="Single Select">
+                                  <option>Single One</option>
+                                  <option>Single Two</option>
+                                  <option>Single Three</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="filterSample">
+                          <div class="sampleTitle left">Multiselect</div>
+                          <div>
+                              <select name="dropdown2" multiple data-init="dropdown" data-placeholder="Multi Select">
+                                  <option>Multi One</option>
+                                  <option>Multi Two</option>
+                                  <option>Multi Three</option>
+                              </select>
+
+                          </div>
+                      </div>
+                      <div class="filterSample">
+                          <div class="sampleTitle left">Editable</div>
+                          <div>
+                              <select name="dropdown3" data-editable="true" data-init="dropdown" data-placeholder="Editable Select">
+                                  <option>Edit One</option>
+                                  <option>Edit Two</option>
+                                  <option>Edit Three</option>
+                              </select>
+
+                          </div>
+                      </div>
+                      <div class="filterSample">
+                          <div class="sampleTitle left">Disabled</div>
+                          <div>
+                              <select name="dropdown4" data-init="dropdown" data-placeholder="Disabled Select" disabled>
+                                  <option>One</option>
+                                  <option>Two</option>
+                                  <option>Three</option>
+                              </select>
+
+                          </div>
+                      </div>
+                      <div class="filterSample">
+                          <div class="sampleTitle left">Error</div>
+                          <div>
+                              <select name="dropdown5" data-init="dropdown" data-placeholder="Error" class="error">
+                                  <option>One</option>
+                                  <option>Two</option>
+                                  <option>Three</option>
+                              </select>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+                  
+          </section>
+
+
+
+        <section id="Slider">
+            <h2 class="line">Sliders (WIP)</h2>
+            <p>Different types of horizontal sliders.</p>
+
+            <div class="componentSample">
+                <div class="example clearfix">
+                    <div class="left">
+                        <div class="slider" data-init="slider">
+                            <input type="range" value="14" min="10" max="20" step="2">
+                        </div>
+                        <div class="slider ticked filled" data-init="slider">
+                            <input type="number" value="14" min="10" max="20" step="2">
+                        </div>
+                    </div>
+                    <div class="left">
+                        <div class="slider ticked filled" data-init="slider">
+                            <input type="number" value="14" min="10" max="20" step="2">
+                            <input type="number" value="16" min="10" max="20" step="2">
+                        </div>
+                        <div class="slider ticked filled" data-init="slider">
+                            <input type="number" value="14" min="10" max="20" step="2" disabled>
+                            <input type="number" value="16" min="10" max="20" step="2" disabled>
+                        </div>
+                    </div>
+                </div>
+              <pre class="prettyprint linenums">
+&lt;div class=&quot;slider&quot; data-init=&quot;slider&quot;&gt;
+  &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;slider ticked filled&quot; data-init=&quot;slider&quot;&gt;
+  &lt;input type=&quot;number&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;slider ticked filled&quot; data-init=&quot;slider&quot;&gt;
+  &lt;input type=&quot;number&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+  &lt;input type=&quot;number&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;slider ticked filled&quot; data-init=&quot;slider&quot;&gt;
+  &lt;input type=&quot;number&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;
+  &lt;input type=&quot;number&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;
+&lt;/div&gt;
+</pre>
+            </div>
+
+            <p>Different types of vertical sliders.</p>
+
+            <div class="componentSample">
+                <div class="example clearfix">
+                    <div class="left">
+                        <div class="slider vertical" data-init="slider">
+                            <input type="range" value="14" min="10" max="20" step="2">
+                        </div>
+                        <div class="slider vertical ticked filled" data-init="slider">
+                            <input type="number" value="14" min="10" max="20" step="2">
+                        </div>
+                        <div class="slider vertical ticked filled" data-init="slider">
+                            <input type="number" value="14" min="10" max="20" step="2">
+                            <input type="number" value="16" min="10" max="20" step="2">
+                        </div>
+                        <div class="slider vertical ticked filled" data-init="slider">
+                            <input type="number" value="14" min="10" max="20" step="2" disabled>
+                            <input type="number" value="16" min="10" max="20" step="2" disabled>
+                        </div>
+                    </div>
+                </div>
+              <pre class="prettyprint linenums">
+&lt;div class=&quot;slider vertical&quot; data-init=&quot;slider&quot;&gt;
+  &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;slider vertical ticked filled&quot; data-init=&quot;slider&quot;&gt;
+  &lt;input type=&quot;number&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;slider vertical ticked filled&quot; data-init=&quot;slider&quot;&gt;
+  &lt;input type=&quot;number&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+  &lt;input type=&quot;number&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;slider vertical ticked filled&quot; data-init=&quot;slider&quot;&gt;
+  &lt;input type=&quot;number&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;
+  &lt;input type=&quot;number&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;
+&lt;/div&gt;
+</pre>
+            </div>
+        </section>
 
         <section id="Checkbox">
           <h2 class="line">Checkbox</h2>
@@ -641,6 +858,118 @@
 </pre>
           </div>
         </section>
+
+        <section id="Toggle">
+            <h2 class="line">Toggles & Selectors (WIP)</h2>
+            <h3>Switch</h3>
+            <p>Mutually exclusive, for use in tables.</p>
+
+            <div class="componentSample">
+                <div class="example clearfix">
+                    <div class="switch">
+                        <label><input type="checkbox" name="s1"><span>Off</span><span>On</span></label>
+                    </div>
+                    <div class="switch">
+                        <label><input type="checkbox" name="s2" disabled><span>Off</span><span>On</span></label>
+                    </div>
+                </div>
+               <pre class="prettyprint linenums">
+&lt;div class=&quot;switch&quot;&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s1&quot;&gt;&lt;span&gt;Off&lt;/span&gt;&lt;span&gt;On&lt;/span&gt;&lt;/label&gt;
+&lt;/div&gt;
+&lt;div class=&quot;switch&quot;&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s2&quot; disabled&gt;&lt;span&gt;Off&lt;/span&gt;&lt;span&gt;On&lt;/span&gt;&lt;/label&gt;
+&lt;/div&gt;
+</pre>
+            </div>
+
+            <h3>Selector</h3>
+            <p>Mutually exclusive.</p>
+
+            <div class="componentSample">
+                <div class="example clearfix">
+                    <div class="left">
+                        <div class="selector">
+                            <label><input type="radio" name="s3"><span>Yes</span></label>
+                            <label><input type="radio" name="s3"><span>No</span></label>
+                        </div>
+                        <div class="selector">
+                            <label><input type="radio" name="s4" disabled><span>Yes</span></label>
+                            <label><input type="radio" name="s4" disabled><span>No</span></label>
+                        </div>
+                    </div>
+                </div>
+               <pre class="prettyprint linenums">
+&lt;div class=&quot;selector&quot;&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;s3&quot;&gt;&lt;span&gt;Yes&lt;/span&gt;&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;s3&quot;&gt;&lt;span&gt;No&lt;/span&gt;&lt;/label&gt;
+&lt;/div&gt;
+&lt;div class=&quot;selector&quot;&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;s4&quot; disabled&gt;&lt;span&gt;Yes&lt;/span&gt;&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;s4&quot; disabled&gt;&lt;span&gt;No&lt;/span&gt;&lt;/label&gt;
+&lt;/div&gt;
+</pre>
+            </div>
+
+            <h3>Multi-Selector</h3>
+            <p>Not mutually exclusive.</p>
+
+            <div class="componentSample">
+                <div class="example clearfix">
+                    <div class="left">
+                        <div class="selector">
+                            <label><input type="checkbox" name="s5"><span>Chicken</span></label>
+                            <label><input type="checkbox" name="s5"><span>Steak</span></label>
+                            <label><input type="checkbox" name="s5"><span>Pork</span></label>
+                        </div>
+                        <div class="selector">
+                            <label><input type="checkbox" name="s6" disabled><span>Chicken</span></label>
+                            <label><input type="checkbox" name="s6" disabled><span>Steak</span></label>
+                            <label><input type="checkbox" name="s6" disabled><span>Pork</span></label>
+                        </div>
+                    </div>
+                </div>
+               <pre class="prettyprint linenums">
+&lt;div class=&quot;selector&quot;&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s5&quot;&gt;&lt;span&gt;Chicken&lt;/span&gt;&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s5&quot;&gt;&lt;span&gt;Steak&lt;/span&gt;&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s5&quot;&gt;&lt;span&gt;Pork&lt;/span&gt;&lt;/label&gt;
+&lt;/div&gt;
+&lt;div class=&quot;selector&quot;&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s6&quot; disabled&gt;&lt;span&gt;Chicken&lt;/span&gt;&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s6&quot; disabled&gt;&lt;span&gt;Steak&lt;/span&gt;&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s6&quot; disabled&gt;&lt;span&gt;Pork&lt;/span&gt;&lt;/label&gt;
+&lt;/div&gt;
+</pre>
+            </div>
+        </section>
+
+		<!-- Draggable -->
+        <section id="Draggable">
+          <h2 class="line">Draggable List</h2>
+          <p>A list with items that can be dragged and dropped.</p>
+
+          <div class="componentSample">
+              <div class="example clearfix">
+                <div class="left">					
+					<ul class="draggable">
+						<li draggable="true">My Content 1<button class="close">&times;</button></li>
+						<li draggable="true">My Content 2<button class="close">&times;</button></li>
+						<li draggable="true">My Content 3<button class="close">&times;</button></li>
+					</ul>
+                </div>
+              </div>
+              <pre class="prettyprint linenums">
+&lt;ul class=&quot;draggable&quot; &gt;
+&lt;li draggable=&quot;true&quot;&gt;My Content 1&lt;button class=&quot;close&quot;&gt;&amp;times&lt;/button&gt;&lt;/li&gt;
+&lt;li draggable=&quot;true&quot;&gt;My Content 2&lt;button class=&quot;close&quot;&gt;&amp;times&lt;/button&gt;&lt;/li&gt;
+&lt;li draggable=&quot;true&quot;&gt;My Content 3&lt;button class=&quot;close&quot;&gt;&amp;times&lt;/button&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+          </div>
+        </section>
+
+		<!-- end draggable -->
 
       </section><!-- /ButtonsAndControls -->
 

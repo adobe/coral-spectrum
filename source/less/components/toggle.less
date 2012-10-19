@@ -1,0 +1,171 @@
+/**
+  Element: toggle
+  CUI button styles
+*/
+
+// Selector
+.selector {
+  display: inline-block;
+  font-size: 0;
+  background-color: @selector-disabled-color;
+
+  label {
+    line-height: 32*@px;
+    min-width: 50*@px;
+    display: inline-block;
+    text-align: center;
+    padding: 0;
+    cursor: pointer;
+
+    span {
+      width: 100%;
+      padding: 0 10*@px;
+      .box-sizing(border-box);
+      .gradient(@selector-gradient-start-color, @selector-gradient-end-color);
+
+      &:hover {
+        .gradient(@selector-gradient-start-color, @selector-gradient-start-color);
+      }
+
+      border: @px solid @selector-border-color;
+      border-left: none;
+    }
+    &:first-child span {
+      border-left: @px solid @selector-border-color;
+    }
+
+    span:before {
+      display: none; // to overwrite default checkbox / radio button
+    }
+    input[type=checkbox],
+    input[type=radio] {
+      width: 1px;
+      float: right;
+      height: 1px;
+      margin-bottom: -1px;
+
+      &:checked + span {
+        .box-shadow(inset 0 0 0.5rem rgba(0, 0, 0, 0.25));
+      }
+
+      &:focus  + span {
+        .glow();
+        position: relative;
+        z-index: 1;
+      }
+
+      &:disabled + span {
+        opacity: 0.5;
+        .gradient(@selector-gradient-start-color, @selector-gradient-start-color);
+      }
+    }
+  }
+}
+
+// Switch
+.switch {
+  display: inline-block;
+  font-size: 0;
+
+  label {
+    display: inline-block;
+    cursor: pointer;
+
+    &:hover input[type="checkbox"] + span + span::before {
+      .gradient(@switch-handle-gradient-start-color, @switch-handle-gradient-start-color);
+    }
+    &:hover input[type="checkbox"]:disabled + span + span::before {
+      .gradient(@switch-handle-gradient-start-color, @switch-handle-gradient-end-color);
+    }
+
+    input[type=checkbox] {
+      width: 1px;
+      float: right;
+      height: 1px;
+      margin-bottom: -1px;
+
+      + span {
+          color: @switch-text-selected-color;
+        &:before {
+          display: none;
+        }
+        &:after {
+          display: inline-block;
+          margin: 0 0 0 5*@px;
+          .box-sizing(border-box);
+          .border-radius(0.25rem);
+          background-color: @switch-slider-background-color;
+          content: "\a0";
+          width: 32*@px;
+          height: 10*@px;
+          border: @px solid @slider-border-color;
+        }
+      }
+
+      + span + span {
+        color: @switch-text-color;
+        margin-left: -5*@px;
+        &:before {
+          position: relative;
+          left: -27*@px;
+          display: inline-block;
+          .box-sizing(border-box);
+          .border-radius(0.25rem);
+          .gradient(@switch-handle-gradient-start-color, @switch-handle-gradient-end-color);
+          content: "\a0"; // Todo: replace with icon
+          line-height: 1.6;
+          width: 10*@px;
+          height: 20*@px;
+          border: @px solid @slider-border-color;
+        }
+        &:after {
+          display: none;
+        }
+      }
+
+      &:checked + span {
+        color: @switch-text-color;
+        &:after {
+          background-color: @switch-slider-selected-background-color;
+          border-color: @switch-slider-selected-border-color;
+          background-image: none;
+        }
+      }
+
+      &:checked + span + span {
+        color: @switch-text-selected-color;
+        &:before {
+          left: -5*@px;
+        }
+      }
+
+      &:focus  + span:after,
+      &:focus  + span + span:before {
+        .glow();
+      }
+
+      &:disabled {
+        + span {
+          color: @switch-text-selected-disabled-color;
+          &:after {
+            background-color: @switch-slider-selected-disabled-background-color;
+            border-color: @switch-slider-selected-disabled-border-color;
+          }
+        }
+        + span + span {
+          color: @switch-text-disabled-color;
+          &:before {
+            background-color: @switch-slider-selected-disabled-background-color;
+            border-color: @switch-slider-selected-disabled-border-color;
+          }
+        }
+        &:checked + span {
+          color: @switch-text-disabled-color;
+        }
+        &:checked + span + span {
+          color: @switch-text-selected-disabled-color;
+        }
+      }
+    }
+  }
+}

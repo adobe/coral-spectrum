@@ -19,7 +19,12 @@ module.exports = function(grunt) {
     'components/CUI.Modal.js',
     'components/CUI.Tabs.js',
     'components/CUI.Alert.js',
-    'components/CUI.Rail.js'
+    'components/CUI.Rail.js',
+    'components/CUI.Popover.js',
+    'components/CUI.DropdownList.js',
+    'components/CUI.Dropdown.js',
+    'components/CUI.Filters.js',
+    'components/CUI.Slider.js'
   ];
   
   /**
@@ -347,7 +352,7 @@ module.exports = function(grunt) {
           '<%= dirs.build %>/js/CUI.Templates.js',
           '<%= dirs.source %>/test/**'
         ],
-        tasks: 'mocha coverage'
+        tasks: 'mocha'
       }
     }
   });
