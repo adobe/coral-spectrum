@@ -176,7 +176,7 @@ describe('CUI.Tabs', function() {
       element: el
     });
   
-    it('should not overwrite tabs', function() {
+    it('should not overwrite tabs and have proper role', function() {
       expect(el.find('a[role="tab"]').first()).to.have.html('Tab 1');
     });
     
@@ -191,11 +191,30 @@ describe('CUI.Tabs', function() {
       expect(el.find('section').eq(1)).to.have.class('active');
     });
   });
+
+  describe('from markup with missing active', function() {
+    var tabsHTML = [
+      '<div class="tabs">',
+        '<nav>',
+          '<a href="#" data-toggle="tab">Tab 1</a>',
+        '</nav>',
+        '<section>Lorizzle ipsizzle fo shizzle mah nizzle fo rizzle.</section>',
+      '</div>'
+    ].join();
+    
+    it('sets the first tab as active on load if none are specified', function() {
+      var el = $(tabsHTML).appendTo('body');
+      $('body').trigger('cui-onload');
+
+      expect(el.find('a')).to.have.class('active');
+      expect(el.find('section')).to.have.class('active');
+    });
+  });
   
   describe('options', function() {
     var el, tabs;
 
-    function optionsTests(set) {
+    var optionsTests = function(set) {
       ['white', 'stacked', 'nav'].forEach(function(type) {
         it('can set type to '+type, function() {
           set('type', type);

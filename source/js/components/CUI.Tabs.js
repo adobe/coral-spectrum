@@ -332,27 +332,35 @@ tabs.hide();
       $tab.focus();
   };
 
+  // utility function for setting up tabs already on the page
+  var _onLoad = function() {
+    // onload handle activating tabs, so remote content is loaded if set to active initially
+    // this also handles tab setups that do not have the correct aria fields, etc.
+    $('.tabs').each(function() {
+      var $element = $(this), $tab;
+
+      // find the first active tab (to trigger a load),
+      // or set the first tab to be active
+      if (($tab = $element.find('nav > a.active').first()).length === 0)
+        $tab = $element.find('nav > a').first();
+
+      // Set ARIA attributes
+      _makeAccessible($element);
+
+      // Activate the tab, but don't focus
+      _activateTab($tab, true);
+    });
+  };
+
   // jQuery plugin
   CUI.util.plugClass(CUI.Tabs);
 
   if (CUI.options.dataAPI) {
     $(function() {
-      // onload handle activating tabs, so remote content is loaded if set to active initially
-      // this also handles tab setups that do not have the correct aria fields, etc.
-      $('.tabs').each(function() {
-        var $element = $(this), $tab;
-
-        // find the first active tab (to trigger a load),
-        // or set the first tab to be active
-        if (($tab = $element.find('nav > a.active').first()).length === 0)
-          $tab = $element.find('nav > a').first();
-
-        // Set ARIA attributes
-        _makeAccessible($element);
-
-        // Activate the tab, but don't focus
-        _activateTab($tab, true);
-      });
+      // set up on onload handler
+      // and the trigger based onload handler
+      _onLoad();
+      $('body').on('cui-onload.data-api', _onLoad);
 
       // Data API
       $('body').on('click.tabs.data-api focus.tabs.data-api', '.tabs > nav > a[data-toggle="tab"]', function (e) {
