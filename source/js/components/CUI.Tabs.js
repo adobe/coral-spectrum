@@ -161,6 +161,8 @@ tabs.hide();
       @param {Boolean} [options.tabs.active]        Whether the tab should be the active tab. Only one tab can be active at a time
      */
     construct: function(options) {
+      var that = this;
+
       // Add tabs class to give styling
       this.$element.addClass('tabs');
 
@@ -176,7 +178,7 @@ tabs.hide();
       if (this.options.tabs.length > 0 && (this.options.active === undefined || this.options.active === null)) {
         this.options.tabs.forEach(function(t, idx) {
           if (t.active) {
-            this.options.active = idx;
+            that.options.active = idx;
             return false;
           }
         });
@@ -242,11 +244,11 @@ tabs.hide();
       if (typeof active === 'number' && active < this.options.tabs.length && active >= 0) {
         $tab = this.$element.find('nav > a[data-toggle="tab"]:eq('+active+')');
       } else if (typeof active === 'string' && active.length > 0) {
-        $tab = this.$element.find('nav > a[data-toggle="tab"]').find('[data-target="#'+active+'"], [href="#'+active+'"]');
+        $tab = this.$element.find('nav > a[data-toggle="tab"]').filter('[data-target="#'+active+'"], [href="#'+active+'"]');
       }
 
-      // Activate the tab, but don't focus
-      _activateTab($tab, true);
+      if ($tab)
+        _activateTab($tab, true); // Activate the tab, but don't focus
     }
   });
 
@@ -338,8 +340,7 @@ tabs.hide();
       // onload handle activating tabs, so remote content is loaded if set to active initially
       // this also handles tab setups that do not have the correct aria fields, etc.
       $('.tabs').each(function() {
-        var $element = $(this);
-        var $tab;
+        var $element = $(this), $tab;
 
         // find the first active tab (to trigger a load),
         // or set the first tab to be active
@@ -355,10 +356,6 @@ tabs.hide();
 
       // Data API
       $('body').on('click.tabs.data-api focus.tabs.data-api', '.tabs > nav > a[data-toggle="tab"]', function (e) {
-        if (e.isTrigger) {
-          return; // ignore self-triggered events
-        }
-
         var $tab = $(this);
 
         // and show/hide the relevant tabs
@@ -374,12 +371,9 @@ tabs.hide();
       });
       
       /*
-      Keyboard interaction
-      Based on guidelines from http://www.w3.org/TR/2010/WD-wai-aria-practices-20100916/#tabpanel
-      Some inspiration taken from http://codetalks.org/source/widgets/tabpanel/tabpanel1.html
-      
-      TODO: Control + PgUp: Show previous tab and restore focus to last control with focus or first control in tab if no previous focus
-      TODO: Control + PgDn: Show next tab and restore focus to last control with focus or first control in tab if no previous focus
+        Keyboard interaction
+        Based on guidelines from http://www.w3.org/TR/2010/WD-wai-aria-practices-20100916/#tabpanel
+        Some inspiration taken from http://codetalks.org/source/widgets/tabpanel/tabpanel1.html
       */
       $('body').on('keydown.tabs.data-api', '.tabs > nav > a[data-toggle="tab"]', function (e) {
         var $tab = $(this), key = e.which;
@@ -389,7 +383,7 @@ tabs.hide();
           Left Arrow - with focus on a tab, pressing the left arrow will move focus to the previous tab in the tab list and activate that tab. Pressing the left arrow when the focus is on the first tab in the tab list will move focus and activate the last tab in the list.
           Down arrow - behaves the same as right arrow in order to support vertical tabs
           */
-          var prev = $tab.prev().not('.disabled');
+          var prev = $tab.prevAll().not('.disabled').first();
 
           if (prev.length > 0) {
             _activateTab(prev);
@@ -404,7 +398,7 @@ tabs.hide();
           Right Arrow - with focus on a tab, pressing the right arrow will move focus to the next tab in the tab list and activate that tab. Pressing the right arrow when the focus is on the last tab in the tab list will move focus to and activate the first tab in the list.
           Up arrow - behaves the same as left arrow in order to support vertical tabs
           */
-          var next = $tab.next().not('.disabled');
+          var next = $tab.nextAll().not('.disabled').first();
 
           if (next.length > 0) {
             _activateTab(next);
@@ -413,34 +407,6 @@ tabs.hide();
           }
           
           // Stop scroll action
-          e.preventDefault();
-        } else if (key === 33 && e.ctrlKey) {
-          /*
-          Ctrl+PageUp - When focus is inside of a tab panel, pressing Ctrl+PageUp moves focus to the tab of the previous tab in the tab list and activates that tab. 
-          When focus is in the first tab panel in the tab list, pressing Ctrl+PageUp will move focus to the last tab in the tab list and activate that tab.
-          */
-          var $prev = $tab.prev().not('.disabled');
-          
-          if ($prev.length !== 0)
-            _activateTab($prev);
-          else
-            _activateTab($tab.siblings(':not(".disabled")').last());
-            
-          // Stop paging action
-          e.preventDefault();
-        } else if (key === 34 && e.ctrlKey) {
-          /*
-          Ctrl+PageDown When focus is inside of a tab panel, pressing Ctrl+PageDown moves focus to the tab of the next tab in the tab list and activates that tab.
-          When focus is in the last tab panel in the tab list, pressing Ctrl+PageDown will move focus to the first tab in the tab list and activate that tab.
-          */
-          var $next = $tab.next().not('.disabled');
-          
-          if ($next.length !== 0)
-            _activateTab($next);
-          else
-            _activateTab($tab.siblings(':not(".disabled")').first());
-            
-          // Stop paging action
           e.preventDefault();
         }
       });
