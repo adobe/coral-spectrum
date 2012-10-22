@@ -13,6 +13,7 @@
     line-height: 32*@px;
     min-width: 50*@px;
     display: inline-block;
+    position: relative;
     text-align: center;
     padding: 0;
     cursor: pointer;
@@ -40,7 +41,9 @@
     input[type=checkbox],
     input[type=radio] {
       width: 1px;
-      float: right;
+      position: absolute;
+      top: 0;
+      left: 0;
       height: 1px;
       margin-bottom: -1px;
 
