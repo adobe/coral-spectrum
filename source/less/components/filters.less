@@ -42,13 +42,7 @@
         outline: none;
       }
 
-      &.error {
-        .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
 
-        &:focus {
-         .glow;
-        }
-      }
     }
 
     ul.tags {
@@ -73,7 +67,8 @@
 
         vertical-align: baseline;
 
-        background: transparent;
+        background: none;
+        filter: none; // IE fix
         border: 0;
 
         width: auto;
@@ -86,6 +81,10 @@
     &.disabled input {
       background: @textfield-disabled-background-color url('../images/components/filters/magnifier.png') no-repeat 0.5rem 0.4rem;
       background-size: 1.1rem;
+    }
+
+    &.error input {
+        .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
     }
 
 }
@@ -119,11 +118,11 @@
     
     &.error {
         .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
-
-        &:focus {
-         .glow;
-        }
     }
+    &.error input {
+        .glow(0);
+    }
+
 
     &.focus {
      .glow;
