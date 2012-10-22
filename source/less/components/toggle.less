@@ -128,8 +128,8 @@
       &:checked + span {
         color: @switch-text-color;
         &:after {
-          background-color: @switch-slider-selected-background-color;
-          border-color: @switch-slider-selected-border-color;
+          background-color: @switch-selected-slider-background-color;
+          border-color: @switch-selected-slider-border-color;
           background-image: none;
         }
       }
@@ -148,24 +148,27 @@
 
       &:disabled {
         + span {
-          color: @switch-text-selected-disabled-color;
+          color: @switch-disabled-selected-text-color;
           &:after {
-            background-color: @switch-slider-selected-disabled-background-color;
-            border-color: @switch-slider-selected-disabled-border-color;
+            background-color: @switch-disabled-background-color;
+            border-color: @switch-disabled-border-color;
           }
         }
         + span + span {
-          color: @switch-text-disabled-color;
+          color: @switch-disabled-text-color;
           &:before {
-            background-color: @switch-slider-selected-disabled-background-color;
-            border-color: @switch-slider-selected-disabled-border-color;
+            background-color: @switch-disabled-background-color;
+            border-color: @switch-disabled-border-color;
           }
         }
         &:checked + span {
-          color: @switch-text-disabled-color;
+          color: @switch-disabled-text-color;
+          &:after {
+          	background-color: @switch-disabled-selected-slider-background-color;
+          }
         }
         &:checked + span + span {
-          color: @switch-text-selected-disabled-color;
+          color: @switch-disabled-selected-text-color;
         }
       }
     }
