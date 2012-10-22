@@ -42,13 +42,7 @@
         outline: none;
       }
 
-      &.error {
-        .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
 
-        &:focus {
-         .glow;
-        }
-      }
     }
 
     ul.tags {
@@ -89,6 +83,10 @@
       background-size: 1.1rem;
     }
 
+    &.error input {
+        .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+    }
+
 }
 
 .filters.stacking {
@@ -120,11 +118,11 @@
     
     &.error {
         .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
-
-        &:focus {
-         .glow;
-        }
     }
+    &.error input {
+        .glow(0);
+    }
+
 
     &.focus {
      .glow;
