@@ -23,7 +23,7 @@
   <script src="examples/assets/google-code-prettify/prettify.js"></script>
 
 </head>
-<body>
+<body class="desktop">
 
   <header class="top">
 
@@ -44,12 +44,13 @@
 
   <div class="page" role="main">
 
-    <div id="main-rail" class="rail left">
-      <div class="wrap">
+    <div id="main-rail" class="rail left fixed">
+      <div class="wrap accordion">
+
         <section class="links">
             <a class="heading" href="#General">General</a>
 
-            <nav>
+            <nav class="fold">
               <a href="#WhatIsCUI">What is CoralUI?</a>
               <a href="#ResolutionIndependence">Resolution Independence</a>
               <a href="#BrowserSupport">Browser Support</a>
@@ -57,7 +58,7 @@
             </nav>
         </section>
 
-        <section class="links foldable open">
+        <section class="links">
             <a class="heading" href="#TextStyles">Text Styles</a>
 
             <nav class="fold">
@@ -67,7 +68,7 @@
             </nav>
         </section>
 
-        <section class="links foldable open">
+        <section class="links">
             <a class="heading" href="#PageComponents">Page&nbsp;Components</a>
 
             <nav class="fold">
@@ -77,7 +78,7 @@
             </nav>
         </section>
 
-        <section class="links foldable open">
+        <section class="links">
             <a class="heading" href="#Navigation">Navigation</a>
 
             <nav class="fold">
@@ -88,25 +89,25 @@
            </nav>
         </section>
 
-      <section class="links">
-          <a class="heading" href="#ButtonsAndControls">Buttons &amp; Controls</a>
+        <section class="links">
+            <a class="heading" href="#ButtonsAndControls">Buttons &amp; Controls</a>
 
-          <nav>
-            <a href="#Buttons">Buttons</a>
-            <a href="#TextField">Text field</a>
-            <a href="#SearchField">Search field</a>
-            <a href="#Filters">Filters</a>
-            <a href="#Slider">Slider</a>
-            <a href="#Checkbox">Checkbox</a>
-            <a href="#RadioButtons">Radio buttons</a>
-            <a href="#Toggle">Toggle</a>
-            <a href="#Selector">Selector</a>
-            <a href="#Dropdown">Dropdown</a>
-            <a href="#Draggable">Draggable</a>
-          </nav>
-      </section>
+            <nav class="fold">
+              <a href="#Buttons">Buttons</a>
+              <a href="#TextField">Text field</a>
+              <a href="#SearchField">Search field</a>
+              <a href="#Filters">Filters</a>
+              <a href="#Checkbox">Checkbox</a>
+              <a href="#RadioButtons">Radio buttons</a>
+              <a href="#Toggle">Toggle</a>
+              <a href="#Selector">Selector</a>
+              <a href="#Slider">Slider</a>
+              <a href="#Dropdown">Dropdown</a>
+              <a href="#Draggable">Draggable</a>
+            </nav>
+        </section>
 
-        <section class="links foldable">
+        <section class="links">
             <a class="heading" href="#DataPresentation">Data&nbsp;Presentation</a>
 
             <nav class="fold">
@@ -116,7 +117,7 @@
             </nav>
         </section>
 
-        <section class="links foldable">
+        <section class="links">
             <a class="heading" href="#Dialogs">Dialogs</a>
 
             <nav class="fold">
@@ -125,7 +126,7 @@
            </nav>
         </section>
 
-        <section class="links foldable">
+        <section class="links">
             <a class="heading" href="#StatusIndicators">Status Indicators</a>
 
             <nav class="fold">
@@ -136,17 +137,7 @@
               <a href="#ProgressBar">Progress Bar</a>
            </nav>
         </section>
-
-        <section class="links foldable">
-            Foo
-        </section>
-
-        <section class="links hidden">
-            <a class="heading" href="#Miscellaneous">Miscellaneous</a>
-
-            <nav>
-           </nav>
-        </section>
+        
       </div>
     </div>
 
@@ -888,7 +879,7 @@
         </section>
 
         <section id="Toggle">
-            <h2 class="line">Toggles & Selectors</h2>
+            <h2 class="line">Toggles & Selectors (WIP)</h2>
             <h3>Switch</h3>
             <p>Mutually exclusive, for use in tables.</p>
 
@@ -971,6 +962,33 @@
 </pre>
             </div>
         </section>
+
+		<!-- Draggable -->
+        <section id="Draggable">
+          <h2 class="line">Draggable List</h2>
+          <p>A list with items that can be dragged and dropped.</p>
+
+          <div class="componentSample">
+              <div class="example clearfix">
+                <div class="left">					
+					<ul class="draggable">
+						<li draggable="true">My Content 1<button class="close">&times;</button></li>
+						<li draggable="true">My Content 2<button class="close">&times;</button></li>
+						<li draggable="true">My Content 3<button class="close">&times;</button></li>
+					</ul>
+                </div>
+              </div>
+              <pre class="prettyprint linenums">
+&lt;ul class=&quot;draggable&quot; &gt;
+&lt;li draggable=&quot;true&quot;&gt;My Content 1&lt;button class=&quot;close&quot;&gt;&amp;times&lt;/button&gt;&lt;/li&gt;
+&lt;li draggable=&quot;true&quot;&gt;My Content 2&lt;button class=&quot;close&quot;&gt;&amp;times&lt;/button&gt;&lt;/li&gt;
+&lt;li draggable=&quot;true&quot;&gt;My Content 3&lt;button class=&quot;close&quot;&gt;&amp;times&lt;/button&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+          </div>
+        </section>
+
+		<!-- end draggable -->
 
       </section><!-- /ButtonsAndControls -->
 

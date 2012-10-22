@@ -21,16 +21,3 @@ body {
 
   cursor: default;
 }
-
-
-// Double our base size for retina devices
-// TBD: break this out into retina.less? conditionally import?
-@media
-only screen and (-webkit-min-device-pixel-ratio: 2),
-only screen and (min-device-pixel-ratio: 2) {
-  body {
-    font-size: @base-size * 2;
-  }
-
-  // TBD: handle icons resizing here or in icons.less/retina.less?
-}

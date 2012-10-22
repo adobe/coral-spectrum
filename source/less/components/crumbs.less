@@ -24,10 +24,6 @@ nav.crumbs {
       font-family: AdobeCleanLight;
       color: @crumb-chevron-color;
     }
-
-    &:hover {
-      color: @crumb-hover-text-color;
-    }
     
     img {
       height: 2rem;
@@ -42,4 +38,9 @@ nav.crumbs {
       content: "";
     }
   }
+}
+
+// hover states
+.desktop nav.crumbs:hover {
+  color: @crumb-hover-text-color;
 }

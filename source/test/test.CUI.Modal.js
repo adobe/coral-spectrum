@@ -21,47 +21,55 @@ describe('CUI.Modal', function() {
     ]
   };
   
-  it('should be defined in CUI namespace', function() {
-    expect(CUI).to.have.property('Modal');
-  });
-  
-  it('should be defined on jQuery object', function() {
-    var div = $('<div/>');
-    expect(div).to.have.property('modal');
+  describe('definition', function() {
+    // 'definition' block is a temporary workaround for kmiyashiro/grunt-mocha/issues/22
+    it('should be defined in CUI namespace', function() {
+      expect(CUI).to.have.property('Modal');
+    });
+
+    it('should be defined on jQuery object', function() {
+      var div = $('<div/>');
+      expect(div).to.have.property('modal');
+    });
   });
   
   describe('modal from template', function() {
     var el = $('<div/>').modal(modalConfig);
   
     it('should have correct CSS classname', function() {
-      expect(el.hasClass('modal')).to.be.true;
+      expect(el).to.have.class('modal');
     });
     
     it('should have correct markup', function() {
-      expect(el.find('.modal-header')).to.have.length(1);
-      expect(el.find('.modal-body')).to.have.length(1);
-      expect(el.find('.modal-footer')).to.have.length(1);
+      // chai-jquery style
+      expect(el).to.have('.modal-header');
+      expect(el).to.have('.modal-body');
+      expect(el).to.have('.modal-footer');
     });
     
     it('should have correct heading', function() {
-      expect(el.find('.modal-header h2').html()).to.equal('TestHeading');
+      expect(el.find('.modal-header h2')).to.have.html('TestHeading');
     });
     
     it('should have correct content', function() {
-      expect(el.find('.modal-body').html()).to.equal('TestContent');
+      expect(el.find('.modal-body')).to.have.html('TestContent');
     });
     
     it('should have buttons', function() {
-      expect(el.find('.modal-footer button')).to.have.length(2);
+      // Does not work with chai-jquery
+      // expect(el.find('.modal-footer button')).to.have.length(2);
+      
+      // Workaround for chaijs/chai-jquery/issues/21
+      expect(el.find('.modal-footer button').length).to.equal(2); 
     });
     
     it('should have button with correct class names', function() {
-      expect(el.find('.modal-footer button.myCloseButton')).to.have.length(1);
-      expect(el.find('.modal-footer button.mySaveButton')).to.have.length(1);
+      expect(el.find('.modal-footer')).to.have('button.myCloseButton');
+      expect(el.find('.modal-footer')).to.have('button.mySaveButton');
     });
     
     it('should be visible by default', function() {
-      expect(el.hasClass('in')).to.be.true;
+      expect(el).to.have.class('in');
     });
   });
   
@@ -84,11 +92,11 @@ describe('CUI.Modal', function() {
     });
   
     it('should not overwrite heading', function() {
-      expect(el.find('.modal-header h2').html()).to.equal('TestHeading');
+      expect(el.find('.modal-header h2')).to.have.html('TestHeading');
     });
     
     it('should not overwrite content', function() {
-      expect(el.find('.modal-body').html()).to.equal('TestContent');
+      expect(el.find('.modal-body')).to.have.html('TestContent');
     });
   });
   
@@ -124,14 +132,14 @@ describe('CUI.Modal', function() {
       });
       modal.set('heading', 'TestHeading');
       
-      expect(el.find('.modal-header h2').html()).to.equal('TestHeading');
+      expect(el.find('.modal-header h2')).to.have.html('TestHeading');
     });
     
     it('can set heading with jQuery', function() {
       var el = $('<div/>').modal();
       el.modal({ heading: 'TestHeading' });
       
-      expect(el.find('.modal-header h2').html()).to.equal('TestHeading');
+      expect(el.find('.modal-header h2')).to.have.html('TestHeading');
     });
     
     it('can set content with class', function() {
@@ -141,14 +149,14 @@ describe('CUI.Modal', function() {
       });
       modal.set('content', 'TestContent');
       
-      expect(el.find('.modal-body').html()).to.equal('TestContent');
+      expect(el.find('.modal-body')).to.have.html('TestContent');
     });
 
     it('can set content with jQuery', function() {
       var el = $('<div/>').modal();
       el.modal({ content: 'TestContent' });
       
-      expect(el.find('.modal-body').html()).to.equal('TestContent');
+      expect(el.find('.modal-body')).to.have.html('TestContent');
     });
     
     it('can set type with class', function() {
@@ -158,14 +166,14 @@ describe('CUI.Modal', function() {
       });
       modal.set('type', 'error');
       
-      expect(el.hasClass('error')).to.be.true;
+      expect(el).to.have.class('error');
     });
 
     it('can set type with jQuery', function() {
       var el = $('<div/>').modal();
       el.modal({ type: 'error' });
       
-      expect(el.hasClass('error')).to.be.true;
+      expect(el).to.have.class('error');
     });
   });
   

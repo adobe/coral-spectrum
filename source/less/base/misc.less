@@ -38,13 +38,35 @@ img {
 
 /**
   Class: .hidden
-  Hide something without affecting its width/height (can be measured while hidden)
+  Hide element from visual browsers as well as from accessibilty, but without affecting its width/height (can be measured while hidden).
+  Known Limitation: In case you need the width/height, avoid to place it inside an element that can be focused (like a link),
+  or it will lose it's dimensions when focused!
 */
 .hidden {
   position: absolute;
-  left: -9999px;
-  top: -9999px;
+  clip: rect(0, 0, 0, 0);
   visibility: hidden;
+}
+:focus .hidden {
+  // Workaround for the focus rectangle in Webkit
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: 1px;
+}
+
+/**
+  Class: .hidden-accessible
+  Hide element from visual browsers, but still keep it accessible (useful to add accessibility to visual elements).
+*/
+.hidden-accessible {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  // Workaround for the focus rectangle in Webkit
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: 1px;
 }
 
 
