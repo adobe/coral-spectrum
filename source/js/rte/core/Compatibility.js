@@ -371,7 +371,7 @@ CUI.rte.Compatibility = function() {
         adjustRegExp: function(obj, prop, defaultValue) {
             if (obj[prop] == null) {
                 obj[prop] = defaultValue;
-            } else if (CUI.rte.Util.isString(obj[prop])) {
+            } else if (CUI.rte.Utils.isString(obj[prop])) {
                 var propValue = obj[prop];
                 var opts = undefined;
                 if (com.strStartsWith(propValue, "/")) {
