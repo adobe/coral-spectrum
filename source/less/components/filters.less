@@ -6,45 +6,44 @@
 *
 */
 
-.filters input[type=text] {
-
-  .box-sizing(border-box);
-
-  width: 100%;
-
-  font-size: 0.8125rem;
-
-  height: 2rem;
-  padding: 0.25rem 0.5rem 0.25rem 2rem;
-  margin: 0 0 0.5rem 0;
-
-  border: @px solid @textfield-border-color; 
-  background: @textfield-background-color url('../images/components/filters/magnifier.png') no-repeat 0.5rem 0.4rem;
-  background-size: 1.1rem;
-
-  &:disabled {
-    background: @textfield-disabled-background-color url('../images/components/filters/magnifier.png') no-repeat 0.5rem 0.4rem;
-    background-size: 1.1rem;
-  }
-
-  &:focus {
-    .glow();
-    outline: none;
-  }
-
-  &.error {
-    .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
-
-    &:focus {
-     .glow;
-    }
-  }
-}
-
 .filters {
+    position: relative;
     display: inline-block;
     width: 13rem;  /* Needs fixed width for floating term elements */
     vertical-align: top;
+
+    select {
+        display: none;
+    }
+
+    input[type=text] {
+
+      .box-sizing(border-box);
+
+      width: 100%;
+
+      font-size: 0.8125rem;
+
+      height: 2rem;
+      padding: 0.25rem 0.5rem 0.25rem 2rem;
+      margin: 0 0 0.5rem 0;
+
+      border: @px solid @textfield-border-color; 
+      background: @textfield-background-color url('../images/components/filters/magnifier.png') no-repeat 0.5rem 0.4rem;
+      background-size: 1.1rem;
+
+      &:disabled {
+        background: @textfield-disabled-background-color url('../images/components/filters/magnifier.png') no-repeat 0.5rem 0.4rem;
+        background-size: 1.1rem;
+      }
+
+      &:focus {
+        .glow();
+        outline: none;
+      }
+
+
+    }
 
     ul.tags {
         font-size: 0; /* Eliminate white space */
@@ -68,7 +67,8 @@
 
         vertical-align: baseline;
 
-        background: transparent;
+        background: none;
+        filter: none; // IE fix
         border: 0;
 
         width: auto;
@@ -81,6 +81,10 @@
     &.disabled input {
       background: @textfield-disabled-background-color url('../images/components/filters/magnifier.png') no-repeat 0.5rem 0.4rem;
       background-size: 1.1rem;
+    }
+
+    &.error input {
+        .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
     }
 
 }
@@ -114,11 +118,11 @@
     
     &.error {
         .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
-
-        &:focus {
-         .glow;
-        }
     }
+    &.error input {
+        .glow(0);
+    }
+
 
     &.focus {
      .glow;
@@ -133,5 +137,6 @@
     em {
         font-weight: bold;
         letter-spacing: 0.1rem;
+        font-style: normal;
     }
 }

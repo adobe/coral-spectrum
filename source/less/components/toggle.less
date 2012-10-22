@@ -13,6 +13,7 @@
     line-height: 32*@px;
     min-width: 50*@px;
     display: inline-block;
+    position: relative;
     text-align: center;
     padding: 0;
     cursor: pointer;
@@ -40,7 +41,9 @@
     input[type=checkbox],
     input[type=radio] {
       width: 1px;
-      float: right;
+      position: absolute;
+      top: 0;
+      left: 0;
       height: 1px;
       margin-bottom: -1px;
 
@@ -91,30 +94,32 @@
         }
         &:after {
           display: inline-block;
+          vertical-align: middle;
           margin: 0 0 0 5*@px;
           .box-sizing(border-box);
           .border-radius(0.25rem);
           background-color: @switch-slider-background-color;
           content: "\a0";
           width: 32*@px;
-          height: 10*@px;
+          height: 8*@px;
           border: @px solid @slider-border-color;
         }
       }
 
       + span + span {
         color: @switch-text-color;
-        margin-left: -5*@px;
+        margin-left: -4*@px;
         &:before {
           position: relative;
-          left: -27*@px;
+          left: -28*@px;
           display: inline-block;
+          vertical-align: middle;
           .box-sizing(border-box);
           .border-radius(0.25rem);
           .gradient(@switch-handle-gradient-start-color, @switch-handle-gradient-end-color);
           content: "\a0"; // Todo: replace with icon
           line-height: 1.6;
-          width: 10*@px;
+          width: 9*@px;
           height: 20*@px;
           border: @px solid @slider-border-color;
         }
@@ -126,8 +131,8 @@
       &:checked + span {
         color: @switch-text-color;
         &:after {
-          background-color: @switch-slider-selected-background-color;
-          border-color: @switch-slider-selected-border-color;
+          background-color: @switch-selected-slider-background-color;
+          border-color: @switch-selected-slider-border-color;
           background-image: none;
         }
       }
@@ -146,24 +151,27 @@
 
       &:disabled {
         + span {
-          color: @switch-text-selected-disabled-color;
+          color: @switch-disabled-selected-text-color;
           &:after {
-            background-color: @switch-slider-selected-disabled-background-color;
-            border-color: @switch-slider-selected-disabled-border-color;
+            background-color: @switch-disabled-background-color;
+            border-color: @switch-disabled-border-color;
           }
         }
         + span + span {
-          color: @switch-text-disabled-color;
+          color: @switch-disabled-text-color;
           &:before {
-            background-color: @switch-slider-selected-disabled-background-color;
-            border-color: @switch-slider-selected-disabled-border-color;
+            background-color: @switch-disabled-background-color;
+            border-color: @switch-disabled-border-color;
           }
         }
         &:checked + span {
-          color: @switch-text-disabled-color;
+          color: @switch-disabled-text-color;
+          &:after {
+          	background-color: @switch-disabled-selected-slider-background-color;
+          }
         }
         &:checked + span + span {
-          color: @switch-text-selected-disabled-color;
+          color: @switch-disabled-selected-text-color;
         }
       }
     }

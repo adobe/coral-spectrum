@@ -34,16 +34,14 @@
         // Listen to events 
         this.$element.on("keydown", "", this._keyPressed.bind(this));
         
-        var hideTimeout = null; // Hacky: Remove hide timeout if element is focussed right after blur!
         this.$element.on("blur", "", function() {
-            hideTimeout = this.hide(200);
+           // Did anyone wanted use to prevent hiding?
+           if (this.preventHiding) {
+             this.preventHiding = false;
+             return;
+           }
+           this.hide();
         }.bind(this));
-        this.$element.on("focus", "", function() {
-            if (hideTimeout) {
-                clearTimeout(hideTimeout);
-                hideTimeout = null;
-            }
-        }.bind(this)); 
        
     },
     
@@ -56,6 +54,7 @@
     },
     listElement: null,
     currentIndex: -1,
+    preventHiding: false,
     
     /**
      * Show this list
@@ -140,6 +139,14 @@
         this.listElement.children().removeClass("selected");
         if (currentIndex >= 0) $(this.listElement.children().get(currentIndex)).addClass("selected");
         
+        // Scroll to position if necessary
+        if (currentIndex >= 0) {
+            var el = $(this.listElement.children().get(currentIndex));
+            var t = el.position().top;
+            this.listElement.animate({scrollTop: t}, 50);
+        }
+        
+        
         return;
     },
     /** @ignore */    
@@ -157,7 +164,7 @@
                
         var list = $("<ul class=\"dropdown-list\">");
         list.width(this.$element.outerWidth());
-        if (this.cssClass) list.addClass(this.cssClass);
+        if (this.options.cssClass) list.addClass(this.options.cssClass);
         
         
         $.each(options, function(index, value) {
@@ -171,6 +178,11 @@
         list.on("click", "li", function(event) {
            this._triggerSelect($(event.target).closest("li").attr("data-id"));
         }.bind(this));
+        
+        list.on("mousedown", "", function() {
+            // Next blur event should NOT hide the list
+            this.preventHiding = true;
+        }.bind(this)); 
         
         // Calculate correct position and size on screen
         var el = (this.options.positioningElement) ? this.options.positioningElement : this.$element;
