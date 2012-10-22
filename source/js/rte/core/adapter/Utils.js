@@ -107,6 +107,10 @@ CUI.rte.Utils = function() {
             return getHooks().processUrl(url, type);
         },
 
+        onPluginCreated: function(plugin) {
+            return getHooks().onPluginCreated(plugin);
+        },
+
         URL_IMAGE: "image"
 
     };

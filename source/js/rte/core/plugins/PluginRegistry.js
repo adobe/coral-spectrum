@@ -52,8 +52,9 @@ CUI.rte.plugins.PluginRegistry = function() {
             var registeredPlugins = { };
             for (var pluginId in pluginRegistry) {
                 if (pluginRegistry.hasOwnProperty(pluginId)) {
-                    registeredPlugins[pluginId] =
-                            new pluginRegistry[pluginId](editorKernel);
+                    var plugin = new pluginRegistry[pluginId](editorKernel);
+                    plugin = CUI.rte.Utils.onPluginCreated(plugin);
+                    registeredPlugins[pluginId] = plugin;
                 }
             }
             return registeredPlugins;

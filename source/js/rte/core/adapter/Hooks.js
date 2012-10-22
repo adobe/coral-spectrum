@@ -70,6 +70,10 @@
 
         processUrl: function(url, type) {
             return url;
+        },
+
+        onPluginCreated: function(plugin) {
+            return plugin;
         }
 
     });
