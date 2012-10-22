@@ -157,7 +157,7 @@
                
         var list = $("<ul class=\"dropdown-list\">");
         list.width(this.$element.outerWidth());
-        if (this.cssClass) list.addClass(this.cssClass);
+        if (this.options.cssClass) list.addClass(this.options.cssClass);
         
         
         $.each(options, function(index, value) {
