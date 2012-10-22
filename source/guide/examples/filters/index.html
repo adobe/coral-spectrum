@@ -26,7 +26,7 @@
             <p>
             Filter me: <input type="text" name="stacking" placeholder="Stacking">
             </p>
-        <h2>Create from jQuery</h2>            
+        <h2>Create from jQuery (with allowCreate enabled)</h2>            
             <p>
                 From select: <select class="filters"><option>One very long <b>tag</b> line</option><option>Two</option><option>Three</option></select>
             </p>
@@ -40,6 +40,14 @@
             </p>
             
             <h2>Create from markup</h2>
+            <div class="filters" data-init="filters">
+                <select>
+                    <option value="1">sad</opion>
+                    <option value="2">angry</opion>
+                    <option value="3">happy</opion>    
+                </select>
+                <input type="text">
+            </div>
             <div class="filters" data-init="filters" data-multiple="true">
                 <select>
                     <option>sad</opion>
@@ -48,7 +56,7 @@
                 </select>
                 <input type="text">
             </div>
-            <div class="filters" data-init="filters" data-multiple="true" data-option-renderer="cqTagOptionRenderer">
+            <div class="filters" data-init="filters" data-multiple="true" data-option-renderer="cqTag" data-allow="create">
                 <select>
                     <option>moods/sad</opion>
                     <option>moods/angry</opion>
@@ -102,7 +110,7 @@
 
                 filters1.setSelectedIndex(2);
 
-                $("select.filters").filters({placeholder: "select me!", stacking: true});
+                $("select.filters").filters({placeholder: "select me!", stacking: true, allowCreate: true});
                 $("select.filters").each(function() {
                     $(this).data("filters").setSelectedIndices([0,1]);
                 })
