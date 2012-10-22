@@ -2,71 +2,72 @@
  * Class: .draggable
  * Used for draggable list component
  */
+ul.draggable {
+  padding: 0;
+  margin: 0;
+  
+  background-color: @draggable-list-background-color; 
+  
+  font-size: 0.8125rem; // 13px
+  
+  list-style: none;
+  .no-select(); // disable text select
+  
+  li {
+    position: relative; // so we can position X and handle absolutely within
+    
+    height: 2.5rem; // 40px;
+    margin: 0;
+    padding: 0 2.5rem 0 0.875rem;
+    
+    // TODO: IE has a problem.. things are too tall... box sizing doesn't fix it.
+    //.box-sizing(border-box);
+    
+    border: @px solid @draggable-list-border-color;
+    
+    background-color: @draggable-list-background-color;
+    
+    line-height: 2.5rem; // 40px
+    color: @draggable-list-text-normal-color;
 
-[draggable] 
-{
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
-}
+    &:hover {
+      cursor: url('../images/cursors/openhand.cur'), default;
+      background-color: @draggable-list-background-hover-color;
+    }
+    
+    &:active {
+      cursor: url('../images/cursors/closedhand.cur'), default;
+    }
+    
+    &:disabled {
+      background-color: @draggable-list-background-disabled-color;
+      color: @draggable-list-text-disabled-color;
+    }
+    
+    + li {
+      margin-top: -1*@px;
+    }
+    
+    &:before {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      
+      content: " ";
+      width: 0.25rem;
+      height: 2.5rem;
+      
+      background: lighten(@draggable-list-border-color, 10%); // Temporary, until we get a texture in there
+    }
 
-.draggable
-{
-	font-size: 0.8125rem; // 13px
-}
-
-/* close button for list items */
-.close 
-{
-  float: right;
-  font-weight: bold;	
-  padding: 0.375em;
-  margin-top: 0.4em;
-}
-
-ul.draggable
-{
-	list-style: none;
-	width: 170px; //10.625em
-	padding: 0 0;
-	margin: 0 0;
-	border: 1px solid @draggable-list-border-color; //0.063em
-	background-color: @draggable-list-background-color;	
-}
-
-ul.draggable li
-{
-	background-color: @draggable-list-background-color;
-	height: 40px; //2.500em; // 40px;
-	line-height: 40px; //2.500em; // 40px
-    border-bottom: 1px solid @draggable-list-border-color;
-	border-top: solid .063em transparent;
-	border-right: solid .063em transparent;
-	border-left: solid 4px @draggable-list-border-handle-color; //4px 0.250em
-	padding: 0 0 0 0.875em; //14px
-	color: @draggable-list-text-normal-color;
-	margin-top: 0;
-}
-
-ul.draggable li:last-child
-{
-	border-bottom: 0px solid transparent;
-}
-
-ul.draggable li:hover
-{
-	cursor: url(../images/cursors/openhand.cur), default;
-	background-color: @draggable-list-background-hover-color;
-}
-
-ul.draggable li:active
-{
-	cursor: url(../images/cursors/closedhand.cur), default;
-} 
-
-ul.draggable li:disabled
-{
-	background-color: @draggable-list-background-disabled-color;
-	color: @draggable-list-text-disabled-color;
+    .close {
+      position: absolute;
+      right: 0;
+      top: 0;
+      
+      padding: 0.157rem;
+      margin: 0.7rem;
+    }
+  }
 }
