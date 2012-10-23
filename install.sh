@@ -7,12 +7,34 @@ else
     alias echoe="echo"
 fi
 
+# parse options
+while getopts ":c" opt; do
+  case "$opt" in
+    c)
+      USE_COLOR=false; 
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      ;;
+  esac
+done
+
+# output with color
+# -c turns this off 
 green() {
-  echoe "\033[32m$1\033[0m$2"
+  if $USE_COLOR ; then
+    echoe "\033[32m$1\033[0m$2"
+  else
+    echoe $1 $2
+  fi
 }
 
 red() {
+  if $USE_COLOR ; then
   echoe "\033[31m$1\033[0m$2"
+  else
+    echoe $1 $2
+  fi
 }
 
 echo "Checking for build dependencies..."
