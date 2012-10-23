@@ -313,6 +313,12 @@ module.exports = function(grunt) {
           ],
           '<%= dirs.build %>/test/libs/chai-jquery/': [
             '<%= dirs.modules %>/chai-jquery/chai-jquery.js'
+          ],
+          '<%= dirs.build %>/test/libs/sinon/': [
+            '<%= dirs.modules %>/sinon/lib/**'
+          ],
+          '<%= dirs.build %>/test/libs/sinon-chai/': [
+            '<%= dirs.modules %>/sinon-chai/lib/sinon-chai.js'
           ]
         }
       }
