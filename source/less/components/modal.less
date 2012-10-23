@@ -34,8 +34,6 @@
   min-width: 20rem;
   max-width: 90%;
 
-  overflow: auto;
-
   outline: none; // Firefox shows focus outline
 
   border: 0.625rem solid @modal-border-color;
@@ -92,8 +90,8 @@
     width: 100%;
     padding: 1rem;
 
-    overflow-y: auto;
-
+    .scrollable();
+    
     border: @px solid @modal-outline-color;
     border-top: 0;
     border-bottom: 0;
