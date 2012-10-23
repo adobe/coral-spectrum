@@ -773,12 +773,57 @@
           <div class="componentSample">
             <div class="example">
 
-              <div class="assetcard">
-                <img src="images/theme/cloudui.png"/>
+              <div class="cardview assetcard">
+                <img src="https://lh5.googleusercontent.com/-Jw12BvbSrH4/UHylAGRIsrI/AAAAAAAADUI/2lXvalAiCgU/s288/20121010-IMG_2547.jpg"/>
                 <p>filename</p>
                 <p>dimensions</p>
                 <p>filesize</p>
               </div>
+            </div>
+            <pre class="prettyprint linenums">
+&lt;div class=&quot;cardview&quot;&gt;
+  &lt;img src=&quot;fake_card_asset.jpg&quot;/&gt;
+  &lt;p&gt;filename&lt;/p&gt;
+  &lt;p&gt;dimensions&lt;/p&gt;
+  &lt;p&gt;filesize&lt;/p&gt;
+&lt;/div&gt;
+            </pre>
+          </div>
+        </section>  
+          <a id="assetcard"></a>
+          <h3 class="line">Collection Card View</h2>
+          <p>For a collection of items.  Thumbnail source is selected at time of creation. It has some banner text as well.</p>
+
+          <div class="componentSample">
+            <div class="example">
+
+              <div class="cardview collectioncard">
+                <div class="thumbs">
+                  <div class="third"><img src="https://lh3.googleusercontent.com/-Gdles7xB94E/UG5o9A4wjAI/AAAAAAAADR0/Pr8fl3uZT3Y/s288/DSC_8895.jpg"/></div>
+                  <div class="second"><img src="https://lh5.googleusercontent.com/-Jw12BvbSrH4/UHylAGRIsrI/AAAAAAAADUI/2lXvalAiCgU/s288/20121010-IMG_2547.jpg"/></div>
+                  <div class="first"><img src="https://lh6.googleusercontent.com/-nof7U7vu5qg/UHyk4sjXq_I/AAAAAAAADTI/8lmvLjBl97g/s288/20121010-IMG_2511.jpg"/></div>
+                </div>
+                <div class="description">This collection has three or more things</div>
+              </div>
+
+              <div class="cardview collectioncard">
+                <div class="thumbs">
+                  <div class="one-empty third"></div>
+                  <div class="second"><img src="https://lh5.googleusercontent.com/-Jw12BvbSrH4/UHylAGRIsrI/AAAAAAAADUI/2lXvalAiCgU/s288/20121010-IMG_2547.jpg"/></div>
+                  <div class="first"><img src="https://lh6.googleusercontent.com/-nof7U7vu5qg/UHyk4sjXq_I/AAAAAAAADTI/8lmvLjBl97g/s288/20121010-IMG_2511.jpg"/></div>
+                </div>
+                <div class="description">This collection has only two things</div>
+              </div>
+
+              <div class="cardview collectioncard">
+                <div class="thumbs">
+                  <div class="two-empty third"></div>
+                  <div class="one-empty second"></div>
+                  <div class="first"><img src="https://lh6.googleusercontent.com/-nof7U7vu5qg/UHyk4sjXq_I/AAAAAAAADTI/8lmvLjBl97g/s288/20121010-IMG_2511.jpg"/></div>
+                </div>
+                <div class="description">This collection has only one thing</div>
+              </div>
+
             </div>
             <pre class="prettyprint linenums">
 &lt;div class=&quot;cardview&quot;&gt;

@@ -3,13 +3,76 @@
   Displays assets in result set as a card 
 */
 
-.assetcard {
+.cardview
+{
     display:inline-block;
     text-align:center;
-    padding: .5em;
-    border: .5em solid @cardview-wideborder-color;
-    outline: @px solid @cardview-outerline-color;
-    -moz-box-shadow: inset 0 0 @px @cardview-insetshadow-color;
-    -webkit-box-shadow: inset 0 0 @px @cardview-insetshadow-color;
-    box-shadow: inset 0 0 @px @cardview-insetshadow-color;
 }
+
+.assetcard {
+        padding: .5em;
+        border: .5em solid @cardview-wideborder-color;
+        outline: @px solid @cardview-outerline-color;
+        -moz-box-shadow: inset 0 0 @px @cardview-insetshadow-color;
+        -webkit-box-shadow: inset 0 0 @px @cardview-insetshadow-color;
+        box-shadow: inset 0 0 @px @cardview-insetshadow-color;
+}
+
+.collectioncard {
+
+    border: 1px solid #CCC;
+    width: 14em;
+    padding: .5em;
+
+    .thumbs {
+
+        height: 14em;
+        position: relative;
+        background-color: #FFF;
+
+        img {
+            height: 100%;
+            width: 100%;
+        }
+
+        div {
+            background-color: #FFF;
+            position: absolute;
+            width: 12em;
+            height: 12em;
+            border: @px solid @cardview-outerline-color;
+        }
+
+        .first {
+            top : 1em;
+            left: .3em;
+        }
+
+        .second {
+            top : .6em;
+            left: .7em;
+        }
+
+        .third {
+            top : .3em;
+            left: 1em;
+        }  
+
+        .one-empty {
+            background-color: #DCDCDC;
+        } 
+
+        .two-empty {
+            background-color: #C2C2C2;
+        } 
+
+ 
+    }
+
+    .description {
+        position: relative;
+        padding: .3em;
+        width: 12em;
+    }
+}
+
