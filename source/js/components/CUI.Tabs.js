@@ -363,7 +363,7 @@ tabs.hide();
       $('body').on('cui-onload.data-api', _onLoad);
 
       // Data API
-      $('body').on('click.tabs.data-api focus.tabs.data-api', '.tabs > nav > a[data-toggle="tab"]', function (e) {
+      $('body').fipo('tap.tabs.data-api', 'click.tabs.data-api focus.tabs.data-api', '.tabs > nav > a[data-toggle="tab"]', function (e) {
         var $tab = $(this);
 
         // and show/hide the relevant tabs
@@ -383,7 +383,7 @@ tabs.hide();
         Based on guidelines from http://www.w3.org/TR/2010/WD-wai-aria-practices-20100916/#tabpanel
         Some inspiration taken from http://codetalks.org/source/widgets/tabpanel/tabpanel1.html
       */
-      $('body').on('keydown.tabs.data-api', '.tabs > nav > a[data-toggle="tab"]', function (e) {
+      $('body').pointer('keydown.tabs.data-api', '.tabs > nav > a[data-toggle="tab"]', function (e) {
         var $tab = $(this), key = e.which;
         
         if (key === 37 || key === 38) {

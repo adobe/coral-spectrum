@@ -278,7 +278,7 @@ modal.hide();
     /** @ignore */
     _setEscapeHandler: function(show) {
       if (show && this.options.keyboard) {
-        $('body').on('keyup', function (e) {
+        $('body').pointer('keyup', function (e) {
           if (e.which === 27)
             this.hide();
         }.bind(this));
@@ -353,7 +353,7 @@ modal.hide();
           if (button.click === 'hide')
             el.attr('data-dismiss', 'modal');
           else if (typeof button.click === 'function')
-            el.on('click', button.click.bind(this, { dialog: this }));
+            el.fipo('tap', 'click', button.click.bind(this, { dialog: this }));
         }
 
         if (button.href)
@@ -372,7 +372,7 @@ modal.hide();
   // Data API
   if (CUI.options.dataAPI) {
     $(function() {
-      $('body').on('click.modal.data-api', '[data-toggle="modal"]', function (e) {
+      $('body').fipo('tap.modal.data-api', 'click.modal.data-api', '[data-toggle="modal"]', function (e) {
         var $trigger = $(this);
 
         // Get the target from data attributes
