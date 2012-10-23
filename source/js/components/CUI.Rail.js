@@ -250,14 +250,14 @@ $('#myRail').rail({
 
     _initAccordion: function (con) {
       var activeAccordion = 'active-accordion',
-          containerHeight = con.outerHeight(),
           accordions = con.find('section'),
-          closedHeight = accordions.outerHeight(true) + 1, // height of one closed accordion
-          contentHeight = containerHeight - (accordions.length * closedHeight); // height of the content for one open accordion
+          closedHeight = accordions.outerHeight(true); // height of one closed accordion
 
 
       accordions.each(function (i, e) {
         var f = $(e),
+            containerHeight = con.outerHeight(),
+            contentHeight = containerHeight - (accordions.length * closedHeight), // height of the content for one open accordion
             trigger = f.find('.heading'),
             fold = f.find('.fold');
 
