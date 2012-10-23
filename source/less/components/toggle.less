@@ -73,10 +73,6 @@
 
 // Switch
 .switch {
-  display: inline-block;
-  font-size: 0;
-
-  label {
     display: inline-block;
     cursor: pointer;
 
@@ -114,7 +110,7 @@
 
       + span + span {
         color: @switch-text-color;
-        margin-left: -4*@px;
+        margin-left: -4*@px; // Remove whitespace between-inline block elements
         &:before {
           position: relative;
           left: -28*@px;
