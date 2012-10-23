@@ -244,11 +244,12 @@ modal.hide();
       this._toggleBackdrop(true);
       this._setEscapeHandler(true);
 
-      // Add to body if this element isn't in the DOM already
-      if (!this.$element.parent().length) {
+      // Move to the bottom of body so we're outside of any relative/absolute context
+      // This allows us to know we'll always float above the backdrop
+      if (this.options.element.parentNode !== document.body) {
         this.$element.appendTo(document.body);
       }
-
+      
       // Get width/height right
       this.$element.css('visibility', 'hidden').css('left', '0').show();
       this.center();

@@ -1,0 +1,73 @@
+/**
+ * Class: .draggable
+ * Used for draggable list component
+ */
+ul.draggable {
+  padding: 0;
+  margin: 0;
+  
+  background-color: @draggable-list-background-color; 
+  
+  font-size: 0.8125rem; // 13px
+  
+  list-style: none;
+  .no-select(); // disable text select
+  
+  li {
+    position: relative; // so we can position X and handle absolutely within
+    
+    height: 2.5rem; // 40px;
+    margin: 0;
+    padding: 0 2.5rem 0 0.875rem;
+    
+    // TODO: IE has a problem.. things are too tall... box sizing doesn't fix it.
+    //.box-sizing(border-box);
+    
+    border: @px solid @draggable-list-border-color;
+    
+    background-color: @draggable-list-background-color;
+    
+    line-height: 2.5rem; // 40px
+    color: @draggable-list-text-normal-color;
+
+    &:hover {
+      cursor: url('../images/cursors/openhand.cur'), default;
+      background-color: @draggable-list-background-hover-color;
+    }
+    
+    &:active {
+      cursor: url('../images/cursors/closedhand.cur'), default;
+    }
+    
+    &:disabled {
+      background-color: @draggable-list-background-disabled-color;
+      color: @draggable-list-text-disabled-color;
+    }
+    
+    + li {
+      margin-top: -1*@px;
+    }
+    
+    &:before {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      
+      content: " ";
+      width: 0.25rem;
+      height: 2.5rem;
+      
+      background: lighten(@draggable-list-border-color, 10%); // Temporary, until we get a texture in there
+    }
+
+    .close {
+      position: absolute;
+      right: 0;
+      top: 0;
+      
+      padding: 0.157rem;
+      margin: 0.7rem;
+    }
+  }
+}
