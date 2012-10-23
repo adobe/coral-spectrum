@@ -164,6 +164,7 @@ modal.hide();
       this.$element.on('change:heading', this._setHeading.bind(this));
       this.$element.on('change:content', this._setContent.bind(this));
       this.$element.on('change:type', this._setType.bind(this));
+      this.$element.on('change:fullscreen', this._setFullscreen.bind(this));
 
       // Render template, if necessary
       if (this.$element.children().length === 0) {
@@ -181,7 +182,8 @@ modal.hide();
       backdrop: 'static',
       keyboard: true,
       visible: true,
-      type: 'default'
+      type: 'default',
+      fullscreen: false
     },
 
     _types: [
@@ -201,6 +203,7 @@ modal.hide();
       }
       this._setButtons();
       this._setType();
+      this._setFullscreen();
     },
 
     /** @ignore */
@@ -238,6 +241,14 @@ modal.hide();
     },
 
     /** @ignore */
+    _setFullscreen: function() {
+      if (this.options.fullscreen)
+        this.$element.addClass('fullscreen');
+      else
+        this.$element.removeClass('fullscreen');
+    },
+
+    /** @ignore */
     _show: function() {
       $('body').addClass('modal-open');
 
@@ -250,15 +261,25 @@ modal.hide();
         this.$element.appendTo(document.body);
       }
       
-      // Get width/height right
-      this.$element.css('visibility', 'hidden').css('left', '0').show();
-      this.center();
-      this.$element.css('visibility', 'visible').css('left', '50%').hide();
+      if (this.options.fullscreen) {
+        var $body = this.$element.find('.modal-body');
+        var $footer = this.$element.find('.modal-footer');
+        $body.css({
+          bottom: $footer.outerHeight()
+        });
+      }
+      else {
+        // Get width/height right
+        this.$element.css('visibility', 'hidden').css('left', '0').show();
+        this.center();
+        this.$element.css('visibility', 'visible').css('left', '50%').hide();
+      }
 
       this.$element.addClass('in').attr('aria-hidden', false).fadeIn().focus();
 
       // IE9 fix for modals that suddenly expand
-      this.$element.css('width', this.$element.innerWidth());
+      if (!this.options.fullscreen)
+        this.$element.css('width', this.$element.innerWidth());
     },
 
     /** @ignore */
@@ -324,6 +345,9 @@ modal.hide();
       @returns {CUI.Modal} this, chainable
      */
     center: function() {
+      if (this.options.fullscreen)
+        return this;
+
       var width = this.$element.outerWidth();
       var height = this.$element.outerHeight();
 
