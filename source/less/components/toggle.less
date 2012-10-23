@@ -56,8 +56,9 @@
         filter: 0; // prevents ie9 filter from overriding box-shadow
       }
 
-      &:focus  + span {
-        .glow();
+      // Focused
+      &:focus + span {
+        .gradient(@selector-gradient-start-color, @selector-gradient-start-color);
         position: relative;
         z-index: 1;
       }
