@@ -7,7 +7,7 @@
         var that = this;
 
         // setting default dom attributes if needed
-        if (!this.$element.hasClass('vertical') && !this.$element.hasClass('horizontal')) this.$element.addClass(that.options.orientation);
+        if (!this.$element.hasClass('vertical')) this.$element.addClass(that.options.orientation);
 
         this.$element.find('input').each(function() {
             var $this = $(this);
@@ -28,6 +28,15 @@
         // adjust dom to our needs
         this._render();
     },
+
+    defaults: {
+      step: '1',
+      min: '1',
+      max: '100',
+      value: '1',
+      orientation: 'horizontal'
+    },
+    
     _render: function() {
         var that = this;
 
@@ -99,14 +108,6 @@
                 $(handle).append(tooltip);
             }
         });
-    },
-
-    defaults: {
-      step: '1',
-      min: '1',
-      max: '100',
-      value: '1',
-      orientation: 'horizontal'
     }
   });
 

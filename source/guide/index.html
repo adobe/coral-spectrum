@@ -37,17 +37,17 @@
     </nav>
 
     <div class="drawer">
-      <div class="badge">v0.3.0-SNAPSHOT</div>
+      <div class="badge">v0.4.0-SNAPSHOT</div>
     </div>
 
   </header>
 
   <div class="page" role="main">
 
-    <div id="main-rail" class="rail left fixed">
+    <div id="main-rail" class="rail left scroll with-toolbar-bottom">
       <div class="wrap">
 
-        <section class="links foldable">
+        <section class="links">
             <a class="heading" href="#General">General</a>
 
             <nav class="fold">
@@ -138,6 +138,10 @@
            </nav>
         </section>
         
+      </div>
+      <div class="toolbar">
+        <a href="#" id="rail-mode-plain">PTR</a>
+        <a href="#" id="rail-mode-accordion">A</a>
       </div>
     </div>
 
@@ -889,20 +893,12 @@
 
             <div class="componentSample">
                 <div class="example clearfix">
-                    <div class="switch">
-                        <label><input type="checkbox" name="s1"><span>Off</span><span>On</span></label>
-                    </div>
-                    <div class="switch">
-                        <label><input type="checkbox" name="s2" disabled><span>Off</span><span>On</span></label>
-                    </div>
+                    <label class="switch"><input type="checkbox" name="s1"><span>Off</span><span>On</span></label>
+                    <label class="switch"><input type="checkbox" name="s2" disabled><span>Off</span><span>On</span></label>
                 </div>
                <pre class="prettyprint linenums">
-&lt;div class=&quot;switch&quot;&gt;
-  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s1&quot;&gt;&lt;span&gt;Off&lt;/span&gt;&lt;span&gt;On&lt;/span&gt;&lt;/label&gt;
-&lt;/div&gt;
-&lt;div class=&quot;switch&quot;&gt;
-  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s2&quot; disabled&gt;&lt;span&gt;Off&lt;/span&gt;&lt;span&gt;On&lt;/span&gt;&lt;/label&gt;
-&lt;/div&gt;
+&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s1&quot;&gt;&lt;span&gt;Off&lt;/span&gt;&lt;span&gt;On&lt;/span&gt;&lt;/label&gt;
+&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s2&quot; disabled&gt;&lt;span&gt;Off&lt;/span&gt;&lt;span&gt;On&lt;/span&gt;&lt;/label&gt;
 </pre>
             </div>
 

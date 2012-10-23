@@ -4,29 +4,164 @@ module.exports = function(grunt) {
    JavaScript file include order
    Add new components to this array _after_ the components they inherit from
   */
-  var includeOrder = [
-    // Class system
-    'Class.js',
-    
-    // Namespace 
-    'CUI.js',
-    
-    // Utilities
-    'CUI.Util.js',
+  var includeOrder = {
+    "base": [
+      'Class.js'
+    ],
+    "cui-templates": [
+      '{build}/CUI.Templates.js'
+    ],
+    "cui": [
+      // Class system
+      'Class.js',
 
-    // Components
-    'components/CUI.Widget.js',
-    'components/CUI.Modal.js',
-    'components/CUI.Tabs.js',
-    'components/CUI.Alert.js',
-    'components/CUI.Rail.js',
-    'components/CUI.Popover.js',
-    'components/CUI.DropdownList.js',
-    'components/CUI.Dropdown.js',
-    'components/CUI.Filters.js',
-    'components/CUI.Slider.js'
-  ];
-  
+      // Namespace
+      'CUI.js',
+
+      // Utilities
+      'CUI.Util.js',
+
+      // Components
+      'components/CUI.Widget.js',
+      'components/CUI.Modal.js',
+      'components/CUI.Tabs.js',
+      'components/CUI.Alert.js',
+      'components/CUI.Rail.js',
+      'components/CUI.Popover.js',
+      'components/CUI.DropdownList.js',
+      'components/CUI.Dropdown.js',
+      'components/CUI.Filters.js',
+      'components/CUI.Slider.js'
+    ],
+    "rte-core": [
+      'rte/setup.js',
+
+      'rte/core/adapter/Utils.js',
+      'rte/core/adapter/Hooks.js',
+      'rte/core/adapter/Eventing.js',
+      'rte/core/adapter/Query.js',
+      'rte/core/adapter/Constants.js',
+
+      'rte/core/EditContext.js',
+      'rte/core/EditorKernel.js',
+      'rte/core/IFrameKernel.js',
+      'rte/core/DivKernel.js',
+      'rte/core/Common.js',
+      'rte/core/HtmlProcessor.js',
+      'rte/core/DomProcessor.js',
+      'rte/core/WhitespaceProcessor.js',
+      'rte/core/NodeList.js',
+      'rte/core/Selection.js',
+      'rte/core/UndoManager.js',
+      'rte/core/TableMatrix.js',
+      'rte/core/ListUtils.js',
+      'rte/core/ListRepresentation.js',
+      'rte/core/CellSelection.js',
+      'rte/core/SearchableDocument.js',
+      'rte/core/Compatibility.js',
+      'rte/core/HtmlRules.js',
+      'rte/core/Serializer.js',
+      'rte/core/HtmlSerializer.js',
+      'rte/core/XhtmlSerializer.js',
+      'rte/core/Deserializer.js',
+      'rte/core/HtmlDeserializer.js',
+      'rte/core/XhtmlDeserializer.js',
+      'rte/core/DomCleanup.js',
+      'rte/core/EditorEvent.js',
+
+      'rte/core/commands/Command.js',
+      'rte/core/commands/CommandRegistry.js',
+      'rte/core/commands/Delete.js',
+      'rte/core/commands/SurroundBase.js',
+      'rte/core/commands/DefaultFormatting.js',
+      'rte/core/commands/Anchor.js',
+      'rte/core/commands/CutCopy.js',
+      'rte/core/commands/Format.js',
+      'rte/core/commands/Indent.js',
+      'rte/core/commands/InsertHtml.js',
+      'rte/core/commands/Justify.js',
+      'rte/core/commands/Link.js',
+      'rte/core/commands/List.js',
+      'rte/core/commands/Outdent.js',
+      'rte/core/commands/Paste.js',
+      'rte/core/commands/Style.js',
+      'rte/core/commands/Table.js',
+      'rte/core/commands/Image.js',
+      'rte/core/commands/UndoRedo.js',
+
+      'rte/core/plugins/Plugin.js',
+      'rte/core/plugins/PluginRegistry.js',
+      'rte/core/plugins/PluginEvent.js',
+      'rte/core/plugins/KeyPlugin.js',
+      'rte/core/plugins/SimpleFormatPlugin.js',
+      'rte/core/plugins/EditToolsPlugin.js',
+      'rte/core/plugins/FindReplacePlugin.js',
+      'rte/core/plugins/FormatPlugin.js',
+      'rte/core/plugins/JustifyPlugin.js',
+      'rte/core/plugins/LinkPlugin.js',
+      'rte/core/plugins/ListPlugin.js',
+      'rte/core/plugins/MiscToolsPlugin.js',
+      'rte/core/plugins/ParagraphFormatPlugin.js',
+      'rte/core/plugins/StylesPlugin.js',
+      'rte/core/plugins/SubSuperScriptPlugin.js',
+      'rte/core/plugins/TablePlugin.js',
+      'rte/core/plugins/ImagePlugin.js',
+      'rte/core/plugins/UndoRedoPlugin.js',
+      'rte/core/plugins/SpellCheckerPlugin.js',
+
+      'rte/core/adapter/JQueryEvent.js',
+      'rte/core/adapter/ExtEvent.js',
+
+      'rte/core/ui/Toolkit.js',
+      'rte/core/ui/ToolkitRegistry.js',
+      'rte/core/ui/UIEvent.js',
+      'rte/core/ui/ToolbarBuilder.js',
+      'rte/core/ui/Toolbar.js',
+      'rte/core/ui/TbElement.js',
+      'rte/core/ui/TbParaFormatter.js',
+      'rte/core/ui/TbStyleSelector.js',
+      'rte/core/ui/ContextMenuBuilder.js',
+      'rte/core/ui/CmItem.js',
+      'rte/core/ui/CmSeparator.js',
+      'rte/core/ui/DialogManager.js',
+      'rte/core/ui/DialogHelper.js'
+    ],
+    "rte-cui": [
+      'rte/ui/Theme.js',
+      'rte/ui/cui/ToolkitImpl.js',
+      'rte/ui/cui/ToolbarImpl.js',
+      'rte/ui/cui/ElementImpl.js',
+      'rte/ui/cui/ParaFormatterImpl.js',
+      'rte/ui/cui/StyleSelectorImpl.js',
+      'rte/ui/cui/CuiToolbarBuilder.js',
+      'rte/ui/cui/CmItemImpl.js',
+      'rte/ui/cui/CmSeparatorImpl.js',
+      'rte/ui/cui/StubContextMenuBuilder.js',
+      'rte/ui/stub/ToolkitImpl.js',
+      'rte/ui/stub/ToolbarImpl.js',
+      'rte/ui/stub/ElementImpl.js',
+      'rte/ui/stub/ParaFormatterImpl.js',
+      'rte/ui/stub/StyleSelectorImpl.js',
+      'rte/ui/stub/StubToolbarBuilder.js',
+      'rte/ui/stub/CmItemImpl.js',
+      'rte/ui/stub/CmSeparatorImpl.js',
+      'rte/ui/stub/StubContextMenuBuilder.js',
+      'rte/ui/stub/StubDialogManager.js',
+      'rte/ui/stub/StubDialogHelper.js',
+
+      'rte/CUI.RichText.js'
+    ],
+    "rte-trailer": [
+      'rte/init.js'
+    ]
+  };
+
+  var packages = {
+    "cui": [ "cui-templates", "base", "cui"],
+    "rte-core": [ "base", "rte-core" ],
+    "cui-with-rte": [ "cui-templates", "base", "rte-core", "cui", "rte-cui", "rte-trailer" ]
+  };
+
   /**
     Build directories
     Any directories used by the build should be defined here
@@ -41,12 +176,23 @@ module.exports = function(grunt) {
 
   /**
     Get array of CUI includes in the correct order
-    
+
+    @param pkg      The package to build
     @param jsPath   Base path to prepend to each include
   */
-  function getIncludes(jsPath) {
-    var includes = [dirs.build+'/js/CUI.Templates.js'];
-    includeOrder.forEach(function(file) { includes.push(jsPath+file); });
+  function getIncludes(pkg, jsPath) {
+    var includes = [ ];
+    var def = packages[pkg];
+    def.forEach(function(_set) {
+        includeOrder[_set].forEach(function(_file) {
+          var pref = "{build}";
+          var prefLen = pref.length;
+          if ((_file.length >= prefLen) && (_file.substring(0, prefLen) === pref)) {
+            includes.push(dirs.build + "/js/" + _file.substring(prefLen + 1));
+          }
+          includes.push(jsPath + _file);
+        });
+    });
     return includes;
   }
 
@@ -95,7 +241,7 @@ module.exports = function(grunt) {
           'Handlebars',   // Handlebars
           'prettyPrint',  // google-code-prettify
           'CUI',          // CoralUI
-          'Class'         // Class 
+          'Class'         // Class
         ]
       },
       globals: {}
@@ -167,11 +313,17 @@ module.exports = function(grunt) {
           ],
           '<%= dirs.build %>/test/libs/chai-jquery/': [
             '<%= dirs.modules %>/chai-jquery/chai-jquery.js'
+          ],
+          '<%= dirs.build %>/test/libs/sinon/': [
+            '<%= dirs.modules %>/sinon/lib/**'
+          ],
+          '<%= dirs.build %>/test/libs/sinon-chai/': [
+            '<%= dirs.modules %>/sinon-chai/lib/sinon-chai.js'
           ]
         }
       }
     },
-    
+
     mincss: {
       main: {
         files: {
@@ -179,7 +331,7 @@ module.exports = function(grunt) {
         }
       }
     },
-    
+
     handlebars: {
       compile: {
         options: {
@@ -195,7 +347,7 @@ module.exports = function(grunt) {
         }
       }
     },
-    
+
     compress: {
       release: {
         options: {
@@ -230,12 +382,12 @@ module.exports = function(grunt) {
         }
       }
     },
-    
+
     jsdoc3: {
       cui: {
         template: '<%= dirs.source %>/docTemplate',
         jsdoc: '<%= dirs.components %>/JSDoc/jsdoc',
-        src: ['<%= dirs.source %>/js/**'],
+        src: ['<%= dirs.source %>/js/*.js','<%= dirs.source %>/js/components/**'],
         dest: '<%= dirs.build %>/jsdoc'
       }
     },
@@ -243,19 +395,29 @@ module.exports = function(grunt) {
     lint: {
       files: [
         'grunt.js',
-        '<%= dirs.source %>/js/**',
+        // exclude RTE for now ...
+        '<%= dirs.source %>/js/*.js',
+        '<%= dirs.source %>/js/components/**',
         '<%= dirs.source %>/guide/examples/assets/guide.js'
       ]
     },
 
     concat: {
       cui: {
-        src: getIncludes(dirs.source+'/js/'),
+        src: getIncludes("cui", dirs.source+'/js/'),
         dest: '<%= dirs.build %>/js/CUI.js'
       },
       cui_cc: {
-        src: getIncludes(dirs.temp+'/js_instrumented/'),
+        src: getIncludes("cui", dirs.temp+'/js_instrumented/'),
         dest: '<%= dirs.temp %>/js_instrumented/CUI_cc.js'
+      },
+      "rte-core": {
+        src: getIncludes("rte-core", dirs.source+'/js/'),
+        dest: '<%= dirs.build %>/js/rte-core.js'
+      },
+      "cui-with-rte": {
+        src: getIncludes("cui-with-rte", dirs.source+'/js/'),
+        dest: '<%= dirs.build %>/js/CUI-with-rte.js'
       }
     },
 
@@ -263,7 +425,16 @@ module.exports = function(grunt) {
       cui: {
         src: ['<config:concat.cui.dest>'],
         dest: '<%= dirs.build %>/js/CUI.min.js'
-      } // TBD: minify individual JS files?
+      },
+      "rte-core": {
+        src: ['<config:concat.rte-core.dest>'],
+        dest: '<%= dirs.build %>/js/rte-core.min.js'
+      },
+      "cui-with-rte": {
+        src: ['<config:concat.cui-with-rte.dest>'],
+        dest: '<%= dirs.build %>/js/CUI-with-rte.min.js'
+      }
+      // TBD: minify individual JS files?
     },
 
     less: {
@@ -290,7 +461,7 @@ module.exports = function(grunt) {
         }
       }
     },
-    
+
     mvn: {
       build: {}
     },
@@ -298,13 +469,13 @@ module.exports = function(grunt) {
     mocha: {
       cui: {
         run: true,
-        
+
         src: [
           '<%= dirs.build %>/test/index.html'
         ]
       }
     },
-    
+
     coverage: {},
 
     // Watch operations
@@ -325,27 +496,27 @@ module.exports = function(grunt) {
         ],
         tasks: 'concat:cui min:cui'
       },
-      
+
       compile_less_min_css: {
         files: '<%= dirs.source %>/less/**',
         tasks: 'less:cui mincss'
       },
-      
+
       compile_guide_less: {
         files: '<%= dirs.source %>/guide/examples/assets/guide.less',
         tasks: 'less:guide'
       },
-      
+
       compile_handlebars: {
         files: '<%= dirs.source %>/templates/*',
         tasks: 'handlebars concat:cui min:cui'
       },
-      
+
       copy_tests: {
         files: '<%= dirs.source %>/test/**',
         tasks: 'clean:tests copy:tests'
       },
-      
+
       run_tests: {
         files: [
           '<%= dirs.source %>/js/**',
@@ -356,42 +527,41 @@ module.exports = function(grunt) {
       }
     }
   });
-  
+
   // Partial build for development
-  grunt.registerTask('partial', 'lint copy handlebars concat:cui min:cui less mincss mocha');
-  
+  grunt.registerTask('partial', 'lint copy handlebars concat:cui concat:rte-core concat:cui-with-rte min less mincss mocha');
+
   // Full build with docs and compressed file
-  grunt.registerTask('full-build', 'lint copy handlebars concat:cui min less mincss mocha jsdoc');
-  
+  grunt.registerTask('full-build', 'lint copy handlebars concat:cui concat:rte-core concat:cui-with-rte min less mincss mocha jsdoc');
+
   // Full build with docs and compressed file
   grunt.registerTask('full', 'clean full-build');
-  
+
   // Release build
   // TODO: add maven?
   grunt.registerTask('release', 'clean full-build coverage compress');
-  
+
   // Rename mvn task so we can override it
   grunt.task.renameTask('mvn', 'mvn-install');
-  
+
   // Almost full build, just the stuff needed for Granite install
   grunt.registerTask('mvn-build', 'clean lint copy:images copy:fonts copy:less_bootstrap_tmp copy:less_bootstrap_build copy:less_cui handlebars concat:cui less:cui');
-  
+
   // Custom build for maven
   grunt.registerTask('mvn', 'mvn-build mvn-install');
-  
+
   // Rename watch task so we can override it
   grunt.task.renameTask('watch', 'watch-start');
-  
+
   // Redefine watch to build partial first
   grunt.registerTask('watch', 'partial watch-start');
-  
+
   // Rename jsdoc task so we can override it
   grunt.task.renameTask('jsdoc', 'jsdoc3');
-  
+
   // Redefine jsdoc task to clean first
   grunt.registerTask('jsdoc', 'clean:jsdoc jsdoc3');
-  
-  
+
   // Default task
   grunt.registerTask('default', 'partial');
 };
