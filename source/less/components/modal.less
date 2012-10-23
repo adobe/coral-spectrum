@@ -34,14 +34,12 @@
   min-width: 20rem;
   max-width: 90%;
 
-  overflow: auto;
-
   outline: none; // Firefox shows focus outline
 
   border: 0.625rem solid @modal-border-color;
 
   background-color: @modal-body-background-color;
-  .background-clip(padding-box);
+  .background-clip(padding-box); // don't let the border overlap the background
 
   .modal-header {
     position: relative;
@@ -92,8 +90,8 @@
     width: 100%;
     padding: 1rem;
 
-    overflow-y: auto;
-
+    .scrollable();
+    
     border: @px solid @modal-outline-color;
     border-top: 0;
     border-bottom: 0;

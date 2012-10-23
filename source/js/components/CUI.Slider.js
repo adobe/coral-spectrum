@@ -35,7 +35,7 @@
       max: '100',
       value: '1',
       orientation: 'horizontal'
-    }
+    },
     
     _render: function() {
         var that = this;

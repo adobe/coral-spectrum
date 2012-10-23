@@ -37,20 +37,20 @@
     </nav>
 
     <div class="drawer">
-      <div class="badge">v0.3.0-SNAPSHOT</div>
+      <div class="badge">v0.3.0</div>
     </div>
 
   </header>
 
   <div class="page" role="main">
 
-    <div id="main-rail" class="rail left fixed">
-      <div class="wrap accordion">
+    <div id="main-rail" class="rail left scroll">
+      <div class="wrap">
 
         <section class="links">
             <a class="heading" href="#General">General</a>
 
-            <nav class="fold">
+            <nav>
               <a href="#WhatIsCUI">What is CoralUI?</a>
               <a href="#ResolutionIndependence">Resolution Independence</a>
               <a href="#BrowserSupport">Browser Support</a>
@@ -58,7 +58,7 @@
             </nav>
         </section>
 
-        <section class="links">
+        <section class="links foldable">
             <a class="heading" href="#TextStyles">Text Styles</a>
 
             <nav class="fold">
@@ -68,7 +68,7 @@
             </nav>
         </section>
 
-        <section class="links">
+        <section class="links foldable">
             <a class="heading" href="#PageComponents">Page&nbsp;Components</a>
 
             <nav class="fold">
@@ -78,7 +78,7 @@
             </nav>
         </section>
 
-        <section class="links">
+        <section class="links foldable">
             <a class="heading" href="#Navigation">Navigation</a>
 
             <nav class="fold">
@@ -89,7 +89,7 @@
            </nav>
         </section>
 
-        <section class="links">
+        <section class="links foldable">
             <a class="heading" href="#ButtonsAndControls">Buttons &amp; Controls</a>
 
             <nav class="fold">
@@ -107,7 +107,7 @@
             </nav>
         </section>
 
-        <section class="links">
+        <section class="links foldable">
             <a class="heading" href="#DataPresentation">Data&nbsp;Presentation</a>
 
             <nav class="fold">
@@ -117,7 +117,7 @@
             </nav>
         </section>
 
-        <section class="links">
+        <section class="links foldable">
             <a class="heading" href="#Dialogs">Dialogs</a>
 
             <nav class="fold">
@@ -126,7 +126,7 @@
            </nav>
         </section>
 
-        <section class="links">
+        <section class="links foldable">
             <a class="heading" href="#StatusIndicators">Status Indicators</a>
 
             <nav class="fold">
@@ -1172,14 +1172,19 @@
           </div>
         </section>
 
-        <section class="hidden" id="Popover">
+        <section id="Popover">
           <h2 class="line">Popover</h2>
-          <p>Popovers.</p>
+          <p>Popovers (WIP).</p>
 
           <div class="componentSample">
-            <div class="example">
+            <div class="example" style="position: relative; height: 3rem; padding-top: 1.5rem;">
+              <div class="popover arrow-bottom">Popover content!</div>
+              <div class="popover arrow-top" style="left: 10rem">Popover content!</div>
             </div>
-            <pre class="prettyprint linenums"></pre>
+            <pre class="prettyprint linenums">
+&lt;div class=&quot;popover arrow-bottom&quot;&gt;Popover content&lt;/div&gt;
+&lt;div class=&quot;popover arrow-top&quot;&gt;Popover content&lt;/div&gt;
+</pre>
           </div>
         </section>
 
