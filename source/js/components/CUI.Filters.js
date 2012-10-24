@@ -16,6 +16,17 @@
             <option>orange</option>
       </select>
       </p>
+
+        <h2>Hints &amp; Tricks</h2>
+      <p>
+       <ul>
+            <li>
+               If you change the <code>options</code> with the <code>set</code>-Method after initialising the element,
+                don't forgt to also set the <code>optionDisplayStrings</code>.
+            </li>
+        </ul>
+      
+    </p>
       
     @example
     <caption>Instantiate with Data API</caption>
@@ -163,7 +174,7 @@ var index = filters.getSelectedIndex();
             this.$element.removeClass("focus");
         }.bind(this));
         
-        this.$element.on("click", "", function() {
+        this.$element.on("click touchend", "input", function() {
             if (this.options.disabled) return;
             this.inputElement.focus();
             this._inputChanged();
@@ -244,6 +255,7 @@ var index = filters.getSelectedIndex();
     /** @ignore */
     _changeOptions: function(event) {
         if (event.widget !== this) return;
+        console.log(this.options.options);
         this.selectedIndex = -1;
         this.selectedIndices = [];
         this.createdIndices = [];
@@ -278,8 +290,15 @@ var index = filters.getSelectedIndex();
             this.options.options = [];
             this.options.optionDisplayStrings = [];
             this.$element.find("select option").each(function(i, e) {
-                this.options.options.push($(e).val());
-                this.options.optionDisplayStrings.push($.trim($(e).text()));
+            this.options.options.push($(e).val());
+            this.options.optionDisplayStrings.push($.trim($(e).text()));
+            
+            // Save selected state
+            if ($(e).attr("selected")) {
+	            this.selectedIndices.push(i);		
+	            this.selectedIndex = i;		
+            }
+
             }.bind(this));
         }
 
@@ -507,7 +526,7 @@ var index = filters.getSelectedIndex();
         var optionRenderer = function(iterator, value) {            
             return (this.options.optionRenderer.bind(this))(iterator, value, this.options.highlight);
         };
-        
+
         this.dropdownList.set("optionRenderer", optionRenderer.bind(this));
         this.dropdownList.set("options", results);
         
@@ -544,6 +563,7 @@ var index = filters.getSelectedIndex();
 
 CUI.Filters.defaultOptionRenderer = function(iterator, index, hightlight) {            
     var value = this.options.options[index];
+
     if (this.options.optionDisplayStrings[index]) { // Use alternate display strings if possible
         value = this.options.optionDisplayStrings[index];
     }
@@ -576,15 +596,26 @@ CUI.Filters.cqTagOptionRenderer = function(iterator, index, highlight) {
     
     var pathParts = value.split("/");
     value = "";
+    
+    // html encode fn
+    function e(text) {
+        return $("<div>").text(text).html();
+    }
+    
     for(var q = 0; q < pathParts.length; q++) {
         var part = pathParts[q];
-        
+
         if (highlight) {
             var i = part.toLowerCase().indexOf(searchFor.toLowerCase());
             if (i >= 0) {
-                part = part.substr(0, i) + "<em>" + part.substr(i, searchFor.length) + "</em>" + part.substr(i + searchFor.length);
+                part = e(part.substr(0, i)) + "<em>" + e(part.substr(i, searchFor.length)) + "</em>" + e(part.substr(i + searchFor.length));
+            } else {
+                part = e(part);
             }
+        } else {
+            part = e(part);
         }
+        
         if (value !== "") value += " / ";
         if (q === pathParts.length - 1) part = "<b>" + part + "</b>";
         value = value + part;

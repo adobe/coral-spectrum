@@ -11,6 +11,7 @@
         <script src="../../js/CUI.js"></script>
        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
     </head>
     <body>
 
@@ -27,9 +28,11 @@
             Filter me: <input type="text" name="stacking" placeholder="Stacking">
             </p>
         <h2>Create from jQuery (with allowCreate enabled)</h2>            
+            <div>
             <p>
                 From select: <select class="filters"><option>One very long <b>tag</b> line</option><option>Two</option><option>Three</option></select>
             </p>
+            </div>
             <p>
                 From select: <select class="filters" multiple><option>One very long <b>tag</b> line with at least one line break</option><option>Two</option><option>Three</option></select>
             </p>
@@ -40,6 +43,10 @@
             </p>
             
             <h2>Create from markup</h2>
+
+            <p>
+                What's your current mood?
+
             <div class="filters" data-init="filters">
                 <select>
                     <option value="1">sad</opion>
@@ -48,22 +55,35 @@
                 </select>
                 <input type="text">
             </div>
+
+            </p>
+
+            <p>
+            What colors do you like best?
+
             <div class="filters" data-init="filters" data-multiple="true">
-                <select>
-                    <option>sad</opion>
-                    <option>angry</opion>
-                    <option>happy</opion>    
+                <select multiple>
+                    <option>green</opion>
+                    <option>red</opion>
+                    <option>blue</opion>    
+                    <option>yellow</opion>    
+                    <option>mauve</opion>    
                 </select>
                 <input type="text">
             </div>
-            <div class="filters" data-init="filters" data-multiple="true" data-option-renderer="cqTag" data-allow="create">
-                <select>
+            </p>
+
+            <p>
+                Create your own!
+            <div class="filters" data-init="filters" data-stacking="true" data-option-renderer="cqTag" data-allow="create">
+                <input type="text">
+                <select multiple>
                     <option>moods/sad</opion>
                     <option>moods/angry</opion>
                     <option>moods/happy</opion>    
                 </select>
-                <input type="text">
-            </div>            
+            </div>
+            </p>            
         </section>
             
         <script type="text/javascript">
@@ -109,11 +129,8 @@
 
 
                 filters1.setSelectedIndex(2);
-
-                $("select.filters").filters({placeholder: "select me!", stacking: true, allowCreate: true});
-                $("select.filters").each(function() {
-                    $(this).data("filters").setSelectedIndices([0,1]);
-                })
+                
+                $("select.filters").filters();
 
                 $("[data-action=disable]").click(function() {
                     filters1.set("disabled", true);
@@ -128,7 +145,7 @@
                     $("select.filters").filters({disabled: false});
                 })
                 
-                filters2.set("options", ["red", "green", "blue"])
+                filters2.set({"options": ["red", "green", "blue"], "optionDisplayStrings": []});
                
             });
             
