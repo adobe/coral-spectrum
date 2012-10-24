@@ -25,6 +25,15 @@
       
     */
     construct: function(options) {
+
+        var container = $("<div class=\"dropdown-container\">");
+         
+        var el = (this.options.positioningElement) ? this.options.positioningElement : this.$element;
+        el.after(container);
+        el.detach();
+        container.append(el);
+        this.containerElement = container;
+
         this.$element.on('change:options change:optionRenderer', function (event) {
             if (event.widget !== this) return; // Only listen to own events
             this.update();
@@ -54,6 +63,7 @@
     },
 
     listElement: null,
+    containerElement: null,
     currentIndex: -1,
     preventHiding: false,
     hackyPositioningInterval: null,
@@ -118,7 +128,7 @@
         
         if (key === 40) { // down
             event.preventDefault();
-            if (currentIndex < (this.listElement.children().length - 1)) currentIndex++;
+            if (currentIndex < (this.listElement.find("li").length - 1)) currentIndex++;
         }
         
         if (key === 27) { // escape
@@ -139,11 +149,11 @@
 
         // Set new css classes
         this.listElement.children().removeClass("selected");
-        if (currentIndex >= 0) $(this.listElement.children().get(currentIndex)).addClass("selected");
+        if (currentIndex >= 0) $(this.listElement.find("li").get(currentIndex)).addClass("selected");
         
         // Scroll to position if necessary
         if (currentIndex >= 0) {
-            var el = $(this.listElement.children().get(currentIndex));
+            var el = $(this.listElement.find("li").get(currentIndex));
             var t = el.position().top;
             this.listElement.animate({scrollTop: t}, 50);
         }
@@ -161,6 +171,9 @@
             this.listElement.remove();
             this.listElement = null;  
         }
+
+        this.containerElement.removeClass("dropdown-visible");
+
         this.options.visible = false;
     },
     /** @ignore */    
@@ -168,8 +181,7 @@
         var options = this.options.options;
         if (options.length === 0) return;
                
-        var list = $("<ul class=\"dropdown-list\">");
-        list.width(this.$element.outerWidth());
+        var list = $("<ul></ul>");
         if (this.options.cssClass) list.addClass(this.options.cssClass);
         
         
@@ -192,20 +204,26 @@
         
         // Calculate correct position and size on screen
         var el = (this.options.positioningElement) ? this.options.positioningElement : this.$element;
-        var left = el.offset().left + parseFloat(el.css("margin-left"));
-        var top = el.offset().top + el.outerHeight(true) - parseFloat(el.css("margin-bottom"));
+        var left = el.position().left + parseFloat(el.css("margin-left"));
+        var top = el.position().top + el.outerHeight(true) - parseFloat(el.css("margin-bottom"));
 
         var width = el.outerWidth(false);
-        
+        var container = $("<div class=\"dropdown-list\">");
+        container.append(list);
+        list = container;
+
         list.css({position: "absolute",
+                  "z-index": "2000",
                   left: left + "px", 
                   top: top + "px", 
                   width: width + "px"});
+        this.containerElement.addClass("dropdown-visible");
 
+
+        el.after(list);
         this.listElement = list;
-        $("body").append(list);
-        
-        // Due to the ugly behaviour of mobile webkits we have to add our element directly to the body and listen to movements on the positioning element
+
+        /*
         this.hackyPositioningInterval = setInterval(function() {
             var left2 = el.offset().left + parseFloat(el.css("margin-left"));
             var top2 = el.offset().top + el.outerHeight(true) - parseFloat(el.css("margin-bottom"));
@@ -214,7 +232,8 @@
             top = top2;
             list.css({left: left + "px", 
                       top: top + "px"});                       
-        }.bind(this), 100);
+        }.bind(this), 100);*/
+
         this.options.visible = true;
 
     },
