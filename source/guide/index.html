@@ -746,6 +746,58 @@
                           </div>
                       </div>
                   </div>
+                <pre class="prettyprint linenums">
+&lt!-- Standard Single select --&gt;
+&lt;div class="dropdown" data-init="dropdown"&gt;
+    &lt;button&gt;Single Select&lt;/button&gt;
+    &lt;select name="dropdown"&gt;
+        &lt;option&gt;Single One&lt;/option&gt;
+        &lt;option selected&gt;Single Two&lt;/option&gt;
+        &lt;option&gt;Single Three&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;
+
+&lt!-- Multi select --&gt;
+&lt;div class="dropdown" data-init="dropdown"&gt;
+    &lt;button&gt;Multi Select&lt;/button&gt;
+    &lt;select name="dropdown2" multiple&gt;
+        &lt;option&gt;Multi One&lt;/option&gt;
+        &lt;option selected&gt;Multi Two&lt;/option&gt;
+        &lt;option&gt;Multi Three&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;
+
+&lt!-- Editable --&gt;
+&lt;div class="dropdown dropdown-editable" data-editable="true" data-init="dropdown"&gt;
+    &lt;input type="text" placeholder="Editable Select"&gt;
+    &lt;button&gt;Editable&lt;/button&gt;
+    &lt;select name="dropdown3"&gt;
+        &lt;option&gt;Edit One&lt;/option&gt;
+        &lt;option&gt;Edit Two&lt;/option&gt;
+        &lt;option&gt;Edit Three&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;
+
+&lt!-- Disabled --&gt;
+&lt;div class="dropdown" data-init="dropdown" data-disabled="true"&gt;
+    &lt;button&gt;Disabled&lt;/button&gt;
+    &lt;select name="dropdown4"&gt;
+        &lt;option&gt;One&lt;/option&gt;
+        &lt;option&gt;Two&lt;/option&gt;
+        &lt;option&gt;Three&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;
+
+&lt!-- Error --&gt;
+&lt;div class="dropdown error" data-init="dropdown"&gt;
+    &lt;button&gt;Error&lt;/button&gt;
+    &lt;select name="dropdown5" &gt;
+        &lt;option&gt;One&lt;/option&gt;
+        &lt;option&gt;Two&lt;/option&gt;
+        &lt;option&gt;Three&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;
+                </pre>
               </div>
                   
           </section>
