@@ -608,7 +608,7 @@
                       
                       <div class="filterSample">
                           <div class="sampleTitle extended left">Standard</div>
-                          <div class="filters" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter">
+                             <div class="filters" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter">
                                <input type="text">
                                 <select  multiple>
                                     <option>Apple</option>
@@ -620,7 +620,7 @@
                       
                       <div class="filterSample">
                           <div class="sampleTitle extended left">Stacking</div>
-                          <div class="filters" data-init="filters" data-stacking="true" data-placeholder="Add Filter">
+                          <div class="filters" data-init="filters" data-stacking="true" data-placeholder="Add Filter" data-allow="create">
                                <input type="text">
                                <select>
                                   <option selected>Apple</option>
@@ -639,7 +639,7 @@
                       
                       <div class="filterSample">
                           <div class="sampleTitle left">Disabled</div>
-                          <div class="filters disabled" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter">
+                          <div class="filters disabled" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter" data-disabled="true">
                              <input class="filter" type="text" disabled>
                           </div>
                       </div>
@@ -647,39 +647,35 @@
                   
                   
                 <pre class="prettyprint linenums">
-    &lt;!-- For a complete, initialized component use this piece of code --&gt; 
-    &lt;div class="filters" data-init="filters" data-multiple="true"&gt;
-        &lt;input type="text"&gt;   &lt;!-- Place input as first child! --&gt; 
-        &lt;select&gt;
-            &lt;option&gt;sad&lt;/opion&gt;
-            &lt;option&gt;angry&lt;/opion&gt;
-            &lt;option&gt;happy&lt;/opion&gt;    
-        &lt;/select&gt;
-    &lt;/div&gt;
+&lt;!-- Standard single filters with select as template --&gt;
+&lt;div class="filters" data-init="filters"&gt;
+  &lt;input type="text" placeholder="Single Term Filter"&gt;
+  &lt;select&gt;
+    &lt;option selected&gt;Apple&lt;/option&gt;
+    &lt;option&gt;Pear&lt;/option&gt;
+    &lt;option&gt;Banana&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/div&gt;
 
-    &lt;!-- But you can also omit most of the HTML: Single term filters with input field as template --&gt;
-    &lt;input type="text" placeholder="Single Term Filter" data-init="filters"&gt;
+&lt;!-- Standard filters with select as template --&gt;
+&lt;div class="filters" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter"&gt;
+  &lt;input type="text"&gt;
+  &lt;select  multiple&gt;
+    &lt;option&gt;Apple&lt;/option&gt;
+    &lt;option&gt;Pear&lt;/option&gt;
+    &lt;option selected&gt;Banana&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/div&gt;
 
-    &lt;!-- Standard filters with select as template --&gt;
-    &lt;select data-placeholder="Add Filter" multiple data-init="filters"&gt;
-        &lt;option&gt;Apple&lt;/option&gt;
-        &lt;option&gt;Pear&lt;/option&gt;
-        &lt;option&gt;Banana&lt;/option&gt;
-    &lt;/select&gt;
-
-    &lt;!-- Stacking filters with select as template --&gt;
-    &lt;select data-placeholder="Add Filter" multiple data-stacking="true" data-init="filters"&gt;
-        &lt;option&gt;Apple&lt;/option&gt;
-        &lt;option&gt;Pear&lt;/option&gt;
-        &lt;option&gt;Banana&lt;/option&gt;
-    &lt;/select&gt;
-
-    &lt;!-- &hellip; and don't forget to initialise your Widget (if you are not using data-init) --&gt;
-    &lt;script type="text/javascript"&gt;
-        $(document).ready(function() {
-            $("select").filters(); // Or a similar selector corresponding to your DOM
-        })
-    &lt;/script&gt;
+&lt;!-- Stacking filters with select as template --&gt;
+&lt;div class="filters" data-init="filters" data-stacking="true" data-placeholder="Add Filter" data-allow="create"&gt;
+  &lt;input type="text"&gt;
+  &lt;select&gt;
+    &lt;option selected&gt;Apple&lt;/option&gt;
+    &lt;option&gt;Pear&lt;/option&gt;
+    &lt;option&gt;Banana&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/div&gt;
                 </pre>
               </div>
           </section>
