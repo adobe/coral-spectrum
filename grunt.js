@@ -387,7 +387,7 @@ module.exports = function(grunt) {
       cui: {
         template: '<%= dirs.source %>/docTemplate',
         jsdoc: '<%= dirs.components %>/JSDoc/jsdoc',
-        src: ['<%= dirs.source %>/js/**'],
+        src: ['<%= dirs.source %>/js/*.js','<%= dirs.source %>/js/components/**'],
         dest: '<%= dirs.build %>/jsdoc'
       }
     },
