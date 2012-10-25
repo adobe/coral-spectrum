@@ -3,6 +3,49 @@
     toString: 'Slider',
     extend: CUI.Widget,
 
+/**
+      @extends CUI.Widget
+      @classdesc A slider widget
+      
+        <p>
+            <div class="slider ticked filled tooltips" data-init="slider">
+              <input type="range" value="14" min="10" max="20" step="2">
+            </div>
+        </p>
+
+        <p>
+        Currently you have to supply the full markup to this widget. It does not render missing
+        elements itself.
+        </p>
+    @example
+    <caption>Simple horizontal slider</caption>
+    &lt;div class="slider" data-init="slider"&gt;
+        &lt;input type="range" value="14" min="10" max="20" step="2"&gt;
+    &lt;/div&gt;
+
+    @example
+    <caption>Full-featured slider with two handles, tooltips, ticks and a filled bar</caption>
+    &lt;div class="slider tooltips ticked filled" data-init="slider"&gt;
+        &lt;input type="range" value="4" min="10" max="20" step="2"&gt;
+        &lt;input type="range" value="14" min="10" max="20" step="2"&gt;
+    &lt;/div&gt;
+
+    @example
+    <caption>Instantiate by jQuery plugin</caption>
+    $("select").dropdown();
+
+      @desc Creates a slider from a div
+      @constructs
+      
+      @param {Object}   options                               Component options
+      @param {number} [options.step=1]  The steps to snap in
+      @param {number} [options.min=1]   Minimum value
+      @param {number} [options.max=100] Maximum value
+      @param {number} [options.value=1] Starting value
+      @param {String} [options.orientation=horizontal]  Either horizontal or vertical
+      @param {boolean} [options.slide=false]    True for smooth sliding animations 
+      @param {boolean} [options.disabled=false] True for a disabled element      
+    */
     construct: function(options) {
         var that = this;
 
