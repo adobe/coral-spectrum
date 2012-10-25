@@ -1,0 +1,26 @@
+/**
+  Class: .actionbar
+  The top toolbar for pages
+*/
+.actionbar {
+    .clearfix;
+    position: relative;
+    line-height: @icon-buttons-size;
+    padding: 3*@px 0;
+    border-bottom: 1px solid @toolbar-border-color;
+
+    .center {
+        position: absolute;
+        left: 50%;
+
+        > * {
+            margin-left: -50%;
+        }
+    }
+
+    h1 {
+        margin: 0;
+        line-height: inherit;
+        font-size: 18*@px;
+    }
+}
