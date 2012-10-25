@@ -38,9 +38,10 @@ img {
 
 /**
   Class: .hidden
-  Hide element from visual browsers as well as from accessibilty, but without affecting its width/height (can be measured while hidden).
-  Known Limitation: In case you need the width/height, avoid to place it inside an element that can be focused (like a link),
-  or it will lose it's dimensions when focused!
+  Hide element from visual browsers as well as from accessibilty, but without affecting its width/height dimensions (can be measured while hidden).
+  Known Limitation:
+    If you need to acces the element's dimensions, don't place it inside a focusable element, or it will lose it's dimensions while focused.
+    This means inside <a> or <button> elements, or draggable elements.
 */
 .hidden {
   position: absolute;

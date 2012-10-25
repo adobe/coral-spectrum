@@ -44,98 +44,66 @@
 
   <div class="page" role="main">
 
-    <div id="main-rail" class="rail left scroll">
+    <div id="main-rail" class="rail left">
       <div class="wrap">
 
-        <section class="links">
-            <a class="heading" href="#General">General</a>
+        <div class="rail-switch">
+          <nav>
+            <a href="#" data-view="feature"><span>A</span></a>
+            <a href="#" class="active" data-view="filter"><span>B</span></a>
+            <a href="#" data-view="activity"><span>C</span></a>
+          </nav>
+          <div class="search">
+            <form>
+              <input type="text" placeholder="Enter Keyword(s)" name="q" />
+              <a class="clear-cmd" href="#">X</a>
+              <a class="query-cmd" href="#">S</a>
+            </form>
+          </div>
+        </div>
 
-            <nav class="fold">
-              <a href="#WhatIsCUI">What is CoralUI?</a>
-              <a href="#ResolutionIndependence">Resolution Independence</a>
-              <a href="#BrowserSupport">Browser Support</a>
-              <a href="#WidgetPhilosophy">Widget Philosophy</a>
-            </nav>
-        </section>
+        <div class="rail-view" data-view="feature">
+          <nav class="feature">
+            <a href="#" class="active">Files</a>
+            <a href="#">Collections</a>
+            <a href="#">Users</a>
+            <a href="#">Tools</a>
+            <a href="#">Settings</a>
+          </nav>
+        </div>
+        
+        <div class="rail-view active group" data-view="filter">
+          <section>
+            <span class="heading">Accordion open</span>
+            <ul>
+              <li>
+                <label>
+                  <input type="checkbox" checked="" value="1" name="c1"><span>Checked</span>
+                </label>
+              </li>
+              <li>Link</li>
+              <li>Fonts</li>
+            </ul>
+          </section>
+          <section>
+            <span class="heading">Accordion open</span>
+            <ul>
+              <li>Headings</li>
+              <li>Link</li>
+              <li>Fonts</li>
+            </ul>
+          </section>
+        </div>
 
-        <section class="links foldable">
-            <a class="heading" href="#TextStyles">Text Styles</a>
-
-            <nav class="fold">
-              <a href="#Headings">Headings</a>
-              <a href="#Link">Link</a>
-              <a href="#Fonts">Fonts</a>
-            </nav>
-        </section>
-
-        <section class="links foldable">
-            <a class="heading" href="#PageComponents">Page&nbsp;Components</a>
-
-            <nav class="fold">
-              <a href="#Header">Header</a>
-              <a href="#Rail">Rail</a>
-              <a href="#Well">Well</a>
-            </nav>
-        </section>
-
-        <section class="links foldable">
-            <a class="heading" href="#Navigation">Navigation</a>
-
-            <nav class="fold">
-              <a href="#Toolbar">Toolbar</a>
-              <a href="#Breadcrumbs">Breadcrumbs</a>
-              <a href="#Tabs">Tabs</a>
-              <a href="#Wizard">Wizard</a>
-           </nav>
-        </section>
-
-        <section class="links foldable">
-            <a class="heading" href="#ButtonsAndControls">Buttons &amp; Controls</a>
-
-            <nav class="fold">
-              <a href="#Buttons">Buttons</a>
-              <a href="#TextField">Text field</a>
-              <a href="#SearchField">Search field</a>
-              <a href="#Filters">Filters</a>
-              <a href="#Checkbox">Checkbox</a>
-              <a href="#RadioButtons">Radio buttons</a>
-              <a href="#Selector">Selector</a>
-              <a href="#Slider">Slider</a>
-              <a href="#Dropdown">Dropdown</a>
-              <a href="#Draggable">Draggable</a>
-            </nav>
-        </section>
-
-        <section class="links foldable">
-            <a class="heading" href="#DataPresentation">Data&nbsp;Presentation</a>
-
-            <nav class="fold">
-              <a href="#List">List</a>
-              <a href="#Table">Table</a>
-              <a href="#Grid">Grid</a>
-            </nav>
-        </section>
-
-        <section class="links foldable">
-            <a class="heading" href="#Dialogs">Dialogs</a>
-
-            <nav class="fold">
-              <a href="#Modal">Modal</a>
-              <a href="#Popover">Popover</a>
-           </nav>
-        </section>
-
-        <section class="links foldable">
-            <a class="heading" href="#StatusIndicators">Status Indicators</a>
-
-            <nav class="fold">
-              <a href="#Alert">Alert</a>
-              <a href="#Tooltip">Tooltip</a>
-              <a href="#Badge">Badge</a>
-              <a href="#Spinner">Spinner</a>
-              <a href="#ProgressBar">Progress Bar</a>
-           </nav>
-        </section>
+        <div class="rail-view" data-view="activity">
+          <nav class="feature">
+            <a href="#" class="active">3</a>
+            <a href="#">Collections</a>
+            <a href="#">Users</a>
+            <a href="#">Tools</a>
+            <a href="#">Settings</a>
+          </nav>
+        </div>
         
       </div>
     </div>
@@ -409,45 +377,64 @@
         <h1 class="line">Navigation</h1>
         <p>CUI provides various controls that enable navigation.</p>
 
-        <section id="Toolbar">
-          <h2 class="line">Toolbar</h2>
-          <p>The toolbar contains action buttons.</p>
+        <section id="ActionBar">
+          <h2 class="line">Action bar (WIP)</h2>
+          <p>The action bar contains action buttons. The button icons are still to be done.</p>
 
           <div class="componentSample">
             <div class="example">
-              <h4>Toolbar</h4>
-              <nav class="toolbar">
-                <div class="left icons-group">
-                  <a href="#" class="icon-rail">Rail</a>
+
+              <h4>No Links</h4>
+              <p><i class="icon-rail"><span class="hidden-accessible">Label</span></i> (with label hidden but accessible)</p>
+              <p><i class="icon-rail">Label</i> (label inside of the icon element)</p>
+              <p><i class="icon-rail"></i>Label (could be used outside of the icon element as well)</p>
+
+              <h4>Links</h4>
+              <p><a href="#" class="icon-rail"><span class="hidden-accessible">Label</span></a> (with label hidden but accessible)</p>
+              <p><a href="#" class="icon-rail">Label</a> (label in link)</p>
+
+              <h4>Icons Groups</h4>
+              <div class="icons-group">
+                  <a href="#" class="icon-rail" title="Rail">Rail</a>
                   <span class="divider"></span>
-                  <a href="#" class="icon-edit">Edit</a>
-                  <a href="#" class="icon-message">Message</a>
-                  <a href="#" class="icon-download">Download</a>
+                  <a href="#" class="icon-edit" title="Edit">Edit</a>
+                  <i class="icon-message">Message</i>
+                  <i class="icon-download"></i>
+              </div>
+
+              <h4>Toolbar</h4>
+              <nav class="actionbar">
+                <div class="left icons-group">
+                  <a href="#" class="icon-rail" title="Rail">Rail</a>
+                  <span class="divider"></span>
+                  <a href="#" class="icon-edit" title="Edit">Edit</a>
+                  <a href="#" class="icon-message" title="Message">Message</a>
+                  <a href="#" class="icon-download" title="Download">Download</a>
                 </div>
                 <div class="center">
                   <h1>Page Title</h1>
                 </div>
                 <div class="right icons-group">
-                  <a href="#" class="icon-list-view">List View</a>
-                  <a href="#" class="icon-search">Search</a>
+                  <a href="#" class="icon-list-view" title="List View">List View</a>
+                  <a href="#" class="icon-search" title="Search">Search</a>
                 </div>
               </nav>
             </div>
             <pre class="prettyprint linenums">
-&lt;nav class=&quot;toolbar&quot;&gt;
+&lt;nav class=&quot;actionbar&quot;&gt;
   &lt;div class=&quot;left icons-group&quot;&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-rail&quot;&gt;Rail&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-rail&quot; title=&quot;Rail&quot;&gt;Rail&lt;/a&gt;
     &lt;span class=&quot;divider&quot;&gt;&lt;/span&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-edit&quot;&gt;Edit&lt;/a&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-message&quot;&gt;Message&lt;/a&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-download&quot;&gt;Download&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-edit&quot; title=&quot;Edit&quot;&gt;Edit&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-message&quot; title=&quot;Message&quot;&gt;Message&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-download&quot; title=&quot;Download&quot;&gt;Download&lt;/a&gt;
   &lt;/div&gt;
   &lt;div class=&quot;center&quot;&gt;
     &lt;h1&gt;Page Title&lt;/h1&gt;
   &lt;/div&gt;
   &lt;div class=&quot;right icons-group&quot;&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-list-view&quot;&gt;List View&lt;/a&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-search&quot;&gt;Search&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-list-view&quot; title=&quot;List View&quot;&gt;List View&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-search&quot; title=&quot;Search&quot;&gt;Search&lt;/a&gt;
   &lt;/div&gt;
 &lt;/nav&gt;
             </pre>
@@ -560,55 +547,6 @@
           </div>
         </section>
 
-        <section id="Icons">
-          <h2 class="line">Icons (WIP)</h2>
-          <p>Icons can be applied to any element with one of the <code class="atv">icon-*</code> classes. As a general rule, to keep the application accessible, always label your icons with a text. There are different techniques in case you want to visually hide your label: you can either apply the <code class="atv">hidden-accessible</code> class to the label, or include your icons in an element with the class <code class="atv">icons-group</code>.</p>
-          <p><strong>Note:</strong> The icons currently use an arbitrary letter from the alphabet. This will later be replaced with a custom font, an SVG graphic, or a sprite image. Currently, unless the icon is in a <code class="atv">icons-group</code>, the icon takes the width of the letter in the font, this is a temporary behavior.</p>
-          <div class="componentSample buttonSample">
-              <div class="example">
-              <div class="iconsSample">
-                  <div class="sampleTitle left">No Links</div>
-                  <p><i class="icon-rail">Label</i> <span class="iconsLabel">&larr; label inside icon element</span></p>
-                  <p><i class="icon-edit"></i>Label <span class="iconsLabel">&larr; label outside of icon element</span></p>
-                  <p><i class="icon-message"><span class="hidden-accessible">Label </span></i><span class="iconsLabel">&larr; label hidden but accessible</span></p>
-              </div>
-              <div class="iconsSample">
-                  <div class="sampleTitle left">Links</div>
-                  <p><a href="#" class="icon-download">Label</a> <span class="iconsLabel">&larr; label in link</span></p>
-                  <p><a href="#" class="icon-list-view"><span class="hidden-accessible">Label</span></a> <span class="iconsLabel">&larr; label hidden but accessible</span></p>
-              </div>
-              <div class="iconsSample">
-                  <div class="sampleTitle left">Icons Group</div>
-                  <div class="icons-group">
-                      <a href="#" class="icon-rail">Rail</a>
-                      <span class="divider"></span>
-                      <a href="#" class="icon-edit">Edit</a>
-                      <a href="#" class="icon-message">Message</a>
-                      <a href="#" class="icon-download">Download</a>
-                      <a href="#" class="icon-list-view">List View</a>
-                      <span class="iconsLabel">&larr; with divider after the first element</span>
-                  </div>
-              </div>
-            <pre class="prettyprint linenums">
-&lt;i class=&quot;icon-rail&quot;&gt;Label&lt;/i&gt;
-&lt;i class=&quot;icon-rail&quot;/&gt;Label
-&lt;i class=&quot;icon-rail&quot;&gt;&lt;span class=&quot;hidden-accessible&quot;&gt;Label&lt;/span&gt;&lt;/i&gt;
-
-&lt;a href=&quot;#&quot; class=&quot;icon-rail&quot;&gt;Label&lt;/a&gt;
-&lt;a href=&quot;#&quot; class=&quot;icon-rail&quot;&gt;&lt;span class=&quot;hidden-accessible&quot;&gt;Label&lt;/span&gt;&lt;/a&gt;
-
-&lt;div class=&quot;icons-group&quot;&gt;
-  &lt;a href=&quot;#&quot; class=&quot;icon-rail&quot;&gt;Rail&lt;/a&gt;
-  &lt;span class=&quot;divider&quot;&gt;&lt;/span&gt;
-  &lt;a href=&quot;#&quot; class=&quot;icon-edit&quot;&gt;Edit&lt;/a&gt;
-  &lt;a href=&quot;#&quot; class=&quot;icon-message&quot;&gt;Message&lt;/a&gt;
-  &lt;a href=&quot;#&quot; class=&quot;icon-download&quot;&gt;Download&lt;/a&gt;
-  &lt;a href=&quot;#&quot; class=&quot;icon-list-view&quot;&gt;List View&lt;/a&gt;
-&lt;/div&gt;
-</pre>
-          </div>
-        </section>
-
         <section id="TextField">
           <h2 class="line">Text Field</h2>
           <p>Text input variants.</p>
@@ -670,37 +608,32 @@
     
                       <div class="filterSample">
                           <div class="sampleTitle left">Single</div>
-                          <div class="filters" data-init="filters">
+                          <div class="filters" id="filters-singleterm">
                             <input type="text" placeholder="Single Term Filter">
-                            <select>
-                              <option selected>Apple</option>
-                              <option>Pear</option>
-                              <option>Banana</option>
-                            </select>
                           </div>
                       </div>
                       
                       <div class="filterSample">
                           <div class="sampleTitle extended left">Standard</div>
-                             <div class="filters" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter">
+                          <div class="filters" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter">
                                <input type="text">
                                 <select  multiple>
                                     <option>Apple</option>
                                     <option>Pear</option>
-                                    <option selected>Banana</option>
+                                    <option>Banana</option>
                                 </select>
                             </div>
                       </div>
                       
                       <div class="filterSample">
                           <div class="sampleTitle extended left">Stacking</div>
-                          <div class="filters" data-init="filters" data-stacking="true" data-placeholder="Add Filter" data-allow="create">
+                          <div class="filters" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter">
                                <input type="text">
                                <select>
-                                  <option selected>Apple</option>
+                                  <option>Apple</option>
                                   <option>Pear</option>
                                   <option>Banana</option>
-                               </select>
+                              </select>
                           </div>     
                       </div>
                       
@@ -713,7 +646,7 @@
                       
                       <div class="filterSample">
                           <div class="sampleTitle left">Disabled</div>
-                          <div class="filters disabled" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter" data-disabled="true">
+                          <div class="filters disabled" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter">
                              <input class="filter" type="text" disabled>
                           </div>
                       </div>
@@ -721,35 +654,39 @@
                   
                   
                 <pre class="prettyprint linenums">
-&lt;!-- Standard single filters with select as template --&gt;
-&lt;div class="filters" data-init="filters"&gt;
-  &lt;input type="text" placeholder="Single Term Filter"&gt;
-  &lt;select&gt;
-    &lt;option selected&gt;Apple&lt;/option&gt;
-    &lt;option&gt;Pear&lt;/option&gt;
-    &lt;option&gt;Banana&lt;/option&gt;
-  &lt;/select&gt;
-&lt;/div&gt;
+    &lt;!-- For a complete, initialized component use this piece of code --&gt; 
+    &lt;div class="filters" data-init="filters" data-multiple="true"&gt;
+        &lt;input type="text"&gt;   &lt;!-- Place input as first child! --&gt; 
+        &lt;select&gt;
+            &lt;option&gt;sad&lt;/opion&gt;
+            &lt;option&gt;angry&lt;/opion&gt;
+            &lt;option&gt;happy&lt;/opion&gt;    
+        &lt;/select&gt;
+    &lt;/div&gt;
 
-&lt;!-- Standard filters with select as template --&gt;
-&lt;div class="filters" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter"&gt;
-  &lt;input type="text"&gt;
-  &lt;select  multiple&gt;
-    &lt;option&gt;Apple&lt;/option&gt;
-    &lt;option&gt;Pear&lt;/option&gt;
-    &lt;option selected&gt;Banana&lt;/option&gt;
-  &lt;/select&gt;
-&lt;/div&gt;
+    &lt;!-- But you can also omit most of the HTML: Single term filters with input field as template --&gt;
+    &lt;input type="text" placeholder="Single Term Filter" data-init="filters"&gt;
 
-&lt;!-- Stacking filters with select as template --&gt;
-&lt;div class="filters" data-init="filters" data-stacking="true" data-placeholder="Add Filter" data-allow="create"&gt;
-  &lt;input type="text"&gt;
-  &lt;select&gt;
-    &lt;option selected&gt;Apple&lt;/option&gt;
-    &lt;option&gt;Pear&lt;/option&gt;
-    &lt;option&gt;Banana&lt;/option&gt;
-  &lt;/select&gt;
-&lt;/div&gt;
+    &lt;!-- Standard filters with select as template --&gt;
+    &lt;select data-placeholder="Add Filter" multiple data-init="filters"&gt;
+        &lt;option&gt;Apple&lt;/option&gt;
+        &lt;option&gt;Pear&lt;/option&gt;
+        &lt;option&gt;Banana&lt;/option&gt;
+    &lt;/select&gt;
+
+    &lt;!-- Stacking filters with select as template --&gt;
+    &lt;select data-placeholder="Add Filter" multiple data-stacking="true" data-init="filters"&gt;
+        &lt;option&gt;Apple&lt;/option&gt;
+        &lt;option&gt;Pear&lt;/option&gt;
+        &lt;option&gt;Banana&lt;/option&gt;
+    &lt;/select&gt;
+
+    &lt;!-- &hellip; and don't forget to initialise your Widget (if you are not using data-init) --&gt;
+    &lt;script type="text/javascript"&gt;
+        $(document).ready(function() {
+            $("select").filters(); // Or a similar selector corresponding to your DOM
+        })
+    &lt;/script&gt;
                 </pre>
               </div>
           </section>
@@ -767,7 +704,7 @@
                               <button>Single Select</button>
                               <select name="dropdown" >
                                   <option>Single One</option>
-                                  <option selected>Single Two</option>
+                                  <option>Single Two</option>
                                   <option>Single Three</option>
                               </select>
                           </div>
@@ -778,7 +715,7 @@
                               <button>Multi Select</button>
                               <select name="dropdown2" multiple>
                                   <option>Multi One</option>
-                                  <option selected>Multi Two</option>
+                                  <option>Multi Two</option>
                                   <option>Multi Three</option>
                               </select>
                           </div>
@@ -819,58 +756,6 @@
                           </div>
                       </div>
                   </div>
-                <pre class="prettyprint linenums">
-&lt!-- Standard Single select --&gt;
-&lt;div class="dropdown" data-init="dropdown"&gt;
-    &lt;button&gt;Single Select&lt;/button&gt;
-    &lt;select name="dropdown"&gt;
-        &lt;option&gt;Single One&lt;/option&gt;
-        &lt;option selected&gt;Single Two&lt;/option&gt;
-        &lt;option&gt;Single Three&lt;/option&gt;
-    &lt;/select&gt;
-&lt;/div&gt;
-
-&lt!-- Multi select --&gt;
-&lt;div class="dropdown" data-init="dropdown"&gt;
-    &lt;button&gt;Multi Select&lt;/button&gt;
-    &lt;select name="dropdown2" multiple&gt;
-        &lt;option&gt;Multi One&lt;/option&gt;
-        &lt;option selected&gt;Multi Two&lt;/option&gt;
-        &lt;option&gt;Multi Three&lt;/option&gt;
-    &lt;/select&gt;
-&lt;/div&gt;
-
-&lt!-- Editable --&gt;
-&lt;div class="dropdown dropdown-editable" data-editable="true" data-init="dropdown"&gt;
-    &lt;input type="text" placeholder="Editable Select"&gt;
-    &lt;button&gt;Editable&lt;/button&gt;
-    &lt;select name="dropdown3"&gt;
-        &lt;option&gt;Edit One&lt;/option&gt;
-        &lt;option&gt;Edit Two&lt;/option&gt;
-        &lt;option&gt;Edit Three&lt;/option&gt;
-    &lt;/select&gt;
-&lt;/div&gt;
-
-&lt!-- Disabled --&gt;
-&lt;div class="dropdown" data-init="dropdown" data-disabled="true"&gt;
-    &lt;button&gt;Disabled&lt;/button&gt;
-    &lt;select name="dropdown4"&gt;
-        &lt;option&gt;One&lt;/option&gt;
-        &lt;option&gt;Two&lt;/option&gt;
-        &lt;option&gt;Three&lt;/option&gt;
-    &lt;/select&gt;
-&lt;/div&gt;
-
-&lt!-- Error --&gt;
-&lt;div class="dropdown error" data-init="dropdown"&gt;
-    &lt;button&gt;Error&lt;/button&gt;
-    &lt;select name="dropdown5" &gt;
-        &lt;option&gt;One&lt;/option&gt;
-        &lt;option&gt;Two&lt;/option&gt;
-        &lt;option&gt;Three&lt;/option&gt;
-    &lt;/select&gt;
-&lt;/div&gt;
-                </pre>
               </div>
                   
           </section>
@@ -883,20 +768,23 @@
 
             <div class="componentSample">
                 <div class="example clearfix">
-                    <br><br> <!-- Some space for tooltips -->
-                    <div class="slider" data-init="slider">
-                        <input type="range" value="14" min="10" max="20" step="2">
+                    <div class="left">
+                        <div class="slider" data-init="slider">
+                            <input type="range" value="14" min="10" max="20" step="2">
+                        </div>
+                        <div class="slider ticked filled" data-init="slider">
+                            <input type="number" value="14" min="10" max="20" step="2">
+                        </div>
                     </div>
-                    <div class="slider ticked filled" data-init="slider">
-                        <input type="range" value="14" min="10" max="20" step="2">
-                    </div>
-                    <div class="slider ticked filled tooltips" data-init="slider">
-                        <input type="range" value="14" min="10" max="20" step="2">
-                        <input type="range" value="16" min="10" max="20" step="2">
-                    </div>
-                    <div class="slider ticked filled" data-init="slider">
-                        <input type="range" value="14" min="10" max="20" step="2" disabled>
-                        <input type="range" value="16" min="10" max="20" step="2" disabled>
+                    <div class="left">
+                        <div class="slider ticked filled" data-init="slider">
+                            <input type="number" value="14" min="10" max="20" step="2">
+                            <input type="number" value="16" min="10" max="20" step="2">
+                        </div>
+                        <div class="slider ticked filled" data-init="slider">
+                            <input type="number" value="14" min="10" max="20" step="2" disabled>
+                            <input type="number" value="16" min="10" max="20" step="2" disabled>
+                        </div>
                     </div>
                 </div>
               <pre class="prettyprint linenums">
@@ -904,15 +792,15 @@
   &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
 &lt;/div&gt;
 &lt;div class=&quot;slider ticked filled&quot; data-init=&quot;slider&quot;&gt;
-  &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+  &lt;input type=&quot;number&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
 &lt;/div&gt;
 &lt;div class=&quot;slider ticked filled&quot; data-init=&quot;slider&quot;&gt;
-  &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
-  &lt;input type=&quot;range&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+  &lt;input type=&quot;number&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+  &lt;input type=&quot;number&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
 &lt;/div&gt;
-&lt;div class=&quot;slider ticked filled tooltips&quot; data-init=&quot;slider&quot;&gt;
-  &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;
-  &lt;input type=&quot;range&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;
+&lt;div class=&quot;slider ticked filled&quot; data-init=&quot;slider&quot;&gt;
+  &lt;input type=&quot;number&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;
+  &lt;input type=&quot;number&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;
 &lt;/div&gt;
 </pre>
             </div>
@@ -926,17 +814,15 @@
                             <input type="range" value="14" min="10" max="20" step="2">
                         </div>
                         <div class="slider vertical ticked filled" data-init="slider">
-                            <input type="range" value="14" min="10" max="20" step="2">
-                        </div>
-                    </div>
-                    <div class="left">
-                        <div class="slider vertical ticked filled tooltips" data-init="slider">
-                            <input type="range" value="14" min="10" max="20" step="2">
-                            <input type="range" value="16" min="10" max="20" step="2">
+                            <input type="number" value="14" min="10" max="20" step="2">
                         </div>
                         <div class="slider vertical ticked filled" data-init="slider">
-                            <input type="range" value="14" min="10" max="20" step="2" disabled>
-                            <input type="range" value="16" min="10" max="20" step="2" disabled>
+                            <input type="number" value="14" min="10" max="20" step="2">
+                            <input type="number" value="16" min="10" max="20" step="2">
+                        </div>
+                        <div class="slider vertical ticked filled" data-init="slider">
+                            <input type="number" value="14" min="10" max="20" step="2" disabled>
+                            <input type="number" value="16" min="10" max="20" step="2" disabled>
                         </div>
                     </div>
                 </div>
@@ -945,15 +831,15 @@
   &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
 &lt;/div&gt;
 &lt;div class=&quot;slider vertical ticked filled&quot; data-init=&quot;slider&quot;&gt;
-  &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
-&lt;/div&gt;
-&lt;div class=&quot;slider vertical ticked filled tooltips&quot; data-init=&quot;slider&quot;&gt;
-  &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
-  &lt;input type=&quot;range&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+  &lt;input type=&quot;number&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
 &lt;/div&gt;
 &lt;div class=&quot;slider vertical ticked filled&quot; data-init=&quot;slider&quot;&gt;
-  &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;
-  &lt;input type=&quot;range&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;
+  &lt;input type=&quot;number&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+  &lt;input type=&quot;number&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;slider vertical ticked filled&quot; data-init=&quot;slider&quot;&gt;
+  &lt;input type=&quot;number&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;
+  &lt;input type=&quot;number&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;
 &lt;/div&gt;
 </pre>
             </div>

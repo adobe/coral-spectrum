@@ -104,7 +104,8 @@ $('#myRail').rail({
               content: e.find('.wrap'),
               ptr: e.find('.pull-to-refresh') 
             },
-            foldable = _.content.find('section.foldable');
+            foldable = _.content.find('section.foldable'),
+            switcher = _.content.find('.rail-switch');
 
       // Accessibility
       _makeAccessible(e);
@@ -118,6 +119,11 @@ $('#myRail').rail({
           f.toggleClass('open');
         });
       });
+
+      // rail switcher
+      if (switcher.length > 0) {
+        this._initRailSwitcher(_.content, switcher);
+      }
 
       // accordion
       if (_.content.hasClass('accordion')) {
@@ -261,7 +267,7 @@ $('#myRail').rail({
             trigger = f.find('.heading'),
             fold = f.find('.fold');
 
-        trigger.fipo('tap', 'click', function (ev) { // TODO make that for touch
+        trigger.fipo('tap', 'click', function (ev) {
           var curHeight = fold.height(),
               targetHeight,
               cur = con.data(activeAccordion);
@@ -275,6 +281,31 @@ $('#myRail').rail({
 
         });
       });  
+    },
+
+    _initRailSwitcher: function (con, switcher) {
+      var trigger = switcher.find('nav a'),
+          views = con.find('.rail-view'),
+          active = con.find('.rail-view.active'),
+          cl = 'active';
+
+      // init switcher
+      trigger.each(function (i, e) {
+        var t = $(e),
+            viewName = t.data('view'),
+            view = con.find('.rail-view[data-view="'+ viewName +'"]');
+
+        t.fipo('tap', 'click', function (ev) {
+          views.removeClass(cl);
+          trigger.removeClass(cl);
+
+          $(this).addClass(cl);
+          view.toggleClass('active'); 
+        });
+      });
+
+      // init search buttons
+      // TODO
     }
     
   });
