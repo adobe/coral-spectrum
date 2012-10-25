@@ -397,12 +397,10 @@
 
     _getHighestValue: function() {
       return Math.max.apply(Math, this.values);
-      //return 30;
     },
 
     _getLowestValue: function() {
       return Math.min.apply(Math, this.values);
-      //return 10;
     }
 
     /*update: function() {
