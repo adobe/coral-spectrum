@@ -7,17 +7,17 @@
     font-style: normal; // Since most icons set with an <i> element, let's reset the font-style
 
     &:before {
-	    speak: none;
-	    display: inline-block; // Removes underline if icon is a link
-	    margin-right: 0.25em;  // Spacing between the icon and the label
-	    font: normal @icon-font-size @font-icon-family;
-	    color: @icon-color;
-	}
+        speak: none;
+        display: inline-block; // Removes underline if icon is a link
+        margin-right: 0.25em;  // Spacing between the icon and the label
+        font: normal @icon-font-size @font-icon-family;
+        color: @icon-color;
+    }
 }
 
 // TBD: Private use area code point characters should be used here (like "\e000")
 .icon-rail:before {
-    content: "W";
+    content: "R";
 }
 .icon-edit:before {
     content: "E";
