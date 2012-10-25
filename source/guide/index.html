@@ -82,7 +82,7 @@
             <a class="heading" href="#Navigation">Navigation</a>
 
             <nav class="fold">
-              <a href="#Toolbar">Toolbar</a>
+              <a href="#ActionBar">Action bar</a>
               <a href="#Breadcrumbs">Breadcrumbs</a>
               <a href="#Tabs">Tabs</a>
               <a href="#Wizard">Wizard</a>
@@ -414,19 +414,67 @@
         <h1 class="line">Navigation</h1>
         <p>CUI provides various controls that enable navigation.</p>
 
-        <section class="hidden" id="Toolbar">
-          <h2 class="line">Toolbar</h2>
-          <p>The toolbar contains action buttons.</p>
+        <section id="ActionBar">
+          <h2 class="line">Action bar (WIP)</h2>
+          <p>The action bar contains action buttons. The button icons are still to be done.</p>
 
           <div class="componentSample">
             <div class="example">
 
-              <nav class="toolbar">
-                <a href="#"><!-- text or image --></a>
-              </nav>
+              <h4>No Links</h4>
+              <p><i class="icon-rail"><span class="hidden-accessible">Label</span></i> (with label hidden but accessible)</p>
+              <p><i class="icon-rail">Label</i> (label inside of the icon element)</p>
+              <p><i class="icon-rail"></i>Label (could be used outside of the icon element as well)</p>
 
+              <h4>Links</h4>
+              <p><a href="#" class="icon-rail"><span class="hidden-accessible">Label</span></a> (with label hidden but accessible)</p>
+              <p><a href="#" class="icon-rail">Label</a> (label in link)</p>
+
+              <h4>Icons Groups</h4>
+              <div class="icons-group">
+                  <a href="#" class="icon-rail" title="Rail">Rail</a>
+                  <span class="divider"></span>
+                  <a href="#" class="icon-edit" title="Edit">Edit</a>
+                  <i class="icon-message">Message</i>
+                  <i class="icon-download"></i>
+              </div>
+
+              <h4>Toolbar</h4>
+              <nav class="actionbar">
+                <div class="left icons-group">
+                  <a href="#" class="icon-rail" title="Rail">Rail</a>
+                  <span class="divider"></span>
+                  <a href="#" class="icon-edit" title="Edit">Edit</a>
+                  <a href="#" class="icon-message" title="Message">Message</a>
+                  <a href="#" class="icon-download" title="Download">Download</a>
+                </div>
+                <div class="center">
+                  <h1>Page Title</h1>
+                </div>
+                <div class="right icons-group">
+                  <a href="#" class="icon-list-view" title="List View">List View</a>
+                  <a href="#" class="icon-search" title="Search">Search</a>
+                </div>
+              </nav>
             </div>
-            <pre class="prettyprint linenums"></pre>
+            <pre class="prettyprint linenums">
+&lt;nav class=&quot;actionbar&quot;&gt;
+  &lt;div class=&quot;left icons-group&quot;&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-rail&quot; title=&quot;Rail&quot;&gt;Rail&lt;/a&gt;
+    &lt;span class=&quot;divider&quot;&gt;&lt;/span&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-edit&quot; title=&quot;Edit&quot;&gt;Edit&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-message&quot; title=&quot;Message&quot;&gt;Message&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-download&quot; title=&quot;Download&quot;&gt;Download&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;center&quot;&gt;
+    &lt;h1&gt;Page Title&lt;/h1&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;right icons-group&quot;&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-list-view&quot; title=&quot;List View&quot;&gt;List View&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-search&quot; title=&quot;Search&quot;&gt;Search&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;
+            </pre>
           </div>
         </section>
 

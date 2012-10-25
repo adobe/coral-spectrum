@@ -11,6 +11,7 @@
 
 // Fonts
 @font-base-family: AdobeClean;
+@font-icon-family: AdobeClean; // TBD: change to icon font
 @font-base-weight: normal;
 @font-base-color: rgb(75, 75, 75);
 @font-captions-help-color: rgb(135, 135, 135);
@@ -35,9 +36,6 @@
 
 // Toolbar
 @toolbar-border-color: rgb(215, 215, 215);
-@toolbar-icon-margin: 4*@px;
-@toolbar-spacer-color: rgb(198, 198, 198);
-
 
 
 // Grid
@@ -64,9 +62,11 @@
 
 
 // Icons
-@icon-size: 24*@px;  // Define with em so it changes with font-size
+@icon-font-size: 1.5em;  // Define with em so it changes with font-size
+@icon-font-width: 1em;   // The width of the icon characters
 @icon-color: rgb(68, 68, 68);
-
+@icon-buttons-size: 40*@px;
+@icon-buttons-divider-width: 8*@px;
 
 // Buttons
 @button-text-size: 14*@px; // TBD: make rem so they stay the same size, or let them scale with fonts?

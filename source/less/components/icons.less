@@ -1,15 +1,70 @@
 /**
-  Element: i
-  Used exclusively for icons
+  Class: icon-*
+  Used exclusively for icons.
+  Note: that the icon- class must be the first class in the class="..." property.
 */
-i {
-  color: @icon-color;
-  font-size: @icon-size;
-  // TODO: set default width/height?
+[class|=icon] {
+    font-style: normal; // Since most icons set with an <i> element, let's reset the font-style
+
+    &:before {
+	    speak: none;
+	    display: inline-block; // Removes underline if icon is a link
+	    margin-right: 0.25em;  // Spacing between the icon and the label
+	    font: normal @icon-font-size @font-icon-family;
+	    color: @icon-color;
+	}
 }
 
-// TODO: support for raster icons with small/medium/large etc
+// TBD: Private use area code point characters should be used here (like "\e000")
+.icon-rail:before {
+    content: "W";
+}
+.icon-edit:before {
+    content: "E";
+}
+.icon-message:before {
+    content: "M";
+}
+.icon-download:before {
+    content: "D";
+}
+.icon-list-view:before {
+    content: "L";
+}
+.icon-search:before {
+    content: "S";
+}
 
+/**
+  Class: icons-group
+  Button toolbar of icons.
+*/
+.icons-group {
+    .clearfix;
+    line-height: @icon-buttons-size;
+
+    [class|=icon] {
+        display: inline-block;
+        overflow: hidden;
+        float: left;
+        white-space: nowrap;
+        width:  @icon-buttons-size;
+        text-align: center;
+        
+        &:before {
+            width:  100%;
+            margin: 0;
+        }
+    }
+
+    .divider {
+        float: left;
+        width:  @icon-buttons-divider-width;
+        height: @icon-buttons-size;
+    }
+}
+
+// TBD: support for raster icons with small/medium/large etc
 // Media query for HD screens - keeping empty and not removing it for later usage.
 @media
 only screen and (-webkit-min-device-pixel-ratio: 1.5),
