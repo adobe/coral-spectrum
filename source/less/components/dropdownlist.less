@@ -1,14 +1,29 @@
 /**
 * Also used by auto completers, see filters.less
 */
+.dropdown-container {
+   display: inline-block;
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+.dropdown-visible {
+    z-index: 1000;
+}
 .dropdown-list {
+    position: absolute;
+    left: 0;
+    top: 0;
+    max-height: 20rem;
+}
+.dropdown-list  ul {
     margin: 0;
     padding: 0;
-    z-index: 1000;
     font-size: @dropdown-text-size;
     max-height: 20rem;
     overflow: auto;
     border-bottom: @px solid @dropdown-border-color;
+    background-color: @dropdown-background-color;
 
     li {
         list-style-type: none;

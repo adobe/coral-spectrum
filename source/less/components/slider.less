@@ -10,11 +10,17 @@
   .border-radius(0.25rem);
   border: @px solid @slider-border-color;
   background-color: @slider-background-color;
+  width: 220*@px;
+  height: 8*@px;
+  margin: 0.5rem 0.25rem;
 
   .handle {
     position: absolute;
     left: 0;
     display: inline-block;
+    width: 9*@px;
+    height: 20*@px;
+    margin: -0.5rem -0.25rem;
     .gradient(@slider-handle-gradient-start-color, @slider-handle-gradient-end-color);
     .border-radius(0.25rem);
     border: @px solid @slider-border-color;
@@ -29,12 +35,21 @@
 
   .tick {
     position: absolute;
+    bottom: 0;
+    left: 0;
+    width: @px;
+    height: 0.4rem;
     background-color: @slider-border-color;
+    &.covered {
+      background-color: @slider-fill-tick-color;
+    }
   }
 
   .tooltip {
     display: none;
     z-index: 1;
+    left: -20*@px;
+    top: -55*@px;
   }
 
   input[type=range],
@@ -48,40 +63,20 @@
   .fill {
     position: absolute;
     background-color: @slider-fill-color;
-    border: @px;
+    border: @px solid @slider-fill-border-color;
+    margin: -@px 0 -@px -@px;
     .border-radius(0.25rem);
+    height: 0.4rem;
+    left: 0;
   }
 
-  &.horizontal {
-    width: 20rem;
-    height: 0.5rem;
-    margin: 0.5rem 0.25rem;
-    .handle {
-      width: 0.5rem;
-      margin: -0.6rem -0.25rem;
-      height: 1.5rem;
-    }
-    .tick {
-      top: 0;
-      left: 0;
-      width: @px;
-      height: 0.4rem;
-    }
-    .tooltip {
-      left: -20*@px;
-      top: -50*@px;
-    }
-    .fill {
-      height: 0.4rem;
-      left: 0;
-    }
-    .value {
-      display: inline-block;
-    }
+  .value {
+    display: inline-block;
   }
+
   &.vertical {
-    width: 0.5rem;
-    height: 20rem;
+    width: 8*@px;
+    height: 220*@px;
     margin: 0.25rem 0.6rem;
 
     input[type=range],
@@ -89,13 +84,11 @@
       float: left;
     }
     .handle {
-      width: 1.5rem;
+      width: 20*@px;
       margin: -0.25rem -0.5rem;
-      height: 0.5rem;
+      height: 9*@px;
     }
     .tick {
-      bottom: 0;
-      left: 0;
       width: 0.4rem;
       height: @px;
     }
@@ -106,6 +99,28 @@
     .fill {
       width: 0.4rem;
       bottom: 0;
+    }
+  }
+
+  &.disabled {
+    border-color: @slider-disabled-border-color;
+    background-color: @slider-disabled-background-color;
+    .handle {
+      background: @slider-disabled-background-color;
+      border-color: @slider-disabled-border-color;
+      &:hover {
+        cursor: auto;
+        .tooltip {
+          display: none;
+        }
+      }
+    }
+    .tick {
+      background-color: @slider-disabled-border-color;
+    }
+    .fill {
+      background-color: @slider-disabled-fill-color;
+      border-color: @slider-disabled-border-color;
     }
   }
 }
