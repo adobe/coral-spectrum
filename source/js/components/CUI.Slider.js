@@ -3,6 +3,49 @@
     toString: 'Slider',
     extend: CUI.Widget,
 
+/**
+      @extends CUI.Widget
+      @classdesc A slider widget
+      
+        <p>
+            <div class="slider ticked filled tooltips" data-init="slider">
+              <input type="range" value="14" min="10" max="20" step="2">
+            </div>
+        </p>
+
+        <p>
+        Currently you have to supply the full markup to this widget. It does not render missing
+        elements itself.
+        </p>
+    @example
+    <caption>Simple horizontal slider</caption>
+    &lt;div class="slider" data-init="slider"&gt;
+        &lt;input type="range" value="14" min="10" max="20" step="2"&gt;
+    &lt;/div&gt;
+
+    @example
+    <caption>Full-featured slider with two handles, tooltips, ticks and a filled bar</caption>
+    &lt;div class="slider tooltips ticked filled" data-init="slider"&gt;
+        &lt;input type="range" value="4" min="10" max="20" step="2"&gt;
+        &lt;input type="range" value="14" min="10" max="20" step="2"&gt;
+    &lt;/div&gt;
+
+    @example
+    <caption>Instantiate by jQuery plugin</caption>
+    $("select").dropdown();
+
+      @desc Creates a slider from a div
+      @constructs
+      
+      @param {Object}   options                               Component options
+      @param {number} [options.step=1]  The steps to snap in
+      @param {number} [options.min=1]   Minimum value
+      @param {number} [options.max=100] Maximum value
+      @param {number} [options.value=1] Starting value
+      @param {String} [options.orientation=horizontal]  Either horizontal or vertical
+      @param {boolean} [options.slide=false]    True for smooth sliding animations 
+      @param {boolean} [options.disabled=false] True for a disabled element      
+    */
     construct: function(options) {
         var that = this;
 
@@ -66,13 +109,13 @@
 
         that.values = values;
 
+        this.$element.on("click", function(event) {
+            this._handleClick(event);
+        }.bind(this));
+        
         // Set up event handling
         // TODO: Support handle drag (mobile: touchstart, touchmove, touchend; click: mousedown, mouseup)
-        this.$element.on("mouseup", function(event) {
-            this._mouseUp(event);
-        }.bind(this));
-
-        this.$element.on("mousedown", function(event) {
+        this.$element.on("mousedown touchstart", ".handle", function(event) {
             this._mouseDown(event);
         }.bind(this));
 
@@ -97,22 +140,22 @@
     $handles: null,
     $tooltips: null,
     isVertical: false,
-    isDragging: false,
+    draggingPosition: -1,
     
     _render: function() {
         var that = this;
 
         // get maximum max value
         var maximums = that.$inputs.map(function() {return $(this).attr('max');});
-        that.options.max = Math.max.apply(Math, maximums.toArray());
+        that.options.max = Math.max.apply(null, maximums.toArray());
 
         // get minimum min value
         var minimums = that.$inputs.map(function() {return $(this).attr('min');});
-        that.options.min = Math.min.apply(Math, minimums.toArray());
+        that.options.min = Math.min.apply(null, minimums.toArray());
 
         // get minimum step value
         var steps = that.$inputs.map(function() {return $(this).attr('step');});
-        that.options.step = Math.min.apply(Math, steps.toArray());
+        that.options.step = Math.min.apply(null, steps.toArray());
 
         // Todo: do not add already existing elements or remove them before adding new elements
         // build ticks if needed
@@ -190,33 +233,16 @@
         that.$handles = that.$element.find('.handle');
         that.$tooltips = that.$element.find('.tooltip');
     },
-
-    _mouseDown: function(event) {
+    
+    _handleClick: function(event) {
         var that = this;
-
-        // TODO: implement slider drag and drop
-        //$(window).mousemove(function() {
-        //    that.isDragging = true;
-        //    $(window).unbind("mousemove");
-        //});
-
-        if(that.options.disabled) return false;
-
-        // Find the nearest handle and move it the clicked position
-        var $nearestHandle;
 
         // Mouse page position
         var mouseX = event.pageX;
         var mouseY = event.pageY;
 
-        // Slider dimensions
-        var sliderWidth = this.$element.outerWidth();
-        var sliderHeight = this.$element.outerHeight();
+        var closestDistance = 999999; // Incredible large start value
 
-        var closestDistance = sliderWidth;
-        if(that.options.orientation === "vertical") {
-            closestDistance = sliderHeight;
-        }
 
         // Find the nearest handle
         var pos = 0;
@@ -238,7 +264,6 @@
 
             if(distance < closestDistance) {
                 closestDistance = distance;
-                $nearestHandle = $(this);
                 pos = index;
             }
         });
@@ -247,27 +272,59 @@
         that._moveHandles();
         if(that.options.filled) {
             that._updateFill();
-        }
+        }            
+    },
+
+    _mouseDown: function(event) {
+        if(this.options.disabled) return false;
+
+        this.draggingPosition = 0;
+        this.$handles.each(function(index, handle) {
+            if (handle === event.target) this.draggingPosition = index;
+        }.bind(this));
+        
+        this.$handles.eq(this.draggingPosition).addClass("dragging");
+        
+        
+        $(window).bind("mousemove.slider touchmove.slider", this._handleDragging.bind(this));
+        $(window).bind("mouseup.slider touchend.slider", this._mouseUp.bind(this));
+
+        event.preventDefault();
+
         //update();
+    },
+    
+    _handleDragging: function(event) {
+        var mouseX = event.pageX;
+        var mouseY = event.pageY;
+        
+        // Handle touch events
+        if (event.originalEvent.targetTouches) {
+            var touch = event.originalEvent.targetTouches.item(0);
+            mouseX = touch.pageX;
+            mouseY = touch.pageY;            
+        }
+        
+        this._updateValue(this.draggingPosition, this._getValueFromCoord(mouseX, mouseY));        
+        this._moveHandles();
+        if(this.options.filled) {
+            this._updateFill();
+        }
+        event.preventDefault();
     },
 
     _mouseUp: function() {
-        var that = this;
+        this.$handles.eq(this.draggingPosition).removeClass("dragging");
 
-        if(that.options.disabled) return false;
-
-        // TODO: Implement handle drag and drop
-        //var wasDragging = that.isDragging;
-        //that.isDragging = false;
-        //$(window).unbind("mousemove");
-        //if (wasDragging) {
-        //    console.log("we were dragging");
-        //}
+        this.draggingPosition = -1;
+        $(window).unbind("mousemove.slider touchmove.slider");
+        $(window).unbind("mousemup.slider touchend.slider");
+        
     },
 
     _updateValue: function(pos, value) {
         var that = this;
-
+                
         if(pos === 0 || pos === 1) {
             that.values[pos] = value.toString();
             that.$inputs.eq(pos).attr("value", value); // Keep input element value updated too
@@ -308,8 +365,8 @@
 
         if(that.values.length !== 0) {
             if(that.values.length === 2) { // Double value/handle
-                percent = ((that.values[0] - that.options.min) / (that.options.max - that.options.min)) * 100;
-                var secondPercent = ((that.values[1] - that.options.min) / (that.options.max - that.options.min)) * 100;
+                percent = ((that._getLowestValue() - that.options.min) / (that.options.max - that.options.min)) * 100;
+                var secondPercent = ((that._getHighestValue() - that.options.min) / (that.options.max - that.options.min)) * 100;
                 var percentDiff = secondPercent - percent;
                 if(that.options.orientation === "vertical") {
                     if(that.options.slide) {
@@ -369,38 +426,40 @@
     },
 
     _getValueFromCoord: function(posX, posY) {
-      var that = this;
-      var percent, snappedValue, remainder;
-      var elementOffset = that.$element.offset();
+        var that = this;
+        var percent, snappedValue, remainder;
+        var elementOffset = that.$element.offset();
 
-      if(that.options.orientation === "vertical") {
-          var elementHeight = that.$element.height();
-          percent = ((elementOffset.top + elementHeight) - posY) / elementHeight;
-      } else {
-          var elementWidth = that.$element.width();
-          percent = ((posX - elementOffset.left) / elementWidth);
-      }
-      var rawValue = that.options.min + ((that.options.max - that.options.min) * percent);
+        if(that.options.orientation === "vertical") {
+            var elementHeight = that.$element.height();
+            percent = ((elementOffset.top + elementHeight) - posY) / elementHeight;
+        } else {
+            var elementWidth = that.$element.width();
+            percent = ((posX - elementOffset.left) / elementWidth);
+        }
+        var rawValue = that.options.min * 1 + ((that.options.max - that.options.min) * percent);
 
-      // Snap value to nearest step
-      if(rawValue >= that.options.max) return that.options.max;
-      if(rawValue <= that.options.min) return that.options.min;
+        if(rawValue >= that.options.max) return that.options.max;
+        if(rawValue <= that.options.min) return that.options.min;
 
-      remainder = ((rawValue - that.options.min) % that.options.step);
-      if(Math.abs(remainder) * 2 >= that.options.step) {
-          snappedValue = rawValue - remainder + that.options.step;
-      } else {
-          snappedValue = rawValue - remainder;
-      }
-      return snappedValue;
+
+        // Snap value to nearest step
+        remainder = ((rawValue - that.options.min) % that.options.step);
+        if(Math.abs(remainder) * 2 >= that.options.step) {
+            snappedValue = (rawValue - remainder) + (that.options.step * 1); // *1 for IE bugfix: Interpretes expr. as string!
+        } else {
+            snappedValue = rawValue - remainder;
+        }
+        
+        return snappedValue;
     },
 
     _getHighestValue: function() {
-      return Math.max.apply(Math, this.values);
+      return Math.max.apply(null, this.values);
     },
 
     _getLowestValue: function() {
-      return Math.min.apply(Math, this.values);
+      return Math.min.apply(null, this.values);
     }
 
     /*update: function() {
