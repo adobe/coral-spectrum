@@ -37,7 +37,7 @@
     </nav>
 
     <div class="drawer">
-      <div class="badge">v0.3.0</div>
+      <div class="badge">v0.4.0-SNAPSHOT</div>
     </div>
 
   </header>
@@ -593,8 +593,13 @@
     
                       <div class="filterSample">
                           <div class="sampleTitle left">Single</div>
-                          <div class="filters" id="filters-singleterm">
+                          <div class="filters" data-init="filters">
                             <input type="text" placeholder="Single Term Filter">
+                            <select>
+                              <option selected>Apple</option>
+                              <option>Pear</option>
+                              <option>Banana</option>
+                            </select>
                           </div>
                       </div>
                       
@@ -605,20 +610,20 @@
                                 <select  multiple>
                                     <option>Apple</option>
                                     <option>Pear</option>
-                                    <option>Banana</option>
+                                    <option selected>Banana</option>
                                 </select>
                             </div>
                       </div>
                       
                       <div class="filterSample">
                           <div class="sampleTitle extended left">Stacking</div>
-                          <div class="filters" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter">
+                          <div class="filters" data-init="filters" data-stacking="true" data-placeholder="Add Filter">
                                <input type="text">
                                <select>
-                                  <option>Apple</option>
+                                  <option selected>Apple</option>
                                   <option>Pear</option>
                                   <option>Banana</option>
-                              </select>
+                               </select>
                           </div>     
                       </div>
                       
@@ -689,7 +694,7 @@
                               <button>Single Select</button>
                               <select name="dropdown" >
                                   <option>Single One</option>
-                                  <option>Single Two</option>
+                                  <option selected>Single Two</option>
                                   <option>Single Three</option>
                               </select>
                           </div>
@@ -700,7 +705,7 @@
                               <button>Multi Select</button>
                               <select name="dropdown2" multiple>
                                   <option>Multi One</option>
-                                  <option>Multi Two</option>
+                                  <option selected>Multi Two</option>
                                   <option>Multi Three</option>
                               </select>
                           </div>
@@ -741,6 +746,58 @@
                           </div>
                       </div>
                   </div>
+                <pre class="prettyprint linenums">
+&lt!-- Standard Single select --&gt;
+&lt;div class="dropdown" data-init="dropdown"&gt;
+    &lt;button&gt;Single Select&lt;/button&gt;
+    &lt;select name="dropdown"&gt;
+        &lt;option&gt;Single One&lt;/option&gt;
+        &lt;option selected&gt;Single Two&lt;/option&gt;
+        &lt;option&gt;Single Three&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;
+
+&lt!-- Multi select --&gt;
+&lt;div class="dropdown" data-init="dropdown"&gt;
+    &lt;button&gt;Multi Select&lt;/button&gt;
+    &lt;select name="dropdown2" multiple&gt;
+        &lt;option&gt;Multi One&lt;/option&gt;
+        &lt;option selected&gt;Multi Two&lt;/option&gt;
+        &lt;option&gt;Multi Three&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;
+
+&lt!-- Editable --&gt;
+&lt;div class="dropdown dropdown-editable" data-editable="true" data-init="dropdown"&gt;
+    &lt;input type="text" placeholder="Editable Select"&gt;
+    &lt;button&gt;Editable&lt;/button&gt;
+    &lt;select name="dropdown3"&gt;
+        &lt;option&gt;Edit One&lt;/option&gt;
+        &lt;option&gt;Edit Two&lt;/option&gt;
+        &lt;option&gt;Edit Three&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;
+
+&lt!-- Disabled --&gt;
+&lt;div class="dropdown" data-init="dropdown" data-disabled="true"&gt;
+    &lt;button&gt;Disabled&lt;/button&gt;
+    &lt;select name="dropdown4"&gt;
+        &lt;option&gt;One&lt;/option&gt;
+        &lt;option&gt;Two&lt;/option&gt;
+        &lt;option&gt;Three&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;
+
+&lt!-- Error --&gt;
+&lt;div class="dropdown error" data-init="dropdown"&gt;
+    &lt;button&gt;Error&lt;/button&gt;
+    &lt;select name="dropdown5" &gt;
+        &lt;option&gt;One&lt;/option&gt;
+        &lt;option&gt;Two&lt;/option&gt;
+        &lt;option&gt;Three&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;
+                </pre>
               </div>
                   
           </section>
@@ -891,8 +948,8 @@
                     <label class="switch"><input type="checkbox" name="s2" disabled><span>Off</span><span>On</span></label>
                 </div>
                <pre class="prettyprint linenums">
-  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s1&quot;&gt;&lt;span&gt;Off&lt;/span&gt;&lt;span&gt;On&lt;/span&gt;&lt;/label&gt;
-  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s2&quot; disabled&gt;&lt;span&gt;Off&lt;/span&gt;&lt;span&gt;On&lt;/span&gt;&lt;/label&gt;
+&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s1&quot;&gt;&lt;span&gt;Off&lt;/span&gt;&lt;span&gt;On&lt;/span&gt;&lt;/label&gt;
+&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s2&quot; disabled&gt;&lt;span&gt;Off&lt;/span&gt;&lt;span&gt;On&lt;/span&gt;&lt;/label&gt;
 </pre>
             </div>
 
