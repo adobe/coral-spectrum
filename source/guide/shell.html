@@ -44,99 +44,66 @@
 
   <div class="page" role="main">
 
-    <div id="main-rail" class="rail left scroll">
+    <div id="main-rail" class="rail left">
       <div class="wrap">
 
-        <section class="links">
-            <a class="heading" href="#General">General</a>
+        <div class="rail-switch">
+          <nav>
+            <a href="#" data-view="feature"><span>A</span></a>
+            <a href="#" class="active" data-view="filter"><span>B</span></a>
+            <a href="#" data-view="activity"><span>C</span></a>
+          </nav>
+          <div class="search">
+            <form>
+              <input type="text" placeholder="Enter Keyword(s)" name="q" />
+              <a class="clear-cmd" href="#">X</a>
+              <a class="query-cmd" href="#">S</a>
+            </form>
+          </div>
+        </div>
 
-            <nav class="fold">
-              <a href="#WhatIsCUI">What is CoralUI?</a>
-              <a href="#ResolutionIndependence">Resolution Independence</a>
-              <a href="#BrowserSupport">Browser Support</a>
-              <a href="#WidgetPhilosophy">Widget Philosophy</a>
-            </nav>
-        </section>
+        <div class="rail-view" data-view="feature">
+          <nav class="feature">
+            <a href="#" class="active">Files</a>
+            <a href="#">Collections</a>
+            <a href="#">Users</a>
+            <a href="#">Tools</a>
+            <a href="#">Settings</a>
+          </nav>
+        </div>
+        
+        <div class="rail-view active group" data-view="filter">
+          <section>
+            <span class="heading">Accordion open</span>
+            <ul>
+              <li>
+                <label>
+                  <input type="checkbox" checked="" value="1" name="c1"><span>Checked</span>
+                </label>
+              </li>
+              <li>Link</li>
+              <li>Fonts</li>
+            </ul>
+          </section>
+          <section>
+            <span class="heading">Accordion open</span>
+            <ul>
+              <li>Headings</li>
+              <li>Link</li>
+              <li>Fonts</li>
+            </ul>
+          </section>
+        </div>
 
-        <section class="links foldable">
-            <a class="heading" href="#TextStyles">Text Styles</a>
-
-            <nav class="fold">
-              <a href="#Headings">Headings</a>
-              <a href="#Link">Link</a>
-              <a href="#Fonts">Fonts</a>
-            </nav>
-        </section>
-
-        <section class="links foldable">
-            <a class="heading" href="#PageComponents">Page&nbsp;Components</a>
-
-            <nav class="fold">
-              <a href="#Header">Header</a>
-              <a href="#Rail">Rail</a>
-              <a href="#Well">Well</a>
-            </nav>
-        </section>
-
-        <section class="links foldable">
-            <a class="heading" href="#Navigation">Navigation</a>
-
-            <nav class="fold">
-              <a href="#Toolbar">Toolbar</a>
-              <a href="#Breadcrumbs">Breadcrumbs</a>
-              <a href="#Tabs">Tabs</a>
-              <a href="#Wizard">Wizard</a>
-           </nav>
-        </section>
-
-        <section class="links foldable">
-            <a class="heading" href="#ButtonsAndControls">Buttons &amp; Controls</a>
-
-            <nav class="fold">
-              <a href="#Buttons">Buttons</a>
-              <a href="#TextField">Text field</a>
-              <a href="#SearchField">Search field</a>
-              <a href="#Filters">Filters</a>
-              <a href="#Checkbox">Checkbox</a>
-              <a href="#RadioButtons">Radio buttons</a>
-              <a href="#Toggle">Toggle</a>
-              <a href="#Selector">Selector</a>
-              <a href="#Slider">Slider</a>
-              <a href="#Dropdown">Dropdown</a>
-              <a href="#Draggable">Draggable</a>
-            </nav>
-        </section>
-
-        <section class="links foldable">
-            <a class="heading" href="#DataPresentation">Data&nbsp;Presentation</a>
-
-            <nav class="fold">
-              <a href="#List">List</a>
-              <a href="#Table">Table</a>
-              <a href="#Grid">Grid</a>
-            </nav>
-        </section>
-
-        <section class="links foldable">
-            <a class="heading" href="#Dialogs">Dialogs</a>
-
-            <nav class="fold">
-              <a href="#Modal">Modal</a>
-              <a href="#Popover">Popover</a>
-           </nav>
-        </section>
-
-        <section class="links foldable">
-            <a class="heading" href="#StatusIndicators">Status Indicators</a>
-
-            <nav class="fold">
-              <a href="#Alert">Alert</a>
-              <a href="#Tooltip">Tooltip</a>
-              <a href="#Badge">Badge</a>
-              <a href="#Spinner">Spinner</a>
-              <a href="#ProgressBar">Progress Bar</a>
-           </nav>
-        </section>
+        <div class="rail-view" data-view="activity">
+          <nav class="feature">
+            <a href="#" class="active">3</a>
+            <a href="#">Collections</a>
+            <a href="#">Users</a>
+            <a href="#">Tools</a>
+            <a href="#">Settings</a>
+          </nav>
+        </div>
         
       </div>
     </div>
@@ -410,45 +377,64 @@
         <h1 class="line">Navigation</h1>
         <p>CUI provides various controls that enable navigation.</p>
 
-        <section id="Toolbar">
-          <h2 class="line">Toolbar</h2>
-          <p>The toolbar contains action buttons.</p>
+        <section id="ActionBar">
+          <h2 class="line">Action bar (WIP)</h2>
+          <p>The action bar contains action buttons. The button icons are still to be done.</p>
 
           <div class="componentSample">
             <div class="example">
-              <h4>Toolbar</h4>
-              <nav class="toolbar">
-                <div class="left icons-group">
-                  <a href="#" class="icon-rail">Rail</a>
+
+              <h4>No Links</h4>
+              <p><i class="icon-rail"><span class="hidden-accessible">Label</span></i> (with label hidden but accessible)</p>
+              <p><i class="icon-rail">Label</i> (label inside of the icon element)</p>
+              <p><i class="icon-rail"></i>Label (could be used outside of the icon element as well)</p>
+
+              <h4>Links</h4>
+              <p><a href="#" class="icon-rail"><span class="hidden-accessible">Label</span></a> (with label hidden but accessible)</p>
+              <p><a href="#" class="icon-rail">Label</a> (label in link)</p>
+
+              <h4>Icons Groups</h4>
+              <div class="icons-group">
+                  <a href="#" class="icon-rail" title="Rail">Rail</a>
                   <span class="divider"></span>
-                  <a href="#" class="icon-edit">Edit</a>
-                  <a href="#" class="icon-message">Message</a>
-                  <a href="#" class="icon-download">Download</a>
+                  <a href="#" class="icon-edit" title="Edit">Edit</a>
+                  <i class="icon-message">Message</i>
+                  <i class="icon-download"></i>
+              </div>
+
+              <h4>Toolbar</h4>
+              <nav class="actionbar">
+                <div class="left icons-group">
+                  <a href="#" class="icon-rail" title="Rail">Rail</a>
+                  <span class="divider"></span>
+                  <a href="#" class="icon-edit" title="Edit">Edit</a>
+                  <a href="#" class="icon-message" title="Message">Message</a>
+                  <a href="#" class="icon-download" title="Download">Download</a>
                 </div>
                 <div class="center">
                   <h1>Page Title</h1>
                 </div>
                 <div class="right icons-group">
-                  <a href="#" class="icon-list-view">List View</a>
-                  <a href="#" class="icon-search">Search</a>
+                  <a href="#" class="icon-list-view" title="List View">List View</a>
+                  <a href="#" class="icon-search" title="Search">Search</a>
                 </div>
               </nav>
             </div>
             <pre class="prettyprint linenums">
-&lt;nav class=&quot;toolbar&quot;&gt;
+&lt;nav class=&quot;actionbar&quot;&gt;
   &lt;div class=&quot;left icons-group&quot;&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-rail&quot;&gt;Rail&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-rail&quot; title=&quot;Rail&quot;&gt;Rail&lt;/a&gt;
     &lt;span class=&quot;divider&quot;&gt;&lt;/span&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-edit&quot;&gt;Edit&lt;/a&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-message&quot;&gt;Message&lt;/a&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-download&quot;&gt;Download&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-edit&quot; title=&quot;Edit&quot;&gt;Edit&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-message&quot; title=&quot;Message&quot;&gt;Message&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-download&quot; title=&quot;Download&quot;&gt;Download&lt;/a&gt;
   &lt;/div&gt;
   &lt;div class=&quot;center&quot;&gt;
     &lt;h1&gt;Page Title&lt;/h1&gt;
   &lt;/div&gt;
   &lt;div class=&quot;right icons-group&quot;&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-list-view&quot;&gt;List View&lt;/a&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-search&quot;&gt;Search&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-list-view&quot; title=&quot;List View&quot;&gt;List View&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-search&quot; title=&quot;Search&quot;&gt;Search&lt;/a&gt;
   &lt;/div&gt;
 &lt;/nav&gt;
             </pre>
@@ -557,55 +543,6 @@
 &lt;button class=&quot;primary&quot;&gt;Primary Action&lt;/button&gt; 
 &lt;button class=&quot;warning&quot;&gt;Warning&lt;/button&gt;
 &lt;button disabled&gt;Disabled&lt;/button&gt;
-</pre>
-          </div>
-        </section>
-
-        <section id="Icons">
-          <h2 class="line">Icons (WIP)</h2>
-          <p>Icons can be applied to any element with one of the <code class="atv">icon-*</code> classes. As a general rule, to keep the application accessible, always label your icons with a text. There are different techniques in case you want to visually hide your label: you can either apply the <code class="atv">hidden-accessible</code> class to the label, or include your icons in an element with the class <code class="atv">icons-group</code>.</p>
-          <p><strong>Note:</strong> The icons currently use an arbitrary letter from the alphabet. This will later be replaced with a custom font, an SVG graphic, or a sprite image. Currently, unless the icon is in a <code class="atv">icons-group</code>, the icon takes the width of the letter in the font, this is a temporary behavior.</p>
-          <div class="componentSample buttonSample">
-              <div class="example">
-              <div class="iconsSample">
-                  <div class="sampleTitle left">No Links</div>
-                  <p><i class="icon-rail">Label</i> <span class="iconsLabel">&larr; label inside icon element</span></p>
-                  <p><i class="icon-edit"></i>Label <span class="iconsLabel">&larr; label outside of icon element</span></p>
-                  <p><i class="icon-message"><span class="hidden-accessible">Label </span></i><span class="iconsLabel">&larr; label hidden but accessible</span></p>
-              </div>
-              <div class="iconsSample">
-                  <div class="sampleTitle left">Links</div>
-                  <p><a href="#" class="icon-download">Label</a> <span class="iconsLabel">&larr; label in link</span></p>
-                  <p><a href="#" class="icon-list-view"><span class="hidden-accessible">Label</span></a> <span class="iconsLabel">&larr; label hidden but accessible</span></p>
-              </div>
-              <div class="iconsSample">
-                  <div class="sampleTitle left">Icons Group</div>
-                  <div class="icons-group">
-                      <a href="#" class="icon-rail">Rail</a>
-                      <span class="divider"></span>
-                      <a href="#" class="icon-edit">Edit</a>
-                      <a href="#" class="icon-message">Message</a>
-                      <a href="#" class="icon-download">Download</a>
-                      <a href="#" class="icon-list-view">List View</a>
-                      <span class="iconsLabel">&larr; with divider after the first element</span>
-                  </div>
-              </div>
-            <pre class="prettyprint linenums">
-&lt;i class=&quot;icon-rail&quot;&gt;Label&lt;/i&gt;
-&lt;i class=&quot;icon-rail&quot;/&gt;Label
-&lt;i class=&quot;icon-rail&quot;&gt;&lt;span class=&quot;hidden-accessible&quot;&gt;Label&lt;/span&gt;&lt;/i&gt;
-
-&lt;a href=&quot;#&quot; class=&quot;icon-rail&quot;&gt;Label&lt;/a&gt;
-&lt;a href=&quot;#&quot; class=&quot;icon-rail&quot;&gt;&lt;span class=&quot;hidden-accessible&quot;&gt;Label&lt;/span&gt;&lt;/a&gt;
-
-&lt;div class=&quot;icons-group&quot;&gt;
-  &lt;a href=&quot;#&quot; class=&quot;icon-rail&quot;&gt;Rail&lt;/a&gt;
-  &lt;span class=&quot;divider&quot;&gt;&lt;/span&gt;
-  &lt;a href=&quot;#&quot; class=&quot;icon-edit&quot;&gt;Edit&lt;/a&gt;
-  &lt;a href=&quot;#&quot; class=&quot;icon-message&quot;&gt;Message&lt;/a&gt;
-  &lt;a href=&quot;#&quot; class=&quot;icon-download&quot;&gt;Download&lt;/a&gt;
-  &lt;a href=&quot;#&quot; class=&quot;icon-list-view&quot;&gt;List View&lt;/a&gt;
-&lt;/div&gt;
 </pre>
           </div>
         </section>

@@ -27,30 +27,16 @@ $(function() {
 
   // make rail pullable
   var rail = $('#main-rail');
+  rail.removeClass('with-toolbar-bottom');
+  rail.rail({
+    refreshCallback: function() {
+      var def = $.Deferred();
+      setTimeout(function() {
+        def.resolve();      
+      }, 3000); 
 
-  $('#rail-mode-plain').on('click', function () {
-    rail.removeClass('with-toolbar-bottom');
-    rail.rail({
-      refreshCallback: function() {
-        var def = $.Deferred();
-        setTimeout(function() {
-          def.resolve();      
-        }, 3000); 
-
-        return def.promise();
-      }
-    });
-  });
-
-  $('#rail-mode-accordion').on('click', function () {
-    rail.removeClass('with-toolbar-bottom');
-    rail.removeClass('scroll');
-    rail.removeClass('pullable');
-    rail.find('.wrap').addClass('accordion');
-    rail.addClass('fixed');
-    rail.find('section.foldable').removeClass('foldable');
-
-    rail.rail();
+      return def.promise();
+    }
   });
   
   /**

@@ -36,7 +36,7 @@ header.top {
     margin-left: 0;
   }
 
-  nav {
+  nav.main {
     margin-left: 0.5rem;
     display: inline-block;
 
@@ -62,6 +62,21 @@ header.top {
       &.selected {
         color: @header-nav-down-font-color;
       }
+    }
+  }
+
+  >nav.crumbs {
+    display: inline;
+    line-height: @header-height;
+
+    a {
+      font-size: 16*@px;
+      color: #fff;
+    }
+
+    a:after {
+      font-size: 32*@px;
+      color: #fff;
     }
   }
 
