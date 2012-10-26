@@ -1,0 +1,33 @@
+/**
+  Class: div.shell
+  The shell
+*/
+div.toolbar {
+  border-bottom: @px solid @toolbar-border-color;
+  margin: 4*@px;
+
+  // Don't use flexbox here. inline-block + absolute positioning might work well enough
+  // See header.less for an example of the above technique
+
+  div:first-child {
+
+  }
+
+  div.buttons {
+    i {
+      margin: 0 @toolbar-icon-margin;
+
+      cursor: pointer;
+
+      &.spacer {
+        cursor: default;
+
+        display: inline-block;
+        font-size: inherit;
+        width: @px;
+        height: 1rem;
+        background-color: @toolbar-spacer-color;
+      }
+    }
+  }
+}

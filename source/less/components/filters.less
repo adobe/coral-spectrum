@@ -7,10 +7,9 @@
 */
 
 .filters {
-    position: relative;
     display: inline-block;
     width: 13rem;  /* Needs fixed width for floating term elements */
-    vertical-align: top;
+    //vertical-align: top;
 
     select {
         display: none;
@@ -18,29 +17,31 @@
 
     input[type=text] {
 
-      .box-sizing(border-box);
+        .box-sizing(border-box);
+        border-radius: 0; // Fix for iOS >=5
+        -webkit-appearance: none; // Fix for iOS <5
 
-      width: 100%;
+        width: 13rem;
 
-      font-size: 0.8125rem;
+        font-size: 0.8125rem;
 
-      height: 2rem;
-      padding: 0.25rem 0.5rem 0.25rem 2rem;
-      margin: 0 0 0.5rem 0;
+        height: 2rem;
+        padding: 0.25rem 0.5rem 0.25rem 2rem;
+        margin: 0 0 0.5rem 0;
 
-      border: @px solid @textfield-border-color; 
-      background: @textfield-background-color url('../images/components/filters/magnifier.png') no-repeat 0.5rem 0.4rem;
-      background-size: 1.1rem;
-
-      &:disabled {
-        background: @textfield-disabled-background-color url('../images/components/filters/magnifier.png') no-repeat 0.5rem 0.4rem;
+        border: @px solid @textfield-border-color; 
+        background: @textfield-background-color url('../images/components/filters/magnifier.png') no-repeat 0.5rem 0.4rem;
         background-size: 1.1rem;
-      }
 
-      &:focus {
-        .glow();
-        outline: none;
-      }
+        &:disabled {
+            background: @textfield-disabled-background-color url('../images/components/filters/magnifier.png') no-repeat 0.5rem 0.4rem;
+            background-size: 1.1rem;
+        }
+
+        &:focus {
+            .glow();
+            outline: none;
+        }
 
 
     }
@@ -92,6 +93,7 @@
 .filters.stacking {
     input[type=text] {
         border: 0;
+
         background: transparent;
         padding: 0;
         margin: 0 0.2rem 0.2rem 0;

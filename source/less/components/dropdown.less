@@ -4,7 +4,6 @@
 */
 
 .dropdown {
-    position: relative;
     display: inline-block;
     margin: 0.125rem 0;  // Give a top/bottom margin so they stack right
     font-size: 0;
@@ -92,6 +91,8 @@
 
     input[type=text] {
         .box-sizing(border-box);
+        border-radius: 0; // Fix for iOS >=5
+        -webkit-appearance: none; // Fix for iOS <5
         vertical-align: middle;
         height: 2rem;
 

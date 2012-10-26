@@ -11,6 +11,7 @@
 
 // Fonts
 @font-base-family: AdobeClean;
+@font-icon-family: AdobeClean; // TBD: change to icon font
 @font-base-weight: normal;
 @font-base-color: rgb(75, 75, 75);
 @font-captions-help-color: rgb(135, 135, 135);
@@ -35,9 +36,6 @@
 
 // Toolbar
 @toolbar-border-color: rgb(215, 215, 215);
-@toolbar-icon-margin: 4*@px;
-@toolbar-spacer-color: rgb(198, 198, 198);
-
 
 
 // Grid
@@ -64,9 +62,11 @@
 
 
 // Icons
-@icon-size: 24*@px;  // Define with em so it changes with font-size
+@icon-font-size: 1.5em;  // Define with em so it changes with font-size
+@icon-font-width: 1em;   // The width of the icon characters
 @icon-color: rgb(68, 68, 68);
-
+@icon-buttons-size: 40*@px;
+@icon-buttons-divider-width: 8*@px;
 
 // Buttons
 @button-text-size: 14*@px; // TBD: make rem so they stay the same size, or let them scale with fonts?
@@ -157,17 +157,26 @@
 @slider-border-color: rgb(165, 165, 165);
 @slider-handle-gradient-start-color: rgb(245, 245, 245);
 @slider-handle-gradient-end-color: rgb(230, 230, 230);
-@slider-fill-color: rgba(125, 169, 232, 0.40);
+@slider-fill-color: rgb(125, 169, 232);
+@slider-fill-border-color: rgb(100, 133, 197);
+@slider-fill-tick-color: rgb(105, 159, 206);
+@slider-disabled-background-color: rgb(225, 225, 225);
+@slider-disabled-border-color: rgb(210, 210, 210);
+@slider-disabled-fill-color: rgb(217, 217, 217);
 
 // Rail
 @rail-background-color: rgb(72, 76, 77);
+@rail-dark-background-color: rgb(58, 62, 62);
 
 @rail-shadow-distance: 0.1rem;
 @rail-shadow-spread: 0.45rem;
 @rail-shadow-opacity: 0.35;
 
+@rail-group-header-color: rgb(81, 85, 86);
+
 @rail-section-border-color: rgb(49, 52, 52);
 @rail-section-highlight-color: rgb(89, 92, 93);
+@rail-section-dark-highlight-color: rgb(54, 57, 57);
 @rail-section-link-color: rgb(199, 199, 199);
 
 @rail-well-background-color: rgb(57, 60, 60);
