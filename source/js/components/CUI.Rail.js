@@ -287,6 +287,9 @@ $('#myRail').rail({
       var trigger = switcher.find('nav a'),
           views = con.find('.rail-view'),
           active = con.find('.rail-view.active'),
+          search = switcher.find('input'),
+          searchClear = switcher.find('.clear-cmd'),
+          searchQuery = switcher.find('.clear-query'),
           cl = 'active';
 
       // init switcher
@@ -305,7 +308,10 @@ $('#myRail').rail({
       });
 
       // init search buttons
-      // TODO
+      searchClear.fipo('tap', 'click', function (ev) {
+        search.val('');
+        search.trigger('focus');
+      });
     }
     
   });
