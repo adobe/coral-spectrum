@@ -20,47 +20,60 @@
 
 .cui-collection-card {
     
-    .collection-card-thumbs {
-        min-height: 250*@px;
+        min-width: 270*@px;
         position: relative;
         margin: 10*@px;
+        margin-bottom: 20*@px;
 
-        img {
-            height: 100%;
+        .collection-content {
             width: 100%;
+            //padding: 10*@px;
+            //border: 1px solid red;
+
+            &:before,
+            &:after {
+                content: " ";
+                height: 0;
+                width: 0;
+                position: absolute;
+                pointer-events: none;
+                /*bottom: -20*@px;*/
+            }
+
+        &:before {
+            content: " ";
+            height: 10*@px;
+            width: 255*@px;
+            bottom: -10*@px;
+            left: 8*@px;
+            border-bottom: @px solid @cardview-outerline-color;
+            border-left: @px solid @cardview-outerline-color;
+            border-right: @px solid @cardview-outerline-color;
         }
 
-        div {
-            background-color: @cardview-background-color;
-            position: absolute;
+        &:after {
+            content: " ";
+            height: 10*@px;
+            width: 240*@px;
+            bottom: -20*@px;
+            left: 16*@px;
+            border-bottom: @px solid @cardview-outerline-color;
+            border-left: @px solid @cardview-outerline-color;
+            border-right: @px solid @cardview-outerline-color;
+        }
+
+        img {
             border: @px solid @cardview-outerline-color;
+            width: 100%;
             .shadow;
         }
 
-        .first-thumb {
-            height: 240*@px;
-            width: 270*@px;
-        }
-
-        .second-thumb {
-            height: 240*@px;
-            width: 255*@px;
-            top: 8*@px;
-            left: 8*@px;
-        }
-
-        .third-thumb {
-            height: 240*@px;
-            width: 240*@px;
-            top: 16*@px;
-            left: 16*@px;
-        }  
-
         .collection-banner {
-            top: 120*@px;
-            left: -8*@px;
-            width: 277*@px;
+            position: absolute;
+            top: 54%;
+            left: -9*@px;
             padding: 5*@px;
+            width: 100% + 40*@px;
             background-color: @cardview-banner-color;
             border: @px solid @cardview-outerline-color;
             color: @cardview-banner-text-color;
@@ -91,6 +104,6 @@
 
         }
     }
+    }
 
-}
 
