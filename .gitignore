@@ -5,3 +5,6 @@
 /components
 /misc
 /target
+.idea/
+atlassian-ide-plugin.xml
+*.iml

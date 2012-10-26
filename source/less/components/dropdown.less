@@ -1,0 +1,111 @@
+/**
+* 
+* A filters or tags input field.
+*/
+
+.dropdown {
+    display: inline-block;
+    margin: 0.125rem 0;  // Give a top/bottom margin so they stack right
+    font-size: 0;
+
+    select {
+        display: none;
+    }
+
+    &.focus button,
+    &.focus input,
+    {
+        .glow();
+    }
+    &.error button,
+    &.error input {
+      .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+    }
+
+    button {
+        display: inline-block;
+        .box-sizing(border-box);
+
+        vertical-align: middle;
+
+        min-width: 135*@px;
+        height: 2rem;
+
+        margin: 0;  // Reset default margin on button tag
+
+        border: @px solid @dropdown-border-color;
+        background: @dropdown-gradient-start-color;
+        .gradient(@dropdown-gradient-start-color, @dropdown-gradient-end-color);
+
+        font-family: @font-base-family;
+        font-size: @dropdown-text-size;
+        line-height: @dropdown-text-size;
+        font-weight: normal;
+        color: @dropdown-text-color;
+        text-shadow: none;
+
+        padding: 0.4375rem 0.4375rem 0.4375rem 1rem;
+        height: @dropdown-text-size+0.4375rem*2+@px*2;
+
+        &:disabled {
+            cursor: default;
+            border-color: @button-disabled-border-color;
+            color: @button-disabled-text-color;
+            text-shadow: none;
+            background: @button-disabled-background-color;
+        }
+
+        &:after {
+            content: "";
+            float: right;
+            display: inline;
+            padding-left: 1rem;
+            height: @dropdown-text-size;
+            background: url('../images/components/dropdown/handle.svg') no-repeat center center;
+        }
+
+        &:hover:not([disabled]) {
+            border: @px solid @dropdown-border-color;
+            background: @dropdown-gradient-start-color;
+            .gradient(@dropdown-gradient-start-color, @dropdown-gradient-start-color);    
+        }
+
+        &:active:not([disabled]) {
+            border: @px solid @dropdown-border-color;
+            background: @dropdown-gradient-end-color;
+            .gradient(@dropdown-gradient-end-color, @dropdown-gradient-end-color);
+            .box-shadow(inset 0 0 0.5rem rgba(0, 0, 0, 0.25));
+        }
+    }
+}
+
+.dropdown-editable {
+    button {
+        min-width: 2rem;
+        width: 2rem;
+        font-size: 0;
+        margin: 0;
+        height: 2rem;
+        padding: 0.4375rem;
+    }
+
+    input[type=text] {
+        .box-sizing(border-box);
+        border-radius: 0; // Fix for iOS >=5
+        -webkit-appearance: none; // Fix for iOS <5
+        vertical-align: middle;
+        height: 2rem;
+
+        font-family: @font-base-family;
+        font-size: @dropdown-text-size;
+        line-height: @dropdown-text-size;
+
+        padding: 0.4375rem;
+        margin: 0;
+        border-right: 0;
+    }
+
+
+}
+
+

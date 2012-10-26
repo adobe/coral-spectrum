@@ -1,0 +1,144 @@
+/**
+ * Class: .slider
+ * Displays a slider
+ */
+.slider {
+  position: relative;
+  display: inline-block;
+  .box-sizing(border-box);
+  padding: 0;
+  .border-radius(0.25rem);
+  border: @px solid @slider-border-color;
+  background-color: @slider-background-color;
+  width: 220*@px;
+  height: 8*@px;
+  margin: 0.5rem 0.25rem;
+
+    .slider-transition {
+        -moz-transition: all 0.1s;
+        -webkit-transition: all 0.1s;
+        -o-transition: all 0.1s;
+        transition: all 0.1s;
+    }
+    .slider-transition-slow {
+        -moz-transition: all 2s cubic-bezier(1, 0, 0.5, 0);
+        -webkit-transition: all 2s cubic-bezier(1, 0, 0.5, 0);
+        -o-transition: all 2s cubic-bezier(1, 0, 0.5, 0);
+        transition: all 2s cubic-bezier(1, 0, 0.5, 0);
+    }
+
+  .handle {
+    position: absolute;
+    left: 0;
+    display: inline-block;
+    width: 9*@px;
+    height: 20*@px;
+    margin: -0.5rem -0.25rem;
+    .gradient(@slider-handle-gradient-start-color, @slider-handle-gradient-end-color);
+    .border-radius(0.25rem);
+    border: @px solid @slider-border-color;
+    cursor: pointer;
+    &:hover,
+    &.dragging {
+      .gradient(lighten(@slider-handle-gradient-start-color, 15%), lighten(@slider-handle-gradient-end-color, 15%));
+      .tooltip {
+        opacity: 1;
+        .slider-transition;
+      }
+    }
+  }
+
+  .tick {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: @px;
+    height: 0.4rem;
+    background-color: @slider-border-color;
+    &.covered {
+      background-color: @slider-fill-tick-color;
+    }
+  }
+
+  .tooltip {
+    opacity: 0;
+    z-index: 1;
+    left: -20*@px;
+    top: -55*@px;
+    .slider-transition-slow;
+  }
+
+  input[type=range],
+  input[type=number] {
+    opacity: 0.000001;
+    cursor: default;
+    width: @px;
+    height: @px;
+  }
+
+  .fill {
+    position: absolute;
+    background-color: @slider-fill-color;
+    border: @px solid @slider-fill-border-color;
+    margin: -@px 0 -@px -@px;
+    .border-radius(0.25rem);
+    height: 0.4rem;
+    left: 0;
+  }
+
+  .value {
+    display: inline-block;
+  }
+
+  &.vertical {
+    width: 8*@px;
+    height: 220*@px;
+    margin: 0.25rem 0.6rem;
+
+    input[type=range],
+    input[type=number] {
+      float: left;
+    }
+    .handle {
+      width: 20*@px;
+      margin: -0.25rem -0.5rem;
+      height: 9*@px;
+    }
+    .tick {
+      width: 0.4rem;
+      height: @px;
+    }
+    .tooltip {
+      left: 25*@px;
+      top: -20*@px;
+    }
+    .fill {
+      width: 0.4rem;
+      bottom: 0;
+    }
+  }
+
+  &.disabled {
+    border-color: @slider-disabled-border-color;
+    background-color: @slider-disabled-background-color;
+    .handle {
+      background: @slider-disabled-background-color;
+      border-color: @slider-disabled-border-color;
+      &:hover {
+        cursor: auto;
+        .tooltip {
+          display: none;
+        }
+      }
+    }
+
+    .tick {
+      background-color: @slider-disabled-border-color;
+    }
+
+    .fill {
+      background-color: @slider-disabled-fill-color;
+      border-color: @slider-disabled-border-color;
+    }
+  }
+}

@@ -17,7 +17,6 @@
   font-style: @font-style;
 }
 
-
 /**
  * Mixin: .columns
  * A CSS3 column layout
@@ -42,7 +41,6 @@
   }
 }
 
-
 /**
  * Mixin: .gradient
  * A simpler syntax for gradients
@@ -50,7 +48,6 @@
 .gradient(@start: white, @end: black) {
 	#gradient > .vertical(@start, @end);
 }
-
 
 /**
  * Mixin: .pinstripe
@@ -66,7 +63,6 @@
   background-image: linear-gradient(-45deg, transparent, transparent 50%-@stripe-offset, @stripe-color 50%-@stripe-offset, @stripe-color 50%+@stripe-offset, transparent 50%+@stripe-offset, transparent);
 }
 
-
 /**
  * Mixin: .shadow
  * A simpler syntax for shadow with defaults
@@ -74,7 +70,6 @@
 .shadow(@distance: 0.1rem, @spread: 0.1rem, @weight: 0.25) {
   .box-shadow(@distance @distance @spread rgba(0, 0, 0, @weight));
 }
-
 
 /**
  * Mixin: .ellipsis
@@ -86,7 +81,6 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-
 
 /**
  * Mixin: .scrollable
@@ -122,13 +116,14 @@
 }
 
 /**
- * Mixin: .transisiton
+ * Mixin: .transition
  */
-.transition(@property:all, @duration:0.2s, @ease:ease-out) {
-  -webkit-transition: @property @duration @ease;
-  -moz-transition: @property @duration @ease;
-  -ms-transition: @property @duration @ease;
-  transition: @property @duration @ease;
+.transition(@transition) {
+  -webkit-transition: @transition;  
+  -moz-transition:    @transition;
+  -ms-transition:     @transition; 
+  -o-transition:      @transition;
+  transition:      @transition;  
 }
 
 /**
@@ -154,18 +149,16 @@
   .background-size(@size, @size);
 }
 
-
 /**
  * Mixin: .glow
  * Make an element glow
+ * TODO: add partial glow mixin
  */
 .glow(@radius: @focus-glow-radius, @glowColor: @focus-glow-color, @borderColor: @focus-border-color) {
   outline: none;
   .box-shadow(0 0 @radius @glowColor);
   border: @px solid @borderColor;
 }
-
-// TODO: add partial glow mixin
 
 /**
  * Mixin: .glow-text
@@ -177,20 +170,43 @@
 }
 
 /**
- * Mixin: .clearfix
- * Force container div to adjust to height of floated element.
+ * Mixin: .user-select
+ * Set user-select property across browsers
  */
-.clearfix {
-  *zoom: 1;
-  &:before,
-  &:after {
-    display: table;
-    content: "";
-    // Fixes Opera/contenteditable bug:
-    // http://nicolasgallagher.com/micro-clearfix-hack/#comment-36952
-    line-height: 0;
-  }
-  &:after {
-    clear: both;
-  }
+.user-select(@userSelect) {
+  -webkit-user-select: @userSelect;
+  -khtml-user-select: @userSelect;
+  -moz-user-select: @userSelect;
+  -ms-user-select: @userSelect;
+  user-select: @userSelect;
+}
+
+/**
+ * Mixin: .no-select
+ * Stop text selection for an element and its children
+ */
+.no-select() {
+  -webkit-touch-callout: none;
+  .user-select(none);
+}
+
+/**
+ * Mixin: .placeholder
+ * input field placeholder font color
+ */
+.placeholder(@color) {
+  input::-webkit-input-placeholder { color: @color; }
+  input:-moz-placeholder { color: @color; }
+  textarea::-webkit-input-placeholder { color: @color; }
+  textarea:-moz-placeholder { color: @color; }
+}
+
+/**
+ * Mixin:; .box-sizing
+ * box-sizing mixin
+ */
+.box-sizing (@type: border-box) {
+  -webkit-box-sizing: @type;
+  -moz-box-sizing:    @type;
+  box-sizing:         @type;
 }

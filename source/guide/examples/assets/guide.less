@@ -188,6 +188,7 @@ div.fakeBody {
   }
 }
 
+
 .sampleTitle {
     width: 5em;
     height: 3em;
@@ -199,6 +200,32 @@ div.fakeBody {
     line-height: 3em;
     font-weight: bold;
     text-align: right;
+
+    &.extended {
+        height: 8em;
+    }
+}
+
+.iconsSample {
+    position: relative;
+
+    .sampleTitle {
+        position: absolute;
+        line-height: 2.1em;
+        width: 6em;
+        height: 100%;
+    }
+    
+    p,
+    .icons-group {
+        margin: 1em 0 1em 8em;
+    }
+
+    .iconsLabel {
+        position: absolute;
+        left: 22em;
+        font-style: italic;
+    }
 }
 
 .spinnerSample {
@@ -209,6 +236,11 @@ div.fakeBody {
   .spinner.large {
     margin: 0 0 0 1rem;
   }
+}
+
+.filterSample {
+    overflow: visible;
+    .clearfix();
 }
 
 .buttonSample {

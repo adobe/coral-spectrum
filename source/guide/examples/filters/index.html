@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Filters &amp; Tags – Single Term examples</title>
+
+        <link rel="stylesheet" href="../../css/cui.css">
+ 
+        <script src="../../js/libs/underscore.js"></script>
+        <script src="../../js/libs/handlebars.js"></script>
+        <script src="../../js/libs/jquery.js"></script>
+        <script src="../../js/CUI.js"></script>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    </head>
+    <body>
+
+        <section>
+        <h1>Filters &amp; Tags</h1>
+        <h2>Create from Class</h2>
+            <p>
+            Filter me: <input type="text" name="single-term" placeholder="Single Term">
+            </p>
+            <p>
+            Filter me: <input type="text" name="multiple" placeholder="Multiple">
+            </p>
+            <p>
+            Filter me: <input type="text" name="stacking" placeholder="Stacking">
+            </p>
+        <h2>Create from jQuery (with allowCreate enabled)</h2>            
+            <div>
+            <p>
+                From select: <select class="filters"><option>One very long <b>tag</b> line</option><option>Two</option><option>Three</option></select>
+            </p>
+            </div>
+            <p>
+                From select: <select class="filters" multiple><option>One very long <b>tag</b> line with at least one line break</option><option>Two</option><option>Three</option></select>
+            </p>
+            <p>
+                <a data-action="disable">Disable all</a>
+                <a data-action="enable">Enable all</a>
+                
+            </p>
+            
+            <h2>Create from markup</h2>
+
+            <p>
+                What's your current mood?
+
+            <div class="filters" data-init="filters">
+                <select>
+                    <option value="1">sad</opion>
+                    <option value="2">angry</opion>
+                    <option value="3">happy</opion>    
+                </select>
+                <input type="text">
+            </div>
+
+            </p>
+
+            <p>
+            What colors do you like best?
+
+            <div class="filters" data-init="filters" data-multiple="true">
+                <select multiple>
+                    <option>green</opion>
+                    <option>red</opion>
+                    <option>blue</opion>    
+                    <option>yellow</opion>    
+                    <option>mauve</opion>    
+                </select>
+                <input type="text">
+            </div>
+            </p>
+
+            <p>
+                Create your own!
+            <div class="filters" data-init="filters" data-stacking="true" data-option-renderer="cqTag" data-allow="create">
+                <input type="text">
+                <select multiple>
+                    <option>moods/sad</opion>
+                    <option>moods/angry</opion>
+                    <option>moods/happy</opion>    
+                </select>
+            </div>
+            </p>            
+        </section>
+            
+        <script type="text/javascript">
+            $(document).ready(function() {
+               var options =  ["Watermelon",
+                                     "Figs", 
+                                     "Dates", 
+                                     "Olive", 
+                                     "Jujube", 
+                                     "Pomegranate", 
+                                     "Lemon", 
+                                     "Lime",
+                                     "Key Lime", 
+                                     "Mandarin", 
+                                     "Orange", 
+                                     "Sweet Lime", 
+                                     "Tangerine", 
+                                     "Avocado", 
+                                     "Guava", 
+                                     "Kumquat" ];
+                
+               var filters1 = new CUI.Filters({
+                            element: 'input[name=single-term]',
+                            multiple: false,
+                            stacking: false,
+                            disabled: false,
+                            options: options
+                });
+               var filters2 = new CUI.Filters({
+                            element: 'input[name=multiple]',
+                            multiple: true,
+                            stacking: false,
+                            disabled: false,
+                            options: options
+                });
+               var filters3 = new CUI.Filters({
+                            element: 'input[name=stacking]',
+                            multiple: true,
+                            stacking: true,
+                            disabled: false,
+                            options: options
+                });
+
+
+                filters1.setSelectedIndex(2);
+                
+                $("select.filters").filters();
+
+                $("[data-action=disable]").click(function() {
+                    filters1.set("disabled", true);
+                    filters2.set("disabled", true);
+                    filters3.set("disabled", true);
+                    $("select.filters").filters({disabled: true});
+                })
+                $("[data-action=enable]").click(function() {
+                    filters1.set("disabled", false);
+                    filters2.set("disabled", false);
+                    filters3.set("disabled", false);
+                    $("select.filters").filters({disabled: false});
+                })
+                
+                filters2.set({"options": ["red", "green", "blue"], "optionDisplayStrings": []});
+               
+            });
+            
+        </script>
+    </body>
+</html>

@@ -1,33 +1,26 @@
 /**
-  Class: div.toolbar
-  The top toolbar for pages
+  Class: .toolbar
+  The top toolbar with action icons
 */
-div.toolbar {
-  border-bottom: @px solid @toolbar-border-color;
-  margin: 0.25rem; // TODO: get exact margins
+.toolbar {
+    .clearfix;
+    position: relative;
+    line-height: @icon-buttons-size;
+    padding: 3*@px 0;
+    border-bottom: 1px solid @toolbar-border-color;
 
-  // Don't use flexbox here. inline-block + absolute positioning might work well enough
-  // See header.less for an example of the above technique
+    .center {
+        position: absolute;
+        left: 50%;
 
-  div:first-child {
-
-  }
-
-  div.buttons {
-    i {
-      margin: 0 @toolbar-icon-margin;
-
-      cursor: pointer;
-
-      &.spacer {
-        cursor: default;
-
-        display: inline-block;
-        font-size: inherit;
-        width: @px;
-        height: 1rem;
-        background-color: @toolbar-spacer-color;
-      }
+        > * {
+            margin-left: -50%;
+        }
     }
-  }
+
+    h1 {
+        margin: 0;
+        line-height: inherit;
+        font-size: 18*@px;
+    }
 }

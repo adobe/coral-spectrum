@@ -26,7 +26,9 @@ $(function() {
   });
 
   // make rail pullable
-  $('#main-rail').rail({
+  var rail = $('#main-rail');
+  rail.removeClass('with-toolbar-bottom');
+  rail.rail({
     refreshCallback: function() {
       var def = $.Deferred();
       setTimeout(function() {

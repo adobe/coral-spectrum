@@ -191,7 +191,7 @@ alert.hide();
   // Data API
   if (CUI.options.dataAPI) {
     $(function() {
-      $('body').on('click.alert.data-api', '[data-dismiss="alert"]', function(evt) {
+      $('body').fipo('tap.alert.data-api', 'click.alert.data-api', '[data-dismiss="alert"]', function(evt) {
         $(evt.target).parent().hide();
       });
     });

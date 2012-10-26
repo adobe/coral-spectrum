@@ -98,33 +98,45 @@ $('#myRail').rail({
                     '<span class="release">' + opt.message.release + '</span>' +
                     '<span class="loading">' + opt.message.loading + '</span>' +
                   '</div>' +
-                '</div>';
+                '</div>',
+            _ = { // fill all locals
+            rail: e,
+              content: e.find('.wrap'),
+              ptr: e.find('.pull-to-refresh') 
+            },
+            foldable = _.content.find('section.foldable'),
+            switcher = _.content.find('.rail-switch');
 
       // Accessibility
-      _makeAccessible(this.$element);
-      
-      var _ = { // fill all locals
-            rail: e,
-            content: e.find('.wrap'),
-            ptr: e.find('.pull-to-refresh') 
-          }, foldable = _.content.find('section.foldable');
-          
+      _makeAccessible(e);
+
+      // enable foldable section
+      foldable.each(function (i, e) {
+        var f = $(e),
+            trigger = f.find('.heading');
+
+        trigger.fipo('tap', 'click', function (ev) {
+          f.toggleClass('open');
+        });
+      });
+
+      // rail switcher
+      if (switcher.length > 0) {
+        this._initRailSwitcher(_.content, switcher);
+      }
+
+      // accordion
+      if (_.content.hasClass('accordion')) {
+        this._initAccordion(_.content);
+      }
+
+
+      // pull-to-refresh    
       if (options.refreshCallback) { // the refreshable option will be activated of the refreshCallback is set
         if (!_.ptr.get(0)) { // add markup if there is non
           _.rail.prepend(html);  
           _.ptr = e.find('.pull-to-refresh');
         }
-
-        // enable foldable section
-        foldable.each(function (i, e) {
-          var f = $(e),
-              trigger = f.find('.heading');
-
-          trigger.on('click', function (ev) { // TODO make that for touch
-            f.toggleClass('open');
-          });
-        });
-
 
         _ = $.extend(_, {
           arrow: _.ptr.find('.arrow'),
@@ -146,9 +158,9 @@ $('#myRail').rail({
         _.rail.addClass('pullable');
 
         // enable scrolling to top from point 0
-        _.content.on('touchstart', $.proxy(this._handleTouchstart, this))
-                .on('touchmove', $.proxy(this._handleTouchmove, this))
-                .on('touchend', $.proxy(this._handleTouchend, this));    
+        _.content.finger('touchstart', $.proxy(this._handleTouchstart, this))
+                .finger('touchmove', $.proxy(this._handleTouchmove, this))
+                .finger('touchend', $.proxy(this._handleTouchend, this));    
       }
     },
 
@@ -240,6 +252,60 @@ $('#myRail').rail({
           });  
         });
       }
+    },
+
+    _initAccordion: function (con) {
+      var activeAccordion = 'active-accordion',
+          accordions = con.find('section'),
+          closedHeight = accordions.outerHeight(true); // height of one closed accordion
+
+
+      accordions.each(function (i, e) {
+        var f = $(e),
+            containerHeight = con.outerHeight(),
+            contentHeight = containerHeight - (accordions.length * closedHeight), // height of the content for one open accordion
+            trigger = f.find('.heading'),
+            fold = f.find('.fold');
+
+        trigger.fipo('tap', 'click', function (ev) {
+          var curHeight = fold.height(),
+              targetHeight,
+              cur = con.data(activeAccordion);
+
+          if (cur) {
+            cur.removeClass('open').find('.fold').height(0);
+          }
+          
+          fold.height(contentHeight);
+          con.data(activeAccordion, f.addClass('open'));
+
+        });
+      });  
+    },
+
+    _initRailSwitcher: function (con, switcher) {
+      var trigger = switcher.find('nav a'),
+          views = con.find('.rail-view'),
+          active = con.find('.rail-view.active'),
+          cl = 'active';
+
+      // init switcher
+      trigger.each(function (i, e) {
+        var t = $(e),
+            viewName = t.data('view'),
+            view = con.find('.rail-view[data-view="'+ viewName +'"]');
+
+        t.fipo('tap', 'click', function (ev) {
+          views.removeClass(cl);
+          trigger.removeClass(cl);
+
+          $(this).addClass(cl);
+          view.toggleClass('active'); 
+        });
+      });
+
+      // init search buttons
+      // TODO
     }
     
   });
