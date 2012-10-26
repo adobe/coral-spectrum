@@ -25,20 +25,15 @@
         margin: 10*@px;
         margin-bottom: 20*@px;
 
-        .collection-content {
-            width: 100%;
-            //padding: 10*@px;
-            //border: 1px solid red;
-
-            &:before,
-            &:after {
-                content: " ";
-                height: 0;
-                width: 0;
-                position: absolute;
-                pointer-events: none;
-                /*bottom: -20*@px;*/
-            }
+        &:before,
+        &:after {
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+            /*bottom: -20*@px;*/
+        }
 
         &:before {
             content: " ";
@@ -101,9 +96,7 @@
                 right: -9*@px;
                 border-width: 8*@px;
             }
-
         }
-    }
-    }
+    } // collection card 
 
 
