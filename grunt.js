@@ -107,7 +107,6 @@ module.exports = function(grunt) {
       'rte/core/plugins/TablePlugin.js',
       'rte/core/plugins/ImagePlugin.js',
       'rte/core/plugins/UndoRedoPlugin.js',
-      'rte/core/plugins/SpellCheckerPlugin.js',
 
       'rte/core/adapter/JQueryEvent.js',
       'rte/core/adapter/ExtEvent.js',
@@ -561,6 +560,12 @@ module.exports = function(grunt) {
 
   // Custom build for maven
   grunt.registerTask('mvn', 'mvn-build mvn-install');
+
+  // Rename mvn-deploy task so we can override it
+  grunt.task.renameTask('mvn-deploy', 'mvn-nexus-deploy');
+
+  // mvn deploy task for jenkins
+  grunt.registerTask('mvn-deploy', 'mvn-build mvn-nexus-deploy');
 
   // Rename watch task so we can override it
   grunt.task.renameTask('watch', 'watch-start');
