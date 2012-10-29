@@ -29,7 +29,7 @@
 
     <div class="logo"><img src="images/theme/cloudui.png" alt="CoralUI logo"></div>
 
-    <nav class="crumbs">
+    <nav class="main">
       <a href="#" class="selected">Guide</a>
       <a href="jsdoc/index.html">Docs</a>
       <a href="https://git.corp.adobe.com/Reef/CoralUI/">Github</a>
@@ -59,12 +59,13 @@
         </section>
 
         <section class="links foldable">
-            <a class="heading" href="#TextStyles">Text Styles</a>
+            <a class="heading" href="#GeneralStyles">General Styles</a>
 
             <nav class="fold">
               <a href="#Headings">Headings</a>
               <a href="#Link">Link</a>
               <a href="#Fonts">Fonts</a>
+              <a href="#Icons">Icons</a>
             </nav>
         </section>
 
@@ -175,7 +176,7 @@
 
       </section>
 
-      <section id="TextStyles">
+      <section id="GeneralStyles">
         <h1 class="line">Text Styles</h1>
         <p>CUI provides basic text styles suitable for paragraph. When laying out your page, you might need to override the margins on the heading elements.</p>
 
@@ -267,7 +268,78 @@
               </tr>
             </tbody>
           </table>
-        </section>  
+        </section>
+        
+
+        <section id="Icons">
+          <h2 class="line">Icons</h2>
+          <p>Icons can be added to a number of different elements by using the <code class="atv">icon-*</code> classes that correspond to the icon's filename.</p>
+          
+          <h3>Usage Guidelines</h3>
+          <p>Icons can be applied to several different tags.</p>
+          <ul>
+            <li><code class="prettyprint">&lt;i&gt;</code>: Indicator icon without a label.</li>
+            <li><code class="prettyprint">&lt;span&gt;</code>: Indicator icon with a label.</li>
+            <li><code class="prettyprint">&lt;a&gt;</code>: Clickable icon with a label.</li>
+            <li><code class="prettyprint">&lt;a&gt;</code> with nested <code class="prettyprint">&lt;i&gt;</code>: Clickable icon with no label.</li>
+          </ul>
+          
+          <h3>Accessibility</h3>
+          <p>When using an icon without a label, include text inside of the element to label the icon's function. TODO: example</p>
+         
+          <h3>Sizing</h3>
+          <p>When used without context, icons should be given a size:</p>
+          <ul>
+            <li><code class="atv">xsmall</code> 12x12</li>
+            <li><code class="atv">small</code> 16x16</li>
+            <li><code class="atv">medium</code> 24x24</li>
+            <li><code class="atv">large</code> 32x32</li>
+          </ul>
+          
+          <div class="componentSample">
+              <div class="example">
+                <div class="iconSample">
+                    <div class="sampleTitle left">Presentational</div>
+                    <p><i class="icon-trash">Deleted</i></p>
+                </div>
+                
+                <div class="iconSample">
+                    <div class="sampleTitle left">Presentational, with label</div>
+                    <p><span class="icon-trash">Deleted</span></p>
+                </div>
+                
+                <div class="iconSample">
+                    <div class="sampleTitle left">Clickable</div>
+                    <p><a href="#" role="button"><i class="icon-paintBucket">Paint</i></a></p>
+                </div>
+                
+                <div class="iconSample">
+                    <div class="sampleTitle left">Clickable, with label</div>
+                    <p><a href="#" role="button" class="icon-paintBucket">Paint</a></p>
+                </div>
+                  
+                <div class="iconSample">
+                    <div class="sampleTitle left">Button with icon</div>
+                    <p><button><i class="icon-trash"></i>Delete</button></p>
+                </div>
+
+                <div class="iconSample">
+                    <div class="sampleTitle left">Icon Group</div>
+                    <div class="iconGroup">
+                        <a href="#"><i class="icon-cards">Cards</i></a>
+                        <span class="divider"></span>
+                        <a href="#"><i class="icon-calendar">Calendar</i></a>
+                        <a href="#"><i class="icon-cart">Cart</i></a>
+                        <a href="#"><i class="icon-addGrid">Add</i></a>
+                    </div>
+                </div>
+              </div>
+            <pre class="prettyprint linenums">
+TODO
+</pre>
+          </div>
+        </section>
+
 
       </section><!-- /Text Styles -->
 
@@ -334,8 +406,8 @@
                     </section>
                     <section>
                         <h4>Revised asset ready for review</h4>
-                        <div class="small grey light">Modified yesterday by Rob Cobourn</div>
-                        <p class="small">I created a new segment thing for the Chance campaign because we left out the Foursquare that will be checking in at Olympic events.</p>
+                        <div class="smallText greyText lightText">Modified yesterday by Rob Cobourn</div>
+                        <p class="smallText">I created a new segment thing for the Chance campaign because we left out the Foursquare that will be checking in at Olympic events.</p>
                     </section>
                   </div>
                 </div>
@@ -363,8 +435,8 @@
       &lt;/section&gt;
       &lt;section&gt;
           &lt;h4&gt;Revised asset ready for review&lt;/h4&gt;
-          &lt;div class=&quot;small grey light&quot;&gt;Modified yesterday by Rob Cobourn&lt;/div&gt;
-          &lt;p class=&quot;small&quot;&gt;I created a new segment thing for the...&lt;/p&gt;
+          &lt;div class=&quot;smallText greyText lightText&quot;&gt;Modified yesterday by Rob Cobourn&lt;/div&gt;
+          &lt;p class=&quot;smallText&quot;&gt;I created a new segment thing for the...&lt;/p&gt;
       &lt;/section&gt;
     &lt;/div&gt;
   &lt;/div&gt;
@@ -556,55 +628,6 @@
 &lt;button class=&quot;primary&quot;&gt;Primary Action&lt;/button&gt; 
 &lt;button class=&quot;warning&quot;&gt;Warning&lt;/button&gt;
 &lt;button disabled&gt;Disabled&lt;/button&gt;
-</pre>
-          </div>
-        </section>
-
-        <section id="Icons">
-          <h2 class="line">Icons (WIP)</h2>
-          <p>Icons can be applied to any element with one of the <code class="atv">icon-*</code> classes. As a general rule, to keep the application accessible, always label your icons with a text. There are different techniques in case you want to visually hide your label: you can either apply the <code class="atv">hidden-accessible</code> class to the label, or include your icons in an element with the class <code class="atv">icons-group</code>.</p>
-          <p><strong>Note:</strong> The icons currently use an arbitrary letter from the alphabet. This will later be replaced with a custom font, an SVG graphic, or a sprite image. Currently, unless the icon is in a <code class="atv">icons-group</code>, the icon takes the width of the letter in the font, this is a temporary behavior.</p>
-          <div class="componentSample buttonSample">
-              <div class="example">
-              <div class="iconsSample">
-                  <div class="sampleTitle left">No Links</div>
-                  <p><i class="icon-rail">Label</i> <span class="iconsLabel">&larr; label inside icon element</span></p>
-                  <p><i class="icon-edit"></i>Label <span class="iconsLabel">&larr; label outside of icon element</span></p>
-                  <p><i class="icon-message"><span class="hidden-accessible">Label </span></i><span class="iconsLabel">&larr; label hidden but accessible</span></p>
-              </div>
-              <div class="iconsSample">
-                  <div class="sampleTitle left">Links</div>
-                  <p><a href="#" class="icon-download">Label</a> <span class="iconsLabel">&larr; label in link</span></p>
-                  <p><a href="#" class="icon-list-view"><span class="hidden-accessible">Label</span></a> <span class="iconsLabel">&larr; label hidden but accessible</span></p>
-              </div>
-              <div class="iconsSample">
-                  <div class="sampleTitle left">Icons Group</div>
-                  <div class="icons-group">
-                      <a href="#" class="icon-rail">Rail</a>
-                      <span class="divider"></span>
-                      <a href="#" class="icon-edit">Edit</a>
-                      <a href="#" class="icon-message">Message</a>
-                      <a href="#" class="icon-download">Download</a>
-                      <a href="#" class="icon-list-view">List View</a>
-                      <span class="iconsLabel">&larr; with divider after the first element</span>
-                  </div>
-              </div>
-            <pre class="prettyprint linenums">
-&lt;i class=&quot;icon-rail&quot;&gt;Label&lt;/i&gt;
-&lt;i class=&quot;icon-rail&quot;/&gt;Label
-&lt;i class=&quot;icon-rail&quot;&gt;&lt;span class=&quot;hidden-accessible&quot;&gt;Label&lt;/span&gt;&lt;/i&gt;
-
-&lt;a href=&quot;#&quot; class=&quot;icon-rail&quot;&gt;Label&lt;/a&gt;
-&lt;a href=&quot;#&quot; class=&quot;icon-rail&quot;&gt;&lt;span class=&quot;hidden-accessible&quot;&gt;Label&lt;/span&gt;&lt;/a&gt;
-
-&lt;div class=&quot;icons-group&quot;&gt;
-  &lt;a href=&quot;#&quot; class=&quot;icon-rail&quot;&gt;Rail&lt;/a&gt;
-  &lt;span class=&quot;divider&quot;&gt;&lt;/span&gt;
-  &lt;a href=&quot;#&quot; class=&quot;icon-edit&quot;&gt;Edit&lt;/a&gt;
-  &lt;a href=&quot;#&quot; class=&quot;icon-message&quot;&gt;Message&lt;/a&gt;
-  &lt;a href=&quot;#&quot; class=&quot;icon-download&quot;&gt;Download&lt;/a&gt;
-  &lt;a href=&quot;#&quot; class=&quot;icon-list-view&quot;&gt;List View&lt;/a&gt;
-&lt;/div&gt;
 </pre>
           </div>
         </section>
