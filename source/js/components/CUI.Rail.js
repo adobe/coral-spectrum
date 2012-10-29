@@ -71,7 +71,7 @@ $('#myRail').rail({
     &lt;/section&gt;
     &lt;section class=&quot;foldable&quot;&gt;
         &lt;h4 class=&quot;heading&quot;&gt;Revised asset ready for review&lt;/h4&gt;
-        &lt;div class=&quot;fold small grey light&quot;&gt;Modified yesterday by Rob Cobourn&lt;/div&gt;
+        &lt;div class=&quot;fold smallText greyText lightText&quot;&gt;Modified yesterday by Rob Cobourn&lt;/div&gt;
         &lt;p class=&quot;small&quot;&gt;I created a new segment thing for the...&lt;/p&gt;
     &lt;/section&gt;
   &lt;/div&gt;
