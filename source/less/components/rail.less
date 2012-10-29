@@ -11,7 +11,7 @@ div.rail {
   @pull-to-request-size: 3rem;
 
   // make it scrollable
-  &.scroll {
+  .scroll {
     .scrollable;
     overflow-x: hidden;
   }
@@ -122,9 +122,14 @@ div.rail {
 
     // cloasable sections
     .closeable() {
-      >.heading:before {
+      position: relative;
+
+      >.heading:after {
         content: "\25B8";
-        padding-right: 0.5rem;  
+        position: absolute;
+        right: 24*@px;
+        font-size: 1rem;
+        line-height: 1rem;
       }  
 
       >.fold {
@@ -133,7 +138,7 @@ div.rail {
       }
 
       &.open {
-        >.heading:before {
+        >.heading:after {
           content: "\25BE";
         }
       }
@@ -262,6 +267,7 @@ div.rail {
 
     .rail-view {
       display: none;
+      height: calc(~"100% -" 98*@px);
 
       &.active {
         display: block;
@@ -331,14 +337,12 @@ div.rail {
         }
 
         .fold {
-          padding: 15*@px;
+          //padding: 15*@px;
         }
       }
     }
 
     .checklist {
-      padding: 0 10*@px;
-
       >li {
         padding: 6*@px 0;
 
@@ -449,8 +453,13 @@ div.rail {
       &.foldable {
         .closeable;
 
+        >.fold {
+          display: none;
+        }
+
         &.open {
           >.fold {
+            display: block;
             height: auto;
             overflow: auto;
           }
