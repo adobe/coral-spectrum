@@ -411,6 +411,13 @@ module.exports = function(grunt) {
         src: getIncludes("cui", dirs.temp+'/js_instrumented/'),
         dest: '<%= dirs.temp %>/js_instrumented/CUI_cc.js'
       },
+      cui_css: {
+        src: [
+          '<%= dirs.temp %>/cui.css',
+          '<%= dirs.temp %>/allIcons.css'
+        ],
+        dest: '<%= dirs.build %>/css/cui.css'
+      },
       "rte-core": {
         src: getIncludes("rte-core", dirs.source+'/js/'),
         dest: '<%= dirs.build %>/js/rte-core.js'
@@ -429,10 +436,6 @@ module.exports = function(grunt) {
       "rte-core": {
         src: ['<config:concat.rte-core.dest>'],
         dest: '<%= dirs.build %>/js/rte-core.min.js'
-      },
-      "cui-with-rte": {
-        src: ['<config:concat.cui-with-rte.dest>'],
-        dest: '<%= dirs.build %>/js/CUI-with-rte.min.js'
       }
       // TBD: minify individual JS files?
     },
@@ -446,7 +449,7 @@ module.exports = function(grunt) {
           ]
         },
         files: {
-          '<%= dirs.build %>/css/cui.css': '<%= dirs.source %>/less/cui.less'
+          '<%= dirs.temp %>/cui.css': '<%= dirs.source %>/less/cui.less'
         }
       },
       guide: {
@@ -477,6 +480,15 @@ module.exports = function(grunt) {
     },
 
     coverage: {},
+    
+    icons: {
+      all: {
+        src: [
+          '<%= dirs.source %>/images/icons/*.svg'
+        ],
+        dest: '<%= dirs.temp %>/allIcons.css'
+      }
+    },
 
     // Watch operations
     watch: {
@@ -499,7 +511,7 @@ module.exports = function(grunt) {
 
       compile_less_min_css: {
         files: '<%= dirs.source %>/less/**',
-        tasks: 'less:cui mincss'
+        tasks: 'less:cui mincss concat:cui_css'
       },
 
       compile_guide_less: {
@@ -529,10 +541,10 @@ module.exports = function(grunt) {
   });
 
   // Partial build for development
-  grunt.registerTask('partial', 'lint copy handlebars concat:cui concat:rte-core concat:cui-with-rte min less mincss mocha');
+  grunt.registerTask('partial', 'lint copy handlebars concat:cui min:cui icons less concat:cui_css mincss mocha');
 
   // Full build with docs and compressed file
-  grunt.registerTask('full-build', 'lint copy handlebars concat:cui concat:rte-core concat:cui-with-rte min less mincss mocha jsdoc');
+  grunt.registerTask('full-build', 'lint copy handlebars concat:cui concat:rte-core concat:cui-with-rte min icons less concat:cui-css mincss mocha jsdoc');
 
   // Full build with docs and compressed file
   grunt.registerTask('full', 'clean full-build');
