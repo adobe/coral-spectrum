@@ -550,6 +550,12 @@ module.exports = function(grunt) {
   // Custom build for maven
   grunt.registerTask('mvn', 'mvn-build mvn-install');
 
+  // Rename mvn-deploy task so we can override it
+  grunt.task.renameTask('mvn-deploy', 'mvn-nexus-deploy');
+
+  // mvn deploy task for jenkins
+  grunt.registerTask('mvn-deploy', 'mvn-build mvn-nexus-deploy');
+
   // Rename watch task so we can override it
   grunt.task.renameTask('watch', 'watch-start');
 
