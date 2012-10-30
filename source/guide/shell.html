@@ -50,9 +50,9 @@
         <div class="rail-switch">
           <nav class="toolbar">
             <div class="iconGroup left">
-              <a href="#" class="icon-calendar">Calendar</a>
-              <a href="#" class="icon-cart">Cart</a>
-              <a href="#" class="icon-paintBucket">Paint</a>
+              <a href="#" class="icon-calendar" data-view="feature">Calendar</a>
+              <a href="#" class="icon-cart active" data-view="filter">Cart</a>
+              <a href="#" class="icon-paintBucket" data-view="activity">Paint</a>
             </div>
           </nav>
           <div class="search">
@@ -232,69 +232,146 @@
           <a href="#" class="icon-trash">Trash</a>
         </div>
       </nav>
-      <section>
-            <div class="grid-col">
-                <div class="card">
-                    <div class="card-inner">
-                        <div class="card-content">
-                            <img src="800x800.png"/>
-                        </div>
-                        <div class="card-text">
-                            <h4>Some title</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eu diam eros, quis viverra velit. Nullam porttitor neque et ipsum suscipit mattis. Fusce eget lectus at est auctor malesuada. Aliquam erat volutpat. Pellentesque eu mollis libero.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-inner">
-                        <div class="card-content">
-                            <img src="800x400.png"/>
-                        </div>
-                        <div class="card-text">
-                            <h4>Some title</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eu diam eros, quis viverra velit. Nullam porttitor neque et ipsum suscipit mattis. Fusce eget lectus at est auctor malesuada. Aliquam erat volutpat. Pellentesque eu mollis libero.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="grid-col">
-                <div class="card">
-                    <div class="card-inner">
-                        <div class="card-content">
-                            <img src="400x800.png"/>
-                        </div>
-                        <div class="card-text">
-                            <h4>Some title</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eu diam eros, quis viverra velit. Nullam porttitor neque et ipsum suscipit mattis. Fusce eget lectus at est auctor malesuada. Aliquam erat volutpat. Pellentesque eu mollis libero.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="grid-col">
-                <div class="card">
-                    <div class="card-inner">
-                        <div class="card-content">
-                            <img src="800x400.png"/>
-                        </div>
-                        <div class="card-text">
-                            <h4>Some title</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eu diam eros, quis viverra velit. Nullam porttitor neque et ipsum suscipit mattis. Fusce eget lectus at est auctor malesuada. Aliquam erat volutpat. Pellentesque eu mollis libero.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-inner">
-                        <div class="card-content">
-                            <img src="800x800.png"/>
-                        </div>
-                        <div class="card-text">
-                            <h4>Some title</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eu diam eros, quis viverra velit. Nullam porttitor neque et ipsum suscipit mattis. Fusce eget lectus at est auctor malesuada. Aliquam erat volutpat. Pellentesque eu mollis libero.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-      </section>
+
+      <div class="grid-container">
+        <div class="grid-4">
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview1.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+          
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview5.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview3.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview8.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+        </div>
+        <div class="grid-4">
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview3.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview2.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview1.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview7.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+        </div>
+        <div class="grid-4">
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview6.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview9.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview5.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview4.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+        </div>
+        <div class="grid-4">
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview2.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview8.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview3.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview7.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+        </div>
+      </div>
     </div><!-- /content -->
   </div><!-- /page -->
 </body>

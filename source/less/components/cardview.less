@@ -4,9 +4,11 @@
 */
 
 .card-asset,
+.card-page,
 .card-collection {
     display: inline-block;
     text-align: center;
+    background: @cardview-background-color;
 }
 
 .card-asset {
@@ -97,4 +99,77 @@
     }
 } // card-collection 
 
+.card-page {
+    display: block;
+    margin: 0 @cardview-grid-margin/2 @cardview-grid-margin;
+    text-align: left;
+    font-size: 12*@px;
+    .box-shadow(0 0.1rem 0.1rem rgba(0, 0, 0, 0.25));
 
+    a {
+        overflow: hidden; // can be replaced with a clearfix in case needed
+        display: block;
+        &,
+        a:hover {
+            text-decoration: none;
+            color: @cardview-text-color;
+        }
+    }
+    img {
+        width: 100%;
+        border-bottom: 1px solid @cardview-image-separator-color;
+    }
+    h4,
+    p {
+        margin: 10*@px;
+    }
+    h4 {
+        margin-bottom: 2*@px;
+        font-size: 12*@px;
+        color: @cardview-title-color;
+    }
+    i {
+        .icon-xsmall;
+    }
+    .kind {
+        margin: 0 10*@px;
+    }
+    .date-modified,
+    .date-published {
+        float: left;
+        margin-right: 0;
+    }
+    .variations {
+        float: right;
+    }
+}
+
+.grid-container {
+    overflow: hidden; // can be replaced with a clearfix in case needed
+    margin: @cardview-grid-margin @cardview-grid-margin/2;
+
+    > .grid-1 {
+        float: left;
+        width: 100%;
+    }
+    > .grid-2 {
+        float: left;
+        width: 50%;
+    }
+    > .grid-3 {
+        float: left;
+        width: 33.3333%;
+    }
+    > .grid-4 {
+        float: left;
+        width: 25%;
+    }
+    > .grid-5 {
+        float: left;
+        width: 20%;
+    }
+    > .grid-6 {
+        float: left;
+        width: 16.6666%;
+    }
+}
