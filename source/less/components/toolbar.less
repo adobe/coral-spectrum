@@ -1,26 +1,46 @@
 /**
-  Class: .toolbar
-  The top toolbar with action icons
+Class: .toolbar
+The top toolbar with action icons
 */
 .toolbar {
-    .clearfix;
-    position: relative;
-    line-height: @icon-buttons-size;
-    padding: 3*@px 0;
-    border-bottom: 1px solid @toolbar-border-color;
+  position: relative;
+  height: 46*@px;
+  
+  border-bottom: @px solid @toolbar-border-color;
 
-    .center {
-        position: absolute;
-        left: 50%;
-
-        > * {
-            margin-left: -50%;
-        }
-    }
-
+  .left,
+  .right,
+  .middle {
+    float: none;
+    position: absolute;
+    top: 0;
+    
+    padding: 11*@px 0; // "vertically center"
+  }
+  
+  .left {
+    z-index: 1;
+    left: 0;
+  }
+  
+  .right {
+    z-index: 1;
+    right: 0;
+  }
+  
+  .middle {
+    z-index: 0;
+    left: 0;
+    right: 0;
+    
+    text-align: center; // make text and inline-block centered
+    
     h1 {
-        margin: 0;
-        line-height: inherit;
-        font-size: 18*@px;
+      margin: 0;
+
+      .regularText; // AdobeClean, not light
+      line-height: 1.5;
+      font-size: 18*@px;
     }
+  }
 }
