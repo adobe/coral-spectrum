@@ -10,4 +10,13 @@ a {
   &:hover {
    text-decoration: underline;
   }
+  
+  &:focus {
+    // Remove outline
+    outline: none;
+    outline-offset: 0;
+    
+    .glow(); // Add glow
+    border: 0; // remove border
+  }
 }
