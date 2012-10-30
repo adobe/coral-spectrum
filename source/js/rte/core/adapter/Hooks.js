@@ -74,6 +74,29 @@
 
         onPluginCreated: function(plugin) {
             return plugin;
+        },
+
+        resolveRelativePath: function(relPath) {
+            var path = document.location.pathname;
+            var parentPath = path.substring(0, path.lastIndexOf("/"));
+            var parts = parentPath.split("/");
+            var relParts = relPath.split("/");
+            for (var r = 0; r < relParts.length; r++) {
+                var relPart = relParts[r];
+                if (relPart === "..") {
+                    if (parts.length <= 1) {
+                        throw new Error("Invalid relative path: " + relPath);
+                    }
+                    parts.splice(parts.length - 1, 1);
+                } else if (relPart !== ".") {
+                    parts.push(relPart);
+                }
+            }
+            return parts.join("/");
+        },
+
+        isExistingPage: function(path) {
+            return true;
         }
 
     });
