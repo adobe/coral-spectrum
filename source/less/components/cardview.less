@@ -3,100 +3,98 @@
   Displays assets in result set as a card 
 */
 
-.cui-card-view
-{
+.card-asset,
+.card-collection {
     display: inline-block;
     text-align: center;
 }
 
-.cui-asset-card {
-
-        border: 10*@px solid @cardview-wideborder-color;
-        outline: @px solid @cardview-outerline-color;
-        -moz-box-shadow: inset 0 0 @px @cardview-insetshadow-color;
-        -webkit-box-shadow: inset 0 0 @px @cardview-insetshadow-color;
-        box-shadow: inset 0 0 @px @cardview-insetshadow-color;
+.card-asset {
+    border: 10*@px solid @cardview-wideborder-color;
+    outline: @px solid @cardview-outerline-color;
+    -moz-box-shadow: inset 0 0 @px @cardview-insetshadow-color;
+    -webkit-box-shadow: inset 0 0 @px @cardview-insetshadow-color;
+    box-shadow: inset 0 0 @px @cardview-insetshadow-color;
 }
 
-.cui-collection-card {
-    
-        min-width: 270*@px;
-        position: relative;
-        margin: 10*@px;
-        margin-bottom: 20*@px;
+.card-collection {
+    min-width: 270*@px;
+    position: relative;
+    margin: 10*@px;
+    margin-bottom: 20*@px;
+
+    &:before,
+    &:after {
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+        /*bottom: -20*@px;*/
+    }
+
+    &:before {
+        content: " ";
+        height: 10*@px;
+        width: 255*@px;
+        bottom: -10*@px;
+        left: 8*@px;
+        border-bottom: @px solid @cardview-outerline-color;
+        border-left: @px solid @cardview-outerline-color;
+        border-right: @px solid @cardview-outerline-color;
+    }
+
+    &:after {
+        content: " ";
+        height: 10*@px;
+        width: 240*@px;
+        bottom: -20*@px;
+        left: 16*@px;
+        border-bottom: @px solid @cardview-outerline-color;
+        border-left: @px solid @cardview-outerline-color;
+        border-right: @px solid @cardview-outerline-color;
+    }
+
+    img {
+        border: @px solid @cardview-outerline-color;
+        width: 100%;
+        .shadow;
+    }
+
+    .collection-banner {
+        position: absolute;
+        top: 54%;
+        left: -9*@px;
+        padding: 5*@px;
+        width: 100% + 40*@px;
+        background-color: @cardview-banner-color;
+        border: @px solid @cardview-outerline-color;
+        color: @cardview-banner-text-color;
+        .shadow;
 
         &:before,
         &:after {
+        border: solid transparent;
             content: " ";
             height: 0;
             width: 0;
             position: absolute;
             pointer-events: none;
-            /*bottom: -20*@px;*/
+            bottom: -9*@px;
         }
 
-        &:before {
-            content: " ";
-            height: 10*@px;
-            width: 255*@px;
-            bottom: -10*@px;
-            left: 8*@px;
-            border-bottom: @px solid @cardview-outerline-color;
-            border-left: @px solid @cardview-outerline-color;
-            border-right: @px solid @cardview-outerline-color;
+        &:before { 
+            border-right-color: @cardview-banner-color;
+            left: -8*@px;
+            border-width: 8*@px;
+        }            
+
+        &:after { 
+            border-left-color: @cardview-banner-color;
+            right: -9*@px;
+            border-width: 8*@px;
         }
-
-        &:after {
-            content: " ";
-            height: 10*@px;
-            width: 240*@px;
-            bottom: -20*@px;
-            left: 16*@px;
-            border-bottom: @px solid @cardview-outerline-color;
-            border-left: @px solid @cardview-outerline-color;
-            border-right: @px solid @cardview-outerline-color;
-        }
-
-        img {
-            border: @px solid @cardview-outerline-color;
-            width: 100%;
-            .shadow;
-        }
-
-        .collection-banner {
-            position: absolute;
-            top: 54%;
-            left: -9*@px;
-            padding: 5*@px;
-            width: 100% + 40*@px;
-            background-color: @cardview-banner-color;
-            border: @px solid @cardview-outerline-color;
-            color: @cardview-banner-text-color;
-            .shadow;
-
-            &:before,
-            &:after {
-            border: solid transparent;
-                content: " ";
-                height: 0;
-                width: 0;
-                position: absolute;
-                pointer-events: none;
-                bottom: -9*@px;
-            }
-
-            &:before { 
-                border-right-color: @cardview-banner-color;
-                left: -8*@px;
-                border-width: 8*@px;
-            }            
-
-            &:after { 
-                border-left-color: @cardview-banner-color;
-                right: -9*@px;
-                border-width: 8*@px;
-            }
-        }
-    } // collection card 
+    }
+} // card-collection 
 
 
