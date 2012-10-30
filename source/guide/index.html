@@ -276,16 +276,16 @@
           <p>Icons can be added to a number of different elements by using the <code class="atv">icon-*</code> classes that correspond to the icon's filename.</p>
           
           <h3>Usage Guidelines</h3>
-          <p>Icons can be applied to several different tags.</p>
+          <p>Icons should be applied to three different tags:</p>
           <ul>
-            <li><code class="prettyprint">&lt;i&gt;</code>: Indicator icon without a label.</li>
-            <li><code class="prettyprint">&lt;span&gt;</code>: Indicator icon with a label.</li>
-            <li><code class="prettyprint">&lt;a&gt;</code>: Clickable icon with a label.</li>
-            <li><code class="prettyprint">&lt;a&gt;</code> with nested <code class="prettyprint">&lt;i&gt;</code>: Clickable icon with no label.</li>
+            <li><code class="prettyprint">&lt;i&gt;</code>: Illustrative</li>
+            <li><code class="prettyprint">&lt;a&gt;</code>: Navigational</li>
+            <li><code class="prettyprint">&lt;button&gt;</code>: Actionable</li>
           </ul>
           
           <h3>Accessibility</h3>
-          <p>When using an icon without a label, include text inside of the element to label the icon's function. TODO: example</p>
+          <p>Always include label inside of the tag to indicate the icon's function. This text isn't visible by default, but is always readable by screen readers.</p>
+          <p>If you want to show the text, add the <code class="atv">withLabel</code> CSS class.</p>
          
           <h3>Sizing</h3>
           <p>When used without context, icons should be given a size:</p>
@@ -299,43 +299,90 @@
           <div class="componentSample">
               <div class="example">
                 <div class="iconSample">
-                    <div class="sampleTitle left">Presentational</div>
-                    <p><i class="icon-trash">Deleted</i></p>
+                    <div class="sampleTitle left">Illustrative</div>
+                    <div class="sample"><i class="icon-paintBucket">Paint</i><br><br><i class="icon-paintBucket withLabel">Paint</i></div>
                 </div>
                 
                 <div class="iconSample">
-                    <div class="sampleTitle left">Presentational, with label</div>
-                    <p><span class="icon-trash">Deleted</span></p>
-                </div>
-                
-                <div class="iconSample">
-                    <div class="sampleTitle left">Clickable</div>
-                    <p><a href="#" role="button"><i class="icon-paintBucket">Paint</i></a></p>
-                </div>
-                
-                <div class="iconSample">
-                    <div class="sampleTitle left">Clickable, with label</div>
-                    <p><a href="#" role="button" class="icon-paintBucket">Paint</a></p>
+                    <div class="sampleTitle left">Navigational</div>
+                    <div class="sample"><a href="#" class="icon-paintBucket">Paint</a><br><br><a href="#" class="icon-paintBucket withLabel">Paint</a></div>
                 </div>
                   
                 <div class="iconSample">
-                    <div class="sampleTitle left">Button with icon</div>
-                    <p><button><i class="icon-trash"></i>Delete</button></p>
+                    <div class="sampleTitle left">Actionable</div>
+                    <div class="sample"><button class="icon-paintBucket">Paint</button><br><br><button class="icon-paintBucket withLabel">Paint</button></div>
                 </div>
 
+                <!-- 
+                Buttons
+                TBD: Is this accessible?
+                <div class="iconSample">
+                    <div class="sampleTitle left">Icon within button (<code class="prettyprint">&lt;button&gt;</code> and <code class="prettyprint">&lt;i&gt;</code>)</div>
+                    <div class="sample"><button><i class="icon-trash"></i>Delete</button></div>
+                </div>
+                
+                <div class="iconSample">
+                    <div class="sampleTitle left">Icon within button (<code class="prettyprint">&lt;a&gt;</code> and <code class="prettyprint">&lt;i&gt;</code>)</div>
+                    <div class="sample"><a href="#" role="button" class="button"><i class="icon-trash"></i>Delete</a></div>
+                </div>
+                
+                <div class="iconSample">
+                    <div class="sampleTitle left">Icon within button (<code class="prettyprint">&lt;button&gt;</code> and <code class="prettyprint">&lt;i&gt;</code>)</div>
+                    <div class="sample"><button class="primary"><i class="icon-trash"></i>Delete</button></div>
+                </div>
+                
+                <div class="iconSample">
+                    <div class="sampleTitle left">Icon within button (<code class="prettyprint">&lt;button&gt;</code> and <code class="prettyprint">&lt;i&gt;</code>)</div>
+                    <div class="sample"><button class="warning"><i class="icon-trash"></i>Delete</button></div>
+                </div>
+                -->
+                
+
+                <!--
+                Icon group
                 <div class="iconSample">
                     <div class="sampleTitle left">Icon Group</div>
                     <div class="iconGroup">
-                        <a href="#"><i class="icon-cards">Cards</i></a>
+                        <a href="#" class="icon-cards">Cards</a>
                         <span class="divider"></span>
-                        <a href="#"><i class="icon-calendar">Calendar</i></a>
-                        <a href="#"><i class="icon-cart">Cart</i></a>
-                        <a href="#"><i class="icon-addGrid">Add</i></a>
+                        <a href="#" class="icon-calendar">Calendar</a>
+                        <a href="#" class="icon-cart">Cart</a>
+                        <a href="#" class="icon-addGrid">Add</a>
                     </div>
                 </div>
+                -->
+                
+                <!--
+                Paragraphs
+                
+                <p><i class="icon-calendar">Calendar</i>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. Pellentesque congue diam ac nisl vehicula ornare. Cras eu consectetur enim. Aliquam orci augue, sollicitudin nec aliquam sit amet, imperdiet ac leo. Donec aliquam tellus nec ipsum porttitor ut viverra odio luctus. Curabitur in turpis sed nunc consequat ornare eget in nulla. Nam dignissim lectus sed velit sagittis vehicula. Maecenas interdum, quam vel luctus sagittis, mi nisl commodo sapien, eget accumsan nunc metus ac ipsum.</p>
+                
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. Pellentesque congue diam ac nisl vehicula ornare. <i class="icon-calendar">Calendar</i>Cras eu consectetur enim. Aliquam orci augue, sollicitudin nec aliquam sit amet, imperdiet ac leo. Donec aliquam tellus nec ipsum porttitor ut viverra odio luctus. Curabitur in turpis sed nunc consequat ornare eget in nulla. Nam dignissim lectus sed velit sagittis vehicula. Maecenas interdum, quam vel luctus sagittis, mi nisl commodo sapien, eget accumsan nunc metus ac ipsum.</p>
+                
+                <p style="font-size: 2rem"><i class="icon-calendar">Calendar</i>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. Pellentesque congue diam ac nisl vehicula ornare. Cras eu consectetur enim. Aliquam orci augue, sollicitudin nec aliquam sit amet, imperdiet ac leo. Donec aliquam tellus nec ipsum porttitor ut viverra odio luctus. Curabitur in turpis sed nunc consequat ornare eget in nulla. Nam dignissim lectus sed velit sagittis vehicula. Maecenas interdum, quam vel luctus sagittis, mi nisl commodo sapien, eget accumsan nunc metus ac ipsum.</p>
+                
+                <p style="font-size: 2rem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. Pellentesque congue diam ac nisl vehicula ornare. <i class="icon-calendar">Calendar</i>Cras eu consectetur enim. Aliquam orci augue, sollicitudin nec aliquam sit amet, imperdiet ac leo. Donec aliquam tellus nec ipsum porttitor ut viverra odio luctus. Curabitur in turpis sed nunc consequat ornare eget in nulla. Nam dignissim lectus sed velit sagittis vehicula. Maecenas interdum, quam vel luctus sagittis, mi nisl commodo sapien, eget accumsan nunc metus ac ipsum.</p>
+                -->
+                
               </div>
             <pre class="prettyprint linenums">
-TODO
+&lt;!-- Illustrative --&gt;
+&lt;i class=&quot;icon-paintBucket&quot;&gt;Paint&lt;/i&gt;
+
+&lt;!-- Illustrative with label --&gt;
+&lt;i class=&quot;icon-paintBucket withLabel&quot;&gt;Paint&lt;/i&gt;
+
+&lt;!-- Navigational --&gt;
+&lt;a href=&quot;#&quot; class=&quot;icon-paintBucket&quot;&gt;Paint&lt;/a&gt;
+
+&lt;!-- Navigational with label --&gt;
+&lt;a href=&quot;#&quot; class=&quot;icon-paintBucket withLabel&quot;&gt;Paint&lt;/a&gt;
+
+&lt;!-- Actionable --&gt;
+&lt;button class=&quot;icon-paintBucket&quot;&gt;Paint&lt;/button&gt;
+
+&lt;!-- Actionable with label --&gt;
+&lt;button class=&quot;icon-paintBucket withLabel&quot;&gt;Paint&lt;/button&gt;
 </pre>
           </div>
         </section>
@@ -421,12 +468,12 @@ TODO
 &lt;div class=&quot;page&quot; role=&quot;main&quot;&gt;
   &lt;div class=&quot;rail right&quot; role=&quot;complementary&quot;&gt;
     &lt;div class=&quot;pull-to-refresh&quot;&gt;
-      &lt;div class=&quot;message&quot;;&gt;
-        &lt;i class=&quot;arrow&quot;;&gt;&lt;/i;&gt;
-        &lt;i class=&quot;spinner large&quot;;&gt;&lt;/i;&gt;
-        &lt;span class=&quot;pull&quot;;&gt;Pull to refresh&lt;/span;&gt;
-        &lt;span class=&quot;release&quot;;&gt;Release to refresh&lt;/span;&gt;
-        &lt;span class=&quot;loading&quot;;&gt;Loading&lt;/span;&gt;
+      &lt;div class=&quot;message&quot;&gt;
+        &lt;i class=&quot;arrow&quot;&gt;&lt;/i;&gt;
+        &lt;i class=&quot;spinner large&quot;&gt;&lt;/i;&gt;
+        &lt;span class=&quot;pull&quot;&gt;Pull to refresh&lt;/span;&gt;
+        &lt;span class=&quot;release&quot;&gt;Release to refresh&lt;/span;&gt;
+        &lt;span class=&quot;loading&quot;&gt;Loading&lt;/span;&gt;
       &lt;/div;&gt;
     &lt;/div&gt;
     &lt;div class=&quot;wrap&quot;&gt;
@@ -487,27 +534,26 @@ TODO
 
           <div class="componentSample">
             <div class="example">
-              <h4>Toolbar</h4>
               <nav class="toolbar">
-                <div class="left icons-group">
-                  <a href="#" class="icon-rail">Rail</a>
+                <div class="left iconGroup">
+                  <a href="#" class="icon-addGrid">Add</a>
                   <span class="divider"></span>
-                  <a href="#" class="icon-edit">Edit</a>
-                  <a href="#" class="icon-message">Message</a>
-                  <a href="#" class="icon-download">Download</a>
+                  <a href="#" class="icon-calendar">Calendar</a>
+                  <a href="#" class="icon-cart">Cart</a>
+                  <a href="#" class="icon-paintBucket">Paint</a>
                 </div>
-                <div class="center">
+                <div class="middle">
                   <h1>Page Title</h1>
                 </div>
-                <div class="right icons-group">
-                  <a href="#" class="icon-list-view">List View</a>
-                  <a href="#" class="icon-search">Search</a>
+                <div class="right iconGroup">
+                  <a href="#" class="icon-cards">Cards</a>
+                  <a href="#" class="icon-trash">Trash</a>
                 </div>
               </nav>
             </div>
             <pre class="prettyprint linenums">
 &lt;nav class=&quot;toolbar&quot;&gt;
-  &lt;div class=&quot;left icons-group&quot;&gt;
+  &lt;div class=&quot;left iconGroup&quot;&gt;
     &lt;a href=&quot;#&quot; class=&quot;icon-rail&quot;&gt;Rail&lt;/a&gt;
     &lt;span class=&quot;divider&quot;&gt;&lt;/span&gt;
     &lt;a href=&quot;#&quot; class=&quot;icon-edit&quot;&gt;Edit&lt;/a&gt;
@@ -517,7 +563,7 @@ TODO
   &lt;div class=&quot;center&quot;&gt;
     &lt;h1&gt;Page Title&lt;/h1&gt;
   &lt;/div&gt;
-  &lt;div class=&quot;right icons-group&quot;&gt;
+  &lt;div class=&quot;right iconGroup&quot;&gt;
     &lt;a href=&quot;#&quot; class=&quot;icon-list-view&quot;&gt;List View&lt;/a&gt;
     &lt;a href=&quot;#&quot; class=&quot;icon-search&quot;&gt;Search&lt;/a&gt;
   &lt;/div&gt;
@@ -1111,7 +1157,6 @@ TODO
             </div>
         </section>
 
-		<!-- Draggable -->
         <section id="Draggable">
           <h2 class="line">Draggable List</h2>
           <p>A list with items that can be dragged and dropped.</p>
@@ -1119,11 +1164,11 @@ TODO
           <div class="componentSample">
               <div class="example clearfix">
                 <div class="left">					
-					<ul class="draggable">
-						<li draggable="true">My Content 1<button class="close">&times;</button></li>
-						<li draggable="true">My Content 2<button class="close">&times;</button></li>
-						<li draggable="true">My Content 3<button class="close">&times;</button></li>
-					</ul>
+                  <ul class="draggable">
+                    <li draggable="true">My Content 1<button class="close">&times;</button></li>
+                    <li draggable="true">My Content 2<button class="close">&times;</button></li>
+                    <li draggable="true">My Content 3<button class="close">&times;</button></li>
+                  </ul>
                 </div>
               </div>
               <pre class="prettyprint linenums">
@@ -1135,8 +1180,6 @@ TODO
 </pre>
           </div>
         </section>
-
-		<!-- end draggable -->
 
       </section><!-- /ButtonsAndControls -->
 
