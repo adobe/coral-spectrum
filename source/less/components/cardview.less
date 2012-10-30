@@ -9,6 +9,7 @@
     display: inline-block;
     text-align: center;
     background: @cardview-background-color;
+    font-size: 14*@px;
 }
 
 .card-asset {
@@ -28,99 +29,92 @@
         margin-left: 10*@px;
         text-align: left;
 
-        &.asset-name {
-            color: @cardview-name-color;
+        &.asset-title {
+            color: @cardview-title-color;
         }
 
         &.asset-description {
-            color: @cardview-description-color;
+            color: @cardview-text-color;
         }
 
         &.asset-details {
             margin-top: 12*@px;
-            color: @cardview-details-color;
+            color: @cardview-text-color;
         }
-
     }
 
 }
 
 .card-collection {
-    min-width: 270*@px;
     position: relative;
-    margin: 10*@px;
-    margin-bottom: 20*@px;
 
     &:before,
     &:after {
-        content: " ";
-        height: 0;
-        width: 0;
         position: absolute;
+        height: @cardview-stackeditem-height;
+        width: 0;
+        border-bottom: @px solid @cardview-border-color;
+        border-left: @px solid @cardview-border-color;
+        border-right: @px solid @cardview-border-color;
         pointer-events: none;
-        /*bottom: -20*@px;*/
+        content: " ";
+        .shadow(0.1rem, 0.1rem, 0.2);
     }
 
     &:before {
-        content: " ";
-        height: 10*@px;
-        width: 255*@px;
-        bottom: -10*@px;
-        left: 8*@px;
-        border-bottom: @px solid @cardview-border-color;
-        border-left: @px solid @cardview-border-color;
-        border-right: @px solid @cardview-border-color;
+        width: 97%;
+        bottom: -@cardview-stackeditem-height;
+        left: 1.5%;
     }
 
     &:after {
-        content: " ";
-        height: 10*@px;
-        width: 240*@px;
-        bottom: -20*@px;
-        left: 16*@px;
-        border-bottom: @px solid @cardview-border-color;
-        border-left: @px solid @cardview-border-color;
-        border-right: @px solid @cardview-border-color;
+        width: 94%;
+        bottom: -@cardview-stackeditem-height * 2;
+        left: 3%;
     }
 
     img {
         border: @px solid @cardview-border-color;
-        width: 100%;
         .shadow;
     }
 
     .collection-banner {
         position: absolute;
-        top: 54%;
-        left: -9*@px;
-        padding: 5*@px;
-        width: 100% + 40*@px;
+        text-align: center;
+        top: 51%;
+        left: -1.5%;
+        width: 103%;
+        border-top: @px solid @cardview-border-color;
+        border-bottom: @px solid @cardview-border-color;
         background-color: @cardview-banner-color;
-        border: @px solid @cardview-border-color;
         color: @cardview-banner-text-color;
         .shadow;
 
+        p {
+            padding: 0px @cardview-banner-padding;
+            text-align: left;
+        }
+
         &:before,
         &:after {
-        border: solid transparent;
-            content: " ";
+            position: absolute;
             height: 0;
             width: 0;
-            position: absolute;
+            bottom: -7*@px;
+            border: solid transparent;
+            border-width: 5*@px;
             pointer-events: none;
-            bottom: -9*@px;
+            content: " ";
         }
 
         &:before { 
             border-right-color: @cardview-banner-color;
-            left: -8*@px;
-            border-width: 8*@px;
+            left: -5*@px;
         }            
 
         &:after { 
             border-left-color: @cardview-banner-color;
-            right: -9*@px;
-            border-width: 8*@px;
+            right: -7*@px;
         }
     }
 } // card-collection 
