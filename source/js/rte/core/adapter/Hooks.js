@@ -97,6 +97,15 @@
 
         isExistingPage: function(path) {
             return true;
+        },
+
+        getServerPrefix: function(url) {
+            var protSepPos = url.indexOf("://");
+            if (protSepPos < 0) {
+                return "";
+            }
+            var afterProtPos = url.indexOf("/", protSepPos + 3);
+            return afterProtPos < 0 ? url : url.substring(0, afterProtPos);
         }
 
     });

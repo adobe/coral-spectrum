@@ -119,6 +119,10 @@ CUI.rte.Utils = function() {
             return getHooks().isExistingPage(path);
         },
 
+        getServerPrefix: function(url) {
+            return getHooks().getServerPrefix(url);
+        },
+
         URL_IMAGE: "image"
 
     };

@@ -512,7 +512,7 @@ CUI.rte.HtmlRules.Links.getLinkHref = function(dom) {
  */
 CUI.rte.HtmlRules.Links.removePrefixForInternalLinks = function(href) {
     var currentUrl = location.href;
-    var currentServerPrefix = CQ.HTTP.getSchemeAndAuthority(currentUrl) + "/";
+    var currentServerPrefix = CUI.rte.Utils.getServerPrefix(currentUrl) + "/";
     var prefixLen = currentServerPrefix.length;
     if (href.length > prefixLen) {
         if (href.substring(0, prefixLen) == currentServerPrefix) {
