@@ -12,11 +12,37 @@
 }
 
 .card-asset {
-    border: 10*@px solid @cardview-wideborder-color;
-    outline: @px solid @cardview-outerline-color;
-    -moz-box-shadow: inset 0 0 @px @cardview-insetshadow-color;
-    -webkit-box-shadow: inset 0 0 @px @cardview-insetshadow-color;
-    box-shadow: inset 0 0 @px @cardview-insetshadow-color;
+
+    border: @px solid @cardview-border-color;
+    padding-bottom: 10*@px;
+    .shadow;
+
+    img {
+        margin-bottom: 8*@px;
+    }
+
+    p {
+        margin-top: 4*@px;
+        margin-right: 0;
+        margin-bottom: 4*@px;
+        margin-left: 10*@px;
+        text-align: left;
+
+        &.asset-name {
+            color: @cardview-name-color;
+        }
+
+        &.asset-description {
+            color: @cardview-description-color;
+        }
+
+        &.asset-details {
+            margin-top: 12*@px;
+            color: @cardview-details-color;
+        }
+
+    }
+
 }
 
 .card-collection {
@@ -41,9 +67,9 @@
         width: 255*@px;
         bottom: -10*@px;
         left: 8*@px;
-        border-bottom: @px solid @cardview-outerline-color;
-        border-left: @px solid @cardview-outerline-color;
-        border-right: @px solid @cardview-outerline-color;
+        border-bottom: @px solid @cardview-border-color;
+        border-left: @px solid @cardview-border-color;
+        border-right: @px solid @cardview-border-color;
     }
 
     &:after {
@@ -52,13 +78,13 @@
         width: 240*@px;
         bottom: -20*@px;
         left: 16*@px;
-        border-bottom: @px solid @cardview-outerline-color;
-        border-left: @px solid @cardview-outerline-color;
-        border-right: @px solid @cardview-outerline-color;
+        border-bottom: @px solid @cardview-border-color;
+        border-left: @px solid @cardview-border-color;
+        border-right: @px solid @cardview-border-color;
     }
 
     img {
-        border: @px solid @cardview-outerline-color;
+        border: @px solid @cardview-border-color;
         width: 100%;
         .shadow;
     }
@@ -70,7 +96,7 @@
         padding: 5*@px;
         width: 100% + 40*@px;
         background-color: @cardview-banner-color;
-        border: @px solid @cardview-outerline-color;
+        border: @px solid @cardview-border-color;
         color: @cardview-banner-text-color;
         .shadow;
 
