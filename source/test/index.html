@@ -16,13 +16,6 @@
   <script src="../js/libs/underscore.js"></script>
   <script src="../js/libs/toe.js"></script>
   <script src="../js/libs/fingerpointer.js"></script>
-
-  <script>
-    // configuration for phantomJS
-    if (window.mochaPhantomJS) {
-
-    }
-  </script>
   
   <!-- Sinon.JS -->
   <script src="libs/sinon/sinon.js"></script>
@@ -38,6 +31,20 @@
   <!-- Mocha -->
   <script src="libs/mocha/mocha.js"></script>
   <script>mocha.setup('bdd')</script>
+  <script>
+    // configuration for phantomJS
+    if (window.PHANTOMJS) {
+      $.fn.finger = function () {
+        return this; 
+      };
+
+      $.fn.pointer = function () {
+        this.on.apply(this, arguments);
+
+        return this;
+      };
+    }
+  </script>
   
   <!-- CoralUI files -->
   <script>
@@ -54,9 +61,9 @@
   <script src="test.Class.js"></script>
   <script src="test.CUI.Util.js"></script>
   <script src="test.CUI.Widget.js"></script>
-  <!--<script src="test.CUI.Modal.js"></script>-->
+  <script src="test.CUI.Modal.js"></script>
   <script src="test.CUI.Alert.js"></script>
-  <!--<script src="test.CUI.Tabs.js"></script>-->
+  <script src="test.CUI.Tabs.js"></script>
   <script src="test.CUI.Rail.js"></script>
   
   <!-- Do test run -->
