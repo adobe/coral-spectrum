@@ -38,45 +38,59 @@
       table {
         width: 100%;
         margin: 0;
-        border-collapse: collapse;
+        background-color: rgb(230,230,230);
+        border-spacing: 1px;
+        font-size: 13px;
 
-        th {
-          text-align: right;
+        a, span {
+          background: rgb(255,255,255);
           padding: 2px 5px 3px 0;
+          display: block;
         }
 
-        td {
-          border: 1px solid rgb(230,230,230);
-          padding: 2px 5px 3px 0;
+        th, td {
           text-align: right;
-
-          a {
-            color: rgb(75,75,75);
-            display: block;
-
-            &:hover {
-              text-decoration: none;
-              background: rgb(64,143,212);
-              color: rgb(255,255,255);
-            }
-          }
-
-          &.dimmed {
-            a {
-              color: rgb(173,173,173);
-            }
-          }
-
-          &:hover {
-            border-color: rgb(69,89,119);
-          }
+          padding: 0;
 
           &:first-child {
-            border-left: 0 none;
+            a, span {
+              margin-left: -1px;
+            }
           }
 
           &:last-child {
-            border-right: 0 none;
+            a, span {
+              margin-right: -1px;
+            }
+          }
+        }
+
+        td {
+          a {
+            color: @datepicker-day;
+            text-decoration: none;
+
+            &:hover {
+              text-decoration: none;
+              border: 1px solid @datepicker-day-hover-border-color;
+              background: @datepicker-day-hover-background-color;
+              margin: -1px;
+              padding-right: 6px;
+            }
+          }
+
+          &.day-selected {
+            a {
+              border: 1px solid @datepicker-day-selected-border-color;
+              background: @datepicker-day-selected-background-color;
+              color: @datepicker-day-selected-text-color;
+              margin: -1px;
+              padding-right: 6px;
+            }
+          }
+
+          span {
+            color: @datepicker-day-dimmed;
           }
         }
       }
@@ -134,6 +148,27 @@
       }
     }
 
+    button.prev-month,
+    button.next-month {
+      float: right;
+      display: inline-block;
+      font-size: 2.5rem;
+      line-height: 1.6rem;
+      color: rgb(90,90,90);
+      padding: 0;
+      margin: 0;
+      border: 0;
+      background: 0;
+      width: auto;
+      height: auto;
+
+      &:hover {
+        border: 0 none;
+        background: none;
+        color: rgb(44,44,44);
+      }
+    }
+
     input[type=text] {
       .box-sizing(border-box);
       border-radius: 0; // Fix for iOS >=5
@@ -151,7 +186,7 @@
     }
 }
 
-// The dropdown version of the datapicker
+// The dropdown version of the datepicker
 .datepicker-dropdown {
   display: inline-block;
   margin: 0.125rem 0;  // Give a top/bottom margin so they stack right
