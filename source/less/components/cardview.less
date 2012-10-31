@@ -5,7 +5,8 @@
 
 .card-asset,
 .card-page,
-.card-collection {
+.card-collection,
+.card-directory  {
     display: inline-block;
     text-align: center;
     background: @cardview-background-color;
@@ -14,7 +15,8 @@
 
 .card-asset {
 
-    border: @px solid @cardview-border-color;
+    border-bottom: @px solid @cardview-border-color;
+    border-left: @px solid @cardview-border-color;
     padding-bottom: 10*@px;
     .shadow;
 
@@ -46,7 +48,9 @@
 }
 
 .card-collection {
+
     position: relative;
+    margin-bottom: 10px;
 
     &:before,
     &:after {
@@ -93,6 +97,15 @@
         p {
             padding: 0px @cardview-banner-padding;
             text-align: left;
+
+            &.title {
+                font-weight: bold;
+            }
+
+            &.details {
+                font-size: 12*@px;
+            }
+
         }
 
         &:before,
@@ -100,7 +113,7 @@
             position: absolute;
             height: 0;
             width: 0;
-            bottom: -7*@px;
+            bottom: -6*@px;
             border: solid transparent;
             border-width: 5*@px;
             pointer-events: none;
@@ -118,6 +131,60 @@
         }
     }
 } // card-collection 
+
+
+.card-directory {
+
+    position: relative;
+    border-bottom: @px solid @cardview-border-color;
+    border-left: @px solid @cardview-border-color;
+    .shadow;
+
+    p {
+        text-align: left;
+        margin-left: 10*@px;
+
+        &.title {
+            color: @cardview-title-color;
+        }
+
+        &.details {
+            margin-top: -5*@px;
+            color: @cardview-text-color;
+        }
+        
+    }
+
+    img {
+        .shadow;
+    }
+
+    &:before,
+    &:after {
+        position: absolute;
+        height: 0;
+        width: 0;
+        top: 0;
+        border: solid transparent;
+        pointer-events: none;
+        content: " ";
+    }
+
+    &:after {
+        border-width: 28*@px;
+        border-right-color: @cardview-background-color;
+        left: 0;
+        top: -28*@px;
+        width: 30%;
+    }            
+
+    &:before { 
+        width: 50%;
+        height: 22*@px;
+        background-color: @cardview-background-color;
+        right: -2*@px;
+    }
+}
 
 .card-page {
     display: block;
