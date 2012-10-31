@@ -41,7 +41,9 @@ CUI.rte.AdapterUtils = function($) {
             return $.parseJSON(str);
         },
 
-        BLANK_IMAGE_URL: "../images/components/rte/blank.png"
+        getBlankImageUrl: function() {
+            return "../images/components/rte/blank.png";
+        }
 
     };
 

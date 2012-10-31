@@ -40,7 +40,9 @@ CUI.rte.AdapterUtils = function() {
             return CQ.Ext.util.JSON.decode(str);
         },
 
-        BLANK_IMAGE_URL: CQ.Ext.BLANK_IMAGE_URL
+        getBlankImageUrl: function() {
+            return CQ.Ext.BLANK_IMAGE_URL;
+        }
 
     };
 

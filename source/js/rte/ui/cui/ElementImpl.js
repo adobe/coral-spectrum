@@ -60,7 +60,7 @@ CUI.rte.ui.cui.ElementImpl = new Class({
             self.plugin.execute(cmd, cmdValue, env);
         });
         var img = $(document.createElement("img"));
-        var src = CUI.rte.Utils.processUrl(CUI.rte.Utils.BLANK_IMAGE_URL,
+        var src = CUI.rte.Utils.processUrl(CUI.rte.Utils.getBlankImageUrl(),
                 CUI.rte.Utils.URL_IMAGE);
         img.attr("src", src);
         img.attr("style", "width: 16px; height: 16px;");

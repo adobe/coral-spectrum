@@ -89,6 +89,16 @@ CUI.rte.Utils = function() {
             return str;
         },
 
+        merge: function(obj1, obj2) {
+            for (var name in obj2) {
+                if (obj2.hasOwnProperty(name)) {
+                    obj1[name] = obj2[name];
+                }
+            }
+            return obj1;
+        },
+
+
         // "hooked" calls
 
         copyObject: function(obj) {
@@ -137,7 +147,7 @@ CUI.rte.Utils = function() {
 
         jsonDecode: CUI.rte.AdapterUtils.jsonDecode,
 
-        BLANK_IMAGE_URL: CUI.rte.AdapterUtils.BLANK_IMAGE_URL
+        getBlankImageUrl: CUI.rte.AdapterUtils.getBlankImageUrl
 
     };
 
