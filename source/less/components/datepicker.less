@@ -47,6 +47,10 @@
         color: @button-disabled-text-color;
         text-shadow: none;
         background: @button-disabled-background-color;
+
+        span {
+          .opacity(30);
+        }
       }
 
       &:hover:not([disabled]) {
@@ -130,8 +134,8 @@
             color: rgb(44,44,44);
           }
           &:active {
-            border: 0 none;
             background: none;
+            .box-shadow(none);
           }
         }
 
@@ -168,7 +172,7 @@
 
         a, span {
           background: rgb(255,255,255);
-          padding: 2px 5px 3px 0;
+          padding: 3*@px 5*@px 3*@px 0;
           display: block;
         }
 
@@ -201,6 +205,16 @@
               border: 1px solid @datepicker-day-hover-border-color;
               background: @datepicker-day-hover-background-color;
               margin: -1px;
+            }
+
+            &:active {
+              border: 1px solid @datepicker-day-selected-border-color;
+              background: @datepicker-day-selected-background-color;
+              color: @datepicker-day-selected-text-color;
+            }
+
+            &:focus {
+              .box-shadow(none);
             }
           }
 
