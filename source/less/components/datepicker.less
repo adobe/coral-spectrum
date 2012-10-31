@@ -47,6 +47,10 @@
         color: @button-disabled-text-color;
         text-shadow: none;
         background: @button-disabled-background-color;
+
+        span {
+          .opacity(30);
+        }
       }
 
       &:hover:not([disabled]) {
