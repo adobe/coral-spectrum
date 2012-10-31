@@ -27,7 +27,7 @@
 
   <header class="top">
 
-    <div class="logo"><img src="images/theme/cloudui.png" alt="CoralUI logo"></div>
+    <div class="logo"><img src="images/theme/cloudui.png" alt="CoralUI logo"/></div>
 
     <nav class="main">
       <a href="#" class="selected">Guide</a>
@@ -114,6 +114,7 @@
               <a href="#List">List</a>
               <a href="#Table">Table</a>
               <a href="#Grid">Grid</a>
+              <a href="#Cards">Cards</a>
             </nav>
         </section>
 
@@ -554,18 +555,18 @@
             <pre class="prettyprint linenums">
 &lt;nav class=&quot;toolbar&quot;&gt;
   &lt;div class=&quot;left iconGroup&quot;&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-rail&quot;&gt;Rail&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-addGrid&quot;&gt;Add&lt;/a&gt;
     &lt;span class=&quot;divider&quot;&gt;&lt;/span&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-edit&quot;&gt;Edit&lt;/a&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-message&quot;&gt;Message&lt;/a&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-download&quot;&gt;Download&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-calendar&quot;&gt;Calendar&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-cart&quot;&gt;Cart&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-paintBucket&quot;&gt;Paint&lt;/a&gt;
   &lt;/div&gt;
-  &lt;div class=&quot;center&quot;&gt;
+  &lt;div class=&quot;middle&quot;&gt;
     &lt;h1&gt;Page Title&lt;/h1&gt;
   &lt;/div&gt;
   &lt;div class=&quot;right iconGroup&quot;&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-list-view&quot;&gt;List View&lt;/a&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-search&quot;&gt;Search&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-cards&quot;&gt;Cards&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-trash&quot;&gt;Trash&lt;/a&gt;
   &lt;/div&gt;
 &lt;/nav&gt;
             </pre>
@@ -580,7 +581,7 @@
             <div class="example">
 
               <nav class="crumbs">
-                <a href="#"><img src="images/theme/cloudui.png"></a>
+                <a href="#"><img src="images/theme/cloudui.png" alt="CoralUI logo"/></a>
                 <a href="#">Admin</a>
                 <a href="#">Settings</a>
                 <a href="#">Current Page Title</a>
@@ -588,7 +589,7 @@
             </div>
             <pre class="prettyprint linenums">
 &lt;nav class=&quot;crumbs&quot;&gt;
-  &lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/theme/cloudui.png&quot;&gt;&lt;/a&gt;
+  &lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/theme/cloudui.png&quot; alt=&quot;CoralUI logo&quot;&gt;&lt;/a&gt;
   &lt;a href=&quot;#&quot;&gt;Admin&lt;/a&gt;
   &lt;a href=&quot;#&quot;&gt;Settings&lt;/a&gt;
   &lt;a href=&quot;#&quot;&gt;Current Page Title&lt;/a&gt;
@@ -889,7 +890,7 @@
                       </div>
                   </div>
                 <pre class="prettyprint linenums">
-&lt!-- Standard Single select --&gt;
+&lt;!-- Standard Single select --&gt;
 &lt;div class="dropdown" data-init="dropdown"&gt;
     &lt;button&gt;Single Select&lt;/button&gt;
     &lt;select name="dropdown"&gt;
@@ -899,7 +900,7 @@
     &lt;/select&gt;
 &lt;/div&gt;
 
-&lt!-- Multi select --&gt;
+&lt;!-- Multi select --&gt;
 &lt;div class="dropdown" data-init="dropdown"&gt;
     &lt;button&gt;Multi Select&lt;/button&gt;
     &lt;select name="dropdown2" multiple&gt;
@@ -909,7 +910,7 @@
     &lt;/select&gt;
 &lt;/div&gt;
 
-&lt!-- Editable --&gt;
+&lt;!-- Editable --&gt;
 &lt;div class="dropdown dropdown-editable" data-editable="true" data-init="dropdown"&gt;
     &lt;input type="text" placeholder="Editable Select"&gt;
     &lt;button&gt;Editable&lt;/button&gt;
@@ -920,7 +921,7 @@
     &lt;/select&gt;
 &lt;/div&gt;
 
-&lt!-- Disabled --&gt;
+&lt;!-- Disabled --&gt;
 &lt;div class="dropdown" data-init="dropdown" data-disabled="true"&gt;
     &lt;button&gt;Disabled&lt;/button&gt;
     &lt;select name="dropdown4"&gt;
@@ -930,7 +931,7 @@
     &lt;/select&gt;
 &lt;/div&gt;
 
-&lt!-- Error --&gt;
+&lt;!-- Error --&gt;
 &lt;div class="dropdown error" data-init="dropdown"&gt;
     &lt;button&gt;Error&lt;/button&gt;
     &lt;select name="dropdown5" &gt;
@@ -947,7 +948,7 @@
 
 
         <section id="Slider">
-            <h2 class="line">Sliders (WIP)</h2>
+            <h2 class="line">Sliders</h2>
             <p>Different types of horizontal sliders.</p>
 
             <div class="componentSample">
@@ -1291,6 +1292,69 @@
           </div>
 
         </section>
+
+        <section id="Cards">
+
+          <h2 class="line">Cards</h2>
+          <p>There are many cards for displaying data. They are not always card shaped, but we still call them that.</p>
+
+          <h3>Variations</h3>
+          <p>Follows are basic card types.  More advanced card types will be added.</p>
+          <ul>
+            <li>Asset Card: for a single item.
+            <li>Collection Card: for a collection of items.
+            <li>Directory Card: for a directory of items.
+          </ul>
+
+          <h3 class="line">Asset Card View</h3>
+          <p>For a single asset.  Can include some descriptive fields, as shown below.</p>
+
+          <div class="componentSample">
+            <div class="example">
+
+              <div class="card-asset">
+                <img src="https://lh5.googleusercontent.com/-Jw12BvbSrH4/UHylAGRIsrI/AAAAAAAADUI/2lXvalAiCgU/s288/20121010-IMG_2547.jpg" alt=""/>
+                <p class="asset-title">title</p>
+                <p class="asset-description">description</p>
+                <p class="asset-details">details</p>
+              </div>
+            </div>
+            <pre class="prettyprint linenums">
+&lt;div class=&quot;card-asset&quot;&gt;
+  &lt;img src=&quot;fake_card_asset.jpg&quot;/&gt;
+  &lt;p class="asset-title"&gt;title&lt;/p&gt;
+  &lt;p class="asset-description"&gt;description&lt;/p&gt;
+  &lt;p class="asset-details"&gt;details&lt;/p&gt;
+&lt;/div&gt;
+            </pre>
+          </div>
+        
+          <h3 id="CollectionCard" class="line">Collection Card View</h3>
+          <p>DAM Collection View</p>
+
+          <div class="componentSample">
+            <div class="example">
+
+              <div class="card-collection">
+                <img src="https://lh5.googleusercontent.com/-Jw12BvbSrH4/UHylAGRIsrI/AAAAAAAADUI/2lXvalAiCgU/s288/20121010-IMG_2547.jpg" alt=""/>
+                <div class="collection-banner">
+                  <p>This would be the banner</p>
+                  </div>
+              </div>
+
+            </div>
+            <pre class="prettyprint linenums">
+&lt;div class=&quot;card-collection&quot;&gt;
+  &lt;img src=&quot;fake_image.jpg&quot;/&gt;
+  &lt;div class=&quot;collection-banner&quot;&gt;
+    &lt;p&gt;This would be the banner&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+            </pre>
+          </div>
+
+
+        </section><!-- Cards -->  
 
       </section><!-- /DataPresentation -->
 

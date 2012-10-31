@@ -1,0 +1,195 @@
+/**
+  Element: Card View
+  Displays assets in result set as a card 
+*/
+
+.card-asset,
+.card-page,
+.card-collection {
+    display: inline-block;
+    text-align: center;
+    background: @cardview-background-color;
+    font-size: 14*@px;
+}
+
+.card-asset {
+
+    border: @px solid @cardview-border-color;
+    padding-bottom: 10*@px;
+    .shadow;
+
+    img {
+        margin-bottom: 8*@px;
+    }
+
+    p {
+        margin-top: 4*@px;
+        margin-right: 0;
+        margin-bottom: 4*@px;
+        margin-left: 10*@px;
+        text-align: left;
+
+        &.asset-title {
+            color: @cardview-title-color;
+        }
+
+        &.asset-description {
+            color: @cardview-text-color;
+        }
+
+        &.asset-details {
+            margin-top: 12*@px;
+            color: @cardview-text-color;
+        }
+    }
+
+}
+
+.card-collection {
+    position: relative;
+
+    &:before,
+    &:after {
+        position: absolute;
+        height: @cardview-stackeditem-height;
+        width: 0;
+        border-bottom: @px solid @cardview-border-color;
+        border-left: @px solid @cardview-border-color;
+        border-right: @px solid @cardview-border-color;
+        pointer-events: none;
+        content: " ";
+        .shadow(0.1rem, 0.1rem, 0.2);
+    }
+
+    &:before {
+        width: 97%;
+        bottom: -@cardview-stackeditem-height;
+        left: 1.5%;
+    }
+
+    &:after {
+        width: 94%;
+        bottom: -@cardview-stackeditem-height * 2;
+        left: 3%;
+    }
+
+    img {
+        border: @px solid @cardview-border-color;
+        .shadow;
+    }
+
+    .collection-banner {
+        position: absolute;
+        text-align: center;
+        top: 51%;
+        left: -1.5%;
+        width: 103%;
+        border-top: @px solid @cardview-border-color;
+        border-bottom: @px solid @cardview-border-color;
+        background-color: @cardview-banner-color;
+        color: @cardview-banner-text-color;
+        .shadow;
+
+        p {
+            padding: 0px @cardview-banner-padding;
+            text-align: left;
+        }
+
+        &:before,
+        &:after {
+            position: absolute;
+            height: 0;
+            width: 0;
+            bottom: -7*@px;
+            border: solid transparent;
+            border-width: 5*@px;
+            pointer-events: none;
+            content: " ";
+        }
+
+        &:before { 
+            border-right-color: @cardview-banner-color;
+            left: -5*@px;
+        }            
+
+        &:after { 
+            border-left-color: @cardview-banner-color;
+            right: -7*@px;
+        }
+    }
+} // card-collection 
+
+.card-page {
+    display: block;
+    margin: 0 @cardview-grid-margin/2 @cardview-grid-margin;
+    text-align: left;
+    font-size: 12*@px;
+    .box-shadow(0 0.1rem 0.1rem rgba(0, 0, 0, 0.25));
+
+    a {
+        overflow: hidden; // can be replaced with a clearfix in case needed
+        display: block;
+        &,
+        a:hover {
+            text-decoration: none;
+            color: @cardview-text-color;
+        }
+    }
+    img {
+        width: 100%;
+        border-bottom: 1px solid @cardview-image-separator-color;
+    }
+    h4,
+    p {
+        margin: 10*@px;
+    }
+    h4 {
+        margin-bottom: 2*@px;
+        font-size: 12*@px;
+        color: @cardview-title-color;
+    }
+    i {
+        .icon-xsmall;
+    }
+    .kind {
+        margin: 0 10*@px;
+    }
+    .date-modified,
+    .date-published {
+        float: left;
+        margin-right: 0;
+    }
+    .variations {
+        float: right;
+    }
+}
+
+.grid-container {
+    overflow: hidden; // can be replaced with a clearfix in case needed
+    margin: @cardview-grid-margin @cardview-grid-margin/2;
+
+    > .grid-1 {
+        float: left;
+        width: 100%;
+    }
+    > .grid-2 {
+        float: left;
+        width: 50%;
+    }
+    > .grid-3 {
+        float: left;
+        width: 33.3333%;
+    }
+    > .grid-4 {
+        float: left;
+        width: 25%;
+    }
+    > .grid-5 {
+        float: left;
+        width: 20%;
+    }
+    > .grid-6 {
+        float: left;
+        width: 16.6666%;
+    }
+}

@@ -420,9 +420,7 @@ CUI.rte.HtmlRules.Links = new Class({
     isPage: function(href) {
         var path;
         if (this.isRelativeLink(href)) {
-            path = CQ.WCM.getPagePath();
-            var parentPath = path.substring(0, path.lastIndexOf("/"));
-            path = CQ.Sling.getContentPath(href, parentPath, true);
+            path = CUI.rte.Utils.resolveRelativePath(href);
         } else if (this.isInternalLink(href)) {
             path = href;
         }
@@ -437,13 +435,7 @@ CUI.rte.HtmlRules.Links = new Class({
 
         // links are already considered URL encoded, so we'll have to decode them
         // before passing the path to #getPageInfo()
-        var pageInfo = CQ.WCM.getPageInfo(decodeURIComponent(path));
-        for (var key in pageInfo) {
-            if (pageInfo.hasOwnProperty(key)) {
-                return true;    // any property means we found a page
-            }
-        }
-        return false;       // an empty pageInfo means we didn't
+        return CUI.rte.Utils.isExistingPage(path);
     }
 
 });
@@ -520,7 +512,7 @@ CUI.rte.HtmlRules.Links.getLinkHref = function(dom) {
  */
 CUI.rte.HtmlRules.Links.removePrefixForInternalLinks = function(href) {
     var currentUrl = location.href;
-    var currentServerPrefix = CQ.HTTP.getSchemeAndAuthority(currentUrl) + "/";
+    var currentServerPrefix = CUI.rte.Utils.getServerPrefix(currentUrl) + "/";
     var prefixLen = currentServerPrefix.length;
     if (href.length > prefixLen) {
         if (href.substring(0, prefixLen) == currentServerPrefix) {

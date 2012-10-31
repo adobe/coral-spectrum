@@ -35,6 +35,13 @@ CUI.rte.adapter.ExtEvent = new Class({
     native: null,
 
     /**
+     * The native ExtJS event (for backward compatibility)
+     * @type CQ.Ext.EventObject
+     * @private
+     */
+    extEvent: null,
+
+    /**
      * Creates a new editor event from the specified ExtJS event.
      * @param {CQ.Ext.EventObject} extEvent The underlying, native ExtJS event
      * @param {CUI.rte.EditContext} editContext The editor context for the event
@@ -42,6 +49,7 @@ CUI.rte.adapter.ExtEvent = new Class({
     construct: function(extEvent, editContext) {
         // console.log(extEvent);
         this.native = extEvent;
+        this.extEvent = extEvent;
         // map to common properties
         var cfg = {
             "type": extEvent.type,
