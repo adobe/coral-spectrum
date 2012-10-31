@@ -31,7 +31,8 @@ module.exports = function(grunt) {
       'components/CUI.DropdownList.js',
       'components/CUI.Dropdown.js',
       'components/CUI.Filters.js',
-      'components/CUI.Slider.js'
+      'components/CUI.Slider.js',
+      'components/CUI.PathBrowser.js'
     ],
     "rte-core": [
       'rte/setup.js',

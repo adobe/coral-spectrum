@@ -1,0 +1,435 @@
+(function($) {
+    CUI.PathBrowser = new Class(/** @lends CUI.PathBrowser# */{
+        toString: 'PathBrowser',
+        extend: CUI.Widget,
+
+        /**
+         @extends CUI.Widget
+         @classdesc An autocompletable path browser widget
+
+         <p>
+            <select data-init="pathbrowser" data-placeholder="Select path">
+                <option>/apps</option>
+                <option>/content</option>
+                <option>/etc</option>
+                <option>/libs</option>
+                <option>/tmp</option>
+                <option>/var</option>
+            </select>
+         </p>
+
+         @desc Creates a path browser field
+         @constructs
+
+         @param {Object}   options                                    Component options
+         @param {Array}    [options.options=empty array]              Array of available options (will be read from &lt;select&gt; by default)
+         @param {Array}    [options.optionDisplayStrings=empty array] Array of alternate strings for display (will be read from &lt;select&gt; by default)
+         @param {Function} [options.optionLoader]                     (Optional) Callback to be called to reload options list
+         @param {boolean}  [options.showTitles=true]                  Should option titles be shown?
+         @param {String}   [options.rootPath='/content']              The root path where completion and browsing starts.
+                                                                      Use the empty string for the repository root (defaults to '/content').
+         @param {String}   [options.rootTitle='Websites']             Custom title for the root path.
+                                                                      Defaults to the value of {@link #rootPath}; if that is not set, it will be
+                                                                      'Websites' (localized), to match the default value of '/content' for the
+                                                                      {@link #rootPath}.
+         @param {String}   [options.placeholder=null]                 Define a placeholder for the input field
+         @param {int}      [options.delay=200]                        Delay before starting autocomplete when typing
+         @param {int}      [options.disabled=false]                   Is this component disabled?
+         @param {String}   [options.name=null]                        (Optional) name for an underlying form field.
+         @param {Function} [options.autocompleteCallback=use options] Callback for autocompletion
+         @param {Function} [options.optionRenderer=default renderer]  (Optional) Renderer for the autocompleter and the tag badges
+         */
+        construct: function(options) {
+            // Set callback to default if there is none
+            if (!this.options.autocompleteCallback) {
+                this.options.autocompleteCallback = this._defaultAutocompleteCallback.bind(this);
+            }
+            if (!this.options.optionRenderer) {
+                this.options.optionRenderer = CUI.PathBrowser.defaultOptionRenderer;
+            }
+
+            // Adjust DOM to our needs
+            this._render();
+
+            // Populate alternative display strings if necessary
+            while (this.options.optionDisplayStrings.length < this.options.options.length) {
+                this.options.optionDisplayStrings.push(this.options.options[this.options.optionDisplayStrings.length]);
+            }
+
+            // Generate Dropdown List widget
+            this.dropdownList = new CUI.DropdownList({
+                element: this.inputElement,
+                positioningElement: this.inputElement,
+                cssClass: "autocomplete-results"
+            });
+
+            // Listen to property changes
+            this.$element.on('change:disabled', this._update.bind(this));
+            this.$element.on('change:placeholder', this._update.bind(this));
+            this.$element.on('change:options', this._changeOptions.bind(this));
+
+            // Listen to events
+            this.$element.on("input", "input", function() {
+                if (this.options.disabled) {
+                    return;
+                }
+                if (this.typeTimeout) {
+                    clearTimeout(this.typeTimeout);
+                }
+                this.typeTimeout = setTimeout(this._inputChanged.bind(this), this.options.delay);
+            }.bind(this));
+
+            this.$element.on("blur", "input", function() {
+                if (this.options.disabled) {
+                    return;
+                }
+                if (this.typeTimeout) {
+                    clearTimeout(this.typeTimeout);
+                }
+                this.typeTimeout = null;
+                // Set to existing selection for single term use
+                if (this.selectedIndex >= 0) {
+                    if (this.inputElement.attr("value") === "") {
+                        this.setSelectedIndex(-1);
+                    } else {
+                        this._update();
+                    }
+                }
+            }.bind(this));
+
+            this.$element.on("keydown", "input", this._keyPressed.bind(this));
+            this.$element.on("keyup", "input", this._keyUp.bind(this));
+
+            this.dropdownList.on("dropdown-list:select", "", function(event) {
+                this.dropdownList.hide(200);
+                this.setSelectedIndex(event.selectedValue * 1);
+            }.bind(this));
+
+            this.$element.on("focus", "input", function() {
+                if (this.options.disabled) {
+                    return;
+                }
+                this.$element.addClass("focus");
+            }.bind(this));
+
+            this.$element.on("blur", "input", function() {
+                if (this.options.disabled) {
+                    return;
+                }
+                this.$element.removeClass("focus");
+            }.bind(this));
+
+            this.$element.on("click touchend", "input", function() {
+                if (this.options.disabled) {
+                    return;
+                }
+                this.inputElement.focus();
+                this._inputChanged();
+            }.bind(this));
+
+        },
+
+        defaults: {
+            autocompleteCallback: null,
+            options: [],
+            optionDisplayStrings: [],
+            optionsLoader: null,
+            showTitles: true,
+            rootPath: "/content",
+            rootTitle: "Websites", // TODO: localize
+            delay: 200,
+            placeholder: null,
+            optionRenderer: null
+        },
+
+        dropdownList: null, // Reference to instance of CUI.DropdownList
+        syncSelectElement: null,
+        inputElement: null,
+        typeTimeout: null,
+        selectedIndex: -1,
+        triggeredBackspace: false,
+
+        /**
+         * @param {int} index Sets the currently selected option by its index.
+         *                    -1 removes any selected index.
+         */
+        setSelectedIndex: function(index) {
+            if (index < -1 || index >= this.options.options.length) {
+                return;
+            }
+            this.inputElement.attr("value", "");
+            this.selectedIndex = index;
+            this._update();
+        },
+
+        /**
+         * @return {int} The currently selected options by index or -1 if none is selected
+         */
+        getSelectedIndex: function() {
+            return this.selectedIndex;
+        },
+
+        /** @ignore */
+        _changeOptions: function(event) {
+            if (event.widget !== this) {
+                return;
+            }
+            this.selectedIndex = -1;
+            this._update();
+        },
+
+        /** @ignore */
+        _render: function() {
+            this._readDataFromMarkup();
+
+            var div;
+            // if current element is select field -> turn into input field, but hold reference to select to update it on change
+            if (this.$element.get(0).tagName === "SELECT") {
+                div = $("<div></div>");
+                this.$element.after(div);
+                this.$element.detach();
+                div.append(this.$element);
+                this.$element = div;
+            }
+
+            // if current element is input field -> wrap it into DIV
+            if (this.$element.get(0).tagName === "INPUT") {
+                div = $("<div></div>");
+                this.$element.after(div);
+                this.$element.detach();
+                div.prepend(this.$element);
+                this.$element = div;
+            }
+
+            // If there was an select in markup: use it for generating options
+            if (this.$element.find("select option").length > 0 && this.options.options.length === 0) {
+                this.options.options = [];
+                this.options.optionDisplayStrings = [];
+                this.$element.find("select option").each(function(i, e) {
+                    this.options.options.push($(e).val());
+                    this.options.optionDisplayStrings.push($.trim($(e).text()));
+
+                    // Save selected state
+                    if ($(e).attr("selected")) {
+                        this.selectedIndex = i;
+                    }
+
+                }.bind(this));
+            }
+
+            this._createMissingElements();
+
+            this.syncSelectElement = this.$element.find("select");
+            this.inputElement = this.$element.find("input");
+
+            this.$element.addClass("pathbrowser");
+            this.$element.removeClass("focus");
+
+            if (!this.options.placeholder) {
+                this.options.placeholder = this.inputElement.attr("placeholder");
+            }
+            if (this.options.name) {
+                this.syncSelectElement.attr("name", this.options.name);
+            }
+
+            this._update();
+        },
+
+        _createMissingElements: function() {
+            if (this.$element.find("select").length === 0) {
+                this.$element.append($("<select></select>"));
+            }
+            if (this.$element.find("input").length === 0) {
+                this.$element.prepend($("<input type=\"text\">"));
+            }
+        },
+
+        /** @ignore */
+        _readDataFromMarkup: function() {
+            if (this.$element.attr("placeholder")) {
+                this.options.placeholder = this.$element.attr("placeholder");
+            }
+            if (this.$element.attr("data-placeholder")) {
+                this.options.placeholder = this.$element.attr("data-placeholder");
+            }
+            if (this.$element.attr("disabled") || this.$element.attr("data-disabled")) {
+                this.options.disabled = true;
+            }
+            if (this.$element.attr("data-option-renderer")) {
+                // Allow to choose from default option renderers
+                this.options.optionRenderer = CUI.PathBrowser[this.$element.attr("data-option-renderer") + "OptionRenderer"];
+            }
+            if (this.$element.attr("data-option-loader")) {
+                try {
+                    var Fn = Function;
+                    this.optionLoader = new Fn("path", this.$element.attr("data-option-loader"));
+                } catch (e) {
+                    // TODO: what should we do? just ignore? raise an error in the console
+                }
+            }
+        },
+
+        /** @ignore */
+        _update: function() {
+            if (this.options.placeholder) {
+                this.inputElement.attr("placeholder", this.options.placeholder);
+            }
+
+            if (this.options.disabled) {
+                this.$element.addClass("disabled");
+                this.inputElement.attr("disabled", "disabled");
+            } else {
+                this.$element.removeClass("disabled");
+                this.inputElement.removeAttr("disabled");
+            }
+
+            if (this.syncSelectElement) {
+                this.syncSelectElement.find("option:selected").removeAttr("selected");
+            }
+            if (this.selectedIndex >= 0) {
+                if (this.syncSelectElement) {
+                    $(this.syncSelectElement.find("option").get(this.selectedIndex)).attr("selected", "selected");
+                }
+                var option = this.options.options[this.selectedIndex];
+                this.inputElement.attr("value", option);
+            } else {
+                this.inputElement.attr("value", "");
+            }
+        },
+
+        /** @ignore */
+        _keyUp: function(event) {
+            var key = event.keyCode;
+            if (key === 8) {
+                this.triggeredBackspace = false; // Release the key event
+            }
+        },
+
+        /** @ignore */
+        _keyPressed: function(event) {
+            var key = event.keyCode;
+            if (!this.dropdownList.isVisible()) {
+                if (key === 40) {
+                    this._inputChanged(); // Show box now!
+                    event.preventDefault();
+                }
+            }
+        },
+
+        /** @ignore */
+        _inputChanged: function() {
+            var self = this;
+
+            var searchFor = this.inputElement.attr("value");
+            if (searchFor.length > 0) {
+                this.options.autocompleteCallback(searchFor)
+                    .done(
+                        function(results) {
+                            self._showAutocompleter(results);
+                        }
+                    )
+                ;
+            } else {
+                this.dropdownList.hide();
+            }
+        },
+
+        /** @ignore */
+        _showAutocompleter: function(results) {
+            this.dropdownList.hide();
+
+            if (results.length === 0) {
+                return;
+            }
+
+            var optionRenderer = function(iterator, value) {
+                return (this.options.optionRenderer.bind(this))(iterator, value);
+            };
+
+            this.dropdownList.set("optionRenderer", optionRenderer.bind(this));
+            this.dropdownList.set("options", results);
+
+            this.dropdownList.show();
+        },
+
+        /** @ignore */
+        _defaultAutocompleteCallback: function(path) {
+            var self = this;
+            var def = $.Deferred();
+
+            // Check if the input value starts and ends with a slash
+            // If so, the options loader will be called if it exists, in order
+            // to refresh the available options list.
+            // Otherwise, it will just filter the options to only show the
+            // matching ones in the auto completer div.
+            if (/^\//.test(path) && /\/$/.test(path) && self.optionLoader) {
+                if (path === "/") {
+                    // Use configured root path
+                    path = self.rootPath ? self.rootPath : "/";
+                } else {
+                    // Remove final slash
+                    path = path.replace(/\/$/, "");
+                }
+
+                // Load new options
+                self.optionLoader(path).done(
+                    function(json) {
+                        var newOptions = [];
+                        var newOptionDisplayStrings = [];
+                        $.each(json.pages, function(index, value) {
+                            newOptions.push(value.path);
+                            if (self.options.showTitles) {
+                                newOptionDisplayStrings.push(value.title);
+                            }
+                        }.bind(self));
+                        self.options.options = newOptions;
+                        if (self.options.showTitles) {
+                            self.options.optionDisplayStrings = newOptionDisplayStrings;
+                        }
+                        def.resolve(self._filterOptions(path));
+                    }
+                );
+            } else {
+                def.resolve(self._filterOptions(path));
+            }
+
+            return def.promise();
+        },
+
+        _filterOptions: function(searchFor) {
+            var result = [];
+
+            $.each(this.options.options, function(key, value) {
+                if (value.toLowerCase().indexOf(searchFor.toLowerCase(), 0) >= 0) {
+                    result.push(key);
+                }
+            }.bind(this));
+
+            return result;
+        }
+
+    });
+
+    CUI.util.plugClass(CUI.PathBrowser);
+
+    // Data API
+    if (CUI.options.dataAPI) {
+        $(document).ready(function() {
+            $("[data-init='pathbrowser']").pathBrowser();
+        });
+    }
+
+}(window.jQuery));
+
+
+CUI.PathBrowser.defaultOptionRenderer = function(iterator, index) {
+    var value = this.options.options[index];
+    var markup = "<span class=\"pathbrowser-autocomplete-item-value\">" + value + "</span>";
+
+    // Use alternate display strings if possible
+    if (this.options.showTitles && this.options.optionDisplayStrings[index]) {
+        markup += "<span class=\"pathbrowser-autocomplete-item-title\">" + this.options.optionDisplayStrings[index] + "</span>";
+    }
+
+    return $(markup);
+};

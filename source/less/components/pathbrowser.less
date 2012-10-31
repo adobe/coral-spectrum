@@ -1,0 +1,100 @@
+/**
+*
+* A path browser field.
+*
+* Uses styles from textfields and dropdown lists!
+*
+*/
+
+.pathbrowser {
+    display: inline-block;
+    width: 50rem;  /* Needs fixed width for floating term elements */
+
+    select {
+        display: none;
+    }
+
+    input[type=text] {
+
+        .box-sizing(border-box);
+        border-radius: 0; // Fix for iOS >=5
+        -webkit-appearance: none; // Fix for iOS <5
+
+        width: 13rem;
+
+        font-size: 0.8125rem;
+
+        height: 2rem;
+        padding: 0.25rem 0.5rem 0.25rem 0.25rem;
+        margin: 0 0 0.5rem 0;
+
+        border: @px solid @textfield-border-color;
+
+        &:disabled {
+            background: @textfield-disabled-background-color url('../images/components/filters/magnifier.png') no-repeat 0.5rem 0.4rem;
+            background-size: 1.1rem;
+        }
+
+        &:focus {
+            .glow();
+            outline: none;
+        }
+
+    }
+
+    button {
+        font-size: 1rem;
+
+        vertical-align: baseline;
+
+        background: none;
+        filter: none; // IE fix
+        border: 0;
+
+        width: auto;
+        min-width: 1rem;
+
+        padding: 0;
+        margin: 0;
+    }
+
+    &.disabled input {
+        background: @textfield-disabled-background-color url('../images/components/filters/magnifier.png') no-repeat 0.5rem 0.4rem;
+        background-size: 1.1rem;
+    }
+
+    &.error input {
+        .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+    }
+
+    .autocomplete-results {
+        em {
+            font-weight: bold;
+            letter-spacing: 0.1rem;
+            font-style: normal;
+        }
+
+        span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .pathbrowser-autocomplete-item-value {
+            clear: left;
+            display: block;
+            float: left;
+            overflow: hidden;
+            width: 100px;
+        }
+
+        .pathbrowser-autocomplete-item-title {
+            display: block;
+            font-size: 10px;
+            font-style: italic;
+            padding-left: 110px;
+            padding-top: 2px;
+        }
+    }
+
+}
