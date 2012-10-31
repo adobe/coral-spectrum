@@ -10,37 +10,152 @@
     margin: 0.125rem 0;  // Give a top/bottom margin so they stack right
     position: relative;
 
+    button {
+      display: inline-block;
+      vertical-align: middle;
+      .box-sizing(border-box);
+      margin: 0; // Reset default margin on button tag
+      margin-left: -4*@px; /* Remove space between inline-block elements */
+      padding: 0.4375rem 0.5rem 0.5rem;
+      height: @dropdown-text-size+0.4375rem*2+@px*2;
+      height: 2rem;
+      min-width: 2rem;
+      width: 2rem;
+      border: @px solid @dropdown-border-color;
+      background-size: 1.0rem 1.0rem;
+      background: @dropdown-gradient-start-color;
+      .gradient(@dropdown-gradient-start-color, @dropdown-gradient-end-color);
+      font-family: @font-base-family;
+      font-size: @dropdown-text-size;
+      line-height: @dropdown-text-size;
+      font-weight: normal;
+      color: @dropdown-text-color;
+      text-shadow: none;
+
+      &:disabled {
+        cursor: default;
+        border-color: @button-disabled-border-color;
+        color: @button-disabled-text-color;
+        text-shadow: none;
+        background: @button-disabled-background-color;
+      }
+
+      &:hover:not([disabled]) {
+        border: @px solid @dropdown-border-color;
+        background: @dropdown-gradient-start-color;
+        .gradient(@dropdown-gradient-start-color, @dropdown-gradient-start-color);
+      }
+
+      &:active:not([disabled]) {
+        border: @px solid @dropdown-border-color;
+        background: @dropdown-gradient-end-color;
+        .gradient(@dropdown-gradient-end-color, @dropdown-gradient-end-color);
+        .box-shadow(inset 0 0 0.5rem rgba(0, 0, 0, 0.25));
+      }
+    }
+
     .datepicker-calendar {
       position: absolute;
-      top: 48*@px;
+      top: 3rem; /* 48px */ /* TODO: place popover relative to the action button (above or below) */
       left: 0;
-      width: 342px; /* TODO: remove this hardcoded value */
+      width: 21.375rem; /* 342px */
       border: 10*@px solid @popover-border-color; /* TODO: 8px in .popover, but design shows 10px */
 
+      /* TODO: this is an override of popover .arrow-top. Increases margin to 10px to match design document
+       * should margins consistently be 8px or 10px for popovers, change accordingly.
+       */
       &.arrow-top:before {
-        bottom: 100%; // position the border on the top
         margin-bottom: 10*@px;
       }
 
-      .popover-inner {
-        background: rgb(255,255,255);
-        border: 1px solid rgb(70,70,70);
+      /* TODO: Adapted from .modal-header. This should be handled by the popover and make use of variables */
+      .popover-header {
+        position: relative;
+
+        .box-sizing(border-box);
+        width: 100%;
+        height: @modal-header-height;
+
+        background: @modal-header-background-color;
+
+        border: @px solid @modal-outline-color;
+        border-bottom: 0;
+
+        // Bottom border, easiest with a box shadow
+        .box-shadow(inset 0 -1*@px 0 @modal-header-border-color);
+
+        h2 {
+          position: absolute;
+          left: 0;
+          top: 0;
+
+          .box-sizing(border-box);
+          width: 100%;
+          height: 3.25rem;
+          margin: 0;
+          padding: 0 3rem 0 1rem;
+
+          line-height: 3.25rem;
+
+          .ellipsis();
+        }
+
+        button.prev-month,
+        button.next-month {
+          position: absolute;
+          right: 0;
+          top: 0;
+          color: rgb(90,90,90);
+          padding: 0.1875rem; /* 3px */
+          margin: 0.1875rem; /* 3px */
+          font-size: 2.3125rem; /* 37px */
+          line-height: 2.3125rem; /* 37px */
+          border: 0;
+          background: 0;
+          width: auto;
+          height: auto;
+
+          &:hover {
+            border: 0 none;
+            background: none;
+            color: rgb(44,44,44);
+          }
+          &:active {
+            border: 0 none;
+            background: none;
+          }
+        }
+
+        button.prev-month {
+          right: 2.5rem;
+          margin-right: 0;
+        }
+        button.next-month {
+          margin-right: 0.4375rem; /* 7px */
+          margin-left: 0;
+        }
       }
 
-      .popover-heading {
-        background: rgb(225,225,225); /* TODO: this should be handled by the popover and make use of variables */
-        padding: 10px 10px 10px 20px;
-        border-bottom: 1px solid rgb(191,191,191);
-        font-size: 22px;
-        color: rgb(60,60,60);
+      // TODO: taken from .modal-body for styling. Should belong to popover
+      .popover-body {
+        .box-sizing(border-box);
+        width: 100%;
+        padding: 0;
+
+        .scrollable();
+
+        border: @px solid @modal-outline-color;
+        border-top: 0;
+        border-bottom: 0;
       }
 
       table {
+        table-layout: fixed;
+        border-spacing: 1px;
         width: 100%;
         margin: 0;
         background-color: rgb(230,230,230);
-        border-spacing: 1px;
-        font-size: 13px;
+        font-size: @datepicker-calendar-font-size;
 
         a, span {
           background: rgb(255,255,255);
@@ -69,23 +184,62 @@
           a {
             color: @datepicker-day;
             text-decoration: none;
+            position:relative;
+            z-index: 100;
 
             &:hover {
               text-decoration: none;
               border: 1px solid @datepicker-day-hover-border-color;
               background: @datepicker-day-hover-background-color;
               margin: -1px;
-              padding-right: 6px;
             }
           }
 
-          &.day-selected {
+          &.datepicker-today {
+            a {
+              font-weight: bold;
+            }
+          }
+
+          &.datepicker-day-selected {
             a {
               border: 1px solid @datepicker-day-selected-border-color;
               background: @datepicker-day-selected-background-color;
               color: @datepicker-day-selected-text-color;
               margin: -1px;
               padding-right: 6px;
+              z-index: 200;
+            }
+            &:first-child {
+              a {
+                border-left: 0 none;
+                padding-right: 5px;
+              }
+            }
+
+            &:last-child {
+              a {
+                border-right: 0 none;
+                padding-right: 5px;
+              }
+            }
+          }
+
+          &:first-child {
+            a {
+              &:hover {
+                border-left: 0 none;
+                padding-right: 5px;
+              }
+            }
+          }
+
+          &:last-child {
+            a {
+              &:hover {
+                border-right: 0 none;
+                padding-right: 5px;
+              }
             }
           }
 
@@ -95,99 +249,12 @@
         }
       }
     }
-
-    button {
-      display: inline-block;
-      background-size: 1.0rem 1.0rem;
-      .box-sizing(border-box);
-
-      vertical-align: middle;
-
-      min-width: 135*@px;
-      height: 2rem;
-
-      margin: 0;  // Reset default margin on button tag
-
-      border: @px solid @dropdown-border-color;
-      background: @dropdown-gradient-start-color;
-      .gradient(@dropdown-gradient-start-color, @dropdown-gradient-end-color);
-
-      font-family: @font-base-family;
-      font-size: @dropdown-text-size;
-      line-height: @dropdown-text-size;
-      font-weight: normal;
-      color: @dropdown-text-color;
-      text-shadow: none;
-
-      height: @dropdown-text-size+0.4375rem*2+@px*2;
-
-      min-width: 2rem;
-      width: 2rem;
-      height: 2rem;
-      padding: 0.4375rem 0.5rem 0.5rem;
-
-      &:disabled {
-        cursor: default;
-        border-color: @button-disabled-border-color;
-        color: @button-disabled-text-color;
-        text-shadow: none;
-        background: @button-disabled-background-color;
-      }
-
-      &:hover:not([disabled]) {
-        border: @px solid @dropdown-border-color;
-        background: @dropdown-gradient-start-color;
-        .gradient(@dropdown-gradient-start-color, @dropdown-gradient-start-color);
-      }
-
-      &:active:not([disabled]) {
-        border: @px solid @dropdown-border-color;
-        background: @dropdown-gradient-end-color;
-        .gradient(@dropdown-gradient-end-color, @dropdown-gradient-end-color);
-        .box-shadow(inset 0 0 0.5rem rgba(0, 0, 0, 0.25));
-      }
-    }
-
-    button.prev-month,
-    button.next-month {
-      float: right;
-      display: inline-block;
-      font-size: 2.5rem;
-      line-height: 1.6rem;
-      color: rgb(90,90,90);
-      padding: 0;
-      margin: 0;
-      border: 0;
-      background: 0;
-      width: auto;
-      height: auto;
-
-      &:hover {
-        border: 0 none;
-        background: none;
-        color: rgb(44,44,44);
-      }
-    }
-
-    input[type=text] {
-      .box-sizing(border-box);
-      border-radius: 0; // Fix for iOS >=5
-      -webkit-appearance: none; // Fix for iOS <5
-      vertical-align: middle;
-      height: 2rem;
-
-      font-family: @font-base-family;
-      font-size: @dropdown-text-size;
-      line-height: @dropdown-text-size;
-
-      padding: 0.4375rem;
-      margin: 0;
-      border-right: 0;
-    }
 }
 
 // The dropdown version of the datepicker
-.datepicker-dropdown {
+// (An alternative idea to the popover solution
+// remove the below if popover is approved)
+/*.datepicker-dropdown {
   display: inline-block;
   margin: 0.125rem 0;  // Give a top/bottom margin so they stack right
   position: relative;
@@ -265,5 +332,5 @@
     border-bottom: @px solid @dropdown-border-color;
     background-color: #fff;
   }
-}
+}*/
 
