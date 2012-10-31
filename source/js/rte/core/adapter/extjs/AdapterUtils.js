@@ -16,36 +16,32 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CUI.rte.Query = function() {
+CUI.rte.AdapterUtils = function() {
 
-    return (CUI.rte._adapter == "ext" ? {
+    return {
 
-        selectNode: function(q, dom) {
-            return CQ.Ext.DomQuery.selectNode(q, dom);
+        isArray: function(obj) {
+            return CQ.Ext.isArray(obj);
         },
 
-        select: function(q, dom) {
-            return CQ.Ext.DomQuery.select(q, dom);
-        }
+        isString: function(obj) {
+            return CQ.Ext.isString(obj);
+        },
 
-    } : function($) {
+        apply: function(obj, config, defaults) {
+            return CQ.Ext.apply(obj, config, defaults);
+        },
 
-        return {
+        getPagePosition: function(dom) {
+            return CQ.Ext.get(dom).getXY();
+        },
 
-            selectNode: function(q, dom) {
-                var result = $(dom).find(q);
-                if (result.length == 0) {
-                    return null;
-                }
-                return result[0];
-            },
+        jsonDecode: function(str) {
+            return CQ.Ext.util.JSON.decode(str);
+        },
 
-            select: function(q, dom) {
-                return $(dom).find(q);
-            }
+        BLANK_IMAGE_URL: CQ.Ext.BLANK_IMAGE_URL
 
-        };
-
-    }(window.jQuery));
+    };
 
 }();

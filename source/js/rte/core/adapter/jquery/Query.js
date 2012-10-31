@@ -16,7 +16,22 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-(function() {
-    CUI.rte.ui.ToolkitRegistry.initialize("stub");
-    // CUI.rte.ui.ToolkitRegistry.initialize("cui");
-})();
+CUI.rte.Query = function($) {
+
+    return {
+
+        selectNode: function(q, dom) {
+            var result = $(dom).find(q);
+            if (result.length == 0) {
+                return null;
+            }
+            return result[0];
+        },
+
+        select: function(q, dom) {
+            return $(dom).find(q);
+        }
+
+    };
+
+}(window.jQuery);

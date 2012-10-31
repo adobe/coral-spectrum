@@ -16,7 +16,33 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-(function() {
-    CUI.rte.ui.ToolkitRegistry.initialize("stub");
-    // CUI.rte.ui.ToolkitRegistry.initialize("cui");
-})();
+CUI.rte.AdapterUtils = function($) {
+
+    return {
+
+        isArray: function(obj) {
+            return $.isArray(obj);
+        },
+
+        isString: function(obj) {
+            return $.isString(obj);
+        },
+
+        apply: function(obj, config, defaults) {
+            return $.extend(obj, config, defaults);
+        },
+
+        getPagePosition: function(dom) {
+           var pos = $(dom).offset();
+           return [ pos.left, pos.top ];
+        },
+
+        jsonDecode: function(str) {
+            return $.parseJSON(str);
+        },
+
+        BLANK_IMAGE_URL: "../images/components/rte/blank.png"
+
+    };
+
+}(window.jQuery);

@@ -26,7 +26,7 @@ CUI.rte.Utils = function() {
         return hooks;
     };
 
-    var commons = {
+    return {
 
         scope: function(fn, scope) {
             return function() {
@@ -123,65 +123,22 @@ CUI.rte.Utils = function() {
             return getHooks().getServerPrefix(url);
         },
 
-        URL_IMAGE: "image"
+        URL_IMAGE: "image",
+
+        // mapping adapter specific stuff:
+
+        isArray: CUI.rte.AdapterUtils.isArray,
+
+        isString: CUI.rte.AdapterUtils.isString,
+
+        apply: CUI.rte.AdapterUtils.apply,
+
+        getPagePosition: CUI.rte.AdapterUtils.getPagePosition,
+
+        jsonDecode: CUI.rte.AdapterUtils.jsonDecode,
+
+        BLANK_IMAGE_URL: CUI.rte.AdapterUtils.BLANK_IMAGE_URL
 
     };
-
-    var specific = (CUI.rte._adapter == "ext" ? {
-
-        isArray: function(obj) {
-            return CQ.Ext.isArray(obj);
-        },
-
-        isString: function(obj) {
-            return CQ.Ext.isString(obj);
-        },
-
-        apply: function(obj, config, defaults) {
-            return CQ.Ext.apply(obj, config, defaults);
-        },
-
-        getPagePosition: function(dom) {
-            return CQ.Ext.get(dom).getXY();
-        },
-
-        jsonDecode: function(str) {
-            return CQ.Ext.util.JSON.decode(str);
-        },
-
-        BLANK_IMAGE_URL: CQ.Ext.BLANK_IMAGE_URL
-
-    } : function($) {
-
-        return {
-
-            isArray: function(obj) {
-                return $.isArray(obj);
-            },
-
-            isString: function(obj) {
-                return $.isString(obj);
-            },
-
-            apply: function(obj, config, defaults) {
-                return $.extend(obj, config, defaults);
-            },
-
-            getPagePosition: function(dom) {
-               var pos = $(dom).offset();
-               return [ pos.left, pos.top ];
-            },
-
-            jsonDecode: function(str) {
-                return $.parseJSON(str);
-            },
-
-            BLANK_IMAGE_URL: "../images/components/rte/blank.png"
-
-        };
-
-    }(window.jQuery));
-
-    return specific.apply(specific, commons);
 
 }();
