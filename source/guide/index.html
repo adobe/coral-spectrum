@@ -951,9 +951,16 @@
             <div class="componentSample">
                 <div class="example clearfix">
                     <div class="column left">
-                        <p>Input format</p>
-                        <input type="date" value="12/11/1986"><br/>
-                        <p>Rendered format</p>
+                        <div class="datepicker" data-init="datepicker">
+                            <input type="text" value="12/11/1986">
+                            <button><span class="icon-calendar small">Datepicker</span></button>
+                        </div>
+                        <div class="datepicker" data-init="datepicker">
+                            <input type="text" value="12/11/1986" disabled>
+                            <button disabled><span class="icon-calendar small">Datepicker</span></button>
+                        </div>
+
+                        <p>Example markup (for development)</p>
                         <div class="datepicker">
                             <input type="text" value="12/11/1986"><!--
                          --><button><span class="icon-calendar small">Datepicker</span></button>
@@ -1039,7 +1046,14 @@
                     </div>
                 </div>
               <pre class="prettyprint linenums">
-&lt;input type=&quot;date&quot;&gt;
+&lt;div class=&quot;datepicker&quot; data-init=&quot;datepicker&quot;&gt;
+  &lt;input type=&quot;text&quot; value=&quot;12/11/1986&quot;&gt;
+  &lt;button&gt;&lt;span class=&quot;icon-calendar small&quot;&gt;Datepicker&lt;/span&gt;&lt;/button&gt;
+&lt;/div&gt;
+&lt;div class=&quot;datepicker&quot; data-init=&quot;datepicker&quot;&gt;
+  &lt;input type=&quot;text&quot; value=&quot;12/11/1986&quot; disabled&gt;
+  &lt;button&gt;&lt;span class=&quot;icon-calendar small&quot;&gt;Datepicker&lt;/span&gt;&lt;/button&gt;
+&lt;/div&gt;
 </pre>
                 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/> <!-- so that we can see the datepicker popover for now -->
             </div>
