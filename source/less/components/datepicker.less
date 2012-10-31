@@ -10,6 +10,15 @@
     margin: 0.125rem 0;  // Give a top/bottom margin so they stack right
     position: relative;
 
+    &.focus > button,
+    &.focus input {
+      .glow();
+    }
+    &.error > button,
+    &.error input {
+      .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+    }
+
     button {
       display: inline-block;
       vertical-align: middle;
