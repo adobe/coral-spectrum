@@ -25,6 +25,8 @@
         this._addMissingElements();
         this._updateState();
         
+        //if (this.options.selectedDate) this.gotoDate(this._formatDate(this.options.selectedDate));
+        
         this.$element.on("click", function() {
             if (this.options.disabled) return;
             this.$element.find("input").focus();
@@ -106,6 +108,11 @@
             this._hidePicker();
         } else {
             this.$element.find("input,button").removeAttr("disabled");
+        }
+        if (!this.options.selectedDate || isNaN(this.options.selectedDate.getFullYear())) {
+            this.$element.addClass("error");
+        } else {
+            this.$element.removeClass("error");            
         }
     },
     
@@ -216,7 +223,9 @@
             $calendar.find(".popover-body").find("table").remove();
             $calendar.find(".popover-body").find(".sliding-container").remove();
             $calendar.find(".popover-body").append(table);
-        }        
+        }
+
+        this._updateState();
     },
         
     _slideCalendar: function(oldtable, newtable, isLeft) {
