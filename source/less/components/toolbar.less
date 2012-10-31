@@ -1,33 +1,46 @@
 /**
-  Class: div.toolbar
-  The top toolbar for pages
+Class: .toolbar
+The top toolbar with action icons
 */
-div.toolbar {
+.toolbar {
+  position: relative;
+  height: 46*@px;
+  
   border-bottom: @px solid @toolbar-border-color;
-  margin: 0.25rem; // TODO: get exact margins
 
-  // Don't use flexbox here. inline-block + absolute positioning might work well enough
-  // See header.less for an example of the above technique
-
-  div:first-child {
-
+  .left,
+  .right,
+  .middle {
+    float: none;
+    position: absolute;
+    top: 0;
+    
+    padding: 11*@px 0; // "vertically center"
   }
+  
+  .left {
+    z-index: 1;
+    left: 0;
+  }
+  
+  .right {
+    z-index: 1;
+    right: 0;
+  }
+  
+  .middle {
+    z-index: 0;
+    left: 0;
+    right: 0;
+    
+    text-align: center; // make text and inline-block centered
+    
+    h1 {
+      margin: 0;
 
-  div.buttons {
-    i {
-      margin: 0 @toolbar-icon-margin;
-
-      cursor: pointer;
-
-      &.spacer {
-        cursor: default;
-
-        display: inline-block;
-        font-size: inherit;
-        width: @px;
-        height: 1rem;
-        background-color: @toolbar-spacer-color;
-      }
+      .regularText; // AdobeClean, not light
+      line-height: 1.5;
+      font-size: 18*@px;
     }
   }
 }

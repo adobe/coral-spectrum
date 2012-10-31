@@ -17,7 +17,7 @@
 **************************************************************************/
 
 window.CUI = window.CUI || { };
-CUI.rte = {};
+CUI.rte = CUI.rte || {};
 CUI.rte.commands = {};
 CUI.rte.plugins = {};
 CUI.rte.adapter = {};
@@ -29,8 +29,12 @@ CUI.rte.ui.stub = {};
 (function() {
 
     // determine which implementations to use
-    CUI.rte._adapter = ((typeof(CQ) !== "undefined") && CQ.Ext ? "ext" : "jquery");
+    if (!CUI.rte._adapter) {
+        CUI.rte._adapter = ((typeof(CQ) !== "undefined") && CQ.Ext ? "ext" : "jquery");
+    }
     // CUI.rte._toolkit = ((typeof(CQ) !== "undefined") && CQ.Ext ? "ext" : "cui");
-    CUI.rte._toolkit = ((typeof(CQ) !== "undefined") && CQ.Ext ? "ext" : "stub");
+    if (!CUI.rte._toolkit) {
+        CUI.rte._toolkit = ((typeof(CQ) !== "undefined") && CQ.Ext ? "ext" : "stub");
+    }
 
 })();

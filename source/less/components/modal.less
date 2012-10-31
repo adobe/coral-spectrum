@@ -124,6 +124,33 @@
       margin-left: 0rem;
     }
   }
+  
+  &.fullscreen {
+    width: auto;
+    margin: 0;
+    left: 5%;
+    right: 5%;
+    top: 5%;
+    bottom: 5%;
+    
+    .modal-body {
+      position: absolute;
+      top: @modal-header-height;
+      bottom: 0;
+      
+      width: 100%;
+    }
+    
+    .modal-footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+
+      width: 100%;
+
+      .box-sizing(border-box);
+    }
+  }
 
   &.error,
   &.notice,

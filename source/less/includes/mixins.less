@@ -118,7 +118,7 @@
 /**
  * Mixin: .transition
  */
-.transition (@transition) {
+.transition(@transition) {
   -webkit-transition: @transition;  
   -moz-transition:    @transition;
   -ms-transition:     @transition; 
@@ -188,4 +188,25 @@
 .no-select() {
   -webkit-touch-callout: none;
   .user-select(none);
+}
+
+/**
+ * Mixin: .placeholder
+ * input field placeholder font color
+ */
+.placeholder(@color) {
+  input::-webkit-input-placeholder { color: @color; }
+  input:-moz-placeholder { color: @color; }
+  textarea::-webkit-input-placeholder { color: @color; }
+  textarea:-moz-placeholder { color: @color; }
+}
+
+/**
+ * Mixin:; .box-sizing
+ * box-sizing mixin
+ */
+.box-sizing(@type: border-box) {
+  -webkit-box-sizing: @type;
+  -moz-box-sizing:    @type;
+  box-sizing:         @type;
 }

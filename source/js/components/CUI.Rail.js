@@ -71,7 +71,7 @@ $('#myRail').rail({
     &lt;/section&gt;
     &lt;section class=&quot;foldable&quot;&gt;
         &lt;h4 class=&quot;heading&quot;&gt;Revised asset ready for review&lt;/h4&gt;
-        &lt;div class=&quot;fold small grey light&quot;&gt;Modified yesterday by Rob Cobourn&lt;/div&gt;
+        &lt;div class=&quot;fold smallText greyText lightText&quot;&gt;Modified yesterday by Rob Cobourn&lt;/div&gt;
         &lt;p class=&quot;small&quot;&gt;I created a new segment thing for the...&lt;/p&gt;
     &lt;/section&gt;
   &lt;/div&gt;
@@ -104,7 +104,8 @@ $('#myRail').rail({
               content: e.find('.wrap'),
               ptr: e.find('.pull-to-refresh') 
             },
-            foldable = _.content.find('section.foldable');
+            foldable = _.content.find('section.foldable'),
+            switcher = _.content.find('.rail-switch');
 
       // Accessibility
       _makeAccessible(e);
@@ -118,6 +119,11 @@ $('#myRail').rail({
           f.toggleClass('open');
         });
       });
+
+      // rail switcher
+      if (switcher.length > 0) {
+        this._initRailSwitcher(_.content, switcher);
+      }
 
       // accordion
       if (_.content.hasClass('accordion')) {
@@ -250,18 +256,18 @@ $('#myRail').rail({
 
     _initAccordion: function (con) {
       var activeAccordion = 'active-accordion',
-          containerHeight = con.outerHeight(),
           accordions = con.find('section'),
-          closedHeight = accordions.outerHeight(true) + 1, // height of one closed accordion
-          contentHeight = containerHeight - (accordions.length * closedHeight); // height of the content for one open accordion
+          closedHeight = accordions.outerHeight(true); // height of one closed accordion
 
 
       accordions.each(function (i, e) {
         var f = $(e),
+            containerHeight = con.outerHeight(),
+            contentHeight = containerHeight - (accordions.length * closedHeight), // height of the content for one open accordion
             trigger = f.find('.heading'),
             fold = f.find('.fold');
 
-        trigger.fipo('tap', 'click', function (ev) { // TODO make that for touch
+        trigger.fipo('tap', 'click', function (ev) {
           var curHeight = fold.height(),
               targetHeight,
               cur = con.data(activeAccordion);
@@ -275,6 +281,37 @@ $('#myRail').rail({
 
         });
       });  
+    },
+
+    _initRailSwitcher: function (con, switcher) {
+      var trigger = switcher.find('nav a'),
+          views = con.find('.rail-view'),
+          active = con.find('.rail-view.active'),
+          search = switcher.find('input'),
+          searchClear = switcher.find('.clear-cmd'),
+          searchQuery = switcher.find('.clear-query'),
+          cl = 'active';
+
+      // init switcher
+      trigger.each(function (i, e) {
+        var t = $(e),
+            viewName = t.data('view'),
+            view = con.find('.rail-view[data-view="'+ viewName +'"]');
+
+        t.fipo('tap', 'click', function (ev) {
+          views.removeClass(cl);
+          trigger.removeClass(cl);
+
+          $(this).addClass(cl);
+          view.toggleClass('active'); 
+        });
+      });
+
+      // init search buttons
+      searchClear.fipo('tap', 'click', function (ev) {
+        search.val('');
+        search.trigger('focus');
+      });
     }
     
   });

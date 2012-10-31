@@ -6,18 +6,18 @@ div.rail {
   max-width: 35%;
 
   background-color: @rail-background-color;
+  height: 100%;
 
   @pull-to-request-size: 3rem;
 
   // make it scrollable
-  &.scroll {
-    height: 100%;
+  .scroll {
     .scrollable;
+    overflow-x: hidden;
   }
 
   // fixed content
   &.fixed {
-    height: 100%;
     overflow-y: hidden;  
   }
 
@@ -44,6 +44,11 @@ div.rail {
   &.right {
     .box-shadow(inset @rail-shadow-distance 0 @rail-shadow-spread rgba(0, 0, 0, @rail-shadow-opacity));
     float: right;
+  }
+
+  // add dark rail background color
+  .dark {
+    background-color: @rail-dark-background-color;
   }
 
   >div.pull-to-refresh {
@@ -117,9 +122,14 @@ div.rail {
 
     // cloasable sections
     .closeable() {
-      >.heading:before {
+      position: relative;
+
+      >.heading:after {
         content: "\25B8";
-        padding-right: 0.5rem;  
+        position: absolute;
+        right: 24*@px;
+        font-size: 1rem;
+        line-height: 1rem;
       }  
 
       >.fold {
@@ -128,8 +138,239 @@ div.rail {
       }
 
       &.open {
-        >.heading:before {
+        >.heading:after {
           content: "\25BE";
+        }
+      }
+    }
+
+    // top rail switch
+    >.rail-switch {
+      height: 98*@px;
+
+      >nav {
+        height: 48*@px;
+        line-height: 48*@px;
+        background-color: @rail-dark-background-color;
+
+        padding: 0 16*@px;
+
+        >a {
+          display: inline-block;
+          text-align: center;
+          width: 20*@px;
+          position: relative;
+
+          &.active {
+            &:before,
+            &:after,
+            >span:before {
+              border: solid transparent;
+              content: " ";
+              height: 0;
+              width: 0;
+              position: absolute;
+              pointer-events: none;
+              left: 50%;
+            }
+
+            >span:before {
+              border-width: 0.5rem;
+              margin-left: -0.5rem;
+              bottom: -@px;
+              border-bottom-color: @rail-section-highlight-color;
+            }
+
+            &:before {
+              border-width: 0.5rem;
+              margin-left: -0.5rem;
+              bottom: 0;
+              border-bottom-color: @rail-section-border-color;
+            }
+
+            &:after {
+              border-width: 0.5rem;
+              margin-left: -0.5rem;
+              bottom: -2*@px;
+              border-bottom-color: @rail-background-color;
+            }
+          }
+
+          
+        }
+      }
+
+      >div.search {
+        border-top: @px solid @rail-section-border-color;
+        .box-shadow(inset 0 @px 0 @rail-section-highlight-color);
+        height: 28*@px;
+        padding: 10*@px;
+
+        >form {
+          .box-sizing();
+
+          height: 30*@px;
+          width: 100%;
+
+          background-color: @rail-dark-background-color;
+          border: @px solid @rail-section-border-color;
+          .box-shadow(inset 0 3*@px 3*@px -3*@px #0a0a0a);
+
+          >a.query-cmd, 
+          >a.clear-cmd {
+            display: block;
+            float: right;
+          }
+
+          >a.clear-cmd {
+            .clearfix;
+          }
+
+          >input[type="text"] {
+            .placeholder(@rail-background-color);
+
+            margin: 0;
+            
+            font-size: 0.85rem;
+            color: @rail-font-color;
+            height: 28*@px;
+            width: 145*@px;
+
+            background-color: transparent;
+            border: none;
+
+            &:focus {
+              box-shadow: none;
+            }
+          }
+
+          >a.query-cmd, >a.clear-cmd {
+            width: 20*@px;
+            text-align: right;
+            margin: 5*@px;
+          }
+
+          >a.clear-cmd {
+            border-left: @px solid @rail-section-highlight-color;
+            color: @rail-section-highlight-color;
+            padding-right: 5*@px;
+            font-family: AdobeCleanLight;
+
+            &:hover {
+              text-decoration: none;
+              color: @rail-font-color;
+            }
+          }
+        }
+      }
+    }
+
+    .rail-view {
+      display: none;
+      height: calc(~"100% -" 98*@px);
+
+      &.active {
+        display: block;
+      }
+    }
+
+
+    nav.feature {
+      >a {
+        border-top: @px solid @rail-section-border-color;
+        .box-shadow(inset 0 @px 0 @rail-section-highlight-color);
+
+        display: block;
+        background-color: @rail-background-color;
+        height: 40*@px;
+        line-height: 40*@px;
+
+        padding-left: 12*@px;
+
+        font-size: 0.85rem;
+        color: @rail-font-color;
+
+        &.active {
+          position: relative;
+
+          background-color: @rail-dark-background-color; 
+          .box-shadow(inset 0 @px 0 @rail-section-dark-highlight-color);
+
+          &:before {
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+            top: 50%;
+          }
+
+          &:before {
+            border-width: 0.5rem;
+            margin-top: -0.5rem;
+            right: -@px;
+            border-right-color: @body-background-color;
+          }
+        }
+      }
+    }
+
+    .group {
+      section {
+        padding: 0;
+        color: @rail-font-color;
+        border: none;
+
+        .heading {
+          background: @rail-group-header-color;
+          border-top: @px solid @rail-section-border-color;
+          border-bottom: @px solid @rail-section-border-color;
+          .box-shadow(-@px @px 0 0 @rail-group-header-color);
+
+          text-transform: uppercase;
+          font-size: 0.7rem;
+
+          padding: 6*@px 15*@px;
+
+          display: block;
+        }
+
+        .fold {
+          //padding: 15*@px;
+        }
+      }
+    }
+
+    .checklist {
+      >li {
+        padding: 6*@px 0;
+
+        >label {
+          input[type=checkbox] {
+            + span:before {
+              .box-shadow(inset 0 3*@px 3*@px -3*@px #0a0a0a);
+              background-color: @rail-section-dark-highlight-color;
+              border-color: @rail-section-border-color;
+            }
+
+            &:checked + label:before,
+            &:checked + span:before {
+              background-image: url('../images/components/checkbox/check_rail.png');
+            }
+          }
+          >span b {
+            position: absolute;
+            right: 14*@px;
+            background-color: @rail-section-dark-highlight-color;
+            .border-radius(11*@px);
+            line-height: 22*@px;
+            width: 34*@px;
+            text-align: center;
+            font-family: AdobeCleanLight;
+            font-weight: normal;
+            font-size: 11*@px;
+          }
         }
       }
     }
@@ -141,6 +382,7 @@ div.rail {
 
         >.fold {
           .transition (all 0.5s ease-out);
+          .scrollable;
         }
       } 
     }
@@ -150,18 +392,18 @@ div.rail {
       padding: 0.5rem;
 
       border-top: @px solid @rail-section-border-color;
-      box-shadow: inset 0 @px 0 @rail-section-highlight-color;
+      .box-shadow(inset 0 @px 0 @rail-section-highlight-color);
 
       color: @rail-font-color;
 
       &:first-child { // First section does not have border/highlight
         border-top: none;
-        box-shadow: none;
+        .box-shadow(none);
       }
 
       // For no styling
       &.bare {
-        box-shadow: none;
+        .box-shadow(none);
         border-top: none;
       }
 
@@ -211,12 +453,62 @@ div.rail {
       &.foldable {
         .closeable;
 
+        >.fold {
+          display: none;
+        }
+
         &.open {
           >.fold {
+            display: block;
             height: auto;
             overflow: auto;
           }
         }
+      }
+    }
+  }
+
+  // toolbar
+  >.toolbar {
+    display: none;
+  }
+
+  &.with-toolbar-bottom {
+    position: relative;
+
+    >.wrap {
+      height: auto;
+      min-height: 0;
+      position: absolute;
+      top: 0;
+      bottom: 3rem;
+      width: 100%;
+      .scrollable;
+    }
+
+    >.toolbar {
+      display: block;
+
+      margin: 0;
+      height: 3rem;
+      color: @rail-font-color;
+
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+
+
+      border-top: @px solid @rail-section-border-color;
+      .box-shadow(inset 0 @px 0 @rail-section-highlight-color);
+      background-color: @rail-background-color;
+    }
+
+    &.toolbar-open {
+      >.wrap {
+        bottom: 6rem;
+      }
+      >.toolbar {
+        height: 6rem;
       }
     }
   }
