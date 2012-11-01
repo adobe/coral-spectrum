@@ -31,7 +31,8 @@ module.exports = function(grunt) {
       'components/CUI.DropdownList.js',
       'components/CUI.Dropdown.js',
       'components/CUI.Filters.js',
-      'components/CUI.Slider.js'
+      'components/CUI.Slider.js',
+      'components/CUI.Datepicker.js'
     ],
     "rte-core": [
       'rte/setup.js',
@@ -107,7 +108,6 @@ module.exports = function(grunt) {
       'rte/core/plugins/TablePlugin.js',
       'rte/core/plugins/ImagePlugin.js',
       'rte/core/plugins/UndoRedoPlugin.js',
-      'rte/core/plugins/SpellCheckerPlugin.js',
 
       'rte/core/adapter/JQueryEvent.js',
       'rte/core/adapter/ExtEvent.js',
@@ -291,7 +291,8 @@ module.exports = function(grunt) {
           '<%= dirs.build %>/js/libs/underscore.js': '<%= dirs.components %>/underscore/index.js',
           '<%= dirs.build %>/js/libs/handlebars.js': '<%= dirs.components %>/handlebars/index.js',
           '<%= dirs.build %>/js/libs/toe.js': '<%= dirs.components %>/toejs/index.js',
-          '<%= dirs.build %>/js/libs/fingerpointer.js': '<%= dirs.components %>/fingerpointer/index.js'
+          '<%= dirs.build %>/js/libs/fingerpointer.js': '<%= dirs.components %>/fingerpointer/index.js',
+          '<%= dirs.build %>/js/libs/jquery-gridlayout.js': '<%= dirs.source %>/js/plugins/jquery-gridlayout.js'
         }
       },
       prettyify: {
@@ -411,6 +412,13 @@ module.exports = function(grunt) {
         src: getIncludes("cui", dirs.temp+'/js_instrumented/'),
         dest: '<%= dirs.temp %>/js_instrumented/CUI_cc.js'
       },
+      cui_css: {
+        src: [
+          '<%= dirs.temp %>/cui.css',
+          '<%= dirs.temp %>/allIcons.css'
+        ],
+        dest: '<%= dirs.build %>/css/cui.css'
+      },
       "rte-core": {
         src: getIncludes("rte-core", dirs.source+'/js/'),
         dest: '<%= dirs.build %>/js/rte-core.js'
@@ -429,10 +437,6 @@ module.exports = function(grunt) {
       "rte-core": {
         src: ['<config:concat.rte-core.dest>'],
         dest: '<%= dirs.build %>/js/rte-core.min.js'
-      },
-      "cui-with-rte": {
-        src: ['<config:concat.cui-with-rte.dest>'],
-        dest: '<%= dirs.build %>/js/CUI-with-rte.min.js'
       }
       // TBD: minify individual JS files?
     },
@@ -446,7 +450,7 @@ module.exports = function(grunt) {
           ]
         },
         files: {
-          '<%= dirs.build %>/css/cui.css': '<%= dirs.source %>/less/cui.less'
+          '<%= dirs.temp %>/cui.css': '<%= dirs.source %>/less/cui.less'
         }
       },
       guide: {
@@ -477,6 +481,15 @@ module.exports = function(grunt) {
     },
 
     coverage: {},
+    
+    icons: {
+      all: {
+        src: [
+          '<%= dirs.source %>/images/icons/*.svg'
+        ],
+        dest: '<%= dirs.temp %>/allIcons.css'
+      }
+    },
 
     // Watch operations
     watch: {
@@ -499,7 +512,7 @@ module.exports = function(grunt) {
 
       compile_less_min_css: {
         files: '<%= dirs.source %>/less/**',
-        tasks: 'less:cui mincss'
+        tasks: 'less:cui mincss concat:cui_css'
       },
 
       compile_guide_less: {
@@ -517,6 +530,11 @@ module.exports = function(grunt) {
         tasks: 'clean:tests copy:tests'
       },
 
+      copy_plugins: {
+          files: '<%= dirs.source %>/js/plugins/jquery-gridlayout.js',
+          tasks: "copy:libs"
+      },
+
       run_tests: {
         files: [
           '<%= dirs.source %>/js/**',
@@ -529,12 +547,10 @@ module.exports = function(grunt) {
   });
 
   // Partial build for development
-  // grunt.registerTask('partial', 'lint copy handlebars concat:cui concat:rte-core concat:cui-with-rte min less mincss mocha');
-  grunt.registerTask('partial', 'lint copy handlebars concat:cui concat:rte-core concat:cui-with-rte min less mincss');
+  grunt.registerTask('partial', 'lint copy handlebars concat:cui min:cui icons less concat:cui_css mincss mocha');
 
   // Full build with docs and compressed file
-  // grunt.registerTask('full-build', 'lint copy handlebars concat:cui concat:rte-core concat:cui-with-rte min less mincss mocha jsdoc');
-  grunt.registerTask('full-build', 'lint copy handlebars concat:cui concat:rte-core concat:cui-with-rte min less mincss jsdoc');
+  grunt.registerTask('full-build', 'lint copy handlebars concat:cui concat:rte-core concat:cui-with-rte min icons less concat:cui_css mincss mocha jsdoc');
 
   // Full build with docs and compressed file
   grunt.registerTask('full', 'clean full-build');
@@ -551,6 +567,12 @@ module.exports = function(grunt) {
 
   // Custom build for maven
   grunt.registerTask('mvn', 'mvn-build mvn-install');
+
+  // Rename mvn-deploy task so we can override it
+  grunt.task.renameTask('mvn-deploy', 'mvn-nexus-deploy');
+
+  // mvn deploy task for jenkins
+  grunt.registerTask('mvn-deploy', 'mvn-build mvn-nexus-deploy');
 
   // Rename watch task so we can override it
   grunt.task.renameTask('watch', 'watch-start');

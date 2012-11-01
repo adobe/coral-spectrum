@@ -22,6 +22,13 @@
   <script src="examples/assets/guide.js"></script>
   <script src="examples/assets/google-code-prettify/prettify.js"></script>
 
+    <script src="js/libs/jquery-gridlayout.js"></script>
+    <script>
+        jQuery(function($){
+            $(".grid-container").cuigridlayout();
+        });
+    </script>
+
 </head>
 <body class="desktop">
 
@@ -48,15 +55,15 @@
       <div class="wrap">
 
         <div class="rail-switch">
-          <nav>
-            <a href="#" data-view="feature"><span>A</span></a>
-            <a href="#" class="active" data-view="filter"><span>B</span></a>
-            <a href="#" data-view="activity"><span>C</span></a>
+          <nav class="toolbar icongroup">
+            <a href="#" class="icon-calendar" data-view="feature">Calendar<i></i></a>
+            <a href="#" class="icon-cart active" data-view="filter">Cart<i></i></a>
+            <a href="#" class="icon-paintBucket" data-view="activity">Paint<i></i></a>
           </nav>
           <div class="search">
             <form>
               <input type="text" placeholder="Enter Keyword(s)" name="q" />
-              <a class="clear-cmd" href="#">X</a>
+              <a class="clear-cmd" href="#">x</a>
               <a class="query-cmd" href="#">S</a>
             </form>
           </div>
@@ -64,8 +71,8 @@
 
         <div class="rail-view" data-view="feature">
           <nav class="feature">
-            <a href="#" class="active">Files</a>
-            <a href="#">Collections</a>
+            <a href="#">Files</a>
+            <a href="#" class="active">Collections</a>
             <a href="#">Users</a>
             <a href="#">Tools</a>
             <a href="#">Settings</a>
@@ -73,24 +80,129 @@
         </div>
         
         <div class="rail-view active group" data-view="filter">
-          <section>
+          <section class="foldable open">
             <span class="heading">Accordion open</span>
-            <ul>
+            <ul class="notype checklist fold">
               <li>
                 <label>
-                  <input type="checkbox" checked="" value="1" name="c1"><span>Checked</span>
+                  <input type="checkbox" checked="" value="1" name="c1"><span>All Assets<b>92</b></span>
                 </label>
               </li>
-              <li>Link</li>
-              <li>Fonts</li>
+              <li>
+                <label>
+                  <input type="checkbox" checked="" value="1" name="c1"><span>Current Directory<b>38</b></span>
+                </label>
+              </li>
             </ul>
           </section>
-          <section>
+          <section class="foldable open">
             <span class="heading">Accordion open</span>
-            <ul>
-              <li>Headings</li>
-              <li>Link</li>
-              <li>Fonts</li>
+            <ul class="notype checklist fold">
+              <li>
+                <label>
+                  <input type="checkbox" checked="" value="1" name="c1"><span>Active<b>15</b></span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" checked="" value="1" name="c1"><span>Review<b>11</b></span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" checked="" value="1" name="c1"><span>Pending Review<b>8</b></span>
+                </label>
+              </li>
+            </ul>
+          </section>
+          <section class="foldable open">
+            <span class="heading">Accordion open</span>
+            <ul class="notype checklist fold">
+              <li>
+                <label>
+                  <input type="checkbox" checked="" value="1" name="c1"><span>Image<b>82</b></span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" checked="" value="1" name="c1"><span>Movie<b>32</b></span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" checked="" value="1" name="c1"><span>Document<b>23</b></span>
+                </label>
+              </li>
+            </ul>
+          </section>
+          <section class="foldable open">
+            <span class="heading">Accordion open</span>
+            <ul class="notype checklist fold">
+              <li>
+                <label>
+                  <input type="checkbox" checked="" value="1" name="c1"><span>Global<b>10</b></span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" checked="" value="1" name="c1"><span>Europe<b>16</b></span>
+                </label>
+              </li>
+            </ul>
+          </section>
+          <section class="foldable">
+            <span class="heading">Accordion open</span>
+            <ul class="notype checklist fold">
+              <li>
+                <label>
+                  <input type="checkbox" checked="" value="1" name="c1"><span>Active<b>15</b></span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" checked="" value="1" name="c1"><span>Review<b>11</b></span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" checked="" value="1" name="c1"><span>Pending Review<b>8</b></span>
+                </label>
+              </li>
+            </ul>
+          </section>
+          <section class="foldable">
+            <span class="heading">Accordion open</span>
+            <ul class="notype checklist fold">
+              <li>
+                <label>
+                  <input type="checkbox" checked="" value="1" name="c1"><span>Image<b>82</b></span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" checked="" value="1" name="c1"><span>Movie<b>32</b></span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" checked="" value="1" name="c1"><span>Document<b>23</b></span>
+                </label>
+              </li>
+            </ul>
+          </section>
+          <section class="foldable">
+            <span class="heading">Accordion open</span>
+            <ul class="notype checklist fold">
+              <li>
+                <label>
+                  <input type="checkbox" checked="" value="1" name="c1"><span>Global<b>10</b></span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" checked="" value="1" name="c1"><span>Europe<b>16</b></span>
+                </label>
+              </li>
             </ul>
           </section>
         </div>
@@ -109,1330 +221,157 @@
     </div>
 
     <div class="content">
-
-      <section id="General">
-        <h2 class="line" id="WhatIsCUI">What is CoralUI?</h2>
-        <p>CoralUI or CUI (pronounced "cooey") is an implementation of the CloudUI visual style from Adobe XD.</p>
-
-        <p>CoralUI's aim is to provide everything your product needs to adopt the CloudUI visual style.</p>
-
-        <h2 class="line" id="ResolutionIndependence">Resolution Independence</h2>
-        <p>CoralUI is resolution independent. By using elastic measurement units to define sizes (em and rem), CoralUI can be scaled to the perfect size for any display, regardless of size or pixel density.</p>
-
-        <div class="res-buttons"><label>Try it:</label>
-          <button id="res-minus" class="warning">-</button><button id="res-reset">=</button><button id="res-plus" class="primary">+</button>
+      <nav class="toolbar">
+        <div class="left icongroup">
+          <a href="#" class="icon-addGrid">Add</a>
+          <span class="divider"></span>
+          <a href="#" class="icon-calendar">Calendar</a>
+          <a href="#" class="icon-cart">Cart</a>
+          <a href="#" class="icon-paintBucket">Paint</a>
         </div>
+        <div class="center">
+          <h1>Page Title</h1>
+        </div>
+        <div class="right icongroup">
+          <a href="#" class="icon-cards">Cards</a>
+          <a href="#" class="icon-trash">Trash</a>
+        </div>
+      </nav>
 
-        <h2 class="line" id="BrowserSupport">Browser Support</h2>
-        <p>CoralUI supports all modern browsers, including IE 9+, Firefox (latest), Chrome (latest), Safari (latest).</p>
-        <p>Prevalent mobile devices are also be supported, including Android 3+ and iOS 5+.</p>
-
-        <h2 class="line" id="WidgetPhilosophy">Widget Philosophy</h2>
-        <p>All CoralUI widgets are guaranteed to fulfill 8 promises:</p>
-
-        <ol>
-          <li>Widgets will be available as a jQuery plugin: <code class="prettyprint">$('#myModal').modal()</code></li>
-          <li>Widgets will be available as a class: <code class="prettyprint">myModal = new CUI.Modal({ element: '#myModal' })</code>.</li>
-          <li>Widget APIs will always be fully documented <a href="jsdoc/index.html">here</a>.</li>
-          <li>Widgets will always be easily extendable with <code class="prettyprint">CUI.Modal.extend()</code>.</li>
-          <li>Widgets will progressively enhance existing markup, or render a template using passed options if no markup is present.</li>
-          <li>Widgets will take advantage of declarative markup using <code>data-*</code> attributes.</li>
-          <li>Widgets will work on both desktop and mobile.</li>
-          <li>Widgets will be <a href="test/coverage.html">fully tested</a> with <a href="test/index.html">automated unit tests</a>.</li>
-        </ol>
-
-      </section>
-
-      <section id="TextStyles">
-        <h1 class="line">Text Styles</h1>
-        <p>CUI provides basic text styles suitable for paragraph. When laying out your page, you might need to override the margins on the heading elements.</p>
-
-        <section id="Headings">
-          <h2 class="line">Headings</h2>
-          <p>Use the <code class="prettyprint">&lt;h1&gt;</code> through <code class="prettyprint">&lt;h6&gt;</code> tags to add headings to sections on your page.</p>
-
-          <div class="componentSample noCode headingSample">
-            <h1>Heading 1 (Page title)</h1>
-            <h2>Heading 2 (Section title)</h2>
-            <h3>Heading 3 (Sub-section title)</h3>
-            <h4>Heading 4 (List title)</h4>
-            <h5>Heading 5 (Sub-list title)</h5>
-            <h6>Heading 6 (Captions, help text)</h6>
-          </div>
-
-        </section>
-
-        <section id="Links">
-          <h2 class="line">Link</h2>
-          <p>The <code class="prettyprint">&lt;a&gt;</code> tag comes with a default color and behavior. Links remain the same color after they are visited.</p>
-
-          <div class="componentSample noCode">
-            Lorem ipsum dolor sit amet consectetur <a href="#Links">inline link</a> adipisicing do tempor incididunt ut labore.
-          </div>
-        </section>
-
-        <section id="Fonts">
-          <h2 class="line">Fonts</h2>
-          <p>Three variations of the Adobe Clean font are provided. Reference the table below to determine the CSS properties to apply for each font style.</p>
-
-          <table class="data">
-            <thead>
-              <tr>
-                <th>font-family</th>
-                <th>font-weight</th>
-                <th>font-style</th>
-                <th>Sample</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>AdobeClean</td>
-                <td>normal</td>
-                <td>normal</td>
-                <td class="AdobeClean">The quick brown fox jumped over the lazy dog.</td>
-              </tr>
-              <tr>
-                <td>AdobeClean</td>
-                <td>bold</td>
-                <td>normal</td>
-                <td class="AdobeClean_Bold">The quick brown fox jumped over the lazy dog.</td>
-              </tr>
-              <tr>
-                <td>AdobeClean</td>
-                <td>normal</td>
-                <td>italic</td>
-                <td class="AdobeClean_Italic">The quick brown fox jumped over the lazy dog.</td>
-              </tr>
-              <tr>
-                <td>AdobeClean</td>
-                <td>bold</td>
-                <td>italic</td>
-                <td class="AdobeClean_BoldItalic">The quick brown fox jumped over the lazy dog.</td>
-              </tr>
-              <tr>
-                <td>AdobeCleanLight</td>
-                <td>normal</td>
-                <td>normal</td>
-                <td class="AdobeClean_Light">The quick brown fox jumped over the lazy dog.</td>
-              </tr>
-              <tr>
-                <td>AdobeCleanLight</td>
-                <td>normal</td>
-                <td>italic</td>
-                <td class="AdobeClean_LightItalic">The quick brown fox jumped over the lazy dog.</td>
-              </tr>
-              <tr>
-                <td>AdobeCleanCondensed</td>
-                <td>normal</td>
-                <td>normal</td>
-                <td class="AdobeClean_Condensed">The quick brown fox jumped over the lazy dog.</td>
-              </tr>
-              <tr>
-                <td>AdobeCleanCondensed</td>
-                <td>normal</td>
-                <td>italic</td>
-                <td class="AdobeClean_CondensedItalic">The quick brown fox jumped over the lazy dog.</td>
-              </tr>
-            </tbody>
-          </table>
-        </section>  
-
-      </section><!-- /Text Styles -->
-
-      <section id="PageComponents">
-        <h1 class="line">Page Components</h1>
-        <p>Page components are top level pieces that appear on nearly every page.</p>
-
-        <section id="Header">
-          <h2 class="line">Header</h2>
-          <p>The top navigation header that appears on every page. It supports a logo, navigation, and drawer (which can contain a badge or other information).</p>
-
-          <div class="componentSample headerSample">
-            <div class="example">
-
-              <header class="top">
-                <div class="logo"><img src="images/theme/dms.png" alt="DMS logo"></div>
-                <nav class="main">
-                  <a href="#" class="selected">Home</a>
-                  <a href="#">Activities</a>
-                  <a href="#">Admin</a>
-                </nav>
-                <div class="drawer">
-                  <div class="badge">5</div>
-                </div>
-              </header>
-
-            </div>
-            <pre class="prettyprint linenums">
-&lt;header class="top"&gt;
-  &lt;div class=&quot;logo&quot;&gt;&lt;img src=&quot;images/theme/dms.png&quot; alt="DMS logo"&gt;&lt;/div&gt;
-  &lt;nav&gt;
-    &lt;a href=&quot;#&quot; class=&quot;selected&quot;&gt;Home&lt;/a&gt;
-    &lt;a href=&quot;#&quot;&gt;Activities&lt;/a&gt;
-    &lt;a href=&quot;#&quot;&gt;Admin&lt;/a&gt;
-  &lt;/nav&gt;
-  &lt;div class=&quot;drawer&quot;&gt;
-    &lt;div class=&quot;badge&quot;&gt;5&lt;/div&gt;
-  &lt;/div&gt;
-&lt;/header&gt;
-</pre>
-          </div>
-        </section>
-
-        <section id="Rail">
-          <h2 class="line">Rail</h2>
-          <p>The side panel used for metadata and feeds.</p>
+      <div class="grid-container">
+        <div class="grid-0">
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview1.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
           
-          <h3>Positioning</h3>
-          <p>The rail can be placed on the left or the right by applying the <code class="atv">left</code> or <code class="atv">right</code> class.</p>
-          
-          <h3>Sections</h3>
-          <p>By using the <code class="prettyprint">&lt;section&gt;</code> tag, the rail can contain multiple sections separated by a border.</p>
-          <p>The <code class="atv">bare</code> and <code class="atv">thin</code> CSS classes can be added to remove the border or padding on each section respectively.</p>
-          <p>Section headings should be contained within the <code class="prettyprint">&lt;h4&gt;</code> tag.</p>
-
-          <div class="componentSample railSample">
-            <div class="example">
-
-              <div class="page shadowBox" role="main">
-                <div class="rail right" role="complementary">
-                  <div class="wrap">
-                    <section>
-                        <h4>News Feed</h4>
-                    </section>
-                    <section>
-                        <h4>Revised asset ready for review</h4>
-                        <div class="small grey light">Modified yesterday by Rob Cobourn</div>
-                        <p class="small">I created a new segment thing for the Chance campaign because we left out the Foursquare that will be checking in at Olympic events.</p>
-                    </section>
-                  </div>
-                </div>
-                <div class="content">
-                  
-                </div>
-              </div>
-
-            </div>
-            <pre class="prettyprint linenums">
-&lt;div class=&quot;page&quot; role=&quot;main&quot;&gt;
-  &lt;div class=&quot;rail right&quot; role=&quot;complementary&quot;&gt;
-    &lt;div class=&quot;pull-to-refresh&quot;&gt;
-      &lt;div class=&quot;message&quot;;&gt;
-        &lt;i class=&quot;arrow&quot;;&gt;&lt;/i;&gt;
-        &lt;i class=&quot;spinner large&quot;;&gt;&lt;/i;&gt;
-        &lt;span class=&quot;pull&quot;;&gt;Pull to refresh&lt;/span;&gt;
-        &lt;span class=&quot;release&quot;;&gt;Release to refresh&lt;/span;&gt;
-        &lt;span class=&quot;loading&quot;;&gt;Loading&lt;/span;&gt;
-      &lt;/div;&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;wrap&quot;&gt;
-      &lt;section&gt;
-          &lt;h4&gt;Update Feed&lt;/h4&gt;
-      &lt;/section&gt;
-      &lt;section&gt;
-          &lt;h4&gt;Revised asset ready for review&lt;/h4&gt;
-          &lt;div class=&quot;small grey light&quot;&gt;Modified yesterday by Rob Cobourn&lt;/div&gt;
-          &lt;p class=&quot;small&quot;&gt;I created a new segment thing for the...&lt;/p&gt;
-      &lt;/section&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;content&quot;&gt;
-    &lt;p&gt;Content.&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</pre>
-          </div>
-        </section>
-
-        <section id="Well">
-          <h2 class="line">Well</h2>
-          <p>Wells are used to separate field groups or large blocks of text.</p>
-
-          <div class="componentSample">
-            <div class="example">
-
-              <strong>Section 1</strong>
-              <section class="well">
-                Content goes here.
-              </section>
-
-              <strong>Section 2</strong>
-              <section class="well">
-                More content goes here.
-              </section>
-
-            </div>
-            <pre class="prettyprint linenums">
-&lt;strong&gt;Label&lt;/strong&gt;
-&lt;section class=&quot;well&quot;&gt;
-  Content goes here.
-&lt;/section&gt;
-</pre>
-          </div>
-        </section>
-
-      </section><!-- /Page Components -->
-
-      <section id="Navigation">
-        <h1 class="line">Navigation</h1>
-        <p>CUI provides various controls that enable navigation.</p>
-
-        <section id="ActionBar">
-          <h2 class="line">Action bar (WIP)</h2>
-          <p>The action bar contains action buttons. The button icons are still to be done.</p>
-
-          <div class="componentSample">
-            <div class="example">
-
-              <h4>No Links</h4>
-              <p><i class="icon-rail"><span class="hidden-accessible">Label</span></i> (with label hidden but accessible)</p>
-              <p><i class="icon-rail">Label</i> (label inside of the icon element)</p>
-              <p><i class="icon-rail"></i>Label (could be used outside of the icon element as well)</p>
-
-              <h4>Links</h4>
-              <p><a href="#" class="icon-rail"><span class="hidden-accessible">Label</span></a> (with label hidden but accessible)</p>
-              <p><a href="#" class="icon-rail">Label</a> (label in link)</p>
-
-              <h4>Icons Groups</h4>
-              <div class="icons-group">
-                  <a href="#" class="icon-rail" title="Rail">Rail</a>
-                  <span class="divider"></span>
-                  <a href="#" class="icon-edit" title="Edit">Edit</a>
-                  <i class="icon-message">Message</i>
-                  <i class="icon-download"></i>
-              </div>
-
-              <h4>Toolbar</h4>
-              <nav class="actionbar">
-                <div class="left icons-group">
-                  <a href="#" class="icon-rail" title="Rail">Rail</a>
-                  <span class="divider"></span>
-                  <a href="#" class="icon-edit" title="Edit">Edit</a>
-                  <a href="#" class="icon-message" title="Message">Message</a>
-                  <a href="#" class="icon-download" title="Download">Download</a>
-                </div>
-                <div class="center">
-                  <h1>Page Title</h1>
-                </div>
-                <div class="right icons-group">
-                  <a href="#" class="icon-list-view" title="List View">List View</a>
-                  <a href="#" class="icon-search" title="Search">Search</a>
-                </div>
-              </nav>
-            </div>
-            <pre class="prettyprint linenums">
-&lt;nav class=&quot;actionbar&quot;&gt;
-  &lt;div class=&quot;left icons-group&quot;&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-rail&quot; title=&quot;Rail&quot;&gt;Rail&lt;/a&gt;
-    &lt;span class=&quot;divider&quot;&gt;&lt;/span&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-edit&quot; title=&quot;Edit&quot;&gt;Edit&lt;/a&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-message&quot; title=&quot;Message&quot;&gt;Message&lt;/a&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-download&quot; title=&quot;Download&quot;&gt;Download&lt;/a&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;center&quot;&gt;
-    &lt;h1&gt;Page Title&lt;/h1&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;right icons-group&quot;&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-list-view&quot; title=&quot;List View&quot;&gt;List View&lt;/a&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-search&quot; title=&quot;Search&quot;&gt;Search&lt;/a&gt;
-  &lt;/div&gt;
-&lt;/nav&gt;
-            </pre>
-          </div>
-        </section>
-
-        <section id="Breadcrumbs">
-          <h2 class="line">Breadcrumbs</h2>
-          <p>Breadcrumbs provide an actionable indication of a user's current location within an application.</p>
-
-          <div class="componentSample">
-            <div class="example">
-
-              <nav class="crumbs">
-                <a href="#"><img src="images/theme/cloudui.png"></a>
-                <a href="#">Admin</a>
-                <a href="#">Settings</a>
-                <a href="#">Current Page Title</a>
-              </nav>
-            </div>
-            <pre class="prettyprint linenums">
-&lt;nav class=&quot;crumbs&quot;&gt;
-  &lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/theme/cloudui.png&quot;&gt;&lt;/a&gt;
-  &lt;a href=&quot;#&quot;&gt;Admin&lt;/a&gt;
-  &lt;a href=&quot;#&quot;&gt;Settings&lt;/a&gt;
-  &lt;a href=&quot;#&quot;&gt;Current Page Title&lt;/a&gt;
-&lt;/nav&gt;
-</pre>
-          </div>
-        </section>
-
-        <section id="Tabs">
-          <h2 class="line">Tabs</h2>
-          <p>A simple markup-driven tab bar used to separate sections of content.</p>
-          
-          <h3>Variations</h3>
-          <p>In addition to the default style, there are 3 variations that can be applied using the following CSS classes:</p>
-          <ul>
-            <li><a href="#" class="tab-variant" data-variant="tabs"> Default tabs</a>: Used in a modal dialog or as sub-tabs</li>
-            <li><code class="atv">nav</code> <a href="#" class="tab-variant" data-variant="tabs nav">Page tabs</a>: For when tabs are used to divide content on a page level</li>
-            <li><code class="atv">white</code> <a href="#" class="tab-variant" data-variant="tabs white"> White tabs</a>: Used in a modal dialog or as sub-tabs</li>
-            <li><code class="atv">finger</code> <a href="#" class="tab-variant" data-variant="tabs stacked">Finger tabs</a>: Useful for tabs that have long titles</li>
-          </ul>
-
-          <div class="componentSample">
-            <div class="example">
-              <div id="tabsExample" class="tabs">
-                <nav>
-                  <a href="#" data-toggle="tab" class="active">Tab 1</a>
-                  <a href="#" data-toggle="tab">Tab 2</a>
-                  <a href="examples/remote.html" data-target="#" data-toggle="tab">Tab 3</a>
-                  <a href="#" data-toggle="tab" class="disabled">Disabled Tab</a>
-                </nav>
-                <section class="active">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. Pellentesque congue diam ac nisl vehicula ornare. Cras eu consectetur enim. Aliquam orci augue, sollicitudin nec aliquam sit amet, imperdiet ac leo. Donec aliquam tellus nec ipsum porttitor ut viverra odio luctus. Curabitur in turpis sed nunc consequat ornare eget in nulla. Nam dignissim lectus sed velit sagittis vehicula. Maecenas interdum, quam vel luctus sagittis, mi nisl commodo sapien, eget accumsan nunc metus ac ipsum. Mauris rutrum lectus turpis. Nullam at neque non quam tincidunt fringilla. Nunc egestas mollis nulla tempor fringilla. Etiam dapibus arcu nec risus tempus dapibus.</section>
-                <section>Aenean faucibus ornare laoreet. Cras luctus purus at ipsum rhoncus et gravida diam malesuada. In ut ante sapien. Nulla fringilla hendrerit laoreet. Proin dolor dolor, suscipit vitae ultrices in, dapibus eget nulla. Aenean varius, sapien id mollis pretium, orci erat ornare tortor, vel molestie diam velit in dolor. Sed sit amet pellentesque justo. Pellentesque tristique felis id arcu malesuada posuere pellentesque lacus varius. Nunc egestas lacinia est, non eleifend lectus varius in. In hac habitasse platea dictumst. Quisque ac ipsum enim. Morbi ut est at mi mattis tincidunt. Praesent nec magna eu augue scelerisque posuere. In erat sapien, tristique ac semper elementum, lacinia non quam.</section>
-                <section>This will be replaced by content from examples/remote.html.</section>
-                <section>This will not be shown as the corresponding tab is disabled.</section>
-              </div>
-            </div>
-
-            <pre class="prettyprint linenums">
-&lt;div class=&quot;tabs&quot;&gt;
-  &lt;nav&gt;
-    &lt;a href=&quot;#&quot; data-toggle=&quot;tab&quot; class=&quot;active&quot; &gt;Tab 1&lt;/a&gt;
-    &lt;a href=&quot;#&quot; data-toggle=&quot;tab&quot;&gt;Tab 2&lt;/a&gt;
-    &lt;a href=&quot;/remote.html&quot; data-target=&quot;#&quot; data-toggle=&quot;tab&quot;&gt;Tab 3&lt;/a&gt;
-    &lt;a href=&quot;#&quot; data-toggle=&quot;tab&quot; class=&quot;disabled&quot;&gt;Disabled Tab&lt;/a&gt;
-  &lt;/nav&gt;
-  &lt;section class=&quot;active&quot;&gt;Lorem ipsum dolor sit amet.&lt;/section&gt;
-  &lt;section&gt;Aenean faucibus ornare laoreet. Cras luctus purus.&lt;/section&gt;
-  &lt;section&gt;This will be replaced by content from /remote.html.&lt;/section&gt;
-  &lt;section&gt;This will not be shown as the corresponding tab is disabled.&lt;/section&gt;
-&lt;/div&gt;
-</pre>
-          </div>
-        </section>
-
-      </section><!-- /Navigation -->
-
-      <section id="ButtonsAndControls">
-        <h1 class="line">Buttons &amp; Controls</h1>
-        <p>CUI provides many useful styles and widgets for buttons &amp; controls.</p>
-
-        <section id="Buttons">
-          <h2 class="line">Buttons</h2>
-          <p>The <code class="prettyprint">&lt;button&gt;</code> tag is styled automatically. You can apply the <code class="atv">button</code> CSS class to any element to style it as a button, but be sure to add <code><span class="atn">role</span><span class="pun">=</span><span class="atv">"button"</span></code> for accessibility.</p>
-          
-          <h3>Variations</h3>
-          <p>By default, buttons are gray. There are two CSS classes that can be added to change the look of the button:</p>
-          <ul>
-            <li><code class="atv">primary</code> A blue button, used to indicate primary actions such as OK or save</li>
-            <li><code class="atv">warning</code> A red button, used to indicate actions that are potentially destructive, such as delete</li>
-          </ul>
-
-          <div class="componentSample buttonSample">
-            <div class="example">
-
-              <a class="button" role="button" href="#Buttons">Action</a>
-              <button class="primary">Primary Action</button>
-              <button class="warning">Warning</button>
-              <button disabled>Disabled</button>
-
-            </div>
-            <pre class="prettyprint linenums">
-&lt;a class=&quot;button&quot;&gt;Action&lt;/a&gt; 
-&lt;button class=&quot;primary&quot;&gt;Primary Action&lt;/button&gt; 
-&lt;button class=&quot;warning&quot;&gt;Warning&lt;/button&gt;
-&lt;button disabled&gt;Disabled&lt;/button&gt;
-</pre>
-          </div>
-        </section>
-
-        <section id="TextField">
-          <h2 class="line">Text Field</h2>
-          <p>Text input variants.</p>
-
-          <div class="componentSample">
-              <div class="example">
-                  <div class="textfieldSample">
-                      <div class="sampleTitle left">Standard</div>
-                      <label>Text Field</label>
-                      <input type="text">
-                  </div>
-                  <div class="textfieldSample">
-                      <div class="sampleTitle left">Title-less</div>
-                      <label>&nbsp;</label>
-                      <input type="text" placeholder="Text Field">
-                  </div>
-                  <div class="textfieldSample">
-                      <div class="sampleTitle left">Error</div>
-                      <label>&nbsp;</label>
-                      <input class="error" type="text">
-                  </div>
-                  <div class="textfieldSample">
-                      <div class="sampleTitle left">Disabled</div>
-                      <label>&nbsp;</label>
-                      <input class="textfield" disabled type="text">
-                  </div>
-              </div>
-              <pre class="prettyprint linenums">
-&lt;input type=&quot;text&quot;&gt;
-&lt;input type=&quot;text&quot; placeholder=&quot;Text Field&quot;&gt;
-&lt;input type=&quot;text&quot; class=&quot;error&quot;&gt;
-&lt;input type=&quot;text&quot; disabled&gt;</pre>
-          </div>
-        </section>
-
-        <section class="hidden" id="SearchField">
-          <h2 class="line">Search Field</h2>
-          <p>Search.</p>
-
-          <div class="componentSample">
-            <div class="example">
-
-              <div class="search">
-              </div>
-
-            </div>
-            <pre class="prettyprint linenums"></pre>
-          </div>
-        </section>
-        
-        <section id="Filters">
-              <h2 class="line">Filters</h2>
-              <p>Filters &amp; Tags input variants. Filter input fields can be created by markup directly or by JavaScript, though
-              the full funcationality can only be achieved by using the corresponding widget.</p>
-              <p>You can use an input field or a select field as template for the widget.</p>
-
-              <div class="componentSample">
-                  <div class="example">
-    
-                      <div class="filterSample">
-                          <div class="sampleTitle left">Single</div>
-                          <div class="filters" id="filters-singleterm">
-                            <input type="text" placeholder="Single Term Filter">
-                          </div>
-                      </div>
-                      
-                      <div class="filterSample">
-                          <div class="sampleTitle extended left">Standard</div>
-                          <div class="filters" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter">
-                               <input type="text">
-                                <select  multiple>
-                                    <option>Apple</option>
-                                    <option>Pear</option>
-                                    <option>Banana</option>
-                                </select>
-                            </div>
-                      </div>
-                      
-                      <div class="filterSample">
-                          <div class="sampleTitle extended left">Stacking</div>
-                          <div class="filters" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter">
-                               <input type="text">
-                               <select>
-                                  <option>Apple</option>
-                                  <option>Pear</option>
-                                  <option>Banana</option>
-                              </select>
-                          </div>     
-                      </div>
-                      
-                      <div class="filterSample">
-                          <div class="sampleTitle left">Error</div>
-                          <div class="filters error" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter">
-                                <input type="text" class="filter">
-                          </div>
-                      </div>
-                      
-                      <div class="filterSample">
-                          <div class="sampleTitle left">Disabled</div>
-                          <div class="filters disabled" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter">
-                             <input class="filter" type="text" disabled>
-                          </div>
-                      </div>
-                  </div>
-                  
-                  
-                <pre class="prettyprint linenums">
-    &lt;!-- For a complete, initialized component use this piece of code --&gt; 
-    &lt;div class="filters" data-init="filters" data-multiple="true"&gt;
-        &lt;input type="text"&gt;   &lt;!-- Place input as first child! --&gt; 
-        &lt;select&gt;
-            &lt;option&gt;sad&lt;/opion&gt;
-            &lt;option&gt;angry&lt;/opion&gt;
-            &lt;option&gt;happy&lt;/opion&gt;    
-        &lt;/select&gt;
-    &lt;/div&gt;
-
-    &lt;!-- But you can also omit most of the HTML: Single term filters with input field as template --&gt;
-    &lt;input type="text" placeholder="Single Term Filter" data-init="filters"&gt;
-
-    &lt;!-- Standard filters with select as template --&gt;
-    &lt;select data-placeholder="Add Filter" multiple data-init="filters"&gt;
-        &lt;option&gt;Apple&lt;/option&gt;
-        &lt;option&gt;Pear&lt;/option&gt;
-        &lt;option&gt;Banana&lt;/option&gt;
-    &lt;/select&gt;
-
-    &lt;!-- Stacking filters with select as template --&gt;
-    &lt;select data-placeholder="Add Filter" multiple data-stacking="true" data-init="filters"&gt;
-        &lt;option&gt;Apple&lt;/option&gt;
-        &lt;option&gt;Pear&lt;/option&gt;
-        &lt;option&gt;Banana&lt;/option&gt;
-    &lt;/select&gt;
-
-    &lt;!-- &hellip; and don't forget to initialise your Widget (if you are not using data-init) --&gt;
-    &lt;script type="text/javascript"&gt;
-        $(document).ready(function() {
-            $("select").filters(); // Or a similar selector corresponding to your DOM
-        })
-    &lt;/script&gt;
-                </pre>
-              </div>
-          </section>
-        
-        
-        <section id="Dropdown">
-              <h2 class="line">Dropdowns</h2>
-              <p>Different types of dropdowns.</p>
-
-              <div class="componentSample">
-                  <div class="example">
-                      <div class="filterSample">
-                          <div class="sampleTitle left">Standard</div>
-                          <div class="dropdown" data-init="dropdown">
-                              <button>Single Select</button>
-                              <select name="dropdown" >
-                                  <option>Single One</option>
-                                  <option>Single Two</option>
-                                  <option>Single Three</option>
-                              </select>
-                          </div>
-                      </div>
-                      <div class="filterSample">
-                          <div class="sampleTitle left">Multiselect</div>
-                          <div class="dropdown" data-init="dropdown">
-                              <button>Multi Select</button>
-                              <select name="dropdown2" multiple>
-                                  <option>Multi One</option>
-                                  <option>Multi Two</option>
-                                  <option>Multi Three</option>
-                              </select>
-                          </div>
-                      </div>
-                      <div class="filterSample">
-                          <div class="sampleTitle left">Editable</div>
-                          <div class="dropdown dropdown-editable" data-editable="true" data-init="dropdown">
-                              <input type="text" placeholder="Editable Select">
-                              <button>Editable</button>
-                              <select name="dropdown3">
-                                  <option>Edit One</option>
-                                  <option>Edit Two</option>
-                                  <option>Edit Three</option>
-                              </select>
-                          </div>
-                      </div>
-                      <div class="filterSample">
-                          <div class="sampleTitle left">Disabled</div>
-                          <div class="dropdown" data-init="dropdown" data-disabled="true">
-                              <button>Disabled</button>
-                              <select name="dropdown4">
-                                  <option>One</option>
-                                  <option>Two</option>
-                                  <option>Three</option>
-                              </select>
-
-                          </div>
-                      </div>
-                      <div class="filterSample">
-                          <div class="sampleTitle left">Error</div>
-                          <div class="dropdown error" data-init="dropdown">
-                              <button>Error</button>
-                              <select name="dropdown5" >
-                                  <option>One</option>
-                                  <option>Two</option>
-                                  <option>Three</option>
-                              </select>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-                  
-          </section>
-
-
-
-        <section id="Slider">
-            <h2 class="line">Sliders (WIP)</h2>
-            <p>Different types of horizontal sliders.</p>
-
-            <div class="componentSample">
-                <div class="example clearfix">
-                    <div class="left">
-                        <div class="slider" data-init="slider">
-                            <input type="range" value="14" min="10" max="20" step="2">
-                        </div>
-                        <div class="slider ticked filled" data-init="slider">
-                            <input type="number" value="14" min="10" max="20" step="2">
-                        </div>
-                    </div>
-                    <div class="left">
-                        <div class="slider ticked filled" data-init="slider">
-                            <input type="number" value="14" min="10" max="20" step="2">
-                            <input type="number" value="16" min="10" max="20" step="2">
-                        </div>
-                        <div class="slider ticked filled" data-init="slider">
-                            <input type="number" value="14" min="10" max="20" step="2" disabled>
-                            <input type="number" value="16" min="10" max="20" step="2" disabled>
-                        </div>
-                    </div>
-                </div>
-              <pre class="prettyprint linenums">
-&lt;div class=&quot;slider&quot; data-init=&quot;slider&quot;&gt;
-  &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
-&lt;/div&gt;
-&lt;div class=&quot;slider ticked filled&quot; data-init=&quot;slider&quot;&gt;
-  &lt;input type=&quot;number&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
-&lt;/div&gt;
-&lt;div class=&quot;slider ticked filled&quot; data-init=&quot;slider&quot;&gt;
-  &lt;input type=&quot;number&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
-  &lt;input type=&quot;number&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
-&lt;/div&gt;
-&lt;div class=&quot;slider ticked filled&quot; data-init=&quot;slider&quot;&gt;
-  &lt;input type=&quot;number&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;
-  &lt;input type=&quot;number&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;
-&lt;/div&gt;
-</pre>
-            </div>
-
-            <p>Different types of vertical sliders.</p>
-
-            <div class="componentSample">
-                <div class="example clearfix">
-                    <div class="left">
-                        <div class="slider vertical" data-init="slider">
-                            <input type="range" value="14" min="10" max="20" step="2">
-                        </div>
-                        <div class="slider vertical ticked filled" data-init="slider">
-                            <input type="number" value="14" min="10" max="20" step="2">
-                        </div>
-                        <div class="slider vertical ticked filled" data-init="slider">
-                            <input type="number" value="14" min="10" max="20" step="2">
-                            <input type="number" value="16" min="10" max="20" step="2">
-                        </div>
-                        <div class="slider vertical ticked filled" data-init="slider">
-                            <input type="number" value="14" min="10" max="20" step="2" disabled>
-                            <input type="number" value="16" min="10" max="20" step="2" disabled>
-                        </div>
-                    </div>
-                </div>
-              <pre class="prettyprint linenums">
-&lt;div class=&quot;slider vertical&quot; data-init=&quot;slider&quot;&gt;
-  &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
-&lt;/div&gt;
-&lt;div class=&quot;slider vertical ticked filled&quot; data-init=&quot;slider&quot;&gt;
-  &lt;input type=&quot;number&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
-&lt;/div&gt;
-&lt;div class=&quot;slider vertical ticked filled&quot; data-init=&quot;slider&quot;&gt;
-  &lt;input type=&quot;number&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
-  &lt;input type=&quot;number&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
-&lt;/div&gt;
-&lt;div class=&quot;slider vertical ticked filled&quot; data-init=&quot;slider&quot;&gt;
-  &lt;input type=&quot;number&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;
-  &lt;input type=&quot;number&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;
-&lt;/div&gt;
-</pre>
-            </div>
-        </section>
-
-        <section id="Checkbox">
-          <h2 class="line">Checkbox</h2>
-          <p>Checkboxes are styling using pure CSS, and a <code class="atv">partial</code> class is provided to indicate a "half-checked" state.</p>
-
-          <div class="componentSample">
-              <div class="example clearfix">
-                <div class="left">
-                  <label><input type="checkbox" name="c1" value="1" checked><span>Checked</span></label><br>
-                  <label><input type="checkbox" name="c2" value="2"><span>Unchecked</span></label><br>
-                  <label><input type="checkbox" name="c3" value="3" class="partial"><span>Partially checked</span></label>
-                </div>
-                <div class="left">
-                  <label><input type="checkbox" name="c4" value="4" disabled checked><span>Disabled Checked</span></label><br>
-                  <label><input type="checkbox" name="c5" value="5" disabled><span>Disabled Unchecked</span></label><br>
-                  <label><input type="checkbox" name="c6" value="6" class="partial" disabled><span>Disabled Partially Checked</span></label>
-                </div>
-              </div>
-              <pre class="prettyprint linenums">
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c1&quot; checked&gt;&lt;span&gt;Checked&lt;/span&gt;&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c2&quot;&gt;&lt;span&gt;Unchecked&lt;/span&gt;&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c3&quot; class=&quot;partial&quot;&gt;&lt;span&gt;Partially checked&lt;/span&gt;&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c4&quot; disabled checked&gt;&lt;span&gt;Disabled Checked&lt;/span&gt;&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c5&quot; disabled&gt;&lt;span&gt;Disabled Unchecked&lt;/span&gt;&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c6&quot; disabled&gt;&lt;span&gt;Disabled Partially Checked&lt;/span&gt;&lt;/label&gt;
-</pre>
-          </div>
-        </section>
-
-        <section id="RadioButtons">
-          <h2 class="line">Radio buttons</h2>
-          <p>Radio buttons are styling using pure CSS.</p>
-
-          <div class="componentSample">
-              <div class="example clearfix">
-                <div class="left">
-                  <label><input type="radio" name="r1" value="1" checked><span>Checked</span></label><br>
-                  <label><input type="radio" name="r1" value="2"><span>Unchecked</span></label>
-                </div>
-                <div class="left">
-                  <label><input type="radio" name="r2" value="1" disabled checked><span>Disabled Checked</span></label><br>
-                  <label><input type="radio" name="r2" value="2" disabled><span>Disabled Unchecked</span></label>
-                </div>
-              </div>
-              <pre class="prettyprint linenums">
-&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;r1&quot; value=&quot;1&quot; checked&gt;&lt;span&gt;&lt;/span&gt;Value 1&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;r1&quot; value=&quot;2&quot;&gt;&lt;span&gt;&lt;/span&gt;Value 2&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;r2&quot; value=&quot;1&quot; disabled checked&gt;&lt;span&gt;Disabled Checked&lt;/span&gt;&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;r2&quot; value=&quot;2&quot; disabled&gt;&lt;span&gt;Disabled Unchecked&lt;/span&gt;&lt;/label&gt;
-</pre>
-          </div>
-        </section>
-
-        <section id="Selector">
-            <h2 class="line">Toggles & Selectors</h2>
-            <h3>Switch</h3>
-            <p>Mutually exclusive, for use in tables.</p>
-
-            <div class="componentSample">
-                <div class="example clearfix">
-                    <label class="switch"><input type="checkbox" name="s1"><span>Off</span><span>On</span></label>
-                    <label class="switch"><input type="checkbox" name="s2" disabled><span>Off</span><span>On</span></label>
-                </div>
-               <pre class="prettyprint linenums">
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s1&quot;&gt;&lt;span&gt;Off&lt;/span&gt;&lt;span&gt;On&lt;/span&gt;&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s2&quot; disabled&gt;&lt;span&gt;Off&lt;/span&gt;&lt;span&gt;On&lt;/span&gt;&lt;/label&gt;
-</pre>
-            </div>
-
-            <h3>Selector</h3>
-            <p>Mutually exclusive.</p>
-
-            <div class="componentSample">
-                <div class="example clearfix">
-                    <div class="left">
-                        <div class="selector">
-                            <label><input type="radio" name="s3"><span>Yes</span></label>
-                            <label><input type="radio" name="s3"><span>No</span></label>
-                        </div>
-                        <div class="selector">
-                            <label><input type="radio" name="s4" disabled><span>Yes</span></label>
-                            <label><input type="radio" name="s4" disabled><span>No</span></label>
-                        </div>
-                    </div>
-                </div>
-               <pre class="prettyprint linenums">
-&lt;div class=&quot;selector&quot;&gt;
-  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;s3&quot;&gt;&lt;span&gt;Yes&lt;/span&gt;&lt;/label&gt;
-  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;s3&quot;&gt;&lt;span&gt;No&lt;/span&gt;&lt;/label&gt;
-&lt;/div&gt;
-&lt;div class=&quot;selector&quot;&gt;
-  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;s4&quot; disabled&gt;&lt;span&gt;Yes&lt;/span&gt;&lt;/label&gt;
-  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;s4&quot; disabled&gt;&lt;span&gt;No&lt;/span&gt;&lt;/label&gt;
-&lt;/div&gt;
-</pre>
-            </div>
-
-            <h3>Multi-Selector</h3>
-            <p>Not mutually exclusive.</p>
-
-            <div class="componentSample">
-                <div class="example clearfix">
-                    <div class="left">
-                        <div class="selector">
-                            <label><input type="checkbox" name="s5"><span>Chicken</span></label>
-                            <label><input type="checkbox" name="s5"><span>Steak</span></label>
-                            <label><input type="checkbox" name="s5"><span>Pork</span></label>
-                        </div>
-                        <div class="selector">
-                            <label><input type="checkbox" name="s6" disabled><span>Chicken</span></label>
-                            <label><input type="checkbox" name="s6" disabled><span>Steak</span></label>
-                            <label><input type="checkbox" name="s6" disabled><span>Pork</span></label>
-                        </div>
-                    </div>
-                </div>
-               <pre class="prettyprint linenums">
-&lt;div class=&quot;selector&quot;&gt;
-  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s5&quot;&gt;&lt;span&gt;Chicken&lt;/span&gt;&lt;/label&gt;
-  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s5&quot;&gt;&lt;span&gt;Steak&lt;/span&gt;&lt;/label&gt;
-  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s5&quot;&gt;&lt;span&gt;Pork&lt;/span&gt;&lt;/label&gt;
-&lt;/div&gt;
-&lt;div class=&quot;selector&quot;&gt;
-  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s6&quot; disabled&gt;&lt;span&gt;Chicken&lt;/span&gt;&lt;/label&gt;
-  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s6&quot; disabled&gt;&lt;span&gt;Steak&lt;/span&gt;&lt;/label&gt;
-  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s6&quot; disabled&gt;&lt;span&gt;Pork&lt;/span&gt;&lt;/label&gt;
-&lt;/div&gt;
-</pre>
-            </div>
-        </section>
-
-		<!-- Draggable -->
-        <section id="Draggable">
-          <h2 class="line">Draggable List</h2>
-          <p>A list with items that can be dragged and dropped.</p>
-
-          <div class="componentSample">
-              <div class="example clearfix">
-                <div class="left">					
-					<ul class="draggable">
-						<li draggable="true">My Content 1<button class="close">&times;</button></li>
-						<li draggable="true">My Content 2<button class="close">&times;</button></li>
-						<li draggable="true">My Content 3<button class="close">&times;</button></li>
-					</ul>
-                </div>
-              </div>
-              <pre class="prettyprint linenums">
-&lt;ul class=&quot;draggable&quot; &gt;
-&lt;li draggable=&quot;true&quot;&gt;My Content 1&lt;button class=&quot;close&quot;&gt;&amp;times&lt;/button&gt;&lt;/li&gt;
-&lt;li draggable=&quot;true&quot;&gt;My Content 2&lt;button class=&quot;close&quot;&gt;&amp;times&lt;/button&gt;&lt;/li&gt;
-&lt;li draggable=&quot;true&quot;&gt;My Content 3&lt;button class=&quot;close&quot;&gt;&amp;times&lt;/button&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</pre>
-          </div>
-        </section>
-
-		<!-- end draggable -->
-
-      </section><!-- /ButtonsAndControls -->
-
-      <section id="DataPresentation">
-        <h1 class="line">Data Presentation</h1>
-        <p>CUI provides basic grids, tables, and lists for data presentation.</p>
-
-        <section class="hidden" id="List">
-          <h2 class="line">List</h2>
-          <p>List.</p>
-
-          <div class="componentSample">
-            <div class="example">
-
-              <ul class="list">
-                <li>Item</li>
-              </ul>
-
-            </div>
-            <pre class="prettyprint linenums"></pre>
-          </div>
-        </section>
-
-        <section class="hidden" id="Grid">
-          <h2 class="line">Grid</h2>
-          <p>Grid.</p>
-
-          <div class="componentSample">
-            <div class="example">
-
-              <ul class="grid">
-                <li>Item</li>
-              </ul>
-
-            </div>
-            <pre class="prettyprint linenums"></pre>
-          </div>
-        </section>
-
-        <section id="Table">
-          <h2 class="line">Table</h2>
-
-          <div class="componentSample">
-            <div class="example">
-              <table class="data" style="width: 50%">
-                <thead>
-                  <tr>
-                    <th class="check"><label><input type="checkbox"><span></span></label></th>
-                    <th>Text</th>
-                    <th>Date</th>
-                    <th class="num">Numbers</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><label><input type="checkbox"><span></span></label></td>
-                    <td>Alpha</td>
-                    <td>December 12th, 2011</td>
-                    <td class="num">912</td>
-                  </tr>
-                  <tr>
-                    <td><label><input type="checkbox"><span></span></label></td>
-                    <td>Bravo</td>
-                    <td>January 28th, 2012</td>
-                    <td class="num">1,049</td>
-                  </tr>
-                  <tr>
-                    <td><label><input type="checkbox"><span></span></label></td>
-                    <td>Charlie</td>
-                    <td>April 10th, 2012</td>
-                    <td class="num">11,130</td>
-                  </tr>
-                  <tr>
-                    <td><label><input type="checkbox"><span></span></label></td>
-                    <td>Delta</td>
-                    <td>June 17th, 2012</td>
-                    <td class="num">731,422</td>
-                  </tr>
-                  <tr>
-                    <td><label><input type="checkbox"><span></span></label></td>
-                    <td>Echo</td>
-                    <td>June 5th, 2012</td>
-                    <td class="num">2,700,120</td>
-                  </tr>
-                </tbody>
-              </table>
-          </div>
-
-          <pre class="prettyprint linenums">
-&lt;table class=&quot;data&quot;&gt;
- &lt;thead&gt;
-   &lt;tr&gt;
-     &lt;th class=&quot;check&quot;&gt;&lt;input type=&quot;checkbox&quot;&gt;&lt;/th&gt;
-     &lt;th&gt;Text&lt;/th&gt;
-     &lt;th&gt;Date&lt;/th&gt;
-     &lt;th class=&quot;num&quot;&gt;Numbers&lt;/th&gt;
-   &lt;/tr&gt;
- &lt;/thead&gt;
- &lt;tbody&gt;
-   &lt;tr&gt;
-     &lt;td&gt;&lt;input type=&quot;checkbox&quot;&gt;&lt;/td&gt;
-     &lt;td&gt;Bravo&lt;/td&gt;
-     &lt;td&gt;January 28th, 2012&lt;/td&gt;
-     &lt;td class=&quot;num&quot;&gt;1,049&lt;/td&gt;
-   &lt;/tr&gt;
- &lt;/tbody&gt;
-&lt;/table&gt;
-</pre>
-          </div>
-
-        </section>
-
-      </section><!-- /DataPresentation -->
-
-      <section id="Dialogs">
-        <h1 class="line">Dialogs</h1>
-        <p>CUI provides various dialogs.</p>
-
-        <section id="Modal">
-          <h2 class="line">Modal</h2>
-          <p>Modals pop over the whole page and prevent interaction underneath them.</p>
-          <p>Modals will progressively enhance existing markup or render their own template if no markup is present. See <a href="jsdoc/index.html">the documentation</a> for more examples.<p>
-            
-          <h3>Variations</h3>
-          <p>Modals can be styled to display alert messages by adding one of the following classes to the modal element or by setting the <code>type</code> option.</p>
-          <ul>
-            <li><code class="atv">default</code> Grey heading, no icon
-            <li><code class="atv">error</code> Red heading, exclamation point icon
-            <li><code class="atv">notice</code> Yellow heading, exclamation point icon
-            <li><code class="atv">success</code> Green heading, checkmark icon
-            <li><code class="atv">help</code> Blue heading, question mark icon
-            <li><code class="atv">info</code> Blue heading, info icon
-          </ul>
-
-          <div class="componentSample">
-            <div class="example">
-
-              <a href="#modal" class="button primary" data-toggle="modal" data-heading="Default Modal" data-type="default">Default</a>
-              <a href="#modal" class="button" data-toggle="modal" data-heading="Error" data-type="error">Error</a>
-              <a href="#modal" class="button" data-toggle="modal" data-heading="Notice" data-type="notice">Notice</a>
-              <a href="#modal" class="button" data-toggle="modal" data-heading="Success" data-type="success">Success</a>
-              <a href="#modal" class="button" data-toggle="modal" data-heading="Help" data-type="help">Help</a>
-              <a href="#modal" class="button" data-toggle="modal" data-heading="Info" data-type="info">Info</a>
-
-              <div id="modal" class="modal">
-                <div class="modal-header">
-                  <h2>Modal from Markup</h2>
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                  <p>This modal was created from markup. Modals can also be created with JavaScript.</p>
-                  <p>See <a href="jsdoc/index.html">the documentation</a> for more examples.</p>
-                </div>
-                <div class="modal-footer">
-                  <button data-dismiss="modal">Close</button><button class="primary" data-dismiss="modal">Save</button>
-                </div>
-              </div>
-
-            </div>
-            <pre class="prettyprint linenums">
-&lt;a href=&quot;#modal&quot; class=&quot;button&quot; data-toggle=&quot;modal&quot;&gt;Show Modal&lt;/a&gt;
-
-&lt;div id=&quot;modal&quot; class=&quot;modal&quot;&gt;
-  &lt;div class=&quot;modal-header&quot;&gt;
-    &lt;h2&gt;Modal from Markup&lt;/h2&gt;
-    &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot;&gt;&amp;times;&lt;/button&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;modal-body&quot;&gt;
-    &lt;p&gt;This modal was created from markup.&lt;/p&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;modal-footer&quot;&gt;
-    &lt;button data-dismiss=&quot;modal&quot;&gt;Close&lt;/button&gt;
-    &lt;button class=&quot;primary&quot; data-dismiss=&quot;modal&quot;&gt;Save&lt;/button&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</pre>
-          </div>
-        </section>
-
-        <section id="Popover">
-          <h2 class="line">Popover</h2>
-          <p>Popovers (WIP).</p>
-
-          <div class="componentSample">
-            <div class="example" style="position: relative; height: 3rem; padding-top: 1.5rem;">
-              <div class="popover arrow-bottom">Popover content!</div>
-              <div class="popover arrow-top" style="left: 10rem">Popover content!</div>
-            </div>
-            <pre class="prettyprint linenums">
-&lt;div class=&quot;popover arrow-bottom&quot;&gt;Popover content&lt;/div&gt;
-&lt;div class=&quot;popover arrow-top&quot;&gt;Popover content&lt;/div&gt;
-</pre>
-          </div>
-        </section>
-
-      </section><!-- /Dialogs -->
-
-      <section id="StatusIndicators">
-        <h1 class="line">Status Indicators</h1>
-        <p>Status indicators provide a way of conveying the progress of an ongoing process or the result of a process that has finished.</p>
-
-        <section id="Alert">
-          <h2 class="line">Alert</h2>
-          <p>Alerts indicate to the result of an operation or that a new information is present.</p>
-          
-          <h3>Variations</h3>
-          <p>There are 5 different styles of alerts:</p>
-          <ul>
-            <li><code class="atv">error</code> Indicate that an operation has failed or that a critical problem is present
-            <li><code class="atv">notice</code> Indicate that an operation completed with warnings, or that a potential problem is present
-            <li><code class="atv">success</code> Indicate that an operation completed without errors or warnings
-            <li><code class="atv">info</code> Provide information to the user, such as indicating that new reports are available
-            <li><code class="atv">help</code> Provide guidance to the user, such as links to help documentation
-          </ul>
-          
-          <h3>Sizing</h3>
-          <p>Alerts usually contain concise messages, but can accommodate larger messages when the <code class="atv">large</code> CSS class is added.</p>
-          
-          <p>The <code class="prettyprint">&lt;button class="close"&gt;</code> tag can be omitted if an alert should not be dismissible.</p>
-
-          <div class="componentSample">
-            <div class="example clearfix">
-
-              <div class="left column">
-                <div class="alert error">
-                  <button class="close" data-dismiss="alert">&times;</button>
-                  <strong>ERROR</strong><div>Uh oh, something went wrong with the whozit!</div>
-                </div>
-
-                <div class="alert notice">
-                  <button class="close" data-dismiss="alert">&times;</button>
-                  <strong>NOTICE</strong><div>Something is about to go wrong with the whozit!</div>
-                </div>
-
-                <div class="alert success">
-                  <button class="close" data-dismiss="alert">&times;</button>
-                  <strong>Success</strong><div>Everything went better than expected with the whozit.</div>
-                </div>
-
-                <div class="alert help">
-                  <button class="close" data-dismiss="alert">&times;</button>
-                  <strong>HELP</strong><div>If you are struggling with the whozit, read <a href="#">the manual</a>.</div>
-                </div>
-
-                <div class="alert info">
-                  <button class="close" data-dismiss="alert">&times;</button>
-                  <strong>INFO</strong><div>For great success, configure the whozit correctly.</div>
-                </div>
-
-              </div>
-
-              <div class="left column">
-
-                <div class="alert error large">
-                  <button class="close" data-dismiss="alert">&times;</button>
-                  <strong>You have missed the deadline</strong><div>In order to prevent taking responsibility, please reset your device using a hammer. The story is, your kid got a hold of it and you need until next week.</div>
-                </div>
-
-                <div class="alert notice large">
-                  <button class="close" data-dismiss="alert">&times;</button>
-                  <strong>Water detected in hard drive bay</strong><div>It seems a flood may be in progress. Please evacuate the building immediately if you're not already doing so. Have a nice day!</div>
-                </div>
-
-                <div class="alert success large">
-                  <button class="close" data-dismiss="alert">&times;</button>
-                  <strong>Everything went better than expected</strong><div>It looks like you pulled through, despite your inability to read the manual. Please attribute your success to this system's intuitive design.</div>
-                </div>
-
-                <div class="alert help large">
-                  <button class="close" data-dismiss="alert">&times;</button>
-                  <strong>It looks like you need help</strong><div>Being of a sound and stable mind state is crucial to performing in the workplace. We suggest you see a psychologist immediately.</div>
-                </div>
-
-                <div class="alert info large">
-                  <button class="close" data-dismiss="alert">&times;</button>
-                  <strong>New feature: Mind reading module</strong><div>By popular demand of our enterprise customers, we have implemented the new Microsloth mind reading module. Think and it shall be!</div>
-                </div>
-
-              </div>
-
-            </div>
-            <pre class="prettyprint linenums">
-&lt;div class=&quot;alert error&quot;&gt;
-  &lt;button class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;&amp;times;&lt;/button&gt;
-  &lt;strong&gt;HEADING&lt;/strong&gt;&lt;div&gt;Content.&lt;/div&gt;
-&lt;/div&gt;
-</pre>
-          </div>
-        </section>
-
-        <section id="Tooltip">
-          <h2 class="line">Tooltip</h2>
-          <p>Tooltips give the user small pieces of information in context by pointing at objects on the page. Tooltips are often used to draw the user's attention to problems in form fields or suggested actions.</p>
-          
-          <h3>Variations</h3>
-          <p>Tooltips are blue by default to indicate they contain helpful information. When tooltips contain other information, such as errors or alerts, the following CSS classes can be applied:</p>
-          <ul>
-            <li><code class="atv">error</code> Draw attention to critical problems
-            <li><code class="atv">notice</code> Draw attention to potential problems
-            <li><code class="atv">success</code> Draw attention to a success state
-          </ul>
-          
-          <h3>Arrow Direction</h3>
-          <p>Tooltips can point different directions by applying the following CSS classes:</p>
-          <ul>
-            <li><code class="atv">arrow-top</code> Point upward
-            <li><code class="atv">arrow-bottom</code> Point downward
-            <li><code class="atv">arrow-left</code> Point left
-            <li><code class="atv">arrow-right</code> Point right
-          </ul>
-          
-          <div class="componentSample">
-            <div class="example clearfix">
-
-              <div class="left">
-
-                <div class="tooltip error arrow-top">Lorem ipsum.</div>
-
-                <div class="tooltip error arrow-bottom">Lorem ipsum.</div>
-
-                <div class="tooltip error arrow-right">Lorem ipsum.</div>
-
-                <div class="tooltip error arrow-left">Lorem ipsum.</div><br>
-
-                <div class="tooltip notice arrow-top">Lorem ipsum.</div>
-
-                <div class="tooltip notice arrow-bottom">Lorem ipsum.</div>
-
-                <div class="tooltip notice arrow-right">Lorem ipsum.</div>
-
-                <div class="tooltip notice arrow-left">Lorem ipsum.</div>
-
-              </div>
-
-              <div class="left">
-
-                <div class="tooltip success arrow-top">Lorem ipsum.</div>
-
-                <div class="tooltip success arrow-bottom">Lorem ipsum.</div>
-
-                <div class="tooltip success arrow-right">Lorem ipsum.</div>
-
-                <div class="tooltip success arrow-left">Lorem ipsum.</div><br>
-
-                <div class="tooltip info arrow-top">Lorem ipsum.</div>
-
-                <div class="tooltip info arrow-bottom">Lorem ipsum.</div>
-
-                <div class="tooltip info arrow-right">Lorem ipsum.</div>
-
-                <div class="tooltip info arrow-left">Lorem ipsum.</div>
-                
-              </div>
-              
-              <div class="clear largeToolTipSample">
-                <input type="text" class="error" value="Some invalid input">
-                <div class="tooltip error arrow-left">
-                  When tooltips contain a large amount of text, they will wrap automatically.
-                </div>
-              </div>
-
-            </div>
-            <pre class="prettyprint linenums">
-&lt;div class=&quot;tooltip error arrow-bottom&quot;&gt;Content&lt;/div&gt;
-</pre>
-          </div>
-        </section>
-
-        <section id="Badge">
-          <h2 class="line">Badge</h2>
-          <p>Badges can be used to indicate a number of items that require attention.</p>
-
-          <h3>Variations</h3>
-          <p>When a badge is showing 0 items, the <code class="atv">empty</code> CSS class should be added.</p>
-
-          <div class="componentSample">
-            <div class="example">
-              <div class="badge">8</div>
-              <div class="badge empty">0</div>
-            </div>
-            <pre class="prettyprint linenums">
-&lt;div class=&quot;badge&quot;&gt;8&lt;/div&gt;
-&lt;div class=&quot;badge empty&quot;&gt;0&lt;/div&gt;
-</pre>
-          </div>
-        </section>
-
-        <section id="Spinner">
-          <h2 class="line">Spinner</h2>
-          <p>Use a spinner to indicate a process is in progress that will occur for an indefinite amount of time by applying the CSS class <code class="atv">spinner</code> to an element.</p>
-
-          <h3>Sizing</h3>
-          <p>Adding the <code class="atv">large</code> CSS class will result in a larger spinner.</p>
-          
-          <div class="componentSample spinnerSample">
-            <div class="example">
-              <div class="spinner"></div>
-              <div class="spinner large"></div>
-            </div>
-            <pre class="prettyprint linenums">
-&lt;div class=&quot;spinner&quot;&gt;&lt;/div&gt;
-&lt;div class=&quot;spinner large&quot;&gt;&lt;/div&gt;
-</pre>
-          </div>
-        </section>
-
-        <section id="ProgressBar">
-          <h2 class="line">Progress Bar</h2>
-          <p>Use a progress bar to indicate the progress of a process.</p>
-          <p>A <code class="prettyprint">&lt;label&gt;</code> tag included immediately after the progress bar can be used to display the numeric value.</p>
-
-          <div class="componentSample spinnerSample">
-            <div class="example">
-              <div class="progress">
-                <div class="bar" style="width: 40%;"></div>
-              </div>
-              <label>40%</label>
-            </div>
-            <pre class="prettyprint linenums">
-&lt;div class=&quot;progress&quot;&gt;
-  &lt;div class=&quot;bar&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;label&gt;40%&lt;/label&gt;
-</pre>
-          </div>
-        </section>
-
-      </section><!-- /StatusIndicators -->
-
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview5.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview3.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview8.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview3.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview2.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview1.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview7.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview6.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview9.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview5.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview4.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview2.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview8.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview3.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+          <article class="card-page"><a href="#">
+            <img src="examples/assets/preview7.png" alt=""/>
+            <h4>Page title</h4>
+            <p class="kind">Launch Copy</p>
+            <p class="date-modified"><i class="icon-calendar">Modified</i> 2 days ago</p>
+            <p class="date-published"><i class="icon-calendar">Published</i> 12 hours ago</p>
+            <p class="variations"><i class="icon-calendar">Variations</i></p>
+          </a></article>
+        </div>
+      </div>
     </div><!-- /content -->
   </div><!-- /page -->
-
-  <a id="SectionAnchor" style="display: none;" title="Right click to copy section URL">&para;</a>
-
 </body>
 </html>

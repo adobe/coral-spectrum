@@ -659,10 +659,10 @@ CUI.rte.plugins.EditToolsPlugin = new Class({
 
     updateState: function(selDef) {
         if (this.cutUI) {
-            this.cutUI.setDisabled(!selDef.isSelection);
+            this.cutUI.setDisabled(!(selDef.isSelection || selDef.selectedDom));
         }
         if (this.copyUI) {
-            this.copyUI.setDisabled(!selDef.isSelection);
+            this.copyUI.setDisabled(!(selDef.isSelection || selDef.selectedDom));
         }
     }
 

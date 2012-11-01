@@ -1,26 +1,54 @@
 /**
-  Class: .toolbar
-  The top toolbar with action icons
+Class: .toolbar
+The top toolbar with action icons
 */
 .toolbar {
-    .clearfix;
     position: relative;
-    line-height: @icon-buttons-size;
-    padding: 3*@px 0;
-    border-bottom: 1px solid @toolbar-border-color;
-
+    height: 46*@px;
+    padding: 0 3*@px;
+    border-bottom: @px solid @toolbar-border-color;
+    
+    .left,
+    .right {
+        z-index: 1;
+        position: relative;
+    }
+    
     .center {
         position: absolute;
-        left: 50%;
-
-        > * {
-            margin-left: -50%;
+        left: 0;
+        right: 0;
+        text-align: center;
+        
+        h1 {
+            display: inline-block;
+            margin: 10px 0 0;
+            line-height: 1.5;
+            font-size: 18*@px;
+            .regularText;
         }
     }
+}
 
-    h1 {
-        margin: 0;
-        line-height: inherit;
-        font-size: 18*@px;
+/**
+    Class: .icongroup
+    Button toolbar of icons defined using the <a> tag
+*/
+.icongroup {
+    .clearfix;
+    line-height: @icon-medium-size;
+
+    a {
+        float: left;
+        padding: 11*@px 8*@px;
+        .icon-medium;
+    }
+
+    .divider {
+        float: left;
+        width: 1px;
+        height: @icon-medium-size;
+        margin: 9*@px 3*@px;
+        background-color: @icon-divider-color;
     }
 }

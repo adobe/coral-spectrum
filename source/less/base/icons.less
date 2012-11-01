@@ -1,0 +1,192 @@
+@icon-xsmall-size: 0.75rem;
+@icon-small-size: 1rem;
+@icon-medium-size: 1.5rem;
+@icon-large-size: 2rem;
+
+@icon-divider-color: rgb(206, 206, 206);
+
+@icon-label-padding-multiplier: 1.25;
+@icon-label-line-height-multiplier: 1.5;
+
+.icon-xsmall() {
+  width: @icon-xsmall-size;
+  height: @icon-xsmall-size;
+  .background-size(@icon-xsmall-size);
+  line-height: @icon-xsmall-size;
+}
+.icon-small() {
+  width: @icon-small-size;
+  height: @icon-small-size;
+  .background-size(@icon-small-size);
+  line-height: @icon-small-size;
+}
+.icon-medium() {
+  width: @icon-medium-size;
+  height: @icon-medium-size;
+  .background-size(@icon-medium-size);
+  line-height: @icon-medium-size;
+}
+.icon-large() {
+  width: @icon-large-size;
+  height: @icon-large-size;
+  .background-size(@icon-large-size);
+  line-height: @icon-large-size;
+}
+
+.hide-inner-text() {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  color: transparent;
+}
+
+/*
+  Default styles for icons
+*/
+[class^="icon-"],
+[class*=" icon-"] {
+  // Use ems by default so we depend on font size of surrounding element
+  width: 1.5em;
+  height: 1.5em;
+  line-height: 1.5em;
+
+  display: inline-block;
+  
+  background-position: center center; // center so padding can be added
+  .background-size(1.5em);
+  background-repeat: no-repeat;
+  
+  vertical-align: top; // make text line up correctly in paragraphs
+  
+  // Hide inner text by default
+  .hide-inner-text;
+  
+  &.withLabel {
+    width: auto;
+    height: auto;
+    
+    text-indent: 0;
+    white-space: inherit;
+    overflow: visible;
+    color: inherit;
+    
+    background-position: left center; // align left so labels can be added
+    
+    &.xsmall {
+      padding: 0;
+      padding-left: @icon-xsmall-size * @icon-label-padding-multiplier;
+      //line-height: @icon-xsmall-size * @icon-label-line-height-multiplier;
+    }
+    &.small {
+      padding: 0;
+      padding-left: @icon-small-size * @icon-label-padding-multiplier;
+      //line-height: @icon-small-size * @icon-label-line-height-multiplier;
+    }
+    &,
+    &.medium {
+      padding: 0;
+      padding-left: @icon-medium-size * @icon-label-padding-multiplier;
+      //line-height: @icon-medium-size * @icon-label-line-height-multiplier;
+    }
+    &.large {
+      padding: 0;
+      padding-left: @icon-large-size * @icon-label-padding-multiplier;
+      //line-height: @icon-large-size * @icon-label-line-height-multiplier;
+    }
+  }
+  
+  &:focus {
+    .glow;
+    border: none;
+  }
+}
+
+
+/*
+  Class: i.icon-* or *.noLabel.icon-*
+  An purely presentational icon that does not have a text label beside it.
+
+  For accessibility purposes, include a text label inside of the icon like so:
+
+    <i class="icon-Add">Add</i>
+
+  The text will be hidden from visual browsers but read by screen readers.
+*/
+i[class^="icon-"],
+i[class*=" icon-"] {
+  font-style: normal;
+}
+
+/*
+  Class: icons within paragraphs
+*/
+p > [class^="icon-"],
+p > [class*=" icon-"] {
+  width: 1em;
+  height: 1em;
+  line-height: 1em;
+  .background-size(1em);
+}
+
+
+[class^="icon-"].xsmall,
+[class*=" icon-"].xsmall { // 12px
+  .icon-xsmall;
+}
+
+[class^="icon-"].small,
+[class*=" icon-"].small { // 16px
+  .icon-small;
+}
+
+[class^="icon-"].medium,
+[class*=" icon-"].medium { // 24px
+  .icon-medium;
+}
+
+[class^="icon-"].large,
+[class*=" icon-"].large { // 32px
+  .icon-large;
+}
+
+/*
+  Class: a.icon-* and span.icon-*
+  An icon with a label. Use <a> for clickable icons and <span> for non-clickable.
+*/
+
+button,
+a.button {
+  i[class^="icon-"],
+  i[class*=" icon-"] {
+    .icon-small;
+    margin-right: 0.25rem;
+    //margin: -0.25rem 0.25rem -0.35rem 0; // For 24px, Don't push the button to a taller height
+  }
+}
+
+button[class^="icon-"],
+button[class*=" icon-"] {
+  margin: 0;
+  padding: 0;
+
+  font-size: inherit;
+  
+  min-width: 0;
+  
+  &,
+  &:hover,
+  &:active {
+    border: none;
+
+    box-shadow: none;
+
+    background-color: transparent;
+    background-repeat: no-repeat;
+    
+    color: inherit;
+    text-shadow: none;
+    font-weight: normal;
+    
+    filter: none;
+  }
+}

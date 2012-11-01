@@ -7,4 +7,14 @@ ul {
   li + li {
     margin-top: 0.357em; // use em to font size is taken into account
   }
+
+  &.notype {
+  	list-style: none;
+  	padding: 0;
+
+  	> li {
+    	padding: 0;
+    	margin: 0;
+  	}	
+  }
 }

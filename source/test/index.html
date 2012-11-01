@@ -31,6 +31,20 @@
   <!-- Mocha -->
   <script src="libs/mocha/mocha.js"></script>
   <script>mocha.setup('bdd')</script>
+  <script>
+    // configuration for phantomJS
+    if (window.PHANTOMJS) {
+      $.fn.finger = function () {
+        return this; 
+      };
+
+      $.fn.pointer = function () {
+        this.on.apply(this, arguments);
+
+        return this;
+      };
+    }
+  </script>
   
   <!-- CoralUI files -->
   <script>

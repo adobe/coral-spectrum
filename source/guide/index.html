@@ -27,9 +27,9 @@
 
   <header class="top">
 
-    <div class="logo"><img src="images/theme/cloudui.png" alt="CoralUI logo"></div>
+    <div class="logo"><img src="images/theme/cloudui.png" alt="CoralUI logo"/></div>
 
-    <nav class="crumbs">
+    <nav class="main">
       <a href="#" class="selected">Guide</a>
       <a href="jsdoc/index.html">Docs</a>
       <a href="https://git.corp.adobe.com/Reef/CoralUI/">Github</a>
@@ -59,12 +59,13 @@
         </section>
 
         <section class="links foldable">
-            <a class="heading" href="#TextStyles">Text Styles</a>
+            <a class="heading" href="#GeneralStyles">General Styles</a>
 
             <nav class="fold">
               <a href="#Headings">Headings</a>
               <a href="#Link">Link</a>
               <a href="#Fonts">Fonts</a>
+              <a href="#Icons">Icons</a>
             </nav>
         </section>
 
@@ -102,6 +103,7 @@
               <a href="#Selector">Selector</a>
               <a href="#Slider">Slider</a>
               <a href="#Dropdown">Dropdown</a>
+              <a href="#Datepicker">Datepicker</a>
               <a href="#Draggable">Draggable</a>
             </nav>
         </section>
@@ -113,6 +115,7 @@
               <a href="#List">List</a>
               <a href="#Table">Table</a>
               <a href="#Grid">Grid</a>
+              <a href="#Cards">Cards</a>
             </nav>
         </section>
 
@@ -175,7 +178,7 @@
 
       </section>
 
-      <section id="TextStyles">
+      <section id="GeneralStyles">
         <h1 class="line">Text Styles</h1>
         <p>CUI provides basic text styles suitable for paragraph. When laying out your page, you might need to override the margins on the heading elements.</p>
 
@@ -267,7 +270,125 @@
               </tr>
             </tbody>
           </table>
-        </section>  
+        </section>
+        
+
+        <section id="Icons">
+          <h2 class="line">Icons</h2>
+          <p>Icons can be added to a number of different elements by using the <code class="atv">icon-*</code> classes that correspond to the icon's filename.</p>
+          
+          <h3>Usage Guidelines</h3>
+          <p>Icons should be applied to three different tags:</p>
+          <ul>
+            <li><code class="prettyprint">&lt;i&gt;</code>: Illustrative</li>
+            <li><code class="prettyprint">&lt;a&gt;</code>: Navigational</li>
+            <li><code class="prettyprint">&lt;button&gt;</code>: Actionable</li>
+          </ul>
+          
+          <h3>Accessibility</h3>
+          <p>Always include label inside of the tag to indicate the icon's function. This text isn't visible by default, but is always readable by screen readers.</p>
+          <p>If you want to show the text, add the <code class="atv">withLabel</code> CSS class.</p>
+         
+          <h3>Sizing</h3>
+          <p>When used without context, icons should be given a size:</p>
+          <ul>
+            <li><code class="atv">xsmall</code> 12x12</li>
+            <li><code class="atv">small</code> 16x16</li>
+            <li><code class="atv">medium</code> 24x24</li>
+            <li><code class="atv">large</code> 32x32</li>
+          </ul>
+          
+          <div class="componentSample">
+              <div class="example">
+                <div class="iconSample">
+                    <div class="sampleTitle left">Illustrative</div>
+                    <div class="sample"><i class="icon-paintbucket">Paint</i><br><br><i class="icon-paintbucket withLabel">Paint</i></div>
+                </div>
+                
+                <div class="iconSample">
+                    <div class="sampleTitle left">Navigational</div>
+                    <div class="sample"><a href="#" class="icon-paintbucket">Paint</a><br><br><a href="#" class="icon-paintbucket withLabel">Paint</a></div>
+                </div>
+                  
+                <div class="iconSample">
+                    <div class="sampleTitle left">Actionable</div>
+                    <div class="sample"><button class="icon-paintbucket">Paint</button><br><br><button class="icon-paintbucket withLabel">Paint</button></div>
+                </div>
+
+                <!-- 
+                Buttons
+                TBD: Is this accessible?
+                <div class="iconSample">
+                    <div class="sampleTitle left">Icon within button (<code class="prettyprint">&lt;button&gt;</code> and <code class="prettyprint">&lt;i&gt;</code>)</div>
+                    <div class="sample"><button><i class="icon-trash"></i>Delete</button></div>
+                </div>
+                
+                <div class="iconSample">
+                    <div class="sampleTitle left">Icon within button (<code class="prettyprint">&lt;a&gt;</code> and <code class="prettyprint">&lt;i&gt;</code>)</div>
+                    <div class="sample"><a href="#" role="button" class="button"><i class="icon-trash"></i>Delete</a></div>
+                </div>
+                
+                <div class="iconSample">
+                    <div class="sampleTitle left">Icon within button (<code class="prettyprint">&lt;button&gt;</code> and <code class="prettyprint">&lt;i&gt;</code>)</div>
+                    <div class="sample"><button class="primary"><i class="icon-trash"></i>Delete</button></div>
+                </div>
+                
+                <div class="iconSample">
+                    <div class="sampleTitle left">Icon within button (<code class="prettyprint">&lt;button&gt;</code> and <code class="prettyprint">&lt;i&gt;</code>)</div>
+                    <div class="sample"><button class="warning"><i class="icon-trash"></i>Delete</button></div>
+                </div>
+                -->
+                
+
+                <!--
+                Icon group
+                <div class="iconSample">
+                    <div class="sampleTitle left">Icon Group</div>
+                    <div class="icongroup">
+                        <a href="#" class="icon-cards">Cards</a>
+                        <span class="divider"></span>
+                        <a href="#" class="icon-calendar">Calendar</a>
+                        <a href="#" class="icon-cart">Cart</a>
+                        <a href="#" class="icon-addgrid">Add</a>
+                    </div>
+                </div>
+                -->
+                
+                <!--
+                Paragraphs
+                
+                <p><i class="icon-calendar">Calendar</i>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. Pellentesque congue diam ac nisl vehicula ornare. Cras eu consectetur enim. Aliquam orci augue, sollicitudin nec aliquam sit amet, imperdiet ac leo. Donec aliquam tellus nec ipsum porttitor ut viverra odio luctus. Curabitur in turpis sed nunc consequat ornare eget in nulla. Nam dignissim lectus sed velit sagittis vehicula. Maecenas interdum, quam vel luctus sagittis, mi nisl commodo sapien, eget accumsan nunc metus ac ipsum.</p>
+                
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. Pellentesque congue diam ac nisl vehicula ornare. <i class="icon-calendar">Calendar</i>Cras eu consectetur enim. Aliquam orci augue, sollicitudin nec aliquam sit amet, imperdiet ac leo. Donec aliquam tellus nec ipsum porttitor ut viverra odio luctus. Curabitur in turpis sed nunc consequat ornare eget in nulla. Nam dignissim lectus sed velit sagittis vehicula. Maecenas interdum, quam vel luctus sagittis, mi nisl commodo sapien, eget accumsan nunc metus ac ipsum.</p>
+                
+                <p style="font-size: 2rem"><i class="icon-calendar">Calendar</i>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. Pellentesque congue diam ac nisl vehicula ornare. Cras eu consectetur enim. Aliquam orci augue, sollicitudin nec aliquam sit amet, imperdiet ac leo. Donec aliquam tellus nec ipsum porttitor ut viverra odio luctus. Curabitur in turpis sed nunc consequat ornare eget in nulla. Nam dignissim lectus sed velit sagittis vehicula. Maecenas interdum, quam vel luctus sagittis, mi nisl commodo sapien, eget accumsan nunc metus ac ipsum.</p>
+                
+                <p style="font-size: 2rem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. Pellentesque congue diam ac nisl vehicula ornare. <i class="icon-calendar">Calendar</i>Cras eu consectetur enim. Aliquam orci augue, sollicitudin nec aliquam sit amet, imperdiet ac leo. Donec aliquam tellus nec ipsum porttitor ut viverra odio luctus. Curabitur in turpis sed nunc consequat ornare eget in nulla. Nam dignissim lectus sed velit sagittis vehicula. Maecenas interdum, quam vel luctus sagittis, mi nisl commodo sapien, eget accumsan nunc metus ac ipsum.</p>
+                -->
+                
+              </div>
+            <pre class="prettyprint linenums">
+&lt;!-- Illustrative --&gt;
+&lt;i class=&quot;icon-paintbucket&quot;&gt;Paint&lt;/i&gt;
+
+&lt;!-- Illustrative with label --&gt;
+&lt;i class=&quot;icon-paintbucket withLabel&quot;&gt;Paint&lt;/i&gt;
+
+&lt;!-- Navigational --&gt;
+&lt;a href=&quot;#&quot; class=&quot;icon-paintbucket&quot;&gt;Paint&lt;/a&gt;
+
+&lt;!-- Navigational with label --&gt;
+&lt;a href=&quot;#&quot; class=&quot;icon-paintbucket withLabel&quot;&gt;Paint&lt;/a&gt;
+
+&lt;!-- Actionable --&gt;
+&lt;button class=&quot;icon-paintbucket&quot;&gt;Paint&lt;/button&gt;
+
+&lt;!-- Actionable with label --&gt;
+&lt;button class=&quot;icon-paintbucket withLabel&quot;&gt;Paint&lt;/button&gt;
+</pre>
+          </div>
+        </section>
+
 
       </section><!-- /Text Styles -->
 
@@ -334,8 +455,8 @@
                     </section>
                     <section>
                         <h4>Revised asset ready for review</h4>
-                        <div class="small grey light">Modified yesterday by Rob Cobourn</div>
-                        <p class="small">I created a new segment thing for the Chance campaign because we left out the Foursquare that will be checking in at Olympic events.</p>
+                        <div class="smallText greyText lightText">Modified yesterday by Rob Cobourn</div>
+                        <p class="smallText">I created a new segment thing for the Chance campaign because we left out the Foursquare that will be checking in at Olympic events.</p>
                     </section>
                   </div>
                 </div>
@@ -349,12 +470,12 @@
 &lt;div class=&quot;page&quot; role=&quot;main&quot;&gt;
   &lt;div class=&quot;rail right&quot; role=&quot;complementary&quot;&gt;
     &lt;div class=&quot;pull-to-refresh&quot;&gt;
-      &lt;div class=&quot;message&quot;;&gt;
-        &lt;i class=&quot;arrow&quot;;&gt;&lt;/i;&gt;
-        &lt;i class=&quot;spinner large&quot;;&gt;&lt;/i;&gt;
-        &lt;span class=&quot;pull&quot;;&gt;Pull to refresh&lt;/span;&gt;
-        &lt;span class=&quot;release&quot;;&gt;Release to refresh&lt;/span;&gt;
-        &lt;span class=&quot;loading&quot;;&gt;Loading&lt;/span;&gt;
+      &lt;div class=&quot;message&quot;&gt;
+        &lt;i class=&quot;arrow&quot;&gt;&lt;/i;&gt;
+        &lt;i class=&quot;spinner large&quot;&gt;&lt;/i;&gt;
+        &lt;span class=&quot;pull&quot;&gt;Pull to refresh&lt;/span;&gt;
+        &lt;span class=&quot;release&quot;&gt;Release to refresh&lt;/span;&gt;
+        &lt;span class=&quot;loading&quot;&gt;Loading&lt;/span;&gt;
       &lt;/div;&gt;
     &lt;/div&gt;
     &lt;div class=&quot;wrap&quot;&gt;
@@ -363,8 +484,8 @@
       &lt;/section&gt;
       &lt;section&gt;
           &lt;h4&gt;Revised asset ready for review&lt;/h4&gt;
-          &lt;div class=&quot;small grey light&quot;&gt;Modified yesterday by Rob Cobourn&lt;/div&gt;
-          &lt;p class=&quot;small&quot;&gt;I created a new segment thing for the...&lt;/p&gt;
+          &lt;div class=&quot;smallText greyText lightText&quot;&gt;Modified yesterday by Rob Cobourn&lt;/div&gt;
+          &lt;p class=&quot;smallText&quot;&gt;I created a new segment thing for the...&lt;/p&gt;
       &lt;/section&gt;
     &lt;/div&gt;
   &lt;/div&gt;
@@ -415,39 +536,38 @@
 
           <div class="componentSample">
             <div class="example">
-              <h4>Toolbar</h4>
               <nav class="toolbar">
-                <div class="left icons-group">
-                  <a href="#" class="icon-rail">Rail</a>
+                <div class="left icongroup">
+                  <a href="#" class="icon-addgrid">Add</a>
                   <span class="divider"></span>
-                  <a href="#" class="icon-edit">Edit</a>
-                  <a href="#" class="icon-message">Message</a>
-                  <a href="#" class="icon-download">Download</a>
+                  <a href="#" class="icon-calendar">Calendar</a>
+                  <a href="#" class="icon-cart">Cart</a>
+                  <a href="#" class="icon-paintbucket">Paint</a>
                 </div>
                 <div class="center">
                   <h1>Page Title</h1>
                 </div>
-                <div class="right icons-group">
-                  <a href="#" class="icon-list-view">List View</a>
-                  <a href="#" class="icon-search">Search</a>
+                <div class="right icongroup">
+                  <a href="#" class="icon-cards">Cards</a>
+                  <a href="#" class="icon-trash">Trash</a>
                 </div>
               </nav>
             </div>
             <pre class="prettyprint linenums">
 &lt;nav class=&quot;toolbar&quot;&gt;
-  &lt;div class=&quot;left icons-group&quot;&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-rail&quot;&gt;Rail&lt;/a&gt;
+  &lt;div class=&quot;left icongroup&quot;&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-addgrid&quot;&gt;Add&lt;/a&gt;
     &lt;span class=&quot;divider&quot;&gt;&lt;/span&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-edit&quot;&gt;Edit&lt;/a&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-message&quot;&gt;Message&lt;/a&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-download&quot;&gt;Download&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-calendar&quot;&gt;Calendar&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-cart&quot;&gt;Cart&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-paintbucket&quot;&gt;Paint&lt;/a&gt;
   &lt;/div&gt;
   &lt;div class=&quot;center&quot;&gt;
     &lt;h1&gt;Page Title&lt;/h1&gt;
   &lt;/div&gt;
-  &lt;div class=&quot;right icons-group&quot;&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-list-view&quot;&gt;List View&lt;/a&gt;
-    &lt;a href=&quot;#&quot; class=&quot;icon-search&quot;&gt;Search&lt;/a&gt;
+  &lt;div class=&quot;right icongroup&quot;&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-cards&quot;&gt;Cards&lt;/a&gt;
+    &lt;a href=&quot;#&quot; class=&quot;icon-trash&quot;&gt;Trash&lt;/a&gt;
   &lt;/div&gt;
 &lt;/nav&gt;
             </pre>
@@ -462,7 +582,7 @@
             <div class="example">
 
               <nav class="crumbs">
-                <a href="#"><img src="images/theme/cloudui.png"></a>
+                <a href="#"><img src="images/theme/cloudui.png" alt="CoralUI logo"/></a>
                 <a href="#">Admin</a>
                 <a href="#">Settings</a>
                 <a href="#">Current Page Title</a>
@@ -470,7 +590,7 @@
             </div>
             <pre class="prettyprint linenums">
 &lt;nav class=&quot;crumbs&quot;&gt;
-  &lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/theme/cloudui.png&quot;&gt;&lt;/a&gt;
+  &lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/theme/cloudui.png&quot; alt=&quot;CoralUI logo&quot;&gt;&lt;/a&gt;
   &lt;a href=&quot;#&quot;&gt;Admin&lt;/a&gt;
   &lt;a href=&quot;#&quot;&gt;Settings&lt;/a&gt;
   &lt;a href=&quot;#&quot;&gt;Current Page Title&lt;/a&gt;
@@ -556,55 +676,6 @@
 &lt;button class=&quot;primary&quot;&gt;Primary Action&lt;/button&gt; 
 &lt;button class=&quot;warning&quot;&gt;Warning&lt;/button&gt;
 &lt;button disabled&gt;Disabled&lt;/button&gt;
-</pre>
-          </div>
-        </section>
-
-        <section id="Icons">
-          <h2 class="line">Icons (WIP)</h2>
-          <p>Icons can be applied to any element with one of the <code class="atv">icon-*</code> classes. As a general rule, to keep the application accessible, always label your icons with a text. There are different techniques in case you want to visually hide your label: you can either apply the <code class="atv">hidden-accessible</code> class to the label, or include your icons in an element with the class <code class="atv">icons-group</code>.</p>
-          <p><strong>Note:</strong> The icons currently use an arbitrary letter from the alphabet. This will later be replaced with a custom font, an SVG graphic, or a sprite image. Currently, unless the icon is in a <code class="atv">icons-group</code>, the icon takes the width of the letter in the font, this is a temporary behavior.</p>
-          <div class="componentSample buttonSample">
-              <div class="example">
-              <div class="iconsSample">
-                  <div class="sampleTitle left">No Links</div>
-                  <p><i class="icon-rail">Label</i> <span class="iconsLabel">&larr; label inside icon element</span></p>
-                  <p><i class="icon-edit"></i>Label <span class="iconsLabel">&larr; label outside of icon element</span></p>
-                  <p><i class="icon-message"><span class="hidden-accessible">Label </span></i><span class="iconsLabel">&larr; label hidden but accessible</span></p>
-              </div>
-              <div class="iconsSample">
-                  <div class="sampleTitle left">Links</div>
-                  <p><a href="#" class="icon-download">Label</a> <span class="iconsLabel">&larr; label in link</span></p>
-                  <p><a href="#" class="icon-list-view"><span class="hidden-accessible">Label</span></a> <span class="iconsLabel">&larr; label hidden but accessible</span></p>
-              </div>
-              <div class="iconsSample">
-                  <div class="sampleTitle left">Icons Group</div>
-                  <div class="icons-group">
-                      <a href="#" class="icon-rail">Rail</a>
-                      <span class="divider"></span>
-                      <a href="#" class="icon-edit">Edit</a>
-                      <a href="#" class="icon-message">Message</a>
-                      <a href="#" class="icon-download">Download</a>
-                      <a href="#" class="icon-list-view">List View</a>
-                      <span class="iconsLabel">&larr; with divider after the first element</span>
-                  </div>
-              </div>
-            <pre class="prettyprint linenums">
-&lt;i class=&quot;icon-rail&quot;&gt;Label&lt;/i&gt;
-&lt;i class=&quot;icon-rail&quot;/&gt;Label
-&lt;i class=&quot;icon-rail&quot;&gt;&lt;span class=&quot;hidden-accessible&quot;&gt;Label&lt;/span&gt;&lt;/i&gt;
-
-&lt;a href=&quot;#&quot; class=&quot;icon-rail&quot;&gt;Label&lt;/a&gt;
-&lt;a href=&quot;#&quot; class=&quot;icon-rail&quot;&gt;&lt;span class=&quot;hidden-accessible&quot;&gt;Label&lt;/span&gt;&lt;/a&gt;
-
-&lt;div class=&quot;icons-group&quot;&gt;
-  &lt;a href=&quot;#&quot; class=&quot;icon-rail&quot;&gt;Rail&lt;/a&gt;
-  &lt;span class=&quot;divider&quot;&gt;&lt;/span&gt;
-  &lt;a href=&quot;#&quot; class=&quot;icon-edit&quot;&gt;Edit&lt;/a&gt;
-  &lt;a href=&quot;#&quot; class=&quot;icon-message&quot;&gt;Message&lt;/a&gt;
-  &lt;a href=&quot;#&quot; class=&quot;icon-download&quot;&gt;Download&lt;/a&gt;
-  &lt;a href=&quot;#&quot; class=&quot;icon-list-view&quot;&gt;List View&lt;/a&gt;
-&lt;/div&gt;
 </pre>
           </div>
         </section>
@@ -858,7 +929,7 @@
                       </div>
                   </div>
                 <pre class="prettyprint linenums">
-&lt!-- Standard Single select --&gt;
+&lt;!-- Standard Single select --&gt;
 &lt;div class="dropdown" data-init="dropdown"&gt;
     &lt;button&gt;Single Select&lt;/button&gt;
     &lt;select name="dropdown"&gt;
@@ -868,7 +939,7 @@
     &lt;/select&gt;
 &lt;/div&gt;
 
-&lt!-- Multi select --&gt;
+&lt;!-- Multi select --&gt;
 &lt;div class="dropdown" data-init="dropdown"&gt;
     &lt;button&gt;Multi Select&lt;/button&gt;
     &lt;select name="dropdown2" multiple&gt;
@@ -878,7 +949,7 @@
     &lt;/select&gt;
 &lt;/div&gt;
 
-&lt!-- Editable --&gt;
+&lt;!-- Editable --&gt;
 &lt;div class="dropdown dropdown-editable" data-editable="true" data-init="dropdown"&gt;
     &lt;input type="text" placeholder="Editable Select"&gt;
     &lt;button&gt;Editable&lt;/button&gt;
@@ -889,7 +960,7 @@
     &lt;/select&gt;
 &lt;/div&gt;
 
-&lt!-- Disabled --&gt;
+&lt;!-- Disabled --&gt;
 &lt;div class="dropdown" data-init="dropdown" data-disabled="true"&gt;
     &lt;button&gt;Disabled&lt;/button&gt;
     &lt;select name="dropdown4"&gt;
@@ -899,7 +970,7 @@
     &lt;/select&gt;
 &lt;/div&gt;
 
-&lt!-- Error --&gt;
+&lt;!-- Error --&gt;
 &lt;div class="dropdown error" data-init="dropdown"&gt;
     &lt;button&gt;Error&lt;/button&gt;
     &lt;select name="dropdown5" &gt;
@@ -913,10 +984,38 @@
                   
           </section>
 
+        <section id="Datepicker">
+            <h2 class="line">Datepicker (WIP)</h2>
+            <p>The datepicker component.</p>
 
+            <div class="componentSample">
+                <div class="example clearfix">
+                    <div class="column left">
+                        <div class="datepicker" data-init="datepicker">
+                            <input type="text" value="1986-12-11">
+                            <button><span class="icon-calendar small">Datepicker</span></button>
+                        </div>
+                        <div class="datepicker" data-init="datepicker">
+                            <input type="text" value="1986-12-11" disabled>
+                            <button disabled><span class="icon-calendar small">Datepicker</span></button>
+                        </div>
+                    </div>
+                </div>
+              <pre class="prettyprint linenums">
+&lt;div class=&quot;datepicker&quot; data-init=&quot;datepicker&quot;&gt;
+  &lt;input type=&quot;text&quot; value=&quot;1986-12-11&quot;&gt;
+  &lt;button&gt;&lt;span class=&quot;icon-calendar small&quot;&gt;Datepicker&lt;/span&gt;&lt;/button&gt;
+&lt;/div&gt;
+&lt;div class=&quot;datepicker&quot; data-init=&quot;datepicker&quot;&gt;
+  &lt;input type=&quot;text&quot; value=&quot;1986-12-11&quot; disabled&gt;
+  &lt;button disabled&gt;&lt;span class=&quot;icon-calendar small&quot;&gt;Datepicker&lt;/span&gt;&lt;/button&gt;
+&lt;/div&gt;
+</pre>
+            </div>
+        </section>
 
         <section id="Slider">
-            <h2 class="line">Sliders (WIP)</h2>
+            <h2 class="line">Sliders</h2>
             <p>Different types of horizontal sliders.</p>
 
             <div class="componentSample">
@@ -1126,7 +1225,6 @@
             </div>
         </section>
 
-		<!-- Draggable -->
         <section id="Draggable">
           <h2 class="line">Draggable List</h2>
           <p>A list with items that can be dragged and dropped.</p>
@@ -1134,11 +1232,11 @@
           <div class="componentSample">
               <div class="example clearfix">
                 <div class="left">					
-					<ul class="draggable">
-						<li draggable="true">My Content 1<button class="close">&times;</button></li>
-						<li draggable="true">My Content 2<button class="close">&times;</button></li>
-						<li draggable="true">My Content 3<button class="close">&times;</button></li>
-					</ul>
+                  <ul class="draggable">
+                    <li draggable="true">My Content 1<button class="close">&times;</button></li>
+                    <li draggable="true">My Content 2<button class="close">&times;</button></li>
+                    <li draggable="true">My Content 3<button class="close">&times;</button></li>
+                  </ul>
                 </div>
               </div>
               <pre class="prettyprint linenums">
@@ -1150,8 +1248,6 @@
 </pre>
           </div>
         </section>
-
-		<!-- end draggable -->
 
       </section><!-- /ButtonsAndControls -->
 
@@ -1263,6 +1359,95 @@
           </div>
 
         </section>
+
+        <section id="Cards">
+
+          <h2 class="line">Cards</h2>
+          <p>There are many cards for displaying data. They are not always card shaped, but we still call them that.</p>
+
+          <h3>Variations</h3>
+          <p>Follows are basic card types.  More advanced card types will be added.</p>
+          <ul>
+            <li>Asset Card: for a single item.
+            <li>Collection Card: for a collection of items.
+            <li>Directory Card: for a directory of items.
+          </ul>
+
+          <h3 class="line">Asset Card View</h3>
+          <p>For a single asset.  Can include some descriptive fields, as shown below.</p>
+
+          <div class="componentSample">
+            <div class="example">
+
+              <div class="card-asset">
+                <img src="https://lh5.googleusercontent.com/-Jw12BvbSrH4/UHylAGRIsrI/AAAAAAAADUI/2lXvalAiCgU/s288/20121010-IMG_2547.jpg" alt=""/>
+                <p class="asset-title">title</p>
+                <p class="asset-description">description</p>
+                <p class="asset-details">details</p>
+              </div>
+            </div>
+            <pre class="prettyprint linenums">
+&lt;div class=&quot;card-asset&quot;&gt;
+  &lt;img src=&quot;fake_card_asset.jpg&quot;/&gt;
+  &lt;p class="asset-title"&gt;title&lt;/p&gt;
+  &lt;p class="asset-description"&gt;description&lt;/p&gt;
+  &lt;p class="asset-details"&gt;details&lt;/p&gt;
+&lt;/div&gt;
+            </pre>
+          </div>
+        
+          <h3 id="CollectionCard" class="line">Collection Card View</h3>
+          <p>DAM Collection View</p>
+
+          <div class="componentSample">
+            <div class="example">
+
+              <div class="card-collection">
+                <img src="https://lh5.googleusercontent.com/-Jw12BvbSrH4/UHylAGRIsrI/AAAAAAAADUI/2lXvalAiCgU/s288/20121010-IMG_2547.jpg" alt=""/>
+                <div class="collection-banner">
+                  <p class="title">This would be the banner</p>
+                  <p class="details">Banner Details (icons)</p>
+                  </div>
+              </div>
+
+            </div>
+            <pre class="prettyprint linenums">
+&lt;div class=&quot;card-collection&quot;&gt;
+  &lt;img src=&quot;fake_image.jpg&quot;/&gt;
+  &lt;div class=&quot;collection-banner&quot;&gt;
+    &lt;p&gt;This would be the banner&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+            </pre>
+          </div>
+
+
+
+          <h3 id="DirectoryCard" class="line">Collection Card View</h3>
+          <p>DAM Directory View</p>
+
+          <div class="componentSample">
+            <div class="example">
+
+              <div class="card-directory">
+                <img src="https://lh5.googleusercontent.com/-Jw12BvbSrH4/UHylAGRIsrI/AAAAAAAADUI/2lXvalAiCgU/s288/20121010-IMG_2547.jpg" alt=""/>
+                  <p class="title">Directory Title</p>
+                  <p class="details">Directory Details (icons)</p>
+              </div>
+
+            </div>
+
+            <pre class="prettyprint linenums">
+&lt;div class=&quot;card-directory&quot;&gt;
+  &lt;img src=&quot;fake_content.jpg&quot; alt=&quot;&quot;/&gt;
+  &lt;p class=&quot;title&quot;&gt;Directory Title&lt;/p&gt;
+  &lt;p class=&quot;details&quot;&gt;Directory Details (icons)&lt;/p&gt;
+&lt;/div&gt;
+            </pre>
+          </div>
+
+
+        </section><!-- Cards -->  
 
       </section><!-- /DataPresentation -->
 

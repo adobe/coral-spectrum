@@ -913,7 +913,7 @@ CUI.rte.DomProcessor = function() {
                 copyNode = copyNode ? copyNode : com.getLastChild(node);
                 copyNode = copyNode ? copyNode : node;
                 while (copyNode != node) {
-                    if (copyNode.nodeType == 1) {
+                    if ((copyNode.nodeType == 1) && !dpr.isNoInsertNode(copyNode)) {
                         var clonedNode = copyNode.cloneNode(false);
                         if (clonedRoot != null) {
                             clonedNode.appendChild(clonedRoot);

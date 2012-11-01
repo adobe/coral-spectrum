@@ -111,6 +111,18 @@ CUI.rte.Utils = function() {
             return getHooks().onPluginCreated(plugin);
         },
 
+        resolveRelativePath: function(relPath) {
+            return getHooks().resolveRelativePath(relPath);
+        },
+
+        isExistingPage: function(path) {
+            return getHooks().isExistingPage(path);
+        },
+
+        getServerPrefix: function(url) {
+            return getHooks().getServerPrefix(url);
+        },
+
         URL_IMAGE: "image"
 
     };
