@@ -167,7 +167,7 @@ module.exports = function(grunt) {
   var packages = {
     "cui": [ "cui-templates", "cui"],
     "rte-core-extjs": [ "rte-setup", "rte-extjs-adapter", "rte-core" ],
-    "cui-with-rte": [ "cui-templates", "cui", "rte-setup", "rte-jquery-adapter", "rte-core", "rte-cui", "rte-init" ]
+    "rte-for-cui": [ "rte-setup", "rte-jquery-adapter", "rte-core", "rte-cui", "rte-init" ]
   };
 
   /**
@@ -430,9 +430,9 @@ module.exports = function(grunt) {
         src: getIncludes("rte-core-extjs", dirs.source+'/js/'),
         dest: '<%= dirs.build %>/js/rte-core-extjs.js'
       },
-      "cui-with-rte": {
-        src: getIncludes("cui-with-rte", dirs.source+'/js/'),
-        dest: '<%= dirs.build %>/js/CUI-with-rte.js'
+      "rte-for-cui": {
+        src: getIncludes("rte-for-cui", dirs.source+'/js/'),
+        dest: '<%= dirs.build %>/js/rte-for-cui.js'
       }
     },
 
@@ -552,7 +552,7 @@ module.exports = function(grunt) {
   grunt.registerTask('partial', 'lint copy handlebars concat:cui min:cui icons less concat:cui_css mincss mocha');
 
   // Full build with docs and compressed file
-  grunt.registerTask('full-build', 'lint copy handlebars concat:cui concat:rte-core-extjs concat:cui-with-rte min icons less concat:cui_css mincss mocha jsdoc');
+  grunt.registerTask('full-build', 'lint copy handlebars concat:cui concat:rte-core-extjs concat:rte-for-cui min icons less concat:cui_css mincss mocha jsdoc');
 
   // Full build with docs and compressed file
   grunt.registerTask('full', 'clean full-build');
