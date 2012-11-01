@@ -24,7 +24,7 @@
          @param {Object}   options                                    Component options
          @param {Array}    [options.options=empty array]              Array of available options (will be read from &lt;select&gt; by default)
          @param {Array}    [options.optionDisplayStrings=empty array] Array of alternate strings for display (will be read from &lt;select&gt; by default)
-         @param {Function} [options.optionLoader]                     (Optional) Callback to be called to reload options list
+         @param {Function} [options.optionLoader=use options]         (Optional) Callback to reload options list
          @param {boolean}  [options.showTitles=true]                  Should option titles be shown?
          @param {String}   [options.rootPath='/content']              The root path where completion and browsing starts.
                                                                       Use the empty string for the repository root (defaults to '/content').
@@ -133,7 +133,7 @@
             autocompleteCallback: null,
             options: [],
             optionDisplayStrings: [],
-            optionsLoader: null,
+            optionLoader: null,
             showTitles: true,
             rootPath: "/content",
             rootTitle: "Websites", // TODO: localize
@@ -262,9 +262,10 @@
             if (this.$element.attr("data-option-loader")) {
                 try {
                     var Fn = Function;
-                    this.optionLoader = new Fn("path", this.$element.attr("data-option-loader"));
+                    this.options.optionLoader = new Fn("path", "return " + this.$element.attr("data-option-loader") + "(path);");
                 } catch (e) {
-                    // TODO: what should we do? just ignore? raise an error in the console
+                    console.log("ERROR: Unable to register option loader", e);
+                    this.options.optionLoader = null;
                 }
             }
         },
@@ -362,7 +363,7 @@
             // to refresh the available options list.
             // Otherwise, it will just filter the options to only show the
             // matching ones in the auto completer div.
-            if (/^\//.test(path) && /\/$/.test(path) && self.optionLoader) {
+            if (/^\//.test(path) && /\/$/.test(path) && self.options.optionLoader) {
                 if (path === "/") {
                     // Use configured root path
                     path = self.rootPath ? self.rootPath : "/";
@@ -371,24 +372,31 @@
                     path = path.replace(/\/$/, "");
                 }
 
-                // Load new options
-                self.optionLoader(path).done(
-                    function(json) {
-                        var newOptions = [];
-                        var newOptionDisplayStrings = [];
-                        $.each(json.pages, function(index, value) {
-                            newOptions.push(value.path);
-                            if (self.options.showTitles) {
-                                newOptionDisplayStrings.push(value.title);
-                            }
-                        }.bind(self));
-                        self.options.options = newOptions;
-                        if (self.options.showTitles) {
-                            self.options.optionDisplayStrings = newOptionDisplayStrings;
+                // Make the option loader a promise to guarantee that the callback is
+                // executed at the right rime
+                var loader = {
+                    loadOptions: self.options.optionLoader
+                };
+                var loaderDef = $.Deferred();
+                loaderDef.promise(loader);
+                loader.done(
+                    function(object) {
+                        if ($.isFunction(object.promise)) {
+                            // Original function was already returning a promise
+                            // Bind the rebuild options on that object's 'done' method
+                            object.done(
+                                function(results) {
+                                    self._rebuildOptions(def, path, results.pages);
+                                }
+                            );
+                        } else {
+                            // Original function was not returning a promise
+                            self._rebuildOptions(def, path, object);
                         }
-                        def.resolve(self._filterOptions(path));
                     }
                 );
+                loaderDef.resolve(loader.loadOptions(path));
+
             } else {
                 def.resolve(self._filterOptions(path));
             }
@@ -396,13 +404,41 @@
             return def.promise();
         },
 
+        _rebuildOptions: function(def, path, object) {
+            var self = this;
+
+            var newOptions = [];
+            var newOptionDisplayStrings = [];
+            $.each(object, function(i, v) {
+                var value, title;
+                if (typeof v === "object") {
+                    value = v.path;
+                    title = v.title;
+                } else {
+                    value = v;
+                }
+                newOptions.push(value);
+                if (self.options.showTitles && title) {
+                    newOptionDisplayStrings.push(title);
+                }
+            }.bind(self));
+
+            self.options.options = newOptions;
+            if (self.options.showTitles) {
+                self.options.optionDisplayStrings = newOptionDisplayStrings;
+            }
+
+            var filtered = self._filterOptions(path);
+            def.resolve(filtered);
+        },
+
         _filterOptions: function(searchFor) {
             var result = [];
 
             $.each(this.options.options, function(key, value) {
-                if (value.toLowerCase().indexOf(searchFor.toLowerCase(), 0) >= 0) {
+//                if (value.toLowerCase().indexOf(searchFor.toLowerCase(), 0) >= 0) {
                     result.push(key);
-                }
+//                }
             }.bind(this));
 
             return result;

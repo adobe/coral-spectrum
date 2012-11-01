@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Path Browser examples</title>
 
@@ -8,6 +8,9 @@
     <script src="../../js/libs/underscore.js"></script>
     <script src="../../js/libs/handlebars.js"></script>
     <script src="../../js/libs/jquery.js"></script>
+    <script src="../../js/libs/toe.js"></script>
+    <script src="../../js/libs/fingerpointer.js"></script>
+
     <script src="../../js/CUI.js"></script>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -18,54 +21,76 @@
 <section>
     <h1>Path Browser</h1>
 
-    <div data-init="pathbrowser" class="pathbrowser" data-placeholder="Enter path">
-        <select>
-            <option>/apps</option>
-            <option>/bin</option>
-            <option>/content</option>
-            <option>/etc</option>
-            <option>/libs</option>
-            <option>/tmp</option>
-            <option>/var</option>
-        </select>
-        <input type="text">
-    </div>
+    <h2>Create from Class</h2>
+    Path:
+    <select name="path-class" class="pathbrowser">
+        <option>apps</option>
+        <option>content</option>
+        <option>etc</option>
+        <option>libs</option>
+    </select>
 
-    <!--<p>-->
-        <!--Path: <input type="text" name="path" placeholder="Enter path"/>-->
-    <!--</p>-->
+    <h2>Create from jQuery</h2>
+    Path:
+    <input type="text" name="path-jquery" placeholder="Enter path"/>
+
+    <h2>Create from markup</h2>
+    Path:
+    <div data-init="pathbrowser" class="pathbrowser" data-placeholder="Provide path" data-option-loader="function(path) { return window.options[path] || []; }">
+        <input type="text" name="path-markup">
+    </div>
 </section>
 
 <script type="text/javascript">
 
-//    $(document).ready(function() {
-//        var options = [
-//            "/content",
-//            "/content/geometrixx",
-//            "/content/geometrixx/en",
-//            "/content/geometrixx/en/company",
-//            "/content/geometrixx/en/services",
-//            "/content/geometrixx/fr",
-//            "/content/geometrixx/de"
-//        ];
-//        var optionDisplayStrings = [
-//            "Websites",
-//            "Geometrixx Demo Site",
-//            "English",
-//            "Company",
-//            "Services",
-//            "Français",
-//            "Deutsch"
-//        ];
-//
-//        var pathBrowser1 = new CUI.PathBrowser({
-//            element: "input[name='path']",
-//            options: options,
-//            optionDisplayStrings: optionDisplayStrings,
-//            showTitles: true
-//        });
-//
-//    });
+    window.options = {
+        "/": [
+            "apps",
+            "bin",
+            "content",
+            "etc",
+            "libs",
+            "tmp"
+        ],
+        "/content": [
+            "geometrixx",
+            "geometrixx-outdoors",
+            "geometrixx-media"
+        ],
+        "/content/geometrixx": [
+            "en",
+            "de",
+            "fr"
+        ],
+        "/content/geometrixx/en": [
+            "company",
+            "services"
+        ],
+        "/content/geometrixx/en/company": [
+            "board",
+            "products"
+        ],
+        "/apps": [
+            "geometrixx",
+            "geometrixx-outdoors"
+        ]
+    };
+
+    $(document).ready(function() {
+        // Create from class
+        $("select.pathbrowser").pathBrowser();
+
+        // Create from jQuery
+        new CUI.PathBrowser({
+            element: "input[name='path-jquery']",
+            optionLoader: function(path) {
+                console.log("optionLoader", path);
+                return options[path] || [];
+            },
+            showTitles: true
+        });
+
+    });
 
 </script>
 </body>
