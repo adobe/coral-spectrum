@@ -149,25 +149,17 @@ div.rail {
       height: 98*@px;
 
 
-
       >.toolbar {
         border-bottom: 1px solid @rail-section-border-color;
-/*
-        height: 48*@px;
-        line-height: 48*@px;
-        background-color: @rail-dark-background-color;
 
-        padding: 0 16*@px;
-        >a {
-          display: inline-block;
-          text-align: center;
-          width: 20*@px;
+        a {
+          overflow: visible;
           position: relative;
 
           &.active {
+            >i,
             &:before,
-            &:after,
-            >span:before {
+            &:after {
               border: solid transparent;
               content: " ";
               height: 0;
@@ -176,21 +168,18 @@ div.rail {
               pointer-events: none;
               left: 50%;
             }
-
-            >span:before {
+            >i {
               border-width: 0.5rem;
               margin-left: -0.5rem;
               bottom: -@px;
               border-bottom-color: @rail-section-highlight-color;
             }
-
             &:before {
               border-width: 0.5rem;
               margin-left: -0.5rem;
               bottom: 0;
               border-bottom-color: @rail-section-border-color;
             }
-
             &:after {
               border-width: 0.5rem;
               margin-left: -0.5rem;
@@ -198,9 +187,7 @@ div.rail {
               border-bottom-color: @rail-background-color;
             }
           }
-          
         }
-*/
       }
 
       >div.search {

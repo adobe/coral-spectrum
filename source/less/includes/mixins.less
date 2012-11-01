@@ -202,50 +202,6 @@
 }
 
 /**
- * Mixin: .inset-triangle
- * Adds an inset triangle to the element centered at the bottom of it.
- * Example usage: .inset-triangle(15, white, black, 3px);
- * @size:         width of the base of the triangle in pixels (not including the unit)
- * @color:        fill color of the triangle
- * @border-color: optional border color for the top faces of the triangle
- * @border-width: optional border width in pixels (defaults to 1px)
- */
-.-inset-triangle(@size, @color, @triangle-side-size, @triangle-offset, @border: none) {
-  // This mixin should not be used directly, it is only to be called by the .inset-triangle mixins below
-
-  overflow: hidden;
-  position: relative;
-
-  &:after {
-    content: " ";
-    overflow: hidden;
-    position: absolute;
-    left: 50%;
-    bottom:      @triangle-offset;
-    margin-left: @triangle-offset;
-    width:       @triangle-side-size;
-    height:      @triangle-side-size;
-    background:  @color;
-    border: @border;
-    .transform(rotate(45deg));
-  }
-}
-.inset-triangle(@size, @color) {
-  @triangle-side-size: @size / 1.4142135623731 * @px; // the side of a 45deg rotated square equals to it's diagonal divided by sqrt(2)
-  @triangle-offset:    -@triangle-side-size / 2;      // the offset between the top left corner of the rotated square and it's center
-
-  .-inset-triangle(@size, @color, @triangle-side-size, @triangle-offset);
-
-}
-.inset-triangle(@size, @color, @border-color, @border-width: 1) {
-  @triangle-side-size: @size / 1.4142135623731 * @px;
-  @triangle-offset: -(@border-width * @px) - @triangle-side-size / 2; // we need to add the border to the offset calculation
-  @border: ~"@{border-width}px solid @{border-color}";  // borders are expressed in px, not rems because some browsers have side-effects with 1px borders
-
-  .-inset-triangle(@size, @color, @triangle-side-size, @triangle-offset, @border);
-}
-
-/**
  * Mixin:; .box-sizing
  * box-sizing mixin
  */
