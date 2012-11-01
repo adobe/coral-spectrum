@@ -255,7 +255,6 @@ var index = filters.getSelectedIndex();
     /** @ignore */
     _changeOptions: function(event) {
         if (event.widget !== this) return;
-        console.log(this.options.options);
         this.selectedIndex = -1;
         this.selectedIndices = [];
         this.createdIndices = [];
