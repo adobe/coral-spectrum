@@ -108,4 +108,22 @@ CUI.util.capitalize = function(str) {
       $target.data('loaded-remote', remote);
     }
   };
+
+  /*
+   * Find first absolute/relative positioned parent
+   */
+  $.fn.positionedParent = function() {
+    var parent;
+
+    $(this).parents().each(function() {
+      var $this = $(this), position = $this.css('position');
+
+      if (position === 'absolute' || position === 'relative') {
+        parent = $this;
+        return false;
+      }
+    });
+
+    return parent || $('body');
+  };
 }(window.jQuery));
