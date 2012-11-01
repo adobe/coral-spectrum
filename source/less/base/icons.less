@@ -52,7 +52,7 @@
 
   display: inline-block;
   
-  background-position: left center;
+  background-position: center center; // center so padding can be added
   .background-size(1.5em);
   background-repeat: no-repeat;
   
@@ -69,6 +69,8 @@
     white-space: inherit;
     overflow: visible;
     color: inherit;
+    
+    background-position: left center; // align left so labels can be added
     
     &.xsmall {
       padding: 0;
