@@ -1,20 +1,20 @@
-@import 'flexbox';  // CSS3 2009/2012 flexbox mixins
+@import 'flexbox';    // CSS3 2009/2012 flexbox mixins
 
 /**
  * Mixin: .font-face
  * Quickly declare a font face
  */
 .font(@font-name, @font-file, @font-weight: normal, @font-style: normal) {
-  font-family: @font-name;
+    font-family: @font-name;
 
-  src: url(~"@{font-folder}/@{font-file}-webfont.eot");
-  src: url(~"@{font-folder}/@{font-file}-webfont.eot?#iefix") format("embedded-opentype"),
-       url(~"@{font-folder}/@{font-file}-webfont.woff") format("woff"),
-       url(~"@{font-folder}/@{font-file}-webfont.ttf") format("truetype"),
-       url(~"@{font-folder}/@{font-file}-webfont.svg#@{font-name}") format("svg");
+    src: url(~"@{font-folder}/@{font-file}-webfont.eot");
+    src: url(~"@{font-folder}/@{font-file}-webfont.eot?#iefix") format("embedded-opentype"),
+         url(~"@{font-folder}/@{font-file}-webfont.woff") format("woff"),
+         url(~"@{font-folder}/@{font-file}-webfont.ttf") format("truetype"),
+         url(~"@{font-folder}/@{font-file}-webfont.svg#@{font-name}") format("svg");
 
-  font-weight: @font-weight;
-  font-style: @font-style;
+    font-weight: @font-weight;
+    font-style: @font-style;
 }
 
 /**
@@ -22,23 +22,23 @@
  * A CSS3 column layout
  */
 .columns(@count: 4, @gap: 0) {
-  -moz-column-count: @count;
-  -webkit-column-count: @count;
-  column-count: @count;
+    -moz-column-count: @count;
+    -webkit-column-count: @count;
+    column-count: @count;
 
-  -moz-column-gap: @gap;
-  -webkit-column-gap: @gap;
-  column-gap: @gap; 
+    -moz-column-gap: @gap;
+    -webkit-column-gap: @gap;
+    column-gap: @gap; 
 
-  /* unsupported */
-  -moz-column-fill: balanced;
-  -webkit-column-fill: balanced;
-  column-fill: balanced;
+    /* unsupported */
+    -moz-column-fill: balanced;
+    -webkit-column-fill: balanced;
+    column-fill: balanced;
 
-  > * {
-    display: inline-block;
-    width: 100%;
-  }
+    > * {
+        display: inline-block;
+        width: 100%;
+    }
 }
 
 /**
@@ -54,13 +54,13 @@
  * Print a pinstripe gradient
  */
 .pinstripe(@background-color, @stripe-color, @angle: -45deg, @stripe-offset: 2%) {
-  background-color: @background-color;
-  // background-image: -webkit-gradient(); // TODO: webkit syntax
-  background-image: -webkit-linear-gradient(-45deg, transparent, transparent 50%-@stripe-offset, @stripe-color 50%-@stripe-offset, @stripe-color 50%+@stripe-offset, transparent 50%+@stripe-offset, transparent);
-  background-image: -moz-linear-gradient(-45deg, transparent, transparent 50%-@stripe-offset, @stripe-color 50%-@stripe-offset, @stripe-color 50%+@stripe-offset, transparent 50%+@stripe-offset, transparent);
-  background-image: -ms-linear-gradient(-45deg, transparent, transparent 50%-@stripe-offset, @stripe-color 50%-@stripe-offset, @stripe-color 50%+@stripe-offset, transparent 50%+@stripe-offset, transparent);
-  background-image: -o-linear-gradient(-45deg, transparent, transparent 50%-@stripe-offset, @stripe-color 50%-@stripe-offset, @stripe-color 50%+@stripe-offset, transparent 50%+@stripe-offset, transparent);
-  background-image: linear-gradient(-45deg, transparent, transparent 50%-@stripe-offset, @stripe-color 50%-@stripe-offset, @stripe-color 50%+@stripe-offset, transparent 50%+@stripe-offset, transparent);
+    background-color: @background-color;
+    // background-image: -webkit-gradient(); // TODO: webkit syntax
+    background-image: -webkit-linear-gradient(-45deg, transparent, transparent 50%-@stripe-offset, @stripe-color 50%-@stripe-offset, @stripe-color 50%+@stripe-offset, transparent 50%+@stripe-offset, transparent);
+    background-image: -moz-linear-gradient(-45deg, transparent, transparent 50%-@stripe-offset, @stripe-color 50%-@stripe-offset, @stripe-color 50%+@stripe-offset, transparent 50%+@stripe-offset, transparent);
+    background-image: -ms-linear-gradient(-45deg, transparent, transparent 50%-@stripe-offset, @stripe-color 50%-@stripe-offset, @stripe-color 50%+@stripe-offset, transparent 50%+@stripe-offset, transparent);
+    background-image: -o-linear-gradient(-45deg, transparent, transparent 50%-@stripe-offset, @stripe-color 50%-@stripe-offset, @stripe-color 50%+@stripe-offset, transparent 50%+@stripe-offset, transparent);
+    background-image: linear-gradient(-45deg, transparent, transparent 50%-@stripe-offset, @stripe-color 50%-@stripe-offset, @stripe-color 50%+@stripe-offset, transparent 50%+@stripe-offset, transparent);
 }
 
 /**
@@ -68,7 +68,7 @@
  * A simpler syntax for shadow with defaults
  */
 .shadow(@distance: 0.1rem, @spread: 0.1rem, @weight: 0.25) {
-  .box-shadow(@distance @distance @spread rgba(0, 0, 0, @weight));
+    .box-shadow(@distance @distance @spread rgba(0, 0, 0, @weight));
 }
 
 /**
@@ -76,10 +76,10 @@
  * Truncate overflowed text using ellipsis: ...
  */
 .ellipsis() {
-  // display: inline-block; // Works without in Chrome
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+    // display: inline-block; // Works without in Chrome
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 /**
@@ -88,9 +88,9 @@
  * TODO: fix this for flexbox children in Chrome
  */
 .scrollable() {
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch; // Enable iOS-style scrolling
-  min-height: 1px; // Enable scrolling in flexbox children in Firefox
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; // Enable iOS-style scrolling
+    min-height: 1px; // Enable scrolling in flexbox children in Firefox
 }
 
 /**
@@ -98,42 +98,42 @@
  * Rotate an element forever
  */
 .spin(@time: 1s) {
-  -webkit-transition-property: -webkit-transform;
-  -webkit-transition-duration: @time;
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: @time;
 
-  -moz-transition-property: -moz-transform;
-  -moz-transition-duration: @time;
+    -moz-transition-property: -moz-transform;
+    -moz-transition-duration: @time;
 
-  -webkit-animation-name: rotate;
-  -webkit-animation-duration: @time;
-  -webkit-animation-iteration-count: infinite;
-  -webkit-animation-timing-function: linear;
+    -webkit-animation-name: rotate;
+    -webkit-animation-duration: @time;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
 
-  -moz-animation-name: rotate;
-  -moz-animation-duration: @time;
-  -moz-animation-iteration-count: infinite;
-  -moz-animation-timing-function: linear;
+    -moz-animation-name: rotate;
+    -moz-animation-duration: @time;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
 }
 
 /**
  * Mixin: .transition
  */
 .transition(@transition) {
-  -webkit-transition: @transition;  
-  -moz-transition:    @transition;
-  -ms-transition:     @transition; 
-  -o-transition:      @transition;
-  transition:         @transition;  
+    -webkit-transition: @transition;
+    -moz-transition:        @transition;
+    -ms-transition:         @transition; 
+    -o-transition:            @transition;
+    transition:                 @transition;
 }
 
 /**
  * Mixin: .transform
  */
 .transform(@property) {
-  -webkit-transform: @property;
-  -moz-transform: @property;
-  -ms-transform: @property;
-  transform: @property;
+    -webkit-transform: @property;
+    -moz-transform: @property;
+    -ms-transform: @property;
+    transform: @property;
 }
 
 /**
@@ -141,12 +141,12 @@
  * Set the scaling of the background image or gradient
  */
 .background-size(@width, @height) { 
-  -webkit-background-size: @width @height;
-  -moz-background-size: @width @height;
-  background-size: @width @height;
+    -webkit-background-size: @width @height;
+    -moz-background-size: @width @height;
+    background-size: @width @height;
 }
 .background-size(@size) { 
-  .background-size(@size, @size);
+    .background-size(@size, @size);
 }
 
 /**
@@ -155,9 +155,9 @@
  * TODO: add partial glow mixin
  */
 .glow(@radius: @focus-glow-radius, @glowColor: @focus-glow-color, @borderColor: @focus-border-color) {
-  outline: none;
-  .box-shadow(0 0 @radius @glowColor);
-  border: @px solid @borderColor;
+    outline: none;
+    .box-shadow(0 0 @radius @glowColor);
+    border: @px solid @borderColor;
 }
 
 /**
@@ -165,8 +165,8 @@
  * Make text or a font icon glow
  */
 .glow-text(@radius: 0.357rem, @glowColor: @focus-glow-color, @textColor: @focus-border-color) {
-  color: darken(@textColor, 35%);
-  text-shadow: 0 0 @radius @glowColor;
+    color: darken(@textColor, 35%);
+    text-shadow: 0 0 @radius @glowColor;
 }
 
 /**
@@ -174,11 +174,11 @@
  * Set user-select property across browsers
  */
 .user-select(@userSelect) {
-  -webkit-user-select: @userSelect;
-  -khtml-user-select: @userSelect;
-  -moz-user-select: @userSelect;
-  -ms-user-select: @userSelect;
-  user-select: @userSelect;
+    -webkit-user-select: @userSelect;
+    -khtml-user-select: @userSelect;
+    -moz-user-select: @userSelect;
+    -ms-user-select: @userSelect;
+    user-select: @userSelect;
 }
 
 /**
@@ -186,8 +186,8 @@
  * Stop text selection for an element and its children
  */
 .no-select() {
-  -webkit-touch-callout: none;
-  .user-select(none);
+    -webkit-touch-callout: none;
+    .user-select(none);
 }
 
 /**
@@ -195,10 +195,10 @@
  * input field placeholder font color
  */
 .placeholder(@color) {
-  input::-webkit-input-placeholder { color: @color; }
-  input:-moz-placeholder { color: @color; }
-  textarea::-webkit-input-placeholder { color: @color; }
-  textarea:-moz-placeholder { color: @color; }
+    input::-webkit-input-placeholder { color: @color; }
+    input:-moz-placeholder { color: @color; }
+    textarea::-webkit-input-placeholder { color: @color; }
+    textarea:-moz-placeholder { color: @color; }
 }
 
 /**
@@ -206,7 +206,7 @@
  * box-sizing mixin
  */
 .box-sizing(@type: border-box) {
-  -webkit-box-sizing: @type;
-  -moz-box-sizing:    @type;
-  box-sizing:         @type;
+    -webkit-box-sizing: @type;
+    -moz-box-sizing:    @type;
+    box-sizing:         @type;
 }
