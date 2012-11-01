@@ -5,99 +5,186 @@
 
 .card-asset,
 .card-page,
-.card-collection {
+.card-collection,
+.card-directory  {
     display: inline-block;
     text-align: center;
     background: @cardview-background-color;
+    font-size: 14*@px;
 }
 
 .card-asset {
-    border: 10*@px solid @cardview-wideborder-color;
-    outline: @px solid @cardview-outerline-color;
-    -moz-box-shadow: inset 0 0 @px @cardview-insetshadow-color;
-    -webkit-box-shadow: inset 0 0 @px @cardview-insetshadow-color;
-    box-shadow: inset 0 0 @px @cardview-insetshadow-color;
+
+    border-bottom: @px solid @cardview-border-color;
+    border-left: @px solid @cardview-border-color;
+    padding-bottom: 10*@px;
+    .shadow;
+
+    img {
+        margin-bottom: 8*@px;
+    }
+
+    p {
+        margin-top: 4*@px;
+        margin-right: 0;
+        margin-bottom: 4*@px;
+        margin-left: 10*@px;
+        text-align: left;
+
+        &.asset-title {
+            color: @cardview-title-color;
+        }
+
+        &.asset-description {
+            color: @cardview-text-color;
+        }
+
+        &.asset-details {
+            margin-top: 12*@px;
+            color: @cardview-text-color;
+        }
+    }
+
 }
 
 .card-collection {
-    min-width: 270*@px;
+
     position: relative;
-    margin: 10*@px;
-    margin-bottom: 20*@px;
+    margin-bottom: 10px;
 
     &:before,
     &:after {
-        content: " ";
-        height: 0;
-        width: 0;
         position: absolute;
+        height: @cardview-stackeditem-height;
+        width: 0;
+        border-bottom: @px solid @cardview-border-color;
+        border-left: @px solid @cardview-border-color;
+        border-right: @px solid @cardview-border-color;
         pointer-events: none;
-        /*bottom: -20*@px;*/
+        content: " ";
+        .shadow(0.1rem, 0.1rem, 0.2);
     }
 
     &:before {
-        content: " ";
-        height: 10*@px;
-        width: 255*@px;
-        bottom: -10*@px;
-        left: 8*@px;
-        border-bottom: @px solid @cardview-outerline-color;
-        border-left: @px solid @cardview-outerline-color;
-        border-right: @px solid @cardview-outerline-color;
+        width: 97%;
+        bottom: -@cardview-stackeditem-height;
+        left: 1.5%;
     }
 
     &:after {
-        content: " ";
-        height: 10*@px;
-        width: 240*@px;
-        bottom: -20*@px;
-        left: 16*@px;
-        border-bottom: @px solid @cardview-outerline-color;
-        border-left: @px solid @cardview-outerline-color;
-        border-right: @px solid @cardview-outerline-color;
+        width: 94%;
+        bottom: -@cardview-stackeditem-height * 2;
+        left: 3%;
     }
 
     img {
-        border: @px solid @cardview-outerline-color;
-        width: 100%;
+        border: @px solid @cardview-border-color;
         .shadow;
     }
 
     .collection-banner {
         position: absolute;
-        top: 54%;
-        left: -9*@px;
-        padding: 5*@px;
-        width: 100% + 40*@px;
+        text-align: center;
+        top: 51%;
+        left: -1.5%;
+        width: 103%;
+        border-top: @px solid @cardview-border-color;
+        border-bottom: @px solid @cardview-border-color;
         background-color: @cardview-banner-color;
-        border: @px solid @cardview-outerline-color;
         color: @cardview-banner-text-color;
         .shadow;
 
+        p {
+            padding: 0px @cardview-banner-padding;
+            text-align: left;
+
+            &.title {
+                font-weight: bold;
+            }
+
+            &.details {
+                font-size: 12*@px;
+            }
+
+        }
+
         &:before,
         &:after {
-        border: solid transparent;
-            content: " ";
+            position: absolute;
             height: 0;
             width: 0;
-            position: absolute;
+            bottom: -6*@px;
+            border: solid transparent;
+            border-width: 5*@px;
             pointer-events: none;
-            bottom: -9*@px;
+            content: " ";
         }
 
         &:before { 
             border-right-color: @cardview-banner-color;
-            left: -8*@px;
-            border-width: 8*@px;
+            left: -5*@px;
         }            
 
         &:after { 
             border-left-color: @cardview-banner-color;
-            right: -9*@px;
-            border-width: 8*@px;
+            right: -7*@px;
         }
     }
 } // card-collection 
+
+
+.card-directory {
+
+    position: relative;
+    border-bottom: @px solid @cardview-border-color;
+    border-left: @px solid @cardview-border-color;
+    .shadow;
+
+    p {
+        text-align: left;
+        margin-left: 10*@px;
+
+        &.title {
+            color: @cardview-title-color;
+        }
+
+        &.details {
+            margin-top: -5*@px;
+            color: @cardview-text-color;
+        }
+        
+    }
+
+    img {
+        .shadow;
+    }
+
+    &:before,
+    &:after {
+        position: absolute;
+        height: 0;
+        width: 0;
+        top: 0;
+        border: solid transparent;
+        pointer-events: none;
+        content: " ";
+    }
+
+    &:after {
+        border-width: 28*@px;
+        border-right-color: @cardview-background-color;
+        left: 0;
+        top: -28*@px;
+        width: 30%;
+    }            
+
+    &:before { 
+        width: 50%;
+        height: 22*@px;
+        background-color: @cardview-background-color;
+        right: -2*@px;
+    }
+}
 
 .card-page {
     display: block;
@@ -147,6 +234,15 @@
 .grid-container {
     overflow: hidden; // can be replaced with a clearfix in case needed
     margin: @cardview-grid-margin @cardview-grid-margin/2;
+
+    > .grid-0 {
+        float: left;
+        width: 100%;
+        article {
+            width:240px;
+            float:left;
+        }
+    }
 
     > .grid-1 {
         float: left;
