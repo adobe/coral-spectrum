@@ -644,18 +644,56 @@
           </div>
         </section>
 
-        <section class="hidden" id="SearchField">
+        <section id="SearchField">
           <h2 class="line">Search Field</h2>
-          <p>Search.</p>
+          <p>A simple Search field.</p>
 
           <div class="componentSample">
             <div class="example">
 
-              <div class="search">
-              </div>
+              <div class="filterSample">
+                <div class="sampleTitle left">Standard</div>
+                <div class="searchfield" >
+                  <div class="search">
+                    <input type="text" placeholder="Search" >
+                    <button type="button" label="" >
+                  </div>
+                </div>
+              <div>
 
+                <div class="filterSample">
+                  <div class="sampleTitle left">Error</div>
+                  <div class="searchfield" >
+                    <div class="search">
+                      <input type="text" class="error" placeholder="Search" >
+                      <button type="button" label="" >
+                    </div>
+                  </div>
+                <div>
+
+               
+              <div class="filterSample">
+                <div class="sampleTitle left">Disabled</div>
+                <div class="searchfield" >
+                  <div class="search">
+                    <input type="text" placeholder="Search" disabled >
+                    <button type="button" label="" disabled >
+                  </div>
+                </div>
+              </div>
             </div>
-            <pre class="prettyprint linenums"></pre>
+            
+            
+<pre class="prettyprint linenums">
+&lt;div class=&quot;search&quot;&gt;
+  &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot;&gt;
+  &lt;button type=&quot;button&quot; label=&quot;&quot;&gt;
+  &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot; class=&quot;error&quot;&gt;
+  &lt;button type=&quot;button&quot; label=&quot;&quot; class=&quot;error&quot;&gt;
+  &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot; disabled &gt;
+  &lt;button type=&quot;button&quot; label=&quot;&quot; disabled &gt;
+&lt;/div&gt;</pre>
+
           </div>
         </section>
         
