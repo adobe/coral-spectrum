@@ -157,7 +157,6 @@
             if (index < -1 || index >= this.options.options.length) {
                 return;
             }
-            this.inputElement.attr("value", "");
             this.selectedIndex = index;
             this._update();
         },
@@ -259,15 +258,9 @@
                 // Allow to choose from default option renderers
                 this.options.optionRenderer = CUI.PathBrowser[this.$element.attr("data-option-renderer") + "OptionRenderer"];
             }
-            if (this.$element.attr("data-option-loader")) {
-                try {
-                    var Fn = Function;
-                    this.options.optionLoader = new Fn("path", "return " + this.$element.attr("data-option-loader") + "(path);");
-                } catch (e) {
-                    console.log("ERROR: Unable to register option loader", e);
-                    this.options.optionLoader = null;
-                }
-            }
+
+            // Register a callback function for option loader if defined
+            this.options.optionLoader = CUI.util.buildFunction(this.$element.attr("data-option-loader"), ["path"]);
         },
 
         /** @ignore */
@@ -291,8 +284,14 @@
                 if (this.syncSelectElement) {
                     $(this.syncSelectElement.find("option").get(this.selectedIndex)).attr("selected", "selected");
                 }
+                // Value to set is what is currently in the input field until the last slash + the option value
+                var parentPath = "";
+                var iLastSlash = this.inputElement.attr("value").lastIndexOf("/");
+                if (iLastSlash >= 0) {
+                    parentPath = this.inputElement.attr("value").substring(0, iLastSlash + 1);
+                }
                 var option = this.options.options[this.selectedIndex];
-                this.inputElement.attr("value", option);
+                this.inputElement.attr("value", parentPath + option);
             } else {
                 this.inputElement.attr("value", "");
             }

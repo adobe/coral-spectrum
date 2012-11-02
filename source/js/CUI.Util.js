@@ -74,6 +74,30 @@ CUI.util.capitalize = function(str) {
     $.fn[pluginName].Constructor = PluginClass;
   };
 
+    /**
+     Register a callback from a string
+
+     @param {String} callbackAsString The string containing the callback function to register
+     @param {Object} [params]         Parameters to provide when executing callback
+     @return {Function} The callback function generated from the provided string
+     */
+    CUI.util.buildFunction = function(callbackAsString, params) {
+        params = params || [];
+        if (typeof params === "string") {
+            params = [params];
+        }
+
+        if (callbackAsString) {
+            try {
+                var Fn = Function;
+                return new Fn(params, "return " + callbackAsString + "(" + params.join(", ") + ");");
+            } catch (e) {
+                console.log("ERROR: Unable to register callback from string: ", callbackAsString, e);
+                return null;
+            }
+        }
+    };
+
   /**
     $.load with a CUI spinner
 

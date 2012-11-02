@@ -39,6 +39,11 @@
     <div data-init="pathbrowser" class="pathbrowser" data-placeholder="Provide path" data-option-loader="function(path) { return window.options[path] || []; }">
         <input type="text" name="path-markup">
     </div>
+
+    <p>
+        <a data-action="disable">Disable all</a>
+        <a data-action="enable">Enable all</a>
+    </p>
 </section>
 
 <script type="text/javascript">
@@ -81,15 +86,22 @@
         $("select.pathbrowser").pathBrowser();
 
         // Create from jQuery
-        new CUI.PathBrowser({
+        var path_jQuery = new CUI.PathBrowser({
             element: "input[name='path-jquery']",
             optionLoader: function(path) {
-                console.log("optionLoader", path);
                 return options[path] || [];
             },
             showTitles: true
         });
 
+        var togglePathBrowser = function(event) {
+            var link = $(event.target);
+            var disabled = link.attr("data-action") === "disable";
+            path_jQuery.set("disabled", disabled);
+            $("select.pathbrowser, div.pathbrowser").pathBrowser({ disabled: disabled });
+        };
+
+        $("a[data-action]").click(togglePathBrowser);
     });
 
 </script>
