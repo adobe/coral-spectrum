@@ -4,40 +4,76 @@
 */
 
 nav.crumbs {
-  a {
+  &>a {
+    background: transparent;
+    border: none;
+
     padding: 0.25rem 0;
-    
+
+    cursor: pointer;
+
+    // Add chevrons to crumbs
+    &:after {
+      margin: 0 0.25rem 0 0.5rem;
+
+      font-size: 2.5rem;
+      line-height: 0.4;
+      font-family: AdobeCleanLight;
+
+      display: inline;
+      padding-left: 1rem;
+      background: url('../images/components/breadcrumbs/handle.svg') no-repeat center center;
+      content: "";
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  a {
     color: @crumb-text-color;
     font-weight: normal;
     font-size: 1.35rem;
     text-decoration: none;
     font-family: AdobeCleanLight;
+  }
 
-    // Add chevrons to crumbs
-    &:after {
-      display: inline-block;
-      margin: 0 0.25rem 0 0.5rem;
+  .popover {
+    display: none;
+    position: absolute;
 
-      content: "\203a";
-      font-size: 2.5rem;
-      line-height: 0.4;
-      font-family: AdobeCleanLight;
-      color: @crumb-chevron-color;
+    ul {
+      margin: 0;
+      padding: 0;
+      background: @white;
+      list-style-type: none;
+
+      li {
+        padding: 0.5em;
+        border-bottom: 1px solid @grayLight;
+
+        &:before {
+          margin: 0 0.25rem 0 0.5rem;
+
+          font-size: 2.5rem;
+          line-height: 0.4;
+          font-family: AdobeCleanLight;
+
+          display: inline;
+          padding-left: 1rem;
+          background: url('../images/icons/folder.png') no-repeat center center;
+          content: "";
+        }
+      }
     }
-    
-    img {
-      height: 2rem;
+
+    &:before {
+      left: 100%;
+      margin-left: -30px;
     }
   }
 
-  // The last crumb should not have a chevron and should be bolder
-  a:last-child {
-    font-family: AdobeClean;
-    
-    &:after {
-      content: "";
-    }
-  }
 }
 
 // hover states
