@@ -296,8 +296,8 @@ module.exports = function(grunt) {
       },
       dependencies: {
         files: {
-          '<%= dirs.build %>/js/libs/toe.js': '<%= dirs.components %>/toejs/index.js',
-          '<%= dirs.build %>/js/libs/fingerpointer.js': '<%= dirs.components %>/fingerpointer/index.js',
+          '<%= dirs.build %>/js/libs/toe.js': '<%= dirs.source %>/js/plugins/toe.js',
+          '<%= dirs.build %>/js/libs/jquery-fingerpointer.js': '<%= dirs.source %>/js/plugins/jquery-fingerpointer.js',
           '<%= dirs.build %>/js/libs/jquery-gridlayout.js': '<%= dirs.source %>/js/plugins/jquery-gridlayout.js'
         }
       },
@@ -548,7 +548,7 @@ module.exports = function(grunt) {
       },
 
       copy_plugins: {
-          files: '<%= dirs.source %>/js/plugins/jquery-gridlayout.js',
+          files: '<%= dirs.source %>/js/plugins/**',
           tasks: "copy:libs"
       },
 
