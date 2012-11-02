@@ -74,6 +74,30 @@ CUI.util.capitalize = function(str) {
     $.fn[pluginName].Constructor = PluginClass;
   };
 
+    /**
+     Register a callback from a string
+
+     @param {String} callbackAsString The string containing the callback function to register
+     @param {Object} [params]         Parameters to provide when executing callback
+     @return {Function} The callback function generated from the provided string
+     */
+    CUI.util.buildFunction = function(callbackAsString, params) {
+        params = params || [];
+        if (typeof params === "string") {
+            params = [params];
+        }
+
+        if (callbackAsString) {
+            try {
+                var Fn = Function;
+                return new Fn(params, "return " + callbackAsString + "(" + params.join(", ") + ");");
+            } catch (e) {
+                console.log("ERROR: Unable to register callback from string: ", callbackAsString, e);
+                return null;
+            }
+        }
+    };
+
   /**
     $.load with a CUI spinner
 
@@ -108,4 +132,30 @@ CUI.util.capitalize = function(str) {
       $target.data('loaded-remote', remote);
     }
   };
+
+    $.extend({
+        /**
+         * Utility function to get the value of a nested key within an object
+         * @param {Object} object    The object to retrieve the value from
+         * @param {String} nestedKey The nested key. For instance "foo.bar.baz"
+         * @return {Object} The object value for the nested key
+         */
+        getNested: function(object, nestedKey) {
+            if (!nestedKey) {
+                return object;
+            }
+
+            // Split key into a table
+            var keys = typeof nestedKey === "string" ? nestedKey.split(".") : nestedKey;
+
+            // Browse object
+            var result = object;
+            while (result && keys.length > 0) {
+                result = result[keys.shift()];
+            }
+
+            return result;
+        }
+    });
+
 }(window.jQuery));
