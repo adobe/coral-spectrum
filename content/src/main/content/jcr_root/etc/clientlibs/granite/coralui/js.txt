@@ -1,3 +1,3 @@
-js/CUI.js
-js/libs/fingerpointer.js
+js/libs/jquery-fingerpointer.js
 js/libs/toe.js
+js/CUI.js
