@@ -39,7 +39,7 @@ $(function() {
     }
   });
 
-  $('#closeRail').fipo('tap', 'click', function () {
+  $('#close-rail').fipo('tap', 'click', function () {
     rail.toggleClass('closed');
   });
   
