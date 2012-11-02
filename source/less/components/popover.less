@@ -3,6 +3,7 @@
 	display: block;
 	background-color: @popover-background-color;
   .background-clip(padding-box); // don't let the border overlap the background
+  z-index: 1010; // keep the popover over the page
 
   border: 8*@px solid @popover-border-color;
 	
