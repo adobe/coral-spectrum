@@ -28,7 +28,8 @@ module.exports = function(grunt) {
       'components/CUI.DropdownList.js',
       'components/CUI.Dropdown.js',
       'components/CUI.Filters.js',
-      'components/CUI.Slider.js'
+      'components/CUI.Slider.js',
+      'components/CUI.Datepicker.js'
     ],
     "rte-setup": [
       'rte/setup.js'
@@ -299,7 +300,8 @@ module.exports = function(grunt) {
           '<%= dirs.build %>/js/libs/underscore.js': '<%= dirs.components %>/underscore/index.js',
           '<%= dirs.build %>/js/libs/handlebars.js': '<%= dirs.components %>/handlebars/index.js',
           '<%= dirs.build %>/js/libs/toe.js': '<%= dirs.components %>/toejs/index.js',
-          '<%= dirs.build %>/js/libs/fingerpointer.js': '<%= dirs.components %>/fingerpointer/index.js'
+          '<%= dirs.build %>/js/libs/fingerpointer.js': '<%= dirs.components %>/fingerpointer/index.js',
+          '<%= dirs.build %>/js/libs/jquery-gridlayout.js': '<%= dirs.source %>/js/plugins/jquery-gridlayout.js'
         }
       },
       prettyify: {
@@ -535,6 +537,11 @@ module.exports = function(grunt) {
       copy_tests: {
         files: '<%= dirs.source %>/test/**',
         tasks: 'clean:tests copy:tests'
+      },
+
+      copy_plugins: {
+          files: '<%= dirs.source %>/js/plugins/jquery-gridlayout.js',
+          tasks: "copy:libs"
       },
 
       run_tests: {

@@ -255,7 +255,6 @@ var index = filters.getSelectedIndex();
     /** @ignore */
     _changeOptions: function(event) {
         if (event.widget !== this) return;
-        console.log(this.options.options);
         this.selectedIndex = -1;
         this.selectedIndices = [];
         this.createdIndices = [];
@@ -340,6 +339,7 @@ var index = filters.getSelectedIndex();
             if (this.$element.attr("data-option-renderer")) {
                 // Allow to choose from default option Renderers
                 this.options.optionRenderer = CUI.Filters[this.$element.attr("data-option-renderer") + "OptionRenderer"];
+                if (!this.options.optionRenderer) this.options.optionRenderer = CUI.Filters.defaultOptionRenderer;
             }
    },
    

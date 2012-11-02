@@ -52,7 +52,7 @@
 
   display: inline-block;
   
-  background-position: left center;
+  background-position: center center; // center so padding can be added
   .background-size(1.5em);
   background-repeat: no-repeat;
   
@@ -69,6 +69,8 @@
     white-space: inherit;
     overflow: visible;
     color: inherit;
+    
+    background-position: left center; // align left so labels can be added
     
     &.xsmall {
       padding: 0;
@@ -147,13 +149,10 @@ p > [class*=" icon-"] {
   .icon-large;
 }
 
-
-// 
 /*
   Class: a.icon-* and span.icon-*
   An icon with a label. Use <a> for clickable icons and <span> for non-clickable.
 */
-
 
 button,
 a.button {
@@ -190,33 +189,4 @@ button[class*=" icon-"] {
     
     filter: none;
   }
-}
-
-
-/**
-  Class: .iconGroup
-  Button toolbar of icons defined using the <a> tag
-*/
-.iconGroup {
-    .clearfix;
-    line-height: @icon-medium-size;
-
-    a {
-      margin: 0 0.25rem;
-      display: inline-block; // let icons fill the anchor
-      
-      .icon-medium;
-    }
-
-    .divider {
-      display: inline-block;
-      vertical-align: top;
-      
-      width: @px;
-      height: @icon-medium-size;
-      
-      margin: 0 4*@px;
-      
-      background-color: @icon-divider-color;
-    }
 }
