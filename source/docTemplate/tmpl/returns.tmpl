@@ -1,8 +1,8 @@
-<?js if (data.description) { ?>
+<?js if (obj.description) { ?>
 <div class="param-desc">
     <?js= description ?>
-    <?js if (data.type && data.type.names) {?>
-    {<?js= this.partial('type.tmpl', data.type.names) ?>}
+    <?js if (obj.type && obj.type.names) {?>
+    {<?js= this.partial('type.tmpl', obj.type.names) ?>}
     <?js } ?>
 </div>
 <?js } ?>
