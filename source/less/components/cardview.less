@@ -3,237 +3,132 @@
   Displays assets in result set as a card 
 */
 
-.card-asset,
-.card-page,
-.card-collection,
-.card-directory  {
+.card-shadow() {
+    .box-shadow(0 1.5*@px 2*@px rgba(0, 0, 0, 0.25));
+}
+
+[class^="card-"],
+[class*=" card-"] {
+    position: relative;
     display: inline-block;
-    text-align: center;
-    background: @cardview-background-color;
-    font-size: 14*@px;
-}
-
-.card-asset {
-
-    border-bottom: @px solid @cardview-border-color;
-    border-left: @px solid @cardview-border-color;
-    padding-bottom: 10*@px;
-    .shadow;
-
-    img {
-        margin-bottom: 8*@px;
-    }
-
-    p {
-        margin-top: 4*@px;
-        margin-right: 0;
-        margin-bottom: 4*@px;
-        margin-left: 10*@px;
-        text-align: left;
-
-        &.asset-title {
-            color: @cardview-title-color;
-        }
-
-        &.asset-description {
-            color: @cardview-text-color;
-        }
-
-        &.asset-details {
-            margin-top: 12*@px;
-            color: @cardview-text-color;
-        }
-    }
-
-}
-
-.card-collection {
-
-    position: relative;
-    margin-bottom: 10px;
-
-    &:before,
-    &:after {
-        position: absolute;
-        height: @cardview-stackeditem-height;
-        width: 0;
-        border-bottom: @px solid @cardview-border-color;
-        border-left: @px solid @cardview-border-color;
-        border-right: @px solid @cardview-border-color;
-        pointer-events: none;
-        content: " ";
-        .shadow(0.1rem, 0.1rem, 0.2);
-    }
-
-    &:before {
-        width: 97%;
-        bottom: -@cardview-stackeditem-height;
-        left: 1.5%;
-    }
-
-    &:after {
-        width: 94%;
-        bottom: -@cardview-stackeditem-height * 2;
-        left: 3%;
-    }
-
-    img {
-        border: @px solid @cardview-border-color;
-        .shadow;
-    }
-
-    .collection-banner {
-        position: absolute;
-        text-align: center;
-        top: 51%;
-        left: -1.5%;
-        width: 103%;
-        border-top: @px solid @cardview-border-color;
-        border-bottom: @px solid @cardview-border-color;
-        background-color: @cardview-banner-color;
-        color: @cardview-banner-text-color;
-        .shadow;
-
-        p {
-            padding: 0px @cardview-banner-padding;
-            text-align: left;
-
-            &.title {
-                font-weight: bold;
-            }
-
-            &.details {
-                font-size: 12*@px;
-            }
-
-        }
-
-        &:before,
-        &:after {
-            position: absolute;
-            height: 0;
-            width: 0;
-            bottom: -6*@px;
-            border: solid transparent;
-            border-width: 5*@px;
-            pointer-events: none;
-            content: " ";
-        }
-
-        &:before { 
-            border-right-color: @cardview-banner-color;
-            left: -5*@px;
-        }            
-
-        &:after { 
-            border-left-color: @cardview-banner-color;
-            right: -7*@px;
-        }
-    }
-} // card-collection 
-
-
-.card-directory {
-
-    position: relative;
-    border-bottom: @px solid @cardview-border-color;
-    border-left: @px solid @cardview-border-color;
-    .shadow;
-
-    p {
-        text-align: left;
-        margin-left: 10*@px;
-
-        &.title {
-            color: @cardview-title-color;
-        }
-
-        &.details {
-            margin-top: -5*@px;
-            color: @cardview-text-color;
-        }
-        
-    }
-
-    img {
-        .shadow;
-    }
-
-    &:before,
-    &:after {
-        position: absolute;
-        height: 0;
-        width: 0;
-        top: 0;
-        border: solid transparent;
-        pointer-events: none;
-        content: " ";
-    }
-
-    &:after {
-        border-width: 28*@px;
-        border-right-color: @cardview-background-color;
-        left: 0;
-        top: -28*@px;
-        width: 30%;
-    }            
-
-    &:before { 
-        width: 50%;
-        height: 22*@px;
-        background-color: @cardview-background-color;
-        right: -2*@px;
-    }
-}
-
-.card-page {
-    display: block;
-    margin: 0 @cardview-grid-margin/2 @cardview-grid-margin;
-    text-align: left;
+    margin: 0 @card-grid-margin/2 @card-grid-margin;
+    background: @card-background-color;
     font-size: 12*@px;
-    .box-shadow(0 0.1rem 0.1rem rgba(0, 0, 0, 0.25));
+    line-height: 1.5em;
+    .card-shadow;
 
     a {
-        overflow: hidden; // can be replaced with a clearfix in case needed
+        overflow: hidden; // for the link ton contain everything
         display: block;
         &,
         a:hover {
             text-decoration: none;
-            color: @cardview-text-color;
+            color: @card-text-color;
         }
     }
     img {
         width: 100%;
-        border-bottom: 1px solid @cardview-image-separator-color;
-    }
-    h4,
-    p {
-        margin: 10*@px;
     }
     h4 {
-        margin-bottom: 2*@px;
+        margin: 10*@px;
         font-size: 12*@px;
-        color: @cardview-title-color;
+        color: @card-title-color;
     }
-    i {
-        .icon-xsmall;
+    p {
+        margin: 0 10*@px 10*@px;
+        &.description {
+            margin-top: -10*@px;
+        }
+        span {
+            padding-right: 5px;
+        }
+        i {
+            .icon-xsmall;
+        }
     }
-    .kind {
-        margin: 0 10*@px;
+}
+
+/**
+    Class: .stack
+    Displays a card stack below the card.
+*/
+.card-stack,
+.card-collection {
+    margin-bottom: @card-grid-margin+(2*@card-stack-offset);
+
+    &:before,
+    &:after {
+        content: " ";
+        position: absolute;
+        height: @card-stack-offset;
+        pointer-events: none;
+        .card-shadow;
     }
-    .date-modified,
-    .date-published {
-        float: left;
-        margin-right: 0;
+
+    &:before {
+        bottom: -@card-stack-offset;
+        left:    @card-stack-offset;
+        right:   @card-stack-offset;
     }
-    .variations {
-        float: right;
+
+    &:after {
+        bottom: -2*@card-stack-offset;
+        left:    2*@card-stack-offset;
+        right:   2*@card-stack-offset;
+    }
+}
+
+.card-collection {
+    .banner {
+        position: absolute;
+        top: 50%;
+        left:  -@card-banner-offset;
+        right: -@card-banner-offset;
+        padding: 0 @card-banner-offset;
+        border: 1px solid @card-banner-border-color;
+        background-color: @card-banner-background-color;
+        color: @card-banner-text-color;
+        .box-shadow(0 8*@px 8*@px -5*@px rgba(0, 0, 0, 0.3));
+
+        h4 {
+            color: @card-banner-text-color;
+        }
+        p {
+            margin-top: -8*@px;
+        }
+
+        &:before,
+        &:after {
+            content: " ";
+            position: absolute;
+            height: 0;
+            width: 0;
+            bottom: -@px - @card-banner-offset;
+            border: @card-banner-offset solid transparent;
+            pointer-events: none;
+        }
+
+        &:before { 
+            border-right-color: @card-banner-background-color;
+            left: -@card-banner-offset;
+        }            
+
+        &:after { 
+            border-left-color: @card-banner-background-color;
+            right: -@card-banner-offset;
+        }
+    }
+}
+
+.card-asset {
+    h4 {
+        font-weight: @font-base-weight;
     }
 }
 
 .grid-container {
     overflow: hidden; // can be replaced with a clearfix in case needed
-    margin: @cardview-grid-margin @cardview-grid-margin/2;
+    margin: @card-grid-margin @card-grid-margin/2;
 
     > .grid-0 {
         float: left;
