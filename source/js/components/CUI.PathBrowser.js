@@ -307,13 +307,20 @@
                     $(this.syncSelectElement.find("option").get(this.selectedIndex)).attr("selected", "selected");
                 }
                 // Value to set is what is currently in the input field until the last slash + the option value
-                var parentPath = "";
-                var iLastSlash = this.inputElement.attr("value").lastIndexOf("/");
-                if (iLastSlash >= 0) {
-                    parentPath = this.inputElement.attr("value").substring(0, iLastSlash + 1);
+                var value;
+                if (this.inputElement.attr("value").indexOf("/") === 0) {
+                    // Option contains an absolute path
+                    value = this.options.options[this.selectedIndex];
+                } else {
+                    // Option contains a relative path
+                    var parentPath = "";
+                    var iLastSlash = this.inputElement.attr("value").lastIndexOf("/");
+                    if (iLastSlash >= 0) {
+                        parentPath = this.inputElement.attr("value").substring(0, iLastSlash + 1);
+                    }
+                    value = parentPath + this.options.options[this.selectedIndex];
                 }
-                var option = this.options.options[this.selectedIndex];
-                this.inputElement.attr("value", parentPath + option);
+                this.inputElement.attr("value", value);
             } else {
                 this.inputElement.attr("value", "");
             }
