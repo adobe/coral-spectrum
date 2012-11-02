@@ -1,3 +1,4 @@
+js/libs/jquery-gridlayout.js
 js/libs/jquery-fingerpointer.js
 js/libs/toe.js
 js/CUI.js
