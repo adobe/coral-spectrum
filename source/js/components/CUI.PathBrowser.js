@@ -31,10 +31,6 @@
          @param {boolean}  [options.showTitles=true]                  Should option titles be shown?
          @param {String}   [options.rootPath='/content']              The root path where completion and browsing starts.
                                                                       Use the empty string for the repository root (defaults to '/content').
-         @param {String}   [options.rootTitle='Websites']             Custom title for the root path.
-                                                                      Defaults to the value of {@link #rootPath}; if that is not set, it will be
-                                                                      'Websites' (localized), to match the default value of '/content' for the
-                                                                      {@link #rootPath}.
          @param {String}   [options.placeholder=null]                 Define a placeholder for the input field
          @param {int}      [options.delay=200]                        Delay before starting autocomplete when typing
          @param {int}      [options.disabled=false]                   Is this component disabled?
@@ -142,7 +138,6 @@
             optionTitleReader: null,
             showTitles: true,
             rootPath: "/content",
-            rootTitle: "Websites", // TODO: localize
             delay: 200,
             placeholder: null,
             optionRenderer: null
@@ -263,6 +258,10 @@
             if (this.$element.attr("data-option-renderer")) {
                 // Allow to choose from default option renderers
                 this.options.optionRenderer = CUI.PathBrowser[this.$element.attr("data-option-renderer") + "OptionRenderer"];
+            }
+
+            if (this.$element.attr("data-root-path")) {
+                this.options.rootPath = this.$element.attr("data-root-path");
             }
 
             // Register a callback function for option loader if defined
@@ -397,11 +396,12 @@
             if (/^\//.test(path) && /\/$/.test(path) && self.options.optionLoader) {
                 if (path === "/") {
                     // Use configured root path
-                    path = self.rootPath ? self.rootPath : "/";
+                    path = self.options.rootPath ? self.options.rootPath : "/";
                 } else {
                     // Remove final slash
                     path = path.replace(/\/$/, "");
                 }
+                self.inputElement.attr("value", path + "/");
 
                 // Make the option loader a promise to guarantee that the callback is
                 // executed at the right rime
