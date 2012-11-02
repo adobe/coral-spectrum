@@ -291,7 +291,11 @@ module.exports = function(grunt) {
         files: {
           '<%= dirs.build %>/js/libs/jquery.js': '<%= dirs.components %>/jquery/index.js',
           '<%= dirs.build %>/js/libs/underscore.js': '<%= dirs.components %>/underscore/index.js',
-          '<%= dirs.build %>/js/libs/handlebars.js': '<%= dirs.components %>/handlebars/index.js',
+          '<%= dirs.build %>/js/libs/handlebars.js': '<%= dirs.components %>/handlebars/index.js'
+        }
+      },
+      dependencies: {
+        files: {
           '<%= dirs.build %>/js/libs/toe.js': '<%= dirs.components %>/toejs/index.js',
           '<%= dirs.build %>/js/libs/fingerpointer.js': '<%= dirs.components %>/fingerpointer/index.js',
           '<%= dirs.build %>/js/libs/jquery-gridlayout.js': '<%= dirs.source %>/js/plugins/jquery-gridlayout.js'
@@ -565,7 +569,7 @@ module.exports = function(grunt) {
   grunt.task.renameTask('mvn', 'mvn-install');
 
   // Almost full build, just the stuff needed for Granite install
-  grunt.registerTask('mvn-build', 'clean lint copy:images copy:fonts copy:less_bootstrap_tmp copy:less_bootstrap_build copy:less_cui handlebars concat:cui less:cui');
+  grunt.registerTask('mvn-build', 'clean lint copy:images copy:fonts copy:dependencies copy:less_bootstrap_tmp copy:less_bootstrap_build copy:less_cui handlebars concat:cui less:cui');
 
   // Custom build for maven
   grunt.registerTask('mvn', 'mvn-build mvn-install');
