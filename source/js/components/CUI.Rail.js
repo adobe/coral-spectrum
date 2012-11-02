@@ -288,8 +288,6 @@ $('#myRail').rail({
           views = con.find('.rail-view'),
           active = con.find('.rail-view.active'),
           search = switcher.find('input'),
-          searchClear = switcher.find('.clear-cmd'),
-          searchQuery = switcher.find('.clear-query'),
           cl = 'active';
 
       // init switcher
@@ -305,12 +303,6 @@ $('#myRail').rail({
           $(this).addClass(cl);
           view.toggleClass('active'); 
         });
-      });
-
-      // init search buttons
-      searchClear.fipo('tap', 'click', function (ev) {
-        search.val('');
-        search.trigger('focus');
       });
     }
     

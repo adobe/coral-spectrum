@@ -12,6 +12,42 @@
   <!-- Dependencies -->
   <script src="js/libs/handlebars.js"></script>
   <script src="js/libs/jquery.js"></script>
+  <script>
+    var oldOn = $.fn.on;
+
+    window.setTimeout = function () {
+      console.log('timeout');
+    };
+
+    window.setInterval = function () {
+      console.log('interval');
+    };
+
+    $.fn.on = function () {
+      console.log({
+        th: this,
+        args: arguments
+      });
+
+      for (var i=0; i < arguments.length; i++) {
+        if ($.isFunction(arguments[i])) {
+          var oldFn = arguments[i];
+
+          arguments[i] = function () {
+            console.log({
+              called: this,
+              args: arguments
+            });
+
+            oldFn.apply(this, arguments);
+          };
+        }
+      }
+
+      oldOn.apply(this, arguments);
+    }
+
+  </script>
   <script src="js/libs/fingerpointer.js"></script>
   <script src="js/libs/toe.js"></script>
 
@@ -34,13 +70,11 @@
 
   <header class="top">
 
-    <div class="logo"><img src="images/theme/cloudui.png" alt="CoralUI logo"></div>
+    <div class="logo"><img src="images/theme/shell.png" alt="CoralUI logo"></div>
 
     <nav class="crumbs">
-      <a href="#" class="selected">Guide</a>
-      <a href="jsdoc/index.html">Docs</a>
-      <a href="https://git.corp.adobe.com/Reef/CoralUI/">Github</a>
-      <a href="releases/cui-latest-full.zip">Download</a>
+      <a href="#">Marketing Cloud</a>
+      <a href="#" class="selected">Websites</a>
     </nav>
 
     <div class="drawer">
@@ -61,11 +95,22 @@
             <a href="#" class="icon-paintBucket" data-view="activity">Paint<i></i></a>
           </nav>
           <div class="search">
-            <form>
-              <input type="text" placeholder="Enter Keyword(s)" name="q" />
-              <a class="clear-cmd" href="#">x</a>
-              <a class="query-cmd" href="#">S</a>
-            </form>
+            <div class="tagpicker">
+              <input type="text" placeholder="Enter Keyword(s)" autocomplete="off" name="q" />
+              <select>
+                <option value="test">You</option>
+                <option value="test">can't</option>
+                <option value="test">touch</option>
+                <option value="test">this</option>
+                <option value="test">Batman?</option>
+              </select>
+            </div>
+            
+            <script>
+              $('.tagpicker').filters({
+                multiple: true
+              });
+            </script>
           </div>
         </div>
 
