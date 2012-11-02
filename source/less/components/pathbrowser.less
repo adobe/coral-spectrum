@@ -52,32 +52,32 @@
     }
 
     .autocomplete-results {
-        em {
-            font-weight: bold;
-            letter-spacing: 0.1rem;
-            font-style: normal;
+        li {
+            min-height: 1rem;
         }
 
-        span {
+        li div {
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
         }
 
-        .pathbrowser-autocomplete-item-value {
-            clear: left;
-            display: block;
+        li div.pathbrowser-autocomplete-item-value {
             float: left;
-            overflow: hidden;
-            width: 100px;
+            width: 12rem;
         }
 
-        .pathbrowser-autocomplete-item-title {
+        li div.pathbrowser-autocomplete-item-value-with-title {
+            width: 6rem;
+        }
+
+        li div.pathbrowser-autocomplete-item-title {
             display: block;
-            font-size: 10px;
+            font-size: 0.7rem;
             font-style: italic;
-            padding-left: 110px;
-            padding-top: 2px;
+            padding-left: 0.25rem;
+            padding-top: 0.05rem;
+            position: relative;
         }
     }
 

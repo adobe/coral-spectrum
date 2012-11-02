@@ -25,6 +25,9 @@
          @param {Array}    [options.options=empty array]              Array of available options (will be read from &lt;select&gt; by default)
          @param {Array}    [options.optionDisplayStrings=empty array] Array of alternate strings for display (will be read from &lt;select&gt; by default)
          @param {Function} [options.optionLoader=use options]         (Optional) Callback to reload options list
+         @param {String}   [options.optionLoaderRoot=use options]     (Optional) Nested key to use as root to retrieve options from the option loader result
+         @param {Function} [options.optionValueReader=use options]    (Optional) Custom function to call to retrieve the value from the option loader result
+         @param {Function} [options.optionTitleReader=use options]    (Optional) Custom function to call to retrieve the title from the option loader result
          @param {boolean}  [options.showTitles=true]                  Should option titles be shown?
          @param {String}   [options.rootPath='/content']              The root path where completion and browsing starts.
                                                                       Use the empty string for the repository root (defaults to '/content').
@@ -134,6 +137,9 @@
             options: [],
             optionDisplayStrings: [],
             optionLoader: null,
+            optionLoaderRoot: null,
+            optionValueReader: null,
+            optionTitleReader: null,
             showTitles: true,
             rootPath: "/content",
             rootTitle: "Websites", // TODO: localize
@@ -260,7 +266,23 @@
             }
 
             // Register a callback function for option loader if defined
-            this.options.optionLoader = CUI.util.buildFunction(this.$element.attr("data-option-loader"), ["path"]);
+            var optionLoader = CUI.util.buildFunction(this.$element.attr("data-option-loader"), ["path"]);
+            if (optionLoader) {
+                this.options.optionLoader = optionLoader.bind(this);
+            }
+            // Root to use from the result object
+            if (this.$element.attr("data-option-loader-root")) {
+                this.options.optionLoaderRoot = this.$element.attr("data-option-loader-root");
+            }
+            // Custom value and title readers
+            var optionValueReader = CUI.util.buildFunction(this.$element.attr("data-option-value-reader"), ["object"]);
+            if (optionValueReader) {
+                this.options.optionValueReader = optionValueReader.bind(this);
+            }
+            var optionTitleReader = CUI.util.buildFunction(this.$element.attr("data-option-title-reader"), ["object"]);
+            if (optionTitleReader) {
+                this.options.optionTitleReader = optionTitleReader.bind(this);
+            }
         },
 
         /** @ignore */
@@ -328,6 +350,12 @@
                             self._showAutocompleter(results);
                         }
                     )
+                    .fail(
+                        function() {
+                            // TODO: implement
+                            console.log("Failed to read options");
+                        }
+                    )
                 ;
             } else {
                 this.dropdownList.hide();
@@ -384,8 +412,8 @@
                             // Original function was already returning a promise
                             // Bind the rebuild options on that object's 'done' method
                             object.done(
-                                function(results) {
-                                    self._rebuildOptions(def, path, results.pages);
+                                function(object) {
+                                    self._rebuildOptions(def, path, object);
                                 }
                             );
                         } else {
@@ -406,29 +434,38 @@
         _rebuildOptions: function(def, path, object) {
             var self = this;
 
-            var newOptions = [];
-            var newOptionDisplayStrings = [];
-            $.each(object, function(i, v) {
-                var value, title;
-                if (typeof v === "object") {
-                    value = v.path;
-                    title = v.title;
-                } else {
-                    value = v;
-                }
-                newOptions.push(value);
-                if (self.options.showTitles && title) {
+            var root = $.getNested(object, self.options.optionLoaderRoot);
+            if (root) {
+                var newOptions = [];
+                var newOptionDisplayStrings = [];
+                $.each(root, function(i, v) {
+                    // Read the title and the value either from provided custom reader
+                    // or using default expected object structure
+                    var value;
+                    if (self.options.optionValueReader) {
+                        value = self.options.optionValueReader(v);
+                    } else {
+                        value = typeof v === "object" ? v.path : v;
+                    }
+                    newOptions.push(value);
+
+                    var title = "";
+                    if (self.options.optionTitleReader) {
+                        title = self.options.optionTitleReader(v);
+                    } else if (typeof v === "object") {
+                        title = v.title;
+                    }
                     newOptionDisplayStrings.push(title);
-                }
-            }.bind(self));
+                }.bind(self));
 
-            self.options.options = newOptions;
-            if (self.options.showTitles) {
+                self.options.options = newOptions;
                 self.options.optionDisplayStrings = newOptionDisplayStrings;
-            }
 
-            var filtered = self._filterOptions(path);
-            def.resolve(filtered);
+                var filtered = self._filterOptions(path);
+                def.resolve(filtered);
+            } else {
+                def.reject();
+            }
         },
 
         _filterOptions: function(searchFor) {
@@ -459,12 +496,14 @@
 
 CUI.PathBrowser.defaultOptionRenderer = function(iterator, index) {
     var value = this.options.options[index];
-    var markup = "<span class=\"pathbrowser-autocomplete-item-value\">" + value + "</span>";
 
     // Use alternate display strings if possible
-    if (this.options.showTitles && this.options.optionDisplayStrings[index]) {
-        markup += "<span class=\"pathbrowser-autocomplete-item-title\">" + this.options.optionDisplayStrings[index] + "</span>";
+    var valueCls = "pathbrowser-autocomplete-item-value";
+    var titleMarkup = "";
+    if (this.options.showTitles && this.options.optionDisplayStrings[index] && this.options.optionDisplayStrings[index].length > 0) {
+        valueCls += " pathbrowser-autocomplete-item-value-with-title";
+        titleMarkup += "<div class=\"pathbrowser-autocomplete-item-title\">" + this.options.optionDisplayStrings[index] + "</div>";
     }
 
-    return $(markup);
+    return $("<div class=\"" + valueCls + "\">" + value + "</div>" + titleMarkup);
 };

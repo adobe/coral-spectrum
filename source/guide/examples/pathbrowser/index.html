@@ -23,12 +23,7 @@
 
     <h2>Create from Class</h2>
     Path:
-    <select name="path-class" class="pathbrowser">
-        <option>apps</option>
-        <option>content</option>
-        <option>etc</option>
-        <option>libs</option>
-    </select>
+    <select name="path-class" class="pathbrowser"></select>
 
     <h2>Create from jQuery</h2>
     Path:
@@ -36,7 +31,7 @@
 
     <h2>Create from markup</h2>
     Path:
-    <div data-init="pathbrowser" class="pathbrowser" data-placeholder="Provide path" data-option-loader="function(path) { return window.options[path] || []; }">
+    <div data-init="pathbrowser" class="pathbrowser" data-placeholder="Provide path">
         <input type="text" name="path-markup">
     </div>
 
@@ -81,26 +76,98 @@
         ]
     };
 
+    window.optionTitles = {
+        "/": [
+            "Applications",
+            "",
+            "Websites",
+            "",
+            "",
+            ""
+        ],
+        "/content": [
+            "Geometrixx Demo Site",
+            "Geometrixx Outdoors",
+            ""
+        ],
+        "/content/geometrixx": [
+            "English",
+            "Deutsch",
+            "French"
+        ],
+        "/content/geometrixx/en": [
+            "Company",
+            "Services"
+        ],
+        "/content/geometrixx/en/company": [
+            "Managing Board",
+            "Products"
+        ]
+        // No titles at all for /apps
+    };
+
+    // Option loader function
+    var optionLoader = function(path) {
+        return window.options[path] || [];
+    };
+
+    // Another option loader function which root and inner structure is not the same
+    var nestedOptionLoader = function(path) {
+        var result = [];
+        if (window.options[path]) {
+            for (var i = 0; i < window.options[path].length; i++) {
+                var value = window.options[path][i];
+                var object = {
+                    thevalue: value
+                };
+                if (window.optionTitles[path] && window.optionTitles[path][i]) {
+                    object.thetitle = window.optionTitles[path][i];
+                }
+                result.push(object);
+            }
+        }
+        return {
+            results: {
+                values: result
+            }
+        };
+    };
+    var nestedOptionLoaderRoot = "results.values";
+    var nestedOptionValueReader = function(object) {
+        return object.thevalue;
+    };
+    var nestedOptionTitleReader = function(object) {
+        return object.thetitle;
+    };
+
+    // Create from markup: add option loader & its parameters
+    $("div.pathbrowser")
+        .attr("data-option-loader", nestedOptionLoader.toString())
+        .attr("data-option-loader-root", nestedOptionLoaderRoot)
+        .attr("data-option-value-reader", nestedOptionValueReader.toString())
+        .attr("data-option-title-reader", nestedOptionTitleReader.toString())
+    ;
+
     $(document).ready(function() {
         // Create from class
-        $("select.pathbrowser").pathBrowser();
+        $("select.pathbrowser").pathBrowser({
+            optionLoader: optionLoader
+        });
 
         // Create from jQuery
         var path_jQuery = new CUI.PathBrowser({
             element: "input[name='path-jquery']",
-            optionLoader: function(path) {
-                return options[path] || [];
-            },
-            showTitles: true
+            optionLoader: optionLoader,
+            showTitles: false
         });
 
+        // Method to enable/disable all path browsers
         var togglePathBrowser = function(event) {
             var link = $(event.target);
             var disabled = link.attr("data-action") === "disable";
             path_jQuery.set("disabled", disabled);
             $("select.pathbrowser, div.pathbrowser").pathBrowser({ disabled: disabled });
         };
-
         $("a[data-action]").click(togglePathBrowser);
     });
 
