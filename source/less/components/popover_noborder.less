@@ -1,0 +1,135 @@
+
+// Popover
+@popover-background-color: rgb(245, 245, 245);
+@popover-border-color: rgb(180, 180, 180);
+@popover-arrow-size: 0.75rem;
+
+.popover {
+  position: absolute;
+	display: inline-block;
+	background-color: @popover-background-color;
+
+  .box-shadow(0 0 0.35rem rgba(0, 0, 0, 0.15));
+  
+  border: @px solid @popover-border-color;
+	
+  /*
+    Arrows
+  */
+  &:before,
+  &:after {
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  // top and bottom arrow
+  &.arrow-top:before,
+  &.arrow-top:after,
+  &.arrow-bottom:before,
+  &.arrow-bottom:after { // center the arrow in the center
+    left: 50%;
+  }
+
+  &.arrow-top:before,
+  &.arrow-bottom:before { // center the arrow in the center
+    border-width: @popover-arrow-size;
+    margin-left: -1*@popover-arrow-size;
+  }
+
+  &.arrow-top:after,
+  &.arrow-bottom:after { // center the arrow in the center
+    border-width: @popover-arrow-size - @px;
+    margin-left: -1*@popover-arrow-size + @px;
+  }
+
+  &.arrow-top:before,
+  &.arrow-top:after {
+    bottom: 100%; // position the border on the top
+  }
+
+  &.arrow-top:before { // outer color
+    border-bottom-color: @popover-border-color;
+  }
+
+  &.arrow-top:after { // inner color
+    border-bottom-color: @popover-background-color;
+  }
+
+
+  &.arrow-bottom:before,
+  &.arrow-bottom:after {
+    top: 100%; // position the border on the bottom
+  }
+
+
+  &.arrow-bottom:before { // outer color
+    border-top-color: @popover-border-color;
+  }
+
+  &.arrow-bottom:after { // inner color
+    border-top-color: @popover-background-color;
+  }
+
+  // left and right arrow
+  &.arrow-left:before,
+  &.arrow-left:after,
+  &.arrow-right:before,
+  &.arrow-right:after { // center the arrow in the center
+    top: 50%;
+  }
+
+  &.arrow-left:before,
+  &.arrow-right:before { // center the arrow in the center
+    border-width: @popover-arrow-size;
+    margin-top: -1*@popover-arrow-size;
+  }
+
+  &.arrow-left:after,
+  &.arrow-right:after { // center the arrow in the center
+    border-width: @popover-arrow-size - @px;
+    margin-top: -1*@popover-arrow-size + @px;
+  }
+
+  &.arrow-left:before,
+  &.arrow-left:after {
+    right: 100%; // position the border on the left
+  }
+
+  &.arrow-left:before { // outer color
+    border-right-color: @popover-border-color;
+  }
+
+  &.arrow-left:after { // inner color
+    border-right-color: @popover-background-color;
+  }
+
+  &.arrow-right:before,
+  &.arrow-right:after {
+    left: 100%; // position the border on the right
+  }
+
+  &.arrow-right:before { // outer color
+    border-left-color: @popover-border-color;
+  }
+
+  &.arrow-right:after { // inner color
+    border-left-color: @popover-background-color;
+  }
+  
+  
+  // Alternate arrow positions
+  &.arrow-pos-left:before,
+  &.arrow-pos-left:after { // center the arrow in the center
+    left: 25%;
+    right: auto;
+  }
+  
+  &.arrow-pos-right:before,
+  &.arrow-pos-right:after { // center the arrow in the center
+    left: 75%;
+  }
+}

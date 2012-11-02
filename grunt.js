@@ -35,7 +35,7 @@ module.exports = function(grunt) {
       'components/CUI.Datepicker.js',
       'components/CUI.Sticky.js',
       'components/CUI.PathBrowser.js'
-  ],
+    ],
     "rte-core": [
       'rte/setup.js',
 
@@ -448,7 +448,18 @@ module.exports = function(grunt) {
     },
 
     less: {
-      cui: {
+      "cui-wrapped": {
+        options: {
+          paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
+            dirs.source+'/less/',
+            dirs.temp+'/less/'
+          ]
+        },
+        files: {
+          '<%= dirs.temp %>/cui-wrapped.css': '<%= dirs.source %>/less/cui-wrapped.less'
+        }
+      },
+      "cui": {
         options: {
           paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
             dirs.source+'/less/',
@@ -459,7 +470,7 @@ module.exports = function(grunt) {
           '<%= dirs.temp %>/cui.css': '<%= dirs.source %>/less/cui.less'
         }
       },
-      guide: {
+      "guide": {
         options: {
           paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
             dirs.source+'/less/', // must hardcode paths here, grunt-contrib-less doesn't support template tags
