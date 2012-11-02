@@ -32,7 +32,7 @@ CUI.rte.adapter.JQueryEvent = new Class({
      * @type jQuery.Event
      * @private
      */
-    native: null,
+    nativeEvent: null,
 
     /**
      * Creates a new editor event from the specified jQuery event.
@@ -41,8 +41,7 @@ CUI.rte.adapter.JQueryEvent = new Class({
      */
     construct: function(jqEvent, editContext) {
         var isMac = CUI.rte.Common.ua.isMac;
-        this.native = jqEvent;
-        var key = (jqEvent.key ? jqEvent.key : jqEvent.keyCode);
+        this.nativeEvent = jqEvent;
         // map to common properties
         var cfg = {
             "type": jqEvent.type,
@@ -99,18 +98,18 @@ CUI.rte.adapter.JQueryEvent = new Class({
 
     // overrides CUI.rte.EdittorEvent#preventDefault
     preventDefault: function() {
-        this.native.preventDefault();
+        this.nativeEvent.preventDefault();
     },
 
     // overrides CUI.rte.EdittorEvent#stopPropagation
     stopPropagation: function() {
-        this.native.stopPropagation();
+        this.nativeEvent.stopPropagation();
     },
 
     // overrides CUI.rte.EdittorEvent#stopEvent
     stopEvent: function() {
-        this.native.preventDefault();
-        this.native.stopPropagation();
+        this.nativeEvent.preventDefault();
+        this.nativeEvent.stopPropagation();
     }
 
 });
