@@ -12,8 +12,8 @@
     // Remove extension
     input = input.replace(svgRE, '');
     
-    // Lowercase first char
-    input = input.slice(0,1).toLowerCase()+input.slice(1);
+    // Lowercase filename
+    input = input.toLowerCase();
     
     return input;
   }
