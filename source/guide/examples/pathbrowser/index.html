@@ -24,16 +24,22 @@
     <h2>Create from Class</h2>
     Path:
     <select name="path-class" class="pathbrowser"></select>
+    <br/>
+    This uses relative paths in a standard option loader.
 
     <h2>Create from jQuery</h2>
     Path:
     <input type="text" name="path-jquery" placeholder="Enter path"/>
+    <br/>
+    This uses absolute paths in an option loader which custom root and option value reader. No titles are displayed.
 
     <h2>Create from markup</h2>
     Path:
     <div data-init="pathbrowser" class="pathbrowser" data-placeholder="Provide path">
         <input type="text" name="path-markup">
     </div>
+    <br/>
+    This uses absolute paths in an option loader which custom root, option value and title readers. Titles are displayed.
 
     <p>
         <a data-action="disable">Disable all</a>
@@ -42,6 +48,40 @@
 </section>
 
 <script type="text/javascript">
+
+    // Absolute options
+    window.absoluteOptions = {
+        "/": [
+            "/apps",
+            "/bin",
+            "/content",
+            "/etc",
+            "/libs",
+            "/tmp"
+        ],
+        "/content": [
+            "/content/geometrixx",
+            "/content/geometrixx-outdoors",
+            "/content/geometrixx-media"
+        ],
+        "/content/geometrixx": [
+            "/content/geometrixx/en",
+            "/content/geometrixx/de",
+            "/content/geometrixx/fr"
+        ],
+        "/content/geometrixx/en": [
+            "/content/geometrixx/en/company",
+            "/content/geometrixx/en/services"
+        ],
+        "/content/geometrixx/en/company": [
+            "/content/geometrixx/en/company/board",
+            "/content/geometrixx/en/company/products"
+        ],
+        "/apps": [
+            "/apps/geometrixx",
+            "/apps/geometrixx-outdoors"
+        ]
+    };
 
     window.options = {
         "/": [
@@ -111,12 +151,12 @@
         return window.options[path] || [];
     };
 
-    // Another option loader function which root and inner structure is not the same
+    // Option loader function which root and inner structure is not the same
     var nestedOptionLoader = function(path) {
         var result = [];
-        if (window.options[path]) {
-            for (var i = 0; i < window.options[path].length; i++) {
-                var value = window.options[path][i];
+        if (window.absoluteOptions[path]) {
+            for (var i = 0; i < window.absoluteOptions[path].length; i++) {
+                var value = window.absoluteOptions[path][i];
                 var object = {
                     thevalue: value
                 };
@@ -157,7 +197,9 @@
         // Create from jQuery
         var path_jQuery = new CUI.PathBrowser({
             element: "input[name='path-jquery']",
-            optionLoader: optionLoader,
+            optionLoader: nestedOptionLoader,
+            optionLoaderRoot: nestedOptionLoaderRoot,
+            optionValueReader: nestedOptionValueReader,
             showTitles: false
         });
 
