@@ -66,6 +66,7 @@
               <a href="#Link">Link</a>
               <a href="#Fonts">Fonts</a>
               <a href="#Icons">Icons</a>
+              <a href="#Sticky">Sticky elements</a>              
             </nav>
         </section>
 
@@ -390,9 +391,18 @@
           </div>
         </section>
 
+      <section id="Sticky">
+          <h2 class="line">Sticky elements</h2>
+          <p>You can make nearly every element "sticky" by just adding the css class <code class="atv">sticky</code> to it. Sticky elements will stay on the top of the screen even if the users scrolls down. You can have more than one sticks element on your page; they will stack themselves in the correct order at the top of your page.</p>
+          <p>You can also initialize the sticky effect by adding <code class="prettyprint">data-init="sticky"</code>, the jQuery-Plugin <code class="prettyprint">$.sticky()</code> or by instantiation of class <code class="prettyprint">CUI.Sticky</code>.</p>
+          <p>Note: Don't forget do add a background to your element or the page will shine through your element when sticked.</p>
+          <p>Also note: Sticky elements do not work inside scrolling divs (overflow: auto or scroll). They only work with the document scroll bar.</p>
+      </section>
+      
 
       </section><!-- /Text Styles -->
-
+      
+      
       <section id="PageComponents">
         <h1 class="line">Page Components</h1>
         <p>Page components are top level pieces that appear on nearly every page.</p>
@@ -1385,76 +1395,153 @@
             <li>Directory Card: for a directory of items.
           </ul>
 
-          <h3 class="line">Asset Card View</h3>
-          <p>For a single asset.  Can include some descriptive fields, as shown below.</p>
+          <h3 class="line">DAM Asset Card</h3>
+          <p>For a single asset. Can include some descriptive fields, as shown below.</p>
 
           <div class="componentSample">
             <div class="example">
-
-              <div class="card-asset">
+              <article class="card-asset"><a href="#">
                 <img src="https://lh5.googleusercontent.com/-Jw12BvbSrH4/UHylAGRIsrI/AAAAAAAADUI/2lXvalAiCgU/s288/20121010-IMG_2547.jpg" alt=""/>
-                <p class="asset-title">title</p>
-                <p class="asset-description">description</p>
-                <p class="asset-details">details</p>
-              </div>
+                <h4>Asset</h4>
+                <p class="description">
+                  <span class="resolution">1220 x 400</span>
+                  <span class="weight">149KB</span>
+                </p>
+                <p class="info">
+                  <span class="links"><i class="icon-paintbucket">Links</i> 8</span>
+                  <span class="comments"><i class="icon-paintbucket">Comments</i> 12</span>
+                  <span class="modified">8 hours ago</span>
+                </p>
+              </a></article>
+              
+              <article class="card-asset"><a href="#">
+                <img src="https://lh5.googleusercontent.com/-Jw12BvbSrH4/UHylAGRIsrI/AAAAAAAADUI/2lXvalAiCgU/s288/20121010-IMG_2547.jpg" alt=""/>
+                <h4>Asset</h4>
+                <p class="description">
+                  <span class="resolution">1220 x 400</span>
+                  <span class="weight">149KB</span>
+                </p>
+              </a></article>
             </div>
             <pre class="prettyprint linenums">
-&lt;div class=&quot;card-asset&quot;&gt;
-  &lt;img src=&quot;fake_card_asset.jpg&quot;/&gt;
-  &lt;p class="asset-title"&gt;title&lt;/p&gt;
-  &lt;p class="asset-description"&gt;description&lt;/p&gt;
-  &lt;p class="asset-details"&gt;details&lt;/p&gt;
-&lt;/div&gt;
+&lt;article class=&quot;card-asset&quot;&gt;&lt;a href=&quot;#&quot;&gt;
+  &lt;img src=&quot;fake_image.jpg&quot; alt=&quot;&quot;/&gt;
+  &lt;h4&gt;Asset&lt;/h4&gt;
+  &lt;p class=&quot;description&quot;&gt;
+    &lt;span class=&quot;resolution&quot;&gt;1220 x 400&lt;/span&gt;
+    &lt;span class=&quot;weight&quot;&gt;149KB&lt;/span&gt;
+  &lt;/p&gt;
+  &lt;p class=&quot;info&quot;&gt;
+    &lt;span class=&quot;links&quot;&gt;&lt;i class=&quot;icon-paintbucket&quot;&gt;Links&lt;/i&gt; 8&lt;/span&gt;
+    &lt;span class=&quot;comments&quot;&gt;&lt;i class=&quot;icon-paintbucket&quot;&gt;Comments&lt;/i&gt; 12&lt;/span&gt;
+    &lt;span class=&quot;modified&quot;&gt;8 hours ago&lt;/span&gt;
+  &lt;/p&gt;
+&lt;/a&gt;&lt;/article&gt;
             </pre>
           </div>
         
-          <h3 id="CollectionCard" class="line">Collection Card View</h3>
-          <p>DAM Collection View</p>
+          <h3 id="CollectionCard" class="line">DAM Collection Card</h3>
 
           <div class="componentSample">
             <div class="example">
-
-              <div class="card-collection">
+              <article class="card-collection"><a href="#">
                 <img src="https://lh5.googleusercontent.com/-Jw12BvbSrH4/UHylAGRIsrI/AAAAAAAADUI/2lXvalAiCgU/s288/20121010-IMG_2547.jpg" alt=""/>
-                <div class="collection-banner">
-                  <p class="title">This would be the banner</p>
-                  <p class="details">Banner Details (icons)</p>
-                  </div>
-              </div>
+                <div class="banner">
+                  <h4>Collection</h4>
+                  <p class="info">
+                    <span class="links"><i class="icon-paintbucket">Links</i> 8</span>
+                    <span class="comments"><i class="icon-paintbucket">Comments</i> 12</span>
+                    <span class="modified">8 hours ago</span>
+                  </p>
+                </div>
+              </a></article>
 
+              <article class="card-collection"><a href="#">
+                <img src="https://lh5.googleusercontent.com/-Jw12BvbSrH4/UHylAGRIsrI/AAAAAAAADUI/2lXvalAiCgU/s288/20121010-IMG_2547.jpg" alt=""/>
+                <div class="banner">
+                  <h4>Collection</h4>
+                </div>
+              </a></article>
             </div>
             <pre class="prettyprint linenums">
-&lt;div class=&quot;card-collection&quot;&gt;
-  &lt;img src=&quot;fake_image.jpg&quot;/&gt;
-  &lt;div class=&quot;collection-banner&quot;&gt;
-    &lt;p&gt;This would be the banner&lt;/p&gt;
+&lt;article class=&quot;card-collection&quot;&gt;&lt;a href=&quot;#&quot;&gt;
+  &lt;img src=&quot;fake_image.jpg&quot; alt=&quot;&quot;/&gt;
+  &lt;div class=&quot;banner&quot;&gt;
+    &lt;h4&gt;Collection&lt;/h4&gt;
+    &lt;p class=&quot;info&quot;&gt;
+      &lt;span class=&quot;links&quot;&gt;&lt;i class=&quot;icon-paintbucket&quot;&gt;Links&lt;/i&gt; 8&lt;/span&gt;
+      &lt;span class=&quot;comments&quot;&gt;&lt;i class=&quot;icon-paintbucket&quot;&gt;Comments&lt;/i&gt; 12&lt;/span&gt;
+      &lt;span class=&quot;modified&quot;&gt;8 hours ago&lt;/span&gt;
+    &lt;/p&gt;
   &lt;/div&gt;
-&lt;/div&gt;
+&lt;/a&gt;&lt;/article&gt;
             </pre>
           </div>
 
 
 
-          <h3 id="DirectoryCard" class="line">Collection Card View</h3>
-          <p>DAM Directory View</p>
+          <h3 id="DirectoryCard" class="line">DAM Directory Card</h3>
 
           <div class="componentSample">
             <div class="example">
-
-              <div class="card-directory">
+              <article class="card-directory"><a href="#">
                 <img src="https://lh5.googleusercontent.com/-Jw12BvbSrH4/UHylAGRIsrI/AAAAAAAADUI/2lXvalAiCgU/s288/20121010-IMG_2547.jpg" alt=""/>
-                  <p class="title">Directory Title</p>
-                  <p class="details">Directory Details (icons)</p>
-              </div>
+                <h4>Directory</h4>
+                <p class="info">
+                  <span class="links"><i class="icon-paintbucket">Links</i> 8</span>
+                  <span class="comments"><i class="icon-paintbucket">Comments</i> 12</span>
+                  <span class="modified">8 hours ago</span>
+                </p>
+              </a></article>
 
+              <article class="card-directory"><a href="#">
+                <img src="https://lh5.googleusercontent.com/-Jw12BvbSrH4/UHylAGRIsrI/AAAAAAAADUI/2lXvalAiCgU/s288/20121010-IMG_2547.jpg" alt=""/>
+                <h4>Directory</h4>
+              </a></article>
             </div>
 
             <pre class="prettyprint linenums">
-&lt;div class=&quot;card-directory&quot;&gt;
-  &lt;img src=&quot;fake_content.jpg&quot; alt=&quot;&quot;/&gt;
-  &lt;p class=&quot;title&quot;&gt;Directory Title&lt;/p&gt;
-  &lt;p class=&quot;details&quot;&gt;Directory Details (icons)&lt;/p&gt;
-&lt;/div&gt;
+&lt;article class=&quot;card-directory&quot;&gt;&lt;a href=&quot;#&quot;&gt;
+  &lt;img src=&quot;fake_image.jpg&quot; alt=&quot;&quot;/&gt;
+  &lt;h4&gt;Directory&lt;/h4&gt;
+  &lt;p class=&quot;info&quot;&gt;
+    &lt;span class=&quot;links&quot;&gt;&lt;i class=&quot;icon-paintbucket&quot;&gt;Links&lt;/i&gt; 8&lt;/span&gt;
+    &lt;span class=&quot;comments&quot;&gt;&lt;i class=&quot;icon-paintbucket&quot;&gt;Comments&lt;/i&gt; 12&lt;/span&gt;
+    &lt;span class=&quot;modified&quot;&gt;8 hours ago&lt;/span&gt;
+  &lt;/p&gt;
+&lt;/a&gt;&lt;/article&gt;
+            </pre>
+          </div>
+
+
+
+          <h3 id="DirectoryCard" class="line">WCM Page Card</h3>
+
+          <div class="componentSample">
+            <div class="example">
+              <article class="card-page"><a href="#">
+                <img src="https://lh5.googleusercontent.com/-Jw12BvbSrH4/UHylAGRIsrI/AAAAAAAADUI/2lXvalAiCgU/s288/20121010-IMG_2547.jpg" alt=""/>
+                <h4>Page</h4>
+                <p class="description">Launch Copy</p>
+                <p class="info">
+                  <span class="modified"><i class="icon-paintbucket">Modified</i> 2 days ago</span>
+                  <span class="published"><i class="icon-paintbucket">Published</i> 12 hours ago</span>
+                  <i class="icon-paintbucket right">Link</i>
+                </p>
+              </a></article>
+            </div>
+
+            <pre class="prettyprint linenums">
+&lt;article class=&quot;card-page&quot;&gt;&lt;a href=&quot;#&quot;&gt;
+  &lt;img src=&quot;examples/assets/preview1.png&quot; alt=&quot;&quot;/&gt;
+  &lt;h4&gt;Page&lt;/h4&gt;
+  &lt;p class=&quot;description&quot;&gt;Launch Copy&lt;/p&gt;
+  &lt;p class=&quot;info&quot;&gt;
+    &lt;span class=&quot;modified&quot;&gt;&lt;i class=&quot;icon-paintbucket&quot;&gt;Modified&lt;/i&gt; 2 days ago&lt;/span&gt;
+    &lt;span class=&quot;published&quot;&gt;&lt;i class=&quot;icon-paintbucket&quot;&gt;Published&lt;/i&gt; 12 hours ago&lt;/span&gt;
+    &lt;i class=&quot;icon-paintbucket right&quot;&gt;Link&lt;/i&gt;
+  &lt;/p&gt;
+&lt;/a&gt;&lt;/article&gt;
             </pre>
           </div>
 

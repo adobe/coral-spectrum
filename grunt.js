@@ -33,8 +33,9 @@ module.exports = function(grunt) {
       'components/CUI.Filters.js',
       'components/CUI.Slider.js',
       'components/CUI.Datepicker.js',
-      'components/CUI.Breadcrumbs.js'
-    ],
+      'components/CUI.Breadcrumbs.js',
+      'components/CUI.Sticky.js'
+  ],
     "rte-core": [
       'rte/setup.js',
 
