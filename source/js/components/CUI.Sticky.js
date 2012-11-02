@@ -1,5 +1,5 @@
 (function($) {
-  CUI.Sticky = new Class({
+  CUI.Sticky = new Class(/** @lends CUI.Sticky# */{
     toString: 'Sticky',
     extend: CUI.Widget,
 
@@ -8,7 +8,6 @@
       @classdesc A sticky widget - can make every element sticky to screen
       
       @desc Makes element sticky, i.e. the element does not scroll out of screen.
-      
     */
     construct: function(options) {
         this.$element.addClass("sticky");
@@ -21,7 +20,7 @@
         this.scrollingElement.on("scroll", this._fixElementPosition.bind(this));
         $(window).on("resize", this._fixElementPosition.bind(this));
     },
-    
+
     _fixElementPosition: function() {
          var pos = this.wrapper.offset().top;
          var scroll = this.scrollingElement.scrollTop();
@@ -43,7 +42,7 @@
          }
 
     },
-    
+
     _getStickPosition: function() {
         var etop = this.wrapper.offset().top;
         var startAt = 0;
@@ -58,6 +57,7 @@
   });
 
   CUI.util.plugClass(CUI.Sticky);
+
   // Data API
   if (CUI.options.dataAPI) {
     $(function() {
@@ -65,4 +65,3 @@
     });
   }
 }(window.jQuery));
-
