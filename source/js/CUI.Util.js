@@ -98,12 +98,15 @@ CUI.util.capitalize = function(str) {
         }
     };
 
-  /**
-    $.load with a CUI spinner
+  /**    
+    Load remote content in an element with a CUI spinner
+    NOTE: This function should be moved to another file as it is not part of the CUI.util namespace. Maybe CUI.jQuery.js? Ignored from docs for now.
 
     @param {String} remote                                  The remote URL to pass to $.load
     @param {Boolean} [force]                                Set force to true to force the load to happen with every call, even if it has succeeded already. Otherwise, subsequent calls will simply return.
     @param {Function} [callback]                            A function to execute in the scope of the jQuery $.load call when the load finishes (whether success or failure). The arguments to the callback are the load results: response, status, xhr.
+    
+    @ignore
   */
   $.fn.loadWithSpinner = function(remote, force, callback) {
     var $target = $(this);
@@ -133,29 +136,32 @@ CUI.util.capitalize = function(str) {
     }
   };
 
-    $.extend({
-        /**
-         * Utility function to get the value of a nested key within an object
-         * @param {Object} object    The object to retrieve the value from
-         * @param {String} nestedKey The nested key. For instance "foo.bar.baz"
-         * @return {Object} The object value for the nested key
-         */
-        getNested: function(object, nestedKey) {
-            if (!nestedKey) {
-                return object;
-            }
+  $.extend({
+      /**
+        Utility function to get the value of a nested key within an object
+        NOTE: This function should be moved to CUI.util namespace as it is not jQuery specific. Ignored from docs for now.
+      
+        @param {Object} object    The object to retrieve the value from
+        @param {String} nestedKey The nested key. For instance "foo.bar.baz"
+        @return {Object} The object value for the nested key
+        
+        @ignore
+      */
+      getNested: function(object, nestedKey) {
+          if (!nestedKey) {
+              return object;
+          }
 
-            // Split key into a table
-            var keys = typeof nestedKey === "string" ? nestedKey.split(".") : nestedKey;
+          // Split key into a table
+          var keys = typeof nestedKey === "string" ? nestedKey.split(".") : nestedKey;
 
-            // Browse object
-            var result = object;
-            while (result && keys.length > 0) {
-                result = result[keys.shift()];
-            }
+          // Browse object
+          var result = object;
+          while (result && keys.length > 0) {
+              result = result[keys.shift()];
+          }
 
-            return result;
-        }
-    });
-
+          return result;
+      }
+  });
 }(window.jQuery));
