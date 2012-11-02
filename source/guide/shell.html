@@ -12,42 +12,6 @@
   <!-- Dependencies -->
   <script src="js/libs/handlebars.js"></script>
   <script src="js/libs/jquery.js"></script>
-  <script>
-    var oldOn = $.fn.on;
-
-    window.setTimeout = function () {
-      console.log('timeout');
-    };
-
-    window.setInterval = function () {
-      console.log('interval');
-    };
-
-    $.fn.on = function () {
-      console.log({
-        th: this,
-        args: arguments
-      });
-
-      for (var i=0; i < arguments.length; i++) {
-        if ($.isFunction(arguments[i])) {
-          var oldFn = arguments[i];
-
-          arguments[i] = function () {
-            console.log({
-              called: this,
-              args: arguments
-            });
-
-            oldFn.apply(this, arguments);
-          };
-        }
-      }
-
-      oldOn.apply(this, arguments);
-    }
-
-  </script>
   <script src="js/libs/fingerpointer.js"></script>
   <script src="js/libs/toe.js"></script>
 
@@ -268,7 +232,7 @@
     <div class="content">
       <nav class="toolbar">
         <div class="left icongroup">
-          <a href="#" class="icon-addGrid">Add</a>
+          <a href="#" class="icon-addGrid" id="closeRail">Add</a>
           <span class="divider"></span>
           <a href="#" class="icon-calendar">Calendar</a>
           <a href="#" class="icon-cart">Cart</a>

@@ -38,6 +38,10 @@ $(function() {
       return def.promise();
     }
   });
+
+  $('#closeRail').fipo('tap', 'click', function () {
+    rail.toggleClass('closed');
+  });
   
   /**
     Show the paragraph link icon when a heading is hovered on that is within a named section
