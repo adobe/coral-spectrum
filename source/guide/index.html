@@ -66,6 +66,7 @@
                         <a href="#Link">Link</a>
                         <a href="#Fonts">Fonts</a>
                         <a href="#Icons">Icons</a>
+                        <a href="#Sticky">Sticky elements</a>
                     </nav>
                 </section>
 
@@ -389,7 +390,13 @@
 </pre>
                     </div>
                 </section>
-
+                <section id="Sticky">
+                    <h2 class="line">Sticky elements</h2>
+                    <p>You can make nearly every element "sticky" by just adding the css class <code class="atv">sticky</code> to it. Sticky elements will stay on the top of the screen even if the users scrolls down. You can have more than one sticks element on your page; they will stack themselves in the correct order at the top of your page.</p>
+                    <p>You can also initialize the sticky effect by adding <code class="prettyprint">data-init="sticky"</code>, the jQuery-Plugin <code class="prettyprint">$.sticky()</code> or by instantiation of class <code class="prettyprint">CUI.Sticky</code>.</p>
+                    <p>Note: Don't forget do add a background to your element or the page will shine through your element when sticked.</p>
+                    <p>Also note: Sticky elements do not work inside scrolling divs (overflow: auto or scroll). They only work with the document scroll bar.</p>
+                </section>
 
             </section><!-- /Text Styles -->
 
