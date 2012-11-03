@@ -1,0 +1,34 @@
+/**
+  Element: Text Area
+  A basic multiline text input field.
+*/
+
+textarea {
+    .border-box;
+
+    font-size: 0.8125rem;
+    font-family: @font-base-family;
+
+    padding: 0.25rem 0.5rem;
+    margin: 0.5rem 0;
+
+    border: @px solid @textfield-border-color;
+    background-color: @textfield-background-color;
+
+    &:disabled {
+        background-color: @textfield-disabled-background-color;
+    }
+
+    &:focus {
+        .glow();
+        outline: none;
+    }
+
+    &.error {
+        .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+
+        &:focus {
+            .glow;
+        }
+    }
+}

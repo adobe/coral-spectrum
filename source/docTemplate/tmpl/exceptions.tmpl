@@ -1,16 +1,18 @@
-<?js if (data.description) { ?>
+<?js
+var self = this;
+if (obj.description) { ?>
 <div class="param-desc">
     <?js= description ?>
 </div>
 <?js } ?>
 
-<?js if (data.type && data.type.names) {?>
+<?js if (obj.type && obj.type.names) {?>
 <dl>
 	<dt>
 		Type
 	</dt>
 	<dd>
-		<?js= self.partial('type.tmpl', data.type.names) ?>
+		<?js= self.partial('type.tmpl', obj.type.names) ?>
 	</dd>
 </dl>
 <?js } ?>

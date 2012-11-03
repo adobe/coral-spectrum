@@ -9,6 +9,7 @@
     display: inline-block;
     margin: 0.125rem 0;  // Give a top/bottom margin so they stack right
     position: relative;
+    font-size: 0; /* Remove space between inline-block elements */
 
     &.focus > button,
     &.focus input {
@@ -22,9 +23,9 @@
     button {
       display: inline-block;
       vertical-align: middle;
-      .box-sizing(border-box);
+      .border-box;
       margin: 0; // Reset default margin on button tag
-      margin-left: -4*@px; /* Remove space between inline-block elements */
+      margin-left: -@px; // Overlap border
       padding: 0.4375rem 0.5rem 0.5rem;
       height: @dropdown-text-size+0.4375rem*2+@px*2;
       height: 2rem;
@@ -85,7 +86,7 @@
       .popover-header {
         position: relative;
 
-        .box-sizing(border-box);
+        .border-box;
         width: 100%;
         height: @modal-header-height;
 
@@ -102,7 +103,7 @@
           left: 0;
           top: 0;
 
-          .box-sizing(border-box);
+          .border-box;
           width: 100%;
           height: 3.25rem;
           margin: 0;
@@ -151,7 +152,7 @@
 
       // TODO: taken from .modal-body for styling. Should belong to popover
       .popover-body {
-        .box-sizing(border-box);
+        .border-box;
         width: 100%;
         padding: 0;
 
@@ -284,7 +285,7 @@
 
   button {
     display: inline-block;
-    .box-sizing(border-box);
+    .border-box;
 
     vertical-align: middle;
 

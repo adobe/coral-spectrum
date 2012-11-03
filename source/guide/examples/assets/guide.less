@@ -188,7 +188,6 @@ div.fakeBody {
   }
 }
 
-
 .sampleTitle {
   width: 5em;
   height: 3em;
@@ -206,6 +205,23 @@ div.fakeBody {
   }
 }
 
+.textareaSample {
+    overflow: auto;
+
+    label {
+        display: inline-block;
+        width: 5em;
+        text-align: right;
+        padding-right: 1em;
+        padding-top: 1em;
+    }
+
+    .sampleTitle {
+        line-height: 5em;
+        height: 6em;
+    }
+}
+
 .iconSample {
   position: relative;
 
@@ -217,7 +233,7 @@ div.fakeBody {
   }
   
   div.sample,
-  .iconGroup {
+  .icongroup {
     margin: 1em 0 1em 8em;
   }
 }
@@ -314,7 +330,7 @@ ul.grid.componentGrid {
 
 div.left.column {
   width: 50%;
-  .box-sizing(border-box);
+  .border-box;
   
   &:first-child {
     padding-right: 0.5rem; 

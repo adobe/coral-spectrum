@@ -32,7 +32,9 @@ module.exports = function(grunt) {
       'components/CUI.Dropdown.js',
       'components/CUI.Filters.js',
       'components/CUI.Slider.js',
-      'components/CUI.Datepicker.js'
+      'components/CUI.Datepicker.js',
+      'components/CUI.Sticky.js',
+      'components/CUI.PathBrowser.js'
     ],
     "rte-core": [
       'rte/setup.js',
@@ -289,9 +291,13 @@ module.exports = function(grunt) {
         files: {
           '<%= dirs.build %>/js/libs/jquery.js': '<%= dirs.components %>/jquery/index.js',
           '<%= dirs.build %>/js/libs/underscore.js': '<%= dirs.components %>/underscore/index.js',
-          '<%= dirs.build %>/js/libs/handlebars.js': '<%= dirs.components %>/handlebars/index.js',
-          '<%= dirs.build %>/js/libs/toe.js': '<%= dirs.components %>/toejs/index.js',
-          '<%= dirs.build %>/js/libs/fingerpointer.js': '<%= dirs.components %>/fingerpointer/index.js',
+          '<%= dirs.build %>/js/libs/handlebars.js': '<%= dirs.components %>/handlebars/index.js'
+        }
+      },
+      dependencies: {
+        files: {
+          '<%= dirs.build %>/js/libs/toe.js': '<%= dirs.source %>/js/plugins/toe.js',
+          '<%= dirs.build %>/js/libs/jquery-fingerpointer.js': '<%= dirs.source %>/js/plugins/jquery-fingerpointer.js',
           '<%= dirs.build %>/js/libs/jquery-gridlayout.js': '<%= dirs.source %>/js/plugins/jquery-gridlayout.js'
         }
       },
@@ -442,7 +448,18 @@ module.exports = function(grunt) {
     },
 
     less: {
-      cui: {
+      "cui-wrapped": {
+        options: {
+          paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
+            dirs.source+'/less/',
+            dirs.temp+'/less/'
+          ]
+        },
+        files: {
+          '<%= dirs.temp %>/cui-wrapped.css': '<%= dirs.source %>/less/cui-wrapped.less'
+        }
+      },
+      "cui": {
         options: {
           paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
             dirs.source+'/less/',
@@ -453,7 +470,7 @@ module.exports = function(grunt) {
           '<%= dirs.temp %>/cui.css': '<%= dirs.source %>/less/cui.less'
         }
       },
-      guide: {
+      "guide": {
         options: {
           paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
             dirs.source+'/less/', // must hardcode paths here, grunt-contrib-less doesn't support template tags
@@ -531,7 +548,7 @@ module.exports = function(grunt) {
       },
 
       copy_plugins: {
-          files: '<%= dirs.source %>/js/plugins/jquery-gridlayout.js',
+          files: '<%= dirs.source %>/js/plugins/**',
           tasks: "copy:libs"
       },
 
@@ -563,7 +580,7 @@ module.exports = function(grunt) {
   grunt.task.renameTask('mvn', 'mvn-install');
 
   // Almost full build, just the stuff needed for Granite install
-  grunt.registerTask('mvn-build', 'clean lint copy:images copy:fonts copy:less_bootstrap_tmp copy:less_bootstrap_build copy:less_cui handlebars concat:cui less:cui');
+  grunt.registerTask('mvn-build', 'clean lint copy:images copy:fonts copy:dependencies copy:less_bootstrap_tmp copy:less_bootstrap_build copy:less_cui handlebars concat:cui less:cui');
 
   // Custom build for maven
   grunt.registerTask('mvn', 'mvn-build mvn-install');

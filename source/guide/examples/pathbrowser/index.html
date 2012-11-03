@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Path Browser examples</title>
+
+    <link rel="stylesheet" href="../../css/cui.css">
+
+    <script src="../../js/libs/underscore.js"></script>
+    <script src="../../js/libs/handlebars.js"></script>
+    <script src="../../js/libs/jquery.js"></script>
+    <script src="../../js/libs/toe.js"></script>
+    <script src="../../js/libs/fingerpointer.js"></script>
+
+    <script src="../../js/CUI.js"></script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+</head>
+<body>
+
+<section>
+    <h1>Path Browser</h1>
+
+    <h2>Create from Class</h2>
+    Path:
+    <select name="path-class" class="pathbrowser"></select>
+    <br/>
+    This uses relative paths in a standard option loader.
+
+    <h2>Create from jQuery</h2>
+    Path:
+    <input type="text" name="path-jquery" placeholder="Enter path"/>
+    <br/>
+    This uses absolute paths in an option loader which custom root and option value reader. No titles are displayed.
+
+    <h2>Create from markup</h2>
+    Path:
+    <div data-init="pathbrowser" class="pathbrowser" data-placeholder="Provide path">
+        <input type="text" name="path-markup">
+    </div>
+    <br/>
+    This uses absolute paths in an option loader which custom root, option value and title readers. Titles are displayed.
+
+    <p>
+        <a data-action="disable">Disable all</a>
+        <a data-action="enable">Enable all</a>
+    </p>
+</section>
+
+<script type="text/javascript">
+
+    // Absolute options
+    window.absoluteOptions = {
+        "/": [
+            "/apps",
+            "/bin",
+            "/content",
+            "/etc",
+            "/libs",
+            "/tmp"
+        ],
+        "/content": [
+            "/content/geometrixx",
+            "/content/geometrixx-outdoors",
+            "/content/geometrixx-media"
+        ],
+        "/content/geometrixx": [
+            "/content/geometrixx/en",
+            "/content/geometrixx/de",
+            "/content/geometrixx/fr"
+        ],
+        "/content/geometrixx/en": [
+            "/content/geometrixx/en/company",
+            "/content/geometrixx/en/services"
+        ],
+        "/content/geometrixx/en/company": [
+            "/content/geometrixx/en/company/board",
+            "/content/geometrixx/en/company/products"
+        ],
+        "/apps": [
+            "/apps/geometrixx",
+            "/apps/geometrixx-outdoors"
+        ]
+    };
+
+    window.options = {
+        "/": [
+            "apps",
+            "bin",
+            "content",
+            "etc",
+            "libs",
+            "tmp"
+        ],
+        "/content": [
+            "geometrixx",
+            "geometrixx-outdoors",
+            "geometrixx-media"
+        ],
+        "/content/geometrixx": [
+            "en",
+            "de",
+            "fr"
+        ],
+        "/content/geometrixx/en": [
+            "company",
+            "services"
+        ],
+        "/content/geometrixx/en/company": [
+            "board",
+            "products"
+        ],
+        "/apps": [
+            "geometrixx",
+            "geometrixx-outdoors"
+        ]
+    };
+
+    window.optionTitles = {
+        "/": [
+            "Applications",
+            "",
+            "Websites",
+            "",
+            "",
+            ""
+        ],
+        "/content": [
+            "Geometrixx Demo Site",
+            "Geometrixx Outdoors",
+            ""
+        ],
+        "/content/geometrixx": [
+            "English",
+            "Deutsch",
+            "French"
+        ],
+        "/content/geometrixx/en": [
+            "Company",
+            "Services"
+        ],
+        "/content/geometrixx/en/company": [
+            "Managing Board",
+            "Products"
+        ]
+        // No titles at all for /apps
+    };
+
+    // Option loader function
+    var optionLoader = function(path) {
+        return window.options[path] || [];
+    };
+
+    // Option loader function which root and inner structure is not the same
+    var nestedOptionLoader = function(path) {
+        var result = [];
+        if (window.absoluteOptions[path]) {
+            for (var i = 0; i < window.absoluteOptions[path].length; i++) {
+                var value = window.absoluteOptions[path][i];
+                var object = {
+                    thevalue: value
+                };
+                if (window.optionTitles[path] && window.optionTitles[path][i]) {
+                    object.thetitle = window.optionTitles[path][i];
+                }
+                result.push(object);
+            }
+        }
+        return {
+            results: {
+                values: result
+            }
+        };
+    };
+    var nestedOptionLoaderRoot = "results.values";
+    var nestedOptionValueReader = function(object) {
+        return object.thevalue;
+    };
+    var nestedOptionTitleReader = function(object) {
+        return object.thetitle;
+    };
+
+    // Create from markup: add option loader & its parameters
+    $("div.pathbrowser")
+        .attr("data-option-loader", nestedOptionLoader.toString())
+        .attr("data-option-loader-root", nestedOptionLoaderRoot)
+        .attr("data-option-value-reader", nestedOptionValueReader.toString())
+        .attr("data-option-title-reader", nestedOptionTitleReader.toString())
+    ;
+
+    $(document).ready(function() {
+        // Create from class
+        $("select.pathbrowser").pathBrowser({
+            optionLoader: optionLoader
+        });
+
+        // Create from jQuery
+        var path_jQuery = new CUI.PathBrowser({
+            element: "input[name='path-jquery']",
+            optionLoader: nestedOptionLoader,
+            optionLoaderRoot: nestedOptionLoaderRoot,
+            optionValueReader: nestedOptionValueReader,
+            rootPath: "/content",
+            showTitles: false
+        });
+
+        // Method to enable/disable all path browsers
+        var togglePathBrowser = function(event) {
+            var link = $(event.target);
+            var disabled = link.attr("data-action") === "disable";
+            path_jQuery.set("disabled", disabled);
+            $("select.pathbrowser, div.pathbrowser").pathBrowser({ disabled: disabled });
+        };
+        $("a[data-action]").click(togglePathBrowser);
+    });
+
+</script>
+</body>
+</html>
