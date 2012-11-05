@@ -5,42 +5,72 @@
 
 nav.crumbs {
   a {
-    padding: 0.25rem 0;
-    
     color: @crumb-text-color;
     font-weight: normal;
-    font-size: 1.35rem;
     text-decoration: none;
-    font-family: AdobeCleanLight;
-
-    // Add chevrons to crumbs
-    &:after {
-      display: inline-block;
-      margin: 0 0.25rem 0 0.5rem;
-
-      content: "\203a";
-      font-size: 2.5rem;
-      line-height: 0.4;
-      font-family: AdobeCleanLight;
-      color: @crumb-chevron-color;
-    }
-    
-    img {
-      height: 2rem;
-    }
+    font-family: AdobeClean;
   }
 
-  // The last crumb should not have a chevron and should be bolder
-  a:last-child {
-    font-family: AdobeClean;
-    
+  > a {
+    background: transparent;
+    border: 0 none;
+    padding: 4*@px 0;
+    font-size: 18*@px;
+
+    &:hover {
+      color: @crumb-hover-text-color;
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+
+    // Add dropdown arrow right of home crumb
     &:after {
+      margin-left: 8*@px;
+      padding-left: 10*@px;
+      display: inline;
+      background: url('../images/components/breadcrumbs/handle.svg') no-repeat center center;
       content: "";
     }
   }
-}
 
-// hover states
-.desktop nav.crumbs:hover {
-  color: @crumb-hover-text-color;
+  .popover {
+    position: absolute;
+    display: none;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      background: @white;
+      border: 1*@px solid @crumb-list-border-color;
+
+      li {
+        margin: 0;
+        border-top: 1*@px solid @crumb-list-divider-color;
+
+        a {
+          color: @crumb-list-text-color;
+          display: block;
+          font-size: 14*@px;
+          padding: 10*@px;
+
+          &[class^="icon-"].withLabel {
+            padding-left: 40*@px;
+            background-position: 10*@px center;
+          }
+        }
+
+        &:first-child {
+          border-top: 0;
+        }
+      }
+    }
+
+    &:before {
+      left: 100%;
+      margin-left: -30px;
+    }
+  }
 }
