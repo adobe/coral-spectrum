@@ -1,6 +1,6 @@
 (function($) {
-  CUI.Breadcrumbs = new Class(/** @lends CUI.Breadcrumbs# */{
-    toString: 'Breadcrumbs',
+  CUI.Pulldown = new Class(/** @lends CUI.Pulldown# */{
+    toString: 'Pulldown',
     extend: CUI.Widget,
     
     defaults: {
@@ -11,7 +11,7 @@
     
     /**
       @extends CUI.Widget
-      @classdesc A breadcrumbs widget
+      @classdesc A pulldown widget
         
       @param {Object}   options                               Component options
       
@@ -75,7 +75,7 @@
         };
 
         var top = position.top + size.height + 15;
-        var left = position.left;
+        var left = position.left + 5;
         var marginLeft = size.width - 30;
 
         $popover.css({
@@ -91,12 +91,12 @@
     
   });
   
-  CUI.util.plugClass(CUI.Breadcrumbs);
+  CUI.util.plugClass(CUI.Pulldown);
 
   // Data API
   if (CUI.options.dataAPI) {
     $(document).ready(function() {
-        $("[data-init=breadcrumbs]").breadcrumbs();
+        $("[data-init=pulldown]").pulldown();
     });
   }  
 
