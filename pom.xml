@@ -35,7 +35,7 @@
     <packaging>content-package</packaging>
 
     <name>Adobe Reef / CoralUI Content Package</name>
-    
+
     <scm>
         <connection>scm:git:git@git.corp.adobe.com:Reef/CoralUI.git</connection>
         <developerConnection>scm:git:git@git.corp.adobe.com:Reef/CoralUI.git</developerConnection>
@@ -70,6 +70,11 @@
                 <excludes>
                     <!-- directories that don't go into the clientlib -->
                     <!--<exclude>guide/**</exclude>-->
+                    <!-- exclude RTE-related stuff for now -->
+                    <exclude>js/rte-core-extjs.js</exclude>
+                    <exclude>js/rte-core-extjs.min.js</exclude>
+                    <exclude>js/rte-for-cui.js</exclude>
+                    <exclude>js/rte-for-cui.min.js</exclude>
                 </excludes>
             </resource>
 

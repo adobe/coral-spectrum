@@ -25,16 +25,3 @@ CUI.rte.ui = {};
 CUI.rte.ui.ext = {};
 CUI.rte.ui.cui = {};
 CUI.rte.ui.stub = {};
-
-(function() {
-
-    // determine which implementations to use
-    if (!CUI.rte._adapter) {
-        CUI.rte._adapter = ((typeof(CQ) !== "undefined") && CQ.Ext ? "ext" : "jquery");
-    }
-    // CUI.rte._toolkit = ((typeof(CQ) !== "undefined") && CQ.Ext ? "ext" : "cui");
-    if (!CUI.rte._toolkit) {
-        CUI.rte._toolkit = ((typeof(CQ) !== "undefined") && CQ.Ext ? "ext" : "stub");
-    }
-
-})();

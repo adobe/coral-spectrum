@@ -162,13 +162,14 @@
     // Data API
     if (CUI.options.dataAPI) {
         $(function () {
-            $('body').on('click.rte.data-api', '.editable', function (e) {
-                var $this = $(this);
-                if (!$this.hasClass("edited")) {
-                    $this.richEdit();
-                    e.preventDefault();
-                }
-            });
+            $('body').fipo('tap.rte.data-api', 'click.rte.data-api', '.editable',
+                    function (e) {
+                        var $this = $(this);
+                        if (!$this.hasClass("edited")) {
+                            $this.richEdit();
+                            e.preventDefault();
+                        }
+                    });
         });
     }
 

@@ -13,6 +13,14 @@ The top toolbar with action icons
         z-index: 1;
         position: relative;
     }
+    .left button,
+    .left .button {
+        margin-right: 1em;
+    }
+    .right button,
+    .right .button {
+        margin-left: 1em;
+    }
     
     .center {
         position: absolute;
@@ -38,10 +46,27 @@ The top toolbar with action icons
     .clearfix;
     line-height: @icon-medium-size;
 
-    a {
+    [class^="icon-"],
+    [class*=" icon-"] {
         float: left;
         padding: 11*@px 8*@px;
         .icon-medium;
+    }
+
+    button,
+    .button {
+        .box-sizing(content-box);
+        float: left;
+        margin: 8*@px 0;
+        min-width:   80*@px;
+        line-height: 14*@px;
+    }
+    button[class^="icon-"],
+    button[class*=" icon-"] {
+        margin: 0;
+        min-width: 0;
+        line-height: 24*@px;
+        color: transparent;
     }
 
     .divider {

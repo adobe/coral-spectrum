@@ -1,0 +1,76 @@
+/**
+  Class: div.pulldown
+  Displays a pulldown widget. 
+*/
+
+nav.pulldown {
+  a {
+    color: @pulldown-text-color;
+    font-weight: normal;
+    text-decoration: none;
+    font-family: AdobeClean;
+  }
+
+  > a {
+    background: transparent;
+    border: 0 none;
+    padding: 4*@px 0;
+    font-size: 18*@px;
+
+    &:hover {
+      color: @pulldown-hover-text-color;
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+
+    // Add dropdown arrow right of home pulldown
+    &:after {
+      margin-left: 8*@px;
+      padding-left: 10*@px;
+      display: inline;
+      background: url('../images/components/pulldown/handle.svg') no-repeat center center;
+      content: "";
+    }
+  }
+
+  .popover {
+    position: absolute;
+    display: none;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      background: @white;
+      border: 1*@px solid @pulldown-list-border-color;
+
+      li {
+        margin: 0;
+        border-top: 1*@px solid @pulldown-list-divider-color;
+
+        a {
+          color: @pulldown-list-text-color;
+          display: block;
+          font-size: 14*@px;
+          padding: 10*@px;
+
+          &[class^="icon-"].withLabel {
+            padding-left: 40*@px;
+            background-position: 10*@px center;
+          }
+        }
+
+        &:first-child {
+          border-top: 0;
+        }
+      }
+    }
+
+    &:before {
+      left: 100%;
+      margin-left: -30px;
+    }
+  }
+}
