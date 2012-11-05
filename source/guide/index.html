@@ -393,9 +393,11 @@
                 <section id="Sticky">
                     <h2 class="line">Sticky elements</h2>
                     <p>You can make nearly every element "sticky" by just adding the css class <code class="atv">sticky</code> to it. Sticky elements will stay on the top of the screen even if the users scrolls down. You can have more than one sticks element on your page; they will stack themselves in the correct order at the top of your page.</p>
+                    <p>Sticky elements will stick to the root document by default, which is not always what you want. You can manually set the sticky container with the class <code class="atv">sticky-container</code>.</p>
+                    <p>You can have a look at the examples for <a href="examples/sticky/index.html">sticking to the root document</a> and for <a href="examples/sticky/rail.html">sticking to a div inside a rail component</a>.</p>
                     <p>You can also initialize the sticky effect by adding <code class="prettyprint">data-init="sticky"</code>, the jQuery-Plugin <code class="prettyprint">$.sticky()</code> or by instantiation of class <code class="prettyprint">CUI.Sticky</code>.</p>
-                    <p>Note: Don't forget do add a background to your element or the page will shine through your element when sticked.</p>
-                    <p>Also note: Sticky elements do not work inside scrolling divs (overflow: auto or scroll). They only work with the document scroll bar.</p>
+                    <p>Note: Don't forget do add a background and perhaps a z-index to your element or the page will shine through/over your element when sticked.</p>
+                    <p>Also: Do not use nested scrolling bars combined with sticky elements as this will give unexpected results.</p>
                 </section>
 
             </section><!-- /Text Styles -->
