@@ -593,7 +593,7 @@ module.exports = function(grunt) {
   grunt.task.renameTask('mvn', 'mvn-install');
 
   // Almost full build, just the stuff needed for Granite install
-  grunt.registerTask('mvn-build', 'clean lint copy:images copy:fonts copy:dependencies copy:less_bootstrap_tmp copy:less_bootstrap_build copy:less_cui handlebars concat:cui less:cui');
+  grunt.registerTask('mvn-build', 'clean lint copy:images copy:fonts copy:dependencies copy:less_bootstrap_tmp copy:less_bootstrap_build copy:less_cui handlebars concat:cui less:cui concat:cui_css');
 
   // Custom build for maven
   grunt.registerTask('mvn', 'mvn-build mvn-install');
