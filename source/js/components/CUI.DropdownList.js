@@ -148,18 +148,16 @@
         this.currentIndex = currentIndex;
 
         // Set new css classes
-        this.listElement.children().removeClass("selected");
-        if (currentIndex >= 0) $(this.listElement.find("li").get(currentIndex)).addClass("selected");
-        
-        // Scroll to position if necessary
+        var listItems = this.listElement.find("li");
+        listItems.removeClass("selected");
         if (currentIndex >= 0) {
-            var el = $(this.listElement.find("li").get(currentIndex));
+            var el = $(listItems[currentIndex]);
+            el.addClass("selected");
+
+            // Scroll to position if necessary
             var t = el.position().top;
             this.listElement.animate({scrollTop: t}, 50);
         }
-        
-        
-        return;
     },
     /** @ignore */    
     _unrender: function() {

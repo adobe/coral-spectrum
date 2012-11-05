@@ -240,7 +240,11 @@
                 this.$element.append($("<select></select>"));
             }
             if (this.$element.find("input").length === 0) {
-                this.$element.prepend($("<input type=\"text\">"));
+                this.$element
+                    .prepend($("<input/>", {
+                        type: "text"
+                    })
+                );
             }
         },
 
