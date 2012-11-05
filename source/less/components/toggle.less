@@ -21,7 +21,7 @@
     span {
       width: 100%;
       padding: 0 10*@px;
-      .box-sizing(border-box);
+      .border-box;
       .gradient(@selector-gradient-start-color, @selector-gradient-end-color);
 
       &:hover {
@@ -98,7 +98,7 @@
           display: inline-block;
           vertical-align: middle;
           margin: 0 0 0 5*@px;
-          .box-sizing(border-box);
+          .border-box;
           .border-radius(0.25rem);
           background-color: @switch-slider-background-color;
           content: "\a0";
@@ -116,7 +116,7 @@
           left: -28*@px;
           display: inline-block;
           vertical-align: middle;
-          .box-sizing(border-box);
+          .border-box;
           .border-radius(0.25rem);
           .gradient(@switch-handle-gradient-start-color, @switch-handle-gradient-end-color);
           content: "\a0"; // Todo: replace with icon

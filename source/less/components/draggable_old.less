@@ -1,0 +1,84 @@
+/**
+ * Class: .draggable
+ * Used for draggable list component
+ */
+
+/*
+Problems:
+  √ Nesting is not being used, so ul.draggable is re-written constantly
+  √ .close is orphaned, affecting Alert/Dialog since it's not inside of ul.draggable
+  √ Mixed spaces and tabs (use spaces, 2 per tab)
+  √ Pixels used -- no pixels allowed! use @px variable, multiplied if you need to such as -2*@px
+  √ Don't use em unless you want sizes to increase with font-size of the parent, use rem to stay fixed regardless of parent font size
+  √ .063em used instead of @px
+  √ When setting padding/margin to 0, you only have to write 0 once (applies to all 4 sides)
+  √ :before works, but it's a bit confusing
+  √ Mixins should be used for prefix properties
+*/
+
+[draggable] 
+{
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+ul.draggable {
+  width: 170*@px; //10.625em
+  padding: 0; // all 4 sides
+  padding: 10px 20px; // 10px top bottom, 20px left right
+  padding: 10px 20px 20px; // ????
+  padding: 10px 20px 20px 20px; //top right bottom left
+  margin: 0; // all 4 sides!!
+
+  border: 1px solid @draggable-list-border-color; //0.063em
+
+  background-color: @draggable-list-background-color;
+
+  font-size: 0.8125rem; // 13px
+
+  list-style: none;
+  
+  li {
+    padding: 0 0 0 0.875rem; //14px
+    margin-top: 0;
+    height: 40px; //2.500em; // 40px;
+  
+    background-color: @draggable-list-background-color;
+    line-height: 40px; //2.500em; // 40px
+  
+    border-bottom: 1px solid @draggable-list-border-color;
+    border-top: solid .063em transparent;
+    border-right: solid .063em transparent;
+    border-left: solid 4px @draggable-list-border-handle-color; //4px 0.250em
+    color: @draggable-list-text-normal-color;
+    
+    &:last-child {
+      border-bottom: 0px solid transparent;
+    }
+    
+    &:hover {
+      cursor: url(../images/cursors/openhand.cur), default;
+      background-color: @draggable-list-background-hover-color;
+    }
+    
+    &:active {
+      cursor: url(../images/cursors/closedhand.cur), default;
+    }
+    
+    &:disabled {
+      background-color: @draggable-list-background-disabled-color;
+      color: @draggable-list-text-disabled-color;
+    }
+    
+    .close {
+      padding: 0.375em;
+      margin-top: 0.4em;
+
+      float: right;
+
+      font-weight: bold;
+    }
+  }
+}

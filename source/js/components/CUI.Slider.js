@@ -1,9 +1,9 @@
 (function($) {
-  CUI.Slider = new Class({
+  CUI.Slider = new Class(/** @lends CUI.Slider# */{
     toString: 'Slider',
     extend: CUI.Widget,
 
-/**
+    /**
       @extends CUI.Widget
       @classdesc A slider widget
       

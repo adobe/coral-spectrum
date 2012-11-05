@@ -1,9 +1,7 @@
-@import 'flexbox';    // CSS3 2009/2012 flexbox mixins
-
 /**
- * Mixin: .font-face
- * Quickly declare a font face
- */
+ Mixin: .font-face
+ Quickly declare a font face
+*/
 .font(@font-name, @font-file, @font-weight: normal, @font-style: normal) {
     font-family: @font-name;
 
@@ -18,9 +16,9 @@
 }
 
 /**
- * Mixin: .columns
- * A CSS3 column layout
- */
+ Mixin: .columns
+ A CSS3 column layout
+*/
 .columns(@count: 4, @gap: 0) {
     -moz-column-count: @count;
     -webkit-column-count: @count;
@@ -42,17 +40,17 @@
 }
 
 /**
- * Mixin: .gradient
- * A simpler syntax for gradients
- */
+ Mixin: .gradient
+ A simpler syntax for gradients
+*/
 .gradient(@start: white, @end: black) {
 	#gradient > .vertical(@start, @end);
 }
 
 /**
- * Mixin: .pinstripe
- * Print a pinstripe gradient
- */
+ Mixin: .pinstripe
+ Print a pinstripe gradient
+*/
 .pinstripe(@background-color, @stripe-color, @angle: -45deg, @stripe-offset: 2%) {
     background-color: @background-color;
     // background-image: -webkit-gradient(); // TODO: webkit syntax
@@ -64,17 +62,17 @@
 }
 
 /**
- * Mixin: .shadow
- * A simpler syntax for shadow with defaults
- */
+ Mixin: .shadow
+ A simpler syntax for shadow with defaults
+*/
 .shadow(@distance: 0.1rem, @spread: 0.1rem, @weight: 0.25) {
     .box-shadow(@distance @distance @spread rgba(0, 0, 0, @weight));
 }
 
 /**
- * Mixin: .ellipsis
- * Truncate overflowed text using ellipsis: ...
- */
+ Mixin: .ellipsis
+ Truncate overflowed text using ellipsis: ...
+*/
 .ellipsis() {
     // display: inline-block; // Works without in Chrome
     overflow: hidden;
@@ -83,10 +81,11 @@
 }
 
 /**
- * Mixin: .scrollable
- * Make an area scrollable when the contents overflow
- * TODO: fix this for flexbox children in Chrome
- */
+ Mixin: .scrollable
+ Make an area scrollable when the contents overflow
+
+ Note: Does not work for flexbox children in Chrome
+*/
 .scrollable() {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch; // Enable iOS-style scrolling
@@ -94,9 +93,9 @@
 }
 
 /**
- * Mixin: .spin
- * Rotate an element forever
- */
+ Mixin: .spin
+ Rotate an element forever
+*/
 .spin(@time: 1s) {
     -webkit-transition-property: -webkit-transform;
     -webkit-transition-duration: @time;
@@ -116,30 +115,9 @@
 }
 
 /**
- * Mixin: .transition
- */
-.transition(@transition) {
-    -webkit-transition: @transition;
-    -moz-transition:        @transition;
-    -ms-transition:         @transition; 
-    -o-transition:            @transition;
-    transition:                 @transition;
-}
-
-/**
- * Mixin: .transform
- */
-.transform(@property) {
-    -webkit-transform: @property;
-    -moz-transform: @property;
-    -ms-transform: @property;
-    transform: @property;
-}
-
-/**
- * Mixin: .background-size
- * Set the scaling of the background image or gradient
- */
+ Mixin: .background-size
+ Set the scaling of the background image or gradient
+*/
 .background-size(@width, @height) { 
     -webkit-background-size: @width @height;
     -moz-background-size: @width @height;
@@ -150,10 +128,10 @@
 }
 
 /**
- * Mixin: .glow
- * Make an element glow
- * TODO: add partial glow mixin
- */
+ Mixin: .glow
+ Make an element glow
+ TODO: add partial glow mixin for mixed top/bottom/left/right only
+*/
 .glow(@radius: @focus-glow-radius, @glowColor: @focus-glow-color, @borderColor: @focus-border-color) {
     outline: none;
     .box-shadow(0 0 @radius @glowColor);
@@ -161,39 +139,27 @@
 }
 
 /**
- * Mixin: .glow-text
- * Make text or a font icon glow
- */
+ Mixin: .glow-text
+ Make text or a font icon glow
+*/
 .glow-text(@radius: 0.357rem, @glowColor: @focus-glow-color, @textColor: @focus-border-color) {
     color: darken(@textColor, 35%);
     text-shadow: 0 0 @radius @glowColor;
 }
 
 /**
- * Mixin: .user-select
- * Set user-select property across browsers
- */
-.user-select(@userSelect) {
-    -webkit-user-select: @userSelect;
-    -khtml-user-select: @userSelect;
-    -moz-user-select: @userSelect;
-    -ms-user-select: @userSelect;
-    user-select: @userSelect;
-}
-
-/**
- * Mixin: .no-select
- * Stop text selection for an element and its children
- */
+ Mixin: .no-select
+ Stop text selection for an element and its children
+*/
 .no-select() {
     -webkit-touch-callout: none;
     .user-select(none);
 }
 
 /**
- * Mixin: .placeholder
- * input field placeholder font color
- */
+ Mixin: .placeholder
+ Input field placeholder font color
+*/
 .placeholder(@color) {
     input::-webkit-input-placeholder { color: @color; }
     input:-moz-placeholder { color: @color; }
@@ -202,11 +168,9 @@
 }
 
 /**
- * Mixin:; .box-sizing
- * box-sizing mixin
- */
-.box-sizing(@type: border-box) {
-    -webkit-box-sizing: @type;
-    -moz-box-sizing:    @type;
-    box-sizing:         @type;
+ Mixin: .box-sizing
+ Set an element as a border box
+*/
+.border-box {
+  .box-sizing(border-box);
 }

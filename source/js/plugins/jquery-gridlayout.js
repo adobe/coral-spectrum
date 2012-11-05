@@ -73,8 +73,8 @@
         colWidth: 240,
         gutterX: 15,
         gutterY: 15,
-        marginLeft:15,
-        marginRight:15,
+        marginLeft:0,
+        marginRight:0,
         selector:"article"
 //        itemClass:"macboard-card"
     };
@@ -92,8 +92,11 @@
 
             this.numCols = -1;
 
+            this.pendingImages = 0;
+
             // load all elements
             this.update();
+            this.updateDimensions();
 
             // bind resize method
             var self = this;
@@ -115,29 +118,57 @@
             this.itemsByPath = {};
             this.element.find(self.options.selector).each(function (i) {
                 var $card = $(this);
-                // todo: width/height should be available before image is loaded
-                var w = $card.width();
-                var h = $card.height();
+                var $img = $("img", $card);
+                if ($img.length == 0) {
+                    $img = null;
+                }
                 var item = {
                     path: $card.data().path,
                     i:i,
                     $el:$card,
-                    w:w,
-                    h:h
+                    $img:$img
                 };
                 self.items.push(item);
                 self.itemsByPath[item.path] = item;
             });
         },
 
+        _imageLoaded: function() {
+            if (--this.pendingImages == 0) {
+//                console.log("all images loaded");
+                // force relayout
+                this.numCols = -1;
+                this.layout();
+            }
+
+        },
         updateDimensions: function() {
+            var self = this;
             this.items.every(function (i) {
                 var $el = i.$el;
                 i.w = $el.width();
                 i.h = $el.height();
 
+                // check if card has an image and if it's loaded
+                if (i.$img) {
+                    if (i.$img.height() == 0) {
+                        // just assume 1:1 for now
+                        i.h += i.w;
+                        self.pendingImages++;
+                        i.$img.on("load.cui.gridlayout", function() {
+                            i.$img = null;
+                            i.h = $el.height();
+//                            console.log("image loaded.", i);
+                            self._imageLoaded();
+                        })
+                    } else {
+                        // we don't need to know this info anymore
+                        i.$img = null;
+                    }
+                }
+
                 // debug
-                $("h4", i.$el).html("Card Nr " + i.i + " (" + i.w + "x" + i.h + ")");
+//                $("h4", i.$el).html("Card Nr " + i.i + " (" + i.w + "x" + i.h + ")");
 
                 return true;
             });
@@ -155,7 +186,7 @@
             // calculate # columns:
             // containerWidth = marginLeft + (colWidth + gx) * n - gx + marginRight;
             // use: "round" for avg width, "floor" for minimal width, "ceil" for maximal width
-            var n = Math.round(($this.width() - marginLeft - marginRight + gx) / (colWidth + gx));
+            var n = Math.floor(($this.width() - marginLeft - marginRight + gx) / (colWidth + gx));
 
             if (n == this.numCols) {
                 // nothing to do. CSS takes care of the scaling
@@ -199,8 +230,9 @@
             // detach all the cards first
             $this.detach(this.options.selector);
 
-            // remove the columns
-            $this.empty();
+            // remember old columns. because otherwise the
+            // event handlers bound on the cards would be removed
+            var $cols = $this.contents();
 
             // now fill up all the columns
             for (var c=0; c<cols.length; c++) {
@@ -209,6 +241,9 @@
                     $col.append(cols[c][j].$el);
                 }
             }
+
+            // remove old columns
+            $cols.remove();
         }
     };
 
