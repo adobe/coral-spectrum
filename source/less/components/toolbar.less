@@ -38,10 +38,35 @@ The top toolbar with action icons
     .clearfix;
     line-height: @icon-medium-size;
 
-    a {
+    [class^="icon-"],
+    [class*=" icon-"] {
         float: left;
         padding: 11*@px 8*@px;
         .icon-medium;
+    }
+
+    button,
+    .button {
+        .box-sizing(content-box);
+        float: left;
+        margin: 8*@px 0;
+        min-width:   80*@px;
+        line-height: 14*@px;
+    }
+    &.left button,
+    &.left .button {
+        margin-right: 1em;
+    }
+    &.right button,
+    &.right .button {
+        margin-left: 1em;
+    }
+    button[class^="icon-"],
+    button[class*=" icon-"] {
+        margin: 0;
+        min-width: auto;
+        line-height: 24*@px;
+        color: transparent;
     }
 
     .divider {
