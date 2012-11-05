@@ -60,6 +60,79 @@
       this._setPointFrom();
     },
 
+    setPosition: function(position) {
+      // Reset point from
+      this._doSetPointFrom(this.options.pointFrom);
+
+      // move element to under body for absolute positioning
+      if (this.$element.parent().get(0) !== $('body').get(0)) {
+        this.$element.detach().appendTo($('body'));
+      }
+      
+      var screenWidth = $(window).width();
+      var screenHeight = $(window).height();
+
+      var pointFrom = this.options.pointFrom;
+      var top = position[1];
+      var left = position[0];
+
+      var width = this.$element.outerWidth();
+      var height = this.$element.outerHeight();
+
+      var arrowHeight = Math.round((this.$element.outerWidth() - this.$element.width())/1.5);
+      
+      // Switch direction if we fall off screen
+      if (pointFrom === 'top' && top - height - arrowHeight < 0) {
+        pointFrom = 'bottom';
+        this._doSetPointFrom('bottom');
+      }
+      if (pointFrom === 'bottom' && top + height + arrowHeight > screenHeight) {
+          pointFrom = 'top';
+          this._doSetPointFrom('top');
+      }
+
+      // Base on pointFrom
+      if (pointFrom === 'bottom' || pointFrom === 'top') {
+        left -= width/2;
+      }
+
+      if (pointFrom === 'bottom') {
+        top += arrowHeight; // TBD find out the size of 1rem
+      } else if (pointFrom === 'top') {
+        top -= height + arrowHeight; // TBD find out the size of 1rem
+      }
+      
+      // Offset if we collide with the right side of the window
+      var offset = 0;
+      var leftOffset = screenWidth - (left + width);
+      if (leftOffset < 0)
+        offset = leftOffset;
+      
+      // Offset if we collide with the left side of the window
+      if (left < 0)
+        offset = -left;
+
+      // Apple offset
+      left += offset;
+      
+      // Position arrow
+      if (offset < 0) {
+        this.$element.addClass('arrow-pos-right');
+      }
+      else if (offset > 0) {
+        this.$element.addClass('arrow-pos-left');
+      }
+      else {
+        this.$element.removeClass('arrow-pos-left arrow-pos-right');
+      }
+      
+      // Position body
+      this.$element.css({
+        top: top,
+        left: left
+      });
+    },
+
     /** @ignore */
     _show: function() {
       this.$element.show();
