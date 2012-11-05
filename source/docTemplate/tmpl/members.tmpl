@@ -1,21 +1,21 @@
 
 <dt>
-    <h3 class="name" id="<?js= id ?>"><?js= data.attribs + name + data.signature ?></h3>
+    <h3 class="name" id="<?js= id ?>"><?js= obj.attribs + name + obj.signature ?></h3>
     
-    <?js if (data.summary) { ?>
+    <?js if (obj.summary) { ?>
     <p class="summary"><?js= summary ?></p>
     <?js } ?>
 </dt>
 <dd>
-    <?js if (data.description) { ?>
+    <?js if (obj.description) { ?>
     <div class="description">
-        <?js= data.description ?>
+        <?js= obj.description ?>
     </div>
     <?js } ?>
     
-    <?js= this.partial('details.tmpl', data) ?>
+    <?js= this.partial('details.tmpl', obj) ?>
     
-    <?js if (data.examples && examples.length) { ?>
+    <?js if (obj.examples && examples.length) { ?>
         <h4>Example<?js= examples.length > 1? 's':'' ?></h4>
         <?js= this.partial('examples.tmpl', examples) ?>
     <?js } ?>

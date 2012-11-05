@@ -330,7 +330,7 @@ ul.grid.componentGrid {
 
 div.left.column {
   width: 50%;
-  .box-sizing(border-box);
+  .border-box;
   
   &:first-child {
     padding-right: 0.5rem; 
@@ -338,4 +338,10 @@ div.left.column {
   &:last-child {
     padding-left: 0.5rem; 
   }
+}
+
+.example [class^="card-"],
+.example [class*=" card-"] {
+    width: 240*@px;
+    display: block;
 }

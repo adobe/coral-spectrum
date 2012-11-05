@@ -1,0 +1,84 @@
+/**
+*
+* A path browser field.
+*
+* Uses styles from textfields and dropdown lists!
+*
+*/
+
+.pathbrowser {
+    display: inline-block;
+    width: 13rem;  /* Needs fixed width for floating term elements */
+
+    select {
+        display: none;
+    }
+
+    input[type=text] {
+
+        .border-box;
+        border-radius: 0; // Fix for iOS >=5
+        -webkit-appearance: none; // Fix for iOS <5
+
+        width: 13rem;
+
+        font-size: 0.8125rem;
+
+        height: 2rem;
+        padding: 0.25rem 0.5rem 0.25rem 0.25rem;
+        margin: 0 0 0.5rem 0;
+
+        border: @px solid @textfield-border-color;
+
+        &:disabled {
+            background: @textfield-disabled-background-color;
+            background-size: 1.1rem;
+        }
+
+        &:focus {
+            .glow();
+            outline: none;
+        }
+
+    }
+
+    &.disabled input {
+        background: @textfield-disabled-background-color;
+        background-size: 1.1rem;
+    }
+
+    &.error input {
+        .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+    }
+
+    .autocomplete-results {
+        li {
+            min-height: 1rem;
+        }
+
+        li div {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        li div.pathbrowser-autocomplete-item-value {
+            float: left;
+            width: 12rem;
+        }
+
+        li div.pathbrowser-autocomplete-item-value-with-title {
+            width: 6rem;
+        }
+
+        li div.pathbrowser-autocomplete-item-title {
+            display: block;
+            font-size: 0.7rem;
+            font-style: italic;
+            padding-left: 0.25rem;
+            padding-top: 0.05rem;
+            position: relative;
+        }
+    }
+
+}

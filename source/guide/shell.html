@@ -12,7 +12,7 @@
   <!-- Dependencies -->
   <script src="js/libs/handlebars.js"></script>
   <script src="js/libs/jquery.js"></script>
-  <script src="js/libs/fingerpointer.js"></script>
+  <script src="js/libs/jquery-fingerpointer.js"></script>
   <script src="js/libs/toe.js"></script>
 
   <!-- CoralUI -->
@@ -34,13 +34,11 @@
 
   <header class="top">
 
-    <div class="logo"><img src="images/theme/cloudui.png" alt="CoralUI logo"></div>
+    <div class="logo"><img src="images/theme/shell.png" alt="CoralUI logo"></div>
 
     <nav class="crumbs">
-      <a href="#" class="selected">Guide</a>
-      <a href="jsdoc/index.html">Docs</a>
-      <a href="https://git.corp.adobe.com/Reef/CoralUI/">Github</a>
-      <a href="releases/cui-latest-full.zip">Download</a>
+      <a href="#">Marketing Cloud</a>
+      <a href="#" class="selected">Websites</a>
     </nav>
 
     <div class="drawer">
@@ -61,11 +59,22 @@
             <a href="#" class="icon-paintBucket" data-view="activity">Paint<i></i></a>
           </nav>
           <div class="search">
-            <form>
-              <input type="text" placeholder="Enter Keyword(s)" name="q" />
-              <a class="clear-cmd" href="#">x</a>
-              <a class="query-cmd" href="#">S</a>
-            </form>
+            <div class="tagpicker">
+              <input type="text" placeholder="Enter Keyword(s)" autocomplete="off" name="q" />
+              <select>
+                <option value="you">You</option>
+                <option value="cant">can't</option>
+                <option value="touch">touch</option>
+                <option value="this">this</option>
+                <option value="nanananana">Batman?</option>
+              </select>
+            </div>
+            
+            <script>
+              $('.tagpicker').filters({
+                multiple: true
+              });
+            </script>
           </div>
         </div>
 
@@ -115,7 +124,7 @@
               </li>
             </ul>
           </section>
-          <section class="foldable open">
+          <section class="foldable">
             <span class="heading">Accordion open</span>
             <ul class="notype checklist fold">
               <li>
@@ -135,7 +144,7 @@
               </li>
             </ul>
           </section>
-          <section class="foldable open">
+          <section class="foldable">
             <span class="heading">Accordion open</span>
             <ul class="notype checklist fold">
               <li>
@@ -205,6 +214,16 @@
               </li>
             </ul>
           </section>
+          <div class="quickform">
+            <div class="action open">
+              <button class="primary">Let's do it</button>
+              <button class="warning">Warning</button>
+            </div>
+            <div class="control">
+              <input type="text" />
+            </div>
+          </div>
+
         </div>
 
         <div class="rail-view" data-view="activity">
@@ -223,7 +242,7 @@
     <div class="content">
       <nav class="toolbar">
         <div class="left icongroup">
-          <a href="#" class="icon-addGrid">Add</a>
+          <a href="#" class="icon-addGrid" id="close-rail">Add</a>
           <span class="divider"></span>
           <a href="#" class="icon-calendar">Calendar</a>
           <a href="#" class="icon-cart">Cart</a>
@@ -242,8 +261,8 @@
         <div class="grid-0">
           <article class="card-page"><a href="#">
             <img src="examples/assets/preview1.png" alt=""/>
-            <h4>Page</h4>
-            <p class="description">Launch Copy</p>
+            <h4>Page. very long type. very long type. very long type. very long type. very long type.</h4>
+            <p class="description">Launch Copy. very long title. very long title. very long title. very long title.</p>
             <p class="info">
               <span class="modified"><i class="icon-paintbucket">Modified</i> 2 days ago</span>
               <span class="published"><i class="icon-paintbucket">Published</i> 12 hours ago</span>
