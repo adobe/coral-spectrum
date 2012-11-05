@@ -456,7 +456,7 @@ CUI.rte.DomCleanup = new Class({
                     } else {
                         var imgReplacement = this.context.createElement("img");
                         com.setAttribute(imgReplacement, "src",
-                                CUI.rte.Utils.BLANK_IMAGE_URL);
+                                CUI.rte.Utils.getBlankImageUrl());
                         com.setAttribute(imgReplacement, com.A_NAME_REPLACEMENT_ATTRIB,
                                 nameAttrib);
                         com.addClass(imgReplacement, CUI.rte.Theme.ANCHOR_CLASS);

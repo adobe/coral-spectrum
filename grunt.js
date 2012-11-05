@@ -5,9 +5,6 @@ module.exports = function(grunt) {
    Add new components to this array _after_ the components they inherit from
   */
   var includeOrder = {
-    "base": [
-      'Class.js'
-    ],
     "cui-templates": [
       '{build}/CUI.Templates.js'
     ],
@@ -36,15 +33,31 @@ module.exports = function(grunt) {
       'components/CUI.Sticky.js',
       'components/CUI.PathBrowser.js'
     ],
-    "rte-core": [
-      'rte/setup.js',
-
-      'rte/core/adapter/Utils.js',
-      'rte/core/adapter/Hooks.js',
-      'rte/core/adapter/Eventing.js',
-      'rte/core/adapter/Query.js',
+    "rte-setup": [
+      'rte/setup.js'
+    ],
+    "rte-jquery-adapter": [
+      'rte/core/adapter/jquery/Eventing.js',
+      'rte/core/adapter/EditorEvent.js',
+      'rte/core/adapter/jquery/JQueryEvent.js',
+      'rte/core/adapter/jquery/Query.js',
+      'rte/core/adapter/jquery/AdapterUtils.js',
       'rte/core/adapter/Constants.js',
-
+      'rte/core/adapter/Hooks.js',
+      'rte/core/adapter/Utils.js'
+    ],
+    "rte-extjs-adapter": [
+      'rte/core/adapter/extjs/Class.js',
+      'rte/core/adapter/extjs/Eventing.js',
+      'rte/core/adapter/EditorEvent.js',
+      'rte/core/adapter/extjs/ExtEvent.js',
+      'rte/core/adapter/extjs/Query.js',
+      'rte/core/adapter/extjs/AdapterUtils.js',
+      'rte/core/adapter/Constants.js',
+      'rte/core/adapter/Hooks.js',
+      'rte/core/adapter/Utils.js'
+    ],
+    "rte-core": [
       'rte/core/EditContext.js',
       'rte/core/EditorKernel.js',
       'rte/core/IFrameKernel.js',
@@ -70,7 +83,6 @@ module.exports = function(grunt) {
       'rte/core/HtmlDeserializer.js',
       'rte/core/XhtmlDeserializer.js',
       'rte/core/DomCleanup.js',
-      'rte/core/EditorEvent.js',
 
       'rte/core/commands/Command.js',
       'rte/core/commands/CommandRegistry.js',
@@ -111,9 +123,6 @@ module.exports = function(grunt) {
       'rte/core/plugins/ImagePlugin.js',
       'rte/core/plugins/UndoRedoPlugin.js',
 
-      'rte/core/adapter/JQueryEvent.js',
-      'rte/core/adapter/ExtEvent.js',
-
       'rte/core/ui/Toolkit.js',
       'rte/core/ui/ToolkitRegistry.js',
       'rte/core/ui/UIEvent.js',
@@ -153,15 +162,15 @@ module.exports = function(grunt) {
 
       'rte/CUI.RichText.js'
     ],
-    "rte-trailer": [
+    "rte-init": [
       'rte/init.js'
     ]
   };
 
   var packages = {
-    "cui": [ "cui-templates", "base", "cui"],
-    "rte-core": [ "base", "rte-core" ],
-    "cui-with-rte": [ "cui-templates", "base", "rte-core", "cui", "rte-cui", "rte-trailer" ]
+    "cui": [ "cui-templates", "cui"],
+    "rte-core-extjs": [ "rte-setup", "rte-extjs-adapter", "rte-core" ],
+    "rte-for-cui": [ "rte-setup", "rte-jquery-adapter", "rte-core", "rte-cui", "rte-init" ]
   };
 
   /**
@@ -425,13 +434,13 @@ module.exports = function(grunt) {
         ],
         dest: '<%= dirs.build %>/css/cui.css'
       },
-      "rte-core": {
-        src: getIncludes("rte-core", dirs.source+'/js/'),
-        dest: '<%= dirs.build %>/js/rte-core.js'
+      "rte-core-extjs": {
+        src: getIncludes("rte-core-extjs", dirs.source+'/js/'),
+        dest: '<%= dirs.build %>/js/rte-core-extjs.js'
       },
-      "cui-with-rte": {
-        src: getIncludes("cui-with-rte", dirs.source+'/js/'),
-        dest: '<%= dirs.build %>/js/CUI-with-rte.js'
+      "rte-for-cui": {
+        src: getIncludes("rte-for-cui", dirs.source+'/js/'),
+        dest: '<%= dirs.build %>/js/rte-for-cui.js'
       }
     },
 
@@ -440,9 +449,9 @@ module.exports = function(grunt) {
         src: ['<config:concat.cui.dest>'],
         dest: '<%= dirs.build %>/js/CUI.min.js'
       },
-      "rte-core": {
-        src: ['<config:concat.rte-core.dest>'],
-        dest: '<%= dirs.build %>/js/rte-core.min.js'
+      "rte-core-extjs": {
+        src: ['<config:concat.rte-core-extjs.dest>'],
+        dest: '<%= dirs.build %>/js/rte-core-extjs.min.js'
       }
       // TBD: minify individual JS files?
     },
@@ -498,7 +507,7 @@ module.exports = function(grunt) {
     },
 
     coverage: {},
-    
+
     icons: {
       all: {
         src: [
@@ -567,7 +576,7 @@ module.exports = function(grunt) {
   grunt.registerTask('partial', 'lint copy handlebars concat:cui min:cui icons less concat:cui_css mincss mocha');
 
   // Full build with docs and compressed file
-  grunt.registerTask('full-build', 'lint copy handlebars concat:cui concat:rte-core concat:cui-with-rte min icons less concat:cui_css mincss mocha jsdoc');
+  grunt.registerTask('full-build', 'lint copy handlebars concat:cui concat:rte-core-extjs concat:rte-for-cui min icons less concat:cui_css mincss mocha jsdoc');
 
   // Full build with docs and compressed file
   grunt.registerTask('full', 'clean full-build');

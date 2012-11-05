@@ -26,7 +26,7 @@ CUI.rte.Utils = function() {
         return hooks;
     };
 
-    var commons = {
+    return {
 
         scope: function(fn, scope) {
             return function() {
@@ -89,6 +89,16 @@ CUI.rte.Utils = function() {
             return str;
         },
 
+        merge: function(obj1, obj2) {
+            for (var name in obj2) {
+                if (obj2.hasOwnProperty(name)) {
+                    obj1[name] = obj2[name];
+                }
+            }
+            return obj1;
+        },
+
+
         // "hooked" calls
 
         copyObject: function(obj) {
@@ -123,65 +133,22 @@ CUI.rte.Utils = function() {
             return getHooks().getServerPrefix(url);
         },
 
-        URL_IMAGE: "image"
+        URL_IMAGE: "image",
+
+        // mapping adapter specific stuff:
+
+        isArray: CUI.rte.AdapterUtils.isArray,
+
+        isString: CUI.rte.AdapterUtils.isString,
+
+        apply: CUI.rte.AdapterUtils.apply,
+
+        getPagePosition: CUI.rte.AdapterUtils.getPagePosition,
+
+        jsonDecode: CUI.rte.AdapterUtils.jsonDecode,
+
+        getBlankImageUrl: CUI.rte.AdapterUtils.getBlankImageUrl
 
     };
-
-    var specific = (CUI.rte._adapter == "ext" ? {
-
-        isArray: function(obj) {
-            return CQ.Ext.isArray(obj);
-        },
-
-        isString: function(obj) {
-            return CQ.Ext.isString(obj);
-        },
-
-        apply: function(obj, config, defaults) {
-            return CQ.Ext.apply(obj, config, defaults);
-        },
-
-        getPagePosition: function(dom) {
-            return CQ.Ext.get(dom).getXY();
-        },
-
-        jsonDecode: function(str) {
-            return CQ.Ext.util.JSON.decode(str);
-        },
-
-        BLANK_IMAGE_URL: CQ.Ext.BLANK_IMAGE_URL
-
-    } : function($) {
-
-        return {
-
-            isArray: function(obj) {
-                return $.isArray(obj);
-            },
-
-            isString: function(obj) {
-                return $.isString(obj);
-            },
-
-            apply: function(obj, config, defaults) {
-                return $.extend(obj, config, defaults);
-            },
-
-            getPagePosition: function(dom) {
-               var pos = $(dom).offset();
-               return [ pos.left, pos.top ];
-            },
-
-            jsonDecode: function(str) {
-                return $.parseJSON(str);
-            },
-
-            BLANK_IMAGE_URL: "../images/components/rte/blank.png"
-
-        };
-
-    }(window.jQuery));
-
-    return specific.apply(specific, commons);
 
 }();

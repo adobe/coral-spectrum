@@ -900,24 +900,28 @@ CUI.rte.plugins.TablePlugin = new Class({
                 if (!cellInfo.isLastCol) {
                     cellSel = tableMatrix.createSelection(singleCell);
                     cellSel.expand(1, 0);
-                    cellSubItems.push({
-                        "text": CUI.rte.Utils.i18n("Merge right"),
-                        "plugin": this,
-                        "cmd": "mergecells",
-                        "cmdValue": cellSel,
-                        "iconCls": "rte-cellmerge"
-                    });
+                    if (cellSel.selectionProps.isRect) {
+                        cellSubItems.push({
+                            "text": CUI.rte.Utils.i18n("Merge right"),
+                            "plugin": this,
+                            "cmd": "mergecells",
+                            "cmdValue": cellSel,
+                            "iconCls": "rte-cellmerge"
+                        });
+                    }
                 }
                 if (!cellInfo.isLastRow) {
                     cellSel = tableMatrix.createSelection(singleCell);
                     cellSel.expand(0, 1);
-                    cellSubItems.push({
-                        "text": CUI.rte.Utils.i18n("Merge down"),
-                        "plugin": this,
-                        "cmd": "mergecells",
-                        "cmdValue": cellSel,
-                        "iconCls": "rte-cellmerge"
-                    });
+                    if (cellSel.selectionProps.isRect) {
+                        cellSubItems.push({
+                            "text": CUI.rte.Utils.i18n("Merge down"),
+                            "plugin": this,
+                            "cmd": "mergecells",
+                            "cmdValue": cellSel,
+                            "iconCls": "rte-cellmerge"
+                        });
+                    }
                 }
             }
         }
