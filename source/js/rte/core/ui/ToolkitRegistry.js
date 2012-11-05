@@ -33,6 +33,7 @@ CUI.rte.ui.ToolkitRegistry = function() {
             if (!toolkits.hasOwnProperty(toolkitName)) {
                 throw new Error("No toolkit registered for type '" + toolkitName + "'");
             }
+            CUI.rte._toolkit = toolkitName;
             var toolkitDef = toolkits[toolkitName];
             var toolkit = toolkitDef.obj;
             if (!toolkitDef.initialized && toolkit.requiresInit()) {

@@ -114,7 +114,6 @@
         }.bind(this));
         
         // Set up event handling
-        // TODO: Support handle drag (mobile: touchstart, touchmove, touchend; click: mousedown, mouseup)
         this.$element.on("mousedown touchstart", ".handle", function(event) {
             this._mouseDown(event);
         }.bind(this));
@@ -327,7 +326,7 @@
                 
         if(pos === 0 || pos === 1) {
             that.values[pos] = value.toString();
-            that.$inputs.eq(pos).attr("value", value); // Keep input element value updated too
+            that.$inputs.eq(pos).attr("value", value).change(); // Keep input element value updated too and fire change event for any listeners
         }
     },
 

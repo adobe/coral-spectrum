@@ -800,8 +800,9 @@ CUI.rte.Selection = function() {
 
     };
 
-    // create browser specific variant of the helper class
-    return CUI.rte.Utils.apply(sharedProps, com.ua.isOldIE ? {
+    // create browser specific variant of the helper class (using merge
+    // is safe during initialization)
+    return CUI.rte.Utils.merge(sharedProps, com.ua.isOldIE ? {
 
         /**
          * @private

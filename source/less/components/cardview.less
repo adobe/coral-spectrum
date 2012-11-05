@@ -4,21 +4,26 @@
 */
 
 .card-shadow() {
-    .box-shadow(0 1.5*@px 2*@px rgba(0, 0, 0, 0.25));
+    .box-shadow(0 1.5*@px 1.5*@px rgba(0, 0, 0, 0.25));
 }
 
 [class^="card-"],
 [class*=" card-"] {
     position: relative;
     display: inline-block;
-    margin: 0 @card-grid-margin/2 @card-grid-margin;
+    width: 95%;
+    width: -webkit-calc(~"100% - "@card-grid-margin);
+    width: -moz-calc(~"100% - "@card-grid-margin);
+    width: -o-calc(~"100% - "@card-grid-margin);
+    width: calc(~"100% - "@card-grid-margin);
+    margin: 0 0 @card-grid-margin 0;
     background: @card-background-color;
     font-size: 12*@px;
     line-height: 1.5em;
     .card-shadow;
 
     a {
-        overflow: hidden; // for the link ton contain everything
+        overflow: hidden; // for the link to contain everything
         display: block;
         &,
         a:hover {
@@ -33,14 +38,20 @@
         margin: 10*@px;
         font-size: 12*@px;
         color: @card-title-color;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
     }
     p {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
         margin: 0 10*@px 10*@px;
         &.description {
             margin-top: -10*@px;
         }
         span {
-            padding-right: 5px;
+            padding-right: 6*@px;
         }
         i {
             .icon-xsmall;
@@ -49,8 +60,9 @@
 }
 
 /**
-    Class: .stack
-    Displays a card stack below the card.
+    Class: .card-stack
+    Displays a card stack below the card (can be used in conjunction with any other card-* type to make it a stack).
+    The card-collection class always has a stack applied.
 */
 .card-stack,
 .card-collection {
@@ -78,6 +90,10 @@
     }
 }
 
+/**
+    Class: .card-collection
+    Displays collection card with a banner.
+*/
 .card-collection {
     .banner {
         position: absolute;
@@ -110,25 +126,66 @@
 
         &:before { 
             border-right-color: @card-banner-background-color;
-            left: -@card-banner-offset;
+            left: -@px - @card-banner-offset;
         }            
 
         &:after { 
             border-left-color: @card-banner-background-color;
-            right: -@card-banner-offset;
+            right: -@px - @card-banner-offset;
         }
     }
 }
 
+/**
+    Class: .card-asset
+    Displays a DAM asset card.
+*/
 .card-asset {
+
+    img.lowres {
+        
+    }
     h4 {
         font-weight: @font-base-weight;
     }
 }
 
+/**
+    Class: .card-directory
+    Displays a DAM directory card.
+*/
+.card-directory {
+    .empty {
+        display: inline-block;
+        vertical-align: middle;
+        width: 100%;
+        height: 150px;
+        background: @card-directory-empty-color;
+    }
+}
+
+/**
+    Class: .card-page
+    Displays a WCM page card.
+*/
+.card-page {
+    // Everything inside this rule is a fix to the white-space:nowrap; set on .card-* > p.
+    .info {
+        position: relative;
+        padding-right: 18*@px;
+
+        > i.right {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+    }
+}
+
+/* Card Grids */
 .grid-container {
     overflow: hidden; // can be replaced with a clearfix in case needed
-    margin: @card-grid-margin @card-grid-margin/2;
+    padding: @card-grid-margin 0 0 @card-grid-margin;
 
     > .grid-0 {
         float: left;
@@ -145,22 +202,30 @@
     }
     > .grid-2 {
         float: left;
-        width: 50%;
+        width: 100% / 2;
     }
     > .grid-3 {
         float: left;
-        width: 33.3333%;
+        width: 100% / 3;
     }
     > .grid-4 {
         float: left;
-        width: 25%;
+        width: 100% / 4;
     }
     > .grid-5 {
         float: left;
-        width: 20%;
+        width: 100% / 5;
     }
     > .grid-6 {
         float: left;
-        width: 16.6666%;
+        width: 100% / 6;
+    }
+    > .grid-7 {
+        float: left;
+        width: 100% / 7;
+    }
+    > .grid-8 {
+        float: left;
+        width: 100% / 8;
     }
 }

@@ -16,36 +16,22 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CUI.rte.Query = function() {
+CUI.rte.Query = function($) {
 
-    return (CUI.rte._adapter == "ext" ? {
+    return {
 
         selectNode: function(q, dom) {
-            return CQ.Ext.DomQuery.selectNode(q, dom);
+            var result = $(dom).find(q);
+            if (result.length == 0) {
+                return null;
+            }
+            return result[0];
         },
 
         select: function(q, dom) {
-            return CQ.Ext.DomQuery.select(q, dom);
+            return $(dom).find(q);
         }
 
-    } : function($) {
+    };
 
-        return {
-
-            selectNode: function(q, dom) {
-                var result = $(dom).find(q);
-                if (result.length == 0) {
-                    return null;
-                }
-                return result[0];
-            },
-
-            select: function(q, dom) {
-                return $(dom).find(q);
-            }
-
-        };
-
-    }(window.jQuery));
-
-}();
+}(window.jQuery);
