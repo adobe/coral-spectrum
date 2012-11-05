@@ -452,6 +452,10 @@ module.exports = function(grunt) {
       "rte-core-extjs": {
         src: ['<config:concat.rte-core-extjs.dest>'],
         dest: '<%= dirs.build %>/js/rte-core-extjs.min.js'
+      },
+      "rte-for-cui": {
+        src: ['<config:concat.rte-for-cui.dest>'],
+        dest: '<%= dirs.build %>/js/rte-for-cui.min.js'
       }
       // TBD: minify individual JS files?
     },
