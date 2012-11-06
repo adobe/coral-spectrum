@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
 
+# disable tracing in shell output (for CI server console)
+set +x
+
 # Single line echo
 if [ "`echo -e "abc\c"`" = "abc" ]; then
     alias echoe="echo -e"
@@ -18,6 +21,14 @@ while getopts ":c" opt; do
       ;;
   esac
 done
+
+# if not using color, use plain text instead of unicode
+# Jenkins is borking the special character
+if $USE_COLOR ; then
+  OK="[√]"
+else
+  OK="[OK]"
+fi
 
 # output with color
 # -c turns this off 
@@ -45,7 +56,7 @@ if ! which node >/dev/null 2>&1; then
   echo "Node must be installed to build CoralUI. Visit nodejs.org to download Node"
   exit 1
 else
-  green " [√] " "\c"
+  green " $OK " "\c"
   echo "Node"
 fi
 
@@ -55,7 +66,7 @@ if ! which npm >/dev/null 2>&1; then
   echo "npm must be installed to build CoralUI"
   exit 1
 else
-  green " [√] " "\c"
+  green " $OK " "\c"
   echo "npm"
 fi
 
@@ -82,7 +93,7 @@ if ! echo $npmList | grep grunt@ >/dev/null 2>&1; then
     exit 1
   fi
 else
-  green " [√] " "\c"
+  green " $OK " "\c"
   echo "grunt"
 fi
 
@@ -106,7 +117,7 @@ if ! echo $npmList | grep bower@ >/dev/null 2>&1; then
     exit 1
   fi
 else
-  green " [√] " "\c"
+  green " $OK " "\c"
   echo "bower"
 fi
 
@@ -117,7 +128,7 @@ echo "Installing modules and components"
 npm install >/dev/null
 
 if [ $? -eq 0 ]; then
-  green " [√] " "\c"
+  green " $OK " "\c"
   echo "npm"
 else
   red " [X] " "\c"
@@ -129,7 +140,7 @@ fi
 bower install >/dev/null
 
 if [ $? -eq 0 ]; then
-  green " [√] " "\c"
+  green " $OK " "\c"
   echo "bower"
 else
   red " [X] " "\c"
@@ -141,7 +152,7 @@ fi
 rm -rf components/JSDoc
 git clone https://github.com/jsdoc3/jsdoc.git components/JSDoc >/dev/null 2>&1
 if [ $? -eq 0 ]; then
-  green " [√] " "\c"
+  green " $OK " "\c"
   echo "JSDoc"
 else
   red " [X] " "\c"
