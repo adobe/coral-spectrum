@@ -1,0 +1,107 @@
+/**
+  Element: Search field
+  A simple search field with Search action button inside.
+*/
+
+div.searchfield
+{
+  display: inline-block;
+}
+
+div.searchfield:after
+{
+  content: ".";
+  clear: both;
+  visibility: hidden;
+}
+
+div.search
+{
+  position: relative;
+  width: 191*@px;
+  height: 2rem;
+  padding: 0;
+  margin: 0;
+}
+
+div.search input[type=text]
+{
+  position: absolute;
+  left: 0;
+  width: 191*@px;
+  height: 2rem;
+  padding: 0 38*@px 0 12*@px;
+  margin: 0;
+  font-size: 0.8125rem;
+  font-family: @font-base-family; 
+  color: @search-text-color;
+  background-color: @search-text-background-color;
+  border: 1px solid @search-text-border-color;
+
+  &:disabled 
+  {
+    background-color: @search-text-disabled-background-color;
+  }
+
+  &:focus 
+  {
+    .glow();
+    outline: none;
+  }
+
+  &.error 
+  {
+    .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+
+    &:focus 
+    {
+     .glow;
+    }
+  }
+}
+
+/* note png below should be replaced with svg */
+
+div.search button
+{
+  position: absolute;
+  right: @px;
+  top: -1*@px;
+  min-width: 0;
+  width: 26*@px;
+  height: 30*@px;
+  z-index: 1;
+  border: 0;
+  border-left: @px solid @search-text-border-color;
+  /* would use the mixin below but doesn't allow for placing image on top of gradient 
+  .gradient(@search-button-gradient-start-color, @search-button-gradient-end-color);
+  */
+  background: @search-button-gradient-start-color; /* old  browser support */
+  background-image: url('../images/components/search/magnifier.png') no-repeat center center;  /* old browser support */
+  background: url('../images/components/search/magnifier.png') no-repeat center center, -moz-linear-gradient(top, @search-button-gradient-start-color, @search-button-gradient-end-color);  
+  background: url('../images/components/search/magnifier.png') no-repeat center center, -webkit-linear-gradient(@search-button-gradient-start-color, @search-button-gradient-end-color);
+  background: url('../images/components/search/magnifier.png') no-repeat center center, -ms-linear-gradient(top, @search-button-gradient-start-color, @search-button-gradient-end-color);
+  background: url('../images/components/search/magnifier.png') no-repeat center center, -o-linear-gradient(top, @search-button-gradient-start-color, @search-button-gradient-end-color);
+  background: url('../images/components/search/magnifier.png') no-repeat center center, linear-gradient(top, @search-button-gradient-start-color, @search-button-gradient-end-color); 
+  background-size: 1rem 1rem;
+
+  &:hover
+  {
+    background: @search-button-hover-background-color url('../images/components/search/magnifier.png') no-repeat center center;
+    background-size: 1rem 1rem;
+  }
+  
+  &:active
+  {
+    background: @search-button-down-background-color url('../images/components/search/magnifier.png') no-repeat center center;
+    background-size: 1rem 1rem;
+  }
+  
+  &:disabled
+  {
+    border: 0;
+    border-left: @px solid @search-button-disabled-border-color;
+    background: @search-button-disabled-background-color url('../images/components/search/magnifier.png') no-repeat center center;
+    background-size: 1rem 1rem;
+  }
+}
