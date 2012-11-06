@@ -60,6 +60,8 @@ div.search input[type=text]
   }
 }
 
+/* note png below should be replaced with svg */
+
 div.search button
 {
   position: absolute;
@@ -71,27 +73,27 @@ div.search button
   z-index: 1;
   border: 0;
   border-left: @px solid @search-text-border-color;
-  /* would use the mixin below but doesn't allow for placing image on top of gradient
+  /* would use the mixin below but doesn't allow for placing image on top of gradient 
   .gradient(@search-button-gradient-start-color, @search-button-gradient-end-color);
   */
-  background: @search-button-gradient-start-color; /* old browser support */
-  background-image: url('../images/components/filters/magnifier.png') no-repeat center center;  /* old browser support */
-  background: url('../images/components/filters/magnifier.png') no-repeat center center, -moz-linear-gradient(top, @search-button-gradient-start-color, @search-button-gradient-end-color);  
-  background: url('../images/components/filters/magnifier.png') no-repeat center center, -webkit-linear-gradient(@search-button-gradient-start-color, @search-button-gradient-end-color);
-  background: url('../images/components/filters/magnifier.png') no-repeat center center, -ms-linear-gradient(top, @search-button-gradient-start-color, @search-button-gradient-end-color);
-  background: url('../images/components/filters/magnifier.png') no-repeat center center, -o-linear-gradient(top, @search-button-gradient-start-color, @search-button-gradient-end-color);
-  background: url('../images/components/filters/magnifier.png') no-repeat center center, linear-gradient(top, @search-button-gradient-start-color, @search-button-gradient-end-color); 
+  background: @search-button-gradient-start-color; /* old  browser support */
+  background-image: url('../images/components/search/magnifier.png') no-repeat center center;  /* old browser support */
+  background: url('../images/components/search/magnifier.png') no-repeat center center, -moz-linear-gradient(top, @search-button-gradient-start-color, @search-button-gradient-end-color);  
+  background: url('../images/components/search/magnifier.png') no-repeat center center, -webkit-linear-gradient(@search-button-gradient-start-color, @search-button-gradient-end-color);
+  background: url('../images/components/search/magnifier.png') no-repeat center center, -ms-linear-gradient(top, @search-button-gradient-start-color, @search-button-gradient-end-color);
+  background: url('../images/components/search/magnifier.png') no-repeat center center, -o-linear-gradient(top, @search-button-gradient-start-color, @search-button-gradient-end-color);
+  background: url('../images/components/search/magnifier.png') no-repeat center center, linear-gradient(top, @search-button-gradient-start-color, @search-button-gradient-end-color); 
   background-size: 1rem 1rem;
 
   &:hover
   {
-    background: @search-button-hover-background-color url('../images/components/filters/magnifier.png') no-repeat center center;
+    background: @search-button-hover-background-color url('../images/components/search/magnifier.png') no-repeat center center;
     background-size: 1rem 1rem;
   }
   
   &:active
   {
-    background: @search-button-down-background-color url('../images/components/filters/magnifier.png') no-repeat center center;
+    background: @search-button-down-background-color url('../images/components/search/magnifier.png') no-repeat center center;
     background-size: 1rem 1rem;
   }
   
@@ -99,7 +101,7 @@ div.search button
   {
     border: 0;
     border-left: @px solid @search-button-disabled-border-color;
-    background: @search-button-disabled-background-color url('../images/components/filters/magnifier.png') no-repeat center center;
+    background: @search-button-disabled-background-color url('../images/components/search/magnifier.png') no-repeat center center;
     background-size: 1rem 1rem;
   }
 }

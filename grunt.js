@@ -547,10 +547,12 @@ module.exports = function(grunt) {
   });
 
   // Partial build for development
-  grunt.registerTask('partial', 'lint copy handlebars concat:cui min:cui icons less concat:cui_css mincss mocha');
+  // grunt.registerTask('partial', 'lint copy handlebars concat:cui min:cui icons less concat:cui_css mincss mocha');
+  grunt.registerTask('partial', 'lint copy handlebars concat:cui min:cui icons less concat:cui_css mincss');
 
   // Full build with docs and compressed file
-  grunt.registerTask('full-build', 'lint copy handlebars concat:cui concat:rte-core concat:cui-with-rte min icons less concat:cui_css mincss mocha jsdoc');
+  //grunt.registerTask('full-build', 'lint copy handlebars concat:cui concat:rte-core concat:cui-with-rte min icons less concat:cui_css mincss mocha jsdoc');
+  grunt.registerTask('full-build', 'lint copy handlebars concat:cui concat:rte-core concat:cui-with-rte min icons less concat:cui_css mincss jsdoc');
 
   // Full build with docs and compressed file
   grunt.registerTask('full', 'clean full-build');
