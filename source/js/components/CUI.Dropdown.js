@@ -337,10 +337,10 @@
             this.$element.removeClass("error");
         }
     },
-
+    
+    /** @ignore */
     _isMobile: function() {
-        return true;
-        //return typeof window.ontouchstart === 'object';
+        return typeof window.ontouchstart === 'object';
     }
     
   });
