@@ -181,7 +181,7 @@
         for(var i = 0; i < 7; i++) {
             day = (i + this.options.startDay) % 7;
             var dayName = this.options.dayNames[day];
-            html += "<td><span>" + dayName + "</span></td>";
+            html += "<th><span>" + dayName + "</span></th>";
         }
         html += "</tr>";
         table.append("<thead>" + html + "</thead>");
@@ -316,7 +316,7 @@
   });
   
   CUI.Datepicker.monthNames = ["January", "February", "March", "April", "May", "Juni", "July", "August", "September", "October", "November", "December"];
-  CUI.Datepicker.dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  CUI.Datepicker.dayNames = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
   CUI.Datepicker.format = "Y-m-d";
 
   CUI.util.plugClass(CUI.Datepicker);

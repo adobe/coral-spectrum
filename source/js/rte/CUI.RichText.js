@@ -61,6 +61,22 @@
             this.editorKernel.execCmd("initializeundo");
         },
 
+        initializeEventHandling: function() {
+            var editContext = this.editorKernel.getEditContext();
+            CUI.rte.Eventing.on(editContext, document.body, "keyup", this.handleKeyUp,
+                    this);
+            this.$textContainer.finger("blur.rte", CUI.rte.Utils.scope(function(e) {
+                this.finish();
+            }, this));
+            this.$textContainer.fipo("tap.rte", "click.rte", function(e) {
+                e.stopPropagation();
+            });
+            $(document.body).fipo("tap.rte.off", "click.rte.off",
+                    CUI.rte.Utils.scope(function(e) {
+                        this.finish();
+                    }, this));
+        },
+
         deactivateEditorKernel: function() {
             if (this.editorKernel != null) {
                 this.editorKernel.removeUIListener("updatestate");
@@ -69,6 +85,16 @@
                 this.editorKernel.suspendEventHandling();
                 this.editorKernel.destroyToolbar();
             }
+        },
+
+        finalizeEventHandling: function() {
+            CUI.rte.Eventing.un(document.body, "keyup", this.handleKeyUp, this);
+            this.$textContainer.off("blur.rte");
+            this.$textContainer.off("tap.rte");
+            this.$textContainer.off("click.rte");
+            var $body = $(document.body);
+            $body.off("tap.rte.off");
+            $body.off("click.rte.off");
         },
 
         updateState: function() {
@@ -122,8 +148,7 @@
             }
             this.savedSpellcheckAttrib = document.body.spellcheck;
             document.body.spellcheck = false;
-            var editContext = this.editorKernel.getEditContext();
-            CUI.rte.Eventing.on(editContext, document.body, "keyup", this.handleKeyUp, this);
+            this.initializeEventHandling();
             var initialContent = this.options.initialContent || this.$textContainer.html();
             this.$textContainer[0].contentEditable = "true";
             var ua = CUI.rte.Common.ua;
@@ -136,8 +161,8 @@
 
         finish: function() {
             var editedContent = this.editorKernel.getProcessedHtml();
+            this.finalizeEventHandling();
             this.deactivateEditorKernel();
-            CUI.rte.Eventing.un(document.body, "keyup", this.handleKeyUp, this);
             this.$textContainer.removeClass("edited");
             // TODO CQ.WCM.unloadToolbar();
             this.textContainer.blur();

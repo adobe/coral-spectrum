@@ -256,7 +256,7 @@
             if (this.$element.attr("data-placeholder")) {
                 this.options.placeholder = this.$element.attr("data-placeholder");
             }
-            if (this.$element.attr("disabled") || this.$element.attr("data-disabled")) {
+            if (this.$element.attr("disabled") || this.$element.attr("data-disabled")) {
                 this.options.disabled = true;
             }
             if (this.$element.attr("data-option-renderer")) {

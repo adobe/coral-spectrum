@@ -13,6 +13,14 @@ The top toolbar with action icons
         z-index: 1;
         position: relative;
     }
+    .left button,
+    .left .button {
+        margin-right: 1em;
+    }
+    .right button,
+    .right .button {
+        margin-left: 1em;
+    }
     
     .center {
         position: absolute;
@@ -53,18 +61,10 @@ The top toolbar with action icons
         min-width:   80*@px;
         line-height: 14*@px;
     }
-    &.left button,
-    &.left .button {
-        margin-right: 1em;
-    }
-    &.right button,
-    &.right .button {
-        margin-left: 1em;
-    }
     button[class^="icon-"],
     button[class*=" icon-"] {
         margin: 0;
-        min-width: auto;
+        min-width: 0;
         line-height: 24*@px;
         color: transparent;
     }
