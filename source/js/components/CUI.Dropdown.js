@@ -55,13 +55,56 @@
     construct: function(options) {
         
         this._render();
-        
+
+        // isMobile should be replace with a CUI.Util method
+        // Editable dropdown can't be natively rendered.
+        if (this._isMobile() && !this.options.editable) {
+            this._initForMobile();
+        } else {
+            this._initForDesktop();
+        }
+
+    },
+    
+    defaults: {
+        options: [],
+        multiple: false,
+        placeholder: "Select",
+        disabled: false,
+        editable: false,
+        hasError: false
+    },
+    
+    dropdownList: null,
+    autocompleteList: null,
+    syncSelectElement: null,
+    buttonElement: null,
+    positioningElement: null,
+    inputElement: null,
+    hasFocus: false,
+
+    _initForMobile: function() {
+        this.$element.addClass('mobile');
+
+        this.buttonElement.on("click", function() {
+            this._openSelectInput();
+        }.bind(this));
+
+        this.$element.find('select').on("change", function() {
+            this._update(true);
+        }.bind(this));
+
+        this._placeSelect();
+    },
+
+    _initForDesktop: function() {
         this.dropdownList = new CUI.DropdownList({
             element: this.buttonElement,
             positioningElement: this.positioningElement,
             options: this.options.options,
             optionRenderer: this._optionRenderer.bind(this)
         });
+
         if (this.options.editable) {
             this.autocompleteList = new CUI.DropdownList({
                 element: this.inputElement,
@@ -98,26 +141,32 @@
         this.$element.children().on("blur", "", function() {
             this.hasFocus = false;
             this._update();
-        }.bind(this));              
+        }.bind(this));
+    },
+
+    _placeSelect: function() {
+        var $select = this.$element.find('select').first();
+
+        $select.css({
+            position: 'relative',
+            top: -5,
+            left: -this.$element.width() / 2
+        });
+
 
     },
-    
-    defaults: {
-        options: [],
-        multiple: false,
-        placeholder: "Select",
-        disabled: false,
-        editable: false,
-        hasError: false
+
+    _openSelectInput: function() {
+        var selectElement = this.$element.find('select')[0];
+
+        if (document.createEvent) {
+            var e = document.createEvent("MouseEvents");
+            e.initMouseEvent("mousedown", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+            selectElement.dispatchEvent(e);
+        } else if (selectElement.fireEvent) {
+            selectElement.fireEvent("onmousedown");
+        }
     },
-    
-    dropdownList: null,
-    autocompleteList: null,
-    syncSelectElement: null,
-    buttonElement: null,
-    positioningElement: null,
-    inputElement: null,
-    hasFocus: false,
 
     /** @ignore */    
     _adjustAutocompleter: function() {
@@ -286,9 +335,11 @@
         } else {
             this.$element.removeClass("error");
         }
+    },
+
+    _isMobile: function() {
+        return typeof window.ontouchstart === 'object';
     }
-    
-    
     
   });
 
