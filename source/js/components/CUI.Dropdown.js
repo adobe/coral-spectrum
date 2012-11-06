@@ -94,6 +94,7 @@
             this._update(true);
         }.bind(this));
 
+        // place the hidden select input at the right position for ipad and iphone
         this._placeSelect();
     },
 
@@ -146,14 +147,14 @@
 
     _placeSelect: function() {
         var $select = this.$element.find('select').first();
+        var $button = this.$element.find('button').first();
 
         $select.css({
             position: 'relative',
-            top: -5,
-            left: -this.$element.width() / 2
+            left: -$button.outerWidth(),
+            width: $button.outerWidth(),
+            height: $button.outerHeight()
         });
-
-
     },
 
     _openSelectInput: function() {
@@ -338,7 +339,8 @@
     },
 
     _isMobile: function() {
-        return typeof window.ontouchstart === 'object';
+        return true;
+        //return typeof window.ontouchstart === 'object';
     }
     
   });
