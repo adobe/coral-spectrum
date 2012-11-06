@@ -363,7 +363,7 @@ tabs.hide();
       $('body').on('cui-onload.data-api', _onLoad);
 
       // Data API
-      $('body').fipo('tap.tabs.data-api', 'click.tabs.data-api focus.tabs.data-api', '.tabs > nav > a[data-toggle="tab"]', function (e) {
+      $('body').fipo('tap.tabs.data-api', 'click.tabs.data-api', '.tabs > nav > a[data-toggle="tab"]', function (e) {
         var $tab = $(this);
 
         // and show/hide the relevant tabs
