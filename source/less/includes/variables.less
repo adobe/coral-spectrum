@@ -50,9 +50,21 @@
 
 
 // Crumbs
+@crumb-text-color: rgb(83, 83, 83);
 @crumb-chevron-color: rgb(206, 206, 206);
-@crumb-text-color: rgb(75, 75, 75);
 @crumb-hover-text-color: rgb(15, 15, 15);
+@crumb-list-border-color: @modal-outline-color;
+@crumb-list-text-color: rgb(51,51,51);
+@crumb-list-divider-color: rgb(210,210,210);
+
+
+// Pulldown
+@pulldown-text-color: rgb(83, 83, 83);
+@pulldown-chevron-color: rgb(206, 206, 206);
+@pulldown-hover-text-color: rgb(15, 15, 15);
+@pulldown-list-border-color: @modal-outline-color;
+@pulldown-list-text-color: rgb(51,51,51);
+@pulldown-list-divider-color: rgb(210,210,210);
 
 
 // Badge
@@ -149,14 +161,19 @@
 @dropdown-active-background-color: rgb(65, 143, 212);
 
 // Datepicker
+@datepicker-day-background-color: rgb(245,245,245);
 @datepicker-day: rgb(75,75,75);
-@datepicker-day-dimmed: rgb(180,180,180);
+@datepicker-day-title-background-color: rgb(215,215,215);
+@datepicker-day-title-border-color: rgb(196,196,196);
+@datepicker-day-dimmed-background-color: rgb(235,235,235);
+@datepicker-day-dimmed-text-color: rgb(191,191,191);
 @datepicker-day-hover-border-color: rgb(170,204,241);
-@datepicker-day-hover-background-color: rgb(210,230,246);
+@datepicker-day-hover-background-color: @white;
 @datepicker-day-selected-border-color: rgb(69,88,118);
 @datepicker-day-selected-background-color: rgb(64,142,212);
 @datepicker-day-selected-text-color: rgb(255,255,255);
-@datepicker-calendar-font-size: 14*@px;
+@datepicker-day-today-background-color: rgb(218,230,240);
+@datepicker-day-today-border-color: rgb(201,213,222);
 
 // Switches
 @switch-text-color: rgb(150, 150, 150);
@@ -196,6 +213,8 @@
 @rail-shadow-spread: 0.45rem;
 @rail-shadow-opacity: 0.35;
 
+@rail-shadow-inset-color: #0a0a0a;
+
 @rail-group-header-color: rgb(81, 85, 86);
 
 @rail-section-border-color: rgb(49, 52, 52);
@@ -224,17 +243,18 @@
 @table-cell-selected-border-color: rgb(140, 185, 230);
 
 
-// CardView
-@cardview-background-color: rgb(255, 255, 255);
-@cardview-border-color: rgb(230, 230, 230);
-@cardview-title-color: rgb(102, 102, 102);
-@cardview-text-color: rgb(153, 153, 153);
-@cardview-banner-padding: 14*@px;
-@cardview-stackeditem-height: 6*@px;
-@cardview-banner-color: rgb(170, 170, 170);
-@cardview-banner-text-color: rgb(255, 255, 255);
-@cardview-image-separator-color: rgb(235, 235, 235);
-@cardview-grid-margin: 16*@px;
+// Cards
+@card-background-color: rgb(255, 255, 255);
+@card-title-color: rgb(102, 102, 102);
+@card-text-color: rgb(153, 153, 153);
+@card-stack-offset: 4*@px;
+@card-banner-offset: 5*@px;
+@card-banner-text-color: rgb(255, 255, 255);
+@card-banner-background-color: rgb(170, 170, 170);
+@card-banner-border-color: rgb(187, 187, 187);
+@card-directory-empty-color: rgb(221, 221, 221);
+@card-image-separator-color: rgb(235, 235, 235);
+@card-grid-margin: 15*@px;
 
 
 // Well

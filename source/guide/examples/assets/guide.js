@@ -38,6 +38,18 @@ $(function() {
       return def.promise();
     }
   });
+
+  // closable rail
+  $('#close-rail').fipo('tap', 'click', function () {
+    rail.toggleClass('closed');
+  });
+
+  // closable bottom toolbar in rail
+  var quickform = $('.quickform');
+
+  quickform.find('.trigger').fipo('tap', 'click', function () {
+    quickform.toggleClass('open');
+  });
   
   /**
     Show the paragraph link icon when a heading is hovered on that is within a named section

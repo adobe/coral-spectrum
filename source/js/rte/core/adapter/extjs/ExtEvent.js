@@ -32,7 +32,7 @@ CUI.rte.adapter.ExtEvent = new Class({
      * @type CQ.Ext.EventObject
      * @private
      */
-    native: null,
+    nativeEvent: null,
 
     /**
      * The native ExtJS event (for backward compatibility)
@@ -48,7 +48,7 @@ CUI.rte.adapter.ExtEvent = new Class({
      */
     construct: function(extEvent, editContext) {
         // console.log(extEvent);
-        this.native = extEvent;
+        this.nativeEvent = extEvent;
         this.extEvent = extEvent;
         // map to common properties
         var cfg = {
@@ -70,57 +70,57 @@ CUI.rte.adapter.ExtEvent = new Class({
 
     // overrides CUI.rte.EdittorEvent#isTab
     isTab: function() {
-        return this.native.getKey() == this.native.TAB;
+        return this.nativeEvent.getKey() == this.nativeEvent.TAB;
     },
 
     // overrides CUI.rte.EdittorEvent#isEnter
     isEnter: function() {
-        return this.native.getKey() == this.native.ENTER;
+        return this.nativeEvent.getKey() == this.nativeEvent.ENTER;
     },
 
     // overrides CUI.rte.EdittorEvent#isSpace
     isSpace: function() {
-        return this.native.getKey() == this.native.SPACE;
+        return this.nativeEvent.getKey() == this.nativeEvent.SPACE;
     },
 
     // overrides CUI.rte.EdittorEvent#isBackSpace
     isBackSpace: function() {
-        return this.native.getKey() == this.native.BACKSPACE;
+        return this.nativeEvent.getKey() == this.nativeEvent.BACKSPACE;
     },
 
     // overrides CUI.rte.EdittorEvent#isDelete
     isDelete: function() {
-        return this.native.getKey() == this.native.DELETE;
+        return this.nativeEvent.getKey() == this.nativeEvent.DELETE;
     },
 
      // overrides CUI.rte.EdittorEvent#isCaretKey
     isCaretKey: function() {
-        var key = this.native.getKey();
-        return (key == this.native.UP) || (key == this.native.DOWN)
-                || (key == this.native.LEFT) || (key == this.native.RIGHT);
+        var key = this.nativeEvent.getKey();
+        return (key == this.nativeEvent.UP) || (key == this.nativeEvent.DOWN)
+                || (key == this.nativeEvent.LEFT) || (key == this.nativeEvent.RIGHT);
     },
 
     // overrides CUI.rte.EdittorEvent#isCaretMovement
     isCaretMovement: function() {
-        var key = this.native.getKey();
+        var key = this.nativeEvent.getKey();
         return this.isCaretKey()
-                || (key == this.native.PAGE_UP) || (key == this.native.PAGE_DOWN)
-                || (key == this.native.HOME) || (key == this.native.END);
+                || (key == this.nativeEvent.PAGE_UP) || (key == this.nativeEvent.PAGE_DOWN)
+                || (key == this.nativeEvent.HOME) || (key == this.nativeEvent.END);
     },
 
     // overrides CUI.rte.EdittorEvent#preventDefault
     preventDefault: function() {
-        this.native.preventDefault();
+        this.nativeEvent.preventDefault();
     },
 
     // overrides CUI.rte.EdittorEvent#stopPropagation
     stopPropagation: function() {
-        this.native.stopPropagation();
+        this.nativeEvent.stopPropagation();
     },
 
     // overrides CUI.rte.EdittorEvent#stopEvent
     stopEvent: function() {
-        this.native.stopEvent();
+        this.nativeEvent.stopEvent();
     }
 
 });

@@ -10,6 +10,7 @@
 
     select {
         display: none;
+
     }
 
     &.focus button,
@@ -23,8 +24,9 @@
     }
 
     button {
+
         display: inline-block;
-        .box-sizing(border-box);
+        .border-box;
 
         vertical-align: middle;
 
@@ -79,6 +81,15 @@
     }
 }
 
+.dropdown.mobile {
+    select {
+        display: inline-block;
+        width: 0px;
+        height:0px;
+        opacity: 0.0001;
+    }
+}
+
 .dropdown-editable {
     button {
         min-width: 2rem;
@@ -90,7 +101,7 @@
     }
 
     input[type=text] {
-        .box-sizing(border-box);
+        .border-box;
         border-radius: 0; // Fix for iOS >=5
         -webkit-appearance: none; // Fix for iOS <5
         vertical-align: middle;

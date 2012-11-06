@@ -17,5 +17,6 @@
 **************************************************************************/
 
 (function() {
-    CUI.rte.ui.ToolkitRegistry.initialize(CUI.rte._toolkit);
+    CUI.rte.ui.ToolkitRegistry.initialize("stub");
+    // CUI.rte.ui.ToolkitRegistry.initialize("cui");
 })();

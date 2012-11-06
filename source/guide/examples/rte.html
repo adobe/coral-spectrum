@@ -10,11 +10,12 @@
   <!-- Dependencies -->
   <script src="../js/libs/handlebars.js"></script>
   <script src="../js/libs/jquery.js"></script>
-  <script src="../js/libs/fingerpointer.js"></script>
+  <script src="../js/libs/jquery-fingerpointer.js"></script>
   <script src="../js/libs/toe.js"></script>
 
   <!-- CoralUI, including RTE -->
-  <script src="../js/CUI-with-rte.js"></script>
+  <script src="../js/CUI.js"></script>
+  <script src="../js/rte-for-cui.js"></script>
 
   <!-- Guide JS -->
   <script src="assets/guide.js"></script>
@@ -33,7 +34,7 @@
     </nav>
 
     <div class="drawer">
-      <div class="badge">v0.3.0-SNAPSHOT</div>
+      <div class="badge">v0.4.0-SNAPSHOT</div>
     </div>
 
   </header>
@@ -66,6 +67,13 @@
 
       <section id="General">
         <h2 class="line" id="rte01">Simple RTE</h2>
+          <nav class="toolbar">
+              <div class="left icongroup">
+                  <a href="#format" data-rte-command="bold" onfocus="blur()" tabindex="-1" class="button rte-toolbar-item rte-tb-bold">B</a>
+                  <a href="#format" data-rte-command="italic" onfocus="blur()" tabindex="-1" class="button rte-toolbar-item rte-tb-italic">i</a>
+                  <a href="#format" data-rte-command="underline" tabindex="-1" class="button rte-toolbar-item rte-tb-underline">U</a>
+              </div>
+          </nav>
           <div class="editable">
              <p>Li Europan lingues es membres del sam familie. Lor separat existentie es
              un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular.

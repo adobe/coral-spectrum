@@ -319,7 +319,7 @@ var index = filters.getSelectedIndex();
     
     _createMissingElements: function() {
         if (this.$element.find("select").length === 0) {
-            this.$element.append($("<select></select>"));
+            this.$element.append($("<select " + (this.options.multiple ? "multiple" : "") + "></select>"));
         }
         if (this.$element.find("input").length === 0) {
             this.$element.prepend($("<input type=\"text\">"));
