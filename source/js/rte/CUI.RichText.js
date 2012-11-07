@@ -75,7 +75,9 @@
             });
             this.$textContainer.finger("blur.rte", function(e) {
                 // get back in a few milliseconds and see if it was a temporary focus
-                // change (if a toolbar button was invoked).
+                // change (if a toolbar button was invoked) and finish otherwise -
+                // this is the case on mobile devices if the on-screen keyboard gets
+                // hidden
                 CUI.rte.Utils.defer(function() {
                     if (!self.isTemporaryFocusChange) {
                         self.finish();
@@ -188,6 +190,7 @@
         },
 
         finish: function() {
+            console.log("FINISH");
             var editedContent = this.editorKernel.getProcessedHtml();
             this.finalizeEventHandling();
             this.deactivateEditorKernel();
