@@ -190,7 +190,6 @@
         },
 
         finish: function() {
-            console.log("FINISH");
             var editedContent = this.editorKernel.getProcessedHtml();
             this.finalizeEventHandling();
             this.deactivateEditorKernel();
