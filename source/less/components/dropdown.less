@@ -10,6 +10,7 @@
 
     select {
         display: none;
+
     }
 
     &.focus button,
@@ -23,6 +24,7 @@
     }
 
     button {
+
         display: inline-block;
         .border-box;
 
@@ -76,6 +78,15 @@
             .gradient(@dropdown-gradient-end-color, @dropdown-gradient-end-color);
             .box-shadow(inset 0 0 0.5rem rgba(0, 0, 0, 0.25));
         }
+    }
+}
+
+.dropdown.mobile {
+    select {
+        display: inline-block;
+        width: 0px;
+        height:0px;
+        opacity: 0.0001;
     }
 }
 

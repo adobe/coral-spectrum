@@ -11,6 +11,7 @@ div.rail {
     @pull-to-request-size: 3rem;
 
     // make it scrollable
+    &.scroll,
     .scroll {
         .scrollable;
         overflow-x: hidden;
@@ -280,6 +281,8 @@ div.rail {
                 padding: 6*@px 0;
 
                 >label {
+                    padding-left: 14*@px;
+
                     input[type=checkbox] {
                         + span:before {
                             .box-shadow(inset 0 3*@px 3*@px -3*@px @rail-shadow-inset-color);
@@ -459,19 +462,17 @@ div.rail {
       >.control {
         padding: 10*@px;
       }
+
+      &.open >.action {
+        display: block;
+      }
       
       >.action {
         display: none;
         background-color: @rail-dark-background-color; 
         color: @rail-font-color;
-        //border-top: @px solid @rail-section-border-color;
-        //.box-shadow(-@px @px 0 0 @rail-group-header-color);
         .box-shadow(inset 0 3*@px 3*@px -3*@px @rail-shadow-inset-color);
         position: relative;
-
-        &.open {
-          display: block;
-        }
 
         >*:first-child:after,
         &:before,
@@ -510,55 +511,16 @@ div.rail {
       }
 
       >.control {
+        .clearfix;
+
         .box-shadow(inset 0 @px 0 @rail-section-highlight-color);
         border-top: @px solid @rail-section-border-color;
+
+        >.comment {
+
+            float: right;
+            width: calc(~"100% - 2rem");
+        }
       }
     }
-
-    // Bottom toolbar
-/*
-    >.toolbar {
-        display: none;
-    }
-
-    &.with-toolbar-bottom {
-        position: relative;
-
-        >.wrap {
-            height: auto;
-            min-height: 0;
-            position: absolute;
-            top: 0;
-            bottom: 3rem;
-            width: 100%;
-            .scrollable;
-        }
-
-        >.toolbar {
-            display: block;
-
-            margin: 0;
-            height: 3rem;
-            color: @rail-font-color;
-
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-
-
-            border-top: @px solid @rail-section-border-color;
-            .box-shadow(inset 0 @px 0 @rail-section-highlight-color);
-            background-color: @rail-background-color;
-        }
-
-        &.toolbar-open {
-            >.wrap {
-                bottom: 6rem;
-            }
-            >.toolbar {
-                height: 6rem;
-            }
-        }
-    }
-*/
 }

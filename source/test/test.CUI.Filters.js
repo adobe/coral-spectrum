@@ -1,67 +1,54 @@
-describe('CUI.Rail', function() {
-  var htmlWithPtr = 
-      '<div class="rail">' + 
-        '<div class="pull-to-refresh">' + 
-          '<div class="icon"></div>' + 
-          '<div class="message">' + 
-            '<i class="arrow"></i>' + 
-            '<i class="spinner large"></i>' + 
-            '<span class="pull">Pull to refresh</span>' + 
-            '<span class="release">Release to refresh</span>' + 
-            '<span class="loading">Loading</span>' + 
-          '</div>' + 
-        '</div>' + 
-        '<div class="wrap">' + 
-          'Place your content here.' + 
-        '</div>' + 
-      '</div>',
-      html = 
-      '<div class="rail">' + 
-        '<div class="wrap">' + 
-          'Place your content here.' + 
-        '</div>' + 
-      '</div>';
-  
-  // A config we can reuse
-  var modalConfig = {
-    heading: 'TestHeading',
-    content: 'TestContent',
-    buttons: [
-      {
-        label: 'Close',
-        click: 'hide',
-        className: 'myCloseButton'
-      },
-      {
-        label: 'Save',
-        className: 'mySaveButton',
-        click: function() {
-          saveClicked = true;
-        }
-      }
-    ]
-  };
-  
-  it('should be defined in CUI namespace', function() {
-    expect(CUI).to.have.property('Rail');
-  });
-  
-  it('should be defined on jQuery object', function() {
-    var div = $('<div/>');
-    expect(div).to.have.property('rail');
-  });
-  
-  describe('pull-to-request from markup', function() {
-    var el = $('<div/>');
-    
-    var modal = new CUI.Rail({
-      element: el,
-      refreshCallback: $.noop
+describe('CUI.Filters', function() {
+
+              
+    it('should be defined in CUI namespace', function() {
+        expect(CUI).to.have.property('Filters');
     });
-  
-    it('expect rail to receive pullable class', function() {
-      expect(el).to.have.class('pullable');
+
+    it('should be defined on jQuery object', function() {
+        var div = $('<div/>');
+        expect(div).to.have.property('filters');
     });
-  });
-  
+
+    describe("from template with custom config", function() {
+        var html = 
+          '<div>';
+        
+        var el = $(html).filters({
+            options: ["red", "green", "blue"],
+            optionDisplayStrings: ["Red", "Green", "Blue"],
+            multiple: true
+        });
+        
+        it('should have filters object attached', function() {
+            expect(el.data("filters")).to.be.an("object");
+        });
+        
+        it('should have correct markup', function() {
+            expect(el).to.have("select[multiple]");
+            expect(el).to.have("input");
+        });
+      });
+      
+    describe("from markup", function() {
+        var html = 
+          '<div data-multiple="true">' + 
+            '<select multiple>' +
+            '<option value="red">Red</option>' +
+            '<option value="green">green</option>' +
+            '<option value="blue">blue</option>' +
+            '</select>' +
+          '</div>';
+        
+        var el = $(html).filters();
+        
+        it('should have filters object attached', function() {
+            expect(el.data("filters")).to.be.an("object");
+        });
+        
+        it('should have correct markup', function() {
+            expect(el).to.have("select[multiple]");
+            expect(el).to.have("input");
+        });
+      });      
 });
