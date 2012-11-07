@@ -39,7 +39,7 @@ CUI.rte.ui.cui.ElementImpl = new Class({
     // Interface implementation ------------------------------------------------------------
 
     addToToolbar: function(toolbar) {
-        // TODO ...?
+        console.log(this);
     },
 
     createToolbarDef: function() {

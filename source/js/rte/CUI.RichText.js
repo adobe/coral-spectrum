@@ -1,5 +1,7 @@
 (function ($) {
 
+    var configs = { };
+
     CUI.RichText = new Class(/** @lends CUI.RichText# */ {
 
         toString:'RichText',
@@ -154,9 +156,9 @@
 
         // Interface ---------------------------------------------------------------------------------------------------
 
-        start: function() {
+        start: function(config) {
             if (this.editorKernel == null) {
-                this.editorKernel = new CUI.rte.DivKernel(this.config);
+                this.editorKernel = new CUI.rte.DivKernel(config);
             }
             this.editorKernel.createToolbar();
             this.$textContainer = this.getTextDiv(this.$element);
@@ -211,7 +213,18 @@
 
     // Register ...
     CUI.util.plugClass(CUI.RichText, "richEdit", function(rte) {
-        rte.start();
+        var configPath = $(this).attr("data-config");
+        var config;
+        if (configs.hasOwnProperty(configPath)) {
+            config = configs[configPath];
+            rte.start(config);
+        } else {
+            $.getJSON(configPath, function(data) {
+                configs[configPath] = data;
+                rte.start(data);
+            });
+        }
+
     });
 
     // Data API
