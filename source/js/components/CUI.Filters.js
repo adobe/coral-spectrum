@@ -84,6 +84,7 @@ var index = filters.getSelectedIndex();
       @param {int}      [options.disabled=false]                   Is this component disabled?
       @param {boolean}  [options.highlight=true]                   Highlight search string in results
       @param {String}   [options.name=null]                        (Optional) name for an underlying form field.
+      @param {Object}   [options.icons=empty object]               Icons for display, coral icon css class paired with option value;
       @param {Function} [options.autocompleteCallback=use options] Callback for autocompletion
       @param {Function} [options.optionRenderer=default renderer]  (Optional) Renderer for the autocompleter and the tag badges
     */
@@ -192,7 +193,8 @@ var index = filters.getSelectedIndex();
         stacking: false,
         placeholder: null,
         optionRenderer: null,
-        allowCreate: false
+        allowCreate: false,
+        icons: null
     },
 
     dropdownList: null, // Reference to instance of CUI.DropdownList
@@ -388,7 +390,7 @@ var index = filters.getSelectedIndex();
         
         $.each(this.selectedIndices, function(iterator, index) {
             //var option = this.options.options[index];
-            var el = (this.options.optionRenderer.bind(this))(iterator, index, false);
+            var el = (this.options.optionRenderer.bind(this))(iterator, index, false, false);
             var li = $("<li data-id=\"" + index + "\"><button data-dismiss=\"filter\">&times;</button></li>");
             ul.append(li);
             li.append(el);
@@ -524,7 +526,7 @@ var index = filters.getSelectedIndex();
         if (results.length === 0) return;
 
         var optionRenderer = function(iterator, value) {            
-            return (this.options.optionRenderer.bind(this))(iterator, value, this.options.highlight);
+            return (this.options.optionRenderer.bind(this))(iterator, value, this.options.highlight, !$.isEmptyObject(this.options.icons));
         };
 
         this.dropdownList.set("optionRenderer", optionRenderer.bind(this));
@@ -561,7 +563,8 @@ var index = filters.getSelectedIndex();
 }(window.jQuery));
 
 
-CUI.Filters.defaultOptionRenderer = function(iterator, index, hightlight) {            
+CUI.Filters.defaultOptionRenderer = function(iterator, index, highlight, icon) {
+
     var value = this.options.options[index];
 
     if (this.options.optionDisplayStrings[index]) { // Use alternate display strings if possible
@@ -570,7 +573,7 @@ CUI.Filters.defaultOptionRenderer = function(iterator, index, hightlight) {
 
     var searchFor = this.inputElement.val();
 
-    if (hightlight) {
+    if (highlight) {
         var i = value.toLowerCase().indexOf(searchFor.toLowerCase());
         if (i >= 0) {
             value = value.substr(0, i) + "<em>" + value.substr(i, searchFor.length) + "</em>" + value.substr(i + searchFor.length);
@@ -582,7 +585,18 @@ CUI.Filters.defaultOptionRenderer = function(iterator, index, hightlight) {
         value = value + "&nbsp;*";
     }
 
-    return $("<span>" + value + "</span>");
+    value = "<span>" + value + "</span>";
+
+    // Check if this option has an associated icon
+    if(icon) {
+        var optionName = this.options.options[index];
+        var iconCssClass;
+        if(typeof(iconCssClass = this.options.icons[optionName]) !== "undefined") {
+            value = "<i class=" + iconCssClass + ">" + optionName + "</i>" + value;
+        }
+    }
+
+    return $(value);
 };
 
 CUI.Filters.cqTagOptionRenderer = function(iterator, index, highlight) {            

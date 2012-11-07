@@ -29,6 +29,7 @@
         list-style-type: none;
         padding: 0.5rem 0.5rem;
         margin: 0;
+        line-height: 1.3125rem;
         background-color: @dropdown-background-color;
         border: @px solid @dropdown-border-color;
         border-bottom: none;
@@ -69,6 +70,11 @@
             + li {
                 border-top: @px solid darken(@dropdown-active-background-color, 20%);                            
             }
+        }
+
+        i {
+          display: inline-block;
+          margin-right: 5*@px;
         }
     }
 
