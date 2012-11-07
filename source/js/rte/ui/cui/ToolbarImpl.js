@@ -22,13 +22,10 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
 
     extend: CUI.rte.ui.Toolbar,
 
-    toolbarParent: null,
-
     elementMap: null,
 
 
-    construct: function(toolkitRep, elementMap) {
-        this.tb = toolkitRep;
+    construct: function(elementMap) {
         this.elementMap = elementMap;
     },
 
@@ -37,10 +34,7 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     },
 
     getHeight: function() {
-        if (this.toolbarParent == null) {
-            return 0;
-        }
-        return this.toolbarParent.height();
+        return 0;
     },
 
     enable: function() {
@@ -64,7 +58,7 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     },
 
     destroy: function() {
-        this.toolbarParent.remove();
+        // TODO ???
     }
 
 });
