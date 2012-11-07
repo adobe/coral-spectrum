@@ -1,5 +1,7 @@
 (function ($) {
 
+    var configs = { };
+
     CUI.RichText = new Class(/** @lends CUI.RichText# */ {
 
         toString:'RichText',
@@ -61,6 +63,49 @@
             this.editorKernel.execCmd("initializeundo");
         },
 
+        initializeEventHandling: function() {
+            var self = this;
+            var $body = $(document.body);
+            // temporary focus handling - we need to retransfer focus immediately
+            // to the text container (at least in iOS 6) to prevent the keyboard from
+            // disappearing and losing the focus altogether
+            var editContext = this.editorKernel.getEditContext();
+            $body.finger("focus.rte", ".rte-toolbar-item", function(e) {
+                self.$textContainer.focus();
+                e.stopPropagation();
+                e.preventDefault();
+            });
+            this.$textContainer.finger("blur.rte", function(e) {
+                // get back in a few milliseconds and see if it was a temporary focus
+                // change (if a toolbar button was invoked) and finish otherwise -
+                // this is the case on mobile devices if the on-screen keyboard gets
+                // hidden
+                CUI.rte.Utils.defer(function() {
+                    if (!self.isTemporaryFocusChange) {
+                        self.finish();
+                    }
+                    self.isTemporaryFocusChange = false;
+                }, 10);
+            });
+            // additional keyboard handling
+            CUI.rte.Eventing.on(editContext, document.body, "keyup", this.handleKeyUp,
+                    this);
+            // handle clicks/taps (clicks on the editable div vs. common/"out of area"
+            // clicks vs. clicks on toolbar items)
+            this.$textContainer.fipo("tap.rte", "click.rte", function(e) {
+                e.stopPropagation();
+            });
+            $body.fipo("tap.rte.ooa", "click.rte.ooa", function(e) {
+                self.finish();
+            });
+            $body.fipo("tap.rte.item", "click.rte.item", ".rte-toolbar-item", function(e) {
+                self.isTemporaryFocusChange = true;
+                e.stopPropagation();
+                e.preventDefault();
+                return false;
+            });
+        },
+
         deactivateEditorKernel: function() {
             if (this.editorKernel != null) {
                 this.editorKernel.removeUIListener("updatestate");
@@ -69,6 +114,19 @@
                 this.editorKernel.suspendEventHandling();
                 this.editorKernel.destroyToolbar();
             }
+        },
+
+        finalizeEventHandling: function() {
+            CUI.rte.Eventing.un(document.body, "keyup", this.handleKeyUp, this);
+            this.$textContainer.off("blur.rte");
+            this.$textContainer.off("tap.rte");
+            this.$textContainer.off("click.rte");
+            var $body = $(document.body);
+            $body.off("focus.rte");
+            $body.off("tap.rte.ooa");
+            $body.off("click.rte.ooa");
+            $body.off("tap.rte.item");
+            $body.off("click.rte.item");
         },
 
         updateState: function() {
@@ -98,9 +156,9 @@
 
         // Interface ---------------------------------------------------------------------------------------------------
 
-        start: function() {
+        start: function(config) {
             if (this.editorKernel == null) {
-                this.editorKernel = new CUI.rte.DivKernel(this.config);
+                this.editorKernel = new CUI.rte.DivKernel(config);
             }
             this.editorKernel.createToolbar();
             this.$textContainer = this.getTextDiv(this.$element);
@@ -122,8 +180,7 @@
             }
             this.savedSpellcheckAttrib = document.body.spellcheck;
             document.body.spellcheck = false;
-            var editContext = this.editorKernel.getEditContext();
-            CUI.rte.Eventing.on(editContext, document.body, "keyup", this.handleKeyUp, this);
+            this.initializeEventHandling();
             var initialContent = this.options.initialContent || this.$textContainer.html();
             this.$textContainer[0].contentEditable = "true";
             var ua = CUI.rte.Common.ua;
@@ -136,8 +193,8 @@
 
         finish: function() {
             var editedContent = this.editorKernel.getProcessedHtml();
+            this.finalizeEventHandling();
             this.deactivateEditorKernel();
-            CUI.rte.Eventing.un(document.body, "keyup", this.handleKeyUp, this);
             this.$textContainer.removeClass("edited");
             // TODO CQ.WCM.unloadToolbar();
             this.textContainer.blur();
@@ -156,7 +213,18 @@
 
     // Register ...
     CUI.util.plugClass(CUI.RichText, "richEdit", function(rte) {
-        rte.start();
+        var configPath = $(this).attr("data-config");
+        var config;
+        if (configs.hasOwnProperty(configPath)) {
+            config = configs[configPath];
+            rte.start(config);
+        } else {
+            $.getJSON(configPath, function(data) {
+                configs[configPath] = data;
+                rte.start(data);
+            });
+        }
+
     });
 
     // Data API

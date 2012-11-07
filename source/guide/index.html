@@ -36,7 +36,7 @@
         </nav>
 
         <div class="drawer">
-            <div class="badge">v0.4.0-SNAPSHOT</div>
+            <div class="badge">v0.5.0-SNAPSHOT</div>
         </div>
 
     </header>
@@ -98,6 +98,7 @@
                         <a href="#Buttons">Buttons</a>
                         <a href="#TextField">Text field</a>
                         <a href="#TextArea">Text area</a>
+                        <a href="#PasswordField">Password field</a>
                         <a href="#SearchField">Search field</a>
                         <a href="#Filters">Filters</a>
                         <a href="#Checkbox">Checkbox</a>
@@ -135,7 +136,7 @@
                     <a class="heading" href="#Dialogs">Dialogs</a>
 
                     <nav class="fold">
-                        <a href="#Modal">Modal</a>
+                        <a href="#ModalDialog">Modal</a>
                         <a href="#Popover">Popover</a>
                  </nav>
                 </section>
@@ -620,6 +621,7 @@
   &lt;a href=&quot;#&quot;&gt;Current Page Title&lt;/a&gt;
 &lt;/nav&gt;
 </pre>
+                  </div>
                 </section>
 
                 <section id="Pulldown">
@@ -726,14 +728,14 @@
                     <div class="componentSample buttonSample">
                         <div class="example">
 
-                            <a class="button" role="button" href="#Buttons">Action</a>
+                            <a class="button" role="button" href="#">Action</a>
                             <button class="primary">Primary Action</button>
                             <button class="warning">Warning</button>
                             <button disabled>Disabled</button>
 
                         </div>
                         <pre class="prettyprint linenums">
-&lt;a class=&quot;button&quot;&gt;Action&lt;/a&gt;
+&lt;a class=&quot;button&quot; role=&quot;button&quot; href=&quot;#&quot;&gt;Action&lt;/a&gt;
 &lt;button class=&quot;primary&quot;&gt;Primary Action&lt;/button&gt;
 &lt;button class=&quot;warning&quot;&gt;Warning&lt;/button&gt;
 &lt;button disabled&gt;Disabled&lt;/button&gt;
@@ -773,8 +775,9 @@
 &lt;input type=&quot;text&quot; placeholder=&quot;Text Field&quot;&gt;
 &lt;input type=&quot;text&quot; class=&quot;error&quot;&gt;
 &lt;input type=&quot;text&quot; disabled&gt;</pre>
-                    </div>
-                </section>
+
+          </div>
+        </section>
 
                 <section id="TextArea">
                     <h2 class="line">Text Area</h2>
@@ -811,20 +814,89 @@
                     </div>
                 </section>
 
-                <section class="hidden" id="SearchField">
-                    <h2 class="line">Search Field</h2>
-                    <p>Search.</p>
+                <section id="PasswordField">
+                    <h2 class="line">Password Field</h2>
+                    <p>Password input variants.</p>
 
                     <div class="componentSample">
                         <div class="example">
-
-                            <div class="search">
+                            <div class="textfieldSample">
+                                <div class="sampleTitle left">Standard</div>
+                                <label>Password</label>
+                                <input type="password">
                             </div>
-
+                            <div class="textfieldSample">
+                                <div class="sampleTitle left">Title-less</div>
+                                <label>&nbsp;</label>
+                                <input type="password" placeholder="Enter password">
+                            </div>
+                            <div class="textfieldSample">
+                                <div class="sampleTitle left">Error</div>
+                                <label>&nbsp;</label>
+                                <input class="error" type="password">
+                            </div>
+                            <div class="textfieldSample">
+                                <div class="sampleTitle left">Disabled</div>
+                                <label>&nbsp;</label>
+                                <input disabled type="password">
+                            </div>
                         </div>
-                        <pre class="prettyprint linenums"></pre>
+                        <pre class="prettyprint linenums">
+&lt;input type=&quot;password&quot;&gt;
+&lt;input type=&quot;password&quot; placeholder=&quot;Enter password&quot;&gt;
+&lt;input type=&quot;password&quot; class=&quot;error&quot;&gt;
+&lt;input type=&quot;password&quot; disabled&gt;</pre>
                     </div>
                 </section>
+
+                <section id="SearchField">
+                    <h2 class="line">Search Field</h2>
+                    <p>Search.</p>
+                    <div class="componentSample">
+                        <div class="example">
+
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Standard</div>
+                                <div class="searchfield">
+                                    <div class="search">
+                                        <input type="text" placeholder="Search"/>
+                                        <button type="button" label=""/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Error</div>
+                                <div class="searchfield">
+                                    <div class="search">
+                                        <input type="text" class="error" placeholder="Search"/>
+                                        <button type="button" label=""/>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Disabled</div>
+                                <div class="searchfield">
+                                    <div class="search">
+                                        <input type="text" placeholder="Search" disabled/>
+                                        <button type="button" label="" disabled/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<pre class="prettyprint linenums">
+&lt;div class=&quot;search&quot;&gt;
+  &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot;&gt;
+  &lt;button type=&quot;button&quot; label=&quot;&quot;&gt;
+  &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot; class=&quot;error&quot;&gt;
+  &lt;button type=&quot;button&quot; label=&quot;&quot; class=&quot;error&quot;&gt;
+  &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot; disabled &gt;
+  &lt;button type=&quot;button&quot; label=&quot;&quot; disabled &gt;
+&lt;/div&gt;</pre>
+          </div>
+        </section>
                 
                 <section id="Filters">
                             <h2 class="line">Filters</h2>
@@ -1588,7 +1660,7 @@
                 <h1 class="line">Dialogs</h1>
                 <p>CUI provides various dialogs.</p>
 
-                <section id="Modal">
+                <section id="ModalDialog">
                     <h2 class="line">Modal</h2>
                     <p>Modals pop over the whole page and prevent interaction underneath them.</p>
                     <p>Modals will progressively enhance existing markup or render their own template if no markup is present. See <a href="jsdoc/index.html">the documentation</a> for more examples.<p>

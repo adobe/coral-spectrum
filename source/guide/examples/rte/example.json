@@ -1,0 +1,7 @@
+{
+    "rtePlugins": {
+        "format": {
+            "features": "*"
+        }
+    }
+}

@@ -70,18 +70,17 @@
         
         var position = $link.position();
         var size = {
-            width: $link.width(),
+            width: $popover.width(),
             height: $link.height()
         };
 
         var top = position.top + size.height + 15;
-        var left = position.left + 5;
+        var left = position.left + $link.width() - size.width + 5;
         var marginLeft = size.width - 30;
 
         $popover.css({
             top: top,
-            left: left,
-            width: size.width
+            left: left
         });
         
         $('.popover.arrow-top::before').css({
@@ -90,7 +89,7 @@
     }
     
   });
-  
+
   CUI.util.plugClass(CUI.Pulldown);
 
   // Data API

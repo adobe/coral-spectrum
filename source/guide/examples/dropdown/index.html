@@ -4,13 +4,13 @@
         <title>Filters &amp; Tags – Single Term examples</title>
 
         <link rel="stylesheet" href="../../css/cui.css">
- 
+        
         <script src="../../js/libs/underscore.js"></script>
         <script src="../../js/libs/handlebars.js"></script>
         <script src="../../js/libs/jquery.js"></script>
-        <script src="../../js/libs/toe.js"></script>
         <script src="../../js/libs/jquery-fingerpointer.js"></script>
-
+        <script src="../../js/libs/toe.js"></script>
+  
         <script src="../../js/CUI.js"></script>
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -18,37 +18,58 @@
     <body>
 
         <section>
-            <h1>Dropdowns</h1>
-        
-            <div data-init="dropdown" class="dropdown" data-placeholder="Choose a single material for your product">
-                <select>
-                    <option>glass</option>
-                    <option>porcelain</option>
-                    <option>wood</option>
-                    <option>metal</option>
-                    <option>plastic</option>
-                    <option>leather</option>
+            <h1>Dropdowns</h1><!-- Standard Single select -->
+            <div class="dropdown" data-init="dropdown">
+                <button>Single Select</button>
+                <select name="dropdown">
+                    <option>Single One</option>
+                    <option selected>Single Two</option>
+                    <option>Single Three</option>
                 </select>
             </div>
-
-            <div data-init="dropdown" class="dropdown" data-multiple="true" data-placeholder="Choose one or more materials for your product">
-                <select>
-                    <option>glass</option>
-                    <option>porcelain</option>
-                    <option>wood</option>
-                    <option>metal</option>
-                    <option>plastic</option>
-                    <option>leather</option>
+            <br />
+            
+            <!-- Multi select -->
+            <div class="dropdown" data-init="dropdown">
+                <button>Multi Select</button>
+                <select name="dropdown2" multiple>
+                    <option>Multi One</option>
+                    <option selected>Multi Two</option>
+                    <option>Multi Three</option>
                 </select>
             </div>
-            <div data-init="dropdown" class="dropdown" data-editable="true" data-placeholder="Type the material for your product">
-                <select>
-                    <option>glass</option>
-                    <option>porcelain</option>
-                    <option>wood</option>
-                    <option>metal</option>
-                    <option>plastic</option>
-                    <option>leather</option>
+            <br />
+            
+            <!-- Editable -->
+            <div class="dropdown dropdown-editable" data-editable="true" data-init="dropdown">
+                <input type="text" placeholder="Editable Select">
+                <button>Editable</button>
+                <select name="dropdown3">
+                    <option>Edit One</option>
+                    <option>Edit Two</option>
+                    <option>Edit Three</option>
+                </select>
+            </div>
+            <br />
+            
+            <!-- Disabled -->
+            <div class="dropdown" data-init="dropdown" data-disabled="true">
+                <button>Disabled</button>
+                <select name="dropdown4">
+                    <option>One</option>
+                    <option>Two</option>
+                    <option>Three</option>
+                </select>
+            </div>
+            <br />
+            
+            <!-- Error -->
+            <div class="dropdown error" data-init="dropdown">
+                <button>Error</button>
+                <select name="dropdown5" >
+                    <option>One</option>
+                    <option>Two</option>
+                    <option>Three</option>
                 </select>
             </div>
         </section>

@@ -16,6 +16,40 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-(function() {
-    CUI.rte.ui.ToolkitRegistry.initialize("cui");
-})();
+CUI.rte.ui.cui.CuiDialogHelper = new Class({
+
+    toString: "CuiDialogHelper",
+
+    extend: CUI.rte.ui.DialogHelper,
+
+    /**
+     * @protected
+     */
+    instantiateDialog: function(dialogConfig) {
+        return { };
+    },
+
+    createItem: function(type, name, label) {
+        return { };
+    },
+
+    getItemType: function(item) {
+        return "unknown";
+    },
+
+    getItemName: function(item) {
+        if (!item.id) {
+            item.id = "id-" + new Date().getTime();
+        }
+        return item.id;
+    },
+
+    getItemValue: function(item) {
+        return item.value;
+    },
+
+    setItemValue: function(item, value) {
+        item.value = value;
+    }
+
+});

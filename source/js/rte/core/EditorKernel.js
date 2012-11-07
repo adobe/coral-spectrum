@@ -549,7 +549,7 @@ CUI.rte.EditorKernel = new Class({
         var sel = CUI.rte.Selection;
         var com = CUI.rte.Common;
         var context = this.getEditContext();
-        if (com.ua.isIE && this.lastKnownBookmark) {
+        if (com.ua.isOldIE && this.lastKnownBookmark) {
             if (!this.hasFocus) {
                 this.focus();
             }
@@ -938,7 +938,7 @@ CUI.rte.EditorKernel = new Class({
     onEditorEvent: function(e) {
         var com = CUI.rte.Common;
         var ignoreEventForContextMenu = false;
-        if (com.ua.isIE) {
+        if (com.ua.isOldIE) {
             if (e.getType() == "selectionchange") {
                 ignoreEventForContextMenu = true;
                 // store current bookmark to have it available later

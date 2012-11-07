@@ -3,30 +3,30 @@
 <head>
   <title>CUI RichTextEditor</title>
 
-  <link rel="stylesheet" href="../css/cui.css">
-  <link rel="stylesheet" href="assets/google-code-prettify/prettify.css">
-  <link rel="stylesheet" href="assets/guide.css">
+  <link rel="stylesheet" href="../../css/cui.css">
+  <link rel="stylesheet" href="../assets/google-code-prettify/prettify.css">
+  <link rel="stylesheet" href="../assets/guide.css">
 
   <!-- Dependencies -->
-  <script src="../js/libs/handlebars.js"></script>
-  <script src="../js/libs/jquery.js"></script>
-  <script src="../js/libs/jquery-fingerpointer.js"></script>
-  <script src="../js/libs/toe.js"></script>
+  <script src="../../js/libs/handlebars.js"></script>
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/libs/jquery-fingerpointer.js"></script>
+  <script src="../../js/libs/toe.js"></script>
 
   <!-- CoralUI, including RTE -->
-  <script src="../js/CUI.js"></script>
-  <script src="../js/rte-for-cui.js"></script>
+  <script src="../../js/CUI.js"></script>
+  <script src="../../js/rte-for-cui.js"></script>
 
   <!-- Guide JS -->
-  <script src="assets/guide.js"></script>
-  <script src="assets/google-code-prettify/prettify.js"></script>
+  <script src="../assets/guide.js"></script>
+  <script src="../assets/google-code-prettify/prettify.js"></script>
 
 </head>
 <body>
 
   <header class="top">
 
-    <div class="logo"><img src="../images/theme/cloudui.png" alt="CoralUI logo"></div>
+    <div class="logo"><img src="../../images/theme/cloudui.png" alt="CoralUI logo"></div>
 
     <nav>
       <a href="#" class="selected">RichTextEditing</a>
@@ -34,7 +34,7 @@
     </nav>
 
     <div class="drawer">
-      <div class="badge">v0.4.0-SNAPSHOT</div>
+      <div class="badge">v0.5.0-SNAPSHOT</div>
     </div>
 
   </header>
@@ -67,7 +67,14 @@
 
       <section id="General">
         <h2 class="line" id="rte01">Simple RTE</h2>
-          <div class="editable">
+          <nav class="toolbar">
+              <div class="left icongroup">
+                  <a href="#format" data-rte-command="bold" tabindex="-1" class="button rte-toolbar-item rte-tb-bold rte-tbi-disabled">B</a>
+                  <a href="#format" data-rte-command="italic" tabindex="-1" class="button rte-toolbar-item rte-tb-italic rte-tbi-disabled">i</a>
+                  <a href="#format" data-rte-command="underline" tabindex="-1" class="button rte-toolbar-item rte-tb-underline rte-tbi-disabled">U</a>
+              </div>
+          </nav>
+          <div class="editable" data-config="example.json">
              <p>Li Europan lingues es membres del sam familie. Lor separat existentie es
              un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular.
              Li lingues differe solmen in li grammatica, li pronunciation e li plu commun

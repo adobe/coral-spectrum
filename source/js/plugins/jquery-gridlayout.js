@@ -81,6 +81,10 @@
 
     $.CUIGridLayout.prototype = {
 
+        option:function(options) {
+            this.options = $.extend({}, $.CUIGridLayout.settings, options);
+        },
+
         // sets up widget
         _create:function (options) {
 
