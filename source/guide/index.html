@@ -136,7 +136,7 @@
                     <a class="heading" href="#Dialogs">Dialogs</a>
 
                     <nav class="fold">
-                        <a href="#Modal">Modal</a>
+                        <a href="#ModalDialog">Modal</a>
                         <a href="#Popover">Popover</a>
                  </nav>
                 </section>
@@ -621,6 +621,7 @@
   &lt;a href=&quot;#&quot;&gt;Current Page Title&lt;/a&gt;
 &lt;/nav&gt;
 </pre>
+                  </div>
                 </section>
 
                 <section id="Pulldown">
@@ -774,8 +775,9 @@
 &lt;input type=&quot;text&quot; placeholder=&quot;Text Field&quot;&gt;
 &lt;input type=&quot;text&quot; class=&quot;error&quot;&gt;
 &lt;input type=&quot;text&quot; disabled&gt;</pre>
-                    </div>
-                </section>
+
+          </div>
+        </section>
 
                 <section id="TextArea">
                     <h2 class="line">Text Area</h2>
@@ -847,20 +849,54 @@
                     </div>
                 </section>
 
-                <section class="hidden" id="SearchField">
+                <section id="SearchField">
                     <h2 class="line">Search Field</h2>
                     <p>Search.</p>
-
                     <div class="componentSample">
                         <div class="example">
 
-                            <div class="search">
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Standard</div>
+                                <div class="searchfield">
+                                    <div class="search">
+                                        <input type="text" placeholder="Search"/>
+                                        <button type="button" label=""/>
+                                    </div>
+                                </div>
                             </div>
 
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Error</div>
+                                <div class="searchfield">
+                                    <div class="search">
+                                        <input type="text" class="error" placeholder="Search"/>
+                                        <button type="button" label=""/>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Disabled</div>
+                                <div class="searchfield">
+                                    <div class="search">
+                                        <input type="text" placeholder="Search" disabled/>
+                                        <button type="button" label="" disabled/>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <pre class="prettyprint linenums"></pre>
-                    </div>
-                </section>
+<pre class="prettyprint linenums">
+&lt;div class=&quot;search&quot;&gt;
+  &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot;&gt;
+  &lt;button type=&quot;button&quot; label=&quot;&quot;&gt;
+  &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot; class=&quot;error&quot;&gt;
+  &lt;button type=&quot;button&quot; label=&quot;&quot; class=&quot;error&quot;&gt;
+  &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot; disabled &gt;
+  &lt;button type=&quot;button&quot; label=&quot;&quot; disabled &gt;
+&lt;/div&gt;</pre>
+          </div>
+        </section>
                 
                 <section id="Filters">
                             <h2 class="line">Filters</h2>
@@ -1624,7 +1660,7 @@
                 <h1 class="line">Dialogs</h1>
                 <p>CUI provides various dialogs.</p>
 
-                <section id="Modal">
+                <section id="ModalDialog">
                     <h2 class="line">Modal</h2>
                     <p>Modals pop over the whole page and prevent interaction underneath them.</p>
                     <p>Modals will progressively enhance existing markup or render their own template if no markup is present. See <a href="jsdoc/index.html">the documentation</a> for more examples.<p>

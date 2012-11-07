@@ -1,5 +1,2 @@
-# Uncomment for Granite builds the support import
-# less/cui.less
-
-# Fallback to precompiled css
-css/cui.css
+less/cui.less
+less/allIcons.css

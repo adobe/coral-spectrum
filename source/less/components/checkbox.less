@@ -69,23 +69,23 @@ input[type=radio] {
 input[type=checkbox] {
   &.partial + label:before,
   &.partial + span:before {
-    background-image: url('../images/components/checkbox/dash.png');
+    background-image: url('@{component-images-folder}/checkbox/dash.png');
   }
 
   &:checked + label:before,
   &:checked + span:before {
-    background-image: url('../images/components/checkbox/check.png');
+    background-image: url('@{component-images-folder}/checkbox/check.png');
   }
 
   &:disabled {
     &.partial + label:before,
     &.partial + span:before {
-      background-image: url('../images/components/checkbox/dash_disabled.png');
+      background-image: url('@{component-images-folder}/checkbox/dash_disabled.png');
     }
 
     &:checked + label:before,
     &:checked + span:before {
-      background-image: url('../images/components/checkbox/check_disabled.png');
+      background-image: url('@{component-images-folder}/checkbox/check_disabled.png');
     }
   }
 }
@@ -98,13 +98,13 @@ input[type=radio] {
 
   &:checked + span:before,
   &:checked + label:before {
-    background-image: url('../images/components/radio/dot.png');
+    background-image: url('@{component-images-folder}/radio/dot.png');
   }
 
   &:disabled {
     &:checked + span:before,
     &:checked + label:before {
-      background-image: url('../images/components/radio/dot_disabled.png');
+      background-image: url('@{component-images-folder}/radio/dot_disabled.png');
     }
   }
 }
