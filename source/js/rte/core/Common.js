@@ -41,7 +41,8 @@ CUI.rte.Common = function() {
         isW3cIE = isIE && !isOldIE,
         isMac = check(/macintosh|mac os x/),
         isChrome = isWebkit && check(/\bchrome\b/),
-        isSafari = isWebkit && !isChrome && check(/safari/);
+        isSafari = isWebkit && !isChrome && check(/safari/),
+        isTouch = "ontouchstart" in window;
 
     /**
      * Flag if the internal logging mechanism is enabled (used for ieLog())
@@ -314,7 +315,11 @@ CUI.rte.Common = function() {
             /**
              * True if the detected browser is Safari
              */
-            isSafari: isSafari
+            isSafari: isSafari,
+            /**
+             * True if a touch-enabled device is used
+             */
+            isTouch: isTouch
         },
 
         /**
