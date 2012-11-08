@@ -86,7 +86,6 @@
         },
 
         destroy: function() {
-            console.log("Element#destroy");
             this.$ui.off("click.rte.handler");
         }
 
