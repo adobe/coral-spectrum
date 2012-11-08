@@ -33,8 +33,6 @@ CUI.rte.ui.TbStyleSelector = new Class({
 
     styles: null,
 
-    toolbar: null,
-
     _init: function(id, plugin, toggle, tooltip, css, cmdDef, styles) {
         this.inherited(arguments);
         this.styles = styles;
@@ -58,6 +56,10 @@ CUI.rte.ui.TbStyleSelector = new Class({
             }
         }
         return htmlCode;
+    },
+
+    notifyToolbar: function(toolbar) {
+        this.toolbar = toolbar;
     },
 
     getToolbar: function() {

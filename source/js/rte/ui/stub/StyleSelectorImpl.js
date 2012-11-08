@@ -35,6 +35,10 @@ CUI.rte.ui.stub.StyleSelectorImpl = new Class({
         // TODO ...?
     },
 
+    notifyToolbar: function(toolbar) {
+        this.toolbar = toolbar;
+    },
+
     createToolbarDef: function() {
         // TODO ...?
         return [ ];
@@ -54,6 +58,18 @@ CUI.rte.ui.stub.StyleSelectorImpl = new Class({
 
     setRemoveDisabled: function(isDisabled) {
         // TODO ...?
+    },
+
+    setDisabled: function(isDisabled) {
+        // ignore
+    },
+
+    setSelected: function(isSelected, suppressEvent) {
+        this._isSelected = isSelected;
+    },
+
+    isSelected: function() {
+        return this._isSelected;
     }
 
 });

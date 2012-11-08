@@ -16,88 +16,79 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CUI.rte.ui.cui.ElementImpl = new Class({
+(function($) {
 
-    toString: "ElementImpl",
+    CUI.rte.ui.cui.ElementImpl = new Class({
 
-    extend: CUI.rte.ui.TbElement,
+        toString: "ElementImpl",
 
-    dom: null,
+        extend: CUI.rte.ui.TbElement,
 
+        dom: null,
 
-    // Helpers -----------------------------------------------------------------------------
-
-    notifyToolbar: function(toolbar) {
-        this.toolbar = toolbar;
-    },
-
-    notifyGroupBorder: function(isFirst) {
-        var cls = (isFirst ? "CUI_Selector_firstButton" : "CUI_Selector_lastButton");
-        this.dom.addClass(cls)
-    },
+        $ui: null,
 
 
-    // Interface implementation ------------------------------------------------------------
+        notifyGroupBorder: function(isFirst) {
+            // TODO ...?
+        },
 
-    addToToolbar: function(toolbar) {
-        this.notifyToolbar(toolbar);
-        toolbar.add(this.createToolbarDef());
-    },
 
-    createToolbarDef: function() {
-        this.dom = $(document.createElement("button"));
-        this.dom.addClass("CUI_Selector_button");
-        this.dom.attr("tabindex", "-1");
-        this.dom.attr("type", "button");
-        var self = this;
-        this.dom.on("click", function() {
-            var editContext = self.plugin.editorKernel.getEditContext();
-            var cmd = (self.cmdDef ? self.cmdDef.cmd : self.id);
-            var cmdValue = (self.cmdDef ? self.cmdDef.cmdValue : undefined);
-            var env = {
-                "editContext": editContext
+        // Interface implementation ------------------------------------------------------------
+
+        addToToolbar: function(toolbar) {
+            // not used here
+        },
+
+        notifyToolbar: function(toolbar) {
+            this.toolbar = toolbar;
+            var pluginId = this.plugin.pluginId;
+            var $cont = $(toolbar.getToolbarContainer());
+            this.$ui = $cont.find('a[href="#' + pluginId + '"][data-rte-command="' + this.id
+                    + '"]');
+            this.$ui.bind("click.rte.handler", CUI.rte.Utils.scope(function(e) {
+                var editContext = this.plugin.editorKernel.getEditContext();
+                var cmd = (this.cmdDef ? this.cmdDef.cmd : this.id);
+                var cmdValue = (this.cmdDef ? this.cmdDef.cmdValue : undefined);
+                var env = {
+                    "editContext": editContext
+                };
+                this.plugin.execute(cmd, cmdValue, env);
+            }, this));
+        },
+
+        createToolbarDef: function() {
+            return {
+                "id": this.id,
+                "element": this
             };
-            self.plugin.execute(cmd, cmdValue, env);
-        });
-        var img = $(document.createElement("img"));
-        var src = CUI.rte.Utils.processUrl(CUI.rte.Utils.getBlankImageUrl(),
-                CUI.rte.Utils.URL_IMAGE);
-        img.attr("src", src);
-        img.attr("style", "width: 16px; height: 16px;");
-        img.addClass(this.css);
-        this.dom.append(img);
-        return {
-            "itemId": this.id,
-            "dom": this.dom
-        };
-    },
+        },
 
-    setDisabled: function(isDisabled) {
-        if (isDisabled) {
-            if (!this.dom.hasClass("disabled")) {
-                this.dom.addClass("disabled");
+        setDisabled: function(isDisabled) {
+            if (isDisabled) {
+                this.$ui.addClass(CUI.rte.Theme.TOOLBARITEM_DISABLED_CLASS);
+            } else {
+                this.$ui.removeClass(CUI.rte.Theme.TOOLBARITEM_DISABLED_CLASS);
             }
-        } else {
-            if (this.dom.hasClass("disabled")) {
-                this.dom.removeClass("disabled");
+        },
+
+        setSelected: function(isSelected, suppressEvent) {
+            this._isSelected = isSelected;
+            if (isSelected) {
+                this.$ui.addClass(CUI.rte.Theme.TOOLBARITEM_SELECTED_CLASS);
+            } else {
+                this.$ui.removeClass(CUI.rte.Theme.TOOLBARITEM_SELECTED_CLASS);
             }
+        },
+
+        isSelected: function() {
+            return this._isSelected;
+        },
+
+        destroy: function() {
+            this.$ui.off("click.rte.handler");
         }
-    },
 
-    setSelected: function(isSelected, suppressEvent) {
-        if (isSelected) {
-            if (!this.dom.hasClass("down")) {
-                this.dom.addClass("down");
-            }
-        } else {
-            if (this.dom.hasClass("down")) {
-                this.dom.removeClass("down");
-            }
-        }
-    },
+    });
 
-    isSelected: function() {
-        return this.dom.hasClass("down");
-    }
-
-});
+})(window.jQuery);

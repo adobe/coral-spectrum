@@ -148,7 +148,10 @@ module.exports = function(grunt) {
       'rte/ui/cui/CuiToolbarBuilder.js',
       'rte/ui/cui/CmItemImpl.js',
       'rte/ui/cui/CmSeparatorImpl.js',
-      'rte/ui/cui/StubContextMenuBuilder.js',
+      'rte/ui/cui/CuiContextMenuBuilder.js',
+      'rte/ui/cui/CuiDialogManager.js',
+      'rte/ui/cui/CuiDialogHelper.js',
+
       'rte/ui/stub/ToolkitImpl.js',
       'rte/ui/stub/ToolbarImpl.js',
       'rte/ui/stub/ElementImpl.js',

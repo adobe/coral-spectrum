@@ -22,66 +22,34 @@ CUI.rte.ui.cui.CuiContextMenuBuilder = new Class({
 
     extend: CUI.rte.ui.ContextMenuBuilder,
 
-    posContainer: null,
-
-    visible: false,
 
     construct: function(editorKernel) {
-        this.visible = false;
+        // TODO ...?
     },
 
     build: function(selectionContext, context) {
-        var tk = CUI.rte.ui.ToolkitRegistry.get("cui");
-        this.posContainer = $(document.createElement("div"));
-        this.posContainer.css("position", "absolute");
-        this.posContainer.css("z-index", "15000");
-        this.menu = this.menu = tk.createMenu({
-            "parent": this.posContainer
-        });
-        var itemCnt = this.items.length;
-        if (itemCnt == 0) {
-            return null;
-        }
-        var items = [ ];
-        for (var i = 0; i < itemCnt; i++) {
-            var itemToBuild = this.items[i];
-            itemToBuild.build(items, this.editorKernel, context, selectionContext);
-        }
-        this.menu.addItems(items);
-        this.menu.render();
-        return this.menu;
+        // TODO ...?
+        return { };
     },
 
     createItem: function(config) {
-        return new CUI.rte.ui.cui.CmItemImpl(config);
+        return new CUI.rte.ui.stub.CmItemImpl(config);
     },
 
     createSeparator: function() {
-        return new CUI.rte.ui.cui.CmSeparatorImpl();
+        return new CUI.rte.ui.stub.CmSeparatorImpl();
     },
 
     showAt: function(x, y) {
-        var parent = $(document.body);
-        this.posContainer.offset({
-            "left": x,
-            "top": y
-        });
-        parent.append(this.posContainer);
-        this.menu.show();
-        this.visible = true;
+        // TODO ...?
     },
 
     hideAll: function() {
-        if (this.posContainer) {
-            this.menu.hide();
-            this.posContainer.remove();
-            this.posContainer = null;
-            this.visible = false;
-        }
+        // TODO ...?
     },
 
     isVisible: function() {
-        return (this.posContainer != null) && this.visible;
+        return false;
     }
 
 });

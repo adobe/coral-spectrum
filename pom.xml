@@ -228,27 +228,6 @@
                 </configuration>
             </plugin>
 
-            <!-- ensure that grunt runs to validate (and build the icons and templates) -->
-            <plugin>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.1</version>
-                <executions>
-                    <execution>
-                        <phase>validate</phase>
-                        <configuration>
-                            <tasks>
-                                <exec dir="${basedir}" executable="grunt" failonerror="true">
-                                    <arg line="full" />
-                                </exec>
-                            </tasks>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
             <!-- ====================================================================== -->
             <!-- V A U L T   P A C K A G E   P L U G I N                                -->
             <!-- ====================================================================== -->
@@ -271,7 +250,73 @@
     <!-- ====================================================================== -->
     <!-- D E P E N D E N C I E S                                                -->
     <!-- ====================================================================== -->
-
     <dependencies>
     </dependencies>
+
+    <profiles>
+        <!-- 'install' profile. allows to run install during releasing -->
+        <profile>
+            <id>install</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <!-- ensure that grunt runs to validate (and build the icons and templates) -->
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.1</version>
+                        <executions>
+                            <execution>
+                                <phase>validate</phase>
+                                <configuration>
+                                    <tasks>
+                                        <exec dir="${basedir}" executable="sh" failonerror="true">
+                                            <arg line="install.sh" />
+                                        </exec>
+                                    </tasks>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <!-- 'grunt' profile. allows to skip grunt with -P-grunt -->
+        <profile>
+            <id>grunt</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <!-- ensure that grunt runs to build the icons and templates and validate the sources -->
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.1</version>
+                        <executions>
+                            <execution>
+                                <phase>generate-sources</phase>
+                                <configuration>
+                                    <tasks>
+                                        <exec dir="${basedir}" executable="grunt" failonerror="true">
+                                            <arg line="full" />
+                                        </exec>
+                                    </tasks>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

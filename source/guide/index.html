@@ -1725,12 +1725,20 @@
                     <h2 class="line">Popover</h2>
                     <p>Popovers (WIP).</p>
 
-                    <div class="componentSample">
-                        <div class="example" style="position: relative; height: 3rem; padding-top: 1.5rem;">
-                            <div class="popover arrow-bottom">Popover content!</div>
-                            <div class="popover arrow-top" style="left: 10rem">Popover content!</div>
-                        </div>
-                        <pre class="prettyprint linenums">
+          <div class="componentSample" style="overflow: visible;">
+            <div class="example" style="position: relative; padding: 5rem;">
+              <a href="#first_popover" data-toggle="popover" data-point-from="right" data-align-from="left">Right popover</a>
+              <a href="#second_popover" data-toggle="popover" data-point-from="left" data-align-from="right">Left popover</a>
+              <a href="#third_popover" data-toggle="popover" data-point-from="top" data-align-from="left">Top popover</a>
+              <a href="#fourth_popover" data-toggle="popover" data-point-from="bottom" data-align-from="right">Bottom popover</a>
+
+              <div id="first_popover" class="popover"><div style="padding: 2rem; width: 16rem;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida.</div></div>
+              <div id="second_popover" class="popover">Short popover content.</div>
+              <div id="third_popover" class="popover"><div style="width: 24rem;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. <a href="#">Link!</a></div></div>
+              <div id="fourth_popover" class="popover"><div style="width: 20rem;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. <a href="#">Link!</a></div></div>
+
+            </div>
+            <pre class="prettyprint linenums">
 &lt;div class=&quot;popover arrow-bottom&quot;&gt;Popover content&lt;/div&gt;
 &lt;div class=&quot;popover arrow-top&quot;&gt;Popover content&lt;/div&gt;
 </pre>

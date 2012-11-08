@@ -619,7 +619,7 @@ CUI.rte.EditorKernel = new Class({
         if (context.isInitialized() && this.isEnabled) {
             var doc = context.doc;
             // deferred execution handlers - no workarounds here; performance-intense
-            // operations are explicitly welcome for deffered execution!
+            // operations are explicitly welcome for deferred execution!
             if (com.ua.isIE) {
                 // IE must use selectionchange event to react on selection/caret changes,
                 // otherwise we get invalid selections when clicking inside an existing
@@ -634,6 +634,12 @@ CUI.rte.EditorKernel = new Class({
                                 return;
                             }
                             this.firePluginEvent("deferredkeyup", e, true);
+                        },
+                        "mousedown": function(e) {
+                            if (this.isEventingDisabled) {
+                                return;
+                            }
+                            this.firePluginEvent("deferredmousedown", e, true);
                         },
                         "mouseup": function(e) {
                             if (this.isEventingDisabled) {
@@ -653,30 +659,57 @@ CUI.rte.EditorKernel = new Class({
                                 return;
                             }
                             this.firePluginEvent("deferredkeyup", e, true);
-                        },
-                        "mouseup": function(e) {
-                            this.onEditorEvent(e);
-                            if (this.isEventingDisabled) {
-                                 return;
-                            }
-                            this.firePluginEvent("deferredmouseup", e, true);
                         }
                     }, this, {
                         "buffer": 100
                     });
+                if (!com.ua.isTouch) {
+                    this.registerHandlers(doc, {
+                            "mousedown": function(e) {
+                                if (this.isEventingDisabled) {
+                                    return;
+                                }
+                                this.firePluginEvent("deferredmousedown", e, true);
+                            },
+                            "mouseup": function(e) {
+                                this.onEditorEvent(e);
+                                if (this.isEventingDisabled) {
+                                     return;
+                                }
+                                this.firePluginEvent("deferredmouseup", e, true);
+                            }
+                        }, this, {
+                            "buffer": 100
+                        });
+                } else {
+                    // touchstart/touchend are mapped to corresponding mousedown/mouseup
+                    // events
+                    this.registerHandlers(doc, {
+                            "touchstart": function(e) {
+                                if (this.isEventingDisabled) {
+                                    return;
+                                }
+                                this.firePluginEvent("deferredmousedown", e, true);
+                            },
+                            "touchend": function(e) {
+                                this.onEditorEvent(e);
+                                if (this.isEventingDisabled) {
+                                     return;
+                                }
+                                this.firePluginEvent("deferredmouseup", e, true);
+                            }
+                        }, this, {
+                            "buffer": 100
+                        });
+                }
             }
+            // keydown is the same across all browsers and all device categories
             this.registerHandlers(doc, {
                     "keydown": function(e) {
                         if (this.isEventingDisabled) {
                             return;
                         }
                         this.firePluginEvent("deferredkeydown", e, true);
-                    },
-                    "mousedown": function(e) {
-                        if (this.isEventingDisabled) {
-                            return;
-                        }
-                        this.firePluginEvent("deferredmousedown", e, true);
                     }
                 }, this, {
                     "buffer": 100
@@ -750,7 +783,26 @@ CUI.rte.EditorKernel = new Class({
                             e.stopEvent();
                             this.deferFocus();
                         }
-                    },
+                    }
+                }, this);
+
+            // Mouse/Touch Events; fired directly
+            if (com.ua.isTouch) {
+                this.registerHandlers(doc, {
+                    "touchstart": function(e) {
+                        if (this.isEventingDisabled) {
+                            return;
+                        }
+                        this.firePluginEvent("mousedown", e, false);
+                    }, "touchend": function(e) {
+                        if (this.isEventingDisabled) {
+                            return;
+                        }
+                        this.firePluginEvent("mouseup", e, false);
+                    }
+                }, this);
+            } else {
+                this.registerHandlers(doc, {
                     "mousedown": function(e) {
                         if (this.isEventingDisabled) {
                             return;
@@ -764,7 +816,9 @@ CUI.rte.EditorKernel = new Class({
                         this.firePluginEvent("mouseup", e, false);
                     }
                 }, this);
+            }
 
+            // Focus-Events, fired immediately
             this.registerHandlers(this.getFocusDom(context), {
                     "focus": function(e) {
                         this.onFocus(e);
@@ -774,6 +828,7 @@ CUI.rte.EditorKernel = new Class({
                     }
                 }, this);
 
+            // Other Events, fired immediately
             this.registerHandlers(doc.body, {
                 "paste": function(e) {
                     this.onPaste(e);
@@ -1406,7 +1461,7 @@ CUI.rte.EditorKernel = new Class({
         if (!selection) {
             return null;
         }
-        isSelection = sel.isSelection(selection);
+        var isSelection = sel.isSelection(selection);
         // Use normalized selection if we have a selection to ensure
         // start node does not point "behind" a node, but points to the
         // first actually included node. If the selection represents a caret,
@@ -1692,6 +1747,8 @@ CUI.rte.EditorKernel = new Class({
      * @param {Object} options (optional) kernel-specific options
      */
     createToolbar: function(options) {
+        options = options || { };
+        options.editorKernel = this;
         var tbBuilder = this.createToolbarBuilder();
         for (var pluginId in this.registeredPlugins) {
             if (this.registeredPlugins.hasOwnProperty(pluginId)) {
