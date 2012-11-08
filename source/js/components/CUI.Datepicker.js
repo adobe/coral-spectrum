@@ -212,7 +212,7 @@
         if(this._isDateEnabled()) this._renderCalendar();
 
         var left = this.$openButton.position().left + this.$openButton.width() / 2 - (this.$element.find(".popover").width() / 2);
-        var top = this.$openButton.position().top + this.$openButton.outerHeight() + 10;
+        var top = this.$openButton.position().top + this.$openButton.outerHeight() + 16;
         //if (left < 0) left = 0;
         this.$element.find(".popover").css(
                 {"position": "absolute",
