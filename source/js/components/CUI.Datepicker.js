@@ -43,67 +43,36 @@
         
         //if (this.options.selectedDateTime) this.setDateTime(this._formatDate(this.options.selectedDateTime));
         if(!this.isMobileAndSupportsInputType) this._switchInputTypeToText(this.$input);
-        
-        this.$element.on("click", function() {
-            if (this.options.disabled) return;
-            this.$input.focus();
-        }.bind(this));
-        
+
         var timeout = null;
-        this.$element.on("focus", "input", function() {
-            if (this.options.disabled) return;
-            this.$element.addClass("focus");
-            if(!this.isMobileAndSupportsInputType) {
-                if (timeout) {
-                    // Picker is currently shown, just leave it!
-                    clearTimeout(timeout);
-                    timeout = null;
-                    return;
+        var $input = this.$element.find('input').first();
+        var $btn = this.$element.find('button').first();
+        var $popover = this.$element.find('.popover').first();
+
+        if (!this.options.disabled) {
+            $('body').on('click', function(){
+                if (this.keepShown === false) {
+                    this._hidePicker();
                 }
-                this._readInputVal();
-                this._showPicker();
-            } else {
-                this._openNativeInput();
-            }
-        }.bind(this));
-        
-        this.$element.on("change", "input", function() {
+            }.bind(this));
+
+            this.$element.click(function(event){
+                this._openPicker();
+
+                // let the event time to propagate.
+                this.keepShown = true;
+                setTimeout(function() {
+                    this.keepShown = false;
+                }.bind(this), 200);
+
+            }.bind(this));
+        }
+
+        $input.on("change", function() {
             if (this.options.disabled) return;
             this.displayDateTime = this.options.selectedDateTime = new Date(this.$input.val());
             this._renderCalendar();
         }.bind(this));
-        
-        this.$element.on("blur", "input", function() {
-            if (this.options.disabled) return;
-            if(this._isTimeEnabled()) {
-                this.$timeDropdowns.each(function(i) {
-                    if($(this).find("button").is(":focus")) return;
-                });
-            }
-            this.$element.removeClass("focus");
-            timeout = setTimeout(function() {
-                timeout = null;
-                this._hidePicker();
-            }.bind(this), 200);
-            
-        }.bind(this));
-
-        if(this._isTimeEnabled()) {
-            this.$timeButtons.on("click", function(event) {
-                event.stopPropagation();
-                if (timeout) {
-                    clearTimeout(timeout);
-                    timeout = null;
-                }
-            }.bind(this));
-            this.$timeButtons.on("dropdown-list:select", "", function(event) {
-                var date = this.options.selectedDateTime.getFullYear() + '-' +
-                            (1 + this.options.selectedDateTime.getMonth()) + '-' +
-                            this.options.selectedDateTime.getDate();
-
-                this._setDateTime(date, this._getTimeFromInput());
-            }.bind(this));
-        }
 
         // Move around
         this.$element.find(".calendar").on("swipe", function(event) {
@@ -116,16 +85,28 @@
                 this._renderCalendar("right");                
             }         
         }.bind(this));
+
         this.$element.on("mousedown", ".next-month", function(event) {
             event.preventDefault();
             this.displayDateTime = new Date(this.displayDateTime.getFullYear(), this.displayDateTime.getMonth() + 1, 1);
             this._renderCalendar("left");
         }.bind(this));
+
         this.$element.on("mousedown", ".prev-month", function(event) {
             event.preventDefault();
             this.displayDateTime = new Date(this.displayDateTime.getFullYear(), this.displayDateTime.getMonth() - 1, 1);
             this._renderCalendar("right");
         }.bind(this));
+
+        if(this._isTimeEnabled()) {
+           this.$timeButtons.on("dropdown-list:select", "", function(event) {
+               var date = this.options.selectedDateTime.getFullYear() + '-' +
+                           (1 + this.options.selectedDateTime.getMonth()) + '-' +
+                           this.options.selectedDateTime.getDate();
+ 
+               this._setDateTime(date, this._getTimeFromInput());
+            }.bind(this));
+        }
     },
     
     defaults: {
@@ -187,6 +168,17 @@
         
         // TODO: Keyboard actions
     },
+
+    _openPicker: function() {
+        this.$element.addClass("focus");
+
+        if(!this.isMobileAndSupportsInputType) {
+            this._readInputVal();
+            this._showPicker();
+        } else {
+            this._openNativeInput();
+        }
+    },
     
     _showPicker: function() {
         if(this._isDateEnabled()) this._renderCalendar();
@@ -203,6 +195,7 @@
     },
     
     _hidePicker: function() {
+        this.$element.removeClass("focus");
         this.$element.find(".popover").hide();
         this.pickerShown = false;
     },
