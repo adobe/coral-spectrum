@@ -5,8 +5,36 @@
     
     /**
       @extends CUI.Widget
-      @classdesc A date picker widget
-        
+      @classdesc A datepicker widget
+         
+        <p>
+            <div class="datepicker" data-init="datepicker">
+                <input type="datetime" value="2012-10-20 11:10">
+                <button><span class="icon-calendar small">Datetime picker</span></button>
+            </div>
+        </p>
+
+        @example
+        <caption>Instantiate by data API</caption>
+        &lt;div class=&quot;datepicker&quot; data-init=&quot;datepicker&quot;&gt;
+            &lt;input type=&quot;datetime&quot; value=&quot;2012-10-20 11:10&quot;&gt;
+            &lt;button&gt;&lt;span class=&quot;icon-calendar small&quot;&gt;Datetime picker&lt;/span&gt;&lt;/button&gt;
+        &lt;/div&gt;
+
+        @example
+        <caption>Instantiate with Class</caption>
+        var datepicker = new CUI.Datepicker({
+          element: '#myOrdinarySelectBox'
+        });
+
+        @example
+        <caption>Instantiate by jQuery plugin</caption>
+        $("div.datepicker").datepicker();
+           
+       
+      @desc Creates a datepicker from a div element
+      @constructs
+
       @param {Object}   options                               Component options
       @param {Array} [options.monthNames=english names]       Array of strings with the name for each month with January at index 0 and December at index 11
       @param {Array} [options.dayNames=english names]         Array of strings with the name for each weekday with Sun at index 0 and Sat at index 6

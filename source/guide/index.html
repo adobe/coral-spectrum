@@ -1119,8 +1119,16 @@
                         <div class="example clearfix">
                             <div class="column left">
                                 <div class="datepicker" data-init="datepicker">
+                                    <input type="datetime" value="2012-10-20 11:10">
+                                    <button><span class="icon-calendar small">Datetime picker</span></button>
+                                </div>
+                                <div class="datepicker" data-init="datepicker">
                                     <input type="text" value="1986-12-11">
                                     <button><span class="icon-calendar small">Datepicker</span></button>
+                                </div>
+                                <div class="datepicker" data-init="datepicker">
+                                    <input type="time" value="11:10">
+                                    <button><span class="icon-time small">Timepicker</span></button>
                                 </div>
                                 <div class="datepicker" data-init="datepicker" data-disabled="true">
                                     <input type="text" value="1986-12-11" disabled>
@@ -1130,10 +1138,18 @@
                         </div>
                         <pre class="prettyprint linenums">
 &lt;div class=&quot;datepicker&quot; data-init=&quot;datepicker&quot;&gt;
+    &lt;input type=&quot;datetime&quot; value=&quot;2012-10-20 11:10&quot;&gt;
+    &lt;button&gt;&lt;span class=&quot;icon-calendar small&quot;&gt;Datetime picker&lt;/span&gt;&lt;/button&gt;
+&lt;/div&gt;
+&lt;div class=&quot;datepicker&quot; data-init=&quot;datepicker&quot;&gt;
     &lt;input type=&quot;text&quot; value=&quot;1986-12-11&quot;&gt;
     &lt;button&gt;&lt;span class=&quot;icon-calendar small&quot;&gt;Datepicker&lt;/span&gt;&lt;/button&gt;
 &lt;/div&gt;
 &lt;div class=&quot;datepicker&quot; data-init=&quot;datepicker&quot;&gt;
+    &lt;input type=&quot;time&quot; value=&quot;11:10&quot;&gt;
+    &lt;button&gt;&lt;span class=&quot;icon-time small&quot;&gt;Timepicker&lt;/span&gt;&lt;/button&gt;
+&lt;/div&gt;
+&lt;div class=&quot;datepicker&quot; data-init=&quot;datepicker&quot; data-disabled=&quot;true&quot;&gt;
     &lt;input type=&quot;text&quot; value=&quot;1986-12-11&quot; disabled&gt;
     &lt;button disabled&gt;&lt;span class=&quot;icon-calendar small&quot;&gt;Datepicker&lt;/span&gt;&lt;/button&gt;
 &lt;/div&gt;
