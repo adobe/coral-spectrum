@@ -97,7 +97,11 @@
                 }
             }.bind(this));
             this.$timeButtons.on("dropdown-list:select", "", function(event) {
-                this._setDateTime("2012-10-25", this._getTimeFromInput());
+                var date = this.options.selectedDateTime.getFullYear() + '-' +
+                            (1 + this.options.selectedDateTime.getMonth()) + '-' +
+                            this.options.selectedDateTime.getDate();
+
+                this._setDateTime(date, this._getTimeFromInput());
             }.bind(this));
         }
 
@@ -363,10 +367,9 @@
           m: function(date) { return this._pad(date.getMonth() + 1); },
           n: function(date) { return date.getMonth() + 1; },
           Y: function(date) { return date.getFullYear(); },
-          y: function(date) { return ('' + date.getFullYear()).substr(2); },
-          c: function(date) { return date.format("Y-m-d"); }
-
+          y: function(date) { return ('' + date.getFullYear()).substr(2); }
       };
+
       var fmt = this.options.format;
       var result = "";
       for(var i = 0; i < fmt.length; i++) {
