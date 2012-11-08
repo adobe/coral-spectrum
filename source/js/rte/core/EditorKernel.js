@@ -1005,7 +1005,6 @@ CUI.rte.EditorKernel = new Class({
             }
         } else {
             ignoreEventForContextMenu = (e.getType() == "mouseup") && (e.getButton() == 2);
-            console.log(ignoreEventForContextMenu);
         }
         if (!ignoreEventForContextMenu) {
             if (this.contextMenu && this.contextMenuBuilder.isVisible()) {

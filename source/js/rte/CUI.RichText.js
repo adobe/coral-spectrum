@@ -70,7 +70,7 @@
             // to the text container (at least in iOS 6) to prevent the keyboard from
             // disappearing and losing the focus altogether
             var editContext = this.editorKernel.getEditContext();
-            $body.finger("focus.rte", ".rte-toolbar-item", function(e) {
+            $body.on("focus.rte", ".rte-toolbar-item", function(e) {
                 self.$textContainer.focus();
                 e.stopPropagation();
                 e.preventDefault();
