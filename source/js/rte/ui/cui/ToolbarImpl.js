@@ -65,6 +65,11 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     },
 
     destroy: function() {
+        // as the toolbar items might be kept on the screen visually, we're disabling
+        // them before destroying the data model; otherwise the toolbar will stay active in
+        // serveral situations where the blur event doesn't kick in (mainly with mobile
+        // devices)
+        this.disable();
         for (var itemId in this.elementMap) {
             if (this.elementMap.hasOwnProperty(itemId)) {
                 var item = this.elementMap[itemId].element;
