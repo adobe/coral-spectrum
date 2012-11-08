@@ -33,11 +33,18 @@ nav.pulldown {
       background: url('@{component-images-folder}/pulldown/handle.svg') no-repeat center center;
       content: "";
     }
+
+    .toolbar & {
+      display: inline-block;
+      line-height: 20*@px;
+      padding: 13*@px 0;
+    }
   }
 
   .popover {
     position: absolute;
     display: none;
+    min-width: 200*@px;
 
     ul {
       margin: 0;
@@ -70,7 +77,13 @@ nav.pulldown {
 
     &:before {
       left: 100%;
-      margin-left: -30px;
+      margin-left: -30*@px;
+    }
+
+    .toolbar & {
+      margin-top: 18*@px;
+      margin-left: 1*@px;
+      text-align: left;
     }
   }
 }

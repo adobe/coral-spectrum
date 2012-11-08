@@ -69,8 +69,15 @@
         var $popover = this.$element.find('.popover');
         
         var position = $link.position();
+
+        //default width either to:
+        //first link width + 22 (22 is alignment on icon) if link is larger that popover
+        //or popover width if larger
+
+        var w = Math.max($link.width() + 22, $popover.width());
+
         var size = {
-            width: $popover.width(),
+            width: w,
             height: $link.height()
         };
 
@@ -80,9 +87,10 @@
 
         $popover.css({
             top: top,
-            left: left
+            left: left,
+            width: size.width
         });
-        
+
         $('.popover.arrow-top::before').css({
             marginLeft: marginLeft
         });
