@@ -15,7 +15,9 @@
   is strictly forbidden unless prior written permission is obtained
   from Adobe Systems Incorporated.
   -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -27,7 +29,7 @@
         <groupId>com.adobe.granite</groupId>
         <artifactId>parent</artifactId>
         <version>26</version>
-        <relativePath />
+        <relativePath/>
     </parent>
 
     <!-- ======================================================================= -->
@@ -44,18 +46,67 @@
         <developerConnection>scm:git:git@git.corp.adobe.com:Reef/CoralUI.git</developerConnection>
         <url>https://git.corp.adobe.com/Reef/CoralUI/master/rte</url>
         <tag>HEAD</tag>
-  </scm>
+    </scm>
 
     <properties>
         <content.dir>${basedir}</content.dir>
-        <coral.build.dir>${project.build.directory}/vault-work/jcr_root/etc/clientlibs/granite/coralui</coral.build.dir>
+        <vault.work>${project.build.directory}/vault-work</vault.work>
+        <rte.target.dir>${vault.work}/jcr_root/libs/cq/ui/rte</rte.target.dir>
     </properties>
 
     <!-- ====================================================================== -->
     <!-- B U I L D   D E S C R I P T I O N                                      -->
     <!-- ====================================================================== -->
     <build>
-        <!-- TODO define build -->
+
+        <resources>
+            <resource>
+                <directory>${content.dir}/src/main/content/META-INF</directory>
+                <targetPath>${vault.work}/META-INF</targetPath>
+            </resource>
+            <resource>
+                <directory>${content.dir}/src/main/content/jcr_root</directory>
+                <targetPath>${vault.work}/jcr_root</targetPath>
+            </resource>
+            <resource>
+                <directory>${basedir}/../build/js</directory>
+                <includes>
+                    <include>rte-core-extjs.js</include>
+                </includes>
+                <targetPath>${rte.target.dir}</targetPath>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-remote-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${vault.work}</outputDirectory>
+                            <attached>false</attached>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.day.jcr.vault</groupId>
+                <artifactId>content-package-maven-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <filters>
+                        <filter>
+                            <root>/libs/cq/ui/rte</root>
+                        </filter>
+                    </filters>
+                </configuration>
+            </plugin>
+        </plugins>
+
     </build>
 
 </project>
