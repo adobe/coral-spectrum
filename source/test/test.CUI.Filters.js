@@ -11,8 +11,7 @@ describe('CUI.Filters', function() {
     });
 
     describe("from template with custom config", function() {
-        var html = 
-          '<div>';
+        var html = '<div>';
         
         var el = $(html).filters({
             options: ["red", "green", "blue"],

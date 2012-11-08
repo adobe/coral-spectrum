@@ -184,7 +184,7 @@
         
         
         $.each(options, function(index, value) {
-            var el = (this.options.optionRenderer) ? this.options.optionRenderer(index, value) : $("<span>" + value + "</span>");
+            var el = (this.options.optionRenderer) ? this.options.optionRenderer(index, value) : $("<span>" + value.toString() + "</span>");
             var li = $("<li data-id=\"" + index + "\">");
             if (index === this.currentIndex) li.addClass("selected");
             li.append(el);
