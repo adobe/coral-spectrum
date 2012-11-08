@@ -93,15 +93,20 @@ var index = filters.getSelectedIndex();
         this.selectedIndices = []; // Initialise fresh array
         this.createdIndices = []; // Initialise fresh array
         
-        // Set callback to default if there is none
+        // Set callbacks to default if there are none
         if (!this.options.autocompleteCallback) {
             this.options.autocompleteCallback = this._defaultAutocompleteCallback.bind(this);
         } else {
             this.usingExternalData = true;
         }
         if (!this.options.optionRenderer) this.options.optionRenderer = CUI.Filters.defaultOptionRenderer;
+        
+        // Read options from markup
+        this._readDataFromMarkup();
+        
+        // Stacking forces multiple
         if (this.options.stacking) this.options.multiple = true;
-
+        
         // Adjust DOM to our needs
         this._render();
         
@@ -154,14 +159,14 @@ var index = filters.getSelectedIndex();
         
         this.dropdownList.on("dropdown-list:select", "", function(event) {
             this.dropdownList.hide(200);
-            // TODO: can't read options here if we are loading data externally
+
             if(this.usingExternalData) {
-                this.selectedValue = event.selectedValue;
+                this._createNewOption(event.selectedValue.toString(), event.selectedValue.toString(), true);
                 this._update();
-            } else {
-                var pos = $.inArray(event.selectedValue, this.options.options);
-                this.setSelectedIndex(pos * 1);
             }
+            
+            var pos = $.inArray(event.selectedValue.toString(), this.options.options);
+            this.setSelectedIndex(pos * 1);
         }.bind(this));
 
         this.$element.on("click", "[data-dismiss=filter]", function(event) {
@@ -214,6 +219,7 @@ var index = filters.getSelectedIndex();
     syncSelectElement: null,
     inputElement: null,
     typeTimeout: null,
+    
     selectedIndex: -1, // For single term only
     selectedIndices: null, // For multiple terms
     createdIndices: null, // Newly created indices
@@ -238,6 +244,7 @@ var index = filters.getSelectedIndex();
         }
         this._update();
     },
+    
     
     /**
      *  Removes the given index from the list of selected indices. Only applies to multi term use.
@@ -282,9 +289,7 @@ var index = filters.getSelectedIndex();
     },
 
     /** @ignore */
-    _render: function() {        
-        this._readDataFromMarkup();
-        
+    _render: function() {
         var div;
         // if current element is select field -> turn into input field, but hold reference to select to update it on change
         if (this.$element.get(0).tagName === "SELECT") {        
@@ -344,6 +349,19 @@ var index = filters.getSelectedIndex();
         if (this.$element.find("input").length === 0) {
             this.$element.prepend($("<input type=\"text\">"));
         }
+        
+        // Create all options where neccessary
+        if (this.$element.find("select option").length < this.options.options.length) {
+            for(var i = this.$element.find("select option").length; i < this.options.options.length; i++) {
+                var value = this.options.options[i];
+                var name = this.options.optionDisplayStrings[i] || this.options.options[i];
+                var opt = $("<option></option>");
+                opt.text(name);
+                opt.attr("value", value);
+                this.$element.find("select").append(opt);
+            }
+        }
+        
     },
 
     /** @ignore */
@@ -379,22 +397,16 @@ var index = filters.getSelectedIndex();
         // Update single term fields
         if (!this.options.multiple) {
             if (this.syncSelectElement) this.syncSelectElement.find("option:selected").removeAttr("selected");
-            if(!this.usingExternalData) {
-                if (this.selectedIndex >= 0) {
-                    if (this.syncSelectElement) $(this.syncSelectElement.find("option").get(this.selectedIndex)).attr("selected", "selected");
-                    var option = this.options.options[this.selectedIndex];
-                    if (this.options.optionDisplayStrings[this.selectedIndex]) { // Use alternative display strings
-                        option = this.options.optionDisplayStrings[this.selectedIndex];
-                    }
-                    this.inputElement.attr("value", option);
-                } else {
-                    this.inputElement.attr("value", "");
+
+            if (this.selectedIndex >= 0) {
+                if (this.syncSelectElement) $(this.syncSelectElement.find("option").get(this.selectedIndex)).attr("selected", "selected");
+                var option = this.options.options[this.selectedIndex];
+                if (this.options.optionDisplayStrings[this.selectedIndex]) { // Use alternative display strings
+                    option = this.options.optionDisplayStrings[this.selectedIndex];
                 }
+                this.inputElement.attr("value", option);
             } else {
-                // The value from the external source has been set
-                if(this.selectedValue && this.selectedValue.length) {
-                    this.inputElement.attr("value", this.selectedValue);
-                }
+                this.inputElement.attr("value", "");
             }
             return;
         }
@@ -465,12 +477,12 @@ var index = filters.getSelectedIndex();
             }
             if (key === 13) { // Create new item
                 var val = this.inputElement.val();
-                if (val.length > 0) this._createNewOption(val);
+                if (val.length > 0) this._createNewOption(val, val, false);
             }
         }
     },
     
-    _createNewOption: function(name) {
+    _createNewOption: function(name, displayName, fromInternal) {
         
         var existingIndex = -1;
         
@@ -486,19 +498,20 @@ var index = filters.getSelectedIndex();
         }
         
         // Is it allowed to add new options?
-        if (!this.options.allowCreate) return;
+        if (!this.options.allowCreate && !fromInternal) return;
         
         var index = this.options.options.length;
 
         this.options.options.push(name);
-        this.options.optionDisplayStrings.push(name);
+        this.options.optionDisplayStrings.push(displayName);
         if (this.syncSelectElement) {
             var el = $("<option></option>");
-            el.text(name);
+            el.text(displayName);
+            el.attr("value", name);
             this.syncSelectElement.append(el);
             //console.log("Compare indices", el.index(), index);
         }
-        this.createdIndices.push(index);
+        if (!fromInternal) this.createdIndices.push(index);
         this.setSelectedIndex(index);
     },
     
@@ -566,11 +579,13 @@ var index = filters.getSelectedIndex();
         var result = [];
 
         $.each(this.options.options, function(index, key) {
+            var name = key;
+            
             if (this.options.optionDisplayStrings[index]) { // Use alternate display names for autocomplete (if possible)
-                key = this.options.optionDisplayStrings[index];
+                name = this.options.optionDisplayStrings[index];
             }
 
-            if (key.toLowerCase().indexOf(searchFor.toLowerCase(), 0) >= 0 ) result.push(key);
+            if (name.toLowerCase().indexOf(searchFor.toLowerCase(), 0) >= 0 ) result.push(key);
 
         }.bind(this));
 
@@ -632,8 +647,9 @@ CUI.Filters.defaultOptionRenderer = function(index, key, highlight, icon) {
 };
 
 // TODO: update this function work off key rather than index as in CUI.Filters.defaultOptionRenderer
-CUI.Filters.cqTagOptionRenderer = function(iterator, index, highlight) {
-    var value = this.options.options[index];
+CUI.Filters.cqTagOptionRenderer = function(iterator, key, highlight) {
+    var index = $.inArray(key, this.options.options);
+    var value = key;
     
     if (this.options.optionDisplayStrings[index]) { // Use alternate display strings if possible
         value = this.options.optionDisplayStrings[index];
