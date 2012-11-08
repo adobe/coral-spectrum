@@ -33,6 +33,12 @@ button,
 
   .gradient(@button-gray-gradient-start-color, @button-gray-gradient-end-color);
 
+  &:hover {
+        text-decoration: none; // Reset underline on anchor
+         //background: @button-gray-hover-background-color; // overrides buttons background image, favor gradient
+        .gradient(@button-gray-hover-background-color, @button-gray-hover-background-color);
+  }
+
   &:active {
     border-color: @button-gray-down-border-color;
     //background: @button-gray-down-background-color;
@@ -54,6 +60,13 @@ button.primary,
 
   .gradient(@button-blue-gradient-start-color, @button-blue-gradient-end-color);
 
+    &.primary {
+        &:hover {
+        //background: @button-blue-hover-background-color; // overrides buttons background image, favor gradient
+            .gradient(@button-blue-hover-background-color, @button-blue-hover-background-color);
+        }
+    }
+
   &:active {
     border-color: @button-blue-down-border-color;
     //background: @button-blue-down-background-color;
@@ -73,6 +86,13 @@ button.warning,
 
   .gradient(@button-red-gradient-start-color, @button-red-gradient-end-color);
 
+    &.warning {
+        &:hover {
+        //background: @button-red-hover-background-color; // overrides buttons background image, favor gradient
+            .gradient(@button-red-hover-background-color, @button-red-hover-background-color);
+        }
+    }
+
   &:active {
     border-color: @button-red-down-border-color;
     //background: @button-red-down-background-color; // overrides buttons background image, favor gradient
@@ -84,47 +104,23 @@ button.warning,
   }
 }
 
-
 // Button: Disabled
 button.disabled,
 button[disabled],
 .button.disabled,
 button.disabled:active,
 button[disabled]:active,
-.button.disabled:active {
-  cursor: default;
+.button.disabled:active,
+button.disabled:hover,
+button[disabled]:hover,
+.button.disabled:hover {
+    cursor: default;
 
-  border-color: @button-disabled-border-color;
+    border-color: @button-disabled-border-color;
 
-  color: @button-disabled-text-color;
-  text-shadow: none;
+    color: @button-disabled-text-color;
+    text-shadow: none;
+    .box-shadow(none);
 
-  background: @button-disabled-background-color;
+    background: @button-disabled-background-color;
 }
-
-
-// hover states
-//.desktop { // lazd: Why is this here? It's tough to override for icon buttons
-  button,
-  .button {
-    &:hover {
-      text-decoration: none; // Reset underline on anchor
-      //background: @button-gray-hover-background-color; // overrides buttons background image, favor gradient
-      .gradient(@button-gray-hover-background-color, @button-gray-hover-background-color);
-    }
-    
-    &.primary {
-      &:hover {
-        //background: @button-blue-hover-background-color; // overrides buttons background image, favor gradient
-        .gradient(@button-blue-hover-background-color, @button-blue-hover-background-color);
-      }
-    }
-
-    &.warning {
-      &:hover {
-        //background: @button-red-hover-background-color; // overrides buttons background image, favor gradient
-        .gradient(@button-red-hover-background-color, @button-red-hover-background-color);
-      }
-    }
-  }
-//}

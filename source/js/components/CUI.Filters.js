@@ -637,7 +637,7 @@ CUI.Filters.defaultOptionRenderer = function(index, key, highlight, icon) {
     // If we allow icons here, build icon if provided for option depending on type (image url or cui icon class)
     if(icon) {
         var attr;
-        if(typeof(attr = this.options.icons[this.options.options[pos]]) !== "undefined") {
+        if(typeof(attr = this.options.icons[key]) !== "undefined") {
             var type = (/^icon-/i.test(attr)) ? "cuiIcon" : "url";
             value = this._buildIcon(type,attr,this.options.iconSize) + value;
         }

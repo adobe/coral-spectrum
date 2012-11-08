@@ -62,6 +62,10 @@ CUI.rte.ui.TbElement = new Class({
         throw new Error("TbElement#addToToolbar is not implemented.");
     },
 
+    notifyToolbar: function(toolbar) {
+        throw new Error("TbElement#notifyToolbar is not implemented.");
+    },
+
     createToolbarDef: function() {
         throw new Error("TbElement#createToolbarDef is not implemented.");
     },

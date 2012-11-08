@@ -22,14 +22,18 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
 
     extend: CUI.rte.ui.Toolbar,
 
-    toolbarParent: null,
-
     elementMap: null,
 
+    $container: null,
 
-    construct: function(toolkitRep, elementMap) {
-        this.tb = toolkitRep;
+
+    getToolbarContainer: function() {
+        return this.$container;
+    },
+
+    construct: function(elementMap, $container) {
         this.elementMap = elementMap;
+        this.$container = $container;
     },
 
     getItem: function(itemId) {
@@ -37,16 +41,13 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     },
 
     getHeight: function() {
-        if (this.toolbarParent == null) {
-            return 0;
-        }
-        return this.toolbarParent.height();
+        return 0;
     },
 
     enable: function() {
         for (var itemId in this.elementMap) {
             if (this.elementMap.hasOwnProperty(itemId)) {
-                var item = this.elementMap[itemId];
+                var item = this.elementMap[itemId].element;
                 item.setDisabled(false);
             }
         }
@@ -56,7 +57,7 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         for (var itemId in this.elementMap) {
             if (this.elementMap.hasOwnProperty(itemId)) {
                 if (!excludeItems || (excludeItems.indexOf(itemId) < 0)) {
-                    var item = this.elementMap[itemId];
+                    var item = this.elementMap[itemId].element;
                     item.setDisabled(true);
                 }
             }
@@ -64,7 +65,20 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     },
 
     destroy: function() {
-        this.toolbarParent.remove();
+        // as the toolbar items might be kept on the screen visually, we're disabling
+        // them before destroying the data model; otherwise the toolbar will stay active in
+        // serveral situations where the blur event doesn't kick in (mainly with mobile
+        // devices)
+        this.disable();
+        for (var itemId in this.elementMap) {
+            if (this.elementMap.hasOwnProperty(itemId)) {
+                var item = this.elementMap[itemId].element;
+                if (item.destroy) {
+                    item.destroy();
+                }
+            }
+        }
+        this.elementMap = { };
     }
 
 });

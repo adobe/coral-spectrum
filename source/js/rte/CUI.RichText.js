@@ -1,5 +1,7 @@
 (function ($) {
 
+    var configs = { };
+
     CUI.RichText = new Class(/** @lends CUI.RichText# */ {
 
         toString:'RichText',
@@ -13,7 +15,7 @@
         savedOutlineStyle: null,
 
 
-        construct:function (options) {
+        construct: function(options) {
             this.options = options || { };
             // TODO ...
         },
@@ -62,19 +64,46 @@
         },
 
         initializeEventHandling: function() {
+            var self = this;
+            var $body = $(document.body);
+            // temporary focus handling - we need to retransfer focus immediately
+            // to the text container (at least in iOS 6) to prevent the keyboard from
+            // disappearing and losing the focus altogether
             var editContext = this.editorKernel.getEditContext();
+            $body.on("focus.rte", ".rte-toolbar-item", function(e) {
+                self.$textContainer.focus();
+                e.stopPropagation();
+                e.preventDefault();
+            });
+            this.$textContainer.finger("blur.rte", function(e) {
+                // get back in a few milliseconds and see if it was a temporary focus
+                // change (if a toolbar button was invoked) and finish otherwise -
+                // this is the case on mobile devices if the on-screen keyboard gets
+                // hidden
+                CUI.rte.Utils.defer(function() {
+                    if (!self.isTemporaryFocusChange) {
+                        self.finish();
+                    }
+                    self.isTemporaryFocusChange = false;
+                }, 10);
+            });
+            // additional keyboard handling
             CUI.rte.Eventing.on(editContext, document.body, "keyup", this.handleKeyUp,
                     this);
-            this.$textContainer.finger("blur.rte", CUI.rte.Utils.scope(function(e) {
-                this.finish();
-            }, this));
+            // handle clicks/taps (clicks on the editable div vs. common/"out of area"
+            // clicks vs. clicks on toolbar items)
             this.$textContainer.fipo("tap.rte", "click.rte", function(e) {
                 e.stopPropagation();
             });
-            $(document.body).fipo("tap.rte.off", "click.rte.off",
-                    CUI.rte.Utils.scope(function(e) {
-                        this.finish();
-                    }, this));
+            $body.fipo("tap.rte.ooa", "click.rte.ooa", function(e) {
+                self.finish();
+            });
+            $body.fipo("tap.rte.item", "click.rte.item", ".rte-toolbar-item", function(e) {
+                self.isTemporaryFocusChange = true;
+                e.stopPropagation();
+                e.preventDefault();
+                return false;
+            });
         },
 
         deactivateEditorKernel: function() {
@@ -93,8 +122,11 @@
             this.$textContainer.off("tap.rte");
             this.$textContainer.off("click.rte");
             var $body = $(document.body);
-            $body.off("tap.rte.off");
-            $body.off("click.rte.off");
+            $body.off("focus.rte");
+            $body.off("tap.rte.ooa");
+            $body.off("click.rte.ooa");
+            $body.off("tap.rte.item");
+            $body.off("click.rte.item");
         },
 
         updateState: function() {
@@ -124,14 +156,17 @@
 
         // Interface ---------------------------------------------------------------------------------------------------
 
-        start: function() {
+        start: function(config, toolbarRoot) {
             if (this.editorKernel == null) {
-                this.editorKernel = new CUI.rte.DivKernel(this.config);
+                this.editorKernel = new CUI.rte.DivKernel(config);
             }
-            this.editorKernel.createToolbar();
             this.$textContainer = this.getTextDiv(this.$element);
             this.$textContainer.addClass("edited");
             this.textContainer = this.$textContainer[0];
+            toolbarRoot = toolbarRoot || this.$textContainer.parent();
+            this.editorKernel.createToolbar({
+                $toolbarRoot: $(toolbarRoot)
+            });
             /*
             this.currentSize = this.textContainer.getSize();
             var pos = el.getXY();
@@ -181,7 +216,18 @@
 
     // Register ...
     CUI.util.plugClass(CUI.RichText, "richEdit", function(rte) {
-        rte.start();
+        var configPath = $(this).attr("data-config");
+        var config;
+        if (configs.hasOwnProperty(configPath)) {
+            config = configs[configPath];
+            rte.start(config);
+        } else {
+            $.getJSON(configPath, function(data) {
+                configs[configPath] = data;
+                rte.start(data);
+            });
+        }
+
     });
 
     // Data API

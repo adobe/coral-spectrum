@@ -1,6 +1,6 @@
 .popover {
   position: absolute;
-	display: block;
+	display: none;
 	background-color: @popover-background-color;
   .background-clip(padding-box); // don't let the border overlap the background
   z-index: 1010; // keep the popover over the page
@@ -24,91 +24,51 @@
   &.arrow-top:before,
   &.arrow-bottom:before { // center the arrow in the center
     left: 50%;
-  }
-  
-  &.arrow-top:before,
-  &.arrow-bottom:before { // center the arrow in the center
     border-width: @popover-arrow-size - @px;
     margin-left: -1*@popover-arrow-size + @px;
   }
-
+  
   &.arrow-top:before {
     bottom: 100%; // position the border on the top
     margin-bottom: 8*@px;
-  }
-
-  &.arrow-top:before { // inner color
     border-bottom-color:@popover-border-color;
   }
 
   &.arrow-bottom:before {
     top: 100%; // position the border on the bottom
     margin-top: 8*@px;
-  }
-
-
-  &.arrow-bottom:before { // inner color
     border-top-color:  @popover-border-color;
-  }
-
-  /*
-  // left and right arrow
-  &.arrow-left:before,
-  &.arrow-left:after,
-  &.arrow-right:before,
-  &.arrow-right:after { // center the arrow in the center
-    top: 50%;
   }
 
   &.arrow-left:before,
   &.arrow-right:before { // center the arrow in the center
-    border-width: @popover-arrow-size;
-    margin-top: -1*@popover-arrow-size;
-  }
-
-  &.arrow-left:after,
-  &.arrow-right:after { // center the arrow in the center
+    top: 50%;
     border-width: @popover-arrow-size - @px;
     margin-top: -1*@popover-arrow-size + @px;
   }
 
-  &.arrow-left:before,
-  &.arrow-left:after {
+  &.arrow-left:before {
     right: 100%; // position the border on the left
+    margin-right: 8*@px;
+    border-right-color:  @popover-border-color;
   }
 
-  &.arrow-left:before { // outer color
-    border-right-color: @popover-border-color;
+  &.arrow-right:before {
+    left: 100%; // position the border on the left
+    margin-left: 8*@px;
+    border-left-color:  @popover-border-color;
   }
 
-  &.arrow-left:after { // inner color
-    border-right-color: @popover-background-color;
-  }
-
-  &.arrow-right:before,
-  &.arrow-right:after {
-    left: 100%; // position the border on the right
-  }
-
-  &.arrow-right:before { // outer color
-    border-left-color: @popover-border-color;
-  }
-
-  &.arrow-right:after { // inner color
-    border-left-color: @popover-background-color;
-  }
-  */
-  
   
   // Alternate arrow positions
   &.arrow-pos-left:before,
-  &.arrow-pos-left:after { // center the arrow in the center
-    left: 25%;
+  &.arrow-pos-left:after {
+    left: 15%;
     right: auto;
   }
   
   &.arrow-pos-right:before,
-  &.arrow-pos-right:after { // center the arrow in the center
-    left: 75%;
+  &.arrow-pos-right:after {
+    left: 85%;
   }
 }

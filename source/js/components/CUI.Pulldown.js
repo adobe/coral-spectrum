@@ -69,13 +69,20 @@
         var $popover = this.$element.find('.popover');
         
         var position = $link.position();
+
+        //default width either to:
+        //first link width + 22 (22 is alignment on icon) if link is larger that popover
+        //or popover width if larger
+
+        var w = Math.max($link.width() + 22, $popover.width());
+
         var size = {
-            width: $link.width(),
+            width: w,
             height: $link.height()
         };
 
         var top = position.top + size.height + 15;
-        var left = position.left + 5;
+        var left = position.left + $link.width() - size.width + 5;
         var marginLeft = size.width - 30;
 
         $popover.css({
@@ -83,14 +90,14 @@
             left: left,
             width: size.width
         });
-        
+
         $('.popover.arrow-top::before').css({
             marginLeft: marginLeft
         });
     }
     
   });
-  
+
   CUI.util.plugClass(CUI.Pulldown);
 
   // Data API

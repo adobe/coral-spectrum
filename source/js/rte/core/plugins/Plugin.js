@@ -42,6 +42,13 @@ CUI.rte.plugins.Plugin = new Class({
     features: null,
 
     /**
+     * @property {String} pluginId
+     * @since 5.6
+     * The plugin ID
+     */
+    pluginId: null,
+
+    /**
      * Back reference to the editor kernel the plugin is used from
      * @type CUI.rte.EditorKernel
      * @private
@@ -67,12 +74,13 @@ CUI.rte.plugins.Plugin = new Class({
         return false;
     },
 
-    construct: function(editorKernel) {
-        this._init(editorKernel);
+    construct: function(editorKernel, pluginId) {
+        this._init(editorKernel, pluginId);
     },
 
-    _init: function(editorKernel) {
+    _init: function(editorKernel, pluginId) {
         this.editorKernel = editorKernel;
+        this.pluginId = pluginId;
     },
 
     getFeatures: function() {

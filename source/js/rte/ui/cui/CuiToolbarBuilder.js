@@ -16,33 +16,36 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CUI.rte.ui.cui.CuiToolbarBuilder = new Class({
+(function($) {
 
-    toString: "CuiToolbarBuilder",
+    CUI.rte.ui.cui.CuiToolbarBuilder = new Class({
 
-    extend: CUI.rte.ui.ToolbarBuilder,
+        toString: "CuiToolbarBuilder",
+
+        extend: CUI.rte.ui.ToolbarBuilder,
 
 
-    // Toolbar management ------------------------------------------------------------------
+        // Toolbar management ------------------------------------------------------------------
 
-    /**
-     * Create the toolbar as a suitable Ext component.
-     * @return {CUI.rte.ui.Toolbar} The toolbar
-     */
-    createToolbar: function(options) {
-        var elementMap = { };
-        var toolbarDiv = $(document.createElement("div"));
-        toolbarDiv.addClass("CUI_FormField");
-        toolbarDiv.addClass("CUI_Selector");
-        var elementsToNotify = [ ];
-        var groupCnt = this.groups.length;
-        var hasMembers = false;
-        for (var groupIndex = 0; groupIndex < groupCnt; groupIndex++) {
-            var groupElements = this.groups[groupIndex].elements;
-            var elCnt = groupElements.length;
-            if (elCnt > 0) {
+        /**
+         * Create the abstracted toolbar.
+         * @return {CUI.rte.ui.Toolbar} The toolbar
+         */
+        createToolbar: function(options) {
+            var toolbarItems = [ ];
+            var elementsToNotify = [ ];
+            var elementMap = { };
+            var groupCnt = this.groups.length;
+            var hasMembers = false;
+            for (var groupIndex = 0; groupIndex < groupCnt; groupIndex++) {
+                var groupElements = this.groups[groupIndex].elements;
+                var elCnt = groupElements.length;
                 for (var elIndex = 0; elIndex < elCnt; elIndex++) {
                     var element = groupElements[elIndex].def;
+                    if ((elIndex == 0) && hasMembers) {
+                        toolbarItems.push("-");
+                        hasMembers = false;
+                    }
                     var toolbarDef = element.createToolbarDef();
                     if (toolbarDef != null) {
                         if (!CUI.rte.Utils.isArray(toolbarDef)) {
@@ -50,54 +53,41 @@ CUI.rte.ui.cui.CuiToolbarBuilder = new Class({
                         }
                         var itemCnt = toolbarDef.length;
                         for (var i = 0; i < itemCnt; i++) {
-                            var item = toolbarDef[i].dom;
-                            if (!item) {
-                                continue;
-                            }
-                            if (i == 0) {
-                                element.notifyGroupBorder(true);
-                            }
-                            elementMap[toolbarDef.itemId] = element;
-                            if (i == (itemCnt - 1)) {
-                                element.notifyGroupBorder(false);
-                            }
-                            toolbarDiv.append(item);
+                            var def = toolbarDef[i];
+                            toolbarItems.push(def);
+                            elementMap[def.id] = def;
                         }
                         elementsToNotify.push(element);
                         hasMembers = true;
                     }
                 }
             }
-        }
-        var notifyCnt = elementsToNotify.length;
-        for (var n = 0; n < notifyCnt; n++) {
-            // TODO remove check after format/style selectors are available
-            if (elementsToNotify[n].notifyToolbar) {
-                elementsToNotify[n].notifyToolbar(toolbarDiv);
+            var toolbar = new CUI.rte.ui.cui.ToolbarImpl(elementMap, options.$toolbarRoot);
+            var notifyCnt = elementsToNotify.length;
+            for (var n = 0; n < notifyCnt; n++) {
+                elementsToNotify[n].notifyToolbar(toolbar);
             }
+            return toolbar;
+        },
+
+
+        // Creating elements -------------------------------------------------------------------
+
+        createElement: function(id, plugin, toggle, tooltip, css, cmdDef) {
+            return new CUI.rte.ui.cui.ElementImpl(id, plugin, toggle, tooltip, css,
+                    cmdDef);
+        },
+
+        createParaFormatter: function(id, plugin, tooltip, formats) {
+            return new CUI.rte.ui.cui.ParaFormatterImpl(id, plugin, false, tooltip, false,
+                    undefined, formats);
+        },
+
+        createStyleSelector: function(id, plugin, tooltip, styles) {
+            return new CUI.rte.ui.cui.StyleSelectorImpl(id, plugin, false, tooltip, false,
+                    undefined, styles);
         }
-        // TODO add toolbar to DOM in a more specific way ...
-        $("#CQ .x-html-editor-tb").append(toolbarDiv);
-        // $CQ(document.body).append(toolbarDiv);
-        return new CUI.rte.ui.cui.ToolbarImpl(toolbarDiv, elementMap);
-    },
 
+    });
 
-    // Creating elements -------------------------------------------------------------------
-
-    createElement: function(id, plugin, toggle, tooltip, css, cmdDef) {
-        return new CUI.rte.ui.cui.ElementImpl(id, plugin, toggle, tooltip, css,
-                cmdDef);
-    },
-
-    createParaFormatter: function(id, plugin, tooltip, formats) {
-        return new CUI.rte.ui.cui.ParaFormatterImpl(id, plugin, false, tooltip, false,
-                undefined, formats);
-    },
-
-    createStyleSelector: function(id, plugin, tooltip, styles) {
-        return new CUI.rte.ui.cui.StyleSelectorImpl(id, plugin, false, tooltip, false,
-                undefined, styles);
-    }
-
-});
+})(window.jQuery);

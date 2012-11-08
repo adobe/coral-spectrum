@@ -35,28 +35,15 @@ CUI.rte.ui.cui.ToolkitImpl = new Class({
     },
 
     createToolbarBuilder: function(hint) {
-        var tk = CUI.rte.ui.Toolkit;
-        var cui = CUI.rte.ui.cui;
-        switch(hint) {
-            case tk.TBHINT_LOCAL:
-                return new cui.CuiToolbarBuilder();
-        }
-        throw new Error("Invalid toolbar type (parameter 'hint'): " + hint);
+        return new CUI.rte.ui.cui.CuiToolbarBuilder();
     },
 
     createContextMenuBuilder: function(editorKernel) {
         return new CUI.rte.ui.cui.CuiContextMenuBuilder(editorKernel);
     },
 
-
-    // Component access --------------------------------------------------------------------
-
-    createDropDown: function(config) {
-        return new this.dropDownCls(config);
-    },
-
-    createMenu: function(config) {
-        return new this.menuCls(config);
+    createDialogManager: function(editorKernel) {
+        return new CUI.rte.ui.cui.CuiDialogManager(editorKernel)
     }
 
 });
