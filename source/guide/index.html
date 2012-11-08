@@ -98,7 +98,6 @@
                         <a href="#Buttons">Buttons</a>
                         <a href="#TextField">Text field</a>
                         <a href="#TextArea">Text area</a>
-                        <a href="#PasswordField">Password field</a>
                         <a href="#SearchField">Search field</a>
                         <a href="#Filters">Filters</a>
                         <a href="#Checkbox">Checkbox</a>
@@ -752,31 +751,55 @@
                             <div class="textfieldSample">
                                 <div class="sampleTitle left">Standard</div>
                                 <label>Text Field</label>
-                                <input type="text">
+                                <input type="text" />
                             </div>
                             <div class="textfieldSample">
                                 <div class="sampleTitle left">Title-less</div>
                                 <label>&nbsp;</label>
-                                <input type="text" placeholder="Text Field">
+                                <input type="text" placeholder="Text Field" />
                             </div>
                             <div class="textfieldSample">
                                 <div class="sampleTitle left">Error</div>
                                 <label>&nbsp;</label>
-                                <input class="error" type="text">
+                                <input type="text" class="error" />
                             </div>
                             <div class="textfieldSample">
                                 <div class="sampleTitle left">Disabled</div>
                                 <label>&nbsp;</label>
-                                <input class="textfield" disabled type="text">
+                                <input type="text" disabled />
                             </div>
+                            <div class="textfieldSample">
+                                <div class="sampleTitle left">Password</div>
+                                <label>&nbsp;</label>
+                                <input type="password" placeholder="Enter password" />
+                            </div>
+                            <div class="textfieldSample">
+                                <div class="sampleTitle left">E-Mail</div>
+                                <label>&nbsp;</label>
+                                <input type="email" placeholder="Enter email address" />
+                            </div>
+                            <div class="textfieldSample">
+                                <div class="sampleTitle left">Phone&nbsp;Nr</div>
+                                <label>&nbsp;</label>
+                                <input type="tel" placeholder="Enter phone number" pattern="\(\d\d\d\) ?\d\d\d-\d\d\d\d" title="(###) ###-####" />
+                            </div>
+                            <div class="textfieldSample">
+                                <div class="sampleTitle left">URL</div>
+                                <label>&nbsp;</label>
+                                <input type="url" placeholder="Enter URL">
+                            </div>
+
                         </div>
                         <pre class="prettyprint linenums">
 &lt;input type=&quot;text&quot;&gt;
 &lt;input type=&quot;text&quot; placeholder=&quot;Text Field&quot;&gt;
 &lt;input type=&quot;text&quot; class=&quot;error&quot;&gt;
-&lt;input type=&quot;text&quot; disabled&gt;</pre>
-
-          </div>
+&lt;input type=&quot;text&quot; disabled&gt;
+&lt;input type="password" placeholder="Enter password" />
+&lt;input type="email" placeholder="Enter email address" />
+&lt;input type="tel" placeholder="Enter phone number" pattern="\(\d\d\d\) ?\d\d\d-\d\d\d\d" title="(###) ###-####" />
+&lt;input type="url" placeholder="Enter URL"></pre>
+                    </div>
         </section>
 
                 <section id="TextArea">
@@ -813,42 +836,6 @@
 &lt;textarea rows="4" disabled>&lt;/textarea></pre>
                     </div>
                 </section>
-
-                <section id="PasswordField">
-                    <h2 class="line">Password Field</h2>
-                    <p>Password input variants.</p>
-
-                    <div class="componentSample">
-                        <div class="example">
-                            <div class="textfieldSample">
-                                <div class="sampleTitle left">Standard</div>
-                                <label>Password</label>
-                                <input type="password">
-                            </div>
-                            <div class="textfieldSample">
-                                <div class="sampleTitle left">Title-less</div>
-                                <label>&nbsp;</label>
-                                <input type="password" placeholder="Enter password">
-                            </div>
-                            <div class="textfieldSample">
-                                <div class="sampleTitle left">Error</div>
-                                <label>&nbsp;</label>
-                                <input class="error" type="password">
-                            </div>
-                            <div class="textfieldSample">
-                                <div class="sampleTitle left">Disabled</div>
-                                <label>&nbsp;</label>
-                                <input disabled type="password">
-                            </div>
-                        </div>
-                        <pre class="prettyprint linenums">
-&lt;input type=&quot;password&quot;&gt;
-&lt;input type=&quot;password&quot; placeholder=&quot;Enter password&quot;&gt;
-&lt;input type=&quot;password&quot; class=&quot;error&quot;&gt;
-&lt;input type=&quot;password&quot; disabled&gt;</pre>
-                    </div>
-                </section>
-
                 <section id="SearchField">
                     <h2 class="line">Search Field</h2>
                     <p>Search.</p>
