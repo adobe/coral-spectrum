@@ -1,18 +1,9 @@
-# What is CoralUI?
-CoralUI or CUI (pronounced "cooey") is an implementation of the XD CloudUI visual style.
+# RichTextEditor
 
-CoralUI provides everything your product needs to adopt the CloudUI visual style.
+## About
 
-# Demo & Download
-Check out the [Style Guide](https://git.corp.adobe.com/pages/Reef/CoralUI/), to see CoralUI in action, download releases, and learn how to use CoralUI in your project.
+This subdirectory currently contains the RichTextEditor core that is used both in CoralUI
+and CQ5.
 
-
-# Contributing
-CoralUI is an internal open source effort with backing from XD and product development teams, and we encourage issues, feature requests, and pull requests from anyone on any team.
-
-## Building
-
-Check out the [Build Process wiki](https://git.corp.adobe.com/Reef/CoralUI/wiki/Build-Process-&-Technology) for information on building CoralUI.
-
-## More Information
-See the [CoralUI Wiki](https://git.corp.adobe.com/Reef/CoralUI/wiki) for more information on contributing. If you'd like to be assigned issues for feature rqeuest, contact [Larry Davis](mailto:lawdavis@adobe.com).
+It provides capabilities to edit any given HTML container and apply rich styling to the
+edited HTML.
