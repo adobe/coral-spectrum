@@ -39,7 +39,8 @@ CUI.rte.ui.cui.ParaFormatterImpl = new Class({
 
     createToolbarDef: function() {
         return {
-            "itemId": this.id
+            "id": this.id,
+            "element": this
         };
     },
 
@@ -57,6 +58,31 @@ CUI.rte.ui.cui.ParaFormatterImpl = new Class({
 
     getSelectedFormat: function() {
         return null;
+    },
+
+    setDisabled: function(isDisabled) {
+        /*
+        if (isDisabled) {
+            this.$ui.addClass("rte-tbi-disabled");
+        } else {
+            this.$ui.removeClass("rte-tbi-disabled");
+        }
+        */
+    },
+
+    setSelected: function(isSelected, suppressEvent) {
+        this._isSelected = isSelected;
+        /*
+        if (isSelected) {
+            this.$ui.addClass("rte-tbi-selected");
+        } else {
+            this.$ui.removeClass("rte-tbi-selected");
+        }
+        */
+    },
+
+    isSelected: function() {
+        return this._isSelected;
     }
 
 });

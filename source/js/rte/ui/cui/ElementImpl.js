@@ -56,11 +56,20 @@
         },
 
         setDisabled: function(isDisabled) {
-            // TODO ...?
+            if (isDisabled) {
+                this.$ui.addClass("rte-tbi-disabled");
+            } else {
+                this.$ui.removeClass("rte-tbi-disabled");
+            }
         },
 
         setSelected: function(isSelected, suppressEvent) {
             this._isSelected = isSelected;
+            if (isSelected) {
+                this.$ui.addClass("rte-tbi-selected");
+            } else {
+                this.$ui.removeClass("rte-tbi-selected");
+            }
         },
 
         isSelected: function() {

@@ -61,6 +61,19 @@ CUI.rte.ui.stub.ParaFormatterImpl = new Class({
 
     getSelectedFormat: function() {
         return null;
+    },
+
+    setDisabled: function(isDisabled) {
+        // ignore
+    },
+
+    setSelected: function(isSelected, suppressEvent) {
+        this._isSelected = isSelected;
+    },
+
+    isSelected: function() {
+        return this._isSelected;
     }
+
 
 });

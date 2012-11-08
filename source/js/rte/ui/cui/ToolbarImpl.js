@@ -47,7 +47,7 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     enable: function() {
         for (var itemId in this.elementMap) {
             if (this.elementMap.hasOwnProperty(itemId)) {
-                var item = this.elementMap[itemId];
+                var item = this.elementMap[itemId].element;
                 item.setDisabled(false);
             }
         }
@@ -57,7 +57,7 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         for (var itemId in this.elementMap) {
             if (this.elementMap.hasOwnProperty(itemId)) {
                 if (!excludeItems || (excludeItems.indexOf(itemId) < 0)) {
-                    var item = this.elementMap[itemId];
+                    var item = this.elementMap[itemId].element;
                     item.setDisabled(true);
                 }
             }
@@ -65,7 +65,7 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     },
 
     destroy: function() {
-        // TODO ???
+        this.elementMap = { };
     }
 
 });

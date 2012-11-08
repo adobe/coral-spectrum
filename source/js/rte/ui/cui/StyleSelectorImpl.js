@@ -36,8 +36,10 @@ CUI.rte.ui.cui.StyleSelectorImpl = new Class({
     },
 
     createToolbarDef: function() {
-        // TODO ...?
-        return [ ];
+        return {
+            "id": this.id,
+            "element": this
+        };
     },
 
     initializeSelector: function() {
@@ -54,6 +56,31 @@ CUI.rte.ui.cui.StyleSelectorImpl = new Class({
 
     setRemoveDisabled: function(isDisabled) {
         // TODO ...?
+    },
+
+    setDisabled: function(isDisabled) {
+        /*
+        if (isDisabled) {
+            this.$ui.addClass("rte-tbi-disabled");
+        } else {
+            this.$ui.removeClass("rte-tbi-disabled");
+        }
+        */
+    },
+
+    setSelected: function(isSelected, suppressEvent) {
+        this._isSelected = isSelected;
+        /*
+        if (isSelected) {
+            this.$ui.addClass("rte-tbi-selected");
+        } else {
+            this.$ui.removeClass("rte-tbi-selected");
+        }
+        */
+    },
+
+    isSelected: function() {
+        return this._isSelected;
     }
 
 });
