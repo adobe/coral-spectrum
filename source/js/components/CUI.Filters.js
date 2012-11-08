@@ -84,7 +84,8 @@ var index = filters.getSelectedIndex();
       @param {int}      [options.disabled=false]                   Is this component disabled?
       @param {boolean}  [options.highlight=true]                   Highlight search string in results
       @param {String}   [options.name=null]                        (Optional) name for an underlying form field.
-      @param {Object}   [options.icons=empty object]               Icons for display, coral icon css class paired with option value;
+      @param {Object}   [options.icons=empty object]               Icons to display. Option key paired with either Coral icon css class or image url.
+      @param {String}   [options.iconSize=small]                   Icon size from: xsmall (12x12), small (16x16), medium (24x24), large (32x32).
       @param {Function} [options.autocompleteCallback=use options] Callback for autocompletion
       @param {Function} [options.optionRenderer=default renderer]  (Optional) Renderer for the autocompleter and the tag badges
     */
@@ -93,7 +94,11 @@ var index = filters.getSelectedIndex();
         this.createdIndices = []; // Initialise fresh array
         
         // Set callback to default if there is none
-        if (!this.options.autocompleteCallback) this.options.autocompleteCallback = this._defaultAutocompleteCallback.bind(this);
+        if (!this.options.autocompleteCallback) {
+            this.options.autocompleteCallback = this._defaultAutocompleteCallback.bind(this);
+        } else {
+            this.usingExternalData = true;
+        }
         if (!this.options.optionRenderer) this.options.optionRenderer = CUI.Filters.defaultOptionRenderer;
         if (this.options.stacking) this.options.multiple = true;
 
@@ -149,9 +154,16 @@ var index = filters.getSelectedIndex();
         
         this.dropdownList.on("dropdown-list:select", "", function(event) {
             this.dropdownList.hide(200);
-            this.setSelectedIndex(event.selectedValue * 1);
-        }.bind(this));        
-        
+            // TODO: can't read options here if we are loading data externally
+            if(this.usingExternalData) {
+                this.selectedValue = event.selectedValue;
+                this._update();
+            } else {
+                var pos = $.inArray(event.selectedValue, this.options.options);
+                this.setSelectedIndex(pos * 1);
+            }
+        }.bind(this));
+
         this.$element.on("click", "[data-dismiss=filter]", function(event) {
             if (this.options.disabled) return;
             var e = $(event.target).closest("[data-id]");
@@ -194,7 +206,8 @@ var index = filters.getSelectedIndex();
         placeholder: null,
         optionRenderer: null,
         allowCreate: false,
-        icons: null
+        icons: null,
+        iconSize: "small"
     },
 
     dropdownList: null, // Reference to instance of CUI.DropdownList
@@ -205,6 +218,11 @@ var index = filters.getSelectedIndex();
     selectedIndices: null, // For multiple terms
     createdIndices: null, // Newly created indices
     triggeredBackspace: false,
+    usingExternalData: false, // Using autocomplete callback for loading external data?
+    selectedValue: null, // Used to store returned value when data is loaded externally
+
+    // TODO switch selectedIndex/selectedIndices to store keys rather than indexes so that they
+    // can be used with external data. Remove selectedValue variable on completion.
 
     /**
      * @param {int} index     Sets the currently selected option by its index or, if options.multiple ist set,
@@ -361,15 +379,22 @@ var index = filters.getSelectedIndex();
         // Update single term fields
         if (!this.options.multiple) {
             if (this.syncSelectElement) this.syncSelectElement.find("option:selected").removeAttr("selected");
-            if (this.selectedIndex >= 0) {
-                if (this.syncSelectElement) $(this.syncSelectElement.find("option").get(this.selectedIndex)).attr("selected", "selected");
-                var option = this.options.options[this.selectedIndex];
-                if (this.options.optionDisplayStrings[this.selectedIndex]) { // Use alternative display strings
-                    option = this.options.optionDisplayStrings[this.selectedIndex];
+            if(!this.usingExternalData) {
+                if (this.selectedIndex >= 0) {
+                    if (this.syncSelectElement) $(this.syncSelectElement.find("option").get(this.selectedIndex)).attr("selected", "selected");
+                    var option = this.options.options[this.selectedIndex];
+                    if (this.options.optionDisplayStrings[this.selectedIndex]) { // Use alternative display strings
+                        option = this.options.optionDisplayStrings[this.selectedIndex];
+                    }
+                    this.inputElement.attr("value", option);
+                } else {
+                    this.inputElement.attr("value", "");
                 }
-                this.inputElement.attr("value", option);
             } else {
-                this.inputElement.attr("value", "");
+                // The value from the external source has been set
+                if(this.selectedValue && this.selectedValue.length) {
+                    this.inputElement.attr("value", this.selectedValue);
+                }
             }
             return;
         }
@@ -389,8 +414,8 @@ var index = filters.getSelectedIndex();
         var ul = $("<ul class=\"tags\"></ul>");
         
         $.each(this.selectedIndices, function(iterator, index) {
-            //var option = this.options.options[index];
-            var el = (this.options.optionRenderer.bind(this))(iterator, index, false, false);
+            var option = this.options.options[index];
+            var el = (this.options.optionRenderer.bind(this))(index, option, false, false);
             var li = $("<li data-id=\"" + index + "\"><button data-dismiss=\"filter\">&times;</button></li>");
             ul.append(li);
             li.append(el);
@@ -504,29 +529,29 @@ var index = filters.getSelectedIndex();
     /** @ignore */
     _inputChanged: function() {
         var searchFor = this.inputElement.attr("value");
-        
-        var results = this.options.autocompleteCallback(searchFor);
-        this._showAutocompleter(results, searchFor);
+        this.options.autocompleteCallback($.proxy(this._showAutocompleter, this), searchFor);
     },
     
     /** @ignore */
-    _showAutocompleter: function(results, searchFor) {
-        
+    _showAutocompleter: function(results) {
+
         this.dropdownList.hide();
         
         if (this.options.multiple) {
             // Do not show already selected indices
-            var l = [];            
-            $.each(results, function(iterator, index) {
-                if (this.selectedIndices.indexOf(index) >= 0) return;
-                l.push(index);
-            }.bind(this));  
+            var l = [];
+            $.each(results, function(iterator, key) {
+                // TODO: can't call this.options.options when we are using external data source
+                var pos = $.inArray(key, this.options.options);
+                if (this.selectedIndices.indexOf(pos) >= 0) return;
+                l.push(key);
+            }.bind(this));
             results = l;
         }        
         if (results.length === 0) return;
 
-        var optionRenderer = function(iterator, value) {            
-            return (this.options.optionRenderer.bind(this))(iterator, value, this.options.highlight, !$.isEmptyObject(this.options.icons));
+        var optionRenderer = function(index, key) {
+            return (this.options.optionRenderer.bind(this))(index, key, this.options.highlight, !$.isEmptyObject(this.options.icons));
         };
 
         this.dropdownList.set("optionRenderer", optionRenderer.bind(this));
@@ -537,21 +562,29 @@ var index = filters.getSelectedIndex();
     },
     
     /** @ignore */
-    _defaultAutocompleteCallback: function(searchFor) {
+    _defaultAutocompleteCallback: function(handler, searchFor) {
         var result = [];
-        
-        $.each(this.options.options, function(key, value) {
-            if (this.options.optionDisplayStrings[key]) { // Use alternate display names for autocomplete (if possible)
-                value = this.options.optionDisplayStrings[key];
+
+        $.each(this.options.options, function(index, key) {
+            if (this.options.optionDisplayStrings[index]) { // Use alternate display names for autocomplete (if possible)
+                key = this.options.optionDisplayStrings[index];
             }
-            
-            if (value.toLowerCase().indexOf(searchFor.toLowerCase(), 0) >= 0 ) result.push(key);
-            
+
+            if (key.toLowerCase().indexOf(searchFor.toLowerCase(), 0) >= 0 ) result.push(key);
+
         }.bind(this));
-        
-        return result;
+
+        handler(result, searchFor);
+    },
+
+    /** @ignore */
+    _buildIcon: function(type, attr, size) {
+        if(type === "url") {
+            return '<i class="' + size + ' icon-inline-bg-image" style="background-image: url(' + attr + ')">' + 'icon' + '</i>';
+        } else if(type === "cuiIcon") {
+            return '<i class="' + attr + ' ' + size + '">' + attr.split('icon-')[1] + '</i>';
+        }
     }
-    
   });
 
   CUI.util.plugClass(CUI.Filters);
@@ -563,12 +596,13 @@ var index = filters.getSelectedIndex();
 }(window.jQuery));
 
 
-CUI.Filters.defaultOptionRenderer = function(iterator, index, highlight, icon) {
+CUI.Filters.defaultOptionRenderer = function(index, key, highlight, icon) {
 
-    var value = this.options.options[index];
+    var pos = $.inArray(key, this.options.options);
+    var value = key;
 
-    if (this.options.optionDisplayStrings[index]) { // Use alternate display strings if possible
-        value = this.options.optionDisplayStrings[index];
+    if (this.options.optionDisplayStrings[pos]) { // Use alternate display strings if possible
+        value = this.options.optionDisplayStrings[pos];
     }
 
     var searchFor = this.inputElement.val();
@@ -581,26 +615,24 @@ CUI.Filters.defaultOptionRenderer = function(iterator, index, highlight, icon) {
     }
     
     // Check if this tag is new
-    if (this.createdIndices.indexOf(index) >= 0) {
+    if (this.createdIndices.indexOf(pos) >= 0) {
         value = value + "&nbsp;*";
     }
 
-    value = "<span>" + value + "</span>";
-
-    // Check if this option has an associated icon
+    // If we allow icons here, build icon if provided for option depending on type (image url or cui icon class)
     if(icon) {
-        var optionName = this.options.options[index];
-        var iconCssClass;
-        if(typeof(iconCssClass = this.options.icons[optionName]) !== "undefined") {
-            value = "<i class=" + iconCssClass + ">" + optionName + "</i>" + value;
+        var attr;
+        if(typeof(attr = this.options.icons[this.options.options[pos]]) !== "undefined") {
+            var type = (/^icon-/i.test(attr)) ? "cuiIcon" : "url";
+            value = this._buildIcon(type,attr,this.options.iconSize) + value;
         }
     }
 
-    return $(value);
+    return $("<span>" + value + "</span>");
 };
 
-CUI.Filters.cqTagOptionRenderer = function(iterator, index, highlight) {            
-    
+// TODO: update this function work off key rather than index as in CUI.Filters.defaultOptionRenderer
+CUI.Filters.cqTagOptionRenderer = function(iterator, index, highlight) {
     var value = this.options.options[index];
     
     if (this.options.optionDisplayStrings[index]) { // Use alternate display strings if possible

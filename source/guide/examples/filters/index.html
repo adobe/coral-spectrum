@@ -30,6 +30,15 @@
             <p>
             Filter me: <input type="text" name="stacking" placeholder="Stacking">
             </p>
+            <p>
+            Filter me: <input type="text" name="external-source" placeholder="Load from external source">
+            </p>
+            <p>
+            Filter me: <input type="text" name="icons" placeholder="Displays icons">
+            </p>
+            <p>
+            Filter me: <input type="text" name="icons-large" placeholder="Displays large icons">
+            </p>
         <h2>Create from jQuery (with allowCreate enabled)</h2>            
             <div>
             <p>
@@ -127,7 +136,50 @@
                             multiple: true,
                             stacking: true,
                             disabled: false,
-                            options: options
+                            options: options,
+                            icons: { "Watermelon":"icon-calendar", "Olive":"icon-paintbucket", "Avocado":"http://www.enterprisewcms.com/images/adobe_cq5_icon_adobe.png" }
+                });
+
+                var loadCities = function(handler, searchFor) {
+                    $.ajax({
+                        url: 'http://gd.geobytes.com/AutoCompleteCity',
+                        dataType: 'jsonp',
+                        data: { "q": searchFor },
+                        success: function(data) {
+                            handler(data);
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            // Error
+                        }
+                    });
+                };
+
+                var filters4 = new CUI.Filters({
+                            element: 'input[name=external-source]',
+                            multiple: false,
+                            stacking: false,
+                            disabled: false,
+                            options: options,
+                            autocompleteCallback: loadCities
+                });
+
+                var filters5 = new CUI.Filters({
+                    element: 'input[name=icons]',
+                    multiple: false,
+                    stacking: false,
+                    disabled: false,
+                    options: options,
+                    icons: { "calendar":"icon-calendar", "cards":"icon-cards", "cart":"icon-cart", "folder":"icon-folder", "paint bucket":"icon-paintbucket", "adobe":"http://www.eduserv.org.uk/~/media/images/lns%20logos/adobe.ashx"}
+                });
+
+                var filters6 = new CUI.Filters({
+                    element: 'input[name=icons-large]',
+                    multiple: false,
+                    stacking: false,
+                    disabled: false,
+                    options: options,
+                    iconSize: "large",
+                    icons: { "calendar":"icon-calendar", "cards":"icon-cards", "cart":"icon-cart", "folder":"icon-folder", "paint bucket":"icon-paintbucket", "adobe":"http://www.eduserv.org.uk/~/media/images/lns%20logos/adobe.ashx"}
                 });
 
 
@@ -149,6 +201,8 @@
                 })
                 
                 filters2.set({"options": ["red", "green", "blue"], "optionDisplayStrings": []});
+                filters5.set({"options": ["calendar", "cards", "cart", "folder", "paint bucket", "adobe"], "optionDisplayStrings": []})
+                filters6.set({"options": ["calendar", "cards", "cart", "folder", "paint bucket", "adobe"], "optionDisplayStrings": []})
                
             });
             
