@@ -35,7 +35,11 @@ input[type=tel] {
     outline: none;
   }
 
-  &.error {
+  &:-moz-ui-invalid {
+    box-shadow:none;
+  }
+  &.error,
+  &:invalid {
     .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
 
     &:focus {
