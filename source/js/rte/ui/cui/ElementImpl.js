@@ -46,6 +46,15 @@
             var $cont = $(toolbar.getToolbarContainer());
             this.$ui = $cont.find('a[href="#' + pluginId + '"][data-rte-command="' + this.id
                     + '"]');
+            this.$ui.bind("click.rte.handler", CUI.rte.Utils.scope(function(e) {
+                var editContext = this.plugin.editorKernel.getEditContext();
+                var cmd = (this.cmdDef ? this.cmdDef.cmd : this.id);
+                var cmdValue = (this.cmdDef ? this.cmdDef.cmdValue : undefined);
+                var env = {
+                    "editContext": editContext
+                };
+                this.plugin.execute(cmd, cmdValue, env);
+            }, this));
         },
 
         createToolbarDef: function() {
@@ -57,23 +66,28 @@
 
         setDisabled: function(isDisabled) {
             if (isDisabled) {
-                this.$ui.addClass("rte-tbi-disabled");
+                this.$ui.addClass(CUI.rte.Theme.TOOLBARITEM_DISABLED_CLASS);
             } else {
-                this.$ui.removeClass("rte-tbi-disabled");
+                this.$ui.removeClass(CUI.rte.Theme.TOOLBARITEM_DISABLED_CLASS);
             }
         },
 
         setSelected: function(isSelected, suppressEvent) {
             this._isSelected = isSelected;
             if (isSelected) {
-                this.$ui.addClass("rte-tbi-selected");
+                this.$ui.addClass(CUI.rte.Theme.TOOLBARITEM_SELECTED_CLASS);
             } else {
-                this.$ui.removeClass("rte-tbi-selected");
+                this.$ui.removeClass(CUI.rte.Theme.TOOLBARITEM_SELECTED_CLASS);
             }
         },
 
         isSelected: function() {
             return this._isSelected;
+        },
+
+        destroy: function() {
+            console.log("Element#destroy");
+            this.$ui.off("click.rte.handler");
         }
 
     });

@@ -70,7 +70,17 @@ CUI.rte.Theme = function() {
          * @type String
          * @since 5.3
          */
-        TABLESELECTION_CLASS: "cui-rte-tableselection"
+        TABLESELECTION_CLASS: "cui-rte-tableselection",
+
+        /**
+         * CSS class that is added to disabled toolbar items
+         */
+        TOOLBARITEM_DISABLED_CLASS: "rte-tbi-disabled",
+
+        /**
+         * CSS class that is added to selected toolbar items
+         */
+        TOOLBARITEM_SELECTED_CLASS: "rte-tbi-selected"
 
     };
 

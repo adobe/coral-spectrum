@@ -65,6 +65,15 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     },
 
     destroy: function() {
+        console.log("Toolbar#destroy");
+        for (var itemId in this.elementMap) {
+            if (this.elementMap.hasOwnProperty(itemId)) {
+                var item = this.elementMap[itemId].element;
+                if (item.destroy) {
+                    item.destroy();
+                }
+            }
+        }
         this.elementMap = { };
     }
 
