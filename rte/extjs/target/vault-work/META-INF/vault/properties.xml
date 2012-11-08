@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Adobe Reef / RichTextEditor Content Package</comment>
+<entry key="createdBy">Adobe Systems Incorporated</entry>
+<entry key="name">com.adobe.coralui.rte-extjs</entry>
+<entry key="acHandling">merge_preserve</entry>
+<entry key="created">2012-11-08T18:39:08.345+0100</entry>
+<entry key="groupId">com.adobe.granite</entry>
+<entry key="version">0.1.0-SNAPSHOT</entry>
+<entry key="requiresRoot">false</entry>
+<entry key="granite.suppressSnapshots">true</entry>
+<entry key="group">adobe/granite</entry>
+<entry key="description">The parent project for Granite, the ES Platform</entry>
+<entry key="artifactId">com.adobe.coralui.rte-extjs</entry>
+<entry key="path">/etc/packages/adobe/granite/com.adobe.coralui.rte-extjs.zip</entry>
+</properties>
