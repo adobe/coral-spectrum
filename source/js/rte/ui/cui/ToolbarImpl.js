@@ -24,9 +24,16 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
 
     elementMap: null,
 
+    $container: null,
 
-    construct: function(elementMap) {
+
+    getToolbarContainer: function() {
+        return this.$container;
+    },
+
+    construct: function(elementMap, $container) {
         this.elementMap = elementMap;
+        this.$container = $container;
     },
 
     getItem: function(itemId) {

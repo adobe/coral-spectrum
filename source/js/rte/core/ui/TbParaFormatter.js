@@ -40,6 +40,10 @@ CUI.rte.ui.TbParaFormatter = new Class({
         this.formats = formats;
     },
 
+    notifyToolbar: function(toolbar) {
+        this.toolbar = toolbar;
+    },
+
     getToolbar: function() {
         return CUI.rte.ui.ToolbarBuilder.STYLE_TOOLBAR;
     },

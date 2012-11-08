@@ -16,7 +16,7 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CUI.rte.ui.stub.CuiDialogManager = new Class({
+CUI.rte.ui.cui.CuiDialogManager = new Class({
 
     toString: "CuiDialogManager",
 

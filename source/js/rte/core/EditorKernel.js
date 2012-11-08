@@ -1406,7 +1406,7 @@ CUI.rte.EditorKernel = new Class({
         if (!selection) {
             return null;
         }
-        isSelection = sel.isSelection(selection);
+        var isSelection = sel.isSelection(selection);
         // Use normalized selection if we have a selection to ensure
         // start node does not point "behind" a node, but points to the
         // first actually included node. If the selection represents a caret,
@@ -1692,6 +1692,8 @@ CUI.rte.EditorKernel = new Class({
      * @param {Object} options (optional) kernel-specific options
      */
     createToolbar: function(options) {
+        options = options || { };
+        options.editorKernel = this;
         var tbBuilder = this.createToolbarBuilder();
         for (var pluginId in this.registeredPlugins) {
             if (this.registeredPlugins.hasOwnProperty(pluginId)) {

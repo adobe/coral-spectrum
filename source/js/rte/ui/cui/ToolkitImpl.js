@@ -35,8 +35,7 @@ CUI.rte.ui.cui.ToolkitImpl = new Class({
     },
 
     createToolbarBuilder: function(hint) {
-        var cui = CUI.rte.ui.cui;
-        return new cui.CuiToolbarBuilder();
+        return new CUI.rte.ui.cui.CuiToolbarBuilder();
     },
 
     createContextMenuBuilder: function(editorKernel) {
@@ -44,7 +43,7 @@ CUI.rte.ui.cui.ToolkitImpl = new Class({
     },
 
     createDialogManager: function(editorKernel) {
-        return new CUI.rte.ui.stub.StubDialogManager(editorKernel)
+        return new CUI.rte.ui.cui.CuiDialogManager(editorKernel)
     }
 
 });

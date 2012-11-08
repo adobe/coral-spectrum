@@ -1,112 +1,119 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>CUI RichTextEditor</title>
 
-  <link rel="stylesheet" href="../../css/cui.css">
-  <link rel="stylesheet" href="../assets/google-code-prettify/prettify.css">
-  <link rel="stylesheet" href="../assets/guide.css">
+    <head>
+        <title>CUI RichTextEditor</title>
 
-  <!-- Dependencies -->
-  <script src="../../js/libs/handlebars.js"></script>
-  <script src="../../js/libs/jquery.js"></script>
-  <script src="../../js/libs/jquery-fingerpointer.js"></script>
-  <script src="../../js/libs/toe.js"></script>
+        <link rel="stylesheet" href="../../css/cui.css">
+        <link rel="stylesheet" href="../assets/google-code-prettify/prettify.css">
+        <link rel="stylesheet" href="../assets/guide.css">
 
-  <!-- CoralUI, including RTE -->
-  <script src="../../js/CUI.js"></script>
-  <script src="../../js/rte-for-cui.js"></script>
+        <!-- Dependencies -->
+        <script src="../../js/libs/handlebars.js"></script>
+        <script src="../../js/libs/jquery.js"></script>
+        <script src="../../js/libs/jquery-fingerpointer.js"></script>
+        <script src="../../js/libs/toe.js"></script>
 
-  <!-- Guide JS -->
-  <script src="../assets/guide.js"></script>
-  <script src="../assets/google-code-prettify/prettify.js"></script>
+        <!-- CoralUI, including RTE -->
+        <script src="../../js/CUI.js"></script>
+        <script src="../../js/rte-for-cui.js"></script>
 
-</head>
-<body>
+        <!-- Guide JS -->
+        <script src="../assets/guide.js"></script>
+        <script src="../assets/google-code-prettify/prettify.js"></script>
 
-  <header class="top">
+    </head>
 
-    <div class="logo"><img src="../../images/theme/cloudui.png" alt="CoralUI logo"></div>
+    <body>
 
-    <nav>
-      <a href="#" class="selected">RichTextEditing</a>
-      <a href="https://git.corp.adobe.com/Reef/CoralUI/">Github</a>
-    </nav>
+        <header class="top">
 
-    <div class="drawer">
-      <div class="badge">v0.5.0-SNAPSHOT</div>
-    </div>
-
-  </header>
-
-  <div class="page" role="main">
-
-    <div id="main-rail" class="rail left">
-      <div class="pull-to-refresh">
-        <div class="message">
-          <i class="arrow"></i>
-          <i class="spinner large"></i>
-          <span class="pull">Pull to refresh</span>
-          <span class="release">Release to refresh</span>
-          <span class="loading">Loading</span>
-        </div>
-      </div>
-      <div class="wrap">
-        <section class="links">
-            <a class="heading" href="#General">General</a>
+            <div class="logo"><img src="../../images/theme/cloudui.png" alt="CoralUI logo"></div>
 
             <nav>
-              <a href="#rte01">Simple RTE</a>
+                <a href="#" class="selected">RichTextEditing</a>
+                <a href="https://git.corp.adobe.com/Reef/CoralUI/">Github</a>
             </nav>
-        </section>
 
-      </div>
-    </div>
+            <div class="drawer">
+                <div class="badge">v0.5.0-SNAPSHOT</div>
+            </div>
 
-    <div class="content">
+        </header>
 
-      <section id="General">
-        <h2 class="line" id="rte01">Simple RTE</h2>
-          <nav class="toolbar">
-              <div class="left icongroup">
-                  <a href="#format" data-rte-command="bold" tabindex="-1" class="button rte-toolbar-item rte-tb-bold rte-tbi-disabled">B</a>
-                  <a href="#format" data-rte-command="italic" tabindex="-1" class="button rte-toolbar-item rte-tb-italic rte-tbi-disabled">i</a>
-                  <a href="#format" data-rte-command="underline" tabindex="-1" class="button rte-toolbar-item rte-tb-underline rte-tbi-disabled">U</a>
-              </div>
-          </nav>
-          <div class="editable" data-config="example.json">
-             <p>Li Europan lingues es membres del sam familie. Lor separat existentie es
-             un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular.
-             Li lingues differe solmen in li grammatica, li pronunciation e li plu commun
-             vocabules.</p>
-             <p>Omnicos directe al desirabilite de un nov lingua franca: On refusa
-             continuar payar custosi traductores. At solmen va esser necessi far uniform
-             grammatica, pronunciation e plu sommun paroles.</p>
-             <p>Ma quande lingues coalesce, li grammatica del resultant lingue es plu
-             simplic e regulari quam ti del coalescent lingues. Li nov lingua franca va
-             esser plu simplic e regulari quam li existent Europan lingues. It va esser
-             tam simplic quam Occidental in fact, it va esser Occidental.</p>
-             <p>A un Angleso it va semblar un simplificat Angles, quam un skeptic
-             Cambridge amico dit me que Occidental es. Li Europan lingues es membres del
-             sam familie. Lor separat existentie es un myth.</p>
-             <p>Por scientie, musica, sport etc, litot Europa usa li sam vocabular. Li
-             lingues differe solmen in li grammatica, li pronunciation e li plu commun
-             vocabules. Omnicos directe al desirabilite de un nov lingua franca: On refusa
-             continuar payar custosi traductores.</p>
-             <p>At solmen va esser necessi far uniform grammatica, pronunciation e plu
-             sommun paroles.</p>
-          </div>
+        <div class="page" role="main">
+
+            <div id="main-rail" class="rail left">
+                <div class="pull-to-refresh">
+                    <div class="message">
+                        <i class="arrow"></i>
+                        <i class="spinner large"></i>
+                        <span class="pull">Pull to refresh</span>
+                        <span class="release">Release to refresh</span>
+                        <span class="loading">Loading</span>
+                    </div>
+                </div>
+                <div class="wrap">
+                    <section class="links">
+                        <a class="heading" href="#General">General</a>
+                        <nav>
+                            <a href="#rte01">Simple RTE</a>
+                        </nav>
+                    </section>
+                </div>
+            </div>
+
+            <div class="content">
+
+                <section id="General">
+                    <!--
+                        Parent div - can be omitted if only one RTE is used on page,
+                        or the toolbar is specified explicitly
+                    -->
+                    <div>
+                        <h2 class="line" id="rte01">Simple RTE</h2>
+                        <nav class="toolbar">
+                            <div class="left icongroup">
+                                <a href="#format" data-rte-command="bold" tabindex="-1" class="button rte-toolbar-item rte-tb-bold rte-tbi-disabled">B</a>
+                                <a href="#format" data-rte-command="italic" tabindex="-1" class="button rte-toolbar-item rte-tb-italic rte-tbi-disabled">i</a>
+                                <a href="#format" data-rte-command="underline" tabindex="-1" class="button rte-toolbar-item rte-tb-underline rte-tbi-disabled">U</a>
+                            </div>
+                        </nav>
+                        <div class="editable" data-config="example.json">
+                             <p>Li Europan lingues es membres del sam familie. Lor separat existentie es
+                             un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular.
+                             Li lingues differe solmen in li grammatica, li pronunciation e li plu commun
+                             vocabules.</p>
+                             <p>Omnicos directe al desirabilite de un nov lingua franca: On refusa
+                             continuar payar custosi traductores. At solmen va esser necessi far uniform
+                             grammatica, pronunciation e plu sommun paroles.</p>
+                             <p>Ma quande lingues coalesce, li grammatica del resultant lingue es plu
+                             simplic e regulari quam ti del coalescent lingues. Li nov lingua franca va
+                             esser plu simplic e regulari quam li existent Europan lingues. It va esser
+                             tam simplic quam Occidental in fact, it va esser Occidental.</p>
+                             <p>A un Angleso it va semblar un simplificat Angles, quam un skeptic
+                             Cambridge amico dit me que Occidental es. Li Europan lingues es membres del
+                             sam familie. Lor separat existentie es un myth.</p>
+                             <p>Por scientie, musica, sport etc, litot Europa usa li sam vocabular. Li
+                             lingues differe solmen in li grammatica, li pronunciation e li plu commun
+                             vocabules. Omnicos directe al desirabilite de un nov lingua franca: On refusa
+                             continuar payar custosi traductores.</p>
+                             <p>At solmen va esser necessi far uniform grammatica, pronunciation e plu
+                             sommun paroles.</p>
+                        </div>
 <pre class="prettyprint linenums">
 &lt;div class=&quot;editable&quot;&gt;
 ...
 &lt;/div&gt;
 </pre>
-        </section>
+                    </div>
+                </section>
 
-    </div><!-- /content -->
-  </div><!-- /page -->
+            </div><!-- /content -->
+        </div><!-- /page -->
 
-  <a id="SectionAnchor" style="display: none;" title="Right click to copy section URL">&para;</a>
+        <a id="SectionAnchor" style="display: none;" title="Right click to copy section URL">&para;</a>
 
-</body>
+    </body>
+
 </html>

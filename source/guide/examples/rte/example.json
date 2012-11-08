@@ -1,7 +1,87 @@
 {
-    "rtePlugins": {
-        "format": {
-            "features": "*"
+    "rtePlugins":{
+        "links":{
+            "linkDialogConfig":{
+                "height":316,
+                "linkAttributes":{
+                    "linkAdvanced":{
+                        "xtype":"dialogfieldset",
+                        "title":"Link tracking",
+                        "name":"./linkdialog/cq:adhocLinkTrackingTab",
+                        "collapsible":true,
+                        "inputValue":"advanced",
+                        "collapsed":true,
+                        "items":{
+                            "enable":{
+                                "xtype":"checkbox",
+                                "fieldLabel":"Custom link tracking",
+                                "name":"./linkdialog/cq:adhocLinkTrackingEnableTracking",
+                                "attribute":"enabletracking",
+                                "fieldDescription":"override analytics framework settings",
+                                "listeners":{
+                                    "check":"function(component){var dlg=component.findParentByType('rtelinkdialog');dlg.enableSCFields(component.checked);}"
+                                }
+                            },
+                            "events":{
+                                "xtype":"textfield",
+                                "fieldLabel":"Include SiteCatalyst events",
+                                "name":"./linkdialog/cq:adhocLinkTrackingEvents",
+                                "attribute":"adhocevents",
+                                "fieldDescription":"e.g.: event2, event7"
+                            },
+                            "evars":{
+                                "xtype":"textfield",
+                                "fieldLabel":"Include SiteCatalyst variables",
+                                "name":"./linkdialog/cq:adhocLinkTrackingEvars",
+                                "attribute":"adhocevars",
+                                "fieldDescription":"e.g.: eVar1: pagedata.url, prop4: 'const'"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "misctools":{
+            "features":"*"
+        },
+        "edit":{
+            "features":"*"
+        },
+        "findreplace":{
+            "features":"*"
+        },
+        "format":{
+            "features":"*"
+        },
+        "image":{
+            "features":"*"
+        },
+        "keys":{
+            "features":"*"
+        },
+        "justify":{
+            "features":"*"
+        },
+        "lists":{
+            "features":"*"
+        },
+        "paraformat":{
+            "features":"*"
+        },
+        "spellcheck":{
+            "features":"*"
+        },
+        "styles":{
+            "features":"*"
+        },
+        "subsuperscript":{
+            "features":"*"
+        },
+        "table":{
+            "features":"*"
+        },
+        "undo":{
+            "features":"*"
         }
     }
 }

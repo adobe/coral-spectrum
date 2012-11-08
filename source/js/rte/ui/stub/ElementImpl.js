@@ -27,10 +27,6 @@ CUI.rte.ui.stub.ElementImpl = new Class({
 
     // Helpers -----------------------------------------------------------------------------
 
-    notifyToolbar: function(toolbar) {
-        this.toolbar = toolbar;
-    },
-
     notifyGroupBorder: function(isFirst) {
         // TODO ...?
     },
@@ -40,6 +36,10 @@ CUI.rte.ui.stub.ElementImpl = new Class({
 
     addToToolbar: function(toolbar) {
         // TODO ...?
+    },
+
+    notifyToolbar: function(toolbar) {
+        this.toolbar = toolbar;
     },
 
     createToolbarDef: function() {

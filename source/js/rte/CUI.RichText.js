@@ -15,7 +15,7 @@
         savedOutlineStyle: null,
 
 
-        construct:function (options) {
+        construct: function(options) {
             this.options = options || { };
             // TODO ...
         },
@@ -156,14 +156,17 @@
 
         // Interface ---------------------------------------------------------------------------------------------------
 
-        start: function(config) {
+        start: function(config, toolbarRoot) {
             if (this.editorKernel == null) {
                 this.editorKernel = new CUI.rte.DivKernel(config);
             }
-            this.editorKernel.createToolbar();
             this.$textContainer = this.getTextDiv(this.$element);
             this.$textContainer.addClass("edited");
             this.textContainer = this.$textContainer[0];
+            toolbarRoot = toolbarRoot || this.$textContainer.parent();
+            this.editorKernel.createToolbar({
+                $toolbarRoot: $(toolbarRoot)
+            });
             /*
             this.currentSize = this.textContainer.getSize();
             var pos = el.getXY();

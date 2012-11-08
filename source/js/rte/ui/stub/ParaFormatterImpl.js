@@ -37,6 +37,10 @@ CUI.rte.ui.stub.ParaFormatterImpl = new Class({
         // TODO ...?
     },
 
+    notifyToolbar: function(toolbar) {
+        this.toolbar = toolbar;
+    },
+
     createToolbarDef: function() {
         return {
             "itemId": this.id

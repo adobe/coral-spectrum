@@ -16,48 +16,57 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CUI.rte.ui.cui.ElementImpl = new Class({
+(function($) {
 
-    toString: "ElementImpl",
+    CUI.rte.ui.cui.ElementImpl = new Class({
 
-    extend: CUI.rte.ui.TbElement,
+        toString: "ElementImpl",
 
-    dom: null,
+        extend: CUI.rte.ui.TbElement,
 
+        dom: null,
 
-    // Helpers -----------------------------------------------------------------------------
-
-    notifyToolbar: function(toolbar) {
-        this.toolbar = toolbar;
-    },
-
-    notifyGroupBorder: function(isFirst) {
-        // TODO ...?
-    },
+        $ui: null,
 
 
-    // Interface implementation ------------------------------------------------------------
+        notifyGroupBorder: function(isFirst) {
+            // TODO ...?
+        },
 
-    addToToolbar: function(toolbar) {
-        console.log(this);
-    },
 
-    createToolbarDef: function() {
-        return {
-            "itemId": this.id
-        };
-    },
+        // Interface implementation ------------------------------------------------------------
 
-    setDisabled: function(isDisabled) {
-        // TODO ...?
-    },
+        addToToolbar: function(toolbar) {
+            // not used here
+        },
 
-    setSelected: function(isSelected, suppressEvent) {
-        this._isSelected = isSelected;
-    },
+        notifyToolbar: function(toolbar) {
+            this.toolbar = toolbar;
+            var pluginId = this.plugin.pluginId;
+            var $cont = $(toolbar.getToolbarContainer());
+            this.$ui = $cont.find('a[href="#' + pluginId + '"][data-rte-command="' + this.id
+                    + '"]');
+        },
 
-    isSelected: function() {
-        return this._isSelected;
-    }
+        createToolbarDef: function() {
+            return {
+                "id": this.id,
+                "element": this
+            };
+        },
 
-});
+        setDisabled: function(isDisabled) {
+            // TODO ...?
+        },
+
+        setSelected: function(isSelected, suppressEvent) {
+            this._isSelected = isSelected;
+        },
+
+        isSelected: function() {
+            return this._isSelected;
+        }
+
+    });
+
+})(window.jQuery);

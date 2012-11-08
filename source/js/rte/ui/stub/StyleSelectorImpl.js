@@ -35,6 +35,10 @@ CUI.rte.ui.stub.StyleSelectorImpl = new Class({
         // TODO ...?
     },
 
+    notifyToolbar: function(toolbar) {
+        this.toolbar = toolbar;
+    },
+
     createToolbarDef: function() {
         // TODO ...?
         return [ ];
