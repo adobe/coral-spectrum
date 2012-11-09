@@ -670,7 +670,6 @@ CUI.Filters.defaultOptionRenderer = function(index, key, highlight, icon) {
     return $("<span>" + value + "</span>");
 };
 
-// TODO: update this function work off key rather than index as in CUI.Filters.defaultOptionRenderer
 CUI.Filters.cqTagOptionRenderer = function(iterator, key, highlight) {
     var index = $.inArray(key, this.options.options);
     var value = key;
