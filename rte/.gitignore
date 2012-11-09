@@ -4,7 +4,7 @@
 /node_modules
 /components
 /misc
-/content/target
+/extjs/target
 .idea/
 atlassian-ide-plugin.xml
 *.iml
