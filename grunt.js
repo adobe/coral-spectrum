@@ -498,6 +498,17 @@ module.exports = function(grunt) {
         files: {
           '<%= dirs.build %>/examples/assets/guide.css': '<%= dirs.source %>/guide/examples/assets/guide.less'
         }
+      },
+      "wizard": {
+        options: {
+          paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
+            dirs.source+'/less/', // must hardcode paths here, grunt-contrib-less doesn't support template tags
+            dirs.temp+'/less/' // must hardcode paths here, grunt-contrib-less doesn't support template tags
+          ]
+        },
+        files: {
+          '<%= dirs.build %>/examples/assets/wizard.css': '<%= dirs.source %>/guide/examples/assets/wizard.less'
+        }
       }
     },
 
