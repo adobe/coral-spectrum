@@ -344,7 +344,7 @@ module.exports = function(grunt) {
         dest: '<%= dirs.build %>/js/CUI.min.js'
       },
       cui_rte: {
-        src: ['<config:concat.cui-rte.dest>'],
+        src: ['<config:concat.cui_rte.dest>'],
         dest: '<%= dirs.build %>/js/cui-rte.min.js'
       }
       // TBD: minify individual JS files?
