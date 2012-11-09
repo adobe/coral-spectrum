@@ -263,6 +263,9 @@ var index = filters.getSelectedIndex();
         if (this.options.multiple && index >=0 && this.selectedIndices.indexOf(index * 1) < 0) {
             this.selectedIndices.push(index * 1); // force numeric
         }
+        if (!this.options.multiple) {
+            this.selectedIndices = (index >= 0) ? [index] : [];
+        }
         this._update();
     },
     
