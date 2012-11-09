@@ -55,7 +55,7 @@ var wizard = null; // TODO for DEV purpose
      *
      * @param {Object} options Component options
      * @param {Mixed} options.element jQuery selector or DOM element to use for panel
-     * @param {Function} options.onChangePage Callback called each time the page change (with arguments: `button, page`).
+     * @param {Function|Object} options.onPageChanged Callback called each time the page change (with arguments: `page`). An Collection of functions can be given. When a page is displayed if his data-wizard-page-callback attribute can be found in the collection, then the corresponding callback will be executed (examples is given in guide/wizard.html).
      * @param {Function} options.onFinish Callback called after the last page change (without arguments).
      */
     construct: function(options) {
@@ -86,7 +86,7 @@ var wizard = null; // TODO for DEV purpose
       backDisabled: false,
       nextLabel: 'next',
       backLabel: 'back',
-      onChangePage: null,
+      onPageChanged: null,
       onFinish: null
     },
 
@@ -103,6 +103,7 @@ var wizard = null; // TODO for DEV purpose
 
       this.pageNumber = pageNumber;
       var page = this.pageNumber - 1;
+      var $newPage = this.getCurrentPage();
 
       this.$nav.find('li.active').removeClass('active');
       this.$nav.find('li:eq(' + page + ')').addClass('active');
@@ -111,6 +112,15 @@ var wizard = null; // TODO for DEV purpose
       this.$element.find('>section:eq(' + page + ')').addClass('active');
 
       this._updateButtons();
+
+      // Accept a callback or a collection of callbacks
+      if (typeof this.options.onPageChanged === 'function') {
+        this.options.onPageChanged($newPage);
+      } else if (typeof this.options.onPageChanged === 'object' &&
+                this._dataExists($newPage, 'wizardPageCallback') &&
+                typeof this.options.onPageChanged[$newPage.data('wizardPageCallback')] === 'function') {
+        this.options.onPageChanged[$newPage.data('wizardPageCallback')]($newPage);
+      }
     },
 
     /**
@@ -175,7 +185,7 @@ var wizard = null; // TODO for DEV purpose
     /** @ignore */
     _onNextClick: function(e) {
       if (this.getCurrentPageNumber() < this.$nav.find('li').length) {
-        this._doButtonClick(e.target, this.getCurrentPageNumber() + 1);
+        this.changePage(this.getCurrentPageNumber() + 1);
       } else {
         if (typeof this.options.onFinish === 'function') {
           this.options.onFinish();
@@ -185,18 +195,7 @@ var wizard = null; // TODO for DEV purpose
 
     /** @ignore */
     _onBackClick: function(e) {
-      this._doButtonClick(e.target, this.getCurrentPageNumber() - 1);
-    },
-
-    _doButtonClick: function(button, pageNumber) {
-      var currentPage = this.getCurrentPageNumber();
-
-      this.changePage(pageNumber);
-
-      if (currentPage !== this.getCurrentPageNumber() &&
-          typeof this.options.onChangePage === 'function') {
-        this.options.onChangePage(button, $(this.getCurrentPage()));
-      }
+      this.changePage(this.getCurrentPageNumber() - 1);
     },
 
     /** @ignore */

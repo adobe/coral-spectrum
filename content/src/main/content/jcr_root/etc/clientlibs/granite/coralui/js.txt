@@ -6,6 +6,7 @@ plugins/toe.js
 Class.js
 CUI.js
 CUI.Util.js
+CUI.Templates.js
 components/CUI.Widget.js
 components/CUI.Modal.js
 components/CUI.Tabs.js

@@ -95,11 +95,9 @@
                     <exclude>rte/**</exclude>
                 </excludes>
             </resource>
-
-            <!-- templates....don't know what to do with them. -->
             <resource>
-                <directory>${basedir}/build</directory>
-                <targetPath>${coral.build.dir}/resources</targetPath>
+                <directory>${basedir}/build/js</directory>
+                <targetPath>${coral.build.dir}/js</targetPath>
                 <includes>
                     <include>**/CUI.Templates.js</include>
                 </includes>
