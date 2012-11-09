@@ -707,6 +707,69 @@
                     </div>
                 </section>
 
+                <section id="Wizard">
+                    <h2 class="line">Wizard</h2>
+                    <p>A multi step dialog which can be used to create multi step forms.</p>
+
+                    <div class="componentSample">
+                        <div class="example">
+                            <div class="wizard" data-init="wizard">
+                                <nav>
+                                    <button class="back">Back</button>
+                                    <ul>
+                                        <li>Frist step</li>
+                                        <li>Second step</li>
+                                        <li>Third step</li>
+                                        <li>Last step</li>
+                                    </ul>
+                                    <button class="next" disabled>Next</button>
+                                </nav>
+                                <section data-next-disabled="false" data-back-label="Cancel">
+                                    The first step is optional.
+                                </section>
+                                <section data-next-disabled="false">
+                                    The second step is optional.
+                                </section>
+                                <section data-next-disabled="false">
+                                    The third step is optional.
+                                </section>
+                                <section data-next-label="Create">
+                                    Name is required.
+                                </section>
+                            </div>
+                        </div>
+
+                        <pre class="prettyprint linenums">
+&lt;div class=&quot;example&quot;&gt;
+    &lt;div class=&quot;wizard&quot; data-init=&quot;wizard&quot;&gt;
+        &lt;nav&gt;
+            &lt;button class=&quot;back&quot;&gt;Back&lt;/button&gt;
+            &lt;ul&gt;
+                &lt;li&gt;Frist step&lt;/li&gt;
+                &lt;li&gt;Second step&lt;/li&gt;
+                &lt;li&gt;Third step&lt;/li&gt;
+                &lt;li&gt;Last step&lt;/li&gt;
+            &lt;/ul&gt;
+            &lt;button class=&quot;next&quot; disabled&gt;Next&lt;/button&gt;
+        &lt;/nav&gt;
+        &lt;section data-next-disabled=&quot;false&quot; data-back-label=&quot;Cancel&quot;&gt;
+            The first step is optional.
+        &lt;/section&gt;
+        &lt;section data-next-disabled=&quot;false&quot;&gt;
+            The second step is optional.
+        &lt;/section&gt;
+        &lt;section data-next-disabled=&quot;false&quot;&gt;
+            The third step is optional.
+        &lt;/section&gt;
+        &lt;section data-next-label=&quot;Create&quot;&gt;
+            Name is required.
+        &lt;/section&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+                    </div>
+                </section>
+
             </section><!-- /Navigation -->
 
             <section id="ButtonsAndControls">

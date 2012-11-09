@@ -7,10 +7,50 @@ var wizard = null; // TODO for DEV purpose
     /**
      * @extends CUI.Widget
      * @classdesc A wizard widget to navigate throught a form.
+     *    
+     *  <div class="wizard" data-init="wizard">
+     *      <nav>
+     *          <button class="back">Back</button>
+     *          <ul>
+     *              <li>Frist step</li>
+     *              <li>Second step</li>
+     *              <li>Third step</li>
+     *              <li>Last step</li>
+     *          </ul>
+     *          <button class="next" disabled>Next</button>
+     *      </nav>
+     *      <section data-next-disabled="false" data-back-label="Cancel">
+     *          The first step is optional.
+     *      </section>
+     *      <section data-next-disabled="false">
+     *          The second step is optional.
+     *      </section>
+     *      <section data-next-disabled="false">
+     *          The third step is optional.
+     *      </section>
+     *      <section data-next-label="Create">
+     *          Name is required.
+     *      </section>
+     *  </div>
+     *     
+     *  @example
+     *  <caption>Instantiate by data API</caption>
+     *  &lt;div class=&quot;wizard&quot; data-init=&quot;wizard&quot;&gt;
+     *      &lt;input type=&quot;datetime&quot; value=&quot;2012-10-20 11:10&quot;&gt;
+     *      &lt;button&gt;&lt;span class=&quot;icon-calendar small&quot;&gt;Datetime picker&lt;/span&gt;&lt;/button&gt;
+     *  &lt;/div&gt;
+     *     
+     *  @example
+     *  <caption>Instantiate with Class</caption>
+     *  var wizard = new CUI.Wizard({
+     *    element: '#myOrdinarySelectBox'
+     *  });
+     *     
+     *  @example
+     *  <caption>Instantiate by jQuery plugin</caption>
+     *  $("div.wizard").wizard();
      *
-     *
-     *
-     * @desc Creates a new tab panel    
+     * @desc Creates a new wizard widget 
      * @constructs
      *
      * @param {Object} options Component options
@@ -137,7 +177,7 @@ var wizard = null; // TODO for DEV purpose
       if (this.getCurrentPageNumber() < this.$nav.find('li').length) {
         this._doButtonClick(e.target, this.getCurrentPageNumber() + 1);
       } else {
-        if (typeof this.options.onFinish == 'function') {
+        if (typeof this.options.onFinish === 'function') {
           this.options.onFinish();
         }
       }
@@ -153,8 +193,8 @@ var wizard = null; // TODO for DEV purpose
 
       this.changePage(pageNumber);
 
-      if (currentPage != this.getCurrentPageNumber() &&
-          typeof this.options.onChangePage == 'function') {
+      if (currentPage !== this.getCurrentPageNumber() &&
+          typeof this.options.onChangePage === 'function') {
         this.options.onChangePage(button, $(this.getCurrentPage()));
       }
     },
@@ -163,17 +203,13 @@ var wizard = null; // TODO for DEV purpose
     _updateButtons: function() {
       var page = this.getCurrentPage();
 
-      this.setNextButtonLabel((this._dataExists(page, 'nextLabel')) 
-        ? page.data('nextLabel') 
+      this.setNextButtonLabel((this._dataExists(page, 'nextLabel')) ? page.data('nextLabel') 
         : this.options.nextLabel);
-      this.setBackButtonLabel((this._dataExists(page, 'backLabel')) 
-        ? page.data('backLabel') 
+      this.setBackButtonLabel((this._dataExists(page, 'backLabel')) ? page.data('backLabel') 
         : this.options.backLabel);
-      this.setNextButtonDisabled((this._dataExists(page, 'nextDisabled')) 
-        ? page.data('nextDisabled') 
+      this.setNextButtonDisabled((this._dataExists(page, 'nextDisabled')) ? page.data('nextDisabled') 
         : this.options.nextDisabled);
-      this.setBackButtonDisabled((this._dataExists(page, 'backDisabled')) 
-        ? page.data('backDisabled') 
+      this.setBackButtonDisabled((this._dataExists(page, 'backDisabled')) ? page.data('backDisabled') 
         : this.options.backDisabled);
     },
 
