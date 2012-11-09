@@ -69,10 +69,10 @@
                 <targetPath>${vault.work}/jcr_root</targetPath>
             </resource>
             <resource>
-                <directory>${basedir}/build/js</directory>
-                <includes>
-                    <include>rte-core-extjs.js</include>
-                </includes>
+                <directory>${basedir}/source</directory>
+                <excludes>
+                    <exclude>core/adapter/jquery/**</exclude>
+                </excludes>
                 <targetPath>${rte.target.dir}</targetPath>
             </resource>
         </resources>
