@@ -55,7 +55,7 @@ var wizard = null; // TODO for DEV purpose
      *
      * @param {Object} options Component options
      * @param {Mixed} options.element jQuery selector or DOM element to use for panel
-     * @param {Function} options.onChangePage Callback called each time the page change (with arguments: `button, page`).
+     * @param {Function} options.onPageChanged Callback called each time the page change (with arguments: `page, button`).
      * @param {Function} options.onFinish Callback called after the last page change (without arguments).
      */
     construct: function(options) {
@@ -86,7 +86,7 @@ var wizard = null; // TODO for DEV purpose
       backDisabled: false,
       nextLabel: 'next',
       backLabel: 'back',
-      onChangePage: null,
+      onPageChanged: null,
       onFinish: null
     },
 
@@ -194,8 +194,8 @@ var wizard = null; // TODO for DEV purpose
       this.changePage(pageNumber);
 
       if (currentPage !== this.getCurrentPageNumber() &&
-          typeof this.options.onChangePage === 'function') {
-        this.options.onChangePage(button, $(this.getCurrentPage()));
+          typeof this.options.onPageChanged === 'function') {
+        this.options.onPageChanged($(this.getCurrentPage()), button);
       }
     },
 

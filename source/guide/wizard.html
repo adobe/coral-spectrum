@@ -16,15 +16,38 @@
        
         <script src="js/libs/jquery-gridlayout.js"></script>
         <script>
-            jQuery(function($){
-                $(".grid-container").cuigridlayout();
+            $(document).ready(function(){
+              var wizard = new CUI.Wizard({ 
+                element: '.wizard' ,
+                onPageChanged: function(page) {
+                    if (page.hasClass('properties')) {
+                      validateProperties();
+                    }
+                },
+                onFinish: function() {
+                    alert('Page created!');
+                }
+              });
+
+              var validateProperties = function(){
+                if ($('input[name="title"]').val() != '') {
+                  wizard.setNextButtonDisabled(false);
+                } else {
+                  wizard.setNextButtonDisabled(true);
+                }
+              };
+
+              $('input[name="title"]').keyup(validateProperties);
+
+              $('.select-source .grid-container').cuigridlayout();
+              $('.select-template .grid-container').cuigridlayout();
             });
         </script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
     </head>
     <body>
-        <div class="wizard" data-init="wizard">
+        <div class="wizard">
             <nav>
                 <button class="back">Back</button>
                 <ol>
@@ -260,7 +283,7 @@
                   </nav>
                   <section class="active basic">
                       <span class="left">
-                        <label>Title</label>
+                        <label>Title *</label>
                         <input type="text" name="title"/>
 
                         <label>Navigation title</label>
@@ -283,15 +306,15 @@
                       </span>
                       <span class="left">
                         <label>Description</label>
-                        <input type="text" name="title"/>
+                        <textarea name="description"></textarea>
 
                         <label>Tags</label>
-                        <div class="filters" data-init="filters">
-                            <input type="text" placeholder="Single Term Filter">
-                            <select>
-                                <option selected>Apple</option>
+                        <div class="filters" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter">
+                            <input type="text">
+                            <select    multiple>
+                                <option>Apple</option>
                                 <option>Pear</option>
-                                <option>Banana</option>
+                                <option selected>Banana</option>
                             </select>
                         </div>
 

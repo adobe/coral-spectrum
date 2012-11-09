@@ -5,21 +5,30 @@
 
 .wizard {
     &>nav {
-        background: #494D4E;
+        background: @wizard-nav-background-color;
 
         button {
-            color: #FFFFFF;
+            color: @wizard-button-color;
             margin: 6px 9px 8px 9px;
         }
 
+        button[disabled] {
+            opacity: 0.5;
+            color: @wizard-button-color;
+
+            &:hover {
+                color: @wizard-button-color;
+            }
+        }
+
         button.back {
-            background: #434749;
-            border-color: #37393A;
+            background: @wizard-back-button-background-color;
+            border-color: @wizard-back-button-border-color;
         }
 
         button.next {
-            background: #4090d1;
-            border-color: #1a3348;
+            background: @wizard-next-button-background-color;
+            border-color: @wizard-next-button-border-color;
         }
 
         ol {
@@ -28,7 +37,7 @@
 
             li {
                 display: inline;
-                color: #7f8283;
+                color: @wizard-nav-title-color;
 
                 &:before {
                     content: counter(item) "  "; 
@@ -36,7 +45,7 @@
                 }
 
                 &.active {
-                    color: #FFFFFF;
+                    color: @wizard-nav-active-title-color;
                 }
             }
         }
