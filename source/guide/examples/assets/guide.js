@@ -39,10 +39,16 @@ $(function() {
     }
   });
 
-  // closable rail
-  $('#close-rail').fipo('tap', 'click', function () {
-    rail.toggleClass('closed');
-  });
+    // closable rail
+    $('#close-rail').fipo('tap', 'click', function () {
+        if (rail.hasClass("closed")) {
+            rail.removeClass("closed");
+            rail.trigger("open");
+        } else {
+            rail.addClass("closed");
+            rail.trigger("close");
+        }
+    });
 
   // closable bottom toolbar in rail
   var quickform = $('.quickform');
