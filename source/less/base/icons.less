@@ -5,39 +5,62 @@
 
 @icon-divider-color: rgb(206, 206, 206);
 
-@icon-label-padding-multiplier: 1.25;
-@icon-label-line-height-multiplier: 1.5;
+@icon-label-padding-multiplier: 0.25;
+@icon-label-line-height-multiplier: 1.15;
+
+.icon-size(@size) {
+  line-height: @size;
+  font-size: @size;
+  height: @size;
+
+  &, &:before {
+    width: @size;
+    height: @size;
+  }
+  &:before {
+    .background-size(@size);
+  }
+}
 
 .icon-xsmall() {
-  width: @icon-xsmall-size;
-  height: @icon-xsmall-size;
-  .background-size(@icon-xsmall-size);
-  line-height: @icon-xsmall-size;
+  .icon-size(@icon-xsmall-size);
 }
 .icon-small() {
-  width: @icon-small-size;
-  height: @icon-small-size;
-  .background-size(@icon-small-size);
-  line-height: @icon-small-size;
+  .icon-size(@icon-small-size);
 }
 .icon-medium() {
-  width: @icon-medium-size;
-  height: @icon-medium-size;
-  .background-size(@icon-medium-size);
-  line-height: @icon-medium-size;
+  .icon-size(@icon-medium-size);
 }
 .icon-large() {
-  width: @icon-large-size;
-  height: @icon-large-size;
-  .background-size(@icon-large-size);
-  line-height: @icon-large-size;
+  .icon-size(@icon-large-size);
 }
 
 .hide-inner-text() {
-  text-indent: 100%;
-  white-space: nowrap;
-  overflow: hidden;
+  // Does not work with :before approach
+  //text-indent: 100%;
+  //white-space: nowrap;
   color: transparent;
+  overflow: hidden;
+}
+
+[class^="icon-"].xsmall,
+[class*=" icon-"].xsmall { // 12px
+  .icon-xsmall;
+}
+
+[class^="icon-"].small,
+[class*=" icon-"].small { // 16px
+  .icon-small;
+}
+
+[class^="icon-"].medium,
+[class*=" icon-"].medium { // 24px
+  .icon-medium;
+}
+
+[class^="icon-"].large,
+[class*=" icon-"].large { // 32px
+  .icon-large;
 }
 
 /*
@@ -52,46 +75,50 @@
 
   display: inline-block;
   
-  background-position: center center; // center so padding can be added
-  .background-size(1.5em);
-  background-repeat: no-repeat;
-  
   vertical-align: top; // make text line up correctly in paragraphs
   
   // Hide inner text by default
   .hide-inner-text;
   
+  &.white {
+    opacity: 0.80;
+  }
+  &.blue {
+    opacity: 1;
+  }
+  
   &.withLabel {
     width: auto;
-    height: auto;
     
     text-indent: 0;
     white-space: inherit;
     overflow: visible;
     color: inherit;
     
-    background-position: left center; // align left so labels can be added
-    
     &.xsmall {
-      padding: 0;
-      padding-left: @icon-xsmall-size * @icon-label-padding-multiplier;
-      //line-height: @icon-xsmall-size * @icon-label-line-height-multiplier;
+      line-height: @icon-xsmall-size * @icon-label-line-height-multiplier;
+      &:before {
+        margin-right: @icon-xsmall-size * @icon-label-padding-multiplier;
+      }
     }
     &.small {
-      padding: 0;
-      padding-left: @icon-small-size * @icon-label-padding-multiplier;
-      //line-height: @icon-small-size * @icon-label-line-height-multiplier;
+      line-height: @icon-small-size * @icon-label-line-height-multiplier;
+      &:before {
+        margin-right: @icon-small-size * @icon-label-padding-multiplier;
+      }
     }
     &,
     &.medium {
-      padding: 0;
-      padding-left: @icon-medium-size * @icon-label-padding-multiplier;
-      //line-height: @icon-medium-size * @icon-label-line-height-multiplier;
+      line-height: @icon-medium-size * @icon-label-line-height-multiplier;
+      &:before {
+        margin-right: @icon-medium-size * @icon-label-padding-multiplier;
+      }
     }
     &.large {
-      padding: 0;
-      padding-left: @icon-large-size * @icon-label-padding-multiplier;
-      //line-height: @icon-large-size * @icon-label-line-height-multiplier;
+      line-height: @icon-large-size * @icon-label-line-height-multiplier;
+      &:before {
+        margin-right: @icon-large-size * @icon-label-padding-multiplier;
+      }
     }
   }
   
@@ -122,71 +149,98 @@ i[class*=" icon-"] {
 */
 p > [class^="icon-"],
 p > [class*=" icon-"] {
-  width: 1em;
-  height: 1em;
   line-height: 1em;
-  .background-size(1em);
+  
+  &, &:before {
+    width: 1em;
+    height: 1em;
+  }
+  
+  &:before {
+    .background-size(1em);
+  }
 }
 
+  
+// Hover states & opacity
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  content: " ";
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
 
-[class^="icon-"].xsmall,
-[class*=" icon-"].xsmall { // 12px
-  .icon-xsmall;
+  background-position: center center; // center so padding can be added
+  .background-size(1.5em);
+  background-repeat: no-repeat;
+  
+  opacity: 0.65;
 }
 
-[class^="icon-"].small,
-[class*=" icon-"].small { // 16px
-  .icon-small;
-}
-
-[class^="icon-"].medium,
-[class*=" icon-"].medium { // 24px
-  .icon-medium;
-}
-
-[class^="icon-"].large,
-[class*=" icon-"].large { // 32px
-  .icon-large;
-}
-
-/*
-  Class: a.icon-* and span.icon-*
-  An icon with a label. Use <a> for clickable icons and <span> for non-clickable.
-*/
-
+// Clickable icons
 button,
-a.button {
+a {
   i[class^="icon-"],
   i[class*=" icon-"] {
     .icon-small;
     margin-right: 0.25rem;
     //margin: -0.25rem 0.25rem -0.35rem 0; // For 24px, Don't push the button to a taller height
+    
+    &:before {
+      opacity: 1;
+    }
+  }
+  
+  // Hover states & opacity
+  &[class^="icon-"],
+  &[class*=" icon-"] {
+    cursor: pointer;
+
+    &:before {
+      opacity: 0.65;
+    }
+
+    &:hover {
+      &:before {
+        opacity: 0.80;
+      }
+    }
+
+    &:active {
+      &:before {
+        opacity: 1
+      }
+    }
   }
 }
 
-button[class^="icon-"],
-button[class*=" icon-"] {
-  margin: 0;
-  padding: 0;
+// Buttons as icon
+button,
+a.button {
+  &[class^="icon-"],
+  &[class*=" icon-"] {
+    margin: 0;
+    padding: 0;
 
-  font-size: inherit;
+    font-size: inherit;
   
-  min-width: 0;
+    min-width: 0;
   
-  &,
-  &:hover,
-  &:active {
-    border: none;
+    &,
+    &:hover,
+    &:active {
+      border: none;
 
-    box-shadow: none;
+      box-shadow: none;
 
-    background-color: transparent;
-    background-repeat: no-repeat;
+      background-color: transparent;
+      background-image: none;
     
-    color: inherit;
-    text-shadow: none;
-    font-weight: normal;
+      color: inherit;
+      text-shadow: none;
+      font-weight: normal;
     
-    filter: none;
+      filter: none;
+    }
   }
 }
