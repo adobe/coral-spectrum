@@ -21,14 +21,23 @@
             background: #4090d1;
             border-color: #1a3348;
         }
-        
-        li {
-            display: inline;
-            list-style-type: none;
-            color: #7f8283;
 
-            &.active {
-              color: #FFFFFF;
+        ol {
+
+            counter-reset: item;
+
+            li {
+                display: inline;
+                color: #7f8283;
+
+                &:before {
+                    content: counter(item) "  "; 
+                    counter-increment: item;
+                }
+
+                &.active {
+                    color: #FFFFFF;
+                }
             }
         }
     }

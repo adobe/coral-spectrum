@@ -11,12 +11,12 @@ var wizard = null; // TODO for DEV purpose
      *  <div class="wizard" data-init="wizard">
      *      <nav>
      *          <button class="back">Back</button>
-     *          <ul>
+     *          <ol>
      *              <li>Frist step</li>
      *              <li>Second step</li>
      *              <li>Third step</li>
      *              <li>Last step</li>
-     *          </ul>
+     *          </ol>
      *          <button class="next" disabled>Next</button>
      *      </nav>
      *      <section data-next-disabled="false" data-back-label="Cancel">
@@ -64,7 +64,7 @@ var wizard = null; // TODO for DEV purpose
       this.$nav = this.$element.find('nav').first();
       this.$back = this.$nav.find('button').first();
       this.$next = this.$nav.find('button').last();
-      this.$pageOverview = this.$nav.find('ul').last();
+      this.$pageOverview = this.$nav.find('ol').last();
 
       // Set toolbar classes
       this.$nav.addClass('toolbar');
