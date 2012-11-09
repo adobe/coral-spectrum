@@ -3,7 +3,15 @@
   var commentRE = /<!--.*?-->\n?/g;
   var badCSSCharsRE = /[^\w-]/g;
   var svgRE = /\.svg$/i;
-
+  var opacityRE = / opacity="[.\d]+"/ig;
+  var svgTagRE = /<svg/i;
+  var backgroundRE = / enable-background="new[ ]*"/ig;
+  var newlineRE = /(\r\n|\n|\r)/g;
+  var layerNameRE = / id="Layer_\d+"/i;
+  var zeroPXRE = /0px/g;
+  
+  var psuedoSelector = ':before';
+  
   // Basic filename transform function
   function getCSSClassFromFileName(input) {
     // Remove path
@@ -19,7 +27,7 @@
   }
   
   // Remove any chars that could break the CSS classname
-  function santizeCSSClass(input) {
+  function sanitizeCSSClass(input) {
     return input.replace(badCSSCharsRE, '');
   }
 
@@ -38,25 +46,68 @@
       // Get the list of all source files
       var srcFiles = grunt.file.expand(this.data.src);
     
+      var colors = this.data.colors;
+    
       var outputCSS = '';
       
       // Get each file
       srcFiles.forEach(function(src) {
-        var svgDataURI = "data:image/svg+xml;base64,";
+        var svgDataURIPrefix = "data:image/svg+xml;base64,";
 
         // Read the SVG file in
         var svgFileContents = grunt.file.read(src, 'utf8').toString();
       
         // Strip comments
-        svgFileContents.replace(commentRE, '');
+        svgFileContents = svgFileContents.replace(commentRE, '');
       
+        // Remove opacity
+        svgFileContents = svgFileContents.replace(opacityRE, '');
+        
+        // Remove background tag
+        svgFileContents = svgFileContents.replace(backgroundRE, '');
+        
+        // Remove newlines
+        svgFileContents = svgFileContents.replace(newlineRE, '');
+      
+        // Remove/normalize arbitrary layer names
+        svgFileContents = svgFileContents.replace(layerNameRE, ' id="icon"');
+       
+        // Make zero unitless
+        svgFileContents = svgFileContents.replace(zeroPXRE, '0');
+        
         // Get the corresponding CSS class name
-        var className = santizeCSSClass(transformClassName(src));
+        var className = sanitizeCSSClass(transformClassName(src));
       
-        // Create the data URI
-        var encoded = svgDataURI + (new Buffer(svgFileContents).toString('base64'));
-      
-        outputCSS += '.'+classPrefix+className+' {background-image:url("'+encoded+'") !important;}\n';
+        var additionalClass = '';
+        for (var color in colors) {
+          var colorInfo = colors[color];
+          if (color !== 'base') {
+            additionalClass = '.'+color;
+          }
+        
+          var otherSelectors = colorInfo.otherSelectors || [];
+          
+          var newFileContents = svgFileContents.replace(svgTagRE, '<svg fill="'+colorInfo.color+'"');
+          
+          // Create the data URI
+          var encoded = svgDataURIPrefix + (new Buffer(newFileContents).toString('base64'));
+          
+          // TODO: Create states for each opacity
+          
+          var baseClass = '.'+classPrefix+className;
+          
+          var selectors = [
+            baseClass+additionalClass+psuedoSelector
+          ];
+          
+          // Add additional selectors
+          otherSelectors.forEach(function(selectorInfo) {
+            selectors.push(selectorInfo.tag+baseClass+selectorInfo.selector+psuedoSelector);
+          });
+          
+          // Add CSS
+          outputCSS += selectors.join(',')+' {background-image:url("'+encoded+'") !important;}\n';
+        }      
       });
     
       grunt.log.ok('CSS created for '+srcFiles.length+' icons');
