@@ -32,7 +32,7 @@
                 </ol>
                 <button class="next" disabled>Next</button>
             </nav>
-            <section class="select-source" data-next-disabled="false" data-back-label="Cancel">
+            <section class="select-source" data-wizard-page-callback="select-source" data-next-disabled="false" data-back-label="Cancel">
               <div class="toolbar">
                 <div class="left icongroup">
                     <button class="icon-text">Calendar</button>
@@ -165,7 +165,7 @@
                 </span>
             </section>
 
-            <section class="select-template" data-next-disabled="false">
+            <section class="select-template" data-wizard-page-callback="select-template" data-next-disabled="false">
               <div class="grid-container">
                 <div class="grid-0">
                   <article class="card-page"><a href="#">
@@ -243,7 +243,7 @@
               </div>
             </section>
 
-            <section class="properties" data-next-label="Create">
+            <section class="properties" data-wizard-page-callback="properties" data-next-label="Create">
                 <article class="card-page left"><a href="#">
                   <img src="examples/assets/preview1.png" alt=""/>
                   <h4>Navtitle</h4>

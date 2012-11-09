@@ -6,16 +6,20 @@ $(document).ready(function(){
 
   var wizard = new CUI.Wizard({ 
     element: '.wizard' ,
-    onPageChanged: function(page) {
-        if (page.hasClass('properties')) {
-          validateProperties();
-        } else if (page.hasClass('select-source') && !sourceGridRendered) {
+    onPageChanged: {
+      'properties': validateProperties,
+      'select-source': function() {
+        if (!sourceGridRendered) {
             new $.CUIGridLayout({}, $('.select-source .grid-container'));
-            sourceGridRendered = true;          
-        } else if (page.hasClass('select-template') && !templateGridRendered) {
+            sourceGridRendered = true;
+        }
+      },
+      'select-template': function() {
+        if (!templateGridRendered) {
             new $.CUIGridLayout({}, $('.select-template .grid-container'));
             templateGridRendered = true;
         }
+      },
     },
     onFinish: function() {
         alert('Page created!');

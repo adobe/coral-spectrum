@@ -55,7 +55,7 @@ var wizard = null; // TODO for DEV purpose
      *
      * @param {Object} options Component options
      * @param {Mixed} options.element jQuery selector or DOM element to use for panel
-     * @param {Function} options.onPageChanged Callback called each time the page change (with arguments: `page`).
+     * @param {Function|Object} options.onPageChanged Callback called each time the page change (with arguments: `page`). An Collection of functions can be given. When a page is displayed if his data-wizard-page-callback attribute can be found in the collection, then the corresponding callback will be executed (examples is given in guide/wizard.html).
      * @param {Function} options.onFinish Callback called after the last page change (without arguments).
      */
     construct: function(options) {
@@ -103,6 +103,7 @@ var wizard = null; // TODO for DEV purpose
 
       this.pageNumber = pageNumber;
       var page = this.pageNumber - 1;
+      var $newPage = this.getCurrentPage();
 
       this.$nav.find('li.active').removeClass('active');
       this.$nav.find('li:eq(' + page + ')').addClass('active');
@@ -112,8 +113,13 @@ var wizard = null; // TODO for DEV purpose
 
       this._updateButtons();
 
+      // Accept a callback or a collection of callbacks
       if (typeof this.options.onPageChanged === 'function') {
-        this.options.onPageChanged($(this.getCurrentPage()));
+        this.options.onPageChanged($newPage);
+      } else if (typeof this.options.onPageChanged === 'object' &&
+                this._dataExists($newPage, 'wizardPageCallback') &&
+                typeof this.options.onPageChanged[$newPage.data('wizardPageCallback')] === 'function') {
+        this.options.onPageChanged[$newPage.data('wizardPageCallback')]($newPage);
       }
     },
 
