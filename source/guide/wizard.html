@@ -15,34 +15,8 @@
         <script src="js/CUI.js"></script>
        
         <script src="js/libs/jquery-gridlayout.js"></script>
-        <script>
-            $(document).ready(function(){
-              var wizard = new CUI.Wizard({ 
-                element: '.wizard' ,
-                onPageChanged: function(page) {
-                    if (page.hasClass('properties')) {
-                      validateProperties();
-                    }
-                },
-                onFinish: function() {
-                    alert('Page created!');
-                }
-              });
-
-              var validateProperties = function(){
-                if ($('input[name="title"]').val() != '') {
-                  wizard.setNextButtonDisabled(false);
-                } else {
-                  wizard.setNextButtonDisabled(true);
-                }
-              };
-
-              $('input[name="title"]').keyup(validateProperties);
-
-              $('.select-source .grid-container').cuigridlayout();
-              $('.select-template .grid-container').cuigridlayout();
-            });
-        </script>
+        <script src="examples/assets/wizard.js"></script>
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
     </head>

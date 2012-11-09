@@ -55,7 +55,7 @@ var wizard = null; // TODO for DEV purpose
      *
      * @param {Object} options Component options
      * @param {Mixed} options.element jQuery selector or DOM element to use for panel
-     * @param {Function} options.onPageChanged Callback called each time the page change (with arguments: `page, button`).
+     * @param {Function} options.onPageChanged Callback called each time the page change (with arguments: `page`).
      * @param {Function} options.onFinish Callback called after the last page change (without arguments).
      */
     construct: function(options) {
@@ -111,6 +111,10 @@ var wizard = null; // TODO for DEV purpose
       this.$element.find('>section:eq(' + page + ')').addClass('active');
 
       this._updateButtons();
+
+      if (typeof this.options.onPageChanged === 'function') {
+        this.options.onPageChanged($(this.getCurrentPage()));
+      }
     },
 
     /**
@@ -175,7 +179,7 @@ var wizard = null; // TODO for DEV purpose
     /** @ignore */
     _onNextClick: function(e) {
       if (this.getCurrentPageNumber() < this.$nav.find('li').length) {
-        this._doButtonClick(e.target, this.getCurrentPageNumber() + 1);
+        this.changePage(this.getCurrentPageNumber() + 1);
       } else {
         if (typeof this.options.onFinish === 'function') {
           this.options.onFinish();
@@ -185,18 +189,7 @@ var wizard = null; // TODO for DEV purpose
 
     /** @ignore */
     _onBackClick: function(e) {
-      this._doButtonClick(e.target, this.getCurrentPageNumber() - 1);
-    },
-
-    _doButtonClick: function(button, pageNumber) {
-      var currentPage = this.getCurrentPageNumber();
-
-      this.changePage(pageNumber);
-
-      if (currentPage !== this.getCurrentPageNumber() &&
-          typeof this.options.onPageChanged === 'function') {
-        this.options.onPageChanged($(this.getCurrentPage()), button);
-      }
+      this.changePage(this.getCurrentPageNumber() - 1);
     },
 
     /** @ignore */
