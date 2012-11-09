@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Wizard example</title>
+
+        <link rel="stylesheet" href="../../css/cui.css">
+ 
+        <script src="../../js/libs/underscore.js"></script>
+        <script src="../../js/libs/handlebars.js"></script>
+        <script src="../../js/libs/jquery.js"></script>
+        <script src="../../js/libs/toe.js"></script>
+        <script src="../../js/libs/jquery-fingerpointer.js"></script>
+
+        <script src="../../js/CUI.js"></script>
+       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    </head>
+    <body>
+        <div class="wizard" data-init="wizard">
+            <nav>
+                <button class="back">Back</button>
+                <ul>
+                    <li>Frist step</li>
+                    <li>Second step</li>
+                    <li>Third step</li>
+                    <li>Last step</li>
+                </ul>
+                <button class="next" disabled>Next</button>
+            </nav>
+            <section data-next-disabled="false" data-back-label="Cancel">
+                The first step is optional.
+            </section>
+            <section data-next-disabled="false">
+                The second step is optional.
+            </section>
+            <section data-next-disabled="false">
+                The third step is optional.
+            </section>
+            <section data-next-label="Create">
+                Name is required.
+            </section>
+      </div>
+    </body>
+</html>

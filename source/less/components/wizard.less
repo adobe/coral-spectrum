@@ -1,0 +1,45 @@
+/**
+  Class: div.wizard
+  Displays a wizard widget. 
+*/
+
+.wizard {
+    nav {
+        background: #494D4E;
+
+        button {
+            color: #FFFFFF;
+            margin: 6px 9px 8px 9px;
+        }
+
+        button.back {
+            background: #434749;
+            border-color: #37393A;
+        }
+
+        button.next {
+            background: #4090d1;
+            border-color: #1a3348;
+        }
+        
+        li {
+            display: inline;
+            list-style-type: none;
+            color: #7f8283;
+
+            &.active {
+              color: #FFFFFF;
+            }
+        }
+    }
+
+    section {
+        display: none;
+    }
+
+    section.active {
+        display: block;
+    }
+
+
+}
