@@ -35,11 +35,11 @@
     <!-- ======================================================================= -->
     <!-- P R O J E C T                                                           -->
     <!-- ======================================================================= -->
-    <artifactId>com.adobe.coralui.rte-extjs</artifactId>
+    <artifactId>com.adobe.coralui.rte</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <packaging>content-package</packaging>
 
-    <name>Adobe Reef / RichTextEditor Content Package</name>
+    <name>Adobe Reef / RichTextEditor</name>
 
     <scm>
         <connection>scm:git:git@git.corp.adobe.com:Reef/CoralUI.git</connection>
@@ -49,7 +49,7 @@
     </scm>
 
     <properties>
-        <content.dir>${basedir}</content.dir>
+        <content.dir>${basedir}/extjs</content.dir>
         <vault.work>${project.build.directory}/vault-work</vault.work>
         <rte.target.dir>${vault.work}/jcr_root/libs/cq/ui/rte</rte.target.dir>
     </properties>
@@ -69,7 +69,7 @@
                 <targetPath>${vault.work}/jcr_root</targetPath>
             </resource>
             <resource>
-                <directory>${basedir}/../build/js</directory>
+                <directory>${basedir}/build/js</directory>
                 <includes>
                     <include>rte-core-extjs.js</include>
                 </includes>
@@ -78,6 +78,35 @@
         </resources>
 
         <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>extjs</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>assembly-extjs.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>jquery</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>assembly-jquery.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-remote-resources-plugin</artifactId>
