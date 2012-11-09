@@ -7,7 +7,11 @@ label {
   font-size: 0.8125rem;
 }
 
-input[type=text], input[type=password] {
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=url],
+input[type=tel] {
   .border-box;
 
   border-radius: 0;
@@ -31,7 +35,11 @@ input[type=text], input[type=password] {
     outline: none;
   }
 
-  &.error {
+  &:-moz-ui-invalid {
+    box-shadow:none;
+  }
+  &.error,
+  &:invalid {
     .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
 
     &:focus {
