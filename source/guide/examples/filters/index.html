@@ -31,9 +31,6 @@
             Filter me: <input type="text" name="stacking" placeholder="Stacking">
             </p>
             <p>
-            Filter me: <input type="text" name="external-source" placeholder="Load from external source">
-            </p>
-            <p>
             Filter me: <input type="text" name="icons" placeholder="Displays icons">
             </p>
             <p>
@@ -87,7 +84,7 @@
             </p>
 
             <p>
-                Create your own!
+            Create your own!
             <div class="filters" data-init="filters" data-stacking="true" data-option-renderer="cqTag" data-allow="create">
                 <input type="text">
                 <select multiple>
@@ -96,7 +93,23 @@
                     <option>moods/happy</opion>    
                 </select>
             </div>
-            </p>            
+            </p>
+            
+            
+            <h2>With data from external source</h2>
+            <p>
+            Filter me:
+            <div class="filters" id="external1">
+                    <input type="text" name="external-source" placeholder="Your place">
+                    <select></select>
+            </div>
+            </p>           
+            <p>
+            Filter me:
+            <div class="filters" id="external2">
+                <input type="text" name="external-source-multiple" placeholder="Your place">
+            </div>
+            </p> 
         </section>
             
         <script type="text/javascript">
@@ -156,14 +169,20 @@
                 };
 
                 var filters4 = new CUI.Filters({
-                            element: 'input[name=external-source]',
+                            element: '#external1',
+                            multiple: false,
+                            stacking: false,
+                            disabled: false,
+                            autocompleteCallback: loadCities
+                });
+                var filters4 = new CUI.Filters({
+                            element: '#external2',
                             multiple: true,
                             stacking: false,
                             disabled: false,
-                            options: options,
                             autocompleteCallback: loadCities
                 });
-
+                
                 var filters5 = new CUI.Filters({
                     element: 'input[name=icons]',
                     multiple: false,

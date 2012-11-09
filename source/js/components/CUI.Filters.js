@@ -69,8 +69,20 @@ $('#myFilters').alert({
 // A reference to the element's filters instance is stored as data-filters
 var filters = $('#myFilters').data('filters');
 var index = filters.getSelectedIndex();
+            
 
       @desc Creates a filters field
+      
+            <h4>Callbacks</h4>
+            <p>
+      There are two callbacks you can use to customize your filters widget and that can be configured within the options array.
+      </p><p>
+      With the <code>autocompleteCallback(Function handler, String searchFor)</code> you can customize the results that are displayed in the autocomplete dropdown list. The handler function to be called after your autocomplete function has finished accepts an array of result objects. These objects can hold any data as long as they define a convenient <code>toString()</code> method that returns the right option value.
+            </p>
+            <p>
+            The <code>optionRenderer(int index, Object option, boolean highlight, boolean showIcon)</code> callback can be used to customize the HTML markup of the items in the dropdown. <code>index</code> is the position in the current list, <code>option</code> is the current option to display (your custom Object if you defined an autocompleteCallback, a string otherwise), <code>highlight</code> defines wether you should highlight the search term and <code>showIcon</code> defines wether you should add an icon to your markup. You have to return a valid jQuery element.
+            </p>
+      
       @constructs
       
       @param {Object}   options                                    Component options
@@ -90,6 +102,12 @@ var index = filters.getSelectedIndex();
       @param {Function} [options.optionRenderer=default renderer]  (Optional) Renderer for the autocompleter and the tag badges
     */
     construct: function(options) {
+            /**
+        @name autocompleteCallback
+        @function
+        @param {Function} handler    The handler to be called when your autocomplte code has finished (to allow asynch autocompletes)
+        @param {String}   searchFor  A string to search for in your data.
+        */
         this.selectedIndices = []; // Initialise fresh array
         this.createdIndices = []; // Initialise fresh array
         
@@ -111,6 +129,9 @@ var index = filters.getSelectedIndex();
         this._render();
         
         // Populate alternative display strings if necessary
+        if (this.options.optionDisplayStrings.length > this.options.options.length) {
+            this.options.optionDisplayStrings = this.options.optionDisplayStrings.slice(0, this.options.options.length);
+        }
         while (this.options.optionDisplayStrings.length < this.options.options.length) {
             this.options.optionDisplayStrings.push(this.options.options[this.options.optionDisplayStrings.length]);
         }
@@ -202,6 +223,7 @@ var index = filters.getSelectedIndex();
     
     defaults: {
         autocompleteCallback: null,
+        optionRenderer: null,
         options: [],
         optionDisplayStrings: [],
         multiple: false,
@@ -209,7 +231,6 @@ var index = filters.getSelectedIndex();
         highlight: true,
         stacking: false,
         placeholder: null,
-        optionRenderer: null,
         allowCreate: false,
         icons: null,
         iconSize: "small"
@@ -241,6 +262,9 @@ var index = filters.getSelectedIndex();
         this.selectedIndex = index;
         if (this.options.multiple && index >=0 && this.selectedIndices.indexOf(index * 1) < 0) {
             this.selectedIndices.push(index * 1); // force numeric
+        }
+        if (!this.options.multiple) {
+            this.selectedIndices = (index >= 0) ? [index] : [];
         }
         this._update();
     },
