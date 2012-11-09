@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CoralUI Wizard</title>
+
+        <link rel="stylesheet" href="css/cui.css">
+ 
+        <script src="js/libs/underscore.js"></script>
+        <script src="js/libs/handlebars.js"></script>
+        <script src="js/libs/jquery.js"></script>
+        <script src="js/libs/toe.js"></script>
+        <script src="js/libs/jquery-fingerpointer.js"></script>
+
+        <script src="js/CUI.js"></script>
+       
+        <script src="js/libs/jquery-gridlayout.js"></script>
+        <script>
+            jQuery(function($){
+                $(".grid-container").cuigridlayout();
+            });
+        </script>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    </head>
+    <body>
+        <div class="wizard" data-init="wizard">
+            <nav>
+                <button class="back">Back</button>
+                <ol>
+                    <li>Select Source</li>
+                    <li>Settings</li>
+                    <li>Select Template</li>
+                    <li>Properties</li>
+                </ol>
+                <button class="next" disabled>Next</button>
+            </nav>
+            <section data-next-disabled="false" data-back-label="Cancel">
+              <div class="toolbar">
+                <div class="left icongroup">
+                    <button class="icon-text">Calendar</button>
+                    <button class="icon-trash">Cart</button>
+                </div>
+                <div class="center">
+                    <nav class="pulldown" data-init="pulldown">
+                        <a href="#">Geometrixx Outdoors</a>
+                        <div class="popover arrow-top">
+                            <ul>
+                                <li><a href="geometrixx.html" class="icon-folder withLabel" >Geometrixx</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+                <div class="right icongroup">
+                    <button class="icon-text">Cards</button>
+                </div>
+              </div>
+              <div class="grid-container">
+                <div class="grid-0">
+                  <article class="card-page"><a href="#">
+                    <img src="examples/assets/preview1.png" alt=""/>
+                    <h4>Page. very long type. very long type. very long type. very long type. very long type.</h4>
+                    <p class="description">Launch Copy. very long title. very long title. very long title. very long title.</p>
+                    <p class="info">
+                      <span><i class="icon-paintbucket">Modified</i> 2 days ago</span>
+                      <span><i class="icon-time">Modified</i> 12 hours ago</span>
+                      <span class="right"><i class="icon-time">Modified</i></span>
+                    </p>
+                  </a></article>
+                  
+                  <article class="card-page"><a href="#">
+                    <img src="examples/assets/preview5.png" alt=""/>
+                    <h4>Page</h4>
+                    <p class="description">Launch Copy</p>
+                    <p class="info">
+                      <span><i class="icon-paintbucket">Modified</i> 2 days ago</span>
+                      <span><i class="icon-time">Modified</i> 12 hours ago</span>
+                      <span class="right"><i class="icon-time">Modified</i></span>
+                    </p>
+                  </a></article>
+
+                  <article class="card-page"><a href="#">
+                    <img src="examples/assets/preview3.png" alt=""/>
+                    <h4>Page</h4>
+                    <p class="description">Launch Copy</p>
+                    <p class="info">
+                      <span><i class="icon-paintbucket">Modified</i> 2 days ago</span>
+                      <span><i class="icon-time">Modified</i> 12 hours ago</span>
+                      <span class="right"><i class="icon-time">Modified</i></span>
+                    </p>
+                  </a></article>
+
+                  <article class="card-page"><a href="#">
+                    <img src="examples/assets/preview8.png" alt=""/>
+                    <h4>Page</h4>
+                    <p class="description">Launch Copy</p>
+                    <p class="info">
+                      <span><i class="icon-paintbucket">Modified</i> 2 days ago</span>
+                      <span><i class="icon-time">Modified</i> 12 hours ago</span>
+                      <span class="right"><i class="icon-time">Modified</i></span>
+                    </p>
+                  </a></article>
+
+                  <article class="card-page"><a href="#">
+                    <img src="examples/assets/preview3.png" alt=""/>
+                    <h4>Page</h4>
+                    <p class="description">Launch Copy</p>
+                    <p class="info">
+                      <span><i class="icon-paintbucket">Modified</i> 2 days ago</span>
+                      <span><i class="icon-time">Modified</i> 12 hours ago</span>
+                      <span class="right"><i class="icon-time">Modified</i></span>
+                    </p>
+                  </a></article>
+
+                  <article class="card-page"><a href="#">
+                    <img src="examples/assets/preview2.png" alt=""/>
+                    <h4>Page</h4>
+                    <p class="description">Launch Copy</p>
+                    <p class="info">
+                      <span><i class="icon-paintbucket">Modified</i> 2 days ago</span>
+                      <span><i class="icon-time">Modified</i> 12 hours ago</span>
+                      <span class="right"><i class="icon-time">Modified</i></span>
+                    </p>
+                  </a></article>
+
+                  <article class="card-page"><a href="#">
+                    <img src="examples/assets/preview1.png" alt=""/>
+                    <h4>Page</h4>
+                    <p class="description">Launch Copy</p>
+                    <p class="info">
+                      <span><i class="icon-paintbucket">Modified</i> 2 days ago</span>
+                      <span><i class="icon-time">Modified</i> 12 hours ago</span>
+                      <span class="right"><i class="icon-time">Modified</i></span>
+                    </p>
+                  </a></article>
+
+                  <article class="card-page"><a href="#">
+                    <img src="examples/assets/preview7.png" alt=""/>
+                    <h4>Page</h4>
+                    <p class="description">Launch Copy</p>
+                    <p class="info">
+                      <span><i class="icon-paintbucket">Modified</i> 2 days ago</span>
+                      <span><i class="icon-time">Modified</i> 12 hours ago</span>
+                      <span class="right"><i class="icon-time">Modified</i></span>
+                    </p>
+                  </a></article>
+                </div>
+              </div>
+            </section>
+
+            <section class="settings" data-next-disabled="false">
+                <h1>Schedule a new Launch</h1>
+                <p>Word on a future state of a page or site section without impacting the production state.</p>
+                <hr/>
+
+                <span class="left">
+                    <p>Inherit source page live Data</p>
+                    <label><input type="radio" name="r1" value="1" checked><span></span>Yes</label>
+                    <label><input type="radio" name="r1" value="2"><span></span>No</label>
+                </span>
+
+                <span class="right">
+                    <p>Use srouce page template</p>
+                    <label><input type="radio" name="r2" value="1" checked><span></span>Yes</label>
+                    <label><input type="radio" name="r2" value="2"><span></span>No</label>
+                </span>
+            </section>
+
+            <section data-next-disabled="false">
+                The third step is optional.
+            </section>
+
+            <section data-next-label="Create">
+                Name is required.
+            </section>
+        </div>
+    </body>
+</html>
