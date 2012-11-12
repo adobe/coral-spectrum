@@ -143,81 +143,8 @@ var index = filters.getSelectedIndex();
             cssClass: "autocomplete-results"
         });
         
-        // Listen to property changes
-        this.$element.on('change:disabled', this._update.bind(this));
-        this.$element.on('change:placeholder', this._update.bind(this));
-        
-        this.$element.on('change:options', this._changeOptions.bind(this));
-        
-        // Listen to events
-        this.$element.on("input", "input", function() {
-            if (this.options.disabled) return;
-            if (this.typeTimeout) clearTimeout(this.typeTimeout);
-            this.typeTimeout = setTimeout(this._inputChanged.bind(this), this.options.delay);
-        }.bind(this));
-        
-        this.$element.on("blur", "input", function() {
-            if (this.options.disabled) return;
-            if (this.typeTimeout) clearTimeout(this.typeTimeout);
-            this.typeTimeout = null;
-            // Set to existing selection for single term use
-            if (!this.options.multiple && this.selectedIndex >=0) {
-                if (this.inputElement.attr("value") === "") {
-                    this.setSelectedIndex(-1);
-                } else {
-                    this._update();
-                }
-            }
-        }.bind(this));
-       
-        this.$element.on("keydown", "input", this._keyPressed.bind(this));
-        this.$element.on("keyup", "input", this._keyUp.bind(this));
-        
-        /*this.$element.on("click", "input", function() {
-            if (this.options.disabled) return;
-            this._inputChanged();
-        }.bind(this));*/
-        
-        this.dropdownList.on("dropdown-list:select", "", function(event) {
-            this.dropdownList.hide(200);
+        this._addEventListeners();
 
-            if(this.usingExternalData) {
-                this._createNewOption(event.selectedValue.toString(), event.selectedValue.toString(), true);
-                this._update();
-            }
-            
-            var pos = $.inArray(event.selectedValue.toString(), this.options.options);
-            this.setSelectedIndex(pos * 1);
-        }.bind(this));
-
-        this.$element.on("click", "[data-dismiss=filter]", function(event) {
-            if (this.options.disabled) return;
-            var e = $(event.target).closest("[data-id]");
-            this.removeSelectedIndex(e.attr("data-id"));
-            return false;
-        }.bind(this));
-        
-        // .. and some more event handlers to style our widget
-        this.$element.on("input", "input", function() {
-            if (this.options.disabled) return;
-            this._correctInputFieldWidth();
-        }.bind(this));
-        
-        this.$element.on("focus", "input", function() {
-            if (this.options.disabled) return;
-            this.$element.addClass("focus");
-        }.bind(this));
-        
-        this.$element.on("blur", "input", function() {
-            if (this.options.disabled) return;
-            this.$element.removeClass("focus");
-        }.bind(this));
-        
-        this.$element.on("click touchend", "input", function() {
-            if (this.options.disabled) return;
-            this.inputElement.focus();
-            this._inputChanged();
-        }.bind(this));
        
     },
     
@@ -303,6 +230,82 @@ var index = filters.getSelectedIndex();
         return this.selectedIndices.slice(0); // Make copy before returning!
     },
     
+    /** @ignore */
+    _addEventListeners: function() {
+        // Listen to property changes
+        this.$element.on('change:disabled', this._update.bind(this));
+        this.$element.on('change:placeholder', this._update.bind(this));
+        
+        this.$element.on('change:options', this._changeOptions.bind(this));
+        
+        // Listen to events
+        this.$element.on("input", "input", function() {
+            if (this.options.disabled) return;
+            if (this.typeTimeout) clearTimeout(this.typeTimeout);
+            this.typeTimeout = setTimeout(this._inputChanged.bind(this), this.options.delay);
+        }.bind(this));
+        
+        this.$element.on("click touchend", "input", function() {
+            if (this.options.disabled) return;
+            this.inputElement.focus();
+            this._inputChanged();
+        }.bind(this));
+                
+        this.$element.on("blur", "input", function() {
+            if (this.options.disabled) return;
+            if (this.typeTimeout) clearTimeout(this.typeTimeout);
+            this.typeTimeout = null;
+            // Set to existing selection for single term use
+            if (!this.options.multiple && this.selectedIndex >=0) {
+                if (this.inputElement.attr("value") === "") {
+                    this.setSelectedIndex(-1);
+                } else {
+                    this._update();
+                }
+            }
+            var hasError = (!this.options.multiple && this.inputElement.val().length > 0 && this.selectedIndex < 0);
+            this.$element.toggleClass("error", hasError);
+        }.bind(this));
+       
+        this.$element.on("keydown", "input", this._keyPressed.bind(this));
+        this.$element.on("keyup", "input", this._keyUp.bind(this));
+        
+        this.dropdownList.on("dropdown-list:select", "", function(event) {
+            this.dropdownList.hide(200);
+
+            if(this.usingExternalData) {
+                this._createNewOption(event.selectedValue.toString(), event.selectedValue.toString(), true);
+                this._update();
+            }
+            
+            var pos = $.inArray(event.selectedValue.toString(), this.options.options);
+            this.setSelectedIndex(pos * 1);
+        }.bind(this));
+
+        this.$element.on("click", "[data-dismiss=filter]", function(event) {
+            if (this.options.disabled) return;
+            var e = $(event.target).closest("[data-id]");
+            this.removeSelectedIndex(e.attr("data-id"));
+            return false;
+        }.bind(this));
+        
+        // .. and some more event handlers to style our widget
+        this.$element.on("input", "input", function() {
+            if (this.options.disabled) return;
+            this._correctInputFieldWidth();
+        }.bind(this));
+        
+        this.$element.on("focus", "input", function() {
+            if (this.options.disabled) return;
+            this.$element.addClass("focus");
+        }.bind(this));
+        
+        this.$element.on("blur", "input", function() {
+            if (this.options.disabled) return;
+            this.$element.removeClass("focus");
+        }.bind(this));
+    },
+        
     /** @ignore */
     _changeOptions: function(event) {
         if (event.widget !== this) return;
@@ -409,7 +412,7 @@ var index = filters.getSelectedIndex();
     _update: function() {
         
         if (this.options.placeholder) this.inputElement.attr("placeholder", this.options.placeholder);
-                
+        
         if (this.options.disabled) {
             this.$element.addClass("disabled");
             this.inputElement.attr("disabled", "disabled");
@@ -485,12 +488,14 @@ var index = filters.getSelectedIndex();
     _keyPressed: function(event) {        
         var key = event.keyCode;
         if (key === 8) { 
-            if (this.triggeredBackspace === false && this.options.multiple && this.selectedIndices.length > 0 &&
-                this.inputElement.attr("value").length === 0) {
-                event.preventDefault();
-                this.removeSelectedIndex(this.selectedIndices[this.selectedIndices.length - 1]);
-                this._inputChanged();
+            if (this.triggeredBackspace === false && this.inputElement.attr("value").length === 0) {
+                if (this.options.multiple && this.selectedIndices.length > 0) {
+                    event.preventDefault();
+                    this.removeSelectedIndex(this.selectedIndices[this.selectedIndices.length - 1]);
+                    this._inputChanged();
+                }
             }
+           
             this.triggeredBackspace = true; // Remember this key down event
         }
         
