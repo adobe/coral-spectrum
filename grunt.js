@@ -35,30 +35,30 @@ module.exports = function(grunt) {
       'components/CUI.PathBrowser.js'
     ],
     "cui-rte": [
-      'components/rte/ui/Theme.js',
-      'components/rte/ui/cui/ToolkitImpl.js',
-      'components/rte/ui/cui/ToolbarImpl.js',
-      'components/rte/ui/cui/ElementImpl.js',
-      'components/rte/ui/cui/ParaFormatterImpl.js',
-      'components/rte/ui/cui/StyleSelectorImpl.js',
-      'components/rte/ui/cui/CuiToolbarBuilder.js',
-      'components/rte/ui/cui/CmItemImpl.js',
-      'components/rte/ui/cui/CmSeparatorImpl.js',
-      'components/rte/ui/cui/CuiContextMenuBuilder.js',
-      'components/rte/ui/cui/CuiDialogManager.js',
-      'components/rte/ui/cui/CuiDialogHelper.js',
+      'components/rte/Theme.js',
+      'components/rte/cui/ToolkitImpl.js',
+      'components/rte/cui/ToolbarImpl.js',
+      'components/rte/cui/ElementImpl.js',
+      'components/rte/cui/ParaFormatterImpl.js',
+      'components/rte/cui/StyleSelectorImpl.js',
+      'components/rte/cui/CuiToolbarBuilder.js',
+      'components/rte/cui/CmItemImpl.js',
+      'components/rte/cui/CmSeparatorImpl.js',
+      'components/rte/cui/CuiContextMenuBuilder.js',
+      'components/rte/cui/CuiDialogManager.js',
+      'components/rte/cui/CuiDialogHelper.js',
 
-      'components/rte/ui/stub/ToolkitImpl.js',
-      'components/rte/ui/stub/ToolbarImpl.js',
-      'components/rte/ui/stub/ElementImpl.js',
-      'components/rte/ui/stub/ParaFormatterImpl.js',
-      'components/rte/ui/stub/StyleSelectorImpl.js',
-      'components/rte/ui/stub/StubToolbarBuilder.js',
-      'components/rte/ui/stub/CmItemImpl.js',
-      'components/rte/ui/stub/CmSeparatorImpl.js',
-      'components/rte/ui/stub/StubContextMenuBuilder.js',
-      'components/rte/ui/stub/StubDialogManager.js',
-      'components/rte/ui/stub/StubDialogHelper.js',
+      'components/rte/stub/ToolkitImpl.js',
+      'components/rte/stub/ToolbarImpl.js',
+      'components/rte/stub/ElementImpl.js',
+      'components/rte/stub/ParaFormatterImpl.js',
+      'components/rte/stub/StyleSelectorImpl.js',
+      'components/rte/stub/StubToolbarBuilder.js',
+      'components/rte/stub/CmItemImpl.js',
+      'components/rte/stub/CmSeparatorImpl.js',
+      'components/rte/stub/StubContextMenuBuilder.js',
+      'components/rte/stub/StubDialogManager.js',
+      'components/rte/stub/StubDialogHelper.js',
 
       'components/CUI.RichText.js',
 
@@ -80,7 +80,8 @@ module.exports = function(grunt) {
     source: 'source',
     temp: 'temp',
     components: 'components',
-    modules: 'node_modules'
+    modules: 'node_modules',
+    rte: "rte"
   };
 
   /**
@@ -114,6 +115,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-mincss');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-mocha');
+  grunt.loadNpmTasks('grunt-hub');
 
   // Read in package.json
   var pkg = grunt.file.readJSON('package.json');
@@ -206,6 +208,11 @@ module.exports = function(grunt) {
           '<%= dirs.build %>/js/libs/toe.js': '<%= dirs.source %>/js/plugins/toe.js',
           '<%= dirs.build %>/js/libs/jquery-fingerpointer.js': '<%= dirs.source %>/js/plugins/jquery-fingerpointer.js',
           '<%= dirs.build %>/js/libs/jquery-gridlayout.js': '<%= dirs.source %>/js/plugins/jquery-gridlayout.js'
+        }
+      },
+      rte: {
+        files: {
+          '<%= dirs.build %>/js/libs/rte-core-jquery.js': '<%= dirs.rte %>/build/js/rte-core-jquery.js'
         }
       },
       prettyify: {
@@ -335,6 +342,13 @@ module.exports = function(grunt) {
       cui_rte: {
         src: getIncludes("cui-rte", dirs.source+'/js/'),
         dest: '<%= dirs.build %>/js/cui-rte.js'
+      }
+    },
+
+    hub: {
+      rte: {
+        src: [ '<%= dirs.rte%>/grunt.js'],
+        tasks: [ 'full' ]
       }
     },
 
@@ -469,8 +483,11 @@ module.exports = function(grunt) {
   // Partial build for development
   grunt.registerTask('partial', 'lint copy handlebars concat:cui min:cui icons less concat:cui_css mincss mocha');
 
+  // Build and copy RTE
+  grunt.registerTask("rte", 'hub:rte copy:rte');
+
   // Full build with docs and compressed file
-  grunt.registerTask('full-build', 'lint copy handlebars concat:cui concat:cui_rte min icons less concat:cui_css mincss mocha jsdoc');
+  grunt.registerTask('full-build', 'lint rte copy handlebars concat:cui concat:cui_rte min icons less concat:cui_css mincss mocha jsdoc');
 
   // Full build with docs and compressed file
   grunt.registerTask('full', 'clean full-build');

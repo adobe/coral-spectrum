@@ -212,7 +212,7 @@ module.exports = function (grunt) {
                 files:[
                     '<%= dirs.source %>/js/**'
                 ],
-                tasks:'concat:cui min:cui'
+                tasks:'concat min'
             }
 
         }
