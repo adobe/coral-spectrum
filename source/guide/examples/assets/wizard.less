@@ -1,32 +1,49 @@
-.settings {
-  width: 50%;
-  margin: 0 auto;
-}
 
-.properties {
-    
-    .card-page {
-        width: 25em;
+.wizard-page {
+    .settings {
+      width: 50%;
+      margin: 0 auto;
     }
 
-    .tabs {
-        width: 60%;
-        width: -webkit-calc(100% - 24em);
-        width: -moz-calc(100% - 24em);
-        width: -o-calc(100% - 24em);
-        width: calc(100% - 24em);
-
-        .basic {
-
-            &>span {
-                margin-left: 25px;
-                
-                &>input, &>label, &>textarea, &>.filters {
-                  display: block;
-                }
-            }
-
-            
+    .properties {
+        
+        .card-page {
+            width: 25em;
         }
+
+        .tabs {
+            width: 60%;
+            width: -webkit-calc(100% - 24em);
+            width: -moz-calc(100% - 24em);
+            width: -o-calc(100% - 24em);
+            width: calc(100% - 24em);
+
+            .basic {
+
+                &>span {
+                    margin-left: 25px;
+                    
+                    &>input, &>label, &>textarea, &>.filters {
+                      display: block;
+                    }
+                }
+
+            }
+        }
+    }
+
+    /* Temporary, need SVGs icons */
+    .icon-wizard-edit {
+        background-image: url('wizard/edit.png');
+    }
+
+    /* Temporary, need SVGs icons */
+    .icon-wizard-earth {
+        background-image: url('wizard/earth.png');
+    }
+
+    /* Temporary, need SVGs icons */
+    .icon-wizard-double-right-arrow {
+        background-image: url('wizard/double-right-arrow.png');
     }
 }
