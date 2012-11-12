@@ -18,8 +18,15 @@ table.data {
       text-align: right;
     }
 
-    >input[type=checkbox] + span {
-      padding: 0;
+    input[type=checkbox] {
+      + span {
+        margin: 0;
+        padding: 0;
+        
+        &:before {
+          margin-right: 0;
+        }
+      }
     }
   }
 
