@@ -212,10 +212,9 @@ var wizard = null; // TODO for DEV purpose
         : this.options.backDisabled);
     },
 
-    /**
-     * @ignore
-     * jQuery doesn't have any method to check if a data exists
-     */
+    /** @ignore */
+    /* jQuery doesn't have any method to check if a data exists */
+     
     _dataExists: function($element, index) {
       return $element.data(index) !== undefined;
     },
