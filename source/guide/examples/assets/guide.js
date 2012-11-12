@@ -39,10 +39,20 @@ $(function() {
     }
   });
 
-  // closable rail
-  $('#close-rail').fipo('tap', 'click', function () {
-    rail.toggleClass('closed');
-  });
+    // closable rail
+    $('#close-rail').fipo('tap', 'click', function () {
+        if (rail.hasClass("closed")) {
+            rail.removeClass("closed");
+            rail.trigger("open");
+            $(this).removeClass("icon-rightrailclose");
+            $(this).addClass("icon-rightrailopen");
+        } else {
+            rail.addClass("closed");
+            rail.trigger("close");
+            $(this).addClass("icon-rightrailclose");
+            $(this).removeClass("icon-rightrailopen");
+        }
+    });
 
   // closable bottom toolbar in rail
   var quickform = $('.quickform');

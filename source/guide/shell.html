@@ -25,7 +25,12 @@
     <script src="js/libs/jquery-gridlayout.js"></script>
     <script>
         jQuery(function($){
-            $(".grid-container").cuigridlayout();
+            var $grid = $(".grid-container");
+            $grid.cuigridlayout();
+
+            $("#main-rail").on("open close", function() {
+                $grid.cuigridlayout("layout");
+            });
         });
     </script>
 
@@ -54,9 +59,9 @@
 
         <div class="rail-switch">
           <nav class="toolbar icongroup">
-            <a href="#" class="icon-calendar" data-view="feature">Calendar<i></i></a>
-            <a href="#" class="icon-cart active" data-view="filter">Cart<i></i></a>
-            <a href="#" class="icon-paintbucket" data-view="activity">Paint<i></i></a>
+            <a href="#" class="icon-collection" data-view="feature">Calendar<i></i></a>
+            <a href="#" class="icon-edit active" data-view="filter">Cart<i></i></a>
+            <a href="#" class="icon-email" data-view="activity">Paint<i></i></a>
           </nav>
           <div class="tagpicker-wrap">
             <div class="tagpicker">
@@ -245,18 +250,17 @@
     <div class="content">
       <nav class="toolbar">
         <div class="left icongroup">
-          <a href="#" class="icon-addgrid" id="close-rail">Add</a>
+          <a href="#" class="icon-rightrailopen" id="close-rail">Add</a>
           <span class="divider"></span>
-          <a href="#" class="icon-calendar">Calendar</a>
-          <a href="#" class="icon-cart">Cart</a>
-          <a href="#" class="icon-paintbucket">Paint</a>
+          <a href="#" class="icon-check">Select</a>
+          <a href="#" class="icon-upload">Upload</a>
+          <a href="#" class="icon-addcollection">Add Collection</a>
         </div>
         <div class="center">
           <h1>Page Title</h1>
         </div>
         <div class="right icongroup">
-          <a href="#" class="icon-cards">Cards</a>
-          <a href="#" class="icon-trash">Trash</a>
+          <a href="#" class="icon-listview">List</a>
         </div>
       </nav>
 

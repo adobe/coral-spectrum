@@ -46,6 +46,7 @@
             var $cont = $(toolbar.getToolbarContainer());
             this.$ui = $cont.find('a[href="#' + pluginId + '"][data-rte-command="' + this.id
                     + '"]');
+            // console.log(pluginId + "/" + this.id);
             this.$ui.bind("click.rte.handler", CUI.rte.Utils.scope(function(e) {
                 var editContext = this.plugin.editorKernel.getEditContext();
                 var cmd = (this.cmdDef ? this.cmdDef.cmd : this.id);
