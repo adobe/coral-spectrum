@@ -114,6 +114,24 @@
     -moz-animation-timing-function: linear;
 }
 
+.spin-cc(@time: 1s) {
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: @time;
+
+    -moz-transition-property: -moz-transform;
+    -moz-transition-duration: @time;
+
+    -webkit-animation-name: rotate-cc;
+    -webkit-animation-duration: @time;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+
+    -moz-animation-name: rotate-cc;
+    -moz-animation-duration: @time;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+}
+
 /**
  Mixin: .background-size
  Set the scaling of the background image or gradient
