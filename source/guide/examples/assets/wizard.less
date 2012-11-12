@@ -32,6 +32,62 @@
         }
     }
 
+    .select-template, .select-source {
+        article {
+
+            h4 {
+                color: #525252;
+            }
+
+            .description, .info {
+                color: #616161;
+            }
+
+            &.focused {
+                background-color: #4b9edd;
+            }
+        }
+    }
+
+    .select-template {
+        /* Temporary, need to ask how the preview is built */
+        div.preview {
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-image: url('wizard/preview.png');
+            width: 100%;
+            height: 664px;
+
+            display: none;
+
+            &.displayed {
+                display: block;
+            }
+        }
+
+        article {
+
+            .preview {
+                border: none;
+                background: #434749;
+                top: 8.5em;
+                left: 25%;
+                position: absolute;
+                display: none;
+            }
+
+            &.focused {
+                button.preview {
+                    display: block;
+                }
+            }
+        }
+
+        .grid-container.hidden {
+            display: none;
+        }
+    }
+
     /* Temporary, need SVGs icons */
     .icon-wizard-edit {
         background-image: url('wizard/edit.png');
