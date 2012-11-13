@@ -35,7 +35,7 @@
 
     <h2>Create from markup</h2>
     Path:
-    <div data-init="pathbrowser" class="pathbrowser" data-placeholder="Provide path">
+    <div data-init="pathbrowser" class="pathbrowser" data-placeholder="Provide path" data-root-path="/">
         <input type="text" name="path-markup">
     </div>
     <br/>
@@ -77,6 +77,10 @@
             "/content/geometrixx/en/company/board",
             "/content/geometrixx/en/company/products"
         ],
+        "/content/geometrixx/en/company/products": [
+            "/content/geometrixx/en/company/products/circle",
+            "/content/geometrixx/en/company/products/triangle"
+        ],
         "/apps": [
             "/apps/geometrixx",
             "/apps/geometrixx-outdoors"
@@ -110,6 +114,10 @@
             "board",
             "products"
         ],
+        "/content/geometrixx/en/company/products": [
+            "circle",
+            "triangle"
+        ],
         "/apps": [
             "geometrixx",
             "geometrixx-outdoors"
@@ -142,6 +150,10 @@
         "/content/geometrixx/en/company": [
             "Managing Board",
             "Products"
+        ],
+        "/content/geometrixx/en/company/products": [
+            "Circle",
+            "Triangle"
         ]
         // No titles at all for /apps
     };
@@ -200,7 +212,7 @@
             optionLoader: nestedOptionLoader,
             optionLoaderRoot: nestedOptionLoaderRoot,
             optionValueReader: nestedOptionValueReader,
-            rootPath: "/content",
+            rootPath: "/content/geometrixx/",
             showTitles: false
         });
 
