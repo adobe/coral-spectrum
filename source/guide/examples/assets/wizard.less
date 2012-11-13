@@ -1,22 +1,43 @@
+/**
+  Wizard step through
+*/
 
 .wizard-page {
+
+    // Settings section
     .settings {
-      width: 50%;
+      width: 480px;
       margin: 0 auto;
+      padding-top: 60px;
+
+      // TODO. Temporary. This should be handled somewhere more generic, added here as an example
+      // <hr/> is semantic, but perhaps a div + border styles would be more flexible
+      hr {
+        height: 1px;
+        border: 0;
+        border-bottom: 1px solid #fdfdfd;
+        margin: 1rem 0;
+        color: #b1b1b1;
+        background-color: #b1b1b1;
+      }
     }
 
+    // Properties section
     .properties {
         
         .card-page {
-            width: 25em;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 14rem;
+        }
+
+        .tabs-wrapper {
+          margin-left: 15rem;
         }
 
         .tabs {
-            width: 60%;
-            width: -webkit-calc(100% - 24em);
-            width: -moz-calc(100% - 24em);
-            width: -o-calc(100% - 24em);
-            width: calc(100% - 24em);
+            width: 100%;
 
             .basic {
 
@@ -32,6 +53,7 @@
         }
     }
 
+    // Select template / select source sections
     .select-template, .select-source {
         article {
 
@@ -49,6 +71,7 @@
         }
     }
 
+    // Select template section
     .select-template {
         /* Temporary, need to ask how the preview is built */
         div.preview {
