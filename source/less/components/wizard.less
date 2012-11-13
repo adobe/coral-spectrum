@@ -8,16 +8,16 @@
         background: @wizard-nav-background-color;
 
         button {
-            color: @wizard-button-color;
+            color: @wizard-button-text-color;
             margin: 6px 9px 8px 9px;
         }
 
         button[disabled] {
             opacity: 0.5;
-            color: @wizard-button-color;
+            color: @wizard-button-text-color;
 
             &:hover {
-                color: @wizard-button-color;
+                color: @wizard-button-text-color;
             }
         }
 
@@ -32,20 +32,86 @@
         }
 
         ol {
-
             counter-reset: item;
+            padding: 9px 0 0 0;
+            font-size: 0; // To remove html whitespace between inline elements
 
             li {
-                display: inline;
-                color: @wizard-nav-title-color;
+                position: relative;
+                display: inline-block;
+                margin: 0;
+                padding-bottom: 5*@px;
+                padding-right: @wizard-progress-list-item-offset;
+                border-bottom: @wizard-progress-bar-height solid @wizard-progress-bar-color;
+                color: @wizard-progress-title-color;
+                font-size: 14*@px;
+                counter-increment: item;
 
-                &:before {
-                    content: counter(item) "  "; 
-                    counter-increment: item;
+                // First item gets an additional section of progress bar left
+                &:first-child {
+                  padding-left: @wizard-progress-list-item-offset;
+                  &:after {
+                    left: @wizard-progress-list-item-offset;
+                  }
+                  &.stepped {
+                  }
                 }
 
+                // List counter
+                &:before {
+                    content: counter(item) "  ";
+                    display: inline-block;
+                    width: 18*@px;
+                    height: 12*@px;
+                    text-align: left;
+                }
+
+                // Circle step marker
+                &:after {
+                  content: " ";
+                  position: absolute;
+                  bottom: -7*@px;
+                  left: 0;
+                  display: block;
+                  width: @wizard-progress-circle-diameter;
+                  height: @wizard-progress-circle-diameter;
+                  border: @wizard-progress-circle-border-width solid @wizard-nav-background-color;
+                  .border-radius(@wizard-progress-circle-diameter);
+                  background: @wizard-progress-circle-color;
+                }
+
+                // Current item
                 &.active {
-                    color: @wizard-nav-active-title-color;
+                    color: @wizard-progress-active-title-color;
+
+                    &:after {
+                      background: @wizard-progress-circle-highlight-color;
+                    }
+                }
+
+                // Previous items
+                &.stepped {
+                  color: @wizard-progress-active-title-color;
+                  border-color: @wizard-progress-bar-highlight-color;
+
+                  &:before {
+                    content: " ";
+                    background: url('@{component-images-folder}/wizard/check.png') 0 bottom no-repeat;
+                  }
+
+                  &:after {
+                    background: @wizard-progress-circle-highlight-color;
+                  }
+                }
+
+                // The leading fill
+                .lead-fill {
+                  position: absolute;
+                  left: 0;
+                  bottom: -@wizard-progress-bar-height;
+                  width: @wizard-progress-list-item-offset;
+                  height: @wizard-progress-bar-height;
+                  background-color: @wizard-progress-bar-highlight-color;
                 }
             }
         }
@@ -58,6 +124,4 @@
     section.active {
         display: block;
     }
-
-
 }

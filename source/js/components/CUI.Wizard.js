@@ -72,6 +72,9 @@ var wizard = null; // TODO for DEV purpose
       this.$next.addClass('right');
       this.$pageOverview.addClass('center');
 
+      // Add div to render leading fill for first list item
+      this.$nav.find('li').first().append('<div class="lead-fill"></div>');
+
       this.$next.click(this._onNextClick.bind(this));
       this.$back.click(this._onBackClick.bind(this));
 
@@ -104,6 +107,9 @@ var wizard = null; // TODO for DEV purpose
       this.pageNumber = pageNumber;
       var page = this.pageNumber - 1;
       var $newPage = this.getCurrentPage();
+
+      this.$nav.find('li').removeClass('stepped');
+      this.$nav.find('li:lt(' + page + ')').addClass('stepped');
 
       this.$nav.find('li.active').removeClass('active');
       this.$nav.find('li:eq(' + page + ')').addClass('active');
