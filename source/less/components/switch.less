@@ -1,76 +1,3 @@
-/**
-  Element: toggle
-  CUI button styles
-*/
-
-// Selector
-.selector {
-  display: inline-block;
-  font-size: 0; // Fight space between inline block elements
-  background-color: @selector-disabled-color;
-
-  label {
-    line-height: 32*@px;
-    min-width: 50*@px;
-    display: inline-block;
-    position: relative;
-    text-align: center;
-    padding: 0;
-    cursor: pointer;
-
-    span {
-      width: 100%;
-      padding: 0 10*@px;
-      .border-box;
-      .gradient(@selector-gradient-start-color, @selector-gradient-end-color);
-
-      &:hover {
-        .gradient(@selector-gradient-start-color, @selector-gradient-start-color);
-      }
-      
-      &:active {
-      	.box-shadow(inset 0 0 0.5rem rgba(0, 0, 0, 0.25));
-      }
-
-      border: @px solid @selector-border-color;
-      border-left: none;
-    }
-    &:first-child span {
-      border-left: @px solid @selector-border-color;
-    }
-
-    span:before {
-      display: none; // to overwrite default checkbox / radio button
-    }
-    input[type=checkbox],
-    input[type=radio] {
-      width: 1px;
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 1px;
-      margin-bottom: -1px;
-
-      &:checked + span {
-        .box-shadow(inset 0 0 0.5rem rgba(0, 0, 0, 0.25));
-        filter: none !important; // prevents ie9 filter from overriding box-shadow
-      }
-
-      // Focused
-      &:focus + span {
-        .gradient(@selector-gradient-start-color, @selector-gradient-start-color);
-        position: relative;
-        z-index: 1;
-      }
-
-      &:disabled + span {
-        opacity: 0.5;
-        .gradient(@selector-gradient-start-color, @selector-gradient-start-color);
-      }
-    }
-  }
-}
-
 // Switch
 .switch {
     display: inline-block;
@@ -84,13 +11,15 @@
     }
 
     input[type=checkbox] {
-      width: 1px;
+      width: @px;
       float: right;
-      height: 1px;
-      margin-bottom: -1px;
+      height: @px;
+      margin-bottom: -@px;
 
       + span {
-          color: @switch-text-selected-color;
+        color: @switch-text-selected-color;
+        padding-right: 0.5rem;
+        
         &:before {
           display: none;
         }
@@ -146,8 +75,8 @@
         }
       }
 
-      &:focus  + span:after,
-      &:focus  + span + span:before {
+      &:focus + span:after,
+      &:focus + span + span:before {
         .glow();
       }
 

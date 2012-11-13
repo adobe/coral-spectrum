@@ -40,38 +40,43 @@ The top toolbar with action icons
 
 /**
     Class: .icongroup
-    Button toolbar of icons defined using the <a> tag
+    Button toolbar of icons defined using the <a> or <button> tags
 */
 .icongroup {
     .clearfix;
-    line-height: @icon-medium-size;
 
+    // Any icon in an icon group should be medium sized
     [class^="icon-"],
     [class*=" icon-"] {
-        float: left;
-        padding: 11*@px 8*@px;
         .icon-medium;
     }
+    
+    // For direct descendants only, apply grouping
+    > a,
+    > button,
+    > .button {
+        padding: 11*@px 8*@px;
+        display: inline-block;
+    }
 
-    button,
-    .button {
+    > button,
+    > .button {
         .box-sizing(content-box);
-        float: left;
         margin: 8*@px 0;
         min-width:   80*@px;
         line-height: 14*@px;
-    }
-    button[class^="icon-"],
-    button[class*=" icon-"] {
-        margin: 0;
-        min-width: 0;
-        line-height: 24*@px;
-        color: transparent;
+        
+        // Buttons with icons should be treated normally
+        &[class^="icon-"],
+        &[class*=" icon-"] {
+            margin: 0;
+            min-width: 0;
+        }
     }
 
-    .divider {
-        float: left;
-        width: 1px;
+    > .divider {
+        display: inline-block;
+        width: @px;
         height: @icon-medium-size;
         margin: 9*@px 3*@px;
         background-color: @icon-divider-color;

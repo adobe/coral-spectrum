@@ -320,9 +320,21 @@
                     }
                     option = parentPath + option;
                 }
-                this.inputElement.attr("value", option);
+                this._setInputValue(option, true);
             } else {
-                this.inputElement.attr("value", "");
+                this._setInputValue("");
+            }
+        },
+
+        /** @ignore */
+        _setInputValue: function(newValue, moveCursor) {
+            // Using select text util to select starting from last character to last character
+            // This way, the cursor is placed at the end of the input text element
+            if (newValue) {
+                this.inputElement.attr("value", newValue);
+                if (moveCursor) {
+                    CUI.util.selectText(this.inputElement, newValue.length);
+                }
             }
         },
 
@@ -398,14 +410,26 @@
             // Otherwise, it will just filter the options to only show the
             // matching ones in the auto completer div.
             if (/^\//.test(path) && /\/$/.test(path) && self.options.optionLoader) {
+                var isCustomRoot = false;
                 if (path === "/") {
                     // Use configured root path
-                    path = self.options.rootPath ? self.options.rootPath : "/";
+                    if (self.options.rootPath) {
+                        path = self.options.rootPath.replace(/\/$/, "");
+                        if (path !== "") {
+                            isCustomRoot = true;
+                        } else {
+                            path = "/";
+                        }
+                    }
                 } else {
                     // Remove final slash
                     path = path.replace(/\/$/, "");
                 }
-                self.inputElement.attr("value", path + "/");
+
+                // Replace field value if the entered path was a custom root path
+                if (isCustomRoot) {
+                    self._setInputValue(path + "/");
+                }
 
                 // Make the option loader a promise to guarantee that the callback is
                 // executed at the right rime

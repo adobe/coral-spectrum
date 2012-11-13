@@ -1,5 +1,5 @@
 @icon-xsmall-size: 0.75rem;
-@icon-small-size: 1rem;
+@icon-small-size: 1rem; // 24px: 1.15rem;
 @icon-medium-size: 1.5rem;
 @icon-large-size: 2rem;
 
@@ -175,11 +175,13 @@ p > [class*=" icon-"] {
   background-repeat: no-repeat;
   
   opacity: 0.65;
+  
+  vertical-align: top; // Fix alignment of icons with labels in IE 9
 }
 
-// Clickable icons
+// Icons in buttons
 button,
-a {
+.button {
   i[class^="icon-"],
   i[class*=" icon-"] {
     .icon-small;
@@ -190,7 +192,11 @@ a {
       opacity: 1;
     }
   }
-  
+}
+
+// Clickable icons
+button,
+a {
   // Hover states & opacity
   &[class^="icon-"],
   &[class*=" icon-"] {
@@ -236,7 +242,6 @@ a.button {
       background-color: transparent;
       background-image: none;
     
-      color: inherit;
       text-shadow: none;
       font-weight: normal;
     

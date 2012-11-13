@@ -21,7 +21,6 @@ input[type=radio] {
   & + label,
   & + span {
     display: inline-block;
-    padding-right: 0.5rem;
   }
 
   & + span:before,
@@ -107,21 +106,4 @@ input[type=radio] {
       background-image: url('@{component-images-folder}/radio/dot_disabled.png');
     }
   }
-}
-
-th,
-td {
-  // Remove padding on checks/radios placed in table cells
-  label {
-    padding: 0;
-  }
-
-  input[type=radio],
-  input[type=checkbox] {
-    & + label:before,
-    & + span:before {
-      padding: 0;
-      margin-right: 0;
-    }
-  }  
 }
