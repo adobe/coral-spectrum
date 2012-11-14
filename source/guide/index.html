@@ -65,7 +65,7 @@
                         <a href="#Link">Link</a>
                         <a href="#Fonts">Fonts</a>
                         <a href="#Icons">Icons</a>
-                        <a href="#Sticky">Sticky elements</a>
+                        <a href="#Sticky">Sticky elements (depr.)</a>
                     </nav>
                 </section>
 
@@ -402,13 +402,8 @@
                     </div>
                 </section>
                 <section id="Sticky">
-                    <h2 class="line">Sticky elements</h2>
-                    <p>You can make nearly every element "sticky" by just adding the css class <code class="atv">sticky</code> to it. Sticky elements will stay on the top of the screen even if the users scrolls down. You can have more than one sticks element on your page; they will stack themselves in the correct order at the top of your page.</p>
-                    <p>Sticky elements will stick to the root document by default, which is not always what you want. You can manually set the sticky container with the class <code class="atv">sticky-container</code>.</p>
-                    <p>You can have a look at the examples for <a href="examples/sticky/index.html">sticking to the root document</a> and for <a href="examples/sticky/rail.html">sticking to a div inside a rail component</a>.</p>
-                    <p>You can also initialize the sticky effect by adding <code class="prettyprint">data-init="sticky"</code>, the jQuery-Plugin <code class="prettyprint">$.sticky()</code> or by instantiation of class <code class="prettyprint">CUI.Sticky</code>.</p>
-                    <p>Note: Don't forget do add a background and perhaps a z-index to your element or the page will shine through/over your element when sticked.</p>
-                    <p>Also: Do not use nested scrolling bars combined with sticky elements as this will give unexpected results.</p>
+                    <h2 class="line">Sticky elements <b>(deprecated)</b></h2>
+                    <p>The sticky widget has been deprecated in favor of a more simple solution for <a href="#Rail">sticky toolbars within rails</a>.</p>
                 </section>
 
             </section><!-- /Text Styles -->
@@ -464,7 +459,7 @@
                     <p>By using the <code class="prettyprint">&lt;section&gt;</code> tag, the rail can contain multiple sections separated by a border.</p>
                     <p>The <code class="atv">bare</code> and <code class="atv">thin</code> CSS classes can be added to remove the border or padding on each section respectively.</p>
                     <p>Section headings should be contained within the <code class="prettyprint">&lt;h4&gt;</code> tag.</p>
-
+                    
                     <div class="componentSample railSample">
                         <div class="example">
 
@@ -516,6 +511,22 @@
 &lt;/div&gt;
 </pre>
                     </div>
+                    
+                    <h3>Sticky toolbars</h3>
+                    <p>Toolbars within the <code class="atv">content</code> area can stick to the top with some additional markup (see example): You need to add the classes <code class="atv">content-header</code> and <code class="atv">content-container</code></p>
+                    
+                    <div class="componentSample railSample">
+                                            <pre class="prettyprint linenums">
+&lt;div class=&quot;content&quot;&gt;
+    &lt;nav class="toolbar content-header"&gt;...&lt;/nav&gt;
+    &lt;div class="content-container"&gt;
+        &lt;p&gt;Content.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+                    </div>
+                    
+<p>If you are already using some kind of container div like <code class="atv">grid-container</code>, you can just add the class  <code class="atv">content-container</code> to it: <code class="prettyprint">&lt;div class="grid-container content-container"&gt;</code></p>                    
                 </section>
 
                 <section id="Well">

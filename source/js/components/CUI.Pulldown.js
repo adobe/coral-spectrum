@@ -102,9 +102,9 @@
 
   // Data API
   if (CUI.options.dataAPI) {
-    $(document).ready(function() {
-        $("[data-init=pulldown]").pulldown();
+    $(document).on("cui-contentloaded.data-api", function(e) {
+        $("[data-init=pulldown]", e.target).pulldown();
     });
-  }  
+  }
 
 }(window.jQuery));
