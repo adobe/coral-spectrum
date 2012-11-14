@@ -518,8 +518,8 @@
 
     // Data API
     if (CUI.options.dataAPI) {
-        $(document).ready(function() {
-            $("[data-init='pathbrowser']").pathBrowser();
+        $(document).on("cui-contentloaded.data-api", function(e) {
+            $("[data-init='pathbrowser']", e.target).pathBrowser();
         });
     }
 

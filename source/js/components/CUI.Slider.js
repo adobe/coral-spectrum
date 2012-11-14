@@ -470,8 +470,8 @@
 
   // Data API
   if (CUI.options.dataAPI) {
-    $(function() {
-        $(".slider[data-init='slider']").slider();
+    $(document).on("cui-contentloaded.data-api", function(e) {
+        $(".slider[data-init='slider']", e.target).slider();
     });
   }
 }(window.jQuery));

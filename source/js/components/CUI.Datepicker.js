@@ -160,7 +160,6 @@
     _readInputVal: function() {
       if(this.options.type !== "time") {
         this.displayDateTime = this.options.selectedDateTime = new Date($(this.$input).val());
-        console.log("selectedDateTime",this.options.selectedDateTime);
       } else {
         var today = new Date();
         var dateString = this._formatDate(today);
@@ -508,9 +507,9 @@
 
   // Data API
   if (CUI.options.dataAPI) {
-    $(document).ready(function() {
-        $("[data-init=datepicker]").datepicker();
+    $(document).on("cui-contentloaded.data-api", function(e) {
+        $("[data-init=datepicker]", e.target).datepicker();
     });
-  }  
+  }
 
 }(window.jQuery));

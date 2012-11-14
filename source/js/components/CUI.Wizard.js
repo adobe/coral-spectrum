@@ -238,8 +238,8 @@ var wizard = null; // TODO for DEV purpose
 
   // Data API
   if (CUI.options.dataAPI) {
-    $(document).ready(function() {
-        $("[data-init=wizard]").wizard();
+    $(document).on("cui-contentloaded.data-api", function(e) {
+      $("[data-init=wizard]", e.target).wizard();
     });
-  }  
+  }
 }(window.jQuery));
