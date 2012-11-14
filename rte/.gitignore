@@ -1,0 +1,10 @@
+.DS_Store
+/build
+/temp
+/node_modules
+/components
+/misc
+/target
+.idea/
+atlassian-ide-plugin.xml
+*.iml

@@ -1,0 +1,16 @@
+{
+    "name":"RichTextEditor",
+    "version":"0.1.0-SNAPSHOT",
+    "repository":{
+        "type":"git",
+        "url":"https://git.corp.adobe.com/Reef/CoralUI/rte"
+    },
+    "dependencies":{
+        "grunt-contrib-clean":"0.2",
+        "grunt-contrib-compress":"0.2",
+        "grunt-contrib-copy":"0.2",
+        "grunt-contrib-handlebars":"0.2",
+        "grunt-contrib-less":"0.1",
+        "grunt-contrib-mincss":"0.2"
+    }
+}

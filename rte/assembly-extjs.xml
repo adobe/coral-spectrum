@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<assembly>
+    <id>extjs</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <files>
+        <file>
+            <source>build/js/rte-core-extjs.js</source>
+        </file>
+        <file>
+            <source>build/js/rte-core-extjs.min.js</source>
+        </file>
+    </files>
+</assembly>

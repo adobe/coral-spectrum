@@ -1,0 +1,141 @@
+<!--
+
+  ADOBE CONFIDENTIAL
+  __________________
+
+   Copyright 2012 Adobe Systems Incorporated
+   All Rights Reserved.
+
+  NOTICE:  All information contained herein is, and remains
+  the property of Adobe Systems Incorporated and its suppliers,
+  if any.  The intellectual and technical concepts contained
+  herein are proprietary to Adobe Systems Incorporated and its
+  suppliers and are protected by trade secret or copyright law.
+  Dissemination of this information or reproduction of this material
+  is strictly forbidden unless prior written permission is obtained
+  from Adobe Systems Incorporated.
+  -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- ======================================================================= -->
+    <!-- P A R E N T   P R O J E C T                                             -->
+    <!-- ======================================================================= -->
+
+    <parent>
+        <groupId>com.adobe.granite</groupId>
+        <artifactId>parent</artifactId>
+        <version>26</version>
+        <relativePath/>
+    </parent>
+
+    <!-- ======================================================================= -->
+    <!-- P R O J E C T                                                           -->
+    <!-- ======================================================================= -->
+    <artifactId>com.adobe.coralui.rte</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>content-package</packaging>
+
+    <name>Adobe Reef / RichTextEditor</name>
+
+    <scm>
+        <connection>scm:git:git@git.corp.adobe.com:Reef/CoralUI.git</connection>
+        <developerConnection>scm:git:git@git.corp.adobe.com:Reef/CoralUI.git</developerConnection>
+        <url>https://git.corp.adobe.com/Reef/CoralUI/master/rte</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <properties>
+        <content.dir>${basedir}/extjs</content.dir>
+        <vault.work>${project.build.directory}/vault-work</vault.work>
+        <rte.target.dir>${vault.work}/jcr_root/libs/cq/ui/rte</rte.target.dir>
+    </properties>
+
+    <!-- ====================================================================== -->
+    <!-- B U I L D   D E S C R I P T I O N                                      -->
+    <!-- ====================================================================== -->
+    <build>
+
+        <resources>
+            <resource>
+                <directory>${content.dir}/src/main/content/META-INF</directory>
+                <targetPath>${vault.work}/META-INF</targetPath>
+            </resource>
+            <resource>
+                <directory>${content.dir}/src/main/content/jcr_root</directory>
+                <targetPath>${vault.work}/jcr_root</targetPath>
+            </resource>
+            <resource>
+                <directory>${basedir}/source</directory>
+                <excludes>
+                    <exclude>core/adapter/jquery/**</exclude>
+                </excludes>
+                <targetPath>${rte.target.dir}</targetPath>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>extjs</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>assembly-extjs.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>jquery</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>assembly-jquery.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-remote-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${vault.work}</outputDirectory>
+                            <attached>false</attached>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.day.jcr.vault</groupId>
+                <artifactId>content-package-maven-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <filters>
+                        <filter>
+                            <root>/libs/cq/ui/rte</root>
+                        </filter>
+                    </filters>
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
+
+</project>
