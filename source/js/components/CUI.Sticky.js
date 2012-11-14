@@ -6,7 +6,8 @@
     /**
       @extends CUI.Widget
       @classdesc A sticky widget - can make every element sticky to screen
-      
+      @deprecated
+        
       @desc Makes element sticky, i.e. the element does not scroll out of screen.
     */
     construct: function(options) {

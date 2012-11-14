@@ -98,6 +98,33 @@ CUI.util.capitalize = function(str) {
         }
     };
 
+    /**
+     * Selects text in the provided field
+     * @param {Number} start (optional) The index where the selection should start (defaults to 0)
+     * @param {Number} end (optional) The index where the selection should end (defaults to the text length)
+     */
+    CUI.util.selectText = function(field, start, end) {
+        var value = field.val();
+        if (value.length > 0) {
+            start = start || 0;
+            end = end || value.length;
+            var domEl = $(field)[0];
+            if (domEl.setSelectionRange) {
+                // Mostly all browsers
+                domEl.blur();
+                domEl.setSelectionRange(start, end);
+                domEl.focus();
+            } else if (domEl.createTextRange) {
+                // IE
+                var range = domEl.createTextRange();
+                range.collapse(true);
+                range.moveEnd("character", end - value.length);
+                range.moveStart("character", start);
+                range.select();
+            }
+        }
+    };
+
   /**    
     Load remote content in an element with a CUI spinner
     NOTE: This function should be moved to another file as it is not part of the CUI.util namespace. Maybe CUI.jQuery.js? Ignored from docs for now.

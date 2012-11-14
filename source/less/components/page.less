@@ -16,7 +16,28 @@
   }
 
   .content {
+    position: relative;
     height: 100%;
     .scrollable;
+
+    // Stick toolbars to the top
+    .content-header {
+       position: absolute;
+       top: 0;
+       left: 0;
+       right: 0;
+    }
+    
+    // Have a scrolling area below toolbar
+    .content-container {
+       position: absolute;
+       top: 46*@px;
+       left: 0;
+       right: 0;
+       bottom: 0;
+       .scrollable
+    }
+        
   }
+ 
 }

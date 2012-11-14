@@ -277,13 +277,21 @@ CUI.rte.EditorKernel = new Class({
 
     /**
      * The UI toolkit to be used; default value: ext
+     * @private
      */
     uiToolkit: null,
 
     /**
      * The dialog manager to be used
+     * @private
      */
     dialogManager: null,
+
+    /**
+     * The ID of the selection change tracking interval
+     * @private
+     */
+    selectionChangeTracker: null,
 
 
     construct: function(config) {
@@ -701,6 +709,27 @@ CUI.rte.EditorKernel = new Class({
                         }, this, {
                             "buffer": 100
                         });
+                    // "Thread" that checks periodically for selection changes on mobile
+                    // devices - there are a lot of cases where Safari does alter the
+                    // selection without notifying the app properly using an appropriate
+                    // DOM event
+                    var ek = this;
+                    this.selectionChangeTracker = window.setInterval(function() {
+                        var sel = CUI.rte.Selection;
+                        var bookmark = sel.createSelectionBookmark(context);
+                        if (this.lastKnownSelection) {
+                            var lks = this.lastKnownSelection;
+                            // TODO evaluate bookmark/lks.cells
+                            if ((bookmark.startPos != lks.startPos)
+                                    || (bookmark.charCnt != lks.charCnt)
+                                    || (bookmark.object != lks.object)) {
+                                ek.onEditorEvent(new CUI.rte.EditorEvent({
+                                    type: "selectionchange"
+                                }));
+                            }
+                        }
+                        this.lastKnownSelection = bookmark;
+                    }, 500);
                 }
             }
             // keydown is the same across all browsers and all device categories
@@ -896,6 +925,10 @@ CUI.rte.EditorKernel = new Class({
      */
     suspendEventHandling: function() {
         this.unregisterHandlers();
+        if (this.selectionChangeTracker !== null) {
+            window.clearInterval(this.selectionChangeTracker);
+            this.selectionChangeTracker = null;
+        }
     },
 
     /**
