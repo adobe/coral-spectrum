@@ -35,147 +35,41 @@ module.exports = function(grunt) {
       'components/CUI.PathBrowser.js',
       'components/CUI.Wizard.js'
     ],
-    "rte-setup": [
-      'rte/setup.js'
-    ],
-    "rte-jquery-adapter": [
-      'rte/core/adapter/jquery/Eventing.js',
-      'rte/core/adapter/EditorEvent.js',
-      'rte/core/adapter/jquery/JQueryEvent.js',
-      'rte/core/adapter/jquery/Query.js',
-      'rte/core/adapter/jquery/AdapterUtils.js',
-      'rte/core/adapter/Constants.js',
-      'rte/core/adapter/Hooks.js',
-      'rte/core/adapter/Utils.js'
-    ],
-    "rte-extjs-adapter": [
-      'rte/core/adapter/extjs/Class.js',
-      'rte/core/adapter/extjs/Eventing.js',
-      'rte/core/adapter/EditorEvent.js',
-      'rte/core/adapter/extjs/ExtEvent.js',
-      'rte/core/adapter/extjs/Query.js',
-      'rte/core/adapter/extjs/AdapterUtils.js',
-      'rte/core/adapter/Constants.js',
-      'rte/core/adapter/Hooks.js',
-      'rte/core/adapter/Utils.js'
-    ],
-    "rte-core": [
-      'rte/core/EditContext.js',
-      'rte/core/EditorKernel.js',
-      'rte/core/IFrameKernel.js',
-      'rte/core/DivKernel.js',
-      'rte/core/Common.js',
-      'rte/core/HtmlProcessor.js',
-      'rte/core/DomProcessor.js',
-      'rte/core/WhitespaceProcessor.js',
-      'rte/core/NodeList.js',
-      'rte/core/Selection.js',
-      'rte/core/UndoManager.js',
-      'rte/core/TableMatrix.js',
-      'rte/core/ListUtils.js',
-      'rte/core/ListRepresentation.js',
-      'rte/core/CellSelection.js',
-      'rte/core/SearchableDocument.js',
-      'rte/core/Compatibility.js',
-      'rte/core/HtmlRules.js',
-      'rte/core/Serializer.js',
-      'rte/core/HtmlSerializer.js',
-      'rte/core/XhtmlSerializer.js',
-      'rte/core/Deserializer.js',
-      'rte/core/HtmlDeserializer.js',
-      'rte/core/XhtmlDeserializer.js',
-      'rte/core/DomCleanup.js',
+    "cui-rte": [
+      'components/rte/Theme.js',
+      'components/rte/cui/ToolkitImpl.js',
+      'components/rte/cui/ToolbarImpl.js',
+      'components/rte/cui/ElementImpl.js',
+      'components/rte/cui/ParaFormatterImpl.js',
+      'components/rte/cui/StyleSelectorImpl.js',
+      'components/rte/cui/CuiToolbarBuilder.js',
+      'components/rte/cui/CmItemImpl.js',
+      'components/rte/cui/CmSeparatorImpl.js',
+      'components/rte/cui/CuiContextMenuBuilder.js',
+      'components/rte/cui/CuiDialogManager.js',
+      'components/rte/cui/CuiDialogHelper.js',
 
-      'rte/core/commands/Command.js',
-      'rte/core/commands/CommandRegistry.js',
-      'rte/core/commands/Delete.js',
-      'rte/core/commands/SurroundBase.js',
-      'rte/core/commands/DefaultFormatting.js',
-      'rte/core/commands/Anchor.js',
-      'rte/core/commands/CutCopy.js',
-      'rte/core/commands/Format.js',
-      'rte/core/commands/Indent.js',
-      'rte/core/commands/InsertHtml.js',
-      'rte/core/commands/Justify.js',
-      'rte/core/commands/Link.js',
-      'rte/core/commands/List.js',
-      'rte/core/commands/Outdent.js',
-      'rte/core/commands/Paste.js',
-      'rte/core/commands/Style.js',
-      'rte/core/commands/Table.js',
-      'rte/core/commands/Image.js',
-      'rte/core/commands/UndoRedo.js',
+      'components/rte/stub/ToolkitImpl.js',
+      'components/rte/stub/ToolbarImpl.js',
+      'components/rte/stub/ElementImpl.js',
+      'components/rte/stub/ParaFormatterImpl.js',
+      'components/rte/stub/StyleSelectorImpl.js',
+      'components/rte/stub/StubToolbarBuilder.js',
+      'components/rte/stub/CmItemImpl.js',
+      'components/rte/stub/CmSeparatorImpl.js',
+      'components/rte/stub/StubContextMenuBuilder.js',
+      'components/rte/stub/StubDialogManager.js',
+      'components/rte/stub/StubDialogHelper.js',
 
-      'rte/core/plugins/Plugin.js',
-      'rte/core/plugins/PluginRegistry.js',
-      'rte/core/plugins/PluginEvent.js',
-      'rte/core/plugins/KeyPlugin.js',
-      'rte/core/plugins/SimpleFormatPlugin.js',
-      'rte/core/plugins/EditToolsPlugin.js',
-      'rte/core/plugins/FindReplacePlugin.js',
-      'rte/core/plugins/FormatPlugin.js',
-      'rte/core/plugins/JustifyPlugin.js',
-      'rte/core/plugins/LinkPlugin.js',
-      'rte/core/plugins/ListPlugin.js',
-      'rte/core/plugins/MiscToolsPlugin.js',
-      'rte/core/plugins/ParagraphFormatPlugin.js',
-      'rte/core/plugins/StylesPlugin.js',
-      'rte/core/plugins/SubSuperScriptPlugin.js',
-      'rte/core/plugins/TablePlugin.js',
-      'rte/core/plugins/ImagePlugin.js',
-      'rte/core/plugins/UndoRedoPlugin.js',
+      'components/CUI.RichText.js',
 
-      'rte/core/ui/Toolkit.js',
-      'rte/core/ui/ToolkitRegistry.js',
-      'rte/core/ui/UIEvent.js',
-      'rte/core/ui/ToolbarBuilder.js',
-      'rte/core/ui/Toolbar.js',
-      'rte/core/ui/TbElement.js',
-      'rte/core/ui/TbParaFormatter.js',
-      'rte/core/ui/TbStyleSelector.js',
-      'rte/core/ui/ContextMenuBuilder.js',
-      'rte/core/ui/CmItem.js',
-      'rte/core/ui/CmSeparator.js',
-      'rte/core/ui/DialogManager.js',
-      'rte/core/ui/DialogHelper.js'
-    ],
-    "rte-cui": [
-      'rte/ui/Theme.js',
-      'rte/ui/cui/ToolkitImpl.js',
-      'rte/ui/cui/ToolbarImpl.js',
-      'rte/ui/cui/ElementImpl.js',
-      'rte/ui/cui/ParaFormatterImpl.js',
-      'rte/ui/cui/StyleSelectorImpl.js',
-      'rte/ui/cui/CuiToolbarBuilder.js',
-      'rte/ui/cui/CmItemImpl.js',
-      'rte/ui/cui/CmSeparatorImpl.js',
-      'rte/ui/cui/CuiContextMenuBuilder.js',
-      'rte/ui/cui/CuiDialogManager.js',
-      'rte/ui/cui/CuiDialogHelper.js',
-
-      'rte/ui/stub/ToolkitImpl.js',
-      'rte/ui/stub/ToolbarImpl.js',
-      'rte/ui/stub/ElementImpl.js',
-      'rte/ui/stub/ParaFormatterImpl.js',
-      'rte/ui/stub/StyleSelectorImpl.js',
-      'rte/ui/stub/StubToolbarBuilder.js',
-      'rte/ui/stub/CmItemImpl.js',
-      'rte/ui/stub/CmSeparatorImpl.js',
-      'rte/ui/stub/StubContextMenuBuilder.js',
-      'rte/ui/stub/StubDialogManager.js',
-      'rte/ui/stub/StubDialogHelper.js',
-
-      'rte/CUI.RichText.js'
-    ],
-    "rte-init": [
-      'rte/init.js'
+      'components/rte/init.js'
     ]
   };
 
   var packages = {
     "cui": [ "cui-templates", "cui"],
-    "rte-core-extjs": [ "rte-setup", "rte-extjs-adapter", "rte-core" ],
-    "rte-for-cui": [ "rte-setup", "rte-jquery-adapter", "rte-core", "rte-cui", "rte-init" ]
+    "cui-rte": [ "cui-rte" ]
   };
 
   /**
@@ -187,7 +81,8 @@ module.exports = function(grunt) {
     source: 'source',
     temp: 'temp',
     components: 'components',
-    modules: 'node_modules'
+    modules: 'node_modules',
+    rte: "rte"
   };
 
   /**
@@ -221,6 +116,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-mincss');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-mocha');
+  grunt.loadNpmTasks('grunt-hub');
 
   // Read in package.json
   var pkg = grunt.file.readJSON('package.json');
@@ -313,6 +209,11 @@ module.exports = function(grunt) {
           '<%= dirs.build %>/js/libs/toe.js': '<%= dirs.source %>/js/plugins/toe.js',
           '<%= dirs.build %>/js/libs/jquery-fingerpointer.js': '<%= dirs.source %>/js/plugins/jquery-fingerpointer.js',
           '<%= dirs.build %>/js/libs/jquery-gridlayout.js': '<%= dirs.source %>/js/plugins/jquery-gridlayout.js'
+        }
+      },
+      rte: {
+        files: {
+          '<%= dirs.build %>/js/libs/rte-core-jquery.js': '<%= dirs.rte %>/build/js/rte-core-jquery.js'
         }
       },
       prettyify: {
@@ -418,7 +319,7 @@ module.exports = function(grunt) {
         'grunt.js',
         // exclude RTE for now ...
         '<%= dirs.source %>/js/*.js',
-        '<%= dirs.source %>/js/components/**',
+        '<%= dirs.source %>/js/components/*',
         '<%= dirs.source %>/guide/examples/assets/guide.js'
       ]
     },
@@ -439,13 +340,16 @@ module.exports = function(grunt) {
         ],
         dest: '<%= dirs.build %>/css/cui.css'
       },
-      "rte-core-extjs": {
-        src: getIncludes("rte-core-extjs", dirs.source+'/js/'),
-        dest: '<%= dirs.build %>/js/rte-core-extjs.js'
-      },
-      "rte-for-cui": {
-        src: getIncludes("rte-for-cui", dirs.source+'/js/'),
-        dest: '<%= dirs.build %>/js/rte-for-cui.js'
+      cui_rte: {
+        src: getIncludes("cui-rte", dirs.source+'/js/'),
+        dest: '<%= dirs.build %>/js/cui-rte.js'
+      }
+    },
+
+    hub: {
+      rte: {
+        src: [ '<%= dirs.rte%>/grunt.js'],
+        tasks: [ 'full' ]
       }
     },
 
@@ -454,13 +358,9 @@ module.exports = function(grunt) {
         src: ['<config:concat.cui.dest>'],
         dest: '<%= dirs.build %>/js/CUI.min.js'
       },
-      "rte-core-extjs": {
-        src: ['<config:concat.rte-core-extjs.dest>'],
-        dest: '<%= dirs.build %>/js/rte-core-extjs.min.js'
-      },
-      "rte-for-cui": {
-        src: ['<config:concat.rte-for-cui.dest>'],
-        dest: '<%= dirs.build %>/js/rte-for-cui.min.js'
+      cui_rte: {
+        src: ['<config:concat.cui_rte.dest>'],
+        dest: '<%= dirs.build %>/js/cui-rte.min.js'
       }
       // TBD: minify individual JS files?
     },
@@ -626,8 +526,11 @@ module.exports = function(grunt) {
   // Partial build for development
   grunt.registerTask('partial', 'lint copy handlebars concat:cui min:cui icons less concat:cui_css mincss mocha');
 
+  // Build and copy RTE
+  grunt.registerTask("rte", 'hub:rte copy:rte');
+
   // Full build with docs and compressed file
-  grunt.registerTask('full-build', 'lint copy handlebars concat:cui concat:rte-core-extjs concat:rte-for-cui min icons less concat:cui_css mincss mocha jsdoc');
+  grunt.registerTask('full-build', 'lint rte copy handlebars concat:cui concat:cui_rte min icons less concat:cui_css mincss mocha jsdoc');
 
   // Full build with docs and compressed file
   grunt.registerTask('full', 'clean full-build');

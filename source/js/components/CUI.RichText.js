@@ -1,4 +1,4 @@
-(function ($) {
+(function($) {
 
     var configs = { };
 
@@ -46,7 +46,7 @@
 
         handleKeyUp: function(e) {
             // if (!window.CQ_inplaceEditDialog) {
-                if (e.getCharCode() == 27) {
+                if (e.getCharCode() === 27) {
                     this.finish();
                 }
             // }
@@ -157,7 +157,7 @@
         // Interface ---------------------------------------------------------------------------------------------------
 
         start: function(config, toolbarRoot) {
-            if (this.editorKernel == null) {
+            if (this.editorKernel === null) {
                 this.editorKernel = new CUI.rte.DivKernel(config);
             }
             this.$textContainer = this.getTextDiv(this.$element);
@@ -244,6 +244,6 @@
         });
     }
 
-})(window.jQuery);
+}(window.jQuery));
 
 

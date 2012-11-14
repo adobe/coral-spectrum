@@ -6,7 +6,8 @@
     /**
       @extends CUI.Widget
       @classdesc A sticky widget - can make every element sticky to screen
-      
+      @deprecated
+        
       @desc Makes element sticky, i.e. the element does not scroll out of screen.
     */
     construct: function(options) {
@@ -84,8 +85,8 @@
 
   // Data API
   if (CUI.options.dataAPI) {
-    $(function() {
-        $(".sticky,[data-init=sticky]").sticky();
+    $(document).on("cui-contentloaded.data-api", function(e) {
+      $(".sticky,[data-init=sticky]", e.target).sticky();
     });
   }
 }(window.jQuery));

@@ -17,6 +17,7 @@
     "chai-jquery": "1.1.0",
     "grunt-mocha": "0.1",
     "sinon": "1.5.0",
-    "sinon-chai": "2.1.2"
+    "sinon-chai": "2.1.2",
+    "grunt-hub": "0.3.3"
   }
 }
