@@ -161,34 +161,28 @@ div.rail {
                     position: relative;
 
                     &.active {
-                        >i,
-                        &:before,
-                        &:after {
-                            border: solid transparent;
-                            content: " ";
-                            height: 0;
-                            width: 0;
-                            position: absolute;
-                            pointer-events: none;
-                            left: 50%;
-                        }
-                        >i {
-                            border-width: 0.5rem;
-                            margin-left: -0.5rem;
-                            bottom: -@px;
-                            border-bottom-color: @rail-section-highlight-color;
-                        }
+                       &:before,
+                       &:after {
+                         position: absolute;
+                         left: 50%;
+                         
+                         height: 0;
+                         width: 0;
+                         margin-left: -0.5rem;
+                         
+                         border: solid transparent;
+                         border-width: 0.5rem;
+                         
+                         content: " ";
+                         pointer-events: none;
+                       }
                         &:before {
-                            border-width: 0.5rem;
-                            margin-left: -0.5rem;
-                            bottom: 0;
-                            border-bottom-color: @rail-section-border-color;
+                          bottom: 0;
+                          border-bottom-color: @rail-section-border-color;
                         }
                         &:after {
-                            border-width: 0.5rem;
-                            margin-left: -0.5rem;
-                            bottom: -2*@px;
-                            border-bottom-color: @rail-background-color;
+                          bottom: -2*@px;
+                          border-bottom-color: @rail-background-color;
                         }
                     }
                 }
