@@ -14,7 +14,7 @@ fi
 while getopts ":c" opt; do
   case "$opt" in
     c)
-      USE_COLOR=false; 
+      USE_COLOR=false;
       ;;
     \?)
       echo "Invalid option: -$OPTARG" >&2
@@ -31,7 +31,7 @@ else
 fi
 
 # output with color
-# -c turns this off 
+# -c turns this off
 green() {
   if $USE_COLOR ; then
     echoe "\033[32m$1\033[0m$2"
@@ -81,7 +81,7 @@ if ! echo $npmList | grep grunt@ >/dev/null 2>&1; then
   if [ $installGrunt = "y" ]; then
     echo "running sudo npm install -g grunt..."
     sudo npm install -g grunt
-    
+
     if [ $? -ne 0 ]; then
       red " [X] " "\c"
       echo "Failed to install grunt"
@@ -105,7 +105,7 @@ if ! echo $npmList | grep bower@ >/dev/null 2>&1; then
   if [ $installBower = "y" ]; then
     echo "running sudo npm install -g bower..."
     sudo npm install -g bower
-    
+
     if [ $? -ne 0 ]; then
       red " [X] " "\c"
       echo "Failed to install Bower"
@@ -159,6 +159,13 @@ else
   echo "JSDoc";
   exit 1
 fi
+
+# install RTE build stuff as well, so grunt full works OOTB without calling the RTE
+# installer manually
+cd rte
+echo "Preparing RichTextEditor submodule"
+./install.sh
+cd -
 
 echo ""
 echo "Run one of the following commands to build CoralUI:"
