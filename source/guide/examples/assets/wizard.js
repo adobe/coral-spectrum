@@ -35,4 +35,15 @@ $(document).ready(function(){
   };
 
   $('input[name="title"]').keyup(validateProperties);
+
+  $('.select-template article').click(function(){
+    $('.select-template article.focused').removeClass('focused');
+    $(this).addClass('focused');
+    return false;
+  });
+
+  $('.select-template article .preview').click(function(){
+    $('.select-template .grid-container').addClass('hidden');
+    $('.select-template div.preview').addClass('displayed');
+  });
 });

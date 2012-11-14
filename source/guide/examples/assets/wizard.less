@@ -1,32 +1,128 @@
-.settings {
-  width: 50%;
-  margin: 0 auto;
-}
+/**
+  Wizard step through
+*/
 
-.properties {
-    
-    .card-page {
-        width: 25em;
+.wizard-page {
+
+    // Settings section
+    .settings {
+      width: 480px;
+      margin: 0 auto;
+      padding-top: 60px;
+
+      // TODO. Temporary. This should be handled somewhere more generic, added here as an example
+      // <hr/> is semantic, but perhaps a div + border styles would be more flexible
+      hr {
+        height: 1px;
+        border: 0;
+        border-bottom: 1px solid #fdfdfd;
+        margin: 1rem 0;
+        color: #b1b1b1;
+        background-color: #b1b1b1;
+      }
     }
 
-    .tabs {
-        width: 60%;
-        width: -webkit-calc(100% - 24em);
-        width: -moz-calc(100% - 24em);
-        width: -o-calc(100% - 24em);
-        width: calc(100% - 24em);
+    // Properties section
+    .properties {
+        
+        .card-page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 14rem;
+        }
 
-        .basic {
+        .tabs-wrapper {
+          margin-left: 15rem;
+        }
 
-            &>span {
-                margin-left: 25px;
-                
-                &>input, &>label, &>textarea, &>.filters {
-                  display: block;
+        .tabs {
+            width: 100%;
+
+            .basic {
+
+                &>span {
+                    margin-left: 25px;
+                    
+                    &>input, &>label, &>textarea, &>.filters {
+                      display: block;
+                    }
                 }
+
+            }
+        }
+    }
+
+    // Select template / select source sections
+    .select-template, .select-source {
+        article {
+
+            h4 {
+                color: #525252;
             }
 
-            
+            .description, .info {
+                color: #616161;
+            }
+
+            &.focused {
+                background-color: #4b9edd;
+            }
         }
+    }
+
+    // Select template section
+    .select-template {
+        /* Temporary, need to ask how the preview is built */
+        div.preview {
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-image: url('wizard/preview.png');
+            width: 100%;
+            height: 664px;
+
+            display: none;
+
+            &.displayed {
+                display: block;
+            }
+        }
+
+        article {
+
+            .preview {
+                border: none;
+                background: #434749;
+                top: 8.5em;
+                left: 25%;
+                position: absolute;
+                display: none;
+            }
+
+            &.focused {
+                button.preview {
+                    display: block;
+                }
+            }
+        }
+
+        .grid-container.hidden {
+            display: none;
+        }
+    }
+
+    /* Temporary, need SVGs icons */
+    .icon-wizard-edit {
+        background-image: url('wizard/edit.png');
+    }
+
+    /* Temporary, need SVGs icons */
+    .icon-wizard-earth {
+        background-image: url('wizard/earth.png');
+    }
+
+    /* Temporary, need SVGs icons */
+    .icon-wizard-double-right-arrow {
+        background-image: url('wizard/double-right-arrow.png');
     }
 }
