@@ -160,7 +160,6 @@
     _readInputVal: function() {
       if(this.options.type !== "time") {
         this.displayDateTime = this.options.selectedDateTime = new Date($(this.$input).val());
-        console.log("selectedDateTime",this.options.selectedDateTime);
       } else {
         var today = new Date();
         var dateString = this._formatDate(today);
