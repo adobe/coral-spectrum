@@ -629,8 +629,8 @@ var index = filters.getSelectedIndex();
   CUI.util.plugClass(CUI.Filters);
   
   // Data API
-  $(document).ready(function() {
-    $('[data-init=filters]').filters();
+  $(document).on("cui-contentloaded.data-api", function(e) {
+    $("[data-init=filters]", e.target).filters();
   });
 }(window.jQuery));
 

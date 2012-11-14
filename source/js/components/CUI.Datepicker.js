@@ -508,9 +508,9 @@
 
   // Data API
   if (CUI.options.dataAPI) {
-    $(document).ready(function() {
-        $("[data-init=datepicker]").datepicker();
+    $(document).on("cui-contentloaded.data-api", function(e) {
+        $("[data-init=datepicker]", e.target).datepicker();
     });
-  }  
+  }
 
 }(window.jQuery));
