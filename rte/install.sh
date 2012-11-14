@@ -53,7 +53,7 @@ echo "Checking for build dependencies..."
 # Check for node, error if not available
 if ! which node >/dev/null 2>&1; then
   red " [X] " "\c"
-  echo "Node must be installed to build CoralUI. Visit nodejs.org to download Node"
+  echo "Node must be installed to build RichTextEditor. Visit nodejs.org to download Node"
   exit 1
 else
   green " $OK " "\c"
@@ -63,7 +63,7 @@ fi
 # Check for npm, error if not available
 if ! which npm >/dev/null 2>&1; then
   red " [X] " "\c"
-  echo "npm must be installed to build CoralUI"
+  echo "npm must be installed to build RichTextEditor"
   exit 1
 else
   green " $OK " "\c"
@@ -89,7 +89,7 @@ if ! echo $npmList | grep grunt@ >/dev/null 2>&1; then
     fi
   else
     red " [X] " "\c"
-    echo "grunt must be installed to build CoralUI"
+    echo "grunt must be installed to build RichTextEditor"
     exit 1
   fi
 else
@@ -113,7 +113,7 @@ if ! echo $npmList | grep bower@ >/dev/null 2>&1; then
     fi
   else
     red " [X] " "\c"
-    echo "Bower must be installed to build CoralUI"
+    echo "Bower must be installed to build RichTextEditor"
     exit 1
   fi
 else
@@ -149,27 +149,20 @@ else
 fi
 
 # Temporary: clone from git and add link to template in JSDoc folder
-rm -rf components/JSDoc
-git clone https://github.com/jsdoc3/jsdoc.git components/JSDoc >/dev/null 2>&1
-if [ $? -eq 0 ]; then
-  green " $OK " "\c"
-  echo "JSDoc"
-else
-  red " [X] " "\c"
-  echo "JSDoc";
-  exit 1
-fi
-
-# install RTE build stuff as well, so grunt full works OOTB without calling the RTE
-# installer manually
-cd rte
-echo "Preparing RichTextEditor submodule"
-./install.sh
-cd -
+# rm -rf components/JSDoc
+# git clone https://github.com/jsdoc3/jsdoc.git components/JSDoc >/dev/null 2>&1
+# if [ $? -eq 0 ]; then
+#   green " $OK " "\c"
+#   echo "JSDoc"
+# else
+#   red " [X] " "\c"
+#   echo "JSDoc";
+#   exit 1
+# fi
 
 echo ""
-echo "Run one of the following commands to build CoralUI:"
+echo "Run one of the following commands to build RichTextEditor:"
 echo ""
 echo "  grunt       # partial build for development"
 echo "  grunt full  # full build with documentation"
-echo "  grunt mvn   # build and install into Granite"
+echo "  grunt mvn   # build and install into CQ"
