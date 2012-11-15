@@ -5,6 +5,9 @@
 div.rail {
     max-width: 35%;
 
+    // animation is too slow
+    //.transition(width 0.5s ease-out);
+
     background-color: @rail-background-color;
     height: 100%;
 
@@ -23,7 +26,8 @@ div.rail {
     }
 
     &.closed {
-      display: none;
+      width: 0;
+      overflow: hidden;
     }
 
     // fixed content

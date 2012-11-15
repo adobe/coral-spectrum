@@ -120,6 +120,25 @@ $('#myRail').rail({
         });
       });
 
+      //enable swiping
+      $(document).finger('swipe', function (e) {
+        var openTriggerArea = 30,
+            w = _.rail.width(),
+            x = e.touches.start[0].pageX,
+            dir = e.direction;
+
+        
+          if (dir === 'left') { // close
+            if (x < w) {
+              _.rail.addClass('closed');
+            }
+          } else if (dir === 'right') { // open
+            if (x < openTriggerArea) {
+              _.rail.removeClass('closed');
+            }
+          }
+      });
+
       // rail switcher
       if (switcher.length > 0) {
         this._initRailSwitcher(_.content, switcher);
