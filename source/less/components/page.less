@@ -20,6 +20,11 @@
     height: 100%;
     .scrollable;
 
+    [class^="icon-"]:before,
+    [class*=" icon-"]:before {
+      color: @icon-color;
+    }
+
     // Stick toolbars to the top
     .content-header {
        position: absolute;

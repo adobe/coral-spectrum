@@ -1,0 +1,26 @@
+@font-face {
+  font-family: 'AdobeIcons';
+  src: url('../fonts/AdobeIcons.eot');
+  src: url('../fonts/AdobeIcons.woff') format('woff'),
+    url('../fonts/AdobeIcons.ttf') format('truetype'),
+    url('../fonts/AdobeIcons.svg#AdobeIcons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*
+@font-face {
+  font-family: 'AdobeIcons';
+  src: url('AdobeIcons.svg#AdobeIcons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}*/
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: AdobeIcons;
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: inherit;
+}

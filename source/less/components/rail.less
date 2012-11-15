@@ -10,6 +10,11 @@ div.rail {
 
     @pull-to-request-size: 3rem;
 
+    [class^="icon-"]:before,
+    [class*=" icon-"]:before {
+      color: @rail-font-color;
+    }
+
     // make it scrollable
     &.scroll,
     .scroll {
