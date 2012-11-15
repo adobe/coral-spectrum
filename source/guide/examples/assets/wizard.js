@@ -13,13 +13,25 @@ $(document).ready(function(){
             new $.CUIGridLayout({}, $('.select-source .grid-container'));
             sourceGridRendered = true;
         }
+        // Add body css class for rendering background image on select source page
+        $('body').addClass("select-source-page");
+      },
+      'settings': function() {
+        console.log("settings page");
+        $('body').removeClass("select-source-page");
       },
       'select-template': function() {
+          console.log("select template");
         if (!templateGridRendered) {
             new $.CUIGridLayout({}, $('.select-template .grid-container'));
             templateGridRendered = true;
         }
+        $('body').removeClass("select-source-page");
       },
+      'properties': function() {
+          console.log("properties");
+          $('body').removeClass("select-source-page");
+      }
     },
     onFinish: function() {
         alert('Page created!');

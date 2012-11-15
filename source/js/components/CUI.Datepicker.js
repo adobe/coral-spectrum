@@ -9,7 +9,7 @@
          
         <p>
             <div class="datepicker" data-init="datepicker">
-                <input type="datetime" value="2012-10-20 11:10">
+                <input type="datetime" value="2012/10/20 11:10:00">
                 <button><span class="icon-calendar small">Datetime picker</span></button>
             </div>
         </p>
@@ -17,7 +17,7 @@
         @example
         <caption>Instantiate by data API</caption>
         &lt;div class=&quot;datepicker&quot; data-init=&quot;datepicker&quot;&gt;
-            &lt;input type=&quot;datetime&quot; value=&quot;2012-10-20 11:10&quot;&gt;
+            &lt;input type=&quot;datetime&quot; value=&quot;2012/10/20 11:10:00&quot;&gt;
             &lt;button&gt;&lt;span class=&quot;icon-calendar small&quot;&gt;Datetime picker&lt;/span&gt;&lt;/button&gt;
         &lt;/div&gt;
 
@@ -128,8 +128,8 @@
 
         if(this._isTimeEnabled()) {
            this.$timeButtons.on("dropdown-list:select", "", function(event) {
-               var date = this.options.selectedDateTime.getFullYear() + '-' +
-                           (1 + this.options.selectedDateTime.getMonth()) + '-' +
+               var date = this.options.selectedDateTime.getFullYear() + '/' +
+                           (1 + this.options.selectedDateTime.getMonth()) + '/' +
                            this.options.selectedDateTime.getDate();
  
                this._setDateTime(date, this._getTimeFromInput());
@@ -291,7 +291,7 @@
         var day = null;
 
         var table = $("<table>");
-        table.data("date", year + "-" + month);
+        table.data("date", year + "/" + month);
 
         var html = "<tr>";
         for(var i = 0; i < 7; i++) {
@@ -430,7 +430,7 @@
     },
 
     _getTimeString: function(hour, minute) {
-        return this._pad(hour) + ":" + this._pad(minute);
+        return this._pad(hour) + ":" + this._pad(minute) + ":" + this._pad(this.options.selectedDateTime.getSeconds());
     },
 
     _combineDateTimeStrings: function(dateString, timeString) {
@@ -501,7 +501,7 @@
   
   CUI.Datepicker.monthNames = ["January", "February", "March", "April", "May", "Juni", "July", "August", "September", "October", "November", "December"];
   CUI.Datepicker.dayNames = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
-  CUI.Datepicker.format = "Y-m-d";
+  CUI.Datepicker.format = "Y/m/d";
 
   CUI.util.plugClass(CUI.Datepicker);
 

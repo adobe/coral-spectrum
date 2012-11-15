@@ -1,24 +1,62 @@
-/**
-  Wizard step through
-*/
+// Bootstrap: Core variables and mixins
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+// CUI: Variables & Mixins
+@import 'includes/config';
+@import 'includes/variables';
+@import 'includes/mixins';
+
+// Wizard page variables
+
+// lined border between divs.
+// Perhaps use the more semantic <hr/> for drawing these borders if x-browser compatibility can be obtained.
+@wizard-line-dark-border: #b1b1b1;
+@wizard-line-light-border: #fdfdfd;
+
+// Card focused state
+@wizard-card-focused-outer-color: #3687c8;
+@wizard-card-focused-inner-color: #4fa2e1;
+@wizard-card-focused-header-color: #173952;
+@wizard-card-focused-text-color: #23547a;
+
+// Wizard page mixins
+
+// Wizard page styles
+
+// Add a vertical scrollbar by default to prevent jumping
+html {
+    overflow-y: scroll;
+}
 
 .wizard-page {
 
+    min-width: 768*@px;
+
+    // All wizard sections
+    .wizard > section {
+      position: relative;
+      .clearfix();
+    }
+
     // Settings section
     .settings {
-      width: 480px;
+      width: 480*@px;
       margin: 0 auto;
-      padding-top: 60px;
+      padding-top: 60*@px;
 
-      // TODO. Temporary. This should be handled somewhere more generic, added here as an example
-      // <hr/> is semantic, but perhaps a div + border styles would be more flexible
-      hr {
-        height: 1px;
-        border: 0;
-        border-bottom: 1px solid #fdfdfd;
-        margin: 1rem 0;
-        color: #b1b1b1;
-        background-color: #b1b1b1;
+      // Perhaps use the more semantic <hr/> for drawing these borders if x-browser compatibility can be obtained.
+      .top {
+        border-bottom: 1*@px solid @wizard-line-dark-border;
+      }
+
+      .bottom {
+        border-top: 1*@px solid @wizard-line-light-border;
+        .clearfix();
+      }
+
+      label {
+        font-size: 1rem;
       }
     }
 
@@ -33,7 +71,9 @@
         }
 
         .tabs-wrapper {
+          min-width: 702*@px;
           margin-left: 15rem;
+          .clearfix();
         }
 
         .tabs {
@@ -41,11 +81,32 @@
 
             .basic {
 
-                &>span {
-                    margin-left: 25px;
+                &>div {
+                    margin-left: 24*@px;
+                    width: 208*@px;
                     
                     &>input, &>label, &>textarea, &>.filters {
                       display: block;
+                    }
+
+                    label {
+                      margin-bottom: 5*@px;
+                    }
+
+                    input[type="text"], textarea {
+                      width: 208*@px;
+                    }
+
+                    .datepicker input[type="text"] {
+                      width: auto;
+                    }
+
+                    textarea {
+                      height: 140*@px;
+                    }
+
+                    &:first-child {
+                      margin-left: 0;
                     }
                 }
 
@@ -55,31 +116,56 @@
 
     // Select template / select source sections
     .select-template, .select-source {
+        margin: 0;
         article {
-
-            h4 {
-                color: #525252;
-            }
-
-            .description, .info {
-                color: #616161;
-            }
-
+            // TODO, merge this focused class back into the card component
             &.focused {
-                background-color: #4b9edd;
+                #gradient .radial(@wizard-card-focused-inner-color, @wizard-card-focused-outer-color);
+                h4 {
+                  color: @wizard-card-focused-header-color;
+                }
+                a {
+                  color: @wizard-card-focused-text-color;
+                }
+
+                /* Temporary, need SVGs icons */
+                .icon-wizard-edit {
+                  background-image: url('wizard/edit-focused.png');
+                }
+
+                /* Temporary, need SVGs icons */
+                .icon-wizard-earth {
+                  background-image: url('wizard/earth-focused.png');
+                }
+
+                /* Temporary, need SVGs icons */
+                .icon-wizard-double-right-arrow {
+                  background-image: url('wizard/double-right-arrow-focused.png');
+                }
+              }
             }
         }
+    }
+
+    // Select source section
+    .select-source {
+      .toolbar {
+        background-color: #eee;
+        .box-shadow(0 1.5*@px 1.5*@px 1*@px rgba(0, 0, 0, 0.25));
+      }
+    }
+
+    &.select-source-page {
+      background: url('wizard/bg-pattern.png') top left repeat;
     }
 
     // Select template section
     .select-template {
         /* Temporary, need to ask how the preview is built */
         div.preview {
-            background-position: center top;
-            background-repeat: no-repeat;
-            background-image: url('wizard/preview.png');
+            background: url('wizard/preview.png') center top no-repeat;
             width: 100%;
-            height: 664px;
+            height: 664*@px;
 
             display: none;
 
@@ -109,11 +195,6 @@
         .grid-container.hidden {
             display: none;
         }
-    }
-
-    /* Temporary, need SVGs icons */
-    .icon-wizard-edit {
-        background-image: url('wizard/edit.png');
     }
 
     /* Temporary, need SVGs icons */
