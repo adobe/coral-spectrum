@@ -105,13 +105,13 @@ if (!fs.exists(outFontFolder)) {
 if (fs.exists(outFontFolder + 'AdobeIcons.svg')) {
     fs.remove(outFontFolder + 'AdobeIcons.svg');    
 }
-if (fs.exists(outCssFolder + 'icons.css')) {
-    fs.remove(outCssFolder + 'icons.css');    
+if (fs.exists(outCssFolder + 'iconfont.less')) {
+    fs.remove(outCssFolder + 'iconfont.less');    
 }
 
 fs.write(outFontFolder + 'AdobeIcons.svg', font, 'w');
 
-var tmpl = fs.read(resFolder + 'icons.less');
-fs.write(outCssFolder + 'icons.less', tmpl + cssOutput, 'w');
+var tmpl = fs.read(resFolder + 'iconfont.less');
+fs.write(outCssFolder + 'iconfont.less', tmpl + cssOutput, 'w');
 
 phantom.exit();
