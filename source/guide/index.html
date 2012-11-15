@@ -1184,28 +1184,32 @@
                     <h2 class="line">Datepicker (WIP)</h2>
                     <p>The datepicker component. Initial input value should be in the following format:</p>
                     <ul>
-                        <li>Date: Y/m/d (e.g. 2012/10/20)</li>
-                        <li>Datetime: Y/m/d h:m:s (e.g. 2012/10/20 11:10:00)</li>
-                        <li>Time: h:m:s (e.g. 11:10:00)</li>
+                        <li>Date: Y-m-d (e.g. 1987-04-06)</li>
+                        <li>Datetime: Y-m-dTh:mZ (e.g. 1987-04-06T20:35Z)</li>
+                        <li>Time: h:m (e.g. 20:35)</li>
                     </ul>
 
                     <div class="componentSample">
                         <div class="example clearfix">
                             <div class="column left">
                                 <div class="datepicker" data-init="datepicker">
-                                    <input type="datetime" value="2012/10/20 11:10:00">
+                                    <input type="datetime" value="1987-04-06T20:35Z">
                                     <button><span class="icon-calendar small">Datetime picker</span></button>
                                 </div>
                                 <div class="datepicker" data-init="datepicker">
-                                    <input type="date" value="2012/10/20">
+                                    <input type="datetime-local" value="1987-04-06T20:35">
+                                    <button><span class="icon-calendar small">Datetime picker</span></button>
+                                </div>
+                                <div class="datepicker" data-init="datepicker">
+                                    <input type="date" value="1987-04-06">
                                     <button><span class="icon-calendar small">Datepicker</span></button>
                                 </div>
                                 <div class="datepicker" data-init="datepicker">
-                                    <input type="time" value="11:10:00">
+                                    <input type="time" value="11:10">
                                     <button><span class="icon-time small">Timepicker</span></button>
                                 </div>
                                 <div class="datepicker" data-init="datepicker" data-disabled="true">
-                                    <input type="date" value="2012/10/20" disabled>
+                                    <input type="date" value="1987-04-06" disabled>
                                     <button disabled><span class="icon-calendar small">Datepicker</span></button>
                                 </div>
                             </div>

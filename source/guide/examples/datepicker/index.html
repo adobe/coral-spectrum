@@ -15,43 +15,51 @@
        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+        <script>
+            $(document).ready(function(){
+                var datepicker = new CUI.Datepicker({
+                  element: '#myDatepicker'
+                });
+            });
+        </script>
+
     </head>
     <body>
      
     <section>
         <h1>Date Picker</h1>
-        <div class="datepicker" data-init="datepicker">
-            <input type="date" value="2012/10/20"><button><span class="icon-calendar small">Datepicker</span></button>
+        <div id="myDatepicker" class="datepicker">
+            <input type="date" value="2012-10-20"><button><span class="icon-calendar small">Datepicker</span></button>
         </div>
         <div class="datepicker" data-init="datepicker" data-disabled="true">
-            <input type="date" value="2012/10/20"><button><span class="icon-calendar small">Datepicker</span></button>
+            <input type="date" value="2012-10-20"><button><span class="icon-calendar small">Datepicker</span></button>
         </div>
     </section>
     <section>
         <h1>Datetime Picker (WIP)</h1>
         <div class="datepicker" data-init="datepicker">
-            <input type="datetime" value="2012/10/20 11:10:00"><button><span class="icon-calendar small">Datetime picker</span></button>
+            <input type="datetime" value="2012-10-20T20:35Z"><button><span class="icon-calendar small">Datetime picker</span></button>
         </div>
         <div class="datepicker" data-init="datepicker" data-disabled="true">
-            <input type="datetime" value="2012/10/20 11:10:00"><button><span class="icon-calendar small">Datetime picker</span></button>
+            <input type="datetime" value="2012-10-20T20:35Z"><button><span class="icon-calendar small">Datetime picker</span></button>
         </div>
     </section>
     <section>
         <h1>Datetime-local Picker (WIP)</h1>
         <div class="datepicker" data-init="datepicker">
-            <input type="datetime-local" value="2012/10/20 11:10:08"><button><span class="icon-calendar small">Datetime local picker</span></button>
+            <input type="datetime-local" value="2012-10-20T20:35"><button><span class="icon-calendar small">Datetime local picker</span></button>
         </div>
         <div class="datepicker" data-init="datepicker" data-disabled="true">
-            <input type="datetime-local" value="2012/10/20 11:10:00"><button><span class="icon-calendar small">Datetime local picker</span></button>
+            <input type="datetime-local" value="2012-10-20T20:35"><button><span class="icon-calendar small">Datetime local picker</span></button>
         </div>
     </section>
     <section>
         <h1>Time Picker (WIP)</h1>
         <div class="datepicker" data-init="datepicker">
-            <input type="time" value="11:10:00"><button><span class="icon-time small">Timepicker</span></button>
+            <input type="time" value="11:10"><button><span class="icon-time small">Timepicker</span></button>
         </div>
         <div class="datepicker" data-init="datepicker" data-disabled="true">
-            <input type="time" value="11:10:00"><button><span class="icon-time small">Timepicker</span></button>
+            <input type="time" value="11:10"><button><span class="icon-time small">Timepicker</span></button>
         </div>
     </section>
     </body>

@@ -9,7 +9,7 @@
          
         <p>
             <div class="datepicker" data-init="datepicker">
-                <input type="datetime" value="2012/10/20 11:10:00">
+                <input type="datetime" value="1987-04-06T20:35Z">
                 <button><span class="icon-calendar small">Datetime picker</span></button>
             </div>
         </p>
@@ -17,7 +17,7 @@
         @example
         <caption>Instantiate by data API</caption>
         &lt;div class=&quot;datepicker&quot; data-init=&quot;datepicker&quot;&gt;
-            &lt;input type=&quot;datetime&quot; value=&quot;2012/10/20 11:10:00&quot;&gt;
+            &lt;input type=&quot;datetime&quot; value=&quot;1987-04-06T20:35Z&quot;&gt;
             &lt;button&gt;&lt;span class=&quot;icon-calendar small&quot;&gt;Datetime picker&lt;/span&gt;&lt;/button&gt;
         &lt;/div&gt;
 
@@ -134,6 +134,11 @@
  
                this._setDateTime(date, this._getTimeFromInput());
             }.bind(this));
+        }
+
+
+        if (this.isMobileAndSupportsInputType) {
+            this.displayDateTime = this.options.selectedDateTime = new Date(this.$input.val());
         }
     },
     
@@ -501,7 +506,7 @@
   
   CUI.Datepicker.monthNames = ["January", "February", "March", "April", "May", "Juni", "July", "August", "September", "October", "November", "December"];
   CUI.Datepicker.dayNames = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
-  CUI.Datepicker.format = "Y/m/d";
+  CUI.Datepicker.format = "Y-m-d";
 
   CUI.util.plugClass(CUI.Datepicker);
 
