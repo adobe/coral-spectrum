@@ -6,7 +6,8 @@ module.exports = function(grunt) {
       done: this.async(),
       src: grunt.template.process(config.font.options.src, config),
       dest_css: grunt.template.process(config.font.options.dest_css, config),
-      dest_font: grunt.template.process(config.font.options.dest_font, config)
+      dest_font: grunt.template.process(config.font.options.dest_font, config),
+      res: grunt.template.process(config.font.options.res, config)
     };
     
     grunt.helper('font-build', options);
@@ -22,7 +23,7 @@ module.exports = function(grunt) {
           options.src, 
           options.dest_css, 
           options.dest_font, 
-          'tasks/fontgen/res/'
+          options.res
         ]
       },
       function(err, result, code) {
