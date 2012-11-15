@@ -1,4 +1,3 @@
-var wizard = null; // TODO for DEV purpose
 (function($) {
   CUI.Wizard = new Class(/** @lends CUI.Wizard# */{
     toString: 'Wizard',
@@ -59,8 +58,6 @@ var wizard = null; // TODO for DEV purpose
      * @param {Function} options.onFinish Callback called after the last page change (without arguments).
      */
     construct: function(options) {
-      wizard = this; // TODO for DEV purpose
-
       this.$nav = this.$element.find('nav').first();
       this.$back = this.$nav.find('button').first();
       this.$next = this.$nav.find('button').last();
@@ -148,7 +145,7 @@ var wizard = null; // TODO for DEV purpose
      * @return {Integer} The page number
      */
     getCurrentPage: function() {
-      var page = parseFloat(wizard.pageNumber)-1;
+      var page = parseFloat(this.pageNumber)-1;
       return this.$element.find('>section:eq('+ page +')');
     },
 
