@@ -428,46 +428,6 @@ module.exports = function(grunt) {
 
     coverage: {},
 
-    /*icons: {
-      all: {
-        src: [
-          '<%= dirs.source %>/images/icons/*.svg'
-        ],
-        dest: '<%= dirs.temp %>/allIcons.css',
-        colors: {
-          base: {
-            color: '#000000'
-          },
-          white: {
-            color: '#FFFFFF',
-            otherSelectors: [
-              {
-                tag: 'button ',
-                selector: ''
-              },
-              {
-                tag: '.button ',
-                selector: ''
-              }
-            ]
-          },
-          blue: {
-            color: '#4191D2',
-            otherSelectors: [
-              {
-                tag: 'button',
-                selector: ':active'
-              },
-              {
-                tag: 'a',
-                selector: ':active'
-              }
-            ]
-          }
-        }
-      }
-    },*/
-
     font: {
       options: {
         src: '<%= dirs.source %>/images/icons/',
