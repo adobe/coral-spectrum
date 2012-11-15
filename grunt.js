@@ -433,9 +433,9 @@ module.exports = function(grunt) {
       options: {
         src: '<%= dirs.source %>/images/icons/',
 
-        dest_css: '<%= dirs.build %>/less/',
+        dest_css: '<%= dirs.build %>/less/base/',
         dest_font: '<%= dirs.build %>/fonts/',
-        res: '<%= dirs.source %>/less/'
+        res: '<%= dirs.source %>/less/base/'
       }
     },
 

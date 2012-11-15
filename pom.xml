@@ -106,10 +106,7 @@
             <!-- fonts -->
             <resource>
                 <directory>${basedir}/build/fonts</directory>
-                <targetPath>${coral.build.dir}/fonts</targetPath>
-                <includes>
-                    <include>AdobeIcons.**</include>
-                </includes>
+                <targetPath>${coral.build.dir}/resources/fonts</targetPath>
             </resource>
 
             <!-- guide -->
