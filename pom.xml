@@ -67,15 +67,8 @@
 
             <!-- css -->
             <resource>
-                <directory>${basedir}/source/less</directory>
+                <directory>${basedir}/build/less</directory>
                 <targetPath>${coral.build.dir}/less</targetPath>
-            </resource>
-            <resource>
-                <directory>${basedir}/temp</directory>
-                <targetPath>${coral.build.dir}/less</targetPath>
-                <includes>
-                    <include>allIcons.css</include>
-                </includes>
             </resource>
             <resource>
                 <directory>${basedir}/components/bootstrap/less</directory>
@@ -112,8 +105,11 @@
 
             <!-- fonts -->
             <resource>
-                <directory>${basedir}/source/fonts</directory>
-                <targetPath>${coral.build.dir}/resources/fonts</targetPath>
+                <directory>${basedir}/build/fonts</directory>
+                <targetPath>${coral.build.dir}/fonts</targetPath>
+                <includes>
+                    <include>AdobeIcons.**</include>
+                </includes>
             </resource>
 
             <!-- guide -->
