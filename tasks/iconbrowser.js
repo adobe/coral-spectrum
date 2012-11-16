@@ -52,7 +52,7 @@
         var className = sanitizeCSSClass(transformClassName(src));
       
         var additionalClass = '';
-        var selector = className;
+        var selector = classPrefix + className;
 
         // Add the selector to the JSON array:
         outputJSON.push({selector: selector, file: src.slice(src.lastIndexOf('/')+1)});

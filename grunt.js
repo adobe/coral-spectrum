@@ -521,13 +521,13 @@ module.exports = function(grunt) {
   });
 
   // Partial build for development
-  grunt.registerTask('partial', 'lint copy handlebars font icons concat:cui min:cui less mincss mocha');
+  grunt.registerTask('partial', 'lint copy handlebars font icons iconbrowser concat:cui min:cui less mincss mocha');
 
   // Build and copy RTE
   grunt.registerTask("rte", 'subgrunt:rte copy:rte');
 
   // Full build with docs and compressed file
-  grunt.registerTask('full-build', 'lint rte copy font icons handlebars concat:cui concat:cui_rte min less mincss mocha jsdoc');
+  grunt.registerTask('full-build', 'lint rte copy font icons iconbrowser handlebars concat:cui concat:cui_rte min less mincss mocha jsdoc');
 
   // Full build with docs and compressed file
   grunt.registerTask('full', 'clean full-build');
@@ -540,7 +540,7 @@ module.exports = function(grunt) {
   grunt.task.renameTask('mvn', 'mvn-install');
 
   // Almost full build, just the stuff needed for Granite install
-  grunt.registerTask('mvn-build', 'clean lint copy:images copy:fonts copy:dependencies copy:less_bootstrap_tmp copy:less_bootstrap_build copy:less_cui font icons handlebars concat:cui less:cui');
+  grunt.registerTask('mvn-build', 'clean lint copy:images copy:fonts copy:dependencies copy:less_bootstrap_tmp copy:less_bootstrap_build copy:less_cui font icons iconbrowser handlebars concat:cui less:cui');
 
   // Custom build for maven
   grunt.registerTask('mvn', 'mvn-build mvn-install');
