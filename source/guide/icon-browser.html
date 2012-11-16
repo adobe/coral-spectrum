@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Icons Browser</title>
+
+  <meta charset="utf-8"/>
+
+  <link rel="stylesheet" type="text/css" href="css/cui.css">
+
+  <!-- Dependencies -->
+  <script src="js/libs/handlebars.js"></script>
+  <script src="js/libs/jquery.js"></script>
+  <script src="js/libs/jquery-fingerpointer.js"></script>
+  <script src="js/libs/toe.js"></script>
+
+  <!-- CoralUI -->
+  <script src="js/CUI.js"></script>  
+
+  <style>
+
+  * {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+  }
+
+  .body {
+    margin: 10px;
+  }
+
+  i {
+    width: 1.5em;
+    height: 1.5em;
+    line-height: 1.5em;
+    display: inline-block;
+    vertical-align: top;
+    color: #000 !important;
+    overflow: hidden;
+  }
+
+
+  </style>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+  <script>
+  $(document).ready(function () {
+
+    var self = this;
+
+    this.createTable = function(icons) {
+
+      var doc = document;
+
+      doc.getElementById("iconTableBody").innerHTML = "";
+
+      var fragment = doc.createDocumentFragment();     
+
+      $(icons).each(function (i, e) {
+
+        //row
+        var tr = doc.createElement("tr");
+
+        // icon asset
+        var td = doc.createElement("td");
+        td.innerHTML = '<i class="' + e.selector + '"></i>';
+        tr.appendChild(td);
+
+        // filename 
+        var td = doc.createElement("td");
+        td.innerHTML = e.file;
+        tr.appendChild(td);
+
+        // selector
+        var td = doc.createElement("td");
+        td.innerHTML = e.selector;
+        tr.appendChild(td);
+
+        //does not trigger reflow
+        fragment.appendChild(tr);
+      });        
+
+      doc.getElementById("iconTableBody").appendChild(fragment);
+
+    }
+
+    this.filterIcons = function(icons, filter) {
+
+      var result = [];
+      if (filter && filter != "") {
+        var terms = filter.split(" ");
+        for (var i = icons.length - 1; i >= 0; i--) {
+          var icon = icons[i];
+
+          if (this.matchIcon(icon, terms))
+          {
+            result.push(icon);
+          }
+        };
+      }
+      else
+      {
+        result = icons;
+      }
+      return result;
+    }
+
+    this.matchIcon = function(icon, terms)  {
+      var result = false;
+      if (icon) {
+        for (var i = terms.length - 1; i >= 0; i--) {
+          var term = terms[i];
+          if (
+            icon.selector.indexOf(term) != -1 ||
+            icon.file.indexOf(term) != -1
+            ) {
+            result = true;
+          }
+          else
+          {
+            result = false;
+            break;
+          }
+        }  
+      }
+      return result;
+    }
+
+    this.changeInputHandler = function(data) {
+      console.log(data.currentTarget.value);
+      self.filteredIcons = self.filterIcons(self.icons, data.currentTarget.value);
+      self.createTable(self.filteredIcons);
+    }
+
+    $("input[type='text']").bind("keyup paste cut", this.changeInputHandler);
+
+    var iconsJSON = $.ajax({
+      type: 'get',
+      url: 'examples/assets/iconbrowser.json',
+      async: false
+    }).responseText;
+
+    
+    self.icons = self.filteredIcons = $.parseJSON(iconsJSON);
+
+    this.createTable(self.icons);
+
+
+
+  });
+</script>
+</head>
+<body>
+
+  <div class="page" role="main">
+
+      <div class="search">
+        <input class="search-input" type="text" placeholder="Search">
+        <button type="button" label="">
+      </div>    
+
+      <div class="content">
+
+     
+
+      <!-- Table with icons -->
+      <table id="iconTable" class="data">
+        <thead>
+          <tr>
+            <th>Icon</th>
+            <th>Name</th>
+            <th>Selector</th>
+          </tr>
+        </thead>
+
+        <tbody id="iconTableBody">
+
+        </tbody>
+      </table>  
+    </div>
+  </div>    
+
+</body>
+</html>
