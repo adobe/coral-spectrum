@@ -44,13 +44,13 @@ $(function() {
         if (rail.hasClass("closed")) {
             rail.removeClass("closed");
             rail.trigger("open");
-            $(this).removeClass("icon-rightrailclose");
-            $(this).addClass("icon-rightrailopen");
+//            $(this).removeClass("icon-rightrailclose");
+//            $(this).addClass("icon-rightrailopen");
         } else {
             rail.addClass("closed");
             rail.trigger("close");
-            $(this).addClass("icon-rightrailclose");
-            $(this).removeClass("icon-rightrailopen");
+//            $(this).addClass("icon-rightrailclose");
+//            $(this).removeClass("icon-rightrailopen");
         }
     });
 
