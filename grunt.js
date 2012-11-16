@@ -336,12 +336,6 @@ module.exports = function(grunt) {
         src: getIncludes("cui", dirs.temp+'/js_instrumented/'),
         dest: '<%= dirs.temp %>/js_instrumented/CUI_cc.js'
       },
-      cui_css: {
-        src: [
-          '<%= dirs.temp %>/cui.css'
-        ],
-        dest: '<%= dirs.build %>/css/cui.css'
-      },
       cui_rte: {
         src: getIncludes("cui-rte", dirs.source+'/js/'),
         dest: '<%= dirs.build %>/js/cui-rte.js'
@@ -389,7 +383,7 @@ module.exports = function(grunt) {
           ]
         },
         files: {
-          '<%= dirs.temp %>/cui.css': '<%= dirs.source %>/less/cui.less'
+          '<%= dirs.build %>/css/cui.css': '<%= dirs.source %>/less/cui.less'
         }
       },
       "guide": {
@@ -437,7 +431,9 @@ module.exports = function(grunt) {
         src: '<%= dirs.source %>/images/icons/',
         dest_css: '<%= dirs.build %>/less/base/',
         dest_font: '<%= dirs.build %>/fonts/',
-        res: '<%= dirs.source %>/less/base/'
+        dest_css_name: 'icons_mono.less',
+        dest_font_name: 'AdobeIcons',
+        prefix: 'icon-'
       }
     },
     
@@ -447,12 +443,8 @@ module.exports = function(grunt) {
         src: [
           '<%= dirs.source %>/images/icons_color/*.svg'
         ],
-        dest: '<%= dirs.temp %>/colorIcons.css',
-        colors: {
-          base: {
-            color: '#000000'
-          }
-        }
+        dest: '<%= dirs.build %>/less/base/icons_color.less',
+        prefix: 'icon-'
       }
     },
 
@@ -477,7 +469,7 @@ module.exports = function(grunt) {
 
       compile_less_min_css: {
         files: '<%= dirs.source %>/less/**',
-        tasks: 'less:cui mincss concat:cui_css'
+        tasks: 'copy:less_cui less:cui mincss'
       },
 
       compile_guide_less: {
@@ -512,14 +504,14 @@ module.exports = function(grunt) {
   });
 
   // Partial build for development
-  grunt.registerTask('partial', 'lint copy handlebars font concat:cui min:cui less concat:cui_css mincss mocha');
+  grunt.registerTask('partial', 'lint copy handlebars font icons concat:cui min:cui less mincss mocha');
 
   // Build and copy RTE
   // DISABLED until CUI-197 resolved //grunt.registerTask("rte", 'hub:rte copy:rte');
 
   // Full build with docs and compressed file
-  // DISABLED until CUI-197 resolved //grunt.registerTask('full-build', 'lint rte copy font handlebars concat:cui concat:cui_rte min less concat:cui_css mincss mocha jsdoc');
-  grunt.registerTask('full-build', 'lint copy font handlebars concat:cui min less concat:cui_css mincss mocha jsdoc');
+  // DISABLED until CUI-197 resolved //grunt.registerTask('full-build', 'lint rte copy font handlebars concat:cui concat:cui_rte min less mincss mocha jsdoc');
+  grunt.registerTask('full-build', 'lint copy font icons handlebars concat:cui min less mincss mocha jsdoc');
 
   // Full build with docs and compressed file
   grunt.registerTask('full', 'clean full-build');
@@ -532,7 +524,7 @@ module.exports = function(grunt) {
   grunt.task.renameTask('mvn', 'mvn-install');
 
   // Almost full build, just the stuff needed for Granite install
-  grunt.registerTask('mvn-build', 'clean lint copy:images copy:fonts copy:dependencies copy:less_bootstrap_tmp copy:less_bootstrap_build copy:less_cui font handlebars concat:cui less:cui concat:cui_css');
+  grunt.registerTask('mvn-build', 'clean lint copy:images copy:fonts copy:dependencies copy:less_bootstrap_tmp copy:less_bootstrap_build copy:less_cui font icons handlebars concat:cui less:cui');
 
   // Custom build for maven
   grunt.registerTask('mvn', 'mvn-build mvn-install');
