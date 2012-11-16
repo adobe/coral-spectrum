@@ -175,17 +175,19 @@ i[class*=" icon-"] {
 [class^="icon-"]:before,
 [class*=" icon-"]:before {
   display: inline-block;
-  width: 1.5em;
-  height: 1.5em;
+  width: 1em;
+  height: 1em;
 
   background-position: center center; // center so padding can be added
-  .background-size(1.5em);
+  .background-size(1em);
   background-repeat: no-repeat;
   
   color: black;
   opacity: 0.65;
   
   vertical-align: text-top; // Make labels align correctly
+  
+  content: " ";
 }
 
 // Icons in buttons
