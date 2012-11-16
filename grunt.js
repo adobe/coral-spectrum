@@ -116,7 +116,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-mincss');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-mocha');
-  grunt.loadNpmTasks('grunt-hub');
+  //grunt.loadNpmTasks('grunt-hub');
 
   // Read in package.json
   var pkg = grunt.file.readJSON('package.json');
@@ -345,12 +345,14 @@ module.exports = function(grunt) {
       }
     },
 
+    /*
     hub: {
       rte: {
         src: [ '<%= dirs.rte%>/grunt.js'],
         tasks: [ 'full' ]
       }
     },
+    */
 
     min: {
       cui: {
