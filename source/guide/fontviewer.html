@@ -68,11 +68,11 @@
         }).responseText;
 
         $(font).find('glyph').each(function (i, e) {
-            var $e = $(e),
-                img = $(document.createElementNS('http://www.w3.org/2000/svg', 'svg'))
-                path = $(document.createElementNS('http://www.w3.org/2000/svg', 'path')),
-                letter = $('<div/>'),
-                icon = $('<i/>');
+            var $e = $(e);
+            var img = $(document.createElementNS('http://www.w3.org/2000/svg', 'svg'));
+            var path = $(document.createElementNS('http://www.w3.org/2000/svg', 'path'));
+            var letter = $('<div/>');
+            var icon = $('<i/>');
 
 
             path.attr('d', $e.attr('d'));
