@@ -211,11 +211,14 @@ module.exports = function(grunt) {
           '<%= dirs.build %>/js/libs/jquery-gridlayout.js': '<%= dirs.source %>/js/plugins/jquery-gridlayout.js'
         }
       },
+      /*
+      // DISABLED until CUI-197 resolved
       rte: {
         files: {
           '<%= dirs.build %>/js/libs/rte-core-jquery.js': '<%= dirs.rte %>/build/js/rte-core-jquery.js'
         }
       },
+      */
       prettyify: {
         src: '<%= dirs.components %>/bootstrap/docs/assets/js/google-code-prettify/*',
         dest: '<%= dirs.build %>/examples/assets/google-code-prettify/'
@@ -437,6 +440,21 @@ module.exports = function(grunt) {
         res: '<%= dirs.source %>/less/base/'
       }
     },
+    
+
+    icons: {
+      all: {
+        src: [
+          '<%= dirs.source %>/images/icons_color/*.svg'
+        ],
+        dest: '<%= dirs.temp %>/colorIcons.css',
+        colors: {
+          base: {
+            color: '#000000'
+          }
+        }
+      }
+    },
 
     // Watch operations
     watch: {
@@ -501,7 +519,7 @@ module.exports = function(grunt) {
 
   // Full build with docs and compressed file
   // DISABLED until CUI-197 resolved //grunt.registerTask('full-build', 'lint rte copy font handlebars concat:cui concat:cui_rte min less concat:cui_css mincss mocha jsdoc');
-  grunt.registerTask('full-build', 'lint copy font handlebars concat:cui concat:cui_rte min less concat:cui_css mincss mocha jsdoc');
+  grunt.registerTask('full-build', 'lint copy font handlebars concat:cui min less concat:cui_css mincss mocha jsdoc');
 
   // Full build with docs and compressed file
   grunt.registerTask('full', 'clean full-build');
