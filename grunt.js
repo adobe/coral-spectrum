@@ -439,6 +439,13 @@ module.exports = function(grunt) {
       }
     },
 
+    iconbrowser: {
+      all: {
+        src: '<%= dirs.source %>/images/icons/**/*',
+        dest: '<%= dirs.build %>/examples/assets/iconbrowser.json'
+      }
+    },
+
     // Watch operations
     watch: {
       copy_guide: {
