@@ -375,8 +375,7 @@ module.exports = function(grunt) {
           ]
         },
         files: {
-          '<%= dirs.temp %>/cui-wrapped.css': '<%= dirs.source %>/less/cui-wrapped.less',
-          '<%= dirs.temp %>/icons.css': '<%= dirs.source %>/less/icons.less'
+          '<%= dirs.temp %>/cui-wrapped.css': '<%= dirs.source %>/less/cui-wrapped.less'
         }
       },
       "cui": {
@@ -387,8 +386,7 @@ module.exports = function(grunt) {
           ]
         },
         files: {
-          '<%= dirs.temp %>/cui.css': '<%= dirs.source %>/less/cui.less',
-          '<%= dirs.temp %>/icons.css': '<%= dirs.source %>/less/icons.less'
+          '<%= dirs.temp %>/cui.css': '<%= dirs.source %>/less/cui.less'
         }
       },
       "guide": {
@@ -434,7 +432,6 @@ module.exports = function(grunt) {
     font: {
       options: {
         src: '<%= dirs.source %>/images/icons/',
-
         dest_css: '<%= dirs.build %>/less/base/',
         dest_font: '<%= dirs.build %>/fonts/',
         res: '<%= dirs.source %>/less/base/'
@@ -500,10 +497,11 @@ module.exports = function(grunt) {
   grunt.registerTask('partial', 'lint copy handlebars font concat:cui min:cui less concat:cui_css mincss mocha');
 
   // Build and copy RTE
-  grunt.registerTask("rte", 'hub:rte copy:rte');
+  // DISABLED until CUI-197 resolved //grunt.registerTask("rte", 'hub:rte copy:rte');
 
   // Full build with docs and compressed file
-  grunt.registerTask('full-build', 'lint rte copy font handlebars concat:cui concat:cui_rte min less concat:cui_css mincss mocha jsdoc');
+  // DISABLED until CUI-197 resolved //grunt.registerTask('full-build', 'lint rte copy font handlebars concat:cui concat:cui_rte min less concat:cui_css mincss mocha jsdoc');
+  grunt.registerTask('full-build', 'lint copy font handlebars concat:cui concat:cui_rte min less concat:cui_css mincss mocha jsdoc');
 
   // Full build with docs and compressed file
   grunt.registerTask('full', 'clean full-build');
