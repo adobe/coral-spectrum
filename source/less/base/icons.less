@@ -3,11 +3,34 @@
 @icon-medium-size: 1.5rem;
 @icon-large-size: 2rem;
 
+@icon-blue-color:  rgb(65, 145, 210);
 @icon-divider-color: rgb(206, 206, 206);
 
 @icon-label-padding-multiplier: 0.25;
 @icon-label-line-height-multiplier: 1.15;
 
+// Setup the font face
+@font-face {
+  font-family: 'AdobeIcons';
+  src: url(~"@{font-folder}/AdobeIcons.eot");
+  src: url(~"@{font-folder}/AdobeIcons.woff") format("woff"),
+    url(~"@{font-folder}/AdobeIcons.ttf") format("truetype"),
+    url(~"@{font-folder}/AdobeIcons.svg#AdobeIcons") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+// Apply the correct font
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: AdobeIcons;
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: none; // Don't let icons underline
+}
+
+// Various mixins
 .icon-size(@size) {
   line-height: @size;
   font-size: @size;
@@ -39,7 +62,8 @@
   // Does not work with :before approach
   //text-indent: 100%;
   //white-space: nowrap;
-  color: transparent;
+  
+  // color: transparent; // Dangert, this doesn't work with font icons
   overflow: hidden;
 }
 
@@ -69,21 +93,24 @@
 [class^="icon-"],
 [class*=" icon-"] {
   // Use ems by default so we depend on font size of surrounding element
-  width: 1.5em;
-  height: 1.5em;
-  line-height: 1.5em;
+  width: 1em;
+  height: 1em;
+  line-height: 1em;
+  font-size: 1em;
 
   display: inline-block;
   
-  vertical-align: top; // make text line up correctly in paragraphs
+  vertical-align: text-top; // Make text line up correctly in paragraphs
   
   // Hide inner text by default
   .hide-inner-text;
   
-  &.white {
+  &.white:before {
+    color: white;
     opacity: 0.80;
   }
-  &.blue {
+  &.blue:before {
+    color: @icon-blue-color;
     opacity: 1;
   }
   
@@ -96,26 +123,26 @@
     color: inherit;
     
     &.xsmall {
-      line-height: @icon-xsmall-size * @icon-label-line-height-multiplier;
+      //line-height: @icon-xsmall-size * @icon-label-line-height-multiplier;
       &:before {
         margin-right: @icon-xsmall-size * @icon-label-padding-multiplier;
       }
     }
     &.small {
-      line-height: @icon-small-size * @icon-label-line-height-multiplier;
+      //line-height: @icon-small-size * @icon-label-line-height-multiplier;
       &:before {
         margin-right: @icon-small-size * @icon-label-padding-multiplier;
       }
     }
     &,
     &.medium {
-      line-height: @icon-medium-size * @icon-label-line-height-multiplier;
+      //line-height: @icon-medium-size * @icon-label-line-height-multiplier;
       &:before {
         margin-right: @icon-medium-size * @icon-label-padding-multiplier;
       }
     }
     &.large {
-      line-height: @icon-large-size * @icon-label-line-height-multiplier;
+      //line-height: @icon-large-size * @icon-label-line-height-multiplier;
       &:before {
         margin-right: @icon-large-size * @icon-label-padding-multiplier;
       }
@@ -144,24 +171,6 @@ i[class*=" icon-"] {
   font-style: normal;
 }
 
-/*
-  Class: icons within paragraphs
-*/
-p > [class^="icon-"],
-p > [class*=" icon-"] {
-  line-height: 1em;
-  
-  &, &:before {
-    width: 1em;
-    height: 1em;
-  }
-  
-  &:before {
-    .background-size(1em);
-  }
-}
-
-  
 // Hover states & opacity
 [class^="icon-"]:before,
 [class*=" icon-"]:before {
@@ -173,9 +182,10 @@ p > [class*=" icon-"] {
   .background-size(1.5em);
   background-repeat: no-repeat;
   
+  color: black;
   opacity: 0.65;
   
-  vertical-align: top; // Fix alignment of icons with labels in IE 9
+  vertical-align: text-top; // Make labels align correctly
 }
 
 // Icons in buttons
@@ -187,7 +197,10 @@ button,
     margin-right: 0.25rem;
     //margin: -0.25rem 0.25rem -0.35rem 0; // For 24px, Don't push the button to a taller height
     
+    //vertical-align: top;
+    
     &:before {
+      color: white;
       opacity: 1;
     }
   }
@@ -201,6 +214,29 @@ a {
   &[class*=" icon-"] {
     cursor: pointer;
 
+    margin: 0;
+    padding: 0;
+
+    font-size: inherit;
+
+    min-width: 0;
+    
+    &,
+    &:hover,
+    &:active {
+      border: none;
+
+      box-shadow: none;
+
+      background-color: transparent;
+      background-image: none;
+
+      text-shadow: none;
+      font-weight: normal;
+
+      filter: none;
+    }
+    
     &:before {
       opacity: 0.65;
     }
@@ -213,38 +249,9 @@ a {
 
     &:active {
       &:before {
-        opacity: 1
+        color: @icon-blue-color;
+        opacity: 1;
       }
-    }
-  }
-}
-
-// Buttons as icon
-button,
-a.button {
-  &[class^="icon-"],
-  &[class*=" icon-"] {
-    margin: 0;
-    padding: 0;
-
-    font-size: inherit;
-  
-    min-width: 0;
-  
-    &,
-    &:hover,
-    &:active {
-      border: none;
-
-      box-shadow: none;
-
-      background-color: transparent;
-      background-image: none;
-    
-      text-shadow: none;
-      font-weight: normal;
-    
-      filter: none;
     }
   }
 }
