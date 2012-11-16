@@ -8,58 +8,23 @@
   <link rel="stylesheet" type="text/css" href="css/cui.css">
 
   <style>
-    * {
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-    }
 
-    #fontview div {
-        font-family: AdobeIcons;
+    .grid > i {
         display: inline-block;
-        margin: 10px;
-        padding: 10px;
-        width: 100px;
-        height: 100px;
+        margin: 1rem;
+        padding: 1rem;
+        width: 4rem;
+        height: 4rem;
         border: 1px solid #0a0a0a;
-        line-height: 72px;
-        font-size: 72px;
-        color: #000;
+        font-size: 4rem;
     }
-
-    #cssfontview i {
-        font-family: AdobeIcons;
-        display: inline-block;
-        margin: 10px;
-        padding: 10px;
-        width: 100px;
-        height: 100px;
-        border: 1px solid #0a0a0a;
-        line-height: 72px;
-        font-size: 72px;
-    }
-
-    #cssfontview i:before {
-        color: #000 !important;
-    }
-
-
-    #svgview svg {
-        margin: 10px;
-        padding: 10px;
-        width: 100px;
-        height: 100px;
-        border: 1px solid #0a0a0a;
-    }
-
+    
   </style>
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
   <script>
     $(document).ready(function () {
-        var svgmode = $('#svgview'),
-            fontmode = $('#fontview'),
-            cssfontmode = $('#cssfontview');
+        var icons_mono = $('#icons-mono');
 
         var font = $.ajax({
             type: 'get',
@@ -71,36 +36,33 @@
             var $e = $(e);
             var img = $(document.createElementNS('http://www.w3.org/2000/svg', 'svg'));
             var path = $(document.createElementNS('http://www.w3.org/2000/svg', 'path'));
-            var letter = $('<div/>');
             var icon = $('<i/>');
-
-
-            path.attr('d', $e.attr('d'));
-            path.attr('transform', 'scale(0.0625, 0.0625) matrix(1, 0, 0, -1, 0, 1152)');
-
-            img.attr('name', $e.attr('glyph-name'));
-            img.append(path);
-
-            svgmode.append(img);
-
-            letter.text($e.attr('unicode'));
-            fontmode.append(letter);
-
+            
             icon.addClass('icon-' + $e.attr('glyph-name'));
-            cssfontmode.append(icon);
+            icons_mono.append(icon);
         });
     });
   </script>
 </head>
 <body>
-    <div id="fontview">
-        <h1>Font mode</h1>
+  <section>
+    <div class="grid" id="icons-mono">
+        <h1>Mono-color icons</h1>
     </div>
-    <div id="cssfontview">
-        <h1>CSS Font mode</h1>
+  </section>
+  
+  <section>
+    <div class="grid" id="icons-full">
+        <h1>Full-color Icons</h1>
+        
+        <i class="icon-calendar-check"></i>
+        <i class="icon-facebook-color"></i>
+        <i class="icon-flickr-color"></i>
+        <i class="icon-image-check"></i>
+        <i class="icon-link-check"></i>
+        <i class="icon-marketingcloud"></i>
+        <i class="icon-target-check"></i>
     </div>
-    <div id="svgview">
-        <h1>SVG mode</h1>
-    </div>
+  </section>
 </body>
 </html>
