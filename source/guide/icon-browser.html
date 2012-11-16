@@ -25,8 +25,15 @@
     -webkit-box-sizing: border-box;
   }
 
-  .body {
+  .content {
     margin: 10px;
+  }
+
+  .searchWrapper {
+    margin: 10px
+    top: 10px;
+    bottom: 10px;
+
   }
 
   i {
@@ -151,18 +158,33 @@
   });
 </script>
 </head>
+
 <body>
+
+  <header class="top">
+
+      <div class="logo"><img src="images/theme/cloudui.png" alt="CoralUI logo"/></div>
+
+      <nav class="main">
+          <a href="#" class="selected">Icon-Browser</a>
+      </nav>
+
+      <div class="drawer">
+          <div class="badge">v0.5.0-SNAPSHOT</div>
+      </div>
+
+  </header>
 
   <div class="page" role="main">
 
-      <div class="search">
-        <input class="search-input" type="text" placeholder="Search">
-        <button type="button" label="">
-      </div>    
+    <div class="content">
 
-      <div class="content">
-
-     
+      <div class="searchWrapper">
+        <div class="search">
+          <input class="search-input" type="text" placeholder="Search">
+          <button type="button" label="">
+        </div>   
+      </div>   
 
       <!-- Table with icons -->
       <table id="iconTable" class="data">
