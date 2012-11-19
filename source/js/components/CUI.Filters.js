@@ -100,6 +100,7 @@ var index = filters.getSelectedIndex();
       @param {String}   [options.iconSize=small]                   Icon size from: xsmall (12x12), small (16x16), medium (24x24), large (32x32).
       @param {Function} [options.autocompleteCallback=use options] Callback for autocompletion
       @param {Function} [options.optionRenderer=default renderer]  (Optional) Renderer for the autocompleter and the tag badges
+      @param {boolean}  [options.infiniteLoad=false]               Should extra content be loaded dynamically when the list is scrolled to bottom?
     */
     construct: function(options) {
             /**
@@ -168,12 +169,17 @@ var index = filters.getSelectedIndex();
     inputElement: null,
     typeTimeout: null,
     
-    selectedIndex: -1, // For single term only
-    selectedIndices: null, // For multiple terms
-    createdIndices: null, // Newly created indices
+    selectedIndex: -1,         // For single term only
+    selectedIndices: null,     // For multiple terms
+    createdIndices: null,      // Newly created indices
     triggeredBackspace: false,
-    usingExternalData: false, // Using autocomplete callback for loading external data?
-    selectedValue: null, // Used to store returned value when data is loaded externally
+    usingExternalData: false,  // Using autocomplete callback for loading external data?
+    selectedValue: null,       // Used to store returned value when data is loaded externally
+
+    // Infinite loading
+    loadOffset: 0,             // To track how many times we have loaded content from the callback (when infinite loading)
+    isLoadingExternal: false,  // Have we started an external call for data (used with infinite loading)
+    loadedEverything: false,   // Have we reached the end of the list? No more items to load?
 
     // TODO switch selectedIndex/selectedIndices to store keys rather than indexes so that they
     // can be used with external data. Remove selectedValue variable on completion.
@@ -271,6 +277,10 @@ var index = filters.getSelectedIndex();
         this.$element.on("keyup", "input", this._keyUp.bind(this));
         
         this.dropdownList.on("dropdown-list:select", "", function(event) {
+            // Reset the callback load offset (for infinite loading)
+            this.loadOffset = 0;
+            this.loadedEverything = false;
+
             this.dropdownList.hide(200);
 
             if(this.usingExternalData) {
@@ -281,6 +291,18 @@ var index = filters.getSelectedIndex();
             var pos = $.inArray(event.selectedValue.toString(), this.options.options);
             this.setSelectedIndex(pos * 1);
         }.bind(this));
+
+        if(this.options.infiniteLoad) {
+            this.dropdownList.on("dropdown-list:scrolled-bottom", "", function(event) {
+                if(!this.isLoadingExternal) {
+                    this.isLoadingExternal = true;
+                    this.loadOffset++;
+                    this.dropdownList.addLoadingIndicator();
+                    var searchFor = this.inputElement.attr("value");
+                    this.options.autocompleteCallback($.proxy(this._appendLoadedData, this), searchFor, this.loadOffset);
+                }
+            }.bind(this));
+        }
 
         this.$element.on("click", "[data-dismiss=filter]", function(event) {
             if (this.options.disabled) return;
@@ -570,12 +592,36 @@ var index = filters.getSelectedIndex();
     
     /** @ignore */
     _inputChanged: function() {
+        // Reset the callback load offset (for infinite loading)
+        this.loadOffset = 0;
+        this.loadedEverything = false;
+
         var searchFor = this.inputElement.attr("value");
-        this.options.autocompleteCallback($.proxy(this._showAutocompleter, this), searchFor);
+        this.options.autocompleteCallback($.proxy(this._showAutocompleter, this), searchFor, this.loadOffset);
+    },
+
+    /** @ignore */
+    _appendLoadedData: function(results) {
+        if(results === "end") {
+            this.loadedEverything = true;
+            this.isLoadingExternal = false;
+            return;
+        }
+
+        // Append the fetched items to the end of the currently open list
+        this.dropdownList.addItems(results);
+        this.dropdownList.removeLoadingIndicator();
+
+        // We're ready to load content again
+        this.isLoadingExternal = false;
     },
     
     /** @ignore */
     _showAutocompleter: function(results) {
+        if(results === "end") {
+            this.loadedEverything = true;
+            return;
+        }
 
         this.dropdownList.hide();
         
@@ -613,7 +659,6 @@ var index = filters.getSelectedIndex();
             if (this.options.optionDisplayStrings[index]) { // Use alternate display names for autocomplete (if possible)
                 name = this.options.optionDisplayStrings[index];
             }
-
             if (name.toLowerCase().indexOf(searchFor.toLowerCase(), 0) >= 0 ) result.push(key);
 
         }.bind(this));
