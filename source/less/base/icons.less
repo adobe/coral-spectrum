@@ -1,5 +1,5 @@
-@icon-xsmall-size: 0.75rem;
-@icon-small-size: 1rem; // 24px: 1.15rem;
+@icon-xsmall-size: 12*@px;
+@icon-small-size: 24*@px;
 @icon-medium-size: 1.5rem;
 @icon-large-size: 2rem;
 
@@ -34,11 +34,11 @@
 .icon-size(@size) {
   line-height: @size;
   font-size: @size;
-  height: @size;
+  min-height: @size;
 
-  &, &:before {
-    width: @size;
-    height: @size;
+  &:before {
+    min-width: @size;
+    min-height: @size;
   }
   &:before {
     .background-size(@size);
@@ -62,9 +62,14 @@
   // Does not work with :before approach
   //text-indent: 100%;
   //white-space: nowrap;
-  
-  color: transparent; // This works for font icons because we set color on the :before element
+  position: absolute;
   overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
 }
 
 [class^="icon-"].xsmall,
@@ -87,142 +92,75 @@
   .icon-large;
 }
 
-/*
-  Default styles for icons
-*/
 [class^="icon-"],
 [class*=" icon-"] {
-  // Use ems by default so we depend on font size of surrounding element
-  width: 1em;
-  height: 1em;
-  line-height: 1em;
-  font-size: 1em;
+  &:before {
+    font-family: AdobeIcons;
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    text-decoration: inherit;
+    color: @icon-color;
 
-  display: inline-block;
-  
-  vertical-align: text-top; // Make text line up correctly in paragraphs
-  
-  // Hide inner text by default
-  .hide-inner-text;
-  
-  &.white:before {
-    color: white;
-    opacity: 0.80;
+    text-decoration: none;
+
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 1.5rem 1.5rem;
+    content: " ";
+
+    vertical-align: middle;
+    text-align: center;
   }
-  &.blue:before {
-    color: @icon-blue-color;
-    opacity: 1;
+
+  .icon-medium;
+
+  &.xsmall {
+    .icon-xsmall;
   }
-  
-  &.withLabel {
-    width: auto;
-    
-    text-indent: 0;
-    white-space: inherit;
-    overflow: visible;
-    color: inherit;
-    
-    &.xsmall {
-      //line-height: @icon-xsmall-size * @icon-label-line-height-multiplier;
-      &:before {
-        margin-right: @icon-xsmall-size * @icon-label-padding-multiplier;
-      }
-    }
-    &.small {
-      //line-height: @icon-small-size * @icon-label-line-height-multiplier;
-      &:before {
-        margin-right: @icon-small-size * @icon-label-padding-multiplier;
-      }
-    }
-    &,
-    &.medium {
-      //line-height: @icon-medium-size * @icon-label-line-height-multiplier;
-      &:before {
-        margin-right: @icon-medium-size * @icon-label-padding-multiplier;
-      }
-    }
-    &.large {
-      //line-height: @icon-large-size * @icon-label-line-height-multiplier;
-      &:before {
-        margin-right: @icon-large-size * @icon-label-padding-multiplier;
-      }
-    }
-  }
-  
-  &:focus {
-    .glow;
-    border: none;
-  }
-}
 
-
-/*
-  Class: i.icon-* or *.noLabel.icon-*
-  An purely presentational icon that does not have a text label beside it.
-
-  For accessibility purposes, include a text label inside of the icon like so:
-
-    <i class="icon-Add">Add</i>
-
-  The text will be hidden from visual browsers but read by screen readers.
-*/
-i[class^="icon-"],
-i[class*=" icon-"] {
-  font-style: normal;
-}
-
-// Hover states & opacity
-[class^="icon-"]:before,
-[class*=" icon-"]:before {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-
-  background-position: center center; // center so padding can be added
-  .background-size(1em);
-  background-repeat: no-repeat;
-  
-  color: black;
-  opacity: 0.65;
-  
-  vertical-align: text-top; // Make labels align correctly
-  
-  content: " ";
-}
-
-// Icons in buttons
-button,
-.button {
-  i[class^="icon-"],
-  i[class*=" icon-"] {
+  &.small {
     .icon-small;
-    margin-right: 0.25rem;
-    //margin: -0.25rem 0.25rem -0.35rem 0; // For 24px, Don't push the button to a taller height
-    
-    //vertical-align: top;
-    
-    &:before {
-      color: white;
-      opacity: 1;
-    }
+  }
+
+  &.medium {
+    .icon-medium;
+  }
+
+  &.large {
+    .icon-large;
+  }
+
+  &:not(.withLabel) span {
+    .hide-inner-text();
+  }
+
+  &.withLabel >span {
+    padding-left: 5*@px;
+    color: @icon-color;
   }
 }
 
-// Clickable icons
+a:hover [class^="icon-"],
+a:hover [class*=" icon-"],
+a[class^="icon-"]:hover,
+a[class*=" icon-"]:hover {
+  &:before {
+    color: @icon-hover-color;
+  }
+}
+
 button,
-a {
-  // Hover states & opacity
+a.button {
   &[class^="icon-"],
   &[class*=" icon-"] {
-    cursor: pointer;
-
     margin: 0;
     padding: 0;
 
     font-size: inherit;
-
+  
     min-width: 0;
-    
+  
     &,
     &:hover,
     &:active {
@@ -232,28 +170,11 @@ a {
 
       background-color: transparent;
       background-image: none;
-
+    
       text-shadow: none;
       font-weight: normal;
-
-      filter: none;
-    }
     
-    &:before {
-      opacity: 0.65;
-    }
-
-    &:hover {
-      &:before {
-        opacity: 0.80;
-      }
-    }
-
-    &:active {
-      &:before {
-        color: @icon-blue-color;
-        opacity: 1;
-      }
+      filter: none;
     }
   }
 }

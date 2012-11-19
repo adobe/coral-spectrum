@@ -306,10 +306,10 @@
                     <h3>Sizing</h3>
                     <p>When used without context, icons should be given a size:</p>
                     <ul>
-                        <li><code class="atv">xsmall</code> 12x12</li>
-                        <li><code class="atv">small</code> 16x16</li>
-                        <li><code class="atv">medium</code> 24x24</li>
-                        <li><code class="atv">large</code> 32x32</li>
+                        <li><code class="atv">xsmall</code> 9x9</li>
+                        <li><code class="atv">small</code> 13.5x13.5</li>
+                        <li><code class="atv">medium</code> 18x18</li>
+                        <li><code class="atv">large</code> 27x27</li>
                     </ul>
                     
                     <h3>Variations</h3>
@@ -323,17 +323,17 @@
                             <div class="example">
                                 <div class="iconSample">
                                     <div class="sampleTitle left">Illustrative</div>
-                                    <div class="sample"><i class="icon-add">Add</i><br><br><i class="icon-add withLabel">Add</i></div>
+                                    <div class="sample"><i class="icon-add"><span>Add</span></i><br><br><i class="icon-add withLabel"><span>Add</span></i></div>
                                 </div>
                                 
                                 <div class="iconSample">
                                     <div class="sampleTitle left">Navigational</div>
-                                    <div class="sample"><a href="#" class="icon-add">Add</a><br><br><a href="#" class="icon-add withLabel">Add</a></div>
+                                    <div class="sample"><a href="#" class="icon-add"><span>Add</span></a><br><br><a href="#" class="icon-add withLabel"><span>Add</span></a></div>
                                 </div>
                                     
                                 <div class="iconSample">
                                     <div class="sampleTitle left">Actionable</div>
-                                    <div class="sample"><button class="icon-add">Add</button><br><br><button class="icon-add withLabel">Add</button></div>
+                                    <div class="sample"><button class="icon-add"><span>Add</span></button><br><br><button class="icon-add withLabel"><span>Add</span></button></div>
                                 </div>
 
                                 <!--
@@ -390,7 +390,7 @@
                             </div>
                         <pre class="prettyprint linenums">
 &lt;!-- Illustrative --&gt;
-&lt;i class=&quot;icon-add&quot;&gt;Add&lt;/i&gt;
+&lt;i class=&quot;icon-add&quot;&gt;&lt;Add&lt;/i&gt;
 
 &lt;!-- Illustrative with label --&gt;
 &lt;i class=&quot;icon-add withLabel&quot;&gt;Add&lt;/i&gt;
@@ -406,52 +406,6 @@
 
 &lt;!-- Actionable with label --&gt;
 &lt;button class=&quot;icon-add withLabel&quot;&gt;Add&lt;/button&gt;
-</pre>
-                    </div>
-                </section>
-                <section id="Sticky">
-                    <h2 class="line">Sticky elements <b>(deprecated)</b></h2>
-                    <p>The sticky widget has been deprecated in favor of a more simple solution for <a href="#Rail">sticky toolbars within rails</a>.</p>
-                </section>
-
-            </section><!-- /Text Styles -->
-
-            <section id="PageComponents">
-                <h1 class="line">Page Components</h1>
-                <p>Page components are top level pieces that appear on nearly every page.</p>
-
-                <section id="Header">
-                    <h2 class="line">Header</h2>
-                    <p>The top navigation header that appears on every page. It supports a logo, navigation, and drawer (which can contain a badge or other information).</p>
-
-                    <div class="componentSample headerSample">
-                        <div class="example">
-
-                            <header class="top">
-                                <div class="logo"><img src="images/theme/dms.png" alt="DMS logo"></div>
-                                <nav class="main">
-                                    <a href="#" class="selected">Home</a>
-                                    <a href="#">Activities</a>
-                                    <a href="#">Admin</a>
-                                </nav>
-                                <div class="drawer">
-                                    <div class="badge">5</div>
-                                </div>
-                            </header>
-
-                        </div>
-                        <pre class="prettyprint linenums">
-&lt;header class="top"&gt;
-    &lt;div class=&quot;logo&quot;&gt;&lt;img src=&quot;images/theme/dms.png&quot; alt="DMS logo"&gt;&lt;/div&gt;
-    &lt;nav&gt;
-        &lt;a href=&quot;#&quot; class=&quot;selected&quot;&gt;Home&lt;/a&gt;
-        &lt;a href=&quot;#&quot;&gt;Activities&lt;/a&gt;
-        &lt;a href=&quot;#&quot;&gt;Admin&lt;/a&gt;
-    &lt;/nav&gt;
-    &lt;div class=&quot;drawer&quot;&gt;
-        &lt;div class=&quot;badge&quot;&gt;5&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/header&gt;
 </pre>
                     </div>
                 </section>
@@ -578,20 +532,20 @@
                         <div class="example">
                             <nav class="toolbar">
                                 <div class="left icongroup">
-                                    <a href="#some-link" class="icon-add">Add</a>
+                                    <a href="#some-link" class="icon-add"><span>Add</span></a>
                                     <span class="divider"></span>
-                                    <button class="icon-calendar">Calendar</button>
-                                    <button class="icon-email">E-mail</button>
-                                    <button class="icon-attach">Attach</button>
+                                    <button class="icon-calendar"><span>Calendar</span></button>
+                                    <button class="icon-email"><span>E-mail</span></button>
+                                    <button class="icon-attach"><span>Attach</span></button>
                                 </div>
                                 <div class="center">
                                     <h1>Page Title</h1>
                                 </div>
                                 <div class="right icongroup">
-                                    <button class="icon-collection">Collection</button>
-                                    <button class="icon-delete">Delete</button>
-                                    <a href="#some-link" class="button">Action</a>
-                                    <button class="primary">Primary</button>
+                                    <button class="icon-collection"><span>Collection</span></button>
+                                    <button class="icon-delete"><span>Delete</span></button>
+                                    <a href="#some-link" class="button"><span>Action</span></a>
+                                    <button class="primary"><span>Primary</span></button>
                                 </div>
                             </nav>
                         </div>
