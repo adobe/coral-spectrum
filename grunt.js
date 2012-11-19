@@ -439,7 +439,7 @@ module.exports = function(grunt) {
         prefix: 'icon-'
       }
     },
-    
+
 
     icons: {
       all: {
@@ -519,8 +519,7 @@ module.exports = function(grunt) {
   grunt.registerTask("rte", 'subgrunt:rte copy:rte');
 
   // Full build with docs and compressed file
-  grunt.registerTask('full-build', 'lint rte copy font handlebars concat:cui concat:cui_rte min less mincss mocha jsdoc');
-  // grunt.registerTask('full-build', 'lint copy font icons handlebars concat:cui min less mincss mocha jsdoc');
+  grunt.registerTask('full-build', 'lint rte copy font icons handlebars concat:cui concat:cui_rte min less mincss mocha jsdoc');
 
   // Full build with docs and compressed file
   grunt.registerTask('full', 'clean full-build');
