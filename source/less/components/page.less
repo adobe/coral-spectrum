@@ -20,17 +20,13 @@
     height: 100%;
     .scrollable;
 
-    [class^="icon-"]:before,
-    [class*=" icon-"]:before {
-      color: @icon-color;
-    }
-
     // Stick toolbars to the top
     .content-header {
        position: absolute;
        top: 0;
        left: 0;
        right: 0;
+       z-index: 5;
     }
     
     // Have a scrolling area below toolbar

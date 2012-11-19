@@ -7,7 +7,9 @@ module.exports = function(grunt) {
       src: grunt.template.process(config.font.options.src, config),
       dest_css: grunt.template.process(config.font.options.dest_css, config),
       dest_font: grunt.template.process(config.font.options.dest_font, config),
-      res: grunt.template.process(config.font.options.res, config)
+      dest_css_name: grunt.template.process(config.font.options.dest_css_name, config),
+      dest_font_name: grunt.template.process(config.font.options.dest_font_name, config),
+      prefix: grunt.template.process(config.font.options.prefix, config)
     };
     
     grunt.helper('font-build', options);
@@ -20,10 +22,12 @@ module.exports = function(grunt) {
         cmd: 'phantomjs',
         args: [
           __dirname+'/fontgen/phantom-runner.js', 
-          options.src, 
-          options.dest_css, 
-          options.dest_font, 
-          options.res
+          options.src,
+          options.dest_css,
+          options.dest_css_name,
+          options.dest_font,
+          options.dest_font_name,
+          options.prefix
         ]
       },
       function(err, result, code) {

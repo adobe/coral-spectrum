@@ -1,24 +1,27 @@
-var fs = require('fs'),
-    system = require('system');
+var fs = require('fs');
+var system = require('system');
 
-var iconFolder = system.args[1] || fs.workingDirectory + fs.separator + 'icons' + fs.separator,
-    outCssFolder = system.args[2] || fs.workingDirectory + fs.separator + 'out' + fs.separator,
-    outFontFolder = system.args[3] || fs.workingDirectory + fs.separator + 'out' + fs.separator,
-    resFolder = system.args[4] || fs.workingDirectory + fs.separator + 'res' + fs.separator;
+// Source
+var iconFolder = system.args[1] || fs.workingDirectory + fs.separator + 'icons' + fs.separator;
 
+// Dest
+var outCssFolder = system.args[2] || fs.workingDirectory + fs.separator + 'out' + fs.separator;
+var cssName = system.args[3] || 'iconClasses.less';
+var outFontFolder = system.args[4] || fs.workingDirectory + fs.separator + 'out' + fs.separator;
+var fontName = system.args[5] || 'Icons';
+var classPrefix = system.args[6] || 'icon-';
 
-
-var commentRE = /<!--.*?-->\n?/g, // Regex to replace comments added by Illustrator
-    badCSSCharsRE = /[^\w-]/g,
-    svgRE = /\.svg$/i,
-    opacityRE = / opacity="[.\d]+"/ig,
-    svgTagRE = /<svg/i,
-    backgroundRE = / enable-background="new[ ]*"/ig,
-    newlineRE = /(\r\n|\n|\r)/g,
-    layerNameRE = / id="Layer_\d+"/i,
-    zeroPXRE = /0px/g,
-    psuedoSelector = ':before',
-    classPrefix = 'icon-';
+// Cached regular expressions
+var commentRE = /<!--.*?-->\n?/g; // Regex to replace comments added by Illustrator
+var badCSSCharsRE = /[^\w-]/g;
+var svgRE = /\.svg$/i;
+var opacityRE = / opacity="[.\d]+"/ig;
+var svgTagRE = /<svg/i;
+var backgroundRE = / enable-background="new[ ]*"/ig;
+var newlineRE = /(\r\n|\n|\r)/g;
+var layerNameRE = / id="Layer_\d+"/i;
+var zeroPXRE = /0px/g;
+var psuedoSelector = ':before';
 
 // SVG font generator
 phantom.injectJs('FontBoost.js');
@@ -95,23 +98,27 @@ for(var i = 0; i < curdir.length; i++)
 
 var font = new FontBoost('AdobeIcons', files).build();
 
-if (!fs.exists(outCssFolder)) {
-    fs.makeDirectory(outCssFolder);    
-}
-if (!fs.exists(outFontFolder)) {
-    fs.makeDirectory(outFontFolder);    
-}
+var fontPath = outFontFolder + fontName + '.svg';
+var cssPath = outCssFolder + cssName;
 
-if (fs.exists(outFontFolder + 'AdobeIcons.svg')) {
-    fs.remove(outFontFolder + 'AdobeIcons.svg');    
-}
-if (fs.exists(outCssFolder + 'iconfont.less')) {
-    fs.remove(outCssFolder + 'iconfont.less');    
-}
+if (!fs.exists(outCssFolder))
+    fs.makeDirectory(outCssFolder);
+    
+if (!fs.exists(outFontFolder))
+    fs.makeDirectory(outFontFolder);
 
-fs.write(outFontFolder + 'AdobeIcons.svg', font, 'w');
+if (fs.exists(fontPath))
+    fs.remove(fontPath);
 
-var tmpl = fs.read(resFolder + 'iconfont.less');
-fs.write(outCssFolder + 'iconfont.less', tmpl + cssOutput, 'w');
+if (fs.exists(cssPath))
+    fs.remove(cssPath);
+
+console.log('Writing font to '+fontPath);
+
+console.log('Writing CSS to '+cssPath);
+
+fs.write(fontPath, font, 'w');
+
+fs.write(cssPath, cssOutput, 'w');
 
 phantom.exit();

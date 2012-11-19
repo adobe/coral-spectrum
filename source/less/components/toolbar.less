@@ -52,33 +52,19 @@ The top toolbar with action icons
     }
     
     // For direct descendants only, apply grouping
-    > a,
-    > button,
-    > .button {
-        padding: 11*@px 8*@px;
+    > a:not(.button),
+    > button[class^="icon-"],
+    > button[class*=" icon-"] {
         display: inline-block;
+        height: 46*@px;
+        padding: 0 10*@px;
+        line-height: 46*@px;
     }
 
-    > button,
-    > .button {
-        .box-sizing(content-box);
-        margin: 8*@px 0;
-        min-width:   80*@px;
-        line-height: 14*@px;
-        
-        // Buttons with icons should be treated normally
-        &[class^="icon-"],
-        &[class*=" icon-"] {
-            margin: 0;
-            min-width: 0;
-        }
-    }
-
-    > .divider {
-        display: inline-block;
-        width: @px;
+    > .divider {    
         height: @icon-medium-size;
-        margin: 9*@px 3*@px;
-        background-color: @icon-divider-color;
+        border-left: @px solid @icon-divider-color;
+        margin-left: 10*@px;
+        padding-right: 10*@px;
     }
 }

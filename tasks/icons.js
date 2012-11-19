@@ -46,7 +46,7 @@
       // Get the list of all source files
       var srcFiles = grunt.file.expand(this.data.src);
     
-      var colors = this.data.colors;
+      var colors = this.data.colors || { base: {} };
     
       var outputCSS = '';
       
@@ -79,6 +79,7 @@
         var className = sanitizeCSSClass(transformClassName(src));
       
         var additionalClass = '';
+        
         for (var color in colors) {
           var colorInfo = colors[color];
           if (color !== 'base') {
@@ -87,7 +88,9 @@
         
           var otherSelectors = colorInfo.otherSelectors || [];
           
-          var newFileContents = svgFileContents.replace(svgTagRE, '<svg fill="'+colorInfo.color+'"');
+          var newFileContents = svgFileContents;
+          if (colorInfo.color)
+            newFileContents = newFileContents.replace(svgTagRE, '<svg fill="'+colorInfo.color+'"');
           
           // Create the data URI
           var encoded = svgDataURIPrefix + (new Buffer(newFileContents).toString('base64'));
