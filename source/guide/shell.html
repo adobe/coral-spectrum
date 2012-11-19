@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CoralUI Style Guide</title>
+  <title>CoralUI Shell</title>
 
   <meta charset="utf-8"/>
 
@@ -22,18 +22,21 @@
   <script src="examples/assets/guide.js"></script>
   <script src="examples/assets/google-code-prettify/prettify.js"></script>
 
-    <script src="js/libs/jquery-gridlayout.js"></script>
-    <script>
-        jQuery(function($){
-            var $grid = $(".grid-container");
-            $grid.cuigridlayout();
+  <script src="js/libs/jquery-gridlayout.js"></script>
+  <script>
+    jQuery(function($){
+      var $grid = $(".grid-container");
+      $grid.cuigridlayout();
 
-            $("#main-rail").on("open close", function() {
-                $grid.cuigridlayout("layout");
-            });
-        });
-    </script>
+      $("#main-rail").on("open close", function() {
+        $grid.cuigridlayout("layout");
+      });
 
+      $('.tagpicker').filters({
+        multiple: true
+      });
+    });
+  </script>
 </head>
 <body class="desktop">
 
@@ -47,7 +50,8 @@
     </nav>
 
     <div class="drawer">
-      <div class="badge">SHELL</div>
+      <div class="badge">10</div>
+      <a class="icon-user white" href="#user_dialog" data-toggle="modal">User</a>
     </div>
 
   </header>
@@ -74,12 +78,6 @@
                 <option value="nanananana">Batman?</option>
               </select>
             </div>
-            
-            <script>
-              $('.tagpicker').filters({
-                multiple: true
-              });
-            </script>
           </div>
         </div>
 
