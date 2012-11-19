@@ -67,8 +67,12 @@ nav.pulldown {
           padding: 10*@px;
 
           &[class^="icon-"].withLabel {
-            padding-left: 40*@px;
+            padding-left: 10*@px;
             background-position: 10*@px center;
+          }
+          &[class^="icon-"].withLabel:before {
+            .icon-large;
+            padding-right: 10*@px;
           }
         }
 
