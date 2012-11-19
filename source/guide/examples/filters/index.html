@@ -158,10 +158,9 @@
                 // @param {Function} handler       A function that can process the returned data / status string
                 // @param {String} searchFor       The search text
                 // @param {int} loadOffset         The offset from the start of the list. For use with infinite loading
-                // @return Array of items or string "end" if there are no more items to load
+                // @return Array of items
                 //
                 var loadCities = function(handler, searchFor, loadOffset) {
-                    console.log("loadOffset", loadOffset);
                     var noItems = 9; // The number of items to send back
                     $.ajax({
                         url: 'http://gd.geobytes.com/AutoCompleteCity',
@@ -169,7 +168,7 @@
                         data: { "q": searchFor },
                         success: function(data) {
                             var first = loadOffset;
-                            var last = first;
+                            var last = first + noItems;
                             last = (last > data.length) ? last = data.length : last;
                             data = data.slice(first, last);
                             handler(data);
