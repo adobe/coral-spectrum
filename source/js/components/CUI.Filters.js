@@ -77,8 +77,9 @@ var index = filters.getSelectedIndex();
             <p>
       There are two callbacks you can use to customize your filters widget and that can be configured within the options array.
       </p><p>
-      With the <code>autocompleteCallback(Function handler, String searchFor)</code> you can customize the results that are displayed in the autocomplete dropdown list. The handler function to be called after your autocomplete function has finished accepts an array of result objects. These objects can hold any data as long as they define a convenient <code>toString()</code> method that returns the right option value.
+      With the <code>autocompleteCallback(Function handler, String searchFor, int offset, int length)</code> you can customize the results that are displayed in the autocomplete dropdown list. The handler function to be called after your autocomplete function has finished accepts an array of result objects. These objects can hold any data as long as they define a convenient <code>toString()</code> method that returns the right option value.
             </p>
+            <p>The additional parameters <code>offset</code> and <code>length</code> are only important when infinite list loading is activated: They define the part of the list to be loaded</p>
             <p>
             The <code>optionRenderer(int index, Object option, boolean highlight, boolean showIcon)</code> callback can be used to customize the HTML markup of the items in the dropdown. <code>index</code> is the position in the current list, <code>option</code> is the current option to display (your custom Object if you defined an autocompleteCallback, a string otherwise), <code>highlight</code> defines wether you should highlight the search term and <code>showIcon</code> defines wether you should add an icon to your markup. You have to return a valid jQuery element.
             </p>
@@ -101,14 +102,9 @@ var index = filters.getSelectedIndex();
       @param {Function} [options.autocompleteCallback=use options] Callback for autocompletion
       @param {Function} [options.optionRenderer=default renderer]  (Optional) Renderer for the autocompleter and the tag badges
       @param {boolean}  [options.infiniteLoad=false]               Should extra content be loaded dynamically when the list is scrolled to bottom?
-    */
+      @param {boolean}  [options.maxLoadingItems=20]               Maximum number of items to load per request on infinite list loading.
+          */
     construct: function(options) {
-            /**
-        @name autocompleteCallback
-        @function
-        @param {Function} handler    The handler to be called when your autocomplte code has finished (to allow asynch autocompletes)
-        @param {String}   searchFor  A string to search for in your data.
-        */
         this.selectedIndices = []; // Initialise fresh array
         this.createdIndices = []; // Initialise fresh array
         
@@ -160,7 +156,9 @@ var index = filters.getSelectedIndex();
         placeholder: null,
         allowCreate: false,
         icons: null,
-        iconSize: "small"
+        iconSize: "small",
+        infiniteLoad: false,
+        maxLoadingItems: 20
     },
 
     dropdownList: null, // Reference to instance of CUI.DropdownList
@@ -176,8 +174,6 @@ var index = filters.getSelectedIndex();
     selectedValue: null,       // Used to store returned value when data is loaded externally
 
     // Infinite loading
-    loadOffset: 0,             // To track how many times we have loaded content from the callback (when infinite loading)
-    offsetDist: null,          // Number of items to add to the offset. Set to the number of results received.
     isLoadingExternal: false,  // Has an external call for data been started?
     loadedEverything: false,   // Have we loaded all the items that we can?
 
@@ -279,8 +275,6 @@ var index = filters.getSelectedIndex();
         this.dropdownList.on("dropdown-list:select", "", function(event) {
 
             if(this.options.infiniteLoad) {
-                // Reset the callback load offset (for infinite loading)
-                this.loadOffset = 0;
                 this.loadedEverything = false;
             }
 
@@ -299,12 +293,11 @@ var index = filters.getSelectedIndex();
             this.dropdownList.on("dropdown-list:scrolled-bottom", "", function(event) {
                 if(!this.isLoadingExternal && !this.loadedEverything) {
                     this.isLoadingExternal = true;
-                    if(this.offsetDist) {
-                        this.loadOffset += this.offsetDist;
-                    }
+                    
                     this.dropdownList.addLoadingIndicator();
+                    var offset = this.dropdownList.getNumberOfItems();
                     var searchFor = this.inputElement.attr("value");
-                    this.options.autocompleteCallback($.proxy(this._appendLoadedData, this), searchFor, this.loadOffset);
+                    this.options.autocompleteCallback($.proxy(this._appendLoadedData, this), searchFor, offset, this.options.maxLoadingItems);
                 }
             }.bind(this));
         }
@@ -599,33 +592,27 @@ var index = filters.getSelectedIndex();
     _inputChanged: function() {
 
         if(this.options.infiniteLoad) {
-            // Reset the callback load offset (for infinite loading)
-            this.loadOffset = 0;
             this.loadedEverything = false;
         }
 
         var searchFor = this.inputElement.attr("value");
-        this.options.autocompleteCallback($.proxy(this._showAutocompleter, this), searchFor, this.loadOffset);
+        this.options.autocompleteCallback($.proxy(this._showAutocompleter, this), searchFor, 0, (this.options.infiniteLoad) ? this.options.maxLoadingItems : 500); // Do not load more than 500 items without infinite loading
     },
 
     /** @ignore */
     _appendLoadedData: function(results) {
 
+        this.dropdownList.removeLoadingIndicator();
+
         // No results back, must be no more data to load
         if(results.length === 0) {
             this.loadedEverything = true;
             this.isLoadingExternal = false;
-            this.dropdownList.removeLoadingIndicator();
             return;
-        }
-
-        if(this.options.infiniteLoad) {
-            this.offsetDist = results.length;
         }
 
         // Append the fetched items to the end of the currently open list
         this.dropdownList.addItems(results);
-        this.dropdownList.removeLoadingIndicator();
 
         // We're ready to load content again
         this.isLoadingExternal = false;
@@ -633,11 +620,6 @@ var index = filters.getSelectedIndex();
     
     /** @ignore */
     _showAutocompleter: function(results) {
-
-        if(this.options.infiniteLoad) {
-            this.offsetDist = results.length;
-        }
-
         this.dropdownList.hide();
         
         if (this.options.multiple) {

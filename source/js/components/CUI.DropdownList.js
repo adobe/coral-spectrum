@@ -132,6 +132,11 @@
             }.bind(this));
         }
     },
+    
+    getNumberOfItems: function() {
+        var offset = this.listElement.find('li').not('.loading-indicator').length;
+        return offset;
+    },
 
     /**
     * Appends a loading indicator to the end of the list. Useful for loading in extra content

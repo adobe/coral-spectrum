@@ -160,8 +160,8 @@
                 // @param {int} loadOffset         The offset from the start of the list. For use with infinite loading
                 // @return Array of items
                 //
-                var loadCities = function(handler, searchFor, loadOffset) {
-                    var noItems = 9; // The number of items to send back
+                var loadCities = function(handler, searchFor, loadOffset, noItems) {
+                    noItems = 9;
                     $.ajax({
                         url: 'http://gd.geobytes.com/AutoCompleteCity',
                         dataType: 'jsonp',
