@@ -20,7 +20,8 @@
         var $link = this.$element.find('a').first();
         var $popover = this.$element.find('.popover').first();
 
-        $link.on("click", function() {
+        $link.on("click", function(event) {
+            event.preventDefault();
             this.togglePopover();
             this._keepFocus();
         }.bind(this));
