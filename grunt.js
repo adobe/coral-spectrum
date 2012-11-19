@@ -211,14 +211,11 @@ module.exports = function(grunt) {
           '<%= dirs.build %>/js/libs/jquery-gridlayout.js': '<%= dirs.source %>/js/plugins/jquery-gridlayout.js'
         }
       },
-      /*
-      // DISABLED until CUI-197 resolved
       rte: {
         files: {
           '<%= dirs.build %>/js/libs/rte-core-jquery.js': '<%= dirs.rte %>/build/js/rte-core-jquery.js'
         }
       },
-      */
       prettyify: {
         src: '<%= dirs.components %>/bootstrap/docs/assets/js/google-code-prettify/*',
         dest: '<%= dirs.build %>/examples/assets/google-code-prettify/'
@@ -350,6 +347,12 @@ module.exports = function(grunt) {
       }
     },
     */
+    subgrunt: {
+      rte: {
+        subdir: './rte/',
+        args: ['full']
+      }
+    },
 
     min: {
       cui: {
@@ -499,7 +502,13 @@ module.exports = function(grunt) {
           '<%= dirs.source %>/test/**'
         ],
         tasks: 'mocha'
+      },
+
+      rte: {
+        files: ['rte/grunt.js'],
+        tasks: 'concat'
       }
+
     }
   });
 
@@ -507,11 +516,11 @@ module.exports = function(grunt) {
   grunt.registerTask('partial', 'lint copy handlebars font icons concat:cui min:cui less mincss mocha');
 
   // Build and copy RTE
-  // DISABLED until CUI-197 resolved //grunt.registerTask("rte", 'hub:rte copy:rte');
+  grunt.registerTask("rte", 'subgrunt:rte copy:rte');
 
   // Full build with docs and compressed file
-  // DISABLED until CUI-197 resolved //grunt.registerTask('full-build', 'lint rte copy font handlebars concat:cui concat:cui_rte min less mincss mocha jsdoc');
-  grunt.registerTask('full-build', 'lint copy font icons handlebars concat:cui min less mincss mocha jsdoc');
+  grunt.registerTask('full-build', 'lint rte copy font handlebars concat:cui concat:cui_rte min less mincss mocha jsdoc');
+  // grunt.registerTask('full-build', 'lint copy font icons handlebars concat:cui min less mincss mocha jsdoc');
 
   // Full build with docs and compressed file
   grunt.registerTask('full', 'clean full-build');

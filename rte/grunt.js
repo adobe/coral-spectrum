@@ -208,11 +208,11 @@ module.exports = function (grunt) {
         // Watch operations
         watch:{
 
-            concat_min_js:{
+            concat:{
                 files:[
                     '<%= dirs.source %>/js/**'
                 ],
-                tasks:'concat min'
+                tasks:'concat'
             }
 
         }
