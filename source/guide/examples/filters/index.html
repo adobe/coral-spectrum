@@ -157,8 +157,8 @@
                 // Example callback function
                 // @param {Function} handler       A function that can process the returned data / status string
                 // @param {String} searchFor       The search text
-                // @param {int} loadOffset         The page to load. Used in combination with infinite loading.
-                // @return Array of items or string "end" if there are no more items to load.
+                // @param {int} loadOffset         The offset from the start of the list. For use with infinite loading
+                // @return Array of items or string "end" if there are no more items to load
                 //
                 var loadCities = function(handler, searchFor, loadOffset) {
                     console.log("loadOffset", loadOffset);
@@ -168,29 +168,22 @@
                         dataType: 'jsonp',
                         data: { "q": searchFor },
                         success: function(data) {
-                            var first = loadOffset * noItems;
-                            var last = first + noItems;
-                            console.log("last initial", last);
+                            var first = loadOffset;
+                            var last = first;
                             last = (last > data.length) ? last = data.length : last;
-                            console.log("last adjusted",last);
-                            console.log("data length", data.length);
                             data = data.slice(first, last);
-                            if(data.length > 0) {
-                                handler(data);
-                            } else {
-                                handler("end");
-                            }
+                            handler(data);
                         },
                         error: function(XMLHttpRequest, textStatus, errorThrown) {
-                            // Error
+                            // Handle error
                         }
                     });
                 };
 
                 var filters4 = new CUI.Filters({
                             element: '#external1',
-                            multiple: false,
-                            stacking: false,
+                            multiple: true,
+                            stacking: true,
                             disabled: false,
                             options: options,
                             infiniteLoad: true,

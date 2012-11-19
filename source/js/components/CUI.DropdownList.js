@@ -64,8 +64,7 @@
         cssClass: null,
         visible: false,
         scrollBuffer: 10,
-        loadingIndicator: "<div class='spinner'></div>",
-        noMoreOptions: "No more options"
+        loadingIndicator: "<div class='spinner'></div>"
     },
 
     listElement: null,
@@ -120,14 +119,16 @@
     * Append items to the end of the list.
     */
     addItems: function(items) {
+        var offset = this.listElement.find('li').not('.loading-indicator').length;
         if(this.listElement) {
             var list = this.listElement.find('ul');
             $.each(items, function(index, value) {
                 var el = (this.options.optionRenderer) ? this.options.optionRenderer(index, value) : $("<span>" + value.toString() + "</span>");
-                var li = $("<li data-id=\"" + index + "\">");
+                var li = $("<li data-id=\"" + (offset+index) + "\">");
                 if (index === this.currentIndex) li.addClass("selected");
                 li.append(el);
                 list.append(li);
+                this.options.options.push(value);
             }.bind(this));
         }
     },
@@ -231,8 +232,8 @@
             list.append(li);
         }.bind(this));
         
-        list.on("click", "li", function(event) {
-           this._triggerSelect($(event.target).closest("li").attr("data-id"));
+        list.on("click", "li:not(.loading-indicator)", function(event) {
+            this._triggerSelect($(event.target).closest("li").attr("data-id"));
         }.bind(this));
         
         // Calculate correct position and size on screen
@@ -296,7 +297,7 @@
     
     /** @ignore */    
     _triggerSelect: function(index) {
-    // Trigger a change event
+        // Trigger a change event
         this.$element.focus();
         var e = $.Event('dropdown-list:select', {
           selectedIndex: index,

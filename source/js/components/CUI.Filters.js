@@ -145,7 +145,6 @@ var index = filters.getSelectedIndex();
         });
         
         this._addEventListeners();
-
        
     },
     
@@ -178,8 +177,9 @@ var index = filters.getSelectedIndex();
 
     // Infinite loading
     loadOffset: 0,             // To track how many times we have loaded content from the callback (when infinite loading)
-    isLoadingExternal: false,  // Have we started an external call for data (used with infinite loading)
-    loadedEverything: false,   // Have we reached the end of the list? No more items to load?
+    offsetDist: null,          // Number of items to add to the offset. Set to the number of results received.
+    isLoadingExternal: false,  // Has an external call for data been started?
+    loadedEverything: false,   // Have we loaded all the items that we can?
 
     // TODO switch selectedIndex/selectedIndices to store keys rather than indexes so that they
     // can be used with external data. Remove selectedValue variable on completion.
@@ -277,9 +277,12 @@ var index = filters.getSelectedIndex();
         this.$element.on("keyup", "input", this._keyUp.bind(this));
         
         this.dropdownList.on("dropdown-list:select", "", function(event) {
-            // Reset the callback load offset (for infinite loading)
-            this.loadOffset = 0;
-            this.loadedEverything = false;
+
+            if(this.options.infiniteLoad) {
+                // Reset the callback load offset (for infinite loading)
+                this.loadOffset = 0;
+                this.loadedEverything = false;
+            }
 
             this.dropdownList.hide(200);
 
@@ -296,7 +299,9 @@ var index = filters.getSelectedIndex();
             this.dropdownList.on("dropdown-list:scrolled-bottom", "", function(event) {
                 if(!this.isLoadingExternal && !this.loadedEverything) {
                     this.isLoadingExternal = true;
-                    this.loadOffset++;
+                    if(this.offsetDist) {
+                        this.loadOffset += this.offsetDist;
+                    }
                     this.dropdownList.addLoadingIndicator();
                     var searchFor = this.inputElement.attr("value");
                     this.options.autocompleteCallback($.proxy(this._appendLoadedData, this), searchFor, this.loadOffset);
@@ -592,9 +597,12 @@ var index = filters.getSelectedIndex();
     
     /** @ignore */
     _inputChanged: function() {
-        // Reset the callback load offset (for infinite loading)
-        this.loadOffset = 0;
-        this.loadedEverything = false;
+
+        if(this.options.infiniteLoad) {
+            // Reset the callback load offset (for infinite loading)
+            this.loadOffset = 0;
+            this.loadedEverything = false;
+        }
 
         var searchFor = this.inputElement.attr("value");
         this.options.autocompleteCallback($.proxy(this._showAutocompleter, this), searchFor, this.loadOffset);
@@ -602,10 +610,17 @@ var index = filters.getSelectedIndex();
 
     /** @ignore */
     _appendLoadedData: function(results) {
-        if(results === "end") {
+
+        // No results back, must be no more data to load
+        if(results.length === 0) {
             this.loadedEverything = true;
             this.isLoadingExternal = false;
+            this.dropdownList.removeLoadingIndicator();
             return;
+        }
+
+        if(this.options.infiniteLoad) {
+            this.offsetDist = results.length;
         }
 
         // Append the fetched items to the end of the currently open list
@@ -618,9 +633,9 @@ var index = filters.getSelectedIndex();
     
     /** @ignore */
     _showAutocompleter: function(results) {
-        if(results === "end") {
-            this.loadedEverything = true;
-            return;
+
+        if(this.options.infiniteLoad) {
+            this.offsetDist = results.length;
         }
 
         this.dropdownList.hide();
