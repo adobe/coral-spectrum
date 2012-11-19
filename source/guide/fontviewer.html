@@ -13,11 +13,24 @@
         display: inline-block;
         margin: 1rem;
         padding: 1rem;
+        border: 1px solid #0a0a0a;
+        
+    }
+
+    /* icon size */
+    .grid > i {
         width: 4rem;
         height: 4rem;
-        border: 1px solid #0a0a0a;
         font-size: 4rem;
     }
+
+    .grid > i:before {
+        min-width: 4rem;
+        min-height: 4rem;
+        -webkit-background-size: 4rem 4rem;
+        -moz-background-size: 4rem 4rem;
+        background-size: 4rem 4rem;
+    } /* or use the mixin */
     
   </style>
   

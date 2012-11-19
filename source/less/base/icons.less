@@ -1,6 +1,6 @@
 @icon-xsmall-size: 12*@px;
-@icon-small-size: 24*@px;
-@icon-medium-size: 1.5rem;
+@icon-small-size: 18*@px;
+@icon-medium-size: 24*@px;
 @icon-large-size: 2rem;
 
 @icon-blue-color:  rgb(65, 145, 210);
@@ -39,8 +39,6 @@
   &:before {
     min-width: @size;
     min-height: @size;
-  }
-  &:before {
     .background-size(@size);
   }
 }
@@ -73,22 +71,22 @@
 }
 
 [class^="icon-"].xsmall,
-[class*=" icon-"].xsmall { // 12px
+[class*=" icon-"].xsmall {
   .icon-xsmall;
 }
 
 [class^="icon-"].small,
-[class*=" icon-"].small { // 16px
+[class*=" icon-"].small {
   .icon-small;
 }
 
 [class^="icon-"].medium,
-[class*=" icon-"].medium { // 24px
+[class*=" icon-"].medium {
   .icon-medium;
 }
 
 [class^="icon-"].large,
-[class*=" icon-"].large { // 32px
+[class*=" icon-"].large {
   .icon-large;
 }
 
@@ -106,14 +104,11 @@
 
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: 1.5rem 1.5rem;
     content: " ";
 
     vertical-align: middle;
     text-align: center;
   }
-
-  .icon-medium;
 
   &.xsmall {
     .icon-xsmall;
