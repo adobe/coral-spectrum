@@ -294,7 +294,7 @@ var index = filters.getSelectedIndex();
 
         if(this.options.infiniteLoad) {
             this.dropdownList.on("dropdown-list:scrolled-bottom", "", function(event) {
-                if(!this.isLoadingExternal) {
+                if(!this.isLoadingExternal && !this.loadedEverything) {
                     this.isLoadingExternal = true;
                     this.loadOffset++;
                     this.dropdownList.addLoadingIndicator();
