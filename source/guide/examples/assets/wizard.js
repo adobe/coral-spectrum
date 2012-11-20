@@ -36,6 +36,9 @@ $(document).ready(function(){
     onFinish: function() {
         alert('Page created!');
     },
+    onLeaving: function() {
+        alert('Want to leave the wizard?');
+    },
     onNextButtonClick: function() {
       console.log('Click on next button');
     },

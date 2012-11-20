@@ -56,6 +56,7 @@
      * @param {Mixed} options.element jQuery selector or DOM element to use for panel
      * @param {Function|Object} options.onPageChanged Callback called each time the page change (with arguments: `page`). An Collection of functions can be given. When a page is displayed if his data-wizard-page-callback attribute can be found in the collection, then the corresponding callback will be executed (examples is given in guide/wizard.html).
      * @param {Function} options.onFinish Callback called after the last page change (without arguments).
+     * @param {Function} options.onLeaving Callback called if user click on back button on the first change (without arguments).
      * @param {Function} options.onNextButtonClick Callback called after the last page change (without arguments).
      * @param {Function} options.onBackButtonClick Callback called after the last page change (without arguments).
      */
@@ -90,6 +91,7 @@
       backLabel: 'back',
       onPageChanged: null,
       onFinish: null,
+      onLeaving: null,
       onNextButtonClick: null,
       onBackButtonClick: null
     },
@@ -208,9 +210,16 @@
 
     /** @ignore */
     _onBackClick: function(e) {
-      this.changePage(this.getCurrentPageNumber() - 1);
-      if (typeof this.options.onBackButtonClick === 'function') {
-        this.options.onBackButtonClick();
+      if (this.getCurrentPageNumber() > 1) {
+        this.changePage(this.getCurrentPageNumber() - 1);
+        if (typeof this.options.onBackButtonClick === 'function') {
+          this.options.onBackButtonClick();
+        }
+      } else {
+        if (typeof this.options.onLeaving === 'function') {
+          this.options.onLeaving();
+        }
+
       }
     },
 
