@@ -35,6 +35,12 @@ $(document).ready(function(){
     },
     onFinish: function() {
         alert('Page created!');
+    },
+    onNextButtonClick: function() {
+      console.log('Click on next button');
+    },
+    onBackButtonClick: function() {
+      console.log('Click on back button');
     }
   });
 
