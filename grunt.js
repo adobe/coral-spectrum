@@ -33,7 +33,8 @@ module.exports = function(grunt) {
       'components/CUI.Pulldown.js',
       'components/CUI.Sticky.js',
       'components/CUI.PathBrowser.js',
-      'components/CUI.Wizard.js'
+      'components/CUI.Wizard.js',
+      'components/CUI.FileUpload.js'
     ],
     "cui-rte": [
       'components/rte/Theme.js',
