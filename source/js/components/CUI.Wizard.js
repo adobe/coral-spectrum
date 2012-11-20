@@ -89,7 +89,9 @@
       nextLabel: 'next',
       backLabel: 'back',
       onPageChanged: null,
-      onFinish: null
+      onFinish: null,
+      onNextButtonClick: null,
+      onBackButtonClick: null
     },
 
     /**
@@ -208,7 +210,7 @@
     _onBackClick: function(e) {
       this.changePage(this.getCurrentPageNumber() - 1);
       if (typeof this.options.onBackButtonClick === 'function') {
-        this.options.onNextButtonClick();
+        this.options.onBackButtonClick();
       }
     },
 
