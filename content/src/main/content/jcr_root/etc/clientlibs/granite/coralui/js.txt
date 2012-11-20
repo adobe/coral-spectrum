@@ -6,6 +6,7 @@ plugins/toe.js
 Class.js
 CUI.js
 CUI.Util.js
+CUI.Util.HTTP.js
 CUI.Templates.js
 components/CUI.Widget.js
 components/CUI.Modal.js
@@ -22,3 +23,4 @@ components/CUI.Pulldown.js
 components/CUI.Wizard.js
 components/CUI.Sticky.js
 components/CUI.PathBrowser.js
+components/CUI.FileUpload.js
