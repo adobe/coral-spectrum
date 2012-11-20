@@ -1,53 +1,159 @@
-/**
-  Class: ul.grid
-  A table-like grid that displays items in a responsive grid. 
+// TODO: remove commented lines below if not needed anymore
+//
+///**
+//  Class: ul.grid
+//  A table-like grid that displays items in a responsive grid. 
+//
+//  Notes:
+//   You should override the height and width of the list items to meet your needs
+//   Use a masonry grid when the presentation/content is important
+//*/
+//ul.grid {
+//  list-style: none;
+//  padding: 0;
+//  margin: 0; // given by @grid-spacing
+//
+//  &.edit {
+//    /// TODO: add diagonally striped grid using gradients or image
+//    background-color: @grid-edit-background-color;
+//  }
+//
+//  li {
+//    display: inline-block;
+//    // TBD: decide default width/heights
+//    height: 16rem;
+//    width: 16rem;
+//    padding: 0;
+//    margin: @grid-spacing;
+//
+//    background-color: @grid-item-background-color;
+//    border: @px solid @grid-item-border-color;
+//  }
+//}
+//
+///**
+//  Class: ul.grid.masonry
+//  A masonry grid that packs items regardless of differences in height.
+//
+//  Note: that this approach is not compatible with IE 9 and will be replaced with jQuery Masonry
+//
+//  TODO: Replace with jQuery Masonry
+//*/
+//ul.grid.masonry {
+//  .columns(@grid-columns, @grid-spacing); /* A four column layout spaced by 1rem */
+//
+//  li {
+//    width: 100%;
+//    height: auto;
+//    margin: 0 0 @grid-spacing 0;
+//
+//    /*
+//    This screws alignment up, possibly related to http://code.google.com/p/chromium/issues/detail?id=129178
+//    */
+//    .shadow(0, 0.5rem);
+//  }
+//}
 
-  Notes:
-   You should override the height and width of the list items to meet your needs
-   Use a masonry grid when the presentation/content is important
-*/
-ul.grid {
-  list-style: none;
-  padding: 0;
-  margin: 0; // given by @grid-spacing
+/* Card Grid View */
+.grid {
+    overflow: hidden; // can be replaced with a clearfix in case needed
+    padding: @card-grid-margin 0 0 @card-grid-margin;
 
-  &.edit {
-    /// TODO: add diagonally striped grid using gradients or image
-    background-color: @grid-edit-background-color;
-  }
+    > [class^="grid-"],
+    > [class*=" grid-"] {
+        float: left;
+    }
+    > .grid-0,
+    > .grid-1 {
+        width: 100%;
+    }
+    > .grid-2 {
+        width: 100% / 2;
+    }
+    > .grid-3 {
+        width: 100% / 3;
+    }
+    > .grid-4 {
+        width: 100% / 4;
+    }
+    > .grid-5 {
+        width: 100% / 5;
+    }
+    > .grid-6 {
+        width: 100% / 6;
+    }
+    > .grid-7 {
+        width: 100% / 7;
+    }
+    > .grid-8 {
+        width: 100% / 8;
+    }
+    > .grid-9 {
+        width: 100% / 9;
+    }
+    > .grid-10 {
+        width: 100% / 10;
+    }
+    > .grid-11 {
+        width: 100% / 11;
+    }
+    > .grid-12 {
+        width: 100% / 12;
+    }
+    > .grid-13 {
+        width: 100% / 13;
+    }
+    > .grid-14 {
+        width: 100% / 14;
+    }
+    > .grid-15 {
+        width: 100% / 15;
+    }
+    > .grid-16 {
+        width: 100% / 16;
+    }
+    > .grid-17 {
+        width: 100% / 17;
+    }
+    > .grid-18 {
+        width: 100% / 18;
+    }
+    > .grid-19 {
+        width: 100% / 19;
+    }
+    > .grid-20 {
+        width: 100% / 20;
+    }
 
-  li {
-    display: inline-block;
-    // TBD: decide default width/heights
-    height: 16rem;
-    width: 16rem;
-    padding: 0;
-    margin: @grid-spacing;
-
-    background-color: @grid-item-background-color;
-    border: @px solid @grid-item-border-color;
-  }
+    .show-list {
+        display: none;
+    }
 }
 
-/**
-  Class: ul.grid.masonry
-  A masonry grid that packs items regardless of differences in height.
+/* List View */
+.list {
+    .list-header {
+        .select {
 
-  Note: that this approach is not compatible with IE 9 and will be replaced with jQuery Masonry
+        }
+        .order {
 
-  TODO: Replace with jQuery Masonry
-*/
-ul.grid.masonry {
-  .columns(@grid-columns, @grid-spacing); /* A four column layout spaced by 1rem */
+        }
+        .title {
 
-  li {
-    width: 100%;
-    height: auto;
-    margin: 0 0 @grid-spacing 0;
+        }
+        .published {
 
-    /*
-    This screws alignment up, possibly related to http://code.google.com/p/chromium/issues/detail?id=129178
-    */
-    .shadow(0, 0.5rem);
-  }
+        }
+        .modified {
+
+        }
+        .links {
+
+        }
+    }
+
+    .show-grid {
+        display: none;
+    }
 }

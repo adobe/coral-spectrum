@@ -10,7 +10,7 @@ $(document).ready(function(){
       'properties': validateProperties,
       'select-source': function() {
         if (!sourceGridRendered) {
-            new $.CUIGridLayout({}, $('.select-source .grid-container'));
+            new $.CUIGridLayout({}, $('.select-source .grid'));
             sourceGridRendered = true;
         }
         // Add body css class for rendering background image on select source page
@@ -23,7 +23,7 @@ $(document).ready(function(){
       'select-template': function() {
           console.log("select template");
         if (!templateGridRendered) {
-            new $.CUIGridLayout({}, $('.select-template .grid-container'));
+            new $.CUIGridLayout({}, $('.select-template .grid'));
             templateGridRendered = true;
         }
         $('body').removeClass("select-source-page");

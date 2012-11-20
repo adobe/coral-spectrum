@@ -11,82 +11,100 @@
 [class*=" card-"] {
     position: relative;
     display: inline-block;
-    width: 95%;
-    width: -webkit-calc(~"100% - "@card-grid-margin);
-    width: -moz-calc(~"100% - "@card-grid-margin);
-    width: -o-calc(~"100% - "@card-grid-margin);
-    width: calc(~"100% - "@card-grid-margin);
-    margin: 0 0 @card-grid-margin 0;
-    background: @card-background-color;
     font-size: 12*@px;
-    line-height: 1.5em;
-    .card-shadow;
+    line-height: 18*@px;
 
-    a {
+    > a {
         overflow: hidden; // for the link to contain everything
         display: block;
-        &,
-        a:hover {
-            text-decoration: none;
+        text-decoration: none;
+        color: @card-text-color;
+
+        [class^="icon-"]:before,
+        [class*=" icon-"]:before,
+        &:hover [class^="icon-"]:before,
+        &:hover [class*=" icon-"]:before {
             color: @card-text-color;
         }
     }
-    img {
-        width: 100%;
-    }
-    h4 {
-        margin: 10*@px;
-        font-size: 12*@px;
-        color: @card-title-color;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-    }
+    h4,
     p {
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
-        margin: 0 10*@px 10*@px;
+        margin: 10*@px;
+    }
+    h4 {
+        font-size: 12*@px;
+        color: @card-title-color;
+    }
+    p {
+        margin-top: 0;
         &.description {
             margin-top: -10*@px;
-        }
-        span {
-            padding-right: 6*@px;
         }
         i {
             .icon-xsmall;
         }
     }
+
+    .grid & {
+        width: 95%;
+        width: -webkit-calc(~"100% - "@card-grid-margin);
+        width: -moz-calc(~"100% - "@card-grid-margin);
+        width: -o-calc(~"100% - "@card-grid-margin);
+        width: calc(~"100% - "@card-grid-margin);
+        margin: 0 0 @card-grid-margin 0;
+        background: @card-background-color;
+
+        a {
+            position: relative;
+            z-index: 1;
+            .card-shadow;
+        }
+        img {
+            width: 100%;
+        }
+    }
+
+    .list & {
+        display: block;
+        
+        img {
+            display: none;
+        }
+    }
 }
 
 /**
-    Class: .card-stack
+    Class: .stack
     Displays a card stack below the card (can be used in conjunction with any other card-* type to make it a stack).
     The card-collection class always has a stack applied.
 */
-.card-stack,
+.grid .stack,
 .card-collection {
     margin-bottom: @card-grid-margin+(2*@card-stack-offset);
-
+    
     &:before,
     &:after {
         content: " ";
         position: absolute;
         height: @card-stack-offset;
         pointer-events: none;
+        background: inherit;
         .card-shadow;
     }
 
     &:before {
-        bottom: -@card-stack-offset;
-        left:    @card-stack-offset;
-        right:   @card-stack-offset;
-    }
-
-    &:after {
         bottom: -2*@card-stack-offset;
         left:    2*@card-stack-offset;
         right:   2*@card-stack-offset;
+    }
+
+    &:after {
+        bottom: -@card-stack-offset;
+        left:    @card-stack-offset;
+        right:   @card-stack-offset;
     }
 }
 
@@ -95,7 +113,7 @@
     Displays collection card with a banner.
 */
 .card-collection {
-    .banner {
+    .description {
         position: absolute;
         top: 50%;
         left:  -@card-banner-offset;
@@ -106,10 +124,10 @@
         color: @card-banner-text-color;
         .box-shadow(0 8*@px 8*@px -5*@px rgba(0, 0, 0, 0.3));
 
-        h4 {
+        > h4 {
             color: @card-banner-text-color;
         }
-        p {
+        > p {
             margin-top: -8*@px;
         }
 
@@ -141,10 +159,6 @@
     Displays a DAM asset card.
 */
 .card-asset {
-
-    img.lowres {
-        
-    }
     h4 {
         font-weight: @font-base-weight;
     }
@@ -169,16 +183,206 @@
     Displays a WCM page card.
 */
 .card-page {
-    // Everything inside this rule is a fix to the white-space:nowrap; set on .card-* > p.
-    .info {
-        position: relative;
-        padding-right: 18*@px;
+    .grid & {
+        .info-approved,
+        .info-locked,
+        .user,
+        .links-number,
+        .select,
+        .move {
+            display: none;
+        }
+        .info-copy {
+            margin-top: -10*@px;
+        }
+        .published,
+        .modified {
+            float: left;
+            padding-right: 6*@px;
+        }
+        .links {
+            float: right;
+        }
+    }
 
-        > i.right {
+    .list & {
+        height: 50*@px;
+        border-bottom: 1*@px solid @card-list-separator-color;
+
+        > a {
+            height: 100%;
+            padding: 0 45*@px;
+
+            > .description {
+                position: relative;
+                height: 100%;
+
+                p {
+                    margin: 0;
+                }
+                h4,
+                .info-approved,
+                .info-locked,
+                .date {
+                    font-weight: bold;
+                    color: @card-list-title-color;
+                }
+
+                > .main {
+                    position: absolute;
+                    padding: 16*@px 0 16*@px 38*@px;
+                    left: 0;
+                    right: 36%;
+
+                    > h4 {
+                        float: left;
+                        max-width: 80%;
+                        margin: 0 5*@px 0 0;
+                    }
+                    > p {
+                        float: left;
+                        font-size: 10*@px;
+                        font-weight: bold;
+                        text-transform: uppercase;
+
+                        &.info-approved,
+                        &.info-locked {
+                            margin: -@px 5*@px -@px 0;
+                            padding: 0 5*@px;
+                            border: 1px solid @card-list-separator-color;
+                        }
+                        &.info-approved {
+                            background: @card-list-approved-background;
+                            border-color: @card-list-approved-border;
+                        }
+                        &.info-locked {
+                            background: @card-list-locked-background;
+                            border-color: @card-list-locked-border;
+                        }
+                    }
+                }
+
+                > .published,
+                > .modified {
+                    position: absolute;
+                    padding: 7*@px 0;
+                    > span {
+                        display: block;
+                    }
+                    > i {
+                        display: none;
+                    }
+                }
+                > .published {
+                    left: 65%;
+                    right: 20%;
+                }
+                > .modified {
+                    left: 81%;
+                    right: 4%;
+                }
+                > .links {
+                    position: absolute;
+                    padding: 25*@px 0 7*@px;
+                    left: 97%;
+                    right: 0;
+                    > i {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        > .select,
+        > .move {
             position: absolute;
             top: 0;
-            right: 0;
+            width: 45*@px;
+            height: 100%;
         }
+        > .select {
+            overflow: hidden;
+            left: 0;
+            width: 45*@px;
+            height: 100%;
+            white-space: nowrap;
+            text-indent: 50*@px;
+
+            &:before,
+            &:after {
+                content: " ";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 15*@px;
+                height: 15*@px;
+                margin: -7.5*@px;
+            }
+            &:before {
+                background: #ebebeb;
+                .box-shadow(inset 0 @px 2*@px rgba(0, 0, 0, 0.33));
+            }
+        }
+        > .move {
+            .icon-medium;
+            opacity: 0.5;
+            right: 0;
+            &:before {
+                display: block;
+                margin: 13*@px auto;
+            }
+        }
+    }
+}
+.card-page.selected {
+    a {
+        background: #bbd2e5;
+    }
+    .select {
+        &:before {
+            .box-shadow(inset 0 @px 2*@px rgba(0, 0, 0, 0.5));
+        }
+        &:after {
+            background-image: url("../images/components/checkbox/check.png");
+            .background-size(100%);
+        }
+    }
+}
+.list .card-page {
+    &.stack .description:before,
+    &.stack .description:after,
+    .main:before {
+        content: " ";
+        position: absolute;
+        z-index: 3;
+        top: 11*@px;
+        left: 0;
+        width: 28*@px;
+        height: 28*@px;
+        border: 1px solid @card-list-stack-border;
+        background: @card-list-stack-background-main;
+    }
+    &.stack .description:after {
+        z-index: 2;
+        top: 13*@px;
+        left: @px;
+        width: 26*@px;
+        background: @card-list-stack-background-stack;
+    }
+    &.stack .description:before {
+        z-index: 1;
+        top: 15*@px;
+        left: 2*@px;
+        width: 24*@px;
+        background: @card-list-stack-background-stack;
+    }
+}
+.card-page.page-hidden,
+.card-page.page-redirect,
+.card-page.page-deactivated {
+    .list & a,
+    .grid & img {
+        opacity: 0.4;
     }
 }
 
@@ -224,50 +428,3 @@
     }
 }
 
-/* Card Grids */
-.grid-container {
-    overflow: hidden; // can be replaced with a clearfix in case needed
-    padding: @card-grid-margin 0 0 @card-grid-margin;
-
-    > .grid-0 {
-        float: left;
-        width: 100%;
-        article {
-            width:240px;
-            float:left;
-        }
-    }
-
-    > .grid-1 {
-        float: left;
-        width: 100%;
-    }
-    > .grid-2 {
-        float: left;
-        width: 100% / 2;
-    }
-    > .grid-3 {
-        float: left;
-        width: 100% / 3;
-    }
-    > .grid-4 {
-        float: left;
-        width: 100% / 4;
-    }
-    > .grid-5 {
-        float: left;
-        width: 100% / 5;
-    }
-    > .grid-6 {
-        float: left;
-        width: 100% / 6;
-    }
-    > .grid-7 {
-        float: left;
-        width: 100% / 7;
-    }
-    > .grid-8 {
-        float: left;
-        width: 100% / 8;
-    }
-}
