@@ -96,7 +96,7 @@ for(var i = 0; i < curdir.length; i++)
     }
 }
 
-var font = new FontBoost('AdobeIcons', files).build();
+var font = new FontBoost('AdobeIcons', files, 1152).build();
 
 var fontPath = outFontFolder + fontName + '.svg';
 var cssPath = outCssFolder + cssName;

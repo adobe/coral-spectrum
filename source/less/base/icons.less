@@ -13,9 +13,9 @@
 @font-face {
   font-family: 'AdobeIcons';
   src: url(~"@{font-folder}/AdobeIcons.eot");
-  src: url(~"@{font-folder}/AdobeIcons.woff") format("woff"),
-    url(~"@{font-folder}/AdobeIcons.ttf") format("truetype"),
-    url(~"@{font-folder}/AdobeIcons.svg#AdobeIcons") format("svg");
+  src: url(~"@{font-folder}/AdobeIcons.svg#AdobeIcons") format("svg"),
+    url(~"@{font-folder}/AdobeIcons.woff") format("woff"),
+    url(~"@{font-folder}/AdobeIcons.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -28,6 +28,7 @@
   font-style: normal;
   display: inline-block;
   text-decoration: none; // Don't let icons underline
+  text-rendering: optimizeLegibility;
 }
 
 // Various mixins
