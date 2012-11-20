@@ -36,7 +36,21 @@
             <p>
             Filter me: <input type="text" name="icons-large" placeholder="Displays large icons">
             </p>
-        <h2>Create from jQuery (with allowCreate enabled)</h2>            
+            <h2>With data from external source</h2>
+            <p>
+                Filter me:
+            <div class="filters" id="external1">
+                <input type="text" name="external-source" placeholder="Your place">
+                <select></select>
+            </div>
+            </p>
+            <p>
+                Filter me:
+            <div class="filters" id="external2">
+                <input type="text" name="external-source-multiple" placeholder="Your place">
+            </div>
+            </p>
+            <h2>Create from jQuery (with allowCreate enabled)</h2>
             <div>
             <p>
                 From select: <select class="filters"><option>One very long <b>tag</b> line</option><option>Two</option><option>Three</option></select>
@@ -95,21 +109,7 @@
             </div>
             </p>
             
-            
-            <h2>With data from external source</h2>
-            <p>
-            Filter me:
-            <div class="filters" id="external1">
-                    <input type="text" name="external-source" placeholder="Your place">
-                    <select></select>
-            </div>
-            </p>           
-            <p>
-            Filter me:
-            <div class="filters" id="external2">
-                <input type="text" name="external-source-multiple" placeholder="Your place">
-            </div>
-            </p> 
+
         </section>
             
         <script type="text/javascript">
@@ -154,25 +154,38 @@
                             icons: { "Watermelon":"icon-calendar", "Olive":"icon-paintbucket", "Avocado":"http://www.enterprisewcms.com/images/adobe_cq5_icon_adobe.png" }
                 });
 
-                var loadCities = function(handler, searchFor) {
+                // Example callback function
+                // @param {Function} handler       A function that can process the returned data / status string
+                // @param {String} searchFor       The search text
+                // @param {int} loadOffset         The offset from the start of the list. For use with infinite loading
+                // @return Array of items
+                //
+                var loadCities = function(handler, searchFor, loadOffset, noItems) {
+                    noItems = 9;
                     $.ajax({
                         url: 'http://gd.geobytes.com/AutoCompleteCity',
                         dataType: 'jsonp',
                         data: { "q": searchFor },
                         success: function(data) {
+                            var first = loadOffset;
+                            var last = first + noItems;
+                            last = (last > data.length) ? last = data.length : last;
+                            data = data.slice(first, last);
                             handler(data);
                         },
                         error: function(XMLHttpRequest, textStatus, errorThrown) {
-                            // Error
+                            // Handle error
                         }
                     });
                 };
 
                 var filters4 = new CUI.Filters({
                             element: '#external1',
-                            multiple: false,
-                            stacking: false,
+                            multiple: true,
+                            stacking: true,
                             disabled: false,
+                            options: options,
+                            infiniteLoad: true,
                             autocompleteCallback: loadCities
                 });
                 var filters4 = new CUI.Filters({

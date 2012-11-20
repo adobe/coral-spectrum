@@ -77,8 +77,9 @@ var index = filters.getSelectedIndex();
             <p>
       There are two callbacks you can use to customize your filters widget and that can be configured within the options array.
       </p><p>
-      With the <code>autocompleteCallback(Function handler, String searchFor)</code> you can customize the results that are displayed in the autocomplete dropdown list. The handler function to be called after your autocomplete function has finished accepts an array of result objects. These objects can hold any data as long as they define a convenient <code>toString()</code> method that returns the right option value.
+      With the <code>autocompleteCallback(Function handler, String searchFor, int offset, int length)</code> you can customize the results that are displayed in the autocomplete dropdown list. The handler function to be called after your autocomplete function has finished accepts an array of result objects. These objects can hold any data as long as they define a convenient <code>toString()</code> method that returns the right option value.
             </p>
+            <p>The additional parameters <code>offset</code> and <code>length</code> are only important when infinite list loading is activated: They define the part of the list to be loaded</p>
             <p>
             The <code>optionRenderer(int index, Object option, boolean highlight, boolean showIcon)</code> callback can be used to customize the HTML markup of the items in the dropdown. <code>index</code> is the position in the current list, <code>option</code> is the current option to display (your custom Object if you defined an autocompleteCallback, a string otherwise), <code>highlight</code> defines wether you should highlight the search term and <code>showIcon</code> defines wether you should add an icon to your markup. You have to return a valid jQuery element.
             </p>
@@ -100,14 +101,10 @@ var index = filters.getSelectedIndex();
       @param {String}   [options.iconSize=small]                   Icon size from: xsmall (12x12), small (16x16), medium (24x24), large (32x32).
       @param {Function} [options.autocompleteCallback=use options] Callback for autocompletion
       @param {Function} [options.optionRenderer=default renderer]  (Optional) Renderer for the autocompleter and the tag badges
-    */
+      @param {boolean}  [options.infiniteLoad=false]               Should extra content be loaded dynamically when the list is scrolled to bottom?
+      @param {boolean}  [options.maxLoadingItems=20]               Maximum number of items to load per request on infinite list loading.
+          */
     construct: function(options) {
-            /**
-        @name autocompleteCallback
-        @function
-        @param {Function} handler    The handler to be called when your autocomplte code has finished (to allow asynch autocompletes)
-        @param {String}   searchFor  A string to search for in your data.
-        */
         this.selectedIndices = []; // Initialise fresh array
         this.createdIndices = []; // Initialise fresh array
         
@@ -144,7 +141,6 @@ var index = filters.getSelectedIndex();
         });
         
         this._addEventListeners();
-
        
     },
     
@@ -160,7 +156,9 @@ var index = filters.getSelectedIndex();
         placeholder: null,
         allowCreate: false,
         icons: null,
-        iconSize: "small"
+        iconSize: "small",
+        infiniteLoad: false,
+        maxLoadingItems: 20
     },
 
     dropdownList: null, // Reference to instance of CUI.DropdownList
@@ -168,12 +166,16 @@ var index = filters.getSelectedIndex();
     inputElement: null,
     typeTimeout: null,
     
-    selectedIndex: -1, // For single term only
-    selectedIndices: null, // For multiple terms
-    createdIndices: null, // Newly created indices
+    selectedIndex: -1,         // For single term only
+    selectedIndices: null,     // For multiple terms
+    createdIndices: null,      // Newly created indices
     triggeredBackspace: false,
-    usingExternalData: false, // Using autocomplete callback for loading external data?
-    selectedValue: null, // Used to store returned value when data is loaded externally
+    usingExternalData: false,  // Using autocomplete callback for loading external data?
+    selectedValue: null,       // Used to store returned value when data is loaded externally
+
+    // Infinite loading
+    isLoadingExternal: false,  // Has an external call for data been started?
+    loadedEverything: false,   // Have we loaded all the items that we can?
 
     // TODO switch selectedIndex/selectedIndices to store keys rather than indexes so that they
     // can be used with external data. Remove selectedValue variable on completion.
@@ -271,6 +273,11 @@ var index = filters.getSelectedIndex();
         this.$element.on("keyup", "input", this._keyUp.bind(this));
         
         this.dropdownList.on("dropdown-list:select", "", function(event) {
+
+            if(this.options.infiniteLoad) {
+                this.loadedEverything = false;
+            }
+
             this.dropdownList.hide(200);
 
             if(this.usingExternalData) {
@@ -281,6 +288,19 @@ var index = filters.getSelectedIndex();
             var pos = $.inArray(event.selectedValue.toString(), this.options.options);
             this.setSelectedIndex(pos * 1);
         }.bind(this));
+
+        if(this.options.infiniteLoad) {
+            this.dropdownList.on("dropdown-list:scrolled-bottom", "", function(event) {
+                if(!this.isLoadingExternal && !this.loadedEverything) {
+                    this.isLoadingExternal = true;
+                    
+                    this.dropdownList.addLoadingIndicator();
+                    var offset = this.dropdownList.getNumberOfItems();
+                    var searchFor = this.inputElement.attr("value");
+                    this.options.autocompleteCallback($.proxy(this._appendLoadedData, this), searchFor, offset, this.options.maxLoadingItems);
+                }
+            }.bind(this));
+        }
 
         this.$element.on("click", "[data-dismiss=filter]", function(event) {
             if (this.options.disabled) return;
@@ -570,13 +590,36 @@ var index = filters.getSelectedIndex();
     
     /** @ignore */
     _inputChanged: function() {
+
+        if(this.options.infiniteLoad) {
+            this.loadedEverything = false;
+        }
+
         var searchFor = this.inputElement.attr("value");
-        this.options.autocompleteCallback($.proxy(this._showAutocompleter, this), searchFor);
+        this.options.autocompleteCallback($.proxy(this._showAutocompleter, this), searchFor, 0, (this.options.infiniteLoad) ? this.options.maxLoadingItems : 500); // Do not load more than 500 items without infinite loading
+    },
+
+    /** @ignore */
+    _appendLoadedData: function(results) {
+
+        this.dropdownList.removeLoadingIndicator();
+
+        // No results back, must be no more data to load
+        if(results.length === 0) {
+            this.loadedEverything = true;
+            this.isLoadingExternal = false;
+            return;
+        }
+
+        // Append the fetched items to the end of the currently open list
+        this.dropdownList.addItems(results);
+
+        // We're ready to load content again
+        this.isLoadingExternal = false;
     },
     
     /** @ignore */
     _showAutocompleter: function(results) {
-
         this.dropdownList.hide();
         
         if (this.options.multiple) {
@@ -613,7 +656,6 @@ var index = filters.getSelectedIndex();
             if (this.options.optionDisplayStrings[index]) { // Use alternate display names for autocomplete (if possible)
                 name = this.options.optionDisplayStrings[index];
             }
-
             if (name.toLowerCase().indexOf(searchFor.toLowerCase(), 0) >= 0 ) result.push(key);
 
         }.bind(this));

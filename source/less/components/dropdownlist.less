@@ -15,14 +15,13 @@
     left: 0;
     top: 0;
     max-height: 20rem;
+    overflow: auto;
+    border-bottom: @px solid @dropdown-border-color;
 }
 .dropdown-list  ul {
     margin: 0;
     padding: 0;
     font-size: @dropdown-text-size;
-    max-height: 20rem;
-    overflow: auto;
-    border-bottom: @px solid @dropdown-border-color;
     background-color: @dropdown-background-color;
 
     li {
@@ -73,6 +72,10 @@
             + li {
                 border-top: @px solid darken(@dropdown-active-background-color, 20%);                            
             }
+        }
+
+        &.loading-indicator {
+          text-align: center;
         }
 
         i {
