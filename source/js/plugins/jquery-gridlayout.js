@@ -87,7 +87,7 @@
 
         // sets up widget
         _create:function (options) {
-
+            
             this.options = $.extend({}, $.CUIGridLayout.settings, options);
 
             this.items = [];
@@ -98,10 +98,9 @@
 
             this.pendingImages = 0;
 
-            // load all elements
             this.update();
-            this.updateDimensions();
 
+            
             // bind resize method
             var self = this;
             $window.bind('smartresize.cui.gridlayout', function () {
@@ -112,8 +111,16 @@
         },
 
         _init:function (callback) {
+            this.updateDimensions();
             this.layout(callback);
 
+            // Give browser a chance to lay out elements and calculate layout a second time after
+            // all CSS is applied correctly by the browser. Without this second, timed calculation is sometimes wrong due
+            // to race conditions with the rendering engine of the browser.
+            setTimeout(function() {
+                this.updateDimensions();
+                this.layout(callback);
+            }.bind(this), 1); 
         },
 
         update:function () {
@@ -138,6 +145,7 @@
         },
 
         _imageLoaded: function() {
+
             if (--this.pendingImages == 0) {
 //                console.log("all images loaded");
                 // force relayout
@@ -150,8 +158,16 @@
             var self = this;
             this.items.every(function (i) {
                 var $el = i.$el;
+
                 i.w = $el.width();
                 i.h = $el.height();
+
+                // Hack: Recalculate element size if browser has wrong values. This sometimes occurs with loaded
+                // images when the elements are not yet displayed on screen.
+                if (i.$img.width() > i.w) {
+                    i.h = (i.h - i.$img.height()) + (i.$img.height() / i.$img.width() * i.w);
+                }
+
 
                 // check if card has an image and if it's loaded
                 if (i.$img) {
@@ -161,7 +177,9 @@
                         self.pendingImages++;
                         i.$img.on("load.cui.gridlayout", function() {
                             i.$img = null;
+                            i.w = $el.width(); // Set width AND height to ensure proper ratio
                             i.h = $el.height();
+                            
 //                            console.log("image loaded.", i);
                             self._imageLoaded();
                         })
@@ -213,11 +231,11 @@
             this.items.every(function (i) {
                 // determine height of card, based on the ratio
                 var height = (i.h / i.w) * cw;
-
+                
                 // find lowest column
                 var min = colHeights[0];
                 var best = 0;
-                for (var c = 0; c<colHeights.length; c++) {
+                for (var c = 0; c < colHeights.length; c++) {
                     var h = colHeights[c];
                     if (h < min) {
                         min = h;
