@@ -155,6 +155,22 @@ a.button {
     font-size: inherit;
   
     min-width: 0;
+
+    &.disabled,
+    &[disabled],
+    &.disabled:before,
+    &[disabled]:before, {
+      background-color: transparent;
+      opacity: 0.4;
+    }
+
+    .disabled:hover,
+    &[disabled]:hover {
+      background-color: transparent;
+      &:before {
+        color: @icon-color;
+      }
+    }
   
     &,
     &:hover,
@@ -170,6 +186,12 @@ a.button {
       font-weight: normal;
     
       filter: none;
+    }
+
+    &:hover {
+      &:before {
+        color: @icon-hover-color;
+      }
     }
   }
 }

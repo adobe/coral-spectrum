@@ -51,7 +51,8 @@ The top toolbar with action icons
         line-height: 46*@px;
     }
 
-    button:not([class^="icon-"]) {
+    a.button:not([class^="icon-"]):not([class*=" icon-"]),
+    button:not([class^="icon-"]):not([class*=" icon-"]) {
         margin: 7*@px 10*@px;
     }
 
