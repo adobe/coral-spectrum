@@ -3,10 +3,8 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="1152px" height="1152px" viewBox="0 0 1152 1152" enable-background="new 0 0 1152 1152" xml:space="preserve">
-<path enable-background="new    " d="M1104,240H48V71.955C48,71.955,47.909,48,71.955,48s982.135,0,1007.09,0
-	S1104,71.955,1104,71.955V240z"/>
-<rect x="48" y="336" enable-background="new    " width="1056" height="192"/>
-<rect x="48" y="624" enable-background="new    " width="1056" height="192"/>
-<path enable-background="new    " d="M1104,1080.045c0,0,1.996,23.955-23.002,23.955s-985.089,0-1009.043,0S48,1080.045,48,1080.045
-	V912h1056V1080.045z"/>
+<path enable-background="new    " d="M1008,696V192c0,0,0-48-48-48s-720,0-768,0s-48,48-48,48v504L0,936v48c0,0,0,24,24,24
+	s1080,0,1104,0s24-24,24-24v-48L1008,696z M732,912H420c-6.6,0-10.69-5.238-9.089-11.642l18.179-72.718
+	C430.69,821.238,437.4,816,444,816h264c6.6,0,13.31,5.238,14.91,11.642l18.18,72.718C742.69,906.762,738.6,912,732,912z M912,672
+	H240V240h672V672z"/>
 </svg>

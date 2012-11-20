@@ -3,10 +3,7 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="1152px" height="1152px" viewBox="0 0 1152 1152" enable-background="new 0 0 1152 1152" xml:space="preserve">
-<path enable-background="new    " d="M1104,240H48V71.955C48,71.955,47.909,48,71.955,48s982.135,0,1007.09,0
-	S1104,71.955,1104,71.955V240z"/>
-<rect x="48" y="336" enable-background="new    " width="1056" height="192"/>
-<rect x="48" y="624" enable-background="new    " width="1056" height="192"/>
-<path enable-background="new    " d="M1104,1080.045c0,0,1.996,23.955-23.002,23.955s-985.089,0-1009.043,0S48,1080.045,48,1080.045
-	V912h1056V1080.045z"/>
+<path d="M192,48v912c0,0,0,48-48,48s-48-48-48-48V144c0,0-96,0-96,108s0,708,0,708s0,144,144,144s636.005,1.346,816,0
+	c192-1.436,192-192,192-192V48H192z M336,432h192v288H336V432z M1008,912H336v-96h672V912z M1008,720H624v-96h384V720z M1008,528
+	H624v-96h384V528z M1008,336H336V192h672V336z"/>
 </svg>
