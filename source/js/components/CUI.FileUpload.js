@@ -97,7 +97,7 @@
             }
 
             if (this.options.autoStart) {
-                this._registerEventHandler("fileSelected", function(event) {
+                this._registerEventHandler("fileselected", function(event) {
                     event.fileUpload.uploadFile(event.item);
                 });
             }
@@ -125,6 +125,7 @@
 
         /** @ignore */
         _readDataFromMarkup: function() {
+            var self = this;
             if (this.$element.attr("placeholder")) {
                 this.options.placeholder = this.$element.attr("placeholder");
             }
@@ -144,7 +145,7 @@
                 this.options.sizeLimit = this.$element.attr("data-size-limit");
             }
             if (this.$element.attr("data-auto-start")) {
-                this.options.autoStart = this.$element.attr("data-auto-start") ? true : false;
+                this.options.autoStart = true;
             }
             if (this.$element.attr("data-file-parameter")) {
                 this.options.fileParameter = this.$element.attr("data-file-parameter");
@@ -152,6 +153,15 @@
             if (this.$element.attr("data-file-name-parameter")) {
                 this.options.fileNameParameter = this.$element.attr("data-file-name-parameter");
             }
+            $.each(this.$element.get(0).attributes, function(i, attribute) {
+                var match = /^data-event-(.*)$/.exec(attribute.name);
+                if (match && match.length > 1) {
+                    var eventHandler = CUI.util.buildFunction(attribute.value, ["event"]);
+                    if (eventHandler) {
+                        self.options.events[match[1]] = eventHandler.bind(self);
+                    }
+                }
+            });
         },
 
         /** @ignore */
@@ -183,21 +193,35 @@
 
             var fileName = file.name ? file.name : file;
             if (!self._getQueueItemByFileName(fileName)) {
-                // Add item to queue
                 var item = {
                     file: file,
                     fileName: fileName,
                     fileSize: file.size
                 };
+
+                // Check file size
+                if (self.options.sizeLimit && file.size > self.options.sizeLimit) {
+                    self.$element.trigger({
+                        type: "filerejected",
+                        item: item,
+                        message: "File is too big",
+                        fileUpload: self
+                    });
+                    return;
+                }
+
+                // Add item to queue
                 self.uploadQueue.push(item);
                 self.$element.trigger({
-                    type: "queueChanged",
+                    type: "queuechanged",
+                    item: item,
+                    operation: "ADD",
                     queueLength: self.uploadQueue.length,
                     fileUpload: self
                 });
 
                 self.$element.trigger({
-                    type: "fileSelected",
+                    type: "fileselected",
                     item: item,
                     fileUpload: self
                 });
@@ -263,9 +287,8 @@
 
         /** @ignore */
         _onUploadStart: function(e, item) {
-            console.log("STARTING UPLOAD OF ", item.fileName, e);
             this.$element.trigger({
-                type: "fileUploadStart",
+                type: "fileuploadstart",
                 item: item,
                 fileUpload: this
             });
@@ -274,9 +297,8 @@
         /** @ignore */
         _onUploadProgress: function(e, item) {
             // Update progress bar
-            console.log("PROGRESS OF ", item.fileName, ": ", e.loaded / e.total * 100);
             this.$element.trigger({
-                type: "fileUploadProgress",
+                type: "fileuploadprogress",
                 item: item,
                 fileUpload: this
             });
@@ -288,18 +310,16 @@
             if (request.readyState === 4) {
                 // Default action
                 if (CUI.util.HTTP.isOkStatus(request.status)) {
-                    console.log("UPLOAD OK ", item.fileName, ": ", e.loaded / e.total * 100);
                     this.$element.trigger({
-                        type: "fileUploadSuccess",
+                        type: "fileuploadsuccess",
                         item: item,
                         fileUpload: this
                     });
                 } else {
-                    console.log("UPLOAD ERROR ", item.fileName, ": ", request.responseText);
                     this.$element.trigger({
-                        type: "fileUploadError",
+                        type: "fileuploaderror",
                         item: item,
-                        errorMessage: request.responseText,
+                        message: request.responseText,
                         fileUpload: this
                     });
                 }
@@ -307,26 +327,19 @@
                 // Remove queue item
                 this.uploadQueue.splice(this._getQueueIndex(item.fileName), 1);
                 this.$element.trigger({
-                    type: "queueChanged",
+                    type: "queuechanged",
+                    item: item,
+                    operation: "REMOVE",
                     queueLength: this.uploadQueue.length,
                     fileUpload: this
                 });
-
-                // Check queue length
-                if (this.uploadQueue.length === 0) {
-                    this.$element.trigger({
-                        type: "queueProcessed",
-                        fileUpload: this
-                    });
-                }
             }
         },
 
         /** @ignore */
         _onUploadError: function(item, message) {
-            console.log("ERROR WHILE UPLOADING FILE ", item.fileName);
             this.$element.trigger({
-                type: "fileUploadError",
+                type: "fileuploaderror",
                 item: item,
                 errorMessage: message,
                 fileUpload: this
@@ -335,9 +348,8 @@
 
         /** @ignore */
         _onUploadCanceled: function(item) {
-            console.log("CANCELED UPLOAD OF ", item.fileName);
             this.$element.trigger({
-                type: "fileUploadCanceled",
+                type: "fileuploadcanceled",
                 item: item,
                 fileUpload: this
             });
