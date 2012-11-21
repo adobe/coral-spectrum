@@ -410,20 +410,37 @@
             padding: 2*@px 0 2*@px 0;
         }
 
+        [class^="icon-"],
+        [class*=" icon-"] {
+            &:before {
+                color: white !important; // bypass the hover color of the sourrounding "A"
+            }
+        }
+
     }
+
     .cardcontent {
         .cardpreview {
+            background-size: cover;
             background-color: #BBBBBB;
             margin: 0 4*@px 4*@px 0;
+            width: 48%;
             width: -webkit-calc(~"50% - 4px");
+            width: -moz-calc(~"50% - 4px");
+            width: -o-calc(~"50% - 4px");
+            width: calc(~"50% - 4px");
             float:left;
 
             &.wide {
+                width: 98%;
                 width: -webkit-calc(~"100% - 4px");
+                width: -moz-calc(~"100% - 4px");
+                width: -o-calc(~"100% - 4px");
+                width: calc(~"100% - 4px");
             }
-        }
-        img {
-//            width: 45%;
+            img {
+                max-width: 100%;
+            }
         }
     }
 }
