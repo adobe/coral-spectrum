@@ -459,6 +459,13 @@ module.exports = function(grunt) {
       }
     },
 
+    iconbrowser: {
+      all: {
+        src: '<%= dirs.source %>/images/icons/**/*',
+        dest: '<%= dirs.build %>/examples/assets/iconbrowser.json'
+      }
+    },
+
     // Watch operations
     watch: {
       copy_guide: {
@@ -541,6 +548,7 @@ module.exports = function(grunt) {
 
   // Almost full build, just the stuff needed for Granite install
   grunt.registerTask('mvn-build', 'clean lint copy:images copy:fonts copy:dependencies copy:less_bootstrap_tmp copy:less_bootstrap_build copy:less_cui font icons iconbrowser handlebars concat:cui less:cui');
+
 
   // Custom build for maven
   grunt.registerTask('mvn', 'mvn-build mvn-install');
