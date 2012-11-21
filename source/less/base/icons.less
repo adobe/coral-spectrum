@@ -187,16 +187,11 @@ span.button {
     &.disabled:before,
     &[disabled]:before {
       background-color: transparent;
-      color: @icon-color;
-      opacity: 0.15;
     }
 
     .disabled:hover,
     &[disabled]:hover {
       background-color: transparent;
-      &:before {
-        color: @icon-color;
-      }
     }
   
     &,
@@ -213,20 +208,6 @@ span.button {
       font-weight: normal;
     
       filter: none;
-    }
-
-    &:hover {
-      &:before {
-        color: @icon-color;
-        opacity: 0.80;
-      }
-    }
-
-    &.active {
-      &:before {
-        color: @icon-active-color;
-        opacity: 1;
-      }
     }
   }
 }

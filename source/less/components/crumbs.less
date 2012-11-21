@@ -5,7 +5,7 @@
 
 nav.crumbs {
   a {
-    padding: 0 10*@px;
+    padding: 0 15*@px;
 
     line-height: 2.75rem;
     height: 2.75rem;
@@ -22,12 +22,16 @@ nav.crumbs {
 
     .icon-chevronright;
 
-    &:before {
+    &:before,
+    &:hover:before {
       font-size: 1rem;
       position: absolute;
       left: -10*@px;
       padding-top: 2*@px;
+      opacity: 1;
+      color: #fff;
     }
+
    
     &:first-child {
       padding-left: 0;
