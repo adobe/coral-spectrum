@@ -22,6 +22,7 @@
          @constructs
 
          @param {Object}   options                                    Component options
+         @param {String}   [options.name="file"]                      (Optional) name for an underlying form field.
          @param {String}   [options.placeholder=null]                 Define a placeholder for the input field
          @param {String}   [options.uploadUrl=null]                   URL where to upload the file
          @param {boolean}  [options.disabled=false]                   Is this component disabled?
@@ -32,7 +33,6 @@
          @param {String}   [options.fileParameter=null]               Name of File's parameter
          @param {String}   [options.fileNameParameter=null]           Name of File name's parameter
          @param {Object}   [options.events={}]                        (Optional) Event handlers
-         @param {String}   [options.name=null]                        (Optional) name for an underlying form field.
          */
         construct: function(options) {
             // Adjust DOM to our needs
@@ -47,6 +47,7 @@
         },
 
         defaults: {
+            name: "file",
             placeholder: null,
             uploadUrl: null,
             disabled: false,
@@ -66,10 +67,9 @@
         _render: function() {
             this._readDataFromMarkup();
 
-            var span;
-            // if current element is input field -> wrap it into DIV
+            // If current element is input field -> wrap it into SPAN
             if (this.$element.get(0).tagName === "INPUT") {
-                span = $("<span></span>");
+                var span = $("<span></span>");
                 this.$element.after(span);
                 this.$element.detach();
                 span.prepend(this.$element);
@@ -116,6 +116,7 @@
                 this.$element
                     .prepend($("<input/>", {
                             type: "file",
+                            name: self.options.name,
                             multiple: self.options.multiple
                         }
                     )
@@ -126,6 +127,9 @@
         /** @ignore */
         _readDataFromMarkup: function() {
             var self = this;
+            if (this.$element.attr("name")) {
+                this.options.name = this.$element.attr("name");
+            }
             if (this.$element.attr("placeholder")) {
                 this.options.placeholder = this.$element.attr("placeholder");
             }
@@ -270,7 +274,7 @@
                 var f = new FormData();
                 if (self.options.fileParameter || self.options.fileNameParameter) {
                     // Custom file and file name parameter
-                    f.append(self.options.fileParameter || "file", file);
+                    f.append(self.options.fileParameter || self.options.name, file);
                     f.append(self.options.fileNameParameter || "fileName", fileName);
                 } else {
                     f.append(fileName, file);
