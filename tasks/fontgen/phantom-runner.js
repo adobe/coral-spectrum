@@ -82,6 +82,10 @@ for(var i = 0; i < curdir.length; i++)
             // Make zero unitless
             file = file.replace(zeroPXRE, '0');
 
+            // add mixin
+            cssOutput += '.' + classPrefix + className + '() {\n\t.icon();\n\t&' + psuedoSelector + ' { content: "\\f' + hex + '"; }\n}\n\n';
+
+            // add icon css
             cssOutput += '.' + classPrefix + className + psuedoSelector + ' { content: "\\f' + hex + '"; }\n';
 
         	// content to DOM Element

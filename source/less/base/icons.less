@@ -13,22 +13,28 @@
 @font-face {
   font-family: 'AdobeIcons';
   src: url(~"@{font-folder}/AdobeIcons.eot");
-  src: url(~"@{font-folder}/AdobeIcons.svg#AdobeIcons") format("svg"),
-    url(~"@{font-folder}/AdobeIcons.woff") format("woff"),
-    url(~"@{font-folder}/AdobeIcons.ttf") format("truetype");
+  src: url(~"@{font-folder}/AdobeIcons.woff") format("woff"),
+    url(~"@{font-folder}/AdobeIcons.ttf") format("truetype"),
+    url(~"@{font-folder}/AdobeIcons.svg#AdobeIcons") format("svg"),;
   font-weight: normal;
   font-style: normal;
 }
 
+.icon() {
+  &:before {
+    font-family: AdobeIcons;
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    text-decoration: none; // Don't let icons underline
+    text-rendering: optimizeLegibility;
+  }
+}
+
 // Apply the correct font
-[class^="icon-"]:before,
-[class*=" icon-"]:before {
-  font-family: AdobeIcons;
-  font-weight: normal;
-  font-style: normal;
-  display: inline-block;
-  text-decoration: none; // Don't let icons underline
-  text-rendering: optimizeLegibility;
+[class^="icon-"],
+[class*=" icon-"] {
+  .icon();
 }
 
 // Various mixins
