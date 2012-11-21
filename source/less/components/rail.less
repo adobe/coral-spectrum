@@ -17,16 +17,33 @@ div.rail {
     [class*=" icon-"] {
       &:before {
         color: @rail-icon-color;
+        opacity: 0.8;
       }
 
       &.active:before {
         color: @rail-icon-active-color;
+        opacity: 1;
       }
 
       &:hover:before {
-        color: @rail-icon-hover-color;
+        color: @rail-icon-color;
+        opacity: 1;
       }
 
+      &.disabled,
+      &[disabled] {
+        &:before {
+          color: @rail-icon-color;
+          opacity: 0.2; 
+        }
+
+        &:hover {
+          &:before {
+            color: @rail-icon-color;
+            opacity: 0.2; 
+          }
+        }
+      }
     }
 
     // make it scrollable

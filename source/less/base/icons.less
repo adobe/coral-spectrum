@@ -28,13 +28,46 @@
     display: inline-block;
     text-decoration: none; // Don't let icons underline
     text-rendering: optimizeLegibility;
-  }
-}
 
-// Apply the correct font
-[class^="icon-"],
-[class*=" icon-"] {
-  .icon();
+    color: @icon-color;
+    opacity: 0.65;
+
+    background-position: center center;
+    background-repeat: no-repeat;
+    content: " ";
+
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  &:hover {
+    &:before {
+      color: @icon-color;
+      opacity: 0.80;
+    }
+  }
+
+  &.active {
+    &:before {
+      color: @icon-active-color;
+      opacity: 1;
+    }
+  }
+
+  &.disabled,
+  &[disabled] {
+    &:before {
+      color: @icon-color;
+      opacity: 0.15;
+    }
+
+    &:hover {
+      &:before {
+        color: @icon-color;
+        opacity: 0.15;
+      }
+    }
+  }
 }
 
 // Various mixins
@@ -99,23 +132,7 @@
 
 [class^="icon-"],
 [class*=" icon-"] {
-  &:before {
-    font-family: AdobeIcons;
-    font-weight: normal;
-    font-style: normal;
-    display: inline-block;
-    text-decoration: inherit;
-    color: @icon-color;
-
-    text-decoration: none;
-
-    background-position: center center;
-    background-repeat: no-repeat;
-    content: " ";
-
-    vertical-align: middle;
-    text-align: center;
-  }
+  .icon();
 
   &.xsmall {
     .icon-xsmall;
@@ -143,14 +160,15 @@
   }
 }
 
-a:hover [class^="icon-"],
+/*a:hover [class^="icon-"],
 a:hover [class*=" icon-"],
 a[class^="icon-"]:hover,
 a[class*=" icon-"]:hover {
   &:before {
-    color: @icon-hover-color;
+    color: @icon-color;
+    opacity: 0.80;
   }
-}
+}*/
 
 button,
 a.button,
@@ -167,9 +185,10 @@ span.button {
     &.disabled,
     &[disabled],
     &.disabled:before,
-    &[disabled]:before, {
+    &[disabled]:before {
       background-color: transparent;
-      opacity: 0.4;
+      color: @icon-color;
+      opacity: 0.15;
     }
 
     .disabled:hover,
@@ -198,7 +217,15 @@ span.button {
 
     &:hover {
       &:before {
-        color: @icon-hover-color;
+        color: @icon-color;
+        opacity: 0.80;
+      }
+    }
+
+    &.active {
+      &:before {
+        color: @icon-active-color;
+        opacity: 1;
       }
     }
   }
