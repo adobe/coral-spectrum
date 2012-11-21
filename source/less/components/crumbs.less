@@ -5,7 +5,10 @@
 
 nav.crumbs {
   a {
-    padding: 0.25rem 0;
+    padding: 0 10*@px;
+
+    line-height: 2.75rem;
+    height: 2.75rem;
 
     letter-spacing: 0.8*@px;
     
@@ -15,27 +18,27 @@ nav.crumbs {
     text-decoration: none;
     font-family: AdobeClean;
 
-    // Add chevrons to crumbs
-    &:after {
-      display: inline-block;
-      margin: 0 0.25rem 0 0.5rem;
+    position: relative;
 
-      content: "\203a";
-      font-size: 2.5rem;
-      line-height: 0.4;
-      font-family: AdobeCleanLight;
-      color: @crumb-chevron-color;
+    .icon-chevronright;
+
+    &:before {
+      font-size: 1rem;
+      position: absolute;
+      left: -10*@px;
+      padding-top: 2*@px;
+    }
+   
+    &:first-child {
+      padding-left: 0;
+
+      &:before {
+        content: "";
+      }
     }
     
     img {
       height: 2rem;
-    }
-  }
-
-  // The last crumb should not have a chevron and should be bolder
-  a:last-child {    
-    &:after {
-      content: "";
     }
   }
 }
