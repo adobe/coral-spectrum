@@ -66,11 +66,11 @@
       this.$next = this.$nav.find('button').last();
       this.$pageOverview = this.$nav.find('ol').last();
 
-      if (this.$back.attr('type') == undefined) {
+      if (this.$back.attr('type') === undefined) {
           this.$back[0].setAttribute('type', 'button');
       }
 
-      if (this.$next.attr('type') == undefined) {
+      if (this.$next.attr('type') === undefined) {
           this.$next[0].setAttribute('type', 'button');
       }
 

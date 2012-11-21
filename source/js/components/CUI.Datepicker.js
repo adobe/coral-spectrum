@@ -49,7 +49,7 @@
         this._readDataFromMarkup();
 
         var $button = this.$element.find('>button');
-        if ($button.attr('type') == undefined) {
+        if ($button.attr('type') === undefined) {
             $button[0].setAttribute('type', 'button');
         }
 
