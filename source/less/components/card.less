@@ -3,9 +3,84 @@
   Displays assets in result set as a card 
 */
 
+// The shadow of cards
 .card-shadow() {
     .box-shadow(0 1.5*@px 1.5*@px rgba(0, 0, 0, 0.25));
 }
+
+// Style of strong text
+.card-strong-text() {
+    font-weight: bold;
+    color: @card-list-title-color;
+}
+
+// Sets the width with a calc() expression
+.card-calc-width(@expression, @fallback) {
+    width: @fallback;
+    width: -webkit-calc(@expression);
+    width: -moz-calc(@expression);
+    width: -o-calc(@expression);
+    width: calc(@expression);
+}
+
+// Cuts the text that are too long
+.card-nowrap-ellipsis() {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+// For list view: draws a box for additional info showed next to the title
+.card-list-box() {
+    .card-strong-text;
+    margin-top: -@px;
+    margin-bottom: -@px;
+    padding: 0 5*@px;
+    border: 1px solid @card-list-gray-border;
+    background: @card-list-gray-background;
+}
+
+// For list view: draws a yellow box
+.card-list-box(yellow) {
+    .card-list-box;
+    background: @card-list-yellow-background;
+    border-color: @card-list-yellow-border;
+}
+
+// For list view: prepends the title with a little stack to illustrate items that have sub-items (used only for WCM pages so far)
+.card-list-box-stack(@size: 28*@px) {
+    .box-stack {
+        position: absolute;
+        z-index: 2;
+        top: 11*@px;
+        left: 0;
+        width:  @size;
+        height: @size;
+        border: @px solid @card-list-stack-border;
+        background: @card-list-stack-background-main;
+    }
+    &.stack .box-stack {
+        &:before,
+        &:after {
+            content: " ";
+            position: absolute;
+            z-index: 1;
+            height: @px;
+            border: @px solid @card-list-stack-border;
+        }
+        &:before {
+            bottom: -3*@px;
+            left: @px;
+            width: @size - 4*@px;
+        }
+        &:after {
+            bottom: -5*@px;
+            left: 3*@px;
+            width: @size - 8*@px;
+        }
+    }
+}
+
 
 [class^="card-"],
 [class*=" card-"] {
@@ -13,65 +88,232 @@
     display: inline-block;
     font-size: 12*@px;
     line-height: 18*@px;
+        
+    > i {
+        display: none;
+    }
 
     > a {
         overflow: hidden; // for the link to contain everything
+        position: relative;
         display: block;
         text-decoration: none;
         color: @card-text-color;
 
-        [class^="icon-"]:before,
-        [class*=" icon-"]:before,
-        &:hover [class^="icon-"]:before,
-        &:hover [class*=" icon-"]:before {
-            color: @card-text-color;
+        // ommiting the direct child syntax on purpose for all rules that follow
+        h4,
+        p {
+            .card-nowrap-ellipsis;
+            margin: 0;
         }
-    }
-    h4,
-    p {
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-        margin: 10*@px;
-    }
-    h4 {
-        font-size: 12*@px;
-        color: @card-title-color;
-    }
-    p {
-        margin-top: 0;
-        &.description {
-            margin-top: -10*@px;
+        h4 {
+            font-size: inherit;
+            color: inherit;
         }
         i {
             .icon-xsmall;
         }
+        i:before,
+        &:hover i:before {
+            color: @card-text-color;
+        }
+        > .main {
+            position: relative;
+        }
     }
 
     .grid & {
-        width: 95%;
-        width: -webkit-calc();
-        width: -moz-calc(~"100% - "@card-grid-margin);
-        width: -o-calc(~"100% - "@card-grid-margin);
-        width: calc(~"100% - "@card-grid-margin);
+        .card-calc-width(~"100% - @{card-grid-margin}", 95%);
         margin: 0 0 @card-grid-margin 0;
         background: @card-background-color;
 
-        a {
-            position: relative;
+        > a {
             z-index: 1;
             .card-shadow;
-        }
-        img {
-            width: 100%;
+
+            > img {
+                width: 100%;
+            }
+
+            h4 { // ommiting the direct child syntax on purpose
+                .card-strong-text;
+                margin: 10*@px;
+            }
+            p { // ommiting the direct child syntax on purpose
+                margin: 0 10*@px 10*@px;
+            }
+            > .main > p {
+                margin-top: -10*@px;
+            }
         }
     }
 
     .list & {
         display: block;
+        border-bottom: 1*@px solid @card-list-separator-color;
+
+        > i { // The selection box and the move handle
+            display: block;
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            width: 45*@px;
+            height: 100%;
+
+            &.select {
+                left: 0;
+
+                &:before,
+                &:after {
+                    content: " ";
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    width: 15*@px;
+                    height: 15*@px;
+                    margin: -7.5*@px;
+                    .background-size(100%);
+                }
+                &:before {
+                    background: @card-list-checkbox-background;
+                    .box-shadow(inset 0 @px 2*@px rgba(0, 0, 0, 0.33));
+                }
+
+                & ~ a {
+                    padding-left: 45*@px;
+                }
+            }   
+            &.move {
+                .icon-medium;
+                opacity: 0.3;
+                right: 0;
+
+                &:before {
+                    display: block;
+                    margin: 16*@px auto;
+                }
+
+                & ~ a {
+                    padding-right: 45*@px;
+                }
+            }
+        }
         
-        img {
+        > a {
+            height: 50*@px;
+            padding: 0 45*@px;
+
+            i,
+            img { // ommiting the direct child syntax on purpose
+                display: none;
+            }
+
+            h4 { // ommiting the direct child syntax on purpose
+                .card-strong-text;
+            }
+
+            // list view columns can be made of the following elements
+            > div,
+            > h4,
+            > p {
+                float: left;
+                margin: 0;
+                padding: 16*@px 0;
+            }
+            > .main {
+                > h4 {
+                    float: left;
+                    margin-right: 10*@px;
+                }
+                > p {
+                    float: left;
+                    margin-right: 5*@px;
+                    font-size: 10*@px;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+
+    &.selected {
+        .list & {
+            > i.select {
+                &:before {
+                    .box-shadow(inset 0 @px 2*@px rgba(0, 0, 0, 0.5));
+                }
+                &:after {
+                    background-image: url("../images/components/checkbox/check.png");
+                }
+            }
+            a {
+                background: @card-list-selection-color;
+            }
+        }
+    }
+}
+
+/**
+    Class: .card-page
+    Displays a WCM page card.
+*/
+.card-page {
+    .grid & {
+        .info-approved,
+        .info-locked,
+        .user,
+        .links-number {
             display: none;
+        }
+        .published,
+        .modified {
+            float: left;
+            padding-right: 6*@px;
+        }
+        .links {
+            float: right;
+        }
+    }
+
+    .list &{ // don't add a space between the ampersand and the bracket or it breaks the card-list-box-stack mixin
+        .card-list-box-stack;
+
+        .main {
+            width: 65%;
+
+            > h4 {
+                margin-left: 36*@px;
+            }
+            >.info-locked {
+                .card-list-box();
+            }
+            >.info-approved {
+                .card-list-box(yellow);
+            }
+        }
+        .published,
+        .modified {
+            width: 15%;
+            padding: 7*@px 0;
+            > .date {
+                .card-strong-text;
+            }
+            > span {
+                display: block;
+            }
+        }
+        .links {
+            width: 5%;
+            padding: 25*@px 0 7*@px;
+        }
+    }
+
+    &.page-hidden,
+    &.page-redirect,
+    &.page-deactivated {
+        .list & a,
+        .grid & img {
+            opacity: 0.5;
         }
     }
 }
@@ -169,221 +411,6 @@
     Displays a DAM directory card.
 */
 .card-directory {
-    .empty {
-        display: inline-block;
-        vertical-align: middle;
-        width: 100%;
-        height: 150px;
-        background: @card-directory-empty-color;
-    }
-}
-
-/**
-    Class: .card-page
-    Displays a WCM page card.
-*/
-.card-page {
-    .grid & {
-        .info-approved,
-        .info-locked,
-        .user,
-        .links-number,
-        .select,
-        .move {
-            display: none;
-        }
-        .info-copy {
-            margin-top: -10*@px;
-        }
-        .published,
-        .modified {
-            float: left;
-            padding-right: 6*@px;
-        }
-        .links {
-            float: right;
-        }
-    }
-
-    .list & {
-        height: 50*@px;
-        border-bottom: 1*@px solid @card-list-separator-color;
-
-        > a {
-            height: 100%;
-            padding: 0 45*@px;
-
-            > .description {
-                position: relative;
-                height: 100%;
-
-                p {
-                    margin: 0;
-                }
-                h4,
-                .info-approved,
-                .info-locked,
-                .date {
-                    font-weight: bold;
-                    color: @card-list-title-color;
-                }
-
-                > .main {
-                    position: absolute;
-                    padding: 16*@px 0 16*@px 38*@px;
-                    left: 0;
-                    right: 36%;
-
-                    > h4 {
-                        float: left;
-                        max-width: 80%;
-                        margin: 0 5*@px 0 0;
-                    }
-                    > p {
-                        float: left;
-                        font-size: 10*@px;
-                        font-weight: bold;
-                        text-transform: uppercase;
-
-                        &.info-approved,
-                        &.info-locked {
-                            margin: -@px 5*@px -@px 0;
-                            padding: 0 5*@px;
-                            border: 1px solid @card-list-separator-color;
-                        }
-                        &.info-approved {
-                            background: @card-list-approved-background;
-                            border-color: @card-list-approved-border;
-                        }
-                        &.info-locked {
-                            background: @card-list-locked-background;
-                            border-color: @card-list-locked-border;
-                        }
-                    }
-                }
-
-                > .published,
-                > .modified {
-                    position: absolute;
-                    padding: 7*@px 0;
-                    > span {
-                        display: block;
-                    }
-                    > i {
-                        display: none;
-                    }
-                }
-                > .published {
-                    left: 65%;
-                    right: 20%;
-                }
-                > .modified {
-                    left: 81%;
-                    right: 4%;
-                }
-                > .links {
-                    position: absolute;
-                    padding: 25*@px 0 7*@px;
-                    left: 97%;
-                    right: 0;
-                    > i {
-                        display: none;
-                    }
-                }
-            }
-        }
-
-        > .select,
-        > .move {
-            position: absolute;
-            top: 0;
-            width: 45*@px;
-            height: 100%;
-        }
-        > .select {
-            overflow: hidden;
-            left: 0;
-            width: 45*@px;
-            height: 100%;
-            white-space: nowrap;
-            text-indent: 50*@px;
-
-            &:before,
-            &:after {
-                content: " ";
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                width: 15*@px;
-                height: 15*@px;
-                margin: -7.5*@px;
-            }
-            &:before {
-                background: #ebebeb;
-                .box-shadow(inset 0 @px 2*@px rgba(0, 0, 0, 0.33));
-            }
-        }
-        > .move {
-            .icon-medium;
-            opacity: 0.5;
-            right: 0;
-            &:before {
-                display: block;
-                margin: 13*@px auto;
-            }
-        }
-    }
-}
-.card-page.selected {
-    a {
-        background: #bbd2e5;
-    }
-    .select {
-        &:before {
-            .box-shadow(inset 0 @px 2*@px rgba(0, 0, 0, 0.5));
-        }
-        &:after {
-            background-image: url("../images/components/checkbox/check.png");
-            .background-size(100%);
-        }
-    }
-}
-.list .card-page {
-    &.stack .description:before,
-    &.stack .description:after,
-    .main:before {
-        content: " ";
-        position: absolute;
-        z-index: 3;
-        top: 11*@px;
-        left: 0;
-        width: 28*@px;
-        height: 28*@px;
-        border: 1px solid @card-list-stack-border;
-        background: @card-list-stack-background-main;
-    }
-    &.stack .description:after {
-        z-index: 2;
-        top: 13*@px;
-        left: @px;
-        width: 26*@px;
-        background: @card-list-stack-background-stack;
-    }
-    &.stack .description:before {
-        z-index: 1;
-        top: 15*@px;
-        left: 2*@px;
-        width: 24*@px;
-        background: @card-list-stack-background-stack;
-    }
-}
-.card-page.page-hidden,
-.card-page.page-redirect,
-.card-page.page-deactivated {
-    .list & a,
-    .grid & img {
-        opacity: 0.4;
-    }
 }
 
 /**
