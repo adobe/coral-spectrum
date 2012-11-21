@@ -162,15 +162,14 @@
                 i.w = $el.width();
                 i.h = $el.height();
 
-                // Hack: Recalculate element size if browser has wrong values. This sometimes occurs with loaded
-                // images when the elements are not yet displayed on screen.
-                if (i.$img.width() > i.w) {
-                    i.h = (i.h - i.$img.height()) + (i.$img.height() / i.$img.width() * i.w);
-                }
-
-
                 // check if card has an image and if it's loaded
                 if (i.$img) {
+                    // Hack: Recalculate element size if browser has wrong values. This sometimes occurs with loaded
+                    // images when the elements are not yet displayed on screen.
+                    if (i.$img.width() > i.w) {
+                        i.h = (i.h - i.$img.height()) + (i.$img.height() / i.$img.width() * i.w);
+                    }
+
                     if (i.$img.height() == 0) {
                         // just assume 1:1 for now
                         i.h += i.w;
