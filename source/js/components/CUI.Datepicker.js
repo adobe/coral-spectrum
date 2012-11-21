@@ -48,6 +48,11 @@
     construct: function(options) {
         this._readDataFromMarkup();
 
+        var $button = this.$element.find('>button');
+        if ($button.attr('type') == undefined) {
+            $button[0].setAttribute('type', 'button');
+        }
+
         this.options.monthNames = this.options.monthNames || CUI.Datepicker.monthNames;
         this.options.dayNames = this.options.dayNames || CUI.Datepicker.dayNames;
         this.options.format = this.options.format || CUI.Datepicker.format;

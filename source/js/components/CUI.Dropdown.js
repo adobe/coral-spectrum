@@ -54,6 +54,11 @@
     */
     construct: function(options) {
         
+        var $button = this.$element.find('>button');
+        if ($button.attr('type') == undefined) {
+            $button[0].setAttribute('type', 'button');
+        }
+
         this._render();
 
         // isMobile should be replace with a CUI.Util method
