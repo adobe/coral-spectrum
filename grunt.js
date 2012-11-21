@@ -219,7 +219,7 @@ module.exports = function(grunt) {
       },
       prettyify: {
         src: '<%= dirs.components %>/bootstrap/docs/assets/js/google-code-prettify/*',
-        dest: '<%= dirs.build %>/examples/assets/google-code-prettify/'
+        dest: '<%= dirs.build %>/js/google-code-prettify/'
       },
       tests: {
         src: '<%= dirs.source %>/test/**',
@@ -321,7 +321,7 @@ module.exports = function(grunt) {
         // exclude RTE for now ...
         '<%= dirs.source %>/js/*.js',
         '<%= dirs.source %>/js/components/*',
-        '<%= dirs.source %>/guide/examples/assets/guide.js'
+        '<%= dirs.source %>/guide/js/*'
       ]
     },
 
@@ -398,7 +398,7 @@ module.exports = function(grunt) {
           ]
         },
         files: {
-          '<%= dirs.build %>/examples/assets/guide.css': '<%= dirs.source %>/guide/examples/assets/guide.less'
+          '<%= dirs.build %>/css/guide.css': '<%= dirs.source %>/guide/less/guide.less'
         }
       },
       "wizard": {
@@ -409,7 +409,18 @@ module.exports = function(grunt) {
           ]
         },
         files: {
-          '<%= dirs.build %>/examples/assets/wizard.css': '<%= dirs.source %>/guide/examples/assets/wizard.less'
+          '<%= dirs.build %>/css/wizard.css': '<%= dirs.source %>/guide/less/wizard.less'
+        }
+      },
+      "aemwelcome": {
+        options: {
+          paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
+            dirs.source+'/less/', // must hardcode paths here, grunt-contrib-less doesn't support template tags
+            dirs.temp+'/less/' // must hardcode paths here, grunt-contrib-less doesn't support template tags
+          ]
+        },
+        files: {
+          '<%= dirs.build %>/css/aem-welcome.css': '<%= dirs.source %>/guide/less/aem-welcome.less'
         }
       }
     },
@@ -477,8 +488,16 @@ module.exports = function(grunt) {
       },
 
       compile_guide_less: {
-        files: '<%= dirs.source %>/guide/examples/assets/guide.less',
+        files: '<%= dirs.source %>/guide/less/guide.less',
         tasks: 'less:guide'
+      },
+      compile_wizard_less: {
+        files: '<%= dirs.source %>/guide/less/wizard.less',
+        tasks: 'less:wizard'
+      },
+      compile_aemwelcome_less: {
+        files: '<%= dirs.source %>/guide/less/aem-welcome.less',
+        tasks: 'less:aemwelcome'
       },
 
       compile_handlebars: {

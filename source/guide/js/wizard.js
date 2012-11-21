@@ -7,7 +7,7 @@ $(document).ready(function(){
   var wizard = new CUI.Wizard({ 
     element: '.wizard' ,
     onPageChanged: {
-      'properties': validateProperties,
+      //'properties': validateProperties,
       'select-source': function() {
         if (!sourceGridRendered) {
             new $.CUIGridLayout({}, $('.select-source .grid'));
@@ -34,10 +34,10 @@ $(document).ready(function(){
       }
     },
     onFinish: function() {
-        alert('Page created!');
+        window.alert('Page created!');
     },
     onLeaving: function() {
-        alert('Want to leave the wizard?');
+        window.alert('Want to leave the wizard?');
     },
     onNextButtonClick: function() {
       console.log('Click on next button');
@@ -48,7 +48,7 @@ $(document).ready(function(){
   });
 
   var validateProperties = function(){
-    if ($('input[name="title"]').val() != '') {
+    if ($('input[name="title"]').val() !== '') {
       wizard.setNextButtonDisabled(false);
     } else {
       wizard.setNextButtonDisabled(true);

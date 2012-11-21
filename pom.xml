@@ -197,11 +197,11 @@
                             <value>"../../coralui.js"</value>
                         </replacement>
                         <replacement>
-                            <token>"examples/assets/guide.js"</token>
+                            <token>"js/guide.js"</token>
                             <value>"../guide.js"</value>
                         </replacement>
                         <replacement>
-                            <token>"examples/assets/guide.css"</token>
+                            <token>"css/guide.css"</token>
                             <value>"../guide.css"</value>
                         </replacement>
                         <replacement>

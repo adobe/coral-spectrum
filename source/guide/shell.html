@@ -1,40 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
   <title>CoralUI Shell</title>
-
-  <meta charset="utf-8"/>
 
   <link rel="stylesheet" href="css/cui.css">
 
-  <!-- Dependencies -->
   <script src="js/libs/handlebars.js"></script>
   <script src="js/libs/jquery.js"></script>
   <script src="js/libs/jquery-fingerpointer.js"></script>
   <script src="js/libs/toe.js"></script>
-
-  <!-- CoralUI -->
+  
   <script src="js/CUI.js"></script>
 
-  <!-- Guide JS -->
-  <script src="examples/assets/guide.js"></script>
-  <script src="examples/assets/google-code-prettify/prettify.js"></script>
-
   <script src="js/libs/jquery-gridlayout.js"></script>
-  <script>
-    jQuery(function($){
-      var $grid = $(".grid");
-      $grid.cuigridlayout();
-
-      $("#main-rail").on("open close", function() {
-        $grid.cuigridlayout("layout");
-      });
-
-      $('.tagpicker').filters({
-        multiple: true
-      });
-    });
-  </script>
+  <script src="js/shell.js"></script>
 </head>
 <body class="desktop">
 
@@ -274,7 +254,7 @@
         <div class="grid-0">
           <article class="card-page">
             <a href="#">
-              <img src="examples/assets/preview1.png" alt=""/>
+              <img src="images/previews/preview1.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page. very long type. very long type. very long type. very long type. very long type.</h4>
@@ -292,7 +272,7 @@
           </article>
           <article class="card-page page-hidden selected">
             <a href="#">
-              <img src="examples/assets/preview5.png" alt=""/>
+              <img src="images/previews/preview5.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -310,7 +290,7 @@
           </article>
           <article class="card-page page-redirect">
             <a href="#">
-              <img src="examples/assets/preview3.png" alt=""/>
+              <img src="images/previews/preview3.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -328,7 +308,7 @@
           </article>
           <article class="card-page page-deactivated">
             <a href="#">
-              <img src="examples/assets/preview8.png" alt=""/>
+              <img src="images/previews/preview8.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -346,7 +326,7 @@
           </article>
           <article class="card-page stack">
             <a href="#">
-              <img src="examples/assets/preview3.png" alt=""/>
+              <img src="images/previews/preview3.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -364,7 +344,7 @@
           </article>
           <article class="card-page selected">
             <a href="#">
-              <img src="examples/assets/preview2.png" alt=""/>
+              <img src="images/previews/preview2.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -382,7 +362,7 @@
           </article>
           <article class="card-page stack">
             <a href="#">
-              <img src="examples/assets/preview1.png" alt=""/>
+              <img src="images/previews/preview1.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -400,7 +380,7 @@
           </article>
           <article class="card-page">
             <a href="#">
-              <img src="examples/assets/preview7.png" alt=""/>
+              <img src="images/previews/preview7.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -418,7 +398,7 @@
           </article>
           <article class="card-page">
             <a href="#">
-              <img src="examples/assets/preview6.png" alt=""/>
+              <img src="images/previews/preview6.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -436,7 +416,7 @@
           </article>
           <article class="card-page">
             <a href="#">
-              <img src="examples/assets/preview9.png" alt=""/>
+              <img src="images/previews/preview9.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -454,7 +434,7 @@
           </article>
           <article class="card-page">
             <a href="#">
-              <img src="examples/assets/preview5.png" alt=""/>
+              <img src="images/previews/preview5.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -472,7 +452,7 @@
           </article>
           <article class="card-page">
             <a href="#">
-              <img src="examples/assets/preview4.png" alt=""/>
+              <img src="images/previews/preview4.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -490,7 +470,7 @@
           </article>
           <article class="card-page">
             <a href="#">
-              <img src="examples/assets/preview2.png" alt=""/>
+              <img src="images/previews/preview2.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -508,7 +488,7 @@
           </article>
           <article class="card-page">
             <a href="#">
-              <img src="examples/assets/preview8.png" alt=""/>
+              <img src="images/previews/preview8.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -526,7 +506,7 @@
           </article>
           <article class="card-page">
             <a href="#">
-              <img src="examples/assets/preview3.png" alt=""/>
+              <img src="images/previews/preview3.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -544,7 +524,7 @@
           </article>
           <article class="card-page">
             <a href="#">
-              <img src="examples/assets/preview7.png" alt=""/>
+              <img src="images/previews/preview7.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -562,7 +542,7 @@
           </article>
           <article class="card-page">
             <a href="#">
-              <img src="examples/assets/preview1.png" alt=""/>
+              <img src="images/previews/preview1.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page. very long type. very long type. very long type. very long type. very long type.</h4>
@@ -580,7 +560,7 @@
           </article>
           <article class="card-page page-hidden">
             <a href="#">
-              <img src="examples/assets/preview5.png" alt=""/>
+              <img src="images/previews/preview5.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -598,7 +578,7 @@
           </article>
           <article class="card-page page-redirect">
             <a href="#">
-              <img src="examples/assets/preview3.png" alt=""/>
+              <img src="images/previews/preview3.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -616,7 +596,7 @@
           </article>
           <article class="card-page page-deactivated">
             <a href="#">
-              <img src="examples/assets/preview8.png" alt=""/>
+              <img src="images/previews/preview8.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -634,7 +614,7 @@
           </article>
           <article class="card-page stack">
             <a href="#">
-              <img src="examples/assets/preview3.png" alt=""/>
+              <img src="images/previews/preview3.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -652,7 +632,7 @@
           </article>
           <article class="card-page">
             <a href="#">
-              <img src="examples/assets/preview2.png" alt=""/>
+              <img src="images/previews/preview2.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -670,7 +650,7 @@
           </article>
           <article class="card-page stack">
             <a href="#">
-              <img src="examples/assets/preview1.png" alt=""/>
+              <img src="images/previews/preview1.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -688,7 +668,7 @@
           </article>
           <article class="card-page">
             <a href="#">
-              <img src="examples/assets/preview7.png" alt=""/>
+              <img src="images/previews/preview7.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -706,7 +686,7 @@
           </article>
           <article class="card-page">
             <a href="#">
-              <img src="examples/assets/preview6.png" alt=""/>
+              <img src="images/previews/preview6.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -724,7 +704,7 @@
           </article>
           <article class="card-page">
             <a href="#">
-              <img src="examples/assets/preview9.png" alt=""/>
+              <img src="images/previews/preview9.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -742,7 +722,7 @@
           </article>
           <article class="card-page">
             <a href="#">
-              <img src="examples/assets/preview5.png" alt=""/>
+              <img src="images/previews/preview5.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -760,7 +740,7 @@
           </article>
           <article class="card-page">
             <a href="#">
-              <img src="examples/assets/preview4.png" alt=""/>
+              <img src="images/previews/preview4.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -778,7 +758,7 @@
           </article>
           <article class="card-page">
             <a href="#">
-              <img src="examples/assets/preview2.png" alt=""/>
+              <img src="images/previews/preview2.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -796,7 +776,7 @@
           </article>
           <article class="card-page">
             <a href="#">
-              <img src="examples/assets/preview8.png" alt=""/>
+              <img src="images/previews/preview8.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -814,7 +794,7 @@
           </article>
           <article class="card-page">
             <a href="#">
-              <img src="examples/assets/preview3.png" alt=""/>
+              <img src="images/previews/preview3.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
@@ -832,7 +812,7 @@
           </article>
           <article class="card-page">
             <a href="#">
-              <img src="examples/assets/preview7.png" alt=""/>
+              <img src="images/previews/preview7.png" alt="">
               <div class="description">
                 <div class="main">
                   <h4>Page Title</h4>
