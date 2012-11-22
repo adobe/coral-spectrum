@@ -294,6 +294,7 @@
             this.$element.trigger({
                 type: "fileuploadstart",
                 item: item,
+                originalEvent: e,
                 fileUpload: this
             });
         },
@@ -304,6 +305,7 @@
             this.$element.trigger({
                 type: "fileuploadprogress",
                 item: item,
+                originalEvent: e,
                 fileUpload: this
             });
         },
@@ -317,12 +319,14 @@
                     this.$element.trigger({
                         type: "fileuploadsuccess",
                         item: item,
+                        originalEvent: e,
                         fileUpload: this
                     });
                 } else {
                     this.$element.trigger({
                         type: "fileuploaderror",
                         item: item,
+                        originalEvent: e,
                         message: request.responseText,
                         fileUpload: this
                     });
@@ -341,20 +345,21 @@
         },
 
         /** @ignore */
-        _onUploadError: function(item, message) {
+        _onUploadError: function(e, item) {
             this.$element.trigger({
                 type: "fileuploaderror",
                 item: item,
-                errorMessage: message,
+                originalEvent: e,
                 fileUpload: this
             });
         },
 
         /** @ignore */
-        _onUploadCanceled: function(item) {
+        _onUploadCanceled: function(e, item) {
             this.$element.trigger({
                 type: "fileuploadcanceled",
                 item: item,
+                originalEvent: e,
                 fileUpload: this
             });
         }
