@@ -53,11 +53,6 @@
       
     */
     construct: function(options) {
-        
-        var $button = this.$element.find('>button');
-        if ($button.length > 0 && $button.attr('type') === undefined) {
-            $button[0].setAttribute('type', 'button');
-        }
 
         this._render();
 
@@ -67,6 +62,11 @@
             this._initForMobile();
         } else {
             this._initForDesktop();
+        }
+        
+        var $button = this.$element.find('>div>button');
+        if ($button.length > 0 && $button.attr('type') === undefined) {
+            $button[0].setAttribute('type', 'button');
         }
 
     },
