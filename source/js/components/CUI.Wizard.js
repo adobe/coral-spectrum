@@ -55,8 +55,8 @@
      * @param {Object} options Component options
      * @param {Mixed} options.element jQuery selector or DOM element to use for panel
      * @param {Function|Object} options.onPageChanged Callback called each time the page change (with arguments: `page`). An Collection of functions can be given. When a page is displayed if his data-wizard-page-callback attribute can be found in the collection, then the corresponding callback will be executed (examples is given in guide/wizard.html).
-     * @param {Function} options.onFinish Callback called after the last page change (without arguments).
-     * @param {Function} options.onLeaving Callback called if user click on back button on the first change (without arguments).
+     * @param {Function} options.onFinish Callback called when the user is on the last page and clicks on the `next button` (without arguments)
+     * @param {Function} options.onLeaving Callback called when the user is on the first page and clicks on the `back button` (without arguments)
      * @param {Function} options.onNextButtonClick Callback called after the last page change (without arguments).
      * @param {Function} options.onBackButtonClick Callback called after the last page change (without arguments).
      */
