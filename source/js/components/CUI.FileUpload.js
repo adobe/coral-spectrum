@@ -185,10 +185,22 @@
 
         /** @ignore */
         _onFileSelectionChange: function(event) {
+            var addedCount = 0, rejectedCount = 0;
             var files = event.target.files;
             for (var i = 0; i < files.length; i++) {
-                this._addFile(files[i]);
+                if (this._addFile(files[i])) {
+                    addedCount++;
+                } else {
+                    rejectedCount++;
+                }
             }
+
+            this.$element.trigger({
+                type: "filelistprocessed",
+                addedCount: addedCount,
+                rejectedCount: rejectedCount,
+                fileUpload: this
+            });
         },
 
         /** @ignore */
@@ -211,7 +223,7 @@
                         message: "File is too big",
                         fileUpload: self
                     });
-                    return;
+                    return false;
                 }
 
                 // Add item to queue
@@ -229,6 +241,8 @@
                     item: item,
                     fileUpload: self
                 });
+
+                return true;
             }
         },
 
