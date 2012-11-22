@@ -15,6 +15,9 @@
 
   <script src="js/libs/jquery-gridlayout.js"></script>
   <script src="js/shell.js"></script>
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width = device-width, initial-scale = 1, user-scalable = no">
 </head>
 <body class="desktop">
 
@@ -229,7 +232,7 @@
           <a href="#" class="icon-navigation" id="close-rail"><span>Add</span></a>
           <span class="divider"></span>
           <a href="#" class="icon-check"><span></span></a>
-          <a href="#" class="icon-upload"><span>Upload</span></a>
+          <a href="#" class="icon-site"><span>Upload</span></a>
           <a href="#" class="icon-addcollection"><span>Add Collection</span></a>
         </div>
         <div class="center">
@@ -241,7 +244,7 @@
       </nav>
 
       <div class="grid content-container">
-        <header class="card-page">
+        <header class="card-page selectable moveable">
           <i class="select"></i>
           <div class="main">Title</div>
           <div class="published">Published</div>
@@ -254,18 +257,97 @@
             <i class="move icon-navigation"></i>
             <a href="#">
               <img src="images/previews/preview1.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page. very long type. very long type. very long type. very long type. very long type.</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+              <div class="label">
+                <div class="main">
+                  <span class="box-stack"></span>
+                  <h4>Page Title</h4>
+                  <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                  <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                  <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                </div>
+                <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
           </article>
+          <header class="card-asset selectable moveable">
+            <i class="select"></i>
+            <div class="main">Title</div>
+            <div class="type"></div>
+            <div class="resolution">Resolution</div>
+            <div class="size">Size</div>
+            <div class="links"><i class="icon-arrowright"><span>Links</span></i></div>
+            <div class="comments"><i class="icon-comment"><span>Comments</span></i></div>
+          </header>
+          <article class="card-asset">
+            <i class="select"></i>
+            <i class="move icon-navigation"></i>
+            <a href="#">
+              <img src="images/previews/preview1.png" alt="">
+              <div class="label">
+                <div class="main">
+                  <img src="images/previews/preview-small.png" alt="">
+                  <h4>Asset Name</h4>
+                </div>
+                <p class="type">PSD</p>
+                <p class="resolution">1220 x 400</p>
+                <p class="size">149KB</p>
+                <p class="links"><i class="icon-link"><span>Links</span></i> 8</p>
+                <p class="comments"><i class="icon-comment"><span>Comments</span></i> 12</p>
+              </div>
+            </a>
+          </article>
+          <article class="card-directory">
+            <i class="select"></i>
+            <i class="move icon-navigation"></i>
+            <a href="#">
+              <img src="images/previews/preview7.png" alt="">
+              <div class="label">
+                <div class="main">
+                  <img src="images/previews/preview-small.png" alt="">
+                  <h4>Directory Name</h4>
+                </div>
+              </div>
+            </a>
+          </article>
+          <article class="card-collection stack">
+            <i class="select"></i>
+            <i class="move icon-navigation"></i>
+            <a href="#">
+              <img src="images/previews/preview1.png" alt="">
+              <div class="label">
+                <h4>Collection Name</h4>
+                <p class="links"><i class="icon-link"><span>Links</span></i> 8</p>
+                <p class="comments"><i class="icon-comment"><span>Comments</span></i> 12</p>
+              </div>
+            </a>
+          </article>
+          <article class="card-collection stack welcome">
+            <i class="select"></i>
+            <i class="move icon-navigation"></i>
+            <a href="#">
+              <img src="images/previews/preview1.png" alt="">
+              <div class="label">
+                <h4>Collection Name</h4>
+                <p>Collection</p>
+              </div>
+            </a>
+          </article>
+          <article class="card-project stack">
+            <i class="select"></i>
+            <i class="move icon-navigation"></i>
+            <a href="#">
+              <img src="images/previews/preview1.png" alt="">
+              <div class="label">
+                <h4>Project Name</h4>
+                <p>Project</p>
+              </div>
+            </a>
+          </article>
+
+
+
           <article class="card-page page-hidden selected">
             <i class="select"></i>
             <i class="move icon-navigation"></i>
@@ -273,26 +355,9 @@
               <img src="images/previews/preview5.png" alt="">
               <div class="main">
                 <span class="box-stack"></span>
-                <h4>Page Title</h4>
+                <h4>Very Long Page Title. very long type. very long type. very long type. very long type.</h4>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page page-redirect">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview3.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -309,7 +374,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -326,7 +391,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -343,7 +408,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -360,7 +425,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -377,7 +442,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -394,7 +459,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -411,7 +476,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -428,7 +493,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -445,7 +510,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -462,7 +527,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -479,7 +544,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -496,7 +561,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -513,7 +578,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -530,7 +595,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -547,7 +612,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -564,7 +629,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -581,7 +646,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -598,7 +663,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -615,7 +680,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -632,7 +697,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -649,7 +714,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -666,7 +731,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -683,7 +748,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -700,7 +765,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -717,7 +782,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -734,7 +799,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -751,7 +816,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -768,7 +833,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
@@ -785,7 +850,7 @@
                 <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                 <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
               </div>
-              <p class="published"><i class="icon-upload"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
               <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
               <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
             </a>
