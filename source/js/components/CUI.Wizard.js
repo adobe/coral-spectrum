@@ -66,6 +66,10 @@
       this.$next = this.$nav.find('button').last();
       this.$pageOverview = this.$nav.find('ol').last();
 
+      if (this.$element.data("hide-steps") === true) {
+        this.$pageOverview.addClass("hidden");
+      }
+
       if (this.$back.attr('type') === undefined) {
           this.$back[0].setAttribute('type', 'button');
       }
