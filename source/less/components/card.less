@@ -123,13 +123,13 @@
 
         > a {
             z-index: 1;
+            float: left;
             .card-shadow;
 
             > img {
                 width: 100%;
             }
 
-            &,
             > .label {
                 display: inline-block;
                 width: 100%;
@@ -317,8 +317,9 @@
         top: 50%;
         left:  -@card-banner-offset;
         right: -@card-banner-offset;
+        margin: -@px;
         padding: 0 @card-banner-offset;
-        border: 1px solid @card-banner-border-color-white;
+        border: @px solid @card-banner-border-color-white;
         background-color: @card-background-color;
         .box-shadow(0 8*@px 8*@px -5*@px rgba(0, 0, 0, 0.3));
 
@@ -507,29 +508,41 @@
             p.size {
                 margin-top: -10*@px;
             }
+            .user,
+            .type {
+                display: none;
+            }
             .resolution,
             .size,
             .links,
             .comments {
                 float: left;
             }
-            .type {
-                display: none;
-            }
-            .links {
+            .modified {
                 clear: left;
+                float: right;
             }
         }
     }
     // List view specific styling
     .list &{ // don't add a space between the ampersand and the bracket or it breaks the card-list-box-stack mixin
         .main {
-            width: 60%;
+            width: 50%;
         }
         .type,
         .resolution,
-        .size {
+        .size,
+        .modified {
             width: 10%;
+        }
+        .modified {
+            margin-top: 7*@px;
+            > .date {
+                .card-strong-text;
+            }
+            > span {
+                display: block;
+            }
         }
         .links,
         .comments {
