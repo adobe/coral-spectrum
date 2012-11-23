@@ -81,7 +81,7 @@ module.exports = function(grunt) {
         args: [
           '-script',
           __dirname+'/fontgen/convert.pe', 
-          options.dest_font + options.dest_font_name
+          options.dest_font + options.dest_font_name + '.svg'
         ]
       },
       function(err, result, code) {
