@@ -444,8 +444,8 @@ module.exports = function(grunt) {
     font: {
       options: {
         src: '<%= dirs.source %>/images/icons/',
-        dest_css: '<%= dirs.build %>/less/base/',
-        dest_font: '<%= dirs.build %>/fonts/',
+        dest_css: '<%= dirs.source %>/less/base/',
+        dest_font: '<%= dirs.source %>/fonts/',
         dest_css_name: 'icons_mono.less',
         dest_font_name: 'AdobeIcons',
         prefix: 'icon-'
@@ -533,13 +533,13 @@ module.exports = function(grunt) {
   });
 
   // Partial build for development
-  grunt.registerTask('partial', 'lint copy handlebars font icons concat:cui min:cui less mincss mocha');
+  grunt.registerTask('partial', 'lint font copy handlebars icons concat:cui min:cui less mincss mocha');
 
   // Build and copy RTE
   grunt.registerTask("rte", 'subgrunt:rte copy:rte');
 
   // Full build with docs and compressed file
-  grunt.registerTask('full-build', 'lint rte copy font icons handlebars concat:cui concat:cui_rte min less mincss mocha jsdoc');
+  grunt.registerTask('full-build', 'lint rte font copy icons handlebars concat:cui concat:cui_rte min less mincss mocha jsdoc');
 
   // Full build with docs and compressed file
   grunt.registerTask('full', 'clean full-build');

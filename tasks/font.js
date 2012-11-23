@@ -17,6 +17,33 @@ module.exports = function(grunt) {
 
   grunt.registerHelper('font-build', function(options) {
 
+    return grunt.utils.spawn( // test if fontforge is installed
+      {
+        cmd: 'fontforge',
+        args: [
+          '-c', 
+          ' '
+        ]
+      },
+      function(err, result, code) {
+        var success = (code == 0);
+      
+        if (success) {
+          grunt.log.write(result.stdout);
+          grunt.helper('font-svg', options);
+        }
+        else {
+          grunt.log.write('REMARK: fontforge could not be found, reuse fonts from repository.');
+        }
+
+        grunt.log.writeln();
+
+      }
+    );
+  });
+
+  grunt.registerHelper('font-svg', function(options) {
+
     return grunt.utils.spawn(
       {
         cmd: 'phantomjs',
@@ -35,6 +62,33 @@ module.exports = function(grunt) {
       
         if (success) {
           grunt.log.write(result.stdout);
+          // execute conversion after the SVG font is generated
+          grunt.helper('font-convert', options);
+        }
+        else {
+          grunt.log.error(err.stderr);
+        }
+
+        grunt.log.writeln();
+      }
+    );
+  });
+
+  grunt.registerHelper('font-convert', function(options) {
+    return grunt.utils.spawn(
+      {
+        cmd: 'fontforge',
+        args: [
+          '-script',
+          __dirname+'/fontgen/convert.pe', 
+          options.dest_font + options.dest_font_name
+        ]
+      },
+      function(err, result, code) {
+        var success = (code == 0);
+      
+        if (success) {
+          grunt.log.write(result.stdout);
         }
         else {
           grunt.log.error(err.stderr);
@@ -42,8 +96,7 @@ module.exports = function(grunt) {
         
         grunt.log.writeln();
         options.done(success);
-      }
-    );
+      });
   });
 
 };
