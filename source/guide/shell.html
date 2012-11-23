@@ -1,918 +1,915 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>CoralUI Shell</title>
+    <meta charset="utf-8">
+    <title>CoralUI Shell</title>
 
-  <link rel="stylesheet" href="css/cui.css">
+    <link rel="stylesheet" href="css/cui.css">
 
-  <script src="js/libs/handlebars.js"></script>
-  <script src="js/libs/jquery.js"></script>
-  <script src="js/libs/jquery-fingerpointer.js"></script>
-  <script src="js/libs/toe.js"></script>
-  
-  <script src="js/CUI.js"></script>
+    <script src="js/libs/handlebars.js"></script>
+    <script src="js/libs/jquery.js"></script>
+    <script src="js/libs/jquery-fingerpointer.js"></script>
+    <script src="js/libs/toe.js"></script>
+    
+    <script src="js/CUI.js"></script>
 
-  <script src="js/libs/jquery-gridlayout.js"></script>
-  <script src="js/shell.js"></script>
+    <script src="js/libs/jquery-gridlayout.js"></script>
+    <script src="js/shell.js"></script>
 
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="viewport" content="width = device-width, initial-scale = 1, user-scalable = no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width = device-width, initial-scale = 1, user-scalable = no">
 </head>
+
 <body class="desktop">
 
-  <header class="top">
+    <header class="top">
+        <div class="logo"><i class="icon-marketingcloud medium"><span>Coral UI</span></i></div>
+        <nav class="crumbs">
+            <a href="#">Marketing Cloud</a>
+            <a href="#" class="selected">Websites</a>
+        </nav>
+        <div class="drawer">
+            <div class="badge">10</div>
+            <a class="icon-user white" href="#user_dialog" data-toggle="modal"><span>User</span></a>
+        </div>
+    </header>
 
-    <div class="logo"><i class="icon-marketingcloud medium"><span>Coral UI</span></i></div>
+    <div class="page" role="main">
 
-    <nav class="crumbs">
-      <a href="#">Marketing Cloud</a>
-      <a href="#" class="selected">Websites</a>
-    </nav>
+        <div id="main-rail" class="rail left">
+            <div class="wrap">
 
-    <div class="drawer">
-      <div class="badge">10</div>
-      <a class="icon-user white" href="#user_dialog" data-toggle="modal"><span>User</span></a>
-    </div>
+                <div class="rail-switch">
+                    <nav class="toolbar icongroup">
+                        <a href="#" data-view="feature"><i class="icon-viewlist"><span>Navigation</span></i></a>
+                        <a href="#" data-view="filter" class="active"><i class="icon-filter"><span>Filter</span></i></a>
+                        <a href="#" data-view="activity"><i class="icon-clock"><span>Timeline</span></i></a>
+                    </nav>
+                    <div class="tagpicker-wrap">
+                        <div class="tagpicker">
+                            <input type="text" placeholder="Enter Keyword(s)" autocomplete="off" name="q">
+                            <select>
+                                <option value="you">You</option>
+                                <option value="cant">can't</option>
+                                <option value="touch">touch</option>
+                                <option value="this">this</option>
+                                <option value="nanananana">Batman?</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
-  </header>
+                <div class="rail-view" data-view="feature">
+                    <nav class="feature">
+                        <a href="#">Files</a>
+                        <a href="#" class="active">Collections</a>
+                        <a href="#">Users</a>
+                        <a href="#">Tools</a>
+                        <a href="#">Settings</a>
+                    </nav>
+                </div>
+                
+                <div class="rail-view active group" data-view="filter">
+                    <section class="foldable open">
+                        <span class="heading">Accordion open</span>
+                        <ul class="notype checklist fold">
+                            <li>
+                                <label>
+                                    <input type="checkbox" checked="" value="1" name="c1"><span>All Assets<b>92</b></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" checked="" value="1" name="c1"><span>Current Directory<b>38</b></span>
+                                </label>
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="foldable open">
+                        <span class="heading">Accordion open</span>
+                        <ul class="notype checklist fold">
+                            <li>
+                                <label>
+                                    <input type="checkbox" checked="" value="1" name="c1"><span>Active<b>15</b></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" checked="" value="1" name="c1"><span>Review<b>11</b></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" checked="" value="1" name="c1"><span>Pending Review<b>8</b></span>
+                                </label>
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="foldable">
+                        <span class="heading">Accordion open</span>
+                        <ul class="notype checklist fold">
+                            <li>
+                                <label>
+                                    <input type="checkbox" checked="" value="1" name="c1"><span>Image<b>82</b></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" checked="" value="1" name="c1"><span>Movie<b>32</b></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" checked="" value="1" name="c1"><span>Document<b>23</b></span>
+                                </label>
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="foldable">
+                        <span class="heading">Accordion open</span>
+                        <ul class="notype checklist fold">
+                            <li>
+                                <label>
+                                    <input type="checkbox" checked="" value="1" name="c1"><span>Global<b>10</b></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" checked="" value="1" name="c1"><span>Europe<b>16</b></span>
+                                </label>
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="foldable">
+                        <span class="heading">Accordion open</span>
+                        <ul class="notype checklist fold">
+                            <li>
+                                <label>
+                                    <input type="checkbox" checked="" value="1" name="c1"><span>Active<b>15</b></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" checked="" value="1" name="c1"><span>Review<b>11</b></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" checked="" value="1" name="c1"><span>Pending Review<b>8</b></span>
+                                </label>
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="foldable">
+                        <span class="heading">Accordion open</span>
+                        <ul class="notype checklist fold">
+                            <li>
+                                <label>
+                                    <input type="checkbox" checked="" value="1" name="c1"><span>Image<b>82</b></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" checked="" value="1" name="c1"><span>Movie<b>32</b></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" checked="" value="1" name="c1"><span>Document<b>23</b></span>
+                                </label>
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="foldable">
+                        <span class="heading">Accordion open</span>
+                        <ul class="notype checklist fold">
+                            <li>
+                                <label>
+                                    <input type="checkbox" checked="" value="1" name="c1"><span>Global<b>10</b></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" checked="" value="1" name="c1"><span>Europe<b>16</b></span>
+                                </label>
+                            </li>
+                        </ul>
+                    </section>
+                    <div class="quickform open">
+                        <div class="action">
+                            <button class="primary">Let's do it</button>
+                            <button class="warning">Warning</button>
+                        </div>
+                        <div class="control">
+                            <a href="#" class="icon-calendar trigger"><span>Calendar</span></a>
+                            <div class="comment">
+                                <input type="text">
+                            </div>
+                        </div>
+                    </div>
 
-  <div class="page" role="main">
+                </div>
 
-    <div id="main-rail" class="rail left">
-      <div class="wrap">
-
-        <div class="rail-switch">
-          <nav class="toolbar icongroup">
-            <a href="#" data-view="feature"><i class="icon-viewlist"><span>Navigation</span></i></a>
-            <a href="#" data-view="filter" class="active"><i class="icon-filter"><span>Filter</span></i></a>
-            <a href="#" data-view="activity"><i class="icon-clock"><span>Timeline</span></i></a>
-          </nav>
-          <div class="tagpicker-wrap">
-            <div class="tagpicker">
-              <input type="text" placeholder="Enter Keyword(s)" autocomplete="off" name="q">
-              <select>
-                <option value="you">You</option>
-                <option value="cant">can't</option>
-                <option value="touch">touch</option>
-                <option value="this">this</option>
-                <option value="nanananana">Batman?</option>
-              </select>
+                <div class="rail-view" data-view="activity">
+                    <nav class="feature">
+                        <a href="#" class="active">3</a>
+                        <a href="#">Collections</a>
+                        <a href="#">Users</a>
+                        <a href="#">Tools</a>
+                        <a href="#">Settings</a>
+                    </nav>
+                </div>
+                
             </div>
-          </div>
         </div>
 
-        <div class="rail-view" data-view="feature">
-          <nav class="feature">
-            <a href="#">Files</a>
-            <a href="#" class="active">Collections</a>
-            <a href="#">Users</a>
-            <a href="#">Tools</a>
-            <a href="#">Settings</a>
-          </nav>
-        </div>
-        
-        <div class="rail-view active group" data-view="filter">
-          <section class="foldable open">
-            <span class="heading">Accordion open</span>
-            <ul class="notype checklist fold">
-              <li>
-                <label>
-                  <input type="checkbox" checked="" value="1" name="c1"><span>All Assets<b>92</b></span>
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox" checked="" value="1" name="c1"><span>Current Directory<b>38</b></span>
-                </label>
-              </li>
-            </ul>
-          </section>
-          <section class="foldable open">
-            <span class="heading">Accordion open</span>
-            <ul class="notype checklist fold">
-              <li>
-                <label>
-                  <input type="checkbox" checked="" value="1" name="c1"><span>Active<b>15</b></span>
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox" checked="" value="1" name="c1"><span>Review<b>11</b></span>
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox" checked="" value="1" name="c1"><span>Pending Review<b>8</b></span>
-                </label>
-              </li>
-            </ul>
-          </section>
-          <section class="foldable">
-            <span class="heading">Accordion open</span>
-            <ul class="notype checklist fold">
-              <li>
-                <label>
-                  <input type="checkbox" checked="" value="1" name="c1"><span>Image<b>82</b></span>
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox" checked="" value="1" name="c1"><span>Movie<b>32</b></span>
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox" checked="" value="1" name="c1"><span>Document<b>23</b></span>
-                </label>
-              </li>
-            </ul>
-          </section>
-          <section class="foldable">
-            <span class="heading">Accordion open</span>
-            <ul class="notype checklist fold">
-              <li>
-                <label>
-                  <input type="checkbox" checked="" value="1" name="c1"><span>Global<b>10</b></span>
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox" checked="" value="1" name="c1"><span>Europe<b>16</b></span>
-                </label>
-              </li>
-            </ul>
-          </section>
-          <section class="foldable">
-            <span class="heading">Accordion open</span>
-            <ul class="notype checklist fold">
-              <li>
-                <label>
-                  <input type="checkbox" checked="" value="1" name="c1"><span>Active<b>15</b></span>
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox" checked="" value="1" name="c1"><span>Review<b>11</b></span>
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox" checked="" value="1" name="c1"><span>Pending Review<b>8</b></span>
-                </label>
-              </li>
-            </ul>
-          </section>
-          <section class="foldable">
-            <span class="heading">Accordion open</span>
-            <ul class="notype checklist fold">
-              <li>
-                <label>
-                  <input type="checkbox" checked="" value="1" name="c1"><span>Image<b>82</b></span>
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox" checked="" value="1" name="c1"><span>Movie<b>32</b></span>
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox" checked="" value="1" name="c1"><span>Document<b>23</b></span>
-                </label>
-              </li>
-            </ul>
-          </section>
-          <section class="foldable">
-            <span class="heading">Accordion open</span>
-            <ul class="notype checklist fold">
-              <li>
-                <label>
-                  <input type="checkbox" checked="" value="1" name="c1"><span>Global<b>10</b></span>
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox" checked="" value="1" name="c1"><span>Europe<b>16</b></span>
-                </label>
-              </li>
-            </ul>
-          </section>
-          <div class="quickform open">
-            <div class="action">
-              <button class="primary">Let's do it</button>
-              <button class="warning">Warning</button>
+        <div class="content">
+            <nav class="toolbar content-header">
+                <div class="left icongroup">
+                    <a href="#" class="icon-navigation" id="close-rail"><span>Add</span></a>
+                    <span class="divider"></span>
+                    <a href="#" class="icon-check"><span></span></a>
+                    <a href="#" class="icon-site"><span>Upload</span></a>
+                    <a href="#" class="icon-addcollection"><span>Add Collection</span></a>
+                </div>
+                <div class="center">
+                    <h1>Page Title</h1>
+                </div>
+                <div class="right icongroup">
+                    <a href="#" class="icon-viewgrid"><span>List</span></a>
+                </div>
+            </nav>
+            <div class="list content-container">
+                <div class="grid-0">
+                    <header class="card-page selectable moveable">
+                        <i class="select"></i>
+                        <div class="main">Title</div>
+                        <div class="published">Published</div>
+                        <div class="modified">Modified</div>
+                        <div class="links"><i class="icon-arrowright"><span>Links</span></i></div>
+                    </header>
+
+                    <article class="card-page stack">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview1.png" alt="">
+                            <div class="label">
+                                <div class="main">
+                                    <span class="box-stack"></span>
+                                    <h4>Page Title</h4>
+                                    <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                    <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                    <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                                </div>
+                                <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                                <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                                <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                            </div>
+                        </a>
+                    </article>
+
+                    <header class="card-asset selectable moveable">
+                        <i class="select"></i>
+                        <div class="main">Title</div>
+                        <div class="type"></div>
+                        <div class="resolution">Resolution</div>
+                        <div class="size">Size</div>
+                        <div class="modified">Modified</div>
+                        <div class="links"><i class="icon-arrowright"><span>Links</span></i></div>
+                        <div class="comments"><i class="icon-comment"><span>Comments</span></i></div>
+                    </header>
+
+                    <article class="card-asset">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview1.png" alt="">
+                            <div class="label">
+                                <div class="main">
+                                    <img src="images/previews/preview-small.png" alt="">
+                                    <h4>Asset Name</h4>
+                                </div>
+                                <p class="type">PSD</p>
+                                <p class="resolution">1220 x 400</p>
+                                <p class="size">149KB</p>
+                                <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                                <p class="links"><i class="icon-link"><span>Links</span></i> 8</p>
+                                <p class="comments"><i class="icon-comment"><span>Comments</span></i> 12</p>
+                            </div>
+                        </a>
+                    </article>
+
+                    <article class="card-directory">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview7.png" alt="">
+                            <div class="label">
+                                <div class="main">
+                                    <img src="images/previews/preview-small.png" alt="">
+                                    <h4>Directory Name</h4>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                    <article class="card-collection stack">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview1.png" alt="">
+                            <div class="label">
+                                <h4>Collection Name</h4>
+                                <p class="links"><i class="icon-link"><span>Links</span></i> 8</p>
+                                <p class="comments"><i class="icon-comment"><span>Comments</span></i> 12</p>
+                            </div>
+                        </a>
+                    </article>
+
+                    <article class="card-collection stack welcome">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview1.png" alt="">
+                            <div class="label">
+                                <h4>Collection Name</h4>
+                                <p>Collection</p>
+                            </div>
+                        </a>
+                    </article>
+
+                    <article class="card-project stack">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview1.png" alt="">
+                            <div class="label">
+                                <h4>Project Name</h4>
+                                <p>Project</p>
+                            </div>
+                        </a>
+                    </article>
+
+                    <article class="card-article stack">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview7.png" alt="">
+                            <div class="label">
+                                <div class="main">
+                                    <img src="images/previews/preview-small.png" alt="">
+                                    <h4>Article Name</h4>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                    <article class="card-project stack">
+                        <a href="#">
+                            <img src="images/previews/preview1.png" alt="">
+                            <div class="label">
+                                <h4>Project Name</h4>
+                                <p>Project</p>
+                            </div>
+                         </a>
+                    </article>
+                    <article class="card-page stack">
+                        <a href="#">
+                            <img src="images/previews/preview1.png" alt="">
+                            <div class="label">
+                                <h4>Website</h4>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="card-directory">
+                        <a href="#">
+                            <img src="images/previews/preview7.png" alt="">
+                            <div class="label">
+                                <h4>Assets</h4>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="card-article stack">
+                        <a href="#">
+                            <img src="images/previews/preview7.png" alt="">
+                            <div class="label">
+                                <h4>Communities</h4>
+                            </div>
+                        </a>
+                    </article>
+
+
+                    <article class="card-page page-hidden selected">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview5.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Very Long Page Title. very long type. very long type. very long type. very long type.</h4>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page page-deactivated">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview8.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page stack">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview3.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page selected">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview2.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page stack">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview1.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview7.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview6.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview9.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview5.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview4.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview2.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview8.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview3.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview7.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview1.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page. very long type. very long type. very long type. very long type. very long type.</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page page-hidden">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview5.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page page-redirect">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview3.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page page-deactivated">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview8.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page stack">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview3.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview2.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page stack">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview1.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview7.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview6.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview9.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview5.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview4.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview2.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview8.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview3.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                    <article class="card-page">
+                        <i class="select"></i>
+                        <i class="move icon-navigation"></i>
+                        <a href="#">
+                            <img src="images/previews/preview7.png" alt="">
+                            <div class="main">
+                                <span class="box-stack"></span>
+                                <h4>Page Title</h4>
+                                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                            </div>
+                            <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                            <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                        </a>
+                    </article>
+                </div>
             </div>
-            <div class="control">
-              <a href="#" class="icon-calendar trigger"><span>Calendar</span></a>
-              <div class="comment">
-                <input type="text">
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="rail-view" data-view="activity">
-          <nav class="feature">
-            <a href="#" class="active">3</a>
-            <a href="#">Collections</a>
-            <a href="#">Users</a>
-            <a href="#">Tools</a>
-            <a href="#">Settings</a>
-          </nav>
-        </div>
-        
-      </div>
-    </div>
-
-    <div class="content">
-      <nav class="toolbar content-header">
-        <div class="left icongroup">
-          <a href="#" class="icon-navigation" id="close-rail"><span>Add</span></a>
-          <span class="divider"></span>
-          <a href="#" class="icon-check"><span></span></a>
-          <a href="#" class="icon-site"><span>Upload</span></a>
-          <a href="#" class="icon-addcollection"><span>Add Collection</span></a>
-        </div>
-        <div class="center">
-          <h1>Page Title</h1>
-        </div>
-        <div class="right icongroup">
-          <a href="#" class="icon-viewgrid"><span>List</span></a>
-        </div>
-      </nav>
-      <div class="list content-container">
-        <div class="grid-0">
-          <header class="card-page selectable moveable">
-            <i class="select"></i>
-            <div class="main">Title</div>
-            <div class="published">Published</div>
-            <div class="modified">Modified</div>
-            <div class="links"><i class="icon-arrowright"><span>Links</span></i></div>
-          </header>
-
-          <article class="card-page stack">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview1.png" alt="">
-              <div class="label">
-                <div class="main">
-                  <span class="box-stack"></span>
-                  <h4>Page Title</h4>
-                  <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                  <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                  <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-                </div>
-                <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-                <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-                <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-              </div>
-            </a>
-          </article>
-
-          <header class="card-asset selectable moveable">
-            <i class="select"></i>
-            <div class="main">Title</div>
-            <div class="type"></div>
-            <div class="resolution">Resolution</div>
-            <div class="size">Size</div>
-            <div class="modified">Modified</div>
-            <div class="links"><i class="icon-arrowright"><span>Links</span></i></div>
-            <div class="comments"><i class="icon-comment"><span>Comments</span></i></div>
-          </header>
-
-          <article class="card-asset">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview1.png" alt="">
-              <div class="label">
-                <div class="main">
-                  <img src="images/previews/preview-small.png" alt="">
-                  <h4>Asset Name</h4>
-                </div>
-                <p class="type">PSD</p>
-                <p class="resolution">1220 x 400</p>
-                <p class="size">149KB</p>
-                <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-                <p class="links"><i class="icon-link"><span>Links</span></i> 8</p>
-                <p class="comments"><i class="icon-comment"><span>Comments</span></i> 12</p>
-              </div>
-            </a>
-          </article>
-
-          <article class="card-directory">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview7.png" alt="">
-              <div class="label">
-                <div class="main">
-                  <img src="images/previews/preview-small.png" alt="">
-                  <h4>Directory Name</h4>
-                </div>
-              </div>
-            </a>
-          </article>
-
-          <article class="card-collection stack">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview1.png" alt="">
-              <div class="label">
-                <h4>Collection Name</h4>
-                <p class="links"><i class="icon-link"><span>Links</span></i> 8</p>
-                <p class="comments"><i class="icon-comment"><span>Comments</span></i> 12</p>
-              </div>
-            </a>
-          </article>
-
-          <article class="card-collection stack welcome">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview1.png" alt="">
-              <div class="label">
-                <h4>Collection Name</h4>
-                <p>Collection</p>
-              </div>
-            </a>
-          </article>
-
-          <article class="card-project stack">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview1.png" alt="">
-              <div class="label">
-                <h4>Project Name</h4>
-                <p>Project</p>
-              </div>
-            </a>
-          </article>
-
-          <article class="card-article stack">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview7.png" alt="">
-              <div class="label">
-                <div class="main">
-                  <img src="images/previews/preview-small.png" alt="">
-                  <h4>Article Name</h4>
-                </div>
-              </div>
-            </a>
-          </article>
-
-          <article class="card-project stack">
-              <a href="#">
-                 <img src="images/previews/preview1.png" alt="">
-                 <div class="label">
-                     <h4>Project Name</h4>
-                     <p>Project</p>
-                  </div>
-             </a>
-          </article>
-          <article class="card-page stack">
-              <a href="#">
-                  <img src="images/previews/preview1.png" alt="">
-                  <div class="label">
-                      <h4>Website</h4>
-                  </div>
-              </a>
-          </article>
-          <article class="card-directory">
-              <a href="#">
-                  <img src="images/previews/preview7.png" alt="">
-                  <div class="label">
-                      <h4>Assets</h4>
-                  </div>
-              </a>
-          </article>
-          <article class="card-article stack">
-              <a href="#">
-                  <img src="images/previews/preview7.png" alt="">
-                  <div class="label">
-                      <h4>Communities</h4>
-                  </div>
-              </a>
-          </article>
-
-
-          <article class="card-page page-hidden selected">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview5.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Very Long Page Title. very long type. very long type. very long type. very long type.</h4>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page page-deactivated">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview8.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page stack">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview3.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page selected">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview2.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page stack">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview1.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview7.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview6.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview9.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview5.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview4.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview2.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview8.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview3.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview7.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview1.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page. very long type. very long type. very long type. very long type. very long type.</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page page-hidden">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview5.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page page-redirect">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview3.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page page-deactivated">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview8.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page stack">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview3.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview2.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page stack">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview1.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview7.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview6.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview9.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview5.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview4.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview2.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview8.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview3.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-          <article class="card-page">
-            <i class="select"></i>
-            <i class="move icon-navigation"></i>
-            <a href="#">
-              <img src="images/previews/preview7.png" alt="">
-              <div class="main">
-                <span class="box-stack"></span>
-                <h4>Page Title</h4>
-                <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-              </div>
-              <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-              <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-              <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
-            </a>
-          </article>
-        </div>
-      </div>
-    </div><!-- /content -->
-  </div><!-- /page -->
+        </div><!-- /content -->
+    </div><!-- /page -->
 </body>
 </html>
