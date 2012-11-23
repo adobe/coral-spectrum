@@ -1,5 +1,7 @@
 
-.list-gradient() {
+
+// The gradient on the list header
+.list-header-gradient() {
     background: #f9f9f9; /* Old browsers */
     background: -moz-linear-gradient(top,  #f9f9f9 0%, #e3e3e3 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9f9f9), color-stop(100%,#e3e3e3)); /* Chrome,Safari4+ */
@@ -9,15 +11,40 @@
     background: linear-gradient(to bottom,  #f9f9f9 0%,#e3e3e3 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', endColorstr='#e3e3e3',GradientType=0 ); /* IE6-9 */
 }
- 
-/* Card Grid View */
+
+.list-header-triangle(@width: 38*@px) {
+    &:before {
+        // Push the title over
+        content: " ";
+        display: inline-block;
+        width: @width;
+    }
+    &:after {
+        // The sort triangle
+        content: " ";
+        position: absolute;
+        left: (@width - 8*@px)/2-5*@px;
+        top: 50%;
+        width: 0;
+        height: 0;
+        margin-top: -3*@px;
+        border: 5*@px solid transparent;
+        border-top-color: @card-list-header-triangle;
+    }
+}
+
+/**
+    Class: .grid
+    Grid View for elements with card-* classes.
+*/
 .grid {
     overflow: hidden; // can be replaced with a clearfix in case needed
     padding: @card-grid-margin 0 0 @card-grid-margin;
 
+    // The class show-list can be used to hide things in grid view
+    .show-list,
     header[class^="card-"],
-    header[class*=" card-"],
-    .show-list {
+    header[class*=" card-"] {
         display: none;
     }
 
@@ -88,22 +115,32 @@
     }
 }
 
-/* List View */
+/**
+    Class: .list
+    List View for elements with card-* classes.
+*/
 .list {
+    // The class show-list can be used to hide things in grid view
     .show-grid {
         display: none;
     }
 
+    // The list header with the column titles
     header[class^="card-"],
     header[class*=" card-"] {
-        .list-gradient;
-        position: relative;
-        font-size: 12*@px;
-        line-height: 18*@px;
+        .list-header-gradient;
         height: 50*@px;
-        padding: 0 45*@px 0;
+        line-height: 18*@px;
+        font-size: 12*@px;
 
-        > div[class] { // The [class] is used to make this rule over-weight the default rule
+        &.selectable {
+            padding-left: 45*@px;
+        }
+        &.moveable {
+            padding-right: 45*@px;
+        }
+
+        > div[class] { // The [class] is just used to make this rule over-weight the default rule
             position: relative;
             float: left;
             margin: 0;
@@ -111,24 +148,13 @@
         }
     }
 
-    header.card-page {
-        .main:before {
-            // Push the title over
-            content: " ";
-            display: inline-block;
-            width: 36*@px;
-        }
-        .main:after {
-            // The sort triangle
-            content: " ";
-            position: absolute;
-            left: 10*@px;
-            top: 50%;
-            width: 0;
-            height: 0;
-            margin-top: -3*@px;
-            border: 5*@px solid transparent;
-            border-top-color: @card-list-header-triangle;
+    header.card-page .main {
+        .list-header-triangle;
+    }
+    header.card-asset {
+        padding-left: (48+45)*@px;
+        .main {
+            .list-header-triangle(48*@px);
         }
     }
 }

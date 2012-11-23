@@ -1,7 +1,3 @@
-/**
-  Element: Card View
-  Displays assets in result set as a card 
-*/
 
 // The shadow of cards
 .card-shadow() {
@@ -12,15 +8,6 @@
 .card-strong-text() {
     font-weight: bold;
     color: @card-list-title-color;
-}
-
-// Sets the width with a calc() expression
-.card-calc-width(@expression, @fallback) {
-    width: @fallback;
-    width: -webkit-calc(@expression);
-    width: -moz-calc(@expression);
-    width: -o-calc(@expression);
-    width: calc(@expression);
 }
 
 // Cuts the text that are too long
@@ -47,18 +34,24 @@
     border-color: @card-list-yellow-border;
 }
 
+// The preview image on the list view
+.card-list-preview-element(@width, @height, @border-color: transparent) {
+    position: relative;
+    z-index: 2;
+    float: left;
+    margin: (@card-list-height - @height - 2*@px)/2 8*@px 0 0;
+    width:  @width;
+    height: @height;
+    border: @px solid @border-color;
+}
+
 // For list view: prepends the title with a little stack to illustrate items that have sub-items (used only for WCM pages so far)
 .card-list-box-stack(@size: 28*@px) {
     .box-stack {
-        position: absolute;
-        z-index: 2;
-        top: 11*@px;
-        left: 0;
-        width:  @size;
-        height: @size;
-        border: @px solid @card-list-stack-border;
+        .card-list-preview-element(@size, @size, @card-list-stack-border);
         background: @card-list-stack-background-main;
     }
+    // When a stack class is placed on the article element, the box-stack should display a stack as well
     &.stack .box-stack {
         &:before,
         &:after {
@@ -81,26 +74,31 @@
     }
 }
 
-
+/**
+  Element: Card View
+  Displays assets in result set as a card
+*/
 [class^="card-"],
 [class*=" card-"] {
     position: relative;
     display: inline-block;
     font-size: 12*@px;
     line-height: 18*@px;
-        
+
     > i {
         display: none;
     }
 
     > a {
-        overflow: hidden; // for the link to contain everything
         position: relative;
         display: block;
         text-decoration: none;
         color: @card-text-color;
 
         // ommiting the direct child syntax on purpose for all rules that follow
+        .main {
+            position: relative;
+        }
         h4,
         p {
             .card-nowrap-ellipsis;
@@ -108,7 +106,7 @@
         }
         h4 {
             font-size: inherit;
-            color: inherit;
+            .card-strong-text;
         }
         i {
             .icon-xsmall;
@@ -117,18 +115,18 @@
         &:hover i:before {
             color: @card-text-color;
         }
-        > .main {
-            position: relative;
-        }
     }
 
-    .grid & {
-        .card-calc-width(~"100% - @{card-grid-margin}", 95%);
+    // Grid view specific styling
+    .grid &{
+        .calc-width(~"100% - @{card-grid-margin}", 95%);
         margin: 0 0 @card-grid-margin 0;
         background: @card-background-color;
 
         > a {
             z-index: 1;
+            float: left; // makes the link contain also floating elements
+            width: 100%;
             .card-shadow;
 
             > img {
@@ -136,23 +134,24 @@
             }
 
             h4 { // ommiting the direct child syntax on purpose
-                .card-strong-text;
                 margin: 10*@px;
             }
             p { // ommiting the direct child syntax on purpose
                 margin: 0 10*@px 10*@px;
             }
-            > .main > p {
-                margin-top: -10*@px;
+            .main > img {
+                display: none;
             }
         }
     }
 
-    .list & {
+    // List view specific styling
+    .list &{
         display: block;
         border-bottom: 1*@px solid @card-list-separator-color;
 
-        > i { // The selection box and the move handle
+        // The selection box and the handle to move the element
+        > i {
             display: block;
             position: absolute;
             z-index: 1;
@@ -160,6 +159,7 @@
             width: 45*@px;
             height: 100%;
 
+            // The selection box
             &.select {
                 left: 0;
 
@@ -179,10 +179,13 @@
                     .box-shadow(inset 0 @px 2*@px rgba(0, 0, 0, 0.33));
                 }
 
+                // The link element that follows the select item should add some spacing on the left
                 & ~ a {
                     padding-left: 45*@px;
                 }
-            }   
+            }
+
+            // The handle to move the element
             &.move {
                 .icon-medium;
                 opacity: 0.3;
@@ -193,36 +196,47 @@
                     margin: 16*@px auto;
                 }
 
+                // The link element that follows the move item should add some spacing on the right
                 & ~ a {
                     padding-right: 45*@px;
                 }
             }
         }
-        
+
         > a {
-            height: 50*@px;
+            overflow: hidden; // Makes floating elements that break on a new line not affect the next row
+            height: @card-list-height;
             padding: 0 45*@px;
 
-            i,
-            img { // ommiting the direct child syntax on purpose
+            > img,
+            i { // ommiting the direct child syntax on purpose
                 display: none;
             }
 
-            h4 { // ommiting the direct child syntax on purpose
-                .card-strong-text;
+            .main {
+                > img {
+                    .card-list-preview-element(38*@px, 30*@px);
+                }
+                > h4 { // ommiting the direct child syntax on purpose
+                    .card-strong-text;
+                }
             }
 
-            // list view columns can be made of the following elements
-            > div,
+            // list view columns can be made of div, h4, or p elements
+            > div:not(.label),
             > h4,
-            > p {
+            > p,
+            > .label > div,
+            > .label > h4,
+            > .label > p {
                 float: left;
-                margin: 0;
-                padding: 16*@px 0;
             }
-            > .main {
+            h4,
+            p {
+                margin-top: 16*@px;
+            }
+            .main { // ommiting the direct child syntax on purpose
                 > h4 {
-                    float: left;
                     margin-right: 10*@px;
                 }
                 > p {
@@ -236,8 +250,13 @@
         }
     }
 
+    // Look of the items when selected
     &.selected {
-        .list & {
+        // For the card view
+        .card &{}
+
+        // For the list view
+        .list &{
             > i.select {
                 &:before {
                     .box-shadow(inset 0 @px 2*@px rgba(0, 0, 0, 0.5));
@@ -254,36 +273,191 @@
 }
 
 /**
+    Class: .stack
+    Displays a card stack below the card (can be used in conjunction with any other card-* type to make it a stack).
+    Apply this class to any card element (on the <article> element).
+    In list view, to represent the stack a box-stack should be placed on the desired element that shows that stack.
+*/
+.stack {
+    .grid &{
+        margin-bottom: @card-grid-margin+(2*@card-stack-offset);
+
+        &:before,
+        &:after {
+            content: " ";
+            position: absolute;
+            height: @card-stack-offset;
+            pointer-events: none;
+            background: inherit;
+            .card-shadow;
+        }
+
+        &:before {
+            bottom: -2*@card-stack-offset;
+            left:    2*@card-stack-offset;
+            right:   2*@card-stack-offset;
+        }
+
+        &:after {
+            bottom: -@card-stack-offset;
+            left:    @card-stack-offset;
+            right:   @card-stack-offset;
+        }
+    }
+}
+
+/**
+    Class: .banner
+    Displays a card a banner.
+    Apply this class to any card element (on the <article> element).
+    The card-project and card-collection elements are always displayed as banners.
+*/
+.banner,
+.card-project,
+.card-collection {
+    .grid & > a > .label {
+        position: absolute;
+        top: 50%;
+        left:  -@card-banner-offset;
+        right: -@card-banner-offset;
+        padding: 0 @card-banner-offset;
+        border: 1px solid @card-banner-border-color-white;
+        background-color: @card-background-color;
+        .box-shadow(0 8*@px 8*@px -5*@px rgba(0, 0, 0, 0.3));
+
+        &:before,
+        &:after {
+            content: " ";
+            position: absolute;
+            height: 0;
+            width: 0;
+            bottom: -@px - @card-banner-offset;
+            border: @card-banner-offset solid transparent;
+            pointer-events: none;
+        }
+        &:before {
+            left: -@px - @card-banner-offset;
+            border-right-color: @card-background-color;
+        }
+        &:after {
+            right: -@px - @card-banner-offset;
+            border-left-color: @card-background-color;
+        }
+    }
+}
+.banner-gray() {
+    .grid & > a > .label {
+        border-color: @card-banner-border-color-gray;
+        background-color: @card-banner-background-color-gray;
+        color: @card-banner-text-color-gray;
+        h4 {
+            color: @card-banner-title-color-gray;
+        }
+        i:before {
+            color: @card-banner-text-color-gray;
+        }
+        &:before {
+            border-right-color: @card-banner-background-color-gray;
+        }
+        &:after {
+            border-left-color: @card-banner-background-color-gray;
+        }
+    }
+}
+.banner-black() {
+    .grid & > a > .label {
+        border-color: @card-banner-border-color-black;
+        background-color: @card-banner-background-color-black;
+        color: @card-banner-text-color-black;
+        h4 {
+            color: @card-banner-title-color-black;
+        }
+        i:before {
+            color: @card-banner-text-color-black;
+        }
+        &:before {
+            border-right-color: @card-banner-background-color-black;
+        }
+        &:after {
+            border-left-color: @card-banner-background-color-black;
+        }
+    }
+}
+
+/**
+    Class: .card-collection
+    Displays collection card with a banner.
+*/
+.card-collection {
+    .grid &{
+        > a p {
+            float: left;
+            margin-top: -10*@px;
+        }
+    }
+    .list &{
+        p {
+            display: none;
+        }
+    }
+}
+// Temporary: simulates how the collections are displayed on the welcome screen.
+.card-collection.welcome {
+    .banner-gray();
+}
+
+/**
+    Class: .card-project
+    Displays a project (which groups WCM pages, DAM assets and other concepts together).
+*/
+.card-project {
+    .banner-black();
+    .grid &{
+        > a p {
+            margin-top: -10*@px;
+        }
+    }
+    .list &{
+        p {
+            display: none;
+        }
+    }
+}
+
+/**
     Class: .card-page
     Displays a WCM page card.
 */
 .card-page {
-    .grid & {
+    // Grid view specific styling
+    .grid &{
         .info-approved,
         .info-locked,
-        .user,
-        .links-number {
+        .user {
             display: none;
+        }
+        .main > p {
+            margin-top: -10*@px;
         }
         .published,
         .modified {
             float: left;
-            //padding-right: 6*@px;
         }
         .links {
             float: right;
         }
     }
 
+    // List view specific styling
     .list &{ // don't add a space between the ampersand and the bracket or it breaks the card-list-box-stack mixin
         .card-list-box-stack;
 
+        > a > img {
+            display: none;
+        }
         .main {
             width: 65%;
 
-            > h4 {
-                margin-left: 36*@px;
-            }
             >.info-locked {
                 .card-list-box();
             }
@@ -294,7 +468,7 @@
         .published,
         .modified {
             width: 15%;
-            padding: 7*@px 0;
+            margin-top: 7*@px;
             > .date {
                 .card-strong-text;
             }
@@ -304,7 +478,6 @@
         }
         .links {
             width: 5%;
-            padding: 25*@px 0 7*@px;
         }
     }
 
@@ -319,90 +492,45 @@
 }
 
 /**
-    Class: .stack
-    Displays a card stack below the card (can be used in conjunction with any other card-* type to make it a stack).
-    The card-collection class always has a stack applied.
-*/
-.grid .stack,
-.grid .card-collection {
-    margin-bottom: @card-grid-margin+(2*@card-stack-offset);
-    
-    &:before,
-    &:after {
-        content: " ";
-        position: absolute;
-        height: @card-stack-offset;
-        pointer-events: none;
-        background: inherit;
-        .card-shadow;
-    }
 
-    &:before {
-        bottom: -2*@card-stack-offset;
-        left:    2*@card-stack-offset;
-        right:   2*@card-stack-offset;
-    }
-
-    &:after {
-        bottom: -@card-stack-offset;
-        left:    @card-stack-offset;
-        right:   @card-stack-offset;
-    }
-}
-
-/**
-    Class: .card-collection
-    Displays collection card with a banner.
-*/
-.card-collection {
-    .description {
-        position: absolute;
-        top: 50%;
-        left:  -@card-banner-offset;
-        right: -@card-banner-offset;
-        padding: 0 @card-banner-offset;
-        border: 1px solid @card-banner-border-color;
-        background-color: @card-banner-background-color;
-        color: @card-banner-text-color;
-        .box-shadow(0 8*@px 8*@px -5*@px rgba(0, 0, 0, 0.3));
-
-        > h4 {
-            color: @card-banner-text-color;
-        }
-        > p {
-            margin-top: -8*@px;
-        }
-
-        &:before,
-        &:after {
-            content: " ";
-            position: absolute;
-            height: 0;
-            width: 0;
-            bottom: -@px - @card-banner-offset;
-            border: @card-banner-offset solid transparent;
-            pointer-events: none;
-        }
-
-        &:before { 
-            border-right-color: @card-banner-background-color;
-            left: -@px - @card-banner-offset;
-        }            
-
-        &:after { 
-            border-left-color: @card-banner-background-color;
-            right: -@px - @card-banner-offset;
-        }
-    }
-}
-
-/**
     Class: .card-asset
     Displays a DAM asset card.
 */
 .card-asset {
-    h4 {
-        font-weight: @font-base-weight;
+    .grid &{
+        > a {
+            p.resolution,
+            p.size {
+                margin-top: -10*@px;
+            }
+            .resolution,
+            .size,
+            .links,
+            .comments {
+                float: left;
+            }
+            .type {
+                display: none;
+            }
+            .links {
+                clear: left;
+            }
+        }
+    }
+    // List view specific styling
+    .list &{ // don't add a space between the ampersand and the bracket or it breaks the card-list-box-stack mixin
+        .main {
+            width: 60%;
+        }
+        .type,
+        .resolution,
+        .size {
+            width: 10%;
+        }
+        .links,
+        .comments {
+            width: 5%;
+        }
     }
 }
 
@@ -411,6 +539,26 @@
     Displays a DAM directory card.
 */
 .card-directory {
+    .grid &{ // don't add a space between the ampersand and the bracket or it breaks the &:before rule
+        margin-top: 21*@px;
+
+        &:before {
+            content: " ";
+            position: absolute;
+            top: -21*@px;
+            left: 5*@px;
+            right: 5*@px;
+            height: 13*@px;
+            border-bottom: 7*@px solid #CCC;
+            background: url(../images/components/card/directory.svg) no-repeat;
+        }
+    }
+    // List view specific styling
+    .list &{ // don't add a space between the ampersand and the bracket or it breaks the card-list-box-stack mixin
+        .main {
+            width: 100%;
+        }
+    }
 }
 
 /**
@@ -421,13 +569,14 @@
     color: white;
     background-color: white;
     padding: 4*@px 0 0 4*@px;
+
     .cardheader {
-        background-color: #AAAAAA;
+        background-color: @card-board-header-background;
         margin: 0 4*@px 4*@px 0;
         h4 {
             margin: 0 10*@px 6*@px 10*@px;
             padding: 6*@px 0 4*@px 0;
-            border-bottom: 1px solid #BBB;
+            border-bottom: 1px solid @card-board-header-border;
             color: white;
             font-size: 13*@px;
         }
@@ -436,34 +585,21 @@
             margin: 0 4*@px 0 10*@px;
             padding: 2*@px 0 2*@px 0;
         }
-
-        [class^="icon-"],
-        [class*=" icon-"] {
-            &:before {
-                color: white !important; // bypass the hover color of the sourrounding "A"
-            }
+        i:before {
+            color: white !important; // bypass the hover color of the sourrounding "A"
         }
-
     }
 
     .cardcontent {
         .cardpreview {
             background-size: cover;
-            background-color: #BBBBBB;
+            background-color: @card-board-preview-background;
             margin: 0 4*@px 4*@px 0;
-            width: 48%;
-            width: -webkit-calc(~"50% - 4px");
-            width: -moz-calc(~"50% - 4px");
-            width: -o-calc(~"50% - 4px");
-            width: calc(~"50% - 4px");
+            .calc-width(~"50% - 4px", 48%);
             float:left;
 
             &.wide {
-                width: 98%;
-                width: -webkit-calc(~"100% - 4px");
-                width: -moz-calc(~"100% - 4px");
-                width: -o-calc(~"100% - 4px");
-                width: calc(~"100% - 4px");
+                .calc-width(~"100% - 4px", 98%);
             }
             img {
                 max-width: 100%;

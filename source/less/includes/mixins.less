@@ -174,15 +174,13 @@
 }
 
 /**
- Mixin: .calc
- Perform calculations to determine the size and shape of objects
+ Mixin: .calc-width
+ Sets the width with a calc() expression
 */
-//.calc(@property, @expression, @fallback) {
-//    @{property}: @expression;
-//    @property: @fallback;
-//    @property: -webkit-calc(@expression);
-//    @property: -moz-calc(@expression);
-//    @property: -o-calc(@expression);
-//    @property: calc(@expression);
-//}
-//
+.calc-width(@expression, @fallback) {
+    width: @fallback;
+    width: -webkit-calc(@expression);
+    width: -moz-calc(@expression);
+    width: -o-calc(@expression);
+    width: calc(@expression);
+}
