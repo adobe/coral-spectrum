@@ -20,8 +20,6 @@
 // For list view: draws a box for additional info showed next to the title
 .card-list-box() {
     .card-strong-text;
-    margin-top: -@px;
-    margin-bottom: -@px;
     padding: 0 5*@px;
     border: 1px solid @card-list-gray-border;
     background: @card-list-gray-background;
@@ -91,14 +89,14 @@
 
     > a {
         position: relative;
-        display: block;
         text-decoration: none;
         color: @card-text-color;
 
-        // ommiting the direct child syntax on purpose for all rules that follow
+        > .label,
         .main {
             position: relative;
         }
+
         h4,
         p {
             .card-nowrap-ellipsis;
@@ -125,11 +123,15 @@
 
         > a {
             z-index: 1;
-            float: left; // makes the link contain also floating elements
-            width: 100%;
             .card-shadow;
 
             > img {
+                width: 100%;
+            }
+
+            &,
+            > .label {
+                display: inline-block;
                 width: 100%;
             }
 
@@ -205,21 +207,13 @@
 
         > a {
             overflow: hidden; // Makes floating elements that break on a new line not affect the next row
+            display: block;
             height: @card-list-height;
             padding: 0 45*@px;
 
             > img,
             i { // ommiting the direct child syntax on purpose
                 display: none;
-            }
-
-            .main {
-                > img {
-                    .card-list-preview-element(38*@px, 30*@px);
-                }
-                > h4 { // ommiting the direct child syntax on purpose
-                    .card-strong-text;
-                }
             }
 
             // list view columns can be made of div, h4, or p elements
@@ -236,15 +230,18 @@
                 margin-top: 16*@px;
             }
             .main { // ommiting the direct child syntax on purpose
+                > img {
+                    .card-list-preview-element(38*@px, 30*@px);
+                }
                 > h4 {
+                    float: left;
                     margin-right: 10*@px;
+                    .card-strong-text;
                 }
                 > p {
                     float: left;
                     margin-right: 5*@px;
-                    font-size: 10*@px;
-                    font-weight: bold;
-                    text-transform: uppercase;
+                    border: 1px solid transparent;
                 }
             }
         }
@@ -457,11 +454,15 @@
         }
         .main {
             width: 65%;
-
-            >.info-locked {
+            > p {
+                font-size: 10*@px;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+            > .info-locked {
                 .card-list-box();
             }
-            >.info-approved {
+            > .info-approved {
                 .card-list-box(yellow);
             }
         }
@@ -499,6 +500,9 @@
 .card-asset {
     .grid &{
         > a {
+            h4 {
+                font-weight: normal;
+            }
             p.resolution,
             p.size {
                 margin-top: -10*@px;
