@@ -34,9 +34,9 @@ module.exports = function(grunt) {
         }
         else {
           grunt.log.write('REMARK: fontforge could not be found, reuse fonts from repository.');
+          grunt.log.writeln();
+          options.done(true);
         }
-
-        grunt.log.writeln();
 
       }
     );
