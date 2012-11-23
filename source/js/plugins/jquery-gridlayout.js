@@ -209,10 +209,13 @@
             // use: "round" for avg width, "floor" for minimal width, "ceil" for maximal width
             var n = Math.floor(($this.width() - marginLeft - marginRight + gx) / (colWidth + gx));
 
+            if (n < 1) n = 1; // Minimum 1 column!
+
             if (n == this.numCols) {
                 // nothing to do. CSS takes care of the scaling
                 return;
             }
+            
             this.numCols = n;
 
             // calculate actual column width:
