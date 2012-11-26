@@ -6,6 +6,7 @@ The top toolbar with action icons
     position: relative;
     height: 46*@px;
     padding: 0 3*@px;
+    
     border-bottom: @px solid @toolbar-border-color;
     
     .left,
@@ -18,11 +19,13 @@ The top toolbar with action icons
         position: absolute;
         left: 0;
         right: 0;
+        
         text-align: center;
         
         h1 {
             display: inline-block;
             margin: 10px 0 0;
+            
             line-height: 1.5;
             font-size: 18*@px;
             .regularText;
@@ -48,6 +51,7 @@ The top toolbar with action icons
         display: inline-block;
         height: 46*@px;
         padding: 0 10*@px;
+        
         line-height: 46*@px;
     }
 
@@ -56,15 +60,20 @@ The top toolbar with action icons
         margin: 7*@px 10*@px;
     }
 
-    .divider {    
+    .divider {
+        display: inline-block;
         height: @icon-medium-size;
-        border-left: @px solid @icon-divider-color;
-        margin-left: 10*@px;
+        margin: 10*@px 0 0 10*@px;
         padding-right: 10*@px;
+        
+        border-left: @px solid @icon-divider-color;
+        
+        vertical-align: top;
     }
 
     >.text {
-        line-height: 46*@px;
         margin: 0 10*@px;
+        
+        line-height: 46*@px;
     }
 }
