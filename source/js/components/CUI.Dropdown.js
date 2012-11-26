@@ -174,7 +174,7 @@
         }
     },
 
-    /** @ignore */    
+    /** @ignore */
     _adjustAutocompleter: function() {
         var searchFor = this.inputElement.val();
         var result = [];
@@ -187,7 +187,7 @@
         this.autocompleteList.show();
     },
 
-    /** @ignore */    
+    /** @ignore */
     _optionRenderer: function(index, option) {
         var el = $("<span>" + option + "</span>");
         if (this.options.multiple) {
@@ -200,7 +200,7 @@
         return el;
     },
 
-    /** @ignore */    
+    /** @ignore */
     _optionRendererAutocomplete: function(index, value) {
         var searchFor = this.inputElement.val();
         var i = value.toLowerCase().indexOf(searchFor.toLowerCase());
@@ -211,7 +211,7 @@
         return $("<span>" + value + "</span>");
     },
     
-    /** @ignore */    
+    /** @ignore */
     _processSelect: function(event) {
         if (this.syncSelectElement) {
             var current = $(this.syncSelectElement.find("option").get(event.selectedIndex));
@@ -222,10 +222,10 @@
                     current.attr("selected", "selected");
                 }
                 this.dropdownList.update();
-            } else {                    
+            } else {
                 this.syncSelectElement.find("option").removeAttr("selected");
                 current.attr("selected", "selected");
-                this.dropdownList.hide();        
+                this.dropdownList.hide();
             }
         }
         this._update(true);
@@ -260,14 +260,14 @@
             this.options.options = [];
             this.$element.find("select option").each(function(i, e) {
                 this.options.options.push($(e).html());
-            }.bind(this));            
+            }.bind(this));
         }
         
         // Set several options
         if (this.options.multiple) {
             this.syncSelectElement.attr("multiple", "multiple");
         } else {
-            this.syncSelectElement.removeAttr("multiple", "multiple");            
+            this.syncSelectElement.removeAttr("multiple", "multiple");
         }
         if (this.options.placeholder) {
             this.buttonElement.text(this.options.placeholder);
@@ -287,14 +287,14 @@
         if (this.$element.attr("data-placeholder")) this.options.placeholder = this.$element.attr("data-placeholder");
         if (this.$element.attr("data-editable")) this.options.editable = true;
         if (this.$element.attr("data-error")) this.options.hasError = true;
-        if (this.$element.hasClass("error")) this.options.hasError = true;        
+        if (this.$element.hasClass("error")) this.options.hasError = true;
     },
     
     /** @ignore */
     _createMissingElements: function() {
         if (this.$element.find("button").length === 0) {
             var button = $("<button>" + this.options.placeholder + "</button>");
-            button.addClass("dropdown");        
+            button.addClass("dropdown");
             this.$element.append(button);
         }
         if (this.options.editable && this.$element.find("input").length === 0) {
@@ -322,14 +322,14 @@
                         this.buttonElement.html(html);
                     }
                 }
-            }            
+            }
         }
         if (this.options.disabled) {
             this.buttonElement.attr("disabled", "disabled");
             this.inputElement.attr("disabled", "disabled");
         } else {
-            this.buttonElement.removeAttr("disabled");            
-            this.inputElement.removeAttr("disabled");            
+            this.buttonElement.removeAttr("disabled");
+            this.inputElement.removeAttr("disabled");
         }
         if (this.hasFocus) {
             this.$element.addClass("focus");
