@@ -18,6 +18,9 @@ module.exports = function(grunt) {
       // Utilities
       'CUI.Util.js',
 
+      // Persistence
+      'CUI.Persistence.js',
+
       // Components
       'components/CUI.Widget.js',
       'components/CUI.Modal.js',
