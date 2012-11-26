@@ -227,6 +227,7 @@
                 current.attr("selected", "selected");
                 this.dropdownList.hide();
             }
+            this.syncSelectElement.change();
         }
         this._update(true);
     },
