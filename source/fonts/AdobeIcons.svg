@@ -4,7 +4,7 @@
 	<metadata></metadata>
 	<defs>
 		<font id="AdobeIcons" horiz-adv-x="1152" >
-			<font-face units-per-em="1152" ascent="1152" descent="-32" />
+			<font-face units-per-em="1152" ascent="1200" descent="-48" />
 			<missing-glyph horiz-adv-x="1152" />
 			<glyph unicode="&#xf002;" d="M 119.098 696.098 L -0.098 575.902 L 575.902 -0.0980225 L 1151.9 575.902 L 1031.71 696.098 L 575.902 240.293 Z M 119.098 1152.1 L -0.098 1031.9 L 575.902 455.902 L 1151.9 1031.9 L 1031.71 1152.1 L 575.902 696.293 Z" glyph-name="accordiondown" />
 			<glyph unicode="&#xf003;" d="M 696 1032.81 L 575.805 1152 L -0.195 576 L 575.805 0 L 696 120.195 L 240.195 576 Z M 1152 1032.81 L 1031.81 1152 L 455.805 576 L 1031.81 0 L 1152 120.195 L 696.195 576 Z" glyph-name="accordionleft" />

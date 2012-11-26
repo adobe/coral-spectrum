@@ -2,13 +2,15 @@ var FontBoost = function (name, images, glyphSize) {
 
 	var self = this,
 		glyphs = {},
+		descent = -48,
+		ascent = glyphSize + descent,
 		header = '<?xml version="1.0" standalone="no"?>\n' +
 			'<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >\n' +
 			'<svg xmlns="http://www.w3.org/2000/svg">\n' +
 			'\t<metadata></metadata>\n' + 
 			'\t<defs>\n' +
 				'\t\t<font id="'+ name +'" horiz-adv-x="'+ glyphSize +'" >\n' + 
-					'\t\t\t<font-face units-per-em="'+ glyphSize +'" ascent="'+ glyphSize +'" descent="-32" />\n' +
+					'\t\t\t<font-face units-per-em="'+ glyphSize +'" ascent="'+ ascent +'" descent="'+ descent +'" />\n' +
 					'\t\t\t<missing-glyph horiz-adv-x="'+ glyphSize +'" />\n',
 		footer = '\t\t</font>\n' + 
 			'\t</defs>\n' + 
