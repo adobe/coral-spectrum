@@ -196,6 +196,7 @@ var index = filters.getSelectedIndex();
             this.selectedIndices = (index >= 0) ? [index] : [];
         }
         this._update();
+        this.inputElement.change();
     },
     
     
