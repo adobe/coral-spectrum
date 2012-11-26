@@ -74,12 +74,33 @@
 
 
 // Icons
-@icon-font-size: 1.5em;  // Define with em so it changes with font-size
-@icon-font-width: 1em;   // The width of the icon characters
-@icon-color: rgb(0, 0, 0);
-@icon-active-color: rgb(65, 145, 210);
-@icon-buttons-size: 40*@px;
-@icon-buttons-divider-width: 8*@px;
+@icon-color: black;
+@icon-opacity: 0.65;
+
+@icon-white-color: white;
+@icon-white-opacity: 1;
+
+@icon-blue-color: rgb(65, 145, 210);
+@icon-blue-opacity: 1;
+
+@icon-hover-color: @icon-color;
+@icon-hover-opacity: 0.80;
+
+@icon-active-color: @icon-blue-color;
+@icon-active-opacity: @icon-blue-opacity;
+
+@icon-disabled-color: @icon-color;
+@icon-disabled-opacity: 0.15;
+
+@icon-xsmall-size: 12*@px;
+@icon-small-size: 18*@px;
+@icon-medium-size: 24*@px;
+@icon-large-size: 2rem;
+
+@icon-divider-color: rgb(206, 206, 206);
+
+@icon-label-padding-multiplier: 0.25;
+
 
 // Buttons
 @button-text-size: 14*@px; // TBD: make rem so they stay the same size, or let them scale with fonts?
