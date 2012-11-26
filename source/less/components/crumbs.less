@@ -5,7 +5,7 @@
 
 nav.crumbs {
   a {
-    padding: 0 15*@px;
+    padding: 0 15*@px 0 0;
 
     line-height: 2.75rem;
     height: 2.75rem;
@@ -25,7 +25,7 @@ nav.crumbs {
     &:before,
     &:hover:before {
       font-size: 1rem;
-      position: absolute;
+      position: relative;
       left: -10*@px;
       padding-top: 2*@px;
       opacity: 1;
@@ -34,8 +34,6 @@ nav.crumbs {
 
    
     &:first-child {
-      padding-left: 0;
-
       &:before {
         content: "";
       }
