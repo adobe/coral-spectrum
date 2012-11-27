@@ -17,6 +17,7 @@
 
     <script src="js/guide.js"></script>
     <script src="js/google-code-prettify/prettify.js"></script>
+
 </head>
 <body class="desktop">
 
@@ -1550,50 +1551,31 @@
                 <section id="Cards-Asset">
                     <h2 class="line">Asset Card</h2>
 
-                    <div class="componentSample">
-                        <div class="example">
-                            <article class="card-asset">
-                                <a href="#">
-                                    <img src="https://lh5.googleusercontent.com/-Jw12BvbSrH4/UHylAGRIsrI/AAAAAAAADUI/2lXvalAiCgU/s288/20121010-IMG_2547.jpg" alt=""/>
-                                    <div class="main">
-                                        <h4>Asset</h4>
-                                    </div>
-                                    <p class="description">
-                                        <span class="resolution">1220 x 400</span>
-                                        <span class="weight">149KB</span>
-                                    </p>
-                                    <p class="info">
-                                        <span class="links"><i class="icon-image">Links</i> 8</span>
-                                        <span class="comments"><i class="icon-comment">Comments</i> 12</span>
-                                        <span class="modified">8 hours ago</span>
-                                    </p>
-                                </a>
-                            </article>
-                            
-                            <article class="card-asset"><a href="#">
-                                <img src="https://lh5.googleusercontent.com/-Jw12BvbSrH4/UHylAGRIsrI/AAAAAAAADUI/2lXvalAiCgU/s288/20121010-IMG_2547.jpg" alt=""/>
-                                <h4>Asset</h4>
-                                <p class="description">
-                                    <span class="resolution">1220 x 400</span>
-                                    <span class="weight">149KB</span>
-                                </p>
-                            </a></article>
+                    <div class="componentSample" >
+                        <div class="example" id="card-asset-ex1">
+                            <div class="grid">
+                                <article class="card-asset" >
+                                    <i class="select"></i>
+                                    <i class="move icon-navigation"></i>
+                                    <a href="#">
+                                        <img src="images/previews/preview1.png" alt="">
+                                        <div class="label">
+                                            <div class="main">
+                                                <img src="images/previews/preview-small.png" alt="">
+                                                <h4>Asset Name</h4>
+                                            </div>
+                                            <p class="type">PSD</p>
+                                            <p class="resolution">1220 x 400</p>
+                                            <p class="size">149KB</p>
+                                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                                            <p class="links"><i class="icon-link"><span>Links</span></i> 8</p>
+                                            <p class="comments"><i class="icon-comment"><span>Comments</span></i> 12</p>
+                                        </div>
+                                    </a>
+                                </article>
+                            </div>
                         </div>
-                        <pre class="prettyprint linenums">
-&lt;article class=&quot;card-asset&quot;&gt;&lt;a href=&quot;#&quot;&gt;
-    &lt;img src=&quot;fake_image.jpg&quot; alt=&quot;&quot;/&gt;
-    &lt;h4&gt;Asset&lt;/h4&gt;
-    &lt;p class=&quot;description&quot;&gt;
-        &lt;span class=&quot;resolution&quot;&gt;1220 x 400&lt;/span&gt;
-        &lt;span class=&quot;weight&quot;&gt;149KB&lt;/span&gt;
-    &lt;/p&gt;
-    &lt;p class=&quot;info&quot;&gt;
-        &lt;span class=&quot;links&quot;&gt;&lt;i class=&quot;icon-add&quot;&gt;Links&lt;/i&gt; 8&lt;/span&gt;
-        &lt;span class=&quot;comments&quot;&gt;&lt;i class=&quot;icon-add&quot;&gt;Comments&lt;/i&gt; 12&lt;/span&gt;
-        &lt;span class=&quot;modified&quot;&gt;8 hours ago&lt;/span&gt;
-    &lt;/p&gt;
-&lt;/a&gt;&lt;/article&gt;
-                        </pre>
+                        <pre class="prettyprint linenums" data-src-id="card-asset-ex1">
                     </div>
                 </section>
 
@@ -1601,7 +1583,7 @@
                     <h2 class="line">Collection Card</h2>
 
                     <div class="componentSample">
-                        <div class="example">
+                        <div class="example" id="card-collection-ex1">
                             <article class="card-collection"><a href="#">
                                 <img src="https://lh5.googleusercontent.com/-Jw12BvbSrH4/UHylAGRIsrI/AAAAAAAADUI/2lXvalAiCgU/s288/20121010-IMG_2547.jpg" alt=""/>
                                 <div class="banner">
@@ -1621,19 +1603,7 @@
                                 </div>
                             </a></article>
                         </div>
-                        <pre class="prettyprint linenums">
-&lt;article class=&quot;card-collection&quot;&gt;&lt;a href=&quot;#&quot;&gt;
-    &lt;img src=&quot;fake_image.jpg&quot; alt=&quot;&quot;/&gt;
-    &lt;div class=&quot;banner&quot;&gt;
-        &lt;h4&gt;Collection&lt;/h4&gt;
-        &lt;p class=&quot;info&quot;&gt;
-            &lt;span class=&quot;links&quot;&gt;&lt;i class=&quot;icon-add&quot;&gt;Links&lt;/i&gt; 8&lt;/span&gt;
-            &lt;span class=&quot;comments&quot;&gt;&lt;i class=&quot;icon-add&quot;&gt;Comments&lt;/i&gt; 12&lt;/span&gt;
-            &lt;span class=&quot;modified&quot;&gt;8 hours ago&lt;/span&gt;
-        &lt;/p&gt;
-    &lt;/div&gt;
-&lt;/a&gt;&lt;/article&gt;
-                        </pre>
+                        <pre class="prettyprint linenums" data-src-id="card-collection-ex1">
                     </div>
                 </section>
 
@@ -1641,7 +1611,7 @@
                     <h2 class="line">Directory Card</h2>
 
                     <div class="componentSample">
-                        <div class="example">
+                        <div class="example" id="card-directory-ex1">
                             <article class="card-directory"><a href="#">
                                 <img src="https://lh5.googleusercontent.com/-Jw12BvbSrH4/UHylAGRIsrI/AAAAAAAADUI/2lXvalAiCgU/s288/20121010-IMG_2547.jpg" alt=""/>
                                 <h4>Directory</h4>
@@ -1663,17 +1633,8 @@
                             </a></article>
                         </div>
 
-                        <pre class="prettyprint linenums">
-&lt;article class=&quot;card-directory&quot;&gt;&lt;a href=&quot;#&quot;&gt;
-    &lt;img src=&quot;fake_image.jpg&quot; alt=&quot;&quot;/&gt;
-    &lt;h4&gt;Directory&lt;/h4&gt;
-    &lt;p class=&quot;info&quot;&gt;
-        &lt;span class=&quot;links&quot;&gt;&lt;i class=&quot;icon-add&quot;&gt;Links&lt;/i&gt; 8&lt;/span&gt;
-        &lt;span class=&quot;comments&quot;&gt;&lt;i class=&quot;icon-add&quot;&gt;Comments&lt;/i&gt; 12&lt;/span&gt;
-        &lt;span class=&quot;modified&quot;&gt;8 hours ago&lt;/span&gt;
-    &lt;/p&gt;
-&lt;/a&gt;&lt;/article&gt;
-                        </pre>
+                        <pre class="prettyprint linenums" data-src-id="card-directory-ex1" />
+                       
                     </div>
                 </section>
 
