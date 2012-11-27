@@ -20,18 +20,18 @@ jQuery(function($) {
             // get the html
             var html = elem.html();
 
-            // replace the extra padding the browser seems to throw in.
-            var numSpacesBeforeFirstNonSpaceCharInFirstLine = html.search(/[^\s]/);
-            console.log('here', numSpacesBeforeFirstNonSpaceCharInFirstLine );
-            var re = new RegExp('^\\s{'+numSpacesBeforeFirstNonSpaceCharInFirstLine+'}', 'gm');
+            // remove the indent based on the number of spaces prefixing the first line.
+            var whitespaceIndentCount = html.search(/[^\s]/);
+            console.log('here', whitespaceIndentCount );
+            var re = new RegExp('^\\s{'+whitespaceIndentCount+'}', 'gm');
             html = html.replace(re, '');
 
-            // hack: last line has one less space. replace that too. 
-            re = new RegExp('^\\s{'+(numSpacesBeforeFirstNonSpaceCharInFirstLine-1)+'}', 'gm');
+            // hack: sometimes last line has one less space. replace that too. 
+            re = new RegExp('^\\s{'+(whitespaceIndentCount-1)+'}', 'gm');
             html = html.replace(re, '');
 
 
-            // set the pre element's html
+            // now set the <pre /> elements text.
             $(this).text( html );
         });
     }
