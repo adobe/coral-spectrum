@@ -109,7 +109,11 @@
       this._updateDefault();
 
       // Start with first page
-      this.changePage(1);
+      // Asynchronous to make the wizard object available in the option callback (onPageChanged)
+      setTimeout(function() { 
+        this.changePage(1);
+      }.bind(this), 1)
+      
     },
 
     defaults: {

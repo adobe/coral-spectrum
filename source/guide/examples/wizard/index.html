@@ -36,7 +36,7 @@
                 </ol>
                 <button class="next" disabled>Next</button>
             </nav>
-            <section data-next-disabled="false" data-back-label="Cancel">
+            <section  data-wizard-page-callback="step1" data-next-disabled="false" data-back-label="Cancel">
                 The first step is optional.
                 <br />
                 <button class="activate-step2 primary">Activate second step</button>
@@ -57,10 +57,14 @@
         <script>
             $(document).ready(function(){
                 var step3 = 0;
+                var wizard = null;
 
-                var wizard = new CUI.Wizard({
+                wizard = new CUI.Wizard({
                     element: '.wizard',
                     onPageChanged: {
+                        step1: function() {
+                            console.log(wizard);
+                        },
                         step3: function() {
                             step3 = 1;
                         }
