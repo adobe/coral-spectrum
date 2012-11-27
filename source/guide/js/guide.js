@@ -5,9 +5,46 @@ jQuery(function($) {
 
         $('html').css('fontSize', newSize);
     }
+
+    // Automatically populate <code /> samples with the appropriate HTML.
+    function populateCodeSamples()
+    {
+        // any <code /> blocks that have 'data-pre-src-id' set to a given element
+        $('pre[data-src-id]').each(function()
+        {
+            // get the html of the source element, based on specified id.
+            var elemName = $(this).attr('data-src-id');
+            var elem = $("#" + elemName);
+
+          
+            // get the html
+            var html = elem.html();
+
+            // replace the extra padding the browser seems to throw in.
+            var numSpacesBeforeFirstNonSpaceCharInFirstLine = html.search(/[^\s]/);
+            console.log('here', numSpacesBeforeFirstNonSpaceCharInFirstLine );
+            var re = new RegExp('^\\s{'+numSpacesBeforeFirstNonSpaceCharInFirstLine+'}', 'gm');
+            html = html.replace(re, '');
+
+            // hack: last line has one less space. replace that too. 
+            re = new RegExp('^\\s{'+(numSpacesBeforeFirstNonSpaceCharInFirstLine-1)+'}', 'gm');
+            html = html.replace(re, '');
+
+
+            // set the pre element's html
+            $(this).text( html );
+        });
+    }
+
+
     
+    populateCodeSamples();
+
     // Prettify code examples
     prettyPrint();
+
+
+    
  
     // Size changers
     $('#res-plus').on('click', function(evt) {
@@ -25,6 +62,9 @@ jQuery(function($) {
     $('.tab-variant').on('click', function() {
         $('#tabsExample').attr('class', $(this).data('variant'));
     });
+
+    
+
     
     /**
         Show the paragraph link icon when a heading is hovered on that is within a named section
