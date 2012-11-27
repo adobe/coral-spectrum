@@ -67,4 +67,28 @@ The top toolbar with action icons
         line-height: 46*@px;
         margin: 0 10*@px;
     }
+
+    >nav.pulldown {
+        display: inline-block;
+
+        >a {
+            &[class^="icon-"], 
+            &[class*=" icon-"] {
+                padding: 0 10*@px;
+                line-height: 46*@px;
+
+                &:after {
+                    background: none;
+                    margin-left: 0;
+                    padding-left: 0;
+                }
+            }
+        }
+
+        >.popover ul li a {
+            padding: 0 10*@px;
+            height: 2rem;
+            line-height: 2rem;
+        }
+    }
 }
