@@ -726,14 +726,21 @@ CUI.Filters.cqTagOptionRenderer = function(iterator, key, highlight) {
     }
     var searchFor = this.inputElement.val();
     
-    var pathParts = value.split("/");
-    value = "";
+    var namespaced = value.split(":");
+    if (namespaced.length < 2) namespaced[1] = "";
+    
+    var namespace = namespaced[0];
+    var restPath = namespaced[1];
+    
+    var pathParts = restPath.split("/");
+
     
     // html encode fn
     function e(text) {
         return $("<div>").text(text).html();
     }
     
+    value = namespace + ": ";
     for(var q = 0; q < pathParts.length; q++) {
         var part = pathParts[q];
 
@@ -748,7 +755,7 @@ CUI.Filters.cqTagOptionRenderer = function(iterator, key, highlight) {
             part = e(part);
         }
         
-        if (value !== "") value += " / ";
+        if (q > 0) value += " / ";
         if (q === pathParts.length - 1) part = "<b>" + part + "</b>";
         value = value + part;
     }
