@@ -17,6 +17,7 @@
 
     <script src="js/guide.js"></script>
     <script src="js/google-code-prettify/prettify.js"></script>
+
 </head>
 <body class="desktop">
 
@@ -121,11 +122,11 @@
                     <a class="heading" href="#Cards">Cards</a>
 
                     <nav class="fold">
-                        <a href="#Cards-Asset">DAM Asset</a>
-                        <a href="#Cards-Collection">DAM Collection</a>
-                        <a href="#Cards-Directory">DAM Directory</a>
-                        <a href="#Cards-Page">WCM Page</a>
-                        <a href="#Cards-Board">WCM Board</a>
+                        <a href="#Cards-Asset">Asset</a>
+                        <a href="#Cards-Collection">Collection</a>
+                        <a href="#Cards-Directory">Directory</a>
+                        <a href="#Cards-Page">Page</a>
+                        <a href="#Cards-Board">Board</a>
                     </nav>
                 </section>
 
@@ -1024,6 +1025,7 @@
                                 <div class="dropdown" data-init="dropdown">
                                     <button>Single Select</button>
                                     <select name="dropdown" >
+                                        <option></option>
                                         <option>Single One</option>
                                         <option selected>Single Two</option>
                                         <option>Single Three</option>
@@ -1541,260 +1543,230 @@
                 <p>There are many cards for displaying data. They are not always card shaped, but we still call them that.</p>
                 <h3>Variations</h3>
                 <ul>
-                    <li>DAM Asset Card: for a single item.
-                    <li>DAM Collection Card: for a collection of items.
-                    <li>DAM Directory Card: for a directory of items.
-                    <li>WCM Page Card: for a page item.
+                    <li>Asset Card: for a single item.
+                    <li>Collection Card: for a collection of items.
+                    <li>Directory Card: for a directory of items.
+                    <li>Page Card: for a page item.
                 </ul>
 
                 <section id="Cards-Asset">
-                    <h2 class="line">DAM Asset Card</h2>
+                    <h2 class="line">Asset Card</h2>
 
-                    <div class="componentSample">
-                        <div class="example">
-                            <article class="card-asset">
-                                <a href="#">
-                                    <img src="https://lh5.googleusercontent.com/-Jw12BvbSrH4/UHylAGRIsrI/AAAAAAAADUI/2lXvalAiCgU/s288/20121010-IMG_2547.jpg" alt=""/>
-                                    <div class="main">
-                                        <h4>Asset</h4>
-                                    </div>
-                                    <p class="description">
-                                        <span class="resolution">1220 x 400</span>
-                                        <span class="weight">149KB</span>
-                                    </p>
-                                    <p class="info">
-                                        <span class="links"><i class="icon-image">Links</i> 8</span>
-                                        <span class="comments"><i class="icon-comment">Comments</i> 12</span>
-                                        <span class="modified">8 hours ago</span>
-                                    </p>
-                                </a>
-                            </article>
-                            
-                            <article class="card-asset"><a href="#">
-                                <img src="https://lh5.googleusercontent.com/-Jw12BvbSrH4/UHylAGRIsrI/AAAAAAAADUI/2lXvalAiCgU/s288/20121010-IMG_2547.jpg" alt=""/>
-                                <h4>Asset</h4>
-                                <p class="description">
-                                    <span class="resolution">1220 x 400</span>
-                                    <span class="weight">149KB</span>
-                                </p>
-                            </a></article>
+                    <div class="componentSample" >
+                        <div class="example" id="card-asset-ex1">
+                            <div class="grid">
+                                <article class="card-asset" >
+                                    <i class="select"></i>
+                                    <i class="move icon-navigation"></i>
+                                    <a href="#">
+                                        <img src="images/previews/preview1.png" alt="">
+                                        <div class="label">
+                                            <div class="main">
+                                                <img src="images/previews/preview-small.png" alt="">
+                                                <h4>Asset Name</h4>
+                                            </div>
+                                            <p class="type">PSD</p>
+                                            <p class="resolution">1220 x 400</p>
+                                            <p class="size">149KB</p>
+                                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                                            <p class="links"><i class="icon-link"><span>Links</span></i> 8</p>
+                                            <p class="comments"><i class="icon-comment"><span>Comments</span></i> 12</p>
+                                        </div>
+                                    </a>
+                                </article>
+                            </div>
                         </div>
-                        <pre class="prettyprint linenums">
-&lt;article class=&quot;card-asset&quot;&gt;&lt;a href=&quot;#&quot;&gt;
-    &lt;img src=&quot;fake_image.jpg&quot; alt=&quot;&quot;/&gt;
-    &lt;h4&gt;Asset&lt;/h4&gt;
-    &lt;p class=&quot;description&quot;&gt;
-        &lt;span class=&quot;resolution&quot;&gt;1220 x 400&lt;/span&gt;
-        &lt;span class=&quot;weight&quot;&gt;149KB&lt;/span&gt;
-    &lt;/p&gt;
-    &lt;p class=&quot;info&quot;&gt;
-        &lt;span class=&quot;links&quot;&gt;&lt;i class=&quot;icon-add&quot;&gt;Links&lt;/i&gt; 8&lt;/span&gt;
-        &lt;span class=&quot;comments&quot;&gt;&lt;i class=&quot;icon-add&quot;&gt;Comments&lt;/i&gt; 12&lt;/span&gt;
-        &lt;span class=&quot;modified&quot;&gt;8 hours ago&lt;/span&gt;
-    &lt;/p&gt;
-&lt;/a&gt;&lt;/article&gt;
-                        </pre>
+                        <pre class="prettyprint linenums" data-src-id="card-asset-ex1">
                     </div>
                 </section>
 
                 <section id="Cards-Collection">
-                    <h2 class="line">DAM Collection Card</h2>
+                    <h2 class="line">Collection Card</h2>
 
                     <div class="componentSample">
-                        <div class="example">
-                            <article class="card-collection"><a href="#">
-                                <img src="https://lh5.googleusercontent.com/-Jw12BvbSrH4/UHylAGRIsrI/AAAAAAAADUI/2lXvalAiCgU/s288/20121010-IMG_2547.jpg" alt=""/>
-                                <div class="banner">
-                                    <h4>Collection</h4>
-                                    <p class="info">
-                                        <span class="links"><i class="icon-image">Links</i> 8</span>
-                                        <span class="comments"><i class="icon-comment">Comments</i> 12</span>
-                                        <span class="modified">8 hours ago</span>
-                                    </p>
-                                </div>
-                            </a></article>
+                        <div class="example" id="card-collection-ex1">
+                           <div class="grid">
+                                <article class="card-collection stack">
+                                    <i class="select"></i>
+                                    <i class="move icon-navigation"></i>
+                                    <a href="#">
+                                        <img src="images/previews/preview1.png" alt="">
+                                        <div class="label">
+                                            <h4>Collection Name</h4>
+                                            <p class="links"><i class="icon-link"><span>Links</span></i> 8</p>
+                                            <p class="comments"><i class="icon-comment"><span>Comments</span></i> 12</p>
+                                        </div>
+                                    </a>
+                                </article>
 
-                            <article class="card-collection"><a href="#">
-                                <img src="https://lh5.googleusercontent.com/-Jw12BvbSrH4/UHylAGRIsrI/AAAAAAAADUI/2lXvalAiCgU/s288/20121010-IMG_2547.jpg" alt=""/>
-                                <div class="banner">
-                                    <h4>Collection</h4>
-                                </div>
-                            </a></article>
+                                <article class="card-collection stack welcome">
+                                    <i class="select"></i>
+                                    <i class="move icon-navigation"></i>
+                                    <a href="#">
+                                        <img src="images/previews/preview1.png" alt="">
+                                        <div class="label">
+                                            <h4>Collection Name</h4>
+                                            <p>Collection</p>
+                                        </div>
+                                    </a>
+                                </article>
+                           </div>
                         </div>
-                        <pre class="prettyprint linenums">
-&lt;article class=&quot;card-collection&quot;&gt;&lt;a href=&quot;#&quot;&gt;
-    &lt;img src=&quot;fake_image.jpg&quot; alt=&quot;&quot;/&gt;
-    &lt;div class=&quot;banner&quot;&gt;
-        &lt;h4&gt;Collection&lt;/h4&gt;
-        &lt;p class=&quot;info&quot;&gt;
-            &lt;span class=&quot;links&quot;&gt;&lt;i class=&quot;icon-add&quot;&gt;Links&lt;/i&gt; 8&lt;/span&gt;
-            &lt;span class=&quot;comments&quot;&gt;&lt;i class=&quot;icon-add&quot;&gt;Comments&lt;/i&gt; 12&lt;/span&gt;
-            &lt;span class=&quot;modified&quot;&gt;8 hours ago&lt;/span&gt;
-        &lt;/p&gt;
-    &lt;/div&gt;
-&lt;/a&gt;&lt;/article&gt;
-                        </pre>
+                        <pre class="prettyprint linenums" data-src-id="card-collection-ex1">
                     </div>
                 </section>
 
                 <section id="Cards-Directory">
-                    <h2 class="line">DAM Directory Card</h2>
+                    <h2 class="line">Directory Card</h2>
 
                     <div class="componentSample">
-                        <div class="example">
-                            <article class="card-directory"><a href="#">
-                                <img src="https://lh5.googleusercontent.com/-Jw12BvbSrH4/UHylAGRIsrI/AAAAAAAADUI/2lXvalAiCgU/s288/20121010-IMG_2547.jpg" alt=""/>
-                                <h4>Directory</h4>
-                                <p class="info">
-                                    <span class="links"><i class="icon-image">Links</i> 8</span>
-                                    <span class="comments"><i class="icon-comment">Comments</i> 12</span>
-                                    <span class="modified">8 hours ago</span>
-                                </p>
-                            </a></article>
-
-                            <article class="card-directory"><a href="#">
-                                <img src="https://lh5.googleusercontent.com/-Jw12BvbSrH4/UHylAGRIsrI/AAAAAAAADUI/2lXvalAiCgU/s288/20121010-IMG_2547.jpg" alt=""/>
-                                <h4>Directory</h4>
-                            </a></article>
-
-                            <article class="card-directory"><a href="#">
-                                <span class="empty"></span>
-                                <h4>Empty Directory</h4>
-                            </a></article>
+                        <div class="example" id="card-directory-ex1">
+                            <div class="grid">
+                                <article class="card-directory">
+                                    <i class="select"></i>
+                                    <i class="move icon-navigation"></i>
+                                    <a href="#">
+                                        <img src="images/previews/preview7.png" alt="">
+                                        <div class="label">
+                                            <div class="main">
+                                                <img src="images/previews/preview-small.png" alt="">
+                                                <h4>Directory Name</h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </article>
+                            </div>
                         </div>
-
-                        <pre class="prettyprint linenums">
-&lt;article class=&quot;card-directory&quot;&gt;&lt;a href=&quot;#&quot;&gt;
-    &lt;img src=&quot;fake_image.jpg&quot; alt=&quot;&quot;/&gt;
-    &lt;h4&gt;Directory&lt;/h4&gt;
-    &lt;p class=&quot;info&quot;&gt;
-        &lt;span class=&quot;links&quot;&gt;&lt;i class=&quot;icon-add&quot;&gt;Links&lt;/i&gt; 8&lt;/span&gt;
-        &lt;span class=&quot;comments&quot;&gt;&lt;i class=&quot;icon-add&quot;&gt;Comments&lt;/i&gt; 12&lt;/span&gt;
-        &lt;span class=&quot;modified&quot;&gt;8 hours ago&lt;/span&gt;
-    &lt;/p&gt;
-&lt;/a&gt;&lt;/article&gt;
-                        </pre>
+                        <pre class="prettyprint linenums" data-src-id="card-directory-ex1" />
+                       
                     </div>
                 </section>
 
                 <section id="Cards-Page">
-                    <h2 class="line">WCM Page Card</h2>
+                    <h2 class="line">Page Card</h2>
 
                     <div class="componentSample">
-                        <div class="example">
-                            <article class="card-page"><a href="#">
-                                <img src="https://lh5.googleusercontent.com/-Jw12BvbSrH4/UHylAGRIsrI/AAAAAAAADUI/2lXvalAiCgU/s288/20121010-IMG_2547.jpg" alt=""/>
-                                <div class="description">
-                                <h4>Page</h4>
-                                <p class="description">Launch Copy</p>
-                                <p class="info">
-                                    <span class="modified"><i class="icon-clock">Modified</i> 2 days ago</span>
-                                    <span class="published"><i class="icon-clock">Published</i> 12 hours ago</span>
-                                    <i class="icon-info right">Link</i>
-                                </p>
-                            </a></article>
-                        </div>
+                        <div class="example" id="card-page-ex1">
+                            <div class="grid">                        
+                                <article class="card-page">
+                                    <i class="select"></i>
+                                    <i class="move icon-navigation"></i>
+                                    <a href="#">
+                                        <img src="images/previews/preview8.png" alt="">
+                                        <div class="main">
+                                            <span class="box-stack"></span>
+                                            <h4>Very Long Page Title. very long type. very long type. very long type. very long type.</h4>
+                                            <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                            <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                            <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                                        </div>
+                                        <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                                        <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                                        <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                                    </a>
+                                </article>
+                                <article class="card-page stack">
+                                    <i class="select"></i>
+                                    <i class="move icon-navigation"></i>
+                                    <a href="#">
+                                        <img src="images/previews/preview3.png" alt="">
+                                        <div class="main">
+                                            <span class="box-stack"></span>
+                                            <h4>Page Title</h4>
+                                            <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
+                                            <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
+                                            <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                                        </div>
+                                        <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                                        <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                                        <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                                    </a>
+                                </article>
 
-                        <pre class="prettyprint linenums">
-&lt;article class=&quot;card-page&quot;&gt;&lt;a href=&quot;#&quot;&gt;
-    &lt;img src=&quot;fake_image.jpg&quot; alt=&quot;&quot;/&gt;
-    &lt;h4&gt;Page&lt;/h4&gt;
-    &lt;p class=&quot;description&quot;&gt;Launch Copy&lt;/p&gt;
-    &lt;p class=&quot;info&quot;&gt;
-        &lt;span class=&quot;modified&quot;&gt;&lt;i class=&quot;icon-add&quot;&gt;Modified&lt;/i&gt; 2 days ago&lt;/span&gt;
-        &lt;span class=&quot;published&quot;&gt;&lt;i class=&quot;icon-add&quot;&gt;Published&lt;/i&gt; 12 hours ago&lt;/span&gt;
-        &lt;i class=&quot;icon-add right&quot;&gt;Link&lt;/i&gt;
-    &lt;/p&gt;
-&lt;/a&gt;&lt;/article&gt;
-                        </pre>
+                            </div>                          
+                        </div>
+                        <pre class="prettyprint linenums" data-src-id="card-page-ex1"></pre>
                     </div>
                 </section>
             </section><!-- Cards -->
 
             <section id="Cards-Board">
-                <h2 class="line">WCM Board Card</h2>
+                <h2 class="line">Board Card</h2>
                 <div class="componentSample">
-                    <div class="example">
+                    <div class="example" id="card-board-ex1">
+                        <div class="grid">
+                            <article class="card-board">
+                                <a href="#">
+                                    <div class="cardheader">
+                                        <h4>Rachel and Wanda 2012</h4>
+                                        <p class="info">
+                                            <span><i class="icon-image white"><span>Cards</span></i> 12</span>
+                                            <span><i class="icon-user white"><span>Users</span></i> 6</span>
+                                            <span class="right">11:23 AM</span>
+                                        </p>
+                                    </div>
+                                    <div class="cardcontent">
+                                        <div class="cardpreview"><img src="images/previews/preview6.png" alt=""/></div>
+                                        <div class="cardpreview"><img src="images/previews/preview6.png" alt=""/></div>
+                                        <div class="cardpreview"><img src="images/previews/preview6.png" alt=""/></div>
+                                        <div class="cardpreview"><img src="images/previews/preview6.png" alt=""/></div>
+                                    </div>
+                                </a>
+                            </article>
 
-                        <article class="card-board"><a href="#">
-                            <div class="cardheader">
-                                <h4>Rachel and Wanda 2012</h4>
-                                <p class="info">
-                                    <span><i class="icon-image white"><span>Cards</span></i> 12</span>
-                                    <span><i class="icon-user white"><span>Users</span></i> 6</span>
-                                    <span class="right">11:23 AM</span>
-                                </p>
-                            </div>
-                            <div class="cardcontent">
-                                <div class="cardpreview"><img src="images/previews/preview6.png" alt=""/></div>
-                                <div class="cardpreview"><img src="images/previews/preview6.png" alt=""/></div>
-                                <div class="cardpreview"><img src="images/previews/preview6.png" alt=""/></div>
-                                <div class="cardpreview"><img src="images/previews/preview6.png" alt=""/></div>
-                            </div>
-                        </a></article>
+                            <article class="card-board">
+                                <a href="#">
+                                    <div class="cardheader">
+                                        <h4>Rachel and Wanda 2012</h4>
+                                        <p class="info">
+                                            <span><i class="icon-image white"><span>Cards</span></i> 12</span>
+                                            <span><i class="icon-user white"><span>Users</span></i> 6</span>
+                                            <span class="right">11:23 AM</span>
+                                        </p>
+                                    </div>
+                                    <div class="cardcontent">
+                                        <div class="cardpreview"><img src="images/previews/preview6.png" alt=""/></div>
+                                        <div class="cardpreview"><img src="images/previews/preview6.png" alt=""/></div>
+                                        <div class="cardpreview wide"><img src="images/previews/preview9.png" alt=""/></div>
+                                    </div>
+                                </a>
+                            </article>
 
-                        <article class="card-board"><a href="#">
-                            <div class="cardheader">
-                                <h4>Rachel and Wanda 2012</h4>
-                                <p class="info">
-                                    <span><i class="icon-image white"><span>Cards</span></i> 12</span>
-                                    <span><i class="icon-user white"><span>Users</span></i> 6</span>
-                                    <span class="right">11:23 AM</span>
-                                </p>
-                            </div>
-                            <div class="cardcontent">
-                                <div class="cardpreview"><img src="images/previews/preview6.png" alt=""/></div>
-                                <div class="cardpreview"><img src="images/previews/preview6.png" alt=""/></div>
-                                <div class="cardpreview wide"><img src="images/previews/preview9.png" alt=""/></div>
-                            </div>
-                        </a></article>
+                            <article class="card-board">
+                                <a href="#">
+                                    <div class="cardheader">
+                                        <h4>Rachel and Wanda 2012</h4>
+                                        <p class="info">
+                                            <span><i class="icon-image white"><span>Cards</span></i> 12</span>
+                                            <span><i class="icon-user white"><span>Users</span></i> 6</span>
+                                            <span class="right">11:23 AM</span>
+                                        </p>
+                                    </div>
+                                    <div class="cardcontent">
+                                        <div class="cardpreview wide"><img src="images/previews/preview9.png" alt=""/></div>
+                                        <div class="cardpreview wide"><img src="images/previews/preview9.png" alt=""/></div>
+                                    </div>
+                                </a>
+                            </article>
 
-                        <article class="card-board"><a href="#">
-                            <div class="cardheader">
-                                <h4>Rachel and Wanda 2012</h4>
-                                <p class="info">
-                                    <span><i class="icon-image white"><span>Cards</span></i> 12</span>
-                                    <span><i class="icon-user white"><span>Users</span></i> 6</span>
-                                    <span class="right">11:23 AM</span>
-                                </p>
-                            </div>
-                            <div class="cardcontent">
-                                <div class="cardpreview wide"><img src="images/previews/preview9.png" alt=""/></div>
-                                <div class="cardpreview wide"><img src="images/previews/preview9.png" alt=""/></div>
-                            </div>
-                        </a></article>
-
-                        <article class="card-board"><a href="#">
-                            <div class="cardheader">
-                                <h4>Rachel and Wanda 2012</h4>
-                                <p class="info">
-                                    <span><i class="icon-image white"><span>Cards</span></i> 12</span>
-                                    <span><i class="icon-user white"><span>Users</span></i> 6</span>
-                                    <span class="right">11:23 AM</span>
-                                </p>
-                            </div>
-                            <div class="cardcontent">
-                                <div class="cardpreview wide"><img src="images/previews/preview6.png" alt=""/></div>
-                            </div>
-                        </a></article>
+                            <article class="card-board">
+                                <a href="#">
+                                    <div class="cardheader">
+                                        <h4>Rachel and Wanda 2012</h4>
+                                        <p class="info">
+                                            <span><i class="icon-image white"><span>Cards</span></i> 12</span>
+                                            <span><i class="icon-user white"><span>Users</span></i> 6</span>
+                                            <span class="right">11:23 AM</span>
+                                        </p>
+                                    </div>
+                                    <div class="cardcontent">
+                                        <div class="cardpreview wide"><img src="images/previews/preview6.png" alt=""/></div>
+                                    </div>
+                                </a>
+                            </article>
+                        </div>
                     </div>
-                    <pre class="prettyprint linenums">
-&lt;article class="card-board">&lt;a href="#">
-    &lt;div class="cardheader">
-        &lt;h4>Rachel and Wanda 2012&lt;/h4>
-        &lt;p class="info">
-            &lt;span>&lt;i class="icon-image white">Cards&lt;/i>12&lt;/span>
-            &lt;span>&lt;i class="icon-user white">Users&lt;/i>6&lt;/span>
-            &lt;span class="right">11:23 AM&lt;/span>
-        &lt;/p>
-    &lt;/div>
-    &lt;div class="cardcontent">
-        &lt;div class="cardpreview">&lt;img src="images/previews/preview6.png" alt=""/>&lt;/div>
-        &lt;div class="cardpreview">&lt;img src="images/previews/preview6.png" alt=""/>&lt;/div>
-        &lt;div class="cardpreview">&lt;img src="images/previews/preview6.png" alt=""/>&lt;/div>
-        &lt;div class="cardpreview">&lt;img src="images/previews/preview6.png" alt=""/>&lt;/div>
-    &lt;/div>
-&lt;/a>&lt;/article></pre>
+                    <pre class="prettyprint linenums" data-src-id="card-board-ex1"></pre>
                 </div>
             </section>
 

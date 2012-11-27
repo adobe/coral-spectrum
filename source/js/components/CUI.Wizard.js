@@ -32,6 +32,22 @@
      *      </section>
      *  </div>
      *     
+     *  <h2>Data Attributes</h2>
+     *  <h4>Currently there are the following data options:</h4>
+     *  <pre>
+     *    data-hide-steps               If true, step will be hidden (useful for one step wizard).
+     *    data-init="wizard"
+     *  </pre>
+     *
+     *  <h4>Currently there are the following data options on section pages:</h4>
+     *  <pre>
+     *    data-wizard-page-callback     Callback identifier if the pageChanged options contains several callbacks
+     *    data-next-label               Specify the label of the `next button`
+     *    data-back-label               Specify the label of the `back button`
+     *    data-next-disabled            Speficy if the `next button` should be disabled
+     *    data-back-disabled            Speficy if the `back button` should be disabled
+     *  </pre>
+     *
      *  @example
      *  <caption>Instantiate by data API</caption>
      *  &lt;div class=&quot;wizard&quot; data-init=&quot;wizard&quot;&gt;
@@ -57,8 +73,8 @@
      * @param {Function|Object} options.onPageChanged Callback called each time the page change (with arguments: `page`). An Collection of functions can be given. When a page is displayed if his data-wizard-page-callback attribute can be found in the collection, then the corresponding callback will be executed (examples is given in guide/wizard.html).
      * @param {Function} options.onFinish Callback called when the user is on the last page and clicks on the `next button` (without arguments)
      * @param {Function} options.onLeaving Callback called when the user is on the first page and clicks on the `back button` (without arguments)
-     * @param {Function} options.onNextButtonClick Callback called after the last page change (without arguments).
-     * @param {Function} options.onBackButtonClick Callback called after the last page change (without arguments).
+     * @param {Function} options.onNextButtonClick Callback called after a click the on `next button` before the page change (without arguments) The page won't change if the callback return false.
+     * @param {Function} options.onBackButtonClick Callback called after a click the on `back button` before the page change (without arguments) The page won't change if the callback return false.
      */
     construct: function(options) {
       this.$nav = this.$element.find('nav').first();
@@ -93,7 +109,11 @@
       this._updateDefault();
 
       // Start with first page
-      this.changePage(1);
+      // Asynchronous to make the wizard object available in the option callback (onPageChanged)
+      setTimeout(function() { 
+        this.changePage(1);
+      }.bind(this), 1);
+      
     },
 
     defaults: {
@@ -135,11 +155,10 @@
       this._updateButtons();
 
       // Accept a callback or a collection of callbacks
-      if (typeof this.options.onPageChanged === 'function') {
-        this.options.onPageChanged($newPage);
-      } else if (typeof this.options.onPageChanged === 'object' &&
-                this._dataExists($newPage, 'wizardPageCallback') &&
-                typeof this.options.onPageChanged[$newPage.data('wizardPageCallback')] === 'function') {
+      this._fireCallback('onPageChanged');
+      if (typeof this.options.onPageChanged === 'object' &&
+              this._dataExists($newPage, 'wizardPageCallback') &&
+              typeof this.options.onPageChanged[$newPage.data('wizardPageCallback')] === 'function') {
         this.options.onPageChanged[$newPage.data('wizardPageCallback')]($newPage);
       }
     },
@@ -163,8 +182,25 @@
      * @return {Integer} The page number
      */
     getCurrentPage: function() {
-      var page = parseFloat(this.pageNumber)-1;
-      return this.$element.find('>section:eq('+ page +')');
+      return this.getPage(this.pageNumber);
+    },
+
+    /**
+     * Returns the page specifed by page number
+     *
+     * @return {Object} The page
+     */
+    getPage: function(pageNumber) {
+      return this.$element.find('>section:eq('+ (parseFloat(pageNumber)-1) +')');
+    },
+
+    /**
+     * Returns the page specifed by page number
+     *
+     * @return {Object} The page
+     */
+    getPageNav: function(pageNumber) {
+      return this.$element.find('>nav li:eq('+ (parseFloat(pageNumber)-1) +')');
     },
 
     /**
@@ -203,35 +239,124 @@
       this.$back.attr('disabled', disabled);
     },
 
+    activatePage: function(pageNumber) {
+      this.getPage(pageNumber).removeClass('wizard-hidden-step');
+      this.getPageNav(pageNumber).removeClass('wizard-hidden-step');
+    },
+
+    deactivatePage: function(pageNumber) {
+      this.getPage(pageNumber).addClass('wizard-hidden-step');
+      this.getPageNav(pageNumber).addClass('wizard-hidden-step');
+    },
+
     /** @ignore */
     _onNextClick: function(e) {
-      if (this.getCurrentPageNumber() < this.$nav.find('li').length) {
-        this.changePage(this.getCurrentPageNumber() + 1);
-        if (typeof this.options.onNextButtonClick === 'function') {
-          this.options.onNextButtonClick();
-        }
+      var callbackResult = this._fireCallback('onNextButtonClick');
+      
+      if (callbackResult === false) {
+        return ;
+      }
+      
+      var pageNumber = this._getNextPageNumber();
+
+      if (pageNumber != null) {
+        this.changePage(pageNumber);
       } else {
-        if (typeof this.options.onNextButtonClick === 'function') {
-          this.options.onNextButtonClick();
-        }
-        if (typeof this.options.onFinish === 'function') {
-          this.options.onFinish();
-        }
+        this._fireCallback('onFinish');
       }
     },
 
     /** @ignore */
     _onBackClick: function(e) {
-      if (this.getCurrentPageNumber() > 1) {
-        this.changePage(this.getCurrentPageNumber() - 1);
-        if (typeof this.options.onBackButtonClick === 'function') {
-          this.options.onBackButtonClick();
-        }
+      var callbackResult = this._fireCallback('onBackButtonClick');
+      
+      if (callbackResult === false) {
+        return ;
+      }
+
+      var pageNumber = this._getPreviousPageNumber();
+
+      if (pageNumber != null) {
+        this.changePage(pageNumber);
       } else {
-        if (typeof this.options.onLeaving === 'function') {
-          this.options.onLeaving();
+        this._fireCallback('onLeaving');
+      }
+    },
+
+    /**
+     * returns the next page to display.
+     * retruns null if the current page is the last one.
+     *
+     * @return {Integer} the page number
+     *
+     * @ignore
+     */
+    _getNextPageNumber: function() {
+      var pageNumber = this.getCurrentPageNumber();
+      return this._getRelativeNextPageNumber(pageNumber);
+    },
+
+    /**
+     * return the next page to display from a page number
+     * retruns null if the current page is the last one.
+     *
+     * @param {Integer} pageNumber page number
+     * @return {Integer} the page number
+     *
+     * @ignore
+     */
+    _getRelativeNextPageNumber: function(pageNumber) {
+      if (pageNumber < this.$nav.find('li').length) {
+        var newPageNumber = pageNumber + 1;
+        var page = this.getPage(newPageNumber);
+
+        if ($(page).hasClass('wizard-hidden-step')) {
+          return this._getRelativeNextPageNumber(newPageNumber);
+        } else {
+          return newPageNumber;
         }
 
+      } else {
+        return null;
+      }
+    },
+
+    /**
+     * return the previous page to display
+     * retruns null if the current page is the first one.
+     *
+     * @return {Integer} the page number
+     *
+     * @ignore
+     */
+    _getPreviousPageNumber: function() {
+      var pageNumber = this.getCurrentPageNumber();
+      return this._getRelativePreviousPageNumber(pageNumber);
+    },
+
+    /**
+     * return the previous page to display from a page number
+     * retruns null if the current page is the first one.
+     *
+     * @param {Integer} pageNumber page number
+     * @return {Integer} the page number
+     *
+     * @ignore
+     */
+    _getRelativePreviousPageNumber: function(pageNumber) {
+      if (pageNumber > 1) {
+        var newPageNumber = pageNumber - 1;
+        var page = this.getPage(newPageNumber);
+
+        if ($(page).hasClass('wizard-hidden-step')) {
+          return this._getRelativePreviousPageNumber(newPageNumber);
+        } else {
+          return newPageNumber;
+        }
+
+        return pageNumber-1;
+      } else {
+        return null;
       }
     },
 
@@ -250,8 +375,15 @@
     },
 
     /** @ignore */
+    _fireCallback: function(callback) {
+        if (typeof this.options[callback] === 'function') {
+          return this.options[callback]();
+        }
+        return undefined;
+    },
+
+    /** @ignore */
     /* jQuery doesn't have any method to check if a data exists */
-     
     _dataExists: function($element, index) {
       return $element.data(index) !== undefined;
     },
