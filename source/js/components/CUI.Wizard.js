@@ -32,6 +32,22 @@
      *      </section>
      *  </div>
      *     
+     *  <h2>Data Attributes</h2>
+     *  <h4>Currently there are the following data options:</h4>
+     *  <pre>
+     *    data-hide-steps               If true, step will be hidden (useful for one step wizard).
+     *    data-init="wizard"
+     *  </pre>
+     *
+     *  <h4>Currently there are the following data options on section pages:</h4>
+     *  <pre>
+     *    data-wizard-page-callback     Callback identifier if the pageChanged options contains several callbacks
+     *    data-next-label               Specify the label of the `next button`
+     *    data-back-label               Specify the label of the `back button`
+     *    data-next-disabled            Speficy if the `next button` should be disabled
+     *    data-back-disabled            Speficy if the `back button` should be disabled
+     *  </pre>
+     *
      *  @example
      *  <caption>Instantiate by data API</caption>
      *  &lt;div class=&quot;wizard&quot; data-init=&quot;wizard&quot;&gt;
@@ -264,12 +280,12 @@
     },
 
     /**
-     * @ignore
-     * 
      * returns the next page to display.
      * retruns null if the current page is the last one.
      *
      * @return {Integer} the page number
+     *
+     * @ignore
      */
     _getNextPageNumber: function() {
       var pageNumber = this.getCurrentPageNumber();
@@ -277,13 +293,13 @@
     },
 
     /**
-     * @ignore
-     * 
      * return the next page to display from a page number
      * retruns null if the current page is the last one.
      *
      * @param {Integer} pageNumber page number
      * @return {Integer} the page number
+     *
+     * @ignore
      */
     _getRelativeNextPageNumber: function(pageNumber) {
       if (pageNumber < this.$nav.find('li').length) {
@@ -302,12 +318,12 @@
     },
 
     /**
-     * @ignore
-     * 
      * return the previous page to display
      * retruns null if the current page is the first one.
      *
      * @return {Integer} the page number
+     *
+     * @ignore
      */
     _getPreviousPageNumber: function() {
       var pageNumber = this.getCurrentPageNumber();
@@ -315,13 +331,13 @@
     },
 
     /**
-     * @ignore
-     * 
      * return the previous page to display from a page number
      * retruns null if the current page is the first one.
      *
      * @param {Integer} pageNumber page number
      * @return {Integer} the page number
+     *
+     * @ignore
      */
     _getRelativePreviousPageNumber: function(pageNumber) {
       if (pageNumber > 1) {
