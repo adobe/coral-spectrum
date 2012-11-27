@@ -15,7 +15,7 @@
         <script src="../../js/CUI.js"></script>
     </head>
     <body>
-        <div class="wizard" data-init="wizard">
+        <div class="wizard">
             <nav>
                 <button class="back">Back</button>
                 <ol>
@@ -39,5 +39,21 @@
                 Name is required.
             </section>
         </div>
+
+        <script>
+        $(document).ready(function(){
+            $('.wizard').wizard({
+                onPageChanged: function() {
+                    console.log('page changed!');
+                },
+                onNextButtonClick: function() {
+                    console.log('onNextButtonClick');
+                },
+                onBackButtonClick: function() {
+                    console.log('onBackButtonClick');
+                }
+            });
+        });
+        </script>
     </body>
 </html>

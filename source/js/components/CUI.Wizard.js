@@ -57,8 +57,8 @@
      * @param {Function|Object} options.onPageChanged Callback called each time the page change (with arguments: `page`). An Collection of functions can be given. When a page is displayed if his data-wizard-page-callback attribute can be found in the collection, then the corresponding callback will be executed (examples is given in guide/wizard.html).
      * @param {Function} options.onFinish Callback called when the user is on the last page and clicks on the `next button` (without arguments)
      * @param {Function} options.onLeaving Callback called when the user is on the first page and clicks on the `back button` (without arguments)
-     * @param {Function} options.onNextButtonClick Callback called after the last page change (without arguments).
-     * @param {Function} options.onBackButtonClick Callback called after the last page change (without arguments).
+     * @param {Function} options.onNextButtonClick Callback called after a click the on `next button` before the page change (without arguments) The page won't change if the callback return false.
+     * @param {Function} options.onBackButtonClick Callback called after a click the on `back button` before the page change (without arguments) The page won't change if the callback return false.
      */
     construct: function(options) {
       this.$nav = this.$element.find('nav').first();
@@ -135,11 +135,10 @@
       this._updateButtons();
 
       // Accept a callback or a collection of callbacks
-      if (typeof this.options.onPageChanged === 'function') {
-        this.options.onPageChanged($newPage);
-      } else if (typeof this.options.onPageChanged === 'object' &&
-                this._dataExists($newPage, 'wizardPageCallback') &&
-                typeof this.options.onPageChanged[$newPage.data('wizardPageCallback')] === 'function') {
+      this._fireCallback('onPageChanged');
+      if (typeof this.options.onPageChanged === 'object' &&
+              this._dataExists($newPage, 'wizardPageCallback') &&
+              typeof this.options.onPageChanged[$newPage.data('wizardPageCallback')] === 'function') {
         this.options.onPageChanged[$newPage.data('wizardPageCallback')]($newPage);
       }
     },
@@ -205,33 +204,100 @@
 
     /** @ignore */
     _onNextClick: function(e) {
-      if (this.getCurrentPageNumber() < this.$nav.find('li').length) {
-        this.changePage(this.getCurrentPageNumber() + 1);
-        if (typeof this.options.onNextButtonClick === 'function') {
-          this.options.onNextButtonClick();
-        }
+      var callbackResult = this._fireCallback('onNextButtonClick');
+      
+      if (callbackResult === false) {
+        return ;
+      }
+      
+      var pageNumber = this._getNextPageNumber();
+
+      if (pageNumber != null) {
+        this.changePage(pageNumber);
+
       } else {
-        if (typeof this.options.onNextButtonClick === 'function') {
-          this.options.onNextButtonClick();
-        }
-        if (typeof this.options.onFinish === 'function') {
-          this.options.onFinish();
-        }
+        this._fireCallback('onFinish');
       }
     },
 
     /** @ignore */
-    _onBackClick: function(e) {
-      if (this.getCurrentPageNumber() > 1) {
-        this.changePage(this.getCurrentPageNumber() - 1);
-        if (typeof this.options.onBackButtonClick === 'function') {
-          this.options.onBackButtonClick();
+    _fireCallback: function(callback) {
+        if (typeof this.options[callback] === 'function') {
+          return this.options[callback]();
         }
-      } else {
-        if (typeof this.options.onLeaving === 'function') {
-          this.options.onLeaving();
-        }
+        return undefined;
+    },
 
+    /** @ignore */
+    _onBackClick: function(e) {
+      var callbackResult = this._fireCallback('onBackButtonClick');
+      
+      if (callbackResult === false) {
+        return ;
+      }
+
+      var pageNumber = this._getNextPageNumber();
+
+      if (pageNumber != null) {
+        this.changePage(pageNumber);
+      } else {
+        this._fireCallback('onLeaving');
+      }
+    },
+
+    /**
+     * @ignore
+     * 
+     * return the next page to display
+     *
+     * @return integer the page number
+     */
+    _getNextPageNumber: function() {
+      var pageNumber = this.getCurrentPageNumber();
+      return this._getRelativeNextPageNumber(pageNumber);
+    },
+
+    /**
+     * @ignore
+     * 
+     * return the next page to display from a page number
+     *
+     * @param {Integer} pageNumber page number
+     * @return integer the page number
+     */
+    _getRelativeNextPageNumber: function(pageNumber) {
+      if (pageNumber < this.$nav.find('li').length) {
+        return pageNumber+1;
+      } else {
+        return null;
+      }
+    },
+
+    /**
+     * @ignore
+     * 
+     * return the previous page to display
+     *
+     * @return integer the page number
+     */
+    _getPreviousPageNumber: function() {
+      var pageNumber = this.getCurrentPageNumber();
+      return this._getRelativePreviousPageNumber(pageNumber);
+    },
+
+    /**
+     * @ignore
+     * 
+     * return the previous page to display from a page number
+     *
+     * @param {Integer} pageNumber page number
+     * @return integer the page number
+     */
+    _getRelativePreviousPageNumber: function(pageNumber) {
+      if (pageNumber > 1) {
+        return pageNumber-1;
+      } else {
+        return null;
       }
     },
 
