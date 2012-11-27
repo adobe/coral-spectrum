@@ -162,8 +162,25 @@
      * @return {Integer} The page number
      */
     getCurrentPage: function() {
-      var page = parseFloat(this.pageNumber)-1;
-      return this.$element.find('>section:eq('+ page +')');
+      return this.getPage(this.pageNumber);
+    },
+
+    /**
+     * Returns the page specifed by page number
+     *
+     * @return {Object} The page
+     */
+    getPage: function(pageNumber) {
+      return this.$element.find('>section:eq('+ (parseFloat(pageNumber)-1) +')');
+    },
+
+    /**
+     * Returns the page specifed by page number
+     *
+     * @return {Object} The page
+     */
+    getPageNav: function(pageNumber) {
+      return this.$element.find('>nav li:eq('+ (parseFloat(pageNumber)-1) +')');
     },
 
     /**
@@ -202,6 +219,16 @@
       this.$back.attr('disabled', disabled);
     },
 
+    activatePage: function(pageNumber) {
+      this.getPage(pageNumber).removeClass('wizard-hidden-step');
+      this.getPageNav(pageNumber).removeClass('wizard-hidden-step');
+    },
+
+    deactivatePage: function(pageNumber) {
+      this.getPage(pageNumber).addClass('wizard-hidden-step');
+      this.getPageNav(pageNumber).addClass('wizard-hidden-step');
+    },
+
     /** @ignore */
     _onNextClick: function(e) {
       var callbackResult = this._fireCallback('onNextButtonClick');
@@ -214,18 +241,9 @@
 
       if (pageNumber != null) {
         this.changePage(pageNumber);
-
       } else {
         this._fireCallback('onFinish');
       }
-    },
-
-    /** @ignore */
-    _fireCallback: function(callback) {
-        if (typeof this.options[callback] === 'function') {
-          return this.options[callback]();
-        }
-        return undefined;
     },
 
     /** @ignore */
@@ -236,7 +254,7 @@
         return ;
       }
 
-      var pageNumber = this._getNextPageNumber();
+      var pageNumber = this._getPreviousPageNumber();
 
       if (pageNumber != null) {
         this.changePage(pageNumber);
@@ -248,9 +266,10 @@
     /**
      * @ignore
      * 
-     * return the next page to display
+     * returns the next page to display.
+     * retruns null if the current page is the last one.
      *
-     * @return integer the page number
+     * @return {Integer} the page number
      */
     _getNextPageNumber: function() {
       var pageNumber = this.getCurrentPageNumber();
@@ -261,13 +280,22 @@
      * @ignore
      * 
      * return the next page to display from a page number
+     * retruns null if the current page is the last one.
      *
      * @param {Integer} pageNumber page number
-     * @return integer the page number
+     * @return {Integer} the page number
      */
     _getRelativeNextPageNumber: function(pageNumber) {
       if (pageNumber < this.$nav.find('li').length) {
-        return pageNumber+1;
+        var newPageNumber = pageNumber + 1;
+        var page = this.getPage(newPageNumber);
+
+        if ($(page).hasClass('wizard-hidden-step')) {
+          return this._getRelativeNextPageNumber(newPageNumber);
+        } else {
+          return newPageNumber;
+        }
+
       } else {
         return null;
       }
@@ -277,8 +305,9 @@
      * @ignore
      * 
      * return the previous page to display
+     * retruns null if the current page is the first one.
      *
-     * @return integer the page number
+     * @return {Integer} the page number
      */
     _getPreviousPageNumber: function() {
       var pageNumber = this.getCurrentPageNumber();
@@ -289,12 +318,22 @@
      * @ignore
      * 
      * return the previous page to display from a page number
+     * retruns null if the current page is the first one.
      *
      * @param {Integer} pageNumber page number
-     * @return integer the page number
+     * @return {Integer} the page number
      */
     _getRelativePreviousPageNumber: function(pageNumber) {
       if (pageNumber > 1) {
+        var newPageNumber = pageNumber - 1;
+        var page = this.getPage(newPageNumber);
+
+        if ($(page).hasClass('wizard-hidden-step')) {
+          return this._getRelativePreviousPageNumber(newPageNumber);
+        } else {
+          return newPageNumber;
+        }
+
         return pageNumber-1;
       } else {
         return null;
@@ -316,8 +355,15 @@
     },
 
     /** @ignore */
+    _fireCallback: function(callback) {
+        if (typeof this.options[callback] === 'function') {
+          return this.options[callback]();
+        }
+        return undefined;
+    },
+
+    /** @ignore */
     /* jQuery doesn't have any method to check if a data exists */
-     
     _dataExists: function($element, index) {
       return $element.data(index) !== undefined;
     },
