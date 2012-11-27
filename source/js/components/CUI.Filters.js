@@ -196,7 +196,6 @@ var index = filters.getSelectedIndex();
             this.selectedIndices = (index >= 0) ? [index] : [];
         }
         this._update();
-        this.inputElement.change();
     },
     
     
@@ -456,6 +455,7 @@ var index = filters.getSelectedIndex();
             } else {
                 this.inputElement.attr("value", "");
             }
+            this.$element.find('select').change();
             return;
         }
 
@@ -494,7 +494,7 @@ var index = filters.getSelectedIndex();
         
         // Correct input field length of stacking fields
         this._correctInputFieldWidth();
-        
+        this.$element.find('select').change();
     },
 
     /** @ignore */
