@@ -41,32 +41,38 @@
 
     button {
       display: inline-block;
-      vertical-align: middle;
       .border-box;
-      margin: 0; // Reset default margin on button tag
-      margin-left: -@px; // Overlap border
-      padding: 0.4375rem 0.5rem 0.5rem;
-      height: @dropdown-text-size+0.4375rem*2+@px*2;
-      height: 2rem;
       min-width: 2rem;
       width: 2rem;
+      height: 2rem;
+      margin: 0; // Reset default margin on button tag
+      margin-left: -@px; // Overlap border
+      padding: 0;
+      
       border: @px solid @dropdown-border-color;
+      
       background-size: 1.0rem 1.0rem;
       background: @dropdown-gradient-start-color;
       .gradient(@dropdown-gradient-start-color, @dropdown-gradient-end-color);
+      
       font-family: @font-base-family;
       font-size: @dropdown-text-size;
-      line-height: @dropdown-text-size;
       font-weight: normal;
-      color: @dropdown-text-color;
+      line-height: 2rem-@px !important;
+      color: transparent;
       text-shadow: none;
 
+      vertical-align: middle;
+      
       &:disabled {
-        cursor: default;
         border-color: @button-disabled-border-color;
-        color: @button-disabled-text-color;
-        text-shadow: none;
+
         background: @button-disabled-background-color;
+
+        color: transparent;
+        text-shadow: none;
+
+        cursor: default;
 
         span {
           .opacity(30);
@@ -88,12 +94,13 @@
     }
 
     .popover {
-      border: 10*@px solid @popover-border-color; /* TODO: 8px in .popover, but design shows 10px */
-      position: absolute;
       display: block;
+      position: absolute;
       top: 3rem; /* 48px */ /* TODO: place popover relative to the action button (above or below) */
       left: 0;
 
+      border: 10*@px solid @popover-border-color; /* TODO: 8px in .popover, but design shows 10px */
+      
       /* TODO: this is an override of popover .arrow-top. Increases margin to 10px to match design document
        * should margins consistently be 8px or 10px for popovers, change accordingly.
        */
@@ -114,6 +121,7 @@
         .border-box;
         width: 100%;
         height: @modal-header-height;
+        
         background: @modal-header-background-color;
 
         // Bottom border, easiest with a box shadow
@@ -123,13 +131,15 @@
           position: absolute;
           left: 0;
           top: 0;
-          text-align: center;
-          font-size: 20*@px;
+          
           .border-box;
           width: 100%;
           height: 3.125rem;
           margin: 0;
           padding: 0;
+          
+          text-align: center;
+          font-size: 20*@px;
           line-height: 3.125rem;
           .ellipsis();
         }
@@ -138,17 +148,21 @@
         button.next-month {
           position: absolute;
           top: 0;
-          color: rgb(90,90,90);
+          
+          width: auto;
+          height: auto;
+          
           padding: 4*@px;
           margin: 8*@px;
-          font-size: 26*@px;
-          line-height: 26*@px;
+          
           border: 0;
           background: none;
           filter: progid:DXImageTransform.Microsoft.gradient(enabled = false); /* Removes ie filter */
-          width: auto;
-          height: auto;
 
+          font-size: 26*@px;
+          color: rgb(90,90,90);
+          line-height: 26*@px !important;
+          
           &:hover {
             border: 0 none;
             background: none;
@@ -278,6 +292,7 @@
         }
       }
     }
+    
   .time {
     background: @datepicker-time-background-color;
     border-top: @px solid @datepicker-time-border-color;
@@ -307,6 +322,10 @@
 
       button {
         min-width: 56*@px;
+        padding: 0.5rem;
+        
+        line-height: 1 !important;
+        color: inherit;
       }
 
       .dropdown-list ul li {
