@@ -39,7 +39,9 @@
       .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
     }
 
-    button {
+    button,
+    button[class^="icon-"],
+    button[class*=" icon-"] {
       display: inline-block;
       .border-box;
       min-width: 2rem;
@@ -58,7 +60,7 @@
       font-family: @font-base-family;
       font-size: @dropdown-text-size;
       font-weight: normal;
-      line-height: 2rem-@px !important;
+      line-height: 2rem-@px;
       color: transparent;
       text-shadow: none;
 
@@ -161,7 +163,7 @@
 
           font-size: 26*@px;
           color: rgb(90,90,90);
-          line-height: 26*@px !important;
+          line-height: 26*@px;
           
           &:hover {
             border: 0 none;
@@ -324,7 +326,7 @@
         min-width: 56*@px;
         padding: 0.5rem;
         
-        line-height: 1 !important;
+        line-height: 1;
         color: inherit;
       }
 
