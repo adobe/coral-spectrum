@@ -74,16 +74,24 @@ nav.pulldown {
             background-position: 10*@px center;
             line-height: @icon-medium-size;
           }
+
           &[class^="icon-"].withLabel:before {
             .icon-medium;
             line-height: 100%;
             padding-right: 10*@px;
+          }
+
+          &:hover {
+              background-color: @pulldown-active-background-color;
+              color: @pulldown-active-text-color;
+              border-bottom: none;
           }
         }
 
         &:first-child {
           border-top: 0;
         }
+
       }
     }
 
