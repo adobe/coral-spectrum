@@ -82,8 +82,14 @@ code {
 
   padding: 0 0.25rem;
 
+  .border-radius(0.35rem);
+  
   border: @px solid @demo-border-color;
   background: @demo-background-color;
+
+  &.linenums {
+    .border-radius(0);
+  }
 }
 
 // Give everyone a nice shadow and border
@@ -136,6 +142,8 @@ div.componentSample {
   // The actual live demo code should be in div.example
   .example {
     background: rgb(251, 251, 251);
+    
+    .border-radius(0.25rem 0.25rem 0 0);
 
     padding: 1rem;
     border-bottom: @px solid lighten(@demo-border-color, 10%);
@@ -145,7 +153,9 @@ div.componentSample {
   .prettyprint {
     margin: 0;
     border: none;
-
+    
+    .border-radius(0 0 0.25rem 0.25rem);
+    
     &.linenums {
       // remove top shadow
       .box-shadow(inset 2.75rem 0 0 #FBFBFC, inset 2.75rem+@px 0 0 #ECECF0);
