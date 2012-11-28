@@ -101,11 +101,13 @@
 
   // If we don't apply to both the container and the :before, we get inconsistent heights
   // For instance, xsmall icons end up 14x13 in Chrome
-  &, &:before {
+  min-width: @size + 2*@px;
+  min-height: @size + 2*@px;
+
+  &:before {
     width: @size + 2*@px;
     height: @size + 2*@px;
-  }
-  &:before {
+    
     .background-size(@size);
   }
 }
@@ -127,26 +129,6 @@
   // Method 1: Hidden text, overflow hidden
   overflow: hidden;
   color: transparent;
-}
-
-[class^="icon-"].xsmall,
-[class*=" icon-"].xsmall {
-  .icon-xsmall;
-}
-
-[class^="icon-"].small,
-[class*=" icon-"].small {
-  .icon-small;
-}
-
-[class^="icon-"].medium,
-[class*=" icon-"].medium {
-  .icon-medium;
-}
-
-[class^="icon-"].large,
-[class*=" icon-"].large {
-  .icon-large;
 }
 
 [class^="icon-"],
