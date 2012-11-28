@@ -250,8 +250,6 @@ modal.hide();
 
     /** @ignore */
     _show: function() {
-      this.$element.trigger('beforeshow');
-
       $('body').addClass('modal-open');
 
       this._toggleBackdrop(true);
@@ -278,9 +276,7 @@ modal.hide();
       }
 
       var self = this;
-      this.$element.addClass('in').attr('aria-hidden', false).fadeIn(function() {
-          self.$element.trigger('shown');
-        }).focus();
+      this.$element.addClass('in').attr('aria-hidden', false).fadeIn().focus();
 
       // IE9 fix for modals that suddenly expand
       if (!this.options.fullscreen)
@@ -289,13 +285,10 @@ modal.hide();
 
     /** @ignore */
     _hide: function() {
-      this.$element.trigger('beforehide');
-
       $('body').removeClass('modal-open');
 
       this.$element.removeClass('in').attr('aria-hidden', true);
 
-      // TODO event is fired when the Modal is still visible - should probably be fired when it is completely invisible
       this.$element.fadeOut().trigger('hidden');
 
       this._toggleBackdrop(false);
