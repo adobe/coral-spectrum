@@ -320,17 +320,17 @@
                             <div class="example">
                                 <div class="iconSample">
                                     <div class="sampleTitle left">Illustrative</div>
-                                    <div class="sample"><i class="icon-add"><span>Add</span></i><br><br><i class="icon-add withLabel"><span>Add</span></i></div>
+                                    <div class="sample"><i class="icon-add-circle">Add</i><br><br><i class="icon-add-circle withLabel">Add</i></div>
                                 </div>
                                 
                                 <div class="iconSample">
                                     <div class="sampleTitle left">Navigational</div>
-                                    <div class="sample"><a href="#" class="icon-add"><span>Add</span></a><br><br><a href="#" class="icon-add withLabel"><span>Add</span></a></div>
+                                    <div class="sample"><a href="#" class="icon-add-circle">Add</a><br><br><a href="#" class="icon-add-circle withLabel">Add</a></div>
                                 </div>
                                     
                                 <div class="iconSample">
                                     <div class="sampleTitle left">Actionable</div>
-                                    <div class="sample"><button class="icon-add"><span>Add</span></button><br><br><button class="icon-add withLabel"><span>Add</span></button></div>
+                                    <div class="sample"><button class="icon-add-circle">Add</button><br><br><button class="icon-add-circle withLabel">Add</button></div>
                                 </div>
 
                                 <!--
@@ -387,22 +387,22 @@
                             </div>
                         <pre class="prettyprint linenums">
 &lt;!-- Illustrative --&gt;
-&lt;i class=&quot;icon-add&quot;&gt;&lt;Add&lt;/i&gt;
+&lt;i class=&quot;icon-add-circle&quot;&gt;&lt;Add&lt;/i&gt;
 
 &lt;!-- Illustrative with label --&gt;
-&lt;i class=&quot;icon-add withLabel&quot;&gt;Add&lt;/i&gt;
+&lt;i class=&quot;icon-add-circle withLabel&quot;&gt;Add&lt;/i&gt;
 
 &lt;!-- Navigational --&gt;
-&lt;a href=&quot;#&quot; class=&quot;icon-add&quot;&gt;Add&lt;/a&gt;
+&lt;a href=&quot;#&quot; class=&quot;icon-add-circle&quot;&gt;Add&lt;/a&gt;
 
 &lt;!-- Navigational with label --&gt;
-&lt;a href=&quot;#&quot; class=&quot;icon-add withLabel&quot;&gt;Add&lt;/a&gt;
+&lt;a href=&quot;#&quot; class=&quot;icon-add-circle withLabel&quot;&gt;Add&lt;/a&gt;
 
 &lt;!-- Actionable --&gt;
-&lt;button class=&quot;icon-add&quot;&gt;Add&lt;/button&gt;
+&lt;button class=&quot;icon-add-circle&quot;&gt;Add&lt;/button&gt;
 
 &lt;!-- Actionable with label --&gt;
-&lt;button class=&quot;icon-add withLabel&quot;&gt;Add&lt;/button&gt;
+&lt;button class=&quot;icon-add-circle withLabel&quot;&gt;Add&lt;/button&gt;
 </pre>
                     </div>
                 </section>
@@ -529,20 +529,20 @@
                         <div class="example">
                             <nav class="toolbar">
                                 <div class="left icongroup">
-                                    <a href="#some-link" class="icon-add"><span>Add</span></a>
+                                    <a href="#some-link" class="icon-add">Add</a>
                                     <span class="divider"></span>
-                                    <button class="icon-calendar"><span>Calendar</span></button>
-                                    <button class="icon-email"><span>E-mail</span></button>
-                                    <button class="icon-attach"><span>Attach</span></button>
+                                    <button class="icon-calendar">Calendar</button>
+                                    <button class="icon-email">E-mail</button>
+                                    <button class="icon-attach">Attach</button>
                                 </div>
                                 <div class="center">
                                     <h1>Page Title</h1>
                                 </div>
                                 <div class="right icongroup">
-                                    <button class="icon-collection"><span>Collection</span></button>
-                                    <button class="icon-delete"><span>Delete</span></button>
-                                    <a href="#some-link" class="button"><span>Action</span></a>
-                                    <button class="primary"><span>Primary</span></button>
+                                    <button class="icon-collection">Collection</button>
+                                    <button class="icon-delete">Delete</button>
+                                    <a href="#some-link" class="button">Action</a>
+                                    <button class="primary">Primary</button>
                                 </div>
                             </nav>
                         </div>
@@ -1152,42 +1152,55 @@
                             <div class="column left">
                                 <div class="datepicker" data-init="datepicker">
                                     <input type="datetime" value="1987-04-06T20:35Z">
-                                    <button class="icon-calendar small"><span>Datetime picker</span></button>
+                                    <button class="icon-calendar small">Datetime picker</button>
                                 </div>
                                 <div class="datepicker" data-init="datepicker">
                                     <input type="datetime-local" value="1987-04-06T20:35">
-                                    <button class="icon-calendar small"><span>Datetime picker</span></button>
+                                    <button class="icon-calendar small">Datetime picker</button>
                                 </div>
                                 <div class="datepicker" data-init="datepicker">
                                     <input type="date" value="1987-04-06">
-                                    <button class="icon-calendar small"><span>Datepicker</span></button>
+                                    <button class="icon-calendar small">Datepicker</button>
                                 </div>
                                 <div class="datepicker" data-init="datepicker">
                                     <input type="time" value="11:10">
-                                    <button class="icon-clock small"><span>Timepicker</span></button>
+                                    <button class="icon-clock small">Timepicker</button>
                                 </div>
                                 <div class="datepicker" data-init="datepicker" data-disabled="true">
                                     <input type="date" value="1987-04-06" disabled>
-                                    <button class="icon-calendar small" disabled><span>Datepicker</span></button>
+                                    <button class="icon-calendar small" disabled>Datepicker</button>
                                 </div>
                             </div>
                         </div>
                         <pre class="prettyprint linenums">
+&lt;!-- Date/time picker --&gt;
 &lt;div class=&quot;datepicker&quot; data-init=&quot;datepicker&quot;&gt;
-    &lt;input type=&quot;datetime&quot; value=&quot;2012/10/20 11:10:00&quot;&gt;
-    &lt;button&gt;&lt;span class=&quot;icon-calendar small&quot;&gt;Datetime picker&lt;/span&gt;&lt;/button&gt;
+    &lt;input type=&quot;datetime&quot; value=&quot;1987-04-06T20:35Z&quot;&gt;
+    &lt;button class=&quot;icon-calendar small&quot;&gt;Datetime picker&lt;/button&gt;
 &lt;/div&gt;
+
+&lt;!-- Local date/time picker --&gt;
 &lt;div class=&quot;datepicker&quot; data-init=&quot;datepicker&quot;&gt;
-    &lt;input type=&quot;date&quot; value=&quot;2012/10/20&quot;&gt;
-    &lt;button&gt;&lt;span class=&quot;icon-calendar small&quot;&gt;Datepicker&lt;/span&gt;&lt;/button&gt;
+    &lt;input type=&quot;datetime-local&quot; value=&quot;1987-04-06T20:35&quot;&gt;
+    &lt;button class=&quot;icon-calendar small&quot;&gt;Datetime picker&lt;/button&gt;
 &lt;/div&gt;
+
+&lt;!-- Date picker --&gt;
 &lt;div class=&quot;datepicker&quot; data-init=&quot;datepicker&quot;&gt;
-    &lt;input type=&quot;time&quot; value=&quot;11:10:00&quot;&gt;
-    &lt;button&gt;&lt;span class=&quot;icon-clock small&quot;&gt;Timepicker&lt;/span&gt;&lt;/button&gt;
+    &lt;input type=&quot;date&quot; value=&quot;1987-04-06&quot;&gt;
+    &lt;button class=&quot;icon-calendar small&quot;&gt;Datepicker&lt;/button&gt;
 &lt;/div&gt;
+
+&lt;!-- Time picker --&gt;
+&lt;div class=&quot;datepicker&quot; data-init=&quot;datepicker&quot;&gt;
+    &lt;input type=&quot;time&quot; value=&quot;11:10&quot;&gt;
+    &lt;button class=&quot;icon-clock small&quot;&gt;Timepicker&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- Disabled date picker --&gt;
 &lt;div class=&quot;datepicker&quot; data-init=&quot;datepicker&quot; data-disabled=&quot;true&quot;&gt;
-    &lt;input type=&quot;date&quot; value=&quot;2012/10/20&quot; disabled&gt;
-    &lt;button disabled&gt;&lt;span class=&quot;icon-calendar small&quot;&gt;Datepicker&lt;/span&gt;&lt;/button&gt;
+    &lt;input type=&quot;date&quot; value=&quot;1987-04-06&quot; disabled&gt;
+    &lt;button class=&quot;icon-calendar small&quot; disabled&gt;Datepicker&lt;/button&gt;
 &lt;/div&gt;
 </pre>
                     </div>
@@ -1568,9 +1581,9 @@
                                             <p class="type">PSD</p>
                                             <p class="resolution">1220 x 400</p>
                                             <p class="size">149KB</p>
-                                            <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-                                            <p class="links"><i class="icon-link"><span>Links</span></i> 8</p>
-                                            <p class="comments"><i class="icon-comment"><span>Comments</span></i> 12</p>
+                                            <p class="modified"><i class="icon-edit">Modified</i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                                            <p class="links"><i class="icon-link">Links</i> 8</p>
+                                            <p class="comments"><i class="icon-comment">Comments</i> 12</p>
                                         </div>
                                     </a>
                                 </article>
@@ -1593,8 +1606,8 @@
                                         <img src="images/previews/preview1.png" alt="">
                                         <div class="label">
                                             <h4>Collection Name</h4>
-                                            <p class="links"><i class="icon-link"><span>Links</span></i> 8</p>
-                                            <p class="comments"><i class="icon-comment"><span>Comments</span></i> 12</p>
+                                            <p class="links"><i class="icon-link">Links</i> 8</p>
+                                            <p class="comments"><i class="icon-comment">Comments</i> 12</p>
                                         </div>
                                     </a>
                                 </article>
@@ -1660,9 +1673,9 @@
                                             <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                                             <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
                                         </div>
-                                        <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-                                        <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-                                        <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                                        <p class="published"><i class="icon-site">Published</i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                                        <p class="modified"><i class="icon-edit">Modified</i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                                        <p class="links"><i class="icon-arrowright">Link</i> <span class="links-number">3</span></p>
                                     </a>
                                 </article>
                                 <article class="card-page stack">
@@ -1677,9 +1690,9 @@
                                             <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
                                             <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
                                         </div>
-                                        <p class="published"><i class="icon-site"><span>Published</span></i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-                                        <p class="modified"><i class="icon-edit"><span>Modified</span></i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-                                        <p class="links"><i class="icon-arrowright"><span>Link</span></i> <span class="links-number">3</span></p>
+                                        <p class="published"><i class="icon-site">Published</i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                                        <p class="modified"><i class="icon-edit">Modified</i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                                        <p class="links"><i class="icon-arrowright">Link</i> <span class="links-number">3</span></p>
                                     </a>
                                 </article>
 
@@ -1700,8 +1713,8 @@
                                     <div class="cardheader">
                                         <h4>Rachel and Wanda 2012</h4>
                                         <p class="info">
-                                            <span><i class="icon-image white"><span>Cards</span></i> 12</span>
-                                            <span><i class="icon-user white"><span>Users</span></i> 6</span>
+                                            <span><i class="icon-image white">Cards</i> 12</span>
+                                            <span><i class="icon-user white">Users</i> 6</span>
                                             <span class="right">11:23 AM</span>
                                         </p>
                                     </div>
@@ -1719,8 +1732,8 @@
                                     <div class="cardheader">
                                         <h4>Rachel and Wanda 2012</h4>
                                         <p class="info">
-                                            <span><i class="icon-image white"><span>Cards</span></i> 12</span>
-                                            <span><i class="icon-user white"><span>Users</span></i> 6</span>
+                                            <span><i class="icon-image white">Cards</i> 12</span>
+                                            <span><i class="icon-user white">Users</i> 6</span>
                                             <span class="right">11:23 AM</span>
                                         </p>
                                     </div>
@@ -1737,8 +1750,8 @@
                                     <div class="cardheader">
                                         <h4>Rachel and Wanda 2012</h4>
                                         <p class="info">
-                                            <span><i class="icon-image white"><span>Cards</span></i> 12</span>
-                                            <span><i class="icon-user white"><span>Users</span></i> 6</span>
+                                            <span><i class="icon-image white">Cards</i> 12</span>
+                                            <span><i class="icon-user white">Users</i> 6</span>
                                             <span class="right">11:23 AM</span>
                                         </p>
                                     </div>
@@ -1754,8 +1767,8 @@
                                     <div class="cardheader">
                                         <h4>Rachel and Wanda 2012</h4>
                                         <p class="info">
-                                            <span><i class="icon-image white"><span>Cards</span></i> 12</span>
-                                            <span><i class="icon-user white"><span>Users</span></i> 6</span>
+                                            <span><i class="icon-image white">Cards</i> 12</span>
+                                            <span><i class="icon-user white">Users</i> 6</span>
                                             <span class="right">11:23 AM</span>
                                         </p>
                                     </div>
