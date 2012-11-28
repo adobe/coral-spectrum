@@ -23,7 +23,7 @@ header.top {
 
     vertical-align: top;
 
-    line-height: @header-height - 0.10rem;
+    line-height: @header-height - 0.3rem;
     text-align: center;
 
     img {
@@ -72,8 +72,7 @@ header.top {
   }
 
   >nav.crumbs {
-    display: inline;
-    line-height: @header-height;
+    display: inline-block; // NEVER set a box to display: inline
 
     a {
       font-size: 18*@px;
