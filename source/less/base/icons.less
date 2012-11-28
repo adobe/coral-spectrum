@@ -1,26 +1,30 @@
-@icon-xsmall-size: 12*@px;
-@icon-small-size: 18*@px;
-@icon-medium-size: 24*@px;
-@icon-large-size: 2rem;
-
-@icon-blue-color:  rgb(65, 145, 210);
-@icon-divider-color: rgb(206, 206, 206);
-
-@icon-label-padding-multiplier: 0.25;
-@icon-label-line-height-multiplier: 1.15;
-
 // Setup the font face
 @font-face {
   font-family: 'AdobeIcons';
+  
   src: url(~"@{font-folder}/AdobeIcons.eot");
   src: url(~"@{font-folder}/AdobeIcons.ttf") format("truetype"),
     url(~"@{font-folder}/AdobeIcons.woff") format("woff"),
     url(~"@{font-folder}/AdobeIcons.svg#AdobeIcons") format("svg");
+  
   font-weight: normal;
   font-style: normal;
 }
 
+
+// Various mixins
 .icon() {
+  display: inline-block;
+  
+  // Use ems by default so we depend on font size of parent element
+  width: 1em + 2*@px;
+  height: 1em + 2*@px;
+  line-height: 1;
+  font-size: 1em;
+  text-align: center; // Center icons in the extra padded space
+  
+  vertical-align: text-top; // Make adjacent text line up correctly when using inline-block
+  
   &:before {
     font-family: AdobeIcons;
     font-weight: normal;
@@ -28,61 +32,79 @@
     display: inline-block;
     text-decoration: none; // Don't let icons underline
     text-rendering: optimizeLegibility;
+    line-height: 1.385; // The truth, the way. Don't question it.
 
     color: @icon-color;
-    opacity: 0.65;
+    opacity: @icon-opacity;
 
+    // Position SVG backgrounds
     background-position: center center;
     background-repeat: no-repeat;
-    content: " ";
 
-    vertical-align: middle;
+    vertical-align: -0.186em; // Align label text correctly. Don't ask why.
+
     text-align: center;
 
-    // position correction
-    position: relative;
-    top: 0.1em;
+    content: " ";
+    
+    // Accessibility: do we need speak: none here?
+    speak: none; // don't try to speak the icon characters
+  }
+  
+  // Forced colors
+  &.black:before {
+    color: @icon-color;
+    opacity: @icon-opacity;
+  }
+  
+  &.white:before {
+    color: @icon-white-color;
+    opacity: @icon-white-opacity;
+  }
+  
+  &.blue:before {
+    color: @icon-blue-color;
+    opacity: @icon-blue-opacity;
   }
 
-  &:hover {
-    &:before {
-      color: @icon-color;
-      opacity: 0.80;
-    }
-  }
-
-  &.active {
-    &:before {
-      color: @icon-active-color;
-      opacity: 1;
-    }
-  }
-
+  // Disabled states
   &.disabled,
   &[disabled] {
-    &:before {
-      color: @icon-color;
-      opacity: 0.15;
-    }
-
-    &:hover {
-      &:before {
-        color: @icon-color;
-        opacity: 0.15;
-      }
+    &:before,
+    &:hover:before {
+      color: @icon-disabled-color;
+      opacity: @icon-disabled-opacity;
     }
   }
 }
 
-// Various mixins
-.icon-size(@size) {
-  line-height: @size;
-  font-size: @size;
-  min-height: @size;
+.icon-clickable() {
+  // States
+  &:hover {
+    &:before {
+      color: @icon-hover-color;
+      opacity: @icon-hover-opacity;
+    }
+  }
 
+  &:active {
+    &:before {
+      color: @icon-active-color;
+      opacity: @icon-active-opacity;
+    }
+  }
+}
+
+.icon-size(@size) {
+  line-height: 1.2;
+  font-size: @size;
+  height: @size + 2*@px;
+
+  &, &:before {
+    width: @size + 2*@px;
+    height: @size + 2*@px;
+  }
   &:before {
-    min-width: @size;
-    min-height: @size;
     .background-size(@size);
   }
 }
@@ -101,17 +123,9 @@
 }
 
 .hide-inner-text() {
-  // Does not work with :before approach
-  //text-indent: 100%;
-  //white-space: nowrap;
-  position: absolute;
+  // Method 1: Hidden text, overflow hidden
   overflow: hidden;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  width: 1px;
-  margin: -1px;
-  border: 0;
-  padding: 0;
+  color: transparent;
 }
 
 [class^="icon-"].xsmall,
@@ -136,8 +150,10 @@
 
 [class^="icon-"],
 [class*=" icon-"] {
-  .icon();
-
+  // Hide inner text by default
+  .hide-inner-text;
+  .icon;
+  
   &.xsmall {
     .icon-xsmall;
   }
@@ -153,30 +169,58 @@
   &.large {
     .icon-large;
   }
-
-  &:not(.withLabel) span {
-    .hide-inner-text();
-  }
-
-  &.withLabel >span {
-    padding-left: 5*@px;
-    color: @icon-color;
+  
+  &.withLabel {
+    width: auto;
+    
+    text-indent: 0;
+    white-space: inherit;
+    overflow: visible;
+    color: inherit;
+    
+    &.xsmall {
+      &:before {
+        margin-right: @icon-xsmall-size * @icon-label-padding-multiplier;
+      }
+    }
+    &.small {
+      &:before {
+        margin-right: @icon-small-size * @icon-label-padding-multiplier;
+      }
+    }
+    &,
+    &.medium {
+      &:before {
+        margin-right: @icon-medium-size * @icon-label-padding-multiplier;
+      }
+    }
+    &.large {
+      &:before {
+        margin-right: @icon-large-size * @icon-label-padding-multiplier;
+      }
+    }
   }
 }
 
-/*a:hover [class^="icon-"],
-a:hover [class*=" icon-"],
-a[class^="icon-"]:hover,
-a[class*=" icon-"]:hover {
-  &:before {
-    color: @icon-color;
-    opacity: 0.80;
+// Illustrative icons
+i[class^="icon-"],
+i[class*=" icon-"] {
+  font-style: normal;
+}
+
+// Clickable icons
+a,
+button,
+.button {
+  &[class^="icon-"],
+  &[class*=" icon-"] {
+    .icon-clickable();
   }
-}*/
+}
 
 button,
-a.button,
-span.button {
+.button {
+  // Icons as buttons
   &[class^="icon-"],
   &[class*=" icon-"] {
     margin: 0;
@@ -212,6 +256,29 @@ span.button {
       font-weight: normal;
     
       filter: none;
+    }
+  }
+  
+  // Icons in buttons
+  i[class^="icon-"],
+  i[class*=" icon-"] {
+    .icon-small;
+    
+    margin-right: 0.25rem; // A little padding between the icon and text
+    
+    // For 18px icons, Don't push the button to a taller height
+    // Works in all browsers except firefox OS X, 1px too far down
+    position: relative;
+    top: -2.25*@px;
+    margin-bottom: -5*@px;
+
+    vertical-align: middle;
+
+    overflow: visible; // Fixes clipping of text shadow, only for use in buttons which will have <i> tags with NO inner text
+
+    &:before {
+      color: @icon-white-color;
+      opacity: @icon-white-opacity;
     }
   }
 }
