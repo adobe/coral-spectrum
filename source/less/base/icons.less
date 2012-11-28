@@ -98,8 +98,9 @@
 .icon-size(@size) {
   line-height: 1.2;
   font-size: @size;
-  height: @size + 2*@px;
 
+  // If we don't apply to both the container and the :before, we get inconsistent heights
+  // For instance, xsmall icons end up 14x13 in Chrome
   &, &:before {
     width: @size + 2*@px;
     height: @size + 2*@px;
