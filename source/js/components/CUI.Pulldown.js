@@ -66,10 +66,12 @@
     },
 
     _placePopover: function() {
-        var $link = this.$element.find('a').first();
-        var $popover = this.$element.find('.popover');
-        
-        var position = $link.position();
+        var $link = this.$element.find('a').first(),
+            $popover = this.$element.find('.popover'),
+            position = $link.position(),
+            top,
+            left,
+            marginLeft;
 
         //default width either to:
         //first link width + 22 (22 is alignment on icon) if link is larger that popover
@@ -82,9 +84,16 @@
             height: $link.height()
         };
 
-        var top = position.top + size.height + 15;
-        var left = position.left + $link.width() - size.width + 5;
-        var marginLeft = size.width - 30;
+        // alignment
+        if ($popover.hasClass('alignleft')) {
+            top = position.top + size.height;
+            left = - 30;
+            marginLeft = 30 - w;
+        } else { // align right
+            top = position.top + size.height + 15;
+            left = position.left + $link.width() - size.width + 5;
+            marginLeft = size.width - 30;
+        }
 
         $popover.css({
             top: top,
@@ -92,9 +101,9 @@
             width: size.width
         });
 
-        $('.popover.arrow-top::before').css({
+        /*$('.popover.arrow-top:before').css({
             marginLeft: marginLeft
-        });
+        });*/
     }
     
   });

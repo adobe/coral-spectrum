@@ -196,7 +196,6 @@ var index = filters.getSelectedIndex();
             this.selectedIndices = (index >= 0) ? [index] : [];
         }
         this._update();
-        this.inputElement.change();
     },
     
     
@@ -456,6 +455,7 @@ var index = filters.getSelectedIndex();
             } else {
                 this.inputElement.attr("value", "");
             }
+            this.$element.find('select').change();
             return;
         }
 
@@ -494,7 +494,7 @@ var index = filters.getSelectedIndex();
         
         // Correct input field length of stacking fields
         this._correctInputFieldWidth();
-        
+        this.$element.find('select').change();
     },
 
     /** @ignore */
@@ -727,14 +727,21 @@ CUI.Filters.cqTagOptionRenderer = function(iterator, key, highlight) {
     }
     var searchFor = this.inputElement.val();
     
-    var pathParts = value.split("/");
-    value = "";
+    var namespaced = value.split(":");
+    if (namespaced.length < 2) namespaced[1] = "";
+    
+    var namespace = namespaced[0];
+    var restPath = namespaced[1];
+    
+    var pathParts = restPath.split("/");
+
     
     // html encode fn
     function e(text) {
         return $("<div>").text(text).html();
     }
     
+    value = namespace + ": ";
     for(var q = 0; q < pathParts.length; q++) {
         var part = pathParts[q];
 
@@ -749,7 +756,7 @@ CUI.Filters.cqTagOptionRenderer = function(iterator, key, highlight) {
             part = e(part);
         }
         
-        if (value !== "") value += " / ";
+        if (q > 0) value += " / ";
         if (q === pathParts.length - 1) part = "<b>" + part + "</b>";
         value = value + part;
     }

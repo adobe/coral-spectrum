@@ -13,31 +13,97 @@
         <script src="../../js/libs/jquery-fingerpointer.js"></script>
 
         <script src="../../js/CUI.js"></script>
+
+        <style>
+            .step3-2 {
+                display: none;
+            }
+
+            .deactivate-step2 {
+                display: none;
+            }
+        </style>
     </head>
     <body>
-        <div class="wizard" data-init="wizard">
+        <div class="wizard">
             <nav>
                 <button class="back">Back</button>
                 <ol>
                     <li>First step</li>
-                    <li>Second step</li>
+                    <li class="wizard-hidden-step">Second step</li>
                     <li>Third step</li>
                     <li>Last step</li>
                 </ol>
                 <button class="next" disabled>Next</button>
             </nav>
-            <section data-next-disabled="false" data-back-label="Cancel">
+            <section  data-wizard-page-callback="step1" data-next-disabled="false" data-back-label="Cancel">
                 The first step is optional.
+                <br />
+                <button class="activate-step2 primary">Activate second step</button>
+                <button class="deactivate-step2 warning">Deacivate second step</button>
             </section>
-            <section data-next-disabled="false">
+            <section class="wizard-hidden-step step2" data-next-disabled="false">
                 The second step is optional.
             </section>
-            <section data-next-disabled="false">
-                The third step is optional.
+            <section class="step3" data-next-disabled="false" data-wizard-page-callback="step3">
+                <div class="step3-1">The third step is optional.</div>
+                <div class="step3-2">The 3,5 step is optional</div>
             </section>
             <section data-next-label="Create">
                 Name is required.
             </section>
         </div>
+
+        <script>
+            $(document).ready(function(){
+                var step3 = 0;
+                var wizard = null;
+
+                wizard = new CUI.Wizard({
+                    element: '.wizard',
+                    onPageChanged: {
+                        step1: function() {
+                            console.log(wizard);
+                        },
+                        step3: function() {
+                            step3 = 1;
+                        }
+                    },
+                    onNextButtonClick: function() {
+                        if (step3 == 1) {
+                            $('.step3-1').hide();
+                            $('.step3-2').show();
+                            step3 = 2;
+                            return false
+                        }
+                        return true;
+                    },
+                    onBackButtonClick: function() {
+                        if (step3 == 2) {
+                            step3 = 1;
+                        } else if (step3 == 1) {
+                            $('.step3-2').hide();
+                            $('.step3-1').show();
+                            step3 = 0;
+                            return false
+                        }
+                        return true;
+                    }
+                });
+
+                $('.activate-step2').click(function(){
+                    wizard.activatePage(2);
+                    $('.activate-step2').hide();
+                    $('.deactivate-step2').show();
+                });
+
+                $('.deactivate-step2').click(function(){
+                    wizard.deactivatePage(2);
+                    $('.deactivate-step2').hide();
+                    $('.activate-step2').show();
+                });
+            });
+        </script>
+
     </body>
 </html>
