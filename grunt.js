@@ -451,6 +451,7 @@ module.exports = function(grunt) {
         dest_css: '<%= dirs.source %>/less/base/',
         dest_font: '<%= dirs.source %>/fonts/',
         dest_css_name: 'icons_mono.less',
+        // Should write to build folder in the future: // dest_css_name: '<%= dirs.build %>/less/base/icons_mono.less',
         dest_font_name: 'AdobeIcons',
         prefix: 'icon-'
       }
