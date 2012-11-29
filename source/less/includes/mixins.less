@@ -184,3 +184,45 @@
     width: -o-calc(@expression);
     width: calc(@expression);
 }
+
+/*
+  Mixin: .button-square
+  Turn any button into a square button. For use with the .icon-* mixins or classes.
+*/
+.button-square() {
+  min-width: 0; // Reset min-width on buttons
+  
+  width: 2rem;
+  height: 2rem;
+  margin: 0;
+  padding: 0;
+  
+  .gradient(@dropdown-gradient-start-color, @dropdown-gradient-end-color);
+  
+  border: @px solid @dropdown-border-color;
+    
+  line-height: 2rem - @px; // Align icons vertically
+  text-shadow: none; // TODO: use white shadow?
+
+  // Don't behave like an icon
+  vertical-align: top;
+  
+  &:disabled {
+    border-color: @button-disabled-border-color;
+
+    background: @button-disabled-background-color;
+
+    cursor: default;
+  }
+
+  &:hover:not([disabled]) {
+    background: @dropdown-gradient-start-color;
+    .gradient(@dropdown-gradient-start-color, @dropdown-gradient-start-color);
+  }
+
+  &:active:not([disabled]) {
+    background: @dropdown-gradient-end-color;
+    .gradient(@dropdown-gradient-end-color, @dropdown-gradient-end-color);
+    .box-shadow(inset 0 0 0.5rem rgba(0, 0, 0, 0.25));
+  }
+}
