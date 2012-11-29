@@ -31,7 +31,12 @@ div.search {
     height: 30*@px;
     margin: @px 0 0 -37*@px;
     
-    border: none;    
-    border-left: @px solid @textfield-border-color;
+    &,
+    &:hover,
+    &:active,
+    &:disabled {
+      border: none;
+      border-left: @px solid @textfield-border-color;
+    }
   }
 }
