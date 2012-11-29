@@ -50,6 +50,11 @@ button,
   &:focus {
     .glow();
   }
+  
+  // A square button for buttons attached to form fields with icons in them
+  &.square {
+    .button-square;
+  }
 }
 
 
@@ -123,9 +128,4 @@ button[disabled]:hover,
     .box-shadow(none);
 
     background: @button-disabled-background-color;
-}
-
-// A square button for buttons attached to form fields with icons in them
-button.square {
-  .button-square;
 }
