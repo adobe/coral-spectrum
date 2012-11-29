@@ -442,8 +442,19 @@ div.rail {
     .search {
         padding: 10*@px;
 
-        input {
+        input[type="text"] {
             width: 100%;
+            padding-right: 2rem;
+        }
+
+        button {
+            background: none;
+            border: none;
+            padding: 0;
+
+            &:before {
+                color: @rail-font-color;
+            }
         }
     }
 
