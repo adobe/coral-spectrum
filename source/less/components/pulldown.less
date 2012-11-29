@@ -68,17 +68,23 @@ nav.pulldown {
           text-overflow: ellipsis;
           white-space: nowrap;
           overflow: hidden;
+          height: 1.5rem;
+          line-height: 1.5rem;
 
-          &[class^="icon-"].withLabel {
-            padding-left: 10*@px;
-            background-position: 10*@px center;
-            line-height: @icon-medium-size;
-          }
+          text-align: left;
 
-          &[class^="icon-"].withLabel:before {
-            .icon-medium;
-            line-height: 100%;
-            padding-right: 10*@px;
+          &[class^="icon-"], 
+          &[class*=" icon-"] {
+            &.withLabel {
+              padding-left: 10*@px;
+              background-position: 10*@px center;
+              line-height: @icon-medium-size;
+
+              &:before {
+                .icon-medium;
+                padding-right: 10*@px;
+              }
+            }
           }
 
           &:hover {
