@@ -15,4 +15,4 @@ CoralUI is an internal open source effort with backing from XD and product devel
 Check out the [Build Process wiki](https://git.corp.adobe.com/Reef/CoralUI/wiki/Build-Process-&-Technology) for information on building CoralUI.
 
 ## More Information
-See the [CoralUI Wiki](https://git.corp.adobe.com/Reef/CoralUI/wiki) for more information on contributing. If you'd like to be assigned issues for feature rqeuest, contact [Larry Davis](mailto:lawdavis@adobe.com).
+See the [CoralUI Wiki](https://git.corp.adobe.com/Reef/CoralUI/wiki) for more information on contributing. If you'd like to be assigned issues for feature request, contact [Larry Davis](mailto:lawdavis@adobe.com).
