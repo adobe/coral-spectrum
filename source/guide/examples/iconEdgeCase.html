@@ -13,17 +13,45 @@
     div.absolute {
       position: absolute;
       right: 0;
-      top: 50%;
+      top: 65%;
+    }
+    
+    div.absolute + div.absolute {
+      top: 75%;
+    }
+    
+    i.absolute {
+      position: absolute;
+      right: 0;
+      top: 25%;
+    }
+    i.absolute + i.absolute {
+      top: 35%;
     }
   </style>
 </head>
 <body>
+  
+  <!-- Use text-align right -->
   <div class="content">
     <i class="icon-add-circle xsmall">AddItemLongNonWrappingText</i>
   </div>
   
+  <div class="content">
+    <i class="icon-add-circle large">AddItemLongNonWrappingTextWhichIsLarge</i>
+  </div>
+  
+  <!-- Position at edge in parent div -->
   <div class="absolute">
     <i class="icon-calendar xsmall">Calendar With Accessibility Text</i>
   </div>
+  
+  <div class="absolute">
+    <i class="icon-calendar large">Calendar With Accessibility Text Which Is Large</i>
+  </div>
+  
+  <!-- Position at edge on actual icon -->
+  <i class="icon-calendar absolute xsmall">Calendar With Accessibility Text</i>
+  <i class="icon-calendar absolute large">Calendar With Accessibility Text</i>
 </body>
 </html>
