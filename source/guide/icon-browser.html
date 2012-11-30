@@ -2,160 +2,323 @@
 <html>
 
 <head>
-  <title>Icons Browser</title>
+  <title>Icon Browser</title>
 
-  <meta charset="utf-8"/>
+  <meta charset="utf-8">
 
-  <link rel="stylesheet" type="text/css" href="css/cui.css">
+  <link rel="stylesheet" href="css/cui.css">
+  <link rel="stylesheet" href="css/guide.css">
+  <link rel="stylesheet" href="js/google-code-prettify/prettify.css">
 
   <!-- Dependencies -->
-  <script src="js/libs/handlebars.js"></script>
+  <script src="js/libs/handlebars.full.js"></script>
   <script src="js/libs/jquery.js"></script>
   <script src="js/libs/jquery-fingerpointer.js"></script>
   <script src="js/libs/toe.js"></script>
 
-  <!-- CoralUI -->
-  <script src="js/CUI.js"></script>  
-
-  <style>
-
-  * {
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-  }
-
-  .content {
-    margin: 10px;
-  }
-
-  .searchWrapper {
-    margin: 10px
-    top: 10px;
-    bottom: 10px;
-
-  }
-
-  i {
-    width: 1.5em;
-    height: 1.5em;
-    line-height: 1.5em;
-    display: inline-block;
-    vertical-align: top;
-    color: #000 !important;
-    overflow: hidden;
-  }
-
-
-  </style>
   
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script src="js/google-code-prettify/prettify.js"></script>
+
+  <!-- CoralUI -->
+  <script src="js/CUI.js"></script>
 
   <script>
-  $(document).ready(function () {
-
-    var self = this;
-
-    this.createTable = function(icons) {
-
-      var doc = document;
-
-      doc.getElementById("iconTableBody").innerHTML = "";
-
-      var fragment = doc.createDocumentFragment();     
-
-      $(icons).each(function (i, e) {
-
-        //row
-        var tr = doc.createElement("tr");
-
-        // icon asset
-        var td = doc.createElement("td");
-        td.innerHTML = '<i class="' + e.selector + '"></i>';
-        tr.appendChild(td);
-
-        // filename 
-        var td = doc.createElement("td");
-        td.innerHTML = e.file;
-        tr.appendChild(td);
-
-        // selector
-        var td = doc.createElement("td");
-        td.innerHTML = e.selector;
-        tr.appendChild(td);
-
-        //does not trigger reflow
-        fragment.appendChild(tr);
-      });        
-
-      doc.getElementById("iconTableBody").appendChild(fragment);
-
+  
+    function encodeEntities(str) {
+      return str.replace(/[<>"&]/g, function(input) {
+        var output = '&';
+        if (input === '<')
+          output += 'lt';
+        if (input === '>')
+          output += 'gt';
+        if (input === '"')
+          output += 'quot';
+        if (input === '&')
+          output += 'amp';
+        output += ';';
+        return output;
+      });
     }
+  
+    CUI.IconBrowser = new Class({
+      Templates: {
+        TableRow: Handlebars.compile([
+          '<tr><td><i class="{{selector}} medium"></i></td><td>{{name}}</td><td>{{selector}}</td></tr>'
+        ].join('\n')),
+        
+        Detail: Handlebars.compile([
+          '<section>',
+            '<h3>{{name}}</h3>',
+            '<p>Description here</p>',
+          '</section>',
+          
+          '<section>',
+            '<h5>Size</h5>',
+            '<div class="slider ticked">',
+                '<input type="range" name="iconSize" value="2" min="1" max="4" step="1">',
+            '</div>',
+          
+            '<h5>Label/Accessibility Text</h5>',
+            '<input type="text" name="iconLabelText" class="iconLabelText" value="{{name}}">',
+            '<label><input type="checkbox" name="iconLabel" value="1"><span></span> Show label</label><br>',
 
-    this.filterIcons = function(icons, filter) {
+            '<div class="left">',
+              '<h5>Usage</h5>',
+              '<label><input type="radio" name="iconTag" value="i" checked><span></span> Illustrative</label><br>',
+              '<label><input type="radio" name="iconTag" value="a"><span></span> Link</label><br>',
+              '<label><input type="radio" name="iconTag" value="button"><span></span> Action</label>',
+            '</div>',
+            
+            '<div class="left iconUIColorBox">',
+              '<h5>UI Color</h5>',
+              '<label><input type="radio" name="iconColor" value="light" checked><span></span> Light</label><br>',
+              '<label><input type="radio" name="iconColor" value="dark"><span></span> Dark</label>',
+            '</div>',
+            
+            '<div class="clear"></div>',
+            
+          '</section>',
+          
+          '<section>',
+            '<h4>Sample</h4>',
+          
+            '<div class="iconBoxContainer">',
+              '<div class="iconBox" id="iconSampleBox">',
+                '<a id="iconSample" href="#" class="{{selector}}">{{Name}}</a>',
+              '</div>',
+            '</div>',
+            
+            '<h4>HTML</h4>',
+            
+            '<code class="prettyprint" id="iconCode">&lt;i class=&quot;{{selector}}&quot;&gt;&lt;/i&gt;</code>',
+          '</section>',
+          
+        ].join('\n'))
+      },
+      
+      construct: function(options) {
+        this.$searchField = $('#searchField');
+        this.$tbody = $('#iconTable tbody');
+        
+        var that = this;
+        
+        // Fetch the icons
+        this.fetchIcons(this.createTable.bind(this));
+        
+        // Stores icon whose details are being viewed
+        this.currentIcon = null;
+        
+        // Show details
+        this.$tbody.on('click', 'tr', function(evt) {
+          var $target = $(evt.currentTarget);
+          var icon = $target.data('icon');
+          
+          that.showDetails(icon);
+        });
+        
+        // Search
+        this.$searchField.on("keyup paste cut", function(data) {
+          that.filter(that.$searchField.val());
+        });
+        
+        // Adjust sample
+        $('#iconDetails').on('change', 'input[type="range"]', function(evt) {
+          this.sample.size = evt.currentTarget.value;
+          this.updateSample();
+        }.bind(this));
+        
+        $('#iconDetails').on('change', 'input[name="iconColor"]', function(evt) {
+          this.sample.color = evt.currentTarget.value;
+          this.updateSample();
+        }.bind(this));
+        
+        $('#iconDetails').on('change', 'input[name="iconTag"]', function(evt) {
+          this.sample.tag = evt.currentTarget.value;
+          this.updateSample();
+        }.bind(this));
+        
+        $('#iconDetails').on('keyup change', 'input[name="iconLabelText"]', function(evt) {
+          this.sample.labelText = evt.currentTarget.value;
+          this.updateSample();
+        }.bind(this));
+        
+        $('#iconDetails').on('change', 'input[name="iconLabel"]', function(evt) {
+          this.sample.withLabel = evt.currentTarget.checked;
+          this.updateSample();
+        }.bind(this));
+      },
+      
+      sizeMap: {
+        1: 'xsmall',
+        2: 'small',
+        3: 'medium',
+        4: 'large'
+      },
+      
+      sample: {
+        size: 2,
+        color: 'light',
+        withLabel: false,
+        labelText: '',
+        tag: 'i'
+      },
+      
+      updateSample: function() {
+        if (this.sample.color == 'dark')
+          $('#iconSampleBox').addClass('dark');
+        else
+          $('#iconSampleBox').removeClass('dark');
+        
+        var icon = this.currentIcon;
+        var size = this.sizeMap[this.sample.size];
+        var withLabel = this.sample.withLabel;
+        var label = this.sample.labelText;
+        var color = this.sample.color === 'dark' ? 'white' : 'black';
+        var tag = this.sample.tag;
+        
+        // Create code
+        var html = '<'+tag;
+        
+        if (tag === 'a')
+          html += ' href="#"';
+          
+        html += ' class="'+icon.selector;
+        
+        html += ' '+size;
+        
+        if (withLabel)
+          html += ' withLabel';
+        
+        if (color == 'white')
+          html += ' white';
+          
+        html += '"';
+        
+        html += '>'+label+'</'+tag+'>';
+        
+        $('#iconSampleBox').html(html);
+        $('#iconCode').html(encodeEntities(html));
+        
+        prettyPrint();
+      },
+      
+      showDetails: function(icon) {
+        console.log('Show details for '+icon.file);
+        
+        var previousIcon = this.currentIcon;
+        if (previousIcon)
+          previousIcon.$tr.removeClass('selected');
+        
+        icon.$tr.addClass('selected');
+        
+        // Populate details
+        $('#iconDetails').html(this.Templates.Detail(icon));
+        
+        $('input[type="range"]').val(this.sample.size);
+        
+        // Make sure slider exists
+        $('.slider').slider();
+        
+        this.sample.labelText = icon.name;
+        
+        this.currentIcon = icon;
+        
+        this.updateSample();
+      },
+      
+      fetchIcons: function(callback) {
+        var that = this;
+        $.getJSON('examples/assets/iconbrowser.json', function(icons) {
+           // Store icons
+           that.icons = icons;
+           
+           if (typeof callback === 'function')
+              callback(icons);
+        });
+      },
+      
+      createTable: function(icons) {
+        // Show all icons by default
+        if (!icons)
+          icons = this.icons;
+          
+        var doc = document;
 
-      var result = [];
-      if (filter && filter != "") {
-        var terms = filter.split(" ");
-        for (var i = icons.length - 1; i >= 0; i--) {
-          var icon = icons[i];
+        this.$tbody.html('');
 
-          if (this.matchIcon(icon, terms))
-          {
-            result.push(icon);
+        // Use a fragment to avoid reflow
+        var fragment = doc.createDocumentFragment();
+
+        var template = this.Templates.TableRow;
+
+        $(icons).each(function (i, icon) {
+          // Create a row
+          var tr = doc.createElement("tr");
+          
+          // Store name without extension
+          icon.name = icon.file.slice(0, icon.file.indexOf('.svg'))
+          
+          var $tr = $(template(icon));
+          
+          // Store reference to table row
+          icon.$tr = $tr;
+          
+          // Store reference to the icon data
+          $tr.data('icon', icon);
+          
+          // Add to fragment
+          fragment.appendChild($tr[0]);
+        });        
+
+        // Add the fragment to the table
+        this.$tbody.append(fragment);
+      },
+      
+      showAll: function() {
+        for (var i = this.icons.length - 1; i >= 0; i--) {
+          this.icons[i].$tr.hide();
+        }
+      },
+      
+      filter: function(searchString) {
+        var result = [];
+        if (searchString) {
+          var terms = searchString.split(" ");
+          for (var i = this.icons.length - 1; i >= 0; i--) {
+            var icon = this.icons[i];
+
+            if (this.matchIcon(icon, terms))
+              icon.$tr.show();
+            else
+              icon.$tr.hide();
           }
-        };
+        }
+        else
+          this.showAll();
+      },
+      
+      matchIcon: function(icon, terms)  {
+        var result = false;
+        if (icon) {
+          for (var i = terms.length - 1; i >= 0; i--) {
+            var term = terms[i];
+            if (icon.selector.indexOf(term) != -1 || icon.file.indexOf(term) != -1) {
+              result = true;
+            }
+            else {
+              result = false;
+              break;
+            }
+          }  
+        }
+        return result;
       }
-      else
-      {
-        result = icons;
-      }
-      return result;
-    }
+    });
 
-    this.matchIcon = function(icon, terms)  {
-      var result = false;
-      if (icon) {
-        for (var i = terms.length - 1; i >= 0; i--) {
-          var term = terms[i];
-          if (
-            icon.selector.indexOf(term) != -1 ||
-            icon.file.indexOf(term) != -1
-            ) {
-            result = true;
-          }
-          else
-          {
-            result = false;
-            break;
-          }
-        }  
-      }
-      return result;
-    }
-
-    this.changeInputHandler = function(data) {
-      console.log(data.currentTarget.value);
-      self.filteredIcons = self.filterIcons(self.icons, data.currentTarget.value);
-      self.createTable(self.filteredIcons);
-    }
-
-    $("input[type='text']").bind("keyup paste cut", this.changeInputHandler);
-
-    var iconsJSON = $.ajax({
-      type: 'get',
-      url: 'examples/assets/iconbrowser.json',
-      async: false
-    }).responseText;
-
-    
-    self.icons = self.filteredIcons = $.parseJSON(iconsJSON);
-
-    this.createTable(self.icons);
-
-
-
-  });
+    var iconBrowser;
+    $(document).ready(function() {
+      iconBrowser = new CUI.IconBrowser();
+    });
 </script>
 </head>
 
@@ -163,45 +326,44 @@
 
   <header class="top">
 
-      <div class="logo"><img src="images/theme/cloudui.png" alt="CoralUI logo"/></div>
+      <div class="logo"><img src="images/theme/cloudui.png" alt="CoralUI logo"></div>
 
       <nav class="main">
-          <a href="#" class="selected">Icon-Browser</a>
+          <a href="#" class="selected">Icon Browser</a>
       </nav>
-
-      <div class="drawer">
-          <div class="badge">v0.5.0-SNAPSHOT</div>
-      </div>
 
   </header>
 
   <div class="page" role="main">
 
-    <div class="content">
-
-      <div class="searchWrapper">
-        <div class="search">
-          <input class="search-input" type="text" placeholder="Search">
-          <button type="button" label="">
-        </div>   
-      </div>   
-
-      <!-- Table with icons -->
-      <table id="iconTable" class="data">
-        <thead>
-          <tr>
-            <th>Icon</th>
-            <th>Name</th>
-            <th>Selector</th>
-          </tr>
-        </thead>
-
-        <tbody id="iconTableBody">
-
-        </tbody>
-      </table>  
+    <div class="rail light right iconDetailRail">
+      <div class="wrap" id="iconDetails">
+        <section>
+          <p class="smallText">Select an icon for details.</p>
+        </section>
+      </div>
     </div>
-  </div>    
+    <div class="content">
+      <div class="contentContainer">
+        <div class="search">
+          <input id="searchField" class="search-input" type="text" placeholder="Search">
+          <button type="button">
+        </div>
+
+        <table id="iconTable" class="data">
+          <thead>
+            <tr>
+              <th>Icon</th>
+              <th>Name</th>
+              <th>Selector</th>
+            </tr>
+          </thead>
+
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>

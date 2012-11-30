@@ -367,3 +367,75 @@ div.left.column {
     margin-right: 15*@px;
 //    display: block;
 }
+
+
+/**
+Icon browser
+************************/
+.contentContainer {
+  padding: 1rem;
+}
+
+#searchField {
+  width: 18rem;
+}
+
+#iconTable {
+  margin-top: 1rem;
+}
+
+#iconTable tr {
+  cursor: pointer;
+}
+
+div.iconBoxContainer {
+  text-align: center;
+}
+
+div.iconBox {
+  display: inline-block;
+  margin: 0.5rem;
+  padding: 1rem;
+  
+  .border-radius(0.5rem);
+  border: @px solid rgb(165, 165, 165);
+  
+  background: rgb(230, 230, 230);
+
+  .box-shadow(inset 0 0 0.5rem rgba(0, 0, 0, 0.1));
+  
+  &.dark {
+    border: @px solid rgb(55, 55, 55);
+
+    background: rgb(77, 77, 77);
+  }
+}
+
+#iconCode {
+  display: block;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+.iconLabelText {
+  width: 10rem !important;
+  margin-right: 0.5rem !important;
+}
+
+.iconUIColorBox {
+  margin-left: 1.5rem;
+}
+
+#iconDetails {
+  pre {
+    display: inline-block;
+  }
+  p {
+    font-size: 0.85rem;
+    margin: 0.25rem 0  0.75rem 0;
+  }
+}
+
+.iconDetailRail {
+  width: 20rem !important;
+}
