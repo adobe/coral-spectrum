@@ -142,7 +142,7 @@
 
             if (!this.options.useHTML5) {
                 if (this.$element.find("iframe").length === 0) {
-                    var iframeName = "test"; // TODO: make dynamic
+                    var iframeName = "upload-" + new Date().getTime();
                     var iframe = $("<iframe/>", {
                             name: iframeName
                         }
