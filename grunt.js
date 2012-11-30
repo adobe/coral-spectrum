@@ -206,7 +206,8 @@ module.exports = function(grunt) {
         files: {
           '<%= dirs.build %>/js/libs/jquery.js': '<%= dirs.components %>/jquery/index.js',
           '<%= dirs.build %>/js/libs/underscore.js': '<%= dirs.components %>/underscore/index.js',
-          '<%= dirs.build %>/js/libs/handlebars.js': '<%= dirs.components %>/handlebars/index.js'
+          '<%= dirs.build %>/js/libs/handlebars.js': '<%= dirs.components %>/handlebars/index.js',
+          '<%= dirs.build %>/js/libs/handlebars.full.js': '<%= dirs.components %>/handlebars-full/index.js'
         }
       },
       dependencies: {
