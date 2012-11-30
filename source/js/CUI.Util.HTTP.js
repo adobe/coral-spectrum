@@ -16,5 +16,17 @@ CUI.util.HTTP = {
         } catch (e) {
             return false;
         }
+    },
+
+    /**
+     * Returns <code>true</code> if HTML5 Upload is supported
+     * @return {Boolean} HTML5 Upload support status
+     */
+    html5UploadSupported: function() {
+        var xhr = new XMLHttpRequest();
+        return !! (
+            xhr && ('upload' in xhr) && ('onprogress' in xhr.upload)
+        );
     }
+
 };

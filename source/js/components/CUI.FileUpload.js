@@ -30,8 +30,8 @@
          @param {Object}   [options.mimeTypes=null]                   Restrict upload to mime types
          @param {int}      [options.sizeLimit=null]                   File size limit
          @param {boolean}  [options.autoStart=false]                  Should upload start automatically once the file is selected?
-         @param {String}   [options.fileParameter=null]               Name of File's parameter
          @param {String}   [options.fileNameParameter=null]           Name of File name's parameter
+         @param {boolean}  [options.useHTML5=true]                    (Optional) Prefer HTML5 to upload files (if browser allows it)
          @param {Object}   [options.events={}]                        (Optional) Event handlers
          */
         construct: function(options) {
@@ -55,20 +55,36 @@
             mimeTypes: null,
             sizeLimit: null,
             autoStart: false,
-            fileParameter: null,
             fileNameParameter: null,
+            useHTML5: true,
             events: {}
         },
 
         inputElement: null,
+        fileNameElement: null,
         uploadQueue: [],
 
         /** @ignore */
         _render: function() {
             this._readDataFromMarkup();
 
+            if (!CUI.util.HTTP.html5UploadSupported()) {
+                this.options.useHTML5 = false;
+            }
+
             // If current element is input field -> wrap it into SPAN
             if (this.$element.get(0).tagName === "INPUT") {
+                if (!this.options.useHTML5) {
+                    var form = $("<form/>", {
+                        method: "post",
+                        enctype: "multipart/form-data"
+                    });
+                    this.$element.after(form);
+                    this.$element.detach();
+                    form.prepend(this.$element);
+                    this.$element = form;
+                }
+
                 var span = $("<span></span>");
                 this.$element.after(span);
                 this.$element.detach();
@@ -76,9 +92,9 @@
                 this.$element = span;
             }
 
-            this._createMissingElements();
+            this.inputElement = this.$element.find("input[type='file']");
 
-            this.inputElement = this.$element.find("input");
+            this._createMissingElements();
 
             this.$element.addClass("fileupload button icon-upload");
             this.$element.removeClass("focus");
@@ -112,15 +128,30 @@
         _createMissingElements: function() {
             var self = this;
 
-            if (this.$element.find("input").length === 0) {
-                this.$element
-                    .prepend($("<input/>", {
-                            type: "file",
-                            name: self.options.name,
-                            multiple: self.options.multiple
+            var multiple = this.options.useHTML5 && self.options.multiple;
+            if (this.inputElement.length === 0) {
+                this.inputElement = $("<input/>", {
+                    type: "file",
+                    name: self.options.name,
+                    multiple: multiple
+                });
+                this.$element.prepend(this.inputElement);
+            } else {
+                this.inputElement.attr("multiple", multiple);
+            }
+
+            if (!this.options.useHTML5) {
+                if (this.$element.find("iframe").length === 0) {
+                    var iframeName = "upload-" + new Date().getTime();
+                    var iframe = $("<iframe/>", {
+                            name: iframeName
                         }
-                    )
-                );
+                    );
+                    this.$element.prepend(iframe);
+                    iframe.hide();
+
+                    this.$element.find("form").attr("target", iframeName);
+                }
             }
         },
 
@@ -151,8 +182,8 @@
             if (this.$element.attr("data-auto-start")) {
                 this.options.autoStart = true;
             }
-            if (this.$element.attr("data-file-parameter")) {
-                this.options.fileParameter = this.$element.attr("data-file-parameter");
+            if (this.$element.attr("data-usehtml5")) {
+                this.options.useHTML5 = this.$element.attr("data-usehtml5") === "true";
             }
             if (this.$element.attr("data-file-name-parameter")) {
                 this.options.fileNameParameter = this.$element.attr("data-file-name-parameter");
@@ -186,9 +217,17 @@
         /** @ignore */
         _onFileSelectionChange: function(event) {
             var addedCount = 0, rejectedCount = 0;
-            var files = event.target.files;
-            for (var i = 0; i < files.length; i++) {
-                if (this._addFile(files[i])) {
+            if (this.options.useHTML5) {
+                var files = event.target.files;
+                for (var i = 0; i < files.length; i++) {
+                    if (this._addFile(files[i])) {
+                        addedCount++;
+                    } else {
+                        rejectedCount++;
+                    }
+                }
+            } else {
+                if (this._addFile(event.target)) {
                     addedCount++;
                 } else {
                     rejectedCount++;
@@ -207,23 +246,34 @@
         _addFile: function(file) {
             var self = this;
 
-            var fileName = file.name ? file.name : file;
+            var fileName;
+            if (this.options.useHTML5) {
+                fileName = file.name;
+            } else {
+                fileName = $(file).attr("value");
+            }
+            if (fileName.lastIndexOf("\\") !== -1) {
+                fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
+            }
+
             if (!self._getQueueItemByFileName(fileName)) {
                 var item = {
-                    file: file,
-                    fileName: fileName,
-                    fileSize: file.size
+                    fileName: fileName
                 };
+                if (this.options.useHTML5) {
+                    item.file = file;
+                    item.fileSize = file.size;
 
-                // Check file size
-                if (self.options.sizeLimit && file.size > self.options.sizeLimit) {
-                    self.$element.trigger({
-                        type: "filerejected",
-                        item: item,
-                        message: "File is too big",
-                        fileUpload: self
-                    });
-                    return false;
+                    // Check file size
+                    if (self.options.sizeLimit && file.size > self.options.sizeLimit) {
+                        self.$element.trigger({
+                            type: "filerejected",
+                            item: item,
+                            message: "File is too big",
+                            fileUpload: self
+                        });
+                        return false;
+                    }
                 }
 
                 // Add item to queue
@@ -272,34 +322,62 @@
         uploadFile: function(item) {
             var self = this;
 
-            var xhr = new XMLHttpRequest();
-            xhr.addEventListener("loadstart", function(e) { self._onUploadStart(e, item); }, false);
-            xhr.addEventListener("load", function(e) { self._onUploadLoad(e, item); }, false);
-            xhr.addEventListener("error", function(e) { self._onUploadError(e, item); }, false);
-            xhr.addEventListener("abort", function(e) { self._onUploadCanceled(e, item); }, false);
+            if (self.options.useHTML5) {
+                var xhr = new XMLHttpRequest();
+                xhr.addEventListener("loadstart", function(e) { self._onUploadStart(e, item); }, false);
+                xhr.addEventListener("load", function(e) { self._onUploadLoad(e, item); }, false);
+                xhr.addEventListener("error", function(e) { self._onUploadError(e, item); }, false);
+                xhr.addEventListener("abort", function(e) { self._onUploadCanceled(e, item); }, false);
 
-            var upload = xhr.upload;
-            upload.addEventListener("progress", function(e) { self._onUploadProgress(e, item); }, false);
+                var upload = xhr.upload;
+                upload.addEventListener("progress", function(e) { self._onUploadProgress(e, item); }, false);
 
-            // TODO: encoding of special characters in file names
-            var file = item.file;
-            var fileName = item.fileName;
-            if (window.FormData) {
-                var f = new FormData();
-                if (self.options.fileParameter || self.options.fileNameParameter) {
-                    // Custom file and file name parameter
-                    f.append(self.options.fileParameter || self.options.name, file);
-                    f.append(self.options.fileNameParameter || "fileName", fileName);
+                // TODO: encoding of special characters in file names
+                var file = item.file;
+                var fileName = item.fileName;
+                if (window.FormData) {
+                    var f = new FormData();
+                    if (self.options.fileNameParameter) {
+                        // Custom file and file name parameter
+                        f.append(self.inputElement.attr("name"), file);
+                        f.append(self.options.fileNameParameter || "fileName", fileName);
+                    } else {
+                        f.append(fileName, file);
+                    }
+                    f.append("_charset_", "utf-8");
+
+                    xhr.open("POST", self.options.uploadUrl, true);
+                    xhr.send(f);
                 } else {
-                    f.append(fileName, file);
+                    xhr.open("PUT", self.options.uploadUrl + "/" + fileName, true);
+                    xhr.send(file);
                 }
-                f.append("_charset_", "utf-8");
 
-                xhr.open("POST", self.options.uploadUrl, true);
-                xhr.send(f);
             } else {
-                xhr.open("PUT", self.options.uploadUrl + "/" + fileName, true);
-                xhr.send(file);
+                var iframe = self.$element.find("iframe");
+                iframe.on("load", function() {
+                    self.$element.trigger({
+                        type: "fileuploadload",
+                        item: item,
+                        content: this.contentWindow.document.body.innerHTML,
+                        fileUpload: self
+                    });
+                });
+
+                var form = self.$element.find("form");
+                form.attr("action", self.options.uploadUrl);
+
+                // Define value of the file name element
+                if (this.options.fileNameParameter) {
+                    this.fileNameElement = $("<input/>", {
+                        type: "hidden",
+                        name: this.options.fileNameParameter,
+                        value: item.fileName
+                    });
+                    form.prepend(this.fileNameElement);
+                }
+
+                form.submit();
             }
         },
 
@@ -328,34 +406,43 @@
         _onUploadLoad: function(e, item) {
             var request = e.target;
             if (request.readyState === 4) {
-                // Default action
-                if (CUI.util.HTTP.isOkStatus(request.status)) {
-                    this.$element.trigger({
-                        type: "fileuploadsuccess",
-                        item: item,
-                        originalEvent: e,
-                        fileUpload: this
-                    });
-                } else {
-                    this.$element.trigger({
-                        type: "fileuploaderror",
-                        item: item,
-                        originalEvent: e,
-                        message: request.responseText,
-                        fileUpload: this
-                    });
-                }
+                this._internalOnUploadLoad(e, item, request.status, request.responseText);
+            }
+        },
 
-                // Remove queue item
-                this.uploadQueue.splice(this._getQueueIndex(item.fileName), 1);
+        /** @ignore */
+        _internalOnUploadLoad: function(e, item, requestStatus, responseText) {
+            if (CUI.util.HTTP.isOkStatus(requestStatus)) {
                 this.$element.trigger({
-                    type: "queuechanged",
+                    type: "fileuploadsuccess",
                     item: item,
-                    operation: "REMOVE",
-                    queueLength: this.uploadQueue.length,
+                    originalEvent: e,
+                    fileUpload: this
+                });
+            } else {
+                this.$element.trigger({
+                    type: "fileuploaderror",
+                    item: item,
+                    originalEvent: e,
+                    message: responseText,
                     fileUpload: this
                 });
             }
+
+            // Remove file name element if needed
+            if (this.fileNameElement) {
+                this.fileNameElement.remove();
+            }
+
+            // Remove queue item
+            this.uploadQueue.splice(this._getQueueIndex(item.fileName), 1);
+            this.$element.trigger({
+                type: "queuechanged",
+                item: item,
+                operation: "REMOVE",
+                queueLength: this.uploadQueue.length,
+                fileUpload: this
+            });
         },
 
         /** @ignore */
