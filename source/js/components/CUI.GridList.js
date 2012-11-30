@@ -16,7 +16,6 @@
         "view": {
             "selectedItem": {
                 "list": {
-                    "selector": "> i.select",
                     "cls": "selected"
                 },
                 "grid": {
@@ -25,13 +24,10 @@
             },
             "selectedItems": {
                 "list": {
-                    "selector": "> i.select",
-                    "resolver": function($el) {
-                        return $el.parents("article");
-                    }
+                    "selector": "article.selected"
                 },
                 "grid": {
-                    // not yet required
+                    "selector": "article.selected"
                 }
             }
         },
@@ -58,19 +54,11 @@
 
     };
 
-    var instances = [ ];
-
-    var getInstance = function($el) {
-        if ($el.length !== 1) {
-            return undefined;
+    var ensureItem = function(item) {
+        if (item.jquery) {
+            return item.data("gridlist-item");
         }
-        var instCnt = instances.length;
-        for (var i = 0; i < instCnt; i++) {
-            if (instances[i].$element[0] === $el[0]) {
-                return instances[i];
-            }
-        }
-        return undefined;
+        return item;
     };
 
     var Utils = {
@@ -81,6 +69,14 @@
 
         getWidget: function($el) {
             return $el.data("gridList");
+        },
+
+        resolve: function($el, fn) {
+            var resolved = [ ];
+            $el.each(function() {
+                resolved.push.apply(resolved, fn($(this)).toArray());
+            });
+            return $(resolved);
         }
 
     };
@@ -136,6 +132,17 @@
                 }
             }
             return undefined;
+        },
+
+        fromItemElements: function($elements) {
+            var items = [ ];
+            $elements.each(function() {
+                var item = $(this).data("gridlist-item");
+                if (item) {
+                    items.push(item);
+                }
+            });
+            return items;
         }
 
     });
@@ -184,7 +191,7 @@
             var selectorDef = this.selectors.view.selectedItems[this.getDisplayMode()];
             var $selectedItems = this.$el.find(selectorDef.selector);
             if (selectorDef.resolver) {
-                $selectedItems = selectorDef.resolver(selectorDef.resolver($selectedItems));
+                $selectedItems = selectorDef.resolver($selectedItems);
             }
             return $selectedItems;
         }
@@ -218,7 +225,8 @@
                     this.selectors.controller.selectElement.grid, function(e) {
                         var item = ensureItem(self.getItemElFromEvent(e));
                         var widget = Utils.getWidget(self.$el);
-                        if (widget.getDisplayMode() === DISPLAY_GRID) {
+                        if ((widget.getDisplayMode() === DISPLAY_GRID) &&
+                                widget.isGridSelectionMode()) {
                             Utils.getWidget(self.$el).toggleSelection(item);
                         }
                     });
@@ -254,14 +262,10 @@
                 } else {
                     $el.removeClass(selectorDef.cls);
                 }
-                this.$el.trigger($.Event("change:gridlist", {
-                    params: {
-                        "origin": "controller",
-                        "widget": this.$el.data("gridList"),
-                        "type": "gridSelect",
-                        "oldValue": !isGridSelect,
-                        "value": isGridSelect
-                    }
+                this.$el.trigger($.Event("change:gridSelect", {
+                    "widget": this.$el.data("gridList"),
+                    "oldValue": !isGridSelect,
+                    "value": isGridSelect
                 }));
             }
         },
@@ -286,14 +290,10 @@
                         this.$el.addClass("list");
                         break;
                 }
-                this.$el.trigger($.Event("change:gridlist", {
-                    "params": {
-                        "origin": "controller",
-                        "widget": this.$el.data("gridList"),
-                        "type": "displayMode",
-                        "oldValue": oldValue,
-                        "value": displayMode
-                    }
+                this.$el.trigger($.Event("change:displayMode", {
+                    "widget": this.$el.data("gridList"),
+                    "oldValue": oldValue,
+                    "value": displayMode
                 }));
             }
         }
@@ -354,22 +354,31 @@
             this.view.setSelectionState(item, selectionState);
         },
 
+        getSelection: function(useModel) {
+            var selection = this.view.getSelectedItems();
+            if (useModel === true) {
+                selection = this.model.fromItemElements(selection);
+            }
+            return selection;
+        },
+
         getDisplayMode: function() {
             return this.controller.getDisplayMode();
         },
 
         setDisplayMode: function(selectionMode) {
             this.controller.setDisplayMode(selectionMode);
+        },
+
+        isGridSelectionMode: function() {
+            return this.controller.isGridSelect();
+        },
+
+        setGridSelectionMode: function(isSelectionMode) {
+            this.controller.setGridSelect(isSelectionMode);
         }
 
     });
-
-    var ensureItem = function(item) {
-        if (item.jquery) {
-            return item.data("gridlist-item");
-        }
-        return item;
-    };
 
     CUI.GridList = new Class(/** @lends CUI.GridList# */{
 
@@ -381,7 +390,6 @@
 
 
         construct: function(options) {
-            instances.push(this);
             this.adapter = new DirectMarkupAdapter(DEFAULT_SELECTOR_CONFIG);
             this.adapter.initialize(this, this.$element);
             this.layout();
@@ -407,19 +415,27 @@
             this.adapter.setDisplayMode(displayMode);
         },
 
+        isGridSelectionMode: function() {
+            return this.adapter.isGridSelectionMode();
+        },
+
+        setGridSelectionMode: function(isSelection) {
+            this.adapter.setGridSelectionMode(isSelection);
+        },
+
+        toggleGridSelectionMode: function() {
+            this.setGridSelectionMode(!this.isGridSelectionMode());
+        },
+
         select: function(item) {
             item = ensureItem(item);
             var isSelected = this.adapter.isSelected(item);
             if (!isSelected) {
                 this.adapter.setSelected(item, true);
-                this.$element.trigger($.Event("change:gridlist", {
-                    "params": {
-                        "type": "select",
-                        "origin": "widget",
-                        "widget": this,
-                        "item": item,
-                        "isSelected": true
-                    }
+                this.$element.trigger($.Event("change:selection", {
+                    "widget": this,
+                    "item": item,
+                    "isSelected": true
                 }));
             }
         },
@@ -429,14 +445,10 @@
             var isSelected = this.adapter.isSelected(item);
             if (!isSelected) {
                 this.adapter.setSelected(item, false);
-                this.$element.trigger($.Event("change:gridlist", {
-                    "params": {
-                        "type": "select",
-                        "origin": "widget",
-                        "widget": this,
-                        "item": item,
-                        "isSelected": false
-                    }
+                this.$element.trigger($.Event("change:selection", {
+                    "widget": this,
+                    "item": item,
+                    "isSelected": false
                 }));
             }
         },
@@ -445,15 +457,15 @@
             item = ensureItem(item);
             var isSelected = this.adapter.isSelected(item);
             this.adapter.setSelected(item, !isSelected);
-            this.$element.trigger($.Event("change:gridlist", {
-                "params": {
-                    "type": "select",
-                    "origin": "widget",
-                    "widget": this,
-                    "item": item,
-                    "isSelected": !isSelected
-                }
+            this.$element.trigger($.Event("change:selection", {
+                "widget": this,
+                "item": item,
+                "isSelected": !isSelected
             }));
+        },
+
+        getSelection: function(useModel) {
+            return this.adapter.getSelection(useModel === true);
         },
 
         layout: function() {
@@ -469,6 +481,14 @@
     CUI.GridList.DISPLAY_GRID = DISPLAY_GRID;
 
     CUI.GridList.DISPLAY_LIST = DISPLAY_LIST;
+
+    CUI.GridList.get = function($el) {
+        var gridlist = Utils.getWidget($el);
+        if (!gridlist) {
+            gridlist = Utils.getWidget($el.gridList());
+        }
+        return gridlist;
+    };
 
     CUI.util.plugClass(CUI.GridList);
 
