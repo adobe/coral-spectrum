@@ -1,6 +1,4 @@
 /*
- * TODO - make it work with external addition/removal of classes (don't rely on state)
- * TODO - for that, delegate (for example) determining the selection to the view
  * TODO - provide a "sync" method that syncs view and model
  */
 
@@ -261,6 +259,7 @@
                     $el.addClass(selectorDef.cls);
                 } else {
                     $el.removeClass(selectorDef.cls);
+                    Utils.getWidget($el).clearSelection();
                 }
                 this.$el.trigger($.Event("change:gridSelect", {
                     "widget": this.$el.data("gridList"),
@@ -282,6 +281,9 @@
                 var oldValue = this.getDisplayMode();
                 switch (displayMode) {
                     case DISPLAY_GRID:
+                        if (!this.isGridSelect()) {
+                            Utils.getWidget(this.$el).clearSelection();
+                        }
                         this.$el.removeClass("list");
                         this.$el.addClass("grid");
                         break;
@@ -443,7 +445,7 @@
         deselect: function(item) {
             item = ensureItem(item);
             var isSelected = this.adapter.isSelected(item);
-            if (!isSelected) {
+            if (isSelected) {
                 this.adapter.setSelected(item, false);
                 this.$element.trigger($.Event("change:selection", {
                     "widget": this,
@@ -466,6 +468,14 @@
 
         getSelection: function(useModel) {
             return this.adapter.getSelection(useModel === true);
+        },
+
+        clearSelection: function() {
+            var selection = this.getSelection(true);
+            var itemCnt = selection.length;
+            for (var i = 0; i < itemCnt; i++) {
+                this.deselect(selection[i]);
+            }
         },
 
         layout: function() {
