@@ -35,6 +35,7 @@ module.exports = function(grunt) {
       'components/CUI.Datepicker.js',
       'components/CUI.Pulldown.js',
       'components/CUI.Sticky.js',
+      'components/CUI.GridList.js',
       'components/CUI.PathBrowser.js',
       'components/CUI.Wizard.js',
       'components/CUI.FileUpload.js'

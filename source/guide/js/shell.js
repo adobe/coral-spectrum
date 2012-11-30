@@ -1,12 +1,12 @@
 
 jQuery(function($) {
 
-    // Initialize grid
+    // Initialize grid & attach widget
     var $grid = $(".grid");
-    $grid.cuigridlayout();
+    $grid.gridList();
 
     $("#main-rail").on("open close", function() {
-        $grid.cuigridlayout("layout");
+        $grid.gridList().relayout();
     });
 
     $('.tagpicker').filters({
