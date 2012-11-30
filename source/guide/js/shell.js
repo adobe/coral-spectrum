@@ -17,7 +17,11 @@ jQuery(function($) {
     });
 
     $("#selection-mode").fipo("tap", "click", function(e) {
+        // use API
         CUI.GridList.get($grid).toggleGridSelectionMode();
+        // use CSS contract
+        // $grid.toggleClass("selection-mode");
+        // $grid.find("article").removeClass("selected");
     });
 
     $("#display-mode").fipo("tap", "click", function(e) {

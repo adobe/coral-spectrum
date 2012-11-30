@@ -1,5 +1,9 @@
 /*
  * TODO - provide a "sync" method that syncs view and model
+ * TODO - prepend/append list items
+ * TODO - preserve header in list view; hide in grid view
+ * TODO - preserve order when switching to list view
+ * TODO - reordering in list view
  */
 
 (function($) {
@@ -10,9 +14,9 @@
 
     var DEFAULT_SELECTOR_CONFIG = {
 
-        "itemSelector": "article",
+        "itemSelector": "article",                      // selector for getting items
         "view": {
-            "selectedItem": {
+            "selectedItem": {                           // defines what classes (cls) on what elements (selector; optional) are used to mark a selection
                 "list": {
                     "cls": "selected"
                 },
@@ -20,7 +24,7 @@
                     "cls": "selected"
                 }
             },
-            "selectedItems": {
+            "selectedItems": {                          // defines the selector that is used for determining the current selection; a resolver function may be specified that adjusts the selection (for exmaple by determining a suitable parent element)
                 "list": {
                     "selector": "article.selected"
                 },
@@ -30,14 +34,14 @@
             }
         },
         "controller": {
-            "selectElement": {
+            "selectElement": {                          // defines the selector that is used for installing the tap/click handlers
                 "list": "article > i.select",
                 "grid": "article > a"
             },
-            "moveHandleElement": {
+            "moveHandleElement": {                      // defines the selector that is used to determine the object that is responsible for moving an item in list view
                 "list": "article > i.move"
             },
-            "targetToItem": {
+            "targetToItem": {                           // defines methods that are used to resolve the event target of a tap/click event to a gridlist item
                 "list": function($target) {
                     return $target.parents("article");
                 },
@@ -45,7 +49,7 @@
                     return $target.parents("article");
                 }
             },
-            "gridSelect": {
+            "gridSelect": {                             // defines the class that is used to trigger the grid selection mode
                 "cls": "selection-mode"
             }
         }
@@ -392,7 +396,8 @@
 
 
         construct: function(options) {
-            this.adapter = new DirectMarkupAdapter(DEFAULT_SELECTOR_CONFIG);
+            var selectorConfig = options.selectorConfig || DEFAULT_SELECTOR_CONFIG;
+            this.adapter = new DirectMarkupAdapter(selectorConfig);
             this.adapter.initialize(this, this.$element);
             this.layout();
         },
