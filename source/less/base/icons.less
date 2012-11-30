@@ -57,9 +57,14 @@
     opacity: @icon-opacity;
   }
   
-  &.white:before {
-    color: @icon-white-color;
-    opacity: @icon-white-opacity;
+  &.white {
+    &, &:before {
+      color: @icon-white-color;
+    }
+    
+    &:before {
+      opacity: @icon-white-opacity;
+    }
   }
   
   &.blue:before {
@@ -74,23 +79,6 @@
     &:hover:before {
       color: @icon-disabled-color;
       opacity: @icon-disabled-opacity;
-    }
-  }
-}
-
-.icon-clickable() {
-  // States
-  &:hover {
-    &:before {
-      color: @icon-hover-color;
-      opacity: @icon-hover-opacity;
-    }
-  }
-
-  &:active {
-    &:before {
-      color: @icon-active-color;
-      opacity: @icon-active-opacity;
     }
   }
 }
@@ -135,6 +123,13 @@
 [class*=" icon-"] {
   // Hide inner text by default
   .hide-inner-text;
+  
+  // Put up here so white/blue can override
+  &.withLabel {
+    color: inherit;
+  }
+  
+  // Icon basics
   .icon;
   
   &.xsmall {
@@ -159,7 +154,8 @@
     text-indent: 0;
     white-space: inherit;
     overflow: visible;
-    color: inherit;
+    
+    // color: inherit; // defined up above
     
     &.xsmall {
       &:before {
@@ -191,15 +187,6 @@ i[class*=" icon-"] {
   font-style: normal;
 }
 
-// Clickable icons
-a,
-button,
-.button {
-  &[class^="icon-"],
-  &[class*=" icon-"] {
-    .icon-clickable();
-  }
-}
 
 button,
 .button {
@@ -269,7 +256,51 @@ button,
 
     &:before {
       color: @icon-white-color;
-      opacity: @icon-white-opacity;
+      opacity: @icon-white-inbutton-opacity;
+    }
+  }
+}
+
+
+
+// Clickable icons
+a,
+button,
+.button {
+  &[class^="icon-"],
+  &[class*=" icon-"] {
+    // States
+    &:hover {
+      &:before {
+        color: @icon-hover-color;
+        opacity: @icon-hover-opacity;
+      }
+    }
+
+    &:active {
+      &:before {
+        color: @icon-active-color;
+        opacity: @icon-active-opacity;
+      }
+    }
+    
+    // White icons
+    &.white {
+      &:hover, &:hover:before {
+        color: @icon-white-hover-color;
+      }
+
+      &:hover:before {
+        opacity: @icon-white-hover-opacity;
+      }
+
+      &:active, &:active:before {
+        color: @icon-blue-color;
+      }
+
+      &:active:before {
+       opacity: @icon-blue-opacity;
+      }
     }
   }
 }
