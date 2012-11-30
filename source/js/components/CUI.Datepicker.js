@@ -437,7 +437,7 @@
     },
 
     _getTimeString: function(hour, minute) {
-        return this._pad(hour) + ":" + this._pad(minute) + ":" + this._pad(this.options.selectedDateTime.getSeconds());
+        return this._pad(hour) + ":" + this._pad(minute) + ":" + this._pad(this.options.selectedDateTime.seconds());
     },
 
     _combineDateTimeStrings: function(dateString, timeString) {
