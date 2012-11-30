@@ -498,29 +498,31 @@ div.rail {
     }
 
     // text input
-    input[type="text"] {
-      .placeholder(@rail-background-color);
+    &:not(.light) {
+      input[type="text"] {
+        .placeholder(@rail-background-color);
 
-      .border-box;
+        .border-box;
 
-      height: 30*@px;
-      width: 100%;
+        height: 30*@px;
+        width: 100%;
 
-      background-color: @rail-dark-background-color;
-      border: @px solid @rail-section-border-color;
-      .box-shadow(inset 0 3*@px 3*@px -3*@px @rail-shadow-inset-color);
+        background-color: @rail-dark-background-color;
+        border: @px solid @rail-section-border-color;
+        .box-shadow(inset 0 3*@px 3*@px -3*@px @rail-shadow-inset-color);
 
-      padding: 0.25rem 0.5rem;
-      width: 100%;
+        padding: 0.25rem 0.5rem;
+        width: 100%;
 
-      margin: 0;
+        margin: 0;
       
-      font-size: 0.85rem;
-      color: @rail-font-color;
-      height: 28*@px;
+        font-size: 0.85rem;
+        color: @rail-font-color;
+        height: 28*@px;
 
-      &:focus {
-          box-shadow: none;
+        &:focus {
+            box-shadow: none;
+        }
       }
     }
 
