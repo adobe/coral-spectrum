@@ -342,6 +342,7 @@
         }.bind(this));
         
         this.$handles.eq(this.draggingPosition).addClass("dragging");
+        this.$element.closest("body").addClass("slider-dragging-cursorhack");
         
         
         $(window).bind("mousemove.slider touchmove.slider", this._handleDragging.bind(this));
@@ -373,7 +374,8 @@
 
     _mouseUp: function() {
         this.$handles.eq(this.draggingPosition).removeClass("dragging");
-
+        this.$element.closest("body").removeClass("slider-dragging-cursorhack");
+        
         this.draggingPosition = -1;
         $(window).unbind("mousemove.slider touchmove.slider");
         $(window).unbind("mousemup.slider touchend.slider");

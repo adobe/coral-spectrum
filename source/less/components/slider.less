@@ -37,7 +37,7 @@
     .gradient(@slider-handle-gradient-start-color, @slider-handle-gradient-end-color);
     .border-radius(0.25rem);
     border: @px solid @slider-border-color;
-    cursor: pointer;
+    cursor: url('../images/cursors/openhand.cur'), default;
     &:hover,
     &.dragging {
       .gradient(lighten(@slider-handle-gradient-start-color, 15%), lighten(@slider-handle-gradient-end-color, 15%));
@@ -45,6 +45,9 @@
         opacity: 1;
         .slider-transition;
       }
+    }
+    &.dragging {
+        cursor: url('../images/cursors/closedhand.cur'), default;
     }
   }
 
@@ -89,7 +92,7 @@
   .value {
     display: inline-block;
   }
-
+    
   &.vertical {
     width: 8*@px;
     height: 220*@px;
@@ -141,4 +144,8 @@
       border-color: @slider-disabled-border-color;
     }
   }
+}
+
+.slider-dragging-cursorhack, .slider-dragging-cursorhack * {
+    cursor: url('../images/cursors/closedhand.cur'), default !important;    /* Apply dragging to complete page */
 }
