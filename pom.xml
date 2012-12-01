@@ -228,6 +228,13 @@
                 <artifactId>content-package-maven-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
+                    <dependencies>
+                        <dependency>
+                            <group>adobe/granite</group>
+                            <name>com.adobe.granite.platform.clientlibs</name>
+                            <version>[0.0.0,)</version>
+                        </dependency>
+                    </dependencies>
                     <filters>
                         <filter>
                             <root>/etc/clientlibs/granite/coralui</root>
