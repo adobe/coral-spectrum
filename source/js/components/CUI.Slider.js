@@ -292,6 +292,7 @@
     },
     
     _handleClick: function(event) {
+        if(this.options.disabled) return false;
         var that = this;
 
         // Mouse page position
@@ -362,7 +363,7 @@
             mouseY = touch.pageY;            
         }
         
-        this._updateValue(this.draggingPosition, this._getValueFromCoord(mouseX, mouseY));        
+        this._updateValue(this.draggingPosition, this._getValueFromCoord(mouseX, mouseY));      
         this._moveHandles();
         if(this.options.filled) {
             this._updateFill();
