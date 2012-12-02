@@ -41,7 +41,7 @@
             "moveHandleElement": {                      // defines the selector that is used to determine the object that is responsible for moving an item in list view
                 "list": "article > i.move"
             },
-            "targetToItem": {                           // defines methods that are used to resolve the event target of a tap/click event to a gridlist item
+            "targetToItem": {                           // defines methods that are used to resolve the event target of a tap/click event to a card view item
                 "list": function($target) {
                     return $target.parents("article");
                 },
@@ -58,7 +58,7 @@
 
     var ensureItem = function(item) {
         if (item.jquery) {
-            return item.data("gridlist-item");
+            return item.data("cardView-item");
         }
         return item;
     };
@@ -70,7 +70,7 @@
         },
 
         getWidget: function($el) {
-            return $el.data("gridList");
+            return $el.data("cardView");
         },
 
         resolve: function($el, fn) {
@@ -92,7 +92,7 @@
 
         construct: function($itemEl) {
             this.$itemEl = $itemEl;
-            this.$itemEl.data("gridlist-item", this);
+            this.$itemEl.data("cardView-item", this);
         },
 
         getItemEl: function() {
@@ -139,7 +139,7 @@
         fromItemElements: function($elements) {
             var items = [ ];
             $elements.each(function() {
-                var item = $(this).data("gridlist-item");
+                var item = $(this).data("cardView-item");
                 if (item) {
                     items.push(item);
                 }
@@ -215,7 +215,7 @@
             this.selectors = selectors;
             this.setDisplayMode(this.$el.hasClass("list") ? DISPLAY_LIST : DISPLAY_GRID);
             var self = this;
-            this.$el.fipo("tap.gridlist.select", "click.gridlist.select",
+            this.$el.fipo("tap.cardview.select", "click.cardview.select",
                     this.selectors.controller.selectElement.list, function(e) {
                         var item = ensureItem(self.getItemElFromEvent(e));
                         var widget = Utils.getWidget(self.$el);
@@ -223,7 +223,7 @@
                             Utils.getWidget(self.$el).toggleSelection(item);
                         }
                     });
-            this.$el.fipo("tap.gridlist.select", "click.gridlist.select",
+            this.$el.fipo("tap.cardview.select", "click.cardview.select",
                     this.selectors.controller.selectElement.grid, function(e) {
                         var item = ensureItem(self.getItemElFromEvent(e));
                         var widget = Utils.getWidget(self.$el);
@@ -266,7 +266,7 @@
                     Utils.getWidget($el).clearSelection();
                 }
                 this.$el.trigger($.Event("change:gridSelect", {
-                    "widget": this.$el.data("gridList"),
+                    "widget": this.$el.data("cardView"),
                     "oldValue": !isGridSelect,
                     "value": isGridSelect
                 }));
@@ -297,7 +297,7 @@
                         break;
                 }
                 this.$el.trigger($.Event("change:displayMode", {
-                    "widget": this.$el.data("gridList"),
+                    "widget": this.$el.data("cardView"),
                     "oldValue": oldValue,
                     "value": displayMode
                 }));
@@ -320,7 +320,7 @@
             this.selectors = selectors;
         },
 
-        initialize: function(gridlist, $el) {
+        initialize: function($el) {
             this.setModel(new DirectMarkupModel($el, this.selectors));
             this.setView(new DirectMarkupView($el, this.selectors));
             this.setController(new DirectMarkupController($el, this.selectors));
@@ -386,9 +386,9 @@
 
     });
 
-    CUI.GridList = new Class(/** @lends CUI.GridList# */{
+    CUI.CardView = new Class(/** @lends CUI.CardView# */{
 
-        toString: 'GridList',
+        toString: 'CardView',
 
         extend: CUI.Widget,
 
@@ -398,7 +398,7 @@
         construct: function(options) {
             var selectorConfig = options.selectorConfig || DEFAULT_SELECTOR_CONFIG;
             this.adapter = new DirectMarkupAdapter(selectorConfig);
-            this.adapter.initialize(this, this.$element);
+            this.adapter.initialize(this.$element);
             this.layout();
         },
 
@@ -493,28 +493,28 @@
 
     });
 
-    CUI.GridList.DISPLAY_GRID = DISPLAY_GRID;
+    CUI.CardView.DISPLAY_GRID = DISPLAY_GRID;
 
-    CUI.GridList.DISPLAY_LIST = DISPLAY_LIST;
+    CUI.CardView.DISPLAY_LIST = DISPLAY_LIST;
 
-    CUI.GridList.get = function($el) {
-        var gridlist = Utils.getWidget($el);
-        if (!gridlist) {
-            gridlist = Utils.getWidget($el.gridList());
+    CUI.CardView.get = function($el) {
+        var cardView = Utils.getWidget($el);
+        if (!cardView) {
+            cardView = Utils.getWidget($el.cardView());
         }
-        return gridlist;
+        return cardView;
     };
 
-    CUI.util.plugClass(CUI.GridList);
+    CUI.util.plugClass(CUI.CardView);
 
     // Data API
     if (CUI.options.dataAPI) {
         $(function() {
-            var gridlists = $('body').find('[data-toggle="gridlist"]');
-            for (var gl = 0; gl < gridlists.length; gl++) {
-                var $gridlist = $(gridlists[gl]);
-                if (!$gridlist.data("gridlist")) {
-                    $gridlist.gridList();
+            var cardViews = $('body').find('[data-toggle="cardview"]');
+            for (var gl = 0; gl < cardViews.length; gl++) {
+                var $cardView = $(cardViews[gl]);
+                if (!$cardView.data("cardview")) {
+                    $cardView.cardView();
                 }
             }
         });

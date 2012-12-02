@@ -3,7 +3,7 @@ jQuery(function($) {
 
     // Initialize grid & attach widget
     var $grid = $(".grid");
-    $grid.gridList();
+    $grid.cardView();
     $grid.on("change:selection", function(e) {
         var gl = e.widget;
         /*
@@ -13,26 +13,26 @@ jQuery(function($) {
     });
 
     $("#main-rail").on("open close", function() {
-        CUI.GridList.get($grid).relayout();
+        CUI.CardView.get($grid).relayout();
     });
 
     $("#selection-mode").fipo("tap", "click", function(e) {
         // use API
-        CUI.GridList.get($grid).toggleGridSelectionMode();
+        CUI.CardView.get($grid).toggleGridSelectionMode();
         // use CSS contract
         // $grid.toggleClass("selection-mode");
         // $grid.find("article").removeClass("selected");
     });
 
     $("#display-mode").fipo("tap", "click", function(e) {
-        var gl = CUI.GridList.get($grid);
+        var gl = CUI.CardView.get($grid);
         var dispMode = gl.getDisplayMode();
         switch (dispMode) {
-            case CUI.GridList.DISPLAY_GRID:
-                gl.setDisplayMode(CUI.GridList.DISPLAY_LIST);
+            case CUI.CardView.DISPLAY_GRID:
+                gl.setDisplayMode(CUI.CardView.DISPLAY_LIST);
                 break;
-            case CUI.GridList.DISPLAY_LIST:
-                gl.setDisplayMode(CUI.GridList.DISPLAY_GRID);
+            case CUI.CardView.DISPLAY_LIST:
+                gl.setDisplayMode(CUI.CardView.DISPLAY_GRID);
                 break;
         }
     });
