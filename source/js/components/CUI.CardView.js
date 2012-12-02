@@ -117,6 +117,10 @@
             }
         },
 
+        initialize: function() {
+            // nothing to do here
+        },
+
         getItemCount: function() {
             return this.items.length;
         },
@@ -163,6 +167,10 @@
             this.selectors = selectors;
         },
 
+        initialize: function() {
+            // nothing to do here
+        },
+
         getDisplayMode: function() {
             return Utils.getWidget(this.$el).getDisplayMode();
         },
@@ -186,7 +194,13 @@
             if (selectorDef.selector) {
                 $itemEl = $itemEl.find(selectorDef.selector);
             }
-            return ($itemEl.hasClass(selectorDef.cls) ? "selected" : "unselected");
+            var cls = selectorDef.cls.split(" ");
+            for (var c = 0; c < cls.length; c++) {
+                if (!$itemEl.hasClass(cls[c])) {
+                    return "unselected";
+                }
+            }
+            return "selected";
         },
 
         getSelectedItems: function() {
@@ -213,25 +227,42 @@
         construct: function($el, selectors) {
             this.$el = $el;
             this.selectors = selectors;
+        },
+
+        initialize: function() {
             this.setDisplayMode(this.$el.hasClass("list") ? DISPLAY_LIST : DISPLAY_GRID);
             var self = this;
             this.$el.fipo("tap.cardview.select", "click.cardview.select",
-                    this.selectors.controller.selectElement.list, function(e) {
-                        var item = ensureItem(self.getItemElFromEvent(e));
-                        var widget = Utils.getWidget(self.$el);
-                        if (widget.getDisplayMode() === DISPLAY_LIST) {
-                            Utils.getWidget(self.$el).toggleSelection(item);
-                        }
-                    });
+                this.selectors.controller.selectElement.list, function(e) {
+                    var item = ensureItem(self.getItemElFromEvent(e));
+                    var widget = Utils.getWidget(self.$el);
+                    if (widget.getDisplayMode() === DISPLAY_LIST) {
+                        Utils.getWidget(self.$el).toggleSelection(item);
+                        e.stopPropagation();
+                        e.preventDefault();
+                    }
+                });
             this.$el.fipo("tap.cardview.select", "click.cardview.select",
-                    this.selectors.controller.selectElement.grid, function(e) {
-                        var item = ensureItem(self.getItemElFromEvent(e));
-                        var widget = Utils.getWidget(self.$el);
-                        if ((widget.getDisplayMode() === DISPLAY_GRID) &&
-                                widget.isGridSelectionMode()) {
-                            Utils.getWidget(self.$el).toggleSelection(item);
-                        }
-                    });
+                this.selectors.controller.selectElement.grid, function(e) {
+                    var item = ensureItem(self.getItemElFromEvent(e));
+                    var widget = Utils.getWidget(self.$el);
+                    if ((widget.getDisplayMode() === DISPLAY_GRID) &&
+                            widget.isGridSelectionMode()) {
+                        Utils.getWidget(self.$el).toggleSelection(item);
+                        e.stopPropagation();
+                        e.preventDefault();
+                    }
+                });
+            // block click event for carsa
+            this.$el.finger("click.cardview.select",
+                this.selectors.controller.selectElement.grid, function(e) {
+                    var widget = Utils.getWidget(self.$el);
+                    if ((widget.getDisplayMode() === DISPLAY_GRID) &&
+                            widget.isGridSelectionMode()) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                    }
+                });
         },
 
         getItemElFromEvent: function(e) {
@@ -277,15 +308,18 @@
             if (this.$el.hasClass("list")) {
                 return DISPLAY_LIST;
             }
-            return DISPLAY_GRID;
+            if (this.$el.hasClass("grid")) {
+                return DISPLAY_GRID;
+            }
+            return null;
         },
 
         setDisplayMode: function(displayMode) {
-            if (this.getDisplayMode() !== displayMode) {
-                var oldValue = this.getDisplayMode();
+            var oldValue = this.getDisplayMode();
+            if (oldValue !== displayMode) {
                 switch (displayMode) {
                     case DISPLAY_GRID:
-                        if (!this.isGridSelect()) {
+                        if (!this.isGridSelect() && (oldValue !== null)) {
                             Utils.getWidget(this.$el).clearSelection();
                         }
                         this.$el.removeClass("list");
@@ -324,6 +358,9 @@
             this.setModel(new DirectMarkupModel($el, this.selectors));
             this.setView(new DirectMarkupView($el, this.selectors));
             this.setController(new DirectMarkupController($el, this.selectors));
+            this.model.initialize();
+            this.view.initialize();
+            this.controller.initialize();
         },
 
         setModel: function(model) {
