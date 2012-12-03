@@ -217,6 +217,13 @@
             return this.headers[pos];
         },
 
+        getHeaders: function() {
+            var headers = [ ];
+            headers.push.apply(headers, this.headers);
+            console.log(headers);
+            return headers;
+        },
+
         getHeaderForEl: function($el) {
             var headerCnt = this.headers.length;
             for (var h = 0; h < headerCnt; h++) {
@@ -488,7 +495,7 @@
                         var $header = self.selectors.controller.selectAll.resolver(
                                 $(e.target));
                         var header = widget.getModel().getHeaderForEl($header);
-                        // console.log("header clicked: ", header);
+                        widget.selectAll(header);
                     }
                 });
             // block click event for cards
@@ -771,16 +778,26 @@
             }
         },
 
-        selectAll: function(header) {
+        selectAll: function(headers) {
             var model = this.adapter.getModel();
-            if (header.jQuery) {
-                header = model.getHeaderForEl(header);
+            if (headers == null) {
+                headers = model.getHeaders();
             }
-            var itemsToSelect = model.getItemsForHeader(header);
-            var itemCnt = itemsToSelect.length;
-            var finalItem = (itemCnt - 1);
-            for (var i = 0; i < itemCnt; i++) {
-                this.select(itemsToSelect[i], (i < finalItem));
+            if (!$.isArray(headers)) {
+                headers = [ headers ];
+            }
+            var headerCnt = headers.length;
+            for (var h = 0; h < headerCnt; h++) {
+                var header = headers[h];
+                if (header.jQuery) {
+                    header = model.getHeaderForEl(header);
+                }
+                var itemsToSelect = model.getItemsForHeader(header);
+                var itemCnt = itemsToSelect.length;
+                var finalItem = (itemCnt - 1);
+                for (var i = 0; i < itemCnt; i++) {
+                    this.select(itemsToSelect[i], (i < finalItem));
+                }
             }
         },
 
