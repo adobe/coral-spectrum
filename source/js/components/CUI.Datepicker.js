@@ -484,6 +484,27 @@
         $(hourDropdown).dropdown();
         $(minuteDropdown).dropdown();
 
+        // Style for mobile, select can't be hidden
+        $(hourDropdown).css({
+            'position': 'relative'
+        });
+
+        $(minuteDropdown).css({
+            'position': 'relative'
+        });
+
+        $(hourDropdown).find('select').css({
+            'position': 'absolute',
+            'left': '1.5rem',
+            'top': '1rem'
+        });
+
+        $(minuteDropdown).find('select').css({
+            'position': 'absolute',
+            'left': '1.5rem',
+            'top': '1rem'
+        });
+
         html.append(hourDropdown, $("<span>:</span>"), minuteDropdown);
 
         if (this.$element.find(".time").length === 0) {
