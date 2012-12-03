@@ -16,6 +16,7 @@
         "itemSelector": "article",                      // selector for getting items
         "headerSelector": "header",                     // selector for headers
         "dataContainer": "grid-0",                      // class name of the data container
+        "enableImageMultiply": true,                    // flag if images should be multiplied
         "view": {
             "selectedItem": {                           // defines what classes (cls) on what elements (selector; optional) are used to mark a selection
                 "list": {
@@ -395,6 +396,9 @@
         },
 
         _drawAllSelectedGrid: function() {
+            if (!this.selectors.enableImageMultiply) {
+                return;
+            }
             var selector = this.selectors.view.selectedItems.grid.selector + " img:visible";
             var self = this;
             $(selector).each(function() {
@@ -406,12 +410,18 @@
         },
 
         _removeAllSelectedGrid: function() {
+            if (!this.selectors.enableImageMultiply) {
+                return;
+            }
             var selector = this.selectors.view.selectedItems.grid.selector +
                     " canvas.multiplied";
             $(selector).remove();
         },
 
         _drawSelectedGrid: function(item) {
+            if (!this.selectors.enableImageMultiply) {
+                return;
+            }
             var $img = item.getItemEl().find("img:visible");
             this._drawImage($img);
             // redraw if image has not been loaded (fully) yet
@@ -422,6 +432,9 @@
         },
 
         _removeSelectedGrid: function(item) {
+            if (!this.selectors.enableImageMultiply) {
+                return;
+            }
             var $itemEl = item.getItemEl();
             $itemEl.find("canvas.multiplied").remove();
         }
