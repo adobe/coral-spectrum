@@ -41,8 +41,8 @@
       @param {String} [options.type="date"]                   Type of picker, supports date, datetime, datetime-local and time
       @param {integer} [options.startDay=0]                   Defines the start day for the week, 0 = Sunday, 1 = Monday etc.
       @param {boolean} [options.disabled=false]               Is this widget disabled?
-      @param {String} [options.displayedFormat="DD-MM-YYYY"]         Displayed date (userfriendly), default is 2010-11-29
-      @param {String} [options.storedFormat="DD-MM-YYYY"]            Stored date (backendfriendly), default is 2010-11-29
+      @param {String} [options.displayedFormat="YYYY-MM-DD[T]HH:mm[Z]"]         Displayed date (userfriendly), default is 2012-10-20T20:35Z
+      @param {String} [options.storedFormat="YYYY-MM-DD[T]HH:mm[Z]"]            Stored date (backendfriendly), default is 2012-10-20T20:35Z
       
     */
     
@@ -54,14 +54,18 @@
         selectedDateTime: moment(),
         startDay: 0,
         disabled: false,
-        displayedFormat : 'DD-MM-YYYY',
-        storedFormat : 'DD-MM-YYYY'
+        displayedFormat : 'YYYY-MM-DD[T]HH:mm[Z]',
+        storedFormat : 'YYYY-MM-DD[T]HH:mm[Z]',
+        forceHTMLMode : false
     },
     
     displayDateTime: null,
     pickerShown: false,
     isMobileAndSupportsInputType: false,
-    internFormat: 'YYYY-M-D',
+    internFormat: 'YYYY-MM-DD[T]HH:mm[Z]',
+    officialDateFormat: 'YYYY-MM-DD',
+    officialTimeFormat: 'YYYY-MM-DD[T]HH:mm[Z]',
+    officialDatetimeFormat: 'HH:mm',
 
     construct: function(options) {
 
@@ -80,10 +84,12 @@
         if(this._isSupportedMobileDevice() && this._supportsInputType(this.options.type)) {
             this.isMobileAndSupportsInputType = true;
         }
+
         this._addMissingElements();
         this._updateState();
 
         this.$openButton = this.$element.find('button');
+        
         this.$input = this.$element.find('input.visible');
         this.$hidden = this.$element.find('input[type="hidden"]');
 
@@ -93,6 +99,22 @@
             this._renderTime();
             this.$timeDropdowns = this.$element.find(".dropdown");
             this.$timeButtons = this.$timeDropdowns.find("button");
+        }
+
+        // If HTML5 input is used, then force to use the official format.
+        if (this.isMobileAndSupportsInputType) {
+            if (this.options.type === 'date') {
+                this.options.displayedFormat = this.officialDateFormat;
+                this.options.storedFormat = this.officialDateFormat;
+            } else if (this.options.type === 'time') {
+                this.options.displayedFormat = this.officialTimeFormat;
+                this.options.storedFormat = this.officialTimeFormat;
+            } else {
+                this.options.displayedFormat = this.officialDatetimeFormat;
+                this.options.storedFormat = this.officialDatetimeFormat;
+            }
+
+            this._setDateTime(this.displayDateTime);
         }
         
         if(!this.isMobileAndSupportsInputType) this._switchInputTypeToText(this.$input);
@@ -184,10 +206,14 @@
         if ($input.data('storedFormat') !== undefined) {
             this.options.storedFormat = $input.data('storedFormat');
         }
+
+        if (this.$element.data('forceHtmlMode') !== undefined) {
+            this.options.forceHTMLMode = this.$element.data('forceHtmlMode');
+        }
     },
 
     _readInputVal: function() {
-        this.displayDateTime = this.options.selectedDateTime = moment($(this.$input).val(), this.options.displayedFormat);
+        this.displayDateTime = this.options.selectedDateTime = moment($(this.$input)[0].getAttribute('value'), this.options.displayedFormat);
     },
     
     _updateState: function() {
@@ -261,7 +287,12 @@
                 .attr('type', 'hidden')
                 .attr('name', $input.attr('name'))
                 // $input.val() or $input.attr('value') does not work for html5 date input in chrome...
-                .attr('value', moment($input[0].getAttribute('value'), this.options.displayedFormat).format(this.options.storedFormat));
+                
+            if ($input.attr('disabled') !== undefined) {
+                $hidden.attr('disabled', 'disabled');
+            }
+
+
             $input.after($hidden);
             $input.removeAttr('name');
         }
@@ -419,10 +450,11 @@
     
     _setDateTime: function(date) {
         this.$input.val(date.format(this.options.displayedFormat));
+
         this.$hidden.val(date.format(this.options.storedFormat));
+        this.options.selectedDateTime = this.displayDateTime = date;
 
         if(this.options.type !== "time") {
-            this.options.selectedDateTime = this.displayDateTime = date;
             this._renderCalendar();
         }
     },
@@ -478,8 +510,9 @@
     },
 
     _isSupportedMobileDevice: function() {
-      if(navigator.userAgent.match(/Android/i) ||
-          navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+      if( (navigator.userAgent.match(/Android/i) ||
+          navigator.userAgent.match(/iPhone|iPad|iPod/i)) &&
+          !this.options.forceHTMLMode) {
           return true;
       }
       return false;
