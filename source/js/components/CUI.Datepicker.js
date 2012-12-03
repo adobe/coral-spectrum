@@ -42,7 +42,6 @@
       @param {integer} [options.startDay=0]                   Defines the start day for the week, 0 = Sunday, 1 = Monday etc.
       @param {boolean} [options.disabled=false]               Is this widget disabled?
       @param {String} [options.displayedFormat="YYYY-MM-DD[T]HH:mm[Z]"]         Displayed date (userfriendly), default is 2012-10-20T20:35Z
-      @param {String} [options.storedFormat="YYYY-MM-DD[T]HH:mm[Z]"]            Stored date (backendfriendly), default is 2012-10-20T20:35Z
       
     */
     
@@ -89,9 +88,8 @@
         this._updateState();
 
         this.$openButton = this.$element.find('button');
-        
-        this.$input = this.$element.find('input.visible');
-        this.$hidden = this.$element.find('input[type="hidden"]');
+
+        this.$input = this.$element.find('input');
 
         this._readInputVal();
 
@@ -278,25 +276,6 @@
     },
     
     _addMissingElements: function() {
-        if (this.$element.find('input[type="hidden"]').length === 0) {
-            var $input = this.$element.find('input');
-            $input.addClass('visible');
-
-            var $hidden = $(document.createElement('input'))
-                .attr('class', 'hidden')
-                .attr('type', 'hidden')
-                .attr('name', $input.attr('name'))
-                // $input.val() or $input.attr('value') does not work for html5 date input in chrome...
-                
-            if ($input.attr('disabled') !== undefined) {
-                $hidden.attr('disabled', 'disabled');
-            }
-
-
-            $input.after($hidden);
-            $input.removeAttr('name');
-        }
-
         if (!this.isMobileAndSupportsInputType) {
             if (this.$element.find(".popover").length === 0) {
                 this.$element.append('<div class="popover arrow-top" style="display:none"><div class="inner"></div></div>');
@@ -451,7 +430,6 @@
     _setDateTime: function(date) {
         this.$input.val(date.format(this.options.displayedFormat));
 
-        this.$hidden.val(date.format(this.options.storedFormat));
         this.options.selectedDateTime = this.displayDateTime = date;
 
         if(this.options.type !== "time") {
