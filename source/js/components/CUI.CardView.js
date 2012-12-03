@@ -91,20 +91,19 @@
 
         /**
          * Multiplies the image with the provided color, this will insert a canvas element before the img element.
-         * image: jQuery object of the image to multiply
+         * image: image element to multiply with the color
          * color: RGB array of values between 0 and 1
          */
-        multiplyImage: function($image, color) {
-            var img = $image[0];
-            var canvas = $("<canvas class='" + img.className + " multiplied' width='" +
-                        img.naturalWidth + "' height='" + img.naturalHeight+"'></canvas>")
-                    .insertBefore(img)[0];
+        multiplyImage: function(image, color) {
+            var canvas = $("<canvas class='" + image.className + " multiplied' width='" +
+                        image.naturalWidth + "' height='" + image.naturalHeight+"'></canvas>")
+                    .insertBefore(image)[0];
 
             var context = canvas.getContext("2d");
-            context.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
+            context.drawImage(image, 0, 0, image.naturalWidth, image.naturalHeight);
 
-            var imgData = context.getImageData(0, 0, canvas.width, canvas.height);
-            var data    = imgData.data;
+            var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+            var data = imageData.data;
 
             for (var i = 0, l = data.length; i < l; i += 4) {
                 data[i] *= color[0];
@@ -112,7 +111,7 @@
                 data[i+2] *= color[2];
             }
 
-            context.putImageData(imgData, 0, 0);
+            context.putImageData(imageData, 0, 0);
         }
 
     };
@@ -392,7 +391,7 @@
             var colorFloat = $.map(color256.match(/(\d+)/g), function (val) { // RGB values between 0 and 1
                 return val/255;
             });
-            Utils.multiplyImage($image, colorFloat);
+            Utils.multiplyImage($image[0], colorFloat);
         },
 
         _drawAllSelectedGrid: function() {
