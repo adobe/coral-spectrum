@@ -460,7 +460,7 @@
 
     _renderTime: function() {
 
-        var html = $("<div class='time'><i class='icon-time small'></i></div>");
+        var html = $("<div class='time'><i class='icon-clock small'></i></div>");
 
         // Hours
         var hourSelect = $('<select name="dropdown"></select>');
