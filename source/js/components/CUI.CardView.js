@@ -1,8 +1,7 @@
 /*
  * TODO - provide a "sync" method that syncs view and model
  * TODO - prepend/append list items
- * TODO - preserve header in list view; hide in grid view
- * TODO - preserve order when switching to list view
+ * TODO - select all
  * TODO - reordering in list view
  */
 
@@ -398,8 +397,10 @@
                     case DISPLAY_GRID:
                         this.$el.removeClass("list");
                         this.$el.addClass("grid");
-                        if (!this.isGridSelect() && (oldValue !== null)) {
-                            widget.clearSelection();
+                        if (oldValue !== null) {
+                            if (!this.isGridSelect()) {
+                                widget.clearSelection();
+                            }
                             widget.layout();
                         }
                         break;
