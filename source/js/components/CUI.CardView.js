@@ -486,9 +486,9 @@
                     var widget = Utils.getWidget(self.$el);
                     if (widget.getDisplayMode() === DISPLAY_LIST) {
                         var $header = self.selectors.controller.selectAll.resolver(
-                                e.target);
+                                $(e.target));
                         var header = widget.getModel().getHeaderForEl($header);
-
+                        // console.log("header clicked: ", header);
                     }
                 });
             // block click event for cards
@@ -562,9 +562,8 @@
                         this.$el.removeClass("list");
                         this.$el.addClass("grid");
                         if (oldValue !== null) {
-                            if (!this.isGridSelect()) {
-                                widget.clearSelection();
-                            }
+                            var selection = widget.getSelection();
+                            this.setGridSelect(selection.length > 0);
                             widget.layout();
                         }
                         break;
