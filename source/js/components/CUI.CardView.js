@@ -15,6 +15,8 @@
     var DEFAULT_SELECTOR_CONFIG = {
 
         "itemSelector": "article",                      // selector for getting items
+        "headerSelector": "header",                     // selector for headers
+        "dataContainer": "grid-0",                      // class name of the data container
         "view": {
             "selectedItem": {                           // defines what classes (cls) on what elements (selector; optional) are used to mark a selection
                 "list": {
@@ -43,10 +45,10 @@
             },
             "targetToItem": {                           // defines methods that are used to resolve the event target of a tap/click event to a card view item
                 "list": function($target) {
-                    return $target.parents("article");
+                    return $target.closest("article");
                 },
                 "grid": function($target) {
-                    return $target.parents("article");
+                    return $target.closest("article");
                 }
             },
             "gridSelect": {                             // defines the class that is used to trigger the grid selection mode
@@ -92,11 +94,36 @@
 
         construct: function($itemEl) {
             this.$itemEl = $itemEl;
-            this.$itemEl.data("cardView-item", this);
+            this.reference();
         },
 
         getItemEl: function() {
             return this.$itemEl;
+        },
+
+        reference: function() {
+            this.$itemEl.data("cardView-item", this);
+        }
+
+    });
+
+    var Header = new Class({
+
+        $headerEl: null,
+
+        itemRef: null,
+
+        construct: function($headerEl, itemRef) {
+            this.$headerEl = $headerEl;
+            this.itemRef = itemRef;
+        },
+
+        getHeaderEl: function() {
+            return this.$headerEl;
+        },
+
+        getItemRef: function() {
+            return this.itemRef;
         }
 
     });
@@ -109,11 +136,21 @@
 
         items: [ ],
 
+        headers: [ ],
+
         construct: function($el, selectors) {
             var $items = $el.find(selectors.itemSelector);
             var itemCnt = $items.length;
             for (var i = 0; i < itemCnt; i++) {
                 this.items.push(new Item($($items[i])));
+            }
+            var $headers = $el.find(selectors.headerSelector);
+            var headerCnt = $headers.length;
+            for (var h = 0; h < headerCnt; h++) {
+                var $header = $($headers[h]);
+                var $itemRef = $header.next(selectors.itemSelector);
+                var itemRef = this.getItemForEl($itemRef);
+                this.headers.push(new Header($header, itemRef));
             }
         },
 
@@ -140,6 +177,14 @@
             return undefined;
         },
 
+        getHeaderCount: function() {
+            return this.headers.length;
+        },
+
+        getHeaderAt: function(pos) {
+            return this.headers[pos];
+        },
+
         fromItemElements: function($elements) {
             var items = [ ];
             $elements.each(function() {
@@ -149,6 +194,13 @@
                 }
             });
             return items;
+        },
+
+        reference: function() {
+            var itemCnt = this.items.length;
+            for (var i = 0; i < itemCnt; i++) {
+                this.items[i].reference();
+            }
         }
 
     });
@@ -210,6 +262,29 @@
                 $selectedItems = selectorDef.resolver($selectedItems);
             }
             return $selectedItems;
+        },
+
+        restore: function(model, restoreHeaders) {
+            var $container = $("<div class='" + this.selectors.dataContainer + "'>");
+            this.$el.empty();
+            this.$el.append($container);
+            var itemCnt = model.getItemCount();
+            for (var i = 0; i < itemCnt; i++) {
+                $container.append(model.getItemAt(i).getItemEl());
+            }
+            if (restoreHeaders) {
+                var headerCnt = model.getHeaderCount();
+                for (var h = 0; h < headerCnt; h++) {
+                    var header = model.getHeaderAt(h);
+                    var $headerEl = header.getHeaderEl();
+                    var itemRef = header.getItemRef();
+                    if (itemRef) {
+                        itemRef.getItemEl().before($headerEl);
+                    } else {
+                        $container.append($headerEl);
+                    }
+                }
+            }
         }
 
     });
@@ -234,21 +309,21 @@
             var self = this;
             this.$el.fipo("tap.cardview.select", "click.cardview.select",
                 this.selectors.controller.selectElement.list, function(e) {
-                    var item = ensureItem(self.getItemElFromEvent(e));
                     var widget = Utils.getWidget(self.$el);
                     if (widget.getDisplayMode() === DISPLAY_LIST) {
-                        Utils.getWidget(self.$el).toggleSelection(item);
+                        var item = ensureItem(self.getItemElFromEvent(e));
+                        widget.toggleSelection(item);
                         e.stopPropagation();
                         e.preventDefault();
                     }
                 });
             this.$el.fipo("tap.cardview.select", "click.cardview.select",
                 this.selectors.controller.selectElement.grid, function(e) {
-                    var item = ensureItem(self.getItemElFromEvent(e));
                     var widget = Utils.getWidget(self.$el);
                     if ((widget.getDisplayMode() === DISPLAY_GRID) &&
                             widget.isGridSelectionMode()) {
-                        Utils.getWidget(self.$el).toggleSelection(item);
+                        var item = ensureItem(self.getItemElFromEvent(e));
+                        widget.toggleSelection(item);
                         e.stopPropagation();
                         e.preventDefault();
                     }
@@ -317,13 +392,16 @@
         setDisplayMode: function(displayMode) {
             var oldValue = this.getDisplayMode();
             if (oldValue !== displayMode) {
+                var widget = Utils.getWidget(this.$el);
+                widget._restore(displayMode === DISPLAY_LIST);
                 switch (displayMode) {
                     case DISPLAY_GRID:
-                        if (!this.isGridSelect() && (oldValue !== null)) {
-                            Utils.getWidget(this.$el).clearSelection();
-                        }
                         this.$el.removeClass("list");
                         this.$el.addClass("grid");
+                        if (!this.isGridSelect() && (oldValue !== null)) {
+                            widget.clearSelection();
+                            widget.layout();
+                        }
                         break;
                     case DISPLAY_LIST:
                         this.$el.removeClass("grid");
@@ -419,6 +497,11 @@
 
         setGridSelectionMode: function(isSelectionMode) {
             this.controller.setGridSelect(isSelectionMode);
+        },
+
+        _restore: function(restoreHeaders) {
+            this.view.restore(this.model, restoreHeaders);
+            this.model.reference();
         }
 
     });
@@ -521,11 +604,16 @@
         },
 
         layout: function() {
+            this.$element.removeData('cuigridlayout');
             this.$element.cuigridlayout();
         },
 
         relayout: function() {
             this.$element.cuigridlayout("layout");
+        },
+
+        _restore: function(restoreHeaders) {
+            this.adapter._restore(restoreHeaders);
         }
 
     });
