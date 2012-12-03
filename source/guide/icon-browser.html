@@ -94,10 +94,19 @@
           if (this.sample.usage === 'button') {
             $('#iconLabel').prop('checked', true).attr('disabled', true);
             $('#buttonTypeBox').show();
+            
+            $('#iconSizeSlider').slider({
+              disabled: true,
+              value: 2
+            });
           }
           else {
             $('#iconLabel').prop('checked', this.sample.withLabel).attr('disabled', false);
             $('#buttonTypeBox').hide();
+            
+            $('#iconSizeSlider').slider({
+              disabled: false
+            });
           }
           
           this.updateSample();
@@ -191,6 +200,9 @@
         // Add code sample
         $('#iconCode').html(encodeEntities(html));
         prettyPrint();
+        
+        // Make sure slider exists
+        $('#iconSizeSlider').slider();
       },
       
       showDetails: function(icon) {
@@ -209,9 +221,6 @@
         // Add details
         $('#iconName').html(icon.name);
         $('#iconLabelText').val(icon.name);
-        
-        // Make sure slider exists
-        $('.slider').slider();
         
         this.sample.labelText = icon.name;
         
@@ -344,7 +353,7 @@
 
           <section>
             <h5>Size</h5>
-            <div class="slider ticked">
+            <div class="slider ticked" id="iconSizeSlider">
                 <input type="range" name="iconSize" value="2" min="1" max="4" step="1">
             </div>
 
