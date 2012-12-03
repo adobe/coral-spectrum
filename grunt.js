@@ -158,7 +158,8 @@ module.exports = function(grunt) {
           'Handlebars',   // Handlebars
           'prettyPrint',  // google-code-prettify
           'CUI',          // CoralUI
-          'Class'         // Class
+          'Class',        // Class
+          'moment'        // Moment.js
         ]
       },
       globals: {}
@@ -207,7 +208,8 @@ module.exports = function(grunt) {
           '<%= dirs.build %>/js/libs/jquery.js': '<%= dirs.components %>/jquery/index.js',
           '<%= dirs.build %>/js/libs/underscore.js': '<%= dirs.components %>/underscore/index.js',
           '<%= dirs.build %>/js/libs/handlebars.js': '<%= dirs.components %>/handlebars/index.js',
-          '<%= dirs.build %>/js/libs/handlebars.full.js': '<%= dirs.components %>/handlebars-full/index.js'
+          '<%= dirs.build %>/js/libs/handlebars.full.js': '<%= dirs.components %>/handlebars-full/index.js',
+          '<%= dirs.build %>/js/libs/moment.js': '<%= dirs.components %>/momentjs/index.js'
         }
       },
       dependencies: {

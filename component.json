@@ -5,6 +5,7 @@
     "handlebars": "http://cloud.github.com/downloads/wycats/handlebars.js/handlebars.runtime-1.0.rc.1.js",
     "handlebars-full": "http://cloud.github.com/downloads/wycats/handlebars.js/handlebars-1.0.rc.1.js",
     "bootstrap": "https://github.com/twitter/bootstrap.git#v2.1.1",
-    "jsdoc3": "https://github.com/jsdoc3/jsdoc.git"
+    "jsdoc3": "https://github.com/jsdoc3/jsdoc.git",
+    "momentjs": "https://raw.github.com/timrwood/moment/1.7.2/moment.js"
   }
 }
