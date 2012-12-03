@@ -42,7 +42,7 @@
       @param {integer} [options.startDay=0]                   Defines the start day for the week, 0 = Sunday, 1 = Monday etc.
       @param {boolean} [options.disabled=false]               Is this widget disabled?
       @param {String} [options.displayedFormat="YYYY-MM-DD[T]HH:mm[Z]"]         Displayed date (userfriendly), default is 2012-10-20T20:35Z
-      
+      @param {String} [options.required=false]                 Is a value required?
     */
     
     defaults: {
@@ -53,9 +53,10 @@
         selectedDateTime: moment(),
         startDay: 0,
         disabled: false,
-        displayedFormat : 'YYYY-MM-DD[T]HH:mm[Z]',
-        storedFormat : 'YYYY-MM-DD[T]HH:mm[Z]',
-        forceHTMLMode : false
+        displayedFormat: 'YYYY-MM-DD[T]HH:mm[Z]',
+        storedFormat: 'YYYY-MM-DD[T]HH:mm[Z]',
+        forceHTMLMode: false,
+        required: false
     },
     
     displayDateTime: null,
@@ -71,6 +72,9 @@
         var $button = this.$element.find('>button');
         if ($button.attr('type') === undefined) {
             $button[0].setAttribute('type', 'button');
+        }
+        if ($button.attr('required')) {
+            this.options.required = true;
         }
 
         this.options.monthNames = this.options.monthNames || CUI.Datepicker.monthNames;
@@ -229,7 +233,7 @@
             this.$element.find("input,button").removeAttr("disabled");
         }
 
-        if (!this.options.selectedDateTime || isNaN(this.options.selectedDateTime.year())) {
+        if ((!this.options.selectedDateTime && this.options.required) || (this.options.selectedDateTime && isNaN(this.options.selectedDateTime.year()))) {
             this.$element.addClass("error");
         } else {
             this.$element.removeClass("error");
@@ -239,7 +243,7 @@
     _switchInputTypeToText: function($input) {
         var convertedInput = $input.detach().attr('type', 'text');
         // readonly to hide the keyboard
-        convertedInput.attr('readonly', 'true');
+        // convertedInput.attr('readonly', 'true'); // Removed, we want to edit dates manually!
         this.$element.prepend(convertedInput);
     },
 
@@ -296,8 +300,11 @@
     },
     
     _renderCalendar: function(slide) {
-        var displayYear = this.displayDateTime.format('YYYY');
-        var displayMonth = this.displayDateTime.format('M') ;
+        var displayDateTime = this.displayDateTime;
+        if (!displayDateTime) displayDateTime = moment();
+    
+        var displayYear = displayDateTime.format('YYYY');
+        var displayMonth = displayDateTime.format('M') ;
 
         var table = this._renderOneCalendar(displayMonth, displayYear);
         
@@ -385,7 +392,7 @@
                 var cssClass = "";
 
                 if (displayDateTime.diff(today, 'days') === 0) cssClass += " today";
-                if (displayDateTime.diff(this.options.selectedDateTime, 'days') === 0) cssClass += " selected";
+                if (this.options.selectedDateTime && displayDateTime.diff(this.options.selectedDateTime, 'days') === 0) cssClass += " selected";
 
                 if (isCurrentMonth) {
                     html += "<td class=\"" + cssClass + "\"><a href=\"#\" data-date=\"" + displayDateTime.format(this.internFormat) + "\">" + displayDateTime.date() + "</a></td>";
