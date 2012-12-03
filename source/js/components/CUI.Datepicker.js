@@ -181,6 +181,7 @@
             var dropdownChanged = function () {
                 var h = this._getHoursFromDropdown();
                 var m = this._getMinutesFromDropdown();
+                if (!this.options.selectedDateTime) this.options.selectedDateTime = moment();
                 var date = this.options.selectedDateTime.hours(h).minutes(m);
 
                this._setDateTime(date);
@@ -478,7 +479,7 @@
         var hourSelect = $('<select name="dropdown"></select>');
         for(var h = 0; h < 24; h++) {
             var hourOption = $('<option>' + this._pad(h) + '</option>');
-            if(h === this.options.selectedDateTime.hours()) { hourOption.attr('selected','selected'); }
+            if(this.options.selectedDateTime && h === this.options.selectedDateTime.hours()) { hourOption.attr('selected','selected'); }
             hourSelect.append(hourOption);
         }
         var hourDropdown = $('<div class="dropdown hour"><button></button></input>').append(hourSelect);
@@ -487,7 +488,7 @@
         var minuteSelect = $('<select name="dropdown"></select>');
         for(var m = 0; m < 60; m++) {
             var minuteOption = $('<option>' + this._pad(m) + '</option>');
-            if(m === this.options.selectedDateTime.minutes()) { minuteOption.attr('selected', 'selected'); }
+            if(this.options.selectedDateTime && m === this.options.selectedDateTime.minutes()) { minuteOption.attr('selected', 'selected'); }
             minuteSelect.append(minuteOption);
         }
         var minuteDropdown = $('<div class="dropdown minute"><button>Single Select</button></div>').append(minuteSelect);
