@@ -82,9 +82,12 @@
     }
   }
 
-  &.active:before {
-    color: @icon-blue-color;
-    opacity: @icon-blue-opacity;
+  &.active {
+    &:before,
+    &:hover:before {
+      color: @icon-blue-color;
+      opacity: @icon-blue-opacity;
+    }
   }
 }
 
