@@ -287,8 +287,10 @@
 
 // Cards
 @card-background-color: rgb(255, 255, 255);
-@card-title-color: rgb(102, 102, 102);
-@card-text-color: rgb(153, 153, 153);
+@card-title-color: rgba(0, 0, 0, 0.6); // The text is transparent to make it look right when selected
+@card-text-color: rgba(0, 0, 0, 0.4);  // The text is transparent to make it look right when selected
+@card-image-separator: rgba(0, 0, 0, 0.1);
+@card-selection-color: rgb(82,165,227);
 @card-stack-offset: 4*@px;
 @card-banner-offset: 5*@px;
 @card-banner-border-color-white: rgb(221, 221, 221);
@@ -300,7 +302,6 @@
 @card-banner-background-color-black: rgb(42, 42, 42);
 @card-banner-title-color-black: rgb(255, 255, 255);
 @card-banner-text-color-black: rgb(221, 221, 221);
-@card-directory-empty-color: rgb(221, 221, 221);
 @card-image-separator-color: rgb(235, 235, 235);
 @card-list-height: 50*@px;
 @card-list-title-color: rgb(51, 51, 51);
@@ -310,14 +311,14 @@
 @card-list-gray-background: rgb(204, 204, 204);
 @card-list-gray-border: rgb(187, 187, 187);
 @card-list-stack-border: rgb(210, 210, 210);
-@card-list-stack-background-main: rgb(255, 255, 255);
+@card-list-stack-background: rgb(255, 255, 255);
 @card-list-checkbox-background: rgb(235, 235, 235);
 @card-list-selection-color: rgb(187, 210, 229);
 @card-list-header-triangle: rgb(153, 153, 153);
 @card-board-header-background: rgb(170, 170, 170);
 @card-board-header-border: rgb(187, 187, 187);
 @card-board-preview-background: rgb(187, 187, 187);
-@card-asset-image-background: rgb(221, 221, 221);
+@card-asset-image-background: rgba(0, 0, 0, 0.13);
 @card-grid-margin: 15*@px;
 
 

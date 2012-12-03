@@ -12,27 +12,6 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', endColorstr='#e3e3e3',GradientType=0 ); /* IE6-9 */
 }
 
-.list-header-triangle(@width: 38*@px) {
-    &:before {
-        // Push the title over
-        content: " ";
-        display: inline-block;
-        width: @width;
-    }
-    &:after {
-        // The sort triangle
-        content: " ";
-        position: absolute;
-        left: (@width - 8*@px)/2-5*@px;
-        top: 50%;
-        width: 0;
-        height: 0;
-        margin-top: -3*@px;
-        border: 5*@px solid transparent;
-        border-top-color: @card-list-header-triangle;
-    }
-}
-
 /**
     Class: .grid
     Grid View for elements with card-* classes.
@@ -129,32 +108,40 @@
     header[class^="card-"],
     header[class*=" card-"] {
         .list-header-gradient;
-        height: 50*@px;
+        height: @card-list-height;
+        padding: 0 10*@px;
         line-height: 18*@px;
         font-size: 12*@px;
 
         &.selectable {
             padding-left: 45*@px;
         }
-        &.moveable {
+        &.movable {
             padding-right: 45*@px;
         }
 
-        > div[class] { // The [class] is just used to make this rule over-weight the default rule
-            position: relative;
+        > div:not(.label),
+        .label > div {
             float: left;
-            margin: 0;
-            padding: 16*@px 0;
+            margin-top: 16*@px;
         }
-    }
 
-    header.card-page .main {
-        .list-header-triangle;
-    }
-    header.card-asset {
-        padding-left: (48+45)*@px;
-        .main {
-            .list-header-triangle(48*@px);
+        // The sort triangle
+        .sort {
+            float: left;
+            position: relative;
+
+            &:before {
+                content: " ";
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                width: 0;
+                height: 0;
+                margin: -3*@px;
+                border: 5*@px solid transparent;
+                border-top-color: @card-list-header-triangle;
+            }
         }
     }
 }

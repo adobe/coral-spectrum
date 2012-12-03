@@ -1,16 +1,134 @@
 
+// Some card-specific mixins first
+
 // Style of strong text
 .card-strong-text() {
     font-weight: bold;
     color: @card-list-title-color;
 }
 
-// Card view: The shadow of cards
-.card-shadow() {
+// Gradient of selected cards
+.card-grid-page-gradient(@color: @card-background-color) {
+    @color-transparent: fade(@color, 0%);
+    @color-opaque:      fade(@color, 100%);
+    background: -moz-linear-gradient(top, @color-transparent 0%, @color-opaque 100%);
+    background: -webkit-linear-gradient(top, @color-transparent 0%, @color-opaque 100%);
+    background: -o-linear-gradient(top, @color-transparent 0%, @color-opaque 100%);
+    background: -ms-linear-gradient(top, @color-transparent 0%, @color-opaque 100%); // IE10+
+    background: linear-gradient(to bottom, @color-transparent 0%, @color-opaque 100%); // W3C
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@{color-transparent}', endColorstr='@{color}', GradientType=0 ); // IE6-9
+}
+
+// Grid view: The shadow of cards
+.card-grid-shadow() {
     .box-shadow(0 1.5*@px 1.5*@px rgba(0, 0, 0, 0.25));
 }
 
-// List view: draws a box for additional info showed next to the title
+// Grid view: displays the card label as a banner that runs across the preview image
+.card-grid-banner(@background: @card-background-color, @border: @card-banner-border-color-white) {
+    .label {
+        position: absolute;
+        top: 50%;
+        left:  -@card-banner-offset;
+        right: -@card-banner-offset;
+        margin: -@px;
+        padding: 0 @card-banner-offset;
+        border: @px solid @border;
+        background-color: @background;
+        .box-shadow(0 8*@px 8*@px -5*@px rgba(0, 0, 0, 0.3));
+        &:before,
+        &:after {
+            content: " ";
+            position: absolute;
+            height: 0;
+            width: 0;
+            bottom: -@px - @card-banner-offset;
+            border: @card-banner-offset solid transparent;
+            pointer-events: none;
+        }
+        &:before {
+            left: -@px - @card-banner-offset;
+            border-right-color: @background;
+        }
+        &:after {
+            right: -@px - @card-banner-offset;
+            border-left-color: @background;
+        }
+    }
+    &.selected .label {
+        background-color: @card-selection-color;
+        border-color: darken(@card-selection-color, 10%);
+        &:before {
+            border-right-color: @card-selection-color;
+        }
+        &:after {
+            border-left-color: @card-selection-color;
+        }
+    }
+}
+.card-grid-banner(black) {
+    .card-grid-banner(@card-banner-background-color-black, @card-banner-border-color-black);
+    &:not(.selected) .label,
+    &:not(.selected) .label h4 {
+        color: @card-banner-text-color-black;
+    }
+}
+
+// List view: Sets the preview image dimensions on the image element
+.card-list-image-dimensions(@width, @height, @display-image: block, @border-color: transparent) {
+    .image {
+        margin: (@card-list-height - @height - 2*@px)/2 8*@px 0 0;
+        border: @px solid @border-color;
+
+        &,
+        img {
+            width:  @width;
+            height: @height;
+        }
+        img.show-list {
+            display: @display-image;
+        }
+    }
+    .select[class] { // The [class] attribute helps to overrule the initial style
+        width: ((45+1+10)*@px + @width);
+    }
+    // The sort triangle in the list header that is displayed above the image column
+    .sort {
+        margin: 0 8*@px 0 0;
+        width: @width;
+    }
+}
+
+// List view: Adds a little stack to the preview image to illustrate items that have sub-items (used only for WCM pages so far)
+.card-list-image-stack(@width, @height, @background: @card-list-stack-background, @border-color: @card-list-stack-border) {
+    .card-list-image-dimensions(@width, @height, none, @border-color);
+
+    .image {
+        background: @background;
+    }
+    // When a stack class is placed on the article element, the box-stack should display a stack as well
+    &.stack .image {
+        &:before,
+        &:after {
+            content: " ";
+            position: absolute;
+            height: @px;
+            border: @px solid @border-color;
+        }
+        &:before {
+            bottom: -3*@px;
+            left: @px;
+            width: @width - 4*@px;
+        }
+        &:after {
+            bottom: -5*@px;
+            left: 3*@px;
+            width: @width - 8*@px;
+        }
+    }
+}
+
+// List view: Draws a box for additional info showed next to the title
 .card-list-box() {
     .card-strong-text;
     padding: 0 5*@px;
@@ -18,22 +136,11 @@
     background: @card-list-gray-background;
 }
 
-// List view: draws a yellow box
+// List view: Draws a yellow box
 .card-list-box(yellow) {
     .card-list-box;
     background: @card-list-yellow-background;
     border-color: @card-list-yellow-border;
-}
-
-// List view: The preview image
-.card-list-preview-element(@width, @height, @border-color: transparent) {
-    position: relative;
-    z-index: 2;
-    float: left;
-    margin: (@card-list-height - @height - 2*@px)/2 8*@px 0 0;
-    width:  @width;
-    height: @height;
-    border: @px solid @border-color;
 }
 
 // List view: Displays the date on line line and the user on another line (used for displaying last-modified or last-published info)
@@ -48,35 +155,6 @@
     }
 }
 
-// List view: prepends the title with a little stack to illustrate items that have sub-items (used only for WCM pages so far)
-.card-list-box-stack(@size: 28*@px) {
-    .box-stack {
-        .card-list-preview-element(@size, @size, @card-list-stack-border);
-        background: @card-list-stack-background-main;
-    }
-    // When a stack class is placed on the article element, the box-stack should display a stack as well
-    &.stack .box-stack {
-        &:before,
-        &:after {
-            content: " ";
-            position: absolute;
-            z-index: 1;
-            height: @px;
-            border: @px solid @card-list-stack-border;
-        }
-        &:before {
-            bottom: -3*@px;
-            left: @px;
-            width: @size - 4*@px;
-        }
-        &:after {
-            bottom: -5*@px;
-            left: 3*@px;
-            width: @size - 8*@px;
-        }
-    }
-}
-
 /**
   Element: Card View
   Displays assets in result set as a card
@@ -88,17 +166,29 @@
     font-size: 12*@px;
     line-height: 18*@px;
 
+    // The card link contains everything
     > a {
         position: relative;
         text-decoration: none;
         color: @card-text-color;
+
     }
 
+    // The card image
+    .image {
+        display: block;
+        position: relative;
+    }
+    img,
+    canvas {
+        display: block;
+    }
+
+    // The card text
     .label,
     .main {
         position: relative;
     }
-
     h4,
     p {
         text-overflow: ellipsis;
@@ -111,18 +201,25 @@
         .card-strong-text;
     }
 
+    // The card icons
     a i {
         .icon-xsmall;
     }
-    a i:before,
+    i,
+    i:before,
+    i:hover:before,
     a:hover i:before {
-        color: @card-text-color;
+        // Let's overwrite the icons settings and use our own color and transparency settings
+        color: inherit;
+        opacity: inherit;
     }
+
+    // The top-level <i> elements are the selection and move hanldes
     > i {
         display: none;
     }
 }
-// Grid view specific styling
+// Grid view style
 .grid [class^="card-"],
 .grid [class*=" card-"] {
     .calc-width(~"100% - @{card-grid-margin}", 95%);
@@ -130,124 +227,139 @@
     background: @card-background-color;
 
     > a {
+        .card-grid-shadow;
         z-index: 1;
-        float: left;
-        width: 100%;
-        .card-shadow;
-    }
-
-    .label {
-        display: inline-block;
+        float: left; // Makes it contain all floating elements
         width: 100%;
     }
 
-    img {
+    .image {
+        border-bottom: @px solid @card-image-separator;
+    }
+    img,
+    canvas {
         width: 100%;
     }
-    .main > img {
+    canvas ~ img {
         display: none;
     }
 
+    .label {
+        display: inline-block; // Makes it contain all floating elements
+        width: 100%;
+    }
     h4 {
         margin: 10*@px;
     }
     p {
         margin: 0 10*@px 10*@px;
     }
+    p:empty {
+        display: none;
+    }
 }
-// List view specific styling
+// List view style
 .list [class^="card-"],
 .list [class*=" card-"] {
     display: block;
     border-bottom: 1*@px solid @card-list-separator-color;
 
-    // The selection box and the handle to move the element
-    > i {
+    // The selection box
+    .select {
         display: block;
+        height: 100%;
         position: absolute;
-        z-index: 1;
+        z-index: 2;
         top: 0;
         width: 45*@px;
+        left: 0;
+
+        &:before,
+        &:after {
+            content: " ";
+            position: absolute;
+            top: 17*@px;
+            left: 15*@px;
+            width: 15*@px;
+            height: 15*@px;
+        }
+        &:before {
+            background: @card-list-checkbox-background;
+            .box-shadow(inset 0 @px 2*@px rgba(0, 0, 0, 0.33));
+        }
+
+        // The link element that follows the select item should add some spacing on the left
+        & ~ a {
+            padding-left: 45*@px;
+        }
+    }
+
+    // The handle to move the element
+    .move {
+        .icon-navigation;
+        .icon-medium;
+        display: block;
         height: 100%;
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        width: 45*@px;
+        right: 0;
+        opacity: 0.3;
 
-        // The selection box
-        &.select {
-            left: 0;
-
-            &:before,
-            &:after {
-                content: " ";
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                width: 15*@px;
-                height: 15*@px;
-                margin: -7.5*@px;
-                .background-size(100%);
-            }
-            &:before {
-                background: @card-list-checkbox-background;
-                .box-shadow(inset 0 @px 2*@px rgba(0, 0, 0, 0.33));
-            }
-
-            // The link element that follows the select item should add some spacing on the left
-            & ~ a {
-                padding-left: 45*@px;
-            }
+        &:before {
+            display: block;
+            margin: 16*@px auto;
         }
 
-        // The handle to move the element
-        &.move {
-            .icon-medium;
-            opacity: 0.3;
-            right: 0;
-
-            &:before {
-                display: block;
-                margin: 16*@px auto;
-            }
-
-            // The link element that follows the move item should add some spacing on the right
-            & ~ a {
-                padding-right: 45*@px;
-            }
+        // The link element that follows the move item should add some spacing on the right
+        & ~ a {
+            padding-right: 45*@px;
         }
+    }
+
+    .sort {
+        display: block;
+        height: 100%;
     }
 
     a {
-        overflow: hidden; // Makes floating elements that break on a new line not affect the next row
         display: block;
         height: @card-list-height;
-        padding: 0 45*@px;
+        padding: 0 10*@px;
 
-        // list view columns can be made of div, h4, or p elements
-        > div:not(.label),
-        > h4,
-        > p,
-        > .label > div,
-        > .label > h4,
-        > .label > p {
-            float: left;
-        }
-
-        > img,
-        > span > img,
+        // hide icons of the card content in list view
         i {
             display: none;
         }
+        .image i {
+            .icon-large;
+            display: block;
+        }
     }
 
+    a,
+    .label {
+        overflow: hidden; // Makes floating elements that break on a new line not affect the next row
+        height: @card-list-height;
+    }
+
+    h4,
+    .main,
+    img,
+    .image {
+        float: left;
+    }
+    .image img { // Hide the preview images in list view, unless a .card-list-image-dimensions has been set
+        display: none;
+    }
     h4,
     p {
         margin-top: 16*@px;
     }
 
     .main {
-        > img {
-            .card-list-preview-element(38*@px, 30*@px);
-        }
         > h4 {
-            float: left;
             margin-right: 10*@px;
             .card-strong-text;
         }
@@ -260,20 +372,27 @@
 }
 // Look of the card when selected in grid view
 .grid [class^="card-"].selected,
-.grid [class*=" card-"].selected {}
+.grid [class*=" card-"].selected {
+    a {
+        background: @card-selection-color;
+    }
+}
 // Look of the card when selected in list view
 .list [class^="card-"].selected,
 .list [class*=" card-"].selected {
+    border-bottom-color: #eee;
+    a {
+        background: fade(@card-selection-color, 25%);
+    }
     > i.select {
         &:before {
             .box-shadow(inset 0 @px 2*@px rgba(0, 0, 0, 0.5));
+            background: white;
         }
         &:after {
             background-image: url('@{component-images-folder}/checkbox/check.png');
+            .background-size(100%);
         }
-    }
-    > a {
-        background: @card-list-selection-color;
     }
 }
 
@@ -293,7 +412,7 @@
         height: @card-stack-offset;
         pointer-events: none;
         background: inherit;
-        .card-shadow;
+        .card-grid-shadow;
     }
 
     &:before {
@@ -310,117 +429,47 @@
 }
 
 /**
-    Class: .banner
-    Displays a card a banner.
-    Apply this class to any card element (on the <article> element).
-    The card-project and card-collection elements are always displayed as banners.
-*/
-.grid .banner,
-.grid .card-project,
-.grid .card-collection {
-    .label {
-        position: absolute;
-        top: 50%;
-        left:  -@card-banner-offset;
-        right: -@card-banner-offset;
-        margin: -@px;
-        padding: 0 @card-banner-offset;
-        border: @px solid @card-banner-border-color-white;
-        background-color: @card-background-color;
-        .box-shadow(0 8*@px 8*@px -5*@px rgba(0, 0, 0, 0.3));
-
-        &:before,
-        &:after {
-            content: " ";
-            position: absolute;
-            height: 0;
-            width: 0;
-            bottom: -@px - @card-banner-offset;
-            border: @card-banner-offset solid transparent;
-            pointer-events: none;
-        }
-        &:before {
-            left: -@px - @card-banner-offset;
-            border-right-color: @card-background-color;
-        }
-        &:after {
-            right: -@px - @card-banner-offset;
-            border-left-color: @card-background-color;
-        }
-    }
-}
-.banner-gray() {
-    .label {
-        border-color: @card-banner-border-color-gray;
-        background-color: @card-banner-background-color-gray;
-        color: @card-banner-text-color-gray;
-        h4 {
-            color: @card-banner-title-color-gray;
-        }
-        i:before {
-            color: @card-banner-text-color-gray;
-        }
-        &:before {
-            border-right-color: @card-banner-background-color-gray;
-        }
-        &:after {
-            border-left-color: @card-banner-background-color-gray;
-        }
-    }
-}
-.banner-black() {
-    .label {
-        border-color: @card-banner-border-color-black;
-        background-color: @card-banner-background-color-black;
-        color: @card-banner-text-color-black;
-        h4 {
-            color: @card-banner-title-color-black;
-        }
-        i:before {
-            color: @card-banner-text-color-black;
-        }
-        &:before {
-            border-right-color: @card-banner-background-color-black;
-        }
-        &:after {
-            border-left-color: @card-banner-background-color-black;
-        }
-    }
-}
-
-/**
     Class: .card-collection
     Displays collection card with a banner.
 */
-// Grid view specific styling
+// Grid view style
 .grid .card-collection {
+    .card-grid-banner();
     p {
         float: left;
         margin-top: -10*@px;
     }
-}
-// List view specific styling
-.list .card-collection {
-    p {
-        //display: none;
+    p.comments,
+    p.links {
+        margin-top: 0;
     }
 }
-// Welcome screen specific design
-.grid .card-collection.welcome {
-    .banner-gray();
+// List view style
+.list .card-collection {
+    p {
+        display: none;
+    }
 }
 
 /**
     Class: .card-project
     Displays a project (which groups WCM pages, DAM assets and other concepts together).
 */
+// Grid view style
 .grid .card-project {
-    .banner-black();
+    .card-grid-banner(black);
 
+    .image {
+        background: @card-banner-border-color-black;
+        img {
+            opacity: 0.5;
+        }
+    }
     p {
         margin-top: -10*@px;
     }
 }
+// List view style
 .list .card-project {
     p {
         display: none;
@@ -431,8 +480,8 @@
     Class: .card-page
     Displays a WCM page card.
 */
+// Grid view style
 .grid .card-page {
-    // Grid view specific styling
     .info-approved,
     .info-locked,
     .user {
@@ -448,14 +497,27 @@
     .links {
         float: right;
     }
-}
-// List view specific styling
-.list .card-page {
-    .card-list-box-stack;
-
-    img {
-        display: none;
+    .image {
+        &:after {
+            content: " ";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            .card-grid-page-gradient();
+        }
     }
+    &.selected {
+        .image:after {
+            .card-grid-page-gradient(@card-selection-color);
+        }
+    }
+}
+// List view style
+.list .card-page {
+    .card-list-image-stack(28*@px, 28*@px);
+
     .main {
         width: 65%;
         > p {
@@ -472,10 +534,12 @@
     }
     .published,
     .modified {
+        float: left;
         width: 15%;
         .card-list-date-user();
     }
     .links {
+        float: left;
         width: 5%;
     }
 }
@@ -483,9 +547,13 @@
 .card-page.page-hidden,
 .card-page.page-redirect,
 .card-page.page-deactivated {
-    .list & a,
-    .grid & img {
+    .list & a > *,
+    .grid & img,
+    .grid & canvas {
         opacity: 0.5;
+    }
+    .grid & h4 {
+        color: inherit;
     }
 }
 
@@ -494,23 +562,21 @@
     Class: .card-asset
     Displays a DAM asset card.
 */
-// Grid view specific styling
+// Grid view style
 .grid .card-asset {
+    // Small images should not be scaled up to 100% of the card width
     .low-resolution {
         display: block;
         background: @card-asset-image-background;
 
-        > img {
+        > img,
+        > canvas {
             margin: 0 auto;
-            display: block;
             padding: 1em 0;
             width: auto;
         }
     }
 
-    h4 {
-        font-weight: normal;
-    }
     .resolution,
     .size {
         margin-top: -10*@px;
@@ -521,28 +587,37 @@
     }
     .resolution,
     .size,
+    .modified,
     .links,
     .comments {
         float: left;
     }
-    .modified {
-        clear: left;
+    .info {
         float: right;
     }
+    .modified {
+        clear: left;
+    }
 }
-// List view specific styling
+// List view style
 .list .card-asset {
+    .card-list-image-dimensions(38*@px, 30*@px);
+
+    h4, // The <h4> element is a <div class="main"> in the list header
     .main {
         width: 50%;
+        font-weight: normal;
     }
     .type,
     .resolution,
     .size,
     .modified {
+        float: left;
         width: 10%;
     }
     .links,
     .comments {
+        float: left;
         width: 5%;
     }
     .modified {
@@ -554,7 +629,7 @@
     Class: .card-directory
     Displays a DAM directory card.
 */
-// Grid view
+// Grid view style
 .grid .card-directory {
     margin-top: 21*@px;
 
@@ -566,14 +641,23 @@
         left: 5*@px;
         right: 5*@px;
         height: 13*@px;
-        border-bottom: 7*@px solid #CCC;
+        border-bottom: 7*@px solid #ccc; // This color doesn't make sense to be configurable, it has to be the same color as the directory SVG.
         background: url('@{component-images-folder}/card/directory.svg') no-repeat;
     }
 }
-// List view
+// List view style
 .list .card-directory {
+    .card-list-image-dimensions(38*@px, 30*@px, none);
+
     .main {
         width: 100%;
+    }
+    .icon-folder {
+        margin-top: -4*@px;
+        &:before {
+            font-size: 38*@px;
+            opacity: 1;
+        }
     }
 }
 

@@ -41,6 +41,23 @@ jQuery(function($) {
         multiple: true
     });
 
+    $(".grid article.selected img:visible").each(function () {
+        var that    = $(this);
+        var img     = that[0];
+        var bgRGB   = $.map(that.closest("a").css("background-color").match(/(\d+)/g), function (val) { return val/255; });
+        var canvas  = $("<canvas width='"+img.naturalWidth+"' height='"+img.naturalHeight+"'></canvas>").attr("class", img.className).insertBefore(img)[0];
+        var context = canvas.getContext("2d");
+        context.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
+        var imgData = context.getImageData(0, 0, canvas.width, canvas.height);
+        var data    = imgData.data;
+        for (var i = 0, l = data.length; i < l; i += 4) {
+            data[i]   *= bgRGB[0]; // red
+            data[i+1] *= bgRGB[1]; // green
+            data[i+2] *= bgRGB[2]; // blue
+        }
+        context.putImageData(imgData, 0, 0);
+    });
+
     // make rail pullable
     var rail = $('#main-rail');
     rail.removeClass('with-toolbar-bottom');
