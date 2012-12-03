@@ -42,7 +42,8 @@
       @param {number} [options.min=1]   Minimum value
       @param {number} [options.max=100] Maximum value
       @param {number} [options.value=1] Starting value
-      @param {String} [options.orientation=horizontal]  Either horizontal or vertical
+      @param {number} [options.tooltips=false] Show tooltips?
+      @param {String} [options.orientation=horizontal]  Either 'horizontal' or 'vertical'
       @param {boolean} [options.slide=false]    True for smooth sliding animations 
       @param {boolean} [options.disabled=false] True for a disabled element*      
     */
@@ -69,6 +70,8 @@
         if(this.$element.hasClass('filled')) {
             that.options.filled = true;
         }
+        
+        this._renderMissingElements();
 
         that.$inputs = this.$element.find('input');
 
@@ -108,7 +111,8 @@
         });
 
         that.values = values;
-
+        if (this.options.orientation === 'vertical') this.isVertical = true;
+        
         this.$element.on("click", function(event) {
             this._handleClick(event);
         }.bind(this));
@@ -128,7 +132,7 @@
         // Adjust dom to our needs
         this._render();
     },
-
+    
     defaults: {
       step: '1',
       min: '1',
@@ -136,7 +140,8 @@
       value: '1',
       orientation: 'horizontal',
       slide: false,
-      disabled: false
+      disabled: false,
+      tooltips: false
     },
 
     values: [],
@@ -161,6 +166,26 @@
         if(this.options.filled) {
             this._updateFill();
         }        
+    },
+    
+    _renderMissingElements: function() {
+        if (!this.$element.find("input").length) {
+            var el = $("<input>");
+            el.attr({
+                "type": "range",
+                "min": this.options.min,
+                "max": this.options.max,
+                "step": this.options.step,
+                "value": this.options.value               
+            });
+            this.$element.append(el);
+        }
+        
+        this.$element.toggleClass("slider", true);
+        this.$element.toggleClass("vertical", this.options.orientation === 'vertical' );
+        this.$element.toggleClass("tooltips", this.options.tooltips);
+        this.$element.toggleClass("ticked", this.options.ticks);
+        this.$element.toggleClass("filled", this.options.filled);                                
     },
     
     _processValueChanged: function() {
@@ -530,6 +555,8 @@
         // TODO: Single update method
     }*/
   });
+
+
 
   CUI.util.plugClass(CUI.Slider);
 

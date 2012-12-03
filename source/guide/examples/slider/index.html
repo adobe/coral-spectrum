@@ -47,6 +47,9 @@
          <div class="slider ticked filled tooltips api-demo2" data-init="slider">
               <input type="range" value="14" min="5" max="50" step="2">
          </div>
+         
+         <h2>Create a slider without markup</h2>
+         <div class="slider-markupless"></div>
                   
          <script type="text/javascript">
             $(document).ready(function() {
@@ -61,6 +64,17 @@
                     $(".api-demo").data("slider").setValue(value2, 1);
                     $(".api-demo2").slider({value: value1, disabled: (value1 < 5)});
                 }, 100);
+                
+                $(".slider-markupless").slider({
+                    min: 0,
+                    max: 100,
+                    step: 5,
+                    value: 50,
+                    ticks: true,
+                    filled: true,
+                    orientation: "vertical",
+                    tooltips: true
+                    });
             });
          </script>
          
