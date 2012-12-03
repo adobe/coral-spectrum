@@ -459,14 +459,19 @@ div.rail {
     }
 
     .search {
+        position: relative;
         padding: 10*@px;
 
-        input[type="text"] {
+        >input[type="text"] {
             width: 100%;
-            padding-right: 2rem;
+            padding-right: 2rem !important; // I couldn't get the style work without !important
         }
 
-        button {
+        >button {
+            position: absolute;
+            top: 10*@px;
+            right: 10*@px;
+
             background: none;
             border: none;
             padding: 0;
