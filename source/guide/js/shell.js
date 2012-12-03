@@ -41,10 +41,14 @@ jQuery(function($) {
         multiple: true
     });
 
+    /**
+      * Multiplies the image with the provided color, this will insert a canvas element before the img element.
+      * image: jQuery object of the image to multiply
+      * color: RGB array of values between 0 and 1
+      */
     function multiplyImage(image, color) {
         var img     = image[0];
-        var canvas  = $("<canvas class='"+img.className+"' width='"+img.naturalWidth+"' height='"+img.naturalHeight+"'></canvas>")
-                        .width(image.width()).height(image.height()).insertBefore(img)[0];
+        var canvas  = $("<canvas class='"+img.className+"' width='"+img.naturalWidth+"' height='"+img.naturalHeight+"'></canvas>").insertBefore(img)[0];
         var context = canvas.getContext("2d");
 
         context.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
@@ -62,10 +66,12 @@ jQuery(function($) {
 
     }
 
+    /* Temporary static way of invoking the multiplyImage effect over selected items */
     $(".grid article.selected img:visible").load(function () {
-        var image   = $(this);
-        var color   = $.map(image.closest("a").css("background-color").match(/(\d+)/g), function (val) { return val/255; });
-        multiplyImage(image, color);
+        var image    = $(this);
+        var colorHex = image.closest("a").css("background-color"); // Let's grab the color form the card background
+        var colorRgb = $.map(colorHex.match(/(\d+)/g), function (val) { return val/255; }); // RGB values between 0 and 1
+        multiplyImage(image, colorRgb);
     });
 
     // make rail pullable

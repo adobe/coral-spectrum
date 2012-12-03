@@ -92,7 +92,6 @@ CUI.util.capitalize = function(str) {
                 var Fn = Function;
                 return new Fn(params, "return " + callbackAsString + "(" + params.join(", ") + ");");
             } catch (e) {
-                console.log("ERROR: Unable to register callback from string: ", callbackAsString, e);
                 return null;
             }
         }
