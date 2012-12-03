@@ -1,11 +1,11 @@
 
-// Style of strong text
+// Style of strong text (used by generic cards on <h4> elements)
 .card-strong-text() {
     font-weight: bold;
     color: @card-list-title-color;
 }
 
-// Gradient of selected cards
+// Gradient of selected cards (used by the stack class, see card_stack.less)
 .card-grid-page-gradient(@color: @card-background-color) {
     @color-transparent: fade(@color, 0%);
     @color-opaque:      fade(@color, 100%);
@@ -19,12 +19,12 @@
 
 // Grid view specific mixins ////////////////////////////////////////////////////////////////
 
-// Grid view: The shadow of cards
+// Grid view: The shadow of all cards
 .card-grid-shadow() {
     .box-shadow(0 1.5*@px 1.5*@px rgba(0, 0, 0, 0.25));
 }
 
-// Grid view: displays the card label as a banner that runs across the preview image
+// Grid view: displays the card label as a banner that runs across the preview image (used by card-collection)
 .card-grid-banner(@background: @card-background-color, @border: @card-banner-border-color-white, @shadow-density: 0.5) {
     @card-grid-banner-margin: @card-grid-margin + 2*(@card-banner-offset+@px);
     .calc-width(~"100% - @{card-grid-banner-margin}rem");
@@ -78,6 +78,8 @@
         }
     }
 }
+
+// Grid view: black version of the .card-grid-banner mixin (used by card-project)
 .card-grid-banner(black) {
     .card-grid-banner(@card-banner-background-color-black, @card-banner-border-color-black, 0.7);
     &:not(.selected) .label,
@@ -103,7 +105,7 @@
 
 // List view specific mixins ////////////////////////////////////////////////////////////////
 
-// List view: Sets the preview image dimensions on the image element
+// List view: Sets the preview image dimensions on the image element (used by card-asset and card-directory)
 .card-list-image-dimensions(@width, @height, @display-image: block, @border-color: transparent) {
     .image {
         margin: (@card-list-height - @height - 2*@px)/2 8*@px 0 0;
@@ -128,7 +130,7 @@
     }
 }
 
-// List view: Adds a little stack to the preview image to illustrate items that have sub-items (used only for WCM pages so far)
+// List view: Adds a little stack to the preview image to illustrate items that have sub-items (used by card-page)
 .card-list-image-stack(@width, @height, @background: @card-list-stack-background, @border-color: @card-list-stack-border) {
     .card-list-image-dimensions(@width, @height, none, @border-color);
 
@@ -157,7 +159,7 @@
     }
 }
 
-// List view: Draws a box for additional info showed next to the title
+// List view: Draws a box for additional info showed next to the title (used by card-page)
 .card-list-box() {
     .card-strong-text;
     padding: 0 5*@px;
@@ -165,14 +167,14 @@
     background: @card-list-gray-background;
 }
 
-// List view: Draws a yellow box
+// List view: Draws a yellow box (used by card-page)
 .card-list-box(yellow) {
     .card-list-box;
     background: @card-list-yellow-background;
     border-color: @card-list-yellow-border;
 }
 
-// List view: Displays the date on line line and the user on another line (used for displaying last-modified or last-published info)
+// List view: Displays the date on line line and the user on another line (used for displaying last-modified or last-published info in card-page and card-asset)
 .card-list-date-user() {
     margin-top: 7*@px;
     .date {
