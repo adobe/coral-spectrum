@@ -388,11 +388,11 @@
         },
 
         _drawImage: function($image) {
-            var colorHex = $image.closest("a").css("background-color"); // Let's grab the color form the card background
-            var colorRgb = $.map(colorHex.match(/(\d+)/g), function (val) {
-                return val/255; // RGB values between 0 and 1
+            var color256   = $image.closest("a").css("background-color");     // Let's grab the color form the card background
+            var colorFloat = $.map(color256.match(/(\d+)/g), function (val) { // RGB values between 0 and 1
+                return val/255;
             });
-            Utils.multiplyImage($image, colorRgb);
+            Utils.multiplyImage($image, colorFloat);
         },
 
         _drawAllSelectedGrid: function() {
