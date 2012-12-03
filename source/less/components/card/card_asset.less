@@ -1,0 +1,68 @@
+
+/**
+
+    Class: .card-asset
+    Displays a DAM asset card.
+*/
+
+// Grid view style
+.grid .card-asset {
+    // Small images should not be scaled up to 100% of the card width
+    .low-resolution {
+        display: block;
+        background: @card-asset-image-background;
+
+        > img,
+        > canvas {
+            margin: 0 auto;
+            padding: 1em 0;
+            width: auto;
+        }
+    }
+
+    .user,
+    .type {
+        display: none;
+    }
+    .resolution,
+    .size,
+    .modified,
+    .links,
+    .comments {
+        float: left;
+    }
+    .info {
+        clear: left;
+        float: right;
+    }
+    .modified {
+        position: absolute;
+        left: 0;
+    }
+}
+
+// List view style
+.list .card-asset {
+    .card-list-image-dimensions(38*@px, 30*@px);
+
+    h4, // The <h4> element is a <div class="main"> in the list header
+    .main {
+        width: 50%;
+        font-weight: normal;
+    }
+    .type,
+    .resolution,
+    .size,
+    .modified {
+        float: left;
+        width: 10%;
+    }
+    .links,
+    .comments {
+        float: left;
+        width: 5%;
+    }
+    .modified {
+        .card-list-date-user();
+    }
+}

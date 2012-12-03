@@ -1,0 +1,32 @@
+
+/**
+    Class: .stack
+    Displays a card stack below the card (can be used in conjunction with any other card-* type to make it a stack).
+    Apply this class to any card element (on the <article> element).
+    In list view, to represent the stack a box-stack should be placed on the desired element that shows that stack.
+*/
+.grid .stack {
+    margin-bottom: @card-grid-margin+(2*@card-stack-offset);
+
+    &:before,
+    &:after {
+        content: " ";
+        position: absolute;
+        height: @card-stack-offset;
+        pointer-events: none;
+        background: inherit;
+        .card-grid-shadow;
+    }
+
+    &:before {
+        bottom: -2*@card-stack-offset;
+        left:    2*@card-stack-offset;
+        right:   2*@card-stack-offset;
+    }
+
+    &:after {
+        bottom: -@card-stack-offset;
+        left:    @card-stack-offset;
+        right:   @card-stack-offset;
+    }
+}
