@@ -207,7 +207,7 @@
                         <replacement>
                             <token>"js/libs/handlebars.js"</token>
                             <value>"/etc/clientlibs/granite/handlebars.js"</value>
-                        </replacement>
+                        </replacement>                      
                         <replacement>
                             <token>"js/libs/jquery.js"</token>
                             <value>"/etc/clientlibs/granite/jquery.js"</value>

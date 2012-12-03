@@ -208,8 +208,7 @@ module.exports = function(grunt) {
           '<%= dirs.build %>/js/libs/jquery.js': '<%= dirs.components %>/jquery/index.js',
           '<%= dirs.build %>/js/libs/underscore.js': '<%= dirs.components %>/underscore/index.js',
           '<%= dirs.build %>/js/libs/handlebars.js': '<%= dirs.components %>/handlebars/index.js',
-          '<%= dirs.build %>/js/libs/handlebars.full.js': '<%= dirs.components %>/handlebars-full/index.js',
-          '<%= dirs.build %>/js/libs/moment.js': '<%= dirs.components %>/momentjs/index.js'
+          '<%= dirs.build %>/js/libs/handlebars.full.js': '<%= dirs.components %>/handlebars-full/index.js'
         }
       },
       dependencies: {
@@ -217,7 +216,8 @@ module.exports = function(grunt) {
           '<%= dirs.build %>/js/libs/toe.js': '<%= dirs.source %>/js/plugins/toe.js',
           '<%= dirs.build %>/js/libs/jquery-fingerpointer.js': '<%= dirs.source %>/js/plugins/jquery-fingerpointer.js',
           '<%= dirs.build %>/js/libs/jquery-gridlayout.js': '<%= dirs.source %>/js/plugins/jquery-gridlayout.js',
-          '<%= dirs.build %>/js/libs/jquery-scrollable.js': '<%= dirs.source %>/js/plugins/jquery-scrollable.js'
+          '<%= dirs.build %>/js/libs/jquery-scrollable.js': '<%= dirs.source %>/js/plugins/jquery-scrollable.js',
+          '<%= dirs.build %>/js/libs/moment.js': '<%= dirs.source %>/js/plugins/moment.js'
         }
       },
       rte: {

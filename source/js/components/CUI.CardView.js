@@ -52,6 +52,12 @@
             },
             "gridSelect": {                             // defines the class that is used to trigger the grid selection mode
                 "cls": "selection-mode"
+            },
+            "selectAll": {                              // defines the "select all" config (list view only)
+                "selector": "header > i.select",
+                "resolver": function($target) {
+                    return $target.closest("header");
+                }
             }
         }
 
@@ -80,9 +86,36 @@
                 resolved.push.apply(resolved, fn($(this)).toArray());
             });
             return $(resolved);
+        },
+
+        /**
+         * Multiplies the image with the provided color, this will insert a canvas element before the img element.
+         * image: jQuery object of the image to multiply
+         * color: RGB array of values between 0 and 1
+         */
+        multiplyImage: function($image, color) {
+            var img = $image[0];
+            var canvas = $("<canvas class='" + img.className + " multiplied' width='" +
+                        img.naturalWidth + "' height='" + img.naturalHeight+"'></canvas>")
+                    .insertBefore(img)[0];
+
+            var context = canvas.getContext("2d");
+            context.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
+
+            var imgData = context.getImageData(0, 0, canvas.width, canvas.height);
+            var data    = imgData.data;
+
+            for (var i = 0, l = data.length; i < l; i += 4) {
+                data[i] *= color[0];
+                data[i+1] *= color[1];
+                data[i+2] *= color[2];
+            }
+
+            context.putImageData(imgData, 0, 0);
         }
 
     };
+
 
     /*
      * This class represents a single item in the list model.
@@ -184,6 +217,48 @@
             return this.headers[pos];
         },
 
+        getHeaderForEl: function($el) {
+            var headerCnt = this.headers.length;
+            for (var h = 0; h < headerCnt; h++) {
+                var header = this.headers[h];
+                if (Utils.equals(header.getHeaderEl(), $el)) {
+                    return header;
+                }
+            }
+            return undefined;
+        },
+
+        getItemsForHeader: function(header) {
+            // TODO does not handle empty headers yet
+            var itemRef = header.getItemRef();
+            var headerCnt = this.headers.length;
+            var itemCnt = this.items.length;
+            var itemsForHeader = [ ];
+            var isInRange = false;
+            for (var i = 0; i < itemCnt; i++) {
+                var item = this.items[i];
+                if (isInRange) {
+                    for (var h = 0; h < headerCnt; h++) {
+                        if (this.headers[h].getItemRef() === item) {
+                            isInRange = false;
+                            break;
+                        }
+                    }
+                    if (isInRange) {
+                        itemsForHeader.push(item);
+                    } else {
+                        break;
+                    }
+                } else {
+                    if (item === itemRef) {
+                        isInRange = true;
+                        itemsForHeader.push(itemRef);
+                    }
+                }
+            }
+            return itemsForHeader;
+        },
+
         fromItemElements: function($elements) {
             var items = [ ];
             $elements.each(function() {
@@ -219,7 +294,13 @@
         },
 
         initialize: function() {
-            // nothing to do here
+            var self = this;
+            this.$el.on("change:displayMode", function(e) {
+                var oldMode = e.oldValue;
+                var newMode = e.value;
+                self.cleanupAfterLayoutMode(oldMode);
+                self.prepareLayoutMode(newMode);
+            });
         },
 
         getDisplayMode: function() {
@@ -227,15 +308,22 @@
         },
 
         setSelectionState: function(item, selectionState) {
-            var selectorDef = this.selectors.view.selectedItem[this.getDisplayMode()];
+            var displayMode = this.getDisplayMode();
+            var selectorDef = this.selectors.view.selectedItem[displayMode];
             var $itemEl = item.getItemEl();
             if (selectorDef.selector) {
                 $itemEl = $itemEl.find(selectorDef.selector);
             }
             if (selectionState === "selected") {
                 $itemEl.addClass(selectorDef.cls);
+                if (displayMode === DISPLAY_GRID) {
+                    this._drawSelectedGrid(item);
+                }
             } else if (selectionState === "unselected") {
                 $itemEl.removeClass(selectorDef.cls);
+                if (displayMode === DISPLAY_GRID) {
+                    this._removeSelectedGrid(item);
+                }
             }
         },
 
@@ -284,6 +372,58 @@
                     }
                 }
             }
+        },
+
+        prepareLayoutMode: function(layoutMode) {
+            if (layoutMode === DISPLAY_GRID) {
+                this._drawAllSelectedGrid();
+            }
+        },
+
+        cleanupAfterLayoutMode: function(layoutMode) {
+            if (layoutMode === DISPLAY_GRID) {
+                this._removeAllSelectedGrid();
+            }
+        },
+
+        _drawImage: function($image) {
+            var colorHex = $image.closest("a").css("background-color"); // Let's grab the color form the card background
+            var colorRgb = $.map(colorHex.match(/(\d+)/g), function (val) {
+                return val/255; // RGB values between 0 and 1
+            });
+            Utils.multiplyImage($image, colorRgb);
+        },
+
+        _drawAllSelectedGrid: function() {
+            var selector = this.selectors.view.selectedItems.grid.selector + " img:visible";
+            var self = this;
+            $(selector).each(function() {
+                self._drawImage($(this));
+            });
+            $(selector).load(function() {
+                self._drawImage($(this));
+            });
+        },
+
+        _removeAllSelectedGrid: function() {
+            var selector = this.selectors.view.selectedItems.grid.selector +
+                    " canvas.multiplied";
+            $(selector).remove();
+        },
+
+        _drawSelectedGrid: function(item) {
+            var $img = item.getItemEl().find("img:visible");
+            this._drawImage($img);
+            // redraw if image has not been loaded (fully) yet
+            var self = this;
+            $img.load(function() {
+                self._drawImage($(this));
+            });
+        },
+
+        _removeSelectedGrid: function(item) {
+            var $itemEl = item.getItemEl();
+            $itemEl.find("canvas.multiplied").remove();
         }
 
     });
@@ -306,6 +446,7 @@
         initialize: function() {
             this.setDisplayMode(this.$el.hasClass("list") ? DISPLAY_LIST : DISPLAY_GRID);
             var self = this;
+            // Selection
             this.$el.fipo("tap.cardview.select", "click.cardview.select",
                 this.selectors.controller.selectElement.list, function(e) {
                     var widget = Utils.getWidget(self.$el);
@@ -327,7 +468,18 @@
                         e.preventDefault();
                     }
                 });
-            // block click event for carsa
+            // list header
+            this.$el.fipo("tap.cardview.selectall", "click.cardview.selectall",
+                this.selectors.controller.selectAll.selector, function(e) {
+                    var widget = Utils.getWidget(self.$el);
+                    if (widget.getDisplayMode() === DISPLAY_LIST) {
+                        var $header = self.selectors.controller.selectAll.resolver(
+                                e.target);
+                        var header = widget.getModel().getHeaderForEl($header);
+
+                    }
+                });
+            // block click event for cards
             this.$el.finger("click.cardview.select",
                 this.selectors.controller.selectElement.grid, function(e) {
                     var widget = Utils.getWidget(self.$el);
@@ -555,7 +707,7 @@
             this.setGridSelectionMode(!this.isGridSelectionMode());
         },
 
-        select: function(item) {
+        select: function(item, moreSelectionChanges) {
             item = ensureItem(item);
             var isSelected = this.adapter.isSelected(item);
             if (!isSelected) {
@@ -563,12 +715,13 @@
                 this.$element.trigger($.Event("change:selection", {
                     "widget": this,
                     "item": item,
-                    "isSelected": true
+                    "isSelected": true,
+                    "moreSelectionChanges": (moreSelectionChanges === true)
                 }));
             }
         },
 
-        deselect: function(item) {
+        deselect: function(item, moreSelectionChanges) {
             item = ensureItem(item);
             var isSelected = this.adapter.isSelected(item);
             if (isSelected) {
@@ -576,19 +729,21 @@
                 this.$element.trigger($.Event("change:selection", {
                     "widget": this,
                     "item": item,
-                    "isSelected": false
+                    "isSelected": false,
+                    "moreSelectionChanges": moreSelectionChanges
                 }));
             }
         },
 
-        toggleSelection: function(item) {
+        toggleSelection: function(item, moreSelectionChanges) {
             item = ensureItem(item);
             var isSelected = this.adapter.isSelected(item);
             this.adapter.setSelected(item, !isSelected);
             this.$element.trigger($.Event("change:selection", {
                 "widget": this,
                 "item": item,
-                "isSelected": !isSelected
+                "isSelected": !isSelected,
+                "moreSelectionChanges": moreSelectionChanges
             }));
         },
 
@@ -599,8 +754,22 @@
         clearSelection: function() {
             var selection = this.getSelection(true);
             var itemCnt = selection.length;
+            var finalItem = (itemCnt - 1);
             for (var i = 0; i < itemCnt; i++) {
-                this.deselect(selection[i]);
+                this.deselect(selection[i], (i < finalItem));
+            }
+        },
+
+        selectAll: function(header) {
+            var model = this.adapter.getModel();
+            if (header.jQuery) {
+                header = model.getHeaderForEl(header);
+            }
+            var itemsToSelect = model.getItemsForHeader(header);
+            var itemCnt = itemsToSelect.length;
+            var finalItem = (itemCnt - 1);
+            for (var i = 0; i < itemCnt; i++) {
+                this.select(itemsToSelect[i], (i < finalItem));
             }
         },
 

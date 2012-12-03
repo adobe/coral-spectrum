@@ -41,33 +41,6 @@ jQuery(function($) {
         multiple: true
     });
 
-    function multiplyImage(image, color) {
-        var img     = image[0];
-        var canvas  = $("<canvas class='"+img.className+"' width='"+img.naturalWidth+"' height='"+img.naturalHeight+"'></canvas>")
-                        .width(image.width()).height(image.height()).insertBefore(img)[0];
-        var context = canvas.getContext("2d");
-
-        context.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
-        
-        var imgData = context.getImageData(0, 0, canvas.width, canvas.height);
-        var data    = imgData.data;
-        
-        for (var i = 0, l = data.length; i < l; i += 4) {
-            data[i]   *= color[0]; // red
-            data[i+1] *= color[1]; // green
-            data[i+2] *= color[2]; // blue
-        }
-        
-        context.putImageData(imgData, 0, 0);
-
-    }
-
-    $(".grid article.selected img:visible").load(function () {
-        var image   = $(this);
-        var color   = $.map(image.closest("a").css("background-color").match(/(\d+)/g), function (val) { return val/255; });
-        multiplyImage(image, color);
-    });
-
     // make rail pullable
     var rail = $('#main-rail');
     rail.removeClass('with-toolbar-bottom');
