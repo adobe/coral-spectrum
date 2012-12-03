@@ -43,12 +43,12 @@
     CUI.IconBrowser = new Class({
       Templates: {
         TableRow: Handlebars.compile([
-          '<tr><td><i class="{{selector}} medium"></i></td><td>{{name}}</td><td>{{selector}}</td></tr>'
+          '<tr><td class="iconCell"><i class="{{selector}} medium"></i></td><td class="iconCell svgCell"><img src="images/icons/{{file}}"></td><td>{{name}}</td><td>{{selector}}</td></tr>'
         ].join('\n'))
       },
       
       construct: function(options) {
-        this.$searchField = $('#searchField');
+        this.$searchField = $('#iconSearchField');
         this.$tbody = $('#iconTable tbody');
         
         var that = this;
@@ -70,6 +70,14 @@
         // Search
         this.$searchField.on("keyup paste cut", function(data) {
           that.filter(that.$searchField.val());
+        });
+        
+        // Show SVG column
+        $('input[name="showSVGs"]').on('change', function(evt) {
+          if (evt.target.checked)
+            $('.svgCell').show();
+          else
+            $('.svgCell').hide();
         });
         
         // Adjust sample
@@ -404,15 +412,18 @@
     </div>
     <div class="content">
       <div class="contentContainer">
-        <div class="search">
-          <input id="searchField" class="search-input" type="text" placeholder="Search">
+        <div class="search iconSearchContainer">
+          <input id="iconSearchField" class="search-input" type="text" placeholder="Search">
           <button type="button">
         </div>
+        
+        <label><input type="checkbox" name="showSVGs"><span></span> Show SVGs</label>
 
         <table id="iconTable" class="data">
           <thead>
             <tr>
               <th>Icon</th>
+              <th class="svgCell">SVG</th>
               <th>Name</th>
               <th>Selector</th>
             </tr>
