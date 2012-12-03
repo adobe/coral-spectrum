@@ -1,0 +1,25 @@
+
+/**
+    Class: .card-project
+    Displays a project (which groups WCM pages, DAM assets and other concepts together).
+*/
+
+// Grid view style
+.grid .card-project {
+    .card-grid-banner(black);
+
+    .image {
+        background: @card-banner-border-color-black;
+        img,
+        canvas {
+            opacity: 0.5;
+        }
+    }
+}
+
+// List view style
+.list .card-project {
+    p {
+        display: none;
+    }
+}

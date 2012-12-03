@@ -35,7 +35,7 @@ module.exports = function(grunt) {
       'components/CUI.Datepicker.js',
       'components/CUI.Pulldown.js',
       'components/CUI.Sticky.js',
-      'components/CUI.GridList.js',
+      'components/CUI.CardView.js',
       'components/CUI.PathBrowser.js',
       'components/CUI.Wizard.js',
       'components/CUI.FileUpload.js'
@@ -158,7 +158,8 @@ module.exports = function(grunt) {
           'Handlebars',   // Handlebars
           'prettyPrint',  // google-code-prettify
           'CUI',          // CoralUI
-          'Class'         // Class
+          'Class',        // Class
+          'moment'        // Moment.js
         ]
       },
       globals: {}
@@ -215,7 +216,8 @@ module.exports = function(grunt) {
           '<%= dirs.build %>/js/libs/toe.js': '<%= dirs.source %>/js/plugins/toe.js',
           '<%= dirs.build %>/js/libs/jquery-fingerpointer.js': '<%= dirs.source %>/js/plugins/jquery-fingerpointer.js',
           '<%= dirs.build %>/js/libs/jquery-gridlayout.js': '<%= dirs.source %>/js/plugins/jquery-gridlayout.js',
-          '<%= dirs.build %>/js/libs/jquery-scrollable.js': '<%= dirs.source %>/js/plugins/jquery-scrollable.js'
+          '<%= dirs.build %>/js/libs/jquery-scrollable.js': '<%= dirs.source %>/js/plugins/jquery-scrollable.js',
+          '<%= dirs.build %>/js/libs/moment.js': '<%= dirs.source %>/js/plugins/moment.js'
         }
       },
       rte: {

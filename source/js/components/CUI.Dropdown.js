@@ -123,7 +123,8 @@
         
         this.buttonElement.on("dropdown-list:select", "", this._processSelect.bind(this));
         
-        this.buttonElement.on("click", "", function() {
+        this.buttonElement.on("click", "", function(event) {
+            event.preventDefault();
             this.dropdownList.show();
         }.bind(this));
         

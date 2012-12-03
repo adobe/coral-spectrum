@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="js/google-code-prettify/prettify.css">
 
     <script src="js/libs/handlebars.js"></script>
+    <script src="js/libs/moment.js"></script>
     <script src="js/libs/jquery.js"></script>
     <script src="js/libs/jquery-fingerpointer.js"></script>
     <script src="js/libs/toe.js"></script>
@@ -34,7 +35,7 @@
         </nav>
 
         <div class="drawer">
-            <div class="badge">v0.5.0</div>
+            <div class="badge">v0.6.0</div>
         </div>
 
     </header>
@@ -1148,7 +1149,7 @@
                 </section>
 
                 <section id="Datepicker">
-                    <h2 class="line">Datepicker (WIP)</h2>
+                    <h2 class="line">Datepicker</h2>
                     <p>The datepicker component. Initial input value should be in the following format:</p>
                     <ul>
                         <li>Date: Y-m-d (e.g. 1987-04-06)</li>
@@ -1564,76 +1565,135 @@
                 <p>There are many cards for displaying data. They are not always card shaped, but we still call them that.</p>
                 <h3>Variations</h3>
                 <ul>
-                    <li>Asset Card: for a single item.
-                    <li>Collection Card: for a collection of items.
-                    <li>Directory Card: for a directory of items.
-                    <li>Page Card: for a page item.
+                    <li><a href="#Cards-Project">Project Card</a>: for a project (that contains an asset folder, a website and some collections).
+                    <li><a href="#Cards-Collection">Collection Card</a>: for a collection of items.
+                    <li><a href="#Cards-Asset">Asset Card</a>: for a single item.
+                    <li><a href="#Cards-Directory">Directory Card</a>: for a directory of assets.
+                    <li><a href="#Cards-Page">Page Card</a>: for a (web) page.
+                    <li><a href="#Cards-Board">Board Card</a>: for a Tartan board.
                 </ul>
+                <h3>Usage</h3>
+                <p>The markup for a card can be displayed in grid view or in list view, depending if it is wrapped in an element with a <code class="atv">grid</code> or with a <code class="atv">list</code> class.</p>
+                <p>Some cards can be displayed as a little stack (e.g. pages that contain sub-pages, non-empty collections and non-empty projects). To display these cards as a stack, simply add the <code class="atv">stack</code> class to the card.</p>
+                <p>If a card has to be displayed in a list view, it should contain the following elements: <code class="atv">&lt;i class=&quot;select&quot;&gt;&lt;/i&gt;&lt;i class=&quot;move&quot;&gt;&lt;/i&gt;</code>. If the items cannot be viewed as a list, these elements can be ommitted.</p>
+                <p>To hide some elements in grid or in list view, the <code class="atv">show-grid</code>, respectivly the <code class="atv">show-list</code> classes can be used.</p>
+                <p>In case an optimized or different image should be displayed in list/grid view, simply place both images into the <code class="atv">&lt;span class=&quot;image&quot;&gt;</code> with one of the <code class="atv">show-grid</code> and <code class="atv">show-list</code> class on each of them. There is a  script to avoids that both images to be loaded until the user switches view.</p>
+
+                <section id="Cards-Project">
+                    <h2 class="line">Project Card</h2>
+                    <p>A project card should always have a <code class="atv">stack</code> class, unless it is empty.</p>
+
+                    <div class="componentSample" >
+                        <div class="example" id="card-project-ex1">
+                            <div class="grid">
+                                <article class="card-project stack">
+                                    <i class="select"></i>
+                                    <i class="move"></i>
+                                    <a href="#">
+                                        <span class="image"><img src="images/previews/preview7.png" alt=""></span>
+                                        <div class="label">
+                                            <h4>Project Name</h4>
+                                            <p>Project Description</p>
+                                        </div>
+                                     </a>
+                                </article>
+                            </div>
+                        </div>
+                        <pre class="prettyprint linenums" data-src-id="card-project-ex1">
+                    </div>
+                </section>
+
+                <section id="Cards-Collection">
+                    <h2 class="line">Collection Card</h2>
+                    <p>A collection card should always have a <code class="atv">stack</code> class, unless it is empty.</p>
+                    <p>Below are two examples, one with collection information and another one with a description.</p>
+
+                    <div class="componentSample" >
+                        <div class="example" id="card-collection-ex1">
+                            <div class="grid">
+                                <article class="card-collection stack">
+                                    <i class="select"></i>
+                                    <i class="move"></i>
+                                    <a href="#">
+                                        <span class="image"><img src="images/previews/preview7.png" alt=""></span>
+                                        <div class="label">
+                                            <h4>Collection Name</h4>
+                                            <div class="info">
+                                                <p class="links"><i class="icon-link">Links</i> 8</p>
+                                                <p class="comments"><i class="icon-comment">Comments</i> 12</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </article>
+                                <article class="card-collection stack">
+                                    <i class="select"></i>
+                                    <i class="move"></i>
+                                    <a href="#">
+                                        <span class="image"><img src="images/previews/preview7.png" alt=""></span>
+                                        <div class="label">
+                                            <h4>Collection Name</h4>
+                                            <p>Collection Description</p>
+                                        </div>
+                                    </a>
+                                </article>
+                            </div>
+                        </div>
+                        <pre class="prettyprint linenums" data-src-id="card-collection-ex1">
+                    </div>
+                </section>
 
                 <section id="Cards-Asset">
                     <h2 class="line">Asset Card</h2>
+                    <p>An asset that is smaller than 240px wide should have the <code class="atv">low-resolution</code> class on the <code class="atv">image</code> element, to avoid that small images are up-scaled.</p>
 
                     <div class="componentSample" >
                         <div class="example" id="card-asset-ex1">
                             <div class="grid">
-                                <article class="card-asset" >
+                                <article class="card-asset">
                                     <i class="select"></i>
-                                    <i class="move icon-navigation"></i>
+                                    <i class="move"></i>
                                     <a href="#">
-                                        <img src="images/previews/preview1.png" alt="">
+                                        <span class="image">
+                                            <img class="show-grid" src="images/previews/preview1.png" alt="">
+                                            <img class="show-list" src="images/previews/preview-small.png" alt="">
+                                        </span>
                                         <div class="label">
-                                            <div class="main">
-                                                <img src="images/previews/preview-small.png" alt="">
-                                                <h4>Asset Name</h4>
-                                            </div>
+                                            <h4>Asset Name</h4>
                                             <p class="type">PSD</p>
                                             <p class="resolution">1220 x 400</p>
                                             <p class="size">149KB</p>
-                                            <p class="modified"><i class="icon-edit">Modified</i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-                                            <p class="links"><i class="icon-link">Links</i> 8</p>
-                                            <p class="comments"><i class="icon-comment">Comments</i> 12</p>
+                                            <div class="info">
+                                                <p class="modified"><i class="icon-edit">Modified</i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                                                <p class="links"><i class="icon-link">Links</i> 8</p>
+                                                <p class="comments"><i class="icon-comment">Comments</i> 12</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </article>
+                                <article class="card-asset">
+                                    <i class="select"></i>
+                                    <i class="move"></i>
+                                    <a href="#">
+                                        <span class="image low-resolution">
+                                            <img class="show-grid" src="images/previews/preview-small.png" alt="">
+                                            <img class="show-list" src="images/previews/preview-small.png" alt="">
+                                        </span>
+                                        <div class="label">
+                                            <h4>Asset Name</h4>
+                                            <p class="type">PSD</p>
+                                            <p class="resolution">1220 x 400</p>
+                                            <p class="size">149KB</p>
+                                            <div class="info">
+                                                <p class="modified"><i class="icon-edit">Modified</i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                                                <p class="links"><i class="icon-link">Links</i> 8</p>
+                                                <p class="comments"><i class="icon-comment">Comments</i> 12</p>
+                                            </div>
                                         </div>
                                     </a>
                                 </article>
                             </div>
                         </div>
                         <pre class="prettyprint linenums" data-src-id="card-asset-ex1">
-                    </div>
-                </section>
-
-                <section id="Cards-Collection">
-                    <h2 class="line">Collection Card</h2>
-
-                    <div class="componentSample">
-                        <div class="example" id="card-collection-ex1">
-                           <div class="grid">
-                                <article class="card-collection stack">
-                                    <i class="select"></i>
-                                    <i class="move icon-navigation"></i>
-                                    <a href="#">
-                                        <img src="images/previews/preview1.png" alt="">
-                                        <div class="label">
-                                            <h4>Collection Name</h4>
-                                            <p class="links"><i class="icon-link">Links</i> 8</p>
-                                            <p class="comments"><i class="icon-comment">Comments</i> 12</p>
-                                        </div>
-                                    </a>
-                                </article>
-
-                                <article class="card-collection stack welcome">
-                                    <i class="select"></i>
-                                    <i class="move icon-navigation"></i>
-                                    <a href="#">
-                                        <img src="images/previews/preview1.png" alt="">
-                                        <div class="label">
-                                            <h4>Collection Name</h4>
-                                            <p>Collection</p>
-                                        </div>
-                                    </a>
-                                </article>
-                           </div>
-                        </div>
-                        <pre class="prettyprint linenums" data-src-id="card-collection-ex1">
                     </div>
                 </section>
 
@@ -1645,14 +1705,14 @@
                             <div class="grid">
                                 <article class="card-directory">
                                     <i class="select"></i>
-                                    <i class="move icon-navigation"></i>
+                                    <i class="move"></i>
                                     <a href="#">
-                                        <img src="images/previews/preview7.png" alt="">
+                                        <span class="image">
+                                            <img class="show-grid" src="images/previews/preview8.png" alt="">
+                                            <i class="show-list icon-folder">Directory</i>
+                                        </span>
                                         <div class="label">
-                                            <div class="main">
-                                                <img src="images/previews/preview-small.png" alt="">
-                                                <h4>Directory Name</h4>
-                                            </div>
+                                            <h4>Directory Name</h4>
                                         </div>
                                     </a>
                                 </article>
@@ -1665,45 +1725,29 @@
 
                 <section id="Cards-Page">
                     <h2 class="line">Page Card</h2>
+                    <p>The cards of the pages that have sub-pages should have a <code class="atv">stack</code> class.</p>
+                    <p>For pages that are hidden, that redirect, or that are deactivated, use the <code class="atv">page-hidden</code>, the <code class="atv">page-redirect</code>, respectivly the <code class="atv">page-deactivated</code> class, which will fade the card content.</p>
 
                     <div class="componentSample">
                         <div class="example" id="card-page-ex1">
-                            <div class="grid">                        
-                                <article class="card-page">
-                                    <i class="select"></i>
-                                    <i class="move icon-navigation"></i>
-                                    <a href="#">
-                                        <img src="images/previews/preview8.png" alt="">
-                                        <div class="main">
-                                            <span class="box-stack"></span>
-                                            <h4>Very Long Page Title. very long type. very long type. very long type. very long type.</h4>
-                                            <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                                            <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                                            <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
-                                        </div>
-                                        <p class="published"><i class="icon-site">Published</i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-                                        <p class="modified"><i class="icon-edit">Modified</i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-                                        <p class="links"><i class="icon-arrowright">Link</i> <span class="links-number">3</span></p>
-                                    </a>
-                                </article>
+                            <div class="grid">
                                 <article class="card-page stack">
                                     <i class="select"></i>
-                                    <i class="move icon-navigation"></i>
+                                    <i class="move"></i>
                                     <a href="#">
-                                        <img src="images/previews/preview3.png" alt="">
-                                        <div class="main">
-                                            <span class="box-stack"></span>
-                                            <h4>Page Title</h4>
-                                            <p class="info-approved">Approve<span class="show-grid"> Page</span></p>
-                                            <p class="info-locked"><span class="show-grid">Page </span>Locked</p>
-                                            <p class="info-copy">Launch<span class="show-grid"> Copy</span></p>
+                                        <span class="image"><img src="images/previews/preview1.png" alt=""></span>
+                                        <div class="label">
+                                            <div class="main">
+                                                <h4>Page Title</h4>
+                                            </div>
+                                            <div class="info">
+                                                <p class="published"><i class="icon-site">Published</i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                                                <p class="modified"><i class="icon-edit">Modified</i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                                                <p class="links"><i class="icon-arrowright">Link</i> <span class="links-number">3</span></p>
+                                            </div>
                                         </div>
-                                        <p class="published"><i class="icon-site">Published</i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-                                        <p class="modified"><i class="icon-edit">Modified</i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-                                        <p class="links"><i class="icon-arrowright">Link</i> <span class="links-number">3</span></p>
                                     </a>
                                 </article>
-
                             </div>                          
                         </div>
                         <pre class="prettyprint linenums" data-src-id="card-page-ex1"></pre>

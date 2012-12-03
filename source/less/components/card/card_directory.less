@@ -1,0 +1,42 @@
+
+/**
+    Class: .card-directory
+    Displays a DAM directory card.
+*/
+
+// Grid view style
+.grid .card-directory {
+    margin-top: 21*@px;
+
+    // This element will display the folder tab above the card
+    &:before {
+        content: " ";
+        position: absolute;
+        top: -21*@px;
+        left: 5*@px;
+        right: 5*@px;
+        height: 13*@px;
+        border-bottom: 7*@px solid #ccc; // This color doesn't make sense to be configurable, it has to be the same color as the directory SVG.
+        background: url('@{component-images-folder}/card/directory.svg') no-repeat;
+    }
+    &.selected:before {
+        border-bottom-color: #478fc5; // This color doesn't make sense to be configurable, it has to be the same color as the directory SVG.
+        background-position: 0 -15px;
+    }
+}
+
+// List view style
+.list .card-directory {
+    .card-list-image-dimensions(38*@px, 30*@px, none);
+
+    .main {
+        width: 100%;
+    }
+    .icon-folder {
+        margin-top: -4*@px;
+        &:before {
+            font-size: 38*@px;
+            opacity: 1;
+        }
+    }
+}

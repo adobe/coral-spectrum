@@ -1,0 +1,187 @@
+
+// Style of strong text (used by generic cards on <h4> elements)
+.card-strong-text() {
+    font-weight: bold;
+    color: @card-list-title-color;
+}
+
+// Gradient of selected cards (used by the stack class, see card_stack.less)
+.card-grid-page-gradient(@color: @card-background-color) {
+    @color-transparent: fade(@color, 0%);
+    @color-opaque:      fade(@color, 100%);
+    background: -moz-linear-gradient(top, @color-transparent 0%, @color-opaque 100%);
+    background: -webkit-linear-gradient(top, @color-transparent 0%, @color-opaque 100%);
+    background: -o-linear-gradient(top, @color-transparent 0%, @color-opaque 100%);
+    background: -ms-linear-gradient(top, @color-transparent 0%, @color-opaque 100%); // IE10+
+    background: linear-gradient(to bottom, @color-transparent 0%, @color-opaque 100%); // W3C
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@{color-transparent}', endColorstr='@{color}', GradientType=0 ); // IE6-9
+}
+
+// Grid view specific mixins ////////////////////////////////////////////////////////////////
+
+// Grid view: The shadow of all cards
+.card-grid-shadow() {
+    .box-shadow(0 1.5*@px 1.5*@px rgba(0, 0, 0, 0.25));
+}
+
+// Grid view: displays the card label as a banner that runs across the preview image (used by card-collection)
+.card-grid-banner(@background: @card-background-color, @border: @card-banner-border-color-white, @shadow-density: 0.5) {
+    @card-grid-banner-margin: @card-grid-margin + 2*(@card-banner-offset+@px);
+    .calc-width(~"100% - @{card-grid-banner-margin}rem");
+    margin-left:  (@card-banner-offset+@px);
+    margin-right: (@card-banner-offset+@px);
+    
+    .image {
+        border-bottom: none;
+    }
+    .label {
+        position: absolute;
+        z-index: 2;
+        top: 50%;
+        left:  -@card-banner-offset;
+        right: -@card-banner-offset;
+        margin: -@px;
+        padding: 0 @card-banner-offset;
+        border: @px solid @border;
+        background-color: @background;
+        .box-shadow(0 8*@px 8*@px -5*@px rgba(0, 0, 0, @shadow-density));
+        &:before,
+        &:after {
+            content: " ";
+            position: absolute;
+            z-index: 1;
+            height: 0;
+            width: 0;
+            border: @card-banner-offset+@px solid transparent;
+            border-style: outset solid; // Fixes a FF bug
+            pointer-events: none;
+        }
+        &:before {
+            bottom: -2*@px - @card-banner-offset;
+            left: -2*@px - @card-banner-offset;
+            border-right-color: @background;
+        }
+        &:after {
+            bottom: -2*@px - @card-banner-offset;
+            right: -2*@px - @card-banner-offset;
+            border-left-color: @background;
+        }
+    }
+    &.selected .label {
+        background-color: @card-selection-color;
+        border-color: darken(@card-selection-color, 10%);
+        &:before {
+            border-right-color: @card-selection-color;
+        }
+        &:after {
+            border-left-color: @card-selection-color;
+        }
+    }
+}
+
+// Grid view: black version of the .card-grid-banner mixin (used by card-project)
+.card-grid-banner(black) {
+    .card-grid-banner(@card-banner-background-color-black, @card-banner-border-color-black, 0.7);
+    &:not(.selected) .label,
+    &:not(.selected) .label h4 {
+        color: @card-banner-text-color-black;
+    }
+    &.selected .label,
+    &.selected .label h4 {
+        @card-selection-banner-black-color: darken(desaturate(@card-selection-color, 20%), 40%);
+        @card-selection-banner-black-border: darken(@card-selection-banner-black-color, 5%);
+
+        color: @white;
+        background-color: @card-selection-banner-black-color;
+        border-color: @card-selection-banner-black-border;
+        &:before {
+            border-right-color: @card-selection-banner-black-color;
+        }
+        &:after {
+            border-left-color: @card-selection-banner-black-color;
+        }
+    }
+}
+
+// List view specific mixins ////////////////////////////////////////////////////////////////
+
+// List view: Sets the preview image dimensions on the image element (used by card-asset and card-directory)
+.card-list-image-dimensions(@width, @height, @display-image: block, @border-color: transparent) {
+    .image {
+        margin: (@card-list-height - @height - 2*@px)/2 8*@px 0 0;
+        border: @px solid @border-color;
+
+        &,
+        img {
+            width:  @width;
+            height: @height;
+        }
+        img.show-list {
+            display: @display-image;
+        }
+    }
+    .select[class] { // The [class] attribute helps to overrule the initial style
+        width: ((45+1+10)*@px + @width);
+    }
+    // The sort triangle in the list header that is displayed above the image column
+    .sort {
+        margin: 0 8*@px 0 0;
+        width: @width;
+    }
+}
+
+// List view: Adds a little stack to the preview image to illustrate items that have sub-items (used by card-page)
+.card-list-image-stack(@width, @height, @background: @card-list-stack-background, @border-color: @card-list-stack-border) {
+    .card-list-image-dimensions(@width, @height, none, @border-color);
+
+    .image {
+        background: @background;
+    }
+    // When a stack class is placed on the article element, the box-stack should display a stack as well
+    &.stack .image {
+        &:before,
+        &:after {
+            content: " ";
+            position: absolute;
+            height: @px;
+            border: @px solid @border-color;
+        }
+        &:before {
+            bottom: -3*@px;
+            left: @px;
+            width: @width - 4*@px;
+        }
+        &:after {
+            bottom: -5*@px;
+            left: 3*@px;
+            width: @width - 8*@px;
+        }
+    }
+}
+
+// List view: Draws a box for additional info showed next to the title (used by card-page)
+.card-list-box() {
+    .card-strong-text;
+    padding: 0 5*@px;
+    border: 1px solid @card-list-gray-border;
+    background: @card-list-gray-background;
+}
+
+// List view: Draws a yellow box (used by card-page)
+.card-list-box(yellow) {
+    .card-list-box;
+    background: @card-list-yellow-background;
+    border-color: @card-list-yellow-border;
+}
+
+// List view: Displays the date on line line and the user on another line (used for displaying last-modified or last-published info in card-page and card-asset)
+.card-list-date-user() {
+    margin-top: 7*@px;
+    .date {
+        .card-strong-text;
+    }
+    .date,
+    .user {
+        display: block;
+    }
+}

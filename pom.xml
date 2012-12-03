@@ -31,7 +31,7 @@
     <!-- P R O J E C T                                                           -->
     <!-- ======================================================================= -->
     <artifactId>com.adobe.coralui.content</artifactId>
-    <version>0.6.0-SNAPSHOT</version>
+    <version>0.6.2-SNAPSHOT</version>
     <packaging>content-package</packaging>
 
     <name>Adobe Reef / CoralUI Content Package</name>
@@ -207,7 +207,7 @@
                         <replacement>
                             <token>"js/libs/handlebars.js"</token>
                             <value>"/etc/clientlibs/granite/handlebars.js"</value>
-                        </replacement>
+                        </replacement>                      
                         <replacement>
                             <token>"js/libs/jquery.js"</token>
                             <value>"/etc/clientlibs/granite/jquery.js"</value>
@@ -228,6 +228,13 @@
                 <artifactId>content-package-maven-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
+                    <dependencies>
+                        <dependency>
+                            <group>adobe/granite</group>
+                            <name>com.adobe.granite.platform.clientlibs</name>
+                            <version>[0.0.0,)</version>
+                        </dependency>
+                    </dependencies>
                     <filters>
                         <filter>
                             <root>/etc/clientlibs/granite/coralui</root>

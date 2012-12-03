@@ -22,7 +22,6 @@ jQuery(function($) {
 
             // remove the indent based on the number of spaces prefixing the first line.
             var whitespaceIndentCount = html.search(/[^\s]/);
-            console.log('here', whitespaceIndentCount );
             var re = new RegExp('^\\s{'+whitespaceIndentCount+'}', 'gm');
             html = html.replace(re, '');
 

@@ -238,6 +238,7 @@
         }.bind(this));
         
         list.on("click", "li:not(.loading-indicator)", function(event) {
+            event.preventDefault();
             this._triggerSelect($(event.target).closest("li").attr("data-id"));
         }.bind(this));
         

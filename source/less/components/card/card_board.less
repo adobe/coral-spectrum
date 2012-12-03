@@ -1,0 +1,47 @@
+
+/**
+    Class: .card-board
+    Displays a WCM board card.
+*/
+.card-board {
+    color: white;
+    background-color: white;
+    padding: 4*@px 0 0 4*@px;
+
+    .cardheader {
+        background-color: @card-board-header-background;
+        margin: 0 4*@px 4*@px 0;
+        h4 {
+            margin: 0 10*@px 6*@px 10*@px;
+            padding: 6*@px 0 4*@px 0;
+            border-bottom: 1px solid @card-board-header-border;
+            color: white;
+            font-size: 13*@px;
+        }
+        p {
+            color: white;
+            margin: 0 4*@px 0 10*@px;
+            padding: 2*@px 0 2*@px 0;
+        }
+        i:before {
+            color: white !important; // bypass the hover color of the sourrounding "A"
+        }
+    }
+
+    .cardcontent {
+        .cardpreview {
+            background-size: cover;
+            background-color: @card-board-preview-background;
+            margin: 0 4*@px 4*@px 0;
+            .calc-width(~"50% - 4px", 48%);
+            float:left;
+
+            &.wide {
+                .calc-width(~"100% - 4px", 98%);
+            }
+            img {
+                max-width: 100%;
+            }
+        }
+    }
+}

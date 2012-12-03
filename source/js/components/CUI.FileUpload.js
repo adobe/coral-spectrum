@@ -25,6 +25,7 @@
          @param {String}   [options.name="file"]                      (Optional) name for an underlying form field.
          @param {String}   [options.placeholder=null]                 Define a placeholder for the input field
          @param {String}   [options.uploadUrl=null]                   URL where to upload the file
+         @param {String}   [options.uploadUrlBuilder=null]            Upload URL builder
          @param {boolean}  [options.disabled=false]                   Is this component disabled?
          @param {boolean}  [options.multiple=false]                   Can the user upload more than one file?
          @param {Object}   [options.mimeTypes=null]                   Restrict upload to mime types
@@ -32,6 +33,7 @@
          @param {boolean}  [options.autoStart=false]                  Should upload start automatically once the file is selected?
          @param {String}   [options.fileNameParameter=null]           Name of File name's parameter
          @param {boolean}  [options.useHTML5=true]                    (Optional) Prefer HTML5 to upload files (if browser allows it)
+         @param {boolean}  [options.dropZone=null]                    (Optional) Drop zone to upload files from file system directly (if browser allows it)
          @param {Object}   [options.events={}]                        (Optional) Event handlers
          */
         construct: function(options) {
@@ -50,6 +52,7 @@
             name: "file",
             placeholder: null,
             uploadUrl: null,
+            uploadUrlBuilder: null,
             disabled: false,
             multiple: false,
             mimeTypes: null,
@@ -57,6 +60,7 @@
             autoStart: false,
             fileNameParameter: null,
             useHTML5: true,
+            dropZone: null,
             events: {}
         },
 
@@ -108,6 +112,13 @@
                 }
             }
 
+            // Register drop zone
+            if (this.options.useHTML5) {
+                this.options.dropZone = this._registerDropZone();
+            } else {
+                this.options.dropZone = null;
+            }
+
             if (!this.options.placeholder) {
                 this.options.placeholder = this.inputElement.attr("placeholder");
             }
@@ -118,7 +129,101 @@
                 });
             }
 
+            // URL built via JavaScript function
+            if (this.options.uploadUrlBuilder) {
+                this.options.uploadUrl = this.options.uploadUrlBuilder(this);
+            }
+
+            if (!this.options.uploadUrl || /\$\{.+\}/.test(this.options.uploadUrl)) {
+                this.options.disabled = true;
+            }
+
             this._update();
+        },
+
+        _registerDropZone: function() {
+            var self = this;
+            if (self.options.dropZone) {
+                // TODO: provide an additional way to get the drop zone via a function
+
+                // Try to get the drop zone via a jQuery selector
+                try {
+                    self.options.dropZone = $(self.options.dropZone);
+                } catch (e) {
+                    delete self.options.dropZone;
+                }
+
+                if (self.options.dropZone) {
+                    self.options.dropZone
+                        .on("dragover", function(e) {
+                            if (self._isActive()) {
+                                self.isDragOver = true;
+
+                                if (e.stopPropagation) {
+                                    e.stopPropagation();
+                                }
+                                if (e.preventDefault) {
+                                    e.preventDefault();
+                                }
+
+                                self.$element.trigger({
+                                    type: "dropzonedragover",
+                                    originalEvent: e,
+                                    fileUpload: self
+                                });
+                            }
+
+                            return false;
+                        })
+                        .on("dragleave", function(e) {
+                            if (self._isActive()) {
+                                if (e.stopPropagation) {
+                                    e.stopPropagation();
+                                }
+                                if (e.preventDefault) {
+                                    e.preventDefault();
+                                }
+
+                                self.isDragOver = false;
+                                window.setTimeout(function() {
+                                    if (!self.isDragOver) {
+                                        self.$element.trigger({
+                                            type: "dropzonedragleave",
+                                            originalEvent: e,
+                                            fileUpload: self
+                                        });
+                                    }
+                                }, 1);
+                            }
+
+                            return false;
+                        })
+                        .on("drop", function(e) {
+                            if (self._isActive()) {
+                                if (e.stopPropagation) {
+                                    e.stopPropagation();
+                                }
+                                if (e.preventDefault) {
+                                    e.preventDefault();
+                                }
+
+                                var files = e.originalEvent.dataTransfer.files;
+
+                                self.$element.trigger({
+                                    type: "dropzonedrop",
+                                    originalEvent: e,
+                                    files: files,
+                                    fileUpload: self
+                                });
+
+                                self._onFileSelectionChange(e, files);
+                            }
+
+                            return false;
+                        })
+                    ;
+                }
+            }
         },
 
         _registerEventHandler: function(name, handler) {
@@ -176,6 +281,9 @@
             if (this.$element.attr("data-upload-url")) {
                 this.options.uploadUrl = this.$element.attr("data-upload-url");
             }
+            if (this.$element.attr("data-upload-url-builder")) {
+                this.options.uploadUrlBuilder = CUI.util.buildFunction(this.$element.attr("data-upload-url-builder"), ["fileUpload"]);
+            }
             if (this.$element.attr("data-size-limit")) {
                 this.options.sizeLimit = this.$element.attr("data-size-limit");
             }
@@ -184,6 +292,9 @@
             }
             if (this.$element.attr("data-usehtml5")) {
                 this.options.useHTML5 = this.$element.attr("data-usehtml5") === "true";
+            }
+            if (this.$element.attr("data-dropzone")) {
+                this.options.dropZone = this.$element.attr("data-dropzone");
             }
             if (this.$element.attr("data-file-name-parameter")) {
                 this.options.fileNameParameter = this.$element.attr("data-file-name-parameter");
@@ -215,10 +326,10 @@
         },
 
         /** @ignore */
-        _onFileSelectionChange: function(event) {
+        _onFileSelectionChange: function(event, files) {
             var addedCount = 0, rejectedCount = 0;
             if (this.options.useHTML5) {
-                var files = event.target.files;
+                files = files || event.target.files;
                 for (var i = 0; i < files.length; i++) {
                     if (this._addFile(files[i])) {
                         addedCount++;
@@ -463,6 +574,11 @@
                 originalEvent: e,
                 fileUpload: this
             });
+        },
+
+        /** @ignore */
+        _isActive: function() {
+            return !this.inputElement.is(':disabled');
         }
 
     });

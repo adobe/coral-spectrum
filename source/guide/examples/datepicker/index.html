@@ -8,57 +8,114 @@
         
         <script src="../../js/libs/underscore.js"></script>
         <script src="../../js/libs/handlebars.js"></script>
+        <script src="../../js/libs/moment.js"></script>
         <script src="../../js/libs/jquery.js"></script>
         <script src="../../js/libs/jquery-fingerpointer.js"></script>
         <script src="../../js/libs/toe.js"></script>
+        <script src="../../js/libs/moment.js"></script>
   
         <script src="../../js/CUI.js"></script>
 
         <script>
             $(document).ready(function(){
-                var datepicker = new CUI.Datepicker({
-                  element: '#myDatepicker'
-                });
+                if ($('#myDatepicker').length > 0) {
+                    var datepicker = new CUI.Datepicker({
+                      element: '#myDatepicker',
+                      displayedFormat: 'DD MMMM  YYYY'
+                    });
+                }
+                if ($('#myDatepickerForce').length > 0) {
+                    var datepicker = new CUI.Datepicker({
+                      element: '#myDatepickerForce',
+                      displayedFormat: 'DD MMMM  YYYY'
+                    });
+                }
             });
         </script>
+
+        <style>
+            .col {
+                float: left;
+            }
+        </style>
     </head>
     <body>
-     
-    <section>
-        <h1>Date Picker</h1>
-        <div id="myDatepicker" class="datepicker">
-            <input type="date" value="2012-10-20"><button class="icon-calendar small"><span>Datepicker</span></button>
-        </div>
-        <div class="datepicker" data-init="datepicker" data-disabled="true">
-            <input type="date" value="2012-10-20"><button class="icon-calendar small"><span>Datepicker</span></button>
-        </div>
-    </section>
-    <section>
-        <h1>Datetime Picker (WIP)</h1>
-        <div class="datepicker" data-init="datepicker">
-            <input type="datetime" value="2012-10-20T20:35Z"><button class="icon-calendar small"><span>Datetime picker</span></button>
-        </div>
-        <div class="datepicker" data-init="datepicker" data-disabled="true">
-            <input type="datetime" value="2012-10-20T20:35Z"><button class="icon-calendar small"><span>Datetime picker</span></button>
-        </div>
-    </section>
-    <section>
-        <h1>Datetime-local Picker (WIP)</h1>
-        <div class="datepicker" data-init="datepicker">
-            <input type="datetime-local" value="2012-10-20T20:35"><button class="icon-calendar small"><span>Datetime local picker</span></button>
-        </div>
-        <div class="datepicker" data-init="datepicker" data-disabled="true">
-            <input type="datetime-local" value="2012-10-20T20:35"><button class="icon-calendar small"><span>Datetime local picker</span></button>
-        </div>
-    </section>
-    <section>
-        <h1>Time Picker (WIP)</h1>
-        <div class="datepicker" data-init="datepicker">
-            <input type="time" value="11:10"><button class="icon-clock small"><span>Timepicker</span></button>
-        </div>
-        <div class="datepicker" data-init="datepicker" data-disabled="true">
-            <input type="time" value="11:10"><button class="icon-clock small"><span>Timepicker</span></button>
-        </div>
-    </section>
+  
+    <div class="col">
+        <section>
+            <h1>Date Picker</h1>
+            <div id="myDatepicker" class="datepicker">
+                <input type="date" value="29 November 2012" name="date1"><button class="icon-calendar small"><span>Datepicker</span></button>
+            </div>
+            
+            <div class="datepicker" data-init="datepicker" data-disabled="true" data-displayed-format="YYYY-MM-DD">
+                <input type="date" value="2012-10-20" data-displayed-format="YYYY-MM-DD" name="date2"><button class="icon-calendar small"><span>Datepicker</span></button>
+            </div>
+
+        </section>
+
+        <section>
+            <h1>Datetime Picker</h1>
+            <div class="datepicker" data-init="datepicker">
+                <input type="datetime" value="2012-10-20T20:35Z" data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" name="date3"><button class="icon-calendar small"><span>Datetime picker</span></button>
+            </div>
+            <div class="datepicker" data-init="datepicker" data-disabled="true">
+                <input type="datetime" value="2012-10-20T20:35Z" data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" name="date4"><button class="icon-calendar small"><span>Datetime picker</span></button>
+            </div>
+        </section>
+        <section>
+            <h1>Datetime Picker, required values</h1>
+            <div class="datepicker" data-init="datepicker">
+                <input type="datetime" value="2012-10-20T20:35Z" data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" name="date3" required><button class="icon-calendar small"><span>Datetime picker</span></button>
+            </div>
+            <div class="datepicker" data-init="datepicker" data-disabled="true">
+                <input type="datetime" value="2012-10-20T20:35Z" data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" name="date4" required><button class="icon-calendar small"><span>Datetime picker</span></button>
+            </div>
+        </section>
+        <section>
+            <h1>Standard dates</h1>
+            <div class="datepicker" data-init="datepicker">
+                <input type="time" value="20:35" data-displayed-format="HH:mm" name="date5"><button class="icon-calendar small"><span>Datetime picker</span></button>
+            </div>
+            <div class="datepicker" data-init="datepicker" data-disabled="true">
+                <input type="time" value="20:35" data-displayed-format="HH:mm" name="date6"><button class="icon-calendar small"><span>Datetime picker</span></button>
+            </div>
+        </section>
+    </div>
+
+    <div class="col">
+        <section>
+            <h1>Date Picker (force HTML Mode)</h1>
+            <div id="myDatepickerForce" class="datepicker" data-force-html-mode="true">
+                <input type="date" value="29 November 2012" name="date1"><button class="icon-calendar small"><span>Datepicker</span></button>
+            </div>
+   
+            <div class="datepicker" data-init="datepicker" data-disabled="true" data-displayed-format="YYYY-MM-DD">
+                <input type="date" value="2012-10-20" data-displayed-format="YYYY-MM-DD" name="date2"><button class="icon-calendar small"><span>Datepicker</span></button>
+            </div>
+
+        </section>
+
+        <section>
+            <h1>Datetime Picker (WIP) (force HTML Mode)</h1>
+            <div class="datepicker" data-init="datepicker" data-force-html-mode="true">
+                <input type="datetime" value="2012-10-20T20:35Z" data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" name="date3"><button class="icon-calendar small"><span>Datetime picker</span></button>
+            </div>
+            <div class="datepicker" data-init="datepicker" data-disabled="true">
+                <input type="datetime" value="2012-10-20T20:35Z" data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" name="date4"><button class="icon-calendar small"><span>Datetime picker</span></button>
+            </div>
+        </section>
+        <section>
+            <h1>Standard dates (force HTML Mode)</h1>
+            <div class="datepicker" data-init="datepicker" data-force-html-mode="true">
+                <input type="time" value="20:35" data-displayed-format="HH:mm" name="date5"><button class="icon-calendar small"><span>Datetime picker</span></button>
+            </div>
+            <div class="datepicker" data-init="datepicker" data-disabled="true">
+                <input type="time" value="20:35" data-displayed-format="HH:mm" name="date6"><button class="icon-calendar small"><span>Datetime picker</span></button>
+            </div>
+        </section>
+
+    </div>
+    
     </body>
 </html>
