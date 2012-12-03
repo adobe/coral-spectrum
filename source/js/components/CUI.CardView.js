@@ -802,11 +802,17 @@
         },
 
         layout: function() {
+            if (this.getDisplayMode() !== DISPLAY_GRID) {
+                return;
+            }
             this.$element.removeData('cuigridlayout');
             this.$element.cuigridlayout();
         },
 
         relayout: function() {
+            if (this.getDisplayMode() !== DISPLAY_GRID) {
+                return;
+            }
             this.$element.cuigridlayout("layout");
         },
 
