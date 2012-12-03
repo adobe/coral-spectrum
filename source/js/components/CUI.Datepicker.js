@@ -115,7 +115,9 @@
             this._setDateTime(this.displayDateTime);
         }
         
-        if(!this.isMobileAndSupportsInputType) this._switchInputTypeToText(this.$input);
+        if(!this.isMobileAndSupportsInputType) {
+            this._switchInputTypeToText(this.$input);
+        }
 
         var timeout = null;
         var $input = this.$element.find('input').first();
@@ -231,6 +233,8 @@
 
     _switchInputTypeToText: function($input) {
         var convertedInput = $input.detach().attr('type', 'text');
+        // readonly to hide the keyboard
+        convertedInput.attr('readonly', 'true');
         this.$element.prepend(convertedInput);
     },
 
