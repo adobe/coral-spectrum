@@ -25,9 +25,18 @@
 }
 
 // Grid view: displays the card label as a banner that runs across the preview image
-.card-grid-banner(@background: @card-background-color, @border: @card-banner-border-color-white) {
+.card-grid-banner(@background: @card-background-color, @border: @card-banner-border-color-white, @shadow-density: 0.5) {
+    @card-grid-banner-margin: @card-grid-margin + 2*(@card-banner-offset+@px);
+    .calc-width(~"100% - @{card-grid-banner-margin}rem");
+    margin-left:  (@card-banner-offset+@px);
+    margin-right: (@card-banner-offset+@px);
+    
+    .image {
+        border-bottom: none;
+    }
     .label {
         position: absolute;
+        z-index: 2;
         top: 50%;
         left:  -@card-banner-offset;
         right: -@card-banner-offset;
@@ -35,23 +44,26 @@
         padding: 0 @card-banner-offset;
         border: @px solid @border;
         background-color: @background;
-        .box-shadow(0 8*@px 8*@px -5*@px rgba(0, 0, 0, 0.3));
+        .box-shadow(0 8*@px 8*@px -5*@px rgba(0, 0, 0, @shadow-density));
         &:before,
         &:after {
             content: " ";
             position: absolute;
+            z-index: 1;
             height: 0;
             width: 0;
-            bottom: -@px - @card-banner-offset;
-            border: @card-banner-offset solid transparent;
+            border: @card-banner-offset+@px solid transparent;
+            border-style: outset solid; // Fixes a FF bug
             pointer-events: none;
         }
         &:before {
-            left: -@px - @card-banner-offset;
+            bottom: -2*@px - @card-banner-offset;
+            left: -2*@px - @card-banner-offset;
             border-right-color: @background;
         }
         &:after {
-            right: -@px - @card-banner-offset;
+            bottom: -2*@px - @card-banner-offset;
+            right: -2*@px - @card-banner-offset;
             border-left-color: @background;
         }
     }
@@ -67,7 +79,7 @@
     }
 }
 .card-grid-banner(black) {
-    .card-grid-banner(@card-banner-background-color-black, @card-banner-border-color-black);
+    .card-grid-banner(@card-banner-background-color-black, @card-banner-border-color-black, 0.7);
     &:not(.selected) .label,
     &:not(.selected) .label h4 {
         color: @card-banner-text-color-black;
@@ -222,15 +234,14 @@
 // Grid view style
 .grid [class^="card-"],
 .grid [class*=" card-"] {
-    .calc-width(~"100% - @{card-grid-margin}", 95%);
+    .calc-width(~"100% - @{card-grid-margin}rem");
     margin: 0 0 @card-grid-margin 0;
     background: @card-background-color;
 
     > a {
         .card-grid-shadow;
+        display: block;
         z-index: 1;
-        float: left; // Makes it contain all floating elements
-        width: 100%;
     }
 
     .image {
@@ -239,6 +250,7 @@
     img,
     canvas {
         width: 100%;
+        opacity: 0.999; // IE fix
     }
     canvas ~ img {
         display: none;

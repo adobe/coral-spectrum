@@ -177,12 +177,15 @@
  Mixin: .calc-width
  Sets the width with a calc() expression
 */
-.calc-width(@expression, @fallback) {
-    width: @fallback;
+.calc-width(@expression) {
     width: -webkit-calc(@expression);
     width: -moz-calc(@expression);
     width: -o-calc(@expression);
     width: calc(@expression);
+}
+.calc-width(@expression, @fallback) {
+    width: @fallback;
+    .calc-width(@expression);
 }
 
 /*
