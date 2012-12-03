@@ -174,13 +174,18 @@
         }.bind(this));
 
         if(this._isTimeEnabled()) {
-           this.$timeButtons.on("dropdown-list:select", "", function(event) {
+            var dropdownChanged = function () {
                 var h = this._getHoursFromDropdown();
                 var m = this._getMinutesFromDropdown();
                 var date = this.options.selectedDateTime.hours(h).minutes(m);
 
                this._setDateTime(date);
-            }.bind(this));
+            };
+
+            // for Desktop
+            this.$timeButtons.on("dropdown-list:select", dropdownChanged.bind(this));
+            // for Mobile
+            this.$timeDropdowns.on('change', dropdownChanged.bind(this));
         }
 
 
