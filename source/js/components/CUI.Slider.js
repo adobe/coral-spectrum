@@ -141,7 +141,8 @@
       orientation: 'horizontal',
       slide: false,
       disabled: false,
-      tooltips: false
+      tooltips: false,
+      tooltipFormatter: function(value) { return value.toString(); }
     },
 
     values: [],
@@ -444,7 +445,7 @@
 
             // Update tooltip value (if required)
             if(that.options.tooltips) {
-                that.$tooltips.eq(index).html(that.values[index]);
+                that.$tooltips.eq(index).html(that.options.tooltipFormatter(that.values[index]));
             }
         });
     },
