@@ -223,7 +223,7 @@
                 $item = $($item);
             }
             // adjust model
-            var followupItem = undefined;
+            var followupItem;
             var item = new Item($item);
             if ((pos === undefined) || (pos === null)) {
                 this.items.push(item);
