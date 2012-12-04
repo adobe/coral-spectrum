@@ -222,7 +222,8 @@
             if (!$item.jquery) {
                 $item = $($item);
             }
-            var followupItem = null;
+            // adjust model
+            var followupItem = undefined;
             var item = new Item($item);
             if ((pos === undefined) || (pos === null)) {
                 this.items.push(item);
