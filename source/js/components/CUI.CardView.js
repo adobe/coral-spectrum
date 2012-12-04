@@ -218,49 +218,59 @@
             return undefined;
         },
 
-        insertItemAt: function($item, pos, beforeHeader) {
-            if (!$item.jquery) {
-                $item = $($item);
+        insertItemAt: function($items, pos, beforeHeader) {
+            if (!$.isArray($items)) {
+                $items = [ $items ];
             }
-            // adjust model
-            var followupItem;
-            var item = new Item($item);
-            if ((pos === undefined) || (pos === null)) {
-                this.items.push(item);
-                pos = this.items.length - 1;
-            } else {
-                followupItem = this.items[pos];
-                this.items.splice(pos, 0, item);
-            }
-            var insert = {
-                "item": followupItem,
-                "mode": "item"
-            };
-            // adjust header references if item is inserted directly behind a header
-            var headerCnt = this.headers.length;
-            for (var h = 0; h < headerCnt; h++) {
-                var header = this.headers[h];
-                if (header.getItemRef() === followupItem) {
-                    if (beforeHeader) {
-                        insert = {
-                            "item": header,
-                            "mode": "header"
-                        };
-                        break;
-                    } else {
-                        header.setItemRef(item);
+            for (var i = $items.length - 1; i >= 0; i--) {
+
+                var $item = $items[i];
+                if (!$item.jquery) {
+                    $item = $($item);
+                }
+
+                // adjust model
+                var followupItem;
+                var item = new Item($item);
+                if ((pos === undefined) || (pos === null)) {
+                    this.items.push(item);
+                    pos = this.items.length - 1;
+                } else {
+                    followupItem = this.items[pos];
+                    this.items.splice(pos, 0, item);
+                }
+                var insert = {
+                    "item": followupItem,
+                    "mode": "item"
+                };
+
+                // adjust header references if item is inserted directly behind a header
+                var headerCnt = this.headers.length;
+                for (var h = 0; h < headerCnt; h++) {
+                    var header = this.headers[h];
+                    if (header.getItemRef() === followupItem) {
+                        if (beforeHeader) {
+                            insert = {
+                                "item": header,
+                                "mode": "header"
+                            };
+                            break;
+                        } else {
+                            header.setItemRef(item);
+                        }
                     }
                 }
+
+                // trigger event
+                this.$el.trigger($.Event("change:insertitem", {
+                    "insertPoint": insert,
+                    "followupItem": followupItem,
+                    "item": item,
+                    "pos": pos,
+                    "widget": Utils.getWidget(this.$el),
+                    "moreItems": (i > 0)
+                }));
             }
-            // trigger event
-            this.$el.trigger($.Event("change:insertitem", {
-                "insertPoint": insert,
-                "followupItem": followupItem,
-                "item": item,
-                "pos": pos,
-                "widget": Utils.getWidget(this.$el)
-            }));
-            return item;
         },
 
         getHeaderCount: function() {
@@ -373,7 +383,6 @@
             }
             var $item = e.item.getItemEl();
             var followupItem = e.followupItem;
-            var $followup = (followupItem ? followupItem.getItemEl() : undefined);
             switch (this.getDisplayMode()) {
                 case DISPLAY_LIST:
                     if (!followupItem) {
@@ -387,10 +396,11 @@
                     }
                     break;
                 case DISPLAY_GRID:
-                    // TODO optimize - only relayout the necessary items
-                    var widget = Utils.getWidget(this.$el);
-                    widget._restore();
-                    widget.layout();
+                    if (!e.moreItems) {
+                        var widget = Utils.getWidget(this.$el);
+                        widget._restore();
+                        widget.layout();
+                    }
                     break;
             }
         },
@@ -981,6 +991,14 @@
 
         _restore: function(restoreHeaders) {
             this.adapter._restore(restoreHeaders);
+        },
+
+        append: function($items) {
+            this.adapter.getModel().insertItemAt($items, null, false);
+        },
+
+        prepend: function($items) {
+            this.adapter.getModel().insertItemAt($items, 0, false);
         }
 
     });

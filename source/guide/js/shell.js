@@ -53,14 +53,33 @@ jQuery(function($) {
     }
 
     $("#prepend").fipo("tap", "click", function(e) {
+        // single item:
         var $itemEl = createNewCard();
-        CUI.CardView.get($grid).getModel().insertItemAt($itemEl, 0, false);
-        // CUI.CardView.get($grid).getModel().insertItemAt($itemEl, 2, false);
+        CUI.CardView.get($grid).prepend($itemEl);
+        // multiple items:
+        /*
+        var $items = [
+            createNewCard(), createNewCard(), createNewCard(),
+            createNewCard(), createNewCard(), createNewCard()
+        ];
+        CUI.CardView.get($grid).prepend($items);
+        */
+        // multiple items at a deliberate position:
+        // CUI.CardView.get($grid).getModel().insertItemAt($items, 2);
     });
 
     $("#append").fipo("tap", "click", function(e) {
+        // single item:
         var $itemEl = createNewCard();
-        CUI.CardView.get($grid).getModel().insertItemAt($itemEl, null); // null: append
+        CUI.CardView.get($grid).append($itemEl);
+        // multiple items:
+        /*
+        var $items = [
+            createNewCard(), createNewCard(), createNewCard(),
+            createNewCard(), createNewCard(), createNewCard()
+        ];
+        CUI.CardView.get($grid).append($items);
+        */
     });
 
     $("#display-mode").fipo("tap", "click", function(e) {
