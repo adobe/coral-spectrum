@@ -53,8 +53,8 @@
         selectedDateTime: moment(),
         startDay: 0,
         disabled: false,
-        displayedFormat: 'YYYY-MM-DD[T]HH:mm[Z]',
-        storedFormat: 'YYYY-MM-DD[T]HH:mm[Z]',
+        displayedFormat: 'YYYY-MM-DD[T]HH:mm',
+        storedFormat: 'YYYY-MM-DD[T]HH:mm',
         forceHTMLMode: false,
         required: false
     },
@@ -209,15 +209,15 @@
             this.options.type = $input.attr("type");
         }
 
-        if ($input.data('displayedFormat') !== undefined) {
+        if ($input.data('displayed-format') !== undefined) {
             this.options.displayedFormat = $input.data('displayedFormat');
         }
 
-        if ($input.data('storedFormat') !== undefined) {
+        if ($input.data('stored-format') !== undefined) {
             this.options.storedFormat = $input.data('storedFormat');
         }
 
-        if (this.$element.data('forceHtmlMode') !== undefined) {
+        if (this.$element.data('force-html-mode') !== undefined) {
             this.options.forceHTMLMode = this.$element.data('forceHtmlMode');
         }
     },
