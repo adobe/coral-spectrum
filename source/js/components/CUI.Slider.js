@@ -409,14 +409,15 @@
 
     _updateValue: function(pos, value, doNotTriggerChange) {
         var that = this;
-        
-        if (value > this.options.max) value = this.options.max;
-        if (value < this.options.min) value = this.options.min;
-        
-        if(pos === 0 || pos === 1) {
-            that.values[pos] = value.toString();
-            that.$inputs.eq(pos).attr("value", value);
-            if (!doNotTriggerChange) that.$inputs.eq(pos).change(); // Keep input element value updated too and fire change event for any listeners
+        if (that.$inputs.eq(pos).attr("value") !== value.toString()) {
+            if (value > this.options.max) value = this.options.max;
+            if (value < this.options.min) value = this.options.min;
+
+            if(pos === 0 || pos === 1) {
+                that.values[pos] = value.toString();
+                that.$inputs.eq(pos).attr("value", value);
+                if (!doNotTriggerChange) that.$inputs.eq(pos).change(); // Keep input element value updated too and fire change event for any listeners
+            }
         }
     },
 
