@@ -54,12 +54,13 @@ jQuery(function($) {
 
     $("#prepend").fipo("tap", "click", function(e) {
         var $itemEl = createNewCard();
-        CUI.CardView.get($grid).getModel().insertItemAt($itemEl, 0);
+        CUI.CardView.get($grid).getModel().insertItemAt($itemEl, 0, false);
+        // CUI.CardView.get($grid).getModel().insertItemAt($itemEl, 2, false);
     });
 
     $("#append").fipo("tap", "click", function(e) {
         var $itemEl = createNewCard();
-        CUI.CardView.get($grid).getModel().insertItemAt($itemEl, true);
+        CUI.CardView.get($grid).getModel().insertItemAt($itemEl, null); // null: append
     });
 
     $("#display-mode").fipo("tap", "click", function(e) {

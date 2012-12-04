@@ -218,33 +218,47 @@
             return undefined;
         },
 
-        insertItemAt: function($item, pos) {
+        insertItemAt: function($item, pos, beforeHeader) {
             if (!$item.jquery) {
                 $item = $($item);
             }
             var followupItem = null;
             var item = new Item($item);
-            if (pos === true) {
+            if ((pos === undefined) || (pos === null)) {
                 this.items.push(item);
                 pos = this.items.length - 1;
             } else {
                 followupItem = this.items[pos];
                 this.items.splice(pos, 0, item);
             }
-            this.$el.trigger($.Event("change:insertitem", {
-                "item": item,
-                "followupItem": followupItem,
-                "pos": pos,
-                "widget": Utils.getWidget(this.$el)
-            }));
+            var insert = {
+                "item": followupItem,
+                "mode": "item"
+            };
             // adjust header references if item is inserted directly behind a header
             var headerCnt = this.headers.length;
             for (var h = 0; h < headerCnt; h++) {
                 var header = this.headers[h];
                 if (header.getItemRef() === followupItem) {
-                    header.setItemRef(followupItem);
+                    if (beforeHeader) {
+                        insert = {
+                            "item": header,
+                            "mode": "header"
+                        };
+                        break;
+                    } else {
+                        header.setItemRef(item);
+                    }
                 }
             }
+            // trigger event
+            this.$el.trigger($.Event("change:insertitem", {
+                "insertPoint": insert,
+                "followupItem": followupItem,
+                "item": item,
+                "pos": pos,
+                "widget": Utils.getWidget(this.$el)
+            }));
             return item;
         },
 
@@ -364,7 +378,11 @@
                     if (!followupItem) {
                         $dataRoot.append($item);
                     } else {
-                        $followup.before($item);
+                        var insert = e.insertPoint;
+                        var item = insert.item;
+                        var $ref = (insert.mode === "item" ?
+                            item.getItemEl() : item.getHeaderEl());
+                        $ref.before($item);
                     }
                     break;
                 case DISPLAY_GRID:
