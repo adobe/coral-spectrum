@@ -79,6 +79,8 @@
 //        itemClass:"macboard-card"
     };
 
+    // TODO layout only takes image sizes into account; may fail when cards have differing "legends"
+
     $.CUIGridLayout.prototype = {
 
         option:function(options) {
@@ -118,6 +120,7 @@
             // all CSS is applied correctly by the browser. Without this second, timed calculation is sometimes wrong due
             // to race conditions with the rendering engine of the browser.
             setTimeout(function() {
+                this.numCols = -1;
                 this.updateDimensions();
                 this.layout(callback);
             }.bind(this), 1); 
