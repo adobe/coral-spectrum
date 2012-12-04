@@ -22,6 +22,14 @@ jQuery(function($) {
         // use CSS contract
         // $grid.toggleClass("selection-mode");
         // $grid.find("article").removeClass("selected");
+        // adjust button state
+        if (CUI.CardView.get($grid).isGridSelectionMode()) {
+            $("#selection-mode").removeClass("icon-check-circle");
+            $("#selection-mode").addClass("icon-close-circle");
+        } else {
+            $("#selection-mode").addClass("icon-check-circle");
+            $("#selection-mode").removeClass("icon-close-circle");
+        }
     });
 
     $("#display-mode").fipo("tap", "click", function(e) {
@@ -29,9 +37,15 @@ jQuery(function($) {
         var dispMode = gl.getDisplayMode();
         switch (dispMode) {
             case CUI.CardView.DISPLAY_GRID:
+                $("#display-mode").removeClass("icon-viewlist");
+                $("#display-mode").addClass("icon-viewgrid");
+                $("#selection-mode").hide();
                 gl.setDisplayMode(CUI.CardView.DISPLAY_LIST);
                 break;
             case CUI.CardView.DISPLAY_LIST:
+                $("#display-mode").removeClass("icon-viewgrid");
+                $("#display-mode").addClass("icon-viewlist");
+                $("#selection-mode").show();
                 gl.setDisplayMode(CUI.CardView.DISPLAY_GRID);
                 break;
         }

@@ -1,7 +1,6 @@
 /*
  * TODO - provide a "sync" method that syncs view and model
  * TODO - prepend/append list items
- * TODO - select all
  * TODO - reordering in list view
  */
 
@@ -49,6 +48,9 @@
                 },
                 "grid": function($target) {
                     return $target.closest("article");
+                },
+                "header": function($target) {
+                    return $target.closest("header");
                 }
             },
             "gridSelect": {                             // defines the class that is used to trigger the grid selection mode
@@ -56,9 +58,7 @@
             },
             "selectAll": {                              // defines the "select all" config (list view only)
                 "selector": "header > i.select",
-                "resolver": function($target) {
-                    return $target.closest("header");
-                }
+                "cls": "selected"
             }
         }
 
@@ -215,6 +215,12 @@
 
         getHeaderAt: function(pos) {
             return this.headers[pos];
+        },
+
+        getHeaders: function() {
+            var headers = [ ];
+            headers.push.apply(headers, this.headers);
+            return headers;
         },
 
         getHeaderForEl: function($el) {
@@ -404,6 +410,7 @@
                 self._drawImage($(this));
             });
             $(selector).load(function() {
+                self._removeSelectedGrid($(this).closest(self.selectors.itemSelector));
                 self._drawImage($(this));
             });
         },
@@ -426,6 +433,7 @@
             // redraw if image has not been loaded (fully) yet
             var self = this;
             $img.load(function() {
+                self._removeSelectedGrid(item);
                 self._drawImage($(this));
             });
         },
@@ -434,7 +442,10 @@
             if (!this.selectors.enableImageMultiply) {
                 return;
             }
-            var $itemEl = item.getItemEl();
+            var $itemEl = item;
+            if (!$itemEl.jquery) {
+                $itemEl = item.getItemEl();
+            }
             $itemEl.find("canvas.multiplied").remove();
         }
 
@@ -485,10 +496,15 @@
                 this.selectors.controller.selectAll.selector, function(e) {
                     var widget = Utils.getWidget(self.$el);
                     if (widget.getDisplayMode() === DISPLAY_LIST) {
-                        var $header = self.selectors.controller.selectAll.resolver(
+                        var cls = self.selectors.controller.selectAll.cls;
+                        var $header = self.selectors.controller.targetToItem.header(
                                 $(e.target));
                         var header = widget.getModel().getHeaderForEl($header);
-                        // console.log("header clicked: ", header);
+                        if ($header.hasClass(cls)) {
+                            widget.deselectAll(header);
+                        } else {
+                            widget.selectAll(header);
+                        }
                     }
                 });
             // block click event for cards
@@ -501,6 +517,25 @@
                         e.preventDefault();
                     }
                 });
+            // handle select all state
+            this.$el.on("change:selection", function(e) {
+                if (e.moreSelectionChanges) {
+                    return;
+                }
+                var cls = self.selectors.controller.selectAll.cls;
+                var selectionState = e.widget.getHeaderSelectionState();
+                var headers = selectionState.headers;
+                var headerCnt = headers.length;
+                for (var h = 0; h < headerCnt; h++) {
+                    var header = headers[h];
+                    var $header = header.header.getHeaderEl();
+                    if (header.hasUnselected) {
+                        $header.removeClass(cls);
+                    } else {
+                        $header.addClass(cls);
+                    }
+                }
+            });
         },
 
         getItemElFromEvent: function(e) {
@@ -771,25 +806,90 @@
             }
         },
 
-        selectAll: function(header) {
+        _headerSel: function(headers, selectFn) {
             var model = this.adapter.getModel();
-            if (header.jQuery) {
-                header = model.getHeaderForEl(header);
+            if (headers == null) {
+                headers = model.getHeaders();
             }
-            var itemsToSelect = model.getItemsForHeader(header);
-            var itemCnt = itemsToSelect.length;
-            var finalItem = (itemCnt - 1);
-            for (var i = 0; i < itemCnt; i++) {
-                this.select(itemsToSelect[i], (i < finalItem));
+            if (!$.isArray(headers)) {
+                headers = [ headers ];
+            }
+            var headerCnt = headers.length;
+            for (var h = 0; h < headerCnt; h++) {
+                var header = headers[h];
+                if (header.jquery) {
+                    header = model.getHeaderForEl(header);
+                }
+                var itemsToSelect = model.getItemsForHeader(header);
+                var itemCnt = itemsToSelect.length;
+                var finalItem = (itemCnt - 1);
+                for (var i = 0; i < itemCnt; i++) {
+                    selectFn.call(this, itemsToSelect[i], (i < finalItem));
+                }
             }
         },
 
+        selectAll: function(headers) {
+            this._headerSel(headers, this.select);
+        },
+
+        deselectAll: function(headers) {
+            this._headerSel(headers, this.deselect);
+        },
+
+        getHeaderSelectionState: function() {
+            var model = this.getModel();
+            var curHeader = null;
+            var state = {
+                "selected": [ ],
+                "hasUnselected": false,
+                "headers": [ ]
+            };
+            var headerCnt = model.getHeaderCount();
+            var itemCnt = model.getItemCount();
+            for (var i = 0; i < itemCnt; i++) {
+                var item = model.getItemAt(i);
+                for (var h = 0; h < headerCnt; h++) {
+                    var header = model.getHeaderAt(h);
+                    if (header.getItemRef() === item) {
+                        curHeader = {
+                            "header": header,
+                            "selected": [ ],
+                            "hasUnselected": false
+                        };
+                        state.headers.push(curHeader);
+                        break;
+                    }
+                }
+                if (this.isSelected(item)) {
+                    if (curHeader !== null) {
+                        curHeader.selected.push(item);
+                    } else {
+                        state.selected.push(item);
+                    }
+                } else {
+                    if (curHeader !== null) {
+                        curHeader.hasUnselected = true;
+                    } else {
+                        state.hasUnselected = true;
+                    }
+                }
+            }
+            return state;
+        },
+
         layout: function() {
+            if (this.getDisplayMode() !== DISPLAY_GRID) {
+                return;
+            }
             this.$element.removeData('cuigridlayout');
             this.$element.cuigridlayout();
         },
 
         relayout: function() {
+            if (this.getDisplayMode() !== DISPLAY_GRID) {
+                return;
+            }
             this.$element.cuigridlayout("layout");
         },
 

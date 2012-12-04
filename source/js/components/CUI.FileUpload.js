@@ -25,6 +25,7 @@
          @param {String}   [options.name="file"]                      (Optional) name for an underlying form field.
          @param {String}   [options.placeholder=null]                 Define a placeholder for the input field
          @param {String}   [options.uploadUrl=null]                   URL where to upload the file
+         @param {String}   [options.uploadUrlBuilder=null]            Upload URL builder
          @param {boolean}  [options.disabled=false]                   Is this component disabled?
          @param {boolean}  [options.multiple=false]                   Can the user upload more than one file?
          @param {Object}   [options.mimeTypes=null]                   Restrict upload to mime types
@@ -51,6 +52,7 @@
             name: "file",
             placeholder: null,
             uploadUrl: null,
+            uploadUrlBuilder: null,
             disabled: false,
             multiple: false,
             mimeTypes: null,
@@ -125,6 +127,15 @@
                 this._registerEventHandler("fileselected", function(event) {
                     event.fileUpload.uploadFile(event.item);
                 });
+            }
+
+            // URL built via JavaScript function
+            if (this.options.uploadUrlBuilder) {
+                this.options.uploadUrl = this.options.uploadUrlBuilder(this);
+            }
+
+            if (!this.options.uploadUrl || /\$\{.+\}/.test(this.options.uploadUrl)) {
+                this.options.disabled = true;
             }
 
             this._update();
@@ -269,6 +280,9 @@
             }
             if (this.$element.attr("data-upload-url")) {
                 this.options.uploadUrl = this.$element.attr("data-upload-url");
+            }
+            if (this.$element.attr("data-upload-url-builder")) {
+                this.options.uploadUrlBuilder = CUI.util.buildFunction(this.$element.attr("data-upload-url-builder"), ["fileUpload"]);
             }
             if (this.$element.attr("data-size-limit")) {
                 this.options.sizeLimit = this.$element.attr("data-size-limit");
