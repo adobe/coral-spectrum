@@ -166,16 +166,18 @@
      */
     var DirectMarkupModel = new Class({
 
-        items: [ ],
+        items: null,
 
-        headers: [ ],
+        headers: null,
 
         construct: function($el, selectors) {
+            this.items = [ ];
             var $items = $el.find(selectors.itemSelector);
             var itemCnt = $items.length;
             for (var i = 0; i < itemCnt; i++) {
                 this.items.push(new Item($($items[i])));
             }
+            this.headers = [ ];
             var $headers = $el.find(selectors.headerSelector);
             var headerCnt = $headers.length;
             for (var h = 0; h < headerCnt; h++) {
