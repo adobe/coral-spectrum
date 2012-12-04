@@ -156,6 +156,10 @@
 
         getItemRef: function() {
             return this.itemRef;
+        },
+
+        setItemRef: function(itemRef) {
+            this.itemRef = itemRef;
         }
 
     });
@@ -166,19 +170,22 @@
      */
     var DirectMarkupModel = new Class({
 
+        $el: null,
+
         items: null,
 
         headers: null,
 
         construct: function($el, selectors) {
+            this.$el = $el;
             this.items = [ ];
-            var $items = $el.find(selectors.itemSelector);
+            var $items = this.$el.find(selectors.itemSelector);
             var itemCnt = $items.length;
             for (var i = 0; i < itemCnt; i++) {
                 this.items.push(new Item($($items[i])));
             }
             this.headers = [ ];
-            var $headers = $el.find(selectors.headerSelector);
+            var $headers = this.$el.find(selectors.headerSelector);
             var headerCnt = $headers.length;
             for (var h = 0; h < headerCnt; h++) {
                 var $header = $($headers[h]);
@@ -209,6 +216,36 @@
                 }
             }
             return undefined;
+        },
+
+        insertItemAt: function($item, pos) {
+            if (!$item.jquery) {
+                $item = $($item);
+            }
+            var followupItem = null;
+            var item = new Item($item);
+            if (pos === true) {
+                this.items.push(item);
+                pos = this.items.length - 1;
+            } else {
+                followupItem = this.items[pos];
+                this.items.splice(pos, 0, item);
+            }
+            this.$el.trigger($.Event("change:insertitem", {
+                "item": item,
+                "followupItem": followupItem,
+                "pos": pos,
+                "widget": Utils.getWidget(this.$el)
+            }));
+            // adjust header references if item is inserted directly behind a header
+            var headerCnt = this.headers.length;
+            for (var h = 0; h < headerCnt; h++) {
+                var header = this.headers[h];
+                if (header.getItemRef() === followupItem) {
+                    header.setItemRef(followupItem);
+                }
+            }
+            return item;
         },
 
         getHeaderCount: function() {
@@ -309,6 +346,34 @@
                 self.cleanupAfterLayoutMode(oldMode);
                 self.prepareLayoutMode(newMode);
             });
+            this.$el.on("change:insertitem", function(e) {
+                self._onItemInserted(e);
+            });
+        },
+
+        _onItemInserted: function(e) {
+            var $dataRoot = this.$el;
+            if (this.selectors.dataContainer) {
+                $dataRoot = $dataRoot.find("." + this.selectors.dataContainer);
+            }
+            var $item = e.item.getItemEl();
+            var followupItem = e.followupItem;
+            var $followup = (followupItem ? followupItem.getItemEl() : undefined);
+            switch (this.getDisplayMode()) {
+                case DISPLAY_LIST:
+                    if (!followupItem) {
+                        $dataRoot.append($item);
+                    } else {
+                        $followup.before($item);
+                    }
+                    break;
+                case DISPLAY_GRID:
+                    // TODO optimize - only relayout the necessary items
+                    var widget = Utils.getWidget(this.$el);
+                    widget._restore();
+                    widget.layout();
+                    break;
+            }
         },
 
         getDisplayMode: function() {

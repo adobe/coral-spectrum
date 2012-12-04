@@ -1,6 +1,8 @@
 
 jQuery(function($) {
 
+    var newCard = 0;
+
     // Initialize grid & attach widget
     var $grid = $(".grid");
     $grid.cardView();
@@ -30,6 +32,34 @@ jQuery(function($) {
             $("#selection-mode").addClass("icon-check-circle");
             $("#selection-mode").removeClass("icon-close-circle");
         }
+    });
+
+    function createNewCard() {
+        return $("<article class=\"card-page\">" +
+                "<i class=\"select\"></i>" +
+                "<i class=\"move\"></i>" +
+                "<a href=\"#\">" +
+                    "<span class=\"image\"><img src=\"images/previews/preview1.png\" alt=\"\"></span>" +
+                    "<div class=\"label\">" +
+                        "<h4 class=\"main\">New Card #" + (++newCard) + "</h4>" +
+                        "<div class=\"info\">" +
+                            "<p class=\"published\"><i class=\"icon-site\">Published</i> <span class=\"date\">12 hours ago</span> <span class=\"user\">Alison Parker</span></p>" +
+                            "<p class=\"modified\"><i class=\"icon-edit\">Modified</i> <span class=\"date\">2 days ago</span> <span class=\"user\">John Doe</span></p>" +
+                            "<p class=\"links\"><i class=\"icon-arrowright\">Link</i> <span class=\"links-number\">3</span></p>" +
+                        "</div>" +
+                    "</div>" +
+                "</a>" +
+            "</article>");
+    }
+
+    $("#prepend").fipo("tap", "click", function(e) {
+        var $itemEl = createNewCard();
+        CUI.CardView.get($grid).getModel().insertItemAt($itemEl, 0);
+    });
+
+    $("#append").fipo("tap", "click", function(e) {
+        var $itemEl = createNewCard();
+        CUI.CardView.get($grid).getModel().insertItemAt($itemEl, true);
     });
 
     $("#display-mode").fipo("tap", "click", function(e) {
