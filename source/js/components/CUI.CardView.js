@@ -116,6 +116,132 @@
 
     };
 
+    var ListItemMoveHandler = new Class({
+
+        $listEl: null,
+
+        $itemEl: null,
+
+        $items: null,
+
+        $doc: null,
+
+        dragCls: null,
+
+        construct: function(config) {
+            this.$listEl = config.$listEl;
+            this.$itemEl = config.$itemEl;
+            this.$items = config.$items;
+            this.dragCls = config.dragCls;
+        },
+
+        _getEventCoords: function(e) {
+            if (!e.originalEvent.touches) {
+                return {
+                    x: e.pageX,
+                    y: e.pageY
+                };
+            }
+            return (e.originalEvent.touches.length > 0 ? {
+                x: e.originalEvent.touches[0].pageX,
+                y: e.originalEvent.touches[0].pageY
+            } : e.originalEvent.changedTouches.length > 0 ? {
+                x: e.originalEvent.changedTouches[0].pageX,
+                y: e.originalEvent.changedTouches[0].pageY
+            } : {
+                x: e.pageX,
+                y: e.pageY
+            });
+        },
+
+        _limit: function(top, left) {
+            if (left < this.listOffset.left) {
+                left = this.listOffset.left;
+            }
+            if (top < this.listOffset.top) {
+                top = this.listOffset.top;
+            }
+            var right = left + this.size.width;
+            var bottom = top + this.size.height;
+            var limitRight = this.listOffset.left + this.listSize.width;
+            var limitBottom = this.listOffset-top + this.listSize.height;
+            if (right > limitRight) {
+                left = limitRight - this.size.width;
+            }
+            if (bottom > limitBottom) {
+                top = limitBottom - this.size.height;
+            }
+            return {
+                "top": top,
+                "left": left
+            };
+        },
+
+        start: function(e) {
+            console.log("start dragging", e);
+            var evtPos = this._getEventCoords(e);
+            if (this.dragCls) {
+                this.$itemEl.addClass(this.dragCls);
+            }
+            var self = this;
+            this.$doc = $(document);
+            this.$doc.fipo("touchmove.listview.drag", "mousemove.listview.drag",
+                function(e) {
+                    self.move(e);
+                });
+            this.$doc.fipo("touchend.listview.drag", "mouseup.listview.drag",
+                function(e) {
+                    self.end(e);
+                });
+            this.offset = this.$itemEl.offset();
+            this.delta = {
+                "left": evtPos.x - this.offset.left,
+                "top": evtPos.y - this.offset.top
+            };
+            this.size = {
+                "width": this.$itemEl.width(),
+                "height": this.$itemEl.height()
+            };
+            this.listOffset = this.$listEl.offset();
+            this.listSize = {
+                "width": this.$listEl.width(),
+                "height": this.$listEl.height()
+            };
+            e.stopPropagation();
+            e.preventDefault();
+            /*
+            console.log("offset", this.offset, "delta", this.delta, "size", this.size,
+                "listoffs", this.listOffset, "listsize", this.listSize);
+            */
+        },
+
+        move: function(e) {
+            // console.log("move", e);
+            var evtPos = this._getEventCoords(e);
+            var left = evtPos.x - this.delta.left;
+            var top = evtPos.y - this.delta.top;
+            this.$itemEl.offset(this._limit(top, left));
+            e.stopPropagation();
+            e.preventDefault();
+        },
+
+        end: function(e) {
+            // console.log("end", e);
+            if (this.dragCls) {
+                this.$itemEl.removeClass(this.dragCls);
+            }
+            this.$itemEl.css("position", "");
+            this.$itemEl.css("top", "");
+            this.$itemEl.css("left", "");
+            this.$doc.off("touchmove.listview.drag");
+            this.$doc.off("mousemove.listview.drag");
+            this.$doc.off("touchend.listview.drag");
+            this.$doc.off("mouseup.listview.drag");
+            e.stopPropagation();
+            e.preventDefault();
+        }
+
+    });
 
     /*
      * This class represents a single item in the list model.
@@ -612,6 +738,18 @@
                         e.stopPropagation();
                         e.preventDefault();
                     }
+                });
+            // reordering
+            this.$el.fipo("touchstart.cardview.reorder", "mousedown.cardview.reorder",
+                this.selectors.controller.moveHandleElement.list, function(e) {
+                    var $itemEl = self.getItemElFromEvent(e);
+                    var handler = new ListItemMoveHandler({
+                        $listEl: self.$el,
+                        $itemEl: $itemEl,
+                        $items: $(self.selectors.itemSelector),
+                        dragCls: "dragging"
+                    });
+                    handler.start(e);
                 });
             // handle select all state
             this.$el.on("change:selection", function(e) {
