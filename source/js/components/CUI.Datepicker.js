@@ -197,7 +197,11 @@
         if (this.useNativeControls) {
             this.displayDateTime = this.options.selectedDateTime = moment(this.$input.val(), this.options.displayedFormat);
         }
-        
+        //Convert for first display
+        if (this.options.displayedFormat) {
+            var date = moment(this.$input.val());
+            if (date) this.$input.val(date.format(this.options.displayedFormat));
+        }
         this._convertToStorage();
     },
     
