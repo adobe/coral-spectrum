@@ -5,7 +5,7 @@
 .progress {
   display: inline-block;
 
-  width: 12rem;
+  width:  @progress-width;
   height: @progress-height;
 
   border: @px solid @progress-border-color;
@@ -14,7 +14,7 @@
 
   .pinstripe(@progress-background-color, @progress-background-stripe-color);
 
-  .background-size(@progress-stripe-size, @progress-stripe-size);
+  .background-size(@progress-stripe-size);
 
   vertical-align: top;
 
