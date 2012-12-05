@@ -53,18 +53,18 @@
         selectedDateTime: moment(),
         startDay: 0,
         disabled: false,
-        displayedFormat: 'YYYY-MM-DD[T]HH:mm',
-        storedFormat: 'YYYY-MM-DD[T]HH:mm',
+        displayedFormat: 'YYYY-MM-DD HH:mm',
+        storedFormat: 'YYYY-MM-DD[T]HH:mmZ',
         forceHTMLMode: false,
         required: false
     },
     
     displayDateTime: null,
     pickerShown: false,
-    isMobileAndSupportsInputType: false,
-    internFormat: 'YYYY-MM-DD[T]HH:mm[Z]',
+    useNativeControls: false,
+    internFormat: 'YYYY-MM-DD[T]HH:mmZ',
     officialDateFormat: 'YYYY-MM-DD',
-    officialTimeFormat: 'YYYY-MM-DD[T]HH:mm[Z]',
+    officialTimeFormat: 'YYYY-MM-DD[T]HH:mmZ',
     officialDatetimeFormat: 'HH:mm',
 
     construct: function(options) {
@@ -72,9 +72,6 @@
         var $button = this.$element.find('>button');
         if ($button.attr('type') === undefined) {
             $button[0].setAttribute('type', 'button');
-        }
-        if ($button.attr('required')) {
-            this.options.required = true;
         }
 
         this.options.monthNames = this.options.monthNames || CUI.Datepicker.monthNames;
@@ -85,15 +82,17 @@
         this._readDataFromMarkup();
 
         if(this._isSupportedMobileDevice() && this._supportsInputType(this.options.type)) {
-            this.isMobileAndSupportsInputType = true;
+            this.useNativeControls = true;
         }
 
-        this._addMissingElements();
+        this._adjustMarkup();
         this._updateState();
 
         this.$openButton = this.$element.find('button');
 
-        this.$input = this.$element.find('input');
+        this.$input = this.$element.find('input').not("[type=hidden]");
+        this.$hiddenInput = this.$element.find('input[type=hidden]');
+        
 
         this._readInputVal();
 
@@ -104,7 +103,7 @@
         }
 
         // If HTML5 input is used, then force to use the official format.
-        if (this.isMobileAndSupportsInputType) {
+        if (this.useNativeControls) {
             if (this.options.type === 'date') {
                 this.options.displayedFormat = this.officialDateFormat;
                 this.options.storedFormat = this.officialDateFormat;
@@ -119,13 +118,13 @@
             this._setDateTime(this.displayDateTime);
         }
         
-        if(!this.isMobileAndSupportsInputType) {
+        if(!this.useNativeControls) {
             this._switchInputTypeToText(this.$input);
         }
 
         var timeout = null;
-        var $input = this.$element.find('input').first();
-        var $btn = this.$element.find('button').first();
+        var $input = this.$input;
+        var $btn = this.$openButton;
         var $popover = this.$element.find('.popover').first();
 
         if (!this.options.disabled) {
@@ -151,6 +150,7 @@
             if (this.options.disabled) return;
             this.displayDateTime = this.options.selectedDateTime = moment(this.$input.val(), this.options.displayedFormat);
             this._renderCalendar();
+            this._convertToStorage();
         }.bind(this));
 
         // Move around
@@ -194,14 +194,20 @@
         }
 
 
-        if (this.isMobileAndSupportsInputType) {
+        if (this.useNativeControls) {
             this.displayDateTime = this.options.selectedDateTime = moment(this.$input.val(), this.options.displayedFormat);
         }
+        
+        this._convertToStorage();
     },
     
     _readDataFromMarkup: function() {
         if (this.$element.data("disabled")) {
             this.options.disabled = true;
+        }
+        
+        if (this.$element.data('required')) {
+            this.options.required = true;
         }
 
         var $input = $(this.$element.find("input").filter("[type^=date],[type=time]"));
@@ -209,16 +215,17 @@
             this.options.type = $input.attr("type");
         }
 
-        if ($input.data('displayed-format') !== undefined) {
-            this.options.displayedFormat = $input.data('displayedFormat');
+        var el = this.$element;
+        if (el.data('displayed-format') !== undefined) {
+            this.options.displayedFormat = el.data('displayed-format');
         }
 
-        if ($input.data('stored-format') !== undefined) {
-            this.options.storedFormat = $input.data('storedFormat');
+        if (el.data('stored-format') !== undefined) {
+            this.options.storedFormat = el.data('stored-format');
         }
 
-        if (this.$element.data('force-html-mode') !== undefined) {
-            this.options.forceHTMLMode = this.$element.data('forceHtmlMode');
+        if (el.data('force-html-mode') !== undefined) {
+            this.options.forceHTMLMode = el.data('force-html-mode');
         }
     },
 
@@ -261,7 +268,7 @@
     _openPicker: function() {
         this.$element.addClass("focus");
 
-        if(!this.isMobileAndSupportsInputType) {
+        if(!this.useNativeControls) {
             this._readInputVal();
             this._showPicker();
         } else {
@@ -289,15 +296,31 @@
         this.pickerShown = false;
     },
     
-    _addMissingElements: function() {
-        if (!this.isMobileAndSupportsInputType) {
+    _adjustMarkup: function() {
+        if (!this.useNativeControls) {
             if (this.$element.find(".popover").length === 0) {
                 this.$element.append('<div class="popover arrow-top" style="display:none"><div class="inner"></div></div>');
                 if(this._isDateEnabled()) this.$element.find(".inner").append('<div class="calendar"><div class="calendar-header"></div><div class="calendar-body"></div></div>');
             }
+            if (this.$element.find("input").not("[type=hidden]").length === 0) {
+                this.$element.append("<input type=\"text\">");
+            }
+
         } else {
             // Show native control
         }
+
+        // Always include hidden field
+        if (this.$element.find("input[type=hidden]").length === 0) {
+            this.$element.append("<input type=\"hidden\">");
+        }
+        
+        if (!this.$element.find("input[type=hidden]").attr("name")) {
+            var name = this.$element.find("input").not("[type=hidden]").attr("name");
+            this.$element.find("input[type=hidden]").attr("name",name);
+            this.$element.find("input").not("[type=hidden]").removeAttr("name");
+        }
+                    
     },
     
     _renderCalendar: function(slide) {
@@ -449,9 +472,16 @@
 
         this.options.selectedDateTime = this.displayDateTime = date;
 
+        this._convertToStorage();
+            
         if(this.options.type !== "time") {
             this._renderCalendar();
         }
+    },
+    
+    _convertToStorage: function() {
+         var string = (this.options.selectedDateTime) ? this.options.selectedDateTime.format(this.options.storedFormat) : "";     
+         this.$hiddenInput.val(string);
     },
 
     _getTimeFromInput: function() {
@@ -476,7 +506,7 @@
         var html = $("<div class='time'><i class='icon-clock small'></i></div>");
 
         // Hours
-        var hourSelect = $('<select name="dropdown"></select>');
+        var hourSelect = $('<select></select>');
         for(var h = 0; h < 24; h++) {
             var hourOption = $('<option>' + this._pad(h) + '</option>');
             if(this.options.selectedDateTime && h === this.options.selectedDateTime.hours()) { hourOption.attr('selected','selected'); }
@@ -485,7 +515,7 @@
         var hourDropdown = $('<div class="dropdown hour"><button></button></input>').append(hourSelect);
 
         // Minutes
-        var minuteSelect = $('<select name="dropdown"></select>');
+        var minuteSelect = $('<select></select>');
         for(var m = 0; m < 60; m++) {
             var minuteOption = $('<option>' + this._pad(m) + '</option>');
             if(this.options.selectedDateTime && m === this.options.selectedDateTime.minutes()) { minuteOption.attr('selected', 'selected'); }
@@ -557,7 +587,6 @@
   
   CUI.Datepicker.monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   CUI.Datepicker.dayNames = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
-  CUI.Datepicker.format = "Y-m-d";
 
   CUI.util.plugClass(CUI.Datepicker);
 
