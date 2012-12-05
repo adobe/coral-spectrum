@@ -345,8 +345,9 @@
             var headerCnt = $headers.length;
             for (var h = 0; h < headerCnt; h++) {
                 var $header = $($headers[h]);
-                var $itemRef = $header.next(selectors.itemSelector);
-                var itemRef = this.getItemForEl($itemRef);
+                var $itemRef = $header.nextAll(selectors.itemSelector);
+                var itemRef = ($itemRef.length > 0 ?
+                        this.getItemForEl($($itemRef[0])) : undefined);
                 this.headers.push(new Header($header, itemRef));
             }
         },
