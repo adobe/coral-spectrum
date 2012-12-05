@@ -24,7 +24,7 @@
          @param {Object}   options                                    Component options
          @param {Array}    [options.options=empty array]              Array of available options (will be read from &lt;select&gt; by default)
          @param {Array}    [options.optionDisplayStrings=empty array] Array of alternate strings for display (will be read from &lt;select&gt; by default)
-         @param {Function} [options.optionLoader=use options]         (Optional) Callback to reload options list
+         @param {Function} [options.optionLoader=use options]         (Optional) Callback to reload options list. Can be synch or asynch. In case of asynch handling, use second parameter as callback function: optionLoader(string currentPath, function callback) with callback(array resultArray)
          @param {String}   [options.optionLoaderRoot=use options]     (Optional) Nested key to use as root to retrieve options from the option loader result
          @param {Function} [options.optionValueReader=use options]    (Optional) Custom function to call to retrieve the value from the option loader result
          @param {Function} [options.optionTitleReader=use options]    (Optional) Custom function to call to retrieve the title from the option loader result
@@ -104,7 +104,7 @@
                 this.setSelectedIndex(event.selectedValue * 1);
             }.bind(this));
 
-            this.$element.on("focus", "input", function() {
+            this.$element.on("focus", "input", function(event) {
                 if (this.options.disabled) {
                     return;
                 }
@@ -118,10 +118,11 @@
                 this.$element.removeClass("focus");
             }.bind(this));
 
-            this.$element.on("click touchend", "input", function() {
+            this.$element.on("click touchend", "input", function(event) {
                 if (this.options.disabled) {
                     return;
                 }
+                
                 this.inputElement.focus();
                 this._inputChanged();
             }.bind(this));
@@ -269,7 +270,7 @@
             }
 
             // Register a callback function for option loader if defined
-            var optionLoader = CUI.util.buildFunction(this.$element.attr("data-option-loader"), ["path"]);
+            var optionLoader = CUI.util.buildFunction(this.$element.attr("data-option-loader"), ["path", "callback"]);
             if (optionLoader) {
                 this.options.optionLoader = optionLoader.bind(this);
             }
@@ -454,7 +455,14 @@
                         }
                     }
                 );
-                loaderDef.resolve(loader.loadOptions(path));
+                
+                // Asynch optionLoader
+                var results = loader.loadOptions(path, function(data) {
+                    loaderDef.resolve(data);
+                });
+                
+                //  Synch optionLoader
+                if (results) loaderDef.resolve(results);
 
             } else {
                 def.resolve(self._filterOptions(path));

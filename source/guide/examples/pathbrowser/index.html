@@ -26,6 +26,14 @@
     <br/>
     This uses relative paths in a standard option loader.
 
+    <h2>Connect to local CQ5</h2>
+    Path:
+    <select name="path-class" class="pathbrowsercq5"></select>
+    <br/>
+    This example will fail because you will most probably not have a CQ instance running on the same host. But the optionLoader
+    can be used as template for Granite UI (see source code).
+    
+
     <h2>Create from jQuery</h2>
     Path:
     <input type="text" name="path-jquery" placeholder="Enter path"/>
@@ -158,8 +166,24 @@
     };
 
     // Option loader function
-    var optionLoader = function(path) {
-        return window.options[path] || [];
+    var optionLoader = function(path, callback) {
+        callback(window.options[path] || []);
+        return false;
+    };
+    
+    var cq5Loader = function(path, callback) {
+        jQuery.get(path + ".pages.json", {
+            predicate: "hierarchyNotFile"
+        },
+        function(data) {
+            var pages = data.pages;
+            var result = [];
+            for(var i = 0; i < pages.length; i++) {
+                result.push(pages[i].label);
+            }
+            if (callback) callback(result);
+        }, "json");
+        return false;
     };
 
     // Option loader function which root and inner structure is not the same
@@ -200,6 +224,11 @@
     ;
 
     $(document).ready(function() {
+        // Create from class
+        $("select.pathbrowsercq5").pathBrowser({
+            optionLoader: cq5Loader
+        });
+        
         // Create from class
         $("select.pathbrowser").pathBrowser({
             optionLoader: optionLoader
