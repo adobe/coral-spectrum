@@ -20,6 +20,16 @@
             &lt;input type=&quot;datetime&quot; value=&quot;1987-04-06T20:35Z&quot;&gt;
             &lt;button&gt;&lt;span class=&quot;icon-calendar small&quot;&gt;Datetime picker&lt;/span&gt;&lt;/button&gt;
         &lt;/div&gt;
+        
+Currently there are the following data options:
+  data-init="datepicker"         Inits the datepicker widget after page load
+  data-disabled                  Sets field to "disabled" if given (with any non-empty value)
+  data-required                  Sets field to "required" if given (with any non-empty value)
+  data-stored-format             Sets the format of the date for transferring it to the server
+  data-displayed-format          Sets the format of the date for displaying it to the user
+  data-force-html-mode           Force to HTML mode and never use a native Date widget, if given (with any non-empty value)
+
+Additionally the type (date, time, datetime) is read from the &lt;input&gt; field.
 
         @example
         <caption>Instantiate with Class</caption>
@@ -41,7 +51,8 @@
       @param {String} [options.type="date"]                   Type of picker, supports date, datetime, datetime-local and time
       @param {integer} [options.startDay=0]                   Defines the start day for the week, 0 = Sunday, 1 = Monday etc.
       @param {boolean} [options.disabled=false]               Is this widget disabled?
-      @param {String} [options.displayedFormat="YYYY-MM-DD[T]HH:mm[Z]"]         Displayed date (userfriendly), default is 2012-10-20T20:35Z
+      @param {String} [options.displayedFormat="YYYY-MM-DD[T]HH:mm[Z]"]           Displayed date (userfriendly), default is 2012-10-20 20:35
+      @param {String} [options.storedFormat="YYYY-MM-DD[T]HH:mmZ"]    Storage Date format, is never shown to the user, but transferred to the server 
       @param {String} [options.required=false]                 Is a value required?
     */
     
@@ -231,6 +242,7 @@
         if (el.data('force-html-mode') !== undefined) {
             this.options.forceHTMLMode = el.data('force-html-mode');
         }
+                
     },
 
     _readInputVal: function() {
