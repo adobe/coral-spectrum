@@ -252,6 +252,8 @@ modal.hide();
     _show: function() {
       $('body').addClass('modal-open');
 
+      this.$element.trigger($.Event("beforeshow"));
+
       this._toggleBackdrop(true);
       this._setEscapeHandler(true);
 
