@@ -271,6 +271,11 @@
 
             // remove old columns
             $cols.remove();
+        },
+
+        destroy: function() {
+            $window.unbind("smartresize.cui.gridlayout");
+            this.element.removeData("cuigridlayout");
         }
     };
 

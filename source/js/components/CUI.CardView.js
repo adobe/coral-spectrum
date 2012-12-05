@@ -878,6 +878,7 @@
                         }
                         break;
                     case DISPLAY_LIST:
+                        this.$el.cuigridlayout("destroy");
                         this.$el.removeClass("grid");
                         this.$el.addClass("list");
                         break;
@@ -1167,7 +1168,9 @@
             if (this.getDisplayMode() !== DISPLAY_GRID) {
                 return;
             }
-            this.$element.removeData('cuigridlayout');
+            if (this.$element.data('cuigridlayout')) {
+                this.$element.cuigridlayout("destroy");
+            }
             this.$element.cuigridlayout();
         },
 
