@@ -71,7 +71,6 @@
     containerElement: null,
     currentIndex: -1,
     preventHiding: false,
-    hackyPositioningInterval: null,
     
     /**
      * Show this list
@@ -206,11 +205,7 @@
         }
     },
     /** @ignore */    
-    _unrender: function() {
-        if (this.hackyPositioningInterval) {
-            clearInterval(this.hackyPositioningInterval);
-            this.hackyPositioningInterval = null;
-        }        
+    _unrender: function() {       
         if (this.listElement) {
             this.listElement.remove();
             this.listElement = null;  
@@ -271,17 +266,6 @@
 
         el.after(list);
         this.listElement = list;
-
-        /*
-        this.hackyPositioningInterval = setInterval(function() {
-            var left2 = el.offset().left + parseFloat(el.css("margin-left"));
-            var top2 = el.offset().top + el.outerHeight(true) - parseFloat(el.css("margin-bottom"));
-            if (left2 === left && top2 === top) return;
-            left = left2;
-            top = top2;
-            list.css({left: left + "px", 
-                      top: top + "px"});                       
-        }.bind(this), 100);*/
 
         this.options.visible = true;
 
