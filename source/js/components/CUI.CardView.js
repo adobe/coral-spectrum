@@ -177,8 +177,39 @@
             };
         },
 
+        _adjustPosition: function(e) {
+            var evtPos = this._getEventCoords(e);
+            var left = evtPos.x - this.delta.left;
+            var top = evtPos.y - this.delta.top;
+            this.$itemEl.offset(this._limit(top, left));
+        },
+
+        _changeOrderIfRequired: function() {
+            var itemPos = this.$itemEl.offset();
+            var hotX = itemPos.left + (this.size.width / 2);
+            var hotY = itemPos.top + (this.size.height / 2);
+            var $newTarget = null;
+            for (var i = 0; i < this.$items.length; i++) {
+                var $item = $(this.$items[i]);
+                if (!Utils.equals($item, this.$itemEl)) {
+                    var offs = $item.offset();
+                    var width = $item.width();
+                    var height = $item.height();
+                    if ((hotX >= offs.left) && (hotX < offs.left + width) &&
+                            (hotY >= offs.top) && (hotY < offs.top + height)) {
+                        $newTarget = $item;
+                        break;
+                    }
+                }
+            }
+            if ($newTarget) {
+                var _offs = this.$itemEl.offset();
+                $newTarget.after(this.$itemEl);
+                this.$itemEl.offset(_offs);
+            }
+        },
+
         start: function(e) {
-            console.log("start dragging", e);
             var evtPos = this._getEventCoords(e);
             if (this.dragCls) {
                 this.$itemEl.addClass(this.dragCls);
@@ -217,15 +248,14 @@
 
         move: function(e) {
             // console.log("move", e);
-            var evtPos = this._getEventCoords(e);
-            var left = evtPos.x - this.delta.left;
-            var top = evtPos.y - this.delta.top;
-            this.$itemEl.offset(this._limit(top, left));
+            this._adjustPosition(e);
+            this._changeOrderIfRequired();
             e.stopPropagation();
             e.preventDefault();
         },
 
         end: function(e) {
+            this._adjustPosition(e);
             // console.log("end", e);
             if (this.dragCls) {
                 this.$itemEl.removeClass(this.dragCls);
