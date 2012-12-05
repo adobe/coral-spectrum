@@ -26,6 +26,7 @@
 
 // Grid view: displays the card label as a banner that runs across the preview image (used by card-collection)
 .card-grid-banner(@background: @card-background-color, @border: @card-banner-border-color-white, @shadow-density: 0.5) {
+    @fold-color: mix(@background, @border, 50%);
     @card-grid-banner-margin: @card-grid-margin + 2*(@card-banner-offset+@px);
     .calc-width(~"100% - @{card-grid-banner-margin}rem");
     margin-left:  (@card-banner-offset+@px);
@@ -52,16 +53,16 @@
             height: 0;
             width: 0;
             border: (@card-banner-offset+@px)/2 solid transparent;
-            border-top-color: @border;
+            border-top-color: @fold-color;
             border-bottom-style: outset;
         }
         &:before {
             left: -@px;
-            border-right-color: @border;
+            border-right-color: @fold-color;
         }
         &:after {
             right: -@px;
-            border-left-color: @border;
+            border-left-color: @fold-color;
         }
     }
     &.selected .label {
@@ -119,6 +120,10 @@
             &.show-grid {
                 display: none;
             }
+        }
+        &.progress-bar {
+            width:  @width;
+            height: @height;
         }
     }
     .select[class] { // The [class] attribute helps to overrule the initial style

@@ -7,19 +7,6 @@
 
 // Grid view style
 .grid .card-asset {
-    // Small images should not be scaled up to 100% of the card width
-    .low-resolution {
-        display: block;
-        background: @card-asset-image-background;
-
-        > img,
-        > canvas {
-            margin: 0 auto;
-            padding: 1em 0;
-            width: auto;
-        }
-    }
-
     .user,
     .type {
         display: none;
@@ -40,6 +27,20 @@
         position: absolute;
         left: 0;
     }
+
+    // Class low-resolution: Small images should not be scaled up to 100% of the card width
+    .low-resolution {
+        display: block;
+        background: @card-asset-image-background;
+        padding: 1rem 0;
+        border-bottom: none;
+
+        > img,
+        > canvas {
+            margin: 0 auto;
+            width: auto;
+        }
+    }
 }
 
 // List view style
@@ -49,7 +50,6 @@
     h4, // The <h4> element is a <div class="main"> in the list header
     .main {
         width: 50%;
-        font-weight: normal;
     }
     .type,
     .resolution,
@@ -65,5 +65,53 @@
     }
     .modified {
         .card-list-date-user();
+    }
+}
+
+/**
+
+    Class: .card-asset.uploading
+    Progress bar displayed while assets are being uploaded.
+*/
+
+// Grid view style
+.grid .card-asset.uploading {
+    .progress-bar {
+        display: block;
+        background: @card-asset-image-upload-background;
+        padding: 1rem 0;
+        border-bottom: none;
+
+        .progress {
+            display: block;
+            margin: 1rem auto;
+        }
+    }
+}
+
+// List view style
+.list .card-asset.uploading {
+    h4 {
+        width: 60%;
+    }
+    p {
+        width: 40%;
+        text-align: right;
+    }
+    .label {
+        padding-right: @progress-width + 10*@px;
+    }
+    .progress-bar {
+        position: static;
+        background: @card-asset-image-upload-background;
+        
+        .progress {
+            position: absolute;
+            right: 0;
+            margin-top: 3*@px;
+        }
+    }
+    .move ~ div .progress {
+        right: 45*@px;
     }
 }
