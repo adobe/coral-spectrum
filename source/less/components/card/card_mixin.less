@@ -114,8 +114,11 @@
             width:  @width;
             height: @height;
         }
-        img.show-list {
+        img {
             display: @display-image;
+            &.show-grid {
+                display: none;
+            }
         }
     }
     .select[class] { // The [class] attribute helps to overrule the initial style
