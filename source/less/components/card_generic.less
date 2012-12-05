@@ -235,6 +235,24 @@
 // In grid view
 .grid [class^="card-"].selected,
 .grid [class*=" card-"].selected {
+    .select {
+        .icon-check-circle;
+        .icon-large;
+        .icon-size(@card-selection-icon-size);
+        display: block;
+        position: absolute;
+        z-index: 3;
+        width: @card-selection-icon-size;
+        height: @card-selection-icon-size;
+        margin: -@card-selection-icon-size -@card-selection-icon-size/2;
+        top: 50%;
+        left: 50%;
+
+        &:before {
+            color: @card-selection-icon-color;
+        }
+    }
+
     > a,
     > div {
         background: @card-selection-color;
