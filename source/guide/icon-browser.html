@@ -15,6 +15,7 @@
   <script src="js/libs/jquery.js"></script>
   <script src="js/libs/jquery-fingerpointer.js"></script>
   <script src="js/libs/toe.js"></script>
+  <script src="js/libs/moment.js"></script>
 
   
   <script src="js/google-code-prettify/prettify.js"></script>
@@ -43,61 +44,12 @@
     CUI.IconBrowser = new Class({
       Templates: {
         TableRow: Handlebars.compile([
-          '<tr><td><i class="{{selector}} medium"></i></td><td>{{name}}</td><td>{{selector}}</td></tr>'
-        ].join('\n')),
-        
-        Detail: Handlebars.compile([
-          '<section>',
-            '<h3>{{name}}</h3>',
-            '<p>Description here</p>',
-          '</section>',
-          
-          '<section>',
-            '<h5>Size</h5>',
-            '<div class="slider ticked">',
-                '<input type="range" name="iconSize" value="2" min="1" max="4" step="1">',
-            '</div>',
-          
-            '<h5>Label/Accessibility Text</h5>',
-            '<input type="text" name="iconLabelText" class="iconLabelText" value="{{name}}">',
-            '<label><input type="checkbox" name="iconLabel" value="1"><span></span> Show label</label><br>',
-
-            '<div class="left">',
-              '<h5>Usage</h5>',
-              '<label><input type="radio" name="iconTag" value="i" checked><span></span> Illustrative</label><br>',
-              '<label><input type="radio" name="iconTag" value="a"><span></span> Link</label><br>',
-              '<label><input type="radio" name="iconTag" value="button"><span></span> Action</label>',
-            '</div>',
-            
-            '<div class="left iconUIColorBox">',
-              '<h5>UI Color</h5>',
-              '<label><input type="radio" name="iconColor" value="light" checked><span></span> Light</label><br>',
-              '<label><input type="radio" name="iconColor" value="dark"><span></span> Dark</label>',
-            '</div>',
-            
-            '<div class="clear"></div>',
-            
-          '</section>',
-          
-          '<section>',
-            '<h4>Sample</h4>',
-          
-            '<div class="iconBoxContainer">',
-              '<div class="iconBox" id="iconSampleBox">',
-                '<a id="iconSample" href="#" class="{{selector}}">{{Name}}</a>',
-              '</div>',
-            '</div>',
-            
-            '<h4>HTML</h4>',
-            
-            '<code class="prettyprint" id="iconCode">&lt;i class=&quot;{{selector}}&quot;&gt;&lt;/i&gt;</code>',
-          '</section>',
-          
+          '<tr><td class="iconCell"><i class="{{selector}} medium"></i></td><td class="iconCell svgCell"><img src="images/icons/{{file}}"></td><td>{{name}}</td><td>{{selector}}</td></tr>'
         ].join('\n'))
       },
       
       construct: function(options) {
-        this.$searchField = $('#searchField');
+        this.$searchField = $('#iconSearchField');
         this.$tbody = $('#iconTable tbody');
         
         var that = this;
@@ -121,6 +73,14 @@
           that.filter(that.$searchField.val());
         });
         
+        // Show SVG column
+        $('input[name="showSVGs"]').on('change', function(evt) {
+          if (evt.target.checked)
+            $('.svgCell').show();
+          else
+            $('.svgCell').hide();
+        });
+        
         // Adjust sample
         $('#iconDetails').on('change', 'input[type="range"]', function(evt) {
           this.sample.size = evt.currentTarget.value;
@@ -132,8 +92,33 @@
           this.updateSample();
         }.bind(this));
         
-        $('#iconDetails').on('change', 'input[name="iconTag"]', function(evt) {
-          this.sample.tag = evt.currentTarget.value;
+        $('#iconDetails').on('change', 'input[name="buttonType"]', function(evt) {
+          this.sample.buttonType = evt.currentTarget.value;
+          this.updateSample();
+        }.bind(this));
+        
+        $('#iconDetails').on('change', 'input[name="iconUsage"]', function(evt) {
+          this.sample.usage = evt.currentTarget.value;
+          
+          if (this.sample.usage === 'button') {
+            $('#iconLabel').prop('checked', true).attr('disabled', true);
+            $('#buttonTypeBox').show();
+            
+            $('#iconSizeSlider').slider({
+              disabled: true,
+              value: 2
+            });
+            this.sample.size = 2;
+          }
+          else {
+            $('#iconLabel').prop('checked', this.sample.withLabel).attr('disabled', false);
+            $('#buttonTypeBox').hide();
+            
+            $('#iconSizeSlider').slider({
+              disabled: false
+            });
+          }
+          
           this.updateSample();
         }.bind(this));
         
@@ -160,7 +145,8 @@
         color: 'light',
         withLabel: false,
         labelText: '',
-        tag: 'i'
+        usage: 'illustrative',
+        buttonType: 'standard'
       },
       
       updateSample: function() {
@@ -174,10 +160,25 @@
         var withLabel = this.sample.withLabel;
         var label = this.sample.labelText;
         var color = this.sample.color === 'dark' ? 'white' : 'black';
-        var tag = this.sample.tag;
+        var tag = 'i';
+        if (this.sample.usage === 'link')
+          tag = 'a';
+        else if (this.sample.usage === 'action')
+          tag = 'button';
         
         // Create code
-        var html = '<'+tag;
+        var html = '';
+        
+        if (this.sample.usage === 'button') {
+          html += '<button';
+          
+          if (this.sample.buttonType !== 'standard')
+            html +=' class="'+this.sample.buttonType+'"';
+
+          html += '>';
+        }
+        
+        html += '<'+tag;
         
         if (tag === 'a')
           html += ' href="#"';
@@ -186,20 +187,32 @@
         
         html += ' '+size;
         
-        if (withLabel)
+        if (this.sample.usage !== 'button' && withLabel)
           html += ' withLabel';
         
-        if (color == 'white')
+        if (this.sample.usage !== 'button' && color == 'white')
           html += ' white';
           
         html += '"';
         
-        html += '>'+label+'</'+tag+'>';
+        html += '>';
         
+        if (this.sample.usage !== 'button')
+          html += label;
+        
+        html += '</'+tag+'>';
+        
+        if (this.sample.usage === 'button')
+          html += label+'</button>';
+          
         $('#iconSampleBox').html(html);
-        $('#iconCode').html(encodeEntities(html));
         
+        // Add code sample
+        $('#iconCode').html(encodeEntities(html));
         prettyPrint();
+        
+        // Make sure slider exists
+        $('#iconSizeSlider').slider();
       },
       
       showDetails: function(icon) {
@@ -212,12 +225,12 @@
         icon.$tr.addClass('selected');
         
         // Populate details
-        $('#iconDetails').html(this.Templates.Detail(icon));
-        
-        $('input[type="range"]').val(this.sample.size);
-        
-        // Make sure slider exists
-        $('.slider').slider();
+        $('#iconDetailsHelperText').hide();
+        $('#iconDetails').show();
+
+        // Add details
+        $('#iconName').html(icon.name);
+        $('#iconLabelText').val(icon.name);
         
         this.sample.labelText = icon.name;
         
@@ -276,7 +289,7 @@
       
       showAll: function() {
         for (var i = this.icons.length - 1; i >= 0; i--) {
-          this.icons[i].$tr.hide();
+          this.icons[i].$tr.show();
         }
       },
       
@@ -337,23 +350,81 @@
   <div class="page" role="main">
 
     <div class="rail light right iconDetailRail">
-      <div class="wrap" id="iconDetails">
-        <section>
+      <div class="wrap">
+        <section id="iconDetailsHelperText">
           <p class="smallText">Select an icon for details.</p>
         </section>
+        
+        <div id="iconDetails" style="display: none;">
+          <section>
+            <h3 id="iconName"></h3>
+            <p id="iconDescription">Description here</p>
+          </section>
+
+          <section>
+            <h5>Size</h5>
+            <div class="slider ticked" id="iconSizeSlider">
+                <input type="range" name="iconSize" value="2" min="1" max="4" step="1">
+            </div>
+
+            <h5>Label/Accessibility Text</h5>
+            <input type="text" name="iconLabelText" class="iconLabelText" id="iconLabelText">
+            <label><input type="checkbox" name="iconLabel" id="iconLabel" value="1"><span></span> Show label</label><br>
+
+            <div class="left">
+              <h5>Usage</h5>
+              <label><input type="radio" name="iconUsage" value="illustrative" checked><span></span> Illustrative</label><br>
+              <label><input type="radio" name="iconUsage" value="link"><span></span> Link</label><br>
+              <label><input type="radio" name="iconUsage" value="action"><span></span> Action</label><br>
+              <label><input type="radio" name="iconUsage" value="button"><span></span> Button</label>
+            </div>
+
+            <div class="left iconUIColorBox">
+              <h5>UI Color</h5>
+              <label><input type="radio" name="iconColor" value="light" checked><span></span> Light</label><br>
+              <label><input type="radio" name="iconColor" value="dark"><span></span> Dark</label>
+            </div>
+
+            <div class="left iconUIColorBox" id="buttonTypeBox" style="display: none;">
+              <h5>Button Type</h5>
+              <label><input type="radio" name="buttonType" value="standard" checked><span></span> Standard</label><br>
+              <label><input type="radio" name="buttonType" value="primary"><span></span> Primary</label><br>
+              <label><input type="radio" name="buttonType" value="warning"><span></span> Warning</label><br>
+            </div>
+
+            <div class="clear"></div>
+
+          </section>
+
+          <section>
+            <h4>Sample</h4>
+
+            <div class="iconBoxContainer">
+              <div class="iconBox" id="iconSampleBox">
+              </div>
+            </div>
+
+            <h4>HTML</h4>
+
+            <code class="prettyprint" id="iconCode"></code>
+          </section>
+        </div>
       </div>
     </div>
     <div class="content">
       <div class="contentContainer">
-        <div class="search">
-          <input id="searchField" class="search-input" type="text" placeholder="Search">
+        <div class="search iconSearchContainer">
+          <input id="iconSearchField" class="search-input" type="text" placeholder="Search">
           <button type="button">
         </div>
+        
+        <label><input type="checkbox" name="showSVGs"><span></span> Show SVGs</label>
 
         <table id="iconTable" class="data">
           <thead>
             <tr>
               <th>Icon</th>
+              <th class="svgCell">SVG</th>
               <th>Name</th>
               <th>Selector</th>
             </tr>

@@ -310,6 +310,9 @@ h1.noMargin {
 
 ul.grid.componentGrid {
   li {
+    background: white;
+    .glow(0.357rem, @grid-item-border-color, @grid-item-border-color);
+    
     width: 16rem;
     height: 14rem;
     
@@ -376,16 +379,35 @@ Icon browser
   padding: 1rem;
 }
 
-#searchField {
+#iconSearchField {
   width: 18rem;
+}
+
+div.search.iconSearchContainer {
+    display: inline-block;
+    margin-right: 1rem;
 }
 
 #iconTable {
   margin-top: 1rem;
+  tr {
+      cursor: pointer;
+  }
+  td.iconCell {
+    width: 28px;
+    text-align: center;
+    
+    img {
+        width: 24px;
+        height: 24px;
+        margin-top: @px;
+        opacity: 0.65;
+    }
+  }
 }
 
-#iconTable tr {
-  cursor: pointer;
+.svgCell {
+    display: none;
 }
 
 div.iconBoxContainer {

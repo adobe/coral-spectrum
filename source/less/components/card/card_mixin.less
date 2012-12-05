@@ -36,7 +36,6 @@
     }
     .label {
         position: absolute;
-        z-index: 2;
         top: 50%;
         left:  -@card-banner-offset;
         right: -@card-banner-offset;
@@ -49,32 +48,31 @@
         &:after {
             content: " ";
             position: absolute;
-            z-index: 1;
+            bottom: -2*@px - @card-banner-offset;
             height: 0;
             width: 0;
-            border: @card-banner-offset+@px solid transparent;
-            border-style: outset solid; // Fixes a FF bug
-            pointer-events: none;
+            border: (@card-banner-offset+@px)/2 solid transparent;
+            border-top-color: @border;
+            border-bottom-style: outset;
         }
         &:before {
-            bottom: -2*@px - @card-banner-offset;
-            left: -2*@px - @card-banner-offset;
-            border-right-color: @background;
+            left: -@px;
+            border-right-color: @border;
         }
         &:after {
-            bottom: -2*@px - @card-banner-offset;
-            right: -2*@px - @card-banner-offset;
-            border-left-color: @background;
+            right: -@px;
+            border-left-color: @border;
         }
     }
     &.selected .label {
+        @card-selection-color-darker: darken(@card-selection-color, 10%);
         background-color: @card-selection-color;
-        border-color: darken(@card-selection-color, 10%);
+        border-color: @card-selection-color-darker;
         &:before {
-            border-right-color: @card-selection-color;
+            border-right-color: @card-selection-color-darker;
         }
         &:after {
-            border-left-color: @card-selection-color;
+            border-left-color: @card-selection-color-darker;
         }
     }
 }
@@ -116,8 +114,11 @@
             width:  @width;
             height: @height;
         }
-        img.show-list {
+        img {
             display: @display-image;
+            &.show-grid {
+                display: none;
+            }
         }
     }
     .select[class] { // The [class] attribute helps to overrule the initial style

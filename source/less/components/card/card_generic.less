@@ -104,6 +104,7 @@
         display: none;
     }
     .info {
+        overflow: hidden; // Makes floating elements that break on a new line not affect the next row (could be replaced with a clearfix if needed)
         padding-top: 10*@px;
     }
 }
@@ -191,7 +192,7 @@
 
     a,
     .label {
-        overflow: hidden; // Makes floating elements that break on a new line not affect the next row
+        overflow: hidden; // Makes floating elements that break on a new line not affect the next row (could be replaced with a clearfix if needed)
         height: @card-list-height;
     }
 

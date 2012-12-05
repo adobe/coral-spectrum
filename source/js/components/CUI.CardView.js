@@ -1,7 +1,6 @@
 /*
  * TODO - provide a "sync" method that syncs view and model
  * TODO - prepend/append list items
- * TODO - select all
  * TODO - reordering in list view
  */
 
@@ -49,6 +48,9 @@
                 },
                 "grid": function($target) {
                     return $target.closest("article");
+                },
+                "header": function($target) {
+                    return $target.closest("header");
                 }
             },
             "gridSelect": {                             // defines the class that is used to trigger the grid selection mode
@@ -56,9 +58,7 @@
             },
             "selectAll": {                              // defines the "select all" config (list view only)
                 "selector": "header > i.select",
-                "resolver": function($target) {
-                    return $target.closest("header");
-                }
+                "cls": "selected"
             }
         }
 
@@ -156,6 +156,10 @@
 
         getItemRef: function() {
             return this.itemRef;
+        },
+
+        setItemRef: function(itemRef) {
+            this.itemRef = itemRef;
         }
 
     });
@@ -166,17 +170,22 @@
      */
     var DirectMarkupModel = new Class({
 
-        items: [ ],
+        $el: null,
 
-        headers: [ ],
+        items: null,
+
+        headers: null,
 
         construct: function($el, selectors) {
-            var $items = $el.find(selectors.itemSelector);
+            this.$el = $el;
+            this.items = [ ];
+            var $items = this.$el.find(selectors.itemSelector);
             var itemCnt = $items.length;
             for (var i = 0; i < itemCnt; i++) {
                 this.items.push(new Item($($items[i])));
             }
-            var $headers = $el.find(selectors.headerSelector);
+            this.headers = [ ];
+            var $headers = this.$el.find(selectors.headerSelector);
             var headerCnt = $headers.length;
             for (var h = 0; h < headerCnt; h++) {
                 var $header = $($headers[h]);
@@ -209,6 +218,61 @@
             return undefined;
         },
 
+        insertItemAt: function($items, pos, beforeHeader) {
+            if (!$.isArray($items)) {
+                $items = [ $items ];
+            }
+            for (var i = $items.length - 1; i >= 0; i--) {
+
+                var $item = $items[i];
+                if (!$item.jquery) {
+                    $item = $($item);
+                }
+
+                // adjust model
+                var followupItem;
+                var item = new Item($item);
+                if ((pos === undefined) || (pos === null)) {
+                    this.items.push(item);
+                    pos = this.items.length - 1;
+                } else {
+                    followupItem = this.items[pos];
+                    this.items.splice(pos, 0, item);
+                }
+                var insert = {
+                    "item": followupItem,
+                    "mode": "item"
+                };
+
+                // adjust header references if item is inserted directly behind a header
+                var headerCnt = this.headers.length;
+                for (var h = 0; h < headerCnt; h++) {
+                    var header = this.headers[h];
+                    if (header.getItemRef() === followupItem) {
+                        if (beforeHeader) {
+                            insert = {
+                                "item": header,
+                                "mode": "header"
+                            };
+                            break;
+                        } else {
+                            header.setItemRef(item);
+                        }
+                    }
+                }
+
+                // trigger event
+                this.$el.trigger($.Event("change:insertitem", {
+                    "insertPoint": insert,
+                    "followupItem": followupItem,
+                    "item": item,
+                    "pos": pos,
+                    "widget": Utils.getWidget(this.$el),
+                    "moreItems": (i > 0)
+                }));
+            }
+        },
+
         getHeaderCount: function() {
             return this.headers.length;
         },
@@ -220,7 +284,6 @@
         getHeaders: function() {
             var headers = [ ];
             headers.push.apply(headers, this.headers);
-            console.log(headers);
             return headers;
         },
 
@@ -308,6 +371,38 @@
                 self.cleanupAfterLayoutMode(oldMode);
                 self.prepareLayoutMode(newMode);
             });
+            this.$el.on("change:insertitem", function(e) {
+                self._onItemInserted(e);
+            });
+        },
+
+        _onItemInserted: function(e) {
+            var $dataRoot = this.$el;
+            if (this.selectors.dataContainer) {
+                $dataRoot = $dataRoot.find("." + this.selectors.dataContainer);
+            }
+            var $item = e.item.getItemEl();
+            var followupItem = e.followupItem;
+            switch (this.getDisplayMode()) {
+                case DISPLAY_LIST:
+                    if (!followupItem) {
+                        $dataRoot.append($item);
+                    } else {
+                        var insert = e.insertPoint;
+                        var item = insert.item;
+                        var $ref = (insert.mode === "item" ?
+                            item.getItemEl() : item.getHeaderEl());
+                        $ref.before($item);
+                    }
+                    break;
+                case DISPLAY_GRID:
+                    if (!e.moreItems) {
+                        var widget = Utils.getWidget(this.$el);
+                        widget._restore();
+                        widget.layout();
+                    }
+                    break;
+            }
         },
 
         getDisplayMode: function() {
@@ -411,6 +506,7 @@
                 self._drawImage($(this));
             });
             $(selector).load(function() {
+                self._removeSelectedGrid($(this).closest(self.selectors.itemSelector));
                 self._drawImage($(this));
             });
         },
@@ -433,6 +529,7 @@
             // redraw if image has not been loaded (fully) yet
             var self = this;
             $img.load(function() {
+                self._removeSelectedGrid(item);
                 self._drawImage($(this));
             });
         },
@@ -441,7 +538,10 @@
             if (!this.selectors.enableImageMultiply) {
                 return;
             }
-            var $itemEl = item.getItemEl();
+            var $itemEl = item;
+            if (!$itemEl.jquery) {
+                $itemEl = item.getItemEl();
+            }
             $itemEl.find("canvas.multiplied").remove();
         }
 
@@ -492,10 +592,15 @@
                 this.selectors.controller.selectAll.selector, function(e) {
                     var widget = Utils.getWidget(self.$el);
                     if (widget.getDisplayMode() === DISPLAY_LIST) {
-                        var $header = self.selectors.controller.selectAll.resolver(
+                        var cls = self.selectors.controller.selectAll.cls;
+                        var $header = self.selectors.controller.targetToItem.header(
                                 $(e.target));
                         var header = widget.getModel().getHeaderForEl($header);
-                        widget.selectAll(header);
+                        if ($header.hasClass(cls)) {
+                            widget.deselectAll(header);
+                        } else {
+                            widget.selectAll(header);
+                        }
                     }
                 });
             // block click event for cards
@@ -508,6 +613,25 @@
                         e.preventDefault();
                     }
                 });
+            // handle select all state
+            this.$el.on("change:selection", function(e) {
+                if (e.moreSelectionChanges) {
+                    return;
+                }
+                var cls = self.selectors.controller.selectAll.cls;
+                var selectionState = e.widget.getHeaderSelectionState();
+                var headers = selectionState.headers;
+                var headerCnt = headers.length;
+                for (var h = 0; h < headerCnt; h++) {
+                    var header = headers[h];
+                    var $header = header.header.getHeaderEl();
+                    if (header.hasUnselected) {
+                        $header.removeClass(cls);
+                    } else {
+                        $header.addClass(cls);
+                    }
+                }
+            });
         },
 
         getItemElFromEvent: function(e) {
@@ -778,7 +902,7 @@
             }
         },
 
-        selectAll: function(headers) {
+        _headerSel: function(headers, selectFn) {
             var model = this.adapter.getModel();
             if (headers == null) {
                 headers = model.getHeaders();
@@ -789,29 +913,92 @@
             var headerCnt = headers.length;
             for (var h = 0; h < headerCnt; h++) {
                 var header = headers[h];
-                if (header.jQuery) {
+                if (header.jquery) {
                     header = model.getHeaderForEl(header);
                 }
                 var itemsToSelect = model.getItemsForHeader(header);
                 var itemCnt = itemsToSelect.length;
                 var finalItem = (itemCnt - 1);
                 for (var i = 0; i < itemCnt; i++) {
-                    this.select(itemsToSelect[i], (i < finalItem));
+                    selectFn.call(this, itemsToSelect[i], (i < finalItem));
                 }
             }
         },
 
+        selectAll: function(headers) {
+            this._headerSel(headers, this.select);
+        },
+
+        deselectAll: function(headers) {
+            this._headerSel(headers, this.deselect);
+        },
+
+        getHeaderSelectionState: function() {
+            var model = this.getModel();
+            var curHeader = null;
+            var state = {
+                "selected": [ ],
+                "hasUnselected": false,
+                "headers": [ ]
+            };
+            var headerCnt = model.getHeaderCount();
+            var itemCnt = model.getItemCount();
+            for (var i = 0; i < itemCnt; i++) {
+                var item = model.getItemAt(i);
+                for (var h = 0; h < headerCnt; h++) {
+                    var header = model.getHeaderAt(h);
+                    if (header.getItemRef() === item) {
+                        curHeader = {
+                            "header": header,
+                            "selected": [ ],
+                            "hasUnselected": false
+                        };
+                        state.headers.push(curHeader);
+                        break;
+                    }
+                }
+                if (this.isSelected(item)) {
+                    if (curHeader !== null) {
+                        curHeader.selected.push(item);
+                    } else {
+                        state.selected.push(item);
+                    }
+                } else {
+                    if (curHeader !== null) {
+                        curHeader.hasUnselected = true;
+                    } else {
+                        state.hasUnselected = true;
+                    }
+                }
+            }
+            return state;
+        },
+
         layout: function() {
+            if (this.getDisplayMode() !== DISPLAY_GRID) {
+                return;
+            }
             this.$element.removeData('cuigridlayout');
             this.$element.cuigridlayout();
         },
 
         relayout: function() {
+            if (this.getDisplayMode() !== DISPLAY_GRID) {
+                return;
+            }
             this.$element.cuigridlayout("layout");
         },
 
         _restore: function(restoreHeaders) {
             this.adapter._restore(restoreHeaders);
+        },
+
+        append: function($items) {
+            this.adapter.getModel().insertItemAt($items, null, false);
+        },
+
+        prepend: function($items) {
+            this.adapter.getModel().insertItemAt($items, 0, false);
         }
 
     });
