@@ -13,6 +13,9 @@ jQuery(function($) {
         console.log(gl.getSelection(true));
         */
     });
+    $grid.on("change:removeAll", function(e) {
+        // console.log("All items removed");
+    });
 
     $("#main-rail").on("open close", function() {
         CUI.CardView.get($grid).relayout();
@@ -32,6 +35,10 @@ jQuery(function($) {
             $("#selection-mode").addClass("icon-check-circle");
             $("#selection-mode").removeClass("icon-close-circle");
         }
+    });
+
+    $("#remove-all").fipo("tap", "click", function(e) {
+        CUI.CardView.get($grid).removeAllItems();
     });
 
     function createNewCard() {

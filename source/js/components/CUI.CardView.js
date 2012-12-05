@@ -501,6 +501,13 @@
             for (var i = 0; i < itemCnt; i++) {
                 this.items[i].reference();
             }
+        },
+
+        removeAllItemsSilently: function() {
+            this.items.length = 0;
+            for (var h = 0; h < this.headers.length; h++) {
+                this.headers[h].setItemRef(undefined);
+            }
         }
 
     });
@@ -699,6 +706,10 @@
                 $itemEl = item.getItemEl();
             }
             $itemEl.find("canvas.multiplied").remove();
+        },
+
+        removeAllItemsSilently: function() {
+            this.$el.find(this.selectors.itemSelector).remove();
         }
 
     });
@@ -883,6 +894,8 @@
 
     var DirectMarkupAdapter = new Class({
 
+        $el: null,
+
         selectors: null,
 
         model: null,
@@ -896,6 +909,7 @@
         },
 
         initialize: function($el) {
+            this.$el = $el;
             this.setModel(new DirectMarkupModel($el, this.selectors));
             this.setView(new DirectMarkupView($el, this.selectors));
             this.setController(new DirectMarkupController($el, this.selectors));
@@ -965,6 +979,13 @@
         _restore: function(restoreHeaders) {
             this.view.restore(this.model, restoreHeaders);
             this.model.reference();
+        },
+
+        removeAllItems: function() {
+            var widget = Utils.getWidget(this.$el);
+            widget.clearSelection();
+            this.model.removeAllItemsSilently();
+            this.view.removeAllItemsSilently();
         }
 
     });
@@ -1167,6 +1188,16 @@
 
         prepend: function($items) {
             this.adapter.getModel().insertItemAt($items, 0, false);
+        },
+
+        removeAllItems: function() {
+            this.adapter.removeAllItems();
+            if (this.getDisplayMode() === DISPLAY_GRID) {
+                this.relayout();
+            }
+            this.$element.trigger($.Event("change:removeAll", {
+                widget: this
+            }));
         }
 
     });
