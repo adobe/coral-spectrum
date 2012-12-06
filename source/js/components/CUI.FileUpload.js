@@ -70,6 +70,8 @@
 
         /** @ignore */
         _render: function() {
+            var self = this;
+
             this._readDataFromMarkup();
 
             if (!CUI.util.HTTP.html5UploadSupported()) {
@@ -89,7 +91,10 @@
                     this.$element = form;
                 }
 
-                var span = $("<span></span>");
+                var span = $("<span/>", {
+                    "class": this.$element.attr("class")
+                });
+                this.$element.removeAttr("class");
                 this.$element.after(span);
                 this.$element.detach();
                 span.prepend(this.$element);
@@ -100,8 +105,14 @@
 
             this._createMissingElements();
 
-            this.$element.addClass("fileupload button icon-upload");
+            this.$element.addClass("fileupload");
             this.$element.removeClass("focus");
+
+            if (this.inputElement.attr("title")) {
+                this.$element.prepend($("<label/>", {
+                    "for": self.options.name
+                }).html(this.inputElement.attr("title")));
+            }
 
             // Register event handlers
             if (this.options.events) {
