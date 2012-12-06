@@ -798,20 +798,30 @@
                 if (e.moreSelectionChanges) {
                     return;
                 }
-                var cls = self.selectors.controller.selectAll.cls;
-                var selectionState = e.widget.getHeaderSelectionState();
-                var headers = selectionState.headers;
-                var headerCnt = headers.length;
-                for (var h = 0; h < headerCnt; h++) {
-                    var header = headers[h];
-                    var $header = header.header.getHeaderEl();
-                    if (header.hasUnselected) {
-                        $header.removeClass(cls);
-                    } else {
-                        $header.addClass(cls);
-                    }
-                }
+                self._adjustSelectAllState(e.widget);
             });
+            this.$el.on("change:insertitem", function(e) {
+                if (e.moreItems) {
+                    return;
+                }
+                self._adjustSelectAllState(e.widget);
+            });
+        },
+
+        _adjustSelectAllState: function(widget) {
+            var cls = this.selectors.controller.selectAll.cls;
+            var selectionState = widget.getHeaderSelectionState();
+            var headers = selectionState.headers;
+            var headerCnt = headers.length;
+            for (var h = 0; h < headerCnt; h++) {
+                var header = headers[h];
+                var $header = header.header.getHeaderEl();
+                if (header.hasUnselected) {
+                    $header.removeClass(cls);
+                } else {
+                    $header.addClass(cls);
+                }
+            }
         },
 
         getItemElFromEvent: function(e) {
