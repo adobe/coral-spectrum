@@ -115,6 +115,9 @@
 
         &.selectable {
             padding-left: 45*@px;
+            .select[class] { // The [class] attribute helps to overrule the initial style
+                width: 45*@px;
+            }
         }
         &.movable {
             padding-right: 45*@px;

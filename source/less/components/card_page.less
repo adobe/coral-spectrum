@@ -19,11 +19,12 @@
         float: right;
     }
     .image {
+        overflow: hidden; // To avoid the gradient to overflow the image element
         &:after {
             content: " ";
             position: absolute;
             width: 100%;
-            top: 70%;
+            height: 64*@px;
             bottom: 0;
             left: 0;
             .card-grid-page-gradient();

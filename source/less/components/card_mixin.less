@@ -7,14 +7,17 @@
 
 // Gradient of selected cards (used by the stack class, see card_stack.less)
 .card-grid-page-gradient(@color: @card-background-color) {
-    @color-transparent: fade(@color, 0%);
-    @color-opaque:      fade(@color, 100%);
-    background: -moz-linear-gradient(top, @color-transparent 0%, @color-opaque 100%);
-    background: -webkit-linear-gradient(top, @color-transparent 0%, @color-opaque 100%);
-    background: -o-linear-gradient(top, @color-transparent 0%, @color-opaque 100%);
-    background: -ms-linear-gradient(top, @color-transparent 0%, @color-opaque 100%); // IE10+
-    background: linear-gradient(to bottom, @color-transparent 0%, @color-opaque 100%); // W3C
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@{color-transparent}', endColorstr='@{color}', GradientType=0 ); // IE6-9
+    @stop1: fade(@color, 0%);
+    @stop2: fade(@color, 10%);
+    @stop3: fade(@color, 25%);
+    @stop4: fade(@color, 50%);
+    @stop5: fade(@color, 100%);
+    background: -moz-linear-gradient(top, @stop1 0%, @stop2 25%, @stop3 50%, @stop4 75%, @stop5 100%);
+    background: -webkit-linear-gradient(top, @stop1 0%, @stop2 25%, @stop3 50%, @stop4 75%, @stop5 100%);
+    background: -o-linear-gradient(top, @stop1 0%, @stop2 25%, @stop3 50%, @stop4 75%, @stop5 100%);
+    background: -ms-linear-gradient(top, @stop1 0%, @stop2 25%, @stop3 50%, @stop4 75%, @stop5 100%);
+    background: linear-gradient(to bottom, @stop1 0%, @stop2 25%, @stop3 50%, @stop4 75%, @stop5 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@{stop1}', endColorstr='@{stop5}', GradientType=0);
 }
 
 // Grid view specific mixins ////////////////////////////////////////////////////////////////

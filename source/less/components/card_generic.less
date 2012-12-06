@@ -96,19 +96,19 @@
     .label {
         display: inline-block; // Makes it contain all floating elements
         width: 100%;
+        margin-bottom: 5*@px;
     }
     h4 {
-        margin: 10*@px;
+        margin: 6*@px 10*@px;
     }
     p {
-        margin: -10*@px 10*@px 10*@px;
+        margin: -7*@px 10*@px 6*@px;
     }
     p:empty {
         display: none;
     }
     .info {
-        overflow: hidden; // Makes floating elements that break on a new line not affect the next row (could be replaced with a clearfix if needed)
-        padding-top: 10*@px;
+        padding-top: 9*@px;
     }
 }
 
@@ -145,7 +145,7 @@
 
         // The link element that follows the select item should add some spacing on the left
         & ~ a,
-        & ~ div {
+        & ~ div:not(.label) {
             padding-left: 45*@px;
         }
     }
@@ -170,7 +170,7 @@
 
         // The link element that follows the move item should add some spacing on the right
         & ~ a,
-        & ~ div {
+        & ~ div:not(.label) {
             padding-right: 45*@px;
         }
     }
@@ -181,7 +181,7 @@
     }
 
     > a,
-    > div {
+    > div:not(.label) {
         display: block;
         height: @card-list-height;
         padding: 0 10*@px;
