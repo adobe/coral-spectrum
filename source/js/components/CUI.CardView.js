@@ -1103,7 +1103,7 @@
             }
         },
 
-        _headerSel: function(headers, selectFn) {
+        _headerSel: function(headers, selectFn, lastValidItemFn) {
             var model = this.adapter.getModel();
             if (headers == null) {
                 headers = model.getHeaders();
@@ -1119,19 +1119,38 @@
                 }
                 var itemsToSelect = model.getItemsForHeader(header);
                 var itemCnt = itemsToSelect.length;
-                var finalItem = (itemCnt - 1);
                 for (var i = 0; i < itemCnt; i++) {
-                    selectFn.call(this, itemsToSelect[i], (i < finalItem));
+                    console.log(lastValidItemFn(i, itemsToSelect));
+                    selectFn.call(this,
+                            itemsToSelect[i], !lastValidItemFn(i, itemsToSelect));
                 }
             }
         },
 
         selectAll: function(headers) {
-            this._headerSel(headers, this.select);
+            var self = this;
+            this._headerSel(headers, this.select, function(i, items) {
+                i++;
+                for (i; i < items.length; i++) {
+                    if (!self.isSelected(items[i])) {
+                        return false;
+                    }
+                }
+                return true;
+            });
         },
 
         deselectAll: function(headers) {
-            this._headerSel(headers, this.deselect);
+            var self = this;
+            this._headerSel(headers, this.deselect, function(i, items) {
+                i++;
+                for (i; i < items.length; i++) {
+                    if (self.isSelected(items[i])) {
+                        return false;
+                    }
+                }
+                return true;
+            });
         },
 
         getHeaderSelectionState: function() {
