@@ -39,7 +39,7 @@
     <scm>
         <connection>scm:git:git@git.corp.adobe.com:Reef/CoralUI.git</connection>
         <developerConnection>scm:git:git@git.corp.adobe.com:Reef/CoralUI.git</developerConnection>
-        <url>https://git.corp.adobe.com/Reef/CoralUI/master</url>
+        <url>https://git.corp.adobe.com/Reef/CoralUI/tree/1.0</url>
       <tag>HEAD</tag>
   </scm>
 
