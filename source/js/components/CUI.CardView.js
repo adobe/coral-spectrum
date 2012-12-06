@@ -78,7 +78,11 @@
         },
 
         getWidget: function($el) {
-            return $el.data("cardView");
+            var widget;
+            if ($el.length > 0) {
+                widget = $($el[0]).data("cardView");
+            }
+            return widget;
         },
 
         resolve: function($el, fn) {
@@ -377,7 +381,7 @@
 
         insertItemAt: function($items, pos, beforeHeader) {
             if (!$.isArray($items)) {
-                $items = [ $items ];
+                $items = $items.toArray();
             }
             for (var i = $items.length - 1; i >= 0; i--) {
 
