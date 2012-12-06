@@ -1120,7 +1120,6 @@
                 var itemsToSelect = model.getItemsForHeader(header);
                 var itemCnt = itemsToSelect.length;
                 for (var i = 0; i < itemCnt; i++) {
-                    console.log(lastValidItemFn(i, itemsToSelect));
                     selectFn.call(this,
                             itemsToSelect[i], !lastValidItemFn(i, itemsToSelect));
                 }
@@ -1130,8 +1129,7 @@
         selectAll: function(headers) {
             var self = this;
             this._headerSel(headers, this.select, function(i, items) {
-                i++;
-                for (i; i < items.length; i++) {
+                for (++i; i < items.length; i++) {
                     if (!self.isSelected(items[i])) {
                         return false;
                     }
@@ -1143,8 +1141,7 @@
         deselectAll: function(headers) {
             var self = this;
             this._headerSel(headers, this.deselect, function(i, items) {
-                i++;
-                for (i; i < items.length; i++) {
+                for (++i; i < items.length; i++) {
                     if (self.isSelected(items[i])) {
                         return false;
                     }
