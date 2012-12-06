@@ -132,11 +132,14 @@
 
         dragCls: null,
 
+        fixHorizontalPosition: false,
+
         construct: function(config) {
             this.$listEl = config.$listEl;
             this.$itemEl = config.$itemEl;
             this.$items = config.$items;
             this.dragCls = config.dragCls;
+            this.fixHorizontalPosition = (config.fixHorizontalPosition !== false);
         },
 
         _getEventCoords: function(e) {
@@ -175,6 +178,9 @@
             if (bottom > limitBottom) {
                 top = limitBottom - this.size.height;
             }
+            if (this.fixHorizontalPosition) {
+                left = this.listOffset.left;
+            }
             return {
                 "top": top,
                 "left": left
@@ -193,14 +199,19 @@
             var hotX = itemPos.left + (this.size.width / 2);
             var hotY = itemPos.top + (this.size.height / 2);
             var $newTarget = null;
+            // check if we are overlapping another item at least 50% -> then we will take
+            // its position
+            var isInsertBefore = false;
             for (var i = 0; i < this.$items.length; i++) {
                 var $item = $(this.$items[i]);
                 if (!Utils.equals($item, this.$itemEl)) {
                     var offs = $item.offset();
                     var width = $item.width();
                     var height = $item.height();
+                    var bottom = offs.top + height;
                     if ((hotX >= offs.left) && (hotX < offs.left + width) &&
-                            (hotY >= offs.top) && (hotY < offs.top + height)) {
+                            (hotY >= offs.top) && (hotY < bottom)) {
+                        isInsertBefore = ((hotY - offs.top) > (bottom - hotY));
                         $newTarget = $item;
                         break;
                     }
@@ -208,7 +219,11 @@
             }
             if ($newTarget) {
                 var _offs = this.$itemEl.offset();
-                $newTarget.after(this.$itemEl);
+                if (isInsertBefore) {
+                    $newTarget.before(this.$itemEl);
+                } else {
+                    $newTarget.after(this.$itemEl);
+                }
                 this.$itemEl.offset(_offs);
             }
         },
