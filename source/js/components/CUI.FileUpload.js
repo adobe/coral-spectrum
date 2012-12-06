@@ -80,6 +80,8 @@
 
             // If current element is input field -> wrap it into SPAN
             if (this.$element.get(0).tagName === "INPUT") {
+                var clazz = this.$element.attr("class");
+
                 if (!this.options.useHTML5) {
                     var form = $("<form/>", {
                         method: "post",
@@ -92,9 +94,8 @@
                 }
 
                 var span = $("<span/>", {
-                    "class": this.$element.attr("class")
+                    "class": clazz
                 });
-                this.$element.removeAttr("class");
                 this.$element.after(span);
                 this.$element.detach();
                 span.prepend(this.$element);
@@ -102,6 +103,7 @@
             }
 
             this.inputElement = this.$element.find("input[type='file']");
+            this.inputElement.removeAttr("class");
 
             this._createMissingElements();
 
