@@ -484,7 +484,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
     },
     
     _setDateTime: function(date) {
-        this.$input.val(date.format(this.options.displayedFormat));
+        this.$input.val((date) ? date.format(this.options.displayedFormat) : "");
 
         this.options.selectedDateTime = this.displayDateTime = date;
 
