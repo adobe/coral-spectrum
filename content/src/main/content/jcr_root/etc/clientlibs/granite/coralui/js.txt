@@ -2,13 +2,14 @@
 plugins/jquery-gridlayout.js
 plugins/jquery-fingerpointer.js
 plugins/jquery-scrollable.js
+plugins/jquery-cookie.js
 plugins/toe.js
 plugins/moment.js
 
 Class.js
 CUI.js
 CUI.Util.js
-CUI.Persistence.js
+CUI.Util.state.js
 CUI.Util.HTTP.js
 CUI.Templates.js
 components/CUI.Widget.js

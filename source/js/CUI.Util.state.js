@@ -17,6 +17,10 @@
 
         },*/
 
+        config: {
+            serverpersistence: true
+        },
+
         /**
          * Persist attributes of a DOM node
          *
@@ -47,6 +51,10 @@
             }
 
             localStorage.setItem(storageKey, JSON.stringify(store));
+            
+            if (CUI.util.state.config.serverpersistence) {
+                $.cookie(storageKey, JSON.stringify(store));
+            }
         },
 
         /**
