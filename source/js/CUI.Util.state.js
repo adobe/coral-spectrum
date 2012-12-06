@@ -1,17 +1,17 @@
 (function ($, window, undefined) {
-    var storageKey = 'cui-persistence',
+    var storageKey = 'cui-state',
         store = {},
         loaded = false;
 
     /**
-     * Persistence object to enable UI page refresh stable states
+     * state object to enable UI page refresh stable states
      * TODO:
      *  - all states are global, lack of an auto restore mode which is aware of the URL
      *  - client side only (localStorage)
      *  - lack of an abstraction layer for the client side storage
      * @type {Object}
      */
-    CUI.persistence = {
+    CUI.util.state = {
 
         /*saveForm: function (form, elem) {
 
@@ -72,7 +72,7 @@
                 };
 
             if (!loaded) {
-                loaded = CUI.persistence.load();
+                loaded = CUI.util.state.load();
             }
 
             
@@ -95,7 +95,7 @@
     };
 
     $(document).ready(function () {
-        CUI.persistence.restore(null, function (selector, attr, val) {
+        CUI.util.state.restore(null, function (selector, attr, val) {
             if (val.autorestore) {
                 return true;
             }
