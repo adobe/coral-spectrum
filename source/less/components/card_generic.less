@@ -254,7 +254,7 @@
     }
 
     > a,
-    > div {
+    > div:not(.label) {
         background: @card-selection-color;
     }
 }
@@ -264,7 +264,7 @@
 .list [class*=" card-"].selected {
     border-bottom-color: #eee;
     > a,
-    > div {
+    > div:not(.label) {
         background: fade(@card-selection-color, 25%);
     }
     > i.select {
