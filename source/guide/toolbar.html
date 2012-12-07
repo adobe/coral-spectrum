@@ -101,6 +101,29 @@
           <button class="icon-check"><span>Open Selection Mode</span></button>
         </div>
       </nav>
+
+       <nav class="toolbar">
+        <div class="left icongroup">
+          <button class="icon-viewgrid"><span>Toggle Rail</span></button>
+          <span class="divider"></span>
+          <div class="dropdown" data-init="dropdown">
+            <button>Single Select</button>
+            <select name="dropdown">
+              <option>Single One</option>
+              <option selected>Single Two</option>
+            <option>Single Three</option>
+          </select>
+          </div>
+          <button class="icon-close"><span>Close Selection Mode</span></button>
+          <button disabled="disabled" class="icon-properties"><span>View Properties</span></button>
+          <a href="#" class="disabled icon-delete"><span>Delete Page</span></a>
+        </div>
+        <div class="right icongroup">
+          <input type="text"/>
+          <span class="text">1 selected</span>
+        </div>
+      </nav>
+
     </div>
   </div>
 </body>
