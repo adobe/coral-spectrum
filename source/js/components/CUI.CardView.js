@@ -130,6 +130,8 @@
 
         $doc: null,
 
+        $oldBefore: null,
+
         dragCls: null,
 
         fixHorizontalPosition: false,
@@ -229,6 +231,7 @@
         },
 
         start: function(e) {
+            this.$oldBefore = this.$itemEl.prev();
             var evtPos = this._getEventCoords(e);
             if (this.dragCls) {
                 this.$itemEl.addClass(this.dragCls);
@@ -286,6 +289,12 @@
             this.$doc.off("mousemove.listview.drag");
             this.$doc.off("touchend.listview.drag");
             this.$doc.off("mouseup.listview.drag");
+            var $newBefore = this.$itemEl.prev();
+            this.$itemEl.trigger($.Event("drop", {
+                newBefore: $newBefore,
+                oldBefore: this.$oldBefore,
+                hasMoved: !Utils.equals($newBefore, this.$oldBefore)
+            }));
             e.stopPropagation();
             e.preventDefault();
         }
@@ -309,6 +318,7 @@
         },
 
         reference: function() {
+            var self = this;
             this.$itemEl.data("cardView-item", this);
         }
 
@@ -351,9 +361,12 @@
 
         headers: null,
 
+        selectors: null,
+
         construct: function($el, selectors) {
             this.$el = $el;
             this.items = [ ];
+            this.selectors = selectors;
             var $items = this.$el.find(selectors.itemSelector);
             var itemCnt = $items.length;
             for (var i = 0; i < itemCnt; i++) {
@@ -372,7 +385,43 @@
         },
 
         initialize: function() {
-            // nothing to do here
+            var self = this;
+            this.$el.on("drop", this.selectors.itemSelector, function(e) {
+                if (e.hasMoved) {
+                    self._reorder(e);
+                }
+            });
+        },
+
+        _reorder: function(e) {
+            var itemToMove = this.getItemForEl($(e.target));
+            var newBefore = this.getItemForEl(e.newBefore);
+            var isHeaderInsert = false;
+            var header;
+            if (!newBefore) {
+                header = this.getHeaderForEl(e.newBefore);
+                if (header) {
+                    isHeaderInsert = true;
+                    var refPos = this.getItemIndex(header.getItemRef());
+                    if (refPos > 0) {
+                        newBefore = this.getItemAt(refPos - 1);
+                    }
+                }
+            }
+            var oldPos = this.getItemIndex(itemToMove);
+            this.items.splice(oldPos, 1);
+            // if the item to move is directly following a header, the header's item ref
+            // has to be updated
+            var headerRef = this._getHeaderByItemRef(itemToMove);
+            if (headerRef) {
+                headerRef.setItemRef(this.getItemAt(oldPos));
+            }
+            var insertPos = (newBefore ? this.getItemIndex(newBefore) + 1 : 0);
+            this.items.splice(insertPos, 0, itemToMove);
+            if (isHeaderInsert) {
+                header.setItemRef(itemToMove);
+            }
+            // console.log(itemToMove, newBefore, isHeaderInsert);
         },
 
         getItemCount: function() {
@@ -381,6 +430,15 @@
 
         getItemAt: function(pos) {
             return this.items[pos];
+        },
+
+        getItemIndex: function(item) {
+            for (var i = 0; i < this.items.length; i++) {
+                if (item === this.items[i]) {
+                    return i;
+                }
+            }
+            return -1;
         },
 
         getItemForEl: function($el) {
@@ -469,6 +527,15 @@
                 var header = this.headers[h];
                 if (Utils.equals(header.getHeaderEl(), $el)) {
                     return header;
+                }
+            }
+            return undefined;
+        },
+
+        _getHeaderByItemRef: function(itemRef) {
+            for (var h = 0; h < this.headers.length; h++) {
+                if (this.headers[h].getItemRef() === itemRef) {
+                    return this.headers[h];
                 }
             }
             return undefined;
