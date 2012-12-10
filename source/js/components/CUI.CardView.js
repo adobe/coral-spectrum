@@ -133,11 +133,15 @@
 
         autoMoveOffset: 0,
 
+        scrollMax: 0,
 
-        construct: function($el, stepSize, autoMoveFn) {
+
+        construct: function($el, stepSize, autoMoveFn, limitBottom) {
             this.$el = $el;
             this.stepSize = stepSize;
             this.$containerEl = this._getScrollingContainer($el);
+            var cont = this.$containerEl[0];
+            this.maxScrollTop = Math.max(cont.scrollHeight - cont.clientHeight, 0);
             this.autoMoveFn = autoMoveFn;
         },
 
@@ -155,11 +159,8 @@
 
         _execute: function() {
             var cont = this.$containerEl[0];
-            var scrollHeight = cont.scrollHeight;
             var clientHeight = cont.clientHeight;
             var scrollTop = cont.scrollTop;
-            var maxScrollTop = scrollHeight - clientHeight;
-            maxScrollTop = Math.max(scrollHeight, 0);
             var itemTop = this.$el.offset().top - this.$containerEl.offset().top;
             var itemBottom = itemTop + this.$el.height();
             var isAutoScroll = false;
@@ -176,11 +177,11 @@
                 }
             } else if (itemBottom >= clientHeight) {
                 // auto scroll downwards
-                if (scrollTop < maxScrollTop) {
+                if (scrollTop < this.maxScrollTop) {
                     scrollTop += this.stepSize;
                     this.autoMoveOffset = this.stepSize;
-                    if (scrollTop > maxScrollTop) {
-                        scrollTop = maxScrollTop;
+                    if (scrollTop > this.maxScrollTop) {
+                        scrollTop = this.maxScrollTop;
                     }
                     cont.scrollTop = scrollTop;
                     isAutoScroll = true;
@@ -197,10 +198,10 @@
             }
         },
 
-        check: function() {
+        check: function(limitBottom) {
             var self = this;
             this.stop();
-            var isAutoScroll = this._execute();
+            var isAutoScroll = this._execute(limitBottom);
             if (isAutoScroll) {
                 this.iid = window.setTimeout(function() {
                     self.iid = undefined;
