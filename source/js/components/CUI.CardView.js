@@ -1,7 +1,8 @@
 /*
  * TODO - provide a "sync" method that syncs view and model
- * TODO - prepend/append list items
- * TODO - reordering in list view
+ * TODO - remove list items
+ * TODO - auto scrolling
+ * TODO - reordering animation in list view
  */
 
 (function($) {
@@ -120,6 +121,104 @@
 
     };
 
+    var ListItemAutoScroller = new Class({
+
+        $el: null,
+
+        $containerEl: null,
+
+        stepSize: 0,
+
+        iid: undefined,
+
+        autoMoveOffset: 0,
+
+
+        construct: function($el, stepSize, autoMoveFn) {
+            this.$el = $el;
+            this.stepSize = stepSize;
+            this.$containerEl = this._getScrollingContainer($el);
+            this.autoMoveFn = autoMoveFn;
+        },
+
+        _getScrollingContainer: function($el) {
+            while (($el.length > 0) && !$el.is("body")) {
+                var ovflY =  $el.css("overflowY");
+                var pos = $el.css("position");
+                if (((ovflY === "auto") || (ovflY === "visible")) && (pos === "absolute")) {
+                    return $el;
+                }
+                $el = $el.parent();
+            }
+            return $(window);
+        },
+
+        _execute: function() {
+            var cont = this.$containerEl[0];
+            var scrollHeight = cont.scrollHeight;
+            var clientHeight = cont.clientHeight;
+            var scrollTop = cont.scrollTop;
+            var maxScrollTop = scrollHeight - clientHeight;
+            maxScrollTop = Math.max(scrollHeight, 0);
+            var itemTop = this.$el.offset().top - this.$containerEl.offset().top;
+            var itemBottom = itemTop + this.$el.height();
+            var isAutoScroll = false;
+            if (itemTop <= 0) {
+                // auto scroll upwards
+                if (scrollTop > 0) {
+                    scrollTop -= this.stepSize;
+                    this.autoMoveOffset = -this.stepSize;
+                    if (scrollTop < 0) {
+                        scrollTop = 0;
+                    }
+                    cont.scrollTop = scrollTop;
+                    isAutoScroll = true;
+                }
+            } else if (itemBottom >= clientHeight) {
+                // auto scroll downwards
+                if (scrollTop < maxScrollTop) {
+                    scrollTop += this.stepSize;
+                    this.autoMoveOffset = this.stepSize;
+                    if (scrollTop > maxScrollTop) {
+                        scrollTop = maxScrollTop;
+                    }
+                    cont.scrollTop = scrollTop;
+                    isAutoScroll = true;
+                }
+            }
+            return isAutoScroll;
+        },
+
+        _autoMove: function() {
+            if (this.autoMoveOffset && this.autoMoveFn) {
+                var itemOffs = this.$el.offset();
+                var itemTop = itemOffs.top + this.autoMoveOffset;
+                this.autoMoveFn(itemOffs.left, itemTop);
+            }
+        },
+
+        check: function() {
+            var self = this;
+            this.stop();
+            var isAutoScroll = this._execute();
+            if (isAutoScroll) {
+                this.iid = window.setTimeout(function() {
+                    self.iid = undefined;
+                    self._autoMove();
+                }, 50);
+            }
+        },
+
+        stop: function() {
+            if (this.iid !== undefined) {
+                window.clearTimeout(this.iid);
+                this.autoMoveOffset = 0;
+                this.iid = undefined;
+            }
+        }
+
+    });
+
     var ListItemMoveHandler = new Class({
 
         $listEl: null,
@@ -136,12 +235,19 @@
 
         fixHorizontalPosition: false,
 
+        autoScroller: null,
+
         construct: function(config) {
+            var self = this;
             this.$listEl = config.$listEl;
             this.$itemEl = config.$itemEl;
             this.$items = config.$items;
             this.dragCls = config.dragCls;
             this.fixHorizontalPosition = (config.fixHorizontalPosition !== false);
+            this.autoScroller = (config.autoScrolling ?
+                    new ListItemAutoScroller(this.$itemEl, 8, function(x, y) {
+                        self._autoMove(x, y);
+                    }) : undefined);
         },
 
         _getEventCoords: function(e) {
@@ -173,7 +279,7 @@
             var right = left + this.size.width;
             var bottom = top + this.size.height;
             var limitRight = this.listOffset.left + this.listSize.width;
-            var limitBottom = this.listOffset-top + this.listSize.height;
+            var limitBottom = this.listOffset - top + this.listSize.height;
             if (right > limitRight) {
                 left = limitRight - this.size.width;
             }
@@ -189,11 +295,19 @@
             };
         },
 
-        _adjustPosition: function(e) {
+        _getEventPos: function(e) {
             var evtPos = this._getEventCoords(e);
-            var left = evtPos.x - this.delta.left;
-            var top = evtPos.y - this.delta.top;
-            this.$itemEl.offset(this._limit(top, left));
+            return {
+                x: evtPos.x - this.delta.left,
+                y: evtPos.y - this.delta.top
+            };
+        },
+
+        _adjustPosition: function(x, y) {
+            this.$itemEl.offset(this._limit(y, x));
+            if (this.autoScroller) {
+                this.autoScroller.check();
+            }
         },
 
         _changeOrderIfRequired: function() {
@@ -270,17 +384,27 @@
 
         move: function(e) {
             // console.log("move", e);
-            this._adjustPosition(e);
+            var pos = this._getEventPos(e);
+            this._adjustPosition(pos.x, pos.y);
             this._changeOrderIfRequired();
             e.stopPropagation();
             e.preventDefault();
         },
 
+        _autoMove: function(x, y) {
+            this._adjustPosition(x, y);
+            this._changeOrderIfRequired();
+        },
+
         end: function(e) {
-            this._adjustPosition(e);
+            var pos = this._getEventPos(e);
+            this._adjustPosition(pos.x, pos.y);
             // console.log("end", e);
             if (this.dragCls) {
                 this.$itemEl.removeClass(this.dragCls);
+            }
+            if (this.autoScroller) {
+                this.autoScroller.stop();
             }
             this.$itemEl.css("position", "");
             this.$itemEl.css("top", "");
@@ -875,7 +999,8 @@
                         $listEl: self.$el,
                         $itemEl: $itemEl,
                         $items: $(self.selectors.itemSelector),
-                        dragCls: "dragging"
+                        dragCls: "dragging",
+                        autoScrolling: true
                     });
                     handler.start(e);
                 });
