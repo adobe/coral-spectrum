@@ -308,8 +308,12 @@
       var popover = $target.popover($.extend({pointAt: $trigger}, $target.data(), $trigger.data())).data('popover');
 
       popover.toggleVisibility();
-
-      e.preventDefault();
+      // No preventDefault here. See below.
+    });
+    
+    // We have to prevent the default behaviour of clicks for pointer AND touch devices, so no fipo here!
+    $('body').on('click.popover.data-api', '[data-toggle="popover"]', function (e) {
+        e.preventDefault();
     });
   });
 }(window.jQuery));
