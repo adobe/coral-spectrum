@@ -38,7 +38,7 @@
         "controller": {
             "selectElement": {                          // defines the selector that is used for installing the tap/click handlers
                 "list": "article > i.select",
-                "grid": "article > a"
+                "grid": "article"
             },
             "moveHandleElement": {                      // defines the selector that is used to determine the object that is responsible for moving an item in list view
                 "list": "article > i.move"
