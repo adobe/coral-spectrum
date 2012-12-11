@@ -40,6 +40,15 @@ The top toolbar with action icons
 .icongroup {
     //overflow: hidden; // Fixes CUI-260 by preventing accessibility text in <button> tags in icon groups from overflowing
     //breaks CUI-277
+
+    > a,
+    > i,
+    > button,
+    > input,
+    > div,
+    > span, {
+      float: left; // inline-block adds undesired spacing to the elements
+    }
     
     // Any icon in an icon group should be medium sized
     [class^="icon-"],
@@ -54,18 +63,12 @@ The top toolbar with action icons
         }
     }
 
-    a {
-      display: inline-block;
-    }
-
     a.button:not([class^="icon-"]):not([class*=" icon-"]),
     button:not([class^="icon-"]):not([class*=" icon-"]) {
         margin: 7*@px 10*@px;
     }
     
-
-    .divider {
-        display: inline-block;
+    > .divider {
         height: @icon-medium-size;
         margin: 10*@px 0 0 10*@px;
         padding-right: 10*@px;
@@ -74,38 +77,35 @@ The top toolbar with action icons
         vertical-align: top;
     }
 
-    >.text {
+    > .text {
         margin: 0 10*@px;
-        
         line-height: 46*@px;
     }
 
-    >nav.pulldown {
+    > nav.pulldown {
         display: inline-block;
 
-        >a {
-            &[class^="icon-"], 
-            &[class*=" icon-"] {
-                padding: 0;
-                line-height: 46*@px;
+        > a[class^="icon-"], 
+        > a[class*=" icon-"] {
+            padding: 0;
+            line-height: 46*@px;
 
-                &:after {
-                    background: none;
-                    margin-left: 0;
-                    padding-left: 0;
-                }
+            &:after {
+                background: none;
+                margin-left: 0;
+                padding-left: 0;
             }
         }
 
-        >.popover ul li a {
+        > .popover ul li a {
             padding: 0 10*@px;
             height: 2rem;
             line-height: 2rem;
         }
     }
 
-    >.dropdown,
-    >input[type="text"] {
+    > .dropdown,
+    > input[type="text"] {
         vertical-align: top;
     }
 }
