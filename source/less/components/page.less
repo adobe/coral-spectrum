@@ -6,7 +6,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: @header-height;
+  top: 0;
   bottom: 0;
   overflow-y: hidden;
 
@@ -40,5 +40,8 @@
     }
         
   }
- 
+}
+
+header.top + .page {
+  top: @header-height;
 }
