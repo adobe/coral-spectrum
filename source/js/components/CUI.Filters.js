@@ -527,7 +527,10 @@ var index = filters.getSelectedIndex();
             }
             if (key === 13) { // Create new item
                 var val = this.inputElement.val();
-                if (val.length > 0) this._createNewOption(val, val, false);
+                if (val.length > 0) {
+                    this._createNewOption(val, val, false);
+                    event.preventDefault();
+                }
             }
         }
     },
@@ -558,6 +561,7 @@ var index = filters.getSelectedIndex();
             var el = $("<option></option>");
             el.text(displayName);
             el.attr("value", name);
+            if (!fromInternal) el.attr("data-new", "true");
             this.syncSelectElement.append(el);
             //console.log("Compare indices", el.index(), index);
         }
