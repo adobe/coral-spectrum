@@ -83,6 +83,10 @@
         width: 100%;
     }
 
+    > a:focus {
+        .card-grid-shadow(focus);
+    }
+
     .image {
         border-bottom: @px solid @card-image-separator;
     }
@@ -196,6 +200,10 @@
             .icon-large;
             display: block;
         }
+    }
+
+    > a:focus {
+        background: @card-list-selection-color;
     }
 
     > a,

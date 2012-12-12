@@ -145,6 +145,18 @@
 }
 
 /**
+ Mixin: .no-glow
+ Make an element glow
+ TODO: add partial glow mixin for mixed top/bottom/left/right only
+*/
+.no-glow() {
+    border: none;
+    outline: none;
+    .box-shadow(0 0 0 transparent);
+    text-shadow: none;
+}
+
+/**
  Mixin: .no-select
  Stop text selection for an element and its children
 */

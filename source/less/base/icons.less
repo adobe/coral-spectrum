@@ -237,11 +237,7 @@ button,
       font-weight: normal;
     
       filter: none;
-    }
-
-    &:active {
-      .glow(); // Add glow
-      border: 0; // remove border
+      box-shadow: none;
     }
   }
   
@@ -288,6 +284,15 @@ button,
     }
 
     &:active {
+      &:before {
+        color: @icon-active-color;
+        opacity: @icon-active-opacity;
+      }
+    }
+
+    &:focus {
+      .no-glow();
+
       &:before {
         color: @icon-active-color;
         opacity: @icon-active-opacity;
