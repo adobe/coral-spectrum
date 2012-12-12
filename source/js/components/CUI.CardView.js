@@ -1,7 +1,8 @@
 /*
  * TODO - provide a "sync" method that syncs view and model
- * TODO - prepend/append list items
- * TODO - reordering in list view
+ * TODO - remove list items
+ * TODO - auto scrolling
+ * TODO - reordering animation in list view
  */
 
 (function($) {
@@ -37,7 +38,7 @@
         "controller": {
             "selectElement": {                          // defines the selector that is used for installing the tap/click handlers
                 "list": "article > i.select",
-                "grid": "article > a"
+                "grid": "article"
             },
             "moveHandleElement": {                      // defines the selector that is used to determine the object that is responsible for moving an item in list view
                 "list": "article > i.move"
@@ -120,6 +121,105 @@
 
     };
 
+    var ListItemAutoScroller = new Class({
+
+        $el: null,
+
+        $containerEl: null,
+
+        stepSize: 0,
+
+        iid: undefined,
+
+        autoMoveOffset: 0,
+
+        scrollMax: 0,
+
+
+        construct: function($el, stepSize, autoMoveFn, limitBottom) {
+            this.$el = $el;
+            this.stepSize = stepSize;
+            this.$containerEl = this._getScrollingContainer($el);
+            var cont = this.$containerEl[0];
+            this.maxScrollTop = Math.max(cont.scrollHeight - cont.clientHeight, 0);
+            this.autoMoveFn = autoMoveFn;
+        },
+
+        _getScrollingContainer: function($el) {
+            while (($el.length > 0) && !$el.is("body")) {
+                var ovflY =  $el.css("overflowY");
+                var pos = $el.css("position");
+                if (((ovflY === "auto") || (ovflY === "visible")) && (pos === "absolute")) {
+                    return $el;
+                }
+                $el = $el.parent();
+            }
+            return $(window);
+        },
+
+        _execute: function() {
+            var cont = this.$containerEl[0];
+            var clientHeight = cont.clientHeight;
+            var scrollTop = cont.scrollTop;
+            var itemTop = this.$el.offset().top - this.$containerEl.offset().top;
+            var itemBottom = itemTop + this.$el.height();
+            var isAutoScroll = false;
+            if (itemTop <= 0) {
+                // auto scroll upwards
+                if (scrollTop > 0) {
+                    scrollTop -= this.stepSize;
+                    this.autoMoveOffset = -this.stepSize;
+                    if (scrollTop < 0) {
+                        scrollTop = 0;
+                    }
+                    cont.scrollTop = scrollTop;
+                    isAutoScroll = true;
+                }
+            } else if (itemBottom >= clientHeight) {
+                // auto scroll downwards
+                if (scrollTop < this.maxScrollTop) {
+                    scrollTop += this.stepSize;
+                    this.autoMoveOffset = this.stepSize;
+                    if (scrollTop > this.maxScrollTop) {
+                        scrollTop = this.maxScrollTop;
+                    }
+                    cont.scrollTop = scrollTop;
+                    isAutoScroll = true;
+                }
+            }
+            return isAutoScroll;
+        },
+
+        _autoMove: function() {
+            if (this.autoMoveOffset && this.autoMoveFn) {
+                var itemOffs = this.$el.offset();
+                var itemTop = itemOffs.top + this.autoMoveOffset;
+                this.autoMoveFn(itemOffs.left, itemTop);
+            }
+        },
+
+        check: function(limitBottom) {
+            var self = this;
+            this.stop();
+            var isAutoScroll = this._execute(limitBottom);
+            if (isAutoScroll) {
+                this.iid = window.setTimeout(function() {
+                    self.iid = undefined;
+                    self._autoMove();
+                }, 50);
+            }
+        },
+
+        stop: function() {
+            if (this.iid !== undefined) {
+                window.clearTimeout(this.iid);
+                this.autoMoveOffset = 0;
+                this.iid = undefined;
+            }
+        }
+
+    });
+
     var ListItemMoveHandler = new Class({
 
         $listEl: null,
@@ -130,13 +230,25 @@
 
         $doc: null,
 
+        $oldBefore: null,
+
         dragCls: null,
 
+        fixHorizontalPosition: false,
+
+        autoScroller: null,
+
         construct: function(config) {
+            var self = this;
             this.$listEl = config.$listEl;
             this.$itemEl = config.$itemEl;
             this.$items = config.$items;
             this.dragCls = config.dragCls;
+            this.fixHorizontalPosition = (config.fixHorizontalPosition !== false);
+            this.autoScroller = (config.autoScrolling ?
+                    new ListItemAutoScroller(this.$itemEl, 8, function(x, y) {
+                        self._autoMove(x, y);
+                    }) : undefined);
         },
 
         _getEventCoords: function(e) {
@@ -168,12 +280,15 @@
             var right = left + this.size.width;
             var bottom = top + this.size.height;
             var limitRight = this.listOffset.left + this.listSize.width;
-            var limitBottom = this.listOffset-top + this.listSize.height;
+            var limitBottom = this.listOffset - top + this.listSize.height;
             if (right > limitRight) {
                 left = limitRight - this.size.width;
             }
             if (bottom > limitBottom) {
                 top = limitBottom - this.size.height;
+            }
+            if (this.fixHorizontalPosition) {
+                left = this.listOffset.left;
             }
             return {
                 "top": top,
@@ -181,11 +296,19 @@
             };
         },
 
-        _adjustPosition: function(e) {
+        _getEventPos: function(e) {
             var evtPos = this._getEventCoords(e);
-            var left = evtPos.x - this.delta.left;
-            var top = evtPos.y - this.delta.top;
-            this.$itemEl.offset(this._limit(top, left));
+            return {
+                x: evtPos.x - this.delta.left,
+                y: evtPos.y - this.delta.top
+            };
+        },
+
+        _adjustPosition: function(x, y) {
+            this.$itemEl.offset(this._limit(y, x));
+            if (this.autoScroller) {
+                this.autoScroller.check();
+            }
         },
 
         _changeOrderIfRequired: function() {
@@ -193,14 +316,19 @@
             var hotX = itemPos.left + (this.size.width / 2);
             var hotY = itemPos.top + (this.size.height / 2);
             var $newTarget = null;
+            // check if we are overlapping another item at least 50% -> then we will take
+            // its position
+            var isInsertBefore = false;
             for (var i = 0; i < this.$items.length; i++) {
                 var $item = $(this.$items[i]);
                 if (!Utils.equals($item, this.$itemEl)) {
                     var offs = $item.offset();
                     var width = $item.width();
                     var height = $item.height();
+                    var bottom = offs.top + height;
                     if ((hotX >= offs.left) && (hotX < offs.left + width) &&
-                            (hotY >= offs.top) && (hotY < offs.top + height)) {
+                            (hotY >= offs.top) && (hotY < bottom)) {
+                        isInsertBefore = ((hotY - offs.top) > (bottom - hotY));
                         $newTarget = $item;
                         break;
                     }
@@ -208,12 +336,17 @@
             }
             if ($newTarget) {
                 var _offs = this.$itemEl.offset();
-                $newTarget.after(this.$itemEl);
+                if (isInsertBefore) {
+                    $newTarget.before(this.$itemEl);
+                } else {
+                    $newTarget.after(this.$itemEl);
+                }
                 this.$itemEl.offset(_offs);
             }
         },
 
         start: function(e) {
+            this.$oldBefore = this.$itemEl.prev();
             var evtPos = this._getEventCoords(e);
             if (this.dragCls) {
                 this.$itemEl.addClass(this.dragCls);
@@ -252,17 +385,27 @@
 
         move: function(e) {
             // console.log("move", e);
-            this._adjustPosition(e);
+            var pos = this._getEventPos(e);
+            this._adjustPosition(pos.x, pos.y);
             this._changeOrderIfRequired();
             e.stopPropagation();
             e.preventDefault();
         },
 
+        _autoMove: function(x, y) {
+            this._adjustPosition(x, y);
+            this._changeOrderIfRequired();
+        },
+
         end: function(e) {
-            this._adjustPosition(e);
+            var pos = this._getEventPos(e);
+            this._adjustPosition(pos.x, pos.y);
             // console.log("end", e);
             if (this.dragCls) {
                 this.$itemEl.removeClass(this.dragCls);
+            }
+            if (this.autoScroller) {
+                this.autoScroller.stop();
             }
             this.$itemEl.css("position", "");
             this.$itemEl.css("top", "");
@@ -271,6 +414,12 @@
             this.$doc.off("mousemove.listview.drag");
             this.$doc.off("touchend.listview.drag");
             this.$doc.off("mouseup.listview.drag");
+            var $newBefore = this.$itemEl.prev();
+            this.$itemEl.trigger($.Event("drop", {
+                newBefore: $newBefore,
+                oldBefore: this.$oldBefore,
+                hasMoved: !Utils.equals($newBefore, this.$oldBefore)
+            }));
             e.stopPropagation();
             e.preventDefault();
         }
@@ -294,6 +443,7 @@
         },
 
         reference: function() {
+            var self = this;
             this.$itemEl.data("cardView-item", this);
         }
 
@@ -336,9 +486,12 @@
 
         headers: null,
 
+        selectors: null,
+
         construct: function($el, selectors) {
             this.$el = $el;
             this.items = [ ];
+            this.selectors = selectors;
             var $items = this.$el.find(selectors.itemSelector);
             var itemCnt = $items.length;
             for (var i = 0; i < itemCnt; i++) {
@@ -357,7 +510,43 @@
         },
 
         initialize: function() {
-            // nothing to do here
+            var self = this;
+            this.$el.on("drop", this.selectors.itemSelector, function(e) {
+                if (e.hasMoved) {
+                    self._reorder(e);
+                }
+            });
+        },
+
+        _reorder: function(e) {
+            var itemToMove = this.getItemForEl($(e.target));
+            var newBefore = this.getItemForEl(e.newBefore);
+            var isHeaderInsert = false;
+            var header;
+            if (!newBefore) {
+                header = this.getHeaderForEl(e.newBefore);
+                if (header) {
+                    isHeaderInsert = true;
+                    var refPos = this.getItemIndex(header.getItemRef());
+                    if (refPos > 0) {
+                        newBefore = this.getItemAt(refPos - 1);
+                    }
+                }
+            }
+            var oldPos = this.getItemIndex(itemToMove);
+            this.items.splice(oldPos, 1);
+            // if the item to move is directly following a header, the header's item ref
+            // has to be updated
+            var headerRef = this._getHeaderByItemRef(itemToMove);
+            if (headerRef) {
+                headerRef.setItemRef(this.getItemAt(oldPos));
+            }
+            var insertPos = (newBefore ? this.getItemIndex(newBefore) + 1 : 0);
+            this.items.splice(insertPos, 0, itemToMove);
+            if (isHeaderInsert) {
+                header.setItemRef(itemToMove);
+            }
+            // console.log(itemToMove, newBefore, isHeaderInsert);
         },
 
         getItemCount: function() {
@@ -366,6 +555,15 @@
 
         getItemAt: function(pos) {
             return this.items[pos];
+        },
+
+        getItemIndex: function(item) {
+            for (var i = 0; i < this.items.length; i++) {
+                if (item === this.items[i]) {
+                    return i;
+                }
+            }
+            return -1;
         },
 
         getItemForEl: function($el) {
@@ -454,6 +652,15 @@
                 var header = this.headers[h];
                 if (Utils.equals(header.getHeaderEl(), $el)) {
                     return header;
+                }
+            }
+            return undefined;
+        },
+
+        _getHeaderByItemRef: function(itemRef) {
+            for (var h = 0; h < this.headers.length; h++) {
+                if (this.headers[h].getItemRef() === itemRef) {
+                    return this.headers[h];
                 }
             }
             return undefined;
@@ -793,7 +1000,8 @@
                         $listEl: self.$el,
                         $itemEl: $itemEl,
                         $items: $(self.selectors.itemSelector),
-                        dragCls: "dragging"
+                        dragCls: "dragging",
+                        autoScrolling: true
                     });
                     handler.start(e);
                 });

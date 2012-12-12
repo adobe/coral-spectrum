@@ -70,6 +70,8 @@
 
         /** @ignore */
         _render: function() {
+            var self = this;
+
             this._readDataFromMarkup();
 
             if (!CUI.util.HTTP.html5UploadSupported()) {
@@ -78,6 +80,8 @@
 
             // If current element is input field -> wrap it into SPAN
             if (this.$element.get(0).tagName === "INPUT") {
+                var clazz = this.$element.attr("class");
+
                 if (!this.options.useHTML5) {
                     var form = $("<form/>", {
                         method: "post",
@@ -89,7 +93,9 @@
                     this.$element = form;
                 }
 
-                var span = $("<span></span>");
+                var span = $("<span/>", {
+                    "class": clazz
+                });
                 this.$element.after(span);
                 this.$element.detach();
                 span.prepend(this.$element);
@@ -97,11 +103,18 @@
             }
 
             this.inputElement = this.$element.find("input[type='file']");
+            this.inputElement.removeAttr("class");
 
             this._createMissingElements();
 
-            this.$element.addClass("fileupload button icon-upload");
+            this.$element.addClass("fileupload");
             this.$element.removeClass("focus");
+
+            if (this.inputElement.attr("title")) {
+                this.$element.prepend($("<label/>", {
+                    "for": self.options.name
+                }).html(this.inputElement.attr("title")));
+            }
 
             // Register event handlers
             if (this.options.events) {

@@ -28,9 +28,17 @@
 }
 
 // Grid view: displays the card label as a banner that runs across the preview image (used by card-collection)
-.card-grid-banner(@background: @card-background-color, @border: @card-banner-border-color-white, @shadow-density: 0.5) {
-    @fold-color: mix(@background, @border, 50%);
+.card-grid-banner(
+    @background: @card-background-color,
+    @border: @card-banner-border-color-white,
+    @selection-color: @card-selection-color,
+    @shadow-density: 0.5
+) {
     @card-grid-banner-margin: @card-grid-margin + 2*(@card-banner-offset+@px);
+    @color-fold: mix(@background, @border, 50%);
+    @selection-color-darker: darken(@selection-color, 10%);
+    @selection-color-fold: mix(@selection-color, @selection-color-darker, 50%);
+
     .calc-width(~"100% - @{card-grid-banner-margin}rem");
     margin-left:  (@card-banner-offset+@px);
     margin-right: (@card-banner-offset+@px);
@@ -56,52 +64,41 @@
             height: 0;
             width: 0;
             border: (@card-banner-offset+@px)/2 solid transparent;
-            border-top-color: @fold-color;
+            border-top-color: @color-fold;
             border-bottom-style: outset;
         }
         &:before {
             left: -@px;
-            border-right-color: @fold-color;
+            border-right-color: @color-fold;
         }
         &:after {
             right: -@px;
-            border-left-color: @fold-color;
+            border-left-color: @color-fold;
         }
     }
     &.selected .label {
-        @card-selection-color-darker: darken(@card-selection-color, 10%);
-        background-color: @card-selection-color;
-        border-color: @card-selection-color-darker;
+        background-color: @selection-color;
+        border-color: @selection-color-darker;
         &:before {
-            border-right-color: @card-selection-color-darker;
+            border-top-color: @selection-color-fold;
+            border-right-color: @selection-color-fold;
         }
         &:after {
-            border-left-color: @card-selection-color-darker;
+            border-top-color: @selection-color-fold;
+            border-left-color: @selection-color-fold;
         }
     }
 }
 
 // Grid view: black version of the .card-grid-banner mixin (used by card-project)
 .card-grid-banner(black) {
-    .card-grid-banner(@card-banner-background-color-black, @card-banner-border-color-black, 0.7);
-    &:not(.selected) .label,
-    &:not(.selected) .label h4 {
+    .card-grid-banner(@card-banner-background-color-black, @card-banner-border-color-black, darken(desaturate(@card-selection-color, 20%), 40%));
+
+    .label {
         color: @card-banner-text-color-black;
     }
-    &.selected .label,
-    &.selected .label h4 {
-        @card-selection-banner-black-color: darken(desaturate(@card-selection-color, 20%), 40%);
-        @card-selection-banner-black-border: darken(@card-selection-banner-black-color, 5%);
-
-        color: @white;
-        background-color: @card-selection-banner-black-color;
-        border-color: @card-selection-banner-black-border;
-        &:before {
-            border-right-color: @card-selection-banner-black-color;
-        }
-        &:after {
-            border-left-color: @card-selection-banner-black-color;
-        }
+    .label h4 {
+        color: @card-banner-title-color-black;
     }
 }
 

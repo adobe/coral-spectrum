@@ -6,11 +6,16 @@ input[type=file].fileupload {
     opacity: 0;
 }
 
-.fileupload {
+span.fileupload {
     overflow: hidden;
     position: relative;
 
-    input {
+    label {
+        margin: 0;
+        font-size: 0.875rem;
+    }
+
+    input[type=file] {
         opacity: 0;
         height: 100%;
         left: 0;

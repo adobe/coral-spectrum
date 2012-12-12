@@ -308,8 +308,6 @@
       var popover = $target.popover($.extend({pointAt: $trigger}, $target.data(), $trigger.data())).data('popover');
 
       popover.toggleVisibility();
-
-      e.preventDefault();
-    });
+    }).on('click.popover.data-api', '[data-toggle="popover"]', false);
   });
 }(window.jQuery));
