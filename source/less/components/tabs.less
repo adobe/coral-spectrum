@@ -49,23 +49,25 @@
       &.disabled {
         color: @tab-disabled-font-color;
 
-        &:hover {
+        &:hover,
+        &:focus {
           cursor: default;
           color: @tab-disabled-font-color;
         }
       }
 
-      &:hover {
+      &:hover,
+      &:focus {
         color: @tab-hover-font-color;
-      }
-      
-      &:focus:not(:active) {
-        .tab-focus(top);
       }
 
       &.active {
         .regularText;
         color: @tab-active-font-color;
+        
+        &:focus {
+          color: @tab-hover-font-color;
+        }
       }
     }
   }
@@ -137,10 +139,6 @@
           border-bottom: 0.0625rem solid @tab-outline-color;
           border-right: none;
           .gradient(@tab-white-background-gradient-end-color, @tab-white-background-gradient-end-color);
-        }
-
-        &:focus:not(:active) {
-          .tab-focus(stacked);
         }
 
         &:last-child {

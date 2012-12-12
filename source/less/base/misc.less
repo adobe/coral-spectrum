@@ -131,18 +131,13 @@ button.close {
 
   .opacity(@close-opacity);
 
-  &:hover {
-    .opacity(85);
-  }
-
   &:active {
     .box-shadow(none); // override button
   }
 
+  &:hover,
   &:focus {
     .box-shadow(none); // override button
-    border: none;
-
-    .glow-text();
-  } 
+    .opacity(85);
+  }
 }
