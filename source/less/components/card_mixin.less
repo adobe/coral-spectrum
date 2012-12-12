@@ -23,11 +23,11 @@
 // Grid view specific mixins ////////////////////////////////////////////////////////////////
 
 // Grid view: The shadow of all cards
-.card-grid-shadow() {
+.card-grid-shadow(@opacity: 0.25) {
     .box-shadow(0 1.5*@px 1.5*@px rgba(0, 0, 0, 0.25));
 }
 .card-grid-shadow(focus) {
-    .box-shadow(0 1.5*@px 1.5*@px rgba(0, 0, 0, 0.8));
+    .card-grid-shadow(0.8);
 }
 
 // Grid view: displays the card label as a banner that runs across the preview image (used by card-collection)
