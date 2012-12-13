@@ -203,7 +203,7 @@
     }
 
     > a:focus {
-        background: @card-list-selection-color;
+        background: @card-selection-color;
     }
 
     > a,
@@ -292,5 +292,8 @@
             background-image: url('@{component-images-folder}/checkbox/check.png');
             .background-size(100%);
         }
+    }
+    > a:focus {
+        background: @card-selection-color;
     }
 }
