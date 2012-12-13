@@ -69,16 +69,19 @@ nav.pulldown {
 
           text-align: left;
 
-          &[class^="icon-"], 
-          &[class*=" icon-"] {
+          [class^="icon-"], 
+          [class*=" icon-"] {
+            padding-left: 0;
+
             &.withLabel {
-              padding-left: 10*@px;
               background-position: 10*@px center;
               line-height: @icon-medium-size;
 
               &:before {
                 .icon-medium;
                 padding-right: 10*@px;
+                position: relative;
+                top: -50%;
               }
             }
           }
