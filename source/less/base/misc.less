@@ -7,6 +7,18 @@ form {
   padding: 0;
 }
 
+/**
+  disable tab highlight for all 'a' elements
+  the rational for disabling the style for all 'a' element rather then selectively
+  is that as each 'widget' provides its own highlight state, 
+  tap-highlight seems to be rather redundant.
+  Althought it would be cleaner to add the style for each widget, this proved to be rather laborious process and 
+  would have to be done for all non-CoralUI widget (e.g. the CQ components).
+*/
+
+a {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
 
 /**
   Element: img
