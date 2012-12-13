@@ -203,7 +203,7 @@
     }
 
     > a:focus {
-        background: @card-selection-color;
+        background: @card-list-selection-color;
     }
 
     > a,
@@ -278,10 +278,10 @@
 // In list view
 .list [class^="card-"].selected,
 .list [class*=" card-"].selected {
-    border-bottom-color: #eee;
+    border-bottom-color: transparent;
     > a,
     > div:not(.label) {
-        background: fade(@card-selection-color, 25%);
+        background: @card-list-selection-color;
     }
     > i.select {
         &:before {
