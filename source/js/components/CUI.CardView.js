@@ -11,6 +11,10 @@
 
     var DISPLAY_LIST = "list";
 
+    var SELECTION_MODE_COUNT_SINGLE = "single";
+
+    var SELECTION_MODE_COUNT_MULTI = "multiple";
+
     var DEFAULT_SELECTOR_CONFIG = {
 
         "itemSelector": "article",                      // selector for getting items
@@ -936,9 +940,12 @@
 
         selectors: null,
 
+        selectionModeCount: null,
+
         construct: function($el, selectors) {
             this.$el = $el;
             this.selectors = selectors;
+            this.selectionModeCount = SELECTION_MODE_COUNT_MULTI;
         },
 
         initialize: function() {
@@ -1112,8 +1119,15 @@
                     "value": displayMode
                 }));
             }
-        }
+        },
 
+        getSelectionModeCount: function() {
+            return this.selectionModeCount;
+        },
+
+        setSelectionModeCount: function(modeCount) {
+            this.selectionModeCount = modeCount;
+        }
     });
 
     var DirectMarkupAdapter = new Class({
@@ -1200,6 +1214,14 @@
             this.controller.setGridSelect(isSelectionMode);
         },
 
+        getSelectionModeCount: function() {
+            return this.controller.getSelectionModeCount();
+        },
+
+        setSelectionModeCount: function(modeCount) {
+            this.controller.setSelectionModeCount(modeCount);
+        },
+
         _restore: function(restoreHeaders) {
             this.view.restore(this.model, restoreHeaders);
             this.model.reference();
@@ -1224,7 +1246,7 @@
 
 
         construct: function(options) {
-            var selectorConfig = options.selectorConfig || DEFAULT_SELECTOR_CONFIG;
+            var selectorConfig = options.selectorConfig || DEFAULT_SELECTOR_CONFIG; // TODO this must be merged instead of just overwriting the whole config
             this.adapter = new DirectMarkupAdapter(selectorConfig);
             this.adapter.initialize(this.$element);
             this.layout();
@@ -1262,10 +1284,23 @@
             this.setGridSelectionMode(!this.isGridSelectionMode());
         },
 
+        getSelectionModeCount: function() {
+            return this.adapter.getSelectionModeCount();
+        },
+
+        setSelectionModeCount: function(modeCount) {
+            this.adapter.setSelectionModeCount(modeCount);
+        },
+
         select: function(item, moreSelectionChanges) {
             item = ensureItem(item);
             var isSelected = this.adapter.isSelected(item);
             if (!isSelected) {
+                if (this.getSelectionModeCount() === SELECTION_MODE_COUNT_SINGLE &&
+                    this.getSelection().length > 0) {
+                    this.clearSelection();
+                }
+
                 this.adapter.setSelected(item, true);
                 this.$element.trigger($.Event("change:selection", {
                     "widget": this,
@@ -1292,7 +1327,14 @@
 
         toggleSelection: function(item, moreSelectionChanges) {
             item = ensureItem(item);
-            var isSelected = this.adapter.isSelected(item);
+            var isSelected = this.isSelected(item);
+
+            if (!isSelected &&
+                this.getSelectionModeCount() === SELECTION_MODE_COUNT_SINGLE &&
+                this.getSelection().length > 0) {
+                this.clearSelection();
+            }
+
             this.adapter.setSelected(item, !isSelected);
             this.$element.trigger($.Event("change:selection", {
                 "widget": this,
@@ -1339,6 +1381,8 @@
         },
 
         selectAll: function(headers) {
+            if (this.getSelectionModeCount() !== SELECTION_MODE_COUNT_MULTI) return;
+
             var self = this;
             this._headerSel(headers, this.select, function(i, items) {
                 for (++i; i < items.length; i++) {
