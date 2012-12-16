@@ -1,7 +1,9 @@
 (function ($, window, undefined) {
     var storageKey = 'cui-state',
+        storageLoadEvent = 'cui-state-restore',
         store = {},
-        loaded = false;
+        loaded = false,
+        $doc = $(document);
 
     /**
      * state object to enable UI page refresh stable states
@@ -27,14 +29,16 @@
          * @param {String} selector
          * @param {String|Array} [attribute] single attribute or list of attributes to be saved. If null then all attributes will be saved
          * @param {Boolean} [autorestore]
+         * @param {String} [customEvent] custom event name
          */
-        save: function (selector, attribute, autorestore) {
+        save: function (selector, attribute, autorestore, customEvent) {
             var elem = $(selector),
                 saveLoop = function (i, attr) {
                     store.global[selector] = store.global[selector] || {};
                     store.global[selector][attr] = store.global[selector][attr] || {};
                     store.global[selector][attr].val = elem.attr(attr);
                     store.global[selector][attr].autorestore = autorestore || false;
+                    store.global[selector][attr].customEvent = customEvent || null;
                 };
 
             
@@ -71,11 +75,20 @@
                 selectorLoop = function (item, noop) {
                     sel = item;
                     elem = $(sel);
-                    $.each(store.global[sel], restoreLoop);
+
+                    if (store.global[sel]) {
+                        $.each(store.global[sel], restoreLoop);
+                    }
                 },
                 restoreLoop = function (attr, obj) {
                     if (check(sel, attr, obj)) {
                         elem.attr(attr, obj.val);
+
+                        if (obj.customEvent) {
+                            $doc.trigger(obj.customEvent, [elem, obj]);
+                        }
+
+                        $doc.trigger(storageLoadEvent, [elem, obj]);
                     }
                 };
 
@@ -102,7 +115,7 @@
         }
     };
 
-    $(document).ready(function () {
+    $doc.ready(function () {
         CUI.util.state.restore(null, function (selector, attr, val) {
             if (val.autorestore) {
                 return true;
