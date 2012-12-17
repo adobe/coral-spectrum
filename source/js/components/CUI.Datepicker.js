@@ -61,11 +61,11 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         dayNames: null,
         format: null,
         type: "date",
-        selectedDateTime: moment(),
+        selectedDateTime: null,
         startDay: 0,
         disabled: false,
-        displayedFormat: 'YYYY-MM-DD HH:mm',
-        storedFormat: 'YYYY-MM-DD[T]HH:mmZ',
+        displayedFormat: null,
+        storedFormat: null,
         forceHTMLMode: false,
         required: false
     },
@@ -75,8 +75,8 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
     useNativeControls: false,
     internFormat: 'YYYY-MM-DD[T]HH:mmZ',
     officialDateFormat: 'YYYY-MM-DD',
-    officialTimeFormat: 'YYYY-MM-DD[T]HH:mmZ',
-    officialDatetimeFormat: 'HH:mm',
+    officialTimeFormat: 'HH:mm',
+    officialDatetimeFormat: 'YYYY-MM-DD[T]HH:mmZ',
 
     construct: function(options) {
 
@@ -87,11 +87,14 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
 
         this.options.monthNames = this.options.monthNames || CUI.Datepicker.monthNames;
         this.options.dayNames = this.options.dayNames || CUI.Datepicker.dayNames;
-        this.options.displayedFormat = this.options.displayedFormat || CUI.Datepicker.displayedFormat;
-        this.options.storedFormat = this.options.storedFormat || CUI.Datepicker.storedFormat;
+
 
         this._readDataFromMarkup();
-
+        
+        // Set standard formats
+        this.options.storedFormat = this.options.storedFormat || (this.options.type === "time" ? 'HH:mm' : 'YYYY-MM-DD[T]HH:mmZ');
+        this.options.displayedFormat = this.options.displayedFormat || (this.options.type === "time" ? 'HH:mm' : 'YYYY-MM-DD HH:mm');
+        
         if(this._isSupportedMobileDevice() && this._supportsInputType(this.options.type)) {
             this.useNativeControls = true;
         }
@@ -103,10 +106,9 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
 
         this.$input = this.$element.find('input').not("[type=hidden]");
         this.$hiddenInput = this.$element.find('input[type=hidden]');
+
         
-
-        this._readInputVal();
-
+        // Enable time buttons in popover
         if(this._isTimeEnabled()) {
             this._renderTime();
             this.$timeDropdowns = this.$element.find(".dropdown");
@@ -117,16 +119,11 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         if (this.useNativeControls) {
             if (this.options.type === 'date') {
                 this.options.displayedFormat = this.officialDateFormat;
-                this.options.storedFormat = this.officialDateFormat;
             } else if (this.options.type === 'time') {
                 this.options.displayedFormat = this.officialTimeFormat;
-                this.options.storedFormat = this.officialTimeFormat;
             } else {
                 this.options.displayedFormat = this.officialDatetimeFormat;
-                this.options.storedFormat = this.officialDatetimeFormat;
             }
-
-            this._setDateTime(this.displayDateTime);
         }
         
         if(!this.useNativeControls) {
@@ -157,7 +154,8 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             }.bind(this));
         }
 
-        $input.on("change", function() {
+        // Listen on change and additional on blur, as iPad does not fire change events for date fields.
+        $input.on("change blur", function() {
             if (this.options.disabled) return;
             this.displayDateTime = this.options.selectedDateTime = moment(this.$input.val(), this.options.displayedFormat);
             this._renderCalendar();
@@ -210,12 +208,10 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         if (this.useNativeControls) {
             this.displayDateTime = this.options.selectedDateTime = moment(this.$input.val(), this.options.displayedFormat);
         }
-        //Convert for first display
-        if (this.options.displayedFormat) {
-            var date = moment(this.$input.val());
-            if (date) this.$input.val(date.format(this.options.displayedFormat));
-        }
-        this._convertToStorage();
+        
+        // Reading input value for the first time -> there may be a storage format
+        if (!this.options.selectedDateTime) this._readInputVal([this.options.storedFormat, this.options.displayedFormat]);
+        this._setDateTime(this.options.selectedDateTime);
     },
     
     _readDataFromMarkup: function() {
@@ -247,8 +243,12 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
                 
     },
 
-    _readInputVal: function() {
-        this.displayDateTime = this.options.selectedDateTime = moment($(this.$input)[0].getAttribute('value'), this.options.displayedFormat);
+    _readInputVal: function(format) {
+        if (!format) format = this.options.displayedFormat;
+        var value = this.$input.eq(0).val();
+        var date = moment(value, format);
+        if (!date || !date.isValid()) date = moment(value); // Fallback: Try automatic guess if none of our formats match
+        this.displayDateTime = this.options.selectedDateTime = date;
     },
     
     _updateState: function() {
