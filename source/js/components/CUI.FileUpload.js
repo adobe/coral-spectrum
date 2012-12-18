@@ -447,13 +447,13 @@
             var self = this;
 
             if (self.options.useHTML5) {
-                var xhr = new XMLHttpRequest();
-                xhr.addEventListener("loadstart", function(e) { self._onUploadStart(e, item); }, false);
-                xhr.addEventListener("load", function(e) { self._onUploadLoad(e, item); }, false);
-                xhr.addEventListener("error", function(e) { self._onUploadError(e, item); }, false);
-                xhr.addEventListener("abort", function(e) { self._onUploadCanceled(e, item); }, false);
+                item.xhr = new XMLHttpRequest();
+                item.xhr.addEventListener("loadstart", function(e) { self._onUploadStart(e, item); }, false);
+                item.xhr.addEventListener("load", function(e) { self._onUploadLoad(e, item); }, false);
+                item.xhr.addEventListener("error", function(e) { self._onUploadError(e, item); }, false);
+                item.xhr.addEventListener("abort", function(e) { self._onUploadCanceled(e, item); }, false);
 
-                var upload = xhr.upload;
+                var upload = item.xhr.upload;
                 upload.addEventListener("progress", function(e) { self._onUploadProgress(e, item); }, false);
 
                 // TODO: encoding of special characters in file names
@@ -470,11 +470,11 @@
                     }
                     f.append("_charset_", "utf-8");
 
-                    xhr.open("POST", self.options.uploadUrl, true);
-                    xhr.send(f);
+                    item.xhr.open("POST", self.options.uploadUrl, true);
+                    item.xhr.send(f);
                 } else {
-                    xhr.open("PUT", self.options.uploadUrl + "/" + fileName, true);
-                    xhr.send(file);
+                    item.xhr.open("PUT", self.options.uploadUrl + "/" + fileName, true);
+                    item.xhr.send(file);
                 }
 
             } else {
@@ -503,6 +503,11 @@
 
                 form.submit();
             }
+        },
+
+        // TODO: document
+        cancelUpload: function(item) {
+            item.xhr.abort();
         },
 
         /** @ignore */
