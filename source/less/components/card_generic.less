@@ -8,14 +8,13 @@
     .iosTapHoldPreventDefault;
 
     position: relative;
-    display: inline-block;
+    float: left;
     font-size: 12*@px;
     line-height: 18*@px;
 
     // The card link contains everything
     > a,
     > div {
-        position: relative;
         text-decoration: none;
         color: @card-text-color;
     }
@@ -23,7 +22,6 @@
     // The card image
     .image {
         display: block;
-        position: relative;
     }
     img,
     canvas {
@@ -31,10 +29,6 @@
     }
 
     // The card text
-    .label,
-    .main {
-        position: relative;
-    }
     h4,
     p {
         text-overflow: ellipsis;
@@ -79,7 +73,6 @@
     > div {
         .card-grid-shadow;
         display: block;
-        z-index: 1;
         width: 100%;
     }
 
