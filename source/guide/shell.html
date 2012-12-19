@@ -31,7 +31,7 @@
         </nav>
         <div class="drawer">
             <div class="badge">10</div>
-            <a class="icon-user white" href="#user_dialog" data-toggle="modal">User</a>
+            <a class="icon-user" href="#user_dialog" data-toggle="modal">User</a>
         </div>
     </header>
 
@@ -229,30 +229,20 @@
                     <a href="#" class="icon-check-circle" id="selection-mode"></a>
                     <a href="#" class="icon-chevronleft" id="prepend">Prepend</a>
                     <a href="#" class="icon-chevronright" id="append">Append</a>
-                    <a href="#" class="icon-addcollection" id="add">Add Collection</a>
+                    <a href="#" class="icon-collectionadd" id="add">Add Collection</a>
                     <a href="#" class="icon-minus-circle" id="remove-all">Remove all</a>
                 </div>
                 <div class="center">
                     <h1>Page Title</h1>
                 </div>
                 <div class="right icongroup">
-                    <a href="#" class="icon-viewlist" id="display-mode">List</a>
+                    <button id="display-mode" class="icon-viewlist" type="button" title="Show as List">List Layout</button>
                 </div>
             </nav>
             
             <!-- The Grid -->
             <div class="grid content-container">
                 <div class="grid-0">
-                    <!-- Default (minimal card markup) -->
-                    <article class="card-default">
-                        <i class="select"></i>
-                        <a href="#">
-                            <span class="image"><img src="images/previews/preview7.png" alt=""></span>
-                            <div class="label">
-                                <h4>#0 Default Card (minimal markup)</h4>
-                            </div>
-                        </a>
-                    </article>
 
                     <!-- Default -->
                     <article class="card-default">
@@ -265,7 +255,7 @@
                             </span>
                             <div class="label">
                                 <h4>#1 Default Card</h4>
-                                <p>Description</p>
+                                <p>Description<span class="show-list"> (not styled for list view)</span></p>
                             </div>
                         </a>
                     </article>
@@ -299,7 +289,7 @@
                         </a>
                     </article>
 
-                    <!-- Page with sub pages and all kind of info -->
+                    <!-- Page (with sub pages and all kind of info) -->
                     <article class="card-page stack">
                         <i class="select"></i>
                         <i class="move"></i>
@@ -312,6 +302,23 @@
                                     <p class="info-locked">Locked</p>
                                     <p class="info-copy">Launch</p>
                                 </div>
+                                <div class="info">
+                                    <p class="published"><i class="icon-globe">Published</i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                                    <p class="modified"><i class="icon-edit">Modified</i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                                    <p class="links"><i class="icon-arrowright">Link</i> <span class="links-number">3</span></p>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                    <!-- Page (hidden) -->
+                    <article class="card-page page-hidden">
+                        <i class="select"></i>
+                        <i class="move"></i>
+                        <a href="#">
+                            <span class="image"><img src="images/previews/preview1.png" alt=""></span>
+                            <div class="label">
+                                <h4 class="main">#4 Page (hidden)</h4>
                                 <div class="info">
                                     <p class="published"><i class="icon-globe">Published</i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
                                     <p class="modified"><i class="icon-edit">Modified</i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
@@ -346,7 +353,7 @@
                                 <img class="show-list" src="images/previews/preview-small.png" alt="">
                             </span>
                             <div class="label">
-                                <h4>#4 Asset Name</h4>
+                                <h4>#5 Asset Name</h4>
                                 <p class="type">PSD</p>
                                 <p class="resolution">1220 x 400</p>
                                 <p class="size">149KB</p>
@@ -368,7 +375,7 @@
                                 <img src="images/previews/preview-small.png" alt="">
                             </span>
                             <div class="label">
-                                <h4>#5 Asset Name (with small image)</h4>
+                                <h4>#6 Asset Name (with small image)</h4>
                                 <p class="type">PSD</p>
                                 <p class="resolution">1220 x 400</p>
                                 <p class="size">149KB</p>
@@ -391,7 +398,7 @@
                                 <img class="show-list" src="images/previews/preview-small.png" alt="">
                             </span>
                             <div class="label">
-                                <h4>#6 Asset Name (with upscaled image)</h4>
+                                <h4>#7 Asset Name (with upscaled image)</h4>
                                 <p class="type">PSD</p>
                                 <p class="resolution">1220 x 400</p>
                                 <p class="size">149KB</p>
@@ -404,18 +411,19 @@
                         </a>
                     </article>
 
+                    <!-- Asset that is being uploaded -->
                     <article class="card-asset uploading">
                         <i class="select"></i>
                         <i class="move"></i>
-                        <i class="cancel"></i>
                         <div class="card">
-                            <div class="image progress-bar">
+                            <div class="progress-bar">
                                 <div class="progress">
                                     <div class="bar" style="width: 40%;"></div>
                                 </div>
+                                <i class="cancel"></i>
                             </div>
                             <div class="label">
-                                <h4>surfer.png</h4>
+                                <h4>#8 surfer.png</h4>
                                 <p>Uploading&hellip;</p>
                             </div>
                         </div>
@@ -431,7 +439,7 @@
                                 <i class="show-list icon-folder">Directory</i>
                             </span>
                             <div class="label">
-                                <h4>#7 Directory Name</h4>
+                                <h4>#9 Directory Name</h4>
                             </div>
                         </a>
                     </article>
@@ -446,7 +454,7 @@
                                 <img class="show-list" src="images/previews/preview-small.png" alt="">
                             </span>
                             <div class="label">
-                                <h4>#8 Collection Name (with details)</h4>
+                                <h4>#10 Collection Name (with details)</h4>
                                 <div class="info">
                                     <p class="links"><i class="icon-link">Links</i> 8</p>
                                     <p class="comments"><i class="icon-comment">Comments</i> 12</p>
@@ -462,7 +470,7 @@
                         <a href="#">
                             <span class="image"><img src="images/previews/preview1.png" alt=""></span>
                             <div class="label">
-                                <h4>#9 Collection Name (with description)</h4>
+                                <h4>#11 Collection Name (with description)</h4>
                                 <p>Collection</p>
                             </div>
                         </a>
@@ -475,7 +483,7 @@
                         <a href="#">
                             <span class="image"><img src="images/previews/preview1.png" alt=""></span>
                             <div class="label">
-                                <h4>#10 Project Name</h4>
+                                <h4>#12 Project Name</h4>
                                 <p>Project</p>
                             </div>
                          </a>
@@ -492,77 +500,71 @@
                         </div>
                     </header>
 
-                    <!-- Page (minimal card markup) -->
+                    <!-- Default (minimal card markup, just for testing - WARNING: not suited for list view!) -->
+                    <article class="card-default">
+                        <i class="select"></i>
+                        <a href="#">
+                            <span class="image"><img src="images/previews/preview7.png" alt=""></span>
+                            <div class="label">
+                                <h4>#13 Default Card (minimal markup<span class="show-list">, not suited for list view</span>)</h4>
+                            </div>
+                        </a>
+                    </article>
+
+                    <!-- Page (minimal card markup - WARNING: not suited for list view!) -->
                     <article class="card-page stack">
                         <i class="select"></i>
                         <a href="#">
                             <span class="image"><img src="images/previews/preview1.png" alt=""></span>
                             <div class="label">
-                                <h4>#11 Website (minimal markup)</h4>
+                                <h4>#14 Website (minimal markup<span class="show-list">, not suited for list view</span>)</h4>
                             </div>
                         </a>
                     </article>
 
 
-                    <!-- Asset (minimal card markup) -->
+                    <!-- Asset (minimal card markup - WARNING: not suited for list view!) -->
                     <article class="card-asset">
                         <i class="select"></i>
                         <a href="#">
                             <span class="image"><img src="images/previews/preview1.png" alt=""></span>
                             <div class="label">
-                                <h4>#12 Asset Name (minimal markup)</h4>
+                                <h4>#15 Asset Name (minimal markup<span class="show-list">, not suited for list view</span>)</h4>
                             </div>
                         </a>
                     </article>
 
-                    <!-- Directory (minimal card markup) -->
+                    <!-- Directory (minimal card markup - WARNING: not suited for list view!) -->
                     <article class="card-directory">
                         <i class="select"></i>
                         <a href="#">
                             <span class="image"><img src="images/previews/preview8.png" alt=""></span>
                             <div class="label">
-                                <h4>#13 Directory (minimal markup)</h4>
+                                <h4>#16 Directory (minimal markup<span class="show-list">, not suited for list view</span>)</h4>
                             </div>
                         </a>
                     </article>
 
-                    <!-- Collection (minimal card markup) -->
+                    <!-- Collection (minimal card markup - WARNING: not suited for list view!) -->
                     <article class="card-collection stack">
                         <i class="select"></i>
                         <a href="#">
                             <span class="image"><img src="images/previews/preview1.png" alt=""></span>
                             <div class="label">
-                                <h4>#14 Collection (minimal markup)</h4>
+                                <h4>#17 Collection (minimal markup<span class="show-list">, not suited for list view</span>)</h4>
                             </div>
                         </a>
                     </article>
 
-                    <!-- Project (minimal card markup) -->
+                    <!-- Project (minimal card markup - WARNING: not suited for list view!) -->
                     <article class="card-project stack">
                         <i class="select"></i>
                         <a href="#">
                             <span class="image"><img src="images/previews/preview1.png" alt=""></span>
                             <div class="label">
-                                <h4>#15 Project (minimal markup)</h4>
+                                <h4>#18 Project (minimal markup<span class="show-list">, not suited for list view</span>)</h4>
                             </div>
                          </a>
-                    </article>
-
-                    <!-- Page (hidden) -->
-                    <article class="card-page page-hidden">
-                        <i class="select"></i>
-                        <i class="move"></i>
-                        <a href="#">
-                            <span class="image"><img src="images/previews/preview1.png" alt=""></span>
-                            <div class="label">
-                                <h4 class="main">#16 Page (hidden)</h4>
-                                <div class="info">
-                                    <p class="published"><i class="icon-globe">Published</i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-                                    <p class="modified"><i class="icon-edit">Modified</i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-                                    <p class="links"><i class="icon-arrowright">Link</i> <span class="links-number">3</span></p>
-                                </div>
-                            </div>
-                        </a>
                     </article>
                 </div>
             </div>

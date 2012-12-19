@@ -5,15 +5,15 @@
 .badge {
   display: inline-block;
   .border-box;
-  height: 1.5rem;
-  padding: 0.313rem 0.45rem 0 0.45rem; // feels wrong, but makes IE9, FF, Chrome render the same
+  height: 24*@px;
+  padding: 5*@px 7*@px 0; // feels wrong, but makes IE9, FF, Chrome render the same
   margin: 0;
-  .border-radius(0.125rem);
+  .border-radius(2*@px);
 
   background-color: @badge-background-color;
 
   text-align: center;
-  line-height: 1rem;
+  line-height: 16*@px;
   color: @badge-font-color;
 
   &.empty {

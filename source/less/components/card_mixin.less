@@ -166,6 +166,16 @@
     }
 }
 
+// List view: Aligns an element that is outside of another one using percentages taking in consideration the offset values of the other element.
+// Practically, this is used by the uploading state of the card-asset to align the progress bar to the columns in the label element.
+// @position should be a float between 0 and 1 that corresponds to the percentage of the width it should aling to.
+// @left-offset-rem and @right-offset-rem should be REM values of the left and right offset of the other element it should align to.
+.card-list-align-to-column(@position, @left-offset-rem, @right-offset-rem) {
+    @total-offset-rem: @left-offset-rem + @right-offset-rem;
+    position: absolute;
+    left: ~"calc((100% - @{total-offset-rem}rem) * @{position} + @{left-offset-rem}rem)";
+}
+
 // List view: Draws a box for additional info showed next to the title (used by card-page)
 .card-list-box() {
     .card-strong-text;

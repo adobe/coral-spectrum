@@ -31,6 +31,20 @@ The top toolbar with action icons
             .regularText;
         }
     }
+
+    // Hack to avoid FF to display horizontal scrollbars because of a bug on button elements
+    // See: https://bugzilla.mozilla.org/show_bug.cgi?id=750115
+    button[class^="icon-"],
+    button[class*=" icon-"] {
+        position: relative;
+        text-indent: -20rem; // This doesn't aim to move the text off-screen but actually to move it on-screen to avoid the scrollbars
+        &:before {
+            position: absolute;
+            left: 0;
+            top: 9*@px;
+            text-indent: 0;
+        }
+    }
 }
 
 /**

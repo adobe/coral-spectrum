@@ -8,14 +8,12 @@
     .iosTapHoldPreventDefault;
 
     position: relative;
-    display: inline-block;
     font-size: 12*@px;
     line-height: 18*@px;
 
     // The card link contains everything
     > a,
-    > div {
-        position: relative;
+    > .card {
         text-decoration: none;
         color: @card-text-color;
     }
@@ -23,7 +21,6 @@
     // The card image
     .image {
         display: block;
-        position: relative;
     }
     img,
     canvas {
@@ -31,15 +28,9 @@
     }
 
     // The card text
-    .label,
-    .main {
-        position: relative;
-    }
     h4,
     p {
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
+        .ellipsis;
         margin: 0;
     }
     h4 {
@@ -49,7 +40,7 @@
 
     // The card icons
     > a i,
-    > div i {
+    > .card i {
         .icon-xsmall;
     }
     i,
@@ -74,12 +65,12 @@
     .calc-width(~"100% - @{card-grid-margin}rem");
     margin: 0 0 @card-grid-margin 0;
     background: @card-background-color;
+    float: left;
 
     > a,
-    > div {
+    > .card {
         .card-grid-shadow;
         display: block;
-        z-index: 1;
         width: 100%;
     }
 
@@ -123,35 +114,32 @@
 .list [class^="card-"],
 .list [class*=" card-"] {
     display: block;
-    border-bottom: 1*@px solid @card-list-separator-color;
 
     // The selection box
     .select {
+        .icon-xsmall;
         display: block;
-        height: 100%;
         position: absolute;
         z-index: 2;
         top: 0;
-        width: 45*@px;
         left: 0;
+        width: 45*@px;
+        height: 100%;
 
-        &:before,
-        &:after {
+        &:before {
             content: " ";
             position: absolute;
             top: 17*@px;
             left: 15*@px;
-            width: 15*@px;
-            height: 15*@px;
-        }
-        &:before {
-            background: @card-list-checkbox-background;
-            .box-shadow(inset 0 @px 2*@px rgba(0, 0, 0, 0.33));
+
+            border: @px solid @checkbox-border-color;
+            background: @checkbox-background-color;
+            .box-shadow(inset @px @px 0 rgba(0, 0, 0, 0.05));
         }
 
         // The link element that follows the select item should add some spacing on the left
         & ~ a,
-        & ~ div:not(.label) {
+        & ~ .card {
             padding-left: 45*@px;
         }
     }
@@ -160,13 +148,12 @@
     .move {
         .icon-navigation;
         .icon-medium;
-        display: block;
-        height: 100%;
         position: absolute;
         z-index: 2;
         top: 0;
-        width: 45*@px;
         right: 0;
+        width: 45*@px;
+        height: 100%;
         opacity: 0.3;
 
         &:before {
@@ -176,7 +163,7 @@
 
         // The link element that follows the move item should add some spacing on the right
         & ~ a,
-        & ~ div:not(.label) {
+        & ~ .card {
             padding-right: 45*@px;
         }
     }
@@ -187,27 +174,25 @@
     }
 
     > a,
-    > div:not(.label) {
+    > .card {
         display: block;
         height: @card-list-height;
         padding: 0 10*@px;
+        border-bottom: 1*@px solid @card-list-separator-color;
 
         // hide icons of the card content in list view
         i {
             display: none;
         }
-        .image i {
-            .icon-large;
-            display: block;
-        }
     }
 
     > a:focus {
+        border-bottom-color: @body-background-color;
         background: @card-list-selection-color;
     }
 
     > a,
-    > div,
+    > .card,
     .label {
         overflow: hidden; // Makes floating elements that break on a new line not affect the next row (could be replaced with a clearfix if needed)
         height: @card-list-height;
@@ -270,7 +255,7 @@
     }
 
     > a,
-    > div:not(.label) {
+    > .card {
         background: @card-selection-color;
     }
 }
@@ -278,20 +263,18 @@
 // In list view
 .list [class^="card-"].selected,
 .list [class*=" card-"].selected {
-    border-bottom-color: transparent;
-    > a,
-    > div:not(.label) {
-        background: @card-list-selection-color;
-    }
     > i.select {
+        .icon-check;
+        
         &:before {
-            .box-shadow(inset 0 @px 2*@px rgba(0, 0, 0, 0.5));
-            background: white;
+            border-color: mix(@checkbox-border-color, @card-list-checkbox-color, 75%);
+            color: @card-list-checkbox-color;
         }
-        &:after {
-            background-image: url('@{component-images-folder}/checkbox/check.png');
-            .background-size(100%);
-        }
+    }
+    > a,
+    > .card {
+        border-bottom-color: @body-background-color;
+        background: @card-list-selection-color;
     }
     > a:focus {
         background: @card-selection-color;
