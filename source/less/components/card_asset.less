@@ -74,6 +74,25 @@
     Progress bar displayed while assets are being uploaded.
 */
 
+// Global asset card styles
+.card-asset.uploading {
+    // The handle to cancel the uploading
+    .cancel {
+        .icon-close;
+        .icon-xsmall;
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        right: 0;
+        opacity: 0.3;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.6;
+        }
+    }
+}
+
 // Grid view style
 .grid .card-asset.uploading {
     .progress-bar {
@@ -86,6 +105,11 @@
             display: block;
             margin: 1rem auto;
         }
+    }
+
+    // The handle to cancel the uploading
+    .cancel {
+        padding: 8*@px;
     }
 }
 
@@ -111,7 +135,30 @@
             margin-top: 3*@px;
         }
     }
-    .move ~ div .progress {
+
+    // The handle to cancel the uploading
+    .cancel {
+        width: 35*@px;
+        height: 100%;
+        margin-right: 10*@px;
+
+        &:before {
+            margin: 18*@px auto;
+        }
+    }
+    .move ~ .cancel {
         right: 45*@px;
+    }
+    .cancel ~ .card {
+        padding-right: 45*@px;
+        .progress {
+            right: 45*@px;
+        }
+    }
+    .move ~ .cancel ~ .card {
+        padding-right: 90*@px;
+        .progress {
+            right: 90*@px;
+        }
     }
 }
