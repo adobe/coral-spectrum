@@ -57,7 +57,10 @@
             localStorage.setItem(storageKey, JSON.stringify(store));
             
             if (CUI.util.state.config.serverpersistence) {
-                $.cookie(storageKey, JSON.stringify(store));
+                $.cookie(storageKey, JSON.stringify(store), {
+                    expires: 7,
+                    path: '/'
+                });
             }
         },
 
