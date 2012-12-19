@@ -38,6 +38,30 @@
        bottom: 0;
        .scrollable
     }
+
+
+    footer {
+      margin-top: @footer-height;
+      border-top: 1px solid @footer-border-color;
+      padding: 0 16*@px;
+
+      &,
+      >span,
+      >a {
+        color: @footer-font-color;
+        height: @footer-height;
+        line-height: @footer-height;
+        font-size: 0.75rem;
+      }
+
+      >a {
+        padding-right: 30px;
+      }
+
+      >.right {
+        float: right;
+      }
+    }
         
   }
 }
