@@ -470,7 +470,7 @@
                     }
                     f.append("_charset_", "utf-8");
 
-                    item.xhr.open("POST", self.options.uploadUrl, true);
+                    item.xhr.open("POST", self.options.uploadUrl + "?ck=" + new Date().getTime(), true);
                     item.xhr.send(f);
                 } else {
                     item.xhr.open("PUT", self.options.uploadUrl + "/" + fileName, true);
