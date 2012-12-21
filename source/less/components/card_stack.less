@@ -7,6 +7,7 @@
 */
 .grid .stack {
     margin-bottom: @card-grid-margin+(2*@card-stack-offset);
+    z-index: 0; // Need to enforce z-index = 0 when setting negative z-index of :before and :after. See CUI-343
 
     &:before,
     &:after {
