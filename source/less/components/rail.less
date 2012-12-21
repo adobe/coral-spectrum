@@ -305,6 +305,17 @@ div.rail {
                     }
                 }
             }
+
+            >span {
+                & a:first-child { // should be applied only to first a tag
+                    display: inline-block;
+                    width: 100%;
+                }
+
+                &.active a:first-child { // should be applied only to first a tag
+                    width: 80%;
+                }
+            }
         }
 
         .group {
