@@ -150,15 +150,7 @@ fi
 
 # Temporary: clone from git and add link to template in JSDoc folder
 rm -rf components/JSDoc
-git clone https://github.com/jsdoc3/jsdoc.git components/JSDoc >/dev/null 2>&1
-if [ $? -eq 0 ]; then
-  green " $OK " "\c"
-  echo "JSDoc"
-else
-  red " [X] " "\c"
-  echo "JSDoc";
-  exit 1
-fi
+tar -xzf util/JSDoc.tar.gz -C components/
 
 # install RTE build stuff as well, so grunt full works OOTB without calling the RTE
 # installer manually
