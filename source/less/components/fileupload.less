@@ -9,19 +9,19 @@ input[type=file].fileupload {
 span.fileupload {
     overflow: hidden;
     position: relative;
+    cursor: pointer;
 
     label {
         margin: 0;
         font-size: 0.875rem;
+        cursor: pointer;
     }
 
     input[type=file] {
-        opacity: 0;
-        height: 100%;
-        left: 0;
+        height: 0;
+        width: 0;
         position: absolute;
+        left: 0;
         top: 0;
-        width: 100%;
-        cursor: pointer;
     }
 }

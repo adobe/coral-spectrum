@@ -64,6 +64,7 @@
             events: {}
         },
 
+        spanElement: null,
         inputElement: null,
         fileNameElement: null,
         uploadQueue: [],
@@ -100,7 +101,15 @@
                 this.$element.detach();
                 span.prepend(this.$element);
                 this.$element = span;
+
+                var _onSpanClick = function() {
+                    self.inputElement.click();
+                    span.one("click", _onSpanClick);
+                };
+                span.one("click", _onSpanClick);
             }
+
+            this.spanElement = this.$element.is("span") ? this.$element : this.$element.find("span");
 
             this.inputElement = this.$element.find("input[type='file']");
             this.inputElement.removeAttr("class");
@@ -111,6 +120,7 @@
             this.$element.removeClass("focus");
 
             if (this.inputElement.attr("title")) {
+                this.spanElement.attr("title", this.inputElement.attr("title"));
                 this.$element.prepend($("<label/>", {
                     "for": self.options.name
                 }).html(this.inputElement.attr("title")));
@@ -418,6 +428,8 @@
 
                 return true;
             }
+
+            return false;
         },
 
         /** @ignore */
