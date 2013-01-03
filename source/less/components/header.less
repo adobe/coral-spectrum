@@ -30,6 +30,16 @@ header.top {
       height: @header-logo-size;
       width: @header-logo-size; 
     }
+
+    > a {
+      display: inline-block;
+      height: @header-height;
+      line-height: @header-height;
+
+      > * {
+        vertical-align: middle;
+      }
+    }
   }
 
   [class^="icon-"]:before,
@@ -90,6 +100,13 @@ header.top {
     padding-right: 16*@px;
 
     line-height: @header-height;
+
+    > a {
+      display: inline-block;
+      height: @header-height;
+      line-height: @header-height;
+      vertical-align: top;
+    }
 
     .icon-user {
       margin-left: 10*@px;
