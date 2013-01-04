@@ -153,13 +153,15 @@
 
     _placeSelect: function() {
         var $select = this.$element.find('select').first();
-        var $button = this.$element.find('button').first();
 
         $select.css({
-            position: 'relative',
-            left: -$button.outerWidth(),
-            width: $button.outerWidth(),
-            height: $button.outerHeight()
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            right: 0,
+            bottom: 0,
+            width: 'auto',
+            height: 'auto'
         });
     },
 
