@@ -1482,6 +1482,18 @@ CUI.rte.Selection = function() {
             range.select();
         },
 
+        selectEmptyNode: function(context, dom) {
+            var dpr = CUI.rte.DomProcessor;
+            var tempSpan = dpr.createTempSpan(context, true, false);
+            tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
+            dom.appendChild(tempSpan);
+            var range = context.doc.selection.createRange();
+            range.moveToElementText(tempSpan);
+            // required for the caret to appear/blink
+            range.move("character", 1);
+            range.select();
+        },
+
         resetSelection: function(context, mode) {
             var sel = CUI.rte.Selection;
             var range = context.doc.selection.createRange();
@@ -2314,6 +2326,16 @@ CUI.rte.Selection = function() {
             } else {
                 range.selectNode(dom);
             }
+            selection.removeAllRanges();
+            selection.addRange(range);
+        },
+
+        selectEmptyNode: function(context, dom) {
+            var selection = context.win.getSelection();
+            var range = context.doc.createRange();
+            range.setStart(dom, 0);
+            range.setEnd(dom, 0);
+            // range.collapse(false);
             selection.removeAllRanges();
             selection.addRange(range);
         },

@@ -67,6 +67,44 @@ CUI.rte.commands.DefaultFormatting = new Class({
         return tagName;
     },
 
+    setCaretTo: function(execDef) {
+        var com = CUI.rte.Common;
+        var tag = this.getTagNameForCommand(execDef.command);
+        if (tag) {
+            var context = execDef.editContext;
+            var sel = execDef.selection;
+            var startNode = sel.startNode;
+            var existing = com.getTagInPath(context, startNode, tag);
+            if (!existing) {
+                // switch on style
+                var el = context.createElement(tag);
+                com.setAttribute(el, com.TEMP_EL_ATTRIB, com.TEMP_EL_REMOVE_ON_SERIALIZE
+                        + ":emptyOnly");
+                CUI.rte.DomProcessor.insertElement(context, el, sel.startNode, sel.startOffset);
+                CUI.rte.Selection.selectEmptyNode(context, el);
+                return {
+                    "preventBookmarkRestore": true
+                };
+            } else {
+                // switch off style
+                var path = [ ];
+                var dom = startNode;
+                while (dom && (dom !== existing)) {
+                    if (dom.nodeType === 1) {
+                        path.push(dom);
+                    }
+                    dom = com.getParentNode(context, dom);
+                }
+                if (path.length === 0) {
+                    console.log("Reposition caret");
+                } else {
+                    console.log("Re-create structure ...");
+                }
+            }
+        }
+        return undefined;
+    },
+
     isCommand: function(cmdStr) {
         var cmdLC = cmdStr.toLowerCase();
         return (cmdLC == "bold") || (cmdLC == "italic") || (cmdLC == "underline")
@@ -84,8 +122,8 @@ CUI.rte.commands.DefaultFormatting = new Class({
         var selection = execDef.selection;
         var context = execDef.editContext;
         if (!CUI.rte.Selection.isSelection(selection)) {
-            execDef.editContext.doc.execCommand(execDef.command, false, null);
-            return;
+            // execDef.editContext.doc.execCommand(execDef.command, false, null);
+            return this.setCaretTo(execDef);
         }
         var tagName = this.getTagNameForCommand(execDef.command);
         var attributes = execDef.value;

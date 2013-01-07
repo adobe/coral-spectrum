@@ -1748,6 +1748,99 @@ CUI.rte.DomProcessor = function() {
         },
 
         /**
+         * Creates a span that contains temporary content.
+         * @param {CUI.rte.EditContext} context The edit context
+         * @param {Boolean} removeImmediately True if the span should be removed
+         *        immediately after the selection changes
+         * @param {Boolean} keepChildren True if child nodes should be kept if the
+         *        temporary span should get removed again
+         */
+        createTempSpan: function(context, removeImmediately, keepChildren) {
+            var com = CUI.rte.Common;
+            var span = context.createElement("span");
+            var value = (removeImmediately ? com.TEMP_EL_IMMEDIATE_REMOVAL
+                    : com.TEMP_EL_REMOVE_ON_SERIALIZE);
+            if (keepChildren) {
+                value += ":keepChildren";
+            }
+            com.setAttribute(span, com.TEMP_EL_ATTRIB, value);
+            return span;
+        },
+
+        /**
+         * Removes all currently active temporary spans (as created by
+         * {@link #createTempSpan}).
+         * @param {CUI.rte.EditContext} context The edit context
+         * @param {Boolean} immediate True if all spans that were marked for immediate
+         *        removal should get removed; fals for spans marked for removal after
+         *        serialization
+         */
+        removeTempSpans: function(context, immediate) {
+            var com = CUI.rte.Common;
+            var spans = context.doc.getElementsByTagName("span");
+            var spanCnt = spans.length;
+            var value = (immediate ? com.TEMP_EL_IMMEDIATE_REMOVAL
+                    : com.TEMP_EL_REMOVE_ON_SERIALIZE);
+            for (var s = 0; s < spanCnt; s++) {
+                var spanToRemove = spans[s];
+                var attrValue = com.getAttribute(spanToRemove, com.TEMP_EL_ATTRIB, true);
+                if (attrValue && com.strStartsWith(attrValue, value)) {
+                    if (spanToRemove.parentNode) {
+                        var splitAttrib = attrValue.split(":");
+                        var keepChildren = com.arrayContains(splitAttrib, "keepChildren");
+                        if (keepChildren) {
+                            CUI.rte.DomProcessor.removeWithoutChildren(spanToRemove);
+                        } else {
+                            spanToRemove.parentNode.removeChild(spanToRemove);
+                        }
+                    }
+                }
+            }
+        },
+
+        /**
+         * Removes all DOM elements that are marked as temporary using the
+         * {@link CUI.rte.Common#TEMP_EL_ATTRIB} attribute.
+         * @param {CUI.rte.EditContext} context The edit context
+         * @param {HTMLElement} treeRoot (optional) The sub tree to process
+         */
+        removeTempElements: function(context, treeRoot) {
+            var com = CUI.rte.Common;
+            var dpr = CUI.rte.DomProcessor;
+            if (!treeRoot) {
+                treeRoot = context.doc;
+            }
+            var childCnt = treeRoot.length;
+            for (var c = 0; c < childCnt; c++) {
+                var child = treeRoot.childNodes[c];
+                if (child.nodeType === 1) {
+                    var tempAttrib = com.getAttribute(child, com.TEMP_EL_ATTRIB, true);
+                    if (tempAttrib) {
+                        var splitAttrib = tempAttrib.split(":");
+                        var keepChildren = com.arrayContains(splitAttrib, "keepChildren");
+                        var emptyOnly = com.arrayContains(splitAttrib, "emptyOnly");
+                        if (keepChildren) {
+                            dpr.removeWithoutChildren(child);
+                        } else {
+                            if (emptyOnly) {
+                                if (child.childNodes.length === 0) {
+                                    child.parentNode.removeChild(child);
+                                    continue;
+                                } else {
+                                    com.removeAttribute(child, com.TEMP_EL_ATTRIB);
+                                }
+                            } else {
+                                child.parentNode.removeChild(child);
+                                continue;
+                            }
+                        }
+                    }
+                    dpr.removeTempElements(context, child);
+                }
+            }
+        },
+
+        /**
          * Gecko has several bugs (row-in-row, no table root element) that have to be
          * corrected. As content may theoretically be copied from Gecko to IE, this
          * method should also be called in IE's pasting mechanisms.
@@ -1878,6 +1971,18 @@ CUI.rte.DomProcessor = function() {
          * @type String
          */
         NBSP: String.fromCharCode(160),
+
+        /**
+         * Constant that defines the char code for a non-breaking, zero-width character
+         * @type String
+         */
+        ZERO_WIDTH_NBSP_CODE: 65279,
+
+        /**
+         * Constant that defines a non-breaking, zero-width character as a String
+         * @type String
+         */
+        ZERO_WIDTH_NBSP: String.fromCharCode(65279),
 
         EMPTYTEXT_EXCLUSIONS: [ {
                 "tagName": "a",
