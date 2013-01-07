@@ -321,7 +321,7 @@
                 var text = $("<span>" + html + "</span>").text();
                 if (selectedIndex >=0) {
                     if (this.inputElement.length > 0) {
-                        this.inputElement.val(text);
+                        this.inputElement.val(text).trigger('change');
                     } else {
                         this.buttonElement.html(html);
                     }
