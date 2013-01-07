@@ -79,12 +79,13 @@
     .progress-bar {
         .progress {
             vertical-align: middle;
+            margin: 4*@px 0;
         }
         .cancel {
             .icon-close;
             .icon-xsmall;
-            padding: 8*@px;
             vertical-align: middle;
+            padding: 8*@px;
             opacity: 0.3;
             cursor: pointer;
 
@@ -135,11 +136,14 @@
         background: @card-asset-image-upload-background;
     */
     .progress-bar {
-        .card-list-align-to-column(0.6, 91*@px, 45*@px);
+        .card-list-align-to-column(0.6, 91*@px);
         margin-top: 10*@px;
 
         .cancel {
             display: inline-block;
         }
+    }
+    .move ~ .card .progress-bar {
+        .card-list-align-to-column(0.6, 91*@px, 45*@px);
     }
 }

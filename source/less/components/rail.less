@@ -504,8 +504,10 @@ div.rail {
         display: block;
 
         input[type="text"] {
-          background-position: calc(~"100% - 0.5rem") center;
           background-position: -webkit-calc(~"100% - 0.5rem") center;
+          background-position: -moz-calc(~"100% - 0.5rem") center;
+          background-position: -o-calc(~"100% - 0.5rem") center;
+          background-position: calc(~"100% - 0.5rem") center;
         }
       }
 
@@ -613,7 +615,7 @@ div.rail {
         >.comment {
 
             float: right;
-            width: calc(~"100% - 2rem");
+            .calc-width(~"100% - 2rem");
         }
       }
     }
