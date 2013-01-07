@@ -557,7 +557,7 @@ module.exports = function(grunt) {
       ulimit -n 1000 worked for me
 
       rte: {
-        files: ['<%= dirs.rte %>/grunt.js', '<%= dirs.rte %>/<%= dirs.source %>/**'],
+        files: ['<%= dirs.rte %>/grunt.js', '<%= dirs.rte %>/<%= dirs.source %>/*' + '*'],
         tasks: 'subgrunt:rte copy:rte'
       }
       */
