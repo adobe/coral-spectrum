@@ -40,7 +40,7 @@
             // Adjust DOM to our needs
             this._render();
 
-            this.$element.on("change", "input", function(event) {
+            this.inputElement.on("change", function(event) {
                 if (this.options.disabled) {
                     return;
                 }
@@ -64,8 +64,8 @@
             events: {}
         },
 
-        spanElement: null,
         inputElement: null,
+        $spanElement: null,
         fileNameElement: null,
         uploadQueue: [],
 
@@ -83,17 +83,6 @@
             if (this.$element.get(0).tagName === "INPUT") {
                 var clazz = this.$element.attr("class");
 
-                if (!this.options.useHTML5) {
-                    var form = $("<form/>", {
-                        method: "post",
-                        enctype: "multipart/form-data"
-                    });
-                    this.$element.after(form);
-                    this.$element.detach();
-                    form.prepend(this.$element);
-                    this.$element = form;
-                }
-
                 var span = $("<span/>", {
                     "class": clazz
                 });
@@ -101,16 +90,12 @@
                 this.$element.detach();
                 span.prepend(this.$element);
                 this.$element = span;
-
-                var _onSpanClick = function() {
-                    self.inputElement.click();
-                    span.one("click", _onSpanClick);
-                };
-                span.one("click", _onSpanClick);
             }
 
-            this.spanElement = this.$element.is("span") ? this.$element : this.$element.find("span");
+            // Get the span element
+            this.$spanElement = this.$element.is("span") ? this.$element : this.$element.find("span");
 
+            // Get the input element
             this.inputElement = this.$element.find("input[type='file']");
             this.inputElement.removeAttr("class");
 
@@ -120,7 +105,6 @@
             this.$element.removeClass("focus");
 
             if (this.inputElement.attr("title")) {
-                this.spanElement.attr("title", this.inputElement.attr("title"));
                 this.$element.prepend($("<label/>", {
                     "for": self.options.name
                 }).html(this.inputElement.attr("title")));
@@ -256,30 +240,16 @@
         _createMissingElements: function() {
             var self = this;
 
-            var multiple = this.options.useHTML5 && self.options.multiple;
-            if (this.inputElement.length === 0) {
-                this.inputElement = $("<input/>", {
+            var multiple = self.options.useHTML5 && self.options.multiple;
+            if (self.inputElement.length === 0) {
+                self.inputElement = $("<input/>", {
                     type: "file",
                     name: self.options.name,
                     multiple: multiple
                 });
-                this.$element.prepend(this.inputElement);
+                self.$element.prepend(self.inputElement);
             } else {
-                this.inputElement.attr("multiple", multiple);
-            }
-
-            if (!this.options.useHTML5) {
-                if (this.$element.find("iframe").length === 0) {
-                    var iframeName = "upload-" + new Date().getTime();
-                    var iframe = $("<iframe/>", {
-                            name: iframeName
-                        }
-                    );
-                    this.$element.prepend(iframe);
-                    iframe.hide();
-
-                    this.$element.find("form").attr("target", iframeName);
-                }
+                self.inputElement.attr("multiple", multiple);
             }
         },
 
@@ -490,18 +460,23 @@
                 }
 
             } else {
-                var iframe = self.$element.find("iframe");
-                iframe.on("load", function() {
-                    self.$element.trigger({
-                        type: "fileuploadload",
-                        item: item,
-                        content: this.contentWindow.document.body.innerHTML,
-                        fileUpload: self
-                    });
-                });
+                var $body = $(document.body);
 
-                var form = self.$element.find("form");
-                form.attr("action", self.options.uploadUrl);
+                // Build an iframe
+                var iframeName = "upload-" + new Date().getTime();
+                var $iframe = $("<iframe/>", {
+                    name: iframeName
+                });
+                $iframe.addClass("fileupload").appendTo($body);
+
+                // Build a form
+                var $form = $("<form/>", {
+                    method: "post",
+                    enctype: "multipart/form-data",
+                    action: self.options.uploadUrl,
+                    target: iframeName
+                });
+                $form.addClass("fileupload").appendTo($body);
 
                 // Define value of the file name element
                 if (this.options.fileNameParameter) {
@@ -510,10 +485,25 @@
                         name: this.options.fileNameParameter,
                         value: item.fileName
                     });
-                    form.prepend(this.fileNameElement);
+                    $form.prepend(this.fileNameElement);
                 }
 
-                form.submit();
+                $iframe.one("load", function() {
+                    var content = this.contentWindow.document.body.innerHTML;
+                    self.inputElement.prependTo(self.$spanElement);
+                    $form.remove();
+                    $iframe.remove();
+
+                    self.$element.trigger({
+                        type: "fileuploadload",
+                        item: item,
+                        content: content,
+                        fileUpload: self
+                    });
+                });
+
+                self.inputElement.prependTo($form);
+                $form.submit();
             }
         },
 

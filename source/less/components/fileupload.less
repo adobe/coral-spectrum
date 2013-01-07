@@ -2,26 +2,35 @@
  * A file upload field.
  */
 
+iframe.fileupload {
+  display: none;
+}
+
+form.fileupload,
 input[type=file].fileupload {
-    opacity: 0;
+  opacity: 0.5;
 }
 
 span.fileupload {
-    overflow: hidden;
-    position: relative;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+
+  label {
+    margin: 0;
+    font-size: 0.875rem;
     cursor: pointer;
+  }
 
-    label {
-        margin: 0;
-        font-size: 0.875rem;
-        cursor: pointer;
-    }
-
-    input[type=file] {
-        height: 0;
-        width: 0;
-        position: absolute;
-        left: 0;
-        top: 0;
-    }
+  input[type=file] {
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 1000px;
+    cursor: pointer;
+  }
 }
+
