@@ -41,9 +41,6 @@ input[type=tel] {
   &.error,
   &:invalid {
     .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
-
-    &:focus {
-     .glow;
-    }
+    color: @textfield-error-font-color;
   }
 }
