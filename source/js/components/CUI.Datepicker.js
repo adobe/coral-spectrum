@@ -378,7 +378,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         }.bind(this));
 
         if ($calendar.find("table").length > 0 && slide) {
-            this._slideCalendar($calendar.find("table"), table, (slide === "left"));
+            this._slideCalendar(table, (slide === "left"));
         } else {
             $calendar.find("table").remove();
             $calendar.find(".sliding-container").remove();
@@ -458,13 +458,16 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
 
         return table;
     },
-        
-    _slideCalendar: function(oldtable, newtable, isLeft) {
+      
+    _slideCalendar: function(newtable, isLeft) {
+
+        this.$element.find(".sliding-container table").stop(true, true);
+        this.$element.find(".sliding-container").remove();
+
+        var oldtable = this.$element.find("table");
         var width = oldtable.width();
         var height = oldtable.height();
-
-        this.$element.find(".sliding-container,table").remove();
-
+        
         var container = $("<div class=\"sliding-container\">");
 
         container.css({"display" : "block",
@@ -478,7 +481,6 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         oldtable.css({"position": "absolute", "left": 0, "top": 0});
         oldtable.after(newtable);
         newtable.css({"position": "absolute", "left": (isLeft) ? width : -width, "top": 0});
-        this.slideInProgress = true;
 
         var speed = 400;
         
