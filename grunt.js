@@ -541,10 +541,26 @@ module.exports = function(grunt) {
         tasks: 'mocha'
       },
 
+      // Note that this is only a "stub" implementation for watching changes in RTE. To get
+      // the expected behavior, use the commented definition below (and see the notes there
+      // on how to handle errors)
       rte: {
-        files: ['rte/grunt.js'],
-        tasks: 'concat'
+        files: ['<%= dirs.rte %>/grunt.js'],
+        tasks: 'subgrunt:rte copy:rte'
       }
+
+      /*
+
+      Full RTE watch implementation - but use with caution: due to OS-specific limits,
+      ulimit might need to be set explicitly before, otherwise NodeJS may choke.
+
+      ulimit -n 1000 worked for me
+
+      rte: {
+        files: ['<%= dirs.rte %>/grunt.js', '<%= dirs.rte %>/<%= dirs.source %>/**'],
+        tasks: 'subgrunt:rte copy:rte'
+      }
+      */
 
     }
   });
