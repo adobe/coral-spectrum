@@ -173,10 +173,10 @@
 .card-list-align-to-column(@position, @left-offset-rem, @right-offset-rem: 0*@px) {
     @total-offset-rem: @left-offset-rem + @right-offset-rem;
     position: absolute;
-    left: -webkit-calc(~"(100% - @{total-offset-rem}) * @{position} + @{left-offset-rem}");
-    left: -moz-calc(~"(100% - @{total-offset-rem}) * @{position} + @{left-offset-rem}");
-    left: -o-calc(~"(100% - @{total-offset-rem}) * @{position} + @{left-offset-rem}");
-    left: calc(~"(100% - @{total-offset-rem}) * @{position} + @{left-offset-rem}");
+    left: -webkit-calc(~"(100% - @{total-offset-rem}rem) * @{position} + @{left-offset-rem}rem");
+    left: -moz-calc(~"(100% - @{total-offset-rem}rem) * @{position} + @{left-offset-rem}rem");
+    left: -o-calc(~"(100% - @{total-offset-rem}rem) * @{position} + @{left-offset-rem}rem");
+    left: calc(~"(100% - @{total-offset-rem}rem) * @{position} + @{left-offset-rem}rem");
 }
 
 // List view: Draws a box for additional info showed next to the title (used by card-page)
