@@ -28,6 +28,8 @@ Currently there are the following data options:
   data-stored-format             Sets the format of the date for transferring it to the server
   data-displayed-format          Sets the format of the date for displaying it to the user
   data-force-html-mode           Force to HTML mode and never use a native Date widget, if given (with any non-empty value)
+  data-day-names                 JSON-array-data with the short names of all week days, starting with Sunday
+  data-month-names               JSON-array-data with the names of all months, starting with January
 
 Additionally the type (date, time, datetime) is read from the &lt;input&gt; field.
 
@@ -240,7 +242,14 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         if (el.data('force-html-mode') !== undefined) {
             this.options.forceHTMLMode = el.data('force-html-mode');
         }
-                
+        
+        if (el.data('day-names') !== undefined) {
+            this.options.dayNames = el.data('day-names') || this.options.dayNames;
+        }
+        
+        if (el.data('month-names') !== undefined) {
+            this.options.monthNames = el.data('month-names') || this.options.monthNames;
+        }                
     },
 
     _readInputVal: function(format) {
