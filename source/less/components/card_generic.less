@@ -22,8 +22,7 @@
     .image {
         display: block;
     }
-    img,
-    canvas {
+    img {
         display: block;
     }
 
@@ -77,12 +76,11 @@
     .image {
         border-bottom: @px solid @card-image-separator;
     }
-    img,
-    canvas {
+    img {
         width: 100%;
         opacity: 0.999; // IE fix
     }
-    canvas ~ img {
+    img.multiplied ~ img {
         display: none;
     }
 

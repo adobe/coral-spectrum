@@ -106,8 +106,7 @@
          */
         multiplyImage: function(image, color) {
             var canvas = $("<canvas class='" + image.className + " multiplied' width='" +
-                        image.naturalWidth + "' height='" + image.naturalHeight+"'></canvas>")
-                    .insertBefore(image)[0];
+                        image.naturalWidth + "' height='" + image.naturalHeight+"'></canvas>")[0];
 
             var context = canvas.getContext("2d");
             context.drawImage(image, 0, 0, image.naturalWidth, image.naturalHeight);
@@ -122,6 +121,11 @@
             }
 
             context.putImageData(imageData, 0, 0);
+
+            // re-sizing of canvases are handled different in IE and Opera, thus we have to use an image
+            $("<img class='" + image.className + " multiplied' width='" +
+                        image.naturalWidth + "' height='" + image.naturalHeight + "' src='" +
+                        canvas.toDataURL("image/png") + "'></img>").insertBefore(image);
         }
 
     };
@@ -907,7 +911,7 @@
                 return;
             }
             var selector = this.selectors.view.selectedItems.grid.selector +
-                    " canvas.multiplied";
+                    " img.multiplied";
             $(selector).remove();
         },
 
@@ -933,7 +937,7 @@
             if (!$itemEl.jquery) {
                 $itemEl = item.getItemEl();
             }
-            $itemEl.find("canvas.multiplied").remove();
+            $itemEl.find("img.multiplied").remove();
         },
 
         removeAllItemsSilently: function() {
