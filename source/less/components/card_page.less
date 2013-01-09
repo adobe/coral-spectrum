@@ -20,6 +20,7 @@
     }
     .image {
         overflow: hidden; // To avoid the gradient to overflow the image element
+        position: relative;
         &:after {
             content: " ";
             position: absolute;
@@ -66,12 +67,47 @@
         width: 5%;
     }
 }
+.list.small .card-page {
+    .main {
+        width: 60%;
+    }
+    .published,
+    .modified {
+        width: 20%;
+    }
+    .links {
+        display: none;
+    }
+}
+.list.xsmall .card-page {
+    .main {
+        width: 70%;
+    }
+    .published {
+        width: 30%;
+    }
+    .modified,
+    .links {
+        display: none;
+    }
+}
+.list.xxsmall .card-page {
+    .main {
+        width: 100%;
+    }
+    .published,
+    .modified,
+    .links {
+        display: none;
+    }
+}
 
 // Hidden, redirecting and deactivated pages
 .card-page.page-hidden,
 .card-page.page-redirect,
 .card-page.page-deactivated {
     .list & a > *,
+    .list & .card > *,
     .grid & img,
     .grid & canvas {
         opacity: 0.5;

@@ -37,6 +37,10 @@
 // Toolbar
 @toolbar-border-color: rgb(215, 215, 215);
 
+// Footer
+@footer-height: 44*@px;
+@footer-border-color: rgb(215, 215, 215);
+@footer-font-color: rgb(180, 180, 180);
 
 // Grid
 @grid-spacing: 8*@px;
@@ -237,6 +241,8 @@
 @slider-disabled-fill-color: rgb(217, 217, 217);
 
 // Rail
+@rail-input-placeholder-color: rgb(166, 166, 166);
+
 @rail-background-color: rgb(72, 76, 77);
 @rail-dark-background-color: rgb(58, 62, 62);
 
@@ -292,7 +298,7 @@
 @card-text-color: rgba(0, 0, 0, 0.4);  // The text is transparent to make it look right when selected
 @card-text-color-inverted: rgb(255, 255, 255);
 @card-image-separator: rgba(0, 0, 0, 0.1);
-@card-selection-color: rgb(82,165,227);
+@card-selection-color: rgb(82, 165, 227);
 @card-selection-icon-color: rgb(255, 255, 255);
 @card-selection-icon-size: 48*@px;
 @card-stack-offset: 4*@px;
@@ -308,6 +314,7 @@
 @card-banner-text-color-black: rgba(255, 255, 255, 0.8);
 @card-image-separator-color: rgb(235, 235, 235);
 @card-list-height: 50*@px;
+@card-list-checkbox-color: saturate(darken(@card-selection-color, 30%), 20%);
 @card-list-title-color: rgb(51, 51, 51);
 @card-list-separator-color: rgb(210, 210, 210);
 @card-list-yellow-background: rgb(255, 210, 77);
@@ -316,13 +323,14 @@
 @card-list-gray-border: rgb(187, 187, 187);
 @card-list-stack-border: rgb(210, 210, 210);
 @card-list-stack-background: rgb(255, 255, 255);
-@card-list-checkbox-background: rgb(235, 235, 235);
+@card-list-checkbox-background: rgb(255, 255, 255);
 @card-list-selection-color: rgb(187, 210, 229);
 @card-list-header-triangle: rgb(153, 153, 153);
 @card-board-header-border: rgb(187, 187, 187);
 @card-board-preview-background: rgb(187, 187, 187);
 @card-asset-image-background: rgba(0, 0, 0, 0.13);
 @card-asset-image-upload-background: rgba(0, 0, 0, 0.4);
+@card-directory-icon-color: rgba(0, 0, 0, 0.4);
 @card-grid-margin: 15*@px;
 
 
@@ -388,7 +396,7 @@
 
 // Checkbox
 @checkbox-check-color: rgb(80, 130, 205);
-@checkbox-border-color: rgba(0, 0, 0, 0.25);
+@checkbox-border-color: rgb(192, 192, 192);
 @checkbox-background-color: rgb(255, 255, 255);
 @checkbox-disabled-background-color: rgb(230, 230, 230);
 @checkbox-disabled-check-color: rgb(195, 195, 195);

@@ -30,6 +30,16 @@ header.top {
       height: @header-logo-size;
       width: @header-logo-size; 
     }
+
+    > a {
+      display: inline-block;
+      height: @header-height;
+      line-height: @header-height;
+
+      > * {
+        vertical-align: middle;
+      }
+    }
   }
 
   [class^="icon-"]:before,
@@ -80,15 +90,29 @@ header.top {
     }
   }
 
-  div.drawer {
+  .drawer {
     position: absolute;
     right: 0;
     top: 0;
 
     display: inline-block;
     height: @header-height;
-    padding-right: 1em;
+    padding-right: 16*@px;
 
     line-height: @header-height;
+
+    > a {
+      display: inline-block;
+      height: @header-height;
+      line-height: @header-height;
+      vertical-align: top;
+    }
+
+    .icon-user {
+      margin-left: 10*@px;
+      &:before {
+        font-size: 1.2rem;
+      }
+    }
   }
 }

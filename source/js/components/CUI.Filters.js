@@ -532,6 +532,12 @@ var index = filters.getSelectedIndex();
                     event.preventDefault();
                 }
             }
+        } else {
+            if (key === 13 && this.dropdownList.currentIndex < 0) {
+                // Close dropdownlist, even if nothing is selected
+                this.dropdownList.hide();
+                event.preventDefault();
+            }
         }
     },
     

@@ -42,6 +42,7 @@
         "controller": {
             "selectElement": {                          // defines the selector that is used for installing the tap/click handlers
                 "list": "article > i.select",
+                /* "listNavElement": "article", */      // may be used to determine the element that is responsible for navigating in list view (required only if different from the Grid's select item)
                 "grid": "article"
             },
             "moveHandleElement": {                      // defines the selector that is used to determine the object that is responsible for moving an item in list view
@@ -753,6 +754,17 @@
             this.$el.on("change:insertitem", function(e) {
                 self._onItemInserted(e);
             });
+            this.$el.reflow({
+                "small": function ($el, size) {
+                    return $el.width() > 40*size.rem() && $el.width() < 50*size.rem();
+                },
+                "xsmall": function ($el, size) {
+                    return $el.width() > 30*size.rem() && $el.width() < 40*size.rem();
+                },
+                "xxsmall": function ($el, size) {
+                    return $el.width() < 30*size.rem();
+                }
+            });
         },
 
         _onItemInserted: function(e) {
@@ -942,6 +954,8 @@
 
         selectionModeCount: null,
 
+        _listSelect: false,
+
         construct: function($el, selectors) {
             this.$el = $el;
             this.selectors = selectors;
@@ -957,9 +971,13 @@
                     var widget = Utils.getWidget(self.$el);
                     if (widget.getDisplayMode() === DISPLAY_LIST) {
                         var item = ensureItem(self.getItemElFromEvent(e));
-                        widget.toggleSelection(item);
-                        e.stopPropagation();
-                        e.preventDefault();
+                        if (widget.toggleSelection(item)) {
+                            e.stopPropagation();
+                            e.preventDefault();
+                        }
+                        if (e.type === "tap") {
+                            self._listSelect = true;
+                        }
                     }
                 });
             this.$el.fipo("tap.cardview.select", "click.cardview.select",
@@ -968,9 +986,10 @@
                     if ((widget.getDisplayMode() === DISPLAY_GRID) &&
                             widget.isGridSelectionMode()) {
                         var item = ensureItem(self.getItemElFromEvent(e));
-                        widget.toggleSelection(item);
-                        e.stopPropagation();
-                        e.preventDefault();
+                        if (widget.toggleSelection(item)) {
+                            e.stopPropagation();
+                            e.preventDefault();
+                        }
                     }
                 });
             // list header
@@ -989,15 +1008,29 @@
                         }
                     }
                 });
-            // block click event for cards
+            // block click event for cards on touch devices
             this.$el.finger("click.cardview.select",
                 this.selectors.controller.selectElement.grid, function(e) {
                     var widget = Utils.getWidget(self.$el);
-                    if ((widget.getDisplayMode() === DISPLAY_GRID) &&
-                            widget.isGridSelectionMode()) {
+                    var dispMode = widget.getDisplayMode();
+                    if ((dispMode === DISPLAY_GRID) && widget.isGridSelectionMode()) {
                         e.stopPropagation();
                         e.preventDefault();
                     }
+                });
+            // block click event for list items on touch devices if the click actually
+            // represents a change in selection rather than navigating
+            var listNavElement = this.selectors.controller.selectElement.listNavElement ||
+                    this.selectors.controller.selectElement.grid;
+            this.$el.finger("click.cardview.select",
+                listNavElement, function(e) {
+                    var widget = Utils.getWidget(self.$el);
+                    var dispMode = widget.getDisplayMode();
+                    if ((dispMode === DISPLAY_LIST) && self._listSelect) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                    }
+                    self._listSelect = false;
                 });
             // reordering
             this.$el.fipo("touchstart.cardview.reorder", "mousedown.cardview.reorder",
@@ -1327,11 +1360,26 @@
 
         toggleSelection: function(item, moreSelectionChanges) {
             item = ensureItem(item);
-            var isSelected = this.isSelected(item);
 
+            var beforeEvent = $.Event("beforeselect", {
+
+                selectionCancelled: false,
+
+                item: item,
+
+                cancelSelection: function() {
+                    this.selectionCancelled = true;
+                }
+            });
+            this.$element.trigger(beforeEvent);
+            if (beforeEvent.selectionCancelled) {
+                return false;
+            }
+
+            var isSelected = this.isSelected(item);
             if (!isSelected &&
-                this.getSelectionModeCount() === SELECTION_MODE_COUNT_SINGLE &&
-                this.getSelection().length > 0) {
+                    (this.getSelectionModeCount() === SELECTION_MODE_COUNT_SINGLE) &&
+                    (this.getSelection().length > 0)) {
                 this.clearSelection();
             }
 
@@ -1342,6 +1390,7 @@
                 "isSelected": !isSelected,
                 "moreSelectionChanges": moreSelectionChanges
             }));
+            return true;
         },
 
         getSelection: function(useModel) {

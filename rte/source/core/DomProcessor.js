@@ -774,6 +774,7 @@ CUI.rte.DomProcessor = function() {
                     // must mark all nodes "behind" the current node for moving, as the
                     // normal mechanism does not work for non-insertable nodes
                     childIndex = com.getChildIndex(node);
+                    offset = childIndex;
                     var children = node.parentNode.childNodes;
                     for (; childIndex < children.length; childIndex++) {
                         nodeToMove = children[childIndex];

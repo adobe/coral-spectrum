@@ -13,6 +13,12 @@ jQuery(function($) {
         console.log(gl.getSelection(true));
         */
     });
+    $grid.on("beforeselect", function(e) {
+        if (e.item.$itemEl.hasClass("unselectable")) {
+            e.cancelSelection();
+        }
+    });
+
     $grid.on("change:removeAll", function(e) {
         // console.log("All items removed");
     });

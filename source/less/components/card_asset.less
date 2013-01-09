@@ -67,6 +67,54 @@
         .card-list-date-user();
     }
 }
+.list.small .card-asset {
+    h4, // The <h4> element is a <div class="main"> in the list header
+    .main {
+        width: 50%;
+    }
+    .resolution,
+    .size {
+        width: 15%;
+    }
+    .modified {
+        width: 20%;
+    }
+    .type,
+    .links,
+    .comments {
+        display: none;
+    }
+}
+.list.xsmall .card-asset {
+    h4, // The <h4> element is a <div class="main"> in the list header
+    .main {
+        width: 70%;
+    }
+    .modified {
+        width: 30%;
+    }
+    .type,
+    .resolution,
+    .size,
+    .links,
+    .comments {
+        display: none;
+    }
+}
+.list.xxsmall .card-asset {
+    h4, // The <h4> element is a <div class="main"> in the list header
+    .main {
+        width: 100%;
+    }
+    .type,
+    .resolution,
+    .size,
+    .modified,
+    .links,
+    .comments {
+        display: none;
+    }
+}
 
 /**
 
@@ -74,44 +122,113 @@
     Progress bar displayed while assets are being uploaded.
 */
 
+// Global asset card styles
+.card-asset.uploading {
+    .progress-bar {
+        .progress {
+            vertical-align: middle;
+            margin: 4*@px 0;
+        }
+        .cancel {
+            .icon-close;
+            .icon-xsmall;
+            vertical-align: middle;
+            padding: 8*@px;
+            opacity: 0.3;
+            cursor: pointer;
+
+            &:hover {
+                opacity: 0.6;
+            }
+        }
+    }
+}
+
 // Grid view style
 .grid .card-asset.uploading {
     .progress-bar {
         display: block;
         background: @card-asset-image-upload-background;
-        padding: 1rem 0;
+        padding: 32*@px 0;
         border-bottom: none;
+        text-align: center;
 
-        .progress {
-            display: block;
-            margin: 1rem auto;
+        .cancel {
+            margin: 0 -10*@px 0 -2*@px;
         }
     }
 }
 
+
 // List view style
 .list .card-asset.uploading {
     h4 {
-        width: 60%;
+        width: 50%;
     }
     p {
-        width: 40%;
-        text-align: right;
+        width: 10%;
     }
-    .label {
-        padding-right: @progress-width + 10*@px;
+    .card:before {
+        content: " ";
+        display: block;
+        float: left;
+        width: 38*@px;
+        height: 30*@px;
+        margin: 9*@px 8*@px 0 0;
+        border: @px solid transparent;
+        background: @card-asset-image-upload-background;
     }
-    .progress-bar {
+
+    /*
         position: static;
         background: @card-asset-image-upload-background;
-        
-        .progress {
-            position: absolute;
-            right: 0;
-            margin-top: 3*@px;
+    */
+    .progress-bar {
+        .card-list-align-to-column(0.6, 91*@px);
+        margin-top: 10*@px;
+
+        .cancel {
+            display: inline-block;
         }
     }
-    .move ~ div .progress {
-        right: 45*@px;
+    .move ~ .card .progress-bar {
+        .card-list-align-to-column(0.6, 91*@px, 45*@px);
+    }
+}
+.list.small .card-asset.uploading {
+    p {
+        display: none;
+    }
+    .progress-bar {
+        .card-list-align-to-column(0.5, 91*@px);
+    }
+    .move ~ .card .progress-bar {
+        .card-list-align-to-column(0.5, 91*@px, 45*@px);
+    }
+}
+.list.xsmall .card-asset.uploading,
+.list.xxsmall .card-asset.uploading {
+    p {
+        display: none;
+    }
+    .progress-bar {
+        left: auto;
+        right: 10*@px;
+
+        .progress {
+            width: 6rem;
+        }
+    }
+    .move ~ .card .progress-bar {
+        left: auto;
+        right: 55*@px;
+    }
+}
+.list.xxsmall .card-asset.uploading {
+    h4 {
+        width: 80%;
+    }
+    .progress-bar .progress {
+        width: 2rem;
     }
 }

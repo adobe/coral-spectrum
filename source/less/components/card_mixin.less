@@ -26,9 +26,6 @@
 .card-grid-shadow(@opacity: 25%) {
     .box-shadow(0 1.5*@px 1.5*@px fade(rgb(0, 0, 0), @opacity));
 }
-.card-grid-shadow(focus) {
-    .card-grid-shadow(80%);
-}
 
 // Grid view: displays the card label as a banner that runs across the preview image (used by card-collection)
 .card-grid-banner(
@@ -42,7 +39,7 @@
     @selection-color-darker: darken(@selection-color, 10%);
     @selection-color-fold: mix(@selection-color, @selection-color-darker, 50%);
 
-    .calc-width(~"100% - @{card-grid-banner-margin}rem");
+    .calc-width(~"100%" - unit(@card-grid-banner-margin, rem));
     margin-left:  (@card-banner-offset+@px);
     margin-right: (@card-banner-offset+@px);
     
@@ -129,9 +126,6 @@
             height: @height;
         }
     }
-    .select[class] { // The [class] attribute helps to overrule the initial style
-        width: ((45+1+10)*@px + @width);
-    }
     // The sort triangle in the list header that is displayed above the image column
     .sort {
         margin: 0 8*@px 0 0;
@@ -167,6 +161,19 @@
             width: @width - 8*@px;
         }
     }
+}
+
+// List view: Aligns an element that is outside of another one using percentages taking in consideration the offset values of the other element.
+// Practically, this is used by the uploading state of the card-asset to align the progress bar to the columns in the label element.
+// @position should be a float between 0 and 1 that corresponds to the percentage of the width it should aling to.
+// @left-offset-rem and @right-offset-rem should be REM values of the left and right offset of the other element it should align to.
+.card-list-align-to-column(@position, @left-offset-rem, @right-offset-rem: 0*@px) {
+    @total-offset-rem: @left-offset-rem + @right-offset-rem;
+    position: absolute;
+    left: -webkit-calc((~"(100% -" unit(@total-offset-rem, rem)) ~") *" @position ~"+" unit(@left-offset-rem, rem));
+    left: -moz-calc((~"(100% -" unit(@total-offset-rem, rem)) ~") *" @position ~"+" unit(@left-offset-rem, rem));
+    left: -o-calc((~"(100% -" unit(@total-offset-rem, rem)) ~") *" @position ~"+" unit(@left-offset-rem, rem));
+    left: calc((~"(100% -" unit(@total-offset-rem, rem)) ~") *" @position ~"+" unit(@left-offset-rem, rem));
 }
 
 // List view: Draws a box for additional info showed next to the title (used by card-page)

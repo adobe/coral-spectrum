@@ -210,7 +210,7 @@ module.exports = function (grunt) {
 
             concat:{
                 files:[
-                    '<%= dirs.source %>/js/**'
+                    '<%= dirs.source %>/**'
                 ],
                 tasks:'concat'
             }
