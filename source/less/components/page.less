@@ -32,11 +32,14 @@
     // Have a scrolling area below toolbar
     .content-container {
        position: absolute;
-       top: 46*@px;
+       top: 47*@px;
        left: 0;
        right: 0;
        bottom: 0;
        .scrollable
+    }
+    .toolbar.break-lines + .content-container {
+      top: 94*@px;
     }
 
 

@@ -67,6 +67,54 @@
         .card-list-date-user();
     }
 }
+.list.small .card-asset {
+    h4, // The <h4> element is a <div class="main"> in the list header
+    .main {
+        width: 50%;
+    }
+    .resolution,
+    .size {
+        width: 15%;
+    }
+    .modified {
+        width: 20%;
+    }
+    .type,
+    .links,
+    .comments {
+        display: none;
+    }
+}
+.list.xsmall .card-asset {
+    h4, // The <h4> element is a <div class="main"> in the list header
+    .main {
+        width: 70%;
+    }
+    .modified {
+        width: 30%;
+    }
+    .type,
+    .resolution,
+    .size,
+    .links,
+    .comments {
+        display: none;
+    }
+}
+.list.xxsmall .card-asset {
+    h4, // The <h4> element is a <div class="main"> in the list header
+    .main {
+        width: 100%;
+    }
+    .type,
+    .resolution,
+    .size,
+    .modified,
+    .links,
+    .comments {
+        display: none;
+    }
+}
 
 /**
 
@@ -145,5 +193,42 @@
     }
     .move ~ .card .progress-bar {
         .card-list-align-to-column(0.6, 91*@px, 45*@px);
+    }
+}
+.list.small .card-asset.uploading {
+    p {
+        display: none;
+    }
+    .progress-bar {
+        .card-list-align-to-column(0.5, 91*@px);
+    }
+    .move ~ .card .progress-bar {
+        .card-list-align-to-column(0.5, 91*@px, 45*@px);
+    }
+}
+.list.xsmall .card-asset.uploading,
+.list.xxsmall .card-asset.uploading {
+    p {
+        display: none;
+    }
+    .progress-bar {
+        left: auto;
+        right: 10*@px;
+
+        .progress {
+            width: 6rem;
+        }
+    }
+    .move ~ .card .progress-bar {
+        left: auto;
+        right: 55*@px;
+    }
+}
+.list.xxsmall .card-asset.uploading {
+    h4 {
+        width: 80%;
+    }
+    .progress-bar .progress {
+        width: 2rem;
     }
 }

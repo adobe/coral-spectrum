@@ -754,6 +754,17 @@
             this.$el.on("change:insertitem", function(e) {
                 self._onItemInserted(e);
             });
+            this.$el.reflow({
+                "small": function ($el, size) {
+                    return $el.width() > 40*size.rem() && $el.width() < 50*size.rem();
+                },
+                "xsmall": function ($el, size) {
+                    return $el.width() > 30*size.rem() && $el.width() < 40*size.rem();
+                },
+                "xxsmall": function ($el, size) {
+                    return $el.width() < 30*size.rem();
+                }
+            });
         },
 
         _onItemInserted: function(e) {

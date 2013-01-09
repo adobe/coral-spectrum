@@ -14,29 +14,16 @@ nav.pulldown {
     font-family: AdobeClean;
   }
 
-  > a {
+  > a,
+  h1 a {
     background: transparent;
     border: 0 none;
-    padding: 4*@px 0;
+    padding: 4*@px 16*@px 4*@px 0;
     font-size: 18*@px;
+    background: url('@{component-images-folder}/pulldown/handle.svg') no-repeat right center;
 
     &:hover {
       color: @pulldown-hover-text-color;
-    }
-
-    // Add dropdown arrow right of home pulldown
-    &:after {
-      margin-left: 8*@px;
-      padding-left: 10*@px;
-      display: inline;
-      background: url('@{component-images-folder}/pulldown/handle.svg') no-repeat center center;
-      content: "";
-    }
-
-    .toolbar & {
-      display: inline-block;
-      line-height: 20*@px;
-      padding: 13*@px 0;
     }
   }
 

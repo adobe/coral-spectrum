@@ -9,6 +9,7 @@
     <script src="js/libs/handlebars.js"></script>
     <script src="js/libs/jquery.js"></script>
     <script src="js/libs/jquery-fingerpointer.js"></script>
+    <script src="js/libs/jquery-reflow.js"></script>
     <script src="js/libs/toe.js"></script>
     <script src="js/libs/moment.js"></script>
 
@@ -16,6 +17,26 @@
 
     <script src="js/libs/jquery-gridlayout.js"></script>
     <script src="js/shell.js"></script>
+    <script>
+
+jQuery(function ($) {
+    $(".toolbar:has(.left + .right + .center)").each(function () {
+        var elem = $(this);
+        var icons = elem.find(".left");
+        var iconWidth = icons.width();
+
+        elem.reflow({
+            "break-lines": function (elem, size) {
+                return elem.width()-2*iconWidth < 20*size.rem();
+            },
+            "long-title":  function (elem, size) {
+                return elem.width()-2*iconWidth > 40*size.rem();
+            }
+        });
+    });
+});
+
+    </script>
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width = device-width, initial-scale = 1, user-scalable = no">
@@ -224,19 +245,28 @@
         <div class="content">
             <nav class="toolbar content-header">
                 <div class="left icongroup">
-                    <a href="#" class="icon-navigation" id="close-rail">Add</a>
+                    <button type="button" title="Toggle Rail" class="foundation-admin-rail-toggle icon-navigation">Toggle Rail</button>
                     <span class="divider"></span>
-                    <a href="#" class="icon-check-circle" id="selection-mode"></a>
-                    <a href="#" class="icon-chevronleft" id="prepend">Prepend</a>
-                    <a href="#" class="icon-chevronright" id="append">Append</a>
-                    <a href="#" class="icon-collectionadd" id="add">Add Collection</a>
-                    <a href="#" class="icon-minus-circle" id="remove-all">Remove all</a>
-                </div>
-                <div class="center">
-                    <h1>Page Title</h1>
+                    <button type="button" class="icon-check-circle" title="Enter Selection Mode">Enter Selection Mode</button>
+                    <button type="button" class="icon-edit" title="Edit"></button>
+                    <button type="button" class="icon-note" title="Annotate"></button>
+                    <a href="#downloadasset" class="icon-download" title="Download">Download</a>
+                    <button type="button" class="icon-info-circle" title="View Properties"></button>
+                    <span class="button icon-upload"><label for="will_be_replaced">Upload Rendition</label></span>
                 </div>
                 <div class="right icongroup">
                     <button id="display-mode" class="icon-viewlist" type="button" title="Show as List">List Layout</button>
+                </div>
+                <div class="center">
+                    <nav data-init="pulldown" class="pulldown">
+                        <a href="#">English Geometrixx Outdoors - Extremely Long Title That Almost Never Ends - Hello World Blablablah</a>
+                        <div class="popover arrow-top" style="display: none;">
+                            <ul>
+                                <li><a href="/sites.html/content/geometrixx-outdoors"><i class="icon-folder withLabel"></i>Geometrixx Outdoors Site</a></li>
+                                <li><a href="/sites.html/content"><i class="icon-folder withLabel"></i>Sites</a></li>
+                            </ul>
+                        </div>
+                    </nav>
                 </div>
             </nav>
             
