@@ -960,9 +960,10 @@
                     var widget = Utils.getWidget(self.$el);
                     if (widget.getDisplayMode() === DISPLAY_LIST) {
                         var item = ensureItem(self.getItemElFromEvent(e));
-                        widget.toggleSelection(item);
-                        e.stopPropagation();
-                        e.preventDefault();
+                        if (widget.toggleSelection(item)) {
+                            e.stopPropagation();
+                            e.preventDefault();
+                        }
                         if (e.type === "tap") {
                             self._listSelect = true;
                         }
@@ -974,9 +975,10 @@
                     if ((widget.getDisplayMode() === DISPLAY_GRID) &&
                             widget.isGridSelectionMode()) {
                         var item = ensureItem(self.getItemElFromEvent(e));
-                        widget.toggleSelection(item);
-                        e.stopPropagation();
-                        e.preventDefault();
+                        if (widget.toggleSelection(item)) {
+                            e.stopPropagation();
+                            e.preventDefault();
+                        }
                     }
                 });
             // list header
@@ -1347,11 +1349,26 @@
 
         toggleSelection: function(item, moreSelectionChanges) {
             item = ensureItem(item);
-            var isSelected = this.isSelected(item);
 
+            var beforeEvent = $.Event("beforeselect", {
+
+                selectionCancelled: false,
+
+                item: item,
+
+                cancelSelection: function() {
+                    this.selectionCancelled = true;
+                }
+            });
+            this.$element.trigger(beforeEvent);
+            if (beforeEvent.selectionCancelled) {
+                return false;
+            }
+
+            var isSelected = this.isSelected(item);
             if (!isSelected &&
-                this.getSelectionModeCount() === SELECTION_MODE_COUNT_SINGLE &&
-                this.getSelection().length > 0) {
+                    (this.getSelectionModeCount() === SELECTION_MODE_COUNT_SINGLE) &&
+                    (this.getSelection().length > 0)) {
                 this.clearSelection();
             }
 
@@ -1362,6 +1379,7 @@
                 "isSelected": !isSelected,
                 "moreSelectionChanges": moreSelectionChanges
             }));
+            return true;
         },
 
         getSelection: function(useModel) {
