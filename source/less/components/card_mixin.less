@@ -42,7 +42,7 @@
     @selection-color-darker: darken(@selection-color, 10%);
     @selection-color-fold: mix(@selection-color, @selection-color-darker, 50%);
 
-    .calc-width(~"100% - @{card-grid-banner-margin}rem");
+    .calc-width(~"100%" - unit(@card-grid-banner-margin, rem));
     margin-left:  (@card-banner-offset+@px);
     margin-right: (@card-banner-offset+@px);
     
@@ -173,10 +173,14 @@
 .card-list-align-to-column(@position, @left-offset-rem, @right-offset-rem: 0*@px) {
     @total-offset-rem: @left-offset-rem + @right-offset-rem;
     position: absolute;
-    left: -webkit-calc(~"(100% - @{total-offset-rem}rem) * @{position} + @{left-offset-rem}rem");
-    left: -moz-calc(~"(100% - @{total-offset-rem}rem) * @{position} + @{left-offset-rem}rem");
-    left: -o-calc(~"(100% - @{total-offset-rem}rem) * @{position} + @{left-offset-rem}rem");
-    left: calc(~"(100% - @{total-offset-rem}rem) * @{position} + @{left-offset-rem}rem");
+    //unit(@total-offset-rem, rem)
+    //unit(@left-offset-rem, rem)
+
+
+    left: -webkit-calc((~"100%" ~"-" unit(@total-offset-rem, rem)) ~"*" @position ~"+" unit(@left-offset-rem, rem));
+    left: -moz-calc((~"100%" ~"-" unit(@total-offset-rem, rem)) ~"*" @position ~"+" unit(@left-offset-rem, rem));
+    left: -o-calc((~"100%" ~"-" unit(@total-offset-rem, rem)) ~"*" @position ~"+" unit(@left-offset-rem, rem));
+    left: calc((~"100%" ~"-" unit(@total-offset-rem, rem)) ~"*" @position ~"+" unit(@left-offset-rem, rem));
 }
 
 // List view: Draws a box for additional info showed next to the title (used by card-page)
