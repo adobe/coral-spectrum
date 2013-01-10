@@ -115,7 +115,62 @@
             };
 
             return true;
+        },
+
+        // support for "temporary" storage that will be automatically cleared if
+        // the browser session ends; currently uses a set/get pattern rather than
+        // loading the entire thing on document ready. Also note that the data is currently
+        // not sent to the server.
+
+        setSessionItem: function(name, value, ns) {
+            var key = name;
+            if (ns) {
+                key = name + ":" + ns;
+            }
+            sessionStorage.setItem(key, JSON.stringify(value));
+        },
+
+        getSessionItem: function(name, ns) {
+            var key = name;
+            if (ns) {
+                key = name + ":" + ns;
+            }
+            var value = sessionStorage.getItem(key);
+            if (value) {
+                value = JSON.parse(value);
+            }
+            return value;
+        },
+
+        removeSessionItem: function(name, ns) {
+            var key = name;
+            if (ns) {
+                key = name + ":" + ns;
+            }
+            sessionStorage.removeItem(key);
+        },
+
+        clearSessionItems: function(ns) {
+            if (ns) {
+                ns = ":" + ns;
+                var keyCnt = sessionStorage.length;
+                var toRemove = [ ];
+                for (var k = 0; k < keyCnt; k++) {
+                    var keyToCheck = sessionStorage.key(k);
+                    var keyLen = keyToCheck.length;
+                    if (keyLen > ns.length) {
+                        if (keyToCheck.substring(keyLen - ns.length) === ns) {
+                            toRemove.push(keyToCheck);
+                        }
+                    }
+                }
+                var removeCnt = toRemove.length;
+                for (var r = 0; r < removeCnt; r++) {
+                    sessionStorage.removeItem(toRemove[r]);
+                }
+            }
         }
+
     };
 
     $doc.ready(function () {
