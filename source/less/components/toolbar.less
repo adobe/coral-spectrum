@@ -23,25 +23,22 @@ The top toolbar with action icons
         
         h1,
         .pulldown > a {
+            display: inline-block;
+            margin: 0;
+            padding-top: 10*@px;
+            padding-bottom: 9*@px;
             max-width: 18rem;
+            
+            .regularText;
+            .ellipsis;
+            line-height: 1.5;
+            font-size: 18*@px;
+        }
+        .pulldown {
+            height: 46*@px;
         }
     }
 
-    h1,
-    .pulldown > a {
-        display: inline-block;
-        margin: 0;
-        padding-top: 10*@px;
-        padding-bottom: 9*@px;
-        
-        .regularText;
-        .ellipsis;
-        line-height: 1.5;
-        font-size: 18*@px;
-    }
-    .pulldown {
-        height: 46*@px;
-    }
 
     // Hack to avoid FF to display horizontal scrollbars because of a bug on button elements
     // See: https://bugzilla.mozilla.org/show_bug.cgi?id=750115
