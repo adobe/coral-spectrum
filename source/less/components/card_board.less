@@ -48,10 +48,10 @@
             max-width: 100%;
             
             @fourPx: 4*@px;
-            .calc-width(~"50%" - unit(@fourPx, rem));
+            .calc-width(~"50% -" @fourPx);
 
             &.wide {
-                .calc-width(~"100%" - unit(@fourPx, rem));
+                .calc-width(~"100% -" @fourPx);
             }
         }
     }

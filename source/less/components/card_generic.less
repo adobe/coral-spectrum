@@ -61,7 +61,7 @@
 
 .grid [class^="card-"],
 .grid [class*=" card-"] {
-    .calc-width(~"100%" - unit(@card-grid-margin, rem));
+    .calc-width(~"100% -" @card-grid-margin);
     margin: 0 0 @card-grid-margin 0;
     background: @card-background-color;
     float: left;
