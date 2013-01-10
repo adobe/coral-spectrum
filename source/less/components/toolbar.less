@@ -54,7 +54,8 @@ The top toolbar with action icons
         }
     }
 
-    &.break-lines .center {
+    &.break-lines .center,
+    .break-lines & .center {
         clear: both;
         position: relative;
         margin: 0 -3*@px;
@@ -69,7 +70,8 @@ The top toolbar with action icons
             max-width: calc(~"100% - 2em");
         }
     }
-    &.long-title .center {
+    &.long-title .center,
+    .long-title & .center {
         h1,
         .pulldown > a {
             max-width: 38rem;

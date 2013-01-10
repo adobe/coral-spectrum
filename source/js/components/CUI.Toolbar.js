@@ -16,17 +16,18 @@
      *  </pre>
      */
     construct: function(options) {
-      var $elem = this.$element,
-          $icons = $elem.find(".left"),
+      var $elem     = this.$element,
+          $parent   = $elem.closest(".content-header"),
+          $icons    = $elem.find(".left"),
           iconWidth = $icons.width();
 
-      this.$element.reflow({
+      $parent.reflow({
         "break-lines": function (elem, size) {
           return $elem.width()-2*iconWidth < 20*size.rem();
         },
         "long-title":  function (elem, size) {
           return $elem.width()-2*iconWidth > 40*size.rem();
-        }  
+        }
       });
     }
   });
