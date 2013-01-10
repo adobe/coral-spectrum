@@ -38,7 +38,9 @@ module.exports = function(grunt) {
       'components/CUI.CardView.js',
       'components/CUI.PathBrowser.js',
       'components/CUI.Wizard.js',
-      'components/CUI.FileUpload.js'
+      'components/CUI.FileUpload.js',
+      'components/CUI.Toolbar.js'
+
     ],
     "cui-rte": [
       'components/rte/Theme.js',

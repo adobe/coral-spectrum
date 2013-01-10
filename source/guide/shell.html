@@ -17,26 +17,6 @@
 
     <script src="js/libs/jquery-gridlayout.js"></script>
     <script src="js/shell.js"></script>
-    <script>
-
-jQuery(function ($) {
-    $(".toolbar:has(.left + .right + .center)").each(function () {
-        var elem = $(this);
-        var icons = elem.find(".left");
-        var iconWidth = icons.width();
-
-        elem.reflow({
-            "break-lines": function (elem, size) {
-                return elem.width()-2*iconWidth < 20*size.rem();
-            },
-            "long-title":  function (elem, size) {
-                return elem.width()-2*iconWidth > 40*size.rem();
-            }
-        });
-    });
-});
-
-    </script>
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width = device-width, initial-scale = 1, user-scalable = no">
@@ -243,7 +223,7 @@ jQuery(function ($) {
         </div>
 
         <div class="content">
-            <nav class="toolbar content-header">
+            <nav class="toolbar content-header" data-init="toolbar">
                 <div class="left icongroup">
                     <button type="button" title="Toggle Rail" class="foundation-admin-rail-toggle icon-navigation">Toggle Rail</button>
                     <span class="divider"></span>

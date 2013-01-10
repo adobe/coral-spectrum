@@ -30,3 +30,4 @@ components/CUI.Sticky.js
 components/CUI.CardView.js
 components/CUI.PathBrowser.js
 components/CUI.FileUpload.js
+components/CUI.Toolbar.js
