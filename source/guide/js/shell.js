@@ -15,7 +15,7 @@ jQuery(function($) {
     });
     $grid.on("beforeselect", function(e) {
         if (e.item.$itemEl.hasClass("unselectable")) {
-            e.cancelSelection();
+            e.cancelSelection(true);
         }
     });
 

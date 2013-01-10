@@ -1365,19 +1365,23 @@
         toggleSelection: function(item, moreSelectionChanges) {
             item = ensureItem(item);
 
+            // allow to cancel & stop the event
             var beforeEvent = $.Event("beforeselect", {
 
                 selectionCancelled: false,
 
+                stopEvent: false,
+
                 item: item,
 
-                cancelSelection: function() {
+                cancelSelection: function(stopEvent) {
                     this.selectionCancelled = true;
+                    this.stopEvent = (stopEvent === true);
                 }
             });
             this.$element.trigger(beforeEvent);
             if (beforeEvent.selectionCancelled) {
-                return false;
+                return beforeEvent.stopEvent;
             }
 
             var isSelected = this.isSelected(item);

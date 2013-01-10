@@ -227,7 +227,8 @@
                 <div class="left icongroup">
                     <button type="button" title="Toggle Rail" class="foundation-admin-rail-toggle icon-navigation">Toggle Rail</button>
                     <span class="divider"></span>
-                    <button type="button" class="icon-check-circle" title="Enter Selection Mode">Enter Selection Mode</button>
+                    <!-- please keep the IDs intact! -->
+                    <button id="selection-mode" type="button" class="icon-check-circle" title="Enter Selection Mode">Enter Selection Mode</button>
                     <button type="button" class="icon-edit" title="Edit"></button>
                     <button type="button" class="icon-note" title="Annotate"></button>
                     <a href="#downloadasset" class="icon-download" title="Download">Download</a>
@@ -357,7 +358,7 @@
                     <article class="card-asset unselectable">
                         <i class="select"></i>
                         <i class="move"></i>
-                        <a href="#">
+                        <a href="javascript:alert('Navigate');">
                             <span class="image">
                                 <img class="show-grid" src="images/previews/preview1.png" alt="">
                                 <img class="show-list" src="images/previews/preview-small.png" alt="">
