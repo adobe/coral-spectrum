@@ -16,18 +16,21 @@
      *  </pre>
      */
     construct: function(options) {
-      var $elem     = this.$element,
-          $parent   = $elem.closest(".content-header"),
-          $icons    = $elem.find(".left"),
+      var $toolbar  = this.$element,
+          $header   = $toolbar.closest(".content-header"),
+          $icons    = $toolbar.find(".left"),
+          hasCenter = $toolbar.find(".center").length !== 0,
           iconWidth = $icons.width();
 
-      $parent.reflow({
-        "break-lines": function (elem, size) {
-          return $elem.width()-2*iconWidth < 20*size.rem();
+      $toolbar.reflow({
+        "break-lines": function ($toolbar, size) {
+          return hasCenter && $toolbar.width()-2*iconWidth < 16*size.rem();
         },
-        "long-title":  function (elem, size) {
-          return $elem.width()-2*iconWidth > 40*size.rem();
+        "long-title":  function ($toolbar, size) {
+          return hasCenter && $toolbar.width()-2*iconWidth > 40*size.rem();
         }
+      }, {
+        "applyClassToElement": $header
       });
     }
   });

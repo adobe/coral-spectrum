@@ -2,7 +2,8 @@
 (function($, window, undefined) {
 
     var defaults = {
-        "threshold": 200 // How often the resize and reflow events should be considered
+        "threshold": 200, // How often the resize and reflow events should be considered
+        "applyClassToElement": undefined
     };
 
     // Utility functions to help calculating sizes
@@ -33,30 +34,33 @@
 
             if (breakpoints) {
                 settings = $.extend({}, defaults, options);
+                settings.applyClassToElement = settings.applyClassToElement || elem;
 
                 function reflowEventHandler() {
-                    if (!scheduledReflowCheck) {
-                        applyClassNames();
-                        scheduledReflowCheck = setTimeout(function reflowCheck() {
-                            scheduledReflowCheck = false;
-                            if (!didApplyClassNames) {
-                                applyClassNames();
-                            }
-                        }, settings.threshold);
-                    } else {
-                        didApplyClassNames = false;
+                    if (elem.is(":visible")) {
+                        if (!scheduledReflowCheck) {
+                            applyClassNames();
+                            scheduledReflowCheck = setTimeout(function reflowCheck() {
+                                scheduledReflowCheck = false;
+                                if (!didApplyClassNames) {
+                                    applyClassNames();
+                                }
+                            }, settings.threshold);
+                        } else {
+                            didApplyClassNames = false;
+                        }
                     }
                 }
 
                 function applyClassNames() {
                     didApplyClassNames = true;
                     for (var className in breakpoints) {
-                        elem.toggleClass(className, breakpoints[className](elem, size));
+                        settings.applyClassToElement.toggleClass(className, breakpoints[className](elem, size));
                     }
                 }
 
-                elem.bind("reflow", reflowEventHandler);
-                $(window).bind("resize.reflow", reflowEventHandler);
+                elem.on("reflow", reflowEventHandler);
+                $(window).on("resize.reflow", reflowEventHandler);
             }
 
             elem.trigger("reflow");
