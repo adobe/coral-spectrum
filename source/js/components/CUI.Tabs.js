@@ -382,41 +382,45 @@ tabs.hide();
         Keyboard interaction
         Based on guidelines from http://www.w3.org/TR/2010/WD-wai-aria-practices-20100916/#tabpanel
         Some inspiration taken from http://codetalks.org/source/widgets/tabpanel/tabpanel1.html
+
+        We listen for a focus first and apply the handler to the tabs div itself to avoid binding a keydown event on the body.
       */
-      $('body').pointer('keydown.tabs.data-api', '.tabs > nav > a[data-toggle="tab"]', function (e) {
-        var $tab = $(this), key = e.which;
-        
-        if (key === 37 || key === 38) {
-          /*
-          Left Arrow - with focus on a tab, pressing the left arrow will move focus to the previous tab in the tab list and activate that tab. Pressing the left arrow when the focus is on the first tab in the tab list will move focus and activate the last tab in the list.
-          Down arrow - behaves the same as right arrow in order to support vertical tabs
-          */
-          var prev = $tab.prevAll().not('.disabled').first();
-
-          if (prev.length > 0) {
-            _activateTab(prev);
-          } else {
-            _activateTab($tab.siblings().not('.disabled').last());
-          }
+      $('body').on('focus.tabs.data-api', '.tabs > nav > a[data-toggle="tab"]', function(top_e) {
+        $(this).parents('.tabs').pointer('keydown.tabs.data-api', 'nav > a[data-toggle="tab"]', function (e) {
+          var $tab = $(this), key = e.which;
           
-          // Stop scroll action
-          e.preventDefault();
-        } else if (key === 39 || key === 40) {
-          /*
-          Right Arrow - with focus on a tab, pressing the right arrow will move focus to the next tab in the tab list and activate that tab. Pressing the right arrow when the focus is on the last tab in the tab list will move focus to and activate the first tab in the list.
-          Up arrow - behaves the same as left arrow in order to support vertical tabs
-          */
-          var next = $tab.nextAll().not('.disabled').first();
+          if (key === 37 || key === 38) {
+            /*
+            Left Arrow - with focus on a tab, pressing the left arrow will move focus to the previous tab in the tab list and activate that tab. Pressing the left arrow when the focus is on the first tab in the tab list will move focus and activate the last tab in the list.
+            Down arrow - behaves the same as right arrow in order to support vertical tabs
+            */
+            var prev = $tab.prevAll().not('.disabled').first();
 
-          if (next.length > 0) {
-            _activateTab(next);
-          } else {
-            _activateTab($tab.siblings().not('.disabled').first());
+            if (prev.length > 0) {
+              _activateTab(prev);
+            } else {
+              _activateTab($tab.siblings().not('.disabled').last());
+            }
+            
+            // Stop scroll action
+            e.preventDefault();
+          } else if (key === 39 || key === 40) {
+            /*
+            Right Arrow - with focus on a tab, pressing the right arrow will move focus to the next tab in the tab list and activate that tab. Pressing the right arrow when the focus is on the last tab in the tab list will move focus to and activate the first tab in the list.
+            Up arrow - behaves the same as left arrow in order to support vertical tabs
+            */
+            var next = $tab.nextAll().not('.disabled').first();
+
+            if (next.length > 0) {
+              _activateTab(next);
+            } else {
+              _activateTab($tab.siblings().not('.disabled').first());
+            }
+            
+            // Stop scroll action
+            e.preventDefault();
           }
-          
-          // Stop scroll action
-          e.preventDefault();
-        }
+        });
       });
     });
   }
