@@ -478,6 +478,13 @@
                 });
                 $form.addClass("fileupload").appendTo($body);
 
+                var $charset = $("<input/>", {
+                    type: "hidden",
+                    name: "_charset_",
+                    value: "utf-8"
+                });
+                $form.prepend($charset);
+
                 // Define value of the file name element
                 if (this.options.fileNameParameter) {
                     this.fileNameElement = $("<input/>", {
