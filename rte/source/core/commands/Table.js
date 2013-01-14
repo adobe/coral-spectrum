@@ -145,7 +145,6 @@ CUI.rte.commands.Table = new Class({
                 insertNode = insertBlock.parentNode;
                 insertAsChild = true;
             }
-
         } else {
             insertNode = dpr.insertParagraph(context, insertNode, insertOffset);
             if (!insertNode) {

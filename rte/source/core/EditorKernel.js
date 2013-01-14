@@ -1026,7 +1026,7 @@ CUI.rte.EditorKernel = new Class({
     onEditorEvent: function(e) {
         var com = CUI.rte.Common;
         var ignoreEventForContextMenu = false;
-        if (com.ua.isOldIE) {
+        if (com.ua.isIE) {
             if (e.getType() == "selectionchange") {
                 ignoreEventForContextMenu = true;
                 // store current bookmark to have it available later
