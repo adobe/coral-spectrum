@@ -216,9 +216,10 @@ div.rail {
                     position: relative;
 
                     &.active {
+                        cursor: default;
 
-                       &:before,
-                       &:after {
+                        &:before,
+                        &:after {
                          position: absolute;
                          left: 50%;
                          
@@ -231,7 +232,7 @@ div.rail {
                          
                          content: " ";
                          pointer-events: none;
-                       }
+                        }
                         &:before {
                           bottom: 0;
                           border-bottom-color: @rail-section-border-color;
@@ -239,6 +240,10 @@ div.rail {
                         &:after {
                           bottom: -2*@px;
                           border-bottom-color: @rail-background-color;
+                        }
+
+                        >i:before {
+                            opacity: 1;
                         }
                     }
                 }

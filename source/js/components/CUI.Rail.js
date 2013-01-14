@@ -316,6 +316,8 @@ $('#myRail').rail({
             view = con.find('.rail-view[data-view="'+ viewName +'"]');
 
         t.fipo('tap', 'click', function (ev) {
+          ev.preventDefault();
+
           views.removeClass(cl);
           trigger.removeClass(cl);
 
