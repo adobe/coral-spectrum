@@ -138,7 +138,14 @@ CUI.rte.commands.Table = new Class({
         } else if (dpr.isBlockStart(context, insertNode, insertOffset)) {
             insertNode = insertBlock;
         } else if (dpr.isBlockEnd(context, insertNode, insertOffset)) {
-            insertNode = insertBlock.nextSibling;
+            if (insertBlock.nextSibling) {
+                insertNode = insertBlock.nextSibling;
+            } else {
+                // end of text situation
+                insertNode = insertBlock.parentNode;
+                insertAsChild = true;
+            }
+
         } else {
             insertNode = dpr.insertParagraph(context, insertNode, insertOffset);
             if (!insertNode) {
