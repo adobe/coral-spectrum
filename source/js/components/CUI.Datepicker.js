@@ -142,8 +142,8 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
                 }
             }.bind(this));
 
-            this.$element.click(function(event){
-                this._openPicker();
+            this.$element.on('click', function(event){
+                if (!this.pickerShown) this._openPicker();
 
                 // let the event time to propagate.
                 this.keepShown = true;
@@ -161,14 +161,19 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             this._setDateTime(newDate);
         }.bind(this));
 
+        function normalizeDate(date) {
+            if (!date) return null;
+            return moment([date.year(), date.month(), date.date()]);
+        }
+
         // Move around
         this.$element.find(".calendar").on("swipe", function(event) {
             var d = event.direction;
             if (d === "left") {
-                this.displayDateTime = moment([this.displayDateTime.year(), this.displayDateTime.month() + 1, 1]);
+                this.displayDateTime = normalizeDate(moment([this.displayDateTime.year(), this.displayDateTime.month() + 1, 1]));
                 this._renderCalendar("left");                
             } else if (d === "right") {
-                this.displayDateTime = moment([this.displayDateTime.year(), this.displayDateTime.month() - 1, 1]);
+                this.displayDateTime = normalizeDate(moment([this.displayDateTime.year(), this.displayDateTime.month() - 1, 1]));
                 this._renderCalendar("right");                
             }         
         }.bind(this));
@@ -176,14 +181,14 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         this.$element.on("mousedown", ".next-month", function(event) {
             event.preventDefault();
             if (!this.displayDateTime) return;
-            this.displayDateTime = moment([this.displayDateTime.year(), this.displayDateTime.month() + 1, 1]);
+            this.displayDateTime = normalizeDate(moment([this.displayDateTime.year(), this.displayDateTime.month() + 1, 1]));
             this._renderCalendar("left");
         }.bind(this));
 
         this.$element.on("mousedown", ".prev-month", function(event) {
             event.preventDefault();
             if (!this.displayDateTime) return;
-            this.displayDateTime = moment([this.displayDateTime.year(), this.displayDateTime.month() - 1, 1]);
+            this.displayDateTime = normalizeDate(moment([this.displayDateTime.year(), this.displayDateTime.month() - 1, 1]));
             this._renderCalendar("right");
         }.bind(this));
 
@@ -350,7 +355,6 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
     _renderCalendar: function(slide) {
         if (!this.displayDateTime || !this.displayDateTime.isValid()) this.displayDateTime = moment();
         var displayDateTime = this.displayDateTime;
-
     
         var displayYear = displayDateTime.format('YYYY');
         var displayMonth = displayDateTime.format('M') ;
