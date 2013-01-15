@@ -182,6 +182,11 @@
             this.$element.append(el);
         }
         
+        if (!this.$element.find("div.clickarea").length) {
+            var el2 = $("<div class=\"clickarea\">");
+            this.$element.prepend(el2); // Prepend: Must be first element to not hide handles!
+        }
+        
         this.$element.toggleClass("slider", true);
         this.$element.toggleClass("vertical", this.options.orientation === 'vertical' );
         this.$element.toggleClass("tooltips", this.options.tooltips);
