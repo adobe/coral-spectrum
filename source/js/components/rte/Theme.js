@@ -21,6 +21,7 @@
  * The theme-specific constants for the RTE component.
  * @static
  * @singleton
+ * @ignore
  */
 CUI.rte.Theme = function() {
 
@@ -32,6 +33,7 @@ CUI.rte.Theme = function() {
          * @static
          * @final
          * @type Number
+         * @ignore
          */
         DEFAULT_HEIGHT: 210,
 
@@ -42,6 +44,7 @@ CUI.rte.Theme = function() {
          * @static
          * @final
          * @type String
+         * @ignore
          */
         DEFAULT_REQCSS_PATH: "/libs/cq/ui/rte/themes/default/internal",
 
@@ -50,6 +53,7 @@ CUI.rte.Theme = function() {
          * @static
          * @final
          * @type String
+         * @ignore
          */
         ANCHOR_CLASS: "cui-rte-anchor",
 
@@ -59,6 +63,7 @@ CUI.rte.Theme = function() {
          * @static
          * @final
          * @type String
+         * @ignore
          */
         TABLE_NOBORDER_CLASS: "cui-rte-forcedborder",
 
@@ -69,16 +74,19 @@ CUI.rte.Theme = function() {
          * @final
          * @type String
          * @since 5.3
+         * @ignore
          */
         TABLESELECTION_CLASS: "cui-rte-tableselection",
 
         /**
          * CSS class that is added to disabled toolbar items
+         * @ignore
          */
         TOOLBARITEM_DISABLED_CLASS: "rte-tbi-disabled",
 
         /**
          * CSS class that is added to selected toolbar items
+         * @ignore
          */
         TOOLBARITEM_SELECTED_CLASS: "rte-tbi-selected"
 

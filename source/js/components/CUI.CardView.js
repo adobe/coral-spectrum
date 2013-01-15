@@ -105,6 +105,16 @@
          * color: RGB array of values between 0 and 1
          */
         multiplyImage: function(image, color) {
+
+            // defer if image is not yet available
+            var self = this;
+            if ((image.naturalWidth === 0) && (image.naturalHeight === 0)) {
+                window.setTimeout(function() {
+                    self.multiplyImage(image, color);
+                }, 100);
+                return;
+            }
+
             var canvas = $("<canvas class='" + image.className + " multiplied' width='" +
                         image.naturalWidth + "' height='" + image.naturalHeight+"'></canvas>")[0];
 

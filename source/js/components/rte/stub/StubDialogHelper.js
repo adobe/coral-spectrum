@@ -24,6 +24,7 @@ CUI.rte.ui.stub.StubDialogHelper = new Class({
 
     /**
      * @protected
+     * @ignore
      */
     instantiateDialog: function(dialogConfig) {
         return { };

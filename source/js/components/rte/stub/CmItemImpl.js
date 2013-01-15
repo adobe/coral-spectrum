@@ -28,6 +28,7 @@ CUI.rte.ui.stub.CmItemImpl = new Class({
 
     /**
      * @cfg {Object} text Descriptive text for the context menu item
+     * @ignore
      */
     text: null,
 

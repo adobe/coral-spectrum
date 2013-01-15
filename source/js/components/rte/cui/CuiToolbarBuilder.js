@@ -30,6 +30,7 @@
         /**
          * Create the abstracted toolbar.
          * @return {CUI.rte.ui.Toolbar} The toolbar
+         * @ignore
          */
         createToolbar: function(options) {
             var toolbarItems = [ ];
