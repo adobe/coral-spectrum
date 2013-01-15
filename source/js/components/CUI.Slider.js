@@ -113,12 +113,8 @@
         that.values = values;
         if (this.options.orientation === 'vertical') this.isVertical = true;
         
-        this.$element.on("click", function(event) {
-            this._handleClick(event);
-        }.bind(this));
-        
         // Set up event handling
-        this.$element.on("mousedown touchstart", ".handle", function(event) {
+        this.$element.fipo("touchstart", "mousedown", function(event) {
             this._mouseDown(event);
         }.bind(this));
 
@@ -329,6 +325,14 @@
         // Mouse page position
         var mouseX = event.pageX;
         var mouseY = event.pageY;
+            
+        if (event.type === "touchstart") {
+            var touches = (event.originalEvent.touches.length > 0) ? event.originalEvent.touches : event.originalEvent.changedTouches;
+            mouseX = touches[0].pageX;
+            mouseY = touches[0].pageY;
+        }
+
+        if (mouseX === undefined || mouseY === undefined) return; // Do not use undefined values!
 
         var closestDistance = 999999; // Incredible large start value
 
@@ -366,20 +370,25 @@
 
     _mouseDown: function(event) {
         if(this.options.disabled) return false;
-
-        this.draggingPosition = 0;
+        event.preventDefault();
+        
+        this.draggingPosition = -1;
         this.$handles.each(function(index, handle) {
             if (handle === event.target) this.draggingPosition = index;
         }.bind(this));
+        
+        // Did not touch any handle? Emulate click instead!
+        if (this.draggingPosition < 0) {
+            this._handleClick(event);
+            return;
+        }
         
         this.$handles.eq(this.draggingPosition).addClass("dragging");
         this.$element.closest("body").addClass("slider-dragging-cursorhack");
         
         
-        $(window).bind("mousemove.slider touchmove.slider", this._handleDragging.bind(this));
-        $(window).bind("mouseup.slider touchend.slider", this._mouseUp.bind(this));
-
-        event.preventDefault();
+        $(window).fipo("touchmove.slider", "mousemove.slider", this._handleDragging.bind(this));
+        $(window).fipo("touchend.slider", "mouseup.slider", this._mouseUp.bind(this));
 
         //update();
     },
@@ -422,7 +431,11 @@
             if(pos === 0 || pos === 1) {
                 that.values[pos] = value.toString();
                 that.$inputs.eq(pos).attr("value", value);
-                if (!doNotTriggerChange) that.$inputs.eq(pos).change(); // Keep input element value updated too and fire change event for any listeners
+                if (!doNotTriggerChange) {
+                    setTimeout(function() {
+                        that.$inputs.eq(pos).change(); // Keep input element value updated too and fire change event for any listeners
+                    }, 1); // Not immediatly, but after our own work here
+                }
             }
         }
     },
