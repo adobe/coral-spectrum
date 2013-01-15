@@ -28,6 +28,7 @@ CUI.rte.ui.stub.StubToolbarBuilder = new Class({
     /**
      * Create the toolbar as a suitable Ext component.
      * @return {CUI.rte.ui.Toolbar} The toolbar
+     * @ignore
      */
     createToolbar: function(options) {
         return new CUI.rte.ui.stub.ToolbarImpl({ });
