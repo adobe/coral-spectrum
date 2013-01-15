@@ -1292,6 +1292,158 @@
         adapter: null,
 
 
+        /**
+         @extends CUI.Widget
+         @classdesc A display of cards that can either be viewed as a grid or a list
+
+        <div class="grid" data-toggle="cardview">
+            <div class="grid-0">
+                <article class="card-default">
+                    <i class="select"></i>
+                    <i class="move"></i>
+                    <a href="#">
+                        <span class="image">
+                            <img class="show-grid" src="images/preview.png" alt="">
+                            <img class="show-list" src="images/preview-small.png" alt="">
+                        </span>
+                        <div class="label">
+                            <h4>A card</h4>
+                            <p>Description</p>
+                        </div>
+                    </a>
+                </article>
+                <article class="card-default">
+                    <i class="select"></i>
+                    <i class="move"></i>
+                    <a href="#">
+                        <span class="image">
+                            <img class="show-grid" src="images/preview.png" alt="">
+                            <img class="show-list" src="images/preview-small.png" alt="">
+                        </span>
+                        <div class="label">
+                            <h4>Another card</h4>
+                            <p>See shell example page for more info.</p>
+                        </div>
+                    </a>
+                </article>
+            </div>
+         </div>
+
+         @example
+<caption>Instantiate with Class</caption>
+// Currently unsupported.
+
+         @example
+<caption>Instantiate with jQuery</caption>
+// Currently unsupported.
+
+         @example
+<caption>Markup</caption>
+&lt;div class="grid" data-toggle="cardview"&gt;
+    &lt;div class="grid-0"&gt;
+        &lt;article class="card-default"&gt;
+            &lt;i class="select"&gt;&lt;/i&gt;
+            &lt;i class="move"&gt;&lt;/i&gt;
+            &lt;a href="#"&gt;
+                &lt;span class="image"&gt;
+                    &lt;img class="show-grid" src="images/preview.png" alt=""&gt;
+                    &lt;img class="show-list" src="images/preview-small.png" alt=""&gt;
+                &lt;/span&gt;
+                &lt;div class="label"&gt;
+                    &lt;h4&gt;A card&lt;/h4&gt;
+                    &lt;p&gt;Description&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/a&gt;
+        &lt;/article&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+         @desc Creates a new card view
+         @constructs
+
+         @param {Object} [options] Component options
+         @param {Object} [options.selectorConfig]
+                The selector configuration; note that you currently have to specify always
+                an object that carries the entire configuration; a configration object
+                that only provides the options that override their respective default values
+                will not suffice
+         @param {String} options.selectorConfig.itemSelector
+                The selector that is used to retrieve the cards from the DOM
+         @param {String} options.selectorConfig.headerSelector
+                The selector that is used to retrieve the header(s) in list view from the
+                DOM
+         @param {String} options.selectorConfig.dataContainer
+                The class of the div that is used internally for laying out the cards
+         @param {Boolean} options.selectorConfig.enableImageMultiply
+                Flag that determines if the images of cards should use the "multiply effect"
+                for display in selected state
+         @param {Object} options.selectorConfig.view
+                Configures the view of the CardView
+         @param {Object} options.selectorConfig.view.selectedItem
+                Defines what classes on what elements are used to select a card
+         @param {Object} options.selectorConfig.view.selectedItem.list
+                Defines the selection-related config in list view
+         @param {Object} options.selectorConfig.view.selectedItem.list.cls
+                Defines the CSS class that is used to select a card in list view
+         @param {Object} options.selectorConfig.view.selectedItem.grid
+                Defines the selection-related config in grid view
+         @param {Object} options.selectorConfig.view.selectedItem.grid.cls
+                Defines the CSS class that is used to select a card in grid view
+         @param {Object} options.selectorConfig.view.selectedItems
+                Defines how to determine the currently selected cards
+         @param {Object} options.selectorConfig.view.selectedItems.list
+                Defines how to determine the currently selected cards in list view
+         @param {Object} options.selectorConfig.view.selectedItems.list.selector
+                The selector that determines the DOM elements that represent all currently
+                selected cards
+         @param {Object} options.selectorConfig.view.selectedItems.grid
+                 Defines how to determine the currently selected cards in grid view
+         @param {Object} options.selectorConfig.view.selectedItems.grid.selector
+                The selector that determines the DOM elements that represent all currently
+                selected cards
+         @param {Object} options.selectorConfig.controller
+                Configures the controller of the CardView
+         @param {Object} options.selectorConfig.controller.selectElement
+                The selector that defines the DOM element that is used for selecting
+                a card (= targets for the respective click/tap handlers)
+         @param {String} options.selectorConfig.controller.selectElement.list
+                The selector that defines the event targets for selecting a card in list
+                view
+         @param {String} options.selectorConfig.controller.selectElement.grid
+                The selector that defines the event targets for selecting a card in grid
+                view
+         @param {Object} options.selectorConfig.controller.moveHandleElement
+                The selector that defines the DOM elements that are used for moving
+                cards in list view (= targets for the respective mouse/touch handlers)
+         @param {String} options.selectorConfig.controller.selectElement.list
+                The selector that defines the event targets for the handles that are used
+                to move a card in list view
+         @param {Object} options.selectorConfig.controller.targetToItems
+                Defines the mapping from event targets to cards
+         @param {Function} options.selectorConfig.controller.targetToItems.list
+                A function that takes a jQuery object that represents the event target for
+                selecting a card in list view and that has to return the jQuery object that
+                represents the entire card
+         @param {Function} options.selectorConfig.controller.targetToItems.grid
+                A function that takes a jQuery object that represents the event target for
+                selecting a card in grid view and that has to return the jQuery object that
+                represents the entire card
+         @param {Function} options.selectorConfig.controller.targetToItems.header
+                A function that takes a jQuery object that represents the event target for
+                the "select all" button of a header in list view and that has to return the
+                jQuery object that represents the respective header
+         @param {Object} options.selectorConfig.controller.gridSelect
+                Defines the selection mode in grid view
+         @param {Object} options.selectorConfig.controller.gridSelect.cls
+                Defines the class that is used to switch to selection mode in grid view
+         @param {Object} options.selectorConfig.controller.selectAll
+                Defines how to select all cards in list view
+         @param {Object} options.selectorConfig.controller.selectAll.selector
+                The selector that is used to determine all "select all" buttons in a
+                CardView
+         @param {Object} options.selectorConfig.controller.selectAll.cls
+                The class that has to be applied to each card if "select all" is invoked
+        */
         construct: function(options) {
             var selectorConfig = options.selectorConfig || DEFAULT_SELECTOR_CONFIG; // TODO this must be merged instead of just overwriting the whole config
             this.adapter = new DirectMarkupAdapter(selectorConfig);
