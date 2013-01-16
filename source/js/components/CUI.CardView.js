@@ -1294,7 +1294,7 @@
 
         /**
          @extends CUI.Widget
-         @classdesc A display of cards that can either be viewed as a grid or a list
+         @classdesc A display of cards that can either be viewed as a grid or a list.
 
         <div class="grid" data-toggle="cardview">
             <div class="grid-0">
@@ -1358,7 +1358,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 
-         @desc Creates a new card view
+         @desc Creates a new card view.
          @constructs
 
          @param {Object} [options] Component options
@@ -1444,41 +1444,79 @@
          @param {Object} options.selectorConfig.controller.selectAll.cls
                 The class that has to be applied to each card if "select all" is invoked
         */
+        // TODO add optional config to JSdoc above (requires code research)
         construct: function(options) {
-            var selectorConfig = options.selectorConfig || DEFAULT_SELECTOR_CONFIG; // TODO this must be merged instead of just overwriting the whole config
+            var selectorConfig = options.selectorConfig || DEFAULT_SELECTOR_CONFIG;
             this.adapter = new DirectMarkupAdapter(selectorConfig);
             this.adapter.initialize(this.$element);
             this.layout();
         },
 
+        /**
+         * Get the underlying data model.
+         * @return {*} The underlying data model
+         * @private
+         */
         getModel: function() {
             return this.adapter.getModel();
         },
 
+        /**
+         * Set the underlying data model.
+         * @param {*} model The underlying data model
+         * @private
+         */
         setModel: function(model) {
             this.adapter.setModel(model);
         },
 
+        /**
+         * Check if the specified item (part of the data model) is currently selected.
+         * @param {*} item The item (data mode) to check
+         * @return {Boolean} True if the specified item is selected
+         * @private
+         */
         isSelected: function(item) {
             return this.adapter.isSelected(item);
         },
 
+        /**
+         * Get the current display mode (grid or list view).
+         * @return {String} The display mode; either {@link CUI.CardView.DISPLAY_GRID} or
+         *         {@link CUI.CardView.DISPLAY_LIST}
+         */
         getDisplayMode: function() {
             return this.adapter.getDisplayMode();
         },
 
+        /**
+         * Set the display mode (grid or list view).
+         * @param {String} displayMode The display mode; either
+         *        {@link CUI.CardView.DISPLAY_GRID} or {@link CUI.CardView.DISPLAY_LIST}
+         */
         setDisplayMode: function(displayMode) {
             this.adapter.setDisplayMode(displayMode);
         },
 
+        /**
+         * Checks if selection mode is currently active in grid view.
+         * @return {Boolean} True if selection mode is active
+         */
         isGridSelectionMode: function() {
             return this.adapter.isGridSelectionMode();
         },
 
+        /**
+         * Set the selection mode in grid view.
+         * @param {Boolean} isSelection True to switch grid selection mode on
+         */
         setGridSelectionMode: function(isSelection) {
             this.adapter.setGridSelectionMode(isSelection);
         },
 
+        /**
+         * Toggle selection mode in grid view.
+         */
         toggleGridSelectionMode: function() {
             this.setGridSelectionMode(!this.isGridSelectionMode());
         },
@@ -1491,7 +1529,17 @@
             this.adapter.setSelectionModeCount(modeCount);
         },
 
+        /**
+         * <p>Selects the specified item.</p>
+         * <p>The second parameter should be used if multiple cards are selected/deselected
+         * at once. It prevents some time consuming stuff only being done once.</p>
+         * @param {jQuery|*} item The item to select; may either be from data model or a
+         *        jQuery object
+         * @param {Boolean} moreSelectionChanges True if there are more selection changes
+         *        following directly
+         */
         select: function(item, moreSelectionChanges) {
+            // TODO implement beforeselect event
             item = ensureItem(item);
             var isSelected = this.adapter.isSelected(item);
             if (!isSelected) {
@@ -1510,7 +1558,17 @@
             }
         },
 
+        /**
+         * <p>Deselects the specified card.</p>
+         * <p>The second parameter should be used if multiple cards are selected/deselected
+         * at once. It prevents some time consuming stuff only being done once.</p>
+         * @param {jQuery|*} item The item to deselect; may either be from data model or a
+         *        jQuery object
+         * @param {Boolean} moreSelectionChanges True if there are more selection changes
+         *        following directly
+         */
         deselect: function(item, moreSelectionChanges) {
+            // TODO implement beforeselect event
             item = ensureItem(item);
             var isSelected = this.adapter.isSelected(item);
             if (isSelected) {
@@ -1524,6 +1582,14 @@
             }
         },
 
+        /**
+         * <p>Toggle the selection state of the specified item.</p>
+         * <p>The second parameter should be used if multiple cards are selected/deselected
+         * at once. It prevents some time consuming stuff only being done once.</p>
+         * @param {jQuery|*} item The item
+         * @param moreSelectionChanges
+         * @return {*}
+         */
         toggleSelection: function(item, moreSelectionChanges) {
             item = ensureItem(item);
 
@@ -1563,10 +1629,19 @@
             return true;
         },
 
+        /**
+         * Gets the currently selected cards.
+         * @param {Boolean} useModel True if items from the data model should be retured;
+         *        false, if a jQuery object should be returned instead
+         * @return {*[]|jQuery} The selected items
+         */
         getSelection: function(useModel) {
             return this.adapter.getSelection(useModel === true);
         },
 
+        /**
+         * Clears the current selection state by deselecting all selected cards.
+         */
         clearSelection: function() {
             var selection = this.getSelection(true);
             var itemCnt = selection.length;
@@ -1576,6 +1651,9 @@
             }
         },
 
+        /**
+         * @private
+         */
         _headerSel: function(headers, selectFn, lastValidItemFn) {
             var model = this.adapter.getModel();
             if (headers == null) {
@@ -1599,6 +1677,13 @@
             }
         },
 
+        /**
+         * <p>Selects all cards.</p>
+         * <p>If the headers parameter is specified, all items that are part of one
+         * of the specified headers get selected. Items that are not assigned to one of the
+         * specified headers are not changed.</p>
+         * @param {*[]} [headers] Header filter
+         */
         selectAll: function(headers) {
             if (this.getSelectionModeCount() !== SELECTION_MODE_COUNT_MULTI) return;
 
@@ -1613,6 +1698,13 @@
             });
         },
 
+        /**
+         * <p>Deselect all cards.</p>
+         * <p>If the headers parameter is specified, all items that are part of one
+         * of the specified headers get deselected. Items that are not assigned to one of
+         * the specified headers are not changed.</p>
+         * @param {*[]} [headers] Header filter
+         */
         deselectAll: function(headers) {
             var self = this;
             this._headerSel(headers, this.deselect, function(i, items) {
@@ -1625,6 +1717,9 @@
             });
         },
 
+        /**
+         * @private
+         */
         getHeaderSelectionState: function() {
             var model = this.getModel();
             var curHeader = null;
@@ -1666,6 +1761,9 @@
             return state;
         },
 
+        /**
+         * Create and execute a layout of the cards if in grid view.
+         */
         layout: function() {
             if (this.getDisplayMode() !== DISPLAY_GRID) {
                 return;
@@ -1676,6 +1774,9 @@
             this.$element.cuigridlayout();
         },
 
+        /**
+         * Exexute a relayout of the cards if in grid view.
+         */
         relayout: function() {
             if (this.getDisplayMode() !== DISPLAY_GRID) {
                 return;
@@ -1683,18 +1784,32 @@
             this.$element.cuigridlayout("layout");
         },
 
+        /**
+         * @private
+         */
         _restore: function(restoreHeaders) {
             this.adapter._restore(restoreHeaders);
         },
 
+        /**
+         * Append the specified jQuery items as cards.
+         * @param {jQuery} $items The jQuery item(s) to append
+         */
         append: function($items) {
             this.adapter.getModel().insertItemAt($items, null, false);
         },
 
+        /**
+         * Prepend the specified jQuery items as cards.
+         * @param {jQuery} $items The jQuery item(s) to prepend
+         */
         prepend: function($items) {
             this.adapter.getModel().insertItemAt($items, 0, false);
         },
 
+        /**
+         * Remove all cards from the view.
+         */
         removeAllItems: function() {
             this.adapter.removeAllItems();
             if (this.getDisplayMode() === DISPLAY_GRID) {
@@ -1707,10 +1822,35 @@
 
     });
 
+    /**
+     * Display mode: grid view; value: "grid"
+     * @type {String}
+     */
     CUI.CardView.DISPLAY_GRID = DISPLAY_GRID;
 
+    /**
+     * Display mode: list view; value: "list"
+     * @type {String}
+     */
     CUI.CardView.DISPLAY_LIST = DISPLAY_LIST;
 
+    /**
+     * Single selection mode; value: "single"
+     * @type {String}
+     */
+    CUI.CardView.SELECTION_MODE_COUNT_SINGLE = "single";
+
+    /**
+     * Multi selection mode; value: "multiple"
+     * @type {String}
+     */
+    CUI.CardView.SELECTION_MODE_COUNT_MULTI = "multiple";
+
+    /**
+     * Utility method to get a {@link CUI.CardView} for the specified jQuery element.
+     * @param {jQuery} $el The jQuery element to get the widget for
+     * @return {CUI.CardView} The widget
+     */
     CUI.CardView.get = function($el) {
         var cardView = Utils.getWidget($el);
         if (!cardView) {
