@@ -264,14 +264,16 @@ div.fakeBody {
 }
 
 .waitSample {
-  .wrapper {
-    display: inline-block;
+  .wait {
 	vertical-align: top;
-    margin: 0.5rem;
+	position: relative;
+    top: 0.5rem;
+	left: 0.5rem;
   }
   
-  .wrapper + .wrapper {
-    margin: 0 0 0 1rem;
+  .wait.large {
+    top: 0;
+	left: 2rem;
   }
 }
 
