@@ -1383,23 +1383,37 @@
                 Defines what classes on what elements are used to select a card
          @param {Object} options.selectorConfig.view.selectedItem.list
                 Defines the selection-related config in list view
-         @param {Object} options.selectorConfig.view.selectedItem.list.cls
+         @param {String} options.selectorConfig.view.selectedItem.list.cls
                 Defines the CSS class that is used to select a card in list view
+         @param {String} [options.selectorConfig.view.selectedItem.list.selector]
+                An additioonal selector if the selection class has to be set on a child
+                element rather than the card's parent element
          @param {Object} options.selectorConfig.view.selectedItem.grid
                 Defines the selection-related config in grid view
-         @param {Object} options.selectorConfig.view.selectedItem.grid.cls
+         @param {String} options.selectorConfig.view.selectedItem.grid.cls
                 Defines the CSS class that is used to select a card in grid view
+         @param {String} [options.selectorConfig.view.selectedItem.grid.selector]
+                An additioonal selector if the selection class has to be set on a child
+                element rather than the card's parent element
          @param {Object} options.selectorConfig.view.selectedItems
                 Defines how to determine the currently selected cards
          @param {Object} options.selectorConfig.view.selectedItems.list
                 Defines how to determine the currently selected cards in list view
-         @param {Object} options.selectorConfig.view.selectedItems.list.selector
+         @param {String} options.selectorConfig.view.selectedItems.list.selector
                 The selector that determines the DOM elements that represent all currently
+                selected cards
+         @param {Function} [options.selectorConfig.view.selectedItems.list.resolver]
+                A function that is used to calculate a card's parent element from the
+                elements that are returned from the selector that is used for determining
                 selected cards
          @param {Object} options.selectorConfig.view.selectedItems.grid
                  Defines how to determine the currently selected cards in grid view
-         @param {Object} options.selectorConfig.view.selectedItems.grid.selector
+         @param {String} options.selectorConfig.view.selectedItems.grid.selector
                 The selector that determines the DOM elements that represent all currently
+                selected cards
+         @param {Function} [options.selectorConfig.view.selectedItems.grid.resolver]
+                A function that is used to calculate a card's parent element from the
+                elements that are returned from the selector that is used for determining
                 selected cards
          @param {Object} options.selectorConfig.controller
                 Configures the controller of the CardView
@@ -1409,33 +1423,41 @@
          @param {String} options.selectorConfig.controller.selectElement.list
                 The selector that defines the event targets for selecting a card in list
                 view
+         @param {String} [options.selectorConfig.controller.selectElement.listNavElement]
+                An additional selector that may be used to determine the element that is
+                used for navigating in list view if it is different from the event target
+                defined by options.selectorConfig.controller.selectElement.grid
          @param {String} options.selectorConfig.controller.selectElement.grid
                 The selector that defines the event targets for selecting a card in grid
                 view
          @param {Object} options.selectorConfig.controller.moveHandleElement
                 The selector that defines the DOM elements that are used for moving
                 cards in list view (= targets for the respective mouse/touch handlers)
-         @param {String} options.selectorConfig.controller.selectElement.list
+         @param {String} options.selectorConfig.controller.moveHandleElement.list
                 The selector that defines the event targets for the handles that are used
                 to move a card in list view
          @param {Object} options.selectorConfig.controller.targetToItems
                 Defines the mapping from event targets to cards
-         @param {Function} options.selectorConfig.controller.targetToItems.list
+         @param {Function|String} options.selectorConfig.controller.targetToItems.list
                 A function that takes a jQuery object that represents the event target for
                 selecting a card in list view and that has to return the jQuery object that
-                represents the entire card
-         @param {Function} options.selectorConfig.controller.targetToItems.grid
+                represents the entire card; can optionally be a selector as well
+         @param {Function|String} options.selectorConfig.controller.targetToItems.grid
                 A function that takes a jQuery object that represents the event target for
                 selecting a card in grid view and that has to return the jQuery object that
-                represents the entire card
-         @param {Function} options.selectorConfig.controller.targetToItems.header
+                represents the entire card; can optionally be a selector as well
+         @param {Function|String} options.selectorConfig.controller.targetToItems.header
                 A function that takes a jQuery object that represents the event target for
                 the "select all" button of a header in list view and that has to return the
-                jQuery object that represents the respective header
+                jQuery object that represents the respective header; can optionally be a
+                selector as well
          @param {Object} options.selectorConfig.controller.gridSelect
                 Defines the selection mode in grid view
          @param {Object} options.selectorConfig.controller.gridSelect.cls
                 Defines the class that is used to switch to selection mode in grid view
+         @param {Object} options.selectorConfig.controller.gridSelect.selector
+                An additional selector that is used to define the child element where the
+                selection mode class should be applied to/read from
          @param {Object} options.selectorConfig.controller.selectAll
                 Defines how to select all cards in list view
          @param {Object} options.selectorConfig.controller.selectAll.selector
@@ -1444,7 +1466,6 @@
          @param {Object} options.selectorConfig.controller.selectAll.cls
                 The class that has to be applied to each card if "select all" is invoked
         */
-        // TODO add optional config to JSdoc above (requires code research)
         construct: function(options) {
             var selectorConfig = options.selectorConfig || DEFAULT_SELECTOR_CONFIG;
             this.adapter = new DirectMarkupAdapter(selectorConfig);
@@ -1530,9 +1551,10 @@
         },
 
         /**
-         * <p>Selects the specified item.</p>
+         * <p>Select the specified item.</p>
          * <p>The second parameter should be used if multiple cards are selected/deselected
-         * at once. It prevents some time consuming stuff only being done once.</p>
+         * at once. It prevents some time consuming stuff from being executed more than
+         * once.</p>
          * @param {jQuery|*} item The item to select; may either be from data model or a
          *        jQuery object
          * @param {Boolean} moreSelectionChanges True if there are more selection changes
@@ -1559,9 +1581,10 @@
         },
 
         /**
-         * <p>Deselects the specified card.</p>
+         * <p>Deselect the specified card.</p>
          * <p>The second parameter should be used if multiple cards are selected/deselected
-         * at once. It prevents some time consuming stuff only being done once.</p>
+         * at once. It prevents some time consuming stuff from being executed more than
+         * once.</p>
          * @param {jQuery|*} item The item to deselect; may either be from data model or a
          *        jQuery object
          * @param {Boolean} moreSelectionChanges True if there are more selection changes
@@ -1585,10 +1608,13 @@
         /**
          * <p>Toggle the selection state of the specified item.</p>
          * <p>The second parameter should be used if multiple cards are selected/deselected
-         * at once. It prevents some time consuming stuff only being done once.</p>
-         * @param {jQuery|*} item The item
-         * @param moreSelectionChanges
-         * @return {*}
+         * at once. It prevents some time consuming stuff from being executed more than
+         * once.</p>
+         * @param {jQuery|*} item The item; may be either from data model or a jQuery object
+         * @param {Boolean} moreSelectionChanges True if there are more selection changes
+         *        following directly
+         * @return {Boolean} True if the toggle requires the originating event (if any)
+         *         to be stopped and to prevent browser's default behavior
          */
         toggleSelection: function(item, moreSelectionChanges) {
             item = ensureItem(item);
