@@ -1294,7 +1294,27 @@
 
         /**
          @extends CUI.Widget
-         @classdesc A display of cards that can either be viewed as a grid or a list.
+         @classdesc
+         <p>A display of cards that can either be viewed as a grid or a list.</p>
+         <p>The display mode - grid or list view - can be changed programmatically whenever
+         required.</p>
+         <p>Grid view has two modes: navigation and selection, which can also be switched
+         programmatically. In navigation mode, the user can use cards to navigate
+         hierarchical structures ("to another stack of cards"). In selection mode, the
+         cards get selected on user interaction instead. List view combines both selection
+         and navigation modes.</p>
+         <p>The card view uses a data model internally that abstracts the cards. This
+         data model is currently not opened as API. Therefore you will often encounter
+         unspecified objects that represent cards in the data model. You can use them
+         interchangibly (for example, if one method returns a card data object, you can
+         pass it to another method that takes a card data object as a parameter), but
+         you shouldn't assume anything about their internals. You may use
+         {@link CUI.CardView#prepend}, {@link CUI.CardView#append} and
+         {@link CUI.CardView#removeAllItems} to manipulate the data model.</p>
+         <p>Please note that the current implementation has some limitiations which are
+         documented if known. Subsequent releases of CoralUI will remove those limitations
+         bit by bit.</p>
+         <p>The following example shows two cards in grid view:</p>
 
         <div class="grid" data-toggle="cardview">
             <div class="grid-0">
@@ -1357,6 +1377,15 @@
         &lt;/article&gt;
     &lt;/div&gt;
 &lt;/div&gt;
+
+         @example
+<caption>Switching to grid selection mode using API</caption>
+$cardView.cardView("toggleGridSelectionMode");
+
+         @example
+<caption>Switching to grid selection mode using CSS contract</caption>
+$cardView.toggleClass("selection-mode");
+$cardView.find("article").removeClass("selected");
 
          @desc Creates a new card view.
          @constructs
@@ -1899,5 +1928,74 @@
             }
         });
     }
+
+    // additional JSdoc
+
+    /**
+     * Triggered when a new card has been inserted succesfully.
+     * @name CUI.CardView#change:insertitem
+     * @event
+     * @param {Object} evt The event
+     * @param {CUI.CardView} evt.widget The widget
+     * @param {*} evt.item The inserted item (data model)
+     */
+
+    /**
+     * Triggered when the grid selection mode changes.
+     * @name CUI.CardView#change:gridSelect
+     * @event
+     * @param {Object} evt The event
+     * @param {CUI.CardView} evt.widget The widget
+     * @param {Boolean} evt.oldValue True if grid select mode was previously active
+     * @param {Boolean} evt.value True if grid select mode is now active
+     */
+
+    /**
+     * Triggered when the display mode (list/grid view) changes. Display modes are
+     * defined by their respective String constants, see for example
+     * {@link CUI.CardView.DISPLAY_GRID}.
+     * @name CUI.CardView#change:displayMode
+     * @event
+     * @param {Object} evt The event
+     * @param {CUI.CardView} evt.widget The widget
+     * @param {String} evt.oldValue The old display mode
+     * @param {String} evt.value The new display mode
+     */
+
+    /**
+     * Triggered when the selection changes.
+     * @name CUI.CardView#change:selection
+     * @event
+     * @param {Object} evt The event
+     * @param {CUI.CardView} evt.widget The widget
+     * @param {*} evt.item The card that is (de)selected (data model)
+     * @param {Boolean} evt.isSelected True if the item is now selected
+     * @param {Boolean} evt.moreSelectionChanges True if there are more selection changes
+     *        following (multiple single selection changes can be treated as one big
+     *        selection change)
+     */
+
+    /**
+     * Triggered right before the selection changes if (and only if) the selection is
+     * changed using {@link CUI.CardView#toggleSelection}. The selection change can be
+     * vetoed by calling cancelSelection on the Event object.
+     * @name CUI.CardView#beforeselect
+     * @event
+     * @param {Object} evt The event
+     * @param {*} evt.item The card that is will get (de)selected (data model)
+     * @param {Function} evt.changeSelection This function may be called to cancel the
+     *        selection; if true is passed as an argument, the originating event (if
+     *        applicable; for example if the selection change is triggered by a user
+     *        interaction) is cancelled as well (no event propagation; no default browser
+     *        behavior)
+     */
+
+    /**
+     * Triggered when all cards are removed.
+     * @name CUI.CardView#change:removeAll
+     * @event
+     * @param {Object} evt The event
+     * @param {CUI.CardView} evt.widget The widget
+     */
 
 }(window.jQuery));

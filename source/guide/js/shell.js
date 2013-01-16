@@ -29,7 +29,7 @@ jQuery(function($) {
 
     $("#selection-mode").fipo("tap", "click", function(e) {
         // use API
-        CUI.CardView.get($grid).toggleGridSelectionMode();
+        $grid.cardView("toggleGridSelectionMode");
         // use CSS contract
         // $grid.toggleClass("selection-mode");
         // $grid.find("article").removeClass("selected");
