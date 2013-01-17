@@ -111,15 +111,18 @@
         border: @px solid @border-color;
 
         &,
-        img {
+        > img {
             width:  @width;
             height: @height;
         }
-        img {
+        > img {
             display: @display-image;
             &.show-grid {
                 display: none;
             }
+        }
+        > img.multiplied {
+            display: none;
         }
         &.progress-bar {
             width:  @width;

@@ -104,40 +104,64 @@
          * image: image element to multiply with the color
          * color: RGB array of values between 0 and 1
          */
-        multiplyImage: function(image, color) {
+        multiplyImages: function($images, color) {
+            // Filter out images where the multiply effect has already been inserted to the DOM, or images that aren't visible
+            $images = $images.filter(function () {
+                var $image = $(this);
+                return !$image.is(".multiplied") && !$image.prev().is(".multiplied") && $image.is(":visible");
+            });
 
-            // defer if image is not yet available
-            var self = this;
-            if ((image.naturalWidth === 0) && (image.naturalHeight === 0)) {
-                window.setTimeout(function() {
-                    self.multiplyImage(image, color);
-                }, 100);
-                return;
+            var imageMaxCounter = $images.length;
+            var imageIteratorCounter = 0;
+            
+            function multiplyNextImage() {
+                if (imageIteratorCounter < imageMaxCounter) {
+                    // Not adding the timeout for the first image will make it feel more reactive.
+                    multiplyOneImage($images[imageIteratorCounter]);
+
+                    imageIteratorCounter++;
+
+                    // But adding a timeout for the other images will make it non-blocking.
+                    setTimeout(multiplyNextImage, 0);
+                }
             }
 
-            var canvas = $("<canvas class='" + image.className + " multiplied' width='" +
-                        image.naturalWidth + "' height='" + image.naturalHeight+"'></canvas>")[0];
+            function multiplyOneImage(image) {
+                var width  = image.naturalWidth,
+                    height = image.naturalHeight;
 
-            var context = canvas.getContext("2d");
-            context.drawImage(image, 0, 0, image.naturalWidth, image.naturalHeight);
+                // defer if image is not yet available
+                if ((width === 0) && (height === 0)) {
+                    window.setTimeout(function() {
+                        multiplyOneImage(image);
+                    }, 200);
+                    return;
+                }
 
-            var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-            var data = imageData.data;
+                var canvas = $("<canvas width='" + width + "' height='" + height+"'></canvas>")[0];
 
-            for (var i = 0, l = data.length; i < l; i += 4) {
-                data[i] *= color[0];
-                data[i+1] *= color[1];
-                data[i+2] *= color[2];
+                var context = canvas.getContext("2d");
+                context.drawImage(image, 0, 0, width, height);
+
+                var imageData = context.getImageData(0, 0, width, height);
+                var data = imageData.data;
+
+                for (var i = 0, l = data.length; i < l; i += 4) {
+                    data[i]   *= color[0];
+                    data[i+1] *= color[1];
+                    data[i+2] *= color[2];
+                }
+
+                context.putImageData(imageData, 0, 0);
+
+                // re-sizing of canvases are handled different in IE and Opera, thus we have to use an image
+                $("<img class='" + image.className + " multiplied' " +
+                    "width='" + width + "' height='" + height + "' " +
+                    "src='" + canvas.toDataURL("image/png") + "'/>").insertBefore(image);
             }
 
-            context.putImageData(imageData, 0, 0);
-
-            // re-sizing of canvases are handled different in IE and Opera, thus we have to use an image
-            $("<img class='" + image.className + " multiplied' width='" +
-                        image.naturalWidth + "' height='" + image.naturalHeight + "' src='" +
-                        canvas.toDataURL("image/png") + "'></img>").insertBefore(image);
+            multiplyNextImage();
         }
-
     };
 
     var ListItemAutoScroller = new Class({
@@ -828,9 +852,6 @@
                 }
             } else if (selectionState === "unselected") {
                 $itemEl.removeClass(selectorDef.cls);
-                if (displayMode === DISPLAY_GRID) {
-                    this._removeSelectedGrid(item);
-                }
             }
         },
 
@@ -888,66 +909,48 @@
         },
 
         cleanupAfterLayoutMode: function(layoutMode) {
-            if (layoutMode === DISPLAY_GRID) {
-                this._removeAllSelectedGrid();
-            }
         },
 
         _drawImage: function($image) {
-            var color256   = $image.closest("a").css("background-color");     // Let's grab the color form the card background
-            var colorFloat = $.map(color256.match(/(\d+)/g), function (val) { // RGB values between 0 and 1
-                return val/255;
-            });
-            Utils.multiplyImage($image[0], colorFloat);
+            if ($image.length === 0) {
+                return;
+            }
+
+            if (this._colorFloat === undefined) {
+                var color256     = $image.closest("a").css("background-color");     // Let's grab the color form the card background
+                this._colorFloat = $.map(color256.match(/(\d+)/g), function (val) { // RGB values between 0 and 1
+                    return val/255;
+                });
+            }
+
+            Utils.multiplyImages($image, this._colorFloat);
         },
 
         _drawAllSelectedGrid: function() {
             if (!this.selectors.enableImageMultiply) {
                 return;
             }
-            var selector = this.selectors.view.selectedItems.grid.selector + " img:visible";
             var self = this;
-            $(selector).each(function() {
-                self._drawImage($(this));
-            });
-            $(selector).load(function() {
-                self._removeSelectedGrid($(this).closest(self.selectors.itemSelector));
-                self._drawImage($(this));
-            });
-        },
+            var selector = this.selectors.view.selectedItems.grid.selector + " img";
+            var $selector = $(selector);
 
-        _removeAllSelectedGrid: function() {
-            if (!this.selectors.enableImageMultiply) {
-                return;
-            }
-            var selector = this.selectors.view.selectedItems.grid.selector +
-                    " img.multiplied";
-            $(selector).remove();
+            this._drawImage($selector);
+            $selector.load(function() {
+                self._drawImage($(this));
+            });
         },
 
         _drawSelectedGrid: function(item) {
             if (!this.selectors.enableImageMultiply) {
                 return;
             }
-            var $img = item.getItemEl().find("img:visible");
-            this._drawImage($img);
-            // redraw if image has not been loaded (fully) yet
             var self = this;
+            var $img = item.getItemEl().find("img");
+
+            this._drawImage($img);
             $img.load(function() {
-                self._removeSelectedGrid(item);
                 self._drawImage($(this));
             });
-        },
-
-        _removeSelectedGrid: function(item) {
-            if (!this.selectors.enableImageMultiply) {
-                return;
-            }
-            var $itemEl = item;
-            if (!$itemEl.jquery) {
-                $itemEl = item.getItemEl();
-            }
-            $itemEl.find("img.multiplied").remove();
         },
 
         removeAllItemsSilently: function() {

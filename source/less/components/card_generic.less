@@ -78,9 +78,12 @@
     }
     img {
         width: 100%;
+        opacity: 1; // IE9 fix
     }
-    img.multiplied ~ img {
-        display: none;
+    img.multiplied {
+        position: absolute;
+        top: 0;
+        visibility: hidden;
     }
 
     .label {
@@ -251,6 +254,13 @@
     > a,
     > .card {
         background: @card-selection-color;
+    }
+
+    img.multiplied {
+        visibility: visible;
+    }
+    img.multiplied + img {
+        visibility: hidden;
     }
 }
 
