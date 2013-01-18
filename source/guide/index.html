@@ -408,6 +408,48 @@
                     </div>
                 </section>
 
+            </section><!-- /Text Styles -->
+
+            <section id="PageComponents">
+                <h1 class="line">Page Components</h1>
+                <p>Page components are top level pieces that appear on nearly every page.</p>
+
+                <section id="Header">
+                    <h2 class="line">Header</h2>
+                    <p>The top navigation header that appears on every page. It supports a logo, navigation, and drawer (which can contain a badge or other information).</p>
+
+                    <div class="componentSample headerSample">
+                        <div class="example">
+
+                            <header class="top">
+                                <div class="logo"><img src="images/theme/dms.png" alt="DMS logo"></div>
+                                <nav class="main">
+                                    <a href="#" class="selected">Home</a>
+                                    <a href="#">Activities</a>
+                                    <a href="#">Admin</a>
+                                </nav>
+                                <div class="drawer">
+                                    <div class="badge">5</div>
+                                </div>
+                            </header>
+
+                        </div>
+                        <pre class="prettyprint linenums">
+&lt;header class="top"&gt;
+    &lt;div class=&quot;logo&quot;&gt;&lt;img src=&quot;images/theme/dms.png&quot; alt="DMS logo"&gt;&lt;/div&gt;
+    &lt;nav&gt;
+        &lt;a href=&quot;#&quot; class=&quot;selected&quot;&gt;Home&lt;/a&gt;
+        &lt;a href=&quot;#&quot;&gt;Activities&lt;/a&gt;
+        &lt;a href=&quot;#&quot;&gt;Admin&lt;/a&gt;
+    &lt;/nav&gt;
+    &lt;div class=&quot;drawer&quot;&gt;
+        &lt;div class=&quot;badge&quot;&gt;5&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/header&gt;
+</pre>
+                    </div>
+                </section>
+
                 <section id="Rail">
                     <h2 class="line">Rail</h2>
                     <p>The side panel used for metadata and feeds.</p>
