@@ -40,7 +40,7 @@
             // Adjust DOM to our needs
             this._render();
 
-            this.$element.on("change", "input", function(event) {
+            this.inputElement.on("change", function(event) {
                 if (this.options.disabled) {
                     return;
                 }
@@ -65,6 +65,7 @@
         },
 
         inputElement: null,
+        $spanElement: null,
         fileNameElement: null,
         uploadQueue: [],
 
@@ -82,17 +83,6 @@
             if (this.$element.get(0).tagName === "INPUT") {
                 var clazz = this.$element.attr("class");
 
-                if (!this.options.useHTML5) {
-                    var form = $("<form/>", {
-                        method: "post",
-                        enctype: "multipart/form-data"
-                    });
-                    this.$element.after(form);
-                    this.$element.detach();
-                    form.prepend(this.$element);
-                    this.$element = form;
-                }
-
                 var span = $("<span/>", {
                     "class": clazz
                 });
@@ -102,6 +92,10 @@
                 this.$element = span;
             }
 
+            // Get the span element
+            this.$spanElement = this.$element.is("span") ? this.$element : this.$element.find("span");
+
+            // Get the input element
             this.inputElement = this.$element.find("input[type='file']");
             this.inputElement.removeAttr("class");
 
@@ -246,30 +240,16 @@
         _createMissingElements: function() {
             var self = this;
 
-            var multiple = this.options.useHTML5 && self.options.multiple;
-            if (this.inputElement.length === 0) {
-                this.inputElement = $("<input/>", {
+            var multiple = self.options.useHTML5 && self.options.multiple;
+            if (self.inputElement.length === 0) {
+                self.inputElement = $("<input/>", {
                     type: "file",
                     name: self.options.name,
                     multiple: multiple
                 });
-                this.$element.prepend(this.inputElement);
+                self.$element.prepend(self.inputElement);
             } else {
-                this.inputElement.attr("multiple", multiple);
-            }
-
-            if (!this.options.useHTML5) {
-                if (this.$element.find("iframe").length === 0) {
-                    var iframeName = "upload-" + new Date().getTime();
-                    var iframe = $("<iframe/>", {
-                            name: iframeName
-                        }
-                    );
-                    this.$element.prepend(iframe);
-                    iframe.hide();
-
-                    this.$element.find("form").attr("target", iframeName);
-                }
+                self.inputElement.attr("multiple", multiple);
             }
         },
 
@@ -418,6 +398,8 @@
 
                 return true;
             }
+
+            return false;
         },
 
         /** @ignore */
@@ -447,13 +429,13 @@
             var self = this;
 
             if (self.options.useHTML5) {
-                var xhr = new XMLHttpRequest();
-                xhr.addEventListener("loadstart", function(e) { self._onUploadStart(e, item); }, false);
-                xhr.addEventListener("load", function(e) { self._onUploadLoad(e, item); }, false);
-                xhr.addEventListener("error", function(e) { self._onUploadError(e, item); }, false);
-                xhr.addEventListener("abort", function(e) { self._onUploadCanceled(e, item); }, false);
+                item.xhr = new XMLHttpRequest();
+                item.xhr.addEventListener("loadstart", function(e) { self._onUploadStart(e, item); }, false);
+                item.xhr.addEventListener("load", function(e) { self._onUploadLoad(e, item); }, false);
+                item.xhr.addEventListener("error", function(e) { self._onUploadError(e, item); }, false);
+                item.xhr.addEventListener("abort", function(e) { self._onUploadCanceled(e, item); }, false);
 
-                var upload = xhr.upload;
+                var upload = item.xhr.upload;
                 upload.addEventListener("progress", function(e) { self._onUploadProgress(e, item); }, false);
 
                 // TODO: encoding of special characters in file names
@@ -470,26 +452,38 @@
                     }
                     f.append("_charset_", "utf-8");
 
-                    xhr.open("POST", self.options.uploadUrl, true);
-                    xhr.send(f);
+                    item.xhr.open("POST", self.options.uploadUrl + "?:ck=" + new Date().getTime(), true);
+                    item.xhr.send(f);
                 } else {
-                    xhr.open("PUT", self.options.uploadUrl + "/" + fileName, true);
-                    xhr.send(file);
+                    item.xhr.open("PUT", self.options.uploadUrl + "/" + fileName, true);
+                    item.xhr.send(file);
                 }
 
             } else {
-                var iframe = self.$element.find("iframe");
-                iframe.on("load", function() {
-                    self.$element.trigger({
-                        type: "fileuploadload",
-                        item: item,
-                        content: this.contentWindow.document.body.innerHTML,
-                        fileUpload: self
-                    });
-                });
+                var $body = $(document.body);
 
-                var form = self.$element.find("form");
-                form.attr("action", self.options.uploadUrl);
+                // Build an iframe
+                var iframeName = "upload-" + new Date().getTime();
+                var $iframe = $("<iframe/>", {
+                    name: iframeName
+                });
+                $iframe.addClass("fileupload").appendTo($body);
+
+                // Build a form
+                var $form = $("<form/>", {
+                    method: "post",
+                    enctype: "multipart/form-data",
+                    action: self.options.uploadUrl,
+                    target: iframeName
+                });
+                $form.addClass("fileupload").appendTo($body);
+
+                var $charset = $("<input/>", {
+                    type: "hidden",
+                    name: "_charset_",
+                    value: "utf-8"
+                });
+                $form.prepend($charset);
 
                 // Define value of the file name element
                 if (this.options.fileNameParameter) {
@@ -498,11 +492,31 @@
                         name: this.options.fileNameParameter,
                         value: item.fileName
                     });
-                    form.prepend(this.fileNameElement);
+                    $form.prepend(this.fileNameElement);
                 }
 
-                form.submit();
+                $iframe.one("load", function() {
+                    var content = this.contentWindow.document.body.innerHTML;
+                    self.inputElement.prependTo(self.$spanElement);
+                    $form.remove();
+                    $iframe.remove();
+
+                    self.$element.trigger({
+                        type: "fileuploadload",
+                        item: item,
+                        content: content,
+                        fileUpload: self
+                    });
+                });
+
+                self.inputElement.prependTo($form);
+                $form.submit();
             }
+        },
+
+        // TODO: document
+        cancelUpload: function(item) {
+            item.xhr.abort();
         },
 
         /** @ignore */

@@ -24,6 +24,7 @@ CUI.rte.ui.cui.CuiDialogHelper = new Class({
 
     /**
      * @protected
+     * @ignore
      */
     instantiateDialog: function(dialogConfig) {
         return { };

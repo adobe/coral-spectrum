@@ -3,6 +3,7 @@ plugins/jquery-gridlayout.js
 plugins/jquery-fingerpointer.js
 plugins/jquery-scrollable.js
 plugins/jquery-cookie.js
+plugins/jquery-reflow.js
 plugins/toe.js
 plugins/moment.js
 
@@ -29,3 +30,4 @@ components/CUI.Sticky.js
 components/CUI.CardView.js
 components/CUI.PathBrowser.js
 components/CUI.FileUpload.js
+components/CUI.Toolbar.js

@@ -153,13 +153,15 @@
 
     _placeSelect: function() {
         var $select = this.$element.find('select').first();
-        var $button = this.$element.find('button').first();
 
         $select.css({
-            position: 'relative',
-            left: -$button.outerWidth(),
-            width: $button.outerWidth(),
-            height: $button.outerHeight()
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            right: 0,
+            bottom: 0,
+            width: 'auto',
+            height: 'auto'
         });
     },
 
@@ -216,16 +218,19 @@
     _processSelect: function(event) {
         if (this.syncSelectElement) {
             var current = $(this.syncSelectElement.find("option").get(event.selectedIndex));
+            var value = current.attr("value");
             if (this.options.multiple) {
-                if (current.attr("selected")) {
-                    current.removeAttr("selected");
+                var v = this.syncSelectElement.val();
+                if (v === null) v = [];
+                if (v.indexOf(value) >= 0) {
+                    v.splice(v.indexOf(value), 1);
                 } else {
-                    current.attr("selected", "selected");
+                    v.push(value);
                 }
+                this.syncSelectElement.val(v);
                 this.dropdownList.update();
             } else {
-                this.syncSelectElement.find("option").removeAttr("selected");
-                current.attr("selected", "selected");
+                this.syncSelectElement.val(value);
                 this.dropdownList.hide();
             }
             this.syncSelectElement.change();
@@ -319,7 +324,7 @@
                 var text = $("<span>" + html + "</span>").text();
                 if (selectedIndex >=0) {
                     if (this.inputElement.length > 0) {
-                        this.inputElement.val(text);
+                        this.inputElement.val(text).trigger('change');
                     } else {
                         this.buttonElement.html(html);
                     }

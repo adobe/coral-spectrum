@@ -12,19 +12,19 @@
     @stop3: fade(@color, 25%);
     @stop4: fade(@color, 50%);
     @stop5: fade(@color, 100%);
-    background: -moz-linear-gradient(top, @stop1 0%, @stop2 25%, @stop3 50%, @stop4 75%, @stop5 100%);
+    background: -moz-linear-gradient(   top, @stop1 0%, @stop2 25%, @stop3 50%, @stop4 75%, @stop5 100%);
     background: -webkit-linear-gradient(top, @stop1 0%, @stop2 25%, @stop3 50%, @stop4 75%, @stop5 100%);
-    background: -o-linear-gradient(top, @stop1 0%, @stop2 25%, @stop3 50%, @stop4 75%, @stop5 100%);
-    background: -ms-linear-gradient(top, @stop1 0%, @stop2 25%, @stop3 50%, @stop4 75%, @stop5 100%);
-    background: linear-gradient(to bottom, @stop1 0%, @stop2 25%, @stop3 50%, @stop4 75%, @stop5 100%);
+    background: -o-linear-gradient(     top, @stop1 0%, @stop2 25%, @stop3 50%, @stop4 75%, @stop5 100%);
+    background: -ms-linear-gradient(    top, @stop1 0%, @stop2 25%, @stop3 50%, @stop4 75%, @stop5 100%);
+    background: linear-gradient(  to bottom, @stop1 0%, @stop2 25%, @stop3 50%, @stop4 75%, @stop5 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@{stop1}', endColorstr='@{stop5}', GradientType=0);
 }
 
 // Grid view specific mixins ////////////////////////////////////////////////////////////////
 
 // Grid view: The shadow of all cards
-.card-grid-shadow() {
-    .box-shadow(0 1.5*@px 1.5*@px rgba(0, 0, 0, 0.25));
+.card-grid-shadow(@opacity: 25%) {
+    .box-shadow(0 1.5*@px 1.5*@px fade(rgb(0, 0, 0), @opacity));
 }
 .card-grid-shadow(focus) {
     .box-shadow(0 1.5*@px 1.5*@px rgba(0, 0, 0, 0.8));
@@ -42,7 +42,7 @@
     @selection-color-darker: darken(@selection-color, 10%);
     @selection-color-fold: mix(@selection-color, @selection-color-darker, 50%);
 
-    .calc-width(~"100% - @{card-grid-banner-margin}rem");
+    .calc-width(~"100%" - unit(@card-grid-banner-margin, rem));
     margin-left:  (@card-banner-offset+@px);
     margin-right: (@card-banner-offset+@px);
     
@@ -114,23 +114,23 @@
         border: @px solid @border-color;
 
         &,
-        img {
+        > img {
             width:  @width;
             height: @height;
         }
-        img {
+        > img {
             display: @display-image;
             &.show-grid {
                 display: none;
             }
         }
+        > img.multiplied {
+            display: none;
+        }
         &.progress-bar {
             width:  @width;
             height: @height;
         }
-    }
-    .select[class] { // The [class] attribute helps to overrule the initial style
-        width: ((45+1+10)*@px + @width);
     }
     // The sort triangle in the list header that is displayed above the image column
     .sort {
@@ -154,6 +154,7 @@
             position: absolute;
             height: @px;
             border: @px solid @border-color;
+            background: @background;
         }
         &:before {
             bottom: -3*@px;
@@ -166,6 +167,19 @@
             width: @width - 8*@px;
         }
     }
+}
+
+// List view: Aligns an element that is outside of another one using percentages taking in consideration the offset values of the other element.
+// Practically, this is used by the uploading state of the card-asset to align the progress bar to the columns in the label element.
+// @position should be a float between 0 and 1 that corresponds to the percentage of the width it should aling to.
+// @left-offset-rem and @right-offset-rem should be REM values of the left and right offset of the other element it should align to.
+.card-list-align-to-column(@position, @left-offset-rem, @right-offset-rem: 0*@px) {
+    @total-offset-rem: @left-offset-rem + @right-offset-rem;
+    position: absolute;
+    left: -webkit-calc((~"(100% -" unit(@total-offset-rem, rem)) ~") *" @position ~"+" unit(@left-offset-rem, rem));
+    left: -moz-calc((~"(100% -" unit(@total-offset-rem, rem)) ~") *" @position ~"+" unit(@left-offset-rem, rem));
+    left: -o-calc((~"(100% -" unit(@total-offset-rem, rem)) ~") *" @position ~"+" unit(@left-offset-rem, rem));
+    left: calc((~"(100% -" unit(@total-offset-rem, rem)) ~") *" @position ~"+" unit(@left-offset-rem, rem));
 }
 
 // List view: Draws a box for additional info showed next to the title (used by card-page)

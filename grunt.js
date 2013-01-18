@@ -38,7 +38,9 @@ module.exports = function(grunt) {
       'components/CUI.CardView.js',
       'components/CUI.PathBrowser.js',
       'components/CUI.Wizard.js',
-      'components/CUI.FileUpload.js'
+      'components/CUI.FileUpload.js',
+      'components/CUI.Toolbar.js'
+
     ],
     "cui-rte": [
       'components/rte/Theme.js',
@@ -215,6 +217,7 @@ module.exports = function(grunt) {
         files: {
           '<%= dirs.build %>/js/libs/toe.js': '<%= dirs.source %>/js/plugins/toe.js',
           '<%= dirs.build %>/js/libs/jquery-fingerpointer.js': '<%= dirs.source %>/js/plugins/jquery-fingerpointer.js',
+          '<%= dirs.build %>/js/libs/jquery-reflow.js': '<%= dirs.source %>/js/plugins/jquery-reflow.js',
           '<%= dirs.build %>/js/libs/jquery-gridlayout.js': '<%= dirs.source %>/js/plugins/jquery-gridlayout.js',
           '<%= dirs.build %>/js/libs/jquery-scrollable.js': '<%= dirs.source %>/js/plugins/jquery-scrollable.js',
           '<%= dirs.build %>/js/libs/moment.js': '<%= dirs.source %>/js/plugins/moment.js',
@@ -541,10 +544,26 @@ module.exports = function(grunt) {
         tasks: 'mocha'
       },
 
+      // Note that this is only a "stub" implementation for watching changes in RTE. To get
+      // the expected behavior, use the commented definition below (and see the notes there
+      // on how to handle errors)
       rte: {
-        files: ['rte/grunt.js'],
-        tasks: 'concat'
+        files: ['<%= dirs.rte %>/grunt.js'],
+        tasks: 'subgrunt:rte copy:rte'
       }
+
+      /*
+
+      Full RTE watch implementation - but use with caution: due to OS-specific limits,
+      ulimit might need to be set explicitly before, otherwise NodeJS may choke.
+
+      ulimit -n 1000 worked for me
+
+      rte: {
+        files: ["<%= dirs.rte %>/grunt.js", "<%= dirs.rte %>/<%= dirs.source %>/" + "**"],
+        tasks: 'subgrunt:rte copy:rte'
+      }
+      */
 
     }
   });

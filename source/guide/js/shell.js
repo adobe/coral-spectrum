@@ -13,6 +13,12 @@ jQuery(function($) {
         console.log(gl.getSelection(true));
         */
     });
+    $grid.on("beforeselect", function(e) {
+        if (e.item.$itemEl.hasClass("unselectable")) {
+            e.cancelSelection(true);
+        }
+    });
+
     $grid.on("change:removeAll", function(e) {
         // console.log("All items removed");
     });
@@ -23,7 +29,7 @@ jQuery(function($) {
 
     $("#selection-mode").fipo("tap", "click", function(e) {
         // use API
-        CUI.CardView.get($grid).toggleGridSelectionMode();
+        $grid.cardView("toggleGridSelectionMode");
         // use CSS contract
         // $grid.toggleClass("selection-mode");
         // $grid.find("article").removeClass("selected");

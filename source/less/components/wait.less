@@ -1,0 +1,145 @@
+/**
+  Class: .wait
+  Provides a wait animated icon
+*/
+@-webkit-keyframes wait {
+	from, to {
+		padding:0;
+		margin:0 1em 1em 0;
+		background:@wait-active-color;
+		-webkit-box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 @wait-inactive-color, 0 1em 0 @wait-inactive-color;
+		box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 @wait-inactive-color, 0 1em 0 @wait-inactive-color;
+	}
+	8.33% {
+		background:transparent;
+		-webkit-box-shadow:1em 0 0 @wait-active-color, 1em 1em 0 @wait-inactive-color, 0 1em 0 @wait-inactive-color;
+		box-shadow:1em 0 0 @wait-active-color, 1em 1em 0 @wait-inactive-color, 0 1em 0 @wait-inactive-color;
+	}
+	16.67% {
+		background:transparent;
+		-webkit-box-shadow:1em 0 0 transparent, 1em 1em 0 @wait-active-color, 0 1em 0 @wait-inactive-color;
+		box-shadow:1em 0 0 transparent, 1em 1em 0 @wait-active-color, 0 1em 0 @wait-inactive-color;
+	}
+	25% {
+		background:transparent;
+		-webkit-box-shadow:1em 0 0 transparent, 1em 1em 0 transparent, 0 1em 0 @wait-active-color;
+		box-shadow:1em 0 0 transparent, 1em 1em 0 transparent, 0 1em 0 @wait-active-color;
+	}
+	33.33% {
+		background:@wait-active-color;
+		-webkit-box-shadow:1em 0 0 transparent, 1em 1em 0 transparent, 0 1em 0 @wait-inactive-color;
+		box-shadow:1em 0 0 transparent, 1em 1em 0 transparent, 0 1em 0 @wait-inactive-color;
+	}
+	41.67% {
+		background:@wait-inactive-color;
+		-webkit-box-shadow:1em 0 0 @wait-active-color, 1em 1em 0 transparent, 0 1em 0 @wait-inactive-color;
+		box-shadow:1em 0 0 @wait-active-color, 1em 1em 0 transparent, 0 1em 0 @wait-inactive-color;
+	}
+	50% {
+		background:@wait-inactive-color;
+		-webkit-box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 @wait-active-color, 0 1em 0 @wait-inactive-color;
+		box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 @wait-active-color, 0 1em 0 @wait-inactive-color;
+	}
+	58.33% {
+		background:@wait-inactive-color;
+		-webkit-box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 transparent, 0 1em 0 @wait-active-color;
+		box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 transparent, 0 1em 0 @wait-active-color;
+	}
+	66.67% {
+		background:@wait-active-color;
+		-webkit-box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 transparent, 0 1em 0 transparent;
+		box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 transparent, 0 1em 0 transparent;
+	}
+	75% {
+		background:transparent;
+		-webkit-box-shadow:1em 0 0 @wait-active-color, 1em 1em 0 transparent, 0 1em 0 transparent;
+		box-shadow:1em 0 0 @wait-active-color, 1em 1em 0 transparent, 0 1em 0 transparent;
+	}
+	83.33% {
+		background:transparent;
+		-webkit-box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 @wait-active-color, 0 1em 0 transparent;
+		box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 @wait-active-color, 0 1em 0 transparent;
+	}
+	91.67% {
+		background:transparent;
+		-webkit-box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 @wait-inactive-color, 0 1em 0 @wait-active-color;
+		box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 @wait-inactive-color, 0 1em 0 @wait-active-color;
+	}
+}
+@keyframes wait {
+	from, to {
+		padding:0;
+		margin:0 1em 1em 0;
+		background:@wait-active-color;
+		box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 @wait-inactive-color, 0 1em 0 @wait-inactive-color;
+	}
+	8.33% {
+		background:transparent;
+		box-shadow:1em 0 0 @wait-active-color, 1em 1em 0 @wait-inactive-color, 0 1em 0 @wait-inactive-color;
+	}
+	16.67% {
+		background:transparent;
+		box-shadow:1em 0 0 transparent, 1em 1em 0 @wait-active-color, 0 1em 0 @wait-inactive-color;
+	}
+	25% {
+		background:transparent;
+		box-shadow:1em 0 0 transparent, 1em 1em 0 transparent, 0 1em 0 @wait-active-color;
+	}
+	33.33% {
+		background:@wait-active-color;
+		box-shadow:1em 0 0 transparent, 1em 1em 0 transparent, 0 1em 0 @wait-inactive-color;
+	}
+	41.67% {
+		background:@wait-inactive-color;
+		box-shadow:1em 0 0 @wait-active-color, 1em 1em 0 transparent, 0 1em 0 @wait-inactive-color;
+	}
+	50% {
+		background:@wait-inactive-color;
+		box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 @wait-active-color, 0 1em 0 @wait-inactive-color;
+	}
+	58.33% {
+		background:@wait-inactive-color;
+		box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 transparent, 0 1em 0 @wait-active-color;
+	}
+	66.67% {
+		background:@wait-active-color;
+		box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 transparent, 0 1em 0 transparent;
+	}
+	75% {
+		background:transparent;
+		box-shadow:1em 0 0 @wait-active-color, 1em 1em 0 transparent, 0 1em 0 transparent;
+	}
+	83.33% {
+		background:transparent;
+		box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 @wait-active-color, 0 1em 0 transparent;
+	}
+	91.67% {
+		background:transparent;
+		box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 @wait-inactive-color, 0 1em 0 @wait-active-color;
+	}
+}
+
+.wait { 
+  display: inline-block;
+  width: 6 * @px;
+  height: 6 * @px;
+  font-size: 10 * @px; // used for box-shadow box placements
+  padding: 0 1em 1em 0;
+  // total size 1rem x 1rem (16px x 16px)
+
+  background: url(~"@{component-images-folder}/wait/wait_16.gif") no-repeat 0 0;
+
+  -webkit-animation: wait 2.4s step-end infinite;
+  animation: wait 2.4s step-end infinite;
+
+  .background-size(cover);
+
+  &.large {
+    width: 14 * @px;
+    height: 14 * @px;
+	font-size: 18 * @px;
+    // total size 2rem x 2rem (32px x 32px)
+
+    background-image: url(~"@{component-images-folder}/wait/wait_32.gif");
+  }
+}

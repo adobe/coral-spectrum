@@ -129,10 +129,10 @@
  Make an element glow
  TODO: add partial glow mixin for mixed top/bottom/left/right only
 */
-.glow(@radius: @focus-glow-radius, @glowColor: @focus-glow-color, @borderColor: @focus-border-color) {
+.glow(@radius: @focus-glow-radius, @glowColor: @focus-glow-color, @borderColor: @focus-border-color, @borderWidth: @px) {
     outline: none;
     .box-shadow(0 0 @radius @glowColor);
-    border: @px solid @borderColor;
+    border: @borderWidth solid @borderColor;
 }
 
 /**

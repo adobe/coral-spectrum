@@ -28,6 +28,8 @@ Currently there are the following data options:
   data-stored-format             Sets the format of the date for transferring it to the server
   data-displayed-format          Sets the format of the date for displaying it to the user
   data-force-html-mode           Force to HTML mode and never use a native Date widget, if given (with any non-empty value)
+  data-day-names                 JSON-array-data with the short names of all week days, starting with Sunday
+  data-month-names               JSON-array-data with the names of all months, starting with January
 
 Additionally the type (date, time, datetime) is read from the &lt;input&gt; field.
 
@@ -61,11 +63,11 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         dayNames: null,
         format: null,
         type: "date",
-        selectedDateTime: moment(),
+        selectedDateTime: null,
         startDay: 0,
         disabled: false,
-        displayedFormat: 'YYYY-MM-DD HH:mm',
-        storedFormat: 'YYYY-MM-DD[T]HH:mmZ',
+        displayedFormat: null,
+        storedFormat: null,
         forceHTMLMode: false,
         required: false
     },
@@ -75,8 +77,8 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
     useNativeControls: false,
     internFormat: 'YYYY-MM-DD[T]HH:mmZ',
     officialDateFormat: 'YYYY-MM-DD',
-    officialTimeFormat: 'YYYY-MM-DD[T]HH:mmZ',
-    officialDatetimeFormat: 'HH:mm',
+    officialTimeFormat: 'HH:mm',
+    officialDatetimeFormat: 'YYYY-MM-DD[T]HH:mmZ',
 
     construct: function(options) {
 
@@ -87,11 +89,14 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
 
         this.options.monthNames = this.options.monthNames || CUI.Datepicker.monthNames;
         this.options.dayNames = this.options.dayNames || CUI.Datepicker.dayNames;
-        this.options.displayedFormat = this.options.displayedFormat || CUI.Datepicker.displayedFormat;
-        this.options.storedFormat = this.options.storedFormat || CUI.Datepicker.storedFormat;
+
 
         this._readDataFromMarkup();
-
+        
+        // Set standard formats
+        this.options.storedFormat = this.options.storedFormat || (this.options.type === "time" ? 'HH:mm' : 'YYYY-MM-DD[T]HH:mmZ');
+        this.options.displayedFormat = this.options.displayedFormat || (this.options.type === "time" ? 'HH:mm' : 'YYYY-MM-DD HH:mm');
+        
         if(this._isSupportedMobileDevice() && this._supportsInputType(this.options.type)) {
             this.useNativeControls = true;
         }
@@ -103,30 +108,22 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
 
         this.$input = this.$element.find('input').not("[type=hidden]");
         this.$hiddenInput = this.$element.find('input[type=hidden]');
+
         
-
-        this._readInputVal();
-
+        // Enable time buttons in popover
         if(this._isTimeEnabled()) {
             this._renderTime();
-            this.$timeDropdowns = this.$element.find(".dropdown");
-            this.$timeButtons = this.$timeDropdowns.find("button");
         }
 
         // If HTML5 input is used, then force to use the official format.
         if (this.useNativeControls) {
             if (this.options.type === 'date') {
                 this.options.displayedFormat = this.officialDateFormat;
-                this.options.storedFormat = this.officialDateFormat;
             } else if (this.options.type === 'time') {
                 this.options.displayedFormat = this.officialTimeFormat;
-                this.options.storedFormat = this.officialTimeFormat;
             } else {
                 this.options.displayedFormat = this.officialDatetimeFormat;
-                this.options.storedFormat = this.officialDatetimeFormat;
             }
-
-            this._setDateTime(this.displayDateTime);
         }
         
         if(!this.useNativeControls) {
@@ -145,8 +142,8 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
                 }
             }.bind(this));
 
-            this.$element.click(function(event){
-                this._openPicker();
+            this.$element.on('click', function(event){
+                if (!this.pickerShown) this._openPicker();
 
                 // let the event time to propagate.
                 this.keepShown = true;
@@ -157,21 +154,26 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             }.bind(this));
         }
 
-        $input.on("change", function() {
+        // Listen on change and additional on blur, as iPad does not fire change events for date fields.
+        $input.on("change blur", function() {
             if (this.options.disabled) return;
-            this.displayDateTime = this.options.selectedDateTime = moment(this.$input.val(), this.options.displayedFormat);
-            this._renderCalendar();
-            this._convertToStorage();
+            var newDate = moment(this.$input.val(), this.options.displayedFormat);
+            this._setDateTime(newDate);
         }.bind(this));
+
+        function normalizeDate(date) {
+            if (!date) return null;
+            return moment([date.year(), date.month(), date.date()]);
+        }
 
         // Move around
         this.$element.find(".calendar").on("swipe", function(event) {
             var d = event.direction;
             if (d === "left") {
-                this.displayDateTime = moment([this.displayDateTime.year(), this.displayDateTime.month() + 1, 1]);
+                this.displayDateTime = normalizeDate(moment([this.displayDateTime.year(), this.displayDateTime.month() + 1, 1]));
                 this._renderCalendar("left");                
             } else if (d === "right") {
-                this.displayDateTime = moment([this.displayDateTime.year(), this.displayDateTime.month() - 1, 1]);
+                this.displayDateTime = normalizeDate(moment([this.displayDateTime.year(), this.displayDateTime.month() - 1, 1]));
                 this._renderCalendar("right");                
             }         
         }.bind(this));
@@ -179,14 +181,14 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         this.$element.on("mousedown", ".next-month", function(event) {
             event.preventDefault();
             if (!this.displayDateTime) return;
-            this.displayDateTime = moment([this.displayDateTime.year(), this.displayDateTime.month() + 1, 1]);
+            this.displayDateTime = normalizeDate(moment([this.displayDateTime.year(), this.displayDateTime.month() + 1, 1]));
             this._renderCalendar("left");
         }.bind(this));
 
         this.$element.on("mousedown", ".prev-month", function(event) {
             event.preventDefault();
             if (!this.displayDateTime) return;
-            this.displayDateTime = moment([this.displayDateTime.year(), this.displayDateTime.month() - 1, 1]);
+            this.displayDateTime = normalizeDate(moment([this.displayDateTime.year(), this.displayDateTime.month() - 1, 1]));
             this._renderCalendar("right");
         }.bind(this));
 
@@ -201,21 +203,19 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             };
 
             // for Desktop
-            this.$timeButtons.on("dropdown-list:select", dropdownChanged.bind(this));
+            this.$element.on("dropdown-list:select", ".hour,.minute", dropdownChanged.bind(this));
             // for Mobile
-            this.$timeDropdowns.on('change', dropdownChanged.bind(this));
+            this.$element.on("change", ".hour,.minute", dropdownChanged.bind(this));
         }
 
 
         if (this.useNativeControls) {
             this.displayDateTime = this.options.selectedDateTime = moment(this.$input.val(), this.options.displayedFormat);
         }
-        //Convert for first display
-        if (this.options.displayedFormat) {
-            var date = moment(this.$input.val());
-            if (date) this.$input.val(date.format(this.options.displayedFormat));
-        }
-        this._convertToStorage();
+        
+        // Reading input value for the first time -> there may be a storage format
+        if (!this.options.selectedDateTime) this._readInputVal([this.options.storedFormat, this.options.displayedFormat]);
+        this._setDateTime(this.options.selectedDateTime);
     },
     
     _readDataFromMarkup: function() {
@@ -244,11 +244,22 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         if (el.data('force-html-mode') !== undefined) {
             this.options.forceHTMLMode = el.data('force-html-mode');
         }
-                
+        
+        if (el.data('day-names') !== undefined) {
+            this.options.dayNames = el.data('day-names') || this.options.dayNames;
+        }
+        
+        if (el.data('month-names') !== undefined) {
+            this.options.monthNames = el.data('month-names') || this.options.monthNames;
+        }                
     },
 
-    _readInputVal: function() {
-        this.displayDateTime = this.options.selectedDateTime = moment($(this.$input)[0].getAttribute('value'), this.options.displayedFormat);
+    _readInputVal: function(format) {
+        if (!format) format = this.options.displayedFormat;
+        var value = this.$input.eq(0).val();
+        var date = moment(value, format);
+        if (!date || !date.isValid()) date = moment(value); // Fallback: Try automatic guess if none of our formats match
+        this.displayDateTime = this.options.selectedDateTime = date;
     },
     
     _updateState: function() {
@@ -259,7 +270,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             this.$element.find("input,button").removeAttr("disabled");
         }
 
-        if ((!this.options.selectedDateTime && this.options.required) || (this.options.selectedDateTime && isNaN(this.options.selectedDateTime.year()))) {
+        if ((!this.options.selectedDateTime && this.options.required) || (this.options.selectedDateTime && !this.options.selectedDateTime.isValid())) {
             this.$element.addClass("error");
         } else {
             this.$element.removeClass("error");
@@ -296,7 +307,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
     
     _showPicker: function() {
         if(this._isDateEnabled()) this._renderCalendar();
-
+        
         var left = this.$openButton.position().left + this.$openButton.width() / 2 - (this.$element.find(".popover").width() / 2);
         var top = this.$openButton.position().top + this.$openButton.outerHeight() + 16;
         //if (left < 0) left = 0;
@@ -342,9 +353,8 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
     },
     
     _renderCalendar: function(slide) {
-        if (!this.displayDateTime) this.displayDateTime = moment();
+        if (!this.displayDateTime || !this.displayDateTime.isValid()) this.displayDateTime = moment();
         var displayDateTime = this.displayDateTime;
-
     
         var displayYear = displayDateTime.format('YYYY');
         var displayMonth = displayDateTime.format('M') ;
@@ -369,7 +379,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         }.bind(this));
 
         if ($calendar.find("table").length > 0 && slide) {
-            this._slideCalendar($calendar.find("table"), table, (slide === "left"));
+            this._slideCalendar(table, (slide === "left"));
         } else {
             $calendar.find("table").remove();
             $calendar.find(".sliding-container").remove();
@@ -380,11 +390,11 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
     },
 
     _getHoursFromDropdown: function() {
-        return parseInt(this.$timeDropdowns.filter('.hour').find("button").text(), 10);
+        return parseInt(this.$element.find('.time .hour select').val(), 10);
     },
 
     _getMinutesFromDropdown: function() {
-        return parseInt(this.$timeDropdowns.filter('.minute').find("button").text(), 10);
+        return parseInt(this.$element.find('.time .minute select').val(), 10);
     },
 
     _renderOneCalendar: function(month, year) {
@@ -426,6 +436,13 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
 
         html = "";
         var today = moment();
+        
+        function isSameDay(d1, d2) {
+            if (!d1) return;
+            if (!d2) return;
+            return d1.year() === d2.year() && d1.month() === d2.month() && d1.date() === d2.date(); 
+        }
+        
         for(var w = 0; w < 6; w++) {
             html +="<tr>";
             for(var d = 0; d < 7; d++) {
@@ -434,8 +451,8 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
                 var isCurrentMonth = (displayDateTime.month() + 1) === parseFloat(month);
                 var cssClass = "";
 
-                if (displayDateTime.diff(today, 'days') === 0) cssClass += " today";
-                if (this.options.selectedDateTime && displayDateTime.diff(this.options.selectedDateTime, 'days') === 0) cssClass += " selected";
+                if (isSameDay(displayDateTime, today)) cssClass += " today";
+                if (isSameDay(displayDateTime, this.options.selectedDateTime)) cssClass += " selected";
 
                 if (isCurrentMonth) {
                     html += "<td class=\"" + cssClass + "\"><a href=\"#\" data-date=\"" + displayDateTime.format(this.internFormat) + "\">" + displayDateTime.date() + "</a></td>";
@@ -449,13 +466,16 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
 
         return table;
     },
-        
-    _slideCalendar: function(oldtable, newtable, isLeft) {
+      
+    _slideCalendar: function(newtable, isLeft) {
+
+        this.$element.find(".sliding-container table").stop(true, true);
+        this.$element.find(".sliding-container").remove();
+
+        var oldtable = this.$element.find("table");
         var width = oldtable.width();
         var height = oldtable.height();
-
-        this.$element.find(".sliding-container,table").remove();
-
+        
         var container = $("<div class=\"sliding-container\">");
 
         container.css({"display" : "block",
@@ -469,7 +489,6 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         oldtable.css({"position": "absolute", "left": 0, "top": 0});
         oldtable.after(newtable);
         newtable.css({"position": "absolute", "left": (isLeft) ? width : -width, "top": 0});
-        this.slideInProgress = true;
 
         var speed = 400;
         
@@ -486,27 +505,34 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         }.bind(this));        
     },
     
+    /**
+    * Sets a new datetime object for this picker
+    */
     _setDateTime: function(date) {
-        this.$input.val((date) ? date.format(this.options.displayedFormat) : "");
-
         this.options.selectedDateTime = this.displayDateTime = date;
-
-        this._convertToStorage();
+        
+        if (!date) {
+            this.$input.val(""); // Clear for null values
+        } else if (date.isValid()) {
+            this.$input.val(date.format(this.options.displayedFormat)); // Set only valid dates
+        }
+        
+        var storage = (date && date.isValid()) ? date.format(this.options.storedFormat) : "";     
+        this.$hiddenInput.val(storage);
             
+        this._updateState();
+        
         if(this.options.type !== "time") {
             this._renderCalendar();
         }
-    },
-    
-    _convertToStorage: function() {
-         var string = (this.options.selectedDateTime) ? this.options.selectedDateTime.format(this.options.storedFormat) : "";     
-         this.$hiddenInput.val(string);
+        
+        if(this._isTimeEnabled()) this._renderTime();
     },
 
     _getTimeFromInput: function() {
         if(this._isTimeEnabled()) {
-            var h = parseInt(this.$timeDropdowns.filter('.hour').find("button").text(), 10);
-            var m = parseInt(this.$timeDropdowns.filter('.minute').find("button").text(), 10);
+            var h = parseInt(this.$element.find('.time .hour button').text(), 10);
+            var m = parseInt(this.$element.find('.time .minute button').text(), 10);
             var time = [h,m];
             return time;
         }
@@ -521,7 +547,6 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
     },
 
     _renderTime: function() {
-
         var html = $("<div class='time'><i class='icon-clock small'></i></div>");
 
         // Hours
@@ -541,10 +566,6 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             minuteSelect.append(minuteOption);
         }
         var minuteDropdown = $('<div class="dropdown minute"><button>Single Select</button></div>').append(minuteSelect);
-
-        // Set up dropdowns
-        $(hourDropdown).dropdown();
-        $(minuteDropdown).dropdown();
 
         // Style for mobile, select can't be hidden
         $(hourDropdown).css({
@@ -571,7 +592,13 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
 
         if (this.$element.find(".time").length === 0) {
             this.$element.find(".inner").append(html);
+        } else {
+            this.$element.find(".time").empty().append(html.children());
         }
+        
+        // Set up dropdowns
+        $(hourDropdown).dropdown();
+        $(minuteDropdown).dropdown();
     },
 
     _isSupportedMobileDevice: function() {

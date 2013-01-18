@@ -123,6 +123,10 @@
                 this.numCols = -1;
                 this.updateDimensions();
                 this.layout(callback);
+
+                this.element.trigger($.Event("cui-gridlayout-initialized", {
+                    "widget": this
+                }));
             }.bind(this), 1); 
         },
 

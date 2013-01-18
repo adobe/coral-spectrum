@@ -216,9 +216,10 @@ div.rail {
                     position: relative;
 
                     &.active {
+                        cursor: default;
 
-                       &:before,
-                       &:after {
+                        &:before,
+                        &:after {
                          position: absolute;
                          left: 50%;
                          
@@ -231,7 +232,7 @@ div.rail {
                          
                          content: " ";
                          pointer-events: none;
-                       }
+                        }
                         &:before {
                           bottom: 0;
                           border-bottom-color: @rail-section-border-color;
@@ -239,6 +240,10 @@ div.rail {
                         &:after {
                           bottom: -2*@px;
                           border-bottom-color: @rail-background-color;
+                        }
+
+                        >i:before {
+                            opacity: 1;
                         }
                     }
                 }
@@ -261,12 +266,13 @@ div.rail {
 
         nav.feature {
             .box-shadow(inset 0 -@px 0 @rail-section-border-color);
-            border-bottom: @px solid @rail-section-highlight-color;
+            border-bottom: 1px solid @rail-section-highlight-color; /* 1px to ensure rendering in IE9 which cuts rem units to 2dp (0.96px) */
 
-            >a {
+            >a,
+            >span {
 
                 border-top: @px solid @rail-section-border-color;
-                .box-shadow(inset 0 @px 0 @rail-section-highlight-color);
+                .box-shadow(inset 0 1px 0 @rail-section-highlight-color); /* 1px to ensure rendering in IE9 which cuts rem units to 2dp (0.96px) */
 
                 display: block;
                 background-color: @rail-background-color;
@@ -276,7 +282,9 @@ div.rail {
                 padding-left: 12*@px;
 
                 font-size: 0.85rem;
-                color: @rail-font-color;
+		        &, a {
+                	color: @rail-font-color;
+                }
 
                 &.active {
                     position: relative;
@@ -300,6 +308,17 @@ div.rail {
                         right: -@px;
                         border-right-color: @body-background-color;
                     }
+                }
+            }
+
+            >span {
+                & a:first-child { // should be applied only to first a tag
+                    display: inline-block;
+                    width: 100%;
+                }
+
+                &.active a:first-child { // should be applied only to first a tag
+                    width: 80%;
                 }
             }
         }
@@ -490,8 +509,10 @@ div.rail {
         display: block;
 
         input[type="text"] {
-          background-position: calc(~"100% - 0.5rem") center;
           background-position: -webkit-calc(~"100% - 0.5rem") center;
+          background-position: -moz-calc(~"100% - 0.5rem") center;
+          background-position: -o-calc(~"100% - 0.5rem") center;
+          background-position: calc(~"100% - 0.5rem") center;
         }
       }
 
@@ -505,7 +526,7 @@ div.rail {
     // text input
     &:not(.light) {
       input[type="text"] {
-        .placeholder(@rail-background-color);
+        .placeholder(@rail-input-placeholder-color);
 
         .border-box;
 
@@ -599,7 +620,7 @@ div.rail {
         >.comment {
 
             float: right;
-            width: calc(~"100% - 2rem");
+            .calc-width(~"100% - 2rem");
         }
       }
     }

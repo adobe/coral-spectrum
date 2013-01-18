@@ -3,32 +3,80 @@ Class: .toolbar
 The top toolbar with action icons
 */
 .toolbar {
+    .clearfix;
     position: relative;
-    height: 46*@px;
     padding: 0 3*@px;
-    
     border-bottom: @px solid @toolbar-border-color;
     
     .left,
     .right {
         z-index: 1;
         position: relative;
+        height: 46*@px;
     }
     
     .center {
         position: absolute;
         left: 0;
         right: 0;
+        height: 46*@px;
         
         text-align: center;
         
-        h1 {
+        h1,
+        .pulldown > a {
             display: inline-block;
-            margin: 10px 0 0;
+            margin: 0;
+            padding-top: 10*@px;
+            padding-bottom: 9*@px;
+            max-width: 14rem;
             
+            .regularText;
+            .ellipsis;
             line-height: 1.5;
             font-size: 18*@px;
-            .regularText;
+        }
+        .pulldown {
+            height: 46*@px;
+        }
+    }
+
+
+    // Hack to avoid FF to display horizontal scrollbars because of a bug on button elements
+    // See: https://bugzilla.mozilla.org/show_bug.cgi?id=750115
+    button[class^="icon-"],
+    button[class*=" icon-"] {
+        position: relative;
+        text-indent: -20rem; // This doesn't aim to move the text off-screen but actually to move it on-screen to avoid the scrollbars
+        &:before {
+            position: absolute;
+            left: 0;
+            top: 9*@px;
+            text-indent: 0;
+        }
+    }
+
+    &.break-lines .center,
+    .break-lines & .center {
+        clear: both;
+        position: relative;
+        margin: 0 -3*@px;
+        padding: 0 3*@px;
+        border-top: @px solid @toolbar-border-color;
+        h1,
+        .pulldown > a {
+            max-width: 92%;
+            max-width: -webkit-calc(~"100% - 2em");
+            max-width: -moz-calc(~"100% - 2em");
+            max-width: -o-calc("100% - 2em");
+            max-width: calc(~"100% - 2em");
+        }
+    }
+    &.long-title .center,
+    .long-title & .center {
+        h1,
+        .pulldown > a {
+            max-width: 38rem;
         }
     }
 }
@@ -88,7 +136,7 @@ The top toolbar with action icons
 
         > a[class^="icon-"], 
         > a[class*=" icon-"] {
-            padding: 0;
+            padding: 0 6*@px 0 0;
             line-height: 46*@px;
 
             &:after {
