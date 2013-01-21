@@ -420,7 +420,6 @@
 
                     <div class="componentSample headerSample">
                         <div class="example">
-
                             <header class="top">
                                 <div class="logo"><img src="images/theme/dms.png" alt="DMS logo"></div>
                                 <nav class="main">
@@ -432,13 +431,43 @@
                                     <div class="badge">5</div>
                                 </div>
                             </header>
-
                         </div>
                         <pre class="prettyprint linenums">
-&lt;header class="top"&gt;
-    &lt;div class=&quot;logo&quot;&gt;&lt;img src=&quot;images/theme/dms.png&quot; alt="DMS logo"&gt;&lt;/div&gt;
-    &lt;nav&gt;
+&lt;header class=&quot;top&quot;&gt;
+    &lt;div class=&quot;logo&quot;&gt;&lt;img src=&quot;images/theme/dms.png&quot; alt=&quot;DMS logo&quot;&gt;&lt;/div&gt;
+    &lt;nav class=&quot;main&quot;&gt;
         &lt;a href=&quot;#&quot; class=&quot;selected&quot;&gt;Home&lt;/a&gt;
+        &lt;a href=&quot;#&quot;&gt;Activities&lt;/a&gt;
+        &lt;a href=&quot;#&quot;&gt;Admin&lt;/a&gt;
+    &lt;/nav&gt;
+    &lt;div class=&quot;drawer&quot;&gt;
+        &lt;div class=&quot;badge&quot;&gt;5&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/header&gt;
+</pre>
+                    </div>
+
+                    <p> Below is an alternate header with breadcrumb navigation.
+
+                    <div class="componentSample">
+                        <div class="example">
+                            <header class="top">
+                                <div class="logo"><img src="images/theme/dms.png" alt="DMS logo"></div>
+                                <nav class="crumbs main">
+                                    <a href="#">Home</a>
+                                    <a href="#">Activities</a>
+                                    <a href="#">Admin</a>
+                                </nav>
+                                <div class="drawer">
+                                    <div class="badge">5</div>
+                                </div>
+                            </header>
+                        </div>
+                        <pre class="prettyprint linenums">
+&lt;header class=&quot;top&quot;&gt;
+    &lt;div class=&quot;logo&quot;&gt;&lt;img src=&quot;images/theme/dms.png&quot; alt=&quot;DMS logo&quot;&gt;&lt;/div&gt;
+    &lt;nav class=&quot;crumbs main&quot;&gt;
+        &lt;a href=&quot;#&quot;&gt;Home&lt;/a&gt;
         &lt;a href=&quot;#&quot;&gt;Activities&lt;/a&gt;
         &lt;a href=&quot;#&quot;&gt;Admin&lt;/a&gt;
     &lt;/nav&gt;
@@ -618,7 +647,6 @@
 
                   <div class="componentSample">
                     <div class="example">
-
                       <nav class="crumbs">
                         <a href="#"><img src="images/theme/cloudui.png" alt="CoralUI logo"/></a>
                         <a href="#">Admin</a>
@@ -628,10 +656,10 @@
                     </div>
                     <pre class="prettyprint linenums">
 &lt;nav class=&quot;crumbs&quot;&gt;
-  &lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/theme/cloudui.png&quot; alt=&quot;CoralUI logo&quot;&gt;&lt;/a&gt;
-  &lt;a href=&quot;#&quot;&gt;Admin&lt;/a&gt;
-  &lt;a href=&quot;#&quot;&gt;Settings&lt;/a&gt;
-  &lt;a href=&quot;#&quot;&gt;Current Page Title&lt;/a&gt;
+    &lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/theme/cloudui.png&quot; alt=&quot;CoralUI logo&quot;/&gt;&lt;/a&gt;
+    &lt;a href=&quot;#&quot;&gt;Admin&lt;/a&gt;
+    &lt;a href=&quot;#&quot;&gt;Settings&lt;/a&gt;
+    &lt;a href=&quot;#&quot;&gt;Current Page Title&lt;/a&gt;
 &lt;/nav&gt;
 </pre>
                   </div>
