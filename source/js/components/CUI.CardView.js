@@ -1,9 +1,20 @@
-/*
- * TODO - provide a "sync" method that syncs view and model
- * TODO - remove list items
- * TODO - auto scrolling
- * TODO - reordering animation in list view
- */
+/*************************************************************************
+*
+* ADOBE CONFIDENTIAL
+* ___________________
+*
+*  Copyright 2012 Adobe Systems Incorporated
+*  All Rights Reserved.
+*
+* NOTICE:  All information contained herein is, and remains
+* the property of Adobe Systems Incorporated and its suppliers,
+* if any.  The intellectual and technical concepts contained
+* herein are proprietary to Adobe Systems Incorporated and its
+* suppliers and are protected by trade secret or copyright law.
+* Dissemination of this information or reproduction of this material
+* is strictly forbidden unless prior written permission is obtained
+* from Adobe Systems Incorporated.
+**************************************************************************/
 
 (function($) {
 
@@ -77,12 +88,27 @@
         return item;
     };
 
+    /**
+     * @classdesc
+     * Internal class that provides utility functionality to the card view.
+     */
     var Utils = {
 
+        /**
+         * Check two jQuery objects for equality.
+         * @param {jQuery} $1 first jQuery object
+         * @param {jQuery} $2 second jQuery object
+         * @return {boolean} True if both objects are considered equal
+         */
         equals: function($1, $2) {
             return ($1.length === $2.length) && ($1.length === $1.filter($2).length);
         },
 
+        /**
+         * Gets a CardView widget for the specified jQuery object.
+         * @param {jQuery} $el The jQuery object
+         * @return {CUI.CardView} The widget
+         */
         getWidget: function($el) {
             var widget;
             if ($el.length > 0) {
@@ -91,6 +117,13 @@
             return widget;
         },
 
+        /**
+         * Resolves each of the DOM elements in the specified jQuery object with a given
+         * function into a new jQuery object.
+         * @param {jQuery} $el The jQuery object to resolve
+         * @param {Function} fn The resolver function
+         * @return {jQuery} The resolved jQuery object
+         */
         resolve: function($el, fn) {
             var resolved = [ ];
             $el.each(function() {
@@ -100,9 +133,10 @@
         },
 
         /**
-         * Multiplies the image with the provided color, this will insert a canvas element before the img element.
-         * image: image element to multiply with the color
-         * color: RGB array of values between 0 and 1
+         * Multiplies the image with the provided color. This will insert a canvas element
+         * before the img element.
+         * @param {HTMLElement} $images image element to multiply with the color
+         * @param {Number[]} color RGB array of values between 0 and 1
          */
         multiplyImages: function($images, color) {
             // Filter out images where the multiply effect has already been inserted to the DOM, or images that aren't visible
@@ -164,22 +198,70 @@
         }
     };
 
-    var ListItemAutoScroller = new Class({
+    var ListItemAutoScroller = new Class(/** @lends CUI.CardView.ListItemAutoScroller# */{
 
+        /**
+         * The item element
+         * @type jQuery
+         * @private
+         */
         $el: null,
 
+        /**
+         * The scrolling container element (with overflow auto/visible and position
+         * absolute)
+         * @type jQuery
+         * @private
+         */
         $containerEl: null,
 
+        /**
+         * Size of a scrolling step (= number of pixels that get scrolled per autoscrolling
+         * 'tick'
+         * @type Number
+         * @private
+         */
         stepSize: 0,
 
+        /**
+         * Timeout ID
+         * @type Number
+         * @private
+         */
         iid: undefined,
 
+        /**
+         * @private
+         */
         autoMoveOffset: 0,
 
-        scrollMax: 0,
+        /**
+         * The maximum value that is allowed for scrollTop while autoscrolling
+         * @type Number
+         * @private
+         */
+        maxScrollTop: 0,
 
 
-        construct: function($el, stepSize, autoMoveFn, limitBottom) {
+        /**
+         * @ignore
+         * @name CUI.CardView.ListItemAutoScroller
+         * @classdesc
+         * Internal class that implements auto scrolling while moving cards in list view.
+         *
+         * @desc
+         * Creates a new auto scroller.
+         *
+         * @constructs
+         *
+         * @param {jQuery} $el The jQuery container element of the card item that is moved
+         * @param {Number} stepSize The step size (number of pixels scrolled per 'tick')
+         * @param {Function} autoMoveFn Function that gets executed on every auto scroll
+         *        "event". The function must actually reposition the item element to
+         *        the coordinate specified as parameters (first parameter: x; second
+         *        parameter: y
+         */
+        construct: function($el, stepSize, autoMoveFn) {
             this.$el = $el;
             this.stepSize = stepSize;
             this.$containerEl = this._getScrollingContainer($el);
@@ -188,6 +270,12 @@
             this.autoMoveFn = autoMoveFn;
         },
 
+        /**
+         * Gets a suitable container element that limits the scrolling area.
+         * @param {jQuery} $el The card item's container element
+         * @return {jQuery} The container element
+         * @private
+         */
         _getScrollingContainer: function($el) {
             while (($el.length > 0) && !$el.is("body")) {
                 var ovflY =  $el.css("overflowY");
@@ -200,6 +288,13 @@
             return $(window);
         },
 
+        /**
+         * Checks if scrolling is necessary according to the item element's current position
+         * and the scroll container's state and executes a single scrolling step by
+         * adjusting the scroll container's scrollTop property if necessary.
+         * @return {Boolean} True if scrolling occured; false if no scrolling was necessary
+         * @private
+         */
         _execute: function() {
             var cont = this.$containerEl[0];
             var clientHeight = cont.clientHeight;
@@ -233,6 +328,11 @@
             return isAutoScroll;
         },
 
+        /**
+         * Moves the card item's element by calculating its new position and calling
+         * the function that was provided in the constructor as autoMoveFn.
+         * @private
+         */
         _autoMove: function() {
             if (this.autoMoveOffset && this.autoMoveFn) {
                 var itemOffs = this.$el.offset();
@@ -241,10 +341,15 @@
             }
         },
 
-        check: function(limitBottom) {
+        /**
+         * Checks if autoscrolling is currently necessary; if so, the autoscrolling is
+         * executed and a timer is started that will check again later if additional
+         * auto scrolling is necessary (and execute again if so).
+         */
+        check: function() {
             var self = this;
             this.stop();
-            var isAutoScroll = this._execute(limitBottom);
+            var isAutoScroll = this._execute();
             if (isAutoScroll) {
                 this.iid = window.setTimeout(function() {
                     self.iid = undefined;
@@ -253,6 +358,9 @@
             }
         },
 
+        /**
+         * Stops autoscrolling.
+         */
         stop: function() {
             if (this.iid !== undefined) {
                 window.clearTimeout(this.iid);
@@ -263,24 +371,78 @@
 
     });
 
-    var ListItemMoveHandler = new Class({
+    var ListItemMoveHandler = new Class(/** @lends CUI.CardView.ListItemMoveHandler# */{
 
+        /**
+         * The list's jQuery element
+         * @type {jQuery}
+         * @private
+         */
         $listEl: null,
 
+        /**
+         * The moved item's jQuery element
+         * @type {jQuery}
+         * @private
+         */
         $itemEl: null,
 
+        /**
+         * A jQuery element that contains all items of the list
+         * @type {jQuery}
+         * @private
+         */
         $items: null,
 
+        /**
+         * The document
+         * @type {jQuery}
+         * @private
+         */
         $doc: null,
 
+        /**
+         * The jQuery object that represents the card that is right before the moved card
+         * just before the move; undefined, if the moved card is the first card of the list
+         * @type {jQuery}
+         * @private
+         */
         $oldBefore: null,
 
+        /**
+         * The CSS class that is added to the item while it is moved
+         * @type String
+         * @private
+         */
         dragCls: null,
 
+        /**
+         * Flag that determines if the horizontal position of an item should be fixed
+         * while it is moved
+         * @type {Boolean}
+         * @private
+         */
         fixHorizontalPosition: false,
 
+        /**
+         * The autoscroller module
+         * @type {ListItemAutoScroller}
+         * @private
+         */
         autoScroller: null,
 
+        /**
+         * @ignore
+         * @name CUI.CardView.ListItemMoveHandler
+         *
+         * @classdesc
+         * Internal class that implements the reordering of cards in list view.
+         *
+         * @constructor
+         * @desc
+         * Creates a new handler for moving a item around in a list by drag &amp; drop (or
+         * its touch counterpart).
+         */
         construct: function(config) {
             var self = this;
             this.$listEl = config.$listEl;
@@ -294,6 +456,13 @@
                     }) : undefined);
         },
 
+        /**
+         * Gets the page coordinates of the specified event, regardless if it is a mouse
+         * or a touch event.
+         * @param {Object} e The event
+         * @return {{x: (Number), y: (Number)}} The page coordinates
+         * @private
+         */
         _getEventCoords: function(e) {
             if (!e.originalEvent.touches) {
                 return {
@@ -313,6 +482,13 @@
             });
         },
 
+        /**
+         * Limits the specified coordinates to the list's real estate.
+         * @param {Number} top vertical coordinate to limit
+         * @param {Number} left horizontal coordinate to limit
+         * @return {{top: *, left: *}}
+         * @private
+         */
         _limit: function(top, left) {
             if (left < this.listOffset.left) {
                 left = this.listOffset.left;
@@ -339,6 +515,13 @@
             };
         },
 
+        /**
+         * Gets the coordinates of the specified event in a device (mouse, touch) agnostic
+         * way.
+         * @param {Object} e The event
+         * @return {{x: Number, y: Number}} The coordinates
+         * @private
+         */
         _getEventPos: function(e) {
             var evtPos = this._getEventCoords(e);
             return {
@@ -347,6 +530,13 @@
             };
         },
 
+        /**
+         * Adjust the position of the moved item by limiting it to the containing list
+         * and executing autoscrolling.
+         * @param {Number} x The original x coordinate
+         * @param {Number} y The original y coordinate
+         * @private
+         */
         _adjustPosition: function(x, y) {
             this.$itemEl.offset(this._limit(y, x));
             if (this.autoScroller) {
@@ -354,6 +544,10 @@
             }
         },
 
+        /**
+         * Changes the order of the items in the list if necessary.
+         * @private
+         */
         _changeOrderIfRequired: function() {
             var itemPos = this.$itemEl.offset();
             var hotX = itemPos.left + (this.size.width / 2);
@@ -388,6 +582,21 @@
             }
         },
 
+        /**
+         * Callback for auto move (called by auto scroller implementation)
+         * @param x {Number} The horizontal position
+         * @param y {Number} The vertical position
+         * @private
+         */
+        _autoMove: function(x, y) {
+            this._adjustPosition(x, y);
+            this._changeOrderIfRequired();
+        },
+
+        /**
+         * Starts moving the list item.
+         * @param {Object} e The event that starts the move
+         */
         start: function(e) {
             this.$oldBefore = this.$itemEl.prev();
             var evtPos = this._getEventCoords(e);
@@ -426,6 +635,10 @@
             */
         },
 
+        /**
+         * Moves the card item.
+         * @param {Object} e The event that is responsible for the move
+         */
         move: function(e) {
             // console.log("move", e);
             var pos = this._getEventPos(e);
@@ -435,11 +648,10 @@
             e.preventDefault();
         },
 
-        _autoMove: function(x, y) {
-            this._adjustPosition(x, y);
-            this._changeOrderIfRequired();
-        },
-
+        /**
+         * Finishes moving the card item.
+         * @param {Object} e The event that is responsible for finishing the move
+         */
         end: function(e) {
             var pos = this._getEventPos(e);
             this._adjustPosition(pos.x, pos.y);
@@ -472,65 +684,151 @@
     /*
      * This class represents a single item in the list model.
      */
-    var Item = new Class({
+    var Item = new Class(/** @lends CUI.CardView.Item# */{
 
+        /**
+         * The jQuery object that represents the card
+         * @type {jQuery}
+         * @private
+         */
         $itemEl: null,
 
+        /**
+         * @ignore
+         * @name CUI.CardView.Item
+         *
+         * @classdesc
+         * Internal class that represents a single card/list item in a card view's data
+         * model.
+         *
+         * @constructor
+         * @desc
+         * Create a new card/list item.
+         */
         construct: function($itemEl) {
             this.$itemEl = $itemEl;
             this.reference();
         },
 
+        /**
+         * Get the card/list item's jQuery object.
+         * @return {jQuery} The jQuery object
+         */
         getItemEl: function() {
             return this.$itemEl;
         },
 
+        /**
+         * References the item's data model in the jQzery object.
+         */
         reference: function() {
-            var self = this;
             this.$itemEl.data("cardView-item", this);
         }
 
     });
 
-    var Header = new Class({
+    var Header = new Class(/** @lends CUI.CardView.Header# */{
 
+        /**
+         * The jQuery object that represents the header
+         * @type {jQuery}
+         * @private
+         */
         $headerEl: null,
 
+        /**
+         * The first item that follows the header
+         * @type {CUI.CardView.Item}
+         */
         itemRef: null,
 
+        /**
+         * @ignore
+         * @name CUI.CardView.Header
+         *
+         * @classdesc
+         * This class represents a list header (that is shown in list view only) in the
+         * card view's data model.
+         *
+         * @constructor
+         * @desc
+         * Create a new list header.
+         */
         construct: function($headerEl, itemRef) {
             this.$headerEl = $headerEl;
             this.itemRef = itemRef;
         },
 
+        /**
+         * Get the jQuery object that is assosciated with the list header.
+         * @return {jQuery} The associated jQuery object
+         */
         getHeaderEl: function() {
             return this.$headerEl;
         },
 
+        /**
+         * Get the list item that follows the header directly.
+         * @return {CUI.CardView.Item} The item
+         */
         getItemRef: function() {
             return this.itemRef;
         },
 
+        /**
+         * Set the list item that follows the header directly.
+         * @param {CUI.CardView.Item} itemRef The item
+         */
         setItemRef: function(itemRef) {
             this.itemRef = itemRef;
         }
 
     });
 
-    /*
-     * This class represents a data model that is created via a selector from an existing
-     * DOM.
-     */
-    var DirectMarkupModel = new Class({
+    var DirectMarkupModel = new Class(/** @lends CUI.CardView.DirectMarkupModel# */{
 
+        /**
+         * The jQuery object that is the parent of the card view
+         * @type {jQuery}
+         * @private
+         */
         $el: null,
 
+        /**
+         * List of items; original/current sorting order (without UI sorting applied)
+         * @type {CUI.CardView.Item[]}
+         * @private
+         */
         items: null,
 
+        /**
+         * List of headers
+         * @type {CUI.CardView.Header[]}
+         * @private
+         */
         headers: null,
 
+        /**
+         * CSS selector config
+         * @type {Object}
+         * @private
+         */
         selectors: null,
 
+        /**
+         * @ignore
+         * @name CUI.CardView.DirectMarkupModel
+         *
+         * @classdesc
+         * This class represents a data model that is created via a selector from an
+         * existing DOM.
+         *
+         * @constructor
+         * @desc
+         * Create a new data model.
+         * @param {jQuery} $el The jQuery object that is the parent of the card view
+         * @param {Object} selectors The CSS selector config
+         */
         construct: function($el, selectors) {
             this.$el = $el;
             this.items = [ ];
@@ -552,6 +850,9 @@
             }
         },
 
+        /**
+         * Initialize the data model.
+         */
         initialize: function() {
             var self = this;
             this.$el.on("drop", this.selectors.itemSelector, function(e) {
@@ -561,6 +862,11 @@
             });
         },
 
+        /**
+         * Reorder the cards according to the specified event.
+         * @param {Event} e The reordering event
+         * @private
+         */
         _reorder: function(e) {
             var itemToMove = this.getItemForEl($(e.target));
             var newBefore = this.getItemForEl(e.newBefore);
@@ -592,14 +898,29 @@
             // console.log(itemToMove, newBefore, isHeaderInsert);
         },
 
+        /**
+         * Get the number of cards/list items.
+         * @return {Number} The number of cards/list items
+         */
         getItemCount: function() {
             return this.items.length;
         },
 
+        /**
+         * Get the card/list item that is at the specified list position.
+         * @param {Number} pos The position
+         * @return {CUI.CardView.Item} The item at the specified position
+         */
         getItemAt: function(pos) {
             return this.items[pos];
         },
 
+        /**
+         * Get the list position of the specified card/list item.
+         * @param {CUI.CardView.Item} item The item
+         * @return {Number} The list position; -1 if the specified item is not a part of
+         *         the list
+         */
         getItemIndex: function(item) {
             for (var i = 0; i < this.items.length; i++) {
                 if (item === this.items[i]) {
@@ -609,6 +930,12 @@
             return -1;
         },
 
+        /**
+         * Get the card/list item that is associated with the specified jQuery object.
+         * @param {jQuery} $el The jQuery object
+         * @return {CUI.CardView.Item} The item; undefined if no item is associated with
+         *         the specified jQuery object
+         */
         getItemForEl: function($el) {
             var itemCnt = this.items.length;
             for (var i = 0; i < itemCnt; i++) {
@@ -620,6 +947,15 @@
             return undefined;
         },
 
+        /**
+         * <p>Inserts the specified card(s)/list item(s) at the given position.</p>
+         * <p>Please note that you can specify multiple items either as an array of jQuery
+         * objects or a single jQuery object that contains multiple DOM objects, each
+         * representing an item.</p>
+         * @param {jQuery|jQuery[]} $items The item(s) to insert
+         * @param pos The position to
+         * @param beforeHeader
+         */
         insertItemAt: function($items, pos, beforeHeader) {
             if (!$.isArray($items)) {
                 $items = $items.toArray();
@@ -675,20 +1011,39 @@
             }
         },
 
+        /**
+         * Get the number of list headers.
+         * @return {Number} The number of headers
+         */
         getHeaderCount: function() {
             return this.headers.length;
         },
 
+        /**
+         * Get a list header by its position in the list of headers.
+         * @param {Number} pos The list header
+         * @return {CUI.CardView.Header} The list header at the specified position
+         */
         getHeaderAt: function(pos) {
             return this.headers[pos];
         },
 
+        /**
+         * Get all list headers.
+         * @return {CUI.CardView.Header[]} List headers
+         */
         getHeaders: function() {
             var headers = [ ];
             headers.push.apply(headers, this.headers);
             return headers;
         },
 
+        /**
+         * Get the list header that is associated with the specified jQuery object.
+         * @param {jQuery} $el The jQuery object
+         * @return {CUI.CardView.Header} The list header; undefined if no header is
+         *         associated with the jQuery object
+         */
         getHeaderForEl: function($el) {
             var headerCnt = this.headers.length;
             for (var h = 0; h < headerCnt; h++) {
@@ -700,6 +1055,12 @@
             return undefined;
         },
 
+        /**
+         * Get the header that directly precedes the specified list item.
+         * @param {CUI.CardView.Item} itemRef The item
+         * @return {CUI.CardView.Header} header The header
+         * @private
+         */
         _getHeaderByItemRef: function(itemRef) {
             for (var h = 0; h < this.headers.length; h++) {
                 if (this.headers[h].getItemRef() === itemRef) {
@@ -709,6 +1070,11 @@
             return undefined;
         },
 
+        /**
+         * Get all list items that are preceded by the specified header.
+         * @param header {CUI.CardView.Header[]} The header
+         * @return {CUI.CardView.Item} The list items
+         */
         getItemsForHeader: function(header) {
             // TODO does not handle empty headers yet
             var itemRef = header.getItemRef();
@@ -740,6 +1106,12 @@
             return itemsForHeader;
         },
 
+        /**
+         * Get the list items (data model) from their associated DOM objects.
+         * @param {jQuery} $elements The jQuery object that specifies the items' DOM
+         *        objects
+         * @return {CUI.CardView.Item[]} List items
+         */
         fromItemElements: function($elements) {
             var items = [ ];
             $elements.each(function() {
@@ -751,6 +1123,9 @@
             return items;
         },
 
+        /**
+         * Write back references to the data model to the respective DOM objects.
+         */
         reference: function() {
             var itemCnt = this.items.length;
             for (var i = 0; i < itemCnt; i++) {
@@ -758,6 +1133,9 @@
             }
         },
 
+        /**
+         * Removes all items without triggering respective events.
+         */
         removeAllItemsSilently: function() {
             this.items.length = 0;
             for (var h = 0; h < this.headers.length; h++) {
@@ -767,27 +1145,50 @@
 
     });
 
-    /*
-     * This class represents a view for data represented by DirectMarkupModel.
-     */
-    var DirectMarkupView = new Class({
+    var DirectMarkupView = new Class(/** @lends CUI.CardView.DirectMarkupView# */{
 
+        /**
+         * The jQuery object that is the parent of the card view
+         * @type {jQuery}
+         * @private
+         */
         $el: null,
 
+        /**
+         * CSS selector config
+         * @type {Object}
+         * @private
+         */
         selectors: null,
 
+        /**
+         * @ignore
+         * @name CUI.CardView.DirectMarkupView
+         *
+         * @classdesc
+         * This class represents a view for data represented by a DirectMarkupModel.
+         *
+         * @constructor
+         * @desc
+         * Create a new view.
+         * @param {jQuery} $el The jQuery object that is the parent of the card view
+         * @param {Object} selectors The CSS selector config
+         */
         construct: function($el, selectors) {
             this.$el = $el;
             this.selectors = selectors;
         },
 
+        /**
+         * Initializes the view.
+         */
         initialize: function() {
             var self = this;
             this.$el.on("change:displayMode", function(e) {
                 var oldMode = e.oldValue;
                 var newMode = e.value;
-                self.cleanupAfterLayoutMode(oldMode);
-                self.prepareLayoutMode(newMode);
+                self.cleanupAfterDisplayMode(oldMode);
+                self.prepareDisplayMode(newMode);
             });
             this.$el.on("change:insertitem", function(e) {
                 self._onItemInserted(e);
@@ -805,6 +1206,11 @@
             });
         },
 
+        /**
+         * Handler that adjusts the view after a new card/list item has been inserted.
+         * @param {Event} e The event
+         * @private
+         */
         _onItemInserted: function(e) {
             var $dataRoot = this.$el;
             if (this.selectors.dataContainer) {
@@ -834,10 +1240,20 @@
             }
         },
 
+        /**
+         * Get the current display mode (grid view/list view)
+         * @return {String} The display mode; defined by constants prefixed by DISPLAY_
+         */
         getDisplayMode: function() {
             return Utils.getWidget(this.$el).getDisplayMode();
         },
 
+        /**
+         * Set the selection state of the specified item.
+         * @param {CUI.CardView.Item} item The item
+         * @param {String} selectionState The selection state; currently supported:
+         *        "selected", "unselected"
+         */
         setSelectionState: function(item, selectionState) {
             var displayMode = this.getDisplayMode();
             var selectorDef = this.selectors.view.selectedItem[displayMode];
@@ -855,6 +1271,12 @@
             }
         },
 
+        /**
+         * Get the selection state of the specified item.
+         * @param {CUI.CardView.Item} item The item
+         * @return {String} The selection state; currently supported: "selected",
+         *         "unselected"
+         */
         getSelectionState: function(item) {
             var selectorDef = this.selectors.view.selectedItem[this.getDisplayMode()];
             var $itemEl = item.getItemEl();
@@ -870,6 +1292,10 @@
             return "selected";
         },
 
+        /**
+         * Get a list of currently selected items.
+         * @return {jQuery} The list of selected items
+         */
         getSelectedItems: function() {
             var selectorDef = this.selectors.view.selectedItems[this.getDisplayMode()];
             var $selectedItems = this.$el.find(selectorDef.selector);
@@ -879,6 +1305,15 @@
             return $selectedItems;
         },
 
+        /**
+         * <p>Restors the card view.</p>
+         * <p>The container is purged and the cards are re-inserted in original order
+         * (note that this is necessary, because the item elements get reordered for
+         * card view; original order has to be restored for list view),</p>
+         * @param {CUI.CardView.DirectMarkupModel} model The data model
+         * @param {Boolean} restoreHeaders True if header objects should be restored as
+         *        well (for list view)
+         */
         restore: function(model, restoreHeaders) {
             var $container = $("<div class='" + this.selectors.dataContainer + "'>");
             this.$el.empty();
@@ -902,15 +1337,32 @@
             }
         },
 
-        prepareLayoutMode: function(layoutMode) {
-            if (layoutMode === DISPLAY_GRID) {
+        /**
+         * Prepares the specified display mode (grid vs. list view).
+         * @param {String} displayMode The display mode ({@link CUI.CardView.DISPLAY_GRID},
+         *        {@link CUI.CardView.DISPLAY_LIST})
+         */
+        prepareDisplayMode: function(displayMode) {
+            if (displayMode === DISPLAY_GRID) {
                 this._drawAllSelectedGrid();
             }
         },
 
-        cleanupAfterLayoutMode: function(layoutMode) {
+        /**
+         * Clean up before the specified display mode is left.
+         * @param {String} displayMode The display mode ({@link CUI.CardView.DISPLAY_GRID},
+         *        {@link CUI.CardView.DISPLAY_LIST})
+         */
+        cleanupAfterDisplayMode: function(displayMode) {
+            // not yet required; may be overridden
         },
 
+        /**
+         * Draw the multiplied version (used for displaying a selection) of the specified
+         * image.
+         * @param {jQuery} $image The image
+         * @private
+         */
         _drawImage: function($image) {
             if ($image.length === 0) {
                 return;
@@ -926,6 +1378,10 @@
             Utils.multiplyImages($image, this._colorFloat);
         },
 
+        /**
+         * Create the multiplied images for selected state (in grid view) for all cards.
+         * @private
+         */
         _drawAllSelectedGrid: function() {
             if (!this.selectors.enableImageMultiply) {
                 return;
@@ -940,6 +1396,12 @@
             });
         },
 
+        /**
+         * Create the multiplied image for the selected state of the specified card (in
+         * grid view).
+         * @param {CUI.CardView.Item} item The card/list item
+         * @private
+         */
         _drawSelectedGrid: function(item) {
             if (!this.selectors.enableImageMultiply) {
                 return;
@@ -953,32 +1415,68 @@
             });
         },
 
+        /**
+         * Removes all items from the view without triggering respective events.
+         */
         removeAllItemsSilently: function() {
             this.$el.find(this.selectors.itemSelector).remove();
         }
 
     });
 
-    /*
-     * This class implements the controller for data represented by DirectMarkupModel and
-     * displayed by DirectMarkupController
-     */
-    var DirectMarkupController = new Class({
+    var DirectMarkupController = new Class(/** @lends CUI.CardView.DirectMarkupController# */{
 
+        /**
+         * The jQuery object that is the parent of the card view
+         * @type {jQuery}
+         * @private
+         */
         $el: null,
 
+        /**
+         * CSS selector config
+         * @type {Object}
+         * @private
+         */
         selectors: null,
 
+        /**
+         * The selection mode
+         * @type {String}
+         * @private
+         */
         selectionModeCount: null,
 
+        /**
+         * Flag that is used for a workaround for touch devices
+         * @type {Boolean}
+         * @private
+         */
         _listSelect: false,
 
+        /**
+         * @ignore
+         * @name CUI.CardView.DirectMarkupController
+         *
+         * @classdesc
+         * This class implements the controller for data represented by DirectMarkupModel
+         * and displayed by DirectMarkupView.
+         *
+         * @constructor
+         * @desc
+         * Create a new controller.
+         * @param {jQuery} $el The jQuery object that is the parent of the card view
+         * @param {Object} selectors The CSS selector config
+         */
         construct: function($el, selectors) {
             this.$el = $el;
             this.selectors = selectors;
             this.selectionModeCount = SELECTION_MODE_COUNT_MULTI;
         },
 
+        /**
+         * Initializes the controller
+         */
         initialize: function() {
             this.setDisplayMode(this.$el.hasClass("list") ? DISPLAY_LIST : DISPLAY_GRID);
             var self = this;
@@ -1077,6 +1575,11 @@
             });
         },
 
+        /**
+         * Adjusts the state of the "select all" element of all list headers.
+         * @param {CUI.CardView} widget The card view widget
+         * @private
+         */
         _adjustSelectAllState: function(widget) {
             var cls = this.selectors.controller.selectAll.cls;
             var selectionState = widget.getHeaderSelectionState();
@@ -1093,6 +1596,12 @@
             }
         },
 
+        /**
+         * Resolves the target of the specified event to a jQuery element that represents
+         * a card.
+         * @param {Event} e The event
+         * @return {jQuery} The jQuery object that represents a card
+         */
         getItemElFromEvent: function(e) {
             var $target = $(e.target);
             var resolver = this.selectors.controller.targetToItem[this.getDisplayMode()];
@@ -1102,6 +1611,10 @@
             return $target.find(resolver);
         },
 
+        /**
+         * Checks if selection mode is enabled for grid view.
+         * @return {Boolean} True if selection mode is enabled
+         */
         isGridSelect: function() {
             var selectorDef = this.selectors.controller.gridSelect;
             var $el = this.$el;
@@ -1111,6 +1624,10 @@
             return $el.hasClass(selectorDef.cls);
         },
 
+        /**
+         * Set selection mode for grid view.
+         * @param {Boolean} isGridSelect True to turn selection mode on
+         */
         setGridSelect: function(isGridSelect) {
             if (this.isGridSelect() !== isGridSelect) {
                 var selectorDef = this.selectors.controller.gridSelect;
@@ -1132,6 +1649,11 @@
             }
         },
 
+        /**
+         * Get current display mode (grid/list view).
+         * @return {String} Display mode ({@link CUI.CardView.DISPLAY_GRID},
+         *         {@link CUI.CardView.DISPLAY_LIST})
+         */
         getDisplayMode: function() {
             if (this.$el.hasClass("list")) {
                 return DISPLAY_LIST;
@@ -1142,6 +1664,11 @@
             return null;
         },
 
+        /**
+         * Set display mode.
+         * @param {String} displayMode Display mode ({@link CUI.CardView.DISPLAY_GRID},
+         *        {@link CUI.CardView.DISPLAY_LIST})
+         */
         setDisplayMode: function(displayMode) {
             var oldValue = this.getDisplayMode();
             if (oldValue !== displayMode) {
@@ -1171,31 +1698,86 @@
             }
         },
 
+        /**
+         * Get selection mode (single/multiple).
+         * @return {String} The selection mode;
+         *         {@link CUI.CardView.SELECTION_MODE_COUNT_SINGLE},
+         *         {@link CUI.CardView.SELECTION_MODE_COUNT_MULTI}
+         */
         getSelectionModeCount: function() {
             return this.selectionModeCount;
         },
 
+        /**
+         * Set selection mode (single/multiple).
+         * @param {String} modeCount The selection mode;
+         *         {@link CUI.CardView.SELECTION_MODE_COUNT_SINGLE},
+         *         {@link CUI.CardView.SELECTION_MODE_COUNT_MULTI}
+         */
         setSelectionModeCount: function(modeCount) {
             this.selectionModeCount = modeCount;
         }
+
     });
 
-    var DirectMarkupAdapter = new Class({
+    var DirectMarkupAdapter = new Class(/** @lends CUI.CardView.DirectMarkupAdapter# */{
 
+        /**
+         * The jQuery object that is the parent of the card view
+         * @type {jQuery}
+         * @private
+         */
         $el: null,
 
+        /**
+         * CSS selector config
+         * @type {Object}
+         * @private
+         */
         selectors: null,
 
+        /**
+         * The model
+         * @type {CUI.CardView.DirectMarkupModel}
+         * @private
+         */
         model: null,
 
+        /**
+         * The view
+         * @type {CUI.CardView.DirectMarkupView}
+         * @private
+         */
         view: null,
 
+        /**
+         * The controller
+         * @type {CUI.CardView.DirectMarkupController}
+         * @private
+         */
         controller: null,
 
+        /**
+         * @ignore
+         * @name CUI.CardView.DirectMarkupAdapter
+         *
+         * @classdesc
+         * Internal class that wires model, controller and view.
+         *
+         * @constructor
+         * @desc
+         * Create a new adapter.
+         * @param {jQuery} $el The jQuery object that is the parent of the card view
+         * @param {Object} selectors The CSS selector config
+         */
         construct: function(selectors) {
             this.selectors = selectors;
         },
 
+        /**
+         * Initialize the adapter (and the wrapped model, view & controller).
+         * @param {jQuery} $el The card view's parent element
+         */
         initialize: function($el) {
             this.$el = $el;
             this.setModel(new DirectMarkupModel($el, this.selectors));
@@ -1206,40 +1788,80 @@
             this.controller.initialize();
         },
 
+        /**
+         * Set the model.
+         * @param {CUI.CardView.DirectMarkupModel} model The model
+         */
         setModel: function(model) {
             this.model = model;
         },
 
+        /**
+         * Get the model.
+         * @return {CUI.CardView.DirectMarkupModel} The model
+         */
         getModel: function() {
             return this.model;
         },
 
+        /**
+         * Set the view.
+         * @param {CUI.CardView.DirectMarkupView} view The view
+         */
         setView: function(view) {
             this.view = view;
         },
 
+        /**
+         * Get the view.
+         * @return {CUI.CardView.DirectMarkupView} The view
+         */
         getView: function() {
             return this.view;
         },
 
+        /**
+         * Set the controller.
+         * @param {CUI.CardView.DirectMarkupController} controller The controller
+         */
         setController: function(controller) {
             this.controller = controller;
         },
 
+        /**
+         * Get the controller.
+         * @return {CUI.CardView.DirectMarkupController} The controller
+         */
         getController: function() {
             return this.controller;
         },
 
+        /**
+         * Check if the specified card/list item is selected.
+         * @param {CUI.CardView.Item} item The card/item
+         * @return {Boolean} True if it is selected
+         */
         isSelected: function(item) {
             var selectionState = this.view.getSelectionState(item);
             return (selectionState === "selected");
         },
 
+        /**
+         * Set the selection state of zhe specified card/list item.
+         * @param {CUI.CardView.Item} item The card/item
+         * @param {Boolean} isSelected True if it is selected
+         */
         setSelected: function(item, isSelected) {
             var selectionState = (isSelected ? "selected" : "unselected");
             this.view.setSelectionState(item, selectionState);
         },
 
+        /**
+         * Get a list of selected items
+         * @param {Boolean} useModel True if {@link CUI.CardView.Item}s should be returned;
+         *        false for jQuery objects
+         * @return {CUI.CardView.Item[]|jQuery}
+         */
         getSelection: function(useModel) {
             var selection = this.view.getSelectedItems();
             if (useModel === true) {
@@ -1248,35 +1870,74 @@
             return selection;
         },
 
+        /**
+         * Get the display mode.
+         * @return {String} The display mode ({@link CUI.CardView.DISPLAY_GRID} or
+         *         {@link CUI.CardView.DISPLAY_LIST})
+         */
         getDisplayMode: function() {
             return this.controller.getDisplayMode();
         },
 
+        /**
+         * Set the display mode.
+         * @param {String} selectionMode The display mode ({@link CUI.CardView.DISPLAY_GRID}
+         *        or {@link CUI.CardView.DISPLAY_LIST})
+         */
         setDisplayMode: function(selectionMode) {
             this.controller.setDisplayMode(selectionMode);
         },
 
+        /**
+         * Check if selection mode is active in grid view.
+         * @return {Boolean} True if selection mode is active
+         */
         isGridSelectionMode: function() {
             return this.controller.isGridSelect();
         },
 
+        /**
+         * Set if selection mode is active in grid view.
+         * @param {Boolean} isSelectionMdoe True if selection mode is active
+         */
         setGridSelectionMode: function(isSelectionMode) {
             this.controller.setGridSelect(isSelectionMode);
         },
 
+        /**
+         * Get the general selection mode (single/multiple items)
+         * @return {String} The selection mode
+         *         ({@link CUI.CardView.SELECTION_MODE_COUNT_SINGLE},
+         *         {@link CUI.CardView.SELECTION_MODE_COUNT_MULTI})
+         */
         getSelectionModeCount: function() {
             return this.controller.getSelectionModeCount();
         },
 
+        /**
+         * Set the general selection mode (single/multiple items)
+         * @param {String} modeCount The selection mode
+         *        ({@link CUI.CardView.SELECTION_MODE_COUNT_SINGLE},
+         *        {@link CUI.CardView.SELECTION_MODE_COUNT_MULTI})
+         */
         setSelectionModeCount: function(modeCount) {
             this.controller.setSelectionModeCount(modeCount);
         },
 
+        /**
+         * Restores the opriginal DOM structure of the widget.
+         * @param {Boolean} restoreHeaders True if list headers should also be restored
+         *        (list view)
+         * @protected
+         */
         _restore: function(restoreHeaders) {
             this.view.restore(this.model, restoreHeaders);
             this.model.reference();
         },
 
+        /**
+         * Removes all items from the card view.
+         */
         removeAllItems: function() {
             var widget = Utils.getWidget(this.$el);
             widget.clearSelection();
@@ -1296,71 +1957,71 @@
 
 
         /**
-         @extends CUI.Widget
-         @classdesc
-         <p>A display of cards that can either be viewed as a grid or a list.</p>
-         <p>The display mode - grid or list view - can be changed programmatically whenever
-         required.</p>
-         <p>Grid view has two modes: navigation and selection, which can also be switched
-         programmatically. In navigation mode, the user can use cards to navigate
-         hierarchical structures ("to another stack of cards"). In selection mode, the
-         cards get selected on user interaction instead. List view combines both selection
-         and navigation modes.</p>
-         <p>The card view uses a data model internally that abstracts the cards. This
-         data model is currently not opened as API. Therefore you will often encounter
-         unspecified objects that represent cards in the data model. You can use them
-         interchangibly (for example, if one method returns a card data object, you can
-         pass it to another method that takes a card data object as a parameter), but
-         you shouldn't assume anything about their internals. You may use
-         {@link CUI.CardView#prepend}, {@link CUI.CardView#append} and
-         {@link CUI.CardView#removeAllItems} to manipulate the data model.</p>
-         <p>Please note that the current implementation has some limitiations which are
-         documented if known. Subsequent releases of CoralUI will remove those limitations
-         bit by bit.</p>
-         <p>The following example shows two cards in grid view:</p>
-
-        <div class="grid" data-toggle="cardview">
-            <div class="grid-0">
-                <article class="card-default">
-                    <i class="select"></i>
-                    <i class="move"></i>
-                    <a href="#">
-                        <span class="image">
-                            <img class="show-grid" src="images/preview.png" alt="">
-                            <img class="show-list" src="images/preview-small.png" alt="">
-                        </span>
-                        <div class="label">
-                            <h4>A card</h4>
-                            <p>Description</p>
-                        </div>
-                    </a>
-                </article>
-                <article class="card-default">
-                    <i class="select"></i>
-                    <i class="move"></i>
-                    <a href="#">
-                        <span class="image">
-                            <img class="show-grid" src="images/preview.png" alt="">
-                            <img class="show-list" src="images/preview-small.png" alt="">
-                        </span>
-                        <div class="label">
-                            <h4>Another card</h4>
-                            <p>See shell example page for more info.</p>
-                        </div>
-                    </a>
-                </article>
-            </div>
-         </div>
-
-         @example
+         * @extends CUI.Widget
+         * @classdesc
+         * <p>A display of cards that can either be viewed as a grid or a list.</p>
+         * <p>The display mode - grid or list view - can be changed programmatically
+         * whenever required.</p>
+         * <p>Grid view has two modes: navigation and selection, which can also be switched
+         * programmatically. In navigation mode, the user can use cards to navigate
+         * hierarchical structures ("to another stack of cards"). In selection mode, the
+         * cards get selected on user interaction instead. List view combines both selection
+         * and navigation modes.</p>
+         * <p>The card view uses a data model internally that abstracts the cards. This
+         * data model is currently not opened as API. Therefore you will often encounter
+         * unspecified objects that represent cards in the data model. You can use them
+         * interchangibly (for example, if one method returns a card data object, you can
+         * pass it to another method that takes a card data object as a parameter), but
+         * you shouldn't assume anything about their internals. You may use
+         * {@link CUI.CardView#prepend}, {@link CUI.CardView#append} and
+         * {@link CUI.CardView#removeAllItems} to manipulate the data model.</p>
+         * <p>Please note that the current implementation has some limitiations which are
+         * documented if known. Subsequent releases of CoralUI will remove those limitations
+         * bit by bit.</p>
+         * <p>The following example shows two cards in grid view:</p>
+         *
+<div class="grid" data-toggle="cardview">
+    <div class="grid-0">
+        <article class="card-default">
+            <i class="select"></i>
+            <i class="move"></i>
+            <a href="#">
+                <span class="image">
+                    <img class="show-grid" src="images/preview.png" alt="">
+                    <img class="show-list" src="images/preview-small.png" alt="">
+                </span>
+                <div class="label">
+                    <h4>A card</h4>
+                    <p>Description</p>
+                </div>
+            </a>
+        </article>
+        <article class="card-default">
+            <i class="select"></i>
+            <i class="move"></i>
+            <a href="#">
+                <span class="image">
+                    <img class="show-grid" src="images/preview.png" alt="">
+                    <img class="show-list" src="images/preview-small.png" alt="">
+                </span>
+                <div class="label">
+                    <h4>Another card</h4>
+                    <p>See shell example page for more info.</p>
+                </div>
+            </a>
+        </article>
+    </div>
+</div>
+         *
+         * @example
 <caption>Instantiate with Class</caption>
 // Currently unsupported.
-
-         @example
+         *
+         * @example
 <caption>Instantiate with jQuery</caption>
 // Currently unsupported.
-
-         @example
+         *
+         * @example
 <caption>Markup</caption>
 &lt;div class="grid" data-toggle="cardview"&gt;
     &lt;div class="grid-0"&gt;
@@ -1380,123 +2041,123 @@
         &lt;/article&gt;
     &lt;/div&gt;
 &lt;/div&gt;
-
-         @example
+         *
+         * @example
 <caption>Switching to grid selection mode using API</caption>
 $cardView.cardView("toggleGridSelectionMode");
-
-         @example
+         *
+         * @example
 <caption>Switching to grid selection mode using CSS contract</caption>
 $cardView.toggleClass("selection-mode");
 $cardView.find("article").removeClass("selected");
-
-         @desc Creates a new card view.
-         @constructs
-
-         @param {Object} [options] Component options
-         @param {Object} [options.selectorConfig]
-                The selector configuration; note that you currently have to specify always
-                an object that carries the entire configuration; a configration object
-                that only provides the options that override their respective default values
-                will not suffice
-         @param {String} options.selectorConfig.itemSelector
-                The selector that is used to retrieve the cards from the DOM
-         @param {String} options.selectorConfig.headerSelector
-                The selector that is used to retrieve the header(s) in list view from the
-                DOM
-         @param {String} options.selectorConfig.dataContainer
-                The class of the div that is used internally for laying out the cards
-         @param {Boolean} options.selectorConfig.enableImageMultiply
-                Flag that determines if the images of cards should use the "multiply effect"
-                for display in selected state
-         @param {Object} options.selectorConfig.view
-                Configures the view of the CardView
-         @param {Object} options.selectorConfig.view.selectedItem
-                Defines what classes on what elements are used to select a card
-         @param {Object} options.selectorConfig.view.selectedItem.list
-                Defines the selection-related config in list view
-         @param {String} options.selectorConfig.view.selectedItem.list.cls
-                Defines the CSS class that is used to select a card in list view
-         @param {String} [options.selectorConfig.view.selectedItem.list.selector]
-                An additioonal selector if the selection class has to be set on a child
-                element rather than the card's parent element
-         @param {Object} options.selectorConfig.view.selectedItem.grid
-                Defines the selection-related config in grid view
-         @param {String} options.selectorConfig.view.selectedItem.grid.cls
-                Defines the CSS class that is used to select a card in grid view
-         @param {String} [options.selectorConfig.view.selectedItem.grid.selector]
-                An additioonal selector if the selection class has to be set on a child
-                element rather than the card's parent element
-         @param {Object} options.selectorConfig.view.selectedItems
-                Defines how to determine the currently selected cards
-         @param {Object} options.selectorConfig.view.selectedItems.list
-                Defines how to determine the currently selected cards in list view
-         @param {String} options.selectorConfig.view.selectedItems.list.selector
-                The selector that determines the DOM elements that represent all currently
-                selected cards
-         @param {Function} [options.selectorConfig.view.selectedItems.list.resolver]
-                A function that is used to calculate a card's parent element from the
-                elements that are returned from the selector that is used for determining
-                selected cards
-         @param {Object} options.selectorConfig.view.selectedItems.grid
-                 Defines how to determine the currently selected cards in grid view
-         @param {String} options.selectorConfig.view.selectedItems.grid.selector
-                The selector that determines the DOM elements that represent all currently
-                selected cards
-         @param {Function} [options.selectorConfig.view.selectedItems.grid.resolver]
-                A function that is used to calculate a card's parent element from the
-                elements that are returned from the selector that is used for determining
-                selected cards
-         @param {Object} options.selectorConfig.controller
-                Configures the controller of the CardView
-         @param {Object} options.selectorConfig.controller.selectElement
-                The selector that defines the DOM element that is used for selecting
-                a card (= targets for the respective click/tap handlers)
-         @param {String} options.selectorConfig.controller.selectElement.list
-                The selector that defines the event targets for selecting a card in list
-                view
-         @param {String} [options.selectorConfig.controller.selectElement.listNavElement]
-                An additional selector that may be used to determine the element that is
-                used for navigating in list view if it is different from the event target
-                defined by options.selectorConfig.controller.selectElement.grid
-         @param {String} options.selectorConfig.controller.selectElement.grid
-                The selector that defines the event targets for selecting a card in grid
-                view
-         @param {Object} options.selectorConfig.controller.moveHandleElement
-                The selector that defines the DOM elements that are used for moving
-                cards in list view (= targets for the respective mouse/touch handlers)
-         @param {String} options.selectorConfig.controller.moveHandleElement.list
-                The selector that defines the event targets for the handles that are used
-                to move a card in list view
-         @param {Object} options.selectorConfig.controller.targetToItems
-                Defines the mapping from event targets to cards
-         @param {Function|String} options.selectorConfig.controller.targetToItems.list
-                A function that takes a jQuery object that represents the event target for
-                selecting a card in list view and that has to return the jQuery object that
-                represents the entire card; can optionally be a selector as well
-         @param {Function|String} options.selectorConfig.controller.targetToItems.grid
-                A function that takes a jQuery object that represents the event target for
-                selecting a card in grid view and that has to return the jQuery object that
-                represents the entire card; can optionally be a selector as well
-         @param {Function|String} options.selectorConfig.controller.targetToItems.header
-                A function that takes a jQuery object that represents the event target for
-                the "select all" button of a header in list view and that has to return the
-                jQuery object that represents the respective header; can optionally be a
-                selector as well
-         @param {Object} options.selectorConfig.controller.gridSelect
-                Defines the selection mode in grid view
-         @param {Object} options.selectorConfig.controller.gridSelect.cls
-                Defines the class that is used to switch to selection mode in grid view
-         @param {Object} options.selectorConfig.controller.gridSelect.selector
-                An additional selector that is used to define the child element where the
-                selection mode class should be applied to/read from
-         @param {Object} options.selectorConfig.controller.selectAll
-                Defines how to select all cards in list view
-         @param {Object} options.selectorConfig.controller.selectAll.selector
-                The selector that is used to determine all "select all" buttons in a
-                CardView
-         @param {Object} options.selectorConfig.controller.selectAll.cls
-                The class that has to be applied to each card if "select all" is invoked
+         *
+         * @desc Creates a new card view.
+         * @constructs
+         *
+         * @param {Object} [options] Component options
+         * @param {Object} [options.selectorConfig]
+         *        The selector configuration; note that you currently have to specify always
+         *        an object that carries the entire configuration; a configration object
+         *        that only provides the options that override their respective default
+         *        values will not suffice
+         * @param {String} options.selectorConfig.itemSelector
+         *        The selector that is used to retrieve the cards from the DOM
+         * @param {String} options.selectorConfig.headerSelector
+         *        The selector that is used to retrieve the header(s) in list view from the
+         *        DOM
+         * @param {String} options.selectorConfig.dataContainer
+         *        The class of the div that is used internally for laying out the cards
+         * @param {Boolean} options.selectorConfig.enableImageMultiply
+         *        Flag that determines if the images of cards should use the "multiply
+         *        effect" for display in selected state
+         * @param {Object} options.selectorConfig.view
+         *        Configures the view of the CardView
+         * @param {Object} options.selectorConfig.view.selectedItem
+         *        Defines what classes on what elements are used to select a card
+         * @param {Object} options.selectorConfig.view.selectedItem.list
+         *        Defines the selection-related config in list view
+         * @param {String} options.selectorConfig.view.selectedItem.list.cls
+         *        Defines the CSS class that is used to select a card in list view
+         * @param {String} [options.selectorConfig.view.selectedItem.list.selector]
+         *        An additioonal selector if the selection class has to be set on a child
+         *        element rather than the card's parent element
+         * @param {Object} options.selectorConfig.view.selectedItem.grid
+         *        Defines the selection-related config in grid view
+         * @param {String} options.selectorConfig.view.selectedItem.grid.cls
+         *        Defines the CSS class that is used to select a card in grid view
+         * @param {String} [options.selectorConfig.view.selectedItem.grid.selector]
+         *        An additioonal selector if the selection class has to be set on a child
+         *        element rather than the card's parent element
+         * @param {Object} options.selectorConfig.view.selectedItems
+         *        Defines how to determine the currently selected cards
+         * @param {Object} options.selectorConfig.view.selectedItems.list
+         *        Defines how to determine the currently selected cards in list view
+         * @param {String} options.selectorConfig.view.selectedItems.list.selector
+         *        The selector that determines the DOM elements that represent all currently
+         *        selected cards
+         * @param {Function} [options.selectorConfig.view.selectedItems.list.resolver]
+         *        A function that is used to calculate a card's parent element from the
+         *        elements that are returned from the selector that is used for determining
+         *        selected cards
+         * @param {Object} options.selectorConfig.view.selectedItems.grid
+         *        Defines how to determine the currently selected cards in grid view
+         * @param {String} options.selectorConfig.view.selectedItems.grid.selector
+         *        The selector that determines the DOM elements that represent all currently
+         *        selected cards
+         * @param {Function} [options.selectorConfig.view.selectedItems.grid.resolver]
+         *        A function that is used to calculate a card's parent element from the
+         *        elements that are returned from the selector that is used for determining
+         *        selected cards
+         * @param {Object} options.selectorConfig.controller
+         *        Configures the controller of the CardView
+         * @param {Object} options.selectorConfig.controller.selectElement
+         *        The selector that defines the DOM element that is used for selecting
+         *        a card (= targets for the respective click/tap handlers)
+         * @param {String} options.selectorConfig.controller.selectElement.list
+         *        The selector that defines the event targets for selecting a card in list
+         *        view
+         * @param {String} [options.selectorConfig.controller.selectElement.listNavElement]
+         *        An additional selector that may be used to determine the element that is
+         *        used for navigating in list view if it is different from the event target
+         *        defined by options.selectorConfig.controller.selectElement.grid
+         * @param {String} options.selectorConfig.controller.selectElement.grid
+         *        The selector that defines the event targets for selecting a card in grid
+         *        view
+         * @param {Object} options.selectorConfig.controller.moveHandleElement
+         *        The selector that defines the DOM elements that are used for moving
+         *        cards in list view (= targets for the respective mouse/touch handlers)
+         * @param {String} options.selectorConfig.controller.moveHandleElement.list
+         *        The selector that defines the event targets for the handles that are used
+         *        to move a card in list view
+         * @param {Object} options.selectorConfig.controller.targetToItems
+         *        Defines the mapping from event targets to cards
+         * @param {Function|String} options.selectorConfig.controller.targetToItems.list
+         *        A function that takes a jQuery object that represents the event target for
+         *        selecting a card in list view and that has to return the jQuery object
+         *        that represents the entire card; can optionally be a selector as well
+         * @param {Function|String} options.selectorConfig.controller.targetToItems.grid
+         *        A function that takes a jQuery object that represents the event target for
+         *        selecting a card in grid view and that has to return the jQuery object t
+         *        hat represents the entire card; can optionally be a selector as well
+         * @param {Function|String} options.selectorConfig.controller.targetToItems.header
+         *        A function that takes a jQuery object that represents the event target for
+         *        the "select all" button of a header in list view and that has to return
+         *        the jQuery object that represents the respective header; can optionally
+         *        be a selector as well
+         * @param {Object} options.selectorConfig.controller.gridSelect
+         *        Defines the selection mode in grid view
+         * @param {Object} options.selectorConfig.controller.gridSelect.cls
+         *        Defines the class that is used to switch to selection mode in grid view
+         * @param {Object} options.selectorConfig.controller.gridSelect.selector
+         *        An additional selector that is used to define the child element where the
+         *        selection mode class should be applied to/read from
+         * @param {Object} options.selectorConfig.controller.selectAll
+         *        Defines how to select all cards in list view
+         * @param {Object} options.selectorConfig.controller.selectAll.selector
+         *        The selector that is used to determine all "select all" buttons in a
+         *        CardView
+         * @param {Object} options.selectorConfig.controller.selectAll.cls
+         *        The class that has to be applied to each card if "select all" is invoked
         */
         construct: function(options) {
             var selectorConfig = options.selectorConfig || DEFAULT_SELECTOR_CONFIG;
@@ -1843,7 +2504,7 @@ $cardView.find("article").removeClass("selected");
         },
 
         /**
-         * @private
+         * @protected
          */
         _restore: function(restoreHeaders) {
             this.adapter._restore(restoreHeaders);
