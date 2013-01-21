@@ -42,7 +42,17 @@ jQuery(function($) {
     // Prettify code examples
     prettyPrint();
 
-
+    // init the rail
+    $('#main-rail').rail({
+      refreshCallback: function () {
+        var def = $.Deferred();
+        setTimeout(function() {
+          def.resolve();      
+        }, 3000); 
+     
+        return def.promise();
+      }
+    });
     
  
     // Size changers
