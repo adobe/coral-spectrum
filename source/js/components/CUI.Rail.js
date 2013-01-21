@@ -119,7 +119,7 @@ $('#myRail').rail({
 
         // register for events with fingerpointer
         trigger.fipo('tap', 'click', function (ev) {
-          //console.log("fingerpointer click");
+
           f.toggleClass('open');
         });
       });
