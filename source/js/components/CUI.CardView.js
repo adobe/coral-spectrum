@@ -2514,8 +2514,11 @@ $cardView.find("article").removeClass("selected");
         },
 
         /**
-         * Append the specified jQuery items as cards.
-         * @param {jQuery} $items The jQuery item(s) to append
+         * <p>Append the specified jQuery items as cards.</p>
+         * <p>Note that if you are intending to add multiple cards at once, you should
+         * either create a single jQuery object that matches the cards to append or an array
+         * of jQuery objects, where each array element represents a single card.</p>
+         * @param {jQuery|jQuery[]} $items The jQuery item(s) to append
          */
         append: function($items) {
             this.adapter.getModel().insertItemAt($items, null, false);
