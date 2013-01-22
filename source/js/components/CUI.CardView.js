@@ -953,8 +953,11 @@
          * objects or a single jQuery object that contains multiple DOM objects, each
          * representing an item.</p>
          * @param {jQuery|jQuery[]} $items The item(s) to insert
-         * @param pos The position to
-         * @param beforeHeader
+         * @param {Number} pos The position to insert
+         * @param {Boolean} beforeHeader True if the items should added before headers (only
+         *        applicable if the items are inserted directly at a position where also
+         *        a header is present); needs to be false if the list has a single header
+         *        that is placed at the top of the list
          */
         insertItemAt: function($items, pos, beforeHeader) {
             if (!$.isArray($items)) {
