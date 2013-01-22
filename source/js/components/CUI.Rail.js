@@ -87,6 +87,7 @@ $('#myRail').rail({
       @param {Function} options.refreshCallback             Callback to be called after a refresh is triggered
     */
     construct: function(options) {
+
       var e = this.$element,
           opt = $.extend(true, {}, this.defaults, options),
           html = '<div class="pull-to-refresh">' +
@@ -112,10 +113,13 @@ $('#myRail').rail({
 
       // enable foldable section
       foldable.each(function (i, e) {
+        
         var f = $(e),
-            trigger = f.find('.heading');
+            trigger = f.find('.heading');  
 
+        // register for events with fingerpointer
         trigger.fipo('tap', 'click', function (ev) {
+
           f.toggleClass('open');
         });
       });
