@@ -139,15 +139,11 @@ CUI.rte.commands.DefaultFormatting = new Class({
 
     queryState: function(selectionDef, cmd) {
         var com = CUI.rte.Common;
-        if (!selectionDef.isSelection) {
-            return selectionDef.editContext.doc.queryCommandState(cmd);
-        }
-        var context = selectionDef.editContext;
         var tagName = this.getTagNameForCommand(cmd);
-        // use the start node to determine state - that's how the browsers would do it
-        // if we could use queryCommandState
+        var context = selectionDef.editContext;
         var selection = selectionDef.selection;
-        return (com.getTagInPath(context, selection.startNode, tagName) != null);
+        return (com.getTagInPath(context, selection.startNode, tagName) != null)
+                || selectionDef.editContext.doc.queryCommandState(cmd);
     }
 
 });
