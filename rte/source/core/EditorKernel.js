@@ -1038,12 +1038,23 @@ CUI.rte.EditorKernel = new Class({
      * @private
      */
     cleanupOnEvent: function(e) {
+        var com = CUI.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
         switch (e.getType()) {
             case "blur":
-            case "keydown":
             case "mousedown":
             case "selectionchange":
-                CUI.rte.DomProcessor.removeTempSpans(e.editContext, true);
+                dpr.removeTempSpans(e.editContext, true);
+                break;
+            case "keydown":
+                if (!com.ua.isWebKit) {
+                    dpr.removeTempSpans(e.editContext, true);
+                }
+                break;
+            case "keyup":
+                if (com.ua.isWebKit) {
+                    dpr.removeTempSpans(e.editContext, true);
+                }
                 break;
         }
     },

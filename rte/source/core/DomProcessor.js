@@ -1754,14 +1754,19 @@ CUI.rte.DomProcessor = function() {
          *        immediately after the selection changes
          * @param {Boolean} keepChildren True if child nodes should be kept if the
          *        temporary span should get removed again
+         * @param {Boolean} adjustInner True if child nodes chould be kept, but cleaned
+         *        up (remove special placeholder characters, etc.))
          */
-        createTempSpan: function(context, removeImmediately, keepChildren) {
+        createTempSpan: function(context, removeImmediately, keepChildren, adjustInner) {
             var com = CUI.rte.Common;
             var span = context.createElement("span");
             var value = (removeImmediately ? com.TEMP_EL_IMMEDIATE_REMOVAL
                     : com.TEMP_EL_REMOVE_ON_SERIALIZE);
             if (keepChildren) {
                 value += ":keepChildren";
+            }
+            if (adjustInner) {
+                value += ":adjustInner";
             }
             com.setAttribute(span, com.TEMP_EL_ATTRIB, value);
             return span;
@@ -1777,6 +1782,7 @@ CUI.rte.DomProcessor = function() {
          */
         removeTempSpans: function(context, immediate) {
             var com = CUI.rte.Common;
+            var dpr = CUI.rte.DomProcessor;
             var spans = context.doc.getElementsByTagName("span");
             var spanCnt = spans.length;
             var value = (immediate ? com.TEMP_EL_IMMEDIATE_REMOVAL
@@ -1788,8 +1794,24 @@ CUI.rte.DomProcessor = function() {
                     if (spanToRemove.parentNode) {
                         var splitAttrib = attrValue.split(":");
                         var keepChildren = com.arrayContains(splitAttrib, "keepChildren");
+                        var adjustInner = com.arrayContains(splitAttrib, "adjustInner");
                         if (keepChildren) {
-                            CUI.rte.DomProcessor.removeWithoutChildren(spanToRemove);
+                            dpr.removeWithoutChildren(spanToRemove);
+                        } else if (adjustInner) {
+                            function cleanUp(dom) {
+                                if (dom.nodeType === 3) {
+                                    var text = dom.nodeValue;
+                                    var regEx = new RegExp(dpr.ZERO_WIDTH_NBSP, "gi");
+                                    dom.nodeValue = text.replace(regEx, "");
+                                } else if (dom.nodeType === 1) {
+                                    var childCnt = dom.childNodes.length;
+                                    for (var c = 0; c < childCnt; c++) {
+                                        cleanUp(dom.childNodes[c]);
+                                    }
+                                }
+                            }
+                            cleanUp(spanToRemove);
+                            dpr.removeWithoutChildren(spanToRemove);
                         } else {
                             spanToRemove.parentNode.removeChild(spanToRemove);
                         }

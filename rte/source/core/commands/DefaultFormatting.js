@@ -80,7 +80,8 @@ CUI.rte.commands.DefaultFormatting = new Class({
                 var el = context.createElement(tag);
                 com.setAttribute(el, com.TEMP_EL_ATTRIB, com.TEMP_EL_REMOVE_ON_SERIALIZE
                         + ":emptyOnly");
-                CUI.rte.DomProcessor.insertElement(context, el, sel.startNode, sel.startOffset);
+                CUI.rte.DomProcessor.insertElement(context, el, sel.startNode,
+                        sel.startOffset);
                 CUI.rte.Selection.selectEmptyNode(context, el);
                 return {
                     "preventBookmarkRestore": true
