@@ -298,6 +298,11 @@ CUI.rte.plugins.KeyPlugin = new Class({
             this.handleBRPlaceholders(context);
         }
 
+        // handle Webkit adding spans deliberately
+        if (com.ua.isWebKit) {
+            this.handleJunkSpans(context);
+        }
+
         // handle IE autolinks if necessary
         if (this.preventAutoLinks) {
             this.handleIEAutoLinks(context);
@@ -459,6 +464,29 @@ CUI.rte.plugins.KeyPlugin = new Class({
         }
     },
 
+    /**
+     * <p>Handles spans that get inserted deliberately by Webkit.</p>
+     * <p>This is for example the case if the user deletes the final character of a
+     * sub-/superscripted fragment and then directly adds another character.</p>
+     * @param {CUI.rte.EditContext} context The edit context
+     */
+    handleJunkSpans: function(context) {
+        var com = CUI.rte.Common;
+        var selection = this.editorKernel.createQualifiedSelection(context);
+        if (!selection.isSelection) {
+            var toCheck = selection.startNode;
+            toCheck = (toCheck.nodeType === 3 ? com.getParentNode(context, toCheck)
+                    : toCheck);
+            if (com.isTag(toCheck, "span")) {
+                var styleAttrib = com.getAttribute(toCheck, "style", true);
+                if (styleAttrib) {
+                    if (styleAttrib.indexOf("font-size") >= 0) {
+                        CUI.rte.DomProcessor.removeWithoutChildren(toCheck);
+                    }
+                }
+            }
+        }
+    },
 
     notifyPluginConfig: function(pluginConfig) {
         pluginConfig = pluginConfig || { };
