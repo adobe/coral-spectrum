@@ -60,8 +60,8 @@ button,
 
 
 // Button: Primary (blue)
-button.primary,
-.button.primary {
+button.primary:not(.disabled):not([disabled]),
+.button.primary:not(.disabled):not([disabled]) {
   border-color: @button-blue-border-color;
 
   .gradient(@button-blue-gradient-start-color, @button-blue-gradient-end-color);
@@ -86,8 +86,8 @@ button.primary,
 
 
 // Button: Warning (red)
-button.warning,
-.button.warning {
+button.warning:not(.disabled):not([disabled]),
+.button.warning:not(.disabled):not([disabled]) {
   border-color: @button-red-border-color;
 
   .gradient(@button-red-gradient-start-color, @button-red-gradient-end-color);
