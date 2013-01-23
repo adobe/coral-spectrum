@@ -6,7 +6,7 @@
     /**
       @extends CUI.Widget
       @classdesc A slider widget
-
+      
         <p>
             <div class="slider ticked filled tooltips" data-init="slider">
               <input type="range" value="14" min="10" max="20" step="2">
@@ -19,16 +19,28 @@
         </p>
     @example
     <caption>Simple horizontal slider</caption>
-    &lt;div class="slider" data-init="slider"&gt;
-        &lt;input type="range" value="14" min="10" max="20" step="2"&gt;
-    &lt;/div&gt;
+        &lt;div class="slider" data-init="slider"&gt;
+            &lt;label&gt;
+                Horizontal Slider
+                &lt;input type="range" value="14" min="10" max="20" step="2"&gt;
+            &lt;/label&gt;
+        &lt;/div&gt;
 
     @example
     <caption>Full-featured slider with two handles, tooltips, ticks and a filled bar</caption>
-    &lt;div class="slider tooltips ticked filled" data-init="slider"&gt;
-        &lt;input type="range" value="4" min="10" max="20" step="2"&gt;
-        &lt;input type="range" value="14" min="10" max="20" step="2"&gt;
-    &lt;/div&gt;
+    &lt;div class="slider tooltips ticked filled" data-init="slider"&gt;    
+            &lt;fieldset&gt;
+                &lt;legend&gt;Vertical Range Slider with Tooltips&lt;/legend&gt;
+                &lt;label&gt;
+                    Minimum value
+                    &lt;input type="range" value="14" min="10" max="20" step="2"&gt;
+                &lt;/label&gt;
+                &lt;label&gt;
+                    Maximum value
+                    &lt;input type="range" value="16" min="10" max="20" step="2"&gt;
+                &lt;/label&gt;
+            &lt;/fieldset&gt;
+        &lt;/div&gt;
 
     @example
     <caption>Instantiate by jQuery plugin</caption>
@@ -36,8 +48,8 @@
 
       @desc Creates a slider from a div
       @constructs
-
-      @param {Object} options           Component options
+      
+      @param {Object} options         Component options
       @param {number} [options.step=1]  The steps to snap in
       @param {number} [options.min=1]   Minimum value
       @param {number} [options.max=100] Maximum value
@@ -45,9 +57,9 @@
       @param {number} [options.tooltips=false] Show tooltips?
       @param {String} [options.orientation=horizontal]  Either 'horizontal' or 'vertical'
       @param {boolean} [options.slide=false]    True for smooth sliding animations 
-      @param {boolean} [options.disabled=false] True for a disabled element* 
-      @param {boolean} [options.bound=false] For multi-input sliders, indicates that the min value is bounded by the max value and the max value is bounded by the min
-    */
+      @param {boolean} [options.disabled=false] True for a disabled element
+            @param {boolean} [options.bound=false] For multi-input sliders, indicates that the min value is bounded by the max value and the max value is bounded by the min
+        **/
     construct: function(options) {
         var that = this;
 
@@ -71,120 +83,141 @@
         if(this.$element.hasClass('filled')) {
             that.options.filled = true;
         }
-
-        if(this.$element.hasClass('slide')) {
+                
+                if(this.$element.hasClass('slide')) {
             that.options.slide = true;
         }
 
         if(this.$element.hasClass('bound')) {
             that.options.bound = true;
         }
-
-        var elementId = that.$element.attr('id');
+        
+        var elementId = this.$element.attr('id');
         // if the element doesn't have an id, build a unique id using the $.expando property
         if(!elementId) {
-            that.$element.data("_tmp",0).attr("id","slider-"+$.expando+"-"+that.$element.get(0)[$.expando]).removeData("_tmp");
-            elementId = that.$element.attr('id');
+            this.$element.data("_tmp",0).attr("id","cui-slider-"+$.expando+"-"+this.$element.get(0)[$.expando]).removeData("_tmp");
+            elementId = this.$element.attr('id');
         }
-
-        that._renderMissingElements();
+                
+        this._renderMissingElements();
 
         // sliders with two inputs should be contained within a fieldset to provide a label for the grouping
         var $fieldset = that.$element.find("fieldset");
         var $legend;
-        if ($fieldset.length)
-        {
-            // move all fieldset children but than the legend to be children of the element.
+        if ($fieldset.length) {
+            // move all fieldset children other than the legend to be children of the element.
             that.$element.append($fieldset.contents(":not(legend)"));
-            // add a class definition so the fieldset appears inline
+            
+            // create a new wrapper div with role="fieldset" and class="sliderfieldset," which will behave as a fieldset but render as an inline block
             var $newFieldset = $('<div role="fieldset" class="sliderfieldset" />');
-            // insert the fieldset before the element and append the element to the fieldset
+                        
+            // wrap the element with the new "sliderfieldset" div
             that.$element.wrap($newFieldset);
 
             // get the first legend. there should only be one
             $legend = $fieldset.find("legend").first();
-            if ($legend.length)
-            {
+            if ($legend.length) {
+                // create new label element, but with role="legend" and append the contents of the legend
                 var $newLegend = $('<label role="legend"/>').append($legend.contents());
 
-                // if there is a legend replace it with a label with the same content and attributes
+                // give the new label element all the same attributes as the legend
                 $.each($legend.prop("attributes"), function() {
                     $newLegend.attr(this.name, this.value);
                 });
-
-                $fieldset.replaceWith($newLegend);
-                $legend = $newLegend;
-                $legend.insertBefore(that.$element);
-
+                                
                 // if the new label/legend has no id, assign one.
-                if (!$legend.attr("id")) {
-                    $legend.attr("id",elementId+"-legend");
+                if (!$newLegend.attr("id")) {
+                    $newLegend.attr("id",elementId+"-legend");
                 }
-
-                $newFieldset.attr("aria-labelledby", $legend.attr("id"));
+                                
+                $newFieldset.attr("aria-labelledby", $newLegend.attr("id"));
+                                
+                // replace the original fieldset, which now only contains the original legend, with the new legend label element
+                $fieldset.replaceWith($newLegend);
+                                
+                // insert the new label/legend before the element
+                $legend = $newLegend.insertBefore(that.$element);        
             }
         }
 
-        that.$inputs = that.$element.find('input');
+        that.$inputs = this.$element.find('input');
 
         var values = [];
 
         that.$inputs.each(function(index) {
             var $this = $(this);
             var thisId = $this.attr("id");
-            // if the input doesn't have an id make one
+            // if the input doesn't have an id, make one
             if (!thisId) {
                 $this.attr("id",elementId+"-input"+index);
                 thisId = $this.attr("id");
             }
-
+            
             if (!$this.attr("aria-labelledby")) {
                 $this.attr("aria-labelledby","");
             }
-
-            // existing labels that use the for element
+            
+            // existing labels that use the "for" attribute to identify the input
             var $label = that.$element.find("label[for='"+thisId+"']");
+            
+            // if we have a legend, the input should first be labelled by the legend
             if ($legend) {
                 if($this.attr("aria-labelledby").indexOf($legend.attr("id"))===-1) {
                     $this.attr("aria-labelledby", $legend.attr("id")+($this.attr("aria-labelledby").length ? " ":"")+$this.attr("aria-labelledby"));
                 }
-
-                if (index===0)
-                    $legend.attr("for",thisId);
             }
-
-            if ($label.length)
-            {
+            
+            // for existing labels that use the "for" attribute to identify the input
+            if ($label.length) {
+                // the label is not the inputs parent, move it before the slider element tag
                 $label.not($this.parent()).insertBefore(that.$element);
                 $label.each(function(index) {
+                    // if the label doesn't have an id, create one
                     if (!$(this).attr("id")) {
                         $(this).attr("id",thisId+"-label"+index);
                     }
+                    
+                    // explicity identify the input's label
                     if($this.attr("aria-labelledby").indexOf(thisId+"-label"+index)===-1) {
                         $this.attr("aria-labelledby", ($this.attr("aria-labelledby").length ? " ":"")+thisId+"-label"+index);
                     }
+                    
+                    if (!that._isTouch())
+                    {
+                        $(this).fipo("touchstart", "mousedown", function(event) {
+                            that.$handles.eq(index).focus();
+                        }.bind(this));
+                    }
                 });
             }
-
+            
+            // if the input is contained by a label
             if ($this.parent().is("label")) {
                 $label = $this.parent();
 
+                // make sure it has an id
                 if (!$label.attr("id")) {
                     $label.attr("id",thisId+"-label");
                 }
-
+                
+                // make sure it explicitly identifies the input it labels
                 if (!$label.attr("for")) {
                     $label.attr("for",thisId);
                 }
 
+                // move the input after the label
                 $this.insertAfter($label);
-
+                
+                // if there is a legend, this is a two thumb slider; internal labels identify the minimum and maximum, and they should have the class="hidden-accessible" 
                 if ($legend) {
                     $label.addClass("hidden-accessible");
                 }
+                
+                // move the label outside the slider element tag
                 $label.insertBefore(that.$element);
             }
-
+            
+            // if the input has a label and it is not included in the aria-labelledby attribute, add the label id to the "aria-labelledby" attribute
             if ($label && $this.attr("aria-labelledby").indexOf($label.attr("id"))===-1)
             {
                 $this.attr("aria-labelledby", $this.attr("aria-labelledby")+($this.attr("aria-labelledby").length ? " ":"")+$label.attr("id"));
@@ -217,15 +250,18 @@
                         that.$element.addClass("disabled");
                     }
                 }
-            }
-
-            $this.on("change", function(event) {
-                if (that.options.disabled) return;
-                that.setValue($this.val(), index);
-            }.bind(this));
-
-            if (that._isMobile())
+            }            
+            
+            if (that._isTouch())
             {
+                // handle input value changes 
+                $this.on("change", function(event) {
+                    if (that.options.disabled) return;
+                    if ($this.val()===that.values[index]) return;
+                    that.setValue($this.val(), index);
+                }.bind(this));
+                
+                // On mobile devices, the input receives focus; listen for focus and blur events, so that the parent style updates appropriately.
                 $this.on("focus", function(event) {
                     that._focus(event);
                 }.bind(this));
@@ -234,13 +270,30 @@
                     that._blur(event);
                 }.bind(this));
             } else {
+                // on desktop, we don't want the input to receive focus
                 $this.attr({"aria-hidden":true,"tabindex":-1,"hidden":"hidden"});
+                
+				if (index===0) {
+					if ($label) {
+						$label.on("click", function(event) {
+						   if (that.options.disabled) return;
+						   that._clickLabel(event);
+						}.bind(this));
+					}
+					
+					if ($legend) {
+						$legend.on("click", function(event) {
+							if (that.options.disabled) return;
+							that._clickLabel(event);
+						}.bind(this));
+					}
+				}
             }
         });
 
         that.values = values;
         if (this.options.orientation === 'vertical') this.isVertical = true;
-
+        
         // Set up event handling
         this.$element.fipo("touchstart", "mousedown", function(event) {
             this._mouseDown(event);
@@ -248,15 +301,15 @@
 
         // Listen to changes to configuration
         this.$element.on('change:value', this._processValueChanged.bind(this));
-        this.$element.on('change:disabled', this._processDisabledChanged.bind(this));
-        this.$element.on('change:min', this._processMinMaxStepChanged.bind(this));
-        this.$element.on('change:max', this._processMinMaxStepChanged.bind(this));
-        this.$element.on('change:step', this._processMinMaxStepChanged.bind(this));
-
+        this.$element.on('change:disabled', this._processDisabledChanged.bind(this));      
+        this.$element.on('change:min', this._processMinMaxStepChanged.bind(this));      
+        this.$element.on('change:max', this._processMinMaxStepChanged.bind(this));      
+        this.$element.on('change:step', this._processMinMaxStepChanged.bind(this));  
+                              
         // Adjust dom to our needs
         this._render();
     },
-
+    
     defaults: {
       step: '1',
       min: '1',
@@ -278,7 +331,7 @@
     $tooltips: null,
     isVertical: false,
     draggingPosition: -1,
-
+    
     /**
      * Set the current value of the slider
      * @param {int}   value   The new value for the slider
@@ -286,14 +339,14 @@
      */
     setValue: function(value, handleNumber) {
         handleNumber = handleNumber || 0;
-
+        
         this._updateValue(handleNumber, value, true); // Do not trigger change event on programmatic value update!
         this._moveHandles();
         if(this.options.filled) {
             this._updateFill();
-        }
+        }        
     },
-
+    
     _renderMissingElements: function() {
         if (!this.$element.find("input").length) {
             var el = $("<input>");
@@ -302,23 +355,23 @@
                 "min": this.options.min,
                 "max": this.options.max,
                 "step": this.options.step,
-                "value": this.options.value
+                "value": this.options.value               
             });
             this.$element.append(el);
         }
-
+        
         if (!this.$element.find("div.clickarea").length) {
             var el2 = $("<div class=\"clickarea\">");
             this.$element.prepend(el2); // Prepend: Must be first element to not hide handles!
         }
-
+        
         this.$element.toggleClass("slider", true);
         this.$element.toggleClass("vertical", this.options.orientation === 'vertical' );
         this.$element.toggleClass("tooltips", this.options.tooltips);
         this.$element.toggleClass("ticked", this.options.ticks);
-        this.$element.toggleClass("filled", this.options.filled);
+        this.$element.toggleClass("filled", this.options.filled);                                
     },
-
+    
     _processValueChanged: function() {
         this._updateValue(0, this.options.value, true); // Do not trigger change event on programmatic value update!
         this._moveHandles();
@@ -331,41 +384,39 @@
         this.$element.find("input").attr("min", this.options.min);
         this.$element.find("input").attr("max", this.options.max);
         this.$element.find("input").attr("step", this.options.step);
-
+        
         for(var i = 0; i < this.values.length; i++) {
             this._updateValue(i, this.values[i], true); // Ensure current values are between min and max
         }
-
+        
         if(this.options.ticks) {
             this.$element.find(".ticks").remove();
             this._buildTicks();
         }
-
+        
         if(this.options.filled) {
             this.$element.find(".fill").remove();
             this._buildFill();
         }
-
+        
         this._moveHandles();
         if(this.options.filled) {
             this._updateFill();
-        }
+        }   
     },
-
+        
     _processDisabledChanged: function() {
-        if (this.options.disabled)
-        {
+        if (this.options.disabled) {
             this.$inputs.attr("disabled","disabled");
-            if (this._isMobile()) 
+            if (this._isTouch()) 
                 this.$handles.attr("aria-disabled",true).removeAttr("tabindex");
         } else {
             this.$inputs.removeAttr("disabled");
-            if (this._isMobile())
+            if (this._isTouch())
                 this.$handles.removeAttr("aria-disabled").attr("tabindex",0);
         }
-        this.$element.toggleClass("disabled", this.options.disabled);
-    },
-
+        this.$element.toggleClass("disabled", this.options.disabled);                 
+    },    
     _render: function() {
         var that = this;
 
@@ -403,12 +454,11 @@
         this.$element.prepend($ticks);
 
         var numberOfTicks = Math.round((that.options.max - that.options.min) / that.options.step) - 1;
-
+        var trackDimensions = that.isVertical ? that.$element.height() : that.$element.width();
         for (var i = 0; i < numberOfTicks; i++) {
-            var trackDimensions = that.isVertical ? that.$element.height() : that.$element.width(),
-                position = (i+1) * (trackDimensions / (numberOfTicks+1)),
-                percent = (position / trackDimensions) * 100,
-                tick = $("<div></div>").addClass('tick').css((that.isVertical ? 'bottom' : 'left'), percent + "%");
+            var position = (i+1) * (trackDimensions / (numberOfTicks+1));
+            var percent = (position / trackDimensions) * 100;
+            var tick = $("<div></div>").addClass('tick').css((that.isVertical ? 'bottom' : 'left'), percent + "%");
             $ticks.append(tick);
         }
         that.$ticks = $ticks.find('.tick');
@@ -448,8 +498,8 @@
 
             // Add handle for input field
             var percent = (that.values[index] - that.options.min) / (that.options.max - that.options.min) * 100;
-            var handle = $('<div></div>').addClass('handle').css((that.isVertical ? 'bottom' : 'left'), percent + "%");
-            handle.attr({
+            var handle = $('<div></div>').addClass('handle').css((that.isVertical ? 'bottom' : 'left'), percent + "%")
+            .attr({
                 "role":"slider",
                 "id":$(this).attr("id")+"-handle",
                 "aria-valuemin":that.options.min,
@@ -457,7 +507,8 @@
                 "aria-valuenow":that.values[index],
                 "aria-valuetext":that.values[index]
             });
-
+            
+            // position the input relative to the slider container element
             $(this).css((that.isVertical ? 'bottom' : 'left'), percent + "%");
             $(wrap).append(handle);
 
@@ -467,17 +518,15 @@
                 .attr({'id':$(this).attr("id")+"-tooltip",'for':$(this).attr("id")});
                 handle.append(tooltip);
             }
-
-            if ($(this).attr("aria-labelledby"))
-            {
+            
+            if ($(this).attr("aria-labelledby")) {
                 handle.attr("aria-labelledby",$(this).attr("aria-labelledby")); 
             }
-
-            if (that.$inputs.length>1 && $(this).attr("aria-labelledby"))
-            {
+            
+            if (that.$inputs.length>1 && $(this).attr("aria-labelledby")) {
                 var inputlabelids = $(this).attr("aria-labelledby").split(" "),
                     label;
-                for(var i =0; i<inputlabelids.length; i++)
+                for(var i = 0; i<inputlabelids.length; i++)
                 {
                     label = $("#"+inputlabelids[i]);
                     if (i>0)
@@ -487,7 +536,8 @@
                     }
                 }
             }
-            if (that._isMobile()) {
+            
+            if (that._isTouch()) {
                 handle.attr("aria-hidden", true);
                 $(this).attr("tabindex", 0).removeAttr("aria-hidden").removeAttr("hidden");
             } else {
@@ -506,9 +556,8 @@
                 handle.attr("tabindex",0);
                 $(this).attr({"aria-hidden":true,"tabindex":-1,"hidden":"hidden"});
             }
-
-            if (that.options.disabled)
-            {
+            
+            if (that.options.disabled) {
                 handle.attr("aria-disabled",true).removeAttr("tabindex");
             }
         });
@@ -516,7 +565,7 @@
         that.$handles = that.$element.find('.handle');
         that.$tooltips = that.$element.find('.tooltip');
     },
-
+    
     _handleClick: function(event) {
         if(this.options.disabled) return false;
         var that = this;
@@ -524,7 +573,7 @@
         // Mouse page position
         var mouseX = event.pageX;
         var mouseY = event.pageY;
-
+            
         if (event.type === "touchstart") {
             var touches = (event.originalEvent.touches.length > 0) ? event.originalEvent.touches : event.originalEvent.changedTouches;
             mouseX = touches[0].pageX;
@@ -535,7 +584,7 @@
 
         // Find the nearest handle
         var pos = that._findNearestHandle(mouseX, mouseY);
-
+        
         var val = that._getValueFromCoord(mouseX, mouseY, true);
 
         if (!isNaN(val))
@@ -546,15 +595,12 @@
                 that._updateFill();
             }
         }
-
-        if (that._isMobile())
-        {
-            that.$inputs.eq(pos).focus();
-        } else {
+        
+        if (!that._isTouch()) {
             that.$handles.eq(pos).focus();
-        }
+        }            
     },
-
+    
     _findNearestHandle: function(mouseX, mouseY) {
         var that = this;
 
@@ -586,7 +632,7 @@
 
         return pos;
     },
-
+    
     _focus: function(event) {
         if (this.options.disabled) return false;
         var that = this,
@@ -602,7 +648,7 @@
         that.$element.removeClass("focus");
         $this.closest(".value").removeClass("focus").find(".handle").removeClass("focus");
     },
-
+    
     _keyDown: function(event) {
         if (this.options.disabled) return;
         var that = this,
@@ -657,52 +703,49 @@
     _mouseDown: function(event) {
         if(this.options.disabled) return false;
         event.preventDefault();
-
+        
         var that = this;
-
+        
         this.draggingPosition = -1;
-
         this.$handles.each(function(index, handle) {
             if (handle === event.target) that.draggingPosition = index;
         }.bind(this));
-
-        that.$tooltips.each(function(index, tooltip) {
+        
+        this.$tooltips.each(function(index, tooltip) {
             if (tooltip === event.target) that.draggingPosition = index;
         }.bind(this));
-
+        
         // Did not touch any handle? Emulate click instead!
         if (this.draggingPosition < 0) {
             this._handleClick(event);
             return;
         }
-
-        if (that._isMobile())
-        {
-            this.$inputs.eq(this.draggingPosition).focus();
-        } else {
-            this.$handles.eq(this.draggingPosition).focus();
-        }
+        
         this.$handles.eq(this.draggingPosition).addClass("dragging");
         this.$element.closest("body").addClass("slider-dragging-cursorhack");
-
+        
         $(window).fipo("touchmove.slider", "mousemove.slider", this._handleDragging.bind(this));
         $(window).fipo("touchend.slider", "mouseup.slider", this._mouseUp.bind(this));
 
+        if (this.$handles.eq(this.draggingPosition) !== document.activeElement && !that._isTouch())
+        {
+            this.$handles.eq(this.draggingPosition).focus();
+        }
         //update();
     },
-
+    
     _handleDragging: function(event) {
         var mouseX = event.pageX;
         var mouseY = event.pageY;
-
+        
         // Handle touch events
         if (event.originalEvent.targetTouches) {
             var touch = event.originalEvent.targetTouches.item(0);
             mouseX = touch.pageX;
-            mouseY = touch.pageY;
+            mouseY = touch.pageY;            
         }
-
-        this._updateValue(this.draggingPosition, this._getValueFromCoord(mouseX, mouseY));
+        
+        this._updateValue(this.draggingPosition, this._getValueFromCoord(mouseX, mouseY));      
         this._moveHandles();
         if(this.options.filled) {
             this._updateFill();
@@ -713,25 +756,29 @@
     _mouseUp: function() {
         this.$handles.eq(this.draggingPosition).removeClass("dragging");
         this.$element.closest("body").removeClass("slider-dragging-cursorhack");
-
+        
         this.draggingPosition = -1;
         $(window).unbind("mousemove.slider touchmove.slider");
         $(window).unbind("mouseup.slider touchend.slider");
     },
+	
+	_clickLabel: function(event) {
+		this.$handles.eq(0)[0].focus();
+    },
 
     _updateValue: function(pos, value, doNotTriggerChange) {
         var that = this;
-        if ((that.$inputs.eq(pos).attr("value") !== value.toString()) || (that.values[pos] !== value.toString())) {
+        if (that.$inputs.eq(pos).attr("value") !== value.toString() || (that.values[pos] !== value.toString())) {
             if (value > this.options.max) value = this.options.max;
             if (value < this.options.min) value = this.options.min;
 
             if(pos === 0 || pos === 1) {
-                if (that.$inputs.length===2 && this.options.bound)
+				if (that.$inputs.length===2 && this.options.bound)
                 {
                     if (pos===0) {
                         value = Math.min(value, Number(that.$inputs.eq(1).val()));
                         that.$inputs.eq(1).attr({"min":value});
-                        that.$inputs.eq(pos).attr({"max":that.$inputs.eq(1).val()/*,"aria-valuemax":that.$inputs.eq(1).val()*/});
+                        that.$inputs.eq(pos).attr({"max":that.$inputs.eq(1).val()});
                         that.$handles.eq(1).attr({"aria-valuemin":value});
                         that.$handles.eq(pos).attr({"aria-valuemax":that.$inputs.eq(1).val()});
                     } else {
@@ -743,8 +790,8 @@
                     }
                 }
                 that.values[pos] = value.toString();
-                that.$inputs.eq(pos).attr("value", value);
-                that.$handles.eq(pos).attr({"aria-valuenow":value,"aria-valuetext":value});
+                that.$inputs.eq(pos).val(value);
+				that.$handles.eq(pos).attr({"aria-valuenow":value,"aria-valuetext":value});
                 if (!doNotTriggerChange) {
                     setTimeout(function() {
                         that.$inputs.eq(pos).change(); // Keep input element value updated too and fire change event for any listeners
@@ -759,8 +806,8 @@
 
         // Set the handle position as a percentage based on the stored values
         this.$handles.each(function(index) {
-            var percent = (that.values[index] - that.options.min) / (that.options.max - that.options.min) * 100,
-                $input = that.$inputs.eq(index);
+            var percent = (that.values[index] - that.options.min) / (that.options.max - that.options.min) * 100;
+            var $input = that.$inputs.eq(index);
 
             if(that.options.orientation === "vertical") {
                 if(that.options.slide) {
@@ -865,15 +912,14 @@
             var elementWidth = that.$element.width();
             percent = ((posX - elementOffset.left) / elementWidth);
         }
-
+        
         // if the bounds are retricted, as with _handleClick, we souldn't change the value.
         if (restrictBounds && (percent<0 || percent>1)) return NaN;
-
+        
         var rawValue = that.options.min * 1 + ((that.options.max - that.options.min) * percent);
 
         if(rawValue >= that.options.max) return that.options.max;
         if(rawValue <= that.options.min) return that.options.min;
-
 
         // Snap value to nearest step
         remainder = ((rawValue - that.options.min) % that.options.step);
@@ -882,7 +928,7 @@
         } else {
             snappedValue = rawValue - remainder;
         }
-
+        
         return snappedValue;
     },
 
@@ -893,10 +939,10 @@
     _getLowestValue: function() {
       return Math.min.apply(null, this.values);
     },
-
+    
     /** @ignore */
-    _isMobile: function() {
-        return typeof window.ontouchstart === 'object';
+    _isTouch: function() {
+        return 'ontouchstart' in window;
     }
 
     /*update: function() {

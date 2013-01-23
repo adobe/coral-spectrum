@@ -35,7 +35,7 @@
         </nav>
 
         <div class="drawer">
-            <div class="badge">v1.0.2-SNAPSHOT</div>
+            <div class="badge">v1.0.1-SNAPSHOT</div>
         </div>
 
     </header>
@@ -404,6 +404,48 @@
 
 &lt;!-- Actionable with label --&gt;
 &lt;button class=&quot;icon-add-circle withLabel&quot;&gt;Add&lt;/button&gt;
+</pre>
+                    </div>
+                </section>
+
+            </section><!-- /Text Styles -->
+
+            <section id="PageComponents">
+                <h1 class="line">Page Components</h1>
+                <p>Page components are top level pieces that appear on nearly every page.</p>
+
+                <section id="Header">
+                    <h2 class="line">Header</h2>
+                    <p>The top navigation header that appears on every page. It supports a logo, navigation, and drawer (which can contain a badge or other information).</p>
+
+                    <div class="componentSample headerSample">
+                        <div class="example">
+
+                            <header class="top">
+                                <div class="logo"><img src="images/theme/dms.png" alt="DMS logo"></div>
+                                <nav class="main">
+                                    <a href="#" class="selected">Home</a>
+                                    <a href="#">Activities</a>
+                                    <a href="#">Admin</a>
+                                </nav>
+                                <div class="drawer">
+                                    <div class="badge">5</div>
+                                </div>
+                            </header>
+
+                        </div>
+                        <pre class="prettyprint linenums">
+&lt;header class="top"&gt;
+    &lt;div class=&quot;logo&quot;&gt;&lt;img src=&quot;images/theme/dms.png&quot; alt="DMS logo"&gt;&lt;/div&gt;
+    &lt;nav&gt;
+        &lt;a href=&quot;#&quot; class=&quot;selected&quot;&gt;Home&lt;/a&gt;
+        &lt;a href=&quot;#&quot;&gt;Activities&lt;/a&gt;
+        &lt;a href=&quot;#&quot;&gt;Admin&lt;/a&gt;
+    &lt;/nav&gt;
+    &lt;div class=&quot;drawer&quot;&gt;
+        &lt;div class=&quot;badge&quot;&gt;5&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/header&gt;
 </pre>
                     </div>
                 </section>
@@ -1222,13 +1264,13 @@
 
                     <div class="componentSample">
                         <div class="example clearfix">
-                        	<div class="sliderSample">
+                            <div class="sliderSample">
                                 <div class="slider" data-init="slider">
                                     <label>
                                         Horizontal Slider
                                         <input type="range" value="14" min="10" max="20" step="2">
                                     </label>
-                            	</div>
+                                </div>
                             </div>
                             <div class="sliderSample">
                                 <div class="slider ticked filled" data-init="slider">
@@ -1330,7 +1372,7 @@
                             </div>
                             <div class="sliderSample left">
                                 <div class="slider vertical ticked filled" data-init="slider">
-                                	<label for="vslider1">Ticked and Filled Vertical Slider</label>
+                                    <label for="vslider1">Ticked and Filled Vertical Slider</label>
                                     <input id="vslider1" type="range" value="14" min="10" max="20" step="2">
                                 </div>
                             </div>
@@ -1344,7 +1386,7 @@
                                 </div>
                             </div>
                             <div class="sliderSample left">
-                            	<div class="slider vertical filled bound" data-init="slider">
+                                <div class="slider vertical filled bound" data-init="slider">
                                     <fieldset>
                                        <legend>Vertical Bound Range Slider</legend>
                                        <label>Minimum value <input type="range" value="40"></label>

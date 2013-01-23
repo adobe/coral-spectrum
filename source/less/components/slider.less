@@ -5,16 +5,21 @@
 .slider {
   position: relative;
   display: inline-block;
-  vertical-align: middle;
-  z-index: auto;
   .border-box;
   padding: 0;
   .border-radius(0.25rem);
   border: @px solid @slider-border-color;
   background-color: @slider-background-color;
-  width: 13.750rem;
-  height: 0.5rem;
+  width: 220*@px;
+  height: 8*@px;
   margin: 0.5rem 0.25rem;
+  vertical-align: middle;
+  z-index: auto;
+  
+  &:hover,
+  &.focus {
+    z-index: 1;
+  }
 
   .slider-transition {
     -moz-transition: all 0.1s;
@@ -28,59 +33,49 @@
     -o-transition: all 2s cubic-bezier(1, 0, 0.5, 0);
     transition: all 2s cubic-bezier(1, 0, 0.5, 0);
   }
-  
-  &:hover,
-  &.focus, {
-      z-index: 1;
-  }
 
   .handle {
     position: absolute;
-    top: 0rem;
     left: 0;
     display: inline-block;
-    .border-box;
-    width: 0.5625rem;
-    height: 1.25rem;
+    width: 9*@px;
+    height: 20*@px;
     margin: -0.5rem -0.25rem;
     .gradient(@slider-handle-gradient-start-color, @slider-handle-gradient-end-color);
     .border-radius(0.25rem);
     border: @px solid @slider-border-color;
     cursor: url('../images/cursors/openhand.cur'), default;
-    &:hover,
-    &.dragging {
-      .gradient(lighten(@slider-handle-gradient-start-color, 15%), lighten(@slider-handle-gradient-end-color, 15%));
-      .tooltip {
-        opacity: 1;
-        .slider-transition;
+      &:hover,
+      &.dragging {
+        .gradient(lighten(@slider-handle-gradient-start-color, 15%), lighten(@slider-handle-gradient-end-color, 15%));
+        .tooltip {
+          opacity: 1;
+          .slider-transition;
+        }
       }
-    }
-    &.dragging {
+      &.focus {
+        .glow();
+        .gradient(lighten(@slider-handle-gradient-start-color, 15%), lighten(@slider-handle-gradient-end-color, 15%));
+        outline: none;
+        .tooltip {
+          opacity: 1;
+          .slider-transition;
+        }
+      }
+      &.dragging {
         cursor: url('../images/cursors/closedhand.cur'), default;
-    }
-    &.focus {
-      .gradient(lighten(@slider-handle-gradient-start-color, 15%), lighten(@slider-handle-gradient-end-color, 15%));
-      -webkit-box-shadow: 0 0 0.375rem #377eaf;
-      -moz-box-shadow: 0 0 0.375rem #377eaf;
-      box-shadow: 0 0 0.375rem #377eaf;
-      border-color: #6a8bc4;
-      outline: none;
-      .tooltip {
-        opacity: 1;
-        .slider-transition;
-      }
-    }
+        .box-shadow(0 0.25rem 0.25rem rgba(0, 0, 0, 0.25));
+      } 
   }
 
   .tick {
     position: absolute;
-    display: block;
-    .border-box;
     bottom: 0;
     left: 0;
-    width: 0.0625rem;
-    height: 100%;
+    width: @px;
+    height: 0.4rem;
     background-color: @slider-border-color;
+    .border-box;
     &.covered {
       background-color: @slider-fill-tick-color;
     }
@@ -89,20 +84,20 @@
   .tooltip {
     position: absolute;
     opacity: 0;
-    left: -1.25rem;
-    top: -3.4375rem;
+    left: -20*@px;
+    top: -55*@px;
     .slider-transition-slow;
   }
-  
+
   input[type=range],
   input[type=number] {
-    opacity: 0.00001;
+    opacity: 0.000001;
     cursor: default;
+    width: 9*@px;
+    height: 20*@px;
     position: absolute;
-    top: 0rem;
+    top: 0;
     left: 0;
-    width: 0.5625rem;
-    height: 1.25rem;
     margin: -0.625rem -0.25rem;
     overflow: hidden;
     padding: 0;
@@ -111,84 +106,81 @@
 
   .fill {
     position: absolute;
-    .border-box;
     background-color: @slider-fill-color;
     border: @px solid @slider-fill-border-color;
-    margin: -0.0625rem;
+    margin: -@px;
     .border-radius(0.25rem);
     height: 0.5rem;
     left: 0;
+    .border-box;
   }
 
   .value {
+    display: inline-block;
     position: absolute;
     width: 100%;
     height: 100%;
-    display: inline-block;
     z-index: auto;
     &.focus {
       z-index: 1;
     }
   }
 
-    .clickarea {
-        position: absolute;
-        left: 0;
-        top: -0.5rem;
-        right: 0;
-        bottom: -0.5rem;
-    }
-    
+  .clickarea {
+    position: absolute;
+    left: 0;
+    top: -0.5rem;
+    right: 0;
+    bottom: -0.5rem;
+  }
+  
   &.vertical {
-    width: 0.5rem;
-    height: 13.750rem;
+    width: 8*@px;
+    height: 220*@px;
     margin: 0.25rem 0.625rem;
-    
+  
     input[type=range],
     input[type=number] {
       top: auto;
       width: 1.25rem;
       height: 0.5625rem;
-      margin: -0.25rem -0.625rem;
+      margin: -0.25rem -0.6rem;
       -webkit-appearance: slider-vertical;
     }
-    
     .handle {
+      width: 20*@px;
+      margin: -0.25rem -0.5rem;
+      height: 9*@px;
       top: auto;
-      width: 1.25rem;
-      height: 0.5625rem;
-      margin: -0.25rem -0.4625rem;
     }
-    
     .tick {
-      width: 100%;
-      height: 0.0625rem;
+      width: 0.4rem;
+      height: @px;
     }
     .tooltip {
-      left: 1.5625rem;
-      top: -1.25rem;
+      left: 25*@px;
+      top: -20*@px;
     }
     .fill {
       width: 0.5rem;
       bottom: 0;
-      margin: -0.0625rem;
+      margin: -@px;
     }
     .clickarea {
-        position: absolute;
-        left: -0.5rem;
-        top: 0;
-        right: -0.5rem;
-        bottom: 0;
+      position: absolute;
+      left: -0.5rem;
+      top: 0;
+      right: -0.5rem;
+      bottom: 0;
     }
   }
-   
+
   &.disabled {
     border-color: @slider-disabled-border-color;
     background-color: @slider-disabled-background-color;
     .handle {
       background: @slider-disabled-background-color;
       border-color: @slider-disabled-border-color;
-      outline: none;
       &:hover {
         cursor: auto;
         .tooltip {
@@ -196,11 +188,11 @@
         }
       }
     }
-
+  
     .tick {
       background-color: @slider-disabled-border-color;
     }
-
+  
     .fill {
       background-color: @slider-disabled-fill-color;
       border-color: @slider-disabled-border-color;
@@ -209,10 +201,10 @@
 }
 
 .slider-dragging-cursorhack, .slider-dragging-cursorhack * {
-    cursor: url('../images/cursors/closedhand.cur'), default !important;    /* Apply dragging to complete page */
+  cursor: url('../images/cursors/closedhand.cur'), default !important;  /* Apply dragging to complete page */
 }
 
 .sliderfieldset {
-    display: inline-block;
-    position: static;
+  display: inline-block;
+  position: static;
 }
