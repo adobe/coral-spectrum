@@ -790,7 +790,7 @@
                     }
                 }
                 that.values[pos] = value.toString();
-                that.$inputs.eq(pos).val(value);
+                that.$inputs.eq(pos).val(value).attr("value",value);
 				that.$handles.eq(pos).attr({"aria-valuenow":value,"aria-valuetext":value});
                 if (!doNotTriggerChange) {
                     setTimeout(function() {
