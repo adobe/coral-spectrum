@@ -31,7 +31,7 @@
     <!-- P R O J E C T                                                           -->
     <!-- ======================================================================= -->
     <artifactId>com.adobe.coralui.content</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>content-package</packaging>
 
     <name>Adobe Reef / CoralUI Content Package</name>
