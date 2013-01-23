@@ -700,7 +700,7 @@ CUI.rte.DomProcessor = function() {
          * <p>For example: &lt;b&gt;ABC &lt;/b&gt;&lt;b&gt;DEF&lt;/b&gt; can be joined to
          * &lt;b&gt;ABC DEF&lt;/b&gt;</p>
          * @param {CUI.rte.EditContext} context The edit context
-         * @param {HTMLElement} dom node t0 check; if this is no text node, the first
+         * @param {HTMLElement} dom node to check; if this is no text node, the first
          *        descendant text node will be used instead
          * @param {Boolean} joinPreceding True if the specified DOM node should be joined
          *        with the preceding text node; False if the succeeding node should be used
