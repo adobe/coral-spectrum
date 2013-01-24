@@ -430,6 +430,7 @@
                                 <div class="drawer">
                                     <div class="badge">5</div>
                                 </div>
+
                             </header>
                         </div>
                         <pre class="prettyprint linenums">
@@ -447,7 +448,7 @@
 </pre>
                     </div>
 
-                    <p> Below is an alternate header with breadcrumb navigation.
+                    <p>Below is an alternate header with <a href="#Breadcrumbs">breadcrumb</a> navigation, and a <a href="#Popover">popover</a> for secondary navigation.
 
                     <div class="componentSample">
                         <div class="example">
@@ -456,10 +457,16 @@
                                 <nav class="crumbs main">
                                     <a href="#">Home</a>
                                     <a href="#">Activities</a>
-                                    <a href="#">Admin</a>
+                                    <a href="#popover-admin" data-toggle="popover" data-point-from="bottom" data-align-from="right">Admin</a>
+                                    <div id="popover-admin" class="popover arrow-right">
+                                        <div><a href="#" style="color:#000">Subnavigation Foo</a></div>
+                                        <div><a href="#" style="color:#000">Subnavigation Bar</a></div>
+                                    </div>
                                 </nav>
                                 <div class="drawer">
+                                    <a href="#" style="color: white; margin-right: .6em">Help</a>
                                     <div class="badge">5</div>
+                                    <a href="#" class="icon-user">Username</a>
                                 </div>
                             </header>
                         </div>
@@ -469,10 +476,16 @@
     &lt;nav class=&quot;crumbs main&quot;&gt;
         &lt;a href=&quot;#&quot;&gt;Home&lt;/a&gt;
         &lt;a href=&quot;#&quot;&gt;Activities&lt;/a&gt;
-        &lt;a href=&quot;#&quot;&gt;Admin&lt;/a&gt;
+        &lt;a href=&quot;#popover-admin&quot; data-toggle=&quot;popover&quot; data-point-from=&quot;bottom&quot; data-align-from=&quot;right&quot;&gt;Admin&lt;/a&gt;
+        &lt;div id=&quot;popover-admin&quot; class=&quot;popover arrow-right&quot;&gt;
+            &lt;div&gt;&lt;a href=&quot;#&quot; style=&quot;color:#000&quot;&gt;Subnavigation Foo&lt;/a&gt;&lt;/div&gt;
+            &lt;div&gt;&lt;a href=&quot;#&quot; style=&quot;color:#000&quot;&gt;Subnavigation Bar&lt;/a&gt;&lt;/div&gt;
+        &lt;/div&gt;
     &lt;/nav&gt;
     &lt;div class=&quot;drawer&quot;&gt;
+        &lt;a href=&quot;#&quot;&gt;Help&lt;/a&gt;
         &lt;div class=&quot;badge&quot;&gt;5&lt;/div&gt;
+        &lt;a href=&quot;#&quot; class=&quot;icon-user&quot;&gt;Username&lt;/a&gt;
     &lt;/div&gt;
 &lt;/header&gt;
 </pre>
