@@ -1,18 +1,23 @@
 # What is CoralUI?
-CoralUI or CUI (pronounced "cooey") is an implementation of the XD CloudUI visual style.
-
-CoralUI provides everything your product needs to adopt the CloudUI visual style.
+CoralUI is an implementation of the XD CloudUI visual style.  Using CoralUI provides everything your product needs to build out a web based UI, including touch friendly controls, a highly scalable interface, accessibility compliance, and component extensibility.
 
 # Demo & Download
-Check out the [Style Guide](https://git.corp.adobe.com/pages/Reef/CoralUI/), to see CoralUI in action, download releases, and learn how to use CoralUI in your project.
+Check out the current release of the [Style Guide][1] to see CoralUI in action.  You can also check out the Style Guide via the build servers, for better or worse.  There are both a [real-time][2] and [nightly][3] options to choose from.
 
+To begin playing with CoralUI, try clicking the Download link for a zip of the project, and using the build [documentation][4] to get started.
 
 # Contributing
-CoralUI is an internal open source effort with backing from XD and product development teams, and we encourage issues, feature requests, and pull requests from anyone on any team.
+CoralUI is an internal open source effort with backing from XD and product development teams, and we encourage the submission of issues, feature requests, and pull requests from anyone, on any team.  To get involved, contact the [mailing list][5] and introduce yourself.
 
 ## Building
-
-Check out the [Build Process wiki](https://git.corp.adobe.com/Reef/CoralUI/wiki/Build-Process-&-Technology) for information on building CoralUI.
+Check out the [Build Process Wiki][5] for information on building CoralUI.
 
 ## More Information
-See the [CoralUI Wiki](https://git.corp.adobe.com/Reef/CoralUI/wiki) for more information on contributing. If you'd like to be assigned issues for feature request, contact [Larry Davis](mailto:lawdavis@adobe.com).
+See the [CoralUI Wiki][6] for more information. 
+
+[1]: https://git.corp.adobe.com/pages/Reef/CoralUI/
+[2]: http://xdbuild.corp.adobe.com:8080/job/CoralUI-Master/ws/build/index.html
+[3]: http://jenkins.bsl.eur.adobe.com:8080/job/Build_CoralUI/ws/build/index.html
+[4]: https://git.corp.adobe.com/Reef/CoralUI/wiki/Build-Process-&-Technology
+[5]: mailto:CoralUI@adobe.com
+[6]: https://git.corp.adobe.com/Reef/CoralUI/wiki
