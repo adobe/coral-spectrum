@@ -52,6 +52,18 @@
             </div>
             <br />
             
+            <!-- Editable with own auto-completer -->
+            <div class="dropdown dropdown-editable-autocomplete">
+                <input type="text" placeholder="Editable Select / Autocomplete">
+                <button>Editable</button>
+                <select name="dropdown3">
+                    <option>Edit One</option>
+                    <option>Edit Two</option>
+                    <option>Edit Three</option>
+                </select>
+            </div>
+            <br />
+                        
             <!-- Disabled -->
             <div class="dropdown" data-init="dropdown" data-disabled="true">
                 <button>Disabled</button>
@@ -74,6 +86,18 @@
             </div>
         </section>
         
+        <script type="text/javascript">
+            $(".dropdown-editable-autocomplete").dropdown({
+                autocompleteCallback: function(handler, searchFor) {
+                    var items = ["Apple", "Pear", "Banana", "Orange"];
+                    var result = [];
+                    for(var i = 0; i < items.length; i++) {
+                        if (items[i].indexOf(searchFor) >= 0) result.push(items[i]);
+                    }
+                    handler(result, searchFor);
+                }   
+            });
+        </script>
        
     </body>
 </html>

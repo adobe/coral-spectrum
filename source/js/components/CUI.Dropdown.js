@@ -50,9 +50,15 @@
       @param {String} [options.placeholder="Select"]      Placeholder string to display in empty widget
       @param {boolean} [options.disabled=false]      Is this widget disabled?
       @param {boolean} [options.hasError=false]      Does this widget contain an error?
+      @param {Function} [options.autocompleteCallback=use options]      Callback for autocompletion: callback(handler, searchFor) with handler is a result callback function with handler(results, searchFor). See example page.
       
     */
     construct: function(options) {
+
+        if (this.options.autocompleteCallback) {
+            // Enable editing for autocompleter
+            this.options.editable = true;
+        }
 
         this._render();
 
@@ -125,7 +131,11 @@
         
         this.buttonElement.on("click", "", function(event) {
             event.preventDefault();
-            this.dropdownList.show();
+            if (this.autocompleteList !== null) {
+                this._adjustAutocompleter();
+            } else {
+                this.dropdownList.show();
+            }
         }.bind(this));
         
         // Auto completion
@@ -136,8 +146,9 @@
            if (this.autocompleteList !== null) this._adjustAutocompleter();
         }.bind(this));
         this.inputElement.on("dropdown-list:select", "", function(event) {
-            this.inputElement.val(event.selectedValue);
-            this.autocompleteList.hide();
+            //this.inputElement.val(event.selectedValue);
+            //this.autocompleteList.hide();
+            this._processSelect(event);
         }.bind(this));
         
         // Correct focus
@@ -180,14 +191,24 @@
     /** @ignore */
     _adjustAutocompleter: function() {
         var searchFor = this.inputElement.val();
-        var result = [];
-        $.each(this.options.options, function(index, value) {
-             if (value.toLowerCase().indexOf(searchFor.toLowerCase(), 0) >= 0 ) result.push(value);
-        });
-        this.autocompleteList.set({
-            options: result
-        });
-        this.autocompleteList.show();
+        
+        var showResults = function(result, searchFor) {
+            this.autocompleteList.set({
+               options: result
+            });
+            this.autocompleteList.show();
+        }.bind(this);
+        
+        if (this.options.autocompleteCallback) {
+            this.options.autocompleteCallback(showResults, searchFor);
+        } else {
+            var result = [];
+            $.each(this.options.options, function(index, value) {
+                 if (value.toLowerCase().indexOf(searchFor.toLowerCase(), 0) >= 0 ) result.push(value);
+            });
+            showResults(result, searchFor);
+        }
+       
     },
 
     /** @ignore */
@@ -217,8 +238,25 @@
     /** @ignore */
     _processSelect: function(event) {
         if (this.syncSelectElement) {
-            var current = $(this.syncSelectElement.find("option").get(event.selectedIndex));
-            var value = current.attr("value");
+
+            var value = event.selectedValue;
+            var current = null;
+
+            // Synchronize select element
+            if (event.source === this.autocompleteList) {
+                this.syncSelectElement.find("option").each(function() {
+                    if ($(this).attr("value") === value) current = $(this);
+                });
+                if (current === null) {
+                    current = $("<option>");
+                    current.attr("value", value).text(value);
+                    this.syncSelectElement.append(current);
+                }
+            } else {
+                current = $(this.syncSelectElement.find("option").get(event.selectedIndex));
+                value = current.attr("value");
+            }
+            
             if (this.options.multiple) {
                 var v = this.syncSelectElement.val();
                 if (v === null) v = [];
@@ -235,6 +273,7 @@
             }
             this.syncSelectElement.change();
         }
+        
         this._update(true);
     },
     
@@ -318,11 +357,11 @@
     _update: function(updateContent) {
         if (updateContent) {
             if (this.syncSelectElement && !this.options.multiple) {
-                var selectedIndex = this.syncSelectElement.find("option:selected").index();
-                var html = this.options.options[selectedIndex];
-                if (!html) html = this.options.placeholder;
-                var text = $("<span>" + html + "</span>").text();
-                if (selectedIndex >=0) {
+                var option = this.syncSelectElement.find("option:selected");
+                if (option) {
+                    var selectedIndex = option.index();
+                    var text = option.text();
+                    var html = option.html();
                     if (this.inputElement.length > 0) {
                         this.inputElement.val(text).trigger('change');
                     } else {
