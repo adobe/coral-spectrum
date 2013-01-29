@@ -4,18 +4,166 @@
         extend: CUI.Widget,
 
         /**
+         Triggered when a file is selected and accepted into the queue
+
+         @name CUI.FileUpload#fileselected
+         @event
+
+         @param {Object} evt                    Event object
+         @param {Object} evt.item               Object representing a file item
+         @param {Object} evt.fileUpload         The file upload widget
+         */
+
+        /**
+         Triggered when a selected file is rejected before upload
+
+         @name CUI.FileUpload#filerejected
+         @event
+
+         @param {Object} evt                    Event object
+         @param {Object} evt.item               Object representing a file item
+         @param {String} evt.message            The reason why the file has been rejected
+         @param {Object} evt.fileUpload         The file upload widget
+         */
+
+        /**
+         Triggered when the internal upload queue changes (file added, file uploaded, etc.)
+
+         @name CUI.FileUpload#queuechanged
+         @event
+
+         @param {Object} evt                    Event object
+         @param {Object} evt.item               Object representing a file item
+         @param {String} evt.operation          The operation on the queue (ADD or REMOVE)
+         @param {int} evt.queueLength           The number of items in the queue
+         @param {Object} evt.fileUpload         The file upload widget
+         */
+
+        /**
+         Triggered when selected files list is processed
+
+         @name CUI.FileUpload#filelistprocessed
+         @event
+
+         @param {Object} evt                    Event object
+         @param {int} evt.addedCount            The number of files that have been added to the processing list
+         @param {int} evt.rejectedCount         The number of files that have been rejected
+         @param {Object} evt.fileUpload         The file upload widget
+         */
+
+        /**
+         Triggered when upload of a file starts
+
+         @name CUI.FileUpload#fileuploadstart
+         @event
+
+         @param {Object} evt                    Event object
+         @param {Object} evt.item               Object representing a file item
+         @param {Object} evt.originalEvent      The original upload event
+         @param {Object} evt.fileUpload         The file upload widget
+         */
+
+        /**
+         Triggered when upload of a file progresses
+
+         @name CUI.FileUpload#fileuploadprogress
+         @event
+
+         @param {Object} evt                    Event object
+         @param {Object} evt.item               Object representing a file item
+         @param {Object} evt.originalEvent      The original upload event (from which the upload ratio can be calculated)
+         @param {Object} evt.fileUpload         The file upload widget
+         */
+
+        /**
+         Triggered when upload of a file is completed (for non-HTML5 uploads only, regardless of success status)
+
+         @name CUI.FileUpload#fileuploadload
+         @event
+
+         @param {Object} evt                    Event object
+         @param {Object} evt.item               Object representing a file item
+         @param {String} evt.content            The server response to the upload request, which needs to be analyzed to determine if upload was successful
+         @param {Object} evt.fileUpload         The file upload widget
+         */
+
+        /**
+         Triggered when upload of a file succeeded
+
+         @name CUI.FileUpload#fileuploadsuccess
+         @event
+
+         @param {Object} evt                    Event object
+         @param {Object} evt.item               Object representing a file item
+         @param {Object} evt.originalEvent      The original upload event
+         @param {Object} evt.fileUpload         The file upload widget
+         */
+
+        /**
+         Triggered when upload of a file failed
+
+         @name CUI.FileUpload#fileuploaderror
+         @event
+
+         @param {Object} evt                    Event object
+         @param {Object} evt.item               Object representing a file item
+         @param {Object} evt.originalEvent      The original upload event
+         @param {String} evt.message            The reason why the file upload failed
+         @param {Object} evt.fileUpload         The file upload widget
+         */
+
+        /**
+         Triggered when upload of a file has been cancelled
+
+         @name CUI.FileUpload#fileuploadcanceled
+         @event
+
+         @param {Object} evt                    Event object
+         @param {Object} evt.item               Object representing a file item
+         @param {Object} evt.originalEvent      The original upload event
+         @param {Object} evt.fileUpload         The file upload widget
+         */
+
+        /**
+         Triggered when dragging over a drop zone
+
+         @name CUI.FileUpload#dropzonedragover
+         @event
+
+         @param {Object} evt                    Event object
+         @param {Object} evt.originalEvent      The original mouse drag event
+         @param {Object} evt.fileUpload         The file upload widget
+         */
+
+        /**
+         Triggered when dragging out of a drop zone
+
+         @name CUI.FileUpload#dropzonedragleave
+         @event
+
+         @param {Object} evt                    Event object
+         @param {Object} evt.originalEvent      The original mouse drag event
+         @param {Object} evt.fileUpload         The file upload widget
+         */
+
+        /**
+         Triggered when dropping files in a drop zone
+
+         @name CUI.FileUpload#dropzonedrop
+         @event
+
+         @param {Object} evt                    Event object
+         @param {Object} evt.originalEvent      The original mouse drop event
+         @param {FileList} evt.files            The list of dropped files
+         @param {Object} evt.fileUpload         The file upload widget
+         */
+
+        /**
          @extends CUI.Widget
          @classdesc A file upload widget
 
          <p>
-         <input data-init="fileupload" data-placeholder="Select file(s)">
-         <option>/apps</option>
-         <option>/content</option>
-         <option>/etc</option>
-         <option>/libs</option>
-         <option>/tmp</option>
-         <option>/var</option>
-         </select>
+         <span class="fileupload button icon-upload"><input type="file" data-init="fileupload" data-placeholder="Select file(s)"></span>
          </p>
 
          @desc Creates a file upload field
@@ -28,7 +176,6 @@
          @param {String}   [options.uploadUrlBuilder=null]            Upload URL builder
          @param {boolean}  [options.disabled=false]                   Is this component disabled?
          @param {boolean}  [options.multiple=false]                   Can the user upload more than one file?
-         @param {Object}   [options.mimeTypes=null]                   Restrict upload to mime types
          @param {int}      [options.sizeLimit=null]                   File size limit
          @param {boolean}  [options.autoStart=false]                  Should upload start automatically once the file is selected?
          @param {String}   [options.fileNameParameter=null]           Name of File name's parameter
@@ -424,7 +571,11 @@
             return this._getQueueItem(this._getQueueIndex(fileName));
         },
 
-        // TODO: document
+        /**
+         Upload a file item
+
+         @param {Object} item                   Object representing a file item
+         */
         uploadFile: function(item) {
             var self = this;
 
@@ -514,7 +665,11 @@
             }
         },
 
-        // TODO: document
+        /**
+         Cancel upload of a file item
+
+         @param {Object} item                   Object representing a file item
+         */
         cancelUpload: function(item) {
             item.xhr.abort();
         },
