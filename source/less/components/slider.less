@@ -28,10 +28,10 @@
     transition: all 0.1s;
   }
   .slider-transition-slow {
-    -moz-transition: visibility 0s linear 2s, pointer-events 0s linear 2s, opacity 2s cubic-bezier(1, 0, 0.5, 0);
-    -webkit-transition: visibility 0s linear 2s, pointer-events 0s linear 2s, opacity 2s cubic-bezier(1, 0, 0.5, 0);
-    -o-transition: visibility 0s linear 2s, pointer-events 0s linear 2s, opacity 2s cubic-bezier(1, 0, 0.5, 0);
-    transition: visibility 0s linear 2s, pointer-events 0s linear 2s, opacity 2s cubic-bezier(1, 0, 0.5, 0);
+    -moz-transition: visibility 0s linear 2s, opacity 2s cubic-bezier(1, 0, 0.5, 0);
+    -webkit-transition: visibility 0s linear 2s, opacity 2s cubic-bezier(1, 0, 0.5, 0);
+    -o-transition: visibility 0s linear 2s, opacity 2s cubic-bezier(1, 0, 0.5, 0);
+    transition: visibility 0s linear 2s, opacity 2s cubic-bezier(1, 0, 0.5, 0);
   }
 
   .handle {
@@ -41,6 +41,7 @@
     width: 9*@px;
     height: 20*@px;
     margin: -0.5rem -0.25rem;
+    background-color: @slider-handle-gradient-start-color;
     .gradient(@slider-handle-gradient-start-color, @slider-handle-gradient-end-color);
     .border-radius(0.25rem);
     border: @px solid @slider-border-color;
@@ -51,7 +52,6 @@
       &.dragging {
         .gradient(lighten(@slider-handle-gradient-start-color, 15%), lighten(@slider-handle-gradient-end-color, 15%));
         .tooltip {
-          pointer-events: auto;
           visibility: visible;
           opacity: 1;
           .slider-transition;
@@ -62,7 +62,6 @@
         .gradient(lighten(@slider-handle-gradient-start-color, 15%), lighten(@slider-handle-gradient-end-color, 15%));
         outline: none;
         .tooltip {
-          pointer-events: auto;
           visibility: visible;
           opacity: 1;
           .slider-transition;
@@ -70,7 +69,11 @@
       }
       &.dragging {
         cursor: url('../images/cursors/closedhand.cur'), default;
-        .box-shadow(0 0.25rem 0.25rem rgba(0, 0, 0, 0.25));
+        opacity: 1 !important;
+        z-index: auto !important;
+        background-color: lighten(@slider-handle-gradient-start-color, 15%);
+        .box-shadow(none);
+        .gradient(lighten(@slider-handle-gradient-start-color, 15%), lighten(@slider-handle-gradient-end-color, 15%));
       } 
   }
 
@@ -90,7 +93,6 @@
   .tooltip {
     position: absolute;
     opacity: 0;
-    pointer-events: none;
     visibility: hidden;   
     left: -20*@px;
     top: -55*@px;
