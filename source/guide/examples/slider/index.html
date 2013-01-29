@@ -20,36 +20,71 @@
         <section>
         <h1>Sliders</h1>
 
-            <div class="slider" data-init="slider">
-              <input type="range" value="14" min="10" max="20" step="2">
+            <div class="left">
+                <div class="slider" data-init="slider">
+                  <label>
+                      Basic Horizontal Slider<br>
+                      <input type="range" value="14" min="10" max="20" step="2">
+                  </label>
+                </div>
             </div>
-            <div class="slider ticked filled tooltips" data-init="slider">
-              <input type="range" value="14" min="10" max="20" step="2">
+            <div class="left">
+                <div class="slider ticked filled tooltips" data-init="slider">
+                  <label>
+                      Filled Horizontal Slider with Tooltips<br>
+                      <input type="range" value="14" min="10" max="20" step="2">
+                  </label>
+                </div>
             </div>
-            <div class="slider ticked filled" data-init="slider">
-              <input type="range" value="14" min="0" max="100" step="2">
-              <input type="range" value="16" min="0" max="100" step="2">
+            <div class="left">
+                <div class="slider ticked filled" data-init="slider">
+                    <fieldset>
+                        <legend>Ticked and filled range slider<br></legend>
+                        <label>Minimum <input type="range" value="14" min="10" max="20" step="2"></label>
+                        <label>Maximum <input type="range" value="16" min="10" max="20" step="2"></label>
+                    </fieldset>
+                </div>
             </div>
-            <div class="slider ticked filled tooltips" data-init="slider">
-              <input type="range" value="14" min="10" max="20" step="2" disabled>
-              <input type="range" value="16" min="10" max="20" step="2" disabled>
+            <div class="left">
+                <div class="slider ticked filled tooltips" data-init="slider">
+                    <fieldset>
+                        <legend>Ticked, filled and disabled range slider<br></legend>
+                        <label>Minimum <input type="range" value="14" min="10" max="20" step="2"></label>
+                        <label>Maximum <input type="range" value="16" min="10" max="20" step="2"></label>
+                    </fieldset>
+                </div>
             </div>
-            <div class="slider ticked filled vertical tooltips" data-init="slider">
-              <input type="range" value="14" min="10" max="20" step="2">
-              <input type="range" value="16" min="10" max="20" step="2">
+            <div class="left">
+                <div class="slider ticked filled vertical tooltips bound" data-init="slider">
+                    <fieldset>
+                        <legend>Ticked, filled and bound vertical range slider</legend>
+                        <label>Minimum <input type="range" value="14" min="10" max="20" step="2"></label>
+                        <label>Maximum <input type="range" value="16" min="10" max="20" step="2"></label>
+                    </fieldset>
+                </div>
             </div>
          
-         <h2>Slider API</h2>
+         <h2 class="clear">Slider API</h2>
          
-         <div class="slider ticked filled tooltips api-demo" data-init="slider">
-              <input type="range" value="14" min="5" max="50" step="2">
-              <input type="range" value="16" min="5" max="50" step="2">
-         </div>         
-         <div class="slider ticked filled tooltips api-demo2" data-init="slider">
-              <input type="range" value="14" min="5" max="50" step="2">
+         <div class="left">
+             <div class="slider ticked filled tooltips api-demo" data-init="slider">
+                  <fieldset>
+                      <legend>Animated values<br></legend>
+                      <label>Minimum <input type="range" value="14" min="5" max="50" step="2"></label>
+                      <label>Maximum <input type="range" value="16" min="5" max="50" step="2"></label>
+                  </fieldset>
+             </div>
+         </div>
+         <div class="left">        
+             <div class="slider ticked filled tooltips api-demo2" data-init="slider">
+                  <label>
+                      Animated value (disabled when &lt; 5)<br>
+                      <input type="range" value="14" min="5" max="50" step="2">
+                  </label>
+             </div>
          </div>
          
-         <h2>Create a slider without markup</h2>
+         <h2 class="clear">Create <span id="slider-markupless-label">a slider without markup</span></h2>
          <div class="slider-markupless"></div>
                   
          <script type="text/javascript">
@@ -75,7 +110,8 @@
                     filled: true,
                     orientation: "vertical",
                     tooltips: true
-                    });
+                })
+				.find("input, .handle").attr("aria-labelledby","slider-markupless-label");
             });
          </script>
          

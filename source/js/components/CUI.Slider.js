@@ -5,13 +5,11 @@
 
     /**
       @extends CUI.Widget
-      @classdesc A slider widget
-      
-        <p>
-            <div class="slider ticked filled tooltips" data-init="slider">
-              <input type="range" value="14" min="10" max="20" step="2">
-            </div>
-        </p>
+      @classdesc <p><span id="slider-label">A slider widget</span></p>
+
+        <div class="slider ticked filled tooltips" data-init="slider">
+            <input aria-labelledby="slider-label" type="range" value="14" min="10" max="20" step="2">
+        </div>
 
         <p>
         Currently you have to supply the full markup to this widget. It does not render missing
@@ -19,32 +17,40 @@
         </p>
     @example
     <caption>Simple horizontal slider</caption>
-        &lt;div class="slider" data-init="slider"&gt;
-            &lt;label&gt;
-                Horizontal Slider
-                &lt;input type="range" value="14" min="10" max="20" step="2"&gt;
-            &lt;/label&gt;
-        &lt;/div&gt;
-
+    &lt;div class="slider" data-init="slider"&gt;
+        &lt;label&gt;
+            Horizontal Slider
+            &lt;input type="range" value="14" min="10" max="20" step="2"&gt;
+        &lt;/label&gt;
+    &lt;/div&gt;
     @example
     <caption>Full-featured slider with two handles, tooltips, ticks and a filled bar</caption>
     &lt;div class="slider tooltips ticked filled" data-init="slider"&gt;    
-            &lt;fieldset&gt;
-                &lt;legend&gt;Vertical Range Slider with Tooltips&lt;/legend&gt;
-                &lt;label&gt;
-                    Minimum value
-                    &lt;input type="range" value="14" min="10" max="20" step="2"&gt;
-                &lt;/label&gt;
-                &lt;label&gt;
-                    Maximum value
-                    &lt;input type="range" value="16" min="10" max="20" step="2"&gt;
-                &lt;/label&gt;
-            &lt;/fieldset&gt;
-        &lt;/div&gt;
+        &lt;fieldset&gt;
+            &lt;legend&gt;Vertical Range Slider with Tooltips&lt;/legend&gt;
+            &lt;label&gt;
+                Minimum value
+                &lt;input type="range" value="14" min="10" max="20" step="2"&gt;
+            &lt;/label&gt;
+            &lt;label&gt;
+                Maximum value
+                &lt;input type="range" value="16" min="10" max="20" step="2"&gt;
+            &lt;/label&gt;
+        &lt;/fieldset&gt;
+    &lt;/div&gt;
 
     @example
     <caption>Instantiate by jQuery plugin</caption>
-    $("select").dropdown();
+    $(".slider-markupless").slider({
+        min: 0,
+        max: 100,
+        step: 5,
+        value: 50,
+        ticks: true,
+        filled: true,
+        orientation: "vertical",
+        tooltips: true
+    });
 
       @desc Creates a slider from a div
       @constructs
@@ -58,8 +64,8 @@
       @param {String} [options.orientation=horizontal]  Either 'horizontal' or 'vertical'
       @param {boolean} [options.slide=false]    True for smooth sliding animations 
       @param {boolean} [options.disabled=false] True for a disabled element
-            @param {boolean} [options.bound=false] For multi-input sliders, indicates that the min value is bounded by the max value and the max value is bounded by the min
-        **/
+      @param {boolean} [options.bound=false] For multi-input sliders, indicates that the min value is bounded by the max value and the max value is bounded by the min
+    **/
     construct: function(options) {
         var that = this;
 
@@ -84,7 +90,7 @@
             that.options.filled = true;
         }
                 
-                if(this.$element.hasClass('slide')) {
+        if(this.$element.hasClass('slide')) {
             that.options.slide = true;
         }
 
@@ -108,8 +114,8 @@
             // move all fieldset children other than the legend to be children of the element.
             that.$element.append($fieldset.contents(":not(legend)"));
             
-            // create a new wrapper div with role="fieldset" and class="sliderfieldset," which will behave as a fieldset but render as an inline block
-            var $newFieldset = $('<div role="fieldset" class="sliderfieldset" />');
+            // create a new wrapper div with role="group" and class="sliderfieldset," which will behave as a fieldset but render as an inline block
+            var $newFieldset = $('<div role="group" class="sliderfieldset" />');
                         
             // wrap the element with the new "sliderfieldset" div
             that.$element.wrap($newFieldset);
@@ -117,8 +123,8 @@
             // get the first legend. there should only be one
             $legend = $fieldset.find("legend").first();
             if ($legend.length) {
-                // create new label element, but with role="legend" and append the contents of the legend
-                var $newLegend = $('<label role="legend"/>').append($legend.contents());
+                // create new label element and append the contents of the legend
+                var $newLegend = $('<label/>').append($legend.contents());
 
                 // give the new label element all the same attributes as the legend
                 $.each($legend.prop("attributes"), function() {
@@ -218,10 +224,20 @@
             }
             
             // if the input has a label and it is not included in the aria-labelledby attribute, add the label id to the "aria-labelledby" attribute
-            if ($label && $this.attr("aria-labelledby").indexOf($label.attr("id"))===-1)
+            if ($label.length && $this.attr("aria-labelledby").indexOf($label.attr("id"))===-1)
             {
                 $this.attr("aria-labelledby", $this.attr("aria-labelledby")+($this.attr("aria-labelledby").length ? " ":"")+$label.attr("id"));
             }
+			
+			if ($label.length===0 && $this.attr("aria-labelledby").length>0)
+            {
+				$label = $("#"+$this.attr("aria-labelledby").split(" ")[0]);
+            }
+			
+			if ($this.attr("aria-labelledby").length===0)
+			{
+				$this.removeAttr("aria-labelledby");
+			}
 
             // setting default step
             if (!$this.is("[step]")) $this.attr('step', that.options.step);
@@ -348,16 +364,21 @@
     },
     
     _renderMissingElements: function() {
-        if (!this.$element.find("input").length) {
-            var el = $("<input>");
-            el.attr({
-                "type": "range",
-                "min": this.options.min,
-                "max": this.options.max,
-                "step": this.options.step,
-                "value": this.options.value               
-            });
-            this.$element.append(el);
+		if (!this.$element.find("input").length) {
+			var that = this,
+			    el, 
+			    values = ($.isArray(this.options.value)) ? this.options.value : [this.options.value];
+			    $.each(values, function(index, value) {
+			        el = $("<input>");
+			        el.attr({
+			            "type": "range",
+			            "min": that.options.min,
+			            "max": that.options.max,
+			            "step": that.options.step,
+			            "value": value              
+			        }).val(value);
+			        that.$element.append(el);
+				});
         }
         
         if (!this.$element.find("div.clickarea").length) {
@@ -373,7 +394,11 @@
     },
     
     _processValueChanged: function() {
-        this._updateValue(0, this.options.value, true); // Do not trigger change event on programmatic value update!
+        var that = this, 
+		    values = ($.isArray(this.options.value)) ? this.options.value : [this.options.value];
+        $.each(values, function(index, value) {
+            that._updateValue(index, value, true); // Do not trigger change event on programmatic value update!
+        });
         this._moveHandles();
         if(this.options.filled) {
             this._updateFill();
@@ -381,13 +406,14 @@
     },
 
     _processMinMaxStepChanged: function() {
+        var that = this;
         this.$element.find("input").attr("min", this.options.min);
         this.$element.find("input").attr("max", this.options.max);
         this.$element.find("input").attr("step", this.options.step);
         
-        for(var i = 0; i < this.values.length; i++) {
-            this._updateValue(i, this.values[i], true); // Ensure current values are between min and max
-        }
+		$.each(this.values, function(index, value) {
+            that._updateValue(index, value, true); // Ensure current values are between min and max
+        });
         
         if(this.options.ticks) {
             this.$element.find(".ticks").remove();
@@ -408,6 +434,10 @@
     _processDisabledChanged: function() {
         if (this.options.disabled) {
             this.$inputs.attr("disabled","disabled");
+			this.$handles.each(function() {
+				$(this).removeClass("focus");
+				$(this).parent().removeClass("focus");
+			});			
             if (this._isTouch()) 
                 this.$handles.attr("aria-disabled",true).removeAttr("tabindex");
         } else {
@@ -416,7 +446,7 @@
                 this.$handles.removeAttr("aria-disabled").attr("tabindex",0);
         }
         this.$element.toggleClass("disabled", this.options.disabled);                 
-    },    
+    },   
     _render: function() {
         var that = this;
 
