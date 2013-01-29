@@ -291,7 +291,8 @@
         this.$element.focus();
         var e = $.Event('dropdown-list:select', {
           selectedIndex: index,
-          selectedValue: this.options.options[index]
+          selectedValue: this.options.options[index],
+          source: this
         });
         this.$element.trigger(e);    
     },
