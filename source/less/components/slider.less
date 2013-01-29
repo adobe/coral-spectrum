@@ -194,9 +194,11 @@
       border-color: @slider-disabled-border-color;
       &:hover {
         cursor: auto;
-        .tooltip {
-          display: none;
-        }
+      }
+      .tooltip {
+          display: none !important;
+          visibility: hidden !important;
+          opacity: 0 !important;
       }
     }
   
