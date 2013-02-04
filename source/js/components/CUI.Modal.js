@@ -67,7 +67,7 @@ var modal = $('#myModal').data('modal');
 modal.hide();
 
 
-      @example 
+      @example
 <caption>Data API: Instantiate and show modal</caption>
 <description>When using a <code class="prettify">&lt;button&gt;</code>, specify the jQuery selector for the element using <code>data-target</code>. Markup should exist already if no options are specified.</description>
 &lt;button data-target=&quot;#myModal&quot; data-toggle=&quot;modal&quot;&gt;Show Modal&lt;/button&gt;
@@ -75,7 +75,7 @@ modal.hide();
       @example
 <caption>Data API: Instantiate, set options, and show</caption>
 <description>When using an <code class="prettify">&lt;a&gt;</code>, specify the jQuery selector for the element using <code>href</code>. Markup is optional since options are specified as data attributes.</description>
-&lt;a 
+&lt;a
   href=&quot;#modal&quot;
   data-toggle=&quot;modal&quot;
   data-heading=&quot;Test Modal&quot;
@@ -125,7 +125,7 @@ modal.hide();
 &lt;/form&gt;
 
 
-      @desc Creates a new modal dialog     
+      @desc Creates a new modal dialog
       @constructs
 
       @param {Object} options                     Component options
@@ -182,7 +182,6 @@ modal.hide();
       backdrop: 'static',
       keyboard: true,
       visible: true,
-      type: 'default',
       fullscreen: false
     },
 
