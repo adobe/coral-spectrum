@@ -8,7 +8,10 @@
       @classdesc A dropdown list widget
       
       <p>
-        Dropdown lists are meant to be used by other widgets like Filters and Dropdowns.
+        Dropdown lists are meant to be used by other widgets like Filters and Dropdowns. Therefore they do not support data-* attributes
+        for initialization as this makes no sense for the current use cases.
+      </p>
+      <p>
         Dropdown lists are invisible by default and can only be made visible by explicitly calling the methods
         "show" (resp. "hide") on the widget.
       </p>
