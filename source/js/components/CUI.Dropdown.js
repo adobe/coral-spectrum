@@ -163,10 +163,11 @@ Currently there are the following data options:
            if (this.autocompleteList !== null) this._adjustAutocompleter();
         }.bind(this));
         
-        var debouncedAutoCompleter = _.debounce(this._adjustAutocompleter.bind(this), this.options.autocompleteDelay);
+        var typeTimeout = null;
         this.inputElement.on("input", "", function() {
            if (this.autocompleteList === null) return;
-           debouncedAutoCompleter();
+           if (typeTimeout) clearTimeout(typeTimeout);
+           typeTimeout = setTimeout(this._adjustAutocompleter.bind(this), this.options.autocompleteDelay);
         }.bind(this));
         
         this.inputElement.on("dropdown-list:select", "", function(event) {
