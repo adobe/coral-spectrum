@@ -53,18 +53,73 @@
      *  by Javascript code, not via HTML markup.
      *  </p>
      *
+     *  <p>
+     *  The wizard also supports to programmatically show/hide steps from the wizard. See methods activatePage() and decativatePage().
+     *  </p>
+     *
      *  @example
-     *  <caption>Instantiate by data API</caption>
-     *  &lt;div class=&quot;wizard&quot; data-init=&quot;wizard&quot;&gt;
-     *      &lt;input type=&quot;datetime&quot; value=&quot;2012-10-20 11:10&quot;&gt;
-     *      &lt;button&gt;&lt;span class=&quot;icon-calendar small&quot;&gt;Datetime picker&lt;/span&gt;&lt;/button&gt;
+     *  <caption>Instantiate by data API (minimal example)</caption>
+     *  &lt;div data-init="wizard"&gt;
+     *      &lt;section data-back-label="Cancel" data-next-label="Forward to step 2"&gt;
+     *          &lt;p&gt;
+     *          This is the first step of our "minimal markup" wizard.
+     *          &lt;/p&gt;
+     *      &lt;/section&gt;
+     *      &lt;section data-back-label="Back to step 1" data-next-label="Finish"&gt;
+     *          This is the second step.
+     *      &lt;/section&gt;
      *  &lt;/div&gt;
-     *     
+     *  
+     *  @example
+     *  <caption>Instantiate by data API with custom navigation bar</caption>
+     *   &lt;div data-init="wizard"&gt;
+     *       &lt;nav&gt;
+     *           &lt;button class="back"&gt;Custom Back Button&lt;/button&gt;
+     *           &lt;ol&gt;
+     *               &lt;li&gt;First step&lt;/li&gt;
+     *               &lt;li&gt;Second step&lt;/li&gt;
+     *           &lt;/ol&gt;
+     *           &lt;button class="next"&gt;Custom Next Button&lt;/button&gt;
+     *       &lt;/nav&gt;
+     *       &lt;section&gt;
+     *           &lt;p&gt;
+     *           This is the first step of our wizard.
+     *           &lt;/p&gt;
+     *       &lt;/section&gt;
+     *       &lt;section&gt;
+     *           This is the second step.
+     *       &lt;/section&gt;
+     *   &lt;/div&gt;
+     *      
      *  @example
      *  <caption>Instantiate with Class</caption>
-     *  var wizard = new CUI.Wizard({
-     *    element: '#myOrdinarySelectBox'
-     *  });
+     *  wizard = new CUI.Wizard({
+     *              element: '.wizard',
+     *              onPageChanged: {
+     *                  step1: function() {
+     *                      // Do something special
+     *                  },
+     *                  step2: function() {
+     *                      // Do something special
+     *                  }
+     *              },
+     *              onNextButtonClick: function() {
+     *                  if (condition) {
+     *                      // Do not forward to next step
+     *                      return false
+     *                  }
+     *                  // Forward to next step
+     *                  return true;
+     *              },
+     *              onBackButtonClick: function() {
+     *                  if (condition) {
+     *                      // Do not go back to last step
+     *                      return false
+     *                  }
+     *                  // Go back to last step
+     *                  return true;
+     *              }
+     *          });
      *     
      *  @example
      *  <caption>Instantiate by jQuery plugin</caption>
@@ -123,7 +178,7 @@
         }.bind(this), 1);
 
     },
-    
+    /** @ignore */
     _renderMissingElements: function() {
         this.$element.addClass("wizard"); // We always need this.
         
@@ -169,10 +224,10 @@
     /**
      * Change the page.
      *
-     * Page number start with 1 and not 0.
-     * Page number should be between 1 and number of sections.
+     * Numbering starts with 1 and not 0.
+     * Page number should be between 1 and number of section elements within the wizard.
      *
-     * @param {Integer} pageNumber The page number
+     * @param {Integer} pageNumber The page number, starting from 1
      */
     changePage: function(pageNumber) {
       if (pageNumber < 1 || pageNumber > this.$nav.find('li').length) return ;
@@ -202,9 +257,9 @@
     },
 
     /**
-     * Return the number of the current page
+     * Return the number of the current page.
      *
-     * Page number start with 1 and not 0.
+     * Page numbering starts with 1 and not 0.
      *
      * @return {Integer} The page number
      */
@@ -213,29 +268,30 @@
     },
 
     /**
-     * Return the current page
+     * Return the current page element
      *
-     * Page number start with 1 and not 0.
      *
-     * @return {Integer} The page number
+     * @return {Object} The current page (jQuery element)
      */
     getCurrentPage: function() {
       return this.getPage(this.pageNumber);
     },
 
     /**
-     * Returns the page specifed by page number
+     * Returns the page element specifed by page number. Numbering starts with 1, not 0
      *
-     * @return {Object} The page
+     * @param {Integer} Page number starting with 1, not 0
+     * @return {Object} The page (jQuery element)
      */
     getPage: function(pageNumber) {
       return this.$element.find('>section:eq('+ (parseFloat(pageNumber)-1) +')');
     },
 
     /**
-     * Returns the page specifed by page number
+     * Returns the navigation element for the specified by page number
      *
-     * @return {Object} The page
+     * @param {Integer} Page number starting with 1, not 0
+     * @return {Object} The navigation element (jQuery object)
      */
     getPageNav: function(pageNumber) {
       return this.$element.find('>nav li:eq('+ (parseFloat(pageNumber)-1) +')');
@@ -244,7 +300,7 @@
     /**
      * Set the label of the `next` button 
      *
-     * @return {String} The label
+     * @param {String} The label
      */
     setNextButtonLabel: function(label) {
       this.$next.text(label);
@@ -253,7 +309,7 @@
     /**
      * Set the label of the `back` button
      *
-     * @return {String} The label
+     * @param {String} The label
      */
     setBackButtonLabel: function(label) {
       this.$back.text(label);
@@ -263,6 +319,8 @@
      * Set or remove the disabled attribe of the next button
      *
      * @param {Boolean} If true the button will be disabled, if not it will be enabled
+     *
+     * TODO: For 2.0 this should probably be simplified to setNextEnabled to avoid double negatives.
      */
     setNextButtonDisabled: function(disabled) {
       this.$next.attr('disabled', disabled);
@@ -272,16 +330,28 @@
      * Set or remove the disabled attribe of the back button
      *
      * @param {Boolean} If true the button will be disabled, if not it will be enabled
+     *
+     * TODO: For 2.0 this should probably be simplified to setBackEnabled to avoid double negatives.
      */
     setBackButtonDisabled: function(disabled) {
       this.$back.attr('disabled', disabled);
     },
 
+    /**
+     * Activate (show) a formerly hidden step (page)
+     *
+     * @param {Integer} Page number starting with 1, not 0      
+    */
     activatePage: function(pageNumber) {
       this.getPage(pageNumber).removeClass('wizard-hidden-step');
       this.getPageNav(pageNumber).removeClass('wizard-hidden-step');
     },
 
+    /**
+     * Deactivate (hide) a formerly shown step (page)
+     *
+     * @param {Integer} Page number starting with 1, not 0      
+    */
     deactivatePage: function(pageNumber) {
       this.getPage(pageNumber).addClass('wizard-hidden-step');
       this.getPageNav(pageNumber).addClass('wizard-hidden-step');

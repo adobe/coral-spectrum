@@ -17,12 +17,20 @@
     </head>
     <body>
         <div data-init="wizard">
-            <section data-back-label="Cancel" data-next-label="Forward to step 2">
+            <nav>
+                <button class="back">Custom Back Button</button>
+                <ol>
+                    <li>First step</li>
+                    <li>Second step</li>
+                </ol>
+                <button class="next">Custom Next Button</button>
+            </nav>
+            <section>
                 <p>
-                This is the first step of our "minimal markup" wizard.
+                This is the first step of our wizard.
                 </p>
             </section>
-            <section data-back-label="Back to step 1" data-next-label="Finish">
+            <section>
                 This is the second step.
             </section>
         </div>
