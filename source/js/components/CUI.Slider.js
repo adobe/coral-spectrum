@@ -14,8 +14,16 @@
         </p>
 
         <p>
-        Currently you have to supply the full markup to this widget. It does not render missing
-        elements itself.
+        You should provide some information in the HTML markup, as this widget will read most of its options
+        directly from the HTML elements:
+        </p>
+        <ul>
+            <li>Current, min, max and step values are read from the input element</li>
+            <li>The toggles for tooltips, ticks, vertical orientation and filled bars are set if the CSS classes tooltips, ticked, vertical or filled are present</li>
+            <li>Use the attribute data-slide='true' to make handles slide smoothly. Use with care: This can make the slider unresponsive on some systems.</li>
+        </ul>
+        <p>
+        As an alternative you can also directly create an instance of this widget with the class constructor CUI.Slider() or with the jQUery plugin $.slider().
         </p>
     @example
     <caption>Simple horizontal slider</caption>
@@ -32,7 +40,17 @@
 
     @example
     <caption>Instantiate by jQuery plugin</caption>
-    $("select").dropdown();
+    $(".slider-markupless").slider({
+            min: 0,
+            max: 100,
+            step: 5,
+            value: 50,
+            ticks: true,
+            filled: true,
+            orientation: "vertical",
+            tooltips: true,
+            slide: true
+        });
 
       @desc Creates a slider from a div
       @constructs
@@ -44,7 +62,7 @@
       @param {number} [options.value=1] Starting value
       @param {number} [options.tooltips=false] Show tooltips?
       @param {String} [options.orientation=horizontal]  Either 'horizontal' or 'vertical'
-      @param {boolean} [options.slide=false]    True for smooth sliding animations 
+      @param {boolean} [options.slide=false]    True for smooth sliding animations. Can make the slider unresponsive on some systems. 
       @param {boolean} [options.disabled=false] True for a disabled element*      
     */
     construct: function(options) {
@@ -69,6 +87,9 @@
 
         if(this.$element.hasClass('filled')) {
             that.options.filled = true;
+        }
+        if (this.$element.data("slide")) {
+            that.options.slide = true;
         }
         
         this._renderMissingElements();
@@ -138,7 +159,9 @@
       slide: false,
       disabled: false,
       tooltips: false,
-      tooltipFormatter: function(value) { return value.toString(); }
+      tooltipFormatter: function(value) { return value.toString(); },
+      ticks: false,
+      filled: false
     },
 
     values: [],
