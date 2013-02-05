@@ -5,7 +5,7 @@
     extend: CUI.Widget,
     /**
      * @extends CUI.Widget
-     * @classdesc A wizard widget to navigate throught a form.
+     * @classdesc A wizard widget to navigate through a form.
      *    
      *  <div class="wizard" data-init="wizard">
      *      <nav>
@@ -35,7 +35,7 @@
      *  <h2>Data Attributes</h2>
      *  <h4>Currently there are the following data options:</h4>
      *  <pre>
-     *    data-hide-steps               If true, step will be hidden (useful for one step wizard).
+     *    data-hide-steps               If true, the 'timeline' in the header bar will be hidden (e.g. useful for one step wizards).
      *    data-init="wizard"
      *  </pre>
      *
@@ -47,6 +47,11 @@
      *    data-next-disabled            Speficy if the `next button` should be disabled
      *    data-back-disabled            Speficy if the `back button` should be disabled
      *  </pre>
+     *
+     *  <p>
+     *  Whenever you need to add custom callbacks, you have to instantiate your wizard by class or jquery plugin, as it is only possible to add these callbacks
+     *  by Javascript code, not via HTML markup.
+     *  </p>
      *
      *  @example
      *  <caption>Instantiate by data API</caption>
@@ -70,50 +75,83 @@
      *
      * @param {Object} options Component options
      * @param {Mixed} options.element jQuery selector or DOM element to use for panel
-     * @param {Function|Object} options.onPageChanged Callback called each time the page change (with arguments: `page`). An Collection of functions can be given. When a page is displayed if his data-wizard-page-callback attribute can be found in the collection, then the corresponding callback will be executed (examples is given in guide/wizard.html).
+     * @param {Function|Object} options.onPageChanged Callback called each time the page change (with arguments: `page`). A key-value-paired collection of functions can be given. You can set the data-wizard-page-callback attribute on the section element to trigger the right callback function for each section.  (see examples in guide/wizard.html).
      * @param {Function} options.onFinish Callback called when the user is on the last page and clicks on the `next button` (without arguments)
      * @param {Function} options.onLeaving Callback called when the user is on the first page and clicks on the `back button` (without arguments)
      * @param {Function} options.onNextButtonClick Callback called after a click the on `next button` before the page change (without arguments) The page won't change if the callback return false.
      * @param {Function} options.onBackButtonClick Callback called after a click the on `back button` before the page change (without arguments) The page won't change if the callback return false.
      */
     construct: function(options) {
-      this.$nav = this.$element.find('nav').first();
-      this.$back = this.$nav.find('button').first();
-      this.$next = this.$nav.find('button').last();
-      this.$pageOverview = this.$nav.find('ol').last();
+    
+        this._renderMissingElements();
 
-      if (this.$element.data("hide-steps") === true) {
-        this.$pageOverview.addClass("hidden");
-      }
+        this.$nav = this.$element.find('nav').first();
+        this.$back = this.$nav.find('button').first();
+        this.$next = this.$nav.find('button').last();
+        this.$pageOverview = this.$nav.find('ol').last();
 
-      if (this.$back.attr('type') === undefined) {
-          this.$back[0].setAttribute('type', 'button');
-      }
+        if (this.$element.data("hide-steps") === true) {
+            this.$pageOverview.addClass("hidden");
+        }
 
-      if (this.$next.attr('type') === undefined) {
-          this.$next[0].setAttribute('type', 'button');
-      }
+        if (this.$back.attr('type') === undefined) {
+            this.$back[0].setAttribute('type', 'button');
+        }
 
-      // Set toolbar classes
-      this.$nav.addClass('toolbar');
-      this.$back.addClass('left');
-      this.$next.addClass('right');
-      this.$pageOverview.addClass('center');
+        if (this.$next.attr('type') === undefined) {
+            this.$next[0].setAttribute('type', 'button');
+        }
 
-      // Add div to render leading fill for first list item
-      this.$nav.find('li').first().append('<div class="lead-fill"></div>');
+        // Set toolbar classes
+        this.$nav.addClass('toolbar');
+        this.$back.addClass('left');
+        this.$next.addClass('right');
+        this.$pageOverview.addClass('center');
 
-      this.$next.click(this._onNextClick.bind(this));
-      this.$back.click(this._onBackClick.bind(this));
+        // Add div to render leading fill for first list item
+        this.$nav.find('li').first().append('<div class="lead-fill"></div>');
 
-      this._updateDefault();
+        this.$next.click(this._onNextClick.bind(this));
+        this.$back.click(this._onBackClick.bind(this));
 
-      // Start with first page
-      // Asynchronous to make the wizard object available in the option callback (onPageChanged)
-      setTimeout(function() { 
-        this.changePage(1);
-      }.bind(this), 1);
-      
+        this._updateDefault();
+
+        // Start with first page
+        // Asynchronous to make the wizard object available in the option callback (onPageChanged)
+        setTimeout(function() { 
+            this.changePage(1);
+        }.bind(this), 1);
+
+    },
+    
+    _renderMissingElements: function() {
+        this.$element.addClass("wizard"); // We always need this.
+        
+        // Render missing nav element
+        if (this.$element.find("nav").length === 0) {
+            var nav = $("<nav>");
+            this.$element.prepend(nav);
+        }
+        
+        // Render missing steps timeline
+        if (this.$element.find("nav ol").length === 0) {
+            var ol = $("<ol>");
+            for(var i = 0; i < this.$element.find("section").length; i++) {
+                ol.append("<li>");
+            }
+            this.$element.find("nav").append(ol);
+        }
+        
+        // Render missing buttons
+        if (this.$element.find("nav button.back").length === 0) {
+            var back = $("<button>").addClass("back").text("Back");
+            this.$element.find("nav").prepend(back);
+        }
+        if (this.$element.find("nav button.next").length === 0) {
+            var next = $("<button>").addClass("next").text("Next");
+            this.$element.find("nav").append(next);
+        }
+        
     },
 
     defaults: {

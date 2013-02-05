@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Wizard examples</title>
+        <title>Wizard example</title>
 
         <link rel="stylesheet" href="../../css/cui.css">
  
@@ -14,13 +14,17 @@
         <script src="../../js/libs/jquery-fingerpointer.js"></script>
 
         <script src="../../js/CUI.js"></script>
-
     </head>
     <body>
-        <section>
-            <h1>Wizard examples</h1>
-            <a href="wizard-markup.html">Wizard example with minimal markup, no custom JS</a><br>
-            <a href="wizard1.html">Complex wizard example</a>
-        </section>
+        <div data-init="wizard">
+            <section data-back-label="Cancel" data-next-label="Forward to step 2">
+                <p>
+                This is the first step of our "minimal markup" wizard.
+                </p>
+            </section>
+            <section data-back-label="Back to step 1" data-next-label="Finish">
+                This is the second step.
+            </section>
+        </div>
     </body>
 </html>

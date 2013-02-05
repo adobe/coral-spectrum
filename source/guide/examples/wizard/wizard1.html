@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Wizard example</title>
+
+        <link rel="stylesheet" href="../../css/cui.css">
+ 
+        <script src="../../js/libs/underscore.js"></script>
+        <script src="../../js/libs/handlebars.js"></script>
+        <script src="../../js/libs/moment.js"></script>
+        <script src="../../js/libs/jquery.js"></script>
+        <script src="../../js/libs/toe.js"></script>
+        <script src="../../js/libs/jquery-fingerpointer.js"></script>
+
+        <script src="../../js/CUI.js"></script>
+
+        <style>
+            .step3-2 {
+                display: none;
+            }
+
+            .deactivate-step2 {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="wizard">
+            <nav>
+                <button class="back">Back</button>
+                <ol>
+                    <li>First step</li>
+                    <li class="wizard-hidden-step">Second step</li>
+                    <li>Third step</li>
+                    <li>Last step</li>
+                </ol>
+                <button class="next" disabled>Next</button>
+            </nav>
+            <section  data-wizard-page-callback="step1" data-next-disabled="false" data-back-label="Cancel">
+                <p>
+                This is the first step of our wizard. The second step is optional, you can activate it, if you want:
+                </p>
+                <button class="activate-step2 primary">Activate second step</button>
+                <button class="deactivate-step2 warning">Deacivate second step</button>
+            </section>
+            <section class="wizard-hidden-step step2" data-next-disabled="false">
+                This is the second step.
+            </section>
+            <section class="step3" data-next-disabled="false" data-wizard-page-callback="step3">
+                <div class="step3-1">This is the third step.</div>
+                <div class="step3-2">Still the third step, but we want to stay here for one more moment …</div>
+            </section>
+            <section data-next-label="Create">
+                Say something important … like … "Name is required!"
+            </section>
+        </div>
+
+        <script>
+            $(document).ready(function(){
+                var step3 = 0;
+                var wizard = null;
+
+                wizard = new CUI.Wizard({
+                    element: '.wizard',
+                    onPageChanged: {
+                        step1: function() {
+                            console.log(wizard);
+                        },
+                        step3: function() {
+                            step3 = 1;
+                        }
+                    },
+                    onNextButtonClick: function() {
+                        if (step3 == 1) {
+                            $('.step3-1').hide();
+                            $('.step3-2').show();
+                            step3 = 2;
+                            return false
+                        }
+                        return true;
+                    },
+                    onBackButtonClick: function() {
+                        if (step3 == 2) {
+                            step3 = 1;
+                        } else if (step3 == 1) {
+                            $('.step3-2').hide();
+                            $('.step3-1').show();
+                            step3 = 0;
+                            return false
+                        }
+                        return true;
+                    }
+                });
+
+                $('.activate-step2').click(function(){
+                    wizard.activatePage(2);
+                    $('.activate-step2').hide();
+                    $('.deactivate-step2').show();
+                });
+
+                $('.deactivate-step2').click(function(){
+                    wizard.deactivatePage(2);
+                    $('.deactivate-step2').hide();
+                    $('.activate-step2').show();
+                });
+            });
+        </script>
+
+    </body>
+</html>
