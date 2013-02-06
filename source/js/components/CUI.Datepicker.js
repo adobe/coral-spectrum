@@ -82,16 +82,12 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
 
     construct: function(options) {
 
-        var $button = this.$element.find('>button');
-        if ($button.attr('type') === undefined) {
-            $button[0].setAttribute('type', 'button');
-        }
+        this._readDataFromMarkup();
+        this._adjustMarkup();
 
         this.options.monthNames = this.options.monthNames || CUI.Datepicker.monthNames;
         this.options.dayNames = this.options.dayNames || CUI.Datepicker.dayNames;
 
-
-        this._readDataFromMarkup();
         
         // Set standard formats
         this.options.storedFormat = this.options.storedFormat || (this.options.type === "time" ? 'HH:mm' : 'YYYY-MM-DD[T]HH:mmZ');
@@ -101,7 +97,6 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             this.useNativeControls = true;
         }
 
-        this._adjustMarkup();
         this._updateState();
 
         this.$openButton = this.$element.find('button');
@@ -326,15 +321,19 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
     },
     
     _adjustMarkup: function() {
+        this.$element.addClass("datepicker");
+        
         if (!this.useNativeControls) {
+            if (this.$element.find("input").not("[type=hidden]").length === 0) {
+                this.$element.append("<input type=\"text\">");
+            }
+            if (this.$element.find("button").length === 0) {
+                this.$element.append("<button class=\"icon-calendar small\"><span>Datepicker</span></button>");
+            }
             if (this.$element.find(".popover").length === 0) {
                 this.$element.append('<div class="popover arrow-top" style="display:none"><div class="inner"></div></div>');
                 if(this._isDateEnabled()) this.$element.find(".inner").append('<div class="calendar"><div class="calendar-header"></div><div class="calendar-body"></div></div>');
             }
-            if (this.$element.find("input").not("[type=hidden]").length === 0) {
-                this.$element.append("<input type=\"text\">");
-            }
-
         } else {
             // Show native control
         }
@@ -348,6 +347,12 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             var name = this.$element.find("input").not("[type=hidden]").attr("name");
             this.$element.find("input[type=hidden]").attr("name",name);
             this.$element.find("input").not("[type=hidden]").removeAttr("name");
+        }
+        
+        // Force button to be a button, not a submit thing
+        var $button = this.$element.find('>button');
+        if ($button.attr('type') === undefined) {
+            $button[0].setAttribute('type', 'button');
         }
                     
     },
@@ -522,9 +527,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             
         this._updateState();
         
-        if(this.options.type !== "time") {
-            this._renderCalendar();
-        }
+        if(this._isDateEnabled()) this._renderCalendar();
         
         if(this._isTimeEnabled()) this._renderTime();
     },
