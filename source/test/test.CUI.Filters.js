@@ -49,5 +49,7 @@ describe('CUI.Filters', function() {
             expect(el).to.have("select[multiple]");
             expect(el).to.have("input");
         });
-      });      
+      });
+      
+      // TODO: Test API and synchronization of select element      
 });

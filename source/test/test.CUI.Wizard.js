@@ -64,5 +64,7 @@ describe('CUI.Wizard', function() {
             expect(wizard.getCurrentPageNumber()).to.equal(1);
         });
         
-      });      
+      });
+      
+      // TODO: test markup creation      
 });
