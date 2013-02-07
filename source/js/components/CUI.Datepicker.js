@@ -153,7 +153,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         $input.on("change blur", function() {
             if (this.options.disabled) return;
             var newDate = moment(this.$input.val(), this.options.displayedFormat);
-            this._setDateTime(newDate);
+            this._setDateTime(newDate, true); // Set the date, but don't trigger a change event
         }.bind(this));
 
         function normalizeDate(date) {
@@ -513,7 +513,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
     /**
     * Sets a new datetime object for this picker
     */
-    _setDateTime: function(date) {
+    _setDateTime: function(date, silent) {
         this.options.selectedDateTime = this.displayDateTime = date;
         
         if (!date) {
@@ -521,6 +521,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         } else if (date.isValid()) {
             this.$input.val(date.format(this.options.displayedFormat)); // Set only valid dates
         }
+        
         
         var storage = (date && date.isValid()) ? date.format(this.options.storedFormat) : "";     
         this.$hiddenInput.val(storage);
@@ -530,6 +531,13 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         if(this._isDateEnabled()) this._renderCalendar();
         
         if(this._isTimeEnabled()) this._renderTime();
+
+        // Trigger a change even on the input
+        if (!silent)
+            this.$input.trigger('change');
+        
+        // Always trigger a change event on the hidden input, since we're not listening to it internally
+        this.$hiddenInput.trigger('change');
     },
 
     _getTimeFromInput: function() {
