@@ -2359,14 +2359,20 @@ CUI.rte.Selection = function() {
             var com = CUI.rte.Common;
             var selection = context.win.getSelection();
             var range = context.doc.createRange();
-            // set...After seems to work more reliable, so we're trying to use it whenever
-            // possible
-            var prevNode = com.getPreviousCharacterNode(context, dom, dpr.EDITBLOCK_TAGS);
-            if (prevNode && !com.isOneCharacterNode(prevNode)) {
-                var charCnt = prevNode.nodeValue.length;
-                range.setStart(prevNode, charCnt);
-                range.setEnd(prevNode, charCnt);
-            } else {
+            // Gecko is more reliable if the last character of the preceding character node
+            // is selected instead of using setXxxBefore
+            var isSelected = false;
+            if (com.ua.isGecko) {
+                var prevNode = com.getPreviousCharacterNode(context, dom,
+                        dpr.EDITBLOCK_TAGS);
+                if (prevNode && !com.isOneCharacterNode(prevNode)) {
+                    var charCnt = prevNode.nodeValue.length;
+                    range.setStart(prevNode, charCnt);
+                    range.setEnd(prevNode, charCnt);
+                    isSelected = true;
+                }
+            }
+            if (!isSelected) {
                 range.setStartBefore(dom);
                 range.setEndBefore(dom);
             }

@@ -135,7 +135,6 @@ CUI.rte.commands.DefaultFormatting = new Class({
                 };
             } else {
                 // switch off style
-                var parentNode;
                 var path = [ ];
                 var dom = startNode;
                 while (dom && (dom !== existing)) {
@@ -144,6 +143,7 @@ CUI.rte.commands.DefaultFormatting = new Class({
                     }
                     dom = com.getParentNode(context, dom);
                 }
+                var parentNode;
                 if (path.length === 0) {
                     // switching off current style
                     parentNode = com.getParentNode(context, startNode);
