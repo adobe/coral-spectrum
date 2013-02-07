@@ -2369,13 +2369,16 @@ CUI.rte.Selection = function() {
             var dpr = CUI.rte.DomProcessor;
             var selection = context.win.getSelection();
             var range = context.doc.createRange();
-            if (!com.ua.isWebKit) {
-                range.setStartAfter(dom);
-                range.setEndAfter(dom);
-            } else {
+            if (com.ua.isWebKit) {
                 // selecting after a node does not work on WebKit, so we'll add another
-                // workaround and select the next character node instead
+                // workaround, add a temporary node and select behind that one instead
+                var tempSpan = dpr.createTempSpan(context, true, false, true);
+                tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
+                dom.parentNode.insertBefore(tempSpan, dom.nextSibling);
+                dom = tempSpan;
             }
+            range.setStartAfter(dom);
+            range.setEndAfter(dom);
             selection.removeAllRanges();
             selection.addRange(range);
         },
