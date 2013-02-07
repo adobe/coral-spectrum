@@ -2351,7 +2351,6 @@ CUI.rte.Selection = function() {
                 range.setStart(dom, 0);
                 range.setEnd(dom, 0);
             }
-            // range.collapse(false);
             selection.removeAllRanges();
             selection.addRange(range);
         },

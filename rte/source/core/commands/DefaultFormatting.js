@@ -70,6 +70,7 @@ CUI.rte.commands.DefaultFormatting = new Class({
     setCaretTo: function(execDef) {
         var com = CUI.rte.Common;
         var sel = CUI.rte.Selection;
+        var dpr = CUI.rte.DomProcessor;
         var tag = this.getTagNameForCommand(execDef.command);
         if (tag) {
             var context = execDef.editContext;
@@ -99,15 +100,18 @@ CUI.rte.commands.DefaultFormatting = new Class({
                     dom = com.getParentNode(context, dom);
                 }
                 if (path.length === 0) {
+                    // switching off current style
                     var formatNode = com.getParentNode(context, startNode);
                     if (startOffset === 0) {
                         sel.selectBeforeNode(context, formatNode);
                     } else if (startOffset === com.getNodeCharacterCnt(startNode)) {
                         sel.selectAfterNode(context, formatNode);
                     } else {
-                        console.log("@mid");
+                        dpr.splitToParent(formatNode, startNode, startOffset);
+                        sel.selectAfterNode(context, formatNode);
                     }
                 } else {
+                    // switching off a style that's somewhere up in the hierarchy
                     console.log("Re-create structure ...");
                 }
                 return {
