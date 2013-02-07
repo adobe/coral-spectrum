@@ -69,19 +69,21 @@ CUI.rte.commands.DefaultFormatting = new Class({
 
     setCaretTo: function(execDef) {
         var com = CUI.rte.Common;
+        var sel = CUI.rte.Selection;
         var tag = this.getTagNameForCommand(execDef.command);
         if (tag) {
             var context = execDef.editContext;
-            var sel = execDef.selection;
-            var startNode = sel.startNode;
+            var selection = execDef.selection;
+            var startNode = selection.startNode;
+            var startOffset = selection.startOffset;
             var existing = com.getTagInPath(context, startNode, tag);
             if (!existing) {
                 // switch on style
                 var el = context.createElement(tag);
                 com.setAttribute(el, com.TEMP_EL_ATTRIB, com.TEMP_EL_REMOVE_ON_SERIALIZE
                         + ":emptyOnly");
-                CUI.rte.DomProcessor.insertElement(context, el, sel.startNode,
-                        sel.startOffset);
+                CUI.rte.DomProcessor.insertElement(context, el, selection.startNode,
+                        selection.startOffset);
                 CUI.rte.Selection.selectEmptyNode(context, el);
                 return {
                     "preventBookmarkRestore": true
@@ -97,10 +99,20 @@ CUI.rte.commands.DefaultFormatting = new Class({
                     dom = com.getParentNode(context, dom);
                 }
                 if (path.length === 0) {
-                    console.log("Reposition caret");
+                    var formatNode = com.getParentNode(context, startNode);
+                    if (startOffset === 0) {
+                        sel.selectBeforeNode(context, formatNode);
+                    } else if (startOffset === com.getNodeCharacterCnt(startNode)) {
+                        sel.selectAfterNode(context, formatNode);
+                    } else {
+                        console.log("@mid");
+                    }
                 } else {
                     console.log("Re-create structure ...");
                 }
+                return {
+                    "preventBookmarkRestore": true
+                };
             }
         }
         return undefined;

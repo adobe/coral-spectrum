@@ -1494,6 +1494,14 @@ CUI.rte.Selection = function() {
             range.select();
         },
 
+        selectBeforeNode: function(context, dom) {
+            throw new Error("Not yet implemented.");
+        },
+
+        selectAfterNode: function(context, dom) {
+            throw new Error("Not yet implemented.");
+        },
+
         resetSelection: function(context, mode) {
             var sel = CUI.rte.Selection;
             var range = context.doc.selection.createRange();
@@ -2344,6 +2352,30 @@ CUI.rte.Selection = function() {
                 range.setEnd(dom, 0);
             }
             // range.collapse(false);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        },
+
+        selectBeforeNode: function(context, dom) {
+            var selection = context.win.getSelection();
+            var range = context.doc.createRange();
+            range.setStartBefore(dom);
+            range.setEndBefore(dom);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        },
+
+        selectAfterNode: function(context, dom) {
+            var dpr = CUI.rte.DomProcessor;
+            var selection = context.win.getSelection();
+            var range = context.doc.createRange();
+            if (!com.ua.isWebKit) {
+                range.setStartAfter(dom);
+                range.setEndAfter(dom);
+            } else {
+                // selecting after a node does not work on WebKit, so we'll add another
+                // workaround and select the next character node instead
+            }
             selection.removeAllRanges();
             selection.addRange(range);
         },
