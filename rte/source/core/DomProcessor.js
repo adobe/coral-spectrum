@@ -1142,6 +1142,7 @@ CUI.rte.DomProcessor = function() {
          * <p>Note that only container nodes that are directly under the body node are
          * taken into account. "Auxiliary root nodes" (such as td, th) will not be included.
          * </p>
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom DOM element to determine container node for
          * @return {HTMLElement} container DOM node; null if no container node is present
          */
@@ -1190,9 +1191,11 @@ CUI.rte.DomProcessor = function() {
                     }
                     var tagToCheck = dom.tagName.toLowerCase();
                     for (var formatId in formatDefs) {
-                        var formatDef = formatDefs[formatId];
-                        if (formatDef.tag && (formatDef.tag == tagToCheck)) {
-                            return dom;
+                        if (formatDefs.hasOwnProperty(formatId)) {
+                            var formatDef = formatDefs[formatId];
+                            if (formatDef.tag && (formatDef.tag == tagToCheck)) {
+                                return dom;
+                            }
                         }
                     }
                 }

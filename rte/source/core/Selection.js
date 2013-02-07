@@ -2356,10 +2356,20 @@ CUI.rte.Selection = function() {
         },
 
         selectBeforeNode: function(context, dom) {
+            var com = CUI.rte.Common;
             var selection = context.win.getSelection();
             var range = context.doc.createRange();
-            range.setStartBefore(dom);
-            range.setEndBefore(dom);
+            // set...After seems to work more reliable, so we're trying to use it whenever
+            // possible
+            var prevNode = com.getPreviousCharacterNode(context, dom, dpr.EDITBLOCK_TAGS);
+            if (prevNode && !com.isOneCharacterNode(prevNode)) {
+                var charCnt = prevNode.nodeValue.length;
+                range.setStart(prevNode, charCnt);
+                range.setEnd(prevNode, charCnt);
+            } else {
+                range.setStartBefore(dom);
+                range.setEndBefore(dom);
+            }
             selection.removeAllRanges();
             selection.addRange(range);
         },
