@@ -711,8 +711,8 @@ CUI.rte.DomProcessor = function() {
             if (dom.nodeType == 1) {
                 dom = com.getFirstTextChild(dom) || dom;
             }
-            var joinDom = (joinPreceding ? com.getPreviousTextNode(context, dom)
-                    : com.getNextTextNode(context, dom));
+            var joinDom = (joinPreceding ? com.getPreviousCharacterNode(context, dom)
+                    : com.getNextCharacterNode(context, dom));
             if (!dom || !joinDom) {
                 return;
             }
