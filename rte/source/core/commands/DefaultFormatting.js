@@ -135,6 +135,7 @@ CUI.rte.commands.DefaultFormatting = new Class({
                 };
             } else {
                 // switch off style
+                var parentNode;
                 var path = [ ];
                 var dom = startNode;
                 while (dom && (dom !== existing)) {
@@ -145,21 +146,32 @@ CUI.rte.commands.DefaultFormatting = new Class({
                 }
                 if (path.length === 0) {
                     // switching off current style
-                    var formatNode = com.getParentNode(context, startNode);
+                    parentNode = com.getParentNode(context, startNode);
                     if (this.isStrucStart(context, startNode, startOffset)) {
-                        console.log("strucStart");
-                        sel.selectBeforeNode(context, formatNode);
+                        sel.selectBeforeNode(context, parentNode);
                     } else if (this.isStrucEnd(context, startNode, startOffset)) {
-                        console.log("strucEnd");
-                        sel.selectAfterNode(context, formatNode);
+                        sel.selectAfterNode(context, parentNode);
                     } else {
-                        console.log("strucMiddle");
-                        dpr.splitToParent(formatNode, startNode, startOffset);
-                        sel.selectAfterNode(context, formatNode);
+                        dpr.splitToParent(parentNode, startNode, startOffset);
+                        sel.selectAfterNode(context, parentNode);
                     }
                 } else {
                     // switching off a style that's somewhere up in the hierarchy
-                    console.log("Re-create structure ...");
+                    var pathCnt = path.length;
+                    var duplicatedNode;
+                    for (var p = 0; p < pathCnt; p++) {
+                        var node = path[p].cloneNode(false);
+                        if (parentNode) {
+                            parentNode.appendChild(node);
+                        } else {
+                            duplicatedNode = node;
+                        }
+                        parentNode = node;
+                    }
+                    dpr.splitToParent(existing, startNode, startOffset);
+                    existing.parentNode.insertBefore(duplicatedNode, existing.nextSibling);
+                    sel.selectEmptyNode(context, com.getFirstChild(duplicatedNode) ||
+                            duplicatedNode);
                 }
                 return {
                     "preventBookmarkRestore": true
