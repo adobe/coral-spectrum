@@ -67,6 +67,50 @@ CUI.rte.commands.DefaultFormatting = new Class({
         return tagName;
     },
 
+    /**
+     * @private
+     */
+    isStrucStart: function(context, node, offset) {
+        var parentNode = node.parentNode;
+        if (!parentNode) {
+            return false;
+        }
+        if (node !== parentNode.firstChild) {
+            return false;
+        }
+        if (node.nodeType === 3) {
+            return (offset === 0);
+        }
+        if (CUI.rte.Common.isOneCharacterNode(node)) {
+            return (offset === undefined) || (offset === null);
+        }
+        return true;
+    },
+
+    /**
+     * @private
+     */
+    isStrucEnd: function(context, node, offset) {
+        var com = CUI.rte.Common;
+        var parentNode = node.parentNode;
+        if (!parentNode) {
+            return false;
+        }
+        if (node !== parentNode.lastChild) {
+            return false;
+        }
+        if (node.nodeType === 3) {
+            return (offset === com.getNodeCharacterCnt(node));
+        }
+        if (com.isOneCharacterNode(node)) {
+            return (offset === 0);
+        }
+        return true;
+    },
+
+    /**
+     * @private
+     */
     setCaretTo: function(execDef) {
         var com = CUI.rte.Common;
         var sel = CUI.rte.Selection;
@@ -102,11 +146,14 @@ CUI.rte.commands.DefaultFormatting = new Class({
                 if (path.length === 0) {
                     // switching off current style
                     var formatNode = com.getParentNode(context, startNode);
-                    if (startOffset === 0) {
+                    if (this.isStrucStart(context, startNode, startOffset)) {
+                        console.log("strucStart");
                         sel.selectBeforeNode(context, formatNode);
-                    } else if (startOffset === com.getNodeCharacterCnt(startNode)) {
+                    } else if (this.isStrucEnd(context, startNode, startOffset)) {
+                        console.log("strucEnd");
                         sel.selectAfterNode(context, formatNode);
                     } else {
+                        console.log("strucMiddle");
                         dpr.splitToParent(formatNode, startNode, startOffset);
                         sel.selectAfterNode(context, formatNode);
                     }
