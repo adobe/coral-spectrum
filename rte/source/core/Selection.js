@@ -1498,7 +1498,6 @@ CUI.rte.Selection = function() {
             var tempSpan = dpr.createTempSpan(context, true, false, true);
             tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
             dom.parentNode.insertBefore(tempSpan, dom);
-            console.log("TempSpan inserted BEFORE");
             var range = context.doc.selection.createRange();
             range.moveToElementText(tempSpan);
             range.collapse(true);
@@ -1510,7 +1509,6 @@ CUI.rte.Selection = function() {
             var tempSpan = dpr.createTempSpan(context, true, false, true);
             tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
             dom.parentNode.insertBefore(tempSpan, dom.nextSibling);
-            console.log("TempSpan inserted AFTER");
             range.moveToElementText(tempSpan);
             range.collapse(false);
             range.select();
@@ -2370,7 +2368,6 @@ CUI.rte.Selection = function() {
         },
 
         selectBeforeNode: function(context, dom) {
-            var com = CUI.rte.Common;
             var selection = context.win.getSelection();
             var range = context.doc.createRange();
             // Gecko is more reliable if the last character of the preceding character node
@@ -2378,7 +2375,7 @@ CUI.rte.Selection = function() {
             var isSelected = false;
             if (com.ua.isGecko) {
                 var prevNode = com.getPreviousCharacterNode(context, dom,
-                        dpr.EDITBLOCK_TAGS);
+                        com.EDITBLOCK_TAGS);
                 if (prevNode && !com.isOneCharacterNode(prevNode)) {
                     var charCnt = prevNode.nodeValue.length;
                     range.setStart(prevNode, charCnt);
