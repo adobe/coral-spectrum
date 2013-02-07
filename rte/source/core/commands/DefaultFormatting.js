@@ -143,8 +143,10 @@ CUI.rte.commands.DefaultFormatting = new Class({
                     }
                     dom = com.getParentNode(context, dom);
                 }
+
+                var pathCnt = path.length;
                 var parentNode;
-                if (path.length === 0) {
+                if (pathCnt === 0) {
                     // switching off current style
                     parentNode = com.getParentNode(context, startNode);
                     if (this.isStrucStart(context, startNode, startOffset)) {
@@ -157,7 +159,6 @@ CUI.rte.commands.DefaultFormatting = new Class({
                     }
                 } else {
                     // switching off a style that's somewhere up in the hierarchy
-                    var pathCnt = path.length;
                     var duplicatedNode;
                     for (var p = 0; p < pathCnt; p++) {
                         var node = path[p].cloneNode(false);

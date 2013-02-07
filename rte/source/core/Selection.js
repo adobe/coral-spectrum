@@ -1495,11 +1495,25 @@ CUI.rte.Selection = function() {
         },
 
         selectBeforeNode: function(context, dom) {
-            throw new Error("Not yet implemented.");
+            var tempSpan = dpr.createTempSpan(context, true, false, true);
+            tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
+            dom.parentNode.insertBefore(tempSpan, dom);
+            console.log("TempSpan inserted BEFORE");
+            var range = context.doc.selection.createRange();
+            range.moveToElementText(tempSpan);
+            range.collapse(true);
+            range.select();
         },
 
         selectAfterNode: function(context, dom) {
-            throw new Error("Not yet implemented.");
+            var range = context.doc.selection.createRange();
+            var tempSpan = dpr.createTempSpan(context, true, false, true);
+            tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
+            dom.parentNode.insertBefore(tempSpan, dom.nextSibling);
+            console.log("TempSpan inserted AFTER");
+            range.moveToElementText(tempSpan);
+            range.collapse(false);
+            range.select();
         },
 
         resetSelection: function(context, mode) {
