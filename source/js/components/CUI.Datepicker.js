@@ -30,6 +30,7 @@ Currently there are the following data options:
   data-force-html-mode           Force to HTML mode and never use a native Date widget, if given (with any non-empty value)
   data-day-names                 JSON-array-data with the short names of all week days, starting with Sunday
   data-month-names               JSON-array-data with the names of all months, starting with January
+  data-start-day                 Defines the start day of the week, 0 = Sunday, 1 = Monday, etc.
 
 Additionally the type (date, time, datetime) is read from the &lt;input&gt; field.
 
@@ -246,7 +247,11 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         
         if (el.data('month-names') !== undefined) {
             this.options.monthNames = el.data('month-names') || this.options.monthNames;
-        }                
+        }
+        
+        if (el.data('start-day') !== undefined) {
+            this.options.startDay = el.data('start-day') * 1; // Force number
+        }              
     },
 
     _readInputVal: function(format) {
