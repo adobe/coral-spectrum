@@ -93,11 +93,17 @@ var index = filters.getSelectedIndex();
             <p>
             The <code>optionRenderer(int index, Object option, boolean highlight, boolean showIcon)</code> callback can be used to customize the HTML markup of the items in the dropdown. <code>index</code> is the position in the current list, <code>option</code> is the current option to display (your custom Object if you defined an autocompleteCallback, a string otherwise), <code>highlight</code> defines wether you should highlight the search term and <code>showIcon</code> defines wether you should add an icon to your markup. You have to return a valid jQuery element.
             </p>
+            <p>
+            This widget does not support changing the options after initialization due to its complex structure.
+            </p>
+            <p>
+            Please give the selectable options <b>either</b> by array in the constructor options <b>or</b> in th html select field. If you provide options in both ways, the result is undefined.
+            </p>
       
       @constructs
       
       @param {Object}   options                                    Component options
-      @param {Array}    [options.options=empty array]              Array of available options (will be read from &lt;select&gt; by default)
+      @param {Array}    [options.options=empty array]              Array of available options (will be read from &lt;select&gt; by default).
       @param {Array}    [options.optionDisplayStrings=empty array] Array of alternate strings for display (will be read from &lt;select&gt; by default)
       @param {boolean}  [options.multiple=false]                   Can the user select more than one option?
       @param {boolean}  [options.stacking=false]                   Uses a slightly different style, implies multiple
