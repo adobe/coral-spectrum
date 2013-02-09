@@ -141,7 +141,7 @@
         this._renderMissingElements();
 
         this.$nav = this.$element.find('nav').first();
-        this.$back = this.$nav.find('button').first();
+        this.$back = this.$nav.find('button').first(); // TODO: Distinguish buttons by class, not by position
         this.$next = this.$nav.find('button').last();
         this.$pageOverview = this.$nav.find('ol').last();
 
