@@ -700,12 +700,10 @@ CUI.rte.Selection = function() {
             if (CUI.rte.Selection.isSelection(selection)) {
                 return true;
             }
+            // we must normalize EOT/EOB situations as well ...
             var startNode = selection.startNode;
-            if (startNode && (startNode.nodeType == 1) && !com.isOneCharacterNode(startNode)) {
-                // we must normalize EOT/EOB situations as well ...
-                return true;
-            }
-            return false;
+            return startNode && (startNode.nodeType == 1)
+                    && !com.isOneCharacterNode(startNode);
         },
 
         /**
@@ -2395,16 +2393,19 @@ CUI.rte.Selection = function() {
             var dpr = CUI.rte.DomProcessor;
             var selection = context.win.getSelection();
             var range = context.doc.createRange();
+            // add a temporary node and select behind that one instead - this makes
+            // it more stable and easier to handle
+            var tempSpan = dpr.createTempSpan(context, true, false, true);
+            tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
+            dom.parentNode.insertBefore(tempSpan, dom.nextSibling);
+            dom = tempSpan;
             if (com.ua.isWebKit) {
-                // selecting after a node does not work on WebKit, so we'll add another
-                // workaround, add a temporary node and select behind that one instead
-                var tempSpan = dpr.createTempSpan(context, true, false, true);
-                tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
-                dom.parentNode.insertBefore(tempSpan, dom.nextSibling);
-                dom = tempSpan;
+                range.setStartAfter(dom);
+                range.setEndAfter(dom);
+            } else {
+                range.setStartBefore(dom);
+                range.setEndBefore(dom);
             }
-            range.setStartAfter(dom);
-            range.setEndAfter(dom);
             selection.removeAllRanges();
             selection.addRange(range);
         },

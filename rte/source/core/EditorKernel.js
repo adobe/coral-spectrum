@@ -1564,11 +1564,8 @@ CUI.rte.EditorKernel = new Class({
         }
         var commonAncestor = nodeList.commonAncestor;
         while (commonAncestor) {
-            if (commonAncestor == context.root) {
-                break;
-            }
             consistentFormatting.push(commonAncestor);
-            commonAncestor = commonAncestor.parentNode;
+            commonAncestor = CUI.rte.Common.getParentNode(context, commonAncestor);
         }
         var selectedDom = sel.getSelectedDom(selection);
         var styles = (stylesDef.styles ? stylesDef.styles : [ ]);
