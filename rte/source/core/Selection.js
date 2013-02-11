@@ -1239,6 +1239,7 @@ CUI.rte.Selection = function() {
                 }
             }
             if (!elNode) {
+                var prevCharNode;
                 // text selection - determine offset to the last directly selectable node
                 var textRange = range.duplicate();
                 textRange.moveToElementText(parentNode);
@@ -1269,6 +1270,16 @@ CUI.rte.Selection = function() {
                     if ((offs + childLen) > textLen) {
                         elNode = childToCheck;
                         elOffset = textLen - offs;
+                        // the start of a text node is actually handled as the end of the
+                        // previous text node (if applicable) - handle this as well
+                        if (elOffset == 0) {
+                             prevCharNode = com.getPreviousCharacterNode(context, elNode,
+                                    com.EDITBLOCK_TAGS);
+                            if (prevCharNode && !com.isOneCharacterNode(prevCharNode)) {
+                                elNode = prevCharNode;
+                                elOffset = com.getNodeCharacterCnt(elNode);
+                            }
+                        }
                         break;
                     }
                     offs += childLen;
@@ -1280,8 +1291,17 @@ CUI.rte.Selection = function() {
                     // get first child node for structural nodes that may have content
                     var textNode = com.getFirstTextChild(elNode);
                     if (textNode) {
-                        elNode = textNode;
-                        elOffset = 0;
+                        // actually, IE handles this as last character of previous text
+                        // node (style is the same), so reflecting it accordingly
+                        prevCharNode = com.getPreviousCharacterNode(context, textNode,
+                                com.EDITBLOCK_TAGS);
+                        if (prevCharNode && !com.isOneCharacterNode(prevCharNode)) {
+                            elNode = prevCharNode;
+                            elOffset = com.getNodeCharacterCnt(elNode);
+                        } else {
+                            elNode = textNode;
+                            elOffset = 0;
+                        }
                     }
                 } else if (com.isTag(elNode, "img")) {
                     // for images: adjust offset if we are handling the end of a selection
@@ -1321,6 +1341,7 @@ CUI.rte.Selection = function() {
                     }
                 }
             }
+            console.log("=== " + elNode.nodeValue + "/" + elOffset);
             return {
                 "dom": elNode,
                 "offset": elOffset
