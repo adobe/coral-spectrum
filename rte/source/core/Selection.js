@@ -1341,7 +1341,6 @@ CUI.rte.Selection = function() {
                     }
                 }
             }
-            console.log("=== " + elNode.nodeValue + "/" + elOffset);
             return {
                 "dom": elNode,
                 "offset": elOffset

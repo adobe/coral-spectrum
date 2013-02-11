@@ -218,8 +218,7 @@ CUI.rte.commands.DefaultFormatting = new Class({
         var tagName = this.getTagNameForCommand(cmd);
         var context = selectionDef.editContext;
         var selection = selectionDef.selection;
-        return (com.getTagInPath(context, selection.startNode, tagName) != null)
-                || selectionDef.editContext.doc.queryCommandState(cmd);
+        return (com.getTagInPath(context, selection.startNode, tagName) != null);
     }
 
 });
