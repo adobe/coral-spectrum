@@ -127,12 +127,8 @@ CUI.rte.commands.DefaultFormatting = new Class({
                 var el = context.createElement(tag);
                 com.setAttribute(el, com.TEMP_EL_ATTRIB, com.TEMP_EL_REMOVE_ON_SERIALIZE
                         + ":emptyOnly");
-                CUI.rte.DomProcessor.insertElement(context, el, selection.startNode,
-                        selection.startOffset);
+                CUI.rte.DomProcessor.insertElement(context, el, startNode, startOffset);
                 CUI.rte.Selection.selectEmptyNode(context, el);
-                return {
-                    "preventBookmarkRestore": true
-                };
             } else {
                 // switch off style
                 var path = [ ];
@@ -154,8 +150,17 @@ CUI.rte.commands.DefaultFormatting = new Class({
                     } else if (this.isStrucEnd(context, startNode, startOffset)) {
                         sel.selectAfterNode(context, parentNode);
                     } else {
-                        dpr.splitToParent(parentNode, startNode, startOffset);
-                        sel.selectAfterNode(context, parentNode);
+                        if (com.isCharacterNode(startNode)) {
+                            dpr.splitToParent(parentNode, startNode, startOffset);
+                            sel.selectAfterNode(context, parentNode);
+                        } else {
+                            var tempSpan = dpr.createTempSpan(context, true, false, true);
+                            tempSpan.appendChild(context.createTextNode(
+                                    dpr.ZERO_WIDTH_NBSP));
+                            startNode.parentNode.insertBefore(tempSpan, startNode);
+                            startNode.parentNode.removeChild(startNode);
+                            sel.selectNode(context, tempSpan, true);
+                        }
                     }
                 } else {
                     // switching off a style that's somewhere up in the hierarchy
@@ -169,15 +174,25 @@ CUI.rte.commands.DefaultFormatting = new Class({
                         }
                         parentNode = node;
                     }
-                    dpr.splitToParent(existing, startNode, startOffset);
+                    if (com.isCharacterNode(startNode)) {
+                        dpr.splitToParent(existing, startNode, startOffset);
+                    } else {
+                        var splitIndex = com.getChildIndex(path[0]);
+                        for (p = pathCnt - 1; p >= 0; p--) {
+                            path[p].parentNode.removeChild(path[p]);
+                        }
+                        var splitNode = existing.cloneNode(false);
+                        existing.parentNode.insertBefore(splitNode, existing.nextSibling);
+                        com.moveChildren(existing, splitNode, splitIndex);
+                    }
                     existing.parentNode.insertBefore(duplicatedNode, existing.nextSibling);
                     sel.selectEmptyNode(context, com.getFirstChild(duplicatedNode) ||
                             duplicatedNode);
                 }
-                return {
-                    "preventBookmarkRestore": true
-                };
             }
+            return {
+                "preventBookmarkRestore": true
+            };
         }
         return undefined;
     },
