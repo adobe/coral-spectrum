@@ -1481,7 +1481,7 @@ CUI.rte.Selection = function() {
         },
 
         selectEmptyNode: function(context, dom) {
-            var dpr = CUI.rte.DomProcessor;
+            context.setState("suppressSelectionChange", true);
             var tempSpan = dpr.createTempSpan(context, true, false);
             tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
             dom.appendChild(tempSpan);
@@ -1493,6 +1493,7 @@ CUI.rte.Selection = function() {
         },
 
         selectBeforeNode: function(context, dom) {
+            context.setState("suppressSelectionChange", true);
             var tempSpan = dpr.createTempSpan(context, true, false, true);
             tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
             dom.parentNode.insertBefore(tempSpan, dom);
@@ -1503,6 +1504,7 @@ CUI.rte.Selection = function() {
         },
 
         selectAfterNode: function(context, dom) {
+            context.setState("suppressSelectionChange", true);
             var range = context.doc.selection.createRange();
             var tempSpan = dpr.createTempSpan(context, true, false, true);
             tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));

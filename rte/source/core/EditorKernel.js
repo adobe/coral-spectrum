@@ -876,7 +876,11 @@ CUI.rte.EditorKernel = new Class({
             if (com.ua.isIE) {
                 this.registerHandlers(doc, {
                     "selectionchange": function(e) {
-                        this.cleanupOnEvent(e);
+                        if (e.editContext.getState("suppressSelectionChange") === true) {
+                            e.editContext.removeState("suppressSelectionChange");
+                        } else {
+                            this.cleanupOnEvent(e);
+                        }
                     }
                 }, this);
             }
