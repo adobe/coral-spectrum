@@ -2376,9 +2376,14 @@ CUI.rte.Selection = function() {
             var selection = context.win.getSelection();
             var range = context.doc.createRange();
             if (com.ua.isWebKit) {
-                var tempSpan = dpr.createTempSpan(context, true, false, true);
-                tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
-                dom.appendChild(tempSpan);
+                var tempSpan;
+                if (dpr.isZeroSizePlaceholder(dom)) {
+                    tempSpan = (dom.nodeType === 3 ? dom.parentNode : dom);
+                } else {
+                    tempSpan = dpr.createTempSpan(context, true, false);
+                    tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
+                    dom.appendChild(tempSpan);
+                }
                 range.selectNode(dom);
                 range.collapse(false);
             } else {

@@ -153,16 +153,23 @@ CUI.rte.commands.DefaultFormatting = new Class({
                             this.isStrucEnd(context, startNode, startOffset)) {
                         sel.selectAfterNode(context, parentNode);
                     } else {
-                        if (com.isCharacterNode(startNode) && !isPlaceholder) {
-                            dpr.splitToParent(parentNode, startNode, startOffset);
-                            sel.selectAfterNode(context, parentNode);
-                        } else {
+                        if (com.isCharacterNode(startNode) || isPlaceholder) {
+                            var textNode;
                             if (isPlaceholder) {
                                 var spanNode = ((startNode.nodeType === 3) ?
                                         startNode.parentNode : startNode);
-                                startNode = spanNode.parentNode;
-                                startNode.removeChild(spanNode);
+                                textNode = spanNode.firstChild;
+                                dpr.removeWithoutChildren(spanNode);
+                                startNode = textNode;
+                                startOffset = 0;
+                                parentNode = com.getParentNode(context, startNode);
                             }
+                            dpr.splitToParent(parentNode, startNode, startOffset);
+                            if (textNode) {
+                                textNode.parentNode.removeChild(textNode);
+                            }
+                            sel.selectAfterNode(context, parentNode);
+                        } else {
                             var tempSpan = dpr.createTempSpan(context, true, false, true);
                             tempSpan.appendChild(context.createTextNode(
                                     dpr.ZERO_WIDTH_NBSP));
