@@ -121,14 +121,25 @@ CUI.rte.commands.DefaultFormatting = new Class({
             var selection = execDef.selection;
             var startNode = selection.startNode;
             var startOffset = selection.startOffset;
+            var isPlaceholder = dpr.isZeroSizePlaceholder(startNode);
             var existing = com.getTagInPath(context, startNode, tag);
             if (!existing) {
                 // switch on style
+                var placeholderNode;
+                if (isPlaceholder) {
+                    placeholderNode = (startNode.nodeType === 3 ? startNode.parentNode :
+                            startNode);
+                    startNode = placeholderNode.parentNode;
+                    startOffset = com.getChildIndex(placeholderNode);
+                }
                 var el = context.createElement(tag);
                 com.setAttribute(el, com.TEMP_EL_ATTRIB, com.TEMP_EL_REMOVE_ON_SERIALIZE
                         + ":emptyOnly");
                 CUI.rte.DomProcessor.insertElement(context, el, startNode, startOffset);
                 CUI.rte.Selection.selectEmptyNode(context, el);
+                if (placeholderNode) {
+                    placeholderNode.parentNode.removeChild(placeholderNode);
+                }
             } else {
                 // switch off style
                 var path = [ ];
@@ -139,8 +150,6 @@ CUI.rte.commands.DefaultFormatting = new Class({
                     }
                     dom = com.getParentNode(context, dom);
                 }
-
-                var isPlaceholder = dpr.isZeroSizePlaceholder(startNode);
                 var pathCnt = path.length;
                 var parentNode;
                 if (pathCnt === 0) {
