@@ -262,7 +262,8 @@ module.exports = function(grunt) {
     mincss: {
       main: {
         files: {
-          '<%= dirs.build %>/css/cui.min.css': '<%= dirs.build %>/css/cui.css'
+          '<%= dirs.build %>/css/cui.min.css': '<%= dirs.build %>/css/cui.css',
+          '<%= dirs.build %>/css/cui-wrapped.min.css': '<%= dirs.build %>/css/cui-wrapped.css'
         }
       }
     },
@@ -388,7 +389,7 @@ module.exports = function(grunt) {
           ]
         },
         files: {
-          '<%= dirs.temp %>/cui-wrapped.css': '<%= dirs.source %>/less/cui-wrapped.less'
+          '<%= dirs.build %>/css/cui-wrapped.css': '<%= dirs.source %>/less/cui-wrapped.less'
         }
       },
       "cui": {
