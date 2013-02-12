@@ -1704,7 +1704,7 @@ CUI.rte.DomProcessor = function() {
                 }
                 return;
             }
-            if (com.isOneCharacterNode(dom)) {
+            if (com.isOneCharacterNode(insertNode)) {
                 if (insertOffset == null) {
                     com.insertBefore(parent, dom, insertNode);
                 } else {
