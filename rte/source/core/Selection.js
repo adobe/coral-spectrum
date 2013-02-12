@@ -1501,10 +1501,14 @@ CUI.rte.Selection = function() {
         },
 
         selectEmptyNode: function(context, dom) {
-            context.setState("suppressSelectionChange", true);
-            var tempSpan = dpr.createTempSpan(context, true, false);
-            tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
-            dom.appendChild(tempSpan);
+            var tempSpan;
+            if (dpr.isZeroSizePlaceholder(dom)) {
+                tempSpan = (dom.nodeType === 3 ? dom.parentNode : dom);
+            } else {
+                tempSpan = dpr.createTempSpan(context, true, false);
+                tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
+                dom.appendChild(tempSpan);
+            }
             var range = context.doc.selection.createRange();
             range.moveToElementText(tempSpan);
             // required for the caret to appear/blink
@@ -1513,7 +1517,6 @@ CUI.rte.Selection = function() {
         },
 
         selectBeforeNode: function(context, dom) {
-            context.setState("suppressSelectionChange", true);
             var tempSpan = dpr.createTempSpan(context, true, false, true);
             tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
             dom.parentNode.insertBefore(tempSpan, dom);
@@ -1524,7 +1527,6 @@ CUI.rte.Selection = function() {
         },
 
         selectAfterNode: function(context, dom) {
-            context.setState("suppressSelectionChange", true);
             var range = context.doc.selection.createRange();
             var tempSpan = dpr.createTempSpan(context, true, false, true);
             tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));

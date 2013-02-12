@@ -876,11 +876,7 @@ CUI.rte.EditorKernel = new Class({
             if (com.ua.isIE) {
                 this.registerHandlers(doc, {
                     "selectionchange": function(e) {
-                        if (e.editContext.getState("suppressSelectionChange") === true) {
-                            e.editContext.removeState("suppressSelectionChange");
-                        } else {
-                            this.cleanupOnEvent(e);
-                        }
+                        this.cleanupOnEvent(e);
                     }
                 }, this);
             }
@@ -1045,9 +1041,7 @@ CUI.rte.EditorKernel = new Class({
         var com = CUI.rte.Common;
         var dpr = CUI.rte.DomProcessor;
         switch (e.getType()) {
-            case "blur":
             case "mousedown":
-            case "selectionchange":
                 dpr.removeTempSpans(e.editContext, true);
                 break;
             case "keydown":

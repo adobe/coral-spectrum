@@ -134,32 +134,41 @@ CUI.rte.commands.DefaultFormatting = new Class({
                 var path = [ ];
                 var dom = startNode;
                 while (dom && (dom !== existing)) {
-                    if (dom.nodeType === 1) {
+                    if ((dom.nodeType === 1) && !dpr.isZeroSizePlaceholder(dom)) {
                         path.push(dom);
                     }
                     dom = com.getParentNode(context, dom);
                 }
 
+                var isPlaceholder = dpr.isZeroSizePlaceholder(startNode);
                 var pathCnt = path.length;
                 var parentNode;
                 if (pathCnt === 0) {
                     // switching off current style
                     parentNode = com.getParentNode(context, startNode);
-                    if (this.isStrucStart(context, startNode, startOffset)) {
+                    if (!isPlaceholder &&
+                            this.isStrucStart(context, startNode, startOffset)) {
                         sel.selectBeforeNode(context, parentNode);
-                    } else if (this.isStrucEnd(context, startNode, startOffset)) {
+                    } else if (!isPlaceholder &&
+                            this.isStrucEnd(context, startNode, startOffset)) {
                         sel.selectAfterNode(context, parentNode);
                     } else {
-                        if (com.isCharacterNode(startNode)) {
+                        if (com.isCharacterNode(startNode) && !isPlaceholder) {
                             dpr.splitToParent(parentNode, startNode, startOffset);
                             sel.selectAfterNode(context, parentNode);
                         } else {
+                            if (isPlaceholder) {
+                                var spanNode = ((startNode.nodeType === 3) ?
+                                        startNode.parentNode : startNode);
+                                startNode = spanNode.parentNode;
+                                startNode.removeChild(spanNode);
+                            }
                             var tempSpan = dpr.createTempSpan(context, true, false, true);
                             tempSpan.appendChild(context.createTextNode(
                                     dpr.ZERO_WIDTH_NBSP));
                             startNode.parentNode.insertBefore(tempSpan, startNode);
                             startNode.parentNode.removeChild(startNode);
-                            sel.selectNode(context, tempSpan, true);
+                            sel.selectEmptyNode(context, tempSpan);
                         }
                     }
                 } else {
@@ -174,7 +183,7 @@ CUI.rte.commands.DefaultFormatting = new Class({
                         }
                         parentNode = node;
                     }
-                    if (com.isCharacterNode(startNode)) {
+                    if (com.isCharacterNode(startNode) && !isPlaceholder) {
                         dpr.splitToParent(existing, startNode, startOffset);
                     } else {
                         var splitIndex = com.getChildIndex(path[0]);

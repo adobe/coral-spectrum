@@ -1866,6 +1866,28 @@ CUI.rte.DomProcessor = function() {
         },
 
         /**
+         * Checks if the specified node represents a "zero width placeholder node".
+         * @param {HTMLElement} dom The node to check
+         * @return {Boolean} True if the specified node is a zero width placeholder node
+         */
+        isZeroSizePlaceholder: function(dom) {
+            if (dom.nodeType === 1) {
+                if (dom.childNodes.length != 1) {
+                    return false;
+                }
+                dom = dom.childNodes[0];
+            }
+            if (dom.nodeType !== 3) {
+                return false;
+            }
+            var text = com.getNodeText(dom);
+            if (text.length !== 1) {
+                return false;
+            }
+            return (text.charAt(0) === CUI.rte.DomProcessor.ZERO_WIDTH_NBSP);
+        },
+
+        /**
          * Gecko has several bugs (row-in-row, no table root element) that have to be
          * corrected. As content may theoretically be copied from Gecko to IE, this
          * method should also be called in IE's pasting mechanisms.
