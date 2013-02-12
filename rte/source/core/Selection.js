@@ -1505,7 +1505,7 @@ CUI.rte.Selection = function() {
             if (dpr.isZeroSizePlaceholder(dom)) {
                 tempSpan = (dom.nodeType === 3 ? dom.parentNode : dom);
             } else {
-                tempSpan = dpr.createTempSpan(context, true, false);
+                tempSpan = dpr.createTempSpan(context, true, false, true);
                 tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
                 dom.appendChild(tempSpan);
             }
@@ -2377,10 +2377,8 @@ CUI.rte.Selection = function() {
             var range = context.doc.createRange();
             if (com.ua.isWebKit) {
                 var tempSpan;
-                if (dpr.isZeroSizePlaceholder(dom)) {
-                    tempSpan = (dom.nodeType === 3 ? dom.parentNode : dom);
-                } else {
-                    tempSpan = dpr.createTempSpan(context, true, false);
+                if (!dpr.isZeroSizePlaceholder(dom)) {
+                    tempSpan = dpr.createTempSpan(context, true, false, true);
                     tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
                     dom.appendChild(tempSpan);
                 }
