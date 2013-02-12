@@ -68,39 +68,39 @@ CUI.rte.adapter.ExtEvent = new Class({
         this._init(cfg);
     },
 
-    // overrides CUI.rte.EdittorEvent#isTab
+    // overrides CUI.rte.EditorEvent#isTab
     isTab: function() {
         return this.nativeEvent.getKey() == this.nativeEvent.TAB;
     },
 
-    // overrides CUI.rte.EdittorEvent#isEnter
+    // overrides CUI.rte.EditorEvent#isEnter
     isEnter: function() {
         return this.nativeEvent.getKey() == this.nativeEvent.ENTER;
     },
 
-    // overrides CUI.rte.EdittorEvent#isSpace
+    // overrides CUI.rte.EditorEvent#isSpace
     isSpace: function() {
         return this.nativeEvent.getKey() == this.nativeEvent.SPACE;
     },
 
-    // overrides CUI.rte.EdittorEvent#isBackSpace
+    // overrides CUI.rte.EditorEvent#isBackSpace
     isBackSpace: function() {
         return this.nativeEvent.getKey() == this.nativeEvent.BACKSPACE;
     },
 
-    // overrides CUI.rte.EdittorEvent#isDelete
+    // overrides CUI.rte.EditorEvent#isDelete
     isDelete: function() {
         return this.nativeEvent.getKey() == this.nativeEvent.DELETE;
     },
 
-     // overrides CUI.rte.EdittorEvent#isCaretKey
+     // overrides CUI.rte.EditorEvent#isCaretKey
     isCaretKey: function() {
         var key = this.nativeEvent.getKey();
         return (key == this.nativeEvent.UP) || (key == this.nativeEvent.DOWN)
                 || (key == this.nativeEvent.LEFT) || (key == this.nativeEvent.RIGHT);
     },
 
-    // overrides CUI.rte.EdittorEvent#isCaretMovement
+    // overrides CUI.rte.EditorEvent#isCaretMovement
     isCaretMovement: function() {
         var key = this.nativeEvent.getKey();
         return this.isCaretKey()
@@ -108,17 +108,17 @@ CUI.rte.adapter.ExtEvent = new Class({
                 || (key == this.nativeEvent.HOME) || (key == this.nativeEvent.END);
     },
 
-    // overrides CUI.rte.EdittorEvent#preventDefault
+    // overrides CUI.rte.EditorEvent#preventDefault
     preventDefault: function() {
         this.nativeEvent.preventDefault();
     },
 
-    // overrides CUI.rte.EdittorEvent#stopPropagation
+    // overrides CUI.rte.EditorEvent#stopPropagation
     stopPropagation: function() {
         this.nativeEvent.stopPropagation();
     },
 
-    // overrides CUI.rte.EdittorEvent#stopEvent
+    // overrides CUI.rte.EditorEvent#stopEvent
     stopEvent: function() {
         this.nativeEvent.stopEvent();
     }

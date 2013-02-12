@@ -60,53 +60,53 @@ CUI.rte.adapter.JQueryEvent = new Class({
         this._init(cfg);
     },
 
-    // overrides CUI.rte.EdittorEvent#isTab
+    // overrides CUI.rte.EditorEvent#isTab
     isTab: function() {
         return (this.charCode == 9);
     },
 
-    // overrides CUI.rte.EdittorEvent#isEnter
+    // overrides CUI.rte.EditorEvent#isEnter
     isEnter: function() {
         return (this.charCode == 13);
     },
 
-    // overrides CUI.rte.EdittorEvent#isSpace
+    // overrides CUI.rte.EditorEvent#isSpace
     isSpace: function() {
         return (this.charCode == 32);
     },
 
-    // overrides CUI.rte.EdittorEvent#isBackSpace
+    // overrides CUI.rte.EditorEvent#isBackSpace
     isBackSpace: function() {
         return (this.charCode == 8);
     },
 
-    // overrides CUI.rte.EdittorEvent#isDelete
+    // overrides CUI.rte.EditorEvent#isDelete
     isDelete: function() {
         return (this.charCode == 46);
     },
 
-     // overrides CUI.rte.EdittorEvent#isCaretKey
+     // overrides CUI.rte.EditorEvent#isCaretKey
     isCaretKey: function() {
         return (this.charCode >= 37) && (this.charCode <= 40);
     },
 
-    // overrides CUI.rte.EdittorEvent#isCaretMovement
+    // overrides CUI.rte.EditorEvent#isCaretMovement
     isCaretMovement: function() {
         return this.isCaretKey()
                 || ((this.charCode >= 33) && (this.charCode <= 36));
     },
 
-    // overrides CUI.rte.EdittorEvent#preventDefault
+    // overrides CUI.rte.EditorEvent#preventDefault
     preventDefault: function() {
         this.nativeEvent.preventDefault();
     },
 
-    // overrides CUI.rte.EdittorEvent#stopPropagation
+    // overrides CUI.rte.EditorEvent#stopPropagation
     stopPropagation: function() {
         this.nativeEvent.stopPropagation();
     },
 
-    // overrides CUI.rte.EdittorEvent#stopEvent
+    // overrides CUI.rte.EditorEvent#stopEvent
     stopEvent: function() {
         this.nativeEvent.preventDefault();
         this.nativeEvent.stopPropagation();

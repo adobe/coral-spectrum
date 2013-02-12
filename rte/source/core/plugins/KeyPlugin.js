@@ -246,6 +246,7 @@ CUI.rte.plugins.KeyPlugin = new Class({
                 } else {
                     sel.setCaretPos(context, caretPos + 1);
                 }
+                // TODO handle scrolling, if required
                 cancelKey = true;
             }
         }
@@ -282,7 +283,7 @@ CUI.rte.plugins.KeyPlugin = new Class({
     /**
      * Handles post-processing required for all browsers. The method is called whenever a
      * key has been pressed.
-     * @param {Object} event The plugin event
+     * @param {Object} e The plugin event
      * @private
      */
     handleKeyUp: function(e) {
