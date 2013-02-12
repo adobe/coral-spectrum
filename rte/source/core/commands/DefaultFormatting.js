@@ -155,6 +155,7 @@ CUI.rte.commands.DefaultFormatting = new Class({
                     } else {
                         if (com.isCharacterNode(startNode) || isPlaceholder) {
                             var textNode;
+                            // handle empty (placeholder) elements
                             if (isPlaceholder) {
                                 var spanNode = ((startNode.nodeType === 3) ?
                                         startNode.parentNode : startNode);
@@ -164,11 +165,25 @@ CUI.rte.commands.DefaultFormatting = new Class({
                                 startOffset = 0;
                                 parentNode = com.getParentNode(context, startNode);
                             }
+                            // split structure at caret and remove old placeholder if
+                            // necessary
                             dpr.splitToParent(parentNode, startNode, startOffset);
                             if (textNode) {
                                 textNode.parentNode.removeChild(textNode);
                             }
+                            // clean up right side if neccessary
+                            var right = parentNode.nextSibling;
+                            if (right && (right.childNodes.length === 0)) {
+                                right.parentNode.removeChild(right);
+                            }
+                            // select behind split point (an empty element will be created
+                            // automatically)
                             sel.selectAfterNode(context, parentNode);
+                            // clean up left side if necessary (AFTER using it as a
+                            // reference for selecting)
+                            if (parentNode.childNodes.length === 0) {
+                                parentNode.parentNode.removeChild(parentNode);
+                            }
                         } else {
                             var tempSpan = dpr.createTempSpan(context, true, false, true);
                             tempSpan.appendChild(context.createTextNode(
