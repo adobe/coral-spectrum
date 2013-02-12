@@ -878,7 +878,12 @@ CUI.rte.EditorKernel = new Class({
                     "selectionchange": function(e) {
                         this.cleanupOnEvent(e);
                     }
-                }, this);
+                }, this, {
+                    // deferred execution required here; interacts strangely otherwise with
+                    // certain keystrokes (inserts two paragraphs when Enter is hit (once)
+                    // on IE >= 9)
+                    buffer: 10
+                });
             }
 
             this.initializeGeckoSpecific();
