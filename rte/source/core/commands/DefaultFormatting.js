@@ -228,8 +228,12 @@ CUI.rte.commands.DefaultFormatting = new Class({
                         sel.selectAfterNode(context, parentNode);
                     } else {
                         // console.log("A.3");
+                        if (placeholderNode) {
+                            startNode = placeholderNode.parentNode;
+                            startOffset = com.getChildIndex(placeholderNode);
+                            placeholderNode.parentNode.removeChild(placeholderNode);
+                        }
                         if (com.isCharacterNode(startNode) && !isPlaceholder) {
-                            // console.log("A.3.1");
                             // split structure at caret
                             this.split(parentNode, startNode, startOffset);
                             this.clean(parentNode, parentNode.nextSibling);
@@ -238,11 +242,6 @@ CUI.rte.commands.DefaultFormatting = new Class({
                             sel.selectAfterNode(context, parentNode);
                         } else {
                             // console.log("A.3.2");
-                            if (placeholderNode) {
-                                startNode = placeholderNode.parentNode;
-                                startOffset = com.getChildIndex(placeholderNode);
-                                placeholderNode.parentNode.removeChild(placeholderNode);
-                            }
                             this.split(existing, startNode, startOffset);
                             ref = existing.nextSibling;
                             var tempSpan = dpr.createTempSpan(context, true, false, true);
