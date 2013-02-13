@@ -229,7 +229,34 @@ CUI.rte.DomCleanup = new Class({
             var emptyOnly = com.arrayContains(splitAttrib, "emptyOnly");
             if (!keepChildren) {
                 if (emptyOnly) {
-                    if (dom.childNodes.length === 0) {
+                    // check for emptiness has to be executed recursively
+                    function checkEmpty(dom) {
+                        if (dom.nodeType === 3) {
+                            return false;
+                        }
+                        var childCnt = dom.childNodes.length;
+                        if (childCnt === 0) {
+                            return true;
+                        }
+                        for (var c = 0; c < childCnt; c++) {
+                            var child = dom.childNodes[c];
+                            var tempAttrib = com.getAttribute(dom, com.TEMP_EL_ATTRIB,
+                                    true);
+                            if (!tempAttrib) {
+                                return false;
+                            }
+                            var splitAttrib = tempAttrib.split(":");
+                            if (com.arrayContains(splitAttrib, "emptyOnly")) {
+                                if (!checkEmpty(child)) {
+                                    return false;
+                                }
+                            } else {
+                                return false;
+                            }
+                        }
+                        return true;
+                    }
+                    if (checkEmpty(dom)) {
                         isValid = false;
                     } else {
                         com.removeAttribute(dom, com.TEMP_EL_ATTRIB);
