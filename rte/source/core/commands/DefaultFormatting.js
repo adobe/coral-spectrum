@@ -111,6 +111,63 @@ CUI.rte.commands.DefaultFormatting = new Class({
     /**
      * @private
      */
+    _clean: function(dom, stopDom) {
+        var dpr = CUI.rte.DomProcessor;
+        do {
+            var parent = dom.parentNode;
+            if ((dom.nodeType !== 1) || (dom.childNodes.length !== 0) ||
+                    (dpr.getTagType(dom) !== dpr.STRUCTURE)) {
+                break;
+            }
+            parent.removeChild(dom);
+            dom = parent;
+        } while (dom !== stopDom);
+    },
+
+    /**
+     * @private
+     */
+    cleanLeft: function(dom) {
+        var deepChild = dom;
+        while (deepChild.firstChild) {
+            deepChild = deepChild.lastChild;
+        }
+        this._clean(deepChild, dom);
+    },
+
+    /**
+     * @private
+     */
+    cleanRight: function(dom) {
+        var deepChild = dom;
+        while (deepChild.firstChild) {
+            deepChild = deepChild.firstChild;
+        }
+        this._clean(deepChild, dom);
+    },
+
+    /**
+     * @private
+     */
+    split: function(splitParent, dom, offset) {
+        CUI.rte.DomProcessor.splitToParent(splitParent, dom, offset);
+    },
+
+    /**
+     * @private
+     */
+    clean: function(domLeft, domRight) {
+        if (domLeft) {
+            this.cleanLeft(domLeft);
+        }
+        if (domRight) {
+            this.cleanRight(domRight);
+        }
+    },
+
+    /**
+     * @private
+     */
     setCaretTo: function(execDef) {
         var com = CUI.rte.Common;
         var sel = CUI.rte.Selection;
@@ -122,13 +179,15 @@ CUI.rte.commands.DefaultFormatting = new Class({
             var startNode = selection.startNode;
             var startOffset = selection.startOffset;
             var isPlaceholder = dpr.isZeroSizePlaceholder(startNode);
+            var placeholderNode;
+            if (isPlaceholder) {
+                placeholderNode = (startNode.nodeType === 3 ? startNode.parentNode :
+                        startNode);
+            }
             var existing = com.getTagInPath(context, startNode, tag);
             if (!existing) {
                 // switch on style
-                var placeholderNode;
-                if (isPlaceholder) {
-                    placeholderNode = (startNode.nodeType === 3 ? startNode.parentNode :
-                            startNode);
+                if (placeholderNode) {
                     startNode = placeholderNode.parentNode;
                     startOffset = com.getChildIndex(placeholderNode);
                 }
@@ -144,6 +203,7 @@ CUI.rte.commands.DefaultFormatting = new Class({
                 // switch off style
                 var path = [ ];
                 var dom = startNode;
+                var ref;
                 while (dom && (dom !== existing)) {
                     if ((dom.nodeType === 1) && !dpr.isZeroSizePlaceholder(dom)) {
                         path.push(dom);
@@ -153,6 +213,7 @@ CUI.rte.commands.DefaultFormatting = new Class({
                 var pathCnt = path.length;
                 var parentNode;
                 if (pathCnt === 0) {
+                    // console.log("A");
                     // switching off current style
                     parentNode = com.getParentNode(context, startNode);
                     if (!isPlaceholder &&
@@ -162,72 +223,59 @@ CUI.rte.commands.DefaultFormatting = new Class({
                             this.isStrucEnd(context, startNode, startOffset)) {
                         sel.selectAfterNode(context, parentNode);
                     } else {
-                        if (com.isCharacterNode(startNode) || isPlaceholder) {
-                            var textNode;
-                            // handle empty (placeholder) elements
-                            if (isPlaceholder) {
-                                var spanNode = ((startNode.nodeType === 3) ?
-                                        startNode.parentNode : startNode);
-                                textNode = spanNode.firstChild;
-                                dpr.removeWithoutChildren(spanNode);
-                                startNode = textNode;
-                                startOffset = 0;
-                                parentNode = com.getParentNode(context, startNode);
-                            }
-                            // split structure at caret and remove old placeholder if
-                            // necessary
-                            dpr.splitToParent(parentNode, startNode, startOffset);
-                            if (textNode) {
-                                textNode.parentNode.removeChild(textNode);
-                            }
-                            // clean up right side if neccessary
-                            var right = parentNode.nextSibling;
-                            if (right && (right.childNodes.length === 0)) {
-                                right.parentNode.removeChild(right);
-                            }
+                        // console.log("A.3");
+                        if (com.isCharacterNode(startNode) && !isPlaceholder) {
+                            // console.log("A.3.1");
+                            // split structure at caret
+                            this.split(parentNode, startNode, startOffset);
+                            this.clean(parentNode, parentNode.nextSibling);
                             // select behind split point (an empty element will be created
                             // automatically)
                             sel.selectAfterNode(context, parentNode);
-                            // clean up left side if necessary (AFTER using it as a
-                            // reference for selecting)
-                            if (parentNode.childNodes.length === 0) {
-                                parentNode.parentNode.removeChild(parentNode);
-                            }
                         } else {
+                            // console.log("A.3.2");
+                            if (placeholderNode) {
+                                startNode = placeholderNode.parentNode;
+                                startOffset = com.getChildIndex(placeholderNode);
+                                placeholderNode.parentNode.removeChild(placeholderNode);
+                            }
+                            this.split(existing, startNode, startOffset);
+                            ref = existing.nextSibling;
                             var tempSpan = dpr.createTempSpan(context, true, false, true);
                             tempSpan.appendChild(context.createTextNode(
                                     dpr.ZERO_WIDTH_NBSP));
-                            startNode.parentNode.insertBefore(tempSpan, startNode);
-                            startNode.parentNode.removeChild(startNode);
+                            existing.parentNode.insertBefore(tempSpan, ref);
+                            this.clean(existing, ref);
                             sel.selectEmptyNode(context, tempSpan);
                         }
                     }
                 } else {
+                    // console.log("B");
                     // switching off a style that's somewhere up in the hierarchy
                     var duplicatedNode;
+                    // create delta style hierarchy
                     for (var p = 0; p < pathCnt; p++) {
-                        var node = path[p].cloneNode(false);
-                        if (parentNode) {
-                            parentNode.appendChild(node);
+                        var cloned = path[p].cloneNode(false);
+                        if (!parentNode) {
+                            duplicatedNode = cloned;
                         } else {
-                            duplicatedNode = node;
+                            parentNode.appendChild(cloned);
                         }
-                        parentNode = node;
+                        parentNode = cloned;
                     }
-                    if (com.isCharacterNode(startNode) && !isPlaceholder) {
-                        dpr.splitToParent(existing, startNode, startOffset);
-                    } else {
-                        var splitIndex = com.getChildIndex(path[0]);
-                        for (p = pathCnt - 1; p >= 0; p--) {
-                            path[p].parentNode.removeChild(path[p]);
-                        }
-                        var splitNode = existing.cloneNode(false);
-                        existing.parentNode.insertBefore(splitNode, existing.nextSibling);
-                        com.moveChildren(existing, splitNode, splitIndex);
+                    // remove placeholder if present
+                    if (placeholderNode) {
+                        startNode = placeholderNode.parentNode;
+                        startOffset = com.getChildIndex(placeholderNode);
+                        placeholderNode.parentNode.removeChild(placeholderNode);
                     }
-                    existing.parentNode.insertBefore(duplicatedNode, existing.nextSibling);
-                    sel.selectEmptyNode(context, com.getFirstChild(duplicatedNode) ||
-                            duplicatedNode);
+                    // split hierarchy and add delta style hierarchy
+                    this.split(existing, startNode, startOffset);
+                    ref = existing.nextSibling;
+                    existing.parentNode.insertBefore(duplicatedNode, ref);
+                    this.clean(existing, ref);
+                    // select the deepest (= last cloned) element of the delta styles
+                    sel.selectEmptyNode(context, cloned);
                 }
             }
             return {

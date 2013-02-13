@@ -2375,13 +2375,12 @@ CUI.rte.Selection = function() {
         selectEmptyNode: function(context, dom) {
             var selection = context.win.getSelection();
             var range = context.doc.createRange();
+            if (!dpr.isZeroSizePlaceholder(dom)) {
+                var tempSpan = dpr.createTempSpan(context, true, false, true);
+                tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
+                dom.appendChild(tempSpan);
+            }
             if (com.ua.isWebKit) {
-                var tempSpan;
-                if (!dpr.isZeroSizePlaceholder(dom)) {
-                    tempSpan = dpr.createTempSpan(context, true, false, true);
-                    tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
-                    dom.appendChild(tempSpan);
-                }
                 range.selectNode(dom);
                 range.collapse(false);
             } else {
