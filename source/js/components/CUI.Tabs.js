@@ -294,7 +294,7 @@ tabs.hide();
 
     // allow for non-id'd section switching
     if ($target.selector === '#') {
-      $target = $tab.parents('.tabs').first().find('section:eq('+$tab.index()+')');
+      $target = $tab.parents('.tabs').first().children('section:eq('+$tab.index()+')');
     }
 
     // test for remote load
