@@ -170,7 +170,7 @@
       // ensure we have the same parent so relative positioning works like a charm.
       // a sad, sad charm.
       if (this.$element.parent().get(0) !== $el.parent().get(0)) {
-        this.$element.detach().after($el);
+        this.$element.detach().insertAfter($el);
       }
 
       // we could probably use more variables here
