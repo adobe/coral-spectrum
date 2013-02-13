@@ -176,6 +176,15 @@ CUI.rte.commands.DefaultFormatting = new Class({
         var com = CUI.rte.Common;
         var sel = CUI.rte.Selection;
         var dpr = CUI.rte.DomProcessor;
+
+        function removePlaceholderIfPresent() {
+            if (placeholderNode) {
+                startNode = placeholderNode.parentNode;
+                startOffset = com.getChildIndex(placeholderNode);
+                placeholderNode.parentNode.removeChild(placeholderNode);
+            }
+        }
+
         var tag = this.getTagNameForCommand(execDef.command);
         if (tag) {
             var context = execDef.editContext;
@@ -228,12 +237,8 @@ CUI.rte.commands.DefaultFormatting = new Class({
                         sel.selectAfterNode(context, parentNode);
                     } else {
                         // console.log("A.3");
-                        if (placeholderNode) {
-                            startNode = placeholderNode.parentNode;
-                            startOffset = com.getChildIndex(placeholderNode);
-                            placeholderNode.parentNode.removeChild(placeholderNode);
-                        }
-                        if (com.isCharacterNode(startNode) && !isPlaceholder) {
+                        removePlaceholderIfPresent();
+                        if (com.isCharacterNode(startNode)) {
                             // split structure at caret
                             this.split(parentNode, startNode, startOffset);
                             this.clean(parentNode, parentNode.nextSibling);
@@ -266,12 +271,7 @@ CUI.rte.commands.DefaultFormatting = new Class({
                         }
                         parentNode = cloned;
                     }
-                    // remove placeholder if present
-                    if (placeholderNode) {
-                        startNode = placeholderNode.parentNode;
-                        startOffset = com.getChildIndex(placeholderNode);
-                        placeholderNode.parentNode.removeChild(placeholderNode);
-                    }
+                    removePlaceholderIfPresent();
                     // split hierarchy and add delta style hierarchy
                     this.split(existing, startNode, startOffset);
                     ref = existing.nextSibling;
