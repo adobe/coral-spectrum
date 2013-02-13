@@ -113,15 +113,19 @@ CUI.rte.commands.DefaultFormatting = new Class({
      */
     _clean: function(dom, stopDom) {
         var dpr = CUI.rte.DomProcessor;
-        do {
+        // ensure that the provided DOM element gets processed as well, even if it is
+        // the same as the "stop" element
+        var isTraversed = false;
+        while (!isTraversed) {
             var parent = dom.parentNode;
             if ((dom.nodeType !== 1) || (dom.childNodes.length !== 0) ||
                     (dpr.getTagType(dom) !== dpr.STRUCTURE)) {
                 break;
             }
             parent.removeChild(dom);
+            isTraversed = (dom === stopDom);
             dom = parent;
-        } while (dom !== stopDom);
+        }
     },
 
     /**
