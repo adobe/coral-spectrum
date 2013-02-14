@@ -52,7 +52,7 @@ CUI.rte.Hooks = new Class({
                     var v = defaults[k];
                     if (v && (typeof(v) === "object") && !CUI.rte.Utils.isArray(v)) {
                         obj[k] = this.applyDefaults(obj[k], v);
-                    } else if (typeof(obj[k] === "undefined")) {
+                    } else if (typeof(obj[k]) === "undefined") {
                         obj[k] = v;
                     }
                 }
