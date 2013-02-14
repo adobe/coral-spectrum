@@ -34,7 +34,7 @@
     <!-- P R O J E C T                                                           -->
     <!-- ======================================================================= -->
     <artifactId>com.adobe.coralui.rte-cq5</artifactId>
-    <version>5.7.0-SNAPSHOT</version>
+    <version>5.6.7-SNAPSHOT</version>
     <packaging>content-package</packaging>
 
     <name>Adobe RTE Core for CQ5</name>
