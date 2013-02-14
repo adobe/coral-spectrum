@@ -14,7 +14,7 @@
         <nav>
           <a href="#" data-toggle="tab" class="active">Tab 1</a>
           <a href="#" data-toggle="tab">Tab 2</a>
-          <a href="/remote.html" data-target="#" data-toggle="tab">Tab 3</a>
+          <a href="../examples/remote.html" data-target="#" data-toggle="tab">Tab 3</a>
           <a href="#" data-toggle="tab" class="disabled">Disabled Tab</a>
         </nav>
         <section class="active">Lorizzle ipsizzle fo shizzle mah nizzle fo rizzle.</section>
@@ -251,6 +251,11 @@ tabs.hide();
         _activateTab($tab, true); // Activate the tab, but don't focus
     }
   });
+  
+  // Utility function to detemine if the user interaction is touch event driven
+  var _isTouch = function() {
+    return ('ontouchstart' in window);
+  };
 
   // Utility function used to make tabs accessible
   var _makeAccessible = function($element) {
@@ -258,19 +263,56 @@ tabs.hide();
       // Nav tab list
       .children('nav')
       .attr('role', 'tablist')
-      
-      // All tabs
-      .children('a[data-toggle="tab"]')
-      .attr('role', 'tab')
-      
-      // Disabled tabs
-      .filter('.disabled')
-      .attr('aria-disabled', true);
-      
-    $element
-      // Tab panels
-      .children('section')
-      .attr('role', 'tabpanel');
+	  .each(function(index) {
+		    var $tablist = $(this), 
+			    tablist_id = $tablist.attr('id');
+			
+			if (!tablist_id) {
+			  $tablist.data('init','tablist');
+			  tablist_id = 'tablist-'+$.expando+'-'+this[$.expando];
+			  $tablist.attr('id', tablist_id);
+			}
+			
+			$tablist
+			  // All tabs
+			  .children('a[data-toggle="tab"]')
+			  .attr('role', 'tab')
+			  .attr('tabindex', -1)
+			  .each(function(index) {
+				    var $tab = $(this),
+					    tab_id = $tab.attr('id');
+					if (!tab_id) {
+					  tab_id = tablist_id + "-tab-" + index;
+					  $tab.attr('id', tab_id);
+					}
+					
+					var $tabpanel = $element
+						  // Tab panel
+						  .children('section:eq('+index+')')
+						  .attr('role', 'tabpanel'),
+						tabpanel_id = $tabpanel.attr('id');
+					if (!tabpanel_id) {
+					  tabpanel_id = tablist_id + "-tabpanel-" + index;
+					  $tabpanel.attr('id', tabpanel_id);
+					}
+					$tab.attr('aria-controls', tabpanel_id)
+						.attr('data-target', '#'+tabpanel_id);
+					if ($tab.attr('href')==='#') {
+						$tab.attr('href','#'+tabpanel_id);
+					}
+					$tabpanel.attr('aria-describedby', tab_id);
+					
+					if ($tab.hasClass('active')) {
+					  $tab.attr('tabindex', 0)
+					    .attr('aria-selected', true);
+					  $tabpanel.addClass('active')
+					    .removeAttr('hidden');
+					}
+					if ($tab.hasClass('disabled')) {
+					  $tab.attr('aria-disabled', true);
+					}
+				  });
+		  });
   };
   
   // utility function used both in the event handler and the class proper
@@ -308,24 +350,26 @@ tabs.hide();
     $tab
       .addClass('active')
       .attr('aria-selected', true)
-      .attr('tabIndex', 0); // only the active tab should be in the tab order
+      .attr('tabindex', 0); // only the active tab should be in the tab order
     
     // Inactive tabs
     $tab.siblings('a[data-toggle="tab"]')
       // Set as inactive
       .removeClass('active')
+	  .removeClass('focus')
       .attr('aria-selected', false)
-      .attr('tabIndex', -1); // remove siblings from tab order
+      .attr('tabindex', -1); // remove siblings from tab order
     
     // Active tab panel
     $target
       .addClass('active')
-      .attr('hidden', false);
+      .removeAttr('hidden');
     
     // Inactive tab panels
     $target.siblings('section')
       .removeClass('active')
-      .attr('hidden', true);
+	  .removeClass('focus')
+      .attr('hidden', 'hidden');
 
     // Focus on the active tab
     if (!noFocus)
@@ -364,10 +408,14 @@ tabs.hide();
 
       // Data API
       $('body').fipo('tap.tabs.data-api', 'click.tabs.data-api', '.tabs > nav > a[data-toggle="tab"]', function (e) {
-        var $tab = $(this);
+        var $tab = $(this),
+		    $target = $('#'+$tab.attr('aria-controls'));
+
+        $tab.removeClass('focus');
+        $target.removeClass('focus');
 
         // and show/hide the relevant tabs
-        _activateTab($tab);
+        _activateTab($tab, (this === document.activeElement));
 
         if (e.type === 'click') {
           // Stop links from navigating
@@ -386,6 +434,16 @@ tabs.hide();
         We listen for a focus first and apply the handler to the tabs div itself to avoid binding a keydown event on the body.
       */
       $('body').on('focus.tabs.data-api', '.tabs > nav > a[data-toggle="tab"]', function(top_e) {
+		var $tab =  $(this),
+		    $target = $('#'+$tab.attr('aria-controls'));
+
+		if (!_isTouch() && !$tab.data('mousedown')) {
+		  $tab.addClass('focus').siblings('a[data-toggle="tab"]').removeClass('focus');
+		  $target.addClass('focus').siblings('section').removeClass('focus');
+		} else {
+		  $tab.removeData('mousedown');
+		}
+
         $(this).parents('.tabs').pointer('keydown.tabs.data-api', 'nav > a[data-toggle="tab"]', function (e) {
           var $tab = $(this), key = e.which;
           
@@ -421,7 +479,15 @@ tabs.hide();
             e.preventDefault();
           }
         });
-      });
+      }).on('blur.tabs.data-api', '.tabs > nav > a[data-toggle="tab"]',function(e) {
+        var $tab =  $(this),
+		    $target = $('#'+$tab.attr('aria-controls'));
+		
+		$tab.removeClass('focus');
+		$target.removeClass('focus');
+	  }).on('mousedown.tabs.data-api', '.tabs > nav > a[data-toggle="tab"]',function(e) {
+        $(this).data('mousedown',true);
+	  });
     });
   }
 }(window.jQuery));
