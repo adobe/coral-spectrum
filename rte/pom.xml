@@ -34,7 +34,7 @@
     <!-- P R O J E C T                                                           -->
     <!-- ======================================================================= -->
     <artifactId>com.adobe.coralui.rte-cq5</artifactId>
-    <version>5.6.8</version>
+    <version>5.6.9-SNAPSHOT</version>
     <packaging>content-package</packaging>
 
     <name>Adobe RTE Core for CQ5</name>
@@ -47,7 +47,7 @@
         <connection>scm:git:git@git.corp.adobe.com:Reef/CoralUI.git</connection>
         <developerConnection>scm:git:git@git.corp.adobe.com:Reef/CoralUI.git</developerConnection>
         <url>https://git.corp.adobe.com/Reef/CoralUI/master/rte</url>
-        <tag>com.adobe.coralui.rte-cq5-5.6.8</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <properties>
