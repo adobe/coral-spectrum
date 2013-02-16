@@ -21,6 +21,9 @@ module.exports = function(grunt) {
       // Persistence
       'CUI.Util.state.js',
 
+      // Touch
+      'CUI.Util.isTouch.js',
+
       // Components
       'components/CUI.Widget.js',
       'components/CUI.Modal.js',

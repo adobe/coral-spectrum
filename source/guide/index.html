@@ -1330,35 +1330,96 @@
 
                     <div class="componentSample">
                         <div class="example clearfix">
-                            <div class="slider" data-init="slider">
-                                <input type="range" value="14" min="10" max="20" step="2">
+                            <div class="sliderSample">
+                                <div class="slider" data-init="slider">
+                                    <label>
+                                        Horizontal Slider
+                                        <input type="range" value="14" min="10" max="20" step="2">
+                                    </label>
+                                </div>
                             </div>
-                            <div class="slider ticked filled" data-init="slider">
-                                <input type="range" value="14" min="10" max="20" step="2">
+                            <div class="sliderSample">
+                                <div class="slider ticked filled" data-init="slider">
+                                    <label>
+                                        Ticked and Filled Horizontal Slider
+                                        <input id="hslider1" type="range" value="14" min="10" max="20" step="2">
+                                    </label>
+                                </div>
                             </div>
-                            <div class="slider ticked filled tooltips" data-init="slider">
-                                <input type="range" value="14" min="10" max="20" step="2">
-                                <input type="range" value="16" min="10" max="20" step="2">
+                            <br><br> <!-- Some space for tooltips -->
+                            <div class="sliderSample">
+                                <div class="slider ticked filled tooltips" data-init="slider">
+                                   <fieldset>
+                                       <legend>Horizontal Range Slider with Tooltips</legend>
+                                       <label>Minimum value <input type="range" value="14" min="10" max="20" step="2"></label>
+                                       <label>Maximum value <input type="range" value="16" min="10" max="20" step="2"></label>
+                                   </fieldset>
+                                </div>
                             </div>
-                            <div class="slider ticked filled" data-init="slider">
-                                <input type="range" value="14" min="10" max="20" step="2" disabled>
-                                <input type="range" value="16" min="10" max="20" step="2" disabled>
+                            <div class="sliderSample">
+                                <div class="slider filled bound" data-init="slider">
+                                   <fieldset>
+                                       <legend>Bound Horizontal Range Slider</legend>
+                                       <label>Minimum value <input type="range" value="40"></label>
+                                       <label>Maximum value <input type="range" value="60"></label>
+                                   </fieldset>
+                                </div>
+                            </div>
+                            <div class="sliderSample">
+                                <div class="slider ticked filled" data-init="slider">
+                                   <fieldset>
+                                       <legend>Disabled Horizontal Range Slider</legend>
+                                       <label>Minimum value <input type="range" value="14" min="10" max="20" step="2" disabled></label>
+                                       <label>Maximum value <input type="range" value="16" min="10" max="20" step="2" disabled></label>
+                                   </fieldset>
+                                </div>
                             </div>
                         </div>
                         <pre class="prettyprint linenums">
+&lt;!-- Standard Horizontal Slider --&gt;
 &lt;div class=&quot;slider&quot; data-init=&quot;slider&quot;&gt;
-    &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+    &lt;!-- Each input must have a label to identify the value a slider controls. 
+         The label tag can wrap the slider. --&gt;
+    &lt;label&gt;
+        Horizontal Slider 
+        &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+    &lt;/label&gt;
 &lt;/div&gt;
+
+&lt;!-- Ticked and Filled Horizontal Slider --&gt;
 &lt;div class=&quot;slider ticked filled&quot; data-init=&quot;slider&quot;&gt;
-    &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+    &lt;!-- The label can also be associated with its input by using the &quot;for&quot; attribute to identify the input by id. --&gt;
+    &lt;label for=&quot;hslider1&quot;&gt;Ticked and Filled Horizontal Slider&lt;/label&gt;
+    &lt;input id=&quot;hslider1&quot; type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
 &lt;/div&gt;
-&lt;div class=&quot;slider ticked filled&quot; data-init=&quot;slider&quot;&gt;
-    &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
-    &lt;input type=&quot;range&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
-&lt;/div&gt;
+
+&lt;!-- Horizontal Range Slider with Tooltips --&gt;
 &lt;div class=&quot;slider ticked filled tooltips&quot; data-init=&quot;slider&quot;&gt;
-    &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;
-    &lt;input type=&quot;range&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;
+    &lt;!-- Multi-thumb sliders should be contained within a fieldset and labelled with a legend. 
+         Each input element within the fieldset must also have a label to identify which value the input changes. --&gt;
+   &lt;fieldset&gt;
+       &lt;legend&gt;Horizontal Range Slider with Tooltips&lt;/legend&gt;
+       &lt;label&gt;Minimum value &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;&lt;/label&gt;
+       &lt;label&gt;Maximum value &lt;input type=&quot;range&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;&lt;/label&gt;
+   &lt;/fieldset&gt;
+&lt;/div&gt;
+
+&lt;!-- Bound Horizontal Range Slider --&gt;
+&lt;div class=&quot;slider filled bound&quot; data-init=&quot;slider&quot;&gt;
+   &lt;fieldset&gt;
+       &lt;legend&gt;Bound Horizontal Range Slider&lt;/legend&gt;
+       &lt;label&gt;Minimum value &lt;input type=&quot;range&quot; value=&quot;40&quot;&gt;&lt;/label&gt;
+       &lt;label&gt;Maximum value &lt;input type=&quot;range&quot; value=&quot;60&quot;&gt;&lt;/label&gt;
+   &lt;/fieldset&gt;
+&lt;/div&gt;
+
+&lt;!-- Disabled Horizontal Range Slider --&gt;
+&lt;div class=&quot;slider ticked filled&quot; data-init=&quot;slider&quot;&gt;
+   &lt;fieldset&gt;
+       &lt;legend&gt;Disabled Horizontal Range Slider&lt;/legend&gt;
+       &lt;label&gt;Minimum value &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;&lt;/label&gt;
+       &lt;label&gt;Maximum value &lt;input type=&quot;range&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;&lt;/label&gt;
+   &lt;/fieldset&gt;
 &lt;/div&gt;
 </pre>
                     </div>
@@ -1367,39 +1428,93 @@
 
                     <div class="componentSample">
                         <div class="example clearfix">
-                            <div class="left">
+                            <div class="sliderSample left">
                                 <div class="slider vertical" data-init="slider">
-                                    <input type="range" value="14" min="10" max="20" step="2">
-                                </div>
-                                <div class="slider vertical ticked filled" data-init="slider">
-                                    <input type="range" value="14" min="10" max="20" step="2">
+                                    <label>
+                                        Vertical Slider
+                                        <input id="vslider0" type="range" value="14" min="10" max="20" step="2">
+                                    </label>
                                 </div>
                             </div>
-                            <div class="left">
-                                <div class="slider vertical ticked filled tooltips" data-init="slider">
-                                    <input type="range" value="14" min="10" max="20" step="2">
-                                    <input type="range" value="16" min="10" max="20" step="2">
-                                </div>
+                            <div class="sliderSample left">
                                 <div class="slider vertical ticked filled" data-init="slider">
-                                    <input type="range" value="14" min="10" max="20" step="2" disabled>
-                                    <input type="range" value="16" min="10" max="20" step="2" disabled>
+                                    <label for="vslider1">Ticked and Filled Vertical Slider</label>
+                                    <input id="vslider1" type="range" value="14" min="10" max="20" step="2">
+                                </div>
+                            </div>
+                            <div class="sliderSample left">
+                                <div class="slider vertical ticked filled tooltips" data-init="slider">
+                                    <fieldset>
+                                       <legend>Vertical Range Slider with Tooltips</legend>
+                                       <label>Minimum value <input type="range" value="14" min="10" max="20" step="2" ></label>
+                                       <label>Maximum value <input type="range" value="16" min="10" max="20" step="2" ></label>
+                                   </fieldset>
+                                </div>
+                            </div>
+                            <div class="sliderSample left">
+                                <div class="slider vertical filled bound" data-init="slider">
+                                    <fieldset>
+                                       <legend>Vertical Bound Range Slider</legend>
+                                       <label>Minimum value <input type="range" value="40"></label>
+                                       <label>Maximum value <input type="range" value="60"></label>
+                                   </fieldset>
+                                </div>
+                            </div>
+                            <div class="sliderSample left">
+                                <div class="slider vertical ticked filled" data-init="slider">
+                                   <fieldset>
+                                       <legend>Disabled Vertical Range Slider</legend>
+                                       <label>Minimum value <input type="range" value="14" min="10" max="20" step="2" disabled></label>
+                                       <label>Maximum value <input type="range" value="16" min="10" max="20" step="2" disabled></label>
+                                   </fieldset>
                                 </div>
                             </div>
                         </div>
                         <pre class="prettyprint linenums">
+&lt;!-- Standard Vertical Slider --&gt;
 &lt;div class=&quot;slider vertical&quot; data-init=&quot;slider&quot;&gt;
-    &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+    &lt;!-- Each input must have a label to identify the value a slider controls. 
+         The label tag can wrap the slider. --&gt;
+    &lt;label&gt;
+        Vertical Slider
+        &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+    &lt;/label&gt;
 &lt;/div&gt;
+
+&lt;!-- Ticked and Filled Vertical Slider --&gt;
 &lt;div class=&quot;slider vertical ticked filled&quot; data-init=&quot;slider&quot;&gt;
-    &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+    &lt;!-- The label can also be associated with its input by using the &quot;for&quot; attribute to identify the input by id. --&gt;
+    &lt;label for=&quot;vslider1&quot;&gt;Ticked and Filled Vertical Slider&lt;/label&gt;
+    &lt;input id=&quot;vslider1&quot; type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
 &lt;/div&gt;
+
+&lt;!-- Vertical Range Slider with Tooltips --&gt;
 &lt;div class=&quot;slider vertical ticked filled tooltips&quot; data-init=&quot;slider&quot;&gt;
-    &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
-    &lt;input type=&quot;range&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
+    &lt;!-- Multi-thumb sliders should be contained within a fieldset and labelled with a legend. 
+         Each input element within the fieldset must also have a label to identify which value the input changes. --&gt;
+    &lt;fieldset&gt;
+       &lt;legend&gt;Vertical Range Slider with Tooltips&lt;/legend&gt;
+       &lt;label&gt;Minimum value &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; &gt;&lt;/label&gt;
+       &lt;label&gt;Maximum value &lt;input type=&quot;range&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; &gt;&lt;/label&gt;
+   &lt;/fieldset&gt;
 &lt;/div&gt;
+
+&lt;!-- Bound Vertical Range Slider --&gt;
+&lt;div class=&quot;slider vertical filled bound&quot; data-init=&quot;slider&quot;&gt;
+    &lt;fieldset&gt;
+       &lt;legend&gt;Vertical Bound Range Slider&lt;/legend&gt;
+       &lt;label&gt;Minimum value &lt;input type=&quot;range&quot; value=&quot;40&quot;&gt;&lt;/label&gt;
+       &lt;label&gt;Maximum value &lt;input type=&quot;range&quot; value=&quot;60&quot;&gt;&lt;/label&gt;
+   &lt;/fieldset&gt;
+&lt;/div&gt;
+
+&lt;!-- Disabled Vertical Range Slider --&gt;
 &lt;div class=&quot;slider vertical ticked filled&quot; data-init=&quot;slider&quot;&gt;
-    &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;
-    &lt;input type=&quot;range&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;
+   &lt;fieldset&gt;
+       &lt;legend&gt;Disabled Vertical Range Slider&lt;/legend&gt;
+       &lt;label&gt;Minimum value &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;&lt;/label&gt;
+       &lt;label&gt;Maximum value &lt;input type=&quot;range&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;&lt;/label&gt;
+   &lt;/fieldset&gt;
 &lt;/div&gt;
 </pre>
                     </div>
