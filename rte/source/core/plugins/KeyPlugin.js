@@ -246,6 +246,7 @@ CUI.rte.plugins.KeyPlugin = new Class({
                 } else {
                     sel.setCaretPos(context, caretPos + 1);
                 }
+                // TODO handle scrolling, if required
                 cancelKey = true;
             }
         }
@@ -282,7 +283,7 @@ CUI.rte.plugins.KeyPlugin = new Class({
     /**
      * Handles post-processing required for all browsers. The method is called whenever a
      * key has been pressed.
-     * @param {Object} event The plugin event
+     * @param {Object} e The plugin event
      * @private
      */
     handleKeyUp: function(e) {
@@ -296,6 +297,11 @@ CUI.rte.plugins.KeyPlugin = new Class({
         // handle Gecko/Webkit <br>-placeholders
         if (com.ua.isGecko || com.ua.isWebKit) {
             this.handleBRPlaceholders(context);
+        }
+
+        // handle Webkit adding spans deliberately
+        if (com.ua.isWebKit) {
+            this.handleJunkSpans(context);
         }
 
         // handle IE autolinks if necessary
@@ -459,6 +465,29 @@ CUI.rte.plugins.KeyPlugin = new Class({
         }
     },
 
+    /**
+     * <p>Handles spans that get inserted deliberately by Webkit.</p>
+     * <p>This is for example the case if the user deletes the final character of a
+     * sub-/superscripted fragment and then directly adds another character.</p>
+     * @param {CUI.rte.EditContext} context The edit context
+     */
+    handleJunkSpans: function(context) {
+        var com = CUI.rte.Common;
+        var selection = this.editorKernel.createQualifiedSelection(context);
+        if (!selection.isSelection) {
+            var toCheck = selection.startNode;
+            toCheck = (toCheck.nodeType === 3 ? com.getParentNode(context, toCheck)
+                    : toCheck);
+            if (com.isTag(toCheck, "span")) {
+                var styleAttrib = com.getAttribute(toCheck, "style", true);
+                if (styleAttrib) {
+                    if (styleAttrib.indexOf("font-size") >= 0) {
+                        CUI.rte.DomProcessor.removeWithoutChildren(toCheck);
+                    }
+                }
+            }
+        }
+    },
 
     notifyPluginConfig: function(pluginConfig) {
         pluginConfig = pluginConfig || { };

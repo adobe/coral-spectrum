@@ -2443,7 +2443,6 @@ CUI.rte.Common = function() {
          */
         getOuterHTML: function(context, dom) {
             var com = CUI.rte.Common;
-
             if (com.ua.isIE) {
                 return dom.outerHTML;
             }
@@ -2708,6 +2707,23 @@ CUI.rte.Common = function() {
          * Helper attribute for images that are used as placeholders for named anchors
          */
         A_NAME_REPLACEMENT_ATTRIB: "_rte_a_name_repl",
+
+        /**
+         * Attribute for elements that are only used temporarily
+         */
+        TEMP_EL_ATTRIB: "_rte_temp_el",
+
+        /**
+         * Attribute value ({@see #TEMP_EL_ATTRIB} for a temporary element that should be
+         * removed "immediately" after a selection changes
+         */
+        TEMP_EL_IMMEDIATE_REMOVAL: "immediate",
+
+        /**
+         * Attribute value ({@see #TEMP_EL_ATTRIB} for a temporary element that should be
+         * removed when the DOM gets serialized
+         */
+        TEMP_EL_REMOVE_ON_SERIALIZE: "serialize",
 
         /**
          * Array of tags that are defining a table cell

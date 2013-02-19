@@ -73,11 +73,9 @@ CUI.rte.plugins.SubSuperScriptPlugin = new Class({
         var hasSubscript = this.editorKernel.queryState("subscript", selDef);
         var hasSuperscript = this.editorKernel.queryState("superscript", selDef);
         if (this.subscriptUI != null) {
-            this.subscriptUI.setDisabled(!selDef.isSelection);
             this.subscriptUI.setSelected(hasSubscript);
         }
         if (this.superscriptUI != null) {
-            this.superscriptUI.setDisabled(!selDef.isSelection);
             this.superscriptUI.setSelected(hasSuperscript);
         }
     },

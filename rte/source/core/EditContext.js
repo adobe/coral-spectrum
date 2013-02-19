@@ -54,11 +54,18 @@ CUI.rte.EditContext = new Class({
      */
     root: null,
 
+    /**
+     * @private
+     * @type Object
+     */
+    state: null,
+
     construct: function(iFrame, win, doc, root) {
         this.iFrame = iFrame;
         this.win = win;
         this.doc = doc;
         this.root = root;
+        this.state = { };
     },
 
     /**
@@ -85,6 +92,41 @@ CUI.rte.EditContext = new Class({
      */
     isInitialized: function() {
         return (this.win != null) && (this.doc != null) && (this.root != null);
+    },
+
+    /**
+     * Sets a certain context state.
+     * @param {String} name The state's name
+     * @param {Object} value The value
+     * @since 5.6.1
+     */
+    setState: function(name, value) {
+        this.state[name] = value;
+    },
+
+    /**
+     * Gets a certain context state.
+     * @param {String} name The state's name
+     * @return {Object} The value; undefined if no value for the specified state is supplied
+     * @since 5.6.1
+     */
+    getState: function(name) {
+        var value = undefined;
+        if (this.state.hasOwnProperty(name)) {
+            value = this.state[name];
+        }
+        return value;
+    },
+
+    /**
+     * Removes the specified context state.
+     * @param {String} name The name of the state to be removed
+     * @since 5.6.1
+     */
+    removeState: function(name) {
+        if (this.state.hasOwnProperty(name)) {
+            delete this.state[name];
+        }
     }
 
 });
