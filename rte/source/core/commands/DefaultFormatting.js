@@ -207,8 +207,8 @@ CUI.rte.commands.DefaultFormatting = new Class({
                 var el = context.createElement(tag);
                 com.setAttribute(el, com.TEMP_EL_ATTRIB, com.TEMP_EL_REMOVE_ON_SERIALIZE
                         + ":emptyOnly");
-                CUI.rte.DomProcessor.insertElement(context, el, startNode, startOffset);
-                CUI.rte.Selection.selectEmptyNode(context, el);
+                dpr.insertElement(context, el, startNode, startOffset);
+                sel.selectEmptyNode(context, el);
                 if (placeholderNode) {
                     placeholderNode.parentNode.removeChild(placeholderNode);
                 }

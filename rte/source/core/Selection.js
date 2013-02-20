@@ -2292,8 +2292,9 @@ CUI.rte.Selection = function() {
                 if (com.ua.isW3cIE) {
                     // on IE >= 9, the start of a text node is actually handled as the end
                     // of the // previous text node (if applicable) - handle this as well
-                    if (startNode && (startNode.nodeType === 3) && (startOffset === 0)) {
-                         var prevCharNode = com.getPreviousCharacterNode(context, startNode,
+                    if (startNode && (startNode.nodeType === 3) && (startOffset === 0) &&
+                            !dpr.isZeroSizePlaceholder(startNode)) {
+                        var prevCharNode = com.getPreviousCharacterNode(context, startNode,
                                 com.EDITBLOCK_TAGS);
                         if (prevCharNode && !com.isOneCharacterNode(prevCharNode)) {
                             startNode = prevCharNode;
