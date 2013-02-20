@@ -1272,7 +1272,7 @@ CUI.rte.Selection = function() {
                         elOffset = textLen - offs;
                         // the start of a text node is actually handled as the end of the
                         // previous text node (if applicable) - handle this as well
-                        if (elOffset == 0) {
+                        if (elOffset === 0) {
                              prevCharNode = com.getPreviousCharacterNode(context, elNode,
                                     com.EDITBLOCK_TAGS);
                             if (prevCharNode && !com.isOneCharacterNode(prevCharNode)) {
@@ -2288,6 +2288,18 @@ CUI.rte.Selection = function() {
                 }
             }
             if (isCollapsed) {
+                if (com.ua.isW3cIE) {
+                    // on IE >= 9, the start of a text node is actually handled as the end
+                    // of the // previous text node (if applicable) - handle this as well
+                    if (startOffset === 0) {
+                         var prevCharNode = com.getPreviousCharacterNode(context, startNode,
+                                com.EDITBLOCK_TAGS);
+                        if (prevCharNode && !com.isOneCharacterNode(prevCharNode)) {
+                            startNode = prevCharNode;
+                            startOffset = com.getNodeCharacterCnt(startNode);
+                        }
+                    }
+                }
                 return {
                     "startNode": startNode,
                     "startOffset": startOffset,
