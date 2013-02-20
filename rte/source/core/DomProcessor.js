@@ -1793,10 +1793,10 @@ CUI.rte.DomProcessor = function() {
                     : com.TEMP_EL_REMOVE_ON_SERIALIZE);
             // on Webkit browsers, the selection may indirectly change,
             // so ensure that it is the same after the clean up again
-            var selection = context.win.getSelection();
             var hasSelectionChanged = false;
-            var restoreNode, restoreOffset;
+            var selection, restoreNode, restoreOffset;
             if (com.ua.isWebKit) {
+                selection = context.win.getSelection();
                 restoreNode = selection.anchorNode;
                 restoreOffset = selection.anchorOffset;
             }

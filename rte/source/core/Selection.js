@@ -1266,14 +1266,15 @@ CUI.rte.Selection = function() {
                 var offs = 0;
                 for (childIndex = nodeRef; childIndex < childCnt; childIndex++) {
                     childToCheck = node.childNodes[childIndex];
-                    var childLen = com.getNodeTextLength(childToCheck);
+                    var childLen = (com.isTag(childToCheck, "br")
+                            ? 0 : com.getNodeTextLength(childToCheck));
                     if ((offs + childLen) > textLen) {
                         elNode = childToCheck;
                         elOffset = textLen - offs;
                         // the start of a text node is actually handled as the end of the
                         // previous text node (if applicable) - handle this as well
-                        if (elOffset === 0) {
-                             prevCharNode = com.getPreviousCharacterNode(context, elNode,
+                        if ((elNode.nodeType === 3) && (elOffset === 0)) {
+                            prevCharNode = com.getPreviousCharacterNode(context, elNode,
                                     com.EDITBLOCK_TAGS);
                             if (prevCharNode && !com.isOneCharacterNode(prevCharNode)) {
                                 elNode = prevCharNode;
@@ -2291,7 +2292,7 @@ CUI.rte.Selection = function() {
                 if (com.ua.isW3cIE) {
                     // on IE >= 9, the start of a text node is actually handled as the end
                     // of the // previous text node (if applicable) - handle this as well
-                    if (startNode && (startOffset === 0)) {
+                    if (startNode && (startNode.nodeType === 3) && (startOffset === 0)) {
                          var prevCharNode = com.getPreviousCharacterNode(context, startNode,
                                 com.EDITBLOCK_TAGS);
                         if (prevCharNode && !com.isOneCharacterNode(prevCharNode)) {
@@ -2406,20 +2407,16 @@ CUI.rte.Selection = function() {
         selectBeforeNode: function(context, dom) {
             var selection = context.win.getSelection();
             var range = context.doc.createRange();
-            // Gecko is more reliable if the last character of the preceding character node
-            // is selected instead of using setXxxBefore
-            var isSelected = false;
-            if (com.ua.isGecko) {
-                var prevNode = com.getPreviousCharacterNode(context, dom,
-                        com.EDITBLOCK_TAGS);
-                if (prevNode && !com.isOneCharacterNode(prevNode)) {
-                    var charCnt = prevNode.nodeValue.length;
-                    range.setStart(prevNode, charCnt);
-                    range.setEnd(prevNode, charCnt);
-                    isSelected = true;
-                }
-            }
-            if (!isSelected) {
+            // add a temporary node and select behind that one instead - this makes
+            // it more stable and easier to handle
+            var tempSpan = dpr.createTempSpan(context, true, false, true);
+            tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
+            dom.parentNode.insertBefore(tempSpan, dom);
+            dom = tempSpan;
+            if (com.ua.isWebKit) {
+                range.setStartAfter(dom);
+                range.setEndAfter(dom);
+            } else {
                 range.setStartBefore(dom);
                 range.setEndBefore(dom);
             }
