@@ -226,7 +226,6 @@ CUI.rte.commands.DefaultFormatting = new Class({
                 var pathCnt = path.length;
                 var parentNode;
                 if (pathCnt === 0) {
-                    // console.log("A");
                     // switching off current style
                     parentNode = com.getParentNode(context, startNode);
                     if (!isPlaceholder &&
@@ -236,7 +235,6 @@ CUI.rte.commands.DefaultFormatting = new Class({
                             this.isStrucEnd(context, startNode, startOffset)) {
                         sel.selectAfterNode(context, parentNode);
                     } else {
-                        // console.log("A.3");
                         removePlaceholderIfPresent();
                         if (com.isCharacterNode(startNode)) {
                             // split structure at caret
@@ -246,7 +244,6 @@ CUI.rte.commands.DefaultFormatting = new Class({
                             // automatically)
                             sel.selectAfterNode(context, parentNode);
                         } else {
-                            // console.log("A.3.2");
                             this.split(existing, startNode, startOffset);
                             ref = existing.nextSibling;
                             var tempSpan = dpr.createTempSpan(context, true, false, true);
@@ -258,11 +255,10 @@ CUI.rte.commands.DefaultFormatting = new Class({
                         }
                     }
                 } else {
-                    // console.log("B");
                     // switching off a style that's somewhere up in the hierarchy
                     var duplicatedNode;
                     // create delta style hierarchy
-                    for (var p = 0; p < pathCnt; p++) {
+                    for (var p = pathCnt - 1; p >= 0; p--) {
                         var cloned = path[p].cloneNode(false);
                         if (!parentNode) {
                             duplicatedNode = cloned;
