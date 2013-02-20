@@ -2266,7 +2266,7 @@ CUI.rte.Selection = function() {
             endOffset = selection.focusOffset;
             var isCollapsed = (startNode == endNode) && (startOffset == endOffset);
             var childCnt;
-            // startNode might be null, so it's better to check that first
+            // startNode might be null, so it's better to check for that first
             if (startNode
                     && !com.isOneCharacterNode(startNode) && (startNode.nodeType == 1)) {
                 childCnt = startNode.childNodes.length;
@@ -2291,7 +2291,7 @@ CUI.rte.Selection = function() {
                 if (com.ua.isW3cIE) {
                     // on IE >= 9, the start of a text node is actually handled as the end
                     // of the // previous text node (if applicable) - handle this as well
-                    if (startOffset === 0) {
+                    if (startNode && (startOffset === 0)) {
                          var prevCharNode = com.getPreviousCharacterNode(context, startNode,
                                 com.EDITBLOCK_TAGS);
                         if (prevCharNode && !com.isOneCharacterNode(prevCharNode)) {
