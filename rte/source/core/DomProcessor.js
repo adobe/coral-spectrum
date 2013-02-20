@@ -1791,6 +1791,15 @@ CUI.rte.DomProcessor = function() {
             var spanCnt = spans.length;
             var value = (immediate ? com.TEMP_EL_IMMEDIATE_REMOVAL
                     : com.TEMP_EL_REMOVE_ON_SERIALIZE);
+            // on Webkit browsers, the selection may indirectly change,
+            // so ensure that it is the same after the clean up again
+            var selection = context.win.getSelection();
+            var hasSelectionChanged = false;
+            var restoreNode, restoreOffset;
+            if (com.ua.isWebKit) {
+                restoreNode = selection.anchorNode;
+                restoreOffset = selection.anchorOffset;
+            }
             for (var s = 0; s < spanCnt; s++) {
                 var spanToRemove = spans[s];
                 var attrValue = com.getAttribute(spanToRemove, com.TEMP_EL_ATTRIB, true);
@@ -1805,8 +1814,24 @@ CUI.rte.DomProcessor = function() {
                             function cleanUp(dom) {
                                 if (dom.nodeType === 3) {
                                     var text = dom.nodeValue;
-                                    var regEx = new RegExp(dpr.ZERO_WIDTH_NBSP, "gi");
-                                    dom.nodeValue = text.replace(regEx, "");
+                                    var isReplaced = false;
+                                    var znbspPos;
+                                    do {
+                                        znbspPos = text.indexOf(dpr.ZERO_WIDTH_NBSP);
+                                        if (znbspPos >= 0) {
+                                            text = com.strReplace(text, znbspPos, znbspPos,
+                                                "");
+                                            if (com.ua.isWebKit && (dom === restoreNode)
+                                                    && (znbspPos < restoreOffset)) {
+                                                restoreOffset--;
+                                                hasSelectionChanged = true;
+                                            }
+                                            isReplaced = true;
+                                        }
+                                    } while (znbspPos >= 0);
+                                    if (isReplaced) {
+                                        dom.nodeValue = text;
+                                    }
                                 } else if (dom.nodeType === 1) {
                                     var childCnt = dom.childNodes.length;
                                     for (var c = 0; c < childCnt; c++) {
@@ -1821,6 +1846,12 @@ CUI.rte.DomProcessor = function() {
                         }
                     }
                 }
+            }
+            if (com.ua.isWebKit && hasSelectionChanged) {
+                var range = context.doc.createRange();
+                range.setStart(restoreNode, restoreOffset);
+                selection.removeAllRanges();
+                selection.addRange(range);
             }
         },
 
