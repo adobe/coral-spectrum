@@ -1089,6 +1089,47 @@ CUI.rte.DomCleanup = new Class({
     // -- Processing -----------------------------------------------------------------------
 
     /**
+     * Optimize the tree (executes operations that can't be efficiently processed
+     * in the event-driven manner the DomCleanup else works).
+     * @param {HTMLElement} root The root element
+     */
+    optimizeTree: function(root) {
+
+        var com = CUI.rte.Common;
+
+        function optimizeNode(dom, joinableTags) {
+            if (com.isTag(dom, joinableTags)) {
+                var isDone = false;
+                do {
+                    var nextDom = dom.nextSibling;
+                    if (nextDom) {
+                        if (com.equals(dom, nextDom)) {
+                            com.moveChildren(nextDom, dom, 0, true);
+                            nextDom.parentNode.removeChild(nextDom);
+                        } else {
+                            isDone = true;
+                        }
+                    } else {
+                        isDone = true;
+                    }
+                } while (!isDone);
+            }
+            if (dom.nodeType === 1) {
+                for (var c = 0; c < dom.childNodes.length; c++) {
+                    optimizeNode(dom.childNodes[c], joinableTags);
+                }
+            }
+        }
+
+        if (!this.isPreProcessing()) {
+            var optimizable = [
+                "b", "i", "u", "big", "small", "strong", "em", "sub", "sup", "span"
+            ];
+            optimizeNode(root, optimizable);
+        }
+    },
+
+    /**
      * Traverses the specified sub-tree recursively.
      * @param {HTMLElement} dom Root element of the sub-tree
      * @param {Boolean} isRoot True if we are at the root node of the entire traversal
@@ -1218,6 +1259,7 @@ CUI.rte.DomCleanup = new Class({
         this.insertElements();
         this.replaceElements();
         this.removeElements();
+        this.optimizeTree(rootDom);
         this.handleContainerRules(rootDom);
         this.handleEmptyContent(rootDom);
     },
