@@ -172,6 +172,10 @@ CUI.rte.plugins.KeyPlugin = new Class({
                         }
                     }
                     if (!useBrowserCmd) {
+                        // if we're inserting before an empty line determinator
+                        // (<p>line<br><br>|<br>), we need to keep that determinator on
+                        // the old line and have to insert behind instead
+                        offset = (dpr.isEmptyLineDeterminator(context, node) ? 0 : offset);
                         var para = dpr.insertParagraph(context, node, offset);
                         if (isBeforeNestedList) {
                             var placeholder = dpr.createGeckoPlaceholder(context);
