@@ -5,10 +5,13 @@ module.exports = function (grunt) {
      Add new components to this array _after_ the components they inherit from
      */
     var includeOrder = {
-        "rte-setup":[
+        "rte-additional": [
+            'additional/Class.js'
+        ],
+        "rte-setup": [
             'setup.js'
         ],
-        "rte-jquery-adapter":[
+        "rte-jquery-adapter": [
             'core/adapter/jquery/Eventing.js',
             'core/adapter/EditorEvent.js',
             'core/adapter/jquery/JQueryEvent.js',
@@ -18,8 +21,7 @@ module.exports = function (grunt) {
             'core/adapter/Hooks.js',
             'core/adapter/Utils.js'
         ],
-        "rte-extjs-adapter":[
-            'core/adapter/extjs/Class.js',
+        "rte-extjs-adapter": [
             'core/adapter/extjs/Eventing.js',
             'core/adapter/EditorEvent.js',
             'core/adapter/extjs/ExtEvent.js',
@@ -29,7 +31,7 @@ module.exports = function (grunt) {
             'core/adapter/Hooks.js',
             'core/adapter/Utils.js'
         ],
-        "rte-core":[
+        "rte-core": [
             'core/EditContext.js',
             'core/EditorKernel.js',
             'core/IFrameKernel.js',
@@ -108,12 +110,44 @@ module.exports = function (grunt) {
             'core/ui/CmSeparator.js',
             'core/ui/DialogManager.js',
             'core/ui/DialogHelper.js'
+        ],
+        "testing-env": [
+            'env/ui/ToolkitImpl.js',
+            'env/ui/ToolbarImpl.js',
+            'env/ui/ElementImpl.js',
+            'env/ui/ParaFormatterImpl.js',
+            'env/ui/StyleSelectorImpl.js',
+            'env/ui/StubToolbarBuilder.js',
+            'env/ui/CmItemImpl.js',
+            'env/ui/CmSeparatorImpl.js',
+            'env/ui/StubContextMenuBuilder.js',
+            'env/ui/StubDialogManager.js',
+            'env/ui/StubDialogHelper.js',
+            'env/Theme.js'
+        ],
+        "testing-lib": [
+            'lib/commons.js',
+            'lib/comptesting.js',
+            'lib/selection.js'
+        ],
+        "testing": [
+            'test_basics.js'
+            /*,
+            'test_domcommons.js',
+            'test_domprocessor.js',
+            'test_selection.js',
+            'test_nodelist.js',
+            'test_lists.js',
+            'test_table_basics.js'
+            */
         ]
     };
 
     var packages = {
-        "rte-core-extjs":[ "rte-setup", "rte-extjs-adapter", "rte-core" ],
-        "rte-core-jquery":[ "rte-setup", "rte-jquery-adapter", "rte-core" ]
+        "rte-core-extjs": [ "rte-setup", "rte-additional", "rte-extjs-adapter", "rte-core" ],
+        "rte-core-jquery": [ "rte-setup", "rte-jquery-adapter", "rte-core" ],
+        "rte-additional": [ "rte-additional" ],
+        "testing": [ "testing-env", "testing-lib", "testing" ]
     };
 
     /**
@@ -121,11 +155,11 @@ module.exports = function (grunt) {
      Any directories used by the build should be defined here
      */
     var dirs = {
-        build:'build',
-        source:'source',
-        temp:'temp',
-        components:'components',
-        modules:'node_modules'
+        build: 'build',
+        source: 'source',
+        temp: 'temp',
+        components: 'components',
+        modules: 'node_modules'
     };
 
     /**
@@ -162,9 +196,9 @@ module.exports = function (grunt) {
     grunt.initConfig({
         // Meta and build configuration
         meta: {
-            version:pkg.version,
-            appName:pkg.name,
-            appWebSite:pkg.repository.url
+            version: pkg.version,
+            appName: pkg.name,
+            appWebSite: pkg.repository.url
         },
         dirs: dirs,
 
@@ -180,12 +214,32 @@ module.exports = function (grunt) {
 
         concat: {
             "rte-core-extjs": {
-                src: getIncludes("rte-core-extjs", dirs.source + '/js/'),
-                dest: '<%= dirs.build %>/js/rte-core-extjs.js'
+                "src": getIncludes("rte-core-extjs", dirs.source + '/js/'),
+                "dest": "<%= dirs.build %>/js/rte-core-extjs.js"
             },
             "rte-core-jquery": {
                 src: getIncludes("rte-core-jquery", dirs.source + '/js/'),
-                dest: '<%= dirs.build %>/js/rte-core-jquery.js'
+                dest: "<%= dirs.build %>/js/rte-core-jquery.js"
+            },
+            "rte-additional": {
+                src: getIncludes("rte-additional", dirs.source + '/js/'),
+                dest: "<%= dirs.build %>/js/rte-additional.js"
+            },
+            "test": {
+                "src": getIncludes("testing", dirs.source + "/test/js/"),
+                "dest": "<%= dirs.build %>/test/testing.js"
+            }
+        },
+
+        copy: {
+            "test": {
+                src: '<%= dirs.source %>/test/*',
+                dest: '<%= dirs.build %>/test/'
+            },
+            "libs-test": {
+                files: {
+                  "<%= dirs.build %>/test/libs/jquery.js": "<%= dirs.components %>/jquery/index.js"
+                }
             }
         },
 
@@ -225,7 +279,7 @@ module.exports = function (grunt) {
     grunt.registerTask('full-build', 'concat min');
 
     // Full build with docs and compressed file
-    grunt.registerTask('full', 'clean full-build');
+    grunt.registerTask('full', 'clean full-build copy');
 
     // Rename mvn task so we can override it
     grunt.task.renameTask('mvn', 'mvn-install');
