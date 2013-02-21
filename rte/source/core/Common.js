@@ -768,6 +768,15 @@ CUI.rte.Common = function() {
         },
 
         /**
+         * Checks for null in a relaxed way - both null and undefined are accepted.
+         * @param {Object} obj The object to check
+         * @return {Boolean} True if the specified object is null or undefined
+         */
+        isNull: function(obj) {
+            return (obj === null) || (obj === undefined);
+        },
+
+        /**
          * <p>Adds the specified text node to the specified parentNode. If nodeBefore is
          * specified, the text node is inserted before that node. Otherwise, it is appended
          * to the current list of child nodes.</p>

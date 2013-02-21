@@ -554,7 +554,7 @@ CUI.rte.DomProcessor = function() {
         /**
          * <p>Determines if the specified node determines an empty line.</p>
          * <p>This is the case for "br" nodes that have either another "br" node as
-         * "previous character sibling" or no direct "previous character subling". The
+         * "previous character sibling" or no direct "previous character sibling". The
          * latter condition is valid for IE only.</p>
          * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} node The DOM element to check

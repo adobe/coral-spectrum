@@ -80,9 +80,9 @@ CUI.rte.plugins.KeyPlugin = new Class({
      */
     isTempBR: function(br) {
         var com = CUI.rte.Common;
-        return (com.isAttribDefined(br, com.BR_TEMP_ATTRIB)
+        return !com.isNull(br) && (com.isAttribDefined(br, com.BR_TEMP_ATTRIB)
                 || (com.isAttribDefined(br, "type")
-                    && (com.getAttribute(br, "type", false) == "_moz")));
+                    && (com.getAttribute(br, "type", false) === "_moz")));
     },
 
     /**
@@ -233,9 +233,12 @@ CUI.rte.plugins.KeyPlugin = new Class({
                 var caretPos = sel.getCaretPos(context);
                 if (dpr.isBlockEnd(context, selNode, selOffs)
                         && !dpr.isEmptyLineDeterminator(context, selNode)) {
-                    var helperBr = context.createElement("br");
-                    com.setAttribute(helperBr, com.BR_TEMP_ATTRIB, "brEOB");
-                    dpr.insertElement(context, helperBr, selNode, selOffs);
+                    var isBlockStart = dpr.isBlockStart(context, selNode, selOffs);
+                    if (!isBlockStart) {
+                        var helperBr = context.createElement("br");
+                        com.setAttribute(helperBr, com.BR_TEMP_ATTRIB, "brEOB");
+                        dpr.insertElement(context, helperBr, selNode, selOffs);
+                    }
                     dpr.insertElement(context, newBr, selNode, selOffs);
                 } else {
                     dpr.insertElement(context, newBr, selNode, selOffs);
@@ -446,19 +449,18 @@ CUI.rte.plugins.KeyPlugin = new Class({
                         com.EDITBLOCK_TAGS);
                 var nextCharNode = com.getNextCharacterNode(context, brToCheck,
                             com.EDITBLOCK_TAGS);
-                if (!com.isTag(prevCharNode, "br")
-                        && (prevCharNode != null) || (nextCharNode != null)) {
+                if ((!com.isTag(prevCharNode, "br") && !com.isNull(prevCharNode))
+                        || !com.isNull(nextCharNode)) {
                     // additional case: keep if previous character node ends with a space
-                    var prevNodeText = com.getNodeText(prevCharNode);
-                    var prevNodeLen = prevNodeText.length;
+                    var prevNodeLen = 0;
+                    if (prevCharNode) {
+                        var prevNodeText = com.getNodeText(prevCharNode);
+                        prevNodeLen = prevNodeText.length;
+                    }
                     var lastChar = (prevNodeLen > 0 ? prevNodeText.charAt(prevNodeLen - 1)
                             : "");
-                    if (lastChar != " ") {
+                    if (lastChar !== " ") {
                         brToCheck.parentNode.removeChild(brToCheck);
-                    }
-                } else {
-                    if (this.isTempBR(nextCharNode)) {
-                        com.removeAttribute(brToCheck, com.BR_TEMP_ATTRIB);
                     }
                 }
             }
