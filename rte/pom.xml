@@ -71,7 +71,7 @@
                 <targetPath>${vault.work}/jcr_root</targetPath>
             </resource>
             <resource>
-                <directory>${basedir}/source</directory>
+                <directory>${basedir}/source/js</directory>
                 <excludes>
                     <exclude>core/adapter/jquery/**</exclude>
                 </excludes>

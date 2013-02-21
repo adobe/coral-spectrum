@@ -161,31 +161,31 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
         // Meta and build configuration
-        meta:{
+        meta: {
             version:pkg.version,
             appName:pkg.name,
             appWebSite:pkg.repository.url
         },
-        dirs:dirs,
+        dirs: dirs,
 
         // Task definitions
-        clean:{
-            build:'<%= dirs.build %>',
-            jsdoc:'<%= dirs.build %>/jsdoc',
-            tests:[
+        clean: {
+            build: '<%= dirs.build %>',
+            jsdoc: '<%= dirs.build %>/jsdoc',
+            tests: [
                 '<%= dirs.build %>/test/*.js',
                 '<%= dirs.build %>/test/*.html'
             ]
         },
 
-        concat:{
-            "rte-core-extjs":{
-                src:getIncludes("rte-core-extjs", dirs.source + '/'),
-                dest:'<%= dirs.build %>/js/rte-core-extjs.js'
+        concat: {
+            "rte-core-extjs": {
+                src: getIncludes("rte-core-extjs", dirs.source + '/js/'),
+                dest: '<%= dirs.build %>/js/rte-core-extjs.js'
             },
-            "rte-core-jquery":{
-                src:getIncludes("rte-core-jquery", dirs.source + '/'),
-                dest:'<%= dirs.build %>/js/rte-core-jquery.js'
+            "rte-core-jquery": {
+                src: getIncludes("rte-core-jquery", dirs.source + '/js/'),
+                dest: '<%= dirs.build %>/js/rte-core-jquery.js'
             }
         },
 
