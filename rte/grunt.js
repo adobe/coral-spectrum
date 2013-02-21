@@ -227,23 +227,23 @@ module.exports = function (grunt) {
             },
             "test": {
                 "src": getIncludes("testing", dirs.source + "/test/js/"),
-                "dest": "<%= dirs.build %>/test/testing.js"
+                "dest": "<%= dirs.build %>/test/js/testing.js"
             }
         },
 
         copy: {
             "test": {
-                src: '<%= dirs.source %>/test/*',
+                src: '<%= dirs.source %>/test/static/**',
                 dest: '<%= dirs.build %>/test/'
             },
             "libs-test": {
                 files: {
-                  "<%= dirs.build %>/test/libs/jquery.js": "<%= dirs.components %>/jquery/index.js"
+                  "<%= dirs.build %>/test/js/libs/jquery.js": "<%= dirs.components %>/jquery/index.js"
                 }
             }
         },
 
-        min:{
+        min: {
             "rte-core-extjs":{
                 src:['<config:concat.rte-core-extjs.dest>'],
                 dest:'<%= dirs.build %>/js/rte-core-extjs.min.js'
@@ -255,15 +255,15 @@ module.exports = function (grunt) {
             // TBD: minify individual JS files?
         },
 
-        mvn:{
+        mvn: {
             build:{}
         },
 
         // Watch operations
-        watch:{
+        watch: {
 
-            concat:{
-                files:[
+            concat: {
+                files: [
                     '<%= dirs.source %>/**'
                 ],
                 tasks:'concat'
