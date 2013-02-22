@@ -80,9 +80,9 @@ CUI.rte.plugins.KeyPlugin = new Class({
      */
     isTempBR: function(br) {
         var com = CUI.rte.Common;
-        return (com.isAttribDefined(br, com.BR_TEMP_ATTRIB)
+        return !com.isNull(br) && (com.isAttribDefined(br, com.BR_TEMP_ATTRIB)
                 || (com.isAttribDefined(br, "type")
-                    && (com.getAttribute(br, "type", false) == "_moz")));
+                    && (com.getAttribute(br, "type", false) === "_moz")));
     },
 
     /**
@@ -172,6 +172,10 @@ CUI.rte.plugins.KeyPlugin = new Class({
                         }
                     }
                     if (!useBrowserCmd) {
+                        // if we're inserting before an empty line determinator
+                        // (<p>line<br><br>|<br>), we need to keep that determinator on
+                        // the old line and have to insert behind instead
+                        offset = (dpr.isEmptyLineDeterminator(context, node) ? 0 : offset);
                         var para = dpr.insertParagraph(context, node, offset);
                         if (isBeforeNestedList) {
                             var placeholder = dpr.createGeckoPlaceholder(context);
@@ -233,9 +237,12 @@ CUI.rte.plugins.KeyPlugin = new Class({
                 var caretPos = sel.getCaretPos(context);
                 if (dpr.isBlockEnd(context, selNode, selOffs)
                         && !dpr.isEmptyLineDeterminator(context, selNode)) {
-                    var helperBr = context.createElement("br");
-                    com.setAttribute(helperBr, com.BR_TEMP_ATTRIB, "brEOB");
-                    dpr.insertElement(context, helperBr, selNode, selOffs);
+                    var isBlockStart = dpr.isBlockStart(context, selNode, selOffs);
+                    if (!isBlockStart) {
+                        var helperBr = context.createElement("br");
+                        com.setAttribute(helperBr, com.BR_TEMP_ATTRIB, "brEOB");
+                        dpr.insertElement(context, helperBr, selNode, selOffs);
+                    }
                     dpr.insertElement(context, newBr, selNode, selOffs);
                 } else {
                     dpr.insertElement(context, newBr, selNode, selOffs);
@@ -246,6 +253,7 @@ CUI.rte.plugins.KeyPlugin = new Class({
                 } else {
                     sel.setCaretPos(context, caretPos + 1);
                 }
+                // TODO handle scrolling, if required
                 cancelKey = true;
             }
         }
@@ -282,7 +290,7 @@ CUI.rte.plugins.KeyPlugin = new Class({
     /**
      * Handles post-processing required for all browsers. The method is called whenever a
      * key has been pressed.
-     * @param {Object} event The plugin event
+     * @param {Object} e The plugin event
      * @private
      */
     handleKeyUp: function(e) {
@@ -296,6 +304,11 @@ CUI.rte.plugins.KeyPlugin = new Class({
         // handle Gecko/Webkit <br>-placeholders
         if (com.ua.isGecko || com.ua.isWebKit) {
             this.handleBRPlaceholders(context);
+        }
+
+        // handle Webkit adding spans deliberately
+        if (com.ua.isWebKit) {
+            this.handleJunkSpans(context);
         }
 
         // handle IE autolinks if necessary
@@ -440,25 +453,47 @@ CUI.rte.plugins.KeyPlugin = new Class({
                         com.EDITBLOCK_TAGS);
                 var nextCharNode = com.getNextCharacterNode(context, brToCheck,
                             com.EDITBLOCK_TAGS);
-                if (!com.isTag(prevCharNode, "br")
-                        && (prevCharNode != null) || (nextCharNode != null)) {
+                if ((!com.isTag(prevCharNode, "br") && !com.isNull(prevCharNode))
+                        || !com.isNull(nextCharNode)) {
                     // additional case: keep if previous character node ends with a space
-                    var prevNodeText = com.getNodeText(prevCharNode);
-                    var prevNodeLen = prevNodeText.length;
+                    var prevNodeLen = 0;
+                    if (prevCharNode) {
+                        var prevNodeText = com.getNodeText(prevCharNode);
+                        prevNodeLen = prevNodeText.length;
+                    }
                     var lastChar = (prevNodeLen > 0 ? prevNodeText.charAt(prevNodeLen - 1)
                             : "");
-                    if (lastChar != " ") {
+                    if (lastChar !== " ") {
                         brToCheck.parentNode.removeChild(brToCheck);
-                    }
-                } else {
-                    if (this.isTempBR(nextCharNode)) {
-                        com.removeAttribute(brToCheck, com.BR_TEMP_ATTRIB);
                     }
                 }
             }
         }
     },
 
+    /**
+     * <p>Handles spans that get inserted deliberately by Webkit.</p>
+     * <p>This is for example the case if the user deletes the final character of a
+     * sub-/superscripted fragment and then directly adds another character.</p>
+     * @param {CUI.rte.EditContext} context The edit context
+     */
+    handleJunkSpans: function(context) {
+        var com = CUI.rte.Common;
+        var selection = this.editorKernel.createQualifiedSelection(context);
+        if (!selection.isSelection) {
+            var toCheck = selection.startNode;
+            toCheck = (toCheck.nodeType === 3 ? com.getParentNode(context, toCheck)
+                    : toCheck);
+            if (com.isTag(toCheck, "span")) {
+                var styleAttrib = com.getAttribute(toCheck, "style", true);
+                if (styleAttrib) {
+                    if (styleAttrib.indexOf("font-size") >= 0) {
+                        CUI.rte.DomProcessor.removeWithoutChildren(toCheck);
+                    }
+                }
+            }
+        }
+    },
 
     notifyPluginConfig: function(pluginConfig) {
         pluginConfig = pluginConfig || { };

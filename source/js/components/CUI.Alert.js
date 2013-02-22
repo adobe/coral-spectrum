@@ -193,6 +193,7 @@ alert.hide();
     $(function() {
       $('body').fipo('tap.alert.data-api', 'click.alert.data-api', '[data-dismiss="alert"]', function(evt) {
         $(evt.target).parent().hide();
+        evt.preventDefault();
       });
     });
   }

@@ -80,6 +80,13 @@ CUI.rte.DomCleanup = new Class({
     elementsToRemove: null,
 
     /**
+     * Array of sub tree roots to be removed
+     * @private
+     * @type HTMLElement[]
+     */
+    subTreesToRemove: null,
+
+    /**
      * Array of DOM elements to be changed after traversing the DOM tree. Each array
      * element has a domToChange property that determines the element to be changed, and
      * a changedDom property that defines the changed element.
@@ -120,6 +127,15 @@ CUI.rte.DomCleanup = new Class({
         if (!CUI.rte.Common.arrayContains(this.elementsToRemove, dom)) {
             this.elementsToRemove.push(dom);
         }
+    },
+
+    /**
+     * Marks the sub tree that starts at the specified DOM element for being deleted. The
+     * specified element will get deleted as well.
+     * @param {HTMLElement} root The root element of the sub tree to be marked for removal
+     */
+    markSubTreeForRemoval: function(root) {
+        this.subTreesToRemove.push(root);
     },
 
     /**
@@ -192,24 +208,101 @@ CUI.rte.DomCleanup = new Class({
     // -- Processing methods ---------------------------------------------------------------
 
     /**
-     * Checks if the specified DOM element is valid according to current rules.
+     * <p>Checks if the specified DOM element marks the root of a valid sub tree in the DOM.
+     * </p>
+     * <p>If the method returns false, the entire sub tree gets removed, including the
+     * specified DOM element.</p>
+     * <p>If the method returns false, ancestor elements or sub trees can still be
+     * declared invalid.</p>
+     * @param {HTMLElement} dom The DOM element to check
+     * @return {Boolean} True if the sub tree starting at the specified element is
+     *         considered valid
+     */
+    isValidSubTree: function(dom) {
+        var com = CUI.rte.Common;
+        var isValid = true;
+        // handle temporary elements first
+        var tempAttrib = com.getAttribute(dom, com.TEMP_EL_ATTRIB, true);
+        if (tempAttrib) {
+            var splitAttrib = tempAttrib.split(":");
+            var keepChildren = com.arrayContains(splitAttrib, "keepChildren");
+            var emptyOnly = com.arrayContains(splitAttrib, "emptyOnly");
+            if (!keepChildren) {
+                if (emptyOnly) {
+                    // check for emptiness has to be executed recursively
+                    function checkEmpty(dom) {
+                        if (dom.nodeType === 3) {
+                            return false;
+                        }
+                        var childCnt = dom.childNodes.length;
+                        if (childCnt === 0) {
+                            return true;
+                        }
+                        for (var c = 0; c < childCnt; c++) {
+                            var child = dom.childNodes[c];
+                            var tempAttrib = com.getAttribute(dom, com.TEMP_EL_ATTRIB,
+                                    true);
+                            if (!tempAttrib) {
+                                return false;
+                            }
+                            var splitAttrib = tempAttrib.split(":");
+                            if (com.arrayContains(splitAttrib, "emptyOnly")) {
+                                if (!checkEmpty(child)) {
+                                    return false;
+                                }
+                            } else {
+                                return false;
+                            }
+                        }
+                        return true;
+                    }
+                    if (checkEmpty(dom)) {
+                        isValid = false;
+                    } else {
+                        com.removeAttribute(dom, com.TEMP_EL_ATTRIB);
+                    }
+                } else {
+                    isValid = false;
+                }
+            }
+        }
+        return isValid;
+    },
+
+    /**
+     * <p>Checks if the specified DOM element is valid according to current rules.</p>
+     * <p>Note that - contrary to {@link #isValidSubTree} - this method only removes
+     * the specified element (if false is returned) and leaves the ancestor elements intact.
+     * </p>
      * @param {HTMLElement} dom The DOM element to check
      * @return {Boolean} True if the DOM element is considered valid
      */
     isValidElement: function(dom) {
         var com = CUI.rte.Common;
         var tagName = dom.tagName.toLowerCase();
+        // ignore namespaced tags
         var namespace = com.getNamespace(dom);
         if (namespace != null) {
             return false;
         }
+        // ignore blacklisted tags
         if (this.tagsToRemove) {
             if (com.arrayContains(this.tagsToRemove, tagName)) {
                 return false;
             }
         }
+        // ignore elements with "_rtetemp" attribute
         if (com.isTag(dom, "span") && com.isAttribDefined(dom, "_rtetemp")) {
             return false;
+        }
+        // ignore temporary elements that keep child nodes
+        var tempAttrib = com.getAttribute(dom, com.TEMP_EL_ATTRIB, true);
+        if (tempAttrib) {
+            var splitAttrib = tempAttrib.split(":");
+            var keepChildren = com.arrayContains(splitAttrib, "keepChildren");
+            if (keepChildren) {
+                return false;
+            }
         }
         return true;
     },
@@ -996,14 +1089,59 @@ CUI.rte.DomCleanup = new Class({
     // -- Processing -----------------------------------------------------------------------
 
     /**
+     * Optimize the tree (executes operations that can't be efficiently processed
+     * in the event-driven manner the DomCleanup else works).
+     * @param {HTMLElement} root The root element
+     */
+    optimizeTree: function(root) {
+
+        var com = CUI.rte.Common;
+
+        function optimizeNode(dom, joinableTags) {
+            if (com.isTag(dom, joinableTags)) {
+                var isDone = false;
+                do {
+                    var nextDom = dom.nextSibling;
+                    if (nextDom) {
+                        if (com.equals(dom, nextDom)) {
+                            com.moveChildren(nextDom, dom, 0, true);
+                            nextDom.parentNode.removeChild(nextDom);
+                        } else {
+                            isDone = true;
+                        }
+                    } else {
+                        isDone = true;
+                    }
+                } while (!isDone);
+            }
+            if (dom.nodeType === 1) {
+                for (var c = 0; c < dom.childNodes.length; c++) {
+                    optimizeNode(dom.childNodes[c], joinableTags);
+                }
+            }
+        }
+
+        if (!this.isPreProcessing()) {
+            var optimizable = [
+                "b", "i", "u", "big", "small", "strong", "em", "sub", "sup", "span"
+            ];
+            optimizeNode(root, optimizable);
+        }
+    },
+
+    /**
      * Traverses the specified sub-tree recursively.
      * @param {HTMLElement} dom Root element of the sub-tree
      * @param {Boolean} isRoot True if we are at the root node of the entire traversal
      */
     traverse: function(dom, isRoot) {
+        var ignoreRecursion = false;
         if (!isRoot) {
             if (dom.nodeType == 1) {
-                if (!this.isValidElement(dom)) {
+                if (!this.isValidSubTree(dom)) {
+                    this.markSubTreeForRemoval(dom);
+                    ignoreRecursion = true;
+                } else if (!this.isValidElement(dom)) {
                     this.markForRemoval(dom);
                 } else {
                     // paste processing works as a "pre-filter"
@@ -1019,9 +1157,11 @@ CUI.rte.DomCleanup = new Class({
             }
             this.handleEmptyLinesAtEOB(dom);
         }
-        var children = dom.childNodes;
-        for (var c = 0; c < children.length; c++) {
-            this.traverse(children[c], false);
+        if (!ignoreRecursion) {
+            var children = dom.childNodes;
+            for (var c = 0; c < children.length; c++) {
+                this.traverse(children[c], false);
+            }
         }
     },
 
@@ -1035,6 +1175,14 @@ CUI.rte.DomCleanup = new Class({
             dpr.removeWithoutChildren(this.elementsToRemove[r]);
         }
         this.elementsToRemove.length = 0;
+        removeCnt = this.subTreesToRemove.length;
+        for (r = 0; r < removeCnt; r++) {
+            var toRemove = this.subTreesToRemove[r];
+            if (toRemove.parentNode) {
+                toRemove.parentNode.removeChild(toRemove);
+            }
+        }
+        this.subTreesToRemove.length = 0;
     },
 
     /**
@@ -1091,31 +1239,27 @@ CUI.rte.DomCleanup = new Class({
         this.editorKernel = editorKernel;
         this.context = editorKernel.getEditContext();
         this.htmlRules = editorKernel.getHtmlRules();
-        if (this.elementsToRemove != null) {
-            this.elementsToRemove.length = 0;
-        } else {
-            this.elementsToRemove = [ ];
+
+        function clear(array) {
+            if (array) {
+                array.length = 0;
+                return array;
+            }
+            return [ ];
         }
-        if (this.elementsToChange != null) {
-            this.elementsToChange.length = 0;
-        } else {
-            this.elementsToChange = [ ];
-        }
-        if (this.elementsToInsert != null) {
-            this.elementsToInsert.length = 0;
-        } else {
-            this.elementsToInsert = [ ];
-        }
-        if (this.emptyBlocksIE != null) {
-            this.emptyBlocksIE.length = 0;
-        } else {
-            this.emptyBlocksIE = [ ];
-        }
+
+        this.elementsToRemove = clear(this.elementsToRemove);
+        this.subTreesToRemove = clear(this.subTreesToRemove);
+        this.elementsToChange = clear(this.elementsToChange);
+        this.elementsToInsert = clear(this.elementsToInsert);
+        this.emptyBlocksIE = clear(this.emptyBlocksIE);
+
         // actually execute
         this.traverse(rootDom, true);
         this.insertElements();
         this.replaceElements();
         this.removeElements();
+        this.optimizeTree(rootDom);
         this.handleContainerRules(rootDom);
         this.handleEmptyContent(rootDom);
     },
