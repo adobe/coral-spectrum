@@ -1196,7 +1196,7 @@
             this.$el.on("change:insertitem", function(e) {
                 self._onItemInserted(e);
             });
-            this.$el.responsive({
+            this.$el.reflow({
                 "small": function ($el, size) {
                     return $el.width() > 40*size.rem() && $el.width() < 50*size.rem();
                 },

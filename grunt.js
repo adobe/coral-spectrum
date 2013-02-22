@@ -220,7 +220,7 @@ module.exports = function(grunt) {
         files: {
           '<%= dirs.build %>/js/libs/toe.js': '<%= dirs.source %>/js/plugins/toe.js',
           '<%= dirs.build %>/js/libs/jquery-fingerpointer.js': '<%= dirs.source %>/js/plugins/jquery-fingerpointer.js',
-          '<%= dirs.build %>/js/libs/jquery-responsive.js': '<%= dirs.source %>/js/plugins/jquery-responsive.js',
+          '<%= dirs.build %>/js/libs/jquery-reflow.js': '<%= dirs.source %>/js/plugins/jquery-reflow.js',
           '<%= dirs.build %>/js/libs/jquery-gridlayout.js': '<%= dirs.source %>/js/plugins/jquery-gridlayout.js',
           '<%= dirs.build %>/js/libs/jquery-scrollable.js': '<%= dirs.source %>/js/plugins/jquery-scrollable.js',
           '<%= dirs.build %>/js/libs/moment.js': '<%= dirs.source %>/js/plugins/moment.js',

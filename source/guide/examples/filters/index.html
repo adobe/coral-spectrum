@@ -109,49 +109,10 @@
             </div>
             </p>
             
-            <p>
-            Full featured markup
-            <div class="filters" data-init="filters" data-stacking="true" data-option-renderer="default" data-allow="create"
-                data-highlight="false" data-delay="1000" data-infinite-load="true" data-max-loading-items="3" data-icons='{ "calendar":"icon-calendar", "cards":"icon-cards", "cart":"icon-cart", "folder":"icon-folder", "paint bucket":"icon-paintbucket", "adobe":"http://www.eduserv.org.uk/~/media/images/lns%20logos/adobe.ashx"}' data-icon-size="large"
-                data-autocomplete-callback="function(handler,searchFor,offset,length) {return loadCities(handler,searchFor,offset,length); }">
-                <input type="text">
-                <select multiple>
-                    <option>calendar</opion>
-                    <option>paint bucket</opion>
-                    <option>cards</opion>
-                    <option>cart</opion>    
-                </select>
-            </div>
-            
-            </p>
 
         </section>
             
         <script type="text/javascript">
-            // Example callback function
-            // @param {Function} handler       A function that can process the returned data / status string
-            // @param {String} searchFor       The search text
-            // @param {int} loadOffset         The offset from the start of the list. For use with infinite loading
-            // @return Array of items
-            //
-            var loadCities = function(handler, searchFor, loadOffset, noItems) {
-                $.ajax({
-                    url: 'http://gd.geobytes.com/AutoCompleteCity',
-                    dataType: 'jsonp',
-                    data: { "q": searchFor },
-                    success: function(data) {
-                        var first = loadOffset;
-                        var last = first + noItems;
-                        last = (last > data.length) ? last = data.length : last;
-                        data = data.slice(first, last);
-                        handler(data);
-                    },
-                    error: function(XMLHttpRequest, textStatus, errorThrown) {
-                        // Handle error
-                    }
-                });
-            };
-                
             $(document).ready(function() {
                var options =  ["Watermelon",
                                      "Figs", 
@@ -192,6 +153,31 @@
                             options: options,
                             icons: { "Watermelon":"icon-calendar", "Olive":"icon-paintbucket", "Avocado":"http://www.enterprisewcms.com/images/adobe_cq5_icon_adobe.png" }
                 });
+
+                // Example callback function
+                // @param {Function} handler       A function that can process the returned data / status string
+                // @param {String} searchFor       The search text
+                // @param {int} loadOffset         The offset from the start of the list. For use with infinite loading
+                // @return Array of items
+                //
+                var loadCities = function(handler, searchFor, loadOffset, noItems) {
+                    noItems = 9;
+                    $.ajax({
+                        url: 'http://gd.geobytes.com/AutoCompleteCity',
+                        dataType: 'jsonp',
+                        data: { "q": searchFor },
+                        success: function(data) {
+                            var first = loadOffset;
+                            var last = first + noItems;
+                            last = (last > data.length) ? last = data.length : last;
+                            data = data.slice(first, last);
+                            handler(data);
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            // Handle error
+                        }
+                    });
+                };
 
                 var filters4 = new CUI.Filters({
                             element: '#external1',

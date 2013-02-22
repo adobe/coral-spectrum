@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>All kinds of Dropdowns</title>
+        <title>Filters &amp; Tags – Single Term examples</title>
 
         <link rel="stylesheet" href="../../css/cui.css">
         
@@ -19,8 +19,6 @@
 
         <section>
             <h1>Dropdowns</h1><!-- Standard Single select -->
-            
-            <h2>Simple single select</h2>
             <div class="dropdown" data-init="dropdown">
                 <button>Single Select</button>
                 <select name="dropdown">
@@ -32,7 +30,6 @@
             <br />
             
             <!-- Multi select -->
-            <h2>Simple multi select</h2>
             <div class="dropdown" data-init="dropdown">
                 <button>Multi Select</button>
                 <select name="dropdown2" multiple>
@@ -44,7 +41,6 @@
             <br />
             
             <!-- Editable -->
-            <h2>Editable select with predefined options</h2>
             <div class="dropdown dropdown-editable" data-editable="true" data-init="dropdown">
                 <input type="text" placeholder="Editable Select">
                 <button>Editable</button>
@@ -57,26 +53,18 @@
             <br />
             
             <!-- Editable with own auto-completer -->
-            <h2>Editable select with custom autocomplete function</h2>
-            <p>Custom autocomplete function with custom renderer</p>
             <div class="dropdown dropdown-editable-autocomplete">
-                <input type="text" placeholder="Custom Autocomplete">
+                <input type="text" placeholder="Editable Select / Autocomplete">
                 <button>Editable</button>
+                <select name="dropdown3">
+                    <option>Edit One</option>
+                    <option>Edit Two</option>
+                    <option>Edit Three</option>
+                </select>
             </div>
             <br />
-            
-            <h2>Editable select with custom autocomplete function from markup</h2>
-            <p>Custom autocomplete function with custom renderer</p>
-            <div data-init="dropdown" data-editable="true"
-                 data-autocomplete-callback="function(handler,searchFor,showAll) {autocompleter(handler,searchFor,showAll);}"
-                 data-autocomplete-option-renderer="function(index, value) {return optionrenderer(index,value);}"
-                 data-autocomplete-delay="1000">
-                <input type="text" placeholder="Custom Autocomplete">
-                <button>Editable</button>
-            </div>
-            <br />                        
+                        
             <!-- Disabled -->
-            <h2>Different states</h2>
             <div class="dropdown" data-init="dropdown" data-disabled="true">
                 <button>Disabled</button>
                 <select name="dropdown4">
@@ -99,48 +87,15 @@
         </section>
         
         <script type="text/javascript">
-            var autocompleter = function(handler, searchFor, showAll) {
-                    var items = ["Henry", "Anja", "Wilhelm", "Sandra"];
-                    if (showAll) {
-                        handler(items, searchFor);
-                        return;
-                    }
-                    
-                    var result = [];
-                    for(var i = 0; i < items.length; i++) {
-                        if (items[i].toLowerCase().indexOf(searchFor.toLowerCase()) >= 0) result.push(items[i]);
-                    }
-                    handler(result, searchFor);
-            };
-            var optionrenderer = function(index, value) {
-                    var e = $("<span>");
-                    e.text(value);
-                    e.prepend((index + 1) + ". Meet ");
-                    return e;
-            };
-                
             $(".dropdown-editable-autocomplete").dropdown({
-                autocompleteCallback: function(handler, searchFor, showAll) {
+                autocompleteCallback: function(handler, searchFor) {
                     var items = ["Apple", "Pear", "Banana", "Orange"];
-                    if (showAll) {
-                        handler(items, searchFor);
-                        return;
-                    }
-                    
                     var result = [];
                     for(var i = 0; i < items.length; i++) {
-                        if (items[i].toLowerCase().indexOf(searchFor.toLowerCase()) >= 0) result.push(items[i]);
+                        if (items[i].indexOf(searchFor) >= 0) result.push(items[i]);
                     }
                     handler(result, searchFor);
-                },
-                autocompleteOptionRenderer: function(index, value) {
-                    var e = $("<span>");
-                    e.text(value);
-                    e.prepend((index + 1) + ". add ");
-                    e.append("s to my basket");
-                    return e;
-                },
-                autocompleteDelay: 20 // Very fast autocompleter, as we do not work remote
+                }   
             });
         </script>
        
