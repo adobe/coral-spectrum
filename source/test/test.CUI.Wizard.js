@@ -64,5 +64,29 @@ describe('CUI.Wizard', function() {
             expect(wizard.getCurrentPageNumber()).to.equal(1);
         });
         
-      });      
+      });
+      
+      describe("from minimal markup", function() {
+        var html = ' <div data-init="wizard">' +
+            '<section data-back-label="Cancel" data-next-label="Forward to step 2">' +
+            '    <p>' +
+            '    This is the first step of our "minimal markup" wizard.' +
+            '    </p>' +
+            '</section>' +
+            '<section data-back-label="Back to step 1" data-next-label="Finish">' +
+            '    This is the second step.' +
+            '</section>' +
+            '</div>';
+            
+        var el = $(html).wizard();
+        $("body").append(el);
+        
+        it('should create a navigation', function() {
+            expect(el.find("nav").length).to.equal(1);
+            expect(el.find("nav ol li").length).to.equal(2);            
+        });
+        it('should create buttons', function() {
+            expect(el.find("nav button").length).to.equal(2);
+        });        
+      });
 });

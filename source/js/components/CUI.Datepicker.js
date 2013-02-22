@@ -30,6 +30,7 @@ Currently there are the following data options:
   data-force-html-mode           Force to HTML mode and never use a native Date widget, if given (with any non-empty value)
   data-day-names                 JSON-array-data with the short names of all week days, starting with Sunday
   data-month-names               JSON-array-data with the names of all months, starting with January
+  data-start-day                 Defines the start day of the week, 0 = Sunday, 1 = Monday, etc.
 
 Additionally the type (date, time, datetime) is read from the &lt;input&gt; field.
 
@@ -82,16 +83,12 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
 
     construct: function(options) {
 
-        var $button = this.$element.find('>button');
-        if ($button.attr('type') === undefined) {
-            $button[0].setAttribute('type', 'button');
-        }
+        this._readDataFromMarkup();
+        this._adjustMarkup();
 
         this.options.monthNames = this.options.monthNames || CUI.Datepicker.monthNames;
         this.options.dayNames = this.options.dayNames || CUI.Datepicker.dayNames;
 
-
-        this._readDataFromMarkup();
         
         // Set standard formats
         this.options.storedFormat = this.options.storedFormat || (this.options.type === "time" ? 'HH:mm' : 'YYYY-MM-DD[T]HH:mmZ');
@@ -101,7 +98,6 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             this.useNativeControls = true;
         }
 
-        this._adjustMarkup();
         this._updateState();
 
         this.$openButton = this.$element.find('button');
@@ -158,7 +154,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         $input.on("change blur", function() {
             if (this.options.disabled) return;
             var newDate = moment(this.$input.val(), this.options.displayedFormat);
-            this._setDateTime(newDate);
+            this._setDateTime(newDate, true); // Set the date, but don't trigger a change event
         }.bind(this));
 
         function normalizeDate(date) {
@@ -251,7 +247,11 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         
         if (el.data('month-names') !== undefined) {
             this.options.monthNames = el.data('month-names') || this.options.monthNames;
-        }                
+        }
+        
+        if (el.data('start-day') !== undefined) {
+            this.options.startDay = el.data('start-day') * 1; // Force number
+        }              
     },
 
     _readInputVal: function(format) {
@@ -326,15 +326,19 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
     },
     
     _adjustMarkup: function() {
+        this.$element.addClass("datepicker");
+        
         if (!this.useNativeControls) {
+            if (this.$element.find("input").not("[type=hidden]").length === 0) {
+                this.$element.append("<input type=\"text\">");
+            }
+            if (this.$element.find("button").length === 0) {
+                this.$element.append("<button class=\"icon-calendar small\"><span>Datepicker</span></button>");
+            }
             if (this.$element.find(".popover").length === 0) {
                 this.$element.append('<div class="popover arrow-top" style="display:none"><div class="inner"></div></div>');
                 if(this._isDateEnabled()) this.$element.find(".inner").append('<div class="calendar"><div class="calendar-header"></div><div class="calendar-body"></div></div>');
             }
-            if (this.$element.find("input").not("[type=hidden]").length === 0) {
-                this.$element.append("<input type=\"text\">");
-            }
-
         } else {
             // Show native control
         }
@@ -348,6 +352,12 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             var name = this.$element.find("input").not("[type=hidden]").attr("name");
             this.$element.find("input[type=hidden]").attr("name",name);
             this.$element.find("input").not("[type=hidden]").removeAttr("name");
+        }
+        
+        // Force button to be a button, not a submit thing
+        var $button = this.$element.find('>button');
+        if ($button.attr('type') === undefined) {
+            $button[0].setAttribute('type', 'button');
         }
                     
     },
@@ -508,7 +518,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
     /**
     * Sets a new datetime object for this picker
     */
-    _setDateTime: function(date) {
+    _setDateTime: function(date, silent) {
         this.options.selectedDateTime = this.displayDateTime = date;
         
         if (!date) {
@@ -517,16 +527,22 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             this.$input.val(date.format(this.options.displayedFormat)); // Set only valid dates
         }
         
+        
         var storage = (date && date.isValid()) ? date.format(this.options.storedFormat) : "";     
         this.$hiddenInput.val(storage);
             
         this._updateState();
         
-        if(this.options.type !== "time") {
-            this._renderCalendar();
-        }
+        if(this._isDateEnabled()) this._renderCalendar();
         
         if(this._isTimeEnabled()) this._renderTime();
+
+        // Trigger a change even on the input
+        if (!silent)
+            this.$input.trigger('change');
+        
+        // Always trigger a change event on the hidden input, since we're not listening to it internally
+        this.$hiddenInput.trigger('change');
     },
 
     _getTimeFromInput: function() {
