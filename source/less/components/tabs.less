@@ -27,10 +27,12 @@
 .tabs {
   > nav {
     .clearfix();
+    z-index: 1;
+    position: relative;
 
     > a {
       .lightText;
-      color: @font-captions-help-color;
+      color: @tab-active-font-color;
       float: left;
       padding: 0.5rem 0.75rem 0.5rem 0.75rem;
       margin: 0 0.125rem -0.0625rem 0;
@@ -48,11 +50,14 @@
 
       &.disabled {
         color: @tab-disabled-font-color;
+        text-decoration: none;
+        opacity: 1;
 
         &:hover,
         &:focus {
           cursor: default;
           color: @tab-disabled-font-color;
+          text-decoration: none;
         }
       }
 
@@ -68,6 +73,10 @@
         &:focus {
           color: @tab-hover-font-color;
         }
+        
+        &.focus {
+          .tab-focus(top);
+        }
       }
     }
   }
@@ -79,6 +88,8 @@
     margin: 0;
     border: 0.0625rem solid @tab-outline-color;
     padding: 0.85rem;
+    z-index: auto;
+    position: relative;
 
     &.active {
       display: block;
@@ -87,6 +98,7 @@
 
   &.white {
     > nav > a.active {
+      border-bottom: none;
       .gradient(@tab-white-background-gradient-start-color, @tab-white-background-gradient-end-color);
     }
 
@@ -139,6 +151,9 @@
           border-bottom: 0.0625rem solid @tab-outline-color;
           border-right: none;
           .gradient(@tab-white-background-gradient-end-color, @tab-white-background-gradient-end-color);
+          &.focus {
+            .tab-focus(stacked);
+          }
         }
 
         &:last-child {

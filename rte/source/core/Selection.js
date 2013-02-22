@@ -700,12 +700,10 @@ CUI.rte.Selection = function() {
             if (CUI.rte.Selection.isSelection(selection)) {
                 return true;
             }
+            // we must normalize EOT/EOB situations as well ...
             var startNode = selection.startNode;
-            if (startNode && (startNode.nodeType == 1) && !com.isOneCharacterNode(startNode)) {
-                // we must normalize EOT/EOB situations as well ...
-                return true;
-            }
-            return false;
+            return startNode && (startNode.nodeType == 1)
+                    && !com.isOneCharacterNode(startNode);
         },
 
         /**
@@ -1241,6 +1239,7 @@ CUI.rte.Selection = function() {
                 }
             }
             if (!elNode) {
+                var prevCharNode;
                 // text selection - determine offset to the last directly selectable node
                 var textRange = range.duplicate();
                 textRange.moveToElementText(parentNode);
@@ -1267,10 +1266,21 @@ CUI.rte.Selection = function() {
                 var offs = 0;
                 for (childIndex = nodeRef; childIndex < childCnt; childIndex++) {
                     childToCheck = node.childNodes[childIndex];
-                    var childLen = com.getNodeTextLength(childToCheck);
+                    var childLen = (com.isTag(childToCheck, "br")
+                            ? 0 : com.getNodeTextLength(childToCheck));
                     if ((offs + childLen) > textLen) {
                         elNode = childToCheck;
                         elOffset = textLen - offs;
+                        // the start of a text node is actually handled as the end of the
+                        // previous text node (if applicable) - handle this as well
+                        if ((elNode.nodeType === 3) && (elOffset === 0)) {
+                            prevCharNode = com.getPreviousCharacterNode(context, elNode,
+                                    com.EDITBLOCK_TAGS);
+                            if (prevCharNode && !com.isOneCharacterNode(prevCharNode)) {
+                                elNode = prevCharNode;
+                                elOffset = com.getNodeCharacterCnt(elNode);
+                            }
+                        }
                         break;
                     }
                     offs += childLen;
@@ -1282,8 +1292,17 @@ CUI.rte.Selection = function() {
                     // get first child node for structural nodes that may have content
                     var textNode = com.getFirstTextChild(elNode);
                     if (textNode) {
-                        elNode = textNode;
-                        elOffset = 0;
+                        // actually, IE handles this as last character of previous text
+                        // node (style is the same), so reflecting it accordingly
+                        prevCharNode = com.getPreviousCharacterNode(context, textNode,
+                                com.EDITBLOCK_TAGS);
+                        if (prevCharNode && !com.isOneCharacterNode(prevCharNode)) {
+                            elNode = prevCharNode;
+                            elOffset = com.getNodeCharacterCnt(elNode);
+                        } else {
+                            elNode = textNode;
+                            elOffset = 0;
+                        }
                     }
                 } else if (com.isTag(elNode, "img")) {
                     // for images: adjust offset if we are handling the end of a selection
@@ -1479,6 +1498,42 @@ CUI.rte.Selection = function() {
             }
             var range = context.doc.selection.createRange();
             CUI.rte.Selection.setNodeToRange(context, range, dom, asInsertPoint);
+            range.select();
+        },
+
+        selectEmptyNode: function(context, dom) {
+            var tempSpan;
+            if (dpr.isZeroSizePlaceholder(dom)) {
+                tempSpan = (dom.nodeType === 3 ? dom.parentNode : dom);
+            } else {
+                tempSpan = dpr.createTempSpan(context, true, false, true);
+                tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
+                dom.appendChild(tempSpan);
+            }
+            var range = context.doc.selection.createRange();
+            range.moveToElementText(tempSpan);
+            // required for the caret to appear/blink
+            range.move("character", 1);
+            range.select();
+        },
+
+        selectBeforeNode: function(context, dom) {
+            var tempSpan = dpr.createTempSpan(context, true, false, true);
+            tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
+            dom.parentNode.insertBefore(tempSpan, dom);
+            var range = context.doc.selection.createRange();
+            range.moveToElementText(tempSpan);
+            range.collapse(true);
+            range.select();
+        },
+
+        selectAfterNode: function(context, dom) {
+            var range = context.doc.selection.createRange();
+            var tempSpan = dpr.createTempSpan(context, true, false, true);
+            tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
+            dom.parentNode.insertBefore(tempSpan, dom.nextSibling);
+            range.moveToElementText(tempSpan);
+            range.collapse(false);
             range.select();
         },
 
@@ -2212,7 +2267,7 @@ CUI.rte.Selection = function() {
             endOffset = selection.focusOffset;
             var isCollapsed = (startNode == endNode) && (startOffset == endOffset);
             var childCnt;
-            // startNode might be null, so it's better to check that first
+            // startNode might be null, so it's better to check for that first
             if (startNode
                     && !com.isOneCharacterNode(startNode) && (startNode.nodeType == 1)) {
                 childCnt = startNode.childNodes.length;
@@ -2234,6 +2289,19 @@ CUI.rte.Selection = function() {
                 }
             }
             if (isCollapsed) {
+                if (com.ua.isW3cIE) {
+                    // on IE >= 9, the start of a text node is actually handled as the end
+                    // of the // previous text node (if applicable) - handle this as well
+                    if (startNode && (startNode.nodeType === 3) && (startOffset === 0) &&
+                            !dpr.isZeroSizePlaceholder(startNode)) {
+                        var prevCharNode = com.getPreviousCharacterNode(context, startNode,
+                                com.EDITBLOCK_TAGS);
+                        if (prevCharNode && !com.isOneCharacterNode(prevCharNode)) {
+                            startNode = prevCharNode;
+                            startOffset = com.getNodeCharacterCnt(startNode);
+                        }
+                    }
+                }
                 return {
                     "startNode": startNode,
                     "startOffset": startOffset,
@@ -2313,6 +2381,66 @@ CUI.rte.Selection = function() {
                 }
             } else {
                 range.selectNode(dom);
+            }
+            selection.removeAllRanges();
+            selection.addRange(range);
+        },
+
+        selectEmptyNode: function(context, dom) {
+            var selection = context.win.getSelection();
+            var range = context.doc.createRange();
+            if (!dpr.isZeroSizePlaceholder(dom)) {
+                var tempSpan = dpr.createTempSpan(context, true, false, true);
+                tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
+                dom.appendChild(tempSpan);
+            }
+            if (com.ua.isWebKit) {
+                range.selectNode(dom);
+                range.collapse(false);
+            } else {
+                range.setStart(dom, 0);
+                range.setEnd(dom, 0);
+            }
+            selection.removeAllRanges();
+            selection.addRange(range);
+        },
+
+        selectBeforeNode: function(context, dom) {
+            var selection = context.win.getSelection();
+            var range = context.doc.createRange();
+            // add a temporary node and select behind that one instead - this makes
+            // it more stable and easier to handle
+            var tempSpan = dpr.createTempSpan(context, true, false, true);
+            tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
+            dom.parentNode.insertBefore(tempSpan, dom);
+            dom = tempSpan;
+            if (com.ua.isWebKit) {
+                range.setStartAfter(dom);
+                range.setEndAfter(dom);
+            } else {
+                range.setStartBefore(dom);
+                range.setEndBefore(dom);
+            }
+            selection.removeAllRanges();
+            selection.addRange(range);
+        },
+
+        selectAfterNode: function(context, dom) {
+            var dpr = CUI.rte.DomProcessor;
+            var selection = context.win.getSelection();
+            var range = context.doc.createRange();
+            // add a temporary node and select behind that one instead - this makes
+            // it more stable and easier to handle
+            var tempSpan = dpr.createTempSpan(context, true, false, true);
+            tempSpan.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
+            dom.parentNode.insertBefore(tempSpan, dom.nextSibling);
+            dom = tempSpan;
+            if (com.ua.isWebKit) {
+                range.setStartAfter(dom);
+                range.setEndAfter(dom);
+            } else {
+                range.setStartBefore(dom);
+                range.setEndBefore(dom);
             }
             selection.removeAllRanges();
             selection.addRange(range);

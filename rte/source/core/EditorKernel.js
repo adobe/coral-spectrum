@@ -31,7 +31,7 @@ CUI.rte.EditorKernel = new Class({
     /**
      * @cfg {Boolean} removeSingleParagraphContainer
      * True if the paragraph element of texts that consist only of a single paragraph
-     * should be removed on {@link #getValue}/{@link #syncValue} (defaults to false).
+     * should be removed on serialization (defaults to false).
      * For example, if a text is &lt;p&gt;Single paragraph text&lt;/p&gt;, the surrounding
      * "p" tag would get removed if this option was set to true. This option is mainly for
      * backward compatibility with CQ 5.1, where container tags had not yet been available.
@@ -131,7 +131,7 @@ CUI.rte.EditorKernel = new Class({
 
     /**
      * Associative array of registered commands; values of type
-     * {@link CUI.rte.commands.Commands}
+     * {@link CUI.rte.commands.Command}
      * @private
      * @type Object
      */
@@ -750,12 +750,13 @@ CUI.rte.EditorKernel = new Class({
             // necessary!
             this.registerHandlers(doc, {
                     "keydown": function(e) {
+                        this.cleanupOnEvent(e);
                         if (this.isEventingDisabled) {
                             return;
                         }
                         if (e.isCtrl()) {
                             if (com.ua.isIE) {
-                                // handling of Ctrl-keys must be handled here for IE
+                                // handling of Ctrl-keys must be done here for IE
                                 var c = String.fromCharCode(e.getCharCode()).toLowerCase();
                                 var cmd = this.keyboardShortcuts[c];
                                 if (cmd) {
@@ -782,6 +783,7 @@ CUI.rte.EditorKernel = new Class({
                         }
                     },
                     "keyup": function(e) {
+                        this.cleanupOnEvent(e);
                         if (this.isEventingDisabled) {
                             return;
                         }
@@ -795,6 +797,7 @@ CUI.rte.EditorKernel = new Class({
                         }
                     },
                     "keypress": function(e) {
+                        this.cleanupOnEvent(e);
                         if (this.isEventingDisabled) {
                             return;
                         }
@@ -819,11 +822,13 @@ CUI.rte.EditorKernel = new Class({
             if (com.ua.isTouch) {
                 this.registerHandlers(doc, {
                     "touchstart": function(e) {
+                        this.cleanupOnEvent(e);
                         if (this.isEventingDisabled) {
                             return;
                         }
                         this.firePluginEvent("mousedown", e, false);
                     }, "touchend": function(e) {
+                        this.cleanupOnEvent(e);
                         if (this.isEventingDisabled) {
                             return;
                         }
@@ -833,12 +838,14 @@ CUI.rte.EditorKernel = new Class({
             } else {
                 this.registerHandlers(doc, {
                     "mousedown": function(e) {
+                        this.cleanupOnEvent(e);
                         if (this.isEventingDisabled) {
                             return;
                         }
                         this.firePluginEvent("mousedown", e, false);
                     },
                     "mouseup": function(e) {
+                        this.cleanupOnEvent(e);
                         if (this.isEventingDisabled) {
                             return;
                         }
@@ -850,9 +857,11 @@ CUI.rte.EditorKernel = new Class({
             // Focus-Events, fired immediately
             this.registerHandlers(this.getFocusDom(context), {
                     "focus": function(e) {
+                        this.cleanupOnEvent(e);
                         this.onFocus(e);
                     },
                     "blur": function(e) {
+                        this.cleanupOnEvent(e);
                         this.onBlur(e);
                     }
                 }, this);
@@ -860,9 +869,22 @@ CUI.rte.EditorKernel = new Class({
             // Other Events, fired immediately
             this.registerHandlers(doc.body, {
                 "paste": function(e) {
+                    this.cleanupOnEvent(e);
                     this.onPaste(e);
                 }
             }, this);
+            if (com.ua.isIE) {
+                this.registerHandlers(doc, {
+                    "selectionchange": function(e) {
+                        this.cleanupOnEvent(e);
+                    }
+                }, this, {
+                    // deferred execution required here; interacts strangely otherwise with
+                    // certain keystrokes (inserts two paragraphs when Enter is hit (once)
+                    // on IE >= 9)
+                    buffer: 10
+                });
+            }
 
             this.initializeGeckoSpecific();
 
@@ -1012,6 +1034,31 @@ CUI.rte.EditorKernel = new Class({
     notifyBlur: function() {
         if (this.hasFocus) {
             this.onBlur();
+        }
+    },
+
+    /**
+     * Cleans up temporary stuff, as required by the specified event.
+     * @param {CUI.rte.EditorEvent} e The event
+     * @private
+     */
+    cleanupOnEvent: function(e) {
+        var com = CUI.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
+        switch (e.getType()) {
+            case "mousedown":
+                dpr.removeTempSpans(e.editContext, true);
+                break;
+            case "keydown":
+                if (!com.ua.isWebKit) {
+                    dpr.removeTempSpans(e.editContext, true);
+                }
+                break;
+            case "keyup":
+                if (com.ua.isWebKit) {
+                    dpr.removeTempSpans(e.editContext, true);
+                }
+                break;
         }
     },
 
@@ -1261,6 +1308,9 @@ CUI.rte.EditorKernel = new Class({
             var execRet = customCommand.execute(execOptions);
             if (context.isInitialized()) {
                 var bookmark = execOptions.bookmark;
+                if (bookmark && execRet && execRet.preventBookmarkRestore) {
+                    bookmark = null;
+                }
                 if (bookmark && execRet && execRet.selOffset) {
                     if (execRet.selOffset.start) {
                         bookmark.startPos += execRet.selOffset.start;
@@ -1517,11 +1567,8 @@ CUI.rte.EditorKernel = new Class({
         }
         var commonAncestor = nodeList.commonAncestor;
         while (commonAncestor) {
-            if (commonAncestor == context.root) {
-                break;
-            }
             consistentFormatting.push(commonAncestor);
-            commonAncestor = commonAncestor.parentNode;
+            commonAncestor = CUI.rte.Common.getParentNode(context, commonAncestor);
         }
         var selectedDom = sel.getSelectedDom(selection);
         var styles = (stylesDef.styles ? stylesDef.styles : [ ]);

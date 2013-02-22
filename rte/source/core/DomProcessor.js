@@ -554,7 +554,7 @@ CUI.rte.DomProcessor = function() {
         /**
          * <p>Determines if the specified node determines an empty line.</p>
          * <p>This is the case for "br" nodes that have either another "br" node as
-         * "previous character sibling" or no direct "previous character subling". The
+         * "previous character sibling" or no direct "previous character sibling". The
          * latter condition is valid for IE only.</p>
          * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} node The DOM element to check
@@ -711,8 +711,8 @@ CUI.rte.DomProcessor = function() {
             if (dom.nodeType == 1) {
                 dom = com.getFirstTextChild(dom) || dom;
             }
-            var joinDom = (joinPreceding ? com.getPreviousTextNode(context, dom)
-                    : com.getNextTextNode(context, dom));
+            var joinDom = (joinPreceding ? com.getPreviousCharacterNode(context, dom)
+                    : com.getNextCharacterNode(context, dom));
             if (!dom || !joinDom) {
                 return;
             }
@@ -1143,6 +1143,7 @@ CUI.rte.DomProcessor = function() {
          * <p>Note that only container nodes that are directly under the body node are
          * taken into account. "Auxiliary root nodes" (such as td, th) will not be included.
          * </p>
+         * @param {CUI.rte.EditContext} context The edit context
          * @param {HTMLElement} dom DOM element to determine container node for
          * @return {HTMLElement} container DOM node; null if no container node is present
          */
@@ -1191,9 +1192,11 @@ CUI.rte.DomProcessor = function() {
                     }
                     var tagToCheck = dom.tagName.toLowerCase();
                     for (var formatId in formatDefs) {
-                        var formatDef = formatDefs[formatId];
-                        if (formatDef.tag && (formatDef.tag == tagToCheck)) {
-                            return dom;
+                        if (formatDefs.hasOwnProperty(formatId)) {
+                            var formatDef = formatDefs[formatId];
+                            if (formatDef.tag && (formatDef.tag == tagToCheck)) {
+                                return dom;
+                            }
                         }
                     }
                 }
@@ -1702,7 +1705,7 @@ CUI.rte.DomProcessor = function() {
                 }
                 return;
             }
-            if (com.isOneCharacterNode(dom)) {
+            if (com.isOneCharacterNode(insertNode)) {
                 if (insertOffset == null) {
                     com.insertBefore(parent, dom, insertNode);
                 } else {
@@ -1746,6 +1749,174 @@ CUI.rte.DomProcessor = function() {
                     nextNode.parentNode.removeChild(nextNode);
                 }
             }
+        },
+
+        /**
+         * Creates a span that contains temporary content.
+         * @param {CUI.rte.EditContext} context The edit context
+         * @param {Boolean} removeImmediately True if the span should be removed
+         *        immediately after the selection changes
+         * @param {Boolean} keepChildren True if child nodes should be kept if the
+         *        temporary span should get removed again
+         * @param {Boolean} adjustInner True if child nodes chould be kept, but cleaned
+         *        up (remove special placeholder characters, etc.))
+         */
+        createTempSpan: function(context, removeImmediately, keepChildren, adjustInner) {
+            var com = CUI.rte.Common;
+            var span = context.createElement("span");
+            var value = (removeImmediately ? com.TEMP_EL_IMMEDIATE_REMOVAL
+                    : com.TEMP_EL_REMOVE_ON_SERIALIZE);
+            if (keepChildren) {
+                value += ":keepChildren";
+            }
+            if (adjustInner) {
+                value += ":adjustInner";
+            }
+            com.setAttribute(span, com.TEMP_EL_ATTRIB, value);
+            return span;
+        },
+
+        /**
+         * Removes all currently active temporary spans (as created by
+         * {@link #createTempSpan}).
+         * @param {CUI.rte.EditContext} context The edit context
+         * @param {Boolean} immediate True if all spans that were marked for immediate
+         *        removal should get removed; fals for spans marked for removal after
+         *        serialization
+         */
+        removeTempSpans: function(context, immediate) {
+            var com = CUI.rte.Common;
+            var dpr = CUI.rte.DomProcessor;
+            var spans = context.doc.getElementsByTagName("span");
+            var spanCnt = spans.length;
+            var value = (immediate ? com.TEMP_EL_IMMEDIATE_REMOVAL
+                    : com.TEMP_EL_REMOVE_ON_SERIALIZE);
+            // on Webkit browsers, the selection may indirectly change,
+            // so ensure that it is the same after the clean up again
+            var hasSelectionChanged = false;
+            var selection, restoreNode, restoreOffset;
+            if (com.ua.isWebKit) {
+                selection = context.win.getSelection();
+                restoreNode = selection.anchorNode;
+                restoreOffset = selection.anchorOffset;
+            }
+            for (var s = 0; s < spanCnt; s++) {
+                var spanToRemove = spans[s];
+                var attrValue = com.getAttribute(spanToRemove, com.TEMP_EL_ATTRIB, true);
+                if (attrValue && com.strStartsWith(attrValue, value)) {
+                    if (spanToRemove.parentNode) {
+                        var splitAttrib = attrValue.split(":");
+                        var keepChildren = com.arrayContains(splitAttrib, "keepChildren");
+                        var adjustInner = com.arrayContains(splitAttrib, "adjustInner");
+                        if (keepChildren) {
+                            dpr.removeWithoutChildren(spanToRemove);
+                        } else if (adjustInner) {
+                            function cleanUp(dom) {
+                                if (dom.nodeType === 3) {
+                                    var text = dom.nodeValue;
+                                    var isReplaced = false;
+                                    var znbspPos;
+                                    do {
+                                        znbspPos = text.indexOf(dpr.ZERO_WIDTH_NBSP);
+                                        if (znbspPos >= 0) {
+                                            text = com.strReplace(text, znbspPos, znbspPos,
+                                                "");
+                                            if (com.ua.isWebKit && (dom === restoreNode)
+                                                    && (znbspPos < restoreOffset)) {
+                                                restoreOffset--;
+                                                hasSelectionChanged = true;
+                                            }
+                                            isReplaced = true;
+                                        }
+                                    } while (znbspPos >= 0);
+                                    if (isReplaced) {
+                                        dom.nodeValue = text;
+                                    }
+                                } else if (dom.nodeType === 1) {
+                                    var childCnt = dom.childNodes.length;
+                                    for (var c = 0; c < childCnt; c++) {
+                                        cleanUp(dom.childNodes[c]);
+                                    }
+                                }
+                            }
+                            cleanUp(spanToRemove);
+                            dpr.removeWithoutChildren(spanToRemove);
+                        } else {
+                            spanToRemove.parentNode.removeChild(spanToRemove);
+                        }
+                    }
+                }
+            }
+            if (com.ua.isWebKit && hasSelectionChanged) {
+                var range = context.doc.createRange();
+                range.setStart(restoreNode, restoreOffset);
+                selection.removeAllRanges();
+                selection.addRange(range);
+            }
+        },
+
+        /**
+         * Removes all DOM elements that are marked as temporary using the
+         * {@link CUI.rte.Common#TEMP_EL_ATTRIB} attribute.
+         * @param {CUI.rte.EditContext} context The edit context
+         * @param {HTMLElement} treeRoot (optional) The sub tree to process
+         */
+        removeTempElements: function(context, treeRoot) {
+            var com = CUI.rte.Common;
+            var dpr = CUI.rte.DomProcessor;
+            if (!treeRoot) {
+                treeRoot = context.doc;
+            }
+            var childCnt = treeRoot.length;
+            for (var c = 0; c < childCnt; c++) {
+                var child = treeRoot.childNodes[c];
+                if (child.nodeType === 1) {
+                    var tempAttrib = com.getAttribute(child, com.TEMP_EL_ATTRIB, true);
+                    if (tempAttrib) {
+                        var splitAttrib = tempAttrib.split(":");
+                        var keepChildren = com.arrayContains(splitAttrib, "keepChildren");
+                        var emptyOnly = com.arrayContains(splitAttrib, "emptyOnly");
+                        if (keepChildren) {
+                            dpr.removeWithoutChildren(child);
+                        } else {
+                            if (emptyOnly) {
+                                if (child.childNodes.length === 0) {
+                                    child.parentNode.removeChild(child);
+                                    continue;
+                                } else {
+                                    com.removeAttribute(child, com.TEMP_EL_ATTRIB);
+                                }
+                            } else {
+                                child.parentNode.removeChild(child);
+                                continue;
+                            }
+                        }
+                    }
+                    dpr.removeTempElements(context, child);
+                }
+            }
+        },
+
+        /**
+         * Checks if the specified node represents a "zero width placeholder node".
+         * @param {HTMLElement} dom The node to check
+         * @return {Boolean} True if the specified node is a zero width placeholder node
+         */
+        isZeroSizePlaceholder: function(dom) {
+            if (dom.nodeType === 1) {
+                if (dom.childNodes.length != 1) {
+                    return false;
+                }
+                dom = dom.childNodes[0];
+            }
+            if (dom.nodeType !== 3) {
+                return false;
+            }
+            var text = com.getNodeText(dom);
+            if (text.length !== 1) {
+                return false;
+            }
+            return (text.charAt(0) === CUI.rte.DomProcessor.ZERO_WIDTH_NBSP);
         },
 
         /**
@@ -1879,6 +2050,18 @@ CUI.rte.DomProcessor = function() {
          * @type String
          */
         NBSP: String.fromCharCode(160),
+
+        /**
+         * Constant that defines the char code for a non-breaking, zero-width character
+         * @type String
+         */
+        ZERO_WIDTH_NBSP_CODE: 65279,
+
+        /**
+         * Constant that defines a non-breaking, zero-width character as a String
+         * @type String
+         */
+        ZERO_WIDTH_NBSP: String.fromCharCode(65279),
 
         EMPTYTEXT_EXCLUSIONS: [ {
                 "tagName": "a",

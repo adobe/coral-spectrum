@@ -1,3 +1,5 @@
+#base=.
+
 setup.js
 
 core/adapter/extjs/Class.js
