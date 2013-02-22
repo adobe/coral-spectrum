@@ -12,8 +12,16 @@
         </div>
 
         <p>
-        Currently you have to supply the full markup to this widget. It does not render missing
-        elements itself.
+        You should provide some information in the HTML markup, as this widget will read most of its options
+        directly from the HTML elements:
+        </p>
+        <ul>
+            <li>Current, min, max and step values are read from the input element</li>
+            <li>The toggles for tooltips, ticks, vertical orientation and filled bars are set if the CSS classes tooltips, ticked, vertical or filled are present</li>
+            <li>Use the attribute data-slide='true' to make handles slide smoothly. Use with care: This can make the slider unresponsive on some systems.</li>
+        </ul>
+        <p>
+        As an alternative you can also directly create an instance of this widget with the class constructor CUI.Slider() or with the jQUery plugin $.slider().
         </p>
     @example
     <caption>Simple horizontal slider</caption>
@@ -42,27 +50,28 @@
     @example
     <caption>Instantiate by jQuery plugin</caption>
     $(".slider-markupless").slider({
-        min: 0,
-        max: 100,
-        step: 5,
-        value: 50,
-        ticks: true,
-        filled: true,
-        orientation: "vertical",
-        tooltips: true
-    });
+            min: 0,
+            max: 100,
+            step: 5,
+            value: 50,
+            ticks: true,
+            filled: true,
+            orientation: "vertical",
+            tooltips: true,
+            slide: true
+        });
 
       @desc Creates a slider from a div
       @constructs
       
-      @param {Object} options         Component options
+      @param {Object}   options                               Component options
       @param {number} [options.step=1]  The steps to snap in
       @param {number} [options.min=1]   Minimum value
       @param {number} [options.max=100] Maximum value
       @param {number} [options.value=1] Starting value
       @param {number} [options.tooltips=false] Show tooltips?
       @param {String} [options.orientation=horizontal]  Either 'horizontal' or 'vertical'
-      @param {boolean} [options.slide=false]    True for smooth sliding animations 
+      @param {boolean} [options.slide=false]    True for smooth sliding animations. Can make the slider unresponsive on some systems. 
       @param {boolean} [options.disabled=false] True for a disabled element
       @param {boolean} [options.bound=false] For multi-input sliders, indicates that the min value is bounded by the max value and the max value is bounded by the min
     **/
@@ -89,8 +98,8 @@
         if(this.$element.hasClass('filled')) {
             that.options.filled = true;
         }
-                
-        if(this.$element.hasClass('slide')) {
+
+        if (this.$element.data("slide")) {
             that.options.slide = true;
         }
 
@@ -188,7 +197,7 @@
                         $this.attr("aria-labelledby", ($this.attr("aria-labelledby").length ? " ":"")+thisId+"-label"+index);
                     }
                     
-                    if (!that._isTouch())
+                    if (!CUI.util.isTouch)
                     {
                         $(this).fipo("touchstart", "mousedown", function(event) {
                             that.$handles.eq(index).focus();
@@ -228,16 +237,16 @@
             {
                 $this.attr("aria-labelledby", $this.attr("aria-labelledby")+($this.attr("aria-labelledby").length ? " ":"")+$label.attr("id"));
             }
-			
-			if ($label.length===0 && $this.attr("aria-labelledby").length>0)
+            
+            if ($label.length===0 && $this.attr("aria-labelledby").length>0)
             {
-				$label = $("#"+$this.attr("aria-labelledby").split(" ")[0]);
+                $label = $("#"+$this.attr("aria-labelledby").split(" ")[0]);
             }
-			
-			if ($this.attr("aria-labelledby").length===0)
-			{
-				$this.removeAttr("aria-labelledby");
-			}
+            
+            if ($this.attr("aria-labelledby").length===0)
+            {
+                $this.removeAttr("aria-labelledby");
+            }
 
             // setting default step
             if (!$this.is("[step]")) $this.attr('step', that.options.step);
@@ -268,7 +277,7 @@
                 }
             }            
             
-            if (that._isTouch())
+            if (CUI.util.isTouch)
             {
                 // handle input value changes 
                 $this.on("change", function(event) {
@@ -289,21 +298,21 @@
                 // on desktop, we don't want the input to receive focus
                 $this.attr({"aria-hidden":true,"tabindex":-1,"hidden":"hidden"});
                 
-				if (index===0) {
-					if ($label) {
-						$label.on("click", function(event) {
-						   if (that.options.disabled) return;
-						   that._clickLabel(event);
-						}.bind(this));
-					}
-					
-					if ($legend) {
-						$legend.on("click", function(event) {
-							if (that.options.disabled) return;
-							that._clickLabel(event);
-						}.bind(this));
-					}
-				}
+                if (index===0) {
+                    if ($label) {
+                        $label.on("click", function(event) {
+                           if (that.options.disabled) return;
+                           that._clickLabel(event);
+                        }.bind(this));
+                    }
+                    
+                    if ($legend) {
+                        $legend.on("click", function(event) {
+                            if (that.options.disabled) return;
+                            that._clickLabel(event);
+                        }.bind(this));
+                    }
+                }
             }
         });
 
@@ -320,7 +329,7 @@
         this.$element.on('change:disabled', this._processDisabledChanged.bind(this));      
         this.$element.on('change:min', this._processMinMaxStepChanged.bind(this));      
         this.$element.on('change:max', this._processMinMaxStepChanged.bind(this));      
-        this.$element.on('change:step', this._processMinMaxStepChanged.bind(this));  
+        this.$element.on('change:step', this._processMinMaxStepChanged.bind(this));
                               
         // Adjust dom to our needs
         this._render();
@@ -336,6 +345,8 @@
       disabled: false,
       tooltips: false,
       tooltipFormatter: function(value) { return value.toString(); },
+      ticks: false,
+      filled: false,
       bound: false
     },
 
@@ -364,21 +375,21 @@
     },
     
     _renderMissingElements: function() {
-		if (!this.$element.find("input").length) {
-			var that = this,
-			    el, 
-			    values = ($.isArray(this.options.value)) ? this.options.value : [this.options.value];
-			    $.each(values, function(index, value) {
-			        el = $("<input>");
-			        el.attr({
-			            "type": "range",
-			            "min": that.options.min,
-			            "max": that.options.max,
-			            "step": that.options.step,
-			            "value": value              
-			        }).val(value);
-			        that.$element.append(el);
-				});
+        if (!this.$element.find("input").length) {
+            var that = this,
+                el, 
+                values = ($.isArray(this.options.value)) ? this.options.value : [this.options.value];
+                $.each(values, function(index, value) {
+                    el = $("<input>");
+                    el.attr({
+                        "type": "range",
+                        "min": that.options.min,
+                        "max": that.options.max,
+                        "step": that.options.step,
+                        "value": value              
+                    }).val(value);
+                    that.$element.append(el);
+                });
         }
         
         if (!this.$element.find("div.clickarea").length) {
@@ -395,7 +406,7 @@
     
     _processValueChanged: function() {
         var that = this, 
-		    values = ($.isArray(this.options.value)) ? this.options.value : [this.options.value];
+            values = ($.isArray(this.options.value)) ? this.options.value : [this.options.value];
         $.each(values, function(index, value) {
             that._updateValue(index, value, true); // Do not trigger change event on programmatic value update!
         });
@@ -411,7 +422,7 @@
         this.$element.find("input").attr("max", this.options.max);
         this.$element.find("input").attr("step", this.options.step);
         
-		$.each(this.values, function(index, value) {
+        $.each(this.values, function(index, value) {
             that._updateValue(index, value, true); // Ensure current values are between min and max
         });
         
@@ -434,15 +445,15 @@
     _processDisabledChanged: function() {
         if (this.options.disabled) {
             this.$inputs.attr("disabled","disabled");
-			this.$handles.each(function() {
-				$(this).removeClass("focus");
-				$(this).parent().removeClass("focus");
-			});			
-            if (this._isTouch()) 
+            this.$handles.each(function() {
+                $(this).removeClass("focus");
+                $(this).parent().removeClass("focus");
+            });            
+            if (CUI.util.isTouch) 
                 this.$handles.attr("aria-disabled",true).removeAttr("tabindex");
         } else {
             this.$inputs.removeAttr("disabled");
-            if (this._isTouch())
+            if (CUI.util.isTouch)
                 this.$handles.removeAttr("aria-disabled").attr("tabindex",0);
         }
         this.$element.toggleClass("disabled", this.options.disabled);                 
@@ -567,7 +578,7 @@
                 }
             }
             
-            if (that._isTouch()) {
+            if (CUI.util.isTouch) {
                 handle.attr("aria-hidden", true);
                 $(this).attr("tabindex", 0).removeAttr("aria-hidden").removeAttr("hidden");
             } else {
@@ -626,7 +637,10 @@
             }
         }
         
-        if (!that._isTouch()) {
+        if (!CUI.util.isTouch) {
+            if (event.type === "mousedown") {
+                that.$handles.eq(pos).data("mousedown", true);
+            }
             that.$handles.eq(pos).focus();
         }            
     },
@@ -666,17 +680,25 @@
     _focus: function(event) {
         if (this.options.disabled) return false;
         var that = this,
-            $this = $(event.target);
-        that.$element.addClass("focus");
-        $this.closest(".value").addClass("focus").find(".handle").addClass("focus");
+            $this = $(event.target),
+			$value = $this.closest(".value"),
+			$handle = $value.find(".handle");
+		if (!$handle.data("mousedown")) {
+            that.$element.addClass("focus");
+            $value.addClass("focus");
+			$handle.addClass("focus");
+		}
     },
 
     _blur: function(event) {
         if (this.options.disabled) return false;
         var that = this,
-        $this = $(event.target);
+        $this = $(event.target),
+		$value = $this.closest(".value"),
+		$handle = $value.find(".handle");
         that.$element.removeClass("focus");
-        $this.closest(".value").removeClass("focus").find(".handle").removeClass("focus");
+		$value.removeClass("focus");
+		$handle.removeClass("focus").removeData("mousedown");
     },
     
     _keyDown: function(event) {
@@ -690,6 +712,10 @@
             minimum = Number(that.options.min),
             maximum = Number(that.options.max),
             page = Math.max(step,Math.round((maximum-minimum)/10));
+		
+		$this.removeData("mousedown");
+		that._focus(event);
+		
         switch(event.keyCode) {
             case 40:
             case 37:
@@ -734,7 +760,7 @@
         if(this.options.disabled) return false;
         event.preventDefault();
         
-        var that = this;
+        var that = this, $handle;
         
         this.draggingPosition = -1;
         this.$handles.each(function(index, handle) {
@@ -751,15 +777,19 @@
             return;
         }
         
-        this.$handles.eq(this.draggingPosition).addClass("dragging");
+        $handle = this.$handles.eq(this.draggingPosition);
+        
+        $handle.addClass("dragging");
         this.$element.closest("body").addClass("slider-dragging-cursorhack");
         
         $(window).fipo("touchmove.slider", "mousemove.slider", this._handleDragging.bind(this));
         $(window).fipo("touchend.slider", "mouseup.slider", this._mouseUp.bind(this));
 
-        if (this.$handles.eq(this.draggingPosition) !== document.activeElement && !that._isTouch())
-        {
-            this.$handles.eq(this.draggingPosition).focus();
+        if ($handle !== document.activeElement && !CUI.util.isTouch) {
+            if (event.type === "mousedown") {
+                $handle.data("mousedown", true);
+            }
+            $handle.focus();
         }
         //update();
     },
@@ -791,9 +821,9 @@
         $(window).unbind("mousemove.slider touchmove.slider");
         $(window).unbind("mouseup.slider touchend.slider");
     },
-	
-	_clickLabel: function(event) {
-		this.$handles.eq(0)[0].focus();
+    
+    _clickLabel: function(event) {
+        this.$handles.eq(0)[0].focus();
     },
 
     _updateValue: function(pos, value, doNotTriggerChange) {
@@ -803,7 +833,7 @@
             if (value < this.options.min) value = this.options.min;
 
             if(pos === 0 || pos === 1) {
-				if (that.$inputs.length===2 && this.options.bound)
+                if (that.$inputs.length===2 && this.options.bound)
                 {
                     if (pos===0) {
                         value = Math.min(value, Number(that.$inputs.eq(1).val()));
@@ -821,7 +851,7 @@
                 }
                 that.values[pos] = value.toString();
                 that.$inputs.eq(pos).val(value).attr("value",value);
-				that.$handles.eq(pos).attr({"aria-valuenow":value,"aria-valuetext":value});
+                that.$handles.eq(pos).attr({"aria-valuenow":value,"aria-valuetext":value});
                 if (!doNotTriggerChange) {
                     setTimeout(function() {
                         that.$inputs.eq(pos).change(); // Keep input element value updated too and fire change event for any listeners
@@ -968,11 +998,6 @@
 
     _getLowestValue: function() {
       return Math.min.apply(null, this.values);
-    },
-    
-    /** @ignore */
-    _isTouch: function() {
-        return 'ontouchstart' in window;
     }
 
     /*update: function() {
