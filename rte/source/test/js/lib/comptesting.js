@@ -260,10 +260,10 @@ CUI.rte.testing.ComponentTesting = function() {
                 if (it < testDescription.iterations.length) {
                     var result = tst.executeTestCaseIteration(testFn, testDescription, it);
                     if (result == "continue") {
-                        asyncFn.defer(1);
+                        CUI.rte.Utils.defer(asyncFn, 1);
                     } else if (result == "success") {
                         it++;
-                        asyncFn.defer(1);
+                        CUI.rte.Utils.defer(asyncFn, 1);
                     } else {
                         if (finishFn) {
                             finishFn(false, result);
@@ -279,7 +279,7 @@ CUI.rte.testing.ComponentTesting = function() {
                     }
                 }
             };
-            asyncFn.defer(1);
+            CUI.rte.Utils.defer(asyncFn, 1);
             return "deferred";
         },
 
@@ -341,7 +341,7 @@ CUI.rte.testing.ComponentTesting = function() {
                 if (isSuccess) {
                     test++;
                     if (test < testCnt) {
-                        asyncSuiteFn.defer(1);
+                        CUI.rte.Utils.defer(asyncSuiteFn, 1);
                     } else {
                         tdr.notifyDeferredSuccess();
                     }
@@ -352,7 +352,7 @@ CUI.rte.testing.ComponentTesting = function() {
             var asyncSuiteFn = function() {
                 tst.executeTestCase(testFn, testDescriptions[test], undefined, continueFn);
             };
-            asyncSuiteFn.defer(1);
+            CUI.rte.Utils.defer(asyncSuiteFn, 1);
             return "deferred";
         }
     };

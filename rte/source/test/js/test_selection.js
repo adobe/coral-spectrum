@@ -444,7 +444,7 @@ CUI.rte.testing.SelectionTests = function() {
         if (!isSingleTest) {
             testIndex = 0;
         }
-        continueSetCaretTestSet.defer(1, this,
+        CUI.rte.Utils.defer(continueSetCaretTestSet, 1, this,
                 [ htmls, resultHtmls, testIndex, 0, isSingleTest ]);
         return "deferred";
     };
@@ -460,7 +460,7 @@ CUI.rte.testing.SelectionTests = function() {
             testIndex ++;
             if ((testIndex < htmls.length) && !isSingleTest) {
                 testRun = 0;
-                continueSetCaretTestSet.defer(1, this,
+                CUI.rte.Utils.defer(continueSetCaretTestSet, 1, this,
                         [ htmls, resultHtmls, testIndex, testRun, isSingleTest ]);
             } else {
                 CUI.rte.DebugRegistry.notifyDeferredSuccess();
@@ -470,7 +470,7 @@ CUI.rte.testing.SelectionTests = function() {
         } else {
             testRun++;
             if (testIndex < htmls.length) {
-                continueSetCaretTestSet.defer(1, this,
+                CUI.rte.Utils.defer(continueSetCaretTestSet, 1, this,
                         [ htmls, resultHtmls, testIndex, testRun, isSingleTest ]);
             } else {
                 CUI.rte.DebugRegistry.notifyDeferredSuccess();
@@ -487,7 +487,7 @@ CUI.rte.testing.SelectionTests = function() {
         if (!isSingleTest) {
             testIndex = 0;
         }
-        continueGetCaretTestSet.defer(1, this,
+        CUI.rte.Utils.defer(continueGetCaretTestSet, 1, this,
                 [ htmls, maxCaretPos, exceptions, testIndex, 0, isSingleTest ]);
         return "deferred";
     };
@@ -503,7 +503,7 @@ CUI.rte.testing.SelectionTests = function() {
             testIndex++;
             if ((testIndex < htmls.length) && !isSingleTest) {
                 testRun = 0;
-                continueGetCaretTestSet.defer(1, this,
+                CUI.rte.Utils.defer(continueGetCaretTestSet, 1, this,
                         [ htmls, maxCaretPos, exceptions, testIndex, testRun,
                                 isSingleTest]);
             } else {
@@ -514,7 +514,7 @@ CUI.rte.testing.SelectionTests = function() {
         } else {
             testRun++;
             if (testIndex < htmls.length) {
-                continueGetCaretTestSet.defer(1, this,
+                CUI.rte.Utils.defer(continueGetCaretTestSet, 1, this,
                         [ htmls, maxCaretPos, exceptions, testIndex, testRun,
                                 isSingleTest]);
             } else {
@@ -674,7 +674,7 @@ CUI.rte.testing.SelectionTests = function() {
         if (!isSingleTest) {
             testIndex = 0;
         }
-        continueCreatePSelTestSet.defer(1, this,
+        CUI.rte.Utils.defer(continueCreatePSelTestSet, 1, this,
                 [ htmls, exceptions, testIndex, 0, isSingleTest ]);
         return "deferred";
     };
@@ -691,7 +691,7 @@ CUI.rte.testing.SelectionTests = function() {
             testIndex ++;
             if ((testIndex < htmls.length) && (!isSingleTest)) {
                 testRun = 0;
-                continueCreatePSelTestSet.defer(100, this,
+                CUI.rte.Utils.defer(continueCreatePSelTestSet, 100, this,
                         [ htmls, exceptions, testIndex, testRun, isSingleTest ]);
             } else {
                 CUI.rte.DebugRegistry.notifyDeferredSuccess();
@@ -699,10 +699,10 @@ CUI.rte.testing.SelectionTests = function() {
         } else if (result == "continue") {
             CUI.rte.DebugRegistry.notifyDeferredError("continue: " + testIndex + "/"
                     + testRun);
-            (function() {
+            CUI.rte.Utils.defer(function() {
                 continueCreatePSelTestSet(htmls, exceptions, testIndex, testRun,
                         isSingleTest);
-            }).defer(1);
+            }, 1);
         } else if (result == "finished") {
             CUI.rte.DebugRegistry.notifyDeferredError(result);
         } else if (result != "success") {
@@ -710,7 +710,7 @@ CUI.rte.testing.SelectionTests = function() {
             CUI.rte.DebugRegistry.notifyDeferredError(result);
         } else  {
             testRun++;
-            continueCreatePSelTestSet.defer(1, this,
+            CUI.rte.Utils.defer(continueCreatePSelTestSet, 1, this,
                     [ htmls, exceptions, testIndex, testRun, isSingleTest ]);
         }
     };
@@ -817,7 +817,7 @@ CUI.rte.testing.SelectionTests = function() {
         if (!isSingleTest) {
             testIndex = 0;
         }
-        continueSelectBookmarkTestSet.defer(1, this,
+        CUI.rte.Utils.defer(continueSelectBookmarkTestSet, 1, this,
                 [ htmls, results, exceptions, testIndex, 0, isSingleTest ]);
         return "deferred";
     };
@@ -833,22 +833,22 @@ CUI.rte.testing.SelectionTests = function() {
             testIndex ++;
             if ((testIndex < htmls.length) && !isSingleTest) {
                 testRun = 0;
-                continueSelectBookmarkTestSet.defer(100, this,
+                CUI.rte.Utils.defer(continueSelectBookmarkTestSet, 100, this,
                         [ htmls, results, exceptions, testIndex, testRun, isSingleTest ]);
             } else {
                 CUI.rte.DebugRegistry.notifyDeferredSuccess();
             }
         } else if (result == "continue") {
-            (function() {
+            CUI.rte.Utils.defer(function() {
                 continueSelectBookmarkTestSet(htmls, results, exceptions, testIndex,
                 testRun, isSingleTest);
-            }).defer(1);
+            }, 1);
         } else if (result != "success") {
             result = addGeckoSelectionInfo(result);
             CUI.rte.DebugRegistry.notifyDeferredError(result);
         } else {
             testRun++;
-            continueSelectBookmarkTestSet.defer(1, this,
+            CUI.rte.Utils.defer(continueSelectBookmarkTestSet, 1, this,
                     [ htmls, results, exceptions, testIndex, testRun, isSingleTest ]);
         }
     };

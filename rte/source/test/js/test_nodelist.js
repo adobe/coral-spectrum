@@ -593,7 +593,7 @@ CUI.rte.testing.NodeListTests = function() {
         if (!isSingleTest) {
             testIndex = 0;
         }
-        continueFromPSelTestSet.defer(1, this,
+        CUI.rte.Utils.defer(continueFromPSelTestSet, 1, this,
                 [ htmls, exceptions, testIndex, 0, isSingleTest ]);
         return "deferred";
     };
@@ -610,7 +610,7 @@ CUI.rte.testing.NodeListTests = function() {
             testIndex ++;
             if ((testIndex < htmls.length) && (!isSingleTest)) {
                 testRun = 0;
-                continueFromPSelTestSet.defer(100, this,
+                CUI.rte.Utils.defer(continueFromPSelTestSet, 100, this,
                         [ htmls, exceptions, testIndex, testRun, isSingleTest ]);
             } else {
                 CUI.rte.DebugRegistry.notifyDeferredSuccess();
@@ -619,7 +619,7 @@ CUI.rte.testing.NodeListTests = function() {
             CUI.rte.DebugRegistry.notifyDeferredError(result);
         } else {
             testRun++;
-            continueFromPSelTestSet.defer(1, this,
+            CUI.rte.Utils.defer(continueFromPSelTestSet, 1, this,
                     [ htmls, exceptions, testIndex, testRun, isSingleTest ]);
         }
     };

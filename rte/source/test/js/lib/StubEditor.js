@@ -27,7 +27,26 @@
             this.editorKernel.setUnprocessedHtml(initialContent || "");
             this.editorKernel.initializeCaret(true);
             this.editorKernel.execCmd("initializeundo");
+        },
+
+        setValue: function(value) {
+            this.editorKernel.setUnprocessedHtml(value);
+            CUI.rte.Utils.defer(function() {
+                if (this.initialized) {
+                    this.editorKernel.initializeCaret();
+                }
+                this.editorKernel.execCmd("initializeundo");
+            }, 1, this);
+        },
+
+        getValue: function() {
+            return this.editorKernel.getProcessedHtml();
+        },
+
+        focus: function() {
+            this.$textContainer.focus();
         }
+
 
     });
 

@@ -32,10 +32,11 @@ CUI.rte.DebugRegistry = function() {
             if (parameter.length == 0) {
                 parameter = undefined;
             }
+            var tests = getTestsForSection(currentSection || "all");
             var resText;
             if (excBoxDom.checked) {
                 try {
-                    resText = registeredTests[selIndex].testFn(parameter);
+                    resText = tests[selIndex].testFn(parameter);
                     resultDom.value = resText;
                     if (window.console) {
                         window.console.log(resText);
@@ -47,13 +48,25 @@ CUI.rte.DebugRegistry = function() {
                     }
                 }
             } else {
-                resText = registeredTests[selIndex].testFn(parameter);
+                resText = tests[selIndex].testFn(parameter);
                 resultDom.value = resText;
                 if (window.console) {
                     window.console.log(resText);
                 }
             }
         }
+    };
+
+    var getTestsForSection = function(section) {
+        var tests = [ ];
+        var testCnt = registeredTests.length;
+        for (var t = 0; t < testCnt; t++) {
+            var test = registeredTests[t];
+            if ((section === "all") || (section === test.section)) {
+                tests.push(test);
+            }
+        }
+        return tests;
     };
 
     var sections = [
@@ -63,14 +76,10 @@ CUI.rte.DebugRegistry = function() {
         }
     ];
 
+    var currentSection = null;
+
     var getSections = function() {
         return sections;
-        /*
-        if (window.CUI_rteInstance.getXType() == "richtext") {
-            return sections;
-        }
-        return sectionsTableEdit;
-        */
     };
 
     var selectSection = function(selDom) {
@@ -107,6 +116,7 @@ CUI.rte.DebugRegistry = function() {
         },
 
         createTestSelector: function(docRef, selectorDiv, preselSection) {
+            currentSection = preselSection;
             var optionDom;
             selectorDiv.appendChild(docRef.createTextNode("Section: "));
             var sectionDom = docRef.createElement("select");
@@ -135,22 +145,15 @@ CUI.rte.DebugRegistry = function() {
             var selDom = docRef.createElement("select");
             selDom.setAttribute("size", "1");
             selectorDiv.appendChild(selDom);
-            var tests = [ ];
-            var testCnt = registeredTests.length;
-            for (var t = 0; t < testCnt; t++) {
-                var test = registeredTests[t];
-                if ((preselSection === "all") || (preselSection === test.section)) {
-                    tests.push(test);
-                }
-            }
-            testCnt = tests.length;
+            var tests = getTestsForSection(preselSection);
+            var testCnt = tests.length;
             if (testCnt == 0) {
                 optionDom = docRef.createElement("option");
                 selDom.appendChild(optionDom);
                 optionDom.setAttribute("value", "");
                 optionDom.appendChild(docRef.createTextNode("- no tests available -"));
             } else {
-                for (t = 0; t < testCnt; t++) {
+                for (var t = 0; t < testCnt; t++) {
                     optionDom = docRef.createElement("option");
                     selDom.appendChild(optionDom);
                     optionDom.setAttribute("value", String(t));
