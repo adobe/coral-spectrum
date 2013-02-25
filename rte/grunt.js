@@ -128,18 +128,22 @@ module.exports = function (grunt) {
         "testing-lib": [
             'lib/commons.js',
             'lib/comptesting.js',
-            'lib/selection.js'
+            'lib/selection.js',
+            'lib/debug.js',
+            'lib/configs.js',
+            'lib/StubEditor.js'
         ],
         "testing": [
-            'test_basics.js'
-            /*,
+            'test_basics.js',
+            /*
             'test_domcommons.js',
             'test_domprocessor.js',
             'test_selection.js',
             'test_nodelist.js',
             'test_lists.js',
-            'test_table_basics.js'
+            'test_table_basics.js',
             */
+            'startup.js'
         ]
     };
 
