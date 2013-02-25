@@ -92,10 +92,13 @@ CUI.rte.DebugRegistry = function() {
     ];
 
     var getSections = function() {
+        return sections;
+        /*
         if (window.CUI_rteInstance.getXType() == "richtext") {
             return sections;
         }
         return sectionsTableEdit;
+        */
     };
 
     var selectSection = function(selDom) {
