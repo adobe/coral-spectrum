@@ -13,9 +13,9 @@ body {
     font-size: 12px;
 }
 
-#test .cq-rte-forcedborder,
-#test .cq-rte-forcedborder TD,
-#test .cq-rte-forcedborder TH {
+#test .cui-rte-forcedborder,
+#test .cui-rte-forcedborder TD,
+#test .cui-rte-forcedborder TH {
     border: 1px dotted #D3D3D3;
 }
 

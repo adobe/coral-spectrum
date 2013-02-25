@@ -355,6 +355,7 @@ CUI.rte.testing.ComponentTesting = function() {
             CUI.rte.Utils.defer(asyncSuiteFn, 1);
             return "deferred";
         }
+
     };
 
 }();

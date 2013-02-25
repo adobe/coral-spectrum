@@ -126,10 +126,10 @@ module.exports = function (grunt) {
             'env/Theme.js'
         ],
         "testing-lib": [
+            'lib/debug.js',
             'lib/commons.js',
             'lib/comptesting.js',
             'lib/selection.js',
-            'lib/debug.js',
             'lib/configs.js',
             'lib/StubEditor.js'
         ],

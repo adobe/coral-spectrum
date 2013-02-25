@@ -4,6 +4,9 @@ CUI.rte.DebugRegistry = function() {
 
     var registeredTests = [ ];
 
+    var successHandler = null;
+
+
     var getUrlPrm = function(prmName, defaultValue) {
         var value = defaultValue;
         var searchStr = document.location.search;
@@ -25,35 +28,68 @@ CUI.rte.DebugRegistry = function() {
         return value;
     };
 
-    var startTest = function(selDom, parameterDom, excBoxDom) {
-        var selIndex = selDom.selectedIndex;
-        if (registeredTests.length > selIndex) {
-            var parameter = parameterDom.value;
-            if (parameter.length == 0) {
-                parameter = undefined;
-            }
-            var tests = getTestsForSection(currentSection || "all");
-            var resText;
-            if (excBoxDom.checked) {
-                try {
-                    resText = tests[selIndex].testFn(parameter);
-                    resultDom.value = resText;
-                    if (window.console) {
-                        window.console.log(resText);
-                    }
-                } catch (e) {
-                    resultDom.value = "Exception: " + (e.message ? e.message : e);
-                    if (window.console) {
-                        window.console.log(e);
-                    }
-                }
-            } else {
-                resText = tests[selIndex].testFn(parameter);
+    var execTest = function(test, parameter, excBoxDom) {
+        var resText;
+        if (excBoxDom.checked) {
+            try {
+                resText = test.testFn(parameter);
                 resultDom.value = resText;
                 if (window.console) {
                     window.console.log(resText);
                 }
+            } catch (e) {
+                resultDom.value = "Exception: " + (e.message ? e.message : e);
+                if (window.console) {
+                    window.console.log(e);
+                }
             }
+        } else {
+            resText = test.testFn(parameter);
+            resultDom.value = resText;
+            if (window.console) {
+                window.console.log(resText);
+            }
+        }
+        if ((resText === "success") && successHandler) {
+            successHandler();
+        }
+    };
+
+    var startTest = function(selDom, parameterDom, excBoxDom) {
+        successHandler = undefined;
+        var selIndex = selDom.selectedIndex;
+        var tests = getTestsForSection(currentSection || "all");
+        if (tests.length > selIndex) {
+            var parameter = parameterDom.value;
+            if (parameter.length == 0) {
+                parameter = undefined;
+            }
+            execTest(tests[selIndex], parameter, excBoxDom);
+        }
+    };
+
+    var _toExecute = null;
+
+    var startAllTests = function(excBoxDom) {
+
+        function startSingleTest() {
+            if (_toExecute.length > 0) {
+                successHandler = startSingleTest;
+                var test = _toExecute[0];
+                _toExecute.splice(0, 1);
+                console.log("Starting test '" + test.name + "'.");
+                execTest(test, undefined, excBoxDom);
+            } else {
+                successHandler = null;
+                console.log("All tests finished successfully.")
+            }
+        }
+
+        _toExecute = getTestsForSection(currentSection || "all");
+        if (_toExecute.length > 0) {
+            startSingleTest();
+        } else {
+            window.console.log("No tests available");
         }
     };
 
@@ -125,6 +161,12 @@ CUI.rte.DebugRegistry = function() {
                 selectSection(sectionDom);
             };
             selectorDiv.appendChild(sectionDom);
+            var startAllButtonDom = docRef.createElement("button");
+            startAllButtonDom.appendChild(docRef.createTextNode("Start all"));
+            startAllButtonDom.onclick = function() {
+                startAllTests(excBoxDom);
+            };
+            selectorDiv.appendChild(startAllButtonDom);
             var _sections = getSections();
             var sectionCnt = _sections.length;
             var preselIndex = -1;
@@ -180,12 +222,12 @@ CUI.rte.DebugRegistry = function() {
                 excBoxDom.setAttribute("checked", "checked");
             }
             selectorDiv.appendChild(docRef.createTextNode(" "));
-            var buttonDom = docRef.createElement("button");
-            buttonDom.appendChild(docRef.createTextNode("Start"));
-            buttonDom.onclick = function() {
+            var startButtonDom = docRef.createElement("button");
+            startButtonDom.appendChild(docRef.createTextNode("Start"));
+            startButtonDom.onclick = function() {
                 startTest(selDom, parameterDom, excBoxDom);
             };
-            selectorDiv.appendChild(buttonDom);
+            selectorDiv.appendChild(startButtonDom);
             selectorDiv.appendChild(docRef.createElement("br"));
             selectorDiv.appendChild(docRef.createTextNode("Result: "));
             selectorDiv.appendChild(resultDom);
@@ -200,6 +242,9 @@ CUI.rte.DebugRegistry = function() {
             resultDom.value = "success";
             if (window.console) {
                 window.console.log("success");
+            }
+            if (successHandler) {
+                successHandler();
             }
         },
 
