@@ -54,15 +54,15 @@ CUI.rte.Utils = function() {
 
         htmlEncode: function(str) {
             if (str) {
-                str = str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-                        .replace(/"/g, "&quot;");
+                str = String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;")
+                        .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
             }
             return str;
         },
 
         htmlDecode: function(str) {
             if (str) {
-                str = str.replace(/&lt;/g, "<").replace(/&gt;/g, ">")
+                str = String(str).replace(/&lt;/g, "<").replace(/&gt;/g, ">")
                         .replace(/&quot;/g, "\"").replace(/&amp;/g, "&");
             }
             return str;
@@ -70,7 +70,7 @@ CUI.rte.Utils = function() {
 
         stripTags: function(str) {
             if (str) {
-                str = str.replace(/<\/?[a-z][a-z0-9]*[^<>]*>/gi, "");
+                str = String(str).replace(/<\/?[a-z][a-z0-9]*[^<>]*>/gi, "");
             }
             return str;
         },
