@@ -35,7 +35,7 @@ CUI.rte.DebugRegistry = function() {
             } else {
                 var msg = "";
                 for (var a = 0; a < arguments.length; a ++) {
-                    if (a >= 0) {
+                    if (a > 0) {
                         msg += "\r\n";
                     }
                     msg += arguments[a];
