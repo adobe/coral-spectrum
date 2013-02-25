@@ -135,9 +135,9 @@ module.exports = function (grunt) {
         ],
         "testing": [
             'test_basics.js',
-            /*
             'test_domcommons.js',
             'test_domprocessor.js',
+            /*
             'test_selection.js',
             'test_nodelist.js',
             'test_lists.js',
