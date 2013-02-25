@@ -28,27 +28,38 @@ CUI.rte.DebugRegistry = function() {
         return value;
     };
 
+    var log = function() {
+        if (window.console) {
+            if (window.console.log.apply) {
+                window.console.log.apply(window.console, arguments);
+            } else {
+                var msg = "";
+                for (var a = 0; a < arguments.length; a ++) {
+                    if (a >= 0) {
+                        msg += "\r\n";
+                    }
+                    msg += arguments[a];
+                }
+                window.console.log(msg);
+            }
+        }
+    };
+
     var execTest = function(test, parameter, excBoxDom) {
         var resText;
         if (excBoxDom.checked) {
             try {
                 resText = test.testFn(parameter);
                 resultDom.value = resText;
-                if (window.console) {
-                    window.console.log(resText);
-                }
+                log(resText);
             } catch (e) {
                 resultDom.value = "Exception: " + (e.message ? e.message : e);
-                if (window.console) {
-                    window.console.log(e);
-                }
+                log(e);
             }
         } else {
             resText = test.testFn(parameter);
             resultDom.value = resText;
-            if (window.console) {
-                window.console.log(resText);
-            }
+            log(resText);
         }
         if ((resText === "success") && successHandler) {
             successHandler();
@@ -77,11 +88,11 @@ CUI.rte.DebugRegistry = function() {
                 successHandler = startSingleTest;
                 var test = _toExecute[0];
                 _toExecute.splice(0, 1);
-                console.log("Starting test '" + test.name + "'.");
+                log("Starting test '" + test.name + "'.");
                 execTest(test, undefined, excBoxDom);
             } else {
                 successHandler = null;
-                console.log("All tests finished successfully.")
+                log("All tests finished successfully.")
             }
         }
 
@@ -89,7 +100,7 @@ CUI.rte.DebugRegistry = function() {
         if (_toExecute.length > 0) {
             startSingleTest();
         } else {
-            window.console.log("No tests available");
+            log("No tests available");
         }
     };
 
@@ -240,9 +251,7 @@ CUI.rte.DebugRegistry = function() {
 
         notifyDeferredSuccess: function() {
             resultDom.value = "success";
-            if (window.console) {
-                window.console.log("success");
-            }
+            log("success");
             if (successHandler) {
                 successHandler();
             }
@@ -250,9 +259,7 @@ CUI.rte.DebugRegistry = function() {
 
         notifyDeferredError: function(error) {
             resultDom.value = error;
-            if (window.console) {
-                window.console.log(error);
-            }
+            log(error);
         }
 
     };
