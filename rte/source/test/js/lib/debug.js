@@ -63,17 +63,6 @@ CUI.rte.DebugRegistry = function() {
         }
     ];
 
-    // TODO
-    var sectionsTableEdit = [
-        {
-            "id": "all",
-            "text": "All sections"
-        }, {
-            "id": "table_basics",
-            "text": "Basic processing"
-        }
-    ];
-
     var getSections = function() {
         return sections;
         /*

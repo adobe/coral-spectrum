@@ -137,12 +137,10 @@ module.exports = function (grunt) {
             'test_basics.js',
             'test_domcommons.js',
             'test_domprocessor.js',
-            /*
             'test_selection.js',
             'test_nodelist.js',
             'test_lists.js',
             'test_table_basics.js',
-            */
             'startup.js'
         ]
     };
