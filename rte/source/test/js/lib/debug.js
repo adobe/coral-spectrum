@@ -60,27 +60,10 @@ CUI.rte.DebugRegistry = function() {
         {
             "id": "all",
             "text": "All sections"
-        }, {
-            "id": "basics",
-            "text": "Basic processing"
-        }, {
-            "id": "domcommons",
-            "text": "Basic DOM processing"
-        }, {
-            "id": "domprocessor",
-            "text": "Advanced DOM processing"
-        }, {
-            "id": "selection",
-            "text": "Selection processing"
-        }, {
-            "id": "nodelist",
-            "text": "Node list-related stuff"
-        }, {
-            "id": "cmdLists",
-            "text": "Command: List"
         }
     ];
 
+    // TODO
     var sectionsTableEdit = [
         {
             "id": "all",
@@ -119,8 +102,16 @@ CUI.rte.DebugRegistry = function() {
 
     return {
 
-        registerTest: function(name, testFn) {
+        registerSection: function(id, text) {
+            sections.push({
+                "id": id,
+                "text": text
+            });
+        },
+
+        registerTest: function(section, name, testFn) {
             registeredTests.push({
+                "section": section,
                 "name": name,
                 "testFn": testFn
             });
@@ -155,18 +146,26 @@ CUI.rte.DebugRegistry = function() {
             var selDom = docRef.createElement("select");
             selDom.setAttribute("size", "1");
             selectorDiv.appendChild(selDom);
+            var tests = [ ];
             var testCnt = registeredTests.length;
+            for (var t = 0; t < testCnt; t++) {
+                var test = registeredTests[t];
+                if ((preselSection === "all") || (preselSection === test.section)) {
+                    tests.push(test);
+                }
+            }
+            testCnt = tests.length;
             if (testCnt == 0) {
                 optionDom = docRef.createElement("option");
                 selDom.appendChild(optionDom);
                 optionDom.setAttribute("value", "");
                 optionDom.appendChild(docRef.createTextNode("- no tests available -"));
             } else {
-                for (var t = 0; t < testCnt; t++) {
+                for (t = 0; t < testCnt; t++) {
                     optionDom = docRef.createElement("option");
                     selDom.appendChild(optionDom);
                     optionDom.setAttribute("value", String(t));
-                    optionDom.appendChild(docRef.createTextNode(registeredTests[t].name));
+                    optionDom.appendChild(docRef.createTextNode(tests[t].name));
                 }
             }
             selectorDiv.appendChild(docRef.createTextNode(" "));

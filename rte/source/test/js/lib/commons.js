@@ -12,9 +12,15 @@ CUI.rte.testing.Commons = function() {
 
     return {
 
-        registerTest: function(name, testFn) {
+        registerSection: function(id, name) {
             if (CUI.rte.DebugRegistry) {
-                CUI.rte.DebugRegistry.registerTest(name, testFn);
+                CUI.rte.DebugRegistry.registerSection(id, name);
+            }
+        },
+
+        registerTest: function(section, name, testFn) {
+            if (CUI.rte.DebugRegistry) {
+                CUI.rte.DebugRegistry.registerTest(section, name, testFn);
             }
         },
 

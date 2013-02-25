@@ -1253,42 +1253,43 @@ CUI.rte.testing.BasicsTests = function() {
 
 }();
 
+CUI.rte.testing.Commons.registerSection("basics", "Basic processing");
 CUI.rte.testing.Commons.registerTest(
-        "Basics.testTagParser",
+        "basics", "Basics.testTagParser",
         CUI.rte.testing.BasicsTests.testTagParser);
 CUI.rte.testing.Commons.registerTest(
-        "Basics.testParser",
+        "basics", "Basics.testParser",
         CUI.rte.testing.BasicsTests.testParser);
 CUI.rte.testing.Commons.registerTest(
-        "Basics.testSerializerHTML",
+        "basics", "Basics.testSerializerHTML",
         CUI.rte.testing.BasicsTests.testSerializerHTML);
 CUI.rte.testing.Commons.registerTest(
-        "Basics.testSerializerXHTML",
+        "basics", "Basics.testSerializerXHTML",
         CUI.rte.testing.BasicsTests.testSerializerXHTML);
 CUI.rte.testing.Commons.registerTest(
-        "Basics.testSerializerXHTML_ShortTags",
+        "basics", "Basics.testSerializerXHTML_ShortTags",
         CUI.rte.testing.BasicsTests.testSerializerXHTML_ShortTags);
 CUI.rte.testing.Commons.registerTest(
-        "Basics.testHtmlDeserializer",
+        "basics", "Basics.testHtmlDeserializer",
         CUI.rte.testing.BasicsTests.testHtmlDeserializer);
 CUI.rte.testing.Commons.registerTest(
-        "Basics.testXhtmlDeserializer",
+        "basics", "Basics.testXhtmlDeserializer",
         CUI.rte.testing.BasicsTests.testXhtmlDeserializer);
 CUI.rte.testing.Commons.registerTest(
-        "Basics.testTableMatrixBasics",
+        "basics", "Basics.testTableMatrixBasics",
         CUI.rte.testing.BasicsTests.testTableMatrixBasics);
 CUI.rte.testing.Commons.registerTest(
-        "Basics.testFullTableMatrix",
+        "basics", "Basics.testFullTableMatrix",
         CUI.rte.testing.BasicsTests.testFullTableMatrix);
 CUI.rte.testing.Commons.registerTest(
-        "Basics.testTableOptimizing",
+        "basics", "Basics.testTableOptimizing",
         CUI.rte.testing.BasicsTests.testTableOptimizing);
 CUI.rte.testing.Commons.registerTest(
-        "Basics.testSetValue",
+        "basics", "Basics.testSetValue",
         CUI.rte.testing.BasicsTests.testSetValue);
 CUI.rte.testing.Commons.registerTest(
-        "Basics.testGetValue",
+        "basics", "Basics.testGetValue",
         CUI.rte.testing.BasicsTests.testGetValue);
 CUI.rte.testing.Commons.registerTest(
-        "Basics.testCommonsLib",
+        "basics", "Basics.testCommonsLib",
         CUI.rte.testing.BasicsTests.testCommonsLib);
