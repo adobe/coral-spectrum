@@ -1,6 +1,6 @@
 var _cqRteConfigs = {
     "dflt": {
-        "requiredCssPath": "../../themes/default/widgets/form/RichText"
+        "requiredCssPath": "rte.css"
     },
     "allFeatures": {
         "rtePlugins": {
@@ -248,6 +248,6 @@ var _cqRteConfigs = {
             }
         },
         // "removeSingleParagraphContainer": true,
-        "requiredCssPath": "../../themes/default/widgets/form/RichText"
+        "requiredCssPath": "rte.css"
     }
 };

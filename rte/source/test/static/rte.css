@@ -1,3 +1,33 @@
 #test {
     border: solid 1px;
+    cursor: text;
+}
+
+body {
+    font-family: sans-serif;
+    font-size: 12px;
+    padding: 3px;
+}
+
+#test TD {
+    font-size: 12px;
+}
+
+#test .cq-rte-forcedborder,
+#test .cq-rte-forcedborder TD,
+#test .cq-rte-forcedborder TH {
+    border: 1px dotted #D3D3D3;
+}
+
+#test .cq-rte-anchor {
+    width: 11px;
+    line-height: 6px;
+    overflow: hidden;
+    padding-left: 14px;
+    background: url("img/anchor.png") no-repeat bottom left;
+}
+
+#test .cq-rte-tableselection {
+    background-color: #0000aa !important;
+    color: #ffffff !important;
 }
