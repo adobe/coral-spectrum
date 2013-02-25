@@ -42,7 +42,7 @@ CUI.rte.AdapterUtils = function($) {
         },
 
         getBlankImageUrl: function() {
-            return "../images/components/rte/blank.png";
+            return CUI.rte.Theme.BLANK_IMAGE;
         }
 
     };

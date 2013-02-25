@@ -32,9 +32,7 @@
         setValue: function(value) {
             this.editorKernel.setUnprocessedHtml(value);
             CUI.rte.Utils.defer(function() {
-                if (this.initialized) {
-                    this.editorKernel.initializeCaret();
-                }
+                this.editorKernel.initializeCaret();
                 this.editorKernel.execCmd("initializeundo");
             }, 1, this);
         },

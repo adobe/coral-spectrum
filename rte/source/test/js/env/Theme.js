@@ -88,7 +88,12 @@ CUI.rte.Theme = function() {
          * CSS class that is added to selected toolbar items
          * @ignore
          */
-        TOOLBARITEM_SELECTED_CLASS: "rte-tbi-selected"
+        TOOLBARITEM_SELECTED_CLASS: "rte-tbi-selected",
+
+        /**
+         * Blank image path
+         */
+        BLANK_IMAGE: "img/spacer.png"
 
     };
 

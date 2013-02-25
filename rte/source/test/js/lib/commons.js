@@ -87,7 +87,7 @@ CUI.rte.testing.Commons = function() {
                 html = html.replace(/<br _rte_wktemp_br="brEOB">/gi, "");
                 html = html.replace(
                         /(<img src="img\/spacer\.png" _rte_a_name_repl=")(.*?)"(.*?>)/gi,
-                        "<a name=\"$2\" class=\"cq-rte-anchor\"></a>");
+                        "<a name=\"$2\" class=\"cui-rte-anchor\"></a>");
             }
             return html;
         },
