@@ -42,7 +42,7 @@
         },
 
         focus: function() {
-            this.$textContainer.focus();
+            this.editorKernel.focus();
         }
 
 
