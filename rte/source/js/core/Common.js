@@ -1207,7 +1207,7 @@ CUI.rte.Common = function() {
             }
             while (true) {
                 node = CUI.rte.Common.getParentNode(context, node);
-                if (!node || (node.parentNode === context.root)) {
+                if (!node || (node === context.root)) {
                     return null;
                 }
                 if (node.nextSibling) {
