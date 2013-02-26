@@ -209,12 +209,32 @@
                             <value>"/etc/clientlibs/granite/handlebars.js"</value>
                         </replacement>                      
                         <replacement>
+                            <token>"js/libs/moment.js"</token>
+                            <value>"/etc/clientlibs/granite/coralui/js/plugins/moment.js"</value>
+                        </replacement>                      
+                        <replacement>
+                            <token>"js/libs/toe.js"</token>
+                            <value>"/etc/clientlibs/granite/coralui/js/plugins/toe.js"</value>
+                        </replacement>                      
+                        <replacement>
                             <token>"js/libs/jquery.js"</token>
                             <value>"/etc/clientlibs/granite/jquery.js"</value>
                         </replacement>
                         <replacement>
+                            <token>"js/libs/jquery-fingerpointer.js"</token>
+                            <value>"/etc/clientlibs/granite/coralui/js/plugins/jquery-fingerpointer.js"</value>
+                        </replacement>                      
+                        <replacement>
+                            <token>"images/previews/</token>
+                            <value>"../guide/images/previews/</value>
+                        </replacement>
+                        <replacement>
                             <token>"images/</token>
                             <value>"../resources/images/</value>
+                        </replacement>
+                        <replacement>
+                            <token>"js/google-code-prettify/</token>
+                            <value>"examples/assets/google-code-prettify/</value>
                         </replacement>
                     </replacements>
                 </configuration>
