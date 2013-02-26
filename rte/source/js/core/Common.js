@@ -24,7 +24,7 @@
  */
 CUI.rte.Common = function() {
 
-    var docMode = window.document.documentMode, // documentMode property explaination: http://msdn.microsoft.com/en-us/library/ie/cc196988%28v=vs.85%29.aspx
+    var docMode = window.document.documentMode, // documentMode property explanation: http://msdn.microsoft.com/en-us/library/ie/cc196988%28v=vs.85%29.aspx
         ua = navigator.userAgent.toLowerCase(),
         check = function(r){
             return r.test(ua);
@@ -32,11 +32,12 @@ CUI.rte.Common = function() {
         isWebkit = check(/webkit/),
         isGecko = !isWebkit && check(/gecko/), // because the Webkit user agent string sometimes contains "like Gecko"
         isIE = check(/msie/),
-        isIE6 = isIE && check(/msie 6/),
-        isIE7 = isIE && (check(/msie 7/) || docMode == 7),
-        isIE8 = isIE && (check(/msie 8/) || docMode == 8),
-        isIE9 = isIE && (check(/msie 9/) || docMode == 9),
-        isIE10 = isIE && (check(/msie 10/) || docMode == 10),
+        // TODO ambigious browser detection, see CUI-
+        isIE6 = isIE && (check(/msie 6/) || (docMode === 5)), // docMode === 5 indicates "Quirks Mode"
+        isIE7 = isIE && (check(/msie 7/) || docMode === 7),
+        isIE8 = isIE && (check(/msie 8/) || docMode === 8),
+        isIE9 = isIE && (check(/msie 9/) || docMode === 9),
+        isIE10 = isIE && (check(/msie 10/) || docMode === 10),
         isOldIE = isIE && (isIE6 || isIE7 || isIE8), // indicator that this IE versions are using the old proprietary behavior (especially selection)
         isW3cIE = isIE && !isOldIE,
         isMac = check(/macintosh|mac os x/),
