@@ -24,9 +24,7 @@
             }
             this.editorKernel.initializeEditContext(window, document, this.textContainer);
             this.editorKernel.initializeEventHandling();
-            this.editorKernel.setUnprocessedHtml(initialContent || "");
-            this.editorKernel.initializeCaret(true);
-            this.editorKernel.execCmd("initializeundo");
+            this.setValue(initialContent || "");
         },
 
         setValue: function(value) {
