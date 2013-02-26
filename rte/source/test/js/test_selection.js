@@ -150,7 +150,7 @@ CUI.rte.testing.SelectionTests = function() {
         if (!tsl.isExchangeable(context, lit11, 0, lit1, 6, true)) {
             return "lit11/0 and lit1/6 (EOS) must be exchangeable, but are not";
         }
-        if (!com.ua.isOldIE) {
+        if (!com.ua.isIE) {
             if (!tsl.isExchangeable(context, br, 0, br, null)) {
                 return "br/0 and br/null must be exchangeable (W3C), but are not";
             }
@@ -165,7 +165,8 @@ CUI.rte.testing.SelectionTests = function() {
             if (!tsl.isExchangeable(context, lit11, 0, lit1, 6, false)) {
                 return "lit11/0 and lit1/6 (BOS) must be exchangeable (IE), but are not";
             }
-        } else {
+        }
+        if (!com.ua.isIE) {
             if (!tsl.isExchangeable(context, p3, null, t5, 0)) {
                 return "p3/null and t5/0 must be exchangeable (W3C), but are not";
             }

@@ -372,7 +372,7 @@ CUI.rte.Selection = function() {
             if (endNode) {
                 var moveAfterPrevCharNode = function() {
                     var pcn = com.getPreviousCharacterNode(context, endNode);
-                    if (pcn) {
+                    if (pcn && !com.isRootNode(pcn)) {
                         endNode = pcn;
                         endOffset = sel.getLastSelectionOffset(context, pcn, true);
                     }
