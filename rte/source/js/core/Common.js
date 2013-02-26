@@ -32,7 +32,7 @@ CUI.rte.Common = function() {
         isWebkit = check(/webkit/),
         isGecko = !isWebkit && check(/gecko/), // because the Webkit user agent string sometimes contains "like Gecko"
         isIE = check(/msie/),
-        // TODO ambigious browser detection, see CUI-
+        // TODO ambigious browser detection, see CUI-447
         isIE6 = isIE && (check(/msie 6/) || (docMode === 5)), // docMode === 5 indicates "Quirks Mode"
         isIE7 = isIE && (check(/msie 7/) || docMode === 7),
         isIE8 = isIE && (check(/msie 8/) || docMode === 8),
@@ -1207,7 +1207,7 @@ CUI.rte.Common = function() {
             }
             while (true) {
                 node = CUI.rte.Common.getParentNode(context, node);
-                if (!node) {
+                if (!node || (node.parentNode === context.root)) {
                     return null;
                 }
                 if (node.nextSibling) {
