@@ -92,12 +92,9 @@ CUI.rte.testing.SelectionLib = function() {
 
         /**
          * Get the (HTML) content of the current selection.
-         * @param {Boolean} suppressWebkitLFWorkarounds True to suppress some
-         *        Webkit-specific "linefeed" workarounds that are required for one testcase,
-         *        but falsify others
          * @return {String} HTML content of the current selection
          */
-        getSelectionContents: function(suppressWebkitLFWorkarounds) {
+        getSelectionContents: function() {
             var range = getLeadRange();
             if (com.ua.isOldIE) {
                 return range.htmlText;
@@ -108,18 +105,7 @@ CUI.rte.testing.SelectionLib = function() {
             // so it's better to use a div
             var div = context.createElement("div");
             div.appendChild(domFrag);
-            var html = div.innerHTML;
-            if (com.ua.isWebKit && !suppressWebkitLFWorkarounds) {
-                html = html.replace(/<p><\/p>/gi, "<p><br></p>");
-                html = html.replace(/<p><br _moz_dirty="" type="_moz"><\/p>/gi,
-                    "<p><br></p>");
-                if (context.root.childNodes.length == 1) {
-                    if (context.root.childNodes[0].innerHTML == html) {
-                        html = context.root.innerHTML;
-                    }
-                }
-            }
-            return html;
+            return div.innerHTML;
         },
 
         /**

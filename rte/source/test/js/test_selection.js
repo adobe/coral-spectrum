@@ -747,7 +747,7 @@ CUI.rte.testing.SelectionTests = function() {
                 "charCnt": (e - testRun)
             };
             sel.selectBookmark(context, bookmark);
-            var selectionOrig = tsl.getSelectionContents(false);
+            var selectionOrig = tsl.getSelectionContents();
             var selectionContent = tsl.toPlainText(selectionOrig);
             var expectedContent = tsl.toPlainText(createPartialHtml(testRun, e, posArray));
             var selection;
