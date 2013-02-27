@@ -898,110 +898,110 @@ CUI.rte.testing.SelectionTests = function() {
 
         SETCARET_TEST_BASICS: [
             // absolutely basic ...
-            "<p>Hello, World!</p>",
-            "<p>A world with</p><p>two paragraphs</p>",
-            "<p><b><i>Formatted</i> test text</b>, easy one.</p>",
-            "<p>More <b><i>complex</i> formatting</b>, <u>so far</u>, so good.</p>",
-            "<p>A test with a<br>linefeed inside.</p>",
-            "<p>Testing<br><br>multiple linefeeds (1).</p>",
-            "<p>Testing<br>multiple<br>linefeeds (2).</p>",
-            "<p><br>complex linefeed 1</p>",
-            "<p><br><br>complex linefeed 3</p>",
-            "<p>Testing <a href=\"http://www.somesite.com\">links</a>.</p>",
+            "<p>Hello, World!</p>",                                                         // #0
+            "<p>A world with</p><p>two paragraphs</p>",                                     // #1 
+            "<p><b><i>Formatted</i> test text</b>, easy one.</p>",                          // #2
+            "<p>More <b><i>complex</i> formatting</b>, <u>so far</u>, so good.</p>",        // #3
+            "<p>A test with a<br>linefeed inside.</p>",                                     // #4
+            "<p>Testing<br><br>multiple linefeeds (1).</p>",                                // #5
+            "<p>Testing<br>multiple<br>linefeeds (2).</p>",                                 // #6
+            "<p><br>complex linefeed 1</p>",                                                // #7
+            "<p><br><br>complex linefeed 3</p>",                                            // #8
+            "<p>Testing <a href=\"http://www.somesite.com\">links</a>.</p>",                // #9
             // anchors (not so basic on IE)
-            "<p>Before" + anchor + "</p><p>Middle" + anchor1 + "</p><p>After"
+            "<p>Before" + anchor + "</p><p>Middle" + anchor1 + "</p><p>After"               // #10
                     + anchor2 + "</p>",
-            "<p>" + anchor + "Before</p><p>" + anchor1 + "Middle</p><p>" + anchor2
+            "<p>" + anchor + "Before</p><p>" + anchor1 + "Middle</p><p>" + anchor2          // #11
                     + "After</p>",
-            "<p>" + anchor + "Para 1</p><p>Para 2" + anchor1 + "</p>",
-            "<p>Para 1" + anchor + "</p><p>" + anchor1 + "Para 2</p>",
-            "<p>Before</p>"
+            "<p>" + anchor + "Para 1</p><p>Para 2" + anchor1 + "</p>",                      // #12
+            "<p>Para 1" + anchor + "</p><p>" + anchor1 + "Para 2</p>",                      // #13
+            "<p>Before</p>"                                                                 // #14
                     + "<p>" + anchor + "Para 1</p><p>Para 2" + anchor1 + "</p>"
                     + "<p>After</p>",
-            "<p>Before</p>"
+            "<p>Before</p>"                                                                 // #15
                     + "<p>Para 1" + anchor + "</p><p>" + anchor1 + "Para 2</p>"
                     + "<p>After</p>",
             // images
-            "<p>" + img + "A nice image with no alignment</p>",
-            "<p>" + imgSmall + imgSmall + "Two images in a row</p>",
-            "<p>" + imgSmall + "at different " + imgSmall + " positions " + imgSmall
+            "<p>" + img + "A nice image with no alignment</p>",                             // #16
+            "<p>" + imgSmall + imgSmall + "Two images in a row</p>",                        // #17
+            "<p>" + imgSmall + "at different " + imgSmall + " positions " + imgSmall        // #18
                     + "</p>",
-            "<p>" + imgSmall + "at different " + imgSmall + " positions " + imgSmall
+            "<p>" + imgSmall + "at different " + imgSmall + " positions " + imgSmall        // #19
                     + "</p>"
                     + "<p>" + imgSmall + "at different " + imgSmall + " positions "
                     + imgSmall + "</p>",
-            "<p>" + imgLeft + "A nice image with alignment to the left</p>",
-            "<p>A nice image with " + imgLeft + "alignment to the left</p>",
-            "<p>" + imgSmall + "</p>",
-            "<p>" + imgSmall + "</p><p>" + imgSmall + "</p>",
-            "<p>Before</p><p>" + imgSmall + "</p><p>After</p>",
-            "<p>" + imgSmall + "<br>" + imgSmall + "</p>",
+            "<p>" + imgLeft + "A nice image with alignment to the left</p>",                // #20
+            "<p>A nice image with " + imgLeft + "alignment to the left</p>",                // #21
+            "<p>" + imgSmall + "</p>",                                                      // #22
+            "<p>" + imgSmall + "</p><p>" + imgSmall + "</p>",                               // #23
+            "<p>Before</p><p>" + imgSmall + "</p><p>After</p>",                             // #24
+            "<p>" + imgSmall + "<br>" + imgSmall + "</p>",                                  // #25
             // combining problem childs ...
-            "<p>Test" + anchor + "with" + imgSmall + "</p>",
-            "<p>Test" + anchor + imgSmall + "together.</p>",
-            "<p>Test" + imgSmall + anchor + "together.</p>",
-            "<p>" + anchor + imgSmall + "BOB</p>",
-            "<p>" + imgSmall + anchor + "BOB</p>",
-            "<p>EOL" + anchor + imgSmall + "</p>",
-            "<p>BOL" + imgSmall + anchor + "</p>",
-            "<p>Before</p><p>Test" + anchor + "with" + imgSmall + "</p><p>After</p>",
-            "<p>Before</p><p>Test" + anchor + imgSmall + "together.</p><p>After</p>",
-            "<p>Before</p><p>Test" + imgSmall + anchor + "together.</p><p>After</p>",
-            "<p>Before</p><p>" + anchor + imgSmall + "BOB</p><p>After</p>",
-            "<p>Before</p><p>" + imgSmall + anchor + "BOB</p><p>After</p>",
-            "<p>Before</p><p>EOL" + anchor + imgSmall + "</p><p>After</p>",
-            "<p>Before</p><p>BOL" + imgSmall + anchor + "</p><p>After</p>",
-            "<p>" + anchor + imgSmall + "BOB</p>"
+            "<p>Test" + anchor + "with" + imgSmall + "</p>",                                // #26
+            "<p>Test" + anchor + imgSmall + "together.</p>",                                // #27
+            "<p>Test" + imgSmall + anchor + "together.</p>",                                // #28
+            "<p>" + anchor + imgSmall + "BOB</p>",                                          // #29
+            "<p>" + imgSmall + anchor + "BOB</p>",                                          // #30
+            "<p>EOL" + anchor + imgSmall + "</p>",                                          // #31
+            "<p>BOL" + imgSmall + anchor + "</p>",                                          // #32
+            "<p>Before</p><p>Test" + anchor + "with" + imgSmall + "</p><p>After</p>",       // #33
+            "<p>Before</p><p>Test" + anchor + imgSmall + "together.</p><p>After</p>",       // #34
+            "<p>Before</p><p>Test" + imgSmall + anchor + "together.</p><p>After</p>",       // #35
+            "<p>Before</p><p>" + anchor + imgSmall + "BOB</p><p>After</p>",                 // #36
+            "<p>Before</p><p>" + imgSmall + anchor + "BOB</p><p>After</p>",                 // #37
+            "<p>Before</p><p>EOL" + anchor + imgSmall + "</p><p>After</p>",                 // #38
+            "<p>Before</p><p>BOL" + imgSmall + anchor + "</p><p>After</p>",                 // #39
+            "<p>" + anchor + imgSmall + "BOB</p>"                                           // #40
                     + "<p>" + anchor + imgSmall + "BOB</p>",
-            "<p>EOB" + anchor + imgSmall + "</p>"
+            "<p>EOB" + anchor + imgSmall + "</p>"                                           // #41
                     + "<p>EOB" + anchor + imgSmall + "</p>",
-            "<p>" + imgSmall + anchor + "BOB</p>"
+            "<p>" + imgSmall + anchor + "BOB</p>"                                           // #42
                     + "<p>EOB" + imgSmall + anchor + "</p>",
-            "<p>EOB" + imgSmall + anchor + "</p>"
+            "<p>EOB" + imgSmall + anchor + "</p>"                                           // #43
                     + "<p>" + imgSmall + anchor + "BOB</p>",
-            "<p>Before</p><p>" + anchor + imgSmall + "BOB</p>"
+            "<p>Before</p><p>" + anchor + imgSmall + "BOB</p>"                              // #44
                     + "<p>" + anchor + imgSmall + "BOB</p><p>After</p>",
-            "<p>Before</p><p>EOB" + anchor + imgSmall + "</p>"
+            "<p>Before</p><p>EOB" + anchor + imgSmall + "</p>"                              // #45
                     + "<p>EOB" + anchor + imgSmall + "</p><p>After</p>",
-            "<p>Before</p><p>" + imgSmall + anchor + "BOB</p>"
+            "<p>Before</p><p>" + imgSmall + anchor + "BOB</p>"                              // #46
                     + "<p>EOB" + imgSmall + anchor + "</p><p>After</p>",
-            "<p>Before</p><p>EOB" + imgSmall + anchor + "</p>"
+            "<p>Before</p><p>EOB" + imgSmall + anchor + "</p>"                              // #47
                     + "<p>" + imgSmall + anchor + "BOB</p><p>After</p>",
-            "<p>" + anchor + imgSmall + "BOB</p>"
+            "<p>" + anchor + imgSmall + "BOB</p>"                                           // #48
                     + "<p>" + imgSmall + anchor + "BOB</p>",
-            "<p>EOB" + anchor + imgSmall + "</p>"
+            "<p>EOB" + anchor + imgSmall + "</p>"                                           // #49
                     + "<p>EOB" + imgSmall + anchor + "</p>",
-            "<p>" + imgSmall + anchor + "BOB</p>"
+            "<p>" + imgSmall + anchor + "BOB</p>"                                           // #50
                     + "<p>EOB" + anchor + imgSmall + "</p>",
-            "<p>EOB" + imgSmall + anchor + "</p>"
+            "<p>EOB" + imgSmall + anchor + "</p>"                                           // #51
                     + "<p>" + anchor + imgSmall + "BOB</p>",
-            "<p>Before</p><p>" + anchor + imgSmall + "BOB</p>"
+            "<p>Before</p><p>" + anchor + imgSmall + "BOB</p>"                              // #52
                     + "<p>" + imgSmall + anchor + "BOB</p><p>After</p>",
-            "<p>Before</p><p>EOB" + anchor + imgSmall + "</p>"
+            "<p>Before</p><p>EOB" + anchor + imgSmall + "</p>"                              // #53
                     + "<p>EOB" + imgSmall + anchor + "</p><p>After</p>",
-            "<p>Before</p><p>" + imgSmall + anchor + "BOB</p>"
+            "<p>Before</p><p>" + imgSmall + anchor + "BOB</p>"                              // #54
                     + "<p>EOB" + anchor + imgSmall + "</p><p>After</p>",
-            "<p>Before</p><p>EOB" + imgSmall + anchor + "</p>"
+            "<p>Before</p><p>EOB" + imgSmall + anchor + "</p>"                              // #55
                     + "<p>" + anchor + imgSmall + "BOB</p><p>After</p>",
-            "<p>" + imgSmall + anchor + imgSmall + anchor1 + imgSmall + anchor2 + "</p>",
-            "<p>" + anchor + anchor1 + imgSmall + imgSmall + "</p>",
-            "<p>" + imgSmall + imgSmall + anchor + anchor1 + "</p>",
-            "<p>Before</p><p>" + anchor + anchor1 + imgSmall + imgSmall + "</p>"
+            "<p>" + imgSmall + anchor + imgSmall + anchor1 + imgSmall + anchor2 + "</p>",   // #56
+            "<p>" + anchor + anchor1 + imgSmall + imgSmall + "</p>",                        // #57
+            "<p>" + imgSmall + imgSmall + anchor + anchor1 + "</p>",                        // #58
+            "<p>Before</p><p>" + anchor + anchor1 + imgSmall + imgSmall + "</p>"            // #59
                     + "<p>After</p>",
-            "<p>Before</p><p>" + imgSmall + imgSmall + anchor + anchor1 + "</p>"
+            "<p>Before</p><p>" + imgSmall + imgSmall + anchor + anchor1 + "</p>"            // #60
                     + "<p>After</p>",
             // Preformatted test cases (leading and trailing \n - if available - should be
             // removed; as they represent a special case here, they are still contained in
             // the test cases, contrary to other test cases)
-            "<p>Before</p><pre>Preformatted</pre><p>After</p>",
-            "<p>Before</p><pre>\nPreformatted\nMultiline\n</pre><p>After</p>",
-            "<p>Before</p><pre>\nMultiple   whitespace</pre><p>After</p>",
-            "<p>Before</p><pre>\n   Leading whitespace</pre><p>After</p>",
-            "<p>Before</p><pre>\nTrailing whitespace   </pre><p>After</p>",
-            "<p>Before</p><pre>  Mixed  whitespace     </pre><p>After</p>",
-            "<p>Before</p><pre>\nComplex multi-\n  line\n    whitespace  \ntest.\n</pre>"
+            "<p>Before</p><pre>Preformatted</pre><p>After</p>",                             // #61
+            "<p>Before</p><pre>\nPreformatted\nMultiline\n</pre><p>After</p>",              // #62
+            "<p>Before</p><pre>\nMultiple   whitespace</pre><p>After</p>",                  // #63
+            "<p>Before</p><pre>\n   Leading whitespace</pre><p>After</p>",                  // #64
+            "<p>Before</p><pre>\nTrailing whitespace   </pre><p>After</p>",                 // #65
+            "<p>Before</p><pre>  Mixed  whitespace     </pre><p>After</p>",                 // #66
+            "<p>Before</p><pre>\nComplex multi-\n  line\n    whitespace  \ntest.\n</pre>"   // #67
                     + "<p>After</p>",
-            "<pre>\nPreformatted\n  trailing empty line\n\n</pre>"
+            "<pre>\nPreformatted\n  trailing empty line\n\n</pre>"                          // #68
         ],
 
         SETCARET_RESULT_BASICS: [
