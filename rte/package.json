@@ -3,7 +3,7 @@
   "version": "0.1.0-SNAPSHOT",
   "repository": {
     "type": "git",
-    "url": "https://git.corp.adobe.com/Reef/CoralUI/rte"
+    "url": "https://git.corp.adobe.com/Coral/CoralUI/rte"
   },
   "devDependencies": {
     "grunt": "0.3.17",

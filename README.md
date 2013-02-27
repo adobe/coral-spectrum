@@ -15,9 +15,9 @@ Check out the [Build Process Wiki][5] for information on building CoralUI.
 ## More Information
 See the [CoralUI Wiki][6] for more information. 
 
-[1]: https://git.corp.adobe.com/pages/Reef/CoralUI/
+[1]: https://git.corp.adobe.com/pages/Coral/CoralUI/
 [2]: http://xdbuild.corp.adobe.com:8080/job/CoralUI-Master/ws/build/index.html
 [3]: http://jenkins.bsl.eur.adobe.com:8080/job/Build_CoralUI/ws/build/index.html
-[4]: https://git.corp.adobe.com/Reef/CoralUI/wiki/Build-Process-&-Technology
+[4]: https://git.corp.adobe.com/Coral/CoralUI/wiki/Build-Process-&-Technology
 [5]: mailto:CoralUI@adobe.com
-[6]: https://git.corp.adobe.com/Reef/CoralUI/wiki
+[6]: https://git.corp.adobe.com/Coral/CoralUI/wiki

@@ -37,9 +37,9 @@
     <name>Adobe Reef / CoralUI Content Package</name>
 
     <scm>
-        <connection>scm:git:git@git.corp.adobe.com:Reef/CoralUI.git</connection>
-        <developerConnection>scm:git:git@git.corp.adobe.com:Reef/CoralUI.git</developerConnection>
-        <url>https://git.corp.adobe.com/Reef/CoralUI/tree/master</url>
+        <connection>scm:git:git@git.corp.adobe.com:Coral/CoralUI.git</connection>
+        <developerConnection>scm:git:git@git.corp.adobe.com:Coral/CoralUI.git</developerConnection>
+        <url>https://git.corp.adobe.com/Coral/CoralUI/tree/master</url>
       <tag>HEAD</tag>
   </scm>
 
