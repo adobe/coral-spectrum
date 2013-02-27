@@ -2276,7 +2276,19 @@ CUI.rte.Selection = function() {
                 } else if (startOffset < childCnt) {
                     startNode = startNode.childNodes[startOffset];
                     startNode = com.getFirstChild(startNode) || startNode;
-                    startOffset = (startNode.nodeType == 3 ? 0 : null);
+                    if ((startNode.nodeType === 1) && !com.isCharacterNode(startNode)) {
+                        // if we are on an empty structural tag (an empty span, b, i, etc.),
+                        // take the next character node if available (IE 9 might change
+                        // the selection to such a structure under some circumstances)
+                        var nextCharNode = com.getNextCharacterNode(context, startNode,
+                                com.EDITBLOCK_TAGS);
+                        if (nextCharNode) {
+                            startNode = nextCharNode;
+                        }
+                    }
+                    startOffset = sel.getFirstSelectionOffset(context, startNode);
+                    isCollapsed = (startNode === endNode) &&
+                            (startOffset === endOffset);
                 } else {
                     startNode = com.getLastChild(startNode);
                     if (startNode.nodeType == 3) {
@@ -2291,7 +2303,7 @@ CUI.rte.Selection = function() {
             if (isCollapsed) {
                 if (com.ua.isW3cIE) {
                     // on IE >= 9, the start of a text node is actually handled as the end
-                    // of the // previous text node (if applicable) - handle this as well
+                    // of the previous text node (if applicable) - handle this as well
                     if (startNode && (startNode.nodeType === 3) && (startOffset === 0) &&
                             !dpr.isZeroSizePlaceholder(startNode)) {
                         var prevCharNode = com.getPreviousCharacterNode(context, startNode,
