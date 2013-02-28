@@ -22,6 +22,7 @@
     }
 
     var isDebug = (getUrlPrm("debug", "false") === "true");
+    var isIFrame = (getUrlPrm("iframe", "false") === "true");
 
     $(function() {
 
@@ -36,7 +37,8 @@
         }
 
         window.CUI_rteInstance = new CUI.rte.testing.StubEditor({
-            $el: $test
+            $el: $test,
+            iframe: isIFrame
         });
 
     });
