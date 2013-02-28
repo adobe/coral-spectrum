@@ -2265,7 +2265,6 @@ CUI.rte.Selection = function() {
             startOffset = selection.anchorOffset;
             endNode = selection.focusNode;
             endOffset = selection.focusOffset;
-            var isCollapsed = (startNode == endNode) && (startOffset == endOffset);
             var childCnt;
             // startNode might be null, so it's better to check for that first
             if (startNode
@@ -2287,8 +2286,6 @@ CUI.rte.Selection = function() {
                         }
                     }
                     startOffset = sel.getFirstSelectionOffset(context, startNode);
-                    isCollapsed = (startNode === endNode) &&
-                            (startOffset === endOffset);
                 } else {
                     startNode = com.getLastChild(startNode);
                     if (startNode.nodeType == 3) {
@@ -2300,6 +2297,7 @@ CUI.rte.Selection = function() {
                     }
                 }
             }
+            var isCollapsed = (startNode == endNode) && (startOffset == endOffset);
             if (isCollapsed) {
                 if (com.ua.isW3cIE) {
                     // on IE >= 9, the start of a text node is actually handled as the end
@@ -2342,7 +2340,14 @@ CUI.rte.Selection = function() {
             }
             var mustSwap = false;
             if (startNode == endNode) {
-                mustSwap = (endOffset < startOffset);
+                if (startOffset === endOffset) {
+                    // actually, this is no selection, but a single caret, misrepresented
+                    // by the browser
+                    endNode = null;
+                    endOffset = null;
+                } else {
+                    mustSwap = (endOffset < startOffset);
+                }
             } else {
                 var startIndex = com.createIndexPath(context, startNode);
                 var endIndex = com.createIndexPath(context, endNode);
