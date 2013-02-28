@@ -2057,6 +2057,7 @@ CUI.rte.Selection = function() {
             var objectToSelect = null;
             var range, selection;
             var cells = bookmark.cells;
+
             // if table cells are bookmarked, we're trying to select them first and use
             // the caret position only if none of the cells are available
             if (cells) {
@@ -2084,6 +2085,7 @@ CUI.rte.Selection = function() {
                     return;
                 }
             }
+
             // the default selection process
             if (bookmark.object) {
                 objectToSelect = bookmark.object;
@@ -2103,6 +2105,7 @@ CUI.rte.Selection = function() {
                     }
                 }
             }
+
             var isRangeCreated = !!objectToSelect;
             if (!isRangeCreated) {
                 var startNodeAndOffset = sel.calcNodeAndOffsetForPosition(context,
@@ -2115,11 +2118,13 @@ CUI.rte.Selection = function() {
                     // selecting an empty edit block on IE causes problems if the
                     // setStart... methods are used
                     if (com.isEmptyEditingBlock(startNodeAndOffset.node, true)) {
-                        range.selectNodeContents(startNodeAndOffset.node);
+                        range.selectNode(startNodeAndOffset.node);
+                        range.collapse(true);
                         isRangeCreated = true;
                     }
                 }
             }
+
             if (!isRangeCreated) {
                 correctToPreviousStructure(context, startNodeAndOffset);
                 if (com.ua.isGecko) {
@@ -2155,6 +2160,7 @@ CUI.rte.Selection = function() {
                     range.setEnd(endNode, endOffset);
                 }
             }
+
             selection = context.win.getSelection();
             selection.removeAllRanges();
             selection.addRange(range);

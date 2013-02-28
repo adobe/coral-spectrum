@@ -3572,18 +3572,18 @@ CUI.rte.testing.SelectionTests = function() {
         ],
 
         BOOKMARK_IE_HTMLS: [
-            "<p>Testing empty</p><p>&nbsp;</p><p>paragraphs.</p>",
-            "<p>Testing empty</p><p>&nbsp;</p><p>&nbsp;</p><p>paragraphs.</p>",
-            "<p>Text with " + anchor + "&nbsp;an anchor.</p>",
-            "<p>" + anchor + "&nbsp;BOL anchor</p>",
-            "<p>EOL anchor " + anchor + "</p>",
-            "<p>Multiple " + anchor + "&nbsp;anchors " + anchor1 + "&nbsp;in one "
+            "<p>Testing empty</p><p>&nbsp;</p><p>paragraphs.</p>",                          // #0
+            "<p>Testing empty</p><p>&nbsp;</p><p>&nbsp;</p><p>paragraphs.</p>",             // #1
+            "<p>Text with " + anchor + "&nbsp;an anchor.</p>",                              // #2
+            "<p>" + anchor + "&nbsp;BOL anchor</p>",                                        // #3
+            "<p>EOL anchor " + anchor + "</p>",                                             // #4
+            "<p>Multiple " + anchor + "&nbsp;anchors " + anchor1 + "&nbsp;in one "          // #5
                     + anchor2 + "&nbsp;para.</p>",
             // the following two test cases pass, but the current testing approach does not
             // ensure that the results are correct
-            "<table border=\"1\"><tr><td>&nbsp;</td><td>&nbsp;</td></tr>"
+            "<table border=\"1\"><tr><td>&nbsp;</td><td>&nbsp;</td></tr>"                   // #6
                     + "<tr><td>&nbsp;</td><td>&nbsp;</td></tr></table>",
-            "<p>&nbsp;</p><p>&nbsp;</p>"
+            "<p>&nbsp;</p><p>&nbsp;</p>"                                                    // #7
         ],
 
         BOOKMARK_IE_RESULTS: [
