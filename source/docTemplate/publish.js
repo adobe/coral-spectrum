@@ -71,7 +71,7 @@ function generate(title, docs, filename) {
     
     html = helper.resolveLinks(html); // turn {@link foo} into <a href="foodoc.html">foo</a>
     
-    fs.writeFileSync(outpath, html);
+    fs.writeFileSync(outpath, html, 'utf-8');
 }
 
 /**
@@ -363,7 +363,7 @@ exports.publish = function(taffyData, opts, tutorials) {
         // yes, you can use {@link} in tutorials too!
         html = helper.resolveLinks(html); // turn {@link foo} into <a href="foodoc.html">foo</a>
         
-        fs.writeFileSync(tutorialPath, html);
+        fs.writeFileSync(tutorialPath, html, 'utf-8');
     }
     
     // tutorials can have only one parent so there is no risk for loops

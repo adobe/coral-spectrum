@@ -5,6 +5,7 @@
 /components
 /misc
 /target
+npm-debug.log
 .idea/
 atlassian-ide-plugin.xml
 *.iml
