@@ -1144,16 +1144,20 @@ CUI.rte.Common = function() {
             var com = CUI.rte.Common;
             // if we're looking for a previous node, we'll have to check the starting
             // node also, contrary to getNextCharacterNode
-            if (breakTags && com.isTag(node, breakTags)) {
+            if ((breakTags && com.isTag(node, breakTags)) || (node === context.root)) {
                 return null;
             }
             do {
                 node = com.getPreviousNode(context, node);
+                if (node === context.root) {
+                    node = null;
+                    break;
+                }
                 if (breakTags && com.isTag(node, breakTags)) {
                     node = null;
                     break;
                 }
-            } while (node && (com.getNodeCharacterCnt(node) == 0));
+            } while (node && (com.getNodeCharacterCnt(node) === 0));
             return node;
         },
 

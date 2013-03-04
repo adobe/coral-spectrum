@@ -3,7 +3,7 @@
   "version": "1.2.0",
   "repository": {
     "type": "git",
-    "url": "https://git.corp.adobe.com/Reef/CoralUI"
+    "url": "https://git.corp.adobe.com/Coral/CoralUI"
   },
   "devDependencies": {
     "grunt": "0.3.17",

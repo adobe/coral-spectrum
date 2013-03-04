@@ -2057,6 +2057,7 @@ CUI.rte.Selection = function() {
             var objectToSelect = null;
             var range, selection;
             var cells = bookmark.cells;
+
             // if table cells are bookmarked, we're trying to select them first and use
             // the caret position only if none of the cells are available
             if (cells) {
@@ -2084,6 +2085,7 @@ CUI.rte.Selection = function() {
                     return;
                 }
             }
+
             // the default selection process
             if (bookmark.object) {
                 objectToSelect = bookmark.object;
@@ -2103,6 +2105,7 @@ CUI.rte.Selection = function() {
                     }
                 }
             }
+
             var isRangeCreated = !!objectToSelect;
             if (!isRangeCreated) {
                 var startNodeAndOffset = sel.calcNodeAndOffsetForPosition(context,
@@ -2115,11 +2118,13 @@ CUI.rte.Selection = function() {
                     // selecting an empty edit block on IE causes problems if the
                     // setStart... methods are used
                     if (com.isEmptyEditingBlock(startNodeAndOffset.node, true)) {
-                        range.selectNodeContents(startNodeAndOffset.node);
+                        range.selectNode(startNodeAndOffset.node);
+                        range.collapse(true);
                         isRangeCreated = true;
                     }
                 }
             }
+
             if (!isRangeCreated) {
                 correctToPreviousStructure(context, startNodeAndOffset);
                 if (com.ua.isGecko) {
@@ -2155,6 +2160,7 @@ CUI.rte.Selection = function() {
                     range.setEnd(endNode, endOffset);
                 }
             }
+
             selection = context.win.getSelection();
             selection.removeAllRanges();
             selection.addRange(range);
@@ -2265,7 +2271,6 @@ CUI.rte.Selection = function() {
             startOffset = selection.anchorOffset;
             endNode = selection.focusNode;
             endOffset = selection.focusOffset;
-            var isCollapsed = (startNode == endNode) && (startOffset == endOffset);
             var childCnt;
             // startNode might be null, so it's better to check for that first
             if (startNode
@@ -2276,7 +2281,17 @@ CUI.rte.Selection = function() {
                 } else if (startOffset < childCnt) {
                     startNode = startNode.childNodes[startOffset];
                     startNode = com.getFirstChild(startNode) || startNode;
-                    startOffset = (startNode.nodeType == 3 ? 0 : null);
+                    if ((startNode.nodeType === 1) && !com.isCharacterNode(startNode)) {
+                        // if we are on an empty structural tag (an empty span, b, i, etc.),
+                        // take the next character node if available (IE 9 might change
+                        // the selection to such a structure under some circumstances)
+                        var nextCharNode = com.getNextCharacterNode(context, startNode,
+                                com.EDITBLOCK_TAGS);
+                        if (nextCharNode) {
+                            startNode = nextCharNode;
+                        }
+                    }
+                    startOffset = sel.getFirstSelectionOffset(context, startNode);
                 } else {
                     startNode = com.getLastChild(startNode);
                     if (startNode.nodeType == 3) {
@@ -2288,10 +2303,11 @@ CUI.rte.Selection = function() {
                     }
                 }
             }
+            var isCollapsed = (startNode == endNode) && (startOffset == endOffset);
             if (isCollapsed) {
                 if (com.ua.isW3cIE) {
                     // on IE >= 9, the start of a text node is actually handled as the end
-                    // of the // previous text node (if applicable) - handle this as well
+                    // of the previous text node (if applicable) - handle this as well
                     if (startNode && (startNode.nodeType === 3) && (startOffset === 0) &&
                             !dpr.isZeroSizePlaceholder(startNode)) {
                         var prevCharNode = com.getPreviousCharacterNode(context, startNode,
@@ -2330,7 +2346,14 @@ CUI.rte.Selection = function() {
             }
             var mustSwap = false;
             if (startNode == endNode) {
-                mustSwap = (endOffset < startOffset);
+                if (startOffset === endOffset) {
+                    // actually, this is no selection, but a single caret, misrepresented
+                    // by the browser
+                    endNode = null;
+                    endOffset = null;
+                } else {
+                    mustSwap = (endOffset < startOffset);
+                }
             } else {
                 var startIndex = com.createIndexPath(context, startNode);
                 var endIndex = com.createIndexPath(context, endNode);
