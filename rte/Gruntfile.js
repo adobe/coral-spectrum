@@ -276,7 +276,7 @@ module.exports = function (grunt) {
     },
 
     // Watch operations
-    watch: {
+    'watch-start': {
       concat: {
         files: [
           '<%= dirs.source %>/**'

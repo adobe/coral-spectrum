@@ -393,7 +393,7 @@ module.exports = function(grunt) {
       }
     },
 
-    jsdoc: {
+    'jsdoc-build': {
       cui: {
         options: {
           template: '<%= dirs.source %>/docTemplate',
@@ -568,7 +568,7 @@ module.exports = function(grunt) {
     },
 
     // Watch operations
-    watch: {
+    'watch-start': {
       copy_guide: {
         files: '<%= dirs.source %>/guide/**',
         tasks: ['copy:guide']
