@@ -59,18 +59,6 @@ module.exports = function(grunt) {
       'components/rte/cui/CuiDialogManager.js',
       'components/rte/cui/CuiDialogHelper.js',
 
-      'components/rte/stub/ToolkitImpl.js',
-      'components/rte/stub/ToolbarImpl.js',
-      'components/rte/stub/ElementImpl.js',
-      'components/rte/stub/ParaFormatterImpl.js',
-      'components/rte/stub/StyleSelectorImpl.js',
-      'components/rte/stub/StubToolbarBuilder.js',
-      'components/rte/stub/CmItemImpl.js',
-      'components/rte/stub/CmSeparatorImpl.js',
-      'components/rte/stub/StubContextMenuBuilder.js',
-      'components/rte/stub/StubDialogManager.js',
-      'components/rte/stub/StubDialogHelper.js',
-
       'components/CUI.RichText.js',
 
       'components/rte/init.js'

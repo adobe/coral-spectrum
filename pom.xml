@@ -114,6 +114,17 @@
                 <directory>${basedir}/source/guide</directory>
                 <targetPath>${coral.build.dir}/guide</targetPath>
             </resource>
+            <!-- copy guide.less to the assets - 
+                 althought this is rather ugly, we would have to move less variables somewhere were guide.less could find it
+                 (they are in the bootsrap dir at the moment) 
+             -->
+            <resource>
+                <directory>${basedir}/source/guide/less</directory>
+                <includes>
+                    <include>guide.less</include>
+                </includes>
+                <targetPath>${coral.build.dir}/guide/examples/assets</targetPath>
+            </resource>
             <resource>
                 <directory>${basedir}/components/bootstrap/docs/assets/js/google-code-prettify</directory>
                 <targetPath>${coral.build.dir}/guide/examples/assets/google-code-prettify</targetPath>
@@ -188,6 +199,19 @@
                             <!--<token>&lt;head></token>-->
                             <!--<value>&lt;head>&#10;    &lt;base href="../" /></value>-->
                         <!--</replacement>-->
+                        <!-- remove some items from the top nav, we don't need then in the CQ documentation -->
+                        <replacement>
+                            <token>&lt;a href="https://git.corp.adobe.com/Reef/CoralUI/"&gt;Github&lt;/a&gt;</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>&lt;a href="releases/cui-latest-full.zip"&gt;Download&lt;/a&gt;</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>&lt;a href="http://jenkins.bsl.eur.adobe.com:8080/job/Build_CoralUI/ws/build/index.html"&gt;Nightly guide&lt;/a&gt;</token>
+                            <value></value>
+                        </replacement>
                         <replacement>
                             <token>"css/cui.css"</token>
                             <value>"../../coralui.css"</value>
