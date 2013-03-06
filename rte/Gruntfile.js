@@ -239,8 +239,14 @@ module.exports = function (grunt) {
 
     copy: {
       "test": {
-        src: '<%= dirs.source %>/test/static/**',
-        dest: '<%= dirs.build %>/test/'
+        files: [
+          {
+            expand: true,
+            cwd: '<%= dirs.source %>/test/static/',
+            src: ['**'],
+            dest: '<%= dirs.build %>/test/'
+          }
+        ]
       },
       "libs-test": {
         files: {
