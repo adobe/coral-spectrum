@@ -26,8 +26,19 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
 
     $container: null,
 
+    $editable: null,
+
     $toolbar: null,
 
+
+    _calculatePosition: function() {
+        var editablePos = this.$editable.offset();
+        var toolbarHeight = this.$toolbar.outerHeight() + 4; // TODO investigate why an offset of 2 is required
+        return {
+            "left": editablePos.left,
+            "top": editablePos.top - toolbarHeight
+        };
+    },
 
     getToolbarContainer: function() {
         return this.$container;
@@ -37,6 +48,7 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         this.elementMap = elementMap;
         this.$container = $container;
         this.$toolbar = $container.find("nav");
+        this.$editable = $container.find(".editable");
     },
 
     getItem: function(itemId) {
@@ -49,6 +61,8 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
 
     startEditing: function() {
         this.$toolbar.addClass(CUI.rte.Theme.TOOLBAR_ACTIVE);
+        this.$toolbar.offset(this._calculatePosition());
+        console.log(this.$toolbar);
     },
 
     finishEditing: function() {
