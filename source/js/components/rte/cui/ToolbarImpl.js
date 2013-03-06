@@ -26,6 +26,8 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
 
     $container: null,
 
+    $toolbar: null,
+
 
     getToolbarContainer: function() {
         return this.$container;
@@ -34,6 +36,7 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     construct: function(elementMap, $container) {
         this.elementMap = elementMap;
         this.$container = $container;
+        this.$toolbar = $container.find("nav");
     },
 
     getItem: function(itemId) {
@@ -42,6 +45,14 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
 
     getHeight: function() {
         return 0;
+    },
+
+    startEditing: function() {
+        this.$toolbar.addClass(CUI.rte.Theme.TOOLBAR_ACTIVE);
+    },
+
+    finishEditing: function() {
+        this.$toolbar.removeClass(CUI.rte.Theme.TOOLBAR_ACTIVE);
     },
 
     enable: function() {

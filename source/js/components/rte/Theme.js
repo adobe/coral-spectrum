@@ -79,16 +79,21 @@ CUI.rte.Theme = function() {
         TABLESELECTION_CLASS: "cui-rte-tableselection",
 
         /**
+         * CSS class that is added to active toolbar items
+         */
+        TOOLBAR_ACTIVE: "active",
+
+        /**
          * CSS class that is added to disabled toolbar items
          * @ignore
          */
-        TOOLBARITEM_DISABLED_CLASS: "rte-tbi-disabled",
+        TOOLBARITEM_DISABLED_CLASS: "disabled",
 
         /**
          * CSS class that is added to selected toolbar items
          * @ignore
          */
-        TOOLBARITEM_SELECTED_CLASS: "rte-tbi-selected",
+        TOOLBARITEM_SELECTED_CLASS: "selected",
 
         /**
          * Blank image path

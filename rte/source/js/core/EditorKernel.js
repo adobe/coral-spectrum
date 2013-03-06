@@ -1886,7 +1886,11 @@ CUI.rte.EditorKernel = new Class({
     },
 
     destroyToolbar: function() {
-        this.toolbar.destroy();
+        if (this.toolbar) {
+            console.log("destroy");
+            this.toolbar.finishEditing();
+            this.toolbar.destroy();
+        }
     },
 
 
