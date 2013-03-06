@@ -31,13 +31,24 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     $toolbar: null,
 
 
-    _calculatePosition: function() {
+    _calculatePosition: function($win) {
+        $win = $win || $(window);
+        var scrollTop = $win.scrollTop();
         var editablePos = this.$editable.offset();
-        var toolbarHeight = this.$toolbar.outerHeight() + 4; // TODO investigate why an offset of 2 is required
+        var toolbarHeight = this.$toolbar.outerHeight() + 4; // TODO investigate why an initial(!) offset of 4 is required (defer?)
+        var top = editablePos.top - toolbarHeight;
+        var left = editablePos.left;
+        if (top < scrollTop) {
+            top = scrollTop;
+        }
         return {
-            "left": editablePos.left,
-            "top": editablePos.top - toolbarHeight
+            "left": left,
+            "top": top
         };
+    },
+
+    _handleScrolling: function(e) {
+        this.$toolbar.offset(this._calculatePosition());
     },
 
     getToolbarContainer: function() {
@@ -62,11 +73,15 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     startEditing: function() {
         this.$toolbar.addClass(CUI.rte.Theme.TOOLBAR_ACTIVE);
         this.$toolbar.offset(this._calculatePosition());
-        console.log(this.$toolbar);
+        var self = this;
+        $(window).on("scroll.rte", function(e) {
+            self._handleScrolling(e);
+        });
     },
 
     finishEditing: function() {
         this.$toolbar.removeClass(CUI.rte.Theme.TOOLBAR_ACTIVE);
+        $(window).off("scroll.rte");
     },
 
     enable: function() {
