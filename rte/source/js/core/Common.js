@@ -43,7 +43,9 @@ CUI.rte.Common = function() {
         isMac = check(/macintosh|mac os x/),
         isChrome = isWebkit && check(/\bchrome\b/),
         isSafari = isWebkit && !isChrome && check(/safari/),
-        isTouch = "ontouchstart" in window;
+        isTouch = "ontouchstart" in window,
+        isIPad = isTouch && isSafari && check(/ipad/),
+        isIPhone = isTouch && isSafari && check(/iphone/);
 
     /**
      * Flag if the internal logging mechanism is enabled (used for ieLog())
@@ -320,7 +322,15 @@ CUI.rte.Common = function() {
             /**
              * True if a touch-enabled device is used
              */
-            isTouch: isTouch
+            isTouch: isTouch,
+            /**
+             * True if an iPad is used
+             */
+            isIPad: isIPad,
+            /**
+             * True if an iPhone is used
+             */
+            isIPhone: isIPhone
         },
 
         /**
