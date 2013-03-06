@@ -2476,6 +2476,14 @@ CUI.rte.Common = function() {
         },
 
         /**
+         * Determines if the application is run in Portrait mode.
+         * @return {Boolean} True if the application is run in Portrait mode
+         */
+        isPortrait: function() {
+            return (window.innerHeight > window.innerWidth);
+        },
+
+        /**
          * Dump the given DOM node.
          * @param {Node} node DOM node to dump
          * @param {String} prefix text prefix (optional)
