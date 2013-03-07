@@ -2016,8 +2016,7 @@ CUI.rte.DomProcessor = function() {
             // we're working on cloned blocks to avoid implicit changes in the selection
             // if start/end reflects the start/end of a selection
             var clonedStartBlock = startBlock.cloneNode(true);
-            var clonedEndBlock = (startBlock !== endBlock ? endBlock.cloneNode(true) :
-                    clonedStartBlock);
+            var clonedEndBlock = endBlock.cloneNode(true);
 
             // match start and end nodes to their counterparts in the cloned block
             function getPath(node, parentNode) {
@@ -2041,12 +2040,12 @@ CUI.rte.DomProcessor = function() {
             var clonedEndNode = applyPath(getPath(endNode, endBlock), clonedEndBlock);
 
             // insert marker to finally determine the position
-            var endMarker = dpr.createMarker(context, clonedEndNode, endOffset);
-            endMarker.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
-            var startMarker = endMarker;
+            var startMarker = dpr.createMarker(context, clonedStartNode, startOffset);
+            startMarker.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
+            var endMarker = startMarker;
             if ((startOffset !== endOffset) || (startNode !== endNode)) {
-                startMarker = dpr.createMarker(context, clonedStartNode, startOffset);
-                startMarker.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
+                endMarker = dpr.createMarker(context, clonedEndNode, endOffset);
+                endMarker.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
             }
             startBlock.parentNode.insertBefore(clonedStartBlock, startBlock);
             var startPos = CUI.rte.Utils.getPagePosition(startMarker);
@@ -2054,7 +2053,7 @@ CUI.rte.DomProcessor = function() {
             var endPos = startPos;
             var endHeight = startHeight;
             startBlock.parentNode.removeChild(clonedStartBlock);
-            if (clonedEndBlock !== clonedStartBlock) {
+            if ((startOffset !== endOffset) || (startNode !== endNode)) {
                 endBlock.parentNode.insertBefore(clonedEndBlock, endBlock);
                 endPos = CUI.rte.Utils.getPagePosition(endMarker);
                 endHeight = CUI.rte.Utils.getHeight(endMarker);

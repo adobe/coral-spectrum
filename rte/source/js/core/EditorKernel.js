@@ -1764,21 +1764,36 @@ CUI.rte.EditorKernel = new Class({
             this.uiListeners[eventName] = [ ];
         }
         this.uiListeners[eventName].push({
-            "fn": scope ? CUI.rte.Utils.scope(fn, scope) : fn
+            "fn": scope ? CUI.rte.Utils.scope(fn, scope) : fn,
+            "idFn": fn,
+            "idScope": scope
         });
     },
 
     /**
-     * Unregisters all UI-related event handlers of a specific type.
+     * Unregisters all or a single UI-related event handler(s) of a specific type.
      * @param {String} eventName Event name (see {@link #addUIListener} for supported
      *        values)
+     * @param {Function} fn (optional) The listener to remove; if unspecified, all handlers
+     *        will be removed
+     * @param {Object} scope (optional) The scope of the listener to be removed
      * @private
      */
-    removeUIListener: function(eventName) {
+    removeUIListener: function(eventName, fn, scope) {
         if (!this.uiListeners || !this.uiListeners[eventName]) {
             return;
         }
-        delete this.uiListeners[eventName];
+        if (fn) {
+            var listeners = this.uiListeners[eventName];
+            for (var l = listeners.length - 1; l >= 0; l--) {
+                var toCheck = listeners[l];
+                if ((toCheck.idFn === fn) && (toCheck.idScope === scope)) {
+                    listeners.splice(l, 1);
+                }
+            }
+        } else {
+            delete this.uiListeners[eventName];
+        }
     },
 
     /**
