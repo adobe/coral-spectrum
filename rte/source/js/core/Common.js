@@ -45,7 +45,10 @@ CUI.rte.Common = function() {
         isSafari = isWebkit && !isChrome && check(/safari/),
         isTouch = "ontouchstart" in window,
         isIPad = isTouch && isSafari && check(/ipad/),
-        isIPhone = isTouch && isSafari && check(/iphone/);
+        isIPhone = isTouch && isSafari && check(/iphone/),
+        calloutHeight = (isIPad || isIPhone ? 56 : 0),
+        screenKeyHeightPortrait = (isIPad ? 308 : (isIPhone ? 260 : 0)),
+        screenKeyHeightLandscape = (isIPad ? 396 : (isIPhone ? 206 : 0));
 
     /**
      * Flag if the internal logging mechanism is enabled (used for ieLog())
@@ -330,7 +333,19 @@ CUI.rte.Common = function() {
             /**
              * True if an iPhone is used
              */
-            isIPhone: isIPhone
+            isIPhone: isIPhone,
+            /**
+             * Height of a potentially used "callout"; 0 on non-iOS browsers
+             */
+            calloutHeight: calloutHeight,
+            /**
+             * Height of a potentially shown screen keyboard in Portrait mode
+             */
+            screenKeyHeightPortrait: screenKeyHeightPortrait,
+            /**
+             * Height of a potentially shown screen keyboard in Landscape mode
+             */
+            screenKeyHeightLandscape: screenKeyHeightLandscape
         },
 
         /**

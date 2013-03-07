@@ -145,6 +145,10 @@ CUI.rte.Utils = function() {
 
         getPagePosition: CUI.rte.AdapterUtils.getPagePosition,
 
+        getWidth: CUI.rte.AdapterUtils.getWidth,
+
+        getHeight: CUI.rte.AdapterUtils.getHeight,
+
         jsonDecode: CUI.rte.AdapterUtils.jsonDecode,
 
         getBlankImageUrl: CUI.rte.AdapterUtils.getBlankImageUrl

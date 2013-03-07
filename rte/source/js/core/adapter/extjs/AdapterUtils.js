@@ -36,6 +36,14 @@ CUI.rte.AdapterUtils = function() {
             return CQ.Ext.get(dom).getXY();
         },
 
+        getWidth: function(dom) {
+            return CQ.Ext.get(dom).getSize().width;
+        },
+
+        getHeight: function(dom) {
+            return CQ.Ext.get(dom).getSize().height;
+        },
+
         jsonDecode: function(str) {
             return CQ.Ext.util.JSON.decode(str);
         },

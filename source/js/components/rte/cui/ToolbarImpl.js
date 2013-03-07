@@ -20,6 +20,11 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
 
     toString: "ToolbarImpl",
 
+    /**
+     * @type CUI.rte.EditorKernel
+     */
+    editorKernel: null,
+
     extend: CUI.rte.ui.Toolbar,
 
     elementMap: null,
@@ -31,7 +36,9 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     $toolbar: null,
 
 
-    _calculatePosition: function($win) {
+    _calculatePosition: function($win, selection) {
+        var com = CUI.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
         $win = $win || $(window);
         var scrollTop = $win.scrollTop();
         var editablePos = this.$editable.offset();
@@ -41,6 +48,21 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         if (top < scrollTop) {
             top = scrollTop;
         }
+        var context = this.editorKernel.getEditContext();
+        selection = selection || this.editorKernel.createQualifiedSelection(context);
+        if (selection && selection.startNode) {
+            var startNode = selection.startNode;
+            var startOffset = selection.startOffset;
+            var endNode = selection.endNode;
+            var endOffset = selection.endOffset;
+            var area = dpr.calcScreenEstate(context, startNode, startOffset, endNode,
+                    endOffset);
+            var yStart = area.startY - (selection.isSelection ? com.ua.calloutHeight : 0);
+            var yEnd = area.endY;
+            var screenKeyboardHeight = (com.isPortrait() ? com.ua.screenKeyHeightPortrait
+                    : com.ua.screenKeyHeightLandscape);
+            // console.log(yStart, yEnd, screenKeyboardHeight);
+        }
         return {
             "left": left,
             "top": top
@@ -48,6 +70,10 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     },
 
     _handleScrolling: function(e) {
+        this.$toolbar.offset(this._calculatePosition());
+    },
+
+    _handleUpdateState: function(e) {
         this.$toolbar.offset(this._calculatePosition());
     },
 
@@ -70,7 +96,9 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         return 0;
     },
 
-    startEditing: function() {
+    startEditing: function(editorKernel) {
+        this.editorKernel = editorKernel;
+        this.editorKernel.addUIListener("updatestate", this._handleUpdateState, this);
         this.$toolbar.addClass(CUI.rte.Theme.TOOLBAR_ACTIVE);
         this.$toolbar.offset(this._calculatePosition());
         var self = this;
@@ -82,6 +110,7 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     finishEditing: function() {
         this.$toolbar.removeClass(CUI.rte.Theme.TOOLBAR_ACTIVE);
         $(window).off("scroll.rte");
+        this.editorKernel.removeUIListener("updatestate", this._handleUpdateState, this);
     },
 
     enable: function() {

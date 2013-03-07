@@ -1993,6 +1993,81 @@ CUI.rte.DomProcessor = function() {
         },
 
         /**
+         * <p>Calculates the "screen estate" the specified nodes/offsets span.</p>
+         * <p>This method returns the top/left coordinates of the start node and the
+         * bottom/right coordinates of the end node if available or of the start node.</p>
+         * @param {CUI.rte.EditContext} context The edit context
+         * @param {HTMLElement} startNode The start node
+         * @param {HTMLElement} startOffset The start offset
+         * @param {HTMLElement} endNode (optional) The end node
+         * @param {HTMLElement} endOffset (optional) The end offset
+         */
+        calcScreenEstate: function(context, startNode, startOffset, endNode, endOffset) {
+            var dpr = CUI.rte.DomProcessor;
+            if (!endNode) {
+                endNode = startNode;
+                endOffset = startOffset;
+            }
+
+            // get start and end block to limit the scope
+            var startBlock = com.getTagInPath(context, startNode, com.BLOCK_TAGS);
+            var endBlock = com.getTagInPath(context, endNode, com.BLOCK_TAGS);
+
+            // we're working on cloned blocks to avoid implicit changes in the selection
+            // if start/end reflects the start/end of a selection
+            var clonedStartBlock = startBlock.cloneNode(true);
+            var clonedEndBlock = endBlock.cloneNode(true);
+
+            // match start and end nodes to their counterparts in the cloned block
+            function getPath(node, parentNode) {
+                var path = [ ];
+                while (node && (node !== parentNode)) {
+                    path.splice(0, 0, com.getChildIndex(node));
+                    node = node.parentNode;
+                }
+                return path;
+            }
+            function applyPath(path, parent) {
+                var node = parent;
+                var pathCnt = path.length;
+                for (var p = 0; p < pathCnt; p++) {
+                    node = node.childNodes[path[p]];
+                }
+                return node;
+            }
+            var clonedStartNode = applyPath(getPath(startNode, startBlock),
+                    clonedStartBlock);
+            var clonedEndNode = applyPath(getPath(endNode, endBlock), clonedEndBlock);
+
+            // insert marker to finally determine the position
+            var startMarker = dpr.createMarker(context, clonedStartNode, startOffset);
+            startMarker.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
+            var endMarker = startMarker;
+            if ((startOffset !== endOffset) || (startNode !== endNode)) {
+                endMarker = dpr.createMarker(context, clonedEndNode, endOffset);
+                endMarker.appendChild(context.createTextNode(dpr.ZERO_WIDTH_NBSP));
+            }
+            startBlock.parentNode.insertBefore(clonedStartBlock, startBlock);
+            var startPos = CUI.rte.Utils.getPagePosition(startMarker);
+            var startHeight = CUI.rte.Utils.getHeight(startMarker);
+            var endPos = startPos;
+            var endHeight = startHeight;
+            startBlock.parentNode.removeChild(clonedStartBlock);
+            if ((startOffset !== endOffset) || (startNode !== endNode)) {
+                endBlock.parentNode.insertBefore(clonedEndBlock, endBlock);
+                endPos = CUI.rte.Utils.getPagePosition(endMarker);
+                endHeight = CUI.rte.Utils.getHeight(endMarker);
+                endBlock.parentNode.removeChild(clonedEndBlock);
+            }
+            return {
+                startX: startPos[0],
+                startY: startPos[1],
+                endX: endPos[0],
+                endY: endPos[1] + endHeight
+            }
+        },
+
+        /**
          * Main node type of a {@link CUI.rte.NodeList}'s node: Text node
          * @type String
          */

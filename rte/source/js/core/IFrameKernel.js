@@ -51,6 +51,9 @@ CUI.rte.IFrameKernel = new Class({
     initializeEditContext: function(iFrame, win, doc, root) {
         this.editContext = new CUI.rte.EditContext(iFrame, win, doc, root);
         this.addFeatureClasses(root);
+        if (this.toolbar) {
+            this.toolbar.startEditing(this);
+        }
     },
 
     /**
