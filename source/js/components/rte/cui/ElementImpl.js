@@ -55,6 +55,7 @@
                     "editContext": editContext
                 };
                 this.plugin.execute(cmd, cmdValue, env);
+                this.plugin.editorKernel.focus(editContext);
             }, this));
         },
 

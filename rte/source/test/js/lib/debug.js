@@ -140,10 +140,29 @@ CUI.rte.DebugRegistry = function() {
                 href = href.substring(0, searchPos);
             }
             href += "?config=" + getUrlPrm("config", "dflt")
-                + "&debug=true&section=" + section.id;
+                + "&debug=true&section=" + section.id
+                + "&iframe=" + getUrlPrm("iframe", "false");
             document.location.href = href;
         }
     };
+
+    var changeIFrameMode = function(iframeBoxDom) {
+        var isIFrame = iframeBoxDom.checked;
+        var href = window.location.href;
+        var searchPos = href.indexOf("?");
+        if (searchPos > 0) {
+            href = href.substring(0, searchPos);
+        }
+        var sectionParam = getUrlPrm("section", "");
+        if (sectionParam.length > 0) {
+            sectionParam = "&section=" + sectionParam;
+        }
+        href += "?config=" + getUrlPrm("config", "dflt")
+                + "&debug=true" + sectionParam + "&iframe=" + String(isIFrame);
+        document.location.href = href;
+    };
+
+    var isIE = CUI.rte.Common.ua.isIE;
 
     return {
 
@@ -224,14 +243,6 @@ CUI.rte.DebugRegistry = function() {
             resultDom.setAttribute("value", "");
             resultDom.setAttribute("size", "80");
             resultDom.setAttribute("disabled", "true");
-            var excBoxDom = docRef.createElement("input");
-            excBoxDom.setAttribute("type", "checkbox");
-            excBoxDom.setAttribute("value", "exc");
-            if (CUI.rte.Common.ua.isIE) {
-                excBoxDom.defaultChecked = true;
-            } else {
-                excBoxDom.setAttribute("checked", "checked");
-            }
             selectorDiv.appendChild(docRef.createTextNode(" "));
             var startButtonDom = docRef.createElement("button");
             startButtonDom.appendChild(docRef.createTextNode("Start"));
@@ -243,8 +254,32 @@ CUI.rte.DebugRegistry = function() {
             selectorDiv.appendChild(docRef.createTextNode("Result: "));
             selectorDiv.appendChild(resultDom);
             selectorDiv.appendChild(docRef.createElement("br"));
+            var excBoxDom = docRef.createElement("input");
+            excBoxDom.setAttribute("type", "checkbox");
+            excBoxDom.setAttribute("value", "exc");
+            if (isIE) {
+                excBoxDom.defaultChecked = true;
+            } else {
+                excBoxDom.setAttribute("checked", "checked");
+            }
             selectorDiv.appendChild(excBoxDom);
+            selectorDiv.appendChild(docRef.createTextNode(" "));
             selectorDiv.appendChild(docRef.createTextNode(" Catch exceptions thrown"));
+            var iframeBoxDom = docRef.createElement("input");
+            iframeBoxDom.setAttribute("type", "checkbox");
+            iframeBoxDom.setAttribute("value", "iframe");
+            if (isIE) {
+                iframeBoxDom.defaultChecked = getUrlPrm("iframe", "false") === "true";
+            } else {
+                if (getUrlPrm("iframe", "false") === "true") {
+                    iframeBoxDom.setAttribute("checked", "checked");
+                }
+            }
+            iframeBoxDom.onclick = function() {
+                changeIFrameMode(iframeBoxDom);
+            };
+            selectorDiv.appendChild(iframeBoxDom);
+            selectorDiv.appendChild(docRef.createTextNode(" iframe environment"));
             selectorDiv.appendChild(docRef.createElement("br"));
             selectorDiv.appendChild(docRef.createElement("br"));
         },

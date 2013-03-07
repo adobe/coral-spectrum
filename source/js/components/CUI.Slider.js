@@ -259,7 +259,7 @@
 
             // setting default value
             if (!$this.is("[value]")) {
-                $this.attr('value', that.options.value);
+                $this.attr({'value':that.options.value,'aria-valuetext':that.options.valuetextFormatter(that.options.value)});
                 values.push(that.options.value);
             } else {
                 values.push($this.attr('value'));
@@ -345,6 +345,7 @@
       disabled: false,
       tooltips: false,
       tooltipFormatter: function(value) { return value.toString(); },
+	  valuetextFormatter: function(value) { return value.toString(); },
       ticks: false,
       filled: false,
       bound: false
@@ -546,7 +547,7 @@
                 "aria-valuemin":that.options.min,
                 "aria-valuemax":that.options.max,
                 "aria-valuenow":that.values[index],
-                "aria-valuetext":that.values[index]
+                "aria-valuetext":that.options.valuetextFormatter(that.values[index])
             });
             
             // position the input relative to the slider container element
@@ -850,8 +851,8 @@
                     }
                 }
                 that.values[pos] = value.toString();
-                that.$inputs.eq(pos).val(value).attr("value",value);
-                that.$handles.eq(pos).attr({"aria-valuenow":value,"aria-valuetext":value});
+                that.$inputs.eq(pos).val(value).attr({"value":value,"aria-valuetext":that.options.valuetextFormatter(value)});
+                that.$handles.eq(pos).attr({"aria-valuenow":value,"aria-valuetext":that.options.valuetextFormatter(value)});
                 if (!doNotTriggerChange) {
                     setTimeout(function() {
                         that.$inputs.eq(pos).change(); // Keep input element value updated too and fire change event for any listeners

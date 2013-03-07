@@ -480,7 +480,7 @@ CUI.rte.plugins.KeyPlugin = new Class({
     handleJunkSpans: function(context) {
         var com = CUI.rte.Common;
         var selection = this.editorKernel.createQualifiedSelection(context);
-        if (!selection.isSelection) {
+        if (selection && !selection.isSelection) {
             var toCheck = selection.startNode;
             toCheck = (toCheck.nodeType === 3 ? com.getParentNode(context, toCheck)
                     : toCheck);

@@ -6,40 +6,66 @@ div.edited {
     background-color: #ffffff;
 }
 
-a.rte-toolbar-item {
-    min-width: 20*@px !important;
-    width: 20*@px;
-    height: 20*@px;
-}
+.rte-toolbar {
 
-a.rte-tbi-selected {
-    color: #ffff00;
-}
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #454545;
+    display: none;
+    padding: 2px;
+    margin: 0;
+    border: 0;
+    z-index: 10000;
 
-a.rte-tbi-disabled {
-    color: #eeeeee;
-    opacity: 0.4;
-}
+    &.active {
+        display: block;
+    }
 
-/* specific styles */
+    a {
 
-a.rte-tb-bold {
-    font-weight: bold;
-    font-size: 20*@px;
-}
+        &.item {
+            min-width: 60*@px !important;
+            width: 60*@px;
+            height: 44*@px;
+            color: #cecece;
+            padding: 2px;
+            user-select: none;
+            -webkit-user-select: none;
+        }
 
-a.rte-tb-italic {
-    font-style: italic;
-    font-size: 20*@px;
-}
+        &.selected {
+            color: #ffff00;
+        }
 
-a.rte-tb-underline {
-    text-decoration: underline;
-    font-size: 20*@px;
+        &.disabled {
+            color: #eeeeee;
+            opacity: 0.4;
+        }
+
+        /* specific styles */
+
+        &.bold {
+            font-weight: bold;
+            font-size: 20*@px;
+        }
+
+        &.italic {
+            font-style: italic;
+            font-size: 20*@px;
+        }
+
+        &.underline {
+            text-decoration: underline;
+            font-size: 20*@px;
+        }
+
+    }
+
 }
 
 .cui-rte-forcedborder,
 .cui-rte-forcedborder TD,
 .cui-rte-forcedborder TH {
-    border: 1*@px dotted #D3D3D3;
+    border: 1*@px dotted #d3d3d3;
 }

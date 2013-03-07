@@ -43,7 +43,9 @@ CUI.rte.Common = function() {
         isMac = check(/macintosh|mac os x/),
         isChrome = isWebkit && check(/\bchrome\b/),
         isSafari = isWebkit && !isChrome && check(/safari/),
-        isTouch = "ontouchstart" in window;
+        isTouch = "ontouchstart" in window,
+        isIPad = isTouch && isSafari && check(/ipad/),
+        isIPhone = isTouch && isSafari && check(/iphone/);
 
     /**
      * Flag if the internal logging mechanism is enabled (used for ieLog())
@@ -320,7 +322,15 @@ CUI.rte.Common = function() {
             /**
              * True if a touch-enabled device is used
              */
-            isTouch: isTouch
+            isTouch: isTouch,
+            /**
+             * True if an iPad is used
+             */
+            isIPad: isIPad,
+            /**
+             * True if an iPhone is used
+             */
+            isIPhone: isIPhone
         },
 
         /**
@@ -1144,16 +1154,20 @@ CUI.rte.Common = function() {
             var com = CUI.rte.Common;
             // if we're looking for a previous node, we'll have to check the starting
             // node also, contrary to getNextCharacterNode
-            if (breakTags && com.isTag(node, breakTags)) {
+            if ((breakTags && com.isTag(node, breakTags)) || (node === context.root)) {
                 return null;
             }
             do {
                 node = com.getPreviousNode(context, node);
+                if (node === context.root) {
+                    node = null;
+                    break;
+                }
                 if (breakTags && com.isTag(node, breakTags)) {
                     node = null;
                     break;
                 }
-            } while (node && (com.getNodeCharacterCnt(node) == 0));
+            } while (node && (com.getNodeCharacterCnt(node) === 0));
             return node;
         },
 
@@ -2459,6 +2473,14 @@ CUI.rte.Common = function() {
             var fakeSpan = context.createElement("span");
             fakeSpan.appendChild(dom.cloneNode(true));
             return fakeSpan.innerHTML;
+        },
+
+        /**
+         * Determines if the application is run in Portrait mode.
+         * @return {Boolean} True if the application is run in Portrait mode
+         */
+        isPortrait: function() {
+            return (window.innerHeight > window.innerWidth);
         },
 
         /**

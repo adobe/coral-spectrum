@@ -98,7 +98,7 @@
             $body.fipo("tap.rte.ooa", "click.rte.ooa", function(e) {
                 self.finish();
             });
-            $body.fipo("tap.rte.item", "click.rte.item", ".rte-toolbar-item", function(e) {
+            $body.fipo("tap.rte.item", "click.rte.item", ".rte-toolbar .item", function(e) {
                 self.isTemporaryFocusChange = true;
                 e.stopPropagation();
                 e.preventDefault();

@@ -101,8 +101,6 @@ CUI.rte.testing.SelectionLib = function() {
             }
             var domFrag = range.cloneContents();
             var context = tcm.getEditContext();
-            // just "phrasing" contact would be allowed in a span tag (http://www.whatwg.org/specs/web-apps/current-work/multipage/text-level-semantics.html#the-span-element)
-            // so it's better to use a div
             var div = context.createElement("div");
             div.appendChild(domFrag);
             return div.innerHTML;

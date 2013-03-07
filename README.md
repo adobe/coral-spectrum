@@ -10,7 +10,7 @@ To begin playing with CoralUI, try clicking the Download link for a zip of the p
 CoralUI is an internal open source effort with backing from XD and product development teams, and we encourage the submission of issues, feature requests, and pull requests from anyone, on any team.  To get involved, contact the [mailing list][5] and introduce yourself.
 
 ## Building
-Check out the [Build Process Wiki][5] for information on building CoralUI.
+Check out the [Build Process Wiki][4] for information on building CoralUI.
 
 ## More Information
 See the [CoralUI Wiki][6] for more information. 

@@ -26,6 +26,30 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
 
     $container: null,
 
+    $editable: null,
+
+    $toolbar: null,
+
+
+    _calculatePosition: function($win) {
+        $win = $win || $(window);
+        var scrollTop = $win.scrollTop();
+        var editablePos = this.$editable.offset();
+        var toolbarHeight = this.$toolbar.outerHeight() + 4; // TODO investigate why an initial(!) offset of 4 is required (defer?)
+        var top = editablePos.top - toolbarHeight;
+        var left = editablePos.left;
+        if (top < scrollTop) {
+            top = scrollTop;
+        }
+        return {
+            "left": left,
+            "top": top
+        };
+    },
+
+    _handleScrolling: function(e) {
+        this.$toolbar.offset(this._calculatePosition());
+    },
 
     getToolbarContainer: function() {
         return this.$container;
@@ -34,6 +58,8 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     construct: function(elementMap, $container) {
         this.elementMap = elementMap;
         this.$container = $container;
+        this.$toolbar = $container.find("nav");
+        this.$editable = $container.find(".editable");
     },
 
     getItem: function(itemId) {
@@ -42,6 +68,20 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
 
     getHeight: function() {
         return 0;
+    },
+
+    startEditing: function() {
+        this.$toolbar.addClass(CUI.rte.Theme.TOOLBAR_ACTIVE);
+        this.$toolbar.offset(this._calculatePosition());
+        var self = this;
+        $(window).on("scroll.rte", function(e) {
+            self._handleScrolling(e);
+        });
+    },
+
+    finishEditing: function() {
+        this.$toolbar.removeClass(CUI.rte.Theme.TOOLBAR_ACTIVE);
+        $(window).off("scroll.rte");
     },
 
     enable: function() {

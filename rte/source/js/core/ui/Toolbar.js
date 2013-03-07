@@ -46,6 +46,16 @@ CUI.rte.ui.Toolbar = new Class({
         // for the toolbar are required
     },
 
+    startEditing: function() {
+        // may be overridden by implementing toolbar if special handling is required,
+        // for example the toolbar is only shown during editing
+    },
+
+    finishEditing: function() {
+        // may be overridden by implementing toolbar if special handling is required,
+        // for example the toolbar is only shown during editing
+    },
+
     enable: function() {
         throw new Error("Toolbar#enable is not implemented.");
     },

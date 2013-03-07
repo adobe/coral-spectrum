@@ -453,11 +453,16 @@ CUI.rte.DomProcessor = function() {
                 var helperNode = context.createElement("span");
                 editBlock.appendChild(helperNode);
                 helperNode.appendChild(context.createTextNode(dpr.NBSP));
-                // required for IE8 compatibility
+                // focus request required for IE >= 8 compatibility
                 context.win.focus();
+                // empty selection before creating the range - otherwise IE 9 might choke
+                // on some edge cases
+                context.doc.selection.empty();
+                // select the temporary span ...
                 var range = context.doc.selection.createRange();
                 range.moveToElementText(helperNode);
-                // this seems to finally make the paragraph displayable
+                // ... and replace it by an empty String - this seems to finally make the
+                // paragraph displayable
                 range.pasteHTML("");
                 editBlock.removeChild(secNode);
             }
