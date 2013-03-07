@@ -20,6 +20,11 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
 
     toString: "ToolbarImpl",
 
+    /**
+     * @type CUI.rte.EditorKernel
+     */
+    editorKernel: null,
+
     extend: CUI.rte.ui.Toolbar,
 
     elementMap: null,
@@ -32,6 +37,8 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
 
 
     _calculatePosition: function($win) {
+        var com = CUI.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
         $win = $win || $(window);
         var scrollTop = $win.scrollTop();
         var editablePos = this.$editable.offset();
@@ -40,6 +47,17 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         var left = editablePos.left;
         if (top < scrollTop) {
             top = scrollTop;
+        }
+        var context = this.editorKernel.getEditContext();
+        var selection = this.editorKernel.createQualifiedSelection(context);
+        if (selection && selection.startNode) {
+            var startNode = selection.startNode;
+            var startOffset = selection.startOffset;
+            var endNode = selection.endNode;
+            var endOffset = selection.endOffset;
+            var rect = dpr.calcScreenEstate(context, startNode, startOffset, endNode,
+                    endOffset);
+            console.log(rect);
         }
         return {
             "left": left,
@@ -70,7 +88,8 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         return 0;
     },
 
-    startEditing: function() {
+    startEditing: function(editorKernel) {
+        this.editorKernel = editorKernel;
         this.$toolbar.addClass(CUI.rte.Theme.TOOLBAR_ACTIVE);
         this.$toolbar.offset(this._calculatePosition());
         var self = this;

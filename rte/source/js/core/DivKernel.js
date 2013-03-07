@@ -51,7 +51,7 @@ CUI.rte.DivKernel = new Class({
         this.editContext = new CUI.rte.EditContext(null, win, doc, root);
         this.addFeatureClasses(root);
         if (this.toolbar) {
-            this.toolbar.startEditing();
+            this.toolbar.startEditing(this);
         }
     },
 

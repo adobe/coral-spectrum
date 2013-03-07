@@ -46,7 +46,7 @@ CUI.rte.ui.Toolbar = new Class({
         // for the toolbar are required
     },
 
-    startEditing: function() {
+    startEditing: function(editorKernel) {
         // may be overridden by implementing toolbar if special handling is required,
         // for example the toolbar is only shown during editing
     },
