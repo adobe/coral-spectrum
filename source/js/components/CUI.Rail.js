@@ -121,12 +121,15 @@ $('#myRail').rail({
 
         // register for events with fingerpointer
         trigger.fipo('tap', 'click', function (ev) {
-            var expanded = f.toggleClass('open').hasClass('open');
+            var expanded = f.toggleClass('open').hasClass('open'), 
+				showFocus = false;
             fold.attr({'aria-hidden':!expanded, 'aria-expanded':expanded});
 			
 			// hack to make sure that VoiceOver announces the expanded items.
 			if (expanded && ev.type==='click' && !trigger.is('a')) {
+				showFocus = trigger.hasClass('focus');
 				fold.attr('tabindex', '-1').focus();
+				if (showFocus) trigger.addClass('focus');
 				setTimeout(function () { fold.removeAttr('tabindex'); trigger.focus(); }, 100);
 			}
         });
