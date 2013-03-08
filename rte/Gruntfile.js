@@ -187,7 +187,7 @@ module.exports = function (grunt) {
   }
 
   // External tasks
-  grunt.loadTasks('tasks');
+  grunt.loadTasks('../tasks/shared');
 
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-compress');
@@ -271,8 +271,16 @@ module.exports = function (grunt) {
       }
     },
 
-    'mvn-install': {
-      build: {}
+    'mvn-goal': {
+      install: {
+        args: ['clean', 'install']
+      },
+      'content-package-install': {
+        args: ['content-package:install']
+      },
+      deploy: {
+        args: ['deploy']
+      }
     },
 
     // Watch operations
@@ -304,17 +312,24 @@ module.exports = function (grunt) {
     'copy'
   ]);
 
+  // Rename mvn task so we can override it
+  grunt.renameTask('mvn', 'mvn-goal');
+
   // Custom build for maven
   grunt.registerTask('mvn', [
     'full',
-    'mvn-install'
+    'mvn-goal:install',
+    'mvn-goal:content-package-install'
   ]);
 
-  // Rename mvn-deploy task so we can override it
-  grunt.task.renameTask('mvn-deploy', 'mvn-nexus-deploy');
+  // mvn deploy task for jenkins
+  grunt.registerTask('mvn-deploy', [
+    'mvn-goal:install',
+    'mvn-goal:deploy'
+  ]);
 
   // Rename watch task so we can override it
-  grunt.task.renameTask('watch', 'watch-start');
+  grunt.renameTask('watch', 'watch-start');
 
   // Redefine watch to build partial first
   grunt.registerTask('watch', [

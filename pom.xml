@@ -358,7 +358,7 @@
                                 <configuration>
                                     <tasks>
                                         <exec dir="${basedir}" executable="grunt" failonerror="true">
-                                            <arg line="full" />
+                                            <arg line="mvn-build" />
                                         </exec>
                                     </tasks>
                                 </configuration>

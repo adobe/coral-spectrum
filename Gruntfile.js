@@ -106,7 +106,8 @@ module.exports = function(grunt) {
   }
 
   // External tasks
-  grunt.loadTasks('tasks');
+  grunt.loadTasks('tasks/core');
+  grunt.loadTasks('tasks/shared');
 
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-compress');
@@ -520,8 +521,16 @@ module.exports = function(grunt) {
       }
     },
 
-    'mvn-install': {
-      build: {}
+    'mvn-goal': {
+      install: {
+        args: ['clean', 'install']
+      },
+      'content-package-install': {
+        args: ['content-package:install']
+      },
+      deploy: {
+        args: ['deploy']
+      }
     },
 
     mocha: {
@@ -724,19 +733,19 @@ module.exports = function(grunt) {
     'less:cui'
   ]);
 
+  // Rename mvn task so we can override it
+  grunt.task.renameTask('mvn', 'mvn-goal');
+
   // Custom build for maven
   grunt.task.registerTask('mvn', [
-    'mvn-build',
-    'mvn-install'
+    'mvn-goal:install',
+    'mvn-goal:content-package-install'
   ]);
-
-  // Rename mvn-deploy task so we can override it
-  grunt.task.renameTask('mvn-deploy', 'mvn-nexus-deploy');
 
   // mvn deploy task for jenkins
   grunt.task.registerTask('mvn-deploy', [
-    'mvn-build',
-    'mvn-nexus-deploy'
+    'mvn-goal:install',
+    'mvn-goal:deploy'
   ]);
 
   // Rename watch task so we can override it
