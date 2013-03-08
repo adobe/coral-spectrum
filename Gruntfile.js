@@ -520,7 +520,7 @@ module.exports = function(grunt) {
       }
     },
 
-    mvn: {
+    'mvn-install': {
       build: {}
     },
 
@@ -705,9 +705,6 @@ module.exports = function(grunt) {
     'coverage',
     'compress'
   ]);
-
-  // Rename mvn task so we can override it
-  grunt.task.renameTask('mvn', 'mvn-install');
 
   // Almost full build, just the stuff needed for Granite install
   grunt.task.registerTask('mvn-build', [

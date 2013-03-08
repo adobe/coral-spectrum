@@ -44,7 +44,7 @@ module.exports = function (grunt) {
     }
   };
 
-  grunt.registerTask('mvn', 'This builds a CRX content package and installs it to your local Maven repository and local Granite instance.', function () {
+  grunt.registerTask('mvn-install', 'This builds a CRX content package and installs it to your local Maven repository and local Granite instance.', function () {
     var config = grunt.config();
 
     var options = {

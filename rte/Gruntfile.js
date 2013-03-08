@@ -271,7 +271,7 @@ module.exports = function (grunt) {
       }
     },
 
-    mvn: {
+    'mvn-install': {
       build: {}
     },
 
@@ -303,9 +303,6 @@ module.exports = function (grunt) {
     'full-build',
     'copy'
   ]);
-
-  // Rename mvn task so we can override it
-  grunt.task.renameTask('mvn', 'mvn-install');
 
   // Custom build for maven
   grunt.registerTask('mvn', [
