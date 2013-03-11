@@ -40,14 +40,19 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         var com = CUI.rte.Common;
         var dpr = CUI.rte.DomProcessor;
         $win = $win || $(window);
+        // first, calculate the "optimal" position (directly above the editable's top
+        // corner
         var scrollTop = $win.scrollTop();
         var editablePos = this.$editable.offset();
-        var toolbarHeight = this.$toolbar.outerHeight() + 4; // TODO investigate why an initial(!) offset of 4 is required (defer?)
-        var top = editablePos.top - toolbarHeight;
+        var tbHeight = this.$toolbar.outerHeight();
+        var top = editablePos.top - tbHeight;
         var left = editablePos.left;
         if (top < scrollTop) {
             top = scrollTop;
         }
+        // then, check if we need to move the toolbar due to current selection state and
+        // what has probably been added to screen by the browser (for example, the callout
+        // and the screen keyboard on an iPad)
         var context = this.editorKernel.getEditContext();
         selection = selection || this.editorKernel.createQualifiedSelection(context);
         if (selection && selection.startNode) {
@@ -61,7 +66,24 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
             var yEnd = area.endY;
             var screenKeyboardHeight = (com.isPortrait() ? com.ua.screenKeyHeightPortrait
                     : com.ua.screenKeyHeightLandscape);
-            // console.log(yStart, yEnd, screenKeyboardHeight);
+            var availY = $win.height() - screenKeyboardHeight + scrollTop;
+            var tbPos = this.$toolbar.offset();
+            var tbY = tbPos.top;
+            var tbY2 = tbY + tbHeight;
+            // console.log(tbY, tbY2, " <--> ", yStart, yEnd);
+            if ((tbY2 > yStart) && (tbY <= yEnd)) {
+                // The toolbar is in the "forbidden area", overlapping either the current
+                // selection and/or the callout (iPad). In such cases, we try to move the
+                // toolbar under the selection
+                if ((yEnd + tbHeight) <= availY) {
+                    top = yEnd;
+                } else {
+                    // if that is not possible, we move it as far to the bottom as possible,
+                    // which will hide part of the selection, but should avoid conflicting
+                    // with the (potential) callout completely
+                    top = availY - tbHeight;
+                }
+            }
         }
         return {
             "left": left,
