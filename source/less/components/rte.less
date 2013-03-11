@@ -13,7 +13,7 @@ div.edited {
     left: 0;
     background-color: #454545;
     display: none;
-    padding: 2px;
+    padding: 0;
     margin: 0;
     border: 0;
     z-index: 10000;
@@ -22,14 +22,16 @@ div.edited {
         display: block;
     }
 
-    a {
+    button {
 
         &.item {
-            min-width: 60*@px !important;
+            min-width: 60*@px;
             width: 60*@px;
             height: 44*@px;
             color: #cecece;
-            padding: 2px;
+            padding: 0;
+            border: 0;
+            margin: 0 -4*@px 0 0;
             user-select: none;
             -webkit-user-select: none;
         }
