@@ -39,6 +39,7 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     _calculatePosition: function($win, selection) {
         var com = CUI.rte.Common;
         var dpr = CUI.rte.DomProcessor;
+        var sel = CUI.rte.Selection;
         $win = $win || $(window);
         // first, calculate the "optimal" position (directly above the editable's top
         // corner
@@ -62,26 +63,31 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
             var endOffset = selection.endOffset;
             var area = dpr.calcScreenEstate(context, startNode, startOffset, endNode,
                     endOffset);
-            var yStart = area.startY - (selection.isSelection ? com.ua.calloutHeight : 0);
+            var yStart = area.startY - (sel.isSelection(selection) ? com.ua.calloutHeight
+                    : 0);
             var yEnd = area.endY;
             var screenKeyboardHeight = (com.isPortrait() ? com.ua.screenKeyHeightPortrait
                     : com.ua.screenKeyHeightLandscape);
-            var availY = $win.height() - screenKeyboardHeight + scrollTop;
-            var tbPos = this.$toolbar.offset();
-            var tbY = tbPos.top;
-            var tbY2 = tbY + tbHeight;
+            var maxY = $win.height() - screenKeyboardHeight + scrollTop;
+            var tbY = top;
+            var tbY2 = top + tbHeight;
             // console.log(tbY, tbY2, " <--> ", yStart, yEnd);
             if ((tbY2 > yStart) && (tbY <= yEnd)) {
                 // The toolbar is in the "forbidden area", overlapping either the current
                 // selection and/or the callout (iPad). In such cases, we try to move the
                 // toolbar under the selection
-                if ((yEnd + tbHeight) <= availY) {
+                if ((yEnd + tbHeight) <= maxY) {
                     top = yEnd;
+                } else if ((yStart - tbHeight) > scrollTop) {
+                    // in this case, there's enough place between the browser window's
+                    // top corner and the top of the callout (which is above the editable's
+                    // top corner)
+                    top = yStart - tbHeight;
                 } else {
                     // if that is not possible, we move it as far to the bottom as possible,
                     // which will hide part of the selection, but should avoid conflicting
                     // with the (potential) callout completely
-                    top = availY - tbHeight;
+                    top = maxY - tbHeight;
                 }
             }
         }
