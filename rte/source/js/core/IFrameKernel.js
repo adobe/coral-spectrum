@@ -50,6 +50,10 @@ CUI.rte.IFrameKernel = new Class({
      */
     initializeEditContext: function(iFrame, win, doc, root) {
         this.editContext = new CUI.rte.EditContext(iFrame, win, doc, root);
+        // switch off auto linking - see http://msdn.microsoft.com/en-us/library/aa769893%28v=vs.85%29.aspx
+        if (CUI.rte.Common.ua.isW3cIE) {
+            doc.execCommand("AutoUrlDetect", false, false);
+        }
         this.addFeatureClasses(root);
         if (this.toolbar) {
             this.toolbar.startEditing(this);
