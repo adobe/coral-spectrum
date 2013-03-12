@@ -44,17 +44,19 @@
             this.toolbar = toolbar;
             var pluginId = this.plugin.pluginId;
             var $cont = $(toolbar.getToolbarContainer());
+            var self = this;
             this.$ui = $cont.find('button[data-action="' + pluginId + '#' + this.id + '"]');
-            this.$ui.bind("click.rte.handler", CUI.rte.Utils.scope(function(e) {
-                var editContext = this.plugin.editorKernel.getEditContext();
-                var cmd = (this.cmdDef ? this.cmdDef.cmd : this.id);
-                var cmdValue = (this.cmdDef ? this.cmdDef.cmdValue : undefined);
+            this.$ui.bind("click.rte.handler", function(e) {
+                var editContext = self.plugin.editorKernel.getEditContext();
+                var cmd = (self.cmdDef ? self.cmdDef.cmd : self.id);
+                var cmdValue = (self.cmdDef ? self.cmdDef.cmdValue : undefined);
                 var env = {
                     "editContext": editContext
                 };
-                this.plugin.execute(cmd, cmdValue, env);
-                this.plugin.editorKernel.focus(editContext);
-            }, this));
+                self.plugin.execute(cmd, cmdValue, env);
+                self.plugin.editorKernel.enableFocusHandling();
+                self.plugin.editorKernel.focus(editContext);
+            });
         },
 
         createToolbarDef: function() {

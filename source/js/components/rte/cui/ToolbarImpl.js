@@ -105,6 +105,28 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         this.$toolbar.offset(this._calculatePosition());
     },
 
+    _initializePopovers: function() {
+        var $popoverLinks = this.$container.find("button[data-action^=\"#\"]");
+        var self = this;
+        $popoverLinks.bind("click.rte.handler", function(e) {
+            // TODO determine suitable position
+            var ref = $(e.target).data("action").substring(1);
+            var $popover = self.$container.find("div[data-popover=\"" + ref + "\"]");
+            var pos = self.$toolbar.offset();
+            // console.log(pos, $popover.outerHeight());
+            $popover.offset({
+                "left": pos.left,
+                "top": pos.top - $popover.outerHeight()
+            });
+            // console.log(pos.left, pos.top - $popover.outerHeight());
+            $popover.popover().show();
+            self.editorKernel.focus();
+        });
+        $popoverLinks.fipo("touchstart.rte.handler", "mousedown.rte.handler", function(e) {
+            self.editorKernel.disableFocusHandling();
+        });
+    },
+
     getToolbarContainer: function() {
         return this.$container;
     },
@@ -129,6 +151,7 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         this.editorKernel.addUIListener("updatestate", this._handleUpdateState, this);
         this.$toolbar.addClass(CUI.rte.Theme.TOOLBAR_ACTIVE);
         this.$toolbar.offset(this._calculatePosition());
+        this._initializePopovers();
         var self = this;
         $(window).on("scroll.rte", function(e) {
             self._handleScrolling(e);

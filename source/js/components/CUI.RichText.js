@@ -104,6 +104,12 @@
                 e.preventDefault();
                 return false;
             });
+            $body.fipo("tap.rte.item", "click.rte.item", ".rte-popover .item", function(e) {
+                self.isTemporaryFocusChange = true;
+                e.stopPropagation();
+                e.preventDefault();
+                return false;
+            });
         },
 
         deactivateEditorKernel: function() {
