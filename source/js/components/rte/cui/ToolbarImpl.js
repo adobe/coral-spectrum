@@ -35,6 +35,8 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
 
     $toolbar: null,
 
+    $popover: null,
+
 
     _calculatePosition: function($win, selection) {
         var com = CUI.rte.Common;
@@ -102,24 +104,34 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     },
 
     _handleUpdateState: function(e) {
+        // this._hidePopover();
         this.$toolbar.offset(this._calculatePosition());
+    },
+
+    _hidePopover: function() {
+        if (this.$popover) {
+            this.$popover.popover().hide();
+            this.$popover = null;
+        }
     },
 
     _initializePopovers: function() {
         var $popoverLinks = this.$container.find("button[data-action^=\"#\"]");
         var self = this;
         $popoverLinks.bind("click.rte.handler", function(e) {
-            // TODO determine suitable position
+            self._hidePopover();
+            // TODO determine suitable position/position (above/below toolbar)
             var ref = $(e.target).data("action").substring(1);
-            var $popover = self.$container.find("div[data-popover=\"" + ref + "\"]");
+            self.$popover = self.$container.find("div[data-popover=\"" + ref + "\"]");
             var pos = self.$toolbar.offset();
-            // console.log(pos, $popover.outerHeight());
-            $popover.offset({
+            self.$popover.popover().show();
+            // taken from CUI.Popover:
+            var arrowHeight = Math.round(
+                    (self.$popover.outerWidth() - self.$popover.width()) / 1.5);
+            self.$popover.offset({
                 "left": pos.left,
-                "top": pos.top - $popover.outerHeight()
+                "top": pos.top - self.$popover.outerHeight() - arrowHeight
             });
-            // console.log(pos.left, pos.top - $popover.outerHeight());
-            $popover.popover().show();
             self.editorKernel.focus();
         });
         $popoverLinks.fipo("touchstart.rte.handler", "mousedown.rte.handler", function(e) {
@@ -159,6 +171,7 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     },
 
     finishEditing: function() {
+        this._hidePopover();
         this.$toolbar.removeClass(CUI.rte.Theme.TOOLBAR_ACTIVE);
         $(window).off("scroll.rte");
         this.editorKernel.removeUIListener("updatestate", this._handleUpdateState, this);
