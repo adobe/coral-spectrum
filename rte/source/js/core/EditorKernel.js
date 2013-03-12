@@ -953,17 +953,6 @@ CUI.rte.EditorKernel = new Class({
         }
     },
 
-    _handleToolbarOnFocus: function() {
-        if (!this.isFocusHandlingDisabled) {
-            if (this.hasFocus) {
-                this.enableToolbar();
-            } else {
-                this.disableToolbar();
-            }
-            this.updateToolbar();
-        }
-    },
-
     /**
      * Internal handler for focus events.
      * @private
@@ -992,7 +981,10 @@ CUI.rte.EditorKernel = new Class({
             }
             this.isEventingDisabled = false;
             this.hasFocus = true;
-            CUI.rte.Utils.defer(this._handleToolbarOnFocus, 1, this);
+            if (!this.isFocusHandlingDisabled) {
+                this.enableToolbar();
+                this.updateToolbar();
+            }
             this.onEditorEvent(e);
             // execute deferred stuff that has been scheduled for being executed on focus
             // gain
