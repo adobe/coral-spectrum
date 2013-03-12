@@ -6,6 +6,56 @@ div.edited {
     background-color: #ffffff;
 }
 
+.rte-button() {
+
+    background-color: #454545;
+    background-image: none;
+    vertical-align: top;
+
+    &.item {
+        min-width: 60*@px;
+        width: 60*@px;
+        height: 44*@px;
+        color: #cecece;
+        background-color: #454545;
+        background-image: none;
+        padding: 0;
+        border: 0;
+        margin: 0;
+        user-select: none;
+        -webkit-user-select: none;
+    }
+
+    &.text {
+        font-size: 20*@px;  /* TODO remove once icons are available */
+    }
+
+    &.selected {
+        background-color: #ffffff;
+        color: #454545;
+    }
+
+    &.disabled {
+        color: #eeeeee;
+        opacity: 0.4;
+    }
+
+    /* specific styles */
+
+    &.bold {
+        font-weight: bold;
+    }
+
+    &.italic {
+        font-style: italic;
+    }
+
+    &.underline {
+        text-decoration: underline;
+    }
+
+}
+
 .rte-toolbar {
 
     position: absolute;
@@ -32,51 +82,16 @@ div.edited {
     }
 
     button {
-
-        background-color: #454545;
-        background-image: none;
-
-        &.item {
-            min-width: 60*@px;
-            width: 60*@px;
-            height: 44*@px;
-            color: #cecece;
-            background-color: #454545;
-            background-image: none;
-            padding: 0;
-            border: 0;
-            margin: 0;
-            font-size: 20*@px;  /* TODO remove once icons are available */
-            user-select: none;
-            -webkit-user-select: none;
-        }
-
-        &.selected {
-            background-color: #ffffff;
-            color: #454545;
-        }
-
-        &.disabled {
-            color: #eeeeee;
-            opacity: 0.4;
-        }
-
-        /* specific styles */
-
-        &.bold {
-            font-weight: bold;
-        }
-
-        &.italic {
-            font-style: italic;
-        }
-
-        &.underline {
-            text-decoration: underline;
-        }
-
+        .rte-button;
     }
 
+}
+
+.rte-popover {
+
+    button {
+        .rte-button;
+    }
 }
 
 .cui-rte-forcedborder,

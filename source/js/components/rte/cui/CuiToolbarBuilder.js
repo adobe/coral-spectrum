@@ -68,6 +68,14 @@
             for (var n = 0; n < notifyCnt; n++) {
                 elementsToNotify[n].notifyToolbar(toolbar);
             }
+            // handle popovers
+            var $tbRoot = options.$toolbarRoot;
+            var $popoverLinks = $tbRoot.find("button[data-action^=\"#\"]");
+            $popoverLinks.bind("click.rte.handler", function(e) {
+                var ref = $(e.target).data("action").substring(1);
+                var $popover = $tbRoot.find("div[data-popover=\"" + ref + "\"]");
+                $popover.popover().show();
+            });
             return toolbar;
         },
 
