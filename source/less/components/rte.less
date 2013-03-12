@@ -17,27 +17,43 @@ div.edited {
     margin: 0;
     border: 0;
     z-index: 10000;
+    font-size: 0;   /* fixes additional space between buttons because of linefeeds */
 
     &.active {
         display: block;
     }
 
+    .separator {
+        background-color: #343434;
+        width: 1*@px;
+        min-width: 1*@px;
+        height: 44*@px;
+        display: inline-block;
+    }
+
     button {
+
+        background-color: #454545;
+        background-image: none;
 
         &.item {
             min-width: 60*@px;
             width: 60*@px;
             height: 44*@px;
             color: #cecece;
+            background-color: #454545;
+            background-image: none;
             padding: 0;
             border: 0;
-            margin: 0 -4*@px 0 0;
+            margin: 0;
+            font-size: 20*@px;  /* TODO remove once icons are available */
             user-select: none;
             -webkit-user-select: none;
         }
 
         &.selected {
-            color: #ffff00;
+            background-color: #ffffff;
+            color: #454545;
         }
 
         &.disabled {
@@ -49,17 +65,14 @@ div.edited {
 
         &.bold {
             font-weight: bold;
-            font-size: 20*@px;
         }
 
         &.italic {
             font-style: italic;
-            font-size: 20*@px;
         }
 
         &.underline {
             text-decoration: underline;
-            font-size: 20*@px;
         }
 
     }
