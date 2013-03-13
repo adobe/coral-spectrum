@@ -71,7 +71,9 @@ CUI.rte.DivKernel = new Class({
         if (com.ua.isGecko || com.ua.isWebKit) {
             this.deferFocus(CUI.rte.Utils.scope(function() {
                 sel.resetSelection(context, "start");
-                this.fireUIEvent("updatestate");
+                this.fireUIEvent("updatestate", {
+                    "origin": "init"
+                });
             }, this));
         } else if (com.ua.isIE) {
             CUI.rte.Utils.defer(function() {

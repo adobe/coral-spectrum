@@ -1096,7 +1096,10 @@ CUI.rte.EditorKernel = new Class({
         if (this.isEventingDisabled) {
             return;
         }
-        this.fireUIEvent("updatestate");
+        this.fireUIEvent("updatestate", {
+            "origin": "event",
+            "event": e
+        });
     },
 
 
@@ -1222,7 +1225,12 @@ CUI.rte.EditorKernel = new Class({
                     throw e;
                 }
             }
-            this.fireUIEvent("updatestate");
+            this.fireUIEvent("updatestate", {
+                "origin": "command",
+                "cmd": cmd,
+                "value": value,
+                "ret": execRet
+            });
         }, 10, this);
     },
 

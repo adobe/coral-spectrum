@@ -96,7 +96,21 @@
                 e.stopPropagation();
             });
             $body.fipo("tap.rte.ooa", "click.rte.ooa", function(e) {
-                self.finish();
+                // TODO find a cleaner solution ...
+                var preventFinish = false;
+                if (self.editorKernel.toolbar) {
+                    var tb = self.editorKernel.toolbar;
+                    if (tb._hidePopover) {
+                        preventFinish = tb._hidePopover();
+                    }
+                }
+                if (preventFinish) {
+                    self.editorKernel.focus();
+                    e.preventDefault();
+                    e.stopPropagation();
+                } else {
+                    self.finish();
+                }
             });
             $body.fipo("tap.rte.item", "click.rte.item", ".rte-toolbar .item", function(e) {
                 self.isTemporaryFocusChange = true;

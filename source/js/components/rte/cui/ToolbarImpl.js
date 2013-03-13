@@ -178,7 +178,13 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     },
 
     _handleUpdateState: function(e) {
-        // this._hidePopover();
+        switch (e.origin) {
+            case "event":
+                break;
+            case "command":
+                this._hidePopover();
+                break;
+        }
         this._updateUI();
     },
 
@@ -195,10 +201,12 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     },
 
     _hidePopover: function() {
-        if (this.$popover) {
+        var mustHide = !!this.$popover;
+        if (mustHide) {
             this.$popover.popover().hide();
             this.$popover = null;
         }
+        return mustHide;
     },
 
     _initializePopovers: function() {
