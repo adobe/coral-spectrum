@@ -37,6 +37,8 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
 
     $popover: null,
 
+    $clipParent: null,
+
     _getClippingParent: function($dom) {
         var $clipParent = undefined;
         var $body = $(document.body);
@@ -80,9 +82,11 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         $win = $win || $(window);
         // first, calculate the "optimal" position (directly above the editable's top
         // corner
-        var $clipParent = this._getClippingParent(this.$container);
+        // var $clipParent = this._getClippingParent(this.$container);
         var scrollTop = $win.scrollTop();
-        var clipY = $clipParent.offset().top;   // TODO scrollOffset?
+        // the scroll offsets of the clipping parent are handled by jQuery automatically,
+        // so we don't have to take care of it here
+        var clipY = (this.$clipParent ? this.$clipParent.offset().top : 0);
         var minY = Math.max(scrollTop, clipY);
         var editablePos = this.$editable.offset();
         var tbHeight = this.$toolbar.outerHeight();
@@ -236,18 +240,28 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         this.editorKernel = editorKernel;
         this.editorKernel.addUIListener("updatestate", this._handleUpdateState, this);
         this.$toolbar.addClass(CUI.rte.Theme.TOOLBAR_ACTIVE);
+        this.$clipParent = this._getClippingParent(this.$container);
         this._initializePopovers();
         this._updateUI();
         var self = this;
         $(window).on("scroll.rte", function(e) {
             self._handleScrolling(e);
         });
+        if (this.$clipParent) {
+            this.$clipParent.on("scroll.rte", function(e) {
+                self._handleScrolling(e);
+            });
+        }
     },
 
     finishEditing: function() {
         this._hidePopover();
         this.$toolbar.removeClass(CUI.rte.Theme.TOOLBAR_ACTIVE);
         $(window).off("scroll.rte");
+        if (this.$clipParent) {
+            this.$clipParent.off("scroll.rte");
+            this.$clipParent = undefined;
+        }
         this.editorKernel.removeUIListener("updatestate", this._handleUpdateState, this);
     },
 
