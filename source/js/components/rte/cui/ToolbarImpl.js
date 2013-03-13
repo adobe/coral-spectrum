@@ -37,6 +37,22 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
 
     $popover: null,
 
+    _getClippingParent: function($dom) {
+        var $clipParent = undefined;
+        var $body = $(document.body);
+        while ($dom[0] !== $body[0]) {
+            var ovf = $dom.css("overflow");
+            var ovfX = $dom.css("overflowX");
+            var ovfY = $dom.css("overflowY");
+            if ((ovfX !== "visible") || (ovfY !== "visible") || (ovf !== "visible")) {
+                $clipParent = $dom;
+                break;
+            }
+            $dom = $dom.parent();
+        }
+        return $clipParent;
+    },
+
     /**
      * Calculates the height of the current popover.
      * @private
@@ -64,7 +80,10 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         $win = $win || $(window);
         // first, calculate the "optimal" position (directly above the editable's top
         // corner
-        var scrollTop = $win.scrollTop(); // TODO must be calculated in more detail (divs may also have scrolling offsets set)
+        var $clipParent = this._getClippingParent(this.$container);
+        var scrollTop = $win.scrollTop();
+        var clipY = $clipParent.offset().top;   // TODO scrollOffset?
+        var minY = Math.max(scrollTop, clipY);
         var editablePos = this.$editable.offset();
         var tbHeight = this.$toolbar.outerHeight();
         var popoverData = this._calcPopover();
@@ -72,8 +91,8 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         var totalHeight = tbHeight + popoverHeight;
         var tbTop = editablePos.top - tbHeight;
         var left = editablePos.left;
-        if ((tbTop - popoverHeight) < scrollTop) {
-            tbTop = scrollTop + popoverHeight;
+        if ((tbTop - popoverHeight) < minY) {
+            tbTop = minY + popoverHeight;
         }
         var popoverAlign = "top";
         // then, check if we need to move the toolbar due to current selection state and
@@ -93,7 +112,7 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
             var yEnd = area.endY;
             var screenKeyboardHeight = (com.isPortrait() ? com.ua.screenKeyHeightPortrait
                     : com.ua.screenKeyHeightLandscape);
-            var maxY = $win.height() - screenKeyboardHeight + scrollTop;
+            var maxY = $win.height() - screenKeyboardHeight + scrollTop;    // TODO consider clipping as well
             var totalY = tbTop - popoverHeight;
             var totalY2 = tbTop + tbHeight;
             // console.log(tbTop, tbHeight, popoverHeight);
@@ -105,7 +124,7 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
                 if ((yEnd + totalHeight) <= maxY) {
                     popoverAlign = "bottom";
                     tbTop = yEnd;
-                } else if ((yStart - totalHeight) > scrollTop) {
+                } else if ((yStart - totalHeight) > minY) {
                     // in this case, there's enough place between the browser window's
                     // top corner and the top of the callout (which is above the editable's
                     // top corner)
