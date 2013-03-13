@@ -13,19 +13,17 @@
     }
     .resolution,
     .size,
-    .modified,
+    .modified,    
+    .published {
+        float: left;
+    }
     .links,
     .comments {
-        float: left;
+        float: right;
     }
     .info {
         clear: left;
-        float: right;
         height: 18*@px; // needed in case the comments and links are empty
-    }
-    .modified {
-        position: absolute;
-        left: 0;
     }
 
     // Class low-resolution: Small images should not be scaled up to 100% of the card width
@@ -71,6 +69,9 @@
     .modified {
         .card-list-date-user();
     }
+    .published {
+        display: none;
+    }
 }
 .list.small .card-asset {
     h4, // The <h4> element is a <div class="main"> in the list header
@@ -86,6 +87,7 @@
     }
     .type,
     .links,
+    .published,
     .comments {
         display: none;
     }
@@ -102,6 +104,7 @@
     .resolution,
     .size,
     .links,
+    .published,
     .comments {
         display: none;
     }
@@ -116,6 +119,7 @@
     .size,
     .modified,
     .links,
+    .published,
     .comments {
         display: none;
     }
