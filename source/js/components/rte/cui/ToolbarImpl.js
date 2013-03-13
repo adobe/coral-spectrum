@@ -37,22 +37,45 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
 
     $popover: null,
 
+    /**
+     * Calculates the height of the current popover.
+     * @private
+     */
+    _calcPopover: function() {
+        var $p = this.$popover;
+        if (!$p) {
+            return {
+                "height": 0,
+                "arrowHeight": 0
+            };
+        }
+        // arrow height calculation taken from CUI.Popover
+        var arrowHeight = Math.round(($p.outerWidth() - $p.width()) / 1.5);
+        return {
+            "height": $p.outerHeight() + arrowHeight,
+            "arrowHeight": arrowHeight
+        };
+    },
 
-    _calculatePosition: function($win, selection) {
+    _calcUIPosition: function($win, selection) {
         var com = CUI.rte.Common;
         var dpr = CUI.rte.DomProcessor;
         var sel = CUI.rte.Selection;
         $win = $win || $(window);
         // first, calculate the "optimal" position (directly above the editable's top
         // corner
-        var scrollTop = $win.scrollTop();
+        var scrollTop = $win.scrollTop(); // TODO must be calculated in more detail (divs may also have scrolling offsets set)
         var editablePos = this.$editable.offset();
         var tbHeight = this.$toolbar.outerHeight();
-        var top = editablePos.top - tbHeight;
+        var popoverData = this._calcPopover();
+        var popoverHeight = popoverData.height;
+        var totalHeight = tbHeight + popoverHeight;
+        var tbTop = editablePos.top - tbHeight;
         var left = editablePos.left;
-        if (top < scrollTop) {
-            top = scrollTop;
+        if ((tbTop - popoverHeight) < scrollTop) {
+            tbTop = scrollTop + popoverHeight;
         }
+        var popoverAlign = "top";
         // then, check if we need to move the toolbar due to current selection state and
         // what has probably been added to screen by the browser (for example, the callout
         // and the screen keyboard on an iPad)
@@ -71,41 +94,81 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
             var screenKeyboardHeight = (com.isPortrait() ? com.ua.screenKeyHeightPortrait
                     : com.ua.screenKeyHeightLandscape);
             var maxY = $win.height() - screenKeyboardHeight + scrollTop;
-            var tbY = top;
-            var tbY2 = top + tbHeight;
-            // console.log(tbY, tbY2, " <--> ", yStart, yEnd);
-            if ((tbY2 > yStart) && (tbY <= yEnd)) {
+            var totalY = tbTop - popoverHeight;
+            var totalY2 = tbTop + tbHeight;
+            // console.log(tbTop, tbHeight, popoverHeight);
+            // console.log(totalY, totalY2, " <--> ", yStart, yEnd);
+            if ((totalY2 > yStart) && (totalY <= yEnd)) {
                 // The toolbar is in the "forbidden area", overlapping either the current
                 // selection and/or the callout (iPad). In such cases, we try to move the
                 // toolbar under the selection
-                if ((yEnd + tbHeight) <= maxY) {
-                    top = yEnd;
-                } else if ((yStart - tbHeight) > scrollTop) {
+                if ((yEnd + totalHeight) <= maxY) {
+                    popoverAlign = "bottom";
+                    tbTop = yEnd;
+                } else if ((yStart - totalHeight) > scrollTop) {
                     // in this case, there's enough place between the browser window's
                     // top corner and the top of the callout (which is above the editable's
                     // top corner)
-                    top = yStart - tbHeight;
+                    tbTop = yStart - tbHeight;
                 } else {
                     // if that is not possible, we move it as far to the bottom as possible,
                     // which will hide part of the selection, but should avoid conflicting
                     // with the (potential) callout completely
-                    top = maxY - tbHeight;
+                    popoverAlign = "bottom";
+                    tbTop = maxY - totalHeight;
                 }
             }
         }
+        // calculate popover position
+        var popoverLeft = left;         // TODO check if we need to change this; if not, inline it
+        var popoverTop = (popoverAlign === "top" ?
+                tbTop - popoverHeight : tbTop + tbHeight + popoverData.arrowHeight);
         return {
-            "left": left,
-            "top": top
+            "toolbar": {
+                "left": left,
+                "top": tbTop
+            },
+            "popover": {
+                "left": popoverLeft,
+                "top": popoverTop,
+                "align": popoverAlign,
+                "arrow": (popoverAlign === "top" ? "bottom" : "top")
+            }
         };
     },
 
+    _updateUI: function() {
+        var pos = this._calcUIPosition();
+        if (pos) {
+            this.$toolbar.offset(pos["toolbar"]);
+            if (this.$popover) {
+                var popoverPos = pos["popover"];
+                this.$popover.removeClass("arrow-bottom  arrow-top");
+                this.$popover.addClass("arrow-" + popoverPos["arrow"]);
+                this.$popover.offset(popoverPos);
+            }
+        }
+    },
+
     _handleScrolling: function(e) {
-        this.$toolbar.offset(this._calculatePosition());
+        this._updateUI();
     },
 
     _handleUpdateState: function(e) {
         // this._hidePopover();
-        this.$toolbar.offset(this._calculatePosition());
+        this._updateUI();
+    },
+
+    _usePopover: function(ref) {
+        this.$popover = this.$container.find("div[data-popover=\"" + ref + "\"]");
+        if (this.$popover.length) {
+            // must be shown before calculating positions, as jQuery will miscalculate
+            // position:absolute otherwise
+            this.$popover.popover().show();
+            this._updateUI();
+        } else {
+            this.$popover = null;
+        }
     },
 
     _hidePopover: function() {
@@ -119,19 +182,11 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         var $popoverLinks = this.$container.find("button[data-action^=\"#\"]");
         var self = this;
         $popoverLinks.bind("click.rte.handler", function(e) {
-            self._hidePopover();
-            // TODO determine suitable position/position (above/below toolbar)
-            var ref = $(e.target).data("action").substring(1);
-            self.$popover = self.$container.find("div[data-popover=\"" + ref + "\"]");
-            var pos = self.$toolbar.offset();
-            self.$popover.popover().show();
-            // taken from CUI.Popover:
-            var arrowHeight = Math.round(
-                    (self.$popover.outerWidth() - self.$popover.width()) / 1.5);
-            self.$popover.offset({
-                "left": pos.left,
-                "top": pos.top - self.$popover.outerHeight() - arrowHeight
-            });
+            if (self.$popover) {
+                self._hidePopover();
+            } else {
+                self._usePopover($(e.target).data("action").substring(1));
+            }
             self.editorKernel.focus();
         });
         $popoverLinks.fipo("touchstart.rte.handler", "mousedown.rte.handler", function(e) {
@@ -162,8 +217,8 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         this.editorKernel = editorKernel;
         this.editorKernel.addUIListener("updatestate", this._handleUpdateState, this);
         this.$toolbar.addClass(CUI.rte.Theme.TOOLBAR_ACTIVE);
-        this.$toolbar.offset(this._calculatePosition());
         this._initializePopovers();
+        this._updateUI();
         var self = this;
         $(window).on("scroll.rte", function(e) {
             self._handleScrolling(e);
