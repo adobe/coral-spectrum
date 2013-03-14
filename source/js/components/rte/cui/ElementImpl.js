@@ -56,6 +56,7 @@
                 self.plugin.execute(cmd, cmdValue, env);
                 self.plugin.editorKernel.enableFocusHandling();
                 self.plugin.editorKernel.focus(editContext);
+                e.stopPropagation();
             });
         },
 

@@ -219,6 +219,7 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
                 self._usePopover($(e.target).data("action").substring(1));
             }
             self.editorKernel.focus();
+            e.stopPropagation();
         });
         $popoverLinks.fipo("touchstart.rte.handler", "mousedown.rte.handler", function(e) {
             self.editorKernel.disableFocusHandling();

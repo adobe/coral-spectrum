@@ -14,6 +14,13 @@
 
         savedOutlineStyle: null,
 
+        /**
+         * Flag to ignore the next "out of area" click event
+         * @private
+         * @type Boolean
+         */
+        ignoreNextClick: false,
+
 
         construct: function(options) {
             this.options = options || { };
@@ -21,6 +28,16 @@
         },
 
         // Helpers -----------------------------------------------------------------------------------------------------
+
+        _hidePopover: function() {
+            if (this.editorKernel.toolbar) {
+                var tb = this.editorKernel.toolbar;
+                if (tb._hidePopover) {
+                    return tb._hidePopover();
+                }
+            }
+            return false;
+        },
 
         getTextDiv: function(parentEl) {
             return parentEl;
@@ -64,6 +81,7 @@
         },
 
         initializeEventHandling: function() {
+            var sel = CUI.rte.Selection;
             var self = this;
             var $body = $(document.body);
             // temporary focus handling - we need to retransfer focus immediately
@@ -95,29 +113,53 @@
             this.$textContainer.fipo("tap.rte", "click.rte", function(e) {
                 e.stopPropagation();
             });
-            $body.fipo("tap.rte.ooa", "click.rte.ooa", function(e) {
-                // TODO find a cleaner solution ...
-                var preventFinish = false;
-                if (self.editorKernel.toolbar) {
-                    var tb = self.editorKernel.toolbar;
-                    if (tb._hidePopover) {
-                        preventFinish = tb._hidePopover();
-                    }
+            var bookmark;
+            $body.fipo("touchstart.rte.ooa", "mousedown.rte.ooa", function(e) {
+                // we need to save the bookmark as soon as possible, as it gets lost
+                // somewhere in the event handling between the initial touchstart/mousedown
+                // event and the tap/click event where we actually might need it
+                var context = self.editorKernel.getEditContext();
+                bookmark = sel.createRangeBookmark(context);
+            });
+            $body.on("click.rte.ooa", function(e) {
+                // there are cases where "out of area clicks" must be ignored - for example,
+                // on touch devices, the initial tap is followed by a click event that
+                // would stop editing immediately; so the ignoreNextClick flag may be
+                // used to handle those cases
+                if (self.ignoreNextClick) {
+                    self.ignoreNextClick = false;
+                    return;
                 }
-                if (preventFinish) {
-                    self.editorKernel.focus();
+                // TODO find a cleaner solution ...
+                if (self._hidePopover()) {
+                    var context = self.editorKernel.getEditContext();
+                    self.editorKernel.focus(context);
+                    // restore the bookmark that was saved on the initial
+                    // touchstart/mousedown event
+                    if (bookmark) {
+                        sel.selectRangeBookmark(context, bookmark);
+                        bookmark = undefined;
+                    }
+                    self.isTemporaryFocusChange = true;
                     e.preventDefault();
                     e.stopPropagation();
                 } else {
                     self.finish();
                 }
             });
+            $body.finger("tap.rte.ooa", function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            });
+            // prevent losing focus for toolbar items
             $body.fipo("tap.rte.item", "click.rte.item", ".rte-toolbar .item", function(e) {
                 self.isTemporaryFocusChange = true;
                 e.stopPropagation();
                 e.preventDefault();
                 return false;
             });
+            // prevent losing focus for popovers
             $body.fipo("tap.rte.item", "click.rte.item", ".rte-popover .item", function(e) {
                 self.isTemporaryFocusChange = true;
                 e.stopPropagation();
@@ -138,15 +180,10 @@
 
         finalizeEventHandling: function() {
             CUI.rte.Eventing.un(document.body, "keyup", this.handleKeyUp, this);
-            this.$textContainer.off("blur.rte");
-            this.$textContainer.off("tap.rte");
-            this.$textContainer.off("click.rte");
+            this.$textContainer.off("blur.rte tap.rte click.rte");
             var $body = $(document.body);
-            $body.off("focus.rte");
-            $body.off("tap.rte.ooa");
-            $body.off("click.rte.ooa");
-            $body.off("tap.rte.item");
-            $body.off("click.rte.item");
+            $body.off("focus.rte tap.rte.ooa click.rte.ooa touchstart.rte.ooa");
+            $body.off("mousedown.rte.ooa tap.rte.item click.rte.item");
         },
 
         updateState: function() {
@@ -180,6 +217,8 @@
             if (this.editorKernel === null) {
                 this.editorKernel = new CUI.rte.DivKernel(config);
             }
+            var ua = CUI.rte.Common.ua;
+            this.ignoreNextClick = ua.isTouch;
             this.$textContainer = this.getTextDiv(this.$element);
             this.$textContainer.addClass("edited");
             this.textContainer = this.$textContainer[0];
@@ -206,7 +245,6 @@
             this.initializeEventHandling();
             var initialContent = this.options.initialContent || this.$textContainer.html();
             this.$textContainer[0].contentEditable = "true";
-            var ua = CUI.rte.Common.ua;
             if (ua.isGecko || ua.isWebKit) {
                 this.savedOutlineStyle = this.textContainer.style.outlineStyle;
                 this.textContainer.style.outlineStyle = "none";
