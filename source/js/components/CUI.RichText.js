@@ -14,6 +14,9 @@
 
         savedOutlineStyle: null,
 
+        isActive: false,
+
+
         /**
          * Flag to ignore the next "out of area" click event
          * @private
@@ -99,7 +102,7 @@
                 // this is the case on mobile devices if the on-screen keyboard gets
                 // hidden
                 CUI.rte.Utils.defer(function() {
-                    if (!self.isTemporaryFocusChange) {
+                    if (!self.isTemporaryFocusChange && self.isActive) {
                         self.finish();
                     }
                     self.isTemporaryFocusChange = false;
@@ -143,7 +146,7 @@
                     self.isTemporaryFocusChange = true;
                     e.preventDefault();
                     e.stopPropagation();
-                } else {
+                } else if (self.isActive) {
                     self.finish();
                 }
             });
@@ -250,6 +253,7 @@
                 this.textContainer.style.outlineStyle = "none";
             }
             this.initializeEditorKernel(initialContent);
+            this.isActive = true;
         },
 
         finish: function() {
@@ -257,7 +261,6 @@
             this.finalizeEventHandling();
             this.deactivateEditorKernel();
             this.$textContainer.removeClass("edited");
-            // TODO CQ.WCM.unloadToolbar();
             this.textContainer.blur();
             this.textContainer.contentEditable = "inherit";
             document.body.spellcheck = this.savedSpellcheckAttrib;
@@ -265,8 +268,7 @@
             if ((ua.isGecko || ua.isWebKit) && this.savedOutlineStyle) {
                 this.textContainer.style.outlineStyle = this.savedOutlineStyle;
             }
-            // TODO ??? this.isBoxChangeCheckActive = false;
-            // console.log(editedContent);
+            this.isActive = false;
             return editedContent;
         }
 
