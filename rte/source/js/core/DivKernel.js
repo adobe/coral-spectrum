@@ -80,7 +80,9 @@ CUI.rte.DivKernel = new Class({
                 this.focus();
                 // workaround: EditorKernel does not always get first focus, so manually
                 // ensuring that editorKernel.hasFocus is set correctly
-                this.hasFocus = true;
+                CUI.rte.Utils.defer(function() {
+                    this.hasFocus = true;
+                }, 1, this);
                 if (emptyTextPara != null) {
                     sel.selectNode(context, emptyTextPara, true);
                 } else {
