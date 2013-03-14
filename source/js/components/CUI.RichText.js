@@ -27,7 +27,6 @@
 
         construct: function(options) {
             this.options = options || { };
-            // TODO ...
         },
 
         // Helpers -----------------------------------------------------------------------------------------------------
@@ -65,6 +64,7 @@
         },
 
         handleKeyUp: function(e) {
+            this._hidePopover();
             // if (!window.CQ_inplaceEditDialog) {
                 if (e.getCharCode() === 27) {
                     this.finish();
@@ -114,6 +114,7 @@
             // handle clicks/taps (clicks on the editable div vs. common/"out of area"
             // clicks vs. clicks on toolbar items)
             this.$textContainer.fipo("tap.rte", "click.rte", function(e) {
+                self._hidePopover();
                 e.stopPropagation();
             });
             var bookmark;
