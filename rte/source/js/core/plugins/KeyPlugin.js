@@ -434,7 +434,7 @@ CUI.rte.plugins.KeyPlugin = new Class({
         for (var a = aCnt - 1; a >= 0; a--) {
             var anchor = aTags[a];
             if (com.isAttribDefined(anchor, "href")
-                    && !com.isAttribDefined(anchor, CUI.rte.Common.HREF_ATTRIB)) {
+                    && !com.isAttribDefined(anchor, com.HREF_ATTRIB)) {
                 CUI.rte.DomProcessor.removeWithoutChildren(anchor);
                 if (!hasRemoved && com.ua.isOldIE) {
                     // IE < 9 may have an invalid selection after removing an auto-link
