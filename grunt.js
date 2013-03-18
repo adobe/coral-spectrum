@@ -42,7 +42,8 @@ module.exports = function(grunt) {
       'components/CUI.PathBrowser.js',
       'components/CUI.Wizard.js',
       'components/CUI.FileUpload.js',
-      'components/CUI.Toolbar.js'
+      'components/CUI.Toolbar.js',
+      'components/CUI.Tooltip.js'
 
     ],
     "cui-rte": [
