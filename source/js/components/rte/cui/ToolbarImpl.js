@@ -226,6 +226,20 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         });
     },
 
+    hide: function() {
+        this._hidePopover();
+        // use "visibility" property instead of "display" - the latter would destroy the
+        // layout on show() on Safari Mobile
+        this.$toolbar.css("visibility", "hidden");
+    },
+
+    show: function() {
+        // use "visibility" property instead of "display" - the latter would destroy the
+        // layout on Safari Mobile
+        this.$toolbar.css("visibility", "visible");
+        this._updateUI();
+    },
+
     getToolbarContainer: function() {
         return this.$container;
     },

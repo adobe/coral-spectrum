@@ -84,8 +84,10 @@
         },
 
         initializeEventHandling: function() {
+            var com = CUI.rte.Common;
             var sel = CUI.rte.Selection;
             var self = this;
+            var $doc = $(document);
             var $body = $(document.body);
             // temporary focus handling - we need to retransfer focus immediately
             // to the text container (at least in iOS 6) to prevent the keyboard from
@@ -170,6 +172,75 @@
                 e.preventDefault();
                 return false;
             });
+            // hide toolbar/popover while a selection is created
+            var _isToolbarHidden = false;
+            if (com.ua.isTouch) {
+                // On touch devices (Safari Mobile), no touch events are dispatched while
+                // the user defines a selection. As a workaround, we listen to
+                // selectionchange events instead (which at least indicate changes in the
+                // selection, but not when the selection process starts or ends). To
+                // determine the end of the selection process, a timed "best guess" approach
+                // is used - currently, the selection is declared "final" if it does not
+                // change for a second. This works well even if the user changes the
+                // selection after the 1sec interval - simply another cycle hiding/showing
+                // gets started in that case.
+                var _tbHideTimeout;
+                var _lastSel;
+                $doc.on("selectionchange", function(e) {
+                    // using native selection instead of selection abstraction here, as
+                    // it is faster and we are in a controlled environment (Webkit mobile)
+                    // here
+                    var slct = window.getSelection();
+                    if (!slct.isCollapsed) {
+                        var isSameSelection = false;
+                        if (_lastSel) {
+                            isSameSelection =
+                                    (_lastSel.ande === slct.anchorNode) &&
+                                    (_lastSel.aoffs === slct.anchorOffset) &&
+                                    (_lastSel.fnde === slct.focusNode) &&
+                                    (_lastSel.foffs === slct.focusOffset);
+                        }
+                        if (!isSameSelection) {
+                            if (_tbHideTimeout) {
+                                window.clearTimeout(_tbHideTimeout);
+                                _tbHideTimeout = undefined;
+                            }
+                            if (!_isToolbarHidden) {
+                                self.editorKernel.toolbar.hide();
+                                _isToolbarHidden = true;
+                            }
+                            _tbHideTimeout = window.setTimeout(function(e) {
+                                self.editorKernel.toolbar.show();
+                                _tbHideTimeout = undefined;
+                                _isToolbarHidden = false;
+                            }, 1000);
+                            _lastSel = {
+                                ande: slct.anchorNode,
+                                aoffs: slct.anchorOffset,
+                                fnde: slct.focusNode,
+                                foffs: slct.focusOffset
+                            };
+                        }
+                    }
+                });
+            }
+            var _isClick = false;
+            this.$textContainer.pointer("mousedown.rte.toolbarhide", function(e) {
+                _isClick = true;
+            });
+            this.$textContainer.pointer("mousemove.rte.toolbarhide", function(e) {
+                if (_isClick && !_isToolbarHidden) {
+                    self.editorKernel.toolbar.hide();
+                    _isToolbarHidden = true;
+                }
+            });
+            this.$textContainer.pointer("mouseup.rte.toolbarhide", function(e) {
+                if (_isToolbarHidden) {
+                    self.editorKernel.toolbar.show();
+                    _isToolbarHidden = false;
+                }
+                _isClick = false;
+            });
         },
 
         deactivateEditorKernel: function() {
@@ -188,6 +259,7 @@
             var $body = $(document.body);
             $body.off("focus.rte tap.rte.ooa click.rte.ooa touchstart.rte.ooa");
             $body.off("mousedown.rte.ooa tap.rte.item click.rte.item");
+            $body.off("touchmove.rte.toolbarhide mousemove.rte.toolbarhide");
         },
 
         updateState: function() {
@@ -306,5 +378,3 @@
     }
 
 }(window.jQuery));
-
-
