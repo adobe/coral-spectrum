@@ -7,7 +7,6 @@ div.edited {
 }
 
 .userSelect(@type) {
-    -webkit-touch-callout: none;
     -webkit-user-select: @type;
     -khtml-user-select: @type;
     -moz-user-select: @type;
@@ -76,6 +75,7 @@ div.edited {
     z-index: 10000;
     font-size: 0;   /* fixes additional space between buttons because of linefeeds */
     .userSelect(none);
+    -webkit-touch-callout: none;
 
     &.active {
         display: block;
@@ -103,6 +103,7 @@ div.edited {
     left: 0;
     z-index: 10001;
     .userSelect(none);
+    -webkit-touch-callout: none;
 
     button {
         .rte-button;
