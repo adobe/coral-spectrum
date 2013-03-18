@@ -69,7 +69,8 @@ CUI.rte.Eventing = function($) {
                 }
             }
             if (wrapper == null) {
-                throw new Error("Unregistered handler provided.");
+                throw new Error(
+                        "Unregistered handler provided for event '" + eventName + "'.");
             }
             $(obj).off(eventName, wrapper);
         }

@@ -34,7 +34,7 @@
             </nav>
 
             <div class="drawer">
-                <div class="badge">v0.5.0-SNAPSHOT</div>
+                <div class="badge">v1.2-SNAPSHOT</div>
             </div>
 
         </header>
@@ -70,23 +70,29 @@
                     -->
                     <div>
                         <h2 class="line" id="rte01">Simple RTE</h2>
-                        <nav class="toolbar">
-                            <div class="left icongroup">
-                                <a href="#format" data-rte-command="bold" tabindex="-1" class="button rte-toolbar-item rte-tb-bold rte-tbi-disabled">B</a>
-                                <a href="#format" data-rte-command="italic" tabindex="-1" class="button rte-toolbar-item rte-tb-italic rte-tbi-disabled">i</a>
-                                <a href="#format" data-rte-command="underline" tabindex="-1" class="button rte-toolbar-item rte-tb-underline rte-tbi-disabled">U</a>
-                                <a href="#subsuperscript" data-rte-command="superscript" tabindex="-1" class="button rte-toolbar-item rte-tbi-disabled"><sup>SUP</sup></a>
-                                <a href="#subsuperscript" data-rte-command="subscript" tabindex="-1" class="button rte-toolbar-item rte-tbi-disabled"><sub>SUB</sub></a>
-                                <a href="#justify" data-rte-command="justifyleft" tabindex="-1" class="button rte-toolbar-item rte-tbi-disabled">[</a>
-                                <a href="#justify" data-rte-command="justifycenter" tabindex="-1" class="button rte-toolbar-item rte-tbi-disabled">-</a>
-                                <a href="#justify" data-rte-command="justifyright" tabindex="-1" class="button rte-toolbar-item rte-tbi-disabled">]</a>
-                                <!-- a href="#justify" data-rte-command="justifyfull" tabindex="-1" class="button rte-toolbar-item rte-tbi-disabled">=</a -->
-                                <a href="#lists" data-rte-command="insertunorderedlist" tabindex="-1" class="button rte-toolbar-item rte-tbi-disabled">&bull;</a>
-                                <a href="#lists" data-rte-command="insertorderedlist" tabindex="-1" class="button rte-toolbar-item rte-tbi-disabled">1.</a>
-                                <a href="#lists" data-rte-command="outdent" tabindex="-1" class="button rte-toolbar-item rte-tbi-disabled">&lt;&lt;</a>
-                                <a href="#lists" data-rte-command="indent" tabindex="-1" class="button rte-toolbar-item rte-tbi-disabled">&gt;&gt;</a>
-                            </div>
+                        <nav class="rte-toolbar">
+                            <button data-action="#format" tabindex="-1" class="item icon-text small white"></button>
+                            <span class="separator"></span>
+                            <!--
+                            <button data-action="subsuperscript#superscript" tabindex="-1" class="item disabled"><sup>SUP</sup></button>
+                            <button data-action="subsuperscript#subscript" tabindex="-1" class="item disabled"><sub>SUB</sub></button>
+                            <span class="separator"></span>
+                            -->
+                            <button data-action="justify#justifyleft" tabindex="-1" class="item disabled text">[</button>
+                            <button data-action="justify#justifycenter" tabindex="-1" class="item disabled text">-</button>
+                            <button data-action="justify#justifyright" tabindex="-1" class="item disabled text">]</button>
+                            <span class="separator"></span>
+                            <!-- a href="#justify" data-rte-command="justifyfull" tabindex="-1" class="button rte-toolbar-item rte-tbi-disabled">=</a -->
+                            <button data-action="lists#insertunorderedlist" tabindex="-1" class="item disabled text">&bull;</button>
+                            <button data-action="lists#insertorderedlist" tabindex="-1" class="item disabled text">1.</button>
+                            <button data-action="lists#outdent" tabindex="-1" class="item disabled text">&lt;&lt;</button>
+                            <button data-action="lists#indent" tabindex="-1" class="item disabled text">&gt;&gt;</button>
                         </nav>
+                        <div data-popover="format" class="popover rte-popover">
+                            <button data-action="format#bold" tabindex="-1" class="item bold disabled text">B</button>
+                            <button data-action="format#italic" tabindex="-1" class="item italic disabled text">i</button>
+                            <button data-action="format#underline" tabindex="-1" class="item underline disabled text">U</button>
+                        </div>
                         <div class="editable" data-config="example.json">
                             <p>Li Europan lingues es membres del sam familie. Lor separat existentie es
                             un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular.

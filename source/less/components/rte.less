@@ -6,40 +6,102 @@ div.edited {
     background-color: #ffffff;
 }
 
-a.rte-toolbar-item {
-    min-width: 20*@px !important;
-    width: 20*@px;
-    height: 20*@px;
+.rte-button() {
+
+    background-color: #454545;
+    background-image: none;
+    vertical-align: top;
+
+    &.item {
+        min-width: 60*@px;
+        width: 60*@px;
+        height: 44*@px;
+        color: #cecece;
+        background-color: #454545;
+        background-image: none;
+        padding: 0;
+        border: 0;
+        margin: 0;
+        user-select: none;
+        -webkit-user-select: none;
+    }
+
+    &.text {
+        font-size: 20*@px;  /* TODO remove once icons are available */
+    }
+
+    &.selected {
+        background-color: #ffffff;
+        color: #454545;
+    }
+
+    &.disabled {
+        color: #eeeeee;
+        opacity: 0.4;
+    }
+
+    /* specific styles */
+
+    &.bold {
+        font-weight: bold;
+    }
+
+    &.italic {
+        font-style: italic;
+    }
+
+    &.underline {
+        text-decoration: underline;
+    }
+
 }
 
-a.rte-tbi-selected {
-    color: #ffff00;
+.rte-toolbar {
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #454545;
+    display: none;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    z-index: 10000;
+    font-size: 0;   /* fixes additional space between buttons because of linefeeds */
+
+    &.active {
+        display: block;
+    }
+
+    .separator {
+        background-color: #343434;
+        width: 1*@px;
+        min-width: 1*@px;
+        height: 44*@px;
+        display: inline-block;
+    }
+
+    button {
+        .rte-button;
+    }
+
 }
 
-a.rte-tbi-disabled {
-    color: #eeeeee;
-    opacity: 0.4;
-}
+.rte-popover {
 
-/* specific styles */
+    font-size: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10001;
 
-a.rte-tb-bold {
-    font-weight: bold;
-    font-size: 20*@px;
-}
-
-a.rte-tb-italic {
-    font-style: italic;
-    font-size: 20*@px;
-}
-
-a.rte-tb-underline {
-    text-decoration: underline;
-    font-size: 20*@px;
+    button {
+        .rte-button;
+    }
 }
 
 .cui-rte-forcedborder,
 .cui-rte-forcedborder TD,
 .cui-rte-forcedborder TH {
-    border: 1*@px dotted #D3D3D3;
+    border: 1*@px dotted #d3d3d3;
 }

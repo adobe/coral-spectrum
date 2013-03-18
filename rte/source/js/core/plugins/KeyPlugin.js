@@ -283,7 +283,6 @@ CUI.rte.plugins.KeyPlugin = new Class({
             }
         }
 
-        this.preventAutoLinks = (!cancelKey && com.ua.isIE);
         e.cancelKey = cancelKey;
     },
 
@@ -311,10 +310,14 @@ CUI.rte.plugins.KeyPlugin = new Class({
             this.handleJunkSpans(context);
         }
 
-        // handle IE autolinks if necessary
-        if (this.preventAutoLinks) {
-            this.handleIEAutoLinks(context);
-            this.preventAutoLinks = false;
+        // handle IE autolinks if necessary; note that this is not necessary anymore with
+        // IE >= 9, as this has an option to switch auto linking off (see initialization
+        // code in EditorKernel#initializeEditContext)
+        if (com.ua.isOldIE) {
+            // older IE versions add auto links _after_ the keyup event is triggered
+            // (especially when re-adding the link after deleting something in a
+            // potential URL), so we use deferred execution here to be sure
+            CUI.rte.Utils.defer(this.handleIEAutoLinks, 1, this, [ context ]);
         }
 
         // handle "absolutely empty" content
@@ -422,15 +425,28 @@ CUI.rte.plugins.KeyPlugin = new Class({
      */
     handleIEAutoLinks: function(context) {
         var com = CUI.rte.Common;
+        var sel = CUI.rte.Selection;
+        var hasRemoved = false;
+        var caretPos;
         // remove all links that don't have a _rte_href attribute
         var aTags = context.root.getElementsByTagName("A");
         var aCnt = aTags.length;
         for (var a = aCnt - 1; a >= 0; a--) {
             var anchor = aTags[a];
             if (com.isAttribDefined(anchor, "href")
-                    && !com.isAttribDefined(anchor, CUI.rte.Common.HREF_ATTRIB)) {
+                    && !com.isAttribDefined(anchor, com.HREF_ATTRIB)) {
                 CUI.rte.DomProcessor.removeWithoutChildren(anchor);
+                if (!hasRemoved && com.ua.isOldIE) {
+                    // IE < 9 may have an invalid selection after removing an auto-link
+                    // (if caret is inside the auto-link that is being removed), so we
+                    // save the caret and restore it at the end
+                    caretPos = sel.getCaretPos(context);
+                    hasRemoved = true;
+                }
             }
+        }
+        if (hasRemoved && com.ua.isOldIE) {
+            sel.setCaretPos(context, caretPos);
         }
     },
 

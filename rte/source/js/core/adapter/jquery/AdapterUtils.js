@@ -37,6 +37,14 @@ CUI.rte.AdapterUtils = function($) {
            return [ pos.left, pos.top ];
         },
 
+        getWidth: function(dom) {
+            return $(dom).width();
+        },
+
+        getHeight: function(dom) {
+            return $(dom).height();
+        },
+
         jsonDecode: function(str) {
             return $.parseJSON(str);
         },

@@ -43,7 +43,12 @@ CUI.rte.Common = function() {
         isMac = check(/macintosh|mac os x/),
         isChrome = isWebkit && check(/\bchrome\b/),
         isSafari = isWebkit && !isChrome && check(/safari/),
-        isTouch = "ontouchstart" in window;
+        isTouch = "ontouchstart" in window,
+        isIPad = isTouch && isSafari && check(/ipad/),
+        isIPhone = isTouch && isSafari && check(/iphone/),
+        calloutHeight = (isIPad || isIPhone ? 56 : 0),
+        screenKeyHeightPortrait = (isIPad ? 308 : (isIPhone ? 260 : 0)),
+        screenKeyHeightLandscape = (isIPad ? 396 : (isIPhone ? 206 : 0));
 
     /**
      * Flag if the internal logging mechanism is enabled (used for ieLog())
@@ -320,7 +325,27 @@ CUI.rte.Common = function() {
             /**
              * True if a touch-enabled device is used
              */
-            isTouch: isTouch
+            isTouch: isTouch,
+            /**
+             * True if an iPad is used
+             */
+            isIPad: isIPad,
+            /**
+             * True if an iPhone is used
+             */
+            isIPhone: isIPhone,
+            /**
+             * Height of a potentially used "callout"; 0 on non-iOS browsers
+             */
+            calloutHeight: calloutHeight,
+            /**
+             * Height of a potentially shown screen keyboard in Portrait mode
+             */
+            screenKeyHeightPortrait: screenKeyHeightPortrait,
+            /**
+             * Height of a potentially shown screen keyboard in Landscape mode
+             */
+            screenKeyHeightLandscape: screenKeyHeightLandscape
         },
 
         /**
@@ -2463,6 +2488,14 @@ CUI.rte.Common = function() {
             var fakeSpan = context.createElement("span");
             fakeSpan.appendChild(dom.cloneNode(true));
             return fakeSpan.innerHTML;
+        },
+
+        /**
+         * Determines if the application is run in Portrait mode.
+         * @return {Boolean} True if the application is run in Portrait mode
+         */
+        isPortrait: function() {
+            return (window.innerHeight > window.innerWidth);
         },
 
         /**

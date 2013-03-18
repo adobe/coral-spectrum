@@ -160,6 +160,10 @@
             this.hasFocus = false;
             this._update();
         }.bind(this));
+
+        this.$element.find('select').on("change", function() {
+            this._update(true);
+        }.bind(this));
     },
 
     _placeSelect: function() {

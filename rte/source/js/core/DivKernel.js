@@ -49,7 +49,14 @@ CUI.rte.DivKernel = new Class({
      */
     initializeEditContext: function(win, doc, root) {
         this.editContext = new CUI.rte.EditContext(null, win, doc, root);
+        // switch off auto linking - see http://msdn.microsoft.com/en-us/library/aa769893%28v=vs.85%29.aspx
+        if (CUI.rte.Common.ua.isW3cIE) {
+            doc.execCommand("AutoUrlDetect", false, false);
+        }
         this.addFeatureClasses(root);
+        if (this.toolbar) {
+            this.toolbar.startEditing(this);
+        }
     },
 
     /**
@@ -64,14 +71,18 @@ CUI.rte.DivKernel = new Class({
         if (com.ua.isGecko || com.ua.isWebKit) {
             this.deferFocus(CUI.rte.Utils.scope(function() {
                 sel.resetSelection(context, "start");
-                this.fireUIEvent("updatestate");
+                this.fireUIEvent("updatestate", {
+                    "origin": "init"
+                });
             }, this));
         } else if (com.ua.isIE) {
             CUI.rte.Utils.defer(function() {
                 this.focus();
                 // workaround: EditorKernel does not always get first focus, so manually
                 // ensuring that editorKernel.hasFocus is set correctly
-                this.hasFocus = true;
+                CUI.rte.Utils.defer(function() {
+                    this.hasFocus = true;
+                }, 1, this);
                 if (emptyTextPara != null) {
                     sel.selectNode(context, emptyTextPara, true);
                 } else {
