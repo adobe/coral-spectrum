@@ -182,11 +182,11 @@
                 // determine the end of the selection process, a timed "best guess" approach
                 // is used - currently, the selection is declared "final" if it does not
                 // change for a second. This works well even if the user changes the
-                // selection after the 1sec interval - simply another cycle hiding/showing
-                // gets started in that case.
+                // selection after the 1sec interval - simply another cycle of
+                // hiding/showing the toolbar gets started in that case.
                 var _tbHideTimeout;
                 var _lastSel;
-                $doc.on("selectionchange", function(e) {
+                $doc.on("selectionchange.rte.toolbarhide", function(e) {
                     // using native selection instead of selection abstraction here, as
                     // it is faster and we are in a controlled environment (Webkit mobile)
                     // here
@@ -259,7 +259,8 @@
             var $body = $(document.body);
             $body.off("focus.rte tap.rte.ooa click.rte.ooa touchstart.rte.ooa");
             $body.off("mousedown.rte.ooa tap.rte.item click.rte.item");
-            $body.off("touchmove.rte.toolbarhide mousemove.rte.toolbarhide");
+            $body.off("selectionchange.rte.toolbarhide mousemove.rte.toolbarhide");
+            $body.off("mouseup.rte.toolbarhide mousedown.rte.toolbarhide");
         },
 
         updateState: function() {
