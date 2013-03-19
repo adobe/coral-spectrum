@@ -201,6 +201,9 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         // see if the toolbar still fits into the screen
         if (tbTop < avail.min) {
             tbTop = avail.min;
+        } else if ((tbTop + tbHeight) > avail.max) {
+            tbTop = avail.max - totalHeight;
+            popoverAlign = "bottom";
         } else {
             // if we can keep the toolbar at the same position by changing the alignment of
             // the popover, we try it
