@@ -39,6 +39,18 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
 
     $clipParent: null,
 
+    preferredToolbarPos: null,
+
+
+    /**
+     * <p>Determines the "clipping parent" of the specified DOM object.</p>
+     * <p>The clipping parent is a DOM object that might clip the visible area of the
+     * specified DOM object by specifiying a suitable "overflow" attribute.</p>
+     * @param {jQuery} $dom The jQuery-wrapped DOM object
+     * @return {jQuery} The clipping parent as a jQuery object; undefined if no clipping
+     *         parent exists
+     * @private
+     */
     _getClippingParent: function($dom) {
         var $clipParent = undefined;
         var $body = $(document.body);
@@ -57,6 +69,8 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
 
     /**
      * Calculates the height of the current popover.
+     * @return {{height: Number, arrowHeight: Number}} The total height height and the
+     *         height of the "arrow" of the popover
      * @private
      */
     _calcPopover: function() {
@@ -75,33 +89,22 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         };
     },
 
-    _calcUIPosition: function($win, selection) {
-        var com = CUI.rte.Common;
+    /**
+     * <p>Calculates the vertical coordinates of the "forbidden area" where the toolbar
+     * should not be positioned if possible.</p>
+     * <p>This is usually the vertical screen estate the current selection takes. On
+     * touch devices, approximal values for native elements (the notorious "callout" ...)
+     * are added.</p>
+     * @param {Object} selection The current processing selection
+     * @return {{start: Number, end: Number}} The vertical screen estate reserved for
+     *         selection + native stuff; undefined for invalid selections
+     * @private
+     */
+    _calcForbidden: function(selection) {
         var dpr = CUI.rte.DomProcessor;
         var sel = CUI.rte.Selection;
-        $win = $win || $(window);
-        // first, calculate the "optimal" position (directly above the editable's top
-        // corner
-        // var $clipParent = this._getClippingParent(this.$container);
-        var scrollTop = $win.scrollTop();
-        // the scroll offsets of the clipping parent are handled by jQuery automatically,
-        // so we don't have to take care of it here
-        var clipY = (this.$clipParent ? this.$clipParent.offset().top : 0);
-        var minY = Math.max(scrollTop, clipY);
-        var editablePos = this.$editable.offset();
-        var tbHeight = this.$toolbar.outerHeight();
-        var popoverData = this._calcPopover();
-        var popoverHeight = popoverData.height;
-        var totalHeight = tbHeight + popoverHeight;
-        var tbTop = editablePos.top - tbHeight;
-        var left = editablePos.left;
-        if ((tbTop - popoverHeight) < minY) {
-            tbTop = minY + popoverHeight;
-        }
-        var popoverAlign = "top";
-        // then, check if we need to move the toolbar due to current selection state and
-        // what has probably been added to screen by the browser (for example, the callout
-        // and the screen keyboard on an iPad)
+        var com = CUI.rte.Common;
+        var forbidden = undefined;
         var context = this.editorKernel.getEditContext();
         selection = selection || this.editorKernel.createQualifiedSelection(context);
         if (selection && selection.startNode) {
@@ -114,43 +117,116 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
             var yStart = area.startY - (sel.isSelection(selection) ? com.ua.calloutHeight
                     : 0);
             var yEnd = area.endY;
-            var screenKeyboardHeight = (com.isPortrait() ? com.ua.screenKeyHeightPortrait
-                    : com.ua.screenKeyHeightLandscape);
-            var maxY = $win.height() - screenKeyboardHeight + scrollTop;    // TODO consider clipping as well
-            var totalY = tbTop - popoverHeight;
-            var totalY2 = tbTop + tbHeight;
+            forbidden = {
+                "start": yStart,
+                "end": yEnd
+            }
+        }
+        return forbidden;
+    },
+
+    /**
+     * Calculates the vertical screen estate that is actually available (approximately).
+     * @param {jQuery} $win The window object, wrapped in a jQuery object
+     * @return {{min: Number, max: Number}} The minimum/maximum vertical coordinates that
+     *         are available
+     * @private
+     */
+    _calcAvail: function($win) {
+        var com = CUI.rte.Common;
+        var scrollTop = $win.scrollTop();
+        var clipY = (this.$clipParent ? this.$clipParent.offset().top : 0);
+        var minY = Math.max(scrollTop, clipY);
+        var screenKeyboardHeight = (com.isPortrait() ? com.ua.screenKeyHeightPortrait
+                : com.ua.screenKeyHeightLandscape);
+        var maxY = $win.height() - screenKeyboardHeight + scrollTop;    // TODO consider clipping as well
+        return {
+            "min": minY,
+            "max": maxY
+        }
+    },
+
+    /**
+     * Calculates the vertical coordinates of the UI (toolbar + popover/if applicable).
+     * @param {Number} tbTop The toolbar's top coordinate
+     * @param {Number} tbHeight The toolbar's height
+     * @param {Number} popoverHeight The popover's height; 0 if no popover is shown
+     * @param {String} popoverAlign The popover's alignment ("top" or "bottom")
+     * @return {{y1: Number, y2: Number}} The top and bottom coordinates of the UI
+     * @private
+     */
+    _calcUITotal: function(tbTop, tbHeight, popoverHeight, popoverAlign) {
+        var y1 = tbTop;
+        var y2 = tbTop + tbHeight;
+        if (popoverAlign === "top") {
+            y1 = tbTop - popoverHeight;
+        } else {
+            y2 = tbTop + popoverHeight;
+        }
+        return {
+            "y1": y1,
+            "y2": y2
+        };
+    },
+
+    _calcUIPosition: function($win, selection) {
+        // first, calculate the "optimal" position (directly above the editable's top
+        // corner
+        // the scroll offsets of the clipping parent are handled by jQuery automatically,
+        // so we don't have to take care of it here
+        var editablePos = this.$editable.offset();
+        var tbHeight = this.$toolbar.outerHeight();
+        var popoverData = this._calcPopover();
+        var totalHeight = tbHeight + popoverData.height;
+        var tbTop = (this.preferredToolbarPos ? this.preferredToolbarPos.top
+                : editablePos.top - tbHeight);
+        var left = editablePos.left;
+        var popoverAlign = "top";
+        var avail = this._calcAvail($win || $(window));
+        if ((tbTop - popoverData.height) < avail.min) {
+            popoverAlign = "bottom";
+            // tbTop = minY + popoverHeight;
+        }
+        // then, check if we need to move the toolbar due to current selection state and
+        // what has probably been added to screen by the browser (for example, the callout
+        // and the screen keyboard on an iPad)
+        var forbidden = this._calcForbidden(selection);
+        if (forbidden) {
+            var totalPos = this._calcUITotal(tbTop, tbHeight, popoverData.height,
+                    popoverAlign);
             // console.log(tbTop, tbHeight, popoverHeight);
             // console.log(totalY, totalY2, " <--> ", yStart, yEnd);
-            if ((totalY2 > yStart) && (totalY <= yEnd)) {
+            if ((totalPos.y2 > forbidden.start) && (totalPos.y1 <= forbidden.end)) {
                 // The toolbar is in the "forbidden area", overlapping either the current
                 // selection and/or the callout (iPad). In such cases, we try to move the
                 // toolbar under the selection
-                if ((yEnd + totalHeight) <= maxY) {
+                if ((forbidden.end + totalHeight) <= avail.max) {
                     popoverAlign = "bottom";
-                    tbTop = yEnd;
-                } else if ((yStart - totalHeight) > minY) {
+                    tbTop = forbidden.end;
+                } else if ((forbidden.start - totalHeight) > avail.min) {
                     // in this case, there's enough place between the browser window's
                     // top corner and the top of the callout (which is above the editable's
                     // top corner)
-                    tbTop = yStart - tbHeight;
+                    tbTop = forbidden.start - tbHeight;
                 } else {
                     // if that is not possible, we move it as far to the bottom as possible,
                     // which will hide part of the selection, but should avoid conflicting
                     // with the (potential) callout completely
                     popoverAlign = "bottom";
-                    tbTop = maxY - totalHeight;
+                    tbTop = avail.max - totalHeight;
                 }
             }
         }
         // calculate popover position
         var popoverLeft = left;         // TODO check if we need to change this; if not, inline it
         var popoverTop = (popoverAlign === "top" ?
-                tbTop - popoverHeight : tbTop + tbHeight + popoverData.arrowHeight);
+                tbTop - popoverData.height : tbTop + tbHeight + popoverData.arrowHeight);
+        this.preferredToolbarPos = {
+            "left": left,
+            "top": tbTop
+        };
         return {
-            "toolbar": {
-                "left": left,
-                "top": tbTop
-            },
+            "toolbar": this.preferredToolbarPos,
             "popover": {
                 "left": popoverLeft,
                 "top": popoverTop,

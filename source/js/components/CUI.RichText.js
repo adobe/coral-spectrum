@@ -192,7 +192,7 @@
                     // here
                     var slct = window.getSelection();
                     // check if selection is valid - if not, reuse last known selection or
-                    // set caret at the start of the text
+                    // set caret to the start of the text
                     var context = self.editorKernel.getEditContext();
                     if (!com.isAncestor(context, context.root, slct.focusNode) ||
                             !com.isAncestor(context, context.root, slct.anchorNode)) {
