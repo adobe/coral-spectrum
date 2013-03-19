@@ -16,7 +16,7 @@ describe('CUI.Wizard', function() {
                 '<nav>'+
                     '<button class="back">Back</button>'+
                     '<ol>'+
-                        '<li>Frist step</li>'+
+                        '<li>First step</li>'+
                         '<li>Second step</li>'+
                         '<li>Third step</li>'+
                         '<li>Last step</li>'+
