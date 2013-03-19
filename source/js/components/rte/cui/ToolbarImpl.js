@@ -68,9 +68,24 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     },
 
     /**
+     * Calculates the optimal toolbart position, which is directly above the editable div.
+     * The position might not be valid; this has to be considered separately.
+     * @private
+     */
+    _calcOptimum: function(popoverData) {
+         var editablePos = this.$editable.offset();
+         var tbHeight = this.$toolbar.outerHeight();
+         return {
+             "left": editablePos.left,
+             "top": editablePos.top - tbHeight
+         };
+    },
+
+    /**
      * Calculates the height of the current popover.
      * @return {{height: Number, arrowHeight: Number}} The total height height and the
-     *         height of the "arrow" of the popover
+     *         height of the "arrow" of the popover; both values are 0 if no popover is
+     *         currently shown
      * @private
      */
     _calcPopover: function() {
@@ -135,6 +150,8 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     _calcAvail: function($win) {
         var com = CUI.rte.Common;
         var scrollTop = $win.scrollTop();
+        // the scroll offsets of the clipping parent are handled by jQuery automatically,
+        // so we don't have to take care of it here
         var clipY = (this.$clipParent ? this.$clipParent.offset().top : 0);
         var minY = Math.max(scrollTop, clipY);
         var screenKeyboardHeight = (com.isPortrait() ? com.ua.screenKeyHeightPortrait
@@ -159,9 +176,9 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         var y1 = tbTop;
         var y2 = tbTop + tbHeight;
         if (popoverAlign === "top") {
-            y1 = tbTop - popoverHeight;
+            y1 -= popoverHeight;
         } else {
-            y2 = tbTop + popoverHeight;
+            y2 += popoverHeight;
         }
         return {
             "y1": y1,
@@ -170,44 +187,50 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     },
 
     _calcUIPosition: function($win, selection) {
-        // first, calculate the "optimal" position (directly above the editable's top
-        // corner
-        // the scroll offsets of the clipping parent are handled by jQuery automatically,
-        // so we don't have to take care of it here
-        var editablePos = this.$editable.offset();
-        var tbHeight = this.$toolbar.outerHeight();
         var popoverData = this._calcPopover();
+        var optimum = this._calcOptimum(popoverData);
+        if (!this.preferredToolbarPos) {
+            this.preferredToolbarPos = optimum;
+        }
+        var tbHeight = this.$toolbar.outerHeight();
         var totalHeight = tbHeight + popoverData.height;
-        var tbTop = (this.preferredToolbarPos ? this.preferredToolbarPos.top
-                : editablePos.top - tbHeight);
-        var left = editablePos.left;
+        var tbLeft = this.preferredToolbarPos.left;
+        var tbTop = this.preferredToolbarPos.top;
         var popoverAlign = "top";
         var avail = this._calcAvail($win || $(window));
+        // if we can keep the toolbar at the same position by changing the alignment of
+        // the popover, we try it
         if ((tbTop - popoverData.height) < avail.min) {
             popoverAlign = "bottom";
-            // tbTop = minY + popoverHeight;
         }
-        // then, check if we need to move the toolbar due to current selection state and
+        // check if we need to move the toolbar due to current selection state and
         // what has probably been added to screen by the browser (for example, the callout
         // and the screen keyboard on an iPad)
         var forbidden = this._calcForbidden(selection);
         if (forbidden) {
             var totalPos = this._calcUITotal(tbTop, tbHeight, popoverData.height,
                     popoverAlign);
-            // console.log(tbTop, tbHeight, popoverHeight);
-            // console.log(totalY, totalY2, " <--> ", yStart, yEnd);
-            if ((totalPos.y2 > forbidden.start) && (totalPos.y1 <= forbidden.end)) {
+            if ((totalPos.y2 > forbidden.start) && (totalPos.y1 < forbidden.end)) {
+                /*
+                console.log("reposition", totalPos.y2 + "<->" + forbidden.start,
+                        totalPos.y1 + "<->" + forbidden.end);
+                */
                 // The toolbar is in the "forbidden area", overlapping either the current
-                // selection and/or the callout (iPad). In such cases, we try to move the
-                // toolbar under the selection
-                if ((forbidden.end + totalHeight) <= avail.max) {
+                // selection and/or the callout (iPad). In such cases, we first see, if we
+                // can place it above the forbidden area if we allow moving the toolbar,
+                // starting with an optimal position ...
+                if ((optimum.top - popoverData.height) > avail.min) {
+                    popoverAlign = "top";
+                    tbTop = optimum.top;
+                } else if ((forbidden.start - totalHeight) > avail.min) {
+                    // ..., otherwise see if it fits above somewhere else than at the
+                    // optimal position, ...
+                    popoverAlign = "top";
+                    tbTop = forbidden.start - tbHeight;
+                } else if ((forbidden.end + totalHeight) <= avail.max) {
+                    // ..., otherwise we try to move the toolbar under the selection
                     popoverAlign = "bottom";
                     tbTop = forbidden.end;
-                } else if ((forbidden.start - totalHeight) > avail.min) {
-                    // in this case, there's enough place between the browser window's
-                    // top corner and the top of the callout (which is above the editable's
-                    // top corner)
-                    tbTop = forbidden.start - tbHeight;
                 } else {
                     // if that is not possible, we move it as far to the bottom as possible,
                     // which will hide part of the selection, but should avoid conflicting
@@ -218,11 +241,11 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
             }
         }
         // calculate popover position
-        var popoverLeft = left;         // TODO check if we need to change this; if not, inline it
+        var popoverLeft = tbLeft;         // TODO check if we need to change this; if not, inline it
         var popoverTop = (popoverAlign === "top" ?
                 tbTop - popoverData.height : tbTop + tbHeight + popoverData.arrowHeight);
         this.preferredToolbarPos = {
-            "left": left,
+            "left": tbLeft,
             "top": tbTop
         };
         return {
