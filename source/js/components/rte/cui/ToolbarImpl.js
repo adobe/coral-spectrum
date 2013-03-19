@@ -198,10 +198,15 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         var tbTop = this.preferredToolbarPos.top;
         var popoverAlign = "top";
         var avail = this._calcAvail($win || $(window));
-        // if we can keep the toolbar at the same position by changing the alignment of
-        // the popover, we try it
-        if ((tbTop - popoverData.height) < avail.min) {
-            popoverAlign = "bottom";
+        // see if the toolbar still fits into the screen
+        if (tbTop < avail.min) {
+            tbTop = avail.min;
+        } else {
+            // if we can keep the toolbar at the same position by changing the alignment of
+            // the popover, we try it
+            if ((tbTop - popoverData.height) < avail.min) {
+                popoverAlign = "bottom";
+            }
         }
         // check if we need to move the toolbar due to current selection state and
         // what has probably been added to screen by the browser (for example, the callout
