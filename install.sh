@@ -174,10 +174,6 @@ else
   exit 1
 fi
 
-# Temporary: clone from git and add link to template in JSDoc folder
-rm -rf components/JSDoc
-tar -xzf util/JSDoc.tar.gz -C components/
-
 # install RTE build stuff as well, so grunt full works OOTB without calling the RTE
 # installer manually
 cd rte
