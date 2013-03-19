@@ -6,6 +6,14 @@ div.edited {
     background-color: #ffffff;
 }
 
+.userSelect(@type) {
+    -webkit-user-select: @type;
+    -khtml-user-select: @type;
+    -moz-user-select: @type;
+    -ms-user-select: @type;
+    user-select: @type;
+}
+
 .rte-button() {
 
     background-color: #454545;
@@ -22,8 +30,6 @@ div.edited {
         padding: 0;
         border: 0;
         margin: 0;
-        user-select: none;
-        -webkit-user-select: none;
     }
 
     &.text {
@@ -68,6 +74,8 @@ div.edited {
     border: 0;
     z-index: 10000;
     font-size: 0;   /* fixes additional space between buttons because of linefeeds */
+    .userSelect(none);
+    -webkit-touch-callout: none;
 
     &.active {
         display: block;
@@ -94,6 +102,8 @@ div.edited {
     top: 0;
     left: 0;
     z-index: 10001;
+    .userSelect(none);
+    -webkit-touch-callout: none;
 
     button {
         .rte-button;

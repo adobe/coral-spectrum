@@ -191,6 +191,23 @@
                     // it is faster and we are in a controlled environment (Webkit mobile)
                     // here
                     var slct = window.getSelection();
+                    // check if selection is valid - if not, reuse last known selection or
+                    // set caret at the start of the text
+                    var context = self.editorKernel.getEditContext();
+                    if (!com.isAncestor(context, context.root, slct.focusNode) ||
+                            !com.isAncestor(context, context.root, slct.anchorNode)) {
+                        slct.removeAllRanges();
+                        var range = document.createRange();
+                        if (_lastSel) {
+                            console.log("Resetting selection");
+                            range.setStart(_lastSel.ande, _lastSel.aoffs);
+                            range.setEnd(_lastSel.fnde, _lastSel.foffs);
+                        } else {
+                            range.selectNodeContents(context.root);
+                            range.collapse(true);
+                        }
+                        slct.addRange(range);
+                    }
                     if (!slct.isCollapsed) {
                         var isSameSelection = false;
                         if (_lastSel) {
@@ -214,14 +231,14 @@
                                 _tbHideTimeout = undefined;
                                 _isToolbarHidden = false;
                             }, 1000);
-                            _lastSel = {
-                                ande: slct.anchorNode,
-                                aoffs: slct.anchorOffset,
-                                fnde: slct.focusNode,
-                                foffs: slct.focusOffset
-                            };
                         }
                     }
+                    _lastSel = {
+                        ande: slct.anchorNode,
+                        aoffs: slct.anchorOffset,
+                        fnde: slct.focusNode,
+                        foffs: slct.focusOffset
+                    };
                 });
             }
             var _isClick = false;

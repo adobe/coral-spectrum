@@ -271,6 +271,12 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
             self._handleScrolling(e);
         });
         if (this.$clipParent) {
+            // provide a onclick handler for the clip parent, as otherwise no click
+            // events would be sent to finish editing
+            this.$clipParent.on("click.rte.clipparent", function() {
+                // do nothing
+            });
+            // handle scrolling of the clip parent
             this.$clipParent.on("scroll.rte", function(e) {
                 self._handleScrolling(e);
             });
@@ -283,6 +289,7 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         $(window).off("scroll.rte");
         if (this.$clipParent) {
             this.$clipParent.off("scroll.rte");
+            this.$clipParent.off("click.rte.clipparent");
             this.$clipParent = undefined;
         }
         this.editorKernel.removeUIListener("updatestate", this._handleUpdateState, this);
