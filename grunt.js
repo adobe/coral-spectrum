@@ -35,6 +35,7 @@ module.exports = function(grunt) {
       'components/CUI.Dropdown.js',
       'components/CUI.Filters.js',
       'components/CUI.Slider.js',
+      'components/CUI.LabeledSlider.js',      
       'components/CUI.Datepicker.js',
       'components/CUI.Pulldown.js',
       'components/CUI.Sticky.js',
