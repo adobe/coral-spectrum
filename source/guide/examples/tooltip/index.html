@@ -30,7 +30,16 @@
             <p>
             <span id="tt3">Tooltipped3</span>
             <span class="tooltip error" data-interactive="false" data-init="tooltip" data-target="#tt3">TEST 3</span>
-            </p>                    
+            </p>
+            <p>
+                <button id="dynamic-button">Dynamic tooltip creation</button>
+            </p>                                
         </section>
+        
+        <script type="text/javascript">
+            new CUI.Tooltip({target: "#dynamic-button",
+                            content: "Dynamic tooltip",
+                            interactive: true});
+        </script>
     </body>
 </html>
