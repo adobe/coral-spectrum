@@ -37,6 +37,8 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
 
     $popover: null,
 
+    $popoverTrigger: null,
+
     $clipParent: null,
 
     preferredToolbarPos: null,
@@ -235,10 +237,6 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
             var totalPos = this._calcUITotal(tbTop, tbHeight, popoverData.height,
                     popoverAlign);
             if ((totalPos.y2 > forbidden.start) && (totalPos.y1 < forbidden.end)) {
-                /*
-                console.log("reposition", totalPos.y2 + "<->" + forbidden.start,
-                        totalPos.y1 + "<->" + forbidden.end);
-                */
                 // The toolbar is in the "forbidden area", overlapping either the current
                 // selection and/or the callout (iPad). In such cases, we first see, if we
                 // can place it above the forbidden area if we allow moving the toolbar,
@@ -312,6 +310,10 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     },
 
     _usePopover: function(ref, $trigger) {
+        this.$popoverTrigger = $trigger;
+        this.$popoverTrigger.addClass("triggered");
+        this.$popoverTrigger.removeClass("white");
+        this.$popoverTrigger.addClass("black");
         this.$popover = this.$container.find("div[data-popover=\"" + ref + "\"]");
         if (this.$popover.length) {
             // calculate & set "arrow" position, using a temporary styleheet to override
@@ -336,6 +338,12 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     },
 
     _hidePopover: function() {
+        if (this.$popoverTrigger) {
+            this.$popoverTrigger.removeClass("triggered");
+            this.$popoverTrigger.addClass("white");
+            this.$popoverTrigger.removeClass("black");
+            this.$popoverTrigger = null;
+        }
         var mustHide = !!this.$popover;
         if (mustHide) {
             this.$popover.removeClass("temp-arrow-position");
