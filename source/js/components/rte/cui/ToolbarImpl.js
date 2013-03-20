@@ -359,10 +359,13 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         var $popoverLinks = this.$container.find("button[data-action^=\"#\"]");
         var self = this;
         $popoverLinks.bind("click.rte.handler", function(e) {
+            var $trigger = $(this);
+            var show = !self.$popover || ($trigger[0] !== self.$popoverTrigger[0]);
             if (self.$popover) {
                 self._hidePopover();
-            } else {
-                self._usePopover($(e.target).data("action").substring(1), $(this));
+            }
+            if (show) {
+                self._usePopover($(e.target).data("action").substring(1), $trigger);
             }
             self.editorKernel.focus();
             e.stopPropagation();
