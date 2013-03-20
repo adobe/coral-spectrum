@@ -46,6 +46,14 @@ div.edited {
         opacity: 0.4;
     }
 
+    /* reset gradient filter on IE */
+
+    &,
+    &:hover,
+    &:active {
+        filter: none;
+    }
+    
     /* specific styles */
 
     &.bold {
