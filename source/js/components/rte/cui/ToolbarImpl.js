@@ -41,6 +41,8 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
 
     preferredToolbarPos: null,
 
+    _popoverStyleSheet: null,
+
 
     /**
      * <p>Determines the "clipping parent" of the specified DOM object.</p>
@@ -82,6 +84,20 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     },
 
     /**
+     * Calculates the height of the "arrow" of a popup.
+     * @return {Number} The height of the "arrow"
+     * @private
+     */
+    _calcArrowHeight: function() {
+        var $p = this.$popover;
+        if (!$p) {
+            return 0;
+        }
+        // arrow height calculation taken from CUI.Popover
+        return Math.round(($p.outerWidth() - $p.width()) / 1.5);
+    },
+
+    /**
      * Calculates the height of the current popover.
      * @return {{height: Number, arrowHeight: Number}} The total height height and the
      *         height of the "arrow" of the popover; both values are 0 if no popover is
@@ -97,7 +113,7 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
             };
         }
         // arrow height calculation taken from CUI.Popover
-        var arrowHeight = Math.round(($p.outerWidth() - $p.width()) / 1.5);
+        var arrowHeight = this._calcArrowHeight();
         return {
             "height": $p.outerHeight() + arrowHeight,
             "arrowHeight": arrowHeight
@@ -295,9 +311,21 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         this._updateUI();
     },
 
-    _usePopover: function(ref) {
+    _usePopover: function(ref, $trigger) {
         this.$popover = this.$container.find("div[data-popover=\"" + ref + "\"]");
         if (this.$popover.length) {
+            // calculate & set "arrow" position, using a temporary styleheet to override
+            // :before pseudo class
+            var triggerOffs = $trigger.offset();
+            var toolbarOffs = this.$toolbar.offset();
+            var triggerDX = triggerOffs.left - toolbarOffs.left;
+            var arrowSize = this._calcArrowHeight();
+            var arrowOffs = Math.round(($trigger.width() / 2) + triggerDX - arrowSize) + 2;
+            this._popoverStyleSheet = CUI.rte.UIUtils.addStyleSheet({
+                ".name": ".temp-arrow-position:before",
+                "left": arrowOffs + "px !important"
+            });
+            this.$popover.addClass("temp-arrow-position");
             // must be shown before calculating positions, as jQuery will miscalculate
             // position:absolute otherwise
             this.$popover.popover().show();
@@ -310,6 +338,9 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     _hidePopover: function() {
         var mustHide = !!this.$popover;
         if (mustHide) {
+            this.$popover.removeClass("temp-arrow-position");
+            CUI.rte.UIUtils.removeStyleSheet(this._popoverStyleSheet);
+            this._popoverStyleSheet = null;
             this.$popover.popover().hide();
             this.$popover = null;
         }
@@ -323,7 +354,7 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
             if (self.$popover) {
                 self._hidePopover();
             } else {
-                self._usePopover($(e.target).data("action").substring(1));
+                self._usePopover($(e.target).data("action").substring(1), $(this));
             }
             self.editorKernel.focus();
             e.stopPropagation();
