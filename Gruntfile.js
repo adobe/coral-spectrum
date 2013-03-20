@@ -49,6 +49,7 @@ module.exports = function(grunt) {
     ],
     "cui-rte": [
       'components/rte/Theme.js',
+      'components/rte/UIUtils.js',
       'components/rte/cui/ToolkitImpl.js',
       'components/rte/cui/ToolbarImpl.js',
       'components/rte/cui/ElementImpl.js',
