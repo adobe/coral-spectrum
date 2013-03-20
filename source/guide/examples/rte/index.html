@@ -72,14 +72,8 @@
                         <h2 class="line" id="rte01">Simple RTE</h2>
                         <nav class="rte-toolbar">
                             <button data-action="#format" tabindex="-1" class="item icon-text small white"></button>
-                            <span class="separator"></span>
-                            <button data-action="#justify" tabindex="-1" class="item icon-viewlist small white"></button>
-                            <span class="separator"></span>
-                            <!-- a href="#justify" data-rte-command="justifyfull" tabindex="-1" class="button rte-toolbar-item rte-tbi-disabled">=</a -->
-                            <button data-action="lists#insertunorderedlist" tabindex="-1" class="item disabled text">&bull;</button>
-                            <button data-action="lists#insertorderedlist" tabindex="-1" class="item disabled text">1.</button>
-                            <button data-action="lists#outdent" tabindex="-1" class="item disabled text">&lt;&lt;</button>
-                            <button data-action="lists#indent" tabindex="-1" class="item disabled text">&gt;&gt;</button>
+                            <button data-action="#justify" tabindex="-1" class="item icon-graphtrendrounded small white"></button>
+                            <button data-action="#lists" tabindex="-1" class="item icon-viewlist small white"></button>
                         </nav>
                         <div data-popover="format" class="popover rte-popover">
                             <button data-action="format#bold" tabindex="-1" class="item bold disabled text">B</button>
@@ -90,6 +84,12 @@
                             <button data-action="justify#justifyleft" tabindex="-1" class="item disabled text">[</button>
                             <button data-action="justify#justifycenter" tabindex="-1" class="item disabled text">-</button>
                             <button data-action="justify#justifyright" tabindex="-1" class="item disabled text">]</button>
+                        </div>
+                        <div data-popover="lists" class="popover rte-popover">
+                            <button data-action="lists#insertunorderedlist" tabindex="-1" class="item disabled text">&bull;</button>
+                            <button data-action="lists#insertorderedlist" tabindex="-1" class="item disabled text">1.</button>
+                            <button data-action="lists#outdent" tabindex="-1" class="item disabled text">&lt;&lt;</button>
+                            <button data-action="lists#indent" tabindex="-1" class="item disabled text">&gt;&gt;</button>
                         </div>
                         <div class="editable" data-config="example.json">
                             <p>Li Europan lingues es membres del sam familie. Lor separat existentie es
