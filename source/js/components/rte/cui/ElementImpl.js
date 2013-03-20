@@ -48,6 +48,7 @@
             this.$ui = $cont.find('button[data-action="' + pluginId + '#' + this.id + '"]');
             this.$ui.bind("click.rte.handler", function(e) {
                 var editContext = self.plugin.editorKernel.getEditContext();
+                editContext.setState("CUI.SelectionLock", 1);
                 var cmd = (self.cmdDef ? self.cmdDef.cmd : self.id);
                 var cmdValue = (self.cmdDef ? self.cmdDef.cmdValue : undefined);
                 var env = {

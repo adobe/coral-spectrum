@@ -16,7 +16,6 @@
 
         isActive: false,
 
-
         /**
          * Flag to ignore the next "out of area" click event
          * @private
@@ -199,7 +198,6 @@
                         slct.removeAllRanges();
                         var range = document.createRange();
                         if (_lastSel) {
-                            console.log("Resetting selection");
                             range.setStart(_lastSel.ande, _lastSel.aoffs);
                             range.setEnd(_lastSel.fnde, _lastSel.foffs);
                         } else {
@@ -209,28 +207,38 @@
                         slct.addRange(range);
                     }
                     if (!slct.isCollapsed) {
-                        var isSameSelection = false;
-                        if (_lastSel) {
-                            isSameSelection =
-                                    (_lastSel.ande === slct.anchorNode) &&
-                                    (_lastSel.aoffs === slct.anchorOffset) &&
-                                    (_lastSel.fnde === slct.focusNode) &&
-                                    (_lastSel.foffs === slct.focusOffset);
-                        }
-                        if (!isSameSelection) {
-                            if (_tbHideTimeout) {
-                                window.clearTimeout(_tbHideTimeout);
-                                _tbHideTimeout = undefined;
+                        var locks = context.getState("CUI.SelectionLock");
+                        if (locks === undefined) {
+                            var isSameSelection = false;
+                            if (_lastSel) {
+                                isSameSelection =
+                                        (_lastSel.ande === slct.anchorNode) &&
+                                        (_lastSel.aoffs === slct.anchorOffset) &&
+                                        (_lastSel.fnde === slct.focusNode) &&
+                                        (_lastSel.foffs === slct.focusOffset);
                             }
-                            if (!_isToolbarHidden) {
-                                self.editorKernel.toolbar.hide();
-                                _isToolbarHidden = true;
+                            if (!isSameSelection) {
+                                if (_tbHideTimeout) {
+                                    window.clearTimeout(_tbHideTimeout);
+                                    _tbHideTimeout = undefined;
+                                }
+                                if (!_isToolbarHidden) {
+                                    self.editorKernel.toolbar.hide();
+                                    _isToolbarHidden = true;
+                                }
+                                _tbHideTimeout = window.setTimeout(function(e) {
+                                    self.editorKernel.toolbar.show();
+                                    _tbHideTimeout = undefined;
+                                    _isToolbarHidden = false;
+                                }, 1000);
                             }
-                            _tbHideTimeout = window.setTimeout(function(e) {
-                                self.editorKernel.toolbar.show();
-                                _tbHideTimeout = undefined;
-                                _isToolbarHidden = false;
-                            }, 1000);
+                        } else {
+                            locks--;
+                            if (locks > 0) {
+                                context.setState("CUI.SelectionLock", locks);
+                            } else {
+                                context.setState("CUI.SelectionLock");
+                            }
                         }
                     }
                     _lastSel = {
