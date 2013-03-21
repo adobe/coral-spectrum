@@ -81,7 +81,7 @@ module.exports = function(grunt) {
     build: 'build',
     source: 'source',
     temp: 'temp',
-    components: 'components',
+    bower: 'externals/components',
     modules: 'node_modules',
     rte: "rte"
   };
@@ -215,7 +215,7 @@ module.exports = function(grunt) {
           {
             expand: true,
             filter: 'isFile',
-            cwd: '<%= dirs.components %>/bootstrap/less/',
+            cwd: '<%= dirs.bower %>/bootstrap/less/',
             src: ['*'],
             dest: '<%= dirs.temp %>/less/bootstrap/'
           }
@@ -226,7 +226,7 @@ module.exports = function(grunt) {
           {
             expand: true,
             filter: 'isFile',
-            cwd: '<%= dirs.components %>/bootstrap/less/',
+            cwd: '<%= dirs.bower %>/bootstrap/less/',
             src: ['*'],
             dest: '<%= dirs.build %>/less/bootstrap/'
           }
@@ -245,19 +245,19 @@ module.exports = function(grunt) {
       libs: {
         files: [
           {
-            src: ['<%= dirs.components %>/jquery/index.js'],
+            src: ['<%= dirs.bower %>/jquery/index.js'],
             dest: '<%= dirs.build %>/js/libs/jquery.js'
           },
           {
-            src: ['<%= dirs.components %>/underscore/index.js'],
+            src: ['<%= dirs.bower %>/underscore/index.js'],
             dest: '<%= dirs.build %>/js/libs/underscore.js'
           },
           {
-            src: ['<%= dirs.components %>/handlebars/index.js'],
+            src: ['<%= dirs.bower %>/handlebars/index.js'],
             dest: '<%= dirs.build %>/js/libs/handlebars.js'
           },
           {
-            src: ['<%= dirs.components %>/handlebars-full/index.js'],
+            src: ['<%= dirs.bower %>/handlebars-full/index.js'],
             dest: '<%= dirs.build %>/js/libs/handlebars.full.js'
           }
         ]
@@ -292,7 +292,7 @@ module.exports = function(grunt) {
         files: [
           {
             expand: true,
-            cwd: '<%= dirs.components %>/bootstrap/docs/assets/js/google-code-prettify/',
+            cwd: '<%= dirs.bower %>/bootstrap/docs/assets/js/google-code-prettify/',
             src: ['*'],
             dest: '<%= dirs.build %>/js/google-code-prettify/'
           }
