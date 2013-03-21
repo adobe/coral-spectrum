@@ -1,6 +1,8 @@
-setup.js
+#base=.
 
-core/adapter/extjs/Class.js
+setup.js
+additional/Class.js
+
 core/adapter/extjs/Eventing.js
 core/adapter/EditorEvent.js
 core/adapter/extjs/ExtEvent.js

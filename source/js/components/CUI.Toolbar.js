@@ -22,7 +22,7 @@
           hasCenter = $toolbar.find(".center").length !== 0,
           iconWidth = $icons.width();
 
-      $toolbar.responsive({
+      $toolbar.reflow({
         "break-lines": function ($toolbar, size) {
           return hasCenter && $toolbar.width()-2*iconWidth < 16*size.rem();
         },

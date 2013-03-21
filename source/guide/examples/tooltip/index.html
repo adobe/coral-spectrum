@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Tooltip examples</title>
+
+        <link rel="stylesheet" href="../../css/cui.css">
+        
+        <script src="../../js/libs/underscore.js"></script>
+        <script src="../../js/libs/handlebars.js"></script>
+        <script src="../../js/libs/moment.js"></script>
+        <script src="../../js/libs/jquery.js"></script>
+        <script src="../../js/libs/jquery-fingerpointer.js"></script>
+        <script src="../../js/libs/toe.js"></script>
+  
+        <script src="../../js/CUI.js"></script>
+    </head>
+    <body>
+
+        <section>
+            <h1>Tooltips</h1>
+            <p>
+                <button id="my-button">My Button</button>
+                <span class="tooltip arrow-bottom" data-interactive="true" data-init="tooltip" data-target="#my-button">Tooltip content</span>
+            </p>
+            <p>
+            <span id="tt2">Tooltipped2</span>
+            <span class="tooltip arrow-top success" data-interactive="true" data-init="tooltip" data-target="#tt2">TEST 2</span>
+            </p>   
+            <p>
+            <span id="tt3">Tooltipped3</span>
+            <span class="tooltip error" data-interactive="false" data-init="tooltip" data-target="#tt3">TEST 3</span>
+            </p>
+            <p>
+                <button id="dynamic-button">Dynamic tooltip creation</button>
+            </p>                                
+        </section>
+        
+        <script type="text/javascript">
+            new CUI.Tooltip({target: "#dynamic-button",
+                            content: "Dynamic tooltip",
+                            interactive: true});
+        </script>
+    </body>
+</html>

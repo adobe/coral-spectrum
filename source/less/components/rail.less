@@ -5,8 +5,8 @@
 div.rail {
     max-width: 35%;
 
-    // animation is too slow
-    //.transition(width 0.5s ease-out);
+    /* animation is too slow */
+    /*.transition(width 0.5s ease-out);*/
 
     background-color: @rail-background-color;
     height: 100%;
@@ -14,7 +14,7 @@ div.rail {
     @pull-to-request-size: 3rem;
 
     &:not(.light) {
-      // Note: this is a bit wrong... We're overriding colors for icons here, this should be part of icons.less...
+      /* Note: this is a bit wrong... We're overriding colors for icons here, this should be part of icons.less... */
       [class^="icon-"]:not(.black):not(.blue),
       [class*=" icon-"]:not(.black):not(.blue) {
         &:before {
@@ -27,7 +27,8 @@ div.rail {
           opacity: 1;
         }
 
-        &:hover:before {
+        &:hover:before,
+        &.focus:before {
           color: @rail-icon-color;
           opacity: 1;
         }
@@ -73,10 +74,12 @@ div.rail {
 
         >.pull-to-refresh {
             display: block;
-        }     
-
-        >.wrap {
-            padding-bottom: 1px; // this is necessary to enable scrolling
+        }
+        
+        &.touch {    
+            > .wrap {
+                padding-bottom: 1px; // this is necessary to enable scrolling
+            }
         }
     }
 
@@ -105,6 +108,13 @@ div.rail {
           .box-shadow(none);
 
           section {
+            color: @font-base-color;
+
+            border-top: @px solid @rail-light-section-border-color;
+            .box-shadow(inset 0 @px 0 @rail-light-section-highlight-color);
+          }
+          
+          .tablist {
             color: @font-base-color;
 
             border-top: @px solid @rail-light-section-border-color;
@@ -181,7 +191,7 @@ div.rail {
         // necessary of pull-to-refresh is possible
         background-color: @rail-background-color;
 
-        // cloasable sections
+        // closeable sections
         .closeable() {
             position: relative;
 
@@ -195,7 +205,8 @@ div.rail {
 
             >.fold {
                 height: 0;
-                overflow: hidden;
+                overflow-x: hidden;
+                overflow-y: hidden;
             }
 
             &.open {
@@ -246,6 +257,21 @@ div.rail {
                             opacity: 1;
                         }
                     }
+                    
+                    &.focus {
+                      outline: none;
+                      .box-shadow(
+                          -@partial-glow-radius -@partial-glow-radius/2 @partial-glow-radius fadeout(@focus-glow-color, 50%),
+                          @partial-glow-radius -@partial-glow-radius/2 @partial-glow-radius fadeout(@focus-glow-color, 50%)
+                      );
+                      border: @px solid @focus-border-color;
+                      border-bottom: none;
+                      margin: 2*@px -1*@px 0;
+                       >i {
+                           line-height: 40*@px + 2*@px;
+                           height: 43*@px;  
+                       }
+                    }
                 }
             }
         }
@@ -285,7 +311,7 @@ div.rail {
 		        &, a {
                 	color: @rail-font-color;
                 }
-
+                
                 &.active {
                     position: relative;
 
@@ -308,6 +334,26 @@ div.rail {
                         right: -@px;
                         border-right-color: @body-background-color;
                     }
+                    
+                    &.focus {
+                        background-color: @rail-well-background-color; 
+                        .box-shadow(
+                            inset 0 -@focus-glow-radius/2 @focus-glow-radius -@focus-glow-radius/2 fadeout(@rail-shadow-inset-color, 65%),
+                            inset 0 @focus-glow-radius/2 @focus-glow-radius -@focus-glow-radius/2 fadeout(@rail-shadow-inset-color, 65%)
+                        );
+                    }
+                }
+                
+                &:hover {
+                    text-decoration: none;
+                }
+                
+                &.focus {
+                    text-decoration: none;
+                    background-color: @rail-well-background-color;
+                    .box-shadow(
+                        inset 0 @px 0 @rail-background-color
+                    );
                 }
             }
 
@@ -341,11 +387,32 @@ div.rail {
                     padding: 6*@px 15*@px;
 
                     display: block;
+                    
+                    &:focus {
+                        outline: none;
+                        
+                    }
+                    
+                    &.focus {
+                        background: @rail-well-background-color;
+                    }
                 }
 
                 //.fold {
                 //    padding: 15*@px;
                 //}
+            }
+            
+            section+section {
+                .heading {
+                    border-top: 0;
+                }
+            }
+            
+            section.open+section {
+                .heading {
+                    border-top: @px solid @rail-section-border-color;
+                }
             }
         }
 
@@ -366,6 +433,12 @@ div.rail {
                         &:checked + label:before,
                         &:checked + span:before {
                             background-image: url('@{component-images-folder}/checkbox/check_rail.png');
+                        }
+                        
+                        &.focus {
+                            + span:before {
+                                .glow();
+                            }
                         }
                     }
                     >span b {
@@ -390,8 +463,19 @@ div.rail {
                 .closeable;
 
                 >.fold {
-                    .transition (all 0.5s ease-out);
-                    .scrollable;
+                    .transition (~"visibility 0s linear 0.5s, height 0.5s ease-out");
+                    visibility: hidden;
+                }
+                
+                &.open {
+                    >.fold {
+                    	.scrollable;
+                        visibility: visible;
+                        transition-delay: 0s;
+                        -moz-transition-delay: 0s; /* Firefox 4 */
+                        -webkit-transition-delay: 0s; /* Safari and Chrome */
+                        -o-transition-delay: 0s; /* Opera */
+                	}
                 }
             } 
         }
@@ -408,6 +492,23 @@ div.rail {
             &:first-child { // First section does not have border/highlight
                 border-top: none;
                 .box-shadow(none);
+                
+                &.links {
+                    >h4,
+                    >a.heading {                
+                        &:active,
+                        &.focus {
+                            border-top: none;
+                            border-bottom: none;
+                            margin-top: -0.25rem;
+                            margin-bottom: -0.1rem;
+                            padding-top: 0.5rem;
+                            padding-bottom: 0.5rem;
+                            position: relative;
+                            z-index: 1;
+                        }
+                    }
+                }
             }
 
             // For no styling
@@ -429,7 +530,8 @@ div.rail {
 
                     display: block;
 
-                    &:active {
+                    &:active,
+                    &.focus {
                         background-color: @rail-well-background-color;
                     }
                 }
@@ -445,6 +547,16 @@ div.rail {
                     color: @rail-font-color;
 
                     padding: 0.25rem 0.7rem;
+                    
+                    &:active,
+                    &.focus {
+                        border-top: @px solid @rail-section-border-color;
+                        border-bottom: @px solid @rail-well-background-color;
+                        margin-top: -0.3125rem;
+                        margin-bottom: -0.1625rem;
+                        padding-top: 0.5rem;
+                        padding-bottom: 0.5rem;
+                    }
                 }
 
                 >nav {
@@ -464,16 +576,46 @@ div.rail {
 
                 >.fold {
                     display: none;
+                    outline: none;
+                }
+                
+                >h4,
+                >a.heading {
+                    margin: 0;
+                    &:active,
+                    &.focus {
+                        .box-shadow(
+                            inset 0 @px 0 @rail-background-color
+                        );
+                        margin-bottom: -0.3125rem;
+                    }
                 }
 
                 &.open {
+                    padding-bottom: 0;
                     >.fold {
                         display: block;
                         height: auto;
                         overflow: auto;
+                        padding-top: 0.15rem;
+                        padding-bottom: 0.25rem;
+                    }
+                    
+                    >h4,
+                    >a.heading {
+                        margin-bottom: 0.3135rem;
+                        &:active,
+                        &.focus {
+                            margin-bottom: 0;
+                        }
                     }
                 }
             }
+        }
+        
+        > .tablist {
+            border-top: @px solid @rail-section-border-color;
+            .box-shadow(inset 0 @px 0 @rail-section-highlight-color);
         }
     }
 
@@ -488,8 +630,11 @@ div.rail {
 
         >button {
             position: absolute;
-            top: 10*@px;
+            top: 9*@px;
             right: 10*@px;
+            width: 28*@px;
+            height: 28*@px;
+            line-height: 30*@px;
 
             background: none;
             border: none;
@@ -497,6 +642,11 @@ div.rail {
 
             &:before {
                 color: @rail-font-color;
+            }
+            
+            &.focus {
+                .glow();
+                line-height: 28*@px;
             }
         }
     }
@@ -548,6 +698,9 @@ div.rail {
 
         &:focus {
             box-shadow: none;
+            &.focus {
+                .glow();
+            }
         }
       }
     }
@@ -556,6 +709,7 @@ div.rail {
 
     .quickform {
       position: absolute;
+      z-index: 1;
       bottom: 0;
       width: 100%;
 
@@ -574,6 +728,7 @@ div.rail {
         color: @rail-font-color;
         .box-shadow(inset 0 3*@px 3*@px -3*@px @rail-shadow-inset-color);
         position: relative;
+        outline: none;
 
         >*:first-child:after,
         &:before,

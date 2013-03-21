@@ -1,0 +1,69 @@
+/**
+ * Class: .slider
+ * Displays a slider
+ */
+ 
+ @labeled-slider-max-lines: 1;
+ @labeled-slider-label-font-size: 13 * @px;
+ 
+.slider.labeled-slider {
+  margin-bottom: @labeled-slider-max-lines * @labeled-slider-label-font-size + 1.2rem;
+  
+  ul.tick-labels {
+    display: none;
+  }
+  
+  
+  .tick {
+    top: 0.4rem;
+    height: 0.8rem;
+    bottom: auto;
+    
+    &.alternate {
+      height: @labeled-slider-max-lines * @labeled-slider-label-font-size + 0.8rem;
+    }
+  }
+  .tick-label {
+    font-size: @labeled-slider-label-font-size;
+    position: absolute;
+    top: 1.2rem;
+    left: 0;
+    width: auto;
+    height: auto;
+    max-height: @labeled-slider-max-lines * @labeled-slider-label-font-size; //Not more than 2 lines!
+    .border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    white-space: nowrap;
+    
+    &.alternate {
+      top: 1.2rem + @labeled-slider-max-lines * @labeled-slider-label-font-size;
+    }
+  }
+
+  &.vertical {
+    margin-bottom: 0.5rem;
+    margin-right: 3.5rem;
+    
+    .tick {
+      left: 0.4rem;
+      width: 0.8rem;
+      top: auto;
+    }  
+    .tick-label {
+      top: auto;
+      left: 1.2rem;
+      width: auto;
+      height: @labeled-slider-label-font-size;
+      margin-bottom: -6.5 * @px;
+    } 
+  }
+
+  &.disabled {
+    .tick-label {
+      opacity: 0.5;
+    }
+  }
+}
+

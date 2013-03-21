@@ -73,28 +73,54 @@ fi
 # Get list of NPM modules
 npmList=`npm list -g`
 
-# Check for grunt
-if ! echo $npmList | grep grunt@ >/dev/null 2>&1; then
+# Check for grunt not installed globally
+cmdGruntUninstall="sudo npm uninstall -g grunt"
+if echo $npmList | grep grunt@ >/dev/null 2>&1; then
   echo ""
-  echoe "grunt must be installed globally, install it with 'sudo npm install -g grunt'? [y/n] \c"
-  read installGrunt
-  if [ $installGrunt = "y" ]; then
-    echo "running sudo npm install -g grunt..."
-    sudo npm install -g grunt
+  echoe "grunt must not be installed globally, uninstall it with '$cmdGruntUninstall'? [y/n] \c"
+  read uninstallGrunt
+  if [ $uninstallGrunt = "y" ]; then
+    echo "running $cmdGruntUninstall..."
+    $cmdGruntUninstall
 
     if [ $? -ne 0 ]; then
       red " [X] " "\c"
-      echo "Failed to install grunt"
+      echo "Failed to uninstall grunt"
       exit 1
     fi
   else
     red " [X] " "\c"
-    echo "grunt must be installed to build RichTextEditor"
+    echo "grunt must not be installed globally to build CoralUI"
     exit 1
   fi
 else
   green " $OK " "\c"
-  echo "grunt"
+  echo "grunt not installed globally"
+fi
+
+# Check for grunt-cli
+cmdGruntCli="sudo npm install -g grunt-cli"
+if ! echo $npmList | grep grunt-cli@ >/dev/null 2>&1; then
+  echo ""
+  echoe "grunt-cli must be installed globally, install it with '$cmdGruntCli'? [y/n] \c"
+  read installGruntCli
+  if [ $installGruntCli = "y" ]; then
+    echo "running $cmdGruntCli..."
+    $cmdGruntCli
+
+    if [ $? -ne 0 ]; then
+      red " [X] " "\c"
+      echo "Failed to install grunt-cli"
+      exit 1
+    fi
+  else
+    red " [X] " "\c"
+    echo "grunt-cli must be installed to build CoralUI"
+    exit 1
+  fi
+else
+  green " $OK " "\c"
+  echo "grunt-cli"
 fi
 
 # Check for bower
@@ -148,17 +174,10 @@ else
   exit 1
 fi
 
-# Temporary: clone from git and add link to template in JSDoc folder
-# rm -rf components/JSDoc
-# git clone https://github.com/jsdoc3/jsdoc.git components/JSDoc >/dev/null 2>&1
-# if [ $? -eq 0 ]; then
-#   green " $OK " "\c"
-#   echo "JSDoc"
-# else
-#   red " [X] " "\c"
-#   echo "JSDoc";
-#   exit 1
-# fi
+gruntVersion="grunt --version"
+echo ""
+echo "$ $gruntVersion"
+$gruntVersion
 
 echo ""
 echo "Run one of the following commands to build RichTextEditor:"

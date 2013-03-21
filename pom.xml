@@ -31,15 +31,15 @@
     <!-- P R O J E C T                                                           -->
     <!-- ======================================================================= -->
     <artifactId>com.adobe.coralui.content</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.3-SNAPSHOT</version>
     <packaging>content-package</packaging>
 
     <name>Adobe Reef / CoralUI Content Package</name>
 
     <scm>
-        <connection>scm:git:git@git.corp.adobe.com:Reef/CoralUI.git</connection>
-        <developerConnection>scm:git:git@git.corp.adobe.com:Reef/CoralUI.git</developerConnection>
-        <url>https://git.corp.adobe.com/Reef/CoralUI/tree/1.0</url>
+        <connection>scm:git:git@git.corp.adobe.com:Coral/CoralUI.git</connection>
+        <developerConnection>scm:git:git@git.corp.adobe.com:Coral/CoralUI.git</developerConnection>
+        <url>https://git.corp.adobe.com/Coral/CoralUI/tree/master</url>
       <tag>HEAD</tag>
   </scm>
 
@@ -113,6 +113,17 @@
             <resource>
                 <directory>${basedir}/source/guide</directory>
                 <targetPath>${coral.build.dir}/guide</targetPath>
+            </resource>
+            <!-- copy guide.less to the assets - 
+                 althought this is rather ugly, we would have to move less variables somewhere were guide.less could find it
+                 (they are in the bootsrap dir at the moment) 
+             -->
+            <resource>
+                <directory>${basedir}/source/guide/less</directory>
+                <includes>
+                    <include>guide.less</include>
+                </includes>
+                <targetPath>${coral.build.dir}/guide/examples/assets</targetPath>
             </resource>
             <resource>
                 <directory>${basedir}/components/bootstrap/docs/assets/js/google-code-prettify</directory>
@@ -188,6 +199,19 @@
                             <!--<token>&lt;head></token>-->
                             <!--<value>&lt;head>&#10;    &lt;base href="../" /></value>-->
                         <!--</replacement>-->
+                        <!-- remove some items from the top nav, we don't need then in the CQ documentation -->
+                        <replacement>
+                            <token>&lt;a href="https://git.corp.adobe.com/Reef/CoralUI/"&gt;Github&lt;/a&gt;</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>&lt;a href="releases/cui-latest-full.zip"&gt;Download&lt;/a&gt;</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>&lt;a href="http://jenkins.bsl.eur.adobe.com:8080/job/Build_CoralUI/ws/build/index.html"&gt;Nightly guide&lt;/a&gt;</token>
+                            <value></value>
+                        </replacement>
                         <replacement>
                             <token>"css/cui.css"</token>
                             <value>"../../coralui.css"</value>
@@ -209,12 +233,32 @@
                             <value>"/etc/clientlibs/granite/handlebars.js"</value>
                         </replacement>                      
                         <replacement>
+                            <token>"js/libs/moment.js"</token>
+                            <value>"/etc/clientlibs/granite/coralui/js/plugins/moment.js"</value>
+                        </replacement>                      
+                        <replacement>
+                            <token>"js/libs/toe.js"</token>
+                            <value>"/etc/clientlibs/granite/coralui/js/plugins/toe.js"</value>
+                        </replacement>                      
+                        <replacement>
                             <token>"js/libs/jquery.js"</token>
                             <value>"/etc/clientlibs/granite/jquery.js"</value>
                         </replacement>
                         <replacement>
+                            <token>"js/libs/jquery-fingerpointer.js"</token>
+                            <value>"/etc/clientlibs/granite/coralui/js/plugins/jquery-fingerpointer.js"</value>
+                        </replacement>                      
+                        <replacement>
+                            <token>"images/previews/</token>
+                            <value>"../guide/images/previews/</value>
+                        </replacement>
+                        <replacement>
                             <token>"images/</token>
                             <value>"../resources/images/</value>
+                        </replacement>
+                        <replacement>
+                            <token>"js/google-code-prettify/</token>
+                            <value>"examples/assets/google-code-prettify/</value>
                         </replacement>
                     </replacements>
                 </configuration>
@@ -314,7 +358,7 @@
                                 <configuration>
                                     <tasks>
                                         <exec dir="${basedir}" executable="grunt" failonerror="true">
-                                            <arg line="full" />
+                                            <arg line="mvn-build" />
                                         </exec>
                                     </tasks>
                                 </configuration>

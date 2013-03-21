@@ -13,19 +13,26 @@
   width: 220*@px;
   height: 8*@px;
   margin: 0.5rem 0.25rem;
+  vertical-align: middle;
+  z-index: auto;
+  
+  &:hover,
+  &.focus {
+    z-index: 1;
+  }
 
-    .slider-transition {
-        -moz-transition: all 0.1s;
-        -webkit-transition: all 0.1s;
-        -o-transition: all 0.1s;
-        transition: all 0.1s;
-    }
-    .slider-transition-slow {
-        -moz-transition: all 2s cubic-bezier(1, 0, 0.5, 0);
-        -webkit-transition: all 2s cubic-bezier(1, 0, 0.5, 0);
-        -o-transition: all 2s cubic-bezier(1, 0, 0.5, 0);
-        transition: all 2s cubic-bezier(1, 0, 0.5, 0);
-    }
+  .slider-transition {
+    -moz-transition: all 0.1s;
+    -webkit-transition: all 0.1s;
+    -o-transition: all 0.1s;
+    transition: all 0.1s;
+  }
+  .slider-transition-slow {
+    -moz-transition: visibility 0s linear 2s, opacity 2s cubic-bezier(1, 0, 0.5, 0);
+    -webkit-transition: visibility 0s linear 2s, opacity 2s cubic-bezier(1, 0, 0.5, 0);
+    -o-transition: visibility 0s linear 2s, opacity 2s cubic-bezier(1, 0, 0.5, 0);
+    transition: visibility 0s linear 2s, opacity 2s cubic-bezier(1, 0, 0.5, 0);
+  }
 
   .handle {
     position: absolute;
@@ -34,21 +41,40 @@
     width: 9*@px;
     height: 20*@px;
     margin: -0.5rem -0.25rem;
+    background-color: @slider-handle-gradient-start-color;
     .gradient(@slider-handle-gradient-start-color, @slider-handle-gradient-end-color);
     .border-radius(0.25rem);
     border: @px solid @slider-border-color;
+    pointer-events: auto;
     cursor: url('../images/cursors/openhand.cur'), default;
-    &:hover,
-    &.dragging {
-      .gradient(lighten(@slider-handle-gradient-start-color, 15%), lighten(@slider-handle-gradient-end-color, 15%));
-      .tooltip {
-        opacity: 1;
-        .slider-transition;
+    outline: none;
+      &:hover,
+      &.dragging {
+        .gradient(lighten(@slider-handle-gradient-start-color, 15%), lighten(@slider-handle-gradient-end-color, 15%));
+        .tooltip {
+          visibility: visible;
+          opacity: 1;
+          .slider-transition;
+        }
       }
-    }
-    &.dragging {
+      &.focus {
+        .glow();
+        .gradient(lighten(@slider-handle-gradient-start-color, 15%), lighten(@slider-handle-gradient-end-color, 15%));
+        outline: none;
+        .tooltip {
+          visibility: visible;
+          opacity: 1;
+          .slider-transition;
+        }
+      }
+      &.dragging {
         cursor: url('../images/cursors/closedhand.cur'), default;
-    }
+        opacity: 1 !important;
+        z-index: auto !important;
+        background-color: lighten(@slider-handle-gradient-start-color, 15%);
+        .box-shadow(none);
+        .gradient(lighten(@slider-handle-gradient-start-color, 15%), lighten(@slider-handle-gradient-end-color, 15%));
+      } 
   }
 
   .tick {
@@ -58,62 +84,87 @@
     width: @px;
     height: 0.4rem;
     background-color: @slider-border-color;
+    .border-box;
     &.covered {
       background-color: @slider-fill-tick-color;
     }
   }
 
   .tooltip {
+    position: absolute;
     opacity: 0;
-    z-index: 1;
+    visibility: hidden;   
     left: -20*@px;
     top: -55*@px;
     .slider-transition-slow;
   }
 
   input[type=range],
-  input[type=number] {
+  input[type=number],
+  input[type=text] {
     opacity: 0.000001;
     cursor: default;
-    width: @px;
-    height: @px;
+    width: 9*@px;
+    height: 8*@px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: -@px -3*@px;
+    overflow: hidden;
+    padding: 0;
+    z-index: 0;
   }
 
   .fill {
     position: absolute;
     background-color: @slider-fill-color;
     border: @px solid @slider-fill-border-color;
-    margin: -@px 0 -@px -@px;
+    margin: -@px;
     .border-radius(0.25rem);
-    height: 0.4rem;
+    height: 0.5rem;
     left: 0;
+    .border-box;
   }
 
   .value {
     display: inline-block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: auto;
+    pointer-events: none;
+    &.focus {
+      z-index: 1;
+    }
   }
 
-    .clickarea {
-        position: absolute;
-        left: 0;
-        top: -0.5rem;
-        right: 0;
-        bottom: -0.5rem;
-    }
-    
+  .clickarea {
+    position: absolute;
+    left: 0;
+    top: -0.5rem;
+    right: 0;
+    bottom: -0.5rem;
+  }
+  
   &.vertical {
     width: 8*@px;
     height: 220*@px;
-    margin: 0.25rem 0.6rem;
-
+    margin: 0.25rem 0.625rem;
+  
     input[type=range],
-    input[type=number] {
-      float: left;
+    input[type=number],
+    input[type=text] {
+      top: auto;
+      width: 8*@px;
+      height: 9*@px;
+      margin: -3*@px -@px;
+      -webkit-appearance: slider-vertical;
     }
     .handle {
       width: 20*@px;
       margin: -0.25rem -0.5rem;
       height: 9*@px;
+      top: auto;
     }
     .tick {
       width: 0.4rem;
@@ -124,15 +175,16 @@
       top: -20*@px;
     }
     .fill {
-      width: 0.4rem;
+      width: 0.5rem;
       bottom: 0;
+      margin: -@px;
     }
     .clickarea {
-        position: absolute;
-        left: -0.5rem;
-        top: 0;
-        right: -0.5rem;
-        bottom: 0;
+      position: absolute;
+      left: -0.5rem;
+      top: 0;
+      right: -0.5rem;
+      bottom: 0;
     }
   }
 
@@ -144,16 +196,18 @@
       border-color: @slider-disabled-border-color;
       &:hover {
         cursor: auto;
-        .tooltip {
-          display: none;
-        }
+      }
+      .tooltip {
+          display: none !important;
+          visibility: hidden !important;
+          opacity: 0 !important;
       }
     }
-
+  
     .tick {
       background-color: @slider-disabled-border-color;
     }
-
+  
     .fill {
       background-color: @slider-disabled-fill-color;
       border-color: @slider-disabled-border-color;
@@ -162,5 +216,10 @@
 }
 
 .slider-dragging-cursorhack, .slider-dragging-cursorhack * {
-    cursor: url('../images/cursors/closedhand.cur'), default !important;    /* Apply dragging to complete page */
+  cursor: url('../images/cursors/closedhand.cur'), default !important;  /* Apply dragging to complete page */
+}
+
+.sliderfieldset {
+  display: inline-block;
+  position: static;
 }

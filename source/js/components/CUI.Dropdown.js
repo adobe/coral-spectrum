@@ -15,7 +15,7 @@
             </select>
         </p>
         <p>
-        This widget supports to get its options either from an existing select field or from a custom autocomplete function for editable fields.
+        Currently this widget does only support creation from an existing &lt;select&gt;&lt;/select&gt; field.
         </p>
     @example
     <caption>Instantiate by data API</caption>
@@ -24,23 +24,7 @@
         &lt;option&gt;Two&lt;/option&gt;
         &lt;option&gt;Three&lt;/option&gt;
     &lt;/select&gt;
-    
-Currently there are the following data options:
-  data-init="datepicker"         Inits the datepicker widget after page load
-  data-disabled                  Sets field to "disabled" if given (with any non-empty value)
-  data-multiple                  Is this a multiselect widget?
-  data-placeholder               Placeholder string to display in empty widget
-  data-editable                  May the user edit the option text?
-  data-error                     Does this widget contain an error?
-  data-autocomplete-callback     String with JS callback function for autocompletion: callback(handler, searchFor, showAll)
-                                 with handler is a result callback function with handler(results, searchFor). If showAll is true,
-                                 all options should be delivered in the results (set on button click!). See example page.
-  data-autocomplete-option-renderer String with JS callback function for rendering options: callback(index, value). Has to
-                                 return a valid jQuery object. see example page.
-  data-autocomplete-delay        Delay before starting a custom autocompleter after typing.
-  
-  multiple and placeholder may also be set on the corresponding html form fields.
-  
+
     @example
     <caption>Instantiate with Class</caption>
     var dropdown = new CUI.Dropdown({
@@ -66,9 +50,8 @@ Currently there are the following data options:
       @param {String} [options.placeholder="Select"]      Placeholder string to display in empty widget
       @param {boolean} [options.disabled=false]      Is this widget disabled?
       @param {boolean} [options.hasError=false]      Does this widget contain an error?
-      @param {Function} [options.autocompleteCallback=use options]      Callback for autocompletion: callback(handler, searchFor, showAll) with handler is a result callback function with handler(results, searchFor). If showAll ist true, all options should be delivered in the results (set on button click!). See example page.
-      @param {Function} [options.autocompleteOptionRenderer=use options values]      Callback for rendering options: callback(index, value). Has to return a valid jQuery object. see example page.
-      @param {int} [options.autocompleteDelay=500]      Delay before starting a custom autocompleter after typing.
+      @param {Function} [options.autocompleteCallback=use options]      Callback for autocompletion: callback(handler, searchFor) with handler is a result callback function with handler(results, searchFor). See example page.
+      
     */
     construct: function(options) {
 
@@ -100,10 +83,7 @@ Currently there are the following data options:
         placeholder: "Select",
         disabled: false,
         editable: false,
-        hasError: false,
-        autocompleteCallback: null,
-        autocompleteOptionRenderer: null,
-        autocompleteDelay: 500
+        hasError: false
     },
     
     dropdownList: null,
@@ -152,7 +132,7 @@ Currently there are the following data options:
         this.buttonElement.on("click", "", function(event) {
             event.preventDefault();
             if (this.autocompleteList !== null) {
-                this._adjustAutocompleter(true); // True: Show all!
+                this._adjustAutocompleter();
             } else {
                 this.dropdownList.show();
             }
@@ -162,17 +142,13 @@ Currently there are the following data options:
         this.inputElement.on("click", "", function() {
            if (this.autocompleteList !== null) this._adjustAutocompleter();
         }.bind(this));
-        
-        var typeTimeout = null;
         this.inputElement.on("input", "", function() {
-           if (this.autocompleteList === null) return;
-           if (typeTimeout) clearTimeout(typeTimeout);
-           typeTimeout = setTimeout(this._adjustAutocompleter.bind(this), this.options.autocompleteDelay);
+           if (this.autocompleteList !== null) this._adjustAutocompleter();
         }.bind(this));
-        
         this.inputElement.on("dropdown-list:select", "", function(event) {
+            //this.inputElement.val(event.selectedValue);
+            //this.autocompleteList.hide();
             this._processSelect(event);
-            this.autocompleteList.hide();
         }.bind(this));
         
         // Correct focus
@@ -183,6 +159,10 @@ Currently there are the following data options:
         this.$element.children().on("blur", "", function() {
             this.hasFocus = false;
             this._update();
+        }.bind(this));
+
+        this.$element.find('select').on("change", function() {
+            this._update(true);
         }.bind(this));
     },
 
@@ -212,13 +192,11 @@ Currently there are the following data options:
         }
     },
 
-    /** Adjust the DropdownList with results from the auto completer.
-     * @param boolean showAll True, if all options should be shown, not only
-     * @ignore */
-    _adjustAutocompleter: function(showAll) {
+    /** @ignore */
+    _adjustAutocompleter: function() {
         var searchFor = this.inputElement.val();
         
-        var showResults = function(result, searchFor) {      
+        var showResults = function(result, searchFor) {
             this.autocompleteList.set({
                options: result
             });
@@ -226,7 +204,7 @@ Currently there are the following data options:
         }.bind(this);
         
         if (this.options.autocompleteCallback) {
-            this.options.autocompleteCallback(showResults, searchFor, (showAll) ? true : false);
+            this.options.autocompleteCallback(showResults, searchFor);
         } else {
             var result = [];
             $.each(this.options.options, function(index, value) {
@@ -252,10 +230,6 @@ Currently there are the following data options:
 
     /** @ignore */
     _optionRendererAutocomplete: function(index, value) {
-        // Use custom option renderer if it is defined...
-        if (this.options.autocompleteOptionRenderer) return this.options.autocompleteOptionRenderer(index, value);
-        
-        // ...use default otherwise
         var searchFor = this.inputElement.val();
         var i = value.toLowerCase().indexOf(searchFor.toLowerCase());
         if (i >= 0) {
@@ -360,22 +334,10 @@ Currently there are the following data options:
         if (this.$element.attr("multiple")) this.options.multiple = true;
         if (this.$element.attr("data-multiple")) this.options.multiple = true;
         if (this.$element.attr("placeholder")) this.options.placeholder = this.$element.attr("placeholder");
-        if (this.$element.find("input").attr("placeholder")) this.options.placeholder = this.$element.find("input").attr("placeholder");
         if (this.$element.attr("data-placeholder")) this.options.placeholder = this.$element.attr("data-placeholder");
         if (this.$element.attr("data-editable")) this.options.editable = true;
         if (this.$element.attr("data-error")) this.options.hasError = true;
         if (this.$element.hasClass("error")) this.options.hasError = true;
-        
-        // Register auto complete callbacks
-        var autocomplete = CUI.util.buildFunction(this.$element.attr("data-autocomplete-callback"), ["handler", "searchFor", "showAll"]);
-        if (autocomplete) {
-            this.options.autocompleteCallback = autocomplete;
-        }
-        var renderer = CUI.util.buildFunction(this.$element.attr("data-autocomplete-option-renderer"), ["index", "value"]);
-        if (renderer) {
-            this.options.autocompleteOptionRenderer = renderer;
-        }
-        if (this.$element.attr("data-autocomplete-delay")) this.options.autocompleteDelay = this.$element.attr("data-autocomplete-delay");        
     },
     
     /** @ignore */

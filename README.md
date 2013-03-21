@@ -10,14 +10,14 @@ To begin playing with CoralUI, try clicking the Download link for a zip of the p
 CoralUI is an internal open source effort with backing from XD and product development teams, and we encourage the submission of issues, feature requests, and pull requests from anyone, on any team.  To get involved, contact the [mailing list][5] and introduce yourself.
 
 ## Building
-Check out the [Build Process Wiki][5] for information on building CoralUI.
+Check out the [Build Process Wiki][4] for information on building CoralUI.
 
 ## More Information
 See the [CoralUI Wiki][6] for more information. 
 
-[1]: https://git.corp.adobe.com/pages/Reef/CoralUI/
+[1]: https://git.corp.adobe.com/pages/Coral/CoralUI/
 [2]: http://xdbuild.corp.adobe.com:8080/job/CoralUI-Master/ws/build/index.html
 [3]: http://jenkins.bsl.eur.adobe.com:8080/job/Build_CoralUI/ws/build/index.html
-[4]: https://git.corp.adobe.com/Reef/CoralUI/wiki/Build-Process-&-Technology
+[4]: https://git.corp.adobe.com/Coral/CoralUI/wiki/Build-Process-&-Technology
 [5]: mailto:CoralUI@adobe.com
-[6]: https://git.corp.adobe.com/Reef/CoralUI/wiki
+[6]: https://git.corp.adobe.com/Coral/CoralUI/wiki

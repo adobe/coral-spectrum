@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <title>CoralUI Shell</title>
@@ -9,7 +9,7 @@
     <script src="js/libs/handlebars.js"></script>
     <script src="js/libs/jquery.js"></script>
     <script src="js/libs/jquery-fingerpointer.js"></script>
-    <script src="js/libs/jquery-responsive.js"></script>
+    <script src="js/libs/jquery-reflow.js"></script>
     <script src="js/libs/toe.js"></script>
     <script src="js/libs/moment.js"></script>
 
@@ -51,20 +51,24 @@
 
                 <div class="rail-view" data-view="feature">
                     <div class="search">
-                        <input type="text" placeholder="Enter Keyword(s)" autocomplete="off" name="q">
+                        <label for="q0" class="hidden-accessible">Search</label>
+                        <input type="text" placeholder="Enter Keyword(s)" autocomplete="off" name="q" id="q0">
+                        <button type="submit" class="icon-search">Search</button>
                     </div>
                     <nav class="feature">
-                        <a href="#">Files</a>
-                        <a href="#" class="active">Collections</a>
-                        <a href="#">Users</a>
-                        <a href="#">Tools</a>
-                        <a href="#">Settings</a>
+                        <a href="#Files">Files</a>
+                        <a href="#Collections" class="active">Collections</a>
+                        <a href="#Users">Users</a>
+                        <a href="#Tools">Tools</a>
+                        <a href="#Settings">Settings</a>
                     </nav>
                 </div>
                 
                 <div class="rail-view active group" data-view="filter">
                     <div class="search">
-                        <input type="text" placeholder="Enter Keyword(s)" autocomplete="off" name="q">
+                        <label for="q1" class="hidden-accessible">Search</label>
+                        <input type="text" placeholder="Enter Keyword(s)" autocomplete="off" name="q" id="q1">
+                        <button type="submit" class="icon-search">Search</button>
                     </div>
                     <div class="dropdown" data-init="dropdown">
                         <button>Dropdown in Rail</button>
@@ -78,13 +82,13 @@
                         <span class="heading">Accordion open</span>
                         <ul class="notype checklist fold">
                             <li>
-                                <label>
-                                    <input type="checkbox" checked="" value="1" name="c1"><span class="image">All Assets<b>92</b></span>
+                                <label for="c1">
+                                    <input type="checkbox" checked="checked" id="c1" name="c1"><span class="image">All Assets&nbsp;<b>92</b></span>
                                 </label>
                             </li>
                             <li>
-                                <label>
-                                    <input type="checkbox" checked="" value="1" name="c1"><span class="image">Current Directory<b>38</b></span>
+                                <label for="c2">
+                                    <input type="checkbox" checked="checked" id="c2" name="c2"><span class="image">Current Directory&nbsp;<b>38</b></span>
                                 </label>
                             </li>
                         </ul>
@@ -93,38 +97,18 @@
                         <span class="heading">Accordion open</span>
                         <ul class="notype checklist fold">
                             <li>
-                                <label>
-                                    <input type="checkbox" checked="" value="1" name="c1"><span class="image">Active<b>15</b></span>
+                                <label for="c3">
+                                    <input type="checkbox" checked="checked" id="c3" name="c3"><span class="image">Active&nbsp;<b>15</b></span>
                                 </label>
                             </li>
                             <li>
-                                <label>
-                                    <input type="checkbox" checked="" value="1" name="c1"><span class="image">Review<b>11</b></span>
+                                <label for="c4">
+                                    <input type="checkbox" checked="checked" id="c4" name="c4"><span class="image">Review&nbsp;<b>11</b></span>
                                 </label>
                             </li>
                             <li>
-                                <label>
-                                    <input type="checkbox" checked="" value="1" name="c1"><span class="image">Pending Review<b>8</b></span>
-                                </label>
-                            </li>
-                        </ul>
-                    </section>
-                    <section class="foldable">
-                        <span class="heading">Accordion open</span>
-                        <ul class="notype checklist fold">
-                            <li>
-                                <label>
-                                    <input type="checkbox" checked="" value="1" name="c1"><span class="image">Image<b>82</b></span>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" checked="" value="1" name="c1"><span class="image">Movie<b>32</b></span>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" checked="" value="1" name="c1"><span class="image">Document<b>23</b></span>
+                                <label for="c5">
+                                    <input type="checkbox" checked="checked" id="c5" name="c5"><span class="image">Pending Review&nbsp;<b>8</b></span>
                                 </label>
                             </li>
                         </ul>
@@ -133,33 +117,18 @@
                         <span class="heading">Accordion open</span>
                         <ul class="notype checklist fold">
                             <li>
-                                <label>
-                                    <input type="checkbox" checked="" value="1" name="c1"><span class="image">Global<b>10</b></span>
+                                <label for="c6">
+                                    <input type="checkbox" checked="checked" id="c6" name="c6"><span class="image">Image&nbsp;<b>82</b></span>
                                 </label>
                             </li>
                             <li>
-                                <label>
-                                    <input type="checkbox" checked="" value="1" name="c1"><span class="image">Europe<b>16</b></span>
-                                </label>
-                            </li>
-                        </ul>
-                    </section>
-                    <section class="foldable">
-                        <span class="heading">Accordion open</span>
-                        <ul class="notype checklist fold">
-                            <li>
-                                <label>
-                                    <input type="checkbox" checked="" value="1" name="c1"><span class="image">Active<b>15</b></span>
+                                <label for="c7">
+                                    <input type="checkbox" checked="checked" id="c7" name="c7"><span class="image">Movie&nbsp;<b>32</b></span>
                                 </label>
                             </li>
                             <li>
-                                <label>
-                                    <input type="checkbox" checked="" value="1" name="c1"><span class="image">Review<b>11</b></span>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" checked="" value="1" name="c1"><span class="image">Pending Review<b>8</b></span>
+                                <label for="c8">
+                                    <input type="checkbox" checked="checked" id="c8" name="c8"><span class="image">Document&nbsp;<b>23</b></span>
                                 </label>
                             </li>
                         </ul>
@@ -168,18 +137,13 @@
                         <span class="heading">Accordion open</span>
                         <ul class="notype checklist fold">
                             <li>
-                                <label>
-                                    <input type="checkbox" checked="" value="1" name="c1"><span class="image">Image<b>82</b></span>
+                                <label for="c9">
+                                    <input type="checkbox" checked="checked" id="c9" name="c9"><span class="image">Global&nbsp;<b>10</b></span>
                                 </label>
                             </li>
                             <li>
-                                <label>
-                                    <input type="checkbox" checked="" value="1" name="c1"><span class="image">Movie<b>32</b></span>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" checked="" value="1" name="c1"><span class="image">Document<b>23</b></span>
+                                <label for="c10">
+                                    <input type="checkbox" checked="checked" id="c10" name="c10"><span class="image">Europe&nbsp;<b>16</b></span>
                                 </label>
                             </li>
                         </ul>
@@ -188,13 +152,53 @@
                         <span class="heading">Accordion open</span>
                         <ul class="notype checklist fold">
                             <li>
-                                <label>
-                                    <input type="checkbox" checked="" value="1" name="c1"><span class="image">Global<b>10</b></span>
+                                <label for="c11">
+                                    <input type="checkbox" checked="checked" id="c11" name="c11"><span class="image">Active&nbsp;<b>15</b></span>
                                 </label>
                             </li>
                             <li>
-                                <label>
-                                    <input type="checkbox" checked="" value="1" name="c1"><span class="image">Europe<b>16</b></span>
+                                <label for="c12">
+                                    <input type="checkbox" checked="checked" id="c12" name="c12"><span class="image">Review&nbsp;<b>11</b></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label for="c13">
+                                    <input type="checkbox" checked="checked" id="c13" name="c13"><span class="image">Pending Review&nbsp;<b>8</b></span>
+                                </label>
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="foldable">
+                        <span class="heading">Accordion open</span>
+                        <ul class="notype checklist fold">
+                            <li>
+                                <label for="c14">
+                                    <input type="checkbox" checked="checked" id="c14" name="c14"><span class="image">Image&nbsp;<b>82</b></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label for="c15">
+                                    <input type="checkbox" checked="checked" id="c15" name="c15"><span class="image">Movie&nbsp;<b>32</b></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label for="c16">
+                                    <input type="checkbox" checked="checked" id="c16" name="c16"><span class="image">Document&nbsp;<b>23</b></span>
+                                </label>
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="foldable">
+                        <span class="heading">Accordion open</span>
+                        <ul class="notype checklist fold">
+                            <li>
+                                <label for="c17">
+                                    <input type="checkbox" checked="checked" id="c17" name="c17"><span class="image">Global&nbsp;<b>10</b></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label for="c18">
+                                    <input type="checkbox" checked="checked" id="c18" name="c18"><span class="image">Europe&nbsp;<b>16</b></span>
                                 </label>
                             </li>
                         </ul>
@@ -205,9 +209,10 @@
                             <button class="warning">Warning</button>
                         </div>
                         <div class="control">
-                            <a href="#" class="icon-calendar trigger">Calendar</a>
+                            <button class="icon-calendar trigger">Calendar</button>
                             <div class="comment">
-                                <input type="text">
+                            	<label for="comment" class="hidden-accessible">Comment</label>
+                                <input type="text" id="comment" name="comment" placeholder="Write a comment…">
                             </div>
                         </div>
                     </div>
@@ -216,14 +221,16 @@
 
                 <div class="rail-view" data-view="activity">
                     <div class="search">
-                        <input type="text" placeholder="Enter Keyword(s)" autocomplete="off" name="q">
+                        <label for="q2" class="hidden-accessible">Search</label>
+                        <input type="text" placeholder="Enter Keyword(s)" autocomplete="off" name="q" id="q2">
+                        <button type="submit" class="icon-search">Search</button>
                     </div>
                     <nav class="feature">
-                        <a href="#" class="active">3</a>
-                        <a href="#">Collections</a>
-                        <a href="#">Users</a>
-                        <a href="#">Tools</a>
-                        <a href="#">Settings</a>
+                        <a href="#3" class="active">3</a>
+                        <a href="#Collections">Collections</a>
+                        <a href="#Users">Users</a>
+                        <a href="#Tools">Tools</a>
+                        <a href="#Settings">Settings</a>
                     </nav>
                 </div>
                 

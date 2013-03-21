@@ -41,21 +41,11 @@
 Currently there are the following data options:
   data-init="filters"         Inits the filter widget after page load
   data-placeholder            Same as option "placeholder"
-  data-multiple               Sets field to "multiple" if given (Boolean)
-  data-stacking               Sets field to "stacking" if given (Boolean)
-  data-disabled               Sets field to "disabled" if given (Boolean)
+  data-multiple               Sets field to "multiple" if given (with any non-empty value)
+  data-stacking               Sets field to "stacking" if given (with any non-empty value)
+  data-disabled               Sets field to "disabled" if given (with any non-empty value)
   data-allow="create"         If given the user is allowed to add new entries to the option list
   data-option-renderer        Either "default" for default behavior or "cqTag" for correct display of CQ5 Tags.
-  data-autocomplete-callback  A callback for auto completion. See options for more information. (String)
-  data-highlight              Should the option renderer highlight the search expression? (Boolean)
-  data-delay                  Delay before starting auto completion when typing. (Integer ms)
-  data-infinite-load          Should infinite list loading be used? (Boolean)
-  data-max-loading-items      Max number of items loaded at once when using infinte list loading. Must be 10 or greater. (Integer)
-  data-icons                  Json array that maps option values to icons.
-  data-icon-size              Either "xsmall", "small", "medium" or "large".
-
-  The behaviour of boolean values has slightly changed since Version 1.0: Now "false", "no", "0" or "" will evaluate to false, all other
-  values will evaluate to true.
 
   "data-multiple", "data-disabled" and "data-placeholder" can be replaced by the native HTML attributes "multiple", "disabled" and
   "placeholder" if the current element allows them.
@@ -93,17 +83,11 @@ var index = filters.getSelectedIndex();
             <p>
             The <code>optionRenderer(int index, Object option, boolean highlight, boolean showIcon)</code> callback can be used to customize the HTML markup of the items in the dropdown. <code>index</code> is the position in the current list, <code>option</code> is the current option to display (your custom Object if you defined an autocompleteCallback, a string otherwise), <code>highlight</code> defines wether you should highlight the search term and <code>showIcon</code> defines wether you should add an icon to your markup. You have to return a valid jQuery element.
             </p>
-            <p>
-            This widget does not support changing the options after initialization due to its complex structure.
-            </p>
-            <p>
-            Please give the selectable options <b>either</b> by array in the constructor options <b>or</b> in th html select field. If you provide options in both ways, the result is undefined.
-            </p>
       
       @constructs
       
       @param {Object}   options                                    Component options
-      @param {Array}    [options.options=empty array]              Array of available options (will be read from &lt;select&gt; by default).
+      @param {Array}    [options.options=empty array]              Array of available options (will be read from &lt;select&gt; by default)
       @param {Array}    [options.optionDisplayStrings=empty array] Array of alternate strings for display (will be read from &lt;select&gt; by default)
       @param {boolean}  [options.multiple=false]                   Can the user select more than one option?
       @param {boolean}  [options.stacking=false]                   Uses a slightly different style, implies multiple
@@ -118,7 +102,7 @@ var index = filters.getSelectedIndex();
       @param {Function} [options.autocompleteCallback=use options] Callback for autocompletion
       @param {Function} [options.optionRenderer=default renderer]  (Optional) Renderer for the autocompleter and the tag badges
       @param {boolean}  [options.infiniteLoad=false]               Should extra content be loaded dynamically when the list is scrolled to bottom?
-      @param {boolean}  [options.maxLoadingItems=20]               Maximum number of items to load per request on infinite list loading. Values lower then 10 are not allowed at the moment. 
+      @param {boolean}  [options.maxLoadingItems=20]               Maximum number of items to load per request on infinite list loading.
           */
     construct: function(options) {
         this.selectedIndices = []; // Initialise fresh array
@@ -137,9 +121,6 @@ var index = filters.getSelectedIndex();
         
         // Stacking forces multiple
         if (this.options.stacking) this.options.multiple = true;
-        
-        // Force max load items to be 10 at least
-        if (this.options.maxLoadingItems < 10) this.options.maxLoadingItems = 10;
         
         // Adjust DOM to our needs
         this._render();
@@ -432,44 +413,19 @@ var index = filters.getSelectedIndex();
 
     /** @ignore */
     _readDataFromMarkup: function() {
-        function toBoolean(value) {
-           if (value === false || value === 0 || value === "false" || value === "no" || value === "0" || value === "") return false;           
-           return true;
-        }
-        
-        var a;
-                    
-        if ((a = this.$element.attr("multiple")) !== undefined) this.options.multiple = toBoolean(a);
-        if ((a = this.$element.attr("data-multiple")) !== undefined) this.options.multiple = toBoolean(a);
-        if ((a = this.$element.attr("data-stacking")) !== undefined) this.options.stacking = toBoolean(a);
-        if (a = this.$element.attr("placeholder")) this.options.placeholder = a;
-        if (a = this.$element.attr("data-placeholder")) this.options.placeholder = a;
-        if (a = this.$element.attr("disabled")) this.options.disabled = toBoolean(a);
-        if ((a = this.$element.attr("data-disabled")) !== undefined) this.options.disabled = toBoolean(a);
-        if (this.$element.attr("data-allow") === "create") this.options.allowCreate = true;
-        if (a = this.$element.attr("data-option-renderer")) {
-            // Allow to choose from default option Renderers
-            this.options.optionRenderer = CUI.Filters[a + "OptionRenderer"];
-            if (!this.options.optionRenderer) this.options.optionRenderer = CUI.Filters.defaultOptionRenderer;
-        }
-        
-        var autocomplete = CUI.util.buildFunction(this.$element.attr("data-autocomplete-callback"), ["handler", "searchFor", "offset", "length"]);
-        if (autocomplete) {
-            this.options.autocompleteCallback = autocomplete;
-        }
-        
-        if ((a = this.$element.data("highlight")) !== undefined) this.options.highlight = toBoolean(a);
-        if (a = this.$element.data("delay")) this.options.delay = a * 1; // Force number
-        if ((a = this.$element.data("infinite-load")) !== undefined) this.options.infiniteLoad = toBoolean(a);
-        if (a = this.$element.data("max-loading-items")) this.options.maxLoadingItems = a * 1;
-        
-        if (a = this.$element.data("icons")) {
-            // Has to be a json array
-            this.options.icons = a;
-        }
-        if (a = this.$element.data("icon-size")) {
-            this.options.iconSize = a;                
-        }                        
+            if (this.$element.attr("multiple")) this.options.multiple = true;
+            if (this.$element.attr("data-multiple")) this.options.multiple = true;
+            if (this.$element.attr("data-stacking")) this.options.stacking = true;
+            if (this.$element.attr("placeholder")) this.options.placeholder = this.$element.attr("placeholder");
+            if (this.$element.attr("data-placeholder")) this.options.placeholder = this.$element.attr("data-placeholder");
+            if (this.$element.attr("disabled")) this.options.disabled = true;
+            if (this.$element.attr("data-disabled")) this.options.disabled = true;
+            if (this.$element.attr("data-allow") === "create") this.options.allowCreate = true;
+            if (this.$element.attr("data-option-renderer")) {
+                // Allow to choose from default option Renderers
+                this.options.optionRenderer = CUI.Filters[this.$element.attr("data-option-renderer") + "OptionRenderer"];
+                if (!this.options.optionRenderer) this.options.optionRenderer = CUI.Filters.defaultOptionRenderer;
+            }
    },
    
     /** @ignore */

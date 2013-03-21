@@ -6,40 +6,132 @@ div.edited {
     background-color: #ffffff;
 }
 
-a.rte-toolbar-item {
-    min-width: 20*@px !important;
-    width: 20*@px;
-    height: 20*@px;
+.userSelect(@type) {
+    -webkit-user-select: @type;
+    -khtml-user-select: @type;
+    -moz-user-select: @type;
+    -ms-user-select: @type;
+    user-select: @type;
 }
 
-a.rte-tbi-selected {
-    color: #ffff00;
+.rte-button() {
+
+    background-color: #454545;
+    background-image: none;
+    vertical-align: top;
+
+    &.item {
+        min-width: 60*@px;
+        width: 60*@px;
+        height: 44*@px;
+        color: #cecece;
+        background-color: #454545;
+        background-image: none;
+        padding: 0;
+        border: 0;
+        margin: 0;
+    }
+
+    &.text {
+        font-size: 20*@px;  /* TODO remove once icons are available */
+    }
+
+    &.selected {
+        background-color: #151515;
+        color: #d0d0d0;
+    }
+
+    &.disabled {
+        color: #eeeeee;
+        opacity: 0.4;
+    }
+
+    &.triggered {
+        background-color: #ffffff;
+        color: #0f0f0f !important;
+    }
+
+    &.trigger {
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNSIgaGVpZ2h0PSI1IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48cG9seWdvbiBmaWxsPSIjQ0NDQ0NDIiBwb2ludHM9IjQsNCAwLDQgNCwwICIvPjwvc3ZnPg==') !important;
+        background-repeat: no-repeat !important;
+        background-position: 100% 100% !important;
+    }
+
+    /* reset gradient filter on IE */
+
+    &,
+    &:hover,
+    &:active {
+        filter: none;
+    }
+
+    /* specific styles */
+
+    &.bold {
+        font-weight: bold;
+    }
+
+    &.italic {
+        font-style: italic;
+    }
+
+    &.underline {
+        text-decoration: underline;
+    }
+
 }
 
-a.rte-tbi-disabled {
-    color: #eeeeee;
-    opacity: 0.4;
+.rte-toolbar {
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #454545;
+    display: none;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    z-index: 10000;
+    font-size: 0;   /* fixes additional space between buttons because of linefeeds */
+    .userSelect(none);
+    -webkit-touch-callout: none;
+
+    &.active {
+        display: block;
+    }
+
+    .separator {
+        background-color: #343434;
+        width: 1*@px;
+        min-width: 1*@px;
+        height: 44*@px;
+        display: inline-block;
+    }
+
+    button {
+        .rte-button;
+    }
+
 }
 
-/* specific styles */
+.rte-popover {
 
-a.rte-tb-bold {
-    font-weight: bold;
-    font-size: 20*@px;
-}
+    font-size: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10001;
+    .userSelect(none);
+    -webkit-touch-callout: none;
 
-a.rte-tb-italic {
-    font-style: italic;
-    font-size: 20*@px;
-}
+    button {
+        .rte-button;
+    }
 
-a.rte-tb-underline {
-    text-decoration: underline;
-    font-size: 20*@px;
 }
 
 .cui-rte-forcedborder,
 .cui-rte-forcedborder TD,
 .cui-rte-forcedborder TH {
-    border: 1*@px dotted #D3D3D3;
+    border: 1*@px dotted #d3d3d3;
 }
