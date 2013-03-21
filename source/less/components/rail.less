@@ -624,4 +624,76 @@ div.rail {
         }
       }
     }
+
+    // dropdown
+    .dropdown {
+        display: block;
+
+        .dropdown-container {
+            display: block;
+            border-bottom: @px solid @rail-section-border-color;
+        }
+
+        button,
+        button:hover:not([disabled]) {
+            display: block;
+            width: 100%;
+            border:none;
+            border-top: @px solid @rail-section-border-color;
+            .box-shadow(inset 0 1px 0 @rail-section-highlight-color); /* 1px to ensure rendering in IE9 which cuts rem units to 2dp (0.96px) */
+            background: @rail-background-color;
+            color: @rail-font-color;
+            height: 40*@px;
+            line-height: 40*@px;
+            padding: 0;
+            padding-left: 12*@px;
+            font-size: 0.85rem;
+
+            // icon (chevron down)
+            &:after {
+                background: none;
+                content: "\f025";
+                font-family: AdobeIcons;
+                position: absolute;
+                right: 16*@px;
+            }
+        }
+    }
+
+    .dropdown-list {
+        border-bottom: @px solid @rail-section-border-color;
+
+        ul {
+            margin: 0;
+            padding: 0;
+            font-size: @dropdown-text-size;
+            background-color: @rail-background-color;
+
+            li {
+                list-style-type: none;
+                margin: 0;
+                background-color: @rail-background-color;
+                border-bottom: none;
+                color: @rail-font-color;
+                border: none;
+                border-top: @px solid @rail-section-border-color;
+                .box-shadow(inset 0 1px 0 @rail-section-highlight-color); /* 1px to ensure rendering in IE9 which cuts rem units to 2dp (0.96px) */
+                overflow: hidden;
+                text-overflow: ellipsis;
+                -o-text-overflow: ellipsis;
+                cursor: pointer;
+                height: 40*@px;
+                line-height: 40*@px;
+                padding: 0;
+                padding-left: 12*@px;
+                font-size: 0.85rem;
+
+                &:hover,
+                &.selected:hover {
+                    background-color: @dropdown-active-background-color;
+                }
+            }
+        }
+    }
+
 }
