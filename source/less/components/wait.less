@@ -4,142 +4,72 @@
 */
 @-webkit-keyframes wait {
 	from, to {
-		padding:0;
-		margin:0 1em 1em 0;
-		background:@wait-active-color;
-		-webkit-box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 @wait-inactive-color, 0 1em 0 @wait-inactive-color;
-		box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 @wait-inactive-color, 0 1em 0 @wait-inactive-color;
+		background-position: 0 0;
+		background-image: url(~"@{component-images-folder}/wait/wait_16.svg");
 	}
-	8.33% {
-		background:transparent;
-		-webkit-box-shadow:1em 0 0 @wait-active-color, 1em 1em 0 @wait-inactive-color, 0 1em 0 @wait-inactive-color;
-		box-shadow:1em 0 0 @wait-active-color, 1em 1em 0 @wait-inactive-color, 0 1em 0 @wait-inactive-color;
-	}
-	16.67% {
-		background:transparent;
-		-webkit-box-shadow:1em 0 0 transparent, 1em 1em 0 @wait-active-color, 0 1em 0 @wait-inactive-color;
-		box-shadow:1em 0 0 transparent, 1em 1em 0 @wait-active-color, 0 1em 0 @wait-inactive-color;
+	12.5% {
+		background-position: 14.28571% 0;
 	}
 	25% {
-		background:transparent;
-		-webkit-box-shadow:1em 0 0 transparent, 1em 1em 0 transparent, 0 1em 0 @wait-active-color;
-		box-shadow:1em 0 0 transparent, 1em 1em 0 transparent, 0 1em 0 @wait-active-color;
+		background-position: 28.57143% 0;
 	}
-	33.33% {
-		background:@wait-active-color;
-		-webkit-box-shadow:1em 0 0 transparent, 1em 1em 0 transparent, 0 1em 0 @wait-inactive-color;
-		box-shadow:1em 0 0 transparent, 1em 1em 0 transparent, 0 1em 0 @wait-inactive-color;
-	}
-	41.67% {
-		background:@wait-inactive-color;
-		-webkit-box-shadow:1em 0 0 @wait-active-color, 1em 1em 0 transparent, 0 1em 0 @wait-inactive-color;
-		box-shadow:1em 0 0 @wait-active-color, 1em 1em 0 transparent, 0 1em 0 @wait-inactive-color;
+	37.5% {
+		background-position: 42.85714% 0;
 	}
 	50% {
-		background:@wait-inactive-color;
-		-webkit-box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 @wait-active-color, 0 1em 0 @wait-inactive-color;
-		box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 @wait-active-color, 0 1em 0 @wait-inactive-color;
+		background-position: 57.14286% 0;
 	}
-	58.33% {
-		background:@wait-inactive-color;
-		-webkit-box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 transparent, 0 1em 0 @wait-active-color;
-		box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 transparent, 0 1em 0 @wait-active-color;
-	}
-	66.67% {
-		background:@wait-active-color;
-		-webkit-box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 transparent, 0 1em 0 transparent;
-		box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 transparent, 0 1em 0 transparent;
+	62.5% {
+		background-position: 71.42857% 0;
 	}
 	75% {
-		background:transparent;
-		-webkit-box-shadow:1em 0 0 @wait-active-color, 1em 1em 0 transparent, 0 1em 0 transparent;
-		box-shadow:1em 0 0 @wait-active-color, 1em 1em 0 transparent, 0 1em 0 transparent;
+		background-position: 85.71429% 0;
 	}
-	83.33% {
-		background:transparent;
-		-webkit-box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 @wait-active-color, 0 1em 0 transparent;
-		box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 @wait-active-color, 0 1em 0 transparent;
-	}
-	91.67% {
-		background:transparent;
-		-webkit-box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 @wait-inactive-color, 0 1em 0 @wait-active-color;
-		box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 @wait-inactive-color, 0 1em 0 @wait-active-color;
+	87.5% {
+		background-position: 100% 0;
 	}
 }
 @keyframes wait {
 	from, to {
-		padding:0;
-		margin:0 1em 1em 0;
-		background:@wait-active-color;
-		box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 @wait-inactive-color, 0 1em 0 @wait-inactive-color;
+		background-position: 0 0;
+		background-image: url(~"@{component-images-folder}/wait/wait_16.svg");
 	}
-	8.33% {
-		background:transparent;
-		box-shadow:1em 0 0 @wait-active-color, 1em 1em 0 @wait-inactive-color, 0 1em 0 @wait-inactive-color;
-	}
-	16.67% {
-		background:transparent;
-		box-shadow:1em 0 0 transparent, 1em 1em 0 @wait-active-color, 0 1em 0 @wait-inactive-color;
+	12.5% {
+		background-position: 14.28571% 0;
 	}
 	25% {
-		background:transparent;
-		box-shadow:1em 0 0 transparent, 1em 1em 0 transparent, 0 1em 0 @wait-active-color;
+		background-position: 28.57143% 0;
 	}
-	33.33% {
-		background:@wait-active-color;
-		box-shadow:1em 0 0 transparent, 1em 1em 0 transparent, 0 1em 0 @wait-inactive-color;
-	}
-	41.67% {
-		background:@wait-inactive-color;
-		box-shadow:1em 0 0 @wait-active-color, 1em 1em 0 transparent, 0 1em 0 @wait-inactive-color;
+	37.5% {
+		background-position: 42.85714% 0;
 	}
 	50% {
-		background:@wait-inactive-color;
-		box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 @wait-active-color, 0 1em 0 @wait-inactive-color;
+		background-position: 57.14286% 0;
 	}
-	58.33% {
-		background:@wait-inactive-color;
-		box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 transparent, 0 1em 0 @wait-active-color;
-	}
-	66.67% {
-		background:@wait-active-color;
-		box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 transparent, 0 1em 0 transparent;
+	62.5% {
+		background-position: 71.42857% 0;
 	}
 	75% {
-		background:transparent;
-		box-shadow:1em 0 0 @wait-active-color, 1em 1em 0 transparent, 0 1em 0 transparent;
+		background-position: 85.71429% 0;
 	}
-	83.33% {
-		background:transparent;
-		box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 @wait-active-color, 0 1em 0 transparent;
-	}
-	91.67% {
-		background:transparent;
-		box-shadow:1em 0 0 @wait-inactive-color, 1em 1em 0 @wait-inactive-color, 0 1em 0 @wait-active-color;
+	87.5% {
+		background-position: 100% 0;
 	}
 }
 
-.wait { 
+.wait {
   display: inline-block;
-  width: 6 * @px;
-  height: 6 * @px;
-  font-size: 10 * @px; // used for box-shadow box placements
-  padding: 0 1em 1em 0;
-  // total size 1rem x 1rem (16px x 16px)
-
+  width: 1rem;
+  height: 1rem;
   background: url(~"@{component-images-folder}/wait/wait_16.gif") no-repeat 0 0;
+  .background-size(auto 100%);
 
-  -webkit-animation: wait 2.4s step-end infinite;
-  animation: wait 2.4s step-end infinite;
-
-  .background-size(cover);
+  -webkit-animation: wait 2s step-end infinite;
+  animation: wait 2s step-end infinite;
 
   &.large {
-    width: 14 * @px;
-    height: 14 * @px;
-	font-size: 18 * @px;
-    // total size 2rem x 2rem (32px x 32px)
-
+    width: 2rem;
+    height: 2rem;
     background-image: url(~"@{component-images-folder}/wait/wait_32.gif");
   }
 }
