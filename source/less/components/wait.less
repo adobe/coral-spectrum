@@ -2,59 +2,57 @@
   Class: .wait
   Provides a wait animated icon
 */
+@-webkit-keyframes wait-large {
+	from, to {
+		background-position: 0 0;
+		background-image: url(~"@{component-images-folder}/wait/wait_32.svg");
+	}
+	12.5% { background-position: 14.28571% 0; }
+	25% { background-position: 28.57143% 0; }
+	37.5% { background-position: 42.85714% 0; }
+	50% { background-position: 57.14286% 0; }
+	62.5% { background-position: 71.42857% 0; }
+	75% { background-position: 85.71429% 0; }
+	87.5% { background-position: 100% 0; }
+}
+@keyframes wait-large {
+	from, to {
+		background-position: 0 0;
+		background-image: url(~"@{component-images-folder}/wait/wait_32.svg");
+	}
+	12.5% { background-position: 14.28571% 0; }
+	25% { background-position: 28.57143% 0; }
+	37.5% { background-position: 42.85714% 0; }
+	50% { background-position: 57.14286% 0; }
+	62.5% { background-position: 71.42857% 0; }
+	75% { background-position: 85.71429% 0; }
+	87.5% { background-position: 100% 0; }
+}
 @-webkit-keyframes wait {
 	from, to {
 		background-position: 0 0;
 		background-image: url(~"@{component-images-folder}/wait/wait_16.svg");
 	}
-	12.5% {
-		background-position: 14.28571% 0;
-	}
-	25% {
-		background-position: 28.57143% 0;
-	}
-	37.5% {
-		background-position: 42.85714% 0;
-	}
-	50% {
-		background-position: 57.14286% 0;
-	}
-	62.5% {
-		background-position: 71.42857% 0;
-	}
-	75% {
-		background-position: 85.71429% 0;
-	}
-	87.5% {
-		background-position: 100% 0;
-	}
+	12.5% { background-position: 14.28571% 0; }
+	25% { background-position: 28.57143% 0; }
+	37.5% { background-position: 42.85714% 0; }
+	50% { background-position: 57.14286% 0; }
+	62.5% { background-position: 71.42857% 0; }
+	75% { background-position: 85.71429% 0; }
+	87.5% { background-position: 100% 0; }
 }
 @keyframes wait {
 	from, to {
 		background-position: 0 0;
 		background-image: url(~"@{component-images-folder}/wait/wait_16.svg");
 	}
-	12.5% {
-		background-position: 14.28571% 0;
-	}
-	25% {
-		background-position: 28.57143% 0;
-	}
-	37.5% {
-		background-position: 42.85714% 0;
-	}
-	50% {
-		background-position: 57.14286% 0;
-	}
-	62.5% {
-		background-position: 71.42857% 0;
-	}
-	75% {
-		background-position: 85.71429% 0;
-	}
-	87.5% {
-		background-position: 100% 0;
-	}
+	12.5% { background-position: 14.28571% 0; }
+	25% { background-position: 28.57143% 0; }
+	37.5% { background-position: 42.85714% 0; }
+	50% { background-position: 57.14286% 0; }
+	62.5% { background-position: 71.42857% 0; }
+	75% { background-position: 85.71429% 0; }
+	87.5% { background-position: 100% 0; }
 }
 
 .wait {
@@ -71,5 +69,8 @@
     width: 2rem;
     height: 2rem;
     background-image: url(~"@{component-images-folder}/wait/wait_32.gif");
+
+    -webkit-animation: wait-large 2s step-end infinite;
+    animation: wait-large 2s step-end infinite;
   }
 }
