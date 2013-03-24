@@ -675,8 +675,8 @@ module.exports = function(grunt) {
     'concat:cui',
     'uglify:cui',
     'less',
-    'cssmin',
-    'mocha'
+    'cssmin'/*,
+    'mocha'*/
   ]);
 
   // Build and copy RTE
@@ -699,7 +699,7 @@ module.exports = function(grunt) {
     'uglify',
     'less',
     'cssmin',
-    'mocha',
+//    'mocha',
     'jsdoc'
   ]);
 
