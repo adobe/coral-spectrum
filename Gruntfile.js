@@ -358,7 +358,20 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          '<%= dirs.build %>/js/CUI.Templates.js': '<%= dirs.source %>/templates/*'
+          '<%= dirs.build %>/js/CUI.Templates.js': '<%= dirs.source %>/templates/cui/*'
+        }
+      },
+      "rte": {
+        options: {
+          wrapped: true,
+          namespace: 'CUI.rte.Templates',
+          processName: function(path) {
+            // Pull the filename out as the template name
+            return path.split('/').pop().split('.').shift();
+          }
+        },
+        files: {
+          '<%= dirs.build %>/js/cui-rte.templates.js': '<%= dirs.source %>/templates/rte/*'
         }
       }
     },
@@ -670,7 +683,7 @@ module.exports = function(grunt) {
     'jshint',
     'font',
     'copy',
-    'handlebars',
+    'handlebars:compile',
     'icons',
     'iconbrowser',
     'concat:cui',

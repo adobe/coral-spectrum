@@ -37,7 +37,11 @@
         // Interface implementation ------------------------------------------------------------
 
         addToToolbar: function(toolbar) {
-            // not used here
+            toolbar.push(CUI.rte.Templates["toolbar-item"]({
+                "plugin": this.plugin.pluginId,
+                "command": this.id,
+                "icon": "text"  // TODO implement correctly
+            }));
         },
 
         notifyToolbar: function(toolbar) {

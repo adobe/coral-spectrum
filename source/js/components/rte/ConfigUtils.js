@@ -56,10 +56,6 @@ CUI.rte.ConfigUtils = function() {
             return featureDefs;
         },
 
-        createToolbarFromConfig: function($editable) {
-            // TODO implement
-        },
-
         mergeConfigAndFeatures: function(config, features) {
             if (!features || (features.length === 0)) {
                 return config;

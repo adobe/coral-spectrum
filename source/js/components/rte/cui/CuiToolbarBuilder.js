@@ -34,9 +34,10 @@
          */
         createToolbar: function(options) {
             var toolbarItems = [ ];
-            var elementsToNotify = [ ];
+            var elements = [ ];
             var elementMap = { };
             var groupCnt = this.groups.length;
+            // create data model
             var hasMembers = false;
             for (var groupIndex = 0; groupIndex < groupCnt; groupIndex++) {
                 var groupElements = this.groups[groupIndex].elements;
@@ -58,15 +59,34 @@
                             toolbarItems.push(def);
                             elementMap[def.id] = def;
                         }
-                        elementsToNotify.push(element);
+                        elements.push(element);
                         hasMembers = true;
                     }
                 }
             }
-            var toolbar = new CUI.rte.ui.cui.ToolbarImpl(elementMap, options.$editable);
-            var notifyCnt = elementsToNotify.length;
-            for (var n = 0; n < notifyCnt; n++) {
-                elementsToNotify[n].notifyToolbar(toolbar);
+            // attach model to UI/create UI from model
+            var $editable = options.$editable;
+            var $toolbar = CUI.rte.UIUtils.getToolbar($editable);
+            var elementCnt = elements.length;
+            var e;
+            if (!$toolbar) {
+                // create new toolbar
+                var items = [ ];
+                for (e = 0; e < elementCnt; e++) {
+                    elements[e].addToToolbar(items);
+                }
+                var toolbarMarkup = CUI.rte.Templates["toolbar"]({
+                    "toolbarItems": items
+                });
+                var $container = $(CUI.rte.Templates["container"]({
+                    "toolbar": toolbarMarkup
+                }));
+                $editable.before($container);
+            }
+            // use existing/newly created toolbar
+            var toolbar = new CUI.rte.ui.cui.ToolbarImpl(elementMap, $editable);
+            for (e = 0; e < elementCnt; e++) {
+                elements[e].notifyToolbar(toolbar);
             }
             return toolbar;
         },

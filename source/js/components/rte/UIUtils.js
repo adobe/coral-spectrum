@@ -67,6 +67,40 @@ CUI.rte.UIUtils = function() {
                 return null;
             }
             return $container.find("div.rte-toolbar");
+        },
+
+        createToolbarFromConfig: function($editable, config) {
+            var featureDef = [ ];
+            var plugins = config.rtePlugins || { };
+            for (var plgName in plugins) {
+                if (plugins.hasOwnProperty(plgName)) {
+                    var pluginCfg = plugins[plgName];
+                    if (pluginCfg.hasOwnProperty("features")) {
+                        var features = pluginCfg["features"];
+                        if (!CUI.rte.Utils.isArray(features)) {
+                            if (features === "*") {
+                                features = pluginCfg.getFeatures();
+                            } else {
+                                features = [ ];
+                            }
+                        }
+                        var featureCnt = features.length;
+                        for (var f = 0; f < featureCnt; f++) {
+                            featureDef.push({
+                                "plugin": plgName,
+                                "feature": features[f]
+                            });
+                        }
+                    }
+                }
+            }
+            var toolbarHTML = CUI.rte.Templates['ui']({ "features": featureDef });
+            console.log(toolbarHTML);
+            var $container = CUI.rte.UIUtils.getUIContainer($editable);
+            if (!$container) {
+                // $container =
+            }
+            // TODO implement
         }
 
     }
