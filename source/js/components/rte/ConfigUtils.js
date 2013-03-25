@@ -103,7 +103,7 @@ CUI.rte.ConfigUtils = function() {
 
         loadConfigAndStartEditing: function(rte, $editable) {
             var features;
-            var $container = CUI.rte.UIUtils.getContainer($editable);
+            var $container = CUI.rte.UIUtils.getUIContainer($editable);
             var $toolbar = CUI.rte.UIUtils.getToolbar($editable);
 
             function processConfig(config) {

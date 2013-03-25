@@ -396,7 +396,7 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     construct: function(elementMap, $editable) {
         this.elementMap = elementMap;
         this.$editable = $editable;
-        this.$container = CUI.rte.UIUtils.getContainer(this.$editable);
+        this.$container = CUI.rte.UIUtils.getUIContainer(this.$editable);
         this.$toolbar = CUI.rte.UIUtils.getToolbar(this.$editable);
     },
 

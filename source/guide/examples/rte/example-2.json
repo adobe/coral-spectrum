@@ -1,0 +1,50 @@
+{
+
+    "rtePlugins": {
+        "links": {
+            "features": "*"
+        },
+        "misctools": {
+            "features": "*"
+        },
+        "edit": {
+            "features": "*"
+        },
+        "findreplace": {
+            "features": "*"
+        },
+        "format": {
+            "features": "*"
+        },
+        "image": {
+            "features": "*"
+        },
+        "keys": {
+            "features": "*"
+        },
+        "justify": {
+            "features": "*"
+        },
+        "lists": {
+            "features": "*"
+        },
+        "paraformat": {
+            "features": "*"
+        },
+        "spellcheck": {
+            "features": "*"
+        },
+        "styles": {
+            "features": "*"
+        },
+        "subsuperscript": {
+            "features": "*"
+        },
+        "table": {
+            "features": "*"
+        },
+        "undo": {
+            "features": "*"
+        }
+    }
+}

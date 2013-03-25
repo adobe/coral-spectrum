@@ -50,12 +50,23 @@ CUI.rte.UIUtils = function() {
             styleSheet.parentNode.removeChild(styleSheet);
         },
 
-        getContainer: function($editable) {
-            return $editable.parent();
+        getUIContainer: function($editable) {
+            var editableDom = $editable[0].previousSibling;
+            while (editableDom && (editableDom.nodeType !== 1)) {
+                editableDom = editableDom.previousSibling;
+            }
+            if (!editableDom || !CUI.rte.Common.hasCSS(editableDom, "rte-ui")) {
+                return null;
+            }
+            return $(editableDom);
         },
 
         getToolbar: function($editable) {
-            return CUI.rte.UIUtils.getContainer($editable).find("nav.rte-toolbar");
+            var $container = CUI.rte.UIUtils.getUIContainer($editable);
+            if (!$container) {
+                return null;
+            }
+            return $container.find("div.rte-toolbar");
         }
 
     }
