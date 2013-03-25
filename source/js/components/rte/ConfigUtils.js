@@ -18,39 +18,102 @@
 
 CUI.rte.ConfigUtils = function() {
 
+    function getPluginDef(action) {
+        if (action) {
+            var sepPos = action.indexOf("#");
+            if (sepPos > 0) {
+                var plugin = action.substring(0, sepPos);
+                var feature = action.substring(sepPos + 1);
+                return {
+                    "plugin": plugin,
+                    "feature": feature
+                };
+            }
+        }
+        return null;
+    }
+
     return {
 
         createFeaturesFromToolbar: function($container, $toolbar) {
+            var featureDefs = [ ];
             // first, analyze the toolbar
             var $buttons = $toolbar.find("button.item");
-            console.log($buttons);
+            $buttons.each(function() {
+                var pluginDef = getPluginDef($(this).data("action"));
+                if (pluginDef) {
+                    featureDefs.push(pluginDef);
+                }
+            });
             // then, analyze popovers
-            var $popovers = $container.find("button[data-action^=\"#\"]");
-            console.log($popovers);
-            return [ ];
+            var $popovers = $container.find("div.rte-popover button.item");
+            $popovers.each(function() {
+                var pluginDef = getPluginDef($(this).data("action"));
+                if (pluginDef) {
+                    featureDefs.push(pluginDef);
+                }
+            });
+            return featureDefs;
         },
 
         createToolbarFromConfig: function($editable) {
             // TODO implement
         },
 
-        getBaseConfig: function($editable) {
-            // TODO implement
+        mergeConfigAndFeatures: function(config, features) {
+            if (!features || (features.length === 0)) {
+                return config;
+            }
+            var pluginConfig;
+            if (config.hasOwnProperty("rtePlugins")) {
+                pluginConfig = config["rtePlugins"];
+            } else {
+                pluginConfig = { };
+                config["rtePlugins"] = pluginConfig;
+            }
+            var featureCnt = features.length;
+            for (var f = 0; f < featureCnt; f++) {
+                var feature = features[f];
+                var pluginId = feature.plugin;
+                var featureId = feature.feature;
+                var cfg, plgFeature;
+                if (!pluginConfig.hasOwnProperty(pluginId)) {
+                    cfg = { };
+                    pluginConfig[pluginId] = cfg;
+                } else {
+                    cfg = pluginConfig[pluginId];
+                }
+                if (cfg.hasOwnProperty("features")) {
+                    plgFeature = cfg["features"];
+                    if (CUI.rte.Utils.isArray(plgFeature)) {
+                        plgFeature.push(featureId)
+                    } else {
+                        if (plgFeature !== "*") {
+                            plgFeature = [ featureId ];
+                            cfg["features"] = plgFeature;
+                        }
+                    }
+                } else {
+                    plgFeature = [ featureId ];
+                    cfg["features"] = plgFeature;
+                }
+            }
+            return config;
         },
 
-        calculateConfig: function(rte, $editable) {
+        loadConfigAndStartEditing: function(rte, $editable) {
             var features;
             var $container = CUI.rte.UIUtils.getContainer($editable);
             var $toolbar = CUI.rte.UIUtils.getToolbar($editable);
 
             function processConfig(config) {
+                config = CUI.rte.ConfigUtils.mergeConfigAndFeatures(config, features);
                 rte.start(config);
             }
 
             if ($toolbar && ($toolbar.length > 0)) {
                 features = CUI.rte.ConfigUtils.createFeaturesFromToolbar($container,
                         $toolbar);
-                console.log("features", features);
             }
             var config = { };
             var configStr = $editable.data("config");

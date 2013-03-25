@@ -374,7 +374,7 @@
 
     // Register ...
     CUI.util.plugClass(CUI.RichText, "richEdit", function(rte) {
-        CUI.rte.ConfigUtils.calculateConfig(rte, $(this));
+        CUI.rte.ConfigUtils.loadConfigAndStartEditing(rte, $(this));
     });
 
     // Data API
