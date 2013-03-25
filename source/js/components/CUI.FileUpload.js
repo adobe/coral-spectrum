@@ -163,7 +163,7 @@
          @classdesc A file upload widget
 
          <p>
-         <span class="fileupload button icon-upload"><input type="file" data-init="fileupload" data-placeholder="Select file(s)"></span>
+         <span class="fileupload button icon-upload" data-init="fileupload"><input type="file" data-placeholder="Select file(s)"></span>
          </p>
 
          @desc Creates a file upload field
