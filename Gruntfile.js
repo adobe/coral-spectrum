@@ -632,7 +632,7 @@ module.exports = function(grunt) {
 
       compile_handlebars: {
         files: '<%= dirs.source %>/templates/*',
-        tasks: ['handlebars', 'concat:cui', 'uglify:cui']
+        tasks: ['handlebars:compile', 'concat:cui', 'uglify:cui']
       },
 
       copy_tests: {
@@ -745,7 +745,7 @@ module.exports = function(grunt) {
     'font',
     'icons',
     'iconbrowser',
-    'handlebars',
+    'handlebars:compile',
     'concat:cui',
     'less:cui'
   ]);
