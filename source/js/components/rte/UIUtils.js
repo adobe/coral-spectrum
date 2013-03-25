@@ -48,6 +48,14 @@ CUI.rte.UIUtils = function() {
 
         removeStyleSheet: function(styleSheet) {
             styleSheet.parentNode.removeChild(styleSheet);
+        },
+
+        getContainer: function($editable) {
+            return $editable.parent();
+        },
+
+        getToolbar: function($editable) {
+            return CUI.rte.UIUtils.getContainer($editable).find("nav.rte-toolbar");
         }
 
     }

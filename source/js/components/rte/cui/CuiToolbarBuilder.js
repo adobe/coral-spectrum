@@ -63,7 +63,7 @@
                     }
                 }
             }
-            var toolbar = new CUI.rte.ui.cui.ToolbarImpl(elementMap, options.$toolbarRoot);
+            var toolbar = new CUI.rte.ui.cui.ToolbarImpl(elementMap, options.$editable);
             var notifyCnt = elementsToNotify.length;
             for (var n = 0; n < notifyCnt; n++) {
                 elementsToNotify[n].notifyToolbar(toolbar);

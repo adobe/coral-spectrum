@@ -313,9 +313,9 @@
         },
 
 
-        // Interface ---------------------------------------------------------------------------------------------------
+        // Interface -----------------------------------------------------------------------
 
-        start: function(config, toolbarRoot) {
+        start: function(config) {
             if (this.editorKernel === null) {
                 this.editorKernel = new CUI.rte.DivKernel(config);
             }
@@ -324,9 +324,8 @@
             this.$textContainer = this.getTextDiv(this.$element);
             this.$textContainer.addClass("edited");
             this.textContainer = this.$textContainer[0];
-            toolbarRoot = toolbarRoot || this.$textContainer.parent();
             this.editorKernel.createToolbar({
-                $toolbarRoot: $(toolbarRoot)
+                $editable: this.$element
             });
             /*
             this.currentSize = this.textContainer.getSize();
@@ -375,18 +374,7 @@
 
     // Register ...
     CUI.util.plugClass(CUI.RichText, "richEdit", function(rte) {
-        var configPath = $(this).attr("data-config");
-        var config;
-        if (configs.hasOwnProperty(configPath)) {
-            config = configs[configPath];
-            rte.start(config);
-        } else {
-            $.getJSON(configPath, function(data) {
-                configs[configPath] = data;
-                rte.start(data);
-            });
-        }
-
+        CUI.rte.ConfigUtils.calculateConfig(rte, $(this));
     });
 
     // Data API
