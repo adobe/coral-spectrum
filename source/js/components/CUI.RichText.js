@@ -325,7 +325,8 @@
             this.$textContainer.addClass("edited");
             this.textContainer = this.$textContainer[0];
             this.editorKernel.createToolbar({
-                $editable: this.$element
+                "$editable": this.$element,
+                "uiSettings": (config ? config.uiSettings : undefined)
             });
             /*
             this.currentSize = this.textContainer.getSize();

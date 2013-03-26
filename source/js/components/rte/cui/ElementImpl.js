@@ -37,11 +37,12 @@
         // Interface implementation ------------------------------------------------------------
 
         addToToolbar: function(toolbar) {
-            toolbar.push(CUI.rte.Templates["toolbar-item"]({
+            toolbar.push({
+                "ref": this.plugin.pluginId + "#" + this.id,
                 "plugin": this.plugin.pluginId,
                 "command": this.id,
                 "icon": "text"  // TODO implement correctly
-            }));
+            });
         },
 
         notifyToolbar: function(toolbar) {

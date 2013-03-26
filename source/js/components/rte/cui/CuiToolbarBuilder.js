@@ -25,7 +25,119 @@
         extend: CUI.rte.ui.ToolbarBuilder,
 
 
-        // Toolbar management ------------------------------------------------------------------
+        // Helpers -------------------------------------------------------------------------
+
+        _buildToolbar: function($editable, elements, options) {
+
+            function getItem(id) {
+                var itemCnt = items.length;
+                for (var i = 0; i < itemCnt; i++) {
+                    if (items[i].ref === id) {
+                        return items[i];
+                    }
+                }
+                return null;
+            }
+
+            function getPopover(id) {
+                if (!popoverDefs) {
+                    return undefined;
+                }
+                for (var def in popoverDefs) {
+                    if (popoverDefs.hasOwnProperty(def)) {
+                        if (popoverDefs[def].ref === id) {
+                            return popoverDefs[def];
+                        }
+                    }
+                }
+                return null;
+            }
+
+            var com = CUI.rte.Common;
+            var uiSettings = undefined;
+            if (options && options.uiSettings && options.uiSettings.cui) {
+                uiSettings = options.uiSettings.cui;
+            } else {
+                uiSettings = CUI.rte.ui.cui.DEFAULT_UI_SETTINGS;
+            }
+            var items = [ ];
+            for (var e = 0; e < elements.length; e++) {
+                elements[e].addToToolbar(items);
+            }
+            // reorder according to settings
+            com.removeJcrData(uiSettings);
+            var toolbars = [ ];
+            var toolbarTpl = CUI.rte.Templates["toolbar"];
+            var itemTpl = CUI.rte.Templates["toolbar-item"];
+            var triggerTpl = CUI.rte.Templates["popover-trigger"];
+            var popoverTpl = CUI.rte.Templates["popover"];
+            var popoverItemTpl = CUI.rte.Templates["popover-item"];
+            for (var tbId in uiSettings) {
+                if (uiSettings.hasOwnProperty(tbId)) {
+                    var toolbar = uiSettings[tbId];
+                    var tbItems = [ ];
+                    var popovers = [ ];
+                    var itemDefs = toolbar.toolbar;
+                    var popoverDefs = toolbar.popovers;
+                    // toolbar
+                    var itemCnt = itemDefs.length;
+                    for (var i = 0; i < itemCnt; i++) {
+                        var itemToAdd = itemDefs[i];
+                        if (itemToAdd && itemToAdd.length) {
+                            if (itemToAdd.charAt(0) === "#") {
+                                // popover trigger
+                                var popover = getPopover(itemToAdd.substring(1));
+                                tbItems.push(triggerTpl({
+                                    "ref": itemToAdd,
+                                    "icon": (popover && popover.icon
+                                            ? popover.icon : "text")
+                                }));
+                            } else {
+                                // regular item
+                                var element = getItem(itemToAdd);
+                                if (element) {
+                                    tbItems.push(itemTpl(element));
+                                }
+                            }
+                        }
+                    }
+                    // popovers
+                    com.removeJcrData(popoverDefs);
+                    for (var p in popoverDefs) {
+                        if (popoverDefs.hasOwnProperty(p)) {
+                            var poItems = [ ];
+                            var popoverToProcess = popoverDefs[p];
+                            var poItemDefs = popoverToProcess.items;
+                            var poItemCnt = poItemDefs.length;
+                            for (var pi = 0; pi < poItemCnt; pi++) {
+                                var poItem = getItem(poItemDefs[pi]);
+                                if (poItem) {
+                                    poItems.push(popoverItemTpl(poItem));
+                                }
+                            }
+                            popovers.push(popoverTpl({
+                                "ref": popoverToProcess.ref,
+                                "popoverItems": poItems
+                            }));
+                        }
+                    }
+                    // add representation
+                    toolbars.push({
+                        "id": tbId,
+                        "toolbar": toolbarTpl({
+                            "toolbarItems": tbItems
+                        }),
+                        "popovers": popovers
+                    });
+                }
+            }
+            $editable.before($(CUI.rte.Templates["container"]({
+                "toolbars": toolbars
+            })));
+        },
+
+
+        // Toolbar management --------------------------------------------------------------
 
         /**
          * Create the abstracted toolbar.
@@ -69,19 +181,10 @@
             var $toolbar = CUI.rte.UIUtils.getToolbar($editable);
             var elementCnt = elements.length;
             var e;
+
             if (!$toolbar) {
-                // create new toolbar
-                var items = [ ];
-                for (e = 0; e < elementCnt; e++) {
-                    elements[e].addToToolbar(items);
-                }
-                var toolbarMarkup = CUI.rte.Templates["toolbar"]({
-                    "toolbarItems": items
-                });
-                var $container = $(CUI.rte.Templates["container"]({
-                    "toolbar": toolbarMarkup
-                }));
-                $editable.before($container);
+                // create new toolbar if none is present yet
+                this._buildToolbar($editable, elements, options);
             }
             // use existing/newly created toolbar
             var toolbar = new CUI.rte.ui.cui.ToolbarImpl(elementMap, $editable);
@@ -110,5 +213,46 @@
         }
 
     });
+
+    CUI.rte.ui.cui.DEFAULT_UI_SETTINGS = {
+        "inline": {
+            "toolbar": [
+                "#format",
+                "#justify",
+                "#lists"
+            ],
+            "popovers": {
+                "format": {
+                    "ref": "format",
+                    "icon": "text",
+                    "items": [
+                        "format#bold",
+                        "format#italic",
+                        "format#underline"
+                    ]
+                },
+                "justify": {
+                    "ref": "justify",
+                    "icon": "text",
+                    "items": [
+                        "justify#justifyleft",
+                        "justify#justifycenter",
+                        "justify#justifyright"
+                    ]
+                },
+                "lists": {
+                    "ref": "lists",
+                    "icon": "text",
+                    "items": [
+                        "lists#insertunorderedlist",
+                        "lists#insertorderedlist",
+                        "lists#outdent",
+                        "lists#indent"
+                    ]
+                }
+            }
+        }
+        // TODO add default config for full screen mode; introduce * wildcard there
+    };
 
 })(window.jQuery);

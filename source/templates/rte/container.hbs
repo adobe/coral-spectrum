@@ -1,6 +1,10 @@
 <div class="rte-ui">
-    {{{toolbar}}}
-    {{#each popovers}}
-        {{{this.popover}}}
+    {{#each toolbars}}
+    <div data-type="{{this.id}}">
+        {{{this.toolbar}}}
+        {{#each this.popovers}}
+            {{{this}}}
+        {{/each}}
+    </div>
     {{/each}}
 </div>

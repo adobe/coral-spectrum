@@ -45,5 +45,49 @@
         "undo": {
             "features": "*"
         }
+    },
+    "uiSettings": {
+        "cui": {
+            "inline": {
+                "toolbar": [
+                    "#format",
+                    "#justify",
+                    "#lists"
+                ],
+                "popovers": {
+                    "format": {
+                        "ref": "format",
+                        "icon": "text",
+                        "items": [
+                            "format#bold",
+                            "format#italic",
+                            "format#underline"
+                        ]
+                    },
+                    "justify": {
+                        "ref": "justify",
+                        "icon": "text",
+                        "items": [
+                            "justify#justifyleft",
+                            "justify#justifycenter",
+                            "justify#justifyright"
+                        ]
+                    },
+                    "lists": {
+                        "ref": "lists",
+                        "icon": "text",
+                        "items": [
+                            "lists#insertunorderedlist",
+                            "lists#insertorderedlist",
+                            "lists#outdent",
+                            "lists#indent"
+                        ]
+                    }
+                }
+            }
+        },
+        "fullScreen": {
+
+        }
     }
 }
