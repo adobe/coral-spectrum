@@ -35,16 +35,13 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
 
     $toolbar: null,
 
-    $popover: null,
-
-    $popoverTrigger: null,
-
     $clipParent: null,
+
+    popover: null,
 
     preferredToolbarPos: null,
 
     _popoverStyleSheet: null,
-
 
     /**
      * <p>Determines the "clipping parent" of the specified DOM object.</p>
@@ -83,43 +80,6 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
              "left": editablePos.left,
              "top": editablePos.top - tbHeight
          };
-    },
-
-    /**
-     * Calculates the height of the "arrow" of a popup.
-     * @return {Number} The height of the "arrow"
-     * @private
-     */
-    _calcArrowHeight: function() {
-        var $p = this.$popover;
-        if (!$p) {
-            return 0;
-        }
-        // arrow height calculation taken from CUI.Popover
-        return Math.round(($p.outerWidth() - $p.width()) / 1.5);
-    },
-
-    /**
-     * Calculates the height of the current popover.
-     * @return {{height: Number, arrowHeight: Number}} The total height height and the
-     *         height of the "arrow" of the popover; both values are 0 if no popover is
-     *         currently shown
-     * @private
-     */
-    _calcPopover: function() {
-        var $p = this.$popover;
-        if (!$p) {
-            return {
-                "height": 0,
-                "arrowHeight": 0
-            };
-        }
-        // arrow height calculation taken from CUI.Popover
-        var arrowHeight = this._calcArrowHeight();
-        return {
-            "height": $p.outerHeight() + arrowHeight,
-            "arrowHeight": arrowHeight
-        };
     },
 
     /**
@@ -205,7 +165,7 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     },
 
     _calcUIPosition: function($win, selection) {
-        var popoverData = this._calcPopover();
+        var popoverData = this.popover.calc();
         var optimum = this._calcOptimum(popoverData);
         if (!this.preferredToolbarPos) {
             this.preferredToolbarPos = optimum;
@@ -285,12 +245,7 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         var pos = this._calcUIPosition();
         if (pos) {
             this.$toolbar.offset(pos["toolbar"]);
-            if (this.$popover) {
-                var popoverPos = pos["popover"];
-                this.$popover.removeClass("arrow-bottom  arrow-top");
-                this.$popover.addClass("arrow-" + popoverPos["arrow"]);
-                this.$popover.offset(popoverPos);
-            }
+            this.popover.setPosition(pos["popover"]);
         }
     },
 
@@ -309,74 +264,28 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         this._updateUI();
     },
 
-    _usePopover: function(ref, $trigger) {
-        this.$popoverTrigger = $trigger;
-        this.$popoverTrigger.addClass("triggered");
-        this.$popoverTrigger.removeClass("white");
-        this.$popoverTrigger.addClass("black");
-        this.$popover = CUI.rte.UIUtils.getPopover(ref, undefined, this.$container);
-        if (this.$popover.length) {
-            // calculate & set "arrow" position, using a temporary styleheet to override
-            // :before pseudo class
-            var triggerOffs = $trigger.offset();
-            var toolbarOffs = this.$toolbar.offset();
-            var triggerDX = triggerOffs.left - toolbarOffs.left;
-            var arrowSize = this._calcArrowHeight();
-            var arrowOffs = Math.round(($trigger.width() / 2) + triggerDX - arrowSize) + 2;
-            this._popoverStyleSheet = CUI.rte.UIUtils.addStyleSheet({
-                ".name": ".temp-arrow-position:before",
-                "left": arrowOffs + "px !important"
-            });
-            this.$popover.addClass("temp-arrow-position");
-            // must be shown before calculating positions, as jQuery will miscalculate
-            // position:absolute otherwise
-            this.$popover.popover().show();
-            this._updateUI();
-        } else {
-            this.$popover = null;
-        }
-    },
-
-    _hidePopover: function() {
-        if (this.$popoverTrigger) {
-            this.$popoverTrigger.removeClass("triggered");
-            this.$popoverTrigger.addClass("white");
-            this.$popoverTrigger.removeClass("black");
-            this.$popoverTrigger = null;
-        }
-        var mustHide = !!this.$popover;
-        if (mustHide) {
-            this.$popover.removeClass("temp-arrow-position");
-            CUI.rte.UIUtils.removeStyleSheet(this._popoverStyleSheet);
-            this._popoverStyleSheet = null;
-            this.$popover.popover().hide();
-            this.$popover = null;
-        }
-        return mustHide;
-    },
-
     _initializePopovers: function() {
-        var $popoverLinks = this.$container.find("button[data-action^=\"#\"]");
         var self = this;
-        $popoverLinks.bind("click.rte.handler", function(e) {
+        this.$container.on("click.rte.handler", "button[data-action^=\"#\"]", function(e) {
             var $trigger = $(this);
-            var show = !self.$popover || ($trigger[0] !== self.$popoverTrigger[0]);
-            if (self.$popover) {
-                self._hidePopover();
-            }
+            var show = !self.popover.isShown() || !self.popover.isTriggeredBy($trigger);
+            self.popover.hide();
             if (show) {
-                self._usePopover($(e.target).data("action").substring(1), $trigger);
+                self.popover.use($(e.target).data("action").substring(1), $trigger,
+                        self.$toolbar);
             }
+            self._updateUI();
             self.editorKernel.focus();
             e.stopPropagation();
         });
-        $popoverLinks.fipo("touchstart.rte.handler", "mousedown.rte.handler", function(e) {
-            self.editorKernel.disableFocusHandling();
-        });
+        this.$container.fipo("touchstart.rte.handler", "mousedown.rte.handler",
+                "button[data-action^=\"#\"]", function(e) {
+                    self.editorKernel.disableFocusHandling();
+                });
     },
 
     hide: function() {
-        this._hidePopover();
+        this.popover.hide();
         // use "visibility" property instead of "display" - the latter would destroy the
         // layout on show() on Safari Mobile
         this.$toolbar.css("visibility", "hidden");
@@ -398,6 +307,7 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         this.$editable = $editable;
         this.$container = CUI.rte.UIUtils.getUIContainer(this.$editable);
         this.$toolbar = CUI.rte.UIUtils.getToolbar(this.$editable);
+        this.popover = new CUI.rte.ui.cui.Popover(this.$container);
     },
 
     getItem: function(itemId) {
