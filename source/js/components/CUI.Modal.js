@@ -259,7 +259,7 @@ modal.hide();
 
       // Move to the bottom of body so we're outside of any relative/absolute context
       // This allows us to know we'll always float above the backdrop
-      if (this.options.element.parentNode !== document.body) {
+      if (!this.$element.parent(document.body).length) {
         this.$element.appendTo(document.body);
       }
       
