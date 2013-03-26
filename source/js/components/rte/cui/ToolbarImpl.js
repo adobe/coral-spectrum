@@ -314,7 +314,7 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
         this.$popoverTrigger.addClass("triggered");
         this.$popoverTrigger.removeClass("white");
         this.$popoverTrigger.addClass("black");
-        this.$popover = this.$container.find("div[data-popover=\"" + ref + "\"]");
+        this.$popover = CUI.rte.UIUtils.getPopover(ref, undefined, this.$container);
         if (this.$popover.length) {
             // calculate & set "arrow" position, using a temporary styleheet to override
             // :before pseudo class

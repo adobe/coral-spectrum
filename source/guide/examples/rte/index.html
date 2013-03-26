@@ -71,26 +71,33 @@
                         div, the features and toolbar configuration is taken from it.
                     -->
                     <div class="rte-ui">
-                        <div class="rte-toolbar">
-                            <button data-action="#format" tabindex="-1" class="item icon-text trigger small white"></button>
-                            <button data-action="#justify" tabindex="-1" class="item icon-graphtrendrounded trigger small white"></button>
-                            <button data-action="#lists" tabindex="-1" class="item icon-viewlist trigger small white"></button>
-                        </div>
-                        <div data-popover="format" class="popover rte-popover">
-                            <button data-action="format#bold" tabindex="-1" class="item bold disabled text">B</button>
-                            <button data-action="format#italic" tabindex="-1" class="item italic disabled text">i</button>
-                            <button data-action="format#underline" tabindex="-1" class="item underline disabled text">U</button>
-                        </div>
-                        <div data-popover="justify" class="popover rte-popover">
-                            <button data-action="justify#justifyleft" tabindex="-1" class="item disabled text">[</button>
-                            <button data-action="justify#justifycenter" tabindex="-1" class="item disabled text">-</button>
-                            <button data-action="justify#justifyright" tabindex="-1" class="item disabled text">]</button>
-                        </div>
-                        <div data-popover="lists" class="popover rte-popover">
-                            <button data-action="lists#insertunorderedlist" tabindex="-1" class="item disabled text">&bull;</button>
-                            <button data-action="lists#insertorderedlist" tabindex="-1" class="item disabled text">1.</button>
-                            <button data-action="lists#outdent" tabindex="-1" class="item disabled text">&lt;&lt;</button>
-                            <button data-action="lists#indent" tabindex="-1" class="item disabled text">&gt;&gt;</button>
+                        <!--
+                            data-type="inplace" defines the toolbar that is used in basic
+                            editing mode; data-type="fullScreen" would define the toolbar
+                            for full screen editing mode
+                        -->
+                        <div data-type="inline">
+                            <div class="rte-toolbar">
+                                <button data-action="#format" tabindex="-1" class="item icon-text trigger small white"></button>
+                                <button data-action="#justify" tabindex="-1" class="item icon-graphtrendrounded trigger small white"></button>
+                                <button data-action="#lists" tabindex="-1" class="item icon-viewlist trigger small white"></button>
+                            </div>
+                            <div data-popover="format" class="popover rte-popover">
+                                <button data-action="format#bold" tabindex="-1" class="item bold disabled text">B</button>
+                                <button data-action="format#italic" tabindex="-1" class="item italic disabled text">i</button>
+                                <button data-action="format#underline" tabindex="-1" class="item underline disabled text">U</button>
+                            </div>
+                            <div data-popover="justify" class="popover rte-popover">
+                                <button data-action="justify#justifyleft" tabindex="-1" class="item disabled text">[</button>
+                                <button data-action="justify#justifycenter" tabindex="-1" class="item disabled text">-</button>
+                                <button data-action="justify#justifyright" tabindex="-1" class="item disabled text">]</button>
+                            </div>
+                            <div data-popover="lists" class="popover rte-popover">
+                                <button data-action="lists#insertunorderedlist" tabindex="-1" class="item disabled text">&bull;</button>
+                                <button data-action="lists#insertorderedlist" tabindex="-1" class="item disabled text">1.</button>
+                                <button data-action="lists#outdent" tabindex="-1" class="item disabled text">&lt;&lt;</button>
+                                <button data-action="lists#indent" tabindex="-1" class="item disabled text">&gt;&gt;</button>
+                            </div>
                         </div>
                     </div>
                     <div class="editable" data-config-path="example-1.json">

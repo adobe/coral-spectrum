@@ -61,14 +61,20 @@ CUI.rte.UIUtils = function() {
             return $(editableDom);
         },
 
-        getToolbar: function($editable) {
+        getToolbar: function($editable, tbType) {
+            tbType = tbType || "inline";
             var $container = CUI.rte.UIUtils.getUIContainer($editable);
             if (!$container) {
                 return null;
             }
-            return $container.find("div.rte-toolbar");
-        }
+            return $container.find("div[data-type=\"" + tbType + "\"] > div.rte-toolbar");
+        },
 
+        getPopover: function(ref, tbType, $container) {
+            tbType = tbType || "inline";
+            return $container.find("div[data-type=\"" + tbType + "\"] > " +
+                    "div[data-popover=\"" + ref + "\"]");
+        }
     }
 
 }();
