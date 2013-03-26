@@ -333,7 +333,7 @@
             // This way, the cursor is placed at the end of the input text element
             if (newValue) {
                 this.inputElement.attr("value", newValue);
-                if (moveCursor) {
+                if (moveCursor && this.inputElement.is(":visible")) {
                     CUI.util.selectText(this.inputElement, newValue.length);
                 }
             }
