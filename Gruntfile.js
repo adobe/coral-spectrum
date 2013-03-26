@@ -126,6 +126,7 @@ module.exports = function(grunt) {
 //  grunt.loadNpmTasks('grunt-jsdoc');
   grunt.loadNpmTasks('grunt-mocha');
 //  grunt.loadNpmTasks('grunt-hub');
+  grunt.loadNpmTasks('grunt-zip');
 
   // Read in package.json
   var pkg = grunt.file.readJSON('package.json');
@@ -575,6 +576,14 @@ module.exports = function(grunt) {
       }
     },
 
+    'athena-icons': {
+      all: {
+        src: [
+          'athena-icons/*'
+        ],
+        dest: '<%= dirs.source %>/images/icons/'
+      }
+    },    
 
     icons: {
       all: {

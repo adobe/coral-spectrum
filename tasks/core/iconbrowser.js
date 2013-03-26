@@ -19,11 +19,20 @@
     
     return input;
   }
-  
+
   // Remove any chars that could break the CSS classname
   function sanitizeCSSClass(input) {
     return input.replace(badCSSCharsRE, '');
   }
+
+  // convert to array type, if necessary
+  function toArray(input) {
+    if (typeof(input) === 'string') {
+        return [input];
+    } else {
+        return input;
+    }
+  }  
 
   module.exports = function(grunt) {
     grunt.registerMultiTask('iconbrowser', 'This generates a JSON file that the icon browser will ingest.', function() {
@@ -65,5 +74,72 @@
     
       return true;
     });
+
+
+    grunt.registerMultiTask('athena-icons', 'This generates a folder with icons from athena.', function() {
+      
+      // Expand the list of files
+      var config = grunt.config();
+
+      // Process the destination name
+      var dest = grunt.template.process(this.data.dest, config);
+
+      var iconsource = grunt.option("is") || grunt.option("iconsource");
+      
+      if (iconsource){
+        grunt.log.writeln('searching for athena-icons in ' + iconsource);
+      } else {
+        grunt.log.write('REMARK: athena iconsource could not be found, reuse assets from repository.');
+        grunt.log.writeln();
+        //options.done(true);
+        this.async()
+        return false;
+      }
+
+      var metadataFilename = 'metadata.json';
+      var aliasPropertyName =  'athena:alias';
+      var assetExtension = '.svg';
+
+      // Get the list of all source files
+      var srcFiles = grunt.file.expand(this.data.src);
+
+      /* for each subfolder */
+      srcFiles.forEach(function(src,i) {
+
+        // get alias from metadata.json side-car file
+        var metadataJSON = grunt.file.readJSON(src + "/" + metadataFilename);
+        var alias = toArray(metadataJSON[aliasPropertyName]);
+      
+
+        // Get the asset in the asset folder
+        var assetFiles = grunt.file.expand(src+"/*" + assetExtension);
+
+        // for each asset
+        assetFiles.forEach(function(asset){
+
+          var assetName = asset.slice(asset.lastIndexOf('/')+1);
+          // get name , copy icon 1:1,             
+          grunt.file.copy(asset, dest + assetName);
+
+          // for each alias
+          alias.forEach(function(aliasname){
+            // copy asset to alias-name
+            var aliasDest = dest + aliasname + assetExtension;
+            grunt.file.copy(asset, aliasDest);
+
+          })
+          
+
+        })
+     
+      });
+  
+      grunt.log.ok('Icons created from athena ' + iconsource);
+      return true;
+
+    });
+    
+
+
   };
 }());
