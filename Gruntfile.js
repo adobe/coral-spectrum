@@ -576,11 +576,19 @@ module.exports = function(grunt) {
       }
     },
 
-    'athena-icons': {
+    athenaimport: {
+    },
+
+    unzip: {
+      catalog: {
+        src: '<%= athena.unzip.src %>',
+        dest: '<%= athena.unzip.dest %>'
+      }          
+    },
+
+    athenaconvert: {
       all: {
-        src: [
-          'athena-icons/*'
-        ],
+        src: '<%= athena.convert.src %>',
         dest: '<%= dirs.source %>/images/icons/'
       }
     },    
@@ -685,7 +693,15 @@ module.exports = function(grunt) {
       */
 
     }
+
   });
+
+  // Import and convert icons from athena-zip
+  grunt.task.registerTask('fromathena', [
+    'athenaimport',
+    'unzip:catalog',
+    'athenaconvert'
+  ]);
 
   // Partial build for development
   grunt.task.registerTask('partial', [
