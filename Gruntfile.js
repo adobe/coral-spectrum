@@ -581,15 +581,15 @@ module.exports = function(grunt) {
 
     unzip: {
       catalog: {
-        src: '<%= athena.unzip.src %>',
-        dest: '<%= athena.unzip.dest %>'
+        src: '<%= unzip.src %>',
+        dest: '<%= unzip.dest %>'
       }          
     },
 
     athenaconvert: {
-      all: {
-        src: '<%= athena.convert.src %>',
-        dest: '<%= dirs.source %>/images/icons/'
+      all:{
+        src: '<%= athenaconvert.src %>',
+        dest: '<%= dirs.source %>/images/icons/'       
       }
     },    
 

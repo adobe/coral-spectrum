@@ -22,15 +22,15 @@ module.exports = function(grunt) {
       if (grunt.file.isFile(iconsource)){
         grunt.log.ok('file found : ' + iconsource);
         //set config for "unzip" and "convert"
-        grunt.config.set('athena.unzip.src', iconsource);
-        grunt.config.set('athena.unzip.dest', tmpZipFolder);
-        grunt.config.set('athena.convert.src', tmpZipFolder + "/icons/*");
+        grunt.config.set('unzip.src', iconsource);
+        grunt.config.set('unzip.dest', tmpZipFolder);
+        grunt.config.set('athenaconvert.all.src', tmpZipFolder + "/icons/*");
         return true;
       }
       else {
         if (grunt.file.isDir(iconsource)){
           grunt.log.ok('directory found : ' + iconsource);
-          grunt.config.set('athena.convert.src', iconsource);
+          grunt.config.set('athenaconvert.all.src', iconsource);
           return true;        
         }
       } 
@@ -52,7 +52,7 @@ module.exports = function(grunt) {
 
 
     // Process the source name
-    var srcConfig = this.data.src;
+    var srcConfig = grunt.config('athenaconvert.all.src');
 
 
     // Process the destination name
