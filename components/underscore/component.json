@@ -1,9 +1,0 @@
-{
-  "name": "underscore",
-  "main": "index.js",
-  "version": "0.0.0",
-  "repository": {
-    "type": "asset",
-    "url": "https://raw.github.com/documentcloud/underscore/1.3.3/underscore-min.js"
-  }
-}
