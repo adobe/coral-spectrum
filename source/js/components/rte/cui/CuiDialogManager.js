@@ -22,7 +22,14 @@ CUI.rte.ui.cui.CuiDialogManager = new Class({
 
     extend: CUI.rte.ui.DialogManager,
 
+    editorKernel: null,
+
+    construct: function(editorKernel) {
+        this.editorKernel = editorKernel;
+    },
+
     create: function(dialogId, config) {
+        // TODO ... used by find/replace, for example
         return { };
     },
 
@@ -43,7 +50,7 @@ CUI.rte.ui.cui.CuiDialogManager = new Class({
     },
 
     createDialogHelper: function() {
-        return new CUI.rte.ui.cui.CuiDialogHelper();
+        return new CUI.rte.ui.cui.CuiDialogHelper(this.editorKernel);
     }
 
 });

@@ -74,7 +74,19 @@ CUI.rte.UIUtils = function() {
             tbType = tbType || "inline";
             return $container.find("div[data-type=\"" + tbType + "\"] > " +
                     "div[data-popover=\"" + ref + "\"]");
+        },
+
+        getDialog: function(ref, tbType, $container) {
+            tbType = tbType || "inline";
+            var $dialog = $container.find("div[data-type=\"" + tbType + "\"] > " +
+                    "div[data-rte-dialog=\"" + ref + "\"]");
+            if (($dialog.length === 0) && (tbType !== "global")) {
+                $dialog = $container.find("div[data-type=\"global\"] > " +
+                    "div[data-rte-dialog=\"" + ref + "\"]");
+            }
+            return $dialog;
         }
+
     }
 
 }();

@@ -124,7 +124,7 @@ CUI.rte.ui.DialogHelper = new Class({
 
 
     construct: function(dialogConfig, editorKernel) {
-        if (arguments.length == 1) {
+        if (arguments.length === 1) {
             // required for backwards compatibility
             editorKernel = dialogConfig;
             dialogConfig = undefined;
@@ -252,7 +252,6 @@ CUI.rte.ui.DialogHelper = new Class({
      * @private
      */
     createExtensibleDialog: function() {
-        var com = CUI.rte.Common;
         if (!this.defaultDialog) {
             throw new Error("Invalid dialogConfig; missing property defaultDialog");
         }

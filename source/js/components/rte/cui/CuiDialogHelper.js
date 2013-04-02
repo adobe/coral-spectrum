@@ -16,41 +16,71 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CUI.rte.ui.cui.CuiDialogHelper = new Class({
+(function($) {
 
-    toString: "CuiDialogHelper",
+    var TYPE_TO_DATATYPE = {
+        "rtelinkdialog": "link"
+    };
 
-    extend: CUI.rte.ui.DialogHelper,
+    CUI.rte.ui.cui.CuiDialogHelper = new Class({
 
-    /**
-     * @protected
-     * @ignore
-     */
-    instantiateDialog: function(dialogConfig) {
-        return { };
-    },
+        toString: "CuiDialogHelper",
 
-    createItem: function(type, name, label) {
-        return { };
-    },
+        extend: CUI.rte.ui.DialogHelper,
 
-    getItemType: function(item) {
-        return "unknown";
-    },
+        /**
+         * @protected
+         * @ignore
+         */
+        instantiateDialog: function(dialogConfig) {
+            var type = dialogConfig.type;
+            if (!TYPE_TO_DATATYPE.hasOwnProperty(type)) {
+                throw new Error("Unknown dialog type: " + type);
+            }
+            var dataType = TYPE_TO_DATATYPE[type];
+            var context = this.editorKernel.getEditContext();
+            var $editable = $(context.root);
+            var $container = CUI.rte.UIUtils.getUIContainer($editable);
+            var $dialog = CUI.rte.UIUtils.getDialog(dataType, undefined, $container);
+            return {
+                "config": dialogConfig,
+                "dataType": dataType,
+                "$editable": $editable,
+                "$container": $container,
+                "$dialog": $dialog,
+                "initializeEdit": function(editorKernel, cfg) {
+                    // TODO ...?
+                }
+            };
+        },
 
-    getItemName: function(item) {
-        if (!item.id) {
-            item.id = "id-" + new Date().getTime();
+        createItem: function(type, name, label) {
+            return { };
+        },
+
+        getItemType: function(item) {
+            return "unknown";
+        },
+
+        getItemName: function(item) {
+            if (!item.id) {
+                item.id = "id-" + new Date().getTime();
+            }
+            return item.id;
+        },
+
+        getItemValue: function(item) {
+            return item.value;
+        },
+
+        setItemValue: function(item, value) {
+            item.value = value;
+        },
+
+        calculateInitialPosition: function() {
+            // TODO how to handle? we'll have different initial positions each time the dialog is shown
         }
-        return item.id;
-    },
 
-    getItemValue: function(item) {
-        return item.value;
-    },
+    });
 
-    setItemValue: function(item, value) {
-        item.value = value;
-    }
-
-});
+})(window.jQuery);
