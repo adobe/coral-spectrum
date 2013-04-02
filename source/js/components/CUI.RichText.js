@@ -33,8 +33,8 @@
         _hidePopover: function() {
             if (this.editorKernel.toolbar) {
                 var tb = this.editorKernel.toolbar;
-                if (tb._hidePopover) {
-                    return tb._hidePopover();
+                if (tb.popover) {
+                    return tb.popover.hide();
                 }
             }
             return false;

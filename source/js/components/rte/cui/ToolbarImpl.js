@@ -258,7 +258,7 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
             case "event":
                 break;
             case "command":
-                this._hidePopover();
+                this.popover.hide();
                 break;
         }
         this._updateUI();
@@ -343,7 +343,7 @@ CUI.rte.ui.cui.ToolbarImpl = new Class({
     },
 
     finishEditing: function() {
-        this._hidePopover();
+        this.popover.hide();
         this.$toolbar.removeClass(CUI.rte.Theme.TOOLBAR_ACTIVE);
         $(window).off("scroll.rte");
         if (this.$clipParent) {
