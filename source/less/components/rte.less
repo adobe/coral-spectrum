@@ -133,11 +133,25 @@ div.edited {
 .rte-dialog {
 
     position: absolute;
+    background-color: #454545;
     top: 0;
     left: 0;
     z-index: 10001;
     .userSelect(none);
     -webkit-touch-callout: none;
+
+    div.rte-dialog-column-container {
+        display: table;
+        padding: 2*@px;
+    }
+
+    div.rte-dialog-column {
+        color: #ffffff;
+        font-weight: normal;
+        font-size: 14*@px;
+        display: table-cell;
+        vertical-align: middle;
+    }
 
 }
 
