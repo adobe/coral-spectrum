@@ -38,11 +38,15 @@ CUI.rte.ui.cui.CuiDialogManager = new Class({
     },
 
     show: function(dialog) {
-        // TODO ...?
+        var $dialog = dialog.$dialog;
+        var popover = this.editorKernel.toolbar.popover;
+        if ($dialog) {
+            popover.use($dialog, dialog.$trigger, dialog.$toolbar)
+        }
     },
 
     hide: function(dialog) {
-        // TODO ...?
+        dialog.$dialog.popover("hide");
     },
 
     alert: function(title, message, fn) {

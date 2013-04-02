@@ -95,7 +95,11 @@ CUI.rte.ui.cui.Popover = new Class({
         this.$popoverTrigger.addClass("triggered");
         this.$popoverTrigger.removeClass("white");
         this.$popoverTrigger.addClass("black");
-        this.$popover = CUI.rte.UIUtils.getPopover(ref, undefined, this.$container);
+        if (ref.jquery) {
+            this.$popover = ref;
+        } else {
+            this.$popover = CUI.rte.UIUtils.getPopover(ref, undefined, this.$container);
+        }
         if (this.$popover.length) {
             // calculate & set "arrow" position, using a temporary styleheet to override
             // :before pseudo class

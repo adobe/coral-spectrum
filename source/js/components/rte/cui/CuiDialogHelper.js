@@ -42,11 +42,16 @@
             var $editable = $(context.root);
             var $container = CUI.rte.UIUtils.getUIContainer($editable);
             var $dialog = CUI.rte.UIUtils.getDialog(dataType, undefined, $container);
+            var $toolbar = this.editorKernel.toolbar.$toolbar;
+            var $trigger = $toolbar.parent().find(
+                    "button[data-action=\"" + dialogConfig.parameters.command + "\"]");
             return {
                 "config": dialogConfig,
                 "dataType": dataType,
                 "$editable": $editable,
                 "$container": $container,
+                "$toolbar": $toolbar,
+                "$trigger": $trigger,
                 "$dialog": $dialog,
                 "initializeEdit": function(editorKernel, cfg) {
                     // TODO ...?
