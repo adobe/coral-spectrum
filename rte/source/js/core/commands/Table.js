@@ -710,11 +710,7 @@ CUI.rte.commands.Table = new Class({
                 com.removeAttribute(dom, "valign");
             }
         }
-        if (com.ua.isIE) {
-            dom.removeAttribute("className");
-        } else {
-            dom.removeAttribute("class");
-        }
+        com.removeAttribute(dom, "class");
         if (config.cellStyle && (config.cellStyle != noneConfig)) {
             com.addClass(dom, config.cellStyle);
         }
