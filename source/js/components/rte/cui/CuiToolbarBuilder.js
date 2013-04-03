@@ -228,7 +228,6 @@
             }
 
             // register additional/override existing icons, if available
-            var iconDefs = undefined;
             var uiSettings = this._getUISettings(options);
             if (uiSettings && uiSettings.hasOwnProperty("icons")) {
                 this._registerIcons(uiSettings["icons"])
