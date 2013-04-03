@@ -39,20 +39,6 @@
                 return null;
             }
 
-            function getPopover(id) {
-                if (!popoverDefs) {
-                    return undefined;
-                }
-                for (var def in popoverDefs) {
-                    if (popoverDefs.hasOwnProperty(def)) {
-                        if (popoverDefs[def].ref === id) {
-                            return popoverDefs[def];
-                        }
-                    }
-                }
-                return null;
-            }
-
             var com = CUI.rte.Common;
             var uiSettings = undefined;
             if (options && options.uiSettings && options.uiSettings.cui) {
@@ -86,11 +72,9 @@
                         if (itemToAdd && itemToAdd.length) {
                             if (itemToAdd.charAt(0) === "#") {
                                 // popover trigger
-                                var popover = getPopover(itemToAdd.substring(1));
                                 tbItems.push(triggerTpl({
                                     "ref": itemToAdd,
-                                    "icon": (popover && popover.icon
-                                            ? popover.icon : "text")
+                                    "icon": CUI.rte.UIUtils.getIconForCommand(itemToAdd)
                                 }));
                             } else {
                                 // regular item
@@ -224,7 +208,6 @@
             "popovers": {
                 "format": {
                     "ref": "format",
-                    "icon": "text",
                     "items": [
                         "format#bold",
                         "format#italic",
@@ -233,7 +216,6 @@
                 },
                 "justify": {
                     "ref": "justify",
-                    "icon": "text",
                     "items": [
                         "justify#justifyleft",
                         "justify#justifycenter",
@@ -242,7 +224,6 @@
                 },
                 "lists": {
                     "ref": "lists",
-                    "icon": "text",
                     "items": [
                         "lists#insertunorderedlist",
                         "lists#insertorderedlist",

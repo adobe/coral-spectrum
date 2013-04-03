@@ -37,11 +37,12 @@
         // Interface implementation ------------------------------------------------------------
 
         addToToolbar: function(toolbar) {
+            var commandRef = this.plugin.pluginId + "#" + this.id;
             toolbar.push({
-                "ref": this.plugin.pluginId + "#" + this.id,
+                "ref": commandRef,
                 "plugin": this.plugin.pluginId,
                 "command": this.id,
-                "icon": "text"  // TODO implement correctly
+                "icon": CUI.rte.UIUtils.getIconForCommand(commandRef) || "text"
             });
         },
 
