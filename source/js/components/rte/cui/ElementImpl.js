@@ -41,8 +41,7 @@
             toolbar.push({
                 "ref": commandRef,
                 "plugin": this.plugin.pluginId,
-                "command": this.id,
-                "icon": CUI.rte.UIUtils.getIconForCommand(commandRef) || "text"
+                "command": this.id
             });
         },
 

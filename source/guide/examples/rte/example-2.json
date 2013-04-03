@@ -84,10 +84,16 @@
                         ]
                     }
                 }
-            }
-        },
-        "fullScreen": {
+            },
+            "fullScreen": {
 
+            },
+            "icons": {
+                "justify": {
+                    "command": "#justify",
+                    "icon": "icon-textjustified"
+                }
+            }
         }
     }
 }

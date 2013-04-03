@@ -18,6 +18,28 @@
 
 (function($) {
 
+    var ICONS = {
+
+        // Popover triggers
+        "#format": "icon-text",
+        "#justify": "icon-textleft",
+        "#lists": "icon-textbulleted",
+
+        // Commands
+        "format#bold": "icon-textbold",
+        "format#italic": "icon-textitalic",
+        "format#underline": "icon-textunderline",
+        "justify#justifyleft": "icon-textleft",
+        "justify#justifycenter": "icon-textcenter",
+        "justify#justifyright": "icon-textright",
+        "lists#insertunorderedlist": "icon-textbulleted",
+        "lists#insertorderedlist": "icon-textnumbered",
+        "lists#outdent": "icon-textindentdecrease",
+        "lists#indent": "icon-textindentincrease",
+        "links#modifylink": "icon-link",
+        "links#unlink": "icon-linkoff"
+    };
+
     CUI.rte.ui.cui.CuiToolbarBuilder = new Class({
 
         toString: "CuiToolbarBuilder",
@@ -27,6 +49,41 @@
 
         // Helpers -------------------------------------------------------------------------
 
+        _getUISettings: function(options) {
+            var uiSettings = undefined;
+            if (options && options.uiSettings && options.uiSettings.cui) {
+                uiSettings = options.uiSettings.cui;
+            } else {
+                uiSettings = CUI.rte.ui.cui.DEFAULT_UI_SETTINGS;
+            }
+            return uiSettings;
+        },
+
+        _registerIcons: function(iconDefs) {
+            if (!iconDefs) {
+                return;
+            }
+            CUI.rte.Common.removeJcrData(iconDefs);
+            for (var node in iconDefs) {
+                if (iconDefs.hasOwnProperty(node)) {
+                    var icon = iconDefs[node];
+                    if (icon.command && icon.icon) {
+                        this.registerIcon(icon.command, icon.icon);
+                    }
+                }
+            }
+        },
+
+        registerIcon: function(commandRef, iconClass) {
+            ICONS[commandRef] = iconClass;
+        },
+
+        _getIconForCommand: function(commandRef) {
+            if (ICONS.hasOwnProperty(commandRef)) {
+                return ICONS[commandRef];
+            }
+            return undefined;
+        },
         _buildToolbar: function($editable, elements, options) {
 
             function getItem(id) {
@@ -40,12 +97,8 @@
             }
 
             var com = CUI.rte.Common;
-            var uiSettings = undefined;
-            if (options && options.uiSettings && options.uiSettings.cui) {
-                uiSettings = options.uiSettings.cui;
-            } else {
-                uiSettings = CUI.rte.ui.cui.DEFAULT_UI_SETTINGS;
-            }
+            var uiSettings = this._getUISettings(options);
+
             var items = [ ];
             for (var e = 0; e < elements.length; e++) {
                 elements[e].addToToolbar(items);
@@ -64,7 +117,10 @@
                     var tbItems = [ ];
                     var popovers = [ ];
                     var itemDefs = toolbar.toolbar;
-                    var popoverDefs = toolbar.popovers;
+                    if (!itemDefs) {
+                        continue;
+                    }
+
                     // toolbar
                     var itemCnt = itemDefs.length;
                     for (var i = 0; i < itemCnt; i++) {
@@ -74,18 +130,25 @@
                                 // popover trigger
                                 tbItems.push(triggerTpl({
                                     "ref": itemToAdd,
-                                    "icon": CUI.rte.UIUtils.getIconForCommand(itemToAdd)
+                                    "icon": this._getIconForCommand(itemToAdd)
                                 }));
                             } else {
                                 // regular item
                                 var element = getItem(itemToAdd);
                                 if (element) {
+                                    element.icon = element.icon ||
+                                            this._getIconForCommand(element.ref);
                                     tbItems.push(itemTpl(element));
                                 }
                             }
                         }
                     }
                     // popovers
+                    var popoverDefs = toolbar.popovers;
+                    if (!popoverDefs) {
+                        continue;
+                    }
+
                     com.removeJcrData(popoverDefs);
                     for (var p in popoverDefs) {
                         if (popoverDefs.hasOwnProperty(p)) {
@@ -96,6 +159,8 @@
                             for (var pi = 0; pi < poItemCnt; pi++) {
                                 var poItem = getItem(poItemDefs[pi]);
                                 if (poItem) {
+                                    poItem.icon = poItem.icon ||
+                                            this._getIconForCommand(poItem.ref);
                                     poItems.push(popoverItemTpl(poItem));
                                 }
                             }
@@ -133,6 +198,7 @@
             var elements = [ ];
             var elementMap = { };
             var groupCnt = this.groups.length;
+
             // create data model
             var hasMembers = false;
             for (var groupIndex = 0; groupIndex < groupCnt; groupIndex++) {
@@ -160,19 +226,27 @@
                     }
                 }
             }
+
+            // register additional/override existing icons, if available
+            var iconDefs = undefined;
+            var uiSettings = this._getUISettings(options);
+            if (uiSettings && uiSettings.hasOwnProperty("icons")) {
+                this._registerIcons(uiSettings["icons"])
+                delete uiSettings["icons"];
+            }
+
             // attach model to UI/create UI from model
             var $editable = options.$editable;
             var $toolbar = CUI.rte.UIUtils.getToolbar($editable);
             var elementCnt = elements.length;
-            var e;
-
             if (!$toolbar) {
                 // create new toolbar if none is present yet
                 this._buildToolbar($editable, elements, options);
             }
+
             // use existing/newly created toolbar
             var toolbar = new CUI.rte.ui.cui.ToolbarImpl(elementMap, $editable);
-            for (e = 0; e < elementCnt; e++) {
+            for (var e = 0; e < elementCnt; e++) {
                 elements[e].notifyToolbar(toolbar);
             }
             return toolbar;

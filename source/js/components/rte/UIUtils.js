@@ -18,28 +18,6 @@
 
 (function($) {
 
-    var ICONS = {
-
-        // Popover triggers
-        "#format": "icon-text",
-        "#justify": "icon-textleft",
-        "#lists": "icon-textbulleted",
-
-        // Commands
-        "format#bold": "icon-textbold",
-        "format#italic": "icon-textitalic",
-        "format#underline": "icon-textunderline",
-        "justify#justifyleft": "icon-textleft",
-        "justify#justifycenter": "icon-textcenter",
-        "justify#justifyright": "icon-textright",
-        "lists#insertunorderedlist": "icon-textbulleted",
-        "lists#insertorderedlist": "icon-textnumbered",
-        "lists#outdent": "icon-textindentdecrease",
-        "lists#indent": "icon-textindentincrease",
-        "links#modifylink": "icon-link",
-        "links#unlink": "icon-linkoff"
-    };
-
     CUI.rte.UIUtils = function() {
 
         return {
@@ -109,17 +87,6 @@
                         "div[data-rte-dialog=\"" + ref + "\"]");
                 }
                 return $dialog;
-            },
-
-            registerIcon: function(commandRef, iconClass) {
-                ICONS[commandRef] = iconClass;
-            },
-
-            getIconForCommand: function(commandRef) {
-                if (ICONS.hasOwnProperty(commandRef)) {
-                    return ICONS[commandRef];
-                }
-                return undefined;
             }
 
         }
