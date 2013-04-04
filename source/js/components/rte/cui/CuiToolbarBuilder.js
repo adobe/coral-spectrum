@@ -40,6 +40,12 @@
         "links#unlink": "icon-linkoff"
     };
 
+    var CLASSES = {
+        "#format": "multi-select",
+        "#justify": "single-select"
+    };
+
+
     CUI.rte.ui.cui.CuiToolbarBuilder = new Class({
 
         toString: "CuiToolbarBuilder",
@@ -84,6 +90,17 @@
             }
             return undefined;
         },
+
+        _getClassesForCommand: function(commandRef) {
+            if (CLASSES.hasOwnProperty(commandRef)) {
+                var classes = CLASSES[commandRef];
+                if (classes) {
+                    return classes;
+                }
+            }
+            return undefined;
+        },
+
         _buildToolbar: function($editable, elements, options) {
 
             function getItem(id) {
@@ -128,9 +145,12 @@
                         if (itemToAdd && itemToAdd.length) {
                             if (itemToAdd.charAt(0) === "#") {
                                 // popover trigger
+                                var addClasses = this._getClassesForCommand(itemToAdd);
+                                addClasses = (addClasses ? " " + addClasses : "");
                                 tbItems.push(triggerTpl({
                                     "ref": itemToAdd,
-                                    "icon": this._getIconForCommand(itemToAdd)
+                                    "icon": this._getIconForCommand(itemToAdd),
+                                    "addClasses": addClasses
                                 }));
                             } else {
                                 // regular item

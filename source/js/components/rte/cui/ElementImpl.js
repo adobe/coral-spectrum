@@ -91,7 +91,7 @@
             }
             var pm = this.toolbar.getPopoverManager();
             var $trigger = pm.getTriggerForElement(this.$ui);
-            if ($trigger.length) {
+            if ($trigger && $trigger.length) {
                 var elements = pm.getElementsForTrigger($trigger);
                 elements = (elements ? elements.elements : [ ]);
                 var selected = [ ];
