@@ -82,7 +82,6 @@
         },
 
         setSelected: function(isSelected, suppressEvent) {
-            var com = CUI.rte.Common;
             this._isSelected = isSelected;
             if (isSelected) {
                 this.$ui.addClass(CUI.rte.Theme.TOOLBARITEM_SELECTED_CLASS);
