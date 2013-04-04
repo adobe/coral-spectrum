@@ -103,7 +103,8 @@ CUI.rte.plugins.LinkPlugin = new Class({
                 },
                 "parameters": {
                     "linkRules": linkRules,
-                    "editorKernel": this.editorKernel
+                    "editorKernel": this.editorKernel,
+                    "command": this.pluginId + "#modifylink"
                 }
             };
             if (this.config.linkDialogConfig) {

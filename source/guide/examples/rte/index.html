@@ -35,7 +35,7 @@
             </nav>
 
             <div class="drawer">
-                <div class="badge">v1.2-SNAPSHOT</div>
+                <div class="badge">v1.4</div>
             </div>
 
         </header>
@@ -72,31 +72,58 @@
                     -->
                     <div class="rte-ui">
                         <!--
-                            data-type="inplace" defines the toolbar that is used in basic
+                            data-type="inline" defines the toolbar that is used in basic
                             editing mode; data-type="fullScreen" would define the toolbar
                             for full screen editing mode
                         -->
                         <div data-type="inline">
                             <div class="rte-toolbar">
-                                <button data-action="#format" tabindex="-1" class="item icon-text trigger small white"></button>
-                                <button data-action="#justify" tabindex="-1" class="item icon-graphtrendrounded trigger small white"></button>
-                                <button data-action="#lists" tabindex="-1" class="item icon-viewlist trigger small white"></button>
+                                <button data-action="#format" tabindex="-1" class="item icon-text trigger multi-select small white"></button>
+                                <button data-action="#justify" tabindex="-1" class="item icon-textleft single-select trigger small white"></button>
+                                <button data-action="#lists" tabindex="-1" class="item icon-textbulleted trigger small white"></button>
+                                <button data-action="links#modifylink" tabindex="-1" class="item icon-link small white"></button>
+                                <button data-action="links#unlink" tabindex="-1" class="item icon-linkoff small white"></button>
                             </div>
                             <div data-popover="format" class="popover rte-popover">
-                                <button data-action="format#bold" tabindex="-1" class="item bold disabled text">B</button>
-                                <button data-action="format#italic" tabindex="-1" class="item italic disabled text">i</button>
-                                <button data-action="format#underline" tabindex="-1" class="item underline disabled text">U</button>
+                                <button data-action="format#bold" tabindex="-1" class="item icon-textbold small white"></button>
+                                <button data-action="format#italic" tabindex="-1" class="item icon-textitalic small white"></button>
+                                <button data-action="format#underline" tabindex="-1" class="item icon-textunderline small white"></button>
                             </div>
                             <div data-popover="justify" class="popover rte-popover">
-                                <button data-action="justify#justifyleft" tabindex="-1" class="item disabled text">[</button>
-                                <button data-action="justify#justifycenter" tabindex="-1" class="item disabled text">-</button>
-                                <button data-action="justify#justifyright" tabindex="-1" class="item disabled text">]</button>
+                                <button data-action="justify#justifyleft" tabindex="-1" class="item icon-textleft small white"></button>
+                                <button data-action="justify#justifycenter" tabindex="-1" class="item icon-textcenter small white"></button>
+                                <button data-action="justify#justifyright" tabindex="-1" class="item icon-textright small white"></button>
                             </div>
                             <div data-popover="lists" class="popover rte-popover">
-                                <button data-action="lists#insertunorderedlist" tabindex="-1" class="item disabled text">&bull;</button>
-                                <button data-action="lists#insertorderedlist" tabindex="-1" class="item disabled text">1.</button>
-                                <button data-action="lists#outdent" tabindex="-1" class="item disabled text">&lt;&lt;</button>
-                                <button data-action="lists#indent" tabindex="-1" class="item disabled text">&gt;&gt;</button>
+                                <button data-action="lists#insertunorderedlist" tabindex="-1" class="item icon-textbulleted small white"></button>
+                                <button data-action="lists#insertorderedlist" tabindex="-1" class="item icon-textnumbered small white"></button>
+                                <button data-action="lists#outdent" tabindex="-1" class="item icon-textindentdecrease small white"></button>
+                                <button data-action="lists#indent" tabindex="-1" class="item icon-textindentincrease small white"></button>
+                            </div>
+                        </div>
+                        <div data-type="global">
+                            <div data-rte-dialog="link" class="popover rte-dialog">
+                                <div class="rte-dialog-column-container">
+                                    <div class="rte-dialog-column">
+                                        <select data-init="pathbrowser" data-placeholder="Link to...">
+                                            <option>/apps</option>
+                                            <option>/content</option>
+                                            <option>/etc</option>
+                                            <option>/libs</option>
+                                            <option>/tmp</option>
+                                            <option>/var</option>
+                                        </select>
+                                    </div>
+                                    <div class="rte-dialog-column">Open in new tab:</div>
+                                    <div class="rte-dialog-column"><label><input type="radio" name="newTab" value="yes" checked><span></span>Yes</label></div>
+                                    <div class="rte-dialog-column"><label><input type="radio" name="newTab" value="no" checked><span></span>No</label></div>
+                                    <div class="rte-dialog-column">
+                                        <button tabindex="-1" class="dialog-button icon-check small white"></button>
+                                    </div>
+                                    <div class="rte-dialog-column">
+                                        <button tabindex="-1" class="dialog-button icon-close small white"></button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

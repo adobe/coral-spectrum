@@ -96,6 +96,11 @@ CUI.rte.Theme = function() {
         TOOLBARITEM_SELECTED_CLASS: "selected",
 
         /**
+         * Prefix for icon classes
+         */
+        TOOLBARITEM_ICON_PREFIX: "icon-",
+
+        /**
          * Blank image path
          */
         BLANK_IMAGE: "../images/components/rte/blank.png"

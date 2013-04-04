@@ -311,6 +311,36 @@ div.rail {
 		        &, a {
                 	color: @rail-font-color;
                 }
+
+                &:hover {
+                    text-decoration: none;
+
+                    >[class^="icon-"],
+                    >[class*=" icon-"] {
+                        &.action {
+                            &,&:before {
+                                display: inline;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+
+                >[class^="icon-"],
+                >[class*=" icon-"] {
+                    &.action {
+                        float: right;
+                        margin-right: 18*@px;
+                        margin-top: 13*@px;
+                        display: none;
+
+                        &:before {
+                            color: @rail-font-color;
+                            display: none;
+                        }
+                    }
+                }
+
                 
                 &.active {
                     position: relative;
@@ -342,10 +372,6 @@ div.rail {
                             inset 0 @focus-glow-radius/2 @focus-glow-radius -@focus-glow-radius/2 fadeout(@rail-shadow-inset-color, 65%)
                         );
                     }
-                }
-                
-                &:hover {
-                    text-decoration: none;
                 }
                 
                 &.focus {
@@ -807,7 +833,7 @@ div.rail {
             // icon (chevron down)
             &:after {
                 background: none;
-                content: "\f025";
+                content: "\f038";
                 font-family: AdobeIcons;
                 position: absolute;
                 right: 16*@px;
