@@ -82,6 +82,7 @@
         },
 
         setSelected: function(isSelected, suppressEvent) {
+            var com = CUI.rte.Common;
             this._isSelected = isSelected;
             if (isSelected) {
                 this.$ui.addClass(CUI.rte.Theme.TOOLBARITEM_SELECTED_CLASS);
@@ -91,9 +92,44 @@
             var pm = this.toolbar.getPopoverManager();
             var $trigger = pm.getTriggerForElement(this.$ui);
             if ($trigger.length) {
-                // TODO determine selected items in element list
-                // TODO determine which algorithm to apply (by markup) or define CSS structure accordingly
-                // TODO apply classes
+                var elements = pm.getElementsForTrigger($trigger);
+                elements = (elements ? elements.elements : [ ]);
+                var selected = [ ];
+                var elementCnt = elements.length;
+                for (var e = 0; e < elementCnt; e++) {
+                    var $el = $(elements[e]);
+                    if ($el.hasClass(CUI.rte.Theme.TOOLBARITEM_SELECTED_CLASS)) {
+                        selected.push($el);
+                    }
+                }
+                if (selected.length > 0) {
+                    $trigger.addClass("items-selected");
+                } else {
+                    $trigger.removeClass("items-selected");
+                }
+                var baseIcon = $trigger.data("base-icon");
+                if (baseIcon) {
+                    var targetIcon = baseIcon;
+                    if (selected.length === 1) {
+                        var $sel = selected[0];
+                        var classes = com.parseCSS($sel[0]);
+                        for (var c = 0; c < classes.length; c++) {
+                            if (com.strStartsWith(classes[c],
+                                    CUI.rte.Theme.TOOLBARITEM_ICON_PREFIX)) {
+                                targetIcon = classes[c];
+                                break;
+                            }
+                        }
+                    }
+                    var currentIcon = $trigger.data("current-icon");
+                    if (currentIcon !== targetIcon) {
+                        if (currentIcon) {
+                            $trigger.removeClass(currentIcon);
+                        }
+                        $trigger.addClass(targetIcon);
+                        $trigger.data("current-icon", targetIcon);
+                    }
+                }
             }
         },
 
