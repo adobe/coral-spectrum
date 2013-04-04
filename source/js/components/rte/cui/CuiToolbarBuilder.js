@@ -91,12 +91,35 @@
             return undefined;
         },
 
+        _registerAllAdditionalClasses: function(clsDefs) {
+            var com = CUI.rte.Common;
+            if (!clsDefs) {
+                return;
+            }
+            com.removeJcrData(clsDefs);
+            for (var node in clsDefs) {
+                if (clsDefs.hasOwnProperty(node)) {
+                    var clsDef = clsDefs[node];
+                    if (clsDef.command && !com.isNull(clsDef.classes)) {
+                        this.registerAdditionalClasses(clsDef.command, clsDef.classes);
+                    }
+                }
+            }
+        },
+
+        /**
+         * @param {String} commandRef The command refence (#trigger for popup triggers;
+         *        plugin#command for active RTE buttons
+         * @param {String} cssClasses Additional CSS classes; space separated
+         */
+        registerAdditionalClasses: function(commandRef, cssClasses) {
+            CLASSES[commandRef] = cssClasses;
+        },
+
         _getClassesForCommand: function(commandRef) {
             if (CLASSES.hasOwnProperty(commandRef)) {
                 var classes = CLASSES[commandRef];
-                if (classes) {
-                    return classes;
-                }
+                return classes;
             }
             return undefined;
         },
@@ -250,8 +273,12 @@
             // register additional/override existing icons, if available
             var uiSettings = this._getUISettings(options);
             if (uiSettings && uiSettings.hasOwnProperty("icons")) {
-                this._registerIcons(uiSettings["icons"])
+                this._registerIcons(uiSettings["icons"]);
                 delete uiSettings["icons"];
+            }
+            if (uiSettings && uiSettings.hasOwnProperty("additionalClasses")) {
+                this._registerAllAdditionalClasses(uiSettings["additionalClasses"]);
+                delete uiSettings["additionalClasses"];
             }
 
             // attach model to UI/create UI from model
@@ -297,7 +324,8 @@
             "toolbar": [
                 "#format",
                 "#justify",
-                "#lists"
+                "#lists",
+                ""
             ],
             "popovers": {
                 "format": {
