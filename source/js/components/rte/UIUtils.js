@@ -24,7 +24,6 @@
 
             addStyleSheet: function(cssToAdd, doc) {
                 doc = doc || document;
-                var com = CUI.rte.Common;
                 if (!CUI.rte.Utils.isArray(cssToAdd)) {
                     cssToAdd = [ cssToAdd ];
                 }
@@ -104,6 +103,18 @@
                         "div[data-rte-dialog=\"" + ref + "\"]");
                 }
                 return $dialog;
+            },
+
+            determineIconClass: function(element) {
+                var com = CUI.rte.Common;
+                var classes = com.parseCSS(element.jquery ? element[0] : element);
+                for (var c = 0; c < classes.length; c++) {
+                    if (com.strStartsWith(classes[c],
+                            CUI.rte.Theme.TOOLBARITEM_ICON_PREFIX)) {
+                        return classes[c];
+                    }
+                }
+                return undefined;
             }
 
         }

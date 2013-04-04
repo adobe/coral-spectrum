@@ -111,15 +111,8 @@
                 if (baseIcon) {
                     var targetIcon = baseIcon;
                     if (selected.length === 1) {
-                        var $sel = selected[0];
-                        var classes = com.parseCSS($sel[0]);
-                        for (var c = 0; c < classes.length; c++) {
-                            if (com.strStartsWith(classes[c],
-                                    CUI.rte.Theme.TOOLBARITEM_ICON_PREFIX)) {
-                                targetIcon = classes[c];
-                                break;
-                            }
-                        }
+                        var selIcon = CUI.rte.UIUtils.determineIconClass(selected[0]);
+                        targetIcon = (selIcon ? selIcon : targetIcon);
                     }
                     var currentIcon = $trigger.data("current-icon");
                     if (currentIcon !== targetIcon) {

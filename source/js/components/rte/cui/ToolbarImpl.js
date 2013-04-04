@@ -287,6 +287,15 @@
                     "button[data-action^=\"#\"]", function(e) {
                         self.editorKernel.disableFocusHandling();
                     });
+            // initialize single selection triggers (that adapt the icon to the currently
+            // chosen child element)
+            var $singleSelectTriggers = this.$toolbar.find(".trigger.single-select");
+            $singleSelectTriggers.each(function() {
+                var icon = CUI.rte.UIUtils.determineIconClass(this);
+                var $this = $(this);
+                $this.data("base-icon", icon);
+                $this.data("current-icon", icon);
+            })
         },
 
         hide: function() {
