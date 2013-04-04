@@ -16,129 +16,133 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CUI.rte.ConfigUtils = function() {
+(function($) {
 
-    function getPluginDef(action) {
-        if (action) {
-            var sepPos = action.indexOf("#");
-            if (sepPos > 0) {
-                var plugin = action.substring(0, sepPos);
-                var feature = action.substring(sepPos + 1);
-                return {
-                    "plugin": plugin,
-                    "feature": feature
-                };
+    CUI.rte.ConfigUtils = function() {
+
+        function getPluginDef(action) {
+            if (action) {
+                var sepPos = action.indexOf("#");
+                if (sepPos > 0) {
+                    var plugin = action.substring(0, sepPos);
+                    var feature = action.substring(sepPos + 1);
+                    return {
+                        "plugin": plugin,
+                        "feature": feature
+                    };
+                }
             }
+            return null;
         }
-        return null;
-    }
 
-    return {
+        return {
 
-        createFeaturesFromToolbar: function($container, $toolbar) {
-            var featureDefs = [ ];
-            // first, analyze the toolbar
-            var $buttons = $toolbar.find("button.item");
-            $buttons.each(function() {
-                var pluginDef = getPluginDef($(this).data("action"));
-                if (pluginDef) {
-                    featureDefs.push(pluginDef);
-                }
-            });
-            // then, analyze popovers
-            var $popovers = $container.find("div.rte-popover button.item");
-            $popovers.each(function() {
-                var pluginDef = getPluginDef($(this).data("action"));
-                if (pluginDef) {
-                    featureDefs.push(pluginDef);
-                }
-            });
-            return featureDefs;
-        },
-
-        mergeConfigAndFeatures: function(config, features) {
-            if (!features || (features.length === 0)) {
-                return config;
-            }
-            var pluginConfig;
-            if (config.hasOwnProperty("rtePlugins")) {
-                pluginConfig = config["rtePlugins"];
-            } else {
-                pluginConfig = { };
-                config["rtePlugins"] = pluginConfig;
-            }
-            var featureCnt = features.length;
-            for (var f = 0; f < featureCnt; f++) {
-                var feature = features[f];
-                var pluginId = feature.plugin;
-                var featureId = feature.feature;
-                var cfg, plgFeature;
-                if (!pluginConfig.hasOwnProperty(pluginId)) {
-                    cfg = { };
-                    pluginConfig[pluginId] = cfg;
-                } else {
-                    cfg = pluginConfig[pluginId];
-                }
-                if (cfg.hasOwnProperty("features")) {
-                    plgFeature = cfg["features"];
-                    if (CUI.rte.Utils.isArray(plgFeature)) {
-                        plgFeature.push(featureId)
-                    } else {
-                        if (plgFeature !== "*") {
-                            plgFeature = [ featureId ];
-                            cfg["features"] = plgFeature;
-                        }
+            createFeaturesFromToolbar: function($container, $toolbar) {
+                var featureDefs = [ ];
+                // first, analyze the toolbar
+                var $buttons = $toolbar.find("button.item");
+                $buttons.each(function() {
+                    var pluginDef = getPluginDef($(this).data("action"));
+                    if (pluginDef) {
+                        featureDefs.push(pluginDef);
                     }
+                });
+                // then, analyze popovers
+                var $popovers = $container.find("div.rte-popover button.item");
+                $popovers.each(function() {
+                    var pluginDef = getPluginDef($(this).data("action"));
+                    if (pluginDef) {
+                        featureDefs.push(pluginDef);
+                    }
+                });
+                return featureDefs;
+            },
+
+            mergeConfigAndFeatures: function(config, features) {
+                if (!features || (features.length === 0)) {
+                    return config;
+                }
+                var pluginConfig;
+                if (config.hasOwnProperty("rtePlugins")) {
+                    pluginConfig = config["rtePlugins"];
                 } else {
-                    plgFeature = [ featureId ];
-                    cfg["features"] = plgFeature;
+                    pluginConfig = { };
+                    config["rtePlugins"] = pluginConfig;
                 }
-            }
-            return config;
-        },
-
-        loadConfigAndStartEditing: function(rte, $editable) {
-            var features;
-            var $container = CUI.rte.UIUtils.getUIContainer($editable);
-            var $toolbar = CUI.rte.UIUtils.getToolbar($editable);
-
-            function processConfig(config) {
-                config = CUI.rte.ConfigUtils.mergeConfigAndFeatures(config, features);
-                rte.start(config);
-            }
-
-            if ($toolbar && ($toolbar.length > 0)) {
-                features = CUI.rte.ConfigUtils.createFeaturesFromToolbar($container,
-                        $toolbar);
-            }
-            var config = { };
-            var configStr = $editable.data("config");
-            if (configStr) {
-                try {
-                    config = $.parseJSON(configStr);
-                } catch (e) {
-                    // use default config
-                }
-                processConfig(config);
-            } else {
-                var configPath = $editable.data("config-path");
-                if (configPath) {
-                    $.ajax({
-                        "url": configPath,
-                        "success": function(data) {
-                            processConfig(data);
-                        },
-                        "error": function() {
-                            processConfig({ });
+                var featureCnt = features.length;
+                for (var f = 0; f < featureCnt; f++) {
+                    var feature = features[f];
+                    var pluginId = feature.plugin;
+                    var featureId = feature.feature;
+                    var cfg, plgFeature;
+                    if (!pluginConfig.hasOwnProperty(pluginId)) {
+                        cfg = { };
+                        pluginConfig[pluginId] = cfg;
+                    } else {
+                        cfg = pluginConfig[pluginId];
+                    }
+                    if (cfg.hasOwnProperty("features")) {
+                        plgFeature = cfg["features"];
+                        if (CUI.rte.Utils.isArray(plgFeature)) {
+                            plgFeature.push(featureId)
+                        } else {
+                            if (plgFeature !== "*") {
+                                plgFeature = [ featureId ];
+                                cfg["features"] = plgFeature;
+                            }
                         }
-                    });
-                } else {
-                    processConfig(config);
+                    } else {
+                        plgFeature = [ featureId ];
+                        cfg["features"] = plgFeature;
+                    }
                 }
+                return config;
+            },
+
+            loadConfigAndStartEditing: function(rte, $editable) {
+                var features;
+                var $container = CUI.rte.UIUtils.getUIContainer($editable);
+                var $toolbar = CUI.rte.UIUtils.getToolbar($editable);
+
+                function processConfig(config) {
+                    config = CUI.rte.ConfigUtils.mergeConfigAndFeatures(config, features);
+                    rte.start(config);
+                }
+
+                if ($toolbar && ($toolbar.length > 0)) {
+                    features = CUI.rte.ConfigUtils.createFeaturesFromToolbar($container,
+                            $toolbar);
+                }
+                var config = { };
+                var configStr = $editable.data("config");
+                if (configStr) {
+                    try {
+                        config = $.parseJSON(configStr);
+                    } catch (e) {
+                        // use default config
+                    }
+                    processConfig(config);
+                } else {
+                    var configPath = $editable.data("config-path");
+                    if (configPath) {
+                        $.ajax({
+                            "url": configPath,
+                            "success": function(data) {
+                                processConfig(data);
+                            },
+                            "error": function() {
+                                processConfig({ });
+                            }
+                        });
+                    } else {
+                        processConfig(config);
+                    }
+                }
+
             }
 
-        }
+        };
 
-    };
+    }();
 
-}();
+})(window.jQuery);

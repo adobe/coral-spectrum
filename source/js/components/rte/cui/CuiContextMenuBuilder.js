@@ -16,40 +16,44 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CUI.rte.ui.cui.CuiContextMenuBuilder = new Class({
+(function($) {
 
-    toString: "CuiContextMenuBuilder",
+    CUI.rte.ui.cui.CuiContextMenuBuilder = new Class({
 
-    extend: CUI.rte.ui.ContextMenuBuilder,
+        toString: "CuiContextMenuBuilder",
+
+        extend: CUI.rte.ui.ContextMenuBuilder,
 
 
-    construct: function(editorKernel) {
-        // TODO ...?
-    },
+        construct: function(editorKernel) {
+            // TODO ...?
+        },
 
-    build: function(selectionContext, context) {
-        // TODO ...?
-        return { };
-    },
+        build: function(selectionContext, context) {
+            // TODO ...?
+            return { };
+        },
 
-    createItem: function(config) {
-        return new CUI.rte.ui.stub.CmItemImpl(config);
-    },
+        createItem: function(config) {
+            return new CUI.rte.ui.stub.CmItemImpl(config);
+        },
 
-    createSeparator: function() {
-        return new CUI.rte.ui.stub.CmSeparatorImpl();
-    },
+        createSeparator: function() {
+            return new CUI.rte.ui.stub.CmSeparatorImpl();
+        },
 
-    showAt: function(x, y) {
-        // TODO ...?
-    },
+        showAt: function(x, y) {
+            // TODO ...?
+        },
 
-    hideAll: function() {
-        // TODO ...?
-    },
+        hideAll: function() {
+            // TODO ...?
+        },
 
-    isVisible: function() {
-        return false;
-    }
+        isVisible: function() {
+            return false;
+        }
 
-});
+    });
+
+})(window.jQuery);

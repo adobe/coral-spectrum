@@ -115,8 +115,9 @@
                 if (!suppressEvent) this.el.trigger("invalid");
                 return false;
             }
-
-            this.el.removeAttr("aria-invalid");
+            
+            this.hideError();
+            
             return true;
         },
 
@@ -127,9 +128,18 @@
 
         showError: function() {
             if (!this.customMessage && !this.message) return;
-
-            // TODO Visually show the message given by this.validationMessage
-            this.el.attr("aria-invalid", "true");
+            
+            this.registry.validators(this.el).every(function(v) {
+                v.show(this.el, this.validationMessage);
+                return false; // i.e. only run the first one
+            }, this);
+        },
+        
+        hideError: function() {
+            this.registry.validators(this.el).every(function(v) {
+                v.hide(this.el);
+                return false; // i.e. only run the first one
+            }, this);
         }
     };
 
@@ -207,6 +217,8 @@
              * @param {Object} validator
              * @param {String|Function} validator.selector Only the element satisfying the selector will be validated using this validator. It will be passed to <code>jQuery.fn.is</code>.
              * @param {Function} validator.validate The actual validation function. It must return a string of error message if the element fails.
+             * @param {Function} validator.show The function to show the error.
+             * @param {Function} validator.hide The function to hide the error.
              *
              * @example
 jQuery.validator.register({
@@ -215,6 +227,10 @@ jQuery.validator.register({
         if (el.attr("aria-required") === "true" && el.val().length === 0) {
             return "This field is required";
         }
+    },
+    show: function(el, message) {
+    },
+    hide: function(el) {
     }
 });
              */
@@ -271,6 +287,8 @@ jQuery.validator.register({
     // This way no other event handlers are executed
     document.addEventListener("submit", function(e) {
         var form = $(e.target);
+        
+        // TODO TBD if we want to do validation only when there is a certain class
 
         if (!form.is("form") ||
             form.prop("noValidate") === true ||

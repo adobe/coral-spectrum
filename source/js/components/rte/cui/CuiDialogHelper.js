@@ -45,18 +45,15 @@
             var $toolbar = this.editorKernel.toolbar.$toolbar;
             var $trigger = $toolbar.parent().find(
                     "button[data-action=\"" + dialogConfig.parameters.command + "\"]");
-            return {
+            return new CUI.rte.ui.cui.DialogImpl({
                 "config": dialogConfig,
                 "dataType": dataType,
                 "$editable": $editable,
                 "$container": $container,
                 "$toolbar": $toolbar,
                 "$trigger": $trigger,
-                "$dialog": $dialog,
-                "initializeEdit": function(editorKernel, cfg) {
-                    // TODO ...?
-                }
-            };
+                "$dialog": $dialog
+            });
         },
 
         createItem: function(type, name, label) {
@@ -83,7 +80,7 @@
         },
 
         calculateInitialPosition: function() {
-            // TODO how to handle? we'll have different initial positions each time the dialog is shown
+            // not required here - the position is managed by CUI.rte.ui.cui.PopupManager
         }
 
     });
