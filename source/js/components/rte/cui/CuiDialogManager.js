@@ -16,45 +16,49 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CUI.rte.ui.cui.CuiDialogManager = new Class({
+(function($) {
 
-    toString: "CuiDialogManager",
+    CUI.rte.ui.cui.CuiDialogManager = new Class({
 
-    extend: CUI.rte.ui.DialogManager,
+        toString: "CuiDialogManager",
 
-    editorKernel: null,
+        extend: CUI.rte.ui.DialogManager,
 
-    construct: function(editorKernel) {
-        this.editorKernel = editorKernel;
-    },
+        editorKernel: null,
 
-    create: function(dialogId, config) {
-        // TODO ... used by find/replace, for example
-        return { };
-    },
+        construct: function(editorKernel) {
+            this.editorKernel = editorKernel;
+        },
 
-    mustRecreate: function(dialog) {
-        return false;
-    },
+        create: function(dialogId, config) {
+            // TODO ... used by find/replace, for example
+            return { };
+        },
 
-    show: function(dialog) {
-        var $dialog = dialog.$dialog;
-        var popover = this.editorKernel.toolbar.popover;
-        if ($dialog) {
-            popover.use($dialog, dialog.$trigger, dialog.$toolbar)
+        mustRecreate: function(dialog) {
+            return false;
+        },
+
+        show: function(dialog) {
+            var $dialog = dialog.$dialog;
+            var popover = this.editorKernel.toolbar.popover;
+            if ($dialog) {
+                popover.use($dialog, dialog.$trigger, dialog.$toolbar)
+            }
+        },
+
+        hide: function(dialog) {
+            dialog.$dialog.popover("hide");
+        },
+
+        alert: function(title, message, fn) {
+            // TODO ...?
+        },
+
+        createDialogHelper: function() {
+            return new CUI.rte.ui.cui.CuiDialogHelper(this.editorKernel);
         }
-    },
 
-    hide: function(dialog) {
-        dialog.$dialog.popover("hide");
-    },
+    });
 
-    alert: function(title, message, fn) {
-        // TODO ...?
-    },
-
-    createDialogHelper: function() {
-        return new CUI.rte.ui.cui.CuiDialogHelper(this.editorKernel);
-    }
-
-});
+})(window.jQuery);

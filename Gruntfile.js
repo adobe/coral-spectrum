@@ -63,6 +63,7 @@ module.exports = function(grunt) {
       'components/rte/cui/CuiContextMenuBuilder.js',
       'components/rte/cui/CuiDialogManager.js',
       'components/rte/cui/CuiDialogHelper.js',
+      'components/rte/cui/DialogImpl.js',
 
       'components/CUI.RichText.js',
 

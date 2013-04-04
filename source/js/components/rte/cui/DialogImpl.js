@@ -18,19 +18,32 @@
 
 (function($) {
 
+    CUI.rte.ui.cui.DialogImpl = new Class({
 
-    /**
-     * @class CUI.rte.ui.ext.CmSeparatorImpl
-     * @private
-     */
-    CUI.rte.ui.cui.CmSeparatorImpl = new Class({
+        config: null,
 
-        toString: "CmSeparatorImpl",
+        dataType: null,
 
-        extend: CUI.rte.ui.CmSeparator,
+        $editable: null,
 
-        build: function(items) {
-            // TODO implement
+        $container: null,
+
+        $toolbar: null,
+
+        $trigger: null,
+
+        $dialog: null,
+
+
+        construct: function(config) {
+            CUI.rte.Utils.apply(this, config);
+        },
+
+        initializeEdit: function(editorKernel, cfg) {
+            this.$dialog.on("click.rte-dialog", "button[data-type=\"apply\"]",
+                    function(e) {
+                        // console.log("Apply");
+                    });
         }
 
     });
