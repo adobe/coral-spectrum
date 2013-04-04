@@ -88,6 +88,13 @@
             } else {
                 this.$ui.removeClass(CUI.rte.Theme.TOOLBARITEM_SELECTED_CLASS);
             }
+            var pm = this.toolbar.getPopoverManager();
+            var $trigger = pm.getTriggerForElement(this.$ui);
+            if ($trigger.length) {
+                // TODO determine selected items in element list
+                // TODO determine which algorithm to apply (by markup) or define CSS structure accordingly
+                // TODO apply classes
+            }
         },
 
         isSelected: function() {

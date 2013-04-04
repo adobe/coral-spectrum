@@ -248,6 +248,7 @@
             for (var e = 0; e < elementCnt; e++) {
                 elements[e].notifyToolbar(toolbar);
             }
+            toolbar.createPopoverTriggerToElementMapping();
             return toolbar;
         },
 

@@ -53,7 +53,7 @@ module.exports = function(grunt) {
       'components/rte/ConfigUtils.js',
       'components/rte/cui/ToolkitImpl.js',
       'components/rte/cui/ToolbarImpl.js',
-      'components/rte/cui/Popover.js',
+      'components/rte/cui/PopoverManager.js',
       'components/rte/cui/ElementImpl.js',
       'components/rte/cui/ParaFormatterImpl.js',
       'components/rte/cui/StyleSelectorImpl.js',

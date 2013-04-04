@@ -63,19 +63,36 @@
                 return $(editableDom);
             },
 
-            getToolbar: function($editable, tbType) {
+            getToolbar: function($editableOrContainer, tbType) {
                 tbType = tbType || "inline";
-                var $container = CUI.rte.UIUtils.getUIContainer($editable);
-                if (!$container) {
+                var $container = $editableOrContainer.hasClass("rte-ui") ?
+                        $editableOrContainer :
+                        CUI.rte.UIUtils.getUIContainer($editableOrContainer);
+                if (!$container || !$container.length) {
                     return null;
                 }
-                return $container.find("div[data-type=\"" + tbType + "\"] > div.rte-toolbar");
+                return $container.find(
+                        "div[data-type=\"" + tbType + "\"] > div.rte-toolbar");
             },
 
             getPopover: function(ref, tbType, $container) {
                 tbType = tbType || "inline";
                 return $container.find("div[data-type=\"" + tbType + "\"] > " +
                         "div[data-popover=\"" + ref + "\"]");
+            },
+
+            getPopoverTrigger: function(ref, tbType, $containerOrToolbar) {
+                tbType = tbType || "inline";
+                var $toolbar = ($containerOrToolbar.hasClass("rte-toolbar") ?
+                        $containerOrToolbar :
+                        CUI.rte.UIUtils.getToolbar($containerOrToolbar, tbType));
+                return $toolbar.find("button[data-action=\"" + ref + "\"]")
+            },
+
+            getElement: function(ref, tbType, $container) {
+                tbType = tbType || "inline";
+                return $container.find("div[data-type=\"" + tbType + "\"] " +
+                        "button[data-action=\"" + ref + "\"]");
             },
 
             getDialog: function(ref, tbType, $container) {

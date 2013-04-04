@@ -39,6 +39,9 @@
 
         $clipParent: null,
 
+        /**
+         * @type CUI.rte.ui.cui.PopoverManager
+         */
         popover: null,
 
         preferredToolbarPos: null,
@@ -304,12 +307,13 @@
             return this.$container;
         },
 
-        construct: function(elementMap, $editable) {
+        construct: function(elementMap, $editable, tbType) {
             this.elementMap = elementMap;
             this.$editable = $editable;
+            this.tbType = (tbType || "inline");
             this.$container = CUI.rte.UIUtils.getUIContainer(this.$editable);
-            this.$toolbar = CUI.rte.UIUtils.getToolbar(this.$editable);
-            this.popover = new CUI.rte.ui.cui.Popover(this.$container);
+            this.$toolbar = CUI.rte.UIUtils.getToolbar(this.$editable, tbType);
+            this.popover = new CUI.rte.ui.cui.PopoverManager(this.$container, tbType);
         },
 
         getItem: function(itemId) {
@@ -318,6 +322,28 @@
 
         getHeight: function() {
             return 0;
+        },
+
+        getPopoverManager: function() {
+            return this.popover;
+        },
+
+        createPopoverTriggerToElementMapping: function() {
+            for (var id in this.elementMap) {
+                if (this.elementMap.hasOwnProperty(id)) {
+                    var elementDef = this.elementMap[id].element;
+                    var action = elementDef.plugin.pluginId + "#" + elementDef.id;
+                    var $element = CUI.rte.UIUtils.getElement(action, this.tbType,
+                            this.$container);
+                    var $popover = $element.parent(".rte-popover");
+                    if ($popover.length) {
+                        var popoverRef = "#" + $popover.data("popover");
+                        var $trigger = CUI.rte.UIUtils.getPopoverTrigger(popoverRef,
+                                this.tbType, this.$toolbar);
+                        this.popover.addTriggerToElement($trigger, $element);
+                    }
+                }
+            }
         },
 
         startEditing: function(editorKernel) {

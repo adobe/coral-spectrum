@@ -16,7 +16,7 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CUI.rte.ui.cui.Popover = new Class({
+CUI.rte.ui.cui.PopoverManager = new Class({
 
     toString: "ToolbarImpl",
 
@@ -26,11 +26,17 @@ CUI.rte.ui.cui.Popover = new Class({
 
     $popoverTrigger: null,
 
+    triggerToElements: null,
 
-    construct: function($container) {
+    tbType: null,
+
+
+    construct: function($container, tbType) {
         this.$popover = null;
         this.$popoverTrigger = null;
         this.$container = $container;
+        this.triggerToElements = [ ];
+        this.tbType = tbType;
     },
 
     /**
@@ -82,6 +88,50 @@ CUI.rte.ui.cui.Popover = new Class({
         };
     },
 
+    addTriggerToElement: function($trigger, $element) {
+        var trigger = $trigger[0];
+        var element = $element[0];
+        var triggerElements = this.getElementsForTrigger($trigger);
+        if (!triggerElements) {
+            triggerElements = {
+                "trigger": trigger,
+                "elements": [ ]
+            };
+            this.triggerToElements.push(triggerElements);
+        }
+        var elements = triggerElements.elements;
+        if (!CUI.rte.Common.arrayContains(elements, element)) {
+            elements.push(element);
+        }
+    },
+
+    getElementsForTrigger: function($trigger) {
+        var trigger = $trigger[0];
+        var triggerCnt = this.triggerToElements.length;
+        for (var t = 0; t < triggerCnt; t++) {
+            if (this.triggerToElements[t].trigger === trigger) {
+                return this.triggerToElements[t];
+            }
+        }
+        return undefined;
+    },
+
+    getTriggerForElement: function($element) {
+        var element = $element[0];
+        var triggerCnt = this.triggerToElements.length;
+        for (var t = 0; t < triggerCnt; t++) {
+            var triggerElements = this.triggerToElements[t];
+            var elements = triggerElements.elements;
+            var elementCnt = elements.length;
+            for (var e = 0; e < elementCnt; e++) {
+                if (elements[e] === element) {
+                    return $(triggerElements.trigger);
+                }
+            }
+        }
+        return undefined;
+    },
+
     isShown: function() {
         return !!this.$popover;
     },
@@ -98,7 +148,7 @@ CUI.rte.ui.cui.Popover = new Class({
         if (ref.jquery) {
             this.$popover = ref;
         } else {
-            this.$popover = CUI.rte.UIUtils.getPopover(ref, undefined, this.$container);
+            this.$popover = CUI.rte.UIUtils.getPopover(ref, this.tbType, this.$container);
         }
         if (this.$popover.length) {
             // calculate & set "arrow" position, using a temporary styleheet to override
