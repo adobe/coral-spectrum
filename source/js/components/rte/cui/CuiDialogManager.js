@@ -40,15 +40,11 @@
         },
 
         show: function(dialog) {
-            var $dialog = dialog.$dialog;
-            var popover = this.editorKernel.toolbar.popover;
-            if ($dialog) {
-                popover.use($dialog, dialog.$trigger, dialog.$toolbar)
-            }
+            dialog.show();
         },
 
         hide: function(dialog) {
-            dialog.$dialog.popover("hide");
+            dialog.hide();
         },
 
         alert: function(title, message, fn) {

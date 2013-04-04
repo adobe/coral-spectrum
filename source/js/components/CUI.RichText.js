@@ -103,7 +103,8 @@
                 // this is the case on mobile devices if the on-screen keyboard gets
                 // hidden
                 CUI.rte.Utils.defer(function() {
-                    if (!self.isTemporaryFocusChange && self.isActive) {
+                    if (!self.isTemporaryFocusChange && self.isActive
+                            && !self.editorKernel.isLocked()) {
                         self.finish();
                     }
                     self.isTemporaryFocusChange = false;

@@ -80,7 +80,7 @@
         },
 
         calculateInitialPosition: function() {
-            // TODO how to handle? we'll have different initial positions each time the dialog is shown
+            // not required here - the position is managed by CUI.rte.ui.cui.PopupManager
         }
 
     });
