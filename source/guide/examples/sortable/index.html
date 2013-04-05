@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Draggable list examples</title>
+
+        <link rel="stylesheet" href="../../css/cui.css">
+ 
+        <script src="../../js/libs/handlebars.js"></script>
+        <script src="../../js/libs/moment.js"></script>
+        <script src="../../js/libs/jquery.js"></script>
+        <script src="../../js/libs/toe.js"></script>
+        <script src="../../js/libs/jquery-fingerpointer.js"></script>
+
+        <script src="../../js/CUI.js"></script>
+        
+    </head>
+    <body>
+
+        <section>
+        <h1>Draggable &amp; Sortable lists</h1>
+
+        <div style="width: 40%; padding-right: 10%; float: left">
+          <div class="dropzone">
+            <ul class="draggable" data-init="draggable-list" data-allow="drag drop reorder" data-closeable="true">
+            <li>Item 1</li>
+            <li>Item 2</li>
+            </ul>
+            <p>Drop here!</p>
+          </div>
+        </div>
+        <div style="width: 40%; padding-right: 10%; float: left">
+          <div class="dropzone">
+            <ul class="draggable" data-init="draggable-list" data-allow="reorder drag drop">
+            </ul>
+            <p>Drop here!</p>
+          </div>
+          <br>
+          <ul class="draggable" data-init="draggable-list" data-allow="reorder drop" data-closeable="true">
+            <li>You can not drag from this list</li>
+          </ul>
+          <br>
+          <ul class="draggable" data-init="draggable-list" data-allow="reorder" data-closeable="true">
+            <li>You can not drop into this list</li>
+            <li>but you may reorder the items</li>
+          </ul>
+        </div>
+        
+        </section>
+        <script type="text/javascript">
+          $("ul").on("reordered", function(event) {
+            console.log("Catched REORDER event: Moved ", event.item, " from", event.oldIndex, "to", event.newIndex);    
+          });
+          $("ul").on("inserted", function(event) {
+            console.log("Catched INSERT event: Moved ", event.item, " from", event.oldIndex, "to", event.newIndex);    
+          });
+          $("ul").on("removed", function(event) {
+            console.log("Catched REMOVE event: Removed ", event.item, " at ", event.index);    
+          });          
+        </script>     
+    </body>
+</html>

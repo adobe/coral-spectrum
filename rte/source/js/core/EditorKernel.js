@@ -521,7 +521,8 @@ CUI.rte.EditorKernel = new Class({
     },
 
     /**
-     * Unlocks the editor, for example when a dialog is hidden
+     * Unlocks the editor, for example when a dialog (that has locked the editor) is hidden
+     * again.
      */
     unlock: function() {
         this.lockCount--;
