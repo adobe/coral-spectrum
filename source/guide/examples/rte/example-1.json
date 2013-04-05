@@ -1,16 +1,19 @@
 {
-    "rtePlugins":{
-        "paraformat":{
-            "features":"*"
+    "rtePlugins": {
+        "paraformat": {
+            "features": "*"
         },
-        "styles":{
-            "features":"*"
+        "styles": {
+            "features": "*"
         },
-        "table":{
-            "features":"*"
+        "table": {
+            "features": "*"
+        },
+        "lists": {
+            "features": "*"
         },
         "undo":{
-            "features":"*"
+            "features": "*"
         }
     }
 }

@@ -16,34 +16,45 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CUI.rte.ui.cui.CuiDialogManager = new Class({
+(function($) {
 
-    toString: "CuiDialogManager",
+    CUI.rte.ui.cui.CuiDialogManager = new Class({
 
-    extend: CUI.rte.ui.DialogManager,
+        toString: "CuiDialogManager",
 
-    create: function(dialogId, config) {
-        return { };
-    },
+        extend: CUI.rte.ui.DialogManager,
 
-    mustRecreate: function(dialog) {
-        return false;
-    },
+        editorKernel: null,
 
-    show: function(dialog) {
-        // TODO ...?
-    },
+        construct: function(editorKernel) {
+            this.editorKernel = editorKernel;
+        },
 
-    hide: function(dialog) {
-        // TODO ...?
-    },
+        create: function(dialogId, config) {
+            // TODO ... used by find/replace, for example
+            return { };
+        },
 
-    alert: function(title, message, fn) {
-        // TODO ...?
-    },
+        mustRecreate: function(dialog) {
+            return false;
+        },
 
-    createDialogHelper: function() {
-        return new CUI.rte.ui.cui.CuiDialogHelper();
-    }
+        show: function(dialog) {
+            dialog.show();
+        },
 
-});
+        hide: function(dialog) {
+            dialog.hide();
+        },
+
+        alert: function(title, message, fn) {
+            // TODO ...?
+        },
+
+        createDialogHelper: function() {
+            return new CUI.rte.ui.cui.CuiDialogHelper(this.editorKernel);
+        }
+
+    });
+
+})(window.jQuery);

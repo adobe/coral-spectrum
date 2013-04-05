@@ -54,6 +54,7 @@ module.exports = function(grunt) {
       'components/rte/ConfigUtils.js',
       'components/rte/cui/ToolkitImpl.js',
       'components/rte/cui/ToolbarImpl.js',
+      'components/rte/cui/PopoverManager.js',
       'components/rte/cui/ElementImpl.js',
       'components/rte/cui/ParaFormatterImpl.js',
       'components/rte/cui/StyleSelectorImpl.js',
@@ -63,6 +64,7 @@ module.exports = function(grunt) {
       'components/rte/cui/CuiContextMenuBuilder.js',
       'components/rte/cui/CuiDialogManager.js',
       'components/rte/cui/CuiDialogHelper.js',
+      'components/rte/cui/DialogImpl.js',
 
       'components/CUI.RichText.js',
 

@@ -33,8 +33,8 @@
         _hidePopover: function() {
             if (this.editorKernel.toolbar) {
                 var tb = this.editorKernel.toolbar;
-                if (tb._hidePopover) {
-                    return tb._hidePopover();
+                if (tb.popover) {
+                    return tb.popover.hide();
                 }
             }
             return false;
@@ -103,7 +103,8 @@
                 // this is the case on mobile devices if the on-screen keyboard gets
                 // hidden
                 CUI.rte.Utils.defer(function() {
-                    if (!self.isTemporaryFocusChange && self.isActive) {
+                    if (!self.isTemporaryFocusChange && self.isActive
+                            && !self.editorKernel.isLocked()) {
                         self.finish();
                     }
                     self.isTemporaryFocusChange = false;

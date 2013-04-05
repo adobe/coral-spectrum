@@ -16,65 +16,109 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CUI.rte.UIUtils = function() {
+(function($) {
 
-    return {
+    CUI.rte.UIUtils = function() {
 
-        addStyleSheet: function(cssToAdd, doc) {
-            doc = doc || document;
-            var com = CUI.rte.Common;
-            if (!CUI.rte.Utils.isArray(cssToAdd)) {
-                cssToAdd = [ cssToAdd ];
-            }
-            var headEl = doc.getElementsByTagName("head")[0];
-            var styleSheet = doc.createElement("style");
-            styleSheet.type = 'text/css';
-            headEl.appendChild(styleSheet);
-            var cssText = "";
-            var cssCnt = cssToAdd.length;
-            for (var c = 0; c < cssCnt; c++) {
-                var css = cssToAdd[c];
-                cssText += css[".name"] + " {\n";
-                for (var key in css) {
-                    if (css.hasOwnProperty(key) && (key !== ".name")) {
-                        cssText += "    " + key + ": " + css[key] + ";\n";
+        return {
+
+            addStyleSheet: function(cssToAdd, doc) {
+                doc = doc || document;
+                if (!CUI.rte.Utils.isArray(cssToAdd)) {
+                    cssToAdd = [ cssToAdd ];
+                }
+                var headEl = doc.getElementsByTagName("head")[0];
+                var styleSheet = doc.createElement("style");
+                styleSheet.type = 'text/css';
+                headEl.appendChild(styleSheet);
+                var cssText = "";
+                var cssCnt = cssToAdd.length;
+                for (var c = 0; c < cssCnt; c++) {
+                    var css = cssToAdd[c];
+                    cssText += css[".name"] + " {\n";
+                    for (var key in css) {
+                        if (css.hasOwnProperty(key) && (key !== ".name")) {
+                            cssText += "    " + key + ": " + css[key] + ";\n";
+                        }
+                    }
+                    cssText += "}\n\n";
+                }
+                styleSheet.innerHTML = cssText;
+                return styleSheet;
+            },
+
+            removeStyleSheet: function(styleSheet) {
+                styleSheet.parentNode.removeChild(styleSheet);
+            },
+
+            getUIContainer: function($editable) {
+                var editableDom = $editable[0].previousSibling;
+                while (editableDom && (editableDom.nodeType !== 1)) {
+                    editableDom = editableDom.previousSibling;
+                }
+                if (!editableDom || !CUI.rte.Common.hasCSS(editableDom, "rte-ui")) {
+                    return null;
+                }
+                return $(editableDom);
+            },
+
+            getToolbar: function($editableOrContainer, tbType) {
+                tbType = tbType || "inline";
+                var $container = $editableOrContainer.hasClass("rte-ui") ?
+                        $editableOrContainer :
+                        CUI.rte.UIUtils.getUIContainer($editableOrContainer);
+                if (!$container || !$container.length) {
+                    return null;
+                }
+                return $container.find(
+                        "div[data-type=\"" + tbType + "\"] > div.rte-toolbar");
+            },
+
+            getPopover: function(ref, tbType, $container) {
+                tbType = tbType || "inline";
+                return $container.find("div[data-type=\"" + tbType + "\"] > " +
+                        "div[data-popover=\"" + ref + "\"]");
+            },
+
+            getPopoverTrigger: function(ref, tbType, $containerOrToolbar) {
+                tbType = tbType || "inline";
+                var $toolbar = ($containerOrToolbar.hasClass("rte-toolbar") ?
+                        $containerOrToolbar :
+                        CUI.rte.UIUtils.getToolbar($containerOrToolbar, tbType));
+                return $toolbar.find("button[data-action=\"" + ref + "\"]")
+            },
+
+            getElement: function(ref, tbType, $container) {
+                tbType = tbType || "inline";
+                return $container.find("div[data-type=\"" + tbType + "\"] " +
+                        "button[data-action=\"" + ref + "\"]");
+            },
+
+            getDialog: function(ref, tbType, $container) {
+                tbType = tbType || "inline";
+                var $dialog = $container.find("div[data-type=\"" + tbType + "\"] > " +
+                        "div[data-rte-dialog=\"" + ref + "\"]");
+                if (($dialog.length === 0) && (tbType !== "global")) {
+                    $dialog = $container.find("div[data-type=\"global\"] > " +
+                        "div[data-rte-dialog=\"" + ref + "\"]");
+                }
+                return $dialog;
+            },
+
+            determineIconClass: function(element) {
+                var com = CUI.rte.Common;
+                var classes = com.parseCSS(element.jquery ? element[0] : element);
+                for (var c = 0; c < classes.length; c++) {
+                    if (com.strStartsWith(classes[c],
+                            CUI.rte.Theme.TOOLBARITEM_ICON_PREFIX)) {
+                        return classes[c];
                     }
                 }
-                cssText += "}\n\n";
+                return undefined;
             }
-            styleSheet.innerHTML = cssText;
-            return styleSheet;
-        },
 
-        removeStyleSheet: function(styleSheet) {
-            styleSheet.parentNode.removeChild(styleSheet);
-        },
-
-        getUIContainer: function($editable) {
-            var editableDom = $editable[0].previousSibling;
-            while (editableDom && (editableDom.nodeType !== 1)) {
-                editableDom = editableDom.previousSibling;
-            }
-            if (!editableDom || !CUI.rte.Common.hasCSS(editableDom, "rte-ui")) {
-                return null;
-            }
-            return $(editableDom);
-        },
-
-        getToolbar: function($editable, tbType) {
-            tbType = tbType || "inline";
-            var $container = CUI.rte.UIUtils.getUIContainer($editable);
-            if (!$container) {
-                return null;
-            }
-            return $container.find("div[data-type=\"" + tbType + "\"] > div.rte-toolbar");
-        },
-
-        getPopover: function(ref, tbType, $container) {
-            tbType = tbType || "inline";
-            return $container.find("div[data-type=\"" + tbType + "\"] > " +
-                    "div[data-popover=\"" + ref + "\"]");
         }
-    }
 
-}();
+    }();
+
+})(window.jQuery);

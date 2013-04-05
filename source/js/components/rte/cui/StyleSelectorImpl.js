@@ -16,71 +16,75 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CUI.rte.ui.cui.StyleSelectorImpl = new Class({
+(function($) {
 
-    toString: "StyleSelectorImpl",
+    CUI.rte.ui.cui.StyleSelectorImpl = new Class({
 
-    extend: CUI.rte.ui.TbStyleSelector,
+        toString: "StyleSelectorImpl",
 
-    // Helpers -----------------------------------------------------------------------------
+        extend: CUI.rte.ui.TbStyleSelector,
 
-    notifyGroupBorder: function() {
-        // do nothing
-    },
+        // Helpers -----------------------------------------------------------------------------
+
+        notifyGroupBorder: function() {
+            // do nothing
+        },
 
 
-    // Interface implementation ------------------------------------------------------------
+        // Interface implementation ------------------------------------------------------------
 
-    addToToolbar: function(toolbar) {
-        // TODO ...?
-    },
+        addToToolbar: function(toolbar) {
+            // TODO ...?
+        },
 
-    createToolbarDef: function() {
-        return {
-            "id": this.id,
-            "element": this
-        };
-    },
+        createToolbarDef: function() {
+            return {
+                "id": this.id,
+                "element": this
+            };
+        },
 
-    initializeSelector: function() {
-        // TODO ...?
-    },
+        initializeSelector: function() {
+            // TODO ...?
+        },
 
-    getSelectorDom: function() {
-        return { };
-    },
+        getSelectorDom: function() {
+            return { };
+        },
 
-    getSelectedStyle: function() {
-        return null;
-    },
+        getSelectedStyle: function() {
+            return null;
+        },
 
-    setRemoveDisabled: function(isDisabled) {
-        // TODO ...?
-    },
+        setRemoveDisabled: function(isDisabled) {
+            // TODO ...?
+        },
 
-    setDisabled: function(isDisabled) {
-        /*
-        if (isDisabled) {
-            this.$ui.addClass("rte-tbi-disabled");
-        } else {
-            this.$ui.removeClass("rte-tbi-disabled");
+        setDisabled: function(isDisabled) {
+            /*
+            if (isDisabled) {
+                this.$ui.addClass("rte-tbi-disabled");
+            } else {
+                this.$ui.removeClass("rte-tbi-disabled");
+            }
+            */
+        },
+
+        setSelected: function(isSelected, suppressEvent) {
+            this._isSelected = isSelected;
+            /*
+            if (isSelected) {
+                this.$ui.addClass("rte-tbi-selected");
+            } else {
+                this.$ui.removeClass("rte-tbi-selected");
+            }
+            */
+        },
+
+        isSelected: function() {
+            return this._isSelected;
         }
-        */
-    },
 
-    setSelected: function(isSelected, suppressEvent) {
-        this._isSelected = isSelected;
-        /*
-        if (isSelected) {
-            this.$ui.addClass("rte-tbi-selected");
-        } else {
-            this.$ui.removeClass("rte-tbi-selected");
-        }
-        */
-    },
+    });
 
-    isSelected: function() {
-        return this._isSelected;
-    }
-
-});
+})(window.jQuery);

@@ -16,18 +16,23 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-/**
- * @class CUI.rte.ui.ext.CmSeparatorImpl
- * @private
- */
-CUI.rte.ui.cui.CmSeparatorImpl = new Class({
+(function($) {
 
-    toString: "CmSeparatorImpl",
 
-    extend: CUI.rte.ui.CmSeparator,
+    /**
+     * @class CUI.rte.ui.ext.CmSeparatorImpl
+     * @private
+     */
+    CUI.rte.ui.cui.CmSeparatorImpl = new Class({
 
-    build: function(items) {
-        // TODO implement
-    }
+        toString: "CmSeparatorImpl",
 
-});
+        extend: CUI.rte.ui.CmSeparator,
+
+        build: function(items) {
+            // TODO implement
+        }
+
+    });
+
+})(window.jQuery);
