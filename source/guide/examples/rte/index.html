@@ -105,7 +105,7 @@
                             <div data-rte-dialog="link" class="popover rte-dialog">
                                 <div class="rte-dialog-column-container">
                                     <div class="rte-dialog-column">
-                                        <select data-init="pathbrowser" data-placeholder="Link to...">
+                                        <select data-type="link" data-init="pathbrowser" data-placeholder="Link to...">
                                             <option>/apps</option>
                                             <option>/content</option>
                                             <option>/etc</option>
@@ -115,13 +115,13 @@
                                         </select>
                                     </div>
                                     <div class="rte-dialog-column">Open in new tab:</div>
-                                    <div class="rte-dialog-column"><label><input type="radio" name="newTab" value="yes" checked><span></span>Yes</label></div>
-                                    <div class="rte-dialog-column"><label><input type="radio" name="newTab" value="no" checked><span></span>No</label></div>
+                                    <div class="rte-dialog-column"><label><input type="radio" name="newTab" value="yes" data-type="openInNewWindow"><span></span>Yes</label></div>
+                                    <div class="rte-dialog-column"><label><input type="radio" name="newTab" value="no" data-type="openInNewWindow" checked><span></span>No</label></div>
                                     <div class="rte-dialog-column">
-                                        <button tabindex="-1" class="dialog-button icon-check small white"></button>
+                                        <button data-type="apply" tabindex="-1" class="dialog-button icon-check small white"></button>
                                     </div>
                                     <div class="rte-dialog-column">
-                                        <button tabindex="-1" class="dialog-button icon-close small white"></button>
+                                        <button data-type="cancel" tabindex="-1" class="dialog-button icon-close small white"></button>
                                     </div>
                                 </div>
                             </div>
