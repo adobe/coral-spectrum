@@ -116,7 +116,7 @@
                 return false;
             }
             
-            this.hideError();
+            this.clearError();
             
             return true;
         },
@@ -135,9 +135,9 @@
             }, this);
         },
         
-        hideError: function() {
+        clearError: function() {
             this.registry.validators(this.el).every(function(v) {
-                v.hide(this.el);
+                v.clear(this.el);
                 return false; // i.e. only run the first one
             }, this);
         }
@@ -218,7 +218,7 @@
              * @param {String|Function} validator.selector Only the element satisfying the selector will be validated using this validator. It will be passed to <code>jQuery.fn.is</code>.
              * @param {Function} validator.validate The actual validation function. It must return a string of error message if the element fails.
              * @param {Function} validator.show The function to show the error.
-             * @param {Function} validator.hide The function to hide the error.
+             * @param {Function} validator.clear The function to clear the error.
              *
              * @example
 jQuery.validator.register({
@@ -230,7 +230,7 @@ jQuery.validator.register({
     },
     show: function(el, message) {
     },
-    hide: function(el) {
+    clear: function(el) {
     }
 });
              */

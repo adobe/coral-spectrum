@@ -15,24 +15,28 @@
   from Adobe Systems Incorporated.
 */
 (function($) {
+    // This is the place where the validation rules and messages are defined
+
     "use strict";
-    
+
+
     // Register all the messages for validation
-    
+    // IMPORTANT: the order is important, where the first one will be used; when in doubt check the source of jquery-message
+
     $.message.register({
         selector: ":lang(en)",
         message: {
             "validation.required": "Please fill out this field."
         }
     });
-    
-    
-    // This is the place where all the validators are specified
+
+
+    // Register all the validation rules
     // IMPORTANT: the order is important, where the first one will be used; when in doubt check the source of jquery-validator
 
-    // TODO TBD if we want to do validation only when there is a certain class
-    // e.g. using selector ".cui-validate input" instead of just "input"
-    
+    // TODO TBD if we want to do validation only when then form is having a certain class
+    // e.g. using selector "form.cui-validate input" instead of just "input"
+
     $.validator.register({
         selector: "input",
         validate: function(el) {
@@ -43,7 +47,7 @@
         show: function(el, message) {
             el.attr("aria-invalid", "true");
         },
-        hide: function(el) {
+        clear: function(el) {
             el.removeAttr("aria-invalid");
         }
     });
@@ -70,7 +74,7 @@
         show: function(el, message) {
             el.attr("aria-invalid", "true");
         },
-        hide: function(el) {
+        clear: function(el) {
             el.removeAttr("aria-invalid");
         }
     });
