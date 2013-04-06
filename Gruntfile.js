@@ -161,7 +161,6 @@ module.exports = function(grunt) {
           'jQuery',       // jQuery
           'console',      // console.log...
           'Backbone',     // Backbone
-          '_',            // Underscore
           'Handlebars',   // Handlebars
           'prettyPrint',  // google-code-prettify
           'CUI',          // CoralUI
@@ -251,10 +250,6 @@ module.exports = function(grunt) {
           {
             src: ['<%= dirs.bower %>/jquery/index.js'],
             dest: '<%= dirs.build %>/js/libs/jquery.js'
-          },
-          {
-            src: ['<%= dirs.bower %>/underscore/index.js'],
-            dest: '<%= dirs.build %>/js/libs/underscore.js'
           },
           {
             src: ['<%= dirs.bower %>/handlebars/index.js'],
