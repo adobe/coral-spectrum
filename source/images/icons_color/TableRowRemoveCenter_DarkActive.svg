@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.4, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="1152px" height="1152px" viewBox="0 0 1152 1152" enable-background="new 0 0 1152 1152" xml:space="preserve">
+<path fill="#3287D2" d="M912,912v48H720V851.344C658.547,808.359,612.094,745.5,590.156,672H144V480h446.156
+	C612.094,406.5,658.547,343.641,720,300.656V192h192v48c51.562,0,100.312,12,144,32.906V96c0-26.391-21.609-48-48-48H48
+	C21.609,48,0,69.609,0,96v960c0,26.391,21.609,48,48,48h960c26.391,0,48-21.609,48-48V879.094C1012.312,900,963.562,912,912,912z
+	 M432,192h192v192H432V192z M144,192h192v192H144V192z M336,960H144V768h192V960z M624,960H432V768h192V960z"/>
+<rect x="144" y="192" opacity="0.2" fill="#3287D2" width="192" height="192"/>
+<rect x="432" y="192" opacity="0.2" fill="#3287D2" width="192" height="192"/>
+<rect x="144" y="768" opacity="0.2" fill="#3287D2" width="192" height="192"/>
+<rect x="432" y="768" opacity="0.2" fill="#3287D2" width="192" height="192"/>
+<path opacity="0.2" fill="#3287D2" d="M720,960h192v-48c-71.391,0-137.531-22.547-192-60.656V960z"/>
+<path opacity="0.2" fill="#3287D2" d="M720,300.656C774.469,262.547,840.609,240,912,240v-48H720V300.656z"/>
+<path fill="#3287D2" d="M912,336c-132.562,0-240,107.438-240,240s107.438,240,240,240s240-107.438,240-240S1044.562,336,912,336z
+	 M1072.969,672L1008,736.969l-96-96l-96,96L751.031,672l96-96l-96-96L816,415.031l96,96l96-96L1072.969,480l-96,96L1072.969,672z"/>
+</svg>

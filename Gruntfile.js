@@ -44,14 +44,17 @@ module.exports = function(grunt) {
       'components/CUI.Wizard.js',
       'components/CUI.FileUpload.js',
       'components/CUI.Toolbar.js',
-      'components/CUI.Tooltip.js'
+      'components/CUI.Tooltip.js',
+      'components/CUI.DraggableList.js'
 
     ],
     "cui-rte": [
       'components/rte/Theme.js',
       'components/rte/UIUtils.js',
+      'components/rte/ConfigUtils.js',
       'components/rte/cui/ToolkitImpl.js',
       'components/rte/cui/ToolbarImpl.js',
+      'components/rte/cui/PopoverManager.js',
       'components/rte/cui/ElementImpl.js',
       'components/rte/cui/ParaFormatterImpl.js',
       'components/rte/cui/StyleSelectorImpl.js',
@@ -61,6 +64,7 @@ module.exports = function(grunt) {
       'components/rte/cui/CuiContextMenuBuilder.js',
       'components/rte/cui/CuiDialogManager.js',
       'components/rte/cui/CuiDialogHelper.js',
+      'components/rte/cui/DialogImpl.js',
 
       'components/CUI.RichText.js',
 
@@ -81,7 +85,7 @@ module.exports = function(grunt) {
     build: 'build',
     source: 'source',
     temp: 'temp',
-    components: 'components',
+    bower: 'externals/components',
     modules: 'node_modules',
     rte: "rte"
   };
@@ -122,7 +126,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-jsdoc');
+//  grunt.loadNpmTasks('grunt-jsdoc');
   grunt.loadNpmTasks('grunt-mocha');
 //  grunt.loadNpmTasks('grunt-hub');
 
@@ -215,7 +219,7 @@ module.exports = function(grunt) {
           {
             expand: true,
             filter: 'isFile',
-            cwd: '<%= dirs.components %>/bootstrap/less/',
+            cwd: '<%= dirs.bower %>/bootstrap/less/',
             src: ['*'],
             dest: '<%= dirs.temp %>/less/bootstrap/'
           }
@@ -226,7 +230,7 @@ module.exports = function(grunt) {
           {
             expand: true,
             filter: 'isFile',
-            cwd: '<%= dirs.components %>/bootstrap/less/',
+            cwd: '<%= dirs.bower %>/bootstrap/less/',
             src: ['*'],
             dest: '<%= dirs.build %>/less/bootstrap/'
           }
@@ -245,19 +249,19 @@ module.exports = function(grunt) {
       libs: {
         files: [
           {
-            src: ['<%= dirs.components %>/jquery/index.js'],
+            src: ['<%= dirs.bower %>/jquery/index.js'],
             dest: '<%= dirs.build %>/js/libs/jquery.js'
           },
           {
-            src: ['<%= dirs.components %>/underscore/index.js'],
+            src: ['<%= dirs.bower %>/underscore/index.js'],
             dest: '<%= dirs.build %>/js/libs/underscore.js'
           },
           {
-            src: ['<%= dirs.components %>/handlebars/index.js'],
+            src: ['<%= dirs.bower %>/handlebars/index.js'],
             dest: '<%= dirs.build %>/js/libs/handlebars.js'
           },
           {
-            src: ['<%= dirs.components %>/handlebars-full/index.js'],
+            src: ['<%= dirs.bower %>/handlebars-full/index.js'],
             dest: '<%= dirs.build %>/js/libs/handlebars.full.js'
           }
         ]
@@ -292,7 +296,7 @@ module.exports = function(grunt) {
         files: [
           {
             expand: true,
-            cwd: '<%= dirs.components %>/bootstrap/docs/assets/js/google-code-prettify/',
+            cwd: '<%= dirs.bower %>/bootstrap/docs/assets/js/google-code-prettify/',
             src: ['*'],
             dest: '<%= dirs.build %>/js/google-code-prettify/'
           }
@@ -357,7 +361,20 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          '<%= dirs.build %>/js/CUI.Templates.js': '<%= dirs.source %>/templates/*'
+          '<%= dirs.build %>/js/CUI.Templates.js': '<%= dirs.source %>/templates/cui/*'
+        }
+      },
+      "rte": {
+        options: {
+          wrapped: true,
+          namespace: 'CUI.rte.Templates',
+          processName: function(path) {
+            // Pull the filename out as the template name
+            return path.split('/').pop().split('.').shift();
+          }
+        },
+        files: {
+          '<%= dirs.build %>/js/cui-rte.templates.js': '<%= dirs.source %>/templates/rte/*'
         }
       }
     },
@@ -618,7 +635,7 @@ module.exports = function(grunt) {
 
       compile_handlebars: {
         files: '<%= dirs.source %>/templates/*',
-        tasks: ['handlebars', 'concat:cui', 'uglify:cui']
+        tasks: ['handlebars:compile', 'concat:cui', 'uglify:cui']
       },
 
       copy_tests: {
@@ -669,14 +686,14 @@ module.exports = function(grunt) {
     'jshint',
     'font',
     'copy',
-    'handlebars',
+    'handlebars:compile',
     'icons',
     'iconbrowser',
     'concat:cui',
     'uglify:cui',
     'less',
-    'cssmin',
-    'mocha'
+    'cssmin'/*,
+    'mocha'*/
   ]);
 
   // Build and copy RTE
@@ -699,7 +716,7 @@ module.exports = function(grunt) {
     'uglify',
     'less',
     'cssmin',
-    'mocha',
+//    'mocha',
     'jsdoc'
   ]);
 
@@ -731,7 +748,7 @@ module.exports = function(grunt) {
     'font',
     'icons',
     'iconbrowser',
-    'handlebars',
+    'handlebars:compile',
     'concat:cui',
     'less:cui'
   ]);

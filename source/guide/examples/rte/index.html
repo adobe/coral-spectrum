@@ -17,7 +17,8 @@
         <script src="../../js/CUI.js"></script>
         <script src="../../js/libs/rte-core-jquery.js"></script>
         <script src="../../js/cui-rte.js"></script>
-        
+        <script src="../../js/cui-rte.templates.js"></script>
+
         <script src="../../js/guide.js"></script>
         <script src="../../js/google-code-prettify/prettify.js"></script>
     </head>
@@ -34,7 +35,7 @@
             </nav>
 
             <div class="drawer">
-                <div class="badge">v1.2-SNAPSHOT</div>
+                <div class="badge">v1.4</div>
             </div>
 
         </header>
@@ -64,69 +65,112 @@
             <div class="content">
 
                 <section id="General">
+                    <h2 class="line" id="rte01">Simple RTE</h2>
                     <!--
-                        Parent div - can be omitted if only one RTE is used on page,
-                        or the toolbar is specified explicitly
+                        If a div with class "rte-ui" is placed directly before an editable
+                        div, the features and toolbar configuration is taken from it.
                     -->
-                    <div>
-                        <h2 class="line" id="rte01">Simple RTE</h2>
-                        <nav class="rte-toolbar">
-                            <button data-action="#format" tabindex="-1" class="item icon-text small white"></button>
-                            <button data-action="#justify" tabindex="-1" class="item icon-graphtrendrounded small white"></button>
-                            <button data-action="#lists" tabindex="-1" class="item icon-viewlist small white"></button>
-                        </nav>
-                        <div data-popover="format" class="popover rte-popover">
-                            <button data-action="format#bold" tabindex="-1" class="item bold disabled text">B</button>
-                            <button data-action="format#italic" tabindex="-1" class="item italic disabled text">i</button>
-                            <button data-action="format#underline" tabindex="-1" class="item underline disabled text">U</button>
+                    <div class="rte-ui">
+                        <!--
+                            data-type="inline" defines the toolbar that is used in basic
+                            editing mode; data-type="fullScreen" would define the toolbar
+                            for full screen editing mode
+                        -->
+                        <div data-type="inline">
+                            <div class="rte-toolbar">
+                                <button data-action="#format" tabindex="-1" class="item icon-text trigger multi-select small white"></button>
+                                <button data-action="#justify" tabindex="-1" class="item icon-textleft single-select trigger small white"></button>
+                                <button data-action="#lists" tabindex="-1" class="item icon-textbulleted trigger small white"></button>
+                                <button data-action="links#modifylink" tabindex="-1" class="item icon-link small white"></button>
+                                <button data-action="links#unlink" tabindex="-1" class="item icon-linkoff small white"></button>
+                            </div>
+                            <div data-popover="format" class="popover rte-popover">
+                                <button data-action="format#bold" tabindex="-1" class="item icon-textbold small white"></button>
+                                <button data-action="format#italic" tabindex="-1" class="item icon-textitalic small white"></button>
+                                <button data-action="format#underline" tabindex="-1" class="item icon-textunderline small white"></button>
+                            </div>
+                            <div data-popover="justify" class="popover rte-popover">
+                                <button data-action="justify#justifyleft" tabindex="-1" class="item icon-textleft small white"></button>
+                                <button data-action="justify#justifycenter" tabindex="-1" class="item icon-textcenter small white"></button>
+                                <button data-action="justify#justifyright" tabindex="-1" class="item icon-textright small white"></button>
+                            </div>
+                            <div data-popover="lists" class="popover rte-popover">
+                                <button data-action="lists#insertunorderedlist" tabindex="-1" class="item icon-textbulleted small white"></button>
+                                <button data-action="lists#insertorderedlist" tabindex="-1" class="item icon-textnumbered small white"></button>
+                                <button data-action="lists#outdent" tabindex="-1" class="item icon-textindentdecrease small white"></button>
+                                <button data-action="lists#indent" tabindex="-1" class="item icon-textindentincrease small white"></button>
+                            </div>
                         </div>
-                        <div data-popover="justify" class="popover rte-popover">
-                            <button data-action="justify#justifyleft" tabindex="-1" class="item disabled text">[</button>
-                            <button data-action="justify#justifycenter" tabindex="-1" class="item disabled text">-</button>
-                            <button data-action="justify#justifyright" tabindex="-1" class="item disabled text">]</button>
+                        <div data-type="global">
+                            <div data-rte-dialog="link" class="popover rte-dialog">
+                                <div class="rte-dialog-column-container">
+                                    <div class="rte-dialog-column">
+                                        <select data-type="link" data-init="pathbrowser" data-placeholder="Link to...">
+                                            <option>/apps</option>
+                                            <option>/content</option>
+                                            <option>/etc</option>
+                                            <option>/libs</option>
+                                            <option>/tmp</option>
+                                            <option>/var</option>
+                                        </select>
+                                    </div>
+                                    <div class="rte-dialog-column">Open in new tab:</div>
+                                    <div class="rte-dialog-column"><label><input type="radio" name="newTab" value="yes" data-type="openInNewWindow"><span></span>Yes</label></div>
+                                    <div class="rte-dialog-column"><label><input type="radio" name="newTab" value="no" data-type="openInNewWindow" checked><span></span>No</label></div>
+                                    <div class="rte-dialog-column">
+                                        <button data-type="apply" tabindex="-1" class="dialog-button icon-check small white"></button>
+                                    </div>
+                                    <div class="rte-dialog-column">
+                                        <button data-type="cancel" tabindex="-1" class="dialog-button icon-close small white"></button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div data-popover="lists" class="popover rte-popover">
-                            <button data-action="lists#insertunorderedlist" tabindex="-1" class="item disabled text">&bull;</button>
-                            <button data-action="lists#insertorderedlist" tabindex="-1" class="item disabled text">1.</button>
-                            <button data-action="lists#outdent" tabindex="-1" class="item disabled text">&lt;&lt;</button>
-                            <button data-action="lists#indent" tabindex="-1" class="item disabled text">&gt;&gt;</button>
-                        </div>
-                        <div class="editable" data-config="example.json">
-                            <p>Li Europan lingues es membres del sam familie. Lor separat existentie es
-                            un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular.
-                            Li lingues differe solmen in li grammatica, li pronunciation e li plu commun
-                            vocabules.</p>
-                            <p>Omnicos directe al desirabilite de un nov lingua franca: On refusa
-                            continuar payar custosi traductores. At solmen va esser necessi far uniform
-                            grammatica, pronunciation e plu sommun paroles.</p>
-                            <p>Ma quande lingues coalesce, li grammatica del resultant lingue es plu
-                            simplic e regulari quam ti del coalescent lingues. Li nov lingua franca va
-                            esser plu simplic e regulari quam li existent Europan lingues. It va esser
-                            tam simplic quam Occidental in fact, it va esser Occidental.</p>
-                            <p>A un Angleso it va semblar un simplificat Angles, quam un skeptic
-                            Cambridge amico dit me que Occidental es. Li Europan lingues es membres del
-                            sam familie. Lor separat existentie es un myth.</p>
-                            <table width="100%" cellspacing="0" cellpadding="8" border="0">
-                                <tr>
-                                    <td>Por scientie, musica, sport etc, litot Europa usa li sam
-                                        vocabular.</td>
-                                    <td>Li lingues differe solmen in li grammatica, li pronunciation
-                                        e li plu commun vocabules.</td>
-                                </tr>
-                                <tr>
-                                    <td>Omnicos directe al desirabilite de un nov lingua franca:</td>
-                                    <td>On refusa continuar payar custosi traductores.</td>
-                                </tr>
-                            </table>
-                            <p>At solmen va esser necessi far uniform grammatica, pronunciation e plu
-                            sommun paroles.</p>
-                        </div>
+                    </div>
+                    <div class="editable" data-config-path="example-1.json">
+                        <p>Li Europan lingues es membres del sam familie. Lor separat existentie es
+                        un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular.
+                        Li lingues differe solmen in li grammatica, li pronunciation e li plu commun
+                        vocabules.</p>
+                        <p>Omnicos directe al desirabilite de un nov lingua franca: On refusa
+                        continuar payar custosi traductores. At solmen va esser necessi far uniform
+                        grammatica, pronunciation e plu sommun paroles.</p>
+                        <p>Ma quande lingues coalesce, li grammatica del resultant lingue es plu
+                        simplic e regulari quam ti del coalescent lingues. Li nov lingua franca va
+                        esser plu simplic e regulari quam li existent Europan lingues. It va esser
+                        tam simplic quam Occidental in fact, it va esser Occidental.</p>
+                        <p>A un Angleso it va semblar un simplificat Angles, quam un skeptic
+                        Cambridge amico dit me que Occidental es. Li Europan lingues es membres del
+                        sam familie. Lor separat existentie es un myth.</p>
+                        <table width="100%" cellspacing="0" cellpadding="8" border="0">
+                            <tr>
+                                <td>Por scientie, musica, sport etc, litot Europa usa li sam
+                                    vocabular.</td>
+                                <td>Li lingues differe solmen in li grammatica, li pronunciation
+                                    e li plu commun vocabules.</td>
+                            </tr>
+                            <tr>
+                                <td>Omnicos directe al desirabilite de un nov lingua franca:</td>
+                                <td>On refusa continuar payar custosi traductores.</td>
+                            </tr>
+                        </table>
+                        <p>At solmen va esser necessi far uniform grammatica, pronunciation e plu
+                        sommun paroles.</p>
                     </div>
 <pre class="prettyprint linenums">
 &lt;div class=&quot;editable&quot;&gt;
 ...
 &lt;/div&gt;
 </pre>
+                    <div class="editable" data-config-path="example-2.json">
+                        <p>Li nov lingua franca va esser plu simplic e regulari quam li
+                        existent <i>Europan lingues</i>. It va esser tam simplic quam
+                        <a href="http://www.adobe.com/">Occidental in fact</a>, it va esser
+                        Occidental.</p>
+                        <p>A un Angleso it va semblar un simplificat Angles, quam un skeptic
+                        Cambridge amico dit me que Occidental es. Li Europan lingues es membres del
+                        sam familie. Lor separat existentie es un myth.</p>
+                    </div>
                 </section>
 
             </div><!-- /content -->

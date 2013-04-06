@@ -3,7 +3,7 @@
 * ADOBE CONFIDENTIAL
 * ___________________
 *
-*  Copyright 2012 Adobe Systems Incorporated
+*  Copyright 2013 Adobe Systems Incorporated
 *  All Rights Reserved.
 *
 * NOTICE:  All information contained herein is, and remains
@@ -16,73 +16,77 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CUI.rte.ui.cui.ParaFormatterImpl = new Class({
+(function($) {
 
-    toString: "ParaFormatterImpl",
+    CUI.rte.ui.cui.ParaFormatterImpl = new Class({
 
-    extend: CUI.rte.ui.TbParaFormatter,
+        toString: "ParaFormatterImpl",
 
-
-    // Stuff -------------------------------------------------------------------------------
-
-    notifyGroupBorder: function() {
-        // do nothing
-    },
+        extend: CUI.rte.ui.TbParaFormatter,
 
 
-    // Interface implementation ------------------------------------------------------------
+        // Stuff -------------------------------------------------------------------------------
 
-    addToToolbar: function(toolbar) {
-        this.toolbar = toolbar;
-        // TODO ...?
-    },
+        notifyGroupBorder: function() {
+            // do nothing
+        },
 
-    createToolbarDef: function() {
-        return {
-            "id": this.id,
-            "element": this
-        };
-    },
 
-    initializeSelector: function() {
-        // TODO ...?
-    },
+        // Interface implementation ------------------------------------------------------------
 
-    selectFormat: function(formatToSelect, auxRoot, formatCnt, noFormatCnt) {
-        // TODO ...?
-    },
+        addToToolbar: function(toolbar) {
+            this.toolbar = toolbar;
+            // TODO ...?
+        },
 
-    getSelectorDom: function() {
-        return null;
-    },
+        createToolbarDef: function() {
+            return {
+                "id": this.id,
+                "element": this
+            };
+        },
 
-    getSelectedFormat: function() {
-        return null;
-    },
+        initializeSelector: function() {
+            // TODO ...?
+        },
 
-    setDisabled: function(isDisabled) {
-        /*
-        if (isDisabled) {
-            this.$ui.addClass("rte-tbi-disabled");
-        } else {
-            this.$ui.removeClass("rte-tbi-disabled");
+        selectFormat: function(formatToSelect, auxRoot, formatCnt, noFormatCnt) {
+            // TODO ...?
+        },
+
+        getSelectorDom: function() {
+            return null;
+        },
+
+        getSelectedFormat: function() {
+            return null;
+        },
+
+        setDisabled: function(isDisabled) {
+            /*
+            if (isDisabled) {
+                this.$ui.addClass("rte-tbi-disabled");
+            } else {
+                this.$ui.removeClass("rte-tbi-disabled");
+            }
+            */
+        },
+
+        setSelected: function(isSelected, suppressEvent) {
+            this._isSelected = isSelected;
+            /*
+            if (isSelected) {
+                this.$ui.addClass("rte-tbi-selected");
+            } else {
+                this.$ui.removeClass("rte-tbi-selected");
+            }
+            */
+        },
+
+        isSelected: function() {
+            return this._isSelected;
         }
-        */
-    },
 
-    setSelected: function(isSelected, suppressEvent) {
-        this._isSelected = isSelected;
-        /*
-        if (isSelected) {
-            this.$ui.addClass("rte-tbi-selected");
-        } else {
-            this.$ui.removeClass("rte-tbi-selected");
-        }
-        */
-    },
+    });
 
-    isSelected: function() {
-        return this._isSelected;
-    }
-
-});
+})(window.jQuery);

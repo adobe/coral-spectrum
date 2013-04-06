@@ -160,7 +160,7 @@ module.exports = function (grunt) {
     build: 'build',
     source: 'source',
     temp: 'temp',
-    components: 'components',
+    bower: 'externals/components',
     modules: 'node_modules'
   };
 
@@ -250,7 +250,7 @@ module.exports = function (grunt) {
       },
       "libs-test": {
         files: {
-          "<%= dirs.build %>/test/js/libs/jquery.js": "<%= dirs.components %>/jquery/index.js"
+          "<%= dirs.build %>/test/js/libs/jquery.js": "<%= dirs.bower %>/jquery/index.js"
         }
       }
     },

@@ -163,7 +163,7 @@
          @classdesc A file upload widget
 
          <p>
-         <span class="fileupload button icon-upload"><input type="file" data-init="fileupload" data-placeholder="Select file(s)"></span>
+         <span class="fileupload button icon-upload" data-init="fileupload"><input type="file" data-placeholder="Select file(s)"></span>
          </p>
 
          @desc Creates a file upload field
@@ -220,12 +220,6 @@
         _render: function() {
             var self = this;
 
-            this._readDataFromMarkup();
-
-            if (!CUI.util.HTTP.html5UploadSupported()) {
-                this.options.useHTML5 = false;
-            }
-
             // If current element is input field -> wrap it into SPAN
             if (this.$element.get(0).tagName === "INPUT") {
                 var clazz = this.$element.attr("class");
@@ -245,6 +239,13 @@
             // Get the input element
             this.inputElement = this.$element.find("input[type='file']");
             this.inputElement.removeAttr("class");
+
+            // Read configuration from markup
+            this._readDataFromMarkup();
+
+            if (!CUI.util.HTTP.html5UploadSupported()) {
+                this.options.useHTML5 = false;
+            }
 
             this._createMissingElements();
 
@@ -403,43 +404,43 @@
         /** @ignore */
         _readDataFromMarkup: function() {
             var self = this;
-            if (this.$element.attr("name")) {
-                this.options.name = this.$element.attr("name");
+            if (this.inputElement.attr("name")) {
+                this.options.name = this.inputElement.attr("name");
             }
-            if (this.$element.attr("placeholder")) {
-                this.options.placeholder = this.$element.attr("placeholder");
+            if (this.inputElement.attr("placeholder")) {
+                this.options.placeholder = this.inputElement.attr("placeholder");
             }
-            if (this.$element.attr("data-placeholder")) {
-                this.options.placeholder = this.$element.attr("data-placeholder");
+            if (this.inputElement.attr("data-placeholder")) {
+                this.options.placeholder = this.inputElement.attr("data-placeholder");
             }
-            if (this.$element.attr("disabled") || this.$element.attr("data-disabled")) {
+            if (this.inputElement.attr("disabled") || this.inputElement.attr("data-disabled")) {
                 this.options.disabled = true;
             }
-            if (this.$element.attr("multiple") || this.$element.attr("data-multiple")) {
+            if (this.inputElement.attr("multiple") || this.inputElement.attr("data-multiple")) {
                 this.options.multiple = true;
             }
-            if (this.$element.attr("data-upload-url")) {
-                this.options.uploadUrl = this.$element.attr("data-upload-url");
+            if (this.inputElement.attr("data-upload-url")) {
+                this.options.uploadUrl = this.inputElement.attr("data-upload-url");
             }
-            if (this.$element.attr("data-upload-url-builder")) {
-                this.options.uploadUrlBuilder = CUI.util.buildFunction(this.$element.attr("data-upload-url-builder"), ["fileUpload"]);
+            if (this.inputElement.attr("data-upload-url-builder")) {
+                this.options.uploadUrlBuilder = CUI.util.buildFunction(this.inputElement.attr("data-upload-url-builder"), ["fileUpload"]);
             }
-            if (this.$element.attr("data-size-limit")) {
-                this.options.sizeLimit = this.$element.attr("data-size-limit");
+            if (this.inputElement.attr("data-size-limit")) {
+                this.options.sizeLimit = this.inputElement.attr("data-size-limit");
             }
-            if (this.$element.attr("data-auto-start")) {
+            if (this.inputElement.attr("data-auto-start")) {
                 this.options.autoStart = true;
             }
-            if (this.$element.attr("data-usehtml5")) {
-                this.options.useHTML5 = this.$element.attr("data-usehtml5") === "true";
+            if (this.inputElement.attr("data-usehtml5")) {
+                this.options.useHTML5 = this.inputElement.attr("data-usehtml5") === "true";
             }
-            if (this.$element.attr("data-dropzone")) {
-                this.options.dropZone = this.$element.attr("data-dropzone");
+            if (this.inputElement.attr("data-dropzone")) {
+                this.options.dropZone = this.inputElement.attr("data-dropzone");
             }
-            if (this.$element.attr("data-file-name-parameter")) {
-                this.options.fileNameParameter = this.$element.attr("data-file-name-parameter");
+            if (this.inputElement.attr("data-file-name-parameter")) {
+                this.options.fileNameParameter = this.inputElement.attr("data-file-name-parameter");
             }
-            $.each(this.$element.get(0).attributes, function(i, attribute) {
+            $.each(this.inputElement.get(0).attributes, function(i, attribute) {
                 var match = /^data-event-(.*)$/.exec(attribute.name);
                 if (match && match.length > 1) {
                     var eventHandler = CUI.util.buildFunction(attribute.value, ["event"]);

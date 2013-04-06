@@ -1,0 +1,19 @@
+{
+    "rtePlugins": {
+        "paraformat": {
+            "features": "*"
+        },
+        "styles": {
+            "features": "*"
+        },
+        "table": {
+            "features": "*"
+        },
+        "lists": {
+            "features": "*"
+        },
+        "undo":{
+            "features": "*"
+        }
+    }
+}

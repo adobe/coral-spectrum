@@ -3,7 +3,7 @@
 * ADOBE CONFIDENTIAL
 * ___________________
 *
-*  Copyright 2012 Adobe Systems Incorporated
+*  Copyright 2013 Adobe Systems Incorporated
 *  All Rights Reserved.
 *
 * NOTICE:  All information contained herein is, and remains
@@ -16,36 +16,41 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CUI.rte.ui.cui.ToolkitImpl = new Class({
+(function($) {
 
-    toString: "ToolkitImpl",
 
-    extend: CUI.rte.ui.Toolkit,
+    CUI.rte.ui.cui.ToolkitImpl = new Class({
 
-    dropDownCls: null,
+        toString: "ToolkitImpl",
 
-    menuCls: null,
+        extend: CUI.rte.ui.Toolkit,
 
-    initialize: function(cb) {
-        // currently not required
-    },
+        dropDownCls: null,
 
-    requiresInit: function() {
-        return false;
-    },
+        menuCls: null,
 
-    createToolbarBuilder: function(hint) {
-        return new CUI.rte.ui.cui.CuiToolbarBuilder();
-    },
+        initialize: function(cb) {
+            // currently not required
+        },
 
-    createContextMenuBuilder: function(editorKernel) {
-        return new CUI.rte.ui.cui.CuiContextMenuBuilder(editorKernel);
-    },
+        requiresInit: function() {
+            return false;
+        },
 
-    createDialogManager: function(editorKernel) {
-        return new CUI.rte.ui.cui.CuiDialogManager(editorKernel)
-    }
+        createToolbarBuilder: function(hint) {
+            return new CUI.rte.ui.cui.CuiToolbarBuilder();
+        },
 
-});
+        createContextMenuBuilder: function(editorKernel) {
+            return new CUI.rte.ui.cui.CuiContextMenuBuilder(editorKernel);
+        },
 
-CUI.rte.ui.ToolkitRegistry.register("cui", CUI.rte.ui.cui.ToolkitImpl);
+        createDialogManager: function(editorKernel) {
+            return new CUI.rte.ui.cui.CuiDialogManager(editorKernel)
+        }
+
+    });
+
+    CUI.rte.ui.ToolkitRegistry.register("cui", CUI.rte.ui.cui.ToolkitImpl);
+
+})(window.jQuery);

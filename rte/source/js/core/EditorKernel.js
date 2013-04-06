@@ -293,6 +293,11 @@ CUI.rte.EditorKernel = new Class({
      */
     selectionChangeTracker: null,
 
+    /**
+     * Number of times the editor has been locked
+     */
+    lockCount: 0,
+
 
     construct: function(config) {
         config = config || { };
@@ -507,6 +512,30 @@ CUI.rte.EditorKernel = new Class({
     disableFocusHandling: function() {
         this.isFocusHandlingDisabled = true;
     },
+
+    /**
+     * Locks the editor, for example while a dialog for editing is shown.
+     */
+    lock: function() {
+        this.lockCount++;
+    },
+
+    /**
+     * Unlocks the editor, for example when a dialog (that has locked the editor) is hidden
+     * again.
+     */
+    unlock: function() {
+        this.lockCount--;
+    },
+
+    /**
+     * Checks if the editor is currently locked.
+     * @returns {Boolean} True if the editor is currently locked
+     */
+    isLocked: function() {
+        return (this.lockCount > 0);
+    },
+
 
     /**
      * Executes some Gecko-related initialization. For example, disables the "enahanced"

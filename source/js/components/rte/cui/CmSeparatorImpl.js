@@ -3,7 +3,7 @@
 * ADOBE CONFIDENTIAL
 * ___________________
 *
-*  Copyright 2012 Adobe Systems Incorporated
+*  Copyright 2013 Adobe Systems Incorporated
 *  All Rights Reserved.
 *
 * NOTICE:  All information contained herein is, and remains
@@ -16,18 +16,23 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-/**
- * @class CUI.rte.ui.ext.CmSeparatorImpl
- * @private
- */
-CUI.rte.ui.cui.CmSeparatorImpl = new Class({
+(function($) {
 
-    toString: "CmSeparatorImpl",
 
-    extend: CUI.rte.ui.CmSeparator,
+    /**
+     * @class CUI.rte.ui.ext.CmSeparatorImpl
+     * @private
+     */
+    CUI.rte.ui.cui.CmSeparatorImpl = new Class({
 
-    build: function(items) {
-        // TODO implement
-    }
+        toString: "CmSeparatorImpl",
 
-});
+        extend: CUI.rte.ui.CmSeparator,
+
+        build: function(items) {
+            // TODO implement
+        }
+
+    });
+
+})(window.jQuery);

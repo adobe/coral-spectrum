@@ -16,7 +16,6 @@
 
         isActive: false,
 
-
         /**
          * Flag to ignore the next "out of area" click event
          * @private
@@ -34,8 +33,8 @@
         _hidePopover: function() {
             if (this.editorKernel.toolbar) {
                 var tb = this.editorKernel.toolbar;
-                if (tb._hidePopover) {
-                    return tb._hidePopover();
+                if (tb.popover) {
+                    return tb.popover.hide();
                 }
             }
             return false;
@@ -104,7 +103,8 @@
                 // this is the case on mobile devices if the on-screen keyboard gets
                 // hidden
                 CUI.rte.Utils.defer(function() {
-                    if (!self.isTemporaryFocusChange && self.isActive) {
+                    if (!self.isTemporaryFocusChange && self.isActive
+                            && !self.editorKernel.isLocked()) {
                         self.finish();
                     }
                     self.isTemporaryFocusChange = false;
@@ -199,7 +199,6 @@
                         slct.removeAllRanges();
                         var range = document.createRange();
                         if (_lastSel) {
-                            console.log("Resetting selection");
                             range.setStart(_lastSel.ande, _lastSel.aoffs);
                             range.setEnd(_lastSel.fnde, _lastSel.foffs);
                         } else {
@@ -209,28 +208,38 @@
                         slct.addRange(range);
                     }
                     if (!slct.isCollapsed) {
-                        var isSameSelection = false;
-                        if (_lastSel) {
-                            isSameSelection =
-                                    (_lastSel.ande === slct.anchorNode) &&
-                                    (_lastSel.aoffs === slct.anchorOffset) &&
-                                    (_lastSel.fnde === slct.focusNode) &&
-                                    (_lastSel.foffs === slct.focusOffset);
-                        }
-                        if (!isSameSelection) {
-                            if (_tbHideTimeout) {
-                                window.clearTimeout(_tbHideTimeout);
-                                _tbHideTimeout = undefined;
+                        var locks = context.getState("CUI.SelectionLock");
+                        if (locks === undefined) {
+                            var isSameSelection = false;
+                            if (_lastSel) {
+                                isSameSelection =
+                                        (_lastSel.ande === slct.anchorNode) &&
+                                        (_lastSel.aoffs === slct.anchorOffset) &&
+                                        (_lastSel.fnde === slct.focusNode) &&
+                                        (_lastSel.foffs === slct.focusOffset);
                             }
-                            if (!_isToolbarHidden) {
-                                self.editorKernel.toolbar.hide();
-                                _isToolbarHidden = true;
+                            if (!isSameSelection) {
+                                if (_tbHideTimeout) {
+                                    window.clearTimeout(_tbHideTimeout);
+                                    _tbHideTimeout = undefined;
+                                }
+                                if (!_isToolbarHidden) {
+                                    self.editorKernel.toolbar.hide();
+                                    _isToolbarHidden = true;
+                                }
+                                _tbHideTimeout = window.setTimeout(function(e) {
+                                    self.editorKernel.toolbar.show();
+                                    _tbHideTimeout = undefined;
+                                    _isToolbarHidden = false;
+                                }, 1000);
                             }
-                            _tbHideTimeout = window.setTimeout(function(e) {
-                                self.editorKernel.toolbar.show();
-                                _tbHideTimeout = undefined;
-                                _isToolbarHidden = false;
-                            }, 1000);
+                        } else {
+                            locks--;
+                            if (locks > 0) {
+                                context.setState("CUI.SelectionLock", locks);
+                            } else {
+                                context.setState("CUI.SelectionLock");
+                            }
                         }
                     }
                     _lastSel = {
@@ -305,9 +314,9 @@
         },
 
 
-        // Interface ---------------------------------------------------------------------------------------------------
+        // Interface -----------------------------------------------------------------------
 
-        start: function(config, toolbarRoot) {
+        start: function(config) {
             if (this.editorKernel === null) {
                 this.editorKernel = new CUI.rte.DivKernel(config);
             }
@@ -316,9 +325,9 @@
             this.$textContainer = this.getTextDiv(this.$element);
             this.$textContainer.addClass("edited");
             this.textContainer = this.$textContainer[0];
-            toolbarRoot = toolbarRoot || this.$textContainer.parent();
             this.editorKernel.createToolbar({
-                $toolbarRoot: $(toolbarRoot)
+                "$editable": this.$element,
+                "uiSettings": (config ? config.uiSettings : undefined)
             });
             /*
             this.currentSize = this.textContainer.getSize();
@@ -367,18 +376,7 @@
 
     // Register ...
     CUI.util.plugClass(CUI.RichText, "richEdit", function(rte) {
-        var configPath = $(this).attr("data-config");
-        var config;
-        if (configs.hasOwnProperty(configPath)) {
-            config = configs[configPath];
-            rte.start(config);
-        } else {
-            $.getJSON(configPath, function(data) {
-                configs[configPath] = data;
-                rte.start(data);
-            });
-        }
-
+        CUI.rte.ConfigUtils.loadConfigAndStartEditing(rte, $(this));
     });
 
     // Data API

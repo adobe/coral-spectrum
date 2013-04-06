@@ -2235,10 +2235,12 @@ CUI.rte.Common = function() {
          */
         removeJcrData: function(coll) {
             for (var key in coll) {
-                if (CUI.rte.Common.strStartsWith(key, "jcr:")) {
-                    delete coll[key];
-                } else if (key == "xtype") {
-                    delete coll[key];
+                if (coll.hasOwnProperty(key)) {
+                    if (CUI.rte.Common.strStartsWith(key, "jcr:")) {
+                        delete coll[key];
+                    } else if (key == "xtype") {
+                        delete coll[key];
+                    }
                 }
             }
         },

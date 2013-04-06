@@ -3,7 +3,7 @@
 * ADOBE CONFIDENTIAL
 * ___________________
 *
-*  Copyright 2012 Adobe Systems Incorporated
+*  Copyright 2013 Adobe Systems Incorporated
 *  All Rights Reserved.
 *
 * NOTICE:  All information contained herein is, and remains
@@ -16,41 +16,73 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-CUI.rte.ui.cui.CuiDialogHelper = new Class({
+(function($) {
 
-    toString: "CuiDialogHelper",
+    var TYPE_TO_DATATYPE = {
+        "rtelinkdialog": "link"
+    };
 
-    extend: CUI.rte.ui.DialogHelper,
+    CUI.rte.ui.cui.CuiDialogHelper = new Class({
 
-    /**
-     * @protected
-     * @ignore
-     */
-    instantiateDialog: function(dialogConfig) {
-        return { };
-    },
+        toString: "CuiDialogHelper",
 
-    createItem: function(type, name, label) {
-        return { };
-    },
+        extend: CUI.rte.ui.DialogHelper,
 
-    getItemType: function(item) {
-        return "unknown";
-    },
+        /**
+         * @protected
+         * @ignore
+         */
+        instantiateDialog: function(dialogConfig) {
+            var type = dialogConfig.type;
+            if (!TYPE_TO_DATATYPE.hasOwnProperty(type)) {
+                throw new Error("Unknown dialog type: " + type);
+            }
+            var dataType = TYPE_TO_DATATYPE[type];
+            var context = this.editorKernel.getEditContext();
+            var $editable = $(context.root);
+            var $container = CUI.rte.UIUtils.getUIContainer($editable);
+            var $dialog = CUI.rte.UIUtils.getDialog(dataType, undefined, $container);
+            var $toolbar = this.editorKernel.toolbar.$toolbar;
+            var $trigger = $toolbar.parent().find(
+                    "button[data-action=\"" + dialogConfig.parameters.command + "\"]");
+            return new CUI.rte.ui.cui.DialogImpl({
+                "config": dialogConfig,
+                "dataType": dataType,
+                "$editable": $editable,
+                "$container": $container,
+                "$toolbar": $toolbar,
+                "$trigger": $trigger,
+                "$dialog": $dialog
+            });
+        },
 
-    getItemName: function(item) {
-        if (!item.id) {
-            item.id = "id-" + new Date().getTime();
+        createItem: function(type, name, label) {
+            return { };
+        },
+
+        getItemType: function(item) {
+            return "unknown";
+        },
+
+        getItemName: function(item) {
+            if (!item.id) {
+                item.id = "id-" + new Date().getTime();
+            }
+            return item.id;
+        },
+
+        getItemValue: function(item) {
+            return item.value;
+        },
+
+        setItemValue: function(item, value) {
+            item.value = value;
+        },
+
+        calculateInitialPosition: function() {
+            // not required here - the position is managed by CUI.rte.ui.cui.PopupManager
         }
-        return item.id;
-    },
 
-    getItemValue: function(item) {
-        return item.value;
-    },
+    });
 
-    setItemValue: function(item, value) {
-        item.value = value;
-    }
-
-});
+})(window.jQuery);
