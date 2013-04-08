@@ -57,7 +57,8 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
       @param {boolean} [options.disabled=false]               Is this widget disabled?
       @param {String} [options.displayedFormat="YYYY-MM-DD[T]HH:mm[Z]"]           Displayed date (userfriendly), default is 2012-10-20 20:35
       @param {String} [options.storedFormat="YYYY-MM-DD[T]HH:mmZ"]    Storage Date format, is never shown to the user, but transferred to the server 
-      @param {String} [options.required=false]                 Is a value required?
+      @param {String} [options.required=false]                Is a value required?
+      @param {String} [options.hasError=false]                True to display widget as erroneous, regardless if the value is required or not.
     */
     
     defaults: {
@@ -72,7 +73,8 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         storedFormat: null,
         headFormat: "MMMM YYYY",
         forceHTMLMode: false,
-        required: false
+        required: false,
+        hasError: false
     },
     
     displayDateTime: null,
@@ -230,6 +232,10 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             this.options.disabled = true;
         }
         
+        if (this.$element.hasClass("error")) {
+            this.options.hasError = true;
+        }
+                
         if (this.$element.data('required')) {
             this.options.required = true;
         }
@@ -285,7 +291,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             this.$element.find("input,button").removeAttr("disabled");
         }
 
-        if ((!this.options.selectedDateTime && this.options.required) || (this.options.selectedDateTime && !this.options.selectedDateTime.isValid())) {
+        if (this.options.hasError || (!this.options.selectedDateTime && this.options.required) || (this.options.selectedDateTime && !this.options.selectedDateTime.isValid())) {
             this.$element.addClass("error");
         } else {
             this.$element.removeClass("error");

@@ -98,17 +98,21 @@
                 e.preventDefault();
             });
             this.$textContainer.finger("blur.rte", function(e) {
-                // get back in a few milliseconds and see if it was a temporary focus
-                // change (if a toolbar button was invoked) and finish otherwise -
-                // this is the case on mobile devices if the on-screen keyboard gets
-                // hidden
-                CUI.rte.Utils.defer(function() {
-                    if (!self.isTemporaryFocusChange && self.isActive
-                            && !self.editorKernel.isLocked()) {
-                        self.finish();
-                    }
+                if (!self.editorKernel.isLocked()) {
+                    // get back in a few milliseconds and see if it was a temporary focus
+                    // change (if a toolbar button was invoked) and finish otherwise -
+                    // this is the case on mobile devices if the on-screen keyboard gets
+                    // hidden
+                    CUI.rte.Utils.defer(function() {
+                        if (!self.isTemporaryFocusChange && self.isActive
+                                && !self.editorKernel.isLocked()) {
+                            self.finish();
+                        }
+                        self.isTemporaryFocusChange = false;
+                    }, 10);
+                } else {
                     self.isTemporaryFocusChange = false;
-                }, 10);
+                }
             });
             // additional keyboard handling
             CUI.rte.Eventing.on(editContext, document.body, "keyup", this.handleKeyUp,
@@ -116,7 +120,9 @@
             // handle clicks/taps (clicks on the editable div vs. common/"out of area"
             // clicks vs. clicks on toolbar items)
             this.$textContainer.fipo("tap.rte", "click.rte", function(e) {
-                self._hidePopover();
+                if (!self.editorKernel.isLocked()) {
+                    self._hidePopover();
+                }
                 e.stopPropagation();
             });
             var bookmark;
@@ -134,6 +140,10 @@
                 // used to handle those cases
                 if (self.ignoreNextClick) {
                     self.ignoreNextClick = false;
+                    return;
+                }
+                // also ignore if editing is currently locked
+                if (self.editorKernel.isLocked()) {
                     return;
                 }
                 // TODO find a cleaner solution ...
@@ -255,7 +265,7 @@
                 _isClick = true;
             });
             this.$textContainer.pointer("mousemove.rte.toolbarhide", function(e) {
-                if (_isClick && !_isToolbarHidden) {
+                if (_isClick && !_isToolbarHidden && !self.editorKernel.isLocked()) {
                     self.editorKernel.toolbar.hide();
                     _isToolbarHidden = true;
                 }

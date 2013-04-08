@@ -27,7 +27,7 @@
 
         height: 2rem;
         padding: 0.25rem 0.5rem 0.25rem 2rem;
-        margin: 0 0 0.5rem 0;
+        margin: 0.5rem 0 0.5rem 0;
 
         border: @px solid @textfield-border-color; 
         background: @textfield-background-color url('@{component-images-folder}/filters/magnifier.png') no-repeat 0.5rem 0.4rem;
@@ -85,9 +85,11 @@
     }
 
     &.error input {
+        border-color: @textfield-error-border-color;
+    }
+    &.error input:focus {
         .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
     }
-
 }
 
 .filters.stacking {

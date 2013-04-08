@@ -4,8 +4,10 @@
 */
 
 div.search {
+  display: inline-block;
   padding: 0;
-  margin: 0;
+  margin: 0.5rem 0;
+  white-space: nowrap; // Fix iOS Safari bug with negative margins
   
   input[type=text] {
     height: 2rem;
@@ -19,14 +21,18 @@ div.search {
     font-family: @font-base-family;
 
     &.error {
-      .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+      border-color: @textfield-error-border-color;
     }
+    &:focus.error {
+      .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+    }    
   }
 
   button {
     .icon-search;
     .button-square;
-    
+    white-space: normal;
+        
     // Fit inside of the search field
     height: 30*@px;
     margin: @px 0 0 -37*@px;

@@ -103,6 +103,7 @@ var index = filters.getSelectedIndex();
       @param {Function} [options.optionRenderer=default renderer]  (Optional) Renderer for the autocompleter and the tag badges
       @param {boolean}  [options.infiniteLoad=false]               Should extra content be loaded dynamically when the list is scrolled to bottom?
       @param {boolean}  [options.maxLoadingItems=20]               Maximum number of items to load per request on infinite list loading.
+      @param {boolean}  [options.hasError=false]                   Set to true to display widget as erroneous, regardless if widgets detects an error or not
           */
     construct: function(options) {
         this.selectedIndices = []; // Initialise fresh array
@@ -158,7 +159,8 @@ var index = filters.getSelectedIndex();
         icons: null,
         iconSize: "small",
         infiniteLoad: false,
-        maxLoadingItems: 20
+        maxLoadingItems: 20,
+        hasError: false
     },
 
     dropdownList: null, // Reference to instance of CUI.DropdownList
@@ -265,7 +267,7 @@ var index = filters.getSelectedIndex();
                     this._update();
                 }
             }
-            var hasError = (!this.options.multiple && this.inputElement.val().length > 0 && this.selectedIndex < 0);
+            var hasError = this.options.hasError || (!this.options.multiple && this.inputElement.val().length > 0 && this.selectedIndex < 0);
             this.$element.toggleClass("error", hasError);
         }.bind(this));
        
@@ -419,6 +421,8 @@ var index = filters.getSelectedIndex();
             if (this.$element.attr("placeholder")) this.options.placeholder = this.$element.attr("placeholder");
             if (this.$element.attr("data-placeholder")) this.options.placeholder = this.$element.attr("data-placeholder");
             if (this.$element.attr("disabled")) this.options.disabled = true;
+            if (this.$element.hasClass("error")) this.options.hasError = true;
+            if (this.$element.find("input").hasClass("error")) this.options.hasError = true;                
             if (this.$element.attr("data-disabled")) this.options.disabled = true;
             if (this.$element.attr("data-allow") === "create") this.options.allowCreate = true;
             if (this.$element.attr("data-option-renderer")) {

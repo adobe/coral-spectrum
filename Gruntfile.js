@@ -45,26 +45,28 @@ module.exports = function(grunt) {
       'components/CUI.FileUpload.js',
       'components/CUI.Toolbar.js',
       'components/CUI.Tooltip.js',
-      'components/CUI.DraggableList.js'
+      'components/CUI.DraggableList.js',
+      'components/CUI.FormError.js'
 
     ],
     "cui-rte": [
       'components/rte/Theme.js',
       'components/rte/UIUtils.js',
       'components/rte/ConfigUtils.js',
-      'components/rte/cui/ToolkitImpl.js',
-      'components/rte/cui/ToolbarImpl.js',
-      'components/rte/cui/PopoverManager.js',
-      'components/rte/cui/ElementImpl.js',
-      'components/rte/cui/ParaFormatterImpl.js',
-      'components/rte/cui/StyleSelectorImpl.js',
-      'components/rte/cui/CuiToolbarBuilder.js',
-      'components/rte/cui/CmItemImpl.js',
-      'components/rte/cui/CmSeparatorImpl.js',
-      'components/rte/cui/CuiContextMenuBuilder.js',
-      'components/rte/cui/CuiDialogManager.js',
-      'components/rte/cui/CuiDialogHelper.js',
-      'components/rte/cui/DialogImpl.js',
+      'components/rte/ui/ToolkitImpl.js',
+      'components/rte/ui/ToolbarImpl.js',
+      'components/rte/ui/PopoverManager.js',
+      'components/rte/ui/ElementImpl.js',
+      'components/rte/ui/ParaFormatterImpl.js',
+      'components/rte/ui/StyleSelectorImpl.js',
+      'components/rte/ui/CuiToolbarBuilder.js',
+      'components/rte/ui/CmItemImpl.js',
+      'components/rte/ui/CmSeparatorImpl.js',
+      'components/rte/ui/CuiContextMenuBuilder.js',
+      'components/rte/ui/dialogs/AbstractDialog.js',
+      'components/rte/ui/dialogs/LinkBaseDialog.js',
+      'components/rte/ui/CuiDialogManager.js',
+      'components/rte/ui/CuiDialogHelper.js',
 
       'components/CUI.RichText.js',
 
@@ -161,7 +163,6 @@ module.exports = function(grunt) {
           'jQuery',       // jQuery
           'console',      // console.log...
           'Backbone',     // Backbone
-          '_',            // Underscore
           'Handlebars',   // Handlebars
           'prettyPrint',  // google-code-prettify
           'CUI',          // CoralUI
@@ -251,10 +252,6 @@ module.exports = function(grunt) {
           {
             src: ['<%= dirs.bower %>/jquery/index.js'],
             dest: '<%= dirs.build %>/js/libs/jquery.js'
-          },
-          {
-            src: ['<%= dirs.bower %>/underscore/index.js'],
-            dest: '<%= dirs.build %>/js/libs/underscore.js'
           },
           {
             src: ['<%= dirs.bower %>/handlebars/index.js'],
