@@ -45,7 +45,8 @@ module.exports = function(grunt) {
       'components/CUI.FileUpload.js',
       'components/CUI.Toolbar.js',
       'components/CUI.Tooltip.js',
-      'components/CUI.DraggableList.js'
+      'components/CUI.DraggableList.js',
+      'components/CUI.FormError.js'
 
     ],
     "cui-rte": [
