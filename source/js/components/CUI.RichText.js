@@ -197,6 +197,10 @@
                 var _tbHideTimeout;
                 var _lastSel;
                 $doc.on("selectionchange.rte.toolbarhide", function(e) {
+                    if (self.editorKernel.isLocked()) {
+                        _lastSel = undefined;
+                        return;
+                    }
                     // using native selection instead of selection abstraction here, as
                     // it is faster and we are in a controlled environment (Webkit mobile)
                     // here
