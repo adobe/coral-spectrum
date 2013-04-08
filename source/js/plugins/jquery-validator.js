@@ -287,8 +287,8 @@ jQuery.validator.register({
     // This way no other event handlers are executed
     document.addEventListener("submit", function(e) {
         var form = $(e.target);
-        
-        // TODO TBD if we want to do validation only when there is a certain class
+
+        // TODO TBD if we want to do validation only when there is a certain class or based on config of $.validator
 
         if (!form.is("form") ||
             form.prop("noValidate") === true ||
