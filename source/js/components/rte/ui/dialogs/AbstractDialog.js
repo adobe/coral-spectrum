@@ -117,7 +117,11 @@
         },
 
         getFieldByType: function(name) {
-            return this.$dialog.find("*[data-type=\"" + name + "\"]");
+            var $field = this.$dialog.find("*[data-type=\"" + name + "\"]");
+            if ($field.length > 0) {
+                return $field;
+            }
+            return undefined;
         },
 
         /**

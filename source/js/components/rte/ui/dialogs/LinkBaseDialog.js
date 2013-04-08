@@ -66,7 +66,7 @@
             if (targetBlankField) {
                 var target = (this.objToEdit && this.objToEdit.target
                         ? this.objToEdit.target.toLowerCase() : null);
-                targetBlankField.val(target == "_blank" ? "true" : "false");
+                targetBlankField.val([ target == "_blank" ? "true" : "false" ]);
             }
         },
 
@@ -81,7 +81,13 @@
                 }
                 var targetBlankField = this.getFieldByType("targetBlank");
                 if (targetBlankField) {
-                    if (targetBlankField.val() === "true") {
+                    var blankValue;
+                    if (targetBlankField.is("input:radio")) {
+                        blankValue = targetBlankField.filter(":checked").val();
+                    } else {
+                        blankValue = targetBlankField.val();
+                    }
+                    if (blankValue === "true") {
                         this.objToEdit.target = "_blank";
                     } else {
                         this.objToEdit.target = null;
