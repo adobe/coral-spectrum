@@ -47,11 +47,15 @@
 
         construct: function(config) {
             CUI.rte.Utils.apply(this, config);
-            var killEvent = function(e) {
-                e.stopPropagation();
-                e.preventDefault();
-            };
             var self = this;
+            var killEvent = function(e) {
+                if ($(e.target).is("input")) {
+                    self.editorKernel.focus();
+                } else {
+                    e.stopPropagation();
+                    e.preventDefault();
+                }
+            };
             this.$dialog.finger("tap.rte-dialog", killEvent);
             this.$dialog.on("click.rte-dialog", killEvent);
             this.$dialog.on("click.rte-dialog", "button[data-type=\"apply\"]",
@@ -80,6 +84,7 @@
 
         hide: function() {
             this.popoverManager.hide();
+            this.editorKernel.focus();
             this.editorKernel.unlock();
         },
 
