@@ -37,6 +37,7 @@ Currently there are the following data options:
       @param {String} [options.type=info]           Type of dialog to display. One of info, error, notice or success
       @param {String} [options.arrow=left]          Where to place the arrow? One of left, right, top or bottom.
       @param {Integer} [options.delay=500]          Delay before an interactive tooltip is shown.
+      @param {Integer} [options.distance=0]        Additional distance of tooltip from element.
       @param {Boolean} [options.visible=true]       True to display immediately, False to defer display until show() called
       @param {Boolean} [options.interactive=false]  True to display tooltip on mouse over, False to only show/hide it when show()/hide() is called manually
      */
@@ -117,7 +118,8 @@ Currently there are the following data options:
           type: 'default',
           interactive: false,
           arrow: null,
-          delay: 500
+          delay: 500,
+          distance: 0
         },
 
         _types: [
@@ -224,20 +226,20 @@ Currently there are the following data options:
             var top = 0;
 
             if (this.options.arrow === "left") {
-                left =  eLeft + eWidth;
+                left =  eLeft + eWidth + this.options.distance;
                 top = eTop + (eHeight - height) / 2;
             }
             if (this.options.arrow === "right") {
-                left =  eLeft - width;
+                left =  eLeft - width - this.options.distance;
                 top = eTop + (eHeight - height) / 2;
             }
             if (this.options.arrow === "bottom") {
                 left =  eLeft + (eWidth - width) / 2;
-                top = eTop - height;
+                top = eTop - height - this.options.distance;
             }
             if (this.options.arrow === "top") {
                 left =  eLeft + (eWidth - width) / 2;
-                top = eTop + eHeight;
+                top = eTop + eHeight + this.options.distance;
             }                  
 
             this.$element.css('left', left);
