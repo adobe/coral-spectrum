@@ -60,13 +60,13 @@
                         value = href;
                     }
                 }
-                $(hrefField).val(value);
+                hrefField.val(value);
             }
             var targetBlankField = this.getFieldByType("targetBlank");
             if (targetBlankField) {
                 var target = (this.objToEdit && this.objToEdit.target
                         ? this.objToEdit.target.toLowerCase() : null);
-                $(targetBlankField).val(target == "_blank" ? "true" : "false");
+                targetBlankField.val(target == "_blank" ? "true" : "false");
             }
         },
 
@@ -81,7 +81,7 @@
                 }
                 var targetBlankField = this.getFieldByType("targetBlank");
                 if (targetBlankField) {
-                    if ($(targetBlankField).val() === "true") {
+                    if (targetBlankField.val() === "true") {
                         this.objToEdit.target = "_blank";
                     } else {
                         this.objToEdit.target = null;

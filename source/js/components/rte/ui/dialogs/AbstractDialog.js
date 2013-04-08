@@ -51,7 +51,8 @@
             CUI.rte.Utils.apply(this, config);
             var self = this;
             var killEvent = function(e) {
-                if ($(e.target).is("input")) {
+                var $target = $(e.target);
+                if ($target.is("input") && !$target.is("input:text")) {
                     self.editorKernel.focus();
                 } else {
                     e.stopPropagation();
