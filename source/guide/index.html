@@ -106,6 +106,7 @@
                         <a href="#Dropdown">Dropdown</a>
                         <a href="#Datepicker">Datepicker</a>
                         <a href="#Draggable">Draggable</a>
+                        <a href="#FormErrors">Form Errors</a>                        
                     </nav>
                 </section>
 
@@ -1679,6 +1680,26 @@
 </pre>
                     </div>
                 </section>
+                
+                <section id="FormErrors" style="position: relative">
+                    <h2 class="line">Form Errors</h2>
+                    <p>Descriptive errors for form field validation can be added easily by just adding a <code class="atv">&lt;span&gt;</code> sibling with class <code class="atv">form-error</code> to the erroneous form field.</p>
+                    <p>On hover (or touch on mobile devices) a tooltip will be shown with your message that should describe the error in detail.</p>
+                    <p>You can choose wether the tooltip should be displayed below (default) or right of the error icon (<code class="atv">tooltip-right</code>).</p>
+
+                    <div class="componentSample">
+                        <div class="example clearfix">
+                            <div class="left">
+                                <input type="text" class="error" value="Tooltip below"> <span class="form-error">Please correct your input!</span><br>
+                                <input type="text" class="error" value="Tooltip right"> <span class="form-error tooltip-right">Please correct your input!</span>
+                            </div>                     
+                        </div>
+                        <pre class="prettyprint linenums">
+&lt;input type="text" class="error" value="Tooltip below"&gt; &lt;span class="form-error"&gt;Please correct your input!&lt;/span&gt;&lt;br&gt;
+&lt;input type="text" class="error" value="Tooltip right"&gt; &lt;span class="form-error tooltip-right"&gt;Please correct your input!&lt;/span&gt;
+</pre>
+                    </div>
+                </section>                
 
             </section><!-- /ButtonsAndControls -->
 
