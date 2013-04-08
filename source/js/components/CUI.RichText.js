@@ -63,12 +63,12 @@
         },
 
         handleKeyUp: function(e) {
-            this._hidePopover();
-            // if (!window.CQ_inplaceEditDialog) {
-                if (e.getCharCode() === 27) {
-                    this.finish();
-                }
-            // }
+            if (!this.editorKernel.isLocked()) {
+                this._hidePopover();
+            }
+            if (e.getCharCode() === 27) {
+                this.finish();
+            }
         },
 
         initializeEditorKernel: function(initialContent) {

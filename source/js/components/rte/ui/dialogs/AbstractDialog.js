@@ -24,6 +24,8 @@
 
         dialogHelper: null,
 
+        range: null,
+
         $editable: null,
 
         $container: null,
@@ -80,6 +82,8 @@
         },
 
         show: function() {
+            this.range = CUI.rte.Selection.createRangeBookmark(
+                    this.editorKernel.getEditContext());
             this.popoverManager.hide();
             if (this.$dialog) {
                 this.popoverManager.use(this.$dialog, this.$trigger, this.$toolbar);
@@ -92,6 +96,8 @@
             this.popoverManager.hide();
             this.editorKernel.focus();
             this.editorKernel.unlock();
+            CUI.rte.Selection.selectRangeBookmark(this.editorKernel.getEditContext(),
+                    this.range);
             this.editorKernel.fireUIEvent("dialoghide");
         },
 
@@ -103,7 +109,6 @@
                     this.applyFn(this.editContext, this.objToEdit);
                 }
             }
-            this.hide();
         },
 
         cancel: function() {
