@@ -70,6 +70,17 @@
             }
         },
 
+        validate: function() {
+            var hrefField = this.getFieldByType("href");
+            if (hrefField) {
+                var href = hrefField.val();
+                if (href && (href.length > 0)) {
+                    return true;
+                }
+            }
+            return false;
+        },
+
         dlgToModel: function() {
             if (this.objToEdit) {
                 var hrefField = this.getFieldByType("href");
