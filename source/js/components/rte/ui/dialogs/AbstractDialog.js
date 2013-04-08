@@ -18,7 +18,7 @@
 
 (function($) {
 
-    CUI.rte.ui.cui.DialogImpl = new Class({
+    CUI.rte.ui.cui.AbstractDialog = new Class({
 
         config: null,
 
@@ -56,6 +56,8 @@
                     e.preventDefault();
                 }
             };
+            this.$dialog = CUI.rte.UIUtils.getDialog(
+                    this.getDataType(), undefined, this.$container);
             this.$dialog.finger("tap.rte-dialog", killEvent);
             this.$dialog.on("click.rte-dialog", killEvent);
             this.$dialog.on("click.rte-dialog", "button[data-type=\"apply\"]",
@@ -96,6 +98,10 @@
         cancel: function() {
             // console.log("cancel");
             this.hide();
+        },
+
+        getDataType: function() {
+            throw new Error("DialogImpl#getDataType must be overridden.");
         }
 
     });

@@ -62,9 +62,10 @@ module.exports = function(grunt) {
       'components/rte/ui/CmItemImpl.js',
       'components/rte/ui/CmSeparatorImpl.js',
       'components/rte/ui/CuiContextMenuBuilder.js',
+      'components/rte/ui/dialogs/AbstractDialog.js',
+      'components/rte/ui/dialogs/LinkBaseDialog.js',
       'components/rte/ui/CuiDialogManager.js',
       'components/rte/ui/CuiDialogHelper.js',
-      'components/rte/ui/DialogImpl.js',
 
       'components/CUI.RichText.js',
 
