@@ -85,9 +85,11 @@
     }
 
     &.error input {
+        border-color: @textfield-error-border-color;
+    }
+    &.error input:focus {
         .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
     }
-
 }
 
 .filters.stacking {

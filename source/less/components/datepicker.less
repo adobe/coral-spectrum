@@ -37,9 +37,13 @@
     }
     &.error > button,
     &.error input {
+      border-color: @textfield-error-border-color !important;
+    }
+    &.error.focus > button,
+    &.error.focus input {
       .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
     }
-
+    
     button,
     button[class^="icon-"],
     button[class*=" icon-"] {
