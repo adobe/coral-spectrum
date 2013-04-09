@@ -20,6 +20,22 @@
   &.focus {
     z-index: 1;
   }
+  
+  &.error {
+    .handle {
+      border-color: @slider-border-error-color;
+    }
+    .tick.covered {
+      background-color: @slider-border-error-color;
+    }
+    .fill {
+      background-color: mix(@slider-border-error-color, @slider-background-color);
+      border-color: @slider-border-error-color;
+    }
+    .handle.focus {
+      .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+    }
+  }
 
   .slider-transition {
     -moz-transition: all 0.1s;
