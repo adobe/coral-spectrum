@@ -63,12 +63,12 @@
         },
 
         handleKeyUp: function(e) {
-            this._hidePopover();
-            // if (!window.CQ_inplaceEditDialog) {
-                if (e.getCharCode() === 27) {
-                    this.finish();
-                }
-            // }
+            if (!this.editorKernel.isLocked()) {
+                this._hidePopover();
+            }
+            if (e.getCharCode() === 27) {
+                this.finish();
+            }
         },
 
         initializeEditorKernel: function(initialContent) {
@@ -197,6 +197,10 @@
                 var _tbHideTimeout;
                 var _lastSel;
                 $doc.on("selectionchange.rte.toolbarhide", function(e) {
+                    if (self.editorKernel.isLocked()) {
+                        _lastSel = undefined;
+                        return;
+                    }
                     // using native selection instead of selection abstraction here, as
                     // it is faster and we are in a controlled environment (Webkit mobile)
                     // here

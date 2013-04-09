@@ -1,139 +1,139 @@
 /**
-  Class: div.wizard
-  Displays a wizard widget. 
+  Class: .wizard or .flexwizard
+  Displays a wizard widget.
 */
 
-.wizard {
-    /** Fix toolbar for wizard */
-    .toolbar {
-        .left,
-        .right {
+.wizard, .flexwizard {
+    // Fix toolbar for wizard
+    // TODO this is a sign that our css is badly designed
+    > .toolbar {
+        .left, .right {
             height: auto;
         }
     }
+}
 
-    &>nav {
-        background: @wizard-nav-background-color;
+.wizard > section, .flexwizard > .step {
+    display: none;
 
-        button {
+    &.active {
+        display: block;
+    }
+}
+
+.wizard > nav, .flexwizard > nav {
+    background: @wizard-nav-background-color;
+
+    > button, > a.button {
+        color: @wizard-button-text-color;
+        margin: 6px 9px 8px 9px;
+    }
+
+    > button[disabled] {
+        opacity: 0.5;
+        color: @wizard-button-text-color;
+
+        &:hover {
             color: @wizard-button-text-color;
-            margin: 6px 9px 8px 9px;
         }
+    }
 
-        button[disabled] {
-            opacity: 0.5;
-            color: @wizard-button-text-color;
+    > button.back, > a.button.back {
+        background: @wizard-back-button-background-color;
+        border-color: @wizard-back-button-border-color;
+    }
 
-            &:hover {
-                color: @wizard-button-text-color;
-            }
-        }
+    > button.next, > a.button.next {
+        background: @wizard-next-button-background-color;
+        border-color: @wizard-next-button-border-color;
+    }
 
-        button.back {
-            background: @wizard-back-button-background-color;
-            border-color: @wizard-back-button-border-color;
-        }
+    > ol {
+        counter-reset: item;
+        padding: 9px 0 0 0;
+        font-size: 0; // To remove html whitespace between inline elements
 
-        button.next {
-            background: @wizard-next-button-background-color;
-            border-color: @wizard-next-button-border-color;
-        }
+        > li {
+            position: relative;
+            display: inline-block;
+            margin: 0;
+            padding-bottom: 5*@px;
+            padding-right: @wizard-progress-list-item-offset;
+            border-bottom: @wizard-progress-bar-height solid @wizard-progress-bar-color;
+            color: @wizard-progress-title-color;
+            font-size: 14*@px;
+            counter-increment: item;
 
-        ol {
-            counter-reset: item;
-            padding: 9px 0 0 0;
-            font-size: 0; // To remove html whitespace between inline elements
-
-            li {
-                position: relative;
-                display: inline-block;
-                margin: 0;
-                padding-bottom: 5*@px;
-                padding-right: @wizard-progress-list-item-offset;
-                border-bottom: @wizard-progress-bar-height solid @wizard-progress-bar-color;
-                color: @wizard-progress-title-color;
-                font-size: 14*@px;
-                counter-increment: item;
-
-                // First item gets an additional section of progress bar left
-                &:first-child {
-                  padding-left: @wizard-progress-list-item-offset;
-                  &:after {
-                    left: @wizard-progress-list-item-offset;
-                  }
-                  &.stepped {
-                  }
-                }
-
-                // List counter
-                &:before {
-                    content: counter(item) "  ";
-                    display: inline-block;
-                    width: 18*@px;
-                    height: 12*@px;
-                    text-align: left;
-                }
-
-                // Circle step marker
+            // First item gets an additional section of progress bar left
+            &:first-child {
+                padding-left: @wizard-progress-list-item-offset;
                 &:after {
-                  content: " ";
-                  position: absolute;
-                  bottom: -7*@px;
-                  left: 0;
-                  display: block;
-                  width: @wizard-progress-circle-diameter;
-                  height: @wizard-progress-circle-diameter;
-                  border: @wizard-progress-circle-border-width solid @wizard-nav-background-color;
-                  .border-radius(@wizard-progress-circle-diameter);
-                  background: @wizard-progress-circle-color;
+                    left: @wizard-progress-list-item-offset;
                 }
-
-                // Current item
-                &.active {
-                    color: @wizard-progress-active-title-color;
-
-                    &:after {
-                      background: @wizard-progress-circle-highlight-color;
-                    }
-                }
-
-                // Previous items
                 &.stepped {
-                  color: @wizard-progress-active-title-color;
-                  border-color: @wizard-progress-bar-highlight-color;
+                }
+            }
 
-                  &:before {
+            // List counter
+            &:before {
+                content: counter(item) "  ";
+                display: inline-block;
+                width: 18*@px;
+                height: 12*@px;
+                text-align: left;
+            }
+
+            // Circle step marker
+            &:after {
+                content: " ";
+                position: absolute;
+                bottom: -7*@px;
+                left: 0;
+                display: block;
+                width: @wizard-progress-circle-diameter;
+                height: @wizard-progress-circle-diameter;
+                border: @wizard-progress-circle-border-width solid @wizard-nav-background-color;
+                .border-radius(@wizard-progress-circle-diameter);
+                background: @wizard-progress-circle-color;
+            }
+
+            // Current item
+            &.active {
+                color: @wizard-progress-active-title-color;
+
+                &:after {
+                    background: @wizard-progress-circle-highlight-color;
+                }
+            }
+
+            // Previous items
+            &.stepped {
+                color: @wizard-progress-active-title-color;
+                border-color: @wizard-progress-bar-highlight-color;
+
+                &:before {
                     content: " ";
                     background: url('@{component-images-folder}/wizard/check.png') 0 bottom no-repeat;
-                  }
+                }
 
-                  &:after {
+                &:after {
                     background: @wizard-progress-circle-highlight-color;
-                  }
-                }
-
-                // The leading fill
-                .lead-fill {
-                  position: absolute;
-                  left: 0;
-                  bottom: -@wizard-progress-bar-height;
-                  width: @wizard-progress-list-item-offset;
-                  height: @wizard-progress-bar-height;
-                  background-color: @wizard-progress-bar-highlight-color;
-                }
-
-                &.wizard-hidden-step {
-                  display: none;
                 }
             }
+
+            // The leading fill
+            .lead-fill {
+                position: absolute;
+                left: 0;
+                bottom: -@wizard-progress-bar-height;
+                width: @wizard-progress-list-item-offset;
+                height: @wizard-progress-bar-height;
+                background-color: @wizard-progress-bar-highlight-color;
+            }
+
+            &.wizard-hidden-step {
+                display: none;
+            }
         }
-    }
-
-    &>section {
-        display: none;
-    }
-
-    &>section.active {
-        display: block;
     }
 }
