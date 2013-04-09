@@ -1,95 +1,87 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Form Errors</title>
+<head>
+  <meta charset="utf-8">
+  <title>Form Errors</title>
 
-        <link rel="stylesheet" href="../../css/cui.css">
-        
-        <script src="../../js/libs/underscore.js"></script>
-        <script src="../../js/libs/handlebars.js"></script>
-        <script src="../../js/libs/moment.js"></script>
-        <script src="../../js/libs/jquery.js"></script>
-        <script src="../../js/libs/jquery-fingerpointer.js"></script>
-        <script src="../../js/libs/toe.js"></script>
-        <script src="../../js/libs/moment.js"></script>
+  <link rel="stylesheet" href="../../css/cui.css">
   
-        <script src="../../js/CUI.js"></script>
-
-    </head>
-    <body>
-    
-      <section>
-          <h1>Form errors</h1>
-          <div>
-            <input type="text" name="test" class="error"> <span class="form-error">Please provide some input</span>
-          </div>
-          <div>
-            <input type="text" name="test" class="error"> <span class="form-error">Please provide some input</span>
-          </div>
-          <div>
-            <label>Limited characters</label><br>
-            <input type="text" name="test" maxlength="10" data-init="character-count"><br>
-            <textarea type="text" name="test" maxlength="10" rows="5" cols="20" data-init="character-count"></textarea><br>
-            <label>Browser limitation</label><br>
-            <textarea type="text" name="test" maxlength="10" rows="5" cols="20" ></textarea><br>
-          </div>
-          <div>
-            <div class="datepicker error" data-init="datepicker">
-              <input type="date" value="29 November 2012" name="date1"><button class="icon-calendar small"><span>Datepicker</span></button>
-            </div>
-            
-            <span class="form-error">Please provide some input</span>
-          </div>
-          <div>
-            <div class="slider ticked filled tooltips error" data-init="slider">
-                <input id="hslider1" type="range" value="14" min="10" max="20" step="2">
-            </div>
-            <span class="form-error tooltip-right">Please provide some input</span>
-            <br>
-            (No red error border design for the slider widget, should we add one?)
-          </div>
-          <div>
-            <div class="search">
-              <input type="text" placeholder="Search" class="error">
-              <button>Search</button>
-            </div>
-            <span class="form-error tooltip-right">Please provide some input</span>
-          </div>
-          <div>          
-            <div class="filters error" data-init="filters">
-                <input type="text" placeholder="Single Term Filter">
-                <select>
-                    <option selected>Apple</option>
-                    <option>Pear</option>
-                    <option>Banana</option>
-                </select>
-            </div>
-            <span class="form-error tooltip-right">Please provide some input</span>
-          </div>    
-          <div>                    
-            <div class="dropdown error" data-init="dropdown">
-                <button>Single Select</button>
-                <select name="dropdown">
-                    <option>Single One</option>
-                    <option selected>Single Two</option>
-                    <option>Single Three</option>
-                </select>
-            </div>
-            <span class="form-error tooltip-right">Please provide some input</span>
-          </div>
-          <div>                    
-            <div class="dropdown error" data-editable="true" data-init="dropdown">
-                <button>Single Select</button>
-                <select name="dropdown">
-                    <option>Single One</option>
-                    <option selected>Single Two</option>
-                    <option>Single Three</option>
-                </select>
-            </div>
-            <span class="form-error tooltip-right">Please provide some input</span>
-          </div>          
-      </section>
-    
-    </body>
+  <script src="../../js/libs/handlebars.js"></script>
+  <script src="../../js/libs/moment.js"></script>
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/libs/jquery-fingerpointer.js"></script>
+  <script src="../../js/libs/toe.js"></script>
+  <script src="../../js/CUI.js"></script>
+</head>
+<body>
+  <section>
+    <h1>Form Errors</h1>
+    <div>
+      <input type="text" name="test" class="error"> <span class="form-error">Please provide some input</span>
+    </div>
+    <div>
+      <input type="text" name="test" class="error"> <span class="form-error">Please provide some input</span>
+    </div>
+    <div>
+      <label>Limited characters</label><br>
+      <input type="text" name="test" maxlength="10" data-init="character-count"><br>
+      <textarea type="text" name="test" maxlength="10" rows="5" cols="20" data-init="character-count"></textarea><br>
+      <label>Browser limitation</label><br>
+      <textarea type="text" name="test" maxlength="10" rows="5" cols="20" ></textarea><br>
+    </div>
+    <div>
+      <div class="datepicker error" data-init="datepicker">
+        <input type="date" value="29 November 2012" name="date1"><button class="icon-calendar small"><span>Datepicker</span></button>
+      </div>
+      <span class="form-error">Please provide some input</span>
+    </div>
+    <div>
+      <div class="slider ticked filled tooltips error" data-init="slider">
+        <input id="hslider1" type="range" value="14" min="10" max="20" step="2">
+      </div>
+      <span class="form-error tooltip-right">Please provide some input</span>
+      <br>
+    </div>
+    <div>
+      <div class="search">
+        <input type="text" placeholder="Search" class="error">
+        <button>Search</button>
+      </div>
+      <span class="form-error tooltip-right">Please provide some input</span>
+    </div>
+    <div>
+      <div class="filters error" data-init="filters">
+        <input type="text" placeholder="Single Term Filter">
+        <select>
+          <option selected>Apple</option>
+          <option>Pear</option>
+          <option>Banana</option>
+        </select>
+      </div>
+      <span class="form-error tooltip-right">Please provide some input</span>
+    </div>
+    <div>
+      <div class="dropdown error" data-init="dropdown">
+        <button>Single Select</button>
+        <select name="dropdown">
+          <option>Single One</option>
+          <option selected>Single Two</option>
+          <option>Single Three</option>
+        </select>
+      </div>
+      <span class="form-error tooltip-right">Please provide some input</span>
+    </div>
+    <div>
+      <div class="dropdown error" data-editable="true" data-init="dropdown">
+        <button>Single Select</button>
+        <select name="dropdown">
+          <option>Single One</option>
+          <option selected>Single Two</option>
+          <option>Single Three</option>
+        </select>
+      </div>
+        <span class="form-error tooltip-right">Please provide some input</span>
+    </div>          
+  </section>
+</body>
 </html>

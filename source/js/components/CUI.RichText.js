@@ -233,19 +233,7 @@
                                         (_lastSel.foffs === slct.focusOffset);
                             }
                             if (!isSameSelection) {
-                                if (_tbHideTimeout) {
-                                    window.clearTimeout(_tbHideTimeout);
-                                    _tbHideTimeout = undefined;
-                                }
-                                if (!_isToolbarHidden) {
-                                    self.editorKernel.toolbar.hide();
-                                    _isToolbarHidden = true;
-                                }
-                                _tbHideTimeout = window.setTimeout(function(e) {
-                                    self.editorKernel.toolbar.show();
-                                    _tbHideTimeout = undefined;
-                                    _isToolbarHidden = false;
-                                }, 1000);
+                                self.editor.toolbar.hideTemporarily();
                             }
                         } else {
                             locks--;
