@@ -55,8 +55,11 @@
             this.$dialog.finger("tap.rte-dialog click.rte-dialog", function(e) {
                 var $target = $(e.target);
                 if ($target.is("input") && !$target.is("input:text")) {
-                    // TODO restore selection to avoid irritation (only if scrolling can be avoided!)
                     self.editorKernel.focus();
+                    if (self.range) {
+                        CUI.rte.Selection.selectRangeBookmark(
+                                self.editorKernel.getEditContext(), self.range);
+                    }
                 } else {
                     CUI.rte.UIUtils.killEvent(e);
                 }
