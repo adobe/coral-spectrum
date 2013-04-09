@@ -50,19 +50,17 @@
         construct: function(config) {
             CUI.rte.Utils.apply(this, config);
             var self = this;
-            var killEvent = function(e) {
-                var $target = $(e.target);
-                if ($target.is("input") && !$target.is("input:text")) {
-                    self.editorKernel.focus();
-                } else {
-                    e.stopPropagation();
-                    e.preventDefault();
-                }
-            };
             this.$dialog = CUI.rte.UIUtils.getDialog(
                     this.getDataType(), undefined, this.$container);
-            this.$dialog.finger("tap.rte-dialog", killEvent);
-            this.$dialog.on("click.rte-dialog", killEvent);
+            this.$dialog.finger("tap.rte-dialog click.rte-dialog", function(e) {
+                var $target = $(e.target);
+                if ($target.is("input") && !$target.is("input:text")) {
+                    // TODO restore selection to avoid irritation (only if scrolling can be avoided!)
+                    self.editorKernel.focus();
+                } else {
+                    CUI.rte.UIUtils.killEvent(e);
+                }
+            });
             this.$dialog.on("click.rte-dialog", "button[data-type=\"apply\"]",
                     function(e) {
                         self.apply();

@@ -115,6 +115,11 @@
                     }
                 }
                 return undefined;
+            },
+
+            killEvent: function(e) {
+                e.stopPropagation();
+                e.preventDefault();
             }
 
         }

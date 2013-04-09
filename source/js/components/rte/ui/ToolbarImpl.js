@@ -50,6 +50,8 @@
 
         _tbHideTimeout: null,
 
+        _recordedScrollTop: null,
+
 
         /**
          * <p>Determines the "clipping parent" of the specified DOM object.</p>
@@ -256,8 +258,17 @@
             }
         },
 
-        _handleScrolling: function() {
-            this._updateUI();
+        _handleScrolling: function(e) {
+            var context = this.editorKernel.getEditContext();
+            var scrollTop = (this.$clipParent || $(context.win)).scrollTop();
+            if (this._recordedScrollTop !== scrollTop) {
+                if (CUI.rte.Common.ua.isTouch && !this.editorKernel.isLocked()) {
+                    this.hideTemporarily(CUI.rte.Utils.scope(this._updateUI, this));
+                } else {
+                    this._updateUI();
+                }
+                this._recordedScrollTop = scrollTop;
+            }
         },
 
         _handleUpdateState: function(e) {
@@ -285,10 +296,6 @@
                 self.editorKernel.focus();
                 e.stopPropagation();
             });
-            this.$container.fipo("touchstart.rte.handler", "mousedown.rte.handler",
-                    "button[data-action^=\"#\"]", function(e) {
-                        self.editorKernel.disableFocusHandling();
-                    });
             // initialize single selection triggers (that adapt the icon to the currently
             // chosen child element)
             var $singleSelectTriggers = this.$toolbar.find(".trigger.single-select");
@@ -398,12 +405,7 @@
                 });
                 // handle scrolling of the clip parent
                 this.$clipParent.on("scroll.rte", function(e) {
-                    if (CUI.rte.Common.ua.isTouch) {
-                        self.hideTemporarily(CUI.rte.Utils.scope(self._handleScrolling,
-                                self));
-                    } else {
-                        self._handleScrolling();
-                    }
+                    self._handleScrolling(e);
                 });
             }
         },

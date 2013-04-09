@@ -73,8 +73,6 @@
 
         initializeEditorKernel: function(initialContent) {
             this.editorKernel.addUIListener("updatestate", this.updateState, this);
-            this.editorKernel.addUIListener("dialogshow", this.onDialogShow, this);
-            this.editorKernel.addUIListener("dialoghide", this.onDialogHide, this);
             this.editorKernel.initializeEditContext(window, document, this.textContainer);
             this.editorKernel.initializeEventHandling();
             this.editorKernel.setUnprocessedHtml(initialContent || "");
@@ -157,33 +155,23 @@
                         bookmark = undefined;
                     }
                     self.isTemporaryFocusChange = true;
-                    e.preventDefault();
-                    e.stopPropagation();
+                    CUI.rte.UIUtils.killEvent(e);
                 } else if (self.isActive) {
                     self.finish();
                 }
             });
-            $body.finger("tap.rte.ooa", function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                return false;
-            });
+            $body.finger("tap.rte.ooa", CUI.rte.UIUtils.killEvent);
             // prevent losing focus for toolbar items
             $body.fipo("tap.rte.item", "click.rte.item", ".rte-toolbar .item", function(e) {
                 self.isTemporaryFocusChange = true;
-                e.stopPropagation();
-                e.preventDefault();
-                return false;
+                CUI.rte.UIUtils.killEvent(e);
             });
             // prevent losing focus for popovers
             $body.fipo("tap.rte.item", "click.rte.item", ".rte-popover .item", function(e) {
                 self.isTemporaryFocusChange = true;
-                e.stopPropagation();
-                e.preventDefault();
-                return false;
+                CUI.rte.UIUtils.killEvent(e);
             });
             // hide toolbar/popover while a selection is created
-            var _isToolbarHidden = false;
             if (com.ua.isTouch) {
                 // On touch devices (Safari Mobile), no touch events are dispatched while
                 // the user defines a selection. As a workaround, we listen to
@@ -233,7 +221,7 @@
                                         (_lastSel.foffs === slct.focusOffset);
                             }
                             if (!isSameSelection) {
-                                self.editor.toolbar.hideTemporarily();
+                                self.editorKernel.toolbar.hideTemporarily();
                             }
                         } else {
                             locks--;
@@ -251,31 +239,31 @@
                         foffs: slct.focusOffset
                     };
                 });
+            } else {
+                var _isClick = false;
+                var _isToolbarHidden = false;
+                this.$textContainer.pointer("mousedown.rte.toolbarhide", function(e) {
+                    _isClick = true;
+                });
+                this.$textContainer.pointer("mousemove.rte.toolbarhide", function(e) {
+                    if (_isClick && !_isToolbarHidden && !self.editorKernel.isLocked()) {
+                        self.editorKernel.toolbar.hide();
+                        _isToolbarHidden = true;
+                    }
+                });
+                this.$textContainer.pointer("mouseup.rte.toolbarhide", function(e) {
+                    if (_isToolbarHidden) {
+                        self.editorKernel.toolbar.show();
+                        _isToolbarHidden = false;
+                    }
+                    _isClick = false;
+                });
             }
-            var _isClick = false;
-            this.$textContainer.pointer("mousedown.rte.toolbarhide", function(e) {
-                _isClick = true;
-            });
-            this.$textContainer.pointer("mousemove.rte.toolbarhide", function(e) {
-                if (_isClick && !_isToolbarHidden && !self.editorKernel.isLocked()) {
-                    self.editorKernel.toolbar.hide();
-                    _isToolbarHidden = true;
-                }
-            });
-            this.$textContainer.pointer("mouseup.rte.toolbarhide", function(e) {
-                if (_isToolbarHidden) {
-                    self.editorKernel.toolbar.show();
-                    _isToolbarHidden = false;
-                }
-                _isClick = false;
-            });
         },
 
         deactivateEditorKernel: function() {
             if (this.editorKernel != null) {
                 this.editorKernel.removeUIListener("updatestate");
-                this.editorKernel.removeUIListener("dialogshow");
-                this.editorKernel.removeUIListener("dialoghide");
                 this.editorKernel.suspendEventHandling();
                 this.editorKernel.destroyToolbar();
             }
@@ -293,26 +281,6 @@
 
         updateState: function() {
             this.editorKernel.updateToolbar();
-        },
-
-        onDialogShow: function() {
-            /*
-            var context = this.editorKernel.getEditContext();
-            this.savedSelection = this.editorKernel.createQualifiedRangeBookmark(context);
-            this.editorKernel.disableEventHandling();
-            window.CQ_inplaceEditDialog = true;
-            */
-        },
-
-        onDialogHide: function() {
-            /*
-            CQ.form.rte.Utils.defer(function() {
-                window.CQ_inplaceEditDialog = false;
-                this.editorKernel.reenableEventHandling();
-                var context = this.editorKernel.getEditContext();
-                this.editorKernel.selectQualifiedRangeBookmark(context, this.savedSelection);
-            }, 1, this);
-            */
         },
 
 
