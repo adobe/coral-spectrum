@@ -284,27 +284,29 @@
 
         _initializePopovers: function() {
             var self = this;
-            this.$container.on("click.rte.handler", "button[data-action^=\"#\"]", function(e) {
-                var $trigger = $(this);
-                var show = !self.popover.isShown() || !self.popover.isTriggeredBy($trigger);
-                self.popover.hide();
-                if (show) {
-                    self.popover.use($(e.target).data("action").substring(1), $trigger,
-                            self.$toolbar);
-                }
-                self._updateUI();
-                self.editorKernel.focus();
-                e.stopPropagation();
-            });
+            this.$container.on("click.rte-toolbar", "button[data-action^=\"#\"]",
+                    function(e) {
+                        var $trigger = $(this);
+                        var show = !self.popover.isShown() ||
+                                !self.popover.isTriggeredBy($trigger);
+                        self.popover.hide();
+                        if (show) {
+                            self.popover.use($(e.target).data("action").substring(1),
+                                    $trigger, self.$toolbar);
+                        }
+                        self._updateUI();
+                        self.editorKernel.focus();
+                        e.stopPropagation();
+                    });
             // clicking a button in the toolbar leads to an unwanted focus transfer; ignore
             // it by disabling focus handling on mousedown and enabling it again on
             // mouseup (after blur); event order is: (touchstart) -> (touchend) -> (tap)
             // -> mousedown -> blur (on opposite component) -> mouseup -> (click)
-            this.$container.on("mousedown.rte-toolbar.handler", ".item",
+            this.$container.on("mousedown.rte-toolbar", ".item",
                     function(e) {
                         self.editorKernel.disableFocusHandling();
                     });
-            $(document).on("mouseup.rte-toolbar.handler",
+            $(document).on("mouseup.rte-toolbar",
                     function(e) {
                         self.editorKernel.enableFocusHandling();
                     });
@@ -412,7 +414,7 @@
             if (this.$clipParent) {
                 // provide a onclick handler for the clip parent, as otherwise no click
                 // events would be sent to finish editing
-                this.$clipParent.on("click.rte-toolbar.clipparent", function() {
+                this.$clipParent.on("click.rte-toolbar", function() {
                     // do nothing
                 });
                 // handle scrolling of the clip parent
@@ -426,11 +428,11 @@
             this.popover.hide();
             this.$toolbar.removeClass(CUI.rte.Theme.TOOLBAR_ACTIVE);
             $(window).off("scroll.rte-toolbar");
-            this.$container.off("mousedown.rte-toolbar.handler");
-            $(document).off("mouseup.rte-toolbar.handler");
+            this.$container.off("mousedown.rte-toolbar click.rte-toolbar");
+            $(document).off("mouseup.rte-toolbar");
             if (this.$clipParent) {
                 this.$clipParent.off("scroll.rte-toolbar");
-                this.$clipParent.off("click.rte-toolbar.clipparent");
+                this.$clipParent.off("click.rte-toolbar");
                 this.$clipParent = undefined;
             }
             this.editorKernel.removeUIListener("updatestate", this._handleUpdateState,

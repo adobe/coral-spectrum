@@ -124,14 +124,14 @@
                 e.stopPropagation();
             });
             var bookmark;
-            $body.fipo("touchstart.rte.ooa", "mousedown.rte.ooa", function(e) {
+            $body.fipo("touchstart.rte-ooa", "mousedown.rte.ooa", function(e) {
                 // we need to save the bookmark as soon as possible, as it gets lost
                 // somewhere in the event handling between the initial touchstart/mousedown
                 // event and the tap/click event where we actually might need it
                 var context = self.editorKernel.getEditContext();
                 bookmark = sel.createRangeBookmark(context);
             });
-            $body.on("click.rte.ooa", function(e) {
+            $body.on("click.rte-ooa", function(e) {
                 // there are cases where "out of area clicks" must be ignored - for example,
                 // on touch devices, the initial tap is followed by a click event that
                 // would stop editing immediately; so the ignoreNextClick flag may be
@@ -160,14 +160,14 @@
                     self.finish();
                 }
             });
-            $body.finger("tap.rte.ooa", CUI.rte.UIUtils.killEvent);
+            $body.finger("tap.rte-ooa", CUI.rte.UIUtils.killEvent);
             // prevent losing focus for toolbar items
-            $body.fipo("tap.rte.item", "click.rte.item", ".rte-toolbar .item", function(e) {
+            $body.fipo("tap.rte-item", "click.rte-item", ".rte-toolbar .item", function(e) {
                 self.isTemporaryFocusChange = true;
                 CUI.rte.UIUtils.killEvent(e);
             });
             // prevent losing focus for popovers
-            $body.fipo("tap.rte.item", "click.rte.item", ".rte-popover .item", function(e) {
+            $body.fipo("tap.rte-item", "click.rte-item", ".rte-popover .item", function(e) {
                 self.isTemporaryFocusChange = true;
                 CUI.rte.UIUtils.killEvent(e);
             });
@@ -184,7 +184,7 @@
                 // hiding/showing the toolbar gets started in that case.
                 var _tbHideTimeout;
                 var _lastSel;
-                $doc.on("selectionchange.rte.toolbarhide", function(e) {
+                $doc.on("selectionchange.rte-toolbarhide", function(e) {
                     if (self.editorKernel.isLocked()) {
                         _lastSel = undefined;
                         return;
@@ -242,16 +242,16 @@
             } else {
                 var _isClick = false;
                 var _isToolbarHidden = false;
-                this.$textContainer.pointer("mousedown.rte.toolbarhide", function(e) {
+                this.$textContainer.pointer("mousedown.rte-toolbarhide", function(e) {
                     _isClick = true;
                 });
-                this.$textContainer.pointer("mousemove.rte.toolbarhide", function(e) {
+                this.$textContainer.pointer("mousemove.rte-toolbarhide", function(e) {
                     if (_isClick && !_isToolbarHidden && !self.editorKernel.isLocked()) {
                         self.editorKernel.toolbar.hide();
                         _isToolbarHidden = true;
                     }
                 });
-                this.$textContainer.pointer("mouseup.rte.toolbarhide", function(e) {
+                this.$textContainer.pointer("mouseup.rte-toolbarhide", function(e) {
                     if (_isToolbarHidden) {
                         self.editorKernel.toolbar.show();
                         _isToolbarHidden = false;
@@ -273,10 +273,10 @@
             CUI.rte.Eventing.un(document.body, "keyup", this.handleKeyUp, this);
             this.$textContainer.off("blur.rte tap.rte click.rte");
             var $body = $(document.body);
-            $body.off("focus.rte tap.rte.ooa click.rte.ooa touchstart.rte.ooa");
-            $body.off("mousedown.rte.ooa tap.rte.item click.rte.item");
-            $body.off("selectionchange.rte.toolbarhide mousemove.rte.toolbarhide");
-            $body.off("mouseup.rte.toolbarhide mousedown.rte.toolbarhide");
+            $body.off("focus.rte tap.rte-ooa click.rte-ooa touchstart.rte-ooa");
+            $body.off("mousedown.rte-ooa tap.rte-item click.rte-item");
+            $body.off("selectionchange.rte-toolbarhide mousemove.rte-toolbarhide");
+            $body.off("mouseup.rte-toolbarhide mousedown.rte-toolbarhide");
         },
 
         updateState: function() {
