@@ -28,6 +28,13 @@
             <input type="text" name="test" class="error"> <span class="form-error">Please provide some input</span>
           </div>
           <div>
+            <label>Limited characters</label><br>
+            <input type="text" name="test" maxlength="10" data-init="character-count"><br>
+            <textarea type="text" name="test" maxlength="10" rows="5" cols="20" data-init="character-count"></textarea><br>
+            <label>Browser limitation</label><br>
+            <textarea type="text" name="test" maxlength="10" rows="5" cols="20" ></textarea><br>
+          </div>
+          <div>
             <div class="datepicker error" data-init="datepicker">
               <input type="date" value="29 November 2012" name="date1"><button class="icon-calendar small"><span>Datepicker</span></button>
             </div>

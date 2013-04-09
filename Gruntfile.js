@@ -46,7 +46,8 @@ module.exports = function(grunt) {
       'components/CUI.Toolbar.js',
       'components/CUI.Tooltip.js',
       'components/CUI.DraggableList.js',
-      'components/CUI.FormError.js'
+      'components/CUI.FormError.js',
+      'components/CUI.CharacterCount.js'
 
     ],
     "cui-rte": [

@@ -1,0 +1,20 @@
+.character-count {
+  display: inline-block;
+  margin: 0.5rem 0.5rem;
+  font-size: 0.8125rem;
+  font-family: @font-base-family;
+  
+  &.negative {
+    color: @textfield-error-font-color;
+  }
+}
+.character-count-container {
+  display: inline-block;
+  vertical-align: top;
+  
+  .character-count {
+    display: block;
+    text-align: right;
+    margin: 0rem 0rem;
+  }  
+}
