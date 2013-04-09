@@ -48,6 +48,9 @@
 
         _popoverStyleSheet: null,
 
+        _tbHideTimeout: null,
+
+
         /**
          * <p>Determines the "clipping parent" of the specified DOM object.</p>
          * <p>The clipping parent is a DOM object that might clip the visible area of the
@@ -228,7 +231,6 @@
                 }
             }
             // calculate popover position
-            var popoverLeft = tbLeft;         // TODO check if we need to change this; if not, inline it
             var popoverTop = (popoverAlign === "top" ?
                     tbTop - popoverData.height : tbTop + tbHeight + popoverData.arrowHeight);
             this.preferredToolbarPos = {
@@ -238,7 +240,7 @@
             return {
                 "toolbar": this.preferredToolbarPos,
                 "popover": {
-                    "left": popoverLeft,
+                    "left": tbLeft,
                     "top": popoverTop,
                     "align": popoverAlign,
                     "arrow": (popoverAlign === "top" ? "bottom" : "top")
@@ -254,7 +256,7 @@
             }
         },
 
-        _handleScrolling: function(e) {
+        _handleScrolling: function() {
             this._updateUI();
         },
 
@@ -303,6 +305,28 @@
             // use "visibility" property instead of "display" - the latter would destroy the
             // layout on show() on Safari Mobile
             this.$toolbar.css("visibility", "hidden");
+        },
+
+        isHidden: function() {
+            return (this.$toolbar.css("visibility") === "hidden");
+        },
+
+        hideTemporarily: function(onShowCallback) {
+            if (this._tbHideTimeout) {
+                window.clearTimeout(this._tbHideTimeout);
+                this._tbHideTimeout = undefined;
+            }
+            if (!this.isHidden()) {
+                this.hide();
+            }
+            var self = this;
+            this._tbHideTimeout = window.setTimeout(function() {
+                self.show();
+                self._tbHideTimeout = undefined;
+                if (onShowCallback) {
+                    onShowCallback();
+                }
+            }, 1000);
         },
 
         show: function() {
@@ -374,7 +398,12 @@
                 });
                 // handle scrolling of the clip parent
                 this.$clipParent.on("scroll.rte", function(e) {
-                    self._handleScrolling(e);
+                    if (CUI.rte.Common.ua.isTouch) {
+                        self.hideTemporarily(CUI.rte.Utils.scope(self._handleScrolling,
+                                self));
+                    } else {
+                        self._handleScrolling();
+                    }
                 });
             }
         },
@@ -388,7 +417,8 @@
                 this.$clipParent.off("click.rte.clipparent");
                 this.$clipParent = undefined;
             }
-            this.editorKernel.removeUIListener("updatestate", this._handleUpdateState, this);
+            this.editorKernel.removeUIListener("updatestate", this._handleUpdateState,
+                    this);
         },
 
         enable: function() {
@@ -427,7 +457,6 @@
             }
             this.elementMap = { };
         }
-
 
     });
 
