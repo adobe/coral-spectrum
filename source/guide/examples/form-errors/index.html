@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Form Errors</title>
+  <title>Form Errors &amp; Validations</title>
 
   <link rel="stylesheet" href="../../css/cui.css">
   
@@ -10,12 +10,14 @@
   <script src="../../js/libs/moment.js"></script>
   <script src="../../js/libs/jquery.js"></script>
   <script src="../../js/libs/jquery-fingerpointer.js"></script>
+  <script src="../../js/libs/jquery-message.js"></script>
+  <script src="../../js/libs/jquery-validator.js"></script>
   <script src="../../js/libs/toe.js"></script>
   <script src="../../js/CUI.js"></script>
 </head>
 <body>
   <section>
-    <h1>Form Errors</h1>
+    <h2>Form Errors</h2>
     <div>
       <input type="text" name="test" class="error"> <span class="form-error">Please provide some input</span>
     </div>
@@ -80,8 +82,18 @@
           <option>Single Three</option>
         </select>
       </div>
-        <span class="form-error tooltip-right">Please provide some input</span>
+      <span class="form-error tooltip-right">Please provide some input</span>
     </div>          
+  </section>
+
+  <section>
+    <h2>Form Validations</h2>
+    <form action="test">
+      <div>
+        <input type="text" name="required" aria-required="true">
+      </div>
+      <input class="button" type="submit" />
+    </form>
   </section>
 </body>
 </html>

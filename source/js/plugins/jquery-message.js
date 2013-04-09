@@ -35,6 +35,10 @@
                     return false;
                 });
 
+                if (!provider) {
+                    return undefined;
+                }
+
                 return ($.isFunction(provider.message) ? provider.message : function(el, key, params) {
                     if (provider.message.hasOwnProperty(key)) {
                         var string = provider.message[key];
@@ -43,7 +47,7 @@
                         });
                         return string;
                     }
-                    return key;
+                    return undefined;
                 }).call(el, el, key, params);
             }
         };
@@ -95,7 +99,7 @@ jQuery.message.register({
     selector: ":lang(en)",
     message: function(el, key, params) {
         if (key === "required") return "Please fill out this field.";
-        else return key;
+        else return undefined;
     }
 });
              */

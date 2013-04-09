@@ -115,9 +115,10 @@
                 if (!suppressEvent) this.el.trigger("invalid");
                 return false;
             }
-            
-            this.clearError();
-            
+
+            // Only clear the error
+            this.updateUI();
+
             return true;
         },
 
@@ -126,20 +127,18 @@
             this.checkValidity(true);
         },
 
-        showError: function() {
-            if (!this.customMessage && !this.message) return;
-            
-            this.registry.validators(this.el).every(function(v) {
-                v.show(this.el, this.validationMessage);
-                return false; // i.e. only run the first one
-            }, this);
-        },
-        
-        clearError: function() {
-            this.registry.validators(this.el).every(function(v) {
-                v.clear(this.el);
-                return false; // i.e. only run the first one
-            }, this);
+        updateUI: function() {
+            if (this.customMessage || this.message) {
+                this.registry.validators(this.el).every(function(v) {
+                    v.show(this.el, this.validationMessage);
+                    return false; // i.e. only run the first one
+                }, this);
+            } else {
+                this.registry.validators(this.el).every(function(v) {
+                    v.clear(this.el);
+                    return false; // i.e. only run the first one
+                }, this);
+            }
         }
     };
 
@@ -180,10 +179,10 @@
     /**
      * @memberof jQuery.fn
      */
-    $.fn.checkValidity = function(suppressEvent) {
+    $.fn.checkValidity = function() {
         var api = registry.api(this.first());
         if (api) {
-            return api.checkValidity(suppressEvent);
+            return api.checkValidity();
         } else {
             // TODO decide if returning undefined is better
             return true;
@@ -198,6 +197,18 @@
             var api = registry.api($(this));
             if (api) {
                 api.setCustomValidity(message);
+            }
+        });
+    };
+
+    /**
+     * @memberof jQuery.fn
+     */
+    $.fn.updateErrorUI = function() {
+        return this.each(function() {
+            var api = registry.api($(this));
+            if (api) {
+                api.updateUI();
             }
         });
     };
@@ -274,7 +285,7 @@ jQuery.validator.register({
             unhandleds.each(function() {
                 var api = registry.api($(this));
                 if (api) {
-                    api.showError();
+                    api.updateUI();
                 }
             });
             return false;

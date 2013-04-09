@@ -48,8 +48,10 @@ module.exports = function(grunt) {
       'components/CUI.Tooltip.js',
       'components/CUI.DraggableList.js',
       'components/CUI.FormError.js',
-      'components/CUI.CharacterCount.js'
+      'components/CUI.CharacterCount.js',
 
+      // Validations
+      'validations.js'
     ],
     "cui-rte": [
       'components/rte/Theme.js',
@@ -277,7 +279,9 @@ module.exports = function(grunt) {
               'jquery-gridlayout.js',
               'jquery-scrollable.js',
               'moment.js',
-              'jquery-cookie.js'
+              'jquery-cookie.js',
+              'jquery-validator.js',
+              'jquery-message.js'
             ],
             dest: '<%= dirs.build %>/js/libs/'
           }
