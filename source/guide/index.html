@@ -868,6 +868,10 @@
                         <li><code class="atv">warning</code> A red button, used to indicate actions that are potentially destructive, such as delete</li>
                     </ul>
 
+                    <h3>Button groups</h3>
+                    <p>You can group buttons into horizontal lines by adding a <code class="prettyprint">&lt;div class="buttong-group"&gt;</code> around them.</p>
+                   
+                                        
                     <div class="componentSample buttonSample">
                         <div class="example">
 
@@ -875,6 +879,13 @@
                             <button class="primary">Primary Action</button>
                             <button class="warning">Warning</button>
                             <button disabled>Disabled</button>
+                            
+                            <p>Button groups:</p>
+                            <div class="button-group">
+                              <button><i class="icon-add"></i> Add</button>
+                              <button><i class="icon-camera"></i> Snapshot</button>
+                              <button><i class="icon-undo"></i> Undo</button>  
+                            </div>
 
                         </div>
                         <pre class="prettyprint linenums">
@@ -882,6 +893,12 @@
 &lt;button class=&quot;primary&quot;&gt;Primary Action&lt;/button&gt;
 &lt;button class=&quot;warning&quot;&gt;Warning&lt;/button&gt;
 &lt;button disabled&gt;Disabled&lt;/button&gt;
+
+&lt;div class="button-group"&gt;
+  &lt;button&gt;&lt;i class="icon-add"&gt;&lt;/i&gt; Add&lt;/button&gt;
+  &lt;button&gt;&lt;i class="icon-camera"&gt;&lt;/i&gt; Snapshot&lt;/button&gt;
+  &lt;button&gt;&lt;i class="icon-undo"&gt;&lt;/i&gt; Undo&lt;/button&gt;  
+&lt;/div&gt;
 </pre>
                     </div>
                 </section>
