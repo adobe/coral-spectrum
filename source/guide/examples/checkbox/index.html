@@ -14,60 +14,62 @@
     <script src="../../js/CUI.js"></script>
 
     <style type="text/css">
-    ul {
-        list-style: none;
-        margin: 5px 20px;
-        -webkit-padding-start: 20px;
-    }
+        ul {
+            list-style: none;
+            margin: 5px 20px;
+            -webkit-padding-start: 20px;
+        }
     </style>
 
     <script>
     $(function() {
 
-        function ts(cb) {
-            if (cb.readOnly) cb.checked=cb.readOnly=false;
-            else if (!cb.checked) cb.readOnly=cb.indeterminate=true;
-        }
+        // $('input[type="checkbox"]').click(function(e) {
+        //     // alert('click');
+        //     if (cb.readOnly) cb.checked = cb.readOnly = false;
+        //     else if (!cb.checked) cb.readOnly = cb.indeterminate = true;
+        // });
 
-              // Apparently click is better chan change? Cuz IE?
-              $('input[type="checkbox"]').change(function(e) {
-                  var checked = $(this).prop("checked"),
-                  container = $(this).parent(),
-                  siblings = container.siblings();
+        // http://css-tricks.com/indeterminate-checkboxes/
+        $('input[type="checkbox"]').change(function(e) {
+           // alert('checked');
+          var checked = $(this).prop("checked"),
+          container = $(this).parent(),
+          siblings = container.siblings();
 
-                  container.find('input[type="checkbox"]').prop({
+          container.find('input[type="checkbox"]').prop({
+              indeterminate: false,
+              checked: checked
+          });
+
+          function checkSiblings(el) {
+              var parent = el.parent().parent(),
+              all = true;
+
+              el.siblings().each(function() {
+                  return all = ($(this).children('input[type="checkbox"]').prop("checked") === checked);
+              });
+
+              if (all && checked) {
+                  parent.children('input[type="checkbox"]').prop({
                       indeterminate: false,
                       checked: checked
                   });
+                  checkSiblings(parent);
+              } else if (all && !checked) {
+                  parent.children('input[type="checkbox"]').prop("checked", checked);
+                  parent.children('input[type="checkbox"]').prop("indeterminate", (parent.find('input[type="checkbox"]:checked').length > 0));
+                  checkSiblings(parent);
+              } else {
+                  el.parents("li").children('input[type="checkbox"]').prop({
+                      indeterminate: true,
+                      checked: false
+                  });
+              }
+          }
 
-                  function checkSiblings(el) {
-                      var parent = el.parent().parent(),
-                      all = true;
-
-                      el.siblings().each(function() {
-                          return all = ($(this).children('input[type="checkbox"]').prop("checked") === checked);
-                      });
-
-                      if (all && checked) {
-                          parent.children('input[type="checkbox"]').prop({
-                              indeterminate: false,
-                              checked: checked
-                          });
-                          checkSiblings(parent);
-                      } else if (all && !checked) {
-                          parent.children('input[type="checkbox"]').prop("checked", checked);
-                          parent.children('input[type="checkbox"]').prop("indeterminate", (parent.find('input[type="checkbox"]:checked').length > 0));
-                          checkSiblings(parent);
-                      } else {
-                          el.parents("li").children('input[type="checkbox"]').prop({
-                              indeterminate: true,
-                              checked: false
-                          });
-                      }
-                  }
-
-                  checkSiblings(container);
-              });
+          checkSiblings(container);
+        });
 });
 </script>
 </head>
