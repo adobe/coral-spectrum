@@ -124,14 +124,14 @@
                 var startOffset = selection.startOffset;
                 var endNode = selection.endNode;
                 var endOffset = selection.endOffset;
+                var isSel = sel.isSelection(selection);
                 var area = dpr.calcScreenEstate(context, startNode, startOffset, endNode,
                         endOffset);
-                var yStart = area.startY - (sel.isSelection(selection) ? com.ua.calloutHeight
-                        : 0);
+                var yStart = area.startY - (isSel ? com.ua.calloutHeight : 0);
                 var yEnd = area.endY;
                 forbidden = {
-                    "start": yStart,
-                    "end": yEnd
+                    "start": yStart - (isSel ? com.ua.selectionHandlesHeight : 0),
+                    "end": yEnd + (isSel ? com.ua.selectionHandlesHeight : 0)
                 }
             }
             return forbidden;
