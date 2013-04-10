@@ -50,26 +50,29 @@
         construct: function(config) {
             CUI.rte.Utils.apply(this, config);
             var self = this;
-            var killEvent = function(e) {
+            this.$dialog = CUI.rte.UIUtils.getDialog(
+                    this.getDataType(), undefined, this.$container);
+            this.$dialog.finger("tap.rte-dialog click.rte-dialog", function(e) {
                 var $target = $(e.target);
                 if ($target.is("input") && !$target.is("input:text")) {
                     self.editorKernel.focus();
+                    if (self.range) {
+                        CUI.rte.Selection.selectRangeBookmark(
+                                self.editorKernel.getEditContext(), self.range);
+                    }
                 } else {
-                    e.stopPropagation();
-                    e.preventDefault();
+                    CUI.rte.UIUtils.killEvent(e);
                 }
-            };
-            this.$dialog = CUI.rte.UIUtils.getDialog(
-                    this.getDataType(), undefined, this.$container);
-            this.$dialog.finger("tap.rte-dialog", killEvent);
-            this.$dialog.on("click.rte-dialog", killEvent);
+            });
             this.$dialog.on("click.rte-dialog", "button[data-type=\"apply\"]",
                     function(e) {
                         self.apply();
+                        e.stopPropagation();
                     });
             this.$dialog.on("click.rte-dialog", "button[data-type=\"cancel\"]",
                     function(e) {
                         self.cancel();
+                        e.stopPropagation();
                     });
         },
 
