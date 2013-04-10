@@ -272,7 +272,7 @@
             var scrollTop = (this.$clipParent || $(context.win)).scrollTop();
             if (this._recordedScrollTop !== scrollTop) {
                 if (CUI.rte.Common.ua.isTouch && !this.editorKernel.isLocked()) {
-                    this.hideTemporarily(CUI.rte.Utils.scope(this._updateUI, this));
+                    this.hideTemporarily();
                 } else {
                     this._updateUI();
                 }
