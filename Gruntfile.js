@@ -139,8 +139,6 @@ module.exports = function(grunt) {
   // Read in package.json
   var pkg = grunt.file.readJSON('package.json');
 
-  grunt.log.write("package grok " + pkg.version);
-
   // Meta and build configuration
   var meta = {
       version: pkg.version,
