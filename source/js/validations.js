@@ -69,32 +69,4 @@
         el.checkValidity();
         el.updateErrorUI();
     });
-
-
-    $.validator.register({
-        selector: "[role=listbox]",
-        validate: function(el) {
-            var required = el.attr("aria-required") === "true";
-
-            if (required) {
-                var selected = false;
-                el.find("[role=option]").each(function() {
-                    if ($(this).attr("aria-selected") === "true") {
-                        selected = true;
-                        return false;
-                    }
-                });
-
-                if (!selected) {
-                    return el.message("validation.required");
-                }
-            }
-        },
-        show: function(el, message) {
-            el.attr("aria-invalid", "true");
-        },
-        clear: function(el) {
-            el.removeAttr("aria-invalid");
-        }
-    });
 })(jQuery);
