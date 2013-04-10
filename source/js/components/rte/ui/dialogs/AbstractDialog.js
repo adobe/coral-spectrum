@@ -101,6 +101,9 @@
                 this.editorKernel.lock();
                 this.editorKernel.fireUIEvent("dialogshow");
                 this.mask.show();
+                // maually do the layout - is required here because the editor is already
+                // locked, so automatic update will not work
+                this.editorKernel.toolbar.triggerUIUpdate();
             }
         },
 

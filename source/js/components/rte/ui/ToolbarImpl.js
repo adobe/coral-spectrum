@@ -281,14 +281,16 @@
         },
 
         _handleUpdateState: function(e) {
-            switch (e.origin) {
-                case "event":
-                    break;
-                case "command":
-                    this.popover.hide();
-                    break;
+            if (!this.editorKernel.isLocked()) {
+                switch (e.origin) {
+                    case "event":
+                        break;
+                    case "command":
+                        this.popover.hide();
+                        break;
+                }
+                this._updateUI();
             }
-            this._updateUI();
         },
 
         _initializePopovers: function() {
@@ -400,6 +402,10 @@
                     }
                 }
             }
+        },
+
+        triggerUIUpdate: function() {
+            this._updateUI();
         },
 
         startEditing: function(editorKernel) {

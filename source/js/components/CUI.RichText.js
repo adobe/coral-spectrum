@@ -112,6 +112,11 @@
                     self.isTemporaryFocusChange = false;
                 }
             });
+            // Prevent changing the selection on touch devices when the editor is locked
+            // (and the user is editing a dialog) - the "mask" implementation used on
+            // desktop does not work as expected; SafariMobile does interesting things with
+            // the mask switched on (for example, masks the dialog and allows editing
+            // - despite the mask has a much higher z-index - instead of vice versa).
             this.$textContainer.finger("touchstart.rte", function(e) {
                 if (self.editorKernel.isLocked()) {
                     CUI.rte.UIUtils.killEvent(e);
