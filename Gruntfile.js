@@ -132,21 +132,26 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
-//  grunt.loadNpmTasks('grunt-jsdoc');
+  //  grunt.loadNpmTasks('grunt-jsdoc');
   grunt.loadNpmTasks('grunt-mocha');
-//  grunt.loadNpmTasks('grunt-hub');
+  //  grunt.loadNpmTasks('grunt-hub');
 
   // Read in package.json
   var pkg = grunt.file.readJSON('package.json');
 
-  grunt.initConfig({
-    // Meta and build configuration
-    meta: {
+  grunt.log.write("package grok " + pkg.version);
+
+  // Meta and build configuration
+  var meta = {
       version: pkg.version,
       appName: pkg.name,
       appWebSite: pkg.repository.url
-    },
+  };
+
+  grunt.initConfig({
+
     dirs: dirs,
+    meta: meta,
 
     // Configuration
     jshint: {
@@ -385,35 +390,31 @@ module.exports = function(grunt) {
     compress: {
       release: {
         options: {
-          mode: 'zip'
+          archive: '<%= dirs.build %>/cui-<%= meta.version %>.zip'
         },
-        files: {
-          '<%= dirs.build %>/cui-<%= meta.version %>.zip': [
-            '<%= dirs.build %>/css/**',
-            '<%= dirs.build %>/fonts/**',
-            '<%= dirs.build %>/images/**',
-            '<%= dirs.build %>/js/**',
-            '<%= dirs.build %>/less/**'
-          ]
-        }
+        files: [
+            {src: ['<%= dirs.build %>/css/**']},
+            {src: ['<%= dirs.build %>/fonts/**']},
+            {src: ['<%= dirs.build %>/images/**']},
+            {src: ['<%= dirs.build %>/js/**']},
+            {src: ['<%= dirs.build %>/less/**']}
+        ]
       },
       full: {
         options: {
-          mode: 'zip'
+          archive: '<%= dirs.build %>/cui-<%= meta.version %>-full.zip'
         },
-        files: {
-          '<%= dirs.build %>/cui-<%= meta.version %>-full.zip': [
-            '<%= dirs.build %>/css/**',
-            '<%= dirs.build %>/examples/**',
-            '<%= dirs.build %>/fonts/**',
-            '<%= dirs.build %>/images/**',
-            '<%= dirs.build %>/js/**',
-            '<%= dirs.build %>/jsdoc/**',
-            '<%= dirs.build %>/less/**',
-            '<%= dirs.build %>/test/**',
-            '<%= dirs.build %>/index.html'
-          ]
-        }
+        files: [
+            {src: ['<%= dirs.build %>/css/**']},
+            {src: ['<%= dirs.build %>/examples/**']},
+            {src: ['<%= dirs.build %>/fonts/**']},
+            {src: ['<%= dirs.build %>/images/**']},
+            {src: ['<%= dirs.build %>/js/**']},
+            {src: ['<%= dirs.build %>/jsdoc/**']},
+            {src: ['<%= dirs.build %>/less/**']},
+            {src: ['<%= dirs.build %>/test/**']},
+            {src: ['<%= dirs.build %>/index.html']}
+        ]
       }
     },
 
@@ -683,6 +684,8 @@ module.exports = function(grunt) {
 
     }
   });
+  // end init config
+
 
   // Partial build for development
   grunt.task.registerTask('partial', [
@@ -734,7 +737,7 @@ module.exports = function(grunt) {
   grunt.task.registerTask('release', [
     'clean',
     'full-build',
-    'coverage',
+    //'coverage',
     'compress'
   ]);
 
