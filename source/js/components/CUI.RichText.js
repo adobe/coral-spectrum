@@ -112,6 +112,11 @@
                     self.isTemporaryFocusChange = false;
                 }
             });
+            this.$textContainer.finger("touchstart.rte", function(e) {
+                if (self.editorKernel.isLocked()) {
+                    CUI.rte.UIUtils.killEvent(e);
+                }
+            });
             // additional keyboard handling
             CUI.rte.Eventing.on(editContext, document.body, "keyup", this.handleKeyUp,
                     this);
@@ -124,7 +129,7 @@
                 e.stopPropagation();
             });
             var bookmark;
-            $body.fipo("touchstart.rte-ooa", "mousedown.rte.ooa", function(e) {
+            $body.fipo("touchstart.rte-ooa", "mousedown.rte-ooa", function(e) {
                 // we need to save the bookmark as soon as possible, as it gets lost
                 // somewhere in the event handling between the initial touchstart/mousedown
                 // event and the tap/click event where we actually might need it
@@ -182,7 +187,6 @@
                 // change for a second. This works well even if the user changes the
                 // selection after the 1sec interval - simply another cycle of
                 // hiding/showing the toolbar gets started in that case.
-                var _tbHideTimeout;
                 var _lastSel;
                 $doc.on("selectionchange.rte-toolbarhide", function(e) {
                     if (self.editorKernel.isLocked()) {

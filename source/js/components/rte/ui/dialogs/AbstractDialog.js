@@ -18,6 +18,11 @@
 
 (function($) {
 
+    function requiresFocus(dom) {
+        var $dom = $(dom);
+        return $dom.is("input:text");
+    }
+
     CUI.rte.ui.cui.AbstractDialog = new Class({
 
         config: null,
@@ -36,6 +41,8 @@
 
         $dialog: null,
 
+        mask: null,
+
         /**
          * @private
          */
@@ -53,8 +60,7 @@
             this.$dialog = CUI.rte.UIUtils.getDialog(
                     this.getDataType(), undefined, this.$container);
             this.$dialog.finger("tap.rte-dialog click.rte-dialog", function(e) {
-                var $target = $(e.target);
-                if ($target.is("input") && !$target.is("input:text")) {
+                if (!requiresFocus(e.target)) {
                     self.editorKernel.focus();
                     if (self.range) {
                         CUI.rte.Selection.selectRangeBookmark(
@@ -74,6 +80,7 @@
                         self.cancel();
                         e.stopPropagation();
                     });
+            this.mask = new CUI.rte.ui.cui.Mask();
         },
 
         initializeEdit: function(editorKernel, objToEdit, applyFn) {
@@ -93,6 +100,7 @@
                 this.popoverManager.use(this.$dialog, this.$trigger, this.$toolbar);
                 this.editorKernel.lock();
                 this.editorKernel.fireUIEvent("dialogshow");
+                this.mask.show();
             }
         },
 
@@ -103,6 +111,7 @@
             CUI.rte.Selection.selectRangeBookmark(this.editorKernel.getEditContext(),
                     this.range);
             this.editorKernel.fireUIEvent("dialoghide");
+            this.mask.hide();
         },
 
         apply: function() {

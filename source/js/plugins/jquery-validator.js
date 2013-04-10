@@ -78,6 +78,26 @@
         this.registry = registry;
         this.message = null;
         this.customMessage = null;
+
+        this.state = (function(outer) {
+            return {
+                get customError() {
+                    return !!outer.customMessage;
+                },
+                get valid() {
+                    return !outer.customMessage && !outer.message;
+                }
+            };
+        })(this);
+    }
+
+    function everyReverse(array, callback, thisArg) {
+        for (var i = array.length - 1; i >= 0; i--) {
+            if (!callback.call(thisArg, array[i], i, array)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     HTMLValidation.prototype = {
@@ -85,23 +105,28 @@
             return this.registry.isCandidate(this.el);
         },
 
+        setCustomValidity: function(message) {
+            this.customMessage = message;
+        },
+
         get validity() {
-            // TODO implement later when needed
+            return this.state;
         },
 
-        get validationMessage() {
-            this.checkValidity(true);
-            return this.customMessage || this.message || "";
-        },
+        checkValidity: function(options) {
+            options = options || {};
 
-        checkValidity: function(suppressEvent) {
+            if (!this.willValidate) {
+                return true;
+            }
+
             if (this.customMessage) {
-                if (!suppressEvent) this.el.trigger("invalid");
+                if (!options.suppressEvent) this.el.trigger("invalid");
                 return false;
             }
 
             this.message = null;
-            this.registry.validators(this.el).every(function(v) {
+            everyReverse(this.registry.validators(this.el), function(v) {
                 var m = v.validate(this.el);
                 if (m) {
                     this.message = m;
@@ -112,30 +137,28 @@
             }, this);
 
             if (this.message) {
-                if (!suppressEvent) this.el.trigger("invalid");
+                if (!options.suppressEvent) this.el.trigger("invalid");
                 return false;
             }
-
-            // Only clear the error
-            this.updateUI();
 
             return true;
         },
 
-        setCustomValidity: function(message) {
-            this.customMessage = message;
-            this.checkValidity(true);
+        get validationMessage() {
+            if (!this.willValidate) return "";
+
+            return this.customMessage || this.message || "";
         },
 
         updateUI: function() {
-            if (this.customMessage || this.message) {
-                this.registry.validators(this.el).every(function(v) {
-                    v.show(this.el, this.validationMessage);
+            if (this.validity.valid) {
+                everyReverse(this.registry.validators(this.el), function(v) {
+                    v.clear(this.el);
                     return false; // i.e. only run the first one
                 }, this);
             } else {
-                this.registry.validators(this.el).every(function(v) {
-                    v.clear(this.el);
+                everyReverse(this.registry.validators(this.el), function(v) {
+                    v.show(this.el, this.validationMessage);
                     return false; // i.e. only run the first one
                 }, this);
             }
@@ -158,7 +181,6 @@
         if (api) {
             return api.willValidate;
         } else {
-            // TODO decide if returning undefined is better
             return false;
         }
     };
@@ -171,7 +193,6 @@
         if (api) {
             return api.validationMessage;
         } else {
-            // TODO decide if returning undefined is better
             return "";
         }
     };
@@ -184,7 +205,6 @@
         if (api) {
             return api.checkValidity();
         } else {
-            // TODO decide if returning undefined is better
             return true;
         }
     };
@@ -262,7 +282,9 @@ jQuery.validator.register({
         return registry.submittables(form)
             .map(function() {
                 var api = registry.api($(this));
-                if (!api || !api.willValidate || api.checkValidity(true)) return;
+                if (!api || !api.willValidate || api.checkValidity({
+                    suppressEvent: true
+                })) return;
                 return this;
             }).map(function() {
                 var e = $.Event("invalid");

@@ -4,8 +4,9 @@ plugins/jquery-fingerpointer.js
 plugins/jquery-scrollable.js
 plugins/jquery-cookie.js
 plugins/jquery-reflow.js
+plugins/jquery-message.js
+plugins/jquery-validator.js
 plugins/toe.js
-plugins/moment.js
 
 Class.js
 CUI.js
@@ -26,6 +27,7 @@ components/CUI.Slider.js
 components/CUI.Datepicker.js
 components/CUI.Pulldown.js
 components/CUI.Wizard.js
+components/CUI.FlexWizard.js
 components/CUI.Sticky.js
 components/CUI.CardView.js
 components/CUI.PathBrowser.js
