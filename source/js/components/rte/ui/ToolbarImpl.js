@@ -53,6 +53,15 @@
         _recordedScrollTop: null,
 
 
+        construct: function(elementMap, $editable, tbType) {
+            this.elementMap = elementMap;
+            this.$editable = $editable;
+            this.tbType = (tbType || "inline");
+            this.$container = CUI.rte.UIUtils.getUIContainer(this.$editable);
+            this.$toolbar = CUI.rte.UIUtils.getToolbar(this.$editable, tbType);
+            this.popover = new CUI.rte.ui.cui.PopoverManager(this.$container, tbType);
+        },
+
         /**
          * <p>Determines the "clipping parent" of the specified DOM object.</p>
          * <p>The clipping parent is a DOM object that might clip the visible area of the
@@ -287,16 +296,18 @@
             this.$container.on("click.rte-toolbar", "button[data-action^=\"#\"]",
                     function(e) {
                         var $trigger = $(this);
-                        var show = !self.popover.isShown() ||
-                                !self.popover.isTriggeredBy($trigger);
-                        self.popover.hide();
-                        if (show) {
-                            self.popover.use($(e.target).data("action").substring(1),
-                                    $trigger, self.$toolbar);
+                        if (!$trigger.hasClass(CUI.rte.Theme.TOOLBARITEM_DISABLED_CLASS)) {
+                            var show = !self.popover.isShown() ||
+                                    !self.popover.isTriggeredBy($trigger);
+                            self.popover.hide();
+                            if (show) {
+                                self.popover.use($(e.target).data("action").substring(1),
+                                        $trigger, self.$toolbar);
+                            }
+                            self._updateUI();
+                            self.editorKernel.focus();
+                            e.stopPropagation();
                         }
-                        self._updateUI();
-                        self.editorKernel.focus();
-                        e.stopPropagation();
                     });
             // clicking a button in the toolbar leads to an unwanted focus transfer; ignore
             // it by disabling focus handling on mousedown and enabling it again on
@@ -359,15 +370,6 @@
 
         getToolbarContainer: function() {
             return this.$container;
-        },
-
-        construct: function(elementMap, $editable, tbType) {
-            this.elementMap = elementMap;
-            this.$editable = $editable;
-            this.tbType = (tbType || "inline");
-            this.$container = CUI.rte.UIUtils.getUIContainer(this.$editable);
-            this.$toolbar = CUI.rte.UIUtils.getToolbar(this.$editable, tbType);
-            this.popover = new CUI.rte.ui.cui.PopoverManager(this.$container, tbType);
         },
 
         getItem: function(itemId) {

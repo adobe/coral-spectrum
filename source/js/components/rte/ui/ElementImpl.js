@@ -52,16 +52,18 @@
             var self = this;
             this.$ui = $cont.find('button[data-action="' + pluginId + '#' + this.id + '"]');
             this.$ui.bind("click.rte.handler", function(e) {
-                var editContext = self.plugin.editorKernel.getEditContext();
-                editContext.setState("CUI.SelectionLock", 1);
-                var cmd = (self.cmdDef ? self.cmdDef.cmd : self.id);
-                var cmdValue = (self.cmdDef ? self.cmdDef.cmdValue : undefined);
-                var env = {
-                    "editContext": editContext
-                };
-                self.plugin.execute(cmd, cmdValue, env);
-                self.plugin.editorKernel.enableFocusHandling();
-                self.plugin.editorKernel.focus(editContext);
+                if (!self.$ui.hasClass(CUI.rte.Theme.TOOLBARITEM_DISABLED_CLASS)) {
+                    var editContext = self.plugin.editorKernel.getEditContext();
+                    editContext.setState("CUI.SelectionLock", 1);
+                    var cmd = (self.cmdDef ? self.cmdDef.cmd : self.id);
+                    var cmdValue = (self.cmdDef ? self.cmdDef.cmdValue : undefined);
+                    var env = {
+                        "editContext": editContext
+                    };
+                    self.plugin.execute(cmd, cmdValue, env);
+                    self.plugin.editorKernel.enableFocusHandling();
+                    self.plugin.editorKernel.focus(editContext);
+                }
                 e.stopPropagation();
             });
         },
@@ -76,8 +78,10 @@
         setDisabled: function(isDisabled) {
             if (isDisabled) {
                 this.$ui.addClass(CUI.rte.Theme.TOOLBARITEM_DISABLED_CLASS);
+                this.$ui.attr("disabled", "disabled");
             } else {
                 this.$ui.removeClass(CUI.rte.Theme.TOOLBARITEM_DISABLED_CLASS);
+                this.$ui.removeAttr("disabled");
             }
         },
 
