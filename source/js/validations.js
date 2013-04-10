@@ -19,6 +19,8 @@
 
     "use strict";
 
+    if (!$.message || !$.validator) return;
+
 
     // Register all the messages for validation
     // IMPORTANT: the order is important, where the last one will be used; when in doubt check the source of jquery-message
