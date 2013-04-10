@@ -102,7 +102,7 @@
         </div>
       </nav>
 
-       <nav class="toolbar">
+      <nav class="toolbar">
         <div class="left icongroup">
           <button class="icon-viewgrid"><span>Toggle Rail</span></button>
           <span class="divider"></span>
@@ -111,8 +111,8 @@
             <select name="dropdown">
               <option>Single One</option>
               <option selected>Single Two</option>
-            <option>Single Three</option>
-          </select>
+              <option>Single Three</option>
+            </select>
           </div>
           <button class="icon-close"><span>Close Selection Mode</span></button>
           <button disabled="disabled" class="icon-properties"><span>View Properties</span></button>
@@ -123,7 +123,28 @@
           <span class="text">1 selected</span>
         </div>
       </nav>
-
+      <nav class="toolbar mode-default" data-init="toolbar">
+        <div class="left icongroup">
+          <button class="icon-navigation" title="Toggle Rail" type="button" data-target="#rail" autocomplete="off">Toggle Rail</button>
+          <span class="divider"></span>
+          <nav id="createpagebtn" class="pulldown" title="Create" data-init="pulldown">
+            <a href="#" class="icon-add">Create</a>
+            <div class="popover arrow-top alignleft">
+              <ul>
+                <li>
+                  <a href="#" class="withLabel">Create Page</a>
+                </li>
+                <li>
+                  <a class="disabled withLabel">Create Launch</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+        <div class="center">
+          <h1>Sites</h1>
+        </div>
+      </nav>
     </div>
   </div>
 </body>
