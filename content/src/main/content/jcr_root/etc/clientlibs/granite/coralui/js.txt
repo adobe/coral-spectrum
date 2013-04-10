@@ -7,7 +7,6 @@ plugins/jquery-reflow.js
 plugins/jquery-message.js
 plugins/jquery-validator.js
 plugins/toe.js
-plugins/moment.js
 
 Class.js
 CUI.js
