@@ -75,20 +75,6 @@ CUI.rte.Utils = function() {
             return str;
         },
 
-        i18n: function(str, values) {
-            // TODO replace with correct internationalization when available ...
-            if (values) {
-                if (CUI.rte.Utils.isArray(values)) {
-                    str = str.replace("{0}", values);
-                } else {
-                    for (var s = 0; s < values.length; s++) {
-                        str = str.replace("{" + s + "}", values[s])
-                    }
-                }
-            }
-            return str;
-        },
-
         merge: function(obj1, obj2) {
             for (var name in obj2) {
                 if (obj2.hasOwnProperty(name)) {
@@ -151,7 +137,9 @@ CUI.rte.Utils = function() {
 
         jsonDecode: CUI.rte.AdapterUtils.jsonDecode,
 
-        getBlankImageUrl: CUI.rte.AdapterUtils.getBlankImageUrl
+        getBlankImageUrl: CUI.rte.AdapterUtils.getBlankImageUrl,
+
+        i18n: CUI.rte.AdapterUtils.i18n
 
     };
 
