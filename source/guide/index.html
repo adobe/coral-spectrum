@@ -1544,30 +1544,37 @@
 
                 <section id="Checkbox">
                     <h2 class="line">Checkbox</h2>
-                    <p>Checkboxes are styling using pure CSS, and a <code class="atv">partial</code> class is provided to indicate a "half-checked" state.</p>
+                    <p>Checkboxes are styled using pure CSS. They can have an indetermined state by changing their state using
+                        javascript.</p>
 
                     <div class="componentSample">
                         <div class="example clearfix">
                             <div class="left">
                                 <label><input type="checkbox" name="c1" value="1" checked><span>Checked</span></label><br>
                                 <label><input type="checkbox" name="c2" value="2"><span>Unchecked</span></label><br>
-                                <label><input type="checkbox" name="c3" value="3" class="partial"><span>Partially checked</span></label>
+                                <label><input type="checkbox" name="c3" value="3" id="partial-checkbox1"><span>Partially checked</span></label>
                             </div>
                             <div class="left">
                                 <label><input type="checkbox" name="c4" value="4" disabled checked><span>Disabled Checked</span></label><br>
                                 <label><input type="checkbox" name="c5" value="5" disabled><span>Disabled Unchecked</span></label><br>
-                                <label><input type="checkbox" name="c6" value="6" class="partial" disabled><span>Disabled Partially Checked</span></label>
+                                <label><input type="checkbox" name="c6" value="6" id="partial-checkbox2" disabled><span>Disabled Partially Checked</span></label>
                             </div>
                         </div>
                         <pre class="prettyprint linenums">
 &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c1&quot; checked&gt;&lt;span&gt;Checked&lt;/span&gt;&lt;/label&gt;
 &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c2&quot;&gt;&lt;span&gt;Unchecked&lt;/span&gt;&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c3&quot; class=&quot;partial&quot;&gt;&lt;span&gt;Partially checked&lt;/span&gt;&lt;/label&gt;
+&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c3&quot; &gt;&lt;span&gt;Partially checked&lt;/span&gt;&lt;/label&gt;
 &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c4&quot; disabled checked&gt;&lt;span&gt;Disabled Checked&lt;/span&gt;&lt;/label&gt;
 &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c5&quot; disabled&gt;&lt;span&gt;Disabled Unchecked&lt;/span&gt;&lt;/label&gt;
 &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c6&quot; disabled&gt;&lt;span&gt;Disabled Partially Checked&lt;/span&gt;&lt;/label&gt;
 </pre>
                     </div>
+
+                    <script type="text/javascript">
+                        // changes the demo checkboxes to be half-checked.
+                        $('#partial-checkbox1').prop('indeterminate', true);
+                        $('#partial-checkbox2').prop('indeterminate', true);
+                    </script>
                 </section>
 
                 <section id="RadioButtons">

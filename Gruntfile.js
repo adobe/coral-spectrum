@@ -529,17 +529,6 @@ module.exports = function(grunt) {
         files: {
           '<%= dirs.build %>/css/wizard.css': '<%= dirs.source %>/guide/less/wizard.less'
         }
-      },
-      "aemwelcome": {
-        options: {
-          paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
-            dirs.source+'/less/', // must hardcode paths here, grunt-contrib-less doesn't support template tags
-            dirs.temp+'/less/' // must hardcode paths here, grunt-contrib-less doesn't support template tags
-          ]
-        },
-        files: {
-          '<%= dirs.build %>/css/aem-welcome.css': '<%= dirs.source %>/guide/less/aem-welcome.less'
-        }
       }
     },
 
@@ -629,10 +618,6 @@ module.exports = function(grunt) {
       compile_wizard_less: {
         files: '<%= dirs.source %>/guide/less/wizard.less',
         tasks: ['less:wizard']
-      },
-      compile_aemwelcome_less: {
-        files: '<%= dirs.source %>/guide/less/aem-welcome.less',
-        tasks: ['less:aemwelcome']
       },
 
       compile_handlebars: {
