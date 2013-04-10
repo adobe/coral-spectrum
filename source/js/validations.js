@@ -21,7 +21,7 @@
 
 
     // Register all the messages for validation
-    // IMPORTANT: the order is important, where the first one will be used; when in doubt check the source of jquery-message
+    // IMPORTANT: the order is important, where the last one will be used; when in doubt check the source of jquery-message
 
     $.message.register({
         selector: ":lang(en)",
@@ -32,14 +32,14 @@
 
 
     // Register all the validation rules
-    // IMPORTANT: the order is important, where the first one will be used; when in doubt check the source of jquery-validator
+    // IMPORTANT: the order is important, where the last one will be used; when in doubt check the source of jquery-validator
 
     // TODO TBD if we want to do validation only when then form is having a certain class
-    // e.g. using selector "form.cui-validate input" instead of just "input"
+    // e.g. using selector "form.validate input" instead of just "form input"
 
 
     $.validator.register({
-        selector: "input",
+        selector: "form input, form textarea",
         validate: function(el) {
             if (el.attr("aria-required") === "true" && el.val().length === 0) {
                 return el.message("validation.required");
@@ -51,39 +51,18 @@
             el.attr("aria-invalid", "true").toggleClass("error", true);
 
             if (error.length === 0) {
-                el.after(function() {
-                    // TODO there is a need to better manage tooltip
-
-                    var error = $("<span class='form-error' />").text(message);
-
-                    new CUI.Tooltip({
-                        target: error,
-                        content: message,
-                        interactive: true,
-                        arrow: "top",
-                        type: "error",
-                        distance: 10
-                    });
-
-                    return error;
-                });
+                el.after($("<span class='form-error' data-init='quicktip' data-quicktip-arrow='top' data-quicktip-type='error' />").html(message));
             } else {
-                error.text(message);
-
-                // TODO this doesn't work
-                error.next(".tooltip").tooltip("set", "content", "aaaa");
+                error.html(message);
             }
         },
         clear: function(el) {
             el.removeAttr("aria-invalid").removeClass("error");
             el.next(".form-error").remove();
-
-            // TODO illegal knowlegde of tooltip mechanism (i.e. the class name used)
-            el.next(".tooltip").remove();
         }
     });
 
-    $(document).on("input", "input", function(e) {
+    $(document).on("input", "form input, form textarea", function(e) {
         var el = $(this);
         el.checkValidity();
         el.updateErrorUI();
