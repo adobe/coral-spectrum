@@ -73,24 +73,25 @@ nav.pulldown {
             }
           }
 
-          &:hover {
+          &:hover:not(.disabled) {
               background-color: @pulldown-active-background-color;
               color: @pulldown-active-text-color;
               border-bottom: none;
-              &:before {
-                  color: white;
-              }
+              &:before { color: white; }
           }
 
-          &.disabled {
-              opacity: 0.15;
+          &.disabled,
+          &.disabled:hover,
+          &.disabled:focus {
+            opacity: 1;
+            cursor: default;
+            color: @pulldown-disabled-text-color;
           }
         }
 
         &:first-child {
           border-top: 0;
         }
-
       }
     }
 
@@ -115,7 +116,7 @@ nav.pulldown {
 
 }
 
-/* selector to hide the pulldown handle if desired */
+// selector to hide the pulldown handle if desired
 nav.no-handle {
   > a, h1 a {
     background: none;
