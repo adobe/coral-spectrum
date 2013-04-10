@@ -311,18 +311,13 @@
                             e.stopPropagation();
                         }
                     });
-            // clicking a button in the toolbar leads to an unwanted focus transfer; ignore
-            // it by disabling focus handling on mousedown and enabling it again on
-            // mouseup (after blur); event order is: (touchstart) -> (touchend) -> (tap)
-            // -> mousedown -> blur (on opposite component) -> mouseup -> (click)
-            this.$container.on("mousedown.rte-toolbar", ".item",
-                    function(e) {
-                        self.editorKernel.disableFocusHandling();
-                    });
-            $(document).on("mouseup.rte-toolbar",
-                    function(e) {
-                        self.editorKernel.enableFocusHandling();
-                    });
+            this.$container.find(".rte-popover").each(function() {
+                $(this).pointer("click.rte-toolbar", function(e) {
+                    if ($(e.target).attr("disabled") === "disabled") {
+                        e.stopPropagation();
+                    }
+                });
+            });
             // initialize single selection triggers (that adapt the icon to the currently
             // chosen child element)
             var $singleSelectTriggers = this.$toolbar.find(".trigger.single-select");
@@ -416,6 +411,26 @@
             this._initializePopovers();
             this._updateUI();
             var self = this;
+            // Several browsers propagate click events on disabled items to parent elements,
+            // others don't. To be sure, cancel all click events that arrive at the toolbar.
+            this.$toolbar.pointer("click.rte-toolbar", function(e) {
+                if ($(e.target).attr("disabled") === "disabled") {
+                    e.stopPropagation();
+                }
+            });
+            // Clicking a button in the toolbar leads to an unwanted focus transfer; ignore
+            // it by disabling focus handling on mousedown and enabling it again on
+            // mouseup (after blur); event order is: (touchstart) -> (touchend) -> (tap)
+            // -> mousedown -> blur (on opposite component) -> mouseup -> (click)
+            this.$container.on("mousedown.rte-toolbar", ".item",
+                    function(e) {
+                        self.editorKernel.disableFocusHandling();
+                    });
+            $(document).on("mouseup.rte-toolbar",
+                    function(e) {
+                        self.editorKernel.enableFocusHandling();
+                    });
+
             $(window).on("scroll.rte-toolbar", function(e) {
                 self._handleScrolling(e);
             });
@@ -445,6 +460,9 @@
             }
             this.editorKernel.removeUIListener("updatestate", this._handleUpdateState,
                     this);
+            this.$container.find(".rte-popover").each(function() {
+                $(this).off("click.rte-toolbar");
+            });
         },
 
         enable: function() {
