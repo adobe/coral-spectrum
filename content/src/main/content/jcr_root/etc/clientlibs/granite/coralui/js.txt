@@ -4,6 +4,8 @@ plugins/jquery-fingerpointer.js
 plugins/jquery-scrollable.js
 plugins/jquery-cookie.js
 plugins/jquery-reflow.js
+plugins/jquery-message.js
+plugins/jquery-validator.js
 plugins/toe.js
 plugins/moment.js
 
