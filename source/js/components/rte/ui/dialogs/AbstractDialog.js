@@ -67,10 +67,12 @@
             this.$dialog.on("click.rte-dialog", "button[data-type=\"apply\"]",
                     function(e) {
                         self.apply();
+                        e.stopPropagation();
                     });
             this.$dialog.on("click.rte-dialog", "button[data-type=\"cancel\"]",
                     function(e) {
                         self.cancel();
+                        e.stopPropagation();
                     });
         },
 
