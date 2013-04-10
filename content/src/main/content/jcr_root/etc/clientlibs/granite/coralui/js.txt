@@ -27,6 +27,7 @@ components/CUI.Slider.js
 components/CUI.Datepicker.js
 components/CUI.Pulldown.js
 components/CUI.Wizard.js
+components/CUI.FlexWizard.js
 components/CUI.Sticky.js
 components/CUI.CardView.js
 components/CUI.PathBrowser.js
