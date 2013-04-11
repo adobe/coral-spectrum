@@ -23,7 +23,7 @@
         $mask: null,
 
         show: function() {
-            // ignore on touch devices - will not work; Safari mobile screws up completely
+            // ignore on touch devices - will not work; SafariMobile screws up completely
             if (!CUI.rte.Common.ua.isTouch) {
                 var $body = $("body");
                 this.$mask = $("<div></div>");

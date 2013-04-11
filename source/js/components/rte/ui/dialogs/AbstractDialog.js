@@ -101,6 +101,9 @@
                 this.editorKernel.lock();
                 this.editorKernel.fireUIEvent("dialogshow");
                 this.mask.show();
+                // maually do the layout - is required here because the editor is already
+                // locked, so automatic update will not work
+                this.editorKernel.toolbar.triggerUIUpdate();
             }
         },
 
@@ -112,6 +115,12 @@
                     this.range);
             this.editorKernel.fireUIEvent("dialoghide");
             this.mask.hide();
+            // hide the toolbar temporarily on touch devices, as the device will most
+            // likely do some screen updates immediately after the command is executed and
+            // the dialog is hidden - so this should result in a less disruptive UI behavior
+            if (CUI.rte.Common.ua.isTouch) {
+                this.editorKernel.toolbar.hideTemporarily();
+            }
         },
 
         apply: function() {

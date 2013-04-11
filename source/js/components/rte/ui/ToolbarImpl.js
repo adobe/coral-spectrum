@@ -124,14 +124,14 @@
                 var startOffset = selection.startOffset;
                 var endNode = selection.endNode;
                 var endOffset = selection.endOffset;
+                var isSel = sel.isSelection(selection);
                 var area = dpr.calcScreenEstate(context, startNode, startOffset, endNode,
                         endOffset);
-                var yStart = area.startY - (sel.isSelection(selection) ? com.ua.calloutHeight
-                        : 0);
+                var yStart = area.startY - (isSel ? com.ua.calloutHeight : 0);
                 var yEnd = area.endY;
                 forbidden = {
-                    "start": yStart,
-                    "end": yEnd
+                    "start": yStart - (isSel ? com.ua.selectionHandlesHeight : 0),
+                    "end": yEnd + (isSel ? com.ua.selectionHandlesHeight : 0)
                 }
             }
             return forbidden;
@@ -272,7 +272,7 @@
             var scrollTop = (this.$clipParent || $(context.win)).scrollTop();
             if (this._recordedScrollTop !== scrollTop) {
                 if (CUI.rte.Common.ua.isTouch && !this.editorKernel.isLocked()) {
-                    this.hideTemporarily(CUI.rte.Utils.scope(this._updateUI, this));
+                    this.hideTemporarily();
                 } else {
                     this._updateUI();
                 }
@@ -281,14 +281,16 @@
         },
 
         _handleUpdateState: function(e) {
-            switch (e.origin) {
-                case "event":
-                    break;
-                case "command":
-                    this.popover.hide();
-                    break;
+            if (!this.editorKernel.isLocked()) {
+                switch (e.origin) {
+                    case "event":
+                        break;
+                    case "command":
+                        this.popover.hide();
+                        break;
+                }
+                this._updateUI();
             }
-            this._updateUI();
         },
 
         _initializePopovers: function() {
@@ -309,18 +311,13 @@
                             e.stopPropagation();
                         }
                     });
-            // clicking a button in the toolbar leads to an unwanted focus transfer; ignore
-            // it by disabling focus handling on mousedown and enabling it again on
-            // mouseup (after blur); event order is: (touchstart) -> (touchend) -> (tap)
-            // -> mousedown -> blur (on opposite component) -> mouseup -> (click)
-            this.$container.on("mousedown.rte-toolbar", ".item",
-                    function(e) {
-                        self.editorKernel.disableFocusHandling();
-                    });
-            $(document).on("mouseup.rte-toolbar",
-                    function(e) {
-                        self.editorKernel.enableFocusHandling();
-                    });
+            this.$container.find(".rte-popover").each(function() {
+                $(this).pointer("click.rte-toolbar", function(e) {
+                    if ($(e.target).attr("disabled") === "disabled") {
+                        e.stopPropagation();
+                    }
+                });
+            });
             // initialize single selection triggers (that adapt the icon to the currently
             // chosen child element)
             var $singleSelectTriggers = this.$toolbar.find(".trigger.single-select");
@@ -402,6 +399,10 @@
             }
         },
 
+        triggerUIUpdate: function() {
+            this._updateUI();
+        },
+
         startEditing: function(editorKernel) {
             this.editorKernel = editorKernel;
             this.editorKernel.addUIListener("updatestate", this._handleUpdateState, this);
@@ -410,6 +411,26 @@
             this._initializePopovers();
             this._updateUI();
             var self = this;
+            // Several browsers propagate click events on disabled items to parent elements,
+            // others don't. To be sure, cancel all click events that arrive at the toolbar.
+            this.$toolbar.pointer("click.rte-toolbar", function(e) {
+                if ($(e.target).attr("disabled") === "disabled") {
+                    e.stopPropagation();
+                }
+            });
+            // Clicking a button in the toolbar leads to an unwanted focus transfer; ignore
+            // it by disabling focus handling on mousedown and enabling it again on
+            // mouseup (after blur); event order is: (touchstart) -> (touchend) -> (tap)
+            // -> mousedown -> blur (on opposite component) -> mouseup -> (click)
+            this.$container.on("mousedown.rte-toolbar", ".item",
+                    function(e) {
+                        self.editorKernel.disableFocusHandling();
+                    });
+            $(document).on("mouseup.rte-toolbar",
+                    function(e) {
+                        self.editorKernel.enableFocusHandling();
+                    });
+
             $(window).on("scroll.rte-toolbar", function(e) {
                 self._handleScrolling(e);
             });
@@ -439,6 +460,9 @@
             }
             this.editorKernel.removeUIListener("updatestate", this._handleUpdateState,
                     this);
+            this.$container.find(".rte-popover").each(function() {
+                $(this).off("click.rte-toolbar");
+            });
         },
 
         enable: function() {
