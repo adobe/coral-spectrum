@@ -48,7 +48,8 @@ module.exports = function(grunt) {
       'components/CUI.Tooltip.js',
       'components/CUI.DraggableList.js',
       'components/CUI.CharacterCount.js',
-
+      'components/CUI.Accordion.js',
+      
       // Validations
       'validations.js'
     ],

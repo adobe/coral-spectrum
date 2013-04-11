@@ -1,0 +1,37 @@
+.accordion {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li + li {
+    border-top: 0;
+  }
+}
+  
+.accordion li,
+.collapsible {
+  margin: 0;
+  padding: 0.4375rem 1rem;
+  overflow: hidden;
+  background-color: @accordion-background-color;
+  border: @px solid @accordion-border-color;
+  font-size: 13*@px;        
+  h3 {
+    margin: -0.4375rem -1rem 0.4375rem -1rem;
+    padding: 0.4375rem 1rem;
+    font-size: 13*@px;
+    line-height: 20*@px;
+    .ellipsis();
+    
+    font-weight: normal;
+    color: @font-secondary-color;
+    .gradient(@accordion-background-gradient-color, @accordion-background-color);
+    cursor: pointer;
+    
+    em {
+      font-style: normal;
+      font-weight: bold;
+      color: @font-base-color;
+    }    
+  }
+}
