@@ -105,6 +105,23 @@
                 return $dialog;
             },
 
+            /**
+             * Returns the specified UI "space". Creates it, if it is not yet available.
+             * @param {String} mode The mode the UI space is used for
+             * @param $container The UI container
+             * @return {jQuery} The UI space
+             */
+            getSpace: function(mode, $container) {
+                var $uiSpace = $container.find("> div[data-type=\"" + mode + "\"]");
+                if (!$uiSpace.length) {
+                    $uiSpace = $(CUI.rte.Templates["ui-space"]({
+                        "mode": mode
+                    }));
+                    $container.append($uiSpace);
+                }
+                return $uiSpace;
+            },
+
             determineIconClass: function(element) {
                 var com = CUI.rte.Common;
                 var classes = com.parseCSS(element.jquery ? element[0] : element);

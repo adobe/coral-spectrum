@@ -57,8 +57,16 @@
         construct: function(config) {
             CUI.rte.Utils.apply(this, config);
             var self = this;
-            this.$dialog = CUI.rte.UIUtils.getDialog(
-                    this.getDataType(), undefined, this.$container);
+            var dataType = this.getDataType();
+            var mode = config.mode;
+            this.$dialog = CUI.rte.UIUtils.getDialog(dataType, mode, this.$container);
+            if (!this.$dialog.length) {
+                this.$dialog = $(CUI.rte.Templates["dlg-" + dataType](config));
+                var $container = CUI.rte.UIUtils.getUIContainer(this.$editable);
+                var space = mode || "global";
+                var $dlgSpace = CUI.rte.UIUtils.getSpace(space, $container);
+                $dlgSpace.append(this.$dialog);
+            }
             this.$dialog.finger("tap.rte-dialog click.rte-dialog", function(e) {
                 if (!requiresFocus(e.target)) {
                     self.editorKernel.focus();
