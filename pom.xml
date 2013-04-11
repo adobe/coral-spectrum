@@ -70,7 +70,7 @@
                 <directory>${basedir}/build/less</directory>
                 <targetPath>${coral.build.dir}/less</targetPath>
                 <excludes>
-                    <exclude>components/rte.less</exclude>
+                    <exclude>optional/**</exclude>
                 </excludes>
             </resource>
             <resource>
@@ -124,11 +124,11 @@
                 </includes>
             </resource>
             <resource>
-                <directory>${basedir}/source/less/components</directory>
+                <directory>${basedir}/source/less/optional/rte</directory>
                 <targetPath>${coral.build.dir}/optional/rte/less</targetPath>
-                <includes>
-                    <include>rte.less</include>
-                </includes>
+                <excludes>
+                    <exclude>wrapper.less</exclude>
+                </excludes>
             </resource>
 
             <!-- images -->

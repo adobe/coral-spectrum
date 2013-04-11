@@ -508,6 +508,17 @@ module.exports = function(grunt) {
           '<%= dirs.build %>/css/cui.css': '<%= dirs.source %>/less/cui.less'
         }
       },
+      "cui-rte": {
+        options: {
+          paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
+            dirs.build+'/less/optional/rte/',
+            dirs.temp+'/less/'
+          ]
+        },
+        files: {
+          '<%= dirs.build %>/css/cui-rte.css': '<%= dirs.source %>/less/optional/rte/wrapper.less'
+        }
+      },
       "guide": {
         options: {
           paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
