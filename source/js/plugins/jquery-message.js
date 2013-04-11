@@ -14,8 +14,21 @@
   is strictly forbidden unless prior written permission is obtained
   from Adobe Systems Incorporated.
 */
-(function($) {
+(function($, console) {
     "use strict";
+
+    function createDefault(provider) {
+        return function(el, key, params) {
+            if (provider.message.hasOwnProperty(key)) {
+                var string = provider.message[key];
+                (params || []).forEach(function(p, i) {
+                    string = string.replace(new RegExp("\\{" + i + "\\}", "g"), p);
+                });
+                return string;
+            }
+            return undefined;
+        };
+    }
 
     var registry = (function() {
         var providers = [];
@@ -26,29 +39,23 @@
             },
 
             message: function(el, key, params) {
-                var provider;
-                providers.some(function(m) {
-                    if (el.is(m.selector)) {
-                        provider = m;
-                        return true;
-                    }
-                    return false;
-                });
+                for (var i = providers.length - 1; i >= 0; i--) {
+                    var provider = providers[i];
 
-                if (!provider) {
-                    return undefined;
+                    if (!el.is(provider.selector)) {
+                        continue;
+                    }
+
+                    var message = ($.isFunction(provider.message) ? provider.message : createDefault(provider)).call(el, el, key, params);
+
+                    if (message) {
+                        return message;
+                    }
                 }
 
-                return ($.isFunction(provider.message) ? provider.message : function(el, key, params) {
-                    if (provider.message.hasOwnProperty(key)) {
-                        var string = provider.message[key];
-                        (params || []).forEach(function(p, i) {
-                            string = string.replace(new RegExp("\\{" + i + "\\}", "g"), p);
-                        });
-                        return string;
-                    }
-                    return undefined;
-                }).call(el, el, key, params);
+                if (console) console.warn("Message not found:", key, el[0]);
+
+                return undefined;
             }
         };
     })();
@@ -110,4 +117,4 @@ jQuery.message.register({
             }
         };
     })();
-})(jQuery);
+})(jQuery, console);
