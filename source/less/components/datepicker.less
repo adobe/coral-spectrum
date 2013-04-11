@@ -5,6 +5,7 @@
 
 .datepicker {
     display: inline-block;
+    vertical-align: middle; // Align it on current line
     margin: 0.125rem 0;  // Give a top/bottom margin so they stack right
     position: relative;
     font-size: 0; /* Remove space between inline-block elements */
@@ -36,9 +37,13 @@
     }
     &.error > button,
     &.error input {
+      border-color: @textfield-error-border-color !important;
+    }
+    &.error.focus > button,
+    &.error.focus input {
       .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
     }
-
+    
     button,
     button[class^="icon-"],
     button[class*=" icon-"] {

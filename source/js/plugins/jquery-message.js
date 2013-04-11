@@ -14,8 +14,21 @@
   is strictly forbidden unless prior written permission is obtained
   from Adobe Systems Incorporated.
 */
-(function($) {
+(function($, console) {
     "use strict";
+
+    function createDefault(provider) {
+        return function(el, key, params) {
+            if (provider.message.hasOwnProperty(key)) {
+                var string = provider.message[key];
+                (params || []).forEach(function(p, i) {
+                    string = string.replace(new RegExp("\\{" + i + "\\}", "g"), p);
+                });
+                return string;
+            }
+            return undefined;
+        };
+    }
 
     var registry = (function() {
         var providers = [];
@@ -26,25 +39,23 @@
             },
 
             message: function(el, key, params) {
-                var provider;
-                providers.some(function(m) {
-                    if (el.is(m.selector)) {
-                        provider = m;
-                        return true;
-                    }
-                    return false;
-                });
+                for (var i = providers.length - 1; i >= 0; i--) {
+                    var provider = providers[i];
 
-                return ($.isFunction(provider.message) ? provider.message : function(el, key, params) {
-                    if (provider.message.hasOwnProperty(key)) {
-                        var string = provider.message[key];
-                        (params || []).forEach(function(p, i) {
-                            string = string.replace(new RegExp("\\{" + i + "\\}", "g"), p);
-                        });
-                        return string;
+                    if (!el.is(provider.selector)) {
+                        continue;
                     }
-                    return key;
-                }).call(el, el, key, params);
+
+                    var message = ($.isFunction(provider.message) ? provider.message : createDefault(provider)).call(el, el, key, params);
+
+                    if (message) {
+                        return message;
+                    }
+                }
+
+                if (console) console.warn("Message not found:", key, el[0]);
+
+                return undefined;
             }
         };
     })();
@@ -58,7 +69,18 @@
      */
 
     /**
+     * Returns the message for the given key.
+     * 
+     *
      * @memberof jQuery.fn
+     *
+     * @param {String} key The key used to look up.
+     * @param {Array} params The params to replace the placeholders
+     *
+     * @example
+$("#myElement").message("range-min", [1]);
+
+If "range-min" is resolved to "Please fill out with minimum value of {0}", the result would be "Please fill out with minimum value of 1",
      */
     $.fn.message = function(key, params) {
         return registry.message(this.first(), key, params);
@@ -95,7 +117,7 @@ jQuery.message.register({
     selector: ":lang(en)",
     message: function(el, key, params) {
         if (key === "required") return "Please fill out this field.";
-        else return key;
+        else return undefined;
     }
 });
              */
@@ -106,4 +128,4 @@ jQuery.message.register({
             }
         };
     })();
-})(jQuery);
+})(jQuery, console);

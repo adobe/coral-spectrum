@@ -35,36 +35,43 @@ module.exports = function(grunt) {
       'components/CUI.Dropdown.js',
       'components/CUI.Filters.js',
       'components/CUI.Slider.js',
-      'components/CUI.LabeledSlider.js',      
+      'components/CUI.LabeledSlider.js',
       'components/CUI.Datepicker.js',
       'components/CUI.Pulldown.js',
       'components/CUI.Sticky.js',
       'components/CUI.CardView.js',
       'components/CUI.PathBrowser.js',
       'components/CUI.Wizard.js',
+      'components/CUI.FlexWizard.js',
       'components/CUI.FileUpload.js',
       'components/CUI.Toolbar.js',
       'components/CUI.Tooltip.js',
-      'components/CUI.DraggableList.js'
-
+      'components/CUI.DraggableList.js',
+      'components/CUI.CharacterCount.js',
+      'components/CUI.Accordion.js',
+      
+      // Validations
+      'validations.js'
     ],
     "cui-rte": [
       'components/rte/Theme.js',
       'components/rte/UIUtils.js',
       'components/rte/ConfigUtils.js',
-      'components/rte/cui/ToolkitImpl.js',
-      'components/rte/cui/ToolbarImpl.js',
-      'components/rte/cui/PopoverManager.js',
-      'components/rte/cui/ElementImpl.js',
-      'components/rte/cui/ParaFormatterImpl.js',
-      'components/rte/cui/StyleSelectorImpl.js',
-      'components/rte/cui/CuiToolbarBuilder.js',
-      'components/rte/cui/CmItemImpl.js',
-      'components/rte/cui/CmSeparatorImpl.js',
-      'components/rte/cui/CuiContextMenuBuilder.js',
-      'components/rte/cui/CuiDialogManager.js',
-      'components/rte/cui/CuiDialogHelper.js',
-      'components/rte/cui/DialogImpl.js',
+      'components/rte/ui/ToolkitImpl.js',
+      'components/rte/ui/ToolbarImpl.js',
+      'components/rte/ui/PopoverManager.js',
+      'components/rte/ui/ElementImpl.js',
+      'components/rte/ui/ParaFormatterImpl.js',
+      'components/rte/ui/StyleSelectorImpl.js',
+      'components/rte/ui/CuiToolbarBuilder.js',
+      'components/rte/ui/CmItemImpl.js',
+      'components/rte/ui/CmSeparatorImpl.js',
+      'components/rte/ui/CuiContextMenuBuilder.js',
+      'components/rte/ui/dialogs/Mask.js',
+      'components/rte/ui/dialogs/AbstractDialog.js',
+      'components/rte/ui/dialogs/LinkBaseDialog.js',
+      'components/rte/ui/CuiDialogManager.js',
+      'components/rte/ui/CuiDialogHelper.js',
 
       'components/CUI.RichText.js',
 
@@ -126,21 +133,24 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
-//  grunt.loadNpmTasks('grunt-jsdoc');
+  //  grunt.loadNpmTasks('grunt-jsdoc');
   grunt.loadNpmTasks('grunt-mocha');
-//  grunt.loadNpmTasks('grunt-hub');
+  //  grunt.loadNpmTasks('grunt-hub');
 
   // Read in package.json
   var pkg = grunt.file.readJSON('package.json');
 
-  grunt.initConfig({
-    // Meta and build configuration
-    meta: {
+  // Meta and build configuration
+  var meta = {
       version: pkg.version,
       appName: pkg.name,
       appWebSite: pkg.repository.url
-    },
+  };
+
+  grunt.initConfig({
+
     dirs: dirs,
+    meta: meta,
 
     // Configuration
     jshint: {
@@ -161,7 +171,6 @@ module.exports = function(grunt) {
           'jQuery',       // jQuery
           'console',      // console.log...
           'Backbone',     // Backbone
-          '_',            // Underscore
           'Handlebars',   // Handlebars
           'prettyPrint',  // google-code-prettify
           'CUI',          // CoralUI
@@ -253,10 +262,6 @@ module.exports = function(grunt) {
             dest: '<%= dirs.build %>/js/libs/jquery.js'
           },
           {
-            src: ['<%= dirs.bower %>/underscore/index.js'],
-            dest: '<%= dirs.build %>/js/libs/underscore.js'
-          },
-          {
             src: ['<%= dirs.bower %>/handlebars/index.js'],
             dest: '<%= dirs.build %>/js/libs/handlebars.js'
           },
@@ -278,7 +283,9 @@ module.exports = function(grunt) {
               'jquery-gridlayout.js',
               'jquery-scrollable.js',
               'moment.js',
-              'jquery-cookie.js'
+              'jquery-cookie.js',
+              'jquery-validator.js',
+              'jquery-message.js'
             ],
             dest: '<%= dirs.build %>/js/libs/'
           }
@@ -382,35 +389,31 @@ module.exports = function(grunt) {
     compress: {
       release: {
         options: {
-          mode: 'zip'
+          archive: '<%= dirs.build %>/cui-<%= meta.version %>.zip'
         },
-        files: {
-          '<%= dirs.build %>/cui-<%= meta.version %>.zip': [
-            '<%= dirs.build %>/css/**',
-            '<%= dirs.build %>/fonts/**',
-            '<%= dirs.build %>/images/**',
-            '<%= dirs.build %>/js/**',
-            '<%= dirs.build %>/less/**'
-          ]
-        }
+        files: [
+            {src: ['<%= dirs.build %>/css/**']},
+            {src: ['<%= dirs.build %>/fonts/**']},
+            {src: ['<%= dirs.build %>/images/**']},
+            {src: ['<%= dirs.build %>/js/**']},
+            {src: ['<%= dirs.build %>/less/**']}
+        ]
       },
       full: {
         options: {
-          mode: 'zip'
+          archive: '<%= dirs.build %>/cui-<%= meta.version %>-full.zip'
         },
-        files: {
-          '<%= dirs.build %>/cui-<%= meta.version %>-full.zip': [
-            '<%= dirs.build %>/css/**',
-            '<%= dirs.build %>/examples/**',
-            '<%= dirs.build %>/fonts/**',
-            '<%= dirs.build %>/images/**',
-            '<%= dirs.build %>/js/**',
-            '<%= dirs.build %>/jsdoc/**',
-            '<%= dirs.build %>/less/**',
-            '<%= dirs.build %>/test/**',
-            '<%= dirs.build %>/index.html'
-          ]
-        }
+        files: [
+            {src: ['<%= dirs.build %>/css/**']},
+            {src: ['<%= dirs.build %>/examples/**']},
+            {src: ['<%= dirs.build %>/fonts/**']},
+            {src: ['<%= dirs.build %>/images/**']},
+            {src: ['<%= dirs.build %>/js/**']},
+            {src: ['<%= dirs.build %>/jsdoc/**']},
+            {src: ['<%= dirs.build %>/less/**']},
+            {src: ['<%= dirs.build %>/test/**']},
+            {src: ['<%= dirs.build %>/index.html']}
+        ]
       }
     },
 
@@ -527,17 +530,6 @@ module.exports = function(grunt) {
         files: {
           '<%= dirs.build %>/css/wizard.css': '<%= dirs.source %>/guide/less/wizard.less'
         }
-      },
-      "aemwelcome": {
-        options: {
-          paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
-            dirs.source+'/less/', // must hardcode paths here, grunt-contrib-less doesn't support template tags
-            dirs.temp+'/less/' // must hardcode paths here, grunt-contrib-less doesn't support template tags
-          ]
-        },
-        files: {
-          '<%= dirs.build %>/css/aem-welcome.css': '<%= dirs.source %>/guide/less/aem-welcome.less'
-        }
       }
     },
 
@@ -628,10 +620,6 @@ module.exports = function(grunt) {
         files: '<%= dirs.source %>/guide/less/wizard.less',
         tasks: ['less:wizard']
       },
-      compile_aemwelcome_less: {
-        files: '<%= dirs.source %>/guide/less/aem-welcome.less',
-        tasks: ['less:aemwelcome']
-      },
 
       compile_handlebars: {
         files: '<%= dirs.source %>/templates/*',
@@ -680,6 +668,8 @@ module.exports = function(grunt) {
 
     }
   });
+  // end init config
+
 
   // Partial build for development
   grunt.task.registerTask('partial', [
@@ -731,7 +721,7 @@ module.exports = function(grunt) {
   grunt.task.registerTask('release', [
     'clean',
     'full-build',
-    'coverage',
+    //'coverage',
     'compress'
   ]);
 

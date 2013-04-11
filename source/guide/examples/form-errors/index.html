@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Form Errors &amp; Validations</title>
+
+  <link rel="stylesheet" href="../../css/cui.css">
+  
+  <script src="../../js/libs/handlebars.js"></script>
+  <script src="../../js/libs/moment.js"></script>
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/libs/jquery-fingerpointer.js"></script>
+  <script src="../../js/libs/jquery-message.js"></script>
+  <script src="../../js/libs/jquery-validator.js"></script>
+  <script src="../../js/libs/toe.js"></script>
+  <script src="../../js/CUI.js"></script>
+</head>
+<body>
+  <section>
+    <h2>Form Errors</h2>
+    <div>
+      <input type="text" name="test" class="error"><span class="form-error">Please provide some input</span><br>
+      <textarea name="test" maxlength="10" rows="5" cols="20" class="error"></textarea><span class="form-error">Please provide some input</span>
+    </div>
+    <div>
+      <h3>Limited Characters</h3>
+      <input type="text" name="test" maxlength="10" data-init="character-count"><br>
+      <textarea name="test" maxlength="10" rows="5" cols="20" data-init="character-count"></textarea><br>
+      <label>Build-in browser check</label><br>
+      <input type="text" name="test" maxlength="10"><br>
+      <textarea name="test" maxlength="10" rows="5" cols="20" ></textarea>
+    </div>
+    <div>
+      <div class="datepicker error" data-init="datepicker">
+        <input type="date" value="29 November 2012" name="test"><button class="icon-calendar small">Datepicker</button>
+      </div><span class="form-error">Please provide some input</span>
+    </div>
+    <div>
+      <div class="slider ticked filled tooltips error" data-init="slider">
+        <input type="range" value="14" min="10" max="20" step="2">
+      </div><span class="form-error tooltip-right">Please provide some input</span>
+    </div>
+    <div>
+      <div class="search">
+        <input type="text" placeholder="Search" class="error">
+        <button>Search</button>
+      </div><span class="form-error tooltip-right">Please provide some input</span>
+    </div>
+    <div>
+      <div class="filters error" data-init="filters">
+        <input type="text" placeholder="Single Term Filter">
+        <select>
+          <option selected>Apple</option>
+          <option>Pear</option>
+          <option>Banana</option>
+        </select>
+      </div><span class="form-error tooltip-right">Please provide some input</span>
+    </div>
+    <div>
+      <div class="dropdown error" data-init="dropdown">
+        <button>Single Select</button>
+        <select name="dropdown">
+          <option>Single One</option>
+          <option selected>Single Two</option>
+          <option>Single Three</option>
+        </select>
+      </div>
+      <span class="form-error tooltip-right">Please provide some input</span>
+    </div>
+    <div>
+      <div class="dropdown error" data-editable="true" data-init="dropdown">
+        <button>Single Select</button>
+        <select name="dropdown">
+          <option>Single One</option>
+          <option selected>Single Two</option>
+          <option>Single Three</option>
+        </select>
+      </div><span class="form-error tooltip-right">Please provide some input</span>
+    </div>          
+  </section>
+
+  <section>
+    <h2>Form Validations</h2>
+    <form action="test">
+      <div>
+        <input type="text" name="test" required><br>
+        <input type="text" name="test" aria-required="true"><br>
+
+        <textarea name="test" maxlength="10" rows="5" cols="20" required></textarea><br>
+        <textarea name="test" maxlength="10" rows="5" cols="20" aria-required="true"></textarea>
+      </div>
+      <input class="button" type="submit" />
+    </form>
+  </section>
+</body>
+</html>

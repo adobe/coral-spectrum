@@ -5,6 +5,7 @@
 /externals/components
 /misc
 /target
+/components
 .idea/
 atlassian-ide-plugin.xml
 *.iml

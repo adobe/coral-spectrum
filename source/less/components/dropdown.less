@@ -1,12 +1,13 @@
 /**
 * 
-* A filters or tags input field.
+* A filters or dropdown input field.
 */
 
 .dropdown {
     display: inline-block;
     position: relative;
-    margin: 0.125rem 0;  // Give a top/bottom margin so they stack right
+    margin: 0.5rem 0;  // Give a top/bottom margin so they stack right
+    vertical-align: middle;
     font-size: 0;
 
     select {
@@ -21,8 +22,14 @@
     }
     &.error button,
     &.error input {
-      .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+      border-color: @textfield-error-border-color;
     }
+    &.error button:focus,
+    &.error input:focus,
+    &.error.focus button,
+    &.error.focus input {
+      .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+    }    
 
     button {
 

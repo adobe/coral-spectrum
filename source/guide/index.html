@@ -31,11 +31,11 @@
             <a href="jsdoc/index.html">Docs</a>
             <a href="https://git.corp.adobe.com/Coral/CoralUI/">Github</a>
             <a href="releases/cui-latest-full.zip">Download</a>
-            <a href="http://jenkins.bsl.eur.adobe.com:8080/job/Build_CoralUI/ws/build/index.html">Nightly guide</a>
+            <a href="http://jenkins.bsl.eur.adobe.com:8080/job/Build_CoralUI-master/ws/build/index.html">Nightly guide</a>
         </nav>
 
         <div class="drawer">
-            <div class="badge">v1.4.0</div>
+            <div class="badge">v1.5.0</div>
         </div>
 
     </header>
@@ -106,6 +106,7 @@
                         <a href="#Dropdown">Dropdown</a>
                         <a href="#Datepicker">Datepicker</a>
                         <a href="#Draggable">Draggable</a>
+                        <a href="#FormErrors">Form Errors</a>                        
                     </nav>
                 </section>
 
@@ -867,6 +868,10 @@
                         <li><code class="atv">warning</code> A red button, used to indicate actions that are potentially destructive, such as delete</li>
                     </ul>
 
+                    <h3>Button groups</h3>
+                    <p>You can group buttons into horizontal lines by adding a <code class="prettyprint">&lt;div class="buttong-group"&gt;</code> around them.</p>
+                   
+                                        
                     <div class="componentSample buttonSample">
                         <div class="example">
 
@@ -874,6 +879,13 @@
                             <button class="primary">Primary Action</button>
                             <button class="warning">Warning</button>
                             <button disabled>Disabled</button>
+                            
+                            <p>Button groups:</p>
+                            <div class="button-group">
+                              <button><i class="icon-add"></i> Add</button>
+                              <button><i class="icon-camera"></i> Snapshot</button>
+                              <button><i class="icon-undo"></i> Undo</button>  
+                            </div>
 
                         </div>
                         <pre class="prettyprint linenums">
@@ -881,6 +893,12 @@
 &lt;button class=&quot;primary&quot;&gt;Primary Action&lt;/button&gt;
 &lt;button class=&quot;warning&quot;&gt;Warning&lt;/button&gt;
 &lt;button disabled&gt;Disabled&lt;/button&gt;
+
+&lt;div class="button-group"&gt;
+  &lt;button&gt;&lt;i class="icon-add"&gt;&lt;/i&gt; Add&lt;/button&gt;
+  &lt;button&gt;&lt;i class="icon-camera"&gt;&lt;/i&gt; Snapshot&lt;/button&gt;
+  &lt;button&gt;&lt;i class="icon-undo"&gt;&lt;/i&gt; Undo&lt;/button&gt;  
+&lt;/div&gt;
 </pre>
                     </div>
                 </section>
@@ -888,7 +906,9 @@
                 <section id="TextField">
                     <h2 class="line">Text Field</h2>
                     <p>Text input variants.</p>
-
+                    <p>You can choose to limit the max length of textfields and textareas and give visual feedback to the user by using the
+                    <a href="jsdoc/CUI.CharacterCount.html">CUI.CharacterCount</a> widget.</p>
+                    
                     <div class="componentSample">
                         <div class="example">
                             <div class="textfieldSample">
@@ -948,6 +968,8 @@
                 <section id="TextArea">
                     <h2 class="line">Text Area</h2>
                     <p>Text input variants.</p>
+                    <p>You can choose to limit the max length of textfields and textareas and give visual feedback to the user by using the
+                    <a href="jsdoc/CUI.CharacterCount.html">CUI.CharacterCount</a> widget.</p>
 
                     <div class="componentSample">
                         <div class="example">
@@ -1522,30 +1544,37 @@
 
                 <section id="Checkbox">
                     <h2 class="line">Checkbox</h2>
-                    <p>Checkboxes are styling using pure CSS, and a <code class="atv">partial</code> class is provided to indicate a "half-checked" state.</p>
+                    <p>Checkboxes are styled using pure CSS. They can have an indetermined state by changing their state using
+                        javascript.</p>
 
                     <div class="componentSample">
                         <div class="example clearfix">
                             <div class="left">
                                 <label><input type="checkbox" name="c1" value="1" checked><span>Checked</span></label><br>
                                 <label><input type="checkbox" name="c2" value="2"><span>Unchecked</span></label><br>
-                                <label><input type="checkbox" name="c3" value="3" class="partial"><span>Partially checked</span></label>
+                                <label><input type="checkbox" name="c3" value="3" id="partial-checkbox1"><span>Partially checked</span></label>
                             </div>
                             <div class="left">
                                 <label><input type="checkbox" name="c4" value="4" disabled checked><span>Disabled Checked</span></label><br>
                                 <label><input type="checkbox" name="c5" value="5" disabled><span>Disabled Unchecked</span></label><br>
-                                <label><input type="checkbox" name="c6" value="6" class="partial" disabled><span>Disabled Partially Checked</span></label>
+                                <label><input type="checkbox" name="c6" value="6" id="partial-checkbox2" disabled><span>Disabled Partially Checked</span></label>
                             </div>
                         </div>
                         <pre class="prettyprint linenums">
 &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c1&quot; checked&gt;&lt;span&gt;Checked&lt;/span&gt;&lt;/label&gt;
 &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c2&quot;&gt;&lt;span&gt;Unchecked&lt;/span&gt;&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c3&quot; class=&quot;partial&quot;&gt;&lt;span&gt;Partially checked&lt;/span&gt;&lt;/label&gt;
+&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c3&quot; &gt;&lt;span&gt;Partially checked&lt;/span&gt;&lt;/label&gt;
 &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c4&quot; disabled checked&gt;&lt;span&gt;Disabled Checked&lt;/span&gt;&lt;/label&gt;
 &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c5&quot; disabled&gt;&lt;span&gt;Disabled Unchecked&lt;/span&gt;&lt;/label&gt;
 &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c6&quot; disabled&gt;&lt;span&gt;Disabled Partially Checked&lt;/span&gt;&lt;/label&gt;
 </pre>
                     </div>
+
+                    <script type="text/javascript">
+                        // changes the demo checkboxes to be half-checked.
+                        $('#partial-checkbox1').prop('indeterminate', true);
+                        $('#partial-checkbox2').prop('indeterminate', true);
+                    </script>
                 </section>
 
                 <section id="RadioButtons">
@@ -1651,21 +1680,27 @@
 
                 <section id="Draggable">
                     <h2 class="line">Draggable List</h2>
-                    <p>A list with items that can be dragged and dropped. If the widget CUI.Sortable is applied to the list, it can be sorted
-                       by just dragging the elements to their new position.</p>
+                    <p>A list with items that can be dragged and dropped. If the widget <a href="jsdoc/CUI.DraggableList.html">CUI.DraggableList</a> is applied to the list, it can be sorted and moved from one list to another by just dragging the elements to their new position.</p>
 
                     <div class="componentSample">
                         <div class="example clearfix">
                             <div class="left">
-                                <ul class="draggable" data-init="draggable-list" data-allow="reorder">
+                                <ul class="draggable" data-init="draggable-list" data-allow="reorder drag drop">
                                     <li draggable="true">My Content 1<button class="close">&times;</button></li>
                                     <li draggable="true">My Content 2<button class="close">&times;</button></li>
                                     <li draggable="true">My Content 3<button class="close">&times;</button></li>
                                 </ul>
                             </div>
+                            <div class="left">
+                                <ul class="draggable" data-init="draggable-list" data-allow="reorder drag drop">
+                                    <li draggable="true">My Content 4<button class="close">&times;</button></li>
+                                    <li draggable="true">My Content 5<button class="close">&times;</button></li>
+                                    <li draggable="true">My Content 6<button class="close">&times;</button></li>
+                                </ul>
+                            </div>                            
                         </div>
                         <pre class="prettyprint linenums">
-&lt;ul class=&quot;draggable&quot; data-init=&quot;sortable&quot;&gt;
+&lt;ul class=&quot;draggable&quot; data-init=&quot;draggable-list&quot;&gt;
 &lt;li draggable=&quot;true&quot;&gt;My Content 1&lt;button class=&quot;close&quot;&gt;&amp;times&lt;/button&gt;&lt;/li&gt;
 &lt;li draggable=&quot;true&quot;&gt;My Content 2&lt;button class=&quot;close&quot;&gt;&amp;times&lt;/button&gt;&lt;/li&gt;
 &lt;li draggable=&quot;true&quot;&gt;My Content 3&lt;button class=&quot;close&quot;&gt;&amp;times&lt;/button&gt;&lt;/li&gt;
@@ -1673,6 +1708,27 @@
 </pre>
                     </div>
                 </section>
+                
+                <section id="FormErrors" style="position: relative">
+                    <h2 class="line">Form Errors</h2>
+                    <p>Descriptive errors for form field validation can be added easily by just adding a <code class="atv">&lt;span&gt;</code> sibling with class <code class="atv">form-error</code> to the erroneous form field.</p>
+                    <p>You should always add a "Quicktip" (see <a href="jsdoc/CUI.Tooltip.html">CUI.Tooltip</a>) to give some more detailed info about the error to the user.</p>
+                    <p>You can also choose to limit the max length of textfields and textareas by using the <a href="jsdoc/CUI.CharacterCount.html">CUI.CharacterCount</a> widget.</p>
+                    <div class="componentSample">
+                        <div class="example clearfix">
+                            <div class="left">
+                                <input type="text" class="error" value="Tooltip below"> <span class="form-error" data-init="quicktip" data-quicktip-arrow="top" data-quicktip-type="error">Please correct your input!</span><br>
+                                <input type="text" class="error" value="Tooltip right"> <span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error">Please correct your input!</span>
+                            </div>                     
+                        </div>
+                        <pre class="prettyprint linenums">
+&lt;input type="text" class="error" value="Tooltip below"&gt;
+&lt;span class="form-error" data-init="quicktip" data-quicktip-arrow="top" data-quicktip-type="error"&gt;Please correct your input!&lt;/span&gt;&lt;br&gt;
+&lt;input type="text" class="error" value="Tooltip right"&gt;
+&lt;span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error"&gt;Please correct your input!&lt;/span&gt;
+</pre>
+                    </div>
+                </section>                
 
             </section><!-- /ButtonsAndControls -->
 

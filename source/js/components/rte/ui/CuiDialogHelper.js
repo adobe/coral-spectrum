@@ -18,8 +18,8 @@
 
 (function($) {
 
-    var TYPE_TO_DATATYPE = {
-        "rtelinkdialog": "link"
+    var TYPES = {
+        "rtelinkdialog": CUI.rte.ui.cui.LinkBaseDialog
     };
 
     CUI.rte.ui.cui.CuiDialogHelper = new Class({
@@ -34,25 +34,22 @@
          */
         instantiateDialog: function(dialogConfig) {
             var type = dialogConfig.type;
-            if (!TYPE_TO_DATATYPE.hasOwnProperty(type)) {
+            if (!TYPES.hasOwnProperty(type)) {
                 throw new Error("Unknown dialog type: " + type);
             }
-            var dataType = TYPE_TO_DATATYPE[type];
+            var cls = TYPES[type];
             var context = this.editorKernel.getEditContext();
             var $editable = $(context.root);
             var $container = CUI.rte.UIUtils.getUIContainer($editable);
-            var $dialog = CUI.rte.UIUtils.getDialog(dataType, undefined, $container);
             var $toolbar = this.editorKernel.toolbar.$toolbar;
             var $trigger = $toolbar.parent().find(
                     "button[data-action=\"" + dialogConfig.parameters.command + "\"]");
-            return new CUI.rte.ui.cui.DialogImpl({
+            return new cls({
                 "config": dialogConfig,
-                "dataType": dataType,
                 "$editable": $editable,
                 "$container": $container,
                 "$toolbar": $toolbar,
-                "$trigger": $trigger,
-                "$dialog": $dialog
+                "$trigger": $trigger
             });
         },
 

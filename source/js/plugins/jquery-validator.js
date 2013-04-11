@@ -32,12 +32,16 @@
         var validators = [];
 
         return {
+            get submittableSelector() {
+                return submittableSelector;
+            },
+
             isSummittable: function(el) {
-                return el.is(submittableSelector);
+                return el.is(this.submittableSelector);
             },
 
             submittables: function(form) {
-                return form.find(submittableSelector);
+                return form.find(this.submittableSelector);
             },
 
             isCandidate: function(el) {
@@ -78,6 +82,32 @@
         this.registry = registry;
         this.message = null;
         this.customMessage = null;
+
+        this.state = (function(outer) {
+            return {
+                get customError() {
+                    return !!outer.customMessage;
+                },
+                get valid() {
+                    return !outer.customMessage && !outer.message;
+                }
+            };
+        })(this);
+    }
+
+    function everyReverse(array, callback, thisArg) {
+        for (var i = array.length - 1; i >= 0; i--) {
+            if (!callback.call(thisArg, array[i], i, array)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function createInvalidEvent() {
+        return $.Event("invalid", {
+            _jqueryValidator: true
+        });
     }
 
     HTMLValidation.prototype = {
@@ -85,23 +115,30 @@
             return this.registry.isCandidate(this.el);
         },
 
+        setCustomValidity: function(message) {
+            this.customMessage = message;
+        },
+
         get validity() {
-            // TODO implement later when needed
+            return this.state;
         },
 
-        get validationMessage() {
-            this.checkValidity(true);
-            return this.customMessage || this.message || "";
-        },
+        checkValidity: function(options) {
+            options = options || {};
 
-        checkValidity: function(suppressEvent) {
+            if (!this.willValidate) {
+                return true;
+            }
+
             if (this.customMessage) {
-                if (!suppressEvent) this.el.trigger("invalid");
+                if (!options.suppressEvent) this.el.trigger(createInvalidEvent());
                 return false;
             }
 
             this.message = null;
-            this.registry.validators(this.el).every(function(v) {
+            everyReverse(this.registry.validators(this.el), function(v) {
+                if (!v.validate) return true;
+
                 var m = v.validate(this.el);
                 if (m) {
                     this.message = m;
@@ -112,34 +149,35 @@
             }, this);
 
             if (this.message) {
-                if (!suppressEvent) this.el.trigger("invalid");
+                if (!options.suppressEvent) this.el.trigger(createInvalidEvent());
                 return false;
             }
-            
-            this.clearError();
-            
+
             return true;
         },
 
-        setCustomValidity: function(message) {
-            this.customMessage = message;
-            this.checkValidity(true);
+        get validationMessage() {
+            if (!this.willValidate) return "";
+
+            return this.customMessage || this.message || "";
         },
 
-        showError: function() {
-            if (!this.customMessage && !this.message) return;
-            
-            this.registry.validators(this.el).every(function(v) {
-                v.show(this.el, this.validationMessage);
-                return false; // i.e. only run the first one
-            }, this);
-        },
-        
-        clearError: function() {
-            this.registry.validators(this.el).every(function(v) {
-                v.clear(this.el);
-                return false; // i.e. only run the first one
-            }, this);
+        updateUI: function() {
+            if (this.validity.valid) {
+                everyReverse(this.registry.validators(this.el), function(v) {
+                    if (!v.clear) return true;
+
+                    v.clear(this.el);
+                    return false; // i.e. only run the first one
+                }, this);
+            } else {
+                everyReverse(this.registry.validators(this.el), function(v) {
+                    if (!v.show) return true;
+
+                    v.show(this.el, this.validationMessage);
+                    return false; // i.e. only run the first one
+                }, this);
+            }
         }
     };
 
@@ -159,7 +197,6 @@
         if (api) {
             return api.willValidate;
         } else {
-            // TODO decide if returning undefined is better
             return false;
         }
     };
@@ -172,7 +209,6 @@
         if (api) {
             return api.validationMessage;
         } else {
-            // TODO decide if returning undefined is better
             return "";
         }
     };
@@ -180,12 +216,11 @@
     /**
      * @memberof jQuery.fn
      */
-    $.fn.checkValidity = function(suppressEvent) {
+    $.fn.checkValidity = function() {
         var api = registry.api(this.first());
         if (api) {
-            return api.checkValidity(suppressEvent);
+            return api.checkValidity();
         } else {
-            // TODO decide if returning undefined is better
             return true;
         }
     };
@@ -198,6 +233,18 @@
             var api = registry.api($(this));
             if (api) {
                 api.setCustomValidity(message);
+            }
+        });
+    };
+
+    /**
+     * @memberof jQuery.fn
+     */
+    $.fn.updateErrorUI = function() {
+        return this.each(function() {
+            var api = registry.api($(this));
+            if (api) {
+                api.updateUI();
             }
         });
     };
@@ -251,10 +298,12 @@ jQuery.validator.register({
         return registry.submittables(form)
             .map(function() {
                 var api = registry.api($(this));
-                if (!api || !api.willValidate || api.checkValidity(true)) return;
+                if (!api || !api.willValidate || api.checkValidity({
+                    suppressEvent: true
+                })) return;
                 return this;
             }).map(function() {
-                var e = $.Event("invalid");
+                var e = createInvalidEvent();
                 $(this).trigger(e);
 
                 if (!e.isDefaultPrevented()) {
@@ -274,7 +323,7 @@ jQuery.validator.register({
             unhandleds.each(function() {
                 var api = registry.api($(this));
                 if (api) {
-                    api.showError();
+                    api.updateUI();
                 }
             });
             return false;
@@ -287,8 +336,8 @@ jQuery.validator.register({
     // This way no other event handlers are executed
     document.addEventListener("submit", function(e) {
         var form = $(e.target);
-        
-        // TODO TBD if we want to do validation only when there is a certain class
+
+        // TODO TBD if we want to do validation only when there is a certain class or based on config of $.validator
 
         if (!form.is("form") ||
             form.prop("noValidate") === true ||
@@ -301,4 +350,18 @@ jQuery.validator.register({
             e.preventDefault();
         }
     }, true);
+
+    // Cancel the native invalid event (which is triggered by the browser supporting native validation)
+    // to show our own UI instead
+    $(document).on("cui-contentloaded", function(e) {
+        $(registry.submittableSelector, e.target).on("invalid", function(e) {
+            if (e._jqueryValidator) return;
+
+            e.preventDefault();
+
+            var el = $(this);
+            el.checkValidity();
+            el.updateErrorUI();
+        });
+    });
 })(document, jQuery);

@@ -48,6 +48,20 @@
 
         _popoverStyleSheet: null,
 
+        _tbHideTimeout: null,
+
+        _recordedScrollTop: null,
+
+
+        construct: function(elementMap, $editable, tbType) {
+            this.elementMap = elementMap;
+            this.$editable = $editable;
+            this.tbType = (tbType || "inline");
+            this.$container = CUI.rte.UIUtils.getUIContainer(this.$editable);
+            this.$toolbar = CUI.rte.UIUtils.getToolbar(this.$editable, tbType);
+            this.popover = new CUI.rte.ui.cui.PopoverManager(this.$container, tbType);
+        },
+
         /**
          * <p>Determines the "clipping parent" of the specified DOM object.</p>
          * <p>The clipping parent is a DOM object that might clip the visible area of the
@@ -110,14 +124,14 @@
                 var startOffset = selection.startOffset;
                 var endNode = selection.endNode;
                 var endOffset = selection.endOffset;
+                var isSel = sel.isSelection(selection);
                 var area = dpr.calcScreenEstate(context, startNode, startOffset, endNode,
                         endOffset);
-                var yStart = area.startY - (sel.isSelection(selection) ? com.ua.calloutHeight
-                        : 0);
+                var yStart = area.startY - (isSel ? com.ua.calloutHeight : 0);
                 var yEnd = area.endY;
                 forbidden = {
-                    "start": yStart,
-                    "end": yEnd
+                    "start": yStart - (isSel ? com.ua.selectionHandlesHeight : 0),
+                    "end": yEnd + (isSel ? com.ua.selectionHandlesHeight : 0)
                 }
             }
             return forbidden;
@@ -228,7 +242,6 @@
                 }
             }
             // calculate popover position
-            var popoverLeft = tbLeft;         // TODO check if we need to change this; if not, inline it
             var popoverTop = (popoverAlign === "top" ?
                     tbTop - popoverData.height : tbTop + tbHeight + popoverData.arrowHeight);
             this.preferredToolbarPos = {
@@ -238,7 +251,7 @@
             return {
                 "toolbar": this.preferredToolbarPos,
                 "popover": {
-                    "left": popoverLeft,
+                    "left": tbLeft,
                     "top": popoverTop,
                     "align": popoverAlign,
                     "arrow": (popoverAlign === "top" ? "bottom" : "top")
@@ -255,38 +268,56 @@
         },
 
         _handleScrolling: function(e) {
-            this._updateUI();
+            var context = this.editorKernel.getEditContext();
+            var scrollTop = (this.$clipParent || $(context.win)).scrollTop();
+            if (this._recordedScrollTop !== scrollTop) {
+                if (CUI.rte.Common.ua.isTouch && !this.editorKernel.isLocked()) {
+                    this.hideTemporarily();
+                } else {
+                    this._updateUI();
+                }
+                this._recordedScrollTop = scrollTop;
+            }
         },
 
         _handleUpdateState: function(e) {
-            switch (e.origin) {
-                case "event":
-                    break;
-                case "command":
-                    this.popover.hide();
-                    break;
+            if (!this.editorKernel.isLocked()) {
+                switch (e.origin) {
+                    case "event":
+                        break;
+                    case "command":
+                        this.popover.hide();
+                        break;
+                }
+                this._updateUI();
             }
-            this._updateUI();
         },
 
         _initializePopovers: function() {
             var self = this;
-            this.$container.on("click.rte.handler", "button[data-action^=\"#\"]", function(e) {
-                var $trigger = $(this);
-                var show = !self.popover.isShown() || !self.popover.isTriggeredBy($trigger);
-                self.popover.hide();
-                if (show) {
-                    self.popover.use($(e.target).data("action").substring(1), $trigger,
-                            self.$toolbar);
-                }
-                self._updateUI();
-                self.editorKernel.focus();
-                e.stopPropagation();
-            });
-            this.$container.fipo("touchstart.rte.handler", "mousedown.rte.handler",
-                    "button[data-action^=\"#\"]", function(e) {
-                        self.editorKernel.disableFocusHandling();
+            this.$container.on("click.rte-toolbar", "button[data-action^=\"#\"]",
+                    function(e) {
+                        var $trigger = $(this);
+                        if (!$trigger.hasClass(CUI.rte.Theme.TOOLBARITEM_DISABLED_CLASS)) {
+                            var show = !self.popover.isShown() ||
+                                    !self.popover.isTriggeredBy($trigger);
+                            self.popover.hide();
+                            if (show) {
+                                self.popover.use($(e.target).data("action").substring(1),
+                                        $trigger, self.$toolbar);
+                            }
+                            self._updateUI();
+                            self.editorKernel.focus();
+                            e.stopPropagation();
+                        }
                     });
+            this.$container.find(".rte-popover").each(function() {
+                $(this).pointer("click.rte-toolbar", function(e) {
+                    if ($(e.target).attr("disabled") === "disabled") {
+                        e.stopPropagation();
+                    }
+                });
+            });
             // initialize single selection triggers (that adapt the icon to the currently
             // chosen child element)
             var $singleSelectTriggers = this.$toolbar.find(".trigger.single-select");
@@ -305,6 +336,28 @@
             this.$toolbar.css("visibility", "hidden");
         },
 
+        isHidden: function() {
+            return (this.$toolbar.css("visibility") === "hidden");
+        },
+
+        hideTemporarily: function(onShowCallback) {
+            if (this._tbHideTimeout) {
+                window.clearTimeout(this._tbHideTimeout);
+                this._tbHideTimeout = undefined;
+            }
+            if (!this.isHidden()) {
+                this.hide();
+            }
+            var self = this;
+            this._tbHideTimeout = window.setTimeout(function() {
+                self.show();
+                self._tbHideTimeout = undefined;
+                if (onShowCallback) {
+                    onShowCallback();
+                }
+            }, 1000);
+        },
+
         show: function() {
             // use "visibility" property instead of "display" - the latter would destroy the
             // layout on Safari Mobile
@@ -314,15 +367,6 @@
 
         getToolbarContainer: function() {
             return this.$container;
-        },
-
-        construct: function(elementMap, $editable, tbType) {
-            this.elementMap = elementMap;
-            this.$editable = $editable;
-            this.tbType = (tbType || "inline");
-            this.$container = CUI.rte.UIUtils.getUIContainer(this.$editable);
-            this.$toolbar = CUI.rte.UIUtils.getToolbar(this.$editable, tbType);
-            this.popover = new CUI.rte.ui.cui.PopoverManager(this.$container, tbType);
         },
 
         getItem: function(itemId) {
@@ -355,6 +399,10 @@
             }
         },
 
+        triggerUIUpdate: function() {
+            this._updateUI();
+        },
+
         startEditing: function(editorKernel) {
             this.editorKernel = editorKernel;
             this.editorKernel.addUIListener("updatestate", this._handleUpdateState, this);
@@ -363,17 +411,37 @@
             this._initializePopovers();
             this._updateUI();
             var self = this;
-            $(window).on("scroll.rte", function(e) {
+            // Several browsers propagate click events on disabled items to parent elements,
+            // others don't. To be sure, cancel all click events that arrive at the toolbar.
+            this.$toolbar.pointer("click.rte-toolbar", function(e) {
+                if ($(e.target).attr("disabled") === "disabled") {
+                    e.stopPropagation();
+                }
+            });
+            // Clicking a button in the toolbar leads to an unwanted focus transfer; ignore
+            // it by disabling focus handling on mousedown and enabling it again on
+            // mouseup (after blur); event order is: (touchstart) -> (touchend) -> (tap)
+            // -> mousedown -> blur (on opposite component) -> mouseup -> (click)
+            this.$container.on("mousedown.rte-toolbar", ".item",
+                    function(e) {
+                        self.editorKernel.disableFocusHandling();
+                    });
+            $(document).on("mouseup.rte-toolbar",
+                    function(e) {
+                        self.editorKernel.enableFocusHandling();
+                    });
+
+            $(window).on("scroll.rte-toolbar", function(e) {
                 self._handleScrolling(e);
             });
             if (this.$clipParent) {
                 // provide a onclick handler for the clip parent, as otherwise no click
                 // events would be sent to finish editing
-                this.$clipParent.on("click.rte.clipparent", function() {
+                this.$clipParent.on("click.rte-toolbar", function() {
                     // do nothing
                 });
                 // handle scrolling of the clip parent
-                this.$clipParent.on("scroll.rte", function(e) {
+                this.$clipParent.on("scroll.rte-toolbar", function(e) {
                     self._handleScrolling(e);
                 });
             }
@@ -382,13 +450,19 @@
         finishEditing: function() {
             this.popover.hide();
             this.$toolbar.removeClass(CUI.rte.Theme.TOOLBAR_ACTIVE);
-            $(window).off("scroll.rte");
+            $(window).off("scroll.rte-toolbar");
+            this.$container.off("mousedown.rte-toolbar click.rte-toolbar");
+            $(document).off("mouseup.rte-toolbar");
             if (this.$clipParent) {
-                this.$clipParent.off("scroll.rte");
-                this.$clipParent.off("click.rte.clipparent");
+                this.$clipParent.off("scroll.rte-toolbar");
+                this.$clipParent.off("click.rte-toolbar");
                 this.$clipParent = undefined;
             }
-            this.editorKernel.removeUIListener("updatestate", this._handleUpdateState, this);
+            this.editorKernel.removeUIListener("updatestate", this._handleUpdateState,
+                    this);
+            this.$container.find(".rte-popover").each(function() {
+                $(this).off("click.rte-toolbar");
+            });
         },
 
         enable: function() {
@@ -401,11 +475,13 @@
         },
 
         disable: function(excludeItems) {
-            for (var itemId in this.elementMap) {
-                if (this.elementMap.hasOwnProperty(itemId)) {
-                    if (!excludeItems || (excludeItems.indexOf(itemId) < 0)) {
-                        var item = this.elementMap[itemId].element;
-                        item.setDisabled(true);
+            if (!this.editorKernel.isLocked()) {
+                for (var itemId in this.elementMap) {
+                    if (this.elementMap.hasOwnProperty(itemId)) {
+                        if (!excludeItems || (excludeItems.indexOf(itemId) < 0)) {
+                            var item = this.elementMap[itemId].element;
+                            item.setDisabled(true);
+                        }
                     }
                 }
             }
@@ -427,7 +503,6 @@
             }
             this.elementMap = { };
         }
-
 
     });
 

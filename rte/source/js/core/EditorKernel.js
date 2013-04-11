@@ -518,6 +518,9 @@ CUI.rte.EditorKernel = new Class({
      */
     lock: function() {
         this.lockCount++;
+        if (this.isLocked() && !this.isEventingDisabled) {
+            this.disableEventHandling();
+        }
     },
 
     /**
@@ -526,6 +529,9 @@ CUI.rte.EditorKernel = new Class({
      */
     unlock: function() {
         this.lockCount--;
+        if (!this.isLocked() && this.isEventingDisabled) {
+            this.reenableEventHandling();
+        }
     },
 
     /**
@@ -935,6 +941,18 @@ CUI.rte.EditorKernel = new Class({
     },
 
     /**
+     * <p>Suspends event handling for this editor kernel.</p>
+     * <p>Use {@link #initializeEventHandling} to re-establish event handling.</p>
+     */
+    suspendEventHandling: function() {
+        this.unregisterHandlers();
+        if (this.selectionChangeTracker !== null) {
+            window.clearInterval(this.selectionChangeTracker);
+            this.selectionChangeTracker = null;
+        }
+    },
+
+    /**
      * <p>Adds CSS "feature classes" to the specified DOM element.</p>
      * <p>Supported feature classes are:</p>
      * <ul>
@@ -968,18 +986,6 @@ CUI.rte.EditorKernel = new Class({
         addConditionally(com.ua.isWebKit, "webkit");
         addConditionally(com.ua.isSafari, "safari");
         addConditionally(com.ua.isChrome, "chrome");
-    },
-
-    /**
-     * <p>Suspends event handling for this editor kernel.</p>
-     * <p>Use {@link #initializeEventHandling} to re-establish event handling.</p>
-     */
-    suspendEventHandling: function() {
-        this.unregisterHandlers();
-        if (this.selectionChangeTracker !== null) {
-            window.clearInterval(this.selectionChangeTracker);
-            this.selectionChangeTracker = null;
-        }
     },
 
     /**
