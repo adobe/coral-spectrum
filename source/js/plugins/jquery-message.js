@@ -69,7 +69,18 @@
      */
 
     /**
+     * Returns the message for the given key.
+     * 
+     *
      * @memberof jQuery.fn
+     *
+     * @param {String} key The key used to look up.
+     * @param {Array} params The params to replace the placeholders
+     *
+     * @example
+$("#myElement").message("range-min", [1]);
+
+If "range-min" is resolved to "Please fill out with minimum value of {0}", the result would be "Please fill out with minimum value of 1",
      */
     $.fn.message = function(key, params) {
         return registry.message(this.first(), key, params);
