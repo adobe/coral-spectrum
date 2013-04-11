@@ -32,12 +32,16 @@
         var validators = [];
 
         return {
+            get submittableSelector() {
+                return submittableSelector;
+            },
+
             isSummittable: function(el) {
-                return el.is(submittableSelector);
+                return el.is(this.submittableSelector);
             },
 
             submittables: function(form) {
-                return form.find(submittableSelector);
+                return form.find(this.submittableSelector);
             },
 
             isCandidate: function(el) {
@@ -100,6 +104,12 @@
         return true;
     }
 
+    function createInvalidEvent() {
+        return $.Event("invalid", {
+            _jqueryValidator: true
+        });
+    }
+
     HTMLValidation.prototype = {
         get willValidate() {
             return this.registry.isCandidate(this.el);
@@ -121,7 +131,7 @@
             }
 
             if (this.customMessage) {
-                if (!options.suppressEvent) this.el.trigger("invalid");
+                if (!options.suppressEvent) this.el.trigger(createInvalidEvent());
                 return false;
             }
 
@@ -139,7 +149,7 @@
             }, this);
 
             if (this.message) {
-                if (!options.suppressEvent) this.el.trigger("invalid");
+                if (!options.suppressEvent) this.el.trigger(createInvalidEvent());
                 return false;
             }
 
@@ -293,7 +303,7 @@ jQuery.validator.register({
                 })) return;
                 return this;
             }).map(function() {
-                var e = $.Event("invalid");
+                var e = createInvalidEvent();
                 $(this).trigger(e);
 
                 if (!e.isDefaultPrevented()) {
@@ -340,4 +350,18 @@ jQuery.validator.register({
             e.preventDefault();
         }
     }, true);
+
+    // Cancel the native invalid event (which is triggered by the browser supporting native validation)
+    // to show our own UI instead
+    $(document).on("cui-contentloaded", function(e) {
+        $(registry.submittableSelector, e.target).on("invalid", function(e) {
+            if (e._jqueryValidator) return;
+
+            e.preventDefault();
+
+            var el = $(this);
+            el.checkValidity();
+            el.updateErrorUI();
+        });
+    });
 })(document, jQuery);
