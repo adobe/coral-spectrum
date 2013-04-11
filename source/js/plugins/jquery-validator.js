@@ -127,6 +127,8 @@
 
             this.message = null;
             everyReverse(this.registry.validators(this.el), function(v) {
+                if (!v.validate) return true;
+
                 var m = v.validate(this.el);
                 if (m) {
                     this.message = m;
@@ -153,11 +155,15 @@
         updateUI: function() {
             if (this.validity.valid) {
                 everyReverse(this.registry.validators(this.el), function(v) {
+                    if (!v.clear) return true;
+
                     v.clear(this.el);
                     return false; // i.e. only run the first one
                 }, this);
             } else {
                 everyReverse(this.registry.validators(this.el), function(v) {
+                    if (!v.show) return true;
+
                     v.show(this.el, this.validationMessage);
                     return false; // i.e. only run the first one
                 }, this);
