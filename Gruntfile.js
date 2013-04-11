@@ -737,7 +737,7 @@ module.exports = function(grunt) {
     'font',
     'icons',
     'iconbrowser',
-    'handlebars:compile',
+    'handlebars',
     'concat:cui',
     'less:cui'
   ]);

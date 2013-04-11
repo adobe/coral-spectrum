@@ -69,6 +69,9 @@
             <resource>
                 <directory>${basedir}/build/less</directory>
                 <targetPath>${coral.build.dir}/less</targetPath>
+                <excludes>
+                    <exclude>components/rte.less</exclude>
+                </excludes>
             </resource>
             <resource>
                 <directory>${basedir}/components/bootstrap/less</directory>
@@ -94,6 +97,37 @@
                 <targetPath>${coral.build.dir}/js</targetPath>
                 <includes>
                     <include>**/CUI.Templates.js</include>
+                </includes>
+            </resource>
+
+            <!-- RTE -->
+            <resource>
+                <directory>${basedir}/rte/source/js</directory>
+                <targetPath>${coral.build.dir}/optional/rte/js</targetPath>
+                <excludes>
+                    <exclude>additional/**</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>${basedir}/source/js/components</directory>
+                <targetPath>${coral.build.dir}/optional/rte/js/components</targetPath>
+                <includes>
+                    <include>CUI.RichText.js</include>
+                    <include>rte/**</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>${basedir}/build/js</directory>
+                <targetPath>${coral.build.dir}/optional/rte/js/components</targetPath>
+                <includes>
+                    <include>cui-rte.templates.js</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>${basedir}/source/less/components</directory>
+                <targetPath>${coral.build.dir}/optional/rte/less</targetPath>
+                <includes>
+                    <include>rte.less</include>
                 </includes>
             </resource>
 
