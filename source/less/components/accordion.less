@@ -1,16 +1,24 @@
 .accordion {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0.4375rem 0;
+
+  li {
+    margin: 0;
+  }
 
   li + li {
     border-top: 0;
   }
 }
-  
+
+.collapsible {
+    margin: 0.4375rem 0;
+}
+
+// Shared styles for accordions and collapsibles
 .accordion li,
 .collapsible {
-  margin: 0;
   padding: 0.4375rem 1rem;
   overflow: hidden;
   background-color: @accordion-background-color;
@@ -21,10 +29,9 @@
     padding: 0.4375rem 1rem;
     font-size: 13*@px;
     line-height: 20*@px;
-    .ellipsis();
-    
     font-weight: normal;
     color: @font-secondary-color;
+    .ellipsis();
     .gradient(@accordion-background-gradient-color, @accordion-background-color);
     cursor: pointer;
     

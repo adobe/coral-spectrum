@@ -86,7 +86,8 @@
                         <a href="#Breadcrumbs">Breadcrumbs</a>
                         <a href="#Pulldown">Pulldown</a>
                         <a href="#Tabs">Tabs</a>
-                        <a href="#Wizard">Wizard</a>
+                        <a href="#Accordion">Accordion / Collapsible</a>                        
+                        <a href="#Wizard">Wizard</a>                    
                  </nav>
                 </section>
 
@@ -786,6 +787,66 @@
 &lt;/div&gt;
 </pre>
                     </div>
+                </section>
+                
+                <section id="Accordion">
+                    <h2 class="line">Accordion / Collapsible</h2>
+                    <p>Accordions and Collapsibles a quite similar, except that accordions group several collapsibles and only
+                    one of the group is visible at any time.</p>
+
+                    <h3>Accordions</h3>
+                    <p>Accordions are defined as unordered lists. You can choose to select an inital active element by
+                    adding the css class <code class="atv">active</code>.</p>
+                    
+                    <ul class="accordion" data-init="accordion">
+                        <li>
+                          <h3><em>Tab 1</em> of accordion</h3>
+                          Lorem ipsum…
+                        </li>
+                        <li class="active">
+                          <h3><em>Tab 2</em> of accordion</h3>
+                          Lorem ipsum…
+                        </li>
+                        <li>
+                          <h3><em>Tab 3</em> of accordion</h3>
+                          Lorem ipsum…
+                        </li>
+                    </ul>
+
+                    <div class="componentSample">
+                        <pre class="prettyprint linenums">
+&lt;ul class="accordion" data-init="accordion"&gt;
+    &lt;li&gt;
+      &lt;h3&gt;&lt;em&gt;Tab 1&lt;/em&gt; of accordion&lt;/h3&gt;
+      Lorem ipsum…
+    &lt;/li&gt;
+    &lt;li class="active"&gt;
+      &lt;h3&gt;&lt;em&gt;Tab 2&lt;/em&gt; of accordion&lt;/h3&gt;
+      Lorem ipsum…
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;h3&gt;&lt;em&gt;Tab 3&lt;/em&gt; of accordion&lt;/h3&gt;
+      Lorem ipsum…
+    &lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+                    </div>
+                    
+                    <h3>Collapsibles</h3>
+                    <p>Collapsibles are like accordions with just one element.</p>
+                    <div class="collapsible" data-init="collapsible">
+                        <h3><em>Headline</em> of collapsible</h3>
+                        Lorem ipsum…
+                    </div>
+
+                    <div class="componentSample">
+                        <pre class="prettyprint linenums">
+&lt;div class="collapsible" data-init="collapsible"&gt;
+    &lt;h3&gt;&lt;em&gt;Headline&lt;/em&gt; of collapsible&lt;/h3&gt;
+    Lorem ipsum…
+&lt;/div&gt;
+</pre>
+                    </div>                    
                 </section>
 
                 <section id="Wizard">
