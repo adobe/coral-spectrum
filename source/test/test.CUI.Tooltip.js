@@ -61,10 +61,10 @@ describe('CUI.Tooltip', function() {
   describe('options', function() {
     it('can set content with class', function() {
       var el = $('<div/>');
-      var modal = new CUI.Tooltip({
+      var tooltip = new CUI.Tooltip({
         element: el
       });
-      modal.set('content', 'TestContent');
+      tooltip.set('content', 'TestContent');
       expect(el).to.have.html('TestContent');
     });
   });
