@@ -134,7 +134,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   //  grunt.loadNpmTasks('grunt-jsdoc');
-  grunt.loadNpmTasks('grunt-mocha');
+  grunt.loadNpmTasks('grunt-mocha-phantomjs');
   //  grunt.loadNpmTasks('grunt-hub');
 
   // Read in package.json
@@ -545,7 +545,7 @@ module.exports = function(grunt) {
       }
     },
 
-    mocha: {
+    mocha_phantomjs: {
       cui: {
         src: [
           '<%= dirs.build %>/test/index.html'
@@ -670,6 +670,10 @@ module.exports = function(grunt) {
   });
   // end init config
 
+  // Register "mocha" task so there is no need to update the rest of the mocha references
+  grunt.task.registerTask('mocha', [
+    'mocha_phantomjs:cui'
+  ]);
 
   // Partial build for development
   grunt.task.registerTask('partial', [
@@ -682,8 +686,8 @@ module.exports = function(grunt) {
     'concat:cui',
     'uglify:cui',
     'less',
-    'cssmin'/*,
-    'mocha'*/
+    'cssmin',
+    'mocha'
   ]);
 
   // Build and copy RTE
@@ -706,7 +710,7 @@ module.exports = function(grunt) {
     'uglify',
     'less',
     'cssmin',
-//    'mocha',
+    'mocha',
     'jsdoc'
   ]);
 
