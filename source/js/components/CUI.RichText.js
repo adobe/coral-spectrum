@@ -75,8 +75,11 @@
         },
 
         initializeEditorKernel: function(initialContent) {
+            var com = CUI.rte.Common;
             this.editorKernel.addUIListener("updatestate", this.updateState, this);
-            this.editorKernel.initializeEditContext(window, document, this.textContainer);
+            var doc = this.textContainer.ownerDocument;
+            var win = (com.ua.isIE ? doc.parentWindow : doc.defaultView);
+            this.editorKernel.initializeEditContext(win, doc, this.textContainer);
             this.editorKernel.initializeEventHandling();
             this.editorKernel.setUnprocessedHtml(initialContent || "");
             this.editorKernel.initializeCaret(true);
@@ -93,12 +96,13 @@
             var com = CUI.rte.Common;
             var sel = CUI.rte.Selection;
             var self = this;
-            var $doc = $(document);
-            var $body = $(document.body);
+            var editContext = this.editorKernel.getEditContext();
+            var $doc = $(editContext.doc);
+            var body = editContext.doc.body;
+            var $body = $(body);
             // temporary focus handling - we need to retransfer focus immediately
             // to the text container (at least in iOS 6) to prevent the keyboard from
             // disappearing and losing the focus altogether
-            var editContext = this.editorKernel.getEditContext();
             $body.on("focus.rte", ".rte-toolbar-item", function(e) {
                 self.$textContainer.focus();
                 e.stopPropagation();
@@ -132,8 +136,7 @@
                 }
             });
             // additional keyboard handling
-            CUI.rte.Eventing.on(editContext, document.body, "keyup", this.handleKeyUp,
-                    this);
+            CUI.rte.Eventing.on(editContext, body, "keyup", this.handleKeyUp, this);
             // handle clicks/taps (clicks on the editable div vs. common/"out of area"
             // clicks vs. clicks on toolbar items)
             this.$textContainer.fipo("tap.rte", "click.rte", function(e) {
@@ -210,14 +213,14 @@
                     // using native selection instead of selection abstraction here, as
                     // it is faster and we are in a controlled environment (Webkit mobile)
                     // here
-                    var slct = window.getSelection();
+                    var slct = self.editorKernel.getEditContext().win.getSelection();
                     // check if selection is valid - if not, reuse last known selection or
                     // set caret to the start of the text
                     var context = self.editorKernel.getEditContext();
                     if (!com.isAncestor(context, context.root, slct.focusNode) ||
                             !com.isAncestor(context, context.root, slct.anchorNode)) {
                         slct.removeAllRanges();
-                        var range = document.createRange();
+                        var range = context.doc.createRange();
                         if (_lastSel) {
                             range.setStart(_lastSel.ande, _lastSel.aoffs);
                             range.setEnd(_lastSel.fnde, _lastSel.foffs);
@@ -288,13 +291,17 @@
         },
 
         finalizeEventHandling: function() {
-            CUI.rte.Eventing.un(document.body, "keyup", this.handleKeyUp, this);
-            this.$textContainer.off("blur.rte tap.rte click.rte");
-            var $body = $(document.body);
-            $body.off("focus.rte tap.rte-ooa click.rte-ooa touchstart.rte-ooa");
-            $body.off("mousedown.rte-ooa tap.rte-item click.rte-item");
-            $body.off("selectionchange.rte-toolbarhide mousemove.rte-toolbarhide");
-            $body.off("mouseup.rte-toolbarhide mousedown.rte-toolbarhide");
+            if (this.editorKernel != null) {
+                var context = this.editorKernel.getEditContext();
+                var body = context.doc.body;
+                CUI.rte.Eventing.un(body, "keyup", this.handleKeyUp, this);
+                this.$textContainer.off("blur.rte tap.rte click.rte");
+                var $body = $(body);
+                $body.off("focus.rte tap.rte-ooa click.rte-ooa touchstart.rte-ooa");
+                $body.off("mousedown.rte-ooa tap.rte-item click.rte-item");
+                $body.off("selectionchange.rte-toolbarhide mousemove.rte-toolbarhide");
+                $body.off("mouseup.rte-toolbarhide mousedown.rte-toolbarhide");
+            }
         },
 
         updateState: function() {
@@ -331,9 +338,6 @@
             if (this.isEmptyContent) {
                 this.prepareForNewText();
             }
-            this.savedSpellcheckAttrib = document.body.spellcheck;
-            document.body.spellcheck = false;
-            this.initializeEventHandling();
             var initialContent = this.options.initialContent || this.$textContainer.html();
             this.$textContainer[0].contentEditable = "true";
             if (ua.isGecko || ua.isWebKit) {
@@ -341,17 +345,24 @@
                 this.textContainer.style.outlineStyle = "none";
             }
             this.initializeEditorKernel(initialContent);
+            var context = this.editorKernel.getEditContext();
+            var body = context.doc.body;
+            this.savedSpellcheckAttrib = body.spellcheck;
+            body.spellcheck = false;
+            this.initializeEventHandling();
             this.isActive = true;
         },
 
         finish: function() {
+            var context = this.editorKernel.getEditContext();
+            var body = context.doc.body;
             var editedContent = this.editorKernel.getProcessedHtml();
             this.finalizeEventHandling();
             this.deactivateEditorKernel();
             this.$textContainer.removeClass("edited");
             this.textContainer.blur();
             this.textContainer.contentEditable = "inherit";
-            document.body.spellcheck = this.savedSpellcheckAttrib;
+            body.spellcheck = this.savedSpellcheckAttrib;
             var ua = CUI.rte.Common.ua;
             if ((ua.isGecko || ua.isWebKit) && this.savedOutlineStyle) {
                 this.textContainer.style.outlineStyle = this.savedOutlineStyle;
