@@ -136,7 +136,7 @@ module.exports = function(grunt) {
   //  grunt.loadNpmTasks('grunt-jsdoc');
   grunt.loadNpmTasks('grunt-mocha-phantomjs');
   //  grunt.loadNpmTasks('grunt-hub');
-  grunt.loadNpmTasks('grunt-zip');
+
 
   // Read in package.json
   var pkg = grunt.file.readJSON('package.json');
@@ -571,23 +571,6 @@ module.exports = function(grunt) {
       }
     },
 
-    athenaimport: {
-    },
-
-    unzip: {
-      catalog: {
-        src: '<%= unzip.src %>',
-        dest: '<%= unzip.dest %>'
-      }          
-    },
-
-    athenaconvert: {
-      all:{
-        src: '<%= athenaconvert.src %>',
-        dest: '<%= dirs.source %>/images/icons/'       
-      }
-    },    
-
     icons: {
       all: {
         src: [
@@ -691,13 +674,6 @@ module.exports = function(grunt) {
   // Register "mocha" task so there is no need to update the rest of the mocha references
   grunt.task.registerTask('mocha', [
     'mocha_phantomjs:cui'
-  ]);
-
-  // Import and convert icons from athena-zip
-  grunt.task.registerTask('fromathena', [
-    'athenaimport',
-    'unzip:catalog',
-    'athenaconvert'
   ]);
 
   // Partial build for development

@@ -1,36 +1,36 @@
 module.exports = function(grunt) {
 
-  // convert to array type, if necessary
-  function toArray(input) {
-    if (typeof(input) === 'string') {
-        return [input];
-    } else {
-        return input;
-    }
-  }  
+  grunt.loadNpmTasks('grunt-zip');
 
-  grunt.registerTask('athenaimport', 'This generates a folder with icons from athena.', function() {
+  // Import and convert icons from athena-zip
+  grunt.task.registerTask('icon-athena', [
+    'icon-athena-setup',
+    'unzip:catalog',
+    'icon-athena-convert'
+  ]);
+  
+  grunt.registerTask('icon-athena-setup', 'This generates a folder with icons from athena.', function() {
 
     var iconsource = grunt.option("is") || grunt.option("iconsource");
 
-    var tmpZipFolder = 'temp/athena-icons';
+    var tmpZipFolder = 'temp/icon-athena';
     
     if (iconsource){
 
-      grunt.log.ok('searching for athena-icons in ' + iconsource);
+      grunt.log.ok('searching for icons from athena in ' + iconsource);
       
       if (grunt.file.isFile(iconsource)){
         grunt.log.ok('file found : ' + iconsource);
         //set config for "unzip" and "convert"
-        grunt.config.set('unzip.src', iconsource);
-        grunt.config.set('unzip.dest', tmpZipFolder);
-        grunt.config.set('athenaconvert.all.src', tmpZipFolder + "/icons/*");
+        grunt.config.set('unzip.catalog.src', iconsource);
+        grunt.config.set('unzip.catalog.dest', tmpZipFolder);
+        grunt.config.set('icon-athena-convert.src', tmpZipFolder + "/icons/*");
         return true;
       }
       else {
         if (grunt.file.isDir(iconsource)){
           grunt.log.ok('directory found : ' + iconsource);
-          grunt.config.set('athenaconvert.all.src', iconsource);
+          grunt.config.set('icon-athena-convert.src', iconsource);
           return true;        
         }
       } 
@@ -45,18 +45,19 @@ module.exports = function(grunt) {
   });
 
  
-  grunt.registerMultiTask('athenaconvert', 'This generates a folder with icons from athena.', function() {
+  grunt.registerTask('icon-athena-convert', 'This converts extracted icons from athena into coral ui assets.', function() {
      
     // Expand the list of files
     var config = grunt.config();
 
 
     // Process the source name
-    var srcConfig = grunt.config('athenaconvert.all.src');
+    var srcConfig = grunt.config('icon-athena-convert.src');
 
+    grunt.log.ok("converting from "  + srcConfig);
 
     // Process the destination name
-    var dest = grunt.template.process(this.data.dest, config);
+    var dest = grunt.template.process('<%= dirs.source %>/images/icons/', config);
 
     grunt.log.ok("converting from "  + srcConfig + " to " + dest);
 
@@ -74,7 +75,7 @@ module.exports = function(grunt) {
 
       // get alias from metadata.json side-car file
       var metadataJSON = grunt.file.readJSON(src + "/" + metadataFilename);
-      var alias = toArray(metadataJSON[aliasPropertyName]);
+      var alias = (typeof(metadataJSON[aliasPropertyName]) === 'string') ? [metadataJSON[aliasPropertyName]] : metadataJSON[aliasPropertyName]
     
 
       // Get the asset in the asset folder
@@ -105,11 +106,6 @@ module.exports = function(grunt) {
     grunt.log.ok(count +' icon(s) successfully imported');
     return true;
 
-
   });  
-
-
-
-
 }    
  
