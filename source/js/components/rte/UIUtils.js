@@ -52,6 +52,10 @@
             },
 
             getUIContainer: function($editable) {
+                var $ui = $editable.data("rte-ui");
+                if ($ui) {
+                    return $ui;
+                }
                 var editableDom = $editable[0].previousSibling;
                 while (editableDom && (editableDom.nodeType !== 1)) {
                     editableDom = editableDom.previousSibling;

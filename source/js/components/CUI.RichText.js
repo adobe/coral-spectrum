@@ -26,6 +26,9 @@
 
         construct: function(options) {
             this.options = options || { };
+            if (this.options.hasOwnProperty("$ui")) {
+                this.$element.data("rte-ui", this.options.$ui);
+            }
         },
 
         // Helpers -----------------------------------------------------------------------------------------------------
