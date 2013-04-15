@@ -22,6 +22,47 @@ CUI.rte.Eventing = function($) {
 
     var delayed = [ ];
 
+    var Wrapper = new Class({
+
+        construct: function($obj, eventName, handler, delay, scope, editContext) {
+            this.$obj = $obj;
+            this.eventName = eventName;
+            this.handler = handler;
+            this.delay = delay;
+            this.scope = scope;
+            this.editContext = editContext;
+        },
+
+        execute: function(jqEvent) {
+            var evt = new CUI.rte.adapter.JQueryEvent(jqEvent, this.editContext);
+            if (this.delay > 0) {
+                for (var s = delayed.length - 1; s >= 0; s--) {
+                    var toCheck = delayed[s];
+                    if ((toCheck.obj = this.$obj) && (toCheck.evt == this.eventName) &&
+                            (toCheck.handler == this.handler)) {
+                        window.clearTimeout(toCheck.tid);
+                        delayed.splice(s, 1);
+                    }
+                }
+                var self = this;
+                var task = function() {
+                    self.handler.call(self.scope, evt);
+                };
+                var taskDef = {
+                    "obj": this.$obj,
+                    "evt": this.eventName,
+                    "handler": this.handler
+                };
+                taskDef.tid = window.setTimeout(task, this.delay);
+                delayed.push(taskDef);
+            } else {
+                this.handler.call(this.scope, evt);
+            }
+        }
+
+    });
+
+
     return {
 
         on: function(editContext, obj, eventName, handler, scope, options) {
@@ -29,34 +70,12 @@ CUI.rte.Eventing = function($) {
             options = options || { };
             var delay = (options.buffer ? options.buffer : 0);
             scope = scope || options.scope || $obj;
-            var wrapper = function(jqEvent) {
-                var evt = new CUI.rte.adapter.JQueryEvent(jqEvent, editContext);
-                if (delay > 0) {
-                    for (var s = delayed.length - 1; s >= 0; s--) {
-                        var toCheck = delayed[s];
-                        if ((toCheck.obj = $obj) && (toCheck.evt == eventName)) {
-                            window.clearTimeout(toCheck.tid);
-                            delayed.splice(s, 1);
-                        }
-                    }
-                    var task = function() {
-                        handler.call(scope, evt);
-                    };
-                    var taskDef = {
-                        "obj": $obj,
-                        "evt": eventName
-                    };
-                    taskDef.tid = window.setTimeout(task, delay);
-                    delayed.push(taskDef);
-                } else {
-                    handler.call(scope, evt);
-                }
-            };
+            var wrapper = new Wrapper($obj, eventName, handler, delay, scope, editContext);
             handlerMap.push({
                 "handler": handler,
                 "wrapper": wrapper
             });
-            $obj.on(eventName, wrapper);
+            $obj.on(eventName, CUI.rte.Utils.scope(wrapper.execute, wrapper));
         },
 
         un: function(obj, eventName, handler, scope) {
