@@ -293,6 +293,11 @@ CUI.rte.EditorKernel = new Class({
      */
     selectionChangeTracker: null,
 
+    /**
+     * Number of times the editor has been locked
+     */
+    lockCount: 0,
+
 
     construct: function(config) {
         config = config || { };
@@ -507,6 +512,36 @@ CUI.rte.EditorKernel = new Class({
     disableFocusHandling: function() {
         this.isFocusHandlingDisabled = true;
     },
+
+    /**
+     * Locks the editor, for example while a dialog for editing is shown.
+     */
+    lock: function() {
+        this.lockCount++;
+        if (this.isLocked() && !this.isEventingDisabled) {
+            this.disableEventHandling();
+        }
+    },
+
+    /**
+     * Unlocks the editor, for example when a dialog (that has locked the editor) is hidden
+     * again.
+     */
+    unlock: function() {
+        this.lockCount--;
+        if (!this.isLocked() && this.isEventingDisabled) {
+            this.reenableEventHandling();
+        }
+    },
+
+    /**
+     * Checks if the editor is currently locked.
+     * @returns {Boolean} True if the editor is currently locked
+     */
+    isLocked: function() {
+        return (this.lockCount > 0);
+    },
+
 
     /**
      * Executes some Gecko-related initialization. For example, disables the "enahanced"
@@ -906,6 +941,18 @@ CUI.rte.EditorKernel = new Class({
     },
 
     /**
+     * <p>Suspends event handling for this editor kernel.</p>
+     * <p>Use {@link #initializeEventHandling} to re-establish event handling.</p>
+     */
+    suspendEventHandling: function() {
+        this.unregisterHandlers();
+        if (this.selectionChangeTracker !== null) {
+            window.clearInterval(this.selectionChangeTracker);
+            this.selectionChangeTracker = null;
+        }
+    },
+
+    /**
      * <p>Adds CSS "feature classes" to the specified DOM element.</p>
      * <p>Supported feature classes are:</p>
      * <ul>
@@ -939,18 +986,6 @@ CUI.rte.EditorKernel = new Class({
         addConditionally(com.ua.isWebKit, "webkit");
         addConditionally(com.ua.isSafari, "safari");
         addConditionally(com.ua.isChrome, "chrome");
-    },
-
-    /**
-     * <p>Suspends event handling for this editor kernel.</p>
-     * <p>Use {@link #initializeEventHandling} to re-establish event handling.</p>
-     */
-    suspendEventHandling: function() {
-        this.unregisterHandlers();
-        if (this.selectionChangeTracker !== null) {
-            window.clearInterval(this.selectionChangeTracker);
-            this.selectionChangeTracker = null;
-        }
     },
 
     /**

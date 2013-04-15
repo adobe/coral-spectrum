@@ -30,6 +30,7 @@ Currently there are the following data options:
   data-force-html-mode           Force to HTML mode and never use a native Date widget, if given (with any non-empty value)
   data-day-names                 JSON-array-data with the short names of all week days, starting with Sunday
   data-month-names               JSON-array-data with the names of all months, starting with January
+  data-head-format               Defines headline format, default is "MMMM YYYY".
   data-start-day                 Defines the start day of the week, 0 = Sunday, 1 = Monday, etc.
 
 Additionally the type (date, time, datetime) is read from the &lt;input&gt; field.
@@ -56,7 +57,8 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
       @param {boolean} [options.disabled=false]               Is this widget disabled?
       @param {String} [options.displayedFormat="YYYY-MM-DD[T]HH:mm[Z]"]           Displayed date (userfriendly), default is 2012-10-20 20:35
       @param {String} [options.storedFormat="YYYY-MM-DD[T]HH:mmZ"]    Storage Date format, is never shown to the user, but transferred to the server 
-      @param {String} [options.required=false]                 Is a value required?
+      @param {String} [options.required=false]                Is a value required?
+      @param {String} [options.hasError=false]                True to display widget as erroneous, regardless if the value is required or not.
     */
     
     defaults: {
@@ -69,8 +71,10 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         disabled: false,
         displayedFormat: null,
         storedFormat: null,
+        headFormat: "MMMM YYYY",
         forceHTMLMode: false,
-        required: false
+        required: false,
+        hasError: false
     },
     
     displayDateTime: null,
@@ -80,6 +84,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
     officialDateFormat: 'YYYY-MM-DD',
     officialTimeFormat: 'HH:mm',
     officialDatetimeFormat: 'YYYY-MM-DD[T]HH:mmZ',
+    language: 'coralui',
 
     construct: function(options) {
 
@@ -89,6 +94,14 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         this.options.monthNames = this.options.monthNames || CUI.Datepicker.monthNames;
         this.options.dayNames = this.options.dayNames || CUI.Datepicker.dayNames;
 
+        // Generate our very own language name for this picker to not overwrite any existing
+        // moment.js language definition
+        this.language = 'coralui_' + new Date().getTime();
+        
+        moment.lang(this.language, {
+           months: this.options.monthNames,
+           weekdaysMin: this.options.dayNames,
+        });
         
         // Set standard formats
         this.options.storedFormat = this.options.storedFormat || (this.options.type === "time" ? 'HH:mm' : 'YYYY-MM-DD[T]HH:mmZ');
@@ -219,6 +232,10 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             this.options.disabled = true;
         }
         
+        if (this.$element.hasClass("error")) {
+            this.options.hasError = true;
+        }
+                
         if (this.$element.data('required')) {
             this.options.required = true;
         }
@@ -249,6 +266,10 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             this.options.monthNames = el.data('month-names') || this.options.monthNames;
         }
         
+        if (el.data('head-format') !== undefined) {
+            this.options.headFormat = el.data('head-format') || this.options.headFormat;
+        }
+               
         if (el.data('start-day') !== undefined) {
             this.options.startDay = el.data('start-day') * 1; // Force number
         }              
@@ -270,7 +291,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             this.$element.find("input,button").removeAttr("disabled");
         }
 
-        if ((!this.options.selectedDateTime && this.options.required) || (this.options.selectedDateTime && !this.options.selectedDateTime.isValid())) {
+        if (this.options.hasError || (!this.options.selectedDateTime && this.options.required) || (this.options.selectedDateTime && !this.options.selectedDateTime.isValid())) {
             this.$element.addClass("error");
         } else {
             this.$element.removeClass("error");
@@ -366,8 +387,8 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         if (!this.displayDateTime || !this.displayDateTime.isValid()) this.displayDateTime = moment();
         var displayDateTime = this.displayDateTime;
     
-        var displayYear = displayDateTime.format('YYYY');
-        var displayMonth = displayDateTime.format('M') ;
+        var displayYear = displayDateTime.year();
+        var displayMonth = displayDateTime.month() + 1;
 
         var table = this._renderOneCalendar(displayMonth, displayYear);
         
@@ -409,9 +430,8 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
 
     _renderOneCalendar: function(month, year) {
 
-        var monthName = this.options.monthNames[month - 1];
-
-        var title = $('<div class="calendar-header"><h2>' + monthName + " " + year + '</h2></div>');
+        var heading = moment([year, month - 1, 1]).lang(this.language).format(this.options.headFormat);  
+        var title = $('<div class="calendar-header"><h2>' + heading + '</h2></div>');
 
         // Month selection
         var nextMonthElement = $("<button class=\"next-month\">›</button>");
@@ -465,7 +485,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
                 if (isSameDay(displayDateTime, this.options.selectedDateTime)) cssClass += " selected";
 
                 if (isCurrentMonth) {
-                    html += "<td class=\"" + cssClass + "\"><a href=\"#\" data-date=\"" + displayDateTime.format(this.internFormat) + "\">" + displayDateTime.date() + "</a></td>";
+                    html += "<td class=\"" + cssClass + "\"><a href=\"#\" data-date=\"" + displayDateTime.lang(this.language).format(this.internFormat) + "\">" + displayDateTime.date() + "</a></td>";
                 } else {
                     html += "<td class=\"" + cssClass + "\"><span>" + displayDateTime.date() + "</span></td>";
                 }
@@ -524,11 +544,11 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         if (!date) {
             this.$input.val(""); // Clear for null values
         } else if (date.isValid()) {
-            this.$input.val(date.format(this.options.displayedFormat)); // Set only valid dates
+            this.$input.val(date.lang(this.language).format(this.options.displayedFormat)); // Set only valid dates
         }
         
         
-        var storage = (date && date.isValid()) ? date.format(this.options.storedFormat) : "";     
+        var storage = (date && date.isValid()) ? date.lang('en').format(this.options.storedFormat) : ""; // Force to english for storage format!    
         this.$hiddenInput.val(storage);
             
         this._updateState();

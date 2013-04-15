@@ -28,10 +28,11 @@ textarea {
     }
 
     &.error {
-        .glow(6px, @textfield-error-border-color, @textfield-error-border-color, 1px);
+        border-color: @textfield-error-border-color;
+        color: @textfield-error-font-color;
 
         &:focus {
-            .glow(6px, @focus-glow-color, @focus-border-color, 1px);
+            .glow(6px, @textfield-error-border-color, @textfield-error-border-color, 1px);
         }
     }
 }

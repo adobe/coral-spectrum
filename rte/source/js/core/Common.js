@@ -48,7 +48,8 @@ CUI.rte.Common = function() {
         isIPhone = isTouch && isSafari && check(/iphone/),
         calloutHeight = (isIPad || isIPhone ? 56 : 0),
         screenKeyHeightPortrait = (isIPad ? 308 : (isIPhone ? 260 : 0)),
-        screenKeyHeightLandscape = (isIPad ? 396 : (isIPhone ? 206 : 0));
+        screenKeyHeightLandscape = (isIPad ? 396 : (isIPhone ? 206 : 0)),
+        selectionHandlesHeight = (isIPad ? 32 : (isIPhone ? 20 : 0)); // TODO check iPhone?
 
     /**
      * Flag if the internal logging mechanism is enabled (used for ieLog())
@@ -345,7 +346,11 @@ CUI.rte.Common = function() {
             /**
              * Height of a potentially shown screen keyboard in Landscape mode
              */
-            screenKeyHeightLandscape: screenKeyHeightLandscape
+            screenKeyHeightLandscape: screenKeyHeightLandscape,
+            /**
+             * Height of sensitive area for selection handles
+             */
+            selectionHandlesHeight: selectionHandlesHeight
         },
 
         /**

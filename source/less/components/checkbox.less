@@ -5,18 +5,10 @@
 
 input[type=checkbox],
 input[type=radio] {
-  opacity: 0.00001;
+  opacity: 0.00001; // used to allow the check box to be clicked in some browsers.
   overflow: hidden;
   width: 1rem;
   height: 1rem;
-
-  /*
-  // Breaks accessibility
-  z-index: -100;
-  position: absolute;
-  top: 0;
-  left: 0;
-  */
 
   & + label,
   & + span {
@@ -25,6 +17,7 @@ input[type=radio] {
 
   & + span:before,
   & + label:before {
+    font-family: AdobeIcons;
     display: inline-block;
     margin-left: -1rem; // cover invisible checkbox 
     .border-box;
@@ -37,17 +30,13 @@ input[type=radio] {
     .box-shadow(inset @px @px 0 rgba(0,0,0,0.05));
 
     background-color: @checkbox-background-color;
-    background-position: center center;
-    background-repeat: no-repeat;
-    .background-size(100% 100%);
 
-    content: "\a0"; // Todo: replace with icon
+    content: "\a0";
 
-    line-height: 1.25;
-    font-size: 0.85rem;
+    line-height: 1.5;
+    font-size: 0.70rem;
     color: @checkbox-check-color;
     text-align: center;
-    font-weight: bold;
   }
 
   &:focus + label:before,
@@ -58,41 +47,31 @@ input[type=radio] {
   &:disabled + label:before,
   &:disabled + span:before {
     border-color: @checkbox-disabled-border-color;
-
     background-color: @checkbox-disabled-background-color;
-
     color: @checkbox-disabled-check-color;
   }
 }
 
 input[type=checkbox] {
-  &.partial + label:before,
-  &.partial + span:before {
-    background-image: url('@{component-images-folder}/checkbox/dash.png');
+  &:indeterminate + label:before,
+  &:indeterminate + span:before {
+    content: "\f0c4";
   }
 
   &:checked + label:before,
   &:checked + span:before {
-    background-image: url('@{component-images-folder}/checkbox/check.png');
-  }
-
-  &:disabled {
-    &.partial + label:before,
-    &.partial + span:before {
-      background-image: url('@{component-images-folder}/checkbox/dash_disabled.png');
-    }
-
-    &:checked + label:before,
-    &:checked + span:before {
-      background-image: url('@{component-images-folder}/checkbox/check_disabled.png');
-    }
+    content: "\f037";
   }
 }
 
 input[type=radio] {
+
   & + span:before,
   & + label:before {
     .border-radius(1rem);
+    background-position: center center;
+    background-repeat: no-repeat;
+    .background-size(100% 100%);
   }
 
   &:checked + span:before,

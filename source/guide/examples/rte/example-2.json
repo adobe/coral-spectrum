@@ -52,7 +52,9 @@
                 "toolbar": [
                     "#format",
                     "#justify",
-                    "#lists"
+                    "#lists",
+                    "links#modifylink",
+                    "links#unlink"
                 ],
                 "popovers": {
                     "format": {
@@ -84,10 +86,22 @@
                         ]
                     }
                 }
-            }
-        },
-        "fullScreen": {
+            },
+            "fullScreen": {
 
+            },
+            "icons": {
+                "justify": {
+                    "command": "#justify",
+                    "icon": "icon-textjustified"
+                }
+            },
+            "additionalClasses": {
+                "justify": {
+                    "command": "#justify",
+                    "classes": ""
+                }
+            }
         }
     }
 }

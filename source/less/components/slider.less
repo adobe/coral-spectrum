@@ -12,13 +12,29 @@
   background-color: @slider-background-color;
   width: 220*@px;
   height: 8*@px;
-  margin: 0.5rem 0.25rem;
+  margin: 1rem 0.25rem; // 1rem margin to get the right distance to other elements above and below
   vertical-align: middle;
   z-index: auto;
   
   &:hover,
   &.focus {
     z-index: 1;
+  }
+  
+  &.error {
+    .handle {
+      border-color: @slider-border-error-color;
+    }
+    .tick.covered {
+      background-color: @slider-border-error-color;
+    }
+    .fill {
+      background-color: mix(@slider-border-error-color, @slider-background-color, 50%);
+      border-color: @slider-border-error-color;
+    }
+    .handle.focus {
+      .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+    }
   }
 
   .slider-transition {

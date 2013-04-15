@@ -108,6 +108,9 @@
 @icon-blue-color: rgb(65, 145, 210);
 @icon-blue-opacity: 1;
 
+// Used for form errors
+@icon-error-color: rgb(204, 84, 75);
+@icon-error-opacity: 1;
 
 @icon-divider-color: rgb(206, 206, 206);
 
@@ -240,6 +243,7 @@
 @slider-disabled-background-color: rgb(225, 225, 225);
 @slider-disabled-border-color: rgb(210, 210, 210);
 @slider-disabled-fill-color: rgb(217, 217, 217);
+@slider-border-error-color: rgb(204, 84, 75);
 
 // Rail
 @rail-input-placeholder-color: rgb(166, 166, 166);
@@ -365,10 +369,6 @@
 @close-opacity: 50;
 
 
-// Wait indicator
-@wait-active-color: rgb(22, 141, 214);
-@wait-inactive-color: rgb(102, 102, 102);
-
 // Progress bar
 @progress-width:  12rem;   // TBD: leave as em so it scales with font size?
 @progress-height: 22*@px;  // TBD: leave as em so it scales with font size?
@@ -450,3 +450,14 @@
 @draggable-list-border-handle-color: rgb(220, 219, 219);
 @draggable-list-text-disabled-color: rgb(179, 179, 179);
 @draggable-list-background-disabled-color: rgb(209, 209, 209);
+
+// DropZone
+@dropzone-background-color: @body-background-color;
+@dropzone-background-hover-color: darken(@body-background-color, 5%);
+@dropzone-border-color: @draggable-list-border-color;
+
+// Accordion
+@accordion-background-color: rgb(245, 245, 245);
+@accordion-border-color: rgba(0, 0, 0, 0.20);
+@accordion-background-gradient-color: rgb(255, 255, 255);
+

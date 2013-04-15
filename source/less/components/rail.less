@@ -311,6 +311,36 @@ div.rail {
 		        &, a {
                 	color: @rail-font-color;
                 }
+
+                &:hover {
+                    text-decoration: none;
+
+                    >[class^="icon-"],
+                    >[class*=" icon-"] {
+                        &.action {
+                            &,&:before {
+                                display: inline;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+
+                >[class^="icon-"],
+                >[class*=" icon-"] {
+                    &.action {
+                        float: right;
+                        margin-right: 18*@px;
+                        margin-top: 13*@px;
+                        display: none;
+
+                        &:before {
+                            color: @rail-font-color;
+                            display: none;
+                        }
+                    }
+                }
+
                 
                 &.active {
                     position: relative;
@@ -342,10 +372,6 @@ div.rail {
                             inset 0 @focus-glow-radius/2 @focus-glow-radius -@focus-glow-radius/2 fadeout(@rail-shadow-inset-color, 65%)
                         );
                     }
-                }
-                
-                &:hover {
-                    text-decoration: none;
                 }
                 
                 &.focus {
@@ -780,8 +806,8 @@ div.rail {
       }
     }
 
-    // dropdown
-    .dropdown {
+    // menu dropdown
+    .dropdown.menu {
         display: block;
 
         .dropdown-container {
@@ -807,45 +833,45 @@ div.rail {
             // icon (chevron down)
             &:after {
                 background: none;
-                content: "\f025";
+                content: @icon-chevrondown-content;
                 font-family: AdobeIcons;
                 position: absolute;
                 right: 16*@px;
             }
         }
-    }
 
-    .dropdown-list {
-        border-bottom: @px solid @rail-section-border-color;
+        .dropdown-list {
+            border-bottom: @px solid @rail-section-border-color;
 
-        ul {
-            margin: 0;
-            padding: 0;
-            font-size: @dropdown-text-size;
-            background-color: @rail-background-color;
-
-            li {
-                list-style-type: none;
+            ul {
                 margin: 0;
-                background-color: @rail-background-color;
-                border-bottom: none;
-                color: @rail-font-color;
-                border: none;
-                border-top: @px solid @rail-section-border-color;
-                .box-shadow(inset 0 1px 0 @rail-section-highlight-color); /* 1px to ensure rendering in IE9 which cuts rem units to 2dp (0.96px) */
-                overflow: hidden;
-                text-overflow: ellipsis;
-                -o-text-overflow: ellipsis;
-                cursor: pointer;
-                height: 40*@px;
-                line-height: 40*@px;
                 padding: 0;
-                padding-left: 12*@px;
-                font-size: 0.85rem;
+                font-size: @dropdown-text-size;
+                background-color: @rail-background-color;
 
-                &:hover,
-                &.selected:hover {
-                    background-color: @dropdown-active-background-color;
+                li {
+                    list-style-type: none;
+                    margin: 0;
+                    background-color: @rail-background-color;
+                    border-bottom: none;
+                    color: @rail-font-color;
+                    border: none;
+                    border-top: @px solid @rail-section-border-color;
+                    .box-shadow(inset 0 1px 0 @rail-section-highlight-color); /* 1px to ensure rendering in IE9 which cuts rem units to 2dp (0.96px) */
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    -o-text-overflow: ellipsis;
+                    cursor: pointer;
+                    height: 40*@px;
+                    line-height: 40*@px;
+                    padding: 0;
+                    padding-left: 12*@px;
+                    font-size: 0.85rem;
+
+                    &:hover,
+                    &.selected:hover {
+                        background-color: @dropdown-active-background-color;
+                    }
                 }
             }
         }

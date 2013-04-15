@@ -32,10 +32,6 @@ div.edited {
         margin: 0;
     }
 
-    &.text {
-        font-size: 20*@px;  /* TODO remove once icons are available */
-    }
-
     &.selected {
         background-color: #151515;
         color: #d0d0d0;
@@ -55,6 +51,12 @@ div.edited {
         background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNSIgaGVpZ2h0PSI1IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48cG9seWdvbiBmaWxsPSIjQ0NDQ0NDIiBwb2ludHM9IjQsNCAwLDQgNCwwICIvPjwvc3ZnPg==') !important;
         background-repeat: no-repeat !important;
         background-position: 100% 100% !important;
+
+        &.multi-select {
+            &.items-selected {
+                background-color: #2b2b2b;
+            }
+        }
     }
 
     /* reset gradient filter on IE */
@@ -63,20 +65,6 @@ div.edited {
     &:hover,
     &:active {
         filter: none;
-    }
-
-    /* specific styles */
-
-    &.bold {
-        font-weight: bold;
-    }
-
-    &.italic {
-        font-style: italic;
-    }
-
-    &.underline {
-        text-decoration: underline;
     }
 
 }
@@ -128,6 +116,107 @@ div.edited {
         .rte-button;
     }
 
+}
+
+.rte-dialog {
+
+    position: absolute;
+    background-color: #454545;
+    top: 0;
+    left: 0;
+    z-index: 10001;
+    .userSelect(none);
+    -webkit-touch-callout: none;
+
+    div.rte-dialog-column-container {
+        display: table;
+        padding: 2*@px;
+        font-size: 0;
+    }
+
+    div.rte-dialog-column {
+        color: #ffffff;
+        font-weight: normal;
+        font-size: 14*@px;
+        display: table-cell;
+        vertical-align: middle;
+        padding: 4*@px;
+    }
+
+    .pathbrowser input[type=text] {
+        margin: 0;
+    }
+
+    button.dialog-button {
+
+        background-color: #454545;
+        background-image: none;
+        vertical-align: top;
+        min-width: 38*@px;
+        width: 38*@px;
+        height: 38*@px;
+        color: #cecece;
+        background-color: #2b2b2b;
+        background-image: none;
+        padding: 0;
+        border: 0;
+        margin: 0;
+
+        &.selected {
+            background-color: #151515;
+            color: #d0d0d0;
+        }
+
+        &.disabled {
+            color: #eeeeee;
+            opacity: 0.4;
+        }
+
+        &.triggered {
+            background-color: #ffffff;
+            color: #0f0f0f !important;
+        }
+
+        &.trigger {
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNSIgaGVpZ2h0PSI1IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48cG9seWdvbiBmaWxsPSIjQ0NDQ0NDIiBwb2ludHM9IjQsNCAwLDQgNCwwICIvPjwvc3ZnPg==') !important;
+            background-repeat: no-repeat !important;
+            background-position: 100% 100% !important;
+        }
+
+        /* reset gradient filter on IE */
+
+        &,
+        &:hover,
+        &:active {
+            filter: none;
+        }
+
+        /* specific styles */
+
+        &.bold {
+            font-weight: bold;
+        }
+
+        &.italic {
+            font-style: italic;
+        }
+
+        &.underline {
+            text-decoration: underline;
+        }
+    }
+
+}
+
+.rte-dialog-mask {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    background-color: #ffffff;
+    opacity: 0.0;
 }
 
 .cui-rte-forcedborder,

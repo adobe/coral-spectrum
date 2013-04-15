@@ -6,7 +6,6 @@
 
         <link rel="stylesheet" href="../../css/cui.css">
         
-        <script src="../../js/libs/underscore.js"></script>
         <script src="../../js/libs/handlebars.js"></script>
         <script src="../../js/libs/moment.js"></script>
         <script src="../../js/libs/jquery.js"></script>
@@ -32,14 +31,26 @@
             <span class="tooltip error" data-interactive="false" data-init="tooltip" data-target="#tt3">TEST 3</span>
             </p>
             <p>
-                <button id="dynamic-button">Dynamic tooltip creation</button>
+                <button id="dynamic-button">Dynamic tooltip</button><br>
+            </p>
+            <h2>Quicktips</h2>
+            <p>
+            <button id="add" class="primary">Add new Quicktip Element</button><br>
             </p>                                
         </section>
         
         <script type="text/javascript">
             new CUI.Tooltip({target: "#dynamic-button",
                             content: "Dynamic tooltip",
-                            interactive: true});
+                            interactive: true,
+                            autoDestroy: true});
+            $(document).ready(function() {
+              $("#add").click(function() {
+                $(this).after('<button data-init="quicktip" data-quicktip-content="This is a quicktip" data-quicktip-type="success" data-quicktip-arrow="left">' +
+                    'Quicktip</button>');
+                $(this).after("<br>");
+              });
+            });
         </script>
     </body>
 </html>

@@ -35,7 +35,7 @@
             </nav>
 
             <div class="drawer">
-                <div class="badge">v1.2-SNAPSHOT</div>
+                <div class="badge">v1.5</div>
             </div>
 
         </header>
@@ -72,31 +72,62 @@
                     -->
                     <div class="rte-ui">
                         <!--
-                            data-type="inplace" defines the toolbar that is used in basic
+                            data-type="inline" defines the toolbar that is used in basic
                             editing mode; data-type="fullScreen" would define the toolbar
                             for full screen editing mode
                         -->
                         <div data-type="inline">
                             <div class="rte-toolbar">
-                                <button data-action="#format" tabindex="-1" class="item icon-text trigger small white"></button>
-                                <button data-action="#justify" tabindex="-1" class="item icon-graphtrendrounded trigger small white"></button>
-                                <button data-action="#lists" tabindex="-1" class="item icon-viewlist trigger small white"></button>
+                                <button data-action="#format" tabindex="-1" class="item icon-text trigger multi-select small white"></button>
+                                <button data-action="#justify" tabindex="-1" class="item icon-textleft single-select trigger small white"></button>
+                                <button data-action="#lists" tabindex="-1" class="item icon-textbulleted trigger small white"></button>
+                                <button data-action="links#modifylink" tabindex="-1" class="item icon-link small white"></button>
+                                <button data-action="links#unlink" tabindex="-1" class="item icon-linkoff small white"></button>
                             </div>
                             <div data-popover="format" class="popover rte-popover">
-                                <button data-action="format#bold" tabindex="-1" class="item bold disabled text">B</button>
-                                <button data-action="format#italic" tabindex="-1" class="item italic disabled text">i</button>
-                                <button data-action="format#underline" tabindex="-1" class="item underline disabled text">U</button>
+                                <button data-action="format#bold" tabindex="-1" class="item icon-textbold small white"></button>
+                                <button data-action="format#italic" tabindex="-1" class="item icon-textitalic small white"></button>
+                                <button data-action="format#underline" tabindex="-1" class="item icon-textunderline small white"></button>
                             </div>
                             <div data-popover="justify" class="popover rte-popover">
-                                <button data-action="justify#justifyleft" tabindex="-1" class="item disabled text">[</button>
-                                <button data-action="justify#justifycenter" tabindex="-1" class="item disabled text">-</button>
-                                <button data-action="justify#justifyright" tabindex="-1" class="item disabled text">]</button>
+                                <button data-action="justify#justifyleft" tabindex="-1" class="item icon-textleft small white"></button>
+                                <button data-action="justify#justifycenter" tabindex="-1" class="item icon-textcenter small white"></button>
+                                <button data-action="justify#justifyright" tabindex="-1" class="item icon-textright small white"></button>
                             </div>
                             <div data-popover="lists" class="popover rte-popover">
-                                <button data-action="lists#insertunorderedlist" tabindex="-1" class="item disabled text">&bull;</button>
-                                <button data-action="lists#insertorderedlist" tabindex="-1" class="item disabled text">1.</button>
-                                <button data-action="lists#outdent" tabindex="-1" class="item disabled text">&lt;&lt;</button>
-                                <button data-action="lists#indent" tabindex="-1" class="item disabled text">&gt;&gt;</button>
+                                <button data-action="lists#insertunorderedlist" tabindex="-1" class="item icon-textbulleted small white"></button>
+                                <button data-action="lists#insertorderedlist" tabindex="-1" class="item icon-textnumbered small white"></button>
+                                <button data-action="lists#outdent" tabindex="-1" class="item icon-textindentdecrease small white"></button>
+                                <button data-action="lists#indent" tabindex="-1" class="item icon-textindentincrease small white"></button>
+                            </div>
+                        </div>
+                        <div data-type="global">
+                            <div data-rte-dialog="link" class="popover rte-dialog">
+                                <div class="rte-dialog-column-container">
+                                    <div class="rte-dialog-column">
+                                        <input type="text" data-type="href" value="">
+                                        <!--
+                                        TODO use if serverside counterpart is available (Granite/CQ5):
+                                        <select data-type="href" data-init="pathbrowser" data-placeholder="Link to...">
+                                            <option>/apps</option>
+                                            <option>/content</option>
+                                            <option>/etc</option>
+                                            <option>/libs</option>
+                                            <option>/tmp</option>
+                                            <option>/var</option>
+                                        </select>
+                                        -->
+                                    </div>
+                                    <div class="rte-dialog-column">Open in new tab:</div>
+                                    <div class="rte-dialog-column"><label><input type="radio" name="targetBlank" value="true" data-type="targetBlank"><span></span>Yes</label></div>
+                                    <div class="rte-dialog-column"><label><input type="radio" name="targetBlank" value="false" data-type="targetBlank" checked><span></span>No</label></div>
+                                    <div class="rte-dialog-column">
+                                        <button data-type="apply" tabindex="-1" class="dialog-button icon-check small white"></button>
+                                    </div>
+                                    <div class="rte-dialog-column">
+                                        <button data-type="cancel" tabindex="-1" class="dialog-button icon-close small white"></button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -141,8 +172,34 @@
                         <a href="http://www.adobe.com/">Occidental in fact</a>, it va esser
                         Occidental.</p>
                         <p>A un Angleso it va semblar un simplificat Angles, quam un skeptic
-                        Cambridge amico dit me que Occidental es. Li Europan lingues es membres del
-                        sam familie. Lor separat existentie es un myth.</p>
+                        Cambridge amico dit me que Occidental es. Li Europan lingues es
+                        membres del sam familie. Lor separat existentie es un myth.</p>
+                    </div>
+                    <div>
+                        <p><b>Non-editable text!</b> A un Angleso it va semblar un
+                        simplificat Angles, quam un skeptic Cambridge amico dit me que
+                        Occidental es. Li Europan lingues es membres del sam familie. Lor
+                        separat existentie es un myth.</p>
+                        <p>Cavus Iugulum pera epos expando iuventus, hos. Exprimo fabre
+                        candela, sub edo beo Filius lea redivivus arx foedero trux offa,
+                        pax esca Devinco incentivus, lux labruscum quod, ars ego faveo cui
+                        sis somniculose fio Commilito calvities erro cogo. Taceo fertilitas
+                        Velamen mens flax pervenio ne qua contradictio Commoneo ars prex
+                        mox Superstes Semotus an avara, frux iam ita occulte Infeste
+                        immunis Radi.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
+                        commodo ligula eget dolor. Aenean massa. Cum sociis natoque
+                        penatibus et magnis dis parturient montes, nascetur ridiculus
+                        mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+                        quis, sem. Nulla consequat massa quis enim. Donec pede justo,
+                        fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo,
+                        rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum
+                        felis eu pede mollis pretium. Integer tincidunt. Cras dapibus.
+                        Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.
+                        Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac,
+                        enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a,
+                        tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque
+                        rutrum.</p>
                     </div>
                 </section>
 

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Checkbox examples</title>
+
+  <link rel="stylesheet" href="../../css/cui.css">
+  <link rel="stylesheet" href="../../css/guide.css">
+  <link rel="stylesheet" href="../../js/google-code-prettify/prettify.css">
+
+  <script src="../../js/libs/handlebars.js"></script>
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/libs/jquery-fingerpointer.js"></script>
+  <script src="../../js/libs/toe.js"></script>
+
+  <script src="../../js/CUI.js"></script>
+  <script src="../../js/google-code-prettify/prettify.js"></script>
+
+  <style type="text/css">
+  ul {
+    list-style: none;
+    margin: 5px 20px;
+    -webkit-padding-start: 20px;
+  }
+  </style>
+
+  <script>
+  $(function() {
+
+    /**
+     * Makes a checkbox cycle through the different states. The readonly property
+     * is used to remember the state in which it was.
+     *
+     */
+    $('#cycle-checkbox').click(function() {
+      if (this.readOnly) {
+        this.checked = this.readOnly = false;
+      } else if (!this.checked) {
+        this.readOnly = this.indeterminate = true;
+      }
+    });
+
+    // http://css-tricks.com/indeterminate-checkboxes/
+    $('input[type="checkbox"]').change(function(e) {
+     var checked = $(this).prop("checked"),
+     container = $(this).parent(),
+     siblings = container.siblings();
+
+     container.find('input[type="checkbox"]').prop({
+      indeterminate: false,
+      checked: checked
+    });
+
+     function checkSiblings(el) {
+      var parent = el.parent().parent(),
+      all = true;
+
+      el.siblings().each(function() {
+        return all = ($(this).children('input[type="checkbox"]').prop("checked") === checked);
+      });
+
+      if (all && checked) {
+        parent.children('input[type="checkbox"]').prop({
+          indeterminate: false,
+          checked: checked
+        });
+        checkSiblings(parent);
+      } else if (all && !checked) {
+        parent.children('input[type="checkbox"]').prop("checked", checked);
+        parent.children('input[type="checkbox"]').prop("indeterminate", (parent.find('input[type="checkbox"]:checked').length > 0));
+        checkSiblings(parent);
+      } else {
+        el.parents("li").children('input[type="checkbox"]').prop({
+          indeterminate: true,
+          checked: false
+        });
+      }
+    }
+
+    checkSiblings(container);
+  });
+});
+</script>
+</head>
+<body>
+  <section>
+    <h2>Checked, unchecked and mixed state checkboxes</h2>
+
+    <div class="componentSample">
+      <div class="example clearfix">
+        <div class="left">
+          <label><input type="checkbox" name="c1" value="1" checked=""><span>Checked</span></label><br>
+          <label><input type="checkbox" name="c2" value="2"><span>Unchecked</span></label><br>
+          <label><input id="some-checkbox" type="checkbox" name="c3" value="3"><span>Partially checked</span></label><br>
+          <label><input id="cycle-checkbox" type="checkbox" name="c3" value="3"><span>Cycling state checkbox</span></label><br>
+        </div>
+        <div class="left" style="margin-left: 10px">
+          <label><input type="checkbox" name="c4" value="4" disabled="" checked=""><span>Disabled Checked</span></label><br>
+          <label><input type="checkbox" name="c5" value="5" disabled=""><span>Disabled Unchecked</span></label><br>
+          <label><input id="some-checkbox2" type="checkbox" name="c6" value="6" disabled=""><span>Disabled Partially Checked</span>
+          </label>
+        </div>
+      </div>
+      <pre class="prettyprint linenums">
+// to enable a checkbox that cycles through the 3 states use the following javascript.
+$('#cycle-checkbox').click(function() {
+  if (this.readOnly) {
+    this.checked = this.readOnly = false;
+  } else if (!this.checked) {
+    this.readOnly = this.indeterminate = true;
+  }
+});</pre>
+    </div>
+
+    <h2> Nested Checkboxes</h2>
+    <p> With additional javascript it is possible to next the checkboxes. </p>
+    <div class="componentSample">
+      <div class="example clearfix">
+        <ul>
+          <li>
+            <input type="checkbox" name="tall" id="tall">
+            <label for="tall">Tall Things</label>
+
+            <ul>
+             <li>
+               <input type="checkbox" name="tall-1" id="tall-1">
+               <label for="tall-1">Buildings</label>
+             </li>
+             <li>
+               <input type="checkbox" name="tall-2" id="tall-2">
+               <label for="tall-2">Giants</label>
+
+               <ul>
+                 <li>
+                   <input type="checkbox" name="tall-2-1" id="tall-2-1">
+                   <label for="tall-2-1">Andre</label>
+                 </li>
+                 <li>
+                   <input type="checkbox" name="tall-2-2" id="tall-2-2">
+                   <label for="tall-2-2">Paul Bunyan</label>
+                 </li>
+               </ul>
+             </li>
+             <li>
+               <input type="checkbox" name="tall-3" id="tall-3">
+               <label for="tall-3">Two sandwiches</label>
+             </li>
+           </ul>
+         </li>
+         <li>
+          <input type="checkbox" name="short" id="short">
+          <label for="short">Short Things</label>
+
+          <ul>
+           <li>
+             <input type="checkbox" name="short-1" id="short-1">
+             <label for="short-1">Smurfs</label>
+           </li>
+           <li>
+             <input type="checkbox" name="short-2" id="short-2">
+             <label for="short-2">Mushrooms</label>
+           </li>
+           <li>
+             <input type="checkbox" name="short-3" id="short-3">
+             <label for="short-3">One Sandwich</label>
+           </li>
+         </ul>
+       </li>
+     </ul>
+   </div>
+
+   <pre class="prettyprint linenums">
+// to enable nested checkboxes use the following javascript.
+
+$('input[type="checkbox"]').change(function(e) {
+ var checked = $(this).prop("checked"),
+ container = $(this).parent(),
+ siblings = container.siblings();
+
+ container.find('input[type="checkbox"]').prop({
+  indeterminate: false,
+  checked: checked
+});
+
+ function checkSiblings(el) {
+  var parent = el.parent().parent(),
+  all = true;
+
+  el.siblings().each(function() {
+    return all = ($(this).children('input[type="checkbox"]').prop("checked") === checked);
+  });
+
+  if (all && checked) {
+    parent.children('input[type="checkbox"]').prop({
+      indeterminate: false,
+      checked: checked
+    });
+    checkSiblings(parent);
+  } else if (all && !checked) {
+    parent.children('input[type="checkbox"]').prop("checked", checked);
+    parent.children('input[type="checkbox"]').prop("indeterminate", (parent.find('input[type="checkbox"]:checked').length > 0));
+    checkSiblings(parent);
+  } else {
+    el.parents("li").children('input[type="checkbox"]').prop({
+      indeterminate: true,
+      checked: false
+    });
+  }
+}
+
+checkSiblings(container);
+});
+</pre>
+</div>
+</div>
+</section>
+<script type="text/javascript">
+  $('#some-checkbox').prop('indeterminate', true);
+  $('#some-checkbox2').prop('indeterminate', true);
+
+  // Prettify code examples
+  prettyPrint();
+</script>
+</body>
+</html>
