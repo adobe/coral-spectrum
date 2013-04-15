@@ -74,8 +74,12 @@
                 if (!$container || !$container.length) {
                     return null;
                 }
-                return $container.find(
+                var $toolbar = $container.find(
                         "div[data-type=\"" + tbType + "\"] > div.rte-toolbar");
+                if (!$toolbar || !$toolbar.length) {
+                    return null;
+                }
+                return $toolbar;
             },
 
             getPopover: function(ref, tbType, $container) {

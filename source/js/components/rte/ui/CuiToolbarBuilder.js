@@ -223,9 +223,15 @@
                     });
                 }
             }
-            $editable.before($(CUI.rte.Templates["container"]({
+            var $toolbar = $(CUI.rte.Templates["container"]({
                 "toolbars": toolbars
-            })));
+            }));
+            if ($editable[0].ownerDocument === document) {
+                $editable.before($toolbar);
+            } else {
+                var $ui = CUI.rte.UIUtils.getUIContainer($editable);
+                $ui.append($toolbar)
+            }
         },
 
 
