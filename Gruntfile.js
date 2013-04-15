@@ -136,6 +136,7 @@ module.exports = function(grunt) {
   //  grunt.loadNpmTasks('grunt-jsdoc');
   grunt.loadNpmTasks('grunt-mocha-phantomjs');
   //  grunt.loadNpmTasks('grunt-hub');
+  grunt.loadNpmTasks('grunt-zip');
 
 
   // Read in package.json

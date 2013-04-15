@@ -1,7 +1,5 @@
 module.exports = function(grunt) {
 
-  grunt.loadNpmTasks('grunt-zip');
-
   // Import and convert icons from athena-zip
   grunt.task.registerTask('icon-athena', [
     'icon-athena-setup',
@@ -75,7 +73,7 @@ module.exports = function(grunt) {
 
       // get alias from metadata.json side-car file
       var metadataJSON = grunt.file.readJSON(src + "/" + metadataFilename);
-      var alias = (typeof(metadataJSON[aliasPropertyName]) === 'string') ? [metadataJSON[aliasPropertyName]] : metadataJSON[aliasPropertyName]
+      var alias = (typeof(metadataJSON[aliasPropertyName]) === 'string') ? [metadataJSON[aliasPropertyName]] : metadataJSON[aliasPropertyName];
     
 
       // Get the asset in the asset folder
@@ -94,9 +92,9 @@ module.exports = function(grunt) {
           var aliasDest = dest + aliasname + assetExtension;
           grunt.file.copy(asset, aliasDest);
 
-        })
+        });
              
-      })
+      });
 
       count = i+1;
 
@@ -107,5 +105,4 @@ module.exports = function(grunt) {
     return true;
 
   });  
-}    
- 
+};
