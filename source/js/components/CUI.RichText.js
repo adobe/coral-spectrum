@@ -369,7 +369,8 @@
                 this.textContainer.style.outlineStyle = this.savedOutlineStyle;
             }
             this.isActive = false;
-            this.$element.trigger(isCancelled ? "editing-cancelled" : "editing-finished");
+            this.$element.trigger(isCancelled ? "editing-cancelled" : "editing-finished",
+                    [ editedContent ]);
             return editedContent;
         }
 
