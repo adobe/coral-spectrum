@@ -785,6 +785,14 @@ CUI.rte.EditorKernel = new Class({
             // necessary!
             this.registerHandlers(doc, {
                     "keydown": function(e) {
+                        // workaround for MobileSafari temporary focus shift when in
+                        // iframe and touchXxx handlers present
+                        if (com.ua.isTouch) {
+                            if (com.isTag(context.win.frameElement, "iframe")) {
+                                // console.log("using focus transfer workaround.")
+                                context.win.focus();
+                            }
+                        }
                         this.cleanupOnEvent(e);
                         if (this.isEventingDisabled) {
                             return;
