@@ -19,7 +19,7 @@
     
     return input;
   }
-  
+
   // Remove any chars that could break the CSS classname
   function sanitizeCSSClass(input) {
     return input.replace(badCSSCharsRE, '');

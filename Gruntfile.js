@@ -136,6 +136,8 @@ module.exports = function(grunt) {
   //  grunt.loadNpmTasks('grunt-jsdoc');
   grunt.loadNpmTasks('grunt-mocha-phantomjs');
   //  grunt.loadNpmTasks('grunt-hub');
+  grunt.loadNpmTasks('grunt-zip');
+
 
   // Read in package.json
   var pkg = grunt.file.readJSON('package.json');
@@ -570,7 +572,6 @@ module.exports = function(grunt) {
       }
     },
 
-
     icons: {
       all: {
         src: [
@@ -667,6 +668,7 @@ module.exports = function(grunt) {
       */
 
     }
+
   });
   // end init config
 

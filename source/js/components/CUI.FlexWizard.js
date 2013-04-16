@@ -15,6 +15,20 @@
   from Adobe Systems Incorporated.
 */
 (function($) {
+    function cloneLeft(buttons) {
+        return buttons.filter("[data-action=prev], [data-action=cancel]").first().addClass("hidden")
+            .clone().addClass("back left").each(processButton);
+    }
+
+    function cloneRight(buttons) {
+        return buttons.filter("[data-action=next]").first().addClass("hidden")
+            .clone().addClass("primary right").each(processButton);
+    }
+
+    function processButton(i, el) {
+        $(el).removeClass("hidden").not("button").toggleClass("button", true);
+    }
+
     function buildNav(wizard) {
         wizard.prepend(function() {
             var sections = wizard.children(".step");
@@ -29,17 +43,32 @@
 
             var buttons = sections.first().find(".flexwizard-control");
 
-            nav.prepend(function() {
-                return buttons.filter("[data-action=prev], [data-action=cancel]").first().addClass("hidden")
-                    .clone().addClass("back left").removeClass("hidden");
+            return nav.prepend(function() {
+                return cloneLeft(buttons);
+            }).append(function() {
+                return cloneRight(buttons);
             });
-            nav.append(function() {
-                return buttons.filter("[data-action=next]").first().addClass("hidden")
-                    .clone().addClass("primary right").removeClass("hidden");
-            });
-
-            return nav;
         });
+    }
+
+    function showNav(to) {
+        if (to.length === 0) return;
+
+        to.addClass("active").removeClass("stepped");
+        to.prevAll("li").addClass("stepped").removeClass("active");
+        to.nextAll("li").removeClass("active stepped");
+    }
+
+    function showStep(wizard, to, from) {
+        if (to.length === 0) return;
+
+        if (from) {
+            from.removeClass("active");
+        }
+
+        to.toggleClass("active", true);
+
+        wizard.trigger("flexwizard-stepchange", [to, from]);
     }
 
     function controlWizard(wizard, action) {
@@ -57,24 +86,19 @@
                 to = from.next(".step");
                 toNav = fromNav.next("li");
                 break;
+            case "cancel":
+                return;
         }
 
         if (to.length === 0) return;
 
         var buttons = to.find(".flexwizard-control");
 
-        from.removeClass("active");
-        to.addClass("active");
+        cloneLeft(buttons).replaceAll(nav.children(".left"));
+        cloneRight(buttons).replaceAll(nav.children(".right"));
 
-        buttons.filter("[data-action=prev], [data-action=cancel]").first().addClass("hidden")
-            .clone().addClass("back left").removeClass("hidden").replaceAll(nav.children(".left"));
-
-        var right = buttons.filter("[data-action=next]").first().addClass("hidden")
-            .clone().addClass("primary right").removeClass("hidden").replaceAll(nav.children(".right"));
-
-        toNav.addClass("active").removeClass("stepped");
-        toNav.prevAll("li").addClass("stepped").removeClass("active");
-        toNav.nextAll("li").removeClass("active stepped");
+        showNav(toNav);
+        showStep(wizard, to, from);
     }
 
     CUI.FlexWizard = new Class({
@@ -86,11 +110,12 @@
             var wizard = this.$element;
 
             buildNav(wizard);
-            wizard.children(".step").first().toggleClass("active", true);
 
             wizard.on("click", ".flexwizard-control", function(e) {
                 controlWizard(wizard, $(this).data("action"));
             });
+
+            showStep(wizard, wizard.children(".step").first());
         }
     });
 
