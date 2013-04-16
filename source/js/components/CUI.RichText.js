@@ -70,7 +70,7 @@
                 this._hidePopover();
             }
             if (e.getCharCode() === 27) {
-                this.finish();
+                this.finish(true);
             }
         },
 
@@ -117,7 +117,7 @@
                     CUI.rte.Utils.defer(function() {
                         if (!self.isTemporaryFocusChange && self.isActive
                                 && !self.editorKernel.isLocked()) {
-                            self.finish();
+                            self.finish(false);
                         }
                         self.isTemporaryFocusChange = false;
                     }, 10);
@@ -179,7 +179,7 @@
                     self.isTemporaryFocusChange = true;
                     CUI.rte.UIUtils.killEvent(e);
                 } else if (self.isActive) {
-                    self.finish();
+                    self.finish(false);
                 }
             });
             $body.finger("tap.rte-ooa", CUI.rte.UIUtils.killEvent);
@@ -351,9 +351,10 @@
             body.spellcheck = false;
             this.initializeEventHandling();
             this.isActive = true;
+            this.$element.trigger("editing-start");
         },
 
-        finish: function() {
+        finish: function(isCancelled) {
             var context = this.editorKernel.getEditContext();
             var body = context.doc.body;
             var editedContent = this.editorKernel.getProcessedHtml();
@@ -368,6 +369,7 @@
                 this.textContainer.style.outlineStyle = this.savedOutlineStyle;
             }
             this.isActive = false;
+            this.$element.trigger(isCancelled ? "editing-cancelled" : "editing-finished");
             return editedContent;
         }
 
