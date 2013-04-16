@@ -32,12 +32,16 @@
         var validators = [];
 
         return {
+            get submittableSelector() {
+                return submittableSelector;
+            },
+
             isSummittable: function(el) {
-                return el.is(submittableSelector);
+                return el.is(this.submittableSelector);
             },
 
             submittables: function(form) {
-                return form.find(submittableSelector);
+                return form.find(this.submittableSelector);
             },
 
             isCandidate: function(el) {
@@ -100,6 +104,12 @@
         return true;
     }
 
+    function createInvalidEvent() {
+        return $.Event("invalid", {
+            _jqueryValidator: true
+        });
+    }
+
     HTMLValidation.prototype = {
         get willValidate() {
             return this.registry.isCandidate(this.el);
@@ -121,12 +131,14 @@
             }
 
             if (this.customMessage) {
-                if (!options.suppressEvent) this.el.trigger("invalid");
+                if (!options.suppressEvent) this.el.trigger(createInvalidEvent());
                 return false;
             }
 
             this.message = null;
             everyReverse(this.registry.validators(this.el), function(v) {
+                if (!v.validate) return true;
+
                 var m = v.validate(this.el);
                 if (m) {
                     this.message = m;
@@ -137,7 +149,7 @@
             }, this);
 
             if (this.message) {
-                if (!options.suppressEvent) this.el.trigger("invalid");
+                if (!options.suppressEvent) this.el.trigger(createInvalidEvent());
                 return false;
             }
 
@@ -153,11 +165,15 @@
         updateUI: function() {
             if (this.validity.valid) {
                 everyReverse(this.registry.validators(this.el), function(v) {
+                    if (!v.clear) return true;
+
                     v.clear(this.el);
                     return false; // i.e. only run the first one
                 }, this);
             } else {
                 everyReverse(this.registry.validators(this.el), function(v) {
+                    if (!v.show) return true;
+
                     v.show(this.el, this.validationMessage);
                     return false; // i.e. only run the first one
                 }, this);
@@ -287,7 +303,7 @@ jQuery.validator.register({
                 })) return;
                 return this;
             }).map(function() {
-                var e = $.Event("invalid");
+                var e = createInvalidEvent();
                 $(this).trigger(e);
 
                 if (!e.isDefaultPrevented()) {
@@ -334,4 +350,18 @@ jQuery.validator.register({
             e.preventDefault();
         }
     }, true);
+
+    // Cancel the native invalid event (which is triggered by the browser supporting native validation)
+    // to show our own UI instead
+    $(document).on("cui-contentloaded", function(e) {
+        $(registry.submittableSelector, e.target).on("invalid", function(e) {
+            if (e._jqueryValidator) return;
+
+            e.preventDefault();
+
+            var el = $(this);
+            el.checkValidity();
+            el.updateErrorUI();
+        });
+    });
 })(document, jQuery);

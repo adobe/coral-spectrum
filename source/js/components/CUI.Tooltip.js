@@ -110,7 +110,7 @@ The quicktip data options are applied to the target element of the tooltip (see 
             this.reposition();
 
             // Save this object also in the target element
-            this.options.target.data("tooltip", this);
+            if (this.options.target) this.options.target.data("tooltip", this);
 
             if (this.options.interactive && this.options.target) {
                 var hto = null;

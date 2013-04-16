@@ -144,15 +144,15 @@
             </resource>
 
             <!-- guide -->
-            <resource>
+            <!--<resource>
                 <directory>${basedir}/source/guide</directory>
                 <targetPath>${coral.build.dir}/guide</targetPath>
-            </resource>
+            </resource> -->
             <!-- copy guide.less to the assets - 
                  althought this is rather ugly, we would have to move less variables somewhere were guide.less could find it
                  (they are in the bootsrap dir at the moment) 
              -->
-            <resource>
+            <!-- <resource>
                 <directory>${basedir}/source/guide/less</directory>
                 <includes>
                     <include>guide.less</include>
@@ -175,7 +175,7 @@
             <resource>
                 <directory>${basedir}/source/less/includes</directory>
                 <targetPath>${coral.build.dir}/guide/examples/assets/includes</targetPath>
-            </resource>
+            </resource> -->
 
             <!-- include package sources -->
             <resource>
@@ -210,7 +210,7 @@
             </plugin>
 
             <!-- fix up some paths in the guide -->
-            <plugin>
+            <!--<plugin>
                 <groupId>com.google.code.maven-replacer-plugin</groupId>
                 <artifactId>replacer</artifactId>
                 <version>1.5.1</version>
@@ -227,13 +227,7 @@
                     <includes>
                         <include>**/*.html</include>
                     </includes>
-                    <!--<file>guide/index.html</file>-->
                     <replacements>
-                        <!--<replacement>-->
-                            <!--<token>&lt;head></token>-->
-                            <!--<value>&lt;head>&#10;    &lt;base href="../" /></value>-->
-                        <!--</replacement>-->
-                        <!-- remove some items from the top nav, we don't need then in the CQ documentation -->
                         <replacement>
                             <token>&lt;a href="https://git.corp.adobe.com/Reef/CoralUI/"&gt;Github&lt;/a&gt;</token>
                             <value></value>
@@ -253,14 +247,6 @@
                         <replacement>
                             <token>"js/CUI.js"</token>
                             <value>"../../coralui.js"</value>
-                        </replacement>
-                        <replacement>
-                            <token>"js/guide.js"</token>
-                            <value>"../guide.js"</value>
-                        </replacement>
-                        <replacement>
-                            <token>"css/guide.css"</token>
-                            <value>"../guide.css"</value>
                         </replacement>
                         <replacement>
                             <token>"js/libs/handlebars.js"</token>
@@ -283,10 +269,6 @@
                             <value>"/etc/clientlibs/granite/coralui/js/plugins/jquery-fingerpointer.js"</value>
                         </replacement>                      
                         <replacement>
-                            <token>"images/previews/</token>
-                            <value>"../guide/images/previews/</value>
-                        </replacement>
-                        <replacement>
                             <token>"images/</token>
                             <value>"../resources/images/</value>
                         </replacement>
@@ -296,7 +278,7 @@
                         </replacement>
                     </replacements>
                 </configuration>
-            </plugin>
+            </plugin>-->
 
             <!-- ====================================================================== -->
             <!-- V A U L T   P A C K A G E   P L U G I N                                -->
