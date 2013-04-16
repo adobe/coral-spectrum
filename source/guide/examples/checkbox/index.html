@@ -44,55 +44,19 @@
 			  'aria-checked': $checkbox.attr('aria-checked') || checked,
 			  'checked': checked
 			});
-			
-			/** 
-			 Screen reader/browser combinations currently report checkboxes as checked 
-			 or unchecked but not "partially checked," even when we use aria-checked="mixed" 
-			 and the indeterminate property. To work around this shortcoming, 
-			 we explicitly identify tri-state checkboxes with the css class "tristate,"
-			 and replace the input[type=checkbox] elements with input[type=image] with the 
-			 appropriate WAI-ARIA role and state properties.
-			*/ 
-			if ($checkbox.hasClass('tristate')) {
-				
-			  // Create a new input[type=image] element with a transparent gif as its source
-			  $ariaCheckbox = $('<input type="image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""/>');
-			  
-			  // Copy the attributes from the checkbox to the new input[type=image] 
-			  attributes = $checkbox.prop('attributes');
-			  $.each(attributes, function (index, value) {
-				if (this.name != 'type') {
-				  $ariaCheckbox.attr(this.name, this.value);
-				}
-			  });
-			  
-			  // Replace the checkbox in the DOM with the new input[type=image]
-			  $checkbox.replaceWith($ariaCheckbox);
-			  
-			  // Define an explicit click handler for the input[type=image] element
-			  // The click handler toggles the current state and triggers a change event. 
-			  $ariaCheckbox.click(function (e) {
-				var $cb = $(this),
-				  checked = !$cb.attr('checked');
-				$cb.attr({
-				  'aria-checked': checked,
-				  'checked': checked
-				}).change();
-				if (!CUI.util.isTouch) $(this).focus();
-			  });
-			}
 		});
       
 	  /**
-	    Respond to change event and update state of parent or child checkboxes accordingly.
-	  */
+	   * Respond to change event and update state of parent or child checkboxes accordingly.
+	   */
       $(':checkbox, input[role="checkbox"]').change(function () {
         var checked = this.checked,
           container = $(this).parent(),
           siblings = container.siblings();
 
         container.find(':checkbox, input[role="checkbox"]').prop({
-          indeterminate: false
+          indeterminate: false,
+		   checked: checked
         }).attr({
           'aria-checked': checked,
           'checked': checked
@@ -108,7 +72,8 @@
 
           if (all && checked) {
             parent.children(':checkbox, input[role="checkbox"]').prop({
-              indeterminate: false
+              indeterminate: false,
+		       checked: checked
             }).attr({
               'aria-checked': checked,
               'checked': checked
@@ -118,25 +83,28 @@
             parent.children(':checkbox, input[role="checkbox"]').attr({
               'aria-checked': checked,
               'checked': checked
-            }).prop("indeterminate", (parent.find(':checkbox:checked, input[role="checkbox"]:checked').length > 0))
+            }).prop({
+				indeterminate: (parent.find(':checkbox:checked, input[role="checkbox"]:checked').length > 0), 
+				checked: checked
+			 });
             checkSiblings(parent);
           } else {
             el.parents("li").children(':checkbox, input[role="checkbox"]').prop({
-              indeterminate: true
+              indeterminate: true,
+			   checked: false
             }).attr({
               'aria-checked': 'mixed',
               'checked': false
             });
           }
         }
-
         checkSiblings(container);
       });
 
 	  /**
 	   * Makes a checkbox cycle through the different states.
 	   */
-	  $('#cycle-checkbox').off('click change').click(function (e) {
+	  $('#cycle-checkbox').off('change').click(function (e) {
 	    var ariaChecked = $(this).attr('aria-checked');
 	    if (ariaChecked === 'mixed') {
 	      this.indeterminate = this.checked = false;
@@ -149,33 +117,33 @@
 	      'checked': this.checked
 	    });
 	    if (!CUI.util.isTouch) $(this).focus();
-	    e.preventDefault();
 	  });
 	});
 </script>
 </head>
 <body>
   <section>
+<form>
     <h2>Checked, unchecked and mixed state checkboxes</h2>
 
     <div class="componentSample">
       <div class="example clearfix">
         <div class="left">
-          <label><input type="checkbox" name="c1" value="1" checked="checked"><span>Checked</span></label><br>
+          <label><input type="checkbox" name="c1" value="1" checked><span>Checked</span></label><br>
           <label><input type="checkbox" name="c2" value="2"><span>Unchecked</span></label><br>
-          <label><input id="some-checkbox" type="checkbox"  name="c3" value="3" class="tristate" aria-checked="mixed"><span>Partially checked</span></label><br>
-          <label><input id="cycle-checkbox" type="checkbox" name="c4" value="4" class="tristate"><span>Cycling state checkbox</span></label><br>
+          <label><input id="some-checkbox" type="checkbox"  name="c3" value="3" aria-checked="mixed"><span>Partially checked</span></label><br>
+          <label><input id="cycle-checkbox" type="checkbox" name="c4" value="4"><span>Cycling state checkbox</span></label><br>
         </div>
         <div class="left" style="margin-left: 10px">
-          <label><input type="checkbox" name="c5" value="5" disabled="disabled" checked="checked"><span>Disabled Checked</span></label><br>
+          <label><input type="checkbox" name="c5" value="5" disabled="disabled" checked><span>Disabled Checked</span></label><br>
           <label><input type="checkbox" name="c6" value="6" disabled="disabled"><span>Disabled Unchecked</span></label><br>
-          <label><input id="some-checkbox2" class="tristate" aria-checked="mixed" type="checkbox" name="c7" value="7" disabled="disabled"><span>Disabled Partially Checked</span>
+          <label><input id="some-checkbox2" type="checkbox" name="c7" value="7" disabled="disabled" aria-checked="mixed"><span>Disabled Partially Checked</span>
           </label>
         </div>
       </div>
       <pre class="prettyprint linenums">
 // to enable a checkbox that cycles through the 3 states use the following javascript.
-$('#cycle-checkbox').off('click change').click(function (e) {
+$('#cycle-checkbox').off('change').click(function (e) {
   var ariaChecked = $(this).attr('aria-checked');
   if (ariaChecked === 'mixed') {
     this.indeterminate = this.checked = false;
@@ -188,7 +156,6 @@ $('#cycle-checkbox').off('click change').click(function (e) {
     'checked': this.checked
   });
   if (!CUI.util.isTouch) $(this).focus();
-  e.preventDefault();
 });</pre>
     </div>
 
@@ -198,98 +165,82 @@ $('#cycle-checkbox').off('click change').click(function (e) {
       <div class="example clearfix">
         <ul>
           <li>
-            <input type="checkbox" class="tristate" name="tall" id="tall">
+            <input type="checkbox" name="tall" id="tall">
             <label for="tall">Tall Things</label>
 
             <ul>
              <li>
-               <input type="checkbox" class="tristate" name="tall-1" id="tall-1">
+               <input type="checkbox" name="tall-1" id="tall-1">
                <label for="tall-1">Buildings</label>
              </li>
              <li>
-               <input type="checkbox" class="tristate" name="tall-2" id="tall-2">
+               <input type="checkbox" name="tall-2" id="tall-2">
                <label for="tall-2">Giants</label>
 
                <ul>
                  <li>
-                   <input type="checkbox" class="tristate" name="tall-2-1" id="tall-2-1">
+                   <input type="checkbox" name="tall-2-1" id="tall-2-1">
                    <label for="tall-2-1">Andre</label>
                  </li>
                  <li>
-                   <input type="checkbox" class="tristate" name="tall-2-2" id="tall-2-2">
+                   <input type="checkbox" name="tall-2-2" id="tall-2-2">
                    <label for="tall-2-2">Paul Bunyan</label>
                  </li>
                </ul>
              </li>
              <li>
-               <input type="checkbox" class="tristate" name="tall-3" id="tall-3">
+               <input type="checkbox" name="tall-3" id="tall-3">
                <label for="tall-3">Two sandwiches</label>
              </li>
            </ul>
          </li>
          <li>
-          <input type="checkbox" class="tristate" name="short" id="short">
+          <input type="checkbox" name="short" id="short">
           <label for="short">Short Things</label>
 
           <ul>
            <li>
-             <input type="checkbox" class="tristate" name="short-1" id="short-1">
+             <input type="checkbox" name="short-1" id="short-1">
              <label for="short-1">Smurfs</label>
            </li>
            <li>
-             <input type="checkbox" class="tristate" name="short-2" id="short-2">
+             <input type="checkbox" name="short-2" id="short-2">
              <label for="short-2">Mushrooms</label>
            </li>
            <li>
-             <input type="checkbox" class="tristate" name="short-3" id="short-3">
+             <input type="checkbox" name="short-3" id="short-3">
              <label for="short-3">One Sandwich</label>
            </li>
          </ul>
        </li>
      </ul>
+     <button type="submit" class="button">Submit</button>
    </div>
 
    <pre class="prettyprint linenums">
 // to enable nested checkboxes use the following javascript.
 $(':checkbox, input[role="checkbox"]')
   .each(function () {
-  var $checkbox = $(this),
-    checked = this.checked = $checkbox.is('[checked]'),
-    $ariaCheckbox, attributes;
-  $checkbox.attr({
-    'role': 'checkbox',
-    'aria-checked': $checkbox.attr('aria-checked') || checked,
-    'checked': checked
+    var $checkbox = $(this),
+      checked = this.checked = $checkbox.is('[checked]'), // explicitly set "checked" property for elements with checked attribute
+      $ariaCheckbox, attributes;
+    
+    // Add aria-checked and checked attribute
+    $checkbox.attr({
+      'role': 'checkbox',
+      'aria-checked': $checkbox.attr('aria-checked') || checked,
+      'checked': checked
+    });
   });
-
-  if ($checkbox.hasClass('tristate')) {
-    $ariaCheckbox = $('&gt;input type="image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""/&lt;');
-    attributes = $checkbox.prop('attributes');
-    $.each(attributes, function (index, value) {
-      if (this.name != 'type') {
-        $ariaCheckbox.attr(this.name, this.value);
-      }
-    });
-    $checkbox.replaceWith($ariaCheckbox);
-    $ariaCheckbox.click(function (e) {
-      var $cb = $(this),
-        checked = !$cb.attr('checked');
-      $cb.attr({
-        'aria-checked': checked,
-        'checked': checked
-      }).change();
-      if (!CUI.util.isTouch) $(this).focus();
-    });
-  }
-});
 
 $(':checkbox, input[role="checkbox"]').change(function () {
   var checked = this.checked,
-    container = $(this).parent(),
-    siblings = container.siblings();
+      container = $(this).parent(),
+      siblings = container.siblings();
 
   container.find(':checkbox, input[role="checkbox"]').prop({
-    indeterminate: false
+    indeterminate: false,
+     checked: checked
   }).attr({
     'aria-checked': checked,
     'checked': checked
@@ -297,7 +248,7 @@ $(':checkbox, input[role="checkbox"]').change(function () {
 
   function checkSiblings(el) {
     var parent = el.parent().parent(),
-      all = true;
+        all = true;
 
     el.siblings().each(function () {
       return all = ($(this).children(':checkbox, input[role="checkbox"]').prop("checked") === checked);
@@ -305,7 +256,8 @@ $(':checkbox, input[role="checkbox"]').change(function () {
 
     if (all &amp;&amp; checked) {
       parent.children(':checkbox, input[role="checkbox"]').prop({
-        indeterminate: false
+        indeterminate: false,
+        checked: checked
       }).attr({
         'aria-checked': checked,
         'checked': checked
@@ -315,22 +267,25 @@ $(':checkbox, input[role="checkbox"]').change(function () {
       parent.children(':checkbox, input[role="checkbox"]').attr({
         'aria-checked': checked,
         'checked': checked
-      })
-        .prop("indeterminate", (parent.find(':checkbox:checked, input[role="checkbox"]:checked').length > 0))
+      }).prop({
+         indeterminate: (parent.find(':checkbox:checked, input[role="checkbox"]:checked').length > 0), 
+         checked: checked
+      });
       checkSiblings(parent);
     } else {
       el.parents("li").children(':checkbox, input[role="checkbox"]').prop({
-        indeterminate: true
+        indeterminate: true,
+        checked: false 
       }).attr({
         'aria-checked': 'mixed',
         'checked': false
       });
     }
   }
-
   checkSiblings(container);
-});</div>
+});</pre>
 </div>
+</form>
 </section>
 <script type="text/javascript">
   $('#some-checkbox').prop('indeterminate', true);
