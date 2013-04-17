@@ -42,7 +42,7 @@ $('#myTextField').characterCount({maxlength: 50});
 
       this.countElement = $("<span>").addClass("character-count");
       
-      if (this.$element.is("textarea")) {
+      if (!this.$element.is("input")) {
         this.container = $("<div>").addClass("character-count-container");
         this.$element.wrapAll(this.container);
       }
@@ -64,13 +64,17 @@ $('#myTextField').characterCount({maxlength: 50});
      @return {boolean} True, if the current textfield/textarea content is too long (greater than maxlength).
     */
     isTooLong: function() {
-      var length = this.$element.val().length;
+      var isFormField = this.$element.is("input,textarea");
+      // In case of form field we use the value to count characters, for normal HTML elements we use the inner text
+      var length = (isFormField) ? this.$element.val().length : this.$element.text().length;
       var tooLong = (this.options.maxlength) ? (length > this.options.maxlength) : false;
       return tooLong;      
     },
     
     _render: function() {
-      var length = this.$element.val().length;
+      var isFormField = this.$element.is("input,textarea");
+      // In case of form field we use the value to count characters, for normal HTML elements we use the inner text
+      var length = (isFormField) ? this.$element.val().length : this.$element.text().length;
       var tooLong = this.isTooLong();
       this.$element.toggleClass("error", tooLong);
       this.countElement.toggleClass("negative", tooLong);
