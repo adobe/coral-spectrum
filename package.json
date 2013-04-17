@@ -23,6 +23,7 @@
     "mocha": "1.8.1",
     "sinon": "1.6.0",
     "sinon-chai": "2.3.1",
-    "grunt-zip": "0.5.1"
+    "grunt-zip": "0.5.1",
+    "grunt-curl": "0.6.0"
   }
 }

@@ -1,5 +1,6 @@
 /*global module:false*/
 module.exports = function(grunt) {
+
   /**
    JavaScript file include order
    Add new components to this array _after_ the components they inherit from
@@ -137,6 +138,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-phantomjs');
   //  grunt.loadNpmTasks('grunt-hub');
   grunt.loadNpmTasks('grunt-zip');
+  grunt.loadNpmTasks('grunt-curl');
 
 
   // Read in package.json
