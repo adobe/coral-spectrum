@@ -90,7 +90,7 @@
         clear: simpleClear
     });
 
-    // Check required & aria-required
+    // Check required & aria-required of input and textarea
     $.validator.register({
         selector: "form input, form textarea",
         validate: function(el) {
@@ -108,5 +108,28 @@
         var el = $(this);
         el.checkValidity();
         el.updateErrorUI();
+    });
+
+
+    // Check role=listbox
+    $.validator.register({
+        selector: "[role=listbox]",
+        validate: function(el) {
+            if (el.attr("aria-required") !== "true") {
+                return;
+            }
+
+            var selected = false;
+            el.find("[role=option]").each(function() {
+                if ($(this).attr("aria-selected") === "true") {
+                    selected = true;
+                    return false;
+                }
+            });
+
+            if (!selected) {
+                return el.message("validation.required") || "required";
+            }
+        }
     });
 })(jQuery, console);
