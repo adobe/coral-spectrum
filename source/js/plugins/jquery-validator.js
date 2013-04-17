@@ -22,7 +22,6 @@
         // Currently these selectors are designed to be fixed. i.e. in order to be validated, the field MUST either use standard element or leverage ARIA.
 
         // http://www.w3.org/TR/html5/forms.html#category-submit
-        // It makes sense to create a pseudo selector ":submittable" for this
         var submittableSelector = "input, textarea, select, button, keygen, object, [role=checkbox], [role=radio], [role=combobox], [role=listbox], [role=radiogroup], [role=tree], [role=slider], [role=spinbutton], [role=textbox]";
 
         // http://www.w3.org/TR/html5/forms.html#candidate-for-constraint-validation
@@ -181,6 +180,14 @@
         }
     };
 
+    $.extend($.expr[":"], {
+        /**
+         * Exposes :submittable selector. Returns the element that can be used during form submission.
+         */
+        submittable: function (element, index, meta, stack) {
+            return registry.isSummittable($(element));
+        }
+    });
 
     /**
      * @namespace jQuery
