@@ -7,6 +7,29 @@
 
  (function ($, window, undefined) {
 
+    var attached = [ ];
+
+    function getCounter(doc, gesture) {
+        var docDef;
+        for (var a = 0; a < attached.length; a++) {
+            if (attached[a].doc === doc) {
+                docDef = attached[a];
+                break;
+            }
+        }
+        if (!docDef) {
+            docDef = {
+                doc: doc,
+                counter: [ ]
+            };
+            attached.push(docDef);
+        }
+        if (!docDef.counter.hasOwnProperty(gesture.name)) {
+            docDef.counter[gesture.name] = 0;
+        }
+        return docDef.counter;
+    }
+
     var touch = {
 
         Event: function (event) {
@@ -47,31 +70,41 @@
                     var start = touch.Event(event);
                     state = touch.State(start); // create a new State object and add start event
 
-                    gesture.touchstart.call(this, event, state, start);
+                    gesture.touchstart.call(event.target, event, state, start);
                 },
                 touchmove = function (event) {
                     var move = touch.Event(event);
                     state.move.push(move);
 
-                    gesture.touchmove.call(this, event, state, move);
+                    gesture.touchmove.call(event.target, event, state, move);
                 },
                 touchend = function (event) {
                     var end = touch.Event(event);
                     state.end = end;
 
-                    gesture.touchend.call(this, event, state, end);
+                    gesture.touchend.call(event.target, event, state, end);
                 };
 
             gesture.setup = function (data, namespaces, eventHandle) {
-                $(this).on('touchstart', data, touchstart)
-                    .on('touchmove', data, touchmove)
-                    .on('touchend touchcancel', data, touchend);
+                var doc = this.ownerDocument;
+                var counter = getCounter(doc, gesture);
+                if (counter[gesture.name] === 0) {
+                    $(doc).on('touchstart', data, touchstart)
+                        .on('touchmove', data, touchmove)
+                        .on('touchend touchcancel', data, touchend);
+                }
+                counter[gesture.name]++;
             };
 
             gesture.teardown = function () {
-                $(this).off('touchstart', touchstart)
-                    .off('touchmove', touchmove)
-                    .off('touchend touchcancel', touchend);
+                var doc = this.ownerDocument;
+                var counter = getCounter(doc, gesture);
+                counter[gesture.name]--;
+                if (counter[gesture.name] === 0) {
+                    $(doc).off('touchstart', touchstart)
+                        .off('touchmove', touchmove)
+                        .off('touchend touchcancel', touchend);
+                }
             };
 
             return gesture;
@@ -138,6 +171,7 @@
             };
 
         return touch.track({
+            name: 'swipe',
             touchstart: function (event, state, start) {
                 state.finger = state.start.point.length;
             },
@@ -146,7 +180,7 @@
                 state.finger = move.point.length > state.finger ? move.point.length : state.finger;
             },
             touchend: function (event, state, end) {
-                var opt = $.extend(cfg, event.data), 
+                var opt = $.extend(cfg, event.data),
                     duration,
                     distance;
 
@@ -181,6 +215,7 @@
             };
 
         return touch.track({
+            name: 'tap',
             touchstart: function (event, state, start) {
                 state.finger = start.point.length;
             },
@@ -196,7 +231,6 @@
                 // calc
                 duration = touch.calc.getDuration(state.start, end);
                 distance = touch.calc.getDistance(state.start.point[0], end.point[0]);
-
                 // check if the tap was valid
                 if (duration < opt.duration && distance < opt.distance) {
                     // fire if the amount of fingers match
@@ -222,6 +256,7 @@
             };
 
         return touch.track({
+            name: 'taphold',
             touchstart: function (event, state, start) {
                 var opt = $.extend(cfg, event.data);
 
@@ -229,10 +264,11 @@
                 state.finger = start.point.length;
 
                 clearTimeout(timer);
+                var self = this;
                 timer = setTimeout(function () {
                     if (!abort) { 
                         if (state.finger === opt.finger) {
-                            $(this).trigger($.Event('taphold', state));
+                            $(self).trigger($.Event('taphold', state));
                         }
                     }
                 }, opt.duration);
@@ -269,6 +305,7 @@
             started;
 
         return touch.track({
+            name: 'transform',
             touchstart: function (event, state, start) {
                 started = false;
             },
