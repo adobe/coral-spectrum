@@ -76,6 +76,9 @@
             "selectAll": {                              // defines the "select all" config (list view only)
                 "selector": "header > i.select",
                 "cls": "selected"
+            },
+            "sort": {                                   // defines the config for column sort
+                "headSelector": "header .label > *"
             }
         }
 
@@ -785,6 +788,39 @@
 
     });
 
+    /**
+        Handles resort according to columns
+    */
+    var ColumnSortHandler = new Class(/** @lends CUI.CardView.ColumnSortHandler# */{
+        construct: function(options) {
+            //this.listElement = options.listElement; // Currently unused
+            this.items = options.items;
+            this.headerElement = options.headerElement;
+            this.compareFn = options.compareFn;
+        },
+        sort: function() {
+            var prevItem = this.headerElement; // Use header as starting point;
+
+            this.items.detach(); // First: Detach all items
+
+            // Re-Sort items
+            var items = [];
+            this.items.each(function() {
+                items.push($(this));
+            })
+            items.sort(this.compareFn);          
+
+            // Now: reinsert in new order
+            for(var i = 0; i < items.length; i++) {
+                var item = items[i];
+                prevItem.after(item);
+                prevItem = item;
+            }
+        }
+    });
+
+
+
     var DirectMarkupModel = new Class(/** @lends CUI.CardView.DirectMarkupModel# */{
 
         /**
@@ -1442,6 +1478,13 @@
          * @private
          */
         selectors: null,
+        
+        /**
+         * comparator config for list sorting
+         * @type {Object}
+         * @private
+         */
+        comparators: null,
 
         /**
          * The selection mode
@@ -1470,10 +1513,12 @@
          * Create a new controller.
          * @param {jQuery} $el The jQuery object that is the parent of the card view
          * @param {Object} selectors The CSS selector config
+         * @param {Object} comparators The comparator config for column sorting
          */
-        construct: function($el, selectors) {
+        construct: function($el, selectors, comparators) {
             this.$el = $el;
             this.selectors = selectors;
+            this.comparators = comparators;
             this.selectionModeCount = SELECTION_MODE_COUNT_MULTI;
         },
 
@@ -1526,6 +1571,45 @@
                         }
                     }
                 });
+                
+            // list sorting
+            // TODO switch from reordering mode to non reordering and vice versa
+            if (this.comparators) {
+                this.$el.fipo("tap.cardview.sort", "click.cardview.sort",
+                    this.selectors.controller.sort.headSelector, function(e) {
+                        // We need some comparators to do sorting!
+                        if (!this.comparators) return;
+                        
+                        // Items: Get current header, get all siblings up to next header, and filter them to items
+                        var items = $(e.target).closest(self.selectors.headerSelector).nextUntil(self.selectors.headerSelector).filter(self.selectors.itemSelector);
+                        var header = $(e.target).closest(self.selectors.headerSelector);                    
+                        var isReverse = $(e.target).hasClass("sort-asc");
+                        header.find(".label > *").removeClass("sort-asc sort-desc"); // TODO: Use configurable selector
+                        $(e.target).removeClass("sort-desc sort-asc");
+                        $(e.target).addClass(isReverse ? "sort-desc" : "sort-asc");
+
+                        // Set some default comparator
+                        var comparator = new DefaultComparator(".label h4", "", false); // TODO: Use configurable selector
+
+                        // Choose the right comparator
+                        for(var selector in this.comparators) {
+                            if (!$(e.target).is(selector)) continue;
+                            comparator = this.comparators[selector];
+                        }
+
+                        comparator.setReverse(isReverse);
+                        var compareFn = comparator.getCompareFn();
+
+                        var sorter = new ColumnSortHandler({
+                            listElement: self.$el,
+                            items: items,
+                            headerElement: header,
+                            compareFn: compareFn
+                        });
+                        sorter.sort();
+                    });
+            }
+
             // block click event for cards on touch devices
             this.$el.finger("click.cardview.select",
                 this.selectors.controller.selectElement.grid, function(e) {
@@ -1740,6 +1824,13 @@
         selectors: null,
 
         /**
+         * comparator config
+         * @type {Object}
+         * @private
+         */
+        comparators: null,
+
+        /**
          * The model
          * @type {CUI.CardView.DirectMarkupModel}
          * @private
@@ -1773,8 +1864,9 @@
          * @param {jQuery} $el The jQuery object that is the parent of the card view
          * @param {Object} selectors The CSS selector config
          */
-        construct: function(selectors) {
+        construct: function(selectors, comparators) {
             this.selectors = selectors;
+            this.comparators = comparators;
         },
 
         /**
@@ -1785,7 +1877,7 @@
             this.$el = $el;
             this.setModel(new DirectMarkupModel($el, this.selectors));
             this.setView(new DirectMarkupView($el, this.selectors));
-            this.setController(new DirectMarkupController($el, this.selectors));
+            this.setController(new DirectMarkupController($el, this.selectors, this.comparators));
             this.model.initialize();
             this.view.initialize();
             this.controller.initialize();
@@ -2044,7 +2136,12 @@
         &lt;/article&gt;
     &lt;/div&gt;
 &lt;/div&gt;
-         *
+         * @example
+<caption>Defining comparators for column sorting</caption>
+var comparatorConfig = {".label .main": new CUI.CardView.DefaultComparator(".label h4", null, false),
+                   ".label .published": new CUI.CardView.DefaultComparator(".label .published", "data-timestamp", true)};
+new CUI.CardView({comparators: comparatorConfig})
+
          * @example
 <caption>Switching to grid selection mode using API</caption>
 $cardView.cardView("toggleGridSelectionMode");
@@ -2161,10 +2258,15 @@ $cardView.find("article").removeClass("selected");
          *        CardView
          * @param {Object} options.selectorConfig.controller.selectAll.cls
          *        The class that has to be applied to each card if "select all" is invoked
+         * @param {Object} [options.comparators]
+         *        An associative array of comparators for column sorting: Every object attribute is a CSS selector
+         *        defining one column and its value has to be of type CUI.CardView.DefaultComparator (or your own derived class)      
         */
         construct: function(options) {
             var selectorConfig = options.selectorConfig || DEFAULT_SELECTOR_CONFIG;
-            this.adapter = new DirectMarkupAdapter(selectorConfig);
+            var comparators = options.comparators || null; // TODO: Read comparators from markup
+
+            this.adapter = new DirectMarkupAdapter(selectorConfig, comparators);
             this.adapter.initialize(this.$element);
             this.layout();
         },
@@ -2546,6 +2648,67 @@ $cardView.find("article").removeClass("selected");
         }
 
     });
+
+    /** Comparator class for column sorting */
+    CUI.CardView.DefaultComparator = new Class(/** @lends CUI.CardView.DefaultComparator# */{
+        /**
+        * This comparator can select any text or attribute of a given jQuery element and compares
+        * it with a second item either numerical or alpahebtical
+        *
+        * @param {String}  selector   A CSS selector that matches the part of the item to be compared
+        * @param {String}  attribute  The attribute of the item to be compared. If not given, the inner text of the item will be used for comparison.
+        * @param {boolean} isNumeric  True for numeric comparison, false otherwise for alphabetical comparison
+        */
+        construct: function (selector, attribute, isNumeric) {
+            this.selector = selector;
+            this.attribute = attribute;
+            this.isNumeric = isNumeric;
+            this.reverseMultiplier = 1;
+        },
+        /**
+        * Changes the order of the sort algorithm
+        * @param {boolean} True for reverse sorting, false for normal
+        */
+        setReverse: function(isReverse) {
+            this.reverseMultiplier = (isReverse) ? -1 : 1;
+        },
+        /**
+        * Compares two items according to the configuration
+        * @return {integer} -1, 0, 1
+        */
+        compare: function($item1, $item2) {
+            var $e1 = $item1.find(this.selector);
+            var $e2 = $item2.find(this.selector);
+            var t1 = "";
+            var t2 = "";
+            if (!this.attribute) {
+                t1 = $e1.text();
+                t2 = $e2.text();    
+            } else if(this.attribute.substr(0, 5) == "data-") {
+                t1 = $e1.data(this.attribute.substr(5));
+                t2 = $e2.data(this.attribute.substr(5));
+            } else {
+                t1 = $e1.attr(this.attribute);
+                t2 = $e2.attr(this.attribute);
+            }
+            if (this.isNumeric) {
+                t1 = t1 * 1;
+                t2 = t2 * 1;
+            }
+
+            if (t1 > t2) return 1 * this.reverseMultiplier;
+            if (t1 < t2) return -1 * this.reverseMultiplier;
+            return 0;            
+        },
+        /**
+        * Return the compare function for use in Array.sort()
+        * @return {function} The compare function (bound to this object)
+        */
+        getCompareFn: function() {
+            return this.compare.bind(this);
+        }
+    });
+
 
     /**
      * Display mode: grid view; value: "grid"
