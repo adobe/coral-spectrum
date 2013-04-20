@@ -2,21 +2,25 @@
   CUI.Pulldown = new Class(/** @lends CUI.Pulldown# */{
     toString: 'Pulldown',
     extend: CUI.Widget,
-    
+
     defaults: {
+        maxRowsBeforeScroll: 0
     },
-    
+
     timeout: null,
     popoverShown: false,
-    
+
     /**
       @extends CUI.Widget
       @classdesc A pulldown widget
-        
+
       @param {Object}   options                               Component options
-      
+      @param {integer} [options.maxRowsBeforeScroll=0]        Defines the maximum number of rows to be displayed before adding a scrollbar
+
     */
     construct: function(options) {
+        this._readDataFromMarkup();
+
         var $link = this.$element.find('a').first();
         var $popover = this.$element.find('.popover').first();
 
@@ -36,6 +40,13 @@
                 this.hidePopover();
             }.bind(this), 200);
         }.bind(this));
+    },
+
+    _readDataFromMarkup: function () {
+        if (this.$element.data("maxRowsBeforeScroll")) {
+            // Force number
+            this.options.maxRowsBeforeScroll = this.$element.data('maxRowsBeforeScroll') * 1;
+        }
     },
 
     _keepFocus: function() {
@@ -104,8 +115,19 @@
         /*$('.popover.arrow-top:before').css({
             marginLeft: marginLeft
         });*/
+
+        var $list = $popover.find("ul").first();
+        if (this.options.maxRowsBeforeScroll > 0) {
+            var sum = 0;
+            $list.find('li:lt(' + this.options.maxRowsBeforeScroll + ')').each(function() {
+                // Need to add list item's outer height and its contained link outer height
+                // as list item's outer height will just contain border height because it's hidden
+                sum += $(this).outerHeight() + $(this).find("a").first().outerHeight();
+            });
+            $list.css("max-height", sum);
+        }
     }
-    
+
   });
 
   CUI.util.plugClass(CUI.Pulldown);
