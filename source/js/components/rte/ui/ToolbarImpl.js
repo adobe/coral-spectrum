@@ -91,16 +91,6 @@
             return $clipParent;
         },
 
-        _getParentFrame: function() {
-            var $parentFrame = undefined;
-            var context = this.editorKernel.getEditContext();
-            var win = context.win;
-            if (win.frameElement) {
-                $parentFrame = $(win);
-            }
-            return $parentFrame;
-        },
-
         _getEditorOffsets: function() {
             var top = 0;
             var left = 0;

@@ -331,7 +331,8 @@
                 "#format",
                 "#justify",
                 "#lists",
-                ""
+                "links#modifylink",
+                "links#unlink"
             ],
             "popovers": {
                 "format": {
