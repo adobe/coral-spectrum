@@ -170,8 +170,8 @@
          * <p>Calculates the vertical coordinates of the "forbidden area" where the toolbar
          * should not be positioned if possible.</p>
          * <p>This is usually the vertical screen estate the current selection takes. On
-         * touch devices, approximal values for native elements (the notorious "callout" ...)
-         * are added.</p>
+         * touch devices, approximal values for native elements (the notorious "callout"
+         * ...) are added.</p>
          * @param {Object} selection The current processing selection
          * @return {{start: Number, end: Number}} The vertical screen estate reserved for
          *         selection + native stuff; undefined for invalid selections

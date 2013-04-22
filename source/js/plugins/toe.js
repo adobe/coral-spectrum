@@ -86,7 +86,7 @@
                 };
 
             gesture.setup = function (data, namespaces, eventHandle) {
-                var doc = this.ownerDocument;
+                var doc = this.ownerDocument || document;
                 var counter = getCounter(doc, gesture);
                 if (counter[gesture.name] === 0) {
                     $(doc).on('touchstart', data, touchstart)
