@@ -52,6 +52,10 @@
 
         _recordedScrollTop: null,
 
+        _offsets: null,
+
+        _isClipped: false,
+
 
         construct: function(elementMap, $editable, tbType) {
             this.elementMap = elementMap;
@@ -87,18 +91,79 @@
             return $clipParent;
         },
 
+        _getParentFrame: function() {
+            var $parentFrame = undefined;
+            var context = this.editorKernel.getEditContext();
+            var win = context.win;
+            if (win.frameElement) {
+                $parentFrame = $(win);
+            }
+            return $parentFrame;
+        },
+
+        _getEditorOffsets: function() {
+            var top = 0;
+            var left = 0;
+            var context = this.editorKernel.getEditContext();
+            var editorDoc = context.doc;
+            while (editorDoc !== document) {
+                var win = CUI.rte.Common.getWindowForDocument(editorDoc);
+                if (win.frameElement) {
+                    var offsets = $(win.frameElement).offset();
+                    top += offsets.top;
+                    left += offsets.left;
+                } else {
+                    break;
+                }
+                editorDoc = win.frameElement.ownerDocument;
+            }
+            return {
+                "top": top,
+                "left": left
+            };
+        },
+
+        /**
+         * Calculates the internal offsets for the toolbar. Those are required to correctly
+         * position a toolbar that is contained in another document than the edited div.
+         * @private
+         * @return {{top:Number,left:Number}} The offsets
+         */
+        _calcInternalOffsets: function() {
+            this._isClipped = this._isUnderClipParent();
+            if (this._isClipped) {
+                return this.$clipParent.offset();
+            }
+            return this._getEditorOffsets();
+        },
+
+        _isUnderClipParent: function() {
+            if (!this.$clipParent) {
+                return false;
+            }
+            var clipParent = this.$clipParent[0];
+            var toTest = this.$container[0];
+            while (toTest.tagName !== "BODY") {
+                if (toTest === clipParent) {
+                    return true;
+                }
+                toTest = toTest.parentNode;
+            }
+            return false;
+        },
+
         /**
          * Calculates the optimal toolbart position, which is directly above the editable div.
          * The position might not be valid; this has to be considered separately.
          * @private
          */
         _calcOptimum: function(popoverData) {
-             var editablePos = this.$editable.offset();
-             var tbHeight = this.$toolbar.outerHeight();
-             return {
-                 "left": editablePos.left,
-                 "top": editablePos.top - tbHeight
-             };
+            var editablePos = this.$editable.offset();
+            var tbHeight = this.$toolbar.outerHeight();
+            return {
+                "left": editablePos.left,
+                "top": editablePos.top - tbHeight
+            };
         },
 
         /**
@@ -129,6 +194,11 @@
                         endOffset);
                 var yStart = area.startY - (isSel ? com.ua.calloutHeight : 0);
                 var yEnd = area.endY;
+                if (this._isClipped) {
+                    var scrollOffs = this.$clipParent.scrollTop();
+                    yStart -= scrollOffs;
+                    yEnd -= scrollOffs;
+                }
                 forbidden = {
                     "start": yStart - (isSel ? com.ua.selectionHandlesHeight : 0),
                     "end": yEnd + (isSel ? com.ua.selectionHandlesHeight : 0)
@@ -149,11 +219,15 @@
             var scrollTop = $win.scrollTop();
             // the scroll offsets of the clipping parent are handled by jQuery automatically,
             // so we don't have to take care of it here
-            var clipY = (this.$clipParent ? this.$clipParent.offset().top : 0);
+            var clipY = (this.$clipParent && !this._isClipped ?
+                    this.$clipParent.offset().top : 0);
             var minY = Math.max(scrollTop, clipY);
             var screenKeyboardHeight = (com.isPortrait() ? com.ua.screenKeyHeightPortrait
                     : com.ua.screenKeyHeightLandscape);
             var maxY = $win.height() - screenKeyboardHeight + scrollTop;    // TODO consider clipping as well
+            if (this._isClipped) {
+                maxY -= this.$clipParent.offset().top;
+            }
             return {
                 "min": minY,
                 "max": maxY
@@ -216,11 +290,12 @@
                 var totalPos = this._calcUITotal(tbTop, tbHeight, popoverData.height,
                         popoverAlign);
                 if ((totalPos.y2 > forbidden.start) && (totalPos.y1 < forbidden.end)) {
-                    // The toolbar is in the "forbidden area", overlapping either the current
-                    // selection and/or the callout (iPad). In such cases, we first see, if we
-                    // can place it above the forbidden area if we allow moving the toolbar,
-                    // starting with an optimal position ...
-                    if ((optimum.top - popoverData.height) > avail.min) {
+                    // The toolbar is in the "forbidden area", overlapping either the
+                    // current selection and/or the callout (iPad). In such cases, we first
+                    // check if we can place it above the forbidden area if we allow moving
+                    // the toolbar, starting with an optimal position ...
+                    if (((optimum.top - popoverData.height) > avail.min) &&
+                            ((optimum.top + tbHeight) < forbidden.start)) {
                         popoverAlign = "top";
                         tbTop = optimum.top;
                     } else if ((forbidden.start - totalHeight) > avail.min) {
@@ -233,9 +308,9 @@
                         popoverAlign = "bottom";
                         tbTop = forbidden.end;
                     } else {
-                        // if that is not possible, we move it as far to the bottom as possible,
-                        // which will hide part of the selection, but should avoid conflicting
-                        // with the (potential) callout completely
+                        // if that is not possible, we move it as far to the bottom as
+                        // possible, which will hide part of the selection, but should avoid
+                        // conflicting with the (potential) callout completely
                         popoverAlign = "bottom";
                         tbTop = avail.max - totalHeight;
                     }
@@ -249,10 +324,13 @@
                 "top": tbTop
             };
             return {
-                "toolbar": this.preferredToolbarPos,
+                "toolbar": {
+                    "left": tbLeft + this._offsets.left,
+                    "top": tbTop + this._offsets.top
+                },
                 "popover": {
-                    "left": tbLeft,
-                    "top": popoverTop,
+                    "left": tbLeft + this._offsets.left,
+                    "top": popoverTop + this._offsets.top,
                     "align": popoverAlign,
                     "arrow": (popoverAlign === "top" ? "bottom" : "top")
                 }
@@ -408,6 +486,7 @@
             this.editorKernel.addUIListener("updatestate", this._handleUpdateState, this);
             this.$toolbar.addClass(CUI.rte.Theme.TOOLBAR_ACTIVE);
             this.$clipParent = this._getClippingParent(this.$container);
+            this._offsets = this._calcInternalOffsets();
             this._initializePopovers();
             this._updateUI();
             var self = this;
@@ -430,7 +509,6 @@
                     function(e) {
                         self.editorKernel.enableFocusHandling();
                     });
-
             $(window).on("scroll.rte-toolbar", function(e) {
                 self._handleScrolling(e);
             });

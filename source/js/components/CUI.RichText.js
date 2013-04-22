@@ -78,7 +78,7 @@
             var com = CUI.rte.Common;
             this.editorKernel.addUIListener("updatestate", this.updateState, this);
             var doc = this.textContainer.ownerDocument;
-            var win = (com.ua.isIE ? doc.parentWindow : doc.defaultView);
+            var win = com.getWindowForDocument(doc);
             this.editorKernel.initializeEditContext(win, doc, this.textContainer);
             this.editorKernel.initializeEventHandling();
             this.editorKernel.setUnprocessedHtml(initialContent || "");

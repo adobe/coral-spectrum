@@ -1600,6 +1600,15 @@ CUI.rte.Common = function() {
         },
 
         /**
+         * Gets the window object for the specified document.
+         * @param {document} doc The document
+         * @returns {window} The corresponding window object
+         */
+        getWindowForDocument: function(doc) {
+            return (CUI.rte.Common.ua.isIE ? doc.parentWindow : doc.defaultView)
+        },
+
+        /**
          * <p>Checks if the specified node is a "zombie node".</p>
          * <p>Later Gecko versions introduced the behaviour that sometimes nodes get
          * referenced (for example by the selection) that are not connected to the
