@@ -352,7 +352,10 @@
             if (this.isEmptyContent) {
                 this.prepareForNewText();
             }
-            var initialContent = this.options.initialContent || this.$textContainer.html();
+            var initialContent = this.options.initialContent;
+            if (initialContent === undefined) {
+                initialContent = this.$textContainer.html();
+            }
             this.$textContainer[0].contentEditable = "true";
             if (ua.isGecko || ua.isWebKit) {
                 this.savedOutlineStyle = this.textContainer.style.outlineStyle;
