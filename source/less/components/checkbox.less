@@ -55,12 +55,12 @@ input[type=radio] {
 input[type=checkbox] {
   &:indeterminate + label:before,
   &:indeterminate + span:before {
-    content: "\f0c4";
+    content: @icon-minus-content;
   }
 
   &:checked + label:before,
   &:checked + span:before {
-    content: "\f037";
+    content: @icon-check-content;
   }
 }
 
