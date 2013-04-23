@@ -40,7 +40,7 @@
         <connection>scm:git:git@git.corp.adobe.com:Coral/CoralUI.git</connection>
         <developerConnection>scm:git:git@git.corp.adobe.com:Coral/CoralUI.git</developerConnection>
         <url>https://git.corp.adobe.com/Coral/CoralUI/tree/master</url>
-      <tag>HEAD</tag>
+      <tag>com.adobe.coralui.content-1.5.0</tag>
   </scm>
 
     <properties>
