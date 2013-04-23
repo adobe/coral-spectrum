@@ -455,17 +455,6 @@ div.rail {
                             background-color: @rail-section-dark-highlight-color;
                             border-color: @rail-section-border-color;
                         }
-
-                        &:checked + label:before,
-                        &:checked + span:before {
-                            background-image: url('@{component-images-folder}/checkbox/check_rail.png');
-                        }
-                        
-                        &.focus {
-                            + span:before {
-                                .glow();
-                            }
-                        }
                     }
                     >span b {
                         position: absolute;
