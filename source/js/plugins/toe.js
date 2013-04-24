@@ -192,7 +192,6 @@
                 return;
             }
             applyOnAttached(function(doc, handler, fn) {
-                console.log("off", handler, fn);
                 doc.off(handler, fn);
             });
             isEnabled = false;
@@ -207,7 +206,6 @@
                 return;
             }
             applyOnAttached(function(doc, handler, fn) {
-                console.log("on", handler, fn);
                 doc.on(handler, fn);
             });
             isEnabled = true;
