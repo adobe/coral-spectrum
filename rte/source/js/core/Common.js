@@ -1600,6 +1600,29 @@ CUI.rte.Common = function() {
         },
 
         /**
+         * Gets the window object for the specified document.
+         * @param {document} doc The document
+         * @returns {window} The corresponding window object
+         */
+        getWindowForDocument: function(doc) {
+            return (CUI.rte.Common.ua.isIE ? doc.parentWindow : doc.defaultView)
+        },
+
+        /**
+         * Determines the parent element that contains the reference of the document's
+         * window object, for example the parent iframe object.
+         * @param {CUI.rte.EditContext} context The edit context
+         * @returns {HTMLElement} The element that "hosts" the document's window object
+         */
+        getParentWindowRef: function(context) {
+            var win = context.win;
+            if (win.frameElement) {
+                return win.frameElement;
+            }
+            return undefined;
+        },
+
+        /**
          * <p>Checks if the specified node is a "zombie node".</p>
          * <p>Later Gecko versions introduced the behaviour that sometimes nodes get
          * referenced (for example by the selection) that are not connected to the

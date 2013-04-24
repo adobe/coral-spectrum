@@ -173,6 +173,8 @@
         this.$element.detach().insertAfter($el);
       }
 
+      var screenPadding = 4; // Use some padding to the borders of the screen
+
       // we could probably use more variables here
       // - said no one ever
       var relativePosition = $el.position(),
@@ -184,13 +186,14 @@
           pointFrom = this.options.pointFrom,
           left = relativePosition.left,
           top = relativePosition.top,
-          absTopDiff = absolutePosition.top - top,
-          absLeftDiff = absolutePosition.left - left,
+          absTopDiff = absolutePosition.top - parseInt($el.css("margin-top")) - top, // Fix jQuery as it does different margin calculations on offset() and position()
+          absLeftDiff = absolutePosition.left - parseInt($el.css("margin-left")) - left, // Fix jQuery as it does different margin calculations on offset() and position()
           width = this.$element.outerWidth(),
           height = this.$element.outerHeight(),
           parentWidth = this.$element.positionedParent().width(),
           parentPadding = parseFloat(this.$element.parent().css('padding-right')),
-          arrowHeight = Math.round((this.$element.outerWidth() - this.$element.width())/1.5),
+          arrowHeight = Math.round((this.$element.outerWidth() - this.$element.innerWidth()) / 1.45),
+          // The arrow height calculation just approximates the size, as we can not get it from the element
           right, offset = 0;
 
       // Switch directions if we fall off screen
@@ -228,10 +231,10 @@
       // for right-aligned popovers, we need to take into account the positioned parent width, as well as the padding
       right = parentWidth - left - width + parentPadding*2;
 
-      if (absLeftDiff + left < 0) {
-        offset = -(absLeftDiff + left);
-      } else if (absLeftDiff + left + width > screenWidth) {
-        offset = screenWidth - (absLeftDiff + left + width);
+      if (absLeftDiff + left - screenPadding < 0) {
+        offset = -(absLeftDiff + left) + screenPadding;
+      } else if (absLeftDiff + left + width + screenPadding > screenWidth) {
+        offset = screenWidth - (absLeftDiff + left + width) - screenPadding;
       }
 
       // adjust if we would be offscreen

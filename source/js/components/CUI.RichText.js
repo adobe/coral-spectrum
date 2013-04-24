@@ -78,7 +78,7 @@
             var com = CUI.rte.Common;
             this.editorKernel.addUIListener("updatestate", this.updateState, this);
             var doc = this.textContainer.ownerDocument;
-            var win = (com.ua.isIE ? doc.parentWindow : doc.defaultView);
+            var win = com.getWindowForDocument(doc);
             this.editorKernel.initializeEditContext(win, doc, this.textContainer);
             this.editorKernel.initializeEventHandling();
             this.editorKernel.setUnprocessedHtml(initialContent || "");
@@ -100,6 +100,7 @@
             var $doc = $(editContext.doc);
             var body = editContext.doc.body;
             var $body = $(body);
+            var $uiBody = $(document.body);
             // temporary focus handling - we need to retransfer focus immediately
             // to the text container (at least in iOS 6) to prevent the keyboard from
             // disappearing and losing the focus altogether
@@ -153,12 +154,17 @@
                 var context = self.editorKernel.getEditContext();
                 bookmark = sel.createRangeBookmark(context);
             });
-            $body.on("click.rte-ooa", function(e) {
+            var isTouchAndIFrame = com.ua.isTouch && com.getParentWindowRef(editContext);
+            var ooaHandler = "click.rte-ooa";
+            if (isTouchAndIFrame) {
+                ooaHandler = "tap.rte-ooa";
+            }
+            $body.on(ooaHandler, function(e) {
                 // there are cases where "out of area clicks" must be ignored - for example,
                 // on touch devices, the initial tap is followed by a click event that
                 // would stop editing immediately; so the ignoreNextClick flag may be
                 // used to handle those cases
-                if (self.ignoreNextClick) {
+                if (self.ignoreNextClick && !isTouchAndIFrame) {
                     self.ignoreNextClick = false;
                     return;
                 }
@@ -180,19 +186,24 @@
                     CUI.rte.UIUtils.killEvent(e);
                 } else if (self.isActive) {
                     self.finish(false);
+                    self.$textContainer.blur();
                 }
             });
-            $body.finger("tap.rte-ooa", CUI.rte.UIUtils.killEvent);
+            if (!isTouchAndIFrame) {
+                $body.finger("tap.rte-ooa", CUI.rte.UIUtils.killEvent);
+            }
             // prevent losing focus for toolbar items
-            $body.fipo("tap.rte-item", "click.rte-item", ".rte-toolbar .item", function(e) {
-                self.isTemporaryFocusChange = true;
-                CUI.rte.UIUtils.killEvent(e);
-            });
+            $uiBody.fipo("tap.rte-item", "click.rte-item", ".rte-toolbar .item",
+                    function(e) {
+                        self.isTemporaryFocusChange = true;
+                        CUI.rte.UIUtils.killEvent(e);
+                    });
             // prevent losing focus for popovers
-            $body.fipo("tap.rte-item", "click.rte-item", ".rte-popover .item", function(e) {
-                self.isTemporaryFocusChange = true;
-                CUI.rte.UIUtils.killEvent(e);
-            });
+            $uiBody.fipo("tap.rte-item", "click.rte-item", ".rte-popover .item",
+                    function(e) {
+                        self.isTemporaryFocusChange = true;
+                        CUI.rte.UIUtils.killEvent(e);
+                    });
             // hide toolbar/popover while a selection is created
             if (com.ua.isTouch) {
                 // On touch devices (Safari Mobile), no touch events are dispatched while
@@ -206,7 +217,7 @@
                 // hiding/showing the toolbar gets started in that case.
                 var _lastSel;
                 $doc.on("selectionchange.rte-toolbarhide", function(e) {
-                    if (self.editorKernel.isLocked()) {
+                    if (self.editorKernel.isLocked() || !self.isActive) {
                         _lastSel = undefined;
                         return;
                     }
@@ -296,11 +307,14 @@
                 var body = context.doc.body;
                 CUI.rte.Eventing.un(body, "keyup", this.handleKeyUp, this);
                 this.$textContainer.off("blur.rte tap.rte click.rte");
+                // TODO adjust to corresponding DOM events after evenr handling fully works
                 var $body = $(body);
+                var $doc = $(context.doc);
                 $body.off("focus.rte tap.rte-ooa click.rte-ooa touchstart.rte-ooa");
                 $body.off("mousedown.rte-ooa tap.rte-item click.rte-item");
-                $body.off("selectionchange.rte-toolbarhide mousemove.rte-toolbarhide");
+                $body.off("mousemove.rte-toolbarhide");
                 $body.off("mouseup.rte-toolbarhide mousedown.rte-toolbarhide");
+                $doc.off("selectionchange.rte-toolbarhide");
             }
         },
 
@@ -338,7 +352,10 @@
             if (this.isEmptyContent) {
                 this.prepareForNewText();
             }
-            var initialContent = this.options.initialContent || this.$textContainer.html();
+            var initialContent = this.options.initialContent;
+            if (initialContent === undefined) {
+                initialContent = this.$textContainer.html();
+            }
             this.$textContainer[0].contentEditable = "true";
             if (ua.isGecko || ua.isWebKit) {
                 this.savedOutlineStyle = this.textContainer.style.outlineStyle;
