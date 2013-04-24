@@ -9,7 +9,9 @@
 
     var attached = [ ];
 
-    function getCounter(doc, gesture) {
+    var isEnabled = true;
+
+    function getGestureDef(doc, gesture) {
         var docDef;
         for (var a = 0; a < attached.length; a++) {
             if (attached[a].doc === doc) {
@@ -20,14 +22,34 @@
         if (!docDef) {
             docDef = {
                 doc: doc,
-                counter: [ ]
+                gestures: { }
             };
             attached.push(docDef);
         }
-        if (!docDef.counter.hasOwnProperty(gesture.name)) {
-            docDef.counter[gesture.name] = 0;
+        if (!docDef.gestures.hasOwnProperty(gesture.name)) {
+            docDef.gestures[gesture.name] = {
+                counter: 0,
+                handlerFn: { }
+            };
         }
-        return docDef.counter;
+        return docDef.gestures[gesture.name];
+    }
+
+    function applyOnAttached(fn) {
+        for (var a = 0; a < attached.length; a++) {
+            var doc = $(attached[a].doc);
+            var gestures = attached[a].gestures;
+            for (var gesture in gestures) {
+               if (gestures.hasOwnProperty(gesture)) {
+                   var handlerDefs = gestures[gesture].handlerFn;
+                   for (var handler in handlerDefs) {
+                       if (handlerDefs.hasOwnProperty(handler)) {
+                           fn(doc, handler, handlerDefs[handler]);
+                       }
+                   }
+               }
+            }
+        }
     }
 
     var touch = {
@@ -87,23 +109,30 @@
 
             gesture.setup = function (data, namespaces, eventHandle) {
                 var doc = this.ownerDocument || document;
-                var counter = getCounter(doc, gesture);
-                if (counter[gesture.name] === 0) {
+                var def = getGestureDef(doc, gesture);
+                if (def.counter === 0) {
                     $(doc).on('touchstart', data, touchstart)
                         .on('touchmove', data, touchmove)
                         .on('touchend touchcancel', data, touchend);
+                    def.handlerFn = {
+                        "touchstart": touchstart,
+                        "touchmove": touchmove,
+                        "touchend": touchend,
+                        "touchcancel": touchend
+                    };
                 }
-                counter[gesture.name]++;
+                def.counter++;
             };
 
             gesture.teardown = function () {
                 var doc = this.ownerDocument;
-                var counter = getCounter(doc, gesture);
-                counter[gesture.name]--;
-                if (counter[gesture.name] === 0) {
+                var def = getGestureDef(doc, gesture);
+                def.counter--;
+                if (def.counter === 0) {
                     $(doc).off('touchstart', touchstart)
                         .off('touchmove', touchmove)
                         .off('touchend touchcancel', touchend);
+                    def.handlerFn = { };
                 }
             };
 
@@ -152,6 +181,36 @@
 
                 return 0;
             }
+        },
+
+        /**
+         * Disables all currently enabled event handlers. Can be re-enabled by using
+         * on.
+         */
+        off: function() {
+            if (!isEnabled) {
+                return;
+            }
+            applyOnAttached(function(doc, handler, fn) {
+                console.log("off", handler, fn);
+                doc.off(handler, fn);
+            });
+            isEnabled = false;
+        },
+
+        /**
+         * Enables previously disabled event handlers. Must have been disabled before by
+         * using off
+         */
+        on: function() {
+            if (isEnabled) {
+                return;
+            }
+            applyOnAttached(function(doc, handler, fn) {
+                console.log("on", handler, fn);
+                doc.on(handler, fn);
+            });
+            isEnabled = true;
         }
     };
 
