@@ -2159,6 +2159,8 @@ $cardView.find("article").removeClass("selected");
          * @param {Object} options.selectorConfig.controller.selectAll.selector
          *        The selector that is used to determine all "select all" buttons in a
          *        CardView
+         * @param {Object} options.gridSettings
+         *        Custom options for jQuery grid layout plugin.
          * @param {Object} options.selectorConfig.controller.selectAll.cls
          *        The class that has to be applied to each card if "select all" is invoked
         */
@@ -2166,7 +2168,7 @@ $cardView.find("article").removeClass("selected");
             var selectorConfig = options.selectorConfig || DEFAULT_SELECTOR_CONFIG;
             this.adapter = new DirectMarkupAdapter(selectorConfig);
             this.adapter.initialize(this.$element);
-            this.layout();
+            this.layout(options.gridSettings);
         },
 
         /**
@@ -2486,14 +2488,14 @@ $cardView.find("article").removeClass("selected");
         /**
          * Create and execute a layout of the cards if in grid view.
          */
-        layout: function() {
+        layout: function(settings) {
             if (this.getDisplayMode() !== DISPLAY_GRID) {
                 return;
             }
             if (this.$element.data('cuigridlayout')) {
                 this.$element.cuigridlayout("destroy");
             }
-            this.$element.cuigridlayout();
+            this.$element.cuigridlayout(settings);
         },
 
         /**
