@@ -43,18 +43,15 @@
 
                 <div class="rail-switch">
                     <nav class="toolbar icongroup">
-                        <a href="#" data-view="feature"><i class="icon-viewlist">Navigation</i></a>
+                        <a href="#" data-view="feature"><i class="icon-compass">Navigation</i></a>
                         <a href="#" data-view="filter" class="active"><i class="icon-filter">Filter</i></a>
                         <a href="#" data-view="activity"><i class="icon-clock">Timeline</i></a>
+                        <a href="#" data-view="presets"><i class="icon-colorpalette">Presets</i></a>
+
                     </nav>
                 </div>
 
                 <div class="rail-view" data-view="feature">
-                    <div class="search">
-                        <label for="q0" class="hidden-accessible">Search</label>
-                        <input type="text" placeholder="Enter Keyword(s)" autocomplete="off" name="q" id="q0">
-                        <button type="submit" class="icon-search">Search</button>
-                    </div>
                     <nav class="feature">
                         <a href="#Files">Files</a>
                         <a href="#Collections" class="active">Collections</a>
@@ -225,14 +222,23 @@
                         <input type="text" placeholder="Enter Keyword(s)" autocomplete="off" name="q" id="q2">
                         <button type="submit" class="icon-search">Search</button>
                     </div>
-                    <nav class="feature">
-                        <a href="#3" class="active">3</a>
-                        <a href="#Collections">Collections</a>
-                        <a href="#Users">Users</a>
-                        <a href="#Tools">Tools</a>
-                        <a href="#Settings">Settings</a>
-                    </nav>
+                    <div class="dropdown menu" data-init="dropdown">
+                        <button>Dropdown Menu in Rail</button>
+                        <select name="dropdown">
+                            <option>Option One</option>
+                            <option>Option Two</option>
+                            <option>Option Three</option>
+                        </select>
+                    </div>                    
                 </div>
+
+                <div class="rail-view" data-view="presets">     
+                    <section>
+                        <span class="heading">Presets</span>
+                    </section>                         
+                </div>
+
+                
                 
             </div>
         </div>
