@@ -210,7 +210,10 @@
             var marginLeft = this.options.marginLeft;
             var marginRight = this.options.marginRight;
             var gx = this.options.gutterX;
-
+            if ($this.width() === 0) {
+	        //need not to layout the div whose width is 0
+                return;
+            }
             // calculate # columns:
             // containerWidth = marginLeft + (colWidth + gx) * n - gx + marginRight;
             // use: "round" for avg width, "floor" for minimal width, "ceil" for maximal width
