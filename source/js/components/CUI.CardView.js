@@ -26,6 +26,7 @@
 
     var SELECTION_MODE_COUNT_MULTI = "multiple";
 
+    // TODO: Additional SORT config not reflected in AEM and therefore list view fails to sort in AEM
     var DEFAULT_SELECTOR_CONFIG = {
 
         "itemSelector": "article",                      // selector for getting items
@@ -798,16 +799,24 @@
             this.items = options.items;
             this.headerElement = options.headerElement;
             this.columnElement = options.columnElement;
-            this.comparator = options.comparator;
+            this.comparators = options.comparators;
             this.selectors = options.selectors;
 
             this.isReverse = this.columnElement.hasClass("sort-asc"); // switch to reverse?
             this.toNatural = this.columnElement.hasClass("sort-desc"); // back to natural order?
             this.fromNatural = !this.headerElement.hasClass("sort-mode");
+            
+            this.comparator = null;
 
-            if (!this.comparator && !this.toNatural) this.comparator = this._readComparatorFromMarkup();
-            if (this.toNatural) this.comparator = new CUI.CardView.DefaultComparator(null, "data-natural-index", "numeric");
+            // Choose the right comparator
+            if (this.comparators) {
+                for(var selector in this.comparators) {
+                    if (!this.columnElement.is(selector)) continue;
+                    this.comparator = this.comparators[selector];
+                }
+            }
 
+            if (!this.comparator) this.comparator = this._readComparatorFromMarkup();
         },
         _readComparatorFromMarkup: function() {
             var selector = this.columnElement.data("sort-selector");
@@ -826,37 +835,32 @@
             this.columnElement.removeClass("sort-desc sort-asc");
             if (!this.toNatural) this.columnElement.addClass(this.isReverse ? "sort-desc" : "sort-asc");
 
-            if (this.fromNatural) {
-                this.items.each(function(index) {
-                    $(this).data("natural-index", index);
-                });
-            }
-
             // Show or hide d&d elements 
-            this.items.find(".move").toggle(this.toNatural);
+            var showMoveHandle = this.toNatural;
+            $.each(this.items, function() {this.getItemEl().find(".move").toggle(showMoveHandle);});
         },
         sort: function() {
-            if (!this.comparator) return;
+            if (!this.comparator && !this.toNatural) return;
 
             this._adjustMarkup();
 
             var prevItem = this.headerElement; // Use header as starting point;
 
-            this.items.detach(); // First: Detach all items
-
-            this.comparator.setReverse(this.isReverse);
-            var fn = this.comparator.getCompareFn();
+            $.each(this.items, function() {this.getItemEl().detach();}); // First: Detach all items
 
             // Re-Sort items
-            var items = [];
-            this.items.each(function() {
-                items.push($(this));
-            })
-            items.sort(fn);          
+            var items = this.items.slice(); // Make a copy before sorting
 
+            if (this.comparator) {
+                this.comparator.setReverse(this.isReverse);
+                var fn = this.comparator.getCompareFn();
+                if (!this.toNatural) items.sort(fn);   // Only sort if we do not want to go back to natural order       
+            }
+
+            
             // Now: reinsert in new order
             for(var i = 0; i < items.length; i++) {
-                var item = items[i];
+                var item = items[i].getItemEl();
                 prevItem.after(item);
                 prevItem = item;
             }
@@ -1155,8 +1159,8 @@
 
         /**
          * Get all list items that are preceded by the specified header.
-         * @param header {CUI.CardView.Header[]} The header
-         * @return {CUI.CardView.Item} The list items
+         * @param header {CUI.CardView.Header} The header
+         * @return {CUI.CardView.Item[]} The list items
          */
         getItemsForHeader: function(header) {
             // TODO does not handle empty headers yet
@@ -1621,32 +1625,22 @@
             this.$el.fipo("tap.cardview.sort", "click.cardview.sort",
                 this.selectors.controller.sort.headSelector, function(e) {
                     
-
-                    // Items: Get current header, get all siblings up to next header, and filter them to items
-                    var items = $(e.target).closest(self.selectors.headerSelector).nextUntil(self.selectors.headerSelector).filter(self.selectors.itemSelector);
-                    var header = $(e.target).closest(self.selectors.headerSelector);                    
+                    var model = self.$el.data("cardView").getModel();
+                    var headerElement = $(e.target).closest(self.selectors.headerSelector);                    
+                    var header = model.getHeaderForEl(headerElement);
+                    var items = model.getItemsForHeader(header);
 
                     // Trigger a sortstart event
                     var event = $.Event("sortstart");
                     $(e.target).trigger(event);
                     if (event.isDefaultPrevented()) return;
 
-                    var comparator = null;
-
-                    // Choose the right comparator
-                    if (self.comparators) {
-                        for(var selector in self.comparators) {
-                            if (!$(e.target).is(selector)) continue;
-                            comparator = self.comparators[selector];
-                        }
-                    }
-
                     var sorter = new ColumnSortHandler({
                         listElement: self.$el,
-                        headerElement: header,
+                        headerElement: header.getHeaderEl(),
                         columnElement: $(e.target),
                         items: items,
-                        comparator: comparator,
+                        comparators: self.comparators,
                         selectors: self.selectors
                     });
                     sorter.sort();
@@ -2752,7 +2746,9 @@ $cardView.find("article").removeClass("selected");
         * Compares two items according to the configuration
         * @return {integer} -1, 0, 1
         */
-        compare: function($item1, $item2) {
+        compare: function(item1, item2) {
+            var $item1 = item1.getItemEl();
+            var $item2 = item2.getItemEl();
             var $e1 = (this.selector) ? $item1.find(this.selector) : $item1;
             var $e2 = (this.selector) ? $item2.find(this.selector) : $item2;
             var t1 = "";
