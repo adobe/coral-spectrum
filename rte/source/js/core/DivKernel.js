@@ -48,9 +48,11 @@ CUI.rte.DivKernel = new Class({
      * @param {HTMLElement} root The root element (the "div" element being edited)
      */
     initializeEditContext: function(win, doc, root) {
+        var com = CUI.rte.Common;
         this.editContext = new CUI.rte.EditContext(null, win, doc, root);
+        com.initializeTouchInIframe(this.editContext);
         // switch off auto linking - see http://msdn.microsoft.com/en-us/library/aa769893%28v=vs.85%29.aspx
-        if (CUI.rte.Common.ua.isW3cIE) {
+        if (com.ua.isW3cIE) {
             doc.execCommand("AutoUrlDetect", false, false);
         }
         this.addFeatureClasses(root);

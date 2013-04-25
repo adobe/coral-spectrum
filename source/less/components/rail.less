@@ -833,6 +833,7 @@ div.rail {
                 font-family: AdobeIcons;
                 position: absolute;
                 right: 16*@px;
+                top: 0;
             }
         }
 
@@ -863,6 +864,68 @@ div.rail {
                     padding: 0;
                     padding-left: 12*@px;
                     font-size: 0.85rem;
+
+                    &:hover,
+                    &.selected:hover {
+                        background-color: @dropdown-active-background-color;
+                    }
+                }
+            }
+        }
+    }
+
+    // dropdown
+    .dropdown {
+        display: block;
+
+        .dropdown-container {
+    //        display: block;
+    //        border-bottom: @px solid @rail-section-border-color;
+        }
+
+        button,
+        button:hover:not([disabled]) {
+            border-color: @rail-dropdown-border-color;
+            background: @rail-dropdown-background-color;
+            color: @rail-dropdown-font-color;
+            font-size: @rail-dropdown-text-size;
+            height: @rail-dropdown-height;
+
+            // arrow down
+            &:after {
+                background: none;
+                content: "▾";
+                font-family: AdobeIcons;
+                position: absolute;
+                right: 10*@px;
+                top: 6*@px;
+            }
+        }
+
+        .dropdown-list {
+            border-bottom: @px solid @rail-dropdown-border-color;
+
+            ul {
+                margin: 0;
+                padding: 0;
+                font-size: @rail-dropdown-text-size;
+                background-color: @rail-dropdown-background-color;
+
+                li {
+                    list-style-type: none;
+                    margin: 0;
+                    background-color: @rail-dropdown-background-color;
+                    color: @rail-dropdown-font-color;
+                    border: @px solid @rail-dropdown-border-color;
+                    border-top: none;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    -o-text-overflow: ellipsis;
+                    cursor: pointer;
+                    height: @rail-dropdown-height;
+                    line-height: @rail-dropdown-height;
+                    padding-top: 0;
+                    padding-bottom: 0;
 
                     &:hover,
                     &.selected:hover {
