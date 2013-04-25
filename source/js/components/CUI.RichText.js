@@ -246,17 +246,12 @@
                 var context = self.editorKernel.getEditContext();
                 bookmark = sel.createRangeBookmark(context);
             });
-            var isTouchAndIFrame = com.ua.isTouch && com.getParentWindowRef(editContext);
-            var ooaHandler = "click.rte-ooa";
-            if (isTouchAndIFrame) {
-                ooaHandler = "tap.rte-ooa";
-            }
-            $body.on(ooaHandler, function(e) {
+            $body.fipo("tap.rte-ooa", "click.rte-ooa", function(e) {
                 // there are cases where "out of area clicks" must be ignored - for example,
                 // on touch devices, the initial tap is followed by a click event that
                 // would stop editing immediately; so the ignoreNextClick flag may be
                 // used to handle those cases
-                if (self.ignoreNextClick && !isTouchAndIFrame) {
+                if (self.ignoreNextClick) {
                     self.ignoreNextClick = false;
                     return;
                 }
@@ -281,9 +276,7 @@
                     self.$textContainer.blur();
                 }
             });
-            if (!isTouchAndIFrame) {
-                $body.finger("tap.rte-ooa", CUI.rte.UIUtils.killEvent);
-            }
+            $body.finger("tap.rte-ooa", CUI.rte.UIUtils.killEvent);
             // prevent losing focus for toolbar items
             $uiBody.fipo("tap.rte-item", "click.rte-item", ".rte-toolbar .item",
                     function(e) {
@@ -296,7 +289,6 @@
                         self.isTemporaryFocusChange = true;
                         CUI.rte.UIUtils.killEvent(e);
                     });
-            // hide toolbar/popover while a selection is created
             // hide toolbar/popover while a selection is created
             this._handleToolbarOnSelectionChange();
         },

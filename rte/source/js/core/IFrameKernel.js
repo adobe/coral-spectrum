@@ -49,9 +49,11 @@ CUI.rte.IFrameKernel = new Class({
      * @param {HTMLElement} root The root element (the "body" element of the iFrame)
      */
     initializeEditContext: function(iFrame, win, doc, root) {
+        var com = CUI.rte.Common;
         this.editContext = new CUI.rte.EditContext(iFrame, win, doc, root);
+        com.initializeTouchInIframe(this.editContext);
         // switch off auto linking - see http://msdn.microsoft.com/en-us/library/aa769893%28v=vs.85%29.aspx
-        if (CUI.rte.Common.ua.isW3cIE) {
+        if (com.ua.isW3cIE) {
             doc.execCommand("AutoUrlDetect", false, false);
         }
         this.addFeatureClasses(root);
