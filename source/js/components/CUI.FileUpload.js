@@ -227,6 +227,7 @@
                 var span = $("<span/>", {
                     "class": clazz
                 });
+                this.$element.removeAttr("class");
                 this.$element.after(span);
                 this.$element.detach();
                 span.prepend(this.$element);
@@ -238,7 +239,6 @@
 
             // Get the input element
             this.inputElement = this.$element.find("input[type='file']");
-            this.inputElement.removeAttr("class");
 
             // Read configuration from markup
             this._readDataFromMarkup();
