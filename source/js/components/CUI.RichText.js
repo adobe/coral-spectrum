@@ -31,7 +31,7 @@
             }
         },
 
-        // Helpers -----------------------------------------------------------------------------------------------------
+        // Helpers -------------------------------------------------------------------------
 
         _hidePopover: function() {
             if (this.editorKernel.toolbar) {
@@ -41,6 +41,99 @@
                 }
             }
             return false;
+        },
+
+        _handleToolbarOnSelectionChange: function() {
+            var com = CUI.rte.Common;
+            var editContext = this.editorKernel.getEditContext();
+            var $doc = $(editContext.doc);
+            var self = this;
+            if (com.ua.isTouch) {
+                // On touch devices (Safari Mobile), no touch events are dispatched while
+                // the user defines a selection. As a workaround, we listen to
+                // selectionchange events instead (which at least indicate changes in the
+                // selection, but not when the selection process starts or ends). To
+                // determine the end of the selection process, a timed "best guess" approach
+                // is used - currently, the selection is declared "final" if it does not
+                // change for a second. This works well even if the user changes the
+                // selection after the 1sec interval - simply another cycle of
+                // hiding/showing the toolbar gets started in that case.
+                var _lastSel;
+                $doc.on("selectionchange.rte-toolbarhide", function(e) {
+                    if (self.editorKernel.isLocked() || !self.isActive) {
+                        _lastSel = undefined;
+                        return;
+                    }
+                    var context = self.editorKernel.getEditContext();
+                    // using native selection instead of selection abstraction here, as
+                    // it is faster and we are in a controlled environment (Webkit mobile)
+                    // here
+                    var slct = context.win.getSelection();
+                    // check if selection is valid - if not, reuse last known selection or
+                    // set caret to the start of the text
+                    if (!com.isAncestor(context, context.root, slct.focusNode) ||
+                            !com.isAncestor(context, context.root, slct.anchorNode)) {
+                        slct.removeAllRanges();
+                        var range = context.doc.createRange();
+                        if (_lastSel) {
+                            range.setStart(_lastSel.ande, _lastSel.aoffs);
+                            range.setEnd(_lastSel.fnde, _lastSel.foffs);
+                        } else {
+                            range.selectNodeContents(context.root);
+                            range.collapse(true);
+                        }
+                        slct.addRange(range);
+                    }
+                    if (!slct.isCollapsed) {
+                        var locks = context.getState("CUI.SelectionLock");
+                        if (locks === undefined) {
+                            var isSameSelection = false;
+                            if (_lastSel) {
+                                isSameSelection =
+                                        (_lastSel.ande === slct.anchorNode) &&
+                                        (_lastSel.aoffs === slct.anchorOffset) &&
+                                        (_lastSel.fnde === slct.focusNode) &&
+                                        (_lastSel.foffs === slct.focusOffset);
+                            }
+                            if (!isSameSelection) {
+                                self.editorKernel.toolbar.hideTemporarily();
+                            }
+                        } else {
+                            locks--;
+                            if (locks > 0) {
+                                context.setState("CUI.SelectionLock", locks);
+                            } else {
+                                context.setState("CUI.SelectionLock");
+                            }
+                        }
+                    }
+                    _lastSel = {
+                        ande: slct.anchorNode,
+                        aoffs: slct.anchorOffset,
+                        fnde: slct.focusNode,
+                        foffs: slct.focusOffset
+                    };
+                });
+            } else {
+                var _isClick = false;
+                var _isToolbarHidden = false;
+                this.$textContainer.pointer("mousedown.rte-toolbarhide", function(e) {
+                    _isClick = true;
+                });
+                this.$textContainer.pointer("mousemove.rte-toolbarhide", function(e) {
+                    if (_isClick && !_isToolbarHidden && !self.editorKernel.isLocked()) {
+                        self.editorKernel.toolbar.hide();
+                        _isToolbarHidden = true;
+                    }
+                });
+                this.$textContainer.pointer("mouseup.rte-toolbarhide", function(e) {
+                    if (_isToolbarHidden) {
+                        self.editorKernel.toolbar.show();
+                        _isToolbarHidden = false;
+                    }
+                    _isClick = false;
+                });
+            }
         },
 
         getTextDiv: function(parentEl) {
@@ -97,7 +190,6 @@
             var sel = CUI.rte.Selection;
             var self = this;
             var editContext = this.editorKernel.getEditContext();
-            var $doc = $(editContext.doc);
             var body = editContext.doc.body;
             var $body = $(body);
             var $uiBody = $(document.body);
@@ -205,92 +297,8 @@
                         CUI.rte.UIUtils.killEvent(e);
                     });
             // hide toolbar/popover while a selection is created
-            if (com.ua.isTouch) {
-                // On touch devices (Safari Mobile), no touch events are dispatched while
-                // the user defines a selection. As a workaround, we listen to
-                // selectionchange events instead (which at least indicate changes in the
-                // selection, but not when the selection process starts or ends). To
-                // determine the end of the selection process, a timed "best guess" approach
-                // is used - currently, the selection is declared "final" if it does not
-                // change for a second. This works well even if the user changes the
-                // selection after the 1sec interval - simply another cycle of
-                // hiding/showing the toolbar gets started in that case.
-                var _lastSel;
-                $doc.on("selectionchange.rte-toolbarhide", function(e) {
-                    if (self.editorKernel.isLocked() || !self.isActive) {
-                        _lastSel = undefined;
-                        return;
-                    }
-                    // using native selection instead of selection abstraction here, as
-                    // it is faster and we are in a controlled environment (Webkit mobile)
-                    // here
-                    var slct = self.editorKernel.getEditContext().win.getSelection();
-                    // check if selection is valid - if not, reuse last known selection or
-                    // set caret to the start of the text
-                    var context = self.editorKernel.getEditContext();
-                    if (!com.isAncestor(context, context.root, slct.focusNode) ||
-                            !com.isAncestor(context, context.root, slct.anchorNode)) {
-                        slct.removeAllRanges();
-                        var range = context.doc.createRange();
-                        if (_lastSel) {
-                            range.setStart(_lastSel.ande, _lastSel.aoffs);
-                            range.setEnd(_lastSel.fnde, _lastSel.foffs);
-                        } else {
-                            range.selectNodeContents(context.root);
-                            range.collapse(true);
-                        }
-                        slct.addRange(range);
-                    }
-                    if (!slct.isCollapsed) {
-                        var locks = context.getState("CUI.SelectionLock");
-                        if (locks === undefined) {
-                            var isSameSelection = false;
-                            if (_lastSel) {
-                                isSameSelection =
-                                        (_lastSel.ande === slct.anchorNode) &&
-                                        (_lastSel.aoffs === slct.anchorOffset) &&
-                                        (_lastSel.fnde === slct.focusNode) &&
-                                        (_lastSel.foffs === slct.focusOffset);
-                            }
-                            if (!isSameSelection) {
-                                self.editorKernel.toolbar.hideTemporarily();
-                            }
-                        } else {
-                            locks--;
-                            if (locks > 0) {
-                                context.setState("CUI.SelectionLock", locks);
-                            } else {
-                                context.setState("CUI.SelectionLock");
-                            }
-                        }
-                    }
-                    _lastSel = {
-                        ande: slct.anchorNode,
-                        aoffs: slct.anchorOffset,
-                        fnde: slct.focusNode,
-                        foffs: slct.focusOffset
-                    };
-                });
-            } else {
-                var _isClick = false;
-                var _isToolbarHidden = false;
-                this.$textContainer.pointer("mousedown.rte-toolbarhide", function(e) {
-                    _isClick = true;
-                });
-                this.$textContainer.pointer("mousemove.rte-toolbarhide", function(e) {
-                    if (_isClick && !_isToolbarHidden && !self.editorKernel.isLocked()) {
-                        self.editorKernel.toolbar.hide();
-                        _isToolbarHidden = true;
-                    }
-                });
-                this.$textContainer.pointer("mouseup.rte-toolbarhide", function(e) {
-                    if (_isToolbarHidden) {
-                        self.editorKernel.toolbar.show();
-                        _isToolbarHidden = false;
-                    }
-                    _isClick = false;
-                });
-            }
+            // hide toolbar/popover while a selection is created
+            this._handleToolbarOnSelectionChange();
         },
 
         deactivateEditorKernel: function() {
