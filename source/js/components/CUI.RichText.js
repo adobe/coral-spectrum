@@ -31,7 +31,7 @@
             }
         },
 
-        // Helpers -----------------------------------------------------------------------------------------------------
+        // Helpers -------------------------------------------------------------------------
 
         _hidePopover: function() {
             if (this.editorKernel.toolbar) {
@@ -47,6 +47,7 @@
             var com = CUI.rte.Common;
             var editContext = this.editorKernel.getEditContext();
             var $doc = $(editContext.doc);
+            var self = this;
             if (com.ua.isTouch) {
                 // On touch devices (Safari Mobile), no touch events are dispatched while
                 // the user defines a selection. As a workaround, we listen to
@@ -297,7 +298,7 @@
                     });
             // hide toolbar/popover while a selection is created
             // hide toolbar/popover while a selection is created
-            this._handleToolbarHideOnSelectionChange();
+            this._handleToolbarOnSelectionChange();
         },
 
         deactivateEditorKernel: function() {
