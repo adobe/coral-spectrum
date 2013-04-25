@@ -796,19 +796,60 @@
             //this.listElement = options.listElement; // Currently unused
             this.items = options.items;
             this.headerElement = options.headerElement;
-            this.compareFn = options.compareFn;
+            this.columnElement = options.columnElement;
+            this.comparator = options.comparator;
+
+            this.isReverse = this.columnElement.hasClass("sort-asc"); // switch to reverse?
+            this.toNatural = this.columnElement.hasClass("sort-desc"); // back to natural order?
+            this.fromNatural = !this.headerElement.hasClass("sort-mode");
+
+            if (!this.comparator && !this.toNatural) this.comparator = this._readComparatorFromMarkup();
+            if (this.toNatural) this.comparator = new CUI.CardView.DefaultComparator(null, "data-natural-index", "numeric");
+
+        },
+        _readComparatorFromMarkup: function() {
+            var selector = this.columnElement.data("sort-selector");
+            var attribute = this.columnElement.data("sort-attribute");
+            var sortType = this.columnElement.data("sort-type");
+            if (!selector && !attribute) return null;
+            return new CUI.CardView.DefaultComparator(selector, attribute, sortType);
+
+        },
+        _adjustMarkup: function() {
+            if (this.fromNatural) this.headerElement.addClass("sort-mode");
+            if (this.toNatural) this.headerElement.removeClass("sort-mode");
+
+            this.headerElement.find(".label > *").removeClass("sort-asc sort-desc"); // TODO: Use configurable selector
+            this.columnElement.removeClass("sort-desc sort-asc");
+            if (!this.toNatural) this.columnElement.addClass(this.isReverse ? "sort-desc" : "sort-asc");
+
+            if (this.fromNatural) {
+                this.items.each(function(index) {
+                    $(this).data("natural-index", index);
+                });
+            }
+
+            // Show or hide d&d elements 
+            this.items.find(".move").toggle(this.toNatural);
         },
         sort: function() {
+            if (!this.comparator) return;
+
+            this._adjustMarkup();
+
             var prevItem = this.headerElement; // Use header as starting point;
 
             this.items.detach(); // First: Detach all items
+
+            this.comparator.setReverse(this.isReverse);
+            var fn = this.comparator.getCompareFn();
 
             // Re-Sort items
             var items = [];
             this.items.each(function() {
                 items.push($(this));
             })
-            items.sort(this.compareFn);          
+            items.sort(fn);          
 
             // Now: reinsert in new order
             for(var i = 0; i < items.length; i++) {
@@ -1528,6 +1569,7 @@
         initialize: function() {
             this.setDisplayMode(this.$el.hasClass("list") ? DISPLAY_LIST : DISPLAY_GRID);
             var self = this;
+
             // Selection
             this.$el.fipo("tap.cardview.select", "click.cardview.select",
                 this.selectors.controller.selectElement.list, function(e) {
@@ -1573,42 +1615,47 @@
                 });
                 
             // list sorting
-            // TODO switch from reordering mode to non reordering and vice versa
-            if (this.comparators) {
-                this.$el.fipo("tap.cardview.sort", "click.cardview.sort",
-                    this.selectors.controller.sort.headSelector, function(e) {
-                        // We need some comparators to do sorting!
-                        if (!this.comparators) return;
-                        
-                        // Items: Get current header, get all siblings up to next header, and filter them to items
-                        var items = $(e.target).closest(self.selectors.headerSelector).nextUntil(self.selectors.headerSelector).filter(self.selectors.itemSelector);
-                        var header = $(e.target).closest(self.selectors.headerSelector);                    
-                        var isReverse = $(e.target).hasClass("sort-asc");
-                        header.find(".label > *").removeClass("sort-asc sort-desc"); // TODO: Use configurable selector
-                        $(e.target).removeClass("sort-desc sort-asc");
-                        $(e.target).addClass(isReverse ? "sort-desc" : "sort-asc");
+            this.$el.fipo("tap.cardview.sort", "click.cardview.sort",
+                this.selectors.controller.sort.headSelector, function(e) {
+                    
 
-                        // Set some default comparator
-                        var comparator = new DefaultComparator(".label h4", "", false); // TODO: Use configurable selector
+                    // Items: Get current header, get all siblings up to next header, and filter them to items
+                    var items = $(e.target).closest(self.selectors.headerSelector).nextUntil(self.selectors.headerSelector).filter(self.selectors.itemSelector);
+                    var header = $(e.target).closest(self.selectors.headerSelector);                    
 
-                        // Choose the right comparator
+                    // Trigger a startsort event
+                    var event = $.Event("startsort");
+                    $(e.target).trigger(event);
+                    if (event.isDefaultPrevented()) return;
+
+                    var comparator = null;
+
+                    // Choose the right comparator
+                    if (this.comparators) {
                         for(var selector in this.comparators) {
                             if (!$(e.target).is(selector)) continue;
                             comparator = this.comparators[selector];
                         }
+                    }
 
-                        comparator.setReverse(isReverse);
-                        var compareFn = comparator.getCompareFn();
-
-                        var sorter = new ColumnSortHandler({
-                            listElement: self.$el,
-                            items: items,
-                            headerElement: header,
-                            compareFn: compareFn
-                        });
-                        sorter.sort();
+                    var sorter = new ColumnSortHandler({
+                        listElement: self.$el,
+                        headerElement: header,
+                        columnElement: $(e.target),
+                        items: items,
+                        comparator: comparator
                     });
-            }
+                    sorter.sort();
+
+                    // Trigger an endsort event
+                    var event = $.Event("endsort");
+                    $(e.target).trigger(event);
+                });
+
+            // Prevent text selection of headers!
+            this.$el.on("selectstart.cardview", this.selectors.controller.sort.headSelector, function(e) {
+                e.preventDefault();
+            });
 
             // block click event for cards on touch devices
             this.$el.finger("click.cardview.select",
@@ -2266,7 +2313,7 @@ $cardView.find("article").removeClass("selected");
         */
         construct: function(options) {
             var selectorConfig = options.selectorConfig || DEFAULT_SELECTOR_CONFIG;
-            var comparators = options.comparators || null; // TODO: Read comparators from markup
+            var comparators = options.comparators || null;
 
             this.adapter = new DirectMarkupAdapter(selectorConfig, comparators);
             this.adapter.initialize(this.$element);
@@ -2659,12 +2706,12 @@ $cardView.find("article").removeClass("selected");
         *
         * @param {String}  selector   A CSS selector that matches the part of the item to be compared
         * @param {String}  attribute  The attribute of the item to be compared. If not given, the inner text of the item will be used for comparison.
-        * @param {boolean} isNumeric  True for numeric comparison, false otherwise for alphabetical comparison
+        * @param {String}  type  "numeric" for numeric comparison, or "string" for alphabetical comparison
         */
-        construct: function (selector, attribute, isNumeric) {
+        construct: function (selector, attribute, type) {
             this.selector = selector;
             this.attribute = attribute;
-            this.isNumeric = isNumeric;
+            this.isNumeric = (type == "numeric");
             this.reverseMultiplier = 1;
         },
         /**
@@ -2679,8 +2726,8 @@ $cardView.find("article").removeClass("selected");
         * @return {integer} -1, 0, 1
         */
         compare: function($item1, $item2) {
-            var $e1 = $item1.find(this.selector);
-            var $e2 = $item2.find(this.selector);
+            var $e1 = (this.selector) ? $item1.find(this.selector) : $item1;
+            var $e2 = (this.selector) ? $item2.find(this.selector) : $item2;
             var t1 = "";
             var t2 = "";
             if (!this.attribute) {
