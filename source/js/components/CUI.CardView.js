@@ -78,7 +78,8 @@
                 "cls": "selected"
             },
             "sort": {                                   // defines the config for column sort
-                "headSelector": "header .label > *"
+                "headSelector": "header .label > *",
+                "columnSelector": ".label > *"
             }
         }
 
@@ -798,6 +799,7 @@
             this.headerElement = options.headerElement;
             this.columnElement = options.columnElement;
             this.comparator = options.comparator;
+            this.selectors = options.selectors;
 
             this.isReverse = this.columnElement.hasClass("sort-asc"); // switch to reverse?
             this.toNatural = this.columnElement.hasClass("sort-desc"); // back to natural order?
@@ -818,8 +820,9 @@
         _adjustMarkup: function() {
             if (this.fromNatural) this.headerElement.addClass("sort-mode");
             if (this.toNatural) this.headerElement.removeClass("sort-mode");
-
-            this.headerElement.find(".label > *").removeClass("sort-asc sort-desc"); // TODO: Use configurable selector
+            
+            this.headerElement.find(this.selectors.controller.sort.columnSelector).removeClass("sort-asc sort-desc");
+            
             this.columnElement.removeClass("sort-desc sort-asc");
             if (!this.toNatural) this.columnElement.addClass(this.isReverse ? "sort-desc" : "sort-asc");
 
@@ -1623,18 +1626,18 @@
                     var items = $(e.target).closest(self.selectors.headerSelector).nextUntil(self.selectors.headerSelector).filter(self.selectors.itemSelector);
                     var header = $(e.target).closest(self.selectors.headerSelector);                    
 
-                    // Trigger a startsort event
-                    var event = $.Event("startsort");
+                    // Trigger a sortstart event
+                    var event = $.Event("sortstart");
                     $(e.target).trigger(event);
                     if (event.isDefaultPrevented()) return;
 
                     var comparator = null;
 
                     // Choose the right comparator
-                    if (this.comparators) {
-                        for(var selector in this.comparators) {
+                    if (self.comparators) {
+                        for(var selector in self.comparators) {
                             if (!$(e.target).is(selector)) continue;
-                            comparator = this.comparators[selector];
+                            comparator = self.comparators[selector];
                         }
                     }
 
@@ -1643,12 +1646,13 @@
                         headerElement: header,
                         columnElement: $(e.target),
                         items: items,
-                        comparator: comparator
+                        comparator: comparator,
+                        selectors: self.selectors
                     });
                     sorter.sort();
 
-                    // Trigger an endsort event
-                    var event = $.Event("endsort");
+                    // Trigger an sortend event
+                    var event = $.Event("sortend");
                     $(e.target).trigger(event);
                 });
 
@@ -2185,9 +2189,32 @@
 &lt;/div&gt;
          * @example
 <caption>Defining comparators for column sorting</caption>
+//  Define a selector for the column and then a comparator to be used for sorting
+// The comparator
 var comparatorConfig = {".label .main": new CUI.CardView.DefaultComparator(".label h4", null, false),
                    ".label .published": new CUI.CardView.DefaultComparator(".label .published", "data-timestamp", true)};
 new CUI.CardView({comparators: comparatorConfig})
+
+         * @example
+<caption>Defining comparators via data API</caption>
+&lt;!-- Page header for list view --&gt;
+&lt;header class="card-page selectable movable"&gt;
+    &lt;i class="select"&gt;&lt;/i&gt;
+    &lt;i class="sort"&gt;&lt;/i&gt;
+    &lt;div class="label"&gt;
+        &lt;div class="main" data-sort-selector=".label h4"&gt;Title&lt;/div&gt;
+        &lt;div class="published" data-sort-selector=".label .published .date" data-sort-attribute="data-timestamp" data-sort-type="numeric"&gt;Published&lt;/div&gt;
+        &lt;div class="modified" data-sort-selector=".label .modified .date" data-sort-attribute="data-timestamp" data-sort-type="numeric"&gt;Modified&lt;/div&gt;
+        &lt;div class="links" data-sort-selector=".label .links-number" data-sort-type="numeric"&gt;&lt;i class="icon-arrowright"&gt;Links&lt;/i&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/header&gt;
+&lt;!--
+    Sorting is started when the user clicks on the corresponding column header.
+
+    data-sort-selector   defines which part of the item to select for sorting
+    data-sort-attribute  defines which attribute of the selected item element should be user for sorting. If not given, the inner text is used.
+    data-sort-type       if set to "numeric", a numerical comparison is used for sorting, an alphabetical otherwise
+--&gt;
 
          * @example
 <caption>Switching to grid selection mode using API</caption>
@@ -2870,6 +2897,24 @@ $cardView.find("article").removeClass("selected");
      *        applicable; for example if the selection change is triggered by a user
      *        interaction) is cancelled as well (no event propagation; no default browser
      *        behavior)
+     */
+
+    /**
+     * Triggered right before a column sort action on the list is started (when the user clicks on a column). The client side
+     * sorting can be vetoed by setting preventDefault() on the event object. The event target is set to the column header the user clicked on.
+     * The sortstart event is always triggered, even if the column has no client side sort configuration.
+     * @name CUI.CardView#sortstart
+     * @event
+     * @param {Object} evt The event
+     */
+
+    /**
+     * Triggered right after a sorting action on the list has been finished (when the user has clicked on a column).
+     * The event target is set to the column header the user clicked on. This event is always triggered, even if the column does not have
+     * a client side sort configuration.
+     * @name CUI.CardView#sortend
+     * @event
+     * @param {Object} evt The event
      */
 
     /**
