@@ -2400,6 +2400,20 @@ $cardView.find("article").removeClass("selected");
         },
 
         /**
+        * @param {boolean} sortable     Set to true if this list should be sortable by click on column
+        */
+        setColumnSortable: function(sortable) {
+            // TODO implement
+        },
+
+        /**
+        * @return {boolean} True if this list is column sortable (does not say if it is currently sorted, use isColumnSorted() for this)
+        */
+        isColumnSortable: function() {
+            // TODO implement
+        }
+
+        /**
          * Set the display mode (grid or list view).
          * @param {String} displayMode The display mode; either
          *        {@link CUI.CardView.DISPLAY_GRID} or {@link CUI.CardView.DISPLAY_LIST}
