@@ -795,12 +795,14 @@
     */
     var ColumnSortHandler = new Class(/** @lends CUI.CardView.ColumnSortHandler# */{
         construct: function(options) {
-            //this.listElement = options.listElement; // Currently unused
-            this.items = options.items;
-            this.headerElement = options.headerElement;
-            this.columnElement = options.columnElement;
+            this.model = options.model;
             this.comparators = options.comparators;
             this.selectors = options.selectors;
+            this.columnElement = options.columnElement;
+
+            this.headerElement = options.columnElement.closest(this.selectors.headerSelector);                    
+            var header = this.model.getHeaderForEl(this.headerElement);
+            this.items = this.model.getItemsForHeader(header);
 
             this.isReverse = this.columnElement.hasClass("sort-asc"); // switch to reverse?
             this.toNatural = this.columnElement.hasClass("sort-desc"); // back to natural order?
@@ -827,11 +829,12 @@
 
         },
         _adjustMarkup: function() {
+            // Adjust general mode class
             if (this.fromNatural) this.headerElement.addClass("sort-mode");
             if (this.toNatural) this.headerElement.removeClass("sort-mode");
             
+            // Adjust column classes
             this.headerElement.find(this.selectors.controller.sort.columnSelector).removeClass("sort-asc sort-desc");
-            
             this.columnElement.removeClass("sort-desc sort-asc");
             if (!this.toNatural) this.columnElement.addClass(this.isReverse ? "sort-desc" : "sort-asc");
 
@@ -844,20 +847,21 @@
 
             this._adjustMarkup();
 
-            var prevItem = this.headerElement; // Use header as starting point;
-
-            $.each(this.items, function() {this.getItemEl().detach();}); // First: Detach all items
-
             // Re-Sort items
             var items = this.items.slice(); // Make a copy before sorting
+            // By default items are in their "natural" order, most probably defined by the user with d&d
 
+            // Only sort if we have a comparator
             if (this.comparator) {
                 this.comparator.setReverse(this.isReverse);
                 var fn = this.comparator.getCompareFn();
                 if (!this.toNatural) items.sort(fn);   // Only sort if we do not want to go back to natural order       
             }
 
-            
+            // Adjust DOM
+            var prevItem = this.headerElement; // Use header as starting point;
+            $.each(this.items, function() {this.getItemEl().detach();}); // First: Detach all items
+           
             // Now: reinsert in new order
             for(var i = 0; i < items.length; i++) {
                 var item = items[i].getItemEl();
@@ -1625,10 +1629,8 @@
             this.$el.fipo("tap.cardview.sort", "click.cardview.sort",
                 this.selectors.controller.sort.headSelector, function(e) {
                     
-                    var model = self.$el.data("cardView").getModel();
-                    var headerElement = $(e.target).closest(self.selectors.headerSelector);                    
-                    var header = model.getHeaderForEl(headerElement);
-                    var items = model.getItemsForHeader(header);
+                    var widget = Utils.getWidget(self.$el);
+                    var model = widget.getModel();
 
                     // Trigger a sortstart event
                     var event = $.Event("sortstart");
@@ -1636,10 +1638,8 @@
                     if (event.isDefaultPrevented()) return;
 
                     var sorter = new ColumnSortHandler({
-                        listElement: self.$el,
-                        headerElement: header.getHeaderEl(),
+                        model: model,
                         columnElement: $(e.target),
-                        items: items,
                         comparators: self.comparators,
                         selectors: self.selectors
                     });
@@ -1794,6 +1794,13 @@
                 return DISPLAY_GRID;
             }
             return null;
+        },
+
+        /**
+        * @return {boolean} true if this widget is currently in list mode and has a column sorting on any header applied
+        */
+        isColumnSorted: function() {
+            return (this.getDisplayMode() == "list") && this.$el.find(this.selectors.headerSelector).filter(".sort-mode").length > 0;
         },
 
         /**
@@ -2018,6 +2025,13 @@
         getDisplayMode: function() {
             return this.controller.getDisplayMode();
         },
+
+        /**
+        * @return {boolean} true if this widget is currently in list mode and has a column sorting on any header applied
+        */
+        isColumnSorted: function() {
+            return this.controller.isColumnSorted();
+        },        
 
         /**
          * Set the display mode.
@@ -2376,6 +2390,13 @@ $cardView.find("article").removeClass("selected");
          */
         getDisplayMode: function() {
             return this.adapter.getDisplayMode();
+        },
+
+       /**
+        * @return {boolean} true if this widget is currently in list mode and has a column sorting on any header applied
+        */
+        isColumnSorted: function() {
+            return this.adapter.isColumnSorted();
         },
 
         /**
