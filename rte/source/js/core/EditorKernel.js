@@ -612,6 +612,11 @@ CUI.rte.EditorKernel = new Class({
      * @param {Object} options (optional) Options
      */
     registerHandler: function(obj, eventName, handler, scope, options) {
+        var com = CUI.rte.Common;
+        if (com.ua.isTouchInIframe && com.strStartsWith(eventName, "touch")) {
+            // emergency brake: must not use touch events if editor is in iframe
+            return;
+        }
         CUI.rte.Eventing.on(this.editContext, obj, eventName, handler, scope, options);
         this.registeredHandlers.push({
             "obj": obj,
@@ -870,7 +875,8 @@ CUI.rte.EditorKernel = new Class({
                             return;
                         }
                         this.firePluginEvent("mousedown", e, false);
-                    }, "touchend": function(e) {
+                    },
+                    "touchend": function(e) {
                         this.cleanupOnEvent(e);
                         if (this.isEventingDisabled) {
                             return;
