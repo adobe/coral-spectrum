@@ -428,7 +428,11 @@ div.rail {
                 //    padding: 15*@px;
                 //}
             }
-            
+
+            section.greyText, section.grayText {
+                color: @font-secondary-color;
+            }
+
             section+section {
                 .heading {
                     border-top: 0;
@@ -817,7 +821,7 @@ div.rail {
             line-height: 40*@px;
             padding: 0;
             padding-left: 12*@px;
-            font-size: 0.85rem;
+            font-size: @dropdown-text-size;
 
             // icon (chevron down)
             &:after {
@@ -856,7 +860,7 @@ div.rail {
                     line-height: 40*@px;
                     padding: 0;
                     padding-left: 12*@px;
-                    font-size: 0.85rem;
+                    font-size: @dropdown-text-size;
 
                     &:hover,
                     &.selected:hover {
@@ -871,18 +875,11 @@ div.rail {
     .dropdown {
         display: block;
 
-        .dropdown-container {
-    //        display: block;
-    //        border-bottom: @px solid @rail-section-border-color;
-        }
-
         button,
         button:hover:not([disabled]) {
             border-color: @rail-dropdown-border-color;
             background: @rail-dropdown-background-color;
             color: @rail-dropdown-font-color;
-            font-size: @rail-dropdown-text-size;
-            height: @rail-dropdown-height;
 
             // arrow down
             &:after {
@@ -896,12 +893,11 @@ div.rail {
         }
 
         .dropdown-list {
-            border-bottom: @px solid @rail-dropdown-border-color;
+            border-bottom: none;
 
             ul {
                 margin: 0;
                 padding: 0;
-                font-size: @rail-dropdown-text-size;
                 background-color: @rail-dropdown-background-color;
 
                 li {
@@ -915,10 +911,6 @@ div.rail {
                     text-overflow: ellipsis;
                     -o-text-overflow: ellipsis;
                     cursor: pointer;
-                    height: @rail-dropdown-height;
-                    line-height: @rail-dropdown-height;
-                    padding-top: 0;
-                    padding-bottom: 0;
 
                     &:hover,
                     &.selected:hover {
