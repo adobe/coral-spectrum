@@ -79,7 +79,6 @@
                 "cls": "selected"
             },
             "sort": {                                   // defines the config for column sort
-                "headSelector": "header .label > *",
                 "columnSelector": ".label > *"
             }
         }
@@ -120,6 +119,34 @@
                 widget = $($el[0]).data("cardView");
             }
             return widget;
+        },
+
+        /**
+         * Mixes two objects so that for every missing property in object1 the properties of object2 are used. This is also done
+         * for nested objects.
+         * @param {object} Object 1
+         * @param {object} Object 2
+         * @return {object} The mixed object with all properties
+        */
+        mixObjects: function(object1, object2) {
+            if (object1 === undefined) return object2;
+
+            var result = {};
+            for(var i in object2) {
+                if (object1[i] === undefined) {
+                    result[i] = object2[i];
+                    continue;
+                }
+                var p = object1[i];
+
+                // Go one step deeper in the object hierarchy if we find an object that is not a string.
+                // Note: typeof returns "function" for functions, so no special testing for functions needed.
+                if (typeof(object1[i]) == "object" && (!(object1[i] instanceof String))) {
+                    p = this.mixObjects(object1[i], object2[i]);
+                }
+                result[i] = p;
+            }
+            return result;
         },
 
         /**
@@ -1627,7 +1654,7 @@
                 
             // list sorting
             this.$el.fipo("tap.cardview.sort", "click.cardview.sort",
-                this.selectors.controller.sort.headSelector, function(e) {
+                this.selectors.headerSelector + " " + this.selectors.controller.sort.columnSelector, function(e) {
                     
                     var widget = Utils.getWidget(self.$el);
                     var model = widget.getModel();
@@ -1651,7 +1678,7 @@
                 });
 
             // Prevent text selection of headers!
-            this.$el.on("selectstart.cardview", this.selectors.controller.sort.headSelector, function(e) {
+            this.$el.on("selectstart.cardview", this.selectors.headerSelector + " " + this.selectors.controller.sort.columnSelector, function(e) {
                 e.preventDefault();
             });
 
@@ -2238,10 +2265,8 @@ $cardView.find("article").removeClass("selected");
          *
          * @param {Object} [options] Component options
          * @param {Object} [options.selectorConfig]
-         *        The selector configuration; note that you currently have to specify always
-         *        an object that carries the entire configuration; a configration object
-         *        that only provides the options that override their respective default
-         *        values will not suffice
+         *        The selector configuration. You can also omit configuration values: Values not given will be used from
+         *        the default selector configuration.
          * @param {String} options.selectorConfig.itemSelector
          *        The selector that is used to retrieve the cards from the DOM
          * @param {String} options.selectorConfig.headerSelector
@@ -2338,6 +2363,10 @@ $cardView.find("article").removeClass("selected");
          * @param {Object} options.selectorConfig.controller.selectAll.selector
          *        The selector that is used to determine all "select all" buttons in a
          *        CardView
+         * @param {Object} options.selectorConfig.controller.sort
+         *        Defines selectors for the column sorting mechanism.
+         * @param {Object} options.selectorConfig.controller.sort.columnSelector
+         *        The selector for all column objects within the header 
          * @param {Object} options.gridSettings
          *        Custom options for jQuery grid layout plugin.
          * @param {Object} options.selectorConfig.controller.selectAll.cls
@@ -2347,7 +2376,8 @@ $cardView.find("article").removeClass("selected");
          *        defining one column and its value has to be of type CUI.CardView.DefaultComparator (or your own derived class)      
         */
         construct: function(options) {
-            var selectorConfig = options.selectorConfig || DEFAULT_SELECTOR_CONFIG;
+            // Mix given selector config with defaults: Use given config and add defaults, where no option is given
+            var selectorConfig = Utils.mixObjects(options.selectorConfig, DEFAULT_SELECTOR_CONFIG);
             var comparators = options.comparators || null;
 
             this.adapter = new DirectMarkupAdapter(selectorConfig, comparators);
