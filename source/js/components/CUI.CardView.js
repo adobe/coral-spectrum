@@ -26,7 +26,6 @@
 
     var SELECTION_MODE_COUNT_MULTI = "multiple";
 
-    // TODO: Additional SORT config not reflected in AEM and therefore list view fails to sort in AEM
     var DEFAULT_SELECTOR_CONFIG = {
 
         "itemSelector": "article",                      // selector for getting items
