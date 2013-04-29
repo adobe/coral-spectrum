@@ -2411,7 +2411,7 @@ $cardView.find("article").removeClass("selected");
         */
         isColumnSortable: function() {
             // TODO implement
-        }
+        },
 
         /**
          * Set the display mode (grid or list view).
