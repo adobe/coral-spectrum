@@ -629,7 +629,9 @@
          * @param {Object} e The event that starts the move
          */
         start: function(e) {
-            this.$oldBefore = this.$itemEl.prev();
+            this.$oldPrev = this.$itemEl.prev();
+            this.$oldNext = this.$itemEl.next();
+
             var evtPos = this._getEventCoords(e);
             if (this.dragCls) {
                 this.$itemEl.addClass(this.dragCls);
@@ -700,11 +702,15 @@
             this.$doc.off("mousemove.listview.drag");
             this.$doc.off("touchend.listview.drag");
             this.$doc.off("mouseup.listview.drag");
-            var $newBefore = this.$itemEl.prev();
-            this.$itemEl.trigger($.Event("drop", {
-                newBefore: $newBefore,
-                oldBefore: this.$oldBefore,
-                hasMoved: !Utils.equals($newBefore, this.$oldBefore)
+            var $newPrev = this.$itemEl.prev();
+            var $newNext = this.$itemEl.next();
+
+            this.$itemEl.trigger($.Event("item-moved", {
+                newPrev: $newPrev,
+                newNext: $newNext,
+                oldPrev: this.$oldPrev,
+                oldNext: this.$oldNext,
+                hasMoved: !Utils.equals($newPrev, this.$oldPrev)
             }));
             e.stopPropagation();
             e.preventDefault();
