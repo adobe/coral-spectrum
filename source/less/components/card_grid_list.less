@@ -131,11 +131,27 @@
             float: left;
             margin-top: 16*@px;
 
-            &.sort-asc {
-                text-decoration: underline; // Todo: show sorting arrow
+            &.sort-asc,&.sort-desc {
+                position: relative;
             }
-            &.sort-desc {
-                text-decoration: underline; // Todo: show sorting arrow
+
+            &.sort-asc:after,&.sort-desc:after {
+                content: " ";
+                display: inline-block;
+                position: relative;
+                left: 10*@px;
+                width: 0;
+                height: 0;
+                margin: -3*@px;
+                border: 5*@px solid transparent;                
+            }
+            &.sort-asc:after {
+                top: -5*@px;
+                border-bottom-color: @card-list-header-triangle;
+            }
+            &.sort-desc:after {
+                top: 0;
+                border-top-color: @card-list-header-triangle;
             }
         }
 
