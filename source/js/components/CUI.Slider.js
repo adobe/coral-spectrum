@@ -1013,7 +1013,7 @@
   // Data API
   if (CUI.options.dataAPI) {
     $(document).on("cui-contentloaded.data-api", function(e) {
-        $(".slider[data-init='slider']", e.target).slider();
+        $(".slider[data-init~='slider']", e.target).slider();
     });
   }
 }(window.jQuery));

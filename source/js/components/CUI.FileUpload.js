@@ -771,7 +771,7 @@
     // Data API
     if (CUI.options.dataAPI) {
         $(document).on("cui-contentloaded.data-api", function(e) {
-            $("[data-init='fileupload']", e.target).fileUpload();
+            $("[data-init~='fileupload']", e.target).fileUpload();
         });
     }
 

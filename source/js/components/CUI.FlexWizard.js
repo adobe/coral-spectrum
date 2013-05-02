@@ -123,7 +123,7 @@
 
     if (CUI.options.dataAPI) {
         $(document).on("cui-contentloaded.data-api", function(e) {
-            $("[data-init=flexwizard]", e.target).flexWizard();
+            $("[data-init~=flexwizard]", e.target).flexWizard();
         });
     }
 }(window.jQuery));

@@ -675,7 +675,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
   // Data API
   if (CUI.options.dataAPI) {
     $(document).on("cui-contentloaded.data-api", function(e) {
-        $("[data-init=datepicker]", e.target).datepicker();
+        $("[data-init~=datepicker]", e.target).datepicker();
     });
   }
 

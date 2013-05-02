@@ -527,7 +527,7 @@
     // Data API
     if (CUI.options.dataAPI) {
         $(document).on("cui-contentloaded.data-api", function(e) {
-            $("[data-init='pathbrowser']", e.target).pathBrowser();
+            $("[data-init~='pathbrowser']", e.target).pathBrowser();
         });
     }
 

@@ -40,7 +40,7 @@
   // Data API
   if (CUI.options.dataAPI) {
     $(document).on("cui-contentloaded.data-api", function(e) {
-      $("[data-init=toolbar]", e.target).toolbar();
+      $("[data-init~=toolbar]", e.target).toolbar();
     });
   }
 }(window.jQuery));

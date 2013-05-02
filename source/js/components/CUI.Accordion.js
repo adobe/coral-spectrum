@@ -184,7 +184,7 @@
   
   // Data API
   $(document).on("cui-contentloaded.data-api", function(e) {
-    $("[data-init=accordion],[data-init=collapsible]").accordion();
+    $("[data-init~=accordion],[data-init~=collapsible]").accordion();
   });
 }(window.jQuery));
 

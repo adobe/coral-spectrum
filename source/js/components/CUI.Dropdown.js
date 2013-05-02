@@ -405,7 +405,7 @@
   // Data API
   if (CUI.options.dataAPI) {
     $(document).on("cui-contentloaded.data-api", function(e) {
-        $("[data-init=dropdown]", e.target).dropdown();
+        $("[data-init~=dropdown]", e.target).dropdown();
     });
   }
 }(window.jQuery));

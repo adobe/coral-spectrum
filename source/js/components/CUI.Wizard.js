@@ -402,7 +402,7 @@
   // Data API
   if (CUI.options.dataAPI) {
     $(document).on("cui-contentloaded.data-api", function(e) {
-      $("[data-init=wizard]", e.target).wizard();
+      $("[data-init~=wizard]", e.target).wizard();
     });
   }
 }(window.jQuery));

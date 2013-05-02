@@ -426,7 +426,7 @@
 
   if (CUI.options.dataAPI) {
       $(document).on('cui-contentloaded.data-api', function() {
-        $("[data-init=draggable-list]").draggableList();
+        $("[data-init~=draggable-list]").draggableList();
       });
   }
 }(window.jQuery));

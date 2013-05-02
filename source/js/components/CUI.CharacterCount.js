@@ -86,7 +86,7 @@ $('#myTextField').characterCount({maxlength: 50});
   
   // Data API
   $(document).on("cui-contentloaded.data-api", function(e) {
-    $("[data-init=character-count]", e.target).characterCount();
+    $("[data-init~=character-count]", e.target).characterCount();
   });
 }(window.jQuery));
 

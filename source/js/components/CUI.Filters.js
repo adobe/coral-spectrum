@@ -692,7 +692,7 @@ var index = filters.getSelectedIndex();
   
   // Data API
   $(document).on("cui-contentloaded.data-api", function(e) {
-    $("[data-init=filters]", e.target).filters();
+    $("[data-init~=filters]", e.target).filters();
   });
 }(window.jQuery));
 
