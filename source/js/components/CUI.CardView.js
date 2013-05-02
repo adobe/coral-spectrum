@@ -2833,9 +2833,12 @@ $cardView.find("article").removeClass("selected");
                 t1 = $e1.attr(this.attribute);
                 t2 = $e2.attr(this.attribute);
             }
+
             if (this.isNumeric) {
                 t1 = t1 * 1;
                 t2 = t2 * 1;
+                if (isNaN(t1)) t1 = 0;
+                if (isNaN(t2)) t2 = 0;
             }
 
             if (t1 > t2) return 1 * this.reverseMultiplier;
