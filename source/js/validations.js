@@ -134,4 +134,4 @@
             }
         }
     });
-})(jQuery, console);
+})(jQuery, window.console);

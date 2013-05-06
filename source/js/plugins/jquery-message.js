@@ -128,4 +128,4 @@ jQuery.message.register({
             }
         };
     })();
-})(jQuery, console);
+})(jQuery, window.console);
