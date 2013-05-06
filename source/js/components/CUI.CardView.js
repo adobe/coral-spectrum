@@ -2969,6 +2969,18 @@ $cardView.find("article").removeClass("selected");
      */
 
     /**
+     * Triggered after an item has been moved with drag&drop to a new place in the list by the user.
+     * @name CUI.CardView#item-moved
+     * @event
+     * @param {Object} evt          The event
+     * @param {Object} evt.oldPrev  The jQuery element that was previous to the item before dragging started, may be empty or a header
+     * @param {Object} evt.oldNext  The jQuery element that was next to the item before dragging started, may be empty
+     * @param {Object} evt.newPrev  The jQuery element that is now previous to the item, may be empty or a header
+     * @param {Object} evt.newNext  The jQuery element that is now next to the item, may be empty
+     * @param {boolean} evt.hasMoved  True if the item really moved or false if it has the some position after the drag action as before.
+     */
+
+    /**
      * Triggered right before a column sort action on the list is started (when the user clicks on a column). The client side
      * sorting can be vetoed by setting preventDefault() on the event object. The event target is set to the column header the user clicked on.
      * The sortstart event is always triggered, even if the column has no client side sort configuration.
