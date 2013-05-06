@@ -155,22 +155,23 @@
             }
         }
 
-        // The sort triangle
+        /* The sort triangle
+           Only for historical reasons: The sorting triangle was never used the way it was implemented in prior versions
+           but we need the related <i> for aligning the header.
+
+           Use .image in new lists.
+        */
         .sort {
             float: left;
             position: relative;
+        }
 
-            &:before {
-                content: " ";
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                width: 0;
-                height: 0;
-                margin: -3*@px;
-                border: 5*@px solid transparent;
-                border-top-color: @card-list-header-triangle;
-            }
+        /*
+          The image header column should not show any image outlines
+        */
+        .image {
+            border: none;
+            background: none;
         }
     }
 }
