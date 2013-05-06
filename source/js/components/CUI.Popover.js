@@ -308,6 +308,9 @@
       var $trigger = $(this),
           $target = CUI.util.getDataTarget($trigger);
 
+      // if data target is not defined try to find the popover as a sibling
+      $target = $target && $target.length > 0 ? $target : $trigger.next('.popover');
+
       var popover = $target.popover($.extend({pointAt: $trigger}, $target.data(), $trigger.data())).data('popover');
 
       popover.toggleVisibility();
