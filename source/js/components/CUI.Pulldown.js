@@ -40,6 +40,10 @@
                 this.hidePopover();
             }.bind(this), 200);
         }.bind(this));
+
+        $popover.fipo("tap", "click", "ul > li > a", function() {
+            this.hidePopover();
+        }.bind(this));
     },
 
     _readDataFromMarkup: function () {
