@@ -15,7 +15,9 @@
   from Adobe Systems Incorporated.
 */
 (function($, console) {
-    // This is the place where the validation rules and messages are defined
+    // This is the place where the validation rules and messages are defined.
+    // But only for validation that is generic or make sense at Coral level.
+    // Otherwise please put your validation in your own file at your level.
 
     "use strict";
 
