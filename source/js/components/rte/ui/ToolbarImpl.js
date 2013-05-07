@@ -67,79 +67,17 @@
         },
 
         /**
-         * <p>Determines the "clipping parent" of the specified DOM object.</p>
-         * <p>The clipping parent is a DOM object that might clip the visible area of the
-         * specified DOM object by specifiying a suitable "overflow" attribute.</p>
-         * @param {jQuery} $dom The jQuery-wrapped DOM object
-         * @return {jQuery} The clipping parent as a jQuery object; undefined if no clipping
-         *         parent exists
-         * @private
-         */
-        _getClippingParent: function($dom) {
-            var $clipParent = undefined;
-            var $body = $(document.body);
-            while ($dom[0] !== $body[0]) {
-                var ovf = $dom.css("overflow");
-                var ovfX = $dom.css("overflowX");
-                var ovfY = $dom.css("overflowY");
-                if ((ovfX !== "visible") || (ovfY !== "visible") || (ovf !== "visible")) {
-                    $clipParent = $dom;
-                    break;
-                }
-                $dom = $dom.parent();
-            }
-            return $clipParent;
-        },
-
-        _getEditorOffsets: function() {
-            var top = 0;
-            var left = 0;
-            var context = this.editorKernel.getEditContext();
-            var editorDoc = context.doc;
-            while (editorDoc !== document) {
-                var win = CUI.rte.Common.getWindowForDocument(editorDoc);
-                if (win.frameElement) {
-                    var offsets = $(win.frameElement).offset();
-                    top += offsets.top;
-                    left += offsets.left;
-                } else {
-                    break;
-                }
-                editorDoc = win.frameElement.ownerDocument;
-            }
-            return {
-                "top": top,
-                "left": left
-            };
-        },
-
-        /**
          * Calculates the internal offsets for the toolbar. Those are required to correctly
          * position a toolbar that is contained in another document than the edited div.
          * @private
          * @return {{top:Number,left:Number}} The offsets
          */
         _calcInternalOffsets: function() {
-            this._isClipped = this._isUnderClipParent();
+            this._isClipped = CUI.rte.UIUtils.isUnder(this.$clipParent, this.$container);
             if (this._isClipped) {
                 return this.$clipParent.offset();
             }
-            return this._getEditorOffsets();
-        },
-
-        _isUnderClipParent: function() {
-            if (!this.$clipParent) {
-                return false;
-            }
-            var clipParent = this.$clipParent[0];
-            var toTest = this.$container[0];
-            while (toTest.tagName !== "BODY") {
-                if (toTest === clipParent) {
-                    return true;
-                }
-                toTest = toTest.parentNode;
-            }
-            return false;
+            return CUI.rte.UIUtils.getEditorOffsets();
         },
 
         /**
@@ -475,7 +413,7 @@
             this.editorKernel = editorKernel;
             this.editorKernel.addUIListener("updatestate", this._handleUpdateState, this);
             this.$toolbar.addClass(CUI.rte.Theme.TOOLBAR_ACTIVE);
-            this.$clipParent = this._getClippingParent(this.$container);
+            this.$clipParent = CUI.rte.UIUtils.getClippingParent(this.$container);
             this._offsets = this._calcInternalOffsets();
             this._initializePopovers();
             this._updateUI();
