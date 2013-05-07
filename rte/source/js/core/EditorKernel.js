@@ -299,7 +299,7 @@ CUI.rte.EditorKernel = new Class({
     lockCount: 0,
 
 
-    construct: function(config) {
+    construct: function(config, defaultPluginConfigFn) {
         config = config || { };
         CUI.rte.Utils.applyDefaults(config, {
             "linkInternalize": [ {
@@ -319,7 +319,7 @@ CUI.rte.EditorKernel = new Class({
             CUI.rte.plugins.PluginRegistry.createRegisteredPlugins(this);
         CUI.rte.Compatibility.moveDeprecatedPluginConfig(config);
         CUI.rte.Compatibility.moveDeprecatedHtmlRules(config);
-        CUI.rte.Compatibility.configurePlugins(config, this);
+        CUI.rte.Compatibility.configurePlugins(config, this, defaultPluginConfigFn);
         delete config.rtePlugins;
         // Initialize HTML rules
         if (config.htmlRules) {

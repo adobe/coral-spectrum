@@ -41,9 +41,9 @@ CUI.rte.plugins.ControlPlugin = new Class({
         var plg = CUI.rte.plugins;
         var ui = CUI.rte.ui;
         if (this.isFeatureEnabled("close")) {
-            this.linkUI = tbGenerator.createElement("close", this, false,
+            this.closeUI = tbGenerator.createElement("close", this, false,
                     this.getTooltip("close"));
-            tbGenerator.addElement("control", plg.Plugin.SORT_LINKS, this.linkUI, 10);
+            tbGenerator.addElement("control", plg.Plugin.SORT_MAX -1, this.closeUI, 10);
         }
     },
 

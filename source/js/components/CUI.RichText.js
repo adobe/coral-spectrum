@@ -333,7 +333,13 @@
 
         start: function(config) {
             if (this.editorKernel === null) {
-                this.editorKernel = new CUI.rte.DivKernel(config);
+                this.editorKernel = new CUI.rte.DivKernel(config,
+                        function(plugin, feature) {
+                            if (plugin === "control") {
+                                return (feature === "close");
+                            }
+                            return undefined;
+                        });
             }
             var ua = CUI.rte.Common.ua;
             this.ignoreNextClick = ua.isTouch;

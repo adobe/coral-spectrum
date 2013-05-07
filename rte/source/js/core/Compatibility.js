@@ -194,9 +194,11 @@ CUI.rte.Compatibility = function() {
          * {@link CUI.rte.RichText#rtePlugins}.
          * @param {Object} config The config object to be used for configuration
          * @param {CUI.rte.EditorKernel} editorKernel The editor kernel
+         * @param {Function} defaultPluginConfigFn (optional) A function that checks
+         *        for default plugin configuration
          * @private
          */
-        configurePlugins: function(config, editorKernel) {
+        configurePlugins: function(config, editorKernel, defaultPluginConfigFn) {
             var isButtonEnabled = function(group, buttonId) {
                 var isGroupEnabled = false;
                 var groupConfig = null;
@@ -267,7 +269,13 @@ CUI.rte.Compatibility = function() {
                     var features = plugin.getFeatures();
                     var featCnt = features.length;
                     for (var f = 0; f < featCnt; f++) {
-                        var isEnabled = checkPluginConfig(pluginId, features[f]);
+                        var isEnabled = undefined;
+                        if (defaultPluginConfigFn) {
+                            isEnabled = defaultPluginConfigFn(pluginId, features[f]);
+                        }
+                        if (isEnabled === undefined) {
+                            isEnabled = checkPluginConfig(pluginId, features[f]);
+                        }
                         if (isEnabled !== undefined) {
                             if (!plgConfig.features) {
                                 plgConfig.features = [ ];

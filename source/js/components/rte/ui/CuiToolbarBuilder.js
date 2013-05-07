@@ -167,6 +167,7 @@
                     var itemCnt = itemDefs.length;
                     for (var i = 0; i < itemCnt; i++) {
                         var itemToAdd = itemDefs[i];
+                        console.log(itemToAdd);
                         if (itemToAdd && itemToAdd.length) {
                             if (itemToAdd.charAt(0) === "#") {
                                 // popover trigger
@@ -334,7 +335,8 @@
                 "#justify",
                 "#lists",
                 "links#modifylink",
-                "links#unlink"
+                "links#unlink",
+                "control#close"
             ],
             "popovers": {
                 "format": {
