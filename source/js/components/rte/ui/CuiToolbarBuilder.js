@@ -37,12 +37,14 @@
         "lists#outdent": "icon-textindentdecrease",
         "lists#indent": "icon-textindentincrease",
         "links#modifylink": "icon-link",
-        "links#unlink": "icon-linkoff"
+        "links#unlink": "icon-linkoff",
+        "control#close": "icon-close"
     };
 
     var CLASSES = {
         "#format": "multi-select",
-        "#justify": "single-select"
+        "#justify": "single-select",
+        "control#close": "modechanger"
     };
 
 
