@@ -317,9 +317,10 @@ var index = filters.getSelectedIndex();
             this._correctInputFieldWidth();
         }.bind(this));
         
-        this.$element.on("focus", "input", function() {
+        this.$element.on("focus", "input", function(event) {
             if (this.options.disabled) return;
             this.$element.addClass("focus");
+            event.preventDefault();
         }.bind(this));
         
         this.$element.on("blur", "input", function() {
