@@ -21,11 +21,16 @@ div.edited {
     vertical-align: top;
     pointer-events: auto;
 
+    &:before {
+        color: #b4b4b4;
+        opacity: 1;
+        font-size: medium;
+    }
+
     &.item {
         min-width: 60*@px;
         width: 60*@px;
         height: 44*@px;
-        color: #cecece;
         background-color: #454545;
         background-image: none;
         padding: 0;
@@ -34,28 +39,37 @@ div.edited {
     }
 
     &.selected {
-        background-color: #151515;
-        color: #d0d0d0;
+        background-color: #373737;
+        color: #ffffff;
     }
 
-    &.disabled {
-        color: #eeeeee;
-        opacity: 0.4;
+    &.disabled:before {
+        color: #b4b4b4;
+        opacity: 0.2;
     }
 
-    &.triggered {
-        background-color: #ffffff;
-        color: #0f0f0f !important;
+    &.triggered:before {
+        color: #4097dc !important;
+        opacity: 1 !important;
     }
 
     &.trigger {
-        background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNSIgaGVpZ2h0PSI1IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48cG9seWdvbiBmaWxsPSIjQ0NDQ0NDIiBwb2ludHM9IjQsNCAwLDQgNCwwICIvPjwvc3ZnPg==') !important;
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNyIgaGVpZ2h0PSI3IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48cG9seWdvbiBmaWxsPSIjOTA5MDkwIiBwb2ludHM9IjQsNCAwLDQgNCwwICIvPjwvc3ZnPg==') !important;
         background-repeat: no-repeat !important;
         background-position: 100% 100% !important;
+
+        &:before {
+            color: #b4b4b4;
+            opacity: 1;
+        }
 
         &.multi-select {
             &.items-selected {
                 background-color: #2b2b2b;
+                &:before {
+                    color: #b4b4b4;
+                    opacity: 1;
+                }
             }
         }
     }
@@ -175,9 +189,8 @@ div.edited {
             opacity: 0.4;
         }
 
-        &.triggered {
-            background-color: #ffffff;
-            color: #0f0f0f !important;
+        &.triggered:before {
+            color: #4097dc !important;
         }
 
         &.trigger {
@@ -194,19 +207,6 @@ div.edited {
             filter: none;
         }
 
-        /* specific styles */
-
-        &.bold {
-            font-weight: bold;
-        }
-
-        &.italic {
-            font-style: italic;
-        }
-
-        &.underline {
-            text-decoration: underline;
-        }
     }
 
 }

@@ -145,8 +145,6 @@
         use: function(ref, $trigger, $toolbar) {
             this.$popoverTrigger = $trigger;
             this.$popoverTrigger.addClass("triggered");
-            this.$popoverTrigger.removeClass("white");
-            this.$popoverTrigger.addClass("black");
             if (ref.jquery) {
                 this.$popover = ref;
             } else {
@@ -178,8 +176,6 @@
         hide: function() {
             if (this.$popoverTrigger) {
                 this.$popoverTrigger.removeClass("triggered");
-                this.$popoverTrigger.addClass("white");
-                this.$popoverTrigger.removeClass("black");
                 this.$popoverTrigger = null;
             }
             var mustHide = !!this.$popover;
