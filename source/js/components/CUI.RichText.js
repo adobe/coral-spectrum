@@ -43,6 +43,10 @@
             return false;
         },
 
+        _finishRequested: function() {
+            this.finish(false);
+        },
+
         _handleToolbarOnSelectionChange: function() {
             var com = CUI.rte.Common;
             var editContext = this.editorKernel.getEditContext();
@@ -177,6 +181,7 @@
             this.editorKernel.setUnprocessedHtml(initialContent || "");
             this.editorKernel.initializeCaret(true);
             this.editorKernel.execCmd("initializeundo");
+            this.editorKernel.addUIListener("requestClose", this._finishRequested, this);
             if (CUI.rte.Common.ua.isTouch) {
                 // show the toolbar with a slight delay on touch devices; this looks a lot
                 // smoother, as the device is most likely to scroll in the first
@@ -295,6 +300,7 @@
 
         deactivateEditorKernel: function() {
             if (this.editorKernel != null) {
+                this.editorKernel.removeUIListener("requestClose");
                 this.editorKernel.removeUIListener("updatestate");
                 this.editorKernel.suspendEventHandling();
                 this.editorKernel.destroyToolbar();
