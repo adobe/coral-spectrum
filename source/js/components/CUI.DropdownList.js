@@ -105,6 +105,13 @@
     },
     
     /**
+     * Toggle list visibility based on current status
+     */
+    toggle: function() {
+        this.isVisible() ? this.hide() : this.show();
+    },
+
+    /**
      * Updates the rendering of this widget.
      */
     update: function() {

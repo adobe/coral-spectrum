@@ -129,15 +129,20 @@
         
         this.buttonElement.on("dropdown-list:select", "", this._processSelect.bind(this));
         
-        this.buttonElement.on("click", "", function(event) {
+        this.buttonElement.on("mousedown", "", function(event) {
             event.preventDefault();
+            this.dropdownList.preventHiding = false;
             if (this.autocompleteList !== null) {
                 this._adjustAutocompleter();
             } else {
-                this.dropdownList.show();
+                this.dropdownList.toggle();
             }
         }.bind(this));
-        
+        this.buttonElement.on("mouseup", "", function(event) {
+            event.preventDefault();
+            this.dropdownList.preventHiding = true;
+        }.bind(this));
+
         // Auto completion
         this.inputElement.on("click", "", function() {
            if (this.autocompleteList !== null) this._adjustAutocompleter();
@@ -200,7 +205,7 @@
             this.autocompleteList.set({
                options: result
             });
-            this.autocompleteList.show();
+            this.autocompleteList.toggle();
         }.bind(this);
         
         if (this.options.autocompleteCallback) {
@@ -277,7 +282,7 @@
             }
             this.syncSelectElement.change();
         }
-        
+
         this._update(true);
     },
     
