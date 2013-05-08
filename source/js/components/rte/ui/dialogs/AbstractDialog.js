@@ -91,6 +91,10 @@
             this.mask = new CUI.rte.ui.cui.Mask();
         },
 
+        destroy: function() {
+            this.$dialog.off("tap.rte-dialog click.rte-dialog");
+        },
+
         initializeEdit: function(editorKernel, objToEdit, applyFn) {
             this.editorKernel = editorKernel;
             this.popoverManager = this.editorKernel.toolbar.popover;
