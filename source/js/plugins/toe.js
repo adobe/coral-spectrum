@@ -24,6 +24,15 @@
             gestures[namespace] = gesture;
         },
 
+        addEventParam: function (point, extra) {
+            var param = {
+                pageX: point.x,
+                pageY: point.y
+            };
+
+            return $.extend(param, extra);
+        },
+
         Event: function (event) { // normalizes and simplifies the event object
             var normalizedEvent = {
                 type: event.type,
@@ -207,7 +216,7 @@
             if (duration < opt.duration && distance < opt.distance) {
                 // fire if the amount of fingers match
                 if (state[namespace].finger === opt.finger) {
-                    $(event.target).trigger($.Event(namespace, state[namespace]));
+                    $(event.target).trigger($.Event(namespace, touch.addEventParam(state.start, state[namespace])));
                 }
             }
         }
@@ -236,7 +245,7 @@
             timer = setTimeout(function () {
                 if (!abort) {
                     if (state[namespace].finger === opt.finger) {
-                        $(event.target).trigger($.Event(namespace, state[namespace]));
+                        $(event.target).trigger($.Event(namespace, touch.addEventParam(state.start, state[namespace])));
                     }
                 }
             }, opt.duration);
