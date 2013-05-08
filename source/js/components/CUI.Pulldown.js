@@ -56,15 +56,17 @@
     _keepFocus: function() {
         var $link = this.$element.find('a').first();
 
-        clearTimeout(this.timeout);
-        this.timeout = null;
-        $link.focus();
+        if (!$link.is(".disabled, [disabled]")) {
+            clearTimeout(this.timeout);
+            this.timeout = null;
+            $link.focus();
+        }
     },
 
     togglePopover: function() {
         if (this.popoverShown) {
             this.hidePopover();
-        } else {
+        } else if (!this.$element.find('a').first().is(".disabled, [disabled]")) {
             this.showPopover();
         }
     },
@@ -78,6 +80,15 @@
     hidePopover: function() {
         this.$element.find('.popover').hide();
         this.popoverShown = false;
+    },
+
+    setDisabled: function(disabled) {
+        if (disabled === true) {
+            this.$element.find('a').first().addClass('disabled');
+            // In case the popover was displayed prior to blocking the pulldown
+            this.hidePopover();
+        } else
+            this.$element.find('a').first().removeClass('disabled');
     },
 
     _placePopover: function() {
