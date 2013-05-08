@@ -140,6 +140,7 @@
 
             var com = CUI.rte.Common;
             var uiSettings = this._getUISettings(options);
+            var addClasses;
 
             var items = [ ];
             for (var e = 0; e < elements.length; e++) {
@@ -167,11 +168,10 @@
                     var itemCnt = itemDefs.length;
                     for (var i = 0; i < itemCnt; i++) {
                         var itemToAdd = itemDefs[i];
-                        console.log(itemToAdd);
                         if (itemToAdd && itemToAdd.length) {
                             if (itemToAdd.charAt(0) === "#") {
                                 // popover trigger
-                                var addClasses = this._getClassesForCommand(itemToAdd);
+                                addClasses = this._getClassesForCommand(itemToAdd);
                                 addClasses = (addClasses ? " " + addClasses : "");
                                 tbItems.push(triggerTpl({
                                     "ref": itemToAdd,
@@ -182,8 +182,11 @@
                                 // regular item
                                 var element = getItem(itemToAdd);
                                 if (element) {
+                                    addClasses = this._getClassesForCommand(itemToAdd);
+                                    addClasses = (addClasses ? " " + addClasses : "");
                                     element.icon = element.icon ||
                                             this._getIconForCommand(element.ref);
+                                    element.addClasses = addClasses;
                                     tbItems.push(itemTpl(element));
                                 }
                             }
@@ -205,8 +208,12 @@
                             for (var pi = 0; pi < poItemCnt; pi++) {
                                 var poItem = getItem(poItemDefs[pi]);
                                 if (poItem) {
-                                    poItem.icon = poItem.icon ||
-                                            this._getIconForCommand(poItem.ref);
+                                    var cmd = poItem.ref;
+                                    addClasses = this._getClassesForCommand(cmd);
+                                    addClasses = (addClasses ? " " + addClasses : "");
+                                    poItem.icon =
+                                            poItem.icon || this._getIconForCommand(cmd);
+                                    poItem.addClasses = addClasses;
                                     poItems.push(popoverItemTpl(poItem));
                                 }
                             }
