@@ -42,7 +42,10 @@
         }.bind(this));
 
         $popover.fipo("tap", "click", "ul > li > a", function() {
-            this.hidePopover();
+            var self = this;
+            setTimeout(function() {
+                self.hidePopover();
+            }, 500);
         }.bind(this));
     },
 
