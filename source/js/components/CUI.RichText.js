@@ -314,8 +314,8 @@
                 var $body = $(body);
                 var $uiBody = $(document.body);
                 var $doc = $(context.doc);
-                CUI.rte.Eventing.un(body, "keyup", this.handleKeyUp, this);
                 // Widget
+                CUI.rte.Eventing.un(body, "keyup", this.handleKeyUp, this);
                 this.$textContainer.off("blur.rte touchstart.rte tap.rte click.rte");
                 $body.off("focus.rte tap.rte-ooa click.rte-ooa");
                 $body.off("touchstart.rte-ooa mousedown.rte-ooa");
