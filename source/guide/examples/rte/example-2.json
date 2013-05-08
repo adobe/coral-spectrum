@@ -56,8 +56,10 @@
                     "#format",
                     "#justify",
                     "#lists",
+                    "-",
                     "links#modifylink",
                     "links#unlink",
+                    "-",
                     "control#close"
                 ],
                 "popovers": {
