@@ -51,7 +51,7 @@
             var $cont = $(toolbar.getToolbarContainer());
             var self = this;
             this.$ui = $cont.find('button[data-action="' + pluginId + '#' + this.id + '"]');
-            this.$ui.bind("click.rte.handler", function(e) {
+            this.$ui.on("click.rte-handler", function(e) {
                 if (!self.$ui.hasClass(CUI.rte.Theme.TOOLBARITEM_DISABLED_CLASS)) {
                     var editContext = self.plugin.editorKernel.getEditContext();
                     editContext.setState("CUI.SelectionLock", 1);
@@ -134,7 +134,7 @@
         },
 
         destroy: function() {
-            this.$ui.off("click.rte.handler");
+            this.$ui.off("click.rte-handler");
         }
 
     });

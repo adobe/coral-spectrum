@@ -311,15 +311,19 @@
             if (this.editorKernel != null) {
                 var context = this.editorKernel.getEditContext();
                 var body = context.doc.body;
-                CUI.rte.Eventing.un(body, "keyup", this.handleKeyUp, this);
-                this.$textContainer.off("blur.rte tap.rte click.rte");
-                // TODO adjust to corresponding DOM events after evenr handling fully works
                 var $body = $(body);
+                var $uiBody = $(document.body);
                 var $doc = $(context.doc);
-                $body.off("focus.rte tap.rte-ooa click.rte-ooa touchstart.rte-ooa");
-                $body.off("mousedown.rte-ooa tap.rte-item click.rte-item");
-                $body.off("mousemove.rte-toolbarhide");
-                $body.off("mouseup.rte-toolbarhide mousedown.rte-toolbarhide");
+                // Widget
+                CUI.rte.Eventing.un(body, "keyup", this.handleKeyUp, this);
+                this.$textContainer.off("blur.rte touchstart.rte tap.rte click.rte");
+                $body.off("focus.rte tap.rte-ooa click.rte-ooa");
+                $body.off("touchstart.rte-ooa mousedown.rte-ooa");
+                // Toolbar
+                $uiBody.off("tap.rte-item click.rte-item");
+                this.$textContainer.off("mousemove.rte-toolbarhide");
+                this.$textContainer.off(
+                        "mouseup.rte-toolbarhide mousedown.rte-toolbarhide");
                 $doc.off("selectionchange.rte-toolbarhide");
             }
         },
