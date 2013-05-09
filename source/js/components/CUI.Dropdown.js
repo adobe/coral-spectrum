@@ -50,6 +50,7 @@
       @param {String} [options.placeholder="Select"]      Placeholder string to display in empty widget
       @param {boolean} [options.disabled=false]      Is this widget disabled?
       @param {boolean} [options.hasError=false]      Does this widget contain an error?
+      @param {boolean} [options.noWidth=false]      Don't set dropdown list width?
       @param {Function} [options.autocompleteCallback=use options]      Callback for autocompletion: callback(handler, searchFor) with handler is a result callback function with handler(results, searchFor). See example page.
       
     */
@@ -83,7 +84,8 @@
         placeholder: "Select",
         disabled: false,
         editable: false,
-        hasError: false
+        hasError: false,
+        noWidth: false
     },
     
     dropdownList: null,
@@ -114,7 +116,8 @@
             element: this.buttonElement,
             positioningElement: this.positioningElement,
             options: this.options.options,
-            optionRenderer: this._optionRenderer.bind(this)
+            optionRenderer: this._optionRenderer.bind(this),
+            noWidth: this.options.noWidth
         });
 
         if (this.options.editable) {
@@ -123,6 +126,7 @@
                 positioningElement: this.positioningElement,
                 options: this.options.options,
                 optionRenderer: this._optionRendererAutocomplete.bind(this),
+                noWidth: this.options.noWidth,
                 cssClass: "autocomplete-results"
             });
         }
@@ -343,6 +347,7 @@
         if (this.$element.attr("data-editable")) this.options.editable = true;
         if (this.$element.attr("data-error")) this.options.hasError = true;
         if (this.$element.hasClass("error")) this.options.hasError = true;
+        if (this.$element.attr("data-nowidth")) this.options.noWidth = true;
     },
     
     /** @ignore */
