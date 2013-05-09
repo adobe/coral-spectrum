@@ -86,7 +86,13 @@ header.top {
 
     a {
       font-size: 18*@px;
-      color: #fff;
+      font-weight: bold;
+      color: @header-crumb-text-color;
+
+      &:before,
+      &:hover:before {
+        color: @header-crumb-chevron-color;
+      }
     }
   }
 
