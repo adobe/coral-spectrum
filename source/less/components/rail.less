@@ -296,6 +296,8 @@ div.rail {
 
             >a,
             >span {
+                font-family: AdobeCleanLight;
+                letter-spacing: 0.05em;
 
                 border-bottom: @px solid @rail-section-border-color;
                 .box-shadow(inset 0 1px 0 @rail-section-highlight-color); /* 1px to ensure rendering in IE9 which cuts rem units to 2dp (0.96px) */
@@ -308,7 +310,6 @@ div.rail {
                 padding-left: 12*@px;
 
                 font-size: 18*@px; /* was 0.85rem;*/
-                font-weight: bold;
 		        &, a {
                 	color: @rail-font-color;
                 }
