@@ -151,7 +151,7 @@
 
     var namespace = 'swipe', cfg = {
             distance: 40, // minimum
-            duration: 900, // maximum
+            duration: 1200, // maximum
             direction: 'all'
         };
 
