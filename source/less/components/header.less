@@ -10,25 +10,29 @@ header.top {
 
   background-color: @header-background-color;
 
-  .box-shadow(0 0.1rem 0.45rem rgba(0, 0, 0, .35)); // TBD: make sure this matches mocks...
-
   color: @header-nav-font-color;
 
   white-space: nowrap;
 
+
   div.logo {
     display: inline-block;
-    height: @header-height;
-    padding: 0 0.25rem 0 0.75rem;
+    
+    padding: @header-logo-padding 6*@px @header-logo-padding 15*@px;
 
-    vertical-align: top;
+    vertical-align: bottom;
 
-    line-height: @header-height - 0.2rem;
     text-align: center;
 
     img {
       height: @header-logo-size;
       width: @header-logo-size; 
+    }
+
+    i.medium {
+      min-width: @header-logo-size;
+      min-height: @header-logo-size;
+      font-size: 1.4rem;
     }
 
     > a {
@@ -52,7 +56,7 @@ header.top {
     margin-left: 0;
   }
 
-  nav.main {
+  > nav.main {
 
     display: inline-block;
 
@@ -70,7 +74,7 @@ header.top {
       margin-right: @header-nav-spacing / 2;
 
       line-height: @header-height;
-      font-size: @header-nav-font-size;  // 18px
+      font-size: @header-nav-font-size;
 
       text-decoration: none;
 
@@ -81,16 +85,21 @@ header.top {
     }
   }
 
-  >nav.crumbs {
+  > nav.crumbs {
     display: inline-block; // NEVER set a box to display: inline
 
     a {
-      font-size: 18*@px;
+      font-size: @header-nav-font-size;
       color: @header-crumb-text-color;
 
       &:before,
       &:hover:before {
         color: @header-crumb-chevron-color;
+      }
+      
+      &:hover,
+      &:focus {
+        color: @header-nav-down-font-color;
       }
     }
   }
@@ -102,22 +111,28 @@ header.top {
 
     display: inline-block;
     height: @header-height;
-    padding-right: 16*@px;
+    padding-right: 15*@px;
 
     line-height: @header-height;
+
+    > a,
+    > div {
+      margin-left: 11*@px;
+    }
 
     > a {
       display: inline-block;
       height: @header-height;
       line-height: @header-height;
       vertical-align: top;
+      // color: @header-nav-font-color;
+      font-size: @header-nav-font-size;
     }
 
     .icon-user {
-      margin-left: 10*@px;
-      &:before {
-        font-size: 1.2rem;
-      }
+      font-size: 1.3rem;
+      min-width: 24 * @px;
+      min-height: 24 * @px;
     }
   }
 }
