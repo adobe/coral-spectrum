@@ -31,15 +31,6 @@
         margin: 6px 9px 8px 9px;
     }
 
-    > button[disabled] {
-        opacity: 0.5;
-        color: @wizard-button-text-color;
-
-        &:hover {
-            color: @wizard-button-text-color;
-        }
-    }
-
     > button.back, > a.button.back {
         background: @wizard-back-button-background-color;
         border-color: @wizard-back-button-border-color;
@@ -48,6 +39,12 @@
     > button.next, > a.button.next {
         background: @wizard-next-button-background-color;
         border-color: @wizard-next-button-border-color;
+    }
+
+    > button[disabled], > a.button.disabled {
+        color: @wizard-disabled-button-text-color;
+        background: @wizard-disabled-button-background-color;
+        border-color: @wizard-disabled-button-border-color;
     }
 
     h1 {
