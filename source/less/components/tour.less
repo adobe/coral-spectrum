@@ -1,6 +1,32 @@
 /**
 Class: .tour
 */
+// Background
+.tour-backdrop { // from modal
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: @zindexModalBackdrop;
+
+  background-color: @modal-underlay-background-color;
+}
+
 .tour {
-    
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: @zindexModal;
+
+  display: none;
+  width: 873*@px;
+  height: 617*@px;
+
+  outline: none; // Firefox shows focus outline
+
+  border: 0.625rem solid @modal-border-color;
+
+  background-color: @modal-body-background-color;
+  .background-clip(padding-box); // don't let the border overlap the background    
 }
