@@ -171,27 +171,6 @@
                 return $clipParent;
             },
 
-            getEditorOffsets: function(context) {
-                var top = 0;
-                var left = 0;
-                var editorDoc = context.doc;
-                while (editorDoc !== document) {
-                    var win = CUI.rte.Common.getWindowForDocument(editorDoc);
-                    if (win.frameElement) {
-                        var offsets = $(win.frameElement).offset();
-                        top += offsets.top;
-                        left += offsets.left;
-                    } else {
-                        break;
-                    }
-                    editorDoc = win.frameElement.ownerDocument;
-                }
-                return {
-                    "top": top,
-                    "left": left
-                };
-            },
-
             isUnder: function($parent, $obj) {
                 if (!$parent || ($parent.length === 0)) {
                     return false;

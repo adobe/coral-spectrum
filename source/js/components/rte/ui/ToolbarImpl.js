@@ -77,7 +77,10 @@
             if (this._isClipped) {
                 return this.$clipParent.offset();
             }
-            return CUI.rte.UIUtils.getEditorOffsets();
+            return {
+                "top": 0,
+                "left": 0
+            };
         },
 
         /**
@@ -87,10 +90,16 @@
          */
         _calcOptimum: function(popoverData) {
             var editablePos = this.$editable.offset();
+            var scrollTop = 0;
+            var scrollLeft = 0;
+            if (this._isClipped) {
+                scrollTop = this.$clipParent.scrollTop();
+                scrollLeft = this.$clipParent.scrollLeft();
+            }
             var tbHeight = this.$toolbar.outerHeight();
             return {
-                "left": editablePos.left,
-                "top": editablePos.top - tbHeight
+                "left": editablePos.left - scrollLeft,
+                "top": editablePos.top - tbHeight - scrollTop
             };
         },
 
@@ -130,7 +139,7 @@
                 forbidden = {
                     "start": yStart - (isSel ? com.ua.selectionHandlesHeight : 0),
                     "end": yEnd + (isSel ? com.ua.selectionHandlesHeight : 0)
-                }
+                };
             }
             return forbidden;
         },
@@ -204,19 +213,20 @@
                 tbTop = avail.max - totalHeight;
                 popoverAlign = "bottom";
             } else {
-                // if we can keep the toolbar at the same position by changing the alignment of
-                // the popover, we try it
+                // if we can keep the toolbar at the same position by changing the alignment
+                // of the popover, we try it
                 if ((tbTop - popoverData.height) < avail.min) {
                     popoverAlign = "bottom";
                 }
             }
             // check if we need to move the toolbar due to current selection state and
-            // what has probably been added to screen by the browser (for example, the callout
-            // and the screen keyboard on an iPad)
+            // what has probably been added to screen by the browser (for example, the
+            // callout and the screen keyboard on an iPad)
             var forbidden = this._calcForbidden(selection);
             if (forbidden) {
                 var totalPos = this._calcUITotal(tbTop, tbHeight, popoverData.height,
                         popoverAlign);
+                console.log(forbidden, totalPos);
                 if ((totalPos.y2 > forbidden.start) && (totalPos.y1 < forbidden.end)) {
                     // The toolbar is in the "forbidden area", overlapping either the
                     // current selection and/or the callout (iPad). In such cases, we first
@@ -246,7 +256,8 @@
             }
             // calculate popover position
             var popoverTop = (popoverAlign === "top" ?
-                    tbTop - popoverData.height : tbTop + tbHeight + popoverData.arrowHeight);
+                    tbTop - popoverData.height :
+                    tbTop + tbHeight + popoverData.arrowHeight);
             this.preferredToolbarPos = {
                 "left": tbLeft,
                 "top": tbTop
@@ -411,6 +422,7 @@
 
         startEditing: function(editorKernel) {
             this.editorKernel = editorKernel;
+            var context = this.editorKernel.getEditContext();
             this.editorKernel.addUIListener("updatestate", this._handleUpdateState, this);
             this.$toolbar.addClass(CUI.rte.Theme.TOOLBAR_ACTIVE);
             this.$clipParent = CUI.rte.UIUtils.getClippingParent(this.$container);
