@@ -181,9 +181,16 @@
                     availHeight -= offsets.top;
                 }
             }
+            // special case: on touch, we need to consider the main window's scroll offset
+            // as well
+            // TODO check if required on desktop as well (when used outside a clipParent)
+            var min = 0;
+            if (com.ua.isTouch) {
+                min = $win.scrollTop();
+            }
             return {
-                "min": 0,
-                "max": availHeight
+                "min": min,
+                "max": min + availHeight
             }
         },
 
