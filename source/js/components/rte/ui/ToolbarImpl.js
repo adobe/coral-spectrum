@@ -56,6 +56,10 @@
 
         _isClipped: false,
 
+        NO_OFFSETS: {
+            "top": 0,
+            "left": 0
+        },
 
         construct: function(elementMap, $editable, tbType) {
             this.elementMap = elementMap;
@@ -64,6 +68,20 @@
             this.$container = CUI.rte.UIUtils.getUIContainer(this.$editable);
             this.$toolbar = CUI.rte.UIUtils.getToolbar(this.$editable, tbType);
             this.popover = new CUI.rte.ui.cui.PopoverManager(this.$container, tbType);
+        },
+
+        _getClipOffsets: function() {
+            var context = this.editorKernel.getEditContext();
+            if (context.doc !== document) {
+                if (this._isClipped) {
+                    return {
+                        "top": this.$clipParent.scrollTop(),
+                        "left": this.$clipParent.scrollLeft()
+                    };
+                }
+                return this.NO_OFFSETS;
+            }
+            return (this._isClipped ? this.$clipParent.offset() : this.NO_OFFSETS);
         },
 
         /**
@@ -77,10 +95,7 @@
             if (this._isClipped) {
                 return this.$clipParent.offset();
             }
-            return {
-                "top": 0,
-                "left": 0
-            };
+            return this.NO_OFFSETS;
         },
 
         /**
@@ -90,16 +105,17 @@
          */
         _calcOptimum: function(popoverData) {
             var editablePos = this.$editable.offset();
-            var scrollTop = 0;
-            var scrollLeft = 0;
+            var offsetTop = 0;
+            var offsetLeft = 0;
             if (this._isClipped) {
-                scrollTop = this.$clipParent.scrollTop();
-                scrollLeft = this.$clipParent.scrollLeft();
+                var offset = this._getClipOffsets();
+                offsetTop = offset.top;
+                offsetLeft = offset.left;
             }
             var tbHeight = this.$toolbar.outerHeight();
             return {
-                "left": editablePos.left - scrollLeft,
-                "top": editablePos.top - tbHeight - scrollTop
+                "left": editablePos.left - offsetLeft,
+                "top": editablePos.top - tbHeight - offsetTop
             };
         },
 
@@ -132,9 +148,9 @@
                 var yStart = area.startY - (isSel ? com.ua.calloutHeight : 0);
                 var yEnd = area.endY;
                 if (this._isClipped) {
-                    var scrollOffs = this.$clipParent.scrollTop();
-                    yStart -= scrollOffs;
-                    yEnd -= scrollOffs;
+                    var offs = this._getClipOffsets();
+                    yStart -= offs.top;
+                    yEnd -= offs.top;
                 }
                 forbidden = {
                     "start": yStart - (isSel ? com.ua.selectionHandlesHeight : 0),
@@ -153,21 +169,21 @@
          */
         _calcAvail: function($win) {
             var com = CUI.rte.Common;
-            var scrollTop = $win.scrollTop();
-            // the scroll offsets of the clipping parent are handled by jQuery automatically,
-            // so we don't have to take care of it here
-            var clipY = (this.$clipParent && !this._isClipped ?
-                    this.$clipParent.offset().top : 0);
-            var minY = Math.max(scrollTop, clipY);
             var screenKeyboardHeight = (com.isPortrait() ? com.ua.screenKeyHeightPortrait
                     : com.ua.screenKeyHeightLandscape);
-            var maxY = $win.height() - screenKeyboardHeight + scrollTop;    // TODO consider clipping as well
+            var availHeight = $win.height() - screenKeyboardHeight;
+            // the scroll offsets of the clipping parent are handled by jQuery
+            // automatically, so we don't have to take care of it here
             if (this._isClipped) {
-                maxY -= this.$clipParent.offset().top;
+                var context = this.editorKernel.getEditContext();
+                if (context.doc !== document) {
+                    var offsets = this.$clipParent.offset();
+                    availHeight -= offsets.top;
+                }
             }
             return {
-                "min": minY,
-                "max": maxY
+                "min": 0,
+                "max": availHeight
             }
         },
 
@@ -226,7 +242,7 @@
             if (forbidden) {
                 var totalPos = this._calcUITotal(tbTop, tbHeight, popoverData.height,
                         popoverAlign);
-                console.log(forbidden, totalPos);
+                // console.log("a, f, t, o: ", avail, forbidden, totalPos, optimum);
                 if ((totalPos.y2 > forbidden.start) && (totalPos.y1 < forbidden.end)) {
                     // The toolbar is in the "forbidden area", overlapping either the
                     // current selection and/or the callout (iPad). In such cases, we first
