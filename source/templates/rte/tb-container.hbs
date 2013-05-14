@@ -1,0 +1,8 @@
+{{#each toolbars}}
+<div data-type="{{this.id}}">
+    {{{this.toolbar}}}
+    {{#each this.popovers}}
+        {{{this}}}
+    {{/each}}
+</div>
+{{/each}}

@@ -66,6 +66,15 @@
                 return $(editableDom);
             },
 
+            createOrGetUIContainer: function($editable) {
+                var $container = CUI.rte.UIUtils.getUIContainer($editable);
+                if (!$container) {
+                    $container = $("<div class='rte-ui'></div>");
+                    $editable.before($container);
+                }
+                return $container;
+            },
+
             getToolbar: function($editableOrContainer, tbType) {
                 tbType = tbType || "inline";
                 var $container = $editableOrContainer.hasClass("rte-ui") ?

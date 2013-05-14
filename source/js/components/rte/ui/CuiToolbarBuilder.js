@@ -243,15 +243,11 @@
                     });
                 }
             }
-            var $toolbar = $(CUI.rte.Templates["container"]({
+            var $toolbar = $(CUI.rte.Templates["tb-container"]({
                 "toolbars": toolbars
             }));
-            if ($editable[0].ownerDocument === document) {
-                $editable.before($toolbar);
-            } else {
-                var $ui = CUI.rte.UIUtils.getUIContainer($editable);
-                $ui.append($toolbar)
-            }
+            var $ui = CUI.rte.UIUtils.createOrGetUIContainer($editable);
+            $ui.append($toolbar)
         },
 
 
