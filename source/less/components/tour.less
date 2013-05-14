@@ -101,12 +101,21 @@ Class: .tour
     text-align: center;
 
     font-size: 0; // set font-size to 0 to remove the spacing between the circles
+    
+    >button {
+      position: relative;
+      float: left;
+      margin: 9*@px;
+      z-index: 1;
+    }
 
     >a {
       &.prev, &.next {
+        position: relative;
         line-height: 50*@px;
         height: 50*@px;
         margin: 0 18*@px;
+        z-index: 1;
       }
 
       &.prev {
@@ -116,8 +125,14 @@ Class: .tour
       &.next {
         float: right;
       }
+    }
 
-      &.control {
+    >.control {
+      position: absolute;
+      left: 0;
+      right: 0;
+
+      > a {
         display: inline-block;
 
         font-size: @tour-nav-circle-size;
