@@ -79,6 +79,8 @@
                 active.removeClass('active');
                 prev.addClass('active');    
             }
+
+            ev.preventDefault();
         });
 
         nav.find('a.next').on('click', function (ev) {
@@ -89,6 +91,8 @@
                 active.removeClass('active');
                 next.addClass('active');    
             }
+
+            ev.preventDefault();
         });
 
         function goToSlide(slide) {
