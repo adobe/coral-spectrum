@@ -19,9 +19,12 @@ Class: .tour
   left: 50%;
   z-index: @zindexModal;
 
-  display: none;
+  display: block;
   width: 873*@px;
   height: 617*@px;
+
+  margin-left: -436*@px;
+  margin-top: -308*@px;
 
   outline: none; // Firefox shows focus outline
 
@@ -29,4 +32,8 @@ Class: .tour
 
   background-color: @modal-body-background-color;
   .background-clip(padding-box); // don't let the border overlap the background    
+
+  > nav {
+
+  }
 }
