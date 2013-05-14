@@ -51,6 +51,7 @@ form.fill-parent {
 				left: 0; top: 0;
 				right: 2rem - 1 * @px;
 				bottom: 0;
+				width: calc(~"100% - " (2rem - 1 * @px)); /* For non-webkit browsers */
 			}
 			> button {
 				position: absolute;
@@ -80,7 +81,7 @@ form.fill-parent {
 				right: 2rem - 1*@px;
 				bottom: 0;
 				margin: 0;
-				width: auto;
+				width: calc(~"100% - " (2rem - 1 * @px)); /* For non-webkit browsers */
 			}
 			button {
 				position: absolute;
@@ -92,6 +93,7 @@ form.fill-parent {
 
 		> .slider {
 			width: 100%;
+			width: calc(~"100% - 0.5rem"); /* For browsers that support calc (all current except Android) */
 		}
 	}
 }
