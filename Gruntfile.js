@@ -50,6 +50,7 @@ module.exports = function(grunt) {
       'components/CUI.DraggableList.js',
       'components/CUI.CharacterCount.js',
       'components/CUI.Accordion.js',
+      'components/CUI.Tour.js',
       
       // Validations
       'validations.js'

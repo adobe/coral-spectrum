@@ -1,5 +1,5 @@
 (function($) {
-  CUI.Modal = new Class(/** @lends CUI.Tour# */{
+  CUI.Tour = new Class(/** @lends CUI.Tour# */{
     toString: 'Tour',
 
     extend: CUI.Widget,
@@ -67,32 +67,64 @@
 
       @param {Object} options Component options
      */
-    construct: function(options) {
+    construct: function (options) {
       this.applyOptions();
 
+      this.$navigation = this.$element.find('nav');
+      this.$skip = this.$navigation.find('button');
+      this.$prev = this.$navigation.find('a.prev');
+      this.$next = this.$navigation.find('a.next');
+      this.$control = this.$navigation.find('.control');
+
       // set if !.active slide, set first as active
+
+
+      this._bindControls();
     },
 
     defaults: {
 
     },
 
-    applyOptions: function() {
+    applyOptions: function () {
+
+    },
+
+    slideToNext: function () {
+
+    },
+
+    slideToPrev: function () {
+
+    },
+
+    slideTo: function (no) {
 
     },
 
     /** @ignore */
-    _show: function() {
+    _bindControls: function () {
+      this.$skip.fipo('tap', 'click', this._hide.bind(this));
+      this.$prev.fipo('tap', 'click', this.slideToPrev.bind(this));
+      this.$next.fipo('tap', 'click', this.slideToNext.bind(this));
+      this.$control.fipo('tap', 'click', 'a', function (event) {
+        alert($(event.currentTarget).index());  
+      });
+    },
+
+    /** @ignore */
+    _show: function () {
+      this.$element.trigger($.Event("beforeshow"));
         
     },
 
     /** @ignore */
-    _hide: function() {
+    _hide: function () {
       
     },
 
     /** @ignore */
-    _removeBackdrop: function() {
+    _removeBackdrop: function () {
         if (this.$backdrop && !this.get('visible')) {
           // Remove from the DOM
           this.$backdrop.remove();
@@ -101,7 +133,7 @@
     },
 
     /** @ignore */
-    _toggleBackdrop: function(show) {
+    _toggleBackdrop: function (show) {
       if (show && this.options.backdrop) {
         if (this.$backdrop)
           this.$backdrop.fadeIn();
@@ -133,8 +165,8 @@
   // Data API
   if (CUI.options.dataAPI) {
 
-    $(document).on("cui-contentloaded.data-api", function(e) {
-      $("[data-init=tour]", e.target).tour();
+    $(document).on("cui-contentloaded.data-api", function (event) {
+      $("[data-init=tour]", event.target).tour();
     });
 
   }

@@ -20,7 +20,7 @@ Class: .tour
   z-index: @zindexModal;
   overflow: hidden;
 
-  display: block;
+  display: none;
   width: 852*@px;
   height: 596*@px;
 
@@ -34,6 +34,10 @@ Class: .tour
   background-color: @modal-body-background-color;
   .background-clip(padding-box); // don't let the border overlap the background    
   
+  &.show {
+    display: block;
+  } 
+
   >.tour-slide {
     position: absolute;
     top: 0;
