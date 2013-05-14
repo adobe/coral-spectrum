@@ -94,7 +94,7 @@
             getPopover: function(ref, tbType, $container) {
                 tbType = tbType || "inline";
                 return $container.find("div[data-type=\"" + tbType + "\"] > " +
-                        "div[data-popover=\"" + ref + "\"]");
+                        "div[data-id=\"" + ref + "\"]");
             },
 
             getPopoverTrigger: function(ref, tbType, $containerOrToolbar) {

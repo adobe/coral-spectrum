@@ -430,7 +430,7 @@
                             this.$container);
                     var $popover = $element.parent(".rte-popover");
                     if ($popover.length) {
-                        var popoverRef = "#" + $popover.data("popover");
+                        var popoverRef = "#" + $popover.data("id");
                         var $trigger = CUI.rte.UIUtils.getPopoverTrigger(popoverRef,
                                 this.tbType, this.$toolbar);
                         this.popover.addTriggerToElement($trigger, $element);

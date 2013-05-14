@@ -167,7 +167,9 @@
                 this.$popover.addClass("temp-arrow-position");
                 // must be shown before calculating positions, as jQuery will miscalculate
                 // position:absolute otherwise
-                this.$popover.popover().show();
+                this.$popover.popover({
+                    pointAt: $([])
+                }).popover("show");
             } else {
                 this.$popover = null;
             }
@@ -183,7 +185,7 @@
                 this.$popover.removeClass("temp-arrow-position");
                 CUI.rte.UIUtils.removeStyleSheet(this._popoverStyleSheet);
                 this._popoverStyleSheet = null;
-                this.$popover.popover().hide();
+                this.$popover.popover("hide");
                 this.$popover = null;
             }
             return mustHide;
