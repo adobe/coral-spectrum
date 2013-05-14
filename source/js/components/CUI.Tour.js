@@ -76,8 +76,9 @@
       this.$next = this.$navigation.find('a.next');
       this.$control = this.$navigation.find('.control');
 
-      // set if !.active slide, set first as active
-
+      // set current slide
+      this.$current = this.$element.find('.tour-slide.active');
+      this.$current = this.$current.length > 0 ? this.$current : this.$element.find('.tour-slide:eq(0)').addClass('active'); // if no slide is selected set first
 
       this._bindControls();
     },
@@ -90,26 +91,42 @@
 
     },
 
-    slideToNext: function () {
+    /** @ignore */
+    _slideTo: function (slide) {
+      if (slide.length > 0) {
+        this.$current.removeClass('active');
+        this.$current = slide.addClass('active');    
+      }
+    },
 
+    slideToNext: function () {
+      var next = this.$current.next('.tour-slide');
+      this._slideTo(next);
     },
 
     slideToPrev: function () {
-
+      var prev = this.$current.prev('.tour-slide');
+      this._slideTo(prev);
     },
 
     slideTo: function (no) {
-
+      var slide = this.$element.find('.tour-slide:eq('+ no +')');
+      this._slideTo(slide);
     },
 
     /** @ignore */
     _bindControls: function () {
+      // disable all anchors
+      this.$navigation.on('click', 'a', function (event) {
+        event.preventDefault;
+      });
+
       this.$skip.fipo('tap', 'click', this._hide.bind(this));
       this.$prev.fipo('tap', 'click', this.slideToPrev.bind(this));
       this.$next.fipo('tap', 'click', this.slideToNext.bind(this));
       this.$control.fipo('tap', 'click', 'a', function (event) {
-        alert($(event.currentTarget).index());  
-      });
+        this.slideTo($(event.currentTarget).index());
+      }.bind(this));
     },
 
     /** @ignore */
