@@ -168,7 +168,8 @@
                 // must be shown before calculating positions, as jQuery will miscalculate
                 // position:absolute otherwise
                 this.$popover.popover({
-                    pointAt: $([])
+                    pointAt: $([]),
+                    preventAutoHide: true
                 }).popover("show");
             } else {
                 this.$popover = null;

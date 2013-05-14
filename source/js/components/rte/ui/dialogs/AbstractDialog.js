@@ -112,7 +112,8 @@
                 this.popoverManager.use(this.$dialog, this.$trigger, this.$toolbar);
                 this.editorKernel.lock();
                 this.editorKernel.fireUIEvent("dialogshow");
-                this.mask.show();
+                // TODO mask is currently on top of everything - dialog included
+                // this.mask.show();
                 // maually do the layout - is required here because the editor is already
                 // locked, so automatic update will not work
                 this.editorKernel.toolbar.triggerUIUpdate();
@@ -126,7 +127,8 @@
             CUI.rte.Selection.selectRangeBookmark(this.editorKernel.getEditContext(),
                     this.range);
             this.editorKernel.fireUIEvent("dialoghide");
-            this.mask.hide();
+            // TODO mask is currently on top of everything - dialog included
+            // this.mask.hide();
             // hide the toolbar temporarily on touch devices, as the device will most
             // likely do some screen updates immediately after the command is executed and
             // the dialog is hidden - so this should result in a less disruptive UI behavior

@@ -137,14 +137,16 @@
     _show: function() {
       this.$element.show();
 
-      $('body').fipo('tap.popover-hide-'+this.uuid, 'click.popover-hide-'+this.uuid, function(e) {
-        var el = this.$element.get(0);
+      if (!this.options.preventAutoHide) {
+        $('body').fipo('tap.popover-hide-'+this.uuid, 'click.popover-hide-'+this.uuid, function(e) {
+          var el = this.$element.get(0);
 
-        if (e.target !== el && !$.contains(el, e.target)) {
-          this.hide();
-          $('body').off('.popover-hide-'+this.uuid);
-        }
-      }.bind(this));
+          if (e.target !== el && !$.contains(el, e.target)) {
+            this.hide();
+            $('body').off('.popover-hide-'+this.uuid);
+          }
+        }.bind(this));
+      }
     },
 
     /** @ignore */
