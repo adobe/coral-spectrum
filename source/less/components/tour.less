@@ -18,6 +18,7 @@ Class: .tour
   top: 50%;
   left: 50%;
   z-index: @zindexModal;
+  overflow: hidden;
 
   display: block;
   width: 852*@px;
@@ -34,9 +35,22 @@ Class: .tour
   .background-clip(padding-box); // don't let the border overlap the background    
   
   >.tour-slide {
-    
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    overflow: hidden;
+  
+    // set them all hidden to left
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(100%);
+    transform: translateX(-100%);
 
-    >p { // text message
+    -webkit-transition: -webkit-transform 0.5s ease-out;
+    transition: transform 0.5s ease-out;
+
+    >section { // text message
       display: block;
       margin: 0;
       position: absolute;
@@ -44,6 +58,37 @@ Class: .tour
       height: 150*@px;
       width: 100%;
       .box-shadow(0 -2*@px 4*@px @tour-slide-text-shadow-color);
+      text-align: center;
+
+      >* {
+        color: @tour-slide-text-color;
+      }
+
+      >h1 {
+        font-size: 22*@px;
+        font-family: AdobeClean;
+        font-weight: bold;
+        margin: 25*@px 0;
+      }
+
+      >p {
+        font-size: 18*@px;
+        font-family: AdobeCleanLight;
+      }
+    }
+
+    &.active {
+      -webkit-transform: translateX(0);
+      -moz-transform: translateX(0);
+      -ms-transform: translateX(0);
+      transform: translateX(0);
+    }
+
+    &.active ~.tour-slide {
+      -webkit-transform: translateX(100%);
+      -moz-transform: translateX(100%);
+      -ms-transform: translateX(100%);
+      transform: translateX(100%);
     }
   }
 
@@ -53,5 +98,42 @@ Class: .tour
     height: 50*@px;
     width: 100%;
     background: @tour-nav-background-color;
+    text-align: center;
+
+    font-size: 0; // set font-size to 0 to remove the spacing between the circles
+
+    >a {
+      &.prev, &.next {
+        line-height: 50*@px;
+        height: 50*@px;
+        margin: 0 18*@px;
+      }
+
+      &.prev {
+        float: left;
+      }
+
+      &.next {
+        float: right;
+      }
+
+      &.control {
+        display: inline-block;
+
+        font-size: @tour-nav-circle-size;
+
+        margin: 21*@px 5*@px 0 5*@px;
+        height: @tour-nav-circle-size;
+        width: @tour-nav-circle-size;
+        border-radius: @tour-nav-circle-size;  
+
+        background: @tour-nav-circle-color;
+
+        &.active, 
+        &:hover {
+          background: @tour-nav-circle-active-color;
+        }
+      }
+    }
   }
 }
