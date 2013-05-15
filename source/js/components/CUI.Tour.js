@@ -16,7 +16,7 @@
                     Your feedback is important
                 </p>
             </section>
-            <img src="http://lorempixel.com/output/technics-q-c-852-396-5.jpg">
+            <img src="http://lorempixel.com/852/396/?img=1">
         </div>
         <div class="tour-slide">
             <section>
@@ -26,7 +26,7 @@
                     Your feedback is important
                 </p>
             </section>
-            <img src="http://lorempixel.com/output/technics-q-c-852-396-5.jpg">
+            <img src="http://lorempixel.com/852/396/?img=2">
         </div>
         <div class="tour-slide">
             <section>
@@ -36,14 +36,15 @@
                     Your feedback is important
                 </p>
             </section>
-            <img src="http://lorempixel.com/output/technics-q-c-852-396-5.jpg">
+            <img src="http://lorempixel.com/852/396/?img=3">
         </div>
         <nav>
-            <button>Skip into</button>
+            <button class="skip">Skip into</button>
+            <button class="done primary">OK</button>
             <a href="#" class="prev icon-chevronleft medium">Previous</a>
             <a href="#" class="next icon-chevronright medium">Next</a> 
             <div class="control">
-                <a href="#" class="active"></a>
+                <a href="#"></a>
                 <a href="#"></a>
                 <a href="#"></a>
             </div>
