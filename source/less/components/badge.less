@@ -16,7 +16,18 @@
   line-height: 16*@px;
   color: @badge-font-color;
 
+  &:hover,
+  &:focus {
+    background: @badge-hover-background-color;
+  }
+
   &.empty {
     background-color: @badge-empty-background-color;
+    color: @badge-empty-font-color;
+
+    &:hover,
+    &:focus {
+      background: @badge-hover-empty-background-color;
+    }
   }
 }
