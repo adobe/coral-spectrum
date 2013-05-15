@@ -499,6 +499,7 @@
                 this.$clipParent.off("click.rte-toolbar");
                 this.$clipParent = undefined;
             }
+            this._isClipped = false;
             this.editorKernel.removeUIListener("updatestate", this._handleUpdateState,
                     this);
             this.$container.find(".rte-popover").each(function() {
