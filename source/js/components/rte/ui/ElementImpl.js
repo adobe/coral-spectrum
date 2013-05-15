@@ -76,12 +76,28 @@
         },
 
         setDisabled: function(isDisabled) {
+            var com = CUI.rte.Common;
+            if (com.ua.isTouch) {
+                // This is a really, really ugly workaround for another SafariMobile
+                // bug: We need to set "display" to "none" before modifying the class
+                // attribute. Otherwise SafariMobile will cancel edit mode immediately
+                // by finally hiding the keyboard (and not showing it again
+                // programmatically, using focus() for example) - see CUI-649
+                this.$ui.css("display", "none");
+            }
             if (isDisabled) {
                 this.$ui.addClass(CUI.rte.Theme.TOOLBARITEM_DISABLED_CLASS);
                 this.$ui.attr("disabled", "disabled");
             } else {
                 this.$ui.removeClass(CUI.rte.Theme.TOOLBARITEM_DISABLED_CLASS);
                 this.$ui.removeAttr("disabled");
+            }
+            if (com.ua.isTouch) {
+                // part 2 of really, really ugly workaround ....
+                var self = this;
+                window.setTimeout(function() {
+                    self.$ui.css("display", "inline-block");
+                }, 1);
             }
         },
 
