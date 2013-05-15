@@ -71,27 +71,29 @@ CUI.rte.Eventing = function($) {
             var delay = (options.buffer ? options.buffer : 0);
             scope = scope || options.scope || $obj;
             var wrapper = new Wrapper($obj, eventName, handler, delay, scope, editContext);
+            var fn = CUI.rte.Utils.scope(wrapper.execute, wrapper);
             handlerMap.push({
                 "handler": handler,
-                "wrapper": wrapper
+                "wrapper": wrapper,
+                "fn": fn
             });
-            $obj.on(eventName, CUI.rte.Utils.scope(wrapper.execute, wrapper));
+            $obj.on(eventName, fn);
         },
 
         un: function(obj, eventName, handler, scope) {
-            var wrapper = null;
+            var fn = null;
             for (var e = 0; e < handlerMap.length; e++) {
                 if (handlerMap[e].handler === handler) {
-                    wrapper = handlerMap[e].wrapper;
+                    fn = handlerMap[e].fn;
                     handlerMap.splice(e, 1);
                     break;
                 }
             }
-            if (wrapper == null) {
+            if (fn == null) {
                 throw new Error(
                         "Unregistered handler provided for event '" + eventName + "'.");
             }
-            $(obj).off(eventName, wrapper);
+            $(obj).off(eventName, fn);
         }
 
     };
