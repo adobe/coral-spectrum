@@ -155,3 +155,34 @@ header.top {
     }
   }
 }
+
+@media all and (min-width: 768px) and (max-width: 959px) {
+  header.top { 
+    nav.crumbs a {
+      display: none;  
+
+      &:nth-last-child(1),
+      &:nth-last-child(2) {
+        display: inline-block;
+      }
+    }
+  }
+}
+
+@media all and (max-width: 767px) { 
+  header.top { 
+    nav.crumbs a {
+      display: none;  
+
+      &:nth-last-child(1) {
+        display: inline-block;
+      }
+    }
+  }    
+}
+
+/*@media (min-width: 380px) and (max-width: 480px) {     
+}
+
+@media (max-width: 379px) { 
+}*/
