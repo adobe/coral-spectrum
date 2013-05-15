@@ -108,9 +108,21 @@ Class: .tour
     
     >button {
       position: relative;
-      float: left;
       margin: 9*@px;
       z-index: 1;
+      display: none;
+
+      &.skip {
+        float: left;
+      }
+
+      &.done {
+        float: right;
+      }
+
+      &.show {
+        display: inline;
+      }
     }
 
     >a {
@@ -128,6 +140,10 @@ Class: .tour
 
       &.next {
         float: right;
+      }
+
+      &.hide {
+        display: none;
       }
     }
 

@@ -66,12 +66,15 @@
       @constructs
 
       @param {Object} options Component options
+      @param {Mixed} [options.backdrop=static]    False to not display transparent underlay, True to display and close when clicked, 'static' to display and not close when clicked
      */
     construct: function (options) {
-      this.applyOptions();
+      var idx;
 
+      this.$slides = this.$element.find('.tour-slide');
       this.$navigation = this.$element.find('nav');
-      this.$skip = this.$navigation.find('button');
+      this.$skip = this.$navigation.find('button.skip');
+      this.$done = this.$navigation.find('button.done');
       this.$prev = this.$navigation.find('a.prev');
       this.$next = this.$navigation.find('a.next');
       this.$control = this.$navigation.find('.control');
@@ -80,22 +83,58 @@
       this.$current = this.$element.find('.tour-slide.active');
       this.$current = this.$current.length > 0 ? this.$current : this.$element.find('.tour-slide:eq(0)').addClass('active'); // if no slide is selected set first
 
+      // set current state in nav
+      idx = this.$current.index();
+      this._setCircleNav(idx);
+      this._toggleButtons(idx);
+
+      // bind the handlers
       this._bindControls();
+
+      if (this.$element.hasClass('show')) {
+        this._toggleBackdrop(true);
+      }
     },
 
     defaults: {
-
+      backdrop: 'static'
     },
 
-    applyOptions: function () {
+    /** @ignore */
+    _toggleButtons: function (idx) {
+      //reset
+      this.$skip.removeClass('show');
+      this.$done.removeClass('show');
+      this.$prev.removeClass('hide');
+      this.$next.removeClass('hide');
 
+      if (idx === 0) {
+        this.$skip.addClass('show');
+        this.$prev.addClass('hide');  
+      } else if (idx === this.$slides.length - 1 ) {
+        this.$done.addClass('show');
+        this.$next.addClass('hide');  
+      }
+    },
+
+    /** @ignore */
+    _setCircleNav: function (idx) {
+      this.$control.find('a')
+        .removeClass('active')
+        .filter(':eq('+ idx +')')
+        .addClass('active');
     },
 
     /** @ignore */
     _slideTo: function (slide) {
+      var idx = slide.index();
+
       if (slide.length > 0) {
         this.$current.removeClass('active');
-        this.$current = slide.addClass('active');    
+        this.$current = slide.addClass('active'); 
+
+        this._setCircleNav(idx);  
+        this._toggleButtons(idx);
       }
     },
 
@@ -118,10 +157,11 @@
     _bindControls: function () {
       // disable all anchors
       this.$navigation.on('click', 'a', function (event) {
-        event.preventDefault;
+        event.preventDefault();
       });
 
       this.$skip.fipo('tap', 'click', this._hide.bind(this));
+      this.$done.fipo('tap', 'click', this._hide.bind(this));
       this.$prev.fipo('tap', 'click', this.slideToPrev.bind(this));
       this.$next.fipo('tap', 'click', this.slideToNext.bind(this));
       this.$control.fipo('tap', 'click', 'a', function (event) {
@@ -131,13 +171,14 @@
 
     /** @ignore */
     _show: function () {
-      this.$element.trigger($.Event("beforeshow"));
-        
+      this.$element.addClass('show');  
+      this._toggleBackdrop(true);
     },
 
     /** @ignore */
     _hide: function () {
-      
+      this.$element.removeClass('show');
+      this._toggleBackdrop();
     },
 
     /** @ignore */
@@ -160,7 +201,12 @@
             css: {
               display: 'none'
             }
-          }).appendTo(document.body).fadeIn();
+          }).appendTo(document.body);
+
+          // start async to have a fadein effect
+          setTimeout(function () {
+            this.$backdrop.fadeIn()
+          }.bind(this), 50);
 
           // Note: If this option is changed before the fade completes, it won't apply
           if (this.options.backdrop !== 'static') {

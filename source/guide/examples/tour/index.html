@@ -15,7 +15,6 @@
     <script src="../../js/CUI.js"></script>
 </head>
 <body>
-    <div class="tour-backdrop"></div>
     <div class="tour show" data-init="tour">
         <div class="tour-slide">
             <section>
@@ -25,7 +24,7 @@
                     Your feedback is important
                 </p>
             </section>
-            <img src="http://lorempixel.com/output/technics-q-c-852-396-5.jpg">
+            <img src="http://lorempixel.com/852/396/?img=1">
         </div>
         <div class="tour-slide">
             <section>
@@ -35,7 +34,7 @@
                     Your feedback is important
                 </p>
             </section>
-            <img src="http://lorempixel.com/output/technics-q-c-852-396-5.jpg">
+            <img src="http://lorempixel.com/852/396/?img=2">
         </div>
         <div class="tour-slide active">
             <section>
@@ -45,7 +44,7 @@
                     Your feedback is important
                 </p>
             </section>
-            <img src="http://lorempixel.com/output/technics-q-c-852-396-5.jpg">
+            <img src="http://lorempixel.com/852/396/?img=3">
         </div>
         <div class="tour-slide">
             <section>
@@ -55,52 +54,20 @@
                     Your feedback is important
                 </p>
             </section>
-            <img src="http://lorempixel.com/output/technics-q-c-852-396-5.jpg">
+            <img src="http://lorempixel.com/852/396/?img=4">
         </div>
         <nav>
-            <button>Skip into</button>
+            <button class="skip">Skip into</button>
+            <button class="done primary">OK</button>
             <a href="#" class="prev icon-chevronleft medium">Previous</a>
             <a href="#" class="next icon-chevronright medium">Next</a> 
             <div class="control">
                 <a href="#"></a>
                 <a href="#"></a>
-                <a href="#" class="active"></a>
+                <a href="#"></a>
                 <a href="#"></a>
             </div>
         </nav>
     </div>
-
-    <script>
-        /*var tour = $('.tour'),
-            nav = tour.find('nav');
-
-        nav.find('a.prev').on('click', function (ev) {
-            var active = tour.find('.tour-slide.active'),
-                prev = active.prev('.tour-slide');
-
-            if (prev.length > 0) {
-                active.removeClass('active');
-                prev.addClass('active');    
-            }
-
-            ev.preventDefault();
-        });
-
-        nav.find('a.next').on('click', function (ev) {
-            var active = tour.find('.tour-slide.active'),
-                next = active.next('.tour-slide');
-
-            if (next.length > 0) {
-                active.removeClass('active');
-                next.addClass('active');    
-            }
-
-            ev.preventDefault();
-        });
-
-        function goToSlide(slide) {
-
-        }*/
-    </script>
 </body>
 </html>
