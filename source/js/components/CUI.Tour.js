@@ -167,6 +167,16 @@
       this.$control.fipo('tap', 'click', 'a', function (event) {
         this.slideTo($(event.currentTarget).index());
       }.bind(this));
+
+      this.$element.finger('swipe', '.tour-slide', function (event) {
+        if (event.finger === 1) {
+          if (event.direction === 'left') {
+            this.slideToNext();
+          } else if (event.direction === 'right') {
+            this.slideToPrev();
+          }
+        }
+      }.bind(this));
     },
 
     /** @ignore */
