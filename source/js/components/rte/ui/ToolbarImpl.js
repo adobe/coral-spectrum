@@ -137,7 +137,7 @@
             var forbidden = undefined;
             var context = this.editorKernel.getEditContext();
             selection = selection || this.editorKernel.createQualifiedSelection(context);
-            if (selection && selection.startNode) {
+            if (selection && selection.startNode && this.editorKernel.hasFocus) {
                 var startNode = selection.startNode;
                 var startOffset = selection.startOffset;
                 var endNode = selection.endNode;
