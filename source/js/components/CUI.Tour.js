@@ -150,7 +150,7 @@
     },
 
     /**
-     * [ description]
+     * slides to the next slide
      * @return {this}
      */
     slideToNext: function () {
@@ -160,6 +160,10 @@
       return this;
     },
 
+    /**
+     * slides to the previous slide
+     * @return {this}
+     */
     slideToPrev: function () {
       var prev = this.$current.prev('.tour-slide');
       this._slideTo(prev);
@@ -167,6 +171,11 @@
       return this;
     },
 
+    /**
+     * slides to the given index of a slide
+     * @param  {integer} no
+     * @return {this}
+     */
     slideTo: function (no) {
       this._slideTo(this.$slides[no]);
 
