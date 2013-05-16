@@ -7,7 +7,10 @@
       @extends CUI.Widget
       @classdesc A tour which allows to explain the application
 
-      <div class="tour" data-init="tour">
+      <h2 class="line">Example</h2>
+      <button onclick="$('#myTour').tour('show')" class="primary">Test the tour</button>
+      
+      <div id="myTour" class="tour" data-init="tour">
         <div class="tour-slide active">
             <section>
                 <h1>Technology Preview</h1>
@@ -59,14 +62,16 @@
 
       @example
       <caption>Instantiate with jQuery</caption>
-      $('#myTour').tour({
-        
-      });
+      $('#myTour').tour();
+
+      // open the tour
+      $('#myTour').tour('show');
 
       @desc Creates a new tour
       @constructs
 
       @param {Object} options Component options
+      @param {Boolean} [options.autoshow=false]   True to open the dialog immediately after initialization
       @param {Mixed} [options.backdrop=static]    False to not display transparent underlay, True to display and close when clicked, 'static' to display and not close when clicked
      */
     construct: function (options) {
@@ -93,11 +98,16 @@
       this._bindControls();
 
       if (this.$element.hasClass('show')) {
+        this.options.autoshow = true;
+      }
+
+      if (this.options.autoshow) {
         this._toggleBackdrop(true);
       }
     },
 
     defaults: {
+      autoshow: false,
       backdrop: 'static'
     },
 
@@ -139,19 +149,28 @@
       }
     },
 
+    /**
+     * [ description]
+     * @return {this}
+     */
     slideToNext: function () {
       var next = this.$current.next('.tour-slide');
       this._slideTo(next);
+
+      return this;
     },
 
     slideToPrev: function () {
       var prev = this.$current.prev('.tour-slide');
       this._slideTo(prev);
+
+      return this;
     },
 
     slideTo: function (no) {
-      var slide = this.$element.find('.tour-slide:eq('+ no +')');
-      this._slideTo(slide);
+      this._slideTo(this.$slides[no]);
+
+      return this;
     },
 
     /** @ignore */
