@@ -335,6 +335,21 @@
 
         // Interface -----------------------------------------------------------------------
 
+        /**
+         * Gets the current content of the edited text <i>while editing is in progress</i>.
+         * Returns undefined before/after editing is started/has been finished.
+         * @returns {String} The edited content; undefined if content is not being edited
+         *          at the moment
+         */
+        getContent: function() {
+            console.log("getContent called", this.isActive, this.editorKernel);
+            if (!this.isActive) {
+                return undefined;
+            }
+            console.log("--- ", this.editorKernel.getProcessedHtml());
+            return this.editorKernel.getProcessedHtml();
+        },
+
         start: function(config) {
             if (this.editorKernel === null) {
                 this.editorKernel = new CUI.rte.DivKernel(config,
