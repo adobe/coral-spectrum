@@ -342,11 +342,9 @@
          *          at the moment
          */
         getContent: function() {
-            console.log("getContent called", this.isActive, this.editorKernel);
             if (!this.isActive) {
                 return undefined;
             }
-            console.log("--- ", this.editorKernel.getProcessedHtml());
             return this.editorKernel.getProcessedHtml();
         },
 
