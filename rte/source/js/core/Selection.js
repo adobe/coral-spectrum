@@ -1058,7 +1058,7 @@ CUI.rte.Selection = function() {
                         range.collapse(true);
                     }
                 } catch (e) {
-                    // if the object is not available anymore (which might be the cause
+                    // if the object is not available anymore (which might be the case
                     // when undoing), use the caret-position instead
                     if (bookmark.startPos) {
                         objectToSelect = undefined;
@@ -1481,6 +1481,9 @@ CUI.rte.Selection = function() {
                                 if (range.move("character", 1) == 1) {
                                     range.move("character", -1);
                                 }
+                            } else if (com.isTag(dom, "li")) {
+                                // todo probably needs to be more conditional than now
+                                range.move("character", 1);
                             }
                         }
                     }
