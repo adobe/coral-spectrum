@@ -975,7 +975,7 @@
          */
         initialize: function() {
             var self = this;
-            this.$el.on("drop", this.selectors.itemSelector, function(e) {
+            this.$el.on("item-moved", this.selectors.itemSelector, function(e) {
                 if (e.hasMoved) {
                     self._reorder(e);
                 }
@@ -989,11 +989,11 @@
          */
         _reorder: function(e) {
             var itemToMove = this.getItemForEl($(e.target));
-            var newBefore = this.getItemForEl(e.newBefore);
+            var newBefore = this.getItemForEl(e.newPrev);
             var isHeaderInsert = false;
             var header;
             if (!newBefore) {
-                header = this.getHeaderForEl(e.newBefore);
+                header = this.getHeaderForEl(e.newPrev);
                 if (header) {
                     isHeaderInsert = true;
                     var refPos = this.getItemIndex(header.getItemRef());
