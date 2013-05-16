@@ -2118,8 +2118,13 @@ CUI.rte.Selection = function() {
                     // selecting an empty edit block on IE causes problems if the
                     // setStart... methods are used
                     if (com.isEmptyEditingBlock(startNodeAndOffset.node, true)) {
-                        range.selectNode(startNodeAndOffset.node);
-                        range.collapse(true);
+                        if (com.isTag(startNodeAndOffset.node, "li")) {
+                            // empty list items require another special treatment
+                            range.setStart(startNodeAndOffset.node, 0);
+                        } else {
+                            range.selectNode(startNodeAndOffset.node);
+                            range.collapse(true);
+                        }
                         isRangeCreated = true;
                     }
                 }
