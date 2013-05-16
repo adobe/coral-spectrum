@@ -554,7 +554,7 @@ CUI.rte.EditorKernel = new Class({
             var context = this.getEditContext();
             if (context.isInitialized()) {
                 try {
-                    context.doc.execCmd("useCSS", true);
+                    context.doc.execCommand("useCSS", true);
                 } catch (e) {
                     // ignore if unsupported
                 }
