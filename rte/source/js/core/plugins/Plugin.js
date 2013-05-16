@@ -255,3 +255,12 @@ CUI.rte.plugins.Plugin.SORT_SPELLCHECK = 370;
  * @type Number
  */
 CUI.rte.plugins.Plugin.SORT_MISC = 1000;
+
+/**
+ * Maximum sort index
+ * @private
+ * @static
+ * @final
+ * @type Number
+ */
+CUI.rte.plugins.Plugin.SORT_MAX = 100000;

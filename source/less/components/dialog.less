@@ -1,9 +1,11 @@
 /**
-  Class: .wizard or .flexwizard
-  Displays a wizard widget.
+  Class: .wizard, .flexwizard, .dialog
+
+  The styling for dialog-like widget.
+  i.e. There is a nav bar at the top, with some buttons for navigation.
 */
 
-.wizard, .flexwizard {
+.wizard, .flexwizard, .dialog {
     // Fix toolbar for wizard
     // TODO this is a sign that our css is badly designed
     > .toolbar {
@@ -21,21 +23,12 @@
     }
 }
 
-.wizard > nav, .flexwizard > nav {
+.wizard > nav, .flexwizard > nav, .dialog > nav {
     background: @wizard-nav-background-color;
 
     > button, > a.button {
         color: @wizard-button-text-color;
         margin: 6px 9px 8px 9px;
-    }
-
-    > button[disabled] {
-        opacity: 0.5;
-        color: @wizard-button-text-color;
-
-        &:hover {
-            color: @wizard-button-text-color;
-        }
     }
 
     > button.back, > a.button.back {
@@ -46,6 +39,16 @@
     > button.next, > a.button.next {
         background: @wizard-next-button-background-color;
         border-color: @wizard-next-button-border-color;
+    }
+
+    > button[disabled], > a.button.disabled {
+        color: @wizard-disabled-button-text-color;
+        background: @wizard-disabled-button-background-color;
+        border-color: @wizard-disabled-button-border-color;
+    }
+
+    h1 {
+        color: @wizard-progress-active-title-color;
     }
 
     > ol {

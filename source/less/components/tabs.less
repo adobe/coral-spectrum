@@ -96,6 +96,10 @@
     }
   }
 
+  &.noscroll > section {
+    overflow: visible;
+  }
+
   &.white {
     > nav > a.active {
       border-bottom: none;
@@ -133,6 +137,11 @@
       border-color: @tab-nav-second-border-color;
       background-color: @body-background-color;
     }
+  }
+
+  /* Full page tabs need some more space above to not stick at the top of the page */
+  &.full-page {
+    margin-top: 0.625rem;
   }
 
   &.stacked {

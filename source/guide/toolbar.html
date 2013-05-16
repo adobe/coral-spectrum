@@ -51,7 +51,7 @@
 
       <nav class="toolbar">
         <div class="left icongroup">
-          <button class="icon-rightrailclose"><span>Toggle Rail</span></button>
+          <button class="icon-chevronleft"><span>Toggle Rail</span></button>
           <span class="divider"></span>
           <a class="icon-add" href="#"><span>Create Page</span></a>
         </div>
@@ -73,7 +73,7 @@
 
       <nav class="toolbar">
         <div class="left icongroup">
-          <button class="icon-rightrailclose"><span>Toggle Rail</span></button>
+          <button class="icon-navigation"><span>Toggle Rail</span></button>
           <span class="divider"></span>
           <button class="icon-close"><span>Close Selection Mode</span></button>
           <button disabled="disabled" class="icon-properties"><span>View Properties</span></button>
@@ -96,13 +96,13 @@
 
       <nav class="toolbar">
         <div class="left icongroup">
-          <button class="icon-drillinleft"><span>Back</span></button>
+          <button class="icon-chevronleft"><span>Back</span></button>
           <span class="divider"></span>
           <button class="icon-check"><span>Open Selection Mode</span></button>
         </div>
       </nav>
 
-       <nav class="toolbar">
+      <nav class="toolbar">
         <div class="left icongroup">
           <button class="icon-viewgrid"><span>Toggle Rail</span></button>
           <span class="divider"></span>
@@ -111,19 +111,48 @@
             <select name="dropdown">
               <option>Single One</option>
               <option selected>Single Two</option>
-            <option>Single Three</option>
-          </select>
+              <option>Single Three</option>
+            </select>
           </div>
           <button class="icon-close"><span>Close Selection Mode</span></button>
           <button disabled="disabled" class="icon-properties"><span>View Properties</span></button>
           <a href="#" class="disabled icon-delete"><span>Delete Page</span></a>
+        </div>
+        <div class="dropdown" data-init="dropdown">
+          <button>Single Select</button>
+          <select name="dropdown">
+            <option>Single One</option>
+            <option selected>Single Two</option>
+            <option>Single Three</option>
+          </select>
         </div>
         <div class="right icongroup">
           <input type="text"/>
           <span class="text">1 selected</span>
         </div>
       </nav>
-
+      <nav class="toolbar mode-default" data-init="toolbar">
+        <div class="left icongroup">
+          <button class="icon-navigation" title="Toggle Rail" type="button" data-target="#rail" autocomplete="off">Toggle Rail</button>
+          <span class="divider"></span>
+          <nav id="createpagebtn" class="pulldown" title="Create" data-init="pulldown">
+            <a href="#" class="icon-add">Create</a>
+            <div class="popover arrow-top alignleft">
+              <ul>
+                <li>
+                  <a href="#" class="withLabel">Create Page</a>
+                </li>
+                <li>
+                  <a class="disabled withLabel">Create Launch</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+        <div class="center">
+          <h1>Sites</h1>
+        </div>
+      </nav>
     </div>
   </div>
 </body>

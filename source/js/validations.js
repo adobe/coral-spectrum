@@ -15,7 +15,9 @@
   from Adobe Systems Incorporated.
 */
 (function($, console) {
-    // This is the place where the validation rules and messages are defined
+    // This is the place where the validation rules and messages are defined.
+    // But only for validation that is generic or make sense at Coral level.
+    // Otherwise please put your validation in your own file at your level.
 
     "use strict";
 
@@ -90,7 +92,7 @@
         clear: simpleClear
     });
 
-    // Check required & aria-required
+    // Check required & aria-required of input and textarea
     $.validator.register({
         selector: "form input, form textarea",
         validate: function(el) {
@@ -109,4 +111,27 @@
         el.checkValidity();
         el.updateErrorUI();
     });
-})(jQuery, console);
+
+
+    // Check role=listbox
+    $.validator.register({
+        selector: "[role=listbox]",
+        validate: function(el) {
+            if (el.attr("aria-required") !== "true") {
+                return;
+            }
+
+            var selected = false;
+            el.find("[role=option]").each(function() {
+                if ($(this).attr("aria-selected") === "true") {
+                    selected = true;
+                    return false;
+                }
+            });
+
+            if (!selected) {
+                return el.message("validation.required") || "required";
+            }
+        }
+    });
+})(jQuery, window.console);

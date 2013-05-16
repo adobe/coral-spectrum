@@ -399,7 +399,8 @@ CUI.rte.HtmlRules.Links = new Class({
             if (this.isPage(href)) {
                 // relative internal link to a page; doesn't need a protocol added
             } else {
-                var hostname = href.substring(0, href.indexOf("/"));
+                var slash = href.indexOf("/");
+                var hostname = (slash > 0 ? href.substring(0, slash) : href);
                 if (CUI.rte.HtmlRules.Links.PROBABLE_HOST_REGEXP.test(hostname)) {
                     // user forgot to type a protocol; give them a default one:
                     var protocol = this.defaultProtocol || "http://";
@@ -407,7 +408,7 @@ CUI.rte.HtmlRules.Links = new Class({
                 } else {
                     // still might be a host which failed our PROBABLE_HOST_REGEXP test, but
                     // better to have a false-negative and do nothing than to wreck a user's
-                    // valid relative URL.  (See bugs 32422 and 35868.)
+                    // valid relative URL.  (See bugs CQ5-10876 and CQ5-13109.)
                 }
             }
         }

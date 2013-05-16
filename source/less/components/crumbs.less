@@ -8,11 +8,12 @@ nav.crumbs {
     // Place first so width/height/line-height can be reset
     .icon-chevronright;
   
-    padding: 0 @crumb-spacing*1.8 0 0;
+    padding: 0 @crumb-spacing 0 0;
 
     line-height: 2.75rem;
     width: auto; // reset icon CSS
     height: 2.75rem;
+    vertical-align: bottom;
 
     color: @crumb-text-color;
     font-weight: normal;
@@ -22,13 +23,11 @@ nav.crumbs {
 
     position: relative;
 
-
     &:before,
     &:hover:before {
       font-size: 1rem;
       position: relative;
-      left:  -@crumb-spacing;
-      padding-top: 2*@px;
+      padding-right: 10*@px;
       opacity: 1;
       color: @crumb-chevron-color;
     }
@@ -36,6 +35,7 @@ nav.crumbs {
     &:first-child {
       &:before {
         content: "";
+        padding-right: 0;
       }
     }
     

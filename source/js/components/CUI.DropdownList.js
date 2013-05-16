@@ -64,7 +64,8 @@
         cssClass: null,
         visible: false,
         scrollBuffer: 10,
-        loadingIndicator: "<div class='spinner'></div>"
+        loadingIndicator: "<div class='spinner'></div>",
+        noWidth: false
     },
 
     listElement: null,
@@ -104,6 +105,13 @@
         return this.options.visible;
     },
     
+    /**
+     * Toggle list visibility based on current status
+     */
+    toggle: function() {
+        this.isVisible() ? this.hide() : this.show();
+    },
+
     /**
      * Updates the rendering of this widget.
      */
@@ -247,11 +255,16 @@
         container.append(list);
         list = container;
 
-        list.css({position: "absolute",
-                  "z-index": "2000",
-                  left: left + "px", 
-                  top: top + "px", 
-                  width: width + "px"});
+        var cssProps = {
+            position: "absolute",
+            "z-index": "2000",
+            left: left + "px",
+            top: top + "px"
+        };
+        if (!this.options.noWidth) {
+            cssProps["width"] = width + "px";
+        }
+        list.css(cssProps);
         this.containerElement.addClass("dropdown-visible");
 
         list.on("scroll", "", function(event) {

@@ -33,3 +33,6 @@ components/CUI.CardView.js
 components/CUI.PathBrowser.js
 components/CUI.FileUpload.js
 components/CUI.Toolbar.js
+components/CUI.Accordion.js
+components/CUI.Tour.js
+validations.js

@@ -299,7 +299,7 @@ CUI.rte.EditorKernel = new Class({
     lockCount: 0,
 
 
-    construct: function(config) {
+    construct: function(config, defaultPluginConfigFn) {
         config = config || { };
         CUI.rte.Utils.applyDefaults(config, {
             "linkInternalize": [ {
@@ -319,7 +319,7 @@ CUI.rte.EditorKernel = new Class({
             CUI.rte.plugins.PluginRegistry.createRegisteredPlugins(this);
         CUI.rte.Compatibility.moveDeprecatedPluginConfig(config);
         CUI.rte.Compatibility.moveDeprecatedHtmlRules(config);
-        CUI.rte.Compatibility.configurePlugins(config, this);
+        CUI.rte.Compatibility.configurePlugins(config, this, defaultPluginConfigFn);
         delete config.rtePlugins;
         // Initialize HTML rules
         if (config.htmlRules) {
@@ -554,7 +554,7 @@ CUI.rte.EditorKernel = new Class({
             var context = this.getEditContext();
             if (context.isInitialized()) {
                 try {
-                    context.doc.execCmd("useCSS", true);
+                    context.doc.execCommand("useCSS", true);
                 } catch (e) {
                     // ignore if unsupported
                 }
@@ -612,6 +612,11 @@ CUI.rte.EditorKernel = new Class({
      * @param {Object} options (optional) Options
      */
     registerHandler: function(obj, eventName, handler, scope, options) {
+        var com = CUI.rte.Common;
+        if (com.ua.isTouchInIframe && com.strStartsWith(eventName, "touch")) {
+            // emergency brake: must not use touch events if editor is in iframe
+            return;
+        }
         CUI.rte.Eventing.on(this.editContext, obj, eventName, handler, scope, options);
         this.registeredHandlers.push({
             "obj": obj,
@@ -785,6 +790,14 @@ CUI.rte.EditorKernel = new Class({
             // necessary!
             this.registerHandlers(doc, {
                     "keydown": function(e) {
+                        // workaround for MobileSafari temporary focus shift when in
+                        // iframe and touchXxx handlers present
+                        if (com.ua.isTouch) {
+                            if (com.isTag(context.win.frameElement, "iframe")) {
+                                // console.log("using focus transfer workaround.")
+                                context.win.focus();
+                            }
+                        }
                         this.cleanupOnEvent(e);
                         if (this.isEventingDisabled) {
                             return;
@@ -862,7 +875,8 @@ CUI.rte.EditorKernel = new Class({
                             return;
                         }
                         this.firePluginEvent("mousedown", e, false);
-                    }, "touchend": function(e) {
+                    },
+                    "touchend": function(e) {
                         this.cleanupOnEvent(e);
                         if (this.isEventingDisabled) {
                             return;

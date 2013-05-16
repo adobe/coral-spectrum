@@ -47,7 +47,7 @@ mv -v *.zip releases/
 # update gh-pages on github
 echo "Committing and pushing to git ..."
 git add -A
-git commit -m "Updated for CoralUI release $version"
+git commit -m "@releng - Updated for CoralUI release $version"
 git push origin gh-pages
 
 # clean up

@@ -3,12 +3,14 @@
   Must be styled using an adjacent label or span tag
 */
 
-input[type=checkbox],
+input[type=checkbox], 
+input[role=checkbox],
 input[type=radio] {
-  opacity: 0.00001; // used to allow the check box to be clicked in some browsers.
+  opacity: 0.0001; // used to allow the check box to be clicked in some browsers.
   overflow: hidden;
   width: 1rem;
   height: 1rem;
+  padding: 0;
 
   & + label,
   & + span {
@@ -34,7 +36,7 @@ input[type=radio] {
     content: "\a0";
 
     line-height: 1.5;
-    font-size: 0.70rem;
+    font-size: 0.7rem;
     color: @checkbox-check-color;
     text-align: center;
   }
@@ -43,24 +45,35 @@ input[type=radio] {
   &:focus + span:before {
     .glow;
   }
-
-  &:disabled + label:before,
-  &:disabled + span:before {
-    border-color: @checkbox-disabled-border-color;
-    background-color: @checkbox-disabled-background-color;
-    color: @checkbox-disabled-check-color;
+  
+  &:disabled {
+      cursor: default;
+      pointer-events: none;
+      
+      & + label:before,
+      & + span:before {
+        border-color: @checkbox-disabled-border-color;
+        background-color: @checkbox-disabled-background-color;
+        color: @checkbox-disabled-check-color;
+      }
   }
+  
 }
 
-input[type=checkbox] {
+input[type=checkbox], 
+input[role=checkbox] {
   &:indeterminate + label:before,
-  &:indeterminate + span:before {
-    content: "\f0c4";
+  &:indeterminate + span:before,
+  &[aria-checked=mixed] + label:before,
+  &[aria-checked=mixed] + span:before {
+    content: @icon-minus-content;
   }
-
+  
   &:checked + label:before,
-  &:checked + span:before {
-    content: "\f037";
+  &:checked + span:before,
+  &[aria-checked=true] + label:before,
+  &[aria-checked=true] + span:before {
+    content: @icon-check-content;
   }
 }
 

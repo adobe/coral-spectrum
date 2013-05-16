@@ -37,12 +37,14 @@
         "lists#outdent": "icon-textindentdecrease",
         "lists#indent": "icon-textindentincrease",
         "links#modifylink": "icon-link",
-        "links#unlink": "icon-linkoff"
+        "links#unlink": "icon-linkoff",
+        "control#close": "icon-close"
     };
 
     var CLASSES = {
         "#format": "multi-select",
-        "#justify": "single-select"
+        "#justify": "single-select",
+        "control#close": "modechanger"
     };
 
 
@@ -138,6 +140,7 @@
 
             var com = CUI.rte.Common;
             var uiSettings = this._getUISettings(options);
+            var addClasses;
 
             var items = [ ];
             for (var e = 0; e < elements.length; e++) {
@@ -151,6 +154,7 @@
             var triggerTpl = CUI.rte.Templates["popover-trigger"];
             var popoverTpl = CUI.rte.Templates["popover"];
             var popoverItemTpl = CUI.rte.Templates["popover-item"];
+            var separatorTpl = CUI.rte.Templates["separator"];
             for (var tbId in uiSettings) {
                 if (uiSettings.hasOwnProperty(tbId)) {
                     var toolbar = uiSettings[tbId];
@@ -168,19 +172,25 @@
                         if (itemToAdd && itemToAdd.length) {
                             if (itemToAdd.charAt(0) === "#") {
                                 // popover trigger
-                                var addClasses = this._getClassesForCommand(itemToAdd);
+                                addClasses = this._getClassesForCommand(itemToAdd);
                                 addClasses = (addClasses ? " " + addClasses : "");
                                 tbItems.push(triggerTpl({
                                     "ref": itemToAdd,
                                     "icon": this._getIconForCommand(itemToAdd),
                                     "addClasses": addClasses
                                 }));
+                            } else if (itemToAdd === "-") {
+                                // separator
+                                tbItems.push(separatorTpl());
                             } else {
                                 // regular item
                                 var element = getItem(itemToAdd);
                                 if (element) {
+                                    addClasses = this._getClassesForCommand(itemToAdd);
+                                    addClasses = (addClasses ? " " + addClasses : "");
                                     element.icon = element.icon ||
                                             this._getIconForCommand(element.ref);
+                                    element.addClasses = addClasses;
                                     tbItems.push(itemTpl(element));
                                 }
                             }
@@ -200,11 +210,21 @@
                             var poItemDefs = popoverToProcess.items;
                             var poItemCnt = poItemDefs.length;
                             for (var pi = 0; pi < poItemCnt; pi++) {
-                                var poItem = getItem(poItemDefs[pi]);
-                                if (poItem) {
-                                    poItem.icon = poItem.icon ||
-                                            this._getIconForCommand(poItem.ref);
-                                    poItems.push(popoverItemTpl(poItem));
+                                if (poItemDefs[pi] !== "-") {
+                                    // popover item
+                                    var poItem = getItem(poItemDefs[pi]);
+                                    if (poItem) {
+                                        var cmd = poItem.ref;
+                                        addClasses = this._getClassesForCommand(cmd);
+                                        addClasses = (addClasses ? " " + addClasses : "");
+                                        poItem.icon =
+                                                poItem.icon || this._getIconForCommand(cmd);
+                                        poItem.addClasses = addClasses;
+                                        poItems.push(popoverItemTpl(poItem));
+                                    }
+                                } else {
+                                    // popover separator
+                                    poItems.push(separatorTpl());
                                 }
                             }
                             popovers.push(popoverTpl({
@@ -223,9 +243,11 @@
                     });
                 }
             }
-            $editable.before($(CUI.rte.Templates["container"]({
+            var $toolbar = $(CUI.rte.Templates["tb-container"]({
                 "toolbars": toolbars
-            })));
+            }));
+            var $ui = CUI.rte.UIUtils.createOrGetUIContainer($editable);
+            $ui.append($toolbar)
         },
 
 
@@ -323,9 +345,15 @@
         "inline": {
             "toolbar": [
                 "#format",
+                "-",
                 "#justify",
+                "-",
                 "#lists",
-                ""
+                "-",
+                "links#modifylink",
+                "links#unlink",
+                "-",
+                "control#close"
             ],
             "popovers": {
                 "format": {

@@ -2,7 +2,8 @@
 .selector {
   display: inline-block;
   font-size: 0; // Fight space between inline block elements
-  background-color: @selector-disabled-color;
+  
+  //background-color: @selector-disabled-color; // Why? This messes up selectors used in toolbars things up.
 
   label {
     line-height: 32*@px;

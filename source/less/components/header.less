@@ -9,21 +9,30 @@ header.top {
   height: @header-height;
 
   background-color: @header-background-color;
+  
+  &, 
+  > nav.main > a,
+  > nav.crumbs > a,
+  > .drawer > a {
+    color: @header-nav-font-color;
 
-  .box-shadow(0 0.1rem 0.45rem rgba(0, 0, 0, .35)); // TBD: make sure this matches mocks...
-
-  color: @header-nav-font-color;
+    &:hover,
+    &:focus {
+      color: @header-nav-down-font-color;
+      text-decoration: none;
+      opacity: 1;
+    }
+  }
 
   white-space: nowrap;
 
   div.logo {
     display: inline-block;
-    height: @header-height;
-    padding: 0 0.25rem 0 0.75rem;
+    
+    padding: 10*@px 6*@px 10*@px 15*@px;
 
-    vertical-align: top;
+    vertical-align: bottom;
 
-    line-height: @header-height - 0.2rem;
     text-align: center;
 
     img {
@@ -31,10 +40,14 @@ header.top {
       width: @header-logo-size; 
     }
 
+    i.medium {
+      min-width: @header-logo-size;
+      min-height: @header-logo-size;
+      font-size: 1.4rem;
+    }
+
     > a {
       display: inline-block;
-      height: @header-height;
-      line-height: @header-height;
 
       > * {
         vertical-align: middle;
@@ -42,8 +55,8 @@ header.top {
     }
   }
 
-  [class^="icon-"]:before,
-  [class*=" icon-"]:before {
+  [class^="icon-"]:not(.active):before,
+  [class*=" icon-"]:not(.active):before {
     color: #fff;
     opacity: 0.99;
   }
@@ -52,15 +65,13 @@ header.top {
     margin-left: 0;
   }
 
-  nav.main {
+  > nav.main {
 
     display: inline-block;
 
     a {
       display: inline-block;
       height: @header-height;
-
-      color: @header-nav-font-color;
 
       /*
       Spacing as a function of header item spacing
@@ -70,7 +81,7 @@ header.top {
       margin-right: @header-nav-spacing / 2;
 
       line-height: @header-height;
-      font-size: @header-nav-font-size;  // 18px
+      font-size: @header-nav-font-size;
 
       text-decoration: none;
 
@@ -81,12 +92,21 @@ header.top {
     }
   }
 
-  >nav.crumbs {
+  > nav.crumbs {
     display: inline-block; // NEVER set a box to display: inline
 
     a {
-      font-size: 18*@px;
-      color: #fff;
+      font-size: @header-nav-font-size;
+
+      font-weight: bold;
+      text-rendering: optimizelegibility;
+      -webkit-font-smoothing:antialiased;
+
+
+      &:before,
+      &:hover:before {
+        color: @header-crumb-chevron-color;
+      }
     }
   }
 
@@ -97,22 +117,73 @@ header.top {
 
     display: inline-block;
     height: @header-height;
-    padding-right: 16*@px;
+    padding-right: 15*@px;
 
     line-height: @header-height;
+
+    > a,
+    > div {
+      margin-left: 11*@px;
+    }
 
     > a {
       display: inline-block;
       height: @header-height;
       line-height: @header-height;
       vertical-align: top;
+      // color: @header-nav-font-color;
+      font-size: @header-nav-font-size;
     }
 
     .icon-user {
-      margin-left: 10*@px;
+      font-size: 22*@px;
+      width: 24*@px;
+
+      > span {
+        display: none;
+      }
+
       &:before {
-        font-size: 1.2rem;
+        opacity: 0.8;
+      }
+      
+      &:hover,
+      &:focus {
+        &:before {
+          opacity: 1;
+        }  
       }
     }
   }
 }
+
+@media all and (min-width: 768px) and (max-width: 959px) {
+  header.top { 
+    nav.crumbs a {
+      display: none;  
+
+      &:nth-last-child(1),
+      &:nth-last-child(2) {
+        display: inline-block;
+      }
+    }
+  }
+}
+
+@media all and (max-width: 767px) { 
+  header.top { 
+    nav.crumbs a {
+      display: none;  
+
+      &:nth-last-child(1) {
+        display: inline-block;
+      }
+    }
+  }    
+}
+
+/*@media (min-width: 380px) and (max-width: 480px) {     
+}
+
+@media (max-width: 379px) { 
+}*/

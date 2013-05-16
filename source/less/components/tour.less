@@ -1,0 +1,174 @@
+/**
+Class: .tour
+*/
+// Background
+.tour-backdrop { // from modal
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: @zindexModalBackdrop;
+
+  background-color: @modal-underlay-background-color;
+}
+
+.tour {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: @zindexModal;
+  overflow: hidden;
+
+  display: none;
+  width: 852*@px;
+  height: 596*@px;
+
+  margin-left: -436*@px;
+  margin-top: -308*@px;
+
+  outline: none; // Firefox shows focus outline
+
+  border: 0.625rem solid @modal-border-color;
+
+  background-color: @modal-body-background-color;
+  .background-clip(padding-box); // don't let the border overlap the background    
+  
+  &.show {
+    display: block;
+  } 
+
+  >.tour-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    overflow: hidden;
+  
+    // set them all hidden to left
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(100%);
+    transform: translateX(-100%);
+
+    -webkit-transition: -webkit-transform 0.5s ease-out;
+    transition: transform 0.5s ease-out;
+
+    >section { // text message
+      display: block;
+      margin: 0;
+      position: absolute;
+      bottom: 50*@px;
+      height: 150*@px;
+      width: 100%;
+      .box-shadow(0 -2*@px 4*@px @tour-slide-text-shadow-color);
+      text-align: center;
+
+      >* {
+        color: @tour-slide-text-color;
+      }
+
+      >h1 {
+        font-size: 22*@px;
+        font-family: AdobeClean;
+        font-weight: bold;
+        margin: 25*@px 0;
+      }
+
+      >p {
+        font-size: 18*@px;
+        font-family: AdobeCleanLight;
+      }
+    }
+
+    &.active {
+      -webkit-transform: translateX(0);
+      -moz-transform: translateX(0);
+      -ms-transform: translateX(0);
+      transform: translateX(0);
+    }
+
+    &.active ~.tour-slide {
+      -webkit-transform: translateX(100%);
+      -moz-transform: translateX(100%);
+      -ms-transform: translateX(100%);
+      transform: translateX(100%);
+    }
+  }
+
+  > nav {
+    position: absolute;
+    bottom: 0;
+    height: 50*@px;
+    width: 100%;
+    background: @tour-nav-background-color;
+    text-align: center;
+
+    font-size: 0; // set font-size to 0 to remove the spacing between the circles
+    
+    >button {
+      position: relative;
+      margin: 9*@px;
+      z-index: 1;
+      display: none;
+
+      &.skip {
+        float: left;
+      }
+
+      &.done {
+        float: right;
+      }
+
+      &.show {
+        display: inline;
+      }
+    }
+
+    >a {
+      &.prev, &.next {
+        position: relative;
+        line-height: 50*@px;
+        height: 50*@px;
+        margin: 0 18*@px;
+        z-index: 1;
+      }
+
+      &.prev {
+        float: left;
+      }
+
+      &.next {
+        float: right;
+      }
+
+      &.hide {
+        display: none;
+      }
+    }
+
+    >.control {
+      position: absolute;
+      left: 0;
+      right: 0;
+
+      > a {
+        display: inline-block;
+
+        font-size: @tour-nav-circle-size;
+
+        margin: 21*@px 5*@px 0 5*@px;
+        height: @tour-nav-circle-size;
+        width: @tour-nav-circle-size;
+        border-radius: @tour-nav-circle-size;  
+
+        background: @tour-nav-circle-color;
+
+        &.active, 
+        &:hover {
+          background: @tour-nav-circle-active-color;
+        }
+      }
+    }
+  }
+}

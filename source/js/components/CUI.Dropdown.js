@@ -50,6 +50,7 @@
       @param {String} [options.placeholder="Select"]      Placeholder string to display in empty widget
       @param {boolean} [options.disabled=false]      Is this widget disabled?
       @param {boolean} [options.hasError=false]      Does this widget contain an error?
+      @param {boolean} [options.noWidth=false]      Don't set dropdown list width?
       @param {Function} [options.autocompleteCallback=use options]      Callback for autocompletion: callback(handler, searchFor) with handler is a result callback function with handler(results, searchFor). See example page.
       
     */
@@ -83,7 +84,8 @@
         placeholder: "Select",
         disabled: false,
         editable: false,
-        hasError: false
+        hasError: false,
+        noWidth: false
     },
     
     dropdownList: null,
@@ -114,7 +116,8 @@
             element: this.buttonElement,
             positioningElement: this.positioningElement,
             options: this.options.options,
-            optionRenderer: this._optionRenderer.bind(this)
+            optionRenderer: this._optionRenderer.bind(this),
+            noWidth: this.options.noWidth
         });
 
         if (this.options.editable) {
@@ -123,21 +126,27 @@
                 positioningElement: this.positioningElement,
                 options: this.options.options,
                 optionRenderer: this._optionRendererAutocomplete.bind(this),
+                noWidth: this.options.noWidth,
                 cssClass: "autocomplete-results"
             });
         }
         
         this.buttonElement.on("dropdown-list:select", "", this._processSelect.bind(this));
         
-        this.buttonElement.on("click", "", function(event) {
+        this.buttonElement.on("mousedown", "", function(event) {
             event.preventDefault();
+            this.dropdownList.preventHiding = false;
             if (this.autocompleteList !== null) {
                 this._adjustAutocompleter();
             } else {
-                this.dropdownList.show();
+                this.dropdownList.toggle();
             }
         }.bind(this));
-        
+        this.buttonElement.on("mouseup", "", function(event) {
+            event.preventDefault();
+            this.dropdownList.preventHiding = true;
+        }.bind(this));
+
         // Auto completion
         this.inputElement.on("click", "", function() {
            if (this.autocompleteList !== null) this._adjustAutocompleter();
@@ -200,7 +209,7 @@
             this.autocompleteList.set({
                options: result
             });
-            this.autocompleteList.show();
+            this.autocompleteList.toggle();
         }.bind(this);
         
         if (this.options.autocompleteCallback) {
@@ -277,7 +286,7 @@
             }
             this.syncSelectElement.change();
         }
-        
+
         this._update(true);
     },
     
@@ -338,6 +347,7 @@
         if (this.$element.attr("data-editable")) this.options.editable = true;
         if (this.$element.attr("data-error")) this.options.hasError = true;
         if (this.$element.hasClass("error")) this.options.hasError = true;
+        if (this.$element.attr("data-nowidth")) this.options.noWidth = true;
     },
     
     /** @ignore */
@@ -405,7 +415,7 @@
   // Data API
   if (CUI.options.dataAPI) {
     $(document).on("cui-contentloaded.data-api", function(e) {
-        $("[data-init=dropdown]", e.target).dropdown();
+        $("[data-init~=dropdown]", e.target).dropdown();
     });
   }
 }(window.jQuery));

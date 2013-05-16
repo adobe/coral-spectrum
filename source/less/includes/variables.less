@@ -22,16 +22,17 @@
 
 
 // Header
-@header-height: 44*@px;
-@header-background-color: rgb(34, 34, 34);
-@header-font-family: AdobeClean;
+@header-height: 46*@px;
+@header-background-color: rgb(35, 35, 35);
+@header-font-family: @font-base-family;
 
 @header-nav-font-size: 18*@px;
-@header-nav-font-color: rgb(153, 153, 153);
+@header-nav-font-color: rgb(230, 230, 230);
 @header-nav-spacing: 28*@px;
-@header-nav-down-font-color: white;
+@header-nav-down-font-color: rgb(255, 255, 255);
+@header-crumb-chevron-color: rgb(120, 120, 120);
 
-@header-logo-size: 18*@px;
+@header-logo-size: 24*@px;
 
 
 // Toolbar
@@ -60,7 +61,7 @@
 @crumb-list-border-color: @modal-outline-color;
 @crumb-list-text-color: rgb(51,51,51);
 @crumb-list-divider-color: rgb(210,210,210);
-@crumb-spacing: 14*@px;
+@crumb-spacing: 4*@px;
 
 
 // Pulldown
@@ -72,11 +73,15 @@
 @pulldown-list-divider-color: rgb(210,210,210);
 @pulldown-active-text-color: rgb(255, 255, 255);
 @pulldown-active-background-color: rgb(65, 143, 212);
+@pulldown-disabled-text-color: rgb(180, 180, 180);
 
 // Badge
-@badge-background-color: rgb(64, 151, 220);
-@badge-empty-background-color: rgb(119, 119, 119);
+@badge-background-color: rgb(50, 135, 210);
+@badge-hover-background-color: rgb(125, 175, 230);
+@badge-empty-background-color: rgb(230, 230, 230);
+@badge-hover-empty-background-color: rgb(255, 255, 255);
 @badge-font-color: white;
+@badge-empty-font-color: rgb(35, 35, 35);
 
 
 // Icons
@@ -246,10 +251,10 @@
 @slider-border-error-color: rgb(204, 84, 75);
 
 // Rail
-@rail-input-placeholder-color: rgb(166, 166, 166);
+@rail-input-placeholder-color: rgb(120, 120, 120);
 
-@rail-background-color: rgb(72, 76, 77);
-@rail-dark-background-color: rgb(58, 62, 62);
+@rail-background-color: rgb(77, 77, 77); // standart background color for rail
+@rail-dark-background-color: rgb(60, 60, 60); // for input-text and special components
 
 @rail-shadow-distance: 0.1rem;
 @rail-shadow-spread: 0.45rem;
@@ -264,9 +269,16 @@
 @rail-section-dark-highlight-color: rgb(54, 57, 57);
 @rail-section-link-color: rgb(199, 199, 199);
 
+@rail-input-text-border-color: rgb(44, 44, 44);
+
 @rail-well-background-color: rgb(57, 60, 60);
 
-@rail-font-color: rgb(220, 220, 220);
+@rail-active-background-color: rgb(72, 76, 77);
+@rail-active-secondrary-background-color: rgb(51, 51, 51);
+
+@rail-font-color: rgb(230, 230, 230);
+@rail-font-active-color: rgb(170, 170, 170);
+@rail-font-hover-color: rgb(255, 255, 255);
 @rail-icon-color: rgb(255, 255, 255);
 @rail-icon-active-color: rgb(65, 145, 210);
 
@@ -279,6 +291,11 @@
 @rail-light-section-dark-highlight-color: rgb(174, 177, 177);
 @rail-light-section-link-color: rgb(50, 50, 50);
 
+@rail-dropdown-border-color: rgb(40, 40, 40);
+@rail-dropdown-background-color: rgb(70, 70, 70);
+@rail-dropdown-font-color: rgb(200, 200, 200);
+@rail-dropdown-text-size: 10*@px;
+@rail-dropdown-height: 30*@px;
 
 // Table
 @table-border-color: rgb(187, 187, 187);
@@ -369,10 +386,6 @@
 @close-opacity: 50;
 
 
-// Wait indicator
-@wait-active-color: rgb(22, 141, 214);
-@wait-inactive-color: rgb(102, 102, 102);
-
 // Progress bar
 @progress-width:  12rem;   // TBD: leave as em so it scales with font size?
 @progress-height: 22*@px;  // TBD: leave as em so it scales with font size?
@@ -402,6 +415,14 @@
 
 @modal-outline-color: rgb(60, 60, 60); // cannot use opacity for this, must be on inside
 
+// Tour
+@tour-nav-background-color: rgb(221, 221, 221);
+@tour-nav-circle-size: 8*@px;
+@tour-nav-circle-color: rgb(177, 177, 177);
+@tour-nav-circle-active-color: rgb(49, 134, 209);
+@tour-slide-text-shadow-color: rgba(0, 0, 0, 0.3);
+@tour-slide-text-color: rgb(69, 69, 69);
+
 
 // Checkbox
 @checkbox-check-color: rgb(80, 130, 205);
@@ -430,6 +451,9 @@
 @wizard-back-button-border-color: #37393A;
 @wizard-next-button-background-color: #4090d1;
 @wizard-next-button-border-color: #1a3348;
+@wizard-disabled-button-text-color: #6E6E6E;
+@wizard-disabled-button-background-color: #505050;
+@wizard-disabled-button-border-color: #414141;
 @wizard-progress-title-color: #7f8283;
 @wizard-progress-active-title-color: @white;
 @wizard-progress-list-item-offset: 40*@px;

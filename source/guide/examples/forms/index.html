@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Forms</title>
+
+  <link rel="stylesheet" href="../../css/cui.css">
+  
+  <script src="../../js/libs/handlebars.js"></script>
+  <script src="../../js/libs/moment.js"></script>
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/libs/jquery-fingerpointer.js"></script>
+  <script src="../../js/libs/jquery-message.js"></script>
+  <script src="../../js/libs/jquery-validator.js"></script>
+  <script src="../../js/libs/toe.js"></script>
+  <script src="../../js/CUI.js"></script>
+</head>
+<body>
+  <form class='dialog vertical' action='/content/geometrixx/en/_jcr_content/par/image' method='post'>
+    <nav class="toolbar content-header"><button  class='foundation-history-control&#x20;back&#x20;left withLabel' type='button' autocomplete='off' data-foundation-history-control-action='back'>Cancel</button><div class="center"><h1>Work in Progress – not yet for production use</h1></div><button type="submit"  class='next&#x20;right'>Done</button></nav>
+    
+    <div class="content-container">
+        <input type="hidden" name=":redirect" value="/editor.html/content/geometrixx/en.html" />
+          
+
+<div  class='nav tabs noscroll'>
+    <nav><a href="#" data-toggle='tab'>Image</a><a href="#" data-toggle='tab'>Advanced</a></nav>
+<section>
+        <section class="form-column">
+            <div  title='Advanced'>
+            <label class=""><span>Title</span><input type="text"  name='.&#x2f;jcr&#x3a;title' value='My&#x20;very&#x20;own&#x20;image&#x20;title' data-fieldDescription='Leave&#x20;empty&#x20;to&#x20;use&#x20;the&#x20;page&#x20;title.' /></label>
+
+            <label class=""><span>Alt Text</span><input type="text"  name='.&#x2f;alt' value='This&#x20;is&#x20;Alica&#x21;' data-fieldDescription='&#x28;leave&#x20;empty&#x20;to&#x20;use&#x20;the&#x20;title&#x20;defined&#x20;above&#x29;' /></label>
+
+            <label class=""><span>Link to</span><input type="text"  class='pathbrowser' name='.&#x2f;linkURL' data-root-path='&#x2f;content' data-option-loader='function&#x28;path,&#x20;callback&#x29;&#x20;&#x7b;&#xa;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;jQuery.get&#x28;path&#x20;&#x2b;&#x20;&quot;.pages.json&quot;,&#x20;&#x7b;&#xa;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;predicate&#x3a;&#x20;&quot;hierarchyNotFile&quot;&#xa;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x7d;,&#xa;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;function&#x28;data&#x29;&#x20;&#x7b;&#xa;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;var&#x20;pages&#x20;&#x3d;&#x20;data.pages&#x3b;&#xa;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;var&#x20;result&#x20;&#x3d;&#x20;&#x5b;&#x5d;&#x3b;&#xa;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;for&#x28;var&#x20;i&#x20;&#x3d;&#x20;0&#x3b;&#x20;i&#x20;&lt;&#x20;pages.length&#x3b;&#x20;i&#x2b;&#x2b;&#x29;&#x20;&#x7b;&#xa;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;result.push&#x28;pages&#x5b;i&#x5d;.label&#x29;&#x3b;&#xa;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x7d;&#xa;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;if&#x20;&#x28;callback&#x29;&#x20;callback&#x28;result&#x29;&#x3b;&#xa;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x7d;,&#x20;&quot;json&quot;&#x29;&#x3b;&#xa;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;return&#x20;false&#x3b;&#xa;&#x20;&#x20;&#x20;&#x20;&#x7d;' value='&#x2f;content&#x2f;catalogs' data-init='pathbrowser' autocomplete='on' /></label>
+
+            <label class=""><span>Description</span><textarea  name='.&#x2f;jcr&#x3a;description'>Lorem ipsum</textarea></label>
+
+            <label class=""><span>Size</span><span  data-unitName='px' data-nameWidth='.&#x2f;width' data-nameHeight='.&#x2f;height'><input type="text"  name='.&#x2f;width' value='345' />px&nbsp;&times;&nbsp;<input type="text"  name='.&#x2f;height' value='120' />px</span></label>
+
+            <label class=""><span>Datepicker</span>
+              <div class="datepicker" data-init="datepicker">
+                <input type="time" value="" data-displayed-format="HH:mm" name="date5"><button class="icon-calendar small"><span>Datetime picker</span></button>
+            </div>
+            </label>
+
+
+           <label class=""><span>Dropdown Single</span>
+            <div class="dropdown" data-init="dropdown">
+                <button>Single Select</button>
+                <select name="dropdown">
+                    <option>Single One</option>
+                    <option selected>Single Two</option>
+                    <option>Single Three</option>
+                </select>
+            </div>
+            </label>
+            
+            <!-- Multi select -->
+           <label class=""><span>Dropdown Multiple</span>
+            <div class="dropdown" data-init="dropdown">
+                <button>Multi Select</button>
+                <select name="dropdown2" multiple>
+                    <option>Multi One</option>
+                    <option selected>Multi Two</option>
+                    <option>Multi Three</option>
+                </select>
+            </div>
+            </label>
+            
+            <!-- Editable -->
+           <label class=""><span>Dropdown Editable</span>
+            <div class="dropdown dropdown-editable" data-editable="true" data-init="dropdown">
+                <input type="text" placeholder="Editable Select">
+                <button>Editable</button>
+                <select name="dropdown3">
+                    <option>Edit One</option>
+                    <option>Edit Two</option>
+                    <option>Edit Three</option>
+                </select>
+            </div>
+            </label>
+
+           <label class=""><span>Slider</span>
+              <div class="slider" data-init="slider">
+                <input type="range" value="14" min="10" max="20" step="2">
+              </div>
+            </label>
+
+
+
+          </div>
+        </section>
+  </section>
+          <section>
+        <div  title='Image'>
+            <label class=""><span>Image</span><img src='&#x2f;content&#x2f;dam&#x2f;geometrixx&#x2f;portraits&#x2f;jane_doe.jpg'/></label>
+        </div>
+    </section>
+  </div>
+
+
+      </div>
+  </form>
+</body>
+</html>

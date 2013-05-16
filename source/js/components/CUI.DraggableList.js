@@ -42,11 +42,26 @@
     construct: function(event, source, dragElement, dropZones, restrictAxis) {
       this.sourceElement = source;
       this.dragElement = dragElement;
+      this.container = this._getViewContainer(dragElement);
+      this.containerHeight = this.container.get(0).scrollHeight; // Save current container height before we start dragging
       this.dropZones = dropZones;
       this.axis = restrictAxis;
+      this.scrollZone = 20; // Use 20px as scrolling zone, static for now
       this.dragStart(event);
     },
     currentDragOver: null,
+    
+    _getViewContainer: function(element) {
+      // Search for the first parent that has a hidden/scrolling overflow
+      while (true) {
+        var p = element.parent();
+        if (p.length == 0) return p;
+        if (p.is("body")) return p;
+        var flow = p.css("overflow");
+        if (flow == "hidden" || flow == "auto" || flow == "scroll") return p;
+        element = p;
+      }
+    },
     dragStart: function(event) {
       event.preventDefault();
       // Starting the drag
@@ -82,6 +97,29 @@
       var p = currentPagePosition(event);
       var x = p.x;
       var y = p.y;
+
+      // Need to scroll?      
+      if (this.container.is("body")) {
+        if ((y - this.container.scrollTop()) < this.scrollZone) this.container.scrollTop(y - this.scrollZone);
+        if ((y - this.container.scrollTop()) > (this.container.height() - this.scrollZone)) this.container.scrollTop(y - (this.container.height() - this.scrollZone));
+      } else {
+        var oldTop = this.container.scrollTop();
+        var t = this.container.offset().top + this.scrollZone;
+        if (y < t) {
+          this.container.scrollTop(this.container.scrollTop() - (t - y));
+        }
+        var h = this.container.offset().top + this.container.height() - this.scrollZone;
+        if (y > h) {
+          var s = this.container.scrollTop() + (y - h);
+          if (s > (this.containerHeight - this.container.height())) {
+            s = Math.max(this.containerHeight - this.container.height(), 0);
+          }
+          this.container.scrollTop(s);
+        }
+        var newTop = this.container.scrollTop();
+        this.dragStart.y += oldTop - newTop; // Correct drag start position after element scrolling
+      }
+      
     
       var newCss = {}
       if (this.axis != "horizontal") newCss["top"] = y - this.dragStart.y;
@@ -388,7 +426,7 @@
 
   if (CUI.options.dataAPI) {
       $(document).on('cui-contentloaded.data-api', function() {
-        $("[data-init=draggable-list]").draggableList();
+        $("[data-init~=draggable-list]").draggableList();
       });
   }
 }(window.jQuery));

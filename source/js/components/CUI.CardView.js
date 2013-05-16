@@ -76,6 +76,9 @@
             "selectAll": {                              // defines the "select all" config (list view only)
                 "selector": "header > i.select",
                 "cls": "selected"
+            },
+            "sort": {                                   // defines the config for column sort
+                "columnSelector": ".label > *"
             }
         }
 
@@ -115,6 +118,34 @@
                 widget = $($el[0]).data("cardView");
             }
             return widget;
+        },
+
+        /**
+         * Mixes two objects so that for every missing property in object1 the properties of object2 are used. This is also done
+         * for nested objects.
+         * @param {object} Object 1
+         * @param {object} Object 2
+         * @return {object} The mixed object with all properties
+        */
+        mixObjects: function(object1, object2) {
+            if (object1 === undefined) return object2;
+
+            var result = {};
+            for(var i in object2) {
+                if (object1[i] === undefined) {
+                    result[i] = object2[i];
+                    continue;
+                }
+                var p = object1[i];
+
+                // Go one step deeper in the object hierarchy if we find an object that is not a string.
+                // Note: typeof returns "function" for functions, so no special testing for functions needed.
+                if (typeof(object1[i]) == "object" && (!(object1[i] instanceof String))) {
+                    p = this.mixObjects(object1[i], object2[i]);
+                }
+                result[i] = p;
+            }
+            return result;
         },
 
         /**
@@ -598,7 +629,9 @@
          * @param {Object} e The event that starts the move
          */
         start: function(e) {
-            this.$oldBefore = this.$itemEl.prev();
+            this.$oldPrev = this.$itemEl.prev();
+            this.$oldNext = this.$itemEl.next();
+
             var evtPos = this._getEventCoords(e);
             if (this.dragCls) {
                 this.$itemEl.addClass(this.dragCls);
@@ -669,11 +702,15 @@
             this.$doc.off("mousemove.listview.drag");
             this.$doc.off("touchend.listview.drag");
             this.$doc.off("mouseup.listview.drag");
-            var $newBefore = this.$itemEl.prev();
-            this.$itemEl.trigger($.Event("drop", {
-                newBefore: $newBefore,
-                oldBefore: this.$oldBefore,
-                hasMoved: !Utils.equals($newBefore, this.$oldBefore)
+            var $newPrev = this.$itemEl.prev();
+            var $newNext = this.$itemEl.next();
+
+            this.$itemEl.trigger($.Event("item-moved", {
+                newPrev: $newPrev,
+                newNext: $newNext,
+                oldPrev: this.$oldPrev,
+                oldNext: this.$oldNext,
+                hasMoved: !Utils.equals($newPrev, this.$oldPrev)
             }));
             e.stopPropagation();
             e.preventDefault();
@@ -785,6 +822,89 @@
 
     });
 
+    /**
+        Handles resort according to columns
+    */
+    var ColumnSortHandler = new Class(/** @lends CUI.CardView.ColumnSortHandler# */{
+        construct: function(options) {
+            this.model = options.model;
+            this.comparators = options.comparators;
+            this.selectors = options.selectors;
+            this.columnElement = options.columnElement;
+
+            this.headerElement = options.columnElement.closest(this.selectors.headerSelector);                    
+            var header = this.model.getHeaderForEl(this.headerElement);
+            this.items = this.model.getItemsForHeader(header);
+
+            this.isReverse = this.columnElement.hasClass("sort-asc"); // switch to reverse?
+            this.toNatural = this.columnElement.hasClass("sort-desc"); // back to natural order?
+            this.fromNatural = !this.headerElement.hasClass("sort-mode");
+            
+            this.comparator = null;
+
+            // Choose the right comparator
+            if (this.comparators) {
+                for(var selector in this.comparators) {
+                    if (!this.columnElement.is(selector)) continue;
+                    this.comparator = this.comparators[selector];
+                }
+            }
+
+            if (!this.comparator) this.comparator = this._readComparatorFromMarkup();
+        },
+        _readComparatorFromMarkup: function() {
+            var selector = this.columnElement.data("sort-selector");
+            var attribute = this.columnElement.data("sort-attribute");
+            var sortType = this.columnElement.data("sort-type");
+            if (!selector && !attribute) return null;
+            return new CUI.CardView.DefaultComparator(selector, attribute, sortType);
+
+        },
+        _adjustMarkup: function() {
+            // Adjust general mode class
+            if (this.fromNatural) this.headerElement.addClass("sort-mode");
+            if (this.toNatural) this.headerElement.removeClass("sort-mode");
+            
+            // Adjust column classes
+            this.headerElement.find(this.selectors.controller.sort.columnSelector).removeClass("sort-asc sort-desc");
+            this.columnElement.removeClass("sort-desc sort-asc");
+            if (!this.toNatural) this.columnElement.addClass(this.isReverse ? "sort-desc" : "sort-asc");
+
+            // Show or hide d&d elements 
+            var showMoveHandle = this.toNatural;
+            $.each(this.items, function() {this.getItemEl().find(".move").toggle(showMoveHandle);});
+        },
+        sort: function() {
+            if (!this.comparator && !this.toNatural) return;
+
+            this._adjustMarkup();
+
+            // Re-Sort items
+            var items = this.items.slice(); // Make a copy before sorting
+            // By default items are in their "natural" order, most probably defined by the user with d&d
+
+            // Only sort if we have a comparator
+            if (this.comparator) {
+                this.comparator.setReverse(this.isReverse);
+                var fn = this.comparator.getCompareFn();
+                if (!this.toNatural) items.sort(fn);   // Only sort if we do not want to go back to natural order       
+            }
+
+            // Adjust DOM
+            var prevItem = this.headerElement; // Use header as starting point;
+            $.each(this.items, function() {this.getItemEl().detach();}); // First: Detach all items
+           
+            // Now: reinsert in new order
+            for(var i = 0; i < items.length; i++) {
+                var item = items[i].getItemEl();
+                prevItem.after(item);
+                prevItem = item;
+            }
+        }
+    });
+
+
+
     var DirectMarkupModel = new Class(/** @lends CUI.CardView.DirectMarkupModel# */{
 
         /**
@@ -855,7 +975,7 @@
          */
         initialize: function() {
             var self = this;
-            this.$el.on("drop", this.selectors.itemSelector, function(e) {
+            this.$el.on("item-moved", this.selectors.itemSelector, function(e) {
                 if (e.hasMoved) {
                     self._reorder(e);
                 }
@@ -869,11 +989,11 @@
          */
         _reorder: function(e) {
             var itemToMove = this.getItemForEl($(e.target));
-            var newBefore = this.getItemForEl(e.newBefore);
+            var newBefore = this.getItemForEl(e.newPrev);
             var isHeaderInsert = false;
             var header;
             if (!newBefore) {
-                header = this.getHeaderForEl(e.newBefore);
+                header = this.getHeaderForEl(e.newPrev);
                 if (header) {
                     isHeaderInsert = true;
                     var refPos = this.getItemIndex(header.getItemRef());
@@ -1075,8 +1195,8 @@
 
         /**
          * Get all list items that are preceded by the specified header.
-         * @param header {CUI.CardView.Header[]} The header
-         * @return {CUI.CardView.Item} The list items
+         * @param header {CUI.CardView.Header} The header
+         * @return {CUI.CardView.Item[]} The list items
          */
         getItemsForHeader: function(header) {
             // TODO does not handle empty headers yet
@@ -1442,6 +1562,13 @@
          * @private
          */
         selectors: null,
+        
+        /**
+         * comparator config for list sorting
+         * @type {Object}
+         * @private
+         */
+        comparators: null,
 
         /**
          * The selection mode
@@ -1470,10 +1597,12 @@
          * Create a new controller.
          * @param {jQuery} $el The jQuery object that is the parent of the card view
          * @param {Object} selectors The CSS selector config
+         * @param {Object} comparators The comparator config for column sorting
          */
-        construct: function($el, selectors) {
+        construct: function($el, selectors, comparators) {
             this.$el = $el;
             this.selectors = selectors;
+            this.comparators = comparators;
             this.selectionModeCount = SELECTION_MODE_COUNT_MULTI;
         },
 
@@ -1483,6 +1612,7 @@
         initialize: function() {
             this.setDisplayMode(this.$el.hasClass("list") ? DISPLAY_LIST : DISPLAY_GRID);
             var self = this;
+
             // Selection
             this.$el.fipo("tap.cardview.select", "click.cardview.select",
                 this.selectors.controller.selectElement.list, function(e) {
@@ -1526,6 +1656,37 @@
                         }
                     }
                 });
+                
+            // list sorting
+            this.$el.fipo("tap.cardview.sort", "click.cardview.sort",
+                this.selectors.headerSelector + " " + this.selectors.controller.sort.columnSelector, function(e) {
+                    
+                    var widget = Utils.getWidget(self.$el);
+                    var model = widget.getModel();
+
+                    // Trigger a sortstart event
+                    var event = $.Event("sortstart");
+                    $(e.target).trigger(event);
+                    if (event.isDefaultPrevented()) return;
+
+                    var sorter = new ColumnSortHandler({
+                        model: model,
+                        columnElement: $(e.target),
+                        comparators: self.comparators,
+                        selectors: self.selectors
+                    });
+                    sorter.sort();
+
+                    // Trigger an sortend event
+                    var event = $.Event("sortend");
+                    $(e.target).trigger(event);
+                });
+
+            // Prevent text selection of headers!
+            this.$el.on("selectstart.cardview", this.selectors.headerSelector + " " + this.selectors.controller.sort.columnSelector, function(e) {
+                e.preventDefault();
+            });
+
             // block click event for cards on touch devices
             this.$el.finger("click.cardview.select",
                 this.selectors.controller.selectElement.grid, function(e) {
@@ -1668,6 +1829,13 @@
         },
 
         /**
+        * @return {boolean} true if this widget is currently in list mode and has a column sorting on any header applied
+        */
+        isColumnSorted: function() {
+            return (this.getDisplayMode() == "list") && this.$el.find(this.selectors.headerSelector).filter(".sort-mode").length > 0;
+        },
+
+        /**
          * Set display mode.
          * @param {String} displayMode Display mode ({@link CUI.CardView.DISPLAY_GRID},
          *        {@link CUI.CardView.DISPLAY_LIST})
@@ -1740,6 +1908,13 @@
         selectors: null,
 
         /**
+         * comparator config
+         * @type {Object}
+         * @private
+         */
+        comparators: null,
+
+        /**
          * The model
          * @type {CUI.CardView.DirectMarkupModel}
          * @private
@@ -1773,8 +1948,9 @@
          * @param {jQuery} $el The jQuery object that is the parent of the card view
          * @param {Object} selectors The CSS selector config
          */
-        construct: function(selectors) {
+        construct: function(selectors, comparators) {
             this.selectors = selectors;
+            this.comparators = comparators;
         },
 
         /**
@@ -1785,7 +1961,7 @@
             this.$el = $el;
             this.setModel(new DirectMarkupModel($el, this.selectors));
             this.setView(new DirectMarkupView($el, this.selectors));
-            this.setController(new DirectMarkupController($el, this.selectors));
+            this.setController(new DirectMarkupController($el, this.selectors, this.comparators));
             this.model.initialize();
             this.view.initialize();
             this.controller.initialize();
@@ -1881,6 +2057,13 @@
         getDisplayMode: function() {
             return this.controller.getDisplayMode();
         },
+
+        /**
+        * @return {boolean} true if this widget is currently in list mode and has a column sorting on any header applied
+        */
+        isColumnSorted: function() {
+            return this.controller.isColumnSorted();
+        },        
 
         /**
          * Set the display mode.
@@ -2044,7 +2227,35 @@
         &lt;/article&gt;
     &lt;/div&gt;
 &lt;/div&gt;
-         *
+         * @example
+<caption>Defining comparators for column sorting</caption>
+//  Define a selector for the column and then a comparator to be used for sorting
+// The comparator
+var comparatorConfig = {".label .main": new CUI.CardView.DefaultComparator(".label h4", null, false),
+                   ".label .published": new CUI.CardView.DefaultComparator(".label .published", "data-timestamp", true)};
+new CUI.CardView({comparators: comparatorConfig})
+
+         * @example
+<caption>Defining comparators via data API</caption>
+&lt;!-- Page header for list view --&gt;
+&lt;header class="card-page selectable movable"&gt;
+    &lt;i class="select"&gt;&lt;/i&gt;
+    &lt;i class="sort"&gt;&lt;/i&gt;
+    &lt;div class="label"&gt;
+        &lt;div class="main" data-sort-selector=".label h4"&gt;Title&lt;/div&gt;
+        &lt;div class="published" data-sort-selector=".label .published .date" data-sort-attribute="data-timestamp" data-sort-type="numeric"&gt;Published&lt;/div&gt;
+        &lt;div class="modified" data-sort-selector=".label .modified .date" data-sort-attribute="data-timestamp" data-sort-type="numeric"&gt;Modified&lt;/div&gt;
+        &lt;div class="links" data-sort-selector=".label .links-number" data-sort-type="numeric"&gt;&lt;i class="icon-arrowright"&gt;Links&lt;/i&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/header&gt;
+&lt;!--
+    Sorting is started when the user clicks on the corresponding column header.
+
+    data-sort-selector   defines which part of the item to select for sorting
+    data-sort-attribute  defines which attribute of the selected item element should be user for sorting. If not given, the inner text is used.
+    data-sort-type       if set to "numeric", a numerical comparison is used for sorting, an alphabetical otherwise
+--&gt;
+
          * @example
 <caption>Switching to grid selection mode using API</caption>
 $cardView.cardView("toggleGridSelectionMode");
@@ -2059,10 +2270,8 @@ $cardView.find("article").removeClass("selected");
          *
          * @param {Object} [options] Component options
          * @param {Object} [options.selectorConfig]
-         *        The selector configuration; note that you currently have to specify always
-         *        an object that carries the entire configuration; a configration object
-         *        that only provides the options that override their respective default
-         *        values will not suffice
+         *        The selector configuration. You can also omit configuration values: Values not given will be used from
+         *        the default selector configuration.
          * @param {String} options.selectorConfig.itemSelector
          *        The selector that is used to retrieve the cards from the DOM
          * @param {String} options.selectorConfig.headerSelector
@@ -2159,14 +2368,26 @@ $cardView.find("article").removeClass("selected");
          * @param {Object} options.selectorConfig.controller.selectAll.selector
          *        The selector that is used to determine all "select all" buttons in a
          *        CardView
+         * @param {Object} options.selectorConfig.controller.sort
+         *        Defines selectors for the column sorting mechanism.
+         * @param {Object} options.selectorConfig.controller.sort.columnSelector
+         *        The selector for all column objects within the header 
+         * @param {Object} options.gridSettings
+         *        Custom options for jQuery grid layout plugin.
          * @param {Object} options.selectorConfig.controller.selectAll.cls
          *        The class that has to be applied to each card if "select all" is invoked
+         * @param {Object} [options.comparators]
+         *        An associative array of comparators for column sorting: Every object attribute is a CSS selector
+         *        defining one column and its value has to be of type CUI.CardView.DefaultComparator (or your own derived class)      
         */
         construct: function(options) {
-            var selectorConfig = options.selectorConfig || DEFAULT_SELECTOR_CONFIG;
-            this.adapter = new DirectMarkupAdapter(selectorConfig);
+            // Mix given selector config with defaults: Use given config and add defaults, where no option is given
+            var selectorConfig = Utils.mixObjects(options.selectorConfig, DEFAULT_SELECTOR_CONFIG);
+            var comparators = options.comparators || null;
+
+            this.adapter = new DirectMarkupAdapter(selectorConfig, comparators);
             this.adapter.initialize(this.$element);
-            this.layout();
+            this.layout(options.gridSettings);
         },
 
         /**
@@ -2204,6 +2425,27 @@ $cardView.find("article").removeClass("selected");
          */
         getDisplayMode: function() {
             return this.adapter.getDisplayMode();
+        },
+
+       /**
+        * @return {boolean} true if this widget is currently in list mode and has a column sorting on any header applied
+        */
+        isColumnSorted: function() {
+            return this.adapter.isColumnSorted();
+        },
+
+        /**
+        * @param {boolean} sortable     Set to true if this list should be sortable by click on column
+        */
+        setColumnSortable: function(sortable) {
+            // TODO implement
+        },
+
+        /**
+        * @return {boolean} True if this list is column sortable (does not say if it is currently sorted, use isColumnSorted() for this)
+        */
+        isColumnSortable: function() {
+            // TODO implement
         },
 
         /**
@@ -2486,14 +2728,14 @@ $cardView.find("article").removeClass("selected");
         /**
          * Create and execute a layout of the cards if in grid view.
          */
-        layout: function() {
+        layout: function(settings) {
             if (this.getDisplayMode() !== DISPLAY_GRID) {
                 return;
             }
             if (this.$element.data('cuigridlayout')) {
                 this.$element.cuigridlayout("destroy");
             }
-            this.$element.cuigridlayout();
+            this.$element.cuigridlayout(settings);
         },
 
         /**
@@ -2546,6 +2788,72 @@ $cardView.find("article").removeClass("selected");
         }
 
     });
+
+    /** Comparator class for column sorting */
+    CUI.CardView.DefaultComparator = new Class(/** @lends CUI.CardView.DefaultComparator# */{
+        /**
+        * This comparator can select any text or attribute of a given jQuery element and compares
+        * it with a second item either numerical or alpahebtical
+        *
+        * @param {String}  selector   A CSS selector that matches the part of the item to be compared
+        * @param {String}  attribute  The attribute of the item to be compared. If not given, the inner text of the item will be used for comparison.
+        * @param {String}  type  "numeric" for numeric comparison, or "string" for alphabetical comparison
+        */
+        construct: function (selector, attribute, type) {
+            this.selector = selector;
+            this.attribute = attribute;
+            this.isNumeric = (type == "numeric");
+            this.reverseMultiplier = 1;
+        },
+        /**
+        * Changes the order of the sort algorithm
+        * @param {boolean} True for reverse sorting, false for normal
+        */
+        setReverse: function(isReverse) {
+            this.reverseMultiplier = (isReverse) ? -1 : 1;
+        },
+        /**
+        * Compares two items according to the configuration
+        * @return {integer} -1, 0, 1
+        */
+        compare: function(item1, item2) {
+            var $item1 = item1.getItemEl();
+            var $item2 = item2.getItemEl();
+            var $e1 = (this.selector) ? $item1.find(this.selector) : $item1;
+            var $e2 = (this.selector) ? $item2.find(this.selector) : $item2;
+            var t1 = "";
+            var t2 = "";
+            if (!this.attribute) {
+                t1 = $e1.text();
+                t2 = $e2.text();    
+            } else if(this.attribute.substr(0, 5) == "data-") {
+                t1 = $e1.data(this.attribute.substr(5));
+                t2 = $e2.data(this.attribute.substr(5));
+            } else {
+                t1 = $e1.attr(this.attribute);
+                t2 = $e2.attr(this.attribute);
+            }
+
+            if (this.isNumeric) {
+                t1 = t1 * 1;
+                t2 = t2 * 1;
+                if (isNaN(t1)) t1 = 0;
+                if (isNaN(t2)) t2 = 0;
+            }
+
+            if (t1 > t2) return 1 * this.reverseMultiplier;
+            if (t1 < t2) return -1 * this.reverseMultiplier;
+            return 0;            
+        },
+        /**
+        * Return the compare function for use in Array.sort()
+        * @return {function} The compare function (bound to this object)
+        */
+        getCompareFn: function() {
+            return this.compare.bind(this);
+        }
+    });
+
 
     /**
      * Display mode: grid view; value: "grid"
@@ -2658,6 +2966,36 @@ $cardView.find("article").removeClass("selected");
      *        applicable; for example if the selection change is triggered by a user
      *        interaction) is cancelled as well (no event propagation; no default browser
      *        behavior)
+     */
+
+    /**
+     * Triggered after an item has been moved with drag&drop to a new place in the list by the user.
+     * @name CUI.CardView#item-moved
+     * @event
+     * @param {Object} evt          The event
+     * @param {Object} evt.oldPrev  The jQuery element that was previous to the item before dragging started, may be empty or a header
+     * @param {Object} evt.oldNext  The jQuery element that was next to the item before dragging started, may be empty
+     * @param {Object} evt.newPrev  The jQuery element that is now previous to the item, may be empty or a header
+     * @param {Object} evt.newNext  The jQuery element that is now next to the item, may be empty
+     * @param {boolean} evt.hasMoved  True if the item really moved or false if it has the some position after the drag action as before.
+     */
+
+    /**
+     * Triggered right before a column sort action on the list is started (when the user clicks on a column). The client side
+     * sorting can be vetoed by setting preventDefault() on the event object. The event target is set to the column header the user clicked on.
+     * The sortstart event is always triggered, even if the column has no client side sort configuration.
+     * @name CUI.CardView#sortstart
+     * @event
+     * @param {Object} evt The event
+     */
+
+    /**
+     * Triggered right after a sorting action on the list has been finished (when the user has clicked on a column).
+     * The event target is set to the column header the user clicked on. This event is always triggered, even if the column does not have
+     * a client side sort configuration.
+     * @name CUI.CardView#sortend
+     * @event
+     * @param {Object} evt The event
      */
 
     /**

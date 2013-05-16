@@ -350,7 +350,13 @@ CUI.rte.Common = function() {
             /**
              * Height of sensitive area for selection handles
              */
-            selectionHandlesHeight: selectionHandlesHeight
+            selectionHandlesHeight: selectionHandlesHeight,
+            /**
+             * Determines if the editor is used on a touch platform inside an iframe;
+             * must be initialized using {@link #initializeTouchInIframe}; if set to true,
+             * no touch events must be used
+             */
+            isTouchInIframe: false
         },
 
         /**
@@ -1597,6 +1603,40 @@ CUI.rte.Common = function() {
                 return null;
             }
             return node.parentNode;
+        },
+
+        /**
+         * Gets the window object for the specified document.
+         * @param {document} doc The document
+         * @returns {window} The corresponding window object
+         */
+        getWindowForDocument: function(doc) {
+            return (CUI.rte.Common.ua.isIE ? doc.parentWindow : doc.defaultView)
+        },
+
+        /**
+         * Determines the parent element that contains the reference of the document's
+         * window object, for example the parent iframe object.
+         * @param {CUI.rte.EditContext} context The edit context
+         * @returns {HTMLElement} The element that "hosts" the document's window object
+         */
+        getParentWindowRef: function(context) {
+            var win = context.win;
+            if (win.frameElement) {
+                return win.frameElement;
+            }
+            return undefined;
+        },
+
+        /**
+         * Initializes the "touch in iframe" user agent property. If the RTE is used
+         * inside an iframe on a touch device, no touch events may be used, as Safari
+         * goes crazy if they are used.
+         * @param {CUI.rte.EditContext} context The edit context
+         */
+        initializeTouchInIframe: function(context) {
+            var com = CUI.rte.Common;
+            com.ua.isTouchInIframe = com.ua.isTouch && com.getParentWindowRef(context);
         },
 
         /**

@@ -35,7 +35,7 @@
         </nav>
 
         <div class="drawer">
-            <div class="badge">v1.5.0</div>
+            <div class="badge">1.7.0-SNAPSHOT</div>
         </div>
 
     </header>
@@ -86,7 +86,8 @@
                         <a href="#Breadcrumbs">Breadcrumbs</a>
                         <a href="#Pulldown">Pulldown</a>
                         <a href="#Tabs">Tabs</a>
-                        <a href="#Wizard">Wizard</a>
+                        <a href="#Accordion">Accordion / Collapsible</a>                        
+                        <a href="#Wizard">Wizard</a>                    
                  </nav>
                 </section>
 
@@ -455,7 +456,7 @@
                         <div class="example">
                             <header class="top">
                                 <div class="logo"><img src="images/theme/dms.png" alt="DMS logo"></div>
-                                <nav class="crumbs main">
+                                <nav class="crumbs">
                                     <a href="#">Home</a>
                                     <a href="#">Activities</a>
                                     <a href="#popover-admin" data-toggle="popover" data-point-from="bottom" data-align-from="right">Admin</a>
@@ -465,7 +466,7 @@
                                     </div>
                                 </nav>
                                 <div class="drawer">
-                                    <a href="#" style="color: white; margin-right: .6em">Help</a>
+                                    <a href="#" style="color: white;">Help</a>
                                     <div class="badge">5</div>
                                     <a href="#" class="icon-user">Username</a>
                                 </div>
@@ -474,7 +475,7 @@
                         <pre class="prettyprint linenums">
 &lt;header class=&quot;top&quot;&gt;
     &lt;div class=&quot;logo&quot;&gt;&lt;img src=&quot;images/theme/dms.png&quot; alt=&quot;DMS logo&quot;&gt;&lt;/div&gt;
-    &lt;nav class=&quot;crumbs main&quot;&gt;
+    &lt;nav class=&quot;crumbs&quot;&gt;
         &lt;a href=&quot;#&quot;&gt;Home&lt;/a&gt;
         &lt;a href=&quot;#&quot;&gt;Activities&lt;/a&gt;
         &lt;a href=&quot;#popover-admin&quot; data-toggle=&quot;popover&quot; data-point-from=&quot;bottom&quot; data-align-from=&quot;right&quot;&gt;Admin&lt;/a&gt;
@@ -571,7 +572,10 @@
 </pre>
                     </div>
                     
-<p>If you are already using some kind of container div like <code class="atv">grid-container</code>, you can just add the class  <code class="atv">content-container</code> to it: <code class="prettyprint">&lt;div class="grid-container content-container"&gt;</code></p>                    
+<p>If you are already using some kind of container div like <code class="atv">grid-container</code>, you can just add the class  <code class="atv">content-container</code> to it: <code class="prettyprint">&lt;div class="grid-container content-container"&gt;</code></p>
+                    <div>
+                        Open <a href="examples/sticky/index.html">Sample A</a> or <a href="examples/sticky/rail.html">Sample B</a>
+                    </div>
                 </section>
 
                 <section id="Well">
@@ -677,6 +681,11 @@
 &lt;/nav&gt;
 </pre>
                   </div>
+
+                    <div>
+                        Open <a href="examples/breadcrumbs/index.html">Sample</a>
+                    </div>
+
                 </section>
 
                 <section id="Pulldown">
@@ -692,7 +701,7 @@
                                         <li><a href="spring.html" class="icon-folder withLabel">Spring</a></li>
                                         <li><a href="gear.html" class="icon-folder withLabel">Gear</a></li>
                                         <li><a href="outdoors.html" class="icon-folder withLabel">Outdoors</a></li>
-                                        <li><a href="products.html" class="icon-folder withLabel">Products</a></li>
+                                        <li><a href="products.html" class="icon-folder disabled withLabel">Products</a></li>
                                         <li><a href="store.html" class="icon-folder withLabel">Store</a></li>
                                         <li><a href="geometrixx.html" class="icon-folder withLabel">Geometrixx</a></li>
                                     </ul>
@@ -707,7 +716,7 @@
             &lt;li&gt;&lt;a href=&quot;spring.html&quot; class=&quot;icon-folder withLabel&quot;&gt;Spring&lt;/a&gt;&lt;/li&gt;
             &lt;li&gt;&lt;a href=&quot;gear.html&quot; class=&quot;icon-folder withLabel&quot;&gt;Gear&lt;/a&gt;&lt;/li&gt;
             &lt;li&gt;&lt;a href=&quot;outdoors.html&quot; class=&quot;icon-folder withLabel&quot;&gt;Outdoors&lt;/a&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;a href=&quot;products.html&quot; class=&quot;icon-folder withLabel&quot;&gt;Products&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;products.html&quot; class=&quot;icon-folder disabled withLabel&quot;&gt;Products&lt;/a&gt;&lt;/li&gt;
             &lt;li&gt;&lt;a href=&quot;store.html&quot; class=&quot;icon-folder withLabel&quot;&gt;Store&lt;/a&gt;&lt;/li&gt;
             &lt;li&gt;&lt;a href=&quot;geometrixx.html&quot; class=&quot;icon-folder withLabel&quot;&gt;Geometrixx&lt;/a&gt;&lt;/li&gt;
         &lt;/ul&gt;
@@ -739,7 +748,9 @@
 &lt;nav class=&quot;pulldown no-handle&quot; data-init=&quot;pulldown&quot;&gt; 
 ...</pre>
 
-
+                    <div>
+                        Open <a href="examples/pulldownl/index.html">Sample</a>
+                    </div>
                 </section>
 
                 <section id="Tabs">
@@ -754,6 +765,7 @@
                         <li><code class="atv">white</code> <a href="#" class="tab-variant" data-variant="tabs white"> White tabs</a>: Used in a modal dialog or as sub-tabs</li>
                         <li><code class="atv">finger</code> <a href="#" class="tab-variant" data-variant="tabs stacked">Finger tabs</a>: Useful for tabs that have long titles</li>
                     </ul>
+                    <p>Additionally you can apply the class <code class="atv">full-page</code> in cases where you use the tabs in full-screen situations. This will give them some more margin to not stick to the borders of your screen.</p>
 
                     <div class="componentSample">
                         <div class="example">
@@ -786,6 +798,70 @@
 &lt;/div&gt;
 </pre>
                     </div>
+                </section>
+                
+                <section id="Accordion">
+                    <h2 class="line">Accordion / Collapsible</h2>
+                    <p>Accordions and Collapsibles a quite similar, except that accordions group several collapsibles and only
+                    one of the group is visible at any time.</p>
+
+                    <h3>Accordions</h3>
+                    <p>Accordions are defined as unordered lists. You can choose to select an inital active element by
+                    adding the css class <code class="atv">active</code>.</p>
+                    
+                    <ul class="accordion" data-init="accordion">
+                        <li>
+                          <h3><em>Tab 1</em> of accordion</h3>
+                          Lorem ipsum…
+                        </li>
+                        <li class="active">
+                          <h3><em>Tab 2</em> of accordion</h3>
+                          Lorem ipsum…
+                        </li>
+                        <li>
+                          <h3><em>Tab 3</em> of accordion</h3>
+                          Lorem ipsum…
+                        </li>
+                    </ul>
+
+                    <div class="componentSample">
+                        <pre class="prettyprint linenums">
+&lt;ul class="accordion" data-init="accordion"&gt;
+    &lt;li&gt;
+      &lt;h3&gt;&lt;em&gt;Tab 1&lt;/em&gt; of accordion&lt;/h3&gt;
+      Lorem ipsum…
+    &lt;/li&gt;
+    &lt;li class="active"&gt;
+      &lt;h3&gt;&lt;em&gt;Tab 2&lt;/em&gt; of accordion&lt;/h3&gt;
+      Lorem ipsum…
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;h3&gt;&lt;em&gt;Tab 3&lt;/em&gt; of accordion&lt;/h3&gt;
+      Lorem ipsum…
+    &lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+                    </div>
+
+                    <div>
+                        Open <a href="examples/accordions/index.html">Sample</a>
+                    </div>
+                    
+                    <h3>Collapsibles</h3>
+                    <p>Collapsibles are like accordions with just one element.</p>
+                    <div class="collapsible" data-init="collapsible">
+                        <h3><em>Headline</em> of collapsible</h3>
+                        Lorem ipsum…
+                    </div>
+
+                    <div class="componentSample">
+                        <pre class="prettyprint linenums">
+&lt;div class="collapsible" data-init="collapsible"&gt;
+    &lt;h3&gt;&lt;em&gt;Headline&lt;/em&gt; of collapsible&lt;/h3&gt;
+    Lorem ipsum…
+&lt;/div&gt;
+</pre>
+                    </div>                    
                 </section>
 
                 <section id="Wizard">
@@ -849,6 +925,9 @@
 &lt;/div&gt;
 </pre>
                     </div>
+                    <div>
+                        Open <a href="examples/wizard/index.html">Sample</a>
+                    </div>
                 </section>
 
             </section><!-- /Navigation -->
@@ -900,6 +979,10 @@
   &lt;button&gt;&lt;i class="icon-undo"&gt;&lt;/i&gt; Undo&lt;/button&gt;  
 &lt;/div&gt;
 </pre>
+                    </div>
+
+                    <div>
+                        Open <a href="examples/buttons/index.html">Sample</a>
                     </div>
                 </section>
 
@@ -1152,6 +1235,9 @@
 &lt;/div&gt;
                             </pre>
                         </div>
+                    <div>
+                        Open <a href="examples/filters/index.html">Sample</a>
+                    </div>
                 </section>
 
                 <section id="Dropdown">
@@ -1276,6 +1362,9 @@
 &lt;/div&gt;
 </pre>
                     </div>
+                    <div>
+                        Open <a href="examples/dropdown/index.html">Sample</a>
+                    </div>
                 </section>
 
                 <section id="Datepicker">
@@ -1343,6 +1432,9 @@
     &lt;button class=&quot;icon-calendar small&quot; disabled&gt;Datepicker&lt;/button&gt;
 &lt;/div&gt;
 </pre>
+                    </div>
+                    <div>
+                        Open <a href="examples/datepicker/index.html">Sample</a>
                     </div>
                 </section>
 
@@ -1540,6 +1632,9 @@
 &lt;/div&gt;
 </pre>
                     </div>
+                    <div>
+                        Open <a href="examples/slider/index.html">Sample</a>
+                    </div>
                 </section>
 
                 <section id="Checkbox">
@@ -1575,6 +1670,9 @@
                         $('#partial-checkbox1').prop('indeterminate', true);
                         $('#partial-checkbox2').prop('indeterminate', true);
                     </script>
+                    <div>
+                        Open <a href="examples/checkbox/index.html">Sample</a>
+                    </div>
                 </section>
 
                 <section id="RadioButtons">
@@ -1707,6 +1805,9 @@
 &lt;/ul&gt;
 </pre>
                     </div>
+                    <div>
+                        Open <a href="examples/sortable/index.html">Sample</a>
+                    </div>
                 </section>
                 
                 <section id="FormErrors" style="position: relative">
@@ -1728,6 +1829,9 @@
 &lt;span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error"&gt;Please correct your input!&lt;/span&gt;
 </pre>
                     </div>
+                    <div>
+                        Open <a href="examples/form-errors/index.html">Sample</a>
+                    </div>
                 </section>                
 
             </section><!-- /ButtonsAndControls -->
@@ -1748,6 +1852,9 @@
                         </div>
                         <pre class="prettyprint linenums"></pre>
                     </div>
+                    <div>
+                        Open <a href="examples/lists/index.html">Sample</a>
+                    </div>
                 </section>
 
                 <section class="hidden" id="Grid">
@@ -1763,6 +1870,9 @@
 
                         </div>
                         <pre class="prettyprint linenums"></pre>
+                    </div>
+                    <div>
+                        Open <a href="examples/gridlayout/index.html">Sample</a>
                     </div>
                 </section>
 
@@ -2475,6 +2585,11 @@
 &lt;div class=&quot;tooltip error arrow-bottom&quot;&gt;Content&lt;/div&gt;
 </pre>
                     </div>
+
+                    <div>
+                        Open <a href="examples/tooltip/index.html">Sample</a>
+                    </div>
+
                 </section>
 
                 <section id="Badge">

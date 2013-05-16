@@ -227,6 +227,7 @@
                 var span = $("<span/>", {
                     "class": clazz
                 });
+                this.$element.removeAttr("class");
                 this.$element.after(span);
                 this.$element.detach();
                 span.prepend(this.$element);
@@ -238,7 +239,6 @@
 
             // Get the input element
             this.inputElement = this.$element.find("input[type='file']");
-            this.inputElement.removeAttr("class");
 
             // Read configuration from markup
             this._readDataFromMarkup();
@@ -771,7 +771,7 @@
     // Data API
     if (CUI.options.dataAPI) {
         $(document).on("cui-contentloaded.data-api", function(e) {
-            $("[data-init='fileupload']", e.target).fileUpload();
+            $("[data-init~='fileupload']", e.target).fileUpload();
         });
     }
 

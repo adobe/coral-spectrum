@@ -14,7 +14,7 @@ div.rail {
     @pull-to-request-size: 3rem;
 
     &:not(.light) {
-      /* Note: this is a bit wrong... We're overriding colors for icons here, this should be part of icons.less... */
+      /* Note: this is a bit wrong... We are overriding colors for icons here, this should be part of icons.less... */
       [class^="icon-"]:not(.black):not(.blue),
       [class*=" icon-"]:not(.black):not(.blue) {
         &:before {
@@ -296,34 +296,22 @@ div.rail {
 
             >a,
             >span {
+                letter-spacing: 0.05em;
 
-                border-top: @px solid @rail-section-border-color;
+                border-bottom: @px solid @rail-section-border-color;
                 .box-shadow(inset 0 1px 0 @rail-section-highlight-color); /* 1px to ensure rendering in IE9 which cuts rem units to 2dp (0.96px) */
-
+                text-rendering: geometricPrecision;
                 display: block;
                 background-color: @rail-background-color;
-                height: 40*@px;
-                line-height: 40*@px;
+                height: 45*@px;
+                line-height: 45*@px;
 
                 padding-left: 12*@px;
 
-                font-size: 0.85rem;
-		        &, a {
-                	color: @rail-font-color;
-                }
-
-                &:hover {
-                    text-decoration: none;
-
-                    >[class^="icon-"],
-                    >[class*=" icon-"] {
-                        &.action {
-                            &,&:before {
-                                display: inline;
-                                cursor: pointer;
-                            }
-                        }
-                    }
+                font-size: 18*@px; /* was 0.85rem;*/
+		        
+                &, a { 
+                  color: @rail-font-color; 
                 }
 
                 >[class^="icon-"],
@@ -340,13 +328,16 @@ div.rail {
                         }
                     }
                 }
-
                 
                 &.active {
                     position: relative;
 
-                    background-color: @rail-dark-background-color; 
-                    .box-shadow(inset 0 @px 0 @rail-section-dark-highlight-color);
+                    background-color: @rail-active-background-color;
+                    .box-shadow(inset 0 1*@px 0 @rail-section-highlight-color);
+
+                    &, > a {
+                        color: @rail-font-active-color;
+                    }
 
                     &:before {
                         border: solid transparent;
@@ -374,6 +365,11 @@ div.rail {
                     }
                 }
                 
+                &:active {
+                  color: @rail-font-active-color;
+                  background-color: @rail-active-secondrary-background-color;
+                }
+
                 &.focus {
                     text-decoration: none;
                     background-color: @rail-well-background-color;
@@ -381,6 +377,23 @@ div.rail {
                         inset 0 @px 0 @rail-background-color
                     );
                 }
+
+                &:hover,
+                > a:hover {
+                    text-decoration: none;
+                    color: @rail-font-hover-color;
+
+                    >[class^="icon-"],
+                    >[class*=" icon-"] {
+                        &.action {
+                            &,&:before {
+                                display: inline;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+
             }
 
             >span {
@@ -428,7 +441,11 @@ div.rail {
                 //    padding: 15*@px;
                 //}
             }
-            
+
+            section.greyText, section.grayText {
+                color: @font-secondary-color;
+            }
+
             section+section {
                 .heading {
                     border-top: 0;
@@ -454,16 +471,16 @@ div.rail {
                             .box-shadow(inset 0 3*@px 3*@px -3*@px @rail-shadow-inset-color);
                             background-color: @rail-section-dark-highlight-color;
                             border-color: @rail-section-border-color;
-                        }
-
-                        &:checked + label:before,
-                        &:checked + span:before {
-                            background-image: url('@{component-images-folder}/checkbox/check_rail.png');
+                            color: @rail-icon-color;
                         }
                         
                         &.focus {
                             + span:before {
-                                .glow();
+                                border-color: @focus-border-color;
+                                .box-shadow(
+                                    inset 0 3*@px 3*@px -3*@px @rail-shadow-inset-color,
+                                    0 0 @focus-glow-radius @focus-glow-color
+                                );
                             }
                         }
                     }
@@ -646,21 +663,25 @@ div.rail {
     }
 
     .search {
+        display: block;
         position: relative;
-        padding: 10*@px;
+        padding: 6*@px 10*@px;
+        margin: 0*@px;
 
-        >input[type="text"] {
-            width: 100%;
-            padding-right: 2rem !important; // I couldn't get the style work without !important
+        border-bottom: @px solid @rail-section-border-color;
+
+        >input[type="text"] {          
+            padding-left: 34*@px !important; // use !important to override default input-text settings within rail
+            background-color: rgb(70, 70, 70) !important;
         }
 
         >button {
             position: absolute;
-            top: 9*@px;
-            right: 10*@px;
-            width: 28*@px;
-            height: 28*@px;
-            line-height: 30*@px;
+            top: 5*@px;
+            left: 47*@px;
+            width: 34*@px;
+            height: 34*@px;
+            line-height: 34*@px;
 
             background: none;
             border: none;
@@ -672,7 +693,7 @@ div.rail {
             
             &.focus {
                 .glow();
-                line-height: 28*@px;
+                line-height: 32*@px;
             }
         }
     }
@@ -706,21 +727,19 @@ div.rail {
 
         .border-box;
 
-        height: 30*@px;
-        width: 100%;
+        height: 34*@px;
 
         background-color: @rail-dark-background-color;
-        border: @px solid @rail-section-border-color;
-        .box-shadow(inset 0 3*@px 3*@px -3*@px @rail-shadow-inset-color);
+        border: @px solid @rail-input-text-border-color;
 
         padding: 0.25rem 0.5rem;
         width: 100%;
+        min-width: auto;
 
         margin: 0;
       
         font-size: 0.85rem;
         color: @rail-font-color;
-        height: 28*@px;
 
         &:focus {
             box-shadow: none;
@@ -786,8 +805,9 @@ div.rail {
             border-bottom-color: @rail-background-color;
         }
 
-        >button {
+        > button, .button {
           width: 100%;
+          min-width: auto;
         }
                     
       }
@@ -806,9 +826,10 @@ div.rail {
       }
     }
 
-    // dropdown
-    .dropdown {
+    // menu dropdown
+    .dropdown.menu {
         display: block;
+        margin: 0; //override
 
         .dropdown-container {
             display: block;
@@ -820,58 +841,151 @@ div.rail {
             display: block;
             width: 100%;
             border:none;
-            border-top: @px solid @rail-section-border-color;
+            // border-top: @px solid @rail-section-border-color;
             .box-shadow(inset 0 1px 0 @rail-section-highlight-color); /* 1px to ensure rendering in IE9 which cuts rem units to 2dp (0.96px) */
             background: @rail-background-color;
+            .gradient(@rail-background-color, @rail-background-color);
             color: @rail-font-color;
             height: 40*@px;
             line-height: 40*@px;
             padding: 0;
             padding-left: 12*@px;
-            font-size: 0.85rem;
+            font-size: @dropdown-text-size;
 
             // icon (chevron down)
             &:after {
                 background: none;
-                content: "\f038";
+                content: @icon-chevrondown-content;
                 font-family: AdobeIcons;
                 position: absolute;
                 right: 16*@px;
+                top: 0;
+            }
+        }
+
+        .dropdown-list {
+            border-bottom: none;
+            padding: 0 10*@px;
+            width: 228*@px;
+
+            ul {
+                border-top: @px solid @rail-section-border-color;
+                font-size: 14*@px;
             }
         }
     }
 
-    .dropdown-list {
-        border-bottom: @px solid @rail-section-border-color;
+    // dropdown
+    .dropdown {
+        display: block;
 
-        ul {
-            margin: 0;
-            padding: 0;
-            font-size: @dropdown-text-size;
-            background-color: @rail-background-color;
+        button,
+        button:hover:not([disabled]) {
+            border-color: @rail-dropdown-border-color;
+            background: @rail-dropdown-background-color;
+            color: @rail-dropdown-font-color;
 
-            li {
-                list-style-type: none;
+            // arrow down
+            &:after {
+                background: none;
+                content: "▾";
+                font-family: AdobeIcons;
+                position: absolute;
+                right: 10*@px;
+                top: 6*@px;
+            }
+        }
+
+        .dropdown-list {
+            border-bottom: none;
+
+            ul {
                 margin: 0;
-                background-color: @rail-background-color;
-                border-bottom: none;
-                color: @rail-font-color;
-                border: none;
-                border-top: @px solid @rail-section-border-color;
-                .box-shadow(inset 0 1px 0 @rail-section-highlight-color); /* 1px to ensure rendering in IE9 which cuts rem units to 2dp (0.96px) */
-                overflow: hidden;
-                text-overflow: ellipsis;
-                -o-text-overflow: ellipsis;
-                cursor: pointer;
-                height: 40*@px;
-                line-height: 40*@px;
                 padding: 0;
-                padding-left: 12*@px;
-                font-size: 0.85rem;
+                background-color: @rail-dropdown-background-color;
 
-                &:hover,
-                &.selected:hover {
-                    background-color: @dropdown-active-background-color;
+                li {
+                    list-style-type: none;
+                    margin: 0;
+                    background-color: @rail-dropdown-background-color;
+                    color: @rail-dropdown-font-color;
+                    border: @px solid @rail-dropdown-border-color;
+                    border-top: none;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    -o-text-overflow: ellipsis;
+                    cursor: pointer;
+
+                    &:hover,
+                    &.selected:hover {
+                        background-color: @dropdown-active-background-color;
+                    }
+                }
+            }
+        }
+    }
+
+    // dropdown
+    .dropdown {
+        display: block;
+        margin: 8*@px 10*@px;
+
+        .dropdown-container {
+          width: 100%;
+    //        display: block;
+    //        border-bottom: @px solid @rail-section-border-color;
+        }
+
+        button,
+        button:hover:not([disabled]) {
+            width: 100%;
+            min-width: auto;
+            border-color: @rail-dropdown-border-color;
+            background: @rail-dropdown-background-color;
+            color: @rail-dropdown-font-color;
+            font-size: @rail-dropdown-text-size;
+            height: @rail-dropdown-height;
+
+            // arrow down
+            &:after {
+                background: none;
+                content: "▾";
+                font-family: AdobeIcons;
+                position: absolute;
+                right: 10*@px;
+                top: 6*@px;
+            }
+        }
+
+        .dropdown-list {
+            border-bottom: @px solid @rail-dropdown-border-color;
+
+            ul {
+                margin: 0;
+                padding: 0;
+                font-size: @rail-dropdown-text-size;
+                background-color: @rail-dropdown-background-color;
+
+                li {
+                    list-style-type: none;
+                    margin: 0;
+                    background-color: @rail-dropdown-background-color;
+                    color: @rail-dropdown-font-color;
+                    border: @px solid @rail-dropdown-border-color;
+                    border-top: none;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    -o-text-overflow: ellipsis;
+                    cursor: pointer;
+                    height: @rail-dropdown-height;
+                    line-height: @rail-dropdown-height;
+                    padding-top: 0;
+                    padding-bottom: 0;
+
+                    &:hover,
+                    &.selected:hover {
+                        background-color: @dropdown-active-background-color;
+                    }
                 }
             }
         }

@@ -52,6 +52,10 @@
             },
 
             getUIContainer: function($editable) {
+                var $ui = $editable.data("rte-ui");
+                if ($ui) {
+                    return $ui;
+                }
                 var editableDom = $editable[0].previousSibling;
                 while (editableDom && (editableDom.nodeType !== 1)) {
                     editableDom = editableDom.previousSibling;
@@ -62,6 +66,15 @@
                 return $(editableDom);
             },
 
+            createOrGetUIContainer: function($editable) {
+                var $container = CUI.rte.UIUtils.getUIContainer($editable);
+                if (!$container) {
+                    $container = $("<div class='rte-ui'></div>");
+                    $editable.before($container);
+                }
+                return $container;
+            },
+
             getToolbar: function($editableOrContainer, tbType) {
                 tbType = tbType || "inline";
                 var $container = $editableOrContainer.hasClass("rte-ui") ?
@@ -70,14 +83,18 @@
                 if (!$container || !$container.length) {
                     return null;
                 }
-                return $container.find(
+                var $toolbar = $container.find(
                         "div[data-type=\"" + tbType + "\"] > div.rte-toolbar");
+                if (!$toolbar || !$toolbar.length) {
+                    return null;
+                }
+                return $toolbar;
             },
 
             getPopover: function(ref, tbType, $container) {
                 tbType = tbType || "inline";
                 return $container.find("div[data-type=\"" + tbType + "\"] > " +
-                        "div[data-popover=\"" + ref + "\"]");
+                        "div[data-id=\"" + ref + "\"]");
             },
 
             getPopoverTrigger: function(ref, tbType, $containerOrToolbar) {
@@ -105,6 +122,23 @@
                 return $dialog;
             },
 
+            /**
+             * Returns the specified UI "space". Creates it, if it is not yet available.
+             * @param {String} mode The mode the UI space is used for
+             * @param $container The UI container
+             * @return {jQuery} The UI space
+             */
+            getSpace: function(mode, $container) {
+                var $uiSpace = $container.find("> div[data-type=\"" + mode + "\"]");
+                if (!$uiSpace.length) {
+                    $uiSpace = $(CUI.rte.Templates["ui-space"]({
+                        "mode": mode
+                    }));
+                    $container.append($uiSpace);
+                }
+                return $uiSpace;
+            },
+
             determineIconClass: function(element) {
                 var com = CUI.rte.Common;
                 var classes = com.parseCSS(element.jquery ? element[0] : element);
@@ -120,6 +154,69 @@
             killEvent: function(e) {
                 e.stopPropagation();
                 e.preventDefault();
+            },
+
+            /**
+             * <p>Determines the "clipping parent" of the specified DOM object.</p>
+             * <p>The clipping parent is a DOM object that might clip the visible area of
+             * the specified DOM object by specifiying a suitable "overflow" attribute.</p>
+             * @param {jQuery} $dom The jQuery-wrapped DOM object
+             * @return {jQuery} The clipping parent as a jQuery object; undefined if no
+             *         clipping parent exists
+             */
+            getClippingParent: function($dom) {
+                var $clipParent = undefined;
+                var $body = $(document.body);
+                while ($dom[0] !== $body[0]) {
+                    var ovf = $dom.css("overflow");
+                    var ovfX = $dom.css("overflowX");
+                    var ovfY = $dom.css("overflowY");
+                    if ((ovfX !== "visible") || (ovfY !== "visible") || (ovf !== "visible")) {
+                        $clipParent = $dom;
+                        break;
+                    }
+                    $dom = $dom.parent();
+                }
+                return $clipParent;
+            },
+
+            getEditorOffsets: function(context) {
+                var top = 0;
+                var left = 0;
+                var editorDoc = context.doc;
+                while (editorDoc !== document) {
+                    var win = CUI.rte.Common.getWindowForDocument(editorDoc);
+                    if (win.frameElement) {
+                        var offsets = $(win.frameElement).offset();
+                        top += offsets.top;
+                        left += offsets.left;
+                    } else {
+                        break;
+                    }
+                    editorDoc = win.frameElement.ownerDocument;
+                }
+                return {
+                    "top": top,
+                    "left": left
+                };
+            },
+
+            isUnder: function($parent, $obj) {
+                if (!$parent || ($parent.length === 0)) {
+                    return false;
+                }
+                if (!$obj || ($obj.length === 0)) {
+                    return false;
+                }
+                var obj = $parent[0];
+                var toTest = $obj[0];
+                while (toTest.tagName !== "BODY") {
+                    if (toTest === obj) {
+                        return true;
+                    }
+                    toTest = toTest.parentNode;
+                }
+                return false;
             }
 
         }

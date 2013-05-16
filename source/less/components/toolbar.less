@@ -112,8 +112,8 @@ The top toolbar with action icons
         }
     }
 
-    a.button:not([class^="icon-"]):not([class*=" icon-"]),
-    button:not([class^="icon-"]):not([class*=" icon-"]) {
+    > a.button:not([class^="icon-"]):not([class*=" icon-"]),
+    > button:not([class^="icon-"]):not([class*=" icon-"]) {
         margin: 7*@px 10*@px;
     }
     
@@ -136,7 +136,7 @@ The top toolbar with action icons
 
         > a[class^="icon-"], 
         > a[class*=" icon-"] {
-            padding: 0 6*@px 0 0;
+            padding: 0;
             line-height: 46*@px;
 
             &:after {
@@ -144,12 +144,6 @@ The top toolbar with action icons
                 margin-left: 0;
                 padding-left: 0;
             }
-        }
-
-        > .popover ul li a {
-            padding: 0 10*@px;
-            height: 2rem;
-            line-height: 2rem;
         }
     }
 

@@ -25,9 +25,13 @@
 <body class="desktop">
 
     <header class="top">
-        <div class="logo"><i class="icon-marketingcloud medium">Coral UI</i></div>
+        <div class="logo">
+          <a href="/">
+            <i class="icon-marketingcloud medium">Coral UI</i>
+          </a>
+        </div>
         <nav class="crumbs">
-            <a href="#">Marketing Cloud</a>
+            <a href="#">Adobe Marketing Cloud</a>
             <a href="#" class="selected">Websites</a>
         </nav>
         <div class="drawer">
@@ -43,18 +47,15 @@
 
                 <div class="rail-switch">
                     <nav class="toolbar icongroup">
-                        <a href="#" data-view="feature"><i class="icon-viewlist">Navigation</i></a>
+                        <a href="#" data-view="feature"><i class="icon-compass">Navigation</i></a>
                         <a href="#" data-view="filter" class="active"><i class="icon-filter">Filter</i></a>
                         <a href="#" data-view="activity"><i class="icon-clock">Timeline</i></a>
+                        <a href="#" data-view="presets"><i class="icon-colorpalette">Presets</i></a>
+
                     </nav>
                 </div>
 
                 <div class="rail-view" data-view="feature">
-                    <div class="search">
-                        <label for="q0" class="hidden-accessible">Search</label>
-                        <input type="text" placeholder="Enter Keyword(s)" autocomplete="off" name="q" id="q0">
-                        <button type="submit" class="icon-search">Search</button>
-                    </div>
                     <nav class="feature">
                         <a href="#Files">Files</a>
                         <a href="#Collections" class="active">Collections</a>
@@ -70,7 +71,15 @@
                         <input type="text" placeholder="Enter Keyword(s)" autocomplete="off" name="q" id="q1">
                         <button type="submit" class="icon-search">Search</button>
                     </div>
-                    <div class="dropdown" data-init="dropdown">
+                    <div class="dropdown menu" data-init="dropdown" data-nowidth="true">
+                        <button>Dropdown Menu in Rail</button>
+                        <select name="dropdown">
+                            <option>Option One</option>
+                            <option>Option Two</option>
+                            <option>Option Three</option>
+                        </select>
+                    </div>
+                    <div class="dropdown" data-init="dropdown" style="margin-left:0.625rem">
                         <button>Dropdown in Rail</button>
                         <select name="dropdown">
                             <option>Option One</option>
@@ -225,14 +234,23 @@
                         <input type="text" placeholder="Enter Keyword(s)" autocomplete="off" name="q" id="q2">
                         <button type="submit" class="icon-search">Search</button>
                     </div>
-                    <nav class="feature">
-                        <a href="#3" class="active">3</a>
-                        <a href="#Collections">Collections</a>
-                        <a href="#Users">Users</a>
-                        <a href="#Tools">Tools</a>
-                        <a href="#Settings">Settings</a>
-                    </nav>
+                    <div class="dropdown menu" data-init="dropdown">
+                        <button>Dropdown Menu in Rail</button>
+                        <select name="dropdown">
+                            <option>Option One</option>
+                            <option>Option Two</option>
+                            <option>Option Three</option>
+                        </select>
+                    </div>                    
                 </div>
+
+                <div class="rail-view" data-view="presets">     
+                    <section>
+                        <span class="heading">Presets</span>
+                    </section>                         
+                </div>
+
+                
                 
             </div>
         </div>
@@ -289,12 +307,12 @@
                     <!-- Page header for list view -->
                     <header class="card-page selectable movable">
                         <i class="select"></i>
-                        <i class="sort"></i>
+                        <span class="image"></span>
                         <div class="label">
-                            <div class="main">Title</div>
-                            <div class="published">Published</div>
-                            <div class="modified">Modified</div>
-                            <div class="links"><i class="icon-arrowright">Links</i></div>
+                            <div class="main" data-sort-selector=".label h4">Title</div>
+                            <div class="published" data-sort-selector=".label .published .date" data-sort-attribute="data-timestamp" data-sort-type="numeric">Published</div>
+                            <div class="modified" data-sort-selector=".label .modified .date" data-sort-attribute="data-timestamp" data-sort-type="numeric">Modified</div>
+                            <div class="links" data-sort-selector=".label .links-number" data-sort-type="numeric"><i class="icon-arrowright">Links</i></div>
                         </div>
                     </header>
 
@@ -307,8 +325,8 @@
                             <div class="label">
                                 <h4 class="main">#2 Page Title</h4>
                                 <div class="info">
-                                    <p class="published"><i class="icon-globe">Published</i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-                                    <p class="modified"><i class="icon-edit">Modified</i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                                    <p class="published"><i class="icon-globe">Published</i> <span class="date" data-timestamp="12">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                                    <p class="modified"><i class="icon-edit">Modified</i> <span class="date" data-timestamp="2">2 days ago</span> <span class="user">John Doe</span></p>
                                     <p class="links"><i class="icon-arrowright">Link</i> <span class="links-number">3</span></p>
                                 </div>
                             </div>
@@ -329,9 +347,9 @@
                                     <p class="info-copy">Launch</p>
                                 </div>
                                 <div class="info">
-                                    <p class="published"><i class="icon-globe">Published</i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-                                    <p class="modified"><i class="icon-edit">Modified</i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-                                    <p class="links"><i class="icon-arrowright">Link</i> <span class="links-number">3</span></p>
+                                    <p class="published"><i class="icon-globe">Published</i> <span class="date" data-timestamp="15">15 hours ago</span> <span class="user">Alison Parker</span></p>
+                                    <p class="modified"><i class="icon-edit">Modified</i> <span class="date" data-timestamp="3">3 days ago</span> <span class="user">John Doe</span></p>
+                                    <p class="links"><i class="icon-arrowright">Link</i> <span class="links-number">4</span></p>
                                 </div>
                             </div>
                         </a>
@@ -346,9 +364,9 @@
                             <div class="label">
                                 <h4 class="main">#4 Page (hidden)</h4>
                                 <div class="info">
-                                    <p class="published"><i class="icon-globe">Published</i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-                                    <p class="modified"><i class="icon-edit">Modified</i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-                                    <p class="links"><i class="icon-arrowright">Link</i> <span class="links-number">3</span></p>
+                                    <p class="published"><i class="icon-globe">Published</i> <span class="date" data-timestamp="10">10 hours ago</span> <span class="user">Alison Parker</span></p>
+                                    <p class="modified"><i class="icon-edit">Modified</i> <span class="date" data-timestamp="4">4 days ago</span> <span class="user">John Doe</span></p>
+                                    <p class="links"><i class="icon-arrowright">Link</i> <span class="links-number">5</span></p>
                                 </div>
                             </div>
                         </a>
@@ -357,7 +375,7 @@
                     <!-- Asset header for list view -->
                     <header class="card-asset selectable movable">
                         <i class="select"></i>
-                        <i class="sort"></i>
+                        <span class="image"></span>
                         <div class="label">
                             <div class="main">Title</div>
                             <div class="type"></div>
@@ -517,7 +535,7 @@
 
                     <!-- Page header for list view (testing version without selectable and movable classes) -->
                     <header class="card-page">
-                        <i class="sort"></i>
+                        <span class="image"></span>
                         <div class="label">
                             <div class="main">Title</div>
                             <div class="published">Published</div>

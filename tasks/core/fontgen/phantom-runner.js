@@ -10,6 +10,7 @@ var cssName = system.args[3] || 'iconClasses.less';
 var outFontFolder = system.args[4] || fs.workingDirectory + fs.separator + 'out' + fs.separator;
 var fontName = system.args[5] || 'Icons';
 var classPrefix = system.args[6] || 'icon-';
+var varSuffix = system.args[7] || '-content';
 
 // Cached regular expressions
 var commentRE = /<!--.*?-->\n?/g; // Regex to replace comments added by Illustrator
@@ -82,11 +83,12 @@ for(var i = 0; i < curdir.length; i++)
             // Make zero unitless
             file = file.replace(zeroPXRE, '0');
 
+            // add icon content var
+            cssOutput += '@' + classPrefix + className + varSuffix + ': "\\f' + hex + '";\n';
             // add mixin
-            cssOutput += '.' + classPrefix + className + '() {\n\t.icon();\n\t&' + psuedoSelector + ' { content: "\\f' + hex + '"; }\n}\n\n';
-
+            cssOutput += '.' + classPrefix + className + '() {\n\t.icon();\n\t&' + psuedoSelector + ' { content: @' + classPrefix + className + varSuffix + '; }\n}\n';
             // add icon css
-            cssOutput += '.' + classPrefix + className + psuedoSelector + ' { content: "\\f' + hex + '"; }\n';
+            cssOutput += '.' + classPrefix + className + psuedoSelector + ' { content: @' + classPrefix + className + varSuffix + '; }\n\n\n';
 
         	// content to DOM Element
             var div = document.createElement('div');

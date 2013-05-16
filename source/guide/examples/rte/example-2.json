@@ -44,6 +44,9 @@
         },
         "undo": {
             "features": "*"
+        },
+        "control": {
+            "features": "*"
         }
     },
     "uiSettings": {
@@ -53,8 +56,11 @@
                     "#format",
                     "#justify",
                     "#lists",
+                    "-",
                     "links#modifylink",
-                    "links#unlink"
+                    "links#unlink",
+                    "-",
+                    "control#close"
                 ],
                 "popovers": {
                     "format": {

@@ -1,5 +1,6 @@
 /*global module:false*/
 module.exports = function(grunt) {
+
   /**
    JavaScript file include order
    Add new components to this array _after_ the components they inherit from
@@ -49,6 +50,7 @@ module.exports = function(grunt) {
       'components/CUI.DraggableList.js',
       'components/CUI.CharacterCount.js',
       'components/CUI.Accordion.js',
+      'components/CUI.Tour.js',
       
       // Validations
       'validations.js'
@@ -57,6 +59,7 @@ module.exports = function(grunt) {
       'components/rte/Theme.js',
       'components/rte/UIUtils.js',
       'components/rte/ConfigUtils.js',
+      'components/rte/plugins/ControlPlugin.js',
       'components/rte/ui/ToolkitImpl.js',
       'components/rte/ui/ToolbarImpl.js',
       'components/rte/ui/PopoverManager.js',
@@ -134,8 +137,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   //  grunt.loadNpmTasks('grunt-jsdoc');
-  grunt.loadNpmTasks('grunt-mocha');
+  grunt.loadNpmTasks('grunt-mocha-phantomjs');
   //  grunt.loadNpmTasks('grunt-hub');
+  grunt.loadNpmTasks('grunt-zip');
+  grunt.loadNpmTasks('grunt-curl');
+
 
   // Read in package.json
   var pkg = grunt.file.readJSON('package.json');
@@ -509,6 +515,17 @@ module.exports = function(grunt) {
           '<%= dirs.build %>/css/cui.css': '<%= dirs.source %>/less/cui.less'
         }
       },
+      "cui-rte": {
+        options: {
+          paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
+            dirs.build+'/less/optional/rte/',
+            dirs.temp+'/less/'
+          ]
+        },
+        files: {
+          '<%= dirs.build %>/css/cui-rte.css': '<%= dirs.source %>/less/optional/rte/wrapper.less'
+        }
+      },
       "guide": {
         options: {
           paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
@@ -545,7 +562,7 @@ module.exports = function(grunt) {
       }
     },
 
-    mocha: {
+    mocha_phantomjs: {
       cui: {
         src: [
           '<%= dirs.build %>/test/index.html'
@@ -569,7 +586,6 @@ module.exports = function(grunt) {
         prefix: 'icon-'
       }
     },
-
 
     icons: {
       all: {
@@ -667,9 +683,14 @@ module.exports = function(grunt) {
       */
 
     }
+
   });
   // end init config
 
+  // Register "mocha" task so there is no need to update the rest of the mocha references
+  grunt.task.registerTask('mocha', [
+    'mocha_phantomjs:cui'
+  ]);
 
   // Partial build for development
   grunt.task.registerTask('partial', [
@@ -682,8 +703,8 @@ module.exports = function(grunt) {
     'concat:cui',
     'uglify:cui',
     'less',
-    'cssmin'/*,
-    'mocha'*/
+    'cssmin',
+    'mocha'
   ]);
 
   // Build and copy RTE
@@ -706,7 +727,7 @@ module.exports = function(grunt) {
     'uglify',
     'less',
     'cssmin',
-//    'mocha',
+    'mocha',
     'jsdoc'
   ]);
 
@@ -738,7 +759,7 @@ module.exports = function(grunt) {
     'font',
     'icons',
     'iconbrowser',
-    'handlebars:compile',
+    'handlebars',
     'concat:cui',
     'less:cui'
   ]);

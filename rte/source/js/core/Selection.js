@@ -1058,7 +1058,7 @@ CUI.rte.Selection = function() {
                         range.collapse(true);
                     }
                 } catch (e) {
-                    // if the object is not available anymore (which might be the cause
+                    // if the object is not available anymore (which might be the case
                     // when undoing), use the caret-position instead
                     if (bookmark.startPos) {
                         objectToSelect = undefined;
@@ -1481,6 +1481,9 @@ CUI.rte.Selection = function() {
                                 if (range.move("character", 1) == 1) {
                                     range.move("character", -1);
                                 }
+                            } else if (com.isTag(dom, "li")) {
+                                // todo probably needs to be more conditional than now
+                                range.move("character", 1);
                             }
                         }
                     }
@@ -2118,8 +2121,13 @@ CUI.rte.Selection = function() {
                     // selecting an empty edit block on IE causes problems if the
                     // setStart... methods are used
                     if (com.isEmptyEditingBlock(startNodeAndOffset.node, true)) {
-                        range.selectNode(startNodeAndOffset.node);
-                        range.collapse(true);
+                        if (com.isTag(startNodeAndOffset.node, "li")) {
+                            // empty list items require another special treatment
+                            range.setStart(startNodeAndOffset.node, 0);
+                        } else {
+                            range.selectNode(startNodeAndOffset.node);
+                            range.collapse(true);
+                        }
                         isRangeCreated = true;
                     }
                 }
