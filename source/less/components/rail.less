@@ -870,57 +870,8 @@ div.rail {
 
             ul {
                 border-top: @px solid @rail-section-border-color;
+                border-bottom: @px solid @rail-section-border-color;
                 font-size: 14*@px;
-            }
-        }
-    }
-
-    // dropdown
-    .dropdown {
-        display: block;
-
-        button,
-        button:hover:not([disabled]) {
-            border-color: @rail-dropdown-border-color;
-            background: @rail-dropdown-background-color;
-            color: @rail-dropdown-font-color;
-
-            // arrow down
-            &:after {
-                background: none;
-                content: "▾";
-                font-family: AdobeIcons;
-                position: absolute;
-                right: 10*@px;
-                top: 6*@px;
-            }
-        }
-
-        .dropdown-list {
-            border-bottom: none;
-
-            ul {
-                margin: 0;
-                padding: 0;
-                background-color: @rail-dropdown-background-color;
-
-                li {
-                    list-style-type: none;
-                    margin: 0;
-                    background-color: @rail-dropdown-background-color;
-                    color: @rail-dropdown-font-color;
-                    border: @px solid @rail-dropdown-border-color;
-                    border-top: none;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    -o-text-overflow: ellipsis;
-                    cursor: pointer;
-
-                    &:hover,
-                    &.selected:hover {
-                        background-color: @dropdown-active-background-color;
-                    }
-                }
             }
         }
     }
@@ -931,61 +882,76 @@ div.rail {
         margin: 8*@px 10*@px;
 
         .dropdown-container {
-          width: 100%;
-    //        display: block;
-    //        border-bottom: @px solid @rail-section-border-color;
+            width: 100%;
         }
 
-        button,
-        button:hover:not([disabled]) {
+        &.error button,
+        &.error input {
+            border-color: @textfield-error-border-color;
+        }
+
+        button {
             width: 100%;
             min-width: auto;
             border-color: @rail-dropdown-border-color;
             background: @rail-dropdown-background-color;
+            .gradient(@rail-dropdown-gradient-start-color, @rail-dropdown-gradient-end-color);
             color: @rail-dropdown-font-color;
-            font-size: @rail-dropdown-text-size;
             height: @rail-dropdown-height;
 
-            // arrow down
+            &:disabled {
+                border-color: @rail-dropdown-disabled-border-color;
+                background: @rail-dropdown-disabled-background-color;
+                color: @rail-dropdown-disabled-font-color;
+            }
+
             &:after {
-                background: none;
+                background:none;
                 content: "▾";
-                font-family: AdobeIcons;
                 position: absolute;
-                right: 10*@px;
-                top: 6*@px;
+                right: 12*@px;
+            }
+
+            &:hover:not([disabled]) {
+                border-color: @rail-dropdown-border-color;
+                background: @rail-dropdown-hover-background-color;
+                .gradient(@rail-dropdown-hover-background-color, @rail-dropdown-hover-background-color);
             }
         }
 
         .dropdown-list {
+
             border-bottom: @px solid @rail-dropdown-border-color;
 
             ul {
-                margin: 0;
-                padding: 0;
-                font-size: @rail-dropdown-text-size;
-                background-color: @rail-dropdown-background-color;
+                background-color: @rail-dropdown-list-background-color;
 
                 li {
-                    list-style-type: none;
-                    margin: 0;
-                    background-color: @rail-dropdown-background-color;
+                    background-color: @rail-dropdown-list-background-color;
                     color: @rail-dropdown-font-color;
-                    border: @px solid @rail-dropdown-border-color;
-                    border-top: none;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    -o-text-overflow: ellipsis;
-                    cursor: pointer;
-                    height: @rail-dropdown-height;
-                    line-height: @rail-dropdown-height;
-                    padding-top: 0;
-                    padding-bottom: 0;
+                    border-color: @rail-dropdown-border-color;
+                    border-top-color: @rail-dropdown-border-light-color;
 
                     &:hover,
                     &.selected:hover {
                         background-color: @dropdown-active-background-color;
+                        border-color: @rail-dropdown-border-color;
+
+                        + li {
+                            border-top-color: @rail-dropdown-border-color;
+                        }
                     }
+
+                }
+
+                .checkbox {
+                    border-color: @rail-dropdown-border-color;
+                    .gradient(@rail-dropdown-gradient-start-color, @rail-dropdown-gradient-end-color-checkbox);
+                    background: @rail-dropdown-background-color;
+                }
+
+                .checkbox.checked:before {
+                    color: @rail-dropdown-font-color;
                 }
             }
         }
