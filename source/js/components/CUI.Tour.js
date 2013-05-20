@@ -102,7 +102,7 @@
       }
 
       if (this.options.autoshow) {
-        this._toggleBackdrop(true);
+        this.show();
       }
     },
 
@@ -137,8 +137,9 @@
     },
 
     /** @ignore */
-    _slideTo: function (slide) {
-      var idx = slide.index();
+    _slideTo: function (sl) {
+      var slide = $(sl), 
+        idx = slide.index();
 
       if (slide.length > 0) {
         this.$current.removeClass('active');
@@ -189,8 +190,8 @@
         event.preventDefault();
       });
 
-      this.$skip.fipo('tap', 'click', this._hide.bind(this));
-      this.$done.fipo('tap', 'click', this._hide.bind(this));
+      this.$skip.fipo('tap', 'click', this.hide.bind(this));
+      this.$done.fipo('tap', 'click', this.hide.bind(this));
       this.$prev.fipo('tap', 'click', this.slideToPrev.bind(this));
       this.$next.fipo('tap', 'click', this.slideToNext.bind(this));
       this.$control.fipo('tap', 'click', 'a', function (event) {
