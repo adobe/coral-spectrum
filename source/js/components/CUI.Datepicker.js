@@ -152,9 +152,17 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             }.bind(this));
 
             this.$element.on('click', function(event){
-                if (!this.pickerShown) this._openPicker();
+                if ($(event.target).is(".icon-calendar")) {
+                    if (!this.pickerShown) {
+                        this._openPicker();
+                    } else {
+                        this._hidePicker();
+                    }
+                }
+
 
                 // let the event time to propagate.
+                // Do not use stopPropagation, as other Datepickers might want to use this event for closing their own datepicker
                 this.keepShown = true;
                 setTimeout(function() {
                     this.keepShown = false;
@@ -406,7 +414,9 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             }
 
             this._setDateTime(date);
-            this._hidePicker();
+
+            // Only hide, if the picker has no extra time fields
+            if(!this._isTimeEnabled()) this._hidePicker();
         }.bind(this));
 
         if ($calendar.find("table").length > 0 && slide) {
