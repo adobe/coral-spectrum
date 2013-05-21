@@ -112,6 +112,28 @@ The top toolbar with action icons
         }
     }
 
+    > a.help {
+      color: @header-nav-font-color;
+      text-decoration: none;
+
+      padding: 0 @header-nav-spacing / 4;
+      margin-right: @header-nav-spacing / 2;
+      line-height: @header-height;
+
+      &:active,
+      &.selected,
+      &:hover,
+      &:focus {
+        color: @header-nav-down-font-color;
+      }
+
+      &:hover,
+      &:focus {
+        text-decoration: none;
+        opacity: 1;
+      }
+    }
+
     > a.button:not([class^="icon-"]):not([class*=" icon-"]),
     > button:not([class^="icon-"]):not([class*=" icon-"]) {
         margin: 7*@px 10*@px;
