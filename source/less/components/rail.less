@@ -869,9 +869,22 @@ div.rail {
             width: 228*@px;
 
             ul {
-                border-top: @px solid @rail-section-border-color;
+                border-top: none;
                 border-bottom: @px solid @rail-section-border-color;
-                font-size: 14*@px;
+
+                li {
+                    border-color: @rail-section-border-color;
+                    border-top-color: @rail-dropdown-border-light-color;
+
+                    &:hover,
+                    &.selected:hover {
+                        border-color: @rail-section-border-color;
+
+                        + li {
+                            border-top-color: @rail-section-border-color;
+                        }
+                    }
+                }
             }
         }
     }
