@@ -210,15 +210,30 @@
     },
 
     /** @ignore */
+    _startImageTransitions: function () {
+      var $fadableImages = this.$element.find('.fadable');
+      this._imageTransitionsTimer = setInterval(function () {
+          $fadableImages.toggleClass('faded');
+      }, 3000);
+    },
+
+    /** @ignore */
+    _stopImageTransitions: function () {
+      clearInterval(this._imageTransitionsTimer);
+    },
+
+    /** @ignore */
     _show: function () {
       this.$element.addClass('show');  
       this._toggleBackdrop(true);
+      this._startImageTransitions();
     },
 
     /** @ignore */
     _hide: function () {
       this.$element.removeClass('show');
       this._toggleBackdrop();
+      this._stopImageTransitions();
     },
 
     /** @ignore */
