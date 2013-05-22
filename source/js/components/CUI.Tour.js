@@ -173,17 +173,6 @@
     },
 
     /**
-     * slides to the last slide
-     * @return {this}
-     */
-    slideToLast: function () {
-      var last = this.$element.find('.tour-slide:last');
-      this._slideTo(last);
-
-      return this;
-    },
-
-    /**
      * slides to the given index of a slide
      * @param  {integer} no
      * @return {this}
@@ -201,7 +190,7 @@
         event.preventDefault();
       });
 
-      this.$skip.fipo('tap', 'click', this.slideToLast.bind(this));
+      this.$skip.fipo('tap', 'click', this.hide.bind(this));
       this.$done.fipo('tap', 'click', this.hide.bind(this));
       this.$prev.fipo('tap', 'click', this.slideToPrev.bind(this));
       this.$next.fipo('tap', 'click', this.slideToNext.bind(this));
