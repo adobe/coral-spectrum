@@ -263,8 +263,8 @@
           this.$backdrop.fadeIn();
         else {
           this.$backdrop = $('<div/>', {
-            class: 'tour-backdrop',
-            css: {
+            "class": 'tour-backdrop',
+            "css": {
               display: 'none'
             }
           }).appendTo(document.body);
