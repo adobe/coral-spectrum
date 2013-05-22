@@ -110,6 +110,7 @@ div.edited {
     font-size: 0;   /* fixes additional space between buttons because of linefeeds */
     .userSelect(none);
     -webkit-touch-callout: none;
+    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.3);
 
     &.active {
         display: block;
@@ -197,11 +198,12 @@ div.edited {
         background-color: #2b2b2b;
 
         background: #454545; /* old browsers */
-        background: -webkit-linear-gradient(#545454 1%, #454545 99%); /* WebKit */
-        background: -moz-linear-gradient(top, #545454 1%, #454545 99%); /* FF3.6+ */
-        background: -o-linear-gradient(top, #545454 1%,#454545 99%); /* Opera 11.10+ */
-        background: -ms-linear-gradient(top, #545454 1%,#454545 99%); /* IE10+ */
-        background: linear-gradient(to bottom, #545454 1%,#454545 99%); /* W3C */
+        background-image: -webkit-linear-gradient(#545454 1%, #454545 99%); /* WebKit */
+        background-image: -moz-linear-gradient(top, #545454 1%, #454545 99%); /* FF3.6+ */
+        background-image: -o-linear-gradient(top, #545454 1%, #454545 99%); /* Opera 11.10+ */
+        background-image: -ms-linear-gradient(top, #545454 1%, #454545 99%); /* IE10+ */
+        background-image: linear-gradient(top, #545454 1%, #454545 99%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#545454', endColorstr='#454545', GradientType=0); /* IE < 10 */
 
         padding: 0;
         border: 1*@px;
@@ -228,14 +230,6 @@ div.edited {
             background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNSIgaGVpZ2h0PSI1IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48cG9seWdvbiBmaWxsPSIjQ0NDQ0NDIiBwb2ludHM9IjQsNCAwLDQgNCwwICIvPjwvc3ZnPg==') !important;
             background-repeat: no-repeat !important;
             background-position: 100% 100% !important;
-        }
-
-        /* reset gradient filter on IE */
-
-        &,
-        &:hover,
-        &:active {
-            filter: none;
         }
 
         &.white {
