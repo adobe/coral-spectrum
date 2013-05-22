@@ -173,6 +173,17 @@
     },
 
     /**
+     * slides to the last slide
+     * @return {this}
+     */
+    slideToLast: function () {
+      var last = this.$element.find('.tour-slide:last');
+      this._slideTo(last);
+
+      return this;
+    },
+
+    /**
      * slides to the given index of a slide
      * @param  {integer} no
      * @return {this}
@@ -190,7 +201,7 @@
         event.preventDefault();
       });
 
-      this.$skip.fipo('tap', 'click', this.hide.bind(this));
+      this.$skip.fipo('tap', 'click', this.slideToLast.bind(this));
       this.$done.fipo('tap', 'click', this.hide.bind(this));
       this.$prev.fipo('tap', 'click', this.slideToPrev.bind(this));
       this.$next.fipo('tap', 'click', this.slideToNext.bind(this));
@@ -210,15 +221,30 @@
     },
 
     /** @ignore */
+    _startImageTransitions: function () {
+      var $fadableImages = this.$element.find('.fadable');
+      this._imageTransitionsTimer = setInterval(function () {
+          $fadableImages.toggleClass('faded');
+      }, 3000);
+    },
+
+    /** @ignore */
+    _stopImageTransitions: function () {
+      clearInterval(this._imageTransitionsTimer);
+    },
+
+    /** @ignore */
     _show: function () {
       this.$element.addClass('show');  
       this._toggleBackdrop(true);
+      this._startImageTransitions();
     },
 
     /** @ignore */
     _hide: function () {
       this.$element.removeClass('show');
       this._toggleBackdrop();
+      this._stopImageTransitions();
     },
 
     /** @ignore */
@@ -237,8 +263,8 @@
           this.$backdrop.fadeIn();
         else {
           this.$backdrop = $('<div/>', {
-            class: 'tour-backdrop',
-            css: {
+            "class": 'tour-backdrop',
+            "css": {
               display: 'none'
             }
           }).appendTo(document.body);

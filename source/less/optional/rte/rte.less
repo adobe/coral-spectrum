@@ -101,7 +101,7 @@ div.edited {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: #454545;
+    background-color: #4d4d4d;
     display: none;
     padding: 0;
     margin: 0;
@@ -163,7 +163,7 @@ div.edited {
     }
 
     div.rte-dialog-column {
-        color: #ffffff;
+        color: #c7c7c7;
         font-weight: normal;
         font-size: 14*@px;
         display: table-cell;
@@ -173,6 +173,16 @@ div.edited {
 
     .pathbrowser input[type=text] {
         margin: 0;
+    }
+
+    input[type=text].dark,
+    input[type=password].dark,
+    input[type=email].dark,
+    input[type=url].dark,
+    input[type=tel].dark {
+        background-color: #404040;
+        color: #c7c7c7;
+        border-color: #2c2c2c;
     }
 
     button.dialog-button {
