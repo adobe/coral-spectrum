@@ -1352,8 +1352,14 @@ CUI.rte.Selection = function() {
             var sel = CUI.rte.Selection;
             var range = context.doc.selection.createRange();
             if (range.item) {
+                var item = range.item(0);
+                // check if selection is actually valid (IE sometimes returns invalid
+                // selections!)
+                if (!com.isAncestor(context, context.root, item)) {
+                    return null;
+                }
                 return {
-                    "startNode": range.item(0)
+                    "startNode": item
                 };
             }
             var startRange = range.duplicate();
@@ -2259,6 +2265,11 @@ CUI.rte.Selection = function() {
                 } else {
                     endOffset = range.endOffset;
                 }
+                // check if selection is actually valid (IE sometimes returns invalid
+                // selections!)
+                if (!com.isAncestor(context, context.root, startNode)) {
+                    return null;
+                }
                 return {
                     "startNode": startNode,
                     "startOffset": startOffset,
@@ -2271,6 +2282,11 @@ CUI.rte.Selection = function() {
             // selected "objects" (a name, img, etc.)
             var selectionObject = sel.getSelectionObject(selection);
             if (selectionObject) {
+                // check if selection is actually valid (IE sometimes returns invalid
+                // selections!)
+                if (!com.isAncestor(context, context.root, selectionObject)) {
+                    return null;
+                }
                 return {
                     "startNode": selectionObject
                 };
@@ -2326,6 +2342,11 @@ CUI.rte.Selection = function() {
                         }
                     }
                 }
+                // check if selection is actually valid (IE sometimes returns invalid
+                // selections!)
+                if (!com.isAncestor(context, context.root, startNode)) {
+                    return null;
+                }
                 return {
                     "startNode": startNode,
                     "startOffset": startOffset,
@@ -2374,6 +2395,11 @@ CUI.rte.Selection = function() {
                 swap = endOffset;
                 endOffset = startOffset;
                 startOffset = swap;
+            }
+            // check if selection is actually valid (IE sometimes returns invalid
+            // selections!)
+            if (!com.isAncestor(context, context.root, startNode)) {
+                return null;
             }
             return {
                 "startNode": startNode,

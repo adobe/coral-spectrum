@@ -1346,6 +1346,9 @@ CUI.rte.Common = function() {
          *         of <code>dom2</code>
          */
         isAncestor: function(context, dom1, dom2) {
+            if (!dom1 || !dom2) {
+                return false;
+            }
             do {
                 dom2 = CUI.rte.Common.getParentNode(context, dom2);
                 if (dom2) {
