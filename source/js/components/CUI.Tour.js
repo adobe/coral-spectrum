@@ -225,7 +225,7 @@
       var $fadableImages = this.$element.find('.fadable');
       this._imageTransitionsTimer = setInterval(function () {
           $fadableImages.toggleClass('faded');
-      }, 3000);
+      }, 5000);
     },
 
     /** @ignore */
