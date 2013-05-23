@@ -1,6 +1,6 @@
 /*!
 * toe.js
-* version 3.0.0b
+* version 3.0.2
 * author: Damien Antipa
 * https://github.com/dantipa/toe.js
 */
@@ -8,16 +8,22 @@
 
     var state, gestures = {}, touch = {
 
-        on: function() {
+        active: false,
+
+        on: function () {
             $(document).on('touchstart', touchstart)
                 .on('touchmove', touchmove)
                 .on('touchend touchcancel', touchend);
+
+            touch.active = true;
         },
 
-        off: function() {
+        off: function () {
             $(document).off('touchstart', touchstart)
                 .off('touchmove', touchmove)
                 .off('touchend touchcancel', touchend);
+
+            touch.active = false;
         },
 
         track: function (namespace, gesture) {
@@ -249,7 +255,7 @@
 
             clearTimeout(timer);
             timer = setTimeout(function () {
-                if (!abort) {
+                if (!abort && touch.active) {
                     if (state[namespace].finger === opt.finger) {
                         $(event.target).trigger($.Event(namespace, touch.addEventParam(start, state[namespace])));
                     }
