@@ -104,29 +104,31 @@
                 this.setSelectedIndex(event.selectedValue * 1);
             }.bind(this));
 
-            this.$element.on("focus", "input", function(event) {
-                if (this.options.disabled) {
-                    return;
-                }
-                this.$element.addClass("focus");
-            }.bind(this));
+            // focus setting confuses mobile safari
+            if (!CUI.util.isTouch) {
+                this.$element.on("focus", "input", function(event) {
+                    if (this.options.disabled) {
+                        return;
+                    }
+                    this.$element.addClass("focus");
+                }.bind(this));
 
-            this.$element.on("blur", "input", function() {
-                if (this.options.disabled) {
-                    return;
-                }
-                this.$element.removeClass("focus");
-            }.bind(this));
+                this.$element.on("blur", "input", function() {
+                    if (this.options.disabled) {
+                        return;
+                    }
+                    this.$element.removeClass("focus");
+                }.bind(this));
 
-            this.$element.on("click touchend", "input", function(event) {
-                if (this.options.disabled) {
-                    return;
-                }
-                
-                this.inputElement.focus();
-                this._inputChanged();
-            }.bind(this));
-
+                this.$element.on("click touchend", "input", function(event) {
+                    if (this.options.disabled) {
+                        return;
+                    }
+                    
+                    this.inputElement.focus();
+                    this._inputChanged();
+                }.bind(this));    
+            }
         },
 
         defaults: {
