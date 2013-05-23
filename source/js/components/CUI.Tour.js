@@ -203,6 +203,17 @@
     },
 
     /**
+     * slides to the first slide
+     * @return {this}
+     */
+    slideToFirst: function () {
+      var first = this.$element.find('.first');
+      this._slideTo(first);
+
+      return this;
+    },
+
+    /**
      * slides to the given index of a slide
      * @param  {integer} no
      * @return {this}
@@ -256,7 +267,8 @@
 
       /** @ignore */
     _show: function () {
-      this.$element.addClass('show');  
+      this.$element.addClass('show');
+      this.slideToFirst();
       this._toggleBackdrop(true);
       this._startNewAnimation();
     },
