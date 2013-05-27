@@ -51,7 +51,7 @@ module.exports = function(grunt) {
       'components/CUI.CharacterCount.js',
       'components/CUI.Accordion.js',
       'components/CUI.Tour.js',
-      
+
       // Validations
       'validations.js'
     ],
@@ -431,7 +431,8 @@ module.exports = function(grunt) {
         },
         src: [
           '<%= dirs.source %>/js/*.js',
-          '<%= dirs.source %>/js/components/**'
+          '<%= dirs.source %>/js/components/**',
+          '<%= dirs.source %>/js/plugins/**'
         ]
       }
     },
@@ -439,9 +440,9 @@ module.exports = function(grunt) {
     lint: {
       files: [
         'Gruntfile.js',
-        // exclude RTE for now ...
         '<%= dirs.source %>/js/*.js',
-        '<%= dirs.source %>/js/components/*',
+        '<%= dirs.source %>/js/components/*', // exclude RTE for now ...
+        '<%= dirs.source %>/js/plugins/**',
         '<%= dirs.source %>/guide/js/*'
       ]
     },
