@@ -105,7 +105,7 @@
 
     function createInvalidEvent() {
         return $.Event("invalid", {
-            _jqueryValidator: true
+            isJqueryValidator: true
         });
     }
 
@@ -357,18 +357,4 @@ jQuery.validator.register({
             e.preventDefault();
         }
     }, true);
-
-    // Cancel the native invalid event (which is triggered by the browser supporting native validation)
-    // to show our own UI instead
-    $(document).on("cui-contentloaded", function(e) {
-        $(registry.submittableSelector, e.target).on("invalid", function(e) {
-            if (e._jqueryValidator) return;
-
-            e.preventDefault();
-
-            var el = $(this);
-            el.checkValidity();
-            el.updateErrorUI();
-        });
-    });
 })(document, jQuery);
