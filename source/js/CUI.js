@@ -19,7 +19,6 @@
   };
 &lt;/script&gt;
 &lt;script src=&quot;js/CUI.js&quot;&gt;&lt;/script&gt;
-
 */
 var CUI = CUI || {};
 
@@ -36,27 +35,23 @@ CUI.options = $.extend({
   }
 
   $(function() {
-
     /**
-      <h1>cui-contentloaded Event</h1>
-      <p><code>cui-contentloaded</code> event is an event that is triggered when a new content is injected to the DOM.
-This event is very similar to <a href="https://developer.mozilla.org/en-US/docs/DOM/DOM_event_reference/DOMContentLoaded">DOMContentLoaded</a> event.
+      <p><code>cui-contentloaded</code> event is an event that is triggered when a new content is injected to the DOM,
+        which is very similar to {@link https://developer.mozilla.org/en-US/docs/DOM/DOM_event_reference/DOMContentLoaded|DOMContentLoaded} event.</p>
 
-This event is normally used so that a JavaScript code can be notified when new content needs to be enhanced (applying event handler, layout, etc).
+      <p>This event is normally used so that a JavaScript code can be notified when new content needs to be enhanced (applying event handler, layout, etc).
+        The element where the new content is injected is available at event.target, like so:
 
-The element where the new content is injected is available at event.target, like so:
-
-<pre class="prettyprint linenums jsDocExample">
-$(document).on("foundation-contentloaded", function(e) {
+<pre class="prettyprint linenums jsDocExample">$(document).on("cui-contentloaded", function(e) {
     var container = e.target;
     // the container is the element where new content is injected.
-});
-</pre>
+});</pre>
 
-This way the listener can limit the scope of the selector accordingly.
+        This way the listener can limit the scope of the selector accordingly.</p>
 
-It will be triggered at DOMContentLoaded event as well, so component can just listen to this event instead of DOMContentLoaded for enhancement purpose. In that case, the value of event.target is <code>document</code>.
-</p>
+      <p>It will be triggered at DOMContentLoaded event as well, so component can just listen to this event instead of DOMContentLoaded for enhancement purpose.
+        In that case, the value of event.target is <code>document</code>.</p>
+
       @namespace cui-contentloaded
     */
     $(document).trigger("cui-contentloaded");
