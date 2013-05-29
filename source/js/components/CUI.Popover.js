@@ -175,7 +175,7 @@
         this.$element.detach().insertAfter($el);
       }
 
-      var screenPadding = 4; // Use some padding to the borders of the screen
+      var screenPadding = 6; // Use some padding to the borders of the screen
 
       // we could probably use more variables here
       // - said no one ever
@@ -190,7 +190,7 @@
           top = relativePosition.top,
           absTopDiff = absolutePosition.top - parseInt($el.css("margin-top")) - top, // Fix jQuery as it does different margin calculations on offset() and position()
           absLeftDiff = absolutePosition.left - parseInt($el.css("margin-left")) - left, // Fix jQuery as it does different margin calculations on offset() and position()
-          width = this.$element.outerWidth(),
+          width = this.$element.outerWidth(true),
           height = this.$element.outerHeight(),
           parentWidth = this.$element.positionedParent().width(),
           parentPadding = parseFloat(this.$element.parent().css('padding-right')),

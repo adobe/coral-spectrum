@@ -74,7 +74,7 @@
     }
 
     /**
-     * @see http://www.w3.org/TR/html5/forms.html#the-constraint-validation-api
+     * @see {@link http://www.w3.org/TR/html5/forms.html#the-constraint-validation-api}
      */
     function HTMLValidation(el, registry) {
         this.el = el;
@@ -105,7 +105,7 @@
 
     function createInvalidEvent() {
         return $.Event("invalid", {
-            _jqueryValidator: true
+            isJqueryValidator: true
         });
     }
 
@@ -182,9 +182,13 @@
 
     $.extend($.expr[":"], {
         /**
-         * Exposes :submittable selector. Returns the element that can be used during form submission.
+         * Selects elements that can be used during form submission.
+         * Currently it is "input, textarea, select, button, keygen, object, [role=checkbox], [role=radio], [role=combobox], [role=listbox], [role=radiogroup], [role=tree], [role=slider], [role=spinbutton], [role=textbox]".
+         *
+         * @see {@link http://www.w3.org/TR/html5/forms.html#category-submit}
+         * @ignore
          */
-        submittable: function (element, index, meta, stack) {
+        submittable: function (element) {
             return registry.isSummittable($(element));
         }
     });
@@ -197,7 +201,10 @@
      */
 
     /**
+     * Returns true if the element will be validated when the form is submitted; false otherwise.
+     *
      * @memberof jQuery.fn
+     * @see {@link http://www.w3.org/TR/html5/forms.html#dom-cva-willvalidate}
      */
     $.fn.willValidate = function() {
         var api = registry.api(this.first());
@@ -209,7 +216,10 @@
     };
 
     /**
+     * Returns the error message that would be shown to the user if the element was to be checked for validity.
+     *
      * @memberof jQuery.fn
+     * @see {@link http://www.w3.org/TR/html5/forms.html#dom-cva-validationmessage}
      */
     $.fn.validationMessage = function() {
         var api = registry.api(this.first());
@@ -221,7 +231,10 @@
     };
 
     /**
+     * Returns true if the element's value has no validity problems; false otherwise. Fires an invalid event at the element in the latter case.
+     *
      * @memberof jQuery.fn
+     * @see {@link http://www.w3.org/TR/html5/forms.html#dom-cva-checkvalidity}
      */
     $.fn.checkValidity = function() {
         var api = registry.api(this.first());
@@ -233,7 +246,11 @@
     };
 
     /**
+     * Sets a custom error, so that the element would fail to validate. The given message is the message to be shown to the user when reporting the problem to the user.
+     * If the argument is the empty string, clears the custom error.
+     *
      * @memberof jQuery.fn
+     * @see {@link http://www.w3.org/TR/html5/forms.html#dom-cva-setcustomvalidity}
      */
     $.fn.setCustomValidity = function(message) {
         return this.each(function() {
@@ -245,6 +262,8 @@
     };
 
     /**
+     * Shows error UI if the element is invalid; hide the UI otherwise.
+     *
      * @memberof jQuery.fn
      */
     $.fn.updateErrorUI = function() {
@@ -257,18 +276,39 @@
     };
 
     /**
-     * Provides a hook for customization of validator plugin.
+     * <code>jQuery.validator</code> is a jQuery plugin that provides form validation, which is designed to replicate {@link http://www.w3.org/TR/html5/forms.html#constraints|HTML Forms Constraint Validation API}.
+     * <p>It will capture the form submit event to cancel and stop propagating the event when the form is invalid. If there is <code>novalidate</code> attribute, the validation is skipped.
+     * It also doesn't actually provide any validation rule, such as validating required field.
+     * Rather the rule is separated and made pluggable, which can be registered using {@link jQuery.validator.register}.</p>
      *
      * @namespace jQuery.validator
      */
     $.validator = (function() {
         return {
             /**
-             * Registers the given validator.
+             * <p>Registers the given validator(s).</p>
+             * <p>Each validator will be iterated to check the validity of submittable elements, where the iteration stopped when the first matching validator says invalid.
+             * The order of the registration is important, where the last one registered will be used first.</p>
+             *
+             * <h6>Design Suggestion</h6>
+             * <p>It is recommended to use existing standard vocabulary (e.g. {@link http://www.w3.org/TR/html5/forms.html#attr-input-required|required}, {@link http://www.w3.org/TR/html5/forms.html#attr-input-pattern|pattern} attribute), to define the rule.
+             * For advance rule, the following markup convention is recommended to be used:
+             * 
+             * <pre class="prettyprint"></code>&lt;input type="text" data-validation="cui.url" />
+&lt;input type="text" data-validation="granite.path" />
+&lt;input type="text" data-validation="granite.relativepath" />
+&lt;input type="text" data-validation="myrule1" /></code></pre>
+             *
+             * where <code>data-validation</code> attribute value is a namespaced name. The validator can be then registered as usual:
+             *
+             * <pre class="prettyprint"></code>jQuery.validator.register({
+    selector: "form input[data-validation='cui.url']",
+    validate: function(el) {}
+});</code></pre></p>
              *
              * @memberof jQuery.validator
              *
-             * @param {Object} validator
+             * @param {...Object} validator One or more validator objects.
              * @param {String|Function} validator.selector Only the element satisfying the selector will be validated using this validator. It will be passed to <code>jQuery.fn.is</code>.
              * @param {Function} validator.validate The actual validation function. It must return a string of error message if the element fails.
              * @param {Function} validator.show The function to show the error.
@@ -276,19 +316,21 @@
              *
              * @example
 jQuery.validator.register({
-    selector: "input",
+    selector: "form input",
     validate: function(el) {
         if (el.attr("aria-required") === "true" && el.val().length === 0) {
             return "This field is required";
         }
     },
     show: function(el, message) {
+        // show the error UI
     },
     clear: function(el) {
+        // clear the error UI
     }
 });
              */
-            register: function(validator) {
+            register: function() {
                 $.each(arguments, function() {
                     registry.register(this);
                 });
@@ -299,7 +341,7 @@ jQuery.validator.register({
 
     /**
      * Statically validate the constraints of form.
-     * @see http://www.w3.org/TR/html5/forms.html#statically-validate-the-constraints
+     * @see {@link http://www.w3.org/TR/html5/forms.html#statically-validate-the-constraints}
      */
     function staticallyValidate(form, registry) {
         return registry.submittables(form)
@@ -321,7 +363,7 @@ jQuery.validator.register({
 
     /**
      * Interactively validate the constraints of form.
-     * @see http://www.w3.org/TR/html5/forms.html#interactively-validate-the-constraints
+     * @see {@link http://www.w3.org/TR/html5/forms.html#interactively-validate-the-constraints}
      */
     function interactivelyValidate(form, registry) {
         var unhandleds = staticallyValidate(form, registry);
@@ -357,18 +399,4 @@ jQuery.validator.register({
             e.preventDefault();
         }
     }, true);
-
-    // Cancel the native invalid event (which is triggered by the browser supporting native validation)
-    // to show our own UI instead
-    $(document).on("cui-contentloaded", function(e) {
-        $(registry.submittableSelector, e.target).on("invalid", function(e) {
-            if (e._jqueryValidator) return;
-
-            e.preventDefault();
-
-            var el = $(this);
-            el.checkValidity();
-            el.updateErrorUI();
-        });
-    });
 })(document, jQuery);

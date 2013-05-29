@@ -404,6 +404,7 @@
             var context = this.editorKernel.getEditContext();
             var body = context.doc.body;
             var editedContent = this.editorKernel.getProcessedHtml();
+            CUI.rte.Selection.resetSelection(context, "start");
             this.finalizeEventHandling();
             this.deactivateEditorKernel();
             this.$textContainer.removeClass("edited");

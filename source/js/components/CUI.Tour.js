@@ -90,9 +90,8 @@
       this.$current = this.$current.length > 0 ? this.$current : this.$element.find('.tour-slide:eq(0)').addClass('active'); // if no slide is selected set first
 
       // set current state in nav
-      idx = this.$current.index();
-      this._setCircleNav(idx);
-      this._toggleButtons(idx);
+      this._setCircleNav(this.$current);
+      this._toggleButtons(this.$current);
 
       // bind the handlers
       this._bindControls();
@@ -102,7 +101,7 @@
       }
 
       if (this.options.autoshow) {
-        this._toggleBackdrop(true);
+        this.show();
       }
     },
 
@@ -112,40 +111,56 @@
     },
 
     /** @ignore */
-    _toggleButtons: function (idx) {
+    _toggleButtons: function ($slide) {
       //reset
       this.$skip.removeClass('show');
       this.$done.removeClass('show');
       this.$prev.removeClass('hide');
       this.$next.removeClass('hide');
 
-      if (idx === 0) {
+      if ($slide.hasClass('first')) {
         this.$skip.addClass('show');
-        this.$prev.addClass('hide');  
-      } else if (idx === this.$slides.length - 1 ) {
+        this.$prev.addClass('hide');
+
+      } else if ($slide.hasClass('last') || $slide.hasClass('skipper')) {
         this.$done.addClass('show');
-        this.$next.addClass('hide');  
+        this.$next.addClass('hide');
       }
     },
 
     /** @ignore */
-    _setCircleNav: function (idx) {
-      this.$control.find('a')
-        .removeClass('active')
-        .filter(':eq('+ idx +')')
-        .addClass('active');
+    _setCircleNav: function ($slide) {
+      var idx = $slide.index();
+
+      if ($slide.hasClass('skipper')) {
+        this.$control
+         .removeClass('show')
+         .addClass('hide');
+      } else {
+        this.$control
+          .removeClass('hide')
+          .addClass('show')
+          .find('a')
+          .removeClass('active')
+          .filter(':eq('+ idx +')')
+          .addClass('active');
+      }
     },
 
     /** @ignore */
-    _slideTo: function (slide) {
-      var idx = slide.index();
+    _slideTo: function (sl) {
+      var $slide = $(sl);
 
-      if (slide.length > 0) {
+      if ($slide.length > 0) {
+        this.$current.find('.fadable').addClass('faded');
         this.$current.removeClass('active');
-        this.$current = slide.addClass('active'); 
+        this.$current = $slide.addClass('active');
 
-        this._setCircleNav(idx);  
-        this._toggleButtons(idx);
+        this._setCircleNav($slide);
+        this._toggleButtons($slide);
+
+        this._stopLastAnimation();
+        this._startNewAnimation();
       }
     },
 
@@ -155,7 +170,9 @@
      */
     slideToNext: function () {
       var next = this.$current.next('.tour-slide');
-      this._slideTo(next);
+      if (! this.$current.hasClass('last')) {
+        this._slideTo(next);
+      }
 
       return this;
     },
@@ -165,8 +182,33 @@
      * @return {this}
      */
     slideToPrev: function () {
-      var prev = this.$current.prev('.tour-slide');
+      var prev = this.$current.hasClass('skipper') ?
+          this.$element.find('.first') :
+          this.$current.prev('.tour-slide');
+
       this._slideTo(prev);
+
+      return this;
+    },
+
+    /**
+     * slides to the skipper (hidden) slide
+     * @return {this}
+     */
+    slideToSkipper: function () {
+      var skipper = this.$element.find('.skipper');
+      this._slideTo(skipper);
+
+      return this;
+    },
+
+    /**
+     * slides to the first slide
+     * @return {this}
+     */
+    slideToFirst: function () {
+      var first = this.$element.find('.first');
+      this._slideTo(first);
 
       return this;
     },
@@ -189,8 +231,8 @@
         event.preventDefault();
       });
 
-      this.$skip.fipo('tap', 'click', this._hide.bind(this));
-      this.$done.fipo('tap', 'click', this._hide.bind(this));
+      this.$skip.fipo('tap', 'click', this.slideToSkipper.bind(this));
+      this.$done.fipo('tap', 'click', this.hide.bind(this));
       this.$prev.fipo('tap', 'click', this.slideToPrev.bind(this));
       this.$next.fipo('tap', 'click', this.slideToNext.bind(this));
       this.$control.fipo('tap', 'click', 'a', function (event) {
@@ -209,15 +251,33 @@
     },
 
     /** @ignore */
+    _startNewAnimation: function () {
+      var $imageToFade = this.$current.find('.fadable');
+      if ($imageToFade) {
+        this._animationTimer = setInterval(function () {
+          $imageToFade.toggleClass('faded');
+        }, 5000);
+      }
+    },
+
+    /** @ignore */
+    _stopLastAnimation: function () {
+     clearInterval(this._animationTimer);
+    },
+
+      /** @ignore */
     _show: function () {
-      this.$element.addClass('show');  
+      this.$element.addClass('show');
+      this.slideToFirst();
       this._toggleBackdrop(true);
+      this._startNewAnimation();
     },
 
     /** @ignore */
     _hide: function () {
       this.$element.removeClass('show');
       this._toggleBackdrop();
+      this._stopLastAnimation();
     },
 
     /** @ignore */
@@ -236,8 +296,8 @@
           this.$backdrop.fadeIn();
         else {
           this.$backdrop = $('<div/>', {
-            class: 'tour-backdrop',
-            css: {
+            "class": 'tour-backdrop',
+            "css": {
               display: 'none'
             }
           }).appendTo(document.body);

@@ -35,8 +35,9 @@
             <a href="#" class="selected">Websites</a>
         </nav>
         <div class="drawer">
+            <a href="#">Help</a>
             <div class="badge">10</div>
-            <a class="icon-user" href="#user_dialog" data-toggle="modal">User</a>
+            <a class="icon-user" href="#user_dialog" data-toggle="modal"><span>User</span></a>
         </div>
     </header>
 
@@ -58,7 +59,9 @@
                 <div class="rail-view" data-view="feature">
                     <nav class="feature">
                         <a href="#Files">Files</a>
-                        <a href="#Collections" class="active">Collections</a>
+                        <a href="#Collections" class="active">Assets</a>
+                        <span class="sub-navigation"><a href="/collections">Collections</a></span>
+                        <span class="sub-navigation"><a href="/collections">Sub Navigation</a></span>
                         <a href="#Users">Users</a>
                         <a href="#Tools">Tools</a>
                         <a href="#Settings">Settings</a>
@@ -71,6 +74,8 @@
                         <input type="text" placeholder="Enter Keyword(s)" autocomplete="off" name="q" id="q1">
                         <button type="submit" class="icon-search">Search</button>
                     </div>
+
+
                     <div class="dropdown menu" data-init="dropdown" data-nowidth="true">
                         <button>Dropdown Menu in Rail</button>
                         <select name="dropdown">
@@ -79,14 +84,43 @@
                             <option>Option Three</option>
                         </select>
                     </div>
-                    <div class="dropdown" data-init="dropdown" style="margin-left:0.625rem">
-                        <button>Dropdown in Rail</button>
-                        <select name="dropdown">
-                            <option>Option One</option>
-                            <option>Option Two</option>
-                            <option>Option Three</option>
-                        </select>
+
+                    <div style="margin:8px 10px;">
+                        <div class="dropdown" data-init="dropdown">
+                            <button>Dropdown in Rail</button>
+                            <select name="dropdown">
+                                <option>Option One</option>
+                                <option>Option Two</option>
+                                <option>Option Three</option>
+                                <option>Option Four</option>
+                            </select>
+                        </div>
+
+                        <!--<div class="dropdown" data-init="dropdown">-->
+                        <!--<button>Multi select in Rail</button>-->
+                        <!--<select name="dropdown" multiple>-->
+                        <!--<option>Option One</option>-->
+                        <!--<option>Option Two</option>-->
+                        <!--<option>Option Three</option>-->
+                        <!--<option>Option Four</option>-->
+                        <!--</select>-->
+                        <!--</div>-->
+
+                        <!--<div class="dropdown" data-init="dropdown" data-disabled="true">-->
+                        <!--<button>Disabled dropdown in Rail</button>-->
+                        <!--</div>-->
+
+                        <!--<div class="dropdown error" data-init="dropdown">-->
+                        <!--<button>Dropdown Error</button>-->
+                        <!--<select name="dropdown">-->
+                        <!--<option>Option One</option>-->
+                        <!--<option>Option Two</option>-->
+                        <!--<option>Option Three</option>-->
+                        <!--<option>Option Four</option>-->
+                        <!--</select>-->
+                        <!--</div>-->
                     </div>
+
                     <section class="foldable open">
                         <span class="heading">Accordion open</span>
                         <ul class="notype checklist fold">

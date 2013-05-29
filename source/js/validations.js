@@ -65,8 +65,21 @@
     // We can do all this without modifying jquery-validator and jquery-message at all.
     // So later when you need a fancy validation, please bring this issue to the mailing list first.
 
-    // TODO TBD if we want to do validation only when then form is having a certain class
-    // e.g. using selector "form.validate input" instead of just "form input"
+
+    // Cancel the native invalid event (which is triggered by the browser supporting native validation)
+    // to show our own UI instead
+    $(document).on("cui-contentloaded", function(e) {
+        $(":submittable", e.target).on("invalid", function(e) {
+            if (e.isJqueryValidator) return;
+
+            e.preventDefault();
+
+            var el = $(this);
+            el.checkValidity();
+            el.updateErrorUI();
+        });
+    });
+
 
     function simpleShow(el, message) {
         var error = el.next(".form-error");
@@ -85,6 +98,9 @@
         el.next(".form-error").remove();
     }
 
+
+    // TODO TBD if we want to do validation only when then form is having a certain class
+    // e.g. using selector "form.validate input" instead of just "form input"
 
     $.validator.register({
         selector: "form *",

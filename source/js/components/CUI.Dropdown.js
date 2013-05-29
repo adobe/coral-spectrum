@@ -131,7 +131,7 @@
             });
         }
         
-        this.buttonElement.on("dropdown-list:select", "", this._processSelect.bind(this));
+        this.buttonElement.on("dropdown-list:select", this._processSelect.bind(this));
         
         this.buttonElement.on("mousedown", "", function(event) {
             event.preventDefault();

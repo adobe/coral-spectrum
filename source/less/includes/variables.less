@@ -255,6 +255,7 @@
 
 @rail-background-color: rgb(77, 77, 77); // standart background color for rail
 @rail-dark-background-color: rgb(60, 60, 60); // for input-text and special components
+@rail-tertiary-background-color: rgb(50, 50, 50);
 
 @rail-shadow-distance: 0.1rem;
 @rail-shadow-spread: 0.45rem;
@@ -264,8 +265,8 @@
 
 @rail-group-header-color: rgb(81, 85, 86);
 
-@rail-section-border-color: rgb(49, 52, 52);
-@rail-section-highlight-color: rgb(89, 92, 93);
+@rail-section-border-color: rgb(42, 42, 42);
+@rail-section-highlight-color: rgb(95, 95, 95);
 @rail-section-dark-highlight-color: rgb(54, 57, 57);
 @rail-section-link-color: rgb(199, 199, 199);
 
@@ -273,11 +274,16 @@
 
 @rail-well-background-color: rgb(57, 60, 60);
 
-@rail-active-background-color: rgb(72, 76, 77);
-@rail-active-secondrary-background-color: rgb(51, 51, 51);
+@rail-active-background-color: @rail-background-color;
+@rail-active-secondary-background-color: rgb(58, 58, 58);
 
-@rail-font-color: rgb(230, 230, 230);
-@rail-font-active-color: rgb(170, 170, 170);
+@rail-section-secondary-border-color: rgb(45, 45, 45);
+@rail-section-secondary-highlight-color: rgb(80, 80, 80);
+@rail-section-change-border-color: rgb(42, 42, 42);
+@rail-section-secondary-first-child-highlight-color: rgb(57, 57, 57);
+
+@rail-font-color: rgb(220, 220, 220);
+@rail-font-active-color: rgb(255, 255, 255);
 @rail-font-hover-color: rgb(255, 255, 255);
 @rail-icon-color: rgb(255, 255, 255);
 @rail-icon-active-color: rgb(65, 145, 210);
@@ -291,11 +297,28 @@
 @rail-light-section-dark-highlight-color: rgb(174, 177, 177);
 @rail-light-section-link-color: rgb(50, 50, 50);
 
-@rail-dropdown-border-color: rgb(40, 40, 40);
-@rail-dropdown-background-color: rgb(70, 70, 70);
-@rail-dropdown-font-color: rgb(200, 200, 200);
-@rail-dropdown-text-size: 10*@px;
-@rail-dropdown-height: 30*@px;
+// dropdown
+@rail-dropdown-height: 38*@px;
+@rail-dropdown-font-color: rgb(220, 220, 220);
+@rail-dropdown-border-color: rgb(30, 30, 30);
+@rail-dropdown-border-light-color: rgb(70, 70, 70);
+@rail-dropdown-background-color: rgb(75, 75, 75);
+@rail-dropdown-gradient-start-color: rgb(85, 85, 85);
+@rail-dropdown-gradient-end-color: rgb(70, 70, 70);
+
+// dropdown hover
+@rail-dropdown-hover-background-color: rgb(80, 80, 80);
+
+// disabled dropdown
+@rail-dropdown-disabled-border-color: rgb(65, 65, 65);
+@rail-dropdown-disabled-background-color: rgb(80, 80, 80);
+@rail-dropdown-disabled-font-color: rgb(100, 100, 100);
+
+// dropdown list
+@rail-dropdown-list-background-color: rgb(80, 80, 80);
+@rail-dropdown-gradient-end-color-checkbox: rgb(75, 75, 75);
+
+
 
 // Table
 @table-border-color: rgb(187, 187, 187);

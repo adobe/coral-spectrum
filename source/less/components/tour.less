@@ -33,10 +33,10 @@ Class: .tour
 
   background-color: @modal-body-background-color;
   .background-clip(padding-box); // don't let the border overlap the background    
-  
+
   &.show {
     display: block;
-  } 
+  }
 
   >.tour-slide {
     position: absolute;
@@ -44,7 +44,7 @@ Class: .tour
     left: 0;
     height: 100%;
     overflow: hidden;
-  
+
     // set them all hidden to left
     -webkit-transform: translateX(-100%);
     -moz-transform: translateX(-100%);
@@ -63,6 +63,7 @@ Class: .tour
       width: 100%;
       .box-shadow(0 -2*@px 4*@px @tour-slide-text-shadow-color);
       text-align: center;
+      z-index: @zindexModal; //avoid the little gap when images fade out
 
       >* {
         color: @tour-slide-text-color;
@@ -78,6 +79,22 @@ Class: .tour
       >p {
         font-size: 18*@px;
         font-family: AdobeCleanLight;
+      }
+    }
+
+    >img.fadable {
+      display: block;
+      position: absolute;
+      top: 0px;
+      opacity: 1;
+
+      -webkit-transition: opacity 1s ease-in-out;
+      -moz-transition: opacity 1s ease-in-out;
+      -o-transition: opacity 1s ease-in-out;
+      transition: opacity 1s ease-in-out;
+
+      &.faded {
+        opacity: 0;
       }
     }
 
@@ -105,7 +122,7 @@ Class: .tour
     text-align: center;
 
     font-size: 0; // set font-size to 0 to remove the spacing between the circles
-    
+
     >button {
       position: relative;
       margin: 9*@px;
@@ -152,6 +169,14 @@ Class: .tour
       left: 0;
       right: 0;
 
+      &.hide {
+        display: none;
+      }
+
+      &.show {
+        display: block;
+      }
+
       > a {
         display: inline-block;
 
@@ -160,11 +185,11 @@ Class: .tour
         margin: 21*@px 5*@px 0 5*@px;
         height: @tour-nav-circle-size;
         width: @tour-nav-circle-size;
-        border-radius: @tour-nav-circle-size;  
+        border-radius: @tour-nav-circle-size;
 
         background: @tour-nav-circle-color;
 
-        &.active, 
+        &.active,
         &:hover {
           background: @tour-nav-circle-active-color;
         }
