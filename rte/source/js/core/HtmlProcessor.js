@@ -819,8 +819,9 @@ CUI.rte.HtmlProcessor = function() {
                                     var attribPos = attribDef.pos;
                                     var attribCharCnt = attribDef.cnt;
                                     var isQuoted = attribDef.quoted;
-                                    var url = CUI.rte.HtmlRules.Links
-                                            .removePrefixForInternalLinks(attribValue);
+                                    var url = CUI.rte.HtmlRules
+                                            .removePrefixForInternalLinks(attribValue,
+                                                CUI.rte.Utils.URL_LINK);
                                     if (url != attribValue) {
                                         if (!isQuoted) {
                                             url = "\"" + url + "\"";

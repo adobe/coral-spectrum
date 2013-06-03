@@ -540,7 +540,8 @@ CUI.rte.HtmlRules.Links.getLinkHref = function(dom) {
     } else {
         href = com.getAttribute(dom, "href");
         if (href) {
-            href = CUI.rte.HtmlRules.Links.removePrefixForInternalLinks(href);
+            href = CUI.rte.HtmlRules.removePrefixForInternalLinks(href,
+                    CUI.rte.Utils.URL_LINK);
         }
     }
     return href;
