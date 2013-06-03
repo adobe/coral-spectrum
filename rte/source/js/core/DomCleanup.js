@@ -595,20 +595,21 @@ CUI.rte.DomCleanup = new Class({
     handleImage: function(dom) {
         var com = CUI.rte.Common;
         var dcu = CUI.rte.DomCleanup;
-        var srcAttrib;
-        if ((this.processingMode == dcu.PRE) && com.isTag(dom, "img")) {
-            srcAttrib = com.getAttribute(dom, CUI.rte.Common.SRC_ATTRIB);
-            srcAttrib = (srcAttrib ? srcAttrib : com.getAttribute(dom, "src", true));
-            com.setAttribute(dom, "src", CUI.rte.Utils.processUrl(srcAttrib,
-                    CUI.rte.Utils.URL_IMAGE));
-        }
-        if (this.processingMode == dcu.PASTE_PREPARE) {
-            if (com.isTag(dom, "img")) {
+        if (com.isTag(dom, "img")) {
+            var srcAttrib;
+            if ((this.processingMode == dcu.PRE) && com.isTag(dom, "img")) {
+                srcAttrib = com.getAttribute(dom, CUI.rte.Common.SRC_ATTRIB);
+                srcAttrib = (srcAttrib ? srcAttrib : com.getAttribute(dom, "src", true));
+                com.setAttribute(dom, "src", CUI.rte.Utils.processUrl(srcAttrib,
+                        CUI.rte.Utils.URL_IMAGE));
+            }
+            if (this.processingMode == dcu.PASTE_PREPARE) {
                 srcAttrib = com.getAttribute(dom, "src", true);
                 if (srcAttrib) {
                     var helperAttrib = com.getAttribute(dom, CUI.rte.Common.SRC_ATTRIB);
                     if (!helperAttrib) {
-                        com.setAttribute(dom, CUI.rte.Common.SRC_ATTRIB, srcAttrib);
+                        com.setAttribute(dom, CUI.rte.Common.SRC_ATTRIB,
+                                CUI.rte.HtmlRules.removePrefixForInternalLinks(srcAttrib));
                     }
                 }
             }

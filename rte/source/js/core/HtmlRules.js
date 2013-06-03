@@ -96,6 +96,48 @@ CUI.rte.HtmlRules = new Class({
 
 });
 
+/**
+ * Removes the server prefix (http://hostname:port/context; deliberately inserted by the
+ * browser) from an internal link.
+ * @param {String} href URL where the server prefix should be removed
+ * @param {String} type The type of the href (for example, image or hyperlink; use
+ *        constants defined in class {@link CUI.rte.Utils})
+ * @return {String} adjusted URL ("/content/foo/bar" for internal links;
+ *         "http://hostname[:port]/foo/bar" for external links
+ */
+CUI.rte.HtmlRules.removePrefixForInternalLinks = function(href, type) {
+    var currentUrl = location.href;
+    var currentServerPrefix = CUI.rte.Utils.getServerPrefix(currentUrl) + "/";
+    var prefixLen = currentServerPrefix.length;
+    if (href.length > prefixLen) {
+        if (href.substring(0, prefixLen) == currentServerPrefix) {
+            var isSamePage = false;
+            var hasQueryString = false;
+            if (href.length > currentUrl.length) {
+                if (href.substring(0, currentUrl.length) == currentUrl) {
+                    var sepChar = href.charAt(currentUrl.length);
+                    switch (sepChar) {
+                        case "?":
+                            hasQueryString = true;
+                            isSamePage = true;
+                            break;
+                        case "#":
+                            isSamePage = true;
+                            break;
+                    }
+                }
+            }
+            if (isSamePage && !hasQueryString) {
+                // anchor-only link: remove protocol, host, path
+                href = href.substring(currentUrl.length, href.length);
+            } else {
+                href = href.substring(prefixLen - 1, href.length);
+            }
+        }
+    }
+    return href;
+};
+
 
 /**
  * @class CUI.rte.HtmlRules.Links
@@ -510,38 +552,10 @@ CUI.rte.HtmlRules.Links.getLinkHref = function(dom) {
  * @param {String} href URL where the server prefix should be removed
  * @return {String} adjusted URL ("/content/foo/bar" for internal links;
  *         "http://hostname[:port]/foo/bar" for external links
+ * @deprecated use {@link CUI.rte.HtmlRules#removePrefixForInternalLinks instead
  */
 CUI.rte.HtmlRules.Links.removePrefixForInternalLinks = function(href) {
-    var currentUrl = location.href;
-    var currentServerPrefix = CUI.rte.Utils.getServerPrefix(currentUrl) + "/";
-    var prefixLen = currentServerPrefix.length;
-    if (href.length > prefixLen) {
-        if (href.substring(0, prefixLen) == currentServerPrefix) {
-            var isSamePage = false;
-            var hasQueryString = false;
-            if (href.length > currentUrl.length) {
-                if (href.substring(0, currentUrl.length) == currentUrl) {
-                    var sepChar = href.charAt(currentUrl.length);
-                    switch (sepChar) {
-                        case "?":
-                            hasQueryString = true;
-                            isSamePage = true;
-                            break;
-                        case "#":
-                            isSamePage = true;
-                            break;
-                    }
-                }
-            }
-            if (isSamePage && !hasQueryString) {
-                // anchor-only link: remove protocol, host, path
-                href = href.substring(currentUrl.length, href.length);
-            } else {
-                href = href.substring(prefixLen - 1, href.length);
-            }
-        }
-    }
-    return href;
+    return CUI.rte.HtmlRules.removePrefixForInternalLinks(href, CUI.rte.Utils.URL_LINK);
 };
 
 
