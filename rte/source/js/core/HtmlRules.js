@@ -309,9 +309,10 @@ CUI.rte.HtmlRules.Links = new Class({
      *     "localhost:80")</li>
      * </ul>
      * @param {String} href The HREF to validate
+     * @param {Boolean} allowEmpty True if an empty HREF should be allowed
      * @return {Boolean} True if the HREF could be validated
      */
-    validateHref: function(href) {
+    validateHref: function(href, allowEmpty) {
         var protocol = this.getProtocol(href);
         if (protocol) {
             // valid protocol prepended
@@ -329,7 +330,7 @@ CUI.rte.HtmlRules.Links = new Class({
             return false;
         }
         // Link without protocol (i.e. www.day.com)
-        return true;
+        return (allowEmpty ? true : !!(href && (href.length > 0)));
     },
 
     /**
@@ -344,7 +345,7 @@ CUI.rte.HtmlRules.Links = new Class({
         if (isDomObject) {
             href = CUI.rte.HtmlRules.Links.getLinkHref(obj);
         } else {
-            href = obj.href;
+            href = obj.href || "";
         }
         var cssMode = this.cssMode;
         if (cssMode == "auto") {
@@ -502,7 +503,8 @@ CUI.rte.HtmlRules.Links.hasProtocol = function(href) {
  * @param {String} href HREF to check
  */
 CUI.rte.HtmlRules.Links.isInternalLink = function(href) {
-    return (href.length > 0) && ((href.charAt(0) == "/") || (href.charAt(0) == '#'));
+    return href && (href.length > 0)
+            && ((href.charAt(0) == "/") || (href.charAt(0) == '#'));
 };
 
 /**

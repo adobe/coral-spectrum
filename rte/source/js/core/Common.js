@@ -2408,6 +2408,9 @@ CUI.rte.Common = function() {
          * @return {Boolean} True, if str starts with partialStr, else false
          */
         strStartsWith: function(str, partialStr) {
+            if (!str || !partialStr) {
+                return false;
+            }
             var pLen = partialStr.length;
             if (str.length >= pLen) {
                 return (str.substring(0, pLen) == partialStr);
@@ -2422,6 +2425,9 @@ CUI.rte.Common = function() {
          * @return {Boolean} True, if str ends with partialStr, else false
          */
         strEndsWith: function(str, partialStr) {
+            if (!str || !partialStr) {
+                return false;
+            }
             var sLen = str.length;
             var pLen = partialStr.length;
             if (sLen >= pLen) {

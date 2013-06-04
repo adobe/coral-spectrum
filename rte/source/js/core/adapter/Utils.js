@@ -30,7 +30,7 @@ CUI.rte.Utils = function() {
 
         scope: function(fn, scope) {
             return function() {
-                fn.apply(scope, arguments);
+                return fn.apply(scope, arguments);
             };
         },
 
