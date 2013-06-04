@@ -11,6 +11,8 @@ core/adapter/jquery/Query.js
 core/adapter/jquery/AdapterUtils.js
 core/adapter/Constants.js
 core/adapter/Hooks.js
+core/adapter/I18nProvider.js
+core/adapter/DefaultI18nProvider.js
 core/adapter/Utils.js
 
 core/EditContext.js

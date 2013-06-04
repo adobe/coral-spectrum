@@ -10,6 +10,7 @@ core/adapter/extjs/Query.js
 core/adapter/extjs/AdapterUtils.js
 core/adapter/Constants.js
 core/adapter/Hooks.js
+core/adapter/I18nProvider.js
 core/adapter/Utils.js
 core/EditContext.js
 core/EditorKernel.js

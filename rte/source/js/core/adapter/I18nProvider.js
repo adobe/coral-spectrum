@@ -16,7 +16,22 @@
 * from Adobe Systems Incorporated.
 **************************************************************************/
 
-(function() {
-    CUI.rte.ui.ToolkitRegistry.initialize("cui");
-    CUI.rte.Utils.setI18nProvider(new CUI.rte.ui.DefaultI18nProvider());
-})();
+/**
+ * <p>This interface class must be implemented for specific contexts to provide
+ * internationalization for the Rich Text Editor.</p>
+ */
+CUI.rte.I18nProvider = new Class({
+
+    /**
+     * Return the correctly internationalized text that is represented by the specified
+     * ID.
+     * @param {String} id The text ID
+     * @param {Array} values (optional) Values to fill placeholders with
+     * @returns {String} The internationalized text
+     */
+    getText: function(id, values) {
+        // must be overridden by something meaningful for the respective context
+        return id;
+    }
+
+});
