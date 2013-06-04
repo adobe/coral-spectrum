@@ -56,6 +56,11 @@ CUI.rte.plugins.FindReplacePlugin = new Class({
     /**
      * @private
      */
+    operationDialog: null,
+
+    /**
+     * @private
+     */
     currentSearchDef: null,
 
     /**
@@ -82,6 +87,7 @@ CUI.rte.plugins.FindReplacePlugin = new Class({
                     config);
         }
         this.findDialog.setMode(true, false);
+        this.operationDialog = this.findDialog;
         dm.show(this.findDialog);
     },
 
@@ -138,8 +144,10 @@ CUI.rte.plugins.FindReplacePlugin = new Class({
             dialog.setMode(false, false);
             this.editorKernel.getDialogManager().alert(
                     CUI.rte.Utils.i18n("plugins.findReplace.findReplaceTitle"),
-                    CUI.rte.Utils.i18n("plugins.findReplace.alertNoMoreResults", [ findText ]),
-                    CUI.rte.Utils.scope(this.findDialog.focusFindField, this.findDialog));
+                    CUI.rte.Utils.i18n("plugins.findReplace.alertNoMoreResults",
+                            [ findText ]),
+                    CUI.rte.Utils.scope(
+                            this.operationDialog.focusFindField, this.operationDialog));
             this.currentSearchDef.doc.create(context.root);
         }
         if (match && (match.length > 0)) {
@@ -219,6 +227,7 @@ CUI.rte.plugins.FindReplacePlugin = new Class({
                     config);
         }
         this.replaceDialog.setMode(true, false);
+        this.operationDialog = this.replaceDialog;
         dm.show(this.replaceDialog);
     },
 
@@ -369,5 +378,4 @@ CUI.rte.plugins.FindReplacePlugin = new Class({
 
 
 // register plugin
-CUI.rte.plugins.PluginRegistry.register("findreplace",
-        CUI.rte.plugins.FindReplacePlugin);
+CUI.rte.plugins.PluginRegistry.register("findreplace", CUI.rte.plugins.FindReplacePlugin);
