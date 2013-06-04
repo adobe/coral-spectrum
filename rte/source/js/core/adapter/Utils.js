@@ -121,6 +121,9 @@ CUI.rte.Utils = function() {
 
         URL_IMAGE: "image",
 
+        URL_LINK: "link",
+
+
         // mapping adapter specific stuff:
 
         isArray: CUI.rte.AdapterUtils.isArray,
