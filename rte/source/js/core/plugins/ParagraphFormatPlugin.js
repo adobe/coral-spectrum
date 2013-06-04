@@ -139,16 +139,16 @@ CUI.rte.plugins.ParagraphFormatPlugin = new Class({
         var defaults = {
             "formats": [ {
                     "tag": "p",
-                    "description": CUI.rte.Utils.i18n("Paragraph")
+                    "description": CUI.rte.Utils.i18n("plugins.paraFormat.defaultP")
                 }, {
                     "tag": "h1",
-                    "description": CUI.rte.Utils.i18n("Heading 1")
+                    "description": CUI.rte.Utils.i18n("plugins.paraFormat.defaultH1")
                 }, {
                     "tag": "h2",
-                    "description": CUI.rte.Utils.i18n("Heading 2")
+                    "description": CUI.rte.Utils.i18n("plugins.paraFormat.defaultH2")
                 }, {
                     "tag": "h3",
-                    "description": CUI.rte.Utils.i18n("Heading 3")
+                    "description": CUI.rte.Utils.i18n("plugins.paraFormat.defaultH3")
                 }
             ]
         };

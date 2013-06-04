@@ -191,5 +191,236 @@ CUI.rte.DefaultI18nProvider.DEFAULT_TRANSLATIONS = {
         },
         "plugins.format.underlineText": {
             "en": "Underline the selected text."
+        },
+        "plugins.image.alignMenu": {
+            "en": "Image alignment"
+        },
+        "plugins.image.alignLeft": {
+            "en": "Left"
+        },
+        "plugins.image.alignRight": {
+            "en": "Right"
+        },
+        "plugins.image.alignNone": {
+            "en": "None"
+        },
+        "plugins.image.noAlign": {
+            "en": "No alignment"
+        },
+        "plugins.justify.leftTitle": {
+            "en": "Align Text Left"
+        },
+        "plugins.justify.leftText": {
+            "en": "Align text to the left."
+        },
+        "plugins.justify.centerTitle": {
+            "en": "Center Text"
+        },
+        "plugins.justify.centerText": {
+            "en": "Center text in the editor."
+        },
+        "plugins.justify.rightTitle": {
+            "en": "Align Text Right"
+        },
+        "plugins.justify.rightText": {
+            "en": "Align text to the right."
+        },
+        "plugins.link.linkTitle": {
+            "en": "Hyperlink"
+        },
+        "plugins.link.linkText": {
+            "en": "Create or modify a hyperlink."
+        },
+        "plugins.link.unlinkTitle": {
+            "en": "Unlink"
+        },
+        "plugins.link.unlinkText": {
+            "en": "Remove an existing hyperlink from the selected text."
+        },
+        "plugins.link.anchorTitle": {
+            "en": "Anchor"
+        },
+        "plugins.link.anchorText": {
+            "en": "Add or edit an anchor."
+        },
+        "plugins.list.ulTitle": {
+            "en": "Bullet List"
+        },
+        "plugins.list.ulText": {
+            "en": "Start a bulleted list."
+        },
+        "plugins.list.olTitle": {
+            "en": "Numbered List"
+        },
+        "plugins.list.olText": {
+            "en": "Start a numbered list."
+        },
+        "plugins.list.indentTitle": {
+            "en": "Indent"
+        },
+        "plugins.list.indentText": {
+            "en": "Indents the selected paragraph(s) or list item(s)."
+        },
+        "plugins.list.outdentTitle": {
+            "en": "Outdent"
+        },
+        "plugins.list.outdentText": {
+            "en": "Outdents the current paragraph(s) or list item(s)."
+        },
+        "plugins.miscTools.sourceEditTitle": {
+            "en": "Source Edit"
+        },
+        "plugins.miscTools.sourceEditText": {
+            "en": "Switch to source editing mode."
+        },
+        "plugins.miscTools.specialCharsTitle": {
+            "en": "Special Characters"
+        },
+        "plugins.miscTools.specialCharsText": {
+            "en": "Insert a special character."
+        },
+        "plugins.paraFormat.defaultP": {
+            "en": "Paragraph"
+        },
+        "plugins.paraFormat.defaultH1": {
+            "en": "Heading 1"
+        },
+        "plugins.paraFormat.defaultH2": {
+            "en": "Heading 2"
+        },
+        "plugins.paraFormat.defaultH3": {
+            "en": "Heading 3"
+        },
+        "plugins.subSuperScript.subTitle": {
+            "en": "Subscript"
+        },
+        "plugins.subSuperScript.subText": {
+            "en": "Formats the selected text as subscript."
+        },
+        "plugins.subSuperScript.superTitle": {
+            "en": "Superscript"
+        },
+        "plugins.subSuperScript.superText": {
+            "en": "Formats the selected text as superscript."
+        },
+        "plugins.table.tableTitle": {
+            "en": "Table"
+        },
+        "plugins.table.tableText": {
+            "en": "Creates a new table or edits the properties of an existing table."
+        },
+        "plugins.table.cellTitle": {
+            "en": "Cell"
+        },
+        "plugins.table.cellText": {
+            "en": "Edit the properties of a selected cell."
+        },
+        "plugins.table.insertAboveTitle": {
+            "en": "Insert Above"
+        },
+        "plugins.table.insertAboveText": {
+            "en": "Insert a new row above the current row."
+        },
+        "plugins.table.insertBelowTitle": {
+            "en": "Insert Below"
+        },
+        "plugins.table.insertBelowText": {
+            "en": "Insert a new row below the current row."
+        },
+        "plugins.table.deleteRowTitle": {
+            "en": "Delete Row"
+        },
+        "plugins.table.deleteRowText": {
+            "en": "Delete the current row."
+        },
+        "plugins.table.insertLeftTitle": {
+            "en": "Insert Left"
+        },
+        "plugins.table.insertLeftText": {
+            "en": "Insert a new column to the left of the current column."
+        },
+        "plugins.table.insertRightTitle": {
+            "en": "Insert Right"
+        },
+        "plugins.table.insertRightText": {
+            "en": "Insert a new column to the right of the current column."
+        },
+        "plugins.table.deleteColumnTitle": {
+            "en": "Delete Column"
+        },
+        "plugins.table.deleteColumnText": {
+            "en": "Delete the current column."
+        },
+        "plugins.table.cellProps": {
+            "en": "Cell properties"
+        },
+        "plugins.table.mergeCells": {
+            "en": "Merge cells"
+        },
+        "plugins.table.mergeRight": {
+            "en": "Merge right"
+        },
+        "plugins.table.mergeDown": {
+            "en": "Merge down"
+        },
+        "plugins.table.splitHor": {
+            "en": "Split cell horizontally"
+        },
+        "plugins.table.splitVert": {
+            "en": "Split cell vertically"
+        },
+        "plugins.table.cell": {
+            "en": "Cell"
+        },
+        "plugins.table.column": {
+            "en": "Column"
+        },
+        "plugins.table.row": {
+            "en": "Row"
+        },
+        "plugins.table.insertBefore": {
+            "en": "Insert before"
+        },
+        "plugins.table.insertAfter": {
+            "en": "Insert after"
+        },
+        "plugins.table.remove": {
+            "en": "Remove"
+        },
+        "plugins.table.tableProps": {
+            "en": "Table properties"
+        },
+        "plugins.table.removeTable": {
+            "en": "Remove table"
+        },
+        "plugins.table.nestedTable": {
+            "en": "Create nested table"
+        },
+        "plugins.table.selectRow": {
+            "en": "Select entire row"
+        },
+        "plugins.table.selectColumn": {
+            "en": "Select entire column"
+        },
+        "plugins.table.insertParaBefore": {
+            "en": "Insert paragraph before table"
+        },
+        "plugins.table.insertParaAfter": {
+            "en": "Insert paragraph after table"
+        },
+        "plugins.table.createTable": {
+            "en": "Create table"
+        },
+        "plugins.undoRedo.undoTitle": {
+            "en": "Undo"
+        },
+        "plugins.undoRedo.undoText": {
+            "en": "Undo the last change."
+        },
+        "plugins.undoRedo.redoTitle": {
+            "en": "Redo"
+        },
+        "plugins.undoRedo.redoText": {
+            "en": "Redo previously undone changes."
         }
-    };
+};

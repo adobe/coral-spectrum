@@ -185,12 +185,12 @@ CUI.rte.plugins.MiscToolsPlugin = new Class({
             },
             "tooltips": {
                 "sourceedit": {
-                    "title": CUI.rte.Utils.i18n("Source Edit"),
-                    "text": CUI.rte.Utils.i18n("Switch to source editing mode.")
+                    "title": CUI.rte.Utils.i18n("plugins.miscTools.sourceEditTitle"),
+                    "text": CUI.rte.Utils.i18n("plugins.miscTools.sourceEditText")
                 },
                 "specialchars": {
-                    "title": CUI.rte.Utils.i18n("Special characters"),
-                    "text": CUI.rte.Utils.i18n("Insert a special character.")
+                    "title": CUI.rte.Utils.i18n("plugins.miscTools.specialCharsTitle"),
+                    "text": CUI.rte.Utils.i18n("plugins.miscTools.specialCharsText")
                 }
             }
         };

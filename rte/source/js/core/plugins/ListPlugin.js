@@ -204,20 +204,20 @@ CUI.rte.plugins.ListPlugin = new Class({
             "keepStructureOnUnlist": false,
             "tooltips": {
                 "insertunorderedlist": {
-                    "title": CUI.rte.Utils.i18n("Bullet List"),
-                    "text": CUI.rte.Utils.i18n("Start a bulleted list.")
+                    "title": CUI.rte.Utils.i18n("plugins.list.ulTitle"),
+                    "text": CUI.rte.Utils.i18n("plugins.list.ulText")
                 },
                 "insertorderedlist": {
-                    "title": CUI.rte.Utils.i18n("Numbered List"),
-                    "text": CUI.rte.Utils.i18n("Start a numbered list.")
+                    "title": CUI.rte.Utils.i18n("plugins.list.olTitle"),
+                    "text": CUI.rte.Utils.i18n("plugins.list.olText")
                 },
                 "indent": {
-                    "title": CUI.rte.Utils.i18n("Indent"),
-                    "text": CUI.rte.Utils.i18n("Indents the selected paragraph(s) or list item(s).")
+                    "title": CUI.rte.Utils.i18n("plugins.list.indentTitle"),
+                    "text": CUI.rte.Utils.i18n("plugins.list.indentText")
                 },
                 "outdent": {
-                    "title": CUI.rte.Utils.i18n("Outdent"),
-                    "text": CUI.rte.Utils.i18n("Outdents the current paragraph(s) or list item(s).")
+                    "title": CUI.rte.Utils.i18n("plugins.list.outdentTitle"),
+                    "text": CUI.rte.Utils.i18n("plugins.list.outdentText")
                 }
             }
         });
