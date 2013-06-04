@@ -67,7 +67,7 @@ CUI.rte.DefaultI18nProvider = new Class({
             }
         }
         if (values) {
-            if (CUI.rte.Utils.isArray(values)) {
+            if (!CUI.rte.Utils.isArray(values)) {
                 text = text.replace("{0}", values);
             } else {
                 for (var s = 0; s < values.length; s++) {
