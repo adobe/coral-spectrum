@@ -73,7 +73,7 @@ CUI.rte.plugins.FindReplacePlugin = new Class({
         if (!this.findDialog || dm.mustRecreate(this.findDialog)) {
             var config = {
                 "editContext": context,
-                "title": CUI.rte.Utils.i18n("Find"),
+                "title": CUI.rte.Utils.i18n("plugins.findReplace.findTitle"),
                 "isReplace": false,
                 "findFn": CUI.rte.Utils.scope(this.execFind, this),
                 "cancelFn": CUI.rte.Utils.scope(this.execCancel, this)
@@ -137,10 +137,9 @@ CUI.rte.plugins.FindReplacePlugin = new Class({
         if (!match) {
             dialog.setMode(false, false);
             this.editorKernel.getDialogManager().alert(
-                    CUI.rte.Utils.i18n("Find/Replace"),
-                    CUI.rte.Utils.i18n("No more occurences of '{0}' found in document.<br>Search will be continued from the top.", [ findText ]),
+                    CUI.rte.Utils.i18n("plugins.findReplace.findReplaceTitle"),
+                    CUI.rte.Utils.i18n("plugins.findReplace.alertNoMoreResults", [ findText ]),
                     CUI.rte.Utils.scope(this.findDialog.focusFindField, this.findDialog));
-
             this.currentSearchDef.doc.create(context.root);
         }
         if (match && (match.length > 0)) {
@@ -261,15 +260,15 @@ CUI.rte.plugins.FindReplacePlugin = new Class({
             dm.hide(dialog);
             if (replaceCnt > 0) {
                 this.editorKernel.getDialogManager().alert(
-                        CUI.rte.Utils.i18n("Replace all"),
-                        CUI.rte.Utils.i18n("Text '{0}' has been replaced {1} time(s).",
+                        CUI.rte.Utils.i18n("plugins.findReplace.replaceAllTitle"),
+                        CUI.rte.Utils.i18n("plugins.findReplace.alertReplaceResults",
                                 [ options.findText, replaceCnt ]),
                         CUI.rte.Utils.scope(this.editorKernel.focus,
                                 this.editorKernel));
             } else {
                 this.editorKernel.getDialogManager().alert(
-                        CUI.rte.Utils.i18n("Replace all"),
-                        CUI.rte.Utils.i18n("Text '{0}' not found."),
+                        CUI.rte.Utils.i18n("plugins.findReplace.replaceAllTitle"),
+                        CUI.rte.Utils.i18n("plugins.findReplace.alertNotFound"),
                         CUI.rte.Utils.scope(this.editorKernel.focus,
                                 this.editorKernel));
             }
@@ -286,8 +285,8 @@ CUI.rte.plugins.FindReplacePlugin = new Class({
             } catch (e) {
                 if (e.message == "Could not insert html due to IE limitations.") {
                     this.editorKernel.getDialogManager().alert(
-                            CUI.rte.Utils.i18n("Replace"),
-                            CUI.rte.Utils.i18n("Could not replace due to limited functionality in Internet Explorer."));
+                            CUI.rte.Utils.i18n("plugins.findReplace.replaceTitle"),
+                            CUI.rte.Utils.i18n("plugins.findReplace.alertIEProblems"));
                     preventFind = true;
                 } else {
                     throw e;
@@ -338,12 +337,12 @@ CUI.rte.plugins.FindReplacePlugin = new Class({
         CUI.rte.Utils.applyDefaults(pluginConfig, {
             "tooltips": {
                 "find": {
-                    "title": CUI.rte.Utils.i18n("Find"),
-                    "text": CUI.rte.Utils.i18n("Finds a text fragment in the text being edited.")
+                    "title": CUI.rte.Utils.i18n("plugins.findReplace.findTitle"),
+                    "text": CUI.rte.Utils.i18n("plugins.findReplace.tooltipFind")
                 },
                 "replace": {
-                    "title": CUI.rte.Utils.i18n("Replace"),
-                    "text": CUI.rte.Utils.i18n("Replaces a text fragment with another fragment.")
+                    "title": CUI.rte.Utils.i18n("plugins.findReplace.replaceTitle"),
+                    "text": CUI.rte.Utils.i18n("plugins.findReplace.tooltipReplace")
                 }
             }
         });

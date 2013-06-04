@@ -81,6 +81,39 @@ CUI.rte.DefaultI18nProvider = new Class({
 });
 
 CUI.rte.DefaultI18nProvider.DEFAULT_TRANSLATIONS = {
+        "kernel.alertTitlePaste": {
+            "en": "Paste"
+        },
+        "kernel.alertSecurityPaste": {
+            "en": "Could not paste due to security restrictions of the browser.<br>Please use Ctrl+V to paste directly."
+        },
+        "kernel.alertTitleCopy": {
+            "en": "Copy"
+        },
+        "kernel.alertSecurityCopy": {
+            "en": "Could not copy due to security restrictions of the browser.<br>Please use Ctrl+C to copy directly."
+        },
+        "kernel.alertTitleCut": {
+            "en": "Cut"
+        },
+        "kernel.alertSecurityCut": {
+            "en": "Could not cut due to security restrictions of the browser.<br>Please use Ctrl+X to cut directly."
+        },
+        "kernel.alertTitleError": {
+            "en": "Error"
+        },
+        "kernel.alertIELimitation": {
+            "en": "Could not insert text due to internal Internet Explorer limitations. Please try to select a smaller text fragment and try again."
+        },
+        "commands.paste.alertTitle": {
+            "en": "Paste"
+        },
+        "commands.paste.alertTableError": {
+            "en": "You are trying to paste table data into an existing table.<br>As this operation would result in invalid HTML, it has been cancelled.<br>Please try to simplify the table's structure and try again."
+        },
+        "commands.paste.alertCellSelectionError": {
+            "en": "You are trying to paste table data into an non-rectangular cell selection.<br>Please choose a rectangular cell selection and try again."
+        },
         "plugins.editTools.cutTitle": {
             "en": "Cut (Ctrl+X)"
         },
@@ -110,5 +143,53 @@ CUI.rte.DefaultI18nProvider.DEFAULT_TRANSLATIONS = {
         },
         "plugins.editTools.pasteWordHtmlText": {
             "en": "Pastes the clipboard content from Word, applying some cleanup."
+        },
+        "plugins.findReplace.findTitle": {
+            "en": "Find"
+        },
+        "plugins.findReplace.replaceTitle": {
+            "en": "Replace"
+        },
+        "plugins.findReplace.findReplaceTitle": {
+            "en": "Find/Replace"
+        },
+        "plugins.findReplace.replaceAllTitle": {
+            "en": "Replace all"
+        },
+        "plugins.findReplace.alertNoMoreResults": {
+            "en": "No more occurences of '{0}' found in document.<br>Search will be continued from the top."
+        },
+        "plugins.findReplace.alertReplaceResults": {
+            "en": "Text '{0}' has been replaced {1} time(s)."
+        },
+        "plugins.findReplace.alertNotFound": {
+            "en": "Text '{0}' not found."
+        },
+        "plugins.findReplace.alertIEProblems": {
+            "en": "Could not replace due to limited functionality in Internet Explorer."
+        },
+        "plugins.findReplace.tooltipFind": {
+            "en": "Finds a text fragment in the text being edited."
+        },
+        "plugins.findReplace.tooltipReplace": {
+            "en": "Replaces a text fragment with another fragment."
+        },
+        "plugins.format.boldTitle": {
+            "en": "Bold (Ctrl+B)"
+        },
+        "plugins.format.boldText": {
+            "en": "Make the selected text bold."
+        },
+        "plugins.format.italicTitle": {
+            "en": "Italic (Ctrl+I)"
+        },
+        "plugins.format.italicText": {
+            "en": "Make the selected text italic."
+        },
+        "plugins.format.underlineTitle": {
+            "en": "Underline (Ctrl+U)"
+        },
+        "plugins.format.underlineText": {
+            "en": "Underline the selected text."
         }
     };
