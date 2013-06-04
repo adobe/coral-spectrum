@@ -309,10 +309,9 @@ CUI.rte.HtmlRules.Links = new Class({
      *     "localhost:80")</li>
      * </ul>
      * @param {String} href The HREF to validate
-     * @param {Boolean} allowEmpty True if an empty HREF should be allowed
      * @return {Boolean} True if the HREF could be validated
      */
-    validateHref: function(href, allowEmpty) {
+    validateHref: function(href) {
         var protocol = this.getProtocol(href);
         if (protocol) {
             // valid protocol prepended
@@ -329,8 +328,8 @@ CUI.rte.HtmlRules.Links = new Class({
         if (this.hasProtocol(href)) {
             return false;
         }
-        // Link without protocol (i.e. www.day.com)
-        return (allowEmpty ? true : !!(href && (href.length > 0)));
+        // link without protocol (i.e. www.day.com) or empty link
+        return !!(href && (href.length > 0));
     },
 
     /**
