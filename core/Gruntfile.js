@@ -53,8 +53,9 @@ module.exports = function(grunt) {
         files: [
           {
             expand: true,
+            flatten: true,
             cwd: '<%= dirs.shared %>/',
-            src: ['*.less'],
+            src: ['styles/base/**.less'],
             dest: '<%= dirs.build %>/less'
           },
           {
