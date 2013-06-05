@@ -1252,23 +1252,23 @@ CUI.rte.EditorKernel = new Class({
             } catch (e) {
                 if (e.message == "Cannot paste.") {
                     this.editorKernel.getDialogManager().alert(
-                            CUI.rte.Utils.i18n("Paste"),
-                            CUI.rte.Utils.i18n("Could not paste due to security restrictions of the browser.<br>Please use Ctrl+V to paste directly."),
+                            CUI.rte.Utils.i18n("kernel.alertTitlePaste"),
+                            CUI.rte.Utils.i18n("kernel.alertSecurityPaste"),
                             CUI.rte.Utils.scope(this.deferFocus, this));
                 } else if (e.message == "Cannot copy.") {
                     this.editorKernel.getDialogManager().alert(
-                            CUI.rte.Utils.i18n("Copy"),
-                            CUI.rte.Utils.i18n("Could not copy due to security restrictions of the browser.<br>Please use Ctrl+C to copy directly."),
+                            CUI.rte.Utils.i18n("kernel.alertTitleCopy"),
+                            CUI.rte.Utils.i18n("kernel.alertSecurityCopy"),
                             CUI.rte.Utils.scope(this.deferFocus, this));
                 } else if (e.message == "Cannot cut.") {
                     this.editorKernel.getDialogManager().alert(
-                            CUI.rte.Utils.i18n("Cut"),
-                            CUI.rte.Utils.i18n("Could not cut due to security restrictions of the browser.<br>Please use Ctrl+X to cut directly."),
+                            CUI.rte.Utils.i18n("kernel.alertTitleCut"),
+                            CUI.rte.Utils.i18n("kernel.alertSecurityCut"),
                             CUI.rte.Utils.scope(this.deferFocus, this));
                 } else if (e.message == "Could not insert html due to IE limitations.") {
                     this.editorKernel.getDialogManager().alert(
-                            CUI.rte.Utils.i18n("Error"),
-                            CUI.rte.Utils.i18n("Could not insert text due to internal Internet Explorer limitations. Please try to select a smaller text fragment and try again."),
+                            CUI.rte.Utils.i18n("kernel.alertTitleError"),
+                            CUI.rte.Utils.i18n("kernel.alertIELimitation"),
                             CUI.rte.Utils.scope(this.deferFocus, this));
                 } else {
                     throw e;

@@ -56,16 +56,16 @@ CUI.rte.plugins.FormatPlugin = new Class({
             "features": "*",
             "tooltips": {
                 "bold": {
-                    "title": CUI.rte.Utils.i18n("Bold (Ctrl+B)"),
-                    "text": CUI.rte.Utils.i18n("Make the selected text bold.")
+                    "title": CUI.rte.Utils.i18n("plugins.format.boldTitle"),
+                    "text": CUI.rte.Utils.i18n("plugins.format.boldText")
                 },
                 "italic": {
-                    "title": CUI.rte.Utils.i18n("Italic (Ctrl+I)"),
-                    "text": CUI.rte.Utils.i18n("Make the selected text italic.")
+                    "title": CUI.rte.Utils.i18n("plugins.format.italicTitle"),
+                    "text": CUI.rte.Utils.i18n("plugins.format.italicText")
                 },
                 "underline": {
-                    "title": CUI.rte.Utils.i18n("Underline (Ctrl+U)"),
-                    "text": CUI.rte.Utils.i18n("Underline the selected text.")
+                    "title": CUI.rte.Utils.i18n("plugins.format.underlineTitle"),
+                    "text": CUI.rte.Utils.i18n("plugins.format.underlineText")
                 }
             }
         });

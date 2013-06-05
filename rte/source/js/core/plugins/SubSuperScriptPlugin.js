@@ -86,12 +86,12 @@ CUI.rte.plugins.SubSuperScriptPlugin = new Class({
         var defaults = {
             "tooltips": {
                 "subscript": {
-                    "title": CUI.rte.Utils.i18n("Subscript"),
-                    "text": CUI.rte.Utils.i18n("Formats the selected text as subscript.")
+                    "title": CUI.rte.Utils.i18n("plugins.subSuperScript.subTitle"),
+                    "text": CUI.rte.Utils.i18n("plugins.subSuperScript.subText")
                 },
                 "superscript": {
-                    "title": CUI.rte.Utils.i18n("Superscript"),
-                    "text": CUI.rte.Utils.i18n("Formats the selected text as superscript.")
+                    "title": CUI.rte.Utils.i18n("plugins.subSuperScript.superTitle"),
+                    "text": CUI.rte.Utils.i18n("plugins.subSuperScript.superText")
                 }
             }
         };

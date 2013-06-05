@@ -50,10 +50,6 @@ CUI.rte.AdapterUtils = function() {
 
         getBlankImageUrl: function() {
             return CQ.Ext.BLANK_IMAGE_URL;
-        },
-
-        i18n: function(str, values) {
-            return CQ.I18n.getMessage(str, values);
         }
 
     };

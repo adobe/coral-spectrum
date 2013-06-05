@@ -26,11 +26,19 @@ CUI.rte.Utils = function() {
         return hooks;
     };
 
+    var i18nProvider = null;
+    var getI18nProvider = function() {
+        if (!i18nProvider) {
+            i18nProvider = new CUI.rte.I18nProvider();
+        }
+        return i18nProvider;
+    };
+
     return {
 
         scope: function(fn, scope) {
             return function() {
-                fn.apply(scope, arguments);
+                return fn.apply(scope, arguments);
             };
         },
 
@@ -82,6 +90,14 @@ CUI.rte.Utils = function() {
                 }
             }
             return obj1;
+        },
+
+        setI18nProvider: function(provider) {
+            i18nProvider = provider;
+        },
+
+        i18n: function(id, values) {
+            return getI18nProvider().getText(id, values);
         },
 
 
@@ -140,9 +156,7 @@ CUI.rte.Utils = function() {
 
         jsonDecode: CUI.rte.AdapterUtils.jsonDecode,
 
-        getBlankImageUrl: CUI.rte.AdapterUtils.getBlankImageUrl,
-
-        i18n: CUI.rte.AdapterUtils.i18n
+        getBlankImageUrl: CUI.rte.AdapterUtils.getBlankImageUrl
 
     };
 

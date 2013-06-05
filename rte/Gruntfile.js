@@ -19,6 +19,7 @@ module.exports = function (grunt) {
       'core/adapter/jquery/AdapterUtils.js',
       'core/adapter/Constants.js',
       'core/adapter/Hooks.js',
+      'core/adapter/I18nProvider.js',
       'core/adapter/Utils.js'
     ],
     "rte-extjs-adapter": [
@@ -29,6 +30,8 @@ module.exports = function (grunt) {
       'core/adapter/extjs/AdapterUtils.js',
       'core/adapter/Constants.js',
       'core/adapter/Hooks.js',
+      'core/adapter/I18nProvider.js',
+      'core/adapter/DefaultI18nProvider.js',
       'core/adapter/Utils.js'
     ],
     "rte-core": [

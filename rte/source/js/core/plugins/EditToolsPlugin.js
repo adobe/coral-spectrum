@@ -603,24 +603,24 @@ CUI.rte.plugins.EditToolsPlugin = new Class({
             },
             "tooltips": {
                 "cut": {
-                    "title": CUI.rte.Utils.i18n("Cut (Ctrl+X)"),
-                    "text": CUI.rte.Utils.i18n("Cuts the currently selected text and puts it in to the clipboard.")
+                    "title": CUI.rte.Utils.i18n("plugins.editTools.cutTitle"),
+                    "text": CUI.rte.Utils.i18n("plugins.editTools.cutText")
                 },
                 "copy": {
-                    "title": CUI.rte.Utils.i18n("Copy (Ctrl+C)"),
-                    "text": CUI.rte.Utils.i18n("Copies the currently selected text to the clipboard.")
+                    "title": CUI.rte.Utils.i18n("plugins.editTools.copyTitle"),
+                    "text": CUI.rte.Utils.i18n("plugins.editTools.copyText")
                 },
                 "paste-default": {
-                    "title": CUI.rte.Utils.i18n("Paste (Ctrl+V)"),
-                    "text": CUI.rte.Utils.i18n("Pastes the clipboard content with the default paste method.")
+                    "title": CUI.rte.Utils.i18n("plugins.editTools.pasteDefaultTitle"),
+                    "text": CUI.rte.Utils.i18n("plugins.editTools.pasteDefaultText")
                 },
                 "paste-plaintext": {
-                    "title": CUI.rte.Utils.i18n("Paste as text"),
-                    "text": CUI.rte.Utils.i18n("Pastes the clipboard content as plain text.")
+                    "title": CUI.rte.Utils.i18n("plugins.editTools.pastePlainTextTitle"),
+                    "text": CUI.rte.Utils.i18n("plugins.editTools.pastePlainTextText")
                 },
                 "paste-wordhtml": {
-                    "title": CUI.rte.Utils.i18n("Paste from Word"),
-                    "text": CUI.rte.Utils.i18n("Pastes the clipboard content from Word, applying some cleanup.")
+                    "title": CUI.rte.Utils.i18n("plugins.editTools.pasteWordHtmlTitle"),
+                    "text": CUI.rte.Utils.i18n("plugins.editTools.pasteWordHtmlText")
                 }
             }
         });
