@@ -6,6 +6,12 @@
   CUI.util = {
 
     /**
+     * Flag if a touch device was detected
+     * @type {Boolean}
+     */
+    isTouch: 'ontouchstart' in window,
+
+    /**
      * Get the target element of a data API action using the data attributes of an element.
      * 
      * @param {jQuery} $element The jQuery object representing the element to get the target from
