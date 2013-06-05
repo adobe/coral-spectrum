@@ -1957,16 +1957,14 @@ CUI.rte.Common = function() {
 
         // --- DOM processing --------------------------------------------------------------
 
-        // TODO check if this can be replaced by DomProcessor.insertElement
+        /**
+         * @deprecated use {@link CUI.rte.DomProcessor#insertElement} instead
+         */
         insertNode: function(dom, node, offset) {
             var com = CUI.rte.Common;
             if (node.nodeType == 1) {
                 if (!offset) {
-                    if (com.isOneCharacterNode(node)) {
-                        node.parentNode.insertBefore(dom, node);
-                    } else {
-                        node.appendChild(dom);
-                    }
+                    node.parentNode.insertBefore(dom, node);
                 } else if (offset >= node.childNodes.length) {
                     node.parentNode.append(dom);
                 } else {
