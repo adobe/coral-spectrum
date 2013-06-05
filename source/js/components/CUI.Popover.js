@@ -165,6 +165,24 @@
 
     /** @ignore */
     _setPointAt: function() {
+      /*
+      * Find first absolute/relative positioned parent
+      * REMARK: moved from CUI.Util, has to be implemented properly
+      */
+      function positionedParent (el) {
+        var parent;
+
+        el.parents().each(function() {
+          var $this = $(this), position = $this.css('position');
+
+          if (position === 'absolute' || position === 'relative') {
+            parent = $this;
+            return false;
+          }
+        });
+
+        return parent || $('body');
+      }
       var $el = $(this.options.pointAt);
       
       if ($el.length !== 1) return;
@@ -192,7 +210,7 @@
           absLeftDiff = absolutePosition.left - parseInt($el.css("margin-left")) - left, // Fix jQuery as it does different margin calculations on offset() and position()
           width = this.$element.outerWidth(true),
           height = this.$element.outerHeight(),
-          parentWidth = this.$element.positionedParent().width(),
+          parentWidth = positionedParent(this.$element).width(),
           parentPadding = parseFloat(this.$element.parent().css('padding-right')),
           arrowHeight = Math.round((this.$element.outerWidth() - this.$element.innerWidth()) / 1.45),
           // The arrow height calculation just approximates the size, as we can not get it from the element

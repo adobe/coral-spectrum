@@ -19,6 +19,9 @@ module.exports = function(grunt) {
       // Utilities
       'CUI.Util.js',
 
+      // jQuery extensions
+      'CUI.jQuery.js',
+
       // Persistence
       'CUI.Util.state.js',
 

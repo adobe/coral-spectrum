@@ -476,7 +476,7 @@
         _rebuildOptions: function(def, path, object) {
             var self = this;
 
-            var root = $.getNested(object, self.options.optionLoaderRoot);
+            var root = CUI.util.getNested(object, self.options.optionLoaderRoot);
             if (root) {
                 var newOptions = [];
                 var newOptionDisplayStrings = [];
