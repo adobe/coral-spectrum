@@ -1,3 +1,7 @@
+# Attention: branch 2.0-pre is a development branch to enable the implementation of the issues discussed here: [Modularization][7]
+
+================
+
 # What is CoralUI?
 CoralUI is an implementation of the XD CloudUI visual style.  Using CoralUI provides everything your product needs to build out a web based UI, including touch friendly controls, a highly scalable interface, accessibility compliance, and component extensibility.
 
@@ -21,3 +25,4 @@ See the [CoralUI Wiki][6] for more information.
 [4]: https://git.corp.adobe.com/Coral/CoralUI/wiki/Build-Process-&-Technology
 [5]: mailto:CoralUI@adobe.com
 [6]: https://git.corp.adobe.com/Coral/CoralUI/wiki
+[7]: https://git.corp.adobe.com/Coral/CoralUI/wiki/CoralUI-Modularization
