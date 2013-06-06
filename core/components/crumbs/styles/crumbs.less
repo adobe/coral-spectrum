@@ -23,6 +23,10 @@ nav.crumbs {
 
     position: relative;
 
+    &:hover {
+      color: @crumb-hover-text-color;
+    }
+
     &:before,
     &:hover:before {
       font-size: 1rem;
@@ -47,9 +51,4 @@ nav.crumbs {
       color: @link-color;
     }
   }
-}
-
-// hover states
-.desktop nav.crumbs:hover {
-  color: @crumb-hover-text-color;
 }
