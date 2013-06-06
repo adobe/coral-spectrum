@@ -35,6 +35,44 @@
   };
 
   /**
+   * $.fn.on for touch devices only
+   * @return {jquery} this, chainable
+   */
+  $.fn.finger = function () {
+    if (isTouch) {
+      this.on.apply(this, arguments);
+    }
+    return this;
+  };
+
+  /**
+   * $.fn.on for pointer devices only
+   * @return {jquery} this, chainable
+   */
+  $.fn.pointer = function () {
+    if (!isTouch) {
+      this.on.apply(this, arguments);
+    }
+    return this;
+  };
+
+  /**
+   * $.fn.on for touch and pointer devices
+   * the first parameter is the finger event the second the pointer event
+   * @return {jquery} this, chainable
+   */
+  $.fn.fipo = function () {
+    var args = Array.prototype.slice.call(arguments, 1, arguments.length);
+
+    this.pointer.apply(this, args);
+
+    args[0] = arguments[0];
+    this.finger.apply(this, args);
+
+    return this;
+  };
+
+  /**
    * :focusable and :tabbable selectors 
    * https://raw.github.com/jquery/jquery-ui/master/ui/jquery.ui.core.js
    * @ignore
