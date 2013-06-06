@@ -185,6 +185,16 @@ module.exports = function(grunt) {
             }
           }
         ]
+      },
+      fonts: {
+        files: [
+          {
+            expand: true,
+            cwd: '<%= dirs.shared %>/fonts/',
+            src: ['**'],
+            dest: '<%= dirs.build %>/res/fonts/'
+          }
+        ]
       }
     }, // copy
 
