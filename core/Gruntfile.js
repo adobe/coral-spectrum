@@ -13,9 +13,57 @@ module.exports = function(grunt) {
 
   grunt.loadTasks('tasks');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+
+  /**
+   JavaScript file include order
+   Add new components to this array _after_ the components they inherit from
+  */
+  var includeOrder = {
+    "cui": [
+      // Class system
+      'Class.js',
+
+      // Namespace
+      'CUI.js',
+
+      // Utilities
+      'CUI.Util.js',
+
+      // jQuery extensions
+      'CUI.jQuery.js'
+    ]
+  };
+  var packages = {
+    "cui": [ "cui"]
+  };
+
+  /**
+    Get array of CUI includes in the correct order
+
+    @param pkg      The package to build
+    @param jsPath   Base path to prepend to each include
+  */
+  function getIncludes(pkg, jsPath) {
+    var includes = [ ];
+    var def = packages[pkg];
+    def.forEach(function(_set) {
+      includeOrder[_set].forEach(function(_file) {
+        var pref = "{build}";
+        var prefLen = pref.length;
+        if ((_file.length >= prefLen) && (_file.substring(0, prefLen) === pref)) {
+          includes.push(dirs.build + "/js/" + _file.substring(prefLen + 1));
+        }
+        includes.push(jsPath + _file);
+      });
+    });
+    return includes;
+  }
 
   // Read in package.json
   var pkg = grunt.file.readJSON('package.json');
@@ -31,6 +79,36 @@ module.exports = function(grunt) {
 
     dirs: dirs,
     meta: meta,
+    outputFileName: "cui-core",
+
+    // Configuration
+    jshint: {
+      options: {
+        eqeqeq: true,
+        immed: true,
+        latedef: true,
+        newcap: true,
+        noarg: true,
+        sub: true,
+        undef: true,
+        boss: true,
+        eqnull: true,
+        browser: true,
+        smarttabs: true,
+        predef: [
+          '$',            // jQuery
+          'jQuery',       // jQuery
+          'console',      // console.log...
+          'Backbone',     // Backbone
+          'Handlebars',   // Handlebars
+          'prettyPrint',  // google-code-prettify
+          'CUI',          // CoralUI
+          'Class',        // Class
+          'moment'        // Moment.js
+        ]
+      },
+      globals: {}
+    },
 
     // Task definitions
     clean: {
@@ -87,13 +165,13 @@ module.exports = function(grunt) {
           }
         ]
       }
-    },
+    }, // copy
 
     cssmin: {
       main: {
         files: {
-          '<%= dirs.build %>/css/cui.min.css': '<%= dirs.build %>/css/cui.css',
-          '<%= dirs.build %>/css/cui-wrapped.min.css': '<%= dirs.build %>/css/cui-wrapped.css'
+          '<%= dirs.build %>/css/<%= outputFileName %>.min.css': '<%= dirs.build %>/css/<%= outputFileName %>.css',
+          '<%= dirs.build %>/css/<%= outputFileName %>-wrapped.min.css': '<%= dirs.build %>/css/<%= outputFileName %>-wrapped.css'
         }
       }
     },
@@ -106,7 +184,7 @@ module.exports = function(grunt) {
           ]
         },
         files: {
-          '<%= dirs.build %>/css/cui-wrapped.css': '<%= dirs.build %>/less/cui-wrapped.less'
+          '<%= dirs.build %>/css/<%= outputFileName %>-wrapped.css': '<%= dirs.build %>/less/cui-wrapped.less'
         }
       },
       "cui": {
@@ -116,10 +194,10 @@ module.exports = function(grunt) {
           ]
         },
         files: {
-          '<%= dirs.build %>/css/cui.css': '<%= dirs.build %>/less/cui.less'
+          '<%= dirs.build %>/css/<%= outputFileName %>.css': '<%= dirs.build %>/less/cui.less'
         }
       }
-    },
+    }, // less
 
     icons: {
       all: {
@@ -129,15 +207,41 @@ module.exports = function(grunt) {
         dest: '<%= dirs.build %>/less/shared/icons_color.less',
         prefix: 'icon-'
       }
-    }
+    },
+
+    lint: {
+      files: [
+        'Gruntfile.js',
+        '<%= dirs.shared %>/scripts/*.js'
+      ]
+    },
+
+    concat: {
+      cui: {
+        src: getIncludes("cui", dirs.shared +'/scripts/'),
+        dest: '<%= dirs.build %>/js/<%= outputFileName %>.js'
+      }
+    },
+
+    uglify: {
+      // TBD: minify individual JS files?
+      cui: {
+        files: {
+          // TODO: make it work with reading the configuration option
+          '<%= dirs.build %>/js/<%= outputFileName %>.min.js': ['<%= dirs.build %>/js/<%= outputFileName %>.js']
+        }
+      }
+    },
   });
   // end init config
 
   // Partial build for development
   grunt.task.registerTask('partial', [
     'clean',
+    'jshint',
     'copy',
     'icons',
+    'concat',
     'less',
     'cssmin'
   ]);
