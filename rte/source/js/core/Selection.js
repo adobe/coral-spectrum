@@ -1831,7 +1831,7 @@ CUI.rte.Selection = function() {
             if (selectedNode.nodeType == 3) {
                 return null;
             }
-            if (com.isTag(selectedNode, com.EDITBLOCK_TAGS)) {
+            if (com.isTag(selectedNode, com.BLOCK_TAGS)) {
                 return null;
             }
             return selectedNode;

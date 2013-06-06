@@ -1,9 +1,6 @@
 (function ($, window, undefined) {
 
-  /**
-   * @lends CUI.Widget#
-   */
-  CUI.Widget = new Class({
+  CUI.Widget = new Class(/** @lends CUI.Widget# */{
     toString: 'Widget',
 
     /**

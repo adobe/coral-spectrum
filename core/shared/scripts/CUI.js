@@ -52,5 +52,8 @@
    *
    * @event cui-contentloaded
    */
-  $(document).trigger("cui-contentloaded");
+  $(function () {
+    $(document).trigger("cui-contentloaded");
+  });
+
 }(jQuery, this));
