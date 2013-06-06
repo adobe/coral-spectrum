@@ -13,6 +13,7 @@ module.exports = function(grunt) {
   };
 
   grunt.loadTasks('tasks');
+
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -20,6 +21,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+
+  grunt.loadNpmTasks('grunt-mocha-phantomjs');
 
   /**
    JavaScript file include order
@@ -284,7 +287,19 @@ module.exports = function(grunt) {
           '<%= dirs.build %>/js/<%= outputFileName %>.min.js': ['<%= dirs.build %>/js/<%= outputFileName %>.js']
         }
       }
+    },
+
+    mocha_phantomjs: {
+      cui: {
+        src: [
+          '<%= dirs.build %>/tests/index.html'
+        ],
+        options: {
+          run: true
+        }
+      }
     }
+
   });
   // end init config
 
@@ -298,6 +313,18 @@ module.exports = function(grunt) {
     'uglify',
     'less',
     'cssmin'
+  ]);
+
+  grunt.task.registerTask('full', [
+    'clean',
+    'jshint',
+    'copy',
+    'icons',
+    'concat',
+    'uglify',
+    'less',
+    'cssmin',
+    'mocha_phantomjs'
   ]);
 
   // Default task
