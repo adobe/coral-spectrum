@@ -167,6 +167,24 @@ module.exports = function(grunt) {
             dest: '<%= dirs.build %>/less/components'
           }
         ]
+      },
+      res_components: {
+        files: [
+          {
+            expand: true,
+            cwd: '<%= dirs.components %>/',
+            src: ['**/resources/**.*'],
+            dest: '<%= dirs.build %>/res/components',
+            // rename to remove the "resources" folder from source
+            rename: function (dest, src) {
+              var srcPath = src.split('/'),
+                  component = srcPath[srcPath.length - 3],
+                  filename = srcPath[srcPath.length - 1];
+
+              return dest + '/' + component + '/' + filename; //dest + src.substring(0, src.indexOf('/')) + '.html';
+            }
+          }
+        ]
       }
     }, // copy
 
