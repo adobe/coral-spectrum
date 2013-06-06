@@ -1,0 +1,17 @@
+/*
+Don't show any artifacts from tests
+We can't use display: none as it messes up tests that show/hide
+*/
+body > * {
+  visibility: hidden !important;
+  position: absolute;
+  left: -99999px;
+  top: -99999px;
+}
+/* Make sure mocha's div displays */
+div#mocha {
+  visibility: visible !important;
+  position: inherit;
+  left: inherit;
+  top: inherit;
+}

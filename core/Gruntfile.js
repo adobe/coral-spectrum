@@ -8,7 +8,8 @@ module.exports = function(grunt) {
     build: 'build',
     modules: 'node_modules',
     shared: 'shared',
-    components: 'components'
+    components: 'components',
+    tests: 'tests'
   };
 
   grunt.loadTasks('tasks');
@@ -193,6 +194,27 @@ module.exports = function(grunt) {
             cwd: '<%= dirs.shared %>/fonts/',
             src: ['**'],
             dest: '<%= dirs.build %>/res/fonts/'
+          }
+        ]
+      },
+      tests: {
+        files: [ // test cases
+          {
+            expand: true,
+            cwd: '<%= dirs.tests %>/',
+            src: ['**'],
+            dest: '<%= dirs.build %>/tests'
+          },
+          { // testrunner + dependencies
+            expand: true,
+            cwd: '<%= dirs.modules %>/',
+            src: [
+              'chai/chai.js',
+              'chai-jquery/chai-jquery.js',
+              'mocha/mocha.js',
+              'mocha/mocha.css'
+            ],
+            dest: '<%= dirs.build %>/tests/libs'
           }
         ]
       }
