@@ -231,7 +231,7 @@ module.exports = function(grunt) {
           '<%= dirs.build %>/js/<%= outputFileName %>.min.js': ['<%= dirs.build %>/js/<%= outputFileName %>.js']
         }
       }
-    },
+    }
   });
   // end init config
 
@@ -242,6 +242,7 @@ module.exports = function(grunt) {
     'copy',
     'icons',
     'concat',
+    'uglify',
     'less',
     'cssmin'
   ]);
