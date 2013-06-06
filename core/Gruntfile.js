@@ -36,7 +36,10 @@ module.exports = function(grunt) {
       'CUI.Util.js',
 
       // jQuery extensions
-      'CUI.jQuery.js'
+      'CUI.jQuery.js',
+
+      // base for widgets
+      'CUI.Widget.js'
     ]
   };
   var packages = {
