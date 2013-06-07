@@ -160,7 +160,6 @@
     /**
      * Hide the widget
      * 
-     * @param  {[type]} evt [description]
      * @return {CUI.Widget} this, chainable
      */
     hide: function (evt) {
