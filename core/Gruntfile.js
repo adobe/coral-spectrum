@@ -304,9 +304,10 @@ module.exports = function(grunt) {
 
     jsdoc : {
         cui : {
-            src: ['<%= dirs.shared %>/scripts/**.js', '<%= dirs.components %>/**/scripts/**.js'], 
+            src: ['<%= dirs.shared %>/scripts/**.js', '<%= dirs.components %>/**/scripts/**.js'],
             options: {
                 destination: '<%= dirs.build %>/doc'
+                //template: '../res/docTemplate/'
             }
         }
     } // jsdoc
