@@ -23,6 +23,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
   grunt.loadNpmTasks('grunt-mocha-phantomjs');
+  grunt.loadNpmTasks('grunt-jsdoc');
 
   /**
    JavaScript file include order
@@ -115,12 +116,12 @@ module.exports = function(grunt) {
         ]
       },
       globals: {}
-    },
+    }, // jshint config
 
     // Task definitions
     clean: {
       build: '<%= dirs.build %>'
-    },
+    }, // clean
 
     copy: {
       less_bootstrap: {
@@ -230,7 +231,7 @@ module.exports = function(grunt) {
           '<%= dirs.build %>/css/<%= outputFileName %>-wrapped.min.css': '<%= dirs.build %>/css/<%= outputFileName %>-wrapped.css'
         }
       }
-    },
+    }, // cssmin
 
     less: {
       "cui-wrapped": {
@@ -263,21 +264,21 @@ module.exports = function(grunt) {
         dest: '<%= dirs.build %>/less/shared/icons_color.less',
         prefix: 'icon-'
       }
-    },
+    }, // icons
 
     lint: {
       files: [
         'Gruntfile.js',
         '<%= dirs.shared %>/scripts/*.js'
       ]
-    },
+    }, // lint
 
     concat: {
       cui: {
         src: getIncludes("cui", dirs.shared +'/scripts/'),
         dest: '<%= dirs.build %>/js/<%= outputFileName %>.js'
       }
-    },
+    }, // concat
 
     uglify: {
       // TBD: minify individual JS files?
@@ -287,7 +288,7 @@ module.exports = function(grunt) {
           '<%= dirs.build %>/js/<%= outputFileName %>.min.js': ['<%= dirs.build %>/js/<%= outputFileName %>.js']
         }
       }
-    },
+    }, // uglify
 
     mocha_phantomjs: {
       cui: {
@@ -299,7 +300,16 @@ module.exports = function(grunt) {
           hasCert: true
         }
       }
-    }
+    }, // mocha_phantomjs
+
+    jsdoc : {
+        cui : {
+            src: ['<%= dirs.shared %>/scripts/**.js', '<%= dirs.components %>/**/scripts/**.js'], 
+            options: {
+                destination: '<%= dirs.build %>/doc'
+            }
+        }
+    } // jsdoc
 
   });
   // end init config
@@ -325,7 +335,8 @@ module.exports = function(grunt) {
     'uglify',
     'less',
     'cssmin',
-    'mocha_phantomjs'
+    'mocha_phantomjs',
+    'jsdoc'
   ]);
 
   // Default task
