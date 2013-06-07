@@ -6,7 +6,7 @@
   @function
 
   @param {Object} descriptor                        Descriptor object
-  @param {String or Function} descriptor.toString   A string or method to use for the toString of this class and instances of this class
+  @param {String|Function} descriptor.toString   A string or method to use for the toString of this class and instances of this class
   @param {Object} descriptor.extend                 The class to extend
   @param {Function} descriptor.construct            The constructor (setup) method for the new class
   @param {Function} descriptor.destruct             The destructor (teardown) method for the new class
@@ -65,7 +65,7 @@ var Exception;
     @static
 
     @param {Object} descriptor                        Descriptor object
-    @param {String or Function} descriptor.toString   A string or method to use for the toString of this class and instances of this class
+    @param {String|Function} descriptor.toString   A string or method to use for the toString of this class and instances of this class
     @param {Object} descriptor.extend                 The class to extend
     @param {Function} descriptor.construct            The constructor (setup) method for the new class
     @param {Function} descriptor.destruct             The destructor (teardown) method for the new class
