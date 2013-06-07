@@ -22,7 +22,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
-  grunt.loadNpmTasks('grunt-mocha-phantomjs');
+  grunt.loadNpmTasks('grunt-mocha');
   grunt.loadNpmTasks('grunt-jsdoc');
 
   /**
@@ -290,17 +290,16 @@ module.exports = function(grunt) {
       }
     }, // uglify
 
-    mocha_phantomjs: {
+    mocha: {
       cui: {
-        src: [
-          '<%= dirs.build %>/tests/index.html'
-        ],
+        src: ['<%= dirs.build %>/tests/index.html'],
         options: {
-          run: true,
-          hasCert: true
+          bail: true,
+          log: true,
+          run: true
         }
       }
-    }, // mocha_phantomjs
+    }, // mocha
 
     jsdoc : {
         cui : {
@@ -336,7 +335,7 @@ module.exports = function(grunt) {
     'uglify',
     'less',
     'cssmin',
-    'mocha_phantomjs',
+    'mocha',
     'jsdoc'
   ]);
 

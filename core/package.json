@@ -16,7 +16,7 @@
     "grunt-contrib-jshint": "~0.6.0",
     "grunt-contrib-less": "~0.5.2",
     "grunt-contrib-uglify": "~0.2.2",
-    "grunt-mocha-phantomjs": "~0.2.7",
+    "grunt-mocha": "~0.3.4",
     "grunt-jsdoc": "~0.3.3",
     "chai": "1.5.0",
     "chai-jquery": "1.1.1",
