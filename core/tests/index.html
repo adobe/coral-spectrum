@@ -59,7 +59,7 @@
       mocha.globals(['jQuery*']); // to ignore this as a global leak
     }
 
-    var m = (window.mochaPhantomJS || mocha).run();
+    (window.mochaPhantomJS || mocha).run();
   </script>
 </body>
 </html>
