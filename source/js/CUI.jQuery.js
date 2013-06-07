@@ -39,7 +39,7 @@
    * @return {jquery} this, chainable
    */
   $.fn.finger = function () {
-    if (isTouch) {
+    if (CUI.util.isTouch) {
       this.on.apply(this, arguments);
     }
     return this;
@@ -50,7 +50,7 @@
    * @return {jquery} this, chainable
    */
   $.fn.pointer = function () {
-    if (!isTouch) {
+    if (!CUI.util.isTouch) {
       this.on.apply(this, arguments);
     }
     return this;
