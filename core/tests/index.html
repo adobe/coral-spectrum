@@ -13,7 +13,6 @@
   <!-- CoralUI Dependencies -->
   <script src="../../../externals/jquery/jquery.js"></script>
   <script src="../../../externals/toe/toe.js"></script>
-  <script src="../js/libs/moment.js"></script>  
 
   <!-- Chai -->
   <script src="libs/chai/chai.js"></script>
@@ -56,7 +55,11 @@
              
   <!-- Do test run -->
   <script>
-    (window.mochaPhantomJS || mocha).run();
+    if (mocha) { // config
+      mocha.globals(['jQuery*']); // to ignore this as a global leak
+    }
+
+    var m = (window.mochaPhantomJS || mocha).run();
   </script>
 </body>
 </html>

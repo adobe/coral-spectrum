@@ -295,7 +295,8 @@ module.exports = function(grunt) {
           '<%= dirs.build %>/tests/index.html'
         ],
         options: {
-          run: true
+          run: true,
+          hasCert: true
         }
       }
     }
