@@ -48,11 +48,10 @@ div.rail {
                     }
                     
                     &.focus {
+                      @shadow: -@partial-glow-radius -@partial-glow-radius/2 @partial-glow-radius fadeout(@focus-glow-color, 50%),
+                          @partial-glow-radius -@partial-glow-radius/2 @partial-glow-radius fadeout(@focus-glow-color, 50%);
                       outline: none;
-                      .box-shadow(
-                          -@partial-glow-radius -@partial-glow-radius/2 @partial-glow-radius fadeout(@focus-glow-color, 50%),
-                          @partial-glow-radius -@partial-glow-radius/2 @partial-glow-radius fadeout(@focus-glow-color, 50%)
-                      );
+                      .box-shadow(@shadow);
                       border: @px solid @focus-border-color;
                       border-bottom: none;
                       margin: 2*@px -1*@px 0;

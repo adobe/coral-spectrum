@@ -22,11 +22,10 @@ div.rail {
 
                         &.focus {
                             + span:before {
+                                @shadow: inset 0 3*@px 3*@px -3*@px @rail-shadow-inset-color,
+                                    0 0 @focus-glow-radius @focus-glow-color;
                                 border-color: @focus-border-color;
-                                .box-shadow(
-                                    inset 0 3*@px 3*@px -3*@px @rail-shadow-inset-color,
-                                    0 0 @focus-glow-radius @focus-glow-color
-                                    );
+                                .box-shadow(@shadow);
                             }
                         }
                     }

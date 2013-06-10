@@ -70,11 +70,10 @@ div.rail {
                     }
                     
                     &.focus {
+                        @shadow: inset 0 -@focus-glow-radius/2 @focus-glow-radius -@focus-glow-radius/2 fadeout(@rail-shadow-inset-color, 65%),
+                            inset 0 @focus-glow-radius/2 @focus-glow-radius -@focus-glow-radius/2 fadeout(@rail-shadow-inset-color, 65%);
                         background-color: @rail-well-background-color; 
-                        .box-shadow(
-                            inset 0 -@focus-glow-radius/2 @focus-glow-radius -@focus-glow-radius/2 fadeout(@rail-shadow-inset-color, 65%),
-                            inset 0 @focus-glow-radius/2 @focus-glow-radius -@focus-glow-radius/2 fadeout(@rail-shadow-inset-color, 65%)
-                        );
+                        .box-shadow(@shadow);
                     }
                 }
                 
