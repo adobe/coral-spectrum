@@ -121,16 +121,7 @@ jQuery(function($) {
     // make rail pullable
     var rail = $('#main-rail');
     rail.removeClass('with-toolbar-bottom');
-    rail.rail({
-        refreshCallback: function() {
-            var def = $.Deferred();
-            setTimeout(function() {
-                def.resolve();
-            }, 3000);
-
-            return def.promise();
-        }
-    });
+    rail.rail();
 
     // closable rail
     $('#close-rail').fipo('tap', 'click', function () {
