@@ -1,0 +1,41 @@
+/**
+* Also used by auto completers, see filters.less
+*/
+div.rail {
+    .dropdown .dropdown-list {
+
+        border-bottom: @px solid @rail-dropdown-border-color;
+
+        ul {
+            background-color: @rail-dropdown-list-background-color;
+
+            li {
+                background-color: @rail-dropdown-list-background-color;
+                color: @rail-dropdown-font-color;
+                border-color: @rail-dropdown-border-color;
+                border-top-color: @rail-dropdown-border-light-color;
+
+                &:hover,
+                &.selected:hover {
+                    background-color: @dropdown-active-background-color;
+                    border-color: @rail-dropdown-border-color;
+
+                    + li {
+                        border-top-color: @rail-dropdown-border-color;
+                    }
+                }
+
+            }
+
+            .checkbox {
+                border-color: @rail-dropdown-border-color;
+                .gradient(@rail-dropdown-gradient-start-color, @rail-dropdown-gradient-end-color-checkbox);
+                background: @rail-dropdown-background-color;
+            }
+
+            .checkbox.checked:before {
+                color: @rail-dropdown-font-color;
+            }
+        }
+    }
+}
