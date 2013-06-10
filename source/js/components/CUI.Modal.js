@@ -156,8 +156,8 @@ modal.hide();
       this.$element.attr('tabIndex', -1);
 
       // Accessibility
-      this.$element.attr('role', 'dialog'); // needed?
-      this.$element.attr('aria-hidden', true);
+      this.$element.attr('role', 'dialog'); // needed
+      this.$element.attr('aria-hidden', !this.options.visible);
 
       // Listen to changes to configuration
       this.$element.on('change:buttons', this._setButtons.bind(this));
@@ -165,6 +165,9 @@ modal.hide();
       this.$element.on('change:content', this._setContent.bind(this));
       this.$element.on('change:type', this._setType.bind(this));
       this.$element.on('change:fullscreen', this._setFullscreen.bind(this));
+      
+      // Listen for keydown on tabbable elements to track focus changes and keep the focus within the Modal dialog
+      this.$element.on('keydown',':tabbable', this._cycleKeyboardFocus.bind(this));
 
       // Render template, if necessary
       if (this.$element.children().length === 0) {
@@ -205,6 +208,23 @@ modal.hide();
       this._setType();
       this._setFullscreen();
     },
+    
+    /** @ignore */
+    _cycleKeyboardFocus: function(event) {
+        if (event.keyCode !== 9) return;
+        var tabbables = this.$element.find(':tabbable'),
+            first = tabbables.filter(':first'),
+            last  = tabbables.filter(':last');
+        if (event.target === last[0] && !event.shiftKey) {
+            first.focus();
+            event.preventDefault();
+            return false;
+        } else if (event.target === first[0] && event.shiftKey) {
+            last.focus();
+            event.preventDefault();
+            return false;
+        }
+    },
 
     /** @ignore */
     _setType: function() {
@@ -233,8 +253,20 @@ modal.hide();
     /** @ignore */
     _setHeading: function() {
       if (typeof this.options.heading !== 'string') return;
-
-      this.$element.find('.modal-header h2').html(this.options.heading);
+      
+      var h2 = this.$element.find('.modal-header h2').html(this.options.heading), 
+          h2_id;
+      
+      if (h2.length) {
+          h2_id = h2.attr('id');
+          if (!h2_id) {
+            h2.data('cui-modal-header-h2','cui-modal-header-h2');
+            h2_id = 'cui-modal-header-h2-'+$.expando+'-'+h2[0][$.expando];
+            h2.attr('id', h2_id).removeData('cui-modal-header-h2');
+          }
+          if (!this.$element.attr('aria-labelledby'))
+            this.$element.attr('aria-labelledby', h2_id);
+      }
 
       // Re-center when content changes
       this.center();
@@ -283,11 +315,49 @@ modal.hide();
       // IE9 fix for modals that suddenly expand
       if (!this.options.fullscreen)
         this.$element.css('width', this.$element.innerWidth());
+        
+        
+        this.$element.siblings('[aria-hidden]').each(function(index, element) {
+            $(element).data('aria-hidden', $(element).attr('aria-hidden'));
+        });
+        this.$element.siblings().not('script, link, style').attr('aria-hidden', true);
+        
+        // add tab-focusable divs to capture and forward focus to the modal dialog when page regains focus
+        $(document.body)
+            .prepend('<div class="hidden-accessible cui-modal-tabcapture" tabindex="0"></div>')
+            .append('<div class="hidden-accessible cui-modal-tabcapture" tabindex="0"></div>')
+            .on('focus', '.cui-modal-tabcapture', this._forwardKeyboardFocusToDialog.bind(this));
+    },
+    
+    /** @ignore */
+    _forwardKeyboardFocusToDialog: function(event) {
+        var tabbables = this.$element.find(':tabbable'),
+            first  = tabbables.filter(':first'),
+            last  = tabbables.filter(':last'),
+            tabcaptures = $('body > .modal-tabcapture'),
+            lasttabcapture  = tabcaptures.filter(':last');
+        if (event.target === lasttabcapture[0] && last.length===1) {
+            last.focus();
+        } else if(first.length===1) {
+            first.focus();
+        } else {
+            this.$element.focus();
+        }
     },
 
     /** @ignore */
     _hide: function() {
-      $('body').removeClass('modal-open');
+      $('body').removeClass('modal-open')
+        .find('.cui-modal-tabcapture').off('focus').remove();
+
+      this.$element.siblings()
+        .removeAttr('aria-hidden')
+        .filter(':data("aria-hidden")')
+        .each(function(index, element) {
+            $(element)
+                .attr('aria-hidden', $(element).data('aria-hidden'))
+                .removeData('aria-hidden');
+        });
 
       this.$element.removeClass('in').attr('aria-hidden', true);
 
