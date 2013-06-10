@@ -188,6 +188,20 @@ module.exports = function(grunt) {
 
               return dest + '/' + component + '/' + filename; //dest + src.substring(0, src.indexOf('/')) + '.html';
             }
+          },
+          {
+            expand: true,
+            cwd: '<%= dirs.components %>/',
+            src: ['**/examples/**.*'],
+            dest: '<%= dirs.build %>/examples',
+            // rename to remove the "resources" folder from source
+            rename: function (dest, src) {
+              var srcPath = src.split('/'),
+                  component = srcPath[srcPath.length - 3],
+                  filename = srcPath[srcPath.length - 1];
+
+              return dest + '/' + component + '/' + filename; //dest + src.substring(0, src.indexOf('/')) + '.html';
+            }
           }
         ]
       },
