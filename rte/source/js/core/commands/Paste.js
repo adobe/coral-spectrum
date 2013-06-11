@@ -56,7 +56,9 @@ CUI.rte.commands.Paste = new Class({
         if (text) {
             plainText = text;
         } else {
-            plainText = (new hpr.StripTags()).strip(html);
+            var helperDiv = context.doc.createElement("div");
+            helperDiv.innerHTML = html;
+            plainText = helperDiv.innerText;
             plainText = hpr.stripSurroundingWhitespace(plainText, true);
             if (execDef.value.stripHtmlTags) {
                 plainText = CUI.rte.Utils.htmlDecode(plainText);

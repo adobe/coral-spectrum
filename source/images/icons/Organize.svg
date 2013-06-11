@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!-- Generator: Adobe Illustrator 16.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="1152px" height="1152px" viewBox="0 0 1152 1152" enable-background="new 0 0 1152 1152" xml:space="preserve">
 <path d="M624,192V96c0,0,0-48-48-48S96,48,48,48S0,96,0,96v96H624z"/>
-<path d="M1104,288c-48,0-1104,0-1104,0v720c0,0,0,48,48,48s1008,0,1056,0s48-48,48-48V336C1152,336,1152,288,1104,288z M336,432h624
-	v96H336V432z M240,912H96v-96h144V912z M240,720H96v-96h144V720z M240,528H96v-96h144V528z M912,912H336v-96h576V912z M1056,720H336
-	v-96h720V720z"/>
+<path d="M1104,288c-48,0-1104,0-1104,0v720c0,0,0,48,48,48s1008,0,1056,0s48-48,48-48V336C1152,336,1152,288,1104,288z M384,432h528
+	v96H384V432z M288,912H144v-96h144V912z M288,720H144v-96h144V720z M288,528H144v-96h144V528z M864,912H384v-96h480V912z M1008,720
+	H384v-96h624V720z"/>
 </svg>
