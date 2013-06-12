@@ -12,7 +12,7 @@ module.exports = function(grunt) {
     tests: 'tests'
   };
 
-  grunt.loadTasks('tasks');
+  //grunt.loadTasks('tasks');
 
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
@@ -132,6 +132,23 @@ module.exports = function(grunt) {
             cwd: '<%= dirs.modules %>/bootstrap/less/',
             src: ['mixins.less', 'variables.less', 'reset.less'],
             dest: '<%= dirs.build %>/less/externals/bootstrap/'
+          }
+        ]
+      },
+      less_icons_base: {
+        files: [
+          {
+            expand: true,
+            filter: 'isFile',
+            cwd: '<%= dirs.modules %>/coralui-contrib-icons-base/build/less/',
+            src: ['**.less'],
+            dest: '<%= dirs.build %>/less/shared/'
+          },
+          {
+            expand: true,
+            cwd: '<%= dirs.modules %>/coralui-contrib-icons-base/build/res/',
+            src: ['**'],
+            dest: '<%= dirs.build %>/res/'
           }
         ]
       },
@@ -270,16 +287,6 @@ module.exports = function(grunt) {
       }
     }, // less
 
-    icons: {
-      all: {
-        src: [
-          '<%= dirs.source %>/images/icons_color/*.svg'
-        ],
-        dest: '<%= dirs.build %>/less/shared/icons_color.less',
-        prefix: 'icon-'
-      }
-    }, // icons
-
     lint: {
       files: [
         'Gruntfile.js',
@@ -333,7 +340,6 @@ module.exports = function(grunt) {
     'clean',
     'jshint',
     'copy',
-    'icons',
     'concat',
     'uglify',
     'less',
@@ -344,7 +350,6 @@ module.exports = function(grunt) {
     'clean',
     'jshint',
     'copy',
-    'icons',
     'concat',
     'uglify',
     'less',
