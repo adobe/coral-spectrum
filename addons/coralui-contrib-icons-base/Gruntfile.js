@@ -48,7 +48,7 @@ module.exports = function(grunt) {
             expand: true,
             flatten: true,
             cwd: '<%= dirs.source %>/',
-            src: ['icons.less', 'variables.less', 'standalone.less'],
+            src: ['icons.less', 'icons_variables.less', 'standalone.less'],
             dest: '<%= dirs.temp %>/less'
           },
           {
@@ -66,7 +66,7 @@ module.exports = function(grunt) {
             expand: true,
             flatten: true,
             cwd: '<%= dirs.source %>/',
-            src: ['icons.less', 'variables.less'],
+            src: ['icons.less', 'icons_variables.less'],
             dest: '<%= dirs.build %>/less'
           },
           {
