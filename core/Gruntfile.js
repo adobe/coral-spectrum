@@ -21,6 +21,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.loadNpmTasks('grunt-mocha');
   grunt.loadNpmTasks('grunt-jsdoc');
@@ -299,7 +300,7 @@ module.exports = function(grunt) {
     lint: {
       files: [
         'Gruntfile.js',
-        '<%= dirs.shared %>/scripts/*.js'
+        '<%= dirs.shared %>/scripts/**.js'
       ]
     }, // lint
 
@@ -339,7 +340,20 @@ module.exports = function(grunt) {
                 template: '../res/docTemplate/'
             }
         }
-    } // jsdoc
+    }, // jsdoc
+
+    watch: {
+        scripts: {
+            files: [
+                dirs.shared + '/scripts/**.js',
+                dirs.components + '/**/scripts/**.js'
+            ],
+            tasks: ['jshint', 'concat', 'uglify', 'mocha'],
+            options: {
+                nospawn: true
+            }
+        }
+    } // watch
 
   });
   // end init config
