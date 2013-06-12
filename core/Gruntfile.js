@@ -32,19 +32,22 @@ module.exports = function(grunt) {
   var includeOrder = {
     "cui": [
       // Class system
-      'Class.js',
+      dirs.shared +'/scripts/Class.js',
 
       // Namespace
-      'CUI.js',
+      dirs.shared +'/scripts/CUI.js',
 
       // Utilities
-      'CUI.Util.js',
+      dirs.shared +'/scripts/CUI.Util.js',
 
       // jQuery extensions
-      'CUI.jQuery.js',
+      dirs.shared +'/scripts/CUI.jQuery.js',
 
       // base for widgets
-      'CUI.Widget.js'
+      dirs.shared +'/scripts/CUI.Widget.js',
+
+      // base for widgets
+      dirs.components +'/rail/scripts/CUI.Rail.js'
     ]
   };
   var packages = {
@@ -55,9 +58,8 @@ module.exports = function(grunt) {
     Get array of CUI includes in the correct order
 
     @param pkg      The package to build
-    @param jsPath   Base path to prepend to each include
   */
-  function getIncludes(pkg, jsPath) {
+  function getIncludes(pkg) {
     var includes = [ ];
     var def = packages[pkg];
     def.forEach(function(_set) {
@@ -67,7 +69,7 @@ module.exports = function(grunt) {
         if ((_file.length >= prefLen) && (_file.substring(0, prefLen) === pref)) {
           includes.push(dirs.build + "/js/" + _file.substring(prefLen + 1));
         }
-        includes.push(jsPath + _file);
+        includes.push(_file);
       });
     });
     return includes;
@@ -240,6 +242,13 @@ module.exports = function(grunt) {
             src: ['**'],
             dest: '<%= dirs.build %>/tests'
           },
+          { // test cases from components
+            expand: true,
+            flatten: true,
+            cwd: '<%= dirs.components %>/',
+            src: ['**/tests/**.js'],
+            dest: '<%= dirs.build %>/tests'
+          },
           { // testrunner + dependencies
             expand: true,
             cwd: '<%= dirs.modules %>/',
@@ -296,7 +305,7 @@ module.exports = function(grunt) {
 
     concat: {
       cui: {
-        src: getIncludes("cui", dirs.shared +'/scripts/'),
+        src: getIncludes("cui"),
         dest: '<%= dirs.build %>/js/<%= outputFileName %>.js'
       }
     }, // concat
@@ -343,7 +352,8 @@ module.exports = function(grunt) {
     'concat',
     'uglify',
     'less',
-    'cssmin'
+    'cssmin',
+    'mocha'
   ]);
 
   grunt.task.registerTask('full', [

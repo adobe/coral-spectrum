@@ -229,12 +229,6 @@ describe('Class', function() {
         var arr = Object.create(Array.prototype);
         expect(arr).to.have.property('push');
       });
-      
-      it('should throw when called with more than more argument', function() {
-        expect(function() {
-          Object.create({}, {});
-        }).to.throw(Error);
-      });
     });
   });
 });
