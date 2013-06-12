@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="1152px" height="1152px" viewBox="0 0 1152 1152" enable-background="new 0 0 1152 1152" xml:space="preserve">
+<g>
+	<polygon points="1008,288 863.871,720 396.774,720 240,96 0,96 0,240 132,240 288,864 960.001,864 1152,288 	"/>
+</g>
+<path d="M948,288H348c-6.6,0-12,5.4-12,12v24c0,6.6,5.4,12,12,12h84v96h-36c-6.6,0-12,5.4-12,12v24c0,6.6,5.4,12,12,12h36v180
+	c0,6.6,5.4,12,12,12h24c6.6,0,12-5.4,12-12v-36h96v36c0,6.6,5.4,12,12,12h24c6.6,0,12-5.4,12-12v-36h96v36c0,6.6,5.4,12,12,12h24
+	c6.6,0,12-5.4,12-12v-36h84c6.6,0,12-5.4,12-12v-24c0-6.6-5.4-12-12-12h-84v-96h132c6.6,0,12-5.4,12-12V336h36c6.6,0,12-5.4,12-12
+	v-24C960,293.4,954.6,288,948,288z M720,336v96h-96v-96H720z M480,336h96v96h-96V336z M480,576v-96h96v96H480z M720,576h-96v-96h96
+	V576z M864,432h-96v-96h96V432z"/>
+<circle cx="384" cy="1008" r="96"/>
+<circle cx="864" cy="1008" r="96"/>
+</svg>
