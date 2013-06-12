@@ -460,6 +460,7 @@ CUI.rte.plugins.KeyPlugin = new Class({
      */
     handleBRPlaceholders: function(context) {
         var com = CUI.rte.Common;
+        var dpr = CUI.rte.DomProcessor;
         var brTags = context.root.getElementsByTagName("BR");
         var brCnt = brTags.length;
         for (var i = 0; i < brCnt; i++) {
@@ -471,15 +472,19 @@ CUI.rte.plugins.KeyPlugin = new Class({
                             com.EDITBLOCK_TAGS);
                 if ((!com.isTag(prevCharNode, "br") && !com.isNull(prevCharNode))
                         || !com.isNull(nextCharNode)) {
-                    // additional case: keep if previous character node ends with a space
+                    // additional cases: keep if previous character node ends with a space
+                    // or is an anchor (anchor: on Gecko only)
                     var prevNodeLen = 0;
+                    var isAnchor = false;
                     if (prevCharNode) {
                         var prevNodeText = com.getNodeText(prevCharNode);
                         prevNodeLen = prevNodeText.length;
+                        isAnchor = com.ua.isGecko &&
+                                (dpr.checkNamedAnchor(prevCharNode) != null);
                     }
                     var lastChar = (prevNodeLen > 0 ? prevNodeText.charAt(prevNodeLen - 1)
                             : "");
-                    if (lastChar !== " ") {
+                    if ((lastChar !== " ") && !isAnchor) {
                         brToCheck.parentNode.removeChild(brToCheck);
                     }
                 }

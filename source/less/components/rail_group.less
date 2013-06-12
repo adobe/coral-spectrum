@@ -1,0 +1,53 @@
+/**
+    rail group, similar to foldable sections
+*/
+div.rail {
+
+    >.wrap {
+        
+        .group {
+            section {
+                padding: 0;
+                color: @rail-font-color;
+                border: none;
+
+                .heading {
+                    background: @rail-group-header-color;
+                    border-top: @px solid @rail-section-border-color;
+                    border-bottom: @px solid @rail-section-border-color;
+                    .box-shadow(-@px @px 0 0 @rail-group-header-color);
+
+                    text-transform: uppercase;
+                    font-size: 0.7rem;
+
+                    padding: 6*@px 15*@px;
+
+                    display: block;
+                    
+                    &:focus {
+                        outline: none;
+                        background: @rail-well-background-color; 
+                    }
+                }
+            }
+
+            section.greyText, section.grayText {
+                color: @font-secondary-color;
+            }
+
+            section+section {
+                .heading {
+                    border-top: 0;
+                }
+            }
+            
+            section.open+section {
+                .heading {
+                    border-top: @px solid @rail-section-border-color;
+                }
+            }
+        }
+
+    } /* .wrap */
+    
+} /* rail */

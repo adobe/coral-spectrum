@@ -19,11 +19,15 @@ module.exports = function(grunt) {
       // Utilities
       'CUI.Util.js',
 
+      // Touch
+      'CUI.Util.isTouch.js',
+
+      // jQuery extensions
+      'CUI.jQuery.js',
+
       // Persistence
       'CUI.Util.state.js',
 
-      // Touch
-      'CUI.Util.isTouch.js',
 
       // Components
       'components/CUI.Widget.js',

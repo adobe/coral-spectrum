@@ -809,6 +809,8 @@ CUI.rte.DomProcessor = function() {
                         }
                     }
                     clonedNode = node.cloneNode(false);
+                    // IDs should not be used twice
+                    com.removeAttribute(clonedNode, "id");
                     var copyCnt = nodesToMove.length;
                     for (var moveIndex = 0; moveIndex < copyCnt; moveIndex++) {
                         nodeToMove = nodesToMove[moveIndex];

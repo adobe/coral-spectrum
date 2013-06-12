@@ -55,8 +55,8 @@ CUI.rte.commands.Anchor = new Class({
                 attributes["name"] = name;
             }
             var selection = execDef.selection;
-            var dom = dpr.createNode(execDef.editContext, tagName, attributes);
-            com.insertNode(dom, selection.startNode, selection.startOffset);
+            var dom = dpr.createNode(context, tagName, attributes);
+            dpr.insertElement(context, dom, selection.startNode, selection.startOffset);
         }
     },
 

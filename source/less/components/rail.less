@@ -10,44 +10,14 @@ div.rail {
 
     background-color: @rail-background-color;
     height: 100%;
+    
+    /* the rail's defualt position is left */
+    float: left;
+    .box-shadow(inset -1*@rail-shadow-distance 0 @rail-shadow-spread rgba(0, 0, 0, @rail-shadow-opacity));
 
-    @pull-to-request-size: 3rem;
-
-    &:not(.light) {
-      /* Note: this is a bit wrong... We are overriding colors for icons here, this should be part of icons.less... */
-      [class^="icon-"]:not(.black):not(.blue),
-      [class*=" icon-"]:not(.black):not(.blue) {
-        &:before {
-          color: @rail-icon-color;
-          opacity: 0.8;
-        }
-
-        &.active:before {
-          color: @rail-icon-active-color;
-          opacity: 1;
-        }
-
-        &:hover:before,
-        &.focus:before {
-          color: @rail-icon-color;
-          opacity: 1;
-        }
-
-        &.disabled,
-        &[disabled] {
-          &:before {
-            color: @rail-icon-color;
-            opacity: 0.2; 
-          }
-
-          &:hover {
-            &:before {
-              color: @rail-icon-color;
-              opacity: 0.2; 
-            }
-          }
-        }
-      }
+    &.right {
+        .box-shadow(inset @rail-shadow-distance 0 @rail-shadow-spread rgba(0, 0, 0, @rail-shadow-opacity));
+        float: right;
     }
 
     // make it scrollable
@@ -62,123 +32,6 @@ div.rail {
       overflow: hidden;
     }
 
-    // fixed content
-    &.fixed {
-        overflow-y: hidden;
-    }
-
-    // if pull to request is possible, then the background needs to transparent
-    &.pullable {
-        position: relative;
-        background-color: transparent; 
-
-        >.pull-to-refresh {
-            display: block;
-        }
-        
-        &.touch {    
-            > .wrap {
-                padding-bottom: 1px; // this is necessary to enable scrolling
-            }
-        }
-    }
-
-    // Add shadow to left/right rail
-    &.left {
-        .box-shadow(inset -1*@rail-shadow-distance 0 @rail-shadow-spread rgba(0, 0, 0, @rail-shadow-opacity)); // TBD: make sure this matches mocks...
-        float: left;
-    }
-
-    &.right {
-        .box-shadow(inset @rail-shadow-distance 0 @rail-shadow-spread rgba(0, 0, 0, @rail-shadow-opacity));
-        float: right;
-    }
-
-    // add dark rail background color
-    .dark {
-        background-color: @rail-dark-background-color;
-    }
-    
-    &.light {
-      > .wrap {
-          background-color: @rail-light-background-color;
-        
-          border-color: @rail-light-border-color;
-        
-          .box-shadow(none);
-
-          section {
-            color: @font-base-color;
-
-            border-top: @px solid @rail-light-section-border-color;
-            .box-shadow(inset 0 @px 0 @rail-light-section-highlight-color);
-          }
-          
-          .tablist {
-            color: @font-base-color;
-
-            border-top: @px solid @rail-light-section-border-color;
-            .box-shadow(inset 0 @px 0 @rail-light-section-highlight-color);
-          }
-      }
-    }
-    >div.pull-to-refresh {
-        display: none;        
-
-        line-height: @pull-to-request-size;
-        height: @pull-to-request-size;
-        width: 100%; 
-        
-        position: absolute; 
-        left: 0; 
-        top: -@pull-to-request-size;
-
-        font-size: 0.85rem;
-
-        z-index: -1; // push it backwards
-
-        >.message {
-            height: @pull-to-request-size;
-            width: 100%;
-            overflow-y: auto;
-            position: relative;
-
-            >i.spinner,
-            >i.arrow {
-                margin: 0.5rem 0.5rem 0.5rem 1rem;
-                display: block;
-            }
-
-            >i.arrow { 
-                display: inline-block;
-                width: 1rem;
-                height: 2rem;
-
-                background-position: center center;
-                background-image: url(~"@{component-images-folder}/rail/pull-to-refresh-arrow.png");
-
-                .background-size(100%);
-            }
-
-            // positioning the messages as layers and hiding with opacity avoids flashing on iOS
-            >span.pull,
-            >span.release, 
-            >span.loading {
-                text-align: center;
-
-                display: block;
-                height: @pull-to-request-size;
-                width: 100%;
-
-                position: absolute;
-                top: 0;
-                left: 0;
-
-                opacity: 0;
-            }
-        }
-    }
-
     >.wrap {
         // activate hardware acceleration, 
         // otherwise the content gets scrambled while scrolling 
@@ -188,349 +41,6 @@ div.rail {
         // stretch to screen height
         min-height: 100%;
 
-        // necessary of pull-to-refresh is possible
-        background-color: @rail-background-color;
-
-        // closeable sections
-        .closeable() {
-            position: relative;
-
-            >.heading:after {
-                content: "\25B8";
-                position: absolute;
-                right: 24*@px;
-                font-size: 1rem;
-                line-height: 1rem;
-            }    
-
-            >.fold {
-                height: 0;
-                overflow-x: hidden;
-                overflow-y: hidden;
-            }
-
-            &.open {
-                >.heading:after {
-                    content: "\25BE";
-                }
-            }
-        }
-
-        // top rail switch
-        >.rail-switch {
-            >.toolbar {
-                background-color: @rail-dark-background-color;
-                border-bottom: 1px solid @rail-section-border-color;
-
-                a {
-                    overflow: visible;
-                    position: relative;
-
-                    &.active {
-                        cursor: default;
-
-                        &:before,
-                        &:after {
-                         position: absolute;
-                         left: 50%;
-                         
-                         height: 0;
-                         width: 0;
-                         margin-left: -0.5rem;
-                         
-                         border: solid transparent;
-                         border-width: 0.5rem;
-                         
-                         content: " ";
-                         pointer-events: none;
-                        }
-                        &:before {
-                          bottom: 0;
-                          border-bottom-color: @rail-section-border-color;
-                        }
-                        &:after {
-                          bottom: -2*@px;
-                          border-bottom-color: @rail-background-color;
-                        }
-
-                        >i:before {
-                            opacity: 1;
-                        }
-                    }
-                    
-                    &.focus {
-                      outline: none;
-                      .box-shadow(
-                          -@partial-glow-radius -@partial-glow-radius/2 @partial-glow-radius fadeout(@focus-glow-color, 50%),
-                          @partial-glow-radius -@partial-glow-radius/2 @partial-glow-radius fadeout(@focus-glow-color, 50%)
-                      );
-                      border: @px solid @focus-border-color;
-                      border-bottom: none;
-                      margin: 2*@px -1*@px 0;
-                       >i {
-                           line-height: 40*@px + 2*@px;
-                           height: 43*@px;  
-                       }
-                    }
-                }
-            }
-        }
-
-        div.tagpicker-wrap {
-            padding: 10*@px;
-        }
-
-        .rail-view {
-            display: none;
-
-            &.active {
-                .box-shadow(inset 0 @px 0 @rail-section-highlight-color);
-                display: block;
-            }
-        }
-
-
-        nav.feature {
-            .box-shadow(inset 0 -@px 0 @rail-section-border-color);
-            border-bottom: @px solid @rail-section-highlight-color; /* 1px to ensure rendering in IE9 which cuts rem units to 2dp (0.96px) */
-
-            > a,
-            > span {
-                letter-spacing: 0.05em; 
-
-                border-bottom: @px solid @rail-section-border-color;
-                .box-shadow(inset 0 1px 0 @rail-section-highlight-color); 
-                /* 1px to ensure rendering in IE9 which cuts rem units to 2dp (0.96px) */
-                text-rendering: geometricPrecision;
-                display: block;
-                background-color: @rail-background-color;
-                height: 46*@px;
-                line-height: 46*@px;
-
-                padding-left: 15*@px;
-
-                font-size: 18*@px;
-		        
-                &, a { 
-                  color: @rail-font-color; 
-                }
-
-                >[class^="icon-"],
-                >[class*=" icon-"] {
-                    &.action {
-                        float: right;
-                        margin-right: 18*@px;
-                        margin-top: 13*@px;
-                        display: none;
-
-                        &:before {
-                            color: @rail-font-color;
-                            display: none;
-                        }
-                    }
-                }
-                
-                &.active {
-                    position: relative;
-
-                    background-color: @rail-active-background-color;
-                    .box-shadow(inset 0 1*@px 0 @rail-section-highlight-color);
-
-                    &:before {
-                        border: solid transparent;
-                        content: " ";
-                        height: 0;
-                        width: 0;
-                        position: absolute;
-                        pointer-events: none;
-                        top: 50%;
-                    }
-
-                    &:before {
-                        border-width: 0.5rem;
-                        margin-top: -0.5rem;
-                        right: -@px;
-                        border-right-color: @body-background-color;
-                    }
-                    
-                    &.focus {
-                        background-color: @rail-well-background-color; 
-                        .box-shadow(
-                            inset 0 -@focus-glow-radius/2 @focus-glow-radius -@focus-glow-radius/2 fadeout(@rail-shadow-inset-color, 65%),
-                            inset 0 @focus-glow-radius/2 @focus-glow-radius -@focus-glow-radius/2 fadeout(@rail-shadow-inset-color, 65%)
-                        );
-                    }
-                }
-                
-                &:active {
-                  color: @rail-font-active-color;
-                  background-color: @rail-active-secondary-background-color;
-                }
-
-                &.focus {
-                    text-decoration: none;
-                    background-color: @rail-well-background-color;
-                    .box-shadow(
-                        inset 0 @px 0 @rail-background-color
-                    );
-                }
-
-                &:hover,
-                > a:hover {
-                    text-decoration: none;
-                    color: @rail-font-hover-color;
-
-                    >[class^="icon-"],
-                    >[class*=" icon-"] {
-                        &.action {
-                            &,&:before {
-                                display: inline;
-                                cursor: pointer;
-                            }
-                        }
-                    }
-                }
-            }
-
-            > span {
-                & a:first-child { // should be applied only to first a tag
-                    display: inline-block;
-                    width: 100%;
-                }
-
-                &.active a:first-child { // should be applied only to first a tag
-                    width: 80%;
-                }
-            }
-
-            >.sub-navigation {
-                background-color: @rail-dark-background-color;
-                font-size: 16*@px;
-
-                border-bottom: @px solid @rail-section-secondary-border-color;
-                .box-shadow(inset 0 1*@px 0 @rail-section-secondary-first-child-highlight-color); 
-
-                ~.sub-navigation {
-                    .box-shadow(inset 0 @px 0 @rail-section-secondary-highlight-color); 
-                }
-            }
-        }
-
-        .group {
-            section {
-                padding: 0;
-                color: @rail-font-color;
-                border: none;
-
-                .heading {
-                    background: @rail-group-header-color;
-                    border-top: @px solid @rail-section-border-color;
-                    border-bottom: @px solid @rail-section-border-color;
-                    .box-shadow(-@px @px 0 0 @rail-group-header-color);
-
-                    text-transform: uppercase;
-                    font-size: 0.7rem;
-
-                    padding: 6*@px 15*@px;
-
-                    display: block;
-                    
-                    &:focus {
-                        outline: none;
-                        
-                    }
-                    
-                    &.focus {
-                        background: @rail-well-background-color;
-                    }
-                }
-
-                //.fold {
-                //    padding: 15*@px;
-                //}
-            }
-
-            section.greyText, section.grayText {
-                color: @font-secondary-color;
-            }
-
-            section+section {
-                .heading {
-                    border-top: 0;
-                }
-            }
-            
-            section.open+section {
-                .heading {
-                    border-top: @px solid @rail-section-border-color;
-                }
-            }
-        }
-
-        .checklist {
-            >li {
-                padding: 6*@px 0;
-
-                >label {
-                    padding-left: 14*@px;
-
-                    input[type=checkbox] {
-                        + span:before {
-                            .box-shadow(inset 0 3*@px 3*@px -3*@px @rail-shadow-inset-color);
-                            background-color: @rail-section-dark-highlight-color;
-                            border-color: @rail-section-border-color;
-                            color: @rail-icon-color;
-                        }
-                        
-                        &.focus {
-                            + span:before {
-                                border-color: @focus-border-color;
-                                .box-shadow(
-                                    inset 0 3*@px 3*@px -3*@px @rail-shadow-inset-color,
-                                    0 0 @focus-glow-radius @focus-glow-color
-                                );
-                            }
-                        }
-                    }
-                    >span b {
-                        position: absolute;
-                        right: 14*@px;
-                        background-color: @rail-section-dark-highlight-color;
-                        .border-radius(11*@px);
-                        line-height: 22*@px;
-                        width: 34*@px;
-                        text-align: center;
-                        font-family: AdobeCleanLight;
-                        font-weight: normal;
-                        font-size: 11*@px;
-                    }
-                }
-            }
-        }
-
-        // accordion mode
-        &.accordion {
-            section {
-                .closeable;
-
-                >.fold {
-                    .transition (~"visibility 0s linear 0.5s, height 0.5s ease-out");
-                    visibility: hidden;
-                }
-                
-                &.open {
-                    >.fold {
-                    	.scrollable;
-                        visibility: visible;
-                        transition-delay: 0s;
-                        -moz-transition-delay: 0s; /* Firefox 4 */
-                        -webkit-transition-delay: 0s; /* Safari and Chrome */
-                        -o-transition-delay: 0s; /* Opera */
-                	}
-                }
-            } 
-        }
-
         section {
             margin: 0;
             padding: 0.5rem;
@@ -539,8 +49,9 @@ div.rail {
             .box-shadow(inset 0 @px 0 @rail-section-highlight-color);
 
             color: @rail-font-color;
-
-            &:first-child { // First section does not have border/highlight
+            
+            /* First section does not have border/highlight */
+            &:first-child { 
                 border-top: none;
                 .box-shadow(none);
                 
@@ -548,7 +59,7 @@ div.rail {
                     >h4,
                     >a.heading {                
                         &:active,
-                        &.focus {
+                        &:focus {
                             border-top: none;
                             border-bottom: none;
                             margin-top: -0.25rem;
@@ -562,17 +73,6 @@ div.rail {
                 }
             }
 
-            // For no styling
-            &.bare {
-                .box-shadow(none);
-                border-top: none;
-            }
-
-            // For no padding
-            &.thin {
-                padding: 0;
-            }
-
             &.links {
                 padding: 0.25rem 0;
 
@@ -582,7 +82,7 @@ div.rail {
                     display: block;
 
                     &:active,
-                    &.focus {
+                    &:focus {
                         background-color: @rail-well-background-color;
                     }
                 }
@@ -600,7 +100,7 @@ div.rail {
                     padding: 0.25rem 0.7rem;
                     
                     &:active,
-                    &.focus {
+                    &:focus {
                         border-top: @px solid @rail-section-border-color;
                         border-bottom: @px solid @rail-well-background-color;
                         margin-top: -0.3125rem;
@@ -621,25 +121,27 @@ div.rail {
                 }
             }
 
-            // the section is foldable
+            /* the section is foldable */
             &.foldable {
-                .closeable;
+                position: relative;
 
                 >.fold {
                     display: none;
                     outline: none;
                 }
-                
-                >h4,
-                >a.heading {
-                    margin: 0;
-                    &:active,
-                    &.focus {
-                        .box-shadow(
-                            inset 0 @px 0 @rail-background-color
-                        );
-                        margin-bottom: -0.3125rem;
-                    }
+
+                >.heading:after {
+                    content: "\25B8";  /* triangle: http://mcdlr.com/8/ */
+                    position: absolute;
+                    right: 24*@px;
+                    font-size: 1rem;
+                    line-height: 1rem;
+                }    
+
+                >.fold {
+                    height: 0;
+                    overflow-x: hidden;
+                    overflow-y: hidden;
                 }
 
                 &.open {
@@ -648,333 +150,13 @@ div.rail {
                         display: block;
                         height: auto;
                         overflow: auto;
-                        padding-top: 0.15rem;
-                        padding-bottom: 0.25rem;
                     }
                     
-                    >h4,
-                    >a.heading {
-                        margin-bottom: 0.3135rem;
-                        &:active,
-                        &.focus {
-                            margin-bottom: 0;
-                        }
+                    >.heading:after {
+                        content: "\25BE"; /* triangle: http://mcdlr.com/8/ */
                     }
                 }
             }
         }
-        
-        > .tablist {
-            border-top: @px solid @rail-section-border-color;
-            .box-shadow(inset 0 @px 0 @rail-section-highlight-color);
-        }
-    }
-
-    .search {
-        display: block;
-        position: relative;
-        padding: 6*@px 10*@px;
-        margin: 0*@px;
-
-        border-bottom: @px solid @rail-section-border-color;
-
-        >input[type="text"] {          
-            padding-left: 34*@px !important; // use !important to override default input-text settings within rail
-            background-color: rgb(70, 70, 70) !important;
-        }
-
-        >button {
-            position: absolute;
-            top: 5*@px;
-            left: 47*@px;
-            width: 34*@px;
-            height: 34*@px;
-            line-height: 34*@px;
-
-            background: none;
-            border: none;
-            padding: 0;
-
-            &:before {
-                color: @rail-font-color;
-            }
-            
-            &.focus {
-                .glow();
-                line-height: 32*@px;
-            }
-        }
-    }
-
-    // tag picker
-    .tagpicker {
-      width: 100%;
-
-      >.dropdown-container {
-        display: block;
-
-        input[type="text"] {
-          background-position: -webkit-calc(~"100% - 0.5rem") center;
-          background-position: -moz-calc(~"100% - 0.5rem") center;
-          background-position: -o-calc(~"100% - 0.5rem") center;
-          background-position: calc(~"100% - 0.5rem") center;
-        }
-      }
-
-      ul.tags {
-        display: block;
-        margin: 0;
-        padding-top: 10*@px;
-      }
-    }
-
-    // text input
-    &:not(.light) {
-      input[type="text"] {
-        .placeholder(@rail-input-placeholder-color);
-
-        .border-box;
-
-        height: 34*@px;
-
-        background-color: @rail-dark-background-color;
-        border: @px solid @rail-input-text-border-color;
-
-        padding: 0.25rem 0.5rem;
-        width: 100%;
-        min-width: auto;
-
-        margin: 0;
-      
-        font-size: 0.85rem;
-        color: @rail-font-color;
-
-        &:focus {
-            box-shadow: none;
-            &.focus {
-                .glow();
-            }
-        }
-      }
-    }
-
-    // quickform 
-
-    .quickform {
-      position: absolute;
-      z-index: 1;
-      bottom: 0;
-      width: 100%;
-
-      >.action,
-      >.control {
-        padding: 10*@px;
-      }
-
-      &.open >.action {
-        display: block;
-      }
-      
-      >.action {
-        display: none;
-        background-color: @rail-dark-background-color; 
-        color: @rail-font-color;
-        .box-shadow(inset 0 3*@px 3*@px -3*@px @rail-shadow-inset-color);
-        position: relative;
-        outline: none;
-
-        >*:first-child:after,
-        &:before,
-        &:after {
-            border: solid transparent;
-            content: " ";
-            height: 0;
-            width: 0;
-            position: absolute;
-            pointer-events: none;
-            left: 50*@px;
-        }
-        >*:first-child:after {
-            border-width: 0.5rem;
-            margin-left: -0.5rem;
-            bottom: -@px;
-            border-bottom-color: @rail-section-highlight-color;
-        }
-        &:before {
-            border-width: 0.5rem;
-            margin-left: -0.5rem;
-            bottom: 0;
-            border-bottom-color: @rail-section-border-color;
-        }
-        &:after {
-            border-width: 0.5rem;
-            margin-left: -0.5rem;
-            bottom: -2*@px;
-            border-bottom-color: @rail-background-color;
-        }
-
-        > button, .button {
-          width: 100%;
-          min-width: auto;
-        }
-                    
-      }
-
-      >.control {
-        .clearfix;
-
-        .box-shadow(inset 0 @px 0 @rail-section-highlight-color);
-        border-top: @px solid @rail-section-border-color;
-
-        >.comment {
-
-            float: right;
-            .calc-width(~"100% - 2rem");
-        }
-      }
-    }
-
-    // menu dropdown
-    .dropdown.menu {
-        display: block;
-        margin: 0; //override
-
-        .dropdown-container {
-            display: block;
-            border-bottom: @px solid @rail-section-border-color;
-        }
-
-        button,
-        button:hover:not([disabled]) {
-            display: block;
-            width: 100%;
-            border:none;
-            // border-top: @px solid @rail-section-border-color;
-            .box-shadow(inset 0 1px 0 @rail-section-highlight-color); /* 1px to ensure rendering in IE9 which cuts rem units to 2dp (0.96px) */
-            background: @rail-background-color;
-            .gradient(@rail-background-color, @rail-background-color);
-            color: @rail-font-color;
-            height: 40*@px;
-            line-height: 40*@px;
-            padding: 0;
-            padding-left: 12*@px;
-            font-size: @dropdown-text-size;
-
-            // icon (chevron down)
-            &:after {
-                background: none;
-                content: @icon-chevrondown-content;
-                font-family: AdobeIcons;
-                position: absolute;
-                right: 16*@px;
-                top: 0;
-            }
-        }
-
-        .dropdown-list {
-            border-bottom: none;
-            padding: 0 10*@px;
-            width: 228*@px;
-
-            ul {
-                border-top: none;
-                border-bottom: @px solid @rail-section-border-color;
-
-                li {
-                    border-color: @rail-section-border-color;
-                    border-top-color: @rail-dropdown-border-light-color;
-
-                    &:hover,
-                    &.selected:hover {
-                        border-color: @rail-section-border-color;
-
-                        + li {
-                            border-top-color: @rail-section-border-color;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    // dropdown
-    .dropdown {
-        display: block;
-
-        .dropdown-container {
-            width: 100%;
-        }
-
-        &.error button,
-        &.error input {
-            border-color: @textfield-error-border-color;
-        }
-
-        button {
-            width: 100%;
-            min-width: auto;
-            border-color: @rail-dropdown-border-color;
-            background: @rail-dropdown-background-color;
-            .gradient(@rail-dropdown-gradient-start-color, @rail-dropdown-gradient-end-color);
-            color: @rail-dropdown-font-color;
-            height: @rail-dropdown-height;
-
-            &:disabled {
-                border-color: @rail-dropdown-disabled-border-color;
-                background: @rail-dropdown-disabled-background-color;
-                color: @rail-dropdown-disabled-font-color;
-            }
-
-            &:after {
-                background:none;
-                content: "\25BE";
-                position: absolute;
-                right: 12*@px;
-            }
-
-            &:hover:not([disabled]) {
-                border-color: @rail-dropdown-border-color;
-                background: @rail-dropdown-hover-background-color;
-                .gradient(@rail-dropdown-hover-background-color, @rail-dropdown-hover-background-color);
-            }
-        }
-
-        .dropdown-list {
-
-            border-bottom: @px solid @rail-dropdown-border-color;
-
-            ul {
-                background-color: @rail-dropdown-list-background-color;
-
-                li {
-                    background-color: @rail-dropdown-list-background-color;
-                    color: @rail-dropdown-font-color;
-                    border-color: @rail-dropdown-border-color;
-                    border-top-color: @rail-dropdown-border-light-color;
-
-                    &:hover,
-                    &.selected:hover {
-                        background-color: @dropdown-active-background-color;
-                        border-color: @rail-dropdown-border-color;
-
-                        + li {
-                            border-top-color: @rail-dropdown-border-color;
-                        }
-                    }
-
-                }
-
-                .checkbox {
-                    border-color: @rail-dropdown-border-color;
-                    .gradient(@rail-dropdown-gradient-start-color, @rail-dropdown-gradient-end-color-checkbox);
-                    background: @rail-dropdown-background-color;
-                }
-
-                .checkbox.checked:before {
-                    color: @rail-dropdown-font-color;
-                }
-            }
-        }
-    }
-
+    } // .wrap
 }
