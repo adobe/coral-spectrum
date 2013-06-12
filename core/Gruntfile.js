@@ -94,32 +94,31 @@ module.exports = function(grunt) {
 
     // Configuration
     jshint: {
-      options: {
-        eqeqeq: true,
-        immed: true,
-        latedef: true,
-        newcap: true,
-        noarg: true,
-        sub: true,
-        undef: true,
-        boss: true,
-        eqnull: true,
-        browser: true,
-        smarttabs: true,
-        predef: [
-          '$',            // jQuery
-          'jQuery',       // jQuery
-          'console',      // console.log...
-          'Backbone',     // Backbone
-          'Handlebars',   // Handlebars
-          'prettyPrint',  // google-code-prettify
-          'CUI',          // CoralUI
-          'Class',        // Class
-          'moment'        // Moment.js
+        options: {
+            eqeqeq: true,
+            immed: true,
+            latedef: true,
+            newcap: true,
+            noarg: true,
+            sub: true,
+            undef: true,
+            boss: true,
+            eqnull: true,
+            browser: true,
+            smarttabs: true,
+            globals: {
+                'jQuery': true,       // jQuery
+                'console': true,      // console.log...
+                'CUI': true,          // CoralUI
+                'Class': true        // Class
+            }
+        },
+        shared: [
+            'Gruntfile.js',
+            '<%= dirs.shared %>/scripts/**.js',
+            '<%= dirs.components %>/**/scripts/**.js'
         ]
-      },
-      globals: {}
-    }, // jshint config
+    },
 
     // Task definitions
     clean: {
@@ -296,13 +295,6 @@ module.exports = function(grunt) {
         }
       }
     }, // less
-
-    lint: {
-      files: [
-        'Gruntfile.js',
-        '<%= dirs.shared %>/scripts/**.js'
-      ]
-    }, // lint
 
     concat: {
       cui: {
