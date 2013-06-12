@@ -7,26 +7,6 @@ describe('CUI.Rail', function() {
           '</section>' + 
         '</div>';
   
-  // A config we can reuse
-  var modalConfig = {
-    heading: 'TestHeading',
-    content: 'TestContent',
-    buttons: [
-      {
-        label: 'Close',
-        click: 'hide',
-        className: 'myCloseButton'
-      },
-      {
-        label: 'Save',
-        className: 'mySaveButton',
-        click: function() {
-          saveClicked = true;
-        }
-      }
-    ]
-  };
-  
   it('should be defined in CUI namespace', function() {
     expect(CUI).to.have.property('Rail');
   });
@@ -43,31 +23,7 @@ describe('CUI.Rail', function() {
 
     el.append(foldableHtml);
     
-    var rail = new CUI.Rail({
-          element: el,
-          refreshCallback: $.noop
-        });
-    
-    // pull to refresh tests
-    it('expect rail to receive pullable class', function() {
-      expect(el).to.have.class('pullable');
-
-      // no useful checks yet. Though execution should be possible
-      rail._handleTouchstart();
-      rail._handleTouchmove()
-      rail._handleTouchend();
-
-      el.trigger('touchstart');
-      el.trigger('touchmove');
-      el.trigger('touchend');
-    });
-
-    it('expect event handler not to raise any exception', function() {
-      // no useful checks yet. Though execution should be possible
-      rail._handleTouchstart();
-      rail._handleTouchmove()
-      rail._handleTouchend();
-    });
+    var rail = new CUI.Rail({element: el});
 
     // foldable tests
     var section = el.find('section');
@@ -97,25 +53,6 @@ describe('CUI.Rail', function() {
       });
       header.trigger('click');*/
       done();
-    });
-  });
-
-describe('rail as an accordion', function() {
-    var el = $('<div/>', {
-      class: 'rail fixed'
-    });
-
-    el.append(foldableHtml);
-
-    var content = el.find('.wrap').addClass('accordion');
-    
-    var rail = new CUI.Rail({
-          element: el
-        });
-    
-    // pull to refresh tests
-    it('expect rail to receive accordion class', function() {
-      expect(content).to.have.class('accordion');
     });
   });
   
