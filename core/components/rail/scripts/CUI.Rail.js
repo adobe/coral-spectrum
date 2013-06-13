@@ -218,7 +218,7 @@
 
             // TODO move that into a generic file
             // init the key handling for tabs
-            var tablists = $('[role="tablist"]'),
+            var tablists = this.$element.find('[role="tablist"]'),
                 tabSelector = '[role="tab"]';
 
             tablists.on('keydown', tabSelector, function (event) {
