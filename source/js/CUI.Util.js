@@ -47,6 +47,7 @@
       pluginName = pluginName || CUI.util.decapitalize(PluginClass.toString());
 
       $.fn[pluginName] = function(optionsIn) {
+        var pluginArgs = arguments;
         return this.each(function() {
           var $element = $(this);
 
@@ -57,7 +58,7 @@
           var instance = $element.data(pluginName) || new PluginClass(options);
 
           if (typeof optionsIn === 'string') // Call method, pass args
-            instance[optionsIn].apply(instance, Array.prototype.slice.call(arguments, 1));
+            instance[optionsIn].apply(instance, Array.prototype.slice.call(pluginArgs, 1));
           else if ($.isPlainObject(optionsIn)) // Apply options
             instance.set(optionsIn);
 
