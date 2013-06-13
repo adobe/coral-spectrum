@@ -112,12 +112,6 @@
                     if (showFocus) trigger.addClass('focus');
                     setTimeout(function () { fold.removeAttr('tabindex'); trigger.focus(); }, 100);
                 }*/
-            }).on('keydown', 'section.foldable .heading', function (event) {
-                // TODO this should be generic and applied to a specific selector (aria?)
-                // trigger click on space/enter
-                if (event.which === 32 || event.which === 13) {
-                    $(event.currentTarget).trigger('click');
-                }
             });
 
         }, //_initFoldable
@@ -274,7 +268,7 @@
 
     // Data API
     if (CUI.options.dataAPI) {
-        $(function() {
+        $(function () {
             $("[data-init~=rail]").rail();
         });
     }

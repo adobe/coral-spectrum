@@ -57,7 +57,9 @@ module.exports = function(grunt) {
       'components/CUI.Tour.js',
 
       // Validations
-      'validations.js'
+      'validations.js',
+
+      'accessibility.js'
     ],
     "cui-rte": [
       'components/rte/Theme.js',
