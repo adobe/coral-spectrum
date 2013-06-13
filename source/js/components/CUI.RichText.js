@@ -191,7 +191,6 @@
         },
 
         initializeEventHandling: function() {
-            var com = CUI.rte.Common;
             var sel = CUI.rte.Selection;
             var self = this;
             var editContext = this.editorKernel.getEditContext();
