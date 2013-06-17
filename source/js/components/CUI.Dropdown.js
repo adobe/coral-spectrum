@@ -353,7 +353,10 @@
     /** @ignore */
     _createMissingElements: function() {
         if (this.$element.find("button").length === 0) {
-            var button = $("<button>" + this.options.placeholder + "</button>");
+            var button = $("<button/>", {
+                text: this.options.placeholder,
+                type: 'button'
+            });
             button.addClass("dropdown");
             this.$element.append(button);
         }
