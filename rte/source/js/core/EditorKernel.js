@@ -217,6 +217,14 @@ CUI.rte.EditorKernel = new Class({
     registeredHandlers: null,
 
     /**
+     * Flag that determines if event handling is currently established. Used to prevent
+     * event handling being installed more than once.
+     * @type Boolean
+     * @private
+     */
+    isEventingEstablished: false,
+
+    /**
      * Flag that determines if internal event handling is currently disabled.
      * @private
      * @type Boolean
@@ -662,9 +670,15 @@ CUI.rte.EditorKernel = new Class({
      * </p>
      */
     initializeEventHandling: function() {
+        if (this.isEventingEstablished) {
+            // eventing already established - prevent initializing it again
+            return;
+        }
         var com = CUI.rte.Common;
         var context = this.getEditContext();
+        // only initialize if the context is initialized and the component is enabled
         if (context.isInitialized() && this.isEnabled) {
+            this.isEventingEstablished = true;
             var doc = context.doc;
             // deferred execution handlers - no workarounds here; performance-intense
             // operations are explicitly welcome for deferred execution!
@@ -959,11 +973,16 @@ CUI.rte.EditorKernel = new Class({
      * <p>Use {@link #initializeEventHandling} to re-establish event handling.</p>
      */
     suspendEventHandling: function() {
+        if (!this.isEventingEstablished) {
+            // no eventing initialized - nothing to suspend
+            return;
+        }
         this.unregisterHandlers();
         if (this.selectionChangeTracker !== null) {
             window.clearInterval(this.selectionChangeTracker);
             this.selectionChangeTracker = null;
         }
+        this.isEventingEstablished = false;
     },
 
     /**
@@ -1481,10 +1500,12 @@ CUI.rte.EditorKernel = new Class({
      * Enables the editor kernel for editing.
      */
     enable: function() {
-        this.isEnabled = true;
-        this.initializeEventHandling();
-        if (this.hasFocus) {
-            this.updateToolbar();
+        if (!this.isEnabled) {
+            this.isEnabled = true;
+            this.initializeEventHandling();
+            if (this.hasFocus) {
+                this.updateToolbar();
+            }
         }
     },
 
@@ -1492,9 +1513,11 @@ CUI.rte.EditorKernel = new Class({
      * Disables the editor kernel for editing.
      */
     disable: function() {
-        this.suspendEventHandling();
-        this.disableToolbar([ "sourceedit" ]);
-        this.isEnabled = false;
+        if (this.isEnabled) {
+            this.suspendEventHandling();
+            this.disableToolbar([ "sourceedit" ]);
+            this.isEnabled = false;
+        }
     },
 
 

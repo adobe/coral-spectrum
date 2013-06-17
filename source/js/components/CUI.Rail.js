@@ -112,12 +112,6 @@
                     if (showFocus) trigger.addClass('focus');
                     setTimeout(function () { fold.removeAttr('tabindex'); trigger.focus(); }, 100);
                 }*/
-            }).on('keydown', 'section.foldable .heading', function (event) {
-                // TODO this should be generic and applied to a specific selector (aria?)
-                // trigger click on space/enter
-                if (event.which === 32 || event.which === 13) {
-                    $(event.currentTarget).trigger('click');
-                }
             });
 
         }, //_initFoldable
@@ -224,7 +218,7 @@
 
             // TODO move that into a generic file
             // init the key handling for tabs
-            var tablists = $('[role="tablist"]'),
+            var tablists = this.$element.find('[role="tablist"]'),
                 tabSelector = '[role="tab"]';
 
             tablists.on('keydown', tabSelector, function (event) {
@@ -274,7 +268,7 @@
 
     // Data API
     if (CUI.options.dataAPI) {
-        $(function() {
+        $(function () {
             $("[data-init~=rail]").rail();
         });
     }
