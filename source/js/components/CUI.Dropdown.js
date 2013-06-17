@@ -135,7 +135,6 @@
         
         this.buttonElement.on("mousedown", "", function(event) {
             event.preventDefault();
-            this.dropdownList.preventHiding = false;
             if (this.autocompleteList !== null) {
                 this._adjustAutocompleter();
             } else {
@@ -144,7 +143,6 @@
         }.bind(this));
         this.buttonElement.on("mouseup", "", function(event) {
             event.preventDefault();
-            this.dropdownList.preventHiding = true;
         }.bind(this));
 
         // Auto completion
