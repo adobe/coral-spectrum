@@ -194,16 +194,11 @@
     });
 
     /**
-     * @namespace jQuery
-     */
-    /**
-     * @namespace jQuery.fn
-     */
-
-    /**
-     * Returns true if the element will be validated when the form is submitted; false otherwise.
+     * Returns <code>true</code> if the element will be validated when the form is submitted; <code>false</code> otherwise.
      *
      * @memberof jQuery.fn
+     * @name willValidate
+     * @return {Boolean}
      * @see {@link http://www.w3.org/TR/html5/forms.html#dom-cva-willvalidate}
      */
     $.fn.willValidate = function() {
@@ -219,6 +214,8 @@
      * Returns the error message that would be shown to the user if the element was to be checked for validity.
      *
      * @memberof jQuery.fn
+     * @name validationMessage
+     * @return {String} The error message or an empty string
      * @see {@link http://www.w3.org/TR/html5/forms.html#dom-cva-validationmessage}
      */
     $.fn.validationMessage = function() {
@@ -231,9 +228,12 @@
     };
 
     /**
-     * Returns true if the element's value has no validity problems; false otherwise. Fires an invalid event at the element in the latter case.
+     * Returns <code>true</code> if the element's value has no validity problems; <code>false</code> otherwise.
+     * Fires an invalid event at the element in the latter case.
      *
      * @memberof jQuery.fn
+     * @name checkValidity
+     * @return {Boolean} The validity
      * @see {@link http://www.w3.org/TR/html5/forms.html#dom-cva-checkvalidity}
      */
     $.fn.checkValidity = function() {
@@ -246,10 +246,13 @@
     };
 
     /**
-     * Sets a custom error, so that the element would fail to validate. The given message is the message to be shown to the user when reporting the problem to the user.
+     * Sets a custom error, so that the element would fail to validate.
+     * The given message is the message to be shown to the user when reporting the problem to the user.
      * If the argument is the empty string, clears the custom error.
      *
      * @memberof jQuery.fn
+     * @name setCustomValidity
+     * @param {String} message The error message or empty string
      * @see {@link http://www.w3.org/TR/html5/forms.html#dom-cva-setcustomvalidity}
      */
     $.fn.setCustomValidity = function(message) {
@@ -265,6 +268,7 @@
      * Shows error UI if the element is invalid; hide the UI otherwise.
      *
      * @memberof jQuery.fn
+     * @name updateErrorUI
      */
     $.fn.updateErrorUI = function() {
         return this.each(function() {
@@ -274,6 +278,10 @@
             }
         });
     };
+
+    /**
+     * @namespace jQuery
+     */
 
     /**
      * <code>jQuery.validator</code> is a jQuery plugin that provides form validation, which is designed to replicate {@link http://www.w3.org/TR/html5/forms.html#constraints|HTML Forms Constraint Validation API}.
