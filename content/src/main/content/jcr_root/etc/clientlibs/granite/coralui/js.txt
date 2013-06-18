@@ -1,6 +1,5 @@
 #base=js
 plugins/jquery-gridlayout.js
-plugins/jquery-fingerpointer.js
 plugins/jquery-scrollable.js
 plugins/jquery-cookie.js
 plugins/jquery-reflow.js
@@ -12,6 +11,7 @@ Class.js
 CUI.js
 CUI.Util.js
 CUI.Util.isTouch.js
+CUI.jQuery.js
 CUI.Util.state.js
 CUI.Util.HTTP.js
 CUI.Templates.js
