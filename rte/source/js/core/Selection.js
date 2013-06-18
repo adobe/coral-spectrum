@@ -2122,7 +2122,6 @@ CUI.rte.Selection = function() {
             if (!isRangeCreated) {
                 var startNodeAndOffset = sel.calcNodeAndOffsetForPosition(context,
                         bookmark.startPos);
-
                 var endNodeAndOffset = startNodeAndOffset;
                 if (bookmark.charCnt > 0) {
                     endNodeAndOffset = sel.calcNodeAndOffsetForPosition(context,
