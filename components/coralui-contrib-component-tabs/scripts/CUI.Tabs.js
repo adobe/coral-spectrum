@@ -129,8 +129,8 @@
             this.applyOptions();
 
             // set up listeners for change events
-            this.$element.on('change:type', this.setType.bind(this));
-            this.$element.on('change:active', this.setActive.bind(this));
+            this.$element.on('change:type', this._setType.bind(this));
+            this.$element.on('change:active', this._setActive.bind(this));
         },
 
         defaults: {},
@@ -149,7 +149,7 @@
 
             // ensure the type is set correctly
             if (this.options.type) {
-                this.setType(this.options.type);
+                this._setType(this.options.type);
             }
 
             // init tab switch
@@ -160,7 +160,7 @@
 
             // set an active tab if there is non flagged as active
             if (activeTab.length === 0) {
-                this.setActive(this.options.active || 0);
+                this._setActive(this.options.active || 0);
             } else {
                 // call the activation logic 
                 // in case the initial tab has remote content
@@ -170,10 +170,11 @@
 
         /**
          * sets a certain tab as active
+         * @private
          * @param  {Number} idx 
          */
-        setActive: function (idx) {
-            var activeTab = this.tabs.eq(idx);
+        _setActive: function (idx) {
+            var activeTab = this.tabs.eq($.isNumeric(idx) ? idx : this.options.active);
 
             // Activate the tab, but don't focus
             this._activateTab(activeTab, true);
@@ -203,15 +204,18 @@
 
         /**
          * sets the type of the tabs
+         * @private
          * @param  {String} type of the tabs: 'default', 'white', 'nav', 'stacked'
          */
-        setType: function (type) {
+        _setType: function (type) {
+            var ty = $.type(type) === 'string' ? type : this.options.type;
+
             // Remove old type
             this.$element.removeClass(this._types.join(' '));
 
             // Add new type
-            if (type !== 'default') {
-                this.$element.addClass(type);
+            if (ty !== 'default') {
+                this.$element.addClass(ty);
             }
         },
 
@@ -265,16 +269,17 @@
          * @private
          */
         _initTabswitch: function () {
-            var self = this;
+            var self = this,
+                sel = '> nav > a[data-toggle="tab"]';
 
-            this.$element.fipo('tap', 'click', '> nav > a[data-toggle="tab"]', function (event) {
+            this.$element.fipo('tap', 'click', sel, function (event) {
                 var tab = $(event.currentTarget);
 
                 // prevent the default anchor
                 event.preventDefault();
 
                 self._activateTab(tab);
-            });
+            }).finger('click', sel, false);
         }, // _initTabswitch
 
         /**
