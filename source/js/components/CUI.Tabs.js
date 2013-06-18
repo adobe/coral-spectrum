@@ -269,16 +269,17 @@
          * @private
          */
         _initTabswitch: function () {
-            var self = this;
+            var self = this,
+                sel = '> nav > a[data-toggle="tab"]';
 
-            this.$element.fipo('tap', 'click', '> nav > a[data-toggle="tab"]', function (event) {
+            this.$element.fipo('tap', 'click', sel, function (event) {
                 var tab = $(event.currentTarget);
 
                 // prevent the default anchor
                 event.preventDefault();
 
                 self._activateTab(tab);
-            });
+            }).finger('click', sel, false);
         }, // _initTabswitch
 
         /**

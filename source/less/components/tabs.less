@@ -71,10 +71,6 @@
         color: @tab-active-font-color;
         
         &:focus {
-          color: @tab-hover-font-color;
-        }
-        
-        &.focus {
           .tab-focus(top);
         }
       }
@@ -159,7 +155,7 @@
           border-bottom: 0.0625rem solid @tab-outline-color;
           border-right: none;
           .gradient(@tab-white-background-gradient-end-color, @tab-white-background-gradient-end-color);
-          &.focus {
+          &:focus {
             .tab-focus(stacked);
           }
         }
