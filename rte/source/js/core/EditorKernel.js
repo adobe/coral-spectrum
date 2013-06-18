@@ -1399,12 +1399,7 @@ CUI.rte.EditorKernel = new Class({
                     }
                 }
                 if (bookmark) {
-                    if (!com.ua.isWebKit) {
-                        sel.selectBookmark(context, bookmark);
-                    } else {
-                        CUI.rte.Utils.defer(sel.selectBookmark, 10, undefined,
-                                [ context, bookmark ]);
-                    }
+                    sel.selectBookmark(context, bookmark);
                 }
             }
             if (execRet && execRet.calleeRet) {

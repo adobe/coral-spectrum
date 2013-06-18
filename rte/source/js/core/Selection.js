@@ -1672,6 +1672,9 @@ CUI.rte.Selection = function() {
             // Parameters dom and calcPos are optional (used for recursion)
             if (!dom) {
                 dom = context.root;
+                if (com.ua.isWebKit) {
+                    dom.normalize();
+                }
                 calcPos = 0;
             }
             var isSuitableNodeEnd, offset;
@@ -1736,7 +1739,7 @@ CUI.rte.Selection = function() {
             var childCnt = dom.childNodes.length;
             for (var c = 0; c < childCnt; c++) {
                 var childToProcess = dom.childNodes[c];
-                var ret = CUI.rte.Selection.calcNodeAndOffsetForPosition(context,
+                var ret = sel.calcNodeAndOffsetForPosition(context,
                         charPos, handleSelectionEnd, childToProcess, calcPos);
                 if (typeof(ret) == "object") {
                     return ret;
@@ -2119,6 +2122,7 @@ CUI.rte.Selection = function() {
             if (!isRangeCreated) {
                 var startNodeAndOffset = sel.calcNodeAndOffsetForPosition(context,
                         bookmark.startPos);
+
                 var endNodeAndOffset = startNodeAndOffset;
                 if (bookmark.charCnt > 0) {
                     endNodeAndOffset = sel.calcNodeAndOffsetForPosition(context,
