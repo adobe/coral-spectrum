@@ -61,6 +61,12 @@ CUI.rte.Common = function() {
      */
     var getNodeAtPositionRec = function(context, node, state, pos) {
         var com = CUI.rte.Common;
+
+        function isEOB(dom) {
+            var editBlock = com.getTagInPath(context, dom, com.EDITBLOCK_TAGS);
+            return (com.getLastChild(editBlock) === dom);
+        }
+
         if (node.nodeType == 3) {
             var textLen = com.getNodeCharacterCnt(node);
             var endPos = state.charPos + textLen;
@@ -73,6 +79,16 @@ CUI.rte.Common = function() {
                 };
                 return;
             } else if (pos == endPos) {
+                // EOB/EOT-Situations
+                if (isEOB(node)) {
+                    state.node = {
+                        "dom": node,
+                        "start": state.charPos,
+                        "offset": pos - state.charPos,
+                        "nodeBefore": state.nodeBefore
+                    };
+                    return;
+                }
                 state.nodeBefore = node;
                 state.startBefore = state.charPos;
             }
@@ -86,6 +102,15 @@ CUI.rte.Common = function() {
                         "dom": node
                     };
                     return;
+                }
+                if ((state.charPos + 1) == pos) {
+                    if (isEOB(node)) {
+                        state.node = {
+                            "isNodeSelection": true,
+                            "startOfElement": false,
+                            "dom": node
+                        };
+                    }
                 }
                 state.charPos++;
             } else {
@@ -573,14 +598,22 @@ CUI.rte.Common = function() {
          */
         removeAttribute: function(dom, attribName) {
             var com = CUI.rte.Common;
-
             if (com.ua.isOldIE) {
                 if (attribName == "style") {
                     dom.style.cssText = null;
                     return;
                 }
             }
-            dom.removeAttribute(CUI.rte.Common.getIEAttributeName(attribName));
+            // IE 7 has gotten worse over time; newer versions cannot remove the
+            // "name" attribute appropriately, using special treatment the 1.000.000th
+            // time
+            var tagName = dom.tagName.toLowerCase();
+            if ((com.ua.isIE6 || com.ua.isIE7)
+                    && ((attribName.toLowerCase() == "name") && (tagName == "a"))) {
+                dom.attributes["name"].nodeValue = "";
+            } else {
+                dom.removeAttribute(CUI.rte.Common.getIEAttributeName(attribName));
+            }
         },
 
         /**

@@ -27,7 +27,8 @@ CUI.rte.testing.DomCommons = function() {
             text = null;
         }
         if (node.nodeType != nodeType) {
-            return "invalid node type; is: " + node.nodeType + "; should be: " + nodeType;
+            return "invalid node type; is: " + node.nodeType + "; should be: " + nodeType
+                    + " (expected: " + def + ")";
         }
         if (nodeType == 1) {
             return (com.isTag(node, tag) ? null : "invalid tag name; is: " + node.tagName
@@ -653,13 +654,13 @@ CUI.rte.testing.DomCommons = function() {
                 for (var o = 0; o < offsetCnt; o++) {
                     node = com.getNextNode(context, node);
                     if (!node) {
-                        return "Unexpected end of processing; test html: " + testHtml + "; "
-                            + "node #" + o;
+                        return "#" + t + " - Unexpected end of processing; test html: "
+                                + testHtml + "; " + "node #" + o;
                     }
                     var expectedOffset = expectedResult[o];
                     var charPos = com.getCharacterOffsetForNode(context, node);
                     if (charPos != expectedOffset) {
-                        return "Invalid offset for node #" + o + ": "
+                        return "#" + t + " - Invalid offset for node #" + o + ": "
                                 + com.dumpNodeRecursively(node) + "; is: " + charPos + "; "
                                 + "expected: " + expectedOffset;
                     }
@@ -677,6 +678,7 @@ CUI.rte.testing.DomCommons = function() {
             "<p>Text with <a name=\"anchor\"></a>an anchor.</p>",
             "<p>Empty</p><p><br></p><p>paragraph</p>",
             "<p>Empty</p><p>&nbsp;</p><p>paragraph</p>",
+            "<p>Testing empty</p><p>&nbsp;</p><p>paragraphs.</p>",
             // list-related test cases
             "<ul><li>Item 1</li><li>Item 2</li></ul>",
             "<ul><li>Item 1<ul><li>Item 1.1</li><li>Item 1.2</li></ul></li><li>"
@@ -716,6 +718,7 @@ CUI.rte.testing.DomCommons = function() {
             [ 0, 0, 10, 11 ],
             [ 0, 0, 6, 6, 8, 8 ],
             [ 0, 0, 6, 6, 8, 8 ],
+            [ 0, 0, 14, 14, 16, 16],
             // list-related test cases
             [ 0, 0, 0, 7, 7 ],
             [ 0, 0, 0, 6, 7, 7, 16, 16, 25, 25, 31, 32, 32, 41, 41 ],
@@ -760,10 +763,38 @@ CUI.rte.testing.DomCommons = function() {
                 for (var r = 0; r < resCnt; r++) {
                     var stepResult = expectedResult[r];
                     var isTagExpected = com.strStartsWith(stepResult, "<");
-                    var charCnt = (isTagExpected ? 1 : stepResult.length);
+                    var charCnt;
+                    var isOneCharNode = false;
+                    if (isTagExpected) {
+                        // <a name="...">, <img>, <br> are treated as text nodes with a
+                        // length of 1
+                        isOneCharNode = stepResult == "<a" || stepResult == "<img"
+                                || stepResult == "<br";
+                        charCnt = (isOneCharNode ? 1 : 0);
+                    } else {
+                        charCnt = stepResult.length;
+                    }
                     if (com.strEndsWith(stepResult, "[")) {
                         stepResult = stepResult.substring(0, stepResult.length - 1);
                     }
+                    // in EOB situations, the last character of a text is addressable
+                    // explicitly. Correct character count accordingly.
+                    var isEOB = (!isTagExpected || isOneCharNode);
+                    var nextStepResult = (r < (resCnt - 1) ? expectedResult[r + 1] : null);
+                    if ((!isTagExpected || isOneCharNode) && nextStepResult) {
+                        if (com.strStartsWith(nextStepResult, "<")) {
+                            var tag = nextStepResult.substring(1);
+                            if (!com.arrayContains(com.EDITBLOCK_TAGS, tag)) {
+                                isEOB = false;
+                            }
+                        } else {
+                            isEOB = false;
+                        }
+                    }
+                    if (isEOB) {
+                        charCnt++;
+                    }
+                    // Check each char ...
                     for (var c = 0; c < charCnt; c++) {
                         var result = com.getNodeAtPosition(context, charPos);
                         if (!result) {
@@ -831,6 +862,13 @@ CUI.rte.testing.DomCommons = function() {
                 NBSP,
                 "<p",
                 "paragraph",
+                "<p"
+            ], [
+                "Testing empty",
+                "<p",
+                NBSP,
+                "<p",
+                "paragraphs.",
                 "<p"
             ],
             // list-related test cases
@@ -1159,12 +1197,19 @@ CUI.rte.testing.DomCommons = function() {
             if (value != expected) {
                 return "Invalid value; is: " + value + "; expected: " + expected;
             }
-            // Testing tables - this is a specioal case on IE!
+            // Testing tables - this is a special case on IE!
             container = document.createElement("div");
             container.innerHTML = "<table cellpadding=\"5\" cellspacing=\"8\">"
-                    + "<tbody><tr>"
-                    + "<td colspan=\"2\" rowspan=\"4\"></td>"
-                    + "</tr></tbody>"
+                    + "<tbody>"
+                    + "<tr>"
+                    + "<td colspan=\"2\" rowspan=\"4\"></td>"   // this is the cell tested
+                    + "<td>&nbsp;</td>"
+                    + "</tr>"
+                    + "<tr><td>&nbsp;</td></tr>"
+                    + "<tr><td>&nbsp;</td></tr>"
+                    + "<tr><td>&nbsp;</td></tr>"
+                    + "<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>"
+                    + "</tbody>"
                     + "</table>";
             var table = container.childNodes[0];
             var cell = table.childNodes[0].childNodes[0].childNodes[0];
@@ -1190,6 +1235,7 @@ CUI.rte.testing.DomCommons = function() {
                 return "Invalid colspan; expected: 2; is: " + attribValue;
             }
             if (!com.isAttribDefined(cell, "rowspan")) {
+                alert(cell.outerHTML);
                 return "Attribute 'rowspan' not accessible";
             }
             attribValue = com.getAttribute(cell, "rowspan");
@@ -1226,12 +1272,34 @@ CUI.rte.testing.DomCommons = function() {
             if (attribValue != "4") {
                 return "Invalid colspan; expected: 4; is: " + attribValue;
             }
+            if (!(com.ua.isIE6 || com.ua.isIE7)) {
+                // IE 7 (and probably IE 6 as well) at some point in time started to
+                // "magically optimize" rowspan attribute if possible. Hence excluding
+                // this test on IE <= 7; at least this problem does not seem to have
+                // any negative impact on cell spacing/merging (where accessing and
+                // changing the span attributes is essential)
+                com.setAttribute(cell, "rowspan", "6");
+                attribValue = com.getAttribute(cell, "rowspan");
+                if (attribValue != "6") {
+                    return "Invalid rowspan; expected: 6; is: " + attribValue;
+                }
+            }
+            // reset colspan/rowspan to get back a valid DOM (IE 7 may choke otherwise)
+            com.setAttribute(cell, "colspan", "2");
+            com.setAttribute(cell, "rowspan", "4");
             value = container.innerHTML;
             expected = tcm.recreateThroughDom(
                     "<table cellpadding=\"5\" cellspacing=\"4\">"
-                        + "<tbody><tr>"
-                        + "<td colspan=\"4\" rowspan=\"4\"></td>"
-                        + "</tr></tbody>"
+                        + "<tbody>"
+                        + "<tr>"
+                        + "<td colspan=\"2\" rowspan=\"4\"></td>"
+                        + "<td>&nbsp;</td>"
+                        + "</tr>"
+                        + "<tr><td>&nbsp;</td></tr>"
+                        + "<tr><td>&nbsp;</td></tr>"
+                        + "<tr><td>&nbsp;</td></tr>"
+                        + "<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>"
+                        + "</tbody>"
                         + "</table>");
             if (value != expected) {
                 return "Invalid value; is: " + value + "; expected: " + expected;
@@ -1247,16 +1315,6 @@ CUI.rte.testing.DomCommons = function() {
             attribs = com.getAttributeNames(cell);
             if (attribs.length != 0) {
                 return "Invalid number of attributes; expected: 0; is: " + attribs.length;
-            }
-            value = container.innerHTML;
-            expected = tcm.recreateThroughDom(
-                    "<table cellpadding=\"5\" cellspacing=\"4\">"
-                        + "<tbody><tr>"
-                        + "<td></td>"
-                        + "</tr></tbody>"
-                        + "</table>");
-            if (value != expected) {
-                return "Invalid value; is: " + value + "; expected: " + expected;
             }
             // <a name=""> is also a special case on IE
             container = document.createElement("span");

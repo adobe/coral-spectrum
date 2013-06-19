@@ -127,11 +127,11 @@ CUI.rte.Selection = function() {
                 break;
             }
             // handle anchors
-            if (com.isTag(node, "a") && com.isAttribDefined(node, "name")) {
+            if (isAnchor(node)) {
                 correctingOffset++;
             }
             processingOffset += com.getNodeCharacterCnt(node);
-            if (processingOffset > nodeDef.offset) {
+            if (processingOffset >= nodeDef.offset) {
                 break;
             }
         }
@@ -467,6 +467,7 @@ CUI.rte.Selection = function() {
          * method.</p>
          * @param {CUI.rte.EditContext} context The edit context
          * @param {Object} selection The selection to be expanded
+         * @deprecated
          */
         expandToLineBorders: function(context, selection) {
             var isLineDelimiter = CUI.rte.Selection.isLineDelimiter;
@@ -882,11 +883,16 @@ CUI.rte.Selection = function() {
                 return range;
             }
             if (nodeDef.isNodeSelection) {
-                // a structural node is selected
+                // A structural node is selected - this is rather easy (relative to the
+                // usual IE standards ...)
                 if (nodeDef.startOfElement || com.isEmptyEditingBlock(nodeDef.dom, true)) {
                     sel.setNodeToRange(context, range, nodeDef.dom, true);
                 } else {
-                    range.moveToElementText(nodeDef.dom);
+                    if (sel.isNoInsertNode(nodeDef.dom)) {
+                        range.moveToElementText(nodeDef.dom.parentNode);
+                    } else {
+                        range.moveToElementText(nodeDef.dom);
+                    }
                     range.collapse(false);
                     // EOB must "of course" be handled different, but beware of table
                     // cells and anchors ("a name") ... additionally, IPE adds some more
@@ -905,10 +911,13 @@ CUI.rte.Selection = function() {
                 }
                 return range;
             }
+            // On IE, we cannot select a text node directly. Hence we select the parent
+            // node (for example, a <p>), collapse to the start and move the caret the
+            // required number of characters to the right.
             var parentNode = nodeDef.parentDom;
             var parentOffset = nodeDef.parentOffset;
             if (!parentNode) {
-                // handle end of text situation correctly
+                // handle end of text situation correctly (if no parent node is available)
                 var nodeBefore = nodeDef.nodeBefore;
                 if (nodeBefore) {
                     if (nodeBefore.nodeType == 3) {
@@ -1465,8 +1474,7 @@ CUI.rte.Selection = function() {
                         // we'll try to position the caret on an empty block, hence we'll
                         // once more have to work around that issue accordingly
                         var requiresWorkaround = (com.isTag(dom, com.EDITBLOCK_TAGS)
-                                    && com.isTag(ptn, "a")
-                                    && com.isAttribDefined(ptn, "name"))
+                                    && isAnchor(ptn))
                                 || (com.isEmptyEditingBlock(dom, true)
                                     && com.isTag(dom.previousSibling, com.LIST_TAGS));
                         if (requiresWorkaround) {

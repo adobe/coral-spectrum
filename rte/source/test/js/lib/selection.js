@@ -254,8 +254,9 @@ CUI.rte.testing.SelectionLib = function() {
             }
             if (com.isTag(node2, com.EDITBLOCK_TAGS) && (offset2 == null)) {
                 lastTextNode = com.getLastTextChild(node2, true);
-                lastOffset = sel.getLastSelectionOffset(context, lastTextNode, false);
                 if (lastTextNode == node1) {
+                    lastOffset = sel.getLastSelectionOffset(context, lastTextNode,
+                            false);
                     if (offset1 == lastOffset) {
                         return true;
                     }

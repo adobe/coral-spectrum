@@ -3603,7 +3603,7 @@ CUI.rte.testing.SelectionTests = function() {
             // ensure that the results are correct
             "<table border=\"1\"><tr><td>|</td><td>|</td></tr>"
                     + "<tr><td>|</td><td>|</td></tr></table>",
-            "<p>|&nbsp;</p><p>|&nbsp;</p>"
+            "<p>|</p><p>|</p>"
         ],
 
 
