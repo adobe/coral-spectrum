@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Autocomplete</title>
+
+  <link rel="stylesheet" href="../../css/cui.css">
+  <style>
+    body {
+      padding: 1rem;
+    }
+  </style>
+
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/libs/handlebars.js"></script>
+  <script src="../../js/libs/toe.js"></script>
+  <script src="../../js/libs/jquery-fingerpointer.js"></script>
+  <script src="../../js/CUI.js"></script>
+</head>
+<body>
+  <h1>Autocomplete</h1>
+
+  <span class="autocomplete" data-init="autocomplete">
+    <input type="text" name="name1">
+    <ol class="autocomplete-values">
+      <li data-value="a">Apple</li>
+      <li data-value="b">Banana</li>
+    </ol>
+  </span>
+
+  <span class="autocomplete icon-search" data-init="autocomplete">
+    <input type="text">
+    <ol class="autocomplete-values">
+      <li data-value="a">Apple AAAAAAA asjdkasjdkas ajdksaj</li>
+      <li data-value="b">Bananaajkdsjkjdsakadkadkjaskdjkasjdka</li>
+      <li data-value="c">Carrot</li>
+      <li data-value="b">Banana</li>
+      <li data-value="c">Carrot</li>
+      <li data-value="b">Banana</li>
+      <li data-value="c">Carrot</li>
+      <li data-value="a">Apple</li>
+      <li data-value="a">Apple</li>
+      <li data-value="a">Apple</li>
+      <li data-value="a">Apple</li>
+      <li data-value="a">Apple</li>
+      <li data-value="a">Apple</li>
+      <li data-value="a">Apple</li>
+      <li data-value="a">Apple</li>
+    </ol>
+  </span>
+
+</body>
+</html>
