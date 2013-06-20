@@ -16,17 +16,13 @@
   <script src="../../js/CUI.js"></script>
 </head>
 <body>
-  <form class='dialog vertical' action='/content/geometrixx/en/_jcr_content/par/image' method='post'>
+  <form class='dialog vertical fill-parent' action='/content/geometrixx/en/_jcr_content/par/image' method='post'>
     <nav class="toolbar content-header"><button  class='foundation-history-control&#x20;back&#x20;left withLabel' type='button' autocomplete='off' data-foundation-history-control-action='back'>Cancel</button><div class="center"><h1>Work in Progress – not yet for production use</h1></div><button type="submit"  class='next&#x20;right'>Done</button></nav>
     
     <div class="content-container">
         <input type="hidden" name=":redirect" value="/editor.html/content/geometrixx/en.html" />
           
-
-<div  class='nav tabs noscroll'>
-    <nav><a href="#" data-toggle='tab'>Image</a><a href="#" data-toggle='tab'>Advanced</a></nav>
-<section>
-        <section class="form-column">
+        <section id="Advanced" class="form-column">
             <div  title='Advanced'>
             <label class=""><span>Title</span><input type="text"  name='.&#x2f;jcr&#x3a;title' value='My&#x20;very&#x20;own&#x20;image&#x20;title' data-fieldDescription='Leave&#x20;empty&#x20;to&#x20;use&#x20;the&#x20;page&#x20;title.' /></label>
 
@@ -91,16 +87,32 @@
 
           </div>
         </section>
-  </section>
-          <section>
-        <div  title='Image'>
-            <label class=""><span>Image</span><img src='&#x2f;content&#x2f;dam&#x2f;geometrixx&#x2f;portraits&#x2f;jane_doe.jpg'/></label>
-        </div>
-    </section>
+        <section class="form-column">
+
+          <h4>Tell us your address</h4>
+              
+          <div class="form-row">
+              <label class="form-span9"><span>Street</span><input type="text"/></label>
+              <label class="form-span3"><span>No.</span><input type="text"/></label>
+          </div>
+          <div class="form-row">
+              <label class="form-span4"><span>ZIP</span><input type="text"/></label>
+              <label class="form-span8"><span>City</span><input type="text"/></label>
+          </div>
+          <div class="form-row">
+              <label class="form-span3"><span>This is a very long label</span><input type="text"/></label>
+              <label class="form-span3"><span>Code2</span><input type="text"/></label>
+              <label class="form-span3"><span>Code3</span><input type="text"/></label>
+              <label class="form-span3"><span>Code4</span><input type="text"/></label>
+          </div>
+
+          <div  title='Image'>
+              <label class=""><span>Image</span><img src='&#x2f;content&#x2f;dam&#x2f;geometrixx&#x2f;portraits&#x2f;jane_doe.jpg'/></label>
+          </div>
+      </section>
   </div>
 
 
-      </div>
   </form>
 </body>
 </html>

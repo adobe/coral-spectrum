@@ -1,10 +1,18 @@
+/************************************************************
+* Work in progress. Do not use for production environments. *
+************************************************************/
+
 form.vertical {
 	label {
 		display: block;
 
+
 		> span:first-child {
 			display: block;
 			color: #9a9a9a;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 	}
 }
@@ -20,7 +28,8 @@ form.fill-parent {
 			width: 100%;
 		}
 		> textarea {
-			max-width: 100%;
+			width: 100%;
+			max-width: 100%; /* When resizing, stick to the width */
 			min-width: 100%;
 		}
 		
@@ -104,4 +113,65 @@ form.form-column {
 	width: 496*@px;
 	margin-left: auto !important;
 	margin-right: auto !important;
+}
+
+@form-grid: 12;
+@form-grid-gap: 2%;
+@form-grid-cell: (100% - (@form-grid-gap * (@form-grid - 1))) / @form-grid;
+
+.form-row {
+	[class^="form-span"],
+    [class*=" form-span"] {
+		display: block;
+		float: left;
+		margin-left: @form-grid-gap;
+	}
+
+	[class^="form-span"]:first-child,
+    [class*=" form-span"]:first-child {
+		margin-left: 0;
+	}
+
+	.form-span1 {
+		width: @form-grid-cell * 1;
+	}
+	.form-span2 {
+		width: @form-grid-cell * 2 + @form-grid-gap * 1;
+	}
+	.form-span3 {
+		width: @form-grid-cell * 3 + @form-grid-gap * 2;
+	}
+	.form-span4 {
+		width: @form-grid-cell * 4 + @form-grid-gap * 3;
+	}
+	.form-span5 {
+		width: @form-grid-cell * 5 + @form-grid-gap * 4;
+	}
+	.form-span6 {
+		width: @form-grid-cell * 6 + @form-grid-gap * 5;
+	}
+	.form-span7 {
+		width: @form-grid-cell * 7 + @form-grid-gap * 6;
+	}
+	.form-span8 {
+		width: @form-grid-cell * 8 + @form-grid-gap * 7;
+	}
+	.form-span9 {
+		width: @form-grid-cell * 9 + @form-grid-gap * 8;
+	}
+	.form-span10 {
+		width: @form-grid-cell * 10 + @form-grid-gap * 9;
+	}
+	.form-span11 {
+		width: @form-grid-cell * 11 + @form-grid-gap * 10;
+	}
+	.form-span12 {
+		width: @form-grid-cell * 12 + @form-grid-gap * 11;
+	}
+
+	&:after {
+		content: "";
+		display: table;
+		clear: both;		
+	}
 }
