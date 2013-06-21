@@ -26,6 +26,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha');
   grunt.loadNpmTasks('grunt-jsdoc');
 
+  grunt.loadTasks('tasks');
+
   /**
    JavaScript file include order
    Add new components to this array _after_ the components they inherit from
