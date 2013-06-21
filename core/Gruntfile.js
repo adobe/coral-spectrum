@@ -376,6 +376,11 @@ module.exports = function(grunt) {
     'jsdoc'
   ]);
 
+  grunt.task.registerTask('retro', [
+    'legacy',
+    'partial'
+  ]);
+
   // Default task
   grunt.task.registerTask('default', [
     'partial'

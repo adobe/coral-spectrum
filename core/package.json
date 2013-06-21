@@ -5,9 +5,6 @@
     "type": "git",
     "url": "https://git.corp.adobe.com/Coral/CoralUI"
   },
-  "dependencies": {
-    "coralui-contrib-icons-base": "~0.5.0"
-  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-clean": "~0.4.1",
