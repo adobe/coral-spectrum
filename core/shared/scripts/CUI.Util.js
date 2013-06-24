@@ -154,4 +154,7 @@
 
   };
 
+  // add touch class to <html>
+  $('html').toggleClass('touch', CUI.util.isTouch);
+
 }(jQuery, this));
