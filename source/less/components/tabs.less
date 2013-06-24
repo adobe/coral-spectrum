@@ -3,28 +3,26 @@
   Provides navigation tabs
 */
 
-.tab-focus(@tab_type) {
-  outline: none;
-  border: @px solid @focus-border-color;
-}
-
-.tab-focus(@tab_type) when (@tab_type = top) {
-  .box-shadow(
-      -@partial-glow-radius -@partial-glow-radius/2 @partial-glow-radius @partial-glow-color,
-      @partial-glow-radius -@partial-glow-radius/2 @partial-glow-radius @partial-glow-color
-  );
-  border-bottom: none;
-}
-
-.tab-focus(@tab_type) when (@tab_type = stacked) {
-  .box-shadow(
-    -@partial-glow-radius/2 -@partial-glow-radius @partial-glow-radius @partial-glow-color,
-    -@partial-glow-radius/2 @partial-glow-radius @partial-glow-radius @partial-glow-color
-  );
-  border-right: none;
-}
-
 .tabs {
+  .tab-focus(@tab_type) {
+    outline: none;
+    border: @px solid @focus-border-color;
+  }
+
+  .tab-focus(@tab_type) when (@tab_type = top) {
+    @shadow: -@partial-glow-radius -@partial-glow-radius/2 @partial-glow-radius @partial-glow-color,
+        @partial-glow-radius -@partial-glow-radius/2 @partial-glow-radius @partial-glow-color;
+    .box-shadow(@shadow);
+    border-bottom: none;
+  }
+
+  .tab-focus(@tab_type) when (@tab_type = stacked) {
+    @shadow: -@partial-glow-radius/2 -@partial-glow-radius @partial-glow-radius @partial-glow-color,
+    -@partial-glow-radius/2 @partial-glow-radius @partial-glow-radius @partial-glow-color;
+    .box-shadow(@shadow);
+    border-right: none;
+  }
+
   > nav {
     .clearfix();
     z-index: 1;
