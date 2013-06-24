@@ -159,11 +159,10 @@
 
             // @deprecated, rather the template engine should be agonistic
             // Render template, if necessary
-            if (this.$element.children().length === 0) {
+            // disabled for now
+            /*if (this.$element.children().length === 0) {
                 this.$element.html(CUI.Templates['modal']($.extend({}, this.options, { buttons: '' })));
-                this.applyOptions(true);
-            }
-
+            }*/
 
             this.applyOptions();
 
@@ -220,7 +219,7 @@
             var self = this,
                 idPrefix = 'modal-header' + new Date().getTime() + '-';
 
-            // the nav around the tabs has a tablist role
+            // the element has the role dialog
             this.$element.attr({
                 'role': 'dialog',
                 'aria-hidden': !this.options.visible,
@@ -229,7 +228,7 @@
                 'tabindex': -1
             });
 
-            this.header.attr({
+            this.header.find('h2').attr({
                 'id': idPrefix + 'label',
                 'tabindex': 0
             });
@@ -242,7 +241,7 @@
             });
 
             // keyboard handling
-            this.$element.on('keydown', ':tabbable', function (event) {
+            this.$element.on('keydown', ':focusable', function (event) {
                 // enables keyboard support
 
                 var elem = $(event.currentTarget),
@@ -250,14 +249,11 @@
                     focusElem;
 
                 switch (event.which) {
-                    case 27: //escape
-                        self.hide();
-                        return;
                     case 9: //tab
                         if (event.shiftKey && event.currentTarget === tabbables[0]) {
                             // in case it is the first one, we switch to the last one
                             focusElem = tabbables.last();
-                        } else if (event.currentTarget === tabbables[tabbables.length-1]) {
+                        } else if (!event.shiftKey && event.currentTarget === tabbables[tabbables.length-1]) {
                             // in case it is the last one, we switch to the first one
                             focusElem = tabbables.first();
                         }
@@ -421,6 +417,9 @@
             // When a modal dialog opens focus goes to the first focusable item in the dialog
             this.$element.find(':focusable').eq(0).trigger('focus');
 
+            // add escape handler
+            $(document).on('keydown.modal-escape', this._escapeKeyHandler.bind(this));
+
             return this;
         },
 
@@ -430,6 +429,9 @@
          */
         _hide: function () {
             $('body').removeClass('modal-open');
+
+            // remove escape handler
+            $(document).off('keydown.modal-escape');
 
             // fire event before showing the modal
             this.$element.trigger('beforehide');
@@ -484,6 +486,17 @@
                     $(this).detach();
                 });
             }
+        },
+
+        /**
+         * handler to close the dialog on escape key
+         * @private
+         */
+        _escapeKeyHandler: function (event) {
+            if (event.which === 27) {
+                this.hide();
+            }
+
         }
     });
 
