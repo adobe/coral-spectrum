@@ -36,4 +36,5 @@ components/CUI.FileUpload.js
 components/CUI.Toolbar.js
 components/CUI.Accordion.js
 components/CUI.Tour.js
+components/CUI.CycleButtons.js
 validations.js

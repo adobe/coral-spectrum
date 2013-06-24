@@ -56,6 +56,7 @@ module.exports = function(grunt) {
       'components/CUI.Accordion.js',
       'components/CUI.Tour.js',
       'components/CUI.Autocomplete.js',
+      'components/CUI.CycleButtons.js',
 
       // Validations
       'validations.js',
@@ -90,7 +91,7 @@ module.exports = function(grunt) {
   };
 
   var packages = {
-    "cui": [ "cui-templates", "cui"],
+    "cui": [ "cui-templates", "cui" ],
     "cui-rte": [ "cui-rte" ]
   };
 
