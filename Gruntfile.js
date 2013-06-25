@@ -339,7 +339,7 @@ module.exports = function (grunt) {
                 src: ['<%= dirs.temp %>/js/**.js', '<%= dirs.temp %>/js/components/**.js'],
                 options: {
                     destination: '<%= dirs.build %>/doc',
-                    template: '../res/docTemplate/'
+                    template: 'res/docTemplate/'
                 }
             }
         }, // jsdoc
@@ -364,6 +364,15 @@ module.exports = function (grunt) {
         'uglify:retro',
         //'mocha:retro', // testrunner works but some tests fail
         'guide'
+    ]);
+
+    grunt.task.registerTask('full', [ // for a standalone upload e.g. pages
+        'retro',
+        'jsdoc'
+    ]);
+
+    grunt.task.registerTask('check', [ // supposed to be execute prior to any commit!
+        'full'
     ]);
 
       // Default task
