@@ -4,9 +4,13 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+
+    grunt.loadNpmTasks('grunt-mocha');
+    grunt.loadNpmTasks('grunt-jsdoc');
 
     grunt.loadTasks('tasks/core');
 
@@ -185,6 +189,13 @@ module.exports = function (grunt) {
                         src: ['**/scripts/**.js'],
                         dest: '<%= dirs.temp %>/js/components'
                     },
+                    { // get tests from the modularized components
+                        expand: true,
+                        flatten: true,
+                        cwd: '<%= dirs.components %>/',
+                        src: ['**/tests/**.js'],
+                        dest: '<%= dirs.build %>/tests'
+                    },
                     { // get legacy components' less
                         expand: true,
                         cwd: '<%= dirs.legacy %>/components/styles',
@@ -221,6 +232,17 @@ module.exports = function (grunt) {
                         cwd: '<%= dirs.legacy %>/components/resources',
                         src: ['**'],
                         dest: '<%= dirs.build %>/res/components'
+                    },
+                    { // testrunner + dependencies
+                        expand: true,
+                        cwd: '<%= dirs.modules %>/',
+                        src: [
+                            'chai/chai.js',
+                            'chai-jquery/chai-jquery.js',
+                            'mocha/mocha.js',
+                            'mocha/mocha.css'
+                        ],
+                        dest: '<%= dirs.build %>/tests/libs'
                     }
                 ]
             },
@@ -277,6 +299,15 @@ module.exports = function (grunt) {
             }
         }, // less
 
+        cssmin: {
+            cui: {
+                files: {
+                    '<%= dirs.build %>/css/cui.min.css': '<%= dirs.build %>/css/cui.css',
+                    '<%= dirs.build %>/css/cui-wrapped.min.css': '<%= dirs.build %>/css/cui-wrapped.css'
+                }
+            }
+        }, // cssmin
+
         concat: {
             retro: {
                 src: getIncludes("cui", dirs.temp+'/js/'),
@@ -290,7 +321,28 @@ module.exports = function (grunt) {
                     '<%= dirs.build %>/js/CUI.min.js': ['<%= dirs.build %>/js/<%= outputFileName %>.js']
                 }
             }
-        } // uglify
+        }, // uglify
+
+        mocha: {
+            retro: {
+                src: ['<%= dirs.build %>/tests/index.html'],
+                options: {
+                    bail: true,
+                    log: true,
+                    run: true
+                }
+            }
+        }, // mocha
+
+        jsdoc : {
+            cui : {
+                src: ['<%= dirs.temp %>/js/**.js', '<%= dirs.temp %>/js/components/**.js'],
+                options: {
+                    destination: '<%= dirs.build %>/doc',
+                    template: '../res/docTemplate/'
+                }
+            }
+        }, // jsdoc
 
     }); // end init config
 
@@ -306,9 +358,11 @@ module.exports = function (grunt) {
         'copy:retro',
         'less:cui',
         'less:cui-wrapped',
+        'cssmin:cui',
         //'jshint:retro', // hint js in temp folder
         'concat:retro',
         'uglify:retro',
+        //'mocha:retro', // testrunner works but some tests fail
         'guide'
     ]);
 
