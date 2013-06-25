@@ -215,6 +215,12 @@ module.exports = function (grunt) {
                         cwd: '<%= dirs.legacy %>/scripts',
                         src: ['*.js'],
                         dest: '<%= dirs.temp %>/js'
+                    },
+                    { // get legacy resources
+                        expand: true,
+                        cwd: '<%= dirs.legacy %>/components/resources',
+                        src: ['**'],
+                        dest: '<%= dirs.build %>/res/components'
                     }
                 ]
             },
