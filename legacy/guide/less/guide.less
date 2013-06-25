@@ -1,11 +1,11 @@
 // Bootstrap: Core variables and mixins
-@import "bootstrap/variables";
-@import "bootstrap/mixins";
+@import "externals/bootstrap/variables";
+@import "externals/bootstrap/mixins";
 
 // CUI: Variables & Mixins
-@import 'includes/config';
-@import 'includes/variables';
-@import 'includes/mixins';
+@import 'shared/includes/config';
+@import 'shared/includes/variables';
+@import 'shared/includes/mixins';
 
 @demo-background-color: rgb(247, 247, 247);
 @demo-border-color: rgb(187, 187, 187);
@@ -106,7 +106,10 @@ div.componentSample {
   font-size: 0.85rem;
   border: @px solid @demo-border-color;
 
-  .box-shadow(inset 2.75rem 0 0 #FBFBFC, inset 2.75rem+@px 0 0 #ECECF0, 0 0 0.5rem rgba(0, 0, 0, 0.1));
+  @shadow: inset 2.75rem 0 0 #FBFBFC, 
+    inset 2.75rem+@px 0 0 #ECECF0, 
+    0 0 0.5rem rgba(0, 0, 0, 0.1);
+  .box-shadow(@shadow);
 
   // Make the gutter a little bigger
   ol.linenums {
@@ -158,7 +161,9 @@ div.componentSample {
     
     &.linenums {
       // remove top shadow
-      .box-shadow(inset 2.75rem 0 0 #FBFBFC, inset 2.75rem+@px 0 0 #ECECF0);
+      @shadow: inset 2.75rem 0 0 #FBFBFC, 
+        inset 2.75rem+@px 0 0 #ECECF0;
+      .box-shadow(@shadow);
     }
   }
 }
