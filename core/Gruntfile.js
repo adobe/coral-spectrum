@@ -365,14 +365,7 @@ module.exports = function(grunt) {
   ]);
 
   grunt.task.registerTask('full', [
-    'clean',
-    'jshint',
-    'copy',
-    'concat',
-    'uglify',
-    'less',
-    'cssmin',
-    'mocha',
+    'partial',
     'jsdoc'
   ]);
 
