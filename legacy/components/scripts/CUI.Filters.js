@@ -585,7 +585,7 @@ var index = filters.getSelectedIndex();
         if (!this.options.stacking) return;
         
         var i = this.inputElement;
-        var text = i.attr("value");
+        var text = i.attr("value") || '';
         if (text.length === 0) text = i.attr("placeholder");
         var styles = ["font-family", "font-weight", "font-style", "font-size", "letter-spacing", "line-height", "text-transform"];
         var div = $("<div style=\"position: absolute; display: none;\"></div>");
