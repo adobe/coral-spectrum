@@ -62,7 +62,7 @@
     .border-radius(0.25rem);
     border: @px solid @slider-border-color;
     pointer-events: auto;
-    cursor: url('../images/cursors/openhand.cur'), default;
+    cursor: url('@{component-images-folder}/cursors/openhand.cur'), default;
     outline: none;
       &:hover,
       &.dragging {
@@ -84,7 +84,7 @@
         }
       }
       &.dragging {
-        cursor: url('../images/cursors/closedhand.cur'), default;
+        cursor: url('@{component-images-folder}/cursors/closedhand.cur'), default;
         opacity: 1 !important;
         z-index: auto !important;
         background-color: lighten(@slider-handle-gradient-start-color, 15%);
@@ -232,7 +232,7 @@
 }
 
 .slider-dragging-cursorhack, .slider-dragging-cursorhack * {
-  cursor: url('../images/cursors/closedhand.cur'), default !important;  /* Apply dragging to complete page */
+  cursor: url('@{component-images-folder}/cursors/closedhand.cur'), default !important;  /* Apply dragging to complete page */
 }
 
 .sliderfieldset {
