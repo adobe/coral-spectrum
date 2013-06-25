@@ -19,7 +19,7 @@
       @param {Object}          options                               Component options
       @param {Array}           [options.options]                Array of options in the list
       @param {Function}        [options.optionRenderer=null]                Callback function to render one option
-      @param {jQuery Object}   [options.positioningElement=null]     If this optional element is given, the dropdown list
+      @param {jQuery|Object}   [options.positioningElement=null]     If this optional element is given, the dropdown list
                                                                      will be placed beyond it instead of the standard element
       @param {String}   [options.cssClass=null]     An optional CSS class string that will be added to the list.
 

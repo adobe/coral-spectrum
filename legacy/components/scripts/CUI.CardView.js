@@ -2597,7 +2597,7 @@ $cardView.find("article").removeClass("selected");
          * Gets the currently selected cards.
          * @param {Boolean} useModel True if items from the data model should be retured;
          *        false, if a jQuery object should be returned instead
-         * @return {*[]|jQuery} The selected items
+         * @return {Array|jQuery} The selected items
          */
         getSelection: function(useModel) {
             return this.adapter.getSelection(useModel === true);
@@ -2646,7 +2646,7 @@ $cardView.find("article").removeClass("selected");
          * <p>If the headers parameter is specified, all items that are part of one
          * of the specified headers get selected. Items that are not assigned to one of the
          * specified headers are not changed.</p>
-         * @param {*[]} [headers] Header filter
+         * @param {Array} [headers] Header filter
          */
         selectAll: function(headers) {
             if (this.getSelectionModeCount() !== SELECTION_MODE_COUNT_MULTI) return;
@@ -2667,7 +2667,7 @@ $cardView.find("article").removeClass("selected");
          * <p>If the headers parameter is specified, all items that are part of one
          * of the specified headers get deselected. Items that are not assigned to one of
          * the specified headers are not changed.</p>
-         * @param {*[]} [headers] Header filter
+         * @param {Array} [headers] Header filter
          */
         deselectAll: function(headers) {
             var self = this;
