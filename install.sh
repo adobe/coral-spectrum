@@ -123,30 +123,6 @@ else
   echo "grunt-cli"
 fi
 
-# Check for bower
-if ! echo $npmList | grep bower@ >/dev/null 2>&1; then
-  echo ""
-  echoe "Bower must be installed globally, install it with 'sudo npm install -g bower'? [y/n] \c"
-  read installBower
-  if [ $installBower = "y" ]; then
-    echo "running sudo npm install -g bower..."
-    sudo npm install -g bower
-
-    if [ $? -ne 0 ]; then
-      red " [X] " "\c"
-      echo "Failed to install Bower"
-      exit 1
-    fi
-  else
-    red " [X] " "\c"
-    echo "Bower must be installed to build CoralUI"
-    exit 1
-  fi
-else
-  green " $OK " "\c"
-  echo "bower"
-fi
-
 echo ""
 echo "Installing modules and components"
 
@@ -162,23 +138,10 @@ else
   exit 1
 fi
 
-# Install JS libraries with Bower
-bower install >/dev/null
-
-if [ $? -eq 0 ]; then
-  green " $OK " "\c"
-  echo "bower"
-else
-  red " [X] " "\c"
-  echo "bower";
-  exit 1
-fi
-
-# install RTE build stuff as well, so grunt full works OOTB without calling the RTE
-# installer manually
-cd rte
+# install core build stuff as well
+cd core
 echo ""
-echo "Preparing RichTextEditor submodule"
+echo "Preparing Coral core"
 ./install.sh
 cd -
 
@@ -192,4 +155,3 @@ echo "Run one of the following commands to build CoralUI:"
 echo ""
 echo "  grunt       # partial build for development"
 echo "  grunt full  # full build with documentation"
-echo "  grunt mvn   # build and install into Granite"
