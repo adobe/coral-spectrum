@@ -67,6 +67,7 @@ module.exports = function (grunt) {
         legacy: 'legacy',
         temp: 'temp',
         modules: 'node_modules',
+        externals: 'externals',
         core: {
             build: 'core/build'
         }
@@ -216,6 +217,23 @@ module.exports = function (grunt) {
                         dest: '<%= dirs.temp %>/js'
                     }
                 ]
+            },
+            guide: {
+                files: [
+                    { // get build from the core
+                        expand: true,
+                        cwd: '<%= dirs.legacy %>/guide/',
+                        src: ['**'],
+                        dest: '<%= dirs.build %>/'
+                    },
+                    { // get external dependencies
+                        expand: true,
+                        flatten: true,
+                        cwd: '<%= dirs.externals %>/',
+                        src: ['*/*.js'],
+                        dest: '<%= dirs.build %>/js/libs'
+                    }
+                ]
             }
         }, // copy
 
@@ -239,6 +257,17 @@ module.exports = function (grunt) {
                 files: {
                     '<%= dirs.build %>/css/cui.css': '<%= dirs.build %>/less/cui.less'
                 }
+            },
+            guide: {
+                options: {
+                    paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
+                        dirs.build+'/less/'
+                    ]
+                },
+                files: {
+                    '<%= dirs.build %>/css/guide.css': '<%= dirs.build %>/less/guide.less',
+                    '<%= dirs.build %>/css/prettify.css': '<%= dirs.build %>/less/prettify.css'
+                }
             }
         }, // less
 
@@ -259,15 +288,22 @@ module.exports = function (grunt) {
 
     }); // end init config
 
+    grunt.task.registerTask('guide', [
+        'copy:guide',
+        'less:guide'
+    ]);
+
 
     grunt.task.registerTask('retro', [
         'clean',
         'subgrunt:core',
         'copy:retro',
-        'less',
+        'less:cui',
+        'less:cui-wrapped',
         //'jshint:retro', // hint js in temp folder
         'concat:retro',
-        'uglify:retro'
+        'uglify:retro',
+        'guide'
     ]);
 
       // Default task
