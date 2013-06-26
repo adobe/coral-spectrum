@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Cycle Buttons</title>
+
+  <link rel="stylesheet" href="../../css/cui.css">
+  <style>
+    [role=main] {
+      padding: 1rem;
+    }
+  </style>
+
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/libs/handlebars.js"></script>
+  <script src="../../js/libs/toe.js"></script>
+  <script src="../../js/libs/jquery-fingerpointer.js"></script>
+  <script src="../../js/CUI.js"></script>
+</head>
+<body>
+  <div role="main">
+    <h1>Cycle Buttons</h1>
+
+    <span class="cyclebuttons" data-init="cyclebuttons">
+      <button class="cyclebuttons-active icon-viewcard" type="button">Card</button>
+      <button class="icon-viewlist" type="button">List</button>
+    </span>
+
+    <div class="cyclebuttons" data-init="cyclebuttons">
+      <button class="cyclebuttons-active icon-viewcard" type="button">Card</button>
+      <button class="icon-viewlist" type="button">List</button>
+    </div>
+  </div>
+</body>
+</html>

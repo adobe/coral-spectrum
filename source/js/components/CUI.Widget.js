@@ -31,13 +31,6 @@
       this.on('change:visible', function (evt) {
         this[evt.value ? '_show' : '_hide']();
       }.bind(this));
-
-      // TBD: break out into applyOptions? Could cause problems if not called
-      if (this.options.visible) {
-        // Show immediately
-        this.options.visible = false;
-        this.show();
-      }
     },
 
     /**

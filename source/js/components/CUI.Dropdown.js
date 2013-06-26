@@ -263,6 +263,7 @@
                     current.attr("value", value).text(value);
                     this.syncSelectElement.append(current);
                 }
+                this.autocompleteList.hide();
             } else {
                 current = $(this.syncSelectElement.find("option").get(event.selectedIndex));
                 value = current.attr("value");
@@ -351,7 +352,10 @@
     /** @ignore */
     _createMissingElements: function() {
         if (this.$element.find("button").length === 0) {
-            var button = $("<button>" + this.options.placeholder + "</button>");
+            var button = $("<button/>", {
+                text: this.options.placeholder,
+                type: 'button'
+            });
             button.addClass("dropdown");
             this.$element.append(button);
         }

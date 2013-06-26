@@ -80,38 +80,45 @@
                 var section = $(e),
                     head = section.find('.heading'),
                     fold = section.find('.fold'),
-                    curId = idPrefix + (head.attr('href') || (' ' + $.expando)).substring(1);
+                    curId = idPrefix + (head.attr('href') || (' ' + $.expando)).substring(1),
+                    isOpen = section.hasClass(openClass);
 
                 section.attr('role', 'presentation');
                 head.attr({
                     'role': 'button',
                     'aria-controls': curId,
-                    'tabindex': 0
+                    'tabindex': 0,
+                    'aria-expanded': isOpen
                 });
                 fold.attr({
                     'aria-labelledby': curId,
-                    'aria-hidden': !section.hasClass(openClass),
-                    'aria-expanded': section.hasClass(openClass)
+                    'aria-hidden': !isOpen,
+                    'aria-expanded': isOpen
                 });
             });
 
             // click handler for open/close
             this.$element.fipo('tap', 'click', 'section.foldable .heading', function (event) {
-                var section = $(event.currentTarget).parents('.foldable:first'),
-                    opened = section.toggleClass(openClass).hasClass(openClass);
+                var head = $(event.currentTarget),
+                    section = head.parents('.foldable:first'),
+                    fold = section.find('.fold'),
+                    isOpen = section.toggleClass(openClass).hasClass(openClass);
 
-                section.attr({
-                    'aria-hidden': !opened,
-                    'aria-expanded': opened
+                head.attr({
+                    'aria-expanded': isOpen
                 });
 
-                // hack to make sure that VoiceOver announces the expanded items.
-                /*if (expanded && ev.type==='click' && !trigger.is('a')) {
-                    showFocus = trigger.hasClass('focus');
-                    fold.attr('tabindex', '-1').focus();
-                    if (showFocus) trigger.addClass('focus');
-                    setTimeout(function () { fold.removeAttr('tabindex'); trigger.focus(); }, 100);
-                }*/
+                fold.attr({
+                    'aria-hidden': !isOpen,
+                    'aria-expanded': isOpen
+                });
+
+                // workaround to make sure that VoiceOver announces the expanded items.
+                if (isOpen && event.type === 'tap') {
+                    fold.attr('tabindex', '-1').trigger('focus');
+                    head.trigger('focus');
+                    fold.removeAttr('tabindex');
+                }
             });
 
         }, //_initFoldable
@@ -255,8 +262,7 @@
                 if (keymatch) { // if a key matched then we set the currently focused element
                     event.preventDefault();
                      // set focus class here to avoid having the focus glow with mouse click
-                    focusElem = $(focusElem);
-                    focusElem.addClass(focusClass)
+                    $(focusElem).addClass(focusClass)
                         .trigger('focus')
                         .trigger('click');
                 }
