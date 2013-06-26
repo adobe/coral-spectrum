@@ -25,6 +25,17 @@
     
     return input;
   }
+
+    // Basic filename transform function
+  function getIconName(input) {
+    // Remove path
+    input = input.slice(input.lastIndexOf('/')+1);
+    
+    // Remove extension
+    input = input.replace(svgRE, '');
+    
+    return input;
+  }
   
   // Remove any chars that could break the CSS classname
   function sanitizeCSSClass(input) {
@@ -42,6 +53,8 @@
 
       // Process the destination name
       var dest = grunt.template.process(this.data.dest, config);
+
+      var htmlTemplate = grunt.template.process(this.data.template, config);
     
       // Get the list of all source files
       var srcFiles = grunt.file.expand(this.data.src);
@@ -49,6 +62,7 @@
       var colors = this.data.colors || { base: {} };
     
       var outputCSS = '';
+      var outputHTML = '';
       
       // Get each file
       srcFiles.forEach(function(src) {
@@ -110,13 +124,22 @@
           
           // Add CSS
           outputCSS += selectors.join(',')+' {background-image:url("'+encoded+'") !important;}\n';
-        }      
+
+          // Add HTML
+          outputHTML += '<tr>\n'+
+              '\t<td><i class="' + classPrefix+className + ' large"></i></td>\n' +
+              '\t<td>' + getIconName(src) + '</td>\n' +
+              '\t<td>.' + classPrefix+className + '</td>\n' +
+            '</tr>\n';
+        }
       });
     
       grunt.log.ok('CSS created for '+srcFiles.length+' icons');
     
       // Write out the CSS file
       grunt.file.write(dest, outputCSS);
+
+      grunt.file.write(htmlTemplate, outputHTML);
     
       return true;
     });

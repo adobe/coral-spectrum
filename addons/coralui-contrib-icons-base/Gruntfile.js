@@ -8,7 +8,8 @@ module.exports = function(grunt) {
     build: 'build',
     source: 'source',
     temp: 'temp',
-    modules: 'node_modules'
+    modules: 'node_modules',
+    tasks: 'tasks'
   };
 
   grunt.loadTasks('tasks');
@@ -18,7 +19,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-webfont');
-  
+
   // Read in package.json
   var pkg = grunt.file.readJSON('package.json');
 
@@ -51,12 +52,18 @@ module.exports = function(grunt) {
             src: ['icons.less', 'icons_variables.less', 'standalone.less'],
             dest: '<%= dirs.temp %>/less'
           },
-          {
+          { // bootstrap dependencies
             expand: true,
             filter: 'isFile',
             cwd: '<%= dirs.modules %>/bootstrap/less/',
             src: ['mixins.less', 'variables.less'],
             dest: '<%= dirs.temp %>/less/externals/bootstrap/'
+          },
+          { // template for icon-browser
+            expand: true,
+            cwd: '<%= dirs.tasks %>/fonttmpl/',
+            src: ['demo.html'],
+            dest: '<%= dirs.temp %>/htmlTemplate/'
           }
         ]
       },
@@ -84,6 +91,15 @@ module.exports = function(grunt) {
             dest: '<%= dirs.build %>/less',
             rename: function (dest, src) {
               return dest + '/icons_mono.less';
+            }
+          },
+          {
+            expand: true,
+            cwd: '<%= dirs.temp %>/less/',
+            src: ['AdobeIcons.html'],
+            dest: '<%= dirs.build %>',
+            rename: function (dest, src) {
+              return dest + '/icon-browser.html';
             }
           }
         ]
@@ -120,6 +136,7 @@ module.exports = function(grunt) {
           '<%= dirs.source %>/icons_color/*.svg'
         ],
         dest: '<%= dirs.temp %>/less/icons_color.less',
+        template: '<%= dirs.temp %>/htmlTemplate/icons_color.html',
         prefix: 'icon-'
       }
     }, // icons
@@ -132,8 +149,9 @@ module.exports = function(grunt) {
         options: {
             font: 'AdobeIcons',
             relativeFontPath: '../res/icons',
-            template: 'tasks/fonttmpl/coral.css',
-            htmlDemo: false,
+            template: '<%= dirs.tasks %>/fonttmpl/coral.css',
+            htmlDemoTemplate: '<%= dirs.temp %>/htmlTemplate/demo.html',
+            htmlDemo: true,
             stylesheet: 'less'
         }
       }
