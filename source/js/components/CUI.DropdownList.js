@@ -273,8 +273,6 @@
         }.bind(this));
 
         list.on("mousedown", "", function(event) {
-            // Next blur event should NOT hide the list. (Clicked scroll bar)
-            this.preventHiding = true;
             event.preventDefault();
             event.stopPropagation();
         }.bind(this));
