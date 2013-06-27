@@ -343,7 +343,7 @@ module.exports = function (grunt) {
                     template: 'res/docTemplate/'
                 }
             }
-        }, // jsdoc
+        } // jsdoc
 
     }); // end init config
 
