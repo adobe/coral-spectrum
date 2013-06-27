@@ -57,6 +57,14 @@
         padding: 0.4375rem 0.4375rem 0.4375rem 0.4375rem;
         height: @dropdown-text-size+0.4375rem*2+@px*2;
 
+        // The button text placeholder, used for handling text overflow - with ellipsis.
+        span {
+            display: block;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
         &:disabled {
             cursor: default;
             border-color: @button-disabled-border-color;
@@ -65,7 +73,7 @@
             background: @button-disabled-background-color;
         }
 
-        &:after {
+        &:before {
             content: "";
             float: right;
             display: inline;

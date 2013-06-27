@@ -307,6 +307,11 @@
         this.inputElement = this.$element.find("input");
         this.positioningElement = (this.options.editable) ? this.$element : this.buttonElement;
         
+        // Build the button text placeholder. Used for managing text overflow
+        if(!this.options.editable) {
+            this.buttonText = $(this.buttonElement).wrapInner("<span />").find("span");
+        }
+
         if (!this.inputElement.attr("name")) this.inputElement.attr("name", this.syncSelectElement.attr("name") + ".edit");
         if (this.syncSelectElement.attr("multiple")) this.options.multiple = true;
         
@@ -328,7 +333,11 @@
             this.syncSelectElement.removeAttr("multiple", "multiple");
         }
         if (this.options.placeholder) {
-            this.buttonElement.text(this.options.placeholder);
+            if(!this.options.editable) {
+                this.buttonText.text(this.options.placeholder);
+            } else {
+                this.buttonElement.text(this.options.placeholder);
+            }
             this.inputElement.attr("placeholder", this.options.placeholder);
         }
 
@@ -381,7 +390,7 @@
                     if (this.inputElement.length > 0) {
                         this.inputElement.val(text).trigger('change');
                     } else {
-                        this.buttonElement.html(html);
+                        this.buttonText.html(html);
                     }
                 }
             }
