@@ -141,18 +141,24 @@ module.exports = function(grunt) {
       },
       less_icons_base: {
         files: [
-          {
+          { // less
             expand: true,
             filter: 'isFile',
             cwd: '<%= dirs.modules %>/coralui-contrib-icons-base/build/less/',
             src: ['**.less'],
             dest: '<%= dirs.build %>/less/shared/'
           },
-          {
+          { // font files
             expand: true,
             cwd: '<%= dirs.modules %>/coralui-contrib-icons-base/build/res/',
             src: ['**'],
             dest: '<%= dirs.build %>/res/'
+          },
+          { // icon-browser
+            expand: true,
+            cwd: '<%= dirs.modules %>/coralui-contrib-icons-base/build/examples/',
+            src: ['icon-browser.html'],
+            dest: '<%= dirs.build %>/examples/'
           }
         ]
       },
