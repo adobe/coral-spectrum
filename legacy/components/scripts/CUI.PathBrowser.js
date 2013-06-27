@@ -37,6 +37,8 @@
          @param {String}   [options.name=null]                        (Optional) name for an underlying form field.
          @param {Function} [options.autocompleteCallback=use options] Callback for autocompletion
          @param {Function} [options.optionRenderer=default renderer]  (Optional) Renderer for the autocompleter and the tag badges
+         @param {String}   [options.position="below"]                 Where to position the dropdown list. "above" or "below"
+         @param {boolean}  [options.autoPosition=true]                Should the dropdown auto position itself if there's not enough space for the default position in the window?
          */
         construct: function(options) {
             // Set callback to default if there is none
@@ -59,6 +61,8 @@
             this.dropdownList = new CUI.DropdownList({
                 element: this.inputElement,
                 positioningElement: this.inputElement,
+                position: this.options.position,
+                autoPosition: this.options.autoPosition,
                 cssClass: "autocomplete-results"
             });
 
@@ -143,7 +147,9 @@
             rootPath: "/content",
             delay: 200,
             placeholder: null,
-            optionRenderer: null
+            optionRenderer: null,
+            position: "below",
+            autoPosition: true
         },
 
         dropdownList: null, // Reference to instance of CUI.DropdownList

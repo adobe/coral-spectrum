@@ -104,6 +104,8 @@ var index = filters.getSelectedIndex();
       @param {boolean}  [options.infiniteLoad=false]               Should extra content be loaded dynamically when the list is scrolled to bottom?
       @param {boolean}  [options.maxLoadingItems=20]               Maximum number of items to load per request on infinite list loading.
       @param {boolean}  [options.hasError=false]                   Set to true to display widget as erroneous, regardless if widgets detects an error or not
+      @param {String}   [options.position="below"]                 Where to position the dropdown list. "above" or "below"
+      @param {boolean}  [options.autoPosition=true]                Should the dropdown auto position itself if there's not enough space for the default position in the window?
           */
     construct: function(options) {
         this.selectedIndices = []; // Initialise fresh array
@@ -138,6 +140,8 @@ var index = filters.getSelectedIndex();
         this.dropdownList = new CUI.DropdownList({
             element: this.inputElement,
             positioningElement: (this.options.stacking) ? this.$element : this.inputElement,
+            position: this.options.position,
+            autoPosition: this.options.autoPosition,
             cssClass: "autocomplete-results"
         });
         
@@ -160,7 +164,9 @@ var index = filters.getSelectedIndex();
         iconSize: "small",
         infiniteLoad: false,
         maxLoadingItems: 20,
-        hasError: false
+        hasError: false,
+        position: "below",
+        autoPosition: true
     },
 
     dropdownList: null, // Reference to instance of CUI.DropdownList
