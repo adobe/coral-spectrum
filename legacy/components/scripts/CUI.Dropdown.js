@@ -52,7 +52,8 @@
       @param {boolean} [options.hasError=false]      Does this widget contain an error?
       @param {boolean} [options.noWidth=false]      Don't set dropdown list width?
       @param {Function} [options.autocompleteCallback=use options]      Callback for autocompletion: callback(handler, searchFor) with handler is a result callback function with handler(results, searchFor). See example page.
-      
+      @param {String}   [options.position="below"]      Where to position the dropdown list. "above" or "below"
+      @param {boolean}  [options.autoPosition=true]      Should the dropdown auto position itself if there's not enough space for the default position in the window?
     */
     construct: function(options) {
 
@@ -85,7 +86,9 @@
         disabled: false,
         editable: false,
         hasError: false,
-        noWidth: false
+        noWidth: false,
+        position: "below",
+        autoPosition: true
     },
     
     dropdownList: null,
@@ -115,6 +118,8 @@
         this.dropdownList = new CUI.DropdownList({
             element: this.buttonElement,
             positioningElement: this.positioningElement,
+            position: this.options.position,
+            autoPosition: this.options.autoPosition,
             options: this.options.options,
             optionRenderer: this._optionRenderer.bind(this),
             noWidth: this.options.noWidth
@@ -124,6 +129,8 @@
             this.autocompleteList = new CUI.DropdownList({
                 element: this.inputElement,
                 positioningElement: this.positioningElement,
+                position: this.options.position,
+                autoPosition: this.options.autoPosition,
                 options: this.options.options,
                 optionRenderer: this._optionRendererAutocomplete.bind(this),
                 noWidth: this.options.noWidth,

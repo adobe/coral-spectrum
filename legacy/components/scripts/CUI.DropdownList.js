@@ -26,6 +26,8 @@
       @param {int}      [options.scrollBuffer]      Distance from bottom of list (px) before scrolled bottom event is fired. Use with infinite loading.
       @param {String}   [options.loadingIndicator]  HTML markup to show when loading in new content.
       @param {String}   [options.noMoreOptions]     Text to show when there are no more options to load.
+      @param {String}   [options.position="below"]      Where to position the dropdown list. "above" or "below"
+      @param {boolean}  [options.autoPosition=true]      Should the dropdown auto position itself if there's not enough space for the default position in the window?
     */
     construct: function(options) {
 
@@ -59,6 +61,8 @@
     
     defaults: {
         positioningElement: null,
+        position: "below",
+        autoPosition: true,
         optionRenderer: null,
         options: ["Apples", "Pears", "Bananas", "Strawberries"],
         cssClass: null,
@@ -226,7 +230,9 @@
 
     /** @ignore */    
     _render: function() {
-        var options = this.options.options;
+        var options = this.options.options,
+            pos;
+
         if (options.length === 0) return;
                
         var list = $("<ul></ul>");
@@ -244,27 +250,25 @@
             event.preventDefault();
             this._triggerSelect($(event.target).closest("li").attr("data-id"));
         }.bind(this));
-        
-        // Calculate correct position and size on screen
-        var el = (this.options.positioningElement) ? this.options.positioningElement : this.$element;
-        var left = el.position().left + parseFloat(el.css("margin-left"));
-        var top = el.position().top + el.outerHeight(true) - parseFloat(el.css("margin-bottom"));
 
-        var width = el.outerWidth(false);
+        var el = (this.options.positioningElement) ? this.options.positioningElement : this.$element;
+
         var container = $("<div class=\"dropdown-list\">");
         container.append(list);
-        list = container;
 
-        var cssProps = {
-            position: "absolute",
-            "z-index": "2000",
-            left: left + "px",
-            top: top + "px"
-        };
+        this.listElement = list = container;
+
+        // Append the list to body and hide it, allows us to calculate its natural height
+        list.css({top: 0, left: 0, visibility: "hidden", display: "block"}).appendTo(document.body);
+
         if (!this.options.noWidth) {
-            cssProps["width"] = width + "px";
+            list.css('width', el.outerWidth(false) + "px");
         }
-        list.css(cssProps);
+
+        pos = this._calcPosition();
+
+        list.css({top: pos.top + "px", left: pos.left + "px", visibility: "visible"});
+
         this.containerElement.addClass("dropdown-visible");
 
         list.on("scroll", "", function(event) {
@@ -277,12 +281,35 @@
             event.stopPropagation();
         }.bind(this));
 
-        el.after(list);
-        this.listElement = list;
-
         this.options.visible = true;
-
     },
+
+      /** @ignore **/
+      _calcPosition: function() {
+          var el = (this.options.positioningElement) ? this.options.positioningElement : this.$element,
+              topb = el.offset().top + el.outerHeight(),
+              topa = el.offset().top - this.listElement.outerHeight(),
+              pos = {
+                  left: el.offset().left,
+                  top: topb
+              },
+              spaceWinBelow = topb + this.listElement.outerHeight() - $(window).scrollTop() < $(window).height(),
+              spaceWinAbove = topa > $(window).scrollTop(),
+              spaceDocBelow = topb + this.listElement.outerHeight() < $(document).height(),
+              spaceDocAbove = topa > 0;
+
+          pos['top'] = (this.options.position === "above") ? topa : topb;
+
+          if(this.options.autoPosition) {
+              if (this.options.position === "above" && !spaceWinAbove) {
+                  pos['top'] = (spaceWinBelow || (!spaceDocAbove && spaceDocBelow)) ? topb : topa;
+              } else if (this.options.position === "below" && !spaceWinBelow) {
+                  pos['top'] = (spaceWinAbove || (!spaceDocBelow && spaceDocAbove)) ? topa : topb;
+              }
+          }
+
+          return pos;
+      },
 
     /** @ignore **/
     _listScrolled: function() {
