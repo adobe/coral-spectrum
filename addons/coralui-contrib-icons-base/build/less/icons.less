@@ -1,0 +1,305 @@
+// Various mixins
+.icon() {
+  display: inline-block;
+  
+  // Use ems by default so we depend on font size of parent element
+  width: 1em + 2*@px;
+  height: 1em + 2*@px;
+  line-height: 1;
+  font-size: 1em;
+  text-align: center; // Center icons in the extra padded space
+  
+  vertical-align: text-top; // Make adjacent text line up correctly when using inline-block
+  
+  &:before {
+    font-family: AdobeIcons;
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    text-decoration: none; // Don't let icons underline
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.172; //line-height: 1.385; // The truth, the way. Don't question it.
+
+    color: @icon-color;
+    opacity: @icon-opacity;
+
+    // Position SVG backgrounds
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    text-align: center;
+
+    content: " ";
+    
+    // Accessibility: do we need speak: none here?
+    speak: none; // don't try to speak the icon characters
+  }
+  
+  // Forced colors
+  &.black:before {
+    color: @icon-color !important;
+    opacity: @icon-opacity !important;
+  }
+  
+  &.white {
+    &.withLabel, &:before {
+      color: @icon-white-color !important;
+    }
+    
+    &:before {
+      opacity: @icon-white-opacity !important;
+    }
+  }
+  
+  &.blue:before {
+    color: @icon-blue-color !important;
+    opacity: @icon-blue-opacity !important;
+  }
+
+  // Disabled states
+  &.disabled,
+  &[disabled] {
+    &:before,
+    &:hover:before {
+      color: @icon-disabled-color;
+      opacity: @icon-disabled-opacity;
+    }
+  }
+
+  &.active {
+    &:before,
+    &:hover:before {
+      color: @icon-blue-color;
+      opacity: @icon-blue-opacity;
+    }
+  }
+}
+
+.icon-size(@size) {
+  line-height: 1.2;
+  font-size: @size;
+
+  // If we don't apply to both the container and the :before, we get inconsistent heights
+  // For instance, xsmall icons end up 14x13 in Chrome
+  min-width: @size + 2*@px;
+  min-height: @size + 2*@px;
+
+  &:before {
+    width: @size + 2*@px;
+    height: @size + 2*@px;
+    
+    .background-size(@size);
+  }
+}
+
+.icon-xsmall() {
+  .icon-size(@icon-xsmall-size);
+}
+.icon-small() {
+  .icon-size(@icon-small-size);
+}
+.icon-medium() {
+  .icon-size(@icon-medium-size);
+}
+.icon-large() {
+  .icon-size(@icon-large-size);
+}
+
+.hide-inner-text() {
+  // Method 1: Hidden text, overflow hidden
+  overflow: hidden;
+  color: transparent;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+  // Hide inner text by default
+  .hide-inner-text;
+  
+  // Put up here so white/blue can override
+  &.withLabel {
+    color: inherit;
+  }
+  
+  // Icon basics
+  .icon;
+  
+  &.xsmall {
+    .icon-xsmall;
+  }
+
+  &.small {
+    .icon-small;
+  }
+
+  &.medium {
+    .icon-medium;
+  }
+
+  &.large {
+    .icon-large;
+  }
+  
+  &.withLabel {
+    width: auto;
+    
+    white-space: inherit;
+    overflow: visible;
+    
+    // color: inherit; // defined up above
+    
+    &.xsmall {
+      &:before {
+        margin-right: @icon-xsmall-size * @icon-label-padding-multiplier;
+      }
+    }
+    &.small {
+      &:before {
+        margin-right: @icon-small-size * @icon-label-padding-multiplier;
+      }
+    }
+    &,
+    &.medium {
+      &:before {
+        margin-right: @icon-medium-size * @icon-label-padding-multiplier;
+      }
+    }
+    &.large {
+      &:before {
+        margin-right: @icon-large-size * @icon-label-padding-multiplier;
+      }
+    }
+  }
+}
+
+// Illustrative icons
+i[class^="icon-"],
+i[class*=" icon-"] {
+  font-style: normal;
+}
+
+
+button,
+.button {
+  // Icons as buttons
+  &[class^="icon-"],
+  &[class*=" icon-"] {
+    margin: 0;
+    padding: 0;
+
+    font-size: inherit;
+  
+    min-width: 0;
+
+    &.disabled,
+    &[disabled],
+    &.disabled:before,
+    &[disabled]:before {
+      background-color: transparent;
+    }
+
+    .disabled:hover,
+    &[disabled]:hover {
+      background-color: transparent;
+    }
+
+    &,
+    &:hover {
+      box-shadow: none;
+    }
+  
+    &,
+    &:hover,
+    &:active {
+      border: none;
+
+      background-color: transparent;
+      background-image: none;
+    
+      text-shadow: none;
+      font-weight: normal;
+    
+      filter: none;
+      box-shadow: none;
+    }
+  }
+  
+  // Icons in buttons
+  i[class^="icon-"],
+  i[class*=" icon-"] {
+    .icon-small;
+    
+    margin-right: 0.25rem; // A little padding between the icon and text
+    
+    // For 18px icons, Don't push the button to a taller height
+    // Works in all browsers except Firefox/Safari OS X, 1px too far down
+    position: relative;
+    top: -2.25*@px;
+    margin-bottom: -5*@px;
+
+    vertical-align: middle;
+
+    overflow: visible; // Fixes clipping of text shadow, only for use in buttons which will have <i> tags with NO inner text
+
+    &:before {
+      color: @icon-white-color;
+      opacity: @icon-white-inbutton-opacity;
+    }
+  }
+}
+
+
+
+// Clickable icons
+a,
+button,
+.button {
+  &[class^="icon-"],
+  &[class*=" icon-"] {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+    // States
+    &:hover {
+      &:before {
+        color: @icon-hover-color;
+        opacity: @icon-hover-opacity;
+      }
+    }
+
+    &:active {
+      &:before {
+        color: @icon-active-color;
+        opacity: @icon-active-opacity;
+      }
+    }
+
+    &:focus {
+      //.no-glow();
+
+      &:before {
+        color: @icon-active-color;
+        opacity: @icon-active-opacity;
+      }
+    }
+    
+    // White icons
+    &.white {
+      &:hover, &:hover:before {
+        color: @icon-white-hover-color;
+      }
+
+      &:hover:before {
+        opacity: @icon-white-hover-opacity;
+      }
+
+      &:active, &:active:before {
+        color: @icon-blue-color;
+      }
+
+      &:active:before {
+       opacity: @icon-blue-opacity;
+      }
+    }
+  }
+}

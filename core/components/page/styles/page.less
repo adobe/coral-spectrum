@@ -1,0 +1,76 @@
+/**
+  Class: .page
+  Used for the main page layout for content and rail
+*/
+.page {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow-y: hidden;
+
+  .rail {
+    width: 15.5rem;
+    float: left;
+  }
+
+  .content {
+    position: relative;
+    height: 100%;
+    .scrollable;
+
+    // Stick toolbars to the top
+    .content-header {
+       position: absolute;
+       top: 0;
+       left: 0;
+       right: 0;
+       z-index: 5;
+    }
+    
+    // Have a scrolling area below toolbar
+    .content-container {
+       position: absolute;
+       top: 47*@px;
+       left: 0;
+       right: 0;
+       bottom: 0;
+       .scrollable
+    }
+    .content-header.break-lines ~ .content-container {
+      top: 94*@px;
+    }
+
+
+    footer {
+      background-color: @body-background-color;
+      margin-top: @footer-height;
+      border-top: 1px solid @footer-border-color;
+      padding: 0 16*@px;
+
+      &,
+      >span,
+      >a {
+        color: @footer-font-color;
+        height: @footer-height;
+        line-height: @footer-height;
+        font-size: 0.75rem;
+      }
+
+      >a {
+        padding-right: 30px;
+      }
+
+      >.right {
+        float: right;
+      }
+    }
+        
+  }
+}
+
+/* if there is a header the page is placed under the header */
+header.top + .page {
+  top: @header-height;
+}

@@ -138,13 +138,6 @@ else
   exit 1
 fi
 
-# install core build stuff as well
-cd core
-echo ""
-echo "Preparing Coral core"
-./install.sh
-cd -
-
 gruntVersion="grunt --version"
 echo ""
 echo "$ $gruntVersion"

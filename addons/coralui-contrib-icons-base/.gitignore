@@ -1,9 +1,6 @@
 .DS_Store
-/build
 /temp
 /node_modules
-/misc
-/target
 .idea/
 atlassian-ide-plugin.xml
 *.iml

@@ -1,813 +1,383 @@
 /*global module:false*/
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
-  /**
-   JavaScript file include order
-   Add new components to this array _after_ the components they inherit from
-  */
-  var includeOrder = {
-    "cui-templates": [
-      '{build}/CUI.Templates.js'
-    ],
-    "cui": [
-      // Class system
-      'Class.js',
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
-      // Namespace
-      'CUI.js',
+    grunt.loadNpmTasks('grunt-mocha');
+    grunt.loadNpmTasks('grunt-jsdoc');
 
-      // Utilities
-      'CUI.Util.js',
+    grunt.loadTasks('tasks/core');
 
-      // Touch
-      'CUI.Util.isTouch.js',
+    /**
+    JavaScript file include order
+    Add new components to this array _after_ the components they inherit from
+    */
+    var includeOrder = {
+            "cui": [
+        // Coral core
+        'cui-core.js',
 
-      // jQuery extensions
-      'CUI.jQuery.js',
-
-      // Persistence
-      'CUI.Util.state.js',
+        // Persistence
+        'CUI.Util.state.js',
 
 
-      // Components
-      'components/CUI.Widget.js',
-      'components/CUI.Modal.js',
-      'components/CUI.Tabs.js',
-      'components/CUI.Alert.js',
-      'components/CUI.Rail.js',
-      'components/CUI.Popover.js',
-      'components/CUI.DropdownList.js',
-      'components/CUI.Dropdown.js',
-      'components/CUI.Filters.js',
-      'components/CUI.Slider.js',
-      'components/CUI.LabeledSlider.js',
-      'components/CUI.Datepicker.js',
-      'components/CUI.Pulldown.js',
-      'components/CUI.Sticky.js',
-      'components/CUI.CardView.js',
-      'components/CUI.PathBrowser.js',
-      'components/CUI.Wizard.js',
-      'components/CUI.FlexWizard.js',
-      'components/CUI.FileUpload.js',
-      'components/CUI.Toolbar.js',
-      'components/CUI.Tooltip.js',
-      'components/CUI.DraggableList.js',
-      'components/CUI.CharacterCount.js',
-      'components/CUI.Accordion.js',
-      'components/CUI.Tour.js',
-      'components/CUI.Autocomplete.js',
-      'components/CUI.CycleButtons.js',
+        // Components
+        'components/CUI.Modal.js',
+        'components/CUI.Tabs.js',
+        'components/CUI.Alert.js',
+        'components/CUI.Popover.js',
+        'components/CUI.DropdownList.js',
+        'components/CUI.Dropdown.js',
+        'components/CUI.Filters.js',
+        'components/CUI.Slider.js',
+        'components/CUI.LabeledSlider.js',
+        'components/CUI.Datepicker.js',
+        'components/CUI.Pulldown.js',
+        'components/CUI.Sticky.js',
+        'components/CUI.CardView.js',
+        'components/CUI.PathBrowser.js',
+        'components/CUI.Wizard.js',
+        'components/CUI.FlexWizard.js',
+        'components/CUI.FileUpload.js',
+        'components/CUI.Toolbar.js',
+        'components/CUI.Tooltip.js',
+        'components/CUI.DraggableList.js',
+        'components/CUI.CharacterCount.js',
+        'components/CUI.Accordion.js',
+        'components/CUI.Tour.js',
+        'components/CUI.Autocomplete.js',
 
-      // Validations
-      'validations.js',
+        // Validations
+        'validations.js',
 
-      'accessibility.js'
-    ],
-    "cui-rte": [
-      'components/rte/Theme.js',
-      'components/rte/UIUtils.js',
-      'components/rte/ConfigUtils.js',
-      'components/rte/plugins/ControlPlugin.js',
-      'components/rte/ui/ToolkitImpl.js',
-      'components/rte/ui/ToolbarImpl.js',
-      'components/rte/ui/PopoverManager.js',
-      'components/rte/ui/ElementImpl.js',
-      'components/rte/ui/ParaFormatterImpl.js',
-      'components/rte/ui/StyleSelectorImpl.js',
-      'components/rte/ui/CuiToolbarBuilder.js',
-      'components/rte/ui/CmItemImpl.js',
-      'components/rte/ui/CmSeparatorImpl.js',
-      'components/rte/ui/CuiContextMenuBuilder.js',
-      'components/rte/ui/dialogs/Mask.js',
-      'components/rte/ui/dialogs/AbstractDialog.js',
-      'components/rte/ui/dialogs/LinkBaseDialog.js',
-      'components/rte/ui/CuiDialogManager.js',
-      'components/rte/ui/CuiDialogHelper.js',
+        'accessibility.js'
+        ]
+    };
 
-      'components/CUI.RichText.js',
+    /**
+     * Build directories
+     * Any directories used by the build should be defined here
+     */
+    var dirs = {
+        build: 'build',
+        components: 'components',
+        source: 'source',
+        legacy: 'legacy',
+        temp: 'temp',
+        modules: 'node_modules',
+        externals: 'externals',
+        core: {
+            grunt: 'core/',
+            build: 'core/build'
+        }
+    };
 
-      'components/rte/init.js'
-    ]
-  };
+    var packages = {
+        "cui": ["cui"]
+    };
 
-  var packages = {
-    "cui": [ "cui-templates", "cui" ],
-    "cui-rte": [ "cui-rte" ]
-  };
 
-  /**
-    Build directories
-    Any directories used by the build should be defined here
-  */
-  var dirs = {
-    build: 'build',
-    source: 'source',
-    temp: 'temp',
-    bower: 'externals/components',
-    modules: 'node_modules',
-    rte: "rte"
-  };
-
-  /**
+    /**
     Get array of CUI includes in the correct order
 
     @param pkg      The package to build
     @param jsPath   Base path to prepend to each include
-  */
-  function getIncludes(pkg, jsPath) {
-    var includes = [ ];
-    var def = packages[pkg];
-    def.forEach(function(_set) {
-      includeOrder[_set].forEach(function(_file) {
-        var pref = "{build}";
-        var prefLen = pref.length;
-        if ((_file.length >= prefLen) && (_file.substring(0, prefLen) === pref)) {
-          includes.push(dirs.build + "/js/" + _file.substring(prefLen + 1));
-        }
-        includes.push(jsPath + _file);
-      });
-    });
-    return includes;
-  }
-
-  // External tasks
-  grunt.loadTasks('tasks/core');
-  grunt.loadTasks('tasks/shared');
-
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-compress');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-handlebars');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-less');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  //  grunt.loadNpmTasks('grunt-jsdoc');
-  grunt.loadNpmTasks('grunt-mocha-phantomjs');
-  //  grunt.loadNpmTasks('grunt-hub');
-  grunt.loadNpmTasks('grunt-zip');
-  grunt.loadNpmTasks('grunt-curl');
-
-
-  // Read in package.json
-  var pkg = grunt.file.readJSON('package.json');
-
-  // Meta and build configuration
-  var meta = {
-      version: pkg.version,
-      appName: pkg.name,
-      appWebSite: pkg.repository.url
-  };
-
-  grunt.initConfig({
-
-    dirs: dirs,
-    meta: meta,
-
-    // Configuration
-    jshint: {
-      options: {
-        eqeqeq: true,
-        immed: true,
-        latedef: true,
-        newcap: true,
-        noarg: true,
-        sub: true,
-        undef: true,
-        boss: true,
-        eqnull: true,
-        browser: true,
-        smarttabs: true,
-        predef: [
-          '$',            // jQuery
-          'jQuery',       // jQuery
-          'console',      // console.log...
-          'Backbone',     // Backbone
-          'Handlebars',   // Handlebars
-          'prettyPrint',  // google-code-prettify
-          'CUI',          // CoralUI
-          'Class',        // Class
-          'moment'        // Moment.js
-        ]
-      },
-      globals: {}
-    },
-
-    // Task definitions
-    clean: {
-      build: '<%= dirs.build %>',
-      jsdoc: '<%= dirs.build %>/jsdoc',
-      temp: '<%= dirs.temp %>',
-      tests: [
-        '<%= dirs.build %>/test/*.js',
-        '<%= dirs.build %>/test/*.html'
-      ]
-    },
-
-    copy: {
-      guide: {
-        files: [
-          {
-            expand: true,
-            cwd: '<%= dirs.source %>/guide/',
-            src: ['**'],
-            dest: '<%= dirs.build %>/'
-          }
-        ]
-      },
-      images: {
-        files: [
-          {
-            expand: true,
-            cwd: '<%= dirs.source %>/images/',
-            src: ['**'],
-            dest: '<%= dirs.build %>/images'
-          }
-        ]
-      },
-      fonts: {
-        files: [
-          {
-            expand: true,
-            cwd: '<%= dirs.source %>/fonts/',
-            src: ['**'],
-            dest: '<%= dirs.build %>/fonts/'
-          }
-        ]
-      },
-      less_bootstrap_tmp: {
-        files: [
-          {
-            expand: true,
-            filter: 'isFile',
-            cwd: '<%= dirs.bower %>/bootstrap/less/',
-            src: ['*'],
-            dest: '<%= dirs.temp %>/less/bootstrap/'
-          }
-        ]
-      },
-      less_bootstrap_build: {
-        files: [
-          {
-            expand: true,
-            filter: 'isFile',
-            cwd: '<%= dirs.bower %>/bootstrap/less/',
-            src: ['*'],
-            dest: '<%= dirs.build %>/less/bootstrap/'
-          }
-        ]
-      },
-      less_cui: {
-        files: [
-          {
-            expand: true,
-            cwd: '<%= dirs.source %>/less/',
-            src: ['**'],
-            dest: '<%= dirs.build %>/less/'
-          }
-        ]
-      },
-      libs: {
-        files: [
-          {
-            src: ['<%= dirs.bower %>/jquery/index.js'],
-            dest: '<%= dirs.build %>/js/libs/jquery.js'
-          },
-          {
-            src: ['<%= dirs.bower %>/handlebars/index.js'],
-            dest: '<%= dirs.build %>/js/libs/handlebars.js'
-          },
-          {
-            src: ['<%= dirs.bower %>/handlebars-full/index.js'],
-            dest: '<%= dirs.build %>/js/libs/handlebars.full.js'
-          }
-        ]
-      },
-      dependencies: {
-        files: [
-          {
-            expand: true,
-            cwd: '<%= dirs.source %>/js/plugins/',
-            src: [
-              'toe.js',
-              'jquery-fingerpointer.js',
-              'jquery-reflow.js',
-              'jquery-gridlayout.js',
-              'jquery-scrollable.js',
-              'moment.js',
-              'jquery-cookie.js',
-              'jquery-validator.js',
-              'jquery-message.js'
-            ],
-            dest: '<%= dirs.build %>/js/libs/'
-          }
-        ]
-      },
-      rte: {
-        files: [
-          {
-            src: ['<%= dirs.rte %>/build/js/rte-core-jquery.js'],
-            dest: '<%= dirs.build %>/js/libs/rte-core-jquery.js'
-          }
-        ]
-      },
-      prettyify: {
-        files: [
-          {
-            expand: true,
-            cwd: '<%= dirs.bower %>/bootstrap/docs/assets/js/google-code-prettify/',
-            src: ['*'],
-            dest: '<%= dirs.build %>/js/google-code-prettify/'
-          }
-        ]
-      },
-      tests: {
-        files: [
-          {
-            expand: true,
-            cwd: '<%= dirs.source %>/',
-            src: ['test/**'],
-            dest: '<%= dirs.build %>/'
-          }
-        ]
-      },
-      test_libs: {
-        files: [
-          {
-            expand: true,
-            cwd: '<%= dirs.modules %>/',
-            src: [
-              'chai/chai.js',
-              'chai-jquery/chai-jquery.js',
-              'mocha/mocha.js',
-              'mocha/mocha.css'
-            ],
-            dest: '<%= dirs.build %>/test/libs/'
-          },
-          {
-            expand: true,
-            cwd: '<%= dirs.modules %>/sinon/lib/',
-            src: ['**'],
-            dest: '<%= dirs.build %>/test/libs/sinon/'
-          },
-          {
-            expand: true,
-            cwd: '<%= dirs.modules %>/sinon-chai/lib/',
-            src: ['sinon-chai.js'],
-            dest: '<%= dirs.build %>/test/libs/sinon-chai/'
-          }
-        ]
-      }
-    },
-
-    cssmin: {
-      main: {
-        files: {
-          '<%= dirs.build %>/css/cui.min.css': '<%= dirs.build %>/css/cui.css',
-          '<%= dirs.build %>/css/cui-wrapped.min.css': '<%= dirs.build %>/css/cui-wrapped.css'
-        }
-      }
-    },
-
-    handlebars: {
-      compile: {
-        options: {
-          wrapped: true,
-          namespace: 'CUI.Templates',
-          processName: function(path) {
-            // Pull the filename out as the template name
-            return path.split('/').pop().split('.').shift();
-          }
-        },
-        files: {
-          '<%= dirs.build %>/js/CUI.Templates.js': '<%= dirs.source %>/templates/cui/*'
-        }
-      },
-      "rte": {
-        options: {
-          wrapped: true,
-          namespace: 'CUI.rte.Templates',
-          processName: function(path) {
-            // Pull the filename out as the template name
-            return path.split('/').pop().split('.').shift();
-          }
-        },
-        files: {
-          '<%= dirs.build %>/js/cui-rte.templates.js': '<%= dirs.source %>/templates/rte/*'
-        }
-      }
-    },
-
-    compress: {
-      release: {
-        options: {
-          archive: '<%= dirs.build %>/cui-<%= meta.version %>.zip'
-        },
-        files: [
-            {src: ['<%= dirs.build %>/css/**']},
-            {src: ['<%= dirs.build %>/fonts/**']},
-            {src: ['<%= dirs.build %>/images/**']},
-            {src: ['<%= dirs.build %>/js/**']},
-            {src: ['<%= dirs.build %>/less/**']}
-        ]
-      },
-      full: {
-        options: {
-          archive: '<%= dirs.build %>/cui-<%= meta.version %>-full.zip'
-        },
-        files: [
-            {src: ['<%= dirs.build %>/css/**']},
-            {src: ['<%= dirs.build %>/examples/**']},
-            {src: ['<%= dirs.build %>/fonts/**']},
-            {src: ['<%= dirs.build %>/images/**']},
-            {src: ['<%= dirs.build %>/js/**']},
-            {src: ['<%= dirs.build %>/jsdoc/**']},
-            {src: ['<%= dirs.build %>/less/**']},
-            {src: ['<%= dirs.build %>/test/**']},
-            {src: ['<%= dirs.build %>/index.html']}
-        ]
-      }
-    },
-
-    'jsdoc-build': {
-      cui: {
-        options: {
-          template: '<%= dirs.source %>/docTemplate',
-          destination: '<%= dirs.build %>/jsdoc'
-        },
-        src: [
-          '<%= dirs.source %>/js/*.js',
-          '<%= dirs.source %>/js/components/**',
-          '<%= dirs.source %>/js/plugins/**'
-        ]
-      }
-    },
-
-    lint: {
-      files: [
-        'Gruntfile.js',
-        '<%= dirs.source %>/js/*.js',
-        '<%= dirs.source %>/js/components/*', // exclude RTE for now ...
-        '<%= dirs.source %>/js/plugins/**',
-        '<%= dirs.source %>/guide/js/*'
-      ]
-    },
-
-    concat: {
-      cui: {
-        src: getIncludes("cui", dirs.source+'/js/'),
-        dest: '<%= dirs.build %>/js/CUI.js'
-      },
-      cui_cc: {
-        src: getIncludes("cui", dirs.temp+'/js_instrumented/'),
-        dest: '<%= dirs.temp %>/js_instrumented/CUI_cc.js'
-      },
-      cui_rte: {
-        src: getIncludes("cui-rte", dirs.source+'/js/'),
-        dest: '<%= dirs.build %>/js/cui-rte.js'
-      }
-    },
-
-    /*
-    hub: {
-      rte: {
-        src: [ '<%= dirs.rte%>/Gruntfile.js'],
-        tasks: [ 'full' ]
-      }
-    },
     */
-    subgrunt: {
-      rte: {
-        subdir: './rte/',
-        args: ['full']
-      }
-    },
-
-    uglify: {
-      // TBD: minify individual JS files?
-      cui: {
-        files: {
-          // TODO: make it work with reading the configuration option
-          '<%= dirs.build %>/js/CUI.min.js': ['<%= dirs.build %>/js/CUI.js']
-        }
-      },
-      cui_rte: {
-        files: {
-          // TODO: make it work with reading the configuration option
-          '<%= dirs.build %>/js/cui-rte.min.js': ['<%= dirs.build %>/js/cui-rte.js']
-        }
-      }
-    },
-
-    less: {
-      "cui-wrapped": {
-        options: {
-          paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
-            dirs.build+'/less/',
-            dirs.temp+'/less/'
-          ]
-        },
-        files: {
-          '<%= dirs.build %>/css/cui-wrapped.css': '<%= dirs.source %>/less/cui-wrapped.less'
-        }
-      },
-      "cui": {
-        options: {
-          paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
-            dirs.build+'/less/',
-            dirs.temp+'/less/'
-          ]
-        },
-        files: {
-          '<%= dirs.build %>/css/cui.css': '<%= dirs.source %>/less/cui.less'
-        }
-      },
-      "cui-rte": {
-        options: {
-          paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
-            dirs.build+'/less/optional/rte/',
-            dirs.temp+'/less/'
-          ]
-        },
-        files: {
-          '<%= dirs.build %>/css/cui-rte.css': '<%= dirs.source %>/less/optional/rte/wrapper.less'
-        }
-      },
-      "guide": {
-        options: {
-          paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
-            dirs.source+'/less/', // must hardcode paths here, grunt-contrib-less doesn't support template tags
-            dirs.temp+'/less/' // must hardcode paths here, grunt-contrib-less doesn't support template tags
-          ]
-        },
-        files: {
-          '<%= dirs.build %>/css/guide.css': '<%= dirs.source %>/guide/less/guide.less'
-        }
-      },
-      "wizard": {
-        options: {
-          paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
-            dirs.source+'/less/', // must hardcode paths here, grunt-contrib-less doesn't support template tags
-            dirs.temp+'/less/' // must hardcode paths here, grunt-contrib-less doesn't support template tags
-          ]
-        },
-        files: {
-          '<%= dirs.build %>/css/wizard.css': '<%= dirs.source %>/guide/less/wizard.less'
-        }
-      }
-    },
-
-    'mvn-goal': {
-      install: {
-        args: ['clean', 'install']
-      },
-      'content-package-install': {
-        args: ['content-package:install']
-      },
-      deploy: {
-        args: ['deploy']
-      }
-    },
-
-    mocha_phantomjs: {
-      cui: {
-        src: [
-          '<%= dirs.build %>/test/index.html'
-        ],
-        options: {
-          run: true
-        }
-      }
-    },
-
-    coverage: {},
-
-    font: {
-      options: {
-        src: '<%= dirs.source %>/images/icons/',
-        dest_css: '<%= dirs.source %>/less/base/',
-        dest_font: '<%= dirs.source %>/fonts/',
-        dest_css_name: 'icons_mono.less',
-        // Should write to build folder in the future: // dest_css_name: '<%= dirs.build %>/less/base/icons_mono.less',
-        dest_font_name: 'AdobeIcons',
-        prefix: 'icon-'
-      }
-    },
-
-    icons: {
-      all: {
-        src: [
-          '<%= dirs.source %>/images/icons_color/*.svg'
-        ],
-        dest: '<%= dirs.build %>/less/base/icons_color.less',
-        prefix: 'icon-'
-      }
-    },
-
-    iconbrowser: {
-      all: {
-        src: '<%= dirs.source %>/images/icons/**/*',
-        dest: '<%= dirs.build %>/examples/assets/iconbrowser.json'
-      }
-    },
-
-    // Watch operations
-    'watch-start': {
-      copy_guide: {
-        files: '<%= dirs.source %>/guide/**',
-        tasks: ['copy:guide']
-      },
-
-      lint_js: {
-        files: '<config:lint.files>',
-        tasks: ['lint']
-      },
-
-      concat_min_js: {
-        files: [
-          '<%= dirs.source %>/js/**'
-        ],
-        tasks: ['concat:cui', 'uglify:cui']
-      },
-
-      compile_less_min_css: {
-        files: '<%= dirs.source %>/less/**',
-        tasks: ['copy:less_cui', 'less:cui', 'cssmin']
-      },
-
-      compile_guide_less: {
-        files: '<%= dirs.source %>/guide/less/guide.less',
-        tasks: ['less:guide']
-      },
-      compile_wizard_less: {
-        files: '<%= dirs.source %>/guide/less/wizard.less',
-        tasks: ['less:wizard']
-      },
-
-      compile_handlebars: {
-        files: '<%= dirs.source %>/templates/*',
-        tasks: ['handlebars:compile', 'concat:cui', 'uglify:cui']
-      },
-
-      copy_tests: {
-        files: '<%= dirs.source %>/test/**',
-        tasks: ['clean:tests', 'copy:tests']
-      },
-
-      copy_plugins: {
-        files: '<%= dirs.source %>/js/plugins/**',
-        tasks: ["copy:libs"]
-      },
-
-      run_tests: {
-        files: [
-          '<%= dirs.source %>/js/**',
-          '<%= dirs.build %>/js/CUI.Templates.js',
-          '<%= dirs.source %>/test/**'
-        ],
-        tasks: ['mocha']
-      },
-
-      // Note that this is only a "stub" implementation for watching changes in RTE. To get
-      // the expected behavior, use the commented definition below (and see the notes there
-      // on how to handle errors)
-      rte: {
-        files: ['<%= dirs.rte %>/Gruntfile.js'],
-        tasks: ['subgrunt:rte', 'copy:rte']
-      }
-
-      /*
-
-      Full RTE watch implementation - but use with caution: due to OS-specific limits,
-      ulimit might need to be set explicitly before, otherwise NodeJS may choke.
-
-      ulimit -n 1000 worked for me
-
-      rte: {
-        files: ["<%= dirs.rte %>/Gruntfile.js", "<%= dirs.rte %>/<%= dirs.source %>/" + "**"],
-        tasks: 'subgrunt:rte copy:rte'
-      }
-      */
-
+    function getIncludes(pkg, jsPath) {
+        var includes = [ ];
+        var def = packages[pkg];
+        def.forEach(function(_set) {
+            includeOrder[_set].forEach(function(_file) {
+                var pref = "{build}";
+                var prefLen = pref.length;
+                if ((_file.length >= prefLen) && (_file.substring(0, prefLen) === pref)) {
+                    includes.push(dirs.build + "/js/" + _file.substring(prefLen + 1));
+                }
+                includes.push(jsPath + _file);
+            });
+        });
+        return includes;
     }
 
-  });
-  // end init config
+    var pkg = grunt.file.readJSON('package.json');
 
-  // Register "mocha" task so there is no need to update the rest of the mocha references
-  grunt.task.registerTask('mocha', [
-    'mocha_phantomjs:cui'
-  ]);
+    // Meta and build configuration
+    var meta = {
+        version: pkg.version,
+        appName: pkg.name,
+        appWebSite: pkg.repository.url
+    };
 
-  // Partial build for development
-  grunt.task.registerTask('partial', [
-    'jshint',
-    'font',
-    'copy',
-    'handlebars:compile',
-    'icons',
-    'iconbrowser',
-    'concat:cui',
-    'uglify:cui',
-    'less',
-    'cssmin',
-    'mocha'
-  ]);
 
-  // Build and copy RTE
-  grunt.task.registerTask("rte", [
-    'subgrunt:rte',
-    'copy:rte'
-  ]);
+    grunt.initConfig({
 
-  // Full build with docs and compressed file
-  grunt.task.registerTask('full-build', [
-    'jshint',
-    'rte',
-    'font',
-    'copy',
-    'icons',
-    'iconbrowser',
-    'handlebars',
-    'concat:cui',
-    'concat:cui_rte',
-    'uglify',
-    'less',
-    'cssmin',
-    'mocha',
-    'jsdoc'
-  ]);
+        dirs: dirs,
+        meta: meta,
+        outputFileName: "CUI",
 
-  // Full build with docs and compressed file
-  grunt.task.registerTask('full', [
-    'clean',
-    'full-build'
-  ]);
+        clean: {
+            build: '<%= dirs.build %>',
+            temp: '<%= dirs.temp %>'
+        }, // clean
 
-  // Release build
-  // TODO: add maven?
-  grunt.task.registerTask('release', [
-    'clean',
-    'full-build',
-    //'coverage',
-    'compress'
-  ]);
+        // Configuration
+        jshint: {
+            options: {
+                eqeqeq: true,
+                immed: true,
+                latedef: true,
+                newcap: true,
+                noarg: true,
+                sub: true,
+                undef: true,
+                boss: true,
+                eqnull: true,
+                browser: true,
+                smarttabs: true,
+                globals: {
+                    'jQuery': true,       // jQuery
+                    'console': true,      // console.log...
+                    'CUI': true,          // CoralUI
+                    'Class': true        // Class
+                }
+            },
+            retro: [
+                'Gruntfile.js',
+                '<%= dirs.temp %>/js/**.js',
+                '<%= dirs.temp %>/js/components/**.js'
+            ]
+        },
 
-  // Almost full build, just the stuff needed for Granite install
-  grunt.task.registerTask('mvn-build', [
-    'clean',
-    'jshint',
-    'copy:images',
-    'copy:fonts',
-    'copy:dependencies',
-    'copy:less_bootstrap_tmp',
-    'copy:less_bootstrap_build',
-    'copy:less_cui',
-    'font',
-    'icons',
-    'iconbrowser',
-    'handlebars',
-    'concat:cui',
-    'less:cui'
-  ]);
+        subgrunt: {
+            core: { // needed to merge the cor einto the build
+                subdir: dirs.core.grunt,
+                args: ['retro']
+            }
+        },
 
-  // Rename mvn task so we can override it
-  grunt.task.renameTask('mvn', 'mvn-goal');
+        copy: {
+            retro: {
+                files: [
+                    { // get build from the core
+                        expand: true,
+                        cwd: '<%= dirs.core.build %>/',
+                        src: ['examples/**', 'less/**', 'res/**', 'tests/**'],
+                        dest: '<%= dirs.build %>/'
+                    },
+                    { // get build from the core js and copy into temp
+                        expand: true,
+                        cwd: '<%= dirs.core.build %>/',
+                        src: ['js/cui-core.js'],
+                        dest: '<%= dirs.temp %>/'
+                    },
+                    { // get less from the modularized components
+                        expand: true,
+                        flatten: true,
+                        cwd: '<%= dirs.components %>/',
+                        src: ['**/styles/**.less'],
+                        dest: '<%= dirs.build %>/less/components'
+                    },
+                    { // get js from the modularized components
+                        expand: true,
+                        flatten: true,
+                        cwd: '<%= dirs.components %>/',
+                        src: ['**/scripts/**.js'],
+                        dest: '<%= dirs.temp %>/js/components'
+                    },
+                    { // get tests from the modularized components
+                        expand: true,
+                        flatten: true,
+                        cwd: '<%= dirs.components %>/',
+                        src: ['**/tests/**.js'],
+                        dest: '<%= dirs.build %>/tests'
+                    },
+                    { // get legacy components' less
+                        expand: true,
+                        cwd: '<%= dirs.legacy %>/components/styles',
+                        src: ['**'],
+                        dest: '<%= dirs.build %>/less/components'
+                    },
+                    { // get legacy less (overrides the core)
+                        expand: true,
+                        cwd: '<%= dirs.legacy %>/styles',
+                        src: ['**.less'],
+                        dest: '<%= dirs.build %>/less'
+                    },
+                    { // get legacy components' tests -> will override the test runner html
+                        expand: true,
+                        cwd: '<%= dirs.legacy %>/components/tests',
+                        src: ['**'],
+                        dest: '<%= dirs.build %>/tests'
+                    },
+                    { // get legacy components' js
+                        expand: true,
+                        cwd: '<%= dirs.legacy %>/components/scripts',
+                        src: ['**'],
+                        dest: '<%= dirs.temp %>/js/components'
+                    },
+                    { // get legacy js
+                        expand: true,
+                        filter: 'isFile',
+                        cwd: '<%= dirs.legacy %>/scripts',
+                        src: ['*.js'],
+                        dest: '<%= dirs.temp %>/js'
+                    },
+                    { // get legacy resources
+                        expand: true,
+                        cwd: '<%= dirs.legacy %>/components/resources',
+                        src: ['**'],
+                        dest: '<%= dirs.build %>/res/components'
+                    },
+                    { // testrunner + dependencies
+                        expand: true,
+                        cwd: '<%= dirs.modules %>/',
+                        src: [
+                            'chai/chai.js',
+                            'chai-jquery/chai-jquery.js',
+                            'mocha/mocha.js',
+                            'mocha/mocha.css'
+                        ],
+                        dest: '<%= dirs.build %>/tests/libs'
+                    }
+                ]
+            },
+            guide: {
+                files: [
+                    { // get build from the core
+                        expand: true,
+                        cwd: '<%= dirs.legacy %>/guide/',
+                        src: ['**'],
+                        dest: '<%= dirs.build %>/'
+                    },
+                    { // get external dependencies
+                        expand: true,
+                        flatten: true,
+                        cwd: '<%= dirs.externals %>/',
+                        src: ['*/*.js'],
+                        dest: '<%= dirs.build %>/js/libs'
+                    }
+                ]
+            }
+        }, // copy
 
-  // Custom build for maven
-  grunt.task.registerTask('mvn', [
-    'mvn-goal:install',
-    'mvn-goal:content-package-install'
-  ]);
+        less: {
+            "cui-wrapped": {
+                options: {
+                    paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
+                        dirs.build+'/less/'
+                    ]
+                },
+                files: {
+                    '<%= dirs.build %>/css/cui-wrapped.css': '<%= dirs.build %>/less/cui-wrapped.less'
+                }
+            },
+            "cui": {
+                options: {
+                    paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
+                        dirs.build+'/less/'
+                    ]
+                },
+                files: {
+                    '<%= dirs.build %>/css/cui.css': '<%= dirs.build %>/less/cui.less'
+                }
+            },
+            guide: {
+                options: {
+                    paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
+                        dirs.build+'/less/'
+                    ]
+                },
+                files: {
+                    '<%= dirs.build %>/css/guide.css': '<%= dirs.build %>/less/guide.less',
+                    '<%= dirs.build %>/css/prettify.css': '<%= dirs.build %>/less/prettify.css'
+                }
+            }
+        }, // less
 
-  // mvn deploy task for jenkins
-  grunt.task.registerTask('mvn-deploy', [
-    'mvn-goal:install',
-    'mvn-goal:deploy'
-  ]);
+        cssmin: {
+            cui: {
+                files: {
+                    '<%= dirs.build %>/css/cui.min.css': '<%= dirs.build %>/css/cui.css',
+                    '<%= dirs.build %>/css/cui-wrapped.min.css': '<%= dirs.build %>/css/cui-wrapped.css'
+                }
+            }
+        }, // cssmin
 
-  // Rename watch task so we can override it
-  grunt.task.renameTask('watch', 'watch-start');
+        concat: {
+            retro: {
+                src: getIncludes("cui", dirs.temp+'/js/'),
+                dest: '<%= dirs.build %>/js/<%= outputFileName %>.js'
+            }
+        }, // concat
 
-  // Redefine watch to build partial first
-  grunt.task.registerTask('watch', [
-    'partial',
-    'watch-start'
-  ]);
+        uglify: {
+            retro: {
+                files: {
+                    '<%= dirs.build %>/js/CUI.min.js': ['<%= dirs.build %>/js/<%= outputFileName %>.js']
+                }
+            }
+        }, // uglify
 
-  // Rename jsdoc task so we can override it
-  grunt.task.renameTask('jsdoc', 'jsdoc-build');
+        mocha: {
+            retro: {
+                src: ['<%= dirs.build %>/tests/index.html'],
+                options: {
+                    bail: true,
+                    log: true,
+                    run: true
+                }
+            }
+        }, // mocha
 
-  // Redefine jsdoc task to clean first
-  grunt.task.registerTask('jsdoc', [
-    'clean:jsdoc',
-    'jsdoc-build'
-  ]);
+        jsdoc : {
+            cui : {
+                src: ['<%= dirs.temp %>/js/**.js', '<%= dirs.temp %>/js/components/**.js'],
+                options: {
+                    destination: '<%= dirs.build %>/doc',
+                    template: 'res/docTemplate/'
+                }
+            }
+        } // jsdoc
 
-  // Default task
-  grunt.task.registerTask('default', [
-    'partial'
-  ]);
+    }); // end init config
+
+    grunt.task.registerTask('guide', [
+        'copy:guide',
+        'less:guide'
+    ]);
+
+
+    grunt.task.registerTask('retro', [
+        'clean',
+        'subgrunt:core',
+        'copy:retro',
+        'less:cui',
+        'less:cui-wrapped',
+        'cssmin:cui',
+        //'jshint:retro', // hint js in temp folder
+        'concat:retro',
+        'uglify:retro',
+        //'mocha:retro', // testrunner works but some tests fail
+        'guide'
+    ]);
+
+    grunt.task.registerTask('full', [ // for a standalone upload e.g. pages
+        'retro',
+        'jsdoc'
+    ]);
+
+    grunt.task.registerTask('check', [ // supposed to be execute prior to any commit!
+        'full'
+    ]);
+
+      // Default task
+    grunt.task.registerTask('default', [
+        'retro'
+    ]);
 };

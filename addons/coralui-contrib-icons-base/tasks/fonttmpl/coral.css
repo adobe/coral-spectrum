@@ -1,0 +1,18 @@
+<% if (fontfaceStyles) { %>@font-face {
+	font-family:"<%= fontBaseName %>";<% if (eot) { %>
+	src:<%= fontSrc1 %>;<% }%>
+	src:<%= fontSrc2 %>;
+	font-weight:normal;
+	font-style:normal;
+}
+<% } %>
+
+<% if (iconsStyles && stylesheet === 'less') { %>/* Mixins */<% for (var glyphIdx = 0; glyphIdx < glyphs.length; glyphIdx++) { %>
+@icon-<%= glyphs[glyphIdx].toLowerCase() %>-content: "\<%= (61696+glyphIdx).toString(16) %>";
+.icon-<%= glyphs[glyphIdx].toLowerCase() %>() {
+	.icon();
+	&:before { content: @icon-<%= glyphs[glyphIdx].toLowerCase() %>-content; }
+}
+.icon-<%= glyphs[glyphIdx].toLowerCase() %>:before { content: @icon-<%= glyphs[glyphIdx].toLowerCase() %>-content; }
+.icon-<%= glyphs[glyphIdx].toLowerCase() %>-after:after { content: @icon-<%= glyphs[glyphIdx].toLowerCase() %>-content; }
+<% } %><% } %>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: <?js= title ?></title>
+    
+    <link type="text/css" rel="stylesheet" href="../css/cui.css">
+    <link type="text/css" rel="stylesheet" href="../css/guide.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+    <link type="text/css" rel="stylesheet" href="../css/prettify.css">
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/CUI.js"></script>
+</head>
+
+<body>
+
+
+  <header class="top">
+
+    <div class="logo"><i class="icon-cloud medium"></i></div>
+
+    <nav class="main">
+      <a href="../index.html">Guide</a>
+      <a href="index.html" class="selected">Docs</a>
+      <a href="../icon-browser.html">Icon Browser</a>
+      <a href="../shell.html">Shell</a>
+      <a href="https://git.corp.adobe.com/Coral/CoralUI/" target="_blank">Github</a>
+      <a href="../cui.zip">Download</a>
+      <a href="http://jenkins.bsl.eur.adobe.com/job/Build_CoralUI-master/ws/build/index.html" target="_blank">Nightly guide</a>
+    </nav>
+
+    <div class="drawer">
+      <div class="badge">Generated <?js var d = new Date(); ?><?js= (d.getMonth()+1)+'/'+(d.getDate())+' at '+d.getHours()+':'+d.getMinutes() ?></div>
+    </div>
+
+  </header>
+
+  <div class="page">
+    <div class="rail left scroll">
+      <div class="wrap">
+        <?js= this.nav ?>
+      </div>
+    </div>
+
+    <div class="content">
+        <!--<?js if (title) { ?><h1 class="line"><?js= title ?></h1><?js } ?>-->
+        <?js if (title === 'Index') { ?>
+          <?js= this.partial('index.tmpl') ?>
+        <?js }
+        else { ?>
+          <?js= content ?>
+        <?js } ?>
+    </div>
+  </div>
+
+  <script> prettyPrint(); </script>
+</body>
+</html>

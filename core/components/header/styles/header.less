@@ -1,0 +1,179 @@
+/**
+  Class: header.top
+  Appears at the top of each page
+*/
+header.top {
+  position: relative;
+
+  width: 100%; // Otherwise does not span screen width in Firefox
+  height: @header-height;
+
+  background-color: @header-background-color;
+  
+  &, 
+  > nav.main > a,
+  > nav.crumbs > a,
+  > .drawer > a {
+    color: @header-nav-font-color;
+
+    &:hover,
+    &:focus {
+      color: @header-nav-down-font-color;
+      text-decoration: none;
+      opacity: 1;
+    }
+  }
+
+  white-space: nowrap;
+  
+
+  div.logo {
+    display: inline-block;
+    
+    padding: 10*@px 6*@px 10*@px 15*@px;
+
+    vertical-align: bottom;
+
+    text-align: center;
+
+    img {
+      height: @header-logo-size;
+      width: @header-logo-size; 
+    }
+
+    i.medium {
+      min-width: @header-logo-size;
+      min-height: @header-logo-size;
+      font-size: 1.4rem;
+    }
+
+    > a {
+      display: inline-block;
+
+      > * {
+        vertical-align: middle;
+      }
+    }
+  }
+
+  [class^="icon-"]:not(.active):before,
+  [class*=" icon-"]:not(.active):before {
+    color: #fff;
+    opacity: 0.99;
+  }
+  
+  div.logo + nav {
+    margin-left: 0;
+  }
+
+  > nav.main {
+
+    display: inline-block;
+
+    a {
+      display: inline-block;
+      height: @header-height;
+
+      /*
+      Spacing as a function of header item spacing
+      Give some to padding, and some to margin
+      */
+      padding: 0 @header-nav-spacing / 4;
+      margin-right: @header-nav-spacing / 2;
+
+      line-height: @header-height;
+      font-size: @header-nav-font-size;
+
+      text-decoration: none;
+
+      &:active, // TBD: does UX wants the active state (mousedown) to look like the selected item?
+      &.selected {
+        color: @header-nav-down-font-color;
+      }
+    }
+  }
+
+  > nav.crumbs {
+    display: inline-block;
+
+    a {
+      font-size: @header-nav-font-size;
+
+      &:before,
+      &:hover:before {
+        color: @header-crumb-chevron-color;
+      }
+    }
+  }
+
+  .drawer {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    display: inline-block;
+    height: @header-height;
+    padding-right: 15*@px;
+
+    line-height: @header-height;
+
+    > a,
+    > div {
+      margin-left: 11*@px;
+    }
+
+    > a {
+      display: inline-block;
+      height: @header-height;
+      line-height: @header-height;
+      vertical-align: top;
+      // color: @header-nav-font-color;
+      font-size: @header-nav-font-size;
+    }
+
+    .icon-user {
+      font-size: 22*@px;
+      width: 24*@px;
+
+      > span {
+        display: none;
+      }
+
+      &:before {
+        opacity: 0.8;
+      }
+      
+      &:hover,
+      &:focus {
+        &:before {
+          opacity: 1;
+        }  
+      }
+    }
+  }
+}
+
+@media all and (min-width: 768px) and (max-width: 959px) {
+  header.top { 
+    nav.crumbs a {
+      display: none;  
+
+      &:nth-last-child(1),
+      &:nth-last-child(2) {
+        display: inline-block;
+      }
+    }
+  }
+}
+
+@media all and (max-width: 767px) { 
+  header.top { 
+    nav.crumbs a {
+      display: none;  
+
+      &:nth-last-child(1) {
+        display: inline-block;
+      }
+    }
+  }    
+}
