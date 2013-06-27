@@ -97,7 +97,7 @@ module.exports = function(grunt) {
             expand: true,
             cwd: '<%= dirs.temp %>/less/',
             src: ['AdobeIcons.html'],
-            dest: '<%= dirs.build %>',
+            dest: '<%= dirs.build %>/examples',
             rename: function (dest, src) {
               return dest + '/icon-browser.html';
             }
