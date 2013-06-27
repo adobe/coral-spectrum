@@ -73,6 +73,7 @@ module.exports = function (grunt) {
         modules: 'node_modules',
         externals: 'externals',
         core: {
+            grunt: 'core/',
             build: 'core/build'
         }
     };
@@ -155,7 +156,7 @@ module.exports = function (grunt) {
 
         subgrunt: {
             core: { // needed to merge the cor einto the build
-                subdir: dirs.core.build,
+                subdir: dirs.core.grunt,
                 args: ['retro']
             }
         },
