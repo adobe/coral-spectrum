@@ -5,6 +5,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-handlebars');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -321,8 +322,29 @@ module.exports = function (grunt) {
                 files: {
                     '<%= dirs.build %>/js/CUI.min.js': ['<%= dirs.build %>/js/<%= outputFileName %>.js']
                 }
+            },
+            template_components: {
+                files: {
+                    '<%= dirs.build %>/js/CUI.Templates.min.js': ['<%= dirs.build %>/js/CUI.Templates.js']
+                }
             }
         }, // uglify
+
+        handlebars: {
+            components: {
+                options: {
+                    wrapped: true,
+                    namespace: 'CUI.templates',
+                    processName: function (path) {
+                        // Pull the filename out as the template name
+                        return path.split('/').pop().split('.').shift();
+                    }
+                },
+                files: {
+                    '<%= dirs.build %>/js/CUI.Templates.js': '<%= dirs.legacy %>/components/templates/*'
+                }
+            }
+        },
 
         mocha: {
             retro: {
@@ -369,6 +391,8 @@ module.exports = function (grunt) {
 
     grunt.task.registerTask('full', [ // for a standalone upload e.g. pages
         'retro',
+        'handlebars:components',
+        'uglify:template_components',
         'jsdoc'
     ]);
 
