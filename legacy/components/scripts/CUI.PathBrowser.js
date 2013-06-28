@@ -381,7 +381,6 @@
                     .fail(
                         function() {
                             // TODO: implement
-                            console.log("Failed to read options");
                         }
                     )
                 ;

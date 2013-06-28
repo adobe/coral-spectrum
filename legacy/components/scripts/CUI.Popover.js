@@ -206,8 +206,8 @@
           pointFrom = this.options.pointFrom,
           left = relativePosition.left,
           top = relativePosition.top,
-          absTopDiff = absolutePosition.top - parseInt($el.css("margin-top")) - top, // Fix jQuery as it does different margin calculations on offset() and position()
-          absLeftDiff = absolutePosition.left - parseInt($el.css("margin-left")) - left, // Fix jQuery as it does different margin calculations on offset() and position()
+          absTopDiff = absolutePosition.top - parseInt($el.css("margin-top"), 10) - top, // Fix jQuery as it does different margin calculations on offset() and position()
+          absLeftDiff = absolutePosition.left - parseInt($el.css("margin-left"), 10) - left, // Fix jQuery as it does different margin calculations on offset() and position()
           width = this.$element.outerWidth(true),
           height = this.$element.outerHeight(),
           parentWidth = positionedParent(this.$element).width(),

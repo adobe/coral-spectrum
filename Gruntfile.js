@@ -145,7 +145,6 @@ module.exports = function (grunt) {
                 smarttabs: true,
                 globals: {
                     'jQuery': true,       // jQuery
-                    'console': true,      // console.log...
                     'CUI': true,          // CoralUI
                     'Class': true,        // Class
                     'moment': true        // Moment.js
