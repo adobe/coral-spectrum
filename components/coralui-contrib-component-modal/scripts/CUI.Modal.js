@@ -160,9 +160,9 @@
             // @deprecated, rather the template engine should be agonistic
             // Render template, if necessary
             // disabled for now
-            /*if (this.$element.children().length === 0) {
+            if (this.$element.children().length === 0) {
                 this.$element.html(CUI.Templates['modal']($.extend({}, this.options, { buttons: '' })));
-            }*/
+            }
 
             this.applyOptions();
 
