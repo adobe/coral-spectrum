@@ -150,6 +150,21 @@ echo ""
 echo "$ $gruntVersion"
 $gruntVersion
 
+#echo ""
+#echo "Install git hooks"
+
+# Install node modules
+#cp res/git/pre-commit .git/hooks/ >/dev/null
+
+#if [ $? -eq 0 ]; then
+  #green " $OK " "\c"
+  #echo "git hook"
+#else
+  #red " [X] " "\c"
+  #echo "git hook";
+  #exit 1
+#fi
+
 echo ""
 echo "Run one of the following commands to build CoralUI:"
 echo ""
