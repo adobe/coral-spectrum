@@ -113,7 +113,7 @@
      * Toggle list visibility based on current status
      */
     toggle: function() {
-        this.isVisible() ? this.hide() : this.show();
+        return this.isVisible() ? this.hide() : this.show();
     },
 
     /**

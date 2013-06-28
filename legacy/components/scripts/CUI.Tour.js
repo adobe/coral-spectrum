@@ -304,7 +304,7 @@
 
           // start async to have a fadein effect
           setTimeout(function () {
-            this.$backdrop.fadeIn()
+            this.$backdrop.fadeIn();
           }.bind(this), 50);
 
           // Note: If this option is changed before the fade completes, it won't apply

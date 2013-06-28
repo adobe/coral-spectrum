@@ -539,24 +539,24 @@
         });
     }
 
+    CUI.PathBrowser.defaultOptionRenderer = function(iterator, index) {
+        var value = this.options.options[index];
+        if (value.indexOf("/") === 0) {
+            // Option contains an absolute path
+            var iLastSlash = value.lastIndexOf("/");
+            value = value.substring(iLastSlash + 1);
+        }
+
+        // Use alternate display strings if possible
+        var valueCls = "pathbrowser-autocomplete-item-value";
+        var titleMarkup = "";
+        if (this.options.showTitles && this.options.optionDisplayStrings[index] && this.options.optionDisplayStrings[index].length > 0) {
+            valueCls += " pathbrowser-autocomplete-item-value-with-title";
+            titleMarkup += "<div class=\"pathbrowser-autocomplete-item-title\">" + this.options.optionDisplayStrings[index] + "</div>";
+        }
+
+        return $("<div class=\"" + valueCls + "\">" + value + "</div>" + titleMarkup);
+    };
+
+
 }(window.jQuery));
-
-
-CUI.PathBrowser.defaultOptionRenderer = function(iterator, index) {
-    var value = this.options.options[index];
-    if (value.indexOf("/") === 0) {
-        // Option contains an absolute path
-        var iLastSlash = value.lastIndexOf("/");
-        value = value.substring(iLastSlash + 1);
-    }
-
-    // Use alternate display strings if possible
-    var valueCls = "pathbrowser-autocomplete-item-value";
-    var titleMarkup = "";
-    if (this.options.showTitles && this.options.optionDisplayStrings[index] && this.options.optionDisplayStrings[index].length > 0) {
-        valueCls += " pathbrowser-autocomplete-item-value-with-title";
-        titleMarkup += "<div class=\"pathbrowser-autocomplete-item-title\">" + this.options.optionDisplayStrings[index] + "</div>";
-    }
-
-    return $("<div class=\"" + valueCls + "\">" + value + "</div>" + titleMarkup);
-};

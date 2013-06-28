@@ -701,10 +701,8 @@ var index = filters.getSelectedIndex();
   $(document).on("cui-contentloaded.data-api", function(e) {
     $("[data-init~=filters]", e.target).filters();
   });
-}(window.jQuery));
 
-
-CUI.Filters.defaultOptionRenderer = function(index, key, highlight, icon) {
+  CUI.Filters.defaultOptionRenderer = function(index, key, highlight, icon) {
 
     var pos = $.inArray(key, this.options.options);
     var value = key;
@@ -789,4 +787,5 @@ CUI.Filters.cqTagOptionRenderer = function(iterator, key, highlight) {
 
     
     return $("<span>" + value + "</span>");
-};
+  };
+}(window.jQuery));
