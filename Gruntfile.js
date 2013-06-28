@@ -132,7 +132,7 @@ module.exports = function (grunt) {
         // Configuration
         jshint: {
             options: {
-                eqeqeq: true,
+                eqeqeq: false,
                 immed: true,
                 latedef: true,
                 newcap: true,
@@ -147,7 +147,8 @@ module.exports = function (grunt) {
                     'jQuery': true,       // jQuery
                     'console': true,      // console.log...
                     'CUI': true,          // CoralUI
-                    'Class': true        // Class
+                    'Class': true,        // Class
+                    'moment': true        // Moment.js
                 }
             },
             retro: [
@@ -457,7 +458,7 @@ module.exports = function (grunt) {
         'less:cui',
         'less:cui-wrapped',
         'cssmin:cui',
-        //'jshint:retro', // hint js in temp folder
+        'jshint:retro', // hint js in temp folder
         'concat:retro',
         'uglify:retro',
         //'mocha:retro', // testrunner works but some tests fail
