@@ -77,7 +77,7 @@
             
     */
     construct: function(options) {
-      this.isAccordion = (!this.$element.hasClass("collapsible")) && (!(this.$element.data("init") == "collapsible"));
+      this.isAccordion = (!this.$element.hasClass("collapsible")) && (this.$element.data("init") !== "collapsible");
     
       if (this.isAccordion) this.$element.addClass("accordion");
     
@@ -134,8 +134,8 @@
     },
     _initElement: function(element, collapse) {
         // Add correct header
-        if ($(element).find("h3").length == 0) $(element).prepend("<h3>&nbsp;</h3>");
-        if ($(element).find("h3 i").length == 0) $(element).find("h3").prepend("<i></i>&nbsp;");
+        if ($(element).find("h3").length === 0) $(element).prepend("<h3>&nbsp;</h3>");
+        if ($(element).find("h3 i").length === 0) $(element).find("h3").prepend("<i></i>&nbsp;");
         
         $(element).addClass("collapsible");
         // Set correct initial state
