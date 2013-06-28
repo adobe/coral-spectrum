@@ -1678,7 +1678,7 @@
                     sorter.sort();
 
                     // Trigger an sortend event
-                    var event = $.Event("sortend");
+                    event = $.Event("sortend");
                     $(e.target).trigger(event);
                 });
 
