@@ -3,6 +3,7 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-handlebars');
@@ -10,6 +11,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-uglify');
 
+    grunt.loadNpmTasks('grunt-gh-pages');
     grunt.loadNpmTasks('grunt-mocha');
     grunt.loadNpmTasks('grunt-jsdoc');
 
@@ -264,6 +266,28 @@ module.exports = function (grunt) {
                         dest: '<%= dirs.build %>/js/libs'
                     }
                 ]
+            },
+            release_archive: { // copy the archive to have a "latest" zip from the current build
+                files: [
+                    { // get build from the core
+                        expand: true,
+                        cwd: '<%= dirs.build %>/release/',
+                        src: ['cui-<%= meta.version %>.zip'],
+                        dest: '<%= dirs.build %>/release/',
+                        rename: function (dest, src) {
+                            return dest + '/cui-latest.zip';
+                        }
+                    },
+                    { // get external dependencies
+                        expand: true,
+                        cwd: '<%= dirs.build %>/release/',
+                        src: ['cui-<%= meta.version %>-full.zip'],
+                        dest: '<%= dirs.build %>/release/',
+                        rename: function (dest, src) {
+                            return dest + '/cui-latest-full.zip';
+                        }
+                    }
+                ]
             }
         }, // copy
 
@@ -365,7 +389,58 @@ module.exports = function (grunt) {
                     template: 'res/docTemplate/'
                 }
             }
-        } // jsdoc
+        }, // jsdoc
+
+        compress: {
+            release: {
+                options: {
+                    archive: '<%= dirs.build %>/release/cui-<%= meta.version %>.zip'
+                },
+                files: [
+                    { src: ['<%= dirs.build %>/css/cui.min.css'] },
+                    { src: ['<%= dirs.build %>/js/CUI.min.js'] },
+                    { src: ['<%= dirs.build %>/less/**'] },
+                    { src: ['<%= dirs.build %>/res/**'] }
+                ]
+            },
+            full: {
+                options: {
+                    archive: '<%= dirs.build %>/release/cui-<%= meta.version %>-full.zip'
+                },
+                files: [
+                    { src: ['<%= dirs.build %>/css/**'] },
+                    { src: ['<%= dirs.build %>/examples/**'] },
+                    { src: ['<%= dirs.build %>/res/**'] },
+                    { src: ['<%= dirs.build %>/images/**'] },
+                    { src: ['<%= dirs.build %>/js/**'] },
+                    { src: ['<%= dirs.build %>/doc/**'] },
+                    { src: ['<%= dirs.build %>/less/**'] },
+                    { src: ['<%= dirs.build %>/test/**'] },
+                    { src: ['<%= dirs.build %>/index.html'] }
+                ]
+            }
+        }, // compress
+
+        'gh-pages': {
+            options: {
+                base: '<%= dirs.build %>',
+                repo: 'git@git.corp.adobe.com:Coral/CoralUI.git',
+                clone: '<%= dirs.temp %>/gh-pages',
+                branch: 'gh-pages'
+            },
+            release: {
+                src: [
+                    'index.html',
+                    'css/**',
+                    'js/**',
+                    'doc/**',
+                    'res/**',
+                    'images/**',
+                    'examples/**',
+                    'release/**'
+                ]
+            }
+        }
 
     }); // end init config
 
@@ -393,11 +468,19 @@ module.exports = function (grunt) {
         'retro',
         'handlebars:components',
         'uglify:template_components',
+        'compress:release',
+        'compress:full',
+        'copy:release_archive',
         'jsdoc'
     ]);
 
     grunt.task.registerTask('check', [ // supposed to be execute prior to any commit!
         'full'
+    ]);
+
+    grunt.task.registerTask('release', [ // releases coral to github page
+        'check',
+        'gh-pages:release'
     ]);
 
       // Default task
