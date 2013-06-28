@@ -426,7 +426,8 @@ module.exports = function (grunt) {
                 base: '<%= dirs.build %>',
                 repo: 'git@git.corp.adobe.com:Coral/CoralUI.git',
                 clone: '<%= dirs.temp %>/gh-pages',
-                branch: 'gh-pages'
+                branch: 'gh-pages',
+                message: '@releng github pages to <%= meta.version %>'
             },
             release: {
                 src: [
