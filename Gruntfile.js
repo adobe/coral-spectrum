@@ -461,7 +461,6 @@ module.exports = function (grunt) {
         'jshint:retro', // hint js in temp folder
         'concat:retro',
         'uglify:retro',
-        //'mocha:retro', // testrunner works but some tests fail
         'guide'
     ]);
 
@@ -472,6 +471,7 @@ module.exports = function (grunt) {
         'compress:release',
         'compress:full',
         'copy:release_archive',
+        //'mocha',
         'jsdoc'
     ]);
 
