@@ -28,7 +28,7 @@
   /**
      Internal helper class to perform the drag action.
   */
-  DragAction = new Class({
+  var DragAction = new Class({
     /**
       Construct a new Drag Action. This class is internal for now.
       
@@ -55,7 +55,7 @@
       // Search for the first parent that has a hidden/scrolling overflow
       while (true) {
         var p = element.parent();
-        if (p.length == 0) return p;
+        if (p.length === 0) return p;
         if (p.is("body")) return p;
         var flow = p.css("overflow");
         if (flow == "hidden" || flow == "auto" || flow == "scroll") return p;
@@ -121,7 +121,7 @@
       }
       
     
-      var newCss = {}
+      var newCss = {};
       if (this.axis != "horizontal") newCss["top"] = y - this.dragStart.y;
       if (this.axis != "vertical") newCss["left"] = x - this.dragStart.x;
 
@@ -346,7 +346,7 @@
       if (!this.$element.is(event.sourceElement) && this.options.allowDrop) {
         var e = $(event.item);
         
-        if (this.options.closable && e.find(".close").length == 0) {
+        if (this.options.closable && e.find(".close").length === 0) {
           e.append("<button class=\"close\">&times;</button>");
         } else if (!this.options.closable) {
           e.find(".close").remove();
@@ -390,7 +390,7 @@
         var oldPosition = from.index();
         if (before.length > 0) from.insertBefore(before);
         if (after.length > 0) from.insertAfter(after);
-        if (before.length == 0 && after.length == 0 && newItem) {
+        if (before.length === 0 && after.length === 0 && newItem) {
           this.$element.append(from);
         }
         var newPosition = from.index();
@@ -412,11 +412,11 @@
       var e = $(event.target).closest("li");
       var index = e.index();
       e.remove();
-      var event = jQuery.Event("removed");
-      event.sourceElement = this.$element.get(0);
-      event.index = index;
-      event.item = e.get(0);
-      this.$element.trigger(event);
+      var ev = jQuery.Event("removed");
+      ev.sourceElement = this.$element.get(0);
+      ev.index = index;
+      ev.item = e.get(0);
+      this.$element.trigger(ev);
     }
            
   });
