@@ -12,7 +12,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-mocha');
     grunt.loadNpmTasks('grunt-jsdoc');
 
-    grunt.loadTasks('tasks/core');
+    grunt.loadTasks('tasks');
 
     /**
     JavaScript file include order
