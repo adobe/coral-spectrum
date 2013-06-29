@@ -471,7 +471,7 @@ module.exports = function (grunt) {
         'compress:release',
         'compress:full',
         'copy:release_archive',
-        //'mocha',
+        'mocha',
         'jsdoc'
     ]);
 
