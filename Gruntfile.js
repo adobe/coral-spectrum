@@ -29,6 +29,9 @@ module.exports = function (grunt) {
         // Persistence
         'CUI.Util.state.js',
 
+        // HTTP
+        'CUI.Util.HTTP.js',
+
 
         // Components
         'components/CUI.Modal.js',
@@ -57,9 +60,7 @@ module.exports = function (grunt) {
         'components/CUI.Autocomplete.js',
 
         // Validations
-        'validations.js',
-
-        'accessibility.js'
+        'validations.js'
         ]
     };
 

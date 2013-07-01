@@ -69,78 +69,26 @@
             <resource>
                 <directory>${basedir}/build/less</directory>
                 <targetPath>${coral.build.dir}/less</targetPath>
-                <excludes>
-                    <exclude>optional/**</exclude>
-                </excludes>
-            </resource>
-            <resource>
-                <directory>${basedir}/components/bootstrap/less</directory>
-                <targetPath>${coral.build.dir}/less/bootstrap</targetPath>
-                <includes>
-                    <include>**/reset.less</include>
-                    <include>**/variables.less</include>
-                    <include>**/mixins.less</include>
-                </includes>
             </resource>
 
             <!-- js -->
             <resource>
-                <directory>${basedir}/source/js</directory>
-                <targetPath>${coral.build.dir}/js</targetPath>
-                <excludes>
-                    <exclude>components/CUI.RichText.js</exclude>
-                    <exclude>components/rte/**</exclude>
-                </excludes>
-            </resource>
-            <resource>
                 <directory>${basedir}/build/js</directory>
                 <targetPath>${coral.build.dir}/js</targetPath>
-                <includes>
-                    <include>**/CUI.Templates.js</include>
-                </includes>
-            </resource>
-
-            <!-- RTE -->
-            <resource>
-                <directory>${basedir}/rte/source/js</directory>
-                <targetPath>${coral.build.dir}/optional/rte/js</targetPath>
                 <excludes>
-                    <exclude>additional/**</exclude>
-                </excludes>
-            </resource>
-            <resource>
-                <directory>${basedir}/source/js/components</directory>
-                <targetPath>${coral.build.dir}/optional/rte/js/components</targetPath>
-                <includes>
-                    <include>CUI.RichText.js</include>
-                    <include>rte/**</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>${basedir}/build/js</directory>
-                <targetPath>${coral.build.dir}/optional/rte/js/components</targetPath>
-                <includes>
-                    <include>cui-rte.templates.js</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>${basedir}/source/less/optional/rte</directory>
-                <targetPath>${coral.build.dir}/optional/rte/less</targetPath>
-                <excludes>
-                    <exclude>wrapper.less</exclude>
+                    <exclude>*.min.js</exclude>
+                    <exclude>guide.js</exclude>
+                    <exclude>prettify.js</exclude>
+                    <exclude>libs/jquery.js</exclude>
+                    <exclude>libs/handlebars.js</exclude>
+                    <exclude>libs/moment.js</exclude>
                 </excludes>
             </resource>
 
             <!-- images -->
             <resource>
-                <directory>${basedir}/source/images</directory>
-                <targetPath>${coral.build.dir}/resources/images</targetPath>
-            </resource>
-
-            <!-- fonts -->
-            <resource>
-                <directory>${basedir}/build/fonts</directory>
-                <targetPath>${coral.build.dir}/resources/fonts</targetPath>
+                <directory>${basedir}/build/res</directory>
+                <targetPath>${coral.build.dir}/res</targetPath>
             </resource>
 
             <!-- guide -->
