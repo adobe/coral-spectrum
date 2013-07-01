@@ -71,7 +71,7 @@ module.exports = function(grunt) {
     var srcConfig = grunt.config('icon-athena-convert.src');
 
     // Process the destination name
-    var dest = grunt.template.process('<%= dirs.source %>/images/icons/', config);
+    var dest = grunt.template.process('<%= dirs.build %>/icons/', config);
 
     grunt.log.ok("converting from "  + srcConfig + " to " + dest);
 
