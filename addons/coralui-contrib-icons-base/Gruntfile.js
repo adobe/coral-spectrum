@@ -148,7 +148,7 @@ module.exports = function(grunt) {
         destCss: '<%= dirs.temp %>/less',
         options: {
             font: 'AdobeIcons',
-            relativeFontPath: '../res/icons',
+            relativeFontPath: '@{icon-font-folder}/',
             template: '<%= dirs.tasks %>/fonttmpl/coral.css',
             htmlDemoTemplate: '<%= dirs.temp %>/htmlTemplate/demo.html',
             htmlDemo: true,
