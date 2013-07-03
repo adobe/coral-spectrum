@@ -12,16 +12,20 @@
 
 
 // Fonts
-@font-base-family: AdobeClean;
-@font-icon-family: AdobeClean; // TBD: change to icon font
+@font-base-family: AdobeClean, Helvetica, Arial, sans-serif;
+@font-light-family: AdobeCleanLight, Helvetica, Arial, sans-serif;
+@font-icon-family: AdobeIcon;
 @font-base-weight: normal;
 @font-base-color: rgb(75, 75, 75);
 @font-captions-help-color: rgb(135, 135, 135);
 @font-secondary-color: rgb(150, 150, 150);
 
+@headings-font-family: @font-base-family;
+@headings-font-weight: @font-base-weight;
+@headings-base-color: @font-base-color;
+
 // Links
 @link-color: rgb(100, 135, 195);
-
 
 // Header
 @header-height: 46*@px;
@@ -35,7 +39,6 @@
 @header-crumb-chevron-color: rgb(120, 120, 120);
 
 @header-logo-size: 24*@px;
-
 
 // Toolbar
 @toolbar-border-color: rgb(215, 215, 215);
