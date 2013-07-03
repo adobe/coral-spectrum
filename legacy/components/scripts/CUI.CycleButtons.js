@@ -23,15 +23,6 @@
       When clicked, the next item of the active is shown and the click is triggered at that next item instead.
       If the last item is clicked, then the first item is shown and triggered accordingly.
 
-      <div>
-        <span class="cyclebuttons" data-init="cyclebuttons">
-          <button class="cyclebuttons-active icon-viewcard" type="button">Card</button>
-          <button class="icon-viewlist" type="button">List</button>
-        </span>
-      </div>
-
-      @extends CUI.Widget
-      
       @example
 &lt;span class="cyclebuttons" data-init="cyclebuttons">
   &lt;button class="cyclebuttons-active icon-viewcard" type="button">Card&lt;/button>
