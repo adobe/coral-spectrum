@@ -40,7 +40,7 @@ module.exports = function(grunt) {
     clean: {
       build: '<%= dirs.build %>',
       temp: '<%= dirs.temp %>'
-    }, // clean
+    } // clean
 
   });
   // end init config
