@@ -30,24 +30,32 @@
     }
 
     function buildNav(wizard) {
-        wizard.prepend(function() {
-            var sections = wizard.children(".step");
+        var sections = wizard.children(".step");
+        var nav;
 
-            var nav = $('<nav class="toolbar"><ol class="center"></ol></nav>');
-            var ol = nav.children("ol");
+        if (wizard.children(".toolbar").length === 0) {
+            wizard.prepend(function() {
+                nav = $('<nav class="toolbar"><ol class="center"></ol></nav>');
+                var ol = nav.children("ol");
 
-            sections.map(function() {
-                return $("<li />").text(this.title);
-            }).appendTo(ol);
-            ol.children("li").first().addClass("active").append("<div class='lead-fill' />");
+                sections.map(function() {
+                    return $("<li />").text(this.title);
+                }).appendTo(ol);
 
-            var buttons = sections.first().find(".flexwizard-control");
-
-            return nav.prepend(function() {
-                return cloneLeft(buttons);
-            }).append(function() {
-                return cloneRight(buttons);
+                return nav;
             });
+        } else {
+            nav = wizard.children("nav");
+        }
+
+        nav.find("> ol > li").first().addClass("active").append("<div class='lead-fill' />");
+
+        var buttons = sections.first().find(".flexwizard-control");
+
+        nav.prepend(function() {
+            return cloneLeft(buttons);
+        }).append(function() {
+            return cloneRight(buttons);
         });
     }
 
