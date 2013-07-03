@@ -1,41 +1,35 @@
-h1 {
-  font-family: 'AdobeCleanLight';
-  font-size: 1.675rem;
-  font-weight: normal;
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-family: @headings-font-family;
+  font-weight: @headings-font-weight;
+  color: @headings-base-color;  
+}
+
+h1 { 
+  font-family: @font-light-family;
+  font-size: 22*@px;
+  line-height: 26*@px;
 }
 
 h2 {
-  font-family: 'AdobeCleanLight';
-  font-size: 1.5rem;
-  font-weight: normal;
+  font-family: @font-light-family;
+  font-size: 20*@px;
+  line-height: 24*@px;
 }
 
 h3 {
-  margin: 0.357rem 0;
-
-  font-size: 1.15rem;
+  font-size: 18*@px;
   font-weight: bold;
+  line-height: 20*@px;
 }
 
 h4 {
-  margin: 0;
-
-  font-size: 1rem;
+  font-size: 13*@px;
   font-weight: bold;
 }
 
-h5 {
-  margin: 0;
-
-  font-size: 1rem;
-  font-weight: bold;
-}
-
-h6 {
-  margin: 0;
-
-  font-size: 1rem;
+h5, h6 {
+  font-size: 13*@px;
   font-style: italic;
-  font-weight: normal;
   color: @font-captions-help-color;
 }

@@ -7,8 +7,8 @@ body {
   width: 100%;
 }
 
-
-html {
+html { 
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   font-size: @base-size + 0px; // the base size in pixels
 }
@@ -16,9 +16,12 @@ html {
 // Set the default background color and font
 body {
   background-color: @body-background-color;
+  color: @font-base-color;
 
   font-family: @font-base-family;
-  color: @font-base-color;
+  font-weight: @font-base-weight;
+  font-size: 13*@px;
+  line-height: 16*@px;
 
   cursor: default;
 }
