@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Bug Report Template</title>
+
+    <link rel="stylesheet" href="css/cui.css">
+    <link rel="stylesheet" href="css/guide.css">
+    <link rel="stylesheet" href="js/google-code-prettify/prettify.css">
+
+    <script src="js/libs/handlebars.js"></script>
+    <script src="js/libs/moment.js"></script>
+    <script src="js/libs/jquery.js"></script>
+    <script src="js/libs/toe.js"></script>
+
+    <script src="js/CUI.js"></script>
+
+    <script src="js/guide.js"></script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+
+</head>
+<body class="mobile">
+
+    <script>
+        $(document).ready(  function()
+        {
+            console.log('put some code here');
+            $('#bugForm').submit( function(e) {
+                console.log('form submitted');
+                alert('form submitted');
+                return false;
+            } )
+
+            $('#dropdownButton').click( function(e) {
+                console.log('clicked');
+                //alert('clicked');
+            });
+            console.log('ready');
+
+        } );
+    </script>
+
+    <header class="top">
+
+        <div class="logo"><i class="icon-coral medium">CoralUI logo</i></div>
+
+        <nav class="main">
+            <a href="#" class="selected">Bug Report</a>
+            
+        </nav>
+
+        <div class="drawer">
+            <div class="badge">CUI-XXX</div>
+        </div>
+
+    </header>
+
+    <div class="page" role="main">
+
+        <div id="main-rail" class="rail left scroll">
+            <div class="wrap">
+
+                <section class="links">
+                    <a class="heading" href="#General">General</a>
+                </section>
+            </div>
+        </div>
+
+        <div class="content">
+
+            <section id="General">
+                <h2 class="line" id="WhatIsCUI">What is the bug?</h2>
+                <p>Put the sample code and JS below. Attach this file into your bug.</p>
+
+                <form id="bugForm">
+                    <label>If the following fires a submit on iPad, its a bug.</label>
+                    <div class="dropdown" data-init="dropdown">
+                        <button id="dropdownButton">Single Select</button>
+                        <select name="dropdown">
+                            <option>Single One</option>
+                            <option>Single Two</option>
+                            <option>Single Three</option>
+                        </select>
+                    </div>
+                    <br>
+                    <button type="submit">This will submit.</button>
+                <form>
+
+              
+            </section>
+
+            <footer>
+                <a href="#">Help</a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Privacy Policy</a>
+                <span class="right">Adobe Systems Incorporated. All Rights Reserved</span>
+            </footer>
+        </div><!-- /content -->
+    </div><!-- /page -->
+
+    <a id="SectionAnchor" style="display: none;" title="Right click to copy section URL">&para;</a>
+
+</body>
+</html>

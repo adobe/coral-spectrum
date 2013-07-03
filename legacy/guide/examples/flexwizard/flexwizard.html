@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>CoralUI Flex Wizard</title>
+
+        <link rel="stylesheet" href="../../css/cui.css">
+ 
+        <script src="../../js/libs/jquery.js"></script>
+        <script src="../../js/libs/toe.js"></script>
+        <script src="../../js/CUI.js"></script>
+    </head>
+    <body>
+        <form action="test" method="post">
+            <div class="flexwizard" data-init="flexwizard">
+                <div class="step" title="Step1">
+                    <a class="flexwizard-control button" href="cancel.html" data-action="cancel">Cancel</a>
+                    <button class="flexwizard-control" type="button" data-action="next">Next</button>
+
+                    <h2>Simple Step</h2>
+                    <p>Word on a future state of a page or site section without impacting the production state.</p>
+                </div>
+
+                <div class="step" title="Step2">
+                    <button class="flexwizard-control" type="button" data-action="prev">Change mind</button>
+                    <button class="flexwizard-control" type="button" data-action="next">Go next</button>
+
+                    <h2>Custom Nav Buttons</h2>
+                    <p>Word on a future state of a page or site section without impacting the production state.</p>
+                </div>
+
+                <div class="step" title="Step3">
+                    <button class="flexwizard-control" type="button" data-action="prev">Back</button>
+                    <button class="flexwizard-control" type="submit" data-action="next">Submit</button>
+
+                    <h2>Schedule a new Launch</h2>
+                    <p>Word on a future state of a page or site section without impacting the production state.</p>
+                </div>
+            </div>
+        </form>
+    </body>
+</html>

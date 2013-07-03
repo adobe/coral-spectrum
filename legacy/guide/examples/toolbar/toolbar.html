@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>CoralUI Shell</title>
+
+  <link rel="stylesheet" href="../../css/cui.css">
+
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/libs/toe.js"></script>
+  <script src="../../js/CUI.js"></script>
+</head>
+<body class="desktop">
+
+  <header class="top">
+
+    <div class="logo"><i class="icon-marketingcloud medium">Coral UI</i></div>
+
+    <nav class="crumbs">
+      <a href="#">Marketing Cloud</a>
+      <a href="#" class="selected">Websites</a>
+    </nav>
+
+    <div class="drawer">
+      <div class="badge">10</div>
+      <a class="icon-user white" href="#user_dialog" data-toggle="modal"><span>User</span></a>
+    </div>
+
+  </header>
+
+  <div class="page" role="main">
+
+    <div class="content">
+      <nav class="toolbar">
+        <div class="left icongroup">
+          <a href="#" class="icon-navigation" id="close-rail"><span>Add</span></a>
+          <span class="divider"></span>
+          <a href="#" class="icon-check"><span>Select</span></a>
+          <a href="#" class="icon-upload"><span>Upload</span></a>
+          <a href="#" class="icon-addcollection"><span>Add Collection</span></a>
+        </div>
+        <div class="center">
+          <h1>Page Title</h1>
+        </div>
+        <div class="right icongroup">
+          <a href="#" class="icon-listview"><span>List</span></a>
+        </div>
+      </nav>
+
+      <nav class="toolbar">
+        <div class="left icongroup">
+          <button class="icon-chevronleft"><span>Toggle Rail</span></button>
+          <span class="divider"></span>
+          <a class="icon-add" href="#"><span>Create Page</span></a>
+        </div>
+        <div class="center">
+          <nav data-init="pulldown" class="pulldown">
+            <a href="#">Geometrixx Demo Site</a>
+            <div class="popover arrow-top">
+              <ul><li><a class="icon-folder withLabel" href="/libs/cq/gui/content/siteadmin.html/content"><span>Websites</span></a></li></ul>
+            </div>
+          </nav>
+        </div>
+        <div class="right icongroup">
+          <div class="foundation-admin-layouttoggle">
+            <button data-foundation-admin-layouttoggle-layout="{&quot;name&quot;:&quot;foundation-layout-list&quot;}" class="icon-listview" type="button"><span>List Layout</span></button>
+            <button data-foundation-admin-layouttoggle-layout="{&quot;name&quot;:&quot;foundation-layout-card&quot;}" class="icon-cardview" style="display:none" type="button"><span>Grid Layout</span></button>
+          </div>
+        </div>
+      </nav>
+
+      <nav class="toolbar">
+        <div class="left icongroup">
+          <button class="icon-navigation"><span>Toggle Rail</span></button>
+          <span class="divider"></span>
+          <button class="icon-close"><span>Close Selection Mode</span></button>
+          <button disabled="disabled" class="icon-properties"><span>View Properties</span></button>
+          <a href="#" class="disabled icon-delete"><span>Delete Page</span></a>
+        </div>
+        <div class="right icongroup">
+          <span class="text">1 selected</span>
+        </div>
+      </nav>
+
+      <nav class="toolbar">
+        <div class="left icongroup">
+          <button class="icon-back"><span>Back</span></button>
+        </div>
+        <div class="center"><h1 data-align="center">Properties</h1></div>
+        <div class="right icongroup">
+          <button class="foundation-mode-change primary">Edit</button>
+        </div>
+      </nav>
+
+      <nav class="toolbar">
+        <div class="left icongroup">
+          <button class="icon-chevronleft"><span>Back</span></button>
+          <span class="divider"></span>
+          <button class="icon-check"><span>Open Selection Mode</span></button>
+        </div>
+      </nav>
+
+      <nav class="toolbar">
+        <div class="left icongroup">
+          <button class="icon-viewgrid"><span>Toggle Rail</span></button>
+          <span class="divider"></span>
+          <div class="dropdown" data-init="dropdown">
+            <button>Single Select</button>
+            <select name="dropdown">
+              <option>Single One</option>
+              <option selected>Single Two</option>
+              <option>Single Three</option>
+            </select>
+          </div>
+          <button class="icon-close"><span>Close Selection Mode</span></button>
+          <button disabled="disabled" class="icon-properties"><span>View Properties</span></button>
+          <a href="#" class="disabled icon-delete"><span>Delete Page</span></a>
+        </div>
+        <div class="dropdown" data-init="dropdown">
+          <button>Single Select</button>
+          <select name="dropdown">
+            <option>Single One</option>
+            <option selected>Single Two</option>
+            <option>Single Three</option>
+          </select>
+        </div>
+        <div class="right icongroup">
+          <input type="text"/>
+          <span class="text">1 selected</span>
+        </div>
+      </nav>
+      <nav class="toolbar mode-default" data-init="toolbar">
+        <div class="left icongroup">
+          <button class="icon-navigation" title="Toggle Rail" type="button" data-target="#rail" autocomplete="off">Toggle Rail</button>
+          <span class="divider"></span>
+          <nav id="createpagebtn" class="pulldown" title="Create" data-init="pulldown">
+            <a href="#" class="icon-add">Create</a>
+            <div class="popover arrow-top alignleft">
+              <ul>
+                <li>
+                  <a href="#" class="withLabel">Create Page</a>
+                </li>
+                <li>
+                  <a class="disabled withLabel">Create Launch</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+        <div class="center">
+          <h1>Sites</h1>
+        </div>
+      </nav>
+    </div>
+  </div>
+</body>
+</html>

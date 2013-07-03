@@ -1,0 +1,25 @@
+{
+  "name": "coralui-core",
+  "version": "2.0.0-SNAPSHOT",
+  "repository": {
+    "type": "git",
+    "url": "https://git.corp.adobe.com/Coral/CoralUI"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-clean": "~0.4.1",
+    "grunt-contrib-cssmin": "~0.6.1",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-less": "~0.5.2",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-watch": "~0.4.4",
+    "grunt-mocha": "~0.3.4",
+    "grunt-jsdoc": "~0.3.3",
+    "chai": "1.5.0",
+    "chai-jquery": "1.1.1",
+    "mocha": "1.8.1",
+    "bootstrap": "git+https://github.com/twitter/bootstrap.git#v2.3.2"
+  }
+}

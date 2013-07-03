@@ -21,3 +21,4 @@ See the [CoralUI Wiki][6] for more information.
 [4]: https://git.corp.adobe.com/Coral/CoralUI/wiki/Build-Process-&-Technology
 [5]: mailto:CoralUI@adobe.com
 [6]: https://git.corp.adobe.com/Coral/CoralUI/wiki
+[7]: https://git.corp.adobe.com/Coral/CoralUI/wiki/CoralUI-Modularization

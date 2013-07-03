@@ -1,0 +1,136 @@
+/**
+    nav.feature list
+    Specification as provided by XD v5 (29th May 2013)
+*/
+div.rail {
+
+    >.wrap {
+
+        nav.feature {
+            .box-shadow(inset 0 -@px 0 @rail-section-border-color);
+            border-bottom: @px solid @rail-section-highlight-color; /* 1px to ensure rendering in IE9 which cuts rem units to 2dp (0.96px) */
+
+            > a,
+            > span {
+                letter-spacing: 0.05em; 
+
+                border-bottom: @px solid @rail-section-border-color;
+                .box-shadow(inset 0 1px 0 @rail-section-highlight-color); 
+                /* 1px to ensure rendering in IE9 which cuts rem units to 2dp (0.96px) */
+                text-rendering: geometricPrecision;
+                display: block;
+                background-color: @rail-background-color;
+                height: 46*@px;
+                line-height: 46*@px;
+
+                padding-left: 15*@px;
+
+                font-size: 18*@px;
+                
+                &, a { 
+                  color: @rail-font-color; 
+                }
+
+                >[class^="icon-"],
+                >[class*=" icon-"] {
+                    &.action {
+                        float: right;
+                        margin-right: 18*@px;
+                        margin-top: 13*@px;
+                        display: none;
+
+                        &:before {
+                            color: @rail-font-color;
+                            display: none;
+                        }
+                    }
+                }
+                
+                &.active {
+                    position: relative;
+
+                    background-color: @rail-active-background-color;
+                    .box-shadow(inset 0 1*@px 0 @rail-section-highlight-color);
+
+                    &:before {
+                        border: solid transparent;
+                        content: " ";
+                        height: 0;
+                        width: 0;
+                        position: absolute;
+                        pointer-events: none;
+                        top: 50%;
+                    }
+
+                    &:before {
+                        border-width: 0.5rem;
+                        margin-top: -0.5rem;
+                        right: -@px;
+                        border-right-color: @body-background-color;
+                    }
+                    
+                    &.focus {
+                        @shadow: inset 0 -@focus-glow-radius/2 @focus-glow-radius -@focus-glow-radius/2 fadeout(@rail-shadow-inset-color, 65%),
+                            inset 0 @focus-glow-radius/2 @focus-glow-radius -@focus-glow-radius/2 fadeout(@rail-shadow-inset-color, 65%);
+                        background-color: @rail-well-background-color; 
+                        .box-shadow(@shadow);
+                    }
+                }
+                
+                &:active {
+                  color: @rail-font-active-color;
+                  background-color: @rail-active-secondary-background-color;
+                }
+
+                &.focus {
+                    text-decoration: none;
+                    background-color: @rail-well-background-color;
+                    .box-shadow(
+                        inset 0 @px 0 @rail-background-color
+                    );
+                }
+
+                &:hover,
+                > a:hover {
+                    text-decoration: none;
+                    color: @rail-font-hover-color;
+
+                    >[class^="icon-"],
+                    >[class*=" icon-"] {
+                        &.action {
+                            &,&:before {
+                                display: inline;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+            }
+
+            > span {
+                & a:first-child { // should be applied only to first a tag
+                    display: inline-block;
+                    width: 100%;
+                }
+
+                &.active a:first-child { // should be applied only to first a tag
+                    width: 80%;
+                }
+            }
+
+            >.sub-navigation {
+                background-color: @rail-dark-background-color;
+                font-size: 16*@px;
+
+                border-bottom: @px solid @rail-section-secondary-border-color;
+                .box-shadow(inset 0 1*@px 0 @rail-section-secondary-first-child-highlight-color); 
+
+                ~.sub-navigation {
+                    .box-shadow(inset 0 @px 0 @rail-section-secondary-highlight-color); 
+                }
+            }
+        } /* nav.feature */
+
+    } /* .wrap */
+
+} /* rail */

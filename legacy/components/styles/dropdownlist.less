@@ -1,0 +1,109 @@
+/**
+* Also used by auto completers, see filters.less
+*/
+.dropdown-container {
+   display: inline-block;
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+.dropdown-visible {
+    z-index: 1000;
+}
+.dropdown-list {
+    position: absolute;
+    max-height: 20rem;
+    overflow: auto;
+    border-bottom: @px solid @dropdown-border-color;
+    z-index: 1000;
+}
+.dropdown-list  ul {
+    margin: 0;
+    padding: 0;
+    font-size: @dropdown-text-size;
+    background-color: @dropdown-background-color;
+
+    li {
+        list-style-type: none;
+        padding: 0.5rem 0.5rem;
+        margin: 0;
+        min-height: 1.3125rem;
+        line-height: 1.3125rem;
+        background-color: @dropdown-background-color;
+        border: @px solid @dropdown-border-color;
+        border-bottom: none;
+        border-top: @px solid lighten(@dropdown-border-color, 20%);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+
+        cursor: pointer;
+
+        &:first-child {
+            border-top: @px solid @dropdown-border-color;
+        }
+
+        // No border at bottom as the border is on the sourrounding ul because of possible scrolling
+        /*
+        &:last-child {
+            border-bottom: @px solid @dropdown-border-color;
+        }
+        */
+
+        &.selected {
+            background-color: lighten(@dropdown-active-background-color, 10%);
+            color: @dropdown-active-text-color;            
+        }
+
+        &:hover,
+        &.selected:hover {
+            background-color: @dropdown-active-background-color;
+            color: @dropdown-active-text-color;
+            border: @px solid darken(@dropdown-active-background-color, 20%);
+            border-bottom: none;
+
+            // No border at bottom as the border is on the sourrounding ul because of possible scrolling
+            /*
+            &:last-child {
+                border-bottom: @px solid darken(@dropdown-active-background-color, 20%);            
+            }
+            */
+
+            + li {
+                border-top: @px solid darken(@dropdown-active-background-color, 20%);                            
+            }
+        }
+
+        &.loading-indicator {
+          text-align: center;
+        }
+
+        i {
+          display: inline-block;
+          margin-right: 5*@px;
+        }
+    }
+
+    .checkbox {
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+      border: @px solid @checkbox-border-color;
+      background: @checkbox-background-color;
+      .background-size(contain);
+      margin-right: .5rem;
+      vertical-align: text-bottom;
+    }
+
+  .checkbox.checked:before {
+    display: inline-block;
+    font-family: AdobeIcons;
+    content: @icon-check-content;
+    line-height: 1.5;
+    font-size: 0.70rem;
+    color: @checkbox-check-color;
+    text-align: center;
+    width: 1rem;
+    height: 1rem;
+  }    
+}

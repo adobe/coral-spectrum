@@ -2,10 +2,8 @@
 /build
 /temp
 /node_modules
-/externals/components
 /misc
 /target
-/components
 .idea/
 atlassian-ide-plugin.xml
 *.iml
