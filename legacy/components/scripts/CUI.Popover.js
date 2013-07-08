@@ -201,8 +201,8 @@
           absolutePosition = $el.offset(),
           pointAtHeight = $el.outerHeight(),
           pointAtWidth = $el.outerWidth(),
-          screenWidth = $(window).width(),
-          screenHeight = $(window).height(),
+          screenWidth = $("body").prop("scrollWidth"),
+          screenHeight = $("body").prop("scrollHeight"),
           pointFrom = this.options.pointFrom,
           left = relativePosition.left,
           top = relativePosition.top,
@@ -214,15 +214,22 @@
           parentPadding = parseFloat(this.$element.parent().css('padding-right')),
           arrowHeight = Math.round((this.$element.outerWidth() - this.$element.innerWidth()) / 1.45),
           // The arrow height calculation just approximates the size, as we can not get it from the element
-          right, offset = 0;
+          right, offset = 0, offsetTop = 0;
 
       // Switch directions if we fall off screen
-      if (pointFrom === 'top' && absolutePosition.top - height - pointAtHeight - arrowHeight < 0) {
+      if (pointFrom === 'top' && absolutePosition.top - height- arrowHeight < 0) {
         pointFrom = 'bottom';
       }
 
       if (pointFrom === 'bottom' && absolutePosition.top + height + arrowHeight + pointAtHeight > screenHeight) {
         pointFrom = 'top';
+      }
+      if (pointFrom === 'left' && absolutePosition.left - width - arrowHeight < 0) {
+          pointFrom = 'right';
+        }
+
+      if (pointFrom === 'right' && absolutePosition.left + width + arrowHeight + pointAtWidth > screenWidth) {
+          pointFrom = 'left';
       }
 
       // set our point direction
@@ -234,7 +241,7 @@
         if (pointFrom === 'bottom') {
           top += (pointAtHeight + arrowHeight);
         } else if (pointFrom === 'top') {
-          top -= (height + pointAtHeight - arrowHeight);
+          top -= (height + arrowHeight);
         }
       }
 
@@ -247,7 +254,7 @@
           left += (pointAtWidth + arrowHeight);
         }
       }
-
+      
       // for right-aligned popovers, we need to take into account the positioned parent width, as well as the padding
       right = parentWidth - left - width + parentPadding*2;
 
@@ -276,7 +283,6 @@
       }
 
       var set_arrows = false;
-      
       // Position arrow
       if (pointFrom === 'top' || pointFrom === 'bottom') {
         if (offset < 0 || this.options.arrowPos === 'right') {
@@ -287,7 +293,7 @@
           set_arrows = true;
         }
       }
-
+      
       if (!set_arrows) {
         this.$element.removeClass('arrow-pos-left arrow-pos-right');
       }
