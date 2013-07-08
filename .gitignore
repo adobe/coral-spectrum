@@ -2,6 +2,7 @@
 /build
 /temp
 /node_modules
+/externals/components
 /misc
 /target
 .idea/
