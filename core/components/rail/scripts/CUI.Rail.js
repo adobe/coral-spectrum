@@ -121,6 +121,13 @@
                     head.trigger('focus');
                     fold.removeAttr('tabindex');
                 }
+            }).on('keydown', 'section.foldable .heading:not(button):not(a[href])', function (event) {
+                var head = $(event.currentTarget);
+                switch (event.which) {
+                    case 13:
+                        head.trigger('click');
+                        break;
+                }
             });
 
         }, //_initFoldable
