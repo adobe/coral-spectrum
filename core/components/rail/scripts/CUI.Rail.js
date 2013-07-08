@@ -80,18 +80,20 @@
                 var section = $(e),
                     head = section.find('.heading'),
                     fold = section.find('.fold'),
-                    curId = idPrefix + (head.attr('href') || (' ' + $.expando)).substring(1),
+                    curId = idPrefix + (head.attr('href') || (' ' + new Date().getTime() + '-' + i)).substring(1),
                     isOpen = section.hasClass(openClass);
 
                 section.attr('role', 'presentation');
                 head.attr({
                     'role': 'button',
-                    'aria-controls': curId,
+                    'id': head.attr('id') || curId,
+                    'aria-controls': fold.attr('id') || curId + '-fold',
                     'tabindex': 0,
                     'aria-expanded': isOpen
                 });
                 fold.attr({
-                    'aria-labelledby': curId,
+                    'id': fold.attr('id') || curId + '-fold',
+                    'aria-labelledby': head.attr('id'),
                     'aria-hidden': !isOpen,
                     'aria-expanded': isOpen
                 });
