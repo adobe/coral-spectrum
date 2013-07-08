@@ -383,7 +383,9 @@
          * @event beforeshow
          */
         _show: function () {
-            var body = $('body');
+            var body = $('body'),
+                tabcapture,
+                self = this;
 
             // ARIA: http://www.w3.org/WAI/PF/aria-practices/#dialog_modal
             // When the dialog is closed or cancelled focus should 
@@ -436,7 +438,7 @@
                 if (event.currentTarget === lasttabcapture[0]) {
                     focusElem = tabbables.filter(':not(.modal-header .close):last');
                 } else {
-                    focusElem = tabbables.filter(':not(.modal-header .close):first')
+                    focusElem = tabbables.filter(':not(.modal-header .close):first');
                 }
 
                 if (focusElem.length === 0) {
