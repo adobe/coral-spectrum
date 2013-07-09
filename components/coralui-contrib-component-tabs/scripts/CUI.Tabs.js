@@ -369,8 +369,8 @@
 
     // Data API
     if (CUI.options.dataAPI) {
-        $(function () {
-            $("[data-init~=tabs]").tabs();
+        $(document).on('cui-contentloaded.data-api', function (event) {
+            $('[data-init~=tabs]').tabs();
         });
     }
 
