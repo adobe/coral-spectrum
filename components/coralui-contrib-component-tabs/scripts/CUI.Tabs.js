@@ -370,7 +370,7 @@
     // Data API
     if (CUI.options.dataAPI) {
         $(document).on('cui-contentloaded.data-api', function (event) {
-            $('[data-init~=tabs]', e.target).tabs();
+            $('[data-init~=tabs]', event.target).tabs();
         });
     }
 
