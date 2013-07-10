@@ -339,9 +339,9 @@
             $.each(this.options.buttons, function(idx, button) {
                 // Create an anchor if href is provided
                 var btn = button.href ? $('<a/>', {
-                        class: 'button'
+                        'class': 'button'
                     }) : $('<button/>', {
-                        type: 'button'
+                        'type': 'button'
                     });
 
                 // Add label
