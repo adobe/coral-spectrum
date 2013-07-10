@@ -3,29 +3,16 @@
   A simple search field with button
 */
 
-div.search {
+.search {
+  position: relative;
   display: inline-block;
   padding: 0;
-  margin: 0.5rem 0;
-  white-space: nowrap; // Fix iOS Safari bug with negative margins
+  margin: 0.5rem 0; // Put the margin here instead of in the textfield
+  // TODO Put the margin for form control in a variable
   
-  input[type=text] {
-    height: 2rem;
+  input[type=text] { // TODO type=search should be considered as well
     margin: 0;
-    
-    min-width: 10rem;
-    
     padding-right: 40*@px;
-    
-    font-size: 13*@px;
-    font-family: @font-base-family;
-
-    &.error {
-      border-color: @textfield-error-border-color;
-    }
-    &:focus.error {
-      .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
-    }    
   }
 
   button {
@@ -34,8 +21,10 @@ div.search {
     white-space: normal;
         
     // Fit inside of the search field
+    position: absolute;
+    top: @px; // Because of textfield border
+    right: @px; // Because of textfield border
     height: 30*@px;
-    margin: @px 0 0 -37*@px;
     
     &,
     &:hover,
