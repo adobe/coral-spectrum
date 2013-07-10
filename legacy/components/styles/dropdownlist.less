@@ -74,6 +74,20 @@
             }
         }
 
+        &.divider {
+            background-color: @dropdown-divider-color;
+            text-transform: uppercase;
+            pointer-events: none;
+            border-top: @px solid rgba(0, 0, 0, 0.25);
+            border-bottom: @px solid rgba(0, 0, 0, 0.25);
+            font-size: 12px;
+            padding: 0rem 0.5rem;
+        }
+
+        &.divider span {
+            font-weight: bold;
+        }
+
         &.loading-indicator {
           text-align: center;
         }

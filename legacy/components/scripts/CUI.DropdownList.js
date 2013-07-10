@@ -137,6 +137,13 @@
                 var el = (this.options.optionRenderer) ? this.options.optionRenderer(index, value) : $("<span>" + value.toString() + "</span>");
                 var li = $("<li data-id=\"" + (offset+index) + "\">");
                 if (index === this.currentIndex) li.addClass("selected");
+                
+                // Set class on list items from data-item-class set on options
+                var optionClassAttribute = this.options.getOptionClassAttribute(index);
+                if (optionClassAttribute) {
+                    li.addClass(optionClassAttribute);
+                }
+
                 li.append(el);
                 list.append(li);
                 this.options.options.push(value);
@@ -242,6 +249,13 @@
             var el = (this.options.optionRenderer) ? this.options.optionRenderer(index, value) : $("<span>" + value.toString() + "</span>");
             var li = $("<li data-id=\"" + index + "\">");
             if (index === this.currentIndex) li.addClass("selected");
+
+            // Set class on list items from data-item-class set on options
+            var optionClassAttribute = this.options.getOptionClassAttribute(index);
+            if (optionClassAttribute) {
+                li.addClass(optionClassAttribute);
+            }
+
             li.append(el);
             list.append(li);
         }.bind(this));

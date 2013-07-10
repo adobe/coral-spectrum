@@ -122,6 +122,7 @@
             autoPosition: this.options.autoPosition,
             options: this.options.options,
             optionRenderer: this._optionRenderer.bind(this),
+            getOptionClassAttribute: this._getOptionClassAttribute.bind(this),
             noWidth: this.options.noWidth
         });
 
@@ -133,6 +134,7 @@
                 autoPosition: this.options.autoPosition,
                 options: this.options.options,
                 optionRenderer: this._optionRendererAutocomplete.bind(this),
+                getOptionClassAttribute: this._getOptionClassAttribute.bind(this),
                 noWidth: this.options.noWidth,
                 cssClass: "autocomplete-results"
             });
@@ -251,6 +253,11 @@
         }
         
         return $("<span>" + value + "</span>");
+    },
+
+    /** @ignore */
+    _getOptionClassAttribute: function(index) {
+        return (this.syncSelectElement) ? $(this.syncSelectElement.find("option").get(index)).data("itemclass") : "";
     },
     
     /** @ignore */
