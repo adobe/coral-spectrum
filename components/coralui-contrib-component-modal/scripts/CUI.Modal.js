@@ -146,8 +146,8 @@
             // creates a backdrop object
             // but it does not attach it to the document
             this.backdrop = $('<div/>', {
-                class: 'modal-backdrop',
-                style: 'display: none;'
+                'class': 'modal-backdrop',
+                'style': 'display: none;'
             }).fipo('tap', 'click', function (event) {
                 if (this.options.backdrop !== 'static') {
                     this.hide();
