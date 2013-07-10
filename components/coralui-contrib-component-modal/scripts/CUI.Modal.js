@@ -363,6 +363,8 @@
                 if (button.className) {
                     btn.addClass(button.className);
                 }
+
+                self.footer.append(btn);
             });
         },
 
