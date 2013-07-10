@@ -383,7 +383,9 @@
          * @event beforeshow
          */
         _show: function () {
-            var body = $('body');
+            var body = $('body'),
+                tabcapture,
+                self = this;
 
             // ARIA: http://www.w3.org/WAI/PF/aria-practices/#dialog_modal
             // When the dialog is closed or cancelled focus should 
@@ -404,8 +406,17 @@
 
             // Move to the bottom of body so we're outside of any relative/absolute context
             // This allows us to know we'll always float above the backdrop
-            if (this.options.attachToBody && this.$element.parent('body').length === 0) {
-                this.$element.appendTo(body);
+            if (this.options.attachToBody) {
+                if (this.$element.parent('body').length === 0) {
+                    this.$element.appendTo(body);
+                }
+                // ARIA
+                // Hide sibling elements from assistive technologies, 
+                // but first store the state of any siblings already have the aria-hidden attribute 
+                this.$element.siblings('[aria-hidden]').each(function(index, element) {
+                    $(element).data('aria-hidden', $(element).attr('aria-hidden'));
+                });            
+                this.$element.siblings().not('script, link, style').attr('aria-hidden', this.options.visible);
             }
 
             this.$element.attr('aria-hidden', !this.options.visible);
@@ -413,9 +424,32 @@
             // fadeIn
             this.$element.fadeIn();
 
-            // ARIA
             // When a modal dialog opens focus goes to the first focusable item in the dialog
-            this.$element.find(':focusable').eq(0).trigger('focus');
+            this.$element.find(':tabbable:not(.modal-header .close):first').focus();
+            
+            // add tab-focusable divs to capture and forward focus to the modal dialog when page regains focus
+            tabcapture = $('<div class="cui-modal-tabcapture" tabindex="0"/>');
+            tabcapture.on('focus.modal-tabcapture', function(event) {
+                var tabbables = self.$element.find(':tabbable'),
+                    tabcaptures = $('body > .cui-modal-tabcapture'),
+                    lasttabcapture  = tabcaptures.last(),
+                    focusElem;
+                
+                if (event.currentTarget === lasttabcapture[0]) {
+                    focusElem = tabbables.filter(':not(.modal-header .close):last');
+                } else {
+                    focusElem = tabbables.filter(':not(.modal-header .close):first');
+                }
+
+                if (focusElem.length === 0) {
+                    focusElem = self.$element;
+                }
+
+                focusElem.trigger('focus');
+            })
+            .prependTo(body)
+            .clone(true)
+            .appendTo(body);
 
             // add escape handler
             $(document).on('keydown.modal-escape', this._escapeKeyHandler.bind(this));
@@ -428,7 +462,8 @@
          * @event beforehide
          */
         _hide: function () {
-            $('body').removeClass('modal-open');
+            $('body').removeClass('modal-open')
+                .find('.cui-modal-tabcapture').off('focus.modal-tabcapture').remove();
 
             // remove escape handler
             $(document).off('keydown.modal-escape');
@@ -439,6 +474,14 @@
             this._toggleBackdrop(false);
 
             this.$element.attr('aria-hidden', !this.options.visible);
+            
+            this.$element.siblings()
+                .removeAttr('aria-hidden')
+                .filter(':data("aria-hidden")')
+                .each(function(index, element) {
+                    $(element).attr('aria-hidden', $(element).data('aria-hidden'))
+                        .removeData('aria-hidden');
+                });
 
             // fadeOut
             this.$element.fadeOut().trigger('blur');

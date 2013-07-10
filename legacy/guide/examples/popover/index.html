@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Popovers</title>
+
+<link rel="stylesheet" href="../../css/cui.css">
+
+<script src="../../js/libs/handlebars.js"></script>
+<script src="../../js/libs/moment.js"></script>
+<script src="../../js/libs/jquery.js"></script>
+<script src="../../js/libs/toe.js"></script>
+<script src="../../js/libs/moment.js"></script>
+
+<script src="../../js/CUI.js"></script>
+
+</head>
+<body>
+    <div class="col" style="margin:300px">
+       <section>
+            <p>Single icon triggers for popover</p>
+       </section>
+        <section>
+            Left popover:<a href="#first_popover" data-toggle="popover" data-point-from="right" data-align-from="left" class="icon-check medium" style="border: 1px solid black;"></a>
+            <div id="first_popover" class="popover"><div style="padding: 2rem; width: 16rem;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida.</div></div>
+        </section>
+
+        <section>
+            Right popover:<a href="#second_popover" data-toggle="popover" data-point-from="left" data-align-from="right" class="icon-check medium" style="border: 1px solid black;"></a>
+            <div id="second_popover" class="popover">Short popover content.</div>
+        </section>
+
+        <section>
+            Top popover:<a href="#third_popover" data-toggle="popover" data-point-from="top" data-align-from="left" class="icon-check medium" style="border: 1px solid black;"></a>
+            <div id="third_popover" class="popover"><div style="width: 24rem;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. <a href="#">Link!</a></div></div>
+        </section>
+
+        <section>
+            Bottom popover: <a href="#fourth_popover" data-toggle="popover" data-point-from="bottom" data-align-from="right" class="icon-check medium" style="border: 1px solid black;"></a>
+            <div id="fourth_popover" class="popover"><div style="width: 20rem;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. <a href="#">Link!</a></div></div>
+        </section>
+
+    </div>
+
+             
+</body>
+</html>
