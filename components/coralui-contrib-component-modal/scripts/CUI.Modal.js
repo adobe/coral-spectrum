@@ -138,6 +138,13 @@
          * 
          */
         construct: function (options) {
+            // @deprecated, rather the template engine should be agonistic
+            // Render template, if necessary
+            // disabled for now
+            if (this.$element.children().length === 0) {
+                this.$element.html(CUI.Templates['modal']($.extend({}, this.options, { buttons: '' })));
+            }
+
             // modal parts
             this.header = this.$element.find('.modal-header');
             this.body = this.$element.find('.modal-body');
@@ -156,13 +163,6 @@
 
             // Fetch content asynchronously, if remote is defined
             this.body.loadWithSpinner(this.options.remote);
-
-            // @deprecated, rather the template engine should be agonistic
-            // Render template, if necessary
-            // disabled for now
-            if (this.$element.children().length === 0) {
-                this.$element.html(CUI.Templates['modal']($.extend({}, this.options, { buttons: '' })));
-            }
 
             this.applyOptions();
 
