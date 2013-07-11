@@ -145,10 +145,18 @@
                 this.$element.html(CUI.Templates['modal']($.extend({}, this.options, { buttons: '' })));
             }
 
+            // @deprecated adding a styling class blocks the reusability
+            // of the modal's javascript. This will be removed in future
+            // add styling
+            this.$element.addClass('modal');
+
             // modal parts
             this.header = this.$element.find('.modal-header');
             this.body = this.$element.find('.modal-body');
             this.footer = this.$element.find('.modal-footer');
+
+            // previous focus element
+            this._previousFocus = $();
 
             // creates a backdrop object
             // but it does not attach it to the document
