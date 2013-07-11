@@ -8,3 +8,4 @@
 .idea/
 atlassian-ide-plugin.xml
 *.iml
+npm-debug.log
