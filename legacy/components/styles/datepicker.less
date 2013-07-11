@@ -1,57 +1,63 @@
 /**
-* 
-* A calendar for picking dates
-*/
+ * A calendar for picking dates
+ */
 
 .datepicker {
-  display: inline-block;
-  vertical-align: middle; // Align it on current line
-  margin: 0.125rem 0;  // Give a top/bottom margin so they stack right
   position: relative;
-  font-size: 0; /* Remove space between inline-block elements */
+  display: inline-block;
+  margin: 0.5rem 0;
+  vertical-align: middle;
 
-  input[type^="date"], input[type="time"] {
-    .border-box;
-    font-size: 0.8125rem; /* 13px */
-    font-family: @font-base-family;
-    line-height: 1.375rem;
+  > input[type=text] {
+    margin: 0;
+    padding-right: 40*@px;
+  }
 
-    height: 2rem;
-    padding: 0.25rem 0.5rem;
-    margin: 0.5rem 0;
+  > input[type^="date"], > input[type="time"] {
+    margin: 0;
+    padding-right: 40*@px;
+    -webkit-appearance: none; // remove default styling for native html5 input
+  }
 
-    border: @px solid @textfield-border-color;
-    background-color: @textfield-background-color;
-
-    -webkit-appearance: none; /* Remove default styling for native html5 input */
-    .border-radius(0);
-
+  > button {
+    .button-square;
+        
+    // Fit inside of the text field
+    position: absolute;
+    top: @px; // Because of textfield border
+    right: @px; // Because of textfield border
+    height: 30*@px;
+    
+    &,
+    &:hover,
+    &:active,
     &:disabled {
-      background-color: @textfield-disabled-background-color;
+      border: none;
+      border-left: @px solid @textfield-border-color;
+      filter: none;
+    }
+
+    &.small { // for backward compatibility; .small is not required
+      // reset all small to behave as .small is not applied
+      min-width: 0;
+      min-height: 0;
+      line-height: 1.9375rem;
+      font-size: inherit;
     }
   }
 
-  &.focus > button,
-  &.focus input {
-    .glow();
-  }
   &.error > button,
-  &.error input {
-    border-color: @textfield-error-border-color !important;
+  &.error > input {
+    color: @textfield-error-font-color;
+    border-color: @textfield-error-border-color;
   }
+
+  &.error > button:focus,
+  &.error > input:focus,
   &.error.focus > button,
-  &.error.focus input {
+  &.error.focus > input {
+    color: @textfield-error-font-color;
     .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
-  }
-  
-  button,
-  button[class^="icon-"],
-  button[class*=" icon-"] {
-    .button-square;
-    
-    margin-left: -@px; // Overlap border
-    
-    vertical-align: middle;
   }
 
   .popover {
