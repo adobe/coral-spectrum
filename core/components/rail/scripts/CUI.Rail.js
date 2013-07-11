@@ -124,7 +124,8 @@
             }).on('keydown', 'section.foldable .heading:not(button):not(a[href])', function (event) {
                 var head = $(event.currentTarget);
                 switch (event.which) {
-                    case 13:
+                    case 13: //enter
+                    case 32: //space
                         head.trigger('click');
                         break;
                 }
