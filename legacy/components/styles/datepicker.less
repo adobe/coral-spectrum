@@ -4,255 +4,255 @@
 */
 
 .datepicker {
-    display: inline-block;
-    vertical-align: middle; // Align it on current line
-    margin: 0.125rem 0;  // Give a top/bottom margin so they stack right
-    position: relative;
-    font-size: 0; /* Remove space between inline-block elements */
+  display: inline-block;
+  vertical-align: middle; // Align it on current line
+  margin: 0.125rem 0;  // Give a top/bottom margin so they stack right
+  position: relative;
+  font-size: 0; /* Remove space between inline-block elements */
 
-    input[type^="date"], input[type="time"] {
-      .border-box;
-      font-size: 0.8125rem; /* 13px */
-      font-family: @font-base-family;
-      line-height: 1.375rem;
+  input[type^="date"], input[type="time"] {
+    .border-box;
+    font-size: 0.8125rem; /* 13px */
+    font-family: @font-base-family;
+    line-height: 1.375rem;
 
-      height: 2rem;
-      padding: 0.25rem 0.5rem;
-      margin: 0.5rem 0;
+    height: 2rem;
+    padding: 0.25rem 0.5rem;
+    margin: 0.5rem 0;
 
-      border: @px solid @textfield-border-color;
-      background-color: @textfield-background-color;
+    border: @px solid @textfield-border-color;
+    background-color: @textfield-background-color;
 
-      -webkit-appearance: none; /* Remove default styling for native html5 input */
-      .border-radius(0);
+    -webkit-appearance: none; /* Remove default styling for native html5 input */
+    .border-radius(0);
 
-      &:disabled {
-        background-color: @textfield-disabled-background-color;
-      }
+    &:disabled {
+      background-color: @textfield-disabled-background-color;
     }
+  }
 
-    &.focus > button,
-    &.focus input {
-      .glow();
-    }
-    &.error > button,
-    &.error input {
-      border-color: @textfield-error-border-color !important;
-    }
-    &.error.focus > button,
-    &.error.focus input {
-      .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
-    }
+  &.focus > button,
+  &.focus input {
+    .glow();
+  }
+  &.error > button,
+  &.error input {
+    border-color: @textfield-error-border-color !important;
+  }
+  &.error.focus > button,
+  &.error.focus input {
+    .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+  }
+  
+  button,
+  button[class^="icon-"],
+  button[class*=" icon-"] {
+    .button-square;
     
-    button,
-    button[class^="icon-"],
-    button[class*=" icon-"] {
-      .button-square;
-      
-      margin-left: -@px; // Overlap border
-      
-      vertical-align: middle;
+    margin-left: -@px; // Overlap border
+    
+    vertical-align: middle;
+  }
+
+  .popover {
+    display: block;
+    position: absolute;
+    top: 3rem; /* 48px */ /* TODO: place popover relative to the action button (above or below) */
+    left: 0;
+
+    border: 10*@px solid @popover-border-color; /* TODO: 8px in .popover, but design shows 10px */
+    
+    /* TODO: this is an override of popover .arrow-top. Increases margin to 10px to match design document
+     * should margins consistently be 8px or 10px for popovers, change accordingly.
+     */
+    &.arrow-top:before {
+      margin-bottom: 10*@px;
     }
 
-    .popover {
-      display: block;
-      position: absolute;
-      top: 3rem; /* 48px */ /* TODO: place popover relative to the action button (above or below) */
-      left: 0;
-
-      border: 10*@px solid @popover-border-color; /* TODO: 8px in .popover, but design shows 10px */
-      
-      /* TODO: this is an override of popover .arrow-top. Increases margin to 10px to match design document
-       * should margins consistently be 8px or 10px for popovers, change accordingly.
-       */
-      &.arrow-top:before {
-        margin-bottom: 10*@px;
-      }
-
-      .inner {
-        border: @px solid @modal-outline-color;
-      }
+    .inner {
+      border: @px solid @modal-outline-color;
     }
+  }
 
-    .calendar {
-      width: 244*@px;
+  .calendar {
+    width: 244*@px;
 
-      .calendar-header {
-        position: relative;
+    .calendar-header {
+      position: relative;
+      .border-box;
+      width: 100%;
+      height: @modal-header-height;
+      
+      background: @modal-header-background-color;
+
+      // Bottom border, easiest with a box shadow
+      .box-shadow(inset 0 -@px 0 @modal-header-border-color);
+
+      h2 {
+        position: absolute;
+        left: 0;
+        top: 0;
+        
         .border-box;
         width: 100%;
-        height: @modal-header-height;
+        height: 3.125rem;
+        margin: 0;
+        padding: 0;
         
-        background: @modal-header-background-color;
+        text-align: center;
+        font-size: 20*@px;
+        line-height: 3.125rem;
+        .ellipsis();
+      }
 
-        // Bottom border, easiest with a box shadow
-        .box-shadow(inset 0 -@px 0 @modal-header-border-color);
+      button.prev-month,
+      button.next-month {
+        position: absolute;
+        top: 0;
+        
+        width: auto;
+        height: auto;
+        
+        padding: 4*@px;
+        margin: 8*@px;
+        
+        border: 0;
+        background: none;
+        filter: progid:DXImageTransform.Microsoft.gradient(enabled = false); /* Removes ie filter */
 
-        h2 {
-          position: absolute;
-          left: 0;
-          top: 0;
-          
-          .border-box;
-          width: 100%;
-          height: 3.125rem;
-          margin: 0;
-          padding: 0;
-          
-          text-align: center;
-          font-size: 20*@px;
-          line-height: 3.125rem;
-          .ellipsis();
+        font-size: 26*@px;
+        color: rgb(90,90,90);
+        line-height: 26*@px;
+        
+        &:hover {
+          border: 0 none;
+          background: none;
+          color: rgb(44,44,44);
         }
 
-        button.prev-month,
-        button.next-month {
-          position: absolute;
-          top: 0;
-          
-          width: auto;
-          height: auto;
-          
-          padding: 4*@px;
-          margin: 8*@px;
-          
-          border: 0;
+        &:active, &:focus {
           background: none;
-          filter: progid:DXImageTransform.Microsoft.gradient(enabled = false); /* Removes ie filter */
+          .box-shadow(none);
+        }
+      }
 
-          font-size: 26*@px;
-          color: rgb(90,90,90);
-          line-height: 26*@px;
-          
+      button.prev-month {
+        left: 0;
+        margin-left: 5*@px;
+      }
+      button.next-month {
+        right: 0;
+        margin-right: 5*@px;
+      }
+    }
+
+    // TODO: taken from .modal-body for styling. Should belong to popover
+    .calendar-body {
+      .border-box;
+      width: 100%;
+      padding: 0;
+      .scrollable();
+    }
+
+    table {
+      table-layout: fixed;
+      border-spacing: @px;
+      width: 100%;
+      margin: 0;
+      background-color: rgb(230,230,230);
+      font-size: 15*@px;
+      font-family: @font-light-family;
+
+      a, span {
+        background: @datepicker-day-background-color;
+        padding: 7*@px 0;
+        display: block;
+      }
+
+      th, td {
+        text-align: center;
+        padding: 0;
+
+        &:first-child {
+          a, span {
+            margin-left: -@px;
+          }
+          a:active, &.selected a, &.today a, &.today a:active {
+            border-left: 0 none;
+          }
+        }
+
+        &:last-child {
+          a, span {
+            margin-right: -@px;
+          }
+          a:active, &.selected a, &.today a, &.today a:active {
+            border-right: 0 none;
+          }
+        }
+      }
+
+      tr:last-child {
+        a, span {
+          margin-bottom: -@px;
+        }
+        a:active, .selected a, .today a, .today a:active {
+          border-bottom: 0 none;
+        }
+      }
+
+      th {
+        span {
+          background: @datepicker-day-title-background-color;
+          border-bottom: @px solid @datepicker-day-title-border-color;
+          font-size: 10*@px;
+          text-transform: uppercase;
+          padding: 3*@px 0;
+          margin: -@px;
+        }
+      }
+
+      td {
+        a {
+          color: @datepicker-day;
+          text-decoration: none;
+          position: relative;
+          z-index: 100;
+
           &:hover {
-            border: 0 none;
-            background: none;
-            color: rgb(44,44,44);
+            text-decoration: none;
+            background: @datepicker-day-hover-background-color;
           }
 
-          &:active, &:focus {
-            background: none;
+          &:focus {
             .box-shadow(none);
           }
         }
 
-        button.prev-month {
-          left: 0;
-          margin-left: 5*@px;
-        }
-        button.next-month {
-          right: 0;
-          margin-right: 5*@px;
-        }
-      }
-
-      // TODO: taken from .modal-body for styling. Should belong to popover
-      .calendar-body {
-        .border-box;
-        width: 100%;
-        padding: 0;
-        .scrollable();
-      }
-
-      table {
-        table-layout: fixed;
-        border-spacing: @px;
-        width: 100%;
-        margin: 0;
-        background-color: rgb(230,230,230);
-        font-size: 15*@px;
-        font-family: @font-light-family;
-
-        a, span {
-          background: @datepicker-day-background-color;
-          padding: 7*@px 0;
-          display: block;
+        span {
+          background: @datepicker-day-dimmed-background-color;
+          color: @datepicker-day-dimmed-text-color;
         }
 
-        th, td {
-          text-align: center;
-          padding: 0;
-
-          &:first-child {
-            a, span {
-              margin-left: -@px;
-            }
-            a:active, &.selected a, &.today a, &.today a:active {
-              border-left: 0 none;
-            }
-          }
-
-          &:last-child {
-            a, span {
-              margin-right: -@px;
-            }
-            a:active, &.selected a, &.today a, &.today a:active {
-              border-right: 0 none;
-            }
-          }
-        }
-
-        tr:last-child {
-          a, span {
-            margin-bottom: -@px;
-          }
-          a:active, .selected a, .today a, .today a:active {
-            border-bottom: 0 none;
-          }
-        }
-
-        th {
-          span {
-            background: @datepicker-day-title-background-color;
-            border-bottom: @px solid @datepicker-day-title-border-color;
-            font-size: 10*@px;
-            text-transform: uppercase;
-            padding: 3*@px 0;
-            margin: -@px;
-          }
-        }
-
-        td {
+        &.today {
           a {
-            color: @datepicker-day;
-            text-decoration: none;
-            position: relative;
-            z-index: 100;
-
-            &:hover {
-              text-decoration: none;
-              background: @datepicker-day-hover-background-color;
-            }
-
-            &:focus {
-              .box-shadow(none);
-            }
-          }
-
-          span {
-            background: @datepicker-day-dimmed-background-color;
-            color: @datepicker-day-dimmed-text-color;
-          }
-
-          &.today {
-            a {
-              margin: -@px;
-              background: @datepicker-day-today-background-color;
-              border: @px solid @datepicker-day-today-border-color;
-            }
-          }
-
-          // Pressed, selected
-          a:active, &.today a:active, &.selected a {
             margin: -@px;
-            border: @px solid @datepicker-day-selected-border-color;
-            background: @datepicker-day-selected-background-color;
-            color: @datepicker-day-selected-text-color;
-            z-index: 200;
+            background: @datepicker-day-today-background-color;
+            border: @px solid @datepicker-day-today-border-color;
           }
+        }
+
+        // Pressed, selected
+        a:active, &.today a:active, &.selected a {
+          margin: -@px;
+          border: @px solid @datepicker-day-selected-border-color;
+          background: @datepicker-day-selected-background-color;
+          color: @datepicker-day-selected-text-color;
+          z-index: 200;
         }
       }
     }
+  }
     
   .time {
     background: @datepicker-time-background-color;
