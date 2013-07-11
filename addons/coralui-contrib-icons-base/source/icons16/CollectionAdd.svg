@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="512px" height="512px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+<path d="M192.735,384H192V256h40.335c10.042-12.142,21.682-22.913,34.59-32H192V96h96v115.255c10.14-5.196,20.846-9.436,32-12.602
+	V96h96v102.653c23.746,6.74,45.464,18.352,64,33.682V32H0v416h211.255C201.254,428.484,194.805,406.864,192.735,384z M160,384H64
+	V256h96V384z M160,224H64V96h96V224z"/>
+<path d="M368,224c-79.529,0-144,64.471-144,144s64.471,144,144,144s144-64.471,144-144S447.529,224,368,224z M448,384h-64v64h-32
+	v-64h-64v-32h64v-64h32v64h64V384z"/>
+</svg>
