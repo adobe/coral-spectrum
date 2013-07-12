@@ -23,7 +23,7 @@ module.exports = function(grunt) {
     var tmpDownloadZip = 'temp/icon-athena/download/icons.zip';
 
     // default: this is the url to the icon for CoralUI hosted in athena
-    var iconSourceAthena = "http://theatrix.eur.adobe.com:4502/content/athena/clients/marketingcloud/collections/default.zip";
+    var iconSourceAthena = "http://theatrix.eur.adobe.com:4502/content/athena/clients/cloud-ui/collections/clouduigeneral.zip";
 
     var iconsource = grunt.option("is") || grunt.option("iconsource") || iconSourceAthena;
 
