@@ -232,6 +232,15 @@ module.exports = function(grunt) {
           }
         ]
       },
+      js: {
+        files: [
+          {
+            expand: true,
+            src: getIncludes("cui"),
+            dest: '<%= dirs.build %>/js/source/'
+          }
+        ]
+      },
       fonts: {
         files: [
           {
