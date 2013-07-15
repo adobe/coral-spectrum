@@ -19,6 +19,7 @@
         border: @px solid @dropdown-border-color;
         padding-left: 0.4375rem; // leave padding-top and bottom as per default button
         padding-right: 0.4375rem;
+        width: 100%;
         min-width: 135*@px;
 
         text-align: left;
@@ -99,5 +100,11 @@
         border-left: @px solid @textfield-border-color;
         height: 30*@px;
         font-size: 0;
+    }
+}
+
+.fill-parent {
+    .dropdown {
+        width: 100%;
     }
 }

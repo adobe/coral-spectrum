@@ -1,12 +1,23 @@
 /**
 * Also used by auto completers, see filters.less
 */
+
+// FIXME .dropdown-container MUST be reviewed. See CUI-770
 .dropdown-container {
-   display: inline-block;
+    display: inline-block;
     position: relative;
     padding: 0;
     margin: 0;
 }
+
+.fill-parent {
+    // FIXME .dropdown-container MUST be reviewed. See CUI-770
+    // need to reset .dropdown-container as it is set as inline-block
+    .dropdown-container {
+        width: 100%;
+    }
+}
+
 .dropdown-visible {
     z-index: 1000;
 }

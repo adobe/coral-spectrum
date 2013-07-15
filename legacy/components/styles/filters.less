@@ -3,6 +3,7 @@
  */
 .filters {
     display: inline-block;
+    .border-box;
     margin: 0.5rem 0;
     width: 13rem; //  width is required to contain the tags
     //vertical-align: top;
@@ -110,5 +111,11 @@
     em {
         font-weight: bold;
         font-style: normal;
+    }
+}
+
+.fill-parent {
+    .filters {
+        width: 100%;
     }
 }
