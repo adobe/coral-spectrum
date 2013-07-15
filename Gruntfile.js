@@ -180,6 +180,20 @@ module.exports = function (grunt) {
                         src: ['js/cui-core.js'],
                         dest: '<%= dirs.temp %>/'
                     },
+                    { // get build from the core js source (components) and copy into temp
+                        expand: true,
+                        flatten: true,
+                        cwd: '<%= dirs.core.build %>/',
+                        src: ['js/source/components/**/*.js'],
+                        dest: '<%= dirs.temp %>/js/components/'
+                    },
+                    { // get build from the core js source (shared) and copy into temp
+                        expand: true,
+                        flatten: true,
+                        cwd: '<%= dirs.core.build %>/',
+                        src: ['js/source/shared/**/*.js'],
+                        dest: '<%= dirs.temp %>/js/'
+                    },
                     { // get less from the modularized components
                         expand: true,
                         flatten: true,
@@ -265,6 +279,16 @@ module.exports = function (grunt) {
                         cwd: '<%= dirs.externals %>/',
                         src: ['*/*.js'],
                         dest: '<%= dirs.build %>/js/libs'
+                    }
+                ]
+            },
+            js_source: {
+                files: [
+                    { // copy all js temp files into build folder
+                        expand: true,
+                        cwd: '<%= dirs.temp %>/js',
+                        src: ['**'],
+                        dest: '<%= dirs.build %>/js/source'
                     }
                 ]
             },
@@ -462,6 +486,7 @@ module.exports = function (grunt) {
         'jshint:retro', // hint js in temp folder
         'concat:retro',
         'uglify:retro',
+        'copy:js_source',
         'guide'
     ]);
 
