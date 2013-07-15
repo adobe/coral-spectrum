@@ -14,11 +14,15 @@
   <script src="../../js/CUI.js"></script>
 
   <style>
+    h1, h2 {
+      margin-bottom: 1rem 0; /* no margin for heading, seriously!? */
+    }
+
     .example-parent {
       position: relative;
+      margin: 1rem 0;
       border: 1px dashed red;
       padding: 1rem;
-      width: 500px;
     }
 
     .example-fillparent {
@@ -39,7 +43,7 @@
   <div style="padding: 2rem;">
     <h1>Forms</h1>
 
-    <form class="vertical example-parent">
+    <form class="vertical example-parent" style="width: 500px;">
       <h2>Vertical Layout</h2>
       <label class="example-fillparent"><input type="checkbox"><span>Fill Parent</span></label>
 
@@ -119,8 +123,127 @@
       <label>Slider</label>
       <span class="slider" data-init="slider"><input type="range" value="10" min="10" max="20" step="2"></span>
 
+      <label>Vertical Slider</label>
+      <span class="slider vertical" data-init="slider"><input type="range" value="10" min="10" max="20" step="2"></span>
+
       <label>Path Browser</label>
       <span class="pathbrowser" data-init="pathbrowser"><input type="text"></span>
+
+      <label>Checkbox</label>
+      <label><input type="checkbox" checked><span>Checkbox</span></label>
+
+      <label>Radio</label>
+      <label><input type="radio" checked><span>Radio</span></label>
+
+      <label>Switch</label>
+      <label class="switch"><input type="checkbox"><span>Off</span><span>On</span></label>
+
+      <label>Selector</label>
+      <span class="selector">
+        <label><input type="radio"><span>Yes</span></label>
+        <label><input type="radio"><span>No</span></label>
+      </span>
+    </form>
+
+    <form class="example-parent">
+      <h2>No Layout (To Test "vertical-align")</h2>
+
+      <label>Text</label>
+      <input type="text">
+
+      <label>Textarea</label>
+      <textarea rows="4"></textarea>
+
+      <label>Search</label>
+      <span class="search"><input type="text"><button type="button">Search</button></span>
+
+      <label>Single Term Filters</label>
+      <span class="filters" data-init="filters">
+        <input type="text">
+        <select>
+          <option selected>Apple</option>
+          <option>Pear</option>
+          <option>Banana</option>
+        </select>
+      </span>
+
+      <label>Multiple Filters</label>
+      <span class="filters" data-init="filters" data-multiple="multiple">
+        <input type="text">
+        <select multiple>
+          <option selected>Apple</option>
+          <option selected>Pear</option>
+          <option selected>Banana</option>
+        </select>
+      </span>
+
+      <label>Stacking Filters</label>
+      <span class="filters" data-init="filters" data-stacking="true" data-allow="create">
+        <input type="text">
+        <select multiple>
+          <option selected>Apple</option>
+          <option selected>Pear</option>
+          <option selected>Banana</option>
+        </select>
+      </span>
+
+      <label>Single Select Dropdown</label>
+      <div class="dropdown" data-init="dropdown">
+        <button type="button">Single Select</button>
+        <select>
+          <option>Single One</option>
+          <option selected>Single Two</option>
+          <option>Single Three</option>
+        </select>
+      </div>
+
+      <label>Multi Select Dropdown</label>
+      <div class="dropdown" data-init="dropdown">
+        <button type="button">Multi Select</button>
+        <select multiple>
+          <option>Multi One</option>
+          <option selected>Multi Two</option>
+          <option>Multi Three</option>
+        </select>
+      </div>
+
+      <label>Editable Dropdown</label>
+      <div class="dropdown dropdown-editable" data-editable="true" data-init="dropdown">
+        <input type="text">
+        <button type="button">Editable</button>
+        <select>
+          <option>Edit One</option>
+          <option>Edit Two</option>
+          <option>Edit Three</option>
+        </select>
+      </div>
+
+      <label>Date Picker</label>
+      <span class="datepicker" data-init="datepicker"><input type="datetime"><button class="icon-calendar">Datetime picker</button></span>
+
+      <label>Slider</label>
+      <span class="slider" data-init="slider"><input type="range" value="10" min="10" max="20" step="2"></span>
+
+      <label>Vertical Slider</label>
+      <span class="slider vertical" data-init="slider"><input type="range" value="10" min="10" max="20" step="2"></span>
+
+      <label>Path Browser</label>
+      <span class="pathbrowser" data-init="pathbrowser"><input type="text"></span>
+
+      <label>Checkbox</label>
+      <label><input type="checkbox" checked><span>Checkbox</span></label>
+
+      <label>Radio</label>
+      <label><input type="radio" checked><span>Radio</span></label>
+
+      <label>Switch</label>
+      <label class="switch"><input type="checkbox"><span>Off</span><span>On</span></label>
+
+      <label>Selector</label>
+      <span class="selector">
+        <label><input type="radio"><span>Yes</span></label>
+        <label><input type="radio"><span>No</span></label>
+      </span>
     </form>
   </div>
 </body>
