@@ -74,7 +74,9 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         headFormat: "MMMM YYYY",
         forceHTMLMode: false,
         required: false,
-        hasError: false
+        hasError: false,
+        minDate: null,
+        maxDate: null
     },
     
     displayDateTime: null,
@@ -132,6 +134,30 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
                 this.options.displayedFormat = this.officialTimeFormat;
             } else {
                 this.options.displayedFormat = this.officialDatetimeFormat;
+            }
+        }
+        
+        if(this.options.minDate !== null){
+            if(this.options.minDate === "today"){
+                this.options.minDate = moment().startOf("day");
+            }else{
+                if(moment(this.options.minDate, this.officialDateFormat).isValid()){
+                    this.options.minDate = moment(this.options.minDate, this.officialDateFormat);
+                }else{
+                    this.options.minDate = null;
+                }
+            }
+        }
+        
+        if(this.options.maxDate !== null){
+            if(this.options.maxDate === "today"){
+                this.options.maxDate = moment().startOf("day");
+            }else{
+                if(moment(this.options.maxDate, this.officialDateFormat).isValid()){
+                    this.options.maxDate = moment(this.options.maxDate, this.officialDateFormat);
+                }else{
+                    this.options.maxDate = null;
+                }
             }
         }
         
@@ -236,6 +262,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
     },
     
     _readDataFromMarkup: function() {
+        
         if (this.$element.data("disabled")) {
             this.options.disabled = true;
         }
@@ -280,7 +307,13 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
                
         if (el.data('start-day') !== undefined) {
             this.options.startDay = el.data('start-day') * 1; // Force number
-        }              
+        }   
+        if (el.data('min-date') !== undefined) {
+            this.options.minDate = el.data('min-date');
+        }
+        if (el.data('max-date') !== undefined) {
+            this.options.maxDate = el.data('max-date');
+        }
     },
 
     _readInputVal: function(format) {
@@ -483,6 +516,19 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             return d1.year() === d2.year() && d1.month() === d2.month() && d1.date() === d2.date(); 
         }
         
+        function isDateInRange(date, startDate, endDate){
+            if(startDate === null && endDate === null){
+                return true;
+            }
+            if(startDate === null){
+                return date <= endDate;
+            }else if(endDate === null){
+                return date >= startDate;
+            }else{
+                return (startDate <= date && date <= endDate);
+            }
+        }
+        
         for(var w = 0; w < 6; w++) {
             html +="<tr>";
             for(var d = 0; d < 7; d++) {
@@ -494,7 +540,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
                 if (isSameDay(displayDateTime, today)) cssClass += " today";
                 if (isSameDay(displayDateTime, this.options.selectedDateTime)) cssClass += " selected";
 
-                if (isCurrentMonth) {
+                if (isCurrentMonth && isDateInRange(displayDateTime, this.options.minDate, this.options.maxDate)) {
                     html += "<td class=\"" + cssClass + "\"><a href=\"#\" data-date=\"" + displayDateTime.lang(this.language).format(this.internFormat) + "\">" + displayDateTime.date() + "</a></td>";
                 } else {
                     html += "<td class=\"" + cssClass + "\"><span>" + displayDateTime.date() + "</span></td>";
