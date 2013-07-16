@@ -132,7 +132,7 @@ module.exports = function(grunt) {
       }
     }, // less
 
-    icons: {
+    iconCSS: {
       all: {
         src: [
           '<%= dirs.source %>/icons_color/*.svg'
@@ -166,7 +166,7 @@ module.exports = function(grunt) {
   grunt.task.registerTask('default', [
     'clean',
     'copy:standalone',
-    'icons',
+    'iconCSS',
     'webfont',
     'less',
     'copy:build'
