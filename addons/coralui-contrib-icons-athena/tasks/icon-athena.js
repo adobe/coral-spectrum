@@ -30,6 +30,7 @@ module.exports = function(grunt) {
     var tasks = new Array();
     
     grunt.log.ok('searching for icons from athena in ' + iconsource);
+    grunt.log.ok('NOTE: unzip task may take a while (5 minutes)...');
 
     if (url.parse(iconsource).host) {
       grunt.log.ok('url found : ' + iconsource);
@@ -120,6 +121,21 @@ module.exports = function(grunt) {
    
     });
 
+    // move _16 assets to their own folder to create a separate font
+    // doing this as another loop so alias copy can be included
+    var icons16 = grunt.file.expand(dest + '*_16*');
+    var dest16 = grunt.template.process('<%= dirs.build %>/icons16/', config);
+    var count16 = 0
+    icons16.forEach(function(icon16) {
+      var iconName = icon16.slice(icon16.lastIndexOf('/')+1);
+      grunt.log.ok("moving "  + iconName);
+      iconName = iconName.replace('_16', '');
+      grunt.file.copy(icon16, dest16 + iconName);
+      grunt.file.delete(icon16);
+      count16++;
+    });
+
+    grunt.log.ok(count16 + " icons moved to "  + dest16);
     grunt.log.ok(count +' icon(s) successfully imported');
     return true;
 

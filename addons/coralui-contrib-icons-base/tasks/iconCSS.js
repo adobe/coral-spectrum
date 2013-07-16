@@ -43,7 +43,7 @@
   }
 
   module.exports = function(grunt) {
-    grunt.registerMultiTask('icons', 'This generates a CSS file from SVGs.', function() {
+    grunt.registerMultiTask('iconCSS', 'This generates a CSS file from SVGs.', function() {
       // Expand the list of files
       var config = grunt.config();
     
