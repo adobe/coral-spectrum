@@ -447,7 +447,7 @@ module.exports = function (grunt) {
             publish: {
                 options: {
                     mode: 'tgz',
-                    archive: '<%= dirs.build %>/release/coralui-<%= meta.version %>.tgz'
+                    archive: '<%= dirs.build %>/release/<%= meta.appName %>-<%= meta.version %>.tgz'
                 },
                 files: [
                     {
