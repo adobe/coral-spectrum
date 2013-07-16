@@ -54,14 +54,15 @@ input[type="time"] {
   }
 }
 
-.fill-parent {
-  input[type=text],
-  input[type=password],
-  input[type=email],
-  input[type=url],
-  input[type=tel],
-  input[type^="date"],
-  input[type="time"] {
+form.vertical {
+  input[type=text].field,
+  input[type=password].field,
+  input[type=email].field,
+  input[type=url].field,
+  input[type=tel].field,
+  input[type^="date"].field,
+  input[type="time"].field {
+    display: block;
     width: 100%;
   }
 }

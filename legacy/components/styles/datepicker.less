@@ -11,12 +11,14 @@
   > input[type=text] {
     margin: 0;
     padding-right: 40*@px;
+    width: 100%;
   }
 
   > input[type^="date"], > input[type="time"] {
     margin: 0;
     padding-right: 40*@px;
     -webkit-appearance: none; // remove default styling for native html5 input
+    width: 100%;
   }
 
   > button {
@@ -299,8 +301,8 @@
   }
 }
 
-.fill-parent {
-  .datepicker {
-    width: 100%;
+form.vertical {
+  .datepicker.field {
+    display: block;
   }
 }

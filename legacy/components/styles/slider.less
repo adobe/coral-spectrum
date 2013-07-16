@@ -6,15 +6,15 @@
   position: relative;
   display: inline-block;
   .border-box;
+  margin: (0.5rem + 10*@px) 0.25rem;
   padding: 0;
-  .border-radius(0.25rem);
   border: @px solid @slider-border-color;
-  background-color: @slider-background-color;
   width: 220*@px;
   height: 8*@px;
-  margin: 1rem 0.25rem; // 1rem margin to get the right distance to other elements above and below
   vertical-align: middle;
   z-index: auto;
+  .border-radius(0.25rem);
+  background-color: @slider-background-color;
   
   &:hover,
   &.focus {
@@ -165,7 +165,7 @@
   &.vertical {
     width: 8*@px;
     height: 220*@px;
-    margin: 0.25rem 0.625rem;
+    margin: 0.5rem 0.625rem;
   
     input[type=range],
     input[type=number],
@@ -240,8 +240,12 @@
   position: static;
 }
 
-.fill-parent {
-  .slider:not(.vertical) {
-    width: 100%;
+form.vertical {
+  .slider.field {
+    display: block;
+
+    &:not(.vertical) {
+      width: 100%;
+    }
   }
 }
