@@ -443,6 +443,38 @@ module.exports = function (grunt) {
                     { src: ['<%= dirs.build %>/test/**'] },
                     { src: ['<%= dirs.build %>/index.html'] }
                 ]
+            },
+            publish: {
+                options: {
+                    mode: 'tgz',
+                    archive: '<%= dirs.build %>/release/coralui-<%= meta.version %>.tgz'
+                },
+                files: [
+                    {
+                        expand: true,
+                        cwd: '<%= dirs.build %>',
+                        src: [
+                            'css/**',
+                            'doc/**',
+                            'examples/**',
+                            'images/**',
+                            'js/**',
+                            'less/**',
+                            'res/**',
+                            'tests/**',
+                            '*.html'
+                        ],
+                        dest: 'package/'
+                    }, {
+                        expand: true,
+                        src: [
+                            'package.json',
+                            'README.md'
+                        ],
+                        dest: 'package/'
+
+                    }
+                ]
             }
         }, // compress
 
@@ -510,8 +542,14 @@ module.exports = function (grunt) {
         'gh-pages:release'
     ]);
 
+    grunt.task.registerTask('publish', [ // publish NPM package
+        'full',
+        'compress:publish'
+    ]);
+
       // Default task
     grunt.task.registerTask('default', [
         'retro'
     ]);
+
 };
