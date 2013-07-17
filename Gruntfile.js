@@ -14,6 +14,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-gh-pages');
     grunt.loadNpmTasks('grunt-mocha');
     grunt.loadNpmTasks('grunt-jsdoc');
+    grunt.loadNpmTasks('grunt-shell');
 
     grunt.loadTasks('tasks');
 
@@ -498,6 +499,14 @@ module.exports = function (grunt) {
                     'release/**'
                 ]
             }
+        },
+        "shell": {
+            "publish": {
+                "command": "npm publish <%= dirs.build %>/release/<%= meta.appName %>-<%= meta.version %>.tgz",
+                "options": {
+                    stderr: true
+                }
+            }
         }
 
     }); // end init config
@@ -544,7 +553,8 @@ module.exports = function (grunt) {
 
     grunt.task.registerTask('publish', [ // publish NPM package
         'full',
-        'compress:publish'
+        'compress:publish',
+        'shell:publish'
     ]);
 
       // Default task
