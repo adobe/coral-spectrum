@@ -201,6 +201,9 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         $input.on("change" + (this._isSupportedMobileDevice() ? " blur" : ""), function() {
             if (this.options.disabled) return;
             var newDate = moment(this.$input.val(), this.options.displayedFormat);
+            if(newDate !== null && !this._isDateInRange(newDate.format(this.officialDateFormat), this.options.minDate, this.options.maxDate)){
+                this.options.hasError = true;
+            }
             this._setDateTime(newDate, true); // Set the date, but don't trigger a change event
         }.bind(this));
 
@@ -258,7 +261,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         
         // Reading input value for the first time -> there may be a storage format
         if (!this.options.selectedDateTime) this._readInputVal([this.options.storedFormat, this.options.displayedFormat]);
-        this._setDateTime(this.options.selectedDateTime);
+        this._setDateTime(this.options.selectedDateTime, true);
     },
     
     _readDataFromMarkup: function() {
@@ -516,19 +519,6 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             return d1.year() === d2.year() && d1.month() === d2.month() && d1.date() === d2.date(); 
         }
         
-        function isDateInRange(date, startDate, endDate){
-            if(startDate === null && endDate === null){
-                return true;
-            }
-            if(startDate === null){
-                return date <= endDate;
-            }else if(endDate === null){
-                return date >= startDate;
-            }else{
-                return (startDate <= date && date <= endDate);
-            }
-        }
-        
         for(var w = 0; w < 6; w++) {
             html +="<tr>";
             for(var d = 0; d < 7; d++) {
@@ -540,7 +530,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
                 if (isSameDay(displayDateTime, today)) cssClass += " today";
                 if (isSameDay(displayDateTime, this.options.selectedDateTime)) cssClass += " selected";
 
-                if (isCurrentMonth && isDateInRange(displayDateTime, this.options.minDate, this.options.maxDate)) {
+                if (isCurrentMonth && this._isDateInRange(displayDateTime, this.options.minDate, this.options.maxDate)) {
                     html += "<td class=\"" + cssClass + "\"><a href=\"#\" data-date=\"" + displayDateTime.lang(this.language).format(this.internFormat) + "\">" + displayDateTime.date() + "</a></td>";
                 } else {
                     html += "<td class=\"" + cssClass + "\"><span>" + displayDateTime.date() + "</span></td>";
@@ -603,7 +593,6 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             this.$input.val(date.lang(this.language).format(this.options.displayedFormat)); // Set only valid dates
         }
         
-        
         var storage = (date && date.isValid()) ? date.lang('en').format(this.options.storedFormat) : ""; // Force to english for storage format!    
         this.$hiddenInput.val(storage);
             
@@ -636,6 +625,19 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
 
     _combineDateTimeStrings: function(dateString, timeString) {
         return dateString + " " + timeString;
+    },
+    
+    _isDateInRange: function(date, startDate, endDate){
+        if(startDate === null && endDate === null){
+            return true;
+        }
+        if(startDate === null){
+            return date <= endDate;
+        }else if(endDate === null){
+            return date >= startDate;
+        }else{
+            return (startDate <= date && date <= endDate);
+        }
     },
 
     _renderTime: function() {
