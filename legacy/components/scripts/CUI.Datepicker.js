@@ -201,8 +201,10 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         $input.on("change" + (this._isSupportedMobileDevice() ? " blur" : ""), function() {
             if (this.options.disabled) return;
             var newDate = moment(this.$input.val(), this.options.displayedFormat);
-            if(newDate !== null && !this._isDateInRange(newDate.format(this.officialDateFormat), this.options.minDate, this.options.maxDate)){
+            if(newDate !== null && !this._isDateInRange(newDate, this.options.minDate, this.options.maxDate)){
                 this.options.hasError = true;
+            }else{
+                this.options.hasError = false;
             }
             this._setDateTime(newDate, true); // Set the date, but don't trigger a change event
         }.bind(this));
