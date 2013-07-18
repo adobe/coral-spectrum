@@ -17,6 +17,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-less');
@@ -25,6 +26,7 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-mocha');
   grunt.loadNpmTasks('grunt-jsdoc');
+  grunt.loadNpmTasks('grunt-shell');
 
   grunt.loadTasks('tasks');
 
@@ -362,8 +364,38 @@ module.exports = function(grunt) {
                 nospawn: true
             }
         }
-    } // watch
+    }, // watch
 
+    compress: {
+      publish: {
+        options: {
+            mode: 'tgz',
+            archive: '<%= dirs.build %>/<%= meta.appName %>-<%= meta.version %>.tgz'
+        },
+        files: [
+            {
+                expand: true,
+                src: [
+                    'components/**',
+                    'shared/**',
+                    'tests/**',
+                    'package.json',
+                    'README.md'
+                ],
+                dest: 'package/'
+            }
+        ]
+      }
+    },
+
+    "shell": {
+      "publish": {
+        "command": "npm publish <%= dirs.build %>/<%= meta.appName %>-<%= meta.version %>.tgz",
+        "options": {
+          stderr: true
+        }
+      }
+    }
   });
   // end init config
 
@@ -387,6 +419,12 @@ module.exports = function(grunt) {
   grunt.task.registerTask('retro', [
     'legacy',
     'partial'
+  ]);
+
+  grunt.task.registerTask('publish', [ // publish NPM package
+    'clean',
+    'compress:publish',
+    'shell:publish'
   ]);
 
   // Default task
