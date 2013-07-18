@@ -1,10 +1,20 @@
+/**
+ * Indicates that the form is using vertical layout.
+ * @see https://issues.adobe.com/browse/CQ5-30653
+ */
 form.vertical {
-  // we use .fieldset instead of <fieldset> as we cannot style <legend> as we want
+  /**
+   * Indicates the fieldset.
+   * .fieldset is used instead of <fieldset> as <legend> cannot be styled as per requirement.
+   */
   .fieldset {
     margin: 0 10*@px 40*@px 10*@px;
     border: none;
     border-top: 1px solid #CCCCCC;
 
+    /**
+     * Indicates the legend of fieldset.
+     */
     > .legend {
       display: block;
       margin: 8*@px 0 15*@px 0;
@@ -19,7 +29,10 @@ form.vertical {
     }
   }
 
-  // .fieldlabel is used so that the styling is only applied to this label, not any <label> inside the form
+  /**
+   * Indicates the label of the field.
+   * .fieldlabel is used so that the styling is only applied to this label, not any <label> inside the form.
+   */
   label.fieldlabel {
     display: block;
     margin-top: 20*@px;

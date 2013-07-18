@@ -23,6 +23,30 @@
   <div style="padding: 2rem;">
     <h1>Forms</h1>
 
+    <p>Currently CoralUI is only providing vertical layout, which is achieved by the following selector structure:</p>
+    <pre>/**
+ * Indicates that the form is using vertical layout.
+ * @see https://issues.adobe.com/browse/CQ5-30653
+ */
+form.vertical
+
+/**
+ * Indicates the fieldset.
+ * .fieldset is used instead of &lt;fieldset> as &lt;legend> cannot be styled as per requirement.
+ */
+form.vertical .fieldset
+
+/**
+ * Indicates the legend of fieldset.
+ */
+form.vertical .fieldset > .legend
+
+/**
+ * Indicates the label of the field.
+ * .fieldlabel is used so that the styling is only applied to this label, not any &lt;label> inside the form.
+ */
+form.vertical label.fieldlabel</pre>
+
     <form class="vertical" style="width: 500px;">
       <h2>Vertical Layout</h2>
 
