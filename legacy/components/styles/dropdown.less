@@ -99,7 +99,11 @@
         border: none;
         border-left: @px solid @textfield-border-color;
         height: 30*@px;
-        font-size: 0;
+        font-size: 0; // hide the text
+
+        &:after {
+            font-size: 0.875rem; // reset font-size to make the icon appear
+        }
     }
 }
 
