@@ -134,8 +134,9 @@ module.exports = function(grunt) {
       grunt.file.delete(icon16);
       count16++;
     });
-
-    grunt.log.ok(count16 + " icons moved to "  + dest16);
+    if (count16 > 0) {
+      grunt.log.ok(count16 + " icons moved to "  + dest16);
+    }
     grunt.log.ok(count +' icon(s) successfully imported');
     return true;
 
