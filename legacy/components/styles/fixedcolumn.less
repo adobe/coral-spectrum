@@ -3,22 +3,18 @@
  * @see https://issues.adobe.com/browse/CQ5-30653
  */
 .fixedcolumns {
-  display: table;
-  margin-left: auto;
-  margin-right: auto;
-  border-collapse: collapse;
+  text-align: center;
+  font-size: 0;
 }
 
 /**
  * Indicates the column.
  */
 .fixedcolumns > .fixedcolumn {
-  display: table-cell;
-  padding: 0 8*@px;
-
-  &:before {
-    content: "";
-    display: block;
-    width: 496*@px;
-  }
+  display: inline-block;
+  margin: 0 8*@px;
+  width: 496*@px;
+  vertical-align: top;
+  text-align: left;
+  font-size: 0.8125rem;
 }
