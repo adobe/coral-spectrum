@@ -23,45 +23,44 @@ module.exports = function (grunt) {
     Add new components to this array _after_ the components they inherit from
     */
     var includeOrder = {
-            "cui": [
-        // Coral core
-        'cui-core.js',
+        "cui": [
+            // Coral core
+            'cui-core.js',
 
-        // Persistence
-        'CUI.Util.state.js',
+            // Persistence
+            'CUI.Util.state.js',
 
-        // HTTP
-        'CUI.Util.HTTP.js',
+            // HTTP
+            'CUI.Util.HTTP.js',
 
+            // Components
+            'components/CUI.Modal.js',
+            'components/CUI.Tabs.js',
+            'components/CUI.Alert.js',
+            'components/CUI.Popover.js',
+            'components/CUI.DropdownList.js',
+            'components/CUI.Dropdown.js',
+            'components/CUI.Filters.js',
+            'components/CUI.Slider.js',
+            'components/CUI.LabeledSlider.js',
+            'components/CUI.Datepicker.js',
+            'components/CUI.Pulldown.js',
+            'components/CUI.Sticky.js',
+            'components/CUI.CardView.js',
+            'components/CUI.PathBrowser.js',
+            'components/CUI.Wizard.js',
+            'components/CUI.FlexWizard.js',
+            'components/CUI.FileUpload.js',
+            'components/CUI.Toolbar.js',
+            'components/CUI.Tooltip.js',
+            'components/CUI.DraggableList.js',
+            'components/CUI.CharacterCount.js',
+            'components/CUI.Accordion.js',
+            'components/CUI.Tour.js',
+            'components/CUI.Autocomplete.js',
 
-        // Components
-        'components/CUI.Modal.js',
-        'components/CUI.Tabs.js',
-        'components/CUI.Alert.js',
-        'components/CUI.Popover.js',
-        'components/CUI.DropdownList.js',
-        'components/CUI.Dropdown.js',
-        'components/CUI.Filters.js',
-        'components/CUI.Slider.js',
-        'components/CUI.LabeledSlider.js',
-        'components/CUI.Datepicker.js',
-        'components/CUI.Pulldown.js',
-        'components/CUI.Sticky.js',
-        'components/CUI.CardView.js',
-        'components/CUI.PathBrowser.js',
-        'components/CUI.Wizard.js',
-        'components/CUI.FlexWizard.js',
-        'components/CUI.FileUpload.js',
-        'components/CUI.Toolbar.js',
-        'components/CUI.Tooltip.js',
-        'components/CUI.DraggableList.js',
-        'components/CUI.CharacterCount.js',
-        'components/CUI.Accordion.js',
-        'components/CUI.Tour.js',
-        'components/CUI.Autocomplete.js',
-
-        // Validations
-        'validations.js'
+            // Validations
+            'validations.js'
         ]
     };
 
@@ -208,6 +207,22 @@ module.exports = function (grunt) {
                         cwd: '<%= dirs.components %>/',
                         src: ['**/scripts/**.js'],
                         dest: '<%= dirs.temp %>/js/components'
+                    },
+                    { // get examples from the modularized components
+                        expand: true,
+                        cwd: '<%= dirs.components %>/',
+                        src: ['**/examples/**'],
+                        dest: '<%= dirs.build %>/examples',
+                        filter: 'isFile',
+                        rename: function(dest, src) {
+                            var match = src.match(/coralui-contrib-component-(.*)\/examples\/(.*)/);
+                            if (match) {
+                                var component = match[1];
+                                var filePath = match[2];
+                                return dest + '/' + component + '/' + filePath;
+                            }
+                            return dest;
+                        }
                     },
                     { // get tests from the modularized components
                         expand: true,
@@ -384,7 +399,7 @@ module.exports = function (grunt) {
             components: {
                 options: {
                     wrapped: true,
-                    namespace: 'CUI.templates',
+                    namespace: 'CUI.Templates',
                     processName: function (path) {
                         // Pull the filename out as the template name
                         return path.split('/').pop().split('.').shift();
@@ -501,6 +516,13 @@ module.exports = function (grunt) {
             }
         },
         "shell": {
+            "local-publish": {
+                "command": "coralui-local-publish <%= meta.appName %> <%= dirs.build %>/release/<%= meta.appName %>-<%= meta.version %>.tgz",
+                "options": {
+                    stdout: true,
+                    stderr: true
+                }
+            },
             "publish": {
                 "command": "npm publish <%= dirs.build %>/release/<%= meta.appName %>-<%= meta.version %>.tgz",
                 "options": {
@@ -551,13 +573,22 @@ module.exports = function (grunt) {
         'gh-pages:release'
     ]);
 
-    grunt.task.registerTask('publish', [ // publish NPM package
+    grunt.task.registerTask('publish-build', [
         'full',
-        'compress:publish',
+        'compress:publish'
+    ]);
+
+    grunt.task.registerTask('publish', [ // publish NPM package
+        'publish-build',
         'shell:publish'
     ]);
 
-      // Default task
+    grunt.task.registerTask('local-publish', [ // publish NPM package locally
+        'publish-build',
+        'shell:local-publish'
+    ]);
+
+    // Default task
     grunt.task.registerTask('default', [
         'retro'
     ]);
