@@ -399,7 +399,7 @@ module.exports = function (grunt) {
             components: {
                 options: {
                     wrapped: true,
-                    namespace: 'CUI.templates',
+                    namespace: 'CUI.Templates',
                     processName: function (path) {
                         // Pull the filename out as the template name
                         return path.split('/').pop().split('.').shift();
