@@ -51,7 +51,7 @@ module.exports = function(grunt) {
       // base for widgets
       dirs.shared +'/scripts/CUI.Widget.js',
 
-      // base for widgets
+      // components 
       dirs.components +'/rail/scripts/CUI.Rail.js'
     ]
   };
