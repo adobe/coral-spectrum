@@ -516,6 +516,13 @@ module.exports = function (grunt) {
             }
         },
         "shell": {
+            "local-publish": {
+                "command": "coralui-local-publish <%= meta.appName %> <%= dirs.build %>/release/<%= meta.appName %>-<%= meta.version %>.tgz",
+                "options": {
+                    stdout: true,
+                    stderr: true
+                }
+            },
             "publish": {
                 "command": "npm publish <%= dirs.build %>/release/<%= meta.appName %>-<%= meta.version %>.tgz",
                 "options": {
@@ -566,13 +573,22 @@ module.exports = function (grunt) {
         'gh-pages:release'
     ]);
 
-    grunt.task.registerTask('publish', [ // publish NPM package
+    grunt.task.registerTask('publish-build', [
         'full',
-        'compress:publish',
+        'compress:publish'
+    ]);
+
+    grunt.task.registerTask('publish', [ // publish NPM package
+        'publish-build',
         'shell:publish'
     ]);
 
-      // Default task
+    grunt.task.registerTask('local-publish', [ // publish NPM package locally
+        'publish-build',
+        'shell:local-publish'
+    ]);
+
+    // Default task
     grunt.task.registerTask('default', [
         'retro'
     ]);

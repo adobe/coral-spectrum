@@ -389,6 +389,13 @@ module.exports = function(grunt) {
     },
 
     "shell": {
+      "local-publish": {
+        "command": "coralui-local-publish <%= meta.appName %> <%= dirs.build %>/<%= meta.appName %>-<%= meta.version %>.tgz",
+        "options": {
+            stdout: true,
+            stderr: true
+        }
+      },
       "publish": {
         "command": "npm publish <%= dirs.build %>/<%= meta.appName %>-<%= meta.version %>.tgz",
         "options": {
@@ -421,10 +428,19 @@ module.exports = function(grunt) {
     'partial'
   ]);
 
+  grunt.task.registerTask('publish-build', [
+    'full',
+    'compress:publish'
+  ]);
+
   grunt.task.registerTask('publish', [ // publish NPM package
-    'clean',
-    'compress:publish',
+    'publish-build',
     'shell:publish'
+  ]);
+
+  grunt.task.registerTask('local-publish', [ // publish NPM package locally
+    'publish-build',
+    'shell:local-publish'
   ]);
 
   // Default task
