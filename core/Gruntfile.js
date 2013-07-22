@@ -429,7 +429,7 @@ module.exports = function(grunt) {
   ]);
 
   grunt.task.registerTask('publish-build', [
-    'full',
+    'retro',
     'compress:publish'
   ]);
 
