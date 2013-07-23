@@ -231,18 +231,14 @@ module.exports = function (grunt) {
                         src: ['**/tests/**.js'],
                         dest: '<%= dirs.build %>/tests'
                     },
+                    
                     { // get legacy components' less
                         expand: true,
                         cwd: '<%= dirs.legacy %>/components/styles',
                         src: ['**'],
                         dest: '<%= dirs.build %>/less/components'
                     },
-                    { // get legacy less (overrides the core)
-                        expand: true,
-                        cwd: '<%= dirs.legacy %>/styles',
-                        src: ['**.less'],
-                        dest: '<%= dirs.build %>/less'
-                    },
+
                     { // get legacy components' tests -> will override the test runner html
                         expand: true,
                         cwd: '<%= dirs.legacy %>/components/tests',
@@ -331,6 +327,20 @@ module.exports = function (grunt) {
                 ]
             }
         }, // copy
+
+        generate_imports: {
+          output: '@import \'components/{filename}\';\n',
+          dest: '<%= dirs.build %>/less/components.less',
+          legacy: {
+            src: '<%= dirs.legacy %>/components/styles/*.less'
+          },
+          core: {
+            src: '<%= dirs.core.grunt %>/components/**/styles/*.less'
+          },
+          components: {
+            src: '<%= dirs.components %>/**/styles/*.less'
+          }
+        },
 
         less: {
             "cui-wrapped": {
@@ -543,6 +553,7 @@ module.exports = function (grunt) {
         'clean',
         'subgrunt:core',
         'copy:retro',
+        'generate-imports',
         'less:cui',
         'less:cui-wrapped',
         'cssmin:cui',

@@ -187,12 +187,12 @@ module.exports = function(grunt) {
             src: ['styles/includes/**.less'],
             dest: '<%= dirs.build %>/less/shared/includes'
           },
-          {
-            expand: true,
-            cwd: '<%= dirs.components %>/',
-            src: ['components.less'],
-            dest: '<%= dirs.build %>/less'
-          },
+          // {
+          //   expand: true,
+          //   cwd: '<%= dirs.components %>/',
+          //   src: ['components.less'],
+          //   dest: '<%= dirs.build %>/less'
+          // },
           {
             expand: true,
             flatten: true,
@@ -282,6 +282,14 @@ module.exports = function(grunt) {
         ]
       }
     }, // copy
+
+    generate_imports: {
+      output: '@import \'components/{filename}\';\n',
+      dest: '<%= dirs.build %>/less/components.less',
+      core: {
+        src: '<%= dirs.components %>/**/styles/*.less'
+      }
+    },
 
     cssmin: {
       main: {
@@ -413,6 +421,7 @@ module.exports = function(grunt) {
     'copy',
     'concat',
     'uglify',
+    'generate-imports',
     'less',
     'cssmin',
     'mocha'
