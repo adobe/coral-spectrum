@@ -65,6 +65,7 @@ describe('CUI.Dropdown', function() {
             elEditable
                 .find("input")
                 .val("re")
+                .trigger($.Event('input'))
                 .trigger($.Event('input'));
 
             // setTimeout is used in an futile attempt to get this working in phantomJS
