@@ -169,6 +169,10 @@ module.exports = function (grunt) {
             core_quicktest: {
                 subdir: dirs.core.root,
                 args: ['quicktest']                 
+            },
+            core_quickless: {
+                subdir: dirs.core.root,
+                args: ['quickless']                 
             }
         },
 
@@ -357,12 +361,23 @@ module.exports = function (grunt) {
                     dirs.core.components + '/**/scripts/**.js',
                     dirs.core.components + '/**/tests/**.js'
                 ],
-                tasks: ['subgrunt:core_quicktest'],
+                tasks: ['subgrunt:core_quicktest', 'copy:retro'],
                 options: {
                     nospawn: true
                 }
-            }
+            }, // core_scripts
+            core_styles: {
+                files: [
+                    dirs.core.components + '/**/styles/**.less',
+                    dirs.core.shared + '/styles/**/**.less',
+                ],
+                tasks: ['subgrunt:core_quickless', 'copy:retro'],
+                options: {
+                    nospawn: true
+                }
+            } // core_styles
         },  
+        // watch
 
         less: {
             "cui-wrapped": {

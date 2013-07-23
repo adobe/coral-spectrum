@@ -373,7 +373,17 @@ module.exports = function(grunt) {
             options: {
                 nospawn: true
             }
-        }
+        }, // scripts
+        styles: {
+          files: [
+            dirs.components + '/**/styles/**.less',
+            dirs.shared + '/styles/**/**.less',
+          ],
+          tasks: ['quickless'],
+          options: {
+            nospawn: true
+          }
+        } // styles
     }, // watch
 
     compress: {
@@ -442,6 +452,11 @@ module.exports = function(grunt) {
   grunt.task.registerTask('quicktest', [
     'jshint', 'copy:tests', 'concat', 'uglify', 'mocha'
   ]);
+
+  grunt.task.registerTask('quickless', [
+    'copy:less_cui', 'less','cssmin'
+  ]);
+
 
   grunt.task.registerTask('publish-build', [
     'retro',
