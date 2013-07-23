@@ -138,16 +138,31 @@
          * 
          */
         construct: function (options) {
+            // @deprecated, rather the template engine should be agonistic
+            // Render template, if necessary
+            // disabled for now
+            if (this.$element.children().length === 0) {
+                this.$element.html(CUI.Templates['modal']($.extend({}, this.options, { buttons: '' })));
+            }
+
+            // @deprecated adding a styling class blocks the reusability
+            // of the modal's javascript. This will be removed in future
+            // add styling
+            this.$element.addClass('modal');
+
             // modal parts
             this.header = this.$element.find('.modal-header');
             this.body = this.$element.find('.modal-body');
             this.footer = this.$element.find('.modal-footer');
 
+            // previous focus element
+            this._previousFocus = $();
+
             // creates a backdrop object
             // but it does not attach it to the document
             this.backdrop = $('<div/>', {
-                class: 'modal-backdrop',
-                style: 'display: none;'
+                'class': 'modal-backdrop',
+                'style': 'display: none;'
             }).fipo('tap', 'click', function (event) {
                 if (this.options.backdrop !== 'static') {
                     this.hide();
@@ -156,13 +171,6 @@
 
             // Fetch content asynchronously, if remote is defined
             this.body.loadWithSpinner(this.options.remote);
-
-            // @deprecated, rather the template engine should be agonistic
-            // Render template, if necessary
-            // disabled for now
-            if (this.$element.children().length === 0) {
-                this.$element.html(CUI.Templates['modal']($.extend({}, this.options, { buttons: '' })));
-            }
 
             this.applyOptions();
 
@@ -339,9 +347,9 @@
             $.each(this.options.buttons, function(idx, button) {
                 // Create an anchor if href is provided
                 var btn = button.href ? $('<a/>', {
-                        class: 'button'
+                        'class': 'button'
                     }) : $('<button/>', {
-                        type: 'button'
+                        'type': 'button'
                     });
 
                 // Add label
@@ -363,6 +371,8 @@
                 if (button.className) {
                     btn.addClass(button.className);
                 }
+
+                self.footer.append(btn);
             });
         },
 

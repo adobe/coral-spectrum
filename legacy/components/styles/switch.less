@@ -1,6 +1,8 @@
 // Switch
 .switch {
   display: inline-block;
+  margin: 0.5rem 0;
+  vertical-align: middle;
   cursor: pointer;
 
   &:hover input[type="checkbox"] + span + span::before {
@@ -105,5 +107,11 @@
         color: @switch-disabled-selected-text-color;
       }
     }
+  }
+}
+
+form.vertical {
+  .switch.field {
+    display: block;
   }
 }

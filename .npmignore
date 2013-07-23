@@ -1,5 +1,5 @@
 .DS_Store
-/build
+/build/release
 /temp
 /node_modules
 /externals/components
@@ -8,5 +8,3 @@
 .idea/
 atlassian-ide-plugin.xml
 *.iml
-npm-debug.log
-.coralui

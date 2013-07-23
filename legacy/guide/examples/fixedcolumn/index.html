@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Fixed Column</title>
+  <link rel="stylesheet" href="../../css/cui.css">
+</head>
+<body>
+  <h1>Fixed Column</h1>
+  <p>Fixed Column is a layout where each column has a fixed width and horizontally centered in the screen. See <a href="https://issues.adobe.com/browse/CQ5-30653">CQ5-30653</a>. It is achieved by the following selector structure:</p>
+  <pre>/**
+ * Indicates the container of the columns.
+ * @see https://issues.adobe.com/browse/CQ5-30653
+ */
+.fixedcolumns
+
+/**
+ * Indicates the column.
+ */
+.fixedcolumns > .fixedcolumn</pre>
+
+  <h2>Single Column</h2>
+  <div class="fixedcolumns">
+    <div class="fixedcolumn">
+      <h3>Column 1</h3>
+      <input type="text" style="width: 100%;">
+    </div>
+  </div>
+
+  <h2>Two Columns</h2>
+  <div class="fixedcolumns">
+    <div class="fixedcolumn">
+      <h3>Column 1</h3>
+      <input type="text" style="width: 100%;">
+    </div>
+    <div class="fixedcolumn">
+      <h3>Column 2</h3>
+      <input type="text" style="width: 100%;">
+    </div>
+  </div>
+
+  <h2>Three Columns</h2>
+  <div class="fixedcolumns">
+    <div class="fixedcolumn">
+      <h3>Column 1</h3>
+      <input type="text" style="width: 100%;">
+    </div>
+    <div class="fixedcolumn">
+      <h3>Column 2</h3>
+      <input type="text" style="width: 100%;">
+    </div>
+    <div class="fixedcolumn">
+      <h3>Column 3</h3>
+      <input type="text" style="width: 100%;">
+    </div>
+  </div>
+</body>
+</html>

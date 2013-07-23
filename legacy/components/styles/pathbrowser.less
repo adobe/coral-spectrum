@@ -1,53 +1,28 @@
 /**
-*
-* A path browser field.
-*
-* Uses styles from textfields and dropdown lists!
-*
-*/
-
+ * A path browser field.
+ */
 .pathbrowser {
     display: inline-block;
-    width: 13rem;  /* Needs fixed width for floating term elements */
+    margin: 0.5rem 0;
+    vertical-align: middle;
 
     select {
         display: none;
     }
 
     input[type=text] {
-
-        .border-box;
-        border-radius: 0; // Fix for iOS >=5
-        -webkit-appearance: none; // Fix for iOS <5
-
-        width: 13rem;
-
-        font-size: 0.8125rem;
-
-        height: 2rem;
-        padding: 0.25rem 0.5rem 0.25rem 0.25rem;
-        margin: 0 0 0.5rem 0;
-
-        border: @px solid @textfield-border-color;
-
-        &:disabled {
-            background: @textfield-disabled-background-color;
-            background-size: 1.1rem;
-        }
-
-        &:focus {
-            .glow();
-            outline: none;
-        }
-
-    }
-
-    &.disabled input {
-        background: @textfield-disabled-background-color;
-        background-size: 1.1rem;
+        margin: 0;
+        width: 100%;
     }
 
     &.error input {
+        color: @textfield-error-font-color;
+        border-color: @textfield-error-border-color;
+    }
+
+    &.error input:focus,
+    &.error.focus input {
+        color: @textfield-error-font-color;
         .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
     }
 
@@ -80,5 +55,16 @@
             position: relative;
         }
     }
+}
 
+.fill-parent {
+    .pathbrowser {
+        width: 100%;
+    }
+}
+
+form.vertical {
+  .pathbrowser.field {
+    display: block;
+  }
 }

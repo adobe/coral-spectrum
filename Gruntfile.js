@@ -14,6 +14,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-gh-pages');
     grunt.loadNpmTasks('grunt-mocha');
     grunt.loadNpmTasks('grunt-jsdoc');
+    grunt.loadNpmTasks('grunt-shell');
 
     grunt.loadTasks('tasks');
 
@@ -22,45 +23,44 @@ module.exports = function (grunt) {
     Add new components to this array _after_ the components they inherit from
     */
     var includeOrder = {
-            "cui": [
-        // Coral core
-        'cui-core.js',
+        "cui": [
+            // Coral core
+            'cui-core.js',
 
-        // Persistence
-        'CUI.Util.state.js',
+            // Persistence
+            'CUI.Util.state.js',
 
-        // HTTP
-        'CUI.Util.HTTP.js',
+            // HTTP
+            'CUI.Util.HTTP.js',
 
+            // Components
+            'components/CUI.Modal.js',
+            'components/CUI.Tabs.js',
+            'components/CUI.Alert.js',
+            'components/CUI.Popover.js',
+            'components/CUI.DropdownList.js',
+            'components/CUI.Dropdown.js',
+            'components/CUI.Filters.js',
+            'components/CUI.Slider.js',
+            'components/CUI.LabeledSlider.js',
+            'components/CUI.Datepicker.js',
+            'components/CUI.Pulldown.js',
+            'components/CUI.Sticky.js',
+            'components/CUI.CardView.js',
+            'components/CUI.PathBrowser.js',
+            'components/CUI.Wizard.js',
+            'components/CUI.FlexWizard.js',
+            'components/CUI.FileUpload.js',
+            'components/CUI.Toolbar.js',
+            'components/CUI.Tooltip.js',
+            'components/CUI.DraggableList.js',
+            'components/CUI.CharacterCount.js',
+            'components/CUI.Accordion.js',
+            'components/CUI.Tour.js',
+            'components/CUI.Autocomplete.js',
 
-        // Components
-        'components/CUI.Modal.js',
-        'components/CUI.Tabs.js',
-        'components/CUI.Alert.js',
-        'components/CUI.Popover.js',
-        'components/CUI.DropdownList.js',
-        'components/CUI.Dropdown.js',
-        'components/CUI.Filters.js',
-        'components/CUI.Slider.js',
-        'components/CUI.LabeledSlider.js',
-        'components/CUI.Datepicker.js',
-        'components/CUI.Pulldown.js',
-        'components/CUI.Sticky.js',
-        'components/CUI.CardView.js',
-        'components/CUI.PathBrowser.js',
-        'components/CUI.Wizard.js',
-        'components/CUI.FlexWizard.js',
-        'components/CUI.FileUpload.js',
-        'components/CUI.Toolbar.js',
-        'components/CUI.Tooltip.js',
-        'components/CUI.DraggableList.js',
-        'components/CUI.CharacterCount.js',
-        'components/CUI.Accordion.js',
-        'components/CUI.Tour.js',
-        'components/CUI.Autocomplete.js',
-
-        // Validations
-        'validations.js'
+            // Validations
+            'validations.js'
         ]
     };
 
@@ -180,6 +180,20 @@ module.exports = function (grunt) {
                         src: ['js/cui-core.js'],
                         dest: '<%= dirs.temp %>/'
                     },
+                    { // get build from the core js source (components) and copy into temp
+                        expand: true,
+                        flatten: true,
+                        cwd: '<%= dirs.core.build %>/',
+                        src: ['js/source/components/**/*.js'],
+                        dest: '<%= dirs.temp %>/js/components/'
+                    },
+                    { // get build from the core js source (shared) and copy into temp
+                        expand: true,
+                        flatten: true,
+                        cwd: '<%= dirs.core.build %>/',
+                        src: ['js/source/shared/**/*.js'],
+                        dest: '<%= dirs.temp %>/js/'
+                    },
                     { // get less from the modularized components
                         expand: true,
                         flatten: true,
@@ -193,6 +207,22 @@ module.exports = function (grunt) {
                         cwd: '<%= dirs.components %>/',
                         src: ['**/scripts/**.js'],
                         dest: '<%= dirs.temp %>/js/components'
+                    },
+                    { // get examples from the modularized components
+                        expand: true,
+                        cwd: '<%= dirs.components %>/',
+                        src: ['**/examples/**'],
+                        dest: '<%= dirs.build %>/examples',
+                        filter: 'isFile',
+                        rename: function(dest, src) {
+                            var match = src.match(/coralui-contrib-component-(.*)\/examples\/(.*)/);
+                            if (match) {
+                                var component = match[1];
+                                var filePath = match[2];
+                                return dest + '/' + component + '/' + filePath;
+                            }
+                            return dest;
+                        }
                     },
                     { // get tests from the modularized components
                         expand: true,
@@ -265,6 +295,16 @@ module.exports = function (grunt) {
                         cwd: '<%= dirs.externals %>/',
                         src: ['*/*.js'],
                         dest: '<%= dirs.build %>/js/libs'
+                    }
+                ]
+            },
+            js_source: {
+                files: [
+                    { // copy all js temp files into build folder
+                        expand: true,
+                        cwd: '<%= dirs.temp %>/js',
+                        src: ['**'],
+                        dest: '<%= dirs.build %>/js/source'
                     }
                 ]
             },
@@ -359,7 +399,7 @@ module.exports = function (grunt) {
             components: {
                 options: {
                     wrapped: true,
-                    namespace: 'CUI.templates',
+                    namespace: 'CUI.Templates',
                     processName: function (path) {
                         // Pull the filename out as the template name
                         return path.split('/').pop().split('.').shift();
@@ -419,6 +459,38 @@ module.exports = function (grunt) {
                     { src: ['<%= dirs.build %>/test/**'] },
                     { src: ['<%= dirs.build %>/index.html'] }
                 ]
+            },
+            publish: {
+                options: {
+                    mode: 'tgz',
+                    archive: '<%= dirs.build %>/release/<%= meta.appName %>-<%= meta.version %>.tgz'
+                },
+                files: [
+                    {
+                        expand: true,
+                        cwd: '<%= dirs.build %>',
+                        src: [
+                            'css/**',
+                            'doc/**',
+                            'examples/**',
+                            'images/**',
+                            'js/**',
+                            'less/**',
+                            'res/**',
+                            'tests/**',
+                            '*.html'
+                        ],
+                        dest: 'package/'
+                    }, {
+                        expand: true,
+                        src: [
+                            'package.json',
+                            'README.md'
+                        ],
+                        dest: 'package/'
+
+                    }
+                ]
             }
         }, // compress
 
@@ -442,6 +514,27 @@ module.exports = function (grunt) {
                     'release/**'
                 ]
             }
+        },
+        "shell": {
+            "local-publish": {
+                "command": "coralui-local-publish <%= meta.appName %> <%= dirs.build %>/release/<%= meta.appName %>-<%= meta.version %>.tgz",
+                "options": {
+                    stdout: true,
+                    stderr: true
+                }
+            },
+            "cache-publish": {
+                "command": "npm cache add <%= dirs.build %>/release/<%= meta.appName %>-<%= meta.version %>.tgz",
+                "options": {
+                    "stderr": true
+                }
+            },
+            "publish": {
+                "command": "npm publish <%= dirs.build %>/release/<%= meta.appName %>-<%= meta.version %>.tgz",
+                "options": {
+                    stderr: true
+                }
+            }
         }
 
     }); // end init config
@@ -462,6 +555,7 @@ module.exports = function (grunt) {
         'jshint:retro', // hint js in temp folder
         'concat:retro',
         'uglify:retro',
+        'copy:js_source',
         'guide'
     ]);
 
@@ -485,8 +579,28 @@ module.exports = function (grunt) {
         'gh-pages:release'
     ]);
 
-      // Default task
+    grunt.task.registerTask('publish-build', [
+        'full',
+        'compress:publish'
+    ]);
+
+    grunt.task.registerTask('publish', [ // publish NPM package
+        'publish-build',
+        'shell:publish'
+    ]);
+
+    grunt.task.registerTask('local-publish', [ // publish NPM package locally
+        'publish-build',
+        'shell:local-publish'
+    ]);
+
+    grunt.task.registerTask('cache-publish', [ // publish NPM to local cache
+        'publish-build',
+        'shell:cache-publish'
+    ]);
+    // Default task
     grunt.task.registerTask('default', [
         'retro'
     ]);
+
 };

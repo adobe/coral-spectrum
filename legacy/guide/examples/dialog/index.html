@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Dialog</title>
+  <link rel="stylesheet" href="../../css/cui.css">
+
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/libs/moment.js"></script>
+  <script src="../../js/libs/jquery-message.js"></script>
+  <script src="../../js/libs/jquery-validator.js"></script>
+  <script src="../../js/libs/toe.js"></script>
+  <script src="../../js/CUI.js"></script>
+</head>
+<body>
+  <div class="page">
+    <div class="content">
+      
+      <form class="dialog vertical">
+        <nav class="toolbar content-header">
+          <a class="back left button" href="#">Cancel</a>
+          <div class="center"><h1>Dialog Title</h1></div>
+          <button class="next right" type="submit">Submit</a>
+        </nav>
+
+        <div class="content-container">
+          <div class="fixedcolumns">
+            <div class="fixedcolumn">
+              <section class="fieldset">
+                <h3 class="legend">Section Title</h3>
+
+                <label class="fieldlabel">Text</label>
+                <input class="field" type="text">
+
+                <label class="fieldlabel">Textarea</label>
+                <textarea class="field" rows="4"></textarea>
+
+                <label class="fieldlabel">Search</label>
+                <span class="field search"><input type="text"><button type="button">Search</button></span>
+
+                <label class="fieldlabel">Single Term Filters</label>
+                <span class="field filters" data-init="filters">
+                  <input type="text">
+                  <select>
+                    <option selected>Apple</option>
+                    <option>Pear</option>
+                    <option>Banana</option>
+                  </select>
+                </span>
+
+                <label class="fieldlabel">Multiple Filters</label>
+                <span class="field filters" data-init="filters" data-multiple="multiple">
+                  <input type="text">
+                  <select multiple>
+                    <option selected>Apple</option>
+                    <option selected>Pear</option>
+                    <option selected>Banana</option>
+                  </select>
+                </span>
+
+                <label class="fieldlabel">Stacking Filters</label>
+                <span class="field filters" data-init="filters" data-stacking="true" data-allow="create">
+                  <input type="text">
+                  <select multiple>
+                    <option selected>Apple</option>
+                    <option selected>Pear</option>
+                    <option selected>Banana</option>
+                  </select>
+                </span>
+
+                <label class="fieldlabel">Single Select Dropdown</label>
+                <div class="field dropdown" data-init="dropdown">
+                  <button type="button">Single Select</button>
+                  <select>
+                    <option>Single One</option>
+                    <option selected>Single Two</option>
+                    <option>Single Three</option>
+                  </select>
+                </div>
+
+                <label class="fieldlabel">Multi Select Dropdown</label>
+                <div class="field dropdown" data-init="dropdown">
+                  <button type="button">Multi Select</button>
+                  <select multiple>
+                    <option>Multi One</option>
+                    <option selected>Multi Two</option>
+                    <option>Multi Three</option>
+                  </select>
+                </div>
+
+                <label class="fieldlabel">Editable Dropdown</label>
+                <div class="field dropdown dropdown-editable" data-editable="true" data-init="dropdown">
+                  <input type="text">
+                  <button type="button">Editable</button>
+                  <select>
+                    <option>Edit One</option>
+                    <option>Edit Two</option>
+                    <option>Edit Three</option>
+                  </select>
+                </div>
+              </section>
+
+              <section class="fieldset">
+                <h3 class="legend">Section Title</h3>
+
+                <label class="fieldlabel">Date Picker</label>
+                <span class="field datepicker" data-init="datepicker"><input type="datetime"><button class="icon-calendar">Datetime picker</button></span>
+
+                <label class="fieldlabel">Slider</label>
+                <span class="field slider" data-init="slider"><input type="range" value="10" min="10" max="20" step="2"></span>
+
+                <label class="fieldlabel">Vertical Slider</label>
+                <span class="field slider vertical" data-init="slider"><input type="range" value="10" min="10" max="20" step="2"></span>
+
+                <label class="fieldlabel">Path Browser</label>
+                <span class="field pathbrowser" data-init="pathbrowser"><input type="text"></span>
+
+                <label class="fieldlabel">Checkbox</label>
+                <label class="field checkboxfield"><input type="checkbox" checked><span>Checkbox</span></label>
+
+                <label class="fieldlabel">Radio</label>
+                <label class="field radiofield"><input type="radio" checked><span>Radio</span></label>
+
+                <label class="fieldlabel">Switch</label>
+                <label class="field switch"><input type="checkbox"><span>Off</span><span>On</span></label>
+
+                <label class="fieldlabel">Selector</label>
+                <span class="field selector">
+                  <label><input type="radio"><span>Yes</span></label>
+                  <label><input type="radio"><span>No</span></label>
+                </span>
+              </section>
+            </div>
+
+            <div class="fixedcolumn">
+              <section class="fieldset fixedcolumn">
+                <h3 class="legend">Section Title</h3>
+
+                <label class="fieldlabel">Text</label>
+                <input class="field" type="text">
+
+                <label class="fieldlabel">Textarea</label>
+                <textarea class="field" rows="4"></textarea>
+
+                <label class="fieldlabel">Search</label>
+                <span class="field search"><input type="text"><button type="button">Search</button></span>
+
+                <label class="fieldlabel">Single Term Filters</label>
+                <span class="field filters" data-init="filters">
+                  <input type="text">
+                  <select>
+                    <option selected>Apple</option>
+                    <option>Pear</option>
+                    <option>Banana</option>
+                  </select>
+                </span>
+
+                <label class="fieldlabel">Multiple Filters</label>
+                <span class="field filters" data-init="filters" data-multiple="multiple">
+                  <input type="text">
+                  <select multiple>
+                    <option selected>Apple</option>
+                    <option selected>Pear</option>
+                    <option selected>Banana</option>
+                  </select>
+                </span>
+
+                <label class="fieldlabel">Stacking Filters</label>
+                <span class="field filters" data-init="filters" data-stacking="true" data-allow="create">
+                  <input type="text">
+                  <select multiple>
+                    <option selected>Apple</option>
+                    <option selected>Pear</option>
+                    <option selected>Banana</option>
+                  </select>
+                </span>
+
+                <label class="fieldlabel">Single Select Dropdown</label>
+                <div class="field dropdown" data-init="dropdown">
+                  <button type="button">Single Select</button>
+                  <select>
+                    <option>Single One</option>
+                    <option selected>Single Two</option>
+                    <option>Single Three</option>
+                  </select>
+                </div>
+
+                <label class="fieldlabel">Multi Select Dropdown</label>
+                <div class="field dropdown" data-init="dropdown">
+                  <button type="button">Multi Select</button>
+                  <select multiple>
+                    <option>Multi One</option>
+                    <option selected>Multi Two</option>
+                    <option>Multi Three</option>
+                  </select>
+                </div>
+
+                <label class="fieldlabel">Editable Dropdown</label>
+                <div class="field dropdown dropdown-editable" data-editable="true" data-init="dropdown">
+                  <input type="text">
+                  <button type="button">Editable</button>
+                  <select>
+                    <option>Edit One</option>
+                    <option>Edit Two</option>
+                    <option>Edit Three</option>
+                  </select>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</body>
+</html>
