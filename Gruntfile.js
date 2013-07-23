@@ -524,7 +524,7 @@ module.exports = function (grunt) {
                 }
             },
             "cache-publish": {
-                "command": "npm cache add <%= dirs.build %>/<%= meta.appName %>-<%= meta.version %>.tgz",
+                "command": "npm cache add <%= dirs.build %>/release/<%= meta.appName %>-<%= meta.version %>.tgz",
                 "options": {
                     "stderr": true
                 }
