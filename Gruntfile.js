@@ -389,7 +389,13 @@ module.exports = function (grunt) {
                     dirs.legacy + '/components/tests/test.*.js'
                 ],
                 tasks: ['quicktest']
-            } // legacy_scripts
+            }, // legacy_scripts
+            legacy_styles: {
+                files: [
+                    dirs.legacy + '/components/styles/*.less'
+                ],
+                tasks: ['quickless']
+            } // legacy_styles
 
         },  
         // watch
@@ -645,6 +651,14 @@ module.exports = function (grunt) {
         'mocha',
         'uglify:retro',
         'copy:js_source'
+    ]);
+
+    grunt.task.registerTask('quickless', [
+        'copy:retro',
+        'generate-imports',
+        'less:cui',
+        'less:cui-wrapped',
+        'cssmin:cui',
     ]);
 
     grunt.task.registerTask('release', [ // releases coral to github page
