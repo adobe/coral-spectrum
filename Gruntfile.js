@@ -644,8 +644,8 @@ module.exports = function (grunt) {
         'compress:release',
         'compress:full',
         'copy:release_archive',
-        'mocha' //,
-        // 'jsdoc'
+        'mocha',
+        'jsdoc'
     ]);
 
     grunt.task.registerTask('check', [ // supposed to be execute prior to any commit!
