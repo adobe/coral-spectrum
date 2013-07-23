@@ -383,7 +383,16 @@ module.exports = function(grunt) {
           options: {
             nospawn: true
           }
-        } // styles
+        }, // styles
+        html: {
+          files: [
+            dirs.components + '/**/examples/**.html'
+          ],
+          tasks: ['quickhtml'],
+          options: {
+            nospawn: true
+          }
+        } // html
     }, // watch
 
     compress: {
@@ -455,6 +464,10 @@ module.exports = function(grunt) {
 
   grunt.task.registerTask('quickless', [
     'copy:less_cui', 'less','cssmin'
+  ]);
+
+  grunt.task.registerTask('quickhtml', [
+    'copy:res_components'
   ]);
 
 

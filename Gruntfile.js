@@ -173,6 +173,10 @@ module.exports = function (grunt) {
             core_quickless: {
                 subdir: dirs.core.root,
                 args: ['quickless']                 
+            },
+            core_quickhtml: {
+                subdir: dirs.core.root,
+                args: ['quickhtml']                 
             }
         },
 
@@ -375,7 +379,16 @@ module.exports = function (grunt) {
                 options: {
                     nospawn: true
                 }
-            } // core_styles
+            }, // core_styles
+            core_html: {
+                files: [
+                    dirs.core.components + '/**/examples/**.html'
+                ],
+                tasks: ['subgrunt:core_quickhtml', 'copy:retro'],
+                options: {
+                  nospawn: true
+                }
+            } // core_html
         },  
         // watch
 
