@@ -108,9 +108,9 @@
         }
         
         var elementId = this.$element.attr('id');
-        // if the element doesn't have an id, build a unique id using the $.expando property
+        // if the element doesn't have an id, build a unique id using new Date().getTime()
         if(!elementId) {
-            this.$element.data("_tmp",0).attr("id","cui-slider-"+$.expando+"-"+this.$element.get(0)[$.expando]).removeData("_tmp");
+            this.$element.attr("id","cui-slider-" + new Date().getTime());
             elementId = this.$element.attr('id');
         }
                 
@@ -142,7 +142,7 @@
                                 
                 // if the new label/legend has no id, assign one.
                 if (!$newLegend.attr("id")) {
-                    $newLegend.attr("id",elementId+"-legend");
+                    $newLegend.attr("id", elementId + "-legend");
                 }
                                 
                 $newFieldset.attr("aria-labelledby", $newLegend.attr("id"));
