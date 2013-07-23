@@ -3,7 +3,7 @@
   Must be styled using an adjacent label or span tag
 */
 
-input[type=checkbox], 
+input[type=checkbox],
 input[role=checkbox],
 input[type=radio] {
   opacity: 0.0001; // used to allow the check box to be clicked in some browsers.
@@ -21,7 +21,7 @@ input[type=radio] {
   & + label:before {
     font-family: AdobeIcons;
     display: inline-block;
-    margin-left: -1rem; // cover invisible checkbox 
+    margin-left: -1rem; // cover invisible checkbox
     .border-box;
 
     width: 1rem;
@@ -57,10 +57,9 @@ input[type=radio] {
         color: @checkbox-disabled-check-color;
       }
   }
-  
 }
 
-input[type=checkbox], 
+input[type=checkbox],
 input[role=checkbox] {
   &:indeterminate + label:before,
   &:indeterminate + span:before,
@@ -78,7 +77,6 @@ input[role=checkbox] {
 }
 
 input[type=radio] {
-
   & + span:before,
   & + label:before {
     .border-radius(1rem);
@@ -97,5 +95,17 @@ input[type=radio] {
     &:checked + label:before {
       background-image: url('@{component-images-folder}/checkbox/radio_dot_disabled.png');
     }
+  }
+}
+
+.checkboxfield, .radiofield {
+  display: inline-block;
+  margin: 0.5rem 0;
+  vertical-align: middle;
+}
+
+form.vertical {
+  .checkboxfield.field, .radiofield.field {
+    display: block;
   }
 }

@@ -19,6 +19,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-webfont');
+  grunt.loadNpmTasks('grunt-curl');
+  grunt.loadNpmTasks('grunt-zip');
 
   // Read in package.json
   var pkg = grunt.file.readJSON('package.json');
@@ -130,7 +132,7 @@ module.exports = function(grunt) {
       }
     }, // less
 
-    icons: {
+    iconCSS: {
       all: {
         src: [
           '<%= dirs.source %>/icons_color/*.svg'
@@ -164,7 +166,7 @@ module.exports = function(grunt) {
   grunt.task.registerTask('default', [
     'clean',
     'copy:standalone',
-    'icons',
+    'iconCSS',
     'webfont',
     'less',
     'copy:build'

@@ -1,0 +1,41 @@
+/**
+  Element: Search
+  A simple search field with button
+*/
+
+div.search {
+  position: relative;
+  display: inline-block;
+  margin: 0.5rem 0;
+  padding: 0;
+  vertical-align: middle;
+  
+  input[type=text] {
+    margin: 0;
+    padding-right: 40*@px;
+    width: 100%;
+  }
+
+  button {
+    .icon-search;
+    .button-square;
+        
+    // Fit inside of the search field
+    position: absolute;
+    top: @px; // Because of textfield border
+    right: @px; // Because of textfield border
+    height: 30*@px;
+    
+    &,
+    &:hover,
+    &:active,
+    &:disabled {
+      border: none;
+      border-left: @px solid @textfield-border-color;
+      filter: none;
+    }
+  }
+}
+/* end search */
+
+

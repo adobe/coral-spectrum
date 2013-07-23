@@ -1,9 +1,12 @@
 {
   "name": "coralui",
-  "version": "1.7.0-SNAPSHOT",
+  "version": "1.9.0-SNAPSHOT",
   "repository": {
     "type": "git",
     "url": "https://git.corp.adobe.com/Coral/CoralUI"
+  },
+  "publishConfig": {
+    "registry": "http://npm.adobe.com/registry/_design/scratch/_rewrite"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -20,10 +23,9 @@
     "grunt-gh-pages": "~0.6.0",
     "grunt-mocha": "~0.3.4",
     "grunt-jsdoc": "~0.3.3",
+    "grunt-shell": "~0.3.1",
     "chai": "1.5.0",
     "chai-jquery": "1.1.1",
-    "mocha": "1.8.1",
-    "grunt-zip": "0.5.1",
-    "grunt-curl": "0.6.0"
+    "mocha": "1.8.1"
   }
 }

@@ -11,7 +11,9 @@ input[type=text],
 input[type=password],
 input[type=email],
 input[type=url],
-input[type=tel] {
+input[type=tel],
+input[type^="date"],
+input[type="time"] {
   .border-box;
 
   border-radius: 0;
@@ -36,7 +38,7 @@ input[type=tel] {
   }
 
   &:-moz-ui-invalid {
-    box-shadow:none;
+    box-shadow: none;
   }
   
   &.error,
@@ -49,5 +51,18 @@ input[type=tel] {
   &:focus:invalid {
     .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
     color: @textfield-error-font-color;
+  }
+}
+
+form.vertical {
+  input[type=text].field,
+  input[type=password].field,
+  input[type=email].field,
+  input[type=url].field,
+  input[type=tel].field,
+  input[type^="date"].field,
+  input[type="time"].field {
+    display: block;
+    width: 100%;
   }
 }

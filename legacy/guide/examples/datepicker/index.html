@@ -9,7 +9,6 @@
         <script src="../../js/libs/handlebars.js"></script>
         <script src="../../js/libs/moment.js"></script>
         <script src="../../js/libs/jquery.js"></script>
-        <script src="../../js/libs/jquery-fingerpointer.js"></script>
         <script src="../../js/libs/toe.js"></script>
         <script src="../../js/libs/moment.js"></script>
   
@@ -55,7 +54,7 @@
     <body>
   
     <div class="col">
-        <section>
+      <section>
             <h1>Date Picker</h1>
             <div id="myDatepicker" class="datepicker">
                 <input type="date" value="29 November 2012" name="date1"><button class="icon-calendar small"><span>Datepicker</span></button>
@@ -76,6 +75,7 @@
                 <input type="datetime" value="2012-10-20T20:35Z" data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" name="date4"><button class="icon-calendar small"><span>Datetime picker</span></button>
             </div>
         </section>
+        
         <section>
             <h1>Time picker</h1>
             <div class="datepicker" data-init="datepicker">
@@ -85,6 +85,7 @@
                 <input type="time" value="20:35" data-displayed-format="HH:mm" name="date6"><button class="icon-calendar small"><span>Datetime picker</span></button>
             </div>
         </section>
+        
         <section>
             <h1>Datetime Picker, required values</h1>
             <div class="datepicker" data-init="datepicker">
@@ -93,10 +94,20 @@
             <div class="datepicker" data-init="datepicker" data-disabled="true">
                 <input type="datetime" value="2012-10-20T20:35Z" data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" name="date4" required><button class="icon-calendar small"><span>Datetime picker</span></button>
             </div>
+        </section> 
+           
+        <section>
+            <h1>Datetime Picker, restricted selection range (today, range)</h1>
+            <div class="datepicker" data-init="datepicker" data-min-date="today" >
+                <input type="datetime" value="2012-10-20T20:35Z" data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" name="date10" required><button class="icon-calendar small"><span>Datetime picker</span></button>
+            </div>
+            <div class="datepicker" data-init="datepicker" data-min-date='2013-07-09' data-max-date='2013-07-15'>
+                <input type="datetime" value="2012-10-20T20:35Z"  data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" name="date11" required><button class="icon-calendar small"><span>Datetime picker</span></button>
+            </div> 
         </section>        
     </div>
 
-    <div class="col">
+     <div class="col">
         <section>
             <h1>Date Picker (force HTML Mode)</h1>
             <div id="myDatepickerForce" class="datepicker" data-force-html-mode="true">
@@ -112,10 +123,10 @@
         <section>
             <h1>Datetime Picker (force HTML Mode)</h1>
             <div class="datepicker" data-init="datepicker" data-force-html-mode="true">
-                <input type="datetime" value="2012-10-20T20:35Z" data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" name="date3"><button class="icon-calendar small"><span>Datetime picker</span></button>
+                <input type="datetime" value="2012-10-20T20:35Z" data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" name="date7"><button class="icon-calendar small"><span>Datetime picker</span></button>
             </div>
-            <div class="datepicker" data-init="datepicker" data-disabled="true">
-                <input type="datetime" value="2012-10-20T20:35Z" data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" name="date4"><button class="icon-calendar small"><span>Datetime picker</span></button>
+            <div class="datepicker" data-init="datepicker">
+                <input type="datetime" value="2012-10-20T20:35Z" data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" name="date8"><button class="icon-calendar small"><span>Datetime picker</span></button>
             </div>
         </section>
         
@@ -138,7 +149,7 @@
                 <input type="time" value="20:35" data-displayed-format="HH:mm" name="date6"><button class="icon-calendar small"><span>Time picker</span></button>
             </div>
         </section>
-    </div>
+    </div> 
     
     </body>
 </html>

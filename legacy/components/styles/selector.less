@@ -1,6 +1,8 @@
-// Selector
+ // Selector
 .selector {
   display: inline-block;
+  margin: 0.5rem 0;
+  vertical-align: middle;
   font-size: 0; // Fight space between inline block elements
   
   //background-color: @selector-disabled-color; // Why? This messes up selectors used in toolbars things up.
@@ -64,5 +66,11 @@
         .gradient(@selector-gradient-start-color, @selector-gradient-start-color);
       }
     }
+  }
+}
+
+form.vertical {
+  .selector.field {
+    display: block;
   }
 }

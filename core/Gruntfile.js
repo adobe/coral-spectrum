@@ -17,6 +17,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-less');
@@ -25,6 +26,7 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-mocha');
   grunt.loadNpmTasks('grunt-jsdoc');
+  grunt.loadNpmTasks('grunt-shell');
 
   grunt.loadTasks('tasks');
 
@@ -49,7 +51,7 @@ module.exports = function(grunt) {
       // base for widgets
       dirs.shared +'/scripts/CUI.Widget.js',
 
-      // base for widgets
+      // components 
       dirs.components +'/rail/scripts/CUI.Rail.js'
     ]
   };
@@ -232,6 +234,15 @@ module.exports = function(grunt) {
           }
         ]
       },
+      js: {
+        files: [
+          {
+            expand: true,
+            src: getIncludes("cui"),
+            dest: '<%= dirs.build %>/js/source/'
+          }
+        ]
+      },
       fonts: {
         files: [
           {
@@ -353,8 +364,45 @@ module.exports = function(grunt) {
                 nospawn: true
             }
         }
-    } // watch
+    }, // watch
 
+    compress: {
+      publish: {
+        options: {
+            mode: 'tgz',
+            archive: '<%= dirs.build %>/<%= meta.appName %>-<%= meta.version %>.tgz'
+        },
+        files: [
+            {
+                expand: true,
+                src: [
+                    'components/**',
+                    'shared/**',
+                    'tests/**',
+                    'package.json',
+                    'README.md'
+                ],
+                dest: 'package/'
+            }
+        ]
+      }
+    },
+
+    "shell": {
+      "local-publish": {
+        "command": "coralui-local-publish <%= meta.appName %> <%= dirs.build %>/<%= meta.appName %>-<%= meta.version %>.tgz",
+        "options": {
+            stdout: true,
+            stderr: true
+        }
+      },
+      "publish": {
+        "command": "npm publish <%= dirs.build %>/<%= meta.appName %>-<%= meta.version %>.tgz",
+        "options": {
+          stderr: true
+        }
+      }
+    }
   });
   // end init config
 
@@ -378,6 +426,21 @@ module.exports = function(grunt) {
   grunt.task.registerTask('retro', [
     'legacy',
     'partial'
+  ]);
+
+  grunt.task.registerTask('publish-build', [
+    'retro',
+    'compress:publish'
+  ]);
+
+  grunt.task.registerTask('publish', [ // publish NPM package
+    'publish-build',
+    'shell:publish'
+  ]);
+
+  grunt.task.registerTask('local-publish', [ // publish NPM package locally
+    'publish-build',
+    'shell:local-publish'
   ]);
 
   // Default task

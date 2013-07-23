@@ -1,21 +1,32 @@
 /**
 * Also used by auto completers, see filters.less
 */
+
+// FIXME .dropdown-container MUST be reviewed. See CUI-770
 .dropdown-container {
-   display: inline-block;
+    display: inline-block;
     position: relative;
     padding: 0;
     margin: 0;
 }
+
+form.vertical {
+    // FIXME .dropdown-container MUST be reviewed. See CUI-770
+    // need to reset .dropdown-container as it is set as inline-block
+    .dropdown-container {
+        display: block;
+    }
+}
+
 .dropdown-visible {
-    z-index: 1000;
+    z-index: 1100;
 }
 .dropdown-list {
     position: absolute;
     max-height: 20rem;
     overflow: auto;
     border-bottom: @px solid @dropdown-border-color;
-    z-index: 1000;
+    z-index: 1100;
 }
 .dropdown-list  ul {
     margin: 0;
