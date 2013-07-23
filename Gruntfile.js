@@ -386,16 +386,25 @@ module.exports = function (grunt) {
             legacy_scripts: {
                 files: [
                     dirs.legacy + '/components/scripts/*.js',
-                    dirs.legacy + '/components/tests/test.*.js'
+                    dirs.legacy + '/components/tests/test.*.js',
+                    dirs.legacy + '/guide/js/guide.js'
                 ],
                 tasks: ['quicktest']
             }, // legacy_scripts
             legacy_styles: {
                 files: [
-                    dirs.legacy + '/components/styles/*.less'
+                    dirs.legacy + '/components/styles/*.less',
                 ],
                 tasks: ['quickless']
-            } // legacy_styles
+            }, // legacy_styles
+            guide: {
+                files: [
+                    dirs.legacy + '/guide/js/guide.js',
+                    dirs.legacy + '/guide/less/*.less',
+                    dirs.legacy + '/guide/index.html'
+                ],
+                tasks: ['guide']
+            } // guide
 
         },  
         // watch
