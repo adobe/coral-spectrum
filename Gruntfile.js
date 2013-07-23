@@ -365,20 +365,14 @@ module.exports = function (grunt) {
                     dirs.core.components + '/**/scripts/**.js',
                     dirs.core.components + '/**/tests/**.js'
                 ],
-                tasks: ['subgrunt:core_quicktest', 'copy:retro'],
-                options: {
-                    nospawn: true
-                }
+                tasks: ['subgrunt:core_quicktest', 'copy:retro']
             }, // core_scripts
             core_styles: {
                 files: [
                     dirs.core.components + '/**/styles/**.less',
                     dirs.core.shared + '/styles/**/**.less',
                 ],
-                tasks: ['subgrunt:core_quickless', 'copy:retro'],
-                options: {
-                    nospawn: true
-                }
+                tasks: ['subgrunt:core_quickless', 'copy:retro']
             }, // core_styles
             core_html: {
                 files: [
@@ -388,7 +382,15 @@ module.exports = function (grunt) {
                 options: {
                   nospawn: true
                 }
-            } // core_html
+            }, // core_html
+            legacy_scripts: {
+                files: [
+                    dirs.legacy + '/components/scripts/*.js',
+                    dirs.legacy + '/components/tests/test.*.js'
+                ],
+                tasks: ['quicktest']
+            } // legacy_scripts
+
         },  
         // watch
 
@@ -633,6 +635,16 @@ module.exports = function (grunt) {
 
     grunt.task.registerTask('check', [ // supposed to be execute prior to any commit!
         'full'
+    ]);
+
+    grunt.task.registerTask('quicktest', [
+        'clean:temp', 
+        'copy:retro',
+        'jshint:retro', 
+        'concat:retro',
+        'mocha',
+        'uglify:retro',
+        'copy:js_source'
     ]);
 
     grunt.task.registerTask('release', [ // releases coral to github page
