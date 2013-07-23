@@ -10,6 +10,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
     grunt.loadNpmTasks('grunt-gh-pages');
     grunt.loadNpmTasks('grunt-mocha');
@@ -71,14 +72,16 @@ module.exports = function (grunt) {
     var dirs = {
         build: 'build',
         components: 'components',
-        source: 'source',
         legacy: 'legacy',
         temp: 'temp',
         modules: 'node_modules',
         externals: 'externals',
         core: {
-            grunt: 'core/',
-            build: 'core/build'
+            root: 'core/',
+            build: 'core/build',
+            shared: 'core/shared',
+            components: 'core/components',
+            tests: 'core/tests'
         }
     };
 
@@ -159,9 +162,13 @@ module.exports = function (grunt) {
         },
 
         subgrunt: {
-            core: { // needed to merge the cor einto the build
-                subdir: dirs.core.grunt,
-                args: ['retro']
+            core: { // this will build core, which gets merged to top level build
+                subdir: dirs.core.root,
+                args: ['retro'] 
+            },
+            core_quicktest: {
+                subdir: dirs.core.root,
+                args: ['quicktest']                 
             }
         },
 
@@ -335,12 +342,27 @@ module.exports = function (grunt) {
             src: '<%= dirs.legacy %>/components/styles/*.less'
           },
           core: {
-            src: '<%= dirs.core.grunt %>/components/**/styles/*.less'
+            src: '<%= dirs.core.root %>/components/**/styles/*.less'
           },
           components: {
             src: '<%= dirs.components %>/**/styles/*.less'
           }
         },
+
+        watch: {
+            core_scripts: {
+                files: [
+                    dirs.core.shared + '/scripts/**.js',
+                    dirs.core.tests + '/**/test.*.js',
+                    dirs.core.components + '/**/scripts/**.js',
+                    dirs.core.components + '/**/tests/**.js'
+                ],
+                tasks: ['subgrunt:core_quicktest'],
+                options: {
+                    nospawn: true
+                }
+            }
+        },  
 
         less: {
             "cui-wrapped": {
@@ -577,8 +599,8 @@ module.exports = function (grunt) {
         'compress:release',
         'compress:full',
         'copy:release_archive',
-        'mocha',
-        'jsdoc'
+        'mocha' //,
+        // 'jsdoc'
     ]);
 
     grunt.task.registerTask('check', [ // supposed to be execute prior to any commit!

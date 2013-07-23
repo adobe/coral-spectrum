@@ -369,7 +369,7 @@ module.exports = function(grunt) {
                 dirs.components + '/**/scripts/**.js',
                 dirs.components + '/**/tests/**.js'
             ],
-            tasks: ['jshint', 'copy:tests', 'concat', 'uglify', 'mocha'],
+            tasks: ['quicktest'],
             options: {
                 nospawn: true
             }
@@ -437,6 +437,10 @@ module.exports = function(grunt) {
   grunt.task.registerTask('retro', [
     'legacy',
     'partial'
+  ]);
+
+  grunt.task.registerTask('quicktest', [
+    'jshint', 'copy:tests', 'concat', 'uglify', 'mocha'
   ]);
 
   grunt.task.registerTask('publish-build', [
