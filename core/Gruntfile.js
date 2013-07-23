@@ -365,9 +365,11 @@ module.exports = function(grunt) {
         scripts: {
             files: [
                 dirs.shared + '/scripts/**.js',
-                dirs.components + '/**/scripts/**.js'
+                dirs.tests + '/**/test.*.js',
+                dirs.components + '/**/scripts/**.js',
+                dirs.components + '/**/tests/**.js'
             ],
-            tasks: ['jshint', 'concat', 'uglify', 'mocha'],
+            tasks: ['jshint', 'copy:tests', 'concat', 'uglify', 'mocha'],
             options: {
                 nospawn: true
             }
