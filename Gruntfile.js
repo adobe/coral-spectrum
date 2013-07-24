@@ -616,12 +616,6 @@ module.exports = function (grunt) {
                     stderr: true
                 }
             },
-            "cache-publish": {
-                "command": "npm cache add <%= dirs.build %>/release/<%= meta.appName %>-<%= meta.version %>.tgz",
-                "options": {
-                    "stderr": true
-                }
-            },
             "publish": {
                 "command": "npm publish <%= dirs.build %>/release/<%= meta.appName %>-<%= meta.version %>.tgz",
                 "options": {
@@ -717,10 +711,6 @@ module.exports = function (grunt) {
         'shell:local-publish'
     ]);
 
-    grunt.task.registerTask('cache-publish', [ // publish NPM to local cache
-        'publish-build',
-        'shell:cache-publish'
-    ]);
     // Default task
     grunt.task.registerTask('default', [
         'retro'
