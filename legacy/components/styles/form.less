@@ -42,3 +42,35 @@ form.vertical {
     }
   }
 }
+
+/**
+ * Indicates that the form is using vertical aligned layout.
+ * The label and field are placed on the same line, and fields are on separate lines
+ */
+form.aligned {
+  .fieldset {
+    margin: 0 10*@px 40*@px 10*@px;
+    border: none;
+    border-top: 1px solid #CCCCCC;
+
+    > .legend {
+      display: inline-block;
+      margin: 8*@px 0 15*@px 0;
+    }
+
+    &:first-of-type {
+      border: none;
+
+      > .legend {
+        margin-top: 25*@px;
+      }
+    }
+  }
+
+  label.fieldlabel {
+    display: block;
+    float: left;
+    min-width: 6.5rem;
+    margin: 19*@px 0 0.5rem 0;
+  }
+}
