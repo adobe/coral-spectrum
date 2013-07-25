@@ -119,15 +119,18 @@
 }
 
 form.vertical {
-  .filters.field {
-    display: block;
-    width: 100%;
-  }
+    .filters.field {
+        display: block;
+        width: 100%;
+    }
 }
 
 form.aligned {
     .filters.field {
-        display: block;
         float: left;
+
+        .dropdown-container { // FIXME .dropdown-container MUST be reviewed. See CUI-770
+            float: none;
+        }
     }
 }

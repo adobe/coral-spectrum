@@ -23,10 +23,9 @@
   <div style="padding: 2rem;">
     <h1>Forms</h1>
 
-    <p>Currently CoralUI is only providing vertical layout, which is achieved by the following selector structure:</p>
+    <h2>Vertical Layout</h2>
     <pre>/**
- * Indicates that the form is using vertical layout.
- * @see https://issues.adobe.com/browse/CQ5-30653
+ * Indicates that the form is using vertical layout, where the label is placed above the field.
  */
 form.vertical
 
@@ -48,8 +47,6 @@ form.vertical .fieldset > .legend
 form.vertical label.fieldlabel</pre>
 
     <form class="vertical" style="width: 500px;">
-      <h2>Vertical Layout</h2>
-
       <section class="fieldset">
         <h3 class="legend">Section Title</h3>
 
@@ -156,10 +153,31 @@ form.vertical label.fieldlabel</pre>
       </section>
     </form>
 
-    <form class="aligned" style="width: 500px;">
-      <h2>Aligned Layout</h2>
+    <h2>Aligned Layout</h2>
+    <pre>/**
+ * Indicates that the form is using aligned layout, where the label and the field are placed on the same line.
+ */
+form.aligned
 
-      <section class="fieldset clearfix">
+/**
+ * Indicates the fieldset.
+ * .fieldset is used instead of &lt;fieldset> as &lt;legend> cannot be styled as per requirement.
+ */
+form.aligned .fieldset
+
+/**
+ * Indicates the legend of fieldset.
+ */
+form.aligned .fieldset > .legend
+
+/**
+ * Indicates the label of the field.
+ * .fieldlabel is used so that the styling is only applied to this label, not any &lt;label> inside the form.
+ */
+form.aligned label.fieldlabel</pre>
+
+    <form class="aligned" style="width: 500px;">
+      <section class="fieldset">
         <h3 class="legend">Section Title</h3>
 
         <label class="fieldlabel">Text</label>
@@ -233,7 +251,7 @@ form.vertical label.fieldlabel</pre>
         </div>
       </section>
 
-      <section class="fieldset clearfix">
+      <section class="fieldset">
         <h3 class="legend">Section Title</h3>
 
         <label class="fieldlabel">Date Picker</label>

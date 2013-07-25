@@ -1,6 +1,7 @@
 /**
- * Indicates that the form is using vertical layout.
- * @see https://issues.adobe.com/browse/CQ5-30653
+ * Indicates that the form is using vertical layout, where the label is placed above the field.
+ *
+ * @see https://issues.adobe.com/browse/CQ5-30653 for measurement
  */
 form.vertical {
   /**
@@ -44,14 +45,14 @@ form.vertical {
 }
 
 /**
- * Indicates that the form is using vertical aligned layout.
- * The label and field are placed on the same line, and fields are on separate lines
+ * Indicates that the form is using aligned layout, where the label and the field are placed on the same line.
  */
 form.aligned {
   .fieldset {
     margin: 0 10*@px 40*@px 10*@px;
     border: none;
     border-top: 1px solid #CCCCCC;
+    .clearfix;
 
     > .legend {
       display: block;
@@ -69,10 +70,11 @@ form.aligned {
   }
 
   label.fieldlabel {
-    display: block;
     float: left;
     clear: left;
+    display: block;
+    margin: 0.5rem 0.5rem 0.5rem 0;
+    line-height: 2rem;
     min-width: 6.5rem;
-    margin: 19*@px 0 0.5rem 0;
   }
 }

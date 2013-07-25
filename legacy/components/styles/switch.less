@@ -118,7 +118,18 @@ form.vertical {
 
 form.aligned {
   .switch.field {
-    display: block;
     float: left;
+
+    input[type=checkbox] {
+      + span {
+        height: 2rem;
+        line-height: 2rem;
+        vertical-align: middle;
+      }
+
+      + span + span {
+        vertical-align: middle;
+      }
+    }
   }
 }

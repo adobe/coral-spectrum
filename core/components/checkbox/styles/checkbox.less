@@ -112,7 +112,10 @@ form.vertical {
 
 form.aligned {
   .checkboxfield.field, .radiofield.field {
-    display: block;
     float: left;
+
+    > input {
+      height: 2rem; // to be the same as the height of label
+    }    
   }
 }

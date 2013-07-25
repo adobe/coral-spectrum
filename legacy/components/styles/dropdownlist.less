@@ -19,9 +19,11 @@ form.vertical {
 }
 
 form.aligned {
+    // FIXME .dropdown-container MUST be reviewed. See CUI-770
+    // need to reset .dropdown-container as it is set as inline-block
     .dropdown-container {
         display: block;
-        float: left;
+        float: left; // this is a hack for stacking filters
     }
 }
 
