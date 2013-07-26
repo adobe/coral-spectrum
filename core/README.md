@@ -4,6 +4,7 @@ This is CoralUI's core, be respectful and think about every line you are going t
 Changes in the core may affect other peoples' projects.
 
 npm package name: coralui-core
+
 Owners: Andreas Kuefer (functional), Damien Antipa (technical)
 
 ## Contained components
