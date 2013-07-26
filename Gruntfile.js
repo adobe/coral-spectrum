@@ -365,14 +365,14 @@ module.exports = function (grunt) {
                     dirs.core.components + '/**/scripts/**.js',
                     dirs.core.components + '/**/tests/**.js'
                 ],
-                tasks: ['subgrunt:core_quicktest', 'copy:retro']
+                tasks: ['subgrunt:core_quicktest', 'quicktest']
             }, // core_scripts
             core_styles: {
                 files: [
                     dirs.core.components + '/**/styles/**.less',
                     dirs.core.shared + '/styles/**/**.less',
                 ],
-                tasks: ['subgrunt:core_quickless', 'copy:retro']
+                tasks: ['subgrunt:core_quickless', 'quickless']
             }, // core_styles
             core_html: {
                 files: [
