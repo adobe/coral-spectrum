@@ -35,6 +35,7 @@ module.exports = function (grunt) {
             'CUI.Util.HTTP.js',
 
             // Components
+            'components/CUI.Rail.js',
             'components/CUI.Modal.js',
             'components/CUI.Tabs.js',
             'components/CUI.Alert.js',
