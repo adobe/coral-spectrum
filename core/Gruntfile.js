@@ -49,10 +49,7 @@ module.exports = function(grunt) {
       dirs.shared +'/scripts/CUI.jQuery.js',
 
       // base for widgets
-      dirs.shared +'/scripts/CUI.Widget.js',
-
-      // components 
-      dirs.components +'/rail/scripts/CUI.Rail.js'
+      dirs.shared +'/scripts/CUI.Widget.js'
     ]
   };
   var packages = {
