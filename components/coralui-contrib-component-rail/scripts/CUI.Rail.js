@@ -32,11 +32,11 @@
          * @constructs
          * @param {Object} options
          */
-        construct: function(options) {
+        construct: function (options) {
 
             // add default theme to rail
             // this is a temporary solution because it expects to markup to already have the attribute
-            if (this.$element.attr('data-theme').length === 0) {
+            if (!this.$element.attr('data-theme')) {
                 this.$element.attr('data-theme', 'dark');
             }
 
