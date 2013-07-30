@@ -162,21 +162,18 @@
         },
 
         updateUI: function() {
+            var f;
             if (this.validity.valid) {
-                everyReverse(this.registry.validators(this.el), function(v) {
-                    if (!v.clear) return true;
-
-                    v.clear(this.el);
-                    return false; // i.e. only run the first one
-                }, this);
+                f = function(v) {
+                    return !v.clear || v.clear(this.el) === $.validator.CONTINUE;
+                };
             } else {
-                everyReverse(this.registry.validators(this.el), function(v) {
-                    if (!v.show) return true;
-
-                    v.show(this.el, this.validationMessage);
-                    return false; // i.e. only run the first one
-                }, this);
+                f = function(v) {
+                    return !v.show || v.show(this.el, this.validationMessage) === $.validator.CONTINUE;
+                };
             }
+
+            everyReverse(this.registry.validators(this.el), f, this);
         }
     };
 
@@ -294,6 +291,16 @@
     $.validator = (function() {
         return {
             /**
+             * A flag to indicate that the validation process should continue to the next validator
+             */
+            CONTINUE: 1,
+
+            /**
+             * A flag to indicate that the validation process should stop. This is default behavior.
+             */
+            STOP: 2,
+
+            /**
              * <p>Registers the given validator(s).</p>
              * <p>Each validator will be iterated to check the validity of submittable elements, where the iteration stopped when the first matching validator says invalid.
              * The order of the registration is important, where the last one registered will be used first.</p>
@@ -319,8 +326,8 @@
              * @param {...Object} validator One or more validator objects.
              * @param {String|Function} validator.selector Only the element satisfying the selector will be validated using this validator. It will be passed to <code>jQuery.fn.is</code>.
              * @param {Function} validator.validate The actual validation function. It must return a string of error message if the element fails.
-             * @param {Function} validator.show The function to show the error.
-             * @param {Function} validator.clear The function to clear the error.
+             * @param {Function} validator.show The function to show the error. The function can return {@link jQuery.validator.CONTINUE} or {@link jQuery.validator.STOP}.
+             * @param {Function} validator.clear The function to clear the error. The function can return {@link jQuery.validator.CONTINUE} or {@link jQuery.validator.STOP}.
              *
              * @example
 jQuery.validator.register({
