@@ -208,11 +208,11 @@
   Mixin: .button-square
   Turn any button into a square button. For use with the .icon-* mixins or classes.
 */
-.button-square() {
+.button-square(@button-size: 2rem) {
   min-width: 0; // Reset min-width on buttons
   
-  width: 2rem;
-  height: 2rem;
+  width: @button-size;
+  height: @button-size;
   margin: 0;
   padding: 0;
   
@@ -220,7 +220,7 @@
   
   border: @px solid @dropdown-border-color;
     
-  line-height: 2rem - @px; // Align icons vertically
+  line-height: @button-size - @px; // Align icons vertically
   text-shadow: none; // TODO: use white shadow?
 
   vertical-align: top; // Don't behave like an icon
@@ -254,6 +254,34 @@
     cursor: default;
   }
 }
+
+.button-square-transparent(@button-size: 2rem) {
+  
+  .button-square(@button-size);
+  
+  background-image: none;
+  background-color: rgba(0,0,0,0);
+  border: none;
+  
+  &:hover {
+    background-image: none;
+    border: none;
+    background-color: rgba(0,0,0,0);
+  }
+
+  &:active {
+    background-image: none;
+    border: none;
+    background-color: rgba(0,0,0,0);
+  }
+  
+  &:disabled {
+    background-image: none;
+    border: none;
+    background-color: rgba(0,0,0,0);
+  }
+}
+
 
 .iosTapHoldPreventDefault() {
     -webkit-touch-callout: none;

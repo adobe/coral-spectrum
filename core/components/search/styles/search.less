@@ -12,19 +12,18 @@
   
   input[type=text] {
     margin: 0;
-    padding-right: 40*@px;
+    padding-left: 32*@px;
     width: 100%;
   }
 
-  button {
+  button[type=submit] {
     .icon-search;
-    .button-square;
+    .button-square-transparent(30*@px);
         
     // Fit inside of the search field
     position: absolute;
-    top: @px; // Because of textfield border
-    right: @px; // Because of textfield border
-    height: 30*@px;
+    top: @px; 
+    left: @px; 
     color: transparent;
     
     &,
@@ -32,10 +31,30 @@
     &:active,
     &:disabled {
       border: none;
-      border-left: @px solid @textfield-border-color;
       filter: none;
     }
   }
+
+  button[type=reset] {
+    .icon-close;
+    .button-square-transparent(1rem);
+
+    font-size: 0.55rem;
+
+    position: absolute;
+    top: 9*@px; 
+    right: 9*@px; 
+    color: transparent;
+
+    &,
+    &:hover,
+    &:active,
+    &:disabled {
+      border: none;
+      filter: none;
+    }
+  }
+
 }
 
 form.vertical {
