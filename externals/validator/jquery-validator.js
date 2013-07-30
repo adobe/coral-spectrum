@@ -342,6 +342,29 @@ jQuery.validator.register({
                 $.each(arguments, function() {
                     registry.register(this);
                 });
+            },
+
+            /**
+             * Returns <code>true</code> if all submittable elements under the given root element have no validity problems; <code>false</code> otherwise.
+             * Fires an invalid event at the invalid submittable element.
+             *
+             * @memberof jQuery.validator
+             * 
+             * @param {jQuery} root The root element
+             *
+             * @return {Boolean} The validity
+             */
+            isValid: function(root) {
+                var allValid = true;
+                root.find(":submittable").each(function() {
+                    var el = $(this);
+                    if (el.willValidate && !el.checkValidity()) {
+                        allValid = false;
+                        return false;
+                    }
+                });
+
+                return allValid;
             }
         };
     })();
