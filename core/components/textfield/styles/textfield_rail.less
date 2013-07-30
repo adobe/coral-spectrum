@@ -1,9 +1,10 @@
 /**
 Element: Text field
-A basic text input field in the rail.
+A basic text input field for dark theme
 */
 
-div.rail {
+[data-theme~=dark] {
+
     input[type="text"] {
         .placeholder(@rail-input-placeholder-color);
 
@@ -30,4 +31,5 @@ div.rail {
             }
         }
     }
+    
 }
