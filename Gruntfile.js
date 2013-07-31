@@ -384,6 +384,21 @@ module.exports = function (grunt) {
                   nospawn: true
                 }
             }, // core_html
+            contrib_scripts: {
+                files: [ 
+                    dirs.components + '/**/scripts/*.js',
+                    dirs.components + '/**/tests/*.js'
+                ],
+                tasks: ['quicktest']
+            }, // contrib_scripts
+            contrib_less: {
+                files: [ dirs.components + '/**/styles/*.less'],
+                tasks: ['quickless']
+            }, // contrib_less
+            contrib_html: {
+                files: [ dirs.components + '/**/examples/*.html'],
+                tasks: ['copy:retro']
+            }, // contrib_html
             legacy_scripts: {
                 files: [
                     dirs.legacy + '/components/scripts/*.js',
