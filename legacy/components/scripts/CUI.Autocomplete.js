@@ -5,8 +5,8 @@
         extend: CUI.Widget,
 
         defaults: {
-            showClearButton: true,
             showSuggestions: true,
+            showClearButton: true,
             showTags: true
         },
 
@@ -15,8 +15,9 @@
 
             // find elements
             this._input = this.$element.children('input');
-            this._suggestions = this.$element.find('.selectlist');
-            this._tags = this.$element.find('.taglist');
+            this._suggestions = this.$element.find('.autocomplete-suggestions');
+            this._suggestionsBtn = this.$element.find('.autocomplete-suggestion-toggle');
+            this._tags = this.$element.find('.autocomplete-tags');
 
             // create additional objects
             this._clearBtn = $('<button/>', {
@@ -26,10 +27,10 @@
 
                 self.clear();
                 self._input.focus();
-            });
+            }).finger('click', false);
 
             // apply
-            this.applyOptions(); 
+            this.applyOptions();
         },
 
         applyOptions: function () {
@@ -40,20 +41,18 @@
 
         _setClearButton: function () {
             if (this.options.showClearButton) {
-
                 this._clearBtn.appendTo(this.$element);
                 this._input.on('keyup.clearBtn', this._refreshClear.bind(this));
                 this._refreshClear();
-
             } else {
-
                 this._clearBtn.detach();
                 this._input.off('keyup.clearBtn');
-
             }
         },
 
         _setSuggestions: function () {
+            var self = this;
+
             if (this.options.showSuggestions) {
 
                 // if the element is not there, create it
@@ -68,9 +67,29 @@
                     relatedElement: this._input
                 });
 
-                // TODO add opening link
+                // if the button to trigger the suggestion box is not there, 
+                // then we add it
+                if (this._suggestionsBtn.length === 0) {
+
+                    this._suggestionsBtn = $('<button/>', {
+                        'class': 'autocomplete-suggestion-toggle icon-chevrondown'
+                    });
+
+                    this._suggestionsBtn.appendTo(this.$element);
+                }
+
+                // handler to open usggestion box
+                this._suggestionsBtn.fipo('tap', 'click', function (event) {
+                    event.preventDefault();
+
+                    self._toggleSuggestions();
+                }).finger('click', false);
+
+                // add class to input to to increase padding right for the button
+                this._input.addClass('autocomplete-has-suggestion-btn');
             } else {
-                // remove opening link
+                this._suggestionsBtn.detach();
+                this._input.removeClass('autocomplete-has-suggestion-btn');
             }
         },
 
@@ -88,11 +107,26 @@
                     element: this._tags
                 });
 
+                this._input.on('keyup.addTag', this._addTag.bind(this));
+
                 // TODO add link
             } else {
                 // remove tag view
                 // remove link
             }
+        },
+
+        _addTag: function (event) {
+            if (event.which !== 13) {
+                return;
+            }
+
+            this._tagList.addItem(this._input.val());
+            this.clear();
+        },
+
+        _toggleSuggestions: function () {
+            this._selectList.show();
         },
 
         _refreshClear: function () {

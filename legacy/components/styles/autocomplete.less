@@ -1,16 +1,21 @@
 .autocomplete {
     position: relative;
     display: inline-block;
-    margin: 0.5rem 0;
+    margin: 8*@px 0;
     width: 13rem; /* Width must be specified */
     vertical-align: top;
 
     @input-height: 2rem;
+    @suggestion-btn-size: 30*@px;
 
     > input {
         margin: 0; /* put the margin at .autocomplete instead */
         padding-right: @input-height;
         width: 100%;
+
+        &.autocomplete-has-suggestion-btn {
+            padding-right: @suggestion-btn-size + 2*@px;    
+        }
     }
     
     // icon as a prefix
@@ -27,7 +32,7 @@
             top: 0;
             left: 10*@px;
             line-height: @input-height;
-            margin: 0.5rem 0;
+            margin: 8*@px 0;
         }
 
         > input {
@@ -43,10 +48,24 @@
         height: @input-height;
         width: @input-height; /* make it square */
         cursor: pointer;
-        margin: 0.5rem 0;
+        margin: 8*@px 0;
 
         &.hide {
             display: none;
+        }
+    }
+
+    > .autocomplete-suggestion-toggle {
+        background: #ccc;
+        position: absolute;
+        top: 9*@px;
+        right: 1*@px;
+        height: @suggestion-btn-size;
+        width: @suggestion-btn-size;
+        
+        &:active,
+        &.active {
+            background: #999;
         }
     }
 }
