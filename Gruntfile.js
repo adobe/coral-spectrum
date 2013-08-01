@@ -59,6 +59,8 @@ module.exports = function (grunt) {
             'components/CUI.CharacterCount.js',
             'components/CUI.Accordion.js',
             'components/CUI.Tour.js',
+            'components/CUI.TagList.js',
+            'components/CUI.SelectList.js',
             'components/CUI.Autocomplete.js',
             'components/CUI.NumberInput.js',
 
