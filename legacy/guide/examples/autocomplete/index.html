@@ -14,7 +14,6 @@
   <script src="../../js/libs/jquery.js"></script>
   <script src="../../js/libs/handlebars.js"></script>
   <script src="../../js/libs/toe.js"></script>
-  <script src="../../js/libs/jquery-fingerpointer.js"></script>
   <script src="../../js/CUI.js"></script>
 </head>
 <body>
@@ -22,31 +21,66 @@
 
   <span class="autocomplete" data-init="autocomplete">
     <input type="text" name="name1">
-    <ol class="autocomplete-values">
-      <li data-value="a">Apple</li>
-      <li data-value="b">Banana</li>
+    <ol class="taglist autocomplete-values">
+      <li>
+        <button class="icon-close"></button>
+        Carrot
+        <input type="hidden" value="Carrot"/>
+      </li>
+      <li>
+        <button class="icon-close"></button>
+        Banana
+        <input type="hidden" value="Banana"/>
+      </li>
+      <li>
+        <button class="icon-close"></button>
+        Apple
+        <input type="hidden" value="Apple"/>
+      </li>
     </ol>
   </span>
 
   <span class="autocomplete icon-search" data-init="autocomplete">
     <input type="text">
-    <ol class="autocomplete-values">
-      <li data-value="a">Apple AAAAAAA asjdkasjdkas ajdksaj</li>
-      <li data-value="b">Bananaajkdsjkjdsakadkadkjaskdjkasjdka</li>
-      <li data-value="c">Carrot</li>
-      <li data-value="b">Banana</li>
-      <li data-value="c">Carrot</li>
-      <li data-value="b">Banana</li>
-      <li data-value="c">Carrot</li>
-      <li data-value="a">Apple</li>
-      <li data-value="a">Apple</li>
-      <li data-value="a">Apple</li>
-      <li data-value="a">Apple</li>
-      <li data-value="a">Apple</li>
-      <li data-value="a">Apple</li>
-      <li data-value="a">Apple</li>
-      <li data-value="a">Apple</li>
+    <ol class="taglist autocomplete-values">
+      <li>
+        <button class="icon-close"></button>
+        Apple AAAAAAA asjdkasjdkas ajdksaj
+        <input type="hidden" value="Apple AAAAAAA asjdkasjdkas ajdksaj"/>
+      </li>
+      <li>
+        <button class="icon-close"></button>
+        Bananaajkdsjkjdsakadkadkjaskdjkasjdka
+        <input type="hidden" value="Bananaajkdsjkjdsakadkadkjaskdjkasjdka"/>
+      </li>
+      <li>
+        <button class="icon-close"></button>
+        Carrot
+        <input type="hidden" value="Carrot"/>
+      </li>
+      <li>
+        <button class="icon-close"></button>
+        Banana
+        <input type="hidden" value="Banana"/>
+      </li>
+      <li>
+        <button class="icon-close"></button>
+        Apple
+        <input type="hidden" value="Apple"/>
+      </li>
     </ol>
+  </span>
+
+  <span class="autocomplete icon-search" data-init="autocomplete">
+    <input type="text">
+    <ul class="selectlist">
+      <li><a data-value="expr1">Expression 1</a></li>
+      <li><a data-value="expr2">Expression 2</a></li>
+      <li><a data-value="expr3">Expression 3</a></li>
+      <li><a data-value="expr4">Expression 4</a></li>
+      <li><a data-value="expr5">Expression 5</a></li>
+      <li><a data-value="expr6">Expression 6</a></li>
+    </ul>
   </span>
 
 </body>
