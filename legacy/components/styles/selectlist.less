@@ -1,0 +1,25 @@
+@selectlist-box-background-color: rgb(245, 245, 245);
+@selectlist-box-border-color: rgba(0, 0, 0, 0.25);
+@selectlist-entry-border-color: rgb(230, 230, 230);
+
+.selectlist {
+    display: none;
+    background-color: @selectlist-box-background-color;
+    border: 1*@px solid @selectlist-box-border-color;
+    padding: 0;
+    margin: 0;
+
+    height: 35*@px * 5;
+    overflow-y: scroll; 
+
+    li {
+        display: block;
+        border-top: 1*@px solid @selectlist-entry-border-color;    
+        padding: 11*@px 10*@px;
+        margin: 0;
+
+        &:first-child {
+            border-top: none;
+        }
+    }
+}
