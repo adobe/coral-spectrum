@@ -179,8 +179,10 @@
                 items = $.isArray(item) ? item : [item];
 
             $.each(items, function (i, item) {
-                self._appendItem(item);
-                self.options.values.push(item);
+                if ($.inArray(item, self.options.values) === - 1) {
+                    self._appendItem(item);
+                    self.options.values.push(item);
+                }
             });
         }
     });
