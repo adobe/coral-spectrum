@@ -42,7 +42,7 @@
             this.applyOptions();
 
             this.$element
-                .on('change:values', this._setOptions.bind(this));
+                .on('change:values', this._setValues.bind(this));
 
             this.$element.fipo('tap', 'click', 'button', function (event) {
                 var elem = $(event.currentTarget).next('input');
@@ -56,12 +56,14 @@
 
         defaults: {
             fieldname: "",
-            values: [],
+            values: null,
             tag: 'li'
         },
 
         applyOptions: function () {
             var self = this;
+
+            this.options.values = this.options.values || [];
 
             // read values from markup
             if (this.options.values.length === 0) {
@@ -72,14 +74,14 @@
                     self.options.values.push(elem.attr('value'));
                 });
             } else {
-                this._setOptions();
+                this._setValues();
             }
         },
 
         /**
          * @private
          */
-        _setOptions: function () {
+        _setValues: function () {
             var items = this.options.values;
 
             // remove list elements

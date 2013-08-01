@@ -88,11 +88,13 @@
             type: 'static', // static or dynamic (WIP)
             relatedElement: null,
             position: 'bottom-1',  // -1 to override the border
-            values: [] // [{display: "Banana", value: "banId"}]
+            values: null // [{display: "Banana", value: "banId"}]
         },
 
         applyOptions: function () {
             var self = this;
+
+            this.options.values = this.options.values || [];
 
             // read values from markup
             if (this.options.values.length === 0) {
