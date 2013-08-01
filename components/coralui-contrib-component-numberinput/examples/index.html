@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Number Input</title>
+
+        <link rel="stylesheet" href="../../css/cui.css">
+        
+        <script src="../../js/libs/handlebars.js"></script>
+        <script src="../../js/libs/moment.js"></script>
+        <script src="../../js/libs/jquery.js"></script>
+        <!--script src="../../js/libs/jquery-fingerpointer.js"></script-->
+        <script src="../../js/libs/toe.js"></script>
+        <script src="../../js/libs/moment.js"></script>
+  
+        <script src="../../js/CUI.js"></script>
+
+        <script>
+            $(document).ready(function(){
+                var numberinput = new CUI.NumberInput({
+                    element:'#jsNumberInput', 
+                    step: 5,
+                    min: -25,
+                    max: '25'
+                });
+
+                $('#stepValue').on('change', function (){
+                    numberinput.setStep(event.currentTarget.value);
+                });
+
+                $('#minValue').on('change', function (){
+                    numberinput.setMin(event.currentTarget.value);
+                });
+
+                $('#maxValue').on('change', function (){
+                    // you can of course use the CUI.Widget#set function as well
+                    numberinput.set('max', event.currentTarget.value);
+                });
+            });
+        </script>
+
+        <style>
+            body {
+              padding-left: 30px;
+            }
+
+            section {
+                height: 300px;
+            }
+
+            .col {
+              float: left;
+              margin-right: 12px;
+            }
+
+            label {
+                margin-right: 1rem;
+            }
+
+            .option-input {
+              width: 3rem;
+            }
+
+            input {
+                width: 60px;
+            }
+        </style>
+    </head>
+    <body> 
+    <h1>Number Input Examples</h1>
+    <div class="col">
+        <section>
+            <h2>Basic</h2>
+            <div class="numberinput" data-init="numberinput">
+                <input type="number" name="number1">
+            </div>
+        </section>
+    </div>
+
+    <div class="col">
+        <section>
+            <h2>JavaScript Initialized</h2>
+            <div id="jsNumberInput"class="numberinput">
+                <input type="number" name="number1">
+            </div>
+            <div><label>Step:</label><input id="stepValue" class="option-input" type="text" value='5'></div>
+            <div><label>Min:</label><input id="minValue" class="option-input" type="text" value='-25'></div> 
+            <div><label>Max:</label><input id="maxValue" class="option-input" type="text" value='25'></div>
+        </section>
+
+    </div>
+    
+    </body>
+</html>

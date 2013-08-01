@@ -60,6 +60,7 @@ module.exports = function (grunt) {
             'components/CUI.Accordion.js',
             'components/CUI.Tour.js',
             'components/CUI.Autocomplete.js',
+            'components/CUI.NumberInput.js',
 
             // Validations
             'validations.js'
