@@ -686,6 +686,23 @@ module.exports = function (grunt) {
         'cssmin:cui',
     ]);
 
+
+    grunt.task.registerTask('watch-start', [
+        'clean:temp',
+        'copy:retro',
+        'jshint:retro', 
+        'concat:retro',
+        'mocha',
+        'uglify:retro',
+        'copy:js_source',
+        'generate-imports',
+        'less:cui',
+        'less:cui-wrapped',
+        'cssmin:cui',
+        'guide',
+        'watch'
+    ]);
+
     grunt.task.registerTask('release', [ // releases coral to github page
         'check',
         'gh-pages:release'
