@@ -77,8 +77,7 @@
 
             this.$element
                 .on('change:type', this._setType.bind(this))
-                .on('change:values', this._setOptions.bind(this))
-                .on('blur', this.hide.bind(this));
+                .on('change:values', this._setOptions.bind(this));
 
             // accessibility
             this._makeAccessible();
@@ -88,6 +87,7 @@
             type: 'static', // static or dynamic (WIP)
             relatedElement: null,
             position: 'bottom-1',  // -1 to override the border
+            autofocus: true, // autofocus on show
             values: null // [{display: "Banana", value: "banId"}]
         },
 
@@ -142,8 +142,7 @@
         _makeAccessible: function () {
             this.$element.attr({
                 'role': 'listbox',
-                'aria-hidden': true,
-                'tabindex': 0
+                'aria-hidden': true
             });
         },
 
@@ -161,7 +160,9 @@
                 of: this.options.relatedElement
             });
 
-            this.$element.trigger('focus');
+            if (this.options.autofocus) {
+                this.$element.find('li:first').trigger('focus');
+            }
         },
 
         /**
@@ -184,10 +185,10 @@
          */
         _addItem: function (id, item) {
             var li = $('<li/>', {
-                    'role': 'option'
+                    'role': 'option',
+                    'tabindex': 0
                 }),
-                a = $('<a/>', {
-                    'href': '#',
+                a = $('<span/>', {
                     'text': item.display || item.value,
                     'data-id': id,
                     'data-value': item.value,
