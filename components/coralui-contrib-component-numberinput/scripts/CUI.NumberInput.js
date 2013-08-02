@@ -26,12 +26,8 @@
         this.setStep(this.$input.attr('step'));
       }
 
-      var minusIcon = $("<span>").addClass("icon-minus xsmall").html("decrement");
-      var plusIcon = $("<span>").addClass("icon-add xsmall").html("increment");
-      this.$decrementElement = $("<button>").addClass("number-input-button number-input-decrement");
-      this.$incrementElement = $("<button>").addClass("number-input-button number-input-increment");
-      this.$decrementElement.html(minusIcon);
-      this.$incrementElement.html(plusIcon);
+      this.$decrementElement = $("<button>").addClass("decrement").html("decrement");
+      this.$incrementElement = $("<button>").addClass("increment").html("increment");
 
       if(!this.useNativeControls) {
         this._switchInputTypeToText(this.$input);
