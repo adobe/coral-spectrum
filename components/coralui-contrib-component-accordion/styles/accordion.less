@@ -1,0 +1,128 @@
+.accordion {
+  list-style: none;
+  padding: 0;
+  margin: 0.4375rem 0;
+
+  li {
+    margin: 0;
+  }
+
+  li + li {
+    border-top: 0;
+    
+    &.focus {
+        margin-top: -@px;
+    }
+  }
+}
+
+.collapsible {
+    margin: 0.4375rem 0;
+}
+
+// Shared styles for accordions and collapsibles
+.accordion li,
+.collapsible {
+  padding: 0.4375rem 1rem;
+  overflow: hidden;
+  background-color: @accordion-background-color;
+  border: @px solid @accordion-border-color;
+  font-size: 13*@px;
+  z-index: inherit;
+  position: relative;        
+  h3 {
+    margin: -0.4375rem -1rem 0.4375rem -1rem;
+    padding: 0.4375rem 1rem;
+    font-size: 13*@px;
+    line-height: 20*@px;
+    font-weight: normal;
+    color: @font-secondary-color;
+    .ellipsis();
+    .gradient(@accordion-background-gradient-color, @accordion-background-color);
+    cursor: pointer;
+    
+    em {
+      font-style: normal;
+      font-weight: bold;
+      color: @font-base-color;
+    }
+    
+    &:hover,
+    &:focus {
+        background: @accordion-background-gradient-end-color;
+        outline: none;
+        
+        [class^="icon-"]:before, 
+        [class*=" icon-"]:before {
+            opacity: @icon-hover-opacity;
+        }
+    }
+  }
+  
+  &.active {
+    background: @accordion-background-gradient-end-color;
+    
+    h3 {
+        .gradient(@accordion-background-gradient-start-color, @accordion-background-gradient-end-color);
+        
+        &:hover,
+        &:focus {
+            background: @accordion-background-gradient-end-color;
+        }
+    }
+  }
+  
+  &.focus {
+      .glow();
+      z-index: 1;
+  }
+}
+
+.dark,
+.rail {
+    &.accordion li,
+    &.collapsible,
+    .accordion li,
+    .collapsible {
+          background-color: @accordion-dark-background-color;
+          border-color: @accordion-dark-border-color;
+          color: @accordion-dark-font-color;
+          h3 {
+            .gradient(@accordion-dark-background-gradient-color, @accordion-dark-background-color);
+            
+            em {
+                color: @accordion-dark-font-color;
+            }
+            
+            [class^="icon-"]:before, 
+            [class*=" icon-"]:before {
+                color: @icon-white-color;
+                opacity: @icon-white-opacity;
+            }
+            
+            &:hover,
+            &:focus {
+                background: @accordion-dark-background-gradient-end-color;
+                
+                [class^="icon-"]:before, 
+                [class*=" icon-"]:before {
+                    color: @icon-white-hover-color;
+                    opacity: @icon-white-hover-opacity;
+                }
+            }
+          }
+          
+          &.active {
+            background: @accordion-dark-background-gradient-end-color;
+            
+            h3 {
+                .gradient(@accordion-dark-background-gradient-start-color, @accordion-dark-background-gradient-end-color);
+                
+                &:hover,
+                &:focus {
+                    background: @accordion-dark-background-gradient-end-color;
+                }
+            }
+          }
+    }
+}
