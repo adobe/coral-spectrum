@@ -687,6 +687,17 @@ module.exports = function (grunt) {
         'cssmin:cui',
     ]);
 
+    grunt.task.registerTask('quickbuild', [
+        'quickless',
+        'guide'
+    ]);
+
+    grunt.task.registerTask('watch-start', [
+        'quickbuild',
+        'quicktest',
+        'watch'
+    ]);
+
     grunt.task.registerTask('release', [ // releases coral to github page
         'check',
         'gh-pages:release'
