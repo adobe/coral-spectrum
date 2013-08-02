@@ -6,12 +6,42 @@
     /**
       @extends CUI.Widget
       @classdesc A number input widget with increment and decrement buttons.
+
+      @example
+      <caption>Instantiate with Class</caption>
+      &lt;div id=&quot;myNumberInput&quot;&lt;input type=&#039;number&#039;/&gt;&lt;/div&gt; 
+
+      var rail = new CUI.NumberInput({
+        element: '#myNumberInput'
+      });
+      
+      @example
+      <caption>Instantiate with jQuery</caption>
+      &lt;div id=&quot;myNumberInput&quot;&lt;input type=&#039;number&#039;/&gt;&lt;/div&gt; 
+      $('#myRail').numberInput();
+      
+      @example
+      <caption>Markup</caption>
+      &lt;div class=&quot;numberinput&quot; data-init=&quot;numberinput&quot;&gt;
+        &lt;input type=&#039;number&#039;/&gt;
+      &lt;/div&gt;
+
+      @desc Creates a Number Input object
+      @constructs
+      @param {Object} options Component options
+      @param {numberic} [options.min=NaN] (Optional) Minimum value allowed for input.
+      @param {numberic} [options.max=NaN] (Optional) Maximum value allowed for input.
+      @param {numberic} [options.step=1] Amount increment/decrement for input.
+      @param {Boolean} [options.useNativeControls=false] (Optional) Show native input controls where possible.
+      
     */
 
     construct: function(options) {
 
       this.setStep(this.options.step || CUI.Datepicker.step);
-      
+
+      this.$element.addClass('numberinput');
+
       this.$input = this.$element.find('input').not("[type=hidden]");
       
       if (this.$input.attr('max')) {
@@ -72,6 +102,9 @@
       useNativeControls: false
     },
 
+    /**
+      Increments value by step amount
+    */
     increment: function () {
       if (this._isNumber()) {
         var value = this.getValue();
@@ -81,46 +114,80 @@
       }
     },
 
-    decrement: function (event) {
+    /**
+      Decrements value by step amount
+    */
+    decrement: function () {
       var value =  this.getValue();
       value -= this.getStep();
       value = value < this.getMin() ? this.getMin() : value;
       this.setValue(value);
     },
 
+    /**
+      Sets the value, which triggers the change event.  Note that value will be 
+      limited to the range defined by the min and max properties. 
+      @param value {numberic} The input value to set.
+    */
     setValue: function(value) {
       this.$input.val(value);
       this.$input.trigger('change');
     },
 
+    /**
+      Sets the minimum value allowed. 
+      @param value {numberic} The min value to set.
+    */
     setMin: function(value) {
       this.set('min', value);
     },
 
+    /**
+      Sets the maximum value allowed. 
+      @param value {numberic} The max value to set.
+    */
     setMax: function(value) {
       this.set('max', value);
     },
 
+
+    /**
+      Sets the step value for increment and decrement. 
+      @param value {numberic} The step value to set.
+    */
     setStep: function(value) {
       this.set('step', value);
     },
 
+    /**
+      @return The current input value.
+    */
     getValue: function() {
       return parseFloat(this.$input.val());
     },
 
+    /**
+      @return The minimum input value allowed.
+    */
     getMin: function() {
       return parseFloat(this.options.min);
     },
 
+    /**
+      @return The maximum input value allowed.
+    */
     getMax: function() {
       return parseFloat(this.options.max);
     },
 
+    /**
+      @return The current increment/decrement step amount .
+    */
     getStep: function() {
       return parseFloat(this.options.step);
     }, 
 
+    /** @ignore */
     _adjustValueLimitedToRange: function() {
       var value = this.getValue();
       if (isNaN(value)) {
@@ -135,6 +202,7 @@
       this.$input.val(value);
     },
 
+    /** @ignore */
     _checkMinMaxViolation: function() {
       
       if (this._isNumber()) {
@@ -149,15 +217,18 @@
       }
     },
 
+   /** @ignore */
     _switchInputTypeToText: function($input) {
         var convertedInput = $input.detach().attr('type', 'text');
         this.$element.prepend(convertedInput);
     },
 
+    /** @ignore */
     _isNumber: function () {
       return !isNaN(this.$input.val());
     },
 
+    /** @ignore */
     _optionBeforeChangeHandler: function(event) {
       if (isNaN(parseFloat(event.value))) {
         // console.error('CUI.NumberInput cannot set option \'' + event.option + '\' to NaN value');

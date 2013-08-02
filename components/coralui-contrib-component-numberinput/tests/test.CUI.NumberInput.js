@@ -13,7 +13,7 @@ describe('CUI.NumberInput', function() {
 
     describe("API", function() {
 
-      var html = '<div><input type="number"></div>';
+      var html = '<div class="numberinput"><input type="number"></div>';
 
       it('#getStep should default to 1', function() {
         var element = new CUI.NumberInput({element: $(html)});
@@ -21,17 +21,17 @@ describe('CUI.NumberInput', function() {
         expect(element.getStep()).to.equal(1);
       });
 
-      // it('#getMax should default to null', function() {
-      //   var element = new CUI.NumberInput({element: $(html)});
-      //   expect(element).to.have.property('getMax');
-      //   expect(element.getMax()).to.be.null;
-      // });
+      it('#getMax should default to NaN', function() {
+        var element = new CUI.NumberInput({element: $(html)});
+        expect(element).to.have.property('getMax');
+        expect(element.getMax()).to.be.NaN;
+      });
 
-      // it('#getMin should default to null', function() {
-      //   var element = new CUI.NumberInput({element: $(html)});
-      //   expect(element).to.have.property('getMin');
-      //   expect(element.getMin()).to.be.null;
-      // });
+      it('#getMin should default to NaN', function() {
+        var element = new CUI.NumberInput({element: $(html)});
+        expect(element).to.have.property('getMin');
+        expect(element.getMin()).to.be.NaN;
+      });
 
       it('#getValue should default to 0', function() {
         var element = new CUI.NumberInput({element: $(html)});
@@ -156,10 +156,10 @@ describe('CUI.NumberInput', function() {
         }
 
 
-        // it('should be a numberinput', function() {
-        //     var element = buildElement();
-        //     expect(element).to.have.class("numberinput");
-        // });
+        it('container should be a numberinput', function() {
+            var element = buildElement();
+            expect(element).to.have.class("numberinput");
+        });
 
         it('should change input type to text', function() {
             var element = buildElement();
