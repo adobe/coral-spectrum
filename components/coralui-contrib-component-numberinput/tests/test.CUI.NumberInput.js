@@ -127,6 +127,20 @@ describe('CUI.NumberInput', function() {
         expect(element.getStep()).to.equal(99);
       });
 
+      // it('#set("hasError", true) should toggle error state', function() {
+      //   var element = new CUI.NumberInput({element: $(html)}); 
+      //   expect(element).to.not.have.class('error'));
+      //   element.set('hasError', true);
+      //   expect(element).to.have.class('error'));
+      // });
+
+      // it('#set("disabled", true) should toggle error state', function() {
+      //   var element = new CUI.NumberInput({element: $(html)}); 
+      //   expect(element).to.not.have.attr('disabled'));
+      //   element.set('disabled', true);
+      //   expect(element).to.have.attr('disables'));
+      // });
+
     });
 
     describe("from markup", function() {

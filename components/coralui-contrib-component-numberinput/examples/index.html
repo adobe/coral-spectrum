@@ -36,6 +36,12 @@
                     // you can of course use the CUI.Widget#set function as well
                     numberinput.set('max', event.currentTarget.value);
                 });
+
+                $("input[name='r1']").on('change', function (){
+                    console.log("changed!", event.currentTarget.value);
+                    numberinput.set('hasError', event.currentTarget.value == 2);    
+                    numberinput.set('disabled', event.currentTarget.value == 3);    
+                });
             });
         </script>
 
@@ -86,6 +92,10 @@
             <div><label>Step:</label><input id="stepValue" class="option-input" type="text" value='5'></div>
             <div><label>Min:</label><input id="minValue" class="option-input" type="text" value='-25'></div> 
             <div><label>Max:</label><input id="maxValue" class="option-input" type="text" value='25'></div>
+            <div><label><input type="radio" name="r1" value="1" checked><span></span>normal</label></div>
+            <div><label><input type="radio" name="r1" value="2"><span></span>error</label></div>
+            <div><label><input type="radio" name="r1" value="3"><span></span>disabled</label></div>
+
         </section>
 
     </div>

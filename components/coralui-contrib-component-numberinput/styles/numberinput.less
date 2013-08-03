@@ -56,6 +56,23 @@
     
   } // button styles
 
+  &.error,
+  &:invalid {
+
+    button, input {
+      border-color: @textfield-error-border-color;
+      color: @textfield-error-font-color;
+    }
+
+    input:focus {
+      .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+    }
+
+    button:before {
+      color: @textfield-error-font-color;
+      opacity: 1;
+    }
+  }
 
 } 
 /* numberinput */

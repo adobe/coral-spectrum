@@ -32,6 +32,8 @@
       @param {numberic} [options.min=NaN] (Optional) Minimum value allowed for input.
       @param {numberic} [options.max=NaN] (Optional) Maximum value allowed for input.
       @param {numberic} [options.step=1] Amount increment/decrement for input.
+      @param {boolean} [options.hasError=false] Set the error state of the widget.
+      @param {boolean} [options.disabled=false] Set the disabled state of the widget.
       @param {Boolean} [options.useNativeControls=false] (Optional) Show native input controls where possible.
       
     */
@@ -54,6 +56,10 @@
 
       if (this.$input.attr('step')) {
         this.setStep(this.$input.attr('step'));
+      }
+
+      if (this.$element.attr("error")) {
+        this.options.hasError = true;
       }
 
       this.$decrementElement = $("<button>").addClass("decrement").html("decrement");
@@ -85,13 +91,29 @@
         this._optionBeforeChangeHandler(event);
       }.bind(this));
 
-      this.$incrementElement.on("click", function () {
+      this.on('change:disabled', function(event) {
+        this._toggleDisabled();
+      }.bind(this));
+
+      this.on('change:hasError', function(event) {
+        this._toggleError();
+      }.bind(this));
+
+      this.$incrementElement.on('click', function () {
         this.increment();
       }.bind(this));
 
-      this.$decrementElement.on("click", function () {
+      this.$decrementElement.on('click', function () {
         this.decrement();
       }.bind(this));
+
+      if (this.$element.attr('disabled') || this.$element.attr('data-disabled') ) {
+        this._toggleDisabled();
+      }
+
+      if (this.$element.hasClass('error') || this.$element.attr('data-error') ) {
+        this.set('hasError', true);
+      }
       
     },
     
@@ -99,6 +121,8 @@
       max: null,
       min: null,
       step: 1,
+      hasError: false,
+      disabled: false,
       useNativeControls: false
     },
 
@@ -233,6 +257,28 @@
       if (isNaN(parseFloat(event.value))) {
         // console.error('CUI.NumberInput cannot set option \'' + event.option + '\' to NaN value');
         event.preventDefault();
+      }
+    },
+
+    /** @ignore */
+    _toggleDisabled: function() {
+      if (this.options.disabled) {
+        this.$incrementElement.attr('disabled', 'disabled');
+        this.$decrementElement.attr('disabled', 'disabled');
+        this.$input.attr('disabled', 'disabled');
+      } else {
+        this.$incrementElement.removeAttr('disabled');
+        this.$decrementElement.removeAttr('disabled');
+        this.$input.removeAttr('disabled');
+      }
+    },
+
+    /** @ignore */
+    _toggleError: function() {
+      if (this.options.hasError) {
+        this.$element.addClass('error');
+      } else {
+        this.$element.removeClass('error');
       }
     }
 
