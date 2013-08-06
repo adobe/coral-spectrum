@@ -35,6 +35,7 @@ module.exports = function (grunt) {
             'CUI.Util.HTTP.js',
 
             // Components
+            'components/CUI.Rail.js',
             'components/CUI.Modal.js',
             'components/CUI.Tabs.js',
             'components/CUI.Alert.js',
@@ -58,7 +59,7 @@ module.exports = function (grunt) {
             'components/CUI.CharacterCount.js',
             'components/CUI.Accordion.js',
             'components/CUI.Tour.js',
-            'components/CUI.Autocomplete.js',
+            'components/CUI.NumberInput.js',
 
             // Validations
             'validations.js'
@@ -383,6 +384,21 @@ module.exports = function (grunt) {
                   nospawn: true
                 }
             }, // core_html
+            contrib_scripts: {
+                files: [ 
+                    dirs.components + '/**/scripts/*.js',
+                    dirs.components + '/**/tests/*.js'
+                ],
+                tasks: ['quicktest']
+            }, // contrib_scripts
+            contrib_less: {
+                files: [ dirs.components + '/**/styles/*.less'],
+                tasks: ['quickless']
+            }, // contrib_less
+            contrib_html: {
+                files: [ dirs.components + '/**/examples/*.html'],
+                tasks: ['copy:retro']
+            }, // contrib_html
             legacy_scripts: {
                 files: [
                     dirs.legacy + '/components/scripts/*.js',
@@ -668,6 +684,17 @@ module.exports = function (grunt) {
         'less:cui',
         'less:cui-wrapped',
         'cssmin:cui',
+    ]);
+
+    grunt.task.registerTask('quickbuild', [
+        'quickless',
+        'guide'
+    ]);
+
+    grunt.task.registerTask('watch-start', [
+        'quickbuild',
+        'quicktest',
+        'watch'
     ]);
 
     grunt.task.registerTask('release', [ // releases coral to github page

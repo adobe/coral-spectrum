@@ -25,6 +25,7 @@
     "chai": "1.5.0",
     "chai-jquery": "1.1.1",
     "mocha": "1.8.1",
-    "bootstrap": "git+https://github.com/twitter/bootstrap.git#v2.3.2"
+    "bootstrap": "git+https://github.com/twbs/bootstrap#v2.3.2",
+    "jquery-ui": "git+https://github.com/jquery/jquery-ui.git#1.10.3"
   }
 }

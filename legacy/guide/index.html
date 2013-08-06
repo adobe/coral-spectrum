@@ -107,6 +107,7 @@
                         <a href="#Slider">Slider</a>
                         <a href="#Dropdown">Dropdown</a>
                         <a href="#Datepicker">Datepicker</a>
+                        <a href="#NumberInput">Number Input</a>
                         <a href="#Draggable">Draggable</a>
                         <a href="#FormErrors">Form Errors</a>                        
                     </nav>
@@ -1429,6 +1430,54 @@
                     </div>
                     <div>
                         Open <a href="examples/datepicker/index.html">Sample</a>
+                    </div>
+                </section>
+
+                <section id="NumberInput">
+                    <h2 class="line">Number Input</h2>
+                    <p>The Number Input component. Use <span class="icon-plus"/>plus</span>
+                      to increment.</p>
+
+                    <div class="componentSample">
+                        <div class="example">
+                            <div class="numberInputSample">
+                                <div class="sampleTitle left">Standard</div>
+                                <div class="numberinput" data-init="numberinput">
+                                    <input type='number'/>
+                                </div>
+                            </div>
+                            <div class="numberInputSample">
+                                <div class="sampleTitle left">Error</div>
+                                <div class="numberinput" data-init="numberinput" data-error="true">
+                                    <input type='number'/>
+                                </div>
+                            </div>
+                            <div class="numberInputSample">
+                                <div class="sampleTitle left">Disabled</div>
+                                <div class="numberinput" data-init="numberinput" data-disabled="true">
+                                    <input type='number'/>
+                                </div>
+                            </div>
+                        </div>
+                        <pre class="prettyprint linenums">
+&lt;!-- Standard Number Input --&gt;                            
+&lt;div class=&quot;numberinput&quot; data-init=&quot;numberinput&quot;&gt;
+    &lt;input type=&#039;number&#039;/&gt;
+&lt;/div&gt;
+
+&lt;!-- Error Number Input --&gt; 
+&lt;div class=&quot;numberinput&quot; data-init=&quot;numberinput&quot; data-error=&quot;true&quot;&gt;
+    &lt;input type=&#039;number&#039;/&gt;
+&lt;/div&gt;
+
+&lt;!-- Disabled Number Input --&gt;  
+&lt;div class=&quot;numberinput&quot; data-init=&quot;numberinput&quot; data-disabled=&quot;true&quot;&gt;
+    &lt;input type=&#039;number&#039;/&gt;
+&lt;/div&gt;
+                        </pre>
+                    </div>
+                    <div>
+                        Open <a href="examples/numberinput/index.html">Sample</a>
                     </div>
                 </section>
 

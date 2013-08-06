@@ -557,44 +557,48 @@
 
     // Data API
     if (CUI.options.dataAPI) {
-        $(function () {
-            // @deprecated
-            // this differs from other components
-            // rather in future we use data-init~="modal-trigger" to intialize a trigger
-            // and require data-init~="modal" on the modal to indicate it is a modal
-            $('body').fipo('tap.modal.data-api', 'click.modal.data-api', '[data-toggle="modal"]', function (e) {
-                var $trigger = $(this);
-
-                // Get the target from data attributes
-                var $target = CUI.util.getDataTarget($trigger);
-
-                // Pass configuration based on data attributes in the triggering link
-                var href = $trigger.attr('href');
-                var options = $.extend({ remote: !/#/.test(href) && href }, $target.data(), $trigger.data());
-
-                // Parse buttons
-                if (typeof options.buttons === 'string') {
-                    options.buttons = JSON.parse(options.buttons);
-                }
-
-                // If a modal already exists, show it
-                var instance = $target.data('modal');
-                var show = true;
-                if (instance && instance.get('visible'))
-                show = false;
-
-                // Apply the options from the data attributes of the trigger
-                // When the dialog is closed, focus on the button that triggered its display
-                $target.modal(options);
-
-                // Perform visibility toggle if we're not creating a new instance
-                if (instance)
-                $target.data('modal').set({ visible: show });
-
-                // Stop links from navigating
-                e.preventDefault();
-            }).finger('click.modal.data-api', '[data-toggle="modal"]', false);
+        $(document).on('cui-contentloaded.data-api', function (event) {
+            // initialize the modal dialogs
+            $('[data-init~=modal]', event.target).modal();
         });
+
+
+        // @deprecated
+        // this differs from other components
+        // rather in future we use data-init~="modal-trigger" to intialize a trigger
+        // and require data-init~="modal" on the modal to indicate it is a modal
+        $(document).fipo('tap.modal.data-api', 'click.modal.data-api', '[data-toggle="modal"]', function (e) {
+            var $trigger = $(this);
+
+            // Get the target from data attributes
+            var $target = CUI.util.getDataTarget($trigger);
+
+            // Pass configuration based on data attributes in the triggering link
+            var href = $trigger.attr('href');
+            var options = $.extend({ remote: !/#/.test(href) && href }, $target.data(), $trigger.data());
+
+            // Parse buttons
+            if (typeof options.buttons === 'string') {
+                options.buttons = JSON.parse(options.buttons);
+            }
+
+            // If a modal already exists, show it
+            var instance = $target.data('modal');
+            var show = true;
+            if (instance && instance.get('visible'))
+            show = false;
+
+            // Apply the options from the data attributes of the trigger
+            // When the dialog is closed, focus on the button that triggered its display
+            $target.modal(options);
+
+            // Perform visibility toggle if we're not creating a new instance
+            if (instance)
+            $target.data('modal').set({ visible: show });
+
+            // Stop links from navigating
+            e.preventDefault();
+        }).finger('click.modal.data-api', '[data-toggle="modal"]', false);
     }
 
 }(jQuery, this));

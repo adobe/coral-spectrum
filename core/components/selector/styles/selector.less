@@ -1,4 +1,11 @@
  // Selector
+
+@selector-border-color: rgb(172, 172, 172);
+@selector-gradient-start-color: rgb(245, 245, 245);
+@selector-gradient-end-color: rgb(235, 235, 235);
+@selector-disabled-color: rgb(220, 220, 220);
+
+
 .selector {
   display: inline-block;
   margin: 0.5rem 0;
@@ -37,7 +44,7 @@
       border-left: @px solid @selector-border-color;
     }
 
-    span:before {
+    input + span:before {
       display: none; // to overwrite default checkbox / radio button
     }
     input[type=checkbox],

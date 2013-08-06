@@ -37,22 +37,27 @@ module.exports = function(grunt) {
   var includeOrder = {
     "cui": [
       // Class system
-      dirs.shared +'/scripts/Class.js',
+      dirs.build +'/js/source/Class.js',
 
       // Namespace
-      dirs.shared +'/scripts/CUI.js',
+      dirs.build +'/js/source/CUI.js',
 
       // Utilities
-      dirs.shared +'/scripts/CUI.Util.js',
+      dirs.build +'/js/source/CUI.Util.js',
 
       // jQuery extensions
-      dirs.shared +'/scripts/CUI.jQuery.js',
+      dirs.build +'/js/source/CUI.jQuery.js',
+
+      // jQuery position plugin
+      dirs.build +'/js/source/externals/jquery-ui/jquery.ui.position.js',
 
       // base for widgets
-      dirs.shared +'/scripts/CUI.Widget.js',
+      dirs.build +'/js/source/CUI.Widget.js',
 
-      // components 
-      dirs.components +'/rail/scripts/CUI.Rail.js'
+      // actual widgets
+      dirs.build +'/js/source/components/CUI.TagList.js',
+      dirs.build +'/js/source/components/CUI.SelectList.js',
+      dirs.build +'/js/source/components/CUI.Autocomplete.js'
     ]
   };
   var packages = {
@@ -130,7 +135,7 @@ module.exports = function(grunt) {
     }, // clean
 
     copy: {
-      less_bootstrap: {
+      less_bootstrap: { // bootstrap dependencies
         files: [
           {
             expand: true,
@@ -202,6 +207,17 @@ module.exports = function(grunt) {
           }
         ]
       },
+      js_cui: {
+        files: [
+          {
+            expand: true,
+            flatten: true,
+            cwd: '<%= dirs.components %>/',
+            src: ['**/scripts/**.js'],
+            dest: '<%= dirs.build %>/js/source/components'
+          }
+        ]
+      },
       res_components: {
         files: [
           {
@@ -234,11 +250,24 @@ module.exports = function(grunt) {
           }
         ]
       },
-      js: {
+      js_jqueryui: {
         files: [
           {
             expand: true,
-            src: getIncludes("cui"),
+            filter: 'isFile',
+            cwd: '<%= dirs.modules %>/jquery-ui/ui/',
+            src: ['jquery.ui.position.js'],
+            dest: '<%= dirs.build %>/js/source/externals/jquery-ui/'
+          }
+        ]
+      },
+      js_shared: {
+        files: [
+          {
+            expand: true,
+            flatten: true,
+            cwd: '<%= dirs.shared %>/scripts/',
+            src: ['**'],
             dest: '<%= dirs.build %>/js/source/'
           }
         ]
