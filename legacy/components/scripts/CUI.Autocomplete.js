@@ -42,11 +42,11 @@
         _setClearButton: function () {
             if (this.options.showClearButton) {
                 this._clearBtn.appendTo(this.$element);
-                this._input.on('keyup.clearBtn', this._refreshClear.bind(this));
+                this._input.on('keyup.autocomplete-clearbtn', this._refreshClear.bind(this));
                 this._refreshClear();
             } else {
                 this._clearBtn.detach();
-                this._input.off('keyup.clearBtn');
+                this._input.off('keyup.autocomplete-clearbtn');
             }
         },
 
@@ -107,12 +107,10 @@
                     element: this._tags
                 });
 
-                this._input.on('keyup.addTag', this._addTag.bind(this));
+                this._input.on('keyup.autocomplete-addtag', this._addTag.bind(this));
 
-                // TODO add link
             } else {
-                // remove tag view
-                // remove link
+                this._input.off('keyup.autocomplete-addtag');
             }
         },
 
