@@ -52,7 +52,12 @@ module.exports = function(grunt) {
       dirs.build +'/js/source/externals/jquery-ui/jquery.ui.position.js',
 
       // base for widgets
-      dirs.build +'/js/source/CUI.Widget.js'
+      dirs.build +'/js/source/CUI.Widget.js',
+
+      // actual widgets
+      dirs.build +'/js/source/components/CUI.TagList.js',
+      dirs.build +'/js/source/components/CUI.SelectList.js',
+      dirs.build +'/js/source/components/CUI.Autocomplete.js'
     ]
   };
   var packages = {
@@ -199,6 +204,17 @@ module.exports = function(grunt) {
             cwd: '<%= dirs.components %>/',
             src: ['**/styles/**.less'],
             dest: '<%= dirs.build %>/less/components'
+          }
+        ]
+      },
+      js_cui: {
+        files: [
+          {
+            expand: true,
+            flatten: true,
+            cwd: '<%= dirs.components %>/',
+            src: ['**/scripts/**.js'],
+            dest: '<%= dirs.build %>/js/source/components'
           }
         ]
       },

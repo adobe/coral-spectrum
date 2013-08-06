@@ -1,0 +1,83 @@
+@autocomplete-suggestion-toggle-border-color: rgba(0, 0, 0, 0.25);
+@autocomplete-suggestion-toggle-background-gradient-start: rgb(255, 255, 255);
+@autocomplete-suggestion-toggle-background-gradient-end: rgb(240, 240, 240);
+@autocomplete-suggestion-toggle-active-background-color: rgb(230, 230, 230);
+@autocomplete-suggestion-toggle-active-glow-color: rgba(0, 0, 0, 0.08);
+
+.autocomplete {
+    position: relative;
+    display: inline-block;
+    margin: 8*@px 0;
+    width: 13rem; /* Width must be specified */
+    vertical-align: top;
+
+    @input-height: 2rem;
+    @suggestion-btn-size: 30*@px;
+
+    > input {
+        margin: 0; /* put the margin at .autocomplete instead */
+        padding-right: @input-height;
+        width: 100%;
+
+        &.autocomplete-has-suggestion-btn {
+            padding-right: @suggestion-btn-size + 2*@px;    
+        }
+    }
+    
+    // icon as a prefix
+    &[class^="icon-"], 
+    &[class*=" icon-"] {
+        overflow: visible;
+        height: auto;
+        white-space: inherit;
+        color: inherit;
+        text-align: left;
+
+        &:before {
+            position: absolute;
+            top: 0;
+            left: 10*@px;
+            line-height: @input-height;
+            margin: 8*@px 0;
+        }
+
+        > input {
+            padding-left: 10*@px + 20*@px;
+        }
+    }
+    
+    // clear button
+    > .autocomplete-clear {
+        position: absolute;
+        top: 0;
+        right: 1px; /* input border */
+        height: @input-height;
+        width: @input-height; /* make it square */
+        cursor: pointer;
+        margin: 8*@px 0;
+
+        &.hide {
+            display: none;
+        }
+    }
+
+    > .autocomplete-suggestion-toggle {
+        .gradient(@autocomplete-suggestion-toggle-background-gradient-start, @autocomplete-suggestion-toggle-background-gradient-end);
+        position: absolute;
+        top: 9*@px;
+        right: 1*@px;
+        height: @suggestion-btn-size;
+        width: @suggestion-btn-size;
+
+        &,
+        &:hover {
+            border-left: 1*@px solid @autocomplete-suggestion-toggle-border-color;
+        }
+        
+        &:active,
+        &.active {
+            background: @autocomplete-suggestion-toggle-active-background-color;
+            .box-shadow(inset 0 0 4*@px @autocomplete-suggestion-toggle-active-glow-color);
+        }
+    }
+}

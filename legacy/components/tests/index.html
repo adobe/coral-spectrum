@@ -52,6 +52,9 @@
   <div id="mocha"></div>
   
   <!-- Tests: legacy -->
+  <!-- NOTE: until our testing setup is refactored out of legacy -->
+  <!-- this file will clobber core/tests/index when running from top -->
+  <!-- level grunt ... for now all tests are run from this file -->
   <script src="test.Class.js"></script>
   <script src="test.CUI.Util.js"></script>
   <script src="test.CUI.Widget.js"></script>
@@ -67,7 +70,8 @@
   <script src="test.CUI.Modal.js"></script>
   <script src="test.CUI.NumberInput.js"></script>
   <script src="test.CUI.Rail.js"></script>
-  <script src="test.CUI.Tabs.js"></script>
+  <!-- removing Tabs until CUI-527 is addressed -->
+  <!-- script src="test.CUI.Tabs.js"></script -->
              
   <!-- Do test run -->
   <script>
