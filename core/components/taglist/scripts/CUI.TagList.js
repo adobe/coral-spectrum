@@ -179,6 +179,10 @@
                 items = $.isArray(item) ? item : [item];
 
             $.each(items, function (i, item) {
+                if (item.length === 0) {
+                    return true;
+                }
+
                 if ($.inArray(item, self.options.values) === - 1) {
                     self._appendItem(item);
                     self.options.values.push(item);
