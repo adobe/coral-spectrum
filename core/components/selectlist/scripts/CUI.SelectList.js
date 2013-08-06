@@ -72,6 +72,8 @@
          * @param  {Boolean} [options.values.autofocus=true] automatically sets the focus on the list
          * @param  {Boolean} [options.values.autohide=true] automatically closes the list when it loses its focus
          * @param  {String} [options.values.addClass] additional css classes to be shown in the list
+         *
+         * @fires SelectList#selected
          * 
          */
         construct: function (options) {
@@ -79,7 +81,8 @@
 
             this.$element
                 .on('change:type', this._setType.bind(this))
-                .on('change:values', this._setValues.bind(this));
+                .on('change:values', this._setValues.bind(this))
+                .on('click', '[role="option"]', this._triggerSelected.bind(this));
 
             // accessibility
             this._makeAccessible();
@@ -190,7 +193,7 @@
                     case 13: // enter
                     case 32: // space
                         // choose element
-                        
+                        elem.trigger('click');
                         keymatch = false;
                         break;
                     case 33: //page up
@@ -252,6 +255,22 @@
             this.$element
                 .hide()
                 .attr('aria-hidden', true);
+        },
+
+        /**
+         * triggers an event for the currently selected element
+         * @private
+         */
+        _triggerSelected: function (event) {
+            var cur = $(event.currentTarget),
+                val = cur.data('value'),
+                display = cur.data('display');
+
+            this.hide();
+            this.$element.trigger($.Event('selected', {
+                selectedValue: val || display,
+                displayedValue: val
+            }));
         },
 
         /**
