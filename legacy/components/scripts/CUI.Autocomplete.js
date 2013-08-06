@@ -5,9 +5,9 @@
         extend: CUI.Widget,
 
         defaults: {
-            showSuggestions: true,
-            showClearButton: true,
-            showTags: true
+            showsuggestions: true,
+            showclearbutton: true,
+            showtags: true
         },
 
         construct: function () {
@@ -40,7 +40,7 @@
         },
 
         _setClearButton: function () {
-            if (this.options.showClearButton) {
+            if (this.options.showclearbutton) {
                 this._clearBtn.appendTo(this.$element);
                 this._input.on('keyup.autocomplete-clearbtn', this._refreshClear.bind(this));
                 this._refreshClear();
@@ -53,7 +53,7 @@
         _setSuggestions: function () {
             var self = this;
 
-            if (this.options.showSuggestions) {
+            if (this.options.showsuggestions) {
 
                 // if the element is not there, create it
                 if (this._suggestions.length === 0) {
@@ -81,7 +81,6 @@
                 // handler to open usggestion box
                 this._suggestionsBtn.fipo('tap', 'click', function (event) {
                     event.preventDefault();
-
                     self._toggleSuggestions();
                 }).finger('click', false);
 
@@ -94,7 +93,7 @@
         },
 
         _setTags: function () {
-            if (this.options.showTags) {
+            if (this.options.showtags) {
 
                 // if the element is not there, create it
                 if (this._tags.length === 0) {
@@ -124,7 +123,7 @@
         },
 
         _toggleSuggestions: function () {
-            this._selectList.show();
+            this._selectList.toggleVisibility();
         },
 
         _refreshClear: function () {

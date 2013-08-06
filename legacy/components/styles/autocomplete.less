@@ -1,3 +1,9 @@
+@autocomplete-suggestion-toggle-border-color: rgba(0, 0, 0, 0.25);
+@autocomplete-suggestion-toggle-background-gradient-start: rgb(255, 255, 255);
+@autocomplete-suggestion-toggle-background-gradient-end: rgb(240, 240, 240);
+@autocomplete-suggestion-toggle-active-background-color: rgb(230, 230, 230);
+@autocomplete-suggestion-toggle-active-glow-color: rgba(0, 0, 0, 0.08);
+
 .autocomplete {
     position: relative;
     display: inline-block;
@@ -56,16 +62,22 @@
     }
 
     > .autocomplete-suggestion-toggle {
-        background: #ccc;
+        .gradient(@autocomplete-suggestion-toggle-background-gradient-start, @autocomplete-suggestion-toggle-background-gradient-end);
         position: absolute;
         top: 9*@px;
         right: 1*@px;
         height: @suggestion-btn-size;
         width: @suggestion-btn-size;
+
+        &,
+        &:hover {
+            border-left: 1*@px solid @autocomplete-suggestion-toggle-border-color;
+        }
         
         &:active,
         &.active {
-            background: #999;
+            background: @autocomplete-suggestion-toggle-active-background-color;
+            .box-shadow(inset 0 0 4*@px @autocomplete-suggestion-toggle-active-glow-color);
         }
     }
 }

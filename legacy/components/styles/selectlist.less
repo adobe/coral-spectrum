@@ -1,9 +1,15 @@
 @selectlist-box-background-color: rgb(245, 245, 245);
 @selectlist-box-border-color: rgba(0, 0, 0, 0.25);
 @selectlist-entry-border-color: rgb(230, 230, 230);
+@selectlist-entry-active-color: rgb(255, 255, 255);
+@selectlist-entry-active-background-color: rgb(50, 135, 210);
 
 .selectlist {
     display: none;
+    position: absolute;
+    .box-sizing(border-box);
+    width: 100%;
+
     background-color: @selectlist-box-background-color;
     border: 1*@px solid @selectlist-box-border-color;
     padding: 0;
@@ -21,9 +27,12 @@
         &:first-child {
             border-top: none;
         }
-
+    
+        &:hover,
         &:focus {
-            background: #3287D2;
+            outline: none; // disable default browser hover
+            color: @selectlist-entry-active-color;
+            background: @selectlist-entry-active-background-color;
         }
     }
 }

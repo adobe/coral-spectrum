@@ -86,7 +86,7 @@
         defaults: {
             type: 'static', // static or dynamic (WIP)
             relatedElement: null,
-            position: 'bottom-1',  // -1 to override the border
+            position: 'center bottom-1',  // -1 to override the border
             autofocus: true, // autofocus on show
             autohide: true, // automatically hides the box if it loses focus
             values: null // [{display: "Banana", value: "banId"}]
@@ -138,7 +138,7 @@
             if (this.options.autohide) {
                 this.$element
                     .on('focusout.selectlist-autohide', function (event) {
-                        setTimeout(function () {
+                        self._autohideTimer = setTimeout(function () {
                             if (!receivedFocus) {
                                 self.hide();
                             }
@@ -170,6 +170,46 @@
                 'role': 'listbox',
                 'aria-hidden': true
             });
+
+            // keyboard handling
+            this.$element.on('keydown', 'li', function (event) {
+                // enables keyboard support
+
+                var elem = $(event.currentTarget),
+                    entries = $(event.delegateTarget)
+                        .find('[role="option"]')
+                        .not('[aria-disabled="true"]'), // ignore disabled
+                    focusElem = elem,
+                    keymatch = true,
+                    idx = entries.index(elem);
+
+                switch (event.which) {
+                    case 33: //page up
+                    case 37: //left arrow
+                    case 38: //up arrow
+                        focusElem = idx-1 > -1 ? entries[idx-1] : entries[entries.length-1];
+                        break;
+                    case 34: //page down
+                    case 39: //right arrow 
+                    case 40: //down arrow
+                        focusElem = idx+1 < entries.length ? entries[idx+1] : entries[0];
+                        break;
+                    case 36: //home
+                        focusElem = entries[0];
+                        break;
+                    case 35: //end
+                        focusElem = entries[entries.length-1];
+                        break;
+                    default:
+                        keymatch = false;
+                        break;
+                }
+
+                if (keymatch) { // if a key matched then we set the currently focused element
+                    event.preventDefault();
+                    $(focusElem).trigger('focus');
+                }
+            });
         },
 
         /**
@@ -197,6 +237,9 @@
          * @private
          */
         _hide: function () {
+            if (this._autohideTimer) {
+                clearTimeout(this._autohideTimer);
+            }
             this.$element
                 .hide()
                 .attr('aria-hidden', true);
