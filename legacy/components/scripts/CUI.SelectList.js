@@ -77,7 +77,7 @@
 
             this.$element
                 .on('change:type', this._setType.bind(this))
-                .on('change:values', this._setOptions.bind(this));
+                .on('change:values', this._setValues.bind(this));
 
             // accessibility
             this._makeAccessible();
@@ -88,6 +88,7 @@
             relatedElement: null,
             position: 'bottom-1',  // -1 to override the border
             autofocus: true, // autofocus on show
+            autohide: true, // automatically hides the box if it loses focus
             values: null // [{display: "Banana", value: "banId"}]
         },
 
@@ -109,13 +110,13 @@
                 });
             }
 
-            this._setOptions();
+            this._setValues();
         },
 
         /**
          * @private
          */
-        _setOptions: function () {
+        _setValues: function () {
             var items = this.options.values;
 
             // remove list elements
@@ -125,6 +126,31 @@
             this.options.values = [];
             // add elements again
             this.addItems(items);
+        },
+
+        /**
+         * @private
+         */
+        _setAutohide: function () {
+            var self = this,
+                receivedFocus = false;
+
+            if (this.options.autohide) {
+                this.$element
+                    .on('focusout.selectlist-autohide', function (event) {
+                        setTimeout(function () {
+                            if (!receivedFocus) {
+                                self.hide();
+                            }
+                            receivedFocus = false;
+                        }, 50);
+                    })
+                    .on('focusin.selectlist-autohide', function (event) {
+                        receivedFocus = true;
+                    });
+            } else {
+                this.$element.off('focusout.selectlist-autohide focusin.selectlist-autohide');
+            }
         },
 
         /**
@@ -163,6 +189,8 @@
             if (this.options.autofocus) {
                 this.$element.find('li:first').trigger('focus');
             }
+
+            this._setAutohide();
         },
 
         /**
