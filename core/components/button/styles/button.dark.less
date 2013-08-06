@@ -14,6 +14,8 @@
 @button-dark-down-border-color: rgba(30, 30, 30, 0.75);
 @button-dark-down-background-color: rgb(70, 70, 70);
 
+@button-dark-icon-color: rgba(255, 255, 255, 0.8);
+
 // Button: Disabled
 @button-dark-disabled-text-color: rgb(110, 110, 110);
 @button-dark-disabled-border-color: rgb(65, 65, 65);
@@ -41,6 +43,10 @@
             .gradient(@button-dark-down-background-color, @button-dark-down-background-color);
             .box-shadow(inset 0 0 4*@px rgba(0, 0, 0, 0.08));
         }
+
+        &:before {
+          color: @button-dark-icon-color !important;
+        };
     }
 
     // Button: Disabled
