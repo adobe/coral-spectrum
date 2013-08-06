@@ -11,9 +11,9 @@
          * <h2 class="line">Examples</h2>
          * 
          * <ul class="selectlist" data-init="selectlist">
-         *     <li><a href="#" data-value="expr1">Expression 1</a></li>
-         *     <li><a href="#" data-value="expr2">Expression 2</a></li>
-         *     <li><a href="#" data-value="expr3">Expression 3</a></li>
+         *     <li data-value="expr1"><span>Expression 1</span></li>
+         *     <li data-value="expr2"><span>Expression 2</span></li>
+         *     <li data-value="expr3"><span>Expression 3</span></li>
          * </ul>
          *
          * @example
@@ -55,9 +55,9 @@
          * <caption>Data API: Instantiate, set options, and show</caption>
          *
          * &lt;ul class=&quot;selectlist&quot; data-init=&quot;selectlist&quot;&gt;
-         *     &lt;li&gt;&lt;a href=&quot;#&quot; data-value=&quot;expr1&quot;&gt;Expression 1&lt;/a&gt;&lt;/li&gt;
-         *     &lt;li&gt;&lt;a href=&quot;#&quot; data-value=&quot;expr2&quot;&gt;Expression 2&lt;/a&gt;&lt;/li&gt;
-         *     &lt;li&gt;&lt;a href=&quot;#&quot; data-value=&quot;expr3&quot;&gt;Expression 3&lt;/a&gt;&lt;/li&gt;
+         *     &lt;li data-value=&quot;expr1&quot;&gt;&lt;span&gt;Expression 1&lt;/span&gt;&lt;/li&gt;
+         *     &lt;li data-value=&quot;expr2&quot;&gt;&lt;span&gt;Expression 2&lt;/span&gt;&lt;/li&gt;
+         *     &lt;li data-value=&quot;expr3&quot;&gt;&lt;span&gt;Expression 3&lt;/span&gt;&lt;/li&gt;
          * &lt;/ul&gt;
          *
          * @description Creates a new select list
@@ -69,6 +69,8 @@
          * @param  {Array} [options.values] array of objects to be displayed in the list
          * @param  {String} [options.values.display] displayed text of an entry
          * @param  {String} [options.values.value] value of an entry
+         * @param  {Boolean} [options.values.autofocus=true] automatically sets the focus on the list
+         * @param  {Boolean} [options.values.autohide=true] automatically closes the list when it loses its focus
          * @param  {String} [options.values.addClass] additional css classes to be shown in the list
          * 
          */
@@ -99,13 +101,14 @@
 
             // read values from markup
             if (this.options.values.length === 0) {
-                this.$element.find('a').each(function (i, e) {
-                    var elem = $(e);
+                this.$element.find('li').each(function (i, e) {
+                    var elem = $(e),
+                        txt = elem.text();
 
                     // add to options.values
                     self.options.values.push({
-                        display: elem.text(),
-                        value: elem.data('value')
+                        display: txt,
+                        value: elem.data('value') || txt
                     });
                 });
             }
@@ -184,6 +187,12 @@
                     idx = entries.index(elem);
 
                 switch (event.which) {
+                    case 13: // enter
+                    case 32: // space
+                        // choose element
+                        
+                        keymatch = false;
+                        break;
                     case 33: //page up
                     case 37: //left arrow
                     case 38: //up arrow
@@ -257,12 +266,12 @@
         _addItem: function (id, item) {
             var li = $('<li/>', {
                     'role': 'option',
-                    'tabindex': 0
+                    'tabindex': 0,
+                    'data-id': id,
+                    'data-value': item.value
                 }),
                 a = $('<span/>', {
                     'text': item.display || item.value,
-                    'data-id': id,
-                    'data-value': item.value,
                     'class': item.addClass
                 }).appendTo(li);
 
