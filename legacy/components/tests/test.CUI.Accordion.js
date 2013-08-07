@@ -13,20 +13,11 @@ describe('CUI.Accordion', function() {
     describe("from markup", function() {
         it('should be an accordion', function() {
             var html = 
-                '<ul><li></li><li class="active"></li><li></li></ul>'; 
+                '<ul><li></li></ul>'; 
             var el = $(html).accordion();
             
             expect(el).to.have.class("accordion");
-            expect(el).to.not.have.class("collapsible");
-        });
-        it('should have role=tablist', function() {
-            var html = 
-                '<ul><li></li><li class="active"></li><li></li></ul>'; 
-            var el = $(html).accordion();
-            
-            expect(el.is("[role=tablist]")).to.be.true;
-            expect(el.find("li h3[role=tab]").length).equal(3);
-            expect(el.find("li div[role=tabpanel]").length).equal(3);
+            expect(el).to.not.have.class("collapsible");            
         });
         it('should be a collapsible', function() {
             var html = 
@@ -36,5 +27,5 @@ describe('CUI.Accordion', function() {
             expect(el).to.have.class("collapsible");
             expect(el).to.not.have.class("accordion");            
         });        
-    });
+    });  
 });
