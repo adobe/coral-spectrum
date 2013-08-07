@@ -84,10 +84,14 @@
                     self._toggleSuggestions();
                 }).finger('click', false);
 
+                // receive the value from the list
+                this._suggestions.on('selected.autcomplete-suggestion-selected', this._handleSuggestionSelected.bind(this));
+
                 // add class to input to to increase padding right for the button
                 this._input.addClass('autocomplete-has-suggestion-btn');
             } else {
                 this._suggestionsBtn.detach();
+                this._suggestions.off('selected.autcomplete-suggestion-selected');
                 this._input.removeClass('autocomplete-has-suggestion-btn');
             }
         },
@@ -120,6 +124,10 @@
 
             this._tagList.addItem(this._input.val());
             this.clear();
+        },
+
+        _handleSuggestionSelected: function (event) {
+            this._input.val(event.displayedValue);
         },
 
         _toggleSuggestions: function () {
