@@ -5,6 +5,7 @@
         extend: CUI.Widget,
 
         defaults: {
+            showtypeahead: true,
             showsuggestions: true,
             showclearbutton: true,
             showtags: true
@@ -84,14 +85,19 @@
                     self._toggleSuggestions();
                 }).finger('click', false);
 
-                // receive the value from the list
-                this._suggestions.on('selected.autcomplete-suggestion-selected', this._handleSuggestionSelected.bind(this));
 
+                this._suggestions
+                    // receive the value from the list
+                    .on('selected.autcomplete-suggestion', this._handleSuggestionSelected.bind(this))
+                    // handle open/hide for the button
+                    .on('show.autcomplete-suggestion hide.autcomplete-suggestion', function (event) {
+                        self._suggestionsBtn.toggleClass('active', event.type === 'show');
+                    });
                 // add class to input to to increase padding right for the button
                 this._input.addClass('autocomplete-has-suggestion-btn');
             } else {
-                this._suggestionsBtn.detach();
-                this._suggestions.off('selected.autcomplete-suggestion-selected');
+                this._suggestionsBtn.remove();
+                this._suggestions.off('selected.autcomplete-suggestion show.autcomplete-suggestion hide.autcomplete-suggestion');
                 this._input.removeClass('autocomplete-has-suggestion-btn');
             }
         },
