@@ -322,8 +322,8 @@
 
             this.hide();
             this.$element.trigger($.Event('selected', {
-                selectedValue: val || display,
-                displayedValue: val
+                selectedValue: val,
+                displayedValue: display
             }));
         },
 
