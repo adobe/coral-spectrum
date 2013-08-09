@@ -12,30 +12,33 @@
   
   input[type=text] {
     margin: 0;
-    padding-right: 40*@px;
-    width: 100%;
+    padding-left: 32*@px;
   }
 
-  button {
+  & button, & button[type=submit] {
     .icon-search;
-    .button-square;
-        
-    // Fit inside of the search field
+    .button-square-transparent(30*@px);
     position: absolute;
-    top: @px; // Because of textfield border
-    right: @px; // Because of textfield border
-    height: 30*@px;
+    top: 3*@px; 
     color: transparent;
-    
+
     &,
     &:hover,
     &:active,
     &:disabled {
       border: none;
-      border-left: @px solid @textfield-border-color;
       filter: none;
     }
   }
+
+  & button[type=reset] {
+    .icon-close;
+    .button-square-transparent(1rem);
+    font-size: 0.55rem;
+    top: 9*@px; 
+    right: 9*@px; 
+  }
+
 }
 
 form.vertical {
