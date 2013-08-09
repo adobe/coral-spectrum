@@ -151,7 +151,6 @@
          */
         _setType: function () {
             var self = this,
-                viewHeight = self.$element.height(),
                 timeout;
 
             function timeoutLoadFunc() {
@@ -159,7 +158,7 @@
                     scrollHeight = elem.scrollHeight,
                     scrollTop = elem.scrollTop;
 
-                if ((scrollHeight - viewHeight) <= (scrollTop + 30)) {
+                if ((scrollHeight - self.$element.height()) <= (scrollTop + 30)) {
                     self._handleLoadData();
                 }
             }
@@ -318,7 +317,7 @@
         _triggerSelected: function (event) {
             var cur = $(event.currentTarget),
                 val = cur.data('value'),
-                display = cur.data('display');
+                display = cur.text();
 
             this.hide();
             this.$element.trigger($.Event('selected', {
