@@ -157,7 +157,7 @@
            if (this.autocompleteList !== null) this._adjustAutocompleter();
         }.bind(this));
         this.inputElement.on("input", "", function() {
-           if (this.autocompleteList !== null) this._adjustAutocompleter();
+           if (this.autocompleteList !== null) this._adjustAutocompleter({toggleList : false});
         }.bind(this));
         this.inputElement.on("dropdown-list:select", "", function(event) {
             //this.inputElement.val(event.selectedValue);
@@ -207,14 +207,22 @@
     },
 
     /** @ignore */
-    _adjustAutocompleter: function() {
+    _adjustAutocompleter: function(args) {
         var searchFor = this.inputElement.val();
-        
+        var defaults = { toggleList : true };
+        var options = $.extend(defaults, args);
+
         var showResults = function(result, searchFor) {
             this.autocompleteList.set({
                options: result
             });
-            this.autocompleteList.toggle();
+            
+            if (options.toggleList) {
+                this.autocompleteList.toggle();
+            }
+            else {
+                this.autocompleteList.show();
+            }
         }.bind(this);
         
         if (this.options.autocompleteCallback) {
