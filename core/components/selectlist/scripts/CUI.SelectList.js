@@ -65,12 +65,12 @@
          * 
          * @param  {Object} options Component options
          * @param  {Mixed} options.element jQuery selector or DOM element to use for panel
-         * @param  {Object} options.relatedElement DOM element
+         * @param  {Object} options.relatedElement DOM element to position at
+         * @param  {Boolean} [options.autofocus=true] automatically sets the focus on the list
+         * @param  {Boolean} [options.autohide=true] automatically closes the list when it loses its focus
          * @param  {Array} [options.values] array of objects to be displayed in the list
          * @param  {String} [options.values.display] displayed text of an entry
          * @param  {String} [options.values.value] value of an entry
-         * @param  {Boolean} [options.values.autofocus=true] automatically sets the focus on the list
-         * @param  {Boolean} [options.values.autohide=true] automatically closes the list when it loses its focus
          * @param  {String} [options.values.addClass] additional css classes to be shown in the list
          *
          * @fires SelectList#selected
@@ -82,6 +82,7 @@
             this.$element
                 .on('change:type', this._setType.bind(this))
                 .on('change:values', this._setValues.bind(this))
+                .on('change:autohide', this._setAutohide.bind(this))
                 .on('click', '[role="option"]', this._triggerSelected.bind(this));
 
             // accessibility
@@ -89,8 +90,12 @@
         },
 
         defaults: {
-            type: 'static', // static or dynamic (WIP)
+            type: 'static', // static or dynamic
             relatedElement: null,
+            dataurl: null,
+            dataurlformat: 'html',
+            datapagesize: 10,
+            loadData: $.noop, // function to receive more data
             position: 'center bottom-1',  // -1 to override the border
             autofocus: true, // autofocus on show
             autohide: true, // automatically hides the box if it loses focus
@@ -100,38 +105,19 @@
         applyOptions: function () {
             var self = this;
 
-            this.options.values = this.options.values || [];
-
-            // read values from markup
-            if (this.options.values.length === 0) {
-                this.$element.find('li').each(function (i, e) {
-                    var elem = $(e),
-                        txt = elem.text();
-
-                    // add to options.values
-                    self.options.values.push({
-                        display: txt,
-                        value: elem.data('value') || txt
-                    });
-                });
-            }
-
             this._setValues();
+            this._setType();
         },
 
         /**
          * @private
          */
         _setValues: function () {
-            var items = this.options.values;
-
-            // remove list elements
-            this.$element.empty();
-
-            // clear options to readd
-            this.options.values = [];
-            // add elements again
-            this.addItems(items);
+            if (this.options.values) {
+                this.addItems(this.options.values);
+            } else {
+                this.options.values = [];
+            }
         },
 
         /**
@@ -144,12 +130,13 @@
             if (this.options.autohide) {
                 this.$element
                     .on('focusout.selectlist-autohide', function (event) {
+                        clearTimeout(self._autohideTimer);
                         self._autohideTimer = setTimeout(function () {
                             if (!receivedFocus) {
                                 self.hide();
                             }
                             receivedFocus = false;
-                        }, 50);
+                        }, 500);
                     })
                     .on('focusin.selectlist-autohide', function (event) {
                         receivedFocus = true;
@@ -163,7 +150,39 @@
          * @private
          */
         _setType: function () {
+            var self = this,
+                viewHeight = self.$element.height(),
+                timeout;
 
+            function timeoutLoadFunc() {
+                var elem = self.$element.get(0),
+                    scrollHeight = elem.scrollHeight,
+                    scrollTop = elem.scrollTop;
+
+                if ((scrollHeight - viewHeight) <= (scrollTop + 30)) {
+                    self._handleLoadData();
+                }
+            }
+
+            // we have a dynamic list of values
+            if (this.options.type === 'dynamic') {
+                this.options.values.length = 0;
+
+                this.$element.on('scroll.selectlist-dynamic-load', function (event) {
+                    // debounce
+                    if (timeout) {
+                        clearTimeout(timeout);
+                    }
+
+                    if (self._loadingComplete || this._loadingIsActive) {
+                        return;
+                    }
+
+                    timeout = setTimeout(timeoutLoadFunc, 500);
+                });
+            } else { // static
+                this.$element.off('scroll.selectlist-dynamic-load');
+            }
         },
 
         /**
@@ -175,6 +194,13 @@
             this.$element.attr({
                 'role': 'listbox',
                 'aria-hidden': true
+            });
+
+            this._makeAccessibleListOption(this.$element.find('li'));
+
+            // setting tabindex
+            this.$element.on('focusin focusout', 'li', function (event) {
+                $(event.currentTarget).attr('tabindex', event.type === 'focusin' ? -1 : 0);
             });
 
             // keyboard handling
@@ -225,9 +251,23 @@
         },
 
         /**
+         * makes the list options accessible
+         * @private
+         * @param  {jQuery} elem
+         */
+        _makeAccessibleListOption: function (elem) {
+            elem.attr({
+                'role': 'option',
+                'tabindex': 0
+            });
+        },
+
+        /**
          * @private
          */
         _show: function () {
+            var self = this;
+
             this.$element
                 .show()
                 .attr('aria-hidden', false);
@@ -242,7 +282,15 @@
                 this.$element.find('li:first').trigger('focus');
             }
 
-            this._setAutohide();
+            // if dynamic start loading
+            if (this.options.type === 'dynamic') {
+                this._handleLoadData().done(function () {
+                    self.$element.find('li:first').trigger('focus');
+                    this._setAutohide();
+                });
+            } else { // otherwise set autohide immediately
+                this._setAutohide();
+            }
         },
 
         /**
@@ -255,6 +303,12 @@
             this.$element
                 .hide()
                 .attr('aria-hidden', true);
+
+            if (this.options.type === 'dynamic') {
+                this.clearItems();
+                this._pagestart = 0;
+                this._loadingComplete = false;
+            }
         },
 
         /**
@@ -282,16 +336,15 @@
          * @param  {String} [item.value]
          * @param  {String} [item.addClass]
          */
-        _addItem: function (id, item) {
+        _addItem: function (item) {
             var li = $('<li/>', {
                     'role': 'option',
                     'tabindex': 0,
-                    'data-id': id,
                     'data-value': item.value
                 }),
-                a = $('<span/>', {
+                span = $('<span/>', {
                     'text': item.display || item.value,
-                    'class': item.addClass
+                    'class': item.addClass || ''
                 }).appendTo(li);
 
             this.$element.append(li);
@@ -299,15 +352,111 @@
 
         /**
         * Append items to the end of the list.
+        * @param {Array} [items] list of objects to add
         */
         addItems: function (items) {
-            var self = this,
-                offset = this.options.values.length;
+            var self = this;
 
             $.each(items, function (i, item) {
-                self._addItem(offset + i, item);
-                self.options.values.push(item);
+                self._addItem(item);
             });
+        },
+
+        /**
+         * deletes the item from the list and the dom
+         */
+        clearItems: function () {
+            this.options.values.length = 0;
+            this.$element.empty();
+        },
+
+        /**
+         * current position for the pagination
+         * @private
+         * @type {Number}
+         */
+        _pagestart: 0,
+
+        /**
+         * indicates if all data was fetched
+         * @private
+         * @type {Boolean}
+         */
+        _loadingComplete: false,
+
+        /**
+         * indicates if currently data is fetched
+         * @private
+         * @type {Boolean}
+         */
+        _loadingIsActive: false,
+
+        /**
+         * handle asynchronous loading of data (type == dynamic)
+         * @private
+         */
+        _handleLoadData: function () {
+            var promise,
+                self = this,
+                end = this._pagestart + this.options.datapagesize,
+                spinner = $('<div/>',{
+                    'class': 'selectlist-spinner'
+                }).append($('<span/>', {
+                    'class': 'spinner'
+                }));
+
+            // activate fetching
+            this._loadingIsActive = true;
+
+            // add spinner
+            this.$element.append(spinner);
+
+            // load from given URL
+            if (this.options.dataurl) {
+                promise = $.ajax({
+                    url: this.options.dataurl,
+                    context: this,
+                    dataType: this.options.dataurlformat,
+                    data: {
+                        start: this._pagestart,
+                        end: end
+                    }
+                });
+
+            } else { // expect custom function to handle
+                promise = this.options.loadData.call(this, this._pagestart, end);
+            }
+
+            // increase to next page
+            this._pagestart = end;
+
+            promise.done(function (data) {
+                var cnt = 0;
+
+                if (self.options.dataurlformat === 'html') {
+                    var elem = $(data).filter('li');
+
+                    cnt = elem.length;
+
+                    self._makeAccessibleListOption(elem);
+                    self.$element.append(elem);
+                } else if (self.options.dataurlformat === 'json') {
+                    // TODO check if pagesize more then what came back
+
+                    self.addItems(data);
+                }
+
+                // if not enough elements came back then the loading is complete
+                if (cnt < self.options.datapagesize) {
+                    this._loadingComplete = true;
+                }
+
+            }).always(function () {
+                spinner.remove();
+                this._loadingIsActive = false;
+            });
+
+            return promise;
         }
     });
 
