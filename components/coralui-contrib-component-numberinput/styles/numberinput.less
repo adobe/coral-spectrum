@@ -39,7 +39,7 @@
     &:active {
       background: none;
       border-color: @textfield-border-color;
-      .box-shadow(0 0 4*@px 8*@px rgb(230, 230, 230) inset);
+      .box-shadow(0 0 4*@px 6 rgba(0, 0, 0, .2) inset);
     }
 
     &.decrement {
@@ -52,6 +52,11 @@
       .icon-add;
       vertical-align: top;
       line-height: 34*@px;
+    }
+
+    &[disabled] {
+      background: none;
+      background-color: @textfield-disabled-background-color;
     }
     
   } // button styles
@@ -69,12 +74,13 @@
     }
 
     button:before {
-      color: @textfield-error-font-color;
+      color: @textfield-error-font-color !important;
       opacity: 1;
     }
   }
 
 } 
+
 /* numberinput */
 
 
