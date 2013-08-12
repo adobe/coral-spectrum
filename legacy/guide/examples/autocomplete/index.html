@@ -22,7 +22,7 @@
   <div>
     <h2>Add Tags</h2>
 
-    <span class="autocomplete" data-init="autocomplete" data-showsuggestions="false" data-showtags="true">
+    <span class="autocomplete" data-init="autocomplete" data-showtags="true" data-showclearbutton="true">
       <input type="text" name="name1">
       <ol class="taglist autocomplete-tags">
         <li>
@@ -81,7 +81,7 @@
   
   <div>
     <h2>Static Suggestions</h2>
-    <span class="autocomplete icon-search" data-init="autocomplete" data-showtags="true">
+    <span class="autocomplete icon-search" data-init="autocomplete" data-showtags="true" data-showsuggestions="true">
       <input type="text">
       <ul class="autocomplete-suggestions selectlist">
         <li data-value="expr1"><span>Expression 1</span></li>
@@ -92,7 +92,7 @@
         <li data-value="expr6"><span>Expression 6</span></li>
       </ul>
     </span>
-    <span class="autocomplete icon-search" data-init="autocomplete" data-showtags="false">
+    <span class="autocomplete icon-search" data-init="autocomplete" data-showtags="false" data-showsuggestions="true">
       <input type="text">
       <ul class="autocomplete-suggestions selectlist">
         <li data-value="expr1"><span>Expression 1</span></li>
@@ -107,7 +107,7 @@
   
   <div>
     <h2>Remote loading</h2>
-    <span class="autocomplete icon-search" data-init="autocomplete">
+    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
       <input type="text">
       <ul class="autocomplete-suggestions selectlist" data-type="dynamic" data-dataurl="remotehtml.html">
       </ul>

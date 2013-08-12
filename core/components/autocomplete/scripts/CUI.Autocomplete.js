@@ -6,8 +6,8 @@
 
         defaults: {
             showtypeahead: true,
-            showsuggestions: true,
-            showclearbutton: true,
+            showsuggestions: false,
+            showclearbutton: false,
             showtags: false,
             suggestionConfig: null,
             tagConfig: null
@@ -140,6 +140,8 @@
             } else {
                 this._input.val(event.displayedValue);
             }
+
+            this._input.trigger('focus');
         },
 
         _toggleSuggestions: function () {

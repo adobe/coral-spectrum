@@ -80,6 +80,8 @@
             this._button.val(event.displayedValue);
             this._select.children('option[value="' + event.selectedValue + '"]')
                 .prop('selected', true);
+
+            this._button.trigger('focus');
         },
 
         _toggleList: function () {
