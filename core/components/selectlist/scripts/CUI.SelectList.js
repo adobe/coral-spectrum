@@ -60,6 +60,13 @@
          *     &lt;li data-value=&quot;expr3&quot;&gt;&lt;span&gt;Expression 3&lt;/span&gt;&lt;/li&gt;
          * &lt;/ul&gt;
          *
+         * @example
+         * <caption>Initialize with custom paramters to load remotely</caption>
+         * 
+         * &lt;ul class=&quot;selectlist&quot; data-init=&quot;selectlist&quot; data-type=&quot;dynamic&quot; data-dataurl=&quot;remotehtml.html&quot;&gt;
+         *     
+         * &lt;/ul&gt;
+         *
          * @description Creates a new select list
          * @constructs
          * 
@@ -219,6 +226,10 @@
                     case 32: // space
                         // choose element
                         elem.trigger('click');
+                        keymatch = false;
+                        break;
+                    case 27: //esc
+                        elem.trigger('blur');
                         keymatch = false;
                         break;
                     case 33: //page up
