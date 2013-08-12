@@ -3,6 +3,7 @@
 @autocomplete-suggestion-toggle-background-gradient-end: rgb(240, 240, 240);
 @autocomplete-suggestion-toggle-active-background-color: rgb(230, 230, 230);
 @autocomplete-suggestion-toggle-active-glow-color: rgba(0, 0, 0, 0.08);
+@autocomplete-suggestion-toggle-hover-background-color: rgb(255, 255, 255);
 @autocomplete-suggestion-toggle-disabled-background-color: rgb(230, 230, 230);
 @autocomplete-suggestion-toggle-disabled-border-color: rgb(210, 210, 210);
 @autocomplete-suggestion-toggle-disabled-text-color: rgb(180, 180, 180);
@@ -94,6 +95,10 @@
         &:active,
         &:hover {
             border-left: 1*@px solid @autocomplete-suggestion-toggle-border-color;
+        }
+
+        &:hover {
+            background: @autocomplete-suggestion-toggle-hover-background-color;
         }
         
         &:active,
