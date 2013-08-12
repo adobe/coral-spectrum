@@ -92,20 +92,7 @@
         <li data-value="expr6"><span>Expression 6</span></li>
       </ul>
     </span>
-  </div>
-  
-  <div>
-    <h2>Remote loading</h2>
-    <span class="autocomplete icon-search" data-init="autocomplete">
-      <input type="text">
-      <ul class="autocomplete-suggestions selectlist" data-type="dynamic" data-dataurl="remotehtml.html">
-      </ul>
-    </span>
-  </div>
-
-    <div>
-    <h2>Static Suggestions</h2>
-    <span class="autocomplete icon-search" data-init="autocomplete" data-showtags="true">
+    <span class="autocomplete icon-search" data-init="autocomplete" data-showtags="false">
       <input type="text">
       <ul class="autocomplete-suggestions selectlist">
         <li data-value="expr1"><span>Expression 1</span></li>
@@ -119,8 +106,17 @@
   </div>
   
   <div>
+    <h2>Remote loading</h2>
+    <span class="autocomplete icon-search" data-init="autocomplete">
+      <input type="text">
+      <ul class="autocomplete-suggestions selectlist" data-type="dynamic" data-dataurl="remotehtml.html">
+      </ul>
+    </span>
+  </div>
+  
+  <div>
     <h2>Dropdown</h2>
-    <span class="dropdown2 icon-chevrondown" data-init="dropdown2">
+    <span class="dropdown2" data-init="dropdown2">
       <input type="button" class="button" value="Fooo"/>
       <select>
         <option value="1">One</option>

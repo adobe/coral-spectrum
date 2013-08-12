@@ -14,20 +14,20 @@
 
     @input-height: 32*@px;
 
-    // icon as a prefix
-    &[class^="icon-"], 
-    &[class*=" icon-"] {
+    &:after {
+        content: "\25BE";
         overflow: visible;
         height: auto;
         white-space: inherit;
         color: inherit;
         text-align: left;
-
-        &:before {
-            position: absolute;
-            top: 9*@px;
-            right: 11*@px;
-        }
+        position: absolute;
+        top: 9*@px;
+        right: 11*@px;
+        text-shadow: none;
+        font-size: 1.2em;
+        color: @font-base-color;
+        pointer-events: none; 
     }
     
     > input {
