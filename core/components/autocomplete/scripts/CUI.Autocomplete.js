@@ -76,7 +76,7 @@
                 if (this._suggestionsBtn.length === 0) {
 
                     this._suggestionsBtn = $('<button/>', {
-                        'class': 'autocomplete-suggestion-toggle icon-chevrondown'
+                        'class': 'autocomplete-suggestion-toggle'
                     });
 
                     this._suggestionsBtn.appendTo(this.$element);

@@ -68,6 +68,24 @@
         right: 1*@px;
         height: @suggestion-btn-size;
         width: @suggestion-btn-size;
+        min-width: 0;
+        margin: 0;
+        padding: 0;
+        border: none;
+
+        &:after {
+            content: "\25BE";
+            position: absolute;
+            top: 0;
+            right: 0.4375rem;
+            width: 1rem;
+            height: 100%;
+            line-height: 2rem;
+            text-align: center;
+            text-shadow: none;
+            font-size: 1.2em;
+            color: @font-base-color;
+        }
 
         &,
         &:active,
