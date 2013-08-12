@@ -36,7 +36,7 @@
         </nav>
 
         <div class="drawer">
-            <div class="badge">1.9.0-SNAPSHOT</div>
+            <div class="badge">1.10.0-SNAPSHOT</div>
         </div>
 
     </header>
@@ -106,6 +106,8 @@
                         <a href="#Selector">Selector</a>
                         <a href="#Slider">Slider</a>
                         <a href="#Dropdown">Dropdown</a>
+                        <a href="#DropDown2">DropDown 2</a>
+                        <a href="#Autocomplete">Autocomplete</a>
                         <a href="#Datepicker">Datepicker</a>
                         <a href="#NumberInput">Number Input</a>
                         <a href="#Draggable">Draggable</a>
@@ -1385,6 +1387,289 @@
                     </div>
                 </section>
 
+                <section id="DropDown2">
+                        <h2 class="line">DropDown2 (WIP)</h2>
+                        <p>A new version of the DropDown.</p>
+
+                        <div class="componentSample">
+                            <div class="example">
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Static</div>
+                                    <span class="dropdown2" data-init="dropdown2">
+                                      <input type="button" class="button" value="Select"/>
+                                      <select>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                      </select>
+                                    </span>
+                                </div>
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Disabled</div>
+                                    <span class="dropdown2" data-init="dropdown2">
+                                      <input type="button" class="button" value="Select" disabled="true"/>
+                                      <select>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                      </select>
+                                    </span>
+                                </div>
+                                
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Disabled</div>
+                                    <span class="dropdown2" data-init="dropdown2">
+                                      <input type="button" class="button error" value="Select"/>
+                                      <select>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                      </select>
+                                    </span>
+                                </div>
+                            </div>
+                            
+                        <pre class="prettyprint linenums">
+&lt;!-- Static --&gt;
+&lt;span class=&quot;dropdown2&quot; data-init=&quot;dropdown2&quot;&gt;
+  &lt;input type=&quot;button&quot; class=&quot;button&quot; value=&quot;Select&quot;/&gt;
+  &lt;select&gt;
+    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
+
+&lt;!-- Disabled --&gt;
+&lt;span class=&quot;dropdown2&quot; data-init=&quot;dropdown2&quot;&gt;
+  &lt;input type=&quot;button&quot; class=&quot;button&quot; value=&quot;Select&quot; disabled=&quot;true&quot;/&gt;
+  &lt;select&gt;
+    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
+
+&lt;!-- Error --&gt;
+&lt;span class=&quot;dropdown2&quot; data-init=&quot;dropdown2&quot;&gt;
+  &lt;input type=&quot;button&quot; class=&quot;button error&quot; value=&quot;Select&quot;/&gt;
+  &lt;select&gt;
+    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
+
+                        </pre>
+                    </div>
+                    <div>
+                        
+                    </div>
+                </section>
+
+                <section id="Autocomplete">
+                        <h2 class="line">Autocomplete (WIP)</h2>
+                        <p>Autocomplete is a comprehensive component which offers multiple features. It includes Filter, Tags and Combobox in one.</p>
+                        <p>To achieve this, it uses the SelectList and TagList widget.</p>
+
+                        <div class="componentSample">
+                            <div class="example">
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Clear</div>
+                                    <span class="autocomplete" data-init="autocomplete" data-showclearbutton="true">
+                                      <input type="text" name="name1" placeholder="Search">
+                                    </span>
+                                </div>
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Icon</div>
+                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showclearbutton="true">
+                                      <input type="text" name="name1" placeholder="Search">
+                                    </span>
+                                </div>
+                                
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Tags</div>
+                                    <span class="autocomplete icon-tag" data-init="autocomplete" data-showclearbutton="true" data-showtags="true">
+                                      <input type="text" name="name1" placeholder="Search">
+                                      <ol class="taglist autocomplete-tags">
+                                        <li>
+                                          <button class="icon-close"></button>
+                                          Carrot
+                                          <input type="hidden" value="Carrot"/>
+                                        </li>
+                                        <li>
+                                          <button class="icon-close"></button>
+                                          Banana
+                                          <input type="hidden" value="Banana"/>
+                                        </li>
+                                        <li>
+                                          <button class="icon-close"></button>
+                                          Apple
+                                          <input type="hidden" value="Apple"/>
+                                        </li>
+                                      </ol>
+                                    </span>
+                                </div>
+                                
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Suggestions</div>
+                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
+                                      <input type="text" name="name1" placeholder="Search">
+                                      <ul class="autocomplete-suggestions selectlist">
+                                        <li data-value="expr1"><span>Expression 1</span></li>
+                                        <li data-value="expr2"><span>Expression 2</span></li>
+                                        <li data-value="expr3"><span>Expression 3</span></li>
+                                        <li><span>Expression 4</span></li>
+                                        <li data-value="expr5"><span>Expression 5</span></li>
+                                        <li data-value="expr6"><span>Expression 6</span></li>
+                                      </ul>
+                                    </span>
+                                </div>
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">with Tags</div>
+                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true" data-showtags="true">
+                                      <input type="text" name="name1" placeholder="Search">
+                                      <ul class="autocomplete-suggestions selectlist">
+                                        <li data-value="expr1"><span>Expression 1</span></li>
+                                        <li data-value="expr2"><span>Expression 2</span></li>
+                                        <li data-value="expr3"><span>Expression 3</span></li>
+                                        <li><span>Expression 4</span></li>
+                                        <li data-value="expr5"><span>Expression 5</span></li>
+                                        <li data-value="expr6"><span>Expression 6</span></li>
+                                      </ul>
+                                    </span>
+                                </div>
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Remote</div>
+                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
+                                      <input type="text" name="name1" placeholder="Search">
+                                      <ul class="autocomplete-suggestions selectlist" data-type="dynamic" data-dataurl="examples/autocomplete/remotehtml.html">
+                                      </ul>
+                                    </span>
+                                </div>
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Disabled</div>
+                                    <span class="autocomplete icon-search disabled" data-init="autocomplete" data-showsuggestions="true">
+                                      <input type="text" name="name1" placeholder="Search" disabled="true">
+                                      <ul class="autocomplete-suggestions selectlist">
+                                      </ul>
+                                      <button class="autocomplete-suggestion-toggle" disabled="true"></button>
+                                    </span>
+                                </div>
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Error</div>
+                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
+                                      <input type="text" name="name1" placeholder="Search" class="error">
+                                      <ul class="autocomplete-suggestions selectlist">
+                                        <li data-value="expr1"><span>Expression 1</span></li>
+                                        <li data-value="expr2"><span>Expression 2</span></li>
+                                        <li data-value="expr3"><span>Expression 3</span></li>
+                                      </ul>
+                                      <button class="autocomplete-suggestion-toggle"></button>
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            
+                        <pre class="prettyprint linenums">
+&lt;!-- Add clear button --&gt;                          
+&lt;span class=&quot;autocomplete&quot; data-init=&quot;autocomplete&quot; data-showclearbutton=&quot;true&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot;&gt;
+&lt;/span&gt;
+
+&lt;!-- Add icon --&gt; 
+&lt;span class=&quot;autocomplete icon-search&quot; data-init=&quot;autocomplete&quot; data-showclearbutton=&quot;true&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot;&gt;
+&lt;/span&gt;
+
+&lt;!-- Add tag functionality --&gt; 
+&lt;span class=&quot;autocomplete icon-tag&quot; data-init=&quot;autocomplete&quot; data-showclearbutton=&quot;true&quot; data-showtags=&quot;true&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot;&gt;
+  &lt;ol class=&quot;taglist autocomplete-tags&quot;&gt;
+    &lt;li&gt;
+      &lt;button class=&quot;icon-close&quot;&gt;&lt;/button&gt;
+      Carrot
+      &lt;input type=&quot;hidden&quot; value=&quot;Carrot&quot;/&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;button class=&quot;icon-close&quot;&gt;&lt;/button&gt;
+      Banana
+      &lt;input type=&quot;hidden&quot; value=&quot;Banana&quot;/&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;button class=&quot;icon-close&quot;&gt;&lt;/button&gt;
+      Apple
+      &lt;input type=&quot;hidden&quot; value=&quot;Apple&quot;/&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/span&gt;
+
+&lt;!-- Add suggestion functionality --&gt; 
+&lt;span class=&quot;autocomplete icon-search&quot; data-init=&quot;autocomplete&quot; data-showsuggestions=&quot;true&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot;&gt;
+  &lt;ul class=&quot;autocomplete-suggestions selectlist&quot;&gt;
+    &lt;li data-value=&quot;expr1&quot;&gt;&lt;span&gt;Expression 1&lt;/span&gt;&lt;/li&gt;
+    &lt;li data-value=&quot;expr2&quot;&gt;&lt;span&gt;Expression 2&lt;/span&gt;&lt;/li&gt;
+    &lt;li data-value=&quot;expr3&quot;&gt;&lt;span&gt;Expression 3&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;Expression 4&lt;/span&gt;&lt;/li&gt;
+    &lt;li data-value=&quot;expr5&quot;&gt;&lt;span&gt;Expression 5&lt;/span&gt;&lt;/li&gt;
+    &lt;li data-value=&quot;expr6&quot;&gt;&lt;span&gt;Expression 6&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/span&gt;
+
+&lt;!-- Combine several features --&gt; 
+&lt;span class=&quot;autocomplete icon-search&quot; data-init=&quot;autocomplete&quot; data-showsuggestions=&quot;true&quot; data-showtags=&quot;true&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot;&gt;
+  &lt;ul class=&quot;autocomplete-suggestions selectlist&quot;&gt;
+    &lt;li data-value=&quot;expr1&quot;&gt;&lt;span&gt;Expression 1&lt;/span&gt;&lt;/li&gt;
+    &lt;li data-value=&quot;expr2&quot;&gt;&lt;span&gt;Expression 2&lt;/span&gt;&lt;/li&gt;
+    &lt;li data-value=&quot;expr3&quot;&gt;&lt;span&gt;Expression 3&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;Expression 4&lt;/span&gt;&lt;/li&gt;
+    &lt;li data-value=&quot;expr5&quot;&gt;&lt;span&gt;Expression 5&lt;/span&gt;&lt;/li&gt;
+    &lt;li data-value=&quot;expr6&quot;&gt;&lt;span&gt;Expression 6&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/span&gt;
+
+&lt;!-- Remote data loading --&gt; 
+&lt;span class=&quot;autocomplete icon-search&quot; data-init=&quot;autocomplete&quot; data-showsuggestions=&quot;true&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot;&gt;
+  &lt;ul class=&quot;autocomplete-suggestions selectlist&quot; data-type=&quot;dynamic&quot; data-dataurl=&quot;examples/autocomplete/remotehtml.html&quot;&gt;
+  &lt;/ul&gt;
+&lt;/span&gt;
+
+&lt;!-- Disabled state --&gt;
+&lt;span class=&quot;autocomplete icon-search disabled&quot; data-init=&quot;autocomplete&quot; data-showsuggestions=&quot;true&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot; disabled=&quot;true&quot;&gt;
+  &lt;ul class=&quot;autocomplete-suggestions selectlist&quot;&gt;
+  &lt;/ul&gt;
+  &lt;button class=&quot;autocomplete-suggestion-toggle&quot; disabled=&quot;true&quot;&gt;&lt;/button&gt;
+&lt;/span&gt;
+
+&lt;!-- Error state --&gt;
+&lt;span class=&quot;autocomplete icon-search&quot; data-init=&quot;autocomplete&quot; data-showsuggestions=&quot;true&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot; class=&quot;error&quot;&gt;
+  &lt;ul class=&quot;autocomplete-suggestions selectlist&quot;&gt;
+    &lt;li data-value=&quot;expr1&quot;&gt;&lt;span&gt;Expression 1&lt;/span&gt;&lt;/li&gt;
+    &lt;li data-value=&quot;expr2&quot;&gt;&lt;span&gt;Expression 2&lt;/span&gt;&lt;/li&gt;
+    &lt;li data-value=&quot;expr3&quot;&gt;&lt;span&gt;Expression 3&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;button class=&quot;autocomplete-suggestion-toggle&quot;&gt;&lt;/button&gt;
+&lt;/span&gt;
+                        </pre>
+                    </div>
+                    <div>
+                        Open <a href="examples/autocomplete/index.html">Sample</a>
+                    </div>
+                </section>
+
                 <section id="Datepicker">
                     <h2 class="line">Datepicker</h2>
                     <p>The datepicker component. Initial input value should be in the following format:</p>
@@ -1481,7 +1766,15 @@
                                     <input type='number'/>
                                 </div>
                             </div>
-                        </div>
+                   <!--          <div class="numberInputSample">
+                                <div class="sampleTitle left">Dark</div>
+                                <div data-theme="dark">
+                                    <div class="numberinput" data-init="numberinput">
+                                        <input type='number'/>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div> <!-- end example -->
                         <pre class="prettyprint linenums">
 &lt;!-- Standard Number Input --&gt;                            
 &lt;div class=&quot;numberinput&quot; data-init=&quot;numberinput&quot;&gt;

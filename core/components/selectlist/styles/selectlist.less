@@ -3,12 +3,14 @@
 @selectlist-entry-border-color: rgb(230, 230, 230);
 @selectlist-entry-active-color: rgb(255, 255, 255);
 @selectlist-entry-active-background-color: rgb(50, 135, 210);
+@selectlist-group-background-color: rgb(220, 220, 220);
 
 .selectlist {
     display: none;
     position: absolute;
     .box-sizing(border-box);
     width: 100%;
+    z-index: 1000; // just make it higher so it is above others
 
     background-color: @selectlist-box-background-color;
     border: 1*@px solid @selectlist-box-border-color;
@@ -16,13 +18,17 @@
     margin: 0;
 
     max-height: 35*@px * 5;
-    overflow-y: scroll; 
+    overflow-y: auto; 
 
     li {
         display: block;
         border-top: 1*@px solid @selectlist-entry-border-color;    
         padding: 11*@px 10*@px;
         margin: 0;
+
+        &[role=option] {
+            cursor: pointer;
+        }
 
         &:first-child {
             border-top: none;

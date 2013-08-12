@@ -53,6 +53,11 @@
       vertical-align: top;
       line-height: 34*@px;
     }
+
+    &[disabled] {
+      background: none;
+      background-color: @textfield-disabled-background-color;
+    }
     
   } // button styles
 
@@ -69,12 +74,13 @@
     }
 
     button:before {
-      color: @textfield-error-font-color;
+      color: @textfield-error-font-color !important;
       opacity: 1;
     }
   }
 
 } 
+
 /* numberinput */
 
 

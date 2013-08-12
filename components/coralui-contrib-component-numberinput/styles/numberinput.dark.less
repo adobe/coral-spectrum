@@ -1,6 +1,6 @@
 [data-theme~=dark] {
-
-    .numberinput button {
+  .numberinput {
+    button {
       background: none; 
       .gradient(rgb(85,85,85), rgb(70,70,70));
 
@@ -13,6 +13,17 @@
         background: none; 
         background-color: rgb(65,65,65);
       }
-    }
 
-}
+      &[disabled] {
+        background: none;
+        background-color: rgb(80,80,80);
+      }
+
+    } // button styles
+
+    input[disabled] {
+      background-color: rgb(80,80,80);
+    }
+  } // numberinput
+} // theme dark
+

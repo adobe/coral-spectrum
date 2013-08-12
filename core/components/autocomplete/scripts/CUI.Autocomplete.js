@@ -5,10 +5,12 @@
         extend: CUI.Widget,
 
         defaults: {
-            showtypeahead: true,
-            showsuggestions: true,
-            showclearbutton: true,
-            showtags: true
+            showtypeahead: false,
+            showsuggestions: false,
+            showclearbutton: false,
+            showtags: false,
+            suggestionConfig: null,
+            tagConfig: null
         },
 
         construct: function () {
@@ -59,21 +61,22 @@
                 // if the element is not there, create it
                 if (this._suggestions.length === 0) {
                     this._suggestions = $('<ul/>', {
-                        'class': 'selectlist'
+                        'class': 'selectlist autocomplete-suggestions'
                     }).appendTo(this.$element);
                 }
 
-                this._selectList = new CUI.SelectList({
-                    element: this._suggestions,
+                this._suggestions.selectList($.extend({
                     relatedElement: this._input
-                });
+                }, this.options.suggestionConfig || {}));
+
+                this._selectList = this._suggestions.data('selectList');
 
                 // if the button to trigger the suggestion box is not there, 
                 // then we add it
                 if (this._suggestionsBtn.length === 0) {
 
                     this._suggestionsBtn = $('<button/>', {
-                        'class': 'autocomplete-suggestion-toggle icon-chevrondown'
+                        'class': 'autocomplete-suggestion-toggle'
                     });
 
                     this._suggestionsBtn.appendTo(this.$element);
@@ -112,9 +115,8 @@
                     }).appendTo(this.$element);
                 }
 
-                this._tagList = new CUI.TagList({
-                    element: this._tags
-                });
+                this._tags.tagList(this.options.tagConfig || {});
+                this._tagList = this._tags.data('tagList');
 
                 this._input.on('keyup.autocomplete-addtag', this._addTag.bind(this));
 
@@ -133,7 +135,13 @@
         },
 
         _handleSuggestionSelected: function (event) {
-            this._input.val(event.displayedValue);
+            if (this.options.showtags) {
+                this._tagList.addItem(event.displayedValue);
+            } else {
+                this._input.val(event.displayedValue);
+            }
+
+            this._input.trigger('focus');
         },
 
         _toggleSuggestions: function () {
@@ -147,6 +155,18 @@
         clear: function () {
             this._input.val('');
             this._refreshClear();
+        },
+
+        disable: function (toggle) {
+            this.$element.addClass('disabled');
+            this._input.prop('disabled', true);
+            this._suggestionsBtn.prop('disabled', true);
+        },
+
+        enable: function () {
+            this.$element.removeClass('disabled');
+            this._input.prop('disabled', false);
+            this._suggestionsBtn.prop('disabled', false);
         }
     });
 

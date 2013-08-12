@@ -60,6 +60,13 @@
          *     &lt;li data-value=&quot;expr3&quot;&gt;&lt;span&gt;Expression 3&lt;/span&gt;&lt;/li&gt;
          * &lt;/ul&gt;
          *
+         * @example
+         * <caption>Initialize with custom paramters to load remotely</caption>
+         * 
+         * &lt;ul class=&quot;selectlist&quot; data-init=&quot;selectlist&quot; data-type=&quot;dynamic&quot; data-dataurl=&quot;remotehtml.html&quot;&gt;
+         *     
+         * &lt;/ul&gt;
+         *
          * @description Creates a new select list
          * @constructs
          * 
@@ -151,7 +158,6 @@
          */
         _setType: function () {
             var self = this,
-                viewHeight = self.$element.height(),
                 timeout;
 
             function timeoutLoadFunc() {
@@ -159,7 +165,7 @@
                     scrollHeight = elem.scrollHeight,
                     scrollTop = elem.scrollTop;
 
-                if ((scrollHeight - viewHeight) <= (scrollTop + 30)) {
+                if ((scrollHeight - self.$element.height()) <= (scrollTop + 30)) {
                     self._handleLoadData();
                 }
             }
@@ -220,6 +226,10 @@
                     case 32: // space
                         // choose element
                         elem.trigger('click');
+                        keymatch = false;
+                        break;
+                    case 27: //esc
+                        elem.trigger('blur');
                         keymatch = false;
                         break;
                     case 33: //page up
@@ -318,12 +328,12 @@
         _triggerSelected: function (event) {
             var cur = $(event.currentTarget),
                 val = cur.data('value'),
-                display = cur.data('display');
+                display = cur.text();
 
             this.hide();
             this.$element.trigger($.Event('selected', {
-                selectedValue: val || display,
-                displayedValue: val
+                selectedValue: val,
+                displayedValue: display
             }));
         },
 
