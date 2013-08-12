@@ -3,6 +3,9 @@
 @autocomplete-suggestion-toggle-background-gradient-end: rgb(240, 240, 240);
 @autocomplete-suggestion-toggle-active-background-color: rgb(230, 230, 230);
 @autocomplete-suggestion-toggle-active-glow-color: rgba(0, 0, 0, 0.08);
+@autocomplete-suggestion-toggle-disabled-background-color: rgb(230, 230, 230);
+@autocomplete-suggestion-toggle-disabled-border-color: rgb(210, 210, 210);
+@autocomplete-suggestion-toggle-disabled-text-color: rgb(180, 180, 180);
 
 .autocomplete {
     position: relative;
@@ -71,6 +74,7 @@
         margin: 0;
         padding: 0;
         border: none;
+        color: @font-base-color;
 
         &:after {
             content: "\25BE";
@@ -83,7 +87,7 @@
             text-align: center;
             text-shadow: none;
             font-size: 1.2em;
-            color: @font-base-color;
+            color: inherit;
         }
 
         &,
@@ -96,6 +100,12 @@
         &.active {
             background: @autocomplete-suggestion-toggle-active-background-color;
             .box-shadow(inset 0 0 4*@px @autocomplete-suggestion-toggle-active-glow-color);
+        }
+
+        &[disabled] {
+            color: @autocomplete-suggestion-toggle-disabled-text-color;
+            background: @autocomplete-suggestion-toggle-disabled-background-color;
+            border-color: @autocomplete-suggestion-toggle-disabled-border-color;
         }
     }
 }
