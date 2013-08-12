@@ -1395,7 +1395,7 @@
                             <div class="example">
 
                                 <div class="filterSample">
-                                    <div class="sampleTitle left">Default</div>
+                                    <div class="sampleTitle left">Static</div>
                                     <span class="dropdown2" data-init="dropdown2">
                                       <input type="button" class="button" value="Select"/>
                                       <select>
@@ -1432,6 +1432,35 @@
                             </div>
                             
                         <pre class="prettyprint linenums">
+&lt;!-- Static --&gt;
+&lt;span class=&quot;dropdown2&quot; data-init=&quot;dropdown2&quot;&gt;
+  &lt;input type=&quot;button&quot; class=&quot;button&quot; value=&quot;Select&quot;/&gt;
+  &lt;select&gt;
+    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
+
+&lt;!-- Disabled --&gt;
+&lt;span class=&quot;dropdown2&quot; data-init=&quot;dropdown2&quot;&gt;
+  &lt;input type=&quot;button&quot; class=&quot;button&quot; value=&quot;Select&quot; disabled=&quot;true&quot;/&gt;
+  &lt;select&gt;
+    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
+
+&lt;!-- Error --&gt;
+&lt;span class=&quot;dropdown2&quot; data-init=&quot;dropdown2&quot;&gt;
+  &lt;input type=&quot;button&quot; class=&quot;button error&quot; value=&quot;Select&quot;/&gt;
+  &lt;select&gt;
+    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
 
                         </pre>
                     </div>
