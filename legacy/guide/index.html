@@ -1470,6 +1470,29 @@
                                       </ul>
                                     </span>
                                 </div>
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Disabled</div>
+                                    <span class="autocomplete icon-search disabled" data-init="autocomplete" data-showsuggestions="true">
+                                      <input type="text" name="name1" placeholder="Search" disabled="true">
+                                      <ul class="autocomplete-suggestions selectlist">
+                                      </ul>
+                                      <button class="autocomplete-suggestion-toggle" disabled="true"></button>
+                                    </span>
+                                </div>
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Error</div>
+                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
+                                      <input type="text" name="name1" placeholder="Search" class="error">
+                                      <ul class="autocomplete-suggestions selectlist">
+                                        <li data-value="expr1"><span>Expression 1</span></li>
+                                        <li data-value="expr2"><span>Expression 2</span></li>
+                                        <li data-value="expr3"><span>Expression 3</span></li>
+                                      </ul>
+                                      <button class="autocomplete-suggestion-toggle"></button>
+                                    </span>
+                                </div>
                             </div>
                             
                             
@@ -1537,6 +1560,25 @@
   &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot;&gt;
   &lt;ul class=&quot;autocomplete-suggestions selectlist&quot; data-type=&quot;dynamic&quot; data-dataurl=&quot;examples/autocomplete/remotehtml.html&quot;&gt;
   &lt;/ul&gt;
+&lt;/span&gt;
+
+&lt;!-- Disabled state --&gt;
+&lt;span class=&quot;autocomplete icon-search disabled&quot; data-init=&quot;autocomplete&quot; data-showsuggestions=&quot;true&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot; disabled=&quot;true&quot;&gt;
+  &lt;ul class=&quot;autocomplete-suggestions selectlist&quot;&gt;
+  &lt;/ul&gt;
+  &lt;button class=&quot;autocomplete-suggestion-toggle&quot; disabled=&quot;true&quot;&gt;&lt;/button&gt;
+&lt;/span&gt;
+
+&lt;!-- Error state --&gt;
+&lt;span class=&quot;autocomplete icon-search&quot; data-init=&quot;autocomplete&quot; data-showsuggestions=&quot;true&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot; class=&quot;error&quot;&gt;
+  &lt;ul class=&quot;autocomplete-suggestions selectlist&quot;&gt;
+    &lt;li data-value=&quot;expr1&quot;&gt;&lt;span&gt;Expression 1&lt;/span&gt;&lt;/li&gt;
+    &lt;li data-value=&quot;expr2&quot;&gt;&lt;span&gt;Expression 2&lt;/span&gt;&lt;/li&gt;
+    &lt;li data-value=&quot;expr3&quot;&gt;&lt;span&gt;Expression 3&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;button class=&quot;autocomplete-suggestion-toggle&quot;&gt;&lt;/button&gt;
 &lt;/span&gt;
                         </pre>
                     </div>

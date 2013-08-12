@@ -155,6 +155,18 @@
         clear: function () {
             this._input.val('');
             this._refreshClear();
+        },
+
+        disable: function (toggle) {
+            this.$element.addClass('disabled');
+            this._input.prop('disabled', true);
+            this._suggestionsBtn.prop('disabled', true);
+        },
+
+        enable: function () {
+            this.$element.removeClass('disabled');
+            this._input.prop('disabled', false);
+            this._suggestionsBtn.prop('disabled', false);
         }
     });
 
