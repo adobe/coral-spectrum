@@ -78,8 +78,7 @@
 
         _handleSelected: function (event) {
             this._button.val(event.displayedValue);
-            this._select.children('option[value="' + event.selectedValue + '"]')
-                .prop('selected', true);
+            this._select.val(event.selectedValue);
 
             this._button.trigger('focus');
         },
