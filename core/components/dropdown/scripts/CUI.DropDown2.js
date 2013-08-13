@@ -5,6 +5,8 @@
         extend: CUI.Widget,
 
         defaults: {
+            type: 'static',
+            nativewidget: true,
             selectlistConfig: null
         },
 
@@ -15,13 +17,49 @@
             this._button = this.$element.children('input[type=button]');
             this._select = this.$element.children('select');
             this._selectList = this.$element.children('selectlist');
+            this._valueInput = this.$element.children('input[type=hidden]');
 
             // apply
             this.applyOptions();
         },
 
         applyOptions: function () {
-            this._setSelectList();
+            if (this.options.nativewidget) {
+                this._setNativeWidget();
+            } else {
+                this._setSelectList();
+            }
+        },
+
+        /**
+         * this option is mainly supposed to be used on mobile
+         * and will just work with static lists
+         * @private
+         * @param {Boolean} [force]
+         */
+        _setNativeWidget: function (force) {
+            var self = this;
+
+            if (this.options.nativewidget || force) {
+                this._select.css({
+                    display: 'block',
+                    width: this._button.outerWidth(),
+                    height: this._button.outerHeight(),
+                    opacity: 0.01
+                });
+
+                this._select.position({
+                    my: 'left top',
+                    at: 'left top',
+                    of: this._button
+                });
+
+                this._select.on('change.dropdown', function (event) {
+                    self._button.val(self._select.children('option:selected').text());
+                });
+            } else {
+                this._select.off('change.dropdown');
+            }
         },
 
         _setSelectList: function () {
