@@ -6,7 +6,7 @@
 
         defaults: {
             type: 'static',
-            nativewidget: true,
+            nativewidget: false,
             nativewidgetonmobile: true,
             selectlistConfig: null
         },
