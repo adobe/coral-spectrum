@@ -7,6 +7,7 @@
         defaults: {
             type: 'static',
             nativewidget: true,
+            nativewidgetonmobile: true,
             selectlistConfig: null
         },
 
@@ -24,7 +25,7 @@
         },
 
         applyOptions: function () {
-            if (this.options.nativewidget) {
+            if (this.options.nativewidget || (CUI.util.isTouch && this.options.nativewidgetonmobile)) {
                 this._setNativeWidget();
             } else {
                 this._setSelectList();
@@ -62,9 +63,29 @@
             }
         },
 
+        /**
+         * parses values from a select lsit
+         * @private
+         * @return {Array} 
+         */
+        _parseValues: function () {
+            var values = [];
+
+            // loop over all elements and add to array
+            this._select.children('option').each(function (i, e) {
+                var opt = $(e);
+
+                values.push({
+                    display: opt.text(),
+                    value: opt.val()
+                });
+            });
+
+            return values;
+        },
+
         _setSelectList: function () {
-            var self = this,
-                values = [];
+            var self = this;
 
             // if the element is not there, create it
             if (this._selectList.length === 0) {
@@ -82,18 +103,7 @@
             // if a <select> is given we are handling a static list
             // otherwise it is dynamic
             if (this._select.length > 0) {
-                // loop over all elements and add to array
-                this._select.children('option').each(function (i, e) {
-                    var opt = $(e);
-
-                    values.push({
-                        display: opt.text(),
-                        value: opt.val()
-                    });
-                });
-
-                this._selectListWidget.set('values', values);
-
+                this._selectListWidget.set('values', this._parseValues());
             } else {
                 this._selectListWidget.set('type', 'dynamic');
             }
@@ -117,6 +127,7 @@
         _handleSelected: function (event) {
             this._button.val(event.displayedValue);
             this._select.val(event.selectedValue);
+            this._valueInput.val(event.selectedValue);
 
             this._button.trigger('focus');
         },
