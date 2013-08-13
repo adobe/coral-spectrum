@@ -207,7 +207,7 @@ module.exports = function (grunt) {
                         expand: true,
                         flatten: true,
                         cwd: '<%= dirs.core.build %>/',
-                        src: ['js/source/shared/**/*.js'],
+                        src: ['js/source/*.js'],
                         dest: '<%= dirs.temp %>/js/'
                     },
                     { // get less from the modularized components
