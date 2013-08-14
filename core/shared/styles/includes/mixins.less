@@ -215,10 +215,8 @@
   
   border: @px solid @dropdown-border-color;
     
-  line-height: @button-size - @px; // Align icons vertically
-  text-shadow: none; // TODO: use white shadow?
-
-  vertical-align: top; // Don't behave like an icon
+  line-height: @button-size; // Align icons vertically
+  text-shadow: none;
   
   &:hover {
     border: @px solid @dropdown-border-color; // Override icon class border resets
@@ -250,6 +248,11 @@
   }
 }
 
+
+/*
+  Mixin: .button-square-transparent
+  Overrides background and border, otherwise the same as .button-square
+*/
 .button-square-transparent(@button-size: 2rem) {
   
   .button-square(@button-size);

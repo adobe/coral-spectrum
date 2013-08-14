@@ -1080,20 +1080,10 @@
                 </section>
                 <section id="SearchField">
                     <h2 class="line">Search Field</h2>
-                    <p>A simple search field.  Note that legacy (pre-1.9) markup should be updated to include
+                    <p>A simple search field.  Note that pre-1.10 markup should be updated to include
                         the &quot;type&quot; attribute on the submit button and provide implementation of the clear option.</p>
                     <div class="componentSample">
                         <div class="example">
-
-                            <div class="filterSample">
-                                <div class="sampleTitle left">Legacy</div>
-                                <div class="searchfield">
-                                    <div class="search">
-                                        <input type="text" placeholder="Search">
-                                        <button>Search</button>
-                                    </div>
-                                </div>
-                            </div>
 
                             <div class="filterSample">
                                 <div class="sampleTitle left">Standard</div>
@@ -1109,8 +1099,8 @@
                             <div class="filterSample">
                                 <div class="sampleTitle left">Error</div>
                                 <div class="searchfield">
-                                    <div class="search">
-                                        <input type="text" class="error" placeholder="Search">
+                                    <div class="search error">
+                                        <input type="text" placeholder="Search" value="error">
                                         <button type="submit">Search</button>
                                         <button type="reset">Clear</button>
                                     </div>
@@ -1123,20 +1113,13 @@
                                 <div class="searchfield">
                                     <div class="search">
                                         <input type="text" placeholder="Search" disabled>
-                                        <button type="submit">Search</button>
-                                        <button type="reset">Clear</button>
+                                        <button type="submit" disabled>Search</button>
+                                        <button type="reset" disabled>Clear</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 <pre class="prettyprint linenums">
-&lt;!-- Legacy (Pre 1.9 markup) --&gt;
-&lt;!-- example provided to show backward compatibility only --&gt;
-&lt;!-- use standard markup for new implmentations --&gt;
-&lt;div class=&quot;search&quot;&gt;
-  &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot;&gt;
-  &lt;button&gt;Search&lt;/button&gt;
-&lt;/div&gt;
 
 &lt;!-- Standard --&gt;
 &lt;div class=&quot;search&quot;&gt;
@@ -1146,7 +1129,7 @@
 &lt;/div&gt;
 
 &lt;!-- Error --&gt;
-&lt;div class=&quot;search&quot;&gt;
+&lt;div class=&quot;search error&quot;&gt;
     &lt;input type=&quot;text&quot; class=&quot;error&quot; placeholder=&quot;Search&quot;&gt;
     &lt;button type=&quot;submit&quot;&gt;Search&lt;/button&gt;
     &lt;button type=&quot;reset&quot;&gt;Clear&lt;/button&gt;
@@ -1155,11 +1138,14 @@
 &lt;!-- Disabled --&gt;
 &lt;div class=&quot;search&quot;&gt;
     &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot; disabled&gt;
-    &lt;button type=&quot;submit&quot;&gt;Search&lt;/button&gt;
-    &lt;button type=&quot;reset&quot;&gt;Clear&lt;/button&gt;
+    &lt;button type=&quot;submit&quot; disabled&gt;Search&lt;/button&gt;
+    &lt;button type=&quot;reset&quot; disabled&gt;Clear&lt;/button&gt;
 &lt;/div&gt;
 </pre>
           </div>
+        <div>
+            Open <a href="examples/search/index.html">Sample</a>
+        </div>  
         </section>
                 
                 <section id="Filters">

@@ -12,14 +12,16 @@
   
   input[type=text] {
     margin: 0;
-    padding-left: 32*@px;
+    padding: 0 32*@px;
+    /*padding-right: 32*@px;*/
   }
 
-  & button, & button[type=submit] {
+  button {
     .icon-search;
     .button-square-transparent(30*@px);
     position: absolute;
-    top: 3*@px; 
+    display: block;
+    top: 1*@px; 
     color: transparent;
 
     &,
@@ -31,15 +33,42 @@
     }
   }
 
-  & button[type=reset] {
+  button[type=submit] {
+    left: 1*@px;
+  }
+
+  button[type=reset] {
     .icon-close;
-    .button-square-transparent(1rem);
-    font-size: 0.55rem;
-    top: 9*@px; 
-    right: 9*@px; 
+    .button-square-transparent(30*@px); 
+    font-size: 0.6rem;
+    top: 1*@px; 
+    right: 1*@px; 
+  }
+
+
+  &.error input {
+    border-color: @textfield-error-border-color;
+    color: @textfield-error-font-color;
+
+    &:focus {
+      .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+    }
+  }
+
+  &.error button {
+
+    &:before {
+      color: @textfield-error-font-color;
+      opacity: 1;
+    }
+
+    &:focus {
+      .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+    }
   }
 
 }
+// .search 
 
 form.vertical {
   .search.field {
@@ -52,6 +81,8 @@ form.aligned {
     display: inline-block;
   }
 }
+
+
 
 /* end search */
 
