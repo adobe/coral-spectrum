@@ -36,7 +36,7 @@
         </nav>
 
         <div class="drawer">
-            <div class="badge">1.10.0-SNAPSHOT</div>
+            <div class="badge">1.9.0-SNAPSHOT</div>
         </div>
 
     </header>
@@ -1080,7 +1080,7 @@
                 </section>
                 <section id="SearchField">
                     <h2 class="line">Search Field</h2>
-                    <p>A simple search field.  Note that legacy (pre-1.10) markup should be updated to include
+                    <p>A simple search field.  Note that legacy (pre-1.9) markup should be updated to include
                         the &quot;type&quot; attribute on the submit button and provide implementation of the clear option.</p>
                     <div class="componentSample">
                         <div class="example">
@@ -1130,7 +1130,7 @@
                             </div>
                         </div>
 <pre class="prettyprint linenums">
-&lt;!-- Legacy (Pre 1.10 markup) --&gt;
+&lt;!-- Legacy (Pre 1.9 markup) --&gt;
 &lt;!-- example provided to show backward compatibility only --&gt;
 &lt;!-- use standard markup for new implmentations --&gt;
 &lt;div class=&quot;search&quot;&gt;
@@ -1419,9 +1419,21 @@
                                 </div>
                                 
                                 <div class="filterSample">
-                                    <div class="sampleTitle left">Disabled</div>
+                                    <div class="sampleTitle left">Error</div>
                                     <span class="dropdown2" data-init="dropdown2">
                                       <input type="button" class="button error" value="Select"/>
+                                      <select>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                      </select>
+                                    </span>
+                                </div>
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Native</div>
+                                    <span class="dropdown2" data-init="dropdown2" data-nativewidget="true">
+                                      <input type="button" class="button" value="Select"/>
                                       <select>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
