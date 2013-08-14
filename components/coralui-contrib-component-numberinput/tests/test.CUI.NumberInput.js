@@ -170,11 +170,7 @@ describe('CUI.NumberInput', function() {
         var clickButtonRepeatedly = function(button, count) {
           count = count || 1;
           while (count > 0) {
-            if (ontouchstart in window) {
-              $(button).trigger('tap');
-            } else {
-              $(button).trigger('click');
-            }
+            $(button).trigger('click');
             count--;
           }
         }
