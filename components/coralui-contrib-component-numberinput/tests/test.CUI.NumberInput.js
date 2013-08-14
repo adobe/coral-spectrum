@@ -13,7 +13,7 @@ describe('CUI.NumberInput', function() {
 
     describe("API", function() {
 
-      var html = '<div class="numberinput"><input type="number"></div>';
+      var html = '<div class="numberinput"><input type="text"></div>';
 
       it('#getStep should default to 1', function() {
         var element = new CUI.NumberInput({element: $(html)});
@@ -125,28 +125,34 @@ describe('CUI.NumberInput', function() {
         expect(element.getStep()).to.equal(99);
         element.setStep("cats");
         expect(element.getStep()).to.equal(99);
+      }); 
+
+
+      it('#set hasError to true should toggle error state', function() {
+          var element = new CUI.NumberInput({element: $(html)});
+          expect(element.$element).to.not.have.class('error');
+          element.set('hasError', true);
+          expect(element.$element).to.have.class('error');
       });
 
-      // it('#set("hasError", true) should toggle error state', function() {
-      //   var element = new CUI.NumberInput({element: $(html)}); 
-      //   expect(element).to.not.have.class('error'));
-      //   element.set('hasError', true);
-      //   expect(element).to.have.class('error'));
-      // });
+      it('#set disabled to true should toggle disabled state', function() {
+          var element = new CUI.NumberInput({element: $(html)});
+          expect(element.$input).to.not.have.attr('disabled');
+          expect(element.$incrementElement).to.not.have.attr('disabled');
+          expect(element.$decrementElement).to.not.have.attr('disabled');
+          expect(element.$input).to.not.have.attr('disabled');
+          element.set('disabled', true);
+          expect(element.$input).to.have.attr('disabled');
+          expect(element.$incrementElement).to.have.attr('disabled');
+          expect(element.$decrementElement).to.have.attr('disabled');
+      });
 
-      // it('#set("disabled", true) should toggle error state', function() {
-      //   var element = new CUI.NumberInput({element: $(html)}); 
-      //   expect(element).to.not.have.attr('disabled'));
-      //   element.set('disabled', true);
-      //   expect(element).to.have.attr('disables'));
-      // });
-
-    });
+    }); // describe API
 
     describe("from markup", function() {
 
         var buildElement = function() {
-          return $('<div><input type="number"></div>').numberInput();
+          return $('<div><button type="button">decrement</button><input type="text"><button type="button">increment</button></div>').numberInput();
         }
 
         var clickDecrement = function(element, count) {
@@ -164,11 +170,14 @@ describe('CUI.NumberInput', function() {
         var clickButtonRepeatedly = function(button, count) {
           count = count || 1;
           while (count > 0) {
-            $(button).click();
+            if (ontouchstart in window) {
+              $(button).trigger('tap');
+            } else {
+              $(button).trigger('click');
+            }
             count--;
           }
         }
-
 
         it('container should be a numberinput', function() {
             var element = buildElement();
@@ -176,8 +185,28 @@ describe('CUI.NumberInput', function() {
         });
 
         it('should change input type to text', function() {
-            var element = buildElement();
+            var element = $('<div><input type="number"></div>').numberInput();;
             expect(element.find('input').attr('type')).to.equal('text');
+        });
+
+        it('should set input type to text if missing', function() {
+            var element = $('<div><input></div>').numberInput();
+            expect(element.find('input').attr('type')).to.equal('text');
+        });
+
+        it('should create buttons if they are missing', function() {
+            var element = $('<div><input></div>').numberInput();
+            var buttons = element.find('button');
+            expect(buttons.length).to.be(2);
+            expect($(buttons[0])).to.have.class('decrement');
+            expect($(buttons[1])).to.have.class('increment');
+        });
+
+        it('should make buttons type button', function() {
+            var element = $('<div><button>up</button><input><button>down</button></div>').numberInput();
+            var buttons = element.find('button');
+            expect($(buttons[0]).attr('type')).to.be('button');
+            expect($(buttons[0]).attr('type')).to.be('button');
         });
 
         it('should have default value of 0', function() {
@@ -185,7 +214,7 @@ describe('CUI.NumberInput', function() {
             expect(element.find('input').val()).to.equal('0');
         });
 
-        it('should add decrement and incrment buttons', function() {
+        it('should add decrement and increment buttons', function() {
             var element = buildElement();
             var buttons = element.find('button');
             expect(buttons).to.exist;
@@ -206,35 +235,30 @@ describe('CUI.NumberInput', function() {
 
         it('should set step value with attribute', function() {
             var html = 
-                '<div><input type="numberinput" step="3"></div>'; 
+                '<div><button type="button">increment</button><input type="text" step="3"><button type="button">decrement</button></div>'; 
             var element = $(html).numberInput();
             clickIncrement(element)
             expect(element.find('input').val()).to.equal('3');
         });
 
-        // the Widget beforeChange event listener in NumberInput does not fire for this case
-        // which breaks the test :(
-        // Oddly, the listeners are working in the API test above
-
-        // it('should ignore step attribute if it cannot be parsed to number', function() {
-        //    console.log('wy u bork');
-        //     var html = 
-        //         '<div><input type="numberinput" step="cats"></div>'; 
-        //     var element = $(html).numberInput();
-        //     clickIncrement(element)
-        //     expect(element.find('input').val()).to.equal('1');
-        // });
+        it('should ignore step attribute if it cannot be parsed to number', function() {
+            var html = 
+                '<div><input type="numberinput" step="cats"></div>'; 
+            var element = $(html).numberInput();
+            clickIncrement(element)
+            expect(element.find('input').val()).to.equal('1');
+        });
 
         it('should set value with attribute', function() {
             var html = 
-                '<div><input type="numberinput" value="3"></div>'; 
+                '<div><button type="button">decrement</button><input type="text" value="3"><button type="button">increment</button></div>'; 
             var element = $(html).numberInput();
             expect(element.find('input').val()).to.equal('3');
         });
 
         it('should set min value with attribute', function() {
             var html = 
-                '<div><input type="numberinput" min="-3"></div>'; 
+                '<div><input type="text" min="-3"></div>'; 
             var element = $(html).numberInput();
             clickDecrement(element, 5);
             expect(element.find('input').val()).to.equal('-3');
@@ -242,7 +266,7 @@ describe('CUI.NumberInput', function() {
 
         it('should set max value with attribute', function() {
             var html = 
-                '<div><input type="numberinput" max="3"></div>'; 
+                '<div><input type="text" max="3"></div>'; 
             var element = $(html).numberInput();
             clickIncrement(element, 5);
             expect(element.find('input').val()).to.equal('3');
@@ -254,6 +278,7 @@ describe('CUI.NumberInput', function() {
             input.val('cheezburger');
             expect(input.val()).to.be.NaN;
         });
+
 
     });
 

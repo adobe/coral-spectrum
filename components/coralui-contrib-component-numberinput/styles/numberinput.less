@@ -5,8 +5,10 @@
 .numberinput {
 
   margin: 8*@px;
+  .clearfix();
 
   input {
+    float: left;
     margin: 0;
     border: 0;
     border-top: 1px solid @textfield-border-color;
@@ -18,6 +20,7 @@
   }
 
   button {
+    float: left;
     margin: 0;
     padding:0;
     border-color: @textfield-border-color;
@@ -66,7 +69,6 @@
 
     button, input {
       border-color: @textfield-error-border-color;
-      color: @textfield-error-font-color;
     }
 
     input:focus {

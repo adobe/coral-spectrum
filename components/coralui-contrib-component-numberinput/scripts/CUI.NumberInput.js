@@ -40,80 +40,9 @@
 
     construct: function(options) {
 
-      this.setStep(this.options.step || CUI.Datepicker.step);
-
-      this.$element.addClass('numberinput');
-
-      this.$input = this.$element.find('input').not("[type=hidden]");
-      
-      if (this.$input.attr('max')) {
-        this.setMax(this.$input.attr('max'));
-      }
-
-      if (this.$input.attr('min')) {
-        this.setMin(this.$input.attr('min'));
-      }
-
-      if (this.$input.attr('step')) {
-        this.setStep(this.$input.attr('step'));
-      }
-
-      if (this.$element.attr("error")) {
-        this.options.hasError = true;
-      }
-
-      this.$decrementElement = $("<button>").addClass("decrement").html("decrement");
-      this.$incrementElement = $("<button>").addClass("increment").html("increment");
-
-      if(!this.useNativeControls) {
-        this._switchInputTypeToText(this.$input);
-      }
-            
-      this.$input.before(this.$decrementElement);
-      this.$input.after(this.$incrementElement);
-
-      this.setValue(this.$input.val() || 0);
-
-      this.$input.on('change', function() {
-        this._checkMinMaxViolation();
-        this._adjustValueLimitedToRange();
-      }.bind(this));
-
-      this.on('beforeChange:step', function(event) {
-        this._optionBeforeChangeHandler(event);
-      }.bind(this));
-
-      this.on('beforeChange:min', function(event) {
-        this._optionBeforeChangeHandler(event);
-      }.bind(this));
-
-      this.on('beforeChange:max', function(event) {
-        this._optionBeforeChangeHandler(event);
-      }.bind(this));
-
-      this.on('change:disabled', function(event) {
-        this._toggleDisabled();
-      }.bind(this));
-
-      this.on('change:hasError', function(event) {
-        this._toggleError();
-      }.bind(this));
-
-      this.$incrementElement.on('click', function () {
-        this.increment();
-      }.bind(this));
-
-      this.$decrementElement.on('click', function () {
-        this.decrement();
-      }.bind(this));
-
-      if (this.$element.attr('disabled') || this.$element.attr('data-disabled') ) {
-        this._toggleDisabled();
-      }
-
-      if (this.$element.hasClass('error') || this.$element.attr('data-error') ) {
-        this.set('hasError', true);
-      }
+      this._fixMarkup();
+      this._setListeners();
+      this._setAttributes();
       
     },
     
@@ -210,6 +139,118 @@
     getStep: function() {
       return parseFloat(this.options.step);
     }, 
+
+    /** @ignore */
+    _fixMarkup: function() {
+      // get the input, fix it if it's number
+      this.$input = this.$element.find('input').not("[type=hidden]");
+      if (this.$input.attr('type') != 'text') {
+        this._switchInputTypeToText(this.$input);
+      }
+
+      var buttons = this.$element.find('button');
+
+      if (buttons && buttons.length == 2) {
+        this.$decrementElement = $(buttons[0]);
+        this.$incrementElement = $(buttons[1]);
+      } else {
+        // create the right amount of buttons 
+        // and remove any weird buttons
+        $.each(buttons, function(index) {
+          $(buttons[index]).detach();
+        });
+        this.$decrementElement = $("<button>");
+        this.$incrementElement = $("<button>");
+        this.$input.before(this.$decrementElement);
+        this.$input.after(this.$incrementElement);
+      }
+      // fix buttons just how we like them
+      this.$decrementElement.attr('type', 'button').addClass("decrement").html("decrement");
+      this.$incrementElement.attr('type', 'button').addClass("increment").html('increment');
+    }, 
+
+    /** @ignore */
+    _setListeners: function() {
+
+      this.$input.on('change', function() {
+        this._checkMinMaxViolation();
+        this._adjustValueLimitedToRange();
+      }.bind(this));
+
+      this.on('beforeChange:step', function(event) {
+        this._optionBeforeChangeHandler(event);
+      }.bind(this));
+
+      this.on('beforeChange:min', function(event) {
+        this._optionBeforeChangeHandler(event);
+      }.bind(this));
+
+      this.on('beforeChange:max', function(event) {
+        this._optionBeforeChangeHandler(event);
+      }.bind(this));
+
+      this.on('change:disabled', function(event) {
+        this._toggleDisabled();
+      }.bind(this));
+
+      this.on('change:hasError', function(event) {
+        this._toggleError();
+      }.bind(this));
+
+      this.$incrementElement.on('click', function () {
+        this.increment();
+      }.bind(this));
+
+      this.$decrementElement.on('click', function (event) {
+        this.decrement();
+      }.bind(this));
+
+      // adding fipo seems to break tests right now
+      // this.$incrementElement.fipo('tap', 'click', function (event) {
+      //   event.preventDefault();
+      //   this.increment();
+      // }.bind(this));
+
+      // this.$decrementElement.fipo('tap', 'click', function (event) {
+      //   event.preventDefault();
+      //   this.decrement();
+      // }.bind(this));
+
+    },
+
+    /** @ignore */
+    _setAttributes: function() {
+
+      this.$element.addClass('numberinput');
+      
+      if (this.$input.attr('max')) {
+        this.setMax(this.$input.attr('max'));
+      }
+
+      if (this.$input.attr('min')) {
+        this.setMin(this.$input.attr('min'));
+      }
+
+      if (this.$input.attr('step')) {
+        this.setStep(this.$input.attr('step'));
+      }
+
+      if (this.$element.attr("error")) {
+        this.options.hasError = true;
+      }
+
+      this.setStep(this.options.step || CUI.Datepicker.step);
+
+      this.setValue(this.$input.val() || 0);
+      
+      if (this.$element.attr('disabled') || this.$element.attr('data-disabled') ) {
+        this._toggleDisabled();
+      }
+
+      if (this.$element.hasClass('error') || this.$element.attr('data-error') ) {
+        this.set('hasError', true);
+      }
+    },
 
     /** @ignore */
     _adjustValueLimitedToRange: function() {

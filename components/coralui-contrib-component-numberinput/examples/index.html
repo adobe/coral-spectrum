@@ -1,130 +1,145 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Number Input</title>
+<head>
+  <meta charset="utf-8">
+  <title>Number Input</title>
 
-        <link rel="stylesheet" href="../../css/cui.css">
-        
-        <script src="../../js/libs/handlebars.js"></script>
-        <script src="../../js/libs/moment.js"></script>
-        <script src="../../js/libs/jquery.js"></script>
-        <!--script src="../../js/libs/jquery-fingerpointer.js"></script-->
-        <script src="../../js/libs/toe.js"></script>
-        <script src="../../js/libs/moment.js"></script>
+  <link rel="stylesheet" href="../../css/cui.css">
+
+  <script src="../../js/libs/handlebars.js"></script>
+  <script src="../../js/libs/moment.js"></script>
+  <script src="../../js/libs/jquery.js"></script>
+  <!--script src="../../js/libs/jquery-fingerpointer.js"></script-->
+  <script src="../../js/libs/toe.js"></script>
+  <script src="../../js/libs/moment.js"></script>
   
-        <script src="../../js/CUI.js"></script>
+  <script src="../../js/CUI.js"></script>
 
-        <script>
-            $(document).ready(function(){
-                var numberinput = new CUI.NumberInput({
-                    element:'#jsNumberInput', 
-                    step: 5,
-                    min: -25,
-                    max: '25'
-                });
+  <script>
+  $(document).ready(function(){
+    var numberinput = new CUI.NumberInput({
+      element:'#jsNumberInput', 
+      step: 5,
+      min: -25,
+      max: '25'
+    });
 
-                $('#stepValue').on('change', function (){
-                    numberinput.setStep(event.currentTarget.value);
-                });
+    $('#stepValue').on('change', function (){
+      numberinput.setStep(event.currentTarget.value);
+    });
 
-                $('#minValue').on('change', function (){
-                    numberinput.setMin(event.currentTarget.value);
-                });
+    $('#minValue').on('change', function (){
+      numberinput.setMin(event.currentTarget.value);
+    });
 
-                $('#maxValue').on('change', function (){
+    $('#maxValue').on('change', function (){
                     // you can of course use the CUI.Widget#set function as well
                     numberinput.set('max', event.currentTarget.value);
-                });
+                  });
 
-                $("input[name='r1']").on('change', function (){
-                    console.log("changed!", event.currentTarget.value);
-                    numberinput.set('hasError', event.currentTarget.value == 2);    
-                    numberinput.set('disabled', event.currentTarget.value == 3);    
-                });
-            });
-        </script>
+    $("input[name='r1']").on('change', function (){
+      console.log("changed!", event.currentTarget.value);
+      numberinput.set('hasError', event.currentTarget.value == 2);    
+      numberinput.set('disabled', event.currentTarget.value == 3);    
+    });
+  });
+  </script>
 
-        <style>
-            body {
-              padding-left: 30px;
-            }
+  <style>
+  body {
+    padding-left: 30px;
+  }
 
-            section {
-                height: 300px;
-            }
+  section {
+    height: 300px;
+  }
 
-            .col {
-              float: left;
-              margin-right: 12px;
-            }
+  .col {
+    float: left;
+    margin-right: 12px;
+  }
 
-            label {
-                margin-right: 1rem;
-            }
+  label {
+    margin-right: 1rem;
+  }
 
-            .option-input {
-              width: 3rem;
-            }
+  .option-input {
+    width: 3rem;
+  }
 
-            input {
-                width: 60px;
-            }
-        </style>
-    </head>
-    <body> 
-    <h1>Number Input Examples</h1>
-    <div class="col">
-        <section>
-            <h2>Basic</h2>
-            <div class="numberinput" data-init="numberinput">
-                <input type="number" name="number1">
-            </div>
-            <h2>Error</h2>
-            <div class="numberinput" data-init="numberinput" data-error="true">
-                <input type="number" name="number1">
-            </div>
-            <h2>Disabled</h2>
-            <div class="numberinput" data-init="numberinput" data-disabled="true">
-                <input type="number" name="number1">
-            </div>
-            <div data-theme="dark">
-                <h2>Dark</h2>
-                <div class="numberinput" data-init="numberinput">
-                 <input type="number" name="number1">
-                </div>
-            </div>
-            <div data-theme="dark">
-                <h2>Dark Error</h2>
-                <div class="numberinput" data-init='numberinput' data-error="true">
-                 <input type="number" name="number1">
-                </div>
-            </div>
-            <div data-theme="dark">
-                <h2>Dark Disabled</h2>
-                <div class="numberinput" data-init="numberinput" data-disabled='true'>
-                 <input type="number" name="number1">
-                </div>
-            </div>
-        </section>
-    </div>
+  input {
+    width: 60px;
+  }
+  </style>
+</head>
+<body> 
+  <h1>Number Input Examples</h1>
+  <div class="col">
+    <section>
+      <h2>Basic</h2>
+      <div class="numberinput" data-init="numberinput">
+        <button class='decrement'>decrement</button>
+        <input type="text" name="number1">
+        <button>increment</button>
+      </div>
+      <div class="numberinput" data-init="numberinput">
+        <!-- widget will fix missing buttons, change type to text, and pick up attributes -->
+        <input type="number" step="10" name="number-other" value='10'>
+      </div>
+      <h2>Error</h2>
+      <div class="numberinput" data-init="numberinput" data-error="true">
+        <button>Whatever</button> <!-- widget removes derp markup -->
+        <input type="text" name="number2">
+      </div>
+      <h2>Disabled</h2>
+      <div class="numberinput" data-init="numberinput" data-disabled="true">
+        <button type="button">Increment</button>
+        <input type="text" name="number3">
+        <button type="button">Increment</button>
+      </div>
+      <div data-theme="dark">
+        <h2>Dark</h2>
+        <div class="numberinput" data-init="numberinput">
+          <button type="button">Increment</button>
+          <input type="text" name="number4">
+          <button type="button">Increment</button>
+        </div>
+      </div>
+      <div data-theme="dark">
+        <h2>Dark Error</h2>
+        <div class="numberinput" data-init='numberinput' data-error="true">
+          <button type="button">Increment</button>
+          <input type="text" name="number5">
+          <button type="button">Increment</button>
+        </div>
+      </div>
+      <div data-theme="dark">
+        <h2>Dark Disabled</h2>
+        <div class="numberinput" data-init="numberinput" data-disabled='true'>
+          <button type="button">Increment</button>
+          <input type="text" name="number6">
+          <button type="button">Increment</button>
+        </div>
+      </div>
+    </section>
+  </div>
 
-    <div class="col">
-        <section>
-            <h2>JavaScript Initialized</h2>
-            <div id="jsNumberInput">
-                <input type="number" name="number1">
-            </div>
-            <div><label>Step:</label><input id="stepValue" class="option-input" type="text" value='5'></div>
-            <div><label>Min:</label><input id="minValue" class="option-input" type="text" value='-25'></div> 
-            <div><label>Max:</label><input id="maxValue" class="option-input" type="text" value='25'></div>
-            <div><label><input type="radio" name="r1" value="1" checked><span></span>normal</label></div>
-            <div><label><input type="radio" name="r1" value="2"><span></span>error</label></div>
-            <div><label><input type="radio" name="r1" value="3"><span></span>disabled</label></div>
+  <div class="col">
+    <section>
+      <h2>JavaScript Initialized</h2>
+      <div id="jsNumberInput">
+        <input type="text" name="number1">
+      </div>
+      <div><label>Step:</label><input id="stepValue" class="option-input" type="text" value='5'></div>
+      <div><label>Min:</label><input id="minValue" class="option-input" type="text" value='-25'></div> 
+      <div><label>Max:</label><input id="maxValue" class="option-input" type="text" value='25'></div>
+      <div><label><input type="radio" name="r1" value="1" checked><span></span>normal</label></div>
+      <div><label><input type="radio" name="r1" value="2"><span></span>error</label></div>
+      <div><label><input type="radio" name="r1" value="3"><span></span>disabled</label></div>
 
-        </section>
+    </section>
 
-    </div>
-    
-    </body>
+  </div>
+
+</body>
 </html>
