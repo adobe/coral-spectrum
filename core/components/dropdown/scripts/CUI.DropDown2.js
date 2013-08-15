@@ -25,7 +25,7 @@
         },
 
         applyOptions: function () {
-            if (this.options.nativewidget || (CUI.util.isTouch && this.options.nativewidgetonmobile)) {
+            if (this.options.nativewidget) {
                 this._setNativeWidget();
             } else {
                 this._setSelectList();

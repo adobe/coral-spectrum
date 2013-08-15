@@ -1460,6 +1460,15 @@
   &lt;/select&gt;
 &lt;/span&gt;
 
+&lt;!-- Native select --&gt;
+&lt;span class=&quot;dropdown2&quot; data-init=&quot;dropdown2&quot; data-nativewidget=&quot;true&quot;&gt;
+  &lt;input type=&quot;button&quot; class=&quot;button&quot; value=&quot;Select&quot;/&gt;
+  &lt;select&gt;
+    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
                         </pre>
                     </div>
                     <div>
@@ -1548,6 +1557,15 @@
                                     <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
                                       <input type="text" name="name1" placeholder="Search">
                                       <ul class="autocomplete-suggestions selectlist" data-type="dynamic" data-dataurl="examples/autocomplete/remotehtml.html">
+                                      </ul>
+                                    </span>
+                                </div>
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Typeahead</div>
+                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showtypeahead="true">
+                                      <input type="text" name="name1" placeholder="Search">
+                                      <ul class="autocomplete-typeahead selectlist" data-type="dynamic" data-dataurl="examples/autocomplete/remotehtml.html">
                                       </ul>
                                     </span>
                                 </div>
@@ -1642,6 +1660,16 @@
   &lt;ul class=&quot;autocomplete-suggestions selectlist&quot; data-type=&quot;dynamic&quot; data-dataurl=&quot;examples/autocomplete/remotehtml.html&quot;&gt;
   &lt;/ul&gt;
 &lt;/span&gt;
+
+&lt;!-- Remote Typeahead --&gt;
+&lt;div class=&quot;filterSample&quot;&gt;
+    &lt;div class=&quot;sampleTitle left&quot;&gt;Typeahead&lt;/div&gt;
+    &lt;span class=&quot;autocomplete icon-search&quot; data-init=&quot;autocomplete&quot; data-showtypeahead=&quot;true&quot;&gt;
+      &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot;&gt;
+      &lt;ul class=&quot;autocomplete-typeahead selectlist&quot; data-type=&quot;dynamic&quot; data-dataurl=&quot;examples/autocomplete/remotehtml.html&quot;&gt;
+      &lt;/ul&gt;
+    &lt;/span&gt;
+&lt;/div&gt;
 
 &lt;!-- Disabled state --&gt;
 &lt;span class=&quot;autocomplete icon-search disabled&quot; data-init=&quot;autocomplete&quot; data-showsuggestions=&quot;true&quot;&gt;

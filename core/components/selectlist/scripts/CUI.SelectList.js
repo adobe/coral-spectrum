@@ -79,6 +79,10 @@
          * @param  {String} [options.values.display] displayed text of an entry
          * @param  {String} [options.values.value] value of an entry
          * @param  {String} [options.values.addClass] additional css classes to be shown in the list
+         * @param  {String} [options.dataurl] URL to receive values dynamically
+         * @param  {String} [options.dataurlformat=html] format of the dynamic data load
+         * @param  {Object} [options.dataadditional] additonal data to be sent
+         * @param  {Function} [options.loadData] function to be called if more data is needed. This must not be used with a set dataurl.
          *
          * @fires SelectList#selected
          * 
@@ -99,13 +103,15 @@
         defaults: {
             type: 'static', // static or dynamic
             relatedElement: null,
-            dataurl: null,
-            dataurlformat: 'html',
-            datapagesize: 10,
-            loadData: $.noop, // function to receive more data
-            position: 'center bottom-1',  // -1 to override the border
             autofocus: true, // autofocus on show
             autohide: true, // automatically hides the box if it loses focus
+            dataurl: null,
+            dataurlformat: 'html',
+            datapaging: true,
+            datapagesize: 10,
+            dataadditional: null,
+            loadData: $.noop, // function to receive more data
+            position: 'center bottom-1',  // -1 to override the border
             values: null // [{display: "Banana", value: "banId"}]
         },
 
@@ -314,11 +320,8 @@
                 .hide()
                 .attr('aria-hidden', true);
 
-            if (this.options.type === 'dynamic') {
-                this.clearItems();
-                this._pagestart = 0;
-                this._loadingComplete = false;
-            }
+            
+            this.reset();
         },
 
         /**
@@ -415,6 +418,10 @@
                     'class': 'spinner'
                 }));
 
+            if (this._loadingIsActive) {
+                return;
+            }
+
             // activate fetching
             this._loadingIsActive = true;
 
@@ -427,10 +434,10 @@
                     url: this.options.dataurl,
                     context: this,
                     dataType: this.options.dataurlformat,
-                    data: {
+                    data: $.extend({
                         start: this._pagestart,
                         end: end
-                    }
+                    }, this.options.dataadditional || {})
                 });
 
             } else { // expect custom function to handle
@@ -451,8 +458,6 @@
                     self._makeAccessibleListOption(elem);
                     self.$element.append(elem);
                 } else if (self.options.dataurlformat === 'json') {
-                    // TODO check if pagesize more then what came back
-
                     self.addItems(data);
                 }
 
@@ -467,6 +472,27 @@
             });
 
             return promise;
+        },
+
+        reset: function () {
+            if (this.options.type === 'dynamic') {
+                this.clearItems();
+                this._pagestart = 0;
+                this._loadingComplete = false;
+            }
+        },
+
+        /**
+         * triggers a loading operation 
+         * this requires to have the selectlist in a dynamic configuration
+         * @param  {Boolean} reset resets pagination
+         */
+        triggerLoadData: function (reset) {
+            if (reset) {
+                this.reset();
+            }
+
+            this._handleLoadData();
         }
     });
 
