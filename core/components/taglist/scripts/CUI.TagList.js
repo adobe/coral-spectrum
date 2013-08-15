@@ -37,8 +37,8 @@
          * @param  {String} options.fieldname fieldname for the input fields
          * @param  {Array} options.values to set the taglist
          *
-         * @fires TagList#add
-         * @fires TagList#remove
+         * @fires TagList#itemadded
+         * @fires TagList#itemremoved
          * 
          */
         construct: function (options) {
@@ -151,7 +151,7 @@
             if (elem.length > 0) {
                 elem.parent().remove();
 
-                this.$element.trigger($.Event('remove'), {
+                this.$element.trigger($.Event('itemremoved'), {
                     value: item
                 });
             }
@@ -198,7 +198,7 @@
 
             this.$element.append(elem);
 
-            this.$element.trigger($.Event('add'), {
+            this.$element.trigger($.Event('itemadded'), {
                 value: val
             });
         },
