@@ -60,21 +60,30 @@
             tag: 'li'
         },
 
+        /**
+         * existing values in the tag list
+         * @private
+         * @type {Array}
+         */
+        _existingValues: null,
+
         applyOptions: function () {
             var self = this;
 
+            this._existingValues = [];
+
             this.options.values = this.options.values || [];
 
-            // read values from markup
-            if (this.options.values.length === 0) {
+            // set values if given
+            if (this.options.values.length > 0) {
+                this._setValues();
+            } else { // read from markup
                 this.$element.find('input').each(function (i, e) {
                     var elem = $(e);
-
+ 
                     // add to options.values
-                    self.options.values.push(elem.attr('value'));
+                    self._existingValues.push(elem.attr('value'));
                 });
-            } else {
-                this._setValues();
             }
         },
 
@@ -103,7 +112,7 @@
                 'role': 'list'
             });
 
-            this.$element.find(this.options.tag).attr({
+            this.$element.children(this.options.tag).attr({
                 'role': 'listitem'
             });
         },
@@ -141,52 +150,65 @@
         /**
          * adds a new item to the DOM
          * @private
-         * @param  {String} item entry to be displayed
+         * @param  {String|Object} item entry to be displayed
          */
         _appendItem: function (item) {
-            var elem = $('<'+ this.options.tag +'/>', {
-                    'role': 'listitem',
-                    'text': item
-                });
+            var display, val, elem;
 
-                $('<button/>', {
-                    'class': 'icon-close'
-                }).prependTo(elem);
+            // see if string or object
+            if ($.type(item) === "string") {
+                display = val = item;
+            } else {
+                display = item.display;
+                val = item.value;
+            }
 
-                $('<input/>', {
-                    'type': 'hidden',
-                    'value': item
-                }).appendTo(elem);
+            if (($.inArray(val, this._existingValues.values) > - 1) || val.length === 0) {
+                return;
+            }
+
+            // add to internal storage
+            this._existingValues.push(val);
+
+            // add DOM element
+            elem = $('<'+ this.options.tag +'/>', {
+                'role': 'listitem',
+                'text': display
+            });
+
+            $('<button/>', {
+                'class': 'icon-close'
+            }).prependTo(elem);
+
+            $('<input/>', {
+                'type': 'hidden',
+                'value': val
+            }).appendTo(elem);
 
             this.$element.append(elem);
         },
 
         /**
-         * @param {String} item
+         * @param {String} item value to be deleted
          */
         removeItem: function (item) {
-            var idx = this.options.values.indexOf(item);
+            var idx = this._existingValues.indexOf(item);
 
             this._removeItem(item);
-            this.options.values.splice(idx, 1);
+            this._existingValues.splice(idx, 1);
         },
 
         /**
-         * @param  {String|Array} item
+         * @param  {String|Object|Array} item
+         * @param  {String} item.display
+         * @param  {String} item.value
          */
         addItem: function (item) {
             var self = this,
                 items = $.isArray(item) ? item : [item];
 
             $.each(items, function (i, item) {
-                if (item.length === 0) {
-                    return true;
-                }
-
-                if ($.inArray(item, self.options.values) === - 1) {
-                    self._appendItem(item);
-                    self.options.values.push(item);
-                }
+                self._appendItem(item);
             });
         }
     });
