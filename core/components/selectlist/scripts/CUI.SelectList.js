@@ -81,6 +81,7 @@
          * @param  {String} [options.values.addClass] additional css classes to be shown in the list
          * @param  {String} [options.dataurl] URL to receive values dynamically
          * @param  {String} [options.dataurlformat=html] format of the dynamic data load
+         * @param  {Object} [options.dataadditional] additonal data to be sent
          * @param  {Function} [options.loadData] function to be called if more data is needed. This must not be used with a set dataurl.
          *
          * @fires SelectList#selected
@@ -102,13 +103,14 @@
         defaults: {
             type: 'static', // static or dynamic
             relatedElement: null,
+            autofocus: true, // autofocus on show
+            autohide: true, // automatically hides the box if it loses focus
             dataurl: null,
             dataurlformat: 'html',
             datapagesize: 10,
+            dataadditional: null,
             loadData: $.noop, // function to receive more data
             position: 'center bottom-1',  // -1 to override the border
-            autofocus: true, // autofocus on show
-            autohide: true, // automatically hides the box if it loses focus
             values: null // [{display: "Banana", value: "banId"}]
         },
 
@@ -430,10 +432,10 @@
                     url: this.options.dataurl,
                     context: this,
                     dataType: this.options.dataurlformat,
-                    data: {
+                    data: $.extend({
                         start: this._pagestart,
                         end: end
-                    }
+                    }, this.options.dataadditional || {})
                 });
 
             } else { // expect custom function to handle
@@ -468,6 +470,10 @@
             });
 
             return promise;
+        },
+
+        triggerLoadData: function () {
+            this._handleLoadData();    
         }
     });
 
