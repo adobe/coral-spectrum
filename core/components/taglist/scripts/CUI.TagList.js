@@ -173,7 +173,7 @@
                 val = item.value;
             }
 
-            if (($.inArray(val, this._existingValues.values) > - 1) || val.length === 0) {
+            if (($.inArray(val, this._existingValues) > - 1) || val.length === 0) {
                 return;
             }
 
