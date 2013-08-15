@@ -454,8 +454,6 @@
                     self._makeAccessibleListOption(elem);
                     self.$element.append(elem);
                 } else if (self.options.dataurlformat === 'json') {
-                    // TODO check if pagesize more then what came back
-
                     self.addItems(data);
                 }
 
