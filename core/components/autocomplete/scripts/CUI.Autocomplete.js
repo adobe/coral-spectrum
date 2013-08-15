@@ -5,7 +5,7 @@
         extend: CUI.Widget,
 
         defaults: {
-            showtypeahead: true,
+            showtypeahead: false,
             showsuggestions: false,
             showclearbutton: false,
             showtags: false,

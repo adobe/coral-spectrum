@@ -107,6 +107,7 @@
             autohide: true, // automatically hides the box if it loses focus
             dataurl: null,
             dataurlformat: 'html',
+            datapaging: true,
             datapagesize: 10,
             dataadditional: null,
             loadData: $.noop, // function to receive more data
@@ -319,11 +320,8 @@
                 .hide()
                 .attr('aria-hidden', true);
 
-            if (this.options.type === 'dynamic') {
-                this.clearItems();
-                this._pagestart = 0;
-                this._loadingComplete = false;
-            }
+            
+            this.reset();
         },
 
         /**
@@ -476,6 +474,14 @@
             return promise;
         },
 
+        reset: function () {
+            if (this.options.type === 'dynamic') {
+                this.clearItems();
+                this._pagestart = 0;
+                this._loadingComplete = false;
+            }
+        },
+
         /**
          * triggers a loading operation 
          * this requires to have the selectlist in a dynamic configuration
@@ -483,8 +489,7 @@
          */
         triggerLoadData: function (reset) {
             if (reset) {
-                this._pagestart = 0;
-                this._loadingComplete = false;
+                this.reset();
             }
 
             this._handleLoadData();
