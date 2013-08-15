@@ -475,7 +475,7 @@
         /**
          * triggers a loading operation 
          * this requires to have the selectlist in a dynamic configuration
-         * @param  {[type]} reset resets pagination
+         * @param  {Boolean} reset resets pagination
          */
         triggerLoadData: function (reset) {
             if (reset) {
