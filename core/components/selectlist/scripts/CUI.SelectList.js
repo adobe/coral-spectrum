@@ -79,6 +79,9 @@
          * @param  {String} [options.values.display] displayed text of an entry
          * @param  {String} [options.values.value] value of an entry
          * @param  {String} [options.values.addClass] additional css classes to be shown in the list
+         * @param  {String} [options.dataurl] URL to receive values dynamically
+         * @param  {String} [options.dataurlformat=html] format of the dynamic data load
+         * @param  {Function} [options.loadData] function to be called if more data is needed. This must not be used with a set dataurl.
          *
          * @fires SelectList#selected
          * 
