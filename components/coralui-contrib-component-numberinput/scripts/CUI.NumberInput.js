@@ -9,21 +9,33 @@
 
       @example
       <caption>Instantiate with Class</caption>
-      &lt;div id=&quot;myNumberInput&quot;&lt;input type=&#039;number&#039;/&gt;&lt;/div&gt; 
+      &lt;div id=&quot;jsNumberInput&quot;&gt;
+        &lt;button type=&quot;button&quot;&gt;decrement&lt;/button&gt;
+        &lt;input type=&#039;text&#039;&gt;
+        &lt;button type=&quot;button&quot;&gt;increment&lt;/button&gt;
+      &lt;/div&gt;
 
-      var rail = new CUI.NumberInput({
-        element: '#myNumberInput'
+      var numberInput = new CUI.NumberInput({
+        element: '#jsNumberInput'
       });
       
       @example
       <caption>Instantiate with jQuery</caption>
-      &lt;div id=&quot;myNumberInput&quot;&lt;input type=&#039;number&#039;/&gt;&lt;/div&gt; 
-      $('#myRail').numberInput();
+      &lt;div id=&quot;jsNumberInput&quot;&gt;
+        &lt;button type=&quot;button&quot;&gt;decrement&lt;/button&gt;
+        &lt;input type=&#039;text&#039;&gt;
+        &lt;button type=&quot;button&quot;&gt;increment&lt;/button&gt;
+      &lt;/div&gt;
+
+      $('#jsNumberInput').numberInput();
       
       @example
       <caption>Markup</caption>
+      &lt;!-- Standard Number Input --&gt;                            
       &lt;div class=&quot;numberinput&quot; data-init=&quot;numberinput&quot;&gt;
-        &lt;input type=&#039;number&#039;/&gt;
+          &lt;button type=&quot;button&quot; class=&#039;decrement&#039;&gt;decrement&lt;/button&gt;
+          &lt;input type=&#039;text&#039;&gt;
+          &lt;button type=&quot;button&quot; class=&#039;increment&#039;&gt;increment&lt;/button&gt;
       &lt;/div&gt;
 
       @desc Creates a Number Input object
@@ -34,7 +46,6 @@
       @param {numberic} [options.step=1] Amount increment/decrement for input.
       @param {boolean} [options.hasError=false] Set the error state of the widget.
       @param {boolean} [options.disabled=false] Set the disabled state of the widget.
-      @param {Boolean} [options.useNativeControls=false] (Optional) Show native input controls where possible.
       
     */
 
@@ -51,8 +62,7 @@
       min: null,
       step: 1,
       hasError: false,
-      disabled: false,
-      useNativeControls: false
+      disabled: false
     },
 
     /**
