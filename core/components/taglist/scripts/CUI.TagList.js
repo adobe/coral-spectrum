@@ -10,7 +10,7 @@
          *
          * <h2 class="line">Examples</h2>
          *  
-         * <ol class="taglist">
+         * <ol class="taglist" data-fieldname="myrequestparam">
          *     <li>
          *         <button class="icon-close"></button>
          *         Carrot
@@ -34,6 +34,11 @@
          * 
          * @param  {Object} options Component options
          * @param  {Mixed} options.element jQuery selector or DOM element to use for panel
+         * @param  {String} options.fieldname fieldname for the input fields
+         * @param  {Array} options.values to set the taglist
+         *
+         * @fires TagList#add
+         * @fires TagList#remove
          * 
          */
         construct: function (options) {
@@ -137,6 +142,7 @@
 
         /**
          * remove an item from the DOM
+         * @private
          * @param  {String} item
          */
         _removeItem: function (item) {
@@ -144,6 +150,10 @@
 
             if (elem.length > 0) {
                 elem.parent().remove();
+
+                this.$element.trigger($.Event('remove'), {
+                    value: item
+                });
             }
         },
 
@@ -182,10 +192,15 @@
 
             $('<input/>', {
                 'type': 'hidden',
-                'value': val
+                'value': val,
+                'name': this.options.fieldname
             }).appendTo(elem);
 
             this.$element.append(elem);
+
+            this.$element.trigger($.Event('add'), {
+                value: val
+            });
         },
 
         /**
