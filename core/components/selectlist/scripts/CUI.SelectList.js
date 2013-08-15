@@ -420,6 +420,10 @@
                     'class': 'spinner'
                 }));
 
+            if (this._loadingIsActive) {
+                return;
+            }
+
             // activate fetching
             this._loadingIsActive = true;
 
