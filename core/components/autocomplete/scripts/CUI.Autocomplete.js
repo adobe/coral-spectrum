@@ -5,12 +5,13 @@
         extend: CUI.Widget,
 
         defaults: {
-            showtypeahead: false,
+            showtypeahead: true,
             showsuggestions: false,
             showclearbutton: false,
             showtags: false,
             suggestionConfig: null,
-            tagConfig: null
+            tagConfig: null,
+            typeaheadConfig: null
         },
 
         construct: function () {
@@ -21,6 +22,7 @@
             this._suggestions = this.$element.find('.autocomplete-suggestions');
             this._suggestionsBtn = this.$element.find('.autocomplete-suggestion-toggle');
             this._tags = this.$element.find('.autocomplete-tags');
+            this._typeahead = this.$element.find('.autocomplete-typeahead');
 
             // create additional objects
             this._clearBtn = $('<button/>', {
@@ -40,6 +42,7 @@
             this._setClearButton();
             this._setSuggestions();
             this._setTags();
+            this._setTypeahead();
         },
 
         _setClearButton: function () {
@@ -69,7 +72,7 @@
                     relatedElement: this._input
                 }, this.options.suggestionConfig || {}));
 
-                this._selectList = this._suggestions.data('selectList');
+                this._selectListSuggestion = this._suggestions.data('selectList');
 
                 // if the button to trigger the suggestion box is not there, 
                 // then we add it
@@ -125,6 +128,50 @@
             }
         },
 
+        _setTypeahead: function () {
+            var self = this,
+                timeout;
+
+            function timeoutLoadFunc() {
+                self._selectListTypeahead.set('dataadditional', {
+                    value: self._input.val()
+                });
+                self._selectListTypeahead.show();
+                self._selectListTypeahead.triggerLoadData(true);
+            }
+
+            if (this.options.showtypeahead) {
+
+                // if the element is not there, create it
+                if (this._typeahead.length === 0) {
+                    this._typeahead = $('<ul/>', {
+                        'class': 'selectlist autocomplete-typeahead'
+                    }).appendTo(this.$element);
+                }
+
+                this._typeahead.selectList($.extend({
+                    relatedElement: this._input,
+                    autofocus: false,
+                    autohide: false
+                }, this.options.typeaheadConfig || {}));
+
+                this._selectListTypeahead = this._typeahead.data('selectList');
+
+                // bind keyboard input listening
+                this._input.on('keyup.autocomplete-typeahead', function (event) {
+                    // debounce
+                    if (timeout) {
+                        clearTimeout(timeout);
+                    }
+
+                    timeout = setTimeout(timeoutLoadFunc, 500);
+                });
+
+            } else {
+                this._input.off('keyup.autocomplete-typeahead');
+            }
+        },
+
         _addTag: function (event) {
             if (event.which !== 13) {
                 return;
@@ -145,7 +192,7 @@
         },
 
         _toggleSuggestions: function () {
-            this._selectList.toggleVisibility();
+            this._selectListSuggestion.toggleVisibility();
         },
 
         _refreshClear: function () {
