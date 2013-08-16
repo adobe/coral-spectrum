@@ -79,7 +79,8 @@
         },
 
         _parseMarkup: function () {
-            var optgroup = this._select.children('optgroup');
+            var self = this,
+                optgroup = this._select.children('optgroup');
 
             function parseGroup(parent, dest) {
                 parent.children('option').each(function (i, e) {
@@ -104,7 +105,7 @@
 
                     parseGroup(group, $('<ul/>').appendTo(entry));
 
-                    this._selectList.append(entry);
+                    self._selectList.append(entry);
                 });
             } else { // flat select list
                 parseGroup(this._select, this._selectList);
