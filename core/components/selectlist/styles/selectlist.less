@@ -4,6 +4,7 @@
 @selectlist-entry-active-color: rgb(255, 255, 255);
 @selectlist-entry-active-background-color: rgb(50, 135, 210);
 @selectlist-group-background-color: rgb(220, 220, 220);
+@selectlist-group-text-color: rgb(75, 75, 75);
 
 .selectlist {
     display: none;
@@ -28,21 +29,43 @@
 
         &[role=option] {
             cursor: pointer;
+
+            &:hover,
+            &:focus {
+                outline: none; // disable default browser hover
+                color: @selectlist-entry-active-color;
+                background: @selectlist-entry-active-background-color;
+            }
         }
 
         &:first-child {
             border-top: none;
         }
-    
-        &:hover,
-        &:focus {
-            outline: none; // disable default browser hover
-            color: @selectlist-entry-active-color;
-            background: @selectlist-entry-active-background-color;
+    }
+
+    li.optgroup {
+        padding: 0;
+
+        > span {
+            display: block;
+            color: @selectlist-group-text-color;
+            font-size: 12*@px;
+            font-weight: bold;
+            background: @selectlist-group-background-color;
+            padding: 0 10*@px;
+            height: 18*@px;
+            line-height: 18*@px;
+            text-transform: uppercase;
+            border-top: 1*@px solid @selectlist-box-border-color;
+            border-bottom: 1*@px solid @selectlist-box-border-color;
+        }
+
+        > ul {
+            padding: 0;
         }
     }
 
-    >.selectlist-spinner {
+    >.selectlist-wait {
         padding: 11*@px 10*@px;
         text-align: center;
     }
