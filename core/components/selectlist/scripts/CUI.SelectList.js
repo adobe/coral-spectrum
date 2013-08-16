@@ -356,7 +356,6 @@
                 val = cur.data('value'),
                 display = cur.text();
 
-            this.hide();
             cur.trigger($.Event('selected', {
                 selectedValue: val,
                 displayedValue: display

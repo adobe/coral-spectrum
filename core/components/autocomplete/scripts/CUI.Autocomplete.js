@@ -182,6 +182,8 @@
         },
 
         _handleSuggestionSelected: function (event) {
+            this._selectListSuggestion.hide();
+            
             if (this.options.showtags) {
                 this._tagList.addItem(event.displayedValue);
             } else {
