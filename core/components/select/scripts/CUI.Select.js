@@ -79,31 +79,11 @@
         },
 
         /**
-         * parses values from a select lsit
-         * @private
-         * @return {Array} 
-         */
-        _parseValues: function () {
-            var values = [];
-
-            // loop over all elements and add to array
-            this._select.children('option').each(function (i, e) {
-                var opt = $(e);
-
-                values.push({
-                    display: opt.text(),
-                    value: opt.val()
-                });
-            });
-
-            return values;
-        },
-
-        /**
          * [_setSelectList description]
          */
         _setSelectList: function () {
-            var self = this;
+            var self = this,
+                type = 'static';
 
             // if the element is not there, create it
             if (this._selectList.length === 0) {
@@ -112,19 +92,28 @@
                 }).appendTo(this.$element);
             }
 
+            // read values from markup
+            if (this._select.length > 0) {
+                // flat select list
+                this._select.children('option').each(function (i, e) {
+                    var opt = $(e);
+
+                    $('<li/>', {
+                        'data-value': opt.val(),
+                        'text': opt.text()
+                    }).appendTo(self._selectList);
+                });
+
+            } else { // if no <select> wa found then a dynamic list is expected
+                type = 'dynamic';
+            }
+
             this._selectList.selectList($.extend({
-                relatedElement: this._button
+                relatedElement: this._button,
+                type: type
             }, this.options.selectlistConfig || {}));
 
             this._selectListWidget = this._selectList.data('selectList');
-
-            // if a <select> is given we are handling a static list
-            // otherwise it is dynamic
-            if (this._select.length > 0) {
-                this._selectListWidget.set('values', this._parseValues());
-            } else {
-                this._selectListWidget.set('type', 'dynamic');
-            }
 
             // handler to open usggestion box
             this._button.fipo('tap', 'click', function (event) {
