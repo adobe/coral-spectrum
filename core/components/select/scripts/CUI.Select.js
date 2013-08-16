@@ -182,7 +182,7 @@
                 });
             } else {
                 // set the button label
-                this._button.val(event.displayedValue);
+                this._button.text(event.displayedValue);
                 // in case it is dynamic a value input should be existing
                 this._valueInput.val(event.selectedValue);
             }

@@ -29,7 +29,12 @@
         color: @select-font-color;
         .box-sizing(border-box);
         .gradient(@select-background-gradient-start, @select-background-gradient-end);
-        border: 1*@px solid @select-border-color;
+
+        &, 
+        &:hover,
+        &:active {
+            border: 1*@px solid @select-border-color;
+        }
 
         text-shadow: none;
         text-align: left;
@@ -39,6 +44,7 @@
         &[class*=" icon-"] {
 
             &:before {
+                color: inherit;
                 margin-right: 10*@px;
             }
         }
