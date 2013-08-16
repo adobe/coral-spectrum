@@ -1,6 +1,6 @@
 (function ($, window, undefined) {
-    CUI.DropDown2 = new Class(/** @lends CUI.DropDown2# */{
-        toString: 'DropDown2',
+    CUI.Select = new Class(/** @lends CUI.Select# */{
+        toString: 'Select',
 
         extend: CUI.Widget,
 
@@ -179,12 +179,12 @@
         }
     });
 
-    CUI.util.plugClass(CUI.DropDown2);
+    CUI.util.plugClass(CUI.Select);
 
     // Data API
     if (CUI.options.dataAPI) {
         $(document).on('cui-contentloaded.data-api', function (e) {
-            $('[data-init~=dropdown2]', e.target).dropDown2();
+            $('[data-init~=Select]', e.target).Select();
         });
     }
 
