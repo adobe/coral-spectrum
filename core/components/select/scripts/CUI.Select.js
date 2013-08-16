@@ -170,6 +170,8 @@
         },
 
         _handleSelected: function (event) {
+            this._selectListWidget.hide();
+
             // set select value
             this._select.val(event.selectedValue);
 
