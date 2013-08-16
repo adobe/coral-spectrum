@@ -237,6 +237,7 @@
                     case 32: // space
                         // choose element
                         elem.trigger('click');
+                        event.preventDefault();
                         keymatch = false;
                         break;
                     case 27: //esc
