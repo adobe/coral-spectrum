@@ -215,12 +215,12 @@
             this._makeAccessibleListOption(this.$element.children());
 
             // setting tabindex
-            this.$element.on('focusin focusout', 'li[role=option]', function (event) {
+            this.$element.on('focusin focusout', 'li[role="option"]', function (event) {
                 $(event.currentTarget).attr('tabindex', event.type === 'focusin' ? -1 : 0);
             });
 
             // keyboard handling
-            this.$element.on('keydown', 'li', function (event) {
+            this.$element.on('keydown', 'li[role="option"]', function (event) {
                 // enables keyboard support
 
                 var elem = $(event.currentTarget),
@@ -317,13 +317,13 @@
             });
 
             if (this.options.autofocus) {
-                this.$element.find('li[role=option]:first').trigger('focus');
+                this.$element.find('li[role="option"]:first').trigger('focus');
             }
 
             // if dynamic start loading
             if (this.options.type === 'dynamic') {
                 this._handleLoadData().done(function () {
-                    self.$element.find('li[role=option]:first').trigger('focus');
+                    self.$element.find('li[role="option"]:first').trigger('focus');
                     this._setAutohide();
                 });
             } else { // otherwise set autohide immediately
