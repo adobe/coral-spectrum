@@ -184,7 +184,7 @@
     // Data API
     if (CUI.options.dataAPI) {
         $(document).on('cui-contentloaded.data-api', function (e) {
-            $('[data-init~=Select]', e.target).Select();
+            $('[data-init~=select]', e.target).Select();
         });
     }
 
