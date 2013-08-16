@@ -8,6 +8,7 @@
             type: 'static',
             nativewidget: false,
             nativewidgetonmobile: true,
+            multiple: false,
             selectlistConfig: null
         },
 
@@ -17,7 +18,8 @@
             // find elements
             this._button = this.$element.children('input[type=button]');
             this._select = this.$element.children('select');
-            this._selectList = this.$element.children('selectlist');
+            this._selectList = this.$element.children('.selectlist');
+            this._tagList = this.$element.children('.taglist');
             this._valueInput = this.$element.children('input[type=hidden]');
 
             // apply
@@ -25,6 +27,15 @@
         },
 
         applyOptions: function () {
+            // there is a select given so read the "native" config options
+            if (this._select.length > 0) {
+                // if multiple set multiple
+                if (this._select.prop('multiple')) {
+                    this.options.multiple = true;
+                }
+            }
+            
+
             if (this.options.nativewidget) {
                 this._setNativeWidget();
             } else {
@@ -55,9 +66,13 @@
                     of: this._button
                 });
 
-                this._select.on('change.dropdown', function (event) {
-                    self._button.val(self._select.children('option:selected').text());
-                });
+                // if it is in single selection mode, 
+                // then the btn receives the label of the selected item
+                if (!this.options.multiple) {
+                    this._select.on('change.dropdown', function (event) {
+                        self._button.val(self._select.children('option:selected').text());
+                    });
+                }
             } else {
                 this._select.off('change.dropdown');
             }
@@ -84,6 +99,9 @@
             return values;
         },
 
+        /**
+         * [_setSelectList description]
+         */
         _setSelectList: function () {
             var self = this;
 
@@ -114,6 +132,19 @@
                 self._toggleList();
             }).finger('click', false);
 
+            if (this.options.multiple) {
+                // if the element is not there, create it
+                if (this._tagList.length === 0) {
+                    this._tagList = $('<ol/>', {
+                        'class': 'taglist'
+                    }).appendTo(this.$element);
+                }
+
+                this._tagList.tagList(this.options.tagConfig || {});
+
+                this._tagListWidget = this._tagList.data('tagList');
+            }
+
 
             this._selectList
                 // receive the value from the list
@@ -125,9 +156,20 @@
         },
 
         _handleSelected: function (event) {
-            this._button.val(event.displayedValue);
+            // set select value
             this._select.val(event.selectedValue);
-            this._valueInput.val(event.selectedValue);
+
+            if (this.options.multiple) {
+                this._tagListWidget.addItem({
+                    value: event.selectedValue,
+                    display: event.displayedValue
+                });
+            } else {
+                // set the button label
+                this._button.val(event.displayedValue);
+                // in case it is dynamic a value input should be existing
+                this._valueInput.val(event.selectedValue);
+            }
 
             this._button.trigger('focus');
         },
