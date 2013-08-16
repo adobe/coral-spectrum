@@ -356,7 +356,7 @@
                 display = cur.text();
 
             this.hide();
-            this.$element.trigger($.Event('selected', {
+            cur.trigger($.Event('selected', {
                 selectedValue: val,
                 displayedValue: display
             }));

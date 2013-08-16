@@ -30,6 +30,22 @@
         &[role=option] {
             cursor: pointer;
 
+            > span {
+                // icon as a prefix
+                &[class^="icon-"], 
+                &[class*=" icon-"] {
+                    overflow: visible;
+                    white-space: inherit;
+                    color: inherit;
+                    width: auto;
+                    height: auto;
+
+                    &:before {
+                        margin-right: 10*@px;
+                    }
+                }
+            }
+
             &:hover,
             &:focus {
                 outline: none; // disable default browser hover
