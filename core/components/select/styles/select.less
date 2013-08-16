@@ -40,29 +40,29 @@
         height: @input-height;
         padding: 7*@px 10*@px;
     
-        color: @dropdown-font-color;
+        color: @select-font-color;
         .box-sizing(border-box);
-        .gradient(@dropdown-background-gradient-start, @dropdown-background-gradient-end);
-        border: 1*@px solid @dropdown-border-color;
+        .gradient(@select-background-gradient-start, @select-background-gradient-end);
+        border: 1*@px solid @select-border-color;
 
         text-shadow: none;
         text-align: left;
         font-weight: normal;
 
         &:hover {
-            background: @dropdown-hover-background-color;
+            background: @select-hover-background-color;
         }
 
         &:active,
         &.active {
-            background: @dropdown-active-background-color;
-            .box-shadow(inset 0 0 4*@px @dropdown-active-glow-color);
+            background: @select-active-background-color;
+            .box-shadow(inset 0 0 4*@px @select-active-glow-color);
         }
 
         &[disabled] {
-            color: @dropdown-disabled-text-color;
-            background: @dropdown-disabled-background-color;
-            border-color: @dropdown-disabled-border-color;
+            color: @select-disabled-text-color;
+            background: @select-disabled-background-color;
+            border-color: @select-disabled-border-color;
         }
 
         &.error {
