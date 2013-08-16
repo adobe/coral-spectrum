@@ -16,27 +16,28 @@
          *     <li data-value="expr3"><span>Expression 3</span></li>
          * </ul>
          *
+         * <ul class="selectlist" data-init="selectlist" data-multiple="true">
+         *     <li class="optgroup">
+         *         <span>Group 1</span>
+         *         <ul>
+         *             <li><span data-value="expr1">Expression 1</span></li>
+         *             <li><span data-value="expr2">Expression 2</span></li>
+         *             <li><span data-value="expr3">Expression 3</span></li>
+         *         </ul>
+         *     </li>
+         *     <li class="optgroup">
+         *         <span>Group 2</span>
+         *         <ul>
+         *             <li><span data-value="expr4">Expression 4</span></li>
+         *             <li><span data-value="expr5">Expression 5</span></li>
+         *         </ul>
+         *     </li>
+         * </ul>
+         *
          * @example
          * <caption>Instantiate with Class</caption>
          * var selectlist = new CUI.SelectList({
          *     element: '#mySelectList'
-         * });
-         *
-         * //Add values through configuration
-         * var selectlist = new CUI.SelectList({
-         *     element: '#mySelectList',
-         *     values: [
-         *         {
-         *             display: 'My Entry',
-         *             value: 'val1',
-         *             addClass: 'icon-usa'
-         *         },
-         *         {
-         *             display: 'Another Entry',
-         *             value: 'val2',
-         *             addClass: 'icon-coral'
-         *         }
-         *     ]
          * });
          *
          * // show the select list
@@ -60,6 +61,24 @@
          *     &lt;li data-value=&quot;expr3&quot;&gt;&lt;span&gt;Expression 3&lt;/span&gt;&lt;/li&gt;
          * &lt;/ul&gt;
          *
+         * &lt;ul class=&quot;selectlist&quot; data-init=&quot;selectlist&quot; data-multiple=&quot;true&quot;&gt;
+         *     &lt;li role=&quot;presentation&quot; class=&quot;selectlist-optgroup&quot;&gt;
+         *         &lt;span&gt;Group 1&lt;/span&gt;
+         *         &lt;ul role=&quot;group&quot;&gt;
+         *             &lt;li role=&quot;option&quot;&gt;&lt;span data-value=&quot;expr1&quot;&gt;Expression 1&lt;/span&gt;&lt;/li&gt;
+         *             &lt;li role=&quot;option&quot;&gt;&lt;span data-value=&quot;expr2&quot;&gt;Expression 2&lt;/span&gt;&lt;/li&gt;
+         *             &lt;li role=&quot;option&quot;&gt;&lt;span data-value=&quot;expr3&quot;&gt;Expression 3&lt;/span&gt;&lt;/li&gt;
+         *         &lt;/ul&gt;
+         *     &lt;/li&gt;
+         *     &lt;li role=&quot;presentation&quot; class=&quot;selectlist-optgroup&quot;&gt;
+         *         &lt;span&gt;Group 2&lt;/span&gt;
+         *         &lt;ul role=&quot;group&quot;&gt;
+         *             &lt;li role=&quot;option&quot;&gt;&lt;span data-value=&quot;expr4&quot;&gt;Expression 4&lt;/span&gt;&lt;/li&gt;
+         *             &lt;li role=&quot;option&quot;&gt;&lt;span data-value=&quot;expr5&quot;&gt;Expression 5&lt;/span&gt;&lt;/li&gt;
+         *         &lt;/ul&gt;
+         *     &lt;/li&gt;
+         * &lt;/ul&gt;
+         *
          * @example
          * <caption>Initialize with custom paramters to load remotely</caption>
          * 
@@ -72,19 +91,18 @@
          * 
          * @param  {Object} options Component options
          * @param  {Mixed} options.element jQuery selector or DOM element to use for panel
+         * @param  {String} [options.type=static] static or dynamic list
+         * @param  {Boolean} [options.multiple=false] multiple selection or not
          * @param  {Object} options.relatedElement DOM element to position at
          * @param  {Boolean} [options.autofocus=true] automatically sets the focus on the list
          * @param  {Boolean} [options.autohide=true] automatically closes the list when it loses its focus
-         * @param  {Array} [options.values] array of objects to be displayed in the list
-         * @param  {String} [options.values.display] displayed text of an entry
-         * @param  {String} [options.values.value] value of an entry
-         * @param  {String} [options.values.addClass] additional css classes to be shown in the list
          * @param  {String} [options.dataurl] URL to receive values dynamically
          * @param  {String} [options.dataurlformat=html] format of the dynamic data load
          * @param  {Object} [options.dataadditional] additonal data to be sent
          * @param  {Function} [options.loadData] function to be called if more data is needed. This must not be used with a set dataurl.
          *
          * @fires SelectList#selected
+         * @fires SelectList#unselected
          * 
          */
         construct: function (options) {
@@ -92,7 +110,6 @@
 
             this.$element
                 .on('change:type', this._setType.bind(this))
-                .on('change:values', this._setValues.bind(this))
                 .on('change:autohide', this._setAutohide.bind(this))
                 .on('click', '[role="option"]', this._triggerSelected.bind(this));
 
@@ -112,26 +129,11 @@
             datapagesize: 10,
             dataadditional: null,
             loadData: $.noop, // function to receive more data
-            position: 'center bottom-1',  // -1 to override the border
-            values: null // [{display: "Banana", value: "banId"}]
+            position: 'center bottom-1'  // -1 to override the border
         },
 
         applyOptions: function () {
-            var self = this;
-
-            this._setValues();
             this._setType();
-        },
-
-        /**
-         * @private
-         */
-        _setValues: function () {
-            if (this.options.values) {
-                this.addItems(this.options.values);
-            } else {
-                this.options.values = [];
-            }
         },
 
         /**
@@ -179,7 +181,6 @@
 
             // we have a dynamic list of values
             if (this.options.type === 'dynamic') {
-                this.options.values.length = 0;
 
                 this.$element.on('scroll.selectlist-dynamic-load', function (event) {
                     // debounce
@@ -211,10 +212,10 @@
                 'aria-multiselectable': this.options.multiple
             });
 
-            this._makeAccessibleListOption(this.$element.find('li'));
+            this._makeAccessibleListOption(this.$element.children());
 
             // setting tabindex
-            this.$element.on('focusin focusout', 'li', function (event) {
+            this.$element.on('focusin focusout', 'li[role=option]', function (event) {
                 $(event.currentTarget).attr('tabindex', event.type === 'focusin' ? -1 : 0);
             });
 
@@ -275,9 +276,27 @@
          * @param  {jQuery} elem
          */
         _makeAccessibleListOption: function (elem) {
-            elem.attr({
-                'role': 'option',
-                'tabindex': 0
+            elem.each(function (i, e) {
+                var entry = $(e);
+
+                // group header
+                if (entry.hasClass('optgroup')) {
+                    entry.attr({
+                        'role': 'presentation',
+                        'tabindex': -1
+                    }).children('ul').attr({
+                        'role': 'group'
+                    }).children('li').attr({
+                        'role': 'option',
+                        'tabindex': 0
+                    });
+
+                } else {
+                    entry.attr({
+                        'role': 'option',
+                        'tabindex': 0
+                    });
+                }
             });
         },
 
@@ -298,13 +317,13 @@
             });
 
             if (this.options.autofocus) {
-                this.$element.find('li:first').trigger('focus');
+                this.$element.find('li[role=option]:first').trigger('focus');
             }
 
             // if dynamic start loading
             if (this.options.type === 'dynamic') {
                 this._handleLoadData().done(function () {
-                    self.$element.find('li:first').trigger('focus');
+                    self.$element.find('li[role=option]:first').trigger('focus');
                     this._setAutohide();
                 });
             } else { // otherwise set autohide immediately
@@ -344,45 +363,9 @@
         },
 
         /**
-         * adds a new item to the DOM
-         * @private
-         * @param  {Number} id index of the entry in the options
-         * @param  {Object} item entry to be displayed
-         * @param  {String} [item.display]
-         * @param  {String} [item.value]
-         * @param  {String} [item.addClass]
-         */
-        _addItem: function (item) {
-            var li = $('<li/>', {
-                    'role': 'option',
-                    'tabindex': 0,
-                    'data-value': item.value
-                }),
-                span = $('<span/>', {
-                    'text': item.display || item.value,
-                    'class': item.addClass || ''
-                }).appendTo(li);
-
-            this.$element.append(li);
-        },
-
-        /**
-        * Append items to the end of the list.
-        * @param {Array} [items] list of objects to add
-        */
-        addItems: function (items) {
-            var self = this;
-
-            $.each(items, function (i, item) {
-                self._addItem(item);
-            });
-        },
-
-        /**
-         * deletes the item from the list and the dom
+         * deletes the item from the dom
          */
         clearItems: function () {
-            this.options.values.length = 0;
             this.$element.empty();
         },
 
@@ -415,10 +398,10 @@
             var promise,
                 self = this,
                 end = this._pagestart + this.options.datapagesize,
-                spinner = $('<div/>',{
-                    'class': 'selectlist-spinner'
+                wait = $('<div/>',{
+                    'class': 'selectlist-wait'
                 }).append($('<span/>', {
-                    'class': 'spinner'
+                    'class': 'wait'
                 }));
 
             if (this._loadingIsActive) {
@@ -428,8 +411,8 @@
             // activate fetching
             this._loadingIsActive = true;
 
-            // add spinner
-            this.$element.append(spinner);
+            // add wait
+            this.$element.append(wait);
 
             // load from given URL
             if (this.options.dataurl) {
@@ -445,14 +428,12 @@
                     var cnt = 0;
 
                     if (self.options.dataurlformat === 'html') {
-                        var elem = $(data).filter('li');
+                        var elem = $(data);
 
-                        cnt = elem.length;
+                        cnt = elem.filter('li').length;
 
                         self._makeAccessibleListOption(elem);
                         self.$element.append(elem);
-                    } else if (self.options.dataurlformat === 'json') {
-                        self.addItems(data);
                     }
 
                     // if not enough elements came back then the loading is complete
@@ -470,13 +451,16 @@
             this._pagestart = end;
 
             promise.always(function () {
-                spinner.remove();
+                wait.remove();
                 this._loadingIsActive = false;
             });
 
             return promise;
         },
 
+        /**
+         * resets the dynamic loaded data
+         */
         reset: function () {
             if (this.options.type === 'dynamic') {
                 this.clearItems();
@@ -507,5 +491,27 @@
             $('[data-init~=selectlist]', event.target).selectList();
         });
     }
+
+    /**
+     * Triggered when option was selected
+     *
+     * @name CUI.SelectList#selected
+     * @event
+     *
+     * @param {Object} event Event object
+     * @param {String} event.selectedValue value which was selected
+     * @param {String} event.displayedValue displayed text of the selected element
+     */
+    
+    /**
+     * Triggered when option was unselected
+     *
+     * @name CUI.SelectList#unselected
+     * @event
+     *
+     * @param {Object} event Event object
+     * @param {String} event.selectedValue value which was unselected
+     * @param {String} event.displayedValue displayed text of the unselected element
+     */
 
 }(jQuery, this));
