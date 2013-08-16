@@ -20,16 +20,16 @@
          *     <li class="optgroup">
          *         <span>Group 1</span>
          *         <ul>
-         *             <li><span data-value="expr1">Expression 1</span></li>
-         *             <li><span data-value="expr2">Expression 2</span></li>
-         *             <li><span data-value="expr3">Expression 3</span></li>
+         *             <li data-value="expr1"><span>Expression 1</span></li>
+         *             <li data-value="expr2"><span>Expression 2</span></li>
+         *             <li data-value="expr3"><span>Expression 3</span></li>
          *         </ul>
          *     </li>
          *     <li class="optgroup">
          *         <span>Group 2</span>
          *         <ul>
-         *             <li><span data-value="expr4">Expression 4</span></li>
-         *             <li><span data-value="expr5">Expression 5</span></li>
+         *             <li data-value="expr4"><span>Expression 4</span></li>
+         *             <li data-value="expr5"><span>Expression 5</span></li>
          *         </ul>
          *     </li>
          * </ul>
@@ -62,22 +62,23 @@
          * &lt;/ul&gt;
          *
          * &lt;ul class=&quot;selectlist&quot; data-init=&quot;selectlist&quot; data-multiple=&quot;true&quot;&gt;
-         *     &lt;li role=&quot;presentation&quot; class=&quot;selectlist-optgroup&quot;&gt;
+         *     &lt;li class=&quot;optgroup&quot;&gt;
          *         &lt;span&gt;Group 1&lt;/span&gt;
-         *         &lt;ul role=&quot;group&quot;&gt;
-         *             &lt;li role=&quot;option&quot;&gt;&lt;span data-value=&quot;expr1&quot;&gt;Expression 1&lt;/span&gt;&lt;/li&gt;
-         *             &lt;li role=&quot;option&quot;&gt;&lt;span data-value=&quot;expr2&quot;&gt;Expression 2&lt;/span&gt;&lt;/li&gt;
-         *             &lt;li role=&quot;option&quot;&gt;&lt;span data-value=&quot;expr3&quot;&gt;Expression 3&lt;/span&gt;&lt;/li&gt;
+         *         &lt;ul&gt;
+         *             &lt;li data-value=&quot;expr1&quot;&gt;&lt;span&gt;Expression 1&lt;/span&gt;&lt;/li&gt;
+         *             &lt;li data-value=&quot;expr2&quot;&gt;&lt;span&gt;Expression 2&lt;/span&gt;&lt;/li&gt;
+         *             &lt;li data-value=&quot;expr3&quot;&gt;&lt;span&gt;Expression 3&lt;/span&gt;&lt;/li&gt;
          *         &lt;/ul&gt;
          *     &lt;/li&gt;
-         *     &lt;li role=&quot;presentation&quot; class=&quot;selectlist-optgroup&quot;&gt;
+         *     &lt;li class=&quot;optgroup&quot;&gt;
          *         &lt;span&gt;Group 2&lt;/span&gt;
-         *         &lt;ul role=&quot;group&quot;&gt;
-         *             &lt;li role=&quot;option&quot;&gt;&lt;span data-value=&quot;expr4&quot;&gt;Expression 4&lt;/span&gt;&lt;/li&gt;
-         *             &lt;li role=&quot;option&quot;&gt;&lt;span data-value=&quot;expr5&quot;&gt;Expression 5&lt;/span&gt;&lt;/li&gt;
+         *         &lt;ul&gt;
+         *             &lt;li data-value=&quot;expr4&quot;&gt;&lt;span&gt;Expression 4&lt;/span&gt;&lt;/li&gt;
+         *             &lt;li data-value=&quot;expr5&quot;&gt;&lt;span&gt;Expression 5&lt;/span&gt;&lt;/li&gt;
          *         &lt;/ul&gt;
          *     &lt;/li&gt;
          * &lt;/ul&gt;
+         * 
          *
          * @example
          * <caption>Initialize with custom paramters to load remotely</caption>
