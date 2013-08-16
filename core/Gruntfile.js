@@ -58,7 +58,7 @@ module.exports = function(grunt) {
       dirs.build +'/js/source/components/CUI.TagList.js',
       dirs.build +'/js/source/components/CUI.SelectList.js',
       dirs.build +'/js/source/components/CUI.Autocomplete.js',
-      dirs.build +'/js/source/components/CUI.DropDown2.js'
+      dirs.build +'/js/source/components/CUI.Select.js'
     ]
   };
   var packages = {
