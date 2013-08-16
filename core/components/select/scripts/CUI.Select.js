@@ -16,7 +16,7 @@
             var self = this;
 
             // find elements
-            this._button = this.$element.children('input[type=button]');
+            this._button = this.$element.children('button');
             this._select = this.$element.children('select');
             this._selectList = this.$element.children('.selectlist');
             this._tagList = this.$element.children('.taglist');
