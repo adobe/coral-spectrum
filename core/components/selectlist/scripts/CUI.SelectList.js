@@ -102,6 +102,7 @@
 
         defaults: {
             type: 'static', // static or dynamic
+            multiple: false,
             relatedElement: null,
             autofocus: true, // autofocus on show
             autohide: true, // automatically hides the box if it loses focus
@@ -205,7 +206,9 @@
         _makeAccessible: function () {
             this.$element.attr({
                 'role': 'listbox',
-                'aria-hidden': true
+                'tabindex': -1, // the list itself is not focusable
+                'aria-hidden': true,
+                'aria-multiselectable': this.options.multiple
             });
 
             this._makeAccessibleListOption(this.$element.find('li'));
