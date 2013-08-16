@@ -11,25 +11,25 @@
          * <h2 class="line">Examples</h2>
          * 
          * <ul class="selectlist" data-init="selectlist">
-         *     <li data-value="expr1"><span>Expression 1</span></li>
-         *     <li data-value="expr2"><span>Expression 2</span></li>
-         *     <li data-value="expr3"><span>Expression 3</span></li>
+         *     <li data-value="expr1">Expression 1</li>
+         *     <li data-value="expr2">Expression 2</li>
+         *     <li data-value="expr3">Expression 3</li>
          * </ul>
          *
          * <ul class="selectlist" data-init="selectlist" data-multiple="true">
          *     <li class="optgroup">
          *         <span>Group 1</span>
          *         <ul>
-         *             <li data-value="expr1"><span>Expression 1</span></li>
-         *             <li data-value="expr2"><span>Expression 2</span></li>
-         *             <li data-value="expr3"><span>Expression 3</span></li>
+         *             <li data-value="expr1">Expression 1</li>
+         *             <li data-value="expr2">Expression 2</li>
+         *             <li data-value="expr3">Expression 3</li>
          *         </ul>
          *     </li>
          *     <li class="optgroup">
          *         <span>Group 2</span>
          *         <ul>
-         *             <li data-value="expr4"><span>Expression 4</span></li>
-         *             <li data-value="expr5"><span>Expression 5</span></li>
+         *             <li data-value="expr4">Expression 4</li>
+         *             <li data-value="expr5">Expression 5</li>
          *         </ul>
          *     </li>
          * </ul>
@@ -56,25 +56,25 @@
          * <caption>Data API: Instantiate, set options, and show</caption>
          *
          * &lt;ul class=&quot;selectlist&quot; data-init=&quot;selectlist&quot;&gt;
-         *     &lt;li data-value=&quot;expr1&quot;&gt;&lt;span&gt;Expression 1&lt;/span&gt;&lt;/li&gt;
-         *     &lt;li data-value=&quot;expr2&quot;&gt;&lt;span&gt;Expression 2&lt;/span&gt;&lt;/li&gt;
-         *     &lt;li data-value=&quot;expr3&quot;&gt;&lt;span&gt;Expression 3&lt;/span&gt;&lt;/li&gt;
+         *     &lt;li data-value=&quot;expr1&quot;&gt;Expression 1&lt;/li&gt;
+         *     &lt;li data-value=&quot;expr2&quot;&gt;Expression 2&lt;/li&gt;
+         *     &lt;li data-value=&quot;expr3&quot;&gt;Expression 3&lt;/li&gt;
          * &lt;/ul&gt;
          *
          * &lt;ul class=&quot;selectlist&quot; data-init=&quot;selectlist&quot; data-multiple=&quot;true&quot;&gt;
          *     &lt;li class=&quot;optgroup&quot;&gt;
          *         &lt;span&gt;Group 1&lt;/span&gt;
          *         &lt;ul&gt;
-         *             &lt;li data-value=&quot;expr1&quot;&gt;&lt;span&gt;Expression 1&lt;/span&gt;&lt;/li&gt;
-         *             &lt;li data-value=&quot;expr2&quot;&gt;&lt;span&gt;Expression 2&lt;/span&gt;&lt;/li&gt;
-         *             &lt;li data-value=&quot;expr3&quot;&gt;&lt;span&gt;Expression 3&lt;/span&gt;&lt;/li&gt;
+         *             &lt;li data-value=&quot;expr1&quot;&gt;Expression 1&lt;/li&gt;
+         *             &lt;li data-value=&quot;expr2&quot;&gt;Expression 2&lt;/li&gt;
+         *             &lt;li data-value=&quot;expr3&quot;&gt;Expression 3&lt;/li&gt;
          *         &lt;/ul&gt;
          *     &lt;/li&gt;
          *     &lt;li class=&quot;optgroup&quot;&gt;
          *         &lt;span&gt;Group 2&lt;/span&gt;
          *         &lt;ul&gt;
-         *             &lt;li data-value=&quot;expr4&quot;&gt;&lt;span&gt;Expression 4&lt;/span&gt;&lt;/li&gt;
-         *             &lt;li data-value=&quot;expr5&quot;&gt;&lt;span&gt;Expression 5&lt;/span&gt;&lt;/li&gt;
+         *             &lt;li data-value=&quot;expr4&quot;&gt;Expression 4&lt;/li&gt;
+         *             &lt;li data-value=&quot;expr5&quot;&gt;Expression 5&lt;/li&gt;
          *         &lt;/ul&gt;
          *     &lt;/li&gt;
          * &lt;/ul&gt;
