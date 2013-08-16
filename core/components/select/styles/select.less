@@ -18,24 +18,8 @@
     color: @font-base-color;
 
     @input-height: 32*@px;
-
-    &:after {
-        content: "\25BE";
-        overflow: visible;
-        height: auto;
-        white-space: inherit;
-        color: inherit;
-        text-align: left;
-        position: absolute;
-        top: 11*@px;
-        right: 11*@px;
-        text-shadow: none;
-        font-size: 1.2em;
-        color: inherit;
-        pointer-events: none; 
-    }
     
-    > input {
+    > button {
         width: 100%;
         height: @input-height;
         padding: 7*@px 10*@px;
@@ -48,6 +32,30 @@
         text-shadow: none;
         text-align: left;
         font-weight: normal;
+
+        &[class^="icon-"], 
+        &[class*=" icon-"] {
+
+            &:before {
+                margin-right: 10*@px;
+            }
+        }
+
+        &:after {
+            content: "\25BE";
+            overflow: visible;
+            height: auto;
+            white-space: inherit;
+            color: inherit;
+            text-align: left;
+            position: absolute;
+            top: 9*@px;
+            right: 11*@px;
+            text-shadow: none;
+            font-size: 1.2em;
+            color: inherit;
+            pointer-events: none; 
+        }
 
         &:hover {
             background: @select-hover-background-color;
