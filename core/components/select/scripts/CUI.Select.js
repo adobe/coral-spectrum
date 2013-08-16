@@ -78,6 +78,39 @@
             }
         },
 
+        _parseMarkup: function () {
+            var optgroup = this._select.children('optgroup');
+
+            function parseGroup(parent, dest) {
+                parent.children('option').each(function (i, e) {
+                    var opt = $(e);
+
+                    $('<li/>', {
+                        'data-value': opt.val(),
+                        'text': opt.text()
+                    }).appendTo(dest);
+                });
+            }
+
+            // optgroups are part of the select -> different markup
+            if (optgroup.length > 0) {
+                optgroup.each(function (i, e) {
+                    var group = $(e),
+                        entry = $('<li/>', {
+                                'class': 'optgroup'
+                            }).append($('<span/>', {
+                                'text': group.attr('label')
+                            }));
+
+                    parseGroup(group, $('<ul/>').appendTo(entry));
+
+                    this._selectList.append(entry);
+                });
+            } else { // flat select list
+                parseGroup(this._select, this._selectList);
+            }
+        },
+
         /**
          * [_setSelectList description]
          */
@@ -94,16 +127,7 @@
 
             // read values from markup
             if (this._select.length > 0) {
-                // flat select list
-                this._select.children('option').each(function (i, e) {
-                    var opt = $(e);
-
-                    $('<li/>', {
-                        'data-value': opt.val(),
-                        'text': opt.text()
-                    }).appendTo(self._selectList);
-                });
-
+                this._parseMarkup();
             } else { // if no <select> wa found then a dynamic list is expected
                 type = 'dynamic';
             }
