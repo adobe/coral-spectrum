@@ -10,7 +10,7 @@
          *
          * <h2 class="line">Examples</h2>
          *  
-         * <ol class="taglist" data-fieldname="myrequestparam">
+         * <ol class="taglist" data-init="taglist" data-fieldname="myrequestparam" style="margin: 2rem">
          *     <li>
          *         <button class="icon-close"></button>
          *         Carrot
@@ -27,7 +27,27 @@
          *         <input type="hidden" value="Apple"/>
          *     </li>
          * </ol>
+         *
+         * @example
+         * <caption>Data API: Instantiate, set options, and show</caption>
          * 
+         * &lt;ol class=&quot;taglist&quot; data-init=&quot;taglist&quot; data-fieldname=&quot;myrequestparam&quot;&gt;
+         *     &lt;li&gt;
+         *         &lt;button class=&quot;icon-close&quot;&gt;&lt;/button&gt;
+         *         Carrot
+         *         &lt;input type=&quot;hidden&quot; value=&quot;Carrot&quot;/&gt;
+         *     &lt;/li&gt;
+         *     &lt;li&gt;
+         *         &lt;button class=&quot;icon-close&quot;&gt;&lt;/button&gt;
+         *         Banana
+         *         &lt;input type=&quot;hidden&quot; value=&quot;Banana&quot;/&gt;
+         *     &lt;/li&gt;
+         *     &lt;li&gt;
+         *         &lt;button class=&quot;icon-close&quot;&gt;&lt;/button&gt;
+         *         Apple
+         *         &lt;input type=&quot;hidden&quot; value=&quot;Apple&quot;/&gt;
+         *     &lt;/li&gt;
+         * &lt;/ol&gt;
          *
          * @description Creates a new tag list
          * @constructs
