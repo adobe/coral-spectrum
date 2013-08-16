@@ -441,6 +441,25 @@
                         start: this._pagestart,
                         end: end
                     }, this.options.dataadditional || {})
+                }).done(function (data) {
+                    var cnt = 0;
+
+                    if (self.options.dataurlformat === 'html') {
+                        var elem = $(data).filter('li');
+
+                        cnt = elem.length;
+
+                        self._makeAccessibleListOption(elem);
+                        self.$element.append(elem);
+                    } else if (self.options.dataurlformat === 'json') {
+                        self.addItems(data);
+                    }
+
+                    // if not enough elements came back then the loading is complete
+                    if (cnt < self.options.datapagesize) {
+                        this._loadingComplete = true;
+                    }
+
                 });
 
             } else { // expect custom function to handle
@@ -450,26 +469,7 @@
             // increase to next page
             this._pagestart = end;
 
-            promise.done(function (data) {
-                var cnt = 0;
-
-                if (self.options.dataurlformat === 'html') {
-                    var elem = $(data).filter('li');
-
-                    cnt = elem.length;
-
-                    self._makeAccessibleListOption(elem);
-                    self.$element.append(elem);
-                } else if (self.options.dataurlformat === 'json') {
-                    self.addItems(data);
-                }
-
-                // if not enough elements came back then the loading is complete
-                if (cnt < self.options.datapagesize) {
-                    this._loadingComplete = true;
-                }
-
-            }).always(function () {
+            promise.always(function () {
                 spinner.remove();
                 this._loadingIsActive = false;
             });
