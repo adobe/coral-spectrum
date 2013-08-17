@@ -70,7 +70,7 @@
                 // then the btn receives the label of the selected item
                 if (!this.options.multiple) {
                     this._select.on('change.dropdown', function (event) {
-                        self._button.text(self._select.children('option:selected').text());
+                        self._button.text(self._select[0][self._select[0].selectedIndex].text);
                     });
                 } else { // TODO multiple impl
 
