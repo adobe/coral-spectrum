@@ -193,12 +193,15 @@
                 val = item.value;
             }
 
+            // always be a string
+            val += "";
+
             if (($.inArray(val, this._existingValues) > - 1) || val.length === 0) {
                 return;
             }
 
             // add to internal storage
-            this._existingValues.push("" + val); // store as string
+            this._existingValues.push(val); // store as string
 
             // add DOM element
             elem = $('<'+ this.options.tag +'/>', {
@@ -227,7 +230,7 @@
          * @param {String} item value to be deleted
          */
         removeItem: function (item) {
-            var idx = this._existingValues.indexOf(item);
+            var idx = this._existingValues.indexOf("" + item);
 
             if (idx > -1) {
                 this._removeItem(item);
