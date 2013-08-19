@@ -76,11 +76,6 @@
                 // if it is in single selection mode, 
                 // then the btn receives the label of the selected item
                 this._select.on('change.select', function (event) {
-                    var selectedElem = self._select[0][self._select[0].selectedIndex],
-                        txt = selectedElem.text,
-                        val = selectedElem.value;
-
-
                     if (self.options.multiple) {
                         // loop over all options
                         $.each(self._select[0].options, function (i, opt) {
