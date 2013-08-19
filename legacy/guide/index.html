@@ -1455,7 +1455,7 @@
                                 <div class="filterSample">
                                     <div class="sampleTitle left">Icon</div>
                                     <span class="select" data-init="select">
-                                      <button type="button" class="icon-globe">Select</button>
+                                      <button type="button" class="icon-globe">Add a location</button>
                                       <select>
                                         <option value="at">Austria</option>
                                         <option value="ch">Switzerland</option>
@@ -1542,6 +1542,42 @@
   &lt;/select&gt;
 &lt;/span&gt;
 
+&lt;!-- Multiple --&gt;
+&lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
+  &lt;button type=&quot;button&quot;&gt;Select&lt;/button&gt;
+  &lt;select multiple=&quot;true&quot;&gt;
+    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
+
+&lt;!-- Group dividers --&gt;
+&lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
+  &lt;button type=&quot;button&quot;&gt;Select&lt;/button&gt;
+  &lt;select&gt;
+    &lt;optgroup label=&quot;Group 1&quot;&gt;
+        &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+        &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+        &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+    &lt;/optgroup&gt;
+    &lt;optgroup label=&quot;Group 2&quot;&gt;
+        &lt;option value=&quot;4&quot;&gt;Fourth&lt;/option&gt;
+        &lt;option value=&quot;5&quot;&gt;Fifth&lt;/option&gt;
+    &lt;/optgroup&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
+
+&lt;!-- with Icon --&gt;
+&lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
+  &lt;button type=&quot;button&quot; class=&quot;icon-globe&quot;&gt;Add a location&lt;/button&gt;
+  &lt;select&gt;
+    &lt;option value=&quot;at&quot;&gt;Austria&lt;/option&gt;
+    &lt;option value=&quot;ch&quot;&gt;Switzerland&lt;/option&gt;
+    &lt;option value=&quot;us&quot;&gt;United States&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
+
 &lt;!-- Disabled --&gt;
 &lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
   &lt;input type=&quot;button&quot; class=&quot;button&quot; value=&quot;Select&quot; disabled=&quot;true&quot;/&gt;
@@ -1579,6 +1615,22 @@
     &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
     &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
     &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
+
+&lt;!-- Native with groups --&gt;
+&lt;span class=&quot;select&quot; data-init=&quot;select&quot; data-nativewidget=&quot;true&quot;&gt;
+  &lt;button type=&quot;button&quot;&gt;Select&lt;/button&gt;
+  &lt;select&gt;
+    &lt;optgroup label=&quot;Group 1&quot;&gt;
+        &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+        &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+        &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+    &lt;/optgroup&gt;
+    &lt;optgroup label=&quot;Group 2&quot;&gt;
+        &lt;option value=&quot;4&quot;&gt;Fourth&lt;/option&gt;
+        &lt;option value=&quot;5&quot;&gt;Fifth&lt;/option&gt;
+    &lt;/optgroup&gt;
   &lt;/select&gt;
 &lt;/span&gt;
                         </pre>
