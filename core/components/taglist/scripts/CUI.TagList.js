@@ -229,8 +229,10 @@
         removeItem: function (item) {
             var idx = this._existingValues.indexOf(item);
 
-            this._removeItem(item);
-            this._existingValues.splice(idx, 1);
+            if (idx > -1) {
+                this._removeItem(item);
+                this._existingValues.splice(idx, 1);
+            }
         },
 
         /**

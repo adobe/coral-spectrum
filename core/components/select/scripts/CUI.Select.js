@@ -42,6 +42,8 @@
             } else {
                 this._setSelectList();
             }
+
+            this._setTagList();
         },
 
         /**
@@ -80,12 +82,19 @@
 
 
                     if (self.options.multiple) {
-                        self._tagListWidget.addItem({
-                            value: val,
-                            display: txt
+                        // loop over all options
+                        $.each(self._select[0].options, function (i, opt) {
+                            if (opt.selected) {
+                                self._tagListWidget.addItem({
+                                    value: opt.value,
+                                    display: opt.text
+                                });
+                            } else {
+                                self._tagListWidget.removeItem(opt.value);
+                            }
                         });
                     } else {
-                        self._button.text(txt);
+                        self._button.text(self._select[0][self._select[0].selectedIndex].text);
                     }
                 });
 
