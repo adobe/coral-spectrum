@@ -198,7 +198,7 @@
             }
 
             // add to internal storage
-            this._existingValues.push(val);
+            this._existingValues.push("" + val); // store as string
 
             // add DOM element
             elem = $('<'+ this.options.tag +'/>', {
