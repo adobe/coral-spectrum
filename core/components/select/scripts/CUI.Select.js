@@ -9,6 +9,7 @@
             nativewidget: false,
             nativewidgetonmobile: true,
             multiple: false,
+            tagConfig: null,
             selectlistConfig: null
         },
 
@@ -66,20 +67,39 @@
                     of: this._button
                 });
 
+                if (this.options.multiple) {
+                    this._setTagList();
+                }
+
                 // if it is in single selection mode, 
                 // then the btn receives the label of the selected item
-                if (!this.options.multiple) {
-                    this._select.on('change.dropdown', function (event) {
-                        self._button.text(self._select[0][self._select[0].selectedIndex].text);
-                    });
-                } else { // TODO multiple impl
+                this._select.on('change.select', function (event) {
+                    var selectedElem = self._select[0][self._select[0].selectedIndex],
+                        txt = selectedElem.text,
+                        val = selectedElem.value;
 
-                }
+
+                    if (self.options.multiple) {
+                        self._tagListWidget.addItem({
+                            value: val,
+                            display: txt
+                        });
+                    } else {
+                        self._button.text(txt);
+                    }
+                });
+
             } else {
-                this._select.off('change.dropdown');
+                this._select.off('change.select');
             }
         },
 
+        /**
+         * this function parses the values from the native select
+         * and prints the right markup for the SelectList widget
+         * This function may only be called in SelectList widget mode.
+         * @private
+         */
         _parseMarkup: function () {
             var self = this,
                 optgroup = this._select.children('optgroup');
@@ -115,7 +135,8 @@
         },
 
         /**
-         * [_setSelectList description]
+         * set SelectList widget
+         * @private
          */
         _setSelectList: function () {
             var self = this,
@@ -148,6 +169,16 @@
                 self._toggleList();
             }).finger('click', false);
 
+            this._selectList
+                // receive the value from the list
+                .on('selected.select', this._handleSelected.bind(this))
+                // handle open/hide for the button
+                .on('show.dropdown hide.select', function (event) {
+                    self._button.toggleClass('active', event.type === 'show');
+                });
+        },
+
+        _setTagList: function () {
             if (this.options.multiple) {
                 // if the element is not there, create it
                 if (this._tagList.length === 0) {
@@ -160,15 +191,6 @@
 
                 this._tagListWidget = this._tagList.data('tagList');
             }
-
-
-            this._selectList
-                // receive the value from the list
-                .on('selected.dropdown', this._handleSelected.bind(this))
-                // handle open/hide for the button
-                .on('show.dropdown hide.dropdown', function (event) {
-                    self._button.toggleClass('active', event.type === 'show');
-                });
         },
 
         _handleSelected: function (event) {
