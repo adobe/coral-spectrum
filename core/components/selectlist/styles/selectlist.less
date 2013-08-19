@@ -53,13 +53,18 @@
             }
         }
 
-        &:first-child {
+        &:first-child,
+        &:last-child {
             border-top: none;
         }
     }
 
     li.optgroup {
         padding: 0;
+
+        &:first-child {
+            border-top: none;
+        }
 
         > span {
             display: block;
