@@ -1,0 +1,67 @@
+/**
+  Element: button
+  CUI button style for dark theme
+*/
+
+@button-dark-text-color: rgb(220, 220, 220);
+
+@button-dark-border-color: rgba(30, 30, 30, 0.5);
+@button-dark-gradient-start-color: rgb(85, 85, 85);
+@button-dark-gradient-end-color: rgb(70, 70, 70);
+
+@button-dark-hover-background-color: rgb(85, 85, 85);
+
+@button-dark-down-border-color: rgba(30, 30, 30, 0.75);
+@button-dark-down-background-color: rgb(70, 70, 70);
+
+@button-dark-icon-color: rgba(255, 255, 255, 0.8);
+
+// Button: Disabled
+@button-dark-disabled-text-color: rgb(110, 110, 110);
+@button-dark-disabled-border-color: rgb(65, 65, 65);
+@button-dark-disabled-background-color: rgb(80, 80, 80);
+
+
+[data-theme~=dark] {
+    button,
+    .button {
+
+        border-color: @button-dark-border-color;
+        color: @button-dark-text-color;
+
+        .gradient(@button-dark-gradient-start-color, @button-dark-gradient-end-color);
+
+        &:hover {
+            text-decoration: none; // Reset underline on anchor
+            //background: @button-dark-hover-background-color; // overrides buttons background image, favor gradient
+            .gradient(@button-dark-hover-background-color, @button-dark-hover-background-color);
+        }
+
+        &:active {
+            border-color: @button-dark-down-border-color;
+            //background: @button-dark-down-background-color;
+            .gradient(@button-dark-down-background-color, @button-dark-down-background-color);
+            .box-shadow(inset 0 0 4*@px rgba(0, 0, 0, 0.08));
+        }
+
+        &:before {
+          color: @button-dark-icon-color;
+        };
+    }
+
+    // Button: Disabled
+    button.disabled,
+    button[disabled],
+    .button.disabled,
+    button.disabled:active,
+    button[disabled]:active,
+    .button.disabled:active,
+    button.disabled:hover,
+    button[disabled]:hover,
+    .button.disabled:hover {
+        border-color: @button-dark-disabled-border-color;
+        color: @button-dark-disabled-text-color;
+        background: @button-dark-disabled-background-color;
+        opacity: 1;
+    }
+}

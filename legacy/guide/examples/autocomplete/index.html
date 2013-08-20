@@ -14,40 +14,105 @@
   <script src="../../js/libs/jquery.js"></script>
   <script src="../../js/libs/handlebars.js"></script>
   <script src="../../js/libs/toe.js"></script>
-  <script src="../../js/libs/jquery-fingerpointer.js"></script>
   <script src="../../js/CUI.js"></script>
 </head>
 <body>
   <h1>Autocomplete</h1>
 
-  <span class="autocomplete" data-init="autocomplete">
-    <input type="text" name="name1">
-    <ol class="autocomplete-values">
-      <li data-value="a">Apple</li>
-      <li data-value="b">Banana</li>
-    </ol>
-  </span>
+  <div>
+    <h2>Add Tags</h2>
 
-  <span class="autocomplete icon-search" data-init="autocomplete">
-    <input type="text">
-    <ol class="autocomplete-values">
-      <li data-value="a">Apple AAAAAAA asjdkasjdkas ajdksaj</li>
-      <li data-value="b">Bananaajkdsjkjdsakadkadkjaskdjkasjdka</li>
-      <li data-value="c">Carrot</li>
-      <li data-value="b">Banana</li>
-      <li data-value="c">Carrot</li>
-      <li data-value="b">Banana</li>
-      <li data-value="c">Carrot</li>
-      <li data-value="a">Apple</li>
-      <li data-value="a">Apple</li>
-      <li data-value="a">Apple</li>
-      <li data-value="a">Apple</li>
-      <li data-value="a">Apple</li>
-      <li data-value="a">Apple</li>
-      <li data-value="a">Apple</li>
-      <li data-value="a">Apple</li>
-    </ol>
-  </span>
+    <span class="autocomplete" data-init="autocomplete" data-showtags="true" data-showclearbutton="true">
+      <input type="text" name="name1">
+      <ol class="taglist autocomplete-tags">
+        <li>
+          <button class="icon-close"></button>
+          Carrot
+          <input type="hidden" value="Carrot"/>
+        </li>
+        <li>
+          <button class="icon-close"></button>
+          Banana
+          <input type="hidden" value="Banana"/>
+        </li>
+        <li>
+          <button class="icon-close"></button>
+          Apple
+          <input type="hidden" value="Apple"/>
+        </li>
+      </ol>
+    </span>
+  </div>
+  
+  <div>
+    <h2>With Icon</h2>
+
+    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="false" data-showtags="true">
+      <input type="text">
+      <ol class="taglist autocomplete-tags">
+        <li>
+          <button class="icon-close"></button>
+          Apple AAAAAAA asjdkasjdkas ajdksaj
+          <input type="hidden" value="Apple AAAAAAA asjdkasjdkas ajdksaj"/>
+        </li>
+        <li>
+          <button class="icon-close"></button>
+          Bananaajkdsjkjdsakadkadkjaskdjkasjdka
+          <input type="hidden" value="Bananaajkdsjkjdsakadkadkjaskdjkasjdka"/>
+        </li>
+        <li>
+          <button class="icon-close"></button>
+          Carrot
+          <input type="hidden" value="Carrot"/>
+        </li>
+        <li>
+          <button class="icon-close"></button>
+          Banana
+          <input type="hidden" value="Banana"/>
+        </li>
+        <li>
+          <button class="icon-close"></button>
+          Apple
+          <input type="hidden" value="Apple"/>
+        </li>
+      </ol>
+    </span>
+  </div>
+  
+  <div>
+    <h2>Static Suggestions</h2>
+    <span class="autocomplete icon-search" data-init="autocomplete" data-showtags="true" data-showsuggestions="true">
+      <input type="text">
+      <ul class="autocomplete-suggestions selectlist">
+        <li data-value="expr1"><span>Expression 1</span></li>
+        <li data-value="expr2"><span>Expression 2</span></li>
+        <li data-value="expr3"><span>Expression 3</span></li>
+        <li><span>Expression 4</span></li>
+        <li data-value="expr5"><span>Expression 5</span></li>
+        <li data-value="expr6"><span>Expression 6</span></li>
+      </ul>
+    </span>
+    <span class="autocomplete icon-search" data-init="autocomplete" data-showtags="false" data-showsuggestions="true">
+      <input type="text">
+      <ul class="autocomplete-suggestions selectlist">
+        <li data-value="expr1"><span>Expression 1</span></li>
+        <li data-value="expr2"><span>Expression 2</span></li>
+        <li data-value="expr3"><span>Expression 3</span></li>
+        <li><span>Expression 4</span></li>
+        <li data-value="expr5"><span>Expression 5</span></li>
+        <li data-value="expr6"><span>Expression 6</span></li>
+      </ul>
+    </span>
+  </div>
+  
+  <div>
+    <h2>Remote loading</h2>
+    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
+      <input type="text">
+      <ul class="autocomplete-suggestions selectlist" data-type="dynamic" data-dataurl="remotehtml.html">
+      </ul>
+    </span>
+  </div>
 
 </body>
 </html>

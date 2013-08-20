@@ -87,13 +87,13 @@ input[type=radio] {
 
   &:checked + span:before,
   &:checked + label:before {
-    background-image: url('@{component-images-folder}/checkbox/radio_dot.png');
+    background-image: url('@{component-resource-folder}/checkbox/radio_dot.png');
   }
 
   &:disabled {
     &:checked + span:before,
     &:checked + label:before {
-      background-image: url('@{component-images-folder}/checkbox/radio_dot_disabled.png');
+      background-image: url('@{component-resource-folder}/checkbox/radio_dot_disabled.png');
     }
   }
 }
@@ -107,5 +107,15 @@ input[type=radio] {
 form.vertical {
   .checkboxfield.field, .radiofield.field {
     display: block;
+  }
+}
+
+form.aligned {
+  .checkboxfield.field, .radiofield.field {
+    float: left;
+
+    > input {
+      height: 2rem; // to be the same as the height of label
+    }    
   }
 }

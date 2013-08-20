@@ -1,0 +1,52 @@
+/**
+  Class: .progress
+  Used for a progress bar. Include a child node with class .bar and give a width in percentages
+*/
+@progress-width:  12rem;   // TBD: leave as em so it scales with font size?
+@progress-height: 22*@px;  // TBD: leave as em so it scales with font size?
+@progress-border-color: rgb(141, 141, 141);
+
+@progress-stripe-size: 6*@px;
+@progress-stripe-offset: 2%;
+
+@progress-background-color: rgb(187, 187, 187);
+@progress-background-stripe-color: rgb(207, 207, 207);
+
+@progress-bar-border-color: rgb(82, 117, 147);
+@progress-bar-gradient-start: rgb(80, 163, 226);
+@progress-bar-gradient-end: rgb(36, 128, 204);
+
+
+.progress {
+  display: inline-block;
+
+  width:  @progress-width;
+  height: @progress-height;
+
+  border: @px solid @progress-border-color;
+
+  background: @progress-background-color;
+
+  .pinstripe(@progress-background-color, @progress-background-stripe-color);
+
+  .background-size(@progress-stripe-size);
+
+  vertical-align: top;
+
+  .bar {
+    margin: -1*@px 0 0 -1*@px;
+
+    height: @progress-height;
+
+    border: @px solid @progress-bar-border-color;
+    border-right: none;
+
+    .gradient(@progress-bar-gradient-start, @progress-bar-gradient-end);
+  }
+
+  & + label {
+    display: inline-block;
+    height: @progress-height;
+    line-height: @progress-height+0.125rem;
+  }
+}

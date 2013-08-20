@@ -1,0 +1,150 @@
+// Switch
+
+@switch-text-color: rgb(150, 150, 150);
+@switch-text-selected-color: @font-base-color;
+@switch-slider-background-color: rgb(220, 220, 220);
+@switch-handle-gradient-start-color: rgb(245, 245, 245);
+@switch-handle-gradient-end-color: rgb(235, 235, 235);
+@switch-selected-slider-background-color: rgb(112, 166, 214);
+@switch-selected-slider-border-color: rgb(100, 133, 197);
+@switch-disabled-background-color: rgb(225, 225, 225);
+@switch-disabled-border-color: rgb(212, 212, 212);
+@switch-disabled-text-color: rgb(210, 210, 210);
+@switch-disabled-selected-slider-background-color: rgb(220, 220, 220);
+@switch-disabled-selected-text-color: rgb(183, 183, 183);
+
+
+.switch {
+  display: inline-block;
+  margin: 0.5rem 0;
+  vertical-align: middle;
+  cursor: pointer;
+
+  &:hover input[type="checkbox"] + span + span::before {
+    .gradient(@switch-handle-gradient-start-color, @switch-handle-gradient-start-color);
+  }
+  &:hover input[type="checkbox"]:disabled + span + span::before {
+    .gradient(@switch-handle-gradient-start-color, @switch-handle-gradient-end-color);
+  }
+
+  input[type=checkbox] {
+    width: @px;
+    float: right;
+    height: @px;
+    margin-bottom: -@px;
+
+    + span {
+      color: @switch-text-selected-color;
+      padding-right: 0.5rem;
+
+      &:before {
+        display: none;
+      }
+      &:after {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0 0 0 5*@px;
+        .border-box;
+        .border-radius(0.25rem);
+        background-color: @switch-slider-background-color;
+        content: "\a0";
+        width: 32*@px;
+        height: 8*@px;
+        border: @px solid @slider-border-color;
+      }
+    }
+
+    + span + span {
+      color: @switch-text-color;
+      margin-left: -0.75rem; // Remove whitespace between-inline block elements
+      &:before {
+        position: relative;
+        left: -28*@px;
+        display: inline-block;
+        vertical-align: middle;
+        .border-box;
+        .border-radius(0.25rem);
+        .gradient(@switch-handle-gradient-start-color, @switch-handle-gradient-end-color);
+        content: "\a0"; // Todo: replace with icon
+        line-height: 1.6;
+        width: 9*@px;
+        height: 20*@px;
+        border: @px solid @slider-border-color;
+      }
+      &:after {
+        display: none;
+      }
+    }
+
+    &:checked + span {
+      color: @switch-text-color;
+      &:after {
+        background-color: @switch-selected-slider-background-color;
+        border-color: @switch-selected-slider-border-color;
+        background-image: none;
+      }
+    }
+
+    &:checked + span + span {
+      color: @switch-text-selected-color;
+      &:before {
+        left: -5*@px;
+      }
+    }
+
+    &:focus + span:after,
+    &:focus + span + span:before {
+      .glow();
+    }
+
+    &:disabled {
+      + span {
+        color: @switch-disabled-selected-text-color;
+        &:after {
+          background-color: @switch-disabled-background-color;
+          border-color: @switch-disabled-border-color;
+        }
+      }
+      + span + span {
+        color: @switch-disabled-text-color;
+        &:before {
+          background-color: @switch-disabled-background-color;
+          border-color: @switch-disabled-border-color;
+        }
+      }
+      &:checked + span {
+        color: @switch-disabled-text-color;
+        &:after {
+          background-color: @switch-disabled-selected-slider-background-color;
+        }
+      }
+      &:checked + span + span {
+        color: @switch-disabled-selected-text-color;
+      }
+    }
+  }
+}
+
+form.vertical {
+  .switch.field {
+    display: block;
+  }
+}
+
+form.aligned {
+  .switch.field {
+    float: left;
+
+    input[type=checkbox] {
+      + span {
+        height: 2rem;
+        line-height: 2rem;
+        vertical-align: middle;
+      }
+
+      + span + span {
+        vertical-align: middle;
+      }
+    }
+  }
+}

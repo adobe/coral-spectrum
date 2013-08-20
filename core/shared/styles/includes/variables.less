@@ -17,6 +17,7 @@
 @font-icon-family: AdobeIcon;
 @font-base-weight: normal;
 @font-base-color: rgb(75, 75, 75);
+@font-base-dark-color: rgb(220, 220, 220);
 @font-captions-help-color: rgb(135, 135, 135);
 @font-secondary-color: rgb(150, 150, 150);
 
@@ -126,50 +127,8 @@
 
 @icon-label-padding-multiplier: 0.25;
 
-
-// Buttons
-@button-text-size: 14*@px; // TBD: make rem so they stay the same size, or let them scale with fonts?
-@button-text-color: rgb(255, 255, 255);
-
-
-// Button: Blue
-@button-blue-border-color: rgba(0, 35, 65, 0.70);
-@button-blue-gradient-start-color: rgb(73, 142, 209);
-@button-blue-gradient-end-color: rgb(55, 121, 203);
-
-@button-blue-hover-background-color: rgb(65, 145, 210);
-
-@button-blue-down-border-color: rgba(0, 35, 65, 0.80);
-@button-blue-down-background-color: rgb(40, 125, 205);
-
-// Button: Gray
-@button-gray-border-color: rgba(30, 30, 30, 0.65);
-@button-gray-gradient-start-color: rgb(180, 180, 180);
-@button-gray-gradient-end-color: rgb(151, 151, 151);
-
-@button-gray-hover-background-color: rgb(165, 165, 165);
-
-@button-gray-down-border-color: rgba(30, 30, 30, 0.75);
-@button-gray-down-background-color: rgb(150, 150, 150);
-
-// Button: Red
-@button-red-border-color: rgba(70, 15, 15, 0.70);
-@button-red-gradient-start-color: rgb(255, 51, 51);
-@button-red-gradient-end-color: rgb(206, 2, 2);
-
-@button-red-hover-background-color: rgb(255, 75, 70);
-
-@button-red-down-border-color: rgba(70, 15, 15, 0.80);
-@button-red-down-background-color: rgb(215, 40, 40);
-
-// Button: Disabled
-@button-disabled-text-color: rgb(180, 180, 180);
-@button-disabled-border-color: rgb(210, 210, 210);  // TODO: replace with RGBA values from UX
-@button-disabled-background-color: rgb(230, 230, 230);  // TODO: replace with RGBA values from UX
-
-
 // Text Field
-@textfield-border-color: rgb(187, 187, 187);
+@textfield-border-color: rgba(0, 0, 0, 0.25);
 @textfield-background-color: rgb(255, 255, 255);
 
 @textfield-disabled-background-color: rgb(230, 230, 230);
@@ -189,13 +148,6 @@
 @search-button-disabled-background-color: rgb(224, 224, 224);
 @search-button-disabled-border-color: rgb(209, 209, 209);
 
-
-// Selectors
-@selector-border-color: rgb(172, 172, 172);
-@selector-gradient-start-color: rgb(245, 245, 245);
-@selector-gradient-end-color: rgb(235, 235, 235);
-@selector-disabled-color: rgb(220, 220, 220);
-
 // Dropdowns
 @dropdown-text-size: 14*@px;
 @dropdown-text-color: rgb(75, 75, 75);
@@ -203,6 +155,7 @@
 @dropdown-gradient-start-color: rgb(245, 245, 245);
 @dropdown-gradient-end-color: rgb(235, 235, 235);
 @dropdown-disabled-color: rgb(220, 220, 220);
+@dropdown-divider-color: rgb(220, 220, 220);
 @dropdown-background-color: rgb(240, 240, 240);
 @dropdown-active-text-color: rgb(255, 255, 255);
 @dropdown-active-background-color: rgb(65, 143, 212);
@@ -224,19 +177,6 @@
 @datepicker-time-background-color: rgb(225,225,225);
 @datepicker-time-border-color: rgb(196,196,196);
 
-// Switches
-@switch-text-color: rgb(150, 150, 150);
-@switch-text-selected-color: @font-base-color;
-@switch-slider-background-color: rgb(220, 220, 220);
-@switch-handle-gradient-start-color: rgb(245, 245, 245);
-@switch-handle-gradient-end-color: rgb(235, 235, 235);
-@switch-selected-slider-background-color: rgb(112, 166, 214);
-@switch-selected-slider-border-color: rgb(100, 133, 197);
-@switch-disabled-background-color: rgb(225, 225, 225);
-@switch-disabled-border-color: rgb(212, 212, 212);
-@switch-disabled-text-color: rgb(210, 210, 210);
-@switch-disabled-selected-slider-background-color: rgb(220, 220, 220);
-@switch-disabled-selected-text-color: rgb(183, 183, 183);
 
 // Filters & Tags
 @filters-background-color: rgb(115, 115, 115);
@@ -413,23 +353,6 @@
 @close-font-size: 20*@px;
 @close-opacity: 50;
 
-
-// Progress bar
-@progress-width:  12rem;   // TBD: leave as em so it scales with font size?
-@progress-height: 22*@px;  // TBD: leave as em so it scales with font size?
-@progress-border-color: rgb(141, 141, 141);
-
-@progress-stripe-size: 6*@px;
-@progress-stripe-offset: 2%;
-
-@progress-background-color: rgb(187, 187, 187);
-@progress-background-stripe-color: rgb(207, 207, 207);
-
-@progress-bar-border-color: rgb(82, 117, 147);
-@progress-bar-gradient-start: rgb(80, 163, 226);
-@progress-bar-gradient-end: rgb(36, 128, 204);
-
-
 // Modal
 @modal-header-height: 50*@px;
 @modal-header-background-color: rgb(230, 230, 230);
@@ -513,7 +436,17 @@
 @dropzone-border-color: @draggable-list-border-color;
 
 // Accordion
-@accordion-background-color: rgb(245, 245, 245);
+@accordion-background-color: rgb(240, 240, 240);
 @accordion-border-color: rgba(0, 0, 0, 0.20);
 @accordion-background-gradient-color: rgb(255, 255, 255);
 
+@accordion-background-gradient-start-color: rgb(245, 245, 245);
+@accordion-background-gradient-end-color: rgb(240, 240, 240);
+
+@accordion-dark-font-color: rgb(220, 220, 220);
+@accordion-dark-font-hover-color: rgb(255, 255, 255);
+@accordion-dark-background-color: rgb(85, 85, 85);
+@accordion-dark-border-color: rgba(30, 30, 30, 0.50);
+@accordion-dark-background-gradient-color: rgb(95, 95, 95);
+@accordion-dark-background-gradient-start-color: rgb(90, 90, 90);
+@accordion-dark-background-gradient-end-color: rgb(85, 85, 85);

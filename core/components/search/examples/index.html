@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Simple Search</title>
+
+  <link rel="stylesheet" href="../../css/cui.css">
+
+  <script src="../../js/libs/handlebars.js"></script>
+  <script src="../../js/libs/moment.js"></script>
+  <script src="../../js/libs/jquery.js"></script>
+  <!--script src="../../js/libs/jquery-fingerpointer.js"></script-->
+  <script src="../../js/libs/toe.js"></script>
+  <script src="../../js/libs/moment.js"></script>
+  
+  <script src="../../js/CUI.js"></script>
+
+  <script>
+    $(document).ready(function(){
+      $('#searchContainer').append('<div class="search"><input type="text" placeholder="Search"><button type="submit">Search</button><button type="reset">Clear</button></div>')
+    });
+  </script>
+
+  <style>
+    body {
+      padding-left: 30px;
+    }
+
+    .col {
+      float: left;
+      margin-right: 12px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Search Examples</h1>
+  <div class="col">
+    <section>
+<!--  THIS IS DEPRECATED MARKUP... it's here for testing css fixes only, don't use it     
+      <h2>Legacy</h2>
+      <div class="search">
+        <input type="text" placeholder="Search">
+        <button>Search</button>
+      </div> -->
+      <h2>Basic</h2>
+      <div class="search"> 
+        <input type="text" placeholder="Search">
+        <button type="submit">Search</button>
+        <button type="reset">Clear</button>
+      </div>
+      <h2>JQuery injected</h2>
+        <div id="searchContainer"></div>
+    </section>
+    <section>
+      <h2>Error</h2>
+      <div class="search error"> 
+        <input type="text" placeholder="Search" value="uh oh...">
+        <button type="submit">Search</button>
+        <button type="reset">Clear</button>
+      </div>
+      <!--h2>Legacy Error</h2>
+      <div class="search"> 
+        <input class='error' type="text" placeholder="Search" value="uh oh...">
+        <button type="submit">Search</button>
+        <button type="reset">Clear</button>
+      </div -->
+    </section>
+    <section>
+      <h2>Disabled</h2>
+      <div class="search"> 
+        <input type="text" placeholder="Search" value="y u no worky!" disabled>
+        <button type="submit" disabled>Search</button>
+        <button type="reset" disabled>Clear</button>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

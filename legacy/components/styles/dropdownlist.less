@@ -18,6 +18,15 @@ form.vertical {
     }
 }
 
+form.aligned {
+    // FIXME .dropdown-container MUST be reviewed. See CUI-770
+    // need to reset .dropdown-container as it is set as inline-block
+    .dropdown-container {
+        display: block;
+        float: left; // this is a hack for stacking filters
+    }
+}
+
 .dropdown-visible {
     z-index: 1100;
 }
@@ -83,6 +92,20 @@ form.vertical {
             + li {
                 border-top: @px solid darken(@dropdown-active-background-color, 20%);                            
             }
+        }
+
+        &.divider {
+            background-color: @dropdown-divider-color;
+            text-transform: uppercase;
+            pointer-events: none;
+            border-top: @px solid rgba(0, 0, 0, 0.25);
+            border-bottom: @px solid rgba(0, 0, 0, 0.25);
+            font-size: 12px;
+            padding: 0rem 0.5rem;
+        }
+
+        &.divider span {
+            font-weight: bold;
         }
 
         &.loading-indicator {

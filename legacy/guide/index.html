@@ -36,7 +36,7 @@
         </nav>
 
         <div class="drawer">
-            <div class="badge">1.9.0-SNAPSHOT</div>
+            <div class="badge">1.10.0-SNAPSHOT</div>
         </div>
 
     </header>
@@ -105,8 +105,11 @@
                         <a href="#RadioButtons">Radio buttons</a>
                         <a href="#Selector">Selector</a>
                         <a href="#Slider">Slider</a>
-                        <a href="#Dropdown">Dropdown</a>
+                        <a href="#Dropdown">Dropdown<span class="deprecated">deprecated</span></a>
+                        <a href="#Select">Select</a>
+                        <a href="#Autocomplete">Autocomplete</a>
                         <a href="#Datepicker">Datepicker</a>
+                        <a href="#NumberInput">Number Input</a>
                         <a href="#Draggable">Draggable</a>
                         <a href="#FormErrors">Form Errors</a>                        
                     </nav>
@@ -531,28 +534,19 @@
                         <pre class="prettyprint linenums">
 &lt;div class=&quot;page&quot; role=&quot;main&quot;&gt;
     &lt;div class=&quot;rail right&quot; role=&quot;complementary&quot;&gt;
-        &lt;div class=&quot;pull-to-refresh&quot;&gt;
-            &lt;div class=&quot;message&quot;&gt;
-                &lt;i class=&quot;arrow&quot;&gt;&lt;/i&gt;
-                &lt;i class=&quot;spinner large&quot;&gt;&lt;/i&gt;
-                &lt;span class=&quot;pull&quot;&gt;Pull to refresh&lt;/span;&gt;
-                &lt;span class=&quot;release&quot;&gt;Release to refresh&lt;/span;&gt;
-                &lt;span class=&quot;loading&quot;&gt;Loading&lt;/span;&gt;
-            &lt;/div;&gt;
-        &lt;/div&gt;
         &lt;div class=&quot;wrap&quot;&gt;
             &lt;section&gt;
-                    &lt;h4&gt;Update Feed&lt;/h4&gt;
+                &lt;h4&gt;News Feed&lt;/h4&gt;
             &lt;/section&gt;
             &lt;section&gt;
-                    &lt;h4&gt;Revised asset ready for review&lt;/h4&gt;
-                    &lt;div class=&quot;smallText greyText lightText&quot;&gt;Modified yesterday by Rob Cobourn&lt;/div&gt;
-                    &lt;p class=&quot;smallText&quot;&gt;I created a new segment thing for the...&lt;/p&gt;
+                &lt;h4&gt;Revised asset ready for review&lt;/h4&gt;
+                &lt;div class=&quot;smallText greyText lightText&quot;&gt;Modified yesterday by Rob Cobourn&lt;/div&gt;
+                &lt;p class=&quot;smallText&quot;&gt;I created a new segment thing for the ....&lt;/p&gt;
             &lt;/section&gt;
         &lt;/div&gt;
     &lt;/div&gt;
     &lt;div class=&quot;content&quot;&gt;
-        &lt;p&gt;Content.&lt;/p&gt;
+        
     &lt;/div&gt;
 &lt;/div&gt;
 </pre>
@@ -948,7 +942,7 @@
                     </ul>
 
                     <h3>Button groups</h3>
-                    <p>You can group buttons into horizontal lines by adding a <code class="prettyprint">&lt;div class="buttong-group"&gt;</code> around them.</p>
+                    <p>You can group buttons into horizontal lines by adding a <code class="prettyprint">&lt;div class="button-group"&gt;</code> around them.</p>
                    
                                         
                     <div class="componentSample buttonSample">
@@ -1086,7 +1080,8 @@
                 </section>
                 <section id="SearchField">
                     <h2 class="line">Search Field</h2>
-                    <p>A simple search field.</p>
+                    <p>A simple search field.  Note that pre-1.10 markup should be updated to include
+                        the &quot;type&quot; attribute on the submit button and provide implementation of the clear option.</p>
                     <div class="componentSample">
                         <div class="example">
 
@@ -1095,7 +1090,8 @@
                                 <div class="searchfield">
                                     <div class="search">
                                         <input type="text" placeholder="Search">
-                                        <button>Search</button>
+                                        <button type="submit">Search</button>
+                                        <button type="reset">Clear</button>
                                     </div>
                                 </div>
                             </div>
@@ -1103,9 +1099,10 @@
                             <div class="filterSample">
                                 <div class="sampleTitle left">Error</div>
                                 <div class="searchfield">
-                                    <div class="search">
-                                        <input type="text" class="error" placeholder="Search">
-                                        <button>Search</button>
+                                    <div class="search error">
+                                        <input type="text" placeholder="Search" value="error">
+                                        <button type="submit">Search</button>
+                                        <button type="reset">Clear</button>
                                     </div>
                                 </div>
                             </div>
@@ -1116,30 +1113,39 @@
                                 <div class="searchfield">
                                     <div class="search">
                                         <input type="text" placeholder="Search" disabled>
-                                        <button disabled>Search</button>
+                                        <button type="submit" disabled>Search</button>
+                                        <button type="reset" disabled>Clear</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 <pre class="prettyprint linenums">
+
+&lt;!-- Standard --&gt;
 &lt;div class=&quot;search&quot;&gt;
-  &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot;&gt;
-  &lt;button&gt;Search&lt;/button&gt;
+    &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot;&gt;
+    &lt;button type=&quot;submit&quot;&gt;Search&lt;/button&gt;
+    &lt;button type=&quot;reset&quot;&gt;Clear&lt;/button&gt;
 &lt;/div&gt;
 
 &lt;!-- Error --&gt;
-&lt;div class=&quot;search&quot;&gt;
-  &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot; class=&quot;error&quot;&gt;
-  &lt;button&gt;Search&lt;/button&gt;
+&lt;div class=&quot;search error&quot;&gt;
+    &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot;&gt;
+    &lt;button type=&quot;submit&quot;&gt;Search&lt;/button&gt;
+    &lt;button type=&quot;reset&quot;&gt;Clear&lt;/button&gt;
 &lt;/div&gt;
 
 &lt;!-- Disabled --&gt;
 &lt;div class=&quot;search&quot;&gt;
-  &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot; disabled&gt;
-  &lt;button disabled&gt;Search&lt;/button&gt;
+    &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot; disabled&gt;
+    &lt;button type=&quot;submit&quot; disabled&gt;Search&lt;/button&gt;
+    &lt;button type=&quot;reset&quot; disabled&gt;Clear&lt;/button&gt;
 &lt;/div&gt;
 </pre>
           </div>
+        <div>
+            Open <a href="examples/search/index.html">Sample</a>
+        </div>  
         </section>
                 
                 <section id="Filters">
@@ -1241,8 +1247,8 @@
                 </section>
 
                 <section id="Dropdown">
-                    <h2 class="line">Dropdowns</h2>
-                    <p>Different types of dropdowns.</p>
+                    <h2 class="line">Dropdowns<span class="deprecated">deprecated</span></h2>
+                    <p>This component is <span class="deprecated">deprecated</span> in favor of the <a href="#Select">Select</a> component. Different types of dropdowns.</p>
 
                     <div class="componentSample">
                         <div class="example">
@@ -1308,6 +1314,22 @@
                                 <div class="dropdown" data-init="dropdown">
                                 </div>
                             </div>
+
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Dividers</div>
+                                <div class="dropdown" data-init="dropdown">
+                                    <button>Dividers</button>
+                                        <select name="dropdown6" >
+                                            <option data-itemclass="divider">Numbers</option>
+                                            <option>One</option>
+                                            <option>Two</option>
+                                            <option>Three</option>
+                                            <option data-itemclass="divider">Alphabets</option>
+                                            <option>X</option>
+                                            <option>Y</option>
+                                        </select>
+                                </div>
+                            </div>
                         </div>
                     <pre class="prettyprint linenums">
 &lt;!-- Standard Single select --&gt;
@@ -1360,10 +1382,571 @@
         &lt;option&gt;Three&lt;/option&gt;
     &lt;/select&gt;
 &lt;/div&gt;
+
+&lt;!-- Dropdown with Dividers --&gt;
+&lt;div class="dropdown" data-init="dropdown"&gt;
+    &lt;button&gt;Dividers&lt;/button&gt;
+    &lt;select name="dropdown6" &gt;
+        &lt;option data-itemclass="divider"&gt;Numbers&lt;/option&gt;
+        &lt;option&gt;One&lt;/option&gt;
+        &lt;option&gt;Two&lt;/option&gt;
+        &lt;option&gt;Three&lt;/option&gt;
+        &lt;option data-itemclass="divider"&gt;Alphabets&lt;/option&gt;
+        &lt;option&gt;X&lt;/option&gt;
+        &lt;option&gt;Y&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;
 </pre>
                     </div>
                     <div>
                         Open <a href="examples/dropdown/index.html">Sample</a>
+                    </div>
+                </section>
+
+                <section id="Select">
+                        <h2 class="line">Select</h2>
+                        <p>A new version of the DropDown.</p>
+
+                        <div class="componentSample">
+                            <div class="example">
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Static</div>
+                                    <span class="select" data-init="select">
+                                      <button type="button">Select</button>
+                                      <select>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                      </select>
+                                    </span>
+                                </div>
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Multiple</div>
+                                    <span class="select" data-init="select">
+                                      <button type="button">Select</button>
+                                      <select multiple="true">
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                      </select>
+                                    </span>
+                                </div>
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Group</div>
+                                    <span class="select" data-init="select">
+                                      <button type="button">Select</button>
+                                      <select>
+                                        <optgroup label="Group 1">
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </optgroup>
+                                        <optgroup label="Group 2">
+                                            <option value="4">Fourth</option>
+                                            <option value="5">Fifth</option>
+                                        </optgroup>
+                                      </select>
+                                    </span>
+                                </div>
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Icon</div>
+                                    <span class="select" data-init="select">
+                                      <button type="button" class="icon-globe">Add a location</button>
+                                      <select>
+                                        <option value="at">Austria</option>
+                                        <option value="ch">Switzerland</option>
+                                        <option value="us">United States</option>
+                                      </select>
+                                    </span>
+                                </div>
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Disabled</div>
+                                    <span class="select" data-init="select">
+                                      <button type="button" disabled="true">Select</button>
+                                      <select>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                      </select>
+                                    </span>
+                                </div>
+                                
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Error</div>
+                                    <span class="select" data-init="select">
+                                      <button type="button" class="error">Select</button>
+                                      <select>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                      </select>
+                                    </span>
+                                </div>
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Native</div>
+                                    <span class="select" data-init="select" data-nativewidget="true">
+                                      <button type="button">Select</button>
+                                      <select>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                      </select>
+                                    </span>
+                                </div>
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">with Multi</div>
+                                    <span class="select" data-init="select" data-nativewidget="true">
+                                      <button type="button">Select</button>
+                                      <select multiple="true">
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                      </select>
+                                    </span>
+                                </div>
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">with Group</div>
+                                    <span class="select" data-init="select" data-nativewidget="true">
+                                      <button type="button">Select</button>
+                                      <select>
+                                        <optgroup label="Group 1">
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </optgroup>
+                                        <optgroup label="Group 2">
+                                            <option value="4">Fourth</option>
+                                            <option value="5">Fifth</option>
+                                        </optgroup>
+                                      </select>
+                                    </span>
+                                </div>
+                            </div>
+                            
+                        <pre class="prettyprint linenums">
+&lt;!-- Static --&gt;
+&lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
+  &lt;input type=&quot;button&quot; class=&quot;button&quot; value=&quot;Select&quot;/&gt;
+  &lt;select&gt;
+    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
+
+&lt;!-- Multiple --&gt;
+&lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
+  &lt;button type=&quot;button&quot;&gt;Select&lt;/button&gt;
+  &lt;select multiple=&quot;true&quot;&gt;
+    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
+
+&lt;!-- Group dividers --&gt;
+&lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
+  &lt;button type=&quot;button&quot;&gt;Select&lt;/button&gt;
+  &lt;select&gt;
+    &lt;optgroup label=&quot;Group 1&quot;&gt;
+        &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+        &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+        &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+    &lt;/optgroup&gt;
+    &lt;optgroup label=&quot;Group 2&quot;&gt;
+        &lt;option value=&quot;4&quot;&gt;Fourth&lt;/option&gt;
+        &lt;option value=&quot;5&quot;&gt;Fifth&lt;/option&gt;
+    &lt;/optgroup&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
+
+&lt;!-- with Icon --&gt;
+&lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
+  &lt;button type=&quot;button&quot; class=&quot;icon-globe&quot;&gt;Add a location&lt;/button&gt;
+  &lt;select&gt;
+    &lt;option value=&quot;at&quot;&gt;Austria&lt;/option&gt;
+    &lt;option value=&quot;ch&quot;&gt;Switzerland&lt;/option&gt;
+    &lt;option value=&quot;us&quot;&gt;United States&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
+
+&lt;!-- Disabled --&gt;
+&lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
+  &lt;input type=&quot;button&quot; class=&quot;button&quot; value=&quot;Select&quot; disabled=&quot;true&quot;/&gt;
+  &lt;select&gt;
+    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
+
+&lt;!-- Error --&gt;
+&lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
+  &lt;input type=&quot;button&quot; class=&quot;button error&quot; value=&quot;Select&quot;/&gt;
+  &lt;select&gt;
+    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
+
+&lt;!-- Native select --&gt;
+&lt;span class=&quot;select&quot; data-init=&quot;select&quot; data-nativewidget=&quot;true&quot;&gt;
+  &lt;input type=&quot;button&quot; class=&quot;button&quot; value=&quot;Select&quot;/&gt;
+  &lt;select&gt;
+    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
+
+&lt;!-- Native with multiple seclect --&gt;
+&lt;span class=&quot;select&quot; data-init=&quot;select&quot; data-nativewidget=&quot;true&quot;&gt;
+  &lt;input type=&quot;button&quot; class=&quot;button&quot; value=&quot;Select&quot;/&gt;
+  &lt;select multiple=&quot;true&quot;&gt;
+    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
+
+&lt;!-- Native with groups --&gt;
+&lt;span class=&quot;select&quot; data-init=&quot;select&quot; data-nativewidget=&quot;true&quot;&gt;
+  &lt;button type=&quot;button&quot;&gt;Select&lt;/button&gt;
+  &lt;select&gt;
+    &lt;optgroup label=&quot;Group 1&quot;&gt;
+        &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+        &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+        &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+    &lt;/optgroup&gt;
+    &lt;optgroup label=&quot;Group 2&quot;&gt;
+        &lt;option value=&quot;4&quot;&gt;Fourth&lt;/option&gt;
+        &lt;option value=&quot;5&quot;&gt;Fifth&lt;/option&gt;
+    &lt;/optgroup&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
+                        </pre>
+                    </div>
+                    <div>
+                        
+                    </div>
+                </section>
+
+                <section id="Autocomplete">
+                        <h2 class="line">Autocomplete (WIP)</h2>
+                        <p>Autocomplete is a comprehensive component which offers multiple features. It includes Filter, Tags and Combobox in one.</p>
+                        <p>To achieve this, it uses the SelectList and TagList widget.</p>
+
+                        <div class="componentSample">
+                            <div class="example">
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Clear</div>
+                                    <span class="autocomplete" data-init="autocomplete" data-showclearbutton="true">
+                                      <input type="text" name="name1" placeholder="Search">
+                                    </span>
+                                </div>
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Icon</div>
+                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showclearbutton="true">
+                                      <input type="text" name="name1" placeholder="Search">
+                                    </span>
+                                </div>
+                                
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Tags</div>
+                                    <span class="autocomplete icon-tag" data-init="autocomplete" data-showclearbutton="true" data-showtags="true">
+                                      <input type="text" name="name1" placeholder="Search">
+                                      <ol class="taglist autocomplete-tags">
+                                        <li>
+                                          <button class="icon-close"></button>
+                                          Carrot
+                                          <input type="hidden" value="Carrot"/>
+                                        </li>
+                                        <li>
+                                          <button class="icon-close"></button>
+                                          Banana
+                                          <input type="hidden" value="Banana"/>
+                                        </li>
+                                        <li>
+                                          <button class="icon-close"></button>
+                                          Apple
+                                          <input type="hidden" value="Apple"/>
+                                        </li>
+                                      </ol>
+                                    </span>
+                                </div>
+                                
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Suggestions</div>
+                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
+                                      <input type="text" name="name1" placeholder="Search">
+                                      <ul class="autocomplete-suggestions selectlist">
+                                        <li data-value="expr1">Expression 1</li>
+                                        <li data-value="expr2">Expression 2</li>
+                                        <li data-value="expr3">Expression 3</li>
+                                        <li>Expression 4</li>
+                                        <li data-value="expr5">Expression 5</li>
+                                        <li data-value="expr6">Expression 6</li>
+                                      </ul>
+                                    </span>
+                                </div>
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">with Tags</div>
+                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true" data-showtags="true">
+                                      <input type="text" name="name1" placeholder="Search">
+                                      <ul class="autocomplete-suggestions selectlist">
+                                        <li data-value="expr1">Expression 1</li>
+                                        <li data-value="expr2">Expression 2</li>
+                                        <li data-value="expr3">Expression 3</li>
+                                        <li>Expression 4</li>
+                                        <li data-value="expr5">Expression 5</li>
+                                        <li data-value="expr6">Expression 6</li>
+                                      </ul>
+                                    </span>
+                                </div>
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Remote</div>
+                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
+                                      <input type="text" name="name1" placeholder="Search">
+                                      <ul class="autocomplete-suggestions selectlist" data-type="dynamic" data-dataurl="examples/autocomplete/remotehtml.html">
+                                      </ul>
+                                    </span>
+                                </div>
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Typeahead</div>
+                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showtypeahead="true">
+                                      <input type="text" name="name1" placeholder="Search">
+                                      <ul class="autocomplete-typeahead selectlist" data-type="dynamic" data-dataurl="examples/autocomplete/remotehtml.html">
+                                      </ul>
+                                    </span>
+                                </div>
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Disabled</div>
+                                    <span class="autocomplete icon-search disabled" data-init="autocomplete" data-showsuggestions="true">
+                                      <input type="text" name="name1" placeholder="Search" disabled="true">
+                                      <ul class="autocomplete-suggestions selectlist">
+                                      </ul>
+                                      <button class="autocomplete-suggestion-toggle" disabled="true"></button>
+                                    </span>
+                                </div>
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Error</div>
+                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
+                                      <input type="text" name="name1" placeholder="Search" class="error">
+                                      <ul class="autocomplete-suggestions selectlist">
+                                        <li data-value="expr1"><span>Expression 1</span></li>
+                                        <li data-value="expr2"><span>Expression 2</span></li>
+                                        <li data-value="expr3"><span>Expression 3</span></li>
+                                      </ul>
+                                      <button class="autocomplete-suggestion-toggle"></button>
+                                    </span>
+                                </div>
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Groups</div>
+                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
+                                      <input type="text" name="name1" placeholder="Search">
+                                      <ul class="autocomplete-suggestions selectlist" data-multiple="true">
+                                          <li class="optgroup">
+                                              <span>Group 1</span>
+                                              <ul>
+                                                  <li><span data-value="expr1">Expression 1</span></li>
+                                                  <li><span data-value="expr2">Expression 2</span></li>
+                                                  <li><span data-value="expr3">Expression 3</span></li>
+                                              </ul>
+                                          </li>
+                                          <li class="optgroup">
+                                              <span>Group 2</span>
+                                              <ul>
+                                                  <li><span data-value="expr4">Expression 4</span></li>
+                                                  <li data-value="expr5"><span>Expression 5</span></li>
+                                              </ul>
+                                          </li>
+                                      </ul>
+                                    </span>
+                                </div>
+
+                                <div class="filterSample">
+                                    <div class="sampleTitle left">Icons</div>
+                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
+                                      <input type="text" name="name1" placeholder="Search">
+                                      <ul class="autocomplete-suggestions selectlist" data-multiple="true">
+                                          <li class="optgroup">
+                                              <span>Group 1</span>
+                                              <ul>
+                                                  <li data-value="expr1" class="icon-adobeanalytics"><span >Expression 1</span></li>
+                                                  <li data-value="expr2" class="icon-adobeexperiencemanager"><span>Expression 2</span></li>
+                                                  <li data-value="expr3" class="icon-adobetarget"><span>Expression 3</span></li>
+                                              </ul>
+                                          </li>
+                                          <li class="optgroup">
+                                              <span>Group 2</span>
+                                              <ul>
+                                                  <li data-value="expr4" class="icon-brush"><span>Expression 4</span></li>
+                                                  <li data-value="expr5" class="icon-browse"><span>Expression 5</span></li>
+                                              </ul>
+                                          </li>
+                                      </ul>
+                                    </span>
+                                </div>
+
+                            </div>
+                            
+                            
+                        <pre class="prettyprint linenums">
+&lt;!-- Add clear button --&gt;                          
+&lt;span class=&quot;autocomplete&quot; data-init=&quot;autocomplete&quot; data-showclearbutton=&quot;true&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot;&gt;
+&lt;/span&gt;
+
+&lt;!-- Add icon --&gt; 
+&lt;span class=&quot;autocomplete icon-search&quot; data-init=&quot;autocomplete&quot; data-showclearbutton=&quot;true&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot;&gt;
+&lt;/span&gt;
+
+&lt;!-- Add tag functionality --&gt; 
+&lt;span class=&quot;autocomplete icon-tag&quot; data-init=&quot;autocomplete&quot; data-showclearbutton=&quot;true&quot; data-showtags=&quot;true&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot;&gt;
+  &lt;ol class=&quot;taglist autocomplete-tags&quot;&gt;
+    &lt;li&gt;
+      &lt;button class=&quot;icon-close&quot;&gt;&lt;/button&gt;
+      Carrot
+      &lt;input type=&quot;hidden&quot; value=&quot;Carrot&quot;/&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;button class=&quot;icon-close&quot;&gt;&lt;/button&gt;
+      Banana
+      &lt;input type=&quot;hidden&quot; value=&quot;Banana&quot;/&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;button class=&quot;icon-close&quot;&gt;&lt;/button&gt;
+      Apple
+      &lt;input type=&quot;hidden&quot; value=&quot;Apple&quot;/&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/span&gt;
+
+&lt;!-- Add suggestion functionality --&gt; 
+&lt;span class=&quot;autocomplete icon-search&quot; data-init=&quot;autocomplete&quot; data-showsuggestions=&quot;true&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot;&gt;
+  &lt;ul class=&quot;autocomplete-suggestions selectlist&quot;&gt;
+    &lt;li data-value=&quot;expr1&quot;&gt;&lt;span&gt;Expression 1&lt;/span&gt;&lt;/li&gt;
+    &lt;li data-value=&quot;expr2&quot;&gt;&lt;span&gt;Expression 2&lt;/span&gt;&lt;/li&gt;
+    &lt;li data-value=&quot;expr3&quot;&gt;&lt;span&gt;Expression 3&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;Expression 4&lt;/span&gt;&lt;/li&gt;
+    &lt;li data-value=&quot;expr5&quot;&gt;&lt;span&gt;Expression 5&lt;/span&gt;&lt;/li&gt;
+    &lt;li data-value=&quot;expr6&quot;&gt;&lt;span&gt;Expression 6&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/span&gt;
+
+&lt;!-- Combine several features --&gt; 
+&lt;span class=&quot;autocomplete icon-search&quot; data-init=&quot;autocomplete&quot; data-showsuggestions=&quot;true&quot; data-showtags=&quot;true&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot;&gt;
+  &lt;ul class=&quot;autocomplete-suggestions selectlist&quot;&gt;
+    &lt;li data-value=&quot;expr1&quot;&gt;&lt;span&gt;Expression 1&lt;/span&gt;&lt;/li&gt;
+    &lt;li data-value=&quot;expr2&quot;&gt;&lt;span&gt;Expression 2&lt;/span&gt;&lt;/li&gt;
+    &lt;li data-value=&quot;expr3&quot;&gt;&lt;span&gt;Expression 3&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;Expression 4&lt;/span&gt;&lt;/li&gt;
+    &lt;li data-value=&quot;expr5&quot;&gt;&lt;span&gt;Expression 5&lt;/span&gt;&lt;/li&gt;
+    &lt;li data-value=&quot;expr6&quot;&gt;&lt;span&gt;Expression 6&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/span&gt;
+
+&lt;!-- Remote data loading --&gt; 
+&lt;span class=&quot;autocomplete icon-search&quot; data-init=&quot;autocomplete&quot; data-showsuggestions=&quot;true&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot;&gt;
+  &lt;ul class=&quot;autocomplete-suggestions selectlist&quot; data-type=&quot;dynamic&quot; data-dataurl=&quot;examples/autocomplete/remotehtml.html&quot;&gt;
+  &lt;/ul&gt;
+&lt;/span&gt;
+
+&lt;!-- Remote Typeahead --&gt;
+&lt;div class=&quot;filterSample&quot;&gt;
+    &lt;div class=&quot;sampleTitle left&quot;&gt;Typeahead&lt;/div&gt;
+    &lt;span class=&quot;autocomplete icon-search&quot; data-init=&quot;autocomplete&quot; data-showtypeahead=&quot;true&quot;&gt;
+      &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot;&gt;
+      &lt;ul class=&quot;autocomplete-typeahead selectlist&quot; data-type=&quot;dynamic&quot; data-dataurl=&quot;examples/autocomplete/remotehtml.html&quot;&gt;
+      &lt;/ul&gt;
+    &lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- Disabled state --&gt;
+&lt;span class=&quot;autocomplete icon-search disabled&quot; data-init=&quot;autocomplete&quot; data-showsuggestions=&quot;true&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot; disabled=&quot;true&quot;&gt;
+  &lt;ul class=&quot;autocomplete-suggestions selectlist&quot;&gt;
+  &lt;/ul&gt;
+  &lt;button class=&quot;autocomplete-suggestion-toggle&quot; disabled=&quot;true&quot;&gt;&lt;/button&gt;
+&lt;/span&gt;
+
+&lt;!-- Error state --&gt;
+&lt;span class=&quot;autocomplete icon-search&quot; data-init=&quot;autocomplete&quot; data-showsuggestions=&quot;true&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot; class=&quot;error&quot;&gt;
+  &lt;ul class=&quot;autocomplete-suggestions selectlist&quot;&gt;
+    &lt;li data-value=&quot;expr1&quot;&gt;&lt;span&gt;Expression 1&lt;/span&gt;&lt;/li&gt;
+    &lt;li data-value=&quot;expr2&quot;&gt;&lt;span&gt;Expression 2&lt;/span&gt;&lt;/li&gt;
+    &lt;li data-value=&quot;expr3&quot;&gt;&lt;span&gt;Expression 3&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;button class=&quot;autocomplete-suggestion-toggle&quot;&gt;&lt;/button&gt;
+&lt;/span&gt;
+
+&lt;!-- Groups --&gt;
+&lt;ul class=&quot;autocomplete-suggestions selectlist&quot; data-multiple=&quot;true&quot;&gt;
+  &lt;li class=&quot;optgroup&quot;&gt;
+      &lt;span&gt;Group 1&lt;/span&gt;
+      &lt;ul&gt;
+          &lt;li&gt;&lt;span data-value=&quot;expr1&quot;&gt;Expression 1&lt;/span&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;span data-value=&quot;expr2&quot;&gt;Expression 2&lt;/span&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;span data-value=&quot;expr3&quot;&gt;Expression 3&lt;/span&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li class=&quot;optgroup&quot;&gt;
+      &lt;span&gt;Group 2&lt;/span&gt;
+      &lt;ul&gt;
+          &lt;li&gt;&lt;span data-value=&quot;expr4&quot;&gt;Expression 4&lt;/span&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;span data-value=&quot;expr5&quot;&gt;Expression 5&lt;/span&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- with Icons --&gt;
+&lt;span class=&quot;autocomplete icon-search&quot; data-init=&quot;autocomplete&quot; data-showsuggestions=&quot;true&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot;&gt;
+  &lt;ul class=&quot;autocomplete-suggestions selectlist&quot; data-multiple=&quot;true&quot;&gt;
+      &lt;li class=&quot;optgroup&quot;&gt;
+          &lt;span&gt;Group 1&lt;/span&gt;
+          &lt;ul&gt;
+              &lt;li&gt;&lt;span class=&quot;icon-adobeanalytics&quot; data-value=&quot;expr1&quot;&gt;Expression 1&lt;/span&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;span class=&quot;icon-adobeexperiencemanager&quot; data-value=&quot;expr2&quot;&gt;Expression 2&lt;/span&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;span class=&quot;icon-adobetarget&quot; data-value=&quot;expr3&quot;&gt;Expression 3&lt;/span&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li class=&quot;optgroup&quot;&gt;
+          &lt;span&gt;Group 2&lt;/span&gt;
+          &lt;ul&gt;
+              &lt;li&gt;&lt;span class=&quot;icon-brush&quot; data-value=&quot;expr4&quot;&gt;Expression 4&lt;/span&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;span class=&quot;icon-browse&quot; data-value=&quot;expr5&quot;&gt;Expression 5&lt;/span&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+      &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/span&gt;
+                        </pre>
+                    </div>
+                    <div>
+                        Open <a href="examples/autocomplete/index.html">Sample</a>
                     </div>
                 </section>
 
@@ -1435,6 +2018,67 @@
                     </div>
                     <div>
                         Open <a href="examples/datepicker/index.html">Sample</a>
+                    </div>
+                </section>
+
+                <section id="NumberInput">
+                    <h2 class="line">Number Input</h2>
+                    <p>The Number Input component. Use <i class="icon-minus"/>minus</i> and 
+                      <i class="icon-add"/>add</i> to change value.  Values for step, min, and max
+                      are configurable.  See the <a href="examples/numberinput/index.html">examples</a> and <a href="doc/CUI.NumberInput.html">documentation</a> for more details.</p>
+
+                    <div class="componentSample">
+                        <div class="example">
+                            <div class="numberInputSample">
+                                <div class="sampleTitle left">Standard</div>
+                                <div class="numberinput" data-init="numberinput">
+                                    <button type="button" class='decrement'>decrement</button>
+                                    <input type='text'>
+                                    <button type="button" class='increment'>increment</button>
+                                </div>
+                            </div>
+                            <div class="numberInputSample">
+                                <div class="sampleTitle left">Error</div>
+                                <div class="numberinput" data-init="numberinput" data-error="true">
+                                    <button type="button" class='decrement'>decrement</button>
+                                    <input type='text'>
+                                    <button type="button" class='increment'>increment</button>
+                                </div>
+                            </div>
+                            <div class="numberInputSample">
+                                <div class="sampleTitle left">Disabled</div>
+                                <div class="numberinput" data-init="numberinput" data-disabled="true">
+                                    <button type="button" class='decrement'>decrement</button>
+                                    <input type='text'>
+                                    <button type="button" class='increment'>increment</button>
+                                </div>
+                            </div>
+                        </div> <!-- end example -->
+                        <pre class="prettyprint linenums">
+&lt;!-- Standard Number Input --&gt;                            
+&lt;div class=&quot;numberinput&quot; data-init=&quot;numberinput&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&#039;decrement&#039;&gt;decrement&lt;/button&gt;
+    &lt;input type=&#039;text&#039;&gt;
+    &lt;button type=&quot;button&quot; class=&#039;increment&#039;&gt;increment&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- Error Number Input --&gt; 
+&lt;div class=&quot;numberinput&quot; data-init=&quot;numberinput&quot; data-error=&quot;true&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&#039;decrement&#039;&gt;decrement&lt;/button&gt;
+    &lt;input type=&#039;text&#039;&gt;
+    &lt;button type=&quot;button&quot; class=&#039;increment&#039;&gt;increment&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- Disabled Number Input --&gt;  
+&lt;div class=&quot;numberinput&quot; data-init=&quot;numberinput&quot; data-disabled=&quot;true&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&#039;decrement&#039;&gt;decrement&lt;/button&gt;
+    &lt;input type=&#039;text&#039;&gt;
+    &lt;button type=&quot;button&quot; class=&#039;increment&#039;&gt;increment&lt;/button&gt;
+&lt;/div&gt;
+                        </pre>
+                    </div>
+                    <div>
+                        Open <a href="examples/numberinput/index.html">Sample</a>
                     </div>
                 </section>
 

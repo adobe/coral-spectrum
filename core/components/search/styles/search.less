@@ -3,7 +3,7 @@
   A simple search field with button
 */
 
-div.search {
+.search {
   position: relative;
   display: inline-block;
   margin: 0.5rem 0;
@@ -12,30 +12,78 @@ div.search {
   
   input[type=text] {
     margin: 0;
-    padding-right: 40*@px;
-    width: 100%;
+    padding: 0 32*@px;
+    /*padding-right: 32*@px;*/
   }
 
   button {
     .icon-search;
-    .button-square;
-        
-    // Fit inside of the search field
+    .button-square-transparent(30*@px);
     position: absolute;
-    top: @px; // Because of textfield border
-    right: @px; // Because of textfield border
-    height: 30*@px;
-    
+    display: block;
+    top: 1*@px; 
+    color: transparent;
+
     &,
     &:hover,
     &:active,
     &:disabled {
       border: none;
-      border-left: @px solid @textfield-border-color;
       filter: none;
     }
   }
+
+  button[type=submit] {
+    left: 1*@px;
+  }
+
+  button[type=reset] {
+    .icon-close;
+    .button-square-transparent(30*@px); 
+    font-size: 0.6rem;
+    top: 1*@px; 
+    right: 1*@px; 
+  }
+
+
+  &.error input {
+    border-color: @textfield-error-border-color;
+    color: @textfield-error-font-color;
+
+    &:focus {
+      .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+    }
+  }
+
+  &.error button {
+
+    &:before {
+      color: @textfield-error-font-color;
+      opacity: 1;
+    }
+
+    &:focus {
+      .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+    }
+  }
+
 }
+// .search 
+
+form.vertical {
+  .search.field {
+    display: block;
+  }
+}
+
+form.aligned {
+  .search.field {
+    display: inline-block;
+  }
+}
+
+
+
 /* end search */
 
 

@@ -7,6 +7,7 @@
 @import 'shared/includes/variables';
 @import 'shared/includes/mixins';
 
+
 @demo-background-color: rgb(247, 247, 247);
 @demo-border-color: rgb(187, 187, 187);
 
@@ -16,47 +17,6 @@ h2.line,
 h3.line,
 h4.line {
   border-bottom: @px solid rgb(200, 200, 200);
-}
-
-// Fonts
-.AdobeClean {
-  font-family: @font-base-family;
-}
-
-.AdobeClean_Bold {
-  font-family: @font-base-family;
-  font-weight: bold;
-}
-
-.AdobeClean_Italic {
-  font-family: @font-base-family;
-  font-style: italic;
-}
-
-.AdobeClean_BoldItalic {
-  font-family: @font-base-family;
-  font-weight: bold;
-  font-style: italic;
-}
-
-.AdobeClean_Light {
-  font-family: @font-light-family;
-  font-weight: normal;
-}
-
-.AdobeClean_LightItalic {
-  font-family: @font-light-family;
-  font-weight: normal;
-  font-style: italic;
-}
-
-.AdobeClean_Condensed {
-  font-family: AdobeCleanCondensed;
-}
-
-.AdobeClean_CondensedItalic {
-  font-family: AdobeCleanCondensed;
-  font-style: italic;
 }
 
 // Heading link
@@ -301,6 +261,20 @@ div.fakeBody {
   }
 }
 
+.numberInputSample {
+
+  .numberinput {
+    margin-top: 0;
+    margin-bottom: 12*@px;
+  }
+
+  input {
+    width: 100*@px;
+  }
+
+  .clearfix();
+}
+
 .buttonSample {
   button + button,
   a.button + button {
@@ -493,4 +467,16 @@ div.iconBox {
 
 .iconDetailRail {
   width: 20rem !important;
+}
+
+// markers
+
+span.deprecated {
+  font-size: 0.75rem;
+  border: 1px solid #ff9c00;
+  border-radius: 5px;
+  background: #fff600;
+  margin: 0 5px;
+  padding: 1px;
+  color: #0a0a0a;
 }

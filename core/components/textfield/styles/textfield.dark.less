@@ -1,0 +1,34 @@
+/**
+Element: Text field
+A basic text input field for dark theme
+*/
+
+[data-theme~=dark] {
+
+    input[type="text"] {
+        .placeholder(@rail-input-placeholder-color);
+
+        .border-box;
+
+        height: 34*@px;
+
+        background-color: @rail-dark-background-color;
+        border: @px solid @rail-input-text-border-color;
+
+        padding: 0.25rem 0.5rem;
+        min-width: auto;
+
+        margin: 0;
+
+        font-size: 0.85rem;
+        color: @rail-font-color;
+
+        &:focus {
+            box-shadow: none;
+            &.focus {
+                .glow();
+            }
+        }
+    }
+    
+}

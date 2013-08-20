@@ -10,6 +10,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
     grunt.loadNpmTasks('grunt-gh-pages');
     grunt.loadNpmTasks('grunt-mocha');
@@ -32,8 +33,12 @@ module.exports = function (grunt) {
 
             // HTTP
             'CUI.Util.HTTP.js',
+            
+            // color
+            'CUI.Util.color.js',
 
             // Components
+            'components/CUI.Rail.js',
             'components/CUI.Modal.js',
             'components/CUI.Tabs.js',
             'components/CUI.Alert.js',
@@ -57,7 +62,8 @@ module.exports = function (grunt) {
             'components/CUI.CharacterCount.js',
             'components/CUI.Accordion.js',
             'components/CUI.Tour.js',
-            'components/CUI.Autocomplete.js',
+            'components/CUI.NumberInput.js',
+            'components/CUI.Colorpicker.js',
 
             // Validations
             'validations.js'
@@ -71,14 +77,16 @@ module.exports = function (grunt) {
     var dirs = {
         build: 'build',
         components: 'components',
-        source: 'source',
         legacy: 'legacy',
         temp: 'temp',
         modules: 'node_modules',
         externals: 'externals',
         core: {
-            grunt: 'core/',
-            build: 'core/build'
+            root: 'core/',
+            build: 'core/build',
+            shared: 'core/shared',
+            components: 'core/components',
+            tests: 'core/tests'
         }
     };
 
@@ -159,9 +167,21 @@ module.exports = function (grunt) {
         },
 
         subgrunt: {
-            core: { // needed to merge the cor einto the build
-                subdir: dirs.core.grunt,
-                args: ['retro']
+            core: { // this will build core, which gets merged to top level build
+                subdir: dirs.core.root,
+                args: ['retro'] 
+            },
+            core_quicktest: {
+                subdir: dirs.core.root,
+                args: ['quicktest']                 
+            },
+            core_quickless: {
+                subdir: dirs.core.root,
+                args: ['quickless']                 
+            },
+            core_quickhtml: {
+                subdir: dirs.core.root,
+                args: ['quickhtml']                 
             }
         },
 
@@ -191,7 +211,7 @@ module.exports = function (grunt) {
                         expand: true,
                         flatten: true,
                         cwd: '<%= dirs.core.build %>/',
-                        src: ['js/source/shared/**/*.js'],
+                        src: ['js/source/*.js'],
                         dest: '<%= dirs.temp %>/js/'
                     },
                     { // get less from the modularized components
@@ -231,18 +251,14 @@ module.exports = function (grunt) {
                         src: ['**/tests/**.js'],
                         dest: '<%= dirs.build %>/tests'
                     },
+                    
                     { // get legacy components' less
                         expand: true,
                         cwd: '<%= dirs.legacy %>/components/styles',
                         src: ['**'],
                         dest: '<%= dirs.build %>/less/components'
                     },
-                    { // get legacy less (overrides the core)
-                        expand: true,
-                        cwd: '<%= dirs.legacy %>/styles',
-                        src: ['**.less'],
-                        dest: '<%= dirs.build %>/less'
-                    },
+
                     { // get legacy components' tests -> will override the test runner html
                         expand: true,
                         cwd: '<%= dirs.legacy %>/components/tests',
@@ -331,6 +347,87 @@ module.exports = function (grunt) {
                 ]
             }
         }, // copy
+
+        generate_imports: {
+          output: '@import \'components/{filename}\';\n',
+          dest: '<%= dirs.build %>/less/components.less',
+          legacy: {
+            src: '<%= dirs.legacy %>/components/styles/*.less'
+          },
+          core: {
+            src: '<%= dirs.core.root %>/components/**/styles/*.less'
+          },
+          components: {
+            src: '<%= dirs.components %>/**/styles/*.less'
+          }
+        },
+
+        watch: {
+            core_scripts: {
+                files: [
+                    dirs.core.shared + '/scripts/**.js',
+                    dirs.core.tests + '/**/test.*.js',
+                    dirs.core.components + '/**/scripts/**.js',
+                    dirs.core.components + '/**/tests/**.js'
+                ],
+                tasks: ['subgrunt:core_quicktest', 'quicktest']
+            }, // core_scripts
+            core_styles: {
+                files: [
+                    dirs.core.components + '/**/styles/**.less',
+                    dirs.core.shared + '/styles/**/**.less',
+                ],
+                tasks: ['subgrunt:core_quickless', 'quickless']
+            }, // core_styles
+            core_html: {
+                files: [
+                    dirs.core.components + '/**/examples/**.html'
+                ],
+                tasks: ['subgrunt:core_quickhtml', 'copy:retro'],
+                options: {
+                  nospawn: true
+                }
+            }, // core_html
+            contrib_scripts: {
+                files: [ 
+                    dirs.components + '/**/scripts/*.js',
+                    dirs.components + '/**/tests/*.js'
+                ],
+                tasks: ['quicktest']
+            }, // contrib_scripts
+            contrib_less: {
+                files: [ dirs.components + '/**/styles/*.less'],
+                tasks: ['quickless']
+            }, // contrib_less
+            contrib_html: {
+                files: [ dirs.components + '/**/examples/*.html'],
+                tasks: ['copy:retro']
+            }, // contrib_html
+            legacy_scripts: {
+                files: [
+                    dirs.legacy + '/components/scripts/*.js',
+                    dirs.legacy + '/components/tests/test.*.js',
+                    dirs.legacy + '/guide/js/guide.js'
+                ],
+                tasks: ['quicktest']
+            }, // legacy_scripts
+            legacy_styles: {
+                files: [
+                    dirs.legacy + '/components/styles/*.less',
+                ],
+                tasks: ['quickless']
+            }, // legacy_styles
+            guide: {
+                files: [
+                    dirs.legacy + '/guide/js/guide.js',
+                    dirs.legacy + '/guide/less/*.less',
+                    dirs.legacy + '/guide/index.html'
+                ],
+                tasks: ['guide']
+            } // guide
+
+        },  
+        // watch
 
         less: {
             "cui-wrapped": {
@@ -523,12 +620,6 @@ module.exports = function (grunt) {
                     stderr: true
                 }
             },
-            "cache-publish": {
-                "command": "npm cache add <%= dirs.build %>/release/<%= meta.appName %>-<%= meta.version %>.tgz",
-                "options": {
-                    "stderr": true
-                }
-            },
             "publish": {
                 "command": "npm publish <%= dirs.build %>/release/<%= meta.appName %>-<%= meta.version %>.tgz",
                 "options": {
@@ -549,6 +640,7 @@ module.exports = function (grunt) {
         'clean',
         'subgrunt:core',
         'copy:retro',
+        'generate-imports',
         'less:cui',
         'less:cui-wrapped',
         'cssmin:cui',
@@ -574,6 +666,35 @@ module.exports = function (grunt) {
         'full'
     ]);
 
+    grunt.task.registerTask('quicktest', [
+        'clean:temp', 
+        'copy:retro',
+        'jshint:retro', 
+        'concat:retro',
+        'mocha',
+        'uglify:retro',
+        'copy:js_source'
+    ]);
+
+    grunt.task.registerTask('quickless', [
+        'copy:retro',
+        'generate-imports',
+        'less:cui',
+        'less:cui-wrapped',
+        'cssmin:cui',
+    ]);
+
+    grunt.task.registerTask('quickbuild', [
+        'quickless',
+        'guide'
+    ]);
+
+    grunt.task.registerTask('watch-start', [
+        'quickbuild',
+        'quicktest',
+        'watch'
+    ]);
+
     grunt.task.registerTask('release', [ // releases coral to github page
         'check',
         'gh-pages:release'
@@ -594,10 +715,6 @@ module.exports = function (grunt) {
         'shell:local-publish'
     ]);
 
-    grunt.task.registerTask('cache-publish', [ // publish NPM to local cache
-        'publish-build',
-        'shell:cache-publish'
-    ]);
     // Default task
     grunt.task.registerTask('default', [
         'retro'

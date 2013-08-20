@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Number Input</title>
+
+  <link rel="stylesheet" href="../../css/cui.css">
+
+  <script src="../../js/libs/handlebars.js"></script>
+  <script src="../../js/libs/moment.js"></script>
+  <script src="../../js/libs/jquery.js"></script>
+  <!--script src="../../js/libs/jquery-fingerpointer.js"></script-->
+  <script src="../../js/libs/toe.js"></script>
+  <script src="../../js/libs/moment.js"></script>
+  
+  <script src="../../js/CUI.js"></script>
+
+  <script>
+  $(document).ready(function(){
+    var numberinput = new CUI.NumberInput({
+      element:'#jsNumberInput', 
+      step: 5,
+      min: -25,
+      max: '25'
+    });
+
+    $('#stepValue').on('change', function (){
+      numberinput.setStep(event.currentTarget.value);
+    });
+
+    $('#minValue').on('change', function (){
+      numberinput.setMin(event.currentTarget.value);
+    });
+
+    $('#maxValue').on('change', function (){
+                    // you can of course use the CUI.Widget#set function as well
+                    numberinput.set('max', event.currentTarget.value);
+                  });
+
+    $("input[name='r1']").on('change', function (){
+      console.log("changed!", event.currentTarget.value);
+      numberinput.set('hasError', event.currentTarget.value == 2);    
+      numberinput.set('disabled', event.currentTarget.value == 3);    
+    });
+  });
+  </script>
+
+  <style>
+  body {
+    padding-left: 30px;
+  }
+
+  section {
+    border-top: 1px solid #C8C8C8; 
+    margin-bottom: 40px;
+  }
+
+  .col {
+    float: left;
+    margin-right: 12px;
+  }
+
+  label {
+    margin-right: 1rem;
+  }
+
+  .option-input {
+    width: 3rem;
+  }
+
+  input {
+    width: 80px;
+  }
+  </style>
+</head>
+<body> 
+  <h1>Number Input Examples</h1>
+  <div class="col">
+    <section>
+      <h2>Basic</h2>
+      <div class="numberinput" data-init="numberinput">
+        <button type="button" class='decrement'>decrement</button>
+        <input type='text'>
+        <button type="button" class='increment'>increment</button>
+      </div>
+
+      <h2>Error</h2>
+      <div class="numberinput" data-init="numberinput" data-error="true">
+        <button type="button" class='decrement'>decrement</button>
+        <input type='text'>
+        <button type="button" class='increment'>increment</button>
+      </div>
+
+      <h2>Disabled</h2>
+      <div class="numberinput" data-init="numberinput" data-disabled="true">
+        <button type="button" class='decrement'>decrement</button>
+        <input type='text'>
+        <button type="button" class='increment'>increment</button>
+      </div>
+    </section>
+    <section>
+      <div data-theme="dark">
+      <!-- examples below will use the dark theme because they are in this container -->  
+        <h2>Dark</h2>
+        <div class="numberinput" data-init="numberinput">
+          <button type="button" class='decrement'>decrement</button>
+          <input type='text'>
+          <button type="button" class='increment'>increment</button>
+        </div>
+
+        <h2>Dark Error</h2>
+        <div class="numberinput" data-init="numberinput" data-error="true">
+          <button type="button" class='decrement'>decrement</button>
+          <input type='text'>
+          <button type="button" class='increment'>increment</button>
+        </div>
+
+        <h2>Dark Disabled</h2>
+        <div class="numberinput" data-init="numberinput" data-disabled="true">
+          <button type="button" class='decrement'>decrement</button>
+          <input type='text'>
+          <button type="button" class='increment'>increment</button>
+        </div>
+      </div> <!-- end theme-dark -->
+    </section>
+  </div> <!-- end column -->
+
+  <div class="col">
+    <section>
+      <h2>JavaScript Initialized</h2>
+      <div id="jsNumberInput">
+          <button type="button">decrement</button>
+          <input type='text'>
+          <button type="button">increment</button>
+      </div>
+      <span>Fields below are using js to set attribute values</span>
+      <div><label>Step:</label><input id="stepValue" class="option-input" type="text" value='5'></div>
+      <div><label>Min:</label><input id="minValue" class="option-input" type="text" value='-25'></div> 
+      <div><label>Max:</label><input id="maxValue" class="option-input" type="text" value='25'></div>
+      <div><label><input type="radio" name="r1" value="1" checked><span></span>normal</label></div>
+      <div><label><input type="radio" name="r1" value="2"><span></span>error</label></div>
+      <div><label><input type="radio" name="r1" value="3"><span></span>disabled</label></div>
+    </section>
+
+    <section>
+      <p>Attributes can also be set on the input markup</p>
+      <h2>Set step value to '3'</h2>
+      <div class="numberinput" data-init="numberinput">
+        <button type="button" class='decrement'>decrement</button>
+        <input type='text' step="3">
+        <button type="button" class='increment'>increment</button>
+      </div>
+
+      <h2>Set max/min so range is 0-5</h2>
+      <div class="numberinput" data-init="numberinput">
+        <button type="button" class='decrement'>decrement</button>
+        <input type='text' value="1" max="5" min="0">
+        <button type="button" class='increment'>increment</button>
+      </div>
+
+    </section>
+
+  </div>
+
+</body>
+</html>

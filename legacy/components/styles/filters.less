@@ -61,7 +61,7 @@
 .filters.stacking {
     padding: 0.25rem 0.5rem;
     border: @px solid @textfield-border-color;
-    background-image: url('@{component-images-folder}/filters/magnifier.png');
+    background-image: url('@{component-resource-folder}/filters/magnifier.png');
     background-repeat: no-repeat;
     background-color: @textfield-background-color;
     background-position: 0.5rem 0.25rem;
@@ -119,8 +119,18 @@
 }
 
 form.vertical {
-  .filters.field {
-    display: block;
-    width: 100%;
-  }
+    .filters.field {
+        display: block;
+        width: 100%;
+    }
+}
+
+form.aligned {
+    .filters.field {
+        float: left;
+
+        .dropdown-container { // FIXME .dropdown-container MUST be reviewed. See CUI-770
+            float: none;
+        }
+    }
 }

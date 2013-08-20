@@ -30,12 +30,12 @@ ul.draggable {
     color: @draggable-list-text-normal-color;
 
     &:hover {
-      cursor: url('../images/cursors/openhand.cur'), default;
+      cursor: url('@{component-resource-folder}/cursors/openhand.cur'), default;
       background-color: @draggable-list-background-hover-color;
     }
     
     &:active {
-      cursor: url('../images/cursors/closedhand.cur'), default;
+      cursor: url('@{component-resource-folder}/cursors/closedhand.cur'), default;
     }
     
     &:disabled {
@@ -44,7 +44,7 @@ ul.draggable {
     }
         
     &.dragging {
-      cursor: url('../images/cursors/closedhand.cur'), move;
+      cursor: url('@{component-resource-folder}/cursors/closedhand.cur'), move;
       opacity: 0.9;
       position: absolute;
       left: 0;

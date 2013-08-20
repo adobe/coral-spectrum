@@ -37,22 +37,28 @@ module.exports = function(grunt) {
   var includeOrder = {
     "cui": [
       // Class system
-      dirs.shared +'/scripts/Class.js',
+      dirs.build +'/js/source/Class.js',
 
       // Namespace
-      dirs.shared +'/scripts/CUI.js',
+      dirs.build +'/js/source/CUI.js',
 
       // Utilities
-      dirs.shared +'/scripts/CUI.Util.js',
+      dirs.build +'/js/source/CUI.Util.js',
 
       // jQuery extensions
-      dirs.shared +'/scripts/CUI.jQuery.js',
+      dirs.build +'/js/source/CUI.jQuery.js',
+
+      // jQuery position plugin
+      dirs.build +'/js/source/externals/jquery-ui/jquery.ui.position.js',
 
       // base for widgets
-      dirs.shared +'/scripts/CUI.Widget.js',
+      dirs.build +'/js/source/CUI.Widget.js',
 
-      // components 
-      dirs.components +'/rail/scripts/CUI.Rail.js'
+      // actual widgets
+      dirs.build +'/js/source/components/CUI.TagList.js',
+      dirs.build +'/js/source/components/CUI.SelectList.js',
+      dirs.build +'/js/source/components/CUI.Autocomplete.js',
+      dirs.build +'/js/source/components/CUI.Select.js'
     ]
   };
   var packages = {
@@ -130,7 +136,7 @@ module.exports = function(grunt) {
     }, // clean
 
     copy: {
-      less_bootstrap: {
+      less_bootstrap: { // bootstrap dependencies
         files: [
           {
             expand: true,
@@ -187,18 +193,29 @@ module.exports = function(grunt) {
             src: ['styles/includes/**.less'],
             dest: '<%= dirs.build %>/less/shared/includes'
           },
-          {
-            expand: true,
-            cwd: '<%= dirs.components %>/',
-            src: ['components.less'],
-            dest: '<%= dirs.build %>/less'
-          },
+          // {
+          //   expand: true,
+          //   cwd: '<%= dirs.components %>/',
+          //   src: ['components.less'],
+          //   dest: '<%= dirs.build %>/less'
+          // },
           {
             expand: true,
             flatten: true,
             cwd: '<%= dirs.components %>/',
             src: ['**/styles/**.less'],
             dest: '<%= dirs.build %>/less/components'
+          }
+        ]
+      },
+      js_cui: {
+        files: [
+          {
+            expand: true,
+            flatten: true,
+            cwd: '<%= dirs.components %>/',
+            src: ['**/scripts/**.js'],
+            dest: '<%= dirs.build %>/js/source/components'
           }
         ]
       },
@@ -234,11 +251,24 @@ module.exports = function(grunt) {
           }
         ]
       },
-      js: {
+      js_jqueryui: {
         files: [
           {
             expand: true,
-            src: getIncludes("cui"),
+            filter: 'isFile',
+            cwd: '<%= dirs.modules %>/jquery-ui/ui/',
+            src: ['jquery.ui.position.js'],
+            dest: '<%= dirs.build %>/js/source/externals/jquery-ui/'
+          }
+        ]
+      },
+      js_shared: {
+        files: [
+          {
+            expand: true,
+            flatten: true,
+            cwd: '<%= dirs.shared %>/scripts/',
+            src: ['**'],
             dest: '<%= dirs.build %>/js/source/'
           }
         ]
@@ -282,6 +312,14 @@ module.exports = function(grunt) {
         ]
       }
     }, // copy
+
+    generate_imports: {
+      output: '@import \'components/{filename}\';\n',
+      dest: '<%= dirs.build %>/less/components.less',
+      core: {
+        src: '<%= dirs.components %>/**/styles/*.less'
+      }
+    },
 
     cssmin: {
       main: {
@@ -347,8 +385,7 @@ module.exports = function(grunt) {
         cui : {
             src: ['<%= dirs.shared %>/scripts/**.js', '<%= dirs.components %>/**/scripts/**.js'],
             options: {
-                destination: '<%= dirs.build %>/doc',
-                template: '../res/docTemplate/'
+                destination: '<%= dirs.build %>/doc'
             }
         }
     }, // jsdoc
@@ -357,13 +394,34 @@ module.exports = function(grunt) {
         scripts: {
             files: [
                 dirs.shared + '/scripts/**.js',
-                dirs.components + '/**/scripts/**.js'
+                dirs.tests + '/**/test.*.js',
+                dirs.components + '/**/scripts/**.js',
+                dirs.components + '/**/tests/**.js'
             ],
-            tasks: ['jshint', 'concat', 'uglify', 'mocha'],
+            tasks: ['quicktest'],
             options: {
                 nospawn: true
             }
-        }
+        }, // scripts
+        styles: {
+          files: [
+            dirs.components + '/**/styles/**.less',
+            dirs.shared + '/styles/**/**.less',
+          ],
+          tasks: ['quickless'],
+          options: {
+            nospawn: true
+          }
+        }, // styles
+        html: {
+          files: [
+            dirs.components + '/**/examples/**.html'
+          ],
+          tasks: ['quickhtml'],
+          options: {
+            nospawn: true
+          }
+        } // html
     }, // watch
 
     compress: {
@@ -413,6 +471,7 @@ module.exports = function(grunt) {
     'copy',
     'concat',
     'uglify',
+    'generate-imports',
     'less',
     'cssmin',
     'mocha'
@@ -427,6 +486,19 @@ module.exports = function(grunt) {
     'legacy',
     'partial'
   ]);
+
+  grunt.task.registerTask('quicktest', [
+    'jshint', 'copy:tests', 'concat', 'uglify', 'mocha'
+  ]);
+
+  grunt.task.registerTask('quickless', [
+    'copy:less_cui', 'less','cssmin'
+  ]);
+
+  grunt.task.registerTask('quickhtml', [
+    'copy:res_components'
+  ]);
+
 
   grunt.task.registerTask('publish-build', [
     'retro',

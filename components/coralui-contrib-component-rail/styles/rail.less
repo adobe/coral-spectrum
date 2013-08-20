@@ -1,0 +1,162 @@
+/**
+    Class: div.rail
+    The side rail for pages
+*/
+div.rail {
+    max-width: 35%;
+
+    /* animation is too slow */
+    /*.transition(width 0.5s ease-out);*/
+
+    background-color: @rail-background-color;
+    height: 100%;
+    
+    /* the rail's defualt position is left */
+    float: left;
+    .box-shadow(inset -1*@rail-shadow-distance 0 @rail-shadow-spread rgba(0, 0, 0, @rail-shadow-opacity));
+
+    &.right {
+        .box-shadow(inset @rail-shadow-distance 0 @rail-shadow-spread rgba(0, 0, 0, @rail-shadow-opacity));
+        float: right;
+    }
+
+    // make it scrollable
+    &.scroll,
+    .scroll {
+        .scrollable;
+        overflow-y: visible;
+    }
+
+    &.closed {
+      width: 0;
+      overflow: hidden;
+    }
+
+    >.wrap {
+        // activate hardware acceleration, 
+        // otherwise the content gets scrambled while scrolling 
+        // -> because the outer div is the scrolling div
+        -webkit-transform: translateZ(0);
+
+        // stretch to screen height
+        min-height: 100%;
+
+        section {
+            margin: 0;
+            padding: 0.5rem;
+
+            border-top: @px solid @rail-section-border-color;
+            .box-shadow(inset 0 @px 0 @rail-section-highlight-color);
+
+            color: @rail-font-color;
+            
+            /* First section does not have border/highlight */
+            &:first-child { 
+                border-top: none;
+                .box-shadow(none);
+                
+                &.links {
+                    >h4,
+                    >a.heading {                
+                        &:active,
+                        &:focus {
+                            border-top: none;
+                            border-bottom: none;
+                            margin-top: -0.25rem;
+                            margin-bottom: -0.1rem;
+                            padding-top: 0.5rem;
+                            padding-bottom: 0.5rem;
+                            position: relative;
+                            z-index: 1;
+                        }
+                    }
+                }
+            }
+
+            &.links {
+                padding: 0.25rem 0;
+
+                a {
+                    text-decoration: none;
+
+                    display: block;
+
+                    &:active,
+                    &:focus {
+                        background-color: @rail-well-background-color;
+                    }
+                }
+
+                // TBD: fix margin collapse for strong
+                >h4,
+                >a.heading {
+                    font-weight: bold;
+                    margin: 0 0 0.15rem 0;
+
+                    font-size: 0.95rem;
+
+                    color: @rail-font-color;
+
+                    padding: 0.25rem 0.7rem;
+                    
+                    &:active,
+                    &:focus {
+                        border-top: @px solid @rail-section-border-color;
+                        border-bottom: @px solid @rail-well-background-color;
+                        margin-top: -0.3125rem;
+                        margin-bottom: -0.1625rem;
+                        padding-top: 0.5rem;
+                        padding-bottom: 0.5rem;
+                    }
+                }
+
+                >nav {
+                    >a {
+                        padding: 0.35rem 1.5rem;
+
+                        font-size: 0.85rem;
+                        //text-shadow: 0 2*@px 0 black;
+                        color: @rail-section-link-color;
+                    }
+                }
+            }
+
+            /* the section is foldable */
+            &.foldable {
+                position: relative;
+
+                >.fold {
+                    display: none;
+                    outline: none;
+                }
+
+                >.heading:after {
+                    content: "\25B8";  /* triangle: http://mcdlr.com/8/ */
+                    position: absolute;
+                    right: 24*@px;
+                    font-size: 1rem;
+                    line-height: 1rem;
+                }    
+
+                >.fold {
+                    height: 0;
+                    overflow-x: hidden;
+                    overflow-y: hidden;
+                }
+
+                &.open {
+                    padding-bottom: 0;
+                    >.fold {
+                        display: block;
+                        height: auto;
+                        overflow: auto;
+                    }
+                    
+                    >.heading:after {
+                        content: "\25BE"; /* triangle: http://mcdlr.com/8/ */
+                    }
+                }
+            }
+        }
+    } // .wrap
+}

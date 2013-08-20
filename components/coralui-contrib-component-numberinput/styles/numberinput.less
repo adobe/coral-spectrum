@@ -1,0 +1,93 @@
+/**
+  Element: number input
+*/
+
+.numberinput {
+
+  margin: 8*@px;
+  .clearfix();
+
+  input {
+    float: left;
+    margin: 0;
+    border: 0;
+    border-top: 1px solid @textfield-border-color;
+    border-bottom: 1px solid @textfield-border-color;
+    max-width: 286*@px;
+    max-height: 36*@px;
+    min-height: 36*@px;
+    min-width: 56*@px;
+  }
+
+  button {
+    float: left;
+    margin: 0;
+    padding:0;
+    border-color: @textfield-border-color;
+    min-width: 32*@px;
+    max-width: 32*@px;
+    min-height: 36*@px;
+    max-height: 36*@px;
+    color: transparent;
+    text-shadow: none;
+    text-align: center;
+    .gradient(rgb(255, 255, 255), rgb(240, 240, 240));
+
+    &:hover {
+      background: none;
+      background-color: rgb(255, 255, 255);
+      border-color: @textfield-border-color;
+    }
+
+    &:active {
+      background: none;
+      border-color: @textfield-border-color;
+      .box-shadow(0 0 4*@px 6 rgba(0, 0, 0, .2) inset);
+    }
+
+    &.decrement {
+      .icon-minus;
+      vertical-align: top;
+      line-height: 34*@px;
+    }
+
+    &.increment {
+      .icon-add;
+      vertical-align: top;
+      line-height: 34*@px;
+    }
+
+    &[disabled] {
+      background: none;
+      background-color: @textfield-disabled-background-color;
+    }
+    
+  } // button styles
+
+  &.error,
+  &:invalid {
+
+    button, input {
+      border-color: @textfield-error-border-color;
+    }
+
+    input {
+      color: @textfield-error-font-color
+    }
+
+    input:focus {
+      .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+    }
+
+    button:before {
+      color: @textfield-error-font-color !important;
+      opacity: 1;
+    }
+  }
+
+} 
+
+/* numberinput */
+
+
+
