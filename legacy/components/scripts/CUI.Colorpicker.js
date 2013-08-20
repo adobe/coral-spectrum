@@ -44,7 +44,7 @@
                     this._adjustMarkup();
 
                     if (this.options.config === null ||
-                            this.options.config.length === 0) {
+                            this.options.config.colors.length === 0) {
                         this.options.disabled = true;
                     }
                     if (!this.options.disabled &&
@@ -261,7 +261,8 @@
                             return;
                         }
                     }
-                    this.$element.find(".colorpicker-footer").on( "tap click", "button", function(event) {
+                    
+                    this.$element.find(".colorpicker-footer button").off("tap.button click.button").fipo( "tap.button", "click.button", function(event) {
                                 event.stopPropagation();
                                 event.preventDefault();
                                 var $target = $(event.target);
@@ -351,8 +352,7 @@
                             function(event) {
                                 this._renderPicker(CLASSIC_MODE, event.direction === "left" ? "left" : "right");
                             }.bind(this));
-
-                    this.$element.on("click  tap", ".dot", function(event) {
+                    this.$element.find(".dot").off("tap.dot click.dot").fipo("tap.dot", "click.dot", function(event) {
                         event.stopPropagation();
 
                         if (this.currentPage === parseInt($(event.target).attr("page"), 10)) {
@@ -515,7 +515,7 @@
                     }
                     table.append("<tbody>" + html + "</tbody>");
                     //click on a color box
-                    table.on("tap click", "a", function(event) {
+                    table.find("a").off("tap.a click.a").fipo("tap.a", "click.a", function(event) {
                                         event.stopPropagation();
                                         event.preventDefault();
 
@@ -555,6 +555,7 @@
                 _renderEditPalette : function(){
                     var table = $("<table>");
                     var html = "<tr>" + 
+                                //hex color representation
                                     "<td colspan='2' rowspan='2'>" +
                                         "<div class='color'></div>" + 
                                      "</td>" +
@@ -564,6 +565,7 @@
                                      "</td>" + 
                                      "<td colspan='2'>&nbsp;</td>" + 
                                 "</tr>" + 
+                                //RGB color representation in 3 input fields(r, g,b)
                                 "<tr>" + 
                                     "<td class='label'>RGB</td>" + 
                                     "<td>" +
@@ -577,6 +579,7 @@
                                     "</td>" + 
                                     "<td>&nbsp;</td>" + 
                                 "</tr>" +
+                              //CMYK color representation in 4 input fields(c,m,y,k)
                                 "<tr>" + 
                                     "<td colspan='2'>&nbsp;</td>" + 
                                     "<td class='label'>CMYK</td>" + 
@@ -593,6 +596,7 @@
                                         "<input type='text' name=':cmyk_k'/>" +
                                     "</td>" + 
                                 "</tr>" +
+                                //save button to store the color on the launcher
                                 "<tr>" + 
                                     "<td colspan='3'>&nbsp;</td>" + 
                                     "<td colspan='4'>" +
