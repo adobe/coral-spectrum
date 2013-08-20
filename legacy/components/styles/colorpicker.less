@@ -1,0 +1,235 @@
+/**
+  Class: .colorpicker
+
+  The styling for colorpicker widget.
+*/
+.colorpicker{
+
+    > input[type=text]{
+        width : 10rem !important;
+    }
+
+    > .colorpicker-launcher{
+        cursor:pointer; 
+        width: 37*@px; 
+        height: 36*@px; 
+        margin: 0px;
+        padding: 0px;
+        background:#fff; 
+        border:0.0625rem solid #acacac;
+        -webkit-appearance: none;
+        -webkit-border-radius: 0px;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    > .colorpicker-launcher:disabled{
+        background-color: @textfield-disabled-background-color;
+        cursor: normal;
+    }
+
+    > .popover {
+        display: block;
+        position: absolute;
+        top: 3rem; 
+        left: 0;
+        border: 10*@px solid @popover-border-color; 
+      
+        &.arrow-top:before {
+            margin-bottom: 10*@px;
+        }
+
+        > .inner{
+            border: @px solid @modal-outline-color;
+        }
+    }
+    
+     .colorpicker-holder {
+        width: 348*@px;
+
+        .palette-header {
+            position: relative;
+            width: 100%;
+            height: 33*@px;
+            margin-top: 10*@px;
+            
+            .selection, .title {
+                height: 32*@px;
+                line-height: 32*@px;
+                
+                > div, > span{
+                    font-weight: bold;
+                    line-height: normal;
+                    vertical-align: middle;
+                    display: inline-block;
+                }
+            }
+            
+            .selection {
+                float: right;
+                margin-right: 10*@px;
+               
+                > div > span{
+                    display: block;
+                    text-align: right;
+                    font-family: AdobeCleanLight;
+                    font-size: 12px;
+                    font-weight: bold;
+                }
+            }
+            
+            .title {
+                float: left;
+                margin-left: 10*@px;
+                
+                > span {
+                    text-align: left;
+                    color: #333333;
+                    font-family: AdobeClean;
+                    font-size: 16px;
+                }
+            }
+        }
+
+      // TODO: taken from .modal-body for styling. Should belong to popover
+      .colorpicker-body {
+        .border-box;
+        width: 100%;
+        height: 214*@px;
+        padding: 5*@px;
+        
+         > .palette-navigator {
+            line-height: 30*@px;
+            text-align: center;
+            
+            > i {
+                width: 14px;
+                display: inline-block;
+            }
+            
+            > i.dot:before {
+                content:"\00b7"; 
+                line-height: 40*@px;
+                vertical-align: middle;
+                font-size: 70px; 
+                color: #AEAEAE;
+                cursor: pointer;
+            }
+            
+            > i.active:before{
+                color: #2870C7;
+            }
+        }
+      }
+      
+    /* palette table */
+    table {
+        table-layout: fixed;
+        height: 170*@px;
+        width: 100%;
+        margin: 0;
+        font-size: 15*@px;
+        font-family: AdobeCleanLight;
+        border-spacing: 5*@px;
+
+        a{
+          padding: 0px;
+          display: block;
+          text-decoration: none;
+          position: relative;
+          z-index: 100;
+          width: 49*@px;
+          height: 49*@px;
+          cursor: pointer;
+        }
+        
+        td.label {
+            line-height: normal;
+            vertical-align: middle;
+            text-align: right;
+            color: #333333;
+            font-family: AdobeClean;
+            font-size: 12px;
+        }
+        
+        input {
+            width: 100%;
+            height: 38*@px;
+            padding: 0px;
+            margin: 0px;
+            text-align: center;
+            vertical-align: middle;
+            color: #333333;
+            font-family: AdobeClean;
+            font-size: 12px;
+        }
+        
+        div.color {
+            height: 80*@px;
+            width: 80*@px;
+        }
+        
+        button{
+            min-width: 5rem;
+            padding: 0.3rem;
+            margin: 10*@px 0;
+            width: 110*@px;
+            height: 38*@px;
+        }
+
+        td.filled {
+          text-align: center;
+          padding: 0;
+          border: 0.0625rem solid rgba(0, 0, 0, 0.2);
+          width: 48*@px;
+          height: 48*@px;
+          
+          a.selected {
+            .icon-check;
+            height: 49*@px;
+            width: 49*@px;
+            line-height: 48*@px;
+          }
+          
+        }
+      
+      }
+      /* palette table end */
+    
+    .colorpicker-footer {
+        border-top: 0.0625rem solid rgba(0, 0, 0, 0.2);
+        width: 100%;
+        height: 70*@px;
+        line-height: 70*@px;
+        text-align: center;
+                    
+       .navigation-bar{
+            display: inline-block;
+            margin-left:auto;
+            margin-right:auto;
+            width: 70%;
+            line-height: normal;
+            vertical-align: middle;
+            
+            > button {
+                width: 60*@px;
+                height: 35*@px;
+                line-height: 1.2rem;
+            }
+            
+       }
+       .selected, .selected:focus{
+           background-color: #e0e0e0;
+           background-image: -moz-linear-gradient(top, #e0e0e0, #e0e0e0);
+           background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#e0e0e0), to(#e0e0e0));
+           background-image: -webkit-linear-gradient(top, #e0e0e0, #e0e0e0);
+           background-image: -o-linear-gradient(top, #e0e0e0, #e0e0e0);
+           background-image: linear-gradient(to bottom, #e0e0e0, #e0e0e0);
+           background-repeat: repeat-x;
+           filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffe0e0e0', endColorstr='#ffe0e0e0', GradientType=0);
+       }
+    }
+    
+    
+  }
+  
+}

@@ -150,6 +150,16 @@
       }
 
       return result;
+    },
+    
+    /**
+     * Utility function to transform a string representation of a boolean value into that boolean value
+     * 
+     * @param {String} string representation
+     * @return {Boolean} The boolean value of the string
+     */
+    isTrue: function(str) {
+        return str === 'true';
     }
 
   };
