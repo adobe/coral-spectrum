@@ -33,6 +33,9 @@ module.exports = function (grunt) {
 
             // HTTP
             'CUI.Util.HTTP.js',
+            
+            // color
+            'CUI.Util.color.js',
 
             // Components
             'components/CUI.Rail.js',

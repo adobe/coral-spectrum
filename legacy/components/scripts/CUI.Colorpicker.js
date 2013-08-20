@@ -104,9 +104,6 @@
                 },
 
                 _readDataFromMarkup : function() {
-                    function strToBool(str) {
-                        return str === 'true';
-                    }
 
                     if (this.$element.data("disabled")) {
                         this.options.disabled = true;
@@ -221,11 +218,11 @@
                             $palette_nav.remove();
                             if (this.$hiddenInput.val() !== undefined && this.$hiddenInput.val().length > 0){
                                 table.find("div.color").css("background", this.$hiddenInput.val());
-                                var hex = this._RGBAToHex(this.$hiddenInput.val());
+                                var hex = CUI.util.color.RGBAToHex(this.$hiddenInput.val());
                                 table.find("input[name=':hex']").val(hex);
-                                var rgb = this._HexToRGB(hex);
+                                var rgb = CUI.util.color.HexToRGB(hex);
                                 this._fillRGBFields(rgb);
-                                var cmyk = this._RGBtoCMYK(rgb);
+                                var cmyk = CUI.util.color.RGBtoCMYK(rgb);
                                 this._fillCMYKFields(cmyk);
                             }
                         } else {
@@ -433,10 +430,6 @@
                             "<span>" + this.options.title + "</span>");
                 },
 
-                _isSameColor : function(c1, c2) {
-                    return c1 && c2 && (c1 === c2);
-                },
-
                 _renderPalette : function() {
                     this._renderPaletteHeader();
 
@@ -456,17 +449,16 @@
                                         this.lowerLimit) {
                                     html += "<td><a></a></td>";
                                 } else {
-                                    rgb = this
-                                            ._HexToRGB(this.options.config.colors[this.colorNames[i +
+                                    rgb = CUI.util.color.HexToRGB(this.options.config.colors[this.colorNames[i +
                                                     this.lowerLimit]]);
                                     shade = "rgba(" + rgb.r + "," + rgb.g +
                                             "," + rgb.b + "," +
                                             (1 - opacity).toFixed(2) + ")";
                                     opacity += 0.16;
-                                    if (this._isSameColor(shade,
+                                    if (CUI.util.color.isSameColor(shade,
                                             this.$hiddenInput.val())) {
                                         cssClass = "selected";
-                                        this._fillSelectedColor(this.colorNames[i + this.lowerLimit], this._RGBAToHex(shade));
+                                        this._fillSelectedColor(this.colorNames[i + this.lowerLimit], CUI.util.color.RGBAToHex(shade));
                                     } else {
                                         cssClass = "";
                                     }
@@ -487,11 +479,10 @@
                                         this.colorShadeNo + sh) {
                                     html += "<td><a></a></td>";
                                 } else {
-                                    rgb = this
-                                            ._HexToRGB(this.options.config.colors[this.colorNames[i *
+                                    rgb = CUI.util.color.HexToRGB(this.options.config.colors[this.colorNames[i *
                                                     this.colorShadeNo + sh]]);
                                     shade = "rgba(" + rgb.r + "," + rgb.g + "," + rgb.b + "," + 1 + ")";
-                                    if (this._isSameColor(shade,
+                                    if (CUI.util.color.isSameColor(shade,
                                             this.$hiddenInput.val())) {
                                         cssClass = "selected";
                                     } else {
@@ -519,7 +510,7 @@
                                         event.stopPropagation();
                                         event.preventDefault();
 
-                                        if (this._isSameColor(this.$hiddenInput
+                                        if (CUI.util.color.isSameColor(this.$hiddenInput
                                                 .val(), $(event.target).attr(
                                                 "color"))) {
                                             return;
@@ -531,7 +522,7 @@
                                         $(event.target).addClass("selected");
 
                                         var colorName = $(event.target).attr("colorName") !== undefined ? $(event.target).attr("colorName"): "";
-                                        this._fillSelectedColor(colorName, this._RGBAToHex($(event.target).attr("color")));
+                                        this._fillSelectedColor(colorName, CUI.util.color.RGBAToHex($(event.target).attr("color")));
 
                                         this._setColor($(event.target).attr("color"));
                                     }.bind(this));
@@ -620,8 +611,8 @@
                                 return;
                             }
                             var rgb = {r:this.$element.find("input[name=':rgb_r']").val(), g:this.$element.find("input[name=':rgb_g']").val(), b:this.$element.find("input[name=':rgb_b']").val()};
-                            var cmyk = this._RGBtoCMYK(rgb);
-                            var hex = this._RGBToHex(rgb);
+                            var cmyk = CUI.util.color.RGBtoCMYK(rgb);
+                            var hex = CUI.util.color.RGBToHex(rgb);
                             this._fillCMYKFields(cmyk);
                             this.$element.find("input[name=':hex']").val(hex);
                             this.$element.find("div.color").css("background", hex);
@@ -639,8 +630,8 @@
                                 return;
                             }
                             var cmyk = {c:this.$element.find("input[name=':cmyk_c']").val(), m:this.$element.find("input[name=':cmyk_m']").val(), y:this.$element.find("input[name=':cmyk_y']").val(), k:this.$element.find("input[name=':cmyk_k']").val()};
-                            var rgb = this._CMYKtoRGB(cmyk);
-                            var hex = this._RGBToHex(rgb);
+                            var rgb = CUI.util.color.CMYKtoRGB(cmyk);
+                            var hex = CUI.util.color.RGBToHex(rgb);
                             this.$element.find("input[name=':hex']").val(hex);
                             this._fillRGBFields(rgb);
                             this.$element.find("div.color").css("background", hex);
@@ -649,15 +640,15 @@
                     table.find("input[name=':hex']").each(function(index, element){
                         $(element).attr("maxlength", "7");
                         $(element).on("blur", function(event){
-                            var hex = this._fixHex($(event.target).val().trim());
+                            var hex = CUI.util.color.fixHex($(event.target).val().trim());
                             if (hex.length === 0){
                                 this._clearRGBFields();
                                 this._clearCMYKFields();
                                 this.$element.find("div.color").removeAttr("style");
                                 return;
                             }
-                            var rgb = this._HexToRGB(hex);
-                            var cmyk = this._RGBtoCMYK(rgb);
+                            var rgb = CUI.util.color.HexToRGB(hex);
+                            var cmyk = CUI.util.color.RGBtoCMYK(rgb);
                             this._fillRGBFields(rgb);
                             this._fillCMYKFields(cmyk);
                             table.find("div.color").css("background", hex);
@@ -707,89 +698,6 @@
                 
                 _clearCMYKFields : function() {
                     this.$element.find("input[name^=':cmyk']").val("");
-                },
-
-                _fixHex : function(hex) {
-                    if (hex.length === 3) {
-                        hex = hex.charAt(0) + hex.charAt(0) + hex.charAt(1) +
-                                hex.charAt(1) + hex.charAt(2) + hex.charAt(2);
-                    }
-                    if (hex.indexOf("#") === -1) {
-                        hex = "#" + hex;
-                    }
-                    var isOk = /(^#[0-9A-F]{6})|(^#[0-9A-F]{3})$/i.test(hex);
-                    if (!isOk) {
-                        this.$element.find("[name=':hex']").val("");
-                        return "";
-                    }
-
-                    return hex;
-                },
-                
-                _hex : function (x) {
-                    return ("0" + parseInt(x, 10).toString(16)).slice(-2);
-                },
-
-                _HexToRGB : function(hex) {
-                    hex = parseInt(((hex.indexOf("#") > -1) ? hex.substring(1) : hex), 16);
-                    return {
-                        r : hex >> 16,
-                        g : (hex & 0x00FF00) >> 8,
-                        b : (hex & 0x0000FF)
-                    };
-                },
-                
-                _RGBAToHex : function(rgbaVal) {
-                    var rgba = rgbaVal.substring(rgbaVal.indexOf('(') + 1, rgbaVal.lastIndexOf(')')).split(/,\s*/);
-                    return '#' + this._hex(rgba[0]) + this._hex(rgba[1]) + this._hex(rgba[2]);
-                },
-                
-                _RGBToHex : function(rgb) {
-                    return '#' + this._hex(rgb.r) + this._hex(rgb.g) + this._hex(rgb.b);
-                },
-                
-                _CMYKtoRGB : function (cmyk){
-                    var result = {r:0, g:0, b:0};
-             
-                    var c = parseInt(cmyk.c, 10) / 100;
-                    var m = parseInt(cmyk.m, 10) / 100;
-                    var y = parseInt(cmyk.y, 10) / 100;
-                    var k = parseInt(cmyk.k, 10) / 100;
-             
-                    result.r = 1 - Math.min( 1, c * ( 1 - k ) + k );
-                    result.g = 1 - Math.min( 1, m * ( 1 - k ) + k );
-                    result.b = 1 - Math.min( 1, y * ( 1 - k ) + k );
-             
-                    result.r = Math.round( result.r * 255 );
-                    result.g = Math.round( result.g * 255 );
-                    result.b = Math.round( result.b * 255 );
-             
-                    return result;
-                },
-             
-                _RGBtoCMYK : function (rgb){
-                    var result = {c:0, m:0, y:0, k:0};
-                    
-                    if (parseInt(rgb.r, 10) === 0 && parseInt(rgb.g, 10) === 0 && parseInt(rgb.b, 10) === 0) {
-                        result.k = 100;
-                        return result;
-                    }
-             
-                    var r = parseInt(rgb.r, 10) / 255;
-                    var g = parseInt(rgb.g, 10) / 255;
-                    var b = parseInt(rgb.b, 10) / 255;
-             
-                    result.k = Math.min( 1 - r, 1 - g, 1 - b );
-                    result.c = ( 1 - r - result.k ) / ( 1 - result.k );
-                    result.m = ( 1 - g - result.k ) / ( 1 - result.k );
-                    result.y = ( 1 - b - result.k ) / ( 1 - result.k );
-             
-                    result.c = Math.round( result.c * 100 );
-                    result.m = Math.round( result.m * 100 );
-                    result.y = Math.round( result.y * 100 );
-                    result.k = Math.round( result.k * 100 );
-             
-                    return result;
                 },
 
             });
