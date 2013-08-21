@@ -62,7 +62,13 @@
                             this.options.name + "']");
                     
                     if (this.$element.attr("value")) {
-                        this._setColor(this.$element.attr("value"));
+                        var initialVal = this.$element.attr("value");
+                        if(this._isValidInitialColorValue(initialVal)){
+                            this._setColor(initialVal);
+                        }else{
+                            this.$element.removeAttr("value");
+                        }
+                        
                     }
 
                     if (this.options.disabled) {
@@ -625,8 +631,8 @@
                     table.find("input[name^=':cmyk_']").each(function(index, element){
                         $(element).attr("maxlength", "3");
                         $(element).on("blur", function(event){
-                            var rgbRegex = /^[1-9]?[0-9]{1}$|^100$/;
-                            if (!rgbRegex.test($(event.target).val().trim()) || $("input:text[value=''][name^='cmyk_']").length > 0){
+                            var cmykRegex = /^[1-9]?[0-9]{1}$|^100$/;
+                            if (!cmykRegex.test($(event.target).val().trim()) || $("input:text[value=''][name^='cmyk_']").length > 0){
                                 $(event.target).val("");
                                 this._clearRGBFields();
                                 this.$element.find("input[name=':hex']").val("");
@@ -703,6 +709,13 @@
                 _clearCMYKFields : function() {
                     this.$element.find("input[name^=':cmyk']").val("");
                 },
+                
+                _isValidInitialColorValue : function(colorRGBAstr){
+                    if(colorRGBAstr.indexOf("rgba") != -1 || colorRGBAstr.indexOf("rgb") != -1){
+                        return CUI.util.color.fixHex(CUI.util.color.RGBAToHex(colorRGBAstr)) !== "";
+                    }
+                    return false;
+                }
 
             });
 
