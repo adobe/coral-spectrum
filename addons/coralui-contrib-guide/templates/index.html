@@ -48,40 +48,35 @@
 
                 <section class="links">
                     <a class="heading" href="#General">General</a>
-
                     <nav class="fold">
                         <a href="#WhatIsCUI">What is CoralUI?</a>
                         <a href="#ResolutionIndependence">Resolution Independence</a>
                         <a href="#BrowserSupport">Browser Support</a>
                         <a href="#WidgetPhilosophy">Widget Philosophy</a>
                     </nav>
-                </section>
+                </section> <!-- /general -->
 
                 <section class="links foldable">
-                    <a class="heading" href="#GeneralStyles">General Styles</a>
-
+                    <a class="heading" href="#TextStyles">Text Styles</a>
                     <nav class="fold">
-                        <a href="#Headings">Headings</a>
-                        <a href="#Link">Link</a>
                         <a href="#Fonts">Fonts</a>
+                        <a href="#Headings">Headings</a>
                         <a href="#Icons">Icons</a>
-                        <a href="#Sticky">Sticky elements (depr.)</a>
+                        <a href="#Links">Links</a>
                     </nav>
-                </section>
+                </section> <!-- /general styles -->
 
                 <section class="links foldable">
                     <a class="heading" href="#PageComponents">Page&nbsp;Components</a>
-
                     <nav class="fold">
                         <a href="#Header">Header</a>
                         <a href="#Rail">Rail</a>
                         <a href="#Well">Well</a>
                     </nav>
-                </section>
+                </section> <!-- /page components -->
 
                 <section class="links foldable">
                     <a class="heading" href="#Navigation">Navigation</a>
-
                     <nav class="fold">
                         <a href="#Toolbar">Toolbar</a>
                         <a href="#Breadcrumbs">Breadcrumbs</a>
@@ -90,11 +85,10 @@
                         <a href="#Accordion">Accordion / Collapsible</a>                        
                         <a href="#Wizard">Wizard</a>                    
                  </nav>
-                </section>
+                </section> <!-- /navigation -->
 
                 <section class="links foldable">
                     <a class="heading" href="#ButtonsAndControls">Buttons &amp; Controls</a>
-
                     <nav class="fold">
                         <a href="#Autocomplete">Autocomplete</a>
                         <a href="#Buttons">Buttons</a>
@@ -113,21 +107,19 @@
                         <a href="#TextArea">Text area</a>
                         <a href="#TextField">Text field</a>
                     </nav>
-                </section>
+                </section> <!-- /buttons and controls -->
 
                 <section class="links foldable">
                     <a class="heading" href="#DataPresentation">Data&nbsp;Presentation</a>
-
                     <nav class="fold">
                         <a class='hidden' href="#List">List</a>
                         <a href="#Table">Table</a>
                         <a class='hidden' href="#Grid">Grid</a>
                     </nav>
-                </section>
+                </section> <!-- /data presentation -->
 
                 <section class="links foldable">
                     <a class="heading" href="#Cards">Cards</a>
-
                     <nav class="fold">
                         <a href="#Cards-Asset">Asset</a>
                         <a href="#Cards-Collection">Collection</a>
@@ -135,20 +127,18 @@
                         <a href="#Cards-Page">Page</a>
                         <a href="#Cards-Board">Board</a>
                     </nav>
-                </section>
+                </section> <!-- /cards -->
 
                 <section class="links foldable">
                     <a class="heading" href="#Dialogs">Dialogs</a>
-
                     <nav class="fold">
                         <a href="#ModalDialog">Modal</a>
                         <a href="#Popover">Popover</a>
                  </nav>
-                </section>
+                </section> <!-- /dialogs -->
 
                 <section class="links foldable">
                     <a class="heading" href="#StatusIndicators">Status Indicators</a>
-
                     <nav class="fold">
                         <a href="#Alert">Alert</a>
                         <a href="#Tooltip">Tooltip</a>
@@ -156,77 +146,66 @@
                         <a href="#Spinner">Spinner</a>
                         <a href="#ProgressBar">Progress Bar</a>
                     </nav>
-                </section>
+                </section> <!-- /status indicators -->
                 
-            </div>
-        </div>
+            </div> <!-- /wrap -->
+        </div> <!-- /main rail -->
 
         <div class="content">
 
             <section id="General">
                 <h2 class="line" id="WhatIsCUI">What is CoralUI?</h2>
-                <p>CoralUI or CUI (pronounced "cooey") is an implementation of the CloudUI visual style from Adobe XD.</p>
+                <p>CoralUI (or CUI) is an implementation of the <a href="https://zerowing.corp.adobe.com/display/CloudUI/Home" 
+                    target="_blank">CloudUI</a> visual style.</p>
 
                 <p>CoralUI's aim is to provide everything your product needs to adopt the CloudUI visual style.</p>
 
                 <h2 class="line" id="ResolutionIndependence">Resolution Independence</h2>
-                <p>CoralUI is resolution independent. By using elastic measurement units to define sizes (em and rem), CoralUI can be scaled to the perfect size for any display, regardless of size or pixel density.</p>
+                <p>CoralUI is resolution independent. By using elastic measurement units to define sizes (em and rem), 
+                    CoralUI can be scaled to the perfect size for any display, regardless of size or pixel density.</p>
 
                 <div class="res-buttons"><label>Try it:</label>
-                    <button id="res-minus" class="warning">-</button><button id="res-reset">=</button><button id="res-plus" class="primary">+</button>
+                    <button id="res-minus" class="warning">-</button>
+                    <button id="res-reset">=</button>
+                    <button id="res-plus" class="primary">+</button>
                 </div>
 
                 <h2 class="line" id="BrowserSupport">Browser Support</h2>
                 <p>CoralUI supports all modern browsers, including IE 9+, Firefox (latest), Chrome (latest), Safari (latest).</p>
-                <p>Prevalent mobile devices are also be supported, including Android 3+ and iOS 5+.</p>
+                <p>Prevalent mobile devices are also supported, including Android 3+ and iOS 5+.</p>
 
                 <h2 class="line" id="WidgetPhilosophy">Widget Philosophy</h2>
-                <p>All CoralUI widgets are guaranteed to fulfill 8 promises:</p>
+                <p>All CoralUI widgets are guaranteed to fulfill these promises:</p>
 
                 <ol>
-                    <li>Widgets will be available as a jQuery plugin: <code class="prettyprint">$('#myModal').modal()</code></li>
-                    <li>Widgets will be available as a class: <code class="prettyprint">myModal = new CUI.Modal({ element: '#myModal' })</code>.</li>
-                    <li>Widget APIs will always be fully documented <a href="doc/index.html">here</a>.</li>
-                    <li>Widgets will always be easily extendable with <code class="prettyprint">CUI.Modal.extend()</code>.</li>
-                    <li>Widgets will progressively enhance existing markup, or render a template using passed options if no markup is present.</li>
-                    <li>Widgets will take advantage of declarative markup using <code>data-*</code> attributes.</li>
+                    <li>Widgets will be available as a jQuery plugin: 
+                        <code class="prettyprint">$('#myModal').modal()</code></li>
+                    <li>Widgets will be available as a class: 
+                        <code class="prettyprint">myModal = new CUI.Modal({ element: '#myModal' })</code>.</li>
+                    <li>Widget APIs will always be fully documented 
+                        <a href="doc/index.html">here</a>.</li>
+                    <li>Widgets will always be easily extendable with 
+                        <code class="prettyprint">CUI.Modal.extend()</code>.</li>
+                    <li>Widgets will progressively enhance existing markup, or render a template 
+                        using passed options if no markup is present.</li>
+                    <li>Widgets will take advantage of declarative markup using 
+                        <code>data-*</code> attributes.</li>
                     <li>Widgets will work on both desktop and mobile.</li>
-                    <li>Widgets will be <a href="test/coverage.html">fully tested</a> with <a href="test/index.html">automated unit tests</a>.</li>
+                    <li>Widgets will be <a href="tests/coverage.html">fully tested</a> with 
+                        <a href="tests/index.html">automated unit tests</a>.</li>
                 </ol>
-
             </section>
+            <!-- /General -->
 
-            <section id="GeneralStyles">
+            <section id="TextStyles">
                 <h1 class="line">Text Styles</h1>
-                <p>CUI provides basic text styles suitable for paragraph. When laying out your page, you might need to override the margins on the heading elements.</p>
-
-                <section id="Headings">
-                    <h2 class="line">Headings</h2>
-                    <p>Use the <code class="prettyprint">&lt;h1&gt;</code> through <code class="prettyprint">&lt;h6&gt;</code> tags to add headings to sections on your page.</p>
-
-                    <div class="componentSample noCode headingSample">
-                        <h1>H1 - Header 1 (Page title)</h1>
-                        <h2>H2 - Header 2 (Modal Title)</h2>
-                        <h3>H3 - Sub Header 1 (Chart/Table Header)</h3>
-                        <h4>H4 - Sub Header 2 (List/Well Headers)</h4>
-                        <h5>H5 - Captions, help text</h5>
-                    </div>
-
-                </section>
-
-                <section id="Links">
-                    <h2 class="line">Link</h2>
-                    <p>The <code class="prettyprint">&lt;a&gt;</code> tag comes with a default color and behavior. Links remain the same color after they are visited.</p>
-
-                    <div class="componentSample noCode">
-                        Lorem ipsum dolor sit amet consectetur <a href="#Links">inline link</a> adipisicing do tempor incididunt ut labore.
-                    </div>
-                </section>
+                <p>CUI provides basic text styles suitable for paragraphs. When laying out your page, 
+                    you might need to override the margins on the heading elements.</p>
 
                 <section id="Fonts">
                     <h2 class="line">Fonts</h2>
-                    <p>Three variations of the Adobe Clean font are provided. Reference the table below to determine the CSS properties to apply for each font style.</p>
-
+                    <p>Three variations of the Adobe Clean font are provided. Reference the table below to 
+                        determine the CSS properties to apply for each font style.</p>
                     <table class="data">
                         <thead>
                             <tr>
@@ -241,58 +220,93 @@
                                 <td>AdobeClean</td>
                                 <td>normal</td>
                                 <td>normal</td>
-                                <td class="AdobeClean">The quick brown fox jumped over the lazy dog.</td>
+                                <td>The quick brown fox jumped over the lazy dog.</td>
                             </tr>
                             <tr>
                                 <td>AdobeClean</td>
-                                <td>bold</td>
+                                <td class="bold">bold</td>
                                 <td>normal</td>
-                                <td class="AdobeClean_Bold">The quick brown fox jumped over the lazy dog.</td>
+                                <td class="bold">The quick brown fox jumped over the lazy dog.</td>
                             </tr>
                             <tr>
                                 <td>AdobeClean</td>
                                 <td>normal</td>
-                                <td>italic</td>
-                                <td class="AdobeClean_Italic">The quick brown fox jumped over the lazy dog.</td>
+                                <td class="italic">italic</td>
+                                <td class="italic">The quick brown fox jumped over the lazy dog.</td>
                             </tr>
                             <tr>
                                 <td>AdobeClean</td>
-                                <td>bold</td>
-                                <td>italic</td>
-                                <td class="AdobeClean_BoldItalic">The quick brown fox jumped over the lazy dog.</td>
+                                <td class="bold">bold</td>
+                                <td class="italic">italic</td>
+                                <td class="bold italic">The quick brown fox jumped over the lazy dog.</td>
                             </tr>
-                            <tr>
+                            <!-- /Adobe Clean -->
+
+                            <tr class="clean-light">
                                 <td>AdobeCleanLight</td>
                                 <td>normal</td>
                                 <td>normal</td>
-                                <td class="AdobeClean_Light">The quick brown fox jumped over the lazy dog.</td>
+                                <td>The quick brown fox jumped over the lazy dog.</td>
                             </tr>
-                            <tr>
+                            <tr class="clean-light">
                                 <td>AdobeCleanLight</td>
                                 <td>normal</td>
-                                <td>italic</td>
-                                <td class="AdobeClean_LightItalic">The quick brown fox jumped over the lazy dog.</td>
+                                <td class="italic">italic</td>
+                                <td class="italic">The quick brown fox jumped over the lazy dog.</td>
                             </tr>
-                            <tr>
+                            <!-- /Adobe Clean Light -->
+
+                            <tr class="condensed">
                                 <td>AdobeCleanCondensed</td>
                                 <td>normal</td>
                                 <td>normal</td>
-                                <td class="AdobeClean_Condensed">The quick brown fox jumped over the lazy dog.</td>
+                                <td>The quick brown fox jumped over the lazy dog.</td>
                             </tr>
-                            <tr>
+                            <tr class="condensed">
+                                <td>AdobeCleanCondensed</td>
+                                <td class="bold">bold</td>
+                                <td>normal</td>
+                                <td class="bold">The quick brown fox jumped over the lazy dog.</td>
+                            </tr>
+                            <tr class="condensed">
                                 <td>AdobeCleanCondensed</td>
                                 <td>normal</td>
-                                <td>italic</td>
-                                <td class="AdobeClean_CondensedItalic">The quick brown fox jumped over the lazy dog.</td>
+                                <td class="italic">italic</td>
+                                <td class="italic">The quick brown fox jumped over the lazy dog.</td>
                             </tr>
+                            <tr class="condensed">
+                                <td>AdobeCleanCondensed</td>
+                                <td class="bold">bold</td>
+                                <td class="italic">italic</td>
+                                <td class="bold italic">The quick brown fox jumped over the lazy dog.</td>
+                            </tr>
+                            <!-- /Adobe Clean Condensed -->
+                      
                         </tbody>
                     </table>
-                </section>
+                </section> <!-- /fonts -->
                 
+                <section id="Headings">
+                    <h2 class="line">Headings</h2>
+                    <p>Use the <code class="prettyprint">&lt;h1&gt;</code> through <code class="prettyprint">&lt;h6&gt;</code> 
+                        tags to add headings to sections on your page.</p>
+                    <div class="componentSample noCode headingSample">
+                        <h1>H1 - Header 1 (Page title)</h1>
+                        <h2>H2 - Header 2 (Modal Title)</h2>
+                        <h3>H3 - Sub Header 1 (Chart/Table Header)</h3>
+                        <h4>H4 - Sub Header 2 (List/Well Headers)</h4>
+                        <h5>H5 - Captions, help text</h5>
+                    </div>
+
+                </section> <!-- /headings -->
 
                 <section id="Icons">
                     <h2 class="line">Icons</h2>
-                    <p>Icons can be added to a number of different elements by using the <code class="atv">icon-*</code> classes that correspond to the icon's filename.</p>
+                    <p>Icons can be added to a number of different elements by using the <code class="atv">icon-*</code> 
+                        classes that correspond to the icon's filename.</p>
+
+                    <p>An example of each of the icons available is shown in the <a href="examples/icon-browser.html"> 
+                        Icon Browser</a></p>
                     
                     <h3>Usage Guidelines</h3>
                     <p>Icons should be applied to three different tags:</p>
@@ -303,8 +317,9 @@
                     </ul>
                     
                     <h3>Accessibility</h3>
-                    <p>Always include label inside of the tag to indicate the icon's function. This text isn't visible by default, but is always readable by screen readers.</p>
                     <p>If you want to show the text, add the <code class="atv">withLabel</code> CSS class.</p>
+                    <p>When not using <code class="atv">withLabel</code>, be sure to still include text inside of the tag 
+                        to indicate the icon's function. This text won't be visible, but will be readable by screen readers.</p>
                  
                     <h3>Sizing</h3>
                     <p>When used without context, icons should be given a size:</p>
@@ -316,12 +331,12 @@
                     </ul>
                     
                     <h3>Variations</h3>
-                    <p>Icons will change color when hovered or clicked appropriate based on context. However, you may force a particular color by applying one of the following CSS classes:</p>
+                    <p>Icons will change color appropriately when hovered or clicked based on context. 
+                        However, you may force a particular color by applying one of the following CSS classes:</p>
                     <ul>
                         <li><code class="atv">white</code> White icon at 100% opacity</li>
                         <li><code class="atv">blue</code> Blue icon at 100% opacity</li>
                     </ul>
-                    
                     <div class="componentSample">
                             <div class="example">
                                 <div class="iconSample">
@@ -389,8 +404,7 @@
                                 
                                 <p style="font-size: 2rem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. Pellentesque congue diam ac nisl vehicula ornare. <i class="icon-calendar">Calendar</i>Cras eu consectetur enim. Aliquam orci augue, sollicitudin nec aliquam sit amet, imperdiet ac leo. Donec aliquam tellus nec ipsum porttitor ut viverra odio luctus. Curabitur in turpis sed nunc consequat ornare eget in nulla. Nam dignissim lectus sed velit sagittis vehicula. Maecenas interdum, quam vel luctus sagittis, mi nisl commodo sapien, eget accumsan nunc metus ac ipsum.</p>
                                 -->
-                                
-                            </div>
+                            </div> <!-- /example -->
                         <pre class="prettyprint linenums">
 &lt;!-- Illustrative --&gt;
 &lt;i class=&quot;icon-add-circle&quot;&gt;Add&lt;/i&gt;
@@ -408,10 +422,21 @@
 &lt;button class=&quot;icon-add-circle&quot;&gt;Add&lt;/button&gt;
 
 &lt;!-- Actionable with label --&gt;
-&lt;button class=&quot;icon-add-circle withLabel&quot;&gt;Add&lt;/button&gt;
-</pre>
+&lt;button class=&quot;icon-add-circle withLabel&quot;&gt;Add&lt;/button&gt;</pre>
+                    </div> <!-- /compoenentSample -->
+                    <p>Open <a href="examples/icon-browser.html"> 
+                        Sample</a></p>
+                </section><!-- icons -->
+
+                <section id="Links">
+                    <h2 class="line">Links</h2>
+                    <p>The <code class="prettyprint">&lt;a&gt;</code> tag comes with a default color and behavior. 
+                        Links remain the same color after they are visited.</p>
+                    <div class="componentSample noCode">
+                        Lorem ipsum dolor sit amet consectetur <a href="#Links">inline link</a> adipisicing do 
+                        tempor incididunt ut labore.
                     </div>
-                </section>
+                </section> <!-- /links -->
 
             </section><!-- /Text Styles -->
 
@@ -421,7 +446,8 @@
 
                 <section id="Header">
                     <h2 class="line">Header</h2>
-                    <p>The top navigation header that appears on every page. It supports a logo, navigation, and drawer (which can contain a badge or other information).</p>
+                    <p>The top navigation header that appears on every page. It supports a logo, navigation, 
+                        and drawer (which can contain a badge or other information).</p>
 
                     <div class="componentSample headerSample">
                         <div class="example">
@@ -2470,7 +2496,7 @@
             <section id="DataPresentation">
                 <h1 class="line">Data Presentation</h1>
                 <p>CUI provides basic grids, tables, and lists for data presentation.</p>
-                
+
                 <section class="hidden" id="List">
                     <h2 class="line">List</h2>
                     <p>List.</p>

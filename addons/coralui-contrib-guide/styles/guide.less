@@ -10,6 +10,22 @@
 @demo-background-color: rgb(247, 247, 247);
 @demo-border-color: rgb(187, 187, 187);
 
+/*
+  shortcuts for a specific font or style
+*/
+.bold {
+  font-weight: bold;
+}
+.italic {
+  font-style: italic;
+}
+.clean-light {
+  font-family: AdobeCleanLight;
+}
+.condensed {
+  font-family: AdobeCleanCondensed;
+}
+
 // Headings
 h1.line,
 h2.line,
@@ -289,14 +305,20 @@ div.fakeBody {
 }
 
 .res-buttons {
+  margin-bottom: 1rem;
+
   label {
+    float: left;
     line-height: 1.25rem;
     font-size: 1.25rem;
     font-weight: bold;
     display: inline-block;
+    margin-right: 1rem;
   }
+
   
   button {
+    float: left;
     width: 2rem;
     min-width: 0;
     padding: 0 0;
@@ -304,6 +326,7 @@ div.fakeBody {
   button + button {
     border-left: none;
   }
+  .clearfix;
 }
 
 pre.jsDocExample + h3 {
