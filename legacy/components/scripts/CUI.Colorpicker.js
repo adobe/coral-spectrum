@@ -60,6 +60,10 @@
                             .find('input.colorpicker-launcher');
                     this.$hiddenInput = this.$element.find("input[name='" +
                             this.options.name + "']");
+                    
+                    if (this.$element.attr("value")) {
+                        this._setColor(this.$element.attr("value"));
+                    }
 
                     if (this.options.disabled) {
                         this.$element.find(">input").attr("disabled",
@@ -112,7 +116,7 @@
                     if (this.$element.data("name")) {
                         this.options.name = this.$element.data("name");
                     }
-
+                    
                     if (this.$element.attr("title")) {
                         this.options.title = this.$element.attr("title");
                     }
