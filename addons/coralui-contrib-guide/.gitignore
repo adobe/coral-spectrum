@@ -1,7 +1,0 @@
-.DS_Store
-/build
-/temp
-/node_modules
-.idea/
-atlassian-ide-plugin.xml
-*.iml
