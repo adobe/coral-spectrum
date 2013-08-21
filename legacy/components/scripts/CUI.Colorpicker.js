@@ -63,7 +63,7 @@
                     
                     if (this.$element.attr("value")) {
                         var initialVal = this.$element.attr("value");
-                        if(this._isValidInitialColorValue(initialVal)){
+                        if(CUI.util.color.isValid("rgba", initialVal) || CUI.util.color.isValid("rgb", initialVal)){
                             this._setColor(initialVal);
                         }else{
                             this.$element.removeAttr("value");
@@ -708,15 +708,8 @@
                 
                 _clearCMYKFields : function() {
                     this.$element.find("input[name^=':cmyk']").val("");
-                },
-                
-                _isValidInitialColorValue : function(colorRGBAstr){
-                    if(colorRGBAstr.indexOf("rgba") != -1 || colorRGBAstr.indexOf("rgb") != -1){
-                        return CUI.util.color.fixHex(CUI.util.color.RGBAToHex(colorRGBAstr)) !== "";
-                    }
-                    return false;
                 }
-
+                
             });
 
     CUI.util.plugClass(CUI.Colorpicker);
