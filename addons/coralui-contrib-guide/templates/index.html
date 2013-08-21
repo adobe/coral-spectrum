@@ -119,9 +119,9 @@
                     <a class="heading" href="#DataPresentation">Data&nbsp;Presentation</a>
 
                     <nav class="fold">
-                        <a href="#List">List</a>
+                        <a class='hidden' href="#List">List</a>
                         <a href="#Table">Table</a>
-                        <a href="#Grid">Grid</a>
+                        <a class='hidden' href="#Grid">Grid</a>
                     </nav>
                 </section>
 
@@ -2470,11 +2470,10 @@
             <section id="DataPresentation">
                 <h1 class="line">Data Presentation</h1>
                 <p>CUI provides basic grids, tables, and lists for data presentation.</p>
-
+                
                 <section class="hidden" id="List">
                     <h2 class="line">List</h2>
                     <p>List.</p>
-
                     <div class="componentSample">
                         <div class="example">
                             <ul class="list">
@@ -2482,34 +2481,32 @@
                             </ul>
                         </div>
                         <pre class="prettyprint linenums"></pre>
-                    </div>
+                    </div> <!-- /componentSample -->
                     <div>
                         Open <a href="examples/lists/index.html">Sample</a>
                     </div>
                 </section>
+                <!-- /List -->
 
                 <section class="hidden" id="Grid">
                     <h2 class="line">Grid</h2>
                     <p>Grid.</p>
-
                     <div class="componentSample">
                         <div class="example">
-
                             <ul class="grid">
                                 <li>Item</li>
                             </ul>
-
                         </div>
                         <pre class="prettyprint linenums"></pre>
-                    </div>
+                    </div> <!-- /componentSample -->
                     <div>
                         Open <a href="examples/gridlayout/index.html">Sample</a>
                     </div>
                 </section>
+                <!-- /Grid -->
 
                 <section id="Table">
                     <h2 class="line">Table</h2>
-
                     <div class="componentSample">
                         <div class="example">
                             <table class="data">
@@ -2554,8 +2551,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
-
+                        </div> <!-- /example -->
                         <pre class="prettyprint linenums">
 &lt;table class=&quot;data&quot;&gt;
  &lt;thead&gt;
@@ -2574,12 +2570,12 @@
          &lt;td class=&quot;num&quot;&gt;1,049&lt;/td&gt;
      &lt;/tr&gt;
  &lt;/tbody&gt;
-&lt;/table&gt;
-</pre>
-                    </div>
-
+&lt;/table&gt;</pre>
+                    </div> <!-- /componentSample -->
                 </section>
-            </section><!-- /DataPresentation -->
+                <!-- /Table -->
+            </section>
+            <!-- /DataPresentation -->
 
             <section id="Cards">
                 <h1 class="line">Cards</h1>
