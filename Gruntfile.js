@@ -637,6 +637,7 @@ module.exports = function (grunt) {
             release: {
                 src: [
                     'index.html',
+                    'bug_template.html',
                     'css/**',
                     'js/**',
                     'doc/**',
