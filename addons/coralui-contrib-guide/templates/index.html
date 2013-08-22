@@ -438,17 +438,17 @@
                     </div>
                 </section> <!-- /links -->
 
-            </section><!-- /Text Styles -->
+            </section>
+            <!-- /Text Styles -->
 
             <section id="PageComponents">
                 <h1 class="line">Page Components</h1>
-                <p>Page components are top level pieces that appear on nearly every page.</p>
+                <p>Page components are top level components that appear on nearly every page.</p>
 
                 <section id="Header">
                     <h2 class="line">Header</h2>
                     <p>The top navigation header that appears on every page. It supports a logo, navigation, 
                         and drawer (which can contain a badge or other information).</p>
-
                     <div class="componentSample headerSample">
                         <div class="example">
                             <header class="top">
@@ -463,7 +463,7 @@
                                 </div>
 
                             </header>
-                        </div>
+                        </div> <!-- /example -->
                         <pre class="prettyprint linenums">
 &lt;header class=&quot;top&quot;&gt;
     &lt;div class=&quot;logo&quot;&gt;&lt;i class=&quot;icon-coral medium&quot;/&gt;CoralUI logo&lt;/i&gt;&lt;/div&gt;
@@ -475,12 +475,11 @@
     &lt;div class=&quot;drawer&quot;&gt;
         &lt;div class=&quot;badge&quot;&gt;5&lt;/div&gt;
     &lt;/div&gt;
-&lt;/header&gt;
-</pre>
-                    </div>
+&lt;/header&gt;</pre>
+                    </div> <!-- /componentSample -->
 
-                    <p>Below is an alternate header with <a href="#Breadcrumbs">breadcrumb</a> navigation, and a <a href="#Popover">popover</a> for secondary navigation.
-
+                    <p>Below is an alternate header with <a href="#Breadcrumbs">breadcrumb</a> navigation, and 
+                        a <a href="#Popover">popover</a> for secondary navigation.
                     <div class="componentSample">
                         <div class="example">
                             <header class="top">
@@ -500,7 +499,7 @@
                                     <a href="#" class="icon-user">Username</a>
                                 </div>
                             </header>
-                        </div>
+                        </div> <!-- example -->
                         <pre class="prettyprint linenums">
 &lt;header class=&quot;top&quot;&gt;
     &lt;div class=&quot;logo&quot;&gt;&lt;i class=&quot;icon-coral medium&quot;/&gt;CoralUI logo&lt;/i&gt;&lt;/div&gt;
@@ -518,36 +517,37 @@
         &lt;div class=&quot;badge&quot;&gt;5&lt;/div&gt;
         &lt;a href=&quot;#&quot; class=&quot;icon-user&quot;&gt;Username&lt;/a&gt;
     &lt;/div&gt;
-&lt;/header&gt;
-</pre>
-                    </div>
+&lt;/header&gt;</pre>
+                    </div> <!-- /componentSample -->
                 </section>
+                <!-- /Header -->
 
                 <section id="Rail">
                     <h2 class="line">Rail</h2>
                     <p>The side panel used for metadata and feeds.</p>
-                    
                     <h3>Positioning</h3>
-                    <p>The rail can be placed on the left or the right by applying the <code class="atv">left</code> or <code class="atv">right</code> class.</p>
-                    
+                    <p>The rail can be placed on the left or the right by applying the <code class="atv">left</code> 
+                        or <code class="atv">right</code> class.</p>
                     <h3>Sections</h3>
-                    <p>By using the <code class="prettyprint">&lt;section&gt;</code> tag, the rail can contain multiple sections separated by a border.</p>
-                    <p>The <code class="atv">bare</code> and <code class="atv">thin</code> CSS classes can be added to remove the border or padding on each section respectively.</p>
+                    <p>By using the <code class="prettyprint">&lt;section&gt;</code> tag, the rail can contain multiple 
+                        sections separated by a border.</p>
+                    <p>The <code class="atv">bare</code> and <code class="atv">thin</code> CSS classes can be added 
+                        to remove the border or padding on each section respectively.</p>
                     <p>Section headings should be contained within the <code class="prettyprint">&lt;h4&gt;</code> tag.</p>
-                    
                     <div class="componentSample railSample">
                         <div class="example">
-
                             <div class="page shadowBox" role="main">
                                 <div class="rail right" role="complementary">
                                     <div class="wrap">
                                         <section>
-                                            <h4>News Feed</h4>
+                                            <!-- TODO: remove this style hack when rail styles are fixed -->
+                                            <h4 style="color:#C8C8C8">News Feed</h4>
                                         </section>
                                         <section>
-                                            <h4>Revised asset ready for review</h4>
+                                            <!-- TODO: remove this style hack when rail styles are fixed -->
+                                            <h4 style="color:#C8C8C8">Revised asset ready for review</h4>
                                             <div class="smallText greyText lightText">Modified yesterday by Rob Cobourn</div>
-                                            <p class="smallText">I created a new segment thing for the Chance campaign because we left out the Foursquare that will be checking in at Olympic events.</p>
+                                            <p class="smallText">I created a new segment thing for the  ... </p>
                                         </section>
                                     </div>
                                 </div>
@@ -555,8 +555,7 @@
                                     
                                 </div>
                             </div>
-
-                        </div>
+                        </div> <!-- /example -->
                         <pre class="prettyprint linenums">
 &lt;div class=&quot;page&quot; role=&quot;main&quot;&gt;
     &lt;div class=&quot;rail right&quot; role=&quot;complementary&quot;&gt;
@@ -567,65 +566,70 @@
             &lt;section&gt;
                 &lt;h4&gt;Revised asset ready for review&lt;/h4&gt;
                 &lt;div class=&quot;smallText greyText lightText&quot;&gt;Modified yesterday by Rob Cobourn&lt;/div&gt;
-                &lt;p class=&quot;smallText&quot;&gt;I created a new segment thing for the ....&lt;/p&gt;
+                &lt;p class=&quot;smallText&quot;&gt;I created a new segment thing for the ... blah blah blah ...&lt;/p&gt;
             &lt;/section&gt;
         &lt;/div&gt;
     &lt;/div&gt;
     &lt;div class=&quot;content&quot;&gt;
         
     &lt;/div&gt;
-&lt;/div&gt;
-</pre>
-                    </div>
+&lt;/div&gt;</pre>
+                    </div> <!-- /componentSample -->
                     
                     <h3>Sticky toolbars</h3>
-                    <p>Toolbars within the <code class="atv">content</code> area can stick to the top with some additional markup (see example): You need to add the classes <code class="atv">content-header</code> and <code class="atv">content-container</code></p>
+                    <p>Toolbars within the <code class="atv">content</code> area can stick to the top with some additional 
+                        markup.</p>
+                    <p>You need to add the classes <code class="atv">content-header</code> and 
+                        <code class="atv">content-container</code></p>
                     
                     <div class="componentSample railSample">
-                                            <pre class="prettyprint linenums">
+                        <pre class="prettyprint linenums">
+    ... rail ...                        
 &lt;div class=&quot;content&quot;&gt;
     &lt;nav class="toolbar content-header"&gt;...&lt;/nav&gt;
     &lt;div class="content-container"&gt;
         &lt;p&gt;Content.&lt;/p&gt;
     &lt;/div&gt;
 &lt;/div&gt;
-</pre>
-                    </div>
+    ... rail ...</pre>
+                    </div> <!-- /componentSample -->
+                    <!-- /sticky toolbars -->
                     
-<p>If you are already using some kind of container div like <code class="atv">grid-container</code>, you can just add the class  <code class="atv">content-container</code> to it: <code class="prettyprint">&lt;div class="grid-container content-container"&gt;</code></p>
+<p>If you are already using some kind of container div like <code class="atv">grid-container</code>, 
+    you can just add the class  <code class="atv">content-container</code> to it:</p>
+<p><code class="prettyprint">&lt;div class="grid-container content-container"&gt;</code></p>
                     <div>
                         Open <a href="examples/sticky/index.html">Sample A</a> or <a href="examples/sticky/rail.html">Sample B</a>
                     </div>
                 </section>
+                <!-- /Rail -->
 
                 <section id="Well">
                     <h2 class="line">Well</h2>
                     <p>Wells are used to separate field groups or large blocks of text.</p>
-
                     <div class="componentSample">
                         <div class="example">
-
                             <strong>Section 1</strong>
                             <section class="well">
                                 Content goes here.
                             </section>
-
                             <strong>Section 2</strong>
                             <section class="well">
                                 More content goes here.
                             </section>
-
-                        </div>
+                        </div> <!-- /example -->
                         <pre class="prettyprint linenums">
 &lt;strong&gt;Label&lt;/strong&gt;
 &lt;section class=&quot;well&quot;&gt;
     Content goes here.
 &lt;/section&gt;
 </pre>
-                    </div>
-                </section>
+                    </div> <!-- /componentSample -->
+                </section> 
+                <!-- /Well -->
 
-            </section><!-- /Page Components -->
+            </section>
+            <!-- /Page Components -->
 
             <section id="Navigation">
                 <h1 class="line">Navigation</h1>
