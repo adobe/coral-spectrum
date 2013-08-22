@@ -44,6 +44,12 @@
             }
 
             this._setTagList();
+
+            // if we have a static <select> based list
+            // load the values from markup
+            if (this.options.type === 'static') {
+                this._handleNativeSelect();
+            }
         },
 
         /**
@@ -75,26 +81,34 @@
 
                 // if it is in single selection mode, 
                 // then the btn receives the label of the selected item
-                this._select.on('change.select', function (event) {
-                    if (self.options.multiple) {
-                        // loop over all options
-                        $.each(self._select[0].options, function (i, opt) {
-                            if (opt.selected) {
-                                self._tagListWidget.addItem({
-                                    value: opt.value,
-                                    display: opt.text
-                                });
-                            } else {
-                                self._tagListWidget.removeItem(opt.value);
-                            }
-                        });
-                    } else {
-                        self._button.text(self._select[0][self._select[0].selectedIndex].text);
-                    }
-                });
+                this._select.on('change.select', this._handleNativeSelect.bind(this));
 
             } else {
                 this._select.off('change.select');
+            }
+        },
+
+        /**
+         * handles a native change event on the select
+         * @private
+         */
+        _handleNativeSelect: function (event) {
+            var self = this;
+
+            if (self.options.multiple) {
+                // loop over all options
+                $.each(self._select[0].options, function (i, opt) {
+                    if (opt.selected) {
+                        self._tagListWidget.addItem({
+                            value: opt.value,
+                            display: opt.text
+                        });
+                    } else {
+                        self._tagListWidget.removeItem(opt.value);
+                    }
+                });
+            } else {
+                self._button.text(self._select[0][self._select[0].selectedIndex].text);
             }
         },
 

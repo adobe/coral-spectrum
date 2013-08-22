@@ -60,6 +60,16 @@
                             .find('input.colorpicker-launcher');
                     this.$hiddenInput = this.$element.find("input[name='" +
                             this.options.name + "']");
+                    
+                    if (this.$element.attr("value")) {
+                        var initialVal = this.$element.attr("value");
+                        if(CUI.util.color.isValid("rgba", initialVal) || CUI.util.color.isValid("rgb", initialVal)){
+                            this._setColor(initialVal);
+                        }else{
+                            this.$element.removeAttr("value");
+                        }
+                        
+                    }
 
                     if (this.options.disabled) {
                         this.$element.find(">input").attr("disabled",
@@ -112,7 +122,7 @@
                     if (this.$element.data("name")) {
                         this.options.name = this.$element.data("name");
                     }
-
+                    
                     if (this.$element.attr("title")) {
                         this.options.title = this.$element.attr("title");
                     }
@@ -621,8 +631,8 @@
                     table.find("input[name^=':cmyk_']").each(function(index, element){
                         $(element).attr("maxlength", "3");
                         $(element).on("blur", function(event){
-                            var rgbRegex = /^[1-9]?[0-9]{1}$|^100$/;
-                            if (!rgbRegex.test($(event.target).val().trim()) || $("input:text[value=''][name^='cmyk_']").length > 0){
+                            var cmykRegex = /^[1-9]?[0-9]{1}$|^100$/;
+                            if (!cmykRegex.test($(event.target).val().trim()) || $("input:text[value=''][name^='cmyk_']").length > 0){
                                 $(event.target).val("");
                                 this._clearRGBFields();
                                 this.$element.find("input[name=':hex']").val("");
@@ -698,8 +708,8 @@
                 
                 _clearCMYKFields : function() {
                     this.$element.find("input[name^=':cmyk']").val("");
-                },
-
+                }
+                
             });
 
     CUI.util.plugClass(CUI.Colorpicker);
