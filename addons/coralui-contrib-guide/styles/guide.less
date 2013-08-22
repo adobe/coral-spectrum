@@ -7,9 +7,24 @@
 @import 'shared/includes/variables';
 @import 'shared/includes/mixins';
 
-
 @demo-background-color: rgb(247, 247, 247);
 @demo-border-color: rgb(187, 187, 187);
+
+/*
+  shortcuts for a specific font or style
+*/
+.bold {
+  font-weight: bold;
+}
+.italic {
+  font-style: italic;
+}
+.clean-light {
+  font-family: AdobeCleanLight;
+}
+.condensed {
+  font-family: AdobeCleanCondensed;
+}
 
 // Headings
 h1.line,
@@ -290,14 +305,20 @@ div.fakeBody {
 }
 
 .res-buttons {
+  margin-bottom: 1rem;
+
   label {
+    float: left;
     line-height: 1.25rem;
     font-size: 1.25rem;
     font-weight: bold;
     display: inline-block;
+    margin-right: 1rem;
   }
+
   
   button {
+    float: left;
     width: 2rem;
     min-width: 0;
     padding: 0 0;
@@ -305,6 +326,7 @@ div.fakeBody {
   button + button {
     border-left: none;
   }
+  .clearfix;
 }
 
 pre.jsDocExample + h3 {
@@ -467,16 +489,4 @@ div.iconBox {
 
 .iconDetailRail {
   width: 20rem !important;
-}
-
-// markers
-
-span.deprecated {
-  font-size: 0.75rem;
-  border: 1px solid #ff9c00;
-  border-radius: 5px;
-  background: #fff600;
-  margin: 0 5px;
-  padding: 1px;
-  color: #0a0a0a;
 }

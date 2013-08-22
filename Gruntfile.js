@@ -78,6 +78,7 @@ module.exports = function (grunt) {
         build: 'build',
         components: 'components',
         legacy: 'legacy',
+        guide: 'addons/coralui-contrib-guide',
         temp: 'temp',
         modules: 'node_modules',
         externals: 'externals',
@@ -271,18 +272,25 @@ module.exports = function (grunt) {
                         src: ['**'],
                         dest: '<%= dirs.temp %>/js/components'
                     },
-                    { // get legacy js
+                    { // legacy js
                         expand: true,
                         filter: 'isFile',
                         cwd: '<%= dirs.legacy %>/scripts',
                         src: ['*.js'],
                         dest: '<%= dirs.temp %>/js'
                     },
-                    { // get legacy resources
+                    { // legacy resources
                         expand: true,
                         cwd: '<%= dirs.legacy %>/components/resources',
                         src: ['**'],
                         dest: '<%= dirs.build %>/res/components'
+                    },
+                    { // legacy examples
+                      // note: this will clobber an examples in core or modular components
+                        expand: true,
+                        cwd: '<%= dirs.legacy %>/components/examples',
+                        src: ['**'],
+                        dest: '<%= dirs.build %>/examples'
                     },
                     { // testrunner + dependencies
                         expand: true,
@@ -299,11 +307,29 @@ module.exports = function (grunt) {
             },
             guide: {
                 files: [
-                    { // get build from the core
+                    { // guide html
                         expand: true,
-                        cwd: '<%= dirs.legacy %>/guide/',
+                        cwd: '<%= dirs.guide %>/templates/',
                         src: ['**'],
                         dest: '<%= dirs.build %>/'
+                    },
+                    { // guide less
+                        expand: true,
+                        cwd: '<%= dirs.guide %>/styles/',
+                        src: ['**'],
+                        dest: '<%= dirs.build %>/less'
+                    },
+                    { // guide scripts
+                        expand: true,
+                        cwd: '<%= dirs.guide %>/scripts/',
+                        src: ['**'],
+                        dest: '<%= dirs.build %>/js/'
+                    },
+                    { // guide resources
+                        expand: true,
+                        cwd: '<%= dirs.guide %>/res/',
+                        src: ['**'],
+                        dest: '<%= dirs.build %>/res/guide'
                     },
                     { // get external dependencies
                         expand: true,
@@ -371,14 +397,14 @@ module.exports = function (grunt) {
                     dirs.core.components + '/**/tests/**.js'
                 ],
                 tasks: ['subgrunt:core_quicktest', 'quicktest']
-            }, // core_scripts
+            }, 
             core_styles: {
                 files: [
                     dirs.core.components + '/**/styles/**.less',
                     dirs.core.shared + '/styles/**/**.less',
                 ],
                 tasks: ['subgrunt:core_quickless', 'quickless']
-            }, // core_styles
+            }, 
             core_html: {
                 files: [
                     dirs.core.components + '/**/examples/**.html'
@@ -387,22 +413,30 @@ module.exports = function (grunt) {
                 options: {
                   nospawn: true
                 }
-            }, // core_html
+            }, 
+            // watch: contrib content
             contrib_scripts: {
                 files: [ 
                     dirs.components + '/**/scripts/*.js',
                     dirs.components + '/**/tests/*.js'
                 ],
                 tasks: ['quicktest']
-            }, // contrib_scripts
+            }, 
             contrib_less: {
                 files: [ dirs.components + '/**/styles/*.less'],
                 tasks: ['quickless']
-            }, // contrib_less
+            }, 
             contrib_html: {
                 files: [ dirs.components + '/**/examples/*.html'],
                 tasks: ['copy:retro']
-            }, // contrib_html
+            }, 
+            // watch: legacy content
+            legacy_html: {
+                files: [
+                    dirs.legacy + '/components/examples/**/*.html'
+                ],
+                tasks: ['copy:retro']
+            },
             legacy_scripts: {
                 files: [
                     dirs.legacy + '/components/scripts/*.js',
@@ -410,24 +444,25 @@ module.exports = function (grunt) {
                     dirs.legacy + '/guide/js/guide.js'
                 ],
                 tasks: ['quicktest']
-            }, // legacy_scripts
+            }, 
             legacy_styles: {
                 files: [
                     dirs.legacy + '/components/styles/*.less',
                 ],
                 tasks: ['quickless']
-            }, // legacy_styles
+            }, 
+            // watch: guide content
             guide: {
                 files: [
-                    dirs.legacy + '/guide/js/guide.js',
-                    dirs.legacy + '/guide/less/*.less',
-                    dirs.legacy + '/guide/index.html'
+                    dirs.guide + '/js/guide.js',
+                    dirs.guide + '/styles/*.less',
+                    dirs.guide + '/templates/*.html'
                 ],
                 tasks: ['guide']
-            } // guide
+            }
 
         },  
-        // watch
+        // end of watch options
 
         less: {
             "cui-wrapped": {

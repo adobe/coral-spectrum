@@ -48,40 +48,35 @@
 
                 <section class="links">
                     <a class="heading" href="#General">General</a>
-
                     <nav class="fold">
                         <a href="#WhatIsCUI">What is CoralUI?</a>
                         <a href="#ResolutionIndependence">Resolution Independence</a>
                         <a href="#BrowserSupport">Browser Support</a>
                         <a href="#WidgetPhilosophy">Widget Philosophy</a>
                     </nav>
-                </section>
+                </section> <!-- /general -->
 
                 <section class="links foldable">
-                    <a class="heading" href="#GeneralStyles">General Styles</a>
-
+                    <a class="heading" href="#TextStyles">Text Styles</a>
                     <nav class="fold">
-                        <a href="#Headings">Headings</a>
-                        <a href="#Link">Link</a>
                         <a href="#Fonts">Fonts</a>
+                        <a href="#Headings">Headings</a>
                         <a href="#Icons">Icons</a>
-                        <a href="#Sticky">Sticky elements (depr.)</a>
+                        <a href="#Links">Links</a>
                     </nav>
-                </section>
+                </section> <!-- /general styles -->
 
                 <section class="links foldable">
                     <a class="heading" href="#PageComponents">Page&nbsp;Components</a>
-
                     <nav class="fold">
                         <a href="#Header">Header</a>
                         <a href="#Rail">Rail</a>
                         <a href="#Well">Well</a>
                     </nav>
-                </section>
+                </section> <!-- /page components -->
 
                 <section class="links foldable">
                     <a class="heading" href="#Navigation">Navigation</a>
-
                     <nav class="fold">
                         <a href="#Toolbar">Toolbar</a>
                         <a href="#Breadcrumbs">Breadcrumbs</a>
@@ -90,44 +85,41 @@
                         <a href="#Accordion">Accordion / Collapsible</a>                        
                         <a href="#Wizard">Wizard</a>                    
                  </nav>
-                </section>
+                </section> <!-- /navigation -->
 
                 <section class="links foldable">
                     <a class="heading" href="#ButtonsAndControls">Buttons &amp; Controls</a>
-
                     <nav class="fold">
+                        <a href="#Autocomplete">Autocomplete</a>
                         <a href="#Buttons">Buttons</a>
-                        <a href="#TextField">Text field</a>
-                        <a href="#TextArea">Text area</a>
-                        <a href="#SearchField">Search field</a>
-                        <a href="#Filters">Filters</a>
                         <a href="#Checkbox">Checkbox</a>
+                        <a href="#Datepicker">Datepicker</a>
+                        <a href="#Draggable">Draggable</a>
+                        <a href="#Dropdown">Dropdown<span class="deprecated">deprecated</span></a>
+                        <a href="#Filters">Filters</a>
+                        <a href="#FormErrors">Form Errors</a>                        
+                        <a href="#NumberInput">Number Input</a>
                         <a href="#RadioButtons">Radio buttons</a>
+                        <a href="#SearchField">Search field</a>
+                        <a href="#Select">Select</a>
                         <a href="#Selector">Selector</a>
                         <a href="#Slider">Slider</a>
-                        <a href="#Dropdown">Dropdown<span class="deprecated">deprecated</span></a>
-                        <a href="#Select">Select</a>
-                        <a href="#Autocomplete">Autocomplete</a>
-                        <a href="#Datepicker">Datepicker</a>
-                        <a href="#NumberInput">Number Input</a>
-                        <a href="#Draggable">Draggable</a>
-                        <a href="#FormErrors">Form Errors</a>                        
+                        <a href="#TextArea">Text area</a>
+                        <a href="#TextField">Text field</a>
                     </nav>
-                </section>
+                </section> <!-- /buttons and controls -->
 
                 <section class="links foldable">
                     <a class="heading" href="#DataPresentation">Data&nbsp;Presentation</a>
-
                     <nav class="fold">
-                        <a href="#List">List</a>
+                        <a class='hidden' href="#List">List</a>
                         <a href="#Table">Table</a>
-                        <a href="#Grid">Grid</a>
+                        <a class='hidden' href="#Grid">Grid</a>
                     </nav>
-                </section>
+                </section> <!-- /data presentation -->
 
                 <section class="links foldable">
                     <a class="heading" href="#Cards">Cards</a>
-
                     <nav class="fold">
                         <a href="#Cards-Asset">Asset</a>
                         <a href="#Cards-Collection">Collection</a>
@@ -135,20 +127,18 @@
                         <a href="#Cards-Page">Page</a>
                         <a href="#Cards-Board">Board</a>
                     </nav>
-                </section>
+                </section> <!-- /cards -->
 
                 <section class="links foldable">
                     <a class="heading" href="#Dialogs">Dialogs</a>
-
                     <nav class="fold">
                         <a href="#ModalDialog">Modal</a>
                         <a href="#Popover">Popover</a>
                  </nav>
-                </section>
+                </section> <!-- /dialogs -->
 
                 <section class="links foldable">
                     <a class="heading" href="#StatusIndicators">Status Indicators</a>
-
                     <nav class="fold">
                         <a href="#Alert">Alert</a>
                         <a href="#Tooltip">Tooltip</a>
@@ -156,77 +146,66 @@
                         <a href="#Spinner">Spinner</a>
                         <a href="#ProgressBar">Progress Bar</a>
                     </nav>
-                </section>
+                </section> <!-- /status indicators -->
                 
-            </div>
-        </div>
+            </div> <!-- /wrap -->
+        </div> <!-- /main rail -->
 
         <div class="content">
 
             <section id="General">
                 <h2 class="line" id="WhatIsCUI">What is CoralUI?</h2>
-                <p>CoralUI or CUI (pronounced "cooey") is an implementation of the CloudUI visual style from Adobe XD.</p>
+                <p>CoralUI (or CUI) is an implementation of the <a href="https://zerowing.corp.adobe.com/display/CloudUI/Home" 
+                    target="_blank">CloudUI</a> visual style.</p>
 
                 <p>CoralUI's aim is to provide everything your product needs to adopt the CloudUI visual style.</p>
 
                 <h2 class="line" id="ResolutionIndependence">Resolution Independence</h2>
-                <p>CoralUI is resolution independent. By using elastic measurement units to define sizes (em and rem), CoralUI can be scaled to the perfect size for any display, regardless of size or pixel density.</p>
+                <p>CoralUI is resolution independent. By using elastic measurement units to define sizes (em and rem), 
+                    CoralUI can be scaled to the perfect size for any display, regardless of size or pixel density.</p>
 
                 <div class="res-buttons"><label>Try it:</label>
-                    <button id="res-minus" class="warning">-</button><button id="res-reset">=</button><button id="res-plus" class="primary">+</button>
+                    <button id="res-minus" class="warning">-</button>
+                    <button id="res-reset">=</button>
+                    <button id="res-plus" class="primary">+</button>
                 </div>
 
                 <h2 class="line" id="BrowserSupport">Browser Support</h2>
                 <p>CoralUI supports all modern browsers, including IE 9+, Firefox (latest), Chrome (latest), Safari (latest).</p>
-                <p>Prevalent mobile devices are also be supported, including Android 3+ and iOS 5+.</p>
+                <p>Prevalent mobile devices are also supported, including Android 3+ and iOS 5+.</p>
 
                 <h2 class="line" id="WidgetPhilosophy">Widget Philosophy</h2>
-                <p>All CoralUI widgets are guaranteed to fulfill 8 promises:</p>
+                <p>All CoralUI widgets are guaranteed to fulfill these promises:</p>
 
                 <ol>
-                    <li>Widgets will be available as a jQuery plugin: <code class="prettyprint">$('#myModal').modal()</code></li>
-                    <li>Widgets will be available as a class: <code class="prettyprint">myModal = new CUI.Modal({ element: '#myModal' })</code>.</li>
-                    <li>Widget APIs will always be fully documented <a href="doc/index.html">here</a>.</li>
-                    <li>Widgets will always be easily extendable with <code class="prettyprint">CUI.Modal.extend()</code>.</li>
-                    <li>Widgets will progressively enhance existing markup, or render a template using passed options if no markup is present.</li>
-                    <li>Widgets will take advantage of declarative markup using <code>data-*</code> attributes.</li>
+                    <li>Widgets will be available as a jQuery plugin: 
+                        <code class="prettyprint">$('#myModal').modal()</code></li>
+                    <li>Widgets will be available as a class: 
+                        <code class="prettyprint">myModal = new CUI.Modal({ element: '#myModal' })</code>.</li>
+                    <li>Widget APIs will always be fully documented 
+                        <a href="doc/index.html">here</a>.</li>
+                    <li>Widgets will always be easily extendable with 
+                        <code class="prettyprint">CUI.Modal.extend()</code>.</li>
+                    <li>Widgets will progressively enhance existing markup, or render a template 
+                        using passed options if no markup is present.</li>
+                    <li>Widgets will take advantage of declarative markup using 
+                        <code>data-*</code> attributes.</li>
                     <li>Widgets will work on both desktop and mobile.</li>
-                    <li>Widgets will be <a href="test/coverage.html">fully tested</a> with <a href="test/index.html">automated unit tests</a>.</li>
+                    <li>Widgets will be <a href="tests/coverage.html">fully tested</a> with 
+                        <a href="tests/index.html">automated unit tests</a>.</li>
                 </ol>
-
             </section>
+            <!-- /General -->
 
-            <section id="GeneralStyles">
+            <section id="TextStyles">
                 <h1 class="line">Text Styles</h1>
-                <p>CUI provides basic text styles suitable for paragraph. When laying out your page, you might need to override the margins on the heading elements.</p>
-
-                <section id="Headings">
-                    <h2 class="line">Headings</h2>
-                    <p>Use the <code class="prettyprint">&lt;h1&gt;</code> through <code class="prettyprint">&lt;h6&gt;</code> tags to add headings to sections on your page.</p>
-
-                    <div class="componentSample noCode headingSample">
-                        <h1>H1 - Header 1 (Page title)</h1>
-                        <h2>H2 - Header 2 (Modal Title)</h2>
-                        <h3>H3 - Sub Header 1 (Chart/Table Header)</h3>
-                        <h4>H4 - Sub Header 2 (List/Well Headers)</h4>
-                        <h5>H5 - Captions, help text</h5>
-                    </div>
-
-                </section>
-
-                <section id="Links">
-                    <h2 class="line">Link</h2>
-                    <p>The <code class="prettyprint">&lt;a&gt;</code> tag comes with a default color and behavior. Links remain the same color after they are visited.</p>
-
-                    <div class="componentSample noCode">
-                        Lorem ipsum dolor sit amet consectetur <a href="#Links">inline link</a> adipisicing do tempor incididunt ut labore.
-                    </div>
-                </section>
+                <p>CUI provides basic text styles suitable for paragraphs. When laying out your page, 
+                    you might need to override the margins on the heading elements.</p>
 
                 <section id="Fonts">
                     <h2 class="line">Fonts</h2>
-                    <p>Three variations of the Adobe Clean font are provided. Reference the table below to determine the CSS properties to apply for each font style.</p>
-
+                    <p>Three variations of the Adobe Clean font are provided. Reference the table below to 
+                        determine the CSS properties to apply for each font style.</p>
                     <table class="data">
                         <thead>
                             <tr>
@@ -241,58 +220,93 @@
                                 <td>AdobeClean</td>
                                 <td>normal</td>
                                 <td>normal</td>
-                                <td class="AdobeClean">The quick brown fox jumped over the lazy dog.</td>
+                                <td>The quick brown fox jumped over the lazy dog.</td>
                             </tr>
                             <tr>
                                 <td>AdobeClean</td>
-                                <td>bold</td>
+                                <td class="bold">bold</td>
                                 <td>normal</td>
-                                <td class="AdobeClean_Bold">The quick brown fox jumped over the lazy dog.</td>
+                                <td class="bold">The quick brown fox jumped over the lazy dog.</td>
                             </tr>
                             <tr>
                                 <td>AdobeClean</td>
                                 <td>normal</td>
-                                <td>italic</td>
-                                <td class="AdobeClean_Italic">The quick brown fox jumped over the lazy dog.</td>
+                                <td class="italic">italic</td>
+                                <td class="italic">The quick brown fox jumped over the lazy dog.</td>
                             </tr>
                             <tr>
                                 <td>AdobeClean</td>
-                                <td>bold</td>
-                                <td>italic</td>
-                                <td class="AdobeClean_BoldItalic">The quick brown fox jumped over the lazy dog.</td>
+                                <td class="bold">bold</td>
+                                <td class="italic">italic</td>
+                                <td class="bold italic">The quick brown fox jumped over the lazy dog.</td>
                             </tr>
-                            <tr>
+                            <!-- /Adobe Clean -->
+
+                            <tr class="clean-light">
                                 <td>AdobeCleanLight</td>
                                 <td>normal</td>
                                 <td>normal</td>
-                                <td class="AdobeClean_Light">The quick brown fox jumped over the lazy dog.</td>
+                                <td>The quick brown fox jumped over the lazy dog.</td>
                             </tr>
-                            <tr>
+                            <tr class="clean-light">
                                 <td>AdobeCleanLight</td>
                                 <td>normal</td>
-                                <td>italic</td>
-                                <td class="AdobeClean_LightItalic">The quick brown fox jumped over the lazy dog.</td>
+                                <td class="italic">italic</td>
+                                <td class="italic">The quick brown fox jumped over the lazy dog.</td>
                             </tr>
-                            <tr>
+                            <!-- /Adobe Clean Light -->
+
+                            <tr class="condensed">
                                 <td>AdobeCleanCondensed</td>
                                 <td>normal</td>
                                 <td>normal</td>
-                                <td class="AdobeClean_Condensed">The quick brown fox jumped over the lazy dog.</td>
+                                <td>The quick brown fox jumped over the lazy dog.</td>
                             </tr>
-                            <tr>
+                            <tr class="condensed">
+                                <td>AdobeCleanCondensed</td>
+                                <td class="bold">bold</td>
+                                <td>normal</td>
+                                <td class="bold">The quick brown fox jumped over the lazy dog.</td>
+                            </tr>
+                            <tr class="condensed">
                                 <td>AdobeCleanCondensed</td>
                                 <td>normal</td>
-                                <td>italic</td>
-                                <td class="AdobeClean_CondensedItalic">The quick brown fox jumped over the lazy dog.</td>
+                                <td class="italic">italic</td>
+                                <td class="italic">The quick brown fox jumped over the lazy dog.</td>
                             </tr>
+                            <tr class="condensed">
+                                <td>AdobeCleanCondensed</td>
+                                <td class="bold">bold</td>
+                                <td class="italic">italic</td>
+                                <td class="bold italic">The quick brown fox jumped over the lazy dog.</td>
+                            </tr>
+                            <!-- /Adobe Clean Condensed -->
+                      
                         </tbody>
                     </table>
-                </section>
+                </section> <!-- /fonts -->
                 
+                <section id="Headings">
+                    <h2 class="line">Headings</h2>
+                    <p>Use the <code class="prettyprint">&lt;h1&gt;</code> through <code class="prettyprint">&lt;h6&gt;</code> 
+                        tags to add headings to sections on your page.</p>
+                    <div class="componentSample noCode headingSample">
+                        <h1>H1 - Header 1 (Page title)</h1>
+                        <h2>H2 - Header 2 (Modal Title)</h2>
+                        <h3>H3 - Sub Header 1 (Chart/Table Header)</h3>
+                        <h4>H4 - Sub Header 2 (List/Well Headers)</h4>
+                        <h5>H5 - Captions, help text</h5>
+                    </div>
+
+                </section> <!-- /headings -->
 
                 <section id="Icons">
                     <h2 class="line">Icons</h2>
-                    <p>Icons can be added to a number of different elements by using the <code class="atv">icon-*</code> classes that correspond to the icon's filename.</p>
+                    <p>Icons can be added to a number of different elements by using the <code class="atv">icon-*</code> 
+                        classes that correspond to the icon's filename.</p>
+
+                    <p>An example of each of the icons available is shown in the <a href="examples/icon-browser.html"> 
+                        Icon Browser</a></p>
                     
                     <h3>Usage Guidelines</h3>
                     <p>Icons should be applied to three different tags:</p>
@@ -303,8 +317,9 @@
                     </ul>
                     
                     <h3>Accessibility</h3>
-                    <p>Always include label inside of the tag to indicate the icon's function. This text isn't visible by default, but is always readable by screen readers.</p>
                     <p>If you want to show the text, add the <code class="atv">withLabel</code> CSS class.</p>
+                    <p>When not using <code class="atv">withLabel</code>, be sure to still include text inside of the tag 
+                        to indicate the icon's function. This text won't be visible, but will be readable by screen readers.</p>
                  
                     <h3>Sizing</h3>
                     <p>When used without context, icons should be given a size:</p>
@@ -316,12 +331,12 @@
                     </ul>
                     
                     <h3>Variations</h3>
-                    <p>Icons will change color when hovered or clicked appropriate based on context. However, you may force a particular color by applying one of the following CSS classes:</p>
+                    <p>Icons will change color appropriately when hovered or clicked based on context. 
+                        However, you may force a particular color by applying one of the following CSS classes:</p>
                     <ul>
                         <li><code class="atv">white</code> White icon at 100% opacity</li>
                         <li><code class="atv">blue</code> Blue icon at 100% opacity</li>
                     </ul>
-                    
                     <div class="componentSample">
                             <div class="example">
                                 <div class="iconSample">
@@ -389,8 +404,7 @@
                                 
                                 <p style="font-size: 2rem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. Pellentesque congue diam ac nisl vehicula ornare. <i class="icon-calendar">Calendar</i>Cras eu consectetur enim. Aliquam orci augue, sollicitudin nec aliquam sit amet, imperdiet ac leo. Donec aliquam tellus nec ipsum porttitor ut viverra odio luctus. Curabitur in turpis sed nunc consequat ornare eget in nulla. Nam dignissim lectus sed velit sagittis vehicula. Maecenas interdum, quam vel luctus sagittis, mi nisl commodo sapien, eget accumsan nunc metus ac ipsum.</p>
                                 -->
-                                
-                            </div>
+                            </div> <!-- /example -->
                         <pre class="prettyprint linenums">
 &lt;!-- Illustrative --&gt;
 &lt;i class=&quot;icon-add-circle&quot;&gt;Add&lt;/i&gt;
@@ -408,21 +422,33 @@
 &lt;button class=&quot;icon-add-circle&quot;&gt;Add&lt;/button&gt;
 
 &lt;!-- Actionable with label --&gt;
-&lt;button class=&quot;icon-add-circle withLabel&quot;&gt;Add&lt;/button&gt;
-</pre>
-                    </div>
-                </section>
+&lt;button class=&quot;icon-add-circle withLabel&quot;&gt;Add&lt;/button&gt;</pre>
+                    </div> <!-- /compoenentSample -->
+                    <p>Open <a href="examples/icon-browser.html"> 
+                        Sample</a></p>
+                </section><!-- icons -->
 
-            </section><!-- /Text Styles -->
+                <section id="Links">
+                    <h2 class="line">Links</h2>
+                    <p>The <code class="prettyprint">&lt;a&gt;</code> tag comes with a default color and behavior. 
+                        Links remain the same color after they are visited.</p>
+                    <div class="componentSample noCode">
+                        Lorem ipsum dolor sit amet consectetur <a href="#Links">inline link</a> adipisicing do 
+                        tempor incididunt ut labore.
+                    </div>
+                </section> <!-- /links -->
+
+            </section>
+            <!-- /Text Styles -->
 
             <section id="PageComponents">
                 <h1 class="line">Page Components</h1>
-                <p>Page components are top level pieces that appear on nearly every page.</p>
+                <p>Page components are top level components that appear on nearly every page.</p>
 
                 <section id="Header">
                     <h2 class="line">Header</h2>
-                    <p>The top navigation header that appears on every page. It supports a logo, navigation, and drawer (which can contain a badge or other information).</p>
-
+                    <p>The top navigation header that appears on every page. It supports a logo, navigation, 
+                        and drawer (which can contain a badge or other information).</p>
                     <div class="componentSample headerSample">
                         <div class="example">
                             <header class="top">
@@ -437,7 +463,7 @@
                                 </div>
 
                             </header>
-                        </div>
+                        </div> <!-- /example -->
                         <pre class="prettyprint linenums">
 &lt;header class=&quot;top&quot;&gt;
     &lt;div class=&quot;logo&quot;&gt;&lt;i class=&quot;icon-coral medium&quot;/&gt;CoralUI logo&lt;/i&gt;&lt;/div&gt;
@@ -449,12 +475,11 @@
     &lt;div class=&quot;drawer&quot;&gt;
         &lt;div class=&quot;badge&quot;&gt;5&lt;/div&gt;
     &lt;/div&gt;
-&lt;/header&gt;
-</pre>
-                    </div>
+&lt;/header&gt;</pre>
+                    </div> <!-- /componentSample -->
 
-                    <p>Below is an alternate header with <a href="#Breadcrumbs">breadcrumb</a> navigation, and a <a href="#Popover">popover</a> for secondary navigation.
-
+                    <p>Below is an alternate header with <a href="#Breadcrumbs">breadcrumb</a> navigation, and 
+                        a <a href="#Popover">popover</a> for secondary navigation.
                     <div class="componentSample">
                         <div class="example">
                             <header class="top">
@@ -474,7 +499,7 @@
                                     <a href="#" class="icon-user">Username</a>
                                 </div>
                             </header>
-                        </div>
+                        </div> <!-- example -->
                         <pre class="prettyprint linenums">
 &lt;header class=&quot;top&quot;&gt;
     &lt;div class=&quot;logo&quot;&gt;&lt;i class=&quot;icon-coral medium&quot;/&gt;CoralUI logo&lt;/i&gt;&lt;/div&gt;
@@ -492,36 +517,37 @@
         &lt;div class=&quot;badge&quot;&gt;5&lt;/div&gt;
         &lt;a href=&quot;#&quot; class=&quot;icon-user&quot;&gt;Username&lt;/a&gt;
     &lt;/div&gt;
-&lt;/header&gt;
-</pre>
-                    </div>
+&lt;/header&gt;</pre>
+                    </div> <!-- /componentSample -->
                 </section>
+                <!-- /Header -->
 
                 <section id="Rail">
                     <h2 class="line">Rail</h2>
                     <p>The side panel used for metadata and feeds.</p>
-                    
                     <h3>Positioning</h3>
-                    <p>The rail can be placed on the left or the right by applying the <code class="atv">left</code> or <code class="atv">right</code> class.</p>
-                    
+                    <p>The rail can be placed on the left or the right by applying the <code class="atv">left</code> 
+                        or <code class="atv">right</code> class.</p>
                     <h3>Sections</h3>
-                    <p>By using the <code class="prettyprint">&lt;section&gt;</code> tag, the rail can contain multiple sections separated by a border.</p>
-                    <p>The <code class="atv">bare</code> and <code class="atv">thin</code> CSS classes can be added to remove the border or padding on each section respectively.</p>
+                    <p>By using the <code class="prettyprint">&lt;section&gt;</code> tag, the rail can contain multiple 
+                        sections separated by a border.</p>
+                    <p>The <code class="atv">bare</code> and <code class="atv">thin</code> CSS classes can be added 
+                        to remove the border or padding on each section respectively.</p>
                     <p>Section headings should be contained within the <code class="prettyprint">&lt;h4&gt;</code> tag.</p>
-                    
                     <div class="componentSample railSample">
                         <div class="example">
-
                             <div class="page shadowBox" role="main">
                                 <div class="rail right" role="complementary">
                                     <div class="wrap">
                                         <section>
-                                            <h4>News Feed</h4>
+                                            <!-- TODO: remove this style hack when rail styles are fixed -->
+                                            <h4 style="color:#C8C8C8">News Feed</h4>
                                         </section>
                                         <section>
-                                            <h4>Revised asset ready for review</h4>
+                                            <!-- TODO: remove this style hack when rail styles are fixed -->
+                                            <h4 style="color:#C8C8C8">Revised asset ready for review</h4>
                                             <div class="smallText greyText lightText">Modified yesterday by Rob Cobourn</div>
-                                            <p class="smallText">I created a new segment thing for the Chance campaign because we left out the Foursquare that will be checking in at Olympic events.</p>
+                                            <p class="smallText">I created a new segment thing for the  ... </p>
                                         </section>
                                     </div>
                                 </div>
@@ -529,8 +555,7 @@
                                     
                                 </div>
                             </div>
-
-                        </div>
+                        </div> <!-- /example -->
                         <pre class="prettyprint linenums">
 &lt;div class=&quot;page&quot; role=&quot;main&quot;&gt;
     &lt;div class=&quot;rail right&quot; role=&quot;complementary&quot;&gt;
@@ -541,65 +566,70 @@
             &lt;section&gt;
                 &lt;h4&gt;Revised asset ready for review&lt;/h4&gt;
                 &lt;div class=&quot;smallText greyText lightText&quot;&gt;Modified yesterday by Rob Cobourn&lt;/div&gt;
-                &lt;p class=&quot;smallText&quot;&gt;I created a new segment thing for the ....&lt;/p&gt;
+                &lt;p class=&quot;smallText&quot;&gt;I created a new segment thing for the ... blah blah blah ...&lt;/p&gt;
             &lt;/section&gt;
         &lt;/div&gt;
     &lt;/div&gt;
     &lt;div class=&quot;content&quot;&gt;
         
     &lt;/div&gt;
-&lt;/div&gt;
-</pre>
-                    </div>
+&lt;/div&gt;</pre>
+                    </div> <!-- /componentSample -->
                     
                     <h3>Sticky toolbars</h3>
-                    <p>Toolbars within the <code class="atv">content</code> area can stick to the top with some additional markup (see example): You need to add the classes <code class="atv">content-header</code> and <code class="atv">content-container</code></p>
+                    <p>Toolbars within the <code class="atv">content</code> area can stick to the top with some additional 
+                        markup.</p>
+                    <p>You need to add the classes <code class="atv">content-header</code> and 
+                        <code class="atv">content-container</code></p>
                     
                     <div class="componentSample railSample">
-                                            <pre class="prettyprint linenums">
+                        <pre class="prettyprint linenums">
+    ... rail ...                        
 &lt;div class=&quot;content&quot;&gt;
     &lt;nav class="toolbar content-header"&gt;...&lt;/nav&gt;
     &lt;div class="content-container"&gt;
         &lt;p&gt;Content.&lt;/p&gt;
     &lt;/div&gt;
 &lt;/div&gt;
-</pre>
-                    </div>
+    ... rail ...</pre>
+                    </div> <!-- /componentSample -->
+                    <!-- /sticky toolbars -->
                     
-<p>If you are already using some kind of container div like <code class="atv">grid-container</code>, you can just add the class  <code class="atv">content-container</code> to it: <code class="prettyprint">&lt;div class="grid-container content-container"&gt;</code></p>
+<p>If you are already using some kind of container div like <code class="atv">grid-container</code>, 
+    you can just add the class  <code class="atv">content-container</code> to it:</p>
+<p><code class="prettyprint">&lt;div class="grid-container content-container"&gt;</code></p>
                     <div>
                         Open <a href="examples/sticky/index.html">Sample A</a> or <a href="examples/sticky/rail.html">Sample B</a>
                     </div>
                 </section>
+                <!-- /Rail -->
 
                 <section id="Well">
                     <h2 class="line">Well</h2>
                     <p>Wells are used to separate field groups or large blocks of text.</p>
-
                     <div class="componentSample">
                         <div class="example">
-
                             <strong>Section 1</strong>
                             <section class="well">
                                 Content goes here.
                             </section>
-
                             <strong>Section 2</strong>
                             <section class="well">
                                 More content goes here.
                             </section>
-
-                        </div>
+                        </div> <!-- /example -->
                         <pre class="prettyprint linenums">
 &lt;strong&gt;Label&lt;/strong&gt;
 &lt;section class=&quot;well&quot;&gt;
     Content goes here.
 &lt;/section&gt;
 </pre>
-                    </div>
-                </section>
+                    </div> <!-- /componentSample -->
+                </section> 
+                <!-- /Well -->
 
-            </section><!-- /Page Components -->
+            </section>
+            <!-- /Page Components -->
 
             <section id="Navigation">
                 <h1 class="line">Navigation</h1>
@@ -922,892 +952,169 @@
                     <div>
                         Open <a href="examples/wizard/index.html">Sample</a>
                     </div>
-                </section>
+                </section> <!-- /wizard -->
 
-            </section><!-- /Navigation -->
+            </section>
+            <!-- /Navigation -->
 
             <section id="ButtonsAndControls">
                 <h1 class="line">Buttons &amp; Controls</h1>
                 <p>CUI provides many useful styles and widgets for buttons &amp; controls.</p>
 
-                <section id="Buttons">
-                    <h2 class="line">Buttons</h2>
-                    <p>The <code class="prettyprint">&lt;button&gt;</code> tag is styled automatically. You can apply the <code class="atv">button</code> CSS class to any element to style it as a button, but be sure to add <code><span class="atn">role</span><span class="pun">=</span><span class="atv">"button"</span></code> for accessibility.</p>
-                    
-                    <h3>Variations</h3>
-                    <p>By default, buttons are gray. There are two CSS classes that can be added to change the look of the button:</p>
-                    <ul>
-                        <li><code class="atv">primary</code> A blue button, used to indicate primary actions such as OK or save</li>
-                        <li><code class="atv">warning</code> A red button, used to indicate actions that are potentially destructive, such as delete</li>
-                    </ul>
-
-                    <h3>Button groups</h3>
-                    <p>You can group buttons into horizontal lines by adding a <code class="prettyprint">&lt;div class="button-group"&gt;</code> around them.</p>
-                   
-                                        
-                    <div class="componentSample buttonSample">
-                        <div class="example">
-
-                            <a class="button" role="button" href="#">Action</a>
-                            <button class="primary">Primary Action</button>
-                            <button class="warning">Warning</button>
-                            <button disabled>Disabled</button>
-                            
-                            <p>Button groups:</p>
-                            <div class="button-group">
-                              <button><i class="icon-add"></i> Add</button>
-                              <button><i class="icon-camera"></i> Snapshot</button>
-                              <button><i class="icon-undo"></i> Undo</button>  
-                            </div>
-
-                        </div>
-                        <pre class="prettyprint linenums">
-&lt;a class=&quot;button&quot; role=&quot;button&quot; href=&quot;#&quot;&gt;Action&lt;/a&gt;
-&lt;button class=&quot;primary&quot;&gt;Primary Action&lt;/button&gt;
-&lt;button class=&quot;warning&quot;&gt;Warning&lt;/button&gt;
-&lt;button disabled&gt;Disabled&lt;/button&gt;
-
-&lt;div class="button-group"&gt;
-  &lt;button&gt;&lt;i class="icon-add"&gt;&lt;/i&gt; Add&lt;/button&gt;
-  &lt;button&gt;&lt;i class="icon-camera"&gt;&lt;/i&gt; Snapshot&lt;/button&gt;
-  &lt;button&gt;&lt;i class="icon-undo"&gt;&lt;/i&gt; Undo&lt;/button&gt;  
-&lt;/div&gt;
-</pre>
-                    </div>
-
-                    <div>
-                        Open <a href="examples/buttons/index.html">Sample</a>
-                    </div>
-                </section>
-
-                <section id="TextField">
-                    <h2 class="line">Text Field</h2>
-                    <p>Text input variants.</p>
-                    <p>You can choose to limit the max length of textfields and textareas and give visual feedback to the user by using the
-                    <a href="doc/CUI.CharacterCount.html">CUI.CharacterCount</a> widget.</p>
-                    
-                    <div class="componentSample">
-                        <div class="example">
-                            <div class="textfieldSample">
-                                <div class="sampleTitle left">Standard</div>
-                                <label>Text Field</label>
-                                <input type="text" />
-                            </div>
-                            <div class="textfieldSample">
-                                <div class="sampleTitle left">Title-less</div>
-                                <label>&nbsp;</label>
-                                <input type="text" placeholder="Text Field" />
-                            </div>
-                            <div class="textfieldSample">
-                                <div class="sampleTitle left">Error</div>
-                                <label>&nbsp;</label>
-                                <input type="text" class="error" />
-                            </div>
-                            <div class="textfieldSample">
-                                <div class="sampleTitle left">Disabled</div>
-                                <label>&nbsp;</label>
-                                <input type="text" disabled />
-                            </div>
-                            <div class="textfieldSample">
-                                <div class="sampleTitle left">Password</div>
-                                <label>&nbsp;</label>
-                                <input type="password" placeholder="Enter password" />
-                            </div>
-                            <div class="textfieldSample">
-                                <div class="sampleTitle left">E-Mail</div>
-                                <label>&nbsp;</label>
-                                <input type="email" placeholder="Enter email address" />
-                            </div>
-                            <div class="textfieldSample">
-                                <div class="sampleTitle left">Phone&nbsp;Nr</div>
-                                <label>&nbsp;</label>
-                                <input type="tel" placeholder="Enter phone number" pattern="\(\d\d\d\) ?\d\d\d-\d\d\d\d" title="(###) ###-####" />
-                            </div>
-                            <div class="textfieldSample">
-                                <div class="sampleTitle left">URL</div>
-                                <label>&nbsp;</label>
-                                <input type="url" placeholder="Enter URL">
-                            </div>
-
-                        </div>
-                        <pre class="prettyprint linenums">
-&lt;input type=&quot;text&quot;&gt;
-&lt;input type=&quot;text&quot; placeholder=&quot;Text Field&quot;&gt;
-&lt;input type=&quot;text&quot; class=&quot;error&quot;&gt;
-&lt;input type=&quot;text&quot; disabled&gt;
-&lt;input type="password" placeholder="Enter password" />
-&lt;input type="email" placeholder="Enter email address" />
-&lt;input type="tel" placeholder="Enter phone number" pattern="\(\d\d\d\) ?\d\d\d-\d\d\d\d" title="(###) ###-####" />
-&lt;input type="url" placeholder="Enter URL"></pre>
-                    </div>
-        </section>
-
-                <section id="TextArea">
-                    <h2 class="line">Text Area</h2>
-                    <p>Text input variants.</p>
-                    <p>You can choose to limit the max length of textfields and textareas and give visual feedback to the user by using the
-                    <a href="doc/CUI.CharacterCount.html">CUI.CharacterCount</a> widget.</p>
-
-                    <div class="componentSample">
-                        <div class="example">
-                            <div class="textareaSample">
-                                <div class="sampleTitle left">Standard</div>
-                                <label>Text Area</label>
-                                <textarea rows="4"></textarea>
-                            </div>
-                            <div class="textareaSample">
-                                <div class="sampleTitle left">Title-less</div>
-                                <label>&nbsp;</label>
-                                <textarea rows="4" placeholder="Text Area"></textarea>
-                            </div>
-                            <div class="textareaSample">
-                                <div class="sampleTitle left">Error</div>
-                                <label>&nbsp;</label>
-                                <textarea rows="4" class="error"></textarea>
-                            </div>
-                            <div class="textareaSample">
-                                <div class="sampleTitle left">Disabled</div>
-                                <label>&nbsp;</label>
-                                <textarea rows="4" disabled></textarea>
-                            </div>
-                        </div>
-                        <pre class="prettyprint linenums">
-&lt;textarea rows="4">&lt;/textarea>
-&lt;textarea rows="4" placeholder="Text Area">&lt;/textarea>
-&lt;textarea rows="4" class="error">&lt;/textarea>
-&lt;textarea rows="4" disabled>&lt;/textarea></pre>
-                    </div>
-                </section>
-                <section id="SearchField">
-                    <h2 class="line">Search Field</h2>
-                    <p>A simple search field.  Note that pre-1.10 markup should be updated to include
-                        the &quot;type&quot; attribute on the submit button and provide implementation of the clear option.</p>
-                    <div class="componentSample">
-                        <div class="example">
-
-                            <div class="filterSample">
-                                <div class="sampleTitle left">Standard</div>
-                                <div class="searchfield">
-                                    <div class="search">
-                                        <input type="text" placeholder="Search">
-                                        <button type="submit">Search</button>
-                                        <button type="reset">Clear</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="filterSample">
-                                <div class="sampleTitle left">Error</div>
-                                <div class="searchfield">
-                                    <div class="search error">
-                                        <input type="text" placeholder="Search" value="error">
-                                        <button type="submit">Search</button>
-                                        <button type="reset">Clear</button>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="filterSample">
-                                <div class="sampleTitle left">Disabled</div>
-                                <div class="searchfield">
-                                    <div class="search">
-                                        <input type="text" placeholder="Search" disabled>
-                                        <button type="submit" disabled>Search</button>
-                                        <button type="reset" disabled>Clear</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-<pre class="prettyprint linenums">
-
-&lt;!-- Standard --&gt;
-&lt;div class=&quot;search&quot;&gt;
-    &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot;&gt;
-    &lt;button type=&quot;submit&quot;&gt;Search&lt;/button&gt;
-    &lt;button type=&quot;reset&quot;&gt;Clear&lt;/button&gt;
-&lt;/div&gt;
-
-&lt;!-- Error --&gt;
-&lt;div class=&quot;search error&quot;&gt;
-    &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot;&gt;
-    &lt;button type=&quot;submit&quot;&gt;Search&lt;/button&gt;
-    &lt;button type=&quot;reset&quot;&gt;Clear&lt;/button&gt;
-&lt;/div&gt;
-
-&lt;!-- Disabled --&gt;
-&lt;div class=&quot;search&quot;&gt;
-    &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot; disabled&gt;
-    &lt;button type=&quot;submit&quot; disabled&gt;Search&lt;/button&gt;
-    &lt;button type=&quot;reset&quot; disabled&gt;Clear&lt;/button&gt;
-&lt;/div&gt;
-</pre>
-          </div>
-        <div>
-            Open <a href="examples/search/index.html">Sample</a>
-        </div>  
-        </section>
-                
-                <section id="Filters">
-                            <h2 class="line">Filters</h2>
-                            <p>Filters &amp; Tags input variants. Filter input fields can be created by markup directly or by JavaScript, though
-                            the full funcationality can only be achieved by using the corresponding widget.</p>
-                            <p>You can use an input field or a select field as template for the widget.</p>
-
-                            <div class="componentSample">
-                                <div class="example">
-
-                                    <div class="filterSample">
-                                        <div class="sampleTitle left">Single</div>
-                                        <div class="filters" data-init="filters">
-                                            <input type="text" placeholder="Single Term Filter">
-                                            <select>
-                                                <option selected>Apple</option>
-                                                <option>Pear</option>
-                                                <option>Banana</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="filterSample">
-                                        <div class="sampleTitle extended left">Standard</div>
-                                        <div class="filters" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter">
-                                            <input type="text">
-                                            <select multiple>
-                                                <option>Apple</option>
-                                                <option>Pear</option>
-                                                <option selected>Banana</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="filterSample">
-                                        <div class="sampleTitle extended left">Stacking</div>
-                                        <div class="filters" data-init="filters" data-stacking="true" data-placeholder="Add Filter" data-allow="create">
-                                            <input type="text">
-                                            <select>
-                                                <option selected>Apple</option>
-                                                <option>Pear</option>
-                                                <option>Banana</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="filterSample">
-                                        <div class="sampleTitle left">Error</div>
-                                        <div class="filters error" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter">
-                                            <input type="text" class="filter">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="filterSample">
-                                        <div class="sampleTitle left">Disabled</div>
-                                        <div class="filters disabled" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter" data-disabled="true">
-                                            <input class="filter" type="text" disabled>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                
-                            <pre class="prettyprint linenums">
-&lt;!-- Standard single filters with select as template --&gt;
-&lt;div class="filters" data-init="filters"&gt;
-    &lt;input type="text" placeholder="Single Term Filter"&gt;
-    &lt;select&gt;
-        &lt;option selected&gt;Apple&lt;/option&gt;
-        &lt;option&gt;Pear&lt;/option&gt;
-        &lt;option&gt;Banana&lt;/option&gt;
-    &lt;/select&gt;
-&lt;/div&gt;
-
-&lt;!-- Standard filters with select as template --&gt;
-&lt;div class="filters" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter"&gt;
-    &lt;input type="text"&gt;
-    &lt;select multiple&gt;
-        &lt;option&gt;Apple&lt;/option&gt;
-        &lt;option&gt;Pear&lt;/option&gt;
-        &lt;option selected&gt;Banana&lt;/option&gt;
-    &lt;/select&gt;
-&lt;/div&gt;
-
-&lt;!-- Stacking filters with select as template --&gt;
-&lt;div class="filters" data-init="filters" data-stacking="true" data-placeholder="Add Filter" data-allow="create"&gt;
-    &lt;input type="text"&gt;
-    &lt;select&gt;
-        &lt;option selected&gt;Apple&lt;/option&gt;
-        &lt;option&gt;Pear&lt;/option&gt;
-        &lt;option&gt;Banana&lt;/option&gt;
-    &lt;/select&gt;
-&lt;/div&gt;
-                            </pre>
-                        </div>
-                    <div>
-                        Open <a href="examples/filters/index.html">Sample</a>
-                    </div>
-                </section>
-
-                <section id="Dropdown">
-                    <h2 class="line">Dropdowns<span class="deprecated">deprecated</span></h2>
-                    <p>This component is <span class="deprecated">deprecated</span> in favor of the <a href="#Select">Select</a> component. Different types of dropdowns.</p>
-
-                    <div class="componentSample">
-                        <div class="example">
-                            <div class="filterSample">
-                                <div class="sampleTitle left">Standard</div>
-                                <div class="dropdown" data-init="dropdown">
-                                    <button>Single Select</button>
-                                    <select name="dropdown" >
-                                        <option></option>
-                                        <option>Single One</option>
-                                        <option selected>Single Two</option>
-                                        <option>Single Three</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="filterSample">
-                                <div class="sampleTitle left">Multiselect</div>
-                                <div class="dropdown" data-init="dropdown">
-                                    <button>Multi Select</button>
-                                    <select name="dropdown2" multiple>
-                                        <option>Multi One</option>
-                                        <option selected>Multi Two</option>
-                                        <option>Multi Three</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="filterSample">
-                                <div class="sampleTitle left">Editable</div>
-                                <div class="dropdown dropdown-editable" data-editable="true" data-init="dropdown">
-                                    <input type="text" placeholder="Editable Select">
-                                    <button>Editable</button>
-                                    <select name="dropdown3">
-                                        <option>Edit One</option>
-                                        <option>Edit Two</option>
-                                        <option>Edit Three</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="filterSample">
-                                <div class="sampleTitle left">Disabled</div>
-                                <div class="dropdown" data-init="dropdown" data-disabled="true">
-                                    <button>Disabled</button>
-                                    <select name="dropdown4">
-                                        <option>One</option>
-                                        <option>Two</option>
-                                        <option>Three</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="filterSample">
-                                <div class="sampleTitle left">Error</div>
-                                <div class="dropdown error" data-init="dropdown">
-                                    <button>Error</button>
-                                    <select name="dropdown5" >
-                                        <option>One</option>
-                                        <option>Two</option>
-                                        <option>Three</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="filterSample">
-                                <div class="sampleTitle left">Empty</div>
-                                <div class="dropdown" data-init="dropdown">
-                                </div>
-                            </div>
-
-                            <div class="filterSample">
-                                <div class="sampleTitle left">Dividers</div>
-                                <div class="dropdown" data-init="dropdown">
-                                    <button>Dividers</button>
-                                        <select name="dropdown6" >
-                                            <option data-itemclass="divider">Numbers</option>
-                                            <option>One</option>
-                                            <option>Two</option>
-                                            <option>Three</option>
-                                            <option data-itemclass="divider">Alphabets</option>
-                                            <option>X</option>
-                                            <option>Y</option>
-                                        </select>
-                                </div>
-                            </div>
-                        </div>
-                    <pre class="prettyprint linenums">
-&lt;!-- Standard Single select --&gt;
-&lt;div class="dropdown" data-init="dropdown"&gt;
-    &lt;button&gt;Single Select&lt;/button&gt;
-    &lt;select name="dropdown"&gt;
-        &lt;option&gt;Single One&lt;/option&gt;
-        &lt;option selected&gt;Single Two&lt;/option&gt;
-        &lt;option&gt;Single Three&lt;/option&gt;
-    &lt;/select&gt;
-&lt;/div&gt;
-
-&lt;!-- Multi select --&gt;
-&lt;div class="dropdown" data-init="dropdown"&gt;
-    &lt;button&gt;Multi Select&lt;/button&gt;
-    &lt;select name="dropdown2" multiple&gt;
-        &lt;option&gt;Multi One&lt;/option&gt;
-        &lt;option selected&gt;Multi Two&lt;/option&gt;
-        &lt;option&gt;Multi Three&lt;/option&gt;
-    &lt;/select&gt;
-&lt;/div&gt;
-
-&lt;!-- Editable --&gt;
-&lt;div class="dropdown dropdown-editable" data-editable="true" data-init="dropdown"&gt;
-    &lt;input type="text" placeholder="Editable Select"&gt;
-    &lt;button&gt;Editable&lt;/button&gt;
-    &lt;select name="dropdown3"&gt;
-        &lt;option&gt;Edit One&lt;/option&gt;
-        &lt;option&gt;Edit Two&lt;/option&gt;
-        &lt;option&gt;Edit Three&lt;/option&gt;
-    &lt;/select&gt;
-&lt;/div&gt;
-
-&lt;!-- Disabled --&gt;
-&lt;div class="dropdown" data-init="dropdown" data-disabled="true"&gt;
-    &lt;button&gt;Disabled&lt;/button&gt;
-    &lt;select name="dropdown4"&gt;
-        &lt;option&gt;One&lt;/option&gt;
-        &lt;option&gt;Two&lt;/option&gt;
-        &lt;option&gt;Three&lt;/option&gt;
-    &lt;/select&gt;
-&lt;/div&gt;
-
-&lt;!-- Error --&gt;
-&lt;div class="dropdown error" data-init="dropdown"&gt;
-    &lt;button&gt;Error&lt;/button&gt;
-    &lt;select name="dropdown5" &gt;
-        &lt;option&gt;One&lt;/option&gt;
-        &lt;option&gt;Two&lt;/option&gt;
-        &lt;option&gt;Three&lt;/option&gt;
-    &lt;/select&gt;
-&lt;/div&gt;
-
-&lt;!-- Dropdown with Dividers --&gt;
-&lt;div class="dropdown" data-init="dropdown"&gt;
-    &lt;button&gt;Dividers&lt;/button&gt;
-    &lt;select name="dropdown6" &gt;
-        &lt;option data-itemclass="divider"&gt;Numbers&lt;/option&gt;
-        &lt;option&gt;One&lt;/option&gt;
-        &lt;option&gt;Two&lt;/option&gt;
-        &lt;option&gt;Three&lt;/option&gt;
-        &lt;option data-itemclass="divider"&gt;Alphabets&lt;/option&gt;
-        &lt;option&gt;X&lt;/option&gt;
-        &lt;option&gt;Y&lt;/option&gt;
-    &lt;/select&gt;
-&lt;/div&gt;
-</pre>
-                    </div>
-                    <div>
-                        Open <a href="examples/dropdown/index.html">Sample</a>
-                    </div>
-                </section>
-
-                <section id="Select">
-                        <h2 class="line">Select</h2>
-                        <p>A new version of the DropDown.</p>
-
-                        <div class="componentSample">
-                            <div class="example">
-
-                                <div class="filterSample">
-                                    <div class="sampleTitle left">Static</div>
-                                    <span class="select" data-init="select">
-                                      <button type="button">Select</button>
-                                      <select>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                      </select>
-                                    </span>
-                                </div>
-
-                                <div class="filterSample">
-                                    <div class="sampleTitle left">Multiple</div>
-                                    <span class="select" data-init="select">
-                                      <button type="button">Select</button>
-                                      <select multiple="true">
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                      </select>
-                                    </span>
-                                </div>
-
-                                <div class="filterSample">
-                                    <div class="sampleTitle left">Group</div>
-                                    <span class="select" data-init="select">
-                                      <button type="button">Select</button>
-                                      <select>
-                                        <optgroup label="Group 1">
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </optgroup>
-                                        <optgroup label="Group 2">
-                                            <option value="4">Fourth</option>
-                                            <option value="5">Fifth</option>
-                                        </optgroup>
-                                      </select>
-                                    </span>
-                                </div>
-
-                                <div class="filterSample">
-                                    <div class="sampleTitle left">Icon</div>
-                                    <span class="select" data-init="select">
-                                      <button type="button" class="icon-globe">Add a location</button>
-                                      <select>
-                                        <option value="at">Austria</option>
-                                        <option value="ch">Switzerland</option>
-                                        <option value="us">United States</option>
-                                      </select>
-                                    </span>
-                                </div>
-
-                                <div class="filterSample">
-                                    <div class="sampleTitle left">Disabled</div>
-                                    <span class="select" data-init="select">
-                                      <button type="button" disabled="true">Select</button>
-                                      <select>
-                                        <option value="1">One</option>
-                                        <option value="2" selected="selected">Two</option>
-                                        <option value="3">Three</option>
-                                      </select>
-                                    </span>
-                                </div>
-                                
-                                <div class="filterSample">
-                                    <div class="sampleTitle left">Error</div>
-                                    <span class="select" data-init="select">
-                                      <button type="button" class="error">Select</button>
-                                      <select>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                      </select>
-                                    </span>
-                                </div>
-
-                                <div class="filterSample">
-                                    <div class="sampleTitle left">Native</div>
-                                    <span class="select" data-init="select" data-nativewidget="true">
-                                      <button type="button">Select</button>
-                                      <select>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                      </select>
-                                    </span>
-                                </div>
-
-                                <div class="filterSample">
-                                    <div class="sampleTitle left">with Multi</div>
-                                    <span class="select" data-init="select" data-nativewidget="true">
-                                      <button type="button">Select</button>
-                                      <select multiple="true">
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                      </select>
-                                    </span>
-                                </div>
-
-                                <div class="filterSample">
-                                    <div class="sampleTitle left">with Group</div>
-                                    <span class="select" data-init="select" data-nativewidget="true">
-                                      <button type="button">Select</button>
-                                      <select>
-                                        <optgroup label="Group 1">
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </optgroup>
-                                        <optgroup label="Group 2">
-                                            <option value="4">Fourth</option>
-                                            <option value="5">Fifth</option>
-                                        </optgroup>
-                                      </select>
-                                    </span>
-                                </div>
-                            </div>
-                            
-                        <pre class="prettyprint linenums">
-&lt;!-- Static --&gt;
-&lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
-  &lt;input type=&quot;button&quot; class=&quot;button&quot; value=&quot;Select&quot;/&gt;
-  &lt;select&gt;
-    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
-    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
-    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
-  &lt;/select&gt;
-&lt;/span&gt;
-
-&lt;!-- Multiple --&gt;
-&lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
-  &lt;button type=&quot;button&quot;&gt;Select&lt;/button&gt;
-  &lt;select multiple=&quot;true&quot;&gt;
-    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
-    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
-    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
-  &lt;/select&gt;
-&lt;/span&gt;
-
-&lt;!-- Group dividers --&gt;
-&lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
-  &lt;button type=&quot;button&quot;&gt;Select&lt;/button&gt;
-  &lt;select&gt;
-    &lt;optgroup label=&quot;Group 1&quot;&gt;
-        &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
-        &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
-        &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
-    &lt;/optgroup&gt;
-    &lt;optgroup label=&quot;Group 2&quot;&gt;
-        &lt;option value=&quot;4&quot;&gt;Fourth&lt;/option&gt;
-        &lt;option value=&quot;5&quot;&gt;Fifth&lt;/option&gt;
-    &lt;/optgroup&gt;
-  &lt;/select&gt;
-&lt;/span&gt;
-
-&lt;!-- with Icon --&gt;
-&lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
-  &lt;button type=&quot;button&quot; class=&quot;icon-globe&quot;&gt;Add a location&lt;/button&gt;
-  &lt;select&gt;
-    &lt;option value=&quot;at&quot;&gt;Austria&lt;/option&gt;
-    &lt;option value=&quot;ch&quot;&gt;Switzerland&lt;/option&gt;
-    &lt;option value=&quot;us&quot;&gt;United States&lt;/option&gt;
-  &lt;/select&gt;
-&lt;/span&gt;
-
-&lt;!-- Disabled --&gt;
-&lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
-  &lt;input type=&quot;button&quot; class=&quot;button&quot; value=&quot;Select&quot; disabled=&quot;true&quot;/&gt;
-  &lt;select&gt;
-    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
-    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
-    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
-  &lt;/select&gt;
-&lt;/span&gt;
-
-&lt;!-- Error --&gt;
-&lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
-  &lt;input type=&quot;button&quot; class=&quot;button error&quot; value=&quot;Select&quot;/&gt;
-  &lt;select&gt;
-    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
-    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
-    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
-  &lt;/select&gt;
-&lt;/span&gt;
-
-&lt;!-- Native select --&gt;
-&lt;span class=&quot;select&quot; data-init=&quot;select&quot; data-nativewidget=&quot;true&quot;&gt;
-  &lt;input type=&quot;button&quot; class=&quot;button&quot; value=&quot;Select&quot;/&gt;
-  &lt;select&gt;
-    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
-    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
-    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
-  &lt;/select&gt;
-&lt;/span&gt;
-
-&lt;!-- Native with multiple seclect --&gt;
-&lt;span class=&quot;select&quot; data-init=&quot;select&quot; data-nativewidget=&quot;true&quot;&gt;
-  &lt;input type=&quot;button&quot; class=&quot;button&quot; value=&quot;Select&quot;/&gt;
-  &lt;select multiple=&quot;true&quot;&gt;
-    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
-    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
-    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
-  &lt;/select&gt;
-&lt;/span&gt;
-
-&lt;!-- Native with groups --&gt;
-&lt;span class=&quot;select&quot; data-init=&quot;select&quot; data-nativewidget=&quot;true&quot;&gt;
-  &lt;button type=&quot;button&quot;&gt;Select&lt;/button&gt;
-  &lt;select&gt;
-    &lt;optgroup label=&quot;Group 1&quot;&gt;
-        &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
-        &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
-        &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
-    &lt;/optgroup&gt;
-    &lt;optgroup label=&quot;Group 2&quot;&gt;
-        &lt;option value=&quot;4&quot;&gt;Fourth&lt;/option&gt;
-        &lt;option value=&quot;5&quot;&gt;Fifth&lt;/option&gt;
-    &lt;/optgroup&gt;
-  &lt;/select&gt;
-&lt;/span&gt;
-                        </pre>
-                    </div>
-                    <div>
-                        
-                    </div>
-                </section>
-
                 <section id="Autocomplete">
-                        <h2 class="line">Autocomplete (WIP)</h2>
-                        <p>Autocomplete is a comprehensive component which offers multiple features. It includes Filter, Tags and Combobox in one.</p>
-                        <p>To achieve this, it uses the SelectList and TagList widget.</p>
-
-                        <div class="componentSample">
-                            <div class="example">
-
-                                <div class="filterSample">
-                                    <div class="sampleTitle left">Clear</div>
-                                    <span class="autocomplete" data-init="autocomplete" data-showclearbutton="true">
-                                      <input type="text" name="name1" placeholder="Search">
-                                    </span>
-                                </div>
-
-                                <div class="filterSample">
-                                    <div class="sampleTitle left">Icon</div>
-                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showclearbutton="true">
-                                      <input type="text" name="name1" placeholder="Search">
-                                    </span>
-                                </div>
-                                
-                                <div class="filterSample">
-                                    <div class="sampleTitle left">Tags</div>
-                                    <span class="autocomplete icon-tag" data-init="autocomplete" data-showclearbutton="true" data-showtags="true">
-                                      <input type="text" name="name1" placeholder="Search">
-                                      <ol class="taglist autocomplete-tags">
-                                        <li>
-                                          <button class="icon-close"></button>
-                                          Carrot
-                                          <input type="hidden" value="Carrot"/>
-                                        </li>
-                                        <li>
-                                          <button class="icon-close"></button>
-                                          Banana
-                                          <input type="hidden" value="Banana"/>
-                                        </li>
-                                        <li>
-                                          <button class="icon-close"></button>
-                                          Apple
-                                          <input type="hidden" value="Apple"/>
-                                        </li>
-                                      </ol>
-                                    </span>
-                                </div>
-                                
-                                <div class="filterSample">
-                                    <div class="sampleTitle left">Suggestions</div>
-                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
-                                      <input type="text" name="name1" placeholder="Search">
-                                      <ul class="autocomplete-suggestions selectlist">
-                                        <li data-value="expr1">Expression 1</li>
-                                        <li data-value="expr2">Expression 2</li>
-                                        <li data-value="expr3">Expression 3</li>
-                                        <li>Expression 4</li>
-                                        <li data-value="expr5">Expression 5</li>
-                                        <li data-value="expr6">Expression 6</li>
-                                      </ul>
-                                    </span>
-                                </div>
-
-                                <div class="filterSample">
-                                    <div class="sampleTitle left">with Tags</div>
-                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true" data-showtags="true">
-                                      <input type="text" name="name1" placeholder="Search">
-                                      <ul class="autocomplete-suggestions selectlist">
-                                        <li data-value="expr1">Expression 1</li>
-                                        <li data-value="expr2">Expression 2</li>
-                                        <li data-value="expr3">Expression 3</li>
-                                        <li>Expression 4</li>
-                                        <li data-value="expr5">Expression 5</li>
-                                        <li data-value="expr6">Expression 6</li>
-                                      </ul>
-                                    </span>
-                                </div>
-
-                                <div class="filterSample">
-                                    <div class="sampleTitle left">Remote</div>
-                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
-                                      <input type="text" name="name1" placeholder="Search">
-                                      <ul class="autocomplete-suggestions selectlist" data-type="dynamic" data-dataurl="examples/autocomplete/remotehtml.html">
-                                      </ul>
-                                    </span>
-                                </div>
-
-                                <div class="filterSample">
-                                    <div class="sampleTitle left">Typeahead</div>
-                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showtypeahead="true">
-                                      <input type="text" name="name1" placeholder="Search">
-                                      <ul class="autocomplete-typeahead selectlist" data-type="dynamic" data-dataurl="examples/autocomplete/remotehtml.html">
-                                      </ul>
-                                    </span>
-                                </div>
-
-                                <div class="filterSample">
-                                    <div class="sampleTitle left">Disabled</div>
-                                    <span class="autocomplete icon-search disabled" data-init="autocomplete" data-showsuggestions="true">
-                                      <input type="text" name="name1" placeholder="Search" disabled="true">
-                                      <ul class="autocomplete-suggestions selectlist">
-                                      </ul>
-                                      <button class="autocomplete-suggestion-toggle" disabled="true"></button>
-                                    </span>
-                                </div>
-
-                                <div class="filterSample">
-                                    <div class="sampleTitle left">Error</div>
-                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
-                                      <input type="text" name="name1" placeholder="Search" class="error">
-                                      <ul class="autocomplete-suggestions selectlist">
-                                        <li data-value="expr1"><span>Expression 1</span></li>
-                                        <li data-value="expr2"><span>Expression 2</span></li>
-                                        <li data-value="expr3"><span>Expression 3</span></li>
-                                      </ul>
-                                      <button class="autocomplete-suggestion-toggle"></button>
-                                    </span>
-                                </div>
-
-                                <div class="filterSample">
-                                    <div class="sampleTitle left">Groups</div>
-                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
-                                      <input type="text" name="name1" placeholder="Search">
-                                      <ul class="autocomplete-suggestions selectlist" data-multiple="true">
-                                          <li class="optgroup">
-                                              <span>Group 1</span>
-                                              <ul>
-                                                  <li><span data-value="expr1">Expression 1</span></li>
-                                                  <li><span data-value="expr2">Expression 2</span></li>
-                                                  <li><span data-value="expr3">Expression 3</span></li>
-                                              </ul>
-                                          </li>
-                                          <li class="optgroup">
-                                              <span>Group 2</span>
-                                              <ul>
-                                                  <li><span data-value="expr4">Expression 4</span></li>
-                                                  <li data-value="expr5"><span>Expression 5</span></li>
-                                              </ul>
-                                          </li>
-                                      </ul>
-                                    </span>
-                                </div>
-
-                                <div class="filterSample">
-                                    <div class="sampleTitle left">Icons</div>
-                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
-                                      <input type="text" name="name1" placeholder="Search">
-                                      <ul class="autocomplete-suggestions selectlist" data-multiple="true">
-                                          <li class="optgroup">
-                                              <span>Group 1</span>
-                                              <ul>
-                                                  <li data-value="expr1" class="icon-adobeanalytics"><span >Expression 1</span></li>
-                                                  <li data-value="expr2" class="icon-adobeexperiencemanager"><span>Expression 2</span></li>
-                                                  <li data-value="expr3" class="icon-adobetarget"><span>Expression 3</span></li>
-                                              </ul>
-                                          </li>
-                                          <li class="optgroup">
-                                              <span>Group 2</span>
-                                              <ul>
-                                                  <li data-value="expr4" class="icon-brush"><span>Expression 4</span></li>
-                                                  <li data-value="expr5" class="icon-browse"><span>Expression 5</span></li>
-                                              </ul>
-                                          </li>
-                                      </ul>
-                                    </span>
-                                </div>
-
+                    <h2 class="line">Autocomplete (WIP)</h2>
+                    <p>Autocomplete is a comprehensive component which offers multiple features. 
+                        It includes Filter, Tags and Combobox in one.</p>
+                    <p>To achieve this, it uses the SelectList and TagList widget.</p>
+                    <div class="componentSample">
+                        <div class="example">
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Clear</div>
+                                <span class="autocomplete" data-init="autocomplete" data-showclearbutton="true">
+                                  <input type="text" name="name1" placeholder="Search">
+                                </span>
                             </div>
-                            
-                            
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Icon</div>
+                                <span class="autocomplete icon-search" data-init="autocomplete" data-showclearbutton="true">
+                                  <input type="text" name="name1" placeholder="Search">
+                                </span>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Tags</div>
+                                <span class="autocomplete icon-tag" data-init="autocomplete" data-showclearbutton="true" data-showtags="true">
+                                  <input type="text" name="name1" placeholder="Search">
+                                  <ol class="taglist autocomplete-tags">
+                                    <li>
+                                      <button class="icon-close"></button>
+                                      Carrot
+                                      <input type="hidden" value="Carrot"/>
+                                    </li>
+                                    <li>
+                                      <button class="icon-close"></button>
+                                      Banana
+                                      <input type="hidden" value="Banana"/>
+                                    </li>
+                                    <li>
+                                      <button class="icon-close"></button>
+                                      Apple
+                                      <input type="hidden" value="Apple"/>
+                                    </li>
+                                  </ol>
+                                </span>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Suggestions</div>
+                                <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
+                                  <input type="text" name="name1" placeholder="Search">
+                                  <ul class="autocomplete-suggestions selectlist">
+                                    <li data-value="expr1">Expression 1</li>
+                                    <li data-value="expr2">Expression 2</li>
+                                    <li data-value="expr3">Expression 3</li>
+                                    <li>Expression 4</li>
+                                    <li data-value="expr5">Expression 5</li>
+                                    <li data-value="expr6">Expression 6</li>
+                                  </ul>
+                                </span>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">with Tags</div>
+                                <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true" data-showtags="true">
+                                  <input type="text" name="name1" placeholder="Search">
+                                  <ul class="autocomplete-suggestions selectlist">
+                                    <li data-value="expr1">Expression 1</li>
+                                    <li data-value="expr2">Expression 2</li>
+                                    <li data-value="expr3">Expression 3</li>
+                                    <li>Expression 4</li>
+                                    <li data-value="expr5">Expression 5</li>
+                                    <li data-value="expr6">Expression 6</li>
+                                  </ul>
+                                </span>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Remote</div>
+                                <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
+                                  <input type="text" name="name1" placeholder="Search">
+                                  <ul class="autocomplete-suggestions selectlist" data-type="dynamic" data-dataurl="examples/autocomplete/remotehtml.html">
+                                  </ul>
+                                </span>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Typeahead</div>
+                                <span class="autocomplete icon-search" data-init="autocomplete" data-showtypeahead="true">
+                                  <input type="text" name="name1" placeholder="Search">
+                                  <ul class="autocomplete-typeahead selectlist" data-type="dynamic" data-dataurl="examples/autocomplete/remotehtml.html">
+                                  </ul>
+                                </span>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Disabled</div>
+                                <span class="autocomplete icon-search disabled" data-init="autocomplete" data-showsuggestions="true">
+                                  <input type="text" name="name1" placeholder="Search" disabled="true">
+                                  <ul class="autocomplete-suggestions selectlist">
+                                  </ul>
+                                  <button class="autocomplete-suggestion-toggle" disabled="true"></button>
+                                </span>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Error</div>
+                                <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
+                                  <input type="text" name="name1" placeholder="Search" class="error">
+                                  <ul class="autocomplete-suggestions selectlist">
+                                    <li data-value="expr1"><span>Expression 1</span></li>
+                                    <li data-value="expr2"><span>Expression 2</span></li>
+                                    <li data-value="expr3"><span>Expression 3</span></li>
+                                  </ul>
+                                  <button class="autocomplete-suggestion-toggle"></button>
+                                </span>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Groups</div>
+                                <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
+                                  <input type="text" name="name1" placeholder="Search">
+                                  <ul class="autocomplete-suggestions selectlist" data-multiple="true">
+                                      <li class="optgroup">
+                                          <span>Group 1</span>
+                                          <ul>
+                                              <li><span data-value="expr1">Expression 1</span></li>
+                                              <li><span data-value="expr2">Expression 2</span></li>
+                                              <li><span data-value="expr3">Expression 3</span></li>
+                                          </ul>
+                                      </li>
+                                      <li class="optgroup">
+                                          <span>Group 2</span>
+                                          <ul>
+                                              <li><span data-value="expr4">Expression 4</span></li>
+                                              <li data-value="expr5"><span>Expression 5</span></li>
+                                          </ul>
+                                      </li>
+                                  </ul>
+                                </span>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Icons</div>
+                                <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
+                                  <input type="text" name="name1" placeholder="Search">
+                                  <ul class="autocomplete-suggestions selectlist" data-multiple="true">
+                                      <li class="optgroup">
+                                          <span>Group 1</span>
+                                          <ul>
+                                              <li data-value="expr1" class="icon-adobeanalytics"><span >Expression 1</span></li>
+                                              <li data-value="expr2" class="icon-adobeexperiencemanager"><span>Expression 2</span></li>
+                                              <li data-value="expr3" class="icon-adobetarget"><span>Expression 3</span></li>
+                                          </ul>
+                                      </li>
+                                      <li class="optgroup">
+                                          <span>Group 2</span>
+                                          <ul>
+                                              <li data-value="expr4" class="icon-brush"><span>Expression 4</span></li>
+                                              <li data-value="expr5" class="icon-browse"><span>Expression 5</span></li>
+                                          </ul>
+                                      </li>
+                                  </ul>
+                                </span>
+                            </div>
+                        </div><!-- /example -->
                         <pre class="prettyprint linenums">
 &lt;!-- Add clear button --&gt;                          
 &lt;span class=&quot;autocomplete&quot; data-init=&quot;autocomplete&quot; data-showclearbutton=&quot;true&quot;&gt;
@@ -1942,13 +1249,98 @@
           &lt;/ul&gt;
       &lt;/li&gt;
   &lt;/ul&gt;
-&lt;/span&gt;
-                        </pre>
-                    </div>
+&lt;/span&gt;</pre>
+                    </div><!-- /componentSample -->
                     <div>
                         Open <a href="examples/autocomplete/index.html">Sample</a>
                     </div>
                 </section>
+                <!-- /autocomplete -->
+
+                <section id="Buttons">
+                    <h2 class="line">Buttons</h2>
+                    <p>The <code class="prettyprint">&lt;button&gt;</code> tag is styled automatically. You can apply the <code class="atv">button</code> CSS class to any element to style it as a button, but be sure to add <code><span class="atn">role</span><span class="pun">=</span><span class="atv">"button"</span></code> for accessibility.</p>
+                    
+                    <h3>Variations</h3>
+                    <p>By default, buttons are gray. There are two CSS classes that can be added to change the look of the button:</p>
+                    <ul>
+                        <li><code class="atv">primary</code> A blue button, used to indicate primary actions such as OK or save</li>
+                        <li><code class="atv">warning</code> A red button, used to indicate actions that are potentially destructive, such as delete</li>
+                    </ul>
+
+                    <h3>Button groups</h3>
+                    <p>You can group buttons into horizontal lines by adding a <code class="prettyprint">&lt;div class="button-group"&gt;</code> around them.</p>
+                   
+                                        
+                    <div class="componentSample buttonSample">
+                        <div class="example">
+
+                            <a class="button" role="button" href="#">Action</a>
+                            <button class="primary">Primary Action</button>
+                            <button class="warning">Warning</button>
+                            <button disabled>Disabled</button>
+                            
+                            <p>Button groups:</p>
+                            <div class="button-group">
+                              <button><i class="icon-add"></i> Add</button>
+                              <button><i class="icon-camera"></i> Snapshot</button>
+                              <button><i class="icon-undo"></i> Undo</button>  
+                            </div>
+                        </div> <!-- /example -->
+                        <pre class="prettyprint linenums">
+&lt;a class=&quot;button&quot; role=&quot;button&quot; href=&quot;#&quot;&gt;Action&lt;/a&gt;
+&lt;button class=&quot;primary&quot;&gt;Primary Action&lt;/button&gt;
+&lt;button class=&quot;warning&quot;&gt;Warning&lt;/button&gt;
+&lt;button disabled&gt;Disabled&lt;/button&gt;
+
+&lt;div class="button-group"&gt;
+  &lt;button&gt;&lt;i class="icon-add"&gt;&lt;/i&gt; Add&lt;/button&gt;
+  &lt;button&gt;&lt;i class="icon-camera"&gt;&lt;/i&gt; Snapshot&lt;/button&gt;
+  &lt;button&gt;&lt;i class="icon-undo"&gt;&lt;/i&gt; Undo&lt;/button&gt;  
+&lt;/div&gt;</pre>
+                    </div><!-- /componentSample -->
+                    <div>
+                        Open <a href="examples/buttons/index.html">Sample</a>
+                    </div>
+                </section>
+                <!-- /Buttons -->
+
+                <section id="Checkbox">
+                    <h2 class="line">Checkbox</h2>
+                    <p>Checkboxes are styled using pure CSS. They can have an indetermined state by 
+                        changing their state using javascript.</p>
+                    <div class="componentSample">
+                        <div class="example clearfix">
+                            <div class="left">
+                                <label><input type="checkbox" name="c1" value="1" checked><span>Checked</span></label><br>
+                                <label><input type="checkbox" name="c2" value="2"><span>Unchecked</span></label><br>
+                                <label><input type="checkbox" name="c3" value="3" id="partial-checkbox1"><span>Partially checked</span></label>
+                            </div>
+                            <div class="left">
+                                <label><input type="checkbox" name="c4" value="4" disabled checked><span>Disabled Checked</span></label><br>
+                                <label><input type="checkbox" name="c5" value="5" disabled><span>Disabled Unchecked</span></label><br>
+                                <label><input type="checkbox" name="c6" value="6" id="partial-checkbox2" disabled><span>Disabled Partially Checked</span></label>
+                            </div>
+                        </div><!-- /example -->
+                        <pre class="prettyprint linenums">
+&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c1&quot; checked&gt;&lt;span&gt;Checked&lt;/span&gt;&lt;/label&gt;
+&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c2&quot;&gt;&lt;span&gt;Unchecked&lt;/span&gt;&lt;/label&gt;
+&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c3&quot; &gt;&lt;span&gt;Partially checked&lt;/span&gt;&lt;/label&gt;
+&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c4&quot; disabled checked&gt;&lt;span&gt;Disabled Checked&lt;/span&gt;&lt;/label&gt;
+&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c5&quot; disabled&gt;&lt;span&gt;Disabled Unchecked&lt;/span&gt;&lt;/label&gt;
+&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c6&quot; disabled&gt;&lt;span&gt;Disabled Partially Checked&lt;/span&gt;&lt;/label&gt;</pre>
+                    </div><!-- /componentSample -->
+
+                    <script type="text/javascript">
+                        // changes the demo checkboxes to be half-checked.
+                        $('#partial-checkbox1').prop('indeterminate', true);
+                        $('#partial-checkbox2').prop('indeterminate', true);
+                    </script>
+                    <div>
+                        Open <a href="examples/checkbox/index.html">Sample</a>
+                    </div>
+                </section>
+                <!-- /checkbox -->
 
                 <section id="Datepicker">
                     <h2 class="line">Datepicker</h2>
@@ -1958,7 +1350,6 @@
                         <li>Datetime: Y-m-dTh:mZ (e.g. 1987-04-06T20:35Z)</li>
                         <li>Time: h:m (e.g. 20:35)</li>
                     </ul>
-
                     <div class="componentSample">
                         <div class="example clearfix">
                             <div class="column left">
@@ -1983,7 +1374,7 @@
                                     <button class="icon-calendar small" disabled>Datepicker</button>
                                 </div>
                             </div>
-                        </div>
+                        </div><!-- /example -->
                         <pre class="prettyprint linenums">
 &lt;!-- Date/time picker --&gt;
 &lt;div class=&quot;datepicker&quot; data-init=&quot;datepicker&quot;&gt;
@@ -2013,20 +1404,329 @@
 &lt;div class=&quot;datepicker&quot; data-init=&quot;datepicker&quot; data-disabled=&quot;true&quot;&gt;
     &lt;input type=&quot;date&quot; value=&quot;1987-04-06&quot; disabled&gt;
     &lt;button class=&quot;icon-calendar small&quot; disabled&gt;Datepicker&lt;/button&gt;
-&lt;/div&gt;
-</pre>
-                    </div>
+&lt;/div&gt;</pre>
+
+                    </div><!-- /componentSample -->
                     <div>
                         Open <a href="examples/datepicker/index.html">Sample</a>
                     </div>
                 </section>
+                <!-- /datepicker -->
+
+                <section id="Draggable">
+                    <h2 class="line">Draggable List</h2>
+                    <p>A list with items that can be dragged and dropped. If the widget <a href="doc/CUI.DraggableList.html">CUI.DraggableList</a> is applied to the list, it can be sorted and moved from one list to another by just dragging the elements to their new position.</p>
+                    <div class="componentSample">
+                        <div class="example clearfix">
+                            <div class="left">
+                                <ul class="draggable" data-init="draggable-list" data-allow="reorder drag drop">
+                                    <li draggable="true">My Content 1<button class="close">&times;</button></li>
+                                    <li draggable="true">My Content 2<button class="close">&times;</button></li>
+                                    <li draggable="true">My Content 3<button class="close">&times;</button></li>
+                                </ul>
+                            </div>
+                            <div class="left">
+                                <ul class="draggable" data-init="draggable-list" data-allow="reorder drag drop">
+                                    <li draggable="true">My Content 4<button class="close">&times;</button></li>
+                                    <li draggable="true">My Content 5<button class="close">&times;</button></li>
+                                    <li draggable="true">My Content 6<button class="close">&times;</button></li>
+                                </ul>
+                            </div>                            
+                        </div> <!-- /example -->
+                        <pre class="prettyprint linenums">
+&lt;ul class=&quot;draggable&quot; data-init=&quot;draggable-list&quot;&gt;
+&lt;li draggable=&quot;true&quot;&gt;My Content 1&lt;button class=&quot;close&quot;&gt;&amp;times&lt;/button&gt;&lt;/li&gt;
+&lt;li draggable=&quot;true&quot;&gt;My Content 2&lt;button class=&quot;close&quot;&gt;&amp;times&lt;/button&gt;&lt;/li&gt;
+&lt;li draggable=&quot;true&quot;&gt;My Content 3&lt;button class=&quot;close&quot;&gt;&amp;times&lt;/button&gt;&lt;/li&gt;
+&lt;/ul&gt;</pre>
+                    </div><!-- /componentSample -->
+                    <div>
+                        Open <a href="examples/sortable/index.html">Sample</a>
+                    </div>
+                </section>
+                <!-- /draggable -->
+                
+                <section id="Dropdown">
+                    <h2 class="line">Dropdowns<span class="deprecated">deprecated</span></h2>
+                    <p>This component is <span class="deprecated">deprecated</span> in favor of the 
+                        <a href="#Select">Select</a> component. Different types of dropdowns.</p>
+                    <div class="componentSample">
+                        <div class="example">
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Standard</div>
+                                <div class="dropdown" data-init="dropdown">
+                                    <button>Single Select</button>
+                                    <select name="dropdown" >
+                                        <option></option>
+                                        <option>Single One</option>
+                                        <option selected>Single Two</option>
+                                        <option>Single Three</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Multiselect</div>
+                                <div class="dropdown" data-init="dropdown">
+                                    <button>Multi Select</button>
+                                    <select name="dropdown2" multiple>
+                                        <option>Multi One</option>
+                                        <option selected>Multi Two</option>
+                                        <option>Multi Three</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Editable</div>
+                                <div class="dropdown dropdown-editable" data-editable="true" data-init="dropdown">
+                                    <input type="text" placeholder="Editable Select">
+                                    <button>Editable</button>
+                                    <select name="dropdown3">
+                                        <option>Edit One</option>
+                                        <option>Edit Two</option>
+                                        <option>Edit Three</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Disabled</div>
+                                <div class="dropdown" data-init="dropdown" data-disabled="true">
+                                    <button>Disabled</button>
+                                    <select name="dropdown4">
+                                        <option>One</option>
+                                        <option>Two</option>
+                                        <option>Three</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Error</div>
+                                <div class="dropdown error" data-init="dropdown">
+                                    <button>Error</button>
+                                    <select name="dropdown5" >
+                                        <option>One</option>
+                                        <option>Two</option>
+                                        <option>Three</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Empty</div>
+                                <div class="dropdown" data-init="dropdown">
+                                </div>
+                            </div>
+
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Dividers</div>
+                                <div class="dropdown" data-init="dropdown">
+                                    <button>Dividers</button>
+                                        <select name="dropdown6" >
+                                            <option data-itemclass="divider">Numbers</option>
+                                            <option>One</option>
+                                            <option>Two</option>
+                                            <option>Three</option>
+                                            <option data-itemclass="divider">Alphabets</option>
+                                            <option>X</option>
+                                            <option>Y</option>
+                                        </select>
+                                </div>
+                            </div>
+                        </div> <!-- /example -->
+                    <pre class="prettyprint linenums">
+&lt;!-- Standard Single select --&gt;
+&lt;div class="dropdown" data-init="dropdown"&gt;
+    &lt;button&gt;Single Select&lt;/button&gt;
+    &lt;select name="dropdown"&gt;
+        &lt;option&gt;Single One&lt;/option&gt;
+        &lt;option selected&gt;Single Two&lt;/option&gt;
+        &lt;option&gt;Single Three&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;
+
+&lt;!-- Multi select --&gt;
+&lt;div class="dropdown" data-init="dropdown"&gt;
+    &lt;button&gt;Multi Select&lt;/button&gt;
+    &lt;select name="dropdown2" multiple&gt;
+        &lt;option&gt;Multi One&lt;/option&gt;
+        &lt;option selected&gt;Multi Two&lt;/option&gt;
+        &lt;option&gt;Multi Three&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;
+
+&lt;!-- Editable --&gt;
+&lt;div class="dropdown dropdown-editable" data-editable="true" data-init="dropdown"&gt;
+    &lt;input type="text" placeholder="Editable Select"&gt;
+    &lt;button&gt;Editable&lt;/button&gt;
+    &lt;select name="dropdown3"&gt;
+        &lt;option&gt;Edit One&lt;/option&gt;
+        &lt;option&gt;Edit Two&lt;/option&gt;
+        &lt;option&gt;Edit Three&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;
+
+&lt;!-- Disabled --&gt;
+&lt;div class="dropdown" data-init="dropdown" data-disabled="true"&gt;
+    &lt;button&gt;Disabled&lt;/button&gt;
+    &lt;select name="dropdown4"&gt;
+        &lt;option&gt;One&lt;/option&gt;
+        &lt;option&gt;Two&lt;/option&gt;
+        &lt;option&gt;Three&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;
+
+&lt;!-- Error --&gt;
+&lt;div class="dropdown error" data-init="dropdown"&gt;
+    &lt;button&gt;Error&lt;/button&gt;
+    &lt;select name="dropdown5" &gt;
+        &lt;option&gt;One&lt;/option&gt;
+        &lt;option&gt;Two&lt;/option&gt;
+        &lt;option&gt;Three&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;
+
+&lt;!-- Dropdown with Dividers --&gt;
+&lt;div class="dropdown" data-init="dropdown"&gt;
+    &lt;button&gt;Dividers&lt;/button&gt;
+    &lt;select name="dropdown6" &gt;
+        &lt;option data-itemclass="divider"&gt;Numbers&lt;/option&gt;
+        &lt;option&gt;One&lt;/option&gt;
+        &lt;option&gt;Two&lt;/option&gt;
+        &lt;option&gt;Three&lt;/option&gt;
+        &lt;option data-itemclass="divider"&gt;Alphabets&lt;/option&gt;
+        &lt;option&gt;X&lt;/option&gt;
+        &lt;option&gt;Y&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;</pre>
+                    </div><!-- /componentSample -->
+                    <div>
+                        Open <a href="examples/dropdown/index.html">Sample</a>
+                    </div>
+                </section>
+                <!-- /dropdown -->
+
+                <section id="Filters">
+                    <h2 class="line">Filters</h2>
+                    <p>Filters &amp; Tags input variants. Filter input fields can be created by markup directly or by JavaScript, though the full functionality can only be achieved by using the corresponding widget.</p>
+                    <p>You can use an input field or a select field as template for the widget.</p>
+                    <div class="componentSample">
+                        <div class="example">
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Single</div>
+                                <div class="filters" data-init="filters">
+                                    <input type="text" placeholder="Single Term Filter">
+                                    <select>
+                                        <option selected>Apple</option>
+                                        <option>Pear</option>
+                                        <option>Banana</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle extended left">Standard</div>
+                                <div class="filters" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter">
+                                    <input type="text">
+                                    <select multiple>
+                                        <option>Apple</option>
+                                        <option>Pear</option>
+                                        <option selected>Banana</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle extended left">Stacking</div>
+                                <div class="filters" data-init="filters" data-stacking="true" data-placeholder="Add Filter" data-allow="create">
+                                    <input type="text">
+                                    <select>
+                                        <option selected>Apple</option>
+                                        <option>Pear</option>
+                                        <option>Banana</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Error</div>
+                                <div class="filters error" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter">
+                                    <input type="text" class="filter">
+                                </div>
+                            </div>
+
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Disabled</div>
+                                <div class="filters disabled" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter" data-disabled="true">
+                                    <input class="filter" type="text" disabled>
+                                </div>
+                            </div>
+                        </div> <!-- /example -->
+                        <pre class="prettyprint linenums">
+&lt;!-- Standard single filters with select as template --&gt;
+&lt;div class="filters" data-init="filters"&gt;
+    &lt;input type="text" placeholder="Single Term Filter"&gt;
+    &lt;select&gt;
+        &lt;option selected&gt;Apple&lt;/option&gt;
+        &lt;option&gt;Pear&lt;/option&gt;
+        &lt;option&gt;Banana&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;
+
+&lt;!-- Standard filters with select as template --&gt;
+&lt;div class="filters" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter"&gt;
+    &lt;input type="text"&gt;
+    &lt;select multiple&gt;
+        &lt;option&gt;Apple&lt;/option&gt;
+        &lt;option&gt;Pear&lt;/option&gt;
+        &lt;option selected&gt;Banana&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;
+
+&lt;!-- Stacking filters with select as template --&gt;
+&lt;div class="filters" data-init="filters" data-stacking="true" data-placeholder="Add Filter" data-allow="create"&gt;
+    &lt;input type="text"&gt;
+    &lt;select&gt;
+        &lt;option selected&gt;Apple&lt;/option&gt;
+        &lt;option&gt;Pear&lt;/option&gt;
+        &lt;option&gt;Banana&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;</pre>
+                    </div><!-- /componentSample -->
+                    <div>
+                        Open <a href="examples/filters/index.html">Sample</a>
+                    </div>
+                </section>
+                <!-- /filters -->
+
+                <section id="FormErrors" style="position: relative">
+                    <h2 class="line">Form Errors</h2>
+                    <p>Descriptive errors for form field validation can be added easily by just adding 
+                        a <code class="atv">&lt;span&gt;</code> sibling with class 
+                        <code class="atv">form-error</code> to the erroneous form field.</p>
+                    <p>You should always add a "Quicktip" (see <a href="doc/CUI.Tooltip.html">CUI.Tooltip</a>)
+                     to give some more detailed info about the error to the user.</p>
+                    <p>You can also choose to limit the max length of textfields and textareas by using 
+                        the <a href="doc/CUI.CharacterCount.html">CUI.CharacterCount</a> widget.</p>
+                    <div class="componentSample">
+                        <div class="example clearfix">
+                            <div class="left">
+                                <input type="text" class="error" value="Tooltip below"> <span class="form-error" data-init="quicktip" data-quicktip-arrow="top" data-quicktip-type="error">Please correct your input!</span><br>
+                                <input type="text" class="error" value="Tooltip right"> <span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error">Please correct your input!</span>
+                            </div>                     
+                        </div> <!-- /example -->
+                        <pre class="prettyprint linenums">
+&lt;input type="text" class="error" value="Tooltip below"&gt;
+&lt;span class="form-error" data-init="quicktip" data-quicktip-arrow="top" data-quicktip-type="error"&gt;Please correct your input!&lt;/span&gt;&lt;br&gt;
+&lt;input type="text" class="error" value="Tooltip right"&gt;
+&lt;span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error"&gt;Please correct your input!&lt;/span&gt;</pre>
+                    </div><!-- /componentSample -->
+                    <div>
+                        Open <a href="examples/form-errors/index.html">Sample</a>
+                    </div>
+                </section> 
+                <!-- /form errors -->   
 
                 <section id="NumberInput">
                     <h2 class="line">Number Input</h2>
                     <p>The Number Input component. Use <i class="icon-minus"/>minus</i> and 
                       <i class="icon-add"/>add</i> to change value.  Values for step, min, and max
-                      are configurable.  See the <a href="examples/numberinput/index.html">examples</a> and <a href="doc/CUI.NumberInput.html">documentation</a> for more details.</p>
-
+                      are configurable.  See the <a href="examples/numberinput/index.html">examples</a> 
+                      and <a href="doc/CUI.NumberInput.html">documentation</a> for more details.</p>
                     <div class="componentSample">
                         <div class="example">
                             <div class="numberInputSample">
@@ -2053,7 +1753,7 @@
                                     <button type="button" class='increment'>increment</button>
                                 </div>
                             </div>
-                        </div> <!-- end example -->
+                        </div> <!-- /example -->
                         <pre class="prettyprint linenums">
 &lt;!-- Standard Number Input --&gt;                            
 &lt;div class=&quot;numberinput&quot; data-init=&quot;numberinput&quot;&gt;
@@ -2074,18 +1774,401 @@
     &lt;button type=&quot;button&quot; class=&#039;decrement&#039;&gt;decrement&lt;/button&gt;
     &lt;input type=&#039;text&#039;&gt;
     &lt;button type=&quot;button&quot; class=&#039;increment&#039;&gt;increment&lt;/button&gt;
-&lt;/div&gt;
-                        </pre>
-                    </div>
+&lt;/div&gt;</pre>
+                    </div><!-- /componentSample -->
                     <div>
                         Open <a href="examples/numberinput/index.html">Sample</a>
                     </div>
                 </section>
+                <!-- /numberinput -->
+
+                <section id="RadioButtons">
+                    <h2 class="line">Radio buttons</h2>
+                    <p>Radio buttons are styled using pure CSS.</p>
+                    <div class="componentSample">
+                        <div class="example clearfix">
+                            <div class="left">
+                                <label><input type="radio" name="r1" value="1" checked><span>Checked</span></label><br>
+                                <label><input type="radio" name="r1" value="2"><span>Unchecked</span></label>
+                            </div>
+                            <div class="left">
+                                <label><input type="radio" name="r2" value="1" disabled checked><span>Disabled Checked</span></label><br>
+                                <label><input type="radio" name="r2" value="2" disabled><span>Disabled Unchecked</span></label>
+                            </div>
+                        </div><!-- /example -->
+                        <pre class="prettyprint linenums">
+&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;r1&quot; value=&quot;1&quot; checked&gt;&lt;span&gt;&lt;/span&gt;Value 1&lt;/label&gt;
+&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;r1&quot; value=&quot;2&quot;&gt;&lt;span&gt;&lt;/span&gt;Value 2&lt;/label&gt;
+&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;r2&quot; value=&quot;1&quot; disabled checked&gt;&lt;span&gt;Disabled Checked&lt;/span&gt;&lt;/label&gt;
+&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;r2&quot; value=&quot;2&quot; disabled&gt;&lt;span&gt;Disabled Unchecked&lt;/span&gt;&lt;/label&gt;</pre>
+                    </div><!-- /componentSample -->
+                </section>
+                <!-- /radio button -->
+
+                <section id="SearchField">
+                    <h2 class="line">Search Field</h2>
+                    <p>A simple search field.  Note that pre-1.10 markup should be updated to include
+                        the &quot;type&quot; attribute on the submit button and provide implementation of the clear option.</p>
+                    <div class="componentSample">
+                        <div class="example">
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Standard</div>
+                                <div class="searchfield">
+                                    <div class="search">
+                                        <input type="text" placeholder="Search">
+                                        <button type="submit">Search</button>
+                                        <button type="reset">Clear</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Error</div>
+                                <div class="searchfield">
+                                    <div class="search error">
+                                        <input type="text" placeholder="Search" value="error">
+                                        <button type="submit">Search</button>
+                                        <button type="reset">Clear</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Disabled</div>
+                                <div class="searchfield">
+                                    <div class="search">
+                                        <input type="text" placeholder="Search" disabled>
+                                        <button type="submit" disabled>Search</button>
+                                        <button type="reset" disabled>Clear</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- /example -->
+                        <pre class="prettyprint linenums">
+&lt;!-- Standard --&gt;
+&lt;div class=&quot;search&quot;&gt;
+    &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot;&gt;
+    &lt;button type=&quot;submit&quot;&gt;Search&lt;/button&gt;
+    &lt;button type=&quot;reset&quot;&gt;Clear&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- Error --&gt;
+&lt;div class=&quot;search error&quot;&gt;
+    &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot;&gt;
+    &lt;button type=&quot;submit&quot;&gt;Search&lt;/button&gt;
+    &lt;button type=&quot;reset&quot;&gt;Clear&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- Disabled --&gt;
+&lt;div class=&quot;search&quot;&gt;
+    &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot; disabled&gt;
+    &lt;button type=&quot;submit&quot; disabled&gt;Search&lt;/button&gt;
+    &lt;button type=&quot;reset&quot; disabled&gt;Clear&lt;/button&gt;
+&lt;/div&gt;</pre>
+                    </div> <!-- /componentSample -->
+                    <div>
+                        Open <a href="examples/search/index.html">Sample</a>
+                    </div>  
+                </section>
+                <!-- /simple search -->
+
+                <section id="Select">
+                    <h2 class="line">Select</h2>
+                    <p>A new version of the DropDown.</p>
+
+                    <div class="componentSample">
+                        <div class="example">
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Static</div>
+                                <span class="select" data-init="select">
+                                  <button type="button">Select</button>
+                                  <select>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </span>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Multiple</div>
+                                <span class="select" data-init="select">
+                                  <button type="button">Select</button>
+                                  <select multiple="true">
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </span>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Group</div>
+                                <span class="select" data-init="select">
+                                  <button type="button">Select</button>
+                                  <select>
+                                    <optgroup label="Group 1">
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </optgroup>
+                                    <optgroup label="Group 2">
+                                        <option value="4">Fourth</option>
+                                        <option value="5">Fifth</option>
+                                    </optgroup>
+                                  </select>
+                                </span>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Icon</div>
+                                <span class="select" data-init="select">
+                                  <button type="button" class="icon-globe">Add a location</button>
+                                  <select>
+                                    <option value="at">Austria</option>
+                                    <option value="ch">Switzerland</option>
+                                    <option value="us">United States</option>
+                                  </select>
+                                </span>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Disabled</div>
+                                <span class="select" data-init="select">
+                                  <button type="button" disabled="true">Select</button>
+                                  <select>
+                                    <option value="1">One</option>
+                                    <option value="2" selected="selected">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </span>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Error</div>
+                                <span class="select" data-init="select">
+                                  <button type="button" class="error">Select</button>
+                                  <select>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </span>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Native</div>
+                                <span class="select" data-init="select" data-nativewidget="true">
+                                  <button type="button">Select</button>
+                                  <select>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </span>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">with Multi</div>
+                                <span class="select" data-init="select" data-nativewidget="true">
+                                  <button type="button">Select</button>
+                                  <select multiple="true">
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </span>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">with Group</div>
+                                <span class="select" data-init="select" data-nativewidget="true">
+                                  <button type="button">Select</button>
+                                  <select>
+                                    <optgroup label="Group 1">
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </optgroup>
+                                    <optgroup label="Group 2">
+                                        <option value="4">Fourth</option>
+                                        <option value="5">Fifth</option>
+                                    </optgroup>
+                                  </select>
+                                </span>
+                            </div>
+                        </div><!-- /example -->
+                        <pre class="prettyprint linenums">
+&lt;!-- Static --&gt;
+&lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
+  &lt;input type=&quot;button&quot; class=&quot;button&quot; value=&quot;Select&quot;/&gt;
+  &lt;select&gt;
+    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
+
+&lt;!-- Multiple --&gt;
+&lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
+  &lt;button type=&quot;button&quot;&gt;Select&lt;/button&gt;
+  &lt;select multiple=&quot;true&quot;&gt;
+    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
+
+&lt;!-- Group dividers --&gt;
+&lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
+  &lt;button type=&quot;button&quot;&gt;Select&lt;/button&gt;
+  &lt;select&gt;
+    &lt;optgroup label=&quot;Group 1&quot;&gt;
+        &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+        &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+        &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+    &lt;/optgroup&gt;
+    &lt;optgroup label=&quot;Group 2&quot;&gt;
+        &lt;option value=&quot;4&quot;&gt;Fourth&lt;/option&gt;
+        &lt;option value=&quot;5&quot;&gt;Fifth&lt;/option&gt;
+    &lt;/optgroup&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
+
+&lt;!-- with Icon --&gt;
+&lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
+  &lt;button type=&quot;button&quot; class=&quot;icon-globe&quot;&gt;Add a location&lt;/button&gt;
+  &lt;select&gt;
+    &lt;option value=&quot;at&quot;&gt;Austria&lt;/option&gt;
+    &lt;option value=&quot;ch&quot;&gt;Switzerland&lt;/option&gt;
+    &lt;option value=&quot;us&quot;&gt;United States&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
+
+&lt;!-- Disabled --&gt;
+&lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
+  &lt;input type=&quot;button&quot; class=&quot;button&quot; value=&quot;Select&quot; disabled=&quot;true&quot;/&gt;
+  &lt;select&gt;
+    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
+
+&lt;!-- Error --&gt;
+&lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
+  &lt;input type=&quot;button&quot; class=&quot;button error&quot; value=&quot;Select&quot;/&gt;
+  &lt;select&gt;
+    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
+
+&lt;!-- Native select --&gt;
+&lt;span class=&quot;select&quot; data-init=&quot;select&quot; data-nativewidget=&quot;true&quot;&gt;
+  &lt;input type=&quot;button&quot; class=&quot;button&quot; value=&quot;Select&quot;/&gt;
+  &lt;select&gt;
+    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
+
+&lt;!-- Native with multiple seclect --&gt;
+&lt;span class=&quot;select&quot; data-init=&quot;select&quot; data-nativewidget=&quot;true&quot;&gt;
+  &lt;input type=&quot;button&quot; class=&quot;button&quot; value=&quot;Select&quot;/&gt;
+  &lt;select multiple=&quot;true&quot;&gt;
+    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/span&gt;
+
+&lt;!-- Native with groups --&gt;
+&lt;span class=&quot;select&quot; data-init=&quot;select&quot; data-nativewidget=&quot;true&quot;&gt;
+  &lt;button type=&quot;button&quot;&gt;Select&lt;/button&gt;
+  &lt;select&gt;
+    &lt;optgroup label=&quot;Group 1&quot;&gt;
+        &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+        &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+        &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+    &lt;/optgroup&gt;
+    &lt;optgroup label=&quot;Group 2&quot;&gt;
+        &lt;option value=&quot;4&quot;&gt;Fourth&lt;/option&gt;
+        &lt;option value=&quot;5&quot;&gt;Fifth&lt;/option&gt;
+    &lt;/optgroup&gt;
+  &lt;/select&gt;
+&lt;/span&gt;</pre>
+                    </div><!-- /componentSample -->
+                </section>
+                <!-- /select -->
+
+                <section id="Selector">
+                    <h2 class="line">Toggles &amp; Selectors</h2>
+                    <h3>Switch</h3>
+                    <p>Mutually exclusive, for use in tables.</p>
+                    <div class="componentSample">
+                        <div class="example clearfix">
+                            <label class="switch"><input type="checkbox" name="s1"><span>Off</span><span>On</span></label>
+                            <label class="switch"><input type="checkbox" name="s2" disabled><span>Off</span><span>On</span></label>
+                        </div> <!-- /example -->
+                        <pre class="prettyprint linenums">
+&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s1&quot;&gt;&lt;span&gt;Off&lt;/span&gt;&lt;span&gt;On&lt;/span&gt;&lt;/label&gt;
+&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s2&quot; disabled&gt;&lt;span&gt;Off&lt;/span&gt;&lt;span&gt;On&lt;/span&gt;&lt;/label&gt;</pre>
+                    </div><!-- /switch componentSample -->
+
+                    <h3>Selector</h3>
+                    <p>Mutually exclusive.</p>
+                    <div class="componentSample">
+                        <div class="example clearfix">
+                            <div class="left">
+                                <div class="selector">
+                                    <label><input type="radio" name="s3"><span>Yes</span></label>
+                                    <label><input type="radio" name="s3"><span>No</span></label>
+                                </div>
+                                <div class="selector">
+                                    <label><input type="radio" name="s4" disabled><span>Yes</span></label>
+                                    <label><input type="radio" name="s4" disabled><span>No</span></label>
+                                </div>
+                            </div>
+                        </div> <!-- /example -->
+                        <pre class="prettyprint linenums">
+&lt;div class=&quot;selector&quot;&gt;
+    &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;s3&quot;&gt;&lt;span&gt;Yes&lt;/span&gt;&lt;/label&gt;
+    &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;s3&quot;&gt;&lt;span&gt;No&lt;/span&gt;&lt;/label&gt;
+&lt;/div&gt;
+&lt;div class=&quot;selector&quot;&gt;
+    &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;s4&quot; disabled&gt;&lt;span&gt;Yes&lt;/span&gt;&lt;/label&gt;
+    &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;s4&quot; disabled&gt;&lt;span&gt;No&lt;/span&gt;&lt;/label&gt;
+&lt;/div&gt;</pre>
+                    </div><!-- / selector componentSample -->
+
+                    <h3>Multi-Selector</h3>
+                    <p>Not mutually exclusive.</p>
+                    <div class="componentSample">
+                        <div class="example clearfix">
+                            <div class="left">
+                                <div class="selector">
+                                    <label><input type="checkbox" name="s5"><span>Chicken</span></label>
+                                    <label><input type="checkbox" name="s5"><span>Steak</span></label>
+                                    <label><input type="checkbox" name="s5"><span>Pork</span></label>
+                                </div>
+                                <div class="selector">
+                                    <label><input type="checkbox" name="s6" disabled><span>Chicken</span></label>
+                                    <label><input type="checkbox" name="s6" disabled><span>Steak</span></label>
+                                    <label><input type="checkbox" name="s6" disabled><span>Pork</span></label>
+                                </div>
+                            </div>
+                        </div> <!-- /example -->
+                        <pre class="prettyprint linenums">
+&lt;div class=&quot;selector&quot;&gt;
+    &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s5&quot;&gt;&lt;span&gt;Chicken&lt;/span&gt;&lt;/label&gt;
+    &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s5&quot;&gt;&lt;span&gt;Steak&lt;/span&gt;&lt;/label&gt;
+    &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s5&quot;&gt;&lt;span&gt;Pork&lt;/span&gt;&lt;/label&gt;
+&lt;/div&gt;
+&lt;div class=&quot;selector&quot;&gt;
+    &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s6&quot; disabled&gt;&lt;span&gt;Chicken&lt;/span&gt;&lt;/label&gt;
+    &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s6&quot; disabled&gt;&lt;span&gt;Steak&lt;/span&gt;&lt;/label&gt;
+    &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s6&quot; disabled&gt;&lt;span&gt;Pork&lt;/span&gt;&lt;/label&gt;
+&lt;/div&gt;</pre>
+                    </div>  <!-- /multi-selector componentSample -->
+                </section>
+                <!-- /selector -->
 
                 <section id="Slider">
                     <h2 class="line">Sliders</h2>
                     <p>Different types of horizontal sliders.</p>
-
                     <div class="componentSample">
                         <div class="example clearfix">
                             <div class="sliderSample">
@@ -2132,7 +2215,7 @@
                                    </fieldset>
                                 </div>
                             </div>
-                        </div>
+                        </div><!-- /example -->
                         <pre class="prettyprint linenums">
 &lt;!-- Standard Horizontal Slider --&gt;
 &lt;div class=&quot;slider&quot; data-init=&quot;slider&quot;&gt;
@@ -2178,12 +2261,10 @@
        &lt;label&gt;Minimum value &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;&lt;/label&gt;
        &lt;label&gt;Maximum value &lt;input type=&quot;range&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;&lt;/label&gt;
    &lt;/fieldset&gt;
-&lt;/div&gt;
-</pre>
-                    </div>
+&lt;/div&gt;</pre>
+                    </div><!-- /horizontal slider componentSample -->
 
                     <p>Different types of vertical sliders.</p>
-
                     <div class="componentSample">
                         <div class="example clearfix">
                             <div class="sliderSample left">
@@ -2227,7 +2308,7 @@
                                    </fieldset>
                                 </div>
                             </div>
-                        </div>
+                        </div> <!-- /example -->
                         <pre class="prettyprint linenums">
 &lt;!-- Standard Vertical Slider --&gt;
 &lt;div class=&quot;slider vertical&quot; data-init=&quot;slider&quot;&gt;
@@ -2273,212 +2354,148 @@
        &lt;label&gt;Minimum value &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;&lt;/label&gt;
        &lt;label&gt;Maximum value &lt;input type=&quot;range&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;&lt;/label&gt;
    &lt;/fieldset&gt;
-&lt;/div&gt;
-</pre>
-                    </div>
+&lt;/div&gt;</pre>
+                    </div> <!-- /vertical slider componentSample -->
                     <div>
                         Open <a href="examples/slider/index.html">Sample</a>
                     </div>
                 </section>
+                <!-- /slider -->
 
-                <section id="Checkbox">
-                    <h2 class="line">Checkbox</h2>
-                    <p>Checkboxes are styled using pure CSS. They can have an indetermined state by changing their state using
-                        javascript.</p>
-
+                <section id="TextArea">
+                    <h2 class="line">Text Area</h2>
+                    <p>Text input variants.</p>
+                    <p>You can choose to limit the max length of textfields and textareas and give visual feedback to the user by using the
+                    <a href="doc/CUI.CharacterCount.html">CUI.CharacterCount</a> widget.</p>
                     <div class="componentSample">
-                        <div class="example clearfix">
-                            <div class="left">
-                                <label><input type="checkbox" name="c1" value="1" checked><span>Checked</span></label><br>
-                                <label><input type="checkbox" name="c2" value="2"><span>Unchecked</span></label><br>
-                                <label><input type="checkbox" name="c3" value="3" id="partial-checkbox1"><span>Partially checked</span></label>
+                        <div class="example">
+                            <div class="textareaSample">
+                                <div class="sampleTitle left">Standard</div>
+                                <label>Text Area</label>
+                                <textarea rows="4"></textarea>
                             </div>
-                            <div class="left">
-                                <label><input type="checkbox" name="c4" value="4" disabled checked><span>Disabled Checked</span></label><br>
-                                <label><input type="checkbox" name="c5" value="5" disabled><span>Disabled Unchecked</span></label><br>
-                                <label><input type="checkbox" name="c6" value="6" id="partial-checkbox2" disabled><span>Disabled Partially Checked</span></label>
+                            <div class="textareaSample">
+                                <div class="sampleTitle left">Title-less</div>
+                                <label>&nbsp;</label>
+                                <textarea rows="4" placeholder="Text Area"></textarea>
                             </div>
-                        </div>
+                            <div class="textareaSample">
+                                <div class="sampleTitle left">Error</div>
+                                <label>&nbsp;</label>
+                                <textarea rows="4" class="error"></textarea>
+                            </div>
+                            <div class="textareaSample">
+                                <div class="sampleTitle left">Disabled</div>
+                                <label>&nbsp;</label>
+                                <textarea rows="4" disabled></textarea>
+                            </div>
+                        </div> <!-- /example -->
                         <pre class="prettyprint linenums">
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c1&quot; checked&gt;&lt;span&gt;Checked&lt;/span&gt;&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c2&quot;&gt;&lt;span&gt;Unchecked&lt;/span&gt;&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c3&quot; &gt;&lt;span&gt;Partially checked&lt;/span&gt;&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c4&quot; disabled checked&gt;&lt;span&gt;Disabled Checked&lt;/span&gt;&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c5&quot; disabled&gt;&lt;span&gt;Disabled Unchecked&lt;/span&gt;&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c6&quot; disabled&gt;&lt;span&gt;Disabled Partially Checked&lt;/span&gt;&lt;/label&gt;
-</pre>
-                    </div>
+&lt;!-- Standard --&gt;
+&lt;label&gt;Text Area&lt;/label&gt;
+&lt;textarea rows=&quot;4&quot;&gt;&lt;/textarea&gt;
 
-                    <script type="text/javascript">
-                        // changes the demo checkboxes to be half-checked.
-                        $('#partial-checkbox1').prop('indeterminate', true);
-                        $('#partial-checkbox2').prop('indeterminate', true);
-                    </script>
-                    <div>
-                        Open <a href="examples/checkbox/index.html">Sample</a>
-                    </div>
+&lt;!-- Without Title --&gt;
+&lt;label&gt;&amp;nbsp;&lt;/label&gt;
+&lt;textarea rows=&quot;4&quot; placeholder=&quot;Text Area&quot;&gt;&lt;/textarea&gt;
+
+&lt;!-- Error --&gt;
+&lt;label&gt;&amp;nbsp;&lt;/label&gt;
+&lt;textarea rows=&quot;4&quot; class=&quot;error&quot;&gt;&lt;/textarea&gt;
+
+&lt;!-- Disabled --&gt;
+&lt;label&gt;&amp;nbsp;&lt;/label&gt;
+&lt;textarea rows=&quot;4&quot; disabled&gt;&lt;/textarea&gt;</pre>
+                    </div><!-- /componentSample -->
                 </section>
+                <!-- /TextArea -->
 
-                <section id="RadioButtons">
-                    <h2 class="line">Radio buttons</h2>
-                    <p>Radio buttons are styling using pure CSS.</p>
-
+                <section id="TextField">
+                    <h2 class="line">Text Field</h2>
+                    <p>Text input variants.</p>
+                    <p>You can choose to limit the max length of textfields and textareas and give visual feedback to the user by using the
+                    <a href="doc/CUI.CharacterCount.html">CUI.CharacterCount</a> widget.</p>
                     <div class="componentSample">
-                        <div class="example clearfix">
-                            <div class="left">
-                                <label><input type="radio" name="r1" value="1" checked><span>Checked</span></label><br>
-                                <label><input type="radio" name="r1" value="2"><span>Unchecked</span></label>
+                        <div class="example">
+                            <div class="textfieldSample">
+                                <div class="sampleTitle left">Standard</div>
+                                <label>Text Field</label>
+                                <input type="text" />
                             </div>
-                            <div class="left">
-                                <label><input type="radio" name="r2" value="1" disabled checked><span>Disabled Checked</span></label><br>
-                                <label><input type="radio" name="r2" value="2" disabled><span>Disabled Unchecked</span></label>
+                            <div class="textfieldSample">
+                                <div class="sampleTitle left">Title-less</div>
+                                <label>&nbsp;</label>
+                                <input type="text" placeholder="Text Field" />
                             </div>
-                        </div>
+                            <div class="textfieldSample">
+                                <div class="sampleTitle left">Error</div>
+                                <label>&nbsp;</label>
+                                <input type="text" class="error" />
+                            </div>
+                            <div class="textfieldSample">
+                                <div class="sampleTitle left">Disabled</div>
+                                <label>&nbsp;</label>
+                                <input type="text" disabled />
+                            </div>
+                            <div class="textfieldSample">
+                                <div class="sampleTitle left">Password</div>
+                                <label>&nbsp;</label>
+                                <input type="password" placeholder="Enter password" />
+                            </div>
+                            <div class="textfieldSample">
+                                <div class="sampleTitle left">E-Mail</div>
+                                <label>&nbsp;</label>
+                                <input type="email" placeholder="Enter email address" />
+                            </div>
+                            <div class="textfieldSample">
+                                <div class="sampleTitle left">Phone&nbsp;Nr</div>
+                                <label>&nbsp;</label>
+                                <input type="tel" placeholder="Enter phone number" pattern="\(\d\d\d\) ?\d\d\d-\d\d\d\d" title="(###) ###-####" />
+                            </div>
+                            <div class="textfieldSample">
+                                <div class="sampleTitle left">URL</div>
+                                <label>&nbsp;</label>
+                                <input type="url" placeholder="Enter URL">
+                            </div>
+                        </div> <!-- /example -->
                         <pre class="prettyprint linenums">
-&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;r1&quot; value=&quot;1&quot; checked&gt;&lt;span&gt;&lt;/span&gt;Value 1&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;r1&quot; value=&quot;2&quot;&gt;&lt;span&gt;&lt;/span&gt;Value 2&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;r2&quot; value=&quot;1&quot; disabled checked&gt;&lt;span&gt;Disabled Checked&lt;/span&gt;&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;r2&quot; value=&quot;2&quot; disabled&gt;&lt;span&gt;Disabled Unchecked&lt;/span&gt;&lt;/label&gt;
-</pre>
-                    </div>
+&lt;!-- Standard --&gt;
+&lt;label&gt;Text Field&lt;/label&gt;
+&lt;input type=&quot;text&quot; /&gt;
+
+&lt;!-- Without Title --&gt;
+&lt;label&gt;&amp;nbsp;&lt;/label&gt;
+&lt;input type=&quot;text&quot; placeholder=&quot;Text Field&quot; /&gt;
+
+&lt;!-- Error --&gt;
+&lt;label&gt;&amp;nbsp;&lt;/label&gt;
+&lt;input type=&quot;text&quot; class=&quot;error&quot; /&gt;
+
+&lt;!-- Disabled --&gt;
+&lt;label&gt;&amp;nbsp;&lt;/label&gt;
+&lt;input type=&quot;text&quot; disabled /&gt;
+
+&lt;!-- Password --&gt;
+&lt;label&gt;&amp;nbsp;&lt;/label&gt;
+&lt;input type=&quot;password&quot; placeholder=&quot;Enter password&quot; /&gt;
+
+&lt;!-- E-Mail --&gt;
+&lt;label&gt;&amp;nbsp;&lt;/label&gt;
+&lt;input type=&quot;email&quot; placeholder=&quot;Enter email address&quot; /&gt;
+
+&lt;!-- Phone --&gt;
+&lt;label&gt;&amp;nbsp;&lt;/label&gt;
+&lt;input type=&quot;tel&quot; placeholder=&quot;Enter phone number&quot; pattern=&quot;\(\d\d\d\) ?\d\d\d-\d\d\d\d&quot; title=&quot;(###) ###-####&quot; /&gt;
+
+&lt;!-- URL --&gt;
+&lt;label&gt;&amp;nbsp;&lt;/label&gt;
+&lt;input type=&quot;url&quot; placeholder=&quot;Enter URL&quot;&gt;</pre>
+                    </div><!-- /componentSample -->
                 </section>
+                <!-- /TextField -->
 
-                <section id="Selector">
-                    <h2 class="line">Toggles &amp; Selectors</h2>
-                    <h3>Switch</h3>
-                    <p>Mutually exclusive, for use in tables.</p>
-
-                    <div class="componentSample">
-                        <div class="example clearfix">
-                            <label class="switch"><input type="checkbox" name="s1"><span>Off</span><span>On</span></label>
-                            <label class="switch"><input type="checkbox" name="s2" disabled><span>Off</span><span>On</span></label>
-                        </div>
-                        <pre class="prettyprint linenums">
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s1&quot;&gt;&lt;span&gt;Off&lt;/span&gt;&lt;span&gt;On&lt;/span&gt;&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s2&quot; disabled&gt;&lt;span&gt;Off&lt;/span&gt;&lt;span&gt;On&lt;/span&gt;&lt;/label&gt;
-</pre>
-                    </div>
-
-                    <h3>Selector</h3>
-                    <p>Mutually exclusive.</p>
-
-                    <div class="componentSample">
-                        <div class="example clearfix">
-                            <div class="left">
-                                <div class="selector">
-                                    <label><input type="radio" name="s3"><span>Yes</span></label>
-                                    <label><input type="radio" name="s3"><span>No</span></label>
-                                </div>
-                                <div class="selector">
-                                    <label><input type="radio" name="s4" disabled><span>Yes</span></label>
-                                    <label><input type="radio" name="s4" disabled><span>No</span></label>
-                                </div>
-                            </div>
-                        </div>
-                        <pre class="prettyprint linenums">
-&lt;div class=&quot;selector&quot;&gt;
-    &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;s3&quot;&gt;&lt;span&gt;Yes&lt;/span&gt;&lt;/label&gt;
-    &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;s3&quot;&gt;&lt;span&gt;No&lt;/span&gt;&lt;/label&gt;
-&lt;/div&gt;
-&lt;div class=&quot;selector&quot;&gt;
-    &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;s4&quot; disabled&gt;&lt;span&gt;Yes&lt;/span&gt;&lt;/label&gt;
-    &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;s4&quot; disabled&gt;&lt;span&gt;No&lt;/span&gt;&lt;/label&gt;
-&lt;/div&gt;
-</pre>
-                    </div>
-
-                    <h3>Multi-Selector</h3>
-                    <p>Not mutually exclusive.</p>
-
-                    <div class="componentSample">
-                        <div class="example clearfix">
-                            <div class="left">
-                                <div class="selector">
-                                    <label><input type="checkbox" name="s5"><span>Chicken</span></label>
-                                    <label><input type="checkbox" name="s5"><span>Steak</span></label>
-                                    <label><input type="checkbox" name="s5"><span>Pork</span></label>
-                                </div>
-                                <div class="selector">
-                                    <label><input type="checkbox" name="s6" disabled><span>Chicken</span></label>
-                                    <label><input type="checkbox" name="s6" disabled><span>Steak</span></label>
-                                    <label><input type="checkbox" name="s6" disabled><span>Pork</span></label>
-                                </div>
-                            </div>
-                        </div>
-                        <pre class="prettyprint linenums">
-&lt;div class=&quot;selector&quot;&gt;
-    &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s5&quot;&gt;&lt;span&gt;Chicken&lt;/span&gt;&lt;/label&gt;
-    &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s5&quot;&gt;&lt;span&gt;Steak&lt;/span&gt;&lt;/label&gt;
-    &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s5&quot;&gt;&lt;span&gt;Pork&lt;/span&gt;&lt;/label&gt;
-&lt;/div&gt;
-&lt;div class=&quot;selector&quot;&gt;
-    &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s6&quot; disabled&gt;&lt;span&gt;Chicken&lt;/span&gt;&lt;/label&gt;
-    &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s6&quot; disabled&gt;&lt;span&gt;Steak&lt;/span&gt;&lt;/label&gt;
-    &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s6&quot; disabled&gt;&lt;span&gt;Pork&lt;/span&gt;&lt;/label&gt;
-&lt;/div&gt;
-</pre>
-                    </div>
-                </section>
-
-                <section id="Draggable">
-                    <h2 class="line">Draggable List</h2>
-                    <p>A list with items that can be dragged and dropped. If the widget <a href="doc/CUI.DraggableList.html">CUI.DraggableList</a> is applied to the list, it can be sorted and moved from one list to another by just dragging the elements to their new position.</p>
-
-                    <div class="componentSample">
-                        <div class="example clearfix">
-                            <div class="left">
-                                <ul class="draggable" data-init="draggable-list" data-allow="reorder drag drop">
-                                    <li draggable="true">My Content 1<button class="close">&times;</button></li>
-                                    <li draggable="true">My Content 2<button class="close">&times;</button></li>
-                                    <li draggable="true">My Content 3<button class="close">&times;</button></li>
-                                </ul>
-                            </div>
-                            <div class="left">
-                                <ul class="draggable" data-init="draggable-list" data-allow="reorder drag drop">
-                                    <li draggable="true">My Content 4<button class="close">&times;</button></li>
-                                    <li draggable="true">My Content 5<button class="close">&times;</button></li>
-                                    <li draggable="true">My Content 6<button class="close">&times;</button></li>
-                                </ul>
-                            </div>                            
-                        </div>
-                        <pre class="prettyprint linenums">
-&lt;ul class=&quot;draggable&quot; data-init=&quot;draggable-list&quot;&gt;
-&lt;li draggable=&quot;true&quot;&gt;My Content 1&lt;button class=&quot;close&quot;&gt;&amp;times&lt;/button&gt;&lt;/li&gt;
-&lt;li draggable=&quot;true&quot;&gt;My Content 2&lt;button class=&quot;close&quot;&gt;&amp;times&lt;/button&gt;&lt;/li&gt;
-&lt;li draggable=&quot;true&quot;&gt;My Content 3&lt;button class=&quot;close&quot;&gt;&amp;times&lt;/button&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</pre>
-                    </div>
-                    <div>
-                        Open <a href="examples/sortable/index.html">Sample</a>
-                    </div>
-                </section>
-                
-                <section id="FormErrors" style="position: relative">
-                    <h2 class="line">Form Errors</h2>
-                    <p>Descriptive errors for form field validation can be added easily by just adding a <code class="atv">&lt;span&gt;</code> sibling with class <code class="atv">form-error</code> to the erroneous form field.</p>
-                    <p>You should always add a "Quicktip" (see <a href="doc/CUI.Tooltip.html">CUI.Tooltip</a>) to give some more detailed info about the error to the user.</p>
-                    <p>You can also choose to limit the max length of textfields and textareas by using the <a href="doc/CUI.CharacterCount.html">CUI.CharacterCount</a> widget.</p>
-                    <div class="componentSample">
-                        <div class="example clearfix">
-                            <div class="left">
-                                <input type="text" class="error" value="Tooltip below"> <span class="form-error" data-init="quicktip" data-quicktip-arrow="top" data-quicktip-type="error">Please correct your input!</span><br>
-                                <input type="text" class="error" value="Tooltip right"> <span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error">Please correct your input!</span>
-                            </div>                     
-                        </div>
-                        <pre class="prettyprint linenums">
-&lt;input type="text" class="error" value="Tooltip below"&gt;
-&lt;span class="form-error" data-init="quicktip" data-quicktip-arrow="top" data-quicktip-type="error"&gt;Please correct your input!&lt;/span&gt;&lt;br&gt;
-&lt;input type="text" class="error" value="Tooltip right"&gt;
-&lt;span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error"&gt;Please correct your input!&lt;/span&gt;
-</pre>
-                    </div>
-                    <div>
-                        Open <a href="examples/form-errors/index.html">Sample</a>
-                    </div>
-                </section>                
-
-            </section><!-- /ButtonsAndControls -->
+            </section>
+            <!-- /ButtonsAndControls -->
 
             <section id="DataPresentation">
                 <h1 class="line">Data Presentation</h1>
@@ -2487,7 +2504,6 @@
                 <section class="hidden" id="List">
                     <h2 class="line">List</h2>
                     <p>List.</p>
-
                     <div class="componentSample">
                         <div class="example">
                             <ul class="list">
@@ -2495,34 +2511,32 @@
                             </ul>
                         </div>
                         <pre class="prettyprint linenums"></pre>
-                    </div>
+                    </div> <!-- /componentSample -->
                     <div>
                         Open <a href="examples/lists/index.html">Sample</a>
                     </div>
                 </section>
+                <!-- /List -->
 
                 <section class="hidden" id="Grid">
                     <h2 class="line">Grid</h2>
                     <p>Grid.</p>
-
                     <div class="componentSample">
                         <div class="example">
-
                             <ul class="grid">
                                 <li>Item</li>
                             </ul>
-
                         </div>
                         <pre class="prettyprint linenums"></pre>
-                    </div>
+                    </div> <!-- /componentSample -->
                     <div>
                         Open <a href="examples/gridlayout/index.html">Sample</a>
                     </div>
                 </section>
+                <!-- /Grid -->
 
                 <section id="Table">
                     <h2 class="line">Table</h2>
-
                     <div class="componentSample">
                         <div class="example">
                             <table class="data">
@@ -2567,8 +2581,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
-
+                        </div> <!-- /example -->
                         <pre class="prettyprint linenums">
 &lt;table class=&quot;data&quot;&gt;
  &lt;thead&gt;
@@ -2587,12 +2600,12 @@
          &lt;td class=&quot;num&quot;&gt;1,049&lt;/td&gt;
      &lt;/tr&gt;
  &lt;/tbody&gt;
-&lt;/table&gt;
-</pre>
-                    </div>
-
+&lt;/table&gt;</pre>
+                    </div> <!-- /componentSample -->
                 </section>
-            </section><!-- /DataPresentation -->
+                <!-- /Table -->
+            </section>
+            <!-- /DataPresentation -->
 
             <section id="Cards">
                 <h1 class="line">Cards</h1>
@@ -2625,7 +2638,7 @@
                                     <i class="select"></i>
                                     <i class="move"></i>
                                     <a href="#">
-                                        <span class="image"><img src="images/previews/preview7.png" alt=""></span>
+                                        <span class="image"><img src="res/guide/previews/preview7.png" alt=""></span>
                                         <div class="label">
                                             <h4>Project Name</h4>
                                             <p>Project Description</p>
@@ -2637,7 +2650,7 @@
                                     <i class="select"></i>
                                     <i class="move"></i>
                                     <div class="card">
-                                        <span class="image"><img src="images/previews/preview7.png" alt=""></span>
+                                        <span class="image"><img src="res/guide/previews/preview7.png" alt=""></span>
                                         <div class="label">
                                             <h4>Project Name</h4>
                                             <p>This card is not a link</p>
@@ -2664,7 +2677,7 @@
                                     <i class="select"></i>
                                     <i class="move"></i>
                                     <a href="#">
-                                        <span class="image"><img src="images/previews/preview7.png" alt=""></span>
+                                        <span class="image"><img src="res/guide/previews/preview7.png" alt=""></span>
                                         <div class="label">
                                             <h4>Collection Name</h4>
                                             <div class="info">
@@ -2679,7 +2692,7 @@
                                     <i class="select"></i>
                                     <i class="move"></i>
                                     <a href="#">
-                                        <span class="image"><img src="images/previews/preview7.png" alt=""></span>
+                                        <span class="image"><img src="res/guide/previews/preview7.png" alt=""></span>
                                         <div class="label">
                                             <h4>Collection Name</h4>
                                             <p>Collection Description</p>
@@ -2691,7 +2704,7 @@
                                     <i class="select"></i>
                                     <i class="move"></i>
                                     <div class="card">
-                                        <span class="image"><img src="images/previews/preview7.png" alt=""></span>
+                                        <span class="image"><img src="res/guide/previews/preview7.png" alt=""></span>
                                         <div class="label">
                                             <h4>Collection Name</h4>
                                             <p>This card is not a link</p>
@@ -2718,8 +2731,8 @@
                                     <i class="move"></i>
                                     <a href="#">
                                         <span class="image">
-                                            <img class="show-grid" src="images/previews/preview1.png" alt="">
-                                            <img class="show-list" src="images/previews/preview-small.png" alt="">
+                                            <img class="show-grid" src="res/guide/previews/preview1.png" alt="">
+                                            <img class="show-list" src="res/guide/previews/preview-small.png" alt="">
                                         </span>
                                         <div class="label">
                                             <h4>Asset Name</h4>
@@ -2740,8 +2753,8 @@
                                     <i class="move"></i>
                                     <div class="card">
                                         <span class="image">
-                                            <img class="show-grid" src="images/previews/preview1.png" alt="">
-                                            <img class="show-list" src="images/previews/preview-small.png" alt="">
+                                            <img class="show-grid" src="res/guide/previews/preview1.png" alt="">
+                                            <img class="show-list" src="res/guide/previews/preview-small.png" alt="">
                                         </span>
                                         <div class="label">
                                             <h4>Asset Name</h4>
@@ -2756,7 +2769,7 @@
                                     <i class="move"></i>
                                     <a href="#">
                                         <span class="image low-resolution">
-                                            <img src="images/previews/preview-small.png" alt="">
+                                            <img src="res/guide/previews/preview-small.png" alt="">
                                         </span>
                                         <div class="label">
                                             <h4>Asset Name</h4>
@@ -2807,7 +2820,7 @@
                                     <i class="move"></i>
                                     <a href="#">
                                         <span class="image">
-                                            <img class="show-grid" src="images/previews/preview8.png" alt="">
+                                            <img class="show-grid" src="res/guide/previews/preview8.png" alt="">
                                             <i class="show-list icon-folder">Directory</i>
                                         </span>
                                         <div class="label">
@@ -2821,7 +2834,7 @@
                                     <i class="move"></i>
                                     <div class="card">
                                         <span class="image">
-                                            <img class="show-grid" src="images/previews/preview8.png" alt="">
+                                            <img class="show-grid" src="res/guide/previews/preview8.png" alt="">
                                             <i class="show-list icon-folder">Directory</i>
                                         </span>
                                         <div class="label">
@@ -2851,7 +2864,7 @@
                                     <i class="select"></i>
                                     <i class="move"></i>
                                     <a href="#">
-                                        <span class="image"><img src="images/previews/preview1.png" alt=""></span>
+                                        <span class="image"><img src="res/guide/previews/preview1.png" alt=""></span>
                                         <div class="label">
                                             <div class="main">
                                                 <h4>Page Title</h4>
@@ -2869,7 +2882,7 @@
                                     <i class="select"></i>
                                     <i class="move"></i>
                                     <div class="card">
-                                        <span class="image"><img src="images/previews/preview1.png" alt=""></span>
+                                        <span class="image"><img src="res/guide/previews/preview1.png" alt=""></span>
                                         <div class="label">
                                             <div class="main">
                                                 <h4>Page Title</h4>
@@ -2904,10 +2917,10 @@
                                         </div>
                                     </div>
                                     <div class="image">
-                                        <img src="images/previews/preview6.png" alt=""/>
-                                        <img src="images/previews/preview6.png" alt=""/>
-                                        <img src="images/previews/preview6.png" alt=""/>
-                                        <img src="images/previews/preview6.png" alt=""/>
+                                        <img src="res/guide/previews/preview6.png" alt=""/>
+                                        <img src="res/guide/previews/preview6.png" alt=""/>
+                                        <img src="res/guide/previews/preview6.png" alt=""/>
+                                        <img src="res/guide/previews/preview6.png" alt=""/>
                                     </div>
                                 </a>
                             </article>
@@ -2923,9 +2936,9 @@
                                         </div>
                                     </div>
                                     <div class="image">
-                                        <img src="images/previews/preview6.png" alt=""/>
-                                        <img src="images/previews/preview6.png" alt=""/>
-                                        <img class="wide" src="images/previews/preview9.png" alt=""/>
+                                        <img src="res/guide/previews/preview6.png" alt=""/>
+                                        <img src="res/guide/previews/preview6.png" alt=""/>
+                                        <img class="wide" src="res/guide/previews/preview9.png" alt=""/>
                                     </div>
                                 </a>
                             </article>
@@ -2941,8 +2954,8 @@
                                         </div>
                                     </div>
                                     <div class="image">
-                                        <img class="wide" src="images/previews/preview9.png" alt=""/>
-                                        <img class="wide" src="images/previews/preview9.png" alt=""/>
+                                        <img class="wide" src="res/guide/previews/preview9.png" alt=""/>
+                                        <img class="wide" src="res/guide/previews/preview9.png" alt=""/>
                                     </div>
                                 </a>
                             </article>
@@ -2958,7 +2971,7 @@
                                         </div>
                                     </div>
                                     <div class="image">
-                                        <img class="wide" src="images/previews/preview6.png" alt=""/>
+                                        <img class="wide" src="res/guide/previews/preview6.png" alt=""/>
                                     </div>
                                 </a>
                             </article>
