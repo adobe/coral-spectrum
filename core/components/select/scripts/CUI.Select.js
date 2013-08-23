@@ -60,7 +60,7 @@
          * @param {String} [options.type=static] static or dynamic list
          * @param {Boolean} [nativewidget=false] shows a native &lt;select&gt; instead of a SelectList widget
          * @param {Boolean} [nativewidgetonmobile=true] forces a native &lt;select&gt; on a mobile device if possible
-         * @param {Boolean} [multiple=false] multiple selection, will automatically be detected form a given <select> source
+         * @param {Boolean} [multiple=false] multiple selection, will automatically be detected form a given &lt;select&gt; source
          */
         construct: function () {
             var self = this;
