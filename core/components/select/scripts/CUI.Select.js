@@ -6,7 +6,7 @@
         
         /**
          * @extends CUI.Widget
-         * @classdesc a widget which is similar to the native <select>
+         * @classdesc a widget which is similar to the native &lt;select&gt;
          *
          * <h2 class="line">Examples</h2>
          *
@@ -52,6 +52,8 @@
          *     &lt;/select&gt;
          * &lt;/span&gt;
          *
+         * @description Creates a new select
+         * @constructs
          *
          * @param {Object} options Component options
          * @param {Mixed} options.element jQuery selector or DOM element to use for panel
