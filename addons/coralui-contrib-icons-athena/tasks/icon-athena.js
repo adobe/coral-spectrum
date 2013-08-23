@@ -101,7 +101,12 @@ module.exports = function(grunt) {
       // for each asset
       assetFiles.forEach(function(asset){
 
+        // get asset name
         var assetName = asset.slice(asset.lastIndexOf('/')+1);
+
+        // remove variant from assetName
+        assetName = assetName.replace('_24', '');
+
         // get name , copy icon 1:1,             
         grunt.file.copy(asset, dest + assetName);
 
