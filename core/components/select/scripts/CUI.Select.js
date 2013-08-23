@@ -58,8 +58,8 @@
          * @param {Object} options Component options
          * @param {Mixed} options.element jQuery selector or DOM element to use for panel
          * @param {String} [options.type=static] static or dynamic list
-         * @param {Boolean} [nativewidget=false] shows a native <select> instead of a SelectList widget
-         * @param {Boolean} [nativewidgetonmobile=true] forces a native <select> on a mobile device if possible
+         * @param {Boolean} [nativewidget=false] shows a native &lt;select&gt; instead of a SelectList widget
+         * @param {Boolean} [nativewidgetonmobile=true] forces a native &lt;select&gt; on a mobile device if possible
          * @param {Boolean} [multiple=false] multiple selection, will automatically be detected form a given <select> source
          */
         construct: function () {
