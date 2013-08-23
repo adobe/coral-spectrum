@@ -3,16 +3,63 @@
         toString: 'Select',
 
         extend: CUI.Widget,
-
-        defaults: {
-            type: 'static',
-            nativewidget: false,
-            nativewidgetonmobile: true,
-            multiple: false,
-            tagConfig: null,
-            selectlistConfig: null
-        },
-
+        
+        /**
+         * @extends CUI.Widget
+         * @classdesc a widget which is similar to the native <select>
+         *
+         * <h2 class="line">Examples</h2>
+         *
+         * <span class="select" data-init="select">
+         *     <input type="button" class="button" value="Select"/>
+         *     <select>
+         *         <option value="1">One</option>
+         *         <option value="2">Two</option>
+         *         <option value="3">Three</option>
+         *     </select>
+         * </span>
+         *
+         * <span class="select" data-init="select">
+         *     <input type="button" class="button" value="Select"/>
+         *     <select multiple="true">
+         *         <option value="1">One</option>
+         *         <option value="2">Two</option>
+         *         <option value="3">Three</option>
+         *     </select>
+         * </span>
+         *
+         * @example
+         * <caption>Instantiate with Class</caption>
+         * var selectlist = new CUI.Select({
+         *     element: '#mySelect'
+         * });
+         *
+         * @example
+         * <caption>Instantiate with jQuery</caption>
+         * $('#mySelect').select({
+         *
+         * });
+         *
+         * @example
+         * <caption>Data API: Instantiate, set options</caption>
+         *
+         * &lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
+         *     &lt;input type=&quot;button&quot; class=&quot;button&quot; value=&quot;Select&quot;/&gt;
+         *     &lt;select&gt;
+         *         &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+         *         &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+         *         &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+         *     &lt;/select&gt;
+         * &lt;/span&gt;
+         *
+         *
+         * @param {Object} options Component options
+         * @param {Mixed} options.element jQuery selector or DOM element to use for panel
+         * @param {String} [options.type=static] static or dynamic list
+         * @param {Boolean} [nativewidget=false] shows a native <select> instead of a SelectList widget
+         * @param {Boolean} [nativewidgetonmobile=true] forces a native <select> on a mobile device if possible
+         * @param {Boolean} [multiple=false] multiple selection, will automatically be detected form a given <select> source
+         */
         construct: function () {
             var self = this;
 
@@ -25,6 +72,15 @@
 
             // apply
             this.applyOptions();
+        },
+
+        defaults: {
+            type: 'static',
+            nativewidget: false,
+            nativewidgetonmobile: true,
+            multiple: false,
+            tagConfig: null,
+            selectlistConfig: null
         },
 
         applyOptions: function () {
@@ -196,6 +252,10 @@
                 });
         },
 
+        /**
+         * sets a tag list for the multiple selection
+         * @private
+         */
         _setTagList: function () {
             if (this.options.multiple) {
                 // if the element is not there, create it
@@ -211,6 +271,10 @@
             }
         },
 
+        /**
+         * handles a select of a SelectList widget
+         * @private
+         */
         _handleSelected: function (event) {
             this._selectListWidget.hide();
 
@@ -232,6 +296,10 @@
             this._button.trigger('focus');
         },
 
+        /**
+         * toggles the visibility of a SelectList widget
+         * @private
+         */
         _toggleList: function () {
             this._selectListWidget.toggleVisibility();
         }
