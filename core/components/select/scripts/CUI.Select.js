@@ -11,7 +11,7 @@
          * <h2 class="line">Examples</h2>
          *
          * <span class="select" data-init="select">
-         *     <input type="button" class="button" value="Select"/>
+         *     <button type="button">Select</button>
          *     <select>
          *         <option value="1">One</option>
          *         <option value="2">Two</option>
@@ -20,7 +20,7 @@
          * </span>
          *
          * <span class="select" data-init="select">
-         *     <input type="button" class="button" value="Select"/>
+         *     <button type="button">Select</button>
          *     <select multiple="true">
          *         <option value="1">One</option>
          *         <option value="2">Two</option>
@@ -44,7 +44,7 @@
          * <caption>Data API: Instantiate, set options</caption>
          *
          * &lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
-         *     &lt;input type=&quot;button&quot; class=&quot;button&quot; value=&quot;Select&quot;/&gt;
+         *     &lt;button type=&quot;button&quot;&gt;Select&lt;/button&gt;
          *     &lt;select&gt;
          *         &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
          *         &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
@@ -58,9 +58,9 @@
          * @param {Object} options Component options
          * @param {Mixed} options.element jQuery selector or DOM element to use for panel
          * @param {String} [options.type=static] static or dynamic list
-         * @param {Boolean} [nativewidget=false] shows a native <select> instead of a SelectList widget
-         * @param {Boolean} [nativewidgetonmobile=true] forces a native <select> on a mobile device if possible
-         * @param {Boolean} [multiple=false] multiple selection, will automatically be detected form a given <select> source
+         * @param {Boolean} [nativewidget=false] shows a native &lt;select&gt; instead of a SelectList widget
+         * @param {Boolean} [nativewidgetonmobile=true] forces a native &lt;select&gt; on a mobile device if possible
+         * @param {Boolean} [multiple=false] multiple selection, will automatically be detected form a given &lt;select&gt; source
          */
         construct: function () {
             var self = this;
