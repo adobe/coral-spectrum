@@ -1,0 +1,10 @@
+{
+  "name": "coralui-contrib-adobeclean",
+  "version": "1.0.0-SNAPSHOT",
+  "repository": {
+    "type": "git",
+    "url": "https://git.corp.adobe.com/Coral/CoralUI"
+  },
+  "dependencies": {
+  }
+}
