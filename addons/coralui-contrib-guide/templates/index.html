@@ -78,11 +78,12 @@
                 <section class="links foldable">
                     <a class="heading" href="#Navigation">Navigation</a>
                     <nav class="fold">
-                        <a href="#Toolbar">Toolbar</a>
+                        <a href="#Accordion">Accordion</a> 
                         <a href="#Breadcrumbs">Breadcrumbs</a>
+                        <a href="#Collapsible">Collapsible</a>                        
                         <a href="#Pulldown">Pulldown</a>
                         <a href="#Tabs">Tabs</a>
-                        <a href="#Accordion">Accordion / Collapsible</a>                        
+                        <a href="#Toolbar">Toolbar</a>
                         <a href="#Wizard">Wizard</a>                    
                  </nav>
                 </section> <!-- /navigation -->
@@ -634,11 +635,226 @@
             <section id="Navigation">
                 <h1 class="line">Navigation</h1>
                 <p>CUI provides various controls that enable navigation.</p>
+                
+                <section id="Accordion">
+                    <h2 class="line">Accordion</h2>
+                    <p>Accordion and Collapsible a quite similar, except that an accordion groups several collapsible 
+                        containers, with only  one of the group visible at any time.</p>
+                    <p>Accordion is defined as an unordered list. You can choose to select an initial active element by
+                    adding the css class <code class="atv">active</code>.</p>
+                    <p>Container headings should be contained within an <code class="prettyprint">&lt;h3&gt;</code> tag.</p>    
+                    <div class="componentSample">
+                        <div class='example'>
+                            <ul class="accordion" data-init="accordion">
+                                <li>
+                                  <h3><em>Tab 1</em> of accordion</h3>
+                                  Lorem ipsum…
+                                </li>
+                                <li class="active">
+                                  <h3><em>Tab 2</em> of accordion</h3>
+                                  Lorem ipsum…
+                                </li>
+                                <li>
+                                  <h3><em>Tab 3</em> of accordion</h3>
+                                  Lorem ipsum…
+                                </li>
+                            </ul>
+                        </div> <!-- /example -->
+                        <pre class="prettyprint linenums">
+&lt;ul class="accordion" data-init="accordion"&gt;
+    &lt;li&gt;
+      &lt;h3&gt;&lt;em&gt;Tab 1&lt;/em&gt; of accordion&lt;/h3&gt;
+      Lorem ipsum…
+    &lt;/li&gt;
+    &lt;li class="active"&gt;
+      &lt;h3&gt;&lt;em&gt;Tab 2&lt;/em&gt; of accordion&lt;/h3&gt;
+      Lorem ipsum…
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;h3&gt;&lt;em&gt;Tab 3&lt;/em&gt; of accordion&lt;/h3&gt;
+      Lorem ipsum…
+    &lt;/li&gt;
+&lt;/ul&gt;</pre>
+                    </div> <!-- /componentSample -->
+                    <div>
+                        Open <a href="examples/accordions/index.html">Sample</a>
+                    </div>
+                </section>
+                <!-- /accordion -->
+
+                <section id="Breadcrumbs">
+                  <h2 class="line">Breadcrumbs</h2>
+                  <p>Breadcrumbs provide an actionable indication of a user's current location within an application.</p>
+                  <div class="componentSample">
+                    <div class="example">
+                      <nav class="crumbs">
+                        <a href="#"><i class="icon-coral medium"/>CoralUI logo</i></a>
+                        <a href="#">Admin</a>
+                        <a href="#">Settings</a>
+                        <a href="#">Current Page Title</a>
+                      </nav>
+                    </div> <!-- /example -->
+                    <pre class="prettyprint linenums">
+&lt;nav class=&quot;crumbs&quot;&gt;
+    &lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;icon-coral medium&quot;/&gt;CoralUI logo&lt;/i&gt;&lt;/a&gt;
+    &lt;a href=&quot;#&quot;&gt;Admin&lt;/a&gt;
+    &lt;a href=&quot;#&quot;&gt;Settings&lt;/a&gt;
+    &lt;a href=&quot;#&quot;&gt;Current Page Title&lt;/a&gt;
+&lt;/nav&gt;</pre>
+                  </div> <!-- /componentSample -->
+                    <div>
+                        Open <a href="examples/breadcrumbs/index.html">Sample</a>
+                    </div>
+                </section>
+                <!-- /Breadcrumbs -->
+
+                <section id="Collapsible">
+                    <h2 class="line">Collapsible</h2>  
+                    <p>Accordion and Collapsible a quite similar, except that an accordion groups several collapsible 
+                        containers, with only one of the group visible at any time.</p>
+                    <p>Container headings should be contained within an <code class="prettyprint">&lt;h3&gt;</code> tag.</p>    
+                    <div class="componentSample">
+                        <div class='example'/>
+                            <div class="collapsible" data-init="collapsible">
+                                <h3><em>Headline</em> of collapsible</h3>
+                                Lorem ipsum…
+                            </div>
+                        </div> <!-- /example -->
+                        <pre class="prettyprint linenums">
+&lt;div class="collapsible" data-init="collapsible"&gt;
+    &lt;h3&gt;&lt;em&gt;Headline&lt;/em&gt; of collapsible&lt;/h3&gt;
+    Lorem ipsum…
+&lt;/div&gt;</pre>
+                    </div> <!-- /contentSample -->
+                </section>
+                 <!-- /Collapsible  -->
+
+                <section id="Pulldown">
+                    <h2 class="line">Pulldown</h2>
+                    <p>A Pulldown provides a menu for navigation or filtering.</p>
+                    <div class="componentSample">
+                        <div class="example">
+                            <nav class="pulldown" data-init="pulldown">
+                                <a href="#">Spring Clearance Product Shots</a>
+                                <div class="popover arrow-top">
+                                    <ul>
+                                        <li><a href="spring.html" class="icon-folder withLabel">Spring</a></li>
+                                        <li><a href="gear.html" class="icon-folder withLabel">Gear</a></li>
+                                        <li><a href="outdoors.html" class="icon-folder withLabel">Outdoors</a></li>
+                                        <li><a href="products.html" class="icon-folder disabled withLabel">Products</a></li>
+                                        <li><a href="store.html" class="icon-folder withLabel">Store</a></li>
+                                        <li><a href="geometrixx.html" class="icon-folder withLabel">Geometrixx</a></li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div> <!-- /example -->
+                        <pre class="prettyprint linenums">
+&lt;nav class=&quot;pulldown&quot; data-init=&quot;pulldown&quot;&gt;
+    &lt;a href=&quot;#&quot;&gt;Spring Clearance Product Shots&lt;/a&gt;
+    &lt;div class=&quot;popover arrow-top&quot;&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&quot;spring.html&quot; class=&quot;icon-folder withLabel&quot;&gt;Spring&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;gear.html&quot; class=&quot;icon-folder withLabel&quot;&gt;Gear&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;outdoors.html&quot; class=&quot;icon-folder withLabel&quot;&gt;Outdoors&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;products.html&quot; class=&quot;icon-folder disabled withLabel&quot;&gt;Products&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;store.html&quot; class=&quot;icon-folder withLabel&quot;&gt;Store&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;geometrixx.html&quot; class=&quot;icon-folder withLabel&quot;&gt;Geometrixx&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/nav&gt;</pre>
+                    </div> 
+                    <!-- /contentSample -->
+                    <p>The class <code class='atv'>no-handle</code> can be added to hide the pulldown handle, 
+                        as seen below:</p>
+                    <div class="componentSample">
+                        <div class="example">
+                            <nav class="pulldown no-handle" data-init="pulldown">
+                                <a href="#">Spring Clearance Product Shots</a>
+                                <div class="popover arrow-top">
+                                    <ul>
+                                        <li><a href="spring.html" class="icon-folder withLabel">Spring</a></li>
+                                        <li><a href="gear.html" class="icon-folder withLabel">Gear</a></li>
+                                        <li><a href="outdoors.html" class="icon-folder withLabel">Outdoors</a></li>
+                                        <li><a href="products.html" class="icon-folder withLabel">Products</a></li>
+                                        <li><a href="store.html" class="icon-folder withLabel">Store</a></li>
+                                        <li><a href="geometrixx.html" class="icon-folder withLabel">Geometrixx</a></li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div> <!-- /example -->
+                        <pre class="prettyprint linenums">
+&lt;nav class=&quot;pulldown no-handle&quot; data-init=&quot;pulldown&quot;&gt; 
+   ... etc ...</pre>
+                    </div>
+                    <div>
+                        Open <a href="examples/pulldown/index.html">Sample</a>
+                    </div>
+                </section>
+
+                <section id="Tabs">
+                    <h2 class="line">Tabs</h2>
+                    <p>A simple markup-driven tab bar used to separate sections of content.</p>
+                    <h4>Variations</h4>
+                    <p>In addition to the default <code class="atv">tabs</code> style, there are 3 variations that can 
+                        be applied by using the following CSS:</p>
+                    <p class='bold'>Click the link for each description to view the variant below.</p>
+                    <ul>
+                        <li>
+                            <a href="#" class="tab-variant" data-variant="tabs">
+                                <code class="atv">tabs</code></a>: 
+                            Used in a modal dialog or as sub-tabs. (Default)</li>
+                        <li>
+                            <a href="#" class="tab-variant" data-variant="tabs nav">
+                                <code class="atv">tabs nav</code></a>: 
+                            For when tabs are used to divide content on a page level</li>
+                        <li>
+                            <a href="#" class="tab-variant" data-variant="tabs white">
+                                <code class="atv">tabs white</code></a>: 
+                            Used in a modal dialog or as sub-tabs</li>
+                        <li>
+                            <a href="#" class="tab-variant" data-variant="tabs stacked">
+                                <code class="atv">tabs stacked</code></a>: 
+                            Useful for tabs that have long titles</li>
+                    </ul>
+                    <p>Additionally you can apply the class <code class="atv">full-page</code> in cases 
+                        where you use the tabs in full-screen situations. This will give them some more margin 
+                        to not stick to the borders of your screen.</p>
+                    <div class="componentSample">
+                        <div class="example">
+                            <h4>Variant: <code class="atv"><span class='tabsVariant'>tabs</span></code></p>
+                            <div id="tabsExample" class="tabs" data-init="tabs">
+                                <nav>
+                                    <a href="#" data-toggle="tab" class="active">Tab 1</a>
+                                    <a href="#" data-toggle="tab">Tab 2</a>
+                                    <a href="examples/remote.html" data-target="#" data-toggle="tab">Tab 3</a>
+                                    <a href="#" data-toggle="tab" class="disabled">Disabled Tab</a>
+                                </nav>
+                                <section class="active">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. Pellentesque congue diam ac nisl vehicula ornare. Cras eu consectetur enim. Aliquam orci augue, sollicitudin nec aliquam sit amet, imperdiet ac leo. Donec aliquam tellus nec ipsum porttitor ut viverra odio luctus. Curabitur in turpis sed nunc consequat ornare eget in nulla. Nam dignissim lectus sed velit sagittis vehicula. Maecenas interdum, quam vel luctus sagittis, mi nisl commodo sapien, eget accumsan nunc metus ac ipsum. Mauris rutrum lectus turpis. Nullam at neque non quam tincidunt fringilla. Nunc egestas mollis nulla tempor fringilla. Etiam dapibus arcu nec risus tempus dapibus.</section>
+                                <section>Aenean faucibus ornare laoreet. Cras luctus purus at ipsum rhoncus et gravida diam malesuada. In ut ante sapien. Nulla fringilla hendrerit laoreet. Proin dolor dolor, suscipit vitae ultrices in, dapibus eget nulla. Aenean varius, sapien id mollis pretium, orci erat ornare tortor, vel molestie diam velit in dolor. Sed sit amet pellentesque justo. Pellentesque tristique felis id arcu malesuada posuere pellentesque lacus varius. Nunc egestas lacinia est, non eleifend lectus varius in. In hac habitasse platea dictumst. Quisque ac ipsum enim. Morbi ut est at mi mattis tincidunt. Praesent nec magna eu augue scelerisque posuere. In erat sapien, tristique ac semper elementum, lacinia non quam.</section>
+                                <section>This will be replaced by content from examples/remote.html.</section>
+                                <section>This will not be shown as the corresponding tab is disabled.</section>
+                            </div>
+                        </div> <!-- /example -->
+                        <pre class="prettyprint linenums">
+&lt;div class=&quot;<span class='tabsVariant atv'>tabs</span>&quot; data-init=&quot;tabs&quot;&gt;
+    &lt;nav&gt;
+        &lt;a href=&quot;#&quot; data-toggle=&quot;tab&quot; class=&quot;active&quot; &gt;Tab 1&lt;/a&gt;
+        &lt;a href=&quot;#&quot; data-toggle=&quot;tab&quot;&gt;Tab 2&lt;/a&gt;
+        &lt;a href=&quot;/remote.html&quot; data-target=&quot;#&quot; data-toggle=&quot;tab&quot;&gt;Tab 3&lt;/a&gt;
+        &lt;a href=&quot;#&quot; data-toggle=&quot;tab&quot; class=&quot;disabled&quot;&gt;Disabled Tab&lt;/a&gt;
+    &lt;/nav&gt;
+    &lt;section class=&quot;active&quot;&gt;Lorem ipsum dolor sit amet.&lt;/section&gt;
+    &lt;section&gt;Aenean faucibus ornare laoreet. Cras luctus purus.&lt;/section&gt;
+    &lt;section&gt;This will be replaced by content from /remote.html.&lt;/section&gt;
+    &lt;section&gt;This will not be shown as the corresponding tab is disabled.&lt;/section&gt;
+&lt;/div&gt;</pre>
+                    </div> <!-- /contentSample -->
+                </section>
+                <!-- /Tabs -->
 
                 <section id="Toolbar">
                     <h2 class="line">Toolbar</h2>
                     <p>The toolbar contains action buttons.</p>
-
                     <div class="componentSample">
                         <div class="example">
                             <nav class="toolbar">
@@ -659,7 +875,7 @@
                                     <button class="primary">Primary</button>
                                 </div>
                             </nav>
-                        </div>
+                        </div>  <!-- /example -->
                         <pre class="prettyprint linenums">
 &lt;nav class=&quot;toolbar&quot;&gt;
     &lt;div class=&quot;left icongroup&quot;&gt;
@@ -678,220 +894,14 @@
         &lt;a href=&quot;#some-link&quot; class=&quot;button&quot;&gt;Action&lt;/a&gt;
         &lt;button class=&quot;primary&quot;&gt;Primary&lt;/button&gt;
     &lt;/div&gt;
-&lt;/nav&gt;
-</pre>
-                    </div>
+&lt;/nav&gt;</pre>
+                    </div> <!-- /contentSample -->
                 </section>
-
-                <section id="Breadcrumbs">
-                  <h2 class="line">Breadcrumbs</h2>
-                  <p>Breadcrumbs provide an actionable indication of a user's current location within an application.</p>
-
-                  <div class="componentSample">
-                    <div class="example">
-                      <nav class="crumbs">
-                        <a href="#"><i class="icon-coral medium"/>CoralUI logo</i></a>
-                        <a href="#">Admin</a>
-                        <a href="#">Settings</a>
-                        <a href="#">Current Page Title</a>
-                      </nav>
-                    </div>
-                    <pre class="prettyprint linenums">
-&lt;nav class=&quot;crumbs&quot;&gt;
-    &lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;icon-coral medium&quot;/&gt;CoralUI logo&lt;/i&gt;&lt;/a&gt;
-    &lt;a href=&quot;#&quot;&gt;Admin&lt;/a&gt;
-    &lt;a href=&quot;#&quot;&gt;Settings&lt;/a&gt;
-    &lt;a href=&quot;#&quot;&gt;Current Page Title&lt;/a&gt;
-&lt;/nav&gt;
-</pre>
-                  </div>
-
-                    <div>
-                        Open <a href="examples/breadcrumbs/index.html">Sample</a>
-                    </div>
-
-                </section>
-
-                <section id="Pulldown">
-                    <h2 class="line">Pulldown</h2>
-                    <p>Pulldowns provide a menu for navigation or filtering.</p>
-
-                    <div class="componentSample">
-                        <div class="example">
-                            <nav class="pulldown" data-init="pulldown">
-                                <a href="#">Spring Clearance Product Shots</a>
-                                <div class="popover arrow-top">
-                                    <ul>
-                                        <li><a href="spring.html" class="icon-folder withLabel">Spring</a></li>
-                                        <li><a href="gear.html" class="icon-folder withLabel">Gear</a></li>
-                                        <li><a href="outdoors.html" class="icon-folder withLabel">Outdoors</a></li>
-                                        <li><a href="products.html" class="icon-folder disabled withLabel">Products</a></li>
-                                        <li><a href="store.html" class="icon-folder withLabel">Store</a></li>
-                                        <li><a href="geometrixx.html" class="icon-folder withLabel">Geometrixx</a></li>
-                                    </ul>
-                                </div>
-                            </nav>
-                        </div>
-                        <pre class="prettyprint linenums">
-&lt;nav class=&quot;pulldown&quot; data-init=&quot;pulldown&quot;&gt;
-    &lt;a href=&quot;#&quot;&gt;Spring Clearance Product Shots&lt;/a&gt;
-    &lt;div class=&quot;popover arrow-top&quot;&gt;
-        &lt;ul&gt;
-            &lt;li&gt;&lt;a href=&quot;spring.html&quot; class=&quot;icon-folder withLabel&quot;&gt;Spring&lt;/a&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;a href=&quot;gear.html&quot; class=&quot;icon-folder withLabel&quot;&gt;Gear&lt;/a&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;a href=&quot;outdoors.html&quot; class=&quot;icon-folder withLabel&quot;&gt;Outdoors&lt;/a&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;a href=&quot;products.html&quot; class=&quot;icon-folder disabled withLabel&quot;&gt;Products&lt;/a&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;a href=&quot;store.html&quot; class=&quot;icon-folder withLabel&quot;&gt;Store&lt;/a&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;a href=&quot;geometrixx.html&quot; class=&quot;icon-folder withLabel&quot;&gt;Geometrixx&lt;/a&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-    &lt;/div&gt;
-&lt;/nav&gt;
-</pre>
-                    </div>
-
-
-                    <p>The selector 'no-handle' can be added to hide the pulldown handle, 
-                        as seen below:</p>
-                    <div class="componentSample">
-                        <div class="example">
-                            <nav class="pulldown no-handle" data-init="pulldown">
-                                <a href="#">Spring Clearance Product Shots</a>
-                                <div class="popover arrow-top">
-                                    <ul>
-                                        <li><a href="spring.html" class="icon-folder withLabel">Spring</a></li>
-                                        <li><a href="gear.html" class="icon-folder withLabel">Gear</a></li>
-                                        <li><a href="outdoors.html" class="icon-folder withLabel">Outdoors</a></li>
-                                        <li><a href="products.html" class="icon-folder withLabel">Products</a></li>
-                                        <li><a href="store.html" class="icon-folder withLabel">Store</a></li>
-                                        <li><a href="geometrixx.html" class="icon-folder withLabel">Geometrixx</a></li>
-                                    </ul>
-                                </div>
-                            </nav>
-                        </div>
-                        <pre class="prettyprint linenums">
-&lt;nav class=&quot;pulldown no-handle&quot; data-init=&quot;pulldown&quot;&gt; 
-...</pre>
-
-                    <div>
-                        Open <a href="examples/pulldown/index.html">Sample</a>
-                    </div>
-                </section>
-
-                <section id="Tabs">
-                    <h2 class="line">Tabs</h2>
-                    <p>A simple markup-driven tab bar used to separate sections of content.</p>
-
-                    <h3>Variations</h3>
-                    <p>In addition to the default style, there are 3 variations that can be applied using the following CSS classes:</p>
-                    <ul>
-                        <li><a href="#" class="tab-variant" data-variant="tabs"> Default tabs</a>: Used in a modal dialog or as sub-tabs</li>
-                        <li><code class="atv">nav</code> <a href="#" class="tab-variant" data-variant="tabs nav">Page tabs</a>: For when tabs are used to divide content on a page level</li>
-                        <li><code class="atv">white</code> <a href="#" class="tab-variant" data-variant="tabs white"> White tabs</a>: Used in a modal dialog or as sub-tabs</li>
-                        <li><code class="atv">finger</code> <a href="#" class="tab-variant" data-variant="tabs stacked">Finger tabs</a>: Useful for tabs that have long titles</li>
-                    </ul>
-                    <p>Additionally you can apply the class <code class="atv">full-page</code> in cases where you use the tabs in full-screen situations. This will give them some more margin to not stick to the borders of your screen.</p>
-
-                    <div class="componentSample">
-                        <div class="example">
-                            <div id="tabsExample" class="tabs" data-init="tabs">
-                                <nav>
-                                    <a href="#" data-toggle="tab" class="active">Tab 1</a>
-                                    <a href="#" data-toggle="tab">Tab 2</a>
-                                    <a href="examples/remote.html" data-target="#" data-toggle="tab">Tab 3</a>
-                                    <a href="#" data-toggle="tab" class="disabled">Disabled Tab</a>
-                                </nav>
-                                <section class="active">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. Pellentesque congue diam ac nisl vehicula ornare. Cras eu consectetur enim. Aliquam orci augue, sollicitudin nec aliquam sit amet, imperdiet ac leo. Donec aliquam tellus nec ipsum porttitor ut viverra odio luctus. Curabitur in turpis sed nunc consequat ornare eget in nulla. Nam dignissim lectus sed velit sagittis vehicula. Maecenas interdum, quam vel luctus sagittis, mi nisl commodo sapien, eget accumsan nunc metus ac ipsum. Mauris rutrum lectus turpis. Nullam at neque non quam tincidunt fringilla. Nunc egestas mollis nulla tempor fringilla. Etiam dapibus arcu nec risus tempus dapibus.</section>
-                                <section>Aenean faucibus ornare laoreet. Cras luctus purus at ipsum rhoncus et gravida diam malesuada. In ut ante sapien. Nulla fringilla hendrerit laoreet. Proin dolor dolor, suscipit vitae ultrices in, dapibus eget nulla. Aenean varius, sapien id mollis pretium, orci erat ornare tortor, vel molestie diam velit in dolor. Sed sit amet pellentesque justo. Pellentesque tristique felis id arcu malesuada posuere pellentesque lacus varius. Nunc egestas lacinia est, non eleifend lectus varius in. In hac habitasse platea dictumst. Quisque ac ipsum enim. Morbi ut est at mi mattis tincidunt. Praesent nec magna eu augue scelerisque posuere. In erat sapien, tristique ac semper elementum, lacinia non quam.</section>
-                                <section>This will be replaced by content from examples/remote.html.</section>
-                                <section>This will not be shown as the corresponding tab is disabled.</section>
-                            </div>
-                        </div>
-
-                        <pre class="prettyprint linenums">
-&lt;div class=&quot;tabs&quot; data-init=&quot;tabs&quot;&gt;
-    &lt;nav&gt;
-        &lt;a href=&quot;#&quot; data-toggle=&quot;tab&quot; class=&quot;active&quot; &gt;Tab 1&lt;/a&gt;
-        &lt;a href=&quot;#&quot; data-toggle=&quot;tab&quot;&gt;Tab 2&lt;/a&gt;
-        &lt;a href=&quot;/remote.html&quot; data-target=&quot;#&quot; data-toggle=&quot;tab&quot;&gt;Tab 3&lt;/a&gt;
-        &lt;a href=&quot;#&quot; data-toggle=&quot;tab&quot; class=&quot;disabled&quot;&gt;Disabled Tab&lt;/a&gt;
-    &lt;/nav&gt;
-    &lt;section class=&quot;active&quot;&gt;Lorem ipsum dolor sit amet.&lt;/section&gt;
-    &lt;section&gt;Aenean faucibus ornare laoreet. Cras luctus purus.&lt;/section&gt;
-    &lt;section&gt;This will be replaced by content from /remote.html.&lt;/section&gt;
-    &lt;section&gt;This will not be shown as the corresponding tab is disabled.&lt;/section&gt;
-&lt;/div&gt;
-</pre>
-                    </div>
-                </section>
-                
-                <section id="Accordion">
-                    <h2 class="line">Accordion / Collapsible</h2>
-                    <p>Accordions and Collapsibles a quite similar, except that accordions group several collapsibles and only
-                    one of the group is visible at any time.</p>
-
-                    <h3>Accordions</h3>
-                    <p>Accordions are defined as unordered lists. You can choose to select an inital active element by
-                    adding the css class <code class="atv">active</code>.</p>
-                    
-                    <ul class="accordion" data-init="accordion">
-                        <li>
-                          <h3><em>Tab 1</em> of accordion</h3>
-                          Lorem ipsum…
-                        </li>
-                        <li class="active">
-                          <h3><em>Tab 2</em> of accordion</h3>
-                          Lorem ipsum…
-                        </li>
-                        <li>
-                          <h3><em>Tab 3</em> of accordion</h3>
-                          Lorem ipsum…
-                        </li>
-                    </ul>
-
-                    <div class="componentSample">
-                        <pre class="prettyprint linenums">
-&lt;ul class="accordion" data-init="accordion"&gt;
-    &lt;li&gt;
-      &lt;h3&gt;&lt;em&gt;Tab 1&lt;/em&gt; of accordion&lt;/h3&gt;
-      Lorem ipsum…
-    &lt;/li&gt;
-    &lt;li class="active"&gt;
-      &lt;h3&gt;&lt;em&gt;Tab 2&lt;/em&gt; of accordion&lt;/h3&gt;
-      Lorem ipsum…
-    &lt;/li&gt;
-    &lt;li&gt;
-      &lt;h3&gt;&lt;em&gt;Tab 3&lt;/em&gt; of accordion&lt;/h3&gt;
-      Lorem ipsum…
-    &lt;/li&gt;
-&lt;/ul&gt;
-</pre>
-                    </div>
-
-                    <div>
-                        Open <a href="examples/accordions/index.html">Sample</a>
-                    </div>
-                    
-                    <h3>Collapsibles</h3>
-                    <p>Collapsibles are like accordions with just one element.</p>
-                    <div class="collapsible" data-init="collapsible">
-                        <h3><em>Headline</em> of collapsible</h3>
-                        Lorem ipsum…
-                    </div>
-
-                    <div class="componentSample">
-                        <pre class="prettyprint linenums">
-&lt;div class="collapsible" data-init="collapsible"&gt;
-    &lt;h3&gt;&lt;em&gt;Headline&lt;/em&gt; of collapsible&lt;/h3&gt;
-    Lorem ipsum…
-&lt;/div&gt;
-</pre>
-                    </div>                    
-                </section>
+                <!-- /Toolbar -->
 
                 <section id="Wizard">
                     <h2 class="line">Wizard</h2>
-                    <p>A multi step dialog which can be used to create multi step forms.</p>
-
+                    <p>A multi-step dialog which can be used to create multi-step forms.</p>
                     <div class="componentSample">
                         <div class="example">
                             <div class="wizard" data-init="wizard">
@@ -918,8 +928,7 @@
                                     Name is required.
                                 </section>
                             </div>
-                        </div>
-
+                        </div> <!-- /example -->
                         <pre class="prettyprint linenums">
 &lt;div class=&quot;example&quot;&gt;
     &lt;div class=&quot;wizard&quot; data-init=&quot;wizard&quot;&gt;
@@ -946,13 +955,13 @@
             Name is required.
         &lt;/section&gt;
     &lt;/div&gt;
-&lt;/div&gt;
-</pre>
-                    </div>
+&lt;/div&gt;</pre>
+                    </div> <!-- /componentSample -->
                     <div>
                         Open <a href="examples/wizard/index.html">Sample</a>
                     </div>
-                </section> <!-- /wizard -->
+                </section> 
+                <!-- /wizard -->
 
             </section>
             <!-- /Navigation -->

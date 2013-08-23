@@ -59,8 +59,12 @@ jQuery(function($) {
         changeSize(0);
     });
 
+
+    // this adds some magic to the tabs example
     $('.tab-variant').on('click', function() {
-        $('#tabsExample').attr('class', $(this).data('variant'));
+        var variant = $(this).data('variant');
+        $('#tabsExample').attr('class', variant);
+        $('.tabsVariant').html(variant);
     });
 
     
