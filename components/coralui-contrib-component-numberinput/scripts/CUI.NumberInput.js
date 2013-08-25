@@ -169,14 +169,14 @@
         $.each(buttons, function(index) {
           $(buttons[index]).detach();
         });
-        this.$decrementElement = $("<button>");
-        this.$incrementElement = $("<button>");
+        this.$decrementElement = $("<button type=\"button\">");
+        this.$incrementElement = $("<button type=\"button\">");
         this.$input.before(this.$decrementElement);
         this.$input.after(this.$incrementElement);
       }
       // fix buttons just how we like them
-      this.$decrementElement.attr('type', 'button').addClass("decrement").html("decrement");
-      this.$incrementElement.attr('type', 'button').addClass("increment").html('increment');
+      this.$decrementElement.addClass("decrement").html("decrement");
+      this.$incrementElement.addClass("increment").html('increment');
     }, 
 
     /** @ignore */
