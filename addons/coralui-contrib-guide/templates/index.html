@@ -2991,8 +2991,8 @@
 
                 <section id="ModalDialog">
                     <h2 class="line">Modal</h2>
-                    <p>Modals pop over the whole page and prevent interaction underneath them.</p>
-                    <p>Modals will progressively enhance existing markup or render their own template if no markup is present. See <a href="doc/index.html">the documentation</a> for more examples.<p>
+                    <p>Modals obscure the whole page and prevent interaction underneath them.</p>
+                    <p>Modals will progressively enhance existing markup or render their own template if no markup is present. See the <a href="doc/CUI.Modal.html">documentation</a> for more examples.<p>
 
                     <h3>Variations</h3>
                     <p>Modals can be styled to display alert messages by adding one of the following classes to the modal element or by setting the <code>type</code> option.</p>
@@ -3000,21 +3000,19 @@
                         <li><code class="atv">default</code> Grey heading, no icon
                         <li><code class="atv">error</code> Red heading, exclamation point icon
                         <li><code class="atv">notice</code> Yellow heading, exclamation point icon
-                        <li><code class="atv">success</code> Green heading, checkmark icon
+                        <li><code class="atv">success</code> Green heading, check mark icon
                         <li><code class="atv">help</code> Blue heading, question mark icon
                         <li><code class="atv">info</code> Blue heading, info icon
                     </ul>
 
                     <div class="componentSample">
                         <div class="example">
-
                             <a href="#modal" class="button primary" data-toggle="modal" data-heading="Default Modal" data-type="default">Default</a>
                             <a href="#modal" class="button" data-toggle="modal" data-heading="Error" data-type="error">Error</a>
                             <a href="#modal" class="button" data-toggle="modal" data-heading="Notice" data-type="notice">Notice</a>
                             <a href="#modal" class="button" data-toggle="modal" data-heading="Success" data-type="success">Success</a>
                             <a href="#modal" class="button" data-toggle="modal" data-heading="Help" data-type="help">Help</a>
                             <a href="#modal" class="button" data-toggle="modal" data-heading="Info" data-type="info">Info</a>
-
                             <div id="modal" class="modal">
                                 <div class="modal-header">
                                     <h2>Modal from Markup</h2>
@@ -3022,14 +3020,13 @@
                                 </div>
                                 <div class="modal-body">
                                     <p>This modal was created from markup. Modals can also be created with JavaScript.</p>
-                                    <p>See <a href="doc/index.html">the documentation</a> for more examples.</p>
+                                    <p>See the <a href="doc/CUI.Modal.html">documentation</a> for more examples.</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button data-dismiss="modal">Close</button><button class="primary" data-dismiss="modal">Save</button>
                                 </div>
                             </div>
-
-                        </div>
+                        </div> <!-- example -->
                         <pre class="prettyprint linenums">
 &lt;a href=&quot;#modal&quot; class=&quot;button&quot; data-toggle=&quot;modal&quot;&gt;Show Modal&lt;/a&gt;
 
@@ -3045,36 +3042,62 @@
         &lt;button data-dismiss=&quot;modal&quot;&gt;Close&lt;/button&gt;
         &lt;button class=&quot;primary&quot; data-dismiss=&quot;modal&quot;&gt;Save&lt;/button&gt;
     &lt;/div&gt;
-&lt;/div&gt;
-</pre>
-                    </div>
+&lt;/div&gt;</pre>
+                    </div> <!-- /componentSample -->
                 </section>
+                <!-- /Modal -->
 
                 <section id="Popover">
                     <h2 class="line">Popover</h2>
                     <p>Popovers (WIP).</p>
+                    <div class="componentSample" style="overflow: visible;">
+                        <div class="example" style="position: relative; padding: 5rem;">
+                            <a href="#first_popover" data-toggle="popover" data-point-from="right" data-align-from="left">
+                                Right popover
+                            </a>&nbsp;&nbsp;
+                            <a href="#second_popover" data-toggle="popover" data-point-from="left" data-align-from="right">
+                                Left popover
+                            </a>&nbsp;&nbsp;
+                            <a href="#third_popover" data-toggle="popover" data-point-from="top" data-align-from="left">
+                                Top popover
+                            </a>&nbsp;&nbsp;
+                            <a href="#fourth_popover" data-toggle="popover" data-point-from="bottom" data-align-from="right">
+                                Bottom popover
+                            </a>
+                            <div id="first_popover" class="popover">
+                                <div style="padding: 2rem; width: 16rem;">Lorem ipsum dolor sit amet, consectetur adipiscing 
+                                    elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo 
+                                    gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida.
+                                </div>
+                            </div>
+                            <div id="second_popover" class="popover">
+                                Short popover content.
+                            </div>
+                            <div id="third_popover" class="popover">
+                                <div style="width: 24rem;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                                    Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo 
+                                    gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. 
+                                    <a href="#">Link!</a>
+                                </div>
+                            </div>
+                            <div id="fourth_popover" class="popover">
+                                <div style="width: 20rem;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                                    Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo 
+                                    gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. 
+                                    <a href="#">Link!</a>
+                                </div>
+                            </div>
 
-          <div class="componentSample" style="overflow: visible;">
-            <div class="example" style="position: relative; padding: 5rem;">
-              <a href="#first_popover" data-toggle="popover" data-point-from="right" data-align-from="left">Right popover</a>
-              <a href="#second_popover" data-toggle="popover" data-point-from="left" data-align-from="right">Left popover</a>
-              <a href="#third_popover" data-toggle="popover" data-point-from="top" data-align-from="left">Top popover</a>
-              <a href="#fourth_popover" data-toggle="popover" data-point-from="bottom" data-align-from="right">Bottom popover</a>
-
-              <div id="first_popover" class="popover"><div style="padding: 2rem; width: 16rem;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida.</div></div>
-              <div id="second_popover" class="popover">Short popover content.</div>
-              <div id="third_popover" class="popover"><div style="width: 24rem;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. <a href="#">Link!</a></div></div>
-              <div id="fourth_popover" class="popover"><div style="width: 20rem;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. <a href="#">Link!</a></div></div>
-
-            </div>
-            <pre class="prettyprint linenums">
+                        </div>
+                        <pre class="prettyprint linenums">
 &lt;div class=&quot;popover arrow-bottom&quot;&gt;Popover content&lt;/div&gt;
-&lt;div class=&quot;popover arrow-top&quot;&gt;Popover content&lt;/div&gt;
-</pre>
-                    </div>
+&lt;div class=&quot;popover arrow-top&quot;&gt;Popover content&lt;/div&gt;</pre>
+                    </div> <!-- componentSample -->
                 </section>
+                <!-- /Popover -->
 
-            </section><!-- /Dialogs -->
+            </section>
+            <!-- /Dialogs -->
 
             <section id="StatusIndicators">
                 <h1 class="line">Status Indicators</h1>
