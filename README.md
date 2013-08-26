@@ -16,7 +16,7 @@ Specifications for compononents can be be found in the [Cloud UI Component Libra
 Check out the [Build Process Wiki][4] for information on building CoralUI.
 
 ## More Information
-See the [CoralUI Wiki][7] for useful information. 
+See the [CoralUI Wiki][7] for more useful information. 
 
 [1]: https://git.corp.adobe.com/pages/Coral/CoralUI/
 [2]: http://xdbuild.corp.adobe.com:8080/job/CoralUI-Master/ws/build/index.html
