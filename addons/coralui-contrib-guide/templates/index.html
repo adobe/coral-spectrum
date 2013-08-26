@@ -143,10 +143,11 @@
                     <a class="heading" href="#StatusIndicators">Status Indicators</a>
                     <nav class="fold">
                         <a href="#Alert">Alert</a>
-                        <a href="#Tooltip">Tooltip</a>
                         <a href="#Badge">Badge</a>
-                        <a href="#Spinner">Spinner</a>
                         <a href="#ProgressBar">Progress Bar</a>
+                        <a href="#Spinner">Spinner</a>
+                        <a href="#Tooltip">Tooltip</a>
+                        <a href="#Wait">Wait Indicator</a>
                     </nav>
                 </section> <!-- /status indicators -->
                 
@@ -3101,60 +3102,56 @@
 
             <section id="StatusIndicators">
                 <h1 class="line">Status Indicators</h1>
-                <p>Status indicators provide a way of conveying the progress of an ongoing process or the result of a process that has finished.</p>
+                <p>Status indicators provide a way of conveying the progress of an ongoing process or the result of 
+                    a process that has finished.</p>
 
                 <section id="Alert">
                     <h2 class="line">Alert</h2>
                     <p>Alerts indicate to the result of an operation or that a new information is present.</p>
-                    
-                    <h3>Variations</h3>
+                    <h4>Variations</h4>
                     <p>There are 5 different styles of alerts:</p>
                     <ul>
-                        <li><code class="atv">error</code> Indicate that an operation has failed or that a critical problem is present
-                        <li><code class="atv">notice</code> Indicate that an operation completed with warnings, or that a potential problem is present
-                        <li><code class="atv">success</code> Indicate that an operation completed without errors or warnings
-                        <li><code class="atv">info</code> Provide information to the user, such as indicating that new reports are available
-                        <li><code class="atv">help</code> Provide guidance to the user, such as links to help documentation
+                        <li><code class="atv">error</code> Indicate that an operation has failed or that a 
+                            critical problem is present.
+                        <li><code class="atv">notice</code> Indicate that an operation completed with warnings, 
+                            or that a potential problem is present.
+                        <li><code class="atv">success</code> Indicate that an operation completed without errors 
+                            or warnings.
+                        <li><code class="atv">info</code> Provide information to the user, such as indicating 
+                            that new reports are available.
+                        <li><code class="atv">help</code> Provide guidance to the user, such as links to 
+                            help documentation.
                     </ul>
-                    
-                    <h3>Sizing</h3>
-                    <p>Alerts usually contain concise messages, but can accommodate larger messages when the <code class="atv">large</code> CSS class is added.</p>
-                    
-                    <p>The <code class="prettyprint">&lt;button class="close"&gt;</code> tag can be omitted if an alert should not be dismissible.</p>
-
+                    <h4>Sizing</h4>
+                    <p>Alerts usually contain concise messages, but can accommodate larger messages when the 
+                        <code class="atv">large</code> CSS class is added.</p>
+                    <p>The <code class="prettyprint">&lt;button class="close"&gt;</code> tag can be omitted if an alert 
+                        should not be dismissed.</p>
                     <div class="componentSample">
                         <div class="example clearfix">
-
                             <div class="left column">
                                 <div class="alert error">
                                     <button class="close" data-dismiss="alert">&times;</button>
                                     <strong>ERROR</strong><div>Uh oh, something went wrong with the whozit!</div>
                                 </div>
-
                                 <div class="alert notice">
                                     <button class="close" data-dismiss="alert">&times;</button>
                                     <strong>NOTICE</strong><div>Something is about to go wrong with the whozit!</div>
                                 </div>
-
                                 <div class="alert success">
                                     <button class="close" data-dismiss="alert">&times;</button>
                                     <strong>Success</strong><div>Everything went better than expected with the whozit.</div>
                                 </div>
-
                                 <div class="alert help">
                                     <button class="close" data-dismiss="alert">&times;</button>
                                     <strong>HELP</strong><div>If you are struggling with the whozit, read <a href="#">the manual</a>.</div>
                                 </div>
-
                                 <div class="alert info">
                                     <button class="close" data-dismiss="alert">&times;</button>
                                     <strong>INFO</strong><div>For great success, configure the whozit correctly.</div>
                                 </div>
-
-                            </div>
-
+                            </div> <!-- /column -->
                             <div class="left column">
-
                                 <div class="alert error large">
                                     <button class="close" data-dismiss="alert">&times;</button>
                                     <strong>You have missed the deadline</strong><div>In order to prevent taking responsibility, please reset your device using a hammer. The story is, your kid got a hold of it and you need until next week.</div>
@@ -3179,32 +3176,82 @@
                                     <button class="close" data-dismiss="alert">&times;</button>
                                     <strong>New feature: Mind reading module</strong><div>By popular demand of our enterprise customers, we have implemented the new  mind reading module. Think and it shall be!</div>
                                 </div>
-
-                            </div>
-
-                        </div>
+                            </div> <!-- /column -->
+                        </div> <!-- /example -->
                         <pre class="prettyprint linenums">
 &lt;div class=&quot;alert error&quot;&gt;
     &lt;button class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;&amp;times;&lt;/button&gt;
     &lt;strong&gt;HEADING&lt;/strong&gt;&lt;div&gt;Content.&lt;/div&gt;
-&lt;/div&gt;
-</pre>
-                    </div>
+&lt;/div&gt;</pre>
+                    </div> <!-- componentSample -->
                 </section>
+                <!-- /Alert -->
+
+                <section id="Badge">
+                    <h2 class="line">Badge</h2>
+                    <p>Badges can be used to indicate a number of items that require attention.</p>
+                    <h4>Variations</h4>
+                    <p>When a badge is showing 0 items, the <code class="atv">empty</code> CSS class should be added.</p>
+                    <div class="componentSample">
+                        <div class="example" id="badge-example">
+                            <div class="badge">8</div>
+                            <div class="badge empty">0</div>
+                        </div> <!-- /example -->
+                        <pre class="prettyprint linenums" data-src-id="badge-example"/>
+                    </div> <!-- /componentSample -->
+                </section>
+                <!-- /Badge -->
+
+                <section id="ProgressBar">
+                    <h2 class="line">Progress Bar</h2>
+                    <p>Use a progress bar to indicate the progress of a process.</p>
+                    <p>A <code class="prettyprint">&lt;label&gt;</code> tag included immediately after the 
+                        progress bar can be used to display the numeric value.</p>
+                    <div class="componentSample spinnerSample">
+                        <div class="example" id='progress-example'>
+                            <div class="progress">
+                                <div class="bar" style="width: 40%;"></div>
+                            </div>
+                            <label>40%</label>
+                        </div> <!-- /example -->
+                        <pre class="prettyprint linenums" data-src-id='progress-example'/>
+                    </div> <!-- /componentSample -->
+                </section>
+                <!-- /ProgressBar -->
+
+                <section id="Spinner">
+                    <h2 class="line">Spinner</h2>
+                    <p>Use a spinner to indicate a process is in progress that will occur for an indefinite 
+                        amount of time by applying the CSS class <code class="atv">spinner</code> to an element.</p>
+                    <h4>Sizing</h4>
+                    <p>Adding the <code class="atv">large</code> CSS class will result in a larger spinner.</p>
+                    
+                    <div class="componentSample spinnerSample">
+                        <div class="example" id="spinner-example">
+                            <div class="spinner"></div>
+                            <div class="spinner large"></div>
+                        </div> <!-- /example -->
+                        <pre class="prettyprint linenums" data-src-id='spinner-example'/>
+                    </div> <!-- /componentSample -->
+                </section>
+                <!-- /Spinner -->
 
                 <section id="Tooltip">
                     <h2 class="line">Tooltip</h2>
-                    <p>Tooltips give the user small pieces of information in context by pointing at objects on the page. Tooltips are often used to draw the user's attention to problems in form fields or suggested actions.</p>
+                    <p>Tooltips give the user small pieces of information in context by pointing at objects on 
+                        the page. Tooltips are often used to draw the user's attention to problems in form 
+                        fields or suggested actions.</p>
                     
-                    <h3>Variations</h3>
-                    <p>Tooltips are blue by default to indicate they contain helpful information. When tooltips contain other information, such as errors or alerts, the following CSS classes can be applied:</p>
+                    <h4>Variations</h4>
+                    <p>Tooltips are blue by default to indicate they contain helpful information. When tooltips 
+                        contain other information, such as errors or alerts, the following CSS classes can be applied:</p>
                     <ul>
                         <li><code class="atv">error</code> Draw attention to critical problems
                         <li><code class="atv">notice</code> Draw attention to potential problems
                         <li><code class="atv">success</code> Draw attention to a success state
                     </ul>
                     
-                    <h3>Arrow Direction</h3>
+                    <h4>Arrow Direction</h4>
                     <p>Tooltips can point different directions by applying the following CSS classes:</p>
                     <ul>
                         <li><code class="atv">arrow-top</code> Point upward
@@ -3215,156 +3262,76 @@
                     
                     <div class="componentSample">
                         <div class="example clearfix">
-
                             <div class="left">
-
                                 <div class="tooltip error arrow-top">Lorem ipsum.</div>
-
                                 <div class="tooltip error arrow-bottom">Lorem ipsum.</div>
-
                                 <div class="tooltip error arrow-right">Lorem ipsum.</div>
-
                                 <div class="tooltip error arrow-left">Lorem ipsum.</div><br>
-
                                 <div class="tooltip notice arrow-top">Lorem ipsum.</div>
-
                                 <div class="tooltip notice arrow-bottom">Lorem ipsum.</div>
-
                                 <div class="tooltip notice arrow-right">Lorem ipsum.</div>
-
                                 <div class="tooltip notice arrow-left">Lorem ipsum.</div>
-
                             </div>
-
                             <div class="left">
-
                                 <div class="tooltip success arrow-top">Lorem ipsum.</div>
-
                                 <div class="tooltip success arrow-bottom">Lorem ipsum.</div>
-
                                 <div class="tooltip success arrow-right">Lorem ipsum.</div>
-
                                 <div class="tooltip success arrow-left">Lorem ipsum.</div><br>
-
                                 <div class="tooltip info arrow-top">Lorem ipsum.</div>
-
                                 <div class="tooltip info arrow-bottom">Lorem ipsum.</div>
-
                                 <div class="tooltip info arrow-right">Lorem ipsum.</div>
-
                                 <div class="tooltip info arrow-left">Lorem ipsum.</div>
-                                
                             </div>
-                            
                             <div class="clear largeToolTipSample">
                                 <input type="text" class="error" value="Some invalid input">
                                 <div class="tooltip error arrow-left">
                                     When tooltips contain a large amount of text, they will wrap automatically.
                                 </div>
                             </div>
-
-                        </div>
+                        </div> <!-- /example -->
                         <pre class="prettyprint linenums">
-&lt;div class=&quot;tooltip error arrow-bottom&quot;&gt;Content&lt;/div&gt;
-</pre>
-                    </div>
-
+&lt;div class=&quot;tooltip error arrow-bottom&quot;&gt;Content&lt;/div&gt;</pre>
+                    </div> <!-- /componentSample -->
                     <div>
                         Open <a href="examples/tooltip/index.html">Sample</a>
                     </div>
-
                 </section>
-
-                <section id="Badge">
-                    <h2 class="line">Badge</h2>
-                    <p>Badges can be used to indicate a number of items that require attention.</p>
-
-                    <h3>Variations</h3>
-                    <p>When a badge is showing 0 items, the <code class="atv">empty</code> CSS class should be added.</p>
-
-                    <div class="componentSample">
-                        <div class="example">
-                            <div class="badge">8</div>
-                            <div class="badge empty">0</div>
-                        </div>
-                        <pre class="prettyprint linenums">
-&lt;div class=&quot;badge&quot;&gt;8&lt;/div&gt;
-&lt;div class=&quot;badge empty&quot;&gt;0&lt;/div&gt;
-</pre>
-                    </div>
-                </section>
-
-                <section id="Spinner">
-                    <h2 class="line">Spinner</h2>
-                    <p>Use a spinner to indicate a process is in progress that will occur for an indefinite amount of time by applying the CSS class <code class="atv">spinner</code> to an element.</p>
-
-                    <h3>Sizing</h3>
-                    <p>Adding the <code class="atv">large</code> CSS class will result in a larger spinner.</p>
-                    
-                    <div class="componentSample spinnerSample">
-                        <div class="example">
-                            <div class="spinner"></div>
-                            <div class="spinner large"></div>
-                        </div>
-                        <pre class="prettyprint linenums">
-&lt;div class=&quot;spinner&quot;&gt;&lt;/div&gt;
-&lt;div class=&quot;spinner large&quot;&gt;&lt;/div&gt;
-</pre>
-                    </div>
-                </section>
+                <!-- /Tooltip -->
 
                 <section id="Wait">
                     <h2 class="line">Wait Indicator</h2>
-                    <p>Use a wait indicator to show a process is in progress that will occur for an indefinite amount of time by applying the CSS class <code class="atv">wait</code> to an element.</p>
-
-                    <h3>Sizing</h3>
+                    <p>Use a wait indicator to show a process is in progress that will occur for an indefinite amount 
+                        of time by applying the CSS class <code class="atv">wait</code> to an element.</p>
+                    <h4>Sizing</h4>
                     <p>Adding the <code class="atv">large</code> CSS class will result in a larger wait indicator.</p>
-
-                    <h3>Centering</h3>
-                    <p>Adding the <code class="atv">center</code> CSS class will make the wait to be centered in the parent element. The parent must be positioned.</p>
-                    
+                    <h4>Centering</h4>
+                    <p>Adding the <code class="atv">center</code> CSS class will make the wait to be centered in 
+                        the parent element. The parent must be positioned.</p>
                     <div class="componentSample waitSample">
-                        <div class="example">
+                        <div class="example" id='wait-example'>
                             <div class="wait"></div>
                             <div class="wait large"></div>
-                        </div>
-                        <pre class="prettyprint linenums">
-&lt;div class=&quot;wait&quot;&gt;&lt;/div&gt;
-&lt;div class=&quot;wait large&quot;&gt;&lt;/div&gt;
-</pre>
-                    </div>
+                        </div> <!-- /example -->
+                        <pre class="prettyprint linenums" data-src-id='wait-example'/>
+                    </div> <!-- /componentSample -->
                 </section>
+                <!-- /Wait -->
 
-                <section id="ProgressBar">
-                    <h2 class="line">Progress Bar</h2>
-                    <p>Use a progress bar to indicate the progress of a process.</p>
-                    <p>A <code class="prettyprint">&lt;label&gt;</code> tag included immediately after the progress bar can be used to display the numeric value.</p>
+            </section>
+            <!-- /StatusIndicators -->
 
-                    <div class="componentSample spinnerSample">
-                        <div class="example">
-                            <div class="progress">
-                                <div class="bar" style="width: 40%;"></div>
-                            </div>
-                            <label>40%</label>
-                        </div>
-                        <pre class="prettyprint linenums">
-&lt;div class=&quot;progress&quot;&gt;
-    &lt;div class=&quot;bar&quot; style=&quot;width: 40%;&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;label&gt;40%&lt;/label&gt;
-</pre>
-                    </div>
-                </section>
-
-            </section><!-- /StatusIndicators -->
+            <!-- guide footer -->
             <footer>
                 <a href="#">Help</a>
                 <a href="#">Terms of Use</a>
                 <a href="#">Privacy Policy</a>
                 <span class="right">Adobe Systems Incorporated. All Rights Reserved</span>
             </footer>
-        </div><!-- /content -->
-    </div><!-- /page -->
+
+        </div>
+        <!-- /content -->
+    </div>
+    <!-- /page -->
 
     <a id="SectionAnchor" style="display: none;" title="Right click to copy section URL">&para;</a>
 
