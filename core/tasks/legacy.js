@@ -26,6 +26,22 @@ module.exports = function(grunt) {
             }
             done(code === 0);
         });
+
+        grunt.util.spawn({
+            cmd: "cp",
+            args: [
+                '-r',
+                dirs.addons + '/coralui-contrib-adobeclean',
+                dirs.modules
+            ]
+        }, function(error, result, code) {
+            if (error) {
+                grunt.log.error('Error running to copy adobeclean addon: ' + result);
+            } else {
+                grunt.log.writeln('Successfully copied adobeclean addon');
+            }
+            done(code === 0);
+        });
     });
 
 };

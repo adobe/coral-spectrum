@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Accordions</title>
+
+        <link rel="stylesheet" href="../../css/cui.css">
+        
+        <script src="../../js/libs/handlebars.js"></script>
+        <script src="../../js/libs/moment.js"></script>
+        <script src="../../js/libs/jquery.js"></script>
+        <script src="../../js/libs/toe.js"></script>
+  
+        <script src="../../js/CUI.js"></script>
+        
+        <style>
+          .col {
+            width: 30%;
+            margin-right: 3%;
+            display: inline-block;
+            vertical-align: top;
+          }
+        </style>
+    </head>
+    <body>
+
+        <section>
+            <h1>Accordions (and collapsibles)</h1>
+            <div class="col">
+              <h3>Accordion</h3>
+              <ul data-init="accordion">
+                <li>
+                  <h3>Accordion Item 1</em></h3>
+                  <div id='myAccordionContent'>Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit. <a href="#">Chocolate cake</a> halvah chocolate cake candy canes powder chocolate croissant. Lollipop fruitcake muffin chocolate cake apple pie bear claw cookie tootsie roll. Chupa chups dessert icing gummies cake jelly pie sesame snaps. Wafer halvah cake sweet.</div>
+                </li>
+                <li>
+                  <h3>
+                    <em>Accordion Item 2</em> (try to expand me!)
+                  </h3>
+                  Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit. <a href="#">Chocolate cake</a> halvah chocolate cake candy canes powder chocolate croissant. Lollipop fruitcake muffin chocolate cake apple pie bear claw cookie tootsie roll. Chupa chups dessert icing gummies cake jelly pie sesame snaps. Wafer halvah cake sweet.
+                </li>
+                <li class="active">
+                  <h3>
+                    <em>Accordion Item 3</em> (initial active)
+                  </h3>
+                  Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit. <a href="#">Chocolate cake</a> halvah chocolate cake candy canes powder chocolate croissant. Lollipop fruitcake muffin chocolate cake apple pie bear claw cookie tootsie roll. Chupa chups dessert icing gummies cake jelly pie sesame snaps. Wafer halvah cake sweet.
+                </li>                             
+              </ul>
+            </div>
+            <div class="col">
+              <h3>Collapsible</h3>
+              <div data-init="collapsible">
+                  <h3>
+                    <i class="icon-accordiondown"></i>
+                    <em>Collapsible</em>
+                  </h3>
+
+                  Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit. <a href="#">Chocolate cake</a> halvah chocolate cake candy canes powder chocolate croissant. Lollipop fruitcake muffin chocolate cake apple pie bear claw cookie tootsie roll. Chupa chups dessert icing gummies cake jelly pie sesame snaps. Wafer halvah cake sweet.            
+              </div>
+            </div>
+            <div class="col">
+              <h3>Collapsible, initial active</h3>
+              <div class="active" data-init="collapsible">
+                  <h3>
+                    <i class="icon-accordiondown"></i>
+                    <em>Active</em> by default
+                  </h3>
+
+                  Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit. <a href="#">Chocolate cake</a> halvah chocolate cake candy canes powder chocolate croissant. Lollipop fruitcake muffin chocolate cake apple pie bear claw cookie tootsie roll. Chupa chups dessert icing gummies cake jelly pie sesame snaps. Wafer halvah cake sweet.            
+              </div>
+            </div>            
+        </section>
+        
+        <section class="rail">
+            <h1>Accordions (and collapsibles)</h1>
+            <div class="col">
+              <h3>Accordion</h3>
+              <ul data-init="accordion">
+                <li>
+                  <h3>
+                    <em>Accordion Item 1</em>
+                  </h3>
+                  Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit. <a href="#">Chocolate cake</a> halvah chocolate cake candy canes powder chocolate croissant. Lollipop fruitcake muffin chocolate cake apple pie bear claw cookie tootsie roll. Chupa chups dessert icing gummies cake jelly pie sesame snaps. Wafer halvah cake sweet.
+                </li>
+                <li>
+                  <h3>
+                    <em>Accordion Item 2</em> (try to expand me!)
+                  </h3>
+                  Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit. <a href="#">Chocolate cake</a> halvah chocolate cake candy canes powder chocolate croissant. Lollipop fruitcake muffin chocolate cake apple pie bear claw cookie tootsie roll. Chupa chups dessert icing gummies cake jelly pie sesame snaps. Wafer halvah cake sweet.
+                </li>
+                <li class="active">
+                  <h3>
+                    <em>Accordion Item 3</em> (initial active)
+                  </h3>
+                  Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit. <a href="#">Chocolate cake</a> halvah chocolate cake candy canes powder chocolate croissant. Lollipop fruitcake muffin chocolate cake apple pie bear claw cookie tootsie roll. Chupa chups dessert icing gummies cake jelly pie sesame snaps. Wafer halvah cake sweet.
+                </li>                             
+              </ul>
+            </div>
+            <div class="col">
+              <h3>Collapsible</h3>
+              <div data-init="collapsible">
+                  <h3>
+                    <i class="icon-accordiondown"></i>
+                    <em>Collapsible</em>
+                  </h3>
+
+                  Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit. <a href="#">Chocolate cake</a> halvah chocolate cake candy canes powder chocolate croissant. Lollipop fruitcake muffin chocolate cake apple pie bear claw cookie tootsie roll. Chupa chups dessert icing gummies cake jelly pie sesame snaps. Wafer halvah cake sweet.            
+              </div>
+            </div>
+            <div class="col">
+              <h3>Collapsible, initial active</h3>
+              <div class="active" data-init="collapsible">
+                  <h3>
+                    <i class="icon-accordiondown"></i>
+                    <em>Active</em> by default
+                  </h3>
+
+                  Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit. <a href="#">Chocolate cake</a> halvah chocolate cake candy canes powder chocolate croissant. Lollipop fruitcake muffin chocolate cake apple pie bear claw cookie tootsie roll. Chupa chups dessert icing gummies cake jelly pie sesame snaps. Wafer halvah cake sweet.            
+              </div>
+            </div>            
+        </section>
+    </body>
+</html>

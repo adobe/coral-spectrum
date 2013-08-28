@@ -140,6 +140,13 @@ CUI.util.color = {
      */
     isSameColor : function(c1, c2) {
         return c1 && c2 && (c1 === c2);
+    },
+    
+    isValid : function(colorFormat, colorAsStr){
+        if(colorAsStr.indexOf(colorFormat) != -1){
+            return this.fixHex(this.RGBAToHex(colorAsStr)) !== "";
+        }
+        return false;
     }
 
 };

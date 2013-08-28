@@ -222,7 +222,8 @@
             this.$element.append(elem);
 
             this.$element.trigger($.Event('itemadded'), {
-                value: val
+                value: val,
+                display: display
             });
         },
 
@@ -261,5 +262,26 @@
             $('[data-init~=taglist]', event.target).tagList();
         });
     }
+
+    /**
+     * Triggered when an item was added
+     *
+     * @name CUI.TagList#itemadded
+     * @event
+     *
+     * @param {Object} event Event object
+     * @param {String} event.value value which was added
+     * @param {String} event.display displayed text of the element
+     */
+    
+    /**
+     * Triggered when an item was removed
+     *
+     * @name CUI.TagList#itemremoved
+     * @event
+     *
+     * @param {Object} event Event object
+     * @param {String} event.value value which was removed
+     */
 
 }(jQuery, this));

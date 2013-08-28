@@ -3,16 +3,65 @@
         toString: 'Select',
 
         extend: CUI.Widget,
-
-        defaults: {
-            type: 'static',
-            nativewidget: false,
-            nativewidgetonmobile: true,
-            multiple: false,
-            tagConfig: null,
-            selectlistConfig: null
-        },
-
+        
+        /**
+         * @extends CUI.Widget
+         * @classdesc a widget which is similar to the native &lt;select&gt;
+         *
+         * <h2 class="line">Examples</h2>
+         *
+         * <span class="select" data-init="select">
+         *     <button type="button">Select</button>
+         *     <select>
+         *         <option value="1">One</option>
+         *         <option value="2">Two</option>
+         *         <option value="3">Three</option>
+         *     </select>
+         * </span>
+         *
+         * <span class="select" data-init="select">
+         *     <button type="button">Select</button>
+         *     <select multiple="true">
+         *         <option value="1">One</option>
+         *         <option value="2">Two</option>
+         *         <option value="3">Three</option>
+         *     </select>
+         * </span>
+         *
+         * @example
+         * <caption>Instantiate with Class</caption>
+         * var selectlist = new CUI.Select({
+         *     element: '#mySelect'
+         * });
+         *
+         * @example
+         * <caption>Instantiate with jQuery</caption>
+         * $('#mySelect').select({
+         *
+         * });
+         *
+         * @example
+         * <caption>Data API: Instantiate, set options</caption>
+         *
+         * &lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
+         *     &lt;button type=&quot;button&quot;&gt;Select&lt;/button&gt;
+         *     &lt;select&gt;
+         *         &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+         *         &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+         *         &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+         *     &lt;/select&gt;
+         * &lt;/span&gt;
+         *
+         * @description Creates a new select
+         * @constructs
+         *
+         * @param {Object} options Component options
+         * @param {Mixed} options.element jQuery selector or DOM element to use for panel
+         * @param {String} [options.type=static] static or dynamic list
+         * @param {Boolean} [nativewidget=false] shows a native &lt;select&gt; instead of a SelectList widget
+         * @param {Boolean} [nativewidgetonmobile=true] forces a native &lt;select&gt; on a mobile device if possible
+         * @param {Boolean} [multiple=false] multiple selection, will automatically be detected form a given &lt;select&gt; source
+         */
         construct: function () {
             var self = this;
 
@@ -25,6 +74,15 @@
 
             // apply
             this.applyOptions();
+        },
+
+        defaults: {
+            type: 'static',
+            nativewidget: false,
+            nativewidgetonmobile: true,
+            multiple: false,
+            tagConfig: null,
+            selectlistConfig: null
         },
 
         applyOptions: function () {
@@ -44,6 +102,12 @@
             }
 
             this._setTagList();
+
+            // if we have a static <select> based list
+            // load the values from markup
+            if (this.options.type === 'static') {
+                this._handleNativeSelect();
+            }
         },
 
         /**
@@ -75,26 +139,34 @@
 
                 // if it is in single selection mode, 
                 // then the btn receives the label of the selected item
-                this._select.on('change.select', function (event) {
-                    if (self.options.multiple) {
-                        // loop over all options
-                        $.each(self._select[0].options, function (i, opt) {
-                            if (opt.selected) {
-                                self._tagListWidget.addItem({
-                                    value: opt.value,
-                                    display: opt.text
-                                });
-                            } else {
-                                self._tagListWidget.removeItem(opt.value);
-                            }
-                        });
-                    } else {
-                        self._button.text(self._select[0][self._select[0].selectedIndex].text);
-                    }
-                });
+                this._select.on('change.select', this._handleNativeSelect.bind(this));
 
             } else {
                 this._select.off('change.select');
+            }
+        },
+
+        /**
+         * handles a native change event on the select
+         * @private
+         */
+        _handleNativeSelect: function (event) {
+            var self = this;
+
+            if (self.options.multiple) {
+                // loop over all options
+                $.each(self._select[0].options, function (i, opt) {
+                    if (opt.selected) {
+                        self._tagListWidget.addItem({
+                            value: opt.value,
+                            display: opt.text
+                        });
+                    } else {
+                        self._tagListWidget.removeItem(opt.value);
+                    }
+                });
+            } else {
+                self._button.text(self._select[0][self._select[0].selectedIndex].text);
             }
         },
 
@@ -182,6 +254,10 @@
                 });
         },
 
+        /**
+         * sets a tag list for the multiple selection
+         * @private
+         */
         _setTagList: function () {
             if (this.options.multiple) {
                 // if the element is not there, create it
@@ -197,6 +273,10 @@
             }
         },
 
+        /**
+         * handles a select of a SelectList widget
+         * @private
+         */
         _handleSelected: function (event) {
             this._selectListWidget.hide();
 
@@ -218,6 +298,10 @@
             this._button.trigger('focus');
         },
 
+        /**
+         * toggles the visibility of a SelectList widget
+         * @private
+         */
         _toggleList: function () {
             this._selectListWidget.toggleVisibility();
         }

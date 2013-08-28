@@ -277,7 +277,7 @@ module.exports = function(grunt) {
         files: [
           {
             expand: true,
-            cwd: '<%= dirs.shared %>/fonts/',
+            cwd: '<%= dirs.modules %>/coralui-contrib-adobeclean/fonts/',
             src: ['**'],
             dest: '<%= dirs.build %>/res/fonts/'
           }
