@@ -180,7 +180,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
                     this._hidePicker();
                 }
             }.bind(this));
-
+            
             this.$element.on('click', function(event){
                 if ($(event.target).is(".icon-calendar")) {
                     if (!this.pickerShown) {
@@ -374,6 +374,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
 
     _openPicker: function() {
         this.$element.addClass("focus");
+        this.$input.parents().on('scroll', this._scrollParents.bind(this));
 
         if(!this.useNativeControls) {
             this._readInputVal();
@@ -381,6 +382,10 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         } else {
             this._openNativeInput();
         }
+    },
+    
+    _scrollParents: function(event) {
+        this._hidePicker();
     },
     
     _showPicker: function() {
@@ -399,6 +404,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
     
     _hidePicker: function() {
         this.$element.removeClass("focus");
+        this.$input.parents().off('scroll', this._scrollParents);
         if(this.$popover){
             this.$popover.hide();
         }
