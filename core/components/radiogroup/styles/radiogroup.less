@@ -1,0 +1,27 @@
+/**
+  Element: radio-group
+  CUI radio-group styles
+*/
+
+.radio-group {
+  &.horizontal .radiofield.field {
+    display: inline;
+
+    &.vertical {
+      display: none;
+    }
+  }
+
+  .radiofield.field.vertical {
+    + span {
+      margin-right: 0.5rem;
+    }
+    + span:before {
+      position: relative;
+      top: -1.5rem;
+      left: 0.8rem;
+      margin-top: 1.5rem;
+      margin-right: 0;
+    }
+  }
+}
