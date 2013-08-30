@@ -12,10 +12,9 @@ CoralUI is an internal open source effort with backing from UXD, XD, and product
 ## Design Specifications
 Specifications for compononents can be be found in the [Cloud UI Component Library][6].
 
-## Building
+## Building ![Build Status](http://jenkins.bsl.eur.adobe.com/job/Build_CoralUI-master/badge/icon)
 Check out the [Build Process Wiki][4] for information on building CoralUI.
 
-Build Status: [![Build Status](http://jenkins.bsl.eur.adobe.com/job/Build_CoralUI-master/badge/icon)]
 
 ## More Information
 See the [CoralUI Wiki][7] for more useful information. 
