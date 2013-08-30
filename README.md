@@ -1,5 +1,5 @@
-# What is CoralUI?
-CoralUI is an implementation of the Cloud UI visual style.  Using CoralUI provides everything your product needs to build out a web based UI, including touch friendly controls, a highly scalable interface, accessibility compliance, and component extensibility.
+# What is CoralUI? 
+CoralUI is an implementation of the [Cloud UI][9] visual style.  Using CoralUI provides everything your product needs to build out a web based UI, including touch friendly controls, a highly scalable interface, accessibility compliance, and component extensibility.
 
 # Demo & Download
 Check out the current release of the [Style Guide][1] to see CoralUI in action.  You can also check out the Style Guide via the build servers, for better or worse.  There are both a [real-time][2] and [nightly][3] options to choose from.
@@ -12,8 +12,9 @@ CoralUI is an internal open source effort with backing from UXD, XD, and product
 ## Design Specifications
 Specifications for compononents can be be found in the [Cloud UI Component Library][6].
 
-## Building
+## Building ![Build Status](http://jenkins.bsl.eur.adobe.com/job/Build_CoralUI-master/badge/icon)
 Check out the [Build Process Wiki][4] for information on building CoralUI.
+
 
 ## More Information
 See the [CoralUI Wiki][7] for more useful information. 
@@ -26,4 +27,5 @@ See the [CoralUI Wiki][7] for more useful information.
 [6]: https://zerowing.corp.adobe.com/display/CloudUI/Component+Library
 [7]: https://git.corp.adobe.com/Coral/CoralUI/wiki
 [8]: https://git.corp.adobe.com/Coral/CoralUI/wiki/CoralUI-Modularization
+[9]: http://blogs.corp.adobe.com/xdcloudui
 

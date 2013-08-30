@@ -5,43 +5,47 @@ module.exports = function(grunt) {
     var path = require('path');
 
     var dirs = {
-        addons: '../addons',
-        modules: 'node_modules'
+        addons: '../addons/',
+        modules: 'node_modules/'
     };
 
-    grunt.registerTask('legacy', 'Legacy task to trigger a valid legacy build', function() {
-        var done = this.async();
-        grunt.util.spawn({
-            cmd: "cp",
-            args: [
-                '-r',
-                dirs.addons + '/coralui-contrib-icons-base',
-                dirs.modules
-            ]
-        }, function(error, result, code) {
-            if (error) {
-                grunt.log.error('Error running to copy icon addon: ' + result);
-            } else {
-                grunt.log.writeln('Successfully copied icon addon');
-            }
-            done(code === 0);
-        });
+    var moduleNames = {
+        icons:'coralui-contrib-icons-base',
+        adobeclean:'coralui-contrib-adobeclean'
+    };
 
-        grunt.util.spawn({
-            cmd: "cp",
-            args: [
-                '-r',
-                dirs.addons + '/coralui-contrib-adobeclean',
-                dirs.modules
-            ]
-        }, function(error, result, code) {
-            if (error) {
-                grunt.log.error('Error running to copy adobeclean addon: ' + result);
-            } else {
-                grunt.log.writeln('Successfully copied adobeclean addon');
-            }
-            done(code === 0);
-        });
+
+    grunt.registerTask('legacy', 'Legacy task to trigger a valid legacy build', function() {
+
+         grunt.log.writeln('copying coralui-contrib addons manually');
+
+         grunt.config.set('copy.icons.files',
+            [{
+                expand:true,
+                cwd:(dirs.addons + moduleNames.icons),
+                src:['**'],
+                dest:(dirs.modules + moduleNames.icons)
+            }]);
+
+           grunt.config.set('copy.adobeclean.files',
+            [{
+                expand:true,
+                cwd:(dirs.addons + moduleNames.adobeclean),
+                src:['**'],
+                dest:(dirs.modules + moduleNames.adobeclean)
+            }]);
+         
+
+         grunt.file.delete( dirs.modules + moduleNames.icons );
+         grunt.task.run('copy:icons');
+
+
+         grunt.file.delete( dirs.modules + moduleNames.adobeclean );
+         grunt.task.run('copy:adobeclean');
+
+         grunt.log.writeln('succesfully copied coralui-contrib adds-ons');
+         return true;
     });
+     
 
 };
