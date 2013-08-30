@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Radio-group</title>
+
+    <link rel="stylesheet" href="../../css/cui.css">
+
+    <script src="../../js/libs/jquery.js"></script>
+    <script src="../../js/libs/moment.js"></script>
+    <script src="../../js/libs/jquery-message.js"></script>
+    <script src="../../js/libs/jquery-validator.js"></script>
+    <script src="../../js/libs/toe.js"></script>
+    <script src="../../js/CUI.js"></script>
+
+    <style>
+        h1, h2 {
+            margin-bottom: 1rem; /* no margin for heading, seriously!? */
+        }
+    </style>
+</head>
+<body>
+<div style="padding: 2rem;">
+    <h1>Radio-group</h1>
+
+    <h2>Horizontal</h2>
+    <pre>/**
+ * Indicates that the radio-group is using horizontal layout, where the radios are positioned side by side.
+ */
+.radio-group.horizontal</pre>
+    <div class="radio-group horizontal">
+        <label><input type="radio" class="field radiofield"/><span class="regularText">Digital Marketer</span></label>
+        <label><input type="radio" class="field radiofield"/><span class="regularText">Creative</span></label>
+        <label><input type="radio" class="field radiofield"/><span class="regularText">Marketing Executive / CMO</span></label>
+    </div>
+
+    <h2>Vertical</h2>
+    <pre>/**
+ * Indicates that the radio-group is using vertical layout, where the radios are positioned one above the other.
+ */
+.radio-group.vertical</pre>
+    <div class="radio-group vertical">
+        <label><input type="radio" class="field radiofield"/><span class="regularText">Digital Marketer</span></label>
+        <label><input type="radio" class="field radiofield"/><span class="regularText">Creative</span></label>
+        <label><input type="radio" class="field radiofield"/><span class="regularText">Marketing Executive / CMO</span></label>
+    </div>
+
+    <h2>Horizontal with vertical radios</h2>
+    <pre>/**
+ * Indicates that the radio is using a vertical layout, where its label is positioned below its input.
+ */
+.radio-group.horizontal radiofield.field.vertical</pre>
+    <div class="radio-group">
+        <label><input type="radio" class="field radiofield vertical"/><span class="regularText">0</span></label>
+        <label><input type="radio" class="field radiofield vertical"/><span class="regularText">1</span></label>
+        <label><input type="radio" class="field radiofield vertical"/><span class="regularText">2</span></label>
+    </div>
+
+</div>
+</body>
+</html>

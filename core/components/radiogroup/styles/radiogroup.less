@@ -4,17 +4,26 @@
 */
 
 .radio-group {
-  &.horizontal .radiofield.field {
-    display: inline;
 
-    &.vertical {
-      display: none;
+  /* vertical layout */
+  &.vertical .radiofield.field + span {
+    display: inline;
+    white-space: pre-line;
+    &:after {
+      content: "\00000A";
     }
   }
 
+  /* horizontal layout */
+  &.horizontal .radiofield.field {
+    display: inline;
+  }
+
+  /* vertical radios (with label below input) */
   .radiofield.field.vertical {
+    display: none;
     + span {
-      margin-right: 0.5rem;
+      margin-right: 1rem;
     }
     + span:before {
       position: relative;
