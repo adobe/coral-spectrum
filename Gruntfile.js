@@ -64,6 +64,7 @@ module.exports = function (grunt) {
             'components/CUI.Tour.js',
             'components/CUI.NumberInput.js',
             'components/CUI.Colorpicker.js',
+            'components/CUI.CycleButtons.js',
 
             // Validations
             'validations.js'
