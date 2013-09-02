@@ -251,7 +251,7 @@
             if (index === this.currentIndex) li.addClass("selected");
 
             // Set class on list items from data-item-class set on options
-            var optionClassAttribute = this.options.getOptionClassAttribute(index);
+            var optionClassAttribute = this.options.getOptionClassAttribute? this.options.getOptionClassAttribute(index):undefined;
             if (optionClassAttribute) {
                 li.addClass(optionClassAttribute);
             }
