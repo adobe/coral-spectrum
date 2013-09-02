@@ -33,7 +33,7 @@ module.exports = function (grunt) {
 
             // HTTP
             'CUI.Util.HTTP.js',
-            
+
             // color
             'CUI.Util.color.js',
 
@@ -170,19 +170,19 @@ module.exports = function (grunt) {
         subgrunt: {
             core: { // this will build core, which gets merged to top level build
                 subdir: dirs.core.root,
-                args: ['retro'] 
+                args: ['retro']
             },
             core_quicktest: {
                 subdir: dirs.core.root,
-                args: ['quicktest']                 
+                args: ['quicktest']
             },
             core_quickless: {
                 subdir: dirs.core.root,
-                args: ['quickless']                 
+                args: ['quickless']
             },
             core_quickhtml: {
                 subdir: dirs.core.root,
-                args: ['quickhtml']                 
+                args: ['quickhtml']
             }
         },
 
@@ -252,7 +252,7 @@ module.exports = function (grunt) {
                         src: ['**/tests/**.js'],
                         dest: '<%= dirs.build %>/tests'
                     },
-                    
+
                     { // get legacy components' less
                         expand: true,
                         cwd: '<%= dirs.legacy %>/components/styles',
@@ -397,14 +397,14 @@ module.exports = function (grunt) {
                     dirs.core.components + '/**/tests/**.js'
                 ],
                 tasks: ['subgrunt:core_quicktest', 'quicktest']
-            }, 
+            },
             core_styles: {
                 files: [
                     dirs.core.components + '/**/styles/**.less',
-                    dirs.core.shared + '/styles/**/**.less',
+                    dirs.core.shared + '/styles/**/**.less'
                 ],
                 tasks: ['subgrunt:core_quickless', 'quickless']
-            }, 
+            },
             core_html: {
                 files: [
                     dirs.core.components + '/**/examples/**.html'
@@ -413,23 +413,23 @@ module.exports = function (grunt) {
                 options: {
                   nospawn: true
                 }
-            }, 
+            },
             // watch: contrib content
             contrib_scripts: {
-                files: [ 
+                files: [
                     dirs.components + '/**/scripts/*.js',
                     dirs.components + '/**/tests/*.js'
                 ],
                 tasks: ['quicktest']
-            }, 
+            },
             contrib_less: {
                 files: [ dirs.components + '/**/styles/*.less'],
                 tasks: ['quickless']
-            }, 
+            },
             contrib_html: {
                 files: [ dirs.components + '/**/examples/*.html'],
                 tasks: ['copy:retro']
-            }, 
+            },
             // watch: legacy content
             legacy_html: {
                 files: [
@@ -444,13 +444,13 @@ module.exports = function (grunt) {
                     dirs.legacy + '/guide/js/guide.js'
                 ],
                 tasks: ['quicktest']
-            }, 
+            },
             legacy_styles: {
                 files: [
-                    dirs.legacy + '/components/styles/*.less',
+                    dirs.legacy + '/components/styles/*.less'
                 ],
                 tasks: ['quickless']
-            }, 
+            },
             // watch: guide content
             guide: {
                 files: [
@@ -461,7 +461,7 @@ module.exports = function (grunt) {
                 tasks: ['guide']
             }
 
-        },  
+        },
         // end of watch options
 
         less: {
@@ -703,9 +703,9 @@ module.exports = function (grunt) {
     ]);
 
     grunt.task.registerTask('quicktest', [
-        'clean:temp', 
+        'clean:temp',
         'copy:retro',
-        'jshint:retro', 
+        'jshint:retro',
         'concat:retro',
         'mocha',
         'uglify:retro',
@@ -717,7 +717,7 @@ module.exports = function (grunt) {
         'generate-imports',
         'less:cui',
         'less:cui-wrapped',
-        'cssmin:cui',
+        'cssmin:cui'
     ]);
 
     grunt.task.registerTask('quickbuild', [
