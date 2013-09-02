@@ -1,0 +1,27 @@
+/**
+ Mixin: .font-face
+ Quickly declare a font face
+*/
+.font(@font-name, @font-file, @font-weight: normal, @font-style: normal) {
+    font-family: @font-name;
+
+    src: url(~"@{font-folder}/@{font-file}-webfont.woff") format("woff"),
+         url(~"@{font-folder}/@{font-file}-webfont.svg#@{font-name}") format("svg");
+
+    font-weight: @font-weight;
+    font-style: @font-style;
+}
+
+// Regular
+@font-face { .font("AdobeClean",          "adobeclean-regular",   normal,   normal); }
+@font-face { .font("AdobeClean",          "adobeclean-bold",      bold,     normal); }
+@font-face { .font("AdobeClean",          "adobeclean-it",        normal,   italic); }
+@font-face { .font("AdobeClean",          "adobeclean-boldit",    bold,     italic); }
+
+// Light
+@font-face { .font("AdobeCleanLight",     "adobeclean-light",     normal,  normal); }
+@font-face { .font("AdobeCleanLight",     "adobeclean-lightit",   normal,  italic); }
+
+// Condensed
+@font-face { .font("AdobeCleanCondensed", "adobeclean-semicn",    normal,   normal); }
+@font-face { .font("AdobeCleanCondensed", "adobeclean-semicnit",  normal,   italic); }
