@@ -1,3 +1,17 @@
+/**
+ Mixin: .font-face
+ Quickly declare a font face
+*/
+.font(@font-name, @font-file, @font-weight: normal, @font-style: normal) {
+    font-family: @font-name;
+
+    src: url(~"@{font-folder}/@{font-file}-webfont.woff") format("woff"),
+         url(~"@{font-folder}/@{font-file}-webfont.svg#@{font-name}") format("svg");
+
+    font-weight: @font-weight;
+    font-style: @font-style;
+}
+
 // Regular
 @font-face { .font("AdobeClean",          "adobeclean-regular",   normal,   normal); }
 @font-face { .font("AdobeClean",          "adobeclean-bold",      bold,     normal); }
