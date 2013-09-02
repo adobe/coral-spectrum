@@ -280,6 +280,12 @@ module.exports = function(grunt) {
             cwd: '<%= dirs.modules %>/coralui-contrib-adobeclean/fonts/',
             src: ['**'],
             dest: '<%= dirs.build %>/res/fonts/'
+          },
+          { // copy font less file
+            expand: true,
+            cwd: '<%= dirs.modules %>/coralui-contrib-adobeclean/styles/',
+            src: ['**'],
+            dest: '<%= dirs.build %>/less/shared/'
           }
         ]
       },
