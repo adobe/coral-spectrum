@@ -49,16 +49,24 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
       @desc Creates a datepicker from a div element
       @constructs
 
-      @param {Object}   options                               Component options
-      @param {Array} [options.monthNames=english names]       Array of strings with the name for each month with January at index 0 and December at index 11
-      @param {Array} [options.dayNames=english names]         Array of strings with the name for each weekday with Sun at index 0 and Sat at index 6
-      @param {String} [options.type="date"]                   Type of picker, supports date, datetime, datetime-local and time
+      @param {Object}  options                                Component options
+      @param {Array}   [options.monthNames=english names]     Array of strings with the name for each month with January at index 0 and December at index 11
+      @param {Array}   [options.dayNames=english names]       Array of strings with the name for each weekday with Sun at index 0 and Sat at index 6
+      @param {String}  [options.type="date"]                  Type of picker, supports date, datetime, datetime-local and time
       @param {integer} [options.startDay=0]                   Defines the start day for the week, 0 = Sunday, 1 = Monday etc.
       @param {boolean} [options.disabled=false]               Is this widget disabled?
-      @param {String} [options.displayedFormat="YYYY-MM-DD[T]HH:mm[Z]"]           Displayed date (userfriendly), default is 2012-10-20 20:35
-      @param {String} [options.storedFormat="YYYY-MM-DD[T]HH:mmZ"]    Storage Date format, is never shown to the user, but transferred to the server 
-      @param {String} [options.required=false]                Is a value required?
-      @param {String} [options.hasError=false]                True to display widget as erroneous, regardless if the value is required or not.
+      @param {String}  [options.displayedFormat="YYYY-MM-DD[T]HH:mm[Z]"]           Displayed date (userfriendly), default is 2012-10-20 20:35
+      @param {String}  [options.storedFormat="YYYY-MM-DD[T]HH:mmZ"]    Storage Date format, is never shown to the user, but transferred to the server 
+      @param {String}  [options.required=false]                Is a value required?
+      @param {String}  [options.hasError=false]                True to display widget as erroneous, regardless if the value is required or not.
+      @param {String}  [options.minDate]                       Defines the start date of selection range. Dates earlier than minDate are not selectable. 
+                                                               It must be expressed in officialDateFormat (YYYY-MM-DD) or as "today".
+      @param {String}  [options.maxDate]                       Defines the end date of selection range. Dates later than maxDate are not selectable. 
+                                                               It must be expressed in officialDateFormat (YYYY-MM-DD) or as "today".
+      @param {String}  [options.headFormat="MMMM YYYY"]        Defines calendar headline format, default is "MMMM YYYY"
+      @param {boolean} [options.forceHTMLMode=false]           Force to HTML mode and never use a native Date widget, if given (with any non-empty value)
+      @param {String}  [options.selectedDateTime]              Defines what date/time will be selected when the calendar is rendered. If nothing is specified it will be 
+                                                               considerend today or current time.
     */
     
     defaults: {
