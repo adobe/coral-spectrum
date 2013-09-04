@@ -117,15 +117,13 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             this.useNativeControls = true;
         }
 
-        this._updateState();
-
-        this.$openButton = this.$element.find('button');
-
         this.$input = this.$element.find('input').not("[type=hidden]");
         this.$hiddenInput = this.$element.find('input[type=hidden]');
         this.$popover = $('body').find(".popover#"+this.guid);
-
+        this.$openButton = this.$element.find('button');
         
+        this._updateState();
+
         // Enable time buttons in popover
         if(this._isTimeEnabled()) {
             this._renderTime();
