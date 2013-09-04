@@ -53,18 +53,14 @@
             }
         }
 
-        &:first-child,
-        &:last-child {
+        &:first-child {
             border-top: none;
         }
     }
 
     li.optgroup {
         padding: 0;
-
-        &:first-child {
-            border-top: none;
-        }
+        border-top-color: @selectlist-box-border-color;
 
         > span {
             display: block;
@@ -76,7 +72,6 @@
             height: 18*@px;
             line-height: 18*@px;
             text-transform: uppercase;
-            border-top: 1*@px solid @selectlist-box-border-color;
             border-bottom: 1*@px solid @selectlist-box-border-color;
         }
 
