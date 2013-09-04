@@ -86,6 +86,8 @@
         },
 
         applyOptions: function () {
+            var forcedNativeWidget = this.options.nativewidgetonmobile && CUI.util.isTouch && this.options.type === 'static';
+
             // there is a select given so read the "native" config options
             if (this._select.length > 0) {
                 // if multiple set multiple
@@ -95,8 +97,8 @@
             }
             
 
-            if (this.options.nativewidget) {
-                this._setNativeWidget();
+            if (this.options.nativewidget || forcedNativeWidget) {
+                this._setNativeWidget(forcedNativeWidget);
             } else {
                 this._setSelectList();
             }
