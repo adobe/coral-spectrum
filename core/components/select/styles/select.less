@@ -10,7 +10,6 @@
 
 
 .select {
-    position: relative;
     display: inline-block;
     width: 13rem; /* Width must be specified */
     vertical-align: top;
@@ -24,6 +23,7 @@
         padding: 7*@px 10*@px;
         margin: 8*@px 0;
         line-height: 1;
+        position: relative;
     
         color: @font-base-color;
         .box-sizing(border-box);
@@ -56,7 +56,6 @@
             color: inherit;
             text-align: left;
             position: absolute;
-            top: 16*@px;
             right: 11*@px;
             text-shadow: none;
             font-size: 1.2em;
@@ -95,6 +94,8 @@
 
     > select {
         display: none;
-        position: absolute;
+        position: relative;
+        margin-bottom: -100%;
+        float: left; 
     }
 }

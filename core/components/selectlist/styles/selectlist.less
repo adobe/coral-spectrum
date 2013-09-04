@@ -8,7 +8,12 @@
 
 .selectlist {
     display: none;
-    position: absolute;
+    // because mobile safari (iOS) has positioning issues
+    // we position it relative and remove the height
+    position: relative;
+    float: left;
+    margin: 0 0 -100% 0;
+
     .box-sizing(border-box);
     width: 100%;
     z-index: 1000; // just make it higher so it is above others
@@ -16,7 +21,6 @@
     background-color: @selectlist-box-background-color;
     border: 1*@px solid @selectlist-box-border-color;
     padding: 0;
-    margin: 0;
 
     max-height: 35*@px * 5;
     overflow-y: auto; 
