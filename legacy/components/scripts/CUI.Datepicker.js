@@ -186,7 +186,8 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             }.bind(this));
 
             this.$element.on('click', function(event){
-                if ($(event.target).is(".icon-calendar")) {
+                var $target = $(event.target);
+                if ($target.is(".icon-calendar, .icon-clock") || $target.children().is(".icon-calendar, .icon-clock")) {
                     if (!this.pickerShown) {
                         this._openPicker();
                     } else {
