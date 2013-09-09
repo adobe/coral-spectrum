@@ -21,7 +21,7 @@ See the [CoralUI Wiki][7] for more useful information.
 
 [1]: https://git.corp.adobe.com/pages/Coral/CoralUI/
 [2]: http://xdbuild.corp.adobe.com:8080/job/CoralUI-Master/ws/build/index.html
-[3]: http://jenkins.bsl.eur.adobe.com:8080/job/Build_CoralUI/ws/build/index.html
+[3]: http://jenkins.bsl.eur.adobe.com:8080/job/Build_CoralUI-master/ws/build/index.html
 [4]: https://git.corp.adobe.com/Coral/CoralUI/wiki/Build-Process-&-Technology
 [5]: mailto:CoralUI@adobe.com
 [6]: https://zerowing.corp.adobe.com/display/CloudUI/Component+Library
