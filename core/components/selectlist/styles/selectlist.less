@@ -7,12 +7,16 @@
 @selectlist-group-text-color: rgb(75, 75, 75);
 
 .selectlist {
-    display: none;
     // because mobile safari (iOS) has positioning issues
     // we position it relative and remove the height
+    visibility: hidden;
     position: relative;
     float: left;
     margin: -100% 0 0 0;
+
+    &.visible {
+        visibility: visible;
+    }
 
     .box-sizing(border-box);
     width: 100%;

@@ -309,7 +309,7 @@
             var self = this;
 
             this.$element
-                .show()
+                .addClass('visible')
                 .attr('aria-hidden', false);
 
             this.$element.position({
@@ -341,7 +341,7 @@
                 clearTimeout(this._autohideTimer);
             }
             this.$element
-                .hide()
+                .removeClass('visible')
                 .attr('aria-hidden', true);
 
             
