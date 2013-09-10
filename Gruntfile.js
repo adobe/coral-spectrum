@@ -651,7 +651,7 @@ module.exports = function (grunt) {
         },
         "shell": {
             "local-publish": {
-                "command": "coralui-local-publish <%= meta.appName %> <%= dirs.build %>/release/<%= meta.appName %>-<%= meta.version %>.tgz",
+                "command": "sh coralui-local-publish <%= meta.appName %> <%= dirs.build %>/release/<%= meta.appName %>-<%= meta.version %>.tgz",
                 "options": {
                     stdout: true,
                     stderr: true
