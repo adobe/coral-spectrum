@@ -220,6 +220,36 @@
             }
         },
 
+        _setSuggestions: function () {
+            var self = this;
+
+            if (this.options.showsuggestions) {
+
+                // if the button to trigger the suggestion box is not there, 
+                // then we add it
+                if (this._suggestionsBtn.length === 0) {
+
+                    this._suggestionsBtn = $('<button/>', {
+                        'class': 'autocomplete-suggestion-toggle'
+                    });
+
+                    this._suggestionsBtn.appendTo(this.$element);
+                }
+
+                // handler to open usggestion box
+                this._suggestionsBtn.fipo('tap', 'click', function (event) {
+                    event.preventDefault();
+                    self._toggleSuggestions();
+                }).finger('click', false);
+
+                // add class to input to to increase padding right for the button
+                this._input.addClass('autocomplete-has-suggestion-btn');
+            } else {
+                this._suggestionsBtn.remove();
+                this._input.removeClass('autocomplete-has-suggestion-btn');
+            }
+        },
+
         /*
         _setTypeahead: function () {
             var self = this,
@@ -292,7 +322,7 @@
         },
 
         /**
-         * 
+         * handles a static list filter (type == static) based on the defined mode
          * @param  {jQuery.Event} event
          * @private
          */
