@@ -6,12 +6,14 @@
 
         defaults: {
             type: 'static',
-            mode: '',
-            showtypeahead: false,
+            mode: '', // filter mode
+            delay: 500,
+            showtypeahead: true,
             showsuggestions: false,
             showclearbutton: false,
             showtags: false,
-            typeaheadConfig: null,
+
+            selectlistConfig: null,
             tagConfig: null
         },
 
@@ -20,10 +22,11 @@
 
             // find elements
             this._input = this.$element.children('input');
-            //this._suggestions = this.$element.find('.autocomplete-suggestions');
+            this._selectlist = this.$element.find('.selectlist');
+            this._tags = this.$element.find('.taglist');
+            
             this._suggestionsBtn = this.$element.find('.autocomplete-suggestion-toggle');
-            this._tags = this.$element.find('.autocomplete-tags');
-            //this._typeahead = this.$element.find('.autocomplete-typeahead');
+
 
             // apply
             this.applyOptions();
@@ -33,8 +36,21 @@
             this._setClearButton();
             //this._setSuggestions();
             this._setTags();
-            
+            this._setSelectlist();
             this._setTypeahead();
+
+            this._setType();
+        },
+
+        /**
+         * initializes the type of the autocomplete
+         */
+        _setType: function () {
+            if (this.options.type === 'static') {
+                this.$element.on('query', this._handleStaticFilter.bind(this));
+            } else if (this.options.type === 'dynamic') {
+
+            }
         },
 
         /**
@@ -119,49 +135,31 @@
             }
         },*/
 
-        _setTypeahead: function () {
+        /**
+         * initializes the select list widget
+         * @private
+         */
+        _setSelectlist: function () {
             var self = this;
 
             // if the element is not there, create it
-            if (this._typeahead.length === 0) {
-                this._typeahead = $('<ul/>', {
+            if (this._selectlist.length === 0) {
+                this._selectlist = $('<ul/>', {
                     'class': 'selectlist'
                 }).appendTo(this.$element);
             }
 
-            this._typeahead.selectList($.extend({
-                relatedElement: this._input
-            }, this.options.suggestionConfig || {}));
+            this._selectlist.selectList($.extend({
+                relatedElement: this._input,
+                autofocus: false,
+                autohide: false
+            }, this.options.selectlistConfig || {}));
 
-            this._selectList = this._suggestions.data('selectList');
+            this._selectListWidget = this._selectlist.data('selectList');
 
-            // if the button to trigger the suggestion box is not there, 
-            // then we add it
-            if (this._suggestionsBtn.length === 0) {
-
-                this._suggestionsBtn = $('<button/>', {
-                    'class': 'autocomplete-suggestion-toggle'
-                });
-
-                this._suggestionsBtn.appendTo(this.$element);
-            }
-
-            // handler to open usggestion box
-            this._suggestionsBtn.fipo('tap', 'click', function (event) {
-                event.preventDefault();
-                self._toggleSuggestions();
-            }).finger('click', false);
-
-
-            this._suggestions
+            this._selectlist
                 // receive the value from the list
-                .on('selected.autcomplete-suggestion', this._handleSuggestionSelected.bind(this))
-                // handle open/hide for the button
-                .on('show.autcomplete-suggestion hide.autcomplete-suggestion', function (event) {
-                    self._suggestionsBtn.toggleClass('active', event.type === 'show');
-                });
-            // add class to input to to increase padding right for the button
-            this._input.addClass('autocomplete-has-suggestion-btn');
+                .on('selected.autcomplete-suggestion', this._handleSuggestionSelected.bind(this));
         },
 
         /**
@@ -185,6 +183,38 @@
 
             } else {
                 this._input.off('keyup.autocomplete-addtag');
+            }
+        },
+
+        /**
+         * initializes the typeahead functionality
+         * @fires Autocomplete#query
+         * @private
+         */
+        _setTypeahead: function () {
+            var self = this,
+                timeout;
+
+            function timeoutLoadFunc() {
+                self.$element.trigger($.Event('query', {
+                    query: self._input.val()
+                }));
+            }
+
+            if (this.options.showtypeahead) {
+
+                // bind keyboard input listening
+                this._input.on('keyup.autocomplete', function (event) {
+                    // debounce
+                    if (timeout) {
+                        clearTimeout(timeout);
+                    }
+
+                    timeout = setTimeout(timeoutLoadFunc, self.config.delay);
+                });
+
+            } else {
+                this._input.off('keyup.autocomplete');
             }
         },
 
@@ -257,6 +287,10 @@
             }
 
             this._input.trigger('focus');
+        },
+
+        _handleStaticFilter: function (event) {
+
         },
 
         _toggleSuggestions: function () {
