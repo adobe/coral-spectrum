@@ -5,6 +5,7 @@
         extend: CUI.Widget,
 
         defaults: {
+            type: 'static',
             mode: 'starts', // filter mode ['starts', 'contains']
             delay: 500,
             showtypeahead: true,
@@ -46,15 +47,10 @@
          * initializes the type of the autocomplete
          */
         _setType: function () {
-            if (this._selectListWidget.options.type === 'static') {
-                this.$element.on('query', this._handleStaticFilter.bind(this));
-            } else if (this._selectListWidget.options.type === 'dynamic') {
-                // TEMP
-                this._selectListWidget.set('dataadditional', {
-                    value: event.value
-                });
-                this._selectListWidget.show();
-                this._selectListWidget.triggerLoadData(true);
+            if (this.options.type === 'static') {
+                this.$element.on('query', this.handleStaticFilter.bind(this));
+            } else if (this.options.type === 'dynamic') {
+                this.$element.on('query', this.handleDynamicFilter.bind(this));
             }
         },
 
@@ -326,25 +322,34 @@
             this._input.trigger('focus');
         },
 
-        /**
-         * handles a static list filter (type == static) based on the defined mode
-         * @param  {jQuery.Event} event
-         * @private
-         */
-        _handleStaticFilter: function (event) {
-            this._selectListWidget.set('dataadditional', {
-                value: event.value
-            });
-            this._selectListWidget.show();
-            this._selectListWidget.triggerLoadData(true);
-        },
-
         _toggleSuggestions: function () {
             this._selectListWidget.toggleVisibility();
         },
 
         _refreshClear: function () {
             this._clearBtn.toggleClass('hide', this._input.val().length === 0);
+        },
+
+        /**
+         * handles a static list filter (type == static) based on the defined mode
+         * @param  {jQuery.Event} event
+         */
+        handleStaticFilter: function (event) {
+            this._selectList.find('[role="option"]').each(function (i, e) {
+
+            });
+        },
+
+        /**
+         * handles a static list filter (type == static) based on the defined mode
+         * @param  {jQuery.Event} event
+         */
+        handleDynamicFilter: function (event) {
+            this._selectListWidget.set('dataadditional', {
+                value: event.value
+            });
+            this._selectListWidget.show();
+            this._selectListWidget.triggerLoadData(true);
         },
 
         /**
