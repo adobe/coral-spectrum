@@ -5,8 +5,7 @@
         extend: CUI.Widget,
 
         defaults: {
-            type: 'static',
-            mode: '', // filter mode
+            mode: 'starts', // filter mode ['starts', 'contains']
             delay: 500,
             showtypeahead: true,
             showsuggestions: false,
@@ -34,10 +33,11 @@
 
         applyOptions: function () {
             this._setClearButton();
-            //this._setSuggestions();
+
             this._setTags();
             this._setSelectlist();
             this._setTypeahead();
+            this._setSuggestions();
 
             this._setType();
         },
@@ -46,10 +46,15 @@
          * initializes the type of the autocomplete
          */
         _setType: function () {
-            if (this.options.type === 'static') {
+            if (this._selectListWidget.options.type === 'static') {
                 this.$element.on('query', this._handleStaticFilter.bind(this));
-            } else if (this.options.type === 'dynamic') {
-
+            } else if (this._selectListWidget.options.type === 'dynamic') {
+                // TEMP
+                this._selectListWidget.set('dataadditional', {
+                    value: event.value
+                });
+                this._selectListWidget.show();
+                this._selectListWidget.triggerLoadData(true);
             }
         },
 
@@ -335,7 +340,7 @@
         },
 
         _toggleSuggestions: function () {
-            this._selectListSuggestion.toggleVisibility();
+            this._selectListWidget.toggleVisibility();
         },
 
         _refreshClear: function () {
