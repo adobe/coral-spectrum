@@ -5,13 +5,14 @@
         extend: CUI.Widget,
 
         defaults: {
+            type: 'static',
+            mode: '',
             showtypeahead: false,
             showsuggestions: false,
             showclearbutton: false,
             showtags: false,
             suggestionConfig: null,
-            tagConfig: null,
-            typeaheadConfig: null
+            tagConfig: null
         },
 
         construct: function () {
@@ -22,17 +23,7 @@
             this._suggestions = this.$element.find('.autocomplete-suggestions');
             this._suggestionsBtn = this.$element.find('.autocomplete-suggestion-toggle');
             this._tags = this.$element.find('.autocomplete-tags');
-            this._typeahead = this.$element.find('.autocomplete-typeahead');
-
-            // create additional objects
-            this._clearBtn = $('<button/>', {
-                'class': 'autocomplete-clear icon-close'
-            }).fipo('tap', 'click', function (event) {
-                event.preventDefault();
-
-                self.clear();
-                self._input.focus();
-            }).finger('click', false);
+            //this._typeahead = this.$element.find('.autocomplete-typeahead');
 
             // apply
             this.applyOptions();
@@ -42,11 +33,30 @@
             this._setClearButton();
             this._setSuggestions();
             this._setTags();
-            this._setTypeahead();
+            //this._setTypeahead();
         },
 
+        /**
+         * initialize the clear button
+         * @private
+         */
         _setClearButton: function () {
+            var self = this;
+
             if (this.options.showclearbutton) {
+
+                // create button if not there
+                if (!this._clearBtn) {
+                    this._clearBtn = $('<button/>', {
+                        'class': 'autocomplete-clear icon-close'
+                    }).fipo('tap', 'click', function (event) {
+                        event.preventDefault();
+
+                        self.clear();
+                        self._input.focus();
+                    }).finger('click', false);
+                }
+
                 this._clearBtn.appendTo(this.$element);
                 this._input.on('keyup.autocomplete-clearbtn', this._refreshClear.bind(this));
                 this._refreshClear();
@@ -108,6 +118,55 @@
             }
         },
 
+        _setTypeahead: function () {
+            var self = this;
+
+            // if the element is not there, create it
+            if (this._typeahead.length === 0) {
+                this._typeahead = $('<ul/>', {
+                    'class': 'selectlist'
+                }).appendTo(this.$element);
+            }
+
+            this._suggestions.selectList($.extend({
+                relatedElement: this._input
+            }, this.options.suggestionConfig || {}));
+
+            this._selectListSuggestion = this._suggestions.data('selectList');
+
+            // if the button to trigger the suggestion box is not there, 
+            // then we add it
+            if (this._suggestionsBtn.length === 0) {
+
+                this._suggestionsBtn = $('<button/>', {
+                    'class': 'autocomplete-suggestion-toggle'
+                });
+
+                this._suggestionsBtn.appendTo(this.$element);
+            }
+
+            // handler to open usggestion box
+            this._suggestionsBtn.fipo('tap', 'click', function (event) {
+                event.preventDefault();
+                self._toggleSuggestions();
+            }).finger('click', false);
+
+
+            this._suggestions
+                // receive the value from the list
+                .on('selected.autcomplete-suggestion', this._handleSuggestionSelected.bind(this))
+                // handle open/hide for the button
+                .on('show.autcomplete-suggestion hide.autcomplete-suggestion', function (event) {
+                    self._suggestionsBtn.toggleClass('active', event.type === 'show');
+                });
+            // add class to input to to increase padding right for the button
+            this._input.addClass('autocomplete-has-suggestion-btn');
+        },
+
+        /**
+         * initializes the tags for multiple options
+         * @private
+         */
         _setTags: function () {
             if (this.options.showtags) {
 
@@ -128,6 +187,7 @@
             }
         },
 
+        /*
         _setTypeahead: function () {
             var self = this,
                 timeout;
@@ -170,8 +230,13 @@
             } else {
                 this._input.off('keyup.autocomplete-typeahead');
             }
-        },
+        },*/
 
+        /**
+         * adds a new tag when pressed button was Enter
+         * @private
+         * @param {jQuery.Event} event
+         */
         _addTag: function (event) {
             if (event.which !== 13) {
                 return;
@@ -201,17 +266,26 @@
             this._clearBtn.toggleClass('hide', this._input.val().length === 0);
         },
 
+        /**
+         * clears the autocomplete input field
+         */
         clear: function () {
             this._input.val('');
             this._refreshClear();
         },
 
-        disable: function (toggle) {
+        /**
+         * disables the autocomplete
+         */
+        disable: function () {
             this.$element.addClass('disabled');
             this._input.prop('disabled', true);
             this._suggestionsBtn.prop('disabled', true);
         },
 
+        /**
+         * enables the autocomplete
+         */
         enable: function () {
             this.$element.removeClass('disabled');
             this._input.prop('disabled', false);
