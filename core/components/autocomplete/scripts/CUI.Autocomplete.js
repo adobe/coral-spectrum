@@ -24,7 +24,7 @@
             this._input = this.$element.children('input');
             this._selectlist = this.$element.find('.selectlist');
             this._tags = this.$element.find('.taglist');
-            
+
             this._suggestionsBtn = this.$element.find('.autocomplete-suggestion-toggle');
 
 
@@ -78,7 +78,9 @@
                 this._input.on('keyup.autocomplete-clearbtn', this._refreshClear.bind(this));
                 this._refreshClear();
             } else {
-                this._clearBtn.detach();
+                if (this._clearBtn) {
+                    this._clearBtn.detach();
+                }
                 this._input.off('keyup.autocomplete-clearbtn');
             }
         },
@@ -159,7 +161,7 @@
 
             this._selectlist
                 // receive the value from the list
-                .on('selected.autcomplete-suggestion', this._handleSuggestionSelected.bind(this));
+                .on('selected.autcomplete', this._handleSelected.bind(this));
         },
 
         /**
@@ -210,7 +212,7 @@
                         clearTimeout(timeout);
                     }
 
-                    timeout = setTimeout(timeoutLoadFunc, self.config.delay);
+                    timeout = setTimeout(timeoutLoadFunc, self.options.delay);
                 });
 
             } else {
@@ -277,8 +279,8 @@
             this.clear();
         },
 
-        _handleSuggestionSelected: function (event) {
-            this._selectListSuggestion.hide();
+        _handleSelected: function (event) {
+            this._selectListWidget.hide();
             
             if (this.options.showtags) {
                 this._tagList.addItem(event.displayedValue);
@@ -289,8 +291,17 @@
             this._input.trigger('focus');
         },
 
+        /**
+         * 
+         * @param  {jQuery.Event} event
+         * @private
+         */
         _handleStaticFilter: function (event) {
-
+            this._selectListWidget.set('dataadditional', {
+                value: event.value
+            });
+            this._selectListWidget.show();
+            this._selectListWidget.triggerLoadData(true);
         },
 
         _toggleSuggestions: function () {
