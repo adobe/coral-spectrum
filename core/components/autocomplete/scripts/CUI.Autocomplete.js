@@ -7,7 +7,7 @@
         defaults: {
             mode: 'starts', // filter mode ['starts', 'contains']
             delay: 500,
-            showtypeahead: true,
+            showtypeahead: false,
             showsuggestions: false,
             showclearbutton: false,
             showtags: false,
