@@ -5,7 +5,6 @@
         extend: CUI.Widget,
 
         defaults: {
-            type: 'static',
             mode: 'starts', // filter mode ['starts', 'contains']
             delay: 500,
             showtypeahead: true,
@@ -47,9 +46,9 @@
          * initializes the type of the autocomplete
          */
         _setType: function () {
-            if (this.options.type === 'static') {
+            if (this._selectListWidget.options.type === 'static') {
                 this.$element.on('query', this.handleStaticFilter.bind(this));
-            } else if (this.options.type === 'dynamic') {
+            } else if (this._selectListWidget.options.type === 'dynamic') {
                 this.$element.on('query', this.handleDynamicFilter.bind(this));
             }
         },
@@ -200,7 +199,7 @@
 
             function timeoutLoadFunc() {
                 self.$element.trigger($.Event('query', {
-                    query: self._input.val()
+                    value: self._input.val()
                 }));
             }
 
