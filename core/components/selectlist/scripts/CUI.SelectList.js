@@ -102,8 +102,6 @@
          * @param  {Object} [options.dataadditional] additonal data to be sent
          * @param  {Function} [options.loadData] function to be called if more data is needed. This must not be used with a set dataurl.
          *
-         * @fires SelectList#selected
-         * @fires SelectList#unselected
          * 
          */
         construct: function (options) {
@@ -350,6 +348,7 @@
 
         /**
          * triggers an event for the currently selected element
+         * @fires SelectList#selected
          * @private
          */
         _triggerSelected: function (event) {
