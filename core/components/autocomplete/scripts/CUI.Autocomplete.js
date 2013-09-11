@@ -11,7 +11,7 @@
             showsuggestions: false,
             showclearbutton: false,
             showtags: false,
-            suggestionConfig: null,
+            typeaheadConfig: null,
             tagConfig: null
         },
 
@@ -20,7 +20,7 @@
 
             // find elements
             this._input = this.$element.children('input');
-            this._suggestions = this.$element.find('.autocomplete-suggestions');
+            //this._suggestions = this.$element.find('.autocomplete-suggestions');
             this._suggestionsBtn = this.$element.find('.autocomplete-suggestion-toggle');
             this._tags = this.$element.find('.autocomplete-tags');
             //this._typeahead = this.$element.find('.autocomplete-typeahead');
@@ -31,9 +31,10 @@
 
         applyOptions: function () {
             this._setClearButton();
-            this._setSuggestions();
+            //this._setSuggestions();
             this._setTags();
-            //this._setTypeahead();
+            
+            this._setTypeahead();
         },
 
         /**
@@ -66,7 +67,7 @@
             }
         },
 
-        _setSuggestions: function () {
+        /*_setSuggestions: function () {
             var self = this;
 
             if (this.options.showsuggestions) {
@@ -116,7 +117,7 @@
                 this._suggestions.off('selected.autcomplete-suggestion show.autcomplete-suggestion hide.autcomplete-suggestion');
                 this._input.removeClass('autocomplete-has-suggestion-btn');
             }
-        },
+        },*/
 
         _setTypeahead: function () {
             var self = this;
@@ -128,11 +129,11 @@
                 }).appendTo(this.$element);
             }
 
-            this._suggestions.selectList($.extend({
+            this._typeahead.selectList($.extend({
                 relatedElement: this._input
             }, this.options.suggestionConfig || {}));
 
-            this._selectListSuggestion = this._suggestions.data('selectList');
+            this._selectList = this._suggestions.data('selectList');
 
             // if the button to trigger the suggestion box is not there, 
             // then we add it
