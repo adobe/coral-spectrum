@@ -9,7 +9,7 @@ div.rail {
     /*.transition(width 0.5s ease-out);*/
 
     background-color: @rail-background-color;
-    height: 100%;
+    height: 100%; 
     
     /* the rail's defualt position is left */
     float: left;
@@ -135,7 +135,11 @@ div.rail {
                     position: absolute;
                     right: 24*@px;
                     font-size: 1rem;
-                    line-height: 1rem;
+                    /* 
+                        Removing 1rem line-height below to work around IE10 bug with rem units in pseudo-elements.
+                        Alternative is to use em instead of rem. 
+                        line-height: 1rem;
+                    */
                 }    
 
                 >.fold {
