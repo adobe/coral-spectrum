@@ -56,19 +56,20 @@ describe('CUI.Datepicker', function() {
           
           it('should open a picker with configured day as first day of week', function() {
                 el.find("button").click();
-                expect(el.find(".calendar-body table tr th:eq(0)").text()).to.equal("Tu");
+                expect($("body").find(".popover#2").find(".calendar-body table tr th:eq(0)").text()).to.equal("Tu");
           });          
           
     });
 
     describe("as a time field", function() {
-          var html = '<div data-init="datepicker"><input type="time" value="20:15"></div>';
+          var html = '<div data-init="datepicker"><input type="time" value="20:15"/></div>';
           var el = $(html).datepicker();
           $("body").append(el);
           
+          
           it('should not have a calendar popup', function() {
                 el.find("button").click();
-                expect(el.find(".calendar-body").length).to.equal(0);
+                expect($("body").find(".popover#3").find(".calendar-body").length).to.equal(0);
           });
     });  
       

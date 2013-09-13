@@ -1,4 +1,6 @@
 (function($) {
+  var datepicker_guid = 0;
+  
   CUI.Datepicker = new Class(/** @lends CUI.Datepicker# */{
     toString: 'Datepicker',
     extend: CUI.Widget,
@@ -97,7 +99,9 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
     language: 'coralui',
 
     construct: function(options) {
-
+        
+        this.guid = (datepicker_guid += 1);
+        
         this._readDataFromMarkup();
         this._adjustMarkup();
 
@@ -121,14 +125,13 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             this.useNativeControls = true;
         }
 
-        this._updateState();
-
-        this.$openButton = this.$element.find('button');
-
         this.$input = this.$element.find('input').not("[type=hidden]");
         this.$hiddenInput = this.$element.find('input[type=hidden]');
-
+        this.$popover = $('body').find(".popover#"+this.guid);
+        this.$openButton = this.$element.find('button');
         
+        this._updateState();
+
         // Enable time buttons in popover
         if(this._isTimeEnabled()) {
             this._renderTime();
@@ -176,7 +179,6 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         var timeout = null;
         var $input = this.$input;
         var $btn = this.$openButton;
-        var $popover = this.$element.find('.popover').first();
 
         if (!this.options.disabled) {
             $('body').on('click', function(){
@@ -184,7 +186,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
                     this._hidePicker();
                 }
             }.bind(this));
-
+            
             this.$element.on('click', function(event){
                 var $target = $(event.target);
                 if ($target.is(".icon-calendar, .icon-clock") || $target.children().is(".icon-calendar, .icon-clock")) {
@@ -195,9 +197,16 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
                     }
                 }
 
-
                 // let the event time to propagate.
                 // Do not use stopPropagation, as other Datepickers might want to use this event for closing their own datepicker
+                this.keepShown = true;
+                setTimeout(function() {
+                    this.keepShown = false;
+                }.bind(this), 200);
+
+            }.bind(this));
+            
+            this.$popover.on('click', function(event){
                 this.keepShown = true;
                 setTimeout(function() {
                     this.keepShown = false;
@@ -224,7 +233,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         }
 
         // Move around
-        this.$element.find(".calendar").on("swipe", function(event) {
+        this.$popover.find(".calendar").on("swipe", function(event) {
             var d = event.direction;
             if (d === "left") {
                 this.displayDateTime = normalizeDate(moment([this.displayDateTime.year(), this.displayDateTime.month() + 1, 1]));
@@ -235,14 +244,14 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             }         
         }.bind(this));
 
-        this.$element.on("mousedown", ".next-month", function(event) {
+        this.$popover.on("mousedown", ".next-month", function(event) {
             event.preventDefault();
             if (!this.displayDateTime) return;
             this.displayDateTime = normalizeDate(moment([this.displayDateTime.year(), this.displayDateTime.month() + 1, 1]));
             this._renderCalendar("left");
         }.bind(this));
 
-        this.$element.on("mousedown", ".prev-month", function(event) {
+        this.$popover.on("mousedown", ".prev-month", function(event) {
             event.preventDefault();
             if (!this.displayDateTime) return;
             this.displayDateTime = normalizeDate(moment([this.displayDateTime.year(), this.displayDateTime.month() - 1, 1]));
@@ -260,9 +269,9 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             };
 
             // for Desktop
-            this.$element.on("dropdown-list:select", ".hour,.minute", dropdownChanged.bind(this));
+            this.$popover.on("dropdown-list:select", ".hour,.minute", dropdownChanged.bind(this));
             // for Mobile
-            this.$element.on("change", ".hour,.minute", dropdownChanged.bind(this));
+            this.$popover.on("change", ".hour,.minute", dropdownChanged.bind(this));
         }
 
 
@@ -372,6 +381,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
 
     _openPicker: function() {
         this.$element.addClass("focus");
+        this.$input.parents().on('scroll', this._scrollParents.bind(this));
 
         if(!this.useNativeControls) {
             this._readInputVal();
@@ -381,13 +391,17 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         }
     },
     
+    _scrollParents: function(event) {
+        this._hidePicker();
+    },
+    
     _showPicker: function() {
         if(this._isDateEnabled()) this._renderCalendar();
         
-        var left = this.$openButton.position().left + this.$openButton.width() / 2 - (this.$element.find(".popover").width() / 2);
-        var top = this.$openButton.position().top + this.$openButton.outerHeight() + 16;
+        var left = this.$openButton.offset().left + this.$openButton.width() / 2 - (this.$popover.width() / 2);
+        var top = this.$openButton.offset().top + this.$openButton.outerHeight() + 16;
         //if (left < 0) left = 0;
-        this.$element.find(".popover").css(
+        this.$popover.css(
                 {"position": "absolute",
                  "left": left + "px",
                  "top": top + "px"}).show();
@@ -397,7 +411,10 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
     
     _hidePicker: function() {
         this.$element.removeClass("focus");
-        this.$element.find(".popover").hide();
+        this.$input.parents().off('scroll', this._scrollParents);
+        if(this.$popover){
+            this.$popover.hide();
+        }
         this.pickerShown = false;
     },
     
@@ -411,9 +428,12 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             if (this.$element.find("button").length === 0) {
                 this.$element.append("<button class=\"icon-calendar small\"><span>Datepicker</span></button>");
             }
-            if (this.$element.find(".popover").length === 0) {
-                this.$element.append('<div class="popover arrow-top" style="display:none"><div class="inner"></div></div>');
-                if(this._isDateEnabled()) this.$element.find(".inner").append('<div class="calendar"><div class="calendar-header"></div><div class="calendar-body"></div></div>');
+            if ( $('body').find(".popover#"+this.guid).length === 0) {
+                $('body').append('<div class="datepicker popover arrow-top" style="display:none" id ="' + this.guid + '"><div class="inner"></div></div>');
+                var $popover = $('body').find(".popover#"+this.guid);
+                if(this._isDateEnabled()) {
+                    $popover.find(".inner").append('<div class="calendar"><div class="calendar-header"></div><div class="calendar-body"></div></div>');
+                }
             }
         } else {
             // Show native control
@@ -447,7 +467,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
 
         var table = this._renderOneCalendar(displayMonth, displayYear);
         
-        var $calendar = this.$element.find(".calendar");
+        var $calendar = this.$popover.find(".calendar");
 
         table.on("mousedown", "a", function(event) {
             event.preventDefault();
@@ -478,11 +498,11 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
     },
 
     _getHoursFromDropdown: function() {
-        return parseInt(this.$element.find('.time .hour select').val(), 10);
+        return parseInt(this.$popover.find('.time .hour select').val(), 10);
     },
 
     _getMinutesFromDropdown: function() {
-        return parseInt(this.$element.find('.time .minute select').val(), 10);
+        return parseInt(this.$popover.find('.time .minute select').val(), 10);
     },
 
     _renderOneCalendar: function(month, year) {
@@ -496,7 +516,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
 
         title.append(nextMonthElement).append(prevMonthElement);
 
-        var $calendar = this.$element.find(".calendar");
+        var $calendar = this.$popover.find(".calendar");
         if ($calendar.find(".calendar-header").length > 0) {
             $calendar.find(".calendar-header").replaceWith(title);
         } else {
@@ -556,10 +576,10 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
       
     _slideCalendar: function(newtable, isLeft) {
 
-        this.$element.find(".sliding-container table").stop(true, true);
-        this.$element.find(".sliding-container").remove();
+        this.$popover.find(".sliding-container table").stop(true, true);
+        this.$popover.find(".sliding-container").remove();
 
-        var oldtable = this.$element.find("table");
+        var oldtable = this.$popover.find("table");
         var width = oldtable.width();
         var height = oldtable.height();
         
@@ -571,7 +591,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
                        "height": height + "px",
                        "overflow": "hidden"});
                    
-        this.$element.find(".calendar-body").append(container);
+        this.$popover.find(".calendar-body").append(container);
         container.append(oldtable).append(newtable);
         oldtable.css({"position": "absolute", "left": 0, "top": 0});
         oldtable.after(newtable);
@@ -587,7 +607,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             if (container.parents().length === 0) return; // We already were detached!
             newtable.css({"position": "relative", "left": 0, "top": 0});
             newtable.detach();
-            this.$element.find(".calendar-body").append(newtable);
+            this.$popover.find(".calendar-body").append(newtable);
             container.remove();
         }.bind(this));        
     },
@@ -623,8 +643,8 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
 
     _getTimeFromInput: function() {
         if(this._isTimeEnabled()) {
-            var h = parseInt(this.$element.find('.time .hour button').text(), 10);
-            var m = parseInt(this.$element.find('.time .minute button').text(), 10);
+            var h = parseInt(this.$popover.find('.time .hour button').text(), 10);
+            var m = parseInt(this.$popover.find('.time .minute button').text(), 10);
             var time = [h,m];
             return time;
         }
@@ -661,7 +681,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             if(this.options.selectedDateTime && h === this.options.selectedDateTime.hours()) { hourOption.attr('selected','selected'); }
             hourSelect.append(hourOption);
         }
-        var hourDropdown = $('<div class="dropdown hour"><button></button></input>').append(hourSelect);
+        var hourDropdown = $('<div class="dropdown hour"><button></button></div>').append(hourSelect);
 
         // Minutes
         var minuteSelect = $('<select></select>');
@@ -695,10 +715,10 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
 
         html.append(hourDropdown, $("<span>:</span>"), minuteDropdown);
 
-        if (this.$element.find(".time").length === 0) {
-            this.$element.find(".inner").append(html);
+        if (this.$popover.find(".time").length === 0) {
+            this.$popover.find(".inner").append(html);
         } else {
-            this.$element.find(".time").empty().append(html.children());
+            this.$popover.find(".time").empty().append(html.children());
         }
         
         // Set up dropdowns
