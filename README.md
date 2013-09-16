@@ -4,7 +4,7 @@ CoralUI is an implementation of the [Cloud UI][9] visual style.  Using CoralUI p
 # Demo & Download
 Check out the current release of the [Style Guide][1] to see CoralUI in action.  You can also check out the Style Guide via the build servers, for better or worse.  There are both a [real-time][2] and [nightly][3] options to choose from.
 
-To begin playing with CoralUI, try clicking the Download link for a zip of the project, and using the build [documentation][4] to get started.
+CoralUI offers [prebuilt releases][10] but we encourage you to build Coral yourself. See the [build documentation][4] to get started.
 
 # Contributing
 CoralUI is an internal open source effort with backing from UXD, XD, and product development teams, and we encourage the submission of issues, feature requests, and pull requests from anyone, on any team.  To get involved, contact the [mailing list][5] and introduce yourself.
@@ -28,4 +28,5 @@ See the [CoralUI Wiki][7] for more useful information.
 [7]: https://git.corp.adobe.com/Coral/CoralUI/wiki
 [8]: https://git.corp.adobe.com/Coral/CoralUI/wiki/CoralUI-Modularization
 [9]: http://blogs.corp.adobe.com/xdcloudui
+[10]: https://git.corp.adobe.com/Coral/CoralUI/tree/gh-pages/release
 
