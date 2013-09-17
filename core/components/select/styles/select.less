@@ -29,7 +29,17 @@
         .box-sizing(border-box);
         .gradient(@select-background-gradient-start, @select-background-gradient-end);
 
-        &, 
+        span {
+            display: block;
+            padding-right: 1rem;
+            .text-overflow();
+
+            &:empty {
+                height: 1rem;
+            }
+        }
+
+        &,
         &:hover,
         &:active {
             border: 1*@px solid @select-border-color;
@@ -42,9 +52,13 @@
         &[class^="icon-"], 
         &[class*=" icon-"] {
 
+            span {
+                padding-left: 10*@px;
+            }
+
             &:before {
                 color: inherit;
-                margin-right: 10*@px;
+                float: left;
             }
         }
 
@@ -57,6 +71,7 @@
             text-align: left;
             position: absolute;
             right: 11*@px;
+            top: 7*@px;
             text-shadow: none;
             font-size: 1.2em;
             color: inherit;

@@ -96,6 +96,7 @@
                 }
             }
             
+            this._renderButtonText();
 
             if (this.options.nativewidget || forcedNativeWidget) {
                 this._setNativeWidget(forcedNativeWidget);
@@ -168,7 +169,7 @@
                     }
                 });
             } else {
-                self._button.text(self._select[0][self._select[0].selectedIndex].text);
+                self._buttonText.text(self._select[0][self._select[0].selectedIndex].text);
             }
         },
 
@@ -276,6 +277,16 @@
         },
 
         /**
+         * create a span inside button for managing text overflow
+         * @private
+         */
+        _renderButtonText: function() {
+            if(this._button.children('span').length === 0) {
+                this._buttonText = this._button.wrapInner("<span />").children('span');
+            }
+        },
+
+        /**
          * handles a select of a SelectList widget
          * @private
          */
@@ -292,7 +303,7 @@
                 });
             } else {
                 // set the button label
-                this._button.text(event.displayedValue);
+                this._buttonText.text(event.displayedValue);
                 // in case it is dynamic a value input should be existing
                 this._valueInput.val(event.selectedValue);
             }
