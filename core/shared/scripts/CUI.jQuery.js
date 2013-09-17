@@ -13,25 +13,25 @@
     if (remote && (force || $target.data('loaded-remote') !== remote)) {
     // only show the spinner if the request takes an appreciable amount of time, otherwise
     // the flash of the spinner is a little ugly
-    var timer = setTimeout(function() {
-      $target.html('<div class="spinner large"></div>');
-    }, 50);
+      var timer = setTimeout(function() {
+        $target.html('<div class="spinner large"></div>');
+      }, 50);
 
-    $target.load(remote, function(response, status, xhr) {
-    clearTimeout(timer); // no need for the spinner anymore!
+      $target.load(remote, function(response, status, xhr) {
+        clearTimeout(timer); // no need for the spinner anymore!
 
-    if (status === 'error') {
-      $target.html('<div class="alert error"><strong>ERROR</strong> Failed to load content: '+xhr.statusText+' ('+xhr.status+')</div>');
-      $target.data('loaded-remote', '');
-    }
+        if (status === 'error') {
+          $target.html('<div class="alert error"><strong>ERROR</strong> Failed to load content: '+xhr.statusText+' ('+xhr.status+')</div>');
+          $target.data('loaded-remote', '');
+        }
 
-    if (typeof callback === 'function') {
-      callback.call(this, response, status, xhr);
-    }
-    });
+        if (typeof callback === 'function') {
+          callback.call(this, response, status, xhr);
+        }
+      }); // load
 
-    $target.data('loaded-remote', remote);
-    }
+      $target.data('loaded-remote', remote);
+    } // end if remote
   };
 
   /**

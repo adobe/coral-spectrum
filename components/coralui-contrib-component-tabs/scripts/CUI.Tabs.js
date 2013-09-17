@@ -6,10 +6,15 @@
 
         /**
          * @extends CUI.Widget
-         * @classdesc A tabbed panel with several variants. A tabs instance ($.tabs or new CUI.Tabs) is not needed for basic functionality, only if programmatic access is necessary.
+         * @classdesc A tabbed panel with several variants. 
+
+         * <p>Tabs markup must be initialized with CUI's data-init property.  However, keeping a reference to 
+         * a tabs instance ($.tabs or new CUI.Tabs) is not needed for basic functionality. This is only 
+         * needed if programmatic access is necessary.</p>
          *
          * <h2 class="line">Examples</h2>
          *
+         * <section class="line">
          * <h3>Default</h3>
          * <div class="tabs" data-init="tabs">
          *     <nav>
@@ -23,7 +28,8 @@
          *     <section>This will be replaced :)</section>
          *     <section>This section will never be shown :(</section>
          * </div>
-         *
+         * </section>
+         * <section>
          * <h3>White</h3>
          * <div class="tabs white" data-init="tabs">
          *     <nav>
@@ -35,7 +41,8 @@
          *     <section>Nulla gangsta. Brizzle shizzlin dizzle pharetra.</section>
          *     <section>This section will never be shown :(</section>
          * </div>
-         *
+         * </section>
+         * <section>
          * <h3>Stacked</h3>
          * <div class="tabs stacked" data-init="tabs">
          *     <nav>
@@ -47,7 +54,8 @@
          *     <section>Nulla gangsta. Brizzle shizzlin dizzle pharetra.</section>
          *     <section>This section will never be shown :(</section>
          * </div>
-         *
+         * </section>
+         * <section>
          * <h3>Nav</h3>
          * <div class="tabs nav" data-init="tabs">
          *     <nav>
@@ -59,7 +67,7 @@
          *     <section>Nulla gangsta. Brizzle shizzlin dizzle pharetra.</section>
          *     <section>This section will never be shown :(</section>
          * </div>
-         *
+         * </section>
          * @example
          * <caption>Instantiate with Class</caption>
          * var tabs = new CUI.Tabs({
@@ -84,7 +92,17 @@
          *
          * @example
          * <caption>Data API: Instantiate, set options, and show</caption>
-         * <description>you do not need to explicitly instantiate a tabs instance to use the tabs functionality. The data API will handle switching between tabs as long as you have created a <code class="prettify">&lt;div&gt;</code> with the <code class="prettify">tabs</code> class. When using markup to instantiate tabs, the overall container is <code class="prettify">div class=&quot;tabs&quot</code>. The tabs themselves are specified within the <code>nav</code> block as simple <code class="prettify">a</code> elements. The <code class="prettify">data-toggle=&quot;tab&quot;</code> attribute on <code>a</code> nav links is essential for the data API; do not omit. The <code>href</code> can either be an id of a following <code>section</code>, a simple anchor: <code>#</code>, or a remote link (see next example).</description>
+         * <description>There is no need to programatically  instantiate a tabs instance to use the tabs 
+         *  functionality. The data API will handle switching between tabs as long as you have created a 
+         * <code class="prettify">&lt;div&gt;</code> with the <code class="prettify">tabs</code> class and added
+         * the <code class="prettify">data-init='tabs'</code> attribute.  
+         * When using markup to instantiate tabs, the overall container is 
+         * <code class="prettify">div class=&quot;tabs&quot</code>. The tabs themselves are specified within the 
+         * <code>nav</code> block as simple <code class="prettify">a</code> elements. The 
+         * <code class="prettify">data-toggle=&quot;tab&quot;</code> attribute on <code>a</code> nav links is 
+         * essential for the data API; do not omit. The <code>href</code> can either be an id of a 
+         * following <code>section</code>, a simple anchor: <code>#</code>, or a remote link 
+         * (see next example).</description>
          * &lt;div class=&quot;tabs&quot; data-init=&quot;tabs&quot;&gt;
          *     &lt;nav&gt;
          *         &lt;a href=&quot;#&quot; data-toggle=&quot;tab&quot; class=&quot;active&quot;&gt;Tab 1&lt;/a&gt;
@@ -100,7 +118,9 @@
          *
          * @example
          * <caption>Variants</caption>
-         * <description>The possible variants, <code class="prettify">white</code>, <code class="prettify">stacked</code>, and <code class="prettify">nav</code>, are specified either via the <code>type</code> argument to the constructor, or via manually specifying the class alongside <code>tabs</code>.</description>
+         * <description>The possible variants, <code class="prettify">white</code>, <code class="prettify">stacked</code>, 
+         * and <code class="prettify">nav</code>, are specified either via the <code>type</code> argument to the 
+         * constructor, or via manually specifying the class alongside <code>tabs</code>.</description>
          * &lt;div class=&quot;tabs nav&quot; data-init=&quot;tabs&quot;&gt;
          *     &lt;nav&gt;
          *         &lt;a href=&quot;#&quot; data-toggle=&quot;tab&quot; class=&quot;active&quot;&gt;Tab 1&lt;/a&gt;
@@ -120,13 +140,15 @@
          * @param  {String} [options.type=""] Type of the tabs. Can be blank, or one of white, stacked, or nav
          * @param  {Number} [options.active=0] index of active tab
          */
+
+         
         construct: function(options) {
             // find elements for tab widget
             this.tablist = this.$element.find('> nav');
             this.tabs = this.tablist.find('> a[data-toggle~="tab"]');
             this.panels = this.$element.find('> section');
 
-            this.applyOptions();
+            this._applyOptions();
 
             // set up listeners for change events
             this.$element.on('change:type', this._setType.bind(this));
@@ -135,16 +157,43 @@
 
         defaults: {},
 
-        _types: [
-            'white',
-            'nav',
-            'stacked'
+        DEFAULT_VARIANT_KEY: 'default',
+        WHITE_VARIANT_CLASS: 'white',
+        STACKED_VARIANT_CLASS: 'stacked',
+        NAV_VARIANT_CLASS: 'nav',
+
+        VARIANT_TYPES: [ 
+            this.WHITE_VARIANT_CLASS, 
+            this.STACKED_VARIANT_CLASS, 
+            this.NAV_VARIANT_CLASS
         ],
 
+
         /**
-         * sets all options
+         * Disables a tab
+         * @param  {jQuery} tab
+         * @return {jQuery} this, chainable
          */
-        applyOptions: function () {
+        setDisabled: function (tab, switcher) {
+            var hop = switcher || false;
+
+            tab.toggleClass('disabled', hop)
+                .prop('aria-disabled', hop);
+            return this;
+        },
+
+        /**
+         * Enables a tab
+         * @param  {jQuery} tab
+         * @return {jQuery} this, chainable
+         */
+        setEnabled: function (tab) {
+            return this.setDisabled(tab, true);
+        },
+
+        // sets all options
+        /** @ignore */
+        _applyOptions: function () {
             var activeTab = this.tabs.filter('.active');
 
             // ensure the type is set correctly
@@ -168,62 +217,35 @@
             }
         },
 
-        /**
-         * sets a certain tab as active
-         * @private
-         * @param  {Number} idx 
-         */
+        // Set a certain tab (by index) as active
+        // * @param  {Number} index of the tab to make active
+        /** @ignore */ 
         _setActive: function (idx) {
-            var activeTab = this.tabs.eq($.isNumeric(idx) ? idx : this.options.active);
-
+            idx = $.isNumeric(idx) ? idx : this.options.active;
+            var activeTab = this.tabs.eq(idx);
             // Activate the tab, but don't focus
             this._activateTab(activeTab, true);
         },
 
-        /**
-         * disables a tab
-         * @param  {jQuery} tab
-         * @return {jQuery} this, chainable
-         */
-        setDisabled: function (tab, switcher) {
-            var hop = switcher || false;
-
-            tab.toggleClass('disabled', hop)
-                .prop('aria-disabled', hop);
-            return this;
-        },
-
-        /**
-         * enables a tab
-         * @param  {jQuery} tab
-         * @return {jQuery} this, chainable
-         */
-        setEnabled: function (tab) {
-            return this.setDisabled(tab, true);
-        },
-
-        /**
-         * sets the type of the tabs
-         * @private
-         * @param  {String} type of the tabs: 'default', 'white', 'nav', 'stacked'
-         */
+         // sets the type of the tabs
+         // @param  {String} type of the tabs: 'default', 'white', 'nav', 'stacked'
+        /** @ignore */
         _setType: function (type) {
-            var ty = $.type(type) === 'string' ? type : this.options.type;
+            var classValue = $.type(type) === 'string' ? type : this.options.type;
 
-            // Remove old type
-            this.$element.removeClass(this._types.join(' '));
+            if (this.VARIANT_TYPES.indexOf(classValue) > -1 || classValue === this.DEFAULT_VARIANT_KEY) {
+                // Remove old type
+                this.$element.removeClass(this.VARIANT_TYPES.join(' '));
 
-            // Add new type
-            if (ty !== 'default') {
-                this.$element.addClass(ty);
+                // Add new type
+                if (classValue !== this.DEFAULT_VARIANT_KEY) {
+                    this.$element.addClass(classValue);
+                }
             }
         },
 
-        /**
-         * activates the given tab
-         * @param  {jQuery} tab
-         * @param  {Boolean} noFocus
-         */
+         // activates the given tab
+         /** @ignore */
         _activateTab: function (tab, noFocus) {
             var href = tab.attr('href'),
                 activeClass = 'active',
@@ -239,7 +261,7 @@
             panel = this.panels.filter('#' + tab.attr('aria-controls'));
 
             // supposed to be remote url
-            if (href.charAt(0) !== '#') {
+            if (href && href.charAt(0) !== '#') {
                 panel.loadWithSpinner(href);
             }
 
@@ -264,10 +286,8 @@
             }
         }, // _activateTab
 
-        /**
-         * add the switching functionality
-         * @private
-         */
+        // add the switching functionality
+        /** @ignore */
         _initTabswitch: function () {
             var self = this,
                 sel = '> nav > a[data-toggle="tab"]';
@@ -282,11 +302,9 @@
             }).finger('click', sel, false);
         }, // _initTabswitch
 
-        /**
-         * adds some accessibility attributes and features
-         * http://www.w3.org/WAI/PF/aria-practices/#tabpanel
-         * @private
-         */
+        // adds some accessibility attributes and features
+        // http://www.w3.org/WAI/PF/aria-practices/#tabpanel
+        /** @ignore */
         _makeAccessible: function () {
             // init the key handling for tabs
             var self = this,
