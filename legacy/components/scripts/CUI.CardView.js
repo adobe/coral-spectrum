@@ -856,8 +856,9 @@
             var selector = this.columnElement.data("sort-selector");
             var attribute = this.columnElement.data("sort-attribute");
             var sortType = this.columnElement.data("sort-type");
+            var ignoreCase = this.columnElement.data("ignorecase");
             if (!selector && !attribute) return null;
-            return new CUI.CardView.DefaultComparator(selector, attribute, sortType);
+            return new CUI.CardView.DefaultComparator(selector, attribute, sortType, ignoreCase);
 
         },
         _adjustMarkup: function() {
@@ -2799,9 +2800,10 @@ $cardView.find("article").removeClass("selected");
         * @param {String}  attribute  The attribute of the item to be compared. If not given, the inner text of the item will be used for comparison.
         * @param {String}  type  "numeric" for numeric comparison, or "string" for alphabetical comparison
         */
-        construct: function (selector, attribute, type) {
+        construct: function (selector, attribute, type, ignoreCase) {
             this.selector = selector;
             this.attribute = attribute;
+            this.ignoreCase = ignoreCase;
             this.isNumeric = (type == "numeric");
             this.reverseMultiplier = 1;
         },
@@ -2824,8 +2826,8 @@ $cardView.find("article").removeClass("selected");
             var t1 = "";
             var t2 = "";
             if (!this.attribute) {
-                t1 = $e1.text();
-                t2 = $e2.text();    
+                t1 = (this.ignoreCase) ? $e1.text().toLowerCase() : $e1.text();
+                t2 = (this.ignoreCase) ? $e2.text().toLowerCase() : $e2.text();    
             } else if(this.attribute.substr(0, 5) == "data-") {
                 t1 = $e1.data(this.attribute.substr(5));
                 t2 = $e2.data(this.attribute.substr(5));
