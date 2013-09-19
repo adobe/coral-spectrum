@@ -318,7 +318,7 @@
 
             function getElWidthForText($el, text) {
                 $el.text(text);
-                return $el.width();
+                return $el.outerWidth();
             }
 
             $.each(options, function(i, opt) {
@@ -328,9 +328,9 @@
 
             $tempHtml.remove();
 
-            widest += parseInt(self._buttonText.css("padding-left"), 10) + parseInt(self._buttonText.css("padding-right"), 10);
-            widest += parseInt(self._buttonText.css("margin-left"), 10) + parseInt(self._buttonText.css("margin-right"), 10);
-            widest += parseInt(self._buttonText.css("borderLeftWidth"), 10) + parseInt(self._buttonText.css("borderRightWidth"), 10);
+            widest += parseInt(self._button.css("padding-left"), 10) + parseInt(self._button.css("padding-right"), 10);
+            widest += parseInt(self._button.css("margin-left"), 10) + parseInt(self._button.css("margin-right"), 10);
+            widest += parseInt(self._button.css("borderLeftWidth"), 10) + parseInt(self._button.css("borderRightWidth"), 10);
 
             return widest;
         },

@@ -20,7 +20,7 @@
     > button {
         width: 100%;
         height: @input-height;
-        padding: 7*@px 10*@px;
+        padding: 0;
         margin: 8*@px 0;
         line-height: 1;
         position: relative;
@@ -31,7 +31,7 @@
 
         span {
             display: block;
-            padding-right: 1rem;
+            padding: 7*@px 10*@px+1rem 7*@px 10*@px;
             .text-overflow();
 
             &:empty {
@@ -53,12 +53,14 @@
         &[class*=" icon-"] {
 
             span {
-                padding-left: 10*@px;
+                padding-left: (2*10*@px)+1rem;
             }
 
             &:before {
                 color: inherit;
-                float: left;
+                position: absolute;
+                top: 7*@px;
+                left: 10*@px;
             }
         }
 
