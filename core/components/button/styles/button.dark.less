@@ -16,42 +16,40 @@
 @button-dark-disabled-border-color: rgb(65, 65, 65);
 @button-dark-disabled-background-color: rgb(80, 80, 80);
 
-
 [data-theme~=dark] {
-    button,
-    .button {
+  button,
+  .button {
+    border-color: fade(@button-dark-border-color, 65%);
+    color: @button-dark-text-color;
 
-        border-color: fade(@button-dark-border-color, 65%);
-        color: @button-dark-text-color;
+    .gradient(@button-dark-gradient-start-color, @button-dark-gradient-end-color);
 
-        .gradient(@button-dark-gradient-start-color, @button-dark-gradient-end-color);
-
-        &:hover {
-            .gradient(@button-dark-gradient-start-color, @button-dark-gradient-start-color);
-        }
-
-        &:active {
-            border-color: fade(@button-dark-border-color, 75%);
-            .gradient(@button-dark-gradient-end-color, @button-dark-gradient-end-color);
-        }
-
-        &:before {
-          color: @button-dark-icon-color;
-        };
+    &:hover {
+      .gradient(@button-dark-gradient-start-color, @button-dark-gradient-start-color);
     }
 
-    // Button: Disabled
-    button.disabled,
-    button[disabled],
-    .button.disabled,
-    button.disabled:active,
-    button[disabled]:active,
-    .button.disabled:active,
-    button.disabled:hover,
-    button[disabled]:hover,
-    .button.disabled:hover {
-        border-color: @button-dark-disabled-border-color;
-        color: @button-dark-disabled-text-color;
-        background: @button-dark-disabled-background-color;
+    &:active {
+      border-color: fade(@button-dark-border-color, 75%);
+      .gradient(@button-dark-gradient-end-color, @button-dark-gradient-end-color);
     }
+
+    &:before {
+      color: @button-dark-icon-color;
+    }
+  }
+
+  // Button: Disabled
+  button.disabled,
+  button[disabled],
+  .button.disabled,
+  button.disabled:active,
+  button[disabled]:active,
+  .button.disabled:active,
+  button.disabled:hover,
+  button[disabled]:hover,
+  .button.disabled:hover {
+    border-color: @button-dark-disabled-border-color;
+    color: @button-dark-disabled-text-color;
+    background: @button-dark-disabled-background-color;
+  }
 }
