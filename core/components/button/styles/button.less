@@ -9,25 +9,19 @@
 @button-text-color: rgb(255, 255, 255);
 
 // Button: Blue
-@button-primary-border-color: rgba(0, 30, 70, 0.70);
+@button-primary-border-color: rgb(0, 30, 70);
 @button-primary-gradient-start-color: rgb(50, 135, 210);
 @button-primary-gradient-end-color: rgb(50, 120, 190);
 
-@button-primary-down-border-color: rgba(0, 30, 70, 0.80);
-
 // Button: Gray
-@button-default-border-color: rgba(30, 30, 30, 0.65);
+@button-default-border-color: rgb(30, 30, 30);
 @button-default-gradient-start-color: rgb(180, 180, 180);
 @button-default-gradient-end-color: rgb(150, 150, 150);
 
-@button-default-down-border-color: rgba(30, 30, 30, 0.75);
-
 // Button: Red
-@button-warning-border-color: rgba(70, 15, 15, 0.70);
+@button-warning-border-color: rgb(70, 15, 15);
 @button-warning-gradient-start-color: rgb(250, 90, 80);
 @button-warning-gradient-end-color: rgb(225, 65, 50);
-
-@button-warning-down-border-color: rgba(70, 15, 15, 0.80);
 
 // Button: Disabled
 @button-disabled-text-color: rgb(180, 180, 180);
@@ -45,12 +39,13 @@ button,
 
   min-width: 110*@px;
 
+  // TODO: check this value with XD.
   margin: 2*@px 0;  // resets default margin on button tag
-                    // gives a top/bottom margin so they stack right
+
   padding: 10*@px 15*@px;
   border: @px solid;
 
-  border-color: @button-default-border-color;
+  border-color: fade(@button-default-border-color, 65%);
 
   .bold-text;
   font-size: @button-text-size;
@@ -70,7 +65,7 @@ button,
   }
 
   &:active {
-    border-color: @button-default-down-border-color;
+    border-color: fade(@button-default-border-color, 75%);
     .gradient(@button-default-gradient-end-color, @button-default-gradient-end-color);
 
     .box-shadow(inset 0 0 4*@px rgba(0, 0, 0, 0.15));
@@ -82,6 +77,7 @@ button,
   }
   
   // A square button for buttons attached to form fields with icons in them
+  &.button-square,
   &.square {
     .button-square;
   }
@@ -93,24 +89,39 @@ button,
     min-width: 135*@px;
     padding: 14*@px 20*@px;
   }
+
+  &.button-block,
+  &.block {
+    display: block;
+    // spans to the width of the container
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    // the container should set the desired margin
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  // adds seperation between two consecutive buttons
+  & + & {
+    margin-left: 15*@px;
+  }
 }
 
 
 // Button: Primary (blue)
 button.primary:not(.disabled):not([disabled]),
 .button.primary:not(.disabled):not([disabled]) {
-  border-color: @button-primary-border-color;
+  border-color: fade(@button-primary-border-color, 70%);
 
   .gradient(@button-primary-gradient-start-color, @button-primary-gradient-end-color);
 
-    // &.primary {
-    &:hover {
-        .gradient(@button-primary-gradient-start-color, @button-primary-gradient-start-color);
-    }
-    // }
+  &:hover {
+    .gradient(@button-primary-gradient-start-color, @button-primary-gradient-start-color);
+  }
 
   &:active {
-    border-color: @button-primary-down-border-color;
+    border-color: fade(@button-primary-border-color, 80%);
     .gradient(@button-primary-gradient-end-color, @button-primary-gradient-end-color);
   }
 }
@@ -119,18 +130,17 @@ button.primary:not(.disabled):not([disabled]),
 // Button: Warning (red)
 button.warning:not(.disabled):not([disabled]),
 .button.warning:not(.disabled):not([disabled]) {
-  border-color: @button-warning-border-color;
+  border-color: fade(@button-warning-border-color, 70%);
 
   .gradient(@button-warning-gradient-start-color, @button-warning-gradient-end-color);
 
-    // &.warning {
-    &:hover {
-        .gradient(@button-warning-gradient-start-color, @button-warning-gradient-start-color);
-    }
-    // }
+
+  &:hover {
+    .gradient(@button-warning-gradient-start-color, @button-warning-gradient-start-color);
+  }
 
   &:active {
-    border-color: @button-warning-down-border-color;
+    border-color: fade(@button-warning-border-color, 80%);
     .gradient(@button-warning-gradient-end-color, @button-warning-gradient-end-color);
   }
 }

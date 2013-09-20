@@ -1,16 +1,11 @@
 // TODO clean up variables and move to related components
 
-// Colors
-@primary-color: rgb(255, 255, 175);
-// @default-color:
-// @warning-color:
-
 // Body
 @body-background-color: rgb(238, 238, 238);
 
 // Focus
 @focus-glow-color: rgb(50, 135, 210);
-@focus-border-color: rgb(106, 139, 196);
+@focus-border-color: @focus-glow-color;
 @focus-glow-radius: 3*@px;
 @partial-glow-radius: @focus-glow-radius/3;
 @partial-glow-color: fadeout(@focus-glow-color, 75%);
@@ -32,9 +27,6 @@
 
 // Links
 @link-color: rgb(100, 135, 195);
-
-// Components
-@component-height: 38*@px;
 
 // Header
 @header-height: 46*@px;
