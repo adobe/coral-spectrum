@@ -9,7 +9,13 @@
 
 [data-theme~=dark] {
   body {
-    background-color: @body-dark-background-color;
-    color: @font-base-dark-color;
+		background-color: @body-dark-background-color;
+		color: @font-base-dark-color;
   }
+}
+
+// allows different containers to style the background and color.
+body[data-theme~=dark], section[data-theme~=dark], div[data-theme~=dark] {
+  background-color: @body-dark-background-color;
+  color: @font-base-dark-color;
 }
