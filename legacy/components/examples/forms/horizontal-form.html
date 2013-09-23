@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Forms</title>
+
+  <link rel="stylesheet" href="../../css/cui.css">
+
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/libs/moment.js"></script>
+  <script src="../../js/libs/jquery-message.js"></script>
+  <script src="../../js/libs/jquery-validator.js"></script>
+  <script src="../../js/libs/toe.js"></script>
+  <script src="../../js/CUI.js"></script>
+
+    <style>
+    h1, h2 {
+      margin-bottom: 1rem; /* no margin for heading, seriously!? */
+    }
+  </style>
+</head>
+<body>
+  <div style="padding: 2rem;">
+    <h1>Horizontal forms</h1>
+
+    <form>
+      <h2>Checks if the different components line up correctly.</h2>
+
+      <!-- Button -->
+      <button>Button</button>
+
+      <!-- Text input -->
+      <label>Text</label>
+      <input type="text">
+
+      <!-- Single term filter -->
+      <span class="filters" data-init="filters">
+        <input type="text">
+        <select>
+          <option selected>Apple</option>
+          <option>Pear</option>
+          <option>Banana</option>
+        </select>
+      </span>
+
+      <!-- Dropdown -->
+      <div class="dropdown" data-init="dropdown">
+        <button type="button">Single Select</button>
+        <select>
+          <option>Single One</option>
+          <option selected>Single Two</option>
+          <option>Single Three</option>
+        </select>
+      </div>
+
+      <!-- Search field -->
+      <span class="search"><input type="text"><button type="button">Search</button></span>
+      
+      <!-- Multiselect dropdown -->
+      <div class="dropdown" data-init="dropdown">
+        <button type="button">Multi Select</button>
+        <select multiple>
+          <option>Multi One</option>
+          <option selected>Multi Two</option>
+          <option>Multi Three</option>
+        </select>
+      </div>
+
+      <!-- Editable dropdown -->
+      <div class="dropdown dropdown-editable" data-editable="true" data-init="dropdown">
+        <input type="text">
+        <button type="button">Editable</button>
+        <select>
+          <option>Edit One</option>
+          <option>Edit Two</option>
+          <option>Edit Three</option>
+        </select>
+      </div>
+
+      <!-- Date Picker -->
+      <span class="datepicker" data-init="datepicker"><input type="datetime"><button class="icon-calendar">Datetime picker</button></span>
+
+      <!-- Slider -->
+      <span class="slider" data-init="slider"><input type="range" value="10" min="10" max="20" step="2"></span>
+
+      <label>Path Browser</label>
+      <span class="pathbrowser" data-init="pathbrowser"><input type="text"></span>
+
+      <label>Checkbox</label>
+      <label><input type="checkbox" checked><span>Checkbox</span></label>
+
+      <label>Radio</label>
+      <label><input type="radio" checked><span>Radio</span></label>
+
+      <label>Switch</label>
+      <label class="switch"><input type="checkbox"><span>Off</span><span>On</span></label>
+
+      <label>Selector</label>
+      <span class="selector">
+        <label><input type="radio"><span>Yes</span></label>
+        <label><input type="radio"><span>No</span></label>
+      </span>
+    </form>
+  </div>
+</body>
+</html>

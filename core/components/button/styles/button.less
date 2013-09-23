@@ -7,6 +7,7 @@
 @button-text-size: 15*@px; // TBD: make rem so they stay the same size, or let them scale with fonts?
 @button-text-large-size: 17*@px;
 @button-text-color: rgb(255, 255, 255);
+@button-line-height: 16*@px;
 
 // Button: Blue
 @button-primary-border-color: rgb(0, 30, 70);
@@ -32,10 +33,10 @@
 // Button: Default (gray)
 button,
 .button {
-  display: inline-block;
+  // display: inline-block;
   .border-box; // makes 110px min-width apply consistently between anchor/button
 
-  vertical-align: top; // makes buttons line up when placed next to each other
+  vertical-align: middle; // used to align them correctly in forms.
 
   min-width: 110*@px;
 
@@ -44,11 +45,11 @@ button,
 
   padding: 10*@px 15*@px;
   border: @px solid;
-
   border-color: fade(@button-default-border-color, 65%);
 
   .bold-text;
   font-size: @button-text-size;
+  line-height: @button-line-height;
   color: @button-text-color;
   text-decoration: none; // resets underline on anchor
   text-align: center;
