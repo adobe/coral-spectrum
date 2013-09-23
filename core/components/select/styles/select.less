@@ -1,3 +1,8 @@
+/**
+  Element: select
+  CUI button styles
+*/
+
 @select-border-color: rgba(0, 0, 0, 0.25);
 @select-background-gradient-start: rgb(255, 255, 255);
 @select-background-gradient-end: rgb(240, 240, 240);
@@ -8,25 +13,26 @@
 @select-disabled-border-color: rgb(210, 210, 210);
 @select-disabled-text-color: rgb(180, 180, 180);
 
-
 .select {
+    .border-box;
+    vertical-align: middle; // used to align them correctly in forms.
+
+    min-width: 110*@px;
+    max-width: 350*@px;
+
+    margin: 2*@px 0;  // resets default margin on button tag
+
     display: inline-block;
     width: 13rem; /* Width must be specified */
-    vertical-align: top;
-    color: @font-base-color;
-
-    @input-height: 32*@px;
     
     > button {
+
         width: 100%;
-        height: @input-height;
-        padding: 0;
-        margin: 8*@px 0;
-        line-height: 1;
+        margin: 0;
+        padding: 10*@px;
         position: relative;
     
         color: @font-base-color;
-        .box-sizing(border-box);
         .gradient(@select-background-gradient-start, @select-background-gradient-end);
 
         span {
