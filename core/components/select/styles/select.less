@@ -14,111 +14,109 @@
 @select-disabled-text-color: rgb(180, 180, 180);
 
 .select {
-    .border-box;
-    vertical-align: middle; // used to align them correctly in forms.
+  .border-box;
+  vertical-align: middle; // used to align them correctly in forms.
 
-    min-width: 110*@px;
-    max-width: 350*@px;
+  min-width: 110*@px;
+  max-width: 350*@px;
 
-    margin: 2*@px 0;  // resets default margin on button tag
+  margin: 2*@px 0;  // resets default margin on button tag
 
-    display: inline-block;
-    width: 13rem; /* Width must be specified */
-    
-    > button {
+  display: inline-block;
+  width: 13rem; /* Width must be specified */
+  
+  > button {
 
-        width: 100%;
-        margin: 0;
-        padding: 10*@px;
-        position: relative;
-    
-        color: @font-base-color;
-        .gradient(@select-background-gradient-start, @select-background-gradient-end);
+    width: 100%;
+    margin: 0;
+    padding: 10*@px;
+    position: relative;
 
-        span {
-            display: block;
-            padding: 7*@px 10*@px+1rem 7*@px 10*@px;
-            .text-overflow();
+    color: @font-base-color;
+    .gradient(@select-background-gradient-start, @select-background-gradient-end);
 
-            &:empty {
-                height: 1rem;
-            }
-        }
+    span {
+      display: block;
+      padding: 7*@px 10*@px+1rem 7*@px 10*@px;
+      .text-overflow();
 
-        &,
-        &:hover,
-        &:active {
-            border: 1*@px solid @select-border-color;
-        }
-
-        text-shadow: none;
-        text-align: left;
-        font-weight: normal;
-
-        &[class^="icon-"], 
-        &[class*=" icon-"] {
-
-            span {
-                padding-left: (2*10*@px)+1rem;
-            }
-
-            &:before {
-                color: inherit;
-                position: absolute;
-                top: 7*@px;
-                left: 10*@px;
-            }
-        }
-
-        &:after {
-            content: "\25BE";
-            overflow: visible;
-            height: auto;
-            white-space: inherit;
-            color: inherit;
-            text-align: left;
-            position: absolute;
-            right: 11*@px;
-            top: 7*@px;
-            text-shadow: none;
-            font-size: 1.2em;
-            color: inherit;
-            pointer-events: none; 
-        }
-
-        &:hover {
-            background: @select-hover-background-color;
-        }
-
-        &:active,
-        &.active {
-            background: @select-active-background-color;
-            .box-shadow(inset 0 0 4*@px @select-active-glow-color);
-        }
-
-        &[disabled] {
-            color: @select-disabled-text-color;
-            background: @select-disabled-background-color;
-            border-color: @select-disabled-border-color;
-            pointer-events: none;
-        }
-
-        &.error {
-            color: @textfield-error-font-color;
-            border-color: @textfield-error-border-color;    
-
-            &:focus {
-                color: @textfield-error-font-color;
-                .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);    
-            }
-        }
-        
+      &:empty {
+        height: 1rem;
+      }
     }
 
-    > select {
-        display: none;
-        position: relative;
-        margin-top: -100%;
-        float: left; 
+    &,
+    &:hover,
+    &:active {
+      border: 1*@px solid @select-border-color;
     }
+
+    text-shadow: none;
+    text-align: left;
+    font-weight: normal;
+
+    &[class^="icon-"], 
+    &[class*=" icon-"] {
+      span {
+        padding-left: (2*10*@px)+1rem;
+      }
+
+      &:before {
+        color: inherit;
+        position: absolute;
+        top: 7*@px;
+        left: 10*@px;
+      }
+    }
+
+    &:after {
+      content: "\25BE";
+      overflow: visible;
+      height: auto;
+      white-space: inherit;
+      color: inherit;
+      text-align: left;
+      position: absolute;
+      right: 11*@px;
+      top: 7*@px;
+      text-shadow: none;
+      font-size: 1.2em;
+      color: inherit;
+      pointer-events: none; 
+    }
+
+    &:hover {
+      background: @select-hover-background-color;
+    }
+
+    &:active,
+    &.active {
+      background: @select-active-background-color;
+      .box-shadow(inset 0 0 4*@px @select-active-glow-color);
+    }
+
+    &[disabled] {
+      color: @select-disabled-text-color;
+      background: @select-disabled-background-color;
+      border-color: @select-disabled-border-color;
+      pointer-events: none;
+    }
+
+    &.error {
+      color: @textfield-error-font-color;
+      border-color: @textfield-error-border-color;    
+
+      &:focus {
+        color: @textfield-error-font-color;
+        .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+      }
+    }
+  }
+
+  > select {
+    display: none;
+    position: relative;
+    margin-top: -100%;
+    float: left;
+  }
 }
