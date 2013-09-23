@@ -51,6 +51,7 @@
       @param {boolean} [options.disabled=false]      Is this widget disabled?
       @param {boolean} [options.hasError=false]      Does this widget contain an error?
       @param {boolean} [options.noWidth=false]      Don't set dropdown list width?
+      @param {boolean} [options.expandwidth=false] Expands (non-editable) dropdown button to a width that accommodates the largest option
       @param {Function} [options.autocompleteCallback=use options]      Callback for autocompletion: callback(handler, searchFor) with handler is a result callback function with handler(results, searchFor). See example page.
       @param {String}   [options.position="below"]      Where to position the dropdown list. "above" or "below"
       @param {boolean}  [options.autoPosition=true]      Should the dropdown auto position itself if there's not enough space for the default position in the window?
@@ -87,6 +88,7 @@
         editable: false,
         hasError: false,
         noWidth: false,
+        expandwidth: false,
         position: "below",
         autoPosition: true
     },
@@ -115,6 +117,8 @@
     },
 
     _initForDesktop: function() {
+        var buttonTextWidth;
+
         this.dropdownList = new CUI.DropdownList({
             element: this.buttonElement,
             positioningElement: this.positioningElement,
@@ -138,6 +142,14 @@
                 noWidth: this.options.noWidth,
                 cssClass: "autocomplete-results"
             });
+        } else {
+            if(this.options.expandwidth) {
+                if(this.options.options.length !== 0) {
+                    buttonTextWidth = this._getTextWidthFromOptions(this.options.options);
+                }
+
+                this.buttonElement.width(buttonTextWidth);
+            }
         }
         
         this.buttonElement.on("dropdown-list:select", this._processSelect.bind(this));
@@ -206,6 +218,38 @@
         } else if (selectElement.fireEvent) {
             selectElement.fireEvent("onmousedown");
         }
+    },
+
+    /** @ignore */
+    _getTextWidthFromOptions: function(options) {
+        var tempHtmlCssProps =  {
+            'position': 'absolute',
+            'visibility': 'hidden',
+            'width': 'auto',
+            'height': 'auto'
+        },
+        $tempHtml = $(this.buttonText).clone().css(tempHtmlCssProps).empty().appendTo($(this.buttonElement)),
+        widest = 0, optWidth;
+
+        function getWidth($html, string) {
+            $html.text(string);
+            return $html.width();
+        }
+
+        if(options.length !== 0) {
+            $.each(options, function() {
+                optWidth = getWidth($tempHtml, this);
+                widest = (optWidth > widest) ? optWidth : widest;
+            });
+        }
+
+        $tempHtml.remove();
+
+        widest += parseInt(this.buttonText.css("padding-left"), 10) + parseInt(this.buttonText.css("padding-right"), 10);
+        widest += parseInt(this.buttonText.css("margin-left"), 10) + parseInt(this.buttonText.css("margin-right"), 10);
+        widest += parseInt(this.buttonText.css("borderLeftWidth"), 10) + parseInt(this.buttonText.css("borderRightWidth"), 10);
+
+        return widest;
     },
 
     /** @ignore */
@@ -378,6 +422,7 @@
         if (this.$element.attr("data-error")) this.options.hasError = true;
         if (this.$element.hasClass("error")) this.options.hasError = true;
         if (this.$element.attr("data-nowidth")) this.options.noWidth = true;
+        if (this.$element.attr("data-expandwidth")) this.options.expandwidth = true;
     },
     
     /** @ignore */
