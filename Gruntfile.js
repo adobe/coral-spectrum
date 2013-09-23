@@ -455,7 +455,7 @@ module.exports = function (grunt) {
             // watch: guide content
             guide: {
                 files: [
-                    dirs.guide + '/js/guide.js',
+                    dirs.guide + '/scripts/*.js',
                     dirs.guide + '/styles/*.less',
                     dirs.guide + '/templates/*.html'
                 ],
@@ -710,7 +710,8 @@ module.exports = function (grunt) {
         'concat:retro',
         'mocha',
         'uglify:retro',
-        'copy:js_source'
+        'copy:js_source',
+        'guide'
     ]);
 
     grunt.task.registerTask('quickless', [
