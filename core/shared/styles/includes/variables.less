@@ -1,32 +1,23 @@
 // TODO clean up variables and move to related components
-
-// Body
-@body-background-color: rgb(238, 238, 238);
-
+    
 // Focus
-@focus-glow-color: rgb(55, 126, 175);
-@focus-border-color: rgb(106, 139, 196);
-@focus-glow-radius: 6*@px;
+@focus-glow-color: rgb(50, 135, 210);
+@focus-border-color: @focus-glow-color;
+@focus-glow-radius: 3*@px;
 @partial-glow-radius: @focus-glow-radius/3;
 @partial-glow-color: fadeout(@focus-glow-color, 75%);
-
 
 // Fonts
 @font-base-family: adobe-clean, Helvetica, Arial, sans-serif;
 @font-light-family: adobe-clean, Helvetica, Arial, sans-serif;
 @font-icon-family: AdobeIcon;
-@font-base-weight: normal;
 @font-base-color: rgb(75, 75, 75);
-@font-base-dark-color: rgb(220, 220, 220);
+
 @font-captions-help-color: rgb(135, 135, 135);
 @font-secondary-color: rgb(150, 150, 150);
 
-@headings-font-family: @font-base-family;
-@headings-font-weight: @font-base-weight;
-@headings-base-color: @font-base-color;
-
-// Links
-@link-color: rgb(100, 135, 195);
+// TODO: remove
+@font-base-dark-color: rgb(220, 220, 220);
 
 // Header
 @header-height: 46*@px;
@@ -431,8 +422,8 @@
 @draggable-list-background-disabled-color: rgb(209, 209, 209);
 
 // DropZone
-@dropzone-background-color: @body-background-color;
-@dropzone-background-hover-color: darken(@body-background-color, 5%);
+@dropzone-background-color: rgb(238, 238, 238);
+@dropzone-background-hover-color: darken(@dropzone-background-color, 5%);
 @dropzone-border-color: @draggable-list-border-color;
 
 // Accordion

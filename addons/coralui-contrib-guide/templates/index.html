@@ -53,6 +53,7 @@
                         <a href="#WhatIsCUI">What is CoralUI?</a>
                         <a href="#ResolutionIndependence">Resolution Independence</a>
                         <a href="#BrowserSupport">Browser Support</a>
+                        <a href="#FrameworkSupport">Framework Support</a>
                         <a href="#WidgetPhilosophy">Widget Philosophy</a>
                     </nav>
                 </section> <!-- /general -->
@@ -198,6 +199,22 @@
                     <li>Widgets will be <a href="tests/coverage.html">fully tested</a> with 
                         <a href="tests/index.html">automated unit tests</a>.</li>
                 </ol>
+
+                <h2 class="line" id="FrameworkSupport">Framework Support</h2>
+                <p>Coral UI can be used together with 3rd party frameworks but special care needs to be taken if dynamic
+                    insertion of DOM elements takes place. <a href="http://www.angularjs.com">AngularJS</a> will do this for
+                    example, on loading a view template.</p>
+                <p>Most Coral UI components are defined using CSS only, but some rely on JavaScript. These components
+                    (Tabs, Rail, CardView, etc.) listen for the page to complete loading after which they setup. When
+                    an element gets inserted into the DOM dynamically after the static HTML has already been loaded,
+                    then the setup needs to be done manually. This is done by triggering a
+                    <code>cui-contentloaded</code> event on the least containing node that got inserted dynamically:
+                </p>
+                <p>
+                    <code class="prettyprint">
+                        $("#idOfLeastContainingElement").trigger("cui-contentloaded");
+                    </code>
+                </p>
             </section>
             <!-- /General -->
 
@@ -3250,7 +3267,11 @@
                 <!-- /ProgressBar -->
 
                 <section id="Spinner">
-                    <h2 class="line">Spinner</h2>
+                    
+
+                    <h2 class="line">Spinner <span class="deprecated">deprecated</span></h2>
+                    <p>This component is <span class="deprecated">deprecated</span> in favor of the 
+                        <a href="#Wait">Wait</a> indicator.</p>
                     <p>Use a spinner to indicate a process is in progress that will occur for an indefinite 
                         amount of time by applying the CSS class <code class="atv">spinner</code> to an element.</p>
                     <h4>Sizing</h4>
