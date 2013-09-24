@@ -61,6 +61,7 @@
          * @param {Boolean} [nativewidget=false] shows a native &lt;select&gt; instead of a SelectList widget
          * @param {Boolean} [nativewidgetonmobile=true] forces a native &lt;select&gt; on a mobile device if possible
          * @param {Boolean} [multiple=false] multiple selection, will automatically be detected form a given &lt;select&gt; source
+         * @param {Boolean} [options.expandwidth=false] auto expand button width on render to width of widest selectable option (only with static lists)
          */
         construct: function () {
             var self = this;
@@ -81,12 +82,14 @@
             nativewidget: false,
             nativewidgetonmobile: true,
             multiple: false,
+            expandwidth: false,
             tagConfig: null,
             selectlistConfig: null
         },
 
         applyOptions: function () {
-            var forcedNativeWidget = this.options.nativewidgetonmobile && CUI.util.isTouch && this.options.type === 'static';
+            var forcedNativeWidget = this.options.nativewidgetonmobile && CUI.util.isTouch && this.options.type === 'static',
+                maxButtonWidth;
 
             // there is a select given so read the "native" config options
             if (this._select.length > 0) {
@@ -96,6 +99,7 @@
                 }
             }
             
+            this._renderButtonText();
 
             if (this.options.nativewidget || forcedNativeWidget) {
                 this._setNativeWidget(forcedNativeWidget);
@@ -106,9 +110,19 @@
             this._setTagList();
 
             // if we have a static <select> based list
-            // load the values from markup
             if (this.options.type === 'static') {
+                // load the values from markup
                 this._handleNativeSelect();
+
+                // expand button width
+                if (this.options.expandwidth) {
+                    maxButtonWidth = this._calcMaxButtonWidth(this._select[0].options);
+
+                    // no reduction
+                    if(maxButtonWidth > this._buttonText.width()) {
+                        this.$element.width(maxButtonWidth);
+                    }
+                }
             }
         },
 
@@ -168,7 +182,7 @@
                     }
                 });
             } else {
-                self._button.text(self._select[0][self._select[0].selectedIndex].text);
+                self._buttonText.text(self._select[0][self._select[0].selectedIndex].text);
             }
         },
 
@@ -276,6 +290,52 @@
         },
 
         /**
+         * create a span inside button for managing text overflow
+         * @private
+         */
+        _renderButtonText: function() {
+            if(this._button.children('span').length === 0) {
+                this._buttonText = this._button.wrapInner("<span />").children('span');
+            }
+        },
+
+        /**
+         * calculates the max width of the button text from options
+         * @private
+         * @param  {Object} [options] the select box options
+         * @return {Number} width of widest button text
+         */
+        _calcMaxButtonWidth: function(options) {
+            var self = this,
+                tempHtmlCssProps =  {
+                    'position': 'absolute',
+                    'visibility': 'hidden',
+                    'width': 'auto',
+                    'height': 'auto'
+                },
+                $tempHtml = $(self._buttonText).clone().css(tempHtmlCssProps).empty().appendTo($(self._button)),
+                widest = 0, optionWidth;
+
+            function getElWidthForText($el, text) {
+                $el.text(text);
+                return $el.outerWidth();
+            }
+
+            $.each(options, function(i, opt) {
+                optionWidth = getElWidthForText($tempHtml, opt.text);
+                widest = (optionWidth > widest) ? optionWidth : widest;
+            });
+
+            $tempHtml.remove();
+
+            widest += parseInt(self._button.css("padding-left"), 10) + parseInt(self._button.css("padding-right"), 10);
+            widest += parseInt(self._button.css("margin-left"), 10) + parseInt(self._button.css("margin-right"), 10);
+            widest += parseInt(self._button.css("borderLeftWidth"), 10) + parseInt(self._button.css("borderRightWidth"), 10);
+
+            return widest;
+        },
+
+        /**
          * handles a select of a SelectList widget
          * @private
          */
@@ -292,7 +352,7 @@
                 });
             } else {
                 // set the button label
-                this._button.text(event.displayedValue);
+                this._buttonText.text(event.displayedValue);
                 // in case it is dynamic a value input should be existing
                 this._valueInput.val(event.selectedValue);
             }

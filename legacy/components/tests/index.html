@@ -23,7 +23,10 @@
   
   <!-- Mocha -->
   <script src="libs/mocha/mocha.js"></script>
-  <script>mocha.setup('bdd')</script>
+  <script>
+    mocha.setup('bdd');
+    mocha.setup({globals: ['Typekit','internalWebfont']});
+  </script>
   <script>
     // configuration for phantomJS
     if (window.PHANTOMJS) {

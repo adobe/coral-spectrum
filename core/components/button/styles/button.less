@@ -3,88 +3,73 @@
   CUI button styles
 */
 
-// Buttons
-@button-text-size: 14*@px; // TBD: make rem so they stay the same size, or let them scale with fonts?
+// Button dimesions
+@button-text-size: 15*@px; // TBD: make rem so they stay the same size, or let them scale with fonts?
+@button-text-large-size: 17*@px;
 @button-text-color: rgb(255, 255, 255);
-
+@button-line-height: 16*@px;
 
 // Button: Blue
-@button-blue-border-color: rgba(0, 35, 65, 0.70);
-@button-blue-gradient-start-color: rgb(73, 142, 209);
-@button-blue-gradient-end-color: rgb(55, 121, 203);
-
-@button-blue-hover-background-color: rgb(65, 145, 210);
-
-@button-blue-down-border-color: rgba(0, 35, 65, 0.80);
-@button-blue-down-background-color: rgb(40, 125, 205);
+@button-primary-border-color: rgb(0, 30, 70);
+@button-primary-gradient-start-color: rgb(50, 135, 210);
+@button-primary-gradient-end-color: rgb(50, 120, 190);
 
 // Button: Gray
-@button-gray-border-color: rgba(30, 30, 30, 0.65);
-@button-gray-gradient-start-color: rgb(180, 180, 180);
-@button-gray-gradient-end-color: rgb(151, 151, 151);
-
-@button-gray-hover-background-color: rgb(165, 165, 165);
-
-@button-gray-down-border-color: rgba(30, 30, 30, 0.75);
-@button-gray-down-background-color: rgb(150, 150, 150);
+@button-default-border-color: rgb(30, 30, 30);
+@button-default-gradient-start-color: rgb(180, 180, 180);
+@button-default-gradient-end-color: rgb(150, 150, 150);
 
 // Button: Red
-@button-red-border-color: rgba(70, 15, 15, 0.70);
-@button-red-gradient-start-color: rgb(255, 51, 51);
-@button-red-gradient-end-color: rgb(206, 2, 2);
-
-@button-red-hover-background-color: rgb(255, 75, 70);
-
-@button-red-down-border-color: rgba(70, 15, 15, 0.80);
-@button-red-down-background-color: rgb(215, 40, 40);
+@button-warning-border-color: rgb(70, 15, 15);
+@button-warning-gradient-start-color: rgb(250, 90, 80);
+@button-warning-gradient-end-color: rgb(225, 65, 50);
 
 // Button: Disabled
 @button-disabled-text-color: rgb(180, 180, 180);
-@button-disabled-border-color: rgb(210, 210, 210);  // TODO: replace with RGBA values from UX
-@button-disabled-background-color: rgb(230, 230, 230);  // TODO: replace with RGBA values from UX
+@button-disabled-border-color: rgb(210, 210, 210);
+@button-disabled-background-color: rgb(230, 230, 230);
 
 
 // Button: Default (gray)
 button,
 .button {
-  display: inline-block;
-  .border-box; // Makes 135px min-width apply consistently between anchor/button
+  // display: inline-block;
+  .border-box; // makes 110px min-width apply consistently between anchor/button
 
-  vertical-align: top; // Make buttons line up when placed next to each other
+  vertical-align: middle; // used to align them correctly in forms.
 
-  min-width: 135*@px;
+  min-width: 110*@px;
 
-  margin: 0.125rem 0;  // Reset default margin on button tag
-                      // Give a top/bottom margin so they stack right
-  padding: 0.4375rem 1rem;
+  // TODO: check this value with XD.
+  margin: 2*@px 0;  // resets default margin on button tag
+
+  padding: 10*@px 15*@px;
   border: @px solid;
-
-  border-color: @button-gray-border-color;
+  border-color: fade(@button-default-border-color, 65%);
 
   .bold-text;
   font-size: @button-text-size;
+  line-height: @button-line-height;
   color: @button-text-color;
-  text-decoration: none; // Reset underline on anchor
+  text-decoration: none; // resets underline on anchor
   text-align: center;
 
-  text-shadow: 0 -1*@px 0 rgba(0, 0, 0, 0.35);
+  text-shadow: 0 -1*@px 0 rgba(0, 0, 0, 0.40);
 
-  cursor: pointer; // Give hand cursor
+  cursor: pointer; // gives hand cursor
 
-  .gradient(@button-gray-gradient-start-color, @button-gray-gradient-end-color);
+  .gradient(@button-default-gradient-start-color, @button-default-gradient-end-color);
 
   &:hover {
-        text-decoration: none; // Reset underline on anchor
-         //background: @button-gray-hover-background-color; // overrides buttons background image, favor gradient
-        .gradient(@button-gray-hover-background-color, @button-gray-hover-background-color);
+        text-decoration: none; // resets underline on anchor
+        .gradient(@button-default-gradient-start-color, @button-default-gradient-start-color);
   }
 
   &:active {
-    border-color: @button-gray-down-border-color;
-    //background: @button-gray-down-background-color;
-    .gradient(@button-gray-down-background-color, @button-gray-down-background-color);
+    border-color: fade(@button-default-border-color, 75%);
+    .gradient(@button-default-gradient-end-color, @button-default-gradient-end-color);
 
-    .box-shadow(inset 0 0 0.5rem rgba(0, 0, 0, 0.25));
+    .box-shadow(inset 0 0 4*@px rgba(0, 0, 0, 0.15));
   }
 
   &:focus {
@@ -93,8 +78,34 @@ button,
   }
   
   // A square button for buttons attached to form fields with icons in them
+  &.button-square,
   &.square {
     .button-square;
+  }
+
+  // call to action button.
+  &.button-large,
+  &.large {
+    font-size: @button-text-large-size;
+    min-width: 135*@px;
+    padding: 14*@px 20*@px;
+  }
+
+  &.button-block,
+  &.block {
+    display: block;
+    // spans to the width of the container
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    // the container should set the desired margin
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  // adds seperation between two consecutive buttons
+  & + & {
+    margin-left: 15*@px;
   }
 }
 
@@ -102,25 +113,17 @@ button,
 // Button: Primary (blue)
 button.primary:not(.disabled):not([disabled]),
 .button.primary:not(.disabled):not([disabled]) {
-  border-color: @button-blue-border-color;
+  border-color: fade(@button-primary-border-color, 70%);
 
-  .gradient(@button-blue-gradient-start-color, @button-blue-gradient-end-color);
+  .gradient(@button-primary-gradient-start-color, @button-primary-gradient-end-color);
 
-    &.primary {
-        &:hover {
-        //background: @button-blue-hover-background-color; // overrides buttons background image, favor gradient
-            .gradient(@button-blue-hover-background-color, @button-blue-hover-background-color);
-        }
-    }
+  &:hover {
+    .gradient(@button-primary-gradient-start-color, @button-primary-gradient-start-color);
+  }
 
   &:active {
-    border-color: @button-blue-down-border-color;
-    //background: @button-blue-down-background-color;
-    .gradient(@button-blue-down-background-color, @button-blue-down-background-color);
-  }
-  
-  &:focus {
-    .glow(@focus-glow-radius*1.25, darken(@focus-glow-color, 2%), darken(@focus-border-color, 20%));
+    border-color: fade(@button-primary-border-color, 80%);
+    .gradient(@button-primary-gradient-end-color, @button-primary-gradient-end-color);
   }
 }
 
@@ -128,27 +131,21 @@ button.primary:not(.disabled):not([disabled]),
 // Button: Warning (red)
 button.warning:not(.disabled):not([disabled]),
 .button.warning:not(.disabled):not([disabled]) {
-  border-color: @button-red-border-color;
+  border-color: fade(@button-warning-border-color, 70%);
 
-  .gradient(@button-red-gradient-start-color, @button-red-gradient-end-color);
+  .gradient(@button-warning-gradient-start-color, @button-warning-gradient-end-color);
 
-    &.warning {
-        &:hover {
-        //background: @button-red-hover-background-color; // overrides buttons background image, favor gradient
-            .gradient(@button-red-hover-background-color, @button-red-hover-background-color);
-        }
-    }
+
+  &:hover {
+    .gradient(@button-warning-gradient-start-color, @button-warning-gradient-start-color);
+  }
 
   &:active {
-    border-color: @button-red-down-border-color;
-    //background: @button-red-down-background-color; // overrides buttons background image, favor gradient
-    .gradient(@button-red-down-background-color, @button-red-down-background-color);
-  }
-  
-  &:focus {
-    .glow();
+    border-color: fade(@button-warning-border-color, 80%);
+    .gradient(@button-warning-gradient-end-color, @button-warning-gradient-end-color);
   }
 }
+
 
 // Button: Disabled
 button.disabled,

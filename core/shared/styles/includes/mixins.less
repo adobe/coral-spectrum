@@ -195,23 +195,23 @@
   margin: 0;
   padding: 0;
   
-  .gradient(@dropdown-gradient-start-color, @dropdown-gradient-end-color);
+  .gradient(@button-square-gradient-start-color, @button-square-gradient-end-color);
   
-  border: @px solid @dropdown-border-color;
+  border: @px solid @button-square-border-color;
     
   line-height: @button-size; // Align icons vertically
   text-shadow: none;
   
   &:hover {
-    border: @px solid @dropdown-border-color; // Override icon class border resets
+    border: @px solid @button-square-border-color; // Override icon class border resets
     
-    .gradient(@dropdown-gradient-start-color, @dropdown-gradient-start-color);
+    .gradient(@button-square-gradient-start-color, @button-square-gradient-start-color);
   }
 
   &:active {
-    border: @px solid @dropdown-border-color; // Override icon class border resets
+    border: @px solid @button-square-border-color; // Override icon class border resets
 
-    .gradient(@dropdown-gradient-end-color, @dropdown-gradient-end-color);
+    .gradient(@button-square-gradient-end-color, @button-square-gradient-end-color);
     
     .box-shadow(inset 0 0 0.5rem rgba(0, 0, 0, 0.25));
     
