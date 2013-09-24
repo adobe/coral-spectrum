@@ -304,8 +304,8 @@ module.exports = function (grunt) {
                         ],
                         dest: '<%= dirs.build %>/tests/libs'
                     }
-                ]
-            },
+                ] // /retro files
+            }, 
             guide: {
                 files: [
                     { // guide html
@@ -339,7 +339,7 @@ module.exports = function (grunt) {
                         src: ['*/*.js'],
                         dest: '<%= dirs.build %>/js/libs'
                     }
-                ]
+                ] // guide files
             },
             js_source: {
                 files: [
@@ -349,8 +349,8 @@ module.exports = function (grunt) {
                         src: ['**'],
                         dest: '<%= dirs.build %>/js/source'
                     }
-                ]
-            },
+                ] // js source files
+            }, 
             release_archive: { // copy the archive to have a "latest" zip from the current build
                 files: [
                     { // get build from the core
@@ -371,7 +371,7 @@ module.exports = function (grunt) {
                             return dest + '/cui-latest-full.zip';
                         }
                     }
-                ]
+                ] // release archive files
             }
         }, // copy
 
@@ -463,7 +463,7 @@ module.exports = function (grunt) {
             }
 
         },
-        // end of watch options
+        // watch options
 
         less: {
             "cui-wrapped": {
@@ -539,10 +539,13 @@ module.exports = function (grunt) {
                     }
                 },
                 files: {
-                    '<%= dirs.build %>/js/CUI.Templates.js': '<%= dirs.legacy %>/components/templates/*'
+                    '<%= dirs.build %>/js/CUI.Templates.js': [
+                    '<%= dirs.legacy %>/components/templates/*.hbs',
+                    '<%= dirs.components %>/**/templates/*.hbs'
+                    ]
                 }
             }
-        },
+        }, // handlebars
 
         mocha: {
             retro: {
