@@ -74,6 +74,7 @@
 
       @param {Object} options                               Widget options.
       @param {Mixed}  [options.active=false]                Index of the initial active tab of the accordion or one of true/false for collapsibles
+      @param {boolean} [options.disabled=false]             Set the disabled state of the widget.
             
     */
     construct: function(options) {
@@ -90,26 +91,54 @@
       } else {
         this._initElement(this.$element, !(this.options.active || this.$element.hasClass("active")));
       }
-      
+
+      if (this.$element.attr('disabled') || this.$element.attr('data-disabled')) {
+        this.options.disabled = true;
+      }
+
+      this._setListeners();
+      this._makeAccessible();
+      this._updateDOMForDisabled();
+    },
+    
+    defaults: {
+      active: false,
+      disabled: false
+    },
+    
+    isAccordion: false,
+
+    _setListeners: function() {
       this.$element.on("click", "h3", this._toggle.bind(this));
-      
+
       this.$element.on("change:active", this._changeActive.bind(this));
-      
+
       // Prevent text selection on header
       this.$element.on("selectstart", "h3", function(event) {
         event.preventDefault();
       });
-      
-      this._makeAccessible();
+
+      this.on('change:disabled', function(event) {
+        this._updateDOMForDisabled();
+      }.bind(this));
     },
-    
-    defaults: {
-      active: false
+
+    /**
+     * Updates styles and attributes to match the current disabled option value.
+     * @ignore */
+    _updateDOMForDisabled: function() {
+      if (this.options.disabled) {
+        this.$element.addClass('disabled').attr('area-disabled', true);
+      } else {
+        this.$element.removeClass('disabled').attr('area-disabled', false);
+      }
     },
-    
-    isAccordion: false,
-    
+
     _toggle: function(event) {
+      if (this.options.disabled) {
+        return;
+      }
+
       var el = $(event.target).closest(".collapsible"),
           isCurrentlyActive = el.hasClass("active"),
           active = (isCurrentlyActive) ? false : ((this.isAccordion) ? el.index() : true); 
@@ -137,7 +166,7 @@
     _initElement: function(element, collapse) {
         // Add correct header
         if ($(element).find("h3").length === 0) $(element).prepend("<h3>&nbsp;</h3>");
-        if ($(element).find("h3 i").length === 0) $(element).find("h3").prepend("<i></i>&nbsp;");
+        if ($(element).find("h3 i").length === 0) $(element).find("h3").prepend("<i></i>");
         
         $(element).addClass("collapsible");
         
@@ -156,16 +185,16 @@
         if (collapse) {
           $(element).removeClass("active");
           $(element).height(head.height());
-          icon.removeClass("icon-accordiondown").addClass("icon-accordionup");
+          icon.removeClass("icon-chevrondown").addClass("icon-chevronup");
         } else {
           $(element).addClass("active");
           $(element).css("height", "auto");
-          icon.removeClass("icon-accordionup").addClass("icon-accordiondown");
+          icon.removeClass("icon-chevronup").addClass("icon-chevrondown");
         }    
     },
     _collapse: function(el) {
-         el.find("h3 i").removeClass("icon-accordiondown").addClass("icon-accordionup");
-         el.animate({height: el.find("h3").height()}, "fast", function() {
+         el.find("h3 i").removeClass("icon-chevrondown").addClass("icon-chevronup");
+         el.animate({height: el.find("h3").outerHeight()}, "fast", function() {
             el.removeClass("active"); // remove the active class after animation so that background color doesn't change during animation
             el.find("div[aria-expanded]").hide(); // After animation we want to hide the collapsed content so that it cannot be focused
          });
@@ -190,7 +219,7 @@
     },
     _expand: function(el) {
          el.addClass("active");
-         el.find("h3 i").removeClass("icon-accordionup").addClass("icon-accordiondown");
+         el.find("h3 i").removeClass("icon-chevronup").addClass("icon-chevrondown");
          var h = this._calcHeight(el);
             
          el.animate({height: h}, "fast", function() {
@@ -309,6 +338,17 @@
         
         this.$element.on('touchstart.accordion, mousedown.accordion', 'h3:focusable', this._onMouseDown.bind(this));
     },
+
+    /**
+     * Sets component options using data-* attributes found in the markup.
+     * @private
+     */
+    _readDataFromMarkup: function() {
+      if (this.$element.data('disabled')) {
+        this.options.disabled = true;
+      }
+    },
+
     /**
      * keydown event handler, which defines the keyboard behavior of the accordion control
      * per the WAI-ARIA Accordion widget design pattern: 
