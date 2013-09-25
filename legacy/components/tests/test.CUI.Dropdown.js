@@ -1,5 +1,7 @@
 describe('CUI.Dropdown', function() {
 
+    // THIS COMPONENT IS DEPRECATED
+    // TESTS SHOULD BE DONE USING SELECT, WHICH REPLACES DROPDOWN
               
     it('should be defined in CUI namespace', function() {
         expect(CUI).to.have.property('Dropdown');
@@ -41,45 +43,45 @@ describe('CUI.Dropdown', function() {
         
         // The following test does not work on the command line.
         // although it should. Therefore it is skipped.
-        it.skip('should open a dropdown list', function(done) {
-            el.find("button").click();
-            // Give it time to open
-            setTimeout(function() {
-                console.log(el.find(".dropdown-list").length);
-                expect(el.find(".dropdown-list").length).to.equal(1);
-                expect(el.find("li").length).to.equal(3);
-                console.log("done");
-                done();
-            }, 400);
-        });
+        // it.skip('should open a dropdown list', function(done) {
+        //     el.find("button").click();
+        //     // Give it time to open
+        //     setTimeout(function() {
+        //         console.log(el.find(".dropdown-list").length);
+        //         expect(el.find(".dropdown-list").length).to.equal(1);
+        //         expect(el.find("li").length).to.equal(3);
+        //         console.log("done");
+        //         done();
+        //     }, 400);
+        // });
 
         // The following test does not work on the command line.
         // although it should. Therefore it is skipped.
-        it.skip('should open an edtiable dropdown list with 2 options', function(done) {
-            var totalTime = 0, 
-                interval = 200, 
-                timeout = 2000,
-                elEditable = null;
+        // it.skip('should open an edtiable dropdown list with 2 options', function(done) {
+        //     var totalTime = 0, 
+        //         interval = 200, 
+        //         timeout = 2000,
+        //         elEditable = null;
 
-            elEditable = $(htmlEditable).dropdown();
-            elEditable
-                .find("input")
-                .val("re")
-                .trigger($.Event('input'))
-                .trigger($.Event('input'));
+        //     elEditable = $(htmlEditable).dropdown();
+        //     elEditable
+        //         .find("input")
+        //         .val("re")
+        //         .trigger($.Event('input'))
+        //         .trigger($.Event('input'));
 
-            // setTimeout is used in an futile attempt to get this working in phantomJS
-            setTimeout(function checkForDropdownElement() {
-                var listElement = elEditable.data("dropdown").autocompleteList.listElement;
-                totalTime += interval;
+        //     // setTimeout is used in an futile attempt to get this working in phantomJS
+        //     setTimeout(function checkForDropdownElement() {
+        //         var listElement = elEditable.data("dropdown").autocompleteList.listElement;
+        //         totalTime += interval;
 
-                if (!listElement && timeout < totalTime) {
-                    return setTimeout(checkForDropdownElement, interval);
-                }
+        //         if (!listElement && timeout < totalTime) {
+        //             return setTimeout(checkForDropdownElement, interval);
+        //         }
 
-                expect(listElement.find('li').length).to.equal(2);
-                done();
-            }, interval);
-        });
+        //         expect(listElement.find('li').length).to.equal(2);
+        //         done();
+        //     }, interval);
+        // });
     });      
 });

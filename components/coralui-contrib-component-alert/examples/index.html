@@ -25,7 +25,7 @@
         element: '#cuiAlert',
         heading: 'WTF?',
         type: 'help',
-        content: 'You need help. <p>Something is wrong! Despair! Doom! Conspiracy!',
+        content: 'You need help. Something is wrong! Despair! Doom! Conspiracy!',
         closable: true
       });
 
@@ -33,6 +33,7 @@
         heading: 'Great Job!',
         type: 'success',
         content: 'You are a super star!',
+        size: 'large',
         closable: false
       });    
 
@@ -98,6 +99,32 @@
     <div id="cuiAlert">THIS WILL GET CLOBBERED</div>
     <div id="jqueryAlert"></div>
   </section>
+  </div>
+
+    <div class="col">
+    <section>
+      <h3>Large Alerts</h3>
+      <div class="alert error large">
+        <button class="close" data-dismiss="alert">&times;</button>
+        <strong>ERROR</strong><div>Uh oh, something went wrong with the whozit!</div>
+      </div>
+      <div class="alert notice large">
+        <button class="close" data-dismiss="alert">&times;</button>
+        <strong>NOTICE</strong><div>Something is about to go wrong with the whozit!</div>
+      </div>
+      <div class="alert success large">
+        <button class="close" data-dismiss="alert">&times;</button>
+        <strong>Success</strong><div>Everything went better than expected with the whozit.</div>
+      </div>
+      <div class="alert help large">
+        <button class="close" data-dismiss="alert">&times;</button>
+        <strong>HELP</strong><div>If you are struggling with the whozit, read <a href="#">the manual</a>.</div>
+      </div>
+      <div class="alert info large">
+        <button class="close" data-dismiss="alert">&times;</button>
+        <strong>INFO</strong><div>For great success, configure the whozit correctly.</div>
+      </div>
+    </section>
   </div>
 
 </body>

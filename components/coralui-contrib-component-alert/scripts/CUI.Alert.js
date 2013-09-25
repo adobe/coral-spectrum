@@ -61,7 +61,7 @@ alert.hide();
       @param {String} [options.heading=Type, capitalized]   Title of the alert (HTML)
       @param {String} options.content                       Content of the alert (HTML)
       @param {Boolean} options.closable                     Array of button descriptors
-      @param {String} [options.size=small]                  Size of the alert. Either large or small.
+      @param {String} [options.size=small]                  Size of the alert. Either large or small. 
       @param {String} [options.type=error]                  Type of alert to display. One of error, notice, success, help, or info
     */
     construct: function(options) {
@@ -137,16 +137,16 @@ alert.hide();
 
     /** @ignore */
     _setContent: function() {
-      if (typeof this.options.content !== 'string') return;
-
-      this.$element.find('div').html(this.options.content);
+      if (typeof this.options.content !== 'string') {
+        this.$element.find('div').html(this.options.content);
+      }
     },
 
     /** @ignore */
     _setHeading: function() {
-      if (typeof this.options.content !== 'string') return;
-
-      this.$element.find('strong').html(this.options.heading);
+      if (typeof this.options.content == 'string'){
+        this.$element.find('strong').html(this.options.heading);
+      }
     },
 
     /** @ignore */
@@ -160,12 +160,14 @@ alert.hide();
 
     /** @ignore */
     _setSize: function() {
-      if (typeof this.options.size !== 'string' || this._sizes.indexOf(this.options.size) === -1) return;
-
-      if (this.options.size === 'small')
-        this.$element.removeClass('large');
-      else
-        this.$element.addClass('large');
+      if (this._isValidSize(this.options.size)) {
+        if (this.options.size === 'small') {
+          this.$element.removeClass('large');
+        }
+        else {
+          this.$element.addClass('large');
+        }
+      }
     },
 
     /** @ignore */
@@ -183,6 +185,11 @@ alert.hide();
     /** @ignore */
     _isValidType: function(value) {
       return typeof value == 'string' && this._types.indexOf(value) > -1;
+    },
+
+    /** @ignore */
+    _isValidSize: function(value) {
+      return typeof value == 'string' && this._sizes.indexOf(value) > -1;
     },
 
     /** @ignore */
