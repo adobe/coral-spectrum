@@ -14,22 +14,19 @@
 @select-disabled-text-color: rgb(180, 180, 180);
 
 .select {
-  .border-box;
-  vertical-align: middle; // used to align them correctly in forms.
-
-  margin: 2*@px 0;  // resets default margin on button tag
-
   display: inline-block;
+  
+  .border-box;
+  vertical-align: top; // used to align them correctly in forms.
+  margin: 2*@px 0;  // resets default margin
+
   width: 13rem; /* Width must be specified */
   
   > button {
 
     width: 100%;
-    height: 38*@px;
     margin: 0;
-    padding: 0 32*@px 0 10*@px;
 
-    line-height: 36*@px;
     position: relative;
 
     color: @font-base-color;
@@ -62,7 +59,6 @@
       text-align: left;
       position: absolute;
       right: 11*@px;
-      top: 0;
       text-shadow: none;
       font-size: 1.2em;
       color: inherit;

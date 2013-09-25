@@ -8,14 +8,15 @@
 
 .selector {
   display: inline-block;
-  margin: 0.5rem 0;
-  vertical-align: middle;
-  font-size: 0; // Fight space between inline block elements
-  
-  //background-color: @selector-disabled-color; // Why? This messes up selectors used in toolbars things up.
+
+  .border-box;
+  vertical-align: top; // used to align them correctly in forms.
+  margin: 2*@px 0;  // resets default margin
+
+  font-size: 0; // fights the space between inline block elements
 
   label {
-    line-height: 32*@px;
+    line-height: 36*@px;
     min-width: 50*@px;
     display: inline-block;
     position: relative;

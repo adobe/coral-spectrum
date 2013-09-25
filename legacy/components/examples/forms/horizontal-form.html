@@ -13,11 +13,6 @@
   <script src="../../js/libs/toe.js"></script>
   <script src="../../js/CUI.js"></script>
 
-    <style>
-    h1, h2 {
-      margin-bottom: 1rem; /* no margin for heading, seriously!? */
-    }
-  </style>
 </head>
 <body>
   <div style="padding: 2rem;">
@@ -26,6 +21,14 @@
     <form>
       <h2>Checks if the different components line up correctly.</h2>
 
+      <div class="numberinput" data-init="numberinput">
+        <button type="button" class='decrement'>decrement</button>
+        <input type='text'>
+        <button type="button" class='increment'>increment</button>
+      </div>
+      
+      <!-- Anchor -->
+      <a class="button" role="button" href="#">Action</a>
       <!-- Button -->
       <button>Button</button>
 
@@ -43,6 +46,9 @@
         </select>
       </span>
 
+      <!-- Text Area -->
+      <label>Text Area</label>
+      <textarea rows="4"></textarea>
       <!-- Select -->
       <span class="select" data-init="select">
       <button type="button">Single Select</button>
@@ -66,36 +72,21 @@
         </select>
       </div>
 
-      <!-- Editable Select -->
-      <div class="select select-editable" data-editable="true" data-init="select">
-        <input type="text">
-        <button type="button">Editable</button>
-        <select>
-          <option>Edit One</option>
-          <option>Edit Two</option>
-          <option>Edit Three</option>
-        </select>
-      </div>
-
       <!-- Date Picker -->
       <span class="datepicker" data-init="datepicker"><input type="datetime"><button class="icon-calendar">Datetime picker</button></span>
-
-      <!-- Slider -->
-      <span class="slider" data-init="slider"><input type="range" value="10" min="10" max="20" step="2"></span>
 
       <label>Path Browser</label>
       <span class="pathbrowser" data-init="pathbrowser"><input type="text"></span>
 
-      <label>Checkbox</label>
+      <!-- Slider -->
+      <span class="slider" data-init="slider"><input type="range" value="10" min="10" max="20" step="2"></span>
+
       <label><input type="checkbox" checked><span>Checkbox</span></label>
 
-      <label>Radio</label>
       <label><input type="radio" checked><span>Radio</span></label>
 
-      <label>Switch</label>
       <label class="switch"><input type="checkbox"><span>Off</span><span>On</span></label>
 
-      <label>Selector</label>
       <span class="selector">
         <label><input type="radio"><span>Yes</span></label>
         <label><input type="radio"><span>No</span></label>

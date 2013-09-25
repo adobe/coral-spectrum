@@ -33,15 +33,14 @@
 // Button: Default (gray)
 button,
 .button {
-  // display: inline-block;
-  .border-box; // makes 110px min-width apply consistently between anchor/button
+  // used by anchor to accept the height and width values
+  display: inline-block;
 
-  vertical-align: middle; // used to align them correctly in forms.
+  .border-box;
+  vertical-align: top; // used to align them correctly in forms.
+  margin: 2*@px 0;  // resets default margin
 
-  min-width: 110*@px;
-
-  // TODO: check this value with XD.
-  margin: 2*@px 0;  // resets default margin on button tag
+  min-width: 110*@px;  
 
   padding: 10*@px 15*@px;
   border: @px solid;
@@ -102,13 +101,7 @@ button,
     margin-left: 0;
     margin-right: 0;
   }
-
-  // adds seperation between two consecutive buttons
-  & + & {
-    margin-left: 15*@px;
-  }
 }
-
 
 // Button: Primary (blue)
 button.primary:not(.disabled):not([disabled]),
@@ -127,7 +120,6 @@ button.primary:not(.disabled):not([disabled]),
   }
 }
 
-
 // Button: Warning (red)
 button.warning:not(.disabled):not([disabled]),
 .button.warning:not(.disabled):not([disabled]) {
@@ -145,7 +137,6 @@ button.warning:not(.disabled):not([disabled]),
     .gradient(@button-warning-gradient-end-color, @button-warning-gradient-end-color);
   }
 }
-
 
 // Button: Disabled
 button.disabled,

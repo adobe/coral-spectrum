@@ -3,10 +3,13 @@
  */
 .filters {
     display: inline-block;
+
     .border-box;
-    margin: 0.5rem 0;
+    vertical-align: middle; // used to align them correctly in forms.
+    margin: 2*@px 0;  // resets default margin
+    
     width: 13rem; // width is required to contain the tags
-    vertical-align: middle;
+    
 
     &[data-multiple=multiple], &[data-stacking=true] {
         vertical-align: top;

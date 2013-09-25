@@ -19,6 +19,7 @@
 label {
   font-size: @textfield-text-size;
   line-height: @textfield-line-height;
+  vertical-align: middle;
 }
 
 input[type=text],
@@ -28,13 +29,13 @@ input[type=url],
 input[type=tel],
 input[type^="date"],
 input[type="time"] {
-  .border-box;
 
-  vertical-align: middle; // used to align them correctly in forms.
+  .border-box;
+  vertical-align: top; // used to align them correctly in forms.
+  margin: 2*@px 0;  // resets default margin
 
   min-width: 110*@px;
 
-  margin: 2*@px 0;  // resets default margin on button tag
   padding: 10*@px;
 
   .normal-text;
