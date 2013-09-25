@@ -30,14 +30,16 @@
 
     > a {
       .light-text;
-      color: @tab-active-font-color;
+      color: @tab-inactive-font-color;
       float: left;
-      padding: 0.5rem 0.75rem 0.5rem 0.75rem;
-      margin: 0 0.125rem -0.0625rem 0;
+      padding: 0.625rem 1.0rem 0.625rem 1.0rem;
+      margin: 0 0.125rem -0.125rem 0;
       white-space: nowrap;
 
       &.active {
         border: 0.0625rem solid @tab-outline-color;
+        /* padding is adjusted on active tab to make up for text shift when border is drawn - CUI-994 */
+        padding: 0.563rem 0.938rem 0.563rem 0.938rem;
         border-bottom: none;
         .gradient(@tab-background-gradient-start-color, @tab-background-gradient-end-color);
       }
@@ -61,11 +63,12 @@
 
       &:hover,
       &:focus {
+        .light-text;
         color: @tab-hover-font-color;
       }
 
       &.active {
-        .regularText;
+        .bold-text;
         color: @tab-active-font-color;
         
         &:focus {
@@ -76,6 +79,7 @@
   }
 
   > section {
+    .normal-text;
     display: none;
     background-color: @tab-background-gradient-end-color;
     margin: 0;
@@ -83,6 +87,11 @@
     padding: 0.85rem;
     z-index: auto;
     position: relative;
+    /* TODO: This should be the inside 1-px white border at top of box. It
+             requires a negative margin in the tab but results in the tab 
+             border intersecting the white border. Needs more work before showing.
+    box-shadow: 0 .063rem 0 @tab-nav-second-border-color inset;
+    */
 
     &.active {
       display: block;
