@@ -300,7 +300,8 @@ module.exports = function (grunt) {
                             'chai/chai.js',
                             'chai-jquery/chai-jquery.js',
                             'mocha/mocha.js',
-                            'mocha/mocha.css'
+                            'mocha/mocha.css',
+                            'sinon/pkg/sinon.js'
                         ],
                         dest: '<%= dirs.build %>/tests/libs'
                     }

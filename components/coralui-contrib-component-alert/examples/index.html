@@ -19,18 +19,21 @@
   <script>
     $(document).ready(function(){
 
+      var defaultAlert = new CUI.Alert({element:'#defaultAlert'});
+
       var cuiAlert = new CUI.Alert({
         element: '#cuiAlert',
-        heading: 'ERROR',
-        content: 'An error has occurred. <p>Something is wrong! Despair! Doom! Conspiracy!',
+        heading: 'WTF?',
+        type: 'help',
+        content: 'You need help. <p>Something is wrong! Despair! Doom! Conspiracy!',
         closable: true
       });
 
       $('#jqueryAlert').alert({
-        heading: 'GREAT:',
+        heading: 'Great Job!',
         type: 'success',
         content: 'You are a super star!',
-        closable: true
+        closable: false
       });    
 
 
@@ -91,6 +94,7 @@
 
     <section>
     <h3>JavaScript generated</h3>
+    <div id="defaultAlert">THIS WILL GET CLOBBERED</div>
     <div id="cuiAlert">THIS WILL GET CLOBBERED</div>
     <div id="jqueryAlert"></div>
   </section>

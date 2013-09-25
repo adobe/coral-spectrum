@@ -95,16 +95,22 @@ alert.hide();
 
       // Render template, if necessary
       if (this.$element.children().length === 0) {
+
+        this.options.type = this._fixType(this.options.type);
+
         // Set default heading
-        this.options.heading = this.options.heading === undefined ? this.options.type.toUpperCase() : this.options.heading;
+        this.options.heading = this._fixHeading(this.options.heading);
 
         this.$element.html(CUI.Templates['alert'](this.options));
 
-        this.applyOptions();
+        this._setClosable();
+        this._setType();
+        this._setSize();
       }
-      else {
-        this.applyOptions(true);
-      }
+      
+      this._setHeading();
+      this._setContent();
+      
     },
 
     defaults: {
@@ -128,15 +134,6 @@ alert.hide();
       'large'
     ],
 
-    applyOptions: function(partial) {
-      if (!partial) {
-        this._setHeading();
-        this._setContent();
-      }
-      this._setClosable();
-      this._setType();
-      this._setSize();
-    },
 
     /** @ignore */
     _setContent: function() {
@@ -154,13 +151,11 @@ alert.hide();
 
     /** @ignore */
     _setType: function() {
-      if (typeof this.options.type !== 'string' || this._types.indexOf(this.options.type) === -1) return;
+      if (this._isValidType(this.options.type)) {
+        this.$element.removeClass(this._types.join(' '));
+        this.$element.addClass(this.options.type);
+        }
 
-      // Remove old type
-      this.$element.removeClass(this._types.join(' '));
-
-      // Add new type
-      this.$element.addClass(this.options.type);
     },
 
     /** @ignore */
@@ -183,7 +178,23 @@ alert.hide();
       else {
         el[this.options.closable ? 'show' : 'hide']();
       }
+    },
+
+    /** @ignore */
+    _isValidType: function(value) {
+      return typeof value == 'string' && this._types.indexOf(value) > -1;
+    },
+
+    /** @ignore */
+    _fixType: function(value) {
+      return this._isValidType(value) ? value : this.defaults.type;
+    },
+
+    /** @ignore */
+    _fixHeading: function(value) {
+      return value === undefined ? this._fixType(this.options.type).toUpperCase() : value;
     }
+
   });
 
   CUI.util.plugClass(CUI.Alert);
