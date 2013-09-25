@@ -156,6 +156,39 @@ describe('CUI.Alert', function() {
       expect(button).to.have.css('display', 'none');
     });
 
+    it('should not set large size by default', function() {
+      el.alert();
+      expect(el.hasClass('large')).to.equal(false);
+    });
+
+    it('should set size to large if size parameter is specified', function() {
+      el.alert({size:'large'});
+      expect(el.hasClass('large')).to.equal(true);
+    });
+
+    it('should remove large if size small is specified', function() {
+      el.addClass('large');
+      el.alert({size:'small'});
+      expect(el.hasClass('large')).to.equal(false);
+    });
+
+    it('should not add small if size small is specified', function() {
+      el.alert({size:'small'});
+      expect(el.hasClass('small')).to.equal(false);
+    });
+
+    it('should ignore size if an invalid value is passed', function() {
+      el.addClass('large');
+      el.alert({size:'invalid value'});
+      expect(el.hasClass('large')).to.equal(true);
+    });
+
+    it('should ignore size if a non-string value is passed', function() {
+      el.addClass('large');
+      el.alert({size:0});
+      expect(el.hasClass('large')).to.equal(true);
+    });
+
   }); // /from template
 
 }); // /CUI.Alert
