@@ -128,9 +128,9 @@
      * @ignore */
     _updateDOMForDisabled: function() {
       if (this.options.disabled) {
-        this.$element.addClass('disabled').attr('area-disabled', true);
+        this.$element.addClass('disabled').attr('aria-disabled', true);
       } else {
-        this.$element.removeClass('disabled').attr('area-disabled', false);
+        this.$element.removeClass('disabled').attr('aria-disabled', false);
       }
     },
 
