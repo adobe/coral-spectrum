@@ -18,8 +18,11 @@
 
 label {
   font-size: @textfield-text-size;
-  line-height: @textfield-line-height;
-  vertical-align: middle;
+  line-height: 38*@px;
+  
+  // we need to use top since some elements cannot be centered using middle.
+  vertical-align: top;
+  margin: 2*@px 0;
 }
 
 input[type=text],
