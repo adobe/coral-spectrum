@@ -1,9 +1,10 @@
 # What is CoralUI? 
 CoralUI is an implementation of the [Cloud UI][0] visual style that provides everything your product needs to build out a web based UI.  Check out our interactive [Style Guide][1] to see CoralUI in action.  
 
+See the [CoralUI Wiki][3] for more information.
+
 # Who maintains CoralUI?
 CoralUI is an internal open source effort with backing from designers and product development teams across Adobe.   
-
 
 # How do I get started?
 First, contact the [mailing list][2] and introduce yourself.  Becoming part of the community is only way let us know how you want to be involved.  The list is also the best way to discover what current priorities are. 
