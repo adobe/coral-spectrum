@@ -3,10 +3,14 @@
  */
 
 .datepicker {
+  // used to place the button.
   position: relative;
+  // used to respect the height and width properties.
   display: inline-block;
-  margin: 0.5rem 0;
-  vertical-align: middle;
+
+  .border-box;
+  vertical-align: top; // used to align them correctly in forms.
+  margin: 2*@px 0;  // resets default margin
 
   > input[type=text] {
     margin: 0;
@@ -22,13 +26,12 @@
   }
 
   > button {
-    .button-square;
+    .button-square(36*@px);
         
     // Fit inside of the text field
     position: absolute;
     top: @px; // Because of textfield border
     right: @px; // Because of textfield border
-    height: 30*@px;
     
     &,
     &:hover,

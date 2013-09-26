@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Alert Examples</title>
+
+  <link rel="stylesheet" href="../../css/cui.css">
+
+  <script src="../../js/libs/handlebars.js"></script>
+  <script src="../../js/libs/moment.js"></script>
+  <script src="../../js/libs/jquery.js"></script>
+  <!--script src="../../js/libs/jquery-fingerpointer.js"></script-->
+  <script src="../../js/libs/toe.js"></script>
+  <script src="../../js/libs/moment.js"></script>
+  
+  <script src="../../js/CUI.js"></script>
+  <script src="../../js/CUI.Templates.js"></script>
+
+  <script>
+    $(document).ready(function(){
+
+      var defaultAlert = new CUI.Alert({element:'#defaultAlert'});
+
+      var cuiAlert = new CUI.Alert({
+        element: '#cuiAlert',
+        heading: 'WTF?',
+        type: 'help',
+        content: 'You need help. Something is wrong! Despair! Doom! Conspiracy!',
+        closable: true
+      });
+
+      $('#jqueryAlert').alert({
+        heading: 'Great Job!',
+        type: 'success',
+        content: 'You are a super star!',
+        size: 'large',
+        closable: false
+      });    
+
+
+    });
+  </script>
+    <style>
+  body {
+    padding-left: 30px;
+  }
+
+  h3 {
+    margin-bottom: 20px;
+  }
+
+  section {
+    border-top: 1px solid #C8C8C8; 
+    margin-bottom: 40px;
+  }
+
+  .col {
+    float: left;
+    margin-right: 12px;
+    width: 400px;
+  }
+
+  label {
+    margin-right: 1rem;
+  }
+  </style>
+
+</head>
+<body> 
+  <h1>Alert Examples</h1>
+  <div class="col">
+    <section>
+      <h3>All the Alerts</h3>
+      <div class="alert error">
+        <button class="close" data-dismiss="alert">&times;</button>
+        <strong>ERROR</strong><div>Uh oh, something went wrong with the whozit!</div>
+      </div>
+      <div class="alert notice">
+        <button class="close" data-dismiss="alert">&times;</button>
+        <strong>NOTICE</strong><div>Something is about to go wrong with the whozit!</div>
+      </div>
+      <div class="alert success">
+        <button class="close" data-dismiss="alert">&times;</button>
+        <strong>Success</strong><div>Everything went better than expected with the whozit.</div>
+      </div>
+      <div class="alert help">
+        <button class="close" data-dismiss="alert">&times;</button>
+        <strong>HELP</strong><div>If you are struggling with the whozit, read <a href="#">the manual</a>.</div>
+      </div>
+      <div class="alert info">
+        <button class="close" data-dismiss="alert">&times;</button>
+        <strong>INFO</strong><div>For great success, configure the whozit correctly.</div>
+      </div>
+    </section>
+
+    <section>
+    <h3>JavaScript generated</h3>
+    <div id="defaultAlert">THIS WILL GET CLOBBERED</div>
+    <div id="cuiAlert">THIS WILL GET CLOBBERED</div>
+    <div id="jqueryAlert"></div>
+  </section>
+  </div>
+
+    <div class="col">
+    <section>
+      <h3>Large Alerts</h3>
+      <div class="alert error large">
+        <button class="close" data-dismiss="alert">&times;</button>
+        <strong>ERROR</strong><div>Uh oh, something went wrong with the whozit!</div>
+      </div>
+      <div class="alert notice large">
+        <button class="close" data-dismiss="alert">&times;</button>
+        <strong>NOTICE</strong><div>Something is about to go wrong with the whozit!</div>
+      </div>
+      <div class="alert success large">
+        <button class="close" data-dismiss="alert">&times;</button>
+        <strong>Success</strong><div>Everything went better than expected with the whozit.</div>
+      </div>
+      <div class="alert help large">
+        <button class="close" data-dismiss="alert">&times;</button>
+        <strong>HELP</strong><div>If you are struggling with the whozit, read <a href="#">the manual</a>.</div>
+      </div>
+      <div class="alert info large">
+        <button class="close" data-dismiss="alert">&times;</button>
+        <strong>INFO</strong><div>For great success, configure the whozit correctly.</div>
+      </div>
+    </section>
+  </div>
+
+</body>
+</html>
