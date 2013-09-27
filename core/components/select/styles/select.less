@@ -25,10 +25,9 @@
   > button {
 
     width: 100%;
-    height: 38*@px;
-    line-height: 38*@px;
     padding-top: 0;
     padding-bottom: 0;
+    padding-right: 32*@px;
     margin: 0;
 
     position: relative;
@@ -45,10 +44,16 @@
     text-shadow: none;
     text-align: left;
     font-weight: normal;
+    
+    &,
+    &[class^="icon-"], 
+    &[class*=" icon-"] {
+        height: 38*@px;
+        line-height: 36*@px;
+    }
 
     &[class^="icon-"], 
     &[class*=" icon-"] {
-      height: 38*@px;
       padding: 10*@px 15*@px;
       &:before {
         color: inherit;
