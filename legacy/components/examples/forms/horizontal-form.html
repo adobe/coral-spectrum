@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Forms</title>
+
+  <link rel="stylesheet" href="../../css/cui.css">
+
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/libs/moment.js"></script>
+  <script src="../../js/libs/jquery-message.js"></script>
+  <script src="../../js/libs/jquery-validator.js"></script>
+  <script src="../../js/libs/toe.js"></script>
+  <script src="../../js/CUI.js"></script>
+
+</head>
+<body>
+  <div style="padding: 2rem;">
+    <h1>Horizontal forms</h1>
+
+    <form class="horizontal">
+      <h2>Checks if the different components line up correctly.</h2>
+
+      <!-- Single term filter -->
+      <span class="filters" data-init="filters">
+        <input type="text">
+        <select>
+          <option selected>Apple</option>
+          <option>Pear</option>
+          <option>Banana</option>
+        </select>
+      </span>
+
+      <div class="numberinput" data-init="numberinput">
+        <button type="button" class='decrement'>decrement</button>
+        <input type='text'>
+        <button type="button" class='increment'>increment</button>
+      </div>
+
+      <!-- Anchor -->
+      <a class="button" role="button" href="#">Action</a>
+      <!-- Button -->
+      <button>Button</button>
+
+      <!-- Text input -->
+      <label>Text</label>
+      <input type="text">
+
+      <!-- Text Area -->
+      <label>Text Area</label>
+      <textarea rows="4"></textarea>
+      <!-- Select -->
+      <span class="select" data-init="select">
+      <button type="button">Single Select</button>
+      <select>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+      </span>
+
+      <!-- Search field -->
+      <span class="search"><input type="text"><button type="button">Search</button></span>
+
+      <!-- Multiselect Select -->
+      <div class="select" data-init="select">
+        <button type="button">Multi Select</button>
+        <select multiple>
+          <option>Multi One</option>
+          <option selected>Multi Two</option>
+          <option>Multi Three</option>
+        </select>
+      </div>
+
+      <!-- Date Picker -->
+      <span class="datepicker" data-init="datepicker"><input type="datetime"><button class="icon-calendar">Datetime picker</button></span>
+
+      <label>Path Browser</label>
+      <span class="pathbrowser" data-init="pathbrowser"><input type="text"></span>
+
+      <!-- Slider -->
+      <span class="slider" data-init="slider"><input type="range" value="10" min="10" max="20" step="2"></span>
+
+      <label><input type="checkbox" checked><span>Checkbox</span></label>
+
+      <label><input type="radio" checked><span>Radio</span></label>
+
+      <label class="switch"><input type="checkbox"><span>Off</span><span>On</span></label>
+
+      <span class="selector">
+        <label><input type="radio"><span>Yes</span></label>
+        <label><input type="radio"><span>No</span></label>
+      </span>
+    </form>
+  </div>
+</body>
+</html>

@@ -3,10 +3,14 @@
  */
 
 .datepicker {
+  // used to place the button.
   position: relative;
+  // used to respect the height and width properties.
   display: inline-block;
-  margin: 0.5rem 0;
-  vertical-align: middle;
+
+  .border-box;
+  vertical-align: top; // used to align them correctly in forms.
+  margin: 2*@px 0;  // resets default margin
 
   > input[type=text] {
     margin: 0;
@@ -22,13 +26,12 @@
   }
 
   > button {
-    .button-square;
+    .button-square(36*@px);
         
     // Fit inside of the text field
     position: absolute;
     top: @px; // Because of textfield border
     right: @px; // Because of textfield border
-    height: 30*@px;
     
     &,
     &:hover,
@@ -62,11 +65,12 @@
     .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
   }
 
-  .popover {
+  &.popover {
     display: block;
     position: absolute;
     top: 3rem; /* 48px */ /* TODO: place popover relative to the action button (above or below) */
     left: 0;
+    z-index: 10010;
 
     border: 10*@px solid @popover-border-color; /* TODO: 8px in .popover, but design shows 10px */
     
@@ -120,6 +124,7 @@
         
         width: auto;
         height: auto;
+        min-width: 2.4375rem;
         
         padding: 4*@px;
         margin: 8*@px;
@@ -147,10 +152,12 @@
       button.prev-month {
         left: 0;
         margin-left: 5*@px;
+        text-align: left;
       }
       button.next-month {
         right: 0;
         margin-right: 5*@px;
+        text-align: right;
       }
     }
 
@@ -294,8 +301,10 @@
         min-width: 0;
       }
 
-      .dropdown-list ul li {
-        padding: 3*@px;
+      .dropdown-list {        
+        ul li {
+            padding: 3*@px;
+        }
       }
     }
   }
@@ -307,3 +316,6 @@ form.vertical {
   }
 }
 
+.dropdown-list {
+    z-index: 10050!important;
+}

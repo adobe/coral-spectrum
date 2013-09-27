@@ -4,7 +4,13 @@
 
 .numberinput {
 
-  margin: 8*@px;
+  // allows the component to accept height and width values.
+  display: inline-block;
+
+  .border-box;
+  vertical-align: top;
+  margin: 2*@px 0;
+
   .clearfix();
 
   input {
@@ -14,8 +20,8 @@
     border-top: 1px solid @textfield-border-color;
     border-bottom: 1px solid @textfield-border-color;
     max-width: 286*@px;
-    max-height: 36*@px;
-    min-height: 36*@px;
+    max-height: 38*@px;
+    min-height: 38*@px;
     min-width: 56*@px;
   }
 
@@ -26,8 +32,8 @@
     border-color: @textfield-border-color;
     min-width: 32*@px;
     max-width: 32*@px;
-    min-height: 36*@px;
-    max-height: 36*@px;
+    min-height: 38*@px;
+    max-height: 38*@px;
     color: transparent;
     text-shadow: none;
     text-align: center;

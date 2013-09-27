@@ -204,7 +204,7 @@
         if (key === 13 || key === 20) { // return or space
            event.preventDefault();
            if (currentIndex >= 0) {
-                this._triggerSelect(currentIndex);
+                this._triggerSelect(currentIndex, event);
                 return;
            }
         }
@@ -251,7 +251,7 @@
             if (index === this.currentIndex) li.addClass("selected");
 
             // Set class on list items from data-item-class set on options
-            var optionClassAttribute = this.options.getOptionClassAttribute(index);
+            var optionClassAttribute = this.options.getOptionClassAttribute? this.options.getOptionClassAttribute(index):undefined;
             if (optionClassAttribute) {
                 li.addClass(optionClassAttribute);
             }
@@ -262,7 +262,7 @@
         
         list.on("click", "li:not(.loading-indicator)", function(event) {
             event.preventDefault();
-            this._triggerSelect($(event.target).closest("li").attr("data-id"));
+            this._triggerSelect($(event.target).closest("li").attr("data-id"), event);
         }.bind(this));
 
         var el = (this.options.positioningElement) ? this.options.positioningElement : this.$element;
@@ -340,13 +340,14 @@
     },
     
     /** @ignore */    
-    _triggerSelect: function(index) {
+    _triggerSelect: function(index, event) {
         // Trigger a change event
         this.$element.focus();
         var e = $.Event('dropdown-list:select', {
           selectedIndex: index,
           selectedValue: this.options.options[index],
-          source: this
+          source: this,
+          originalEvent: event //passing originalEvent, for finding the exact target if required.
         });
         this.$element.trigger(e);    
     },

@@ -1,21 +1,4 @@
 /**
- Mixin: .font-face
- Quickly declare a font face
-*/
-.font(@font-name, @font-file, @font-weight: normal, @font-style: normal) {
-    font-family: @font-name;
-
-    src: url(~"@{font-folder}/@{font-file}-webfont.eot");
-    src: url(~"@{font-folder}/@{font-file}-webfont.eot?#iefix") format("embedded-opentype"),
-         url(~"@{font-folder}/@{font-file}-webfont.woff") format("woff"),
-         url(~"@{font-folder}/@{font-file}-webfont.ttf") format("truetype"),
-         url(~"@{font-folder}/@{font-file}-webfont.svg#@{font-name}") format("svg");
-
-    font-weight: @font-weight;
-    font-style: @font-style;
-}
-
-/**
  Mixin: .gradient
  A simpler syntax for gradients
 */
@@ -66,6 +49,7 @@
     -webkit-overflow-scrolling: touch; // Enable iOS-style scrolling
     min-height: 1px; // Enable scrolling in flexbox children in Firefox
 }
+
 
 /**
  Mixin: .spin
@@ -211,23 +195,23 @@
   margin: 0;
   padding: 0;
   
-  .gradient(@dropdown-gradient-start-color, @dropdown-gradient-end-color);
+  .gradient(@button-square-gradient-start-color, @button-square-gradient-end-color);
   
-  border: @px solid @dropdown-border-color;
+  border: @px solid @button-square-border-color;
     
   line-height: @button-size; // Align icons vertically
   text-shadow: none;
   
   &:hover {
-    border: @px solid @dropdown-border-color; // Override icon class border resets
+    border: @px solid @button-square-border-color; // Override icon class border resets
     
-    .gradient(@dropdown-gradient-start-color, @dropdown-gradient-start-color);
+    .gradient(@button-square-gradient-start-color, @button-square-gradient-start-color);
   }
 
   &:active {
-    border: @px solid @dropdown-border-color; // Override icon class border resets
+    border: @px solid @button-square-border-color; // Override icon class border resets
 
-    .gradient(@dropdown-gradient-end-color, @dropdown-gradient-end-color);
+    .gradient(@button-square-gradient-end-color, @button-square-gradient-end-color);
     
     .box-shadow(inset 0 0 0.5rem rgba(0, 0, 0, 0.25));
     

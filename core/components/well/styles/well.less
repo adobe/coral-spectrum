@@ -2,9 +2,13 @@
  * Class: .well
  * A content well. Used in conjunction with <strong> as a label for the well.
  */
+
+@well-background-color: rgba(0, 0, 0, .03);
+@well-border-color: rgba(0, 0, 0, .15);
+
 .well {
-  margin: 0.25rem 0;
-  padding: 0.5rem;
+  margin: 4*@px 0;
+  padding: 8*@px;
 
   border: @px solid @well-border-color;
 
@@ -13,5 +17,5 @@
 
 .well + strong {
   display: inline-block;
-  margin-top: 0.5rem;
+  margin-top: 4*@px;
 }

@@ -3,8 +3,26 @@
   A basic text input field.
 */
 
+// Dimensions
+@textfield-text-size: 13*@px;
+@textfield-text-color: rgb(255, 255, 255);
+@textfield-line-height: 16*@px;
+
+// Colors
+@textfield-border-color: rgba(0, 0, 0, 0.25);
+@textfield-background-color: rgb(255, 255, 255);
+
+@textfield-disabled-background-color: rgb(230, 230, 230);
+@textfield-error-border-color: rgb(204, 84, 74);
+@textfield-error-font-color: rgb(204, 84, 75);
+
 label {
-  font-size: 0.8125rem;
+  font-size: @textfield-text-size;
+  // line-height: 38*@px;
+  
+  // we need to use top since some elements cannot be centered using middle.
+  vertical-align: top;
+  margin: 2*@px 0;
 }
 
 input[type=text],
@@ -14,18 +32,22 @@ input[type=url],
 input[type=tel],
 input[type^="date"],
 input[type="time"] {
+
   .border-box;
+  vertical-align: top; // used to align them correctly in forms.
+  margin: 2*@px 0;  // resets default margin
 
+  min-width: 110*@px;
+
+  padding: 10*@px;
+
+  .normal-text;
+  font-size: @textfield-text-size;
+  line-height: @textfield-line-height;
+
+  border: @px solid;
+  border-color: @textfield-border-color;
   border-radius: 0;
-
-  font-size: 0.8125rem;
-  font-family: @font-base-family;
-
-  height: 2rem;
-  padding: 0.25rem 0.5rem;
-  margin: 0.5rem 0;
-
-  border: @px solid @textfield-border-color; 
   background-color: @textfield-background-color;
 
   &:disabled {
@@ -51,6 +73,12 @@ input[type="time"] {
   &:focus:invalid {
     .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
     color: @textfield-error-font-color;
+  }
+}
+
+form.horizontal {
+  label {
+    line-height: 38*@px;
   }
 }
 

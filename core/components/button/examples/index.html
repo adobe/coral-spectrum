@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Button</title>
+
+        <link rel="stylesheet" href="../../css/cui.css">
+ 
+        <script src="../../js/libs/handlebars.js"></script>
+        <script src="../../js/libs/moment.js"></script>
+        <script src="../../js/libs/jquery.js"></script>
+        <script src="../../js/libs/toe.js"></script>
+
+        <script src="../js/CUI.js"></script>
+    </head>
+    <body>
+
+        <section>
+        <h1>Buttons</h1>
+        <h2>Normal buttons</h2>
+        <button>Normal button</button>
+        <button class="primary">Primary</button>
+        <button class="warning">Warning</button>
+        <button><i class="icon-add"></i> Add Segments</button>
+        <button><i class="icon-download"></i> Download</button>
+        <button class="square warning"><i class="icon-delete"></i></button>
+
+        <h2>Call To Action Buttons</h2>
+        <button class="primary large">Call To Action Primary</button>
+        <button class="large">Call To Action</button>
+        <h2>Disabled buttons</h2>
+        <button class="primary" disabled="disabled">Disabled primary</button>
+        <h2>Block button</h2>
+        <div class="well" style="max-width: 400px;">
+          <button class="primary button-large button-block">Block level button</button>
+          <button class="warning button-block">Block level button</button>
+        </div>
+
+        <h2>Button groups, icon only</h2>
+        <div class="button-group">
+          <button><i class="icon-add"></i></button>
+          <button><i class="icon-camera"></i></button>
+          <button><i class="icon-undo"></i></button>
+        </div>
+        <h2>Button groups, text only</h2>
+        <div class="button-group">
+          <button>Add</button>
+          <button>Snapshot</button>
+          <button>Undo</button>  
+        </div>    
+        <h2>Button groups, mixed</h2>
+        <div class="button-group">
+          <button><i class="icon-add"></i> Add</button>
+          <button><i class="icon-camera"></i> Snapshot</button>
+          <button><i class="icon-undo"></i> Undo</button>  
+        </div>      
+        </section>        
+    </body>
+</html>

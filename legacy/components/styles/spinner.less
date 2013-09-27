@@ -1,0 +1,24 @@
+/**
+  Class: .spinner
+  Provides a spinny spinner
+
+  This class has been deprecated in favor of the .wait
+*/
+.spinner { 
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+
+  background-position: center center;
+  background-image: url(~"@{component-resource-folder}/spinner/spinner_small.png");
+
+  .background-size(100%);
+
+  .spin(0.75s);
+
+  &.large {
+    width: 2rem;
+    height: 2rem;
+    background-image: url(~"@{component-resource-folder}/spinner/spinner_large.png");
+  }
+}

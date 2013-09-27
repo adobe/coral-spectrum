@@ -1,0 +1,36 @@
+/**
+  Element: radio-group
+  CUI radio-group styles
+*/
+
+.radio-group {
+
+  /* vertical layout */
+  &.vertical .radiofield.field + span {
+    display: inline;
+    white-space: pre-line;
+    &:after {
+      content: "\00000A";
+    }
+  }
+
+  /* horizontal layout */
+  &.horizontal .radiofield.field {
+    display: inline;
+  }
+
+  /* vertical radios (with label below input) */
+  .radiofield.field.vertical {
+    display: none;
+    + span {
+      margin-right: 1rem;
+    }
+    + span:before {
+      position: relative;
+      top: -1.5rem;
+      left: 0.8rem;
+      margin-top: 1.5rem;
+      margin-right: 0;
+    }
+  }
+}

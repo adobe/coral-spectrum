@@ -1,32 +1,23 @@
 // TODO clean up variables and move to related components
-
-// Body
-@body-background-color: rgb(238, 238, 238);
-
+    
 // Focus
-@focus-glow-color: rgb(55, 126, 175);
-@focus-border-color: rgb(106, 139, 196);
-@focus-glow-radius: 6*@px;
+@focus-glow-color: rgb(50, 135, 210);
+@focus-border-color: @focus-glow-color;
+@focus-glow-radius: 3*@px;
 @partial-glow-radius: @focus-glow-radius/3;
 @partial-glow-color: fadeout(@focus-glow-color, 75%);
 
-
 // Fonts
-@font-base-family: AdobeClean, Helvetica, Arial, sans-serif;
-@font-light-family: AdobeCleanLight, Helvetica, Arial, sans-serif;
+@font-base-family: adobe-clean, Helvetica, Arial, sans-serif;
+@font-light-family: adobe-clean, Helvetica, Arial, sans-serif;
 @font-icon-family: AdobeIcon;
-@font-base-weight: normal;
 @font-base-color: rgb(75, 75, 75);
-@font-base-dark-color: rgb(220, 220, 220);
+
 @font-captions-help-color: rgb(135, 135, 135);
 @font-secondary-color: rgb(150, 150, 150);
 
-@headings-font-family: @font-base-family;
-@headings-font-weight: @font-base-weight;
-@headings-base-color: @font-base-color;
-
-// Links
-@link-color: rgb(100, 135, 195);
+// TODO: remove
+@font-base-dark-color: rgb(220, 220, 220);
 
 // Header
 @header-height: 46*@px;
@@ -127,38 +118,10 @@
 
 @icon-label-padding-multiplier: 0.25;
 
-// Text Field
-@textfield-border-color: rgba(0, 0, 0, 0.25);
-@textfield-background-color: rgb(255, 255, 255);
-
-@textfield-disabled-background-color: rgb(230, 230, 230);
-@textfield-error-border-color: rgb(204, 84, 74);
-@textfield-error-font-color: rgb(204, 84, 75);
-
-// Search Text Field
-@search-text-color: rgb(150, 150, 150);
-@search-text-background-color: rgb(249, 249, 249);
-@search-text-disabled-background-color: rgb(224, 224, 224);
-@search-text-border-color: rgb(184, 184, 184); 
-@search-text-disabled-border-color: rgb(209, 209, 209); 
-@search-button-gradient-start-color: rgb(234, 234, 234);
-@search-button-gradient-end-color: rgb(244, 244, 244);
-@search-button-hover-background-color: rgb(244, 244, 244);
-@search-button-down-background-color: rgb(211, 211, 211);
-@search-button-disabled-background-color: rgb(224, 224, 224);
-@search-button-disabled-border-color: rgb(209, 209, 209);
-
-// Dropdowns
-@dropdown-text-size: 14*@px;
-@dropdown-text-color: rgb(75, 75, 75);
-@dropdown-border-color: rgb(172, 172, 172);
-@dropdown-gradient-start-color: rgb(245, 245, 245);
-@dropdown-gradient-end-color: rgb(235, 235, 235);
-@dropdown-disabled-color: rgb(220, 220, 220);
-@dropdown-divider-color: rgb(220, 220, 220);
-@dropdown-background-color: rgb(240, 240, 240);
-@dropdown-active-text-color: rgb(255, 255, 255);
-@dropdown-active-background-color: rgb(65, 143, 212);
+ // Square Buttons used in the mixin.
+@button-square-border-color: rgb(172, 172, 172);
+@button-square-gradient-start-color: rgb(245, 245, 245);
+@button-square-gradient-end-color: rgb(235, 235, 235);
 
 // Datepicker
 @datepicker-day-background-color: rgb(245,245,245);
@@ -324,11 +287,6 @@
 @card-grid-margin: 15*@px;
 
 
-// Well
-@well-background-color: rgb(213, 213, 213);
-@well-border-color: rgb(187, 187, 187);
-
-
 // Alert
 @alert-header-height: 32*@px;
 
@@ -431,8 +389,8 @@
 @draggable-list-background-disabled-color: rgb(209, 209, 209);
 
 // DropZone
-@dropzone-background-color: @body-background-color;
-@dropzone-background-hover-color: darken(@body-background-color, 5%);
+@dropzone-background-color: rgb(238, 238, 238);
+@dropzone-background-hover-color: darken(@dropzone-background-color, 5%);
 @dropzone-border-color: @draggable-list-border-color;
 
 // Accordion

@@ -1,4 +1,6 @@
 (function($) {
+  var datepicker_guid = 0;
+  
   CUI.Datepicker = new Class(/** @lends CUI.Datepicker# */{
     toString: 'Datepicker',
     extend: CUI.Widget,
@@ -49,16 +51,24 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
       @desc Creates a datepicker from a div element
       @constructs
 
-      @param {Object}   options                               Component options
-      @param {Array} [options.monthNames=english names]       Array of strings with the name for each month with January at index 0 and December at index 11
-      @param {Array} [options.dayNames=english names]         Array of strings with the name for each weekday with Sun at index 0 and Sat at index 6
-      @param {String} [options.type="date"]                   Type of picker, supports date, datetime, datetime-local and time
-      @param {integer} [options.startDay=0]                   Defines the start day for the week, 0 = Sunday, 1 = Monday etc.
-      @param {boolean} [options.disabled=false]               Is this widget disabled?
-      @param {String} [options.displayedFormat="YYYY-MM-DD[T]HH:mm[Z]"]           Displayed date (userfriendly), default is 2012-10-20 20:35
-      @param {String} [options.storedFormat="YYYY-MM-DD[T]HH:mmZ"]    Storage Date format, is never shown to the user, but transferred to the server 
-      @param {String} [options.required=false]                Is a value required?
-      @param {String} [options.hasError=false]                True to display widget as erroneous, regardless if the value is required or not.
+      @param {Object}  options                                                     Component options
+      @param {Array}   [options.monthNames=english names]                          Array of strings with the name for each month with January at index 0 and December at index 11
+      @param {Array}   [options.dayNames=english names]                            Array of strings with the name for each weekday with Sun at index 0 and Sat at index 6
+      @param {String}  [options.type="date"]                                       Type of picker, supports date, datetime, datetime-local and time
+      @param {integer} [options.startDay=0]                                        Defines the start day for the week, 0 = Sunday, 1 = Monday etc.
+      @param {boolean} [options.disabled=false]                                    Is this widget disabled?
+      @param {String}  [options.displayedFormat="YYYY-MM-DD[T]HH:mm[Z]"]           Displayed date (userfriendly), default is 2012-10-20 20:35
+      @param {String}  [options.storedFormat="YYYY-MM-DD[T]HH:mmZ"]                Storage Date format, is never shown to the user, but transferred to the server 
+      @param {String}  [options.required=false]                                    Is a value required?
+      @param {String}  [options.hasError=false]                                    True to display widget as erroneous, regardless if the value is required or not.
+      @param {String}  [options.minDate]                                           Defines the start date of selection range. Dates earlier than minDate are not selectable. 
+                                                                                   It must be expressed in officialDateFormat (YYYY-MM-DD) or as "today".
+      @param {String}  [options.maxDate]                                           Defines the end date of selection range. Dates later than maxDate are not selectable. 
+                                                                                   It must be expressed in officialDateFormat (YYYY-MM-DD) or as "today".
+      @param {String}  [options.headFormat="MMMM YYYY"]                            Defines calendar headline format, default is "MMMM YYYY"
+      @param {boolean} [options.forceHTMLMode=false]                               Force to HTML mode and never use a native Date widget, if given (with any non-empty value)
+      @param {String}  [options.selectedDateTime]                                  Defines what date/time will be selected when the calendar is rendered. If nothing is specified it will be 
+                                                                                   considerend today or current time.
     */
     
     defaults: {
@@ -89,7 +99,9 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
     language: 'coralui',
 
     construct: function(options) {
-
+        
+        this.guid = (datepicker_guid += 1);
+        
         this._readDataFromMarkup();
         this._adjustMarkup();
 
@@ -113,14 +125,13 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             this.useNativeControls = true;
         }
 
-        this._updateState();
-
-        this.$openButton = this.$element.find('button');
-
         this.$input = this.$element.find('input').not("[type=hidden]");
         this.$hiddenInput = this.$element.find('input[type=hidden]');
-
+        this.$popover = $('body').find(".popover#"+this.guid);
+        this.$openButton = this.$element.find('button');
         
+        this._updateState();
+
         // Enable time buttons in popover
         if(this._isTimeEnabled()) {
             this._renderTime();
@@ -168,7 +179,6 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         var timeout = null;
         var $input = this.$input;
         var $btn = this.$openButton;
-        var $popover = this.$element.find('.popover').first();
 
         if (!this.options.disabled) {
             $('body').on('click', function(){
@@ -176,9 +186,10 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
                     this._hidePicker();
                 }
             }.bind(this));
-
+            
             this.$element.on('click', function(event){
-                if ($(event.target).is(".icon-calendar")) {
+                var $target = $(event.target);
+                if ($target.is(".icon-calendar, .icon-clock") || $target.children().is(".icon-calendar, .icon-clock")) {
                     if (!this.pickerShown) {
                         this._openPicker();
                     } else {
@@ -186,9 +197,16 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
                     }
                 }
 
-
                 // let the event time to propagate.
                 // Do not use stopPropagation, as other Datepickers might want to use this event for closing their own datepicker
+                this.keepShown = true;
+                setTimeout(function() {
+                    this.keepShown = false;
+                }.bind(this), 200);
+
+            }.bind(this));
+            
+            this.$popover.on('click', function(event){
                 this.keepShown = true;
                 setTimeout(function() {
                     this.keepShown = false;
@@ -215,7 +233,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         }
 
         // Move around
-        this.$element.find(".calendar").on("swipe", function(event) {
+        this.$popover.find(".calendar").on("swipe", function(event) {
             var d = event.direction;
             if (d === "left") {
                 this.displayDateTime = normalizeDate(moment([this.displayDateTime.year(), this.displayDateTime.month() + 1, 1]));
@@ -226,14 +244,14 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             }         
         }.bind(this));
 
-        this.$element.on("mousedown", ".next-month", function(event) {
+        this.$popover.on("mousedown", ".next-month", function(event) {
             event.preventDefault();
             if (!this.displayDateTime) return;
             this.displayDateTime = normalizeDate(moment([this.displayDateTime.year(), this.displayDateTime.month() + 1, 1]));
             this._renderCalendar("left");
         }.bind(this));
 
-        this.$element.on("mousedown", ".prev-month", function(event) {
+        this.$popover.on("mousedown", ".prev-month", function(event) {
             event.preventDefault();
             if (!this.displayDateTime) return;
             this.displayDateTime = normalizeDate(moment([this.displayDateTime.year(), this.displayDateTime.month() - 1, 1]));
@@ -251,9 +269,9 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             };
 
             // for Desktop
-            this.$element.on("dropdown-list:select", ".hour,.minute", dropdownChanged.bind(this));
+            this.$popover.on("dropdown-list:select", ".hour,.minute", dropdownChanged.bind(this));
             // for Mobile
-            this.$element.on("change", ".hour,.minute", dropdownChanged.bind(this));
+            this.$popover.on("change", ".hour,.minute", dropdownChanged.bind(this));
         }
 
 
@@ -363,6 +381,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
 
     _openPicker: function() {
         this.$element.addClass("focus");
+        this.$input.parents().on('scroll', this._scrollParents.bind(this));
 
         if(!this.useNativeControls) {
             this._readInputVal();
@@ -372,13 +391,17 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
         }
     },
     
+    _scrollParents: function(event) {
+        this._hidePicker();
+    },
+    
     _showPicker: function() {
         if(this._isDateEnabled()) this._renderCalendar();
         
-        var left = this.$openButton.position().left + this.$openButton.width() / 2 - (this.$element.find(".popover").width() / 2);
-        var top = this.$openButton.position().top + this.$openButton.outerHeight() + 16;
+        var left = this.$openButton.offset().left + this.$openButton.width() / 2 - (this.$popover.width() / 2);
+        var top = this.$openButton.offset().top + this.$openButton.outerHeight() + 16;
         //if (left < 0) left = 0;
-        this.$element.find(".popover").css(
+        this.$popover.css(
                 {"position": "absolute",
                  "left": left + "px",
                  "top": top + "px"}).show();
@@ -388,7 +411,10 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
     
     _hidePicker: function() {
         this.$element.removeClass("focus");
-        this.$element.find(".popover").hide();
+        this.$input.parents().off('scroll', this._scrollParents);
+        if(this.$popover){
+            this.$popover.hide();
+        }
         this.pickerShown = false;
     },
     
@@ -402,9 +428,12 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             if (this.$element.find("button").length === 0) {
                 this.$element.append("<button class=\"icon-calendar small\"><span>Datepicker</span></button>");
             }
-            if (this.$element.find(".popover").length === 0) {
-                this.$element.append('<div class="popover arrow-top" style="display:none"><div class="inner"></div></div>');
-                if(this._isDateEnabled()) this.$element.find(".inner").append('<div class="calendar"><div class="calendar-header"></div><div class="calendar-body"></div></div>');
+            if ( $('body').find(".popover#"+this.guid).length === 0) {
+                $('body').append('<div class="datepicker popover arrow-top" style="display:none" id ="' + this.guid + '"><div class="inner"></div></div>');
+                var $popover = $('body').find(".popover#"+this.guid);
+                if(this._isDateEnabled()) {
+                    $popover.find(".inner").append('<div class="calendar"><div class="calendar-header"></div><div class="calendar-body"></div></div>');
+                }
             }
         } else {
             // Show native control
@@ -438,7 +467,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
 
         var table = this._renderOneCalendar(displayMonth, displayYear);
         
-        var $calendar = this.$element.find(".calendar");
+        var $calendar = this.$popover.find(".calendar");
 
         table.on("mousedown", "a", function(event) {
             event.preventDefault();
@@ -469,11 +498,11 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
     },
 
     _getHoursFromDropdown: function() {
-        return parseInt(this.$element.find('.time .hour select').val(), 10);
+        return parseInt(this.$popover.find('.time .hour select').val(), 10);
     },
 
     _getMinutesFromDropdown: function() {
-        return parseInt(this.$element.find('.time .minute select').val(), 10);
+        return parseInt(this.$popover.find('.time .minute select').val(), 10);
     },
 
     _renderOneCalendar: function(month, year) {
@@ -487,7 +516,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
 
         title.append(nextMonthElement).append(prevMonthElement);
 
-        var $calendar = this.$element.find(".calendar");
+        var $calendar = this.$popover.find(".calendar");
         if ($calendar.find(".calendar-header").length > 0) {
             $calendar.find(".calendar-header").replaceWith(title);
         } else {
@@ -547,10 +576,10 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
       
     _slideCalendar: function(newtable, isLeft) {
 
-        this.$element.find(".sliding-container table").stop(true, true);
-        this.$element.find(".sliding-container").remove();
+        this.$popover.find(".sliding-container table").stop(true, true);
+        this.$popover.find(".sliding-container").remove();
 
-        var oldtable = this.$element.find("table");
+        var oldtable = this.$popover.find("table");
         var width = oldtable.width();
         var height = oldtable.height();
         
@@ -562,7 +591,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
                        "height": height + "px",
                        "overflow": "hidden"});
                    
-        this.$element.find(".calendar-body").append(container);
+        this.$popover.find(".calendar-body").append(container);
         container.append(oldtable).append(newtable);
         oldtable.css({"position": "absolute", "left": 0, "top": 0});
         oldtable.after(newtable);
@@ -578,7 +607,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             if (container.parents().length === 0) return; // We already were detached!
             newtable.css({"position": "relative", "left": 0, "top": 0});
             newtable.detach();
-            this.$element.find(".calendar-body").append(newtable);
+            this.$popover.find(".calendar-body").append(newtable);
             container.remove();
         }.bind(this));        
     },
@@ -614,8 +643,8 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
 
     _getTimeFromInput: function() {
         if(this._isTimeEnabled()) {
-            var h = parseInt(this.$element.find('.time .hour button').text(), 10);
-            var m = parseInt(this.$element.find('.time .minute button').text(), 10);
+            var h = parseInt(this.$popover.find('.time .hour button').text(), 10);
+            var m = parseInt(this.$popover.find('.time .minute button').text(), 10);
             var time = [h,m];
             return time;
         }
@@ -652,7 +681,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             if(this.options.selectedDateTime && h === this.options.selectedDateTime.hours()) { hourOption.attr('selected','selected'); }
             hourSelect.append(hourOption);
         }
-        var hourDropdown = $('<div class="dropdown hour"><button></button></input>').append(hourSelect);
+        var hourDropdown = $('<div class="dropdown hour"><button></button></div>').append(hourSelect);
 
         // Minutes
         var minuteSelect = $('<select></select>');
@@ -686,10 +715,10 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
 
         html.append(hourDropdown, $("<span>:</span>"), minuteDropdown);
 
-        if (this.$element.find(".time").length === 0) {
-            this.$element.find(".inner").append(html);
+        if (this.$popover.find(".time").length === 0) {
+            this.$popover.find(".inner").append(html);
         } else {
-            this.$element.find(".time").empty().append(html.children());
+            this.$popover.find(".time").empty().append(html.children());
         }
         
         // Set up dropdowns

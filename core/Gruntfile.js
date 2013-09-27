@@ -36,6 +36,9 @@ module.exports = function(grunt) {
   */
   var includeOrder = {
     "cui": [
+      // Typekit system
+      dirs.build +'/js/source/typekit.js',
+
       // Class system
       dirs.build +'/js/source/Class.js',
 
@@ -273,16 +276,6 @@ module.exports = function(grunt) {
           }
         ]
       },
-      fonts: {
-        files: [
-          {
-            expand: true,
-            cwd: '<%= dirs.modules %>/coralui-contrib-adobeclean/fonts/',
-            src: ['**'],
-            dest: '<%= dirs.build %>/res/fonts/'
-          }
-        ]
-      },
       tests: {
         files: [ // test cases
           {
@@ -448,7 +441,7 @@ module.exports = function(grunt) {
 
     "shell": {
       "local-publish": {
-        "command": "coralui-local-publish <%= meta.appName %> <%= dirs.build %>/<%= meta.appName %>-<%= meta.version %>.tgz",
+        "command": "sh coralui-local-publish <%= meta.appName %> <%= dirs.build %>/<%= meta.appName %>-<%= meta.version %>.tgz",
         "options": {
             stdout: true,
             stderr: true
