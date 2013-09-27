@@ -223,6 +223,22 @@ module.exports = function (grunt) {
                         src: ['**/styles/**.less'],
                         dest: '<%= dirs.build %>/less/components'
                     },
+                    { // get resources from the modularized components
+                        expand: true,
+                        cwd: '<%= dirs.components %>/',
+                        src: ['**/res/**'],
+                        dest: '<%= dirs.build %>/res/components',
+                        filter: 'isFile',
+                        rename: function(dest, src) {
+                            var match = src.match(/coralui-contrib-component-(.*)\/res\/(.*)/);
+                            if (match) {
+                                var component = match[1];
+                                var filePath = match[2];
+                                return dest + '/' + component + '/' + filePath;
+                            }
+                            return dest;
+                        }
+                    },
                     { // get js from the modularized components
                         expand: true,
                         flatten: true,
