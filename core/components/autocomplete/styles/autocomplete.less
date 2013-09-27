@@ -14,11 +14,13 @@
     width: 13rem; /* Width must be specified */
     vertical-align: top;
 
+    margin: 2*@px 0;
+
     @input-height: 2rem;
-    @suggestion-btn-size: 30*@px;
+    @suggestion-btn-size: 36*@px;
 
     > input {
-        margin: 0; /* put the margin at .autocomplete instead */
+        margin: 0;
         padding-right: @input-height;
         width: 100%;
 
@@ -63,12 +65,13 @@
     }
 
     > .autocomplete-suggestion-toggle {
+        .button-square(@suggestion-btn-size);
+
         .gradient(@autocomplete-suggestion-toggle-background-gradient-start, @autocomplete-suggestion-toggle-background-gradient-end);
         position: absolute;
-        top: 9*@px;
-        right: 1*@px;
-        height: @suggestion-btn-size;
-        width: @suggestion-btn-size;
+        top: 3*@px; // due to border of 1px and margin
+        right: @px; // due to border of 1px
+        line-height: 24*@px;
         min-width: 0;
         margin: 0;
         padding: 0;

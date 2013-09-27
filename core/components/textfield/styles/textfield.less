@@ -18,7 +18,7 @@
 
 label {
   font-size: @textfield-text-size;
-  line-height: 38*@px;
+  // line-height: 38*@px;
   
   // we need to use top since some elements cannot be centered using middle.
   vertical-align: top;
@@ -73,6 +73,12 @@ input[type="time"] {
   &:focus:invalid {
     .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
     color: @textfield-error-font-color;
+  }
+}
+
+form.horizontal {
+  label {
+    line-height: 38*@px;
   }
 }
 
