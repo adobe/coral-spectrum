@@ -11,13 +11,32 @@
     .user {
         display: none;
     }
-    .published,
-    .modified {
+
+    .main {
+        > p {
+            text-transform: uppercase;
+            margin: 6*@px 10*@px -6*@px;
+            font-size: 10*@px;
+        }
+    }
+    .label > hr {
+        clear: left;
+        border: none;
+        border-bottom: @px solid @card-image-separator;
+        margin: 0 10*@px 6*@px;
+    }
+    .published, .modified {
         float: left;
+        margin-right: 0;
     }
-    .links {
-        float: right;
+    .info {
+        > span {
+            margin-right: 6*@px;
+            margin-bottom: 6*@px;
+            display: inline-block;
+        }
     }
+
     .image {
         overflow: hidden; // To avoid the gradient to overflow the image element
         position: relative;
@@ -43,11 +62,22 @@
     .card-list-image-stack(28*@px, 28*@px);
 
     .main {
-        width: 65%;
+        width: 60%;
+        height: 100%;
+        position: relative;
+
         > p {
+            float: left;
+
             font-size: 10*@px;
             font-weight: bold;
             text-transform: uppercase;
+            position: absolute;
+            margin-top: 25*@px;
+        }
+
+        > p + h4 {
+            margin-top: 7*@px;
         }
         .info-locked {
             .card-list-box();
@@ -56,48 +86,63 @@
             .card-list-box(yellow);
         }
     }
-    .published,
-    .modified {
-        float: left;
-        width: 15%;
-        .card-list-date-user();
+    .label > hr {
+        display: none;
     }
-    .links {
+
+    .info,
+    .modified,
+    .published {
         float: left;
-        width: 5%;
+    }
+
+    .info {
+        width: 10%;
+        float: right;
+
+        > span {
+            display: inline-block;
+            width: 10*@px;
+        }
+    }
+
+    .modified,
+    .published {
+        width: 15%;
+       .card-list-date-user();
     }
 }
 .list.small .card-page {
     .main {
         width: 60%;
     }
-    .published,
-    .modified {
-        width: 20%;
-    }
-    .links {
+    .info {
         display: none;
+    }
+    .modified,
+    .published {
+        width: 20%;
     }
 }
 .list.xsmall .card-page {
     .main {
         width: 70%;
     }
+    .info,
+    .modified {
+        display: none;
+    }
     .published {
         width: 30%;
-    }
-    .modified,
-    .links {
-        display: none;
     }
 }
 .list.xxsmall .card-page {
     .main {
         width: 100%;
     }
-    .published,
+    .info,
     .modified,
-    .links {
+    .published {
         display: none;
     }
 }
