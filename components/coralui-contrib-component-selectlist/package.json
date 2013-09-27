@@ -1,0 +1,13 @@
+{
+  "name": "coralui-contrib-component-selectlist",
+  "version": "0.1.0-SNAPSHOT",
+  "repository": {
+    "type": "git",
+    "url": "https://git.corp.adobe.com/Coral/CoralUI"
+  },
+  "dependencies": {
+    "coralui-core": "~2.0.0"
+  },
+  "devDependencies": {
+  }
+}
