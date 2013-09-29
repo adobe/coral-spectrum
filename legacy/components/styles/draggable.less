@@ -2,6 +2,21 @@
  * Class: .draggable
  * Used for draggable list component
  */
+
+ // Draggable
+@draggable-list-background-color: rgb(244, 244, 244);
+@draggable-list-background-hover-color: rgb(255, 255, 255);
+@draggable-list-border-color: rgb(179, 179, 179);
+@draggable-list-text-normal-color: rgb(75, 75, 75);
+@draggable-list-border-handle-color: rgb(220, 219, 219);
+@draggable-list-text-disabled-color: rgb(179, 179, 179);
+@draggable-list-background-disabled-color: rgb(209, 209, 209);
+
+// DropZone
+@dropzone-background-color: rgb(238, 238, 238);
+@dropzone-background-hover-color: darken(@dropzone-background-color, 5%);
+@dropzone-border-color: @draggable-list-border-color;
+
 ul.draggable {
   position: relative;
   padding: 0;
