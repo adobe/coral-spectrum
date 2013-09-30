@@ -103,6 +103,16 @@
     .info {
         padding-top: 9*@px;
     }
+
+    .new-flag {
+        .card-flag(rgb(125,179,255));
+        text-transform: uppercase;
+    }
+
+    .flag {
+        .card-flag(#C8C8C8);
+        text-transform: uppercase;
+    }
 }
 
 // List view style ////////////////////////////////////////////////////////////////
@@ -272,12 +282,13 @@
     }
 }
 
+
 // In list view
 .list [class^="card-"].selected,
 .list [class*=" card-"].selected {
     > i.select {
         .icon-check;
-        
+
         &:before {
             border-color: mix(@checkbox-border-color, @card-list-checkbox-color, 75%);
             color: @card-list-checkbox-color;
