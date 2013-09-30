@@ -42,7 +42,7 @@
     .calc-width(~"100%" - unit(@card-grid-banner-margin, rem));
     margin-left:  (@card-banner-offset+@px);
     margin-right: (@card-banner-offset+@px);
-    
+
     .image {
         border-bottom: none;
     }
@@ -203,5 +203,37 @@
     .date,
     .user {
         display: block;
+    }
+}
+
+.card-flag(@backgroundColor, @triangleSize: @card-banner-offset, @shadow-density: 0.5) {
+    display: block;
+    z-index: 10;
+    position: absolute;
+
+    top: 10*@px;
+    right: -@triangleSize;
+    margin-right: -@px;
+
+    padding: (@triangleSize / 2) (1.5 * @triangleSize);
+
+    text-align: right;
+    font-weight: bold;
+    background: @backgroundColor;
+    border: @px solid darken(@backgroundColor, 10%);
+    .box-shadow(0 8*@px 8*@px -5*@px rgba(0, 0, 0, @shadow-density));
+
+    &:after {
+        content: " ";
+        position: absolute;
+        bottom: -2*@px - @triangleSize;
+        right: -@px;
+
+        width: 0;
+        height: 0;
+
+        border: (@triangleSize + @px)/2 solid transparent;
+        border-left-color: darken(@backgroundColor, 10%);
+        border-top-color: darken(@backgroundColor, 10%);
     }
 }
