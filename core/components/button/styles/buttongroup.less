@@ -3,13 +3,17 @@
   CUI button-group styles
 */
 
+@buttongroup-border-color: rgb(172, 172, 172);
+@buttongroup-gradient-start-color: rgb(245, 245, 245);
+@buttongroup-gradient-end-color: rgb(235, 235, 235);
+
 .button-group {
   font-size: 0;
   
   button,
   .button {
-      .gradient(@selector-gradient-start-color, @selector-gradient-end-color);
-      border: @px solid @selector-border-color;
+      .gradient(@buttongroup-gradient-start-color, @buttongroup-gradient-end-color);
+      border: @px solid @buttongroup-border-color;
       color: @font-base-color;
       text-shadow: none;
       .normal-text;
@@ -21,7 +25,7 @@
         position: relative;
       }
       &:hover {
-          .gradient(@selector-gradient-start-color, @selector-gradient-start-color);  
+          .gradient(@buttongroup-gradient-start-color, @buttongroup-gradient-start-color);  
       }
       
       i[class^="icon-"],
