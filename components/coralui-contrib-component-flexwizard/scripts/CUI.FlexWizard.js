@@ -39,7 +39,8 @@
                 var ol = nav.children("ol");
 
                 sections.map(function() {
-                    return $("<li />").text(this.title);
+                    //http://bugs.jquery.com/ticket/13567
+                    return $("<li />").text(this.title).get(0);
                 }).appendTo(ol);
 
                 return nav;
