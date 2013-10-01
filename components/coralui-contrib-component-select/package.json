@@ -7,7 +7,8 @@
   },
   "dependencies": {
     "coralui-core": "~2.0.0",
-    "coralui-contrib-component-selectlist": "~0.0.1"
+    "coralui-contrib-component-selectlist": "0.0.1",
+    "coralui-contrib-component-taglist": "0.0.1"
   },
   "devDependencies": {
   }
