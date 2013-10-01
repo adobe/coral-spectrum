@@ -237,3 +237,51 @@
         border-top-color: darken(@backgroundColor, 10%);
     }
 }
+
+.card-alert(@triangleSize: @card-banner-offset, @shadow-density: 0.5) {
+    display: block;
+    z-index: 10;
+    position: relative;
+
+    top: 0;
+    margin: 0 -(@triangleSize + @px);
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    .box-shadow(0 8*@px 8*@px -5*@px rgba(0, 0, 0, @shadow-density));
+
+              ~ a:before,               ~ a:after,
+              ~ .card:before,           ~ .card:after { border-color: @alert-blue-border-color;   }
+    &.error   ~ a:before,     &.error   ~ a:after,
+    &.error   ~ .card:before, &.error   ~ .card:after { border-color: @alert-red-border-color;    }
+    &.notice  ~ a:before,     &.notice  ~ a:after,
+    &.notice  ~ .card:before, &.notice  ~ .card:after { border-color: @alert-yellow-border-color; }
+    &.success ~ a:before,     &.success ~ a:after,
+    &.success ~ .card:before, &.success ~ .card:after { border-color: @alert-green-border-color;  }
+    &.help    ~ a:before,     &.help    ~ a:after,
+    &.help    ~ .card:before, &.help    ~ .card:after,
+    &.info    ~ a:before,     &.info    ~ a:after,
+    &.info    ~ .card:before, &.info    ~ .card:after { border-color: @alert-blue-border-color;   }
+
+    ~ a:before, ~ a:after, ~ .card:before, ~ .card:after {
+        content: " ";
+        position: absolute;
+        top: 0;
+        width: 0;
+        height: 0;
+        border: (@triangleSize + @px)/2 solid;
+
+        /* overriding more specific selectors from above using !important */
+        border-bottom-color: transparent !important;
+    }
+    ~ a:before, ~ .card:before {
+        left: -(@triangleSize + @px);
+        border-left-color: transparent !important;
+    }
+    ~ a:after, ~ .card:after {
+        right: -(@triangleSize + @px);
+        border-right-color: transparent !important;
+    }
+}
