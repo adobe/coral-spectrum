@@ -6,7 +6,8 @@
     "url": "https://git.corp.adobe.com/Coral/CoralUI"
   },
   "dependencies": {
-    "coralui-core": "~2.0.0"
+    "coralui-core": "~2.0.0",
+    "coralui-contrib-component-selectlist": "~0.0.1"
   },
   "devDependencies": {
   }
