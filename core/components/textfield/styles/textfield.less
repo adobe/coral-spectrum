@@ -6,7 +6,7 @@
 // Dimensions
 @textfield-text-size: 13*@px;
 @textfield-text-color: rgb(255, 255, 255);
-@textfield-line-height: 16*@px;
+@textfield-height: 38*@px;
 
 // Colors
 @textfield-border-color: rgba(0, 0, 0, 0.25);
@@ -37,13 +37,14 @@ input[type="time"] {
   vertical-align: top; // used to align them correctly in forms.
   margin: 2*@px 0;  // resets default margin
 
+  height: @textfield-height;
   min-width: 110*@px;
 
-  padding: 10*@px;
+  padding: 0 10*@px;
 
   .normal-text;
   font-size: @textfield-text-size;
-  line-height: @textfield-line-height;
+  line-height: @textfield-height;
 
   border: @px solid;
   border-color: @textfield-border-color;
