@@ -65,6 +65,10 @@ module.exports = function (grunt) {
             'components/CUI.NumberInput.js',
             'components/CUI.Colorpicker.js',
             'components/CUI.CycleButtons.js',
+            'components/CUI.SelectList.js',
+            'components/CUI.TagList.js',
+            'components/CUI.Select.js',
+            'components/CUI.Autocomplete.js',
 
             // Validations
             'validations.js'
