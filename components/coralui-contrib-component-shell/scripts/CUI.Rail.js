@@ -6,7 +6,7 @@
         /**
          * @extends CUI.Widget
          * @classdesc this widget enables rail features
-         * <div id="myRail" class="rail" data-init="rail" data-theme="dark">
+         * <div id="myRail" class="rail theme-dark" data-init="rail">
          *     <div class="wrap">
          *     Place your content here.
          *     </div>
@@ -23,7 +23,7 @@
          *
          * @example
          * <caption>Markup</caption>
-         * &lt;div id=&quot;myRail&quot; class=&quot;rail&quot; data-init=&quot;rail&quot; data-theme=&quot;dark&quot;&gt;
+         * &lt;div id=&quot;myRail&quot; class=&quot;rail theme-dark&quot; data-init=&quot;rail&quot;&gt;
          *     &lt;div class=&quot;wrap&quot;&gt;
          *     Place your content here.
          *     &lt;/div&gt;
@@ -36,8 +36,8 @@
 
             // add default theme to rail
             // this is a temporary solution because it expects to markup to already have the attribute
-            if (!this.$element.attr('data-theme')) {
-                this.$element.attr('data-theme', 'dark');
+            if (!this.$element.hasClass('theme-dark')) {
+                this.$element.addClass('theme-dark');
             }
 
             this.applyOptions();
