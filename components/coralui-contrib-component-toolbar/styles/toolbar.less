@@ -2,28 +2,31 @@
 Class: .toolbar
 The top toolbar with action icons
 */
-
 // Toolbar
 @toolbar-border-color: rgb(215, 215, 215);
+@toolbar-height: 52*@px;
 
 .toolbar {
+
     .clearfix;
+
     position: relative;
-    padding: 0 3*@px;
+
+    // setting a fixed height stops the toobar from having several rows.
+    // height: 38*@px;
+    padding: 7*@px;
     border-bottom: @px solid @toolbar-border-color;
-    
-    .left,
-    .right {
-        z-index: 1;
-        position: relative;
-        height: 46*@px;
+
+    // removes the margin of every component
+    > * {
+        margin: 0;
     }
     
     .center {
         position: absolute;
         left: 0;
         right: 0;
-        height: 46*@px;
+        height: 100%;
         
         text-align: center;
         
@@ -35,17 +38,19 @@ The top toolbar with action icons
             padding-bottom: 9*@px;
             max-width: 14rem;
             
-            .regularText;
+            .regular-text;
             .ellipsis;
             line-height: 1.5;
             font-size: 18*@px;
         }
-        .pulldown {
-            height: 46*@px;
-        }
+
+        /*
+        > * {
+            margin: 0;
+        }*/
     }
 
-
+    /*
     // Hack to avoid FF to display horizontal scrollbars because of a bug on button elements
     // See: https://bugzilla.mozilla.org/show_bug.cgi?id=750115
     button[class^="icon-"],
@@ -58,7 +63,7 @@ The top toolbar with action icons
             top: 9*@px;
             text-indent: 0;
         }
-    }
+    }*/
 
     &.break-lines .center,
     .break-lines & .center {
@@ -93,6 +98,12 @@ The top toolbar with action icons
     //overflow: hidden; // Fixes CUI-260 by preventing accessibility text in <button> tags in icon groups from overflowing
     //breaks CUI-277
 
+    
+    // removes the margin of every child element.        
+    > * {
+        margin: 0;
+    }
+
     > a,
     > i,
     > button,
@@ -106,13 +117,13 @@ The top toolbar with action icons
     // Any icon in an icon group should be medium sized
     [class^="icon-"],
     [class*=" icon-"] {
+        // uses the 24px icons.
         .icon-medium;
         
-        line-height: 46*@px + 2*@px;
-        
         &, &:before {
-          height: 46*@px;
-          width: 44*@px;
+          line-height: 38*@px;
+          height: 38*@px;
+          width: 38*@px;
         }
     }
 
@@ -139,23 +150,9 @@ The top toolbar with action icons
       }
     }
 
-    > a.button:not([class^="icon-"]):not([class*=" icon-"]),
-    > button:not([class^="icon-"]):not([class*=" icon-"]) {
-        margin: 7*@px 10*@px;
-    }
-    
-    > .divider {
-        height: @icon-medium-size;
-        margin: 10*@px 0 0 10*@px;
-        padding-right: 10*@px;
-        line-height: 50*@px;
-        border-left: @px solid @icon-divider-color;
-        vertical-align: top;
-    }
-
     > .text {
         margin: 0 10*@px;
-        line-height: 46*@px;
+        line-height: 38*@px;
     }
 
     > nav.pulldown {
@@ -164,7 +161,7 @@ The top toolbar with action icons
         > a[class^="icon-"], 
         > a[class*=" icon-"] {
             padding: 0;
-            line-height: 46*@px;
+            line-height: @toolbar-height;
 
             &:after {
                 background: none;
@@ -173,9 +170,18 @@ The top toolbar with action icons
             }
         }
     }
+}
 
-    > .dropdown,
-    > input[type="text"] {
-        vertical-align: top;
-    }
+.divider {
+    
+    // variables
+    @divider-height: 24*@px;
+    @divider-border-color: rgb(206, 206, 206);
+
+    height: @divider-height;
+    margin: 7*@px 0 7*@px 10*@px;
+    padding-right: 10*@px;
+    line-height: @divider-height;
+    border-left: @px solid @divider-border-color;
+    vertical-align: top;
 }

@@ -5,11 +5,13 @@
   <title>CoralUI Shell</title>
 
   <link rel="stylesheet" href="../../css/cui.css">
-
+  
   <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/libs/jquery-reflow.js"></script>
   <script src="../../js/libs/toe.js"></script>
   <script src="../../js/CUI.js"></script>
 </head>
+
 <body class="desktop">
 
   <header class="top">
@@ -29,6 +31,32 @@
   </header>
 
   <div class="page" role="main">
+
+<div class="content-header">
+<nav class="mode-default toolbar" data-init="toolbar">
+<div class="left icongroup"><button class="icon-navigation" title="Toggle Rail" type="button" autocomplete="off" data-target="#rail">Toggle Rail</button><span class="divider"></span><button class="foundation-mode-change foundation-collection-action icon-check-circle" title="Enter Selection Mode" type="button" autocomplete="off" data-foundation-mode-group="cq-projects-admin-projects" data-foundation-mode-value="selection" data-foundation-collection-action="{&quot;target&quot;: &quot;.cq-projects-admin-projects&quot;, &quot;activeCount&quot;: &quot;&gt;0&quot;}">Enter Selection Mode</button><a id="create-pulldown" class="cq-projects-admin-create icon-add" title="Create" href="/libs/cq/core/content/projects/create.html">Create</a>
+</div><div class="right icongroup">
+
+<div class="foundation-admin-layouttoggle" data-foundation-admin-layouttoggle-target=".cq-projects-admin-projects" data-align="right">
+
+<button data-foundation-admin-layouttoggle-layout="{&quot;name&quot;:&quot;foundation-layout-list&quot;}" title="Show as List" type="button" autocomplete="off" class="icon-viewcard">List Layout</button>
+<button class="hide icon-viewlist" data-foundation-admin-layouttoggle-layout="{&quot;name&quot;:&quot;foundation-layout-card&quot;}" title="Show as Cards" type="button" autocomplete="off">Card Layout</button></div>
+</div>
+
+<div class="center">
+        
+
+    <h1>Projects</h1>
+
+
+    </div></nav>
+
+
+<nav class="mode-selection toolbar" data-init="toolbar">
+<div class="left icongroup"><button class="foundation-admin-rail-toggle icon-navigation" title="Toggle Rail" type="button" autocomplete="off" data-target="#rail">Toggle Rail</button><span class="divider"></span><button class="foundation-mode-change icon-close-circle active" title="Exit Selection Mode" type="button" autocomplete="off" data-foundation-mode-group="cq-projects-admin-projects" data-foundation-mode-value="default">Exit Selection Mode</button><button class="foundation-admin-properties-activator foundation-collection-action icon-info-circle hide" title="View Properties" type="button" autocomplete="off" data-href="/libs/cq/core/content/projects/properties.html" data-foundation-collection-action="{&quot;target&quot;: &quot;.cq-projects-admin-projects&quot;, &quot;activeSelectionCount&quot;: &quot;single&quot;}">View Properties</button><a class="cq-projects-admin-actions-delete-activator foundation-collection-action icon-delete hide" title="Delete" href="#deleteproject" data-toggle="modal" data-foundation-collection-action="{&quot;target&quot;: &quot;.cq-projects-admin-projects&quot;, &quot;activeSelectionCount&quot;: &quot;multiple&quot;}">Delete</a><a class="cq-projects-admin-actions-addtask-activator foundation-collection-action icon-noteadd hide" title="Add task page" href="/libs/cq/core/content/projects/addtask.html" data-foundation-collection-action="{&quot;target&quot;: &quot;.cq-projects-admin-projects&quot;, &quot;activeSelectionCount&quot;: &quot;multiple&quot;}">Add task page</a><button class="foundation-admin-properties-activator foundation-collection-action icon-note hide" title="Show Tasks" type="button" autocomplete="off" data-href="/libs/cq/core/content/projects/showtasks.html" data-foundation-collection-action="{&quot;target&quot;: &quot;.cq-projects-admin-projects&quot;, &quot;activeSelectionCount&quot;: &quot;single&quot;}">Show Tasks</button></div><div class="right icongroup"><span class="foundation-admin-selectionstatus text" data-foundation-admin-selectionstatus-template="{{count}} selected" data-foundation-admin-selectionstatus-target=".cq-projects-admin-projects">0 selected</span></div></nav>
+
+
+</div>
 
     <div class="content">
       <nav class="toolbar">
@@ -100,7 +128,7 @@
         </div>
       </nav>
 
-      <nav class="toolbar">
+      <nav class="toolbar" data-init="toolbar">
         <div class="left icongroup">
           <button class="icon-viewgrid"><span>Toggle Rail</span></button>
           <span class="divider"></span>
