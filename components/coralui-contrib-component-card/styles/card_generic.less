@@ -104,18 +104,25 @@
         padding-top: 9*@px;
     }
 
-    .new-flag {
-        .card-flag(rgb(125,179,255));
-        text-transform: uppercase;
-    }
-
     .flag {
-        .card-flag(#C8C8C8);
-        text-transform: uppercase;
+        .card-flag();
+
+        &.error {
+          .card-flag-color(@card-flag-red-background-color, @card-flag-red-border-color);
+        }
+        &.notice {
+          .card-flag-color(@card-flag-yellow-background-color, @card-flag-yellow-border-color);
+        }
+        &.success {
+          .card-flag-color(@card-flag-green-background-color, @card-flag-green-border-color);
+        }
+        &.info {
+          .card-flag-color(@card-flag-blue-background-color, @card-flag-blue-border-color);
+        }
     }
 
     .alert {
-        .card-alert();
+        .card-alert-banner();
     }
 }
 
@@ -243,7 +250,8 @@
         }
     }
 
-    .new-flag, .flag, .alert {
+    .flag,
+    .alert {
         display: none;
     }
 }
@@ -289,7 +297,6 @@
         visibility: hidden;
     }
 }
-
 
 // In list view
 .list [class^="card-"].selected,

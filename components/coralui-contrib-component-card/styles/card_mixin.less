@@ -206,84 +206,127 @@
     }
 }
 
-.card-flag(@backgroundColor, @triangleSize: @card-banner-offset, @shadow-density: 0.5) {
+.card-flag(@background-color: @card-flag-background-color, @border-color: @card-flag-border-color, @triangle-size: @card-banner-offset, @shadow-density: 0.5) {
     display: block;
     z-index: 10;
     position: absolute;
 
     top: 10*@px;
-    right: -@triangleSize;
+    right: -@triangle-size;
     margin-right: -@px;
+    padding: (@triangle-size) (1.5 * @triangle-size);
 
-    padding: (@triangleSize / 2) (1.5 * @triangleSize);
-
+    color: @card-flag-text-color;
     text-align: right;
     font-weight: bold;
-    background: @backgroundColor;
-    border: @px solid darken(@backgroundColor, 10%);
+    text-transform: uppercase;
+    border: @px solid;
+
     .box-shadow(0 8*@px 8*@px -5*@px rgba(0, 0, 0, @shadow-density));
 
     &:after {
         content: " ";
         position: absolute;
-        bottom: -2*@px - @triangleSize;
+        bottom: -2*@px - @triangle-size;
         right: -@px;
 
         width: 0;
         height: 0;
 
-        border: (@triangleSize + @px)/2 solid transparent;
-        border-left-color: darken(@backgroundColor, 10%);
-        border-top-color: darken(@backgroundColor, 10%);
+        border: (@triangle-size + @px)/2 solid transparent;
+    }
+
+    .card-flag-color(@background-color, @border-color);
+}
+
+.card-flag-color(@background-color: @card-flag-background-color, @border-color: @card-flag-border-color) {
+    background-color: @background-color;
+    border-color: @border-color;
+
+    &:after {
+        border-left-color: @border-color;
+        border-top-color: @border-color;
     }
 }
 
-.card-alert(@triangleSize: @card-banner-offset, @shadow-density: 0.5) {
+.card-alert-banner(@triangle-size: @card-banner-offset, @shadow-density: 0.5) {
     display: block;
     z-index: 10;
     position: relative;
 
     top: 0;
-    margin: 0 -(@triangleSize + @px);
-
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    margin: 0 -(@triangle-size + @px);
 
     font-size: inherit;
 
     .box-shadow(0 8*@px 8*@px -5*@px rgba(0, 0, 0, @shadow-density));
 
-              ~ a:before,               ~ a:after,
-              ~ .card:before,           ~ .card:after { border-color: @alert-blue-border-color;   }
-    &.error   ~ a:before,     &.error   ~ a:after,
-    &.error   ~ .card:before, &.error   ~ .card:after { border-color: @alert-red-border-color;    }
-    &.notice  ~ a:before,     &.notice  ~ a:after,
-    &.notice  ~ .card:before, &.notice  ~ .card:after { border-color: @alert-yellow-border-color; }
-    &.success ~ a:before,     &.success ~ a:after,
-    &.success ~ .card:before, &.success ~ .card:after { border-color: @alert-green-border-color;  }
-    &.help    ~ a:before,     &.help    ~ a:after,
-    &.help    ~ .card:before, &.help    ~ .card:after,
-    &.info    ~ a:before,     &.info    ~ a:after,
-    &.info    ~ .card:before, &.info    ~ .card:after { border-color: @alert-blue-border-color;   }
-
-    ~ a:before, ~ a:after, ~ .card:before, ~ .card:after {
+    &:before,
+    &:after {
         content: " ";
         position: absolute;
-        top: 0;
+        bottom: -2*@px - @triangle-size;
         width: 0;
         height: 0;
-        border: (@triangleSize + @px)/2 solid;
-
-        /* overriding more specific selectors from above using !important */
+        border-width: (@triangle-size + @px)/2;
+        border-style: solid;
+        border-color: @alert-blue-border-color;
         border-bottom-color: transparent !important;
     }
-    ~ a:before, ~ .card:before {
-        left: -(@triangleSize + @px);
+
+    &.error {
+        &:before,
+        &:after {
+            border-color: @alert-red-border-color;
+        }
+    }
+
+    &.notice {
+      &:before,
+      &:after {
+          border-color: @alert-yellow-border-color;
+      }
+    }
+
+    &.success {
+      &:before,
+      &:after {
+          border-color: @alert-green-border-color;
+      }
+    }
+
+    &.info,
+    &.help {
+      &:before,
+      &:after {
+          border-color: @alert-blue-border-color;
+      }
+    }
+
+    &:before {
+        left: -@px;
         border-left-color: transparent !important;
     }
-    ~ a:after, ~ .card:after {
-        right: -(@triangleSize + @px);
+
+    &:after {
+        right: -@px;
         border-right-color: transparent !important;
+    }
+
+    > div {
+        display: block;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+        > div {
+            display: inline;
+        }
+
+        > strong {
+            display: inline-block;
+            margin-right: 0.25rem;
+            text-transform: uppercase;
+        }
     }
 }
