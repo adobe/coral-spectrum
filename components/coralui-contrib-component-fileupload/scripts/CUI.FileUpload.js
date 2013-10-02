@@ -508,6 +508,15 @@
                 fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
             }
 
+            if (self.options.fileNameParameter && !this.options.useHTML5){
+                var fileNameInput = $("input[name=\"" + self.options.fileNameParameter +"\"" );
+                if (fileNameInput.length === 0){
+                    fileNameInput = $("<input type='hidden' name='" + self.options.fileNameParameter + "'/>");
+                    fileNameInput.appendTo(this.$element);
+                }
+                fileNameInput.val(fileName);
+            }
+            
             if (!self._getQueueItemByFileName(fileName)) {
                 var item = {
                     fileName: fileName
