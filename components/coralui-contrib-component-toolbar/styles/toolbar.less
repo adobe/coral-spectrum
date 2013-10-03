@@ -34,21 +34,22 @@
     position: absolute;
     left: 0;
     right: 0;
-    height: 100%;
+    height: @component-single-line-height;
     
     text-align: center;
     
     h1,
     .pulldown > a {
-      display: inline-block;
-      margin: 0;
-      padding-top: 10*@px;
-      padding-bottom: 9*@px;
-      max-width: 14rem;
       
       .regular-text;
       .ellipsis;
-      line-height: 1.5;
+
+      display: inline-block;
+      margin: 0;
+      max-width: 14rem;
+    
+
+      line-height: @component-single-line-height;
       font-size: 18*@px;
     }
   }
@@ -115,10 +116,11 @@
     float: left; // inline-block adds undesired spacing to the elements
   }
 
-  // makes the anchors and spans be lined up.
+  // makes the anchors and spans be lined up with the
+  // rest of the components.
   > a,
   > span {
-    line-height: 38*@px;
+    line-height: @component-single-line-height;
   }
   
   // Any icon in an icon group should be medium sized
@@ -128,33 +130,21 @@
     .icon-medium;
     
     &, &:before {
-      line-height: 38*@px;
-      height: 38*@px;
-      width: 38*@px;
+      line-height: @component-single-line-height;
+      height: @component-single-line-height;
+      width: @component-single-line-height;
     }
   }
 
   > .text {
     margin: 0 10*@px;
   }
-
-  > nav.pulldown {
-    display: inline-block;
-
-    > a[class^="icon-"], 
-    > a[class*=" icon-"] {
-      padding: 0;
-      line-height: @toolbar-height;
-
-      &:after {
-        background: none;
-        margin-left: 0;
-        padding-left: 0;
-      }
-    }
-  }
 }
 
+/**
+  Class: .divider
+  Divider used to separate icons and elements in the toolbar.
+*/
 .divider {    
   // variables
   @divider-height: 24*@px;
