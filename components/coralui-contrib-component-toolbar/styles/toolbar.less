@@ -5,6 +5,7 @@
 // Toolbar
 @toolbar-border-color: rgb(215, 215, 215);
 @toolbar-height: 52*@px;
+@toolbar-padding: 7*@px;
 
 .toolbar {
 
@@ -12,9 +13,7 @@
 
   position: relative;
 
-  // setting a fixed height stops the toobar from having several rows.
-  // height: 38*@px;
-  padding: 7*@px;
+  padding: @toolbar-padding;
   border-bottom: @px solid @toolbar-border-color;
 
   // required so that the mouse events are not taken by
@@ -39,51 +38,27 @@
     text-align: center;
     
     h1,
-    .pulldown > a {
-      
+    .pulldown > a {      
       .regular-text;
       .ellipsis;
 
       display: inline-block;
       margin: 0;
-      max-width: 14rem;
-    
+
+      max-width: 100%;
 
       line-height: @component-single-line-height;
       font-size: 18*@px;
     }
   }
 
-  /*
-  // Hack to avoid FF to display horizontal scrollbars because of a bug on button elements
-  // See: https://bugzilla.mozilla.org/show_bug.cgi?id=750115
-  button[class^="icon-"],
-  button[class*=" icon-"] {
-      position: relative;
-      text-indent: -20rem; // This doesn't aim to move the text off-screen but actually to move it on-screen to avoid the scrollbars
-      &:before {
-          position: absolute;
-          left: 0;
-          top: 9*@px;
-          text-indent: 0;
-      }
-  }*/
-
   &.break-lines .center,
   .break-lines & .center {
     clear: both;
     position: relative;
-    margin: 0 -3*@px;
-    padding: 0 3*@px;
+    margin-top: @component-single-line-height + @toolbar-padding; // component height + margin.
+    padding: @toolbar-padding 0 0 0;
     border-top: @px solid @toolbar-border-color;
-    h1,
-    .pulldown > a {
-      max-width: 92%;
-      max-width: -webkit-calc(~"100% - 2em");
-      max-width: -moz-calc(~"100% - 2em");
-      max-width: -o-calc("100% - 2em");
-      max-width: calc(~"100% - 2em");
-    }
   }
 
   &.long-title .center,
@@ -151,7 +126,7 @@
   @divider-border-color: rgb(206, 206, 206);
 
   height: @divider-height;
-  margin: 7*@px 0 7*@px 10*@px;
+  margin: @toolbar-padding 0 @toolbar-padding 10*@px;
   padding-right: 10*@px;
   line-height: @divider-height;
   border-left: @px solid @divider-border-color;

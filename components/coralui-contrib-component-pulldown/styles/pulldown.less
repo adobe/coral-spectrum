@@ -16,7 +16,9 @@
 
 nav.pulldown {
 
-    position: relative; // Force children to position relative to this element
+  .border-box;
+
+  position: relative; // Force children to position relative to this element
 
   a {
     color: @pulldown-text-color;
@@ -27,9 +29,14 @@ nav.pulldown {
 
   > a,
   h1 a {
+
+    // forces correct measurement of the padding and margin as part of the component.
+    .border-box;
+
     background: transparent;
     border: 0 none;
     padding: 0 16*@px 0 0;
+    margin-right: 16*@px;
     font-size: 18*@px;
     background: url('@{component-resource-folder}/pulldown/handle.svg') no-repeat right center;
 
