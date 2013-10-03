@@ -53,6 +53,7 @@ module.exports = function(grunt) {
 
       // jQuery position plugin
       dirs.build +'/js/source/externals/jquery-ui/jquery.ui.position.js',
+      dirs.build +'/js/source/jquery.ui.position.patch.js',
 
       // base for widgets
       dirs.build +'/js/source/CUI.Widget.js'
