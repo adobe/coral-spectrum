@@ -38,16 +38,15 @@
     // Have a scrolling area below toolbar
     .content-container {
        position: absolute;
-       top: 47*@px;
+       top: 53*@px;
        left: 0;
        right: 0;
        bottom: 0;
        .scrollable
     }
     .content-header.break-lines ~ .content-container {
-      top: 94*@px;
+      top: 106*@px;
     }
-
 
     footer {
       background-color: @body-background-color;
@@ -61,7 +60,7 @@
         color: @footer-font-color;
         height: @footer-height;
         line-height: @footer-height;
-        font-size: 0.75rem;
+        font-size: 12*@px;
       }
 
       >a {
@@ -75,6 +74,11 @@
         
   }
 }
+
+.center {
+  text-align: center;
+}
+
 
 /* if there is a header the page is placed under the header */
 header.top + .page {

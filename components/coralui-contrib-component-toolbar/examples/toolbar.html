@@ -5,11 +5,13 @@
   <title>CoralUI Shell</title>
 
   <link rel="stylesheet" href="../../css/cui.css">
-
+  
   <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/libs/jquery-reflow.js"></script>
   <script src="../../js/libs/toe.js"></script>
   <script src="../../js/CUI.js"></script>
 </head>
+
 <body class="desktop">
 
   <header class="top">
@@ -29,7 +31,6 @@
   </header>
 
   <div class="page" role="main">
-
     <div class="content">
       <nav class="toolbar">
         <div class="left icongroup">
@@ -39,19 +40,26 @@
           <a href="#" class="icon-upload"><span>Upload</span></a>
           <a href="#" class="icon-addcollection"><span>Add Collection</span></a>
         </div>
-        <div class="center">
-          <h1>Page Title</h1>
-        </div>
         <div class="right icongroup">
           <a href="#" class="icon-listview"><span>List</span></a>
         </div>
+        <div class="center">
+          <h1>Page Title</h1>
+        </div>
       </nav>
 
-      <nav class="toolbar">
+      <nav class="toolbar break-lines">
         <div class="left icongroup">
           <button class="icon-chevronleft"><span>Toggle Rail</span></button>
           <span class="divider"></span>
           <a class="icon-add" href="#"><span>Create Page</span></a>
+        </div>
+
+        <div class="right icongroup">
+          <div class="foundation-admin-layouttoggle">
+            <button data-foundation-admin-layouttoggle-layout="{&quot;name&quot;:&quot;foundation-layout-list&quot;}" class="icon-listview" type="button"><span>List Layout</span></button>
+            <button data-foundation-admin-layouttoggle-layout="{&quot;name&quot;:&quot;foundation-layout-card&quot;}" class="icon-cardview" style="display:none" type="button"><span>Grid Layout</span></button>
+          </div>
         </div>
         <div class="center">
           <nav data-init="pulldown" class="pulldown">
@@ -60,12 +68,6 @@
               <ul><li><a class="icon-folder withLabel" href="/libs/cq/gui/content/siteadmin.html/content"><span>Websites</span></a></li></ul>
             </div>
           </nav>
-        </div>
-        <div class="right icongroup">
-          <div class="foundation-admin-layouttoggle">
-            <button data-foundation-admin-layouttoggle-layout="{&quot;name&quot;:&quot;foundation-layout-list&quot;}" class="icon-listview" type="button"><span>List Layout</span></button>
-            <button data-foundation-admin-layouttoggle-layout="{&quot;name&quot;:&quot;foundation-layout-card&quot;}" class="icon-cardview" style="display:none" type="button"><span>Grid Layout</span></button>
-          </div>
         </div>
       </nav>
 
@@ -100,13 +102,13 @@
         </div>
       </nav>
 
-      <nav class="toolbar">
+      <nav class="toolbar" data-init="toolbar">
         <div class="left icongroup">
           <button class="icon-viewgrid"><span>Toggle Rail</span></button>
           <span class="divider"></span>
-          <div class="dropdown" data-init="dropdown">
+          <div class="select" data-init="select">
             <button>Single Select</button>
-            <select name="dropdown">
+            <select name="select">
               <option>Single One</option>
               <option selected>Single Two</option>
               <option>Single Three</option>
@@ -115,14 +117,6 @@
           <button class="icon-close"><span>Close Selection Mode</span></button>
           <button disabled="disabled" class="icon-properties"><span>View Properties</span></button>
           <a href="#" class="disabled icon-delete"><span>Delete Page</span></a>
-        </div>
-        <div class="dropdown" data-init="dropdown">
-          <button>Single Select</button>
-          <select name="dropdown">
-            <option>Single One</option>
-            <option selected>Single Two</option>
-            <option>Single Three</option>
-          </select>
         </div>
         <div class="right icongroup">
           <input type="text"/>

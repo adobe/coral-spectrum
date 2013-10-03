@@ -1,181 +1,138 @@
 /**
-Class: .toolbar
-The top toolbar with action icons
+  Class: .toolbar
+  The top toolbar with action icons
 */
-
 // Toolbar
 @toolbar-border-color: rgb(215, 215, 215);
+@toolbar-height: 52*@px;
+@toolbar-padding: 7*@px;
 
 .toolbar {
-    .clearfix;
+
+  .clearfix;
+
+  position: relative;
+
+  padding: @toolbar-padding;
+  border-bottom: @px solid @toolbar-border-color;
+
+  // required so that the mouse events are not taken by
+  // the center element.
+  .left,
+  .right {
+    z-index: 1;
     position: relative;
-    padding: 0 3*@px;
-    border-bottom: @px solid @toolbar-border-color;
+  }
+
+  // removes the margin of every component
+  > * {
+    margin: 0;
+  }
+  
+  .center {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: @component-single-line-height;
     
-    .left,
-    .right {
-        z-index: 1;
-        position: relative;
-        height: 46*@px;
+    h1,
+    .pulldown > a {      
+      .regular-text;
+      .ellipsis;
+
+      display: inline-block;
+      margin: 0;
+
+      max-width: 200*@px;
+
+      line-height: @component-single-line-height;
+      font-size: 18*@px;
     }
+  }
+
+  &.break-lines .center,
+  .break-lines & .center {
+    clear: both;
+    position: relative;
     
-    .center {
-        position: absolute;
-        left: 0;
-        right: 0;
-        height: 46*@px;
-        
-        text-align: center;
-        
-        h1,
-        .pulldown > a {
-            display: inline-block;
-            margin: 0;
-            padding-top: 10*@px;
-            padding-bottom: 9*@px;
-            max-width: 14rem;
-            
-            .regularText;
-            .ellipsis;
-            line-height: 1.5;
-            font-size: 18*@px;
-        }
-        .pulldown {
-            height: 46*@px;
-        }
-    }
+    margin-top: @component-single-line-height + @toolbar-padding; // component height + margin.
+    padding: @toolbar-padding 0 0 0;
+    border-top: @px solid @toolbar-border-color;
 
+    // forces the text to cover all the space available.
+    h1,
+    .pulldown > a { 
+      max-width: 100%;
+    }
+  }
 
-    // Hack to avoid FF to display horizontal scrollbars because of a bug on button elements
-    // See: https://bugzilla.mozilla.org/show_bug.cgi?id=750115
-    button[class^="icon-"],
-    button[class*=" icon-"] {
-        position: relative;
-        text-indent: -20rem; // This doesn't aim to move the text off-screen but actually to move it on-screen to avoid the scrollbars
-        &:before {
-            position: absolute;
-            left: 0;
-            top: 9*@px;
-            text-indent: 0;
-        }
+  &.long-title .center,
+  .long-title & .center {
+    h1,
+    .pulldown > a {
+      max-width: 608*@px;
     }
-
-    &.break-lines .center,
-    .break-lines & .center {
-        clear: both;
-        position: relative;
-        margin: 0 -3*@px;
-        padding: 0 3*@px;
-        border-top: @px solid @toolbar-border-color;
-        h1,
-        .pulldown > a {
-            max-width: 92%;
-            max-width: -webkit-calc(~"100% - 2em");
-            max-width: -moz-calc(~"100% - 2em");
-            max-width: -o-calc("100% - 2em");
-            max-width: calc(~"100% - 2em");
-        }
-    }
-    &.long-title .center,
-    .long-title & .center {
-        h1,
-        .pulldown > a {
-            max-width: 38rem;
-        }
-    }
+  }
 }
 
 /**
-    Class: .icongroup
-    Button toolbar of icons defined using the <a> or <button> tags
+  Class: .icongroup
+  Button toolbar of icons defined using the <a> or <button> tags
 */
 .icongroup {
-    //overflow: hidden; // Fixes CUI-260 by preventing accessibility text in <button> tags in icon groups from overflowing
-    //breaks CUI-277
 
-    > a,
-    > i,
-    > button,
-    > input,
-    > nav.pulldown,
-    > div,
-    > span, {
-      float: left; // inline-block adds undesired spacing to the elements
-    }
+  // removes the margin of every child element.        
+  > * {
+    margin: 0;
+  }
+
+  > a,
+  > i,
+  > button,
+  > input,
+  > nav,
+  > div,
+  > span, {
+    float: left; // inline-block adds undesired spacing to the elements
+  }
+
+  // makes the anchors and spans be lined up with the
+  // rest of the components.
+  > span {
+    line-height: @component-single-line-height;
+  }
+  
+  // Any icon in an icon group should be medium sized
+  [class^="icon-"],
+  [class*=" icon-"] {
+    // uses the 24px icons.
+    .icon-medium;
     
-    // Any icon in an icon group should be medium sized
-    [class^="icon-"],
-    [class*=" icon-"] {
-        .icon-medium;
-        
-        line-height: 46*@px + 2*@px;
-        
-        &, &:before {
-          height: 46*@px;
-          width: 44*@px;
-        }
+    &, &:before {
+      line-height: @component-single-line-height;
+      height: @component-single-line-height;
+      width: @component-single-line-height;
     }
+  }
 
-    > a.help {
-      color: @header-nav-font-color;
-      text-decoration: none;
+  > .text {
+    margin: 0 10*@px;
+  }
+}
 
-      padding: 0 @header-nav-spacing / 4;
-      margin-right: @header-nav-spacing / 2;
-      line-height: @header-height;
-      font-size: @header-nav-font-size;
+/**
+  Class: .divider
+  Divider used to separate icons and elements in the toolbar.
+*/
+.divider {    
+  // variables
+  @divider-height: 24*@px;
+  @divider-border-color: rgb(206, 206, 206);
 
-      &:active,
-      &.selected,
-      &:hover,
-      &:focus {
-        color: @header-nav-down-font-color;
-      }
-
-      &:hover,
-      &:focus {
-        text-decoration: none;
-        opacity: 1;
-      }
-    }
-
-    > a.button:not([class^="icon-"]):not([class*=" icon-"]),
-    > button:not([class^="icon-"]):not([class*=" icon-"]) {
-        margin: 7*@px 10*@px;
-    }
-    
-    > .divider {
-        height: @icon-medium-size;
-        margin: 10*@px 0 0 10*@px;
-        padding-right: 10*@px;
-        line-height: 50*@px;
-        border-left: @px solid @icon-divider-color;
-        vertical-align: top;
-    }
-
-    > .text {
-        margin: 0 10*@px;
-        line-height: 46*@px;
-    }
-
-    > nav.pulldown {
-        display: inline-block;
-
-        > a[class^="icon-"], 
-        > a[class*=" icon-"] {
-            padding: 0;
-            line-height: 46*@px;
-
-            &:after {
-                background: none;
-                margin-left: 0;
-                padding-left: 0;
-            }
-        }
-    }
-
-    > .dropdown,
-    > input[type="text"] {
-        vertical-align: top;
-    }
+  height: @divider-height;
+  margin: @toolbar-padding 0 @toolbar-padding 10*@px;
+  padding-right: 10*@px;
+  line-height: @divider-height;
+  border-left: @px solid @divider-border-color;
+  vertical-align: top;
 }
