@@ -14,13 +14,17 @@ div.rail {
         >.rail-switch {
             >.toolbar {
                 background-color: @rail-dark-background-color;
-                border-bottom: 1px solid @rail-section-border-color;
+                border-bottom: @px solid @rail-section-border-color;
                 position: relative;
                 z-index: 1;
 
                 a {
                     overflow: visible;
                     position: relative;
+
+                    // causes the height of the anchor to be correct
+                    // by taking the height of its contents.
+                    line-height: 0;
 
                     &.active {
                         cursor: default;
@@ -32,20 +36,20 @@ div.rail {
                          
                          height: 0;
                          width: 0;
-                         margin-left: -0.5rem;
+                         margin-left: -8*@px;
                          
                          border: solid transparent;
-                         border-width: 0.5rem;
+                         border-width: 8*@px;
                          
                          content: " ";
                          pointer-events: none;
                         }
                         &:before {
-                          bottom: 0;
+                          bottom: -8*@px;
                           border-bottom-color: @rail-section-border-color;
                         }
                         &:after {
-                          bottom: -2*@px;
+                          bottom: -9*@px;
                           border-bottom-color: @rail-background-color;
                         }
 
@@ -79,7 +83,7 @@ div.rail {
                 display: block;
                 position: absolute;
                 width: 100%;
-                top: 47*@px;
+                top: 53*@px;
                 right: 0;
                 bottom: 0;
                 .scrollable;
