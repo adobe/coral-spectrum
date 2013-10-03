@@ -1,6 +1,6 @@
 /**
-Class: .toolbar
-The top toolbar with action icons
+  Class: .toolbar
+  The top toolbar with action icons
 */
 // Toolbar
 @toolbar-border-color: rgb(215, 215, 215);
@@ -95,8 +95,8 @@ The top toolbar with action icons
 }
 
 /**
-    Class: .icongroup
-    Button toolbar of icons defined using the <a> or <button> tags
+  Class: .icongroup
+  Button toolbar of icons defined using the <a> or <button> tags
 */
 .icongroup {
 
@@ -114,6 +114,12 @@ The top toolbar with action icons
   > span, {
     float: left; // inline-block adds undesired spacing to the elements
   }
+
+  // makes the anchors and spans be lined up.
+  > a,
+  > span {
+    line-height: 38*@px;
+  }
   
   // Any icon in an icon group should be medium sized
   [class^="icon-"],
@@ -128,32 +134,8 @@ The top toolbar with action icons
     }
   }
 
-  > a.help {
-    color: @header-nav-font-color;
-    text-decoration: none;
-
-    padding: 0 @header-nav-spacing / 4;
-    margin-right: @header-nav-spacing / 2;
-    line-height: @header-height;
-    font-size: @header-nav-font-size;
-
-    &:active,
-    &.selected,
-    &:hover,
-    &:focus {
-      color: @header-nav-down-font-color;
-    }
-
-    &:hover,
-    &:focus {
-      text-decoration: none;
-      opacity: 1;
-    }
-  }
-
   > .text {
     margin: 0 10*@px;
-    line-height: 38*@px;
   }
 
   > nav.pulldown {
