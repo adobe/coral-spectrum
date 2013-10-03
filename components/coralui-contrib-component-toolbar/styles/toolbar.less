@@ -35,8 +35,6 @@
     right: 0;
     height: @component-single-line-height;
     
-    text-align: center;
-    
     h1,
     .pulldown > a {      
       .regular-text;
@@ -45,27 +43,32 @@
       display: inline-block;
       margin: 0;
 
-      max-width: 100%;
+      max-width: 200*@px;
 
       line-height: @component-single-line-height;
       font-size: 18*@px;
     }
   }
 
-  &.break-lines .center,
-  .break-lines & .center {
+  &.break-lines .center {
     clear: both;
     position: relative;
+    
     margin-top: @component-single-line-height + @toolbar-padding; // component height + margin.
     padding: @toolbar-padding 0 0 0;
     border-top: @px solid @toolbar-border-color;
+
+    // forces the text to cover all the space available.
+    h1,
+    .pulldown > a { 
+      max-width: 100%;
+    }
   }
 
-  &.long-title .center,
-  .long-title & .center {
+  &.long-title .center {
     h1,
     .pulldown > a {
-      max-width: 38rem;
+      max-width: 608*@px;
     }
   }
 }
