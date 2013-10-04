@@ -56,4 +56,7 @@ See the [Coral UI Wiki][wiki_url] or email the [Coral UI DL](coralui@adobe.com) 
 [cloudui_url]: http://blogs.corp.adobe.com/xdcloudui
 [guide_url]: https://git.corp.adobe.com/pages/Coral/CoralUI/
 [wiki_url]: https://git.corp.adobe.com/Coral/CoralUI/wiki/Home
+<<<<<<< HEAD
 [help_url]: https://git.corp.adobe.com/Coral/CoralUI/wiki/Using-CoralUI-FAQ
+=======
+>>>>>>> d966ec8f2d89d6db9b0eb37e44825386c9eb23a4
