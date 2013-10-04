@@ -8,6 +8,8 @@
 @buttongroup-gradient-end-color: rgb(235, 235, 235);
 
 .button-group {
+
+  // removes the spacing between the buttons.
   font-size: 0;
   
   button,
@@ -17,24 +19,24 @@
       color: @font-base-color;
       text-shadow: none;
       .normal-text;
-      font-size: @button-text-size;
       min-width: 50 * @px;
 
       &:focus {
         z-index: 1; // Force glow to front of button line
         position: relative;
       }
+
       &:hover {
-          .gradient(@buttongroup-gradient-start-color, @buttongroup-gradient-start-color);  
+        .gradient(@buttongroup-gradient-start-color, @buttongroup-gradient-start-color);  
       }
       
       i[class^="icon-"],
       i[class*=" icon-"] {
-        margin-right: 0; // Margin does not display well in buttons without text
+          margin-right: 0; // Margin does not display well in buttons without text
+
         &:before {
           color: @icon-color;
           opacity: @icon-opacity;
-          
         }
       }
   }
