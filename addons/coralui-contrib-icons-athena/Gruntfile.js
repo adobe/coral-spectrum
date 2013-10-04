@@ -16,9 +16,6 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-zip');
-  grunt.loadNpmTasks('grunt-curl');
-
 
   // Read in package.json
   var pkg = grunt.file.readJSON('package.json');
@@ -40,7 +37,42 @@ module.exports = function(grunt) {
     clean: {
       build: '<%= dirs.build %>',
       temp: '<%= dirs.temp %>'
-    } // clean
+    }, // clean
+
+    'icon-athena': {
+      options: {
+        variants: [{name:'16', replace:'', dest:'16'},{name:'24', replace:'', dest:'24'}]
+      },
+      monochrome: {
+        options: {
+          muh: 'monochrome-muh',
+          downloadZip: 'clouduigeneral.zip',
+          tmpZipFolder: 'temp/icon-athena/unzip/monochrome'
+        }
+      },      
+      color: {
+        options: {
+          muh: 'color-muh',
+          downloadZip: 'clouduicolor.zip',
+          tmpZipFolder: 'temp/icon-athena/unzip/color'
+        }
+      },      
+      hover: {
+        options: {
+          muh: 'hover-muh',
+          downloadZip: 'clouduiwithhover.zip',
+          tmpZipFolder: 'temp/icon-athena/unzip/hover',
+          variants: [
+                    {name:'Light16', replace:'_Light', dest:'16'},
+                    {name:'Light24', replace:'_Light', dest:'24'},
+                    {name:'Active16', replace:'_Active', dest:'16'},
+                    {name:'Active24', replace:'_Active', dest:'24'},
+                    {name:'Dark16', replace:'_Dark', dest:'16'},
+                    {name:'Dark24', replace:'_Dark', dest:'24'}
+                    ]
+        }
+      }            
+    } // icon-athena
 
   });
   // end init config
