@@ -313,20 +313,20 @@
         border-right-color: transparent !important;
     }
 
-    > div {
+    div {
+        display: inline;
+    }
+
+    strong {
+        display: inline-block;
+        margin-right: 0.25rem;
+        text-transform: uppercase;
+    }
+
+    .text-ellipsis {
         display: block;
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
-
-        > div {
-            display: inline;
-        }
-
-        > strong {
-            display: inline-block;
-            margin-right: 0.25rem;
-            text-transform: uppercase;
-        }
     }
 }
