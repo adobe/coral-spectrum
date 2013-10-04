@@ -1,11 +1,12 @@
-@tooltip-charcoal-background-color: rgb(100, 100, 100);
-@tooltip-charcoal-border-color: rgba(50, 50, 50, .85);
-@tooltip-charcoal-font-color: rgb(250, 250, 250);
-
 /**
   Class: .tooltip
   Used for tooltip messages
 */
+
+@tooltip-inspect-background-color: rgb(100, 100, 100);
+@tooltip-inspect-border-color: rgba(50, 50, 50, .85);
+@tooltip-inspect-font-color: rgb(250, 250, 250);
+
 .tooltip {
   // Mixin for coloring the bubble and tip.
   .bubble-tip-color(@background-color, @border-color) {
@@ -85,23 +86,23 @@
   border: @px solid;
 
   // default is blue
-  .bubble-tip-color(@alert-blue-background-light-color, @alert-blue-border-color);
+  .bubble-tip-color(@alert-info-background-light-color, @alert-info-border-color);
 
   &.error {
-    .bubble-tip-color(@alert-red-background-light-color, @alert-red-border-color);
+    .bubble-tip-color(@alert-error-background-light-color, @alert-error-border-color);
   }
 
   &.notice {
-    .bubble-tip-color(@alert-yellow-background-light-color, @alert-yellow-border-color);
+    .bubble-tip-color(@alert-notice-background-light-color, @alert-notice-border-color);
   }
 
   &.success {
-    .bubble-tip-color(@alert-green-background-light-color, @alert-green-border-color);
+    .bubble-tip-color(@alert-success-background-light-color, @alert-success-border-color);
   }
 
   &.inspect {
-    color: @tooltip-charcoal-font-color;
-    .bubble-tip-color(@tooltip-charcoal-background-color, @tooltip-charcoal-border-color);
+    color: @tooltip-inspect-font-color;
+    .bubble-tip-color(@tooltip-inspect-background-color, @tooltip-inspect-border-color);
   }
 
   /*

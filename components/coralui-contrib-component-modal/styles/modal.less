@@ -100,7 +100,7 @@
     padding: 1rem;
 
     .scrollable();
-    
+
     border: @px solid @modal-outline-color;
     border-top: 0;
     border-bottom: 0;
@@ -133,7 +133,7 @@
       margin-left: 0rem;
     }
   }
-  
+
   &.fullscreen {
     width: auto;
     margin: 0;
@@ -141,15 +141,15 @@
     right: 5%;
     top: 5%;
     bottom: 5%;
-    
+
     .modal-body {
       position: absolute;
       top: @modal-header-height;
       bottom: 0;
-      
+
       width: 100%;
     }
-    
+
     .modal-footer {
       position: absolute;
       bottom: 0;
@@ -178,9 +178,9 @@
 
   &.error {
     .modal-header {
-      background-color: @alert-red-background-color;
+      background-color: @alert-error-background-color;
 
-      .box-shadow(inset 0 -1*@px 0 @alert-red-border-color);
+      .box-shadow(inset 0 -1*@px 0 @alert-error-border-color);
 
       background-image: url('@{component-resource-folder}/alert/exclaimation.png');
     }
@@ -188,9 +188,9 @@
 
   &.notice {
     .modal-header {
-      background-color: @alert-yellow-background-color;
+      background-color: @alert-notice-background-color;
 
-      .box-shadow(inset 0 -1*@px 0 @alert-yellow-border-color);
+      .box-shadow(inset 0 -1*@px 0 @alert-notice-border-color);
 
       background-image: url('@{component-resource-folder}/alert/exclaimation.png');
     }
@@ -198,9 +198,9 @@
 
   &.success {
     .modal-header {
-      background-color: @alert-green-background-color;
+      background-color: @alert-success-background-color;
 
-      .box-shadow(inset 0 -1*@px 0 @alert-green-border-color);
+      .box-shadow(inset 0 -1*@px 0 @alert-success-border-color);
 
       background-image: url('@{component-resource-folder}/alert/check.png');
     }
@@ -208,9 +208,9 @@
 
   &.help {
     .modal-header {
-      background-color: @alert-blue-background-color;
+      background-color: @alert-info-background-color;
 
-      .box-shadow(inset 0 -1*@px 0 @alert-blue-border-color);
+      .box-shadow(inset 0 -1*@px 0 @alert-info-border-color);
 
       background-image: url('@{component-resource-folder}/alert/question.png');
     }
@@ -218,9 +218,9 @@
 
   &.info {
     .modal-header {
-      background-color: @alert-blue-background-color;
+      background-color: @alert-info-background-color;
 
-      .box-shadow(inset 0 -1*@px 0 @alert-blue-border-color);
+      .box-shadow(inset 0 -1*@px 0 @alert-info-border-color);
 
       background-image: url('@{component-resource-folder}/alert/i.png');
     }
