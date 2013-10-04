@@ -65,6 +65,10 @@ module.exports = function (grunt) {
             'components/CUI.NumberInput.js',
             'components/CUI.Colorpicker.js',
             'components/CUI.CycleButtons.js',
+            'components/CUI.SelectList.js',
+            'components/CUI.TagList.js',
+            'components/CUI.Select.js',
+            'components/CUI.Autocomplete.js',
 
             // Validations
             'validations.js'
@@ -223,6 +227,22 @@ module.exports = function (grunt) {
                         src: ['**/styles/**.less'],
                         dest: '<%= dirs.build %>/less/components'
                     },
+                    { // get resources from the modularized components
+                        expand: true,
+                        cwd: '<%= dirs.components %>/',
+                        src: ['**/res/**'],
+                        dest: '<%= dirs.build %>/res/components',
+                        filter: 'isFile',
+                        rename: function(dest, src) {
+                            var match = src.match(/coralui-contrib-component-(.*)\/res\/(.*)/);
+                            if (match) {
+                                var component = match[1];
+                                var filePath = match[2];
+                                return dest + '/' + component + '/' + filePath;
+                            }
+                            return dest;
+                        }
+                    },
                     { // get js from the modularized components
                         expand: true,
                         flatten: true,
@@ -300,7 +320,8 @@ module.exports = function (grunt) {
                             'chai/chai.js',
                             'chai-jquery/chai-jquery.js',
                             'mocha/mocha.js',
-                            'mocha/mocha.css'
+                            'mocha/mocha.css',
+                            'sinon/pkg/sinon.js'
                         ],
                         dest: '<%= dirs.build %>/tests/libs'
                     }
@@ -455,7 +476,7 @@ module.exports = function (grunt) {
             // watch: guide content
             guide: {
                 files: [
-                    dirs.guide + '/js/guide.js',
+                    dirs.guide + '/scripts/*.js',
                     dirs.guide + '/styles/*.less',
                     dirs.guide + '/templates/*.html'
                 ],
@@ -713,7 +734,8 @@ module.exports = function (grunt) {
         'concat:retro',
         'mocha',
         'uglify:retro',
-        'copy:js_source'
+        'copy:js_source',
+        'guide'
     ]);
 
     grunt.task.registerTask('quickless', [

@@ -1,0 +1,138 @@
+/**
+  Class: .toolbar
+  The top toolbar with action icons
+*/
+// Toolbar
+@toolbar-border-color: rgb(215, 215, 215);
+@toolbar-height: 52*@px;
+@toolbar-padding: 7*@px;
+
+.toolbar {
+
+  .clearfix;
+
+  position: relative;
+
+  padding: @toolbar-padding;
+  border-bottom: @px solid @toolbar-border-color;
+
+  // required so that the mouse events are not taken by
+  // the center element.
+  .left,
+  .right {
+    z-index: 1;
+    position: relative;
+  }
+
+  // removes the margin of every component
+  > * {
+    margin: 0;
+  }
+  
+  .center {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: @component-single-line-height;
+    
+    h1,
+    .pulldown > a {      
+      .regular-text;
+      .ellipsis;
+
+      display: inline-block;
+      margin: 0;
+
+      max-width: 200*@px;
+
+      line-height: @component-single-line-height;
+      font-size: 18*@px;
+    }
+  }
+
+  &.break-lines .center,
+  .break-lines & .center {
+    clear: both;
+    position: relative;
+    
+    margin-top: @component-single-line-height + @toolbar-padding; // component height + margin.
+    padding: @toolbar-padding 0 0 0;
+    border-top: @px solid @toolbar-border-color;
+
+    // forces the text to cover all the space available.
+    h1,
+    .pulldown > a { 
+      max-width: 100%;
+    }
+  }
+
+  &.long-title .center,
+  .long-title & .center {
+    h1,
+    .pulldown > a {
+      max-width: 608*@px;
+    }
+  }
+}
+
+/**
+  Class: .icongroup
+  Button toolbar of icons defined using the <a> or <button> tags
+*/
+.icongroup {
+
+  // removes the margin of every child element.        
+  > * {
+    margin: 0;
+  }
+
+  > a,
+  > i,
+  > button,
+  > input,
+  > nav,
+  > div,
+  > span, {
+    float: left; // inline-block adds undesired spacing to the elements
+  }
+
+  // makes the anchors and spans be lined up with the
+  // rest of the components.
+  > span {
+    line-height: @component-single-line-height;
+  }
+  
+  // Any icon in an icon group should be medium sized
+  [class^="icon-"],
+  [class*=" icon-"] {
+    // uses the 24px icons.
+    .icon-medium;
+    
+    &, &:before {
+      line-height: @component-single-line-height;
+      height: @component-single-line-height;
+      width: @component-single-line-height;
+    }
+  }
+
+  > .text {
+    margin: 0 10*@px;
+  }
+}
+
+/**
+  Class: .divider
+  Divider used to separate icons and elements in the toolbar.
+*/
+.divider {    
+  // variables
+  @divider-height: 24*@px;
+  @divider-border-color: rgb(206, 206, 206);
+
+  height: @divider-height;
+  margin: @toolbar-padding 0 @toolbar-padding 10*@px;
+  padding-right: 10*@px;
+  line-height: @divider-height;
+  border-left: @px solid @divider-border-color;
+  vertical-align: top;
+}

@@ -6,6 +6,7 @@
 // Dimensions
 @textfield-text-size: 13*@px;
 @textfield-text-color: rgb(255, 255, 255);
+@textfield-height: 38*@px;
 @textfield-line-height: 16*@px;
 
 // Colors
@@ -18,7 +19,7 @@
 
 label {
   font-size: @textfield-text-size;
-  line-height: 38*@px;
+  // line-height: 38*@px;
   
   // we need to use top since some elements cannot be centered using middle.
   vertical-align: top;
@@ -35,7 +36,7 @@ input[type="time"] {
 
   .border-box;
   vertical-align: top; // used to align them correctly in forms.
-  margin: 2*@px 0;  // resets default margin
+  margin: 0;  // resets default margin
 
   min-width: 110*@px;
 
@@ -44,6 +45,7 @@ input[type="time"] {
   .normal-text;
   font-size: @textfield-text-size;
   line-height: @textfield-line-height;
+  height: @textfield-height;
 
   border: @px solid;
   border-color: @textfield-border-color;
@@ -73,6 +75,12 @@ input[type="time"] {
   &:focus:invalid {
     .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
     color: @textfield-error-font-color;
+  }
+}
+
+form.horizontal {
+  label {
+    line-height: 38*@px;
   }
 }
 

@@ -1,0 +1,33 @@
+/**
+  Element: selectlist
+  CUI selectlist style for dark theme
+*/
+
+.theme-dark {
+    @selectlist-box-text-color: rgb(220, 220, 220);
+    @selectlist-box-background-color: rgb(85, 85, 85);
+    @selectlist-box-border-color: rgba(30, 30, 30, 0.65);
+    @selectlist-entry-border-color: rgb(70, 70, 70);
+    @selectlist-group-background-color: rgb(100, 100, 100);
+    @selectlist-group-border-color: rgba(0, 0, 0, 0.3);
+    @selectlist-group-text-color: rgb(50, 50, 50);
+
+    .selectlist {
+        color: @selectlist-box-text-color;
+        background-color: @selectlist-box-background-color;
+        border-color: @selectlist-box-border-color;
+
+        li {
+            border-color: @selectlist-entry-border-color;    
+        }
+
+        li.optgroup {
+
+            > span {
+                color: @selectlist-group-text-color;
+                background: @selectlist-group-background-color;
+                border-color: @selectlist-group-border-color;
+            }
+        }
+    }
+}

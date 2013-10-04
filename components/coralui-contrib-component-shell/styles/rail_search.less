@@ -1,0 +1,19 @@
+div.rail {
+  .search {
+    display: block;
+    margin: 0;
+    padding: 6*@px 10*@px;
+    border-bottom: @px solid @rail-section-border-color; // FIXME bad assumsion that the search is located at the top of the rail
+
+    > input[type=text] {
+      color: @font-base-dark-color;
+      background-color: #464646;
+      width: 100%;
+    }
+
+    > button {
+      top: 7*@px;
+      left: 11*@px;
+    }
+  }
+}

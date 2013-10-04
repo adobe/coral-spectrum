@@ -3,24 +3,18 @@ Element: Text field
 A basic text input field for dark theme
 */
 
-[data-theme~=dark] {
+// TODO: remove rail references from implementation.
+@rail-input-placeholder-color: rgb(120, 120, 120);
+@rail-dark-background-color: rgb(60, 60, 60); // for input-text and special components
+@rail-input-text-border-color: rgb(44, 44, 44);
+@rail-font-color: rgb(220, 220, 220);
+
+.theme-dark {
 
     input[type="text"] {
         .placeholder(@rail-input-placeholder-color);
-
-        .border-box;
-
-        height: 34*@px;
-
         background-color: @rail-dark-background-color;
         border: @px solid @rail-input-text-border-color;
-
-        padding: 0.25rem 0.5rem;
-        min-width: auto;
-
-        margin: 0;
-
-        font-size: 0.85rem;
         color: @rail-font-color;
 
         &:focus {
@@ -30,5 +24,4 @@ A basic text input field for dark theme
             }
         }
     }
-    
 }

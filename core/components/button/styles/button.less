@@ -30,7 +30,7 @@
 @button-disabled-background-color: rgb(230, 230, 230);
 
 
-// Button: Default (gray)
+// Default button
 button,
 .button {
   // used by anchor to accept the height and width values
@@ -38,7 +38,7 @@ button,
 
   .border-box;
   vertical-align: top; // used to align them correctly in forms.
-  margin: 2*@px 0;  // resets default margin
+  margin: 0;
 
   min-width: 110*@px;  
 
@@ -47,8 +47,11 @@ button,
   border-color: fade(@button-default-border-color, 65%);
 
   .bold-text;
+
   font-size: @button-text-size;
   line-height: @button-line-height;
+  height: @component-single-line-height;
+
   color: @button-text-color;
   text-decoration: none; // resets underline on anchor
   text-align: center;
@@ -79,7 +82,14 @@ button,
   // A square button for buttons attached to form fields with icons in them
   &.button-square,
   &.square {
-    .button-square;
+
+    // special width for icon only buttons.
+    min-width: 50 * @px;
+
+    i[class^="icon-"],
+    i[class*=" icon-"] {
+        margin-right: 0; // Margin does not display well in buttons without text
+    }
   }
 
   // call to action button.
@@ -88,6 +98,7 @@ button,
     font-size: @button-text-large-size;
     min-width: 135*@px;
     padding: 14*@px 20*@px;
+    height: 46*@px;
   }
 
   &.button-block,
@@ -95,15 +106,13 @@ button,
     display: block;
     // spans to the width of the container
     width: 100%;
-    padding-left: 0;
-    padding-right: 0;
     // the container should set the desired margin
     margin-left: 0;
     margin-right: 0;
   }
 }
 
-// Button: Primary (blue)
+// Primary button
 button.primary:not(.disabled):not([disabled]),
 .button.primary:not(.disabled):not([disabled]) {
   border-color: fade(@button-primary-border-color, 70%);
@@ -120,7 +129,7 @@ button.primary:not(.disabled):not([disabled]),
   }
 }
 
-// Button: Warning (red)
+// Warning button
 button.warning:not(.disabled):not([disabled]),
 .button.warning:not(.disabled):not([disabled]) {
   border-color: fade(@button-warning-border-color, 70%);
@@ -138,7 +147,7 @@ button.warning:not(.disabled):not([disabled]),
   }
 }
 
-// Button: Disabled
+// Disabled
 button.disabled,
 button[disabled],
 .button.disabled,

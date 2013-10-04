@@ -14,9 +14,12 @@
     <script src="js/libs/toe.js"></script>
 
 
-    <script src="js/CUI.js"></script>
+    <!-- note its critical to keep guide.js before CUI.js in order that the
+         PRE code samples are generated *before* dynamic DOM manipulation -->
     <script src="js/guide.js"></script>
     <script src="js/prettify.js"></script>
+    <script src="js/CUI.js"></script>
+
 
 </head>
 <body class="desktop">
@@ -30,14 +33,14 @@
             <a href="doc/index.html">Docs</a>
             <a href="examples/icon-browser.html">Icon Browser</a>
             <a href="bug_template.html">Bug Template</a>
-            <a href="examples/misc/shell.html">Shell</a>
+            <a href="examples/shell/shell.html">Shell</a>
             <a href="https://git.corp.adobe.com/Coral/CoralUI/" target="_blank">Github</a>
             <a href="release/cui-latest-full.zip">Download</a>
             <a href="http://jenkins.bsl.eur.adobe.com/job/Build_CoralUI-master/ws/build/index.html" target="_blank">Nightly guide</a>
         </nav>
 
         <div class="drawer">
-            <div class="badge">1.12.0-SNAPSHOT</div>
+            <div class="badge">1.13.0-SNAPSHOT</div>
         </div>
 
     </header>
@@ -351,88 +354,33 @@
                             <div class="example">
                                 <div class="iconSample">
                                     <div class="sampleTitle left">Illustrative</div>
-                                    <div class="sample"><i class="icon-add-circle">Add</i><br><br><i class="icon-add-circle withLabel">Add</i></div>
+                                    <div class="sample" id="icon-sample-illustrative">
+                                        <!-- illustrative -->
+                                        <i class="icon-add-circle">Add</i>
+                                        <br><br>
+                                        <i class="icon-add-circle withLabel">Add</i></div>
                                 </div>
                                 
                                 <div class="iconSample">
                                     <div class="sampleTitle left">Navigational</div>
-                                    <div class="sample"><a href="#" class="icon-add-circle">Add</a><br><br><a href="#" class="icon-add-circle withLabel">Add</a></div>
-                                </div>
-                                    
-                                <div class="iconSample">
-                                    <div class="sampleTitle left">Actionable</div>
-                                    <div class="sample"><button class="icon-add-circle">Add</button><br><br><button class="icon-add-circle withLabel">Add</button></div>
-                                </div>
-
-                                <!--
-                                Buttons
-                                TBD: Is this accessible?
-                                <div class="iconSample">
-                                    <div class="sampleTitle left">Icon within button (<code class="prettyprint">&lt;button&gt;</code> and <code class="prettyprint">&lt;i&gt;</code>)</div>
-                                    <div class="sample"><button><i class="icon-trash"></i>Delete</button></div>
-                                </div>
-                                
-                                <div class="iconSample">
-                                    <div class="sampleTitle left">Icon within button (<code class="prettyprint">&lt;a&gt;</code> and <code class="prettyprint">&lt;i&gt;</code>)</div>
-                                    <div class="sample"><a href="#" role="button" class="button"><i class="icon-trash"></i>Delete</a></div>
-                                </div>
-                                
-                                <div class="iconSample">
-                                    <div class="sampleTitle left">Icon within button (<code class="prettyprint">&lt;button&gt;</code> and <code class="prettyprint">&lt;i&gt;</code>)</div>
-                                    <div class="sample"><button class="primary"><i class="icon-trash"></i>Delete</button></div>
-                                </div>
-                                
-                                <div class="iconSample">
-                                    <div class="sampleTitle left">Icon within button (<code class="prettyprint">&lt;button&gt;</code> and <code class="prettyprint">&lt;i&gt;</code>)</div>
-                                    <div class="sample"><button class="warning"><i class="icon-trash"></i>Delete</button></div>
-                                </div>
-                                -->
-                                
-
-                                <!--
-                                Icon group
-                                <div class="iconSample">
-                                    <div class="sampleTitle left">Icon Group</div>
-                                    <div class="icongroup">
-                                        <a href="#" class="icon-cards">Cards</a>
-                                        <span class="divider"></span>
-                                        <a href="#" class="icon-calendar">Calendar</a>
-                                        <a href="#" class="icon-email">E-mail</a>
-                                        <a href="#" class="icon-addgrid">Add</a>
+                                    <div class="sample" id="icon-sample-nav">
+                                        <!-- navigational -->
+                                        <a href="#" class="icon-add-circle">Add</a>
+                                        <br><br>
+                                        <a href="#" class="icon-add-circle withLabel">Add</a>
                                     </div>
                                 </div>
-                                -->
-                                
-                                <!--
-                                Paragraphs
-                                
-                                <p><i class="icon-calendar">Calendar</i>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. Pellentesque congue diam ac nisl vehicula ornare. Cras eu consectetur enim. Aliquam orci augue, sollicitudin nec aliquam sit amet, imperdiet ac leo. Donec aliquam tellus nec ipsum porttitor ut viverra odio luctus. Curabitur in turpis sed nunc consequat ornare eget in nulla. Nam dignissim lectus sed velit sagittis vehicula. Maecenas interdum, quam vel luctus sagittis, mi nisl commodo sapien, eget accumsan nunc metus ac ipsum.</p>
-                                
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. Pellentesque congue diam ac nisl vehicula ornare. <i class="icon-calendar">Calendar</i>Cras eu consectetur enim. Aliquam orci augue, sollicitudin nec aliquam sit amet, imperdiet ac leo. Donec aliquam tellus nec ipsum porttitor ut viverra odio luctus. Curabitur in turpis sed nunc consequat ornare eget in nulla. Nam dignissim lectus sed velit sagittis vehicula. Maecenas interdum, quam vel luctus sagittis, mi nisl commodo sapien, eget accumsan nunc metus ac ipsum.</p>
-                                
-                                <p style="font-size: 2rem"><i class="icon-calendar">Calendar</i>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. Pellentesque congue diam ac nisl vehicula ornare. Cras eu consectetur enim. Aliquam orci augue, sollicitudin nec aliquam sit amet, imperdiet ac leo. Donec aliquam tellus nec ipsum porttitor ut viverra odio luctus. Curabitur in turpis sed nunc consequat ornare eget in nulla. Nam dignissim lectus sed velit sagittis vehicula. Maecenas interdum, quam vel luctus sagittis, mi nisl commodo sapien, eget accumsan nunc metus ac ipsum.</p>
-                                
-                                <p style="font-size: 2rem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. Pellentesque congue diam ac nisl vehicula ornare. <i class="icon-calendar">Calendar</i>Cras eu consectetur enim. Aliquam orci augue, sollicitudin nec aliquam sit amet, imperdiet ac leo. Donec aliquam tellus nec ipsum porttitor ut viverra odio luctus. Curabitur in turpis sed nunc consequat ornare eget in nulla. Nam dignissim lectus sed velit sagittis vehicula. Maecenas interdum, quam vel luctus sagittis, mi nisl commodo sapien, eget accumsan nunc metus ac ipsum.</p>
-                                -->
+                                <div class="iconSample">
+                                    <div class="sampleTitle left">Actionable</div>
+                                    <div class="sample" id="icon-sample-actionable">
+                                        <!-- actionable -->
+                                        <button class="icon-add-circle">Add</button>
+                                        <br><br>
+                                        <button class="icon-add-circle withLabel">Add</button>
+                                    </div>
+                                </div>
                             </div> <!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;!-- Illustrative --&gt;
-&lt;i class=&quot;icon-add-circle&quot;&gt;Add&lt;/i&gt;
-
-&lt;!-- Illustrative with label --&gt;
-&lt;i class=&quot;icon-add-circle withLabel&quot;&gt;Add&lt;/i&gt;
-
-&lt;!-- Navigational --&gt;
-&lt;a href=&quot;#&quot; class=&quot;icon-add-circle&quot;&gt;Add&lt;/a&gt;
-
-&lt;!-- Navigational with label --&gt;
-&lt;a href=&quot;#&quot; class=&quot;icon-add-circle withLabel&quot;&gt;Add&lt;/a&gt;
-
-&lt;!-- Actionable --&gt;
-&lt;button class=&quot;icon-add-circle&quot;&gt;Add&lt;/button&gt;
-
-&lt;!-- Actionable with label --&gt;
-&lt;button class=&quot;icon-add-circle withLabel&quot;&gt;Add&lt;/button&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="icon-sample-illustrative,icon-sample-nav,icon-sample-actionable"></pre>
                     </div> <!-- /compoenentSample -->
                     <p>Open <a href="examples/icon-browser.html"> 
                         Sample</a></p>
@@ -459,8 +407,8 @@
                     <h2 class="line">Header</h2>
                     <p>The top navigation header that appears on every page. It supports a logo, navigation, 
                         and drawer (which can contain a badge or other information).</p>
-                    <div class="componentSample headerSample">
-                        <div class="example">
+                    <div class="componentSample headerSample" >
+                        <div class="example" id="header-sample1">
                             <header class="top">
                                 <div class="logo"><i class="icon-coral medium"/>CoralUI logo</i></div>
                                 <nav class="main">
@@ -474,24 +422,13 @@
 
                             </header>
                         </div> <!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;header class=&quot;top&quot;&gt;
-    &lt;div class=&quot;logo&quot;&gt;&lt;i class=&quot;icon-coral medium&quot;/&gt;CoralUI logo&lt;/i&gt;&lt;/div&gt;
-    &lt;nav class=&quot;main&quot;&gt;
-        &lt;a href=&quot;#&quot; class=&quot;selected&quot;&gt;Home&lt;/a&gt;
-        &lt;a href=&quot;#&quot;&gt;Activities&lt;/a&gt;
-        &lt;a href=&quot;#&quot;&gt;Admin&lt;/a&gt;
-    &lt;/nav&gt;
-    &lt;div class=&quot;drawer&quot;&gt;
-        &lt;div class=&quot;badge&quot;&gt;5&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/header&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="header-sample1"></pre>
                     </div> <!-- /componentSample -->
 
                     <p>Below is an alternate header with <a href="#Breadcrumbs">breadcrumb</a> navigation, and 
                         a <a href="#Popover">popover</a> for secondary navigation.
                     <div class="componentSample">
-                        <div class="example">
+                        <div class="example" id="header-sample2">
                             <header class="top">
                                 <div class="logo"><i class="icon-coral medium"/>CoralUI logo</i></div>
                                 <nav class="crumbs">
@@ -510,24 +447,7 @@
                                 </div>
                             </header>
                         </div> <!-- example -->
-                        <pre class="prettyprint linenums">
-&lt;header class=&quot;top&quot;&gt;
-    &lt;div class=&quot;logo&quot;&gt;&lt;i class=&quot;icon-coral medium&quot;/&gt;CoralUI logo&lt;/i&gt;&lt;/div&gt;
-    &lt;nav class=&quot;crumbs&quot;&gt;
-        &lt;a href=&quot;#&quot;&gt;Home&lt;/a&gt;
-        &lt;a href=&quot;#&quot;&gt;Activities&lt;/a&gt;
-        &lt;a href=&quot;#popover-admin&quot; data-toggle=&quot;popover&quot; data-point-from=&quot;bottom&quot; data-align-from=&quot;right&quot;&gt;Admin&lt;/a&gt;
-        &lt;div id=&quot;popover-admin&quot; class=&quot;popover arrow-right&quot;&gt;
-            &lt;div&gt;&lt;a href=&quot;#&quot; style=&quot;color:#000&quot;&gt;Subnavigation Foo&lt;/a&gt;&lt;/div&gt;
-            &lt;div&gt;&lt;a href=&quot;#&quot; style=&quot;color:#000&quot;&gt;Subnavigation Bar&lt;/a&gt;&lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/nav&gt;
-    &lt;div class=&quot;drawer&quot;&gt;
-        &lt;a href=&quot;#&quot;&gt;Help&lt;/a&gt;
-        &lt;div class=&quot;badge&quot;&gt;5&lt;/div&gt;
-        &lt;a href=&quot;#&quot; class=&quot;icon-user&quot;&gt;Username&lt;/a&gt;
-    &lt;/div&gt;
-&lt;/header&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="header-sample2">
                     </div> <!-- /componentSample -->
                 </section>
                 <!-- /Header -->
@@ -545,7 +465,7 @@
                         to remove the border or padding on each section respectively.</p>
                     <p>Section headings should be contained within the <code class="prettyprint">&lt;h4&gt;</code> tag.</p>
                     <div class="componentSample railSample">
-                        <div class="example">
+                        <div class="example" id="rail-section-sample">
                             <div class="page shadowBox" role="main">
                                 <div class="rail right" role="complementary">
                                     <div class="wrap">
@@ -566,24 +486,7 @@
                                 </div>
                             </div>
                         </div> <!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;div class=&quot;page&quot; role=&quot;main&quot;&gt;
-    &lt;div class=&quot;rail right&quot; role=&quot;complementary&quot;&gt;
-        &lt;div class=&quot;wrap&quot;&gt;
-            &lt;section&gt;
-                &lt;h4&gt;News Feed&lt;/h4&gt;
-            &lt;/section&gt;
-            &lt;section&gt;
-                &lt;h4&gt;Revised asset ready for review&lt;/h4&gt;
-                &lt;div class=&quot;smallText greyText lightText&quot;&gt;Modified yesterday by Rob Cobourn&lt;/div&gt;
-                &lt;p class=&quot;smallText&quot;&gt;I created a new segment thing for the ... blah blah blah ...&lt;/p&gt;
-            &lt;/section&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;content&quot;&gt;
-        
-    &lt;/div&gt;
-&lt;/div&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="rail-section-sample"></pre>
                     </div> <!-- /componentSample -->
                     
                     <h3>Sticky toolbars</h3>
@@ -618,7 +521,7 @@
                     <h2 class="line">Well</h2>
                     <p>Wells are used to separate field groups or large blocks of text.</p>
                     <div class="componentSample">
-                        <div class="example">
+                        <div class="example" id="well-sample">
                             <strong>Section 1</strong>
                             <section class="well">
                                 Content goes here.
@@ -628,12 +531,7 @@
                                 More content goes here.
                             </section>
                         </div> <!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;strong&gt;Label&lt;/strong&gt;
-&lt;section class=&quot;well&quot;&gt;
-    Content goes here.
-&lt;/section&gt;
-</pre>
+                        <pre class="prettyprint linenums" data-src-id="well-sample"></pre>
                     </div> <!-- /componentSample -->
                 </section> 
                 <!-- /Well -->
@@ -653,7 +551,7 @@
                     adding the css class <code class="atv">active</code>.</p>
                     <p>Container headings should be contained within an <code class="prettyprint">&lt;h3&gt;</code> tag.</p>    
                     <div class="componentSample">
-                        <div class='example'>
+                        <div class='example' id="accordion-sample">
                             <ul class="accordion" data-init="accordion">
                                 <li>
                                   <h3><em>Tab 1</em> of accordion</h3>
@@ -669,21 +567,7 @@
                                 </li>
                             </ul>
                         </div> <!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;ul class="accordion" data-init="accordion"&gt;
-    &lt;li&gt;
-      &lt;h3&gt;&lt;em&gt;Tab 1&lt;/em&gt; of accordion&lt;/h3&gt;
-      Lorem ipsum…
-    &lt;/li&gt;
-    &lt;li class="active"&gt;
-      &lt;h3&gt;&lt;em&gt;Tab 2&lt;/em&gt; of accordion&lt;/h3&gt;
-      Lorem ipsum…
-    &lt;/li&gt;
-    &lt;li&gt;
-      &lt;h3&gt;&lt;em&gt;Tab 3&lt;/em&gt; of accordion&lt;/h3&gt;
-      Lorem ipsum…
-    &lt;/li&gt;
-&lt;/ul&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="accordion-sample">
                     </div> <!-- /componentSample -->
                     <div>
                         Open <a href="examples/accordions/index.html">Sample</a>
@@ -695,21 +579,15 @@
                   <h2 class="line">Breadcrumbs</h2>
                   <p>Breadcrumbs provide an actionable indication of a user's current location within an application.</p>
                   <div class="componentSample">
-                    <div class="example">
-                      <nav class="crumbs">
-                        <a href="#"><i class="icon-coral medium"/>CoralUI logo</i></a>
-                        <a href="#">Admin</a>
-                        <a href="#">Settings</a>
-                        <a href="#">Current Page Title</a>
-                      </nav>
+                    <div class="example" id="crumbs-sample">
+                        <nav class="crumbs">
+                            <a href="#"><i class="icon-coral medium"/>CoralUI logo</i></a>
+                            <a href="#">Admin</a>
+                            <a href="#">Settings</a>
+                            <a href="#">Current Page Title</a>
+                        </nav>
                     </div> <!-- /example -->
-                    <pre class="prettyprint linenums">
-&lt;nav class=&quot;crumbs&quot;&gt;
-    &lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;icon-coral medium&quot;/&gt;CoralUI logo&lt;/i&gt;&lt;/a&gt;
-    &lt;a href=&quot;#&quot;&gt;Admin&lt;/a&gt;
-    &lt;a href=&quot;#&quot;&gt;Settings&lt;/a&gt;
-    &lt;a href=&quot;#&quot;&gt;Current Page Title&lt;/a&gt;
-&lt;/nav&gt;</pre>
+                    <pre class="prettyprint linenums" data-src-id="crumbs-sample"
                   </div> <!-- /componentSample -->
                     <div>
                         Open <a href="examples/breadcrumbs/index.html">Sample</a>
@@ -723,17 +601,13 @@
                         containers, with only one of the group visible at any time.</p>
                     <p>Container headings should be contained within an <code class="prettyprint">&lt;h3&gt;</code> tag.</p>    
                     <div class="componentSample">
-                        <div class='example'/>
+                        <div class='example' id="collapsible-sample">
                             <div class="collapsible" data-init="collapsible">
                                 <h3><em>Headline</em> of collapsible</h3>
                                 Lorem ipsum…
                             </div>
                         </div> <!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;div class="collapsible" data-init="collapsible"&gt;
-    &lt;h3&gt;&lt;em&gt;Headline&lt;/em&gt; of collapsible&lt;/h3&gt;
-    Lorem ipsum…
-&lt;/div&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="collapsible-sample">
                     </div> <!-- /contentSample -->
                 </section>
                  <!-- /Collapsible  -->
@@ -742,7 +616,7 @@
                     <h2 class="line">Pulldown</h2>
                     <p>A Pulldown provides a menu for navigation or filtering.</p>
                     <div class="componentSample">
-                        <div class="example">
+                        <div class="example" id="pulldown-sample">
                             <nav class="pulldown" data-init="pulldown">
                                 <a href="#">Spring Clearance Product Shots</a>
                                 <div class="popover arrow-top">
@@ -757,20 +631,7 @@
                                 </div>
                             </nav>
                         </div> <!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;nav class=&quot;pulldown&quot; data-init=&quot;pulldown&quot;&gt;
-    &lt;a href=&quot;#&quot;&gt;Spring Clearance Product Shots&lt;/a&gt;
-    &lt;div class=&quot;popover arrow-top&quot;&gt;
-        &lt;ul&gt;
-            &lt;li&gt;&lt;a href=&quot;spring.html&quot; class=&quot;icon-folder withLabel&quot;&gt;Spring&lt;/a&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;a href=&quot;gear.html&quot; class=&quot;icon-folder withLabel&quot;&gt;Gear&lt;/a&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;a href=&quot;outdoors.html&quot; class=&quot;icon-folder withLabel&quot;&gt;Outdoors&lt;/a&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;a href=&quot;products.html&quot; class=&quot;icon-folder disabled withLabel&quot;&gt;Products&lt;/a&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;a href=&quot;store.html&quot; class=&quot;icon-folder withLabel&quot;&gt;Store&lt;/a&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;a href=&quot;geometrixx.html&quot; class=&quot;icon-folder withLabel&quot;&gt;Geometrixx&lt;/a&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-    &lt;/div&gt;
-&lt;/nav&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="pulldown-sample">
                     </div> 
                     <!-- /contentSample -->
                     <p>The class <code class='atv'>no-handle</code> can be added to hide the pulldown handle, 
@@ -831,33 +692,27 @@
                     <div class="componentSample">
                         <div class="example">
                             <h4>Variant: <code class="atv"><span class='tabsVariant'>tabs</span></code></p>
-                            <div id="tabsExample" class="tabs" data-init="tabs">
-                                <nav>
-                                    <a href="#" data-toggle="tab" class="active">Tab 1</a>
-                                    <a href="#" data-toggle="tab">Tab 2</a>
-                                    <a href="examples/remote.html" data-target="#" data-toggle="tab">Tab 3</a>
-                                    <a href="#" data-toggle="tab" class="disabled">Disabled Tab</a>
-                                </nav>
-                                <section class="active">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. Pellentesque congue diam ac nisl vehicula ornare. Cras eu consectetur enim. Aliquam orci augue, sollicitudin nec aliquam sit amet, imperdiet ac leo. Donec aliquam tellus nec ipsum porttitor ut viverra odio luctus. Curabitur in turpis sed nunc consequat ornare eget in nulla. Nam dignissim lectus sed velit sagittis vehicula. Maecenas interdum, quam vel luctus sagittis, mi nisl commodo sapien, eget accumsan nunc metus ac ipsum. Mauris rutrum lectus turpis. Nullam at neque non quam tincidunt fringilla. Nunc egestas mollis nulla tempor fringilla. Etiam dapibus arcu nec risus tempus dapibus.</section>
-                                <section>Aenean faucibus ornare laoreet. Cras luctus purus at ipsum rhoncus et gravida diam malesuada. In ut ante sapien. Nulla fringilla hendrerit laoreet. Proin dolor dolor, suscipit vitae ultrices in, dapibus eget nulla. Aenean varius, sapien id mollis pretium, orci erat ornare tortor, vel molestie diam velit in dolor. Sed sit amet pellentesque justo. Pellentesque tristique felis id arcu malesuada posuere pellentesque lacus varius. Nunc egestas lacinia est, non eleifend lectus varius in. In hac habitasse platea dictumst. Quisque ac ipsum enim. Morbi ut est at mi mattis tincidunt. Praesent nec magna eu augue scelerisque posuere. In erat sapien, tristique ac semper elementum, lacinia non quam.</section>
-                                <section>This will be replaced by content from examples/remote.html.</section>
-                                <section>This will not be shown as the corresponding tab is disabled.</section>
+                            <div id="tabs-sample">
+                                <!-- see guide.js for additional code used in this example -->
+                                <div id="tabsExample" class="tabs" data-init="tabs">
+                                    <nav>
+                                        <a href="#" data-toggle="tab" class="active">Tab 1</a>
+                                        <a href="#" data-toggle="tab">Tab 2</a>
+                                        <a href="examples/remote.html" data-target="#" data-toggle="tab">Tab 3</a>
+                                        <a href="#" data-toggle="tab" class="disabled">Disabled Tab</a>
+                                    </nav>
+                                    <section class="active">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida. Pellentesque congue diam ac nisl vehicula ornare. Cras eu consectetur enim. Aliquam orci augue, sollicitudin nec aliquam sit amet, imperdiet ac leo. Donec aliquam tellus nec ipsum porttitor ut viverra odio luctus. Curabitur in turpis sed nunc consequat ornare eget in nulla. Nam dignissim lectus sed velit sagittis vehicula. Maecenas interdum, quam vel luctus sagittis, mi nisl commodo sapien, eget accumsan nunc metus ac ipsum. Mauris rutrum lectus turpis. Nullam at neque non quam tincidunt fringilla. Nunc egestas mollis nulla tempor fringilla. Etiam dapibus arcu nec risus tempus dapibus.</section>
+                                    <section>Aenean faucibus ornare laoreet. Cras luctus purus at ipsum rhoncus et gravida diam malesuada. In ut ante sapien. Nulla fringilla hendrerit laoreet. Proin dolor dolor, suscipit vitae ultrices in, dapibus eget nulla. Aenean varius, sapien id mollis pretium, orci erat ornare tortor, vel molestie diam velit in dolor. Sed sit amet pellentesque justo. Pellentesque tristique felis id arcu malesuada posuere pellentesque lacus varius. Nunc egestas lacinia est, non eleifend lectus varius in. In hac habitasse platea dictumst. Quisque ac ipsum enim. Morbi ut est at mi mattis tincidunt. Praesent nec magna eu augue scelerisque posuere. In erat sapien, tristique ac semper elementum, lacinia non quam.</section>
+                                    <section>This will be replaced by content from examples/remote.html.</section>
+                                    <section>This will not be shown as the corresponding tab is disabled.</section>
+                                </div>
                             </div>
                         </div> <!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;div class=&quot;<span class='tabsVariant atv'>tabs</span>&quot; data-init=&quot;tabs&quot;&gt;
-    &lt;nav&gt;
-        &lt;a href=&quot;#&quot; data-toggle=&quot;tab&quot; class=&quot;active&quot; &gt;Tab 1&lt;/a&gt;
-        &lt;a href=&quot;#&quot; data-toggle=&quot;tab&quot;&gt;Tab 2&lt;/a&gt;
-        &lt;a href=&quot;/remote.html&quot; data-target=&quot;#&quot; data-toggle=&quot;tab&quot;&gt;Tab 3&lt;/a&gt;
-        &lt;a href=&quot;#&quot; data-toggle=&quot;tab&quot; class=&quot;disabled&quot;&gt;Disabled Tab&lt;/a&gt;
-    &lt;/nav&gt;
-    &lt;section class=&quot;active&quot;&gt;Lorem ipsum dolor sit amet.&lt;/section&gt;
-    &lt;section&gt;Aenean faucibus ornare laoreet. Cras luctus purus.&lt;/section&gt;
-    &lt;section&gt;This will be replaced by content from /remote.html.&lt;/section&gt;
-    &lt;section&gt;This will not be shown as the corresponding tab is disabled.&lt;/section&gt;
-&lt;/div&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="tabs-sample">
                     </div> <!-- /contentSample -->
+                    <div>
+                        Open <a href="examples/tabs/index.html">Sample</a>
+                    </div>
                 </section>
                 <!-- /Tabs -->
 
@@ -865,7 +720,7 @@
                     <h2 class="line">Toolbar</h2>
                     <p>The toolbar contains action buttons.</p>
                     <div class="componentSample">
-                        <div class="example">
+                        <div class="example" id="toolbar-sample">
                             <nav class="toolbar">
                                 <div class="left icongroup">
                                     <a href="#some-link" class="icon-add">Add</a>
@@ -874,36 +729,18 @@
                                     <button class="icon-email">E-mail</button>
                                     <button class="icon-attach">Attach</button>
                                 </div>
-                                <div class="center">
-                                    <h1>Page Title</h1>
-                                </div>
                                 <div class="right icongroup">
                                     <button class="icon-collection">Collection</button>
                                     <button class="icon-delete">Delete</button>
                                     <a href="#some-link" class="button">Action</a>
                                     <button class="primary">Primary</button>
                                 </div>
+                                <div class="center">
+                                    <h1>Page Title</h1>
+                                </div>
                             </nav>
                         </div>  <!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;nav class=&quot;toolbar&quot;&gt;
-    &lt;div class=&quot;left icongroup&quot;&gt;
-        &lt;a href=&quot;#some-link&quot; class=&quot;icon-add&quot;&gt;Add&lt;/a&gt;
-        &lt;span class=&quot;divider&quot;&gt;&lt;/span&gt;
-        &lt;button class=&quot;icon-calendar&quot;&gt;Calendar&lt;/button&gt;
-        &lt;button class=&quot;icon-email&quot;&gt;E-mail&lt;/button&gt;
-        &lt;button class=&quot;icon-attach&quot;&gt;Attach&lt;/button&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;center&quot;&gt;
-        &lt;h1&gt;Page Title&lt;/h1&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;right icongroup&quot;&gt;
-        &lt;button class=&quot;icon-collection&quot;&gt;Collection&lt;/button&gt;
-        &lt;button class=&quot;icon-delete&quot;&gt;Delete&lt;/button&gt;
-        &lt;a href=&quot;#some-link&quot; class=&quot;button&quot;&gt;Action&lt;/a&gt;
-        &lt;button class=&quot;primary&quot;&gt;Primary&lt;/button&gt;
-    &lt;/div&gt;
-&lt;/nav&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="toolbar-sample">
                     </div> <!-- /contentSample -->
                 </section>
                 <!-- /Toolbar -->
@@ -912,7 +749,7 @@
                     <h2 class="line">Wizard</h2>
                     <p>A multi-step dialog which can be used to create multi-step forms.</p>
                     <div class="componentSample">
-                        <div class="example">
+                        <div class="example" id="wizard-sample">
                             <div class="wizard" data-init="wizard">
                                 <nav>
                                     <button class="back">Back</button>
@@ -938,33 +775,7 @@
                                 </section>
                             </div>
                         </div> <!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;div class=&quot;example&quot;&gt;
-    &lt;div class=&quot;wizard&quot; data-init=&quot;wizard&quot;&gt;
-        &lt;nav&gt;
-            &lt;button class=&quot;back&quot;&gt;Back&lt;/button&gt;
-            &lt;ol&gt;
-                &lt;li&gt;Frist step&lt;/li&gt;
-                &lt;li&gt;Second step&lt;/li&gt;
-                &lt;li&gt;Third step&lt;/li&gt;
-                &lt;li&gt;Last step&lt;/li&gt;
-            &lt;/ol&gt;
-            &lt;button class=&quot;next&quot; disabled&gt;Next&lt;/button&gt;
-        &lt;/nav&gt;
-        &lt;section data-next-disabled=&quot;false&quot; data-back-label=&quot;Cancel&quot;&gt;
-            The first step is optional.
-        &lt;/section&gt;
-        &lt;section data-next-disabled=&quot;false&quot;&gt;
-            The second step is optional.
-        &lt;/section&gt;
-        &lt;section data-next-disabled=&quot;false&quot;&gt;
-            The third step is optional.
-        &lt;/section&gt;
-        &lt;section data-next-label=&quot;Create&quot;&gt;
-            Name is required.
-        &lt;/section&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="wizard-sample">
                     </div> <!-- /componentSample -->
                     <div>
                         Open <a href="examples/wizard/index.html">Sample</a>
@@ -988,286 +799,196 @@
                         <div class="example">
                             <div class="filterSample">
                                 <div class="sampleTitle left">Clear</div>
-                                <span class="autocomplete" data-init="autocomplete" data-showclearbutton="true">
-                                  <input type="text" name="name1" placeholder="Search">
-                                </span>
+                                <div id="autocomplete-sample1">
+                                    <!-- Clear -->
+                                    <span class="autocomplete" data-init="autocomplete" data-showclearbutton="true">
+                                        <input type="text" name="name1" placeholder="Search">
+                                        <button class="autocomplete-suggestion-toggle"></button>
+                                    </span>
+                                </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">Icon</div>
-                                <span class="autocomplete icon-search" data-init="autocomplete" data-showclearbutton="true">
-                                  <input type="text" name="name1" placeholder="Search">
-                                </span>
+                                <div id="autocomplete-sample2">
+                                    <!-- Icon -->
+                                    <span class="autocomplete icon-search" data-init="autocomplete"
+                                          data-showclearbutton="true">
+                                        <input type="text" name="name1" placeholder="Search">
+                                        <button class="autocomplete-suggestion-toggle"></button>
+                                    </span>
+                                </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">Tags</div>
-                                <span class="autocomplete icon-tag" data-init="autocomplete" data-showclearbutton="true" data-showtags="true">
-                                  <input type="text" name="name1" placeholder="Search">
-                                  <ol class="taglist autocomplete-tags">
-                                    <li>
-                                      <button class="icon-close"></button>
-                                      Carrot
-                                      <input type="hidden" value="Carrot"/>
-                                    </li>
-                                    <li>
-                                      <button class="icon-close"></button>
-                                      Banana
-                                      <input type="hidden" value="Banana"/>
-                                    </li>
-                                    <li>
-                                      <button class="icon-close"></button>
-                                      Apple
-                                      <input type="hidden" value="Apple"/>
-                                    </li>
-                                  </ol>
-                                </span>
+                                <div id="autocomplete-sample3">
+                                      <!-- Tags -->
+                                      <span class="autocomplete icon-tag" data-init="autocomplete" data-showclearbutton="true" data-showtags="true">
+                                          <input type="text" name="name1" placeholder="Search">
+                                          <button class="autocomplete-suggestion-toggle"></button>
+                                          <ol class="taglist autocomplete-tags">
+                                              <li>
+                                                  <button class="icon-close"></button>
+                                                  Carrot
+                                                  <input type="hidden" value="Carrot"/>
+                                              </li>
+                                              <li>
+                                                  <button class="icon-close"></button>
+                                                  Banana
+                                                  <input type="hidden" value="Banana"/>
+                                              </li>
+                                              <li>
+                                                  <button class="icon-close"></button>
+                                                  Apple
+                                                  <input type="hidden" value="Apple"/>
+                                              </li>
+                                          </ol>
+                                      </span>
+                                </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">Suggestions</div>
-                                <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
-                                  <input type="text" name="name1" placeholder="Search">
-                                  <ul class="autocomplete-suggestions selectlist">
-                                    <li data-value="expr1">Expression 1</li>
-                                    <li data-value="expr2">Expression 2</li>
-                                    <li data-value="expr3">Expression 3</li>
-                                    <li>Expression 4</li>
-                                    <li data-value="expr5">Expression 5</li>
-                                    <li data-value="expr6">Expression 6</li>
-                                  </ul>
-                                </span>
+                                <div id="autocomplete-sample4">
+                                    <!-- Suggestions -->
+                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
+                                      <input type="text" name="name1" placeholder="Search">
+                                      <button class="autocomplete-suggestion-toggle"></button>
+                                      <ul class="autocomplete-suggestions selectlist">
+                                          <li data-value="expr1">Expression 1</li>
+                                          <li data-value="expr2">Expression 2</li>
+                                          <li data-value="expr3">Expression 3</li>
+                                          <li>Expression 4</li>
+                                          <li data-value="expr5">Expression 5</li>
+                                          <li data-value="expr6">Expression 6</li>
+                                      </ul>
+                                    </span>
+                                </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">with Tags</div>
-                                <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true" data-showtags="true">
-                                  <input type="text" name="name1" placeholder="Search">
-                                  <ul class="autocomplete-suggestions selectlist">
-                                    <li data-value="expr1">Expression 1</li>
-                                    <li data-value="expr2">Expression 2</li>
-                                    <li data-value="expr3">Expression 3</li>
-                                    <li>Expression 4</li>
-                                    <li data-value="expr5">Expression 5</li>
-                                    <li data-value="expr6">Expression 6</li>
-                                  </ul>
-                                </span>
+                                <div id="autocomplete-sample5">
+                                    <!-- with Tags -->
+                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true" data-showtags="true">
+                                          <input type="text" name="name1" placeholder="Search">
+                                          <button class="autocomplete-suggestion-toggle"></button>
+                                          <ul class="autocomplete-suggestions selectlist">
+                                                <li data-value="expr1">Expression 1</li>
+                                                <li data-value="expr2">Expression 2</li>
+                                                <li data-value="expr3">Expression 3</li>
+                                                <li>Expression 4</li>
+                                                <li data-value="expr5">Expression 5</li>
+                                                <li data-value="expr6">Expression 6</li>
+                                          </ul>
+                                    </span>
+                                </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">Remote</div>
-                                <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
-                                  <input type="text" name="name1" placeholder="Search">
-                                  <ul class="autocomplete-suggestions selectlist" data-type="dynamic" data-dataurl="examples/autocomplete/remotehtml.html">
-                                  </ul>
-                                </span>
+                                <div id="autocomplete-sample6">
+                                    <!-- remote -->
+                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
+                                          <input type="text" name="name1" placeholder="Search">
+                                          <button class="autocomplete-suggestion-toggle"></button>
+                                          <ul class="autocomplete-suggestions selectlist" data-type="dynamic" data-dataurl="examples/autocomplete/remotehtml.html">
+                                          </ul>
+                                    </span>
+                                </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">Typeahead</div>
-                                <span class="autocomplete icon-search" data-init="autocomplete" data-showtypeahead="true">
-                                  <input type="text" name="name1" placeholder="Search">
-                                  <ul class="autocomplete-typeahead selectlist" data-type="dynamic" data-dataurl="examples/autocomplete/remotehtml.html">
-                                  </ul>
-                                </span>
+                                <div id="autocomplete-sample7">
+                                    <!-- Typeahead -->
+                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showtypeahead="true">
+                                          <input type="text" name="name1" placeholder="Search">
+                                          <button class="autocomplete-suggestion-toggle"></button>
+                                          <ul class="autocomplete-typeahead selectlist" data-type="dynamic" data-dataurl="examples/autocomplete/remotehtml.html">
+                                          </ul>
+                                    </span>
+                                </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">Disabled</div>
-                                <span class="autocomplete icon-search disabled" data-init="autocomplete" data-showsuggestions="true">
-                                  <input type="text" name="name1" placeholder="Search" disabled="true">
-                                  <ul class="autocomplete-suggestions selectlist">
-                                  </ul>
-                                  <button class="autocomplete-suggestion-toggle" disabled="true"></button>
-                                </span>
+                                <div id="autocomplete-sample8">
+                                    <!-- Disabled -->
+                                    <span class="autocomplete icon-search disabled" data-init="autocomplete" data-showsuggestions="true">
+                                          <input type="text" name="name1" placeholder="Search" disabled="true">
+                                          <ul class="autocomplete-suggestions selectlist">
+                                          </ul>
+                                          <button class="autocomplete-suggestion-toggle" disabled="true"></button>
+                                    </span>
+                                </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">Error</div>
-                                <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
-                                  <input type="text" name="name1" placeholder="Search" class="error">
-                                  <ul class="autocomplete-suggestions selectlist">
-                                    <li data-value="expr1"><span>Expression 1</span></li>
-                                    <li data-value="expr2"><span>Expression 2</span></li>
-                                    <li data-value="expr3"><span>Expression 3</span></li>
-                                  </ul>
-                                  <button class="autocomplete-suggestion-toggle"></button>
-                                </span>
+                                <div id="autocomplete-sample9">
+                                    <!-- Error -->
+                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
+                                          <input type="text" name="name1" placeholder="Search" class="error">
+                                          <ul class="autocomplete-suggestions selectlist">
+                                            <li data-value="expr1"><span>Expression 1</span></li>
+                                            <li data-value="expr2"><span>Expression 2</span></li>
+                                            <li data-value="expr3"><span>Expression 3</span></li>
+                                          </ul>
+                                          <button class="autocomplete-suggestion-toggle"></button>
+                                    </span>
+                                </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">Groups</div>
-                                <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
-                                  <input type="text" name="name1" placeholder="Search">
-                                  <ul class="autocomplete-suggestions selectlist" data-multiple="true">
-                                      <li class="optgroup">
-                                          <span>Group 1</span>
-                                          <ul>
-                                              <li><span data-value="expr1">Expression 1</span></li>
-                                              <li><span data-value="expr2">Expression 2</span></li>
-                                              <li><span data-value="expr3">Expression 3</span></li>
+                                <div id="autocomplete-sample10">
+                                    <!-- Groups -->
+                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
+                                          <input type="text" name="name1" placeholder="Search">
+                                          <button class="autocomplete-suggestion-toggle"></button>
+                                          <ul class="autocomplete-suggestions selectlist" data-multiple="true">
+                                              <li class="optgroup">
+                                                  <span>Group 1</span>
+                                                  <ul>
+                                                      <li><span data-value="expr1">Expression 1</span></li>
+                                                      <li><span data-value="expr2">Expression 2</span></li>
+                                                      <li><span data-value="expr3">Expression 3</span></li>
+                                                  </ul>
+                                              </li>
+                                              <li class="optgroup">
+                                                  <span>Group 2</span>
+                                                  <ul>
+                                                      <li><span data-value="expr4">Expression 4</span></li>
+                                                      <li data-value="expr5"><span>Expression 5</span></li>
+                                                  </ul>
+                                              </li>
                                           </ul>
-                                      </li>
-                                      <li class="optgroup">
-                                          <span>Group 2</span>
-                                          <ul>
-                                              <li><span data-value="expr4">Expression 4</span></li>
-                                              <li data-value="expr5"><span>Expression 5</span></li>
-                                          </ul>
-                                      </li>
-                                  </ul>
-                                </span>
+                                    </span>
+                                </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">Icons</div>
-                                <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
-                                  <input type="text" name="name1" placeholder="Search">
-                                  <ul class="autocomplete-suggestions selectlist" data-multiple="true">
-                                      <li class="optgroup">
-                                          <span>Group 1</span>
-                                          <ul>
-                                              <li data-value="expr1" class="icon-adobeanalytics"><span >Expression 1</span></li>
-                                              <li data-value="expr2" class="icon-adobeexperiencemanager"><span>Expression 2</span></li>
-                                              <li data-value="expr3" class="icon-adobetarget"><span>Expression 3</span></li>
+                                <div id="autocomplete-sample11">
+                                    <!-- Icons -->
+                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
+                                          <input type="text" name="name1" placeholder="Search">
+                                          <button class="autocomplete-suggestion-toggle"></button>
+                                          <ul class="autocomplete-suggestions selectlist" data-multiple="true">
+                                              <li class="optgroup">
+                                                  <span>Group 1</span>
+                                                  <ul>
+                                                      <li data-value="expr1" class="icon-adobeanalytics"><span >Expression 1</span></li>
+                                                      <li data-value="expr2" class="icon-adobeexperiencemanager"><span>Expression 2</span></li>
+                                                      <li data-value="expr3" class="icon-adobetarget"><span>Expression 3</span></li>
+                                                  </ul>
+                                              </li>
+                                              <li class="optgroup">
+                                                  <span>Group 2</span>
+                                                  <ul>
+                                                      <li data-value="expr4" class="icon-brush"><span>Expression 4</span></li>
+                                                      <li data-value="expr5" class="icon-browse"><span>Expression 5</span></li>
+                                                  </ul>
+                                              </li>
                                           </ul>
-                                      </li>
-                                      <li class="optgroup">
-                                          <span>Group 2</span>
-                                          <ul>
-                                              <li data-value="expr4" class="icon-brush"><span>Expression 4</span></li>
-                                              <li data-value="expr5" class="icon-browse"><span>Expression 5</span></li>
-                                          </ul>
-                                      </li>
-                                  </ul>
-                                </span>
+                                    </span>
+                                </div>
                             </div>
                         </div><!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;!-- Add clear button --&gt;                          
-&lt;span class=&quot;autocomplete&quot; data-init=&quot;autocomplete&quot; data-showclearbutton=&quot;true&quot;&gt;
-  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot;&gt;
-&lt;/span&gt;
-
-&lt;!-- Add icon --&gt; 
-&lt;span class=&quot;autocomplete icon-search&quot; data-init=&quot;autocomplete&quot; data-showclearbutton=&quot;true&quot;&gt;
-  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot;&gt;
-&lt;/span&gt;
-
-&lt;!-- Add tag functionality --&gt; 
-&lt;span class=&quot;autocomplete icon-tag&quot; data-init=&quot;autocomplete&quot; data-showclearbutton=&quot;true&quot; data-showtags=&quot;true&quot;&gt;
-  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot;&gt;
-  &lt;ol class=&quot;taglist autocomplete-tags&quot;&gt;
-    &lt;li&gt;
-      &lt;button class=&quot;icon-close&quot;&gt;&lt;/button&gt;
-      Carrot
-      &lt;input type=&quot;hidden&quot; value=&quot;Carrot&quot;/&gt;
-    &lt;/li&gt;
-    &lt;li&gt;
-      &lt;button class=&quot;icon-close&quot;&gt;&lt;/button&gt;
-      Banana
-      &lt;input type=&quot;hidden&quot; value=&quot;Banana&quot;/&gt;
-    &lt;/li&gt;
-    &lt;li&gt;
-      &lt;button class=&quot;icon-close&quot;&gt;&lt;/button&gt;
-      Apple
-      &lt;input type=&quot;hidden&quot; value=&quot;Apple&quot;/&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/span&gt;
-
-&lt;!-- Add suggestion functionality --&gt; 
-&lt;span class=&quot;autocomplete icon-search&quot; data-init=&quot;autocomplete&quot; data-showsuggestions=&quot;true&quot;&gt;
-  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot;&gt;
-  &lt;ul class=&quot;autocomplete-suggestions selectlist&quot;&gt;
-    &lt;li data-value=&quot;expr1&quot;&gt;&lt;span&gt;Expression 1&lt;/span&gt;&lt;/li&gt;
-    &lt;li data-value=&quot;expr2&quot;&gt;&lt;span&gt;Expression 2&lt;/span&gt;&lt;/li&gt;
-    &lt;li data-value=&quot;expr3&quot;&gt;&lt;span&gt;Expression 3&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;Expression 4&lt;/span&gt;&lt;/li&gt;
-    &lt;li data-value=&quot;expr5&quot;&gt;&lt;span&gt;Expression 5&lt;/span&gt;&lt;/li&gt;
-    &lt;li data-value=&quot;expr6&quot;&gt;&lt;span&gt;Expression 6&lt;/span&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/span&gt;
-
-&lt;!-- Combine several features --&gt; 
-&lt;span class=&quot;autocomplete icon-search&quot; data-init=&quot;autocomplete&quot; data-showsuggestions=&quot;true&quot; data-showtags=&quot;true&quot;&gt;
-  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot;&gt;
-  &lt;ul class=&quot;autocomplete-suggestions selectlist&quot;&gt;
-    &lt;li data-value=&quot;expr1&quot;&gt;&lt;span&gt;Expression 1&lt;/span&gt;&lt;/li&gt;
-    &lt;li data-value=&quot;expr2&quot;&gt;&lt;span&gt;Expression 2&lt;/span&gt;&lt;/li&gt;
-    &lt;li data-value=&quot;expr3&quot;&gt;&lt;span&gt;Expression 3&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;Expression 4&lt;/span&gt;&lt;/li&gt;
-    &lt;li data-value=&quot;expr5&quot;&gt;&lt;span&gt;Expression 5&lt;/span&gt;&lt;/li&gt;
-    &lt;li data-value=&quot;expr6&quot;&gt;&lt;span&gt;Expression 6&lt;/span&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/span&gt;
-
-&lt;!-- Remote data loading --&gt; 
-&lt;span class=&quot;autocomplete icon-search&quot; data-init=&quot;autocomplete&quot; data-showsuggestions=&quot;true&quot;&gt;
-  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot;&gt;
-  &lt;ul class=&quot;autocomplete-suggestions selectlist&quot; data-type=&quot;dynamic&quot; data-dataurl=&quot;examples/autocomplete/remotehtml.html&quot;&gt;
-  &lt;/ul&gt;
-&lt;/span&gt;
-
-&lt;!-- Remote Typeahead --&gt;
-&lt;div class=&quot;filterSample&quot;&gt;
-    &lt;div class=&quot;sampleTitle left&quot;&gt;Typeahead&lt;/div&gt;
-    &lt;span class=&quot;autocomplete icon-search&quot; data-init=&quot;autocomplete&quot; data-showtypeahead=&quot;true&quot;&gt;
-      &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot;&gt;
-      &lt;ul class=&quot;autocomplete-typeahead selectlist&quot; data-type=&quot;dynamic&quot; data-dataurl=&quot;examples/autocomplete/remotehtml.html&quot;&gt;
-      &lt;/ul&gt;
-    &lt;/span&gt;
-&lt;/div&gt;
-
-&lt;!-- Disabled state --&gt;
-&lt;span class=&quot;autocomplete icon-search disabled&quot; data-init=&quot;autocomplete&quot; data-showsuggestions=&quot;true&quot;&gt;
-  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot; disabled=&quot;true&quot;&gt;
-  &lt;ul class=&quot;autocomplete-suggestions selectlist&quot;&gt;
-  &lt;/ul&gt;
-  &lt;button class=&quot;autocomplete-suggestion-toggle&quot; disabled=&quot;true&quot;&gt;&lt;/button&gt;
-&lt;/span&gt;
-
-&lt;!-- Error state --&gt;
-&lt;span class=&quot;autocomplete icon-search&quot; data-init=&quot;autocomplete&quot; data-showsuggestions=&quot;true&quot;&gt;
-  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot; class=&quot;error&quot;&gt;
-  &lt;ul class=&quot;autocomplete-suggestions selectlist&quot;&gt;
-    &lt;li data-value=&quot;expr1&quot;&gt;&lt;span&gt;Expression 1&lt;/span&gt;&lt;/li&gt;
-    &lt;li data-value=&quot;expr2&quot;&gt;&lt;span&gt;Expression 2&lt;/span&gt;&lt;/li&gt;
-    &lt;li data-value=&quot;expr3&quot;&gt;&lt;span&gt;Expression 3&lt;/span&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-  &lt;button class=&quot;autocomplete-suggestion-toggle&quot;&gt;&lt;/button&gt;
-&lt;/span&gt;
-
-&lt;!-- Groups --&gt;
-&lt;ul class=&quot;autocomplete-suggestions selectlist&quot; data-multiple=&quot;true&quot;&gt;
-  &lt;li class=&quot;optgroup&quot;&gt;
-      &lt;span&gt;Group 1&lt;/span&gt;
-      &lt;ul&gt;
-          &lt;li&gt;&lt;span data-value=&quot;expr1&quot;&gt;Expression 1&lt;/span&gt;&lt;/li&gt;
-          &lt;li&gt;&lt;span data-value=&quot;expr2&quot;&gt;Expression 2&lt;/span&gt;&lt;/li&gt;
-          &lt;li&gt;&lt;span data-value=&quot;expr3&quot;&gt;Expression 3&lt;/span&gt;&lt;/li&gt;
-      &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li class=&quot;optgroup&quot;&gt;
-      &lt;span&gt;Group 2&lt;/span&gt;
-      &lt;ul&gt;
-          &lt;li&gt;&lt;span data-value=&quot;expr4&quot;&gt;Expression 4&lt;/span&gt;&lt;/li&gt;
-          &lt;li&gt;&lt;span data-value=&quot;expr5&quot;&gt;Expression 5&lt;/span&gt;&lt;/li&gt;
-      &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;!-- with Icons --&gt;
-&lt;span class=&quot;autocomplete icon-search&quot; data-init=&quot;autocomplete&quot; data-showsuggestions=&quot;true&quot;&gt;
-  &lt;input type=&quot;text&quot; name=&quot;name1&quot; placeholder=&quot;Search&quot;&gt;
-  &lt;ul class=&quot;autocomplete-suggestions selectlist&quot; data-multiple=&quot;true&quot;&gt;
-      &lt;li class=&quot;optgroup&quot;&gt;
-          &lt;span&gt;Group 1&lt;/span&gt;
-          &lt;ul&gt;
-              &lt;li&gt;&lt;span class=&quot;icon-adobeanalytics&quot; data-value=&quot;expr1&quot;&gt;Expression 1&lt;/span&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;span class=&quot;icon-adobeexperiencemanager&quot; data-value=&quot;expr2&quot;&gt;Expression 2&lt;/span&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;span class=&quot;icon-adobetarget&quot; data-value=&quot;expr3&quot;&gt;Expression 3&lt;/span&gt;&lt;/li&gt;
-          &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li class=&quot;optgroup&quot;&gt;
-          &lt;span&gt;Group 2&lt;/span&gt;
-          &lt;ul&gt;
-              &lt;li&gt;&lt;span class=&quot;icon-brush&quot; data-value=&quot;expr4&quot;&gt;Expression 4&lt;/span&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;span class=&quot;icon-browse&quot; data-value=&quot;expr5&quot;&gt;Expression 5&lt;/span&gt;&lt;/li&gt;
-          &lt;/ul&gt;
-      &lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/span&gt;</pre>
+                        <pre class="prettyprint linenums"
+                             data-src-id="autocomplete-sample1,autocomplete-sample2,autocomplete-sample3,autocomplete-sample4,autocomplete-sample5,autocomplete-sample6,autocomplete-sample7,autocomplete-sample8,autocomplete-sample9,autocomplete-sample10,autocomplete-sample11">
                     </div><!-- /componentSample -->
                     <div>
                         Open <a href="examples/autocomplete/index.html">Sample</a>
@@ -1292,30 +1013,30 @@
                                         
                     <div class="componentSample buttonSample">
                         <div class="example">
+                            Buttons:
+                            <div id="button-sample1">
+                                <!-- Buttons -->
+                                <a class="button" role="button" href="#">Action</a>
 
-                            <a class="button" role="button" href="#">Action</a>
-                            <button class="primary">Primary Action</button>
-                            <button class="warning">Warning</button>
-                            <button disabled>Disabled</button>
-                            
-                            <p>Button groups:</p>
-                            <div class="button-group">
-                              <button><i class="icon-add"></i> Add</button>
-                              <button><i class="icon-camera"></i> Snapshot</button>
-                              <button><i class="icon-undo"></i> Undo</button>  
+                                <button class="primary">Primary Action</button>
+
+                                <button class="warning">Warning</button>
+
+                                <button disabled>Disabled</button>
                             </div>
-                        </div> <!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;a class=&quot;button&quot; role=&quot;button&quot; href=&quot;#&quot;&gt;Action&lt;/a&gt;
-&lt;button class=&quot;primary&quot;&gt;Primary Action&lt;/button&gt;
-&lt;button class=&quot;warning&quot;&gt;Warning&lt;/button&gt;
-&lt;button disabled&gt;Disabled&lt;/button&gt;
+                            <br><br>
+                            Button Group:
+                            <div id="button-sample2">
+                                <!-- Button Group -->
+                                <div class="button-group">
+                                    <button><i class="icon-add"></i> Add</button>
+                                    <button><i class="icon-camera"></i> Snapshot</button>
+                                    <button><i class="icon-undo"></i> Undo</button>
+                                </div>
+                            </div>
 
-&lt;div class="button-group"&gt;
-  &lt;button&gt;&lt;i class="icon-add"&gt;&lt;/i&gt; Add&lt;/button&gt;
-  &lt;button&gt;&lt;i class="icon-camera"&gt;&lt;/i&gt; Snapshot&lt;/button&gt;
-  &lt;button&gt;&lt;i class="icon-undo"&gt;&lt;/i&gt; Undo&lt;/button&gt;  
-&lt;/div&gt;</pre>
+                        </div> <!-- /example -->
+                        <pre class="prettyprint linenums" data-src-id="button-sample1,button-sample2">
                     </div><!-- /componentSample -->
                     <div>
                         Open <a href="examples/buttons/index.html">Sample</a>
@@ -1325,35 +1046,42 @@
 
                 <section id="Checkbox">
                     <h2 class="line">Checkbox</h2>
-                    <p>Checkboxes are styled using pure CSS. They can have an indetermined state by 
+                    <p>Checkboxes are styled using pure CSS for checked and unchecked. They can have an indeterminate state by
                         changing their state using javascript.</p>
                     <div class="componentSample">
                         <div class="example clearfix">
-                            <div class="left">
+                            <div class="left" id="checkbox-sample1">
+                                <!-- Checked -->
                                 <label><input type="checkbox" name="c1" value="1" checked><span>Checked</span></label><br>
+
+                                <!-- Unchecked -->
                                 <label><input type="checkbox" name="c2" value="2"><span>Unchecked</span></label><br>
+
+                                <!-- Partially Checked -->
                                 <label><input type="checkbox" name="c3" value="3" id="partial-checkbox1"><span>Partially checked</span></label>
                             </div>
-                            <div class="left">
+                            <div class="left" id="checkbox-sample2">
+                                <!-- Disabled Checked -->
                                 <label><input type="checkbox" name="c4" value="4" disabled checked><span>Disabled Checked</span></label><br>
+
+                                <!-- Disabled Unchecked -->
                                 <label><input type="checkbox" name="c5" value="5" disabled><span>Disabled Unchecked</span></label><br>
+
+                                <!-- Disabled Partially Checked -->
                                 <label><input type="checkbox" name="c6" value="6" id="partial-checkbox2" disabled><span>Disabled Partially Checked</span></label>
                             </div>
+                            <div id="checkbox-sample3">
+                               <script type="text/javascript">
+                                    // changes the demo checkboxes to be half-checked.
+                                    $('#partial-checkbox1').prop('indeterminate', true);
+                                    $('#partial-checkbox2').prop('indeterminate', true);
+                                </script>
+                            </div>
                         </div><!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c1&quot; checked&gt;&lt;span&gt;Checked&lt;/span&gt;&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c2&quot;&gt;&lt;span&gt;Unchecked&lt;/span&gt;&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c3&quot; &gt;&lt;span&gt;Partially checked&lt;/span&gt;&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c4&quot; disabled checked&gt;&lt;span&gt;Disabled Checked&lt;/span&gt;&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c5&quot; disabled&gt;&lt;span&gt;Disabled Unchecked&lt;/span&gt;&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;c6&quot; disabled&gt;&lt;span&gt;Disabled Partially Checked&lt;/span&gt;&lt;/label&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="checkbox-sample1,checkbox-sample2,checkbox-sample3"></pre>
                     </div><!-- /componentSample -->
 
-                    <script type="text/javascript">
-                        // changes the demo checkboxes to be half-checked.
-                        $('#partial-checkbox1').prop('indeterminate', true);
-                        $('#partial-checkbox2').prop('indeterminate', true);
-                    </script>
+
                     <div>
                         Open <a href="examples/checkbox/index.html">Sample</a>
                     </div>
@@ -1371,58 +1099,44 @@
                     <div class="componentSample">
                         <div class="example clearfix">
                             <div class="column left">
-                                <div class="datepicker" data-init="datepicker">
-                                    <input type="datetime" value="1987-04-06T20:35Z">
-                                    <button class="icon-calendar small">Datetime picker</button>
+                                <div id="datepicker-sample1">
+                                    <!-- date and time -->
+                                    <div class="datepicker" data-init="datepicker">
+                                        <input type="datetime" value="1987-04-06T20:35Z">
+                                        <button class="icon-calendar small">Datetime picker</button>
+                                    </div>
                                 </div>
-                                <div class="datepicker" data-init="datepicker">
-                                    <input type="datetime-local" value="1987-04-06T20:35">
-                                    <button class="icon-calendar small">Datetime picker</button>
+                                <div id="datepicker-sample2">
+                                    <!-- local date and time -->
+                                    <div class="datepicker" data-init="datepicker">
+                                        <input type="datetime-local" value="1987-04-06T20:35">
+                                        <button class="icon-calendar small">Datetime picker</button>
+                                    </div>
                                 </div>
-                                <div class="datepicker" data-init="datepicker">
-                                    <input type="date" value="1987-04-06">
-                                    <button class="icon-calendar small">Datepicker</button>
+                                <div id="datepicker-sample3">
+                                    <!-- date -->
+                                    <div class="datepicker" data-init="datepicker">
+                                        <input type="date" value="1987-04-06">
+                                        <button class="icon-calendar small">Datepicker</button>
+                                    </div>
                                 </div>
-                                <div class="datepicker" data-init="datepicker">
-                                    <input type="time" value="11:10">
-                                    <button class="icon-clock small">Timepicker</button>
+                                <div id="datepicker-sample4">
+                                    <!-- time -->
+                                    <div class="datepicker" data-init="datepicker">
+                                        <input type="time" value="11:10">
+                                        <button class="icon-clock small">Timepicker</button>
+                                    </div>
                                 </div>
-                                <div class="datepicker" data-init="datepicker" data-disabled="true">
-                                    <input type="date" value="1987-04-06" disabled>
-                                    <button class="icon-calendar small" disabled>Datepicker</button>
+                                <div id="datepicker-sample5">
+                                    <!-- disabled -->
+                                    <div class="datepicker" data-init="datepicker" data-disabled="true">
+                                        <input type="date" value="1987-04-06" disabled>
+                                        <button class="icon-calendar small" disabled>Datepicker</button>
+                                    </div>
                                 </div>
                             </div>
                         </div><!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;!-- Date/time picker --&gt;
-&lt;div class=&quot;datepicker&quot; data-init=&quot;datepicker&quot;&gt;
-    &lt;input type=&quot;datetime&quot; value=&quot;1987-04-06T20:35Z&quot;&gt;
-    &lt;button class=&quot;icon-calendar small&quot;&gt;Datetime picker&lt;/button&gt;
-&lt;/div&gt;
-
-&lt;!-- Local date/time picker --&gt;
-&lt;div class=&quot;datepicker&quot; data-init=&quot;datepicker&quot;&gt;
-    &lt;input type=&quot;datetime-local&quot; value=&quot;1987-04-06T20:35&quot;&gt;
-    &lt;button class=&quot;icon-calendar small&quot;&gt;Datetime picker&lt;/button&gt;
-&lt;/div&gt;
-
-&lt;!-- Date picker --&gt;
-&lt;div class=&quot;datepicker&quot; data-init=&quot;datepicker&quot;&gt;
-    &lt;input type=&quot;date&quot; value=&quot;1987-04-06&quot;&gt;
-    &lt;button class=&quot;icon-calendar small&quot;&gt;Datepicker&lt;/button&gt;
-&lt;/div&gt;
-
-&lt;!-- Time picker --&gt;
-&lt;div class=&quot;datepicker&quot; data-init=&quot;datepicker&quot;&gt;
-    &lt;input type=&quot;time&quot; value=&quot;11:10&quot;&gt;
-    &lt;button class=&quot;icon-clock small&quot;&gt;Timepicker&lt;/button&gt;
-&lt;/div&gt;
-
-&lt;!-- Disabled date picker --&gt;
-&lt;div class=&quot;datepicker&quot; data-init=&quot;datepicker&quot; data-disabled=&quot;true&quot;&gt;
-    &lt;input type=&quot;date&quot; value=&quot;1987-04-06&quot; disabled&gt;
-    &lt;button class=&quot;icon-calendar small&quot; disabled&gt;Datepicker&lt;/button&gt;
-&lt;/div&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="datepicker-sample1,datepicker-sample2,datepicker-sample3,datepicker-sample4,datepicker-sample5"></pre>
 
                     </div><!-- /componentSample -->
                     <div>
@@ -1436,14 +1150,16 @@
                     <p>A list with items that can be dragged and dropped. If the widget <a href="doc/CUI.DraggableList.html">CUI.DraggableList</a> is applied to the list, it can be sorted and moved from one list to another by just dragging the elements to their new position.</p>
                     <div class="componentSample">
                         <div class="example clearfix">
-                            <div class="left">
+                            <div class="left" id="draggable-sample1">
+                                <!-- left list -->
                                 <ul class="draggable" data-init="draggable-list" data-allow="reorder drag drop">
                                     <li draggable="true">My Content 1<button class="close">&times;</button></li>
                                     <li draggable="true">My Content 2<button class="close">&times;</button></li>
                                     <li draggable="true">My Content 3<button class="close">&times;</button></li>
                                 </ul>
                             </div>
-                            <div class="left">
+                            <div class="left" id="draggable-sample2">
+                                <!-- right list -->
                                 <ul class="draggable" data-init="draggable-list" data-allow="reorder drag drop">
                                     <li draggable="true">My Content 4<button class="close">&times;</button></li>
                                     <li draggable="true">My Content 5<button class="close">&times;</button></li>
@@ -1451,12 +1167,7 @@
                                 </ul>
                             </div>                            
                         </div> <!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;ul class=&quot;draggable&quot; data-init=&quot;draggable-list&quot;&gt;
-&lt;li draggable=&quot;true&quot;&gt;My Content 1&lt;button class=&quot;close&quot;&gt;&amp;times&lt;/button&gt;&lt;/li&gt;
-&lt;li draggable=&quot;true&quot;&gt;My Content 2&lt;button class=&quot;close&quot;&gt;&amp;times&lt;/button&gt;&lt;/li&gt;
-&lt;li draggable=&quot;true&quot;&gt;My Content 3&lt;button class=&quot;close&quot;&gt;&amp;times&lt;/button&gt;&lt;/li&gt;
-&lt;/ul&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="draggable-sample1,draggable-sample2"></pre>
                     </div><!-- /componentSample -->
                     <div>
                         Open <a href="examples/sortable/index.html">Sample</a>
@@ -1472,71 +1183,90 @@
                         <div class="example">
                             <div class="filterSample">
                                 <div class="sampleTitle left">Standard</div>
-                                <div class="dropdown" data-init="dropdown">
-                                    <button>Single Select</button>
-                                    <select name="dropdown" >
-                                        <option></option>
-                                        <option>Single One</option>
-                                        <option selected>Single Two</option>
-                                        <option>Single Three</option>
-                                    </select>
+                                <div id="dropdown-sample1">
+                                    <!-- standard -->
+                                    <div class="dropdown" data-init="dropdown">
+                                        <button>Single Select</button>
+                                        <select name="dropdown" >
+                                            <option></option>
+                                            <option>Single One</option>
+                                            <option selected>Single Two</option>
+                                            <option>Single Three</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">Multiselect</div>
-                                <div class="dropdown" data-init="dropdown">
-                                    <button>Multi Select</button>
-                                    <select name="dropdown2" multiple>
-                                        <option>Multi One</option>
-                                        <option selected>Multi Two</option>
-                                        <option>Multi Three</option>
-                                    </select>
-                                </div>
+                                    <div id="dropdown-sample2">
+                                        <!-- multiselect -->
+                                        <div class="dropdown" data-init="dropdown">
+                                            <button>Multi Select</button>
+                                            <select name="dropdown2" multiple>
+                                                <option>Multi One</option>
+                                                <option selected>Multi Two</option>
+                                                <option>Multi Three</option>
+                                            </select>
+                                        </div>
+                                    </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">Editable</div>
-                                <div class="dropdown dropdown-editable" data-editable="true" data-init="dropdown">
-                                    <input type="text" placeholder="Editable Select">
-                                    <button>Editable</button>
-                                    <select name="dropdown3">
-                                        <option>Edit One</option>
-                                        <option>Edit Two</option>
-                                        <option>Edit Three</option>
-                                    </select>
+                                <div id="dropdown-sample3">
+                                    <!-- editable -->
+                                    <div class="dropdown dropdown-editable" data-editable="true" data-init="dropdown">
+                                        <input type="text" placeholder="Editable Select">
+                                        <button>Editable</button>
+                                        <select name="dropdown3">
+                                            <option>Edit One</option>
+                                            <option>Edit Two</option>
+                                            <option>Edit Three</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">Disabled</div>
-                                <div class="dropdown" data-init="dropdown" data-disabled="true">
-                                    <button>Disabled</button>
-                                    <select name="dropdown4">
-                                        <option>One</option>
-                                        <option>Two</option>
-                                        <option>Three</option>
-                                    </select>
+                                <div id="dropdown-sample4">
+                                    <!-- disabled -->
+                                    <div class="dropdown" data-init="dropdown" data-disabled="true">
+                                        <button>Disabled</button>
+                                        <select name="dropdown4">
+                                            <option>One</option>
+                                            <option>Two</option>
+                                            <option>Three</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">Error</div>
-                                <div class="dropdown error" data-init="dropdown">
-                                    <button>Error</button>
-                                    <select name="dropdown5" >
-                                        <option>One</option>
-                                        <option>Two</option>
-                                        <option>Three</option>
-                                    </select>
+                                <div id="dropdown-sample5">
+                                    <!-- error -->
+                                    <div class="dropdown error" data-init="dropdown">
+                                        <button>Error</button>
+                                        <select name="dropdown5" >
+                                            <option>One</option>
+                                            <option>Two</option>
+                                            <option>Three</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">Empty</div>
-                                <div class="dropdown" data-init="dropdown">
+                                <div id="dropdown-sample6">
+                                    <!-- empty -->
+                                    <div class="dropdown" data-init="dropdown"></div>
                                 </div>
                             </div>
 
                             <div class="filterSample">
                                 <div class="sampleTitle left">Dividers</div>
-                                <div class="dropdown" data-init="dropdown">
-                                    <button>Dividers</button>
+                                <div id="dropdown-sample7">
+                                    <!-- dividers -->
+                                    <div class="dropdown" data-init="dropdown">
+                                        <button>Dividers</button>
                                         <select name="dropdown6" >
                                             <option data-itemclass="divider">Numbers</option>
                                             <option>One</option>
@@ -1546,74 +1276,11 @@
                                             <option>X</option>
                                             <option>Y</option>
                                         </select>
+                                    </div>
                                 </div>
                             </div>
                         </div> <!-- /example -->
-                    <pre class="prettyprint linenums">
-&lt;!-- Standard Single select --&gt;
-&lt;div class="dropdown" data-init="dropdown"&gt;
-    &lt;button&gt;Single Select&lt;/button&gt;
-    &lt;select name="dropdown"&gt;
-        &lt;option&gt;Single One&lt;/option&gt;
-        &lt;option selected&gt;Single Two&lt;/option&gt;
-        &lt;option&gt;Single Three&lt;/option&gt;
-    &lt;/select&gt;
-&lt;/div&gt;
-
-&lt;!-- Multi select --&gt;
-&lt;div class="dropdown" data-init="dropdown"&gt;
-    &lt;button&gt;Multi Select&lt;/button&gt;
-    &lt;select name="dropdown2" multiple&gt;
-        &lt;option&gt;Multi One&lt;/option&gt;
-        &lt;option selected&gt;Multi Two&lt;/option&gt;
-        &lt;option&gt;Multi Three&lt;/option&gt;
-    &lt;/select&gt;
-&lt;/div&gt;
-
-&lt;!-- Editable --&gt;
-&lt;div class="dropdown dropdown-editable" data-editable="true" data-init="dropdown"&gt;
-    &lt;input type="text" placeholder="Editable Select"&gt;
-    &lt;button&gt;Editable&lt;/button&gt;
-    &lt;select name="dropdown3"&gt;
-        &lt;option&gt;Edit One&lt;/option&gt;
-        &lt;option&gt;Edit Two&lt;/option&gt;
-        &lt;option&gt;Edit Three&lt;/option&gt;
-    &lt;/select&gt;
-&lt;/div&gt;
-
-&lt;!-- Disabled --&gt;
-&lt;div class="dropdown" data-init="dropdown" data-disabled="true"&gt;
-    &lt;button&gt;Disabled&lt;/button&gt;
-    &lt;select name="dropdown4"&gt;
-        &lt;option&gt;One&lt;/option&gt;
-        &lt;option&gt;Two&lt;/option&gt;
-        &lt;option&gt;Three&lt;/option&gt;
-    &lt;/select&gt;
-&lt;/div&gt;
-
-&lt;!-- Error --&gt;
-&lt;div class="dropdown error" data-init="dropdown"&gt;
-    &lt;button&gt;Error&lt;/button&gt;
-    &lt;select name="dropdown5" &gt;
-        &lt;option&gt;One&lt;/option&gt;
-        &lt;option&gt;Two&lt;/option&gt;
-        &lt;option&gt;Three&lt;/option&gt;
-    &lt;/select&gt;
-&lt;/div&gt;
-
-&lt;!-- Dropdown with Dividers --&gt;
-&lt;div class="dropdown" data-init="dropdown"&gt;
-    &lt;button&gt;Dividers&lt;/button&gt;
-    &lt;select name="dropdown6" &gt;
-        &lt;option data-itemclass="divider"&gt;Numbers&lt;/option&gt;
-        &lt;option&gt;One&lt;/option&gt;
-        &lt;option&gt;Two&lt;/option&gt;
-        &lt;option&gt;Three&lt;/option&gt;
-        &lt;option data-itemclass="divider"&gt;Alphabets&lt;/option&gt;
-        &lt;option&gt;X&lt;/option&gt;
-        &lt;option&gt;Y&lt;/option&gt;
-    &lt;/select&gt;
-&lt;/div&gt;</pre>
+                    <pre class="prettyprint linenums" data-src-id="dropdown-sample1,dropdown-sample2,dropdown-sample3,dropdown-sample4,dropdown-sample5,dropdown-sample6,dropdown-sample7"></pre>
                     </div><!-- /componentSample -->
                     <div>
                         Open <a href="examples/dropdown/index.html">Sample</a>
@@ -1629,81 +1296,67 @@
                         <div class="example">
                             <div class="filterSample">
                                 <div class="sampleTitle left">Single</div>
-                                <div class="filters" data-init="filters">
-                                    <input type="text" placeholder="Single Term Filter">
-                                    <select>
-                                        <option selected>Apple</option>
-                                        <option>Pear</option>
-                                        <option>Banana</option>
-                                    </select>
+                                <div id="filters-sample1">
+                                    <!-- single -->
+                                    <div class="filters" data-init="filters">
+                                        <input type="text" placeholder="Single Term Filter">
+                                        <select>
+                                            <option selected>Apple</option>
+                                            <option>Pear</option>
+                                            <option>Banana</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle extended left">Standard</div>
-                                <div class="filters" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter">
-                                    <input type="text">
-                                    <select multiple>
-                                        <option>Apple</option>
-                                        <option>Pear</option>
-                                        <option selected>Banana</option>
-                                    </select>
+                                <div id="filters-sample2">
+                                    <!-- standard -->
+                                    <div class="filters" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter">
+                                        <input type="text">
+                                        <select multiple>
+                                            <option>Apple</option>
+                                            <option>Pear</option>
+                                            <option selected>Banana</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle extended left">Stacking</div>
-                                <div class="filters" data-init="filters" data-stacking="true" data-placeholder="Add Filter" data-allow="create">
-                                    <input type="text">
-                                    <select>
-                                        <option selected>Apple</option>
-                                        <option>Pear</option>
-                                        <option>Banana</option>
-                                    </select>
+                                <div id="filters-sample3">
+                                    <!-- stacking -->
+                                    <div class="filters" data-init="filters" data-stacking="true" data-placeholder="Add Filter" data-allow="create">
+                                        <input type="text">
+                                        <select>
+                                            <option selected>Apple</option>
+                                            <option>Pear</option>
+                                            <option>Banana</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">Error</div>
-                                <div class="filters error" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter">
-                                    <input type="text" class="filter">
+                                <div id="filters-sample4">
+                                    <!-- error -->
+                                    <div class="filters error" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter">
+                                        <input type="text" class="filter">
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="filterSample">
                                 <div class="sampleTitle left">Disabled</div>
-                                <div class="filters disabled" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter" data-disabled="true">
-                                    <input class="filter" type="text" disabled>
+                                <div id="filters-sample5">
+                                    <!-- disabled -->
+                                    <div class="filters disabled" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter" data-disabled="true">
+                                        <input class="filter" type="text" disabled>
+                                    </div>
                                 </div>
                             </div>
                         </div> <!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;!-- Standard single filters with select as template --&gt;
-&lt;div class="filters" data-init="filters"&gt;
-    &lt;input type="text" placeholder="Single Term Filter"&gt;
-    &lt;select&gt;
-        &lt;option selected&gt;Apple&lt;/option&gt;
-        &lt;option&gt;Pear&lt;/option&gt;
-        &lt;option&gt;Banana&lt;/option&gt;
-    &lt;/select&gt;
-&lt;/div&gt;
-
-&lt;!-- Standard filters with select as template --&gt;
-&lt;div class="filters" data-init="filters" data-multiple="multiple" data-placeholder="Add Filter"&gt;
-    &lt;input type="text"&gt;
-    &lt;select multiple&gt;
-        &lt;option&gt;Apple&lt;/option&gt;
-        &lt;option&gt;Pear&lt;/option&gt;
-        &lt;option selected&gt;Banana&lt;/option&gt;
-    &lt;/select&gt;
-&lt;/div&gt;
-
-&lt;!-- Stacking filters with select as template --&gt;
-&lt;div class="filters" data-init="filters" data-stacking="true" data-placeholder="Add Filter" data-allow="create"&gt;
-    &lt;input type="text"&gt;
-    &lt;select&gt;
-        &lt;option selected&gt;Apple&lt;/option&gt;
-        &lt;option&gt;Pear&lt;/option&gt;
-        &lt;option&gt;Banana&lt;/option&gt;
-    &lt;/select&gt;
-&lt;/div&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="filters-sample1,filters-sample2,filters-sample3,filters-sample4,filters-sample5">
                     </div><!-- /componentSample -->
                     <div>
                         Open <a href="examples/filters/index.html">Sample</a>
@@ -1721,17 +1374,19 @@
                     <p>You can also choose to limit the max length of textfields and textareas by using 
                         the <a href="doc/CUI.CharacterCount.html">CUI.CharacterCount</a> widget.</p>
                     <div class="componentSample">
-                        <div class="example clearfix">
-                            <div class="left">
-                                <input type="text" class="error" value="Tooltip below"> <span class="form-error" data-init="quicktip" data-quicktip-arrow="top" data-quicktip-type="error">Please correct your input!</span><br>
-                                <input type="text" class="error" value="Tooltip right"> <span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error">Please correct your input!</span>
+                        <div class="example clearfix" >
+                            <div class="left" id="error-sample">
+                                <!-- tooltip below -->
+                                <input type="text" class="error" value="Tooltip below">
+                                <span class="form-error" data-init="quicktip" data-quicktip-arrow="top" data-quicktip-type="error">Please correct your input!</span>
+                                <br>
+
+                                <!-- tooltip right -->
+                                <input type="text" class="error" value="Tooltip right">
+                                <span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error">Please correct your input!</span>
                             </div>                     
                         </div> <!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;input type="text" class="error" value="Tooltip below"&gt;
-&lt;span class="form-error" data-init="quicktip" data-quicktip-arrow="top" data-quicktip-type="error"&gt;Please correct your input!&lt;/span&gt;&lt;br&gt;
-&lt;input type="text" class="error" value="Tooltip right"&gt;
-&lt;span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error"&gt;Please correct your input!&lt;/span&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="error-sample"></pre>
                     </div><!-- /componentSample -->
                     <div>
                         Open <a href="examples/form-errors/index.html">Sample</a>
@@ -1749,50 +1404,40 @@
                         <div class="example">
                             <div class="numberInputSample">
                                 <div class="sampleTitle left">Standard</div>
-                                <div class="numberinput" data-init="numberinput">
-                                    <button type="button" class='decrement'>decrement</button>
-                                    <input type='text'>
-                                    <button type="button" class='increment'>increment</button>
+                                <div id="numberInput-sample1">
+                                    <!-- standard -->
+                                    <div class="numberinput" data-init="numberinput">
+                                        <button type="button" class='decrement'>decrement</button>
+                                        <input type='text'>
+                                        <button type="button" class='increment'>increment</button>
+                                    </div>
                                 </div>
+
                             </div>
                             <div class="numberInputSample">
                                 <div class="sampleTitle left">Error</div>
-                                <div class="numberinput" data-init="numberinput" data-error="true">
-                                    <button type="button" class='decrement'>decrement</button>
-                                    <input type='text'>
-                                    <button type="button" class='increment'>increment</button>
+                                <div id="numberInput-sample2">
+                                    <!-- error -->
+                                    <div class="numberinput" data-init="numberinput" data-error="true">
+                                        <button type="button" class='decrement'>decrement</button>
+                                        <input type='text'>
+                                        <button type="button" class='increment'>increment</button>
+                                    </div>
                                 </div>
                             </div>
                             <div class="numberInputSample">
                                 <div class="sampleTitle left">Disabled</div>
-                                <div class="numberinput" data-init="numberinput" data-disabled="true">
-                                    <button type="button" class='decrement'>decrement</button>
-                                    <input type='text'>
-                                    <button type="button" class='increment'>increment</button>
+                                <div id="numberInput-sample3">
+                                    <!-- disabled -->
+                                    <div class="numberinput" data-init="numberinput" data-disabled="true">
+                                        <button type="button" class='decrement'>decrement</button>
+                                        <input type='text'>
+                                        <button type="button" class='increment'>increment</button>
+                                    </div>
                                 </div>
                             </div>
                         </div> <!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;!-- Standard Number Input --&gt;                            
-&lt;div class=&quot;numberinput&quot; data-init=&quot;numberinput&quot;&gt;
-    &lt;button type=&quot;button&quot; class=&#039;decrement&#039;&gt;decrement&lt;/button&gt;
-    &lt;input type=&#039;text&#039;&gt;
-    &lt;button type=&quot;button&quot; class=&#039;increment&#039;&gt;increment&lt;/button&gt;
-&lt;/div&gt;
-
-&lt;!-- Error Number Input --&gt; 
-&lt;div class=&quot;numberinput&quot; data-init=&quot;numberinput&quot; data-error=&quot;true&quot;&gt;
-    &lt;button type=&quot;button&quot; class=&#039;decrement&#039;&gt;decrement&lt;/button&gt;
-    &lt;input type=&#039;text&#039;&gt;
-    &lt;button type=&quot;button&quot; class=&#039;increment&#039;&gt;increment&lt;/button&gt;
-&lt;/div&gt;
-
-&lt;!-- Disabled Number Input --&gt;  
-&lt;div class=&quot;numberinput&quot; data-init=&quot;numberinput&quot; data-disabled=&quot;true&quot;&gt;
-    &lt;button type=&quot;button&quot; class=&#039;decrement&#039;&gt;decrement&lt;/button&gt;
-    &lt;input type=&#039;text&#039;&gt;
-    &lt;button type=&quot;button&quot; class=&#039;increment&#039;&gt;increment&lt;/button&gt;
-&lt;/div&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="numberInput-sample1,numberInput-sample2,numberInput-sample3"></pre>
                     </div><!-- /componentSample -->
                     <div>
                         Open <a href="examples/numberinput/index.html">Sample</a>
@@ -1805,20 +1450,20 @@
                     <p>Radio buttons are styled using pure CSS.</p>
                     <div class="componentSample">
                         <div class="example clearfix">
-                            <div class="left">
+                            <div class="left" id="radio-sample1">
+                                <!-- checked -->
                                 <label><input type="radio" name="r1" value="1" checked><span>Checked</span></label><br>
+                                <!-- unchecked -->
                                 <label><input type="radio" name="r1" value="2"><span>Unchecked</span></label>
                             </div>
-                            <div class="left">
+                            <div class="left" id="radio-sample2">
+                                <!-- disabled checked -->
                                 <label><input type="radio" name="r2" value="1" disabled checked><span>Disabled Checked</span></label><br>
+                                <!-- disabled unchecked -->
                                 <label><input type="radio" name="r2" value="2" disabled><span>Disabled Unchecked</span></label>
                             </div>
                         </div><!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;r1&quot; value=&quot;1&quot; checked&gt;&lt;span&gt;&lt;/span&gt;Value 1&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;r1&quot; value=&quot;2&quot;&gt;&lt;span&gt;&lt;/span&gt;Value 2&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;r2&quot; value=&quot;1&quot; disabled checked&gt;&lt;span&gt;Disabled Checked&lt;/span&gt;&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;r2&quot; value=&quot;2&quot; disabled&gt;&lt;span&gt;Disabled Unchecked&lt;/span&gt;&lt;/label&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="radio-sample1,radio-sample2"></pre>
                     </div><!-- /componentSample -->
                 </section>
                 <!-- /radio button -->
@@ -1831,56 +1476,46 @@
                         <div class="example">
                             <div class="filterSample">
                                 <div class="sampleTitle left">Standard</div>
-                                <div class="searchfield">
-                                    <div class="search">
-                                        <input type="text" placeholder="Search">
-                                        <button type="submit">Search</button>
-                                        <button type="reset">Clear</button>
+                                <div id="searchField-sample1">
+                                    <!-- Standard -->
+                                    <div class="searchfield">
+                                        <div class="search">
+                                            <input type="text" placeholder="Search">
+                                            <button type="submit">Search</button>
+                                            <button type="reset">Clear</button>
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">Error</div>
                                 <div class="searchfield">
-                                    <div class="search error">
-                                        <input type="text" placeholder="Search" value="error">
-                                        <button type="submit">Search</button>
-                                        <button type="reset">Clear</button>
+                                    <div id="searchField-sample2">
+                                        <!-- Error -->
+                                        <div class="search error">
+                                            <input type="text" placeholder="Search" value="error">
+                                            <button type="submit">Search</button>
+                                            <button type="reset">Clear</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">Disabled</div>
-                                <div class="searchfield">
-                                    <div class="search">
-                                        <input type="text" placeholder="Search" disabled>
-                                        <button type="submit" disabled>Search</button>
-                                        <button type="reset" disabled>Clear</button>
+                                <div id="searchField-sample3">
+                                    <!-- disabled -->
+                                    <div class="searchfield">
+                                        <div class="search">
+                                            <input type="text" placeholder="Search" disabled>
+                                            <button type="submit" disabled>Search</button>
+                                            <button type="reset" disabled>Clear</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div> <!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;!-- Standard --&gt;
-&lt;div class=&quot;search&quot;&gt;
-    &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot;&gt;
-    &lt;button type=&quot;submit&quot;&gt;Search&lt;/button&gt;
-    &lt;button type=&quot;reset&quot;&gt;Clear&lt;/button&gt;
-&lt;/div&gt;
-
-&lt;!-- Error --&gt;
-&lt;div class=&quot;search error&quot;&gt;
-    &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot;&gt;
-    &lt;button type=&quot;submit&quot;&gt;Search&lt;/button&gt;
-    &lt;button type=&quot;reset&quot;&gt;Clear&lt;/button&gt;
-&lt;/div&gt;
-
-&lt;!-- Disabled --&gt;
-&lt;div class=&quot;search&quot;&gt;
-    &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot; disabled&gt;
-    &lt;button type=&quot;submit&quot; disabled&gt;Search&lt;/button&gt;
-    &lt;button type=&quot;reset&quot; disabled&gt;Clear&lt;/button&gt;
-&lt;/div&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="searchField-sample1,searchField-sample2,searchField-sample3"></pre>
                     </div> <!-- /componentSample -->
                     <div>
                         Open <a href="examples/search/index.html">Sample</a>
@@ -1893,234 +1528,161 @@
                     <p>A new version of the DropDown.</p>
 
                     <div class="componentSample">
-                        <div class="example">
+                        <div class="example" id="select-sample">
                             <div class="filterSample">
                                 <div class="sampleTitle left">Static</div>
-                                <span class="select" data-init="select">
-                                  <button type="button">Select</button>
-                                  <select>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                    <option value="4">One Two Three Four Five Six Seven Eight Nine Ten</option>
-                                  </select>
-                                </span>
+                                <div id="select-sample1">
+                                    <!-- static -->
+                                    <span class="select" data-init="select">
+                                          <button type="button">Select</button>
+                                          <select>
+                                              <option value="1">One</option>
+                                              <option value="2">Two</option>
+                                              <option value="3">Three</option>
+											  <option value="4">One Two Three Four Five Six Seven Eight Nine Ten</option>
+                                          </select>
+                                    </span>
+                                </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">Multiple</div>
-                                <span class="select" data-init="select">
-                                  <button type="button">Select</button>
-                                  <select multiple="true">
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                  </select>
-                                </span>
+                                <div id="select-sample2">
+                                    <!-- multiple -->
+                                    <span class="select" data-init="select">
+                                        <button type="button">Select</button>
+                                        <select multiple="true">
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </span>
+                                </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">Group</div>
-                                <span class="select" data-init="select">
-                                  <button type="button">Select</button>
-                                  <select>
-                                    <optgroup label="Group 1">
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </optgroup>
-                                    <optgroup label="Group 2">
-                                        <option value="4">Fourth</option>
-                                        <option value="5">Fifth</option>
-                                    </optgroup>
-                                  </select>
-                                </span>
+                                <div id="select-sample3">
+                                    <!-- group -->
+                                    <span class="select" data-init="select">
+                                        <button type="button">Select</button>
+                                        <select>
+                                            <optgroup label="Group 1">
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </optgroup>
+                                                <optgroup label="Group 2">
+                                                <option value="4">Fourth</option>
+                                                <option value="5">Fifth</option>
+                                            </optgroup>
+                                        </select>
+                                    </span>
+                                </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">Icon</div>
-                                <span class="select" data-init="select">
-                                  <button type="button" class="icon-globe">Add a location</button>
-                                  <select>
-                                    <option value="at">Austria</option>
-                                    <option value="ch">Switzerland</option>
-                                    <option value="us">United States</option>
-                                  </select>
-                                </span>
+                                <div id="select-sample4">
+                                    <!-- icon -->
+                                    <span class="select" data-init="select">
+                                        <button type="button" class="icon-globe">Add a location</button>
+                                        <select>
+                                            <option value="at">Austria</option>
+                                            <option value="ch">Switzerland</option>
+                                            <option value="us">United States</option>
+                                        </select>
+                                    </span>
+                                </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">Disabled</div>
-                                <span class="select" data-init="select">
-                                  <button type="button" disabled="true">Select</button>
-                                  <select>
-                                    <option value="1">One</option>
-                                    <option value="2" selected="selected">Two</option>
-                                    <option value="3">Three</option>
-                                  </select>
-                                </span>
+                                <div id="select-sample5">
+                                    <!-- disabled -->
+                                    <span class="select" data-init="select">
+                                        <button type="button" disabled="true">Select</button>
+                                        <select>
+                                            <option value="1">One</option>
+                                            <option value="2" selected="selected">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </span>
+                                </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">Error</div>
-                                <span class="select" data-init="select">
-                                  <button type="button" class="error">Select</button>
-                                  <select>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                  </select>
-                                </span>
+                               <div id="select-sample6">
+                                   <!-- error -->
+                                   <span class="select" data-init="select">
+                                      <button type="button" class="error">Select</button>
+                                      <select>
+                                          <option value="1">One</option>
+                                          <option value="2">Two</option>
+                                          <option value="3">Three</option>
+                                      </select>
+                                   </span>
+                               </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">Native</div>
-                                <span class="select" data-init="select" data-nativewidget="true">
-                                  <button type="button">Select</button>
-                                  <select>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                  </select>
-                                </span>
+                                <div id="select-sample7">
+                                    <!-- native -->
+                                    <span class="select" data-init="select" data-nativewidget="true">
+                                        <button type="button">Select</button>
+                                        <select>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </span>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">with Multi</div>
-                                <span class="select" data-init="select" data-nativewidget="true">
-                                  <button type="button">Select</button>
-                                  <select multiple="true">
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                  </select>
-                                </span>
+                                <div id="select-sample8">
+                                    <!-- with multi -->
+                                    <span class="select" data-init="select" data-nativewidget="true">
+                                        <button type="button">Select</button>
+                                        <select multiple="true">
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </span>
+                                </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">with Group</div>
-                                <span class="select" data-init="select" data-nativewidget="true">
-                                  <button type="button">Select</button>
-                                  <select>
-                                    <optgroup label="Group 1">
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </optgroup>
-                                    <optgroup label="Group 2">
-                                        <option value="4">Fourth</option>
-                                        <option value="5">Fifth</option>
-                                    </optgroup>
-                                  </select>
-                                </span>
+                                <div id="select-sample9">
+                                    <!-- with group -->
+                                    <span class="select" data-init="select" data-nativewidget="true">
+                                        <button type="button">Select</button>
+                                        <select>
+                                            <optgroup label="Group 1">
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </optgroup>
+                                            <optgroup label="Group 2">
+                                                <option value="4">Fourth</option>
+                                                <option value="5">Fifth</option>
+                                            </optgroup>
+                                        </select>
+                                    </span>
+                                </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">Widget</div>
-                                <span class="select" data-init="select" data-nativewidgetonmobile="false">
-                                  <button type="button">Select</button>
-                                  <select>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                  </select>
-                                </span>
+                                <div id="select-sample10">
+                                    <!-- widget -->
+                                    <span class="select" data-init="select" data-nativewidgetonmobile="false">
+                                        <button type="button">Select</button>
+                                        <select>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </span>
+                                </div>
                             </div>
                         </div><!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;!-- Static --&gt;
-&lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
-  &lt;button type=&quot;button&quot;&gt;Select&lt;/button&gt;Select&quot;/&gt;
-  &lt;select&gt;
-    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
-    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
-    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
-  &lt;/select&gt;
-&lt;/span&gt;
-
-&lt;!-- Multiple --&gt;
-&lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
-  &lt;button type=&quot;button&quot;&gt;Select&lt;/button&gt;
-  &lt;select multiple=&quot;true&quot;&gt;
-    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
-    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
-    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
-  &lt;/select&gt;
-&lt;/span&gt;
-
-&lt;!-- Group dividers --&gt;
-&lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
-  &lt;button type=&quot;button&quot;&gt;Select&lt;/button&gt;
-  &lt;select&gt;
-    &lt;optgroup label=&quot;Group 1&quot;&gt;
-        &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
-        &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
-        &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
-    &lt;/optgroup&gt;
-    &lt;optgroup label=&quot;Group 2&quot;&gt;
-        &lt;option value=&quot;4&quot;&gt;Fourth&lt;/option&gt;
-        &lt;option value=&quot;5&quot;&gt;Fifth&lt;/option&gt;
-    &lt;/optgroup&gt;
-  &lt;/select&gt;
-&lt;/span&gt;
-
-&lt;!-- with Icon --&gt;
-&lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
-  &lt;button type=&quot;button&quot; class=&quot;icon-globe&quot;&gt;Add a location&lt;/button&gt;
-  &lt;select&gt;
-    &lt;option value=&quot;at&quot;&gt;Austria&lt;/option&gt;
-    &lt;option value=&quot;ch&quot;&gt;Switzerland&lt;/option&gt;
-    &lt;option value=&quot;us&quot;&gt;United States&lt;/option&gt;
-  &lt;/select&gt;
-&lt;/span&gt;
-
-&lt;!-- Disabled --&gt;
-&lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
-  &lt;button type=&quot;button&quot; disabled=&quot;true&quot;&gt;Select&lt;/button&gt;
-  &lt;select disabled=&quot;true&quot;&gt;
-    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
-    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
-    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
-  &lt;/select&gt;
-&lt;/span&gt;
-
-&lt;!-- Error --&gt;
-&lt;span class=&quot;select&quot; data-init=&quot;select&quot;&gt;
-  &lt;button type=&quot;button&quot; class=&quot;error&quot;&gt;Select&lt;/button&gt;
-  &lt;select&gt;
-    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
-    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
-    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
-  &lt;/select&gt;
-&lt;/span&gt;
-
-&lt;!-- Native select --&gt;
-&lt;span class=&quot;select&quot; data-init=&quot;select&quot; data-nativewidget=&quot;true&quot;&gt;
- &lt;button type=&quot;button&quot;&gt;Select&lt;/button&gt;
-  &lt;select&gt;
-    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
-    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
-    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
-  &lt;/select&gt;
-&lt;/span&gt;
-
-&lt;!-- Native with multiple seclect --&gt;
-&lt;span class=&quot;select&quot; data-init=&quot;select&quot; data-nativewidget=&quot;true&quot;&gt;
-  &lt;button type=&quot;button&quot;&gt;Select&lt;/button&gt;
-  &lt;select multiple=&quot;true&quot;&gt;
-    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
-    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
-    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
-  &lt;/select&gt;
-&lt;/span&gt;
-
-&lt;!-- Native with groups --&gt;
-&lt;span class=&quot;select&quot; data-init=&quot;select&quot; data-nativewidget=&quot;true&quot;&gt;
-  &lt;button type=&quot;button&quot;&gt;Select&lt;/button&gt;
-  &lt;select&gt;
-    &lt;optgroup label=&quot;Group 1&quot;&gt;
-        &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
-        &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
-        &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
-    &lt;/optgroup&gt;
-    &lt;optgroup label=&quot;Group 2&quot;&gt;
-        &lt;option value=&quot;4&quot;&gt;Fourth&lt;/option&gt;
-        &lt;option value=&quot;5&quot;&gt;Fifth&lt;/option&gt;
-    &lt;/optgroup&gt;
-  &lt;/select&gt;
-&lt;/span&gt;
-</pre>
+                        <pre class="prettyprint linenums" data-src-id="select-sample1,select-sample2,select-sample3,select-sample4,select-sample5,select-sample6,select-sample7,select-sample8,select-sample9,select-sample10"></pre>
                     </div><!-- /componentSample -->
                 </section>
                 <!-- /select -->
@@ -2130,51 +1692,48 @@
                     <h3>Switch</h3>
                     <p>Mutually exclusive, for use in tables.</p>
                     <div class="componentSample">
-                        <div class="example clearfix">
+                        <div class="example clearfix" id="switch-sample">
+                            <!-- enabled -->
                             <label class="switch"><input type="checkbox" name="s1"><span>Off</span><span>On</span></label>
+
+                            <!-- disabled -->
                             <label class="switch"><input type="checkbox" name="s2" disabled><span>Off</span><span>On</span></label>
                         </div> <!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s1&quot;&gt;&lt;span&gt;Off&lt;/span&gt;&lt;span&gt;On&lt;/span&gt;&lt;/label&gt;
-&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s2&quot; disabled&gt;&lt;span&gt;Off&lt;/span&gt;&lt;span&gt;On&lt;/span&gt;&lt;/label&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="switch-sample"></pre>
                     </div><!-- /switch componentSample -->
 
                     <h3>Selector</h3>
                     <p>Mutually exclusive.</p>
                     <div class="componentSample">
                         <div class="example clearfix">
-                            <div class="left">
+                            <div class="left" id="selector-sample">
+                                <!-- enabled -->
                                 <div class="selector">
                                     <label><input type="radio" name="s3"><span>Yes</span></label>
                                     <label><input type="radio" name="s3"><span>No</span></label>
                                 </div>
+                                <!-- disabled -->
                                 <div class="selector">
                                     <label><input type="radio" name="s4" disabled><span>Yes</span></label>
                                     <label><input type="radio" name="s4" disabled><span>No</span></label>
                                 </div>
                             </div>
                         </div> <!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;div class=&quot;selector&quot;&gt;
-    &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;s3&quot;&gt;&lt;span&gt;Yes&lt;/span&gt;&lt;/label&gt;
-    &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;s3&quot;&gt;&lt;span&gt;No&lt;/span&gt;&lt;/label&gt;
-&lt;/div&gt;
-&lt;div class=&quot;selector&quot;&gt;
-    &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;s4&quot; disabled&gt;&lt;span&gt;Yes&lt;/span&gt;&lt;/label&gt;
-    &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;s4&quot; disabled&gt;&lt;span&gt;No&lt;/span&gt;&lt;/label&gt;
-&lt;/div&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="selector-sample"></pre>
                     </div><!-- / selector componentSample -->
 
                     <h3>Multi-Selector</h3>
                     <p>Not mutually exclusive.</p>
                     <div class="componentSample">
                         <div class="example clearfix">
-                            <div class="left">
+                            <div class="left" id="multiselector-sample">
+                                <!-- enabled -->
                                 <div class="selector">
                                     <label><input type="checkbox" name="s5"><span>Chicken</span></label>
                                     <label><input type="checkbox" name="s5"><span>Steak</span></label>
                                     <label><input type="checkbox" name="s5"><span>Pork</span></label>
                                 </div>
+                                <!-- disabled -->
                                 <div class="selector">
                                     <label><input type="checkbox" name="s6" disabled><span>Chicken</span></label>
                                     <label><input type="checkbox" name="s6" disabled><span>Steak</span></label>
@@ -2182,17 +1741,7 @@
                                 </div>
                             </div>
                         </div> <!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;div class=&quot;selector&quot;&gt;
-    &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s5&quot;&gt;&lt;span&gt;Chicken&lt;/span&gt;&lt;/label&gt;
-    &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s5&quot;&gt;&lt;span&gt;Steak&lt;/span&gt;&lt;/label&gt;
-    &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s5&quot;&gt;&lt;span&gt;Pork&lt;/span&gt;&lt;/label&gt;
-&lt;/div&gt;
-&lt;div class=&quot;selector&quot;&gt;
-    &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s6&quot; disabled&gt;&lt;span&gt;Chicken&lt;/span&gt;&lt;/label&gt;
-    &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s6&quot; disabled&gt;&lt;span&gt;Steak&lt;/span&gt;&lt;/label&gt;
-    &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;s6&quot; disabled&gt;&lt;span&gt;Pork&lt;/span&gt;&lt;/label&gt;
-&lt;/div&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="multiselector-sample"></pre>
                     </div>  <!-- /multi-selector componentSample -->
                 </section>
                 <!-- /selector -->
@@ -2202,7 +1751,7 @@
                     <p>Different types of horizontal sliders.</p>
                     <div class="componentSample">
                         <div class="example clearfix">
-                            <div class="sliderSample">
+                            <div class="sliderSample" id="slider-sample1">
                                 <div class="slider" data-init="slider">
                                     <label>
                                         Horizontal Slider
@@ -2210,7 +1759,7 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="sliderSample">
+                            <div class="sliderSample" id="slider-sample2">
                                 <div class="slider ticked filled" data-init="slider">
                                     <label>
                                         Ticked and Filled Horizontal Slider
@@ -2219,7 +1768,7 @@
                                 </div>
                             </div>
                             <br><br> <!-- Some space for tooltips -->
-                            <div class="sliderSample">
+                            <div class="sliderSample" id="slider-sample3">
                                 <div class="slider ticked filled tooltips" data-init="slider">
                                    <fieldset>
                                        <legend>Horizontal Range Slider with Tooltips</legend>
@@ -2228,7 +1777,7 @@
                                    </fieldset>
                                 </div>
                             </div>
-                            <div class="sliderSample">
+                            <div class="sliderSample" id="slider-sample4">
                                 <div class="slider filled bound" data-init="slider">
                                    <fieldset>
                                        <legend>Bound Horizontal Range Slider</legend>
@@ -2237,7 +1786,7 @@
                                    </fieldset>
                                 </div>
                             </div>
-                            <div class="sliderSample">
+                            <div class="sliderSample" id="slider-sample5">
                                 <div class="slider ticked filled" data-init="slider">
                                    <fieldset>
                                        <legend>Disabled Horizontal Range Slider</legend>
@@ -2247,58 +1796,13 @@
                                 </div>
                             </div>
                         </div><!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;!-- Standard Horizontal Slider --&gt;
-&lt;div class=&quot;slider&quot; data-init=&quot;slider&quot;&gt;
-    &lt;!-- Each input must have a label to identify the value a slider controls. 
-         The label tag can wrap the slider. --&gt;
-    &lt;label&gt;
-        Horizontal Slider 
-        &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
-    &lt;/label&gt;
-&lt;/div&gt;
-
-&lt;!-- Ticked and Filled Horizontal Slider --&gt;
-&lt;div class=&quot;slider ticked filled&quot; data-init=&quot;slider&quot;&gt;
-    &lt;!-- The label can also be associated with its input by using the &quot;for&quot; attribute to identify the input by id. --&gt;
-    &lt;label for=&quot;hslider1&quot;&gt;Ticked and Filled Horizontal Slider&lt;/label&gt;
-    &lt;input id=&quot;hslider1&quot; type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
-&lt;/div&gt;
-
-&lt;!-- Horizontal Range Slider with Tooltips --&gt;
-&lt;div class=&quot;slider ticked filled tooltips&quot; data-init=&quot;slider&quot;&gt;
-    &lt;!-- Multi-thumb sliders should be contained within a fieldset and labelled with a legend. 
-         Each input element within the fieldset must also have a label to identify which value the input changes. --&gt;
-   &lt;fieldset&gt;
-       &lt;legend&gt;Horizontal Range Slider with Tooltips&lt;/legend&gt;
-       &lt;label&gt;Minimum value &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;&lt;/label&gt;
-       &lt;label&gt;Maximum value &lt;input type=&quot;range&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;&lt;/label&gt;
-   &lt;/fieldset&gt;
-&lt;/div&gt;
-
-&lt;!-- Bound Horizontal Range Slider --&gt;
-&lt;div class=&quot;slider filled bound&quot; data-init=&quot;slider&quot;&gt;
-   &lt;fieldset&gt;
-       &lt;legend&gt;Bound Horizontal Range Slider&lt;/legend&gt;
-       &lt;label&gt;Minimum value &lt;input type=&quot;range&quot; value=&quot;40&quot;&gt;&lt;/label&gt;
-       &lt;label&gt;Maximum value &lt;input type=&quot;range&quot; value=&quot;60&quot;&gt;&lt;/label&gt;
-   &lt;/fieldset&gt;
-&lt;/div&gt;
-
-&lt;!-- Disabled Horizontal Range Slider --&gt;
-&lt;div class=&quot;slider ticked filled&quot; data-init=&quot;slider&quot;&gt;
-   &lt;fieldset&gt;
-       &lt;legend&gt;Disabled Horizontal Range Slider&lt;/legend&gt;
-       &lt;label&gt;Minimum value &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;&lt;/label&gt;
-       &lt;label&gt;Maximum value &lt;input type=&quot;range&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;&lt;/label&gt;
-   &lt;/fieldset&gt;
-&lt;/div&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="slider-sample1,slider-sample2,slider-sample3,slider-sample4,slider-sample5"></pre>
                     </div><!-- /horizontal slider componentSample -->
 
                     <p>Different types of vertical sliders.</p>
                     <div class="componentSample">
                         <div class="example clearfix">
-                            <div class="sliderSample left">
+                            <div class="sliderSample left" id="vslider-sample1">
                                 <div class="slider vertical" data-init="slider">
                                     <label>
                                         Vertical Slider
@@ -2306,13 +1810,13 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="sliderSample left">
+                            <div class="sliderSample left" id="vslider-sample2">
                                 <div class="slider vertical ticked filled" data-init="slider">
                                     <label for="vslider1">Ticked and Filled Vertical Slider</label>
                                     <input id="vslider1" type="range" value="14" min="10" max="20" step="2">
                                 </div>
                             </div>
-                            <div class="sliderSample left">
+                            <div class="sliderSample left" id="vslider-sample3">
                                 <div class="slider vertical ticked filled tooltips" data-init="slider">
                                     <fieldset>
                                        <legend>Vertical Range Slider with Tooltips</legend>
@@ -2321,7 +1825,7 @@
                                    </fieldset>
                                 </div>
                             </div>
-                            <div class="sliderSample left">
+                            <div class="sliderSample left" id="vslider-sample4">
                                 <div class="slider vertical filled bound" data-init="slider">
                                     <fieldset>
                                        <legend>Vertical Bound Range Slider</legend>
@@ -2330,7 +1834,7 @@
                                    </fieldset>
                                 </div>
                             </div>
-                            <div class="sliderSample left">
+                            <div class="sliderSample left" id="vslider-sample5">
                                 <div class="slider vertical ticked filled" data-init="slider">
                                    <fieldset>
                                        <legend>Disabled Vertical Range Slider</legend>
@@ -2340,52 +1844,7 @@
                                 </div>
                             </div>
                         </div> <!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;!-- Standard Vertical Slider --&gt;
-&lt;div class=&quot;slider vertical&quot; data-init=&quot;slider&quot;&gt;
-    &lt;!-- Each input must have a label to identify the value a slider controls. 
-         The label tag can wrap the slider. --&gt;
-    &lt;label&gt;
-        Vertical Slider
-        &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
-    &lt;/label&gt;
-&lt;/div&gt;
-
-&lt;!-- Ticked and Filled Vertical Slider --&gt;
-&lt;div class=&quot;slider vertical ticked filled&quot; data-init=&quot;slider&quot;&gt;
-    &lt;!-- The label can also be associated with its input by using the &quot;for&quot; attribute to identify the input by id. --&gt;
-    &lt;label for=&quot;vslider1&quot;&gt;Ticked and Filled Vertical Slider&lt;/label&gt;
-    &lt;input id=&quot;vslider1&quot; type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;
-&lt;/div&gt;
-
-&lt;!-- Vertical Range Slider with Tooltips --&gt;
-&lt;div class=&quot;slider vertical ticked filled tooltips&quot; data-init=&quot;slider&quot;&gt;
-    &lt;!-- Multi-thumb sliders should be contained within a fieldset and labelled with a legend. 
-         Each input element within the fieldset must also have a label to identify which value the input changes. --&gt;
-    &lt;fieldset&gt;
-       &lt;legend&gt;Vertical Range Slider with Tooltips&lt;/legend&gt;
-       &lt;label&gt;Minimum value &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; &gt;&lt;/label&gt;
-       &lt;label&gt;Maximum value &lt;input type=&quot;range&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; &gt;&lt;/label&gt;
-   &lt;/fieldset&gt;
-&lt;/div&gt;
-
-&lt;!-- Bound Vertical Range Slider --&gt;
-&lt;div class=&quot;slider vertical filled bound&quot; data-init=&quot;slider&quot;&gt;
-    &lt;fieldset&gt;
-       &lt;legend&gt;Vertical Bound Range Slider&lt;/legend&gt;
-       &lt;label&gt;Minimum value &lt;input type=&quot;range&quot; value=&quot;40&quot;&gt;&lt;/label&gt;
-       &lt;label&gt;Maximum value &lt;input type=&quot;range&quot; value=&quot;60&quot;&gt;&lt;/label&gt;
-   &lt;/fieldset&gt;
-&lt;/div&gt;
-
-&lt;!-- Disabled Vertical Range Slider --&gt;
-&lt;div class=&quot;slider vertical ticked filled&quot; data-init=&quot;slider&quot;&gt;
-   &lt;fieldset&gt;
-       &lt;legend&gt;Disabled Vertical Range Slider&lt;/legend&gt;
-       &lt;label&gt;Minimum value &lt;input type=&quot;range&quot; value=&quot;14&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;&lt;/label&gt;
-       &lt;label&gt;Maximum value &lt;input type=&quot;range&quot; value=&quot;16&quot; min=&quot;10&quot; max=&quot;20&quot; step=&quot;2&quot; disabled&gt;&lt;/label&gt;
-   &lt;/fieldset&gt;
-&lt;/div&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="vslider-sample1,vslider-sample2,vslider-sample3,vslider-sample4,vslider-sample5"></pre>
                     </div> <!-- /vertical slider componentSample -->
                     <div>
                         Open <a href="examples/slider/index.html">Sample</a>
@@ -2402,41 +1861,40 @@
                         <div class="example">
                             <div class="textareaSample">
                                 <div class="sampleTitle left">Standard</div>
-                                <label>Text Area</label>
-                                <textarea rows="4"></textarea>
+                                <div id="textarea-sample1">
+                                    <!-- standard -->
+                                    <textarea rows="4"></textarea>
+                                </div>
                             </div>
+
+
                             <div class="textareaSample">
-                                <div class="sampleTitle left">Title-less</div>
-                                <label>&nbsp;</label>
-                                <textarea rows="4" placeholder="Text Area"></textarea>
+                                <div class="sampleTitle left">Placeholder-text</div>
+                                <div id="textarea-sample2">
+                                    <!-- Placeholder-text -->
+                                    <textarea rows="4" placeholder="Text Area"></textarea>
+                                </div>
                             </div>
+
+
                             <div class="textareaSample">
                                 <div class="sampleTitle left">Error</div>
-                                <label>&nbsp;</label>
-                                <textarea rows="4" class="error"></textarea>
+                                <div id="textarea-sample3">
+                                    <!-- error -->
+                                    <textarea rows="4" class="error"></textarea>
+                                </div>
                             </div>
+
+
                             <div class="textareaSample">
                                 <div class="sampleTitle left">Disabled</div>
-                                <label>&nbsp;</label>
-                                <textarea rows="4" disabled></textarea>
+                                <div id="textarea-sample4">
+                                    <!-- disabled -->
+                                    <textarea rows="4" disabled></textarea>
+                                </div>
                             </div>
                         </div> <!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;!-- Standard --&gt;
-&lt;label&gt;Text Area&lt;/label&gt;
-&lt;textarea rows=&quot;4&quot;&gt;&lt;/textarea&gt;
-
-&lt;!-- Without Title --&gt;
-&lt;label&gt;&amp;nbsp;&lt;/label&gt;
-&lt;textarea rows=&quot;4&quot; placeholder=&quot;Text Area&quot;&gt;&lt;/textarea&gt;
-
-&lt;!-- Error --&gt;
-&lt;label&gt;&amp;nbsp;&lt;/label&gt;
-&lt;textarea rows=&quot;4&quot; class=&quot;error&quot;&gt;&lt;/textarea&gt;
-
-&lt;!-- Disabled --&gt;
-&lt;label&gt;&amp;nbsp;&lt;/label&gt;
-&lt;textarea rows=&quot;4&quot; disabled&gt;&lt;/textarea&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="textarea-sample1,textarea-sample2,textarea-sample3,textarea-sample4"></pre>
                     </div><!-- /componentSample -->
                 </section>
                 <!-- /TextArea -->
@@ -2450,77 +1908,64 @@
                         <div class="example">
                             <div class="textfieldSample">
                                 <div class="sampleTitle left">Standard</div>
-                                <label>Text Field</label>
-                                <input type="text" />
+                                <div id="textfield-sample1">
+                                    <!-- standard -->
+                                    <input type="text" />
+                                </div>
                             </div>
                             <div class="textfieldSample">
-                                <div class="sampleTitle left">Title-less</div>
-                                <label>&nbsp;</label>
-                                <input type="text" placeholder="Text Field" />
+                                <div class="sampleTitle left">Placeholder</div>
+                                <div id="textfield-sample2">
+                                    <!-- placeholder -->
+                                    <input type="text" placeholder="Text Field" />
+                                </div>
                             </div>
                             <div class="textfieldSample">
                                 <div class="sampleTitle left">Error</div>
-                                <label>&nbsp;</label>
-                                <input type="text" class="error" />
+                                <div id="textfield-sample3">
+                                    <!-- error -->
+                                    <input type="text" class="error" />
+                                </div>
                             </div>
                             <div class="textfieldSample">
                                 <div class="sampleTitle left">Disabled</div>
-                                <label>&nbsp;</label>
-                                <input type="text" disabled />
+                                <div id="textfield-sample4">
+                                    <!-- disabled -->
+                                    <input type="text" disabled />
+                                </div>
                             </div>
                             <div class="textfieldSample">
                                 <div class="sampleTitle left">Password</div>
-                                <label>&nbsp;</label>
-                                <input type="password" placeholder="Enter password" />
+                                <div id="textfield-sample5">
+                                    <!-- password -->
+                                    <input type="password" placeholder="Enter password" />
+                                </div>
+
                             </div>
                             <div class="textfieldSample">
                                 <div class="sampleTitle left">E-Mail</div>
-                                <label>&nbsp;</label>
-                                <input type="email" placeholder="Enter email address" />
+                                <div id="textfield-sample6">
+                                    <!-- email -->
+                                    <input type="email" placeholder="Enter email address" />
+                                </div>
+
                             </div>
                             <div class="textfieldSample">
-                                <div class="sampleTitle left">Phone&nbsp;Nr</div>
-                                <label>&nbsp;</label>
-                                <input type="tel" placeholder="Enter phone number" pattern="\(\d\d\d\) ?\d\d\d-\d\d\d\d" title="(###) ###-####" />
+                                <div class="sampleTitle left">Phone</div>
+                                <div id="textfield-sample7">
+                                    <!-- phone -->
+                                    <input type="tel" placeholder="Enter phone number" pattern="\(\d\d\d\) ?\d\d\d-\d\d\d\d" title="(###) ###-####" />
+                                </div>
                             </div>
                             <div class="textfieldSample">
                                 <div class="sampleTitle left">URL</div>
-                                <label>&nbsp;</label>
-                                <input type="url" placeholder="Enter URL">
+                                <div id="textfield-sample8">
+                                    <!-- url -->
+                                    <input type="url" placeholder="Enter URL">
+                                </div>
                             </div>
                         </div> <!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;!-- Standard --&gt;
-&lt;label&gt;Text Field&lt;/label&gt;
-&lt;input type=&quot;text&quot; /&gt;
-
-&lt;!-- Without Title --&gt;
-&lt;label&gt;&amp;nbsp;&lt;/label&gt;
-&lt;input type=&quot;text&quot; placeholder=&quot;Text Field&quot; /&gt;
-
-&lt;!-- Error --&gt;
-&lt;label&gt;&amp;nbsp;&lt;/label&gt;
-&lt;input type=&quot;text&quot; class=&quot;error&quot; /&gt;
-
-&lt;!-- Disabled --&gt;
-&lt;label&gt;&amp;nbsp;&lt;/label&gt;
-&lt;input type=&quot;text&quot; disabled /&gt;
-
-&lt;!-- Password --&gt;
-&lt;label&gt;&amp;nbsp;&lt;/label&gt;
-&lt;input type=&quot;password&quot; placeholder=&quot;Enter password&quot; /&gt;
-
-&lt;!-- E-Mail --&gt;
-&lt;label&gt;&amp;nbsp;&lt;/label&gt;
-&lt;input type=&quot;email&quot; placeholder=&quot;Enter email address&quot; /&gt;
-
-&lt;!-- Phone --&gt;
-&lt;label&gt;&amp;nbsp;&lt;/label&gt;
-&lt;input type=&quot;tel&quot; placeholder=&quot;Enter phone number&quot; pattern=&quot;\(\d\d\d\) ?\d\d\d-\d\d\d\d&quot; title=&quot;(###) ###-####&quot; /&gt;
-
-&lt;!-- URL --&gt;
-&lt;label&gt;&amp;nbsp;&lt;/label&gt;
-&lt;input type=&quot;url&quot; placeholder=&quot;Enter URL&quot;&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="textfield-sample1,textfield-sample2,textfield-sample3,textfield-sample4,textfield-sample5,textfield-sample6,textfield-sample7,textfield-sample8"></pre>
                     </div><!-- /componentSample -->
                 </section>
                 <!-- /TextField -->
@@ -2531,6 +1976,7 @@
             <section id="DataPresentation">
                 <h1 class="line">Data Presentation</h1>
                 <p>CUI provides basic grids, tables, and lists for data presentation.</p>
+
 
                 <section class="hidden" id="List">
                     <h2 class="line">List</h2>
@@ -2569,7 +2015,7 @@
                 <section id="Table">
                     <h2 class="line">Table</h2>
                     <div class="componentSample">
-                        <div class="example">
+                        <div class="example" id="table-sample">
                             <table class="data">
                                 <thead>
                                     <tr>
@@ -2613,25 +2059,7 @@
                                 </tbody>
                             </table>
                         </div> <!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;table class=&quot;data&quot;&gt;
- &lt;thead&gt;
-     &lt;tr&gt;
-         &lt;th class=&quot;check&quot;&gt;&lt;label&gt;&lt;input type=&quot;checkbox&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/label&gt;&lt;/th&gt;
-         &lt;th&gt;Text&lt;/th&gt;
-         &lt;th&gt;Date&lt;/th&gt;
-         &lt;th class=&quot;num&quot;&gt;Numbers&lt;/th&gt;
-     &lt;/tr&gt;
- &lt;/thead&gt;
- &lt;tbody&gt;
-     &lt;tr&gt;
-         &lt;td&gt;&lt;label&gt;&lt;input type=&quot;checkbox&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/label&gt;&lt;/td&gt;
-         &lt;td&gt;Bravo&lt;/td&gt;
-         &lt;td&gt;January 28th, 2012&lt;/td&gt;
-         &lt;td class=&quot;num&quot;&gt;1,049&lt;/td&gt;
-     &lt;/tr&gt;
- &lt;/tbody&gt;
-&lt;/table&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="table-sample"></pre>
                     </div> <!-- /componentSample -->
                 </section>
                 <!-- /Table -->
@@ -3027,7 +2455,7 @@
                     </ul>
 
                     <div class="componentSample">
-                        <div class="example">
+                        <div class="example" id="modal-sample">
                             <a href="#modal" class="button primary" data-toggle="modal" data-heading="Default Modal" data-type="default">Default</a>
                             <a href="#modal" class="button" data-toggle="modal" data-heading="Error" data-type="error">Error</a>
                             <a href="#modal" class="button" data-toggle="modal" data-heading="Notice" data-type="notice">Notice</a>
@@ -3048,22 +2476,7 @@
                                 </div>
                             </div>
                         </div> <!-- example -->
-                        <pre class="prettyprint linenums">
-&lt;a href=&quot;#modal&quot; class=&quot;button&quot; data-toggle=&quot;modal&quot;&gt;Show Modal&lt;/a&gt;
-
-&lt;div id=&quot;modal&quot; class=&quot;modal&quot;&gt;
-    &lt;div class=&quot;modal-header&quot;&gt;
-        &lt;h2&gt;Modal from Markup&lt;/h2&gt;
-        &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot;&gt;&amp;times;&lt;/button&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;modal-body&quot;&gt;
-        &lt;p&gt;This modal was created from markup.&lt;/p&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;modal-footer&quot;&gt;
-        &lt;button data-dismiss=&quot;modal&quot;&gt;Close&lt;/button&gt;
-        &lt;button class=&quot;primary&quot; data-dismiss=&quot;modal&quot;&gt;Save&lt;/button&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="modal-sample"></pre>
                     </div> <!-- /componentSample -->
                 </section>
                 <!-- /Modal -->
@@ -3072,7 +2485,7 @@
                     <h2 class="line">Popover</h2>
                     <p>Popovers (WIP).</p>
                     <div class="componentSample" style="overflow: visible;">
-                        <div class="example" style="position: relative; padding: 5rem;">
+                        <div class="example" style="position: relative; padding: 5rem;" id="popover-sample">
                             <a href="#first_popover" data-toggle="popover" data-point-from="right" data-align-from="left">
                                 Right popover
                             </a>&nbsp;&nbsp;
@@ -3110,9 +2523,7 @@
                             </div>
 
                         </div>
-                        <pre class="prettyprint linenums">
-&lt;div class=&quot;popover arrow-bottom&quot;&gt;Popover content&lt;/div&gt;
-&lt;div class=&quot;popover arrow-top&quot;&gt;Popover content&lt;/div&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="popover-sample"</pre>
                     </div> <!-- componentSample -->
                 </section>
                 <!-- /Popover -->
@@ -3149,7 +2560,8 @@
                         should not be dismissed.</p>
                     <div class="componentSample">
                         <div class="example clearfix">
-                            <div class="left column">
+                            <div class="left column" id="alert-sample1">
+                                <!-- with message -->
                                 <div class="alert error">
                                     <button class="close" data-dismiss="alert">&times;</button>
                                     <strong>ERROR</strong><div>Uh oh, something went wrong with the whozit!</div>
@@ -3171,7 +2583,8 @@
                                     <strong>INFO</strong><div>For great success, configure the whozit correctly.</div>
                                 </div>
                             </div> <!-- /column -->
-                            <div class="left column">
+                            <div class="left column" id="alert-sample2">
+                                <!-- with message and body text -->
                                 <div class="alert error large">
                                     <button class="close" data-dismiss="alert">&times;</button>
                                     <strong>You have missed the deadline</strong><div>In order to prevent taking responsibility, please reset your device using a hammer. The story is, your kid got a hold of it and you need until next week.</div>
@@ -3198,11 +2611,7 @@
                                 </div>
                             </div> <!-- /column -->
                         </div> <!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;div class=&quot;alert error&quot;&gt;
-    &lt;button class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;&amp;times;&lt;/button&gt;
-    &lt;strong&gt;HEADING&lt;/strong&gt;&lt;div&gt;Content.&lt;/div&gt;
-&lt;/div&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="alert-sample1,alert-sample2"></pre>
                     </div> <!-- componentSample -->
                 </section>
                 <!-- /Alert -->
@@ -3275,7 +2684,7 @@
                         <li><code class="atv">success</code> Draw attention to a success state
                         <li><code class="atv">inspect</code> Inspect data points on a chart
                     </ul>
-                    
+
                     <h4>Arrow Direction</h4>
                     <p>Tooltips can point different directions by applying the following CSS classes:</p>
                     <ul>
@@ -3283,43 +2692,62 @@
                         <li><code class="atv">arrow-bottom</code> Point downward
                         <li><code class="atv">arrow-left</code> Point left
                         <li><code class="atv">arrow-right</code> Point right
+                        <li><code class="atv">arrow-right</code> Inspect data points on a chart
                     </ul>
-                    
+
                     <div class="componentSample">
                         <div class="example clearfix">
                             <div class="left">
-                                <div class="tooltip error arrow-top">Lorem ipsum.</div>
-                                <div class="tooltip error arrow-bottom">Lorem ipsum.</div>
-                                <div class="tooltip error arrow-right">Lorem ipsum.</div>
-                                <div class="tooltip error arrow-left">Lorem ipsum.</div><br>
-                                <div class="tooltip notice arrow-top">Lorem ipsum.</div>
-                                <div class="tooltip notice arrow-bottom">Lorem ipsum.</div>
-                                <div class="tooltip notice arrow-right">Lorem ipsum.</div>
-                                <div class="tooltip notice arrow-left">Lorem ipsum.</div><br>
-                                <div class="tooltip inspect arrow-top">Lorem ipsum.</div>
-                                <div class="tooltip inspect arrow-bottom">Lorem ipsum.</div>
-                                <div class="tooltip inspect arrow-right">Lorem ipsum.</div>
-                                <div class="tooltip inspect arrow-left">Lorem ipsum.</div><br>
+                                <div id="tooltip-sample1">
+                                    <!-- info tips -->
+                                    <div class="tooltip info arrow-top">Lorem ipsum.</div>
+                                    <div class="tooltip info arrow-bottom">Lorem ipsum.</div>
+                                    <div class="tooltip info arrow-right">Lorem ipsum.</div>
+                                    <div class="tooltip info arrow-left">Lorem ipsum.</div>
+                                </div>
+                                <br>
+                                <div id="tooltip-sample3">
+                                    <!-- notice tips -->
+                                    <div class="tooltip notice arrow-top">Lorem ipsum.</div>
+                                    <div class="tooltip notice arrow-bottom">Lorem ipsum.</div>
+                                    <div class="tooltip notice arrow-right">Lorem ipsum.</div>
+                                    <div class="tooltip notice arrow-left">Lorem ipsum.</div>
+                                </div>
+                                <br>
+                                <div id="tooltip-sample5">
+                                    <!-- inspect tips -->
+                                    <div class="tooltip inspect arrow-top">Lorem ipsum.</div>
+                                    <div class="tooltip inspect arrow-bottom">Lorem ipsum.</div>
+                                    <div class="tooltip inspect arrow-right">Lorem ipsum.</div>
+                                    <div class="tooltip inspect arrow-left">Lorem ipsum.</div>
+                                </div>
                             </div>
                             <div class="left">
-                                <div class="tooltip success arrow-top">Lorem ipsum.</div>
-                                <div class="tooltip success arrow-bottom">Lorem ipsum.</div>
-                                <div class="tooltip success arrow-right">Lorem ipsum.</div>
-                                <div class="tooltip success arrow-left">Lorem ipsum.</div><br>
-                                <div class="tooltip info arrow-top">Lorem ipsum.</div>
-                                <div class="tooltip info arrow-bottom">Lorem ipsum.</div>
-                                <div class="tooltip info arrow-right">Lorem ipsum.</div>
-                                <div class="tooltip info arrow-left">Lorem ipsum.</div>
+                                <div id="tooltip-sample2">
+                                    <!-- error tips -->
+                                    <div class="tooltip error arrow-top">Lorem ipsum.</div>
+                                    <div class="tooltip error arrow-bottom">Lorem ipsum.</div>
+                                    <div class="tooltip error arrow-right">Lorem ipsum.</div>
+                                    <div class="tooltip error arrow-left">Lorem ipsum.</div>
+                                </div>
+                                <br>
+                                <div id="tooltip-sample4">
+                                    <!-- success tips -->
+                                    <div class="tooltip success arrow-top">Lorem ipsum.</div>
+                                    <div class="tooltip success arrow-bottom">Lorem ipsum.</div>
+                                    <div class="tooltip success arrow-right">Lorem ipsum.</div>
+                                    <div class="tooltip success arrow-left">Lorem ipsum.</div>
+                                </div>
                             </div>
-                            <div class="clear largeToolTipSample">
+                            <div class="clear largeToolTipSample" id="tooltip-sample6">
+                                <!-- large tooltip sample -->
                                 <input type="text" class="error" value="Some invalid input">
                                 <div class="tooltip error arrow-left">
                                     When tooltips contain a large amount of text, they will wrap automatically.
                                 </div>
                             </div>
                         </div> <!-- /example -->
-                        <pre class="prettyprint linenums">
-&lt;div class=&quot;tooltip error arrow-bottom&quot;&gt;Content&lt;/div&gt;</pre>
+                        <pre class="prettyprint linenums" data-src-id="tooltip-sample1,tooltip-sample2,tooltip-sample3,tooltip-sample4,tooltip-sample5,tooltip-sample6"></pre>
                     </div> <!-- /componentSample -->
                     <div>
                         Open <a href="examples/tooltip/index.html">Sample</a>

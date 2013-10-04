@@ -1,0 +1,44 @@
+/**
+  Class: .badge
+  Displays a blue badge that can contain a number of items the user should be notified about
+*/
+
+// Badge
+@badge-background-color: rgb(50, 135, 210);
+@badge-hover-background-color: rgb(125, 175, 230);
+@badge-empty-background-color: rgb(230, 230, 230);
+@badge-hover-empty-background-color: rgb(255, 255, 255);
+@badge-font-color: white;
+@badge-empty-font-color: rgb(35, 35, 35);
+
+.badge {
+  display: inline-block;
+  .border-box;
+  height: 24*@px;
+  padding: 4*@px 8*@px 0; // feels wrong, but makes IE9, FF, Chrome render the same
+  margin: 0;
+  font-size: 16*@px;
+  .bold-text;
+  .border-radius(2*@px);
+
+  background-color: @badge-background-color;
+
+  text-align: center;
+  line-height: 16*@px;
+  color: @badge-font-color;
+
+  &:hover,
+  &:focus {
+    background: @badge-hover-background-color;
+  }
+
+  &.empty {
+    background-color: @badge-empty-background-color;
+    color: @badge-empty-font-color;
+
+    &:hover,
+    &:focus {
+      background: @badge-hover-empty-background-color;
+    }
+  }
+}

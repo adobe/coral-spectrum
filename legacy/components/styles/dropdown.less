@@ -17,8 +17,8 @@
 .dropdown {
   position: relative;
   display: inline-block;
-  margin: 0.5rem 0;
-  vertical-align: middle;
+  margin: 2*@px 0;
+  vertical-align: top;
 
   select {
     display: none;
@@ -108,13 +108,12 @@
   }
 
   button {
-    .button-square;
+    .button-square(36*@px);
     position: absolute;
     top: @px; // Because of textfield border
     right: @px; // Because of textfield border
     border: none;
     border-left: @px solid @textfield-border-color;
-    height: 36*@px;
     font-size: 0; // hide the text
 
     &:after {

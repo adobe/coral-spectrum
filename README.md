@@ -1,32 +1,23 @@
 # What is CoralUI? 
-CoralUI is an implementation of the [Cloud UI][9] visual style.  Using CoralUI provides everything your product needs to build out a web based UI, including touch friendly controls, a highly scalable interface, accessibility compliance, and component extensibility.
+CoralUI is an implementation of the [Cloud UI][0] visual style that provides everything your product needs to build out a web based UI.  Check out our interactive [Style Guide][1] to see CoralUI in action.  
 
-# Demo & Download
-Check out the current release of the [Style Guide][1] to see CoralUI in action.  You can also check out the Style Guide via the build servers, for better or worse.  There are both a [real-time][2] and [nightly][3] options to choose from.
+See the [CoralUI Wiki][3] for more information.
 
-CoralUI offers [prebuilt releases][10] but we encourage you to build Coral yourself. See the [build documentation][4] to get started.
+# Who maintains CoralUI?
+CoralUI is an internal open source effort with backing from designers and product development teams across Adobe.   
 
-# Contributing
-CoralUI is an internal open source effort with backing from UXD, XD, and product development teams, and we encourage the submission of issues, feature requests, and pull requests from anyone, on any team.  To get involved, contact the [mailing list][5] and introduce yourself.
+# How do I get started?
+First, contact the [mailing list][2] and introduce yourself.  Becoming part of the community is only way let us know how you want to be involved.  The list is also the best way to discover what current priorities are. 
 
-## Design Specifications
-Specifications for compononents can be be found in the [Cloud UI Component Library][6].
+Next, dive into the [CoralUI Wiki][3].  It contains everything you need to know about using CoralUI and contributing back to the project.
 
-## Building ![Build Status](http://jenkins.bsl.eur.adobe.com/job/Build_CoralUI-master/badge/icon)
-Check out the [Build Process Wiki][4] for information on building CoralUI.
+# How do I find out more?
+Just "Read The Fine Manual", a.k.a the [CoralUI Wiki][3].  
 
+### CoralUI Build Status   
+[![Build Status](http://xdbuild.corp.adobe.com:8080/job/CoralUI-Master/badge/icon)](http://xdbuild.corp.adobe.com:8080/job/CoralUI-Master/)
 
-## More Information
-See the [CoralUI Wiki][7] for more useful information. 
-
+[0]: http://blogs.corp.adobe.com/xdcloudui
 [1]: https://git.corp.adobe.com/pages/Coral/CoralUI/
-[2]: http://xdbuild.corp.adobe.com:8080/job/CoralUI-Master/ws/build/index.html
-[3]: http://jenkins.bsl.eur.adobe.com:8080/job/Build_CoralUI-master/ws/build/index.html
-[4]: https://git.corp.adobe.com/Coral/CoralUI/wiki/Build-Process-&-Technology
-[5]: mailto:CoralUI@adobe.com
-[6]: https://zerowing.corp.adobe.com/display/CloudUI/Component+Library
-[7]: https://git.corp.adobe.com/Coral/CoralUI/wiki
-[8]: https://git.corp.adobe.com/Coral/CoralUI/wiki/CoralUI-Modularization
-[9]: http://blogs.corp.adobe.com/xdcloudui
-[10]: https://git.corp.adobe.com/Coral/CoralUI/tree/gh-pages/release
-
+[2]: mailto:CoralUI@adobe.com
+[3]: https://git.corp.adobe.com/Coral/CoralUI/wiki/Home
