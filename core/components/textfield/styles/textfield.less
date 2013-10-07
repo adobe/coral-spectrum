@@ -38,10 +38,8 @@ input[type="time"] {
   height: @component-single-line-height;
 
   color: @font-base-color;
-  border: @px solid;
-  border-color: @textfield-border-color;
-  
-  border-radius: 0;
+
+  border: @px solid @textfield-border-color;
   background-color: @textfield-background-color;
 
   .placeholder(@font-secondary-color);
@@ -67,12 +65,11 @@ input[type="time"] {
   &:invalid {
     border-color: @textfield-error-border-color;
     color: @textfield-error-font-color;
-  }
-    
-  &:focus.error,
-  &:focus:invalid {
-    .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
-    color: @textfield-error-font-color;
+
+    &:focus {
+      .glow(6*@px, @textfield-error-border-color, @textfield-error-border-color);
+      color: @textfield-error-font-color;
+    }
   }
 }
 
