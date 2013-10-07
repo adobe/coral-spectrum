@@ -4,37 +4,37 @@
 */
 
 textarea {
-    .border-box;
+  .border-box;
 
-    border-radius: 0;
+  border-radius: 0;
 
-    font-size: 0.8125rem;
-    font-family: @font-base-family;
+  font-size: 0.8125rem;
+  font-family: @font-base-family;
 
-    padding: 0.25rem 0.5rem;
-    margin: 2*@px 0;
+  padding: 0.25rem 0.5rem;
+  margin: 2*@px 0;
 
-    /* using rem (e.g. @px) as border-width of textareas crashes IE9 */
-    border: 1px solid @textfield-border-color;
-    background-color: @textfield-background-color;
+  /* using rem (e.g. @px) as border-width of textareas crashes IE9 */
+  border: 1px solid @textfield-border-color;
+  background-color: @textfield-background-color;
 
-    &:disabled {
-        background-color: @textfield-disabled-background-color;
-    }
+  &:disabled {
+    background-color: @textfield-disabled-background-color;
+  }
+
+  &:focus {
+    .glow(6px, @focus-glow-color, @focus-border-color, 1px);
+    outline: none;
+  }
+
+  &.error {
+    border-color: @textfield-error-border-color;
+    color: @textfield-error-font-color;
 
     &:focus {
-        .glow(6px, @focus-glow-color, @focus-border-color, 1px);
-        outline: none;
+      .glow(6px, @textfield-error-border-color, @textfield-error-border-color, 1px);
     }
-
-    &.error {
-        border-color: @textfield-error-border-color;
-        color: @textfield-error-font-color;
-
-        &:focus {
-            .glow(6px, @textfield-error-border-color, @textfield-error-border-color, 1px);
-        }
-    }
+  }
 }
 
 form.vertical {
