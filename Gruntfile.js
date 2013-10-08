@@ -65,6 +65,10 @@ module.exports = function (grunt) {
             'components/CUI.NumberInput.js',
             'components/CUI.Colorpicker.js',
             'components/CUI.CycleButtons.js',
+            'components/CUI.SelectList.js',
+            'components/CUI.TagList.js',
+            'components/CUI.Select.js',
+            'components/CUI.Autocomplete.js',
 
             // Validations
             'validations.js'
@@ -222,6 +226,22 @@ module.exports = function (grunt) {
                         cwd: '<%= dirs.components %>/',
                         src: ['**/styles/**.less'],
                         dest: '<%= dirs.build %>/less/components'
+                    },
+                    { // get resources from the modularized components
+                        expand: true,
+                        cwd: '<%= dirs.components %>/',
+                        src: ['**/res/**'],
+                        dest: '<%= dirs.build %>/res/components',
+                        filter: 'isFile',
+                        rename: function(dest, src) {
+                            var match = src.match(/coralui-contrib-component-(.*)\/res\/(.*)/);
+                            if (match) {
+                                var component = match[1];
+                                var filePath = match[2];
+                                return dest + '/' + component + '/' + filePath;
+                            }
+                            return dest;
+                        }
                     },
                     { // get js from the modularized components
                         expand: true,
@@ -575,10 +595,23 @@ module.exports = function (grunt) {
                     archive: '<%= dirs.build %>/release/cui-<%= meta.version %>.zip'
                 },
                 files: [
-                    { src: ['<%= dirs.build %>/css/cui.min.css'] },
-                    { src: ['<%= dirs.build %>/js/CUI.min.js'] },
-                    { src: ['<%= dirs.build %>/less/**'] },
-                    { src: ['<%= dirs.build %>/res/**'] }
+                    {
+                        expand: true,
+                        cwd: '<%= dirs.build %>',
+                        src: [
+                            'css/cui.min.css',
+                            'js/CUI.min.js',
+                            'res/components/**',
+                            'res/icons/**'
+                        ],
+                        dest: 'coral-ui-<%= meta.version %>/'
+                    },
+                    {
+                        expand: true,
+                        cwd:'res/package-metadata',
+                        src:['README.md'],
+                        dest: 'coral-ui-<%= meta.version %>/'
+                    }
                 ]
             },
             full: {
@@ -586,16 +619,34 @@ module.exports = function (grunt) {
                     archive: '<%= dirs.build %>/release/cui-<%= meta.version %>-full.zip'
                 },
                 files: [
-                    { src: ['<%= dirs.build %>/css/**'] },
-                    { src: ['<%= dirs.build %>/examples/**'] },
-                    { src: ['<%= dirs.build %>/res/**'] },
-                    { src: ['<%= dirs.build %>/images/**'] },
-                    { src: ['<%= dirs.build %>/js/**'] },
-                    { src: ['<%= dirs.build %>/doc/**'] },
-                    { src: ['<%= dirs.build %>/less/**'] },
-                    { src: ['<%= dirs.build %>/test/**'] },
-                    { src: ['<%= dirs.build %>/index.html'] }
-                ]
+                    {
+                        expand: true,
+                        cwd: '<%= dirs.build %>',
+                        src: [
+                            'css/cui*.css',
+                            'js/CUI*.js',
+                            'js/libs/**',
+                            'js/source/**',
+                            'less/components/**',
+                            'less/shared/**',
+                            'less/externals/**',
+                            'less/cui*.less',
+                            'less/base.less',
+                            'less/components.less',
+                            'less/elements.less',
+                            'res/components/**',
+                            'res/icons/**',
+                            'tests/**'
+                        ], 
+                        dest: 'coral-ui-<%= meta.version %>/'
+                    },
+                    {
+                        expand: true,
+                        cwd:'res/package-metadata',
+                        src:['README.md'],
+                        dest: 'coral-ui-<%= meta.version %>/'
+                    }
+                ],
             },
             publish: {
                 options: {

@@ -33,14 +33,14 @@
             <a href="doc/index.html">Docs</a>
             <a href="examples/icon-browser.html">Icon Browser</a>
             <a href="bug_template.html">Bug Template</a>
-            <a href="examples/misc/shell.html">Shell</a>
+            <a href="examples/shell/shell.html">Shell</a>
             <a href="https://git.corp.adobe.com/Coral/CoralUI/" target="_blank">Github</a>
-            <a href="release/cui-latest-full.zip">Download</a>
+            <a href="release/cui-latest.zip">Download</a>
             <a href="http://jenkins.bsl.eur.adobe.com/job/Build_CoralUI-master/ws/build/index.html" target="_blank">Nightly guide</a>
         </nav>
 
         <div class="drawer">
-            <div class="badge">1.12.0-SNAPSHOT</div>
+            <div class="badge">1.13.0-SNAPSHOT</div>
         </div>
 
     </header>
@@ -729,14 +729,14 @@
                                     <button class="icon-email">E-mail</button>
                                     <button class="icon-attach">Attach</button>
                                 </div>
-                                <div class="center">
-                                    <h1>Page Title</h1>
-                                </div>
                                 <div class="right icongroup">
                                     <button class="icon-collection">Collection</button>
                                     <button class="icon-delete">Delete</button>
                                     <a href="#some-link" class="button">Action</a>
                                     <button class="primary">Primary</button>
+                                </div>
+                                <div class="center">
+                                    <h1>Page Title</h1>
                                 </div>
                             </nav>
                         </div>  <!-- /example -->
@@ -803,6 +803,7 @@
                                     <!-- Clear -->
                                     <span class="autocomplete" data-init="autocomplete" data-showclearbutton="true">
                                         <input type="text" name="name1" placeholder="Search">
+                                        <button class="autocomplete-suggestion-toggle"></button>
                                     </span>
                                 </div>
                             </div>
@@ -813,6 +814,7 @@
                                     <span class="autocomplete icon-search" data-init="autocomplete"
                                           data-showclearbutton="true">
                                         <input type="text" name="name1" placeholder="Search">
+                                        <button class="autocomplete-suggestion-toggle"></button>
                                     </span>
                                 </div>
                             </div>
@@ -822,6 +824,7 @@
                                       <!-- Tags -->
                                       <span class="autocomplete icon-tag" data-init="autocomplete" data-showclearbutton="true" data-showtags="true">
                                           <input type="text" name="name1" placeholder="Search">
+                                          <button class="autocomplete-suggestion-toggle"></button>
                                           <ol class="taglist autocomplete-tags">
                                               <li>
                                                   <button class="icon-close"></button>
@@ -848,6 +851,7 @@
                                     <!-- Suggestions -->
                                     <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
                                       <input type="text" name="name1" placeholder="Search">
+                                      <button class="autocomplete-suggestion-toggle"></button>
                                       <ul class="autocomplete-suggestions selectlist">
                                           <li data-value="expr1">Expression 1</li>
                                           <li data-value="expr2">Expression 2</li>
@@ -865,6 +869,7 @@
                                     <!-- with Tags -->
                                     <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true" data-showtags="true">
                                           <input type="text" name="name1" placeholder="Search">
+                                          <button class="autocomplete-suggestion-toggle"></button>
                                           <ul class="autocomplete-suggestions selectlist">
                                                 <li data-value="expr1">Expression 1</li>
                                                 <li data-value="expr2">Expression 2</li>
@@ -882,6 +887,7 @@
                                     <!-- remote -->
                                     <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
                                           <input type="text" name="name1" placeholder="Search">
+                                          <button class="autocomplete-suggestion-toggle"></button>
                                           <ul class="autocomplete-suggestions selectlist" data-type="dynamic" data-dataurl="examples/autocomplete/remotehtml.html">
                                           </ul>
                                     </span>
@@ -893,6 +899,7 @@
                                     <!-- Typeahead -->
                                     <span class="autocomplete icon-search" data-init="autocomplete" data-showtypeahead="true">
                                           <input type="text" name="name1" placeholder="Search">
+                                          <button class="autocomplete-suggestion-toggle"></button>
                                           <ul class="autocomplete-typeahead selectlist" data-type="dynamic" data-dataurl="examples/autocomplete/remotehtml.html">
                                           </ul>
                                     </span>
@@ -931,6 +938,7 @@
                                     <!-- Groups -->
                                     <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
                                           <input type="text" name="name1" placeholder="Search">
+                                          <button class="autocomplete-suggestion-toggle"></button>
                                           <ul class="autocomplete-suggestions selectlist" data-multiple="true">
                                               <li class="optgroup">
                                                   <span>Group 1</span>
@@ -957,6 +965,7 @@
                                     <!-- Icons -->
                                     <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
                                           <input type="text" name="name1" placeholder="Search">
+                                          <button class="autocomplete-suggestion-toggle"></button>
                                           <ul class="autocomplete-suggestions selectlist" data-multiple="true">
                                               <li class="optgroup">
                                                   <span>Group 1</span>

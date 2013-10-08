@@ -1,0 +1,338 @@
+/**
+ * A calendar for picking dates
+ */
+
+// Datepicker
+@datepicker-day-background-color: rgb(245,245,245);
+@datepicker-day: rgb(75,75,75);
+@datepicker-day-title-background-color: rgb(215,215,215);
+@datepicker-day-title-border-color: rgb(196,196,196);
+@datepicker-day-dimmed-background-color: rgb(235,235,235);
+@datepicker-day-dimmed-text-color: rgb(191,191,191);
+@datepicker-day-hover-border-color: rgb(170,204,241);
+@datepicker-day-hover-background-color: @white;
+@datepicker-day-selected-border-color: rgb(69,88,118);
+@datepicker-day-selected-background-color: rgb(64,142,212);
+@datepicker-day-selected-text-color: rgb(255,255,255);
+@datepicker-day-today-background-color: rgb(218,230,240);
+@datepicker-day-today-border-color: rgb(201,213,222);
+@datepicker-time-background-color: rgb(225,225,225);
+@datepicker-time-border-color: rgb(196,196,196);
+
+.datepicker {
+  // used to place the button.
+  position: relative;
+  // used to respect the height and width properties.
+  display: inline-block;
+
+  .border-box;
+  vertical-align: top; // used to align them correctly in forms.
+  margin: 2*@px 0;  // resets default margin
+
+  > input[type=text] {
+    margin: 0;
+    padding-right: 40*@px;
+    width: 100%;
+  }
+
+  > input[type^="date"], > input[type="time"] {
+    margin: 0;
+    padding-right: 40*@px;
+    -webkit-appearance: none; // remove default styling for native html5 input
+    width: 100%;
+  }
+
+  > button {
+    .button-square(36*@px);
+        
+    // Fit inside of the text field
+    position: absolute;
+    top: @px; // Because of textfield border
+    right: @px; // Because of textfield border
+    
+    &,
+    &:hover,
+    &:active,
+    &:disabled {
+      border: none;
+      border-left: @px solid @textfield-border-color;
+      filter: none;
+    }
+
+    &.small { // for backward compatibility; .small is not required
+      // reset all small to behave as .small is not applied
+      min-width: 0;
+      min-height: 0;
+      line-height: 1.9375rem;
+      font-size: inherit;
+    }
+  }
+
+  &.error > button,
+  &.error > input {
+    color: @textfield-error-font-color;
+    border-color: @textfield-error-border-color;
+  }
+
+  &.error > button:focus,
+  &.error > input:focus,
+  &.error.focus > button,
+  &.error.focus > input {
+    color: @textfield-error-font-color;
+    .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+  }
+
+  &.popover {
+    display: block;
+    position: absolute;
+    top: 3rem; /* 48px */ /* TODO: place popover relative to the action button (above or below) */
+    left: 0;
+    z-index: 10010;
+
+    border: 10*@px solid @popover-border-color; /* TODO: 8px in .popover, but design shows 10px */
+    
+    /* TODO: this is an override of popover .arrow-top. Increases margin to 10px to match design document
+     * should margins consistently be 8px or 10px for popovers, change accordingly.
+     */
+    &.arrow-top:before {
+      margin-bottom: 10*@px;
+    }
+
+    .inner {
+      border: @px solid @modal-outline-color;
+    }
+  }
+
+  .calendar {
+    width: 244*@px;
+
+    .calendar-header {
+      position: relative;
+      .border-box;
+      width: 100%;
+      height: @modal-header-height;
+      
+      background: @modal-header-background-color;
+
+      // Bottom border, easiest with a box shadow
+      .box-shadow(inset 0 -@px 0 @modal-header-border-color);
+
+      h2 {
+        position: absolute;
+        left: 0;
+        top: 0;
+        
+        .border-box;
+        width: 100%;
+        height: 3.125rem;
+        margin: 0;
+        padding: 0;
+        
+        text-align: center;
+        font-size: 20*@px;
+        line-height: 3.125rem;
+        .ellipsis();
+      }
+
+      button.prev-month,
+      button.next-month {
+        position: absolute;
+        top: 0;
+        
+        width: auto;
+        height: auto;
+        min-width: 2.4375rem;
+        
+        padding: 4*@px;
+        margin: 8*@px;
+        
+        border: 0;
+        background: none;
+        filter: progid:DXImageTransform.Microsoft.gradient(enabled = false); /* Removes ie filter */
+
+        font-size: 26*@px;
+        color: rgb(90,90,90);
+        line-height: 26*@px;
+        
+        &:hover {
+          border: 0 none;
+          background: none;
+          color: rgb(44,44,44);
+        }
+
+        &:active, &:focus {
+          background: none;
+          .box-shadow(none);
+        }
+      }
+
+      button.prev-month {
+        left: 0;
+        margin-left: 5*@px;
+        text-align: left;
+      }
+      button.next-month {
+        right: 0;
+        margin-right: 5*@px;
+        text-align: right;
+      }
+    }
+
+    // TODO: taken from .modal-body for styling. Should belong to popover
+    .calendar-body {
+      .border-box;
+      width: 100%;
+      padding: 0;
+      .scrollable();
+    }
+
+    table {
+      table-layout: fixed;
+      border-spacing: @px;
+      width: 100%;
+      margin: 0;
+      background-color: rgb(230,230,230);
+      font-size: 15*@px;
+      font-family: @font-light-family;
+
+      a, span {
+        background: @datepicker-day-background-color;
+        padding: 7*@px 0;
+        display: block;
+      }
+
+      th, td {
+        text-align: center;
+        padding: 0;
+
+        &:first-child {
+          a, span {
+            margin-left: -@px;
+          }
+          a:active, &.selected a, &.today a, &.today a:active {
+            border-left: 0 none;
+          }
+        }
+
+        &:last-child {
+          a, span {
+            margin-right: -@px;
+          }
+          a:active, &.selected a, &.today a, &.today a:active {
+            border-right: 0 none;
+          }
+        }
+      }
+
+      tr:last-child {
+        a, span {
+          margin-bottom: -@px;
+        }
+        a:active, .selected a, .today a, .today a:active {
+          border-bottom: 0 none;
+        }
+      }
+
+      th {
+        span {
+          background: @datepicker-day-title-background-color;
+          border-bottom: @px solid @datepicker-day-title-border-color;
+          font-size: 10*@px;
+          text-transform: uppercase;
+          padding: 3*@px 0;
+          margin: -@px;
+        }
+      }
+
+      td {
+        a {
+          color: @datepicker-day;
+          text-decoration: none;
+          position: relative;
+          z-index: 100;
+
+          &:hover {
+            text-decoration: none;
+            background: @datepicker-day-hover-background-color;
+          }
+
+          &:focus {
+            .box-shadow(none);
+          }
+        }
+
+        span {
+          background: @datepicker-day-dimmed-background-color;
+          color: @datepicker-day-dimmed-text-color;
+        }
+
+        &.today {
+          a {
+            margin: -@px;
+            background: @datepicker-day-today-background-color;
+            border: @px solid @datepicker-day-today-border-color;
+          }
+        }
+
+        // Pressed, selected
+        a:active, &.today a:active, &.selected a {
+          margin: -@px;
+          border: @px solid @datepicker-day-selected-border-color;
+          background: @datepicker-day-selected-background-color;
+          color: @datepicker-day-selected-text-color;
+          z-index: 200;
+        }
+      }
+    }
+  }
+    
+  .time {
+    background: @datepicker-time-background-color;
+    border-top: @px solid @datepicker-time-border-color;
+    padding: 0.625rem;
+    min-width: 170*@px;
+    font-size: 15*@px;
+
+    i, span {
+      display: inline-block;
+      height: 2rem;
+      line-height: 2rem;
+    }
+
+    i {
+      margin: 0 10*@px 0 5*@px;
+    }
+
+    span {
+      margin: 0 8*@px;
+    }
+
+    .dropdown {
+
+      &:first-child {
+        margin-left: 10*@px;
+      }
+
+      button {
+        width: 56*@px;
+        min-width: 0;
+      }
+
+      .dropdown-list {        
+        ul li {
+            padding: 3*@px;
+        }
+      }
+    }
+  }
+}
+
+form.vertical {
+  .datepicker.field {
+    display: block;
+  }
+}
+
+.dropdown-list {
+    z-index: 10050!important;
+}
