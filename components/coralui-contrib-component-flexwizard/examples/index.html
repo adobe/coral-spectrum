@@ -8,22 +8,52 @@
  
         <script src="../../js/libs/jquery.js"></script>
         <script src="../../js/libs/toe.js"></script>
+        <script src="../../js/libs/handlebars.js"></script>
         <script src="../../js/CUI.js"></script>
+
+        <script id="step-template" type="text/x-handlebars-template">
+            <div class="step" data-step-title="{{title}}">
+                <button class="flexwizard-control" type="button" data-action="prev">Back</button>
+                <button class="flexwizard-control" type="button" data-action="next">Next</button>
+                <p>{{title}}</p>
+            </div>
+        </script>
+
+        <script>
+            $(function() {
+                var stepTemplate = Handlebars.compile($("#step-template").html());
+
+                $(document).on("click", ".example-append", function(e) {
+                    var wizard = $(this).closest(".flexwizard");
+
+                    var html = stepTemplate({
+                        title: "Step" + (wizard.children(".step").length + 1)
+                    });
+
+                    var api = wizard.data("flexWizard");
+                    api.add(html);
+                });
+            });
+        </script>
     </head>
     <body>
         <form action="test" method="post">
             <div class="flexwizard" data-init="flexwizard">
-                <div class="step" title="Step1">
+                <div class="step" data-step-title="Step1">
                     <a class="flexwizard-control button" href="cancel.html" data-action="cancel">Cancel</a>
                     <button class="flexwizard-control" type="button" data-action="next">Next</button>
 
                     <h2>Simple Step</h2>
-                    <p>Word on a future state of a page or site section without impacting the production state.</p>
+                    <p>Content.</p>
+
+                    <h2>Adding Step</h2>
+                    <p>The FlexWizard allows you to add a new step
+                        <button class="example-append primary" type="button">Add Step</button>.</p>
                 </div>
 
                 <div class="step" title="Step2">
-                    <button class="flexwizard-control" type="button" data-action="prev">Change mind</button>
-                    <button class="flexwizard-control" type="button" data-action="next">Go next</button>
+                    <button class="flexwizard-control" type="button" data-action="prev">Back</button>
+                    <button class="flexwizard-control" type="button" data-action="next">Next</button>
 
                     <h2>Custom Nav Buttons</h2>
                     <p>Word on a future state of a page or site section without impacting the production state.</p>
@@ -31,7 +61,7 @@
 
                 <div class="step" title="Step3">
                     <button class="flexwizard-control" type="button" data-action="prev">Back</button>
-                    <button class="flexwizard-control" type="submit" data-action="next">Submit</button>
+                    <button class="flexwizard-control" type="button" data-action="next">Next</button>
 
                     <h2>Schedule a new Launch</h2>
                     <p>Word on a future state of a page or site section without impacting the production state.</p>
