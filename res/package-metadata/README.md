@@ -48,7 +48,9 @@ tests/* : the Mocha test runner and unit tests
 ```
 Note that the full archive is not linked from the Coral UI Style Guide.  It is recommended that, should you need the full CSS, JavaScript, source files, or tests, you are better off cloning the git repo and building Coral UI from source. 
 
+
 If building yourself isn't an option, you can get the full zip at this URL:
+
 https://git.corp.adobe.com/pages/Coral/CoralUI/release/cui-latest-full.zip
 
 See the [Coral UI Wiki][wiki_url] or email the [Coral UI DL](coralui@adobe.com) for more information.
