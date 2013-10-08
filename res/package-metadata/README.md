@@ -4,7 +4,7 @@ This readme explains the Coral UI zip package contents explained.
 **What is CoralUI?**
 CoralUI is an implementation of the [Cloud UI][cloudui_url] visual style that provides everything your product needs to build out a web based UI. Check out our interactive [Style Guide][guide_url] to see Coral UI in action.
 
-For help in using Coral UI on your project, see the [Using Coral UI FAQ][using_coralui_wiki] wiki page.
+For help in using Coral UI on your project, see the [Using Coral UI FAQ][help_url] wiki page.
 
 ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 
@@ -48,7 +48,7 @@ tests/* : the Mocha test runner and unit tests
 ```
 Note that the full archive is not linked from the Coral UI Style Guide.  It is recommended that, should you need the full CSS, JavaScript, source files, or tests, you are better off cloning the git repo and building Coral UI from source. 
 
-That said, you can get the full zip at this URL:
+If building yourself isn't an option, you can get the full zip at this URL:
 https://git.corp.adobe.com/pages/Coral/CoralUI/release/cui-latest-full.zip
 
 See the [Coral UI Wiki][wiki_url] or email the [Coral UI DL](coralui@adobe.com) for more information.
@@ -56,7 +56,5 @@ See the [Coral UI Wiki][wiki_url] or email the [Coral UI DL](coralui@adobe.com) 
 [cloudui_url]: http://blogs.corp.adobe.com/xdcloudui
 [guide_url]: https://git.corp.adobe.com/pages/Coral/CoralUI/
 [wiki_url]: https://git.corp.adobe.com/Coral/CoralUI/wiki/Home
-<<<<<<< HEAD
 [help_url]: https://git.corp.adobe.com/Coral/CoralUI/wiki/Using-CoralUI-FAQ
-=======
->>>>>>> d966ec8f2d89d6db9b0eb37e44825386c9eb23a4
+
