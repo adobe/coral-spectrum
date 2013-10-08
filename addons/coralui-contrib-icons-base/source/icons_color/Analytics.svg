@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1152px"
+	 height="1152px" viewBox="0 0 1152 1152" enable-background="new 0 0 1152 1152" xml:space="preserve">
+<g id="Bkg">
+	
+		<radialGradient id="SVGID_1_" cx="-65.0778" cy="936.0193" r="0.9889" gradientTransform="matrix(1678.5994 0 0 -1703.6219 109853.9141 1594544.25)" gradientUnits="userSpaceOnUse">
+		<stop  offset="0" style="stop-color:#FEFFFF"/>
+		<stop  offset="0.22" style="stop-color:#FFFFFF"/>
+		<stop  offset="1" style="stop-color:#DAD9D9"/>
+	</radialGradient>
+	<rect fill="url(#SVGID_1_)" width="1152" height="1104"/>
+</g>
+<g id="Analytics">
+	<path fill-rule="evenodd" clip-rule="evenodd" fill="#75C358" d="M576,144c-238.611,0-432,193.423-432,432
+		c0,238.582,193.389,432,432,432c238.611,0,432-193.418,432-432C1008,337.423,814.611,144,576,144 M576,175.767
+		c220.693,0,400.257,179.565,400.257,400.234c0,220.708-179.565,400.238-400.257,400.238c-220.693,0-400.253-179.53-400.253-400.238
+		C175.747,355.332,355.307,175.767,576,175.767"/>
+	<path fill="#1B3120" d="M470.457,585.822h-44.181v291.065c13.549,6.814,29.7,12.759,44.181,17.668V585.822z M553.912,566.186
+		v343.538c6.234,2.253,15.267,4.708,21.551,4.708c7.855,0,15.414,0.987,22.484-0.633l0.147-347.613H553.912z M809.184,810.707
+		c15.812-16.691,32.007-36.911,44.182-56.607V531.822h-44.182V810.707z M321.663,603.883L424.41,485.775l97.592,36.229
+		l208.101-148.942l104.902,99.016l52.724-42.12l-7.899-16.838l-45.119,35.64L732.21,353.229L520.776,504.233l-98.182-38.095
+		L313.121,589.553l-68.482,16.048l0.049,15.763L321.663,603.883z M342.821,674.186h-44.181v85.953
+		c12.321,18.851,28.472,36.376,44.181,52.331V674.186z M725.73,477.822h-44.182v415.211c14.531-5.209,30.633-11.394,44.182-18.507
+		V477.822z"/>
+</g>
+</svg>
