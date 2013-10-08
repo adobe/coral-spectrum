@@ -23,8 +23,14 @@
          *         <button data-dismiss="modal">Ok</button>
          *     </div>
          * </div>
-         *
          * @example
+
+         <caption>
+                <p><strong>*** DEPRECATION WARNING ***</strong></p>
+                <p>Use of template based contruction for CUI.Modal relies on Handlebars.js.  Native
+                 support of Handlebars.js in Coral UI has been deprecated.</p>
+        </caption>  
+         *
          * <caption>Instantiate with Class</caption>
          * var modal = new CUI.Modal({
          *     element: '#myModal',
@@ -142,6 +148,16 @@
             // Render template, if necessary
             // disabled for now
             if (this.$element.children().length === 0) {
+
+                // *** DEPRECATION WARNING ***
+
+                // Use of Handlebars.js is deprecated.  Coral UI will no longer natively 
+                // support Handlebars.js templates in an upcoming version.  Please fix this 
+                // implementation and remove this warning.
+
+                // See https://issues.adobe.com/browse/CUI-1025 for details  
+
+                //TODO: remove use of handlebars templates
                 this.$element.html(CUI.Templates['modal']($.extend({}, this.options, { buttons: '' })));
             }
 

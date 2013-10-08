@@ -13,6 +13,13 @@
       </div>
 
       @example
+
+<caption>
+  <p><strong>*** DEPRECATION WARNING ***</strong></p>
+  <p>Use of template based construction for CUI.Alert relies on Handlebars.js.  Native
+   support of Handlebars.js in Coral UI has been deprecated.</p>
+</caption>
+
 <caption>Instantiate with Class</caption>
 var alert = new CUI.Alert({
   element: '#myAlert',
@@ -58,8 +65,8 @@ alert.hide();
       @constructs
 
       @param {Object} options                               Component options
-      @param {String} [options.heading=Type, capitalized]   Title of the alert (HTML)
-      @param {String} options.content                       Content of the alert (HTML)
+      @param {String} [options.heading=Type, capitalized]   Title of the alert
+      @param {String} options.content                       Content of the alert
       @param {Boolean} options.closable                     Array of button descriptors
       @param {String} [options.size=small]                  Size of the alert. Either large or small. 
       @param {String} [options.type=error]                  Type of alert to display. One of error, notice, success, help, or info
@@ -101,6 +108,15 @@ alert.hide();
         // Set default heading
         this.options.heading = this._fixHeading(this.options.heading);
 
+        // *** DEPRECATION WARNING ***
+
+        // Use of Handlebars.js is deprecated.  Coral UI will no longer natively
+        // support Handlebars.js templates in an upcoming version.  Please fix this
+        // implementation and remove this warning.
+
+        // See https://issues.adobe.com/browse/CUI-1025 for details
+
+        //TODO: remove use of handlebars templates
         this.$element.html(CUI.Templates['alert'](this.options));
 
         this._setClosable();
