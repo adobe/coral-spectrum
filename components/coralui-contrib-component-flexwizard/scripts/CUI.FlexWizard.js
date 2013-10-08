@@ -31,22 +31,20 @@
 
     function buildNav(wizard) {
         var sections = wizard.children(".step");
-        var nav;
+        var nav = wizard.children(".toolbar");
 
-        if (wizard.children(".toolbar").length === 0) {
+        if (nav.length === 0) {
             wizard.prepend(function() {
                 nav = $('<nav class="toolbar"><ol class="center"></ol></nav>');
                 var ol = nav.children("ol");
 
                 sections.map(function() {
                     //http://bugs.jquery.com/ticket/13567
-                    return $("<li />").text(this.title).get(0);
+                    return $("<li />").text($(this).data("stepTitle") || this.title).get(0);
                 }).appendTo(ol);
 
                 return nav;
             });
-        } else {
-            nav = wizard.children("nav");
         }
 
         nav.find("> ol > li").first().addClass("active").append("<div class='lead-fill' />");
@@ -58,6 +56,14 @@
         }).append(function() {
             return cloneRight(buttons);
         });
+    }
+
+    function insertAfter(wizard, step, refStep) {
+        var navStep = $("<li />").text(step.data("stepTitle") || step.attr("title"));
+
+        var index = wizard.children(".step").index(refStep);
+        wizard.find("> .toolbar > ol > li").eq(index).after(navStep);
+        refStep.after(step);
     }
 
     function showNav(to) {
@@ -110,11 +116,42 @@
         showStep(wizard, to, from);
     }
 
-    CUI.FlexWizard = new Class({
+    CUI.FlexWizard = new Class(/** @lends CUI.FlexWizard# */{
         toString: "FlexWizard",
 
         extend: CUI.Widget,
 
+        /**
+            @extends CUI.Widget
+            @classdesc Wizard component
+
+            @example
+            <caption>Instantiate FlexWizard with data API</caption>
+&lt;form class="flexwizard" data-init="flexwizard" action="test" method="post">
+    &lt;div class="step" data-step-title="Step1">
+        &lt;a class="flexwizard-control button" href="cancel.html" data-action="cancel">Cancel&lt;/a>
+        &lt;button class="flexwizard-control" type="button" data-action="next">Next&lt;/button>
+
+        &lt;h2>Simple Step&lt;/h2>
+        &lt;p>Content.&lt;/p>
+    &lt;/div>
+
+    &lt;div class="step" title="Step2">
+        &lt;button class="flexwizard-control" type="button" data-action="prev">Back&lt;/button>
+        &lt;button class="flexwizard-control" type="button" data-action="next">Next&lt;/button>
+
+        &lt;h2>Custom Nav Buttons&lt;/h2>
+        &lt;p>Word on a future state of a page or site section without impacting the production state.&lt;/p>
+    &lt;/div>
+&lt;/form>
+
+            @example
+            <caption>Instantiate Flexwizard with jQuery plugin</caption>
+$("#flexwizard").flexWizard();
+      
+            @desc Creates a new wizard
+            @constructs
+         */
         construct: function(options) {
             var wizard = this.$element;
 
@@ -125,6 +162,49 @@
             });
 
             showStep(wizard, wizard.children(".step").first());
+        },
+
+        /**
+            Add the given step to the wizard.
+
+            @param {HTMLElement|jQuery|String} step The step to be added
+            @param {Number} [index] The index the step is added. If not passed, the step is added as the last one
+         */
+        add: function(step, index) {
+            var wizard = this.$element;
+
+            if (index === undefined) {
+                this.addAfter(step, wizard.children(".step").last());
+                return;
+            }
+
+            if (!step.jquery) {
+                step = $(step);
+            }
+
+            step.toggleClass("step", true);
+            insertAfter(wizard, step, wizard.children(".step").eq(index));
+        },
+
+        /**
+            Add the given step after the given reference step.
+
+            @param {HTMLElement|jQuery|String} step The step to be added
+            @param {HTMLElement|jQuery} refStep The reference step
+         */
+        addAfter: function(step, refStep) {
+            var wizard = this.$element;
+
+            if (!step.jquery) {
+                step = $(step);
+            }
+
+            if (!refStep.jquery) {
+                refStep = $(refStep);
+            }
+
+            step.toggleClass("step", true);
+            insertAfter(wizard, step, refStep);
         }
     });
 
