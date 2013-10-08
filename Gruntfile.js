@@ -561,8 +561,7 @@ module.exports = function (grunt) {
                 },
                 files: {
                     '<%= dirs.build %>/js/CUI.Templates.js': [
-                    '<%= dirs.legacy %>/components/templates/*.hbs',
-                    '<%= dirs.components %>/**/templates/*.hbs'
+                    '<%= dirs.legacy %>/components/templates/*.hbs'
                     ]
                 }
             }

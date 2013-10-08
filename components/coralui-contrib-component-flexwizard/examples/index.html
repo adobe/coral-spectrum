@@ -8,10 +8,24 @@
  
         <script src="../../js/libs/jquery.js"></script>
         <script src="../../js/libs/toe.js"></script>
+
+<!-- 
+    *** DEPRECATION WARNING ***
+
+    Use of Handlebars.js is deprecated.  Coral UI will no longer natively 
+    support Handlebars.js templates in an upcoming version.  Please fix this 
+    implementation and remove this warning.
+
+    See https://issues.adobe.com/browse/CUI-1025 for details                      
+                                                                            
+-->
         <script src="../../js/libs/handlebars.js"></script>
+        <!-- TODO: remove handlebars.js -->
+
         <script src="../../js/CUI.js"></script>
 
         <script id="step-template" type="text/x-handlebars-template">
+
             <div class="step" data-step-title="{{title}}">
                 <button class="flexwizard-control" type="button" data-action="prev">Back</button>
                 <button class="flexwizard-control" type="button" data-action="next">Next</button>
