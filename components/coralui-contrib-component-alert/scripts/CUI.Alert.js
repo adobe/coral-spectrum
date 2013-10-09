@@ -6,6 +6,10 @@
     /**
       @extends CUI.Widget
       @classdesc An optionally closable alert message.
+      <style> div.alert {
+          width: 400px;
+      }
+      </style>
 
       <div class="alert error">
         <button class="close" data-dismiss="alert">&times;</button>
@@ -14,52 +18,54 @@
 
       @example
 
-<caption>
-  <p><strong>*** DEPRECATION WARNING ***</strong></p>
-  <p>Use of template based construction for CUI.Alert relies on Handlebars.js.  Native
-   support of Handlebars.js in Coral UI has been deprecated.</p>
-</caption>
+      <caption>The constructors below act on the expected HTML markup:</caption>
 
-<caption>Instantiate with Class</caption>
-var alert = new CUI.Alert({
-  element: '#myAlert',
-  heading: 'ERROR',
-  content: 'An error has occurred.',
-  closable: true
-});
+      &lt;div id=&quot;myAlert&quot;&gt;
+        &lt;button class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;&amp;times;&lt;/button&gt;
+        &lt;strong&gt;ERROR&lt;/strong&gt;&lt;div&gt;Uh oh, something went wrong with the whozit!&lt;/div&gt;
+      &lt;/div&gt;
+       
+      @example
+      <caption>Instantiate with Class</caption>
+      var alert = new CUI.Alert({
+        element: '#myAlert',
+        heading: 'ERROR',
+        content: 'An error has occurred.',
+        closable: true
+      });
 
-// Hide the alert, change the content, then show it again
-alert.hide().set({ content: 'Another error has occurred.'}).show();
+      // Hide the alert, change the content, then show it again
+      alert.hide().set({ content: 'Another error has occurred.'}).show();
 
-// jQuery style works as well
-$('#myAlert').alert('hide');
+      // jQuery style works as well
+      $('#myAlert').alert('hide');
 
       @example
-<caption>Instantiate with jQuery</caption>
-$('#myAlert').alert({
-  heading: 'ERROR',
-  content: 'An error has occurred.',
-  closable: true
-});
+      <caption>Instantiate with jQuery</caption>
+      $('#myAlert').alert({
+        heading: 'ERROR',
+        content: 'An error has occurred.',
+        closable: true
+      });
 
-// Hide the alert, change the content, then show it again
-$('#myAlert').alert('hide').alert({ heading: 'Another error has occurred.'}).alert('show');
+      // Hide the alert, change the content, then show it again
+      $('#myAlert').alert('hide').alert({ heading: 'Another error has occurred.'}).alert('show');
 
-// A reference to the element's alert instance is stored as data-alert
-var alert = $('#myAlert').data('alert');
-alert.hide();
-
-      @example
-<caption>Data API: Hide alert</caption>
-<description>When an element within the alert has <code><span class="atn">data-dismiss</span>=<span class="atv">"alert"</span></code>, it will hide the alert.</description>
-&lt;a data-dismiss=&quot;alert&quot;&gt;Dismiss&lt;/a&gt;
+      // A reference to the element's alert instance is stored as data-alert
+      var alert = $('#myAlert').data('alert');
+      alert.hide();
 
       @example
-<caption>Markup</caption>
-&lt;div class=&quot;alert error&quot;&gt;
-  &lt;button class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;&amp;times;&lt;/button&gt;
-  &lt;strong&gt;ERROR&lt;/strong&gt;&lt;div&gt;Uh oh, something went wrong with the whozit!&lt;/div&gt;
-&lt;/div&gt;
+      <caption>Data API: Hide alert</caption>
+      <description>When an element within the alert has <code><span class="atn">data-dismiss</span>=<span class="atv">"alert"</span></code>, it will hide the alert.</description>
+      &lt;a data-dismiss=&quot;alert&quot;&gt;Dismiss&lt;/a&gt;
+
+      @example
+      <caption>Markup</caption>
+      &lt;div class=&quot;alert error&quot;&gt;
+        &lt;button class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;&amp;times;&lt;/button&gt;
+        &lt;strong&gt;ERROR&lt;/strong&gt;&lt;div&gt;Uh oh, something went wrong with the whozit!&lt;/div&gt;
+      &lt;/div&gt;
 
       @desc Creates a new alert
       @constructs
@@ -116,7 +122,9 @@ alert.hide();
 
         // See https://issues.adobe.com/browse/CUI-1025 for details
 
-        //TODO: remove use of handlebars templates
+
+        // TODO: remove use of handlebars templates
+        // see https://issues.adobe.com/browse/CUI-1098
         this.$element.html(CUI.Templates['alert'](this.options));
 
         this._setClosable();

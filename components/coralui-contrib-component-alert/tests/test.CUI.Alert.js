@@ -51,6 +51,13 @@ describe('CUI.Alert', function() {
     var html, el;
 
     beforeEach(function() {
+      /*
+        *** DEPRECATION WARNING ***
+        Use of Handlebars.js is deprecated.
+        See https://issues.adobe.com/browse/CUI-1025 for details 
+        TODO: remove use of handlebars templates
+        see https://issues.adobe.com/browse/CUI-1098 
+      */
       html = '<div id="myAlert"></div>';
       el = $(html).appendTo('body');
     });
