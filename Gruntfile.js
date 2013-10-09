@@ -6,12 +6,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-handlebars');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
-
     grunt.loadNpmTasks('grunt-gh-pages');
     grunt.loadNpmTasks('grunt-mocha');
     grunt.loadNpmTasks('grunt-jsdoc');
@@ -19,6 +17,15 @@ module.exports = function (grunt) {
 
     grunt.loadTasks('tasks');
 
+    /*
+        *** DEPRECATION WARNING ***
+        Use of Handlebars.js is deprecated.
+        See https://issues.adobe.com/browse/CUI-1025 for details 
+        TODO: remove use of handlebars templates
+        see https://issues.adobe.com/browse/CUI-1098 
+    */
+    grunt.loadNpmTasks('grunt-contrib-handlebars');
+    
     /**
     JavaScript file include order
     Add new components to this array _after_ the components they inherit from
@@ -548,7 +555,10 @@ module.exports = function (grunt) {
                 }
             }
         }, // uglify
-
+      /*
+        TODO: remove use of handlebars templates
+        see https://issues.adobe.com/browse/CUI-1098 
+      */
         handlebars: {
             components: {
                 options: {
@@ -742,6 +752,10 @@ module.exports = function (grunt) {
         'guide'
     ]);
 
+      /*
+        TODO: remove use of handlebars templates
+        see https://issues.adobe.com/browse/CUI-1098 
+      */
     grunt.task.registerTask('full', [ // for a standalone upload e.g. pages
         'retro',
         'handlebars:components',
