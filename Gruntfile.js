@@ -11,7 +11,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
-
+    grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-gh-pages');
     grunt.loadNpmTasks('grunt-mocha');
     grunt.loadNpmTasks('grunt-jsdoc');
@@ -718,7 +718,16 @@ module.exports = function (grunt) {
                     stderr: true
                 }
             }
-        }
+        },
+        connect: {
+            server: {
+                options: {
+                    port: 9001,
+                    base: 'build',
+                    keepalive : true
+                }
+            }
+        },
 
     }); // end init config
 
@@ -808,9 +817,13 @@ module.exports = function (grunt) {
         'shell:local-publish'
     ]);
 
+
+
     // Default task
     grunt.task.registerTask('default', [
         'retro'
     ]);
+
+
 
 };
