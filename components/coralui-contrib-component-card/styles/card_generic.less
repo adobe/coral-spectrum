@@ -103,6 +103,27 @@
     .info {
         padding-top: 9*@px;
     }
+
+    .flag {
+        .card-flag();
+
+        &.error {
+          .card-flag-color(@card-flag-red-background-color, @card-flag-red-border-color);
+        }
+        &.notice {
+          .card-flag-color(@card-flag-yellow-background-color, @card-flag-yellow-border-color);
+        }
+        &.success {
+          .card-flag-color(@card-flag-green-background-color, @card-flag-green-border-color);
+        }
+        &.info {
+          .card-flag-color(@card-flag-blue-background-color, @card-flag-blue-border-color);
+        }
+    }
+
+    .alert {
+        .card-alert-banner();
+    }
 }
 
 // List view style ////////////////////////////////////////////////////////////////
@@ -228,6 +249,11 @@
             border: 1px solid transparent;
         }
     }
+
+    .flag,
+    .alert {
+        display: none;
+    }
 }
 
 // Selected cards ////////////////////////////////////////////////////////////////
@@ -277,7 +303,7 @@
 .list [class*=" card-"].selected {
     > i.select {
         .icon-check;
-        
+
         &:before {
             border-color: mix(@checkbox-border-color, @card-list-checkbox-color, 75%);
             color: @card-list-checkbox-color;
