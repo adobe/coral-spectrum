@@ -213,6 +213,13 @@ module.exports = function (grunt) {
                         src: ['js/source/components/**/*.js'],
                         dest: '<%= dirs.temp %>/js/components/'
                     },
+                    { // get external dependencies from the core js and copy into temp
+                        expand: true,
+                        flatten: true,
+                        cwd: '<%= dirs.core.build %>/',
+                        src: ['js/source/externals/**/*.js'],
+                        dest: '<%= dirs.build %>/js/libs'
+                    },
                     { // get build from the core js source (shared) and copy into temp
                         expand: true,
                         flatten: true,
