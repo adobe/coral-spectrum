@@ -339,6 +339,15 @@ module.exports = function (grunt) {
                             'sinon/pkg/sinon.js'
                         ],
                         dest: '<%= dirs.build %>/tests/libs'
+                    },
+                    {   // add on: jquery-raf-animation
+                        // this has to be removed through a proper build system
+                        expand: true,
+                        cwd: 'addons/coralui-contrib-jquery-raf-animation/scripts',
+                        src: [
+                            '**'
+                        ],
+                        dest: '<%= dirs.build %>/js'
                     }
                 ] // /retro files
             }, 
