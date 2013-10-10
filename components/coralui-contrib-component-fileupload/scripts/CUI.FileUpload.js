@@ -511,16 +511,19 @@
             // if no autostart is used we need to set fileNameParameter as an additional form input field
             // to be submitted with the form.
             if (self.options.fileNameParameter && !this.options.autoStart){
-                // check if there is already a form input field defined for the parameter
-                var fileNameInput = $("input[name=\"" + self.options.fileNameParameter +"\"" );
-                // if not 
-                if (fileNameInput.length === 0){
-                    // add a hidden field 
-                    fileNameInput = $("<input type='hidden' name='" + self.options.fileNameParameter + "'/>");
-                    fileNameInput.appendTo(this.$element);
+                if (!self.fileNameElement) {
+                    // check if there is already a form input field defined to store the parameter
+                    self.fileNameElement = $("input[name=\"" + self.options.fileNameParameter +"\"" );
+                    if (self.fileNameElement.length === 0) {
+                        // create and append
+                        self.fileNameElement = $("<input/>", {
+                            type: "hidden",
+                            name: self.options.fileNameParameter
+                        });                        
+                        self.fileNameElement.appendTo(self.$element);
+                    }                   
                 }
-                // set the value of the field
-                fileNameInput.val(fileName);
+                self.fileNameElement.val(fileName);
             }
             
             if (!self._getQueueItemByFileName(fileName)) {
