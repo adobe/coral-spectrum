@@ -411,6 +411,9 @@ module.exports = function (grunt) {
         },
 
         watch: {
+            options: {
+                livereload: true
+            },
             core_scripts: {
                 files: [
                     dirs.core.shared + '/scripts/**.js',
@@ -723,8 +726,7 @@ module.exports = function (grunt) {
             server: {
                 options: {
                     port: 9001,
-                    base: 'build',
-                    keepalive : true
+                    base: 'build'
                 }
             }
         },
@@ -815,6 +817,11 @@ module.exports = function (grunt) {
     grunt.task.registerTask('local-publish', [ // publish NPM package locally
         'publish-build',
         'shell:local-publish'
+    ]);
+
+    grunt.task.registerTask('dev', [ // task for developers to work
+        'connect',
+        'watch'
     ]);
 
 
