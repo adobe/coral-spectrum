@@ -34,6 +34,14 @@ describe('CUI.Modal', function() {
   });
   
   describe('modal from template', function() {
+
+    /*
+      *** DEPRECATION WARNING ***
+      Use of Handlebars.js is deprecated.
+      See https://issues.adobe.com/browse/CUI-1025 for details 
+      TODO: remove use of handlebars templates
+      see https://issues.adobe.com/browse/CUI-1098 
+    */
     var el = $('<div/>').modal(modalConfig);
   
     it('should have correct CSS classname', function() {

@@ -14,7 +14,17 @@
   <script src="../../js/libs/moment.js"></script>
   
   <script src="../../js/CUI.js"></script>
-  <script src="../../js/CUI.Templates.js"></script>
+  <!-- 
+    *** DEPRECATION WARNING ***
+
+    Use of Handlebars.js is deprecated.  Coral UI will no longer natively 
+    support Handlebars.js templates in an upcoming version.  Please fix this 
+    implementation and remove this warning.
+
+    See https://issues.adobe.com/browse/CUI-1025 for details                      
+                                                                            
+-->
+  <script src="../../js/CUI.Templates.js"></script> 
 
   <script>
     $(document).ready(function(){
@@ -96,8 +106,11 @@
     <section>
     <h3>JavaScript generated</h3>
     <div id="defaultAlert">THIS WILL GET CLOBBERED</div>
+    <!-- TODO: this example relies on deprecated handlebars templates -->
     <div id="cuiAlert">THIS WILL GET CLOBBERED</div>
+    <!-- TODO: this example relies on deprecated handlebars templates -->
     <div id="jqueryAlert"></div>
+    <!-- TODO: this example relies on deprecated handlebars templates -->
   </section>
   </div>
 

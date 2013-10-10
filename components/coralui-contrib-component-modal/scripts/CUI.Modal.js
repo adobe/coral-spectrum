@@ -6,142 +6,171 @@
         extend: CUI.Widget,
 
         /**
-         * @extends CUI.Widget
-         * @classdesc A dialog that prevents interaction with page elements while displayed. Modal will use existing markup if it is present, or create markup if <code>options.element</code> has no children.
+          @extends CUI.Widget
+          @classdesc A dialog that prevents interaction with page elements while displayed. Modal will use existing markup if it is present, or create markup if <code>options.element</code> has no children.
+         
+          <h2 class="line">Example</h2>
+              <a href="#myModal" class="button" data-toggle="modal">Show Modal</a>
+              <div id="myModal" class="modal">
+                  <div class="modal-header">
+                  <h2>A Sample Modal</h2>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                  <p>Some sample content.</p>
+              </div>
+              <div class="modal-footer">
+                  <button data-dismiss="modal">Ok</button>
+              </div>
+          </div>
+          @example
+
+
+          <caption>The constructors below act on the expected HTML markup:</caption>
+              &lt;div id=&quot;myModal&quot; class=&quot;modal&quot;&gt;
+                  &lt;div class=&quot;modal-header&quot;&gt;
+                  &lt;h2&gt;A Sample Modal&lt;/h2&gt;
+                  &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot;&gt;&amp;times;&lt;/button&gt;
+              &lt;/div&gt;
+              &lt;div class=&quot;modal-body&quot;&gt;
+                  &lt;p&gt;Some sample content.&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div class=&quot;modal-footer&quot;&gt;
+                  &lt;button data-dismiss=&quot;modal&quot;&gt;Ok&lt;/button&gt;
+              &lt;/div&gt;
+          &lt;/div&gt;
+
+ 
+          @example
+         
+          <caption>Instantiate with Class</caption>
+          var modal = new CUI.Modal({
+              element: '#myModal',
+              header: 'My Modal',
+              content: '&lt;p&gt;Content here.&lt;/p&gt;',
+              buttons: [{
+                  label: 'Save',
+                  className: 'primary',
+                  click: function(evt) {
+                      console.log('Modal: This would usually trigger a save...');
+                      this.hide(); // could also use evt.dialog.hide();
+                  }
+              }]
+          });
          *
-         * <h2 class="line">Example</h2>
-         *     <a href="#myModal" class="button" data-toggle="modal">Show Modal</a>
-         *     <div id="myModal" class="modal">
-         *         <div class="modal-header">
-         *         <h2>A Sample Modal</h2>
-         *         <button type="button" class="close" data-dismiss="modal">&times;</button>
-         *     </div>
-         *     <div class="modal-body">
-         *         <p>Some sample content.</p>
-         *     </div>
-         *     <div class="modal-footer">
-         *         <button data-dismiss="modal">Ok</button>
-         *     </div>
-         * </div>
+          // Hide the modal, change the heading, then show it again
+          modal.hide().set({ header: 'My Modal Again'}).show();
          *
-         * @example
-         * <caption>Instantiate with Class</caption>
-         * var modal = new CUI.Modal({
-         *     element: '#myModal',
-         *     header: 'My Modal',
-         *     content: '&lt;p&gt;Content here.&lt;/p&gt;',
-         *     buttons: [{
-         *         label: 'Save',
-         *         className: 'primary',
-         *         click: function(evt) {
-         *             console.log('Modal: This would usually trigger a save...');
-         *             this.hide(); // could also use evt.dialog.hide();
-         *         }
-         *     }]
-         * });
+          @example
+          <caption>Instantiate with jQuery</caption>
+          $('#myModal').modal({
+              header: 'My Modal',
+              content: '&lt;p&gt;Content here.&lt;/p&gt;',
+              buttons: [{
+                  label: 'Close',
+                  click: 'hide', // Specifying 'hide' causes the dialog to close when clicked
+              }]
+          });
          *
-         * // Hide the modal, change the heading, then show it again
-         * modal.hide().set({ header: 'My Modal Again'}).show();
+          // jQuery style works as well
+          $('#myModal').modal('hide');
          *
-         * @example
-         * <caption>Instantiate with jQuery</caption>
-         * $('#myModal').modal({
-         *     header: 'My Modal',
-         *     content: '&lt;p&gt;Content here.&lt;/p&gt;',
-         *     buttons: [{
-         *         label: 'Close',
-         *         click: 'hide', // Specifying 'hide' causes the dialog to close when clicked
-         *     }]
-         * });
+          // A reference to the element's modal instance is stored as data-modal
+          var modal = $('#myModal').data('modal');
+          modal.hide();
          *
-         * // jQuery style works as well
-         * $('#myModal').modal('hide');
+          @example 
+          <caption>Data API: Instantiate and show modal</caption>
+          <description>When using a <code class="prettify">&lt;button&gt;</code>, specify the jQuery selector for the element using <code>data-target</code>. Markup should exist already if no options are specified.</description>
+          &lt;button data-target=&quot;#myModal&quot; data-toggle=&quot;modal&quot;&gt;Show Modal&lt;/button&gt;
          *
-         * // A reference to the element's modal instance is stored as data-modal
-         * var modal = $('#myModal').data('modal');
-         * modal.hide();
+          @example
+          <caption>Data API: Instantiate, set options, and show</caption>
+          <description>When using an <code class="prettify">&lt;a&gt;</code>, specify the jQuery selector for the element using <code>href</code>. Markup is optional since options are specified as data attributes.</description>
+          &lt;a 
+              href=&quot;#modal&quot;
+              data-toggle=&quot;modal&quot;
+              data-heading=&quot;Test Modal&quot;
+              data-content=&quot;&amp;lt;p&amp;gt;Test content&amp;lt;/p&amp;gt;&quot;
+              data-buttons=&#x27;[{ &quot;label&quot;: &quot;Close&quot;, &quot;click&quot;: &quot;close&quot; }]&#x27;
+          &gt;Show Modal&lt;/a&gt;
          *
-         * @example 
-         * <caption>Data API: Instantiate and show modal</caption>
-         * <description>When using a <code class="prettify">&lt;button&gt;</code>, specify the jQuery selector for the element using <code>data-target</code>. Markup should exist already if no options are specified.</description>
-         * &lt;button data-target=&quot;#myModal&quot; data-toggle=&quot;modal&quot;&gt;Show Modal&lt;/button&gt;
-         *
-         * @example
-         * <caption>Data API: Instantiate, set options, and show</caption>
-         * <description>When using an <code class="prettify">&lt;a&gt;</code>, specify the jQuery selector for the element using <code>href</code>. Markup is optional since options are specified as data attributes.</description>
-         * &lt;a 
-         *     href=&quot;#modal&quot;
-         *     data-toggle=&quot;modal&quot;
-         *     data-heading=&quot;Test Modal&quot;
-         *     data-content=&quot;&amp;lt;p&amp;gt;Test content&amp;lt;/p&amp;gt;&quot;
-         *     data-buttons=&#x27;[{ &quot;label&quot;: &quot;Close&quot;, &quot;click&quot;: &quot;close&quot; }]&#x27;
-         * &gt;Show Modal&lt;/a&gt;
-         *
-         * @example
-         * <caption>Data API: Instantiate, load content asynchronously, and show</caption>
-         * <description>When loading content asynchronously, regardless of what tag is used, specify the jQuery selector for the element using <code>data-target</code> and the URL of the content to load with <code>href</code>.</description>
-         * &lt;button
-         *     data-target="#myModal"
-         *     data-toggle=&quot;modal&quot;
-         *     href=&quot;content.html&quot;
-         * &gt;Show Modal&lt;/button&gt;
-         *
-         * @example
-         * <caption>Markup</caption>
-         * &lt;h2 class=&quot;line&quot;&gt;Example&lt;/h2&gt;
-         *     &lt;a href=&quot;#myModal&quot; class=&quot;button&quot; data-toggle=&quot;modal&quot;&gt;Show Modal&lt;/a&gt;
-         *     &lt;div id=&quot;myModal&quot; class=&quot;modal&quot;&gt;
-         *         &lt;div class=&quot;modal-header&quot;&gt;
-         *         &lt;h2&gt;A Sample Modal&lt;/h2&gt;
-         *         &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot;&gt;&amp;times;&lt;/button&gt;
-         *     &lt;/div&gt;
-         *     &lt;div class=&quot;modal-body&quot;&gt;
-         *         &lt;p&gt;Some sample content.&lt;/p&gt;
-         *     &lt;/div&gt;
-         *     &lt;div class=&quot;modal-footer&quot;&gt;
-         *         &lt;button data-dismiss=&quot;modal&quot;&gt;Ok&lt;/button&gt;
-         *     &lt;/div&gt;
-         * &lt;/div&gt;
-         *
-         * @example
-         * <caption>Markup with &lt;form&gt; tag</caption>
-         * <description>Modals can be created from the <code class="prettify">&lt;form&gt;</code> tag as well. Make sure to set <code class="prettify">type="button"</code> on buttons that should not perform a submit.</description>
-         * &lt;form id=&quot;myModal&quot; class=&quot;modal&quot; action="/users" method="post"&gt;
-         *     &lt;div class=&quot;modal-header&quot;&gt;
-         *         &lt;h2&gt;Create User&lt;/h2&gt;
-         *             &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot;&gt;&amp;times;&lt;/button&gt;
-         *     &lt;/div&gt;
-         *     &lt;div class=&quot;modal-body&quot;&gt;
-         *         &lt;label for=&quot;name&quot;&gt;Name&lt;/label&gt;&lt;input id=&quot;name&quot; name=&quot;name&quot; type=&quot;text&quot;&gt;
-         *     &lt;/div&gt;
-         *     &lt;div class=&quot;modal-footer&quot;&gt;
-         *         &lt;button type="button" data-dismiss=&quot;modal&quot;&gt;Cancel&lt;/button&gt;
-         *         &lt;button type="submit"&gt;Submit&lt;/button&gt;
-         *     &lt;/div&gt;
-         * &lt;/form&gt;
-         * 
-         * 
-         * @desc Creates a new modal dialog
-         * @constructs
-         * @param {Object} options Component options
-         * @param {Mixed} options.element jQuery selector or DOM element to use for dialog
-         * @param {String} options.header Title of the modal dialog (HTML)
-         * @param {String} options.content Title of the modal dialog (HTML)
-         * @param {String} [options.type=default] Type of dialog to display. One of default, error, notice, success, help, or info
-         * @param {Array} [options.buttons] Array of button descriptors
-         * @param {String} [options.buttons.label] Button label (HTML)
-         * @param {String} [options.buttons.className] CSS class name to apply to the button
-         * @param {Mixed} [options.buttons.click] Click handler function or string 'hide' to hide the dialog
-         * @param {String} [options.remote] URL to asynchronously load content from the first time the modal is shown
-         * @param {Mixed} [options.backdrop=static] False to not display transparent underlay, True to display and close when clicked, 'static' to display and not close when clicked
-         * @param {Mixed} [options.visible=true] True to display immediately, False to defer display until show() called
-         * 
-         */
+          @example
+          <caption>Data API: Instantiate, load content asynchronously, and show</caption>
+          <description>When loading content asynchronously, regardless of what tag is used, specify the jQuery selector for the element using <code>data-target</code> and the URL of the content to load with <code>href</code>.</description>
+          &lt;button
+              data-target="#myModal"
+              data-toggle=&quot;modal&quot;
+              href=&quot;content.html&quot;
+          &gt;Show Modal&lt;/button&gt;
+         
+          @example
+          <caption>Markup</caption>
+          &lt;h2 class=&quot;line&quot;&gt;Example&lt;/h2&gt;
+              &lt;a href=&quot;#myModal&quot; class=&quot;button&quot; data-toggle=&quot;modal&quot;&gt;Show Modal&lt;/a&gt;
+              &lt;div id=&quot;myModal&quot; class=&quot;modal&quot;&gt;
+                  &lt;div class=&quot;modal-header&quot;&gt;
+                  &lt;h2&gt;A Sample Modal&lt;/h2&gt;
+                  &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot;&gt;&amp;times;&lt;/button&gt;
+              &lt;/div&gt;
+              &lt;div class=&quot;modal-body&quot;&gt;
+                  &lt;p&gt;Some sample content.&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div class=&quot;modal-footer&quot;&gt;
+                  &lt;button data-dismiss=&quot;modal&quot;&gt;Ok&lt;/button&gt;
+              &lt;/div&gt;
+          &lt;/div&gt;
+         
+          @example
+          <caption>Markup with &lt;form&gt; tag</caption>
+          <description>Modals can be created from the <code class="prettify">&lt;form&gt;</code> tag as well. Make sure to set <code class="prettify">type="button"</code> on buttons that should not perform a submit.</description>
+          &lt;form id=&quot;myModal&quot; class=&quot;modal&quot; action="/users" method="post"&gt;
+              &lt;div class=&quot;modal-header&quot;&gt;
+                  &lt;h2&gt;Create User&lt;/h2&gt;
+                      &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot;&gt;&amp;times;&lt;/button&gt;
+              &lt;/div&gt;
+              &lt;div class=&quot;modal-body&quot;&gt;
+                  &lt;label for=&quot;name&quot;&gt;Name&lt;/label&gt;&lt;input id=&quot;name&quot; name=&quot;name&quot; type=&quot;text&quot;&gt;
+              &lt;/div&gt;
+              &lt;div class=&quot;modal-footer&quot;&gt;
+                  &lt;button type="button" data-dismiss=&quot;modal&quot;&gt;Cancel&lt;/button&gt;
+                  &lt;button type="submit"&gt;Submit&lt;/button&gt;
+              &lt;/div&gt;
+          &lt;/form&gt;
+          
+          
+          @desc Creates a new modal dialog
+          @constructs
+          @param {Object} options Component options
+          @param {Mixed} options.element jQuery selector or DOM element to use for dialog
+          @param {String} options.header Title of the modal dialog (HTML)
+          @param {String} options.content Title of the modal dialog (HTML)
+          @param {String} [options.type=default] Type of dialog to display. One of default, error, notice, success, help, or info
+          @param {Array} [options.buttons] Array of button descriptors
+          @param {String} [options.buttons.label] Button label (HTML)
+          @param {String} [options.buttons.className] CSS class name to apply to the button
+          @param {Mixed} [options.buttons.click] Click handler function or string 'hide' to hide the dialog
+          @param {String} [options.remote] URL to asynchronously load content from the first time the modal is shown
+          @param {Mixed} [options.backdrop=static] False to not display transparent underlay, True to display and close when clicked, 'static' to display and not close when clicked
+          @param {Mixed} [options.visible=true] True to display immediately, False to defer display until show() called
+          
+        */
         construct: function (options) {
             // @deprecated, rather the template engine should be agonistic
             // Render template, if necessary
             // disabled for now
             if (this.$element.children().length === 0) {
+
+                // *** DEPRECATION WARNING ***
+
+                // Use of Handlebars.js is deprecated.  Coral UI will no longer natively 
+                // support Handlebars.js templates in an upcoming version.  Please fix this 
+                // implementation and remove this warning.
+
+                // See https://issues.adobe.com/browse/CUI-1025 for details  
+
+                // TODO: remove use of handlebars templates
+                // see https://issues.adobe.com/browse/CUI-1098
                 this.$element.html(CUI.Templates['modal']($.extend({}, this.options, { buttons: '' })));
             }
 
@@ -219,9 +248,9 @@
         },
 
         /**
-         * adds some accessibility attributes and features
-         * http://www.w3.org/WAI/PF/aria-practices/#dialog_modal
-         * @private
+          adds some accessibility attributes and features
+          http://www.w3.org/WAI/PF/aria-practices/#dialog_modal
+          @private
          */
         _makeAccessible: function () {
             var self = this,
@@ -276,8 +305,8 @@
         },
 
         /**
-         * sets the type of the modal
-         * @private
+          sets the type of the modal
+          @private
          */
         _setType: function () {
             if (!this.options.type) {
@@ -294,8 +323,8 @@
         },
 
         /**
-         * sets the header of the modal
-         * @private
+          sets the header of the modal
+          @private
          */
         _setHeader: function () {
             if (!this.options.header) {
@@ -306,8 +335,8 @@
         },
 
         /**
-         * @deprecated rather use #_setHeader
-         * @private
+          @deprecated rather use #_setHeader
+          @private
          */
         _setHeading: function () {
             if (!this.options.heading) {
@@ -319,8 +348,8 @@
         },
 
         /**
-         * sets the content of the modal body
-         * @private
+          sets the content of the modal body
+          @private
          */
         _setContent: function () {
             if (!this.options.content) {
@@ -331,8 +360,8 @@
         },
 
         /**
-         * sets the buttons into the footer from the config
-         * @private
+          sets the buttons into the footer from the config
+          @private
          */
         _setFooter: function () {
             if (!$.isArray(this.options.buttons)) {
@@ -377,8 +406,8 @@
         },
 
         /**
-         * sets the fullscreen css class
-         * @private
+          sets the fullscreen css class
+          @private
          */
         _setFullscreen: function () {
             if (this.options.fullscreen) {
@@ -389,8 +418,8 @@
         },
 
         /**
-         * @private
-         * @event beforeshow
+          @private
+          @event beforeshow
          */
         _show: function () {
             var body = $('body'),
@@ -468,8 +497,8 @@
         },
 
         /**
-         * @private
-         * @event beforehide
+          @private
+          @event beforehide
          */
         _hide: function () {
             $('body').removeClass('modal-open')
@@ -506,8 +535,8 @@
         },
 
         /**
-         * centers the modal in the middle of the screen
-         * @returns {CUI.Modal} this, chainable
+          centers the modal in the middle of the screen
+          @returns {CUI.Modal} this, chainable
          */
         center: function () {
             var width = this.$element.outerWidth(),
@@ -520,9 +549,9 @@
         },
 
         /**
-         * toggles back drop
-         * @private
-         * @param  {Boolean} [show] true/false to force state
+          toggles back drop
+          @private
+          @param  {Boolean} [show] true/false to force state
          */
         _toggleBackdrop: function (show) {
             if (!this.options.backdrop) {
@@ -542,8 +571,8 @@
         },
 
         /**
-         * handler to close the dialog on escape key
-         * @private
+          handler to close the dialog on escape key
+          @private
          */
         _escapeKeyHandler: function (event) {
             if (event.which === 27) {
