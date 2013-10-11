@@ -270,28 +270,28 @@
         height: 0;
         border-width: (@triangle-size + @px)/2;
         border-style: solid;
-        border-color: @alert-blue-border-color;
+        border-color: @alert-info-border-color;
         border-bottom-color: transparent !important;
     }
 
     &.error {
         &:before,
         &:after {
-            border-color: @alert-red-border-color;
+            border-color: @alert-error-border-color;
         }
     }
 
     &.notice {
       &:before,
       &:after {
-          border-color: @alert-yellow-border-color;
+          border-color: @alert-notice-border-color;
       }
     }
 
     &.success {
       &:before,
       &:after {
-          border-color: @alert-green-border-color;
+          border-color: @alert-success-border-color;
       }
     }
 
@@ -299,7 +299,7 @@
     &.help {
       &:before,
       &:after {
-          border-color: @alert-blue-border-color;
+          border-color: @alert-info-border-color;
       }
     }
 
