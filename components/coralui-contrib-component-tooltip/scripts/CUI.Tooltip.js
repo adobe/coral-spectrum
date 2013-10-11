@@ -24,7 +24,7 @@ Currently there are the following data options:
   data-interactive            Set to "true" for interactive show/hide on mouseover/touch.
   data-target                 Give an CSS-Selector for defining the target element this tooltips targets at.
   arrow-* CSS classes         One of arrow-left, arrow-right, arrow-top, arrow-bottom to define the position of the tooltip
-  type CSS classes            One of success, error, info, notice to define the type of the tooltip
+  type CSS classes            One of success, error, info, notice, inspect to define the type of the tooltip
 
       @example
       <caption>Instantiate by special "quicktip" data option</caption>
@@ -37,7 +37,7 @@ The quicktip data options are applied to the target element of the tooltip (see 
   data-init="quicktip"          Creates a new tooltip on mouseover/touch (="quicktip").
   data-quicktip-content         Defines a content for the dynamic tooltip. If this is not given, the html() of the element itself is used.
   data-quicktip-arrow           Defines the direction of the arrow of the new tooltip (and therefore the position)
-  data-quicktip-type            One of "info", "success", "error", "notice"
+  data-quicktip-type            One of "info", "success", "error", "notice", "inspect"
 
       @example
       <caption>Instantiate by Class</caption>
@@ -57,7 +57,7 @@ The quicktip data options are applied to the target element of the tooltip (see 
       @param {Mixed} [options.element]              jQuery selector or DOM element to use for tooltip.
       @param {Mixed} options.target                 jQuery selector or DOM element the tooltip is attached to
       @param {String} [options.content]             Content of the tooltip (HTML)
-      @param {String} [options.type=info]           Type of dialog to display. One of info, error, notice or success
+      @param {String} [options.type=info]           Type of dialog to display. One of info, error, notice, success, or inspect
       @param {String} [options.arrow=left]          Where to place the arrow? One of left, right, top or bottom.
       @param {Integer} [options.delay=500]          Delay before an interactive tooltip is shown.
       @param {Integer} [options.distance=5]         Additional distance of tooltip from element.
@@ -153,7 +153,8 @@ The quicktip data options are applied to the target element of the tooltip (see 
           'info',
           'error',
           'notice',
-          'success'
+          'success',
+          'inspect'
         ],
         
         _arrows: [

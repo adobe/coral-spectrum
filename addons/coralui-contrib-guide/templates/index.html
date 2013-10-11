@@ -2789,8 +2789,9 @@
                         <li><code class="atv">error</code> Draw attention to critical problems
                         <li><code class="atv">notice</code> Draw attention to potential problems
                         <li><code class="atv">success</code> Draw attention to a success state
+                        <li><code class="atv">inspect</code> Inspect data points on a chart
                     </ul>
-                    
+
                     <h4>Arrow Direction</h4>
                     <p>Tooltips can point different directions by applying the following CSS classes:</p>
                     <ul>
@@ -2798,12 +2799,38 @@
                         <li><code class="atv">arrow-bottom</code> Point downward
                         <li><code class="atv">arrow-left</code> Point left
                         <li><code class="atv">arrow-right</code> Point right
+                        <li><code class="atv">arrow-right</code> Inspect data points on a chart
                     </ul>
-                    
+
                     <div class="componentSample">
                         <div class="example clearfix">
                             <div class="left">
                                 <div id="tooltip-sample1">
+                                    <!-- info tips -->
+                                    <div class="tooltip info arrow-top">Lorem ipsum.</div>
+                                    <div class="tooltip info arrow-bottom">Lorem ipsum.</div>
+                                    <div class="tooltip info arrow-right">Lorem ipsum.</div>
+                                    <div class="tooltip info arrow-left">Lorem ipsum.</div>
+                                </div>
+                                <br>
+                                <div id="tooltip-sample3">
+                                    <!-- notice tips -->
+                                    <div class="tooltip notice arrow-top">Lorem ipsum.</div>
+                                    <div class="tooltip notice arrow-bottom">Lorem ipsum.</div>
+                                    <div class="tooltip notice arrow-right">Lorem ipsum.</div>
+                                    <div class="tooltip notice arrow-left">Lorem ipsum.</div>
+                                </div>
+                                <br>
+                                <div id="tooltip-sample5">
+                                    <!-- inspect tips -->
+                                    <div class="tooltip inspect arrow-top">Lorem ipsum.</div>
+                                    <div class="tooltip inspect arrow-bottom">Lorem ipsum.</div>
+                                    <div class="tooltip inspect arrow-right">Lorem ipsum.</div>
+                                    <div class="tooltip inspect arrow-left">Lorem ipsum.</div>
+                                </div>
+                            </div>
+                            <div class="left">
+                                <div id="tooltip-sample2">
                                     <!-- error tips -->
                                     <div class="tooltip error arrow-top">Lorem ipsum.</div>
                                     <div class="tooltip error arrow-bottom">Lorem ipsum.</div>
@@ -2811,33 +2838,15 @@
                                     <div class="tooltip error arrow-left">Lorem ipsum.</div>
                                 </div>
                                 <br>
-                                <div id="tooltip-sample2">
-                                    <!-- notice tips -->
-                                    <div class="tooltip notice arrow-top">Lorem ipsum.</div>
-                                    <div class="tooltip notice arrow-bottom">Lorem ipsum.</div>
-                                    <div class="tooltip notice arrow-right">Lorem ipsum.</div>
-                                    <div class="tooltip notice arrow-left">Lorem ipsum.</div>
-                                </div>
-                            </div>
-                            <div class="left">
-                                <div id="tooltip-sample3">
+                                <div id="tooltip-sample4">
                                     <!-- success tips -->
                                     <div class="tooltip success arrow-top">Lorem ipsum.</div>
                                     <div class="tooltip success arrow-bottom">Lorem ipsum.</div>
                                     <div class="tooltip success arrow-right">Lorem ipsum.</div>
                                     <div class="tooltip success arrow-left">Lorem ipsum.</div>
                                 </div>
-                                <br>
-                                <div id="tooltip-sample4">
-                                    <!-- info tips -->
-                                    <div class="tooltip info arrow-top">Lorem ipsum.</div>
-                                    <div class="tooltip info arrow-bottom">Lorem ipsum.</div>
-                                    <div class="tooltip info arrow-right">Lorem ipsum.</div>
-                                    <div class="tooltip info arrow-left">Lorem ipsum.</div>
-                                </div>
-
                             </div>
-                            <div class="clear largeToolTipSample" id="tooltip-sample5">
+                            <div class="clear largeToolTipSample" id="tooltip-sample6">
                                 <!-- large tooltip sample -->
                                 <input type="text" class="error" value="Some invalid input">
                                 <div class="tooltip error arrow-left">
@@ -2845,7 +2854,7 @@
                                 </div>
                             </div>
                         </div> <!-- /example -->
-                        <pre class="prettyprint linenums" data-src-id="tooltip-sample1,tooltip-sample2,tooltip-sample3,tooltip-sample4,tooltip-sample5"></pre>
+                        <pre class="prettyprint linenums" data-src-id="tooltip-sample1,tooltip-sample2,tooltip-sample3,tooltip-sample4,tooltip-sample5,tooltip-sample6"></pre>
                     </div> <!-- /componentSample -->
                     <div>
                         Open <a href="examples/tooltip/index.html">Sample</a>

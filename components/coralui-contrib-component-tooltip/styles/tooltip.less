@@ -2,120 +2,107 @@
   Class: .tooltip
   Used for tooltip messages
 */
+
+@tooltip-inspect-background-color: rgb(100, 100, 100);
+@tooltip-inspect-border-color: rgba(50, 50, 50, .85);
+@tooltip-inspect-font-color: rgb(250, 250, 250);
+
 .tooltip {
+  // Mixin for coloring the bubble and tip.
+  .bubble-tip-color(@background-color, @border-color) {
+    background-color: @background-color;
+    border-color: @border-color;
+
+    &.arrow-top:before { // outer color
+      border-bottom-color: @border-color;
+    }
+    &.arrow-top:after { // inner color
+      border-bottom-color: @background-color;
+    }
+    &.arrow-bottom:before {
+      border-top-color: @border-color;
+    }
+    &.arrow-bottom:after {
+      border-top-color: @background-color;
+    }
+    &.arrow-left:before { // outer color
+      border-right-color: @border-color;
+    }
+    &.arrow-left:after { // inner color
+      border-right-color: @background-color;
+    }
+    &.arrow-right:before { // outer color
+      border-left-color: @border-color;
+    }
+    &.arrow-right:after { // inner color
+      border-left-color: @background-color;
+    }
+  }
+
+
+  .border-box;
   position: relative;
   display: inline-block;
   z-index: 100;
-  
-  max-width: 12rem;
-  // height: 1rem; // Let content determine height/size
+
+  min-width: 32*@px;
+  min-height: 32*@px;
+  max-width: 250*@px;
+  max-height: 250*@px;
+
+  a {
+    color: inherit;
+
+    &,
+    &:visited {
+      text-decoration: underline;
+    }
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
 
   margin: 0.5rem;
-  padding: 0.5rem;
+
+  // The spec dictates 10px space between the content and the tooltip border. We're using 8px top and bottom padding
+  // to account for vertical space added by the text line height. If the tooltip content is a non-text element
+  // like an image, this could cause a bit less padding than 10px. Since text is the most likely content, we'll
+  // cater to it. Is there a better way of handling this?
+  padding: 8*@px 10*@px;
 
   background-position: 0.5rem 0.5rem;
   background-repeat: no-repeat;
   .background-size(1rem 1rem);
 
-  font-size: 0.875rem; // 14px
+  color: @alert-font-color;
 
   vertical-align: middle; // Point at center of adjacent elements when included inline
 
   /*
     Colors
   */
+  border: @px solid;
+
   // default is blue
-  border: @px solid @alert-blue-border-color;
-  background-color: @alert-blue-background-color;
+  .bubble-tip-color(@alert-info-background-light-color, @alert-info-border-color);
 
   &.error {
-    background-color: @alert-red-background-color;
-    border-color: @alert-red-border-color;
-
-    &.arrow-top:before { // outer color
-      border-bottom-color: @alert-red-border-color;
-    }
-    &.arrow-top:after { // inner color
-      border-bottom-color: @alert-red-background-color;
-    }
-    &.arrow-bottom:before {
-      border-top-color: @alert-red-border-color;
-    }
-    &.arrow-bottom:after {
-      border-top-color: @alert-red-background-color;
-    }
-    &.arrow-left:before { // outer color
-      border-right-color: @alert-red-border-color;
-    }
-    &.arrow-left:after { // inner color
-      border-right-color: @alert-red-background-color;
-    }
-    &.arrow-right:before { // outer color
-      border-left-color: @alert-red-border-color;
-    }
-    &.arrow-right:after { // inner color
-      border-left-color: @alert-red-background-color;
-    }
+    .bubble-tip-color(@alert-error-background-light-color, @alert-error-border-color);
   }
 
   &.notice {
-    background-color: @alert-yellow-background-color;
-    border-color: @alert-yellow-border-color;
-
-    &.arrow-top:before { // outer color
-      border-bottom-color: @alert-yellow-border-color;
-    }
-    &.arrow-top:after { // inner color
-      border-bottom-color: @alert-yellow-background-color;
-    }
-    &.arrow-bottom:before {
-      border-top-color: @alert-yellow-border-color;
-    }
-    &.arrow-bottom:after {
-      border-top-color: @alert-yellow-background-color;
-    }
-    &.arrow-left:before { // outer color
-      border-right-color: @alert-yellow-border-color;
-    }
-    &.arrow-left:after { // inner color
-      border-right-color: @alert-yellow-background-color;
-    }
-    &.arrow-right:before { // outer color
-      border-left-color: @alert-yellow-border-color;
-    }
-    &.arrow-right:after { // inner color
-      border-left-color: @alert-yellow-background-color;
-    }    
+    .bubble-tip-color(@alert-notice-background-light-color, @alert-notice-border-color);
   }
 
   &.success {
-    background-color: @alert-green-background-color;
-    border-color: @alert-green-border-color;
+    .bubble-tip-color(@alert-success-background-light-color, @alert-success-border-color);
+  }
 
-    &.arrow-top:before { // outer color
-      border-bottom-color: @alert-green-border-color;
-    }
-    &.arrow-top:after { // inner color
-      border-bottom-color: @alert-green-background-color;
-    }
-    &.arrow-bottom:before {
-      border-top-color: @alert-green-border-color;
-    }
-    &.arrow-bottom:after {
-      border-top-color: @alert-green-background-color;
-    }
-    &.arrow-left:before { // outer color
-      border-right-color: @alert-green-border-color;
-    }
-    &.arrow-left:after { // inner color
-      border-right-color: @alert-green-background-color;
-    }
-    &.arrow-right:before { // outer color
-      border-left-color: @alert-green-border-color;
-    }
-    &.arrow-right:after { // inner color
-      border-left-color: @alert-green-background-color;
-    }
+  &.inspect {
+    color: @tooltip-inspect-font-color;
+    .bubble-tip-color(@tooltip-inspect-background-color, @tooltip-inspect-border-color);
   }
 
   /*
@@ -159,27 +146,9 @@
     bottom: 100%; // position the border on the top
   }
 
-  &.arrow-top:before { // outer color
-    border-bottom-color: @alert-blue-border-color;
-  }
-
-  &.arrow-top:after { // inner color
-    border-bottom-color: @alert-blue-background-color;
-  }
-
-
   &.arrow-bottom:before,
   &.arrow-bottom:after {
     top: 100%; // position the border on the bottom
-  }
-
-
-  &.arrow-bottom:before {
-    border-top-color: @alert-blue-border-color;
-  }
-
-  &.arrow-bottom:after {
-    border-top-color: @alert-blue-background-color;
   }
 
   // left and right arrow
@@ -207,24 +176,8 @@
     right: 100%; // position the border on the left
   }
 
-  &.arrow-left:before { // outer color
-    border-right-color: @alert-blue-border-color;
-  }
-
-  &.arrow-left:after { // inner color
-    border-right-color: @alert-blue-background-color;
-  }
-
   &.arrow-right:before,
   &.arrow-right:after {
     left: 100%; // position the border on the right
-  }
-
-  &.arrow-right:before { // outer color
-    border-left-color: @alert-blue-border-color;
-  }
-
-  &.arrow-right:after { // inner color
-    border-left-color: @alert-blue-background-color;
   }
 }
