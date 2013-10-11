@@ -1,1 +1,14 @@
+<!-- 
+  *** DEPRECATION WARNING ***
+
+  Use of Handlebars.js is deprecated.  Coral UI will no longer natively 
+  support Handlebars.js templates in an upcoming version.  Please fix this 
+  implementation and remove this warning.
+
+  See https://issues.adobe.com/browse/CUI-1025 for details
+  
+  TODO: remove use of handlebars templates
+  see https://issues.adobe.com/browse/CUI-1098                       
+                                                                          
+-->
 <a href="{{url}}" role="tab"{{#if id}} id="{{id}}"{{/if}}{{#if owns}} aria-owns="{{owns}}"{{/if}} {{#if selected}}aria-selected="true" class="selected"{{else}}aria-selected="false"{{/if}}">{{label}}</a>

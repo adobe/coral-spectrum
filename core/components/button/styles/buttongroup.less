@@ -1,0 +1,64 @@
+/**
+  Element: button-group
+  CUI button-group styles
+*/
+
+@buttongroup-gradient-start-color: rgb(255, 255, 255);
+@buttongroup-gradient-end-color: rgb(240, 240, 240);
+@buttongroup-active-color: rgb(230, 230, 230);
+
+.button-group {
+
+  // removes the spacing between the buttons.
+  font-size: 0;
+  
+  button,
+  .button {
+
+    .normal-text;
+    text-shadow: none;
+
+    min-width: 52*@px;
+
+    .gradient(@buttongroup-gradient-start-color, @buttongroup-gradient-end-color);
+    border: @px solid fade(@black, 25%);
+    color: @font-base-color;
+
+    &:focus {
+      z-index: 1; // Force glow to front of button line
+      position: relative;
+    }
+
+    &:hover {
+      .gradient(@buttongroup-gradient-start-color, @buttongroup-gradient-start-color);  
+    }
+
+    &:active {
+      .gradient(@buttongroup-active-color, @buttongroup-active-color);
+      .box-shadow(inset 0 0 4*@px rgba(0, 0, 0, 0.08));
+    }
+    
+    i[class^="icon-"],
+    i[class*=" icon-"] {
+      margin-right: 0; // Margin does not display well in buttons without text
+
+      &:before {
+        color: @icon-color;
+        opacity: @icon-opacity;
+      }
+    }
+
+    // hides the button when it is disabled.
+    &:disabled {
+      display: none;
+    }
+  }
+  
+  // allows the buttons to share the border.
+  button,
+  .button {
+    &:not(:first-child) {
+      margin-left: -@px;
+    }
+  }
+}

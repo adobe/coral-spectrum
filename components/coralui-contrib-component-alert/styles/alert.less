@@ -1,0 +1,205 @@
+/**
+  Class: .alert
+  Used for alert messages
+*/
+
+// Alert
+@alert-header-height: 32*@px;
+@alert-font-color: rgb(50, 50, 50);
+
+@alert-error-background-color: rgb(250, 90, 80);
+@alert-error-background-light-color: rgb(250, 120, 110);
+@alert-error-border-color: rgba(120, 10, 10, .6);
+
+@alert-notice-background-color: rgb(245, 200, 65);
+@alert-notice-background-light-color: rgb(250, 210, 105);
+@alert-notice-border-color: rgba(65, 45, 0, .4);
+
+@alert-success-background-color: rgb(140, 195, 80);
+@alert-success-background-light-color: rgb(165, 205, 115, 100);
+@alert-success-border-color: rgba(5, 65, 0, .5);
+
+@alert-info-background-color: rgb(90, 155, 220);
+@alert-info-background-light-color: rgb(125, 175, 230);
+@alert-info-border-color: rgba(0, 30, 70, .5);
+
+.alert,
+.alert.large > strong { 
+  background-position: 0.5rem 0.5rem;
+  background-repeat: no-repeat;
+  .background-size(1rem 1rem);
+}
+
+.alert {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+
+  // Default is blue
+  border: @px solid @alert-info-border-color;
+  background-color: @alert-info-background-color;
+
+  color: @alert-font-color;
+
+  > .close {
+    float: right;
+    font-weight: bold;
+    padding: 0.125em;
+  }
+
+  // Heading text
+  > strong {
+    display: inline-block;
+    margin-right: 0.25rem;
+    text-transform: uppercase;
+  }
+
+  // Feels weird, but we want to use a div here in case
+  // the content has a block level element
+  // We'll make it inline so it renders right
+  > div {
+    display: inline;
+  }
+
+  &.error,
+  &.notice,
+  &.success,
+  &.help,
+  &.info {
+    padding-left: 2rem;
+  }
+
+  &.error,
+  &.notice {
+    background-image: url('@{component-resource-folder}/alert/exclaimation.png');
+  }
+
+  &.error {
+    background-color: @alert-error-background-color;
+    border-color: @alert-error-border-color;
+  }
+
+  &.notice {
+    background-color: @alert-notice-background-color;
+    border-color: @alert-notice-border-color;
+  }
+
+  &.success {
+    background-color: @alert-success-background-color;
+    border-color: @alert-success-border-color;
+
+    background-image: url('@{component-resource-folder}/alert/check.png');
+  }
+
+  &.help,
+  &.info {
+    background-color: @alert-info-background-color;
+    border-color: @alert-info-border-color;
+  }
+
+  &.help{
+    background-image: url('@{component-resource-folder}/alert/question.png');
+  }
+
+  &.info {
+    background-image: url('@{component-resource-folder}/alert/i.png');
+  }
+
+  // Large alerts
+  &.large {
+    position: relative;
+
+    padding: 0;
+
+    background-image: none;
+
+    > .close {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+    }
+
+    > strong {
+      display: block;
+      height: @alert-header-height;
+      margin: 0;
+
+      line-height: @alert-header-height;
+      text-transform: none;
+
+      border-bottom: @px solid @alert-info-border-color;
+    }
+
+    > div { 
+      display: block;
+      padding: 0.5rem;
+    }
+
+    &.error,
+    &.notice,
+    &.success,
+    &.help,
+    &.info {
+      > strong {
+        padding-left: 2rem;
+      }
+    }
+
+    &.error,
+    &.notice {
+      > strong {
+        background-image: url('@{component-resource-folder}/alert/exclaimation.png');
+      }
+    }
+
+    &.error {
+      background-color: @alert-error-background-light-color;
+
+      > strong {
+        background-color: @alert-error-background-color;
+        border-color: @alert-error-border-color;
+      }
+    }
+
+    &.notice {
+      background-color: @alert-notice-background-light-color;
+
+      > strong {
+        background-color: @alert-notice-background-color;
+        border-color: @alert-notice-border-color;
+      }
+    }
+
+    &.success {
+      background-color: @alert-success-background-light-color;
+
+      > strong {
+        background-color: @alert-success-background-color;
+        border-color: @alert-success-border-color;
+
+        background-image: url('@{component-resource-folder}/alert/check.png');
+      }
+    }
+
+    &.help,
+    &.info {
+      background-color: @alert-info-background-light-color;
+
+      > strong {
+        background-color: @alert-info-background-color;
+        border-color: @alert-info-border-color;
+      }
+    }
+
+    &.help {
+      > strong {
+        background-image: url('@{component-resource-folder}/alert/question.png');
+      }
+    }
+
+    &.info {
+      > strong {
+        background-image: url('@{component-resource-folder}/alert/i.png');
+      }
+    }
+  }
+}

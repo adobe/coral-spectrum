@@ -6,12 +6,11 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-handlebars');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
-
+    grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-gh-pages');
     grunt.loadNpmTasks('grunt-mocha');
     grunt.loadNpmTasks('grunt-jsdoc');
@@ -19,6 +18,15 @@ module.exports = function (grunt) {
 
     grunt.loadTasks('tasks');
 
+    /*
+        *** DEPRECATION WARNING ***
+        Use of Handlebars.js is deprecated.
+        See https://issues.adobe.com/browse/CUI-1025 for details 
+        TODO: remove use of handlebars templates
+        see https://issues.adobe.com/browse/CUI-1098 
+    */
+    grunt.loadNpmTasks('grunt-contrib-handlebars');
+    
     /**
     JavaScript file include order
     Add new components to this array _after_ the components they inherit from
@@ -65,6 +73,10 @@ module.exports = function (grunt) {
             'components/CUI.NumberInput.js',
             'components/CUI.Colorpicker.js',
             'components/CUI.CycleButtons.js',
+            'components/CUI.SelectList.js',
+            'components/CUI.TagList.js',
+            'components/CUI.Select.js',
+            'components/CUI.Autocomplete.js',
 
             // Validations
             'validations.js'
@@ -209,6 +221,13 @@ module.exports = function (grunt) {
                         src: ['js/source/components/**/*.js'],
                         dest: '<%= dirs.temp %>/js/components/'
                     },
+                    { // get external dependencies from the core js and copy into temp
+                        expand: true,
+                        flatten: true,
+                        cwd: '<%= dirs.core.build %>/',
+                        src: ['js/source/externals/**/*.js'],
+                        dest: '<%= dirs.build %>/js/libs'
+                    },
                     { // get build from the core js source (shared) and copy into temp
                         expand: true,
                         flatten: true,
@@ -222,6 +241,22 @@ module.exports = function (grunt) {
                         cwd: '<%= dirs.components %>/',
                         src: ['**/styles/**.less'],
                         dest: '<%= dirs.build %>/less/components'
+                    },
+                    { // get resources from the modularized components
+                        expand: true,
+                        cwd: '<%= dirs.components %>/',
+                        src: ['**/res/**'],
+                        dest: '<%= dirs.build %>/res/components',
+                        filter: 'isFile',
+                        rename: function(dest, src) {
+                            var match = src.match(/coralui-contrib-component-(.*)\/res\/(.*)/);
+                            if (match) {
+                                var component = match[1];
+                                var filePath = match[2];
+                                return dest + '/' + component + '/' + filePath;
+                            }
+                            return dest;
+                        }
                     },
                     { // get js from the modularized components
                         expand: true,
@@ -300,12 +335,22 @@ module.exports = function (grunt) {
                             'chai/chai.js',
                             'chai-jquery/chai-jquery.js',
                             'mocha/mocha.js',
-                            'mocha/mocha.css'
+                            'mocha/mocha.css',
+                            'sinon/pkg/sinon.js'
                         ],
                         dest: '<%= dirs.build %>/tests/libs'
+                    },
+                    {   // add on: jquery-raf-animation
+                        // this has to be removed through a proper build system
+                        expand: true,
+                        cwd: 'addons/coralui-contrib-jquery-raf-animation/scripts',
+                        src: [
+                            '**'
+                        ],
+                        dest: '<%= dirs.build %>/js'
                     }
-                ]
-            },
+                ] // /retro files
+            }, 
             guide: {
                 files: [
                     { // guide html
@@ -339,7 +384,7 @@ module.exports = function (grunt) {
                         src: ['*/*.js'],
                         dest: '<%= dirs.build %>/js/libs'
                     }
-                ]
+                ] // guide files
             },
             js_source: {
                 files: [
@@ -349,8 +394,8 @@ module.exports = function (grunt) {
                         src: ['**'],
                         dest: '<%= dirs.build %>/js/source'
                     }
-                ]
-            },
+                ] // js source files
+            }, 
             release_archive: { // copy the archive to have a "latest" zip from the current build
                 files: [
                     { // get build from the core
@@ -371,7 +416,7 @@ module.exports = function (grunt) {
                             return dest + '/cui-latest-full.zip';
                         }
                     }
-                ]
+                ] // release archive files
             }
         }, // copy
 
@@ -390,6 +435,9 @@ module.exports = function (grunt) {
         },
 
         watch: {
+            options: {
+                livereload: true
+            },
             core_scripts: {
                 files: [
                     dirs.core.shared + '/scripts/**.js',
@@ -455,7 +503,7 @@ module.exports = function (grunt) {
             // watch: guide content
             guide: {
                 files: [
-                    dirs.guide + '/js/guide.js',
+                    dirs.guide + '/scripts/*.js',
                     dirs.guide + '/styles/*.less',
                     dirs.guide + '/templates/*.html'
                 ],
@@ -463,7 +511,7 @@ module.exports = function (grunt) {
             }
 
         },
-        // end of watch options
+        // watch options
 
         less: {
             "cui-wrapped": {
@@ -527,7 +575,10 @@ module.exports = function (grunt) {
                 }
             }
         }, // uglify
-
+      /*
+        TODO: remove use of handlebars templates
+        see https://issues.adobe.com/browse/CUI-1098 
+      */
         handlebars: {
             components: {
                 options: {
@@ -539,10 +590,12 @@ module.exports = function (grunt) {
                     }
                 },
                 files: {
-                    '<%= dirs.build %>/js/CUI.Templates.js': '<%= dirs.legacy %>/components/templates/*'
+                    '<%= dirs.build %>/js/CUI.Templates.js': [
+                    '<%= dirs.legacy %>/components/templates/*.hbs'
+                    ]
                 }
             }
-        },
+        }, // handlebars
 
         mocha: {
             retro: {
@@ -571,10 +624,23 @@ module.exports = function (grunt) {
                     archive: '<%= dirs.build %>/release/cui-<%= meta.version %>.zip'
                 },
                 files: [
-                    { src: ['<%= dirs.build %>/css/cui.min.css'] },
-                    { src: ['<%= dirs.build %>/js/CUI.min.js'] },
-                    { src: ['<%= dirs.build %>/less/**'] },
-                    { src: ['<%= dirs.build %>/res/**'] }
+                    {
+                        expand: true,
+                        cwd: '<%= dirs.build %>',
+                        src: [
+                            'css/cui.min.css',
+                            'js/CUI.min.js',
+                            'res/components/**',
+                            'res/icons/**'
+                        ],
+                        dest: 'coral-ui-<%= meta.version %>/'
+                    },
+                    {
+                        expand: true,
+                        cwd:'res/package-metadata',
+                        src:['README.md'],
+                        dest: 'coral-ui-<%= meta.version %>/'
+                    }
                 ]
             },
             full: {
@@ -582,16 +648,34 @@ module.exports = function (grunt) {
                     archive: '<%= dirs.build %>/release/cui-<%= meta.version %>-full.zip'
                 },
                 files: [
-                    { src: ['<%= dirs.build %>/css/**'] },
-                    { src: ['<%= dirs.build %>/examples/**'] },
-                    { src: ['<%= dirs.build %>/res/**'] },
-                    { src: ['<%= dirs.build %>/images/**'] },
-                    { src: ['<%= dirs.build %>/js/**'] },
-                    { src: ['<%= dirs.build %>/doc/**'] },
-                    { src: ['<%= dirs.build %>/less/**'] },
-                    { src: ['<%= dirs.build %>/test/**'] },
-                    { src: ['<%= dirs.build %>/index.html'] }
-                ]
+                    {
+                        expand: true,
+                        cwd: '<%= dirs.build %>',
+                        src: [
+                            'css/cui*.css',
+                            'js/CUI*.js',
+                            'js/libs/**',
+                            'js/source/**',
+                            'less/components/**',
+                            'less/shared/**',
+                            'less/externals/**',
+                            'less/cui*.less',
+                            'less/base.less',
+                            'less/components.less',
+                            'less/elements.less',
+                            'res/components/**',
+                            'res/icons/**',
+                            'tests/**'
+                        ], 
+                        dest: 'coral-ui-<%= meta.version %>/'
+                    },
+                    {
+                        expand: true,
+                        cwd:'res/package-metadata',
+                        src:['README.md'],
+                        dest: 'coral-ui-<%= meta.version %>/'
+                    }
+                ],
             },
             publish: {
                 options: {
@@ -663,7 +747,15 @@ module.exports = function (grunt) {
                     stderr: true
                 }
             }
-        }
+        },
+        connect: {
+            server: {
+                options: {
+                    port: 9001,
+                    base: 'build'
+                }
+            }
+        },
 
     }); // end init config
 
@@ -688,6 +780,10 @@ module.exports = function (grunt) {
         'guide'
     ]);
 
+      /*
+        TODO: remove use of handlebars templates
+        see https://issues.adobe.com/browse/CUI-1098 
+      */
     grunt.task.registerTask('full', [ // for a standalone upload e.g. pages
         'retro',
         'handlebars:components',
@@ -710,7 +806,8 @@ module.exports = function (grunt) {
         'concat:retro',
         'mocha',
         'uglify:retro',
-        'copy:js_source'
+        'copy:js_source',
+        'guide'
     ]);
 
     grunt.task.registerTask('quickless', [
@@ -751,6 +848,13 @@ module.exports = function (grunt) {
         'publish-build',
         'shell:local-publish'
     ]);
+
+    grunt.task.registerTask('dev', [ // task for developers to work
+        'connect',
+        'watch'
+    ]);
+
+
 
     // Default task
     grunt.task.registerTask('default', [

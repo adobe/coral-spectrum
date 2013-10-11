@@ -75,7 +75,7 @@
     }
   }
 }
-
+  
 .icon-size(@size) {
   line-height: 1.2;
   font-size: @size;
@@ -179,7 +179,6 @@ i[class*=" icon-"] {
   font-style: normal;
 }
 
-
 button,
 .button {
   // Icons as buttons
@@ -193,15 +192,12 @@ button,
     min-width: 0;
 
     &.disabled,
-    &[disabled],
-    &.disabled:before,
-    &[disabled]:before {
-      background-color: transparent;
-    }
-
-    .disabled:hover,
-    &[disabled]:hover {
-      background-color: transparent;
+    &[disabled] {
+      &, 
+      &:before, 
+      &:hover {
+        background-color: transparent;
+      }
     }
 
     &,
@@ -230,13 +226,14 @@ button,
   i[class*=" icon-"] {
     .icon-small;
     
-    margin-right: 0.25rem; // A little padding between the icon and text
+    margin-right: 4*@px; // A little padding between the icon and text
     
-    // For 18px icons, Don't push the button to a taller height
+    // For 16px icons, Don't push the button to a taller height
     // Works in all browsers except Firefox/Safari OS X, 1px too far down
     position: relative;
-    top: -2.25*@px;
-    margin-bottom: -5*@px;
+    margin-top: -3*@px;
+    // top: -2.25*@px;
+    // margin-bottom: -5*@px;
 
     vertical-align: middle;
 
@@ -248,8 +245,6 @@ button,
     }
   }
 }
-
-
 
 // Clickable icons
 a,
@@ -275,8 +270,6 @@ button,
     }
 
     &:focus {
-      //.no-glow();
-
       &:before {
         color: @icon-active-color;
         opacity: @icon-active-opacity;

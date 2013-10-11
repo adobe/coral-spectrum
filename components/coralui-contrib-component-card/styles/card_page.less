@@ -1,0 +1,178 @@
+
+/**
+    Class: .card-page
+    Displays a WCM page card.
+*/
+
+// Grid view style
+.grid .card-page {
+    .label {
+        .info-approved,
+        .info-locked,
+        .user {
+            display: none;
+        }
+
+        .main {
+            > .descriptor {
+                text-transform: uppercase;
+                margin: 6*@px 10*@px 0;
+                font-size: 10*@px;
+
+                + h4 {
+                    margin-top: 0;
+                }
+            }
+        }
+
+        .info {
+            border-top: @px solid @card-separator-color;
+            margin: 9*@px 9*@px 0;
+            padding-top: 8*@px;
+
+            .short-info > span {
+                margin-right: 6*@px;
+                margin-bottom: 6*@px;
+                display: inline-block;
+
+                + .status {
+                    padding-top: 4*@px;
+                }
+            }
+
+            .status {
+                clear: both;
+                padding-top: 8*@px;
+            }
+
+            .published, .modified {
+                display: inline-block;
+                margin-left: 0;
+                margin-right: 0.5rem;
+            }
+        }
+    }
+
+    .image {
+        overflow: hidden; // To avoid the gradient to overflow the image element
+        position: relative;
+        &:after {
+            content: " ";
+            position: absolute;
+            width: 100%;
+            height: 64*@px;
+            bottom: 0;
+            left: 0;
+            .card-grid-page-gradient();
+        }
+    }
+
+    &.selected {
+        .image:after {
+            .card-grid-page-gradient(@card-selection-color);
+        }
+    }
+}
+
+// List view style
+.list .card-page {
+    .card-list-image-stack(28*@px, 28*@px);
+
+    .main {
+        width: 60%;
+        height: 100%;
+        position: relative;
+
+        > p {
+            font-size: 10*@px;
+            font-weight: bold;
+            text-transform: uppercase;
+            position: absolute;
+            margin-top: 25*@px;
+        }
+
+        > p + h4 {
+            margin-top: 7*@px;
+        }
+        .info-locked {
+            .card-list-box();
+        }
+        .info-approved {
+            .card-list-box(yellow);
+        }
+    }
+    .label > hr {
+        display: none;
+    }
+
+    .info,
+    .modified,
+    .published {
+        float: left;
+    }
+
+    .info {
+        width: 10%;
+        float: right;
+
+        > span {
+            display: inline-block;
+            width: 10*@px;
+        }
+    }
+
+    .modified,
+    .published {
+        width: 15%;
+       .card-list-date-user();
+    }
+}
+.list.small .card-page {
+    .main {
+        width: 60%;
+    }
+    .info {
+        display: none;
+    }
+    .modified,
+    .published {
+        width: 20%;
+    }
+}
+.list.xsmall .card-page {
+    .main {
+        width: 70%;
+    }
+    .info,
+    .modified {
+        display: none;
+    }
+    .published {
+        width: 30%;
+    }
+}
+.list.xxsmall .card-page {
+    .main {
+        width: 100%;
+    }
+    .info,
+    .modified,
+    .published {
+        display: none;
+    }
+}
+
+// Hidden, redirecting and deactivated pages
+.card-page.page-hidden,
+.card-page.page-redirect,
+.card-page.page-deactivated {
+    .list & a > *,
+    .list & .card > *,
+    .grid & img,
+    .grid & canvas {
+        opacity: 0.5;
+    }
+    .grid & h4 {
+        color: inherit;
+    }
+}

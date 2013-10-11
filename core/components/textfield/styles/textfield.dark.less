@@ -3,32 +3,36 @@ Element: Text field
 A basic text input field for dark theme
 */
 
-[data-theme~=dark] {
+// Colors
+@textfield-dark-border-color: rgb(45, 45, 45);
+@textfield-dark-background-color: rgb(65, 65, 65);
+@textfield-dark-font-color: rgb(220, 220, 220);
 
-    input[type="text"] {
-        .placeholder(@rail-input-placeholder-color);
+@textfield-dark-disabled-border-color: rgb(65, 65, 65);
+@textfield-dark-disabled-background-color: rgb(80, 80, 80);
+@textfield-dark-disabled-font-color: rgb(95, 95, 95);
 
-        .border-box;
+.theme-dark {
+  input[type=text],
+  input[type=password],
+  input[type=email],
+  input[type=url],
+  input[type=tel],
+  input[type^="date"],
+  input[type="time"] {
 
-        height: 34*@px;
-
-        background-color: @rail-dark-background-color;
-        border: @px solid @rail-input-text-border-color;
-
-        padding: 0.25rem 0.5rem;
-        min-width: auto;
-
-        margin: 0;
-
-        font-size: 0.85rem;
-        color: @rail-font-color;
-
-        &:focus {
-            box-shadow: none;
-            &.focus {
-                .glow();
-            }
-        }
-    }
+    color: @textfield-dark-font-color;
+    border-color: @textfield-dark-border-color;
     
+    background-color: @textfield-dark-background-color;
+
+    &:disabled {
+      
+      color: @textfield-dark-disabled-font-color;
+      .placeholder(@textfield-dark-disabled-font-color);
+
+      background-color: @textfield-dark-disabled-background-color;
+      border-color: @textfield-dark-disabled-border-color;
+    }
+  }
 }

@@ -6,11 +6,13 @@
 @body-background-color: rgb(238, 238, 238);
 
 // used to place correctly all elements.
+/*
 *,
 *:before,
 *:after {
   .border-box;
 }
+*/
 
 // We're acting as an app, so we should always fill the screen completely
 html,
@@ -23,7 +25,6 @@ body {
 
 html { 
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
   font-size: @base-size + 0px; // the base size in pixels
 }
 
@@ -33,8 +34,8 @@ body {
   color: @font-base-color;
 
   .normal-text;
-  font-size: 13*@px;
-  line-height: 16*@px;
+  font-size: @base-font-size;
+  line-height: @base-line-height;
 
   cursor: default;
 }

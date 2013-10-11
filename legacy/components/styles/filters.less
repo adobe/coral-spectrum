@@ -1,12 +1,20 @@
 /**
  * A filters or tags input field.
  */
+
+// Filters & Tags
+@filters-background-color: rgb(115, 115, 115);
+@filters-text-color: rgb(255, 255, 255);
+
 .filters {
     display: inline-block;
+
     .border-box;
-    margin: 0.5rem 0;
+    vertical-align: top; // used to align them correctly in forms.
+    margin: 2*@px 0;  // resets default margin
+    
     width: 13rem; // width is required to contain the tags
-    vertical-align: middle;
+    
 
     &[data-multiple=multiple], &[data-stacking=true] {
         vertical-align: top;

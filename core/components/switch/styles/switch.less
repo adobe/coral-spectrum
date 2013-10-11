@@ -12,7 +12,7 @@
 @switch-disabled-text-color: rgb(210, 210, 210);
 @switch-disabled-selected-slider-background-color: rgb(220, 220, 220);
 @switch-disabled-selected-text-color: rgb(183, 183, 183);
-
+@switch-border-color: rgb(165, 165, 165);
 
 .switch {
   display: inline-block;
@@ -50,7 +50,7 @@
         content: "\a0";
         width: 32*@px;
         height: 8*@px;
-        border: @px solid @slider-border-color;
+        border: @px solid @switch-border-color;
       }
     }
 
@@ -69,7 +69,7 @@
         line-height: 1.6;
         width: 9*@px;
         height: 20*@px;
-        border: @px solid @slider-border-color;
+        border: @px solid @switch-border-color;
       }
       &:after {
         display: none;

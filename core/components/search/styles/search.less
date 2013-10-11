@@ -3,25 +3,40 @@
   A simple search field with button
 */
 
+// Search Text Field
+@search-text-color: rgb(150, 150, 150);
+@search-text-background-color: rgb(249, 249, 249);
+@search-text-disabled-background-color: rgb(224, 224, 224);
+@search-text-border-color: rgb(184, 184, 184); 
+@search-text-disabled-border-color: rgb(209, 209, 209); 
+@search-button-gradient-start-color: rgb(234, 234, 234);
+@search-button-gradient-end-color: rgb(244, 244, 244);
+@search-button-hover-background-color: rgb(244, 244, 244);
+@search-button-down-background-color: rgb(211, 211, 211);
+@search-button-disabled-background-color: rgb(224, 224, 224);
+@search-button-disabled-border-color: rgb(209, 209, 209);
+
 .search {
-  position: relative;
   display: inline-block;
-  margin: 0.5rem 0;
-  padding: 0;
-  vertical-align: middle;
+
+  .border-box;
+  vertical-align: top; // used to align them correctly in forms.
+  margin: 2*@px 0;  // resets default margin
+
+  position: relative;
   
   input[type=text] {
     margin: 0;
-    padding: 0 32*@px;
-    /*padding-right: 32*@px;*/
+    padding: 10*@px 16*@px 10*@px 36*@px;
   }
 
   button {
     .icon-search;
-    .button-square-transparent(30*@px);
+    .button-square-transparent(36*@px);
     position: absolute;
     display: block;
-    top: 1*@px; 
+    // places the button below the border
+    top: 1*@px;
     color: transparent;
 
     &,
@@ -66,9 +81,7 @@
       .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
     }
   }
-
 }
-// .search 
 
 form.vertical {
   .search.field {
@@ -81,9 +94,3 @@ form.aligned {
     display: inline-block;
   }
 }
-
-
-
-/* end search */
-
-

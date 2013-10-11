@@ -8,7 +8,7 @@ Before building you need some dependencies on your system.
 
 Assuming OSX with Homebrew:
     brew install fontforge ttfautohint
-    brew install https://raw.github.com/sapegin/grunt-webfont/master/Formula/sfnt2woff.rb
+    brew install https://raw.github.com/sapegin/grunt-webfont/grunt-0-3-0/Formula/sfnt2woff.rb
 
 There are also dependencies needed for grunt, which you can install using npm.
 
