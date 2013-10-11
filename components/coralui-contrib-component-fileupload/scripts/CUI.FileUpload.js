@@ -508,6 +508,24 @@
                 fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
             }
 
+            // if no autostart is used we need to set fileNameParameter as an additional form input field
+            // to be submitted with the form.
+            if (self.options.fileNameParameter && !this.options.autoStart){
+                if (!self.fileNameElement) {
+                    // check if there is already a form input field defined to store the parameter
+                    self.fileNameElement = $("input[name=\"" + self.options.fileNameParameter +"\"" );
+                    if (self.fileNameElement.length === 0) {
+                        // create and append
+                        self.fileNameElement = $("<input/>", {
+                            type: "hidden",
+                            name: self.options.fileNameParameter
+                        });                        
+                        self.fileNameElement.appendTo(self.$element);
+                    }                   
+                }
+                self.fileNameElement.val(fileName);
+            }
+            
             if (!self._getQueueItemByFileName(fileName)) {
                 var item = {
                     fileName: fileName
