@@ -364,6 +364,7 @@
          */
         disable: function () {
             this.$element.addClass('disabled');
+            this.$element.prop('aria-disabled', true);
             this._input.prop('disabled', true);
             this._suggestionsBtn.prop('disabled', true);
         },
@@ -373,6 +374,7 @@
          */
         enable: function () {
             this.$element.removeClass('disabled');
+            this.$element.prop('aria-disabled', false);
             this._input.prop('disabled', false);
             this._suggestionsBtn.prop('disabled', false);
         }
