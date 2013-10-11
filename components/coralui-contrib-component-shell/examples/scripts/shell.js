@@ -144,4 +144,28 @@ jQuery(function($) {
     quickform.find('.trigger').fipo('tap', 'click', function () {
         quickform.toggleClass('open');
     });
+
+    $("#references-first-type").fipo('tap', 'click', function () {
+        toggleReferencesView();
+    });
+
+    rail.fipo('tap', 'click', '[data-view="references"] .back', function () {
+        toggleReferencesView();
+    });
+
+    rail.fipo('tap', 'click', '.references .detail section .info', function () {
+        toggleActions($(this));
+    });
+
+    function toggleReferencesView() {
+        var $references = rail.find(".references");
+        $references.find(".list").toggle();
+        $references.find(".detail").toggle();
+        rail.find(".back").toggle();
+    }
+
+    function toggleActions(section) {
+        section.siblings(".actions").toggle();
+    }
+
 });

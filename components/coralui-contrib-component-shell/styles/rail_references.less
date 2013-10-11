@@ -1,0 +1,101 @@
+div.rail {
+  .references {
+    color: @rail-font-color;
+    display: block;
+
+    > ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      > li {
+        margin: 0;
+
+        .header {
+          background: @rail-header-background-color;
+          border-top: @px solid @rail-section-border-color;
+          border-bottom: @px solid @rail-section-border-color;
+          .box-shadow(-@px @px 0 0 @rail-group-header-color);
+
+          color: @rail-header-text-color;
+          letter-spacing: 2*@px;
+          text-transform: uppercase;
+          font-size: 12*@px;
+          .bold-text;
+
+          padding: 8*@px 16*@px;
+
+          display: block;
+        }
+
+        &:last-of-type:not(:only-of-type) {
+          .header {
+            border-top: none;
+          }
+        }
+
+        section {
+          border-bottom: @px solid @rail-section-border-color;
+          box-shadow: none;
+          line-height: 16*@px;
+
+          .info {
+            padding: 12*@px 20*@px;
+          }
+
+          a {
+            letter-spacing: 0.05em;
+            color: @rail-font-color;
+            text-transform: uppercase;
+            .bold-text;
+
+            &:hover {
+              text-decoration: none;
+              color: @rail-font-hover-color;
+            }
+          }
+
+          div {
+            color: @rail-header-text-color;
+          }
+
+          i[class^="icon-"],
+          i[class*=" icon-"] {
+            float: right;
+            font-size: 18*@px;
+            margin: 16*@px 16*@px 0;
+
+            cursor: pointer;
+
+            &.warning:before {
+              color: @rail-icon-warning-color;
+            }
+          }
+        }
+      }
+    }
+
+    .detail {
+      display: none;
+
+      .actions {
+        display: none;
+
+        background: @rail-dark-background-color;
+        border-top: @px solid @rail-section-border-color;
+
+        padding: 8*@px;
+
+        div {
+          margin-bottom: 8*@px;
+        }
+
+        button {
+          color: @button-text-color;
+          margin: 4*@px 0;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
