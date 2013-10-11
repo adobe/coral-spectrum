@@ -3,28 +3,16 @@
   A basic text input field.
 */
 
-// Dimensions
-@textfield-text-size: 13*@px;
-@textfield-text-color: rgb(255, 255, 255);
-@textfield-height: 38*@px;
-@textfield-line-height: 16*@px;
-
 // Colors
-@textfield-border-color: rgba(0, 0, 0, 0.25);
-@textfield-background-color: rgb(255, 255, 255);
+@textfield-border-color: rgb(185, 185, 185);
+@textfield-background-color: rgb(250, 250, 250);
 
+@textfield-disabled-border-color: rgb(210, 210, 210);
 @textfield-disabled-background-color: rgb(230, 230, 230);
+@textfield-disabled-font-color: rgb(200, 200, 200);
+
 @textfield-error-border-color: rgb(204, 84, 74);
 @textfield-error-font-color: rgb(204, 84, 75);
-
-label {
-  font-size: @textfield-text-size;
-  // line-height: 38*@px;
-  
-  // we need to use top since some elements cannot be centered using middle.
-  vertical-align: top;
-  margin: 2*@px 0;
-}
 
 input[type=text],
 input[type=password],
@@ -43,17 +31,25 @@ input[type="time"] {
   padding: 10*@px;
 
   .normal-text;
-  font-size: @textfield-text-size;
-  line-height: @textfield-line-height;
-  height: @textfield-height;
+  font-size: @base-font-size;
+  line-height: @base-line-height;
 
-  border: @px solid;
-  border-color: @textfield-border-color;
-  border-radius: 0;
+  // fixes rendering issues in FF.
+  height: @component-single-line-height;
+
+  color: @font-base-color;
+
+  border: @px solid @textfield-border-color;
   background-color: @textfield-background-color;
 
+  .placeholder(@font-secondary-color);
+
   &:disabled {
+    color: @textfield-disabled-font-color;
+    .placeholder(@textfield-disabled-font-color);
+
     background-color: @textfield-disabled-background-color;
+    border-color: @textfield-disabled-border-color;
   }
 
   &:focus {
@@ -69,18 +65,11 @@ input[type="time"] {
   &:invalid {
     border-color: @textfield-error-border-color;
     color: @textfield-error-font-color;
-  }
-    
-  &:focus.error,
-  &:focus:invalid {
-    .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
-    color: @textfield-error-font-color;
-  }
-}
 
-form.horizontal {
-  label {
-    line-height: 38*@px;
+    &:focus {
+      .glow(6*@px, @textfield-error-border-color, @textfield-error-border-color);
+      color: @textfield-error-font-color;
+    }
   }
 }
 

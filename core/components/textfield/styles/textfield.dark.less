@@ -3,25 +3,36 @@ Element: Text field
 A basic text input field for dark theme
 */
 
-// TODO: remove rail references from implementation.
-@rail-input-placeholder-color: rgb(120, 120, 120);
-@rail-dark-background-color: rgb(60, 60, 60); // for input-text and special components
-@rail-input-text-border-color: rgb(44, 44, 44);
-@rail-font-color: rgb(220, 220, 220);
+// Colors
+@textfield-dark-border-color: rgb(45, 45, 45);
+@textfield-dark-background-color: rgb(65, 65, 65);
+@textfield-dark-font-color: rgb(220, 220, 220);
+
+@textfield-dark-disabled-border-color: rgb(65, 65, 65);
+@textfield-dark-disabled-background-color: rgb(80, 80, 80);
+@textfield-dark-disabled-font-color: rgb(95, 95, 95);
 
 .theme-dark {
+  input[type=text],
+  input[type=password],
+  input[type=email],
+  input[type=url],
+  input[type=tel],
+  input[type^="date"],
+  input[type="time"] {
 
-    input[type="text"] {
-        .placeholder(@rail-input-placeholder-color);
-        background-color: @rail-dark-background-color;
-        border: @px solid @rail-input-text-border-color;
-        color: @rail-font-color;
+    color: @textfield-dark-font-color;
+    border-color: @textfield-dark-border-color;
+    
+    background-color: @textfield-dark-background-color;
 
-        &:focus {
-            box-shadow: none;
-            &.focus {
-                .glow();
-            }
-        }
+    &:disabled {
+      
+      color: @textfield-dark-disabled-font-color;
+      .placeholder(@textfield-dark-disabled-font-color);
+
+      background-color: @textfield-dark-disabled-background-color;
+      border-color: @textfield-dark-disabled-border-color;
     }
+  }
 }

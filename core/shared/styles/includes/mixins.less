@@ -154,10 +154,10 @@
  Input field placeholder font color
 */
 .placeholder(@color) {
-    input::-webkit-input-placeholder { color: @color; }
-    input:-moz-placeholder { color: @color; }
-    textarea::-webkit-input-placeholder { color: @color; }
-    textarea:-moz-placeholder { color: @color; }
+    &::-webkit-input-placeholder { color: @color; }
+    &:-moz-placeholder { color: @color; } // Firefox 18-
+    &::-moz-placeholder { color: @color; } // Firefox 19+
+    &:-ms-input-placeholder { color: @color; }
 }
 
 /**
