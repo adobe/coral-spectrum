@@ -92,10 +92,6 @@
         this._initElement(this.$element, !(this.options.active || this.$element.hasClass("active")));
       }
 
-      if (this.$element.attr('disabled') || this.$element.attr('data-disabled')) {
-        this.options.disabled = true;
-      }
-
       this._setListeners();
       this._makeAccessible();
       this._updateDOMForDisabled();
@@ -194,7 +190,7 @@
     },
     _collapse: function(el) {
          el.find("h3 i").removeClass("icon-chevrondown").addClass("icon-chevronup");
-         el.animate({height: el.find("h3").outerHeight()}, "fast", function() {
+         el.animate({height: el.find("h3").height()}, "fast", function() {
             el.removeClass("active"); // remove the active class after animation so that background color doesn't change during animation
             el.find("div[aria-expanded]").hide(); // After animation we want to hide the collapsed content so that it cannot be focused
          });
@@ -337,16 +333,6 @@
         this.$element.on('focusout.accordion', 'h3:focusable', this._onFocusOut.bind(this));
         
         this.$element.on('touchstart.accordion, mousedown.accordion', 'h3:focusable', this._onMouseDown.bind(this));
-    },
-
-    /**
-     * Sets component options using data-* attributes found in the markup.
-     * @private
-     */
-    _readDataFromMarkup: function() {
-      if (this.$element.data('disabled')) {
-        this.options.disabled = true;
-      }
     },
 
     /**
