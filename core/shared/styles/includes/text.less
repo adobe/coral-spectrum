@@ -4,8 +4,8 @@
  * Apply light text styling with appropriate font fallback.
  */
 .light-text {
-  font-family: adobe-clean, Helvetica, Arial, sans-serif;
-  font-weight: lighter;
+  font-family: @font-base-family;
+  font-weight: 300;
 }
 
 /**
@@ -15,21 +15,18 @@
 .normal-text,
 .regular-text
 {
-  font-family: adobe-clean, Helvetica, Arial, sans-serif;
+  font-family: @font-base-family;
   font-weight: normal;
 }
-
 
 /**
  * Mixin, CSS Class: .bold-text
  * Apply bold text styling with appropriate font fallback.
  */
 .bold-text {
-  font-family: adobe-clean, Helvetica, Arial, sans-serif;
-  font-weight: bold;
+  font-family: @font-base-family;
+  font-weight: 700;
 }
-
-
 
 /**
  * Mixin: .condensed-text()
@@ -37,7 +34,7 @@
  */
 .condensed-text
 {
-  font-family: adobe-clean-condensed, Helvetica, Arial, sans-serif;
+  font-family: @font-base-family;
   font-weight: normal;
 }
 
@@ -46,6 +43,6 @@
  * Apply bold condensed text styling with appropriate font fallback.
  */
 .condensed-bold-text {
-  font-family: adobe-clean-condensed, Helvetica, Arial, sans-serif;
-  font-weight: bold;
+  font-family: @font-base-family;
+  font-weight: 700;
 }
