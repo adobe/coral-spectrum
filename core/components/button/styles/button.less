@@ -29,18 +29,12 @@
 @button-disabled-border-color: rgb(210, 210, 210);
 @button-disabled-background-color: rgb(230, 230, 230);
 
-
-// Default button
 button,
 .button {
-  // used by anchor to accept the height and width values
-  display: inline-block;
 
-  .border-box;
-  vertical-align: top; // used to align them correctly in forms.
-  margin: 0;
+  .component-single-line;
 
-  min-width: 110*@px;  
+  min-width: 110*@px;
 
   padding: 10*@px 15*@px;
   border: @px solid;
@@ -157,13 +151,20 @@ button[disabled]:active,
 button.disabled:hover,
 button[disabled]:hover,
 .button.disabled:hover {
-    cursor: default;
+  cursor: default;
 
-    border-color: @button-disabled-border-color;
+  text-shadow: none;
+  .box-shadow(none);
 
-    color: @button-disabled-text-color;
-    text-shadow: none;
-    .box-shadow(none);
+  color: @button-disabled-text-color;
+  border-color: @button-disabled-border-color;
+  background: @button-disabled-background-color;
 
-    background: @button-disabled-background-color;
+  i[class^="icon-"],
+  i[class*=" icon-"] {
+    &, &:before {
+      color: @button-disabled-text-color;
+      opacity: 1;
+    }
+  }
 }

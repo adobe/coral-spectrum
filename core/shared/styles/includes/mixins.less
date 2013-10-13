@@ -165,7 +165,7 @@
  Set an element as a border box
 */
 .border-box {
-    .box-sizing(border-box);
+  .box-sizing(border-box);
 }
 
 /**
@@ -182,6 +182,27 @@
     width: @fallback;
     .calc-width(@expression);
 }
+
+/*
+  Mixin: .component-single-line
+  Common styles used for single line components.
+
+*/
+.component-single-line() {
+
+  .border-box;
+  // margin has to be handled by the container.
+  margin: 0;
+  // we need to use top since some elements cannot be centered using middle.
+  vertical-align: top;
+  // used by anchor to accept the height and width values
+  display: inline-block;
+
+  // allows the boders to use the transparency.
+  -webkit-background-clip: padding-box;  // Safari 4 Chrome 6
+  background-clip: padding-box;          // Firefox 4, Safari 5, Opera 10, IE 9
+}
+
 
 /*
   Mixin: .button-square
@@ -263,7 +284,6 @@
     background-color: rgba(0,0,0,0);
   }
 }
-
 
 .iosTapHoldPreventDefault() {
     -webkit-touch-callout: none;
