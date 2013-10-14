@@ -144,4 +144,35 @@ jQuery(function($) {
     quickform.find('.trigger').fipo('tap', 'click', function () {
         quickform.toggleClass('open');
     });
+
+    $("#references-first-type").fipo('tap', 'click', function () {
+        toggleReferencesView();
+    });
+
+    rail.fipo('tap', 'click', '[data-view="references"] .back', function () {
+        toggleReferencesView();
+    });
+
+    rail.fipo('tap', 'click', '.references .detail section', function (e) {
+        var $section = $(this);
+
+        var $actions = $section.find(".actions");
+        if (!$actions.is(e.target) && !$.contains($actions[0], e.target)) {
+            // Toggle actions status
+            $actions.toggle();
+
+            // Hide actions of siblings
+            $section.siblings().find(".actions").hide();
+        }
+
+        e.preventDefault();
+    });
+
+    function toggleReferencesView() {
+        var $references = rail.find(".references");
+        $references.find(".list").toggle();
+        $references.find(".detail").toggle();
+        rail.find(".back").toggle();
+    }
+
 });
