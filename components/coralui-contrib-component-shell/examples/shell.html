@@ -65,7 +65,7 @@
                         <a href="#Settings">Settings</a>
                     </nav>
                 </div>
-                
+
                 <div class="rail-view active group" data-view="filter">
                     <div class="search">
                         <label for="q1" class="hidden-accessible">Search</label>
@@ -73,7 +73,7 @@
                         <button type="submit" class="icon-search">Search</button>
                         <button type="reset">Clear</button>
                     </div>
-                    
+
                     <section>
                         <span class="heading">Datepicker</span>
                         <div class="datepicker onTime rail-margin" data-init="datepicker">
@@ -351,7 +351,7 @@
                 <div class="rail-view" data-view="presets">
                     <section>
                         <span class="heading">Presets</span>
-                    </section>                         
+                    </section>
                 </div>
 
             </div>
@@ -385,7 +385,7 @@
                     </nav>
                 </div>
             </nav>
-            
+
             <!-- The Grid -->
             <div class="grid content-container">
                 <div class="grid-0">
@@ -425,11 +425,22 @@
                         <a href="#">
                             <span class="image"><img src="images/previews/preview1.png" alt=""></span>
                             <div class="label">
-                                <h4 class="main">#2 Page Title</h4>
+                                <div class="main">
+                                    <h4>#2 Page Title</h4>
+                                </div>
                                 <div class="info">
-                                    <p class="published"><i class="icon-globe">Published</i> <span class="date" data-timestamp="12">12 hours ago</span> <span class="user">Alison Parker</span></p>
-                                    <p class="modified"><i class="icon-edit">Modified</i> <span class="date" data-timestamp="2">2 days ago</span> <span class="user">John Doe</span></p>
-                                    <p class="links"><i class="icon-arrowright">Link</i> <span class="links-number">3</span></p>
+                                    <div class="status">
+                                        <p class="modified">
+                                            <i class="icon-edit">Modified</i>
+                                            <span class="date" data-timestamp="7">7 days ago</span>
+                                            <span class="user">John Doe</span>
+                                        </p>
+                                        <p class="published">
+                                            <i class="icon-globe">Published</i>
+                                            <span class="date" data-timestamp="8">8 hours ago</span>
+                                            <span class="user">Alison Parker</span>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </a>
@@ -443,15 +454,37 @@
                             <span class="image"><img src="images/previews/preview1.png" alt=""></span>
                             <div class="label">
                                 <div class="main">
+                                    <p class="descriptor">Launch</p>
                                     <h4>#3 Page Title (with sub-pages)</h4>
                                     <p class="info-approved">Approve</p>
                                     <p class="info-locked">Locked</p>
-                                    <p class="info-copy">Launch</p>
                                 </div>
                                 <div class="info">
-                                    <p class="published"><i class="icon-globe">Published</i> <span class="date" data-timestamp="15">15 hours ago</span> <span class="user">Alison Parker</span></p>
-                                    <p class="modified"><i class="icon-edit">Modified</i> <span class="date" data-timestamp="3">3 days ago</span> <span class="user">John Doe</span></p>
-                                    <p class="links"><i class="icon-arrowright">Link</i> <span class="links-number">4</span></p>
+                                    <div class="short-info">
+                                        <span class="hideinnav">
+                                            <i class="icon-viewoff">Hidden</i>
+                                        </span>
+                                        <span class="links">
+                                            <i class="icon-arrowright">Link</i>
+                                            <span class="links-number">3</span>
+                                        </span>
+                                        <span class="copies">
+                                            <i class="icon-unmerge">Copies</i>
+                                            <span class="copies-number">3</span>
+                                        </span>
+                                    </div>
+                                    <div class="status">
+                                        <p class="modified">
+                                            <i class="icon-edit">Modified</i>
+                                            <span class="date">2 days ago</span>
+                                            <span class="user">John Doe</span>
+                                        </p>
+                                        <p class="published">
+                                            <i class="icon-globe">Published</i>
+                                            <span class="date">12 hours ago</span>
+                                            <span class="user">Alison Parker</span>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </a>
@@ -464,11 +497,20 @@
                         <a href="#">
                             <span class="image"><img src="images/previews/preview1.png" alt=""></span>
                             <div class="label">
-                                <h4 class="main">#4 Page (hidden)</h4>
+                                <h4 class="main">#4 Page (ghost)</h4>
                                 <div class="info">
-                                    <p class="published"><i class="icon-globe">Published</i> <span class="date" data-timestamp="10">10 hours ago</span> <span class="user">Alison Parker</span></p>
-                                    <p class="modified"><i class="icon-edit">Modified</i> <span class="date" data-timestamp="4">4 days ago</span> <span class="user">John Doe</span></p>
-                                    <p class="links"><i class="icon-arrowright">Link</i> <span class="links-number">5</span></p>
+                                    <div class="status">
+                                        <p class="modified">
+                                            <i class="icon-edit">Modified</i>
+                                            <span class="date">2 days ago</span>
+                                            <span class="user">John Doe</span>
+                                        </p>
+                                        <p class="published">
+                                            <i class="icon-globe">Published</i>
+                                            <span class="date">12 hours ago</span>
+                                            <span class="user">Alison Parker</span>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </a>
@@ -487,13 +529,14 @@
                             <span class="image"><img src="images/previews/preview1.png" alt=""></span>
                             <div class="label">
                                 <div class="main">
-                                    <h4>#5 Page Title</h4>
+                                    <h4>#5 Page Title (with an alert banner)</h4>
                                 </div>
                                 <div class="info">
                                     <div class="short-info">
                                         <span class="copies">
-                                        <i class="icon-unmerge">Copies</i>
-                                        <span class="copies-number">4</span>
+                                            <i class="icon-unmerge">Copies</i>
+                                            <span class="copies-number">4</span>
+                                        </span>
                                     </div>
                                     <div class="status">
                                         <p class="modified">
@@ -521,13 +564,14 @@
                             <span class="image"><img src="images/previews/preview1.png" alt=""></span>
                             <div class="label">
                                 <div class="main">
-                                    <h4>#6 Page Title</h4>
+                                    <h4>#6 Page Title (with a status flag)</h4>
                                 </div>
                                 <div class="info">
                                     <div class="short-info">
                                         <span class="copies">
-                                        <i class="icon-unmerge">Copies</i>
-                                        <span class="copies-number">4</span>
+                                            <i class="icon-unmerge">Copies</i>
+                                            <span class="copies-number">4</span>
+                                        </span>
                                     </div>
                                     <div class="status">
                                         <p class="modified">
@@ -560,13 +604,14 @@
                             <span class="image"><img src="images/previews/preview1.png" alt=""></span>
                             <div class="label">
                                 <div class="main">
-                                  <h4>#7 Page Title</h4>
+                                  <h4>#7 Page Title (with an alert banner and status flag)</h4>
                                 </div>
                                 <div class="info">
                                     <div class="short-info">
                                         <span class="copies">
-                                        <i class="icon-unmerge">Copies</i>
-                                        <span class="copies-number">2</span>
+                                            <i class="icon-unmerge">Copies</i>
+                                            <span class="copies-number">2</span>
+                                        </span>
                                     </div>
                                     <div class="status">
                                         <p class="modified">
