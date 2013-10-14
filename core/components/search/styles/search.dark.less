@@ -7,16 +7,19 @@
 
     button[type=submit],
     button[type=reset] {
-      &,
       &:before {
         color: @icon-white-color;
         opacity: @icon-white-opacity;
       }
 
+      &,
       &:disabled,
+      &:disabled:hover {
+        color: transparent;
+      }
+
       &:disabled:before {
         color: @icon-white-color;
-        // opacity: @icon-disabled-opacity;
       }
     }
 
