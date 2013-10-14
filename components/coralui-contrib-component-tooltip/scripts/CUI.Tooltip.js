@@ -83,7 +83,7 @@ The quicktip data options are applied to the target element of the tooltip (see 
                 this.options.interactive = true;
                 if (!this.options.target) this.options.target = this.$element.parent();
             }
-     
+
             if (this.$element.data("target")) {
                 this.options.target = $(this.$element.data("target"));
             }
@@ -129,14 +129,13 @@ The quicktip data options are applied to the target element of the tooltip (see 
                     showTimeout = setTimeout(function() {
                         this.show();
                     }.bind(this), this.options.delay);
-                }.bind(this));        
+                }.bind(this));
 
                 $(this.options.target).pointer("mouseout.cui-tooltip", function(event) {
                     if (showTimeout) clearTimeout(showTimeout);
                     this.hide();
-                }.bind(this));        
+                }.bind(this));
             }
-          
         },
 
         defaults: {
@@ -156,14 +155,14 @@ The quicktip data options are applied to the target element of the tooltip (see 
           'success',
           'inspect'
         ],
-        
+
         _arrows: [
           'arrow-left',
           'arrow-right',
           'arrow-top',
           'arrow-bottom'
         ],
-        
+
         applyOptions: function() {
           this._setContent();
           this._setType();
@@ -183,7 +182,7 @@ The quicktip data options are applied to the target element of the tooltip (see 
             // Re-positioning
             this.reposition();
         },
-        
+
         /** @ignore */
         _setArrow: function() {
             if (typeof this.options.arrow !== 'string' || this._arrows.indexOf("arrow-" + this.options.arrow) === -1) return;
@@ -196,7 +195,7 @@ The quicktip data options are applied to the target element of the tooltip (see 
 
             // Re-positioning
             this.reposition();
-        },    
+        },
 
         /** @ignore */
         _setContent: function() {
@@ -208,7 +207,6 @@ The quicktip data options are applied to the target element of the tooltip (see 
             this.reposition();
         },
 
-        
         /** @ignore */
         _show: function() {
             if (this.$element.hasClass("hidden")) {
@@ -226,7 +224,7 @@ The quicktip data options are applied to the target element of the tooltip (see 
                 this.$element.remove();
                 $(this.options.target).off(".cui-tooltip");
                 $(this.options.target).data("tooltip", null);
-              }         
+              }
             }.bind(this));
             return this;
         },
@@ -238,10 +236,10 @@ The quicktip data options are applied to the target element of the tooltip (see 
          */
         reposition: function(withoutWorkaround) {
             if (!this.options.target) return;
-            
+
             // Reposition a second time due to rendering errors with Chrome and IE
             if (!withoutWorkaround) setTimeout(function() {this.reposition(true);}.bind(this), 50);
-            
+
             this.$element.detach().insertAfter(this.options.target);
 
             this.$element.css("position", "absolute");
@@ -274,7 +272,7 @@ The quicktip data options are applied to the target element of the tooltip (see 
             if (this.options.arrow === "top") {
                 left =  eLeft + (eWidth - width) / 2;
                 top = eTop + eHeight + this.options.distance;
-            }                  
+            }
 
             this.$element.css('left', left);
             this.$element.css('top', top);
@@ -291,10 +289,11 @@ The quicktip data options are applied to the target element of the tooltip (see 
             // Only initialize non-interactive tooltips this way!
             $("[data-init~=tooltip]", e.target).tooltip();
         });
-        
-        $(document).fipo("touchstart", "mouseover", "[data-init~=quicktip]", function(event) {
-          var el = $(event.target);
+
+        $(document).fipo("touchstart", "mouseover", "[data-init~=quicktip]", function(e) {
+          var el = $(this);
           var tooltip = el.data("tooltip");
+
           if (!tooltip) {
             new CUI.Tooltip({
               target: el,
@@ -304,9 +303,8 @@ The quicktip data options are applied to the target element of the tooltip (see 
               interactive: true,
               autoDestroy: true
             });
-            el.trigger(event);
+            el.trigger(e);
           }
-        }.bind(this));  
-
+        });
     }
 }(window.jQuery));
