@@ -1,43 +1,33 @@
 /**
-  Element: Search
+  Element: .search
   A simple search field with button
 */
 
-// Search Text Field
-@search-text-color: rgb(150, 150, 150);
-@search-text-background-color: rgb(249, 249, 249);
-@search-text-disabled-background-color: rgb(224, 224, 224);
-@search-text-border-color: rgb(184, 184, 184); 
-@search-text-disabled-border-color: rgb(209, 209, 209); 
-@search-button-gradient-start-color: rgb(234, 234, 234);
-@search-button-gradient-end-color: rgb(244, 244, 244);
-@search-button-hover-background-color: rgb(244, 244, 244);
-@search-button-down-background-color: rgb(211, 211, 211);
-@search-button-disabled-background-color: rgb(224, 224, 224);
-@search-button-disabled-border-color: rgb(209, 209, 209);
-
 .search {
-  display: inline-block;
 
-  .border-box;
-  vertical-align: top; // used to align them correctly in forms.
-  margin: 2*@px 0;  // resets default margin
+  .component-single-line;
+
+  height: @component-single-line-height;
 
   position: relative;
   
   input[type=text] {
     margin: 0;
-    padding: 10*@px 32*@px;
+    padding-left: @component-single-line-height;
+    padding-right: @component-single-line-height;
   }
 
   button {
-    .icon-search;
-    .button-square-transparent(36*@px);
     position: absolute;
     display: block;
-    // places the button below the border
-    top: 1*@px;
     color: transparent;
+
+    .icon-search;
+    .icon-small;
+    .button-square-transparent(36*@px);
+
+    // places the button below the border
+    top: 1*@px; 
 
     &,
     &:hover,
@@ -45,28 +35,33 @@
     &:disabled {
       border: none;
       filter: none;
+      color: transparent;
     }
   }
 
   button[type=submit] {
+    .icon-search;
+    .icon-small;
+    .button-square-transparent(36*@px);
+
     left: 1*@px;
   }
 
   button[type=reset] {
     .icon-close;
-    .button-square-transparent(30*@px); 
-    font-size: 0.6rem;
-    top: 1*@px; 
-    right: 1*@px; 
-  }
+    .icon-xsmall;
+    .button-square-transparent(36*@px);
 
+    right: 1*@px;
+  }
 
   &.error input {
     border-color: @textfield-error-border-color;
     color: @textfield-error-font-color;
 
     &:focus {
-      .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+      .glow(6*@px, @textfield-error-border-color, @textfield-error-border-color);
+      color: @textfield-error-font-color;
     }
   }
 
@@ -78,7 +73,7 @@
     }
 
     &:focus {
-      .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+      .glow(6*@px, @textfield-error-border-color, @textfield-error-border-color);
     }
   }
 }

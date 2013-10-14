@@ -11,6 +11,9 @@
 @demo-background-color: rgb(247, 247, 247);
 @demo-border-color: rgb(187, 187, 187);
 
+@grid-item-background-color: white;
+@grid-item-border-color: rgb(230, 230, 230);
+
 /*
   shortcuts for a specific font or style
 */
@@ -291,13 +294,6 @@ div.fakeBody {
   .clearfix();
 }
 
-.buttonSample {
-  button + button,
-  a.button + button {
-    margin-left: 1rem;
-  }
-}
-
 .railSample {
   .page {
     position: static;
@@ -317,8 +313,8 @@ div.fakeBody {
     margin-right: 1rem;
   }
 
-  
   button {
+    height: auto;
     float: left;
     width: 2rem;
     min-width: 0;
@@ -394,8 +390,8 @@ div.left.column {
   }
 }
 
-.example [class^="card-"],
-.example [class*=" card-"] {
+.example .grid [class^="card-"],
+.example .grid [class*=" card-"] {
     width: 240*@px;
     margin-right: 15*@px;
     float: left;

@@ -7,7 +7,7 @@
 @body-dark-background-color: RGB(77, 77, 77);
 @font-base-dark-color: rgb(220, 220, 220);
 
-[data-theme~=dark] {
+.theme-dark {
   body {
     background-color: @body-dark-background-color;
     color: @font-base-dark-color;
@@ -15,7 +15,9 @@
 }
 
 // allows different containers to style the background and color.
-body[data-theme~=dark], section[data-theme~=dark], div[data-theme~=dark] {
-  background-color: @body-dark-background-color;
-  color: @font-base-dark-color;
+body, section, div {
+  &.theme-dark {
+    background-color: @body-dark-background-color;
+    color: @font-base-dark-color;
+  }
 }

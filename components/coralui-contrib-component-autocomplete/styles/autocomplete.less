@@ -1,0 +1,115 @@
+@autocomplete-suggestion-toggle-border-color: rgba(0, 0, 0, 0.25);
+@autocomplete-suggestion-toggle-background-gradient-start: rgb(255, 255, 255);
+@autocomplete-suggestion-toggle-background-gradient-end: rgb(240, 240, 240);
+@autocomplete-suggestion-toggle-active-background-color: rgb(230, 230, 230);
+@autocomplete-suggestion-toggle-active-glow-color: rgba(0, 0, 0, 0.08);
+@autocomplete-suggestion-toggle-hover-background-color: rgb(255, 255, 255);
+@autocomplete-suggestion-toggle-disabled-background-color: rgb(230, 230, 230);
+@autocomplete-suggestion-toggle-disabled-border-color: rgb(210, 210, 210);
+@autocomplete-suggestion-toggle-disabled-text-color: rgb(180, 180, 180);
+
+.autocomplete {
+    position: relative;
+
+    .component-single-line;
+
+    width: 13rem; /* Width must be specified */
+
+    @input-height: 2rem;
+    @suggestion-btn-size: 36*@px;
+
+    > input {
+        margin: 0;
+        padding-right: @input-height;
+        width: 100%;
+
+        &.autocomplete-has-suggestion-btn {
+            padding-right: @suggestion-btn-size + 2*@px;    
+        }
+    }
+    
+    // icon as a prefix
+    &[class^="icon-"], 
+    &[class*=" icon-"] {
+        overflow: visible;
+        height: auto;
+        white-space: inherit;
+        color: inherit;
+        text-align: left;
+
+        &:before {
+            position: absolute;
+            line-height: 38*@px;
+            left: 10*@px;
+        }
+
+        > input {
+            padding-left: 10*@px + 20*@px;
+        }
+    }
+    
+    // clear button
+    > .autocomplete-clear {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 38*@px;
+        width: 38*@px; /* make it square */
+        cursor: pointer;
+
+        &.hide {
+            display: none;
+        }
+    }
+
+    > .autocomplete-suggestion-toggle {
+        .button-square(@suggestion-btn-size);
+
+        .gradient(@autocomplete-suggestion-toggle-background-gradient-start, @autocomplete-suggestion-toggle-background-gradient-end);
+        position: absolute;
+        top: @px; // due to border of 1px
+        right: @px; // due to border of 1px
+        line-height: 24*@px;
+        min-width: 0;
+        margin: 0;
+        padding: 0;
+        border: none;
+        color: @font-base-color;
+
+        &:after {
+            content: "\25BE";
+            line-height: inherit;
+            width: inherit;
+            height: 100%;
+            text-align: center;
+            text-shadow: none;
+            font-size: 1.2em;
+            color: inherit;
+        }
+
+        &,
+        &:active,
+        &:hover {
+            border-top: 0;
+            border-right: 0;
+            border-bottom: 0;
+            border-left: 1*@px solid @autocomplete-suggestion-toggle-border-color;
+        }
+
+        &:hover {
+            background: @autocomplete-suggestion-toggle-hover-background-color;
+        }
+        
+        &:active,
+        &.active {
+            background: @autocomplete-suggestion-toggle-active-background-color;
+            .box-shadow(inset 0 0 4*@px @autocomplete-suggestion-toggle-active-glow-color);
+        }
+
+        &[disabled] {
+            color: @autocomplete-suggestion-toggle-disabled-text-color;
+            background: @autocomplete-suggestion-toggle-disabled-background-color;
+            border-color: @autocomplete-suggestion-toggle-disabled-border-color;
+        }
+    }
+}

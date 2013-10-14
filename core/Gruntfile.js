@@ -53,15 +53,10 @@ module.exports = function(grunt) {
 
       // jQuery position plugin
       dirs.build +'/js/source/externals/jquery-ui/jquery.ui.position.js',
+      dirs.build +'/js/source/jquery.ui.position.patch.js',
 
       // base for widgets
-      dirs.build +'/js/source/CUI.Widget.js',
-
-      // actual widgets
-      dirs.build +'/js/source/components/CUI.TagList.js',
-      dirs.build +'/js/source/components/CUI.SelectList.js',
-      dirs.build +'/js/source/components/CUI.Autocomplete.js',
-      dirs.build +'/js/source/components/CUI.Select.js'
+      dirs.build +'/js/source/CUI.Widget.js'
     ]
   };
   var packages = {

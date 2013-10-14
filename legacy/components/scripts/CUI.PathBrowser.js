@@ -370,7 +370,7 @@
         _inputChanged: function() {
             var self = this;
 
-            var searchFor = this.inputElement.attr("value");
+            var searchFor = this.inputElement.val();
             if (searchFor.length > 0) {
                 this.options.autocompleteCallback(searchFor)
                     .done(

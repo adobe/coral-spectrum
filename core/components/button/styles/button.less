@@ -29,26 +29,23 @@
 @button-disabled-border-color: rgb(210, 210, 210);
 @button-disabled-background-color: rgb(230, 230, 230);
 
-
-// Button: Default (gray)
 button,
 .button {
-  // used by anchor to accept the height and width values
-  display: inline-block;
 
-  .border-box;
-  vertical-align: top; // used to align them correctly in forms.
-  margin: 2*@px 0;  // resets default margin
+  .component-single-line;
 
-  min-width: 110*@px;  
+  min-width: 110*@px;
 
   padding: 10*@px 15*@px;
   border: @px solid;
   border-color: fade(@button-default-border-color, 65%);
 
   .bold-text;
+
   font-size: @button-text-size;
   line-height: @button-line-height;
+  height: @component-single-line-height;
+
   color: @button-text-color;
   text-decoration: none; // resets underline on anchor
   text-align: center;
@@ -60,8 +57,8 @@ button,
   .gradient(@button-default-gradient-start-color, @button-default-gradient-end-color);
 
   &:hover {
-        text-decoration: none; // resets underline on anchor
-        .gradient(@button-default-gradient-start-color, @button-default-gradient-start-color);
+    text-decoration: none; // resets underline on anchor
+    .gradient(@button-default-gradient-start-color, @button-default-gradient-start-color);
   }
 
   &:active {
@@ -79,7 +76,14 @@ button,
   // A square button for buttons attached to form fields with icons in them
   &.button-square,
   &.square {
-    .button-square;
+
+    // special width for icon only buttons.
+    min-width: 52*@px;
+
+    i[class^="icon-"],
+    i[class*=" icon-"] {
+        margin-right: 0; // Margin does not display well in buttons without text
+    }
   }
 
   // call to action button.
@@ -88,6 +92,7 @@ button,
     font-size: @button-text-large-size;
     min-width: 135*@px;
     padding: 14*@px 20*@px;
+    height: 46*@px;
   }
 
   &.button-block,
@@ -95,15 +100,13 @@ button,
     display: block;
     // spans to the width of the container
     width: 100%;
-    padding-left: 0;
-    padding-right: 0;
     // the container should set the desired margin
     margin-left: 0;
     margin-right: 0;
   }
 }
 
-// Button: Primary (blue)
+// Primary button
 button.primary:not(.disabled):not([disabled]),
 .button.primary:not(.disabled):not([disabled]) {
   border-color: fade(@button-primary-border-color, 70%);
@@ -120,7 +123,7 @@ button.primary:not(.disabled):not([disabled]),
   }
 }
 
-// Button: Warning (red)
+// Warning button
 button.warning:not(.disabled):not([disabled]),
 .button.warning:not(.disabled):not([disabled]) {
   border-color: fade(@button-warning-border-color, 70%);
@@ -138,7 +141,7 @@ button.warning:not(.disabled):not([disabled]),
   }
 }
 
-// Button: Disabled
+// Disabled
 button.disabled,
 button[disabled],
 .button.disabled,
@@ -148,13 +151,20 @@ button[disabled]:active,
 button.disabled:hover,
 button[disabled]:hover,
 .button.disabled:hover {
-    cursor: default;
+  cursor: default;
 
-    border-color: @button-disabled-border-color;
+  text-shadow: none;
+  .box-shadow(none);
 
-    color: @button-disabled-text-color;
-    text-shadow: none;
-    .box-shadow(none);
+  color: @button-disabled-text-color;
+  border-color: @button-disabled-border-color;
+  background: @button-disabled-background-color;
 
-    background: @button-disabled-background-color;
+  i[class^="icon-"],
+  i[class*=" icon-"] {
+    &, &:before {
+      color: @button-disabled-text-color;
+      opacity: 1;
+    }
+  }
 }

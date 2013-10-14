@@ -1,0 +1,121 @@
+/**
+ * Class: table.data
+ * Use for tables containing data
+ */
+
+ // Table
+@table-border-color: rgb(187, 187, 187);
+
+@table-heading-background-color: rgb(220, 220, 220);
+@table-heading-sorted-background-color: rgb(210, 210, 210);
+
+@table-cell-border-color: rgb(230, 230, 230);
+@table-cell-background-color: rgb(255, 255, 255);
+
+@table-cell-hover-background-color: rgb(210, 230, 245);
+@table-cell-hover-border-color: rgb(170, 205, 240);
+
+@table-cell-selected-background-color: rgb(170, 205, 240);
+@table-cell-selected-border-color: rgb(140, 185, 230);
+
+table.data {
+  // border-collapse: collapse; // Messes up horizontal borders
+  border-spacing: 0;  
+
+  border: @px solid @table-border-color;
+
+  th,
+  td {
+    padding: 0.5rem;
+
+    text-align: left;
+
+    &.num {
+      text-align: right;
+    }
+
+    input[type=checkbox] {
+      + span {
+        margin: 0;
+        padding: 0;
+        
+        &:before {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  th {
+    background: @table-heading-background-color;
+
+    // All th have dark bottom border
+    border-bottom: @px solid @table-border-color;
+  }
+
+  th + th {
+    // All th except first have dark left border
+    border-left: @px solid @table-border-color;
+  }
+
+  td {
+    background: @table-cell-background-color;
+  }
+
+  td + td {
+    // All td except first td in row have light left border
+    border-left: @px solid @table-cell-border-color;
+  }
+
+  tr + tr {
+    td {
+      // All td except td in first row have light top border
+      border-top: @px solid @table-cell-border-color;
+    }
+  }
+
+  tr:hover {
+    >td {
+        background: @table-cell-hover-background-color;
+
+        border-color: @table-cell-hover-border-color;
+    }
+
+    & + tr {
+      >td {
+        // Change the top border color of cells in the next row
+        border-top: @px solid @table-cell-hover-border-color;
+      }
+    }
+  }
+
+  tr.selected {
+    >td {
+      background: @table-cell-selected-background-color;
+
+      border-left-color: @table-cell-selected-border-color;
+      border-top-color: @table-cell-selected-border-color;
+    }
+
+    & + tr {
+      >td {
+        border-top-color: @table-cell-selected-border-color;
+      }
+    }
+  }
+
+  &.noHover {
+    tr:hover {
+      >td {
+        background: @table-cell-background-color;
+        border-color:@table-cell-border-color;
+      }
+
+      & + tr {
+        >td {
+          border-color: @table-cell-border-color;
+        }
+      }
+    }
+  }
+}

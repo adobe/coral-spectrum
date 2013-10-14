@@ -15,7 +15,6 @@
   from Adobe Systems Incorporated.
 */
 (function(document, $) {
-    /*jshint es5:true */
     "use strict";
 
     var registry = (function() {
@@ -31,16 +30,12 @@
         var validators = [];
 
         return {
-            get submittableSelector() {
-                return submittableSelector;
-            },
-
             isSummittable: function(el) {
-                return el.is(this.submittableSelector);
+                return el.is(submittableSelector);
             },
 
             submittables: function(form) {
-                return form.find(this.submittableSelector);
+                return form.find(submittableSelector);
             },
 
             isCandidate: function(el) {
@@ -84,10 +79,10 @@
 
         this.state = (function(outer) {
             return {
-                get customError() {
+                getCustomError: function() {
                     return !!outer.customMessage;
                 },
-                get valid() {
+                isValid: function() {
                     return !outer.customMessage && !outer.message;
                 }
             };
@@ -110,7 +105,7 @@
     }
 
     HTMLValidation.prototype = {
-        get willValidate() {
+        willValidate: function() {
             return this.registry.isCandidate(this.el);
         },
 
@@ -118,14 +113,14 @@
             this.customMessage = message;
         },
 
-        get validity() {
+        getValidity: function() {
             return this.state;
         },
 
         checkValidity: function(options) {
             options = options || {};
 
-            if (!this.willValidate) {
+            if (!this.willValidate()) {
                 return true;
             }
 
@@ -155,21 +150,21 @@
             return true;
         },
 
-        get validationMessage() {
-            if (!this.willValidate) return "";
+        getValidationMessage: function() {
+            if (!this.willValidate()) return "";
 
             return this.customMessage || this.message || "";
         },
 
         updateUI: function() {
             var f;
-            if (this.validity.valid) {
+            if (this.getValidity().isValid()) {
                 f = function(v) {
                     return !v.clear || v.clear(this.el) === $.validator.CONTINUE;
                 };
             } else {
                 f = function(v) {
-                    return !v.show || v.show(this.el, this.validationMessage) === $.validator.CONTINUE;
+                    return !v.show || v.show(this.el, this.getValidationMessage()) === $.validator.CONTINUE;
                 };
             }
 
@@ -201,7 +196,7 @@
     $.fn.willValidate = function() {
         var api = registry.api(this.first());
         if (api) {
-            return api.willValidate;
+            return api.willValidate();
         } else {
             return false;
         }
@@ -218,7 +213,7 @@
     $.fn.validationMessage = function() {
         var api = registry.api(this.first());
         if (api) {
-            return api.validationMessage;
+            return api.getValidationMessage();
         } else {
             return "";
         }
@@ -365,7 +360,7 @@ jQuery.validator.register({
                 var allValid = true;
                 root.find(":submittable").each(function() {
                     var el = $(this);
-                    if (el.willValidate && !el.checkValidity()) {
+                    if (el.willValidate() && !el.checkValidity()) {
                         allValid = false;
                         return false;
                     }
@@ -385,7 +380,7 @@ jQuery.validator.register({
         return registry.submittables(form)
             .map(function() {
                 var api = registry.api($(this));
-                if (!api || !api.willValidate || api.checkValidity({
+                if (!api || !api.willValidate() || api.checkValidity({
                     suppressEvent: true
                 })) return;
                 return this;

@@ -1,0 +1,41 @@
+.theme-dark {
+    @select-border-color: rgba(30, 30, 30, 0.65);
+    @select-background-gradient-start: rgb(85, 85, 85);
+    @select-background-gradient-end: rgb(70, 70, 70);
+    @select-active-background-color: rgb(70, 70, 70);
+    @select-hover-background-color: rgb(80, 80, 80);
+    @select-disabled-background-color: rgb(80, 80, 80);
+    @select-disabled-border-color: rgb(65, 65, 65);
+    @select-disabled-text-color: rgb(100, 100, 100);
+
+
+    .select {
+        color: @font-base-dark-color;
+        
+        > button {
+            color: @font-base-dark-color;
+            .gradient(@select-background-gradient-start, @select-background-gradient-end);
+
+            &, 
+            &:hover,
+            &:active {
+                border: 1*@px solid @select-border-color;
+            }
+
+            &:hover {
+                background: @select-hover-background-color;
+            }
+
+            &:active,
+            &.active {
+                background: @select-active-background-color;
+            }
+
+            &[disabled] {
+                color: @select-disabled-text-color;
+                background: @select-disabled-background-color;
+                border-color: @select-disabled-border-color;
+            }
+        }
+    }
+}

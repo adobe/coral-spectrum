@@ -1,7 +1,47 @@
-// because of the less compile order
-// the regular search padding-left gets clobbered
-[data-theme~=dark] {
-  .search input[type=text] {
-    padding-left: 32*@px;
-  }   
-} 
+/**
+  Element: .search
+  Dark style
+*/
+.theme-dark {
+  .search {
+
+    button {
+      &:before {
+        color: @icon-white-color;
+        opacity: @icon-white-opacity;
+      }
+
+      &,
+      &:disabled,
+      &:disabled:hover {
+        color: transparent;
+      }
+
+      &:disabled:before {
+        color: @icon-white-color;
+      }
+    }
+
+    &.error input {
+      border-color: @textfield-error-border-color;
+      color: @textfield-error-font-color;
+
+      &:focus {
+        .glow(6*@px, @textfield-error-border-color, @textfield-error-border-color);
+        color: @textfield-error-font-color;
+      }
+    }
+
+    &.error button {
+
+      &:before {
+        color: @textfield-error-font-color;
+        opacity: 1;
+      }
+
+      &:focus {
+        .glow(6*@px, @textfield-error-border-color, @textfield-error-border-color);
+      }
+    }
+  }
+}

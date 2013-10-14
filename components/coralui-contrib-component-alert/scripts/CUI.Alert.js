@@ -6,6 +6,10 @@
     /**
       @extends CUI.Widget
       @classdesc An optionally closable alert message.
+      <style> div.alert {
+          width: 400px;
+      }
+      </style>
 
       <div class="alert error">
         <button class="close" data-dismiss="alert">&times;</button>
@@ -13,53 +17,62 @@
       </div>
 
       @example
-<caption>Instantiate with Class</caption>
-var alert = new CUI.Alert({
-  element: '#myAlert',
-  heading: 'ERROR',
-  content: 'An error has occurred.',
-  closable: true
-});
 
-// Hide the alert, change the content, then show it again
-alert.hide().set({ content: 'Another error has occurred.'}).show();
+      <caption>The constructors below act on the expected HTML markup:</caption>
 
-// jQuery style works as well
-$('#myAlert').alert('hide');
+      &lt;div id=&quot;myAlert&quot;&gt;
+        &lt;button class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;&amp;times;&lt;/button&gt;
+        &lt;strong&gt;ERROR&lt;/strong&gt;&lt;div&gt;Uh oh, something went wrong with the whozit!&lt;/div&gt;
+      &lt;/div&gt;
+       
+      @example
+      <caption>Instantiate with Class</caption>
+      var alert = new CUI.Alert({
+        element: '#myAlert',
+        heading: 'ERROR',
+        content: 'An error has occurred.',
+        closable: true
+      });
+
+      // Hide the alert, change the content, then show it again
+      alert.hide().set({ content: 'Another error has occurred.'}).show();
+
+      // jQuery style works as well
+      $('#myAlert').alert('hide');
 
       @example
-<caption>Instantiate with jQuery</caption>
-$('#myAlert').alert({
-  heading: 'ERROR',
-  content: 'An error has occurred.',
-  closable: true
-});
+      <caption>Instantiate with jQuery</caption>
+      $('#myAlert').alert({
+        heading: 'ERROR',
+        content: 'An error has occurred.',
+        closable: true
+      });
 
-// Hide the alert, change the content, then show it again
-$('#myAlert').alert('hide').alert({ heading: 'Another error has occurred.'}).alert('show');
+      // Hide the alert, change the content, then show it again
+      $('#myAlert').alert('hide').alert({ heading: 'Another error has occurred.'}).alert('show');
 
-// A reference to the element's alert instance is stored as data-alert
-var alert = $('#myAlert').data('alert');
-alert.hide();
-
-      @example
-<caption>Data API: Hide alert</caption>
-<description>When an element within the alert has <code><span class="atn">data-dismiss</span>=<span class="atv">"alert"</span></code>, it will hide the alert.</description>
-&lt;a data-dismiss=&quot;alert&quot;&gt;Dismiss&lt;/a&gt;
+      // A reference to the element's alert instance is stored as data-alert
+      var alert = $('#myAlert').data('alert');
+      alert.hide();
 
       @example
-<caption>Markup</caption>
-&lt;div class=&quot;alert error&quot;&gt;
-  &lt;button class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;&amp;times;&lt;/button&gt;
-  &lt;strong&gt;ERROR&lt;/strong&gt;&lt;div&gt;Uh oh, something went wrong with the whozit!&lt;/div&gt;
-&lt;/div&gt;
+      <caption>Data API: Hide alert</caption>
+      <description>When an element within the alert has <code><span class="atn">data-dismiss</span>=<span class="atv">"alert"</span></code>, it will hide the alert.</description>
+      &lt;a data-dismiss=&quot;alert&quot;&gt;Dismiss&lt;/a&gt;
+
+      @example
+      <caption>Markup</caption>
+      &lt;div class=&quot;alert error&quot;&gt;
+        &lt;button class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;&amp;times;&lt;/button&gt;
+        &lt;strong&gt;ERROR&lt;/strong&gt;&lt;div&gt;Uh oh, something went wrong with the whozit!&lt;/div&gt;
+      &lt;/div&gt;
 
       @desc Creates a new alert
       @constructs
 
       @param {Object} options                               Component options
-      @param {String} [options.heading=Type, capitalized]   Title of the alert (HTML)
-      @param {String} options.content                       Content of the alert (HTML)
+      @param {String} [options.heading=Type, capitalized]   Title of the alert
+      @param {String} options.content                       Content of the alert
       @param {Boolean} options.closable                     Array of button descriptors
       @param {String} [options.size=small]                  Size of the alert. Either large or small. 
       @param {String} [options.type=error]                  Type of alert to display. One of error, notice, success, help, or info
@@ -101,6 +114,17 @@ alert.hide();
         // Set default heading
         this.options.heading = this._fixHeading(this.options.heading);
 
+        // *** DEPRECATION WARNING ***
+
+        // Use of Handlebars.js is deprecated.  Coral UI will no longer natively
+        // support Handlebars.js templates in an upcoming version.  Please fix this
+        // implementation and remove this warning.
+
+        // See https://issues.adobe.com/browse/CUI-1025 for details
+
+
+        // TODO: remove use of handlebars templates
+        // see https://issues.adobe.com/browse/CUI-1098
         this.$element.html(CUI.Templates['alert'](this.options));
 
         this._setClosable();

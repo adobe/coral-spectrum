@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Tooltip examples</title>
+
+        <link rel="stylesheet" href="../../css/cui.css">
+        
+        <script src="../../js/libs/handlebars.js"></script>
+        <script src="../../js/libs/moment.js"></script>
+        <script src="../../js/libs/jquery.js"></script>
+        <script src="../../js/libs/jquery-fingerpointer.js"></script>
+        <script src="../../js/libs/toe.js"></script>
+  
+        <script src="../../js/CUI.js"></script>
+    </head>
+    <body>
+
+        <section>
+            <h1>Tooltips</h1>
+            <p>
+                <button id="my-button">My Button</button>
+                <span class="tooltip arrow-bottom" data-interactive="true" data-init="tooltip" data-target="#my-button">Tooltip content</span>
+            </p>
+            <p>
+            <span id="tt2">Tooltipped2</span>
+            <span class="tooltip arrow-top success" data-interactive="true" data-init="tooltip" data-target="#tt2">TEST 2</span>
+            </p>
+            <p>
+            <span id="tt3">Tooltipped3</span>
+            <span class="tooltip error" data-interactive="false" data-init="tooltip" data-target="#tt3">TEST 3</span>
+            </p>
+            <p>
+                <button id="dynamic-button">Dynamic tooltip</button><br>
+            </p>
+            <h2>Quicktips</h2>
+            <p>
+            <button id="add" class="primary">Add new Quicktip Element</button><br>
+            </p>
+            <p>
+                Chart tooltip:
+                <div class="tooltip chart arrow-top">Chart tooltip.</div>
+            </p>
+            <p>
+                Link within content:
+                <div class="tooltip success arrow-top">This is an example of a <a href="#">link within the content</a>.</div>
+            </p>
+            <p>
+                Min width/height:
+                <div class="tooltip success arrow-top"></div>
+            </p>
+            <p>
+                Max width/height:
+                <div class="tooltip success arrow-top">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nibh velit, imperdiet id elementum non, laoreet eu massa. Donec malesuada vel tellus at bibendum. Sed gravida velit erat, sit amet posuere urna imperdiet vitae. Quisque vitae lectus ac lacus condimentum molestie. Vivamus a orci tellus. Cras magna lorem, congue ut felis rutrum, euismod feugiat felis. Curabitur nibh neque, malesuada vel varius nec, aliquet a metus. Quisque condimentum ultricies luctus. Suspendisse sed metus in dolor placerat tristique. Ut et ligula varius, placerat ligula in, bibendum tortor. Nulla commodo libero et mi malesuada, sed fringilla arcu placerat. Ut dictum sapien turpis, et lacinia nisi molestie ut. Aenean laoreet nibh euismod libero auctor eleifend. Fusce ut eleifend mauris, et commodo nisl.</div>
+            </p>
+        </section>
+        
+        <script type="text/javascript">
+            new CUI.Tooltip({target: "#dynamic-button",
+                            content: "Dynamic tooltip",
+                            interactive: true,
+                            autoDestroy: true});
+            $(document).ready(function() {
+              $("#add").click(function() {
+                $(this).after('<button data-init="quicktip" data-quicktip-content="This is a quicktip" data-quicktip-type="success" data-quicktip-arrow="left">' +
+                    'Quicktip</button>');
+                $(this).after("<br>");
+              });
+            });
+        </script>
+    </body>
+</html>

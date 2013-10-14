@@ -1,0 +1,19 @@
+
+// Used for form errors
+@form-error-icon-color: rgb(204, 84, 75);
+@form-error-icon-opacity: 1;
+
+.form-error {
+  .icon-alert();
+  .hide-inner-text();
+
+  display: inline-block;
+  margin: 2*@px 8*@px;
+  height: 16px;
+  padding: 11*@px 0;
+  
+  &:before {
+    color: @form-error-icon-color;
+    opacity: @form-error-icon-opacity;
+  }
+}

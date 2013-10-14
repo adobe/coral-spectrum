@@ -1,0 +1,150 @@
+/**
+  Class: div.pulldown
+  Displays a pulldown widget. 
+*/
+
+// Pulldown
+@pulldown-text-color: rgb(83, 83, 83);
+@pulldown-chevron-color: rgb(206, 206, 206);
+@pulldown-hover-text-color: rgb(15, 15, 15);
+@pulldown-list-border-color: @modal-outline-color;
+@pulldown-list-text-color: rgb(51,51,51);
+@pulldown-list-divider-color: rgb(210,210,210);
+@pulldown-active-text-color: rgb(255, 255, 255);
+@pulldown-active-background-color: rgb(65, 143, 212);
+@pulldown-disabled-text-color: rgb(180, 180, 180);
+
+nav.pulldown {
+
+  .border-box;
+
+  position: relative; // Force children to position relative to this element
+
+  a {
+    color: @pulldown-text-color;
+    .normal-text;
+    font-weight: normal;
+    text-decoration: none;
+  }
+
+  > a,
+  h1 a {
+
+    // forces correct measurement of the padding and margin as part of the component.
+    .border-box;
+
+    background: transparent;
+    border: 0 none;
+    padding: 0 16*@px 0 0;
+    margin-right: 16*@px;
+    font-size: 18*@px;
+    background: url('@{component-resource-folder}/pulldown/handle.svg') no-repeat right center;
+
+    &:hover {
+      color: @pulldown-hover-text-color;
+    }
+  }
+
+  > a[class^="icon-"],
+  > a[class*=" icon-"],
+  h1 a[class^="icon-"],
+  h1 a[class*=" icon-"] {
+    background: none;
+  }
+
+  .popover {
+    position: absolute;
+    display: none;
+    min-width: 200*@px;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      background: @white;
+      border: 1*@px solid @pulldown-list-border-color;
+      overflow-y: auto;
+
+      li {
+        margin: 0;
+        border-top: 1*@px solid @pulldown-list-divider-color;
+
+        a {
+          color: @pulldown-list-text-color;
+          display: block;
+          font-size: 14*@px;
+          padding: 10*@px;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+          height: 15*@px;
+          line-height: 15*@px;
+
+          text-align: left;
+
+          [class^="icon-"], 
+          [class*=" icon-"] {
+            padding-left: 0;
+
+            &.withLabel {
+              background-position: 10*@px center;
+              line-height: @icon-medium-size;
+
+              &:before {
+                .icon-medium;
+                padding-right: 10*@px;
+                position: relative;
+                top: -50%;
+              }
+            }
+          }
+
+          &:hover:not(.disabled) {
+              background-color: @pulldown-active-background-color;
+              color: @pulldown-active-text-color;
+              border: none;
+              &:before { color: @white; }
+          }
+
+          &.disabled,
+          &.disabled:hover,
+          &.disabled:focus {
+            opacity: 1;
+            cursor: default;
+            color: @pulldown-disabled-text-color;
+          }
+        }
+
+        &:first-child {
+          border-top: 0;
+        }
+      }
+    }
+
+    &.alignleft {
+      &:before {
+        left: 0;
+        margin-left: 30*@px;
+      }
+    }
+
+    &:before {
+      left: 100%;
+      margin-left: -30*@px;
+    }
+
+    .toolbar & {
+      margin-top: 18*@px;
+      margin-left: 1*@px;
+      text-align: left;
+    }
+  }
+
+}
+
+// selector to hide the pulldown handle if desired
+nav.no-handle {
+  > a, h1 a {
+    background: none;
+  }
+}

@@ -20,13 +20,13 @@
     <h1>Path Browser</h1>
 
     <h2>Create from Class</h2>
-    Path:
+    <label>Path:</label>
     <select name="path-class" class="pathbrowser"></select>
     <br/>
     This uses relative paths in a standard option loader.
 
     <h2>Connect to local CQ5</h2>
-    Path:
+    <label>Path:</label>
     <select name="path-class" class="pathbrowsercq5"></select>
     <br/>
     This example will fail because you will most probably not have a CQ instance running on the same host. But the optionLoader
@@ -34,13 +34,13 @@
     
 
     <h2>Create from jQuery</h2>
-    Path:
+    <label>Path:</label>
     <input type="text" name="path-jquery" placeholder="Enter path"/>
     <br/>
     This uses absolute paths in an option loader which custom root and option value reader. No titles are displayed.
 
     <h2>Create from markup</h2>
-    Path:
+    <label>Path:</label>
     <div data-init="pathbrowser" class="pathbrowser" data-placeholder="Provide path" data-root-path="/">
         <input type="text" name="path-markup">
     </div>

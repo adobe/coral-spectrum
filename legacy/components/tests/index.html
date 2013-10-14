@@ -69,16 +69,22 @@
   <script src="test.CUI.Filters.js"></script>
   <script src="test.CUI.Slider.js"></script>
   <script src="test.CUI.Tooltip.js"></script>
-  <script src="test.CUI.Tour.js"></script> 
+  <script src="test.CUI.Tour.js"></script>
   <!-- modular components -->
   <script src="test.CUI.NumberInput.js"></script>
   <script src="test.CUI.Rail.js"></script>
   <script src="test.CUI.Tabs.js"></script>
   <script src="test.CUI.Modal.js"></script>
-             
+  <script src="test.CUI.Popover.js"></script>
+
   <!-- Do test run -->
   <script>
-    (window.mochaPhantomJS || mocha).run();
+      // Prevent tests from running twice when running through grunt.
+      // https://github.com/yeoman/generator-webapp/issues/65
+      // Can alternatively do a check on window.PHANTOMJS
+      if (navigator.userAgent.indexOf('PhantomJS') < 0) {
+          mocha.run();
+      }
   </script>
 </body>
 </html>

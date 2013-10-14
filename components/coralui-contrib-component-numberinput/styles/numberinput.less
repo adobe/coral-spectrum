@@ -4,12 +4,7 @@
 
 .numberinput {
 
-  // allows the component to accept height and width values.
-  display: inline-block;
-
-  .border-box;
-  vertical-align: top;
-  margin: 2*@px 0;
+  .component-single-line;
 
   .clearfix();
 
@@ -34,9 +29,9 @@
     max-width: 32*@px;
     min-height: 38*@px;
     max-height: 38*@px;
-    color: transparent;
+
     text-shadow: none;
-    text-align: center;
+
     .gradient(rgb(255, 255, 255), rgb(240, 240, 240));
 
     &:hover {
@@ -53,14 +48,12 @@
 
     &.decrement {
       .icon-minus;
-      vertical-align: top;
-      line-height: 34*@px;
+      line-height: 36*@px;
     }
 
     &.increment {
       .icon-add;
-      vertical-align: top;
-      line-height: 34*@px;
+      line-height: 36*@px;
     }
 
     &[disabled] {

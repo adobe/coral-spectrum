@@ -1,87 +1,112 @@
 module.exports = function(grunt) {
 
+  grunt.loadNpmTasks('grunt-zip');
+  grunt.loadNpmTasks('grunt-curl');
+
+  // property for icon-athena
+  var url = require('url');
+  var baseUrl = 'http://theatrix.eur.adobe.com:4502/content/athena/clients/cloud-ui/collections/';
+  var downloadDestFolderBase = 'temp/icon-athena/download';
+  var unzipDestFolderBase = 'temp/icon-athena/unzip';
+
   // Import and convert icons from athena-zip
-  grunt.task.registerTask('icon-athena', [
-    'icon-athena-setup',
-    'icon-athena-convert'
-  ]);
+  grunt.registerMultiTask('icon-athena', 'This generates a folder with icons from athena.', function() {
 
-  
-  grunt.registerTask('icon-athena-setup', 'This generates a folder with icons from athena.', function() {
+    var config = grunt.config();
 
-    var url = require('url')
-    
-    grunt.log.ok("icon-athena-setup");
+    var options = this.options();
 
     // where to extract the zip to
-    var tmpZipFolder = 'temp/icon-athena/unzip';
+    var tmpZipFolder = options.tmpZipFolder;
+    grunt.verbose.ok('tmpZipFolder: ' + tmpZipFolder);
 
     // where to convert files from 
-    var convertSrcFolder = tmpZipFolder + "/" + "icons/*"
+    var convertSrcFolder = tmpZipFolder + "/" + "icons/*";
+    grunt.verbose.ok('convertSrcFolder: ' + convertSrcFolder);    
 
     // name of download-content
-    var tmpDownloadZip = 'temp/icon-athena/download/icons.zip';
+    var downloadDest = downloadDestFolderBase + "/" + options.downloadZip;
+    grunt.verbose.ok('downloadDest: ' + downloadDest);
 
     // default: this is the url to the icon for CoralUI hosted in athena
-    var iconSourceAthena = "http://theatrix.eur.adobe.com:4502/content/athena/clients/cloud-ui/collections/clouduigeneral.zip";
-
-    var iconsource = grunt.option("is") || grunt.option("iconsource") || iconSourceAthena;
-
-    var tasks = new Array();
+    var downloadSrc = baseUrl + options.downloadZip;
     
-    grunt.log.ok('searching for icons from athena in ' + iconsource);
-    grunt.log.ok('NOTE: unzip task may take a while (5 minutes)...');
-
-    if (url.parse(iconsource).host) {
-      grunt.log.ok('url found : ' + iconsource);
-      grunt.config.set('curl.long.src', iconsource);
-      grunt.config.set('curl.long.dest', tmpDownloadZip);
-      grunt.config.set('unzip.catalog.src', tmpDownloadZip);
-      grunt.config.set('unzip.catalog.dest', tmpZipFolder);
-      grunt.config.set('icon-athena-convert.src', convertSrcFolder);
-      tasks.push('curl');
-      tasks.push('unzip:catalog');         
-    } else if (grunt.file.isFile(iconsource)){
-      grunt.log.ok('file found : ' + iconsource);
-      grunt.config.set('unzip.catalog.src', iconsource);
-      grunt.config.set('unzip.catalog.dest', tmpZipFolder);
-      grunt.config.set('icon-athena-convert.src', convertSrcFolder);
-      tasks.push('unzip:catalog');
-    } else if (grunt.file.isDir(iconsource)){
-      grunt.log.ok('directory found : ' + iconsource);
-      grunt.config.set('icon-athena-convert.src', iconsource + "/*");
+    grunt.log.ok('searching for icons from athena in ' + downloadSrc);
+   
+    if (url.parse(downloadSrc).host) {
+      grunt.log.ok('url found : ' + downloadSrc);    
     } else {
-      grunt.log.writeln('iconsource could not be found');
-      grunt.log.writeln('USAGE: grunt icon-athena -is=<icon .zip>||<icon directory>||<icon url>');
+      grunt.log.writeln('Icons on Athena could not be found');
       grunt.log.writeln();
       return false
     }
-    
-    grunt.task.run(tasks);
+
+    // config curl
+    grunt.config.set('curl.' + this.target, {
+        src: downloadSrc,
+        dest: downloadDest
+    });
+
+    // run curl
+    grunt.task.run('curl:' + this.target);
+    grunt.verbose.ok('downloading icons from ' + downloadSrc + ' to ' + downloadDest);  
+
+    // config unzip
+    grunt.config.set('unzip.' + this.target, {
+        src: downloadDest,
+        dest: tmpZipFolder
+    });
+
+    //run unzip
+    grunt.log.ok('NOTE: unzip task may take a while (5 minutes)...');
+    grunt.task.run('unzip:' + this.target);
+    grunt.verbose.ok('extracting icons from ' + downloadDest + ' to ' + tmpZipFolder);
+
+    // config converting
+    var configConvertSrcName = 'icon-athena-convert.' + this.target + '.src';    
+    grunt.config.set(configConvertSrcName, convertSrcFolder);
+
+    var variants = options.variants;
+    grunt.config.set('icon-athena-convert.' + this.target + '.variants',  options.variants);
+
+    // run converting 
+    grunt.task.run('icon-athena-convert:' + this.target);
+
     return true;
 
   });
 
- 
-  grunt.registerTask('icon-athena-convert', 'This converts extracted icons from athena into coral ui assets.', function() {
-     
-    // Expand the list of files
-    var config = grunt.config();
+  // property for icon-athena-convert 
+  var metadataFilename = 'metadata.json';
+  var aliasPropertyName =  'athena:alias';
+  var assetExtension = '.svg';
 
-    // Process the source name
-    var srcConfig = grunt.config('icon-athena-convert.src');
+  grunt.registerMultiTask('icon-athena-convert', 'This converts extracted icons from athena into coral ui assets.', function() {
+     
+    // get the variants from config
+    var variants = grunt.config('icon-athena-convert.' + this.target).variants;
+
+    // get the src to convert from
+    var convertSrc = this.file.src;
 
     // Process the destination name
-    var dest = grunt.template.process('<%= dirs.build %>/icons/', config);
-
-    grunt.log.ok("converting from "  + srcConfig + " to " + dest);
-
-    var metadataFilename = 'metadata.json';
-    var aliasPropertyName =  'athena:alias';
-    var assetExtension = '.svg';
+    var config = grunt.config();
+    var convertDest = grunt.template.process('<%= dirs.build %>/' + this.target + '/', config);
+    grunt.verbose.writeln("converting all files from "  + convertSrc + " to " + convertDest);
 
     // Get the list of all source files
-    var srcFiles = grunt.file.expand(srcConfig);
+    var srcFiles = grunt.file.expand(convertSrc);
+    var count = processIcons(srcFiles, convertDest, variants);
+
+    grunt.log.ok(count +' icon(s) successfully imported');
+
+    return true;
+  });  
+  
+  /**
+  * one icon/source has multiple assets 
+  */
+  function processIcons(srcFiles, convertDest, variants) {
 
     // count files
     var count = 0;
@@ -91,59 +116,46 @@ module.exports = function(grunt) {
 
       // get alias from metadata.json side-car file
       var metadataJSON = grunt.file.readJSON(src + "/" + metadataFilename);
-      var alias = (typeof(metadataJSON[aliasPropertyName]) === 'string') ? [metadataJSON[aliasPropertyName]] : metadataJSON[aliasPropertyName];
+      var aliasValue = (typeof(metadataJSON[aliasPropertyName]) === 'string') ? [metadataJSON[aliasPropertyName]] : metadataJSON[aliasPropertyName];
       
-      grunt.log.ok("converting "  + src);
-
-      // Get the asset in the asset folder
-      var assetFiles = grunt.file.expand(src+"/*" + assetExtension);
-
-      // for each asset
-      assetFiles.forEach(function(asset){
-
-        // get asset name
-        var assetName = asset.slice(asset.lastIndexOf('/')+1);
-
-        // remove variant from assetName
-        assetName = assetName.replace('_24', '');
-
-        // get name , copy icon 1:1,             
-        grunt.file.copy(asset, dest + assetName);
-
-        // handle alias
-        if (alias && Array.isArray(alias)){
-          alias.forEach(function(aliasname){
-            // copy asset to alias-name
-            var aliasDest = dest + aliasname + assetExtension;
-            grunt.file.copy(asset, aliasDest);
-
-          });          
-        }
-            
+      // Get the asset in the asset folder by variant : 16 & 24
+      variants.forEach(function(variant) {
+        var assetFiles = grunt.file.expand(src+"/*_*"+variant.name+assetExtension);
+        processAssets(assetFiles, variant, convertDest, aliasValue);
       });
 
       count = i+1;
    
-    });
+    });    
 
-    // move _16 assets to their own folder to create a separate font
-    // doing this as another loop so alias copy can be included
-    var icons16 = grunt.file.expand(dest + '*_16*');
-    var dest16 = grunt.template.process('<%= dirs.build %>/icons16/', config);
-    var count16 = 0
-    icons16.forEach(function(icon16) {
-      var iconName = icon16.slice(icon16.lastIndexOf('/')+1);
-      grunt.log.ok("moving "  + iconName);
-      iconName = iconName.replace('_16', '');
-      grunt.file.copy(icon16, dest16 + iconName);
-      grunt.file.delete(icon16);
-      count16++;
-    });
-    if (count16 > 0) {
-      grunt.log.ok(count16 + " icons moved to "  + dest16);
-    }
-    grunt.log.ok(count +' icon(s) successfully imported');
-    return true;
+    return count;
+  };
 
-  });  
+
+  function processAssets(assets, variant, convertDest, alias) {
+
+    assets.forEach(function(asset){
+      // get asset name
+      var assetName = asset.slice(asset.lastIndexOf('/')+1);
+      // remove variant from assetName
+      assetName = assetName.replace('_'+variant.name, variant.replace);
+      assetDest = convertDest + variant.dest + '/';
+      // get name , copy icon 1:1,             
+      grunt.file.copy(asset, assetDest + assetName);
+      grunt.verbose.ok("copy " + asset + " to " + assetDest);
+
+      // handle alias
+      if (alias && Array.isArray(alias)){
+        alias.forEach(function(aliasname){
+          // copy asset to alias-name
+          var aliasDest = assetDest + aliasname + assetExtension;
+          grunt.file.copy(asset, aliasDest);
+
+        });          
+      }   
+    })
+  };
+
+ 
+
 };

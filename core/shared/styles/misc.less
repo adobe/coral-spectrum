@@ -1,3 +1,8 @@
+
+// Close button
+@close-font-size: 20*@px;
+@close-opacity: 50;
+
 /**
   Element: form
   No margin or padding by default
@@ -19,21 +24,8 @@ form {
   NOTE: disabling for 'a' elements works BUT is not perfect.
   For example, 'touching' free space while displaying quickactions, still produces an ugly flash.
 */
-
 * {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
-
-/**
- Improves the rendering of the text.
-*/
-button,
-.button,
-input,
-select,
-textarea {
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
 }
 
 /**
@@ -98,6 +90,46 @@ img {
   margin: 0 -1px -1px 0 !important;
 }
 
+/**
+  Selector: .resizable
+  The element displays a mechanism for allowing the user to resize the element, which may be resized both horizontally and vertically.
+
+  @see https://developer.mozilla.org/en-US/docs/Web/CSS/resize
+*/
+.resizable {
+    resize: both;
+}
+
+/**
+  Selector: .resizable-x
+  The element displays a mechanism for allowing the user to resize the element, which may only be resized horizontally.
+
+  @see https://developer.mozilla.org/en-US/docs/Web/CSS/resize
+*/
+.resizable-x {
+    resize: horizontal;
+}
+
+/**
+  Selector: .resizable-y
+  The element displays a mechanism for allowing the user to resize the element, which may only be resized vertically.
+
+  @see https://developer.mozilla.org/en-US/docs/Web/CSS/resize
+*/
+.resizable-y {
+    resize: vertical;
+}
+
+/**
+  Selector: .resizable-none
+  The element offers no user-controllable method for resizing the element.
+
+  @see https://developer.mozilla.org/en-US/docs/Web/CSS/resize
+*/
+.resizable-none {
+    resize: none;
+}
+
 
 /**
   Class: .close
@@ -109,6 +141,7 @@ button.close {
   margin: 0;
   padding: 0;
   min-width: 0;
+  height: auto;
 
   border: none !important;
   background: none !important;

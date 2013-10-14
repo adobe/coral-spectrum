@@ -75,7 +75,7 @@
         svgFileContents = svgFileContents.replace(commentRE, '');
       
         // Remove opacity
-        svgFileContents = svgFileContents.replace(opacityRE, '');
+        //svgFileContents = svgFileContents.replace(opacityRE, '');
         
         // Remove background tag
         svgFileContents = svgFileContents.replace(backgroundRE, '');

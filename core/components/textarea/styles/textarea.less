@@ -4,37 +4,53 @@
 */
 
 textarea {
-    .border-box;
 
-    border-radius: 0;
+  .border-box;
+  vertical-align: top; // used to align them correctly in forms.
+  margin: 0;  // resets default margin
 
-    font-size: 0.8125rem;
-    font-family: @font-base-family;
+  min-width: 110*@px;
 
-    padding: 0.25rem 0.5rem;
-    margin: 2*@px 0;
+  padding: 10*@px;
 
-    /* using rem (e.g. @px) as border-width of textareas crashes IE9 */
-    border: 1px solid @textfield-border-color;
-    background-color: @textfield-background-color;
+  .normal-text;
+  font-size: @base-font-size;
+  line-height: @base-line-height;
 
-    &:disabled {
-        background-color: @textfield-disabled-background-color;
-    }
+  color: @font-base-color;
+
+  border: @px solid @textfield-border-color;
+  background-color: @textfield-background-color;
+
+  .placeholder(@font-secondary-color);
+
+  &:disabled {
+    color: @textfield-disabled-font-color;
+    .placeholder(@textfield-disabled-font-color);
+
+    background-color: @textfield-disabled-background-color;
+    border-color: @textfield-disabled-border-color;
+  }
+
+  &:focus {
+    .glow();
+    outline: none;
+  }
+
+  &:-moz-ui-invalid {
+    box-shadow: none;
+  }
+
+  &.error,
+  &:invalid {
+    border-color: @textfield-error-border-color;
+    color: @textfield-error-font-color;
 
     &:focus {
-        .glow(6px, @focus-glow-color, @focus-border-color, 1px);
-        outline: none;
+      .glow(6*@px, @textfield-error-border-color, @textfield-error-border-color);
+      color: @textfield-error-font-color;
     }
-
-    &.error {
-        border-color: @textfield-error-border-color;
-        color: @textfield-error-font-color;
-
-        &:focus {
-            .glow(6px, @textfield-error-border-color, @textfield-error-border-color, 1px);
-        }
-    }
+  }
 }
 
 form.vertical {
