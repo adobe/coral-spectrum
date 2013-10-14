@@ -153,19 +153,8 @@ jQuery(function($) {
         toggleReferencesView();
     });
 
-    rail.fipo('tap', 'click', '.references .detail section', function (e) {
-        var $section = $(this);
-
-        var $actions = $section.find(".actions");
-        if (!$actions.is(e.target) && !$.contains($actions[0], e.target)) {
-            // Toggle actions status
-            $actions.toggle();
-
-            // Hide actions of siblings
-            $section.siblings().find(".actions").hide();
-        }
-
-        e.preventDefault();
+    rail.fipo('tap', 'click', '.references .detail section .info', function () {
+        toggleActions($(this));
     });
 
     function toggleReferencesView() {
@@ -173,6 +162,10 @@ jQuery(function($) {
         $references.find(".list").toggle();
         $references.find(".detail").toggle();
         rail.find(".back").toggle();
+    }
+
+    function toggleActions(section) {
+        section.siblings(".actions").toggle();
     }
 
 });
