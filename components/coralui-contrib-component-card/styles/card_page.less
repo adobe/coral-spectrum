@@ -28,24 +28,19 @@
         .info {
             border-top: @px solid @card-separator-color;
             margin: 9*@px 9*@px 0;
-            padding-top: 8*@px;
+            padding-top: 16*@px;
 
-            .short-info > span {
-                margin-right: 6*@px;
-                margin-bottom: 6*@px;
-                display: inline-block;
-
-                + .status {
-                    padding-top: 4*@px;
-                }
+            p {
+                margin: -0.4375rem 0.625rem 0.375rem 0;
+                float: left;
             }
 
-            .status {
-                clear: both;
-                padding-top: 8*@px;
+            .clearfix {
+                margin: 4*@px;
             }
 
             .published, .modified {
+                float: none;
                 display: inline-block;
                 margin-left: 0;
                 margin-right: 0.5rem;
@@ -107,19 +102,16 @@
         height: 100%;
         float: left;
 
-        .short-info {
-            float: right;
-            width: 33%;
-
-            display: table;
-            table-layout: fixed;
-            margin-top: 16*@px;
-
-            > span {
-                display: table-cell;
-
-            }
+        .clearfix,
+        .hideinnav,
+        .copies {
+            display: none;
         }
+
+        .links {
+            float: right;
+        }
+
         .modified,
         .published {
             float: left;
@@ -131,9 +123,6 @@
 .list.small .card-page {
     .main {
         width: 60%;
-    }
-    .short-info {
-        display: none;
     }
     .modified,
     .published {
@@ -147,7 +136,6 @@
     .info {
         width: 30%;
     }
-    .short-info,
     .modified {
         display: none;
     }
