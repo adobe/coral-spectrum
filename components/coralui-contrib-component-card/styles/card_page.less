@@ -101,63 +101,65 @@
             .card-list-box(yellow);
         }
     }
-    .label > hr {
-        display: none;
-    }
-
-    .info,
-    .modified,
-    .published {
-        float: left;
-    }
 
     .info {
-        width: 10%;
-        float: right;
+        width: 40%;
+        height: 100%;
+        float: left;
 
-        > span {
-            display: inline-block;
-            width: 10*@px;
+        .short-info {
+            float: right;
+            width: 33%;
+
+            display: table;
+            table-layout: fixed;
+            margin-top: 16*@px;
+
+            > span {
+                display: table-cell;
+
+            }
         }
-    }
-
-    .modified,
-    .published {
-        width: 15%;
-       .card-list-date-user();
+        .modified,
+        .published {
+            float: left;
+            width: 33%;
+           .card-list-date-user();
+        }
     }
 }
 .list.small .card-page {
     .main {
         width: 60%;
     }
-    .info {
+    .short-info {
         display: none;
     }
     .modified,
     .published {
-        width: 20%;
+        width: 50%;
     }
 }
 .list.xsmall .card-page {
     .main {
         width: 70%;
     }
-    .info,
+    .info {
+        width: 30%;
+    }
+    .short-info,
     .modified {
         display: none;
     }
     .published {
-        width: 30%;
+        width: 100%;
     }
 }
 .list.xxsmall .card-page {
     .main {
         width: 100%;
     }
-    .info,
-    .modified,
-    .published {
+    .info {
         display: none;
     }
 }
