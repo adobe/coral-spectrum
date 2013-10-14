@@ -1,79 +1,75 @@
 // Popover
 @popover-background-color: rgb(245, 245, 245);
 @popover-border-color: rgba(90, 90, 90, 0.80);
-@popover-arrow-size: 12*@px;
+@popover-tail-base: 24*@px;
+@popover-tail-height: 12*@px;
 
 .popover {
   position: absolute;
-	display: none;
-	background-color: @popover-background-color;
-  .background-clip(padding-box); // don't let the border overlap the background
+  display: none;
   z-index: 1010; // keep the popover over the page
-
+  // jQueryUI's Position utility cannot position elements which are not visible. Because of this, we must set
+  // popover's display property to block right before positioning. A problem occurs if setting display:block on the
+  // popover causes scrollbars to appear (because the popover happens to extend the document beyond the view pane) but
+  // later go away after the popover is positioned (because the popover no longer extends the document beyond the
+  // view pane). In this case, the popover is (mis)positioned as though scrollbars are being shown even though they are
+  // not. To avoid the issue, we ensure the initial display of the popover does not cause scrollbars.
+  top: -9999px;
+  left: -9999px;
+  background-color: @popover-background-color;
+  .background-clip(padding-box); // don't let the border overlap the background
   border: 8*@px solid @popover-border-color;
-	
-  /*
-    Arrows
-  */
-  &:before,
-  &:after {
-    border: solid transparent;
-    content: " ";
+  margin: 10px;
+}
+
+.popover-arrow {
+  position: absolute;
+  pointer-events: none;
+
+  .triangle-core() {
     height: 0;
     width: 0;
-    position: absolute;
-    pointer-events: none;
+    display: block;
   }
 
-  // top and bottom arrow
-  &.arrow-top:before,
-  &.arrow-bottom:before { // center the arrow in the center
-    left: 50%;
-    border-width: @popover-arrow-size - @px;
-    margin-left: -1*@popover-arrow-size + @px;
+  .triangle(@direction, @base, @height, @color) when (@direction = up) {
+    .triangle-core();
+    border-left: @base/2 solid transparent;
+    border-right: @base/2 solid transparent;
+    border-bottom: @height solid @color;
   }
-  
-  &.arrow-top:before {
-    bottom: 100%; // position the border on the top
-    margin-bottom: 8*@px;
-    border-bottom-color:@popover-border-color;
+  .triangle(@direction, @base, @height, @color) when (@direction = down) {
+    .triangle-core();
+    border-left: @base/2 solid transparent;
+    border-right: @base/2 solid transparent;
+    border-top: @height solid @color;
   }
-
-  &.arrow-bottom:before {
-    top: 100%; // position the border on the bottom
-    margin-top: 8*@px;
-    border-top-color:  @popover-border-color;
+  .triangle(@direction, @base, @height, @color) when (@direction = left) {
+    .triangle-core();
+    border-top: @base/2 solid transparent;
+    border-bottom: @base/2 solid transparent;
+    border-right: @height solid @color;
   }
-
-  &.arrow-left:before,
-  &.arrow-right:before { // center the arrow in the center
-    top: 50%;
-    border-width: @popover-arrow-size - @px;
-    margin-top: -1*@popover-arrow-size + @px;
+  .triangle(@direction, @base, @height, @color) when (@direction = right) {
+    .triangle-core();
+    border-top: @base/2 solid transparent;
+    border-bottom: @base/2 solid transparent;
+    border-left: @height solid @color;
   }
 
-  &.arrow-left:before {
-    right: 100%; // position the border on the left
-    margin-right: 8*@px;
-    border-right-color:  @popover-border-color;
+  &.arrow-up {
+    .triangle(up, @popover-tail-base, @popover-tail-height, @popover-border-color);
   }
 
-  &.arrow-right:before {
-    left: 100%; // position the border on the left
-    margin-left: 8*@px;
-    border-left-color:  @popover-border-color;
+  &.arrow-right {
+    .triangle(right, @popover-tail-base, @popover-tail-height, @popover-border-color);
   }
 
-  
-  // Alternate arrow positions
-  &.arrow-pos-left:before,
-  &.arrow-pos-left:after {
-    left: 15%;
-    right: auto;
+  &.arrow-down {
+    .triangle(down, @popover-tail-base, @popover-tail-height, @popover-border-color);
   }
-  
-  &.arrow-pos-right:before,
-  &.arrow-pos-right:after {
-    left: 85%;
+
+  &.arrow-left {
+    .triangle(left, @popover-tail-base, @popover-tail-height, @popover-border-color);
   }
 }
