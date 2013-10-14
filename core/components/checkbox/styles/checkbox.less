@@ -4,11 +4,13 @@
 */
 
 // Checkbox
-@checkbox-check-color: rgb(80, 130, 205);
-@checkbox-border-color: rgb(192, 192, 192);
+@checkbox-check-color: rgb(50, 135, 210);
+@checkbox-border-color: rgba(0, 0, 0, .25);
 @checkbox-background-color: rgb(255, 255, 255);
+@checkbox-background-gradient-start-color: rgb(240, 240, 240);
+@checkbox-background-gradient-end-color: rgb(255, 255, 255);
 @checkbox-disabled-background-color: rgb(230, 230, 230);
-@checkbox-disabled-check-color: rgb(195, 195, 195);
+@checkbox-disabled-check-color: rgba(0, 0, 0, .15);
 @checkbox-disabled-border-color: rgb(210, 210, 210);
 
 input[type=checkbox],
@@ -16,8 +18,8 @@ input[role=checkbox],
 input[type=radio] {
   opacity: 0.0001; // used to allow the check box to be clicked in some browsers.
   overflow: hidden;
-  width: 1rem;
-  height: 1rem;
+  width: 18*@px;
+  height: 18*@px;
   padding: 0;
 
   & + label,
@@ -32,19 +34,18 @@ input[type=radio] {
     margin-left: -1rem; // cover invisible checkbox
     .border-box;
 
-    width: 1rem;
-    height: 1rem;
-    margin-right: 0.5rem;
+    width: 18*@px;
+    height: 18*@px;
+    margin-right: 8*@px;
 
     border: @px solid @checkbox-border-color;
-    .box-shadow(inset @px @px 0 rgba(0,0,0,0.05));
-
-    background-color: @checkbox-background-color;
+    
+    .gradient(@checkbox-background-gradient-start-color, @checkbox-background-gradient-end-color);
 
     content: "\a0";
 
-    line-height: 1.5;
-    font-size: 0.7rem;
+    line-height: 1.35; 
+    font-size: 12*@px;
     color: @checkbox-check-color;
     text-align: center;
   }
