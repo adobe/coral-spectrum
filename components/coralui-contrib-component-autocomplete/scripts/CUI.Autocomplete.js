@@ -9,7 +9,7 @@
             delay: 500,
             showtypeahead: false,
             showsuggestions: false,
-            showclearbutton: false,
+            //showclearbutton: false,
             showtags: false,
 
             selectlistConfig: null,
@@ -32,7 +32,7 @@
         },
 
         applyOptions: function () {
-            this._setClearButton();
+            //this._setClearButton();
 
             this._setTags();
             this._setSelectlist();
@@ -57,7 +57,7 @@
          * initialize the clear button
          * @private
          */
-        _setClearButton: function () {
+        /*_setClearButton: function () {
             var self = this;
 
             if (this.options.showclearbutton) {
@@ -83,7 +83,7 @@
                 }
                 this._input.off('keyup.autocomplete-clearbtn');
             }
-        },
+        },*/
 
         /*_setSuggestions: function () {
             var self = this;
@@ -325,9 +325,9 @@
             this._selectListWidget.toggleVisibility();
         },
 
-        _refreshClear: function () {
+        /*_refreshClear: function () {
             this._clearBtn.toggleClass('hide', this._input.val().length === 0);
-        },
+        },*/
 
         /**
          * handles a static list filter (type == static) based on the defined mode
@@ -354,10 +354,10 @@
         /**
          * clears the autocomplete input field
          */
-        clear: function () {
+        /*clear: function () {
             this._input.val('');
             this._refreshClear();
-        },
+        },*/
 
         /**
          * disables the autocomplete
