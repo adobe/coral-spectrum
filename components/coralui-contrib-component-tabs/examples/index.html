@@ -25,16 +25,9 @@
           type: 'stacked'
       });
 
-      // var tabs = new CUI.Tabs({
-      //     element: '#jsTabsSection'
-      // // });
 
-      // var divTabs = $('#jsTabsDiv');
-
-      // var tabs = new CUI.Tabs({
-      //     element: divTabs
-      // });
       var activeExampleTab = 0;
+      var typeIndex = 0;
 
       $('#cycleActive').on("click", function(){
         activeExampleTab < 3 ? ++activeExampleTab : activeExampleTab = 0;
@@ -42,6 +35,13 @@
           alert("setting tab index to disabled tab is ignored");
         }
         cuiTabs.set('active', activeExampleTab);
+      });
+
+      $('#cycleType').on("click", function(){
+        typeIndex < 3 ? ++typeIndex : typeIndex = 0;
+        console.log('setting', cuiTabs.VARIANT_TYPES[typeIndex]);
+        cuiTabs.set('type', cuiTabs.VARIANT_TYPES[typeIndex]);
+        $('#typeLabel').html('Type:' + cuiTabs.VARIANT_TYPES[typeIndex]);
       });
     });
   </script>
@@ -53,6 +53,10 @@
 
     h3 {
       margin-bottom: 20px;
+    }
+
+    div.tabs, div.magicButtons {
+      margin-top: 10px;
     }
 
     section {
@@ -93,6 +97,7 @@
     
     <section>
       <h3>CUI Constructor Example</h3>
+      <h4 id='typeLabel'>Type:default</h4>
       <div class="tabs" id="cuiTabsDiv">
         <nav>
           <a href="#" data-toggle="tab" class="active" >CUI Tab 1</a>
@@ -105,8 +110,9 @@
         <section>This will be replaced by content from remote.html.</section>
         <section>This will not be shown as the corresponding tab is disabled.</section>
       </div> 
-      <div> 
+      <div class="magicButtons"> 
         <button type="button" id="cycleActive">Cycle Active</button>
+        <button type="button" id="cycleType">Cycle Type</button>
       </div>
     </section>
     <section>
