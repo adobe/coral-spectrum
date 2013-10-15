@@ -44,7 +44,27 @@ form.vertical .fieldset > .legend
  * Indicates the label of the field.
  * .fieldlabel is used so that the styling is only applied to this label, not any &lt;label> inside the form.
  */
-form.vertical label.fieldlabel</pre>
+form.vertical label.fieldlabel
+
+/**
+ * Indicates the field.
+ */
+form.vertical .field
+
+/**
+ * Indicates the field group. A field group MUST be used for field info and field error.
+ */
+form.vertical .fieldgroup
+
+/**
+ * Indicates the field info.
+ */
+form.vertical .fieldgroup .fieldinfo
+
+/**
+ * Indicates the field error.
+ */
+form.vertical .fieldgroup .fielderror</pre>
 
     <form class="vertical" style="width: 500px;">
       <section class="fieldset">
@@ -56,8 +76,30 @@ form.vertical label.fieldlabel</pre>
         <label class="fieldlabel">Text</label>
         <input class="field" type="text" placeholder="Placeholder">
 
+        <div class="fieldgroup">
+          <label class="fieldlabel">Text</label>
+          <input class="field" type="text" placeholder="Required" aria-required="true">
+          <span class="fieldinfo icon-info-circle small" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right">Field Description</span>
+        </div>
+
+        <div class="fieldgroup">
+          <label class="fieldlabel">Text</label>
+          <input class="field" type="text" placeholder="Required" aria-required="true">
+        </div>
+
         <label class="fieldlabel">Textarea</label>
         <textarea class="field" placeholder="Placeholder" rows="4"></textarea>
+
+        <div class="fieldgroup">
+          <label class="fieldlabel">Textarea</label>
+          <textarea class="field" placeholder="Required" rows="4" aria-required="true"></textarea>
+          <span class="fieldinfo icon-info-circle small" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right">Field Description</span>
+        </div>
+
+        <div class="fieldgroup">
+          <label class="fieldlabel">Textarea</label>
+          <textarea class="field" placeholder="Required" rows="4" aria-required="true"></textarea>
+        </div>
 
         <label class="fieldlabel">Search</label>
         <span class="field search"><input type="text"><button type="button">Search</button></span>
@@ -140,20 +182,20 @@ form.vertical label.fieldlabel</pre>
         <span class="field pathbrowser" data-init="pathbrowser"><input type="text"></span>
 
         <label class="fieldlabel">Checkbox</label>
-        <input class="field checkbox" type="checkbox" checked><span>Checkbox</span>
+        <label class="field checkboxfield"><input type="checkbox" checked><span>Checkbox</span></label>
 
         <label class="fieldlabel">Radio</label>
-        <input class="field radiofield" type="radio" checked><span>Radio</span>
+        <label class="field radiofield"><input type="radio" checked><span>Radio</span></label>
 
-      <label class="fieldlabel">Radio-group with horizontal layout </label>
-      <div class="radio-group horizontal">
-          <label><input type="radio" class="field radiofield vertical"/><span class="regularText">1</span></label>
-          <label><input type="radio" class="field radiofield vertical"/><span class="regularText">2</span></label>
-          <label><input type="radio" class="field radiofield vertical"/><span class="regularText">3</span></label>
-      </div>
+        <label class="fieldlabel">Radio-group with horizontal layout </label>
+        <div class="field radio-group horizontal">
+            <label><input type="radio" class="field radiofield vertical"/><span class="regularText">1</span></label>
+            <label><input type="radio" class="field radiofield vertical"/><span class="regularText">2</span></label>
+            <label><input type="radio" class="field radiofield vertical"/><span class="regularText">3</span></label>
+        </div>
 
         <label class="fieldlabel">Switch</label>
-        <input class="field switch" type="checkbox"><span>Off</span><span>On</span>
+        <label class="field switch"><input type="checkbox"><span>Off</span><span>On</span></label>
 
         <label class="fieldlabel">Selector</label>
         <span class="field selector">
@@ -184,17 +226,59 @@ form.aligned .fieldset > .legend
  * Indicates the label of the field.
  * .fieldlabel is used so that the styling is only applied to this label, not any &lt;label> inside the form.
  */
-form.aligned label.fieldlabel</pre>
+form.aligned label.fieldlabel
+
+/**
+ * Indicates the field.
+ */
+form.aligned .field
+
+/**
+ * Indicates the field group. A field group MUST be used for field info and field error.
+ */
+form.aligned .fieldgroup
+
+/**
+ * Indicates the field info.
+ */
+form.aligned .fieldgroup .fieldinfo
+
+/**
+ * Indicates the field error.
+ */
+form.aligned .fieldgroup .fielderror</pre>
 
     <form class="aligned" style="width: 500px;">
       <section class="fieldset">
         <h3 class="legend">Section Title</h3>
 
         <label class="fieldlabel">Text</label>
-        <input class="field" type="text">
+        <input class="field" type="text" placeholder="Placeholder">
+
+        <div class="fieldgroup">
+          <label class="fieldlabel">Text</label>
+          <input class="field" type="text" placeholder="Required" aria-required="true">
+          <span class="fieldinfo icon-info-circle small" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="top">Field Description</span>
+        </div>
+
+        <div class="fieldgroup">
+          <label class="fieldlabel">Text</label>
+          <input class="field" type="text" placeholder="Required" aria-required="true">
+        </div>
 
         <label class="fieldlabel">Textarea</label>
-        <textarea class="field" rows="4"></textarea>
+        <textarea class="field" placeholder="Placeholder" rows="4"></textarea>
+
+        <div class="fieldgroup">
+          <label class="fieldlabel">Textarea</label>
+          <textarea class="field" placeholder="Placeholder" rows="4" aria-required="true"></textarea>
+          <span class="fieldinfo icon-info-circle small" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="top">Field Description</span>
+        </div>
+
+        <div class="fieldgroup">
+          <label class="fieldlabel">Textarea</label>
+          <textarea class="field" placeholder="Required" rows="4" aria-required="true"></textarea>
+        </div>
 
         <label class="fieldlabel">Search</label>
         <span class="field search"><input type="text"><button type="button">Search</button></span>
