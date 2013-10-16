@@ -36,6 +36,20 @@
             .card-grid-page-gradient(@card-selection-color);
         }
     }
+
+    .descriptor {
+        margin: 6*@px 10*@px -6*@px 10*@px;
+        text-transform: uppercase;
+    }
+    .meta-info {
+        border-top: 1px solid @card-separator-color;
+        padding-top: 6*@px;
+        margin-bottom: 10*@px;
+
+        > span {
+            margin-right: 6*@px;
+        }
+    }
 }
 
 // List view style
@@ -65,6 +79,17 @@
     .links {
         float: left;
         width: 5%;
+    }
+    .descriptor {
+        position: absolute;
+        top: 10*@px;
+
+        ~ * {
+            margin-top: 7*@px;
+        }
+    }
+    .meta-info {
+        display: none;
     }
 }
 .list.small .card-page {
