@@ -19,10 +19,6 @@
       var jqueryTabs = $('#jsTabsDiv').tabs();
       var cuiTabs = new CUI.Tabs({ element: '#cuiTabsDiv'});
 
-      $('#jsTabsDivStacked').tabs({
-          type: 'stacked'
-      });
-
       // var tabs = new CUI.Tabs({
       //     element: '#jsTabsSection'
       // // });
@@ -49,14 +45,19 @@
       padding: 15px;
     }
 
+    h3 {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
     section {
-      border-top: 1px solid #C8C8C8; 
+      border-top: 1px solid #C8C8C8;
     }
 
     .col {
       float: left;
       margin-right: 12px;
-      width: 400%
+      width: 500px;
     }
 
   </style>
@@ -69,15 +70,13 @@
       <h3>Data-Init Constructor Example</h3>
       <div class="tabs" data-init="tabs">
         <nav>
-          <a href="#" data-toggle="tab" class="active" >Tab 1</a>
-          <a href="#" data-toggle="tab">Tab 2</a>
+          <a href="#" data-toggle="tab" class="active" >Menu Item With Super Long Title</a>
+          <a href="#" data-toggle="tab">Medium Title</a>
           <a href="../remote.html" data-target="#" data-toggle="tab">Tab 3</a>
-          <a href="#" data-toggle="tab" class="disabled">Disabled Tab</a>
         </nav>
         <section class="active">Lorem ipsum dolor sit amet.</section>
         <section>Aenean faucibus ornare laoreet. Cras luctus purus.</section>
         <section>This will be replaced by content from remote.html.</section>
-        <section>This will not be shown as the corresponding tab is disabled.</section>
       </div>  
     </section>
     
@@ -101,7 +100,7 @@
     </section>
     <section>
       <h3>jQuery Constructor Example</h3>
-      <div class="tabs" id="jsTabsDiv">
+      <div class="tabs nav" id="jsTabsDiv">
         <nav>
           <a href="#" data-toggle="tab" class="active" >Tab 1</a>
           <a href="#" data-toggle="tab">Tab 2</a>
@@ -116,7 +115,7 @@
     </section>
     <section>   
       <h3>Stacked Example</h3>
-      <div class="tabs" id="jsTabsDivStacked">
+      <div class="tabs stacked" data-init="tabs">
         <nav>
           <a href="#" data-toggle="tab" class="active" >Tab 1</a>
           <a href="#" data-toggle="tab">Tab 2</a>
