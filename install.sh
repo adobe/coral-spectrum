@@ -170,3 +170,7 @@ echo "Run one of the following commands to build CoralUI:"
 echo ""
 echo "  grunt       # partial build for development"
 echo "  grunt full  # full build with documentation"
+echo "  grunt watch # after a build, watch for changes and automatically rebuild"
+echo "  grunt dev   # grunt watch + connect + live-reload"
+echo "  "
+

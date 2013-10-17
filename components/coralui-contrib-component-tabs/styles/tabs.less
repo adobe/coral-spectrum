@@ -5,21 +5,16 @@
 
 // Tabs
 @tab-outline-color: rgba(0, 0, 0, 0.20);
-@tab-background-gradient-start-color: rgb(240, 240, 240);
-@tab-background-gradient-end-color: rgb(230, 230, 230);
-
+@tab-background-gradient-start-color: rgb(246, 246, 246);
+@tab-background-gradient-end-color: rgb(238, 238, 238);
 @tab-inactive-font-color: rgb(135, 135, 135);
-@tab-active-font-color: rgb(105, 105, 105);
-@tab-hover-font-color: rgb(30, 30, 30);
+@tab-active-font-color: rgb(75, 75, 75);
+@tab-hover-font-color: rgb(75, 75, 75);
 @tab-disabled-font-color: rgb(180, 180, 180);
-
-
-
 @tab-white-background-gradient-start-color: rgb(255, 255, 255);
 @tab-white-background-gradient-end-color: rgb(245, 245, 245);
 @tab-nav-second-border-color: rgb(255, 255, 255, 0.8);
 @tab-nav-font-size: 18*@px;
-
 
 .tabs {
   .tab-focus(@tab_type) {
@@ -50,14 +45,14 @@
       .light-text;
       color: @tab-inactive-font-color;
       float: left;
-      padding: 0.625rem 1.0rem 0.625rem 1.0rem;
-      margin: 0 0.125rem -0.125rem 0;
+      padding: 10*@px 16*@px 10*@px 16*@px;
+      margin: 0 2*@px -2*@px 0;
       white-space: nowrap;
 
       &.active {
-        border: 0.0625rem solid @tab-outline-color;
+        border: 1*@px solid @tab-outline-color;
         /* padding is adjusted on active tab to make up for text shift when border is drawn - CUI-994 */
-        padding: 0.563rem 0.938rem 0.563rem 0.938rem;
+        padding: 9*@px 15*@px 9*@px 15*@px;
         border-bottom: none;
         .gradient(@tab-background-gradient-start-color, @tab-background-gradient-end-color);
       }
@@ -86,7 +81,7 @@
       }
 
       &.active {
-        .regular-text;
+        .bold-text;
         color: @tab-active-font-color;
         
         &:focus {
@@ -97,19 +92,13 @@
   }
 
   > section {
-    .normal-text;
     display: none;
     background-color: @tab-background-gradient-end-color;
     margin: 0;
-    border: 0.0625rem solid @tab-outline-color;
-    padding: 0.85rem;
+    border: 1*@px solid @tab-outline-color;
+    padding: 13*@px;
     z-index: auto;
     position: relative;
-    /* TODO: This should be the inside 1-px white border at top of box. It
-             requires a negative margin in the tab but results in the tab 
-             border intersecting the white border. Needs more work before showing.
-    box-shadow: 0 .063rem 0 @tab-nav-second-border-color inset;
-    */
 
     &.active {
       display: block;
@@ -133,11 +122,11 @@
 
   &.nav {
     > nav {
-      border-bottom: 0.0625rem solid @tab-outline-color;
+      border-bottom: 1*@px solid @tab-outline-color;
 
       > a {
         font-size: @tab-nav-font-size;
-        margin-bottom: -0.125rem; // TODO breaks slightly at higher base font sizes
+        margin-bottom: -2*@px; // TODO breaks slightly at higher base font sizes
 
         &.active {
           .gradient(lighten(@body-background-color, 7%), @body-background-color);
@@ -145,7 +134,7 @@
         }
 
         &:first-child {
-          margin-left: 1.25rem;
+          margin-left: 20*@px;
         }
       }
     }
@@ -161,7 +150,7 @@
 
   /* Full page tabs need some more space above to not stick at the top of the page */
   &.full-page {
-    margin-top: 0.625rem;
+    margin-top: 10*@px;
   }
 
   &.stacked {
@@ -174,10 +163,10 @@
       > a {
         float: none;
         display: block;
-        margin: 0 -0.0625rem 0.125rem 0;
+        margin: 0 -1*@px 2*@px 0;
 
         &.active {
-          border-bottom: 0.0625rem solid @tab-outline-color;
+          border-bottom: 1*@px solid @tab-outline-color;
           border-right: none;
           .gradient(@tab-white-background-gradient-end-color, @tab-white-background-gradient-end-color);
           &:focus {

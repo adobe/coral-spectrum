@@ -1,5 +1,5 @@
 # What is CoralUI? 
-CoralUI is an implementation of the [Cloud UI][0] visual style that provides everything your product needs to build out a web based UI.  Check out our interactive [Style Guide][1] to see CoralUI in action.  
+CoralUI is an HTML, CSS, and JavaScript library that implements the [CloudUI][0] visual style and philosophy. CoralUI provides everything your product needs to build out a web based UI.  Check out our interactive [Style Guide][1] to see CoralUI in action.  
 
 See the [CoralUI Wiki][3] for more information.
 
