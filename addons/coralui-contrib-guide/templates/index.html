@@ -2095,6 +2095,12 @@
                     The backing JavaScript will prevent both images from being loaded until the user switches the
                     view state.</p>
 
+                <p>To manipulate the order of cards within the grid view, without changing the one in list view, an optional
+                    <code class="atv">data-gridlayout-sortkey</code> attribute may be provided on the
+                    <code class="prettyprint">&lt;article&gt;</code>. The value should be a signed
+                    integer (default is <code class="atv">0</code>). This attribute is used to sort the cards before
+                    arranging them in the grid layout. Cards with the same sortkey are sorted in document order.</p>
+
                 <section id="Cards-Asset">
                     <h2 class="line">Asset Card</h2>
                     <p>An asset that is smaller than 240px wide should have the additonal class 
