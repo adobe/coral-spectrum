@@ -44,38 +44,6 @@
         },
 
         /**
-         * initialize the clear button
-         * @private
-         */
-        /*_setClearButton: function () {
-            var self = this;
-
-            if (this.options.showclearbutton) {
-
-                // create button if not there
-                if (!this._clearBtn) {
-                    this._clearBtn = $('<button/>', {
-                        'class': 'autocomplete-clear icon-close'
-                    }).fipo('tap', 'click', function (event) {
-                        event.preventDefault();
-
-                        self.clear();
-                        self._input.focus();
-                    }).finger('click', false);
-                }
-
-                this._clearBtn.appendTo(this.$element);
-                this._input.on('keyup.autocomplete-clearbtn', this._refreshClear.bind(this));
-                this._refreshClear();
-            } else {
-                if (this._clearBtn) {
-                    this._clearBtn.detach();
-                }
-                this._input.off('keyup.autocomplete-clearbtn');
-            }
-        },*/
-
-        /**
          * initializes the select list widget
          * @private
          */
@@ -229,12 +197,8 @@
                 this._handleDynamicFilter();
             }
 
-            this._selectListWidget.toggleVisibility();
+            this._selectListWidget.show();
         },
-
-        /*_refreshClear: function () {
-            this._clearBtn.toggleClass('hide', this._input.val().length === 0);
-        },*/
 
         /**
          * handles a static list filter (type == static) based on the defined mode
@@ -254,17 +218,16 @@
             this._selectListWidget.set('dataadditional', {
                 query: val
             });
-            this._selectListWidget.show();
             this._selectListWidget.triggerLoadData(true);
         },
 
         /**
          * clears the autocomplete input field
          */
-        /*clear: function () {
+        clear: function () {
             this._input.val('');
             this._refreshClear();
-        },*/
+        },
 
         /**
          * disables the autocomplete
