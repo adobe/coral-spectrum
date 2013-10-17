@@ -167,6 +167,11 @@
             this.clear();
         },
 
+        /**
+         * @private
+         * @param  {[type]} event [description]
+         * @return {[type]}       [description]
+         */
         _handleSelected: function (event) {
             this._selectListWidget.hide();
             
@@ -192,9 +197,9 @@
 
             // actually handle the filter
             if (this._selectListWidget.options.type === 'static') {
-                this._handleStaticFilter();
+                this._handleStaticFilter(val);
             } else if (this._selectListWidget.options.type === 'dynamic') {
-                this._handleDynamicFilter();
+                this._handleDynamicFilter(val);
             }
 
             this._selectListWidget.show();
@@ -205,9 +210,9 @@
          * @param  {jQuery.Event} event
          */
         _handleStaticFilter: function (event) {
-            /*this._selectList.find('[role="option"]').each(function (i, e) {
+            this._selectlist.find('[role="option"]').each(function (i, e) {
 
-            });*/
+            });
         },
 
         /**
@@ -226,7 +231,6 @@
          */
         clear: function () {
             this._input.val('');
-            this._refreshClear();
         },
 
         /**

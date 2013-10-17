@@ -324,7 +324,7 @@
             if (this.options.type === 'dynamic') {
                 this._handleLoadData().done(function () {
                     self.$element.find('li[role="option"]:first').trigger('focus');
-                    this._setAutohide();
+                    self._setAutohide();
                 });
             } else { // otherwise set autohide immediately
                 this._setAutohide();
@@ -405,7 +405,7 @@
                 }));
 
             if (this._loadingIsActive) {
-                return;
+                return $.Deferred().resolve().promise();
             }
 
             // activate fetching
