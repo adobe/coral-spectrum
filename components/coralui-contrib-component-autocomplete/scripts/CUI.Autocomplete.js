@@ -205,9 +205,9 @@
          * @param  {jQuery.Event} event
          */
         _handleStaticFilter: function (event) {
-            this._selectList.find('[role="option"]').each(function (i, e) {
+            /*this._selectList.find('[role="option"]').each(function (i, e) {
 
-            });
+            });*/
         },
 
         /**
