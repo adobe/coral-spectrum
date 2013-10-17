@@ -168,7 +168,7 @@
                     }
                 });
             } else {
-                self._button.text(self._select[0][self._select[0].selectedIndex].text); 
+                self._button.text(self._select[0][self._select[0].selectedIndex].text);
             }
         },
 
