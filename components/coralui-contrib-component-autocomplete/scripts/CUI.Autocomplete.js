@@ -189,7 +189,6 @@
 
         /**
          * initializes the typeahead functionality
-         * @fires Autocomplete#query
          * @private
          */
         _setTypeahead: function () {
@@ -197,9 +196,7 @@
                 timeout;
 
             function timeoutLoadFunc() {
-                self.$element.trigger($.Event('query', {
-                    value: self._input.val()
-                }));
+                self.handleInput(self._input.val());
             }
 
             if (this.options.showtypeahead) {
@@ -320,7 +317,17 @@
             this._input.trigger('focus');
         },
 
+        /**
+         * @fires Autocomplete#query
+         * @param  {String} val null if all values need to be shown
+         * @return {[type]}     [description]
+         */
         handleInput: function (val) {
+            // fire event to allow notifications
+            this.$element.trigger($.Event('query', {
+                value: val
+            }));
+
             this._selectListWidget.toggleVisibility();
         },
 
@@ -363,7 +370,7 @@
          */
         disable: function () {
             this.$element.addClass('disabled');
-            this.$element.prop('aria-disabled', true);
+            this.$element.attr('aria-disabled', true);
             this._input.prop('disabled', true);
             this._suggestionsBtn.prop('disabled', true);
         },
@@ -373,7 +380,7 @@
          */
         enable: function () {
             this.$element.removeClass('disabled');
-            this.$element.prop('aria-disabled', false);
+            this.$element.attr('aria-disabled', false);
             this._input.prop('disabled', false);
             this._suggestionsBtn.prop('disabled', false);
         }
