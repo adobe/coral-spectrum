@@ -7,11 +7,11 @@
 @pulldown-text-color: rgb(83, 83, 83);
 @pulldown-chevron-color: rgb(206, 206, 206);
 @pulldown-hover-text-color: rgb(15, 15, 15);
-@pulldown-list-border-color: @modal-outline-color;
-@pulldown-list-text-color: rgb(51,51,51);
-@pulldown-list-divider-color: rgb(210,210,210);
+@pulldown-list-border-color: rgb(102, 102, 102);
+@pulldown-list-text-color: rgb(75, 75, 75);
+@pulldown-list-divider-color: rgb(230,230,230);
 @pulldown-active-text-color: rgb(255, 255, 255);
-@pulldown-active-background-color: rgb(65, 143, 212);
+@pulldown-active-background-color: rgb(50, 135, 210);
 @pulldown-disabled-text-color: rgb(180, 180, 180);
 
 nav.pulldown {
@@ -56,6 +56,8 @@ nav.pulldown {
     position: absolute;
     display: none;
     min-width: 200*@px;
+    /* normal popover has 15px padding, but when inside a pulldown it should have 0 */
+    padding: 0;
 
     ul {
       margin: 0;
@@ -73,7 +75,7 @@ nav.pulldown {
           color: @pulldown-list-text-color;
           display: block;
           font-size: 14*@px;
-          padding: 10*@px;
+          padding: 12*@px 10*@px 13*@px 10*@px;
           text-overflow: ellipsis;
           white-space: nowrap;
           overflow: hidden;
