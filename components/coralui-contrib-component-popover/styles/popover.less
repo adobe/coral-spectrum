@@ -1,6 +1,6 @@
 // Popover
 @popover-background-color: rgb(245, 245, 245);
-@popover-border-color: rgba(90, 90, 90, 0.80);
+@popover-border-color: rgba(120, 120, 120, .95);
 @popover-tail-base: 24*@px;
 @popover-tail-height: 12*@px;
 
@@ -20,6 +20,8 @@
   .background-clip(padding-box); // don't let the border overlap the background
   border: 8*@px solid @popover-border-color;
   margin: 10px;
+  padding: 15*@px;
+  max-width: 654*@px;
 }
 
 .popover-arrow {
