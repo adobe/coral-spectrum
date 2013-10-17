@@ -7,7 +7,7 @@
         defaults: {
             mode: 'starts', // filter mode ['starts', 'contains']
             delay: 500,
-            showtypeahead: false,
+            showtypeahead: true,
             showsuggestions: false,
             //showclearbutton: false,
             showtags: false,
@@ -23,7 +23,6 @@
             this._input = this.$element.children('input');
             this._selectlist = this.$element.find('.selectlist');
             this._tags = this.$element.find('.taglist');
-
             this._suggestionsBtn = this.$element.find('.autocomplete-suggestion-toggle');
 
 
@@ -239,7 +238,7 @@
                 // handler to open usggestion box
                 this._suggestionsBtn.fipo('tap', 'click', function (event) {
                     event.preventDefault();
-                    self._toggleSuggestions();
+                    self.handleInput();
                 }).finger('click', false);
 
                 // add class to input to to increase padding right for the button
@@ -321,7 +320,7 @@
             this._input.trigger('focus');
         },
 
-        _toggleSuggestions: function () {
+        handleInput: function (val) {
             this._selectListWidget.toggleVisibility();
         },
 
