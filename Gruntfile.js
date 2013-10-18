@@ -89,7 +89,10 @@ module.exports = function (grunt) {
      */
     var dirs = {
         build: 'build',
-        components: 'components',
+        components: {
+            root: 'components/',
+            contrib: 'components/contrib'
+        },
         legacy: 'legacy',
         guide: 'addons/coralui-contrib-guide',
         temp: 'temp',
@@ -238,18 +241,18 @@ module.exports = function (grunt) {
                     { // get less from the modularized components
                         expand: true,
                         flatten: true,
-                        cwd: '<%= dirs.components %>/',
-                        src: ['**/styles/**.less'],
+                        cwd: '<%= dirs.components.root %>/',
+                        src: ['**/**/styles/**.less'],
                         dest: '<%= dirs.build %>/less/components'
                     },
                     { // get resources from the modularized components
                         expand: true,
-                        cwd: '<%= dirs.components %>/',
-                        src: ['**/res/**'],
+                        cwd: '<%= dirs.components.root %>/',
+                        src: ['**/**/res/**'],
                         dest: '<%= dirs.build %>/res/components',
                         filter: 'isFile',
                         rename: function(dest, src) {
-                            var match = src.match(/coralui-contrib-component-(.*)\/res\/(.*)/);
+                            var match = src.match(/contrib\/(.*)\/res\/(.*)/);
                             if (match) {
                                 var component = match[1];
                                 var filePath = match[2];
@@ -261,21 +264,22 @@ module.exports = function (grunt) {
                     { // get js from the modularized components
                         expand: true,
                         flatten: true,
-                        cwd: '<%= dirs.components %>/',
-                        src: ['**/scripts/**.js'],
+                        cwd: '<%= dirs.components.root %>/',
+                        src: ['**/**/scripts/**.js'],
                         dest: '<%= dirs.temp %>/js/components'
                     },
                     { // get examples from the modularized components
                         expand: true,
-                        cwd: '<%= dirs.components %>/',
-                        src: ['**/examples/**'],
+                        cwd: '<%= dirs.components.root %>/',
+                        src: ['**/**/examples/**'],
                         dest: '<%= dirs.build %>/examples',
                         filter: 'isFile',
                         rename: function(dest, src) {
-                            var match = src.match(/coralui-contrib-component-(.*)\/examples\/(.*)/);
+                            var match = src.match(/contrib\/(.*)\/examples\/(.*)/);
                             if (match) {
                                 var component = match[1];
                                 var filePath = match[2];
+                                grunt.log.writeln("***" + dest + '/' + component + '/' + filePath);
                                 return dest + '/' + component + '/' + filePath;
                             }
                             return dest;
@@ -284,8 +288,8 @@ module.exports = function (grunt) {
                     { // get tests from the modularized components
                         expand: true,
                         flatten: true,
-                        cwd: '<%= dirs.components %>/',
-                        src: ['**/tests/**.js'],
+                        cwd: '<%= dirs.components.root %>/',
+                        src: ['**/**/tests/**.js'],
                         dest: '<%= dirs.build %>/tests'
                     },
 
@@ -430,7 +434,7 @@ module.exports = function (grunt) {
             src: '<%= dirs.core.root %>/components/**/styles/*.less'
           },
           components: {
-            src: '<%= dirs.components %>/**/styles/*.less'
+            src: '<%= dirs.components.root %>/**/**/styles/*.less'
           }
         },
 
@@ -466,17 +470,17 @@ module.exports = function (grunt) {
             // watch: contrib content
             contrib_scripts: {
                 files: [
-                    dirs.components + '/**/scripts/*.js',
-                    dirs.components + '/**/tests/*.js'
+                    dirs.components.contrib + '/**/scripts/*.js',
+                    dirs.components.contrib + '/**/tests/*.js'
                 ],
                 tasks: ['quicktest']
             },
             contrib_less: {
-                files: [ dirs.components + '/**/styles/*.less'],
+                files: [ dirs.components.contrib + '/**/styles/*.less'],
                 tasks: ['quickless']
             },
             contrib_html: {
-                files: [ dirs.components + '/**/examples/*.html'],
+                files: [ dirs.components.contrib + '/**/examples/*.html'],
                 tasks: ['copy:retro']
             },
             // watch: legacy content
@@ -675,7 +679,7 @@ module.exports = function (grunt) {
                         src:['README.md'],
                         dest: 'coral-ui-<%= meta.version %>/'
                     }
-                ],
+                ]
             },
             publish: {
                 options: {
@@ -756,7 +760,7 @@ module.exports = function (grunt) {
                     hostname: '*'
                 }
             }
-        },
+        }
 
     }); // end init config
 
