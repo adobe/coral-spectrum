@@ -6,13 +6,11 @@
 
   <link rel="stylesheet" href="../../css/cui.css">
 
-  <script src="../../js/libs/handlebars.js"></script>
-  <script src="../../js/libs/moment.js"></script>
   <script src="../../js/libs/jquery.js"></script>
-  <!--script src="../../js/libs/jquery-fingerpointer.js"></script-->
-  <script src="../../js/libs/toe.js"></script>
   <script src="../../js/libs/moment.js"></script>
-  
+  <script src="../../js/libs/jquery-message.js"></script>
+  <script src="../../js/libs/jquery-validator.js"></script>
+  <script src="../../js/libs/toe.js"></script>
   <script src="../../js/CUI.js"></script>
 
   <script>
@@ -37,8 +35,8 @@
                     numberinput.set('max', event.currentTarget.value);
                   });
 
-    $("input[name='r1']").on('change', function (){
-      console.log("changed!", event.currentTarget.value);
+    $('input[name="r1"]').on('change', function (){
+      console.log('changed!', event.currentTarget.value);
       numberinput.set('hasError', event.currentTarget.value == 2);    
       numberinput.set('disabled', event.currentTarget.value == 3);    
     });
@@ -46,26 +44,19 @@
   </script>
 
   <style>
-  body {
-    padding: 15px;
-  }
+    body {
+      padding: 15px;
+    }
 
-  section {
-    border-top: 1px solid #C8C8C8;
-  }
+    section {
+      border-top: 1px solid #C8C8C8;
+    }
 
-  .col {
-    float: left;
-    margin-right: 12px;
-  }
-
-  label {
-    margin-right: 1rem;
-  }
-
-  .option-input {
-    width: 3rem;
-  }
+    .col {
+      float: left;
+      margin-right: 12px;
+      width: 400px;
+    }
 
   </style>
 </head>
@@ -75,88 +66,90 @@
     <section>
       <h2>Basic</h2>
       <div class="numberinput" data-init="numberinput">
-        <button type="button" class='decrement'>decrement</button>
-        <input type='text'>
-        <button type="button" class='increment'>increment</button>
+        <button type="button" class="decrement">decrement</button>
+        <input type="text">
+        <button type="button" class="increment">increment</button>
       </div>
 
       <h2>Error</h2>
       <div class="numberinput" data-init="numberinput" data-error="true">
-        <button type="button" class='decrement'>decrement</button>
-        <input type='text'>
-        <button type="button" class='increment'>increment</button>
+        <button type="button" class="decrement">decrement</button>
+        <input type="text">
+        <button type="button" class="increment">increment</button>
       </div>
 
       <h2>Disabled</h2>
       <div class="numberinput" data-init="numberinput" data-disabled="true">
-        <button type="button" class='decrement'>decrement</button>
-        <input type='text'>
-        <button type="button" class='increment'>increment</button>
+        <button type="button" class="decrement">decrement</button>
+        <input type="text">
+        <button type="button" class="increment">increment</button>
       </div>
     </section>
     <section>
-      <div class="theme-dark well">
-      <!-- examples below will use the dark theme because they are in this container -->  
-        <h2>Dark</h2>
-        <div class="numberinput" data-init="numberinput">
-          <button type="button" class='decrement'>decrement</button>
-          <input type='text'>
-          <button type="button" class='increment'>increment</button>
-        </div>
-
-        <h2>Dark Error</h2>
-        <div class="numberinput" data-init="numberinput" data-error="true">
-          <button type="button" class='decrement'>decrement</button>
-          <input type='text'>
-          <button type="button" class='increment'>increment</button>
-        </div>
-
-        <h2>Dark Disabled</h2>
-        <div class="numberinput" data-init="numberinput" data-disabled="true">
-          <button type="button" class='decrement'>decrement</button>
-          <input type='text'>
-          <button type="button" class='increment'>increment</button>
-        </div>
-      </div> <!-- end theme-dark -->
-    </section>
-  </div> <!-- end column -->
-
-  <div class="col">
-    <section>
-      <h2>JavaScript Initialized</h2>
-      <div id="jsNumberInput">
-          <button type="button">decrement</button>
-          <input type='text'>
-          <button type="button">increment</button>
-      </div>
-      <span>Fields below are using js to set attribute values</span>
-      <div><label>Step:</label><input id="stepValue" class="option-input" type="text" value='5'></div>
-      <div><label>Min:</label><input id="minValue" class="option-input" type="text" value='-25'></div> 
-      <div><label>Max:</label><input id="maxValue" class="option-input" type="text" value='25'></div>
-      <div><label><input type="radio" name="r1" value="1" checked><span></span>normal</label></div>
-      <div><label><input type="radio" name="r1" value="2"><span></span>error</label></div>
-      <div><label><input type="radio" name="r1" value="3"><span></span>disabled</label></div>
-    </section>
-
-    <section>
-      <p>Attributes can also be set on the input markup</p>
-      <h2>Set step value to '3'</h2>
+      <h2>Set step value to "3"</h2>
       <div class="numberinput" data-init="numberinput">
-        <button type="button" class='decrement'>decrement</button>
-        <input type='text' step="3">
-        <button type="button" class='increment'>increment</button>
+        <button type="button" class="decrement">decrement</button>
+        <input type="text" step="3">
+        <button type="button" class="increment">increment</button>
       </div>
 
       <h2>Set max/min so range is 0-5</h2>
       <div class="numberinput" data-init="numberinput">
-        <button type="button" class='decrement'>decrement</button>
-        <input type='text' value="1" max="5" min="0">
-        <button type="button" class='increment'>increment</button>
+        <button type="button" class="decrement">decrement</button>
+        <input type="text" value="1" max="5" min="0">
+        <button type="button" class="increment">increment</button>
+      </div>
+    </section>
+    <section>
+      <h2>JavaScript Initialized</h2>
+      <div id="jsNumberInput">
+          <button type="button">decrement</button>
+          <input type="text">
+          <button type="button">increment</button>
       </div>
 
+      <form class="aligned">
+        <div class="fieldset">
+
+          <label class="fieldlabel">Step:</label><input id="stepValue" class="field" type="text" value="5">
+          <label class="fieldlabel">Min:</label><input id="minValue" class="field" type="text" value="-25">
+          <label class="fieldlabel">Max:</label><input id="maxValue" class="field" type="text" value="25">
+
+          <div class="clearfix"> </div>
+
+          <div class="radio-group horizontal">
+              <label class="field radiofield"><input type="radio" name="r1" value="1" checked> <span>normal</span></label>
+              <label class="field radiofield"><input type="radio" name="r1" value="2"><span>error</span></label>
+              <label class="field radiofield"><input type="radio" name="r1" value="3"><span>disabled</span></label>
+          </div>
+        </div>
+      </form>
     </section>
-
   </div>
+  <div class="col">
+    <section class="theme-dark well">
+      <!-- examples below will use the dark theme because they are in this container -->  
+        <h2>Dark</h2>
+        <div class="numberinput" data-init="numberinput">
+          <button type="button" class="decrement">decrement</button>
+          <input type="text">
+          <button type="button" class="increment">increment</button>
+        </div>
 
+        <h2>Dark Error</h2>
+        <div class="numberinput" data-init="numberinput" data-error="true">
+          <button type="button" class="decrement">decrement</button>
+          <input type="text">
+          <button type="button" class="increment">increment</button>
+        </div>
+
+        <h2>Dark Disabled</h2>
+        <div class="numberinput" data-init="numberinput" data-disabled="true">
+          <button type="button" class="decrement">decrement</button>
+          <input type="text">
+          <button type="button" class="increment">increment</button>
+        </div>
+    </section>
+  </div>
 </body>
 </html>
