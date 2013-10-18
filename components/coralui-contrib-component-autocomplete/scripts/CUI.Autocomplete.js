@@ -9,7 +9,6 @@
             delay: 500,
             showtypeahead: true,
             showsuggestions: false,
-            //showclearbutton: false,
             showtags: false,
 
             selectlistConfig: null,
