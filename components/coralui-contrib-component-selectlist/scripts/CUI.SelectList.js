@@ -207,6 +207,7 @@
             this.$element.attr({
                 'role': 'listbox',
                 'tabindex': -1, // the list itself is not focusable
+                'aria-controls': this.options.relatedElement.attr('id') || '',
                 'aria-hidden': true,
                 'aria-multiselectable': this.options.multiple
             });

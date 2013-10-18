@@ -5,7 +5,7 @@
         extend: CUI.Widget,
 
         defaults: {
-            mode: 'starts', // filter mode ['starts', 'contains']
+            mode: 'contains', // filter mode ['starts', 'contains']
             ignorecase: true,
             delay: 500,
             showtypeahead: true,
@@ -210,18 +210,32 @@
          * @param  {jQuery.Event} event
          */
         _handleStaticFilter: function (val) {
-            this._selectlist.find('[role="option"]').each(function (i, e) {
-                var entry = $(e),
-                    display = entry.text();
+            var self = this,
+                entries = this._selectlist.find('[role="option"]'); // maybe received by the selectlist widget
 
-                if (this.options.ignorecase) {
-                    display = display.toLowerCase();
-                    val = val.toLowerCase();
-                }
+            if (val) {
+                entries.each(function (i, e) {
+                    var entry = $(e),
+                        display = entry.text(),
+                        found;
 
-                // performance: http://jsperf.com/js-startswith/6    
-                entry.toggle(display.lastIndexOf(val, 0) === 0);
-            });
+                    if (self.options.ignorecase) {
+                        display = display.toLowerCase();
+                        val = val.toLowerCase();
+                    }
+
+                    // performance "starts": http://jsperf.com/js-startswith/6
+                    // performance "contains": http://jsperf.com/string-compare-perf-test
+                    found = self.options.mode === 'starts' ? display.lastIndexOf(val, 0) === 0 :
+                        self.options.mode === 'contains' ? display.search(val) !== -1:
+                        false;
+
+                    entry.toggle(found);
+                });
+            } else { // show all
+                entries.show();
+            }
+            
         },
 
         /**
