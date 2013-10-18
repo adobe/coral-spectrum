@@ -15,8 +15,11 @@
             selectlistConfig: null,
             tagConfig: null,
 
-            // future feature 3.0, 
+            // @warning do not use this
+            // 
+            // future feature
             // allows to bypass element search and pass elements
+            // will allow to evalute this solution
             predefine: {}
         },
 
@@ -28,7 +31,6 @@
             this._selectlist = this.options.predefine.selectlist || this.$element.find('.selectlist');
             this._tags = this.options.predefine.tags || this.$element.find('.taglist');
             this._suggestionsBtn = this.options.predefine.suggestionsBtn || this.$element.find('.autocomplete-suggestion-toggle');
-
 
             // apply
             this.applyOptions();
