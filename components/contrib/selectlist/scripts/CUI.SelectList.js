@@ -99,7 +99,7 @@
          * @param  {Boolean} [options.autohide=true] automatically closes the list when it loses its focus
          * @param  {String} [options.dataurl] URL to receive values dynamically
          * @param  {String} [options.dataurlformat=html] format of the dynamic data load
-         * @param  {Object} [options.dataadditional] additonal data to be sent
+         * @param  {Object} [options.dataadditional] additonal data to be sent with a remote loading request
          * @param  {Function} [options.loadData] function to be called if more data is needed. This must not be used with a set dataurl.
          *
          * 
@@ -519,7 +519,7 @@
      */
     
     /**
-     * Triggered when option was unselected
+     * Triggered when option was unselected (not implemented)
      *
      * @name CUI.SelectList#unselected
      * @event
