@@ -6,53 +6,18 @@
 
 // Grid view style
 .grid .card-page {
-    .label {
-        .info-approved,
-        .info-locked,
-        .user {
-            display: none;
-        }
-
-        .main {
-            > .descriptor {
-                text-transform: uppercase;
-                margin: 6*@px 10*@px 0;
-                font-size: 10*@px;
-
-                + h4 {
-                    margin-top: 0;
-                }
-            }
-        }
-
-        .info {
-            border-top: @px solid @card-separator-color;
-            margin: 9*@px 9*@px 0;
-            padding-top: 8*@px;
-
-            .short-info > span {
-                margin-right: 6*@px;
-                margin-bottom: 6*@px;
-                display: inline-block;
-
-                + .status {
-                    padding-top: 4*@px;
-                }
-            }
-
-            .status {
-                clear: both;
-                padding-top: 8*@px;
-            }
-
-            .published, .modified {
-                display: inline-block;
-                margin-left: 0;
-                margin-right: 0.5rem;
-            }
-        }
+    .info-approved,
+    .info-locked,
+    .user {
+        display: none;
     }
-
+    .published,
+    .modified {
+        float: left;
+    }
+    .links {
+        float: right;
+    }
     .image {
         overflow: hidden; // To avoid the gradient to overflow the image element
         position: relative;
@@ -66,10 +31,23 @@
             .card-grid-page-gradient();
         }
     }
-
     &.selected {
         .image:after {
             .card-grid-page-gradient(@card-selection-color);
+        }
+    }
+
+    .descriptor {
+        margin: 6*@px 10*@px -6*@px 10*@px;
+        text-transform: uppercase;
+    }
+    .meta-info {
+        border-top: 1px solid @card-separator-color;
+        padding-top: 6*@px;
+        margin-bottom: 10*@px;
+
+        > span {
+            margin-right: 6*@px;
         }
     }
 }
@@ -79,20 +57,11 @@
     .card-list-image-stack(28*@px, 28*@px);
 
     .main {
-        width: 60%;
-        height: 100%;
-        position: relative;
-
+        width: 65%;
         > p {
             font-size: 10*@px;
             font-weight: bold;
             text-transform: uppercase;
-            margin-top: 25*@px;
-        }
-
-        > p + h4 {
-            margin-top: 7*@px;
-            position: absolute;
         }
         .info-locked {
             .card-list-box();
@@ -101,65 +70,59 @@
             .card-list-box(yellow);
         }
     }
-
-    .info {
-        width: 40%;
-        height: 100%;
+    .published,
+    .modified {
         float: left;
+        width: 15%;
+        .card-list-date-user();
+    }
+    .links {
+        float: left;
+        width: 5%;
+    }
+    .descriptor {
+        position: absolute;
+        top: 10*@px;
 
-        .short-info {
-            float: right;
-            width: 33%;
-
-            display: table;
-            table-layout: fixed;
-            margin-top: 16*@px;
-
-            > span {
-                display: table-cell;
-
-            }
+        ~ * {
+            margin-top: 7*@px;
         }
-        .modified,
-        .published {
-            float: left;
-            width: 33%;
-           .card-list-date-user();
-        }
+    }
+    .meta-info {
+        display: none;
     }
 }
 .list.small .card-page {
     .main {
         width: 60%;
     }
-    .short-info {
-        display: none;
+    .published,
+    .modified {
+        width: 20%;
     }
-    .modified,
-    .published {
-        width: 50%;
+    .links {
+        display: none;
     }
 }
 .list.xsmall .card-page {
     .main {
         width: 70%;
     }
-    .info {
+    .published {
         width: 30%;
     }
-    .short-info,
-    .modified {
+    .modified,
+    .links {
         display: none;
-    }
-    .published {
-        width: 100%;
     }
 }
 .list.xxsmall .card-page {
     .main {
         width: 100%;
     }
-    .info {
+    .published,
+    .modified,
+    .links {
         display: none;
     }
 }

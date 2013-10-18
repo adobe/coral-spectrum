@@ -1,9 +1,21 @@
+// Internal form variables!
+@field-margin: 0.5rem;
+@field-label-margin-top: 20*@px;
+@field-label-margin-bottom: @field-margin;
+@field-gap: 0.5rem;
+
+
 /**
  * Indicates that the form is using vertical layout, where the label is placed above the field.
  *
  * @see https://issues.adobe.com/browse/CQ5-30653 for measurement
  */
-form.vertical {
+form.vertical,
+
+/**
+ * Indicates that the form is using aligned layout, where the label and the field are placed on the same line.
+ */
+form.aligned {
   /**
    * Indicates the fieldset.
    * .fieldset is used instead of <fieldset> as <legend> cannot be styled as per requirement.
@@ -36,41 +48,121 @@ form.vertical {
    */
   label.fieldlabel {
     display: block;
-    margin: 20*@px 0 0.5rem 0;
+    margin: @field-label-margin-top 0 @field-label-margin-bottom 0;
+  }
+
+  /**
+   * Indicates the field wrapper. A field wrapper MUST be used for field info and field error.
+   */
+  .fieldwrapper {
+    display: block;
+
+    .fieldinfo[class^="icon-"],
+    .fieldinfo[class*=" icon-"],
+    .fielderror.form-error {
+      margin: 0;
+      padding: 0;
+      height: @component-single-line-height;
+      line-height: @component-single-line-height;
+    }
   }
 }
 
-/**
- * Indicates that the form is using aligned layout, where the label and the field are placed on the same line.
- */
+form.vertical {
+  /**
+   * Indicates the field.
+   */
+  .field {
+    margin: @field-margin 0;
+  }
+
+  .fieldwrapper {
+    position: relative;
+
+    /**
+     * Indicates the field info.
+     */
+    .fieldinfo,
+
+    /**
+     * Indicates the field error.
+     */
+    .fielderror {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+}
+
 form.aligned {
   .fieldset {
-    margin: 0 10*@px 40*@px 10*@px;
-    border: none;
-    border-top: 1px solid #CCCCCC;
     .clearfix;
-
-    > .legend {
-      display: block;
-      margin: 8*@px 0 15*@px 0;
-    }
-
-    &:first-of-type {
-      border: none;
-
-      > .legend {
-        margin-top: 25*@px;
-        display: block;
-      }
-    }
   }
 
   label.fieldlabel {
     float: left;
     clear: left;
-    display: block;
-    margin: 0.5rem 0.5rem 0.5rem 0;
-    line-height: 2rem;
+    margin-right: @field-gap;
+    line-height: @component-single-line-height;
     min-width: 6.5rem;
+  }
+
+  /**
+   * Indicates the field.
+   */
+  .field {
+    float: left;
+    margin: @field-label-margin-top 0 @field-label-margin-bottom 0;
+  }
+
+  .fieldwrapper {
+    clear: left;
+    margin: @field-label-margin-top 0 @field-label-margin-bottom 0;
+    .clearfix;
+
+    label.fieldlabel {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .field {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    /**
+     * Indicates the field info.
+     */
+    .fieldinfo,
+
+    /**
+     * Indicates the field error.
+     */
+    .fielderror {
+      float: left;
+      margin-left: @field-gap;
+    }
+
+    .fieldinfo[class^="icon-"],
+    .fieldinfo[class*=" icon-"],
+    .fielderror.form-error {
+      margin-left: @field-gap;
+    }
+  }
+
+  .field + .fieldwrapper {
+    // because of float of the field, the margin top of fieldwrapper is not effective
+    // take a look at form example
+    padding-top: @field-label-margin-top - @field-margin;
+  }
+
+  .field + label.fieldlabel,
+  .field + label.fieldlabel + .field,
+  .fieldwrapper + label.fieldlabel,
+  .fieldwrapper + label.fieldlabel + .field {
+    // because of float, the margin is not collapsed, so reduce it
+    // take a look at form example
+    margin-top: @field-label-margin-top - @field-margin;
   }
 }

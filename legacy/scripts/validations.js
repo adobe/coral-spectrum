@@ -66,6 +66,11 @@
     // So later when you need a fancy validation, please bring this issue to the mailing list first.
 
 
+    // NOTE about browsers behaviours
+    // IE9 doesn't trigger "input" event when the character is deleted, thus error can only be validated fully upon form submission
+    // IE10 recognizes aria-required attribute, hence the error state is shown straight away (based on current logic)
+
+
     // Cancel the native invalid event (which is triggered by the browser supporting native validation)
     // to show our own UI instead
     $(document).on("cui-contentloaded", function(e) {
@@ -107,6 +112,31 @@
         show: simpleShow,
         clear: simpleClear
     });
+
+    $.validator.register({
+        selector: "form .fieldwrapper .field",
+        show: function(el, message) {
+            el.attr("aria-invalid", "true").toggleClass("error", true);
+            el.nextAll(".fieldinfo").addClass("hidden-accessible");
+
+            var error = el.nextAll(".fielderror");
+
+            if (error.length === 0) {
+                var arrow = el.closest("form").hasClass("vertical") ? "right" : "top";
+                $("<span class='fielderror form-error small' data-init='quicktip' data-quicktip-type='error' />")
+                    .attr("data-quicktip-arrow", arrow)
+                    .html(message)
+                    .insertAfter(el);
+            } else {
+                error.html(message);
+            }
+        },
+        clear: function(el) {
+            el.removeAttr("aria-invalid").removeClass("error").nextAll(".fielderror").remove();
+            el.nextAll(".fieldinfo").removeClass("hidden-accessible");
+        }
+    });
+
 
     // Check required & aria-required of input and textarea
     $.validator.register({

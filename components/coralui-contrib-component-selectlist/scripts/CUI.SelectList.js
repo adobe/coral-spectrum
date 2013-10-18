@@ -99,7 +99,7 @@
          * @param  {Boolean} [options.autohide=true] automatically closes the list when it loses its focus
          * @param  {String} [options.dataurl] URL to receive values dynamically
          * @param  {String} [options.dataurlformat=html] format of the dynamic data load
-         * @param  {Object} [options.dataadditional] additonal data to be sent
+         * @param  {Object} [options.dataadditional] additonal data to be sent with a remote loading request
          * @param  {Function} [options.loadData] function to be called if more data is needed. This must not be used with a set dataurl.
          *
          * 
@@ -110,7 +110,8 @@
             this.$element
                 .on('change:type', this._setType.bind(this))
                 .on('change:autohide', this._setAutohide.bind(this))
-                .on('click', '[role="option"]', this._triggerSelected.bind(this));
+                .on('click', '[role="option"]', this._triggerSelected.bind(this))
+                .on('mouseenter', '[role="option"]', this._handleMouseEnter.bind(this));
 
             // accessibility
             this._makeAccessible();
@@ -207,6 +208,7 @@
             this.$element.attr({
                 'role': 'listbox',
                 'tabindex': -1, // the list itself is not focusable
+                'aria-controls': this.options.relatedElement.attr('id') || '',
                 'aria-hidden': true,
                 'aria-multiselectable': this.options.multiple
             });
@@ -291,6 +293,10 @@
                         'tabindex': 0
                     });
 
+                    entry.children('span').attr({
+                        'tabindex': -1
+                    });
+
                 } else {
                     entry.attr({
                         'role': 'option',
@@ -324,7 +330,7 @@
             if (this.options.type === 'dynamic') {
                 this._handleLoadData().done(function () {
                     self.$element.find('li[role="option"]:first').trigger('focus');
-                    this._setAutohide();
+                    self._setAutohide();
                 });
             } else { // otherwise set autohide immediately
                 this._setAutohide();
@@ -360,6 +366,15 @@
                 selectedValue: val,
                 displayedValue: display
             }));
+        },
+
+        /**
+         * handles the mousenter event on an option
+         * this events sets the the focus to the current event
+         * @param  {jQuery.Event} event
+         */
+        _handleMouseEnter: function (event) {
+            $(event.currentTarget).trigger('focus');
         },
 
         /**
@@ -404,8 +419,8 @@
                     'class': 'wait'
                 }));
 
-            if (this._loadingIsActive) {
-                return;
+            if (this._loadingIsActive) { // immediately resolve
+                return $.Deferred().resolve().promise();
             }
 
             // activate fetching
@@ -504,7 +519,7 @@
      */
     
     /**
-     * Triggered when option was unselected
+     * Triggered when option was unselected (not implemented)
      *
      * @name CUI.SelectList#unselected
      * @event

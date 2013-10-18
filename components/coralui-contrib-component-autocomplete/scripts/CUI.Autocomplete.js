@@ -4,138 +4,79 @@
 
         extend: CUI.Widget,
 
-        defaults: {
-            mode: 'starts', // filter mode ['starts', 'contains']
-            delay: 500,
-            showtypeahead: false,
-            showsuggestions: false,
-            showclearbutton: false,
-            showtags: false,
-
-            selectlistConfig: null,
-            tagConfig: null
-        },
-
+        /**
+         * @extends CUI.Widget
+         * @classdesc 
+         *
+         * <h2 class="line">Examples</h2>
+         *
+         * 
+         *
+         * @example
+         * <caption>Instantiate with Class</caption>
+         * var selectlist = new CUI.Autocomplete({
+         *     element: '#myAutocomplete'
+         * });
+         *
+         * @example
+         * <caption>Instantiate with jQuery</caption>
+         * $('#mySelect').autocomplete({
+         *
+         * });
+         *
+         * @example
+         * <caption>Data API: Instantiate, set options</caption>
+         *
+         * 
+         *
+         * @description Creates a new select
+         * @constructs
+         *
+         * @param {Object} options Component options
+         * @param {Mixed} options.element jQuery selector or DOM element to use for panel
+         * 
+         * 
+         */
         construct: function () {
             var self = this;
 
             // find elements
-            this._input = this.$element.children('input');
-            this._selectlist = this.$element.find('.selectlist');
-            this._tags = this.$element.find('.taglist');
-
-            this._suggestionsBtn = this.$element.find('.autocomplete-suggestion-toggle');
-
+            this._input = this.options.predefine.input || this.$element.children('input');
+            this._selectlist = this.options.predefine.selectlist || this.$element.find('.selectlist');
+            this._tags = this.options.predefine.tags || this.$element.find('.taglist');
+            this._suggestionsBtn = this.options.predefine.suggestionsBtn || this.$element.find('.autocomplete-suggestion-toggle');
 
             // apply
             this.applyOptions();
         },
 
+        defaults: {
+            mode: 'contains', // filter mode ['starts', 'contains']
+            ignorecase: true,
+            delay: 500,
+            showtypeahead: true,
+            showsuggestions: false,
+            multiple: false,
+
+            selectlistConfig: null,
+            tagConfig: null,
+
+            // @warning do not use this
+            // 
+            // future feature
+            // allows to bypass element search and pass elements
+            // will allow to evalute this solution
+            predefine: {}
+        },
+
         applyOptions: function () {
-            this._setClearButton();
+            //this._setClearButton();
 
             this._setTags();
             this._setSelectlist();
             this._setTypeahead();
             this._setSuggestions();
-
-            this._setType();
         },
-
-        /**
-         * initializes the type of the autocomplete
-         */
-        _setType: function () {
-            if (this._selectListWidget.options.type === 'static') {
-                this.$element.on('query', this.handleStaticFilter.bind(this));
-            } else if (this._selectListWidget.options.type === 'dynamic') {
-                this.$element.on('query', this.handleDynamicFilter.bind(this));
-            }
-        },
-
-        /**
-         * initialize the clear button
-         * @private
-         */
-        _setClearButton: function () {
-            var self = this;
-
-            if (this.options.showclearbutton) {
-
-                // create button if not there
-                if (!this._clearBtn) {
-                    this._clearBtn = $('<button/>', {
-                        'class': 'autocomplete-clear icon-close'
-                    }).fipo('tap', 'click', function (event) {
-                        event.preventDefault();
-
-                        self.clear();
-                        self._input.focus();
-                    }).finger('click', false);
-                }
-
-                this._clearBtn.appendTo(this.$element);
-                this._input.on('keyup.autocomplete-clearbtn', this._refreshClear.bind(this));
-                this._refreshClear();
-            } else {
-                if (this._clearBtn) {
-                    this._clearBtn.detach();
-                }
-                this._input.off('keyup.autocomplete-clearbtn');
-            }
-        },
-
-        /*_setSuggestions: function () {
-            var self = this;
-
-            if (this.options.showsuggestions) {
-
-                // if the element is not there, create it
-                if (this._suggestions.length === 0) {
-                    this._suggestions = $('<ul/>', {
-                        'class': 'selectlist autocomplete-suggestions'
-                    }).appendTo(this.$element);
-                }
-
-                this._suggestions.selectList($.extend({
-                    relatedElement: this._input
-                }, this.options.suggestionConfig || {}));
-
-                this._selectListSuggestion = this._suggestions.data('selectList');
-
-                // if the button to trigger the suggestion box is not there, 
-                // then we add it
-                if (this._suggestionsBtn.length === 0) {
-
-                    this._suggestionsBtn = $('<button/>', {
-                        'class': 'autocomplete-suggestion-toggle'
-                    });
-
-                    this._suggestionsBtn.appendTo(this.$element);
-                }
-
-                // handler to open usggestion box
-                this._suggestionsBtn.fipo('tap', 'click', function (event) {
-                    event.preventDefault();
-                    self._toggleSuggestions();
-                }).finger('click', false);
-
-
-                this._suggestions
-                    // receive the value from the list
-                    .on('selected.autcomplete-suggestion', this._handleSuggestionSelected.bind(this))
-                    // handle open/hide for the button
-                    .on('show.autcomplete-suggestion hide.autcomplete-suggestion', function (event) {
-                        self._suggestionsBtn.toggleClass('active', event.type === 'show');
-                    });
-                // add class to input to to increase padding right for the button
-                this._input.addClass('autocomplete-has-suggestion-btn');
-            } else {
-                this._suggestionsBtn.remove();
-                this._suggestions.off('selected.autcomplete-suggestion show.autcomplete-suggestion hide.autcomplete-suggestion');
-                this._input.removeClass('autocomplete-has-suggestion-btn');
-            }
-        },*/
 
         /**
          * initializes the select list widget
@@ -169,7 +110,7 @@
          * @private
          */
         _setTags: function () {
-            if (this.options.showtags) {
+            if (this.options.multiple) {
 
                 // if the element is not there, create it
                 if (this._tags.length === 0) {
@@ -190,7 +131,6 @@
 
         /**
          * initializes the typeahead functionality
-         * @fires Autocomplete#query
          * @private
          */
         _setTypeahead: function () {
@@ -198,9 +138,7 @@
                 timeout;
 
             function timeoutLoadFunc() {
-                self.$element.trigger($.Event('query', {
-                    value: self._input.val()
-                }));
+                self.handleInput(self._input.val());
             }
 
             if (this.options.showtypeahead) {
@@ -239,7 +177,7 @@
                 // handler to open usggestion box
                 this._suggestionsBtn.fipo('tap', 'click', function (event) {
                     event.preventDefault();
-                    self._toggleSuggestions();
+                    self.handleInput();
                 }).finger('click', false);
 
                 // add class to input to to increase padding right for the button
@@ -250,50 +188,38 @@
             }
         },
 
-        /*
-        _setTypeahead: function () {
-            var self = this,
-                timeout;
+        /**
+         * adds some accessibility attributes and features
+         * http://www.w3.org/WAI/PF/aria/roles#combobox
+         * @private
+         */
+        _makeAccessible: function () {
+            this.$element.attr({
+                'role': 'combobox',
+                'aria-multiselectable': this.options.multiple,
+                'aria-autocomplete': this.options.showtypeahead ? 'list' : '',
+                'aria-owns': this._selectlist.attr('id') || ''
+            });
 
-            function timeoutLoadFunc() {
-                self._selectListTypeahead.set('dataadditional', {
-                    value: self._input.val()
-                });
-                self._selectListTypeahead.show();
-                self._selectListTypeahead.triggerLoadData(true);
-            }
+            // keyboard handling
+            this.$element.on('keydown', 'li[role="option"]', function (event) {
+                // enables keyboard support
 
-            if (this.options.showtypeahead) {
+                var elem = $(event.currentTarget);
 
-                // if the element is not there, create it
-                if (this._typeahead.length === 0) {
-                    this._typeahead = $('<ul/>', {
-                        'class': 'selectlist autocomplete-typeahead'
-                    }).appendTo(this.$element);
+                switch (event.which) {
+                    case 13: // enter
+                        // choose first element
+                        break;
+                    case 27: //esc
+                        // close suggestions
+                        break;
+                    case 40: //down arrow
+                        // focus first element
+                        break;
                 }
-
-                this._typeahead.selectList($.extend({
-                    relatedElement: this._input,
-                    autofocus: false,
-                    autohide: false
-                }, this.options.typeaheadConfig || {}));
-
-                this._selectListTypeahead = this._typeahead.data('selectList');
-
-                // bind keyboard input listening
-                this._input.on('keyup.autocomplete-typeahead', function (event) {
-                    // debounce
-                    if (timeout) {
-                        clearTimeout(timeout);
-                    }
-
-                    timeout = setTimeout(timeoutLoadFunc, 500);
-                });
-
-            } else {
-                this._input.off('keyup.autocomplete-typeahead');
-            }
-        },*/
+            });
+        },
 
         /**
          * adds a new tag when pressed button was Enter
@@ -309,10 +235,14 @@
             this.clear();
         },
 
+        /**
+         * @private
+         * @param  {jQuery.Event} event
+         */
         _handleSelected: function (event) {
             this._selectListWidget.hide();
             
-            if (this.options.showtags) {
+            if (this.options.multiple) {
                 this._tagList.addItem(event.displayedValue);
             } else {
                 this._input.val(event.displayedValue);
@@ -321,33 +251,67 @@
             this._input.trigger('focus');
         },
 
-        _toggleSuggestions: function () {
-            this._selectListWidget.toggleVisibility();
-        },
-
-        _refreshClear: function () {
-            this._clearBtn.toggleClass('hide', this._input.val().length === 0);
-        },
-
         /**
-         * handles a static list filter (type == static) based on the defined mode
-         * @param  {jQuery.Event} event
+         * @fires Autocomplete#query
+         * @param  {String} val null if all values need to be shown
          */
-        handleStaticFilter: function (event) {
-            this._selectList.find('[role="option"]').each(function (i, e) {
+        handleInput: function (val) {
+            // fire event to allow notifications
+            this.$element.trigger($.Event('query', {
+                value: val
+            }));
 
-            });
-        },
+            // actually handle the filter
+            if (this._selectListWidget.options.type === 'static') {
+                this._handleStaticFilter(val);
+            } else if (this._selectListWidget.options.type === 'dynamic') {
+                this._handleDynamicFilter(val);
+            }
 
-        /**
-         * handles a static list filter (type == static) based on the defined mode
-         * @param  {jQuery.Event} event
-         */
-        handleDynamicFilter: function (event) {
-            this._selectListWidget.set('dataadditional', {
-                value: event.value
-            });
             this._selectListWidget.show();
+        },
+
+        /**
+         * handles a static list filter (type == static) based on the defined mode
+         * @param  {jQuery.Event} event
+         */
+        _handleStaticFilter: function (val) {
+            var self = this,
+                entries = this._selectlist.find('[role="option"]'); // maybe received by the selectlist widget
+
+            if (val) {
+                entries.each(function (i, e) {
+                    var entry = $(e),
+                        display = entry.text(),
+                        found;
+
+                    if (self.options.ignorecase) {
+                        display = display.toLowerCase();
+                        val = val.toLowerCase();
+                    }
+
+                    // performance "starts": http://jsperf.com/js-startswith/6
+                    // performance "contains": http://jsperf.com/string-compare-perf-test
+                    found = self.options.mode === 'starts' ? display.lastIndexOf(val, 0) === 0 :
+                        self.options.mode === 'contains' ? display.search(val) !== -1:
+                        false;
+
+                    entry.toggle(found);
+                });
+            } else { // show all
+                entries.show();
+            }
+            
+        },
+
+        /**
+         * handles a static list filter (type == static) based on the defined mode
+         * @param  {jQuery.Event} event
+         */
+        _handleDynamicFilter: function (val) {
+            this._selectListWidget.set('dataadditional', {
+                query: val
+            });
             this._selectListWidget.triggerLoadData(true);
         },
 
@@ -356,7 +320,6 @@
          */
         clear: function () {
             this._input.val('');
-            this._refreshClear();
         },
 
         /**
@@ -364,7 +327,7 @@
          */
         disable: function () {
             this.$element.addClass('disabled');
-            this.$element.prop('aria-disabled', true);
+            this.$element.attr('aria-disabled', true);
             this._input.prop('disabled', true);
             this._suggestionsBtn.prop('disabled', true);
         },
@@ -374,7 +337,7 @@
          */
         enable: function () {
             this.$element.removeClass('disabled');
-            this.$element.prop('aria-disabled', false);
+            this.$element.attr('aria-disabled', false);
             this._input.prop('disabled', false);
             this._suggestionsBtn.prop('disabled', false);
         }
