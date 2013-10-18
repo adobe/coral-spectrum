@@ -6,34 +6,23 @@
 
   <link rel="stylesheet" href="../../css/cui.css">
 
-  <script src="../../js/libs/handlebars.js"></script>
-  <script src="../../js/libs/moment.js"></script>
   <script src="../../js/libs/jquery.js"></script>
-  <!--script src="../../js/libs/jquery-fingerpointer.js"></script-->
-  <script src="../../js/libs/toe.js"></script>
   <script src="../../js/libs/moment.js"></script>
-  
+  <script src="../../js/libs/jquery-message.js"></script>
+  <script src="../../js/libs/jquery-validator.js"></script>
+  <script src="../../js/libs/toe.js"></script>
   <script src="../../js/CUI.js"></script>
 
   <script>
     $(document).ready(function(){
 
       var jqueryTabs = $('#jsTabsDiv').tabs();
+      var jqueryTabsDark = $('#jsTabsDivDark').tabs();
+      
       var cuiTabs = new CUI.Tabs({ element: '#cuiTabsDiv'});
+      var cuiTabsDark = new CUI.Tabs({ element: '#cuiTabsDivDark'});
 
-      $('#jsTabsDivStacked').tabs({
-          type: 'stacked'
-      });
 
-      // var tabs = new CUI.Tabs({
-      //     element: '#jsTabsSection'
-      // // });
-
-      // var divTabs = $('#jsTabsDiv');
-
-      // var tabs = new CUI.Tabs({
-      //     element: divTabs
-      // });
       var activeExampleTab = 0;
 
       $('#cycleActive').on("click", function(){
@@ -48,27 +37,24 @@
 
   <style>
     body {
-      padding-left: 30px;
+      padding: 15px;
     }
 
     h3 {
-      margin-bottom: 20px;
+      margin-top: 10px;
+      margin-bottom: 10px;
     }
 
     section {
-      border-top: 1px solid #C8C8C8; 
-      margin-bottom: 40px;
+      border-top: 1px solid #C8C8C8;
     }
 
     .col {
       float: left;
       margin-right: 12px;
-      width: 40%
+      width: 500px;
     }
 
-    label {
-      margin-right: 1rem;
-    }
   </style>
 
 </head>
@@ -79,21 +65,18 @@
       <h3>Data-Init Constructor Example</h3>
       <div class="tabs" data-init="tabs">
         <nav>
-          <a href="#" data-toggle="tab" class="active" >Tab 1</a>
-          <a href="#" data-toggle="tab">Tab 2</a>
+          <a href="#" data-toggle="tab" class="active" >Menu Item With Super Long Title</a>
+          <a href="#" data-toggle="tab">Medium Title</a>
           <a href="../remote.html" data-target="#" data-toggle="tab">Tab 3</a>
-          <a href="#" data-toggle="tab" class="disabled">Disabled Tab</a>
         </nav>
         <section class="active">Lorem ipsum dolor sit amet.</section>
         <section>Aenean faucibus ornare laoreet. Cras luctus purus.</section>
         <section>This will be replaced by content from remote.html.</section>
-        <section>This will not be shown as the corresponding tab is disabled.</section>
       </div>  
-    </section>
-    
+    </section> 
     <section>
       <h3>CUI Constructor Example</h3>
-      <div class="tabs" id="cuiTabsDiv">
+      <div class="tabs white" id="cuiTabsDiv">
         <nav>
           <a href="#" data-toggle="tab" class="active" >CUI Tab 1</a>
           <a href="#" data-toggle="tab">CUI Tab 2</a>
@@ -111,7 +94,7 @@
     </section>
     <section>
       <h3>jQuery Constructor Example</h3>
-      <div class="tabs" id="jsTabsDiv">
+      <div class="tabs nav" id="jsTabsDiv">
         <nav>
           <a href="#" data-toggle="tab" class="active" >Tab 1</a>
           <a href="#" data-toggle="tab">Tab 2</a>
@@ -126,7 +109,67 @@
     </section>
     <section>   
       <h3>Stacked Example</h3>
-      <div class="tabs" id="jsTabsDivStacked">
+      <div class="tabs stacked" data-init="tabs">
+        <nav>
+          <a href="#" data-toggle="tab" class="active" >Tab 1</a>
+          <a href="#" data-toggle="tab">Tab 2</a>
+          <a href="../remote.html" data-target="#" data-toggle="tab">Tab 3</a>
+          <a href="#" data-toggle="tab" class="disabled">Disabled Tab</a>
+        </nav>
+        <section class="active">Lorem ipsum dolor sit amet.</section>
+        <section>Aenean faucibus ornare laoreet. Cras luctus purus.</section>
+        <section>This will be replaced by content from remote.html.</section>
+        <section>This will not be shown as the corresponding tab is disabled.</section>
+      </div>    
+    </section>
+  </div> <!-- /col -->
+  <div class="col theme-dark">
+    <section>
+      <h3>Data-Init Constructor Example</h3>
+      <div class="tabs" data-init="tabs">
+        <nav>
+          <a href="#" data-toggle="tab" class="active" >Menu Item With Super Long Title</a>
+          <a href="#" data-toggle="tab">Medium Title</a>
+          <a href="../remote.html" data-target="#" data-toggle="tab">Tab 3</a>
+        </nav>
+        <section class="active">Lorem ipsum dolor sit amet.</section>
+        <section>Aenean faucibus ornare laoreet. Cras luctus purus.</section>
+        <section>This will be replaced by content from remote.html.</section>
+      </div>  
+    </section>  
+    <section>
+      <h3>CUI Constructor Example</h3>
+      <div class="tabs" id="cuiTabsDivDark">
+        <nav>
+          <a href="#" data-toggle="tab" class="active" >CUI Tab 1</a>
+          <a href="#" data-toggle="tab">CUI Tab 2</a>
+          <a href="../remote.html" data-target="#" data-toggle="tab">Tab 3</a>
+          <a href="#" data-toggle="tab" class="disabled">Disabled Tab</a>
+        </nav>
+        <section class="active">CUI constructed Lorem ipsum dolor sit amet.</section>
+        <section>Aenean faucibus ornare laoreet. Cras luctus purus.</section>
+        <section>This will be replaced by content from remote.html.</section>
+        <section>This will not be shown as the corresponding tab is disabled.</section>
+      </div>
+    </section>
+    <section>
+      <h3>jQuery Constructor Example</h3>
+      <div class="tabs nav" id="jsTabsDivDark">
+        <nav>
+          <a href="#" data-toggle="tab" class="active" >Tab 1</a>
+          <a href="#" data-toggle="tab">Tab 2</a>
+          <a href="../remote.html" data-target="#" data-toggle="tab">Tab 3</a>
+          <a href="#" data-toggle="tab" class="disabled">Disabled Tab</a>
+        </nav>
+        <section class="active">Lorem ipsum dolor sit amet.</section>
+        <section>Aenean faucibus ornare laoreet. Cras luctus purus.</section>
+        <section>This will be replaced by content from remote.html.</section>
+        <section>This will not be shown as the corresponding tab is disabled.</section>
+      </div>  
+    </section>
+    <section>   
+      <h3>Stacked Example</h3>
+      <div class="tabs stacked" data-init="tabs">
         <nav>
           <a href="#" data-toggle="tab" class="active" >Tab 1</a>
           <a href="#" data-toggle="tab">Tab 2</a>
