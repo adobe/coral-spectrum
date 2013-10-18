@@ -6,6 +6,7 @@
 
         defaults: {
             mode: 'starts', // filter mode ['starts', 'contains']
+            ignorecase: true,
             delay: 500,
             showtypeahead: true,
             showsuggestions: false,
@@ -208,9 +209,18 @@
          * handles a static list filter (type == static) based on the defined mode
          * @param  {jQuery.Event} event
          */
-        _handleStaticFilter: function (event) {
+        _handleStaticFilter: function (val) {
             this._selectlist.find('[role="option"]').each(function (i, e) {
+                var entry = $(e),
+                    display = entry.text();
 
+                if (this.options.ignorecase) {
+                    display = display.toLowerCase();
+                    val = val.toLowerCase();
+                }
+
+                // performance: http://jsperf.com/js-startswith/6    
+                entry.toggle(display.lastIndexOf(val, 0) === 0);
             });
         },
 
