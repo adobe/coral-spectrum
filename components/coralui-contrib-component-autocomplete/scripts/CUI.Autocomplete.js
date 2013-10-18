@@ -169,8 +169,7 @@
 
         /**
          * @private
-         * @param  {[type]} event [description]
-         * @return {[type]}       [description]
+         * @param  {jQuery.Event} event
          */
         _handleSelected: function (event) {
             this._selectListWidget.hide();
@@ -187,7 +186,6 @@
         /**
          * @fires Autocomplete#query
          * @param  {String} val null if all values need to be shown
-         * @return {[type]}     [description]
          */
         handleInput: function (val) {
             // fire event to allow notifications
@@ -207,7 +205,7 @@
 
         /**
          * handles a static list filter (type == static) based on the defined mode
-         * @param  {jQuery.Event} event
+         * @param  {String} val null if all values need to be shown
          */
         _handleStaticFilter: function (val) {
             var self = this,
