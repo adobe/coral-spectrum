@@ -371,7 +371,7 @@
         /**
          * handles the mousenter event on an option
          * this events sets the the focus to the current event
-         * @private
+         * @param  {jQuery.Event} event
          */
         _handleMouseEnter: function (event) {
             $(event.currentTarget).trigger('focus');

@@ -237,6 +237,7 @@
 
         /**
          * @private
+         * @param  {jQuery.Event} event
          */
         _handleSelected: function (event) {
             this._selectListWidget.hide();
@@ -253,7 +254,6 @@
         /**
          * @fires Autocomplete#query
          * @param  {String} val null if all values need to be shown
-         * @return {[type]}     [description]
          */
         handleInput: function (val) {
             // fire event to allow notifications

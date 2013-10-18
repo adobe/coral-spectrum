@@ -513,7 +513,7 @@
             if (self.options.fileNameParameter && !this.options.autoStart){
                 if (!self.fileNameElement) {
                     // check if there is already a form input field defined to store the parameter
-                    self.fileNameElement = $("input[name=\"" + self.options.fileNameParameter +"\"" );
+                    self.fileNameElement = $("input[name=\"" + self.options.fileNameParameter + "\"]");
                     if (self.fileNameElement.length === 0) {
                         // create and append
                         self.fileNameElement = $("<input/>", {
