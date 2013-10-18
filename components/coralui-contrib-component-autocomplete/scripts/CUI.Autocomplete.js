@@ -4,25 +4,39 @@
 
         extend: CUI.Widget,
 
-        defaults: {
-            mode: 'contains', // filter mode ['starts', 'contains']
-            ignorecase: true,
-            delay: 500,
-            showtypeahead: true,
-            showsuggestions: false,
-            showtags: false,
-
-            selectlistConfig: null,
-            tagConfig: null,
-
-            // @warning do not use this
-            // 
-            // future feature
-            // allows to bypass element search and pass elements
-            // will allow to evalute this solution
-            predefine: {}
-        },
-
+        /**
+         * @extends CUI.Widget
+         * @classdesc 
+         *
+         * <h2 class="line">Examples</h2>
+         *
+         * 
+         *
+         * @example
+         * <caption>Instantiate with Class</caption>
+         * var selectlist = new CUI.Autocomplete({
+         *     element: '#myAutocomplete'
+         * });
+         *
+         * @example
+         * <caption>Instantiate with jQuery</caption>
+         * $('#mySelect').autocomplete({
+         *
+         * });
+         *
+         * @example
+         * <caption>Data API: Instantiate, set options</caption>
+         *
+         * 
+         *
+         * @description Creates a new select
+         * @constructs
+         *
+         * @param {Object} options Component options
+         * @param {Mixed} options.element jQuery selector or DOM element to use for panel
+         * 
+         * 
+         */
         construct: function () {
             var self = this;
 
@@ -34,6 +48,25 @@
 
             // apply
             this.applyOptions();
+        },
+
+        defaults: {
+            mode: 'contains', // filter mode ['starts', 'contains']
+            ignorecase: true,
+            delay: 500,
+            showtypeahead: true,
+            showsuggestions: false,
+            multiple: false,
+
+            selectlistConfig: null,
+            tagConfig: null,
+
+            // @warning do not use this
+            // 
+            // future feature
+            // allows to bypass element search and pass elements
+            // will allow to evalute this solution
+            predefine: {}
         },
 
         applyOptions: function () {
@@ -77,7 +110,7 @@
          * @private
          */
         _setTags: function () {
-            if (this.options.showtags) {
+            if (this.options.multiple) {
 
                 // if the element is not there, create it
                 if (this._tags.length === 0) {
@@ -156,6 +189,39 @@
         },
 
         /**
+         * adds some accessibility attributes and features
+         * http://www.w3.org/WAI/PF/aria/roles#combobox
+         * @private
+         */
+        _makeAccessible: function () {
+            this.$element.attr({
+                'role': 'combobox',
+                'aria-multiselectable': this.options.multiple,
+                'aria-autocomplete': this.options.showtypeahead ? 'list' : '',
+                'aria-owns': this._selectlist.attr('id') || ''
+            });
+
+            // keyboard handling
+            this.$element.on('keydown', 'li[role="option"]', function (event) {
+                // enables keyboard support
+
+                var elem = $(event.currentTarget);
+
+                switch (event.which) {
+                    case 13: // enter
+                        // choose first element
+                        break;
+                    case 27: //esc
+                        // close suggestions
+                        break;
+                    case 40: //down arrow
+                        // focus first element
+                        break;
+                }
+            });
+        },
+
+        /**
          * adds a new tag when pressed button was Enter
          * @private
          * @param {jQuery.Event} event
@@ -171,13 +237,11 @@
 
         /**
          * @private
-         * @param  {[type]} event [description]
-         * @return {[type]}       [description]
          */
         _handleSelected: function (event) {
             this._selectListWidget.hide();
             
-            if (this.options.showtags) {
+            if (this.options.multiple) {
                 this._tagList.addItem(event.displayedValue);
             } else {
                 this._input.val(event.displayedValue);
