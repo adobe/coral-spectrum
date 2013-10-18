@@ -110,7 +110,8 @@
             this.$element
                 .on('change:type', this._setType.bind(this))
                 .on('change:autohide', this._setAutohide.bind(this))
-                .on('click', '[role="option"]', this._triggerSelected.bind(this));
+                .on('click', '[role="option"]', this._triggerSelected.bind(this))
+                .on('mouseenter', '[role="option"]', this._handleMouseEnter.bind(this));
 
             // accessibility
             this._makeAccessible();
@@ -292,6 +293,10 @@
                         'tabindex': 0
                     });
 
+                    entry.children('span').attr({
+                        'tabindex': -1
+                    });
+
                 } else {
                     entry.attr({
                         'role': 'option',
@@ -364,6 +369,16 @@
         },
 
         /**
+         * handles the mousenter event on an option
+         * this events sets the the focus to the current event
+         * @param  {[type]} event [description]
+         * @return {[type]}       [description]
+         */
+        _handleMouseEnter: function (event) {
+            $(event.currentTarget).trigger('focus');
+        },
+
+        /**
          * deletes the item from the dom
          */
         clearItems: function () {
@@ -405,7 +420,7 @@
                     'class': 'wait'
                 }));
 
-            if (this._loadingIsActive) {
+            if (this._loadingIsActive) { // immediately resolve
                 return $.Deferred().resolve().promise();
             }
 
