@@ -52,19 +52,19 @@ form.vertical label.fieldlabel
 form.vertical .field
 
 /**
- * Indicates the field group. A field group MUST be used for field info and field error.
+ * Indicates the field wrapper. A field wrapper MUST be used for field info and field error.
  */
-form.vertical .fieldgroup
+form.vertical .fieldwrapper
 
 /**
  * Indicates the field info.
  */
-form.vertical .fieldgroup .fieldinfo
+form.vertical .fieldwrapper .fieldinfo
 
 /**
  * Indicates the field error.
  */
-form.vertical .fieldgroup .fielderror</pre>
+form.vertical .fieldwrapper .fielderror</pre>
 
     <form class="vertical" style="width: 500px;">
       <section class="fieldset">
@@ -76,13 +76,13 @@ form.vertical .fieldgroup .fielderror</pre>
         <label class="fieldlabel">Text</label>
         <input class="field" type="text" placeholder="Placeholder">
 
-        <div class="fieldgroup">
+        <div class="fieldwrapper">
           <label class="fieldlabel">Text</label>
           <input class="field" type="text" placeholder="Required" aria-required="true">
           <span class="fieldinfo icon-info-circle small" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right">Field Description</span>
         </div>
 
-        <div class="fieldgroup">
+        <div class="fieldwrapper">
           <label class="fieldlabel">Text</label>
           <input class="field" type="text" placeholder="Required" aria-required="true">
         </div>
@@ -90,13 +90,13 @@ form.vertical .fieldgroup .fielderror</pre>
         <label class="fieldlabel">Textarea</label>
         <textarea class="field" placeholder="Placeholder" rows="4"></textarea>
 
-        <div class="fieldgroup">
+        <div class="fieldwrapper">
           <label class="fieldlabel">Textarea</label>
           <textarea class="field" placeholder="Required" rows="4" aria-required="true"></textarea>
           <span class="fieldinfo icon-info-circle small" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right">Field Description</span>
         </div>
 
-        <div class="fieldgroup">
+        <div class="fieldwrapper">
           <label class="fieldlabel">Textarea</label>
           <textarea class="field" placeholder="Required" rows="4" aria-required="true"></textarea>
         </div>
@@ -234,19 +234,19 @@ form.aligned label.fieldlabel
 form.aligned .field
 
 /**
- * Indicates the field group. A field group MUST be used for field info and field error.
+ * Indicates the field wrapper. A field wrapper MUST be used for field info and field error.
  */
-form.aligned .fieldgroup
+form.aligned .fieldwrapper
 
 /**
  * Indicates the field info.
  */
-form.aligned .fieldgroup .fieldinfo
+form.aligned .fieldwrapper .fieldinfo
 
 /**
  * Indicates the field error.
  */
-form.aligned .fieldgroup .fielderror</pre>
+form.aligned .fieldwrapper .fielderror</pre>
 
     <form class="aligned" style="width: 500px;">
       <section class="fieldset">
@@ -255,13 +255,13 @@ form.aligned .fieldgroup .fielderror</pre>
         <label class="fieldlabel">Text</label>
         <input class="field" type="text" placeholder="Placeholder">
 
-        <div class="fieldgroup">
+        <div class="fieldwrapper">
           <label class="fieldlabel">Text</label>
           <input class="field" type="text" placeholder="Required" aria-required="true">
           <span class="fieldinfo icon-info-circle small" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="top">Field Description</span>
         </div>
 
-        <div class="fieldgroup">
+        <div class="fieldwrapper">
           <label class="fieldlabel">Text</label>
           <input class="field" type="text" placeholder="Required" aria-required="true">
         </div>
@@ -269,13 +269,13 @@ form.aligned .fieldgroup .fielderror</pre>
         <label class="fieldlabel">Textarea</label>
         <textarea class="field" placeholder="Placeholder" rows="4"></textarea>
 
-        <div class="fieldgroup">
+        <div class="fieldwrapper">
           <label class="fieldlabel">Textarea</label>
           <textarea class="field" placeholder="Placeholder" rows="4" aria-required="true"></textarea>
           <span class="fieldinfo icon-info-circle small" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="top">Field Description</span>
         </div>
 
-        <div class="fieldgroup">
+        <div class="fieldwrapper">
           <label class="fieldlabel">Textarea</label>
           <textarea class="field" placeholder="Required" rows="4" aria-required="true"></textarea>
         </div>

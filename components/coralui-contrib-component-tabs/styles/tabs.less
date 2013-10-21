@@ -4,34 +4,47 @@
 */
 
 // Tabs
-@tab-outline-color: rgba(0, 0, 0, 0.20);
-@tab-background-gradient-start-color: rgb(246, 246, 246);
+@tab-font-size: 14*@px;
+@tab-outline-color: rgba(0, 0, 0, 0.15);
+
+@tab-background-gradient-start-color: rgb(255, 255, 255);
 @tab-background-gradient-end-color: rgb(238, 238, 238);
-@tab-inactive-font-color: rgb(135, 135, 135);
+
 @tab-active-font-color: rgb(75, 75, 75);
+@tab-inactive-font-color: rgb(135, 135, 135);
 @tab-hover-font-color: rgb(75, 75, 75);
-@tab-disabled-font-color: rgb(180, 180, 180);
+@tab-disabled-font-color: rgb(195, 195, 195);
+
 @tab-white-background-gradient-start-color: rgb(255, 255, 255);
 @tab-white-background-gradient-end-color: rgb(245, 245, 245);
-@tab-nav-second-border-color: rgb(255, 255, 255, 0.8);
+
+@tab-nav-second-border-color: rgba(255, 255, 255, 0.8);
 @tab-nav-font-size: 18*@px;
 
 .tabs {
+
+  // surrounding margin
+  margin-top: 15*@px;
+  margin-bottom: 15*@px;
+
   .tab-focus(@tab_type) {
     outline: none;
     border: @px solid @focus-border-color;
   }
 
+  // x and y offset of the focus glow
+  @focus-offset: @partial-glow-radius + 0.1*@px;
+
   .tab-focus(@tab_type) when (@tab_type = top) {
-    @shadow: -@partial-glow-radius -@partial-glow-radius/2 @partial-glow-radius @partial-glow-color,
-        @partial-glow-radius -@partial-glow-radius/2 @partial-glow-radius @partial-glow-color;
+    @shadow: -@focus-offset -@focus-offset @partial-glow-radius @partial-glow-color,
+        @focus-offset -@focus-offset @partial-glow-radius @partial-glow-color;
     .box-shadow(@shadow);
     border-bottom: none;
   }
 
   .tab-focus(@tab_type) when (@tab_type = stacked) {
-    @shadow: -@partial-glow-radius/2 -@partial-glow-radius @partial-glow-radius @partial-glow-color,
-    -@partial-glow-radius/2 @partial-glow-radius @partial-glow-radius @partial-glow-color;
+    @shadow: -@focus-offset -@focus-offset @partial-glow-radius @partial-glow-color,
+    -@focus-offset  @focus-offset @partial-glow-radius @partial-glow-color;
     .box-shadow(@shadow);
     border-right: none;
   }
@@ -42,22 +55,26 @@
     position: relative;
 
     > a {
-      .light-text;
-      color: @tab-inactive-font-color;
       float: left;
-      padding: 10*@px 16*@px 10*@px 16*@px;
+
+      .light-text;
+      font-size: @tab-font-size;
+      font-style: normal;
+      color: @tab-inactive-font-color;
+      
+      padding: 10*@px 15*@px 10*@px 15*@px;
       margin: 0 2*@px -2*@px 0;
+
+      text-align: center;
       white-space: nowrap;
 
-      &.active {
-        border: 1*@px solid @tab-outline-color;
-        /* padding is adjusted on active tab to make up for text shift when border is drawn - CUI-994 */
-        padding: 9*@px 15*@px 9*@px 15*@px;
-        border-bottom: none;
-        .gradient(@tab-background-gradient-start-color, @tab-background-gradient-end-color);
-      }
+      min-width: 75*@px;
+      max-width: 300*@px;
 
-      &.active, &:hover {
+      .ellipsis;
+
+      &.active,
+      &:hover {
         text-decoration: none;
       }
 
@@ -83,6 +100,12 @@
       &.active {
         .bold-text;
         color: @tab-active-font-color;
+
+        border: 1*@px solid @tab-outline-color;
+        /* padding is adjusted on active tab to make up for text shift when border is drawn - CUI-994 */
+        padding: 9*@px 15*@px 9*@px 15*@px;
+        border-bottom: none;
+        .gradient(@tab-background-gradient-start-color, @tab-background-gradient-end-color);
         
         &:focus {
           .tab-focus(top);
@@ -95,7 +118,7 @@
     display: none;
     background-color: @tab-background-gradient-end-color;
     margin: 0;
-    border: 1*@px solid @tab-outline-color;
+    border: @px solid @tab-outline-color;
     padding: 13*@px;
     z-index: auto;
     position: relative;
@@ -128,9 +151,12 @@
         font-size: @tab-nav-font-size;
         margin-bottom: -2*@px; // TODO breaks slightly at higher base font sizes
 
+        // allows the boders to use the transparency.
+        .background-clip(padding-box);
+
         &.active {
           .gradient(lighten(@body-background-color, 7%), @body-background-color);
-          border-bottom: 2px solid @body-background-color;
+          border-bottom: 2*@px solid @body-background-color;
         }
 
         &:first-child {
@@ -168,7 +194,8 @@
         &.active {
           border-bottom: 1*@px solid @tab-outline-color;
           border-right: none;
-          .gradient(@tab-white-background-gradient-end-color, @tab-white-background-gradient-end-color);
+
+          #gradient > .horizontal(@tab-white-background-gradient-start-color, @tab-white-background-gradient-end-color);
           &:focus {
             .tab-focus(stacked);
           }

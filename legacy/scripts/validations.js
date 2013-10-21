@@ -114,7 +114,7 @@
     });
 
     $.validator.register({
-        selector: "form .fieldgroup .field",
+        selector: "form .fieldwrapper .field",
         show: function(el, message) {
             el.attr("aria-invalid", "true").toggleClass("error", true);
             el.nextAll(".fieldinfo").addClass("hidden-accessible");

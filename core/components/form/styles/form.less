@@ -52,9 +52,9 @@ form.aligned {
   }
 
   /**
-   * Indicates the field group. A field group MUST be used for field info and field error.
+   * Indicates the field wrapper. A field wrapper MUST be used for field info and field error.
    */
-  .fieldgroup {
+  .fieldwrapper {
     display: block;
 
     .fieldinfo[class^="icon-"],
@@ -76,7 +76,7 @@ form.vertical {
     margin: @field-margin 0;
   }
 
-  .fieldgroup {
+  .fieldwrapper {
     position: relative;
 
     /**
@@ -116,7 +116,7 @@ form.aligned {
     margin: @field-label-margin-top 0 @field-label-margin-bottom 0;
   }
 
-  .fieldgroup {
+  .fieldwrapper {
     clear: left;
     margin: @field-label-margin-top 0 @field-label-margin-bottom 0;
     .clearfix;
@@ -151,16 +151,16 @@ form.aligned {
     }
   }
 
-  .field + .fieldgroup {
-    // because of float of the field, the margin top of fieldgroup is not effective
+  .field + .fieldwrapper {
+    // because of float of the field, the margin top of fieldwrapper is not effective
     // take a look at form example
     padding-top: @field-label-margin-top - @field-margin;
   }
 
   .field + label.fieldlabel,
   .field + label.fieldlabel + .field,
-  .fieldgroup + label.fieldlabel,
-  .fieldgroup + label.fieldlabel + .field {
+  .fieldwrapper + label.fieldlabel,
+  .fieldwrapper + label.fieldlabel + .field {
     // because of float, the margin is not collapsed, so reduce it
     // take a look at form example
     margin-top: @field-label-margin-top - @field-margin;

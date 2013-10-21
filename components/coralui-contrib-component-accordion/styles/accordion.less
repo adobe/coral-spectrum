@@ -1,18 +1,30 @@
 // Accordion
-@accordion-background-color: rgb(240, 240, 240);
+@accordion-primary-font-color: @font-base-color;
+@accordion-secondary-font-color: @font-secondary-color;
 @accordion-border-color: rgba(0, 0, 0, 0.20);
-@accordion-background-gradient-color: rgb(255, 255, 255);
-
 @accordion-background-gradient-start-color: rgb(245, 245, 245);
-@accordion-background-gradient-end-color: rgb(240, 240, 240);
+@accordion-background-gradient-end-color: rgb(235, 235, 235);
+@accordion-background-active-color: @accordion-background-gradient-end-color;
+@accordion-background-hover-color: @accordion-background-gradient-end-color;
 
-@accordion-dark-font-color: rgb(220, 220, 220);
-@accordion-dark-font-hover-color: rgb(255, 255, 255);
-@accordion-dark-background-color: rgb(85, 85, 85);
+@accordion-disabled-primary-font-color: rgb(180, 180, 180);
+@accordion-disabled-secondary-font-color: rgb(200, 200, 200);
+@accordion-disabled-border-color: rgb(210, 210, 210);
+@accordion-disabled-background-color: rgb(230, 230, 230);
+
+@accordion-dark-primary-font-color: rgb(220, 220, 220);
+@accordion-dark-secondary-font-color: rgb(150, 150, 150);
 @accordion-dark-border-color: rgba(30, 30, 30, 0.50);
-@accordion-dark-background-gradient-color: rgb(95, 95, 95);
-@accordion-dark-background-gradient-start-color: rgb(90, 90, 90);
+@accordion-dark-background-gradient-start-color: rgb(95, 95, 95);
 @accordion-dark-background-gradient-end-color: rgb(85, 85, 85);
+@accordion-dark-background-active-color: @accordion-dark-background-gradient-end-color;
+@accordion-dark-background-hover-color: @accordion-dark-background-gradient-end-color;
+
+@accordion-dark-disabled-primary-font-color: rgb(110, 110, 110);
+@accordion-dark-disabled-secondary-font-color: rgb(95, 95, 95);
+@accordion-dark-disabled-border-color: rgb(65, 65, 65);
+@accordion-dark-disabled-background-color: rgb(80, 80, 80);
+
 
 .accordion {
   list-style: none;
@@ -25,10 +37,6 @@
 
   li + li {
     border-top: 0;
-    
-    &.focus {
-        margin-top: -@px;
-    }
   }
 }
 
@@ -41,104 +49,149 @@
 .collapsible {
   padding: 0.4375rem 1rem;
   overflow: hidden;
-  background-color: @accordion-background-color;
   border: @px solid @accordion-border-color;
   font-size: 13*@px;
   z-index: inherit;
   position: relative;        
   h3 {
     margin: -0.4375rem -1rem 0.4375rem -1rem;
-    padding: 0.4375rem 1rem;
+    padding: 0.4375rem 15*@px;
     font-size: 13*@px;
-    line-height: 20*@px;
+    line-height: 22*@px;
     font-weight: normal;
-    color: @font-secondary-color;
+    color: @accordion-secondary-font-color;
     .ellipsis();
-    .gradient(@accordion-background-gradient-color, @accordion-background-color);
+    .gradient(@accordion-background-gradient-start-color, @accordion-background-gradient-end-color);
     cursor: pointer;
+
+    i {
+      margin-right: 8*@px;
+    }
     
     em {
       font-style: normal;
       font-weight: bold;
-      color: @font-base-color;
+      color: @accordion-primary-font-color;
     }
     
     &:hover,
     &:focus {
-        background: @accordion-background-gradient-end-color;
-        outline: none;
-        
-        [class^="icon-"]:before, 
-        [class*=" icon-"]:before {
-            opacity: @icon-hover-opacity;
-        }
+      background: @accordion-background-hover-color;
+      outline: none;
+
+      [class^="icon-"]:before,
+      [class*=" icon-"]:before {
+          opacity: @icon-hover-opacity;
+      }
     }
   }
   
   &.active {
-    background: @accordion-background-gradient-end-color;
-    
-    h3 {
-        .gradient(@accordion-background-gradient-start-color, @accordion-background-gradient-end-color);
-        
-        &:hover,
-        &:focus {
-            background: @accordion-background-gradient-end-color;
-        }
-    }
+    background: @accordion-background-active-color;
   }
-  
-  &.focus {
-      .glow();
-      z-index: 1;
+}
+
+.accordion.disabled li,
+.collapsible.disabled {
+  &,
+  &.active {
+    background: @accordion-disabled-background-color;
+    border-color: @accordion-disabled-border-color;
+  }
+
+  h3 {
+    em {
+      color: @accordion-disabled-primary-font-color;
+    }
+
+    &,
+    &:hover,
+    &:focus {
+      cursor: auto;
+      background: @accordion-disabled-background-color;
+      color: @accordion-disabled-secondary-font-color;
+      [class^="icon-"]:before,
+      [class*=" icon-"]:before {
+        opacity: @icon-disabled-opacity;
+      }
+    }
   }
 }
 
 .dark,
 .rail {
-    &.accordion li,
-    &.collapsible,
-    .accordion li,
-    .collapsible {
-          background-color: @accordion-dark-background-color;
-          border-color: @accordion-dark-border-color;
-          color: @accordion-dark-font-color;
-          h3 {
-            .gradient(@accordion-dark-background-gradient-color, @accordion-dark-background-color);
-            
-            em {
-                color: @accordion-dark-font-color;
-            }
-            
-            [class^="icon-"]:before, 
-            [class*=" icon-"]:before {
-                color: @icon-white-color;
-                opacity: @icon-white-opacity;
-            }
-            
-            &:hover,
-            &:focus {
-                background: @accordion-dark-background-gradient-end-color;
-                
-                [class^="icon-"]:before, 
-                [class*=" icon-"]:before {
-                    color: @icon-white-hover-color;
-                    opacity: @icon-white-hover-opacity;
-                }
-            }
+  &.accordion li,
+  &.collapsible,
+  .accordion li,
+  .collapsible {
+    border-color: @accordion-dark-border-color;
+    color: @accordion-dark-secondary-font-color;
+
+    h3 {
+      .gradient(@accordion-dark-background-gradient-start-color, @accordion-dark-background-gradient-end-color);
+
+      em {
+          color: @accordion-dark-primary-font-color;
+      }
+
+      [class^="icon-"]:before,
+      [class*=" icon-"]:before {
+          color: @icon-white-color;
+          opacity: @icon-white-opacity;
+      }
+
+      &:hover,
+      &:focus {
+          background: @accordion-dark-background-gradient-end-color;
+
+          [class^="icon-"]:before,
+          [class*=" icon-"]:before {
+              color: @icon-white-hover-color;
+              opacity: @icon-white-hover-opacity;
           }
-          
-          &.active {
-            background: @accordion-dark-background-gradient-end-color;
-            
-            h3 {
-                .gradient(@accordion-dark-background-gradient-start-color, @accordion-dark-background-gradient-end-color);
-                
-                &:hover,
-                &:focus {
-                    background: @accordion-dark-background-gradient-end-color;
-                }
-            }
-          }
+      }
     }
+
+    &.active {
+      background: @accordion-dark-background-gradient-end-color;
+
+      h3 {
+          .gradient(@accordion-dark-background-gradient-start-color, @accordion-dark-background-gradient-end-color);
+
+          &:hover,
+          &:focus {
+              background: @accordion-dark-background-gradient-end-color;
+          }
+      }
+    }
+  }
+
+  &.accordion.disabled li,
+  &.collapsible.disabled,
+  .accordion.disabled li,
+  .collapsible.disabled {
+    &,
+    &.active {
+      background: @accordion-dark-disabled-background-color;
+      border-color: @accordion-dark-disabled-border-color;
+    }
+
+    h3 {
+      em {
+        color: @accordion-dark-disabled-primary-font-color;
+      }
+
+      &,
+      &:hover,
+      &:focus {
+        cursor: auto;
+        background: @accordion-dark-disabled-background-color;
+        color: @accordion-dark-disabled-secondary-font-color;
+        [class^="icon-"]:before,
+        [class*=" icon-"]:before {
+          opacity: @icon-white-disabled-opacity;
+        }
+      }
+    }
+  }
 }
