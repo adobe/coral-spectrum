@@ -131,13 +131,13 @@
         },
 
         update:function () {
-            var self = this;
-            this.items = [];
-            this.itemsByPath = {};
-            this.element.find(self.options.selector).each(function (i) {
+            var items = [],
+                itemsByPath = {};
+
+            this.element.find(this.options.selector).each(function (i) {
                 var $card = $(this);
                 var $img = $("img", $card);
-                if ($img.length == 0) {
+                if ($img.length === 0) {
                     $img = null;
                 }
                 var item = {
@@ -146,9 +146,17 @@
                     $el:$card,
                     $img:$img
                 };
-                self.items.push(item);
-                self.itemsByPath[item.path] = item;
+                items.push(item);
+                itemsByPath[item.path] = item;
             });
+
+            this.items = items.sort(function (i1, i2) {
+                var i1key = i1.$el.data("gridlayout-sortkey") || 0,
+                    i2key = i2.$el.data("gridlayout-sortkey") || 0;
+
+                return i2key - i1key || i1.i - i2.i;
+            });
+            this.itemsByPath = itemsByPath;
         },
 
         _imageLoaded: function() {
