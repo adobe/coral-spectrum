@@ -78,8 +78,6 @@
         },
 
         applyOptions: function () {
-            //this._setClearButton();
-
             this._setTags();
             this._setSelectlist();
             this._setTypeahead();
