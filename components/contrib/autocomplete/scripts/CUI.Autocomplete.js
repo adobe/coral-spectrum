@@ -20,7 +20,7 @@
          *
          * @example
          * <caption>Instantiate with jQuery</caption>
-         * $('#mySelect').autocomplete({
+         * $('#myAutocomplete').autocomplete({
          *
          * });
          *
@@ -34,7 +34,12 @@
          *
          * @param {Object} options Component options
          * @param {Mixed} options.element jQuery selector or DOM element to use for panel
-         * 
+         * @param {String} [options.mode=starts] search mode for static list, either "starts" or "contains"
+         * @param {Boolean} [options.ignorecase=true] case sensitivity parameter for the static search
+         * @param {Number} [options.delay=500] typing delay in ms before a filter operation is triggered
+         * @param {Boolean} [option.typeahead=true] triggers filtering while typing
+         * @param {Boolean} [options.showsuggestions=false] enables a suggestion button to show all available options 
+         * @param {Boolean} [options.multiple=false] allows multiple selections
          * 
          */
         construct: function () {
@@ -48,13 +53,16 @@
 
             // apply
             this.applyOptions();
+
+            // accessibility
+            this._makeAccessible();
         },
 
         defaults: {
             mode: 'contains', // filter mode ['starts', 'contains']
             ignorecase: true,
             delay: 500,
-            showtypeahead: true,
+            typeahead: true,
             showsuggestions: false,
             multiple: false,
 
@@ -70,8 +78,6 @@
         },
 
         applyOptions: function () {
-            //this._setClearButton();
-
             this._setTags();
             this._setSelectlist();
             this._setTypeahead();
@@ -138,10 +144,10 @@
                 timeout;
 
             function timeoutLoadFunc() {
-                self.handleInput(self._input.val());
+                self.handleInput(self._input.val(), self._selectListWidget);
             }
 
-            if (this.options.showtypeahead) {
+            if (this.options.typeahead) {
 
                 // bind keyboard input listening
                 this._input.on('keyup.autocomplete', function (event) {
@@ -158,6 +164,10 @@
             }
         },
 
+        /**
+         * sets the suggestion button
+         * @private
+         */
         _setSuggestions: function () {
             var self = this;
 
@@ -177,7 +187,13 @@
                 // handler to open usggestion box
                 this._suggestionsBtn.fipo('tap', 'click', function (event) {
                     event.preventDefault();
-                    self.handleInput();
+                    
+                    if (self._selectListWidget.options.visible) { // list is already open -> close it
+                        self._selectListWidget.hide();
+                    } else {
+                        self.handleInput(null, self._selectListWidget);
+                    }
+                    
                 }).finger('click', false);
 
                 // add class to input to to increase padding right for the button
@@ -191,13 +207,14 @@
         /**
          * adds some accessibility attributes and features
          * http://www.w3.org/WAI/PF/aria/roles#combobox
+         * http://www.w3.org/WAI/PF/aria/states_and_properties#aria-autocomplete
          * @private
          */
         _makeAccessible: function () {
             this.$element.attr({
                 'role': 'combobox',
                 'aria-multiselectable': this.options.multiple,
-                'aria-autocomplete': this.options.showtypeahead ? 'list' : '',
+                'aria-autocomplete': this.options.typeahead ? 'list' : '',
                 'aria-owns': this._selectlist.attr('id') || ''
             });
 
@@ -252,10 +269,14 @@
         },
 
         /**
+         * this function is triggered when a typeahead request needs to be done
+         * override this function to acheive a custom handling on the client
+         * 
          * @fires Autocomplete#query
          * @param  {String} val null if all values need to be shown
+         * @param {CUI.SelectList} selectlist instance to control the popup
          */
-        handleInput: function (val) {
+        handleInput: function (val, selectlist) { // selectlist argument is passed for custom implementations
             // fire event to allow notifications
             this.$element.trigger($.Event('query', {
                 value: val
@@ -273,6 +294,7 @@
 
         /**
          * handles a static list filter (type == static) based on the defined mode
+         * @private
          * @param  {jQuery.Event} event
          */
         _handleStaticFilter: function (val) {
@@ -306,6 +328,7 @@
 
         /**
          * handles a static list filter (type == static) based on the defined mode
+         * @private
          * @param  {jQuery.Event} event
          */
         _handleDynamicFilter: function (val) {
