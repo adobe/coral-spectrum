@@ -277,6 +277,7 @@
 
         /**
          * handles a static list filter (type == static) based on the defined mode
+         * @private
          * @param  {jQuery.Event} event
          */
         _handleStaticFilter: function (val) {
@@ -310,6 +311,7 @@
 
         /**
          * handles a static list filter (type == static) based on the defined mode
+         * @private
          * @param  {jQuery.Event} event
          */
         _handleDynamicFilter: function (val) {
