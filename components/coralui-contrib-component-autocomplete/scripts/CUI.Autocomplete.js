@@ -48,6 +48,9 @@
 
             // apply
             this.applyOptions();
+
+            // accessibility
+            this._makeAccessible();
         },
 
         defaults: {
