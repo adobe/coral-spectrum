@@ -166,6 +166,10 @@
             }
         },
 
+        /**
+         * sets the suggestion button
+         * @private
+         */
         _setSuggestions: function () {
             var self = this;
 
