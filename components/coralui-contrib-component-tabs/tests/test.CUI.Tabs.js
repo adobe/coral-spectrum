@@ -136,22 +136,23 @@ describe('CUI.Tabs', function() {
       expect(disabled_tab).to.have.class('disabled');
     });
 
-    // THIS TEST BREAKS IF RUN IN THE SAME SUITE AS THE MODAL TESTS
+    // THIS TEST USED TO BREAK IF RUN IN THE SAME SUITE AS THE MODAL TESTS
     // BUT ONLY RUNNING VIA GRUNT, NOT IN THE BROWSER :(
+    // I THINK BECAUSE MODAL LEFT A LOT OF CRUFT IN THE TEST RUNNER HTML... 
       
-    // it('should load content remotely', function(done) {
-    //   var third_section = el.find('section[id="' + third_tab.attr('aria-controls') + '"]');
-    //   // the load call will fail, but that's ok - we will check both 
-    //   // the remote call and the error response
-    //   $(document).on("ajaxComplete", function() {
-    //     $(document).off("ajaxComplete");
-    //     expect(third_section).to.have('div.alert.error');
-    //     expect(third_tab).to.have.class('active');
-    //     expect(third_section).to.have.class('active');
-    //     done();
-    //   });
-    //   activate(third_tab);
-    // });
+    it('should load content remotely', function(done) {
+      var third_section = el.find('section[id="' + third_tab.attr('aria-controls') + '"]');
+      // the load call will fail, but that's ok - we will check both 
+      // the remote call and the error response
+      $(document).on("ajaxComplete", function() {
+        $(document).off("ajaxComplete");
+        expect(third_section).to.have('div.alert.error');
+        expect(third_tab).to.have.class('active');
+        expect(third_section).to.have.class('active');
+        done();
+      });
+      activate(third_tab);
+    });
 
   }); // click handlers
 
@@ -250,74 +251,127 @@ describe('CUI.Tabs', function() {
 
 
   // constructor option testing
-  describe('passing', function() {
+  describe('passing options to', function() {
+    
     var tabs;
-    var classElement; 
+    var tabsElement; 
 
-    before( function() {
-      classElement = $(jQueryMarkup).appendTo('body');
-      classElement.attr('id', 'options-test-tabs');
+    var constructElement = function() {
+      tabsElement = $(jQueryMarkup).appendTo('body');
+      tabsElement.attr('id', 'options-test-tabs');
       first_tab = $('#options-test-tabs').find('a').eq(0);
       second_tab = $('#options-test-tabs').find('a').eq(1);
       third_tab = $('#options-test-tabs').find('a').eq(2);
       disabled_tab = $('#options-test-tabs').find('a').eq(3);
       last_tab = $('#options-test-tabs').find('a').eq(4);
-    });
-
+    };
 
     // set callback for each test run defined below
     var testOptions = function(set) {
+      
       // test variants using private array of types
-      tabs.VARIANT_TYPES.forEach( function(type) {
-        it('option \'type\' can set class variant to '+ type, function() {
-          set('type', type);
-          expect($('#options-test-tabs').hasClass(type)).to.be(true);
-        });
+      CUI.Tabs().VARIANT_TYPES.forEach( function(type) {
+        if (type != 'default') {
+          it('can set type variant to '+ type, function() {
+            expect($('#options-test-tabs')).to.not.have.class(type);
+            set('type', type);
+            expect($('#options-test-tabs')).to.have.class(type);
+          });
+        } else {
+          it('can set type variant to default', function() {
+            expect($('#options-test-tabs')).to.not.have.class(type);
+            set('type', type);
+            expect($('#options-test-tabs')).to.not.have.class(type);
+            expect($('#options-test-tabs').attr('class')).to.equal('tabs');
+          });
+        }
       });
 
-      it('option \'type\' ignored if sent an invalid type', function() {
+
+      it('will ignore type if sent an invalid type', function() {
         set('type', 'mariachi');
         expect($(tabs)).to.not.have.class('mariachi');
       });
 
-      it('option \'active\' can set the active tab', function() {
-        var second_section = $('#options-test-tabs').find('section[id="' + second_tab.attr('aria-controls') + '"]');
+      it('will set active for a non-active tab', function() {
         // first tab active by default
-        expect(second_tab.hasClass('active')).to.be(false);
-        expect(second_section.hasClass('active')).to.be(false);
+        expect(second_tab.hasClass('active')).to.be.false;
         set('active', 1); // index of second tab
-        expect(second_tab.hasClass('active')).to.be(true);
-        expect(second_section.hasClass('active')).to.be(true);
+        expect(second_tab.hasClass('active'), 'second tab active').to.be.true;
+        var controlId = second_tab.attr('aria-controls');
+        var second_section = $('#options-test-tabs').find('section[id="' + controlId + '"]');
+        expect(second_section.hasClass('active'), 'second section active').to.be.true;
       });
 
-      it('option \'active\' can not activate a disabled tab', function() {
+      it('will ignore active for a disabled tab', function() {
         set('active', 3); // index of disabled tab
-        expect(disabled_tab.hasClass('active')).to.be(false);
+        expect(disabled_tab.hasClass('active')).to.equal(false);
       });
-    } // options tests
+    }; // options tests
 
-    describe('CUI.Widget#set on existing Tabs', function() {
-      tabs = new CUI.Tabs({ element: classElement });
-      testOptions(function(key, value) {
-        tabs.set(key, value);
-      });
-    });
 
-    describe('CUI.Widget constructor', function() {
-      testOptions(function(key, value) {
-        var kvp = { key:value };
-        tabs = new CUI.Tabs({ element: classElement , options: kvp});
-      });
-    });
+    describe('CUI.Tabs constructor', function() {
 
-    describe('jQuery constructor', function() {
-      testOptions(function(key, value) {
-        var kvp = { key:value };
-        tabs = $(classElement).tabs({options:kvp});
+      beforeEach( function() {
+        constructElement();
       });
-    });
+
+      afterEach( function() {
+        tabs = null;
+        tabsElement.remove();
+      });
+        
+      testOptions(function(key, value) {
+        var options = {};
+        options['element'] = tabsElement;
+        options[key] = value;
+        tabs = new CUI.Tabs(options);
+      });
+
+    }); // CUI.Tabs constructor
+
+    describe('jQuery.tabs() constructor', function() {
+
+      beforeEach( function() {
+        constructElement();
+      });
+
+      afterEach( function() {
+        tabs = null;
+        tabsElement.remove();
+      });
+        
+      testOptions(function(key, value) {
+        var options = {};
+        options['element'] = tabsElement;
+        options[key] = value;
+        tabs = $('#options-test-tabs').tabs(options);
+      });
+
+    }); // /jQuery tabs constructor
+
+
+    describe('#set on existing Tabs', function() {
+
+      before( function() {
+        constructElement();
+        tabs = new CUI.Tabs({element:tabsElement});
+      });
+
+      after( function() {
+        tabs = null;
+        tabsElement.remove();
+      });
+        
+      testOptions(function(key, value) {
+          tabs.set(key, value);
+      });
+
+    }); // set on existing tabs
+
 
   }); // passing options
+
 
 }); // end test
 

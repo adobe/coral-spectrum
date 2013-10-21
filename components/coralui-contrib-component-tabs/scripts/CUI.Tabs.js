@@ -163,9 +163,10 @@
         NAV_VARIANT_CLASS: 'nav',
 
         VARIANT_TYPES: [ 
-            this.WHITE_VARIANT_CLASS, 
-            this.STACKED_VARIANT_CLASS, 
-            this.NAV_VARIANT_CLASS
+            'default', 
+            'white', 
+            'stacked', 
+            'nav'
         ],
 
 
