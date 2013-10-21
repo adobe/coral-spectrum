@@ -138,7 +138,7 @@
                 timeout;
 
             function timeoutLoadFunc() {
-                self.handleInput(self._input.val());
+                self.handleInput(self._input.val(), self._selectListWidget);
             }
 
             if (this.options.showtypeahead) {
@@ -177,7 +177,7 @@
                 // handler to open usggestion box
                 this._suggestionsBtn.fipo('tap', 'click', function (event) {
                     event.preventDefault();
-                    self.handleInput();
+                    self.handleInput(null, self._selectListWidget);
                 }).finger('click', false);
 
                 // add class to input to to increase padding right for the button
@@ -252,10 +252,14 @@
         },
 
         /**
+         * this function is triggered when a typeahead request needs to be done
+         * override this function to acheive a custom handling on the client
+         * 
          * @fires Autocomplete#query
          * @param  {String} val null if all values need to be shown
+         * @param {CUI.SelectList} selectlist instance to control the popup
          */
-        handleInput: function (val) {
+        handleInput: function (val, selectlist) { // selectlist argument is passed for custom implementations
             // fire event to allow notifications
             this.$element.trigger($.Event('query', {
                 value: val
