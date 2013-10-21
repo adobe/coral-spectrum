@@ -20,7 +20,7 @@
          *
          * @example
          * <caption>Instantiate with jQuery</caption>
-         * $('#mySelect').autocomplete({
+         * $('#myAutocomplete').autocomplete({
          *
          * });
          *
@@ -34,7 +34,12 @@
          *
          * @param {Object} options Component options
          * @param {Mixed} options.element jQuery selector or DOM element to use for panel
-         * 
+         * @param {String} [options.mode=starts] search mode for static list, either "starts" or "contains"
+         * @param {Boolean} [options.ignorecase=true] case sensitivity parameter for the static search
+         * @param {Number} [options.delay=500] typing delay in ms before a filter operation is triggered
+         * @param {Boolean} [option.typeahead=true] triggers filtering while typing
+         * @param {Boolean} [options.showsuggestions=false] enables a suggestion button to show all available options 
+         * @param {Boolean} [options.multiple=false] allows multiple selections
          * 
          */
         construct: function () {
@@ -57,7 +62,7 @@
             mode: 'contains', // filter mode ['starts', 'contains']
             ignorecase: true,
             delay: 500,
-            showtypeahead: true,
+            typeahead: true,
             showsuggestions: false,
             multiple: false,
 
@@ -144,7 +149,7 @@
                 self.handleInput(self._input.val(), self._selectListWidget);
             }
 
-            if (this.options.showtypeahead) {
+            if (this.options.typeahead) {
 
                 // bind keyboard input listening
                 this._input.on('keyup.autocomplete', function (event) {
@@ -200,13 +205,14 @@
         /**
          * adds some accessibility attributes and features
          * http://www.w3.org/WAI/PF/aria/roles#combobox
+         * http://www.w3.org/WAI/PF/aria/states_and_properties#aria-autocomplete
          * @private
          */
         _makeAccessible: function () {
             this.$element.attr({
                 'role': 'combobox',
                 'aria-multiselectable': this.options.multiple,
-                'aria-autocomplete': this.options.showtypeahead ? 'list' : '',
+                'aria-autocomplete': this.options.typeahead ? 'list' : '',
                 'aria-owns': this._selectlist.attr('id') || ''
             });
 
