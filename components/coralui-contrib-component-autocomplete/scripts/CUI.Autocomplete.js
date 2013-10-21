@@ -180,7 +180,13 @@
                 // handler to open usggestion box
                 this._suggestionsBtn.fipo('tap', 'click', function (event) {
                     event.preventDefault();
-                    self.handleInput(null, self._selectListWidget);
+                    
+                    if (self._selectListWidget.options.visible) { // list is already open -> close it
+                        self._selectListWidget.hide();
+                    } else {
+                        self.handleInput(null, self._selectListWidget);
+                    }
+                    
                 }).finger('click', false);
 
                 // add class to input to to increase padding right for the button
