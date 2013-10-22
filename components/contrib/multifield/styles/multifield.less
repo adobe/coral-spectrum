@@ -1,0 +1,97 @@
+/**
+  Selector: .multifield
+  Indicates the root element of Multifield
+*/
+.multifield {
+    display: inline-block;
+    .border-box;
+    border: @px solid rgba(0, 0, 0, .15);
+    padding: 8*@px;
+    background: rgba(0, 0, 0, .03);
+
+    > ol {
+        list-style: none;
+        position: relative;
+        margin: 0;
+        padding: 0;
+
+        &:empty {
+            min-width: 13rem;
+        }
+
+        > li:only-child .multifield-move {
+            display: none;
+        }
+
+        > li.dragging:first-child + li {
+            margin-top: 0; // first li doesn't have a top margin
+        }
+    }
+
+    .multifield-add,
+    .multifield-remove,
+    .multifield-move {
+        .button-square-transparent(@component-single-line-height);
+    }
+
+    .multifield-add {
+        display: block;
+    }
+
+
+    // reorder related rules
+
+    .multifield-move {
+        cursor: url("@{component-resource-folder}/cursors/openhand.cur"), default;
+    }
+
+    > ol > li {
+        &.dragging {
+            opacity: 0.9;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10000;
+
+            .multifield-move {
+                cursor: url("@{component-resource-folder}/cursors/closedhand.cur"), move;
+            }
+        }
+
+        &.drag-after {
+          position: relative;
+          top: @component-single-line-height;
+        }
+    }
+}
+
+form.vertical {
+    .multifield.field {
+        display: block;
+
+        > ol > li {
+            position: relative;
+            padding-right: 2 * @component-single-line-height; // we can use @component-single-line-height as the button is a square
+
+            &.dragging {
+                position: absolute;
+            }
+
+            > :first-child {
+                width: 100%;
+            }
+
+            > .multifield-remove {
+                position: absolute;
+                top: 0;
+                right: @component-single-line-height; // we can use @component-single-line-height as the button is a square
+            }
+
+            > .multifield-move {
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
+        }
+    }
+}

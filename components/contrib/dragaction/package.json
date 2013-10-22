@@ -1,13 +1,12 @@
 {
-  "name": "coralui-contrib-component-draggable",
+  "name": "coralui-contrib-component-dragaction",
   "version": "0.0.1-SNAPSHOT",
   "repository": {
     "type": "git",
     "url": "https://git.corp.adobe.com/Coral/CoralUI"
   },
   "dependencies": {
-    "coralui-core": "~2.0.0",
-    "coralui-contrib-component-dragaction": "~0.0"
+    "coralui-core": "~2.0.0"
   },
   "devDependencies": {
   }
