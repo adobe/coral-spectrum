@@ -8,31 +8,44 @@
 
   .clearfix();
 
+  position: relative;
+  width: 120*@px;
+  min-width: 120*@px;
+  height: @component-single-line-height;
+
   input {
-    float: left;
-    margin: 0;
-    border: 0;
-    border-top: 1px solid @textfield-border-color;
-    border-bottom: 1px solid @textfield-border-color;
-    max-width: 286*@px;
+
+    position: absolute;
+
+    left: 33*@px; // accomodates the left button
+    right: 33*@px; // accomodates the right button
+
     max-height: 38*@px;
     min-height: 38*@px;
-    min-width: 56*@px;
+    min-width: 54*@px;
+    width: 54*@px; // FF needs this value to be specified.
+
+    &:focus  {
+      // brings the border to the front
+      z-index: 1;
+    }
   }
 
   button {
-    float: left;
+    position: absolute;
+
     margin: 0;
-    padding:0;
+    padding: 0;
     border-color: @textfield-border-color;
-    min-width: 32*@px;
-    max-width: 32*@px;
-    min-height: 38*@px;
-    max-height: 38*@px;
 
     text-shadow: none;
 
     .gradient(rgb(255, 255, 255), rgb(240, 240, 240));
+
+    // allows the border to be rendered in front
+    &:focus {
+      z-index: 1;
+    }
 
     &:hover {
       background: none;
@@ -42,26 +55,45 @@
 
     &:active {
       background: none;
+      background-color: rgb(230, 230, 230);
       border-color: @textfield-border-color;
-      .box-shadow(0 0 4*@px 6 rgba(0, 0, 0, .2) inset);
+      .box-shadow(inset 0 0 4*@px rgba(0, 0, 0, 0.08));
     }
 
     &.decrement {
       .icon-minus;
-      line-height: 36*@px;
+      .icon-small;
+      .hide-inner-text;
+
+      left: 0;
+
+      min-width: 34*@px; // takes into account the 2px in stroke
+      max-width: 34*@px;
+      min-height: 38*@px;
+      max-height: 38*@px;
+      line-height: 38*@px;
     }
 
     &.increment {
       .icon-add;
-      line-height: 36*@px;
+      .icon-small;
+      .hide-inner-text;
+
+      right: 0;
+
+      min-width: 34*@px; // takes into account the 2px in stroke
+      max-width: 34*@px;
+      min-height: 38*@px;
+      max-height: 38*@px;
+      line-height: 38*@px;
     }
 
     &[disabled] {
       background: none;
       background-color: @textfield-disabled-background-color;
-    }
-    
-  } // button styles
+      border-color: @textfield-disabled-border-color;
+    } 
+  }
 
   &.error,
   &:invalid {
@@ -83,10 +115,4 @@
       opacity: 1;
     }
   }
-
 } 
-
-/* numberinput */
-
-
-

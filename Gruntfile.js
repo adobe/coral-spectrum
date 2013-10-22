@@ -279,7 +279,6 @@ module.exports = function (grunt) {
                             if (match) {
                                 var component = match[1];
                                 var filePath = match[2];
-                                grunt.log.writeln("***" + dest + '/' + component + '/' + filePath);
                                 return dest + '/' + component + '/' + filePath;
                             }
                             return dest;
