@@ -59,7 +59,7 @@
         },
 
         defaults: {
-            mode: 'contains', // filter mode ['starts', 'contains']
+            mode: 'starts', // filter mode ['starts', 'contains']
             ignorecase: true,
             delay: 500,
             typeahead: true,
