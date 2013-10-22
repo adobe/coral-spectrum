@@ -1,5 +1,4 @@
 (function($) {
-  var ns = "cui-draggable-list";
   var dropZoneClassName = "dropzone";
 
   /* Define some private helpers */
@@ -9,10 +8,7 @@
             w: element.outerWidth(),
             h: element.outerHeight()};
   }
-  function within(x, y, element) {
-    var bb = boundingBox(element);
-    return (x >= bb.l && y >= bb.t && x < bb.l + bb.w && y < bb.t + bb.h);
-  }
+
   function currentPagePosition(event) {
       var touch = {};
       if (event.originalEvent) {
@@ -25,163 +21,6 @@
       return {x: x, y: y};
   }
 
-  /**
-     Internal helper class to perform the drag action.
-  */
-  var DragAction = new Class({
-    /**
-      Construct a new Drag Action. This class is internal for now.
-      
-      After the initialization the drag ist performed immediatly.
-      
-      @param {Event} event        The event that triggered the drag
-      @param {jQuery} source      The element that is the source of this drag
-      @param {jQuery} dragElement The element that will be dragged
-      @param {Array} dropZones    An Array of elements that can be destinations for this drag 
-    */
-    construct: function(event, source, dragElement, dropZones, restrictAxis) {
-      this.sourceElement = source;
-      this.dragElement = dragElement;
-      this.container = this._getViewContainer(dragElement);
-      this.containerHeight = this.container.get(0).scrollHeight; // Save current container height before we start dragging
-      this.dropZones = dropZones;
-      this.axis = restrictAxis;
-      this.scrollZone = 20; // Use 20px as scrolling zone, static for now
-      this.dragStart(event);
-    },
-    currentDragOver: null,
-
-    _getViewContainer: function(element) {
-      // Search for the first parent that has a hidden/scrolling overflow
-      while (true) {
-        var p = element.parent();
-        if (p.length === 0) return p;
-        if (p.is("body")) return p;
-        var flow = p.css("overflow");
-        if (flow == "hidden" || flow == "auto" || flow == "scroll") return p;
-        element = p;
-      }
-    },
-    dragStart: function(event) {
-      event.preventDefault();
-      // Starting the drag
-      var p = this.dragElement.position();
-
-      this.dragElement.css({
-          "left": p.left,
-          "top": p.top,
-          "width": this.dragElement.width() + "px"}
-      );
-      this.dragElement.addClass("dragging");
-
-      var pp = currentPagePosition(event);
-      var x = pp.x;
-      var y = pp.y;
-
-      this.dragStart = {x: x - p.left, y: y - p.top};
-
-      // Bind event listeners
-      $(document).fipo("touchmove." + ns, "mousemove." + ns, this.drag.bind(this));
-      $(document).fipo("touchend." + ns, "mouseup." + ns, this.dragEnd.bind(this));
-
-      this.sourceElement.trigger(this._createEvent("dragstart", event));
-
-      // Perform a first drag
-      this.drag(event);
-
-    },
-    drag: function(event) {
-      event.preventDefault();
-
-      // Performing the drag
-      var p = currentPagePosition(event);
-      var x = p.x;
-      var y = p.y;
-
-      // Need to scroll?      
-      if (this.container.is("body")) {
-        if ((y - this.container.scrollTop()) < this.scrollZone) this.container.scrollTop(y - this.scrollZone);
-        if ((y - this.container.scrollTop()) > (this.container.height() - this.scrollZone)) this.container.scrollTop(y - (this.container.height() - this.scrollZone));
-      } else {
-        var oldTop = this.container.scrollTop();
-        var t = this.container.offset().top + this.scrollZone;
-        if (y < t) {
-          this.container.scrollTop(this.container.scrollTop() - (t - y));
-        }
-        var h = this.container.offset().top + this.container.height() - this.scrollZone;
-        if (y > h) {
-          var s = this.container.scrollTop() + (y - h);
-          if (s > (this.containerHeight - this.container.height())) {
-            s = Math.max(this.containerHeight - this.container.height(), 0);
-          }
-          this.container.scrollTop(s);
-        }
-        var newTop = this.container.scrollTop();
-        this.dragStart.y += oldTop - newTop; // Correct drag start position after element scrolling
-      }
-
-
-      var newCss = {};
-      if (this.axis != "horizontal") newCss["top"] = y - this.dragStart.y;
-      if (this.axis != "vertical") newCss["left"] = x - this.dragStart.x;
-
-      this.dragElement.css(newCss);
-
-      this.triggerDrag(event);
-    },
-    dragEnd: function(event) {
-      event.preventDefault();
-      // Finishing a drag
-      this.dragElement.removeClass("dragging");
-      this.dragElement.css({top: "", left: "", width: ""});
-
-      // Remove event handlers
-      $(document).off("." + ns);
-
-      // Trigger drop
-      this.triggerDrop(event);
-
-      // Trigger end events
-      if (this.currentDragOver != null) $(this.currentDragOver).trigger(this._createEvent("dragleave", event));
-      this.sourceElement.trigger(this._createEvent("dragend", event));
-    },
-    triggerDrag: function(event) {
-      var dropElement = this._getCurrentDropZone(event);
-      if (dropElement != this.currentDragOver) {
-        if (this.currentDragOver != null) $(this.currentDragOver).trigger(this._createEvent("dragleave", event));
-        this.currentDragOver = dropElement;
-        if (this.currentDragOver != null) $(this.currentDragOver).trigger(this._createEvent("dragenter", event));
-      } else {
-        if (this.currentDragOver != null) $(this.currentDragOver).trigger(this._createEvent("dragover", event));
-      }
-    },
-    triggerDrop: function(event) {
-      var dropElement = this._getCurrentDropZone(event);
-      if (dropElement == null) return;
-      var dropEvent = this._createEvent("drop", event);
-      dropElement.trigger(dropEvent);
-    },
-    _getCurrentDropZone: function(event) {
-      var p = currentPagePosition(event);
-      var dropElement = null;
-
-      jQuery.each(this.dropZones, function(index, value) {
-        if (!within(p.x, p.y, value)) return;
-        dropElement = value;
-      }.bind(this));
-
-      return dropElement;
-    },
-    _createEvent: function(name, fromEvent) {
-      var p = currentPagePosition(fromEvent);
-      var event = jQuery.Event(name);
-      event.pageX = p.x;
-      event.pageY = p.y;
-      event.sourceElement = this.sourceElement;
-      event.item = this.dragElement;
-      return event;
-    }
-  });
 
   /* Global array of drop zones */
   var dropZones = [];
@@ -313,9 +152,9 @@
       // Fix height of list element to avoid flickering of page
       this.$element.css({height: this.$element.height() + $(event.item).height() + "px"});
       if (this.options.allowDrag) {
-        new DragAction(event, this.$element, el, dropZones);
+        new CUI.DragAction(event, this.$element, el, dropZones);
       } else {
-        new DragAction(event, this.$element, el, [this.dropZone], "vertical");
+        new CUI.DragAction(event, this.$element, el, [this.dropZone], "vertical");
       }
 
     },

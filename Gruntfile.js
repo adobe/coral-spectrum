@@ -66,6 +66,7 @@ module.exports = function (grunt) {
             'components/CUI.FileUpload.js',
             'components/CUI.Toolbar.js',
             'components/CUI.Tooltip.js',
+            'components/CUI.DragAction.js',
             'components/CUI.DraggableList.js',
             'components/CUI.CharacterCount.js',
             'components/CUI.Accordion.js',
@@ -77,6 +78,7 @@ module.exports = function (grunt) {
             'components/CUI.TagList.js',
             'components/CUI.Select.js',
             'components/CUI.Autocomplete.js',
+            'components/CUI.Multifield.js',
 
             // Validations
             'validations.js'
