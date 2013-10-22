@@ -26,16 +26,6 @@
 @wizard-progress-circle-color: rgb(127,130,131);
 @wizard-progress-circle-highlight-color: rgb(76,145,208);
 
-.wizard {
-    // Fix toolbar for wizard
-    // TODO this is a sign that our css is badly designed
-    > .toolbar {
-        .left, .right {
-            height: auto;
-        }
-    }
-}
-
 .wizard > section {
     display: none;
 
@@ -46,11 +36,6 @@
 
 .wizard > nav {
     background: @wizard-nav-background-color;
-
-    > button, > a.button {
-        color: @wizard-button-text-color;
-        margin: 6px 9px 8px 9px;
-    }
 
     > button.back, > a.button.back {
         background: @wizard-back-button-background-color;
@@ -74,7 +59,7 @@
 
     > ol {
         counter-reset: item;
-        padding: 9px 0 0 0;
+        padding: 5*@px 0 0 0;
         font-size: 0; // To remove html whitespace between inline elements
 
         > li {
