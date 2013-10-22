@@ -28,6 +28,7 @@
 
 .flexwizard > .step {
   display: none;
+  padding: 15*@px;
 
   &.active {
     display: block;
@@ -36,10 +37,6 @@
 
 .flexwizard > nav {
   background: @flexwizard-nav-background-color;
-
-  > button, > a.button {
-    color: @flexwizard-button-text-color;
-  }
 
   > button.back, > a.button.back {
     background: @flexwizard-back-button-background-color;
@@ -63,7 +60,7 @@
 
   > ol {
     counter-reset: item;
-    padding: 9px 0 0 0;
+    padding: 9*@px 0 0 0;
     font-size: 0; // To remove html whitespace between inline elements
 
     > li {
@@ -126,7 +123,7 @@
 
         &:before {
           content: " ";
-          background: url('@{component-resource-folder}/wizard/check.png') 0 bottom no-repeat;
+          background: url('@{component-resource-folder}/flexwizard/check.png') 0 bottom no-repeat;
         }
 
         &:after {
