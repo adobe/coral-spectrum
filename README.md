@@ -15,7 +15,7 @@ Next, dive into the [CoralUI Wiki][3].  It contains everything you need to know 
 Just "Read The Fine Manual", a.k.a the [CoralUI Wiki][3].  
 
 ### CoralUI Build Status   
-[![Build Status](http://xdbuild.corp.adobe.com:8080/job/CoralUI-Master/badge/icon)](http://xdbuild.corp.adobe.com:8080/job/CoralUI-Master/)
+[![Build Status](http://xdbuild.corp.adobe.com:8080/buildStatus/icon?job=Projects-Master)](http://xdbuild.corp.adobe.com:8080/job/Projects-Master/)
 
 [0]: http://blogs.corp.adobe.com/xdcloudui
 [1]: https://git.corp.adobe.com/pages/Coral/CoralUI/
