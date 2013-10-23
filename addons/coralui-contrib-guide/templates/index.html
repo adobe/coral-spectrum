@@ -2817,26 +2817,15 @@
                         <code class="atv">page-deactivated</code>. Each of these will fade the card content.</p>
                     <p>To highlight certain properties of a page, cards may carry an additional flag on the side or
                         a banner at the top. Their markup and class names are similar to <a href="#Alert">the general alerts.</a></p>
+
+                    <p>The card layout with a <code class="atv">.links</code> element after the created and modified
+                        time stamps is <span class="deprecated">deprecated</span> in favour of the layout with
+                        horizontal ruler. The <code class="atv">.links</code> element should be moved into the
+                        <code class="atv">.meta-info</code> node.</p>
+
                     <div class="componentSample">
                         <div class="example" id="card-page-ex1">
                             <div class="grid">
-                                <article class="card-page stack">
-                                    <i class="select"></i>
-                                    <i class="move"></i>
-                                    <a href="#">
-                                        <span class="image"><img src="res/guide/previews/preview1.png" alt=""></span>
-                                        <div class="label">
-                                            <div class="main">
-                                                <h4>Page Title</h4>
-                                            </div>
-                                            <div class="info">
-                                                <p class="published"><i class="icon-globe">Published</i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
-                                                <p class="modified"><i class="icon-edit">Modified</i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-                                                <p class="links"><i class="icon-arrowright">Link</i> <span class="links-number">3</span></p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </article>
                                 <article class="card-page stack">
                                     <i class="select"></i>
                                     <i class="move"></i>
@@ -2926,9 +2915,10 @@
                                         <h4>Page Title</h4>
                                       </div>
                                       <div class="info">
+                                        <p class="meta-info">
+                                        </p>
                                         <p class="published"><i class="icon-globe">Published</i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
                                         <p class="modified"><i class="icon-edit">Modified</i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-                                        <p class="links"><i class="icon-arrowright">Link</i> <span class="links-number">3</span></p>
                                       </div>
                                     </div>
                                   </a>
@@ -2944,14 +2934,37 @@
                                         <h4>Page Title</h4>
                                       </div>
                                       <div class="info">
+                                        <p class="meta-info">
+                                        </p>
                                         <p class="published"><i class="icon-globe">Published</i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
                                         <p class="modified"><i class="icon-edit">Modified</i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
-                                        <p class="links"><i class="icon-arrowright">Link</i> <span class="links-number">3</span></p>
                                       </div>
                                     </div>
                                   </a>
                                 </article>
-                            </div>                          
+                                <article class="card-page stack">
+                                    <i class="select"></i>
+                                    <i class="move"></i>
+                                    <a href="#">
+                                        <span class="image"><img src="res/guide/previews/preview1.png" alt=""></span>
+                                        <div class="label">
+                                            <div class="main">
+                                                <h4>Page Title
+                                                    <span class="deprecated" 
+                                                          title="This layout is deprecated in favour of the one with a .meta-info element">
+                                                        deprecated
+                                                    </span>
+                                                </h4>
+                                            </div>
+                                            <div class="info">
+                                                <p class="published"><i class="icon-globe">Published</i> <span class="date">12 hours ago</span> <span class="user">Alison Parker</span></p>
+                                                <p class="modified"><i class="icon-edit">Modified</i> <span class="date">2 days ago</span> <span class="user">John Doe</span></p>
+                                                <p class="links"><i class="icon-arrowright">Link</i> <span class="links-number">3</span></p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </article>
+                            </div>
                         </div> <!-- /example -->
                         <pre class="prettyprint linenums" data-src-id="card-page-ex1"/>
                     </div> <!-- /componentSample -->
