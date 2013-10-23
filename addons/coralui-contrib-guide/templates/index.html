@@ -111,6 +111,7 @@
                         <a href="#Select">Select</a>
                         <a href="#Selector">Selector</a>
                         <a href="#Slider">Slider</a>
+                        <a href="#Multifield">Multifield</a>
                         <a href="#Dropdown">Dropdown<span class="deprecated">deprecated</span></a>
                  </nav>
                 </section> <!-- /additional components nav -->
@@ -1756,6 +1757,41 @@
                     </div>
                 </section>
                 <!-- /slider -->
+                <!--
+                          ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+                -->
+                <section id="Multifield">
+                    <h2 class="line">Multifield</h2>
+                    <p>Multifield is a composite field to represent a list of fields.</p>
+                    <div class="componentSample">
+                        <div class="example clearfix">
+                            <p>Component template consists of a text field, with predefined values.</p>
+                            <div id="multifield-sample1">
+                                <div class="multifield" data-init="multifield">
+                                    <ol>
+                                        <li><input type="text" /></li>
+                                        <li><input type="text" /></li>
+                                        <li><input type="text" /></li>
+                                    </ol>
+                                    <script type="text/html">
+                                        <input type="text" />
+                                    </script>
+                                </div>
+                            </div>
+                            <p>Component template consists of a text field, without values.</p>
+                            <div id="multifield-sample2">
+                                <div class="multifield" data-init="multifield">
+                                    <script type="text/html">
+                                        <input type="text" />
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                        <pre class="prettyprint linenums" data-src-id="multifield-sample1,multifield-sample2"></pre>
+                    </div>
+                    <div>Open <a href="examples/multifield/index.html">Sample</a></div>
+                </section>
+                <!-- /multifield -->
                 <!--
                           ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
                 -->
