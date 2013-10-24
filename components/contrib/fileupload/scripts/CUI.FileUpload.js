@@ -177,6 +177,7 @@
          @param {boolean}  [options.disabled=false]                   Is this component disabled?
          @param {boolean}  [options.multiple=false]                   Can the user upload more than one file?
          @param {int}      [options.sizeLimit=null]                   File size limit
+         @param {Array}    [options.extensionsAllowed=[".*"]]         File extensions allowed for uploading (wildcard .* is allowed)
          @param {boolean}  [options.autoStart=false]                  Should upload start automatically once the file is selected?
          @param {String}   [options.fileNameParameter=null]           Name of File name's parameter
          @param {boolean}  [options.useHTML5=true]                    (Optional) Prefer HTML5 to upload files (if browser allows it)
@@ -202,8 +203,8 @@
             uploadUrlBuilder: null,
             disabled: false,
             multiple: false,
-            mimeTypes: null,
             sizeLimit: null,
+            extensionsAllowed: [".*"],
             autoStart: false,
             fileNameParameter: null,
             useHTML5: true,
@@ -425,6 +426,9 @@
             if (this.inputElement.attr("data-upload-url-builder")) {
                 this.options.uploadUrlBuilder = CUI.util.buildFunction(this.inputElement.attr("data-upload-url-builder"), ["fileUpload"]);
             }
+            if (this.inputElement.attr("data-extensions-allowed")) {
+                this.options.extensionsAllowed = this.inputElement.data("extensions-allowed");
+            }
             if (this.inputElement.attr("data-size-limit")) {
                 this.options.sizeLimit = this.inputElement.attr("data-size-limit");
             }
@@ -502,7 +506,7 @@
             if (this.options.useHTML5) {
                 fileName = file.name;
             } else {
-                fileName = $(file).attr("value");
+                fileName = $(file).attr("value") || file.value;
             }
             if (fileName.lastIndexOf("\\") !== -1) {
                 fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
@@ -546,6 +550,17 @@
                     }
                 }
 
+                // Check file extension
+                if (!self._isFileExtensionAllowed(fileName)) {
+                    self.$element.trigger({
+                        type: "filerejected",
+                        item: item,
+                        message: "File extension is not allowed",
+                        fileUpload: self
+                    });
+                    return false;
+                }
+
                 // Add item to queue
                 self.uploadQueue.push(item);
                 self.$element.trigger({
@@ -565,6 +580,31 @@
                 return true;
             }
 
+            return false;
+        },
+
+        /** @ignore */
+        _isFileExtensionAllowed: function(fileName) {
+            var fileExtension = fileName.match(/(.+)(\..+)$/)[2],
+                extensionsAllowed = this.options.extensionsAllowed,
+                extensionsAllowedLength = extensionsAllowed.length,
+                extensionAllowed,
+                i;
+
+            for (i = 0; i < extensionsAllowedLength; i++) {
+                extensionAllowed = extensionsAllowed[i];
+
+                // Wildcard: allow any file extension
+                if (extensionAllowed === ".*") {
+                    return true;
+                } else {
+                    // File extension is explicitly allowed
+                    if (fileExtension === extensionAllowed) {
+                        return true;
+                    }
+                }
+            }
+            // File extension is not allowed
             return false;
         },
 
