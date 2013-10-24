@@ -45,11 +45,25 @@
         <span class="fileupload icon-upload" data-init="fileupload">
             <input type="file" name="./file"
                    data-upload-url="dummy"
+                   title="Upload Image" 
                    data-file-name-parameter="./fileName"
                    data-extensions-allowed='[".txt"]'>
         </span>
     </div>
-</section>
+
+    <div class="example">
+        <h2>Using a .button</h2>
+        <span class="fileupload button" data-init="fileupload">
+            <input  type="file" 
+                    title="Upload Image" 
+                    name="./image/file.sftmp" 
+                    data-usehtml5="true" 
+                    data-upload-url="will_be_replaced" 
+                    data-size-limit="100000000">
+        </span>
+    </div>
+
+<section>
 
 <script>
     $(document).on("filerejected", function (event) {
