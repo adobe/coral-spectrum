@@ -123,10 +123,20 @@
     },
 
     /**
+      Attempts to return parseFloat for value.
+      Does not attempt to parse null, undefined, or empty string.
       @return The current input value.
     */
     getValue: function() {
-      return parseFloat(this.$input.val());
+      var result = this.$input.val();
+      if (typeof result == 'undefined' || 
+          result == null || 
+          result.length < 1) {
+        result = '';
+      } else {
+        result = parseFloat(result);
+      }
+      return result; 
     },
 
     /**
@@ -215,17 +225,6 @@
         this.decrement();
       }.bind(this));
 
-      // adding fipo seems to break tests right now
-      // this.$incrementElement.fipo('tap', 'click', function (event) {
-      //   event.preventDefault();
-      //   this.increment();
-      // }.bind(this));
-
-      // this.$decrementElement.fipo('tap', 'click', function (event) {
-      //   event.preventDefault();
-      //   this.decrement();
-      // }.bind(this));
-
     },
 
     /** @ignore */
@@ -266,7 +265,7 @@
     _adjustValueLimitedToRange: function() {
       var value = this.getValue();
       if (isNaN(value)) {
-        // console.error("CUI.NumberInput value set to NaN");
+        
       } else {
         if (value > this.getMax()) {
           value = this.getMax();
