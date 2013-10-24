@@ -26,6 +26,7 @@
 
 // Button: Disabled
 @button-disabled-text-color: rgb(180, 180, 180);
+@button-disabled-icon-color: rgba(0, 0, 0, 0.15);
 @button-disabled-border-color: rgb(210, 210, 210);
 @button-disabled-background-color: rgb(230, 230, 230);
 
@@ -163,7 +164,7 @@ button[disabled]:hover,
   i[class^="icon-"],
   i[class*=" icon-"] {
     &, &:before {
-      color: @button-disabled-text-color;
+      color: @button-disabled-icon-color;
       opacity: 1;
     }
   }

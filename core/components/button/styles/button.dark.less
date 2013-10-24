@@ -13,6 +13,7 @@
 
 // Button: Disabled
 @button-dark-disabled-text-color: rgb(110, 110, 110);
+@button-dark-disabled-icon-color: rgba(255, 255, 255, 0.15);
 @button-dark-disabled-border-color: rgb(65, 65, 65);
 @button-dark-disabled-background-color: rgb(80, 80, 80);
 
@@ -55,7 +56,7 @@
     i[class^="icon-"],
     i[class*=" icon-"] {
       &, &:before {
-        color: @button-dark-disabled-text-color;
+        color: @button-dark-disabled-icon-color;
         opacity: 1;
       }
     }
