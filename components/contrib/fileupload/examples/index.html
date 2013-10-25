@@ -41,17 +41,6 @@
     </div>
 
     <div class="example">
-        <h2>Only ".txt" files allowed</h2>
-        <span class="fileupload icon-upload" data-init="fileupload">
-            <input type="file" name="./file"
-                   data-upload-url="dummy"
-                   title="Upload Image" 
-                   data-file-name-parameter="./fileName"
-                   data-extensions-allowed='[".txt"]'>
-        </span>
-    </div>
-
-    <div class="example">
         <h2>Using a .button</h2>
         <span class="fileupload button" data-init="fileupload">
             <input  type="file" 
@@ -59,7 +48,21 @@
                     name="./image/file.sftmp" 
                     data-usehtml5="true" 
                     data-upload-url="will_be_replaced" 
-                    data-size-limit="100000000">
+                    data-size-limit="100000000"
+                    data-mime-types='["image"]'>
+        </span>
+    </div>
+
+    <div class="example">
+        <h2>Using a .button</h2>
+        <span class="fileupload button" data-init="fileupload">
+            <input  type="file"
+                    title="Upload Image or Text"
+                    name="./image/file.sftmp"
+                    data-usehtml5="true"
+                    data-upload-url="will_be_replaced"
+                    data-size-limit="100000000"
+                    data-mime-types='["image", "text"]'>
         </span>
     </div>
 
