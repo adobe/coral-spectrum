@@ -19,6 +19,8 @@
   background-color: @popover-background-color;
   .background-clip(padding-box); // don't let the border overlap the background
   border: 8*@px solid @popover-border-color;
+  // Margin necessary for the position utility to keep the popover away
+  // from the edge of the viewport.
   margin: 10px;
   padding: 15*@px;
   max-width: 654*@px;
@@ -73,5 +75,78 @@
 
   &.arrow-left {
     .triangle(left, @popover-tail-base, @popover-tail-height, @popover-border-color);
+  }
+}
+
+// Deprecated. Please consider using the popover widget for positioning.
+.popover {
+
+  &[class^="arrow-"],
+  &[class*=" arrow-"] {
+    margin: 0;
+  }
+
+  /*
+    Arrows
+  */
+  &:before,
+  &:after {
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  // top and bottom arrow
+  &.arrow-top:before,
+  &.arrow-bottom:before { // center the arrow in the center
+    left: 50%;
+    border-width: @popover-tail-height - @px;
+    margin-left: -1*@popover-tail-height + @px;
+  }
+
+  &.arrow-top:before {
+    bottom: 100%; // position the border on the top
+    margin-bottom: 8*@px;
+    border-bottom-color:@popover-border-color;
+  }
+
+  &.arrow-bottom:before {
+    top: 100%; // position the border on the bottom
+    margin-top: 8*@px;
+    border-top-color:  @popover-border-color;
+  }
+
+  &.arrow-left:before,
+  &.arrow-right:before { // center the arrow in the center
+    top: 50%;
+    border-width: @popover-tail-height - @px;
+    margin-top: -1*@popover-tail-height + @px;
+  }
+
+  &.arrow-left:before {
+    right: 100%; // position the border on the left
+    margin-right: 8*@px;
+    border-right-color:  @popover-border-color;
+  }
+
+  &.arrow-right:before {
+    left: 100%; // position the border on the left
+    margin-left: 8*@px;
+    border-left-color:  @popover-border-color;
+  }
+
+  // Alternate arrow positions
+  &.arrow-pos-left:before,
+  &.arrow-pos-left:after {
+    left: 15%;
+    right: auto;
+  }
+
+  &.arrow-pos-right:before,
+  &.arrow-pos-right:after {
+    left: 85%;
   }
 }
