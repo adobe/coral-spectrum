@@ -21,24 +21,16 @@
   button {
     position: absolute;
     display: block;
-    color: transparent;
 
     .icon-search;
     .icon-small;
     .button-square-transparent(36*@px);
 
+    .hide-inner-text;
+
     // places the button below the border
     top: 1*@px;
     left: 1*@px;
-
-    &,
-    &:hover,
-    &:active,
-    &:disabled {
-      border: none;
-      filter: none;
-      color: transparent;
-    }
   }
 
   button[type=submit] {
