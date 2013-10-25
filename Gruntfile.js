@@ -64,6 +64,7 @@ module.exports = function (grunt) {
             'components/CUI.Wizard.js',
             'components/CUI.FlexWizard.js',
             'components/CUI.FileUpload.js',
+            'components/CUI.FileUpload.MimeTypes.js',
             'components/CUI.Toolbar.js',
             'components/CUI.Tooltip.js',
             'components/CUI.DragAction.js',

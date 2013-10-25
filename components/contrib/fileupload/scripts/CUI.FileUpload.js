@@ -177,7 +177,7 @@
          @param {boolean}  [options.disabled=false]                   Is this component disabled?
          @param {boolean}  [options.multiple=false]                   Can the user upload more than one file?
          @param {int}      [options.sizeLimit=null]                   File size limit
-         @param {Array}    [options.extensionsAllowed=[".*"]]         File extensions allowed for uploading (wildcard .* is allowed)
+         @param {Array}    [options.mimeTypes=["*"]]                  Mime types allowed for uploading (proper mime types, wildcard "*" and file extensions are supported)
          @param {boolean}  [options.autoStart=false]                  Should upload start automatically once the file is selected?
          @param {String}   [options.fileNameParameter=null]           Name of File name's parameter
          @param {boolean}  [options.useHTML5=true]                    (Optional) Prefer HTML5 to upload files (if browser allows it)
@@ -204,7 +204,7 @@
             disabled: false,
             multiple: false,
             sizeLimit: null,
-            extensionsAllowed: [".*"],
+            mimeTypes: [".*"],
             autoStart: false,
             fileNameParameter: null,
             useHTML5: true,
@@ -426,8 +426,8 @@
             if (this.inputElement.attr("data-upload-url-builder")) {
                 this.options.uploadUrlBuilder = CUI.util.buildFunction(this.inputElement.attr("data-upload-url-builder"), ["fileUpload"]);
             }
-            if (this.inputElement.attr("data-extensions-allowed")) {
-                this.options.extensionsAllowed = this.inputElement.data("extensions-allowed");
+            if (this.inputElement.attr("data-mime-types")) {
+                this.options.mimeTypes = this.inputElement.data("mime-types");
             }
             if (this.inputElement.attr("data-size-limit")) {
                 this.options.sizeLimit = this.inputElement.attr("data-size-limit");
@@ -502,11 +502,14 @@
         _addFile: function(file) {
             var self = this;
 
-            var fileName;
+            var fileName,
+                fileMimeType;
             if (this.options.useHTML5) {
                 fileName = file.name;
+                fileMimeType = file.type;
             } else {
                 fileName = $(file).attr("value") || file.value;
+                fileMimeType = CUI.FileUpload.MimeTypes["." + fileName.split(".")[1]];
             }
             if (fileName.lastIndexOf("\\") !== -1) {
                 fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
@@ -550,12 +553,12 @@
                     }
                 }
 
-                // Check file extension
-                if (!self._isFileExtensionAllowed(fileName)) {
+                // Check file mime type against allowed mime types
+                if (!self._checkMimeTypes(fileMimeType, self.options.mimeTypes)) {
                     self.$element.trigger({
                         type: "filerejected",
                         item: item,
-                        message: "File extension is not allowed",
+                        message: "File mime type is not allowed",
                         fileUpload: self
                     });
                     return false;
@@ -584,27 +587,40 @@
         },
 
         /** @ignore */
-        _isFileExtensionAllowed: function(fileName) {
-            var fileExtension = fileName.match(/(.+)(\..+)$/)[2],
-                extensionsAllowed = this.options.extensionsAllowed,
-                extensionsAllowedLength = extensionsAllowed.length,
-                extensionAllowed,
+        _checkMimeTypes: function (fileMimeType, allowedMimeTypes) {
+            function isMimeTypeAllowed(fileMimeType, allowedMimeType) {
+                var mimeTypeRegEx = /(.+)\/(.+)$/,      // "text/plain"
+                    fileExtensionRegEx = /\.(.+)$/,     // ".txt"
+                    shortcutRegEx = /.*/,               // "text"
+                    isAllowed = false;
+
+                if (allowedMimeType === "*" || allowedMimeType === ".*" || allowedMimeType === "*/*") {
+                    // Wildcard case: allow any file
+                    isAllowed = true;
+                } else if (!fileMimeType.match(mimeTypeRegEx)) {
+                    // File mime type is erroneous
+                    isAllowed = false;
+                } else if (allowedMimeType.match(mimeTypeRegEx)) {
+                    // Proper mime type case: directly compare with file mime type
+                    isAllowed = (fileMimeType === allowedMimeType);
+                } else if (allowedMimeType.match(fileExtensionRegEx)) {
+                    // File extension case: map extension to proper mime type and then compare
+                    isAllowed = (fileMimeType === CUI.FileUpload.MimeTypes[allowedMimeType]);
+                } else if (allowedMimeType.match(shortcutRegEx)) {
+                    // "Shortcut" case: only compare first part of the file mime type with the shortcut
+                    isAllowed = (fileMimeType.split("/")[0] === allowedMimeType);
+                }
+                return isAllowed;
+            }
+
+            var length = allowedMimeTypes.length,
                 i;
 
-            for (i = 0; i < extensionsAllowedLength; i++) {
-                extensionAllowed = extensionsAllowed[i];
-
-                // Wildcard: allow any file extension
-                if (extensionAllowed === ".*") {
+            for (i = 0 ; i < length ; i += 1) {
+                if (isMimeTypeAllowed(fileMimeType, allowedMimeTypes[i])) {
                     return true;
-                } else {
-                    // File extension is explicitly allowed
-                    if (fileExtension === extensionAllowed) {
-                        return true;
-                    }
                 }
             }
-            // File extension is not allowed
             return false;
         },
 
