@@ -54,6 +54,10 @@
         color: inherit;
         margin-right: 10*@px; 
       }
+
+      &:focus {
+        .glow();
+      }
     }
 
     &:after {
@@ -95,12 +99,14 @@
 
       &:focus {
         color: @textfield-error-font-color;
-        .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+        .glow(6*@px, @textfield-error-border-color, @textfield-error-border-color);
       }
     }
   }
 
   > select {
+    // allows the height to be modified.
+    -webkit-appearance: none;
     display: none;
     position: relative;
     margin-top: -100%;
