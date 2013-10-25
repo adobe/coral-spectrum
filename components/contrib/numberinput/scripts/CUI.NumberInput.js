@@ -264,9 +264,7 @@
     /** @ignore */
     _adjustValueLimitedToRange: function() {
       var value = this.getValue();
-      if (isNaN(value)) {
-        
-      } else {
+      if (!isNaN(value)) {
         if (value > this.getMax()) {
           value = this.getMax();
         } else if (value < this.getMin()) {
