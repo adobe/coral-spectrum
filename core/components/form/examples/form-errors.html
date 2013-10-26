@@ -18,7 +18,7 @@
 <body>
   <section>
     <h2>Form Errors</h2>
-    <div>
+    <div id="form-basic-error">
       <input type="text" name="test" class="error"><span class="form-error">Please provide some input</span><br>
       <textarea name="test" maxlength="10" rows="5" cols="20" class="error"></textarea><span class="form-error">Please provide some input</span>
     </div>
@@ -31,23 +31,23 @@
       <textarea name="test" maxlength="10" rows="5" cols="20" ></textarea>
     </div>
     <div>
-      <div class="datepicker error" data-init="datepicker">
+      <div id="form-datepicker-error" class="datepicker error" data-init="datepicker">
         <input type="date" value="29 November 2012" name="test"><button class="icon-calendar small">Datepicker</button>
       </div><span class="form-error">Please provide some input</span>
     </div>
     <div>
-      <div class="slider ticked filled tooltips error" data-init="slider">
+      <div id="form-slider-error" class="slider ticked filled tooltips error" data-init="slider">
         <input type="range" value="14" min="10" max="20" step="2">
       </div><span class="form-error tooltip-right">Please provide some input</span>
     </div>
     <div>
-      <div class="search">
+      <div id="form-search-error" class="search">
         <input type="text" placeholder="Search" class="error">
         <button>Search</button>
       </div><span class="form-error tooltip-right">Please provide some input</span>
     </div>
     <div>
-      <div class="filters error" data-init="filters">
+      <div id="form-filter-error" class="filters error" data-init="filters">
         <input type="text" placeholder="Single Term Filter">
         <select>
           <option selected>Apple</option>
@@ -57,7 +57,7 @@
       </div><span class="form-error tooltip-right">Please provide some input</span>
     </div>
     <div>
-      <div class="dropdown error" data-init="dropdown">
+      <div id="form-dropdown-error" class="dropdown error" data-init="dropdown">
         <button>Single Select</button>
         <select name="dropdown">
           <option>Single One</option>
@@ -68,7 +68,7 @@
       <span class="form-error tooltip-right">Please provide some input</span>
     </div>
     <div>
-      <div class="dropdown error" data-editable="true" data-init="dropdown">
+      <div id="form-dropdown-editable-error" class="dropdown error" data-editable="true" data-init="dropdown">
         <button>Single Select</button>
         <select name="dropdown">
           <option>Single One</option>
