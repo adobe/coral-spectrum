@@ -125,16 +125,16 @@
     <h2>Checked, unchecked and mixed state checkboxes</h2>
 
     <div class="componentSample">
-      <div class="example clearfix">
+      <div class="example clearfix" id="checkbox-group-1">
         <div class="left">
-          <label><input type="checkbox" name="c1" value="1" checked><span>Checked</span></label><br>
-          <label><input type="checkbox" name="c2" value="2"><span>Unchecked</span></label><br>
+          <label><input id="checked-checkbox" type="checkbox" name="c1" value="1" checked><span>Checked</span></label><br>
+          <label><input id="unchecked-checkbox" type="checkbox" name="c2" value="2"><span>Unchecked</span></label><br>
           <label><input id="some-checkbox" type="checkbox"  name="c3" value="3" aria-checked="mixed"><span>Partially checked</span></label><br>
           <label><input id="cycle-checkbox" type="checkbox" name="c4" value="4"><span>Cycling state checkbox</span></label><br>
         </div>
         <div class="left" style="margin-left: 10px">
-          <label><input type="checkbox" name="c5" value="5" disabled="disabled" checked><span>Disabled Checked</span></label><br>
-          <label><input type="checkbox" name="c6" value="6" disabled="disabled"><span>Disabled Unchecked</span></label><br>
+          <label><input id="checked-checkbox-disabled" type="checkbox" name="c5" value="5" disabled="disabled" checked><span>Disabled Checked</span></label><br>
+          <label><input id="unchecked-checkbox-disabled" type="checkbox" name="c6" value="6" disabled="disabled"><span>Disabled Unchecked</span></label><br>
           <label><input id="some-checkbox2" type="checkbox" name="c7" value="7" disabled="disabled" aria-checked="mixed"><span>Disabled Partially Checked</span>
           </label>
         </div>
@@ -160,9 +160,9 @@ $('#cycle-checkbox').off('change').click(function (e) {
     <h2> Nested Checkboxes</h2>
     <p> With additional javascript it is possible to next the checkboxes. </p>
     <div class="componentSample">
-      <div class="example clearfix">
+      <div class="example clearfix" id="checkbox-group-2">
         <ul>
-          <li>
+          <li id="checks-1">
             <input type="checkbox" name="tall" id="tall">
             <label for="tall">Tall Things</label>
 
@@ -192,7 +192,7 @@ $('#cycle-checkbox').off('change').click(function (e) {
              </li>
            </ul>
          </li>
-         <li>
+          <li id="checks-2">
           <input type="checkbox" name="short" id="short">
           <label for="short">Short Things</label>
 
