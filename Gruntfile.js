@@ -426,7 +426,7 @@ module.exports = function (grunt) {
         }, // copy
 
         generate_imports: {
-          output: '@import \'components/{filename}\';\n',
+          output: '@import-once \'components/{filename}\';\n',
           dest: '<%= dirs.build %>/less/components.less',
           legacy: {
             src: '<%= dirs.legacy %>/components/styles/*.less'

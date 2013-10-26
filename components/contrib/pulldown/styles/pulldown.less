@@ -45,11 +45,13 @@ nav.pulldown {
     }
   }
 
+  // arrow is removed when there's an icon CUI-588
   > a[class^="icon-"],
   > a[class*=" icon-"],
   h1 a[class^="icon-"],
   h1 a[class*=" icon-"] {
     background: none;
+    margin-right: 0;
   }
 
   .popover {
@@ -141,7 +143,6 @@ nav.pulldown {
       text-align: left;
     }
   }
-
 }
 
 // selector to hide the pulldown handle if desired

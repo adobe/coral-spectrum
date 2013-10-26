@@ -111,7 +111,21 @@ describe('CUI.NumberInput', function() {
         expect(element.getValue()).to.equal(-12);
       });    
 
-      it('#setValue should set NaN if input cannot be parsed to number', function() {
+      it('#setValue should allow empty value', function() {
+        var element = new CUI.NumberInput({element: $(html)}); 
+        element.setValue(99);
+        expect(element.getValue()).to.equal(99);
+        element.setValue('');
+        expect(element.getValue()).to.equal('');
+      });    
+
+      it('#setValue will parseFloat input values', function() {
+        var element = new CUI.NumberInput({element: $(html)}); 
+        element.setValue("12345.678");
+        expect(element.getValue()).to.equal(12345.678);
+      });   
+
+      it('#setValue should set NaN if non-empty input cannot be parsed to number', function() {
         var element = new CUI.NumberInput({element: $(html)}); 
         element.setValue(99);
         expect(element.getValue()).to.equal(99);

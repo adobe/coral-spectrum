@@ -13,6 +13,7 @@
   
   input[type=text] {
     margin: 0;
+    width: 100%;
     padding-left: @component-single-line-height;
     padding-right: @component-single-line-height;
   }
@@ -20,23 +21,16 @@
   button {
     position: absolute;
     display: block;
-    color: transparent;
 
     .icon-search;
     .icon-small;
     .button-square-transparent(36*@px);
 
-    // places the button below the border
-    top: 1*@px; 
+    .hide-inner-text;
 
-    &,
-    &:hover,
-    &:active,
-    &:disabled {
-      border: none;
-      filter: none;
-      color: transparent;
-    }
+    // places the button below the border
+    top: 1*@px;
+    left: 1*@px;
   }
 
   button[type=submit] {

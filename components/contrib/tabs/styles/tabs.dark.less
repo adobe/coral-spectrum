@@ -6,8 +6,8 @@
 // Tabs
 @tab-dark-outline-color: rgba(0, 0, 0, 0.20);
 
-@tab-dark-background-gradient-start-color: lighten(@body-dark-background-color, 7%);
-@tab-dark-background-gradient-end-color: @body-dark-background-color;
+@tab-dark-background-gradient-start-color: rgb(90, 90, 90);
+@tab-dark-background-gradient-end-color: rgb(77, 77, 77);
 
 @tab-dark-active-font-color: rgb(255, 255, 255);
 @tab-dark-inactive-font-color: rgb(190, 190, 190);
@@ -67,7 +67,7 @@
         border-bottom: 1*@px solid @tab-dark-outline-color;
 
         > a.active {
-          .gradient(lighten(@body-dark-background-color, 7%), @body-dark-background-color);
+          .gradient(@tab-dark-background-gradient-start-color, @tab-dark-background-gradient-end-color);
           border-bottom: 2*@px solid @body-dark-background-color;
         }
       }

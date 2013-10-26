@@ -20,8 +20,6 @@
     left: 33*@px; // accomodates the left button
     right: 33*@px; // accomodates the right button
 
-    max-height: 38*@px;
-    min-height: 38*@px;
     min-width: 54*@px;
     width: 54*@px; // FF needs this value to be specified.
 
@@ -98,16 +96,17 @@
   &.error,
   &:invalid {
 
-    button, input {
-      border-color: @textfield-error-border-color;
+    button,
+    input {
+      border-color: @textfield-error-border-color !important;
     }
 
     input {
-      color: @textfield-error-font-color
+      color: @textfield-error-font-color !important;
     }
 
     input:focus {
-      .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+      .glow(6*@px, @textfield-error-border-color, @textfield-error-border-color);
     }
 
     button:before {
