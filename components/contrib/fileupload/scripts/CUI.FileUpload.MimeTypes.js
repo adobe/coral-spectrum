@@ -449,4 +449,17 @@
          ".zoo": "application/octet-stream",
          ".zsh": "text/x-script.zsh"
      };
+
+    /**
+     Returns the mime type corresponding to the given file name's extension
+
+     @param {String}                   fileName Name of the file
+     */
+    CUI.FileUpload.MimeTypes.getMimeTypeFromFileName = function (fileName) {
+        var fileExtensionMatch = fileName.match(/.+(\..+)/);
+
+        return (fileExtensionMatch ?
+            CUI.FileUpload.MimeTypes[fileExtensionMatch[1]] :
+            undefined);
+    };
 }(window.jQuery));

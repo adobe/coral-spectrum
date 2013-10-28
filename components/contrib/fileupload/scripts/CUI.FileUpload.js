@@ -432,7 +432,7 @@
             if (this.inputElement.data("sizeLimit")) {
                 this.options.sizeLimit = this.inputElement.data("sizeLimit");
             }
-            if (this.inputElement.data("autostart")) {
+            if (this.inputElement.data("autoStart")) {
                 this.options.autoStart = true;
             }
             if (this.inputElement.data("usehtml5")) {
@@ -509,9 +509,7 @@
                 fileMimeType = file.type;
             } else {
                 fileName = $(file).attr("value") || file.value;
-                fileMimeType = fileName.match(/.+(\..+)/) ?
-                    CUI.FileUpload.MimeTypes[fileName.match(/.+(\..+)/)[1]] :
-                    undefined;
+                fileMimeType = CUI.FileUpload.MimeTypes.getMimeTypeFromFileName(fileName);
             }
             if (fileName.lastIndexOf("\\") !== -1) {
                 fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
@@ -615,8 +613,7 @@
                 return isAllowed;
             }
 
-            var allowedMimeTypes = this.options.mimeTypes,
-                length = allowedMimeTypes.length,
+            var length = this.options.mimeTypes.length,
                 i;
 
             if (length === 0) {
@@ -625,7 +622,7 @@
             } else {
                 // Some restrictions have been defined
                 for (i = 0 ; i < length ; i += 1) {
-                    if (isMimeTypeAllowed(fileMimeType, allowedMimeTypes[i])) {
+                    if (isMimeTypeAllowed(fileMimeType, this.options.mimeTypes[i])) {
                         return true;
                     }
                 }
