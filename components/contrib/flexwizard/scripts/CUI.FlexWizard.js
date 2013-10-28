@@ -118,7 +118,7 @@
         cloneLeft(buttons).replaceAll(nav.children(".left"));
         cloneRight(buttons).replaceAll(nav.children(".right:not([data-action=cancel])"));
 
-        nav.children("[data-action=cancel]").toggleClass("hidden", to.prev(".step").length === 0);
+        nav.children(".right[data-action=cancel]").toggleClass("hidden", to.prev(".step").length === 0);
 
         showNav(toNav);
         showStep(wizard, to, from);
