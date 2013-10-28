@@ -106,7 +106,7 @@
 
             this.$element.on("click", ".multifield-add", function(e) {
                 var item = $(fieldTemplate);
-                item.find(".multifield-placeholder").replaceWith(self.script.html());
+                item.find(".multifield-placeholder").replaceWith(self.script.html().trim());
                 item.appendTo(self.ol);
                 $(self.ol).trigger("cui-contentloaded");
             });
