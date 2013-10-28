@@ -177,7 +177,7 @@
          @param {boolean}  [options.disabled=false]                   Is this component disabled?
          @param {boolean}  [options.multiple=false]                   Can the user upload more than one file?
          @param {int}      [options.sizeLimit=null]                   File size limit
-         @param {Array}    [options.extensionsAllowed=[".*"]]         File extensions allowed for uploading (wildcard .* is allowed)
+         @param {Array}    [options.mimeTypes=[]]                     Mime types allowed for uploading (proper mime types, wildcard "*" and file extensions are supported)
          @param {boolean}  [options.autoStart=false]                  Should upload start automatically once the file is selected?
          @param {String}   [options.fileNameParameter=null]           Name of File name's parameter
          @param {boolean}  [options.useHTML5=true]                    (Optional) Prefer HTML5 to upload files (if browser allows it)
@@ -204,7 +204,7 @@
             disabled: false,
             multiple: false,
             sizeLimit: null,
-            extensionsAllowed: [".*"],
+            mimeTypes: [], // Default case: no restriction on mime types
             autoStart: false,
             fileNameParameter: null,
             useHTML5: true,
@@ -411,38 +411,38 @@
             if (this.inputElement.attr("placeholder")) {
                 this.options.placeholder = this.inputElement.attr("placeholder");
             }
-            if (this.inputElement.attr("data-placeholder")) {
-                this.options.placeholder = this.inputElement.attr("data-placeholder");
+            if (this.inputElement.data("placeholder")) {
+                this.options.placeholder = this.inputElement.data("placeholder");
             }
-            if (this.inputElement.attr("disabled") || this.inputElement.attr("data-disabled")) {
+            if (this.inputElement.attr("disabled") || this.inputElement.data("disabled")) {
                 this.options.disabled = true;
             }
-            if (this.inputElement.attr("multiple") || this.inputElement.attr("data-multiple")) {
+            if (this.inputElement.attr("multiple") || this.inputElement.data("multiple")) {
                 this.options.multiple = true;
             }
-            if (this.inputElement.attr("data-upload-url")) {
-                this.options.uploadUrl = this.inputElement.attr("data-upload-url");
+            if (this.inputElement.data("uploadUrl")) {
+                this.options.uploadUrl = this.inputElement.data("uploadUrl");
             }
-            if (this.inputElement.attr("data-upload-url-builder")) {
-                this.options.uploadUrlBuilder = CUI.util.buildFunction(this.inputElement.attr("data-upload-url-builder"), ["fileUpload"]);
+            if (this.inputElement.data("uploadUrlBuilder")) {
+                this.options.uploadUrlBuilder = CUI.util.buildFunction(this.inputElement.data("uploadUrlBuilder"), ["fileUpload"]);
             }
-            if (this.inputElement.attr("data-extensions-allowed")) {
-                this.options.extensionsAllowed = this.inputElement.data("extensions-allowed");
+            if (this.inputElement.data("mimeTypes")) {
+                this.options.mimeTypes = this.inputElement.data("mimeTypes");
             }
-            if (this.inputElement.attr("data-size-limit")) {
-                this.options.sizeLimit = this.inputElement.attr("data-size-limit");
+            if (this.inputElement.data("sizeLimit")) {
+                this.options.sizeLimit = this.inputElement.data("sizeLimit");
             }
-            if (this.inputElement.attr("data-auto-start")) {
+            if (this.inputElement.data("autoStart")) {
                 this.options.autoStart = true;
             }
-            if (this.inputElement.attr("data-usehtml5")) {
-                this.options.useHTML5 = this.inputElement.attr("data-usehtml5") === "true";
+            if (this.inputElement.data("usehtml5")) {
+                this.options.useHTML5 = this.inputElement.data("usehtml5") === "true";
             }
-            if (this.inputElement.attr("data-dropzone")) {
-                this.options.dropZone = this.inputElement.attr("data-dropzone");
+            if (this.inputElement.data("dropzone")) {
+                this.options.dropZone = this.inputElement.data("dropzone");
             }
-            if (this.inputElement.attr("data-file-name-parameter")) {
-                this.options.fileNameParameter = this.inputElement.attr("data-file-name-parameter");
+            if (this.inputElement.data("fileNameParameter")) {
+                this.options.fileNameParameter = this.inputElement.data("fileNameParameter");
             }
             $.each(this.inputElement.get(0).attributes, function(i, attribute) {
                 var match = /^data-event-(.*)$/.exec(attribute.name);
@@ -502,11 +502,14 @@
         _addFile: function(file) {
             var self = this;
 
-            var fileName;
+            var fileName,
+                fileMimeType;
             if (this.options.useHTML5) {
                 fileName = file.name;
+                fileMimeType = file.type;
             } else {
                 fileName = $(file).attr("value") || file.value;
+                fileMimeType = CUI.FileUpload.MimeTypes.getMimeTypeFromFileName(fileName);
             }
             if (fileName.lastIndexOf("\\") !== -1) {
                 fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
@@ -550,12 +553,12 @@
                     }
                 }
 
-                // Check file extension
-                if (!self._isFileExtensionAllowed(fileName)) {
+                // Check file mime type against allowed mime types
+                if (!self._checkMimeTypes(fileMimeType)) {
                     self.$element.trigger({
                         type: "filerejected",
                         item: item,
-                        message: "File extension is not allowed",
+                        message: "File mime type is not allowed",
                         fileUpload: self
                     });
                     return false;
@@ -584,28 +587,49 @@
         },
 
         /** @ignore */
-        _isFileExtensionAllowed: function(fileName) {
-            var fileExtension = fileName.match(/(.+)(\..+)$/)[2],
-                extensionsAllowed = this.options.extensionsAllowed,
-                extensionsAllowedLength = extensionsAllowed.length,
-                extensionAllowed,
+        _checkMimeTypes: function (fileMimeType) {
+            function isMimeTypeAllowed(fileMimeType, allowedMimeType) {
+                var mimeTypeRegEx = /(.+)\/(.+)$/,      // "text/plain"
+                    fileExtensionRegEx = /\.(.+)$/,     // ".txt"
+                    shortcutRegEx = /.*/,               // "text"
+                    isAllowed = false;
+
+                if (allowedMimeType === "*" || allowedMimeType === ".*" || allowedMimeType === "*/*") {
+                    // Explicit wildcard case: allow any file
+                    isAllowed = true;
+                } else if (!fileMimeType || !fileMimeType.match(mimeTypeRegEx)) {
+                    // File mime type is erroneous
+                    isAllowed = false;
+                } else if (allowedMimeType.match(mimeTypeRegEx)) {
+                    // Proper mime type case: directly compare with file mime type
+                    isAllowed = (fileMimeType === allowedMimeType);
+                } else if (allowedMimeType.match(fileExtensionRegEx)) {
+                    // File extension case: map extension to proper mime type and then compare
+                    isAllowed = (fileMimeType === CUI.FileUpload.MimeTypes[allowedMimeType]);
+                } else if (allowedMimeType.match(shortcutRegEx)) {
+                    // "Shortcut" case: only compare first part of the file mime type with the shortcut
+                    isAllowed = (fileMimeType.split("/")[0] === allowedMimeType);
+                }
+                return isAllowed;
+            }
+
+            var length = this.options.mimeTypes.length,
                 i;
 
-            for (i = 0; i < extensionsAllowedLength; i++) {
-                extensionAllowed = extensionsAllowed[i];
-
-                // Wildcard: allow any file extension
-                if (extensionAllowed === ".*") {
-                    return true;
-                } else {
-                    // File extension is explicitly allowed
-                    if (fileExtension === extensionAllowed) {
+            if (length === 0) {
+                // No restriction has been defined (default case): allow any file
+                return true;
+            } else {
+                // Some restrictions have been defined
+                for (i = 0 ; i < length ; i += 1) {
+                    if (isMimeTypeAllowed(fileMimeType, this.options.mimeTypes[i])) {
                         return true;
                     }
                 }
+                // The file mime type matches none of the mime types allowed
+                return false;
             }
-            // File extension is not allowed
-            return false;
+
         },
 
         /** @ignore */
