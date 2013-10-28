@@ -9,8 +9,8 @@
   .clearfix();
 
   position: relative;
-  width: 120*@px;
-  min-width: 120*@px;
+  width: 172*@px;
+  min-width: 110*@px;
   height: @component-single-line-height;
 
   input {
@@ -20,8 +20,8 @@
     left: 33*@px; // accomodates the left button
     right: 33*@px; // accomodates the right button
 
-    min-width: 54*@px;
-    width: 54*@px; // FF needs this value to be specified.
+    min-width: 0; // 54*@px;
+    .calc-width(~"100% -" 66*@px); // FF needs this value to be specified.
 
     &:focus  {
       // brings the border to the front
@@ -114,4 +114,11 @@
       opacity: 1;
     }
   }
-} 
+}
+
+form.vertical {
+  .numberinput.field {
+    display: block;
+    width: 100%;
+  }
+}
