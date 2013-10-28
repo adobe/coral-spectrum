@@ -24,6 +24,11 @@
 @button-warning-gradient-start-color: rgb(250, 90, 80);
 @button-warning-gradient-end-color: rgb(225, 65, 50);
 
+// Button: Quiet
+@button-quiet-border-color: rgb(70, 15, 15);
+@button-quiet-gradient-start-color: rgb(250, 90, 80);
+@button-quiet-gradient-end-color: rgb(225, 65, 50);
+
 // Button: Disabled
 @button-disabled-text-color: rgb(180, 180, 180);
 @button-disabled-icon-color: rgba(0, 0, 0, 0.15);
@@ -105,6 +110,38 @@ button,
     margin-left: 0;
     margin-right: 0;
   }
+
+  &.quiet {
+    border-color: transparent;
+    background: none;
+
+    .normal-text;
+
+    // resets the min-width property.
+    min-width: 0;
+
+    color: @font-base-color;
+    text-shadow: none;
+
+    &:hover {
+      background: none;
+      text-decoration: underline;
+    }
+
+    &:active {
+      background: none;
+      .box-shadow(none);
+    }
+
+    &[disabled],
+    &.disabled {
+      &, &:active, &:hover {
+        background: none;
+        border-color: transparent;
+        text-decoration: none;
+      }
+    }
+  }
 }
 
 // Primary button
@@ -169,3 +206,4 @@ button[disabled]:hover,
     }
   }
 }
+  
