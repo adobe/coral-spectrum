@@ -1,33 +1,8 @@
 /**
   Class: .flexwizard
-
-  The styling for dialog-like widget.
-  i.e. There is a nav bar at the top, with some buttons for navigation.
 */
-
-// Wizard
-@flexwizard-nav-background-color: #494D4E;
-@flexwizard-back-button-background-color: #434749;
-@flexwizard-back-button-border-color: #37393A;
-@flexwizard-next-button-background-color: #4090d1;
-@flexwizard-next-button-border-color: #1a3348;
-@flexwizard-disabled-button-text-color: #6E6E6E;
-@flexwizard-disabled-button-background-color: #505050;
-@flexwizard-disabled-button-border-color: #414141;
-@flexwizard-progress-title-color: #7f8283;
-@flexwizard-progress-active-title-color: @white;
-@flexwizard-progress-list-item-offset: 40*@px;
-@flexwizard-progress-bar-color: rgb(91, 94, 95);
-@flexwizard-progress-bar-highlight-color: rgb(79, 114, 146);
-@flexwizard-progress-bar-height: 3*@px;
-@flexwizard-progress-circle-diameter: 7*@px;
-@flexwizard-progress-circle-border-width: 2*@px;
-@flexwizard-progress-circle-color: rgb(127, 130, 131);
-@flexwizard-progress-circle-highlight-color: rgb(76, 145, 208);
-
 .flexwizard > .step {
   display: none;
-  padding: 15*@px;
 
   &.active {
     display: block;
@@ -35,116 +10,77 @@
 }
 
 .flexwizard > nav {
-  background: @flexwizard-nav-background-color;
-
-  > button.back, > a.button.back {
-    background: @flexwizard-back-button-background-color;
-    border-color: @flexwizard-back-button-border-color;
-  }
-
-  > button.next, > a.button.next {
-    background: @flexwizard-next-button-background-color;
-    border-color: @flexwizard-next-button-border-color;
-  }
-
-  > button[disabled], > a.button.disabled {
-    color: @flexwizard-disabled-button-text-color;
-    background: @flexwizard-disabled-button-background-color;
-    border-color: @flexwizard-disabled-button-border-color;
-  }
-
-  h1 {
-    color: @flexwizard-progress-active-title-color;
+  > .right + .right {
+    margin-right: 0.5rem;
   }
 
   > ol {
-    counter-reset: item;
     padding: 5*@px 0 0 0;
     font-size: 0; // To remove html whitespace between inline elements
+    counter-reset: item;
 
     > li {
       position: relative;
       display: inline-block;
       margin: 0;
-      padding-bottom: 5*@px;
-      padding-right: @flexwizard-progress-list-item-offset;
-      border-bottom: @flexwizard-progress-bar-height solid @flexwizard-progress-bar-color;
-      color: @flexwizard-progress-title-color;
-      font-size: 14*@px;
+      padding: 0 40*@px 5*@px 0;
+      border-bottom: 2*@px solid @font-captions-help-color;
+      font-size: 12*@px;
+      line-height: 20*@px;
       counter-increment: item;
-
-      // First item gets an additional section of progress bar left
-      &:first-child {
-        padding-left: @flexwizard-progress-list-item-offset;
-        &:after {
-          left: @flexwizard-progress-list-item-offset;
-        }
-        &.stepped {
-        }
-      }
 
       // List counter
       &:before {
-        content: counter(item) "  ";
+        content: counter(item);
         display: inline-block;
-        width: 18*@px;
-        height: 12*@px;
-        text-align: left;
+        margin-right: 5*@px;
+        font-size: 20*@px;
+        vertical-align: top;
       }
 
       // Circle step marker
       &:after {
-        content: " ";
+        @diameter: 7*@px;
+
+        content: "";
         position: absolute;
         bottom: -7*@px;
         left: 0;
         display: block;
-        width: @flexwizard-progress-circle-diameter;
-        height: @flexwizard-progress-circle-diameter;
-        border: @flexwizard-progress-circle-border-width solid @flexwizard-nav-background-color;
-        .border-radius(@flexwizard-progress-circle-diameter);
-        background: @flexwizard-progress-circle-color;
+        width: @diameter;
+        height: @diameter;
+        border: 2*@px solid @body-dark-background-color;
+        .border-radius(@diameter);
+        background: @font-base-dark-color;
       }
 
       // Current item
       &.active {
-        color: @flexwizard-progress-active-title-color;
+        color: rgb(50, 135, 210);
+        border-color: rgb(50, 135, 210);
 
         &:after {
-          background: @flexwizard-progress-circle-highlight-color;
+          background: rgb(50, 135, 210);
         }
       }
 
       // Previous items
       &.stepped {
-        color: @flexwizard-progress-active-title-color;
-        border-color: @flexwizard-progress-bar-highlight-color;
+        color: rgb(130, 130, 130);
+        border-color: rgb(94, 94, 94);
 
-        // adds the icon configuration
-        &:before { 
+        &:before {
           .icon-content;
-          color: white;
+          color: rgb(130, 130, 130);
           opacity: 1;
-          content: @icon-check-content; 
+          content: @icon-check-content;
+          font-size: 16*@px;
+          line-height: inherit;
         }
 
         &:after {
-          background: @flexwizard-progress-circle-highlight-color;
+          background: rgb(130, 130, 130);
         }
-      }
-
-      // The leading fill
-      .lead-fill {
-        position: absolute;
-        left: 0;
-        bottom: -@flexwizard-progress-bar-height;
-        width: @flexwizard-progress-list-item-offset;
-        height: @flexwizard-progress-bar-height;
-        background-color: @flexwizard-progress-bar-highlight-color;
-      }
-
-      &.wizard-hidden-step {
-        display: none;
       }
     }
   }

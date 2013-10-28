@@ -17,12 +17,17 @@
 (function($) {
     function cloneLeft(buttons) {
         return buttons.filter("[data-action=prev], [data-action=cancel]").first().addClass("hidden")
-            .clone().addClass("back left").each(processButton);
+            .clone().addClass("left").each(processButton);
     }
 
     function cloneRight(buttons) {
         return buttons.filter("[data-action=next]").first().addClass("hidden")
             .clone().addClass("primary right").each(processButton);
+    }
+
+    function cloneCancel(buttons) {
+        return buttons.filter("[data-action=cancel]").first()
+            .clone().addClass("quiet right").each(processButton);
     }
 
     function processButton(i, el) {
@@ -39,7 +44,6 @@
                 var ol = nav.children("ol");
 
                 sections.map(function() {
-                    //http://bugs.jquery.com/ticket/13567
                     return $("<li />").text($(this).data("stepTitle") || this.title).get(0);
                 }).appendTo(ol);
 
@@ -47,14 +51,16 @@
             });
         }
 
-        nav.find("> ol > li").first().addClass("active").append("<div class='lead-fill' />");
+        nav.toggleClass("theme-dark", true);
+
+        nav.find("> ol > li").first().addClass("active");
 
         var buttons = sections.first().find(".flexwizard-control");
 
         nav.prepend(function() {
             return cloneLeft(buttons);
         }).append(function() {
-            return cloneRight(buttons);
+            return cloneRight(buttons).add(cloneCancel(buttons).toggleClass("hidden", true));
         });
     }
 
@@ -110,7 +116,9 @@
         var buttons = to.find(".flexwizard-control");
 
         cloneLeft(buttons).replaceAll(nav.children(".left"));
-        cloneRight(buttons).replaceAll(nav.children(".right"));
+        cloneRight(buttons).replaceAll(nav.children(".right:not([data-action=cancel])"));
+
+        nav.children("[data-action=cancel]").toggleClass("hidden", to.prev(".step").length === 0);
 
         showNav(toNav);
         showStep(wizard, to, from);

@@ -8,24 +8,11 @@
  
         <script src="../../js/libs/jquery.js"></script>
         <script src="../../js/libs/toe.js"></script>
-
-<!-- 
-    *** DEPRECATION WARNING ***
-
-    Use of Handlebars.js is deprecated.  Coral UI will no longer natively 
-    support Handlebars.js templates in an upcoming version.  Please fix this 
-    implementation and remove this warning.
-
-    See https://issues.adobe.com/browse/CUI-1025 for details                      
-                                                                            
--->
-        <script src="../../js/libs/handlebars.js"></script>
-        <!-- TODO: remove handlebars.js -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0/handlebars.min.js"></script>
 
         <script src="../../js/CUI.js"></script>
 
         <script id="step-template" type="text/x-handlebars-template">
-
             <div class="step" data-step-title="{{title}}">
                 <button class="flexwizard-control" type="button" data-action="prev">Back</button>
                 <button class="flexwizard-control" type="button" data-action="next">Next</button>
@@ -53,7 +40,15 @@
     <body>
         <form action="test" method="post">
             <div class="flexwizard" data-init="flexwizard">
-                <div class="step" data-step-title="Step1">
+                <nav class="toolbar theme-dark">
+                    <ol class="center">
+                        <li>Step 1</li>
+                        <li>Step 2</li>
+                        <li>Step 3</li>
+                    </ol>
+                </nav>
+
+                <div class="step">
                     <a class="flexwizard-control button" href="cancel.html" data-action="cancel">Cancel</a>
                     <button class="flexwizard-control" type="button" data-action="next">Next</button>
 
@@ -65,7 +60,7 @@
                         <button class="example-append primary" type="button">Add Step</button>.</p>
                 </div>
 
-                <div class="step" title="Step2">
+                <div class="step">
                     <button class="flexwizard-control" type="button" data-action="prev">Back</button>
                     <button class="flexwizard-control" type="button" data-action="next">Next</button>
 
@@ -73,7 +68,7 @@
                     <p>Word on a future state of a page or site section without impacting the production state.</p>
                 </div>
 
-                <div class="step" title="Step3">
+                <div class="step">
                     <button class="flexwizard-control" type="button" data-action="prev">Back</button>
                     <button class="flexwizard-control" type="button" data-action="next">Next</button>
 
