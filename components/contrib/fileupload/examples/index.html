@@ -66,16 +66,16 @@
         </span>
     </div>
 
-<section>
+</section>
 
 <script>
-    $(document).on("filerejected", function (event) {
-        console.error("File has been rejected: " + event.message);
-    });
-
-    $(document).on("fileselected", function (event) {
-        console.log("File has been selected to be uploaded");
-    });
+    $(document)
+            .on("filerejected", function (event) {
+                console.error("File has been rejected: " + event.message);
+            })
+            .on("fileselected", function (event) {
+                console.log("File has been selected to be uploaded");
+            });
 </script>
 
 </body>
