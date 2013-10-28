@@ -12,28 +12,7 @@
   vertical-align: text-top; // Make adjacent text line up correctly when using inline-block
   
   &:before {
-    font-family: AdobeIcons;
-    font-weight: normal;
-    font-style: normal;
-    display: inline-block;
-    text-decoration: none; // Don't let icons underline
-    text-rendering: geometricPrecision;
-    -webkit-font-smoothing: antialiased;
-    line-height: 1.172; //line-height: 1.385; // The truth, the way. Don't question it.
-
-    color: @icon-color;
-    opacity: @icon-opacity;
-
-    // Position SVG backgrounds
-    background-position: center center;
-    background-repeat: no-repeat;
-
-    text-align: center;
-
-    content: " ";
-    
-    // Accessibility: do we need speak: none here?
-    speak: none; // don't try to speak the icon characters
+    .icon-content;
   }
   
   // Forced colors
@@ -74,6 +53,31 @@
       opacity: @icon-blue-opacity;
     }
   }
+}
+
+.icon-content() {
+  font-family: AdobeIcons;
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: none; // Don't let icons underline
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.172; //line-height: 1.385; // The truth, the way. Don't question it.
+
+  color: @icon-color;
+  opacity: @icon-opacity;
+
+  // Position SVG backgrounds
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  text-align: center;
+
+  content: " ";
+  
+  // Accessibility: do we need speak: none here?
+  speak: none; // don't try to speak the icon characters
 }
 
 .icon-size(@size) {

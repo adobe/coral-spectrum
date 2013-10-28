@@ -120,9 +120,12 @@
         color: @flexwizard-progress-active-title-color;
         border-color: @flexwizard-progress-bar-highlight-color;
 
-        &:before {
-          content: " ";
-          background: url('@{component-resource-folder}/flexwizard/check.png') 0 bottom no-repeat;
+        // adds the icon configuration
+        &:before { 
+          .icon-content;
+          color: white;
+          opacity: 1;
+          content: @icon-check-content; 
         }
 
         &:after {
