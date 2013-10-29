@@ -19,6 +19,27 @@
             min-width: 13rem;
         }
 
+        > li {
+            position: relative;
+            padding-right: 2 * @component-single-line-height; // we can use @component-single-line-height as the button is a square
+
+            > :first-child {
+                width: 100%;
+            }
+
+            > .multifield-remove {
+                position: absolute;
+                top: 0;
+                right: @component-single-line-height; // we can use @component-single-line-height as the button is a square
+            }
+
+            > .multifield-move {
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
+        }
+
         > li:only-child .multifield-move {
             display: none;
         }
@@ -68,30 +89,5 @@
 form.vertical {
     .multifield.field {
         display: block;
-
-        > ol > li {
-            position: relative;
-            padding-right: 2 * @component-single-line-height; // we can use @component-single-line-height as the button is a square
-
-            &.dragging {
-                position: absolute;
-            }
-
-            > :first-child {
-                width: 100%;
-            }
-
-            > .multifield-remove {
-                position: absolute;
-                top: 0;
-                right: @component-single-line-height; // we can use @component-single-line-height as the button is a square
-            }
-
-            > .multifield-move {
-                position: absolute;
-                top: 0;
-                right: 0;
-            }
-        }
     }
 }
