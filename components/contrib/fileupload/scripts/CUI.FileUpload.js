@@ -436,7 +436,7 @@
                 this.options.autoStart = true;
             }
             if (this.inputElement.data("usehtml5")) {
-                this.options.useHTML5 = this.inputElement.data("usehtml5") === "true";
+                this.options.useHTML5 = this.inputElement.data("usehtml5") === true;
             }
             if (this.inputElement.data("dropzone")) {
                 this.options.dropZone = this.inputElement.data("dropzone");
