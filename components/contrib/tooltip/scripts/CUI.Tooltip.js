@@ -248,7 +248,7 @@ The quicktip data options are applied to the target element of the tooltip (see 
             var eWidth = el.outerWidth(true);
             var eHeight = el.outerHeight(true);
             var eLeft = el.position().left;
-            var eTop = el.position().top;
+            var eTop = el.position().top + el.offsetParent().scrollTop();
 
 
             var width = this.$element.outerWidth(true);
