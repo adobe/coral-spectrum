@@ -1,6 +1,6 @@
 /**
-  Class: .toolbar
-  The top toolbar with action icons
+  Selector: .toolbar
+  The toolbar with action icons
 */
 // Toolbar
 @toolbar-border-color: rgb(215, 215, 215);
@@ -8,7 +8,6 @@
 @toolbar-padding: 7*@px;
 
 .toolbar {
-
   .clearfix;
 
   position: relative;
@@ -16,17 +15,14 @@
   padding: @toolbar-padding;
   border-bottom: @px solid @toolbar-border-color;
 
-  // required so that the mouse events are not taken by
-  // the center element.
-  .left,
-  .right {
-    z-index: 1;
-    position: relative;
+  > * {
+    margin: 0; // removes the margin of every component
   }
 
-  // removes the margin of every component
-  > * {
-    margin: 0;
+  .left,
+  .right {
+    z-index: 1; // required so that the mouse events are not taken by the center element
+    position: relative;
   }
   
   .center {
@@ -36,7 +32,7 @@
     height: @component-single-line-height;
     
     h1,
-    .pulldown > a {      
+    .pulldown > a {
       .regular-text;
       .ellipsis;
 
@@ -76,29 +72,17 @@
 }
 
 /**
-  Class: .icongroup
+  Selector: .icongroup
   Button toolbar of icons defined using the <a> or <button> tags
 */
 .icongroup {
-
-  // removes the margin of every child element.        
   > * {
-    margin: 0;
-  }
-
-  > a,
-  > i,
-  > button,
-  > input,
-  > nav,
-  > div,
-  > span, {
     float: left; // inline-block adds undesired spacing to the elements
+    margin: 0; // removes the margin of every child element
   }
 
-  // makes the anchors and spans be lined up with the
-  // rest of the components.
-  > span {
+  // makes the anchors and spans be lined up with the rest of the components
+  > span, > h1 {
     line-height: @component-single-line-height;
   }
   
