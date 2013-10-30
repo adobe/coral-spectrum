@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Forms</title>
+  <title>Form Examples</title>
 
   <link rel="stylesheet" href="../../css/cui.css">
 
@@ -155,36 +155,36 @@ form.vertical .fieldwrapper .fielderror</pre>
           </select>
         </span>
 
-        <label class="fieldlabel">Single Select Dropdown</label>
-        <div class="field dropdown" data-init="dropdown">
-          <button type="button">Single Select</button>
-          <select>
-            <option>Single One</option>
-            <option selected>Single Two</option>
-            <option>Single Three</option>
-          </select>
-        </div>
+        <label class="fieldlabel">Select</label>
+        <span class="field select" data-init="select">
+        <button type="button" class="">One</button>
+        <select>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+          <option value="4">One Two Three Four Five Six Seven Eight Nine Ten</option>
+        </select>
+      </span>
 
-        <label class="fieldlabel">Multi Select Dropdown</label>
-        <div class="field dropdown" data-init="dropdown">
-          <button type="button">Multi Select</button>
-          <select multiple>
-            <option>Multi One</option>
-            <option selected>Multi Two</option>
-            <option>Multi Three</option>
-          </select>
-        </div>
+      <label class="fieldlabel">Multiple Select</label>
+      <span class="field select" data-init="select">
+        <button type="button">Select</button>
+        <select multiple="true">
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </span>
 
-        <label class="fieldlabel">Editable Dropdown</label>
-        <div class="field dropdown dropdown-editable" data-editable="true" data-init="dropdown">
-          <input type="text">
-          <button type="button">Editable</button>
+        <label class="fieldlabel">Icon Select</label>
+        <span class="field select" data-init="select">
+          <button type="button" class="icon-globe">Austria</button>
           <select>
-            <option>Edit One</option>
-            <option>Edit Two</option>
-            <option>Edit Three</option>
+            <option value="at">Austria</option>
+            <option value="ch">Switzerland</option>
+            <option value="us">United States</option>
           </select>
-        </div>
+        </span>
 
         <label class="fieldlabel">Multifield</label>
         <div class="field multifield" data-init="multifield">
