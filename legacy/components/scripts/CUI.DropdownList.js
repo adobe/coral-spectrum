@@ -68,7 +68,7 @@
         cssClass: null,
         visible: false,
         scrollBuffer: 10,
-        loadingIndicator: "<div class='spinner'></div>",
+        loadingIndicator: "<div class='wait'></div>",
         noWidth: false
     },
 
@@ -187,12 +187,20 @@
         
         if (key === 38) { // up
             event.preventDefault();
-            if (currentIndex > 0) currentIndex--;
+            if (currentIndex > 0) {
+                currentIndex--;
+            } else {
+                currentIndex = this.listElement.find("li").length - 1;
+            }
         }
         
         if (key === 40) { // down
             event.preventDefault();
-            if (currentIndex < (this.listElement.find("li").length - 1)) currentIndex++;
+            if (currentIndex < (this.listElement.find("li").length - 1)) {
+                currentIndex++;  
+            } else {
+                currentIndex = 0
+            }
         }
         
         if (key === 27) { // escape
@@ -219,10 +227,43 @@
             el.addClass("selected");
 
             // Scroll to position if necessary
-            var t = el.position().top;
-            this.listElement.animate({scrollTop: t}, 50);
+            this._updateScrollPosition(currentIndex);
         }
     },
+
+    _updateScrollPosition: function(idx){
+        var selectedLi = this.listElement.find('.autocomplete-results').children(':nth-child(' + (idx+1) + ')');
+
+        if (this.listElement.length && selectedLi.length){
+            var selectedLiYPos = selectedLi.position().top,
+                currentScrollPos = this.listElement.scrollTop(),
+                newScrollPos = 0;
+
+            //When changing the index in the down position check to see if the items postion plus its
+            //height is greater than the dropdowns height.  If so then adjust the scroll position to
+            //account for the bottom most portion of the selected item. When going up check to see if
+            //the position of the current item is less than 0. If so then it is out of site and should
+            //be adjusted to be at the top of the list.
+            if (selectedLiYPos + selectedLi.height() > this.listElement.height()){
+                //Set the new scroll position to the current scroll position.
+                newScrollPos = currentScrollPos;
+                //Add the position of the selected item accounting for its height.
+                newScrollPos += selectedLiYPos + selectedLi.outerHeight();
+                //Now subtract the height of the dropdown list.
+                newScrollPos -= this.listElement.height();
+
+                this.listElement.scrollTop(newScrollPos);
+            } else if (selectedLiYPos < 0){
+                //Set the new scroll position to the current scroll position.
+                newScrollPos = currentScrollPos;
+                //Subtract the current y position.  NOTE it will be negative so we are actually going to add it.
+                newScrollPos += selectedLiYPos;
+
+                this.listElement.scrollTop(newScrollPos);
+            }
+        }
+    },
+
     /** @ignore */    
     _unrender: function() {       
         if (this.listElement) {
