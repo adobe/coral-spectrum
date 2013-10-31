@@ -17,6 +17,16 @@
     h1, h2 {
       margin-bottom: 1rem; /* no margin for heading, seriously!? */
     }
+
+    span.deprecated {
+      font-size: 0.75rem;
+      border: 1px solid #ff9c00;
+      border-radius: 5px;
+      background: #fff600;
+      margin: 0 5px;
+      padding: 1px;
+      color: #0a0a0a;
+    }
   </style>
 </head>
 <body>
@@ -185,6 +195,17 @@ form.vertical .fieldwrapper .fielderror</pre>
             <option value="us">United States</option>
           </select>
         </span>
+
+        <label class="fieldlabel">Single Select Dropdown<span class="deprecated">deprecated</span></label>
+        <p>This component is <span class="deprecated">deprecated</span> in favor of the Select component.</p>
+        <div class="field dropdown" data-init="dropdown">
+          <button type="button">Single Select</button>
+          <select>
+            <option>Single One</option>
+            <option selected>Single Two</option>
+            <option>Single Three</option>
+          </select>
+       </div>
 
         <label class="fieldlabel">Multifield</label>
         <div class="field multifield" data-init="multifield">
@@ -364,37 +385,6 @@ form.aligned .fieldwrapper .fielderror</pre>
           </select>
         </span>
 
-        <label class="fieldlabel">Single Select Dropdown</label>
-        <div class="field dropdown" data-init="dropdown">
-          <button type="button">Single Select</button>
-          <select>
-            <option>Single One</option>
-            <option selected>Single Two</option>
-            <option>Single Three</option>
-          </select>
-        </div>
-
-        <label class="fieldlabel">Multi Select Dropdown</label>
-        <div class="field dropdown" data-init="dropdown">
-          <button type="button">Multi Select</button>
-          <select multiple>
-            <option>Multi One</option>
-            <option selected>Multi Two</option>
-            <option>Multi Three</option>
-          </select>
-        </div>
-
-        <label class="fieldlabel">Editable Dropdown</label>
-        <div class="field dropdown dropdown-editable" data-editable="true" data-init="dropdown">
-          <input type="text">
-          <button type="button">Editable</button>
-          <select>
-            <option>Edit One</option>
-            <option>Edit Two</option>
-            <option>Edit Three</option>
-          </select>
-        </div>
-
         <label class="fieldlabel">Multifield</label>
         <div class="field multifield" data-init="multifield">
           <ol>
@@ -437,6 +427,41 @@ form.aligned .fieldwrapper .fielderror</pre>
           <label><input type="radio"><span>Yes</span></label>
           <label><input type="radio"><span>No</span></label>
         </span>
+      </section>
+
+      <section class='fieldset'>
+        <p>The examples below use Dropdown, which is <span class="deprecated">deprecated</span> in favor of the Select component.</p>
+
+        <label class="fieldlabel">Single Select</label>
+        <div class="field dropdown" data-init="dropdown">
+          <button type="button">Single Select</button>
+          <select>
+            <option>Single One</option>
+            <option selected>Single Two</option>
+            <option>Single Three</option>
+          </select>
+        </div>
+
+        <label class="fieldlabel">Multi Select</label>
+        <div class="field dropdown" data-init="dropdown">
+          <button type="button">Multi Select</button>
+          <select multiple>
+            <option>Multi One</option>
+            <option selected>Multi Two</option>
+            <option>Multi Three</option>
+          </select>
+        </div>
+
+        <label class="fieldlabel">Editable</label>
+        <div class="field dropdown dropdown-editable" data-editable="true" data-init="dropdown">
+          <input type="text">
+          <button type="button">Editable</button>
+          <select>
+            <option>Edit One</option>
+            <option>Edit Two</option>
+            <option>Edit Three</option>
+          </select>
+        </div>
       </section>
     </form>
 
@@ -482,6 +507,35 @@ form.aligned .fieldwrapper .fielderror</pre>
         </select>
       </span>
 
+      <label>Date Picker</label>
+      <span class="datepicker" data-init="datepicker"><input type="datetime"><button class="icon-calendar">Datetime picker</button></span>
+
+      <label>Slider</label>
+      <span class="slider" data-init="slider"><input type="range" value="10" min="10" max="20" step="2"></span>
+
+      <label>Vertical Slider</label>
+      <span class="slider vertical" data-init="slider"><input type="range" value="10" min="10" max="20" step="2"></span>
+
+      <label>Path Browser</label>
+      <span class="pathbrowser" data-init="pathbrowser"><input type="text"></span>
+
+      <label>Checkbox</label>
+      <label><input type="checkbox" checked><span>Checkbox</span></label>
+
+      <label>Radio</label>
+      <label><input type="radio" checked><span>Radio</span></label>
+
+      <label>Switch</label>
+      <label class="switch"><input type="checkbox"><span>Off</span><span>On</span></label>
+
+      <label>Selector</label>
+      <span class="selector">
+        <label><input type="radio"><span>Yes</span></label>
+        <label><input type="radio"><span>No</span></label>
+      </span>
+
+      <p>The examples below use Dropdown, which is <span class="deprecated">deprecated</span> in favor of the Select component.</p>
+
       <label>Single Select Dropdown</label>
       <div class="dropdown" data-init="dropdown">
         <button type="button">Single Select</button>
@@ -513,32 +567,6 @@ form.aligned .fieldwrapper .fielderror</pre>
         </select>
       </div>
 
-      <label>Date Picker</label>
-      <span class="datepicker" data-init="datepicker"><input type="datetime"><button class="icon-calendar">Datetime picker</button></span>
-
-      <label>Slider</label>
-      <span class="slider" data-init="slider"><input type="range" value="10" min="10" max="20" step="2"></span>
-
-      <label>Vertical Slider</label>
-      <span class="slider vertical" data-init="slider"><input type="range" value="10" min="10" max="20" step="2"></span>
-
-      <label>Path Browser</label>
-      <span class="pathbrowser" data-init="pathbrowser"><input type="text"></span>
-
-      <label>Checkbox</label>
-      <label><input type="checkbox" checked><span>Checkbox</span></label>
-
-      <label>Radio</label>
-      <label><input type="radio" checked><span>Radio</span></label>
-
-      <label>Switch</label>
-      <label class="switch"><input type="checkbox"><span>Off</span><span>On</span></label>
-
-      <label>Selector</label>
-      <span class="selector">
-        <label><input type="radio"><span>Yes</span></label>
-        <label><input type="radio"><span>No</span></label>
-      </span>
     </form>
   </div>
 </body>
