@@ -20,18 +20,14 @@
 @datepicker-time-border-color: rgb(196,196,196);
 
 .datepicker {
+  .component-single-line;
+
   // used to place the button.
   position: relative;
 
-  .component-single-line;
-
+  > input[type^="date"],
+  > input[type="time"],
   > input[type=text] {
-    margin: 0;
-    padding-right: 40*@px;
-    width: 100%;
-  }
-
-  > input[type^="date"], > input[type="time"] {
     margin: 0;
     padding-right: 40*@px;
     -webkit-appearance: none; // remove default styling for native html5 input
@@ -39,7 +35,7 @@
   }
 
   > button {
-    .button-square(36*@px);
+    .button-square-transparent(36*@px);
         
     // Fit inside of the text field
     position: absolute;
@@ -79,20 +75,12 @@
   }
 
   &.popover {
+    padding: 0; // TODO: this should not be necessary!
     display: block;
     position: absolute;
-    top: 3rem; /* 48px */ /* TODO: place popover relative to the action button (above or below) */
+    top: 48*@px;
     left: 0;
     z-index: 10010;
-
-    border: 10*@px solid @popover-border-color; /* TODO: 8px in .popover, but design shows 10px */
-    
-    /* TODO: this is an override of popover .arrow-top. Increases margin to 10px to match design document
-     * should margins consistently be 8px or 10px for popovers, change accordingly.
-     */
-    &.arrow-top:before {
-      margin-bottom: 10*@px;
-    }
 
     .inner {
       border: @px solid @modal-outline-color;
@@ -285,39 +273,31 @@
   .time {
     background: @datepicker-time-background-color;
     border-top: @px solid @datepicker-time-border-color;
-    padding: 0.625rem;
+    padding: 10*@px;
     min-width: 170*@px;
     font-size: 15*@px;
 
-    i, span {
+    >i, 
+    > span {
+      vertical-align: top;
       display: inline-block;
-      height: 2rem;
-      line-height: 2rem;
+      height: @component-single-line-height;
+      line-height: @component-single-line-height;
     }
 
-    i {
+    > i {
       margin: 0 10*@px 0 5*@px;
     }
 
-    span {
+    > span {
       margin: 0 8*@px;
     }
 
     .dropdown {
-
-      &:first-child {
-        margin-left: 10*@px;
-      }
-
+      margin: 0;
       button {
         width: 56*@px;
         min-width: 0;
-      }
-
-      .dropdown-list {        
-        ul li {
-            padding: 3*@px;
-        }
       }
     }
   }
