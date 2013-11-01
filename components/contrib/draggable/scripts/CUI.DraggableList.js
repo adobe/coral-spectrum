@@ -91,7 +91,7 @@
       @param {boolean} [options.allowReorder=false]    May the user reorder the list by drag&drop?     
       @param {boolean} [options.allowDrag=false]       May the user drag elements of the list to other lists?
       @param {boolean} [options.allowDrop=false]       May the user drop elements into this list?
-      @param {boolean} [options.closable=false]        Can the user remove items from this list?                             
+      @param {boolean} [options.closeable=false]        Can the user remove items from this list?                             
     */
     construct: function(options) {
       this.$element.addClass("draggable");
@@ -102,7 +102,7 @@
         if (jQuery.inArray("drag", allow) >= 0) this.options.allowDrag = true;
         if (jQuery.inArray("drop", allow) >= 0) this.options.allowDrop = true;
       }
-      if (this.$element.data("closable")) this.options.closable = true;
+      if (this.$element.data("closeable")) this.options.closeable = true;
 
       this.$element.on("click", ".close", this.close.bind(this));
       this.$element.fipo("taphold", "mousedown", "li", this.dragStart.bind(this));
@@ -134,7 +134,7 @@
       allowReorder: false,
       allowDrag: false,
       allowDrop: false,
-      closable: false
+      closeable: false
     },
 
     dropZone: null,
@@ -184,9 +184,9 @@
       if (!this.$element.is(event.sourceElement) && this.options.allowDrop) {
         var e = $(event.item);
 
-        if (this.options.closable && e.find(".close").length === 0) {
+        if (this.options.closeable && e.find(".close").length === 0) {
           e.append("<button class=\"close\">&times;</button>");
-        } else if (!this.options.closable) {
+        } else if (!this.options.closeable) {
           e.find(".close").remove();
         }
 
@@ -244,7 +244,7 @@
         return false;
     },
     close: function(event) {
-      if (!this.options.closable) return;
+      if (!this.options.closeable) return;
       event.preventDefault();
       var e = $(event.target).closest("li");
       var index = e.index();
