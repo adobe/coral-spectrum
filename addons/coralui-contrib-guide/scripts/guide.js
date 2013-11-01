@@ -57,12 +57,13 @@ jQuery(function($) {
         return html;
     }
 
-
-    
-    populateCodeSamples();
-
-    // Prettify code examples
-    prettyPrint();
+    // CUI-1245: Style guide is very slow to render.
+    // These functions create a HUGE DOM. As Typekit font init creates a number of
+    // browser reflows, delaying this past the Typekit timeout allows the fonts to load first.
+    setTimeout( function() {
+        populateCodeSamples();
+        prettyPrint();
+    }, 3000);
 
     // init the rail
     $('#main-rail').rail();
