@@ -82,28 +82,6 @@
                         </div>
                     </section>
 
-                    <div class="dropdown menu" data-init="dropdown" data-nowidth="true">
-                        <button>Dropdown Menu in Rail</button>
-                        <select name="dropdown">
-                            <option>Option One</option>
-                            <option>Option Two</option>
-                            <option>Option Three</option>
-                        </select>
-                    </div>
-
-                    <div style="margin:8px 10px;">
-                        <div class="dropdown" data-init="dropdown">
-                            <button>Dropdown in Rail</button>
-                            <select name="dropdown">
-                                <option>Option One</option>
-                                <option>Option Two</option>
-                                <option>Option Three</option>
-                                <option>Option Four</option>
-                            </select>
-                        </div>
-
-                    </div>
-
                     <section class="foldable open">
                         <span class="heading">Accordion open</span>
                         <ul class="notype checklist fold">
@@ -233,20 +211,27 @@
                 </div>
 
                 <div class="rail-view" data-view="activity">
-                    <div class="search">
-                        <label for="q2" class="hidden-accessible">Search</label>
-                        <input type="text" placeholder="Enter Keyword(s)" autocomplete="off" name="q" id="q2">
-                        <button type="submit" class="icon-search">Search</button>
-                        <button type="reset">Clear</button>
-                    </div>
-                    <div class="dropdown menu" data-init="dropdown">
-                        <button>Dropdown Menu in Rail</button>
-                        <select name="dropdown">
-                            <option>Option One</option>
-                            <option>Option Two</option>
-                            <option>Option Three</option>
+
+                    <span class="select menu" data-init="select">
+                        <button>Menu in Rail</button>
+                        <select name="select1">
+                            <option>Menu Option One</option>
+                            <option>Menu Option Two</option>
+                            <option>Menu Option Three</option>
                         </select>
+                    </span>
+
+                    <div style="margin:8px 10px;">
+                        <span class="select" data-init="select">
+                            <button>Select in Rail</button>
+                            <select name="select2">
+                                <option>Select Option One</option>
+                                <option>Select Option Two</option>
+                                <option>Select Option Three</option>
+                            </select>
+                        </span>
                     </div>
+
                 </div>
 
                 <div class="rail-view" data-view="references">
