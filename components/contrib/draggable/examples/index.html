@@ -28,15 +28,24 @@
             <p>Drop here!</p>
           </div>
         </div>
+
         <div style="width: 40%; padding-right: 10%; float: left">
           <div class="dropzone">
             <ul class="draggable" data-init="draggable-list" data-allow="reorder drag drop">
             </ul>
-            <p>Drop here!</p>
+            <p>Drop here! (data-closeable="false")</p>
           </div>
           <br>
-          <ul class="draggable" data-init="draggable-list" data-allow="reorder drop" data-closeable="true">
-            <li>You can not drag from this list</li>
+
+          <div class="dropzone">
+            <ul class="draggable" data-init="draggable-list" data-allow="reorder drag drop" data-closeable="true">
+            </ul>
+            <p>Drop here! (data-closeable="true")</p>
+          </div>
+          <br/>
+
+          <ul class="draggable" data-init="draggable-list" data-allow="drop" data-closeable="true">
+            <li>You can not drag from this list, but you can drop here and close items.</li>
           </ul>
           <br>
           <ul class="draggable" data-init="draggable-list" data-allow="reorder" data-closeable="true">
@@ -45,6 +54,17 @@
           </ul>
         </div>
         
+        <div style="width: 200px; float: left; padding-top: 10px">
+          <div class="dropzone">
+            <ul class="draggable" data-init="draggable-list" data-allow="drag drop reorder" data-closeable="true">
+              <li>Item A<button class="close">x</button></li>
+              <li>Item B<button class="close">x</button></li>
+              <li>Item C<button class="close">x</button></li>
+            </ul> 
+            <p>Drop here!</p>
+          </div>
+        </div>
+
         </section>
         <script type="text/javascript">
           $("ul").on("reordered", function(event) {
