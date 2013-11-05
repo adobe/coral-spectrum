@@ -170,6 +170,11 @@
             } else {
                 self._button.text(self._select[0][self._select[0].selectedIndex].text);
             }
+
+            // we stop the propagation because the component itself provides a change event too
+            if (event) {
+                event.stopPropagation();
+            }
         },
 
         /**
@@ -277,6 +282,7 @@
 
         /**
          * handles a select of a SelectList widget
+         * @fires Select#selected
          * @private
          */
         _handleSelected: function (event) {
@@ -298,6 +304,11 @@
             }
 
             this._button.trigger('focus');
+
+            this.$element.trigger($.Event('change', {
+                value: event.selectedValue,
+                display: event.displayedValue
+            }));
         },
 
         /**
@@ -317,5 +328,16 @@
             $('[data-init~=select]', e.target).select();
         });
     }
+
+    /**
+     * Triggered when option was selected
+     *
+     * @name CUI.Select#change
+     * @event
+     *
+     * @param {Object} event Event object
+     * @param {String} event.selectedValue value which was selected
+     * @param {String} event.displayedValue displayed text of the selected element
+     */
 
 }(jQuery, this));
