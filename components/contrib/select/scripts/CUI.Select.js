@@ -170,11 +170,6 @@
                             value: opt.value,
                             display: opt.text
                         });
-
-                        selected.push({
-                            value: opt.value,
-                            display: opt.text
-                        });
                     } else {
                         self._tagListWidget.removeItem(opt.value);
                     }
@@ -309,6 +304,8 @@
          * @private
          */
         _handleSelected: function (event) {
+            var selected;
+
             this._selectListWidget.hide();
 
             // set select value
@@ -319,18 +316,21 @@
                     value: event.selectedValue,
                     display: event.displayedValue
                 });
+
+                selected = this._tagListWidget.getValues();
             } else {
                 // set the button label
                 this._button.text(event.displayedValue);
                 // in case it is dynamic a value input should be existing
                 this._valueInput.val(event.selectedValue);
+
+                selected = [event.selectedValue];
             }
 
             this._button.trigger('focus');
 
             this.$element.trigger($.Event('change', {
-                value: event.selectedValue,
-                display: event.displayedValue
+                selected: selected
             }));
         },
 
