@@ -11,7 +11,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-gh-pages');
     grunt.loadNpmTasks('grunt-mocha');
     grunt.loadNpmTasks('grunt-jsdoc');
     grunt.loadNpmTasks('grunt-shell');
@@ -97,7 +96,6 @@ module.exports = function (grunt) {
             contrib: 'components/contrib'
         },
         legacy: 'legacy',
-        guide: 'addons/coralui-contrib-guide',
         temp: 'temp',
         modules: 'node_modules',
         externals: 'externals',
@@ -357,32 +355,8 @@ module.exports = function (grunt) {
                     }
                 ] // /retro files
             }, 
-            guide: {
+            externals: {
                 files: [
-                    { // guide html
-                        expand: true,
-                        cwd: '<%= dirs.guide %>/templates/',
-                        src: ['**'],
-                        dest: '<%= dirs.build %>/'
-                    },
-                    { // guide less
-                        expand: true,
-                        cwd: '<%= dirs.guide %>/styles/',
-                        src: ['**'],
-                        dest: '<%= dirs.build %>/less'
-                    },
-                    { // guide scripts
-                        expand: true,
-                        cwd: '<%= dirs.guide %>/scripts/',
-                        src: ['**'],
-                        dest: '<%= dirs.build %>/js/'
-                    },
-                    { // guide resources
-                        expand: true,
-                        cwd: '<%= dirs.guide %>/res/',
-                        src: ['**'],
-                        dest: '<%= dirs.build %>/res/guide'
-                    },
                     { // get external dependencies
                         expand: true,
                         flatten: true,
@@ -390,7 +364,7 @@ module.exports = function (grunt) {
                         src: ['*/*.js'],
                         dest: '<%= dirs.build %>/js/libs'
                     }
-                ] // guide files
+                ]
             },
             js_source: {
                 files: [
@@ -495,8 +469,7 @@ module.exports = function (grunt) {
             legacy_scripts: {
                 files: [
                     dirs.legacy + '/components/scripts/*.js',
-                    dirs.legacy + '/components/tests/test.*.js',
-                    dirs.legacy + '/guide/js/guide.js'
+                    dirs.legacy + '/components/tests/test.*.js'
                 ],
                 tasks: ['quicktest']
             },
@@ -505,15 +478,6 @@ module.exports = function (grunt) {
                     dirs.legacy + '/components/styles/*.less'
                 ],
                 tasks: ['quickless']
-            },
-            // watch: guide content
-            guide: {
-                files: [
-                    dirs.guide + '/scripts/*.js',
-                    dirs.guide + '/styles/*.less',
-                    dirs.guide + '/templates/*.html'
-                ],
-                tasks: ['guide']
             }
 
         },
@@ -538,17 +502,6 @@ module.exports = function (grunt) {
                 },
                 files: {
                     '<%= dirs.build %>/css/cui.css': '<%= dirs.build %>/less/cui.less'
-                }
-            },
-            guide: {
-                options: {
-                    paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
-                        dirs.build+'/less/'
-                    ]
-                },
-                files: {
-                    '<%= dirs.build %>/css/guide.css': '<%= dirs.build %>/less/guide.less',
-                    '<%= dirs.build %>/css/prettify.css': '<%= dirs.build %>/less/prettify.css'
                 }
             }
         }, // less
@@ -717,28 +670,6 @@ module.exports = function (grunt) {
             }
         }, // compress
 
-        'gh-pages': {
-            options: {
-                base: '<%= dirs.build %>',
-                repo: 'git@git.corp.adobe.com:Coral/CoralUI.git',
-                clone: '<%= dirs.temp %>/gh-pages',
-                branch: 'gh-pages',
-                message: '@releng github pages to <%= meta.version %>'
-            },
-            release: {
-                src: [
-                    'index.html',
-                    'bug_template.html',
-                    'css/**',
-                    'js/**',
-                    'doc/**',
-                    'res/**',
-                    'images/**',
-                    'examples/**',
-                    'release/**'
-                ]
-            }
-        },
         "shell": {
             "local-publish": {
                 "command": "sh coralui-local-publish <%= meta.appName %> <%= dirs.build %>/release/<%= meta.appName %>-<%= meta.version %>.tgz",
@@ -766,12 +697,6 @@ module.exports = function (grunt) {
 
     }); // end init config
 
-    grunt.task.registerTask('guide', [
-        'copy:guide',
-        'less:guide'
-    ]);
-
-
     grunt.task.registerTask('retro', [
         'clean',
         'subgrunt:core',
@@ -784,7 +709,7 @@ module.exports = function (grunt) {
         'concat:retro',
         'uglify:retro',
         'copy:js_source',
-        'guide'
+        'copy:externals'
     ]);
 
       /*
@@ -814,7 +739,7 @@ module.exports = function (grunt) {
         'mocha',
         'uglify:retro',
         'copy:js_source',
-        'guide'
+        'copy:externals'
     ]);
 
     grunt.task.registerTask('quickless', [
@@ -827,18 +752,13 @@ module.exports = function (grunt) {
 
     grunt.task.registerTask('quickbuild', [
         'quickless',
-        'guide'
+        'copy:externals'
     ]);
 
     grunt.task.registerTask('watch-start', [
         'quickbuild',
         'quicktest',
         'watch'
-    ]);
-
-    grunt.task.registerTask('release', [ // releases coral to github page
-        'check',
-        'gh-pages:release'
     ]);
 
     grunt.task.registerTask('publish-build', [
