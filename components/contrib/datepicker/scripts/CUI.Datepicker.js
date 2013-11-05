@@ -273,7 +273,7 @@
       }
 
       if (!this.options.disabled) {
-        this.$element.on('click', this._clickHandler.bind(this));
+        this.$openButton.on('click', this._clickHandler.bind(this));
         this.$input.on("change" + (IS_MOBILE_DEVICE ? " blur" : ""), this._inputChangedHandler.bind(this));
       }
 
@@ -331,17 +331,15 @@
     },
 
     _clickHandler: function (event) {
-      if (isCalendarButton($(event.target))) {
-        if (this.pickerShown) {
-          this._hidePicker();
-        } else {
-          this._openPicker();
-        }
+      if (this.pickerShown) {
+        this._hidePicker();
+      } else {
+        this._openPicker();
       }
     },
 
     _bodyClickHandler: function (event) {
-      if (!isCalendarButton($(event.target))) {
+      if (!($(event.target).is(this.$openButton))) {
         this._hidePicker();
       }
     },
@@ -818,10 +816,6 @@
     if (d1 && d2) {
       return d1.year() === d2.year() && d1.month() === d2.month() && d1.date() === d2.date();
     }
-  }
-
-  function isCalendarButton($target) {
-    return $target.is(".icon-calendar, .icon-clock") || $target.children().is(".icon-calendar, .icon-clock");
   }
 
   var
