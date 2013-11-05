@@ -320,7 +320,7 @@
                 // in case it is dynamic a value input should be existing
                 this._valueInput.val(event.selectedValue);
 
-                selected = event.selectedValue;
+                selected = "" + event.selectedValue;
             }
 
             this._button.trigger('focus');
@@ -355,8 +355,8 @@
      * @event
      *
      * @param {Object} event Event object
-     * @param {String} event.selectedValue value which was selected
-     * @param {String} event.displayedValue displayed text of the selected element
+     * @param {String|Array} event.selected value which was selected
+     * 
      */
 
 }(jQuery, this));
