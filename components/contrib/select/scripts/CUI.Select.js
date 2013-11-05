@@ -170,19 +170,33 @@
                             value: opt.value,
                             display: opt.text
                         });
+
+                        selected.push({
+                            value: opt.value,
+                            display: opt.text
+                        });
                     } else {
                         self._tagListWidget.removeItem(opt.value);
                     }
                 });
+
+
+                if (event) {
+                    this.$element.trigger($.Event('change', {
+                        selected: selected
+                    }));
+                }
             } else {
                 selected = self._select[0][self._select[0].selectedIndex];
 
                 self._button.text(selected.text);
 
-                this.$element.trigger($.Event('change', {
-                    value: selected.value,
-                    display: selected.text
-                }));
+                if (event) {
+                    this.$element.trigger($.Event('change', {
+                        value: selected.value,
+                        display: selected.text
+                    }));
+                }
             }
         },
 
