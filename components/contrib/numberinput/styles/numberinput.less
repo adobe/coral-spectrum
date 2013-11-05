@@ -93,8 +93,32 @@
     } 
   }
 
-  &.error,
-  &:invalid {
+  // invalid and error have to be separated
+  // the combined selector will break in IE 9
+  &:invalid  {
+
+    button,
+    input {
+      border-color: @textfield-error-border-color !important;
+    }
+
+    input {
+      color: @textfield-error-font-color !important;
+    }
+
+    input:focus {
+      .glow(6*@px, @textfield-error-border-color, @textfield-error-border-color);
+    }
+
+    button:before {
+      color: @textfield-error-font-color !important;
+      opacity: 1;
+    }
+  }
+
+
+  &.error {
+  //, &:invalid  {
 
     button,
     input {
