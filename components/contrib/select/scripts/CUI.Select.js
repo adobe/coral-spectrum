@@ -153,7 +153,14 @@
          * @private
          */
         _handleNativeSelect: function (event) {
-            var self = this;
+            var self = this,
+                selected = [];
+
+
+            // we stop the propagation because the component itself provides a change event too
+            if (event) {
+                event.stopPropagation();
+            }
 
             if (self.options.multiple) {
                 // loop over all options
@@ -168,12 +175,14 @@
                     }
                 });
             } else {
-                self._button.text(self._select[0][self._select[0].selectedIndex].text);
-            }
+                selected = self._select[0][self._select[0].selectedIndex];
 
-            // we stop the propagation because the component itself provides a change event too
-            if (event) {
-                event.stopPropagation();
+                self._button.text(selected.text);
+
+                this.$element.trigger($.Event('change', {
+                    value: selected.value,
+                    display: selected.text
+                }));
             }
         },
 
