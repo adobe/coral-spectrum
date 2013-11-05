@@ -9,7 +9,6 @@
   <script src="../../js/libs/handlebars.js"></script>
   <script src="../../js/libs/moment.js"></script>
   <script src="../../js/libs/jquery.js"></script>
-  <script src="../../js/libs/jquery-fingerpointer.js"></script>
   <script src="../../js/libs/jquery-message.js"></script>
   <script src="../../js/libs/jquery-validator.js"></script>
   <script src="../../js/libs/toe.js"></script>
@@ -70,14 +69,14 @@
     </div>
 
     <div>
-      <h4>TextArea - Tool Tip Below</h4>
-      <textarea class="error" value="Tooltip below"></textarea>
-      <span class="form-error" data-init="quicktip" data-quicktip-arrow="top" data-quicktip-type="error">Please correct your input!</span>
+      <h4>TextArea - Tool Tip Below - Small</h4>
+      <textarea class="field error" placeholder="tootip below"></textarea>
+      <span class="form-error small" data-init="quicktip" data-quicktip-arrow="top" data-quicktip-type="error">Please correct your input!</span>
     </div>
     <div>
-      <h4>TextArea - Tool Tip Right</h4>
-      <textarea class="error" value="Tooltip right"></textarea>
-      <span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error">Please correct your input!</span>
+      <h4>TextArea - Tool Tip Right - Small</h4>
+      <textarea class="error" placeholder="tootip right"></textarea>
+      <span class="form-error small" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error">Please correct your input!</span>
     </div>
 
     <div>
@@ -130,6 +129,99 @@
       <span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error">Please correct your input!</span>      
     </div>
   
+  </section>
+
+  <section>
+    
+    <p>Checking compatibility with fieldset</p>
+    
+    <form class="vertical" style="width: 500px;">
+      <section class="fieldset">
+        <h3 class="legend">Vertical Layout</h3>
+
+        <div class="fieldwrapper">
+          <label class="fieldlabel">Text</label>
+          <input class="field error" type="text" placeholder="Required" aria-required="true">
+          <span class="fielderror form-error" data-init="quicktip" data-quicktip-arrow="right" data-quicktip-type="error">Please correct your input!</span>
+        </div>
+
+        <div class="fieldwrapper">
+          <label class="fieldlabel">Textarea</label>
+          <textarea class="field error" rows="4">Not required, no placeholder</textarea>
+          <!-- TODO: both info and error won't layout right in vertical layout -->
+          <!-- span class="fieldinfo icon-info-circle small" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="top">Field Description</span -->
+          <span class="fielderror form-error" data-init="quicktip" data-quicktip-arrow="right" data-quicktip-type="error">Please correct your input!</span>
+        </div>
+
+        <div class="fieldwrapper">
+          <label class="fieldlabel">Textarea</label>
+          <textarea class="field error" placeholder="Required" rows="4" aria-required="true"></textarea>
+          <span class="fielderror form-error" data-init="quicktip" data-quicktip-arrow="right" data-quicktip-type="error">Please correct your input!</span>
+        </div>
+
+        <div class="fieldwrapper">
+          <label class="fieldlabel">Textarea</label>
+          <!-- TODO: In IE10 only, validation js will remove error class from below -->
+          <!-- this only happens if a 'placeholder' is added to the text area -->
+          <!-- note 'required' validation will compensate and added error border -->
+          <textarea class="field error" placeholder="Just Placeholder" rows="4"></textarea>
+          <span class="fielderror form-error" data-init="quicktip" data-quicktip-arrow="right" data-quicktip-type="error">Please correct your input!</span>
+        </div>
+
+        <div class="fieldwrapper">
+          <label class="fieldlabel">Number Input</label>
+          <div class="field numberinput error" data-init="numberinput">
+            <button type="button" class="decrement">decrement</button>
+            <input type="text">
+            <button type="button" class="increment">increment</button>
+          </div>
+          <span class="fielderror form-error" data-init="quicktip" data-quicktip-arrow="right" data-quicktip-type="error">Please correct your input!</span>
+        </div>
+      </section>
+    </form>
+    <form class="aligned" style="width: 500px;">
+      <section class="fieldset">
+        <h3 class="legend">This is Aligned Layout</h3>
+
+        <div class="fieldwrapper">
+          <label class="fieldlabel">Text</label>
+          <input class="field error" type="text" placeholder="Placeholder">
+          <span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error">Please correct your input!</span>      
+        </div>
+
+        <div class="fieldwrapper">
+          <label class="fieldlabel">Text</label>
+          <input class="field error" type="text" placeholder="Required" aria-required="true">
+          <span class="fieldinfo icon-info-circle small" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="top">Field Description</span>
+          <span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error">Please correct your input!</span>      
+        </div>
+
+        <div class="fieldwrapper">
+          <label class="fieldlabel">Text</label>
+          <input class="field error" type="text">
+          <span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error">Please correct your input!</span>      
+        </div>
+
+        <div class="fieldwrapper">
+          <label class="fieldlabel">Textarea</label>
+          <!-- TODO: In IE10 only, validation js will remove error class from below -->
+          <!-- this only happens if a 'placeholder' is added to the text area -->
+          <!-- note 'required' validation will compensate and added error border -->
+          <textarea class="error" placeholder="Placeholder" rows="4"></textarea>
+          <span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error">Please correct your input!</span>
+        </div>
+
+        <div class="fieldwrapper">
+          <label class="fieldlabel">Number Input</label>
+          <div class="field numberinput error" data-init="numberinput">
+            <button type="button" class="decrement">decrement</button>
+            <input type="text">
+            <button type="button" class="increment">increment</button>
+          </div>
+          <span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error">Please correct your input!</span>      
+        </div>
+      </section>
+    </form>
   </section>
 
   <section>

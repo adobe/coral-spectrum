@@ -61,9 +61,20 @@ input[type="time"] {
     box-shadow: none;
   }
   
-  &.error,
+  // invalid and error must be separated
+  // because the combined selector will break in IE9 :(
   &:invalid {
-    border-color: @textfield-error-border-color;
+    border-color: @textfield-error-border-color !important;
+    color: @textfield-error-font-color;
+
+    &:focus {
+      .glow(6*@px, @textfield-error-border-color, @textfield-error-border-color);
+      color: @textfield-error-font-color;
+    }
+  }  
+
+  &.error {
+    border-color: @textfield-error-border-color !important;
     color: @textfield-error-font-color;
 
     &:focus {
