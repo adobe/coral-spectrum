@@ -1,4 +1,3 @@
-/* jshint -W117 */
 (function ($) {
 
   // Instance id counter:
@@ -274,8 +273,6 @@
       }
 
       if (!this.options.disabled) {
-        $('body').on('click', this._bodyClickHandler.bind(this));
-        this.$popover.on('click', this._popoverClickHandler.bind(this));
         this.$element.on('click', this._clickHandler.bind(this));
         this.$input.on("change" + (IS_MOBILE_DEVICE ? " blur" : ""), this._inputChangedHandler.bind(this));
       }
@@ -334,30 +331,17 @@
     },
 
     _clickHandler: function (event) {
-      var $target = $(event.target);
-      if ($target.is(".icon-calendar, .icon-clock") || $target.children().is(".icon-calendar, .icon-clock")) {
-        this.pickerShown ?
-          this._hidePicker() :
+      if (isCalendarButton($(event.target))) {
+        if (this.pickerShown) {
+          this._hidePicker();
+        } else {
           this._openPicker();
+        }
       }
-
-      // let the event time to propagate.
-      // Do not use stopPropagation, as other Datepickers might want to use this event for closing their own datepicker
-      this.keepShown = true;
-      setTimeout(function () {
-        this.keepShown = false;
-      }.bind(this), 200);
     },
 
-    _popoverClickHandler: function (event) {
-      this.keepShown = true;
-      setTimeout(function () {
-        this.keepShown = false;
-      }.bind(this), 200);
-    },
-
-    _bodyClickHandler: function () {
-      if (this.keepShown === false) {
+    _bodyClickHandler: function (event) {
+      if (!isCalendarButton($(event.target))) {
         this._hidePicker();
       }
     },
@@ -399,29 +383,39 @@
     },
 
     _showPicker: function () {
-      if (this.options.isDateEnabled) {
-        this.popover.renderCalendar();
+      if (!this.pickerShown) {
+        this.boundBodyClickHandler = this._bodyClickHandler.bind(this);
+        $('body').on('click', this.boundBodyClickHandler);
+
+        if (this.options.isDateEnabled) {
+          this.popover.renderCalendar();
+        }
+
+        var left = this.$openButton.offset().left + this.$openButton.outerWidth() / 2 - (this.$popover.outerWidth() / 2);
+        var top = this.$openButton.offset().top + this.$openButton.outerHeight() + 16;
+
+        this.$popover.css({
+            "position": "absolute",
+            "left": left + "px",
+            "top": top + "px"}
+        ).show();
+
+        this.pickerShown = true;
       }
-
-      var left = this.$openButton.offset().left + this.$openButton.width() / 2 - (this.$popover.width() / 2);
-      var top = this.$openButton.offset().top + this.$openButton.outerHeight() + 16;
-
-      this.$popover.css({
-          "position": "absolute",
-          "left": left + "px",
-          "top": top + "px"}
-      ).show();
-
-      this.pickerShown = true;
     },
 
     _hidePicker: function () {
-      this.$element.removeClass("focus");
-      this.$input.parents().off('scroll', this._scrollParents);
-      if (this.$popover) {
-        this.$popover.hide();
+      if (this.pickerShown) {
+        $('body').off('click', this.boundBodyClickHandler);
+        this.boundBodyClickHandler = null;
+
+        this.$element.removeClass("focus");
+        this.$input.parents().off('scroll', this._scrollParents);
+        if (this.$popover) {
+          this.$popover.hide();
+        }
+        this.pickerShown = false;
       }
-      this.pickerShown = false;
     },
 
     /**
@@ -457,8 +451,6 @@
       // Always trigger a change event on the hidden input, since we're not listening to it internally
       this.$hiddenInput.trigger('change');
     }
-
-
   });
 
   CUI.Datepicker.monthNames = [
@@ -479,7 +471,6 @@
     });
   }
 
-
   /**
    * @private
    *
@@ -494,7 +485,8 @@
       this.$element = options.$element;
       this.options = options.options;
       this.setDateTimeCallback = options.setDateTimeCallback;
-      this._bindToElement();
+
+      this._setupListeners();
     },
 
     /**
@@ -522,12 +514,13 @@
      *
      * Register event handlers.
      */
-    _bindToElement: function () {
+    _setupListeners: function () {
 
       // Move around
       this.$element.find(".calendar").on("swipe", this._swipeHandler.bind(this));
       this.$element.on("mousedown", ".next-month", this._mouseDownNextHandler.bind(this));
       this.$element.on("mousedown", ".prev-month", this._mouseDownPrevHandler.bind(this));
+      this.$element.on("click", this._popOverClickHandler.bind(this));
 
       if (this.options.isTimeEnabled) {
         // for Desktop
@@ -567,6 +560,12 @@
       }
     },
 
+    _popOverClickHandler: function (event) {
+      // Make sure that clicks stay contained to the pop-up (for when a click
+      // reaches the body tag, the pop-up may get closed.
+      event.stopImmediatePropagation();
+    },
+
     _dropdownChangedHandler: function () {
       var hours = this._getHoursFromDropdown();
       var minutes = this._getMinutesFromDropdown();
@@ -574,7 +573,6 @@
         this.options.selectedDateTime = moment();
       }
       var date = this.options.selectedDateTime.hours(hours).minutes(minutes);
-      console.log("date:", date, hours, minutes);
       this.setDateTimeCallback(date);
     },
 
@@ -760,12 +758,10 @@
     },
 
     _getHoursFromDropdown: function () {
-      console.log(this.$element.find('.time .hour select'));
       return parseInt(this.$element.find('.time .hour select').val(), 10);
     },
 
     _getMinutesFromDropdown: function () {
-      console.log(this.$element.find('.time .minute select'));
       return parseInt(this.$element.find('.time .minute select').val(), 10);
     }
 
@@ -822,6 +818,10 @@
     if (d1 && d2) {
       return d1.year() === d2.year() && d1.month() === d2.month() && d1.date() === d2.date();
     }
+  }
+
+  function isCalendarButton($target) {
+    return $target.is(".icon-calendar, .icon-clock") || $target.children().is(".icon-calendar, .icon-clock");
   }
 
   var
