@@ -365,9 +365,6 @@
     },
 
     _openPicker: function () {
-      this.$element.addClass("focus");
-      this.$input.parents().on('scroll', this._scrollParents.bind(this));
-
       if (!this.options.useNativeControls) {
         this._readInputVal();
         this._showPicker();
@@ -376,12 +373,11 @@
       }
     },
 
-    _scrollParents: function (event) {
-      this._hidePicker();
-    },
-
     _showPicker: function () {
       if (!this.pickerShown) {
+
+        this.$element.addClass("focus");
+
         this.boundBodyClickHandler = this._bodyClickHandler.bind(this);
         $('body').on('click', this.boundBodyClickHandler);
 
@@ -404,14 +400,13 @@
 
     _hidePicker: function () {
       if (this.pickerShown) {
+
+        this.$element.removeClass("focus");
+
         $('body').off('click', this.boundBodyClickHandler);
         this.boundBodyClickHandler = null;
 
-        this.$element.removeClass("focus");
-        this.$input.parents().off('scroll', this._scrollParents);
-        if (this.$popover) {
-          this.$popover.hide();
-        }
+        this.$popover.hide();
         this.pickerShown = false;
       }
     },
