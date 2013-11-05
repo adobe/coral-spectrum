@@ -150,17 +150,12 @@
 
         /**
          * handles a native change event on the select
+         * @fires Select#selected
          * @private
          */
         _handleNativeSelect: function (event) {
             var self = this,
                 selected, selectedElem;
-
-
-            // we stop the propagation because the component itself provides a change event too
-            if (event) {
-                event.stopPropagation();
-            }
 
             if (self.options.multiple) {
                 // loop over all options
@@ -185,7 +180,7 @@
             }
 
             if (event) {
-                this.$element.trigger($.Event('change', {
+                this.$element.trigger($.Event('selected', {
                     selected: selected
                 }));
             }
@@ -296,11 +291,17 @@
 
         /**
          * handles a select of a SelectList widget
-         * @fires Select#change
+         * @fires Select#selected
          * @private
          */
         _handleSelected: function (event) {
             var selected;
+
+
+            // we stop the propagation because the component itself provides a selected event too
+            if (event) {
+                event.stopPropagation();
+            }
 
             this._selectListWidget.hide();
 
@@ -325,7 +326,7 @@
 
             this._button.trigger('focus');
 
-            this.$element.trigger($.Event('change', {
+            this.$element.trigger($.Event('selected', {
                 selected: selected
             }));
         },
@@ -351,7 +352,7 @@
     /**
      * Triggered when option was selected
      *
-     * @name CUI.Select#change
+     * @name CUI.Select#selected
      * @event
      *
      * @param {Object} event Event object
