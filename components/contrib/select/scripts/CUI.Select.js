@@ -150,10 +150,12 @@
 
         /**
          * handles a native change event on the select
+         * @fires Select#selected
          * @private
          */
         _handleNativeSelect: function (event) {
-            var self = this;
+            var self = this,
+                selected, selectedElem;
 
             if (self.options.multiple) {
                 // loop over all options
@@ -167,8 +169,20 @@
                         self._tagListWidget.removeItem(opt.value);
                     }
                 });
+
+                selected = self._tagListWidget.getValues();
             } else {
-                self._button.text(self._select[0][self._select[0].selectedIndex].text);
+                selectedElem = self._select[0][self._select[0].selectedIndex];
+
+                self._button.text(selectedElem.text);
+
+                selected = selectedElem.value;
+            }
+
+            if (event) {
+                this.$element.trigger($.Event('selected', {
+                    selected: selected
+                }));
             }
         },
 
@@ -277,9 +291,18 @@
 
         /**
          * handles a select of a SelectList widget
+         * @fires Select#selected
          * @private
          */
         _handleSelected: function (event) {
+            var selected;
+
+
+            // we stop the propagation because the component itself provides a selected event too
+            if (event) {
+                event.stopPropagation();
+            }
+
             this._selectListWidget.hide();
 
             // set select value
@@ -290,14 +313,22 @@
                     value: event.selectedValue,
                     display: event.displayedValue
                 });
+
+                selected = this._tagListWidget.getValues();
             } else {
                 // set the button label
                 this._button.text(event.displayedValue);
                 // in case it is dynamic a value input should be existing
                 this._valueInput.val(event.selectedValue);
+
+                selected = "" + event.selectedValue;
             }
 
             this._button.trigger('focus');
+
+            this.$element.trigger($.Event('selected', {
+                selected: selected
+            }));
         },
 
         /**
@@ -317,5 +348,16 @@
             $('[data-init~=select]', e.target).select();
         });
     }
+
+    /**
+     * Triggered when option was selected
+     *
+     * @name CUI.Select#selected
+     * @event
+     *
+     * @param {Object} event Event object
+     * @param {String|Array} event.selected value which was selected
+     * 
+     */
 
 }(jQuery, this));

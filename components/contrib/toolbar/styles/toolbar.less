@@ -14,6 +14,8 @@
 
   padding: @toolbar-padding;
   border-bottom: @px solid @toolbar-border-color;
+  // stops the toolbar from collapsing when empty (CUI-1205)
+  min-height: @toolbar-height - 2*@toolbar-padding;
 
   > * {
     margin: 0; // removes the margin of every component

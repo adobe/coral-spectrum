@@ -127,7 +127,7 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
 
         this.$input = this.$element.find('input').not("[type=hidden]");
         this.$hiddenInput = this.$element.find('input[type=hidden]');
-        this.$popover = $('body').find(".popover#"+this.guid);
+        this.$popover = $('body').find("#popguid" + this.guid + ".popover");
         this.$openButton = this.$element.find('button');
         
         this._updateState();
@@ -428,9 +428,9 @@ Additionally the type (date, time, datetime) is read from the &lt;input&gt; fiel
             if (this.$element.find("button").length === 0) {
                 this.$element.append("<button class=\"icon-calendar small\"><span>Datepicker</span></button>");
             }
-            if ( $('body').find(".popover#"+this.guid).length === 0) {
-                $('body').append('<div class="datepicker popover arrow-top" style="display:none" id ="' + this.guid + '"><div class="inner"></div></div>');
-                var $popover = $('body').find(".popover#"+this.guid);
+            if ( $('body').find("#popguid" + this.guid + ".popover").length === 0) {
+                $('body').append('<div class="datepicker popover arrow-top" style="display:none" id ="popguid' + this.guid + '"><div class="inner"></div></div>');
+                var $popover = $('body').find("#popguid" + this.guid + ".popover");
                 if(this._isDateEnabled()) {
                     $popover.find(".inner").append('<div class="calendar"><div class="calendar-header"></div><div class="calendar-body"></div></div>');
                 }

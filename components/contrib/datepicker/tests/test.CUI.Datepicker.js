@@ -56,7 +56,7 @@ describe('CUI.Datepicker', function() {
           
           it('should open a picker with configured day as first day of week', function() {
                 el.find("button").click();
-                expect($("body").find(".popover#2").find(".calendar-body table tr th:eq(0)").text()).to.equal("Tu");
+                expect($("body").find("#popguid2.popover").find(".calendar-body table tr th:eq(0)").text()).to.equal("Tu");
           });          
           
     });
@@ -69,7 +69,7 @@ describe('CUI.Datepicker', function() {
           
           it('should not have a calendar popup', function() {
                 el.find("button").click();
-                expect($("body").find(".popover#3").find(".calendar-body").length).to.equal(0);
+                expect($("body").find("#popguid3.popover").find(".calendar-body").length).to.equal(0);
           });
     });  
       

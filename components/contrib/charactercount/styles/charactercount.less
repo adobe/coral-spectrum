@@ -1,13 +1,21 @@
 .character-count {
   display: inline-block;
-  margin: 0.5rem 0.5rem;
+  
+  margin: 11*@px 8*@px;
+  // padding: 3*@px 0 0 0;
+  
   font-size: @base-font-size;
+  line-height: 16*@px;
+  
   .normal-text;
+
+  color: @font-secondary-color;
   
   &.negative {
     color: @textfield-error-font-color;
   }
 }
+
 .character-count-container {
   display: inline-block;
   vertical-align: top;
@@ -15,6 +23,6 @@
   .character-count {
     display: block;
     text-align: right;
-    margin: 0;
+    margin-top: 5*@px 0 0 0;
   }  
 }
