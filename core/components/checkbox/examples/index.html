@@ -285,6 +285,21 @@ $(':checkbox, input[role="checkbox"]').change(function () {
 </div>
 </form>
 </section>
+
+  <section class="theme-dark well">
+    <h2>theme-dark - Checked and unchecked checkboxes and radio buttons</h2>
+
+          <label><input type="checkbox" name="c1" checked><span>Checked</span></label><br>
+          <label><input type="checkbox" name="c2" ><span>Unchecked</span></label><br>
+          <label><input type="checkbox" name="c3" disabled="" ><span>Unchecked Disabled</span></label><br>
+          <label><input type="checkbox" name="c1" checked disabled=""><span>Checked Disabled</span></label><br>
+          <label><input type="radio" name="r1" checked=""><span>Radio Button Checked</span></label><br>
+          <label><input type="radio" name="r1"><span>Radio Button Unchecked</span></label><br>
+          <label><input type="radio" name="r1" disabled=""><span>Radio Button Unchecked Disabled</span></label><br>
+          <label><input type="radio" name="r2" checked="" disabled=""><span>Radio Button Checked Disabled</span></label><br>
+  </section>
+
+
 <script type="text/javascript">
   $('#some-checkbox').prop('indeterminate', true);
   $('#some-checkbox2').prop('indeterminate', true);
