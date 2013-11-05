@@ -154,7 +154,7 @@
          */
         _handleNativeSelect: function (event) {
             var self = this,
-                selected = [];
+                selected, selectedElem;
 
 
             // we stop the propagation because the component itself provides a change event too
@@ -175,23 +175,19 @@
                     }
                 });
 
-
-                if (event) {
-                    this.$element.trigger($.Event('change', {
-                        selected: selected
-                    }));
-                }
+                selected = self._tagListWidget.getValues();
             } else {
-                selected = self._select[0][self._select[0].selectedIndex];
+                selectedElem = self._select[0][self._select[0].selectedIndex];
 
-                self._button.text(selected.text);
+                self._button.text(selectedElem.text);
 
-                if (event) {
-                    this.$element.trigger($.Event('change', {
-                        value: selected.value,
-                        display: selected.text
-                    }));
-                }
+                selected = selectedElem.value;
+            }
+
+            if (event) {
+                this.$element.trigger($.Event('change', {
+                    selected: selected
+                }));
             }
         },
 
@@ -324,7 +320,7 @@
                 // in case it is dynamic a value input should be existing
                 this._valueInput.val(event.selectedValue);
 
-                selected = [event.selectedValue];
+                selected = event.selectedValue;
             }
 
             this._button.trigger('focus');
