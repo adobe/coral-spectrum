@@ -251,6 +251,10 @@
             $.each(items, function (i, item) {
                 self._appendItem(item);
             });
+        },
+
+        getValues: function () {
+            return this._existingValues.slice(0);
         }
     });
 
