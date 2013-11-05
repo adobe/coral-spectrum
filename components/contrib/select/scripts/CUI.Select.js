@@ -296,7 +296,7 @@
 
         /**
          * handles a select of a SelectList widget
-         * @fires Select#selected
+         * @fires Select#change
          * @private
          */
         _handleSelected: function (event) {
