@@ -1,339 +1,341 @@
 (function($) {
-  CUI.Slider = new Class(/** @lends CUI.Slider# */{
-    toString: 'Slider',
-    extend: CUI.Widget,
+    CUI.Slider = new Class(/** @lends CUI.Slider# */{
+        toString: 'Slider',
+        extend: CUI.Widget,
+        /**
+         * @extends CUI.Widget
+         * @classdesc <p><span id="slider-label">A slider widget</span></p>
+         *
+         *
+         * <div class="slider ticked filled tooltips" data-init="slider">
+         *      <input aria-labelledby="slider-label" type="range" value="14" min="10" max="20" step="2">
+         * </div>
+         * 
+         * <p>
+         * You should provide some information in the HTML markup, as this widget will read most of its options
+         * directly from the HTML elements:
+         * </p>
+         * 
+         * <ul>
+         *      <li>Current, min, max and step values are read from the input element</li>
+         *      <li>The toggles for tooltips, ticks, vertical orientation and filled bars are set if the CSS classes tooltips, ticked, vertical or filled are present</li>
+         *      <li>Use the attribute data-slide='true' to make handles slide smoothly. Use with care: This can make the slider unresponsive on some systems.</li>
+         * </ul>
+         * <p>
+         * As an alternative you can also directly create an instance of this widget with the class constructor CUI.Slider() or with the jQUery plugin $.slider().
+         * </p>
+         *
+         * @example
+         * <caption>Simple horizontal slider</caption>
+         * &lt;div class="slider" data-init="slider"&gt;
+         *      &lt;label&gt;
+         *          Horizontal Slider
+         *          &lt;input type="range" value="14" min="10" max="20" step="2"&gt;
+         *      &lt;/label&gt;
+         * &lt;/div&gt;
+         * 
+         * @example
+         * <caption>Full-featured slider with two handles, tooltips, ticks and a filled bar</caption>
+         * &lt;div class="slider tooltips ticked filled" data-init="slider"&gt;    
+         *      &lt;fieldset&gt;
+         *          &lt;legend&gt;Vertical Range Slider with Tooltips&lt;/legend&gt;
+         *          &lt;label&gt; Minimum value
+         *              &lt;input type="range" value="14" min="10" max="20" step="2"&gt;
+         *          &lt;/label&gt;
+         *          &lt;label&gt; Maximum value
+         *              &lt;input type="range" value="16" min="10" max="20" step="2"&gt;
+         *          &lt;/label&gt;
+         *     &lt;/fieldset&gt;
+         * &lt;/div&gt;
+         *
+         * @example
+         * <caption>Instantiate by jQuery plugin</caption>
+         * $(".slider-markupless").slider({
+         *      min: 0,
+         *      max: 100,
+         *      step: 5,
+         *      value: 50,
+         *      ticks: true,
+         *      filled: true,
+         *      orientation: "vertical",
+         *      tooltips: true,
+         *      slide: true
+         * });
+         * 
+         * @desc Creates a slider from a div
+         * @constructs
+         * 
+         * @param {Object}   options                               Component options
+         * @param {number} [options.step=1]  The steps to snap in
+         * @param {number} [options.min=1]   Minimum value
+         * @param {number} [options.max=100] Maximum value
+         * @param {number} [options.value=1] Starting value
+         * @param {number} [options.tooltips=false] Show tooltips?
+         * @param {String} [options.orientation=horizontal]  Either 'horizontal' or 'vertical'
+         * @param {boolean} [options.slide=false]    True for smooth sliding animations. Can make the slider unresponsive on some systems. 
+         * @param {boolean} [options.disabled=false] True for a disabled element
+         * @param {boolean} [options.bound=false] For multi-input sliders, indicates that the min value is bounded by the max value and the max value is bounded by the min
+         * 
+         */
+        construct: function(options) {
+            var that = this;
 
-    /**
-      @extends CUI.Widget
-      @classdesc <p><span id="slider-label">A slider widget</span></p>
+            // sane defaults for the options
+            that.options = $.extend({}, this.defaults, options);
 
-        <div class="slider ticked filled tooltips" data-init="slider">
-            <input aria-labelledby="slider-label" type="range" value="14" min="10" max="20" step="2">
-        </div>
-
-        <p>
-        You should provide some information in the HTML markup, as this widget will read most of its options
-        directly from the HTML elements:
-        </p>
-        <ul>
-            <li>Current, min, max and step values are read from the input element</li>
-            <li>The toggles for tooltips, ticks, vertical orientation and filled bars are set if the CSS classes tooltips, ticked, vertical or filled are present</li>
-            <li>Use the attribute data-slide='true' to make handles slide smoothly. Use with care: This can make the slider unresponsive on some systems.</li>
-        </ul>
-        <p>
-        As an alternative you can also directly create an instance of this widget with the class constructor CUI.Slider() or with the jQUery plugin $.slider().
-        </p>
-    @example
-    <caption>Simple horizontal slider</caption>
-    &lt;div class="slider" data-init="slider"&gt;
-        &lt;label&gt;
-            Horizontal Slider
-            &lt;input type="range" value="14" min="10" max="20" step="2"&gt;
-        &lt;/label&gt;
-    &lt;/div&gt;
-    @example
-    <caption>Full-featured slider with two handles, tooltips, ticks and a filled bar</caption>
-    &lt;div class="slider tooltips ticked filled" data-init="slider"&gt;    
-        &lt;fieldset&gt;
-            &lt;legend&gt;Vertical Range Slider with Tooltips&lt;/legend&gt;
-            &lt;label&gt;
-                Minimum value
-                &lt;input type="range" value="14" min="10" max="20" step="2"&gt;
-            &lt;/label&gt;
-            &lt;label&gt;
-                Maximum value
-                &lt;input type="range" value="16" min="10" max="20" step="2"&gt;
-            &lt;/label&gt;
-        &lt;/fieldset&gt;
-    &lt;/div&gt;
-
-    @example
-    <caption>Instantiate by jQuery plugin</caption>
-    $(".slider-markupless").slider({
-            min: 0,
-            max: 100,
-            step: 5,
-            value: 50,
-            ticks: true,
-            filled: true,
-            orientation: "vertical",
-            tooltips: true,
-            slide: true
-        });
-
-      @desc Creates a slider from a div
-      @constructs
-      
-      @param {Object}   options                               Component options
-      @param {number} [options.step=1]  The steps to snap in
-      @param {number} [options.min=1]   Minimum value
-      @param {number} [options.max=100] Maximum value
-      @param {number} [options.value=1] Starting value
-      @param {number} [options.tooltips=false] Show tooltips?
-      @param {String} [options.orientation=horizontal]  Either 'horizontal' or 'vertical'
-      @param {boolean} [options.slide=false]    True for smooth sliding animations. Can make the slider unresponsive on some systems. 
-      @param {boolean} [options.disabled=false] True for a disabled element
-      @param {boolean} [options.bound=false] For multi-input sliders, indicates that the min value is bounded by the max value and the max value is bounded by the min
-    **/
-    construct: function(options) {
-        var that = this;
-
-        // sane defaults for the options
-        that.options = $.extend({}, this.defaults, options);
-
-        // setting default dom attributes if needed
-        if (this.$element.hasClass('vertical')) {
-            that.options.orientation = 'vertical';
-            that.isVertical = true;
-        }
-
-        if(that.$element.hasClass('tooltips')) {
-            that.options.tooltips = true;
-        }
-
-        if(that.$element.hasClass('ticked')) {
-            that.options.ticks = true;
-        }
-
-        if(this.$element.hasClass('filled')) {
-            that.options.filled = true;
-        }
-
-        if (this.$element.data("slide")) {
-            that.options.slide = true;
-        }
-
-        if(this.$element.hasClass('bound')) {
-            that.options.bound = true;
-        }
-        
-        var elementId = this.$element.attr('id');
-        // if the element doesn't have an id, build a unique id using new Date().getTime()
-        if(!elementId) {
-            this.$element.attr("id","cui-slider-" + new Date().getTime());
-            elementId = this.$element.attr('id');
-        }
-                
-        this._renderMissingElements();
-
-        // sliders with two inputs should be contained within a fieldset to provide a label for the grouping
-        var $fieldset = that.$element.find("fieldset");
-        var $legend;
-        if ($fieldset.length) {
-            // move all fieldset children other than the legend to be children of the element.
-            that.$element.append($fieldset.contents(":not(legend)"));
-            
-            // create a new wrapper div with role="group" and class="sliderfieldset," which will behave as a fieldset but render as an inline block
-            var $newFieldset = $('<div role="group" class="sliderfieldset" />');
-                        
-            // wrap the element with the new "sliderfieldset" div
-            that.$element.wrap($newFieldset);
-
-            // get the first legend. there should only be one
-            $legend = $fieldset.find("legend").first();
-            if ($legend.length) {
-                // create new label element and append the contents of the legend
-                var $newLegend = $('<label/>').append($legend.contents());
-
-                // give the new label element all the same attributes as the legend
-                $.each($legend.prop("attributes"), function() {
-                    $newLegend.attr(this.name, this.value);
-                });
-                                
-                // if the new label/legend has no id, assign one.
-                if (!$newLegend.attr("id")) {
-                    $newLegend.attr("id", elementId + "-legend");
-                }
-                                
-                $newFieldset.attr("aria-labelledby", $newLegend.attr("id"));
-                                
-                // replace the original fieldset, which now only contains the original legend, with the new legend label element
-                $fieldset.replaceWith($newLegend);
-                                
-                // insert the new label/legend before the element
-                $legend = $newLegend.insertBefore(that.$element);        
+            // setting default dom attributes if needed
+            if (this.$element.hasClass('vertical')) {
+                that.options.orientation = 'vertical';
+                that.isVertical = true;
             }
-        }
 
-        that.$inputs = this.$element.find('input');
+            if(that.$element.hasClass('tooltips')) {
+                that.options.tooltips = true;
+            }
 
-        var values = [];
+            if(that.$element.hasClass('ticked')) {
+                that.options.ticks = true;
+            }
 
-        that.$inputs.each(function(index) {
-            var $this = $(this);
-            var thisId = $this.attr("id");
-            // if the input doesn't have an id, make one
-            if (!thisId) {
-                $this.attr("id",elementId+"-input"+index);
-                thisId = $this.attr("id");
+            if(this.$element.hasClass('filled')) {
+                that.options.filled = true;
+            }
+
+            if (this.$element.data("slide")) {
+                that.options.slide = true;
+            }
+
+            if(this.$element.hasClass('bound')) {
+                that.options.bound = true;
             }
             
-            if (!$this.attr("aria-labelledby")) {
-                $this.attr("aria-labelledby","");
+            var elementId = this.$element.attr('id');
+            // if the element doesn't have an id, build a unique id using new Date().getTime()
+            if(!elementId) {
+                this.$element.attr("id","cui-slider-" + new Date().getTime());
+                elementId = this.$element.attr('id');
             }
-            
-            // existing labels that use the "for" attribute to identify the input
-            var $label = that.$element.find("label[for='"+thisId+"']");
-            
-            // if we have a legend, the input should first be labelled by the legend
-            if ($legend) {
-                if($this.attr("aria-labelledby").indexOf($legend.attr("id"))===-1) {
-                    $this.attr("aria-labelledby", $legend.attr("id")+($this.attr("aria-labelledby").length ? " ":"")+$this.attr("aria-labelledby"));
-                }
-            }
-            
-            // for existing labels that use the "for" attribute to identify the input
-            if ($label.length) {
-                // the label is not the inputs parent, move it before the slider element tag
-                $label.not($this.parent()).insertBefore(that.$element);
-                $label.each(function(index) {
-                    // if the label doesn't have an id, create one
-                    if (!$(this).attr("id")) {
-                        $(this).attr("id",thisId+"-label"+index);
-                    }
                     
-                    // explicity identify the input's label
-                    if($this.attr("aria-labelledby").indexOf(thisId+"-label"+index)===-1) {
-                        $this.attr("aria-labelledby", ($this.attr("aria-labelledby").length ? " ":"")+thisId+"-label"+index);
+            this._renderMissingElements();
+
+            // sliders with two inputs should be contained within a fieldset to provide a label for the grouping
+            var $fieldset = that.$element.find("fieldset");
+            var $legend;
+            if ($fieldset.length) {
+                // move all fieldset children other than the legend to be children of the element.
+                that.$element.append($fieldset.contents(":not(legend)"));
+                
+                // create a new wrapper div with role="group" and class="sliderfieldset," which will behave as a fieldset but render as an inline block
+                var $newFieldset = $('<div role="group" class="sliderfieldset" />');
+                            
+                // wrap the element with the new "sliderfieldset" div
+                that.$element.wrap($newFieldset);
+
+                // get the first legend. there should only be one
+                $legend = $fieldset.find("legend").first();
+                if ($legend.length) {
+                    // create new label element and append the contents of the legend
+                    var $newLegend = $('<label/>').append($legend.contents());
+
+                    // give the new label element all the same attributes as the legend
+                    $.each($legend.prop("attributes"), function() {
+                        $newLegend.attr(this.name, this.value);
+                    });
+                                    
+                    // if the new label/legend has no id, assign one.
+                    if (!$newLegend.attr("id")) {
+                        $newLegend.attr("id", elementId + "-legend");
                     }
-                    
-                    if (!CUI.util.isTouch)
-                    {
-                        $(this).fipo("touchstart", "mousedown", function(event) {
-                            that.$handles.eq(index).focus();
-                        }.bind(this));
-                    }
-                });
+                                    
+                    $newFieldset.attr("aria-labelledby", $newLegend.attr("id"));
+                                    
+                    // replace the original fieldset, which now only contains the original legend, with the new legend label element
+                    $fieldset.replaceWith($newLegend);
+                                    
+                    // insert the new label/legend before the element
+                    $legend = $newLegend.insertBefore(that.$element);        
+                }
             }
-            
-            // if the input is contained by a label
-            if ($this.parent().is("label")) {
-                $label = $this.parent();
 
-                // make sure it has an id
-                if (!$label.attr("id")) {
-                    $label.attr("id",thisId+"-label");
+            that.$inputs = this.$element.find('input');
+
+            var values = [];
+
+            that.$inputs.each(function(index) {
+                var $this = $(this);
+                var thisId = $this.attr("id");
+                // if the input doesn't have an id, make one
+                if (!thisId) {
+                    $this.attr("id",elementId+"-input"+index);
+                    thisId = $this.attr("id");
                 }
                 
-                // make sure it explicitly identifies the input it labels
-                if (!$label.attr("for")) {
-                    $label.attr("for",thisId);
+                if (!$this.attr("aria-labelledby")) {
+                    $this.attr("aria-labelledby","");
                 }
-
-                // move the input after the label
-                $this.insertAfter($label);
                 
-                // if there is a legend, this is a two thumb slider; internal labels identify the minimum and maximum, and they should have the class="hidden-accessible" 
+                // existing labels that use the "for" attribute to identify the input
+                var $label = that.$element.find("label[for='"+thisId+"']");
+                
+                // if we have a legend, the input should first be labelled by the legend
                 if ($legend) {
-                    $label.addClass("hidden-accessible");
-                }
-                
-                // move the label outside the slider element tag
-                $label.insertBefore(that.$element);
-            }
-            
-            // if the input has a label and it is not included in the aria-labelledby attribute, add the label id to the "aria-labelledby" attribute
-            if ($label.length && $this.attr("aria-labelledby").indexOf($label.attr("id"))===-1)
-            {
-                $this.attr("aria-labelledby", $this.attr("aria-labelledby")+($this.attr("aria-labelledby").length ? " ":"")+$label.attr("id"));
-            }
-            
-            if ($label.length===0 && $this.attr("aria-labelledby").length>0)
-            {
-                $label = $("#"+$this.attr("aria-labelledby").split(" ")[0]);
-            }
-            
-            if ($this.attr("aria-labelledby").length===0)
-            {
-                $this.removeAttr("aria-labelledby");
-            }
-
-            // setting default step
-            if (!$this.is("[step]")) $this.attr('step', that.options.step);
-
-            // setting default min
-            if (!$this.is("[min]")) $this.attr('min', that.options.min);
-
-            // setting default max
-            if (!$this.is("[max]")) $this.attr('max', that.options.max);
-
-            // setting default value
-            if (!$this.is("[value]")) {
-                $this.attr({'value':that.options.value,'aria-valuetext':that.options.valuetextFormatter(that.options.value)});
-                values.push(that.options.value);
-            } else {
-                values.push($this.attr('value'));
-            }
-
-            if(index === 0) {
-                if($this.is(":disabled")) {
-                    that.options.disabled = true;
-                    that.$element.addClass("disabled");
-                } else {
-                    if(that.options.disabled) {
-                        $this.attr("disabled","disabled");
-                        that.$element.addClass("disabled");
+                    if($this.attr("aria-labelledby").indexOf($legend.attr("id"))===-1) {
+                        $this.attr("aria-labelledby", $legend.attr("id")+($this.attr("aria-labelledby").length ? " ":"")+$this.attr("aria-labelledby"));
                     }
                 }
-            }            
-            
-            if (CUI.util.isTouch)
-            {
-                // handle input value changes 
-                $this.on("change", function(event) {
-                    if (that.options.disabled) return;
-                    if ($this.val()===that.values[index]) return;
-                    that.setValue($this.val(), index);
-                }.bind(this));
                 
-                // On mobile devices, the input receives focus; listen for focus and blur events, so that the parent style updates appropriately.
-                $this.on("focus", function(event) {
-                    that._focus(event);
-                }.bind(this));
+                // for existing labels that use the "for" attribute to identify the input
+                if ($label.length) {
+                    // the label is not the inputs parent, move it before the slider element tag
+                    $label.not($this.parent()).insertBefore(that.$element);
+                    $label.each(function(index) {
+                        // if the label doesn't have an id, create one
+                        if (!$(this).attr("id")) {
+                            $(this).attr("id",thisId+"-label"+index);
+                        }
+                        
+                        // explicity identify the input's label
+                        if($this.attr("aria-labelledby").indexOf(thisId+"-label"+index)===-1) {
+                            $this.attr("aria-labelledby", ($this.attr("aria-labelledby").length ? " ":"")+thisId+"-label"+index);
+                        }
+                        
+                        if (!CUI.util.isTouch)
+                        {
+                            $(this).fipo("touchstart", "mousedown", function(event) {
+                                that.$handles.eq(index).focus();
+                            }.bind(this));
+                        }
+                    });
+                }
+                
+                // if the input is contained by a label
+                if ($this.parent().is("label")) {
+                    $label = $this.parent();
 
-                $this.on("blur", function(event) {
-                    that._blur(event);
-                }.bind(this));
-            } else {
-                // on desktop, we don't want the input to receive focus
-                $this.attr({"aria-hidden":true,"tabindex":-1,"hidden":"hidden"});
-                
-                if (index===0) {
-                    if ($label) {
-                        $label.on("click", function(event) {
-                           if (that.options.disabled) return;
-                           that._clickLabel(event);
-                        }.bind(this));
+                    // make sure it has an id
+                    if (!$label.attr("id")) {
+                        $label.attr("id",thisId+"-label");
                     }
                     
+                    // make sure it explicitly identifies the input it labels
+                    if (!$label.attr("for")) {
+                        $label.attr("for",thisId);
+                    }
+
+                    // move the input after the label
+                    $this.insertAfter($label);
+                    
+                    // if there is a legend, this is a two thumb slider; internal labels identify the minimum and maximum, and they should have the class="hidden-accessible" 
                     if ($legend) {
-                        $legend.on("click", function(event) {
-                            if (that.options.disabled) return;
-                            that._clickLabel(event);
-                        }.bind(this));
+                        $label.addClass("hidden-accessible");
+                    }
+                    
+                    // move the label outside the slider element tag
+                    $label.insertBefore(that.$element);
+                }
+                
+                // if the input has a label and it is not included in the aria-labelledby attribute, add the label id to the "aria-labelledby" attribute
+                if ($label.length && $this.attr("aria-labelledby").indexOf($label.attr("id"))===-1)
+                {
+                    $this.attr("aria-labelledby", $this.attr("aria-labelledby")+($this.attr("aria-labelledby").length ? " ":"")+$label.attr("id"));
+                }
+                
+                if ($label.length===0 && $this.attr("aria-labelledby").length>0)
+                {
+                    $label = $("#"+$this.attr("aria-labelledby").split(" ")[0]);
+                }
+                
+                if ($this.attr("aria-labelledby").length===0)
+                {
+                    $this.removeAttr("aria-labelledby");
+                }
+
+                // setting default step
+                if (!$this.is("[step]")) $this.attr('step', that.options.step);
+
+                // setting default min
+                if (!$this.is("[min]")) $this.attr('min', that.options.min);
+
+                // setting default max
+                if (!$this.is("[max]")) $this.attr('max', that.options.max);
+
+                // setting default value
+                if (!$this.is("[value]")) {
+                    $this.attr({'value':that.options.value,'aria-valuetext':that.options.valuetextFormatter(that.options.value)});
+                    values.push(that.options.value);
+                } else {
+                    values.push($this.attr('value'));
+                }
+
+                if(index === 0) {
+                    if($this.is(":disabled")) {
+                        that.options.disabled = true;
+                        that.$element.addClass("disabled");
+                    } else {
+                        if(that.options.disabled) {
+                            $this.attr("disabled","disabled");
+                            that.$element.addClass("disabled");
+                        }
+                    }
+                }            
+                
+                if (CUI.util.isTouch)
+                {
+                    // handle input value changes 
+                    $this.on("change", function(event) {
+                        if (that.options.disabled) return;
+                        if ($this.val()===that.values[index]) return;
+                        that.setValue($this.val(), index);
+                    }.bind(this));
+                    
+                    // On mobile devices, the input receives focus; listen for focus and blur events, so that the parent style updates appropriately.
+                    $this.on("focus", function(event) {
+                        that._focus(event);
+                    }.bind(this));
+
+                    $this.on("blur", function(event) {
+                        that._blur(event);
+                    }.bind(this));
+                } else {
+                    // on desktop, we don't want the input to receive focus
+                    $this.attr({"aria-hidden":true,"tabindex":-1,"hidden":"hidden"});
+                    
+                    if (index===0) {
+                        if ($label) {
+                            $label.on("click", function(event) {
+                               if (that.options.disabled) return;
+                               that._clickLabel(event);
+                            }.bind(this));
+                        }
+                        
+                        if ($legend) {
+                            $legend.on("click", function(event) {
+                                if (that.options.disabled) return;
+                                that._clickLabel(event);
+                            }.bind(this));
+                        }
                     }
                 }
-            }
-        });
+            });
 
-        that.values = values;
-        if (this.options.orientation === 'vertical') this.isVertical = true;
-        
-        // Set up event handling
-        this.$element.fipo("touchstart", "mousedown", function(event) {
-            this._mouseDown(event);
-        }.bind(this));
+            that.values = values;
+            if (this.options.orientation === 'vertical') this.isVertical = true;
+            
+            // Set up event handling
+            this.$element.fipo("touchstart", "mousedown", function(event) {
+                this._mouseDown(event);
+            }.bind(this));
 
-        // Listen to changes to configuration
-        this.$element.on('change:value', this._processValueChanged.bind(this));
-        this.$element.on('change:disabled', this._processDisabledChanged.bind(this));      
-        this.$element.on('change:min', this._processMinMaxStepChanged.bind(this));      
-        this.$element.on('change:max', this._processMinMaxStepChanged.bind(this));      
-        this.$element.on('change:step', this._processMinMaxStepChanged.bind(this));
-                              
-        // Adjust dom to our needs
-        this._render();
-    },
+            // Listen to changes to configuration
+            this.$element.on('change:value', this._processValueChanged.bind(this));
+            this.$element.on('change:disabled', this._processDisabledChanged.bind(this));      
+            this.$element.on('change:min', this._processMinMaxStepChanged.bind(this));      
+            this.$element.on('change:max', this._processMinMaxStepChanged.bind(this));      
+            this.$element.on('change:step', this._processMinMaxStepChanged.bind(this));
+                                  
+            // Adjust dom to our needs
+            this._render();
+        }, // construct
     
     defaults: {
       step: '1',
