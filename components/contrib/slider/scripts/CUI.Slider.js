@@ -84,7 +84,9 @@
                 elementId = this.$element.attr('id'),
                 // sliders with two inputs should be contained within a fieldset to provide a label for the grouping
                 fieldset = this.$element.children('fieldset'),
-                legend = fieldset.children('legend');
+                legend = fieldset.children('legend'),
+
+                values = [];
 
             // reads the options from markup
             this._readOptions();
@@ -128,7 +130,7 @@
                         this._grouplegend.attr('id', elementId + '-legend');
                     }
 
-                    this._group.attr("aria-labelledby", this._grouplegend.attr('id'));
+                    this._group.attr('aria-labelledby', this._grouplegend.attr('id'));
 
                     // replace the original fieldset, which now only contains the original legend, with the new legend label element
                     fieldset.replaceWith(this._grouplegend);
@@ -138,167 +140,161 @@
                 }
             }
 
-            
+            // get all input value fields
+            this.$inputs = this.$element.find('input');
 
-            that.$inputs = this.$element.find('input');
+            this.$inputs.each(function (index) {
 
-            var values = [];
-
-            that.$inputs.each(function(index) {
-                var $this = $(this);
-                var thisId = $this.attr("id");
-            // if the input doesn't have an id, make one
-            if (!thisId) {
-                $this.attr("id",elementId+"-input"+index);
-                thisId = $this.attr("id");
-            }
-
-            if (!$this.attr("aria-labelledby")) {
-                $this.attr("aria-labelledby","");
-            }
-
-            // existing labels that use the "for" attribute to identify the input
-            var $label = that.$element.find("label[for='"+thisId+"']");
-
-            // if we have a legend, the input should first be labelled by the legend
-            if ($legend) {
-                if($this.attr("aria-labelledby").indexOf($legend.attr("id"))===-1) {
-                    $this.attr("aria-labelledby", $legend.attr("id")+($this.attr("aria-labelledby").length ? " ":"")+$this.attr("aria-labelledby"));
+                var $this = $(this),
+                    thisId = $this.attr('id');
+                
+                // if the input doesn't have an id, make one
+                if (!thisId) {
+                    $this.attr('id', elementId + "-input" + index);
+                    thisId = $this.attr("id");
                 }
-            }
 
-            // for existing labels that use the "for" attribute to identify the input
-            if ($label.length) {
-            // the label is not the inputs parent, move it before the slider element tag
-            $label.not($this.parent()).insertBefore(that.$element);
-            $label.each(function(index) {
-            // if the label doesn't have an id, create one
-            if (!$(this).attr("id")) {
-                $(this).attr("id",thisId+"-label"+index);
-            }
+                if (!$this.attr("aria-labelledby")) {
+                    $this.attr("aria-labelledby","");
+                }
 
-            // explicity identify the input's label
-            if($this.attr("aria-labelledby").indexOf(thisId+"-label"+index)===-1) {
-                $this.attr("aria-labelledby", ($this.attr("aria-labelledby").length ? " ":"")+thisId+"-label"+index);
-            }
+                // existing labels that use the "for" attribute to identify the input
+                var $label = that.$element.find('label[for="'+ thisId +'"]');
 
-            if (!CUI.util.isTouch)
-            {
-                $(this).fipo("touchstart", "mousedown", function(event) {
-                    that.$handles.eq(index).focus();
-                }.bind(this));
-            }
-            });
-            }
-
-            // if the input is contained by a label
-            if ($this.parent().is("label")) {
-                $label = $this.parent();
-
-            // make sure it has an id
-            if (!$label.attr("id")) {
-                $label.attr("id",thisId+"-label");
-            }
-
-            // make sure it explicitly identifies the input it labels
-            if (!$label.attr("for")) {
-                $label.attr("for",thisId);
-            }
-
-            // move the input after the label
-            $this.insertAfter($label);
-
-            // if there is a legend, this is a two thumb slider; internal labels identify the minimum and maximum, and they should have the class="hidden-accessible" 
-            if ($legend) {
-                $label.addClass("hidden-accessible");
-            }
-
-            // move the label outside the slider element tag
-            $label.insertBefore(that.$element);
-            }
-
-            // if the input has a label and it is not included in the aria-labelledby attribute, add the label id to the "aria-labelledby" attribute
-            if ($label.length && $this.attr("aria-labelledby").indexOf($label.attr("id"))===-1)
-            {
-                $this.attr("aria-labelledby", $this.attr("aria-labelledby")+($this.attr("aria-labelledby").length ? " ":"")+$label.attr("id"));
-            }
-
-            if ($label.length===0 && $this.attr("aria-labelledby").length>0)
-            {
-                $label = $("#"+$this.attr("aria-labelledby").split(" ")[0]);
-            }
-
-            if ($this.attr("aria-labelledby").length===0)
-            {
-                $this.removeAttr("aria-labelledby");
-            }
-
-            // setting default step
-            if (!$this.is("[step]")) $this.attr('step', that.options.step);
-
-            // setting default min
-            if (!$this.is("[min]")) $this.attr('min', that.options.min);
-
-            // setting default max
-            if (!$this.is("[max]")) $this.attr('max', that.options.max);
-
-            // setting default value
-            if (!$this.is("[value]")) {
-                $this.attr({'value':that.options.value,'aria-valuetext':that.options.valuetextFormatter(that.options.value)});
-                values.push(that.options.value);
-            } else {
-                values.push($this.attr('value'));
-            }
-
-            if(index === 0) {
-                if($this.is(":disabled")) {
-                    that.options.disabled = true;
-                    that.$element.addClass("disabled");
-                } else {
-                    if(that.options.disabled) {
-                        $this.attr("disabled","disabled");
-                        that.$element.addClass("disabled");
+                // if we have a legend, the input should first be labelled by the legend
+                if (legend) {
+                    if($this.attr("aria-labelledby").indexOf(legend.attr("id"))===-1) {
+                        $this.attr("aria-labelledby", legend.attr("id")+($this.attr("aria-labelledby").length ? " ":"")+$this.attr("aria-labelledby"));
                     }
                 }
-            }            
 
-            if (CUI.util.isTouch)
-            {
-            // handle input value changes 
-            $this.on("change", function(event) {
-                if (that.options.disabled) return;
-                if ($this.val()===that.values[index]) return;
-                that.setValue($this.val(), index);
-            }.bind(this));
+                // for existing labels that use the "for" attribute to identify the input
+                if ($label.length > 0) {
+                    // the label is not the inputs parent, move it before the slider element tag
+                    $label.not($this.parent()).insertBefore(that.$element);
+                    $label.each(function(index) {
+                        // if the label doesn't have an id, create one
+                        if (!$(this).attr("id")) {
+                            $(this).attr("id",thisId+"-label"+index);
+                        }
 
-            // On mobile devices, the input receives focus; listen for focus and blur events, so that the parent style updates appropriately.
-            $this.on("focus", function(event) {
-                that._focus(event);
-            }.bind(this));
+                        // explicity identify the input's label
+                        if ($this.attr("aria-labelledby").indexOf(thisId+"-label"+index)===-1) {
+                            $this.attr("aria-labelledby", ($this.attr("aria-labelledby").length ? " ":"")+thisId+"-label"+index);
+                        }
 
-            $this.on("blur", function(event) {
-                that._blur(event);
-            }.bind(this));
-            } else {
-            // on desktop, we don't want the input to receive focus
-            $this.attr({"aria-hidden":true,"tabindex":-1,"hidden":"hidden"});
-
-            if (index===0) {
-                if ($label) {
-                    $label.on("click", function(event) {
-                        if (that.options.disabled) return;
-                        that._clickLabel(event);
-                    }.bind(this));
+                        if (!CUI.util.isTouch) {
+                            $(this).fipo("touchstart", "mousedown", function(event) {
+                                that.$handles.eq(index).focus();
+                            }.bind(this));
+                        }
+                    });
                 }
 
-                if ($legend) {
-                    $legend.on("click", function(event) {
-                        if (that.options.disabled) return;
-                        that._clickLabel(event);
-                    }.bind(this));
+                // if the input is contained by a label
+                if ($this.parent().is("label")) {
+                    $label = $this.parent();
+
+                    // make sure it has an id
+                    if (!$label.attr("id")) {
+                        $label.attr("id",thisId+"-label");
+                    }
+
+                    // make sure it explicitly identifies the input it labels
+                    if (!$label.attr("for")) {
+                        $label.attr("for",thisId);
+                    }
+
+                    // move the input after the label
+                    $this.insertAfter($label);
+
+                    // if there is a legend, this is a two thumb slider; internal labels identify the minimum and maximum, and they should have the class="hidden-accessible" 
+                    if (legend) {
+                        $label.addClass("hidden-accessible");
+                    }
+
+                    // move the label outside the slider element tag
+                    $label.insertBefore(that.$element);
                 }
-            }
-            }
+
+                // if the input has a label and it is not included in the aria-labelledby attribute, add the label id to the "aria-labelledby" attribute
+                if ($label.length && $this.attr("aria-labelledby").indexOf($label.attr("id"))===-1) {
+                    $this.attr("aria-labelledby", $this.attr("aria-labelledby")+($this.attr("aria-labelledby").length ? " ":"")+$label.attr("id"));
+                }
+
+                if ($label.length===0 && $this.attr("aria-labelledby").length>0) {
+                    $label = $("#"+$this.attr("aria-labelledby").split(" ")[0]);
+                }
+
+                if ($this.attr("aria-labelledby").length===0) {
+                    $this.removeAttr("aria-labelledby");
+                }
+
+                // setting default step
+                if (!$this.is("[step]")) $this.attr('step', that.options.step);
+
+                // setting default min
+                if (!$this.is("[min]")) $this.attr('min', that.options.min);
+
+                // setting default max
+                if (!$this.is("[max]")) $this.attr('max', that.options.max);
+
+                // setting default value
+                if (!$this.is("[value]")) {
+                    $this.attr({'value':that.options.value,'aria-valuetext':that.options.valuetextFormatter(that.options.value)});
+                    values.push(that.options.value);
+                } else {
+                    values.push($this.attr('value'));
+                }
+
+                if(index === 0) {
+                    if($this.is(":disabled")) {
+                        that.options.disabled = true;
+                        that.$element.addClass("disabled");
+                    } else {
+                        if(that.options.disabled) {
+                            $this.attr("disabled","disabled");
+                            that.$element.addClass("disabled");
+                        }
+                    }
+                }            
+
+                if (CUI.util.isTouch) {
+                    // handle input value changes 
+                    $this.on("change", function(event) {
+                        if (that.options.disabled) return;
+                        if ($this.val()===that.values[index]) return;
+                        that.setValue($this.val(), index);
+                    }.bind(this));
+
+                    // On mobile devices, the input receives focus; listen for focus and blur events, so that the parent style updates appropriately.
+                    $this.on("focus", function(event) {
+                        that._focus(event);
+                    }.bind(this));
+
+                    $this.on("blur", function(event) {
+                        that._blur(event);
+                    }.bind(this));
+                } else {
+                    // on desktop, we don't want the input to receive focus
+                    $this.attr({"aria-hidden":true,"tabindex":-1,"hidden":"hidden"});
+
+                    if (index===0) {
+                        if ($label) {
+                            $label.on("click", function(event) {
+                                if (that.options.disabled) return;
+                                that._clickLabel(event);
+                            }.bind(this));
+                        }
+
+                        if (legend) {
+                            legend.on("click", function(event) {
+                                if (that.options.disabled) return;
+                                that._clickLabel(event);
+                            }.bind(this));
+                        }
+                    }
+                }
             });
 
             that.values = values;
@@ -336,14 +332,14 @@
             bound: false
         },
 
-    values: [],
-    $inputs: null,
-    $ticks: null,
-    $fill: null,
-    $handles: null,
-    $tooltips: null,
-    isVertical: false,
-    draggingPosition: -1,
+        values: [],
+        $inputs: null,
+        $ticks: null,
+        $fill: null,
+        $handles: null,
+        $tooltips: null,
+        isVertical: false,
+        draggingPosition: -1,
 
         /**
          * reads the options from the markup (classes)
@@ -700,24 +696,24 @@
         if (this.options.disabled) return false;
         var that = this,
             $this = $(event.target),
-			$value = $this.closest(".value"),
-			$handle = $value.find(".handle");
-		if (!$handle.data("mousedown")) {
+            $value = $this.closest(".value"),
+            $handle = $value.find(".handle");
+        if (!$handle.data("mousedown")) {
             that.$element.addClass("focus");
             $value.addClass("focus");
-			$handle.addClass("focus");
-		}
+            $handle.addClass("focus");
+        }
     },
 
     _blur: function(event) {
         if (this.options.disabled) return false;
         var that = this,
         $this = $(event.target),
-		$value = $this.closest(".value"),
-		$handle = $value.find(".handle");
+        $value = $this.closest(".value"),
+        $handle = $value.find(".handle");
         that.$element.removeClass("focus");
-		$value.removeClass("focus");
-		$handle.removeClass("focus").removeData("mousedown");
+        $value.removeClass("focus");
+        $handle.removeClass("focus").removeData("mousedown");
     },
     
     _keyDown: function(event) {
@@ -731,10 +727,10 @@
             minimum = Number(that.options.min),
             maximum = Number(that.options.max),
             page = Math.max(step,Math.round((maximum-minimum)/10));
-		
-		$this.removeData("mousedown");
-		that._focus(event);
-		
+        
+        $this.removeData("mousedown");
+        that._focus(event);
+        
         switch(event.keyCode) {
             case 40:
             case 37:
