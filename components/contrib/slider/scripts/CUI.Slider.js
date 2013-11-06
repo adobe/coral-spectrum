@@ -80,57 +80,65 @@
          * 
          */
         construct: function () {
-            var that = this;
+            var that = this,
+                elementId = this.$element.attr('id'),
+                // sliders with two inputs should be contained within a fieldset to provide a label for the grouping
+                fieldset = this.$element.children('fieldset'),
+                legend = fieldset.children('legend');
 
+            // reads the options from markup
             this._readOptions();
 
-            var elementId = this.$element.attr('id');
             // if the element doesn't have an id, build a unique id using new Date().getTime()
             if(!elementId) {
-                this.$element.attr("id","cui-slider-" + new Date().getTime());
-                elementId = this.$element.attr('id');
+                elementId = CUI.util.getNextId();
+                this.$element.attr('id', elementId);
             }
 
             this._renderMissingElements();
 
-            // sliders with two inputs should be contained within a fieldset to provide a label for the grouping
-            var $fieldset = that.$element.find("fieldset");
-            var $legend;
-            if ($fieldset.length) {
-            // move all fieldset children other than the legend to be children of the element.
-            that.$element.append($fieldset.contents(":not(legend)"));
+            // [~dantipa] 
+            // this block has to be optimized
+            // taking the content of fieldset and appending it somewhere else causes flashing
+            // future markup should be like the expected markup (breaking change)
+            if (fieldset.length > 0) {
+                // move all fieldset children other than the legend to be children of the element.
+                this.$element.append(fieldset.contents(":not(legend)"));
 
-            // create a new wrapper div with role="group" and class="sliderfieldset," which will behave as a fieldset but render as an inline block
-            var $newFieldset = $('<div role="group" class="sliderfieldset" />');
+                // create a new wrapper div with role="group" and class="sliderfieldset," which will behave as a fieldset but render as an inline block
+                this._group = $('<div/>', {
+                    'role': 'group',
+                    'class': 'sliderfieldset'
+                });
 
-            // wrap the element with the new "sliderfieldset" div
-            that.$element.wrap($newFieldset);
+                // wrap the element with the new "sliderfieldset" div
+                that.$element.wrap(this._group);
 
-            // get the first legend. there should only be one
-            $legend = $fieldset.find("legend").first();
-            if ($legend.length) {
-            // create new label element and append the contents of the legend
-            var $newLegend = $('<label/>').append($legend.contents());
+                if (legend.length > 0) {
+                    // create new label element and append the contents of the legend
+                    this._grouplegend = $('<label/>').append(legend.contents());
 
-            // give the new label element all the same attributes as the legend
-            $.each($legend.prop("attributes"), function() {
-                $newLegend.attr(this.name, this.value);
-            });
+                    // give the new label element all the same attributes as the legend
+                    $.each(legend.prop('attributes'), function () {
+                        that._grouplegend.attr(this.name, this.value);
+                    });
 
-            // if the new label/legend has no id, assign one.
-            if (!$newLegend.attr("id")) {
-                $newLegend.attr("id", elementId + "-legend");
+                    // if the new label/legend has no id, assign one.
+                    if (!this._grouplegend.attr('id')) {
+                        this._grouplegend.attr('id', elementId + '-legend');
+                    }
+
+                    this._group.attr("aria-labelledby", this._grouplegend.attr('id'));
+
+                    // replace the original fieldset, which now only contains the original legend, with the new legend label element
+                    fieldset.replaceWith(this._grouplegend);
+
+                    // insert the new label/legend before the element
+                    legend = this._grouplegend.insertBefore(this.$element);     
+                }
             }
 
-            $newFieldset.attr("aria-labelledby", $newLegend.attr("id"));
-
-            // replace the original fieldset, which now only contains the original legend, with the new legend label element
-            $fieldset.replaceWith($newLegend);
-
-            // insert the new label/legend before the element
-            $legend = $newLegend.insertBefore(that.$element);        
-            }
-            }
+            
 
             that.$inputs = this.$element.find('input');
 
@@ -339,6 +347,7 @@
 
         /**
          * reads the options from the markup (classes)
+         * TODO optimize
          * @private
          */
         _readOptions: function () {
