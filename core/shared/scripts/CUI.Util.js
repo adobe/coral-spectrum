@@ -19,7 +19,7 @@
      * meant to be used in case a id attribute is necessary but missing
      */
     getNextId: function () {
-      return 'cui-' + nextId++;
+      return 'coral-' + nextId++;
     },
 
     /**
