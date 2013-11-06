@@ -50,6 +50,7 @@
   text-decoration: none;
   text-rendering: geometricPrecision;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   line-height: 1.172;
   color: #000000;
   opacity: 0.65;
