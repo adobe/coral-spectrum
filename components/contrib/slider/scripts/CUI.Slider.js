@@ -1,7 +1,9 @@
-(function($) {
+(function ($, window, undefined) {
     CUI.Slider = new Class(/** @lends CUI.Slider# */{
         toString: 'Slider',
+
         extend: CUI.Widget,
+        
         /**
          * @extends CUI.Widget
          * @classdesc <p><span id="slider-label">A slider widget</span></p>
@@ -1018,7 +1020,7 @@
         $(".slider[data-init~='slider']", e.target).slider();
     });
   }
-}(window.jQuery));
+}(jQuery, this));
 
 
 /*
