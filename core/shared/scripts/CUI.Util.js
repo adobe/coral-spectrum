@@ -1,4 +1,7 @@
 (function ($, window, undefined) {
+
+  var nextId = 1;
+
   /**
    * Utility functions used by CoralUI widgets
    * @namespace
@@ -10,6 +13,14 @@
      * @type {Boolean}
      */
     isTouch: 'ontouchstart' in window,
+
+    /**
+     * delivers a unique id within Coral
+     * meant to be used in case a id attribute is necessary but missing
+     */
+    getNextId: function () {
+      return 'cui-' + nextId++;
+    },
 
     /**
      * Get the target element of a data API action using the data attributes of an element.
