@@ -1,5 +1,5 @@
 {
-  "name": "coralui-contrib-icons-base",
+  "name": "coralui-contrib-icons-fontgen",
   "version": "0.5.0-SNAPSHOT",
   "repository": {
     "type": "git",
@@ -10,9 +10,7 @@
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-clean": "~0.4.1",
-    "grunt-contrib-cssmin": "~0.6.1",
     "grunt-contrib-copy": "~0.4.1",
-    "grunt-contrib-less": "~0.5.2",
-    "bootstrap": "git+https://github.com/twbs/bootstrap.git#v2.3.2"
+    "grunt-webfont": "~0.1.4"
   }
 }

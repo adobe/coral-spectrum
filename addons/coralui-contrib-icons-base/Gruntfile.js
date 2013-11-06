@@ -18,7 +18,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-less');
-  grunt.loadNpmTasks('grunt-webfont');
 
   // Read in package.json
   var pkg = grunt.file.readJSON('package.json');
@@ -59,14 +58,22 @@ module.exports = function(grunt) {
             src: ['mixins.less', 'variables.less'],
             dest: '<%= dirs.temp %>/less/externals/bootstrap/'
           },
-          { // template for icon-browser
+          { // font
             expand: true,
-            cwd: '<%= dirs.tasks %>/fonttmpl/',
-            src: ['demo.html'],
-            dest: '<%= dirs.temp %>/htmlTemplate/'
-          }
+            filter: 'isFile',
+            cwd: '<%= dirs.modules %>/coralui-contrib-icons-fontgen/build/',
+            src: ['**'],
+            dest: '<%= dirs.temp %>/fontgen/'
+          },
+          { // font-less
+            expand: true,
+            filter: 'isFile',
+            cwd: '<%= dirs.modules %>/coralui-contrib-icons-fontgen/build/less/',
+            src: ['*.less'],
+            dest: '<%= dirs.temp %>/less/'
+          }          
         ]
-      },
+      },     
       build: {
         files: [
           {
@@ -86,7 +93,7 @@ module.exports = function(grunt) {
           {
             expand: true,
             flatten: true,
-            cwd: '<%= dirs.temp %>/less/',
+            cwd: '<%= dirs.temp %>/fontgen/less/',
             src: ['AdobeIcons.less'],
             dest: '<%= dirs.build %>/less',
             rename: function (dest, src) {
@@ -95,13 +102,19 @@ module.exports = function(grunt) {
           },
           {
             expand: true,
-            cwd: '<%= dirs.temp %>/less/',
+            cwd: '<%= dirs.temp %>/fontgen/html/',
             src: ['AdobeIcons.html'],
             dest: '<%= dirs.build %>/examples',
             rename: function (dest, src) {
               return dest + '/icon-browser.html';
             }
-          }
+          },
+          {
+            expand: true,
+            cwd: '<%= dirs.temp %>/fontgen/font/',
+            src: ['**'],
+            dest: '<%= dirs.build %>/res/icons'
+          }          
         ]
       }
     }, // copy
@@ -139,23 +152,7 @@ module.exports = function(grunt) {
         template: '<%= dirs.temp %>/htmlTemplate/icons_color.html',
         prefix: 'icon-'
       }
-    }, // icons
-
-    webfont: {
-      icons: {
-        src: '<%= dirs.source %>/icons/*.svg',
-        dest: '<%= dirs.build %>/res/icons',
-        destCss: '<%= dirs.temp %>/less',
-        options: {
-            font: 'AdobeIcons',
-            relativeFontPath: '@{icon-font-folder}/',
-            template: '<%= dirs.tasks %>/fonttmpl/coral.css',
-            htmlDemoTemplate: '<%= dirs.temp %>/htmlTemplate/demo.html',
-            htmlDemo: true,
-            stylesheet: 'less'
-        }
-      }
-    } // webfont
+    } // iconCSS
 
   });
   // end init config
@@ -163,9 +160,9 @@ module.exports = function(grunt) {
   // Default
   grunt.task.registerTask('default', [
     'clean',
+    'import-addon',
     'copy:standalone',
     'iconCSS',
-    'webfont',
     'less',
     'copy:build'
   ]);
