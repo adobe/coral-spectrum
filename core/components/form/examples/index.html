@@ -236,11 +236,19 @@ form.vertical .fieldwrapper .fielderror</pre>
         <label class="fieldlabel">Path Browser</label>
         <span class="field pathbrowser" data-init="pathbrowser"><input type="text"></span>
 
-        <label class="fieldlabel">Checkbox</label>
-        <label class="field checkboxfield"><input type="checkbox" checked><span>Checkbox</span></label>
+        <div class="fieldwrapper fieldwrapper-singleline">
+          <label class="field checkboxfield"><input type="checkbox" name="check" checked><span>Checkbox</span></label>
+          <span class="fieldinfo icon-info-circle small" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="left">Field Description</span>
+        </div>
+        <label class="field checkboxfield"><input type="checkbox" name="check" checked><span>Checkbox</span></label>
+        <label class="field checkboxfield"><input type="checkbox" name="check" checked><span>Checkbox</span></label>
 
-        <label class="fieldlabel">Radio</label>
-        <label class="field radiofield"><input type="radio" checked><span>Radio</span></label>
+        <div class="fieldwrapper fieldwrapper-singleline">
+          <label class="field radiofield"><input type="radio" name="radio" checked><span>Radio</span></label>
+          <span class="fieldinfo icon-info-circle small" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="left">Field Description</span>
+        </div>
+        <label class="field radiofield"><input type="radio" name="radio" checked><span>Radio</span></label>
+        <label class="field radiofield"><input type="radio" name="radio" checked><span>Radio</span></label>
 
         <label class="fieldlabel">Radio-group with horizontal layout </label>
         <div class="field radio-group horizontal">
@@ -314,6 +322,7 @@ form.aligned .fieldwrapper .fielderror</pre>
           <label class="fieldlabel">Text</label>
           <input class="field" type="text" placeholder="Required" aria-required="true">
           <span class="fieldinfo icon-info-circle small" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="top">Field Description</span>
+          <div class="tooltip hidden info arrow-top" style="position: absolute; left: 277.667px; top: 10165.3px;">Field Description</div>
         </div>
 
         <div class="fieldwrapper">
@@ -341,7 +350,7 @@ form.aligned .fieldwrapper .fielderror</pre>
           <input type="text">
           <button type="button" class="increment">increment</button>
         </div>
-        
+
         <label class="fieldlabel">Search</label>
         <span class="field search"><input type="text"><button type="button">Search</button></span>
 
@@ -414,11 +423,17 @@ form.aligned .fieldwrapper .fielderror</pre>
         <label class="fieldlabel">Path Browser</label>
         <span class="field pathbrowser" data-init="pathbrowser"><input type="text"></span>
 
-        <label class="fieldlabel">Checkbox</label>
-        <label class="field checkboxfield"><input type="checkbox" checked><span>Checkbox</span></label>
+        <div class="fieldwrapper fieldwrapper-singleline">
+          <label class="fieldlabel">Checkbox</label>
+          <label class="field checkboxfield"><input type="checkbox" name="check" checked><span>Checkbox</span></label>
+          <span class="fieldinfo icon-info-circle small" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="left">Field Description</span>
+        </div>
 
-        <label class="fieldlabel">Radio</label>
-        <label class="field radiofield"><input type="radio" checked><span>Radio</span></label>
+        <div class="fieldwrapper fieldwrapper-singleline">
+          <label class="fieldlabel">Radio</label>
+          <label class="field radiofield"><input type="radio" name="radio" checked><span>Radio</span></label>
+          <span class="fieldinfo icon-info-circle small" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="left">Field Description</span>
+        </div>
 
         <label class="fieldlabel">Switch</label>
         <label class="field switch"><input type="checkbox"><span>Off</span><span>On</span></label>
