@@ -69,6 +69,16 @@
       width: 500px;
     }
 
+    span.deprecated {
+      font-size: 0.75rem;
+      border: 1px solid #ff9c00;
+      border-radius: 5px;
+      background: #fff600;
+      margin: 0 5px;
+      padding: 1px;
+      color: #0a0a0a;
+    }
+
   </style>
 
 </head>
@@ -90,6 +100,14 @@
     </section> 
     <section>
       <h3>CUI Constructor Example</h3>
+      <p>
+          Note: the white tabs variant is <span class="deprecated">deprecated</span>, and will be removed 
+          in a future release.
+      </p>
+      <p>
+          See <a href='http://issues.adobe.com/browse/CUI-1156'>CUI-1156</a> 
+          and <a href='http://issues.adobe.com/browse/CUI-1154'>CUI-1154</a>.
+      </p>
       <h4 id='typeLabel'>Type:default</h4>
       <div class="tabs" id="cuiTabsDiv">
         <nav>

@@ -15,6 +15,9 @@
 @tab-hover-font-color: rgb(75, 75, 75);
 @tab-disabled-font-color: rgb(195, 195, 195);
 
+
+// Note: the white tabs variant is deprecated, and will be removed in a future release
+// See https://issues.adobe.com/browse/CUI-1156 and https://issues.adobe.com/browse/CUI-1154
 @tab-white-background-gradient-start-color: rgb(255, 255, 255);
 @tab-white-background-gradient-end-color: rgb(245, 245, 245);
 
@@ -132,6 +135,8 @@
     overflow: visible;
   }
 
+  /* Note: the white tabs variant is deprecated, and will be removed in a future release */
+  /* See https://issues.adobe.com/browse/CUI-1156 and  https://issues.adobe.com/browse/CUI-1154 */
   &.white {
     > nav > a.active {
       border-bottom: none;
