@@ -199,7 +199,7 @@
             if (currentIndex < (this.listElement.find("li").length - 1)) {
                 currentIndex++;  
             } else {
-                currentIndex = 0
+                currentIndex = 0;
             }
         }
         
