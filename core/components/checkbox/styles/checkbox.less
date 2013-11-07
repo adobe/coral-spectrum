@@ -6,12 +6,13 @@
 // Checkbox
 @checkbox-check-color: rgb(50, 135, 210);
 @checkbox-border-color: rgba(0, 0, 0, .25);
-@checkbox-background-color: rgb(255, 255, 255);
 @checkbox-background-gradient-start-color: rgb(240, 240, 240);
 @checkbox-background-gradient-end-color: rgb(255, 255, 255);
 @checkbox-disabled-background-color: rgb(230, 230, 230);
 @checkbox-disabled-check-color: rgba(0, 0, 0, .15);
 @checkbox-disabled-border-color: rgb(210, 210, 210);
+
+@checkbox-disabled-text-color: rgb(180, 180, 180);
 
 input[type=checkbox],
 input[role=checkbox],
@@ -56,15 +57,22 @@ input[type=radio] {
   }
   
   &:disabled {
+    cursor: default;
+    pointer-events: none;
+
+    & + label,
+    & + span {
       cursor: default;
       pointer-events: none;
-      
-      & + label:before,
-      & + span:before {
+
+      color: @checkbox-disabled-text-color;
+
+      &:before {
         border-color: @checkbox-disabled-border-color;
         background-color: @checkbox-disabled-background-color;
         color: @checkbox-disabled-check-color;
       }
+    }
   }
 }
 
