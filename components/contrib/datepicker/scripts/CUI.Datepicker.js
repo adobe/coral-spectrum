@@ -177,8 +177,8 @@
         }
       }
 
-      options.storedFormat = options.storedFormat || (options.type === "time" ? 'HH:mm' : 'YYYY-MM-DD[T]HH:mmZ');
-      options.displayedFormat = options.displayedFormat || (options.type === "time" ? 'HH:mm' : 'YYYY-MM-DD HH:mm');
+      options.storedFormat = options.storedFormat || (options.type === "time" ? OFFICIAL_TIME_FORMAT : OFFICIAL_DATETIME_FORMAT);
+      options.displayedFormat = options.displayedFormat || (options.type === "time" ? OFFICIAL_TIME_FORMAT : DISPLAY_FORMAT);
       options.useNativeControls = options.forceHTMLMode;
 
       if ((!options.forceHTMLMode) &&
@@ -211,40 +211,44 @@
     },
 
     _adjustMarkup: function () {
-      var element = this.$element;
-      element.addClass("datepicker");
+      var $element = this.$element;
+      $element.addClass("datepicker");
 
       if (!this.options.useNativeControls) {
-        if (element.find("input").not("[type=hidden]").length === 0) {
-          element.append("<input type=\"text\">");
+        if ($element.find("input").not("[type=hidden]").length === 0) {
+          $element.append(HTML_INPUT);
         }
-        if (element.find("button").length === 0) {
-          element.append("<button class=\"icon-calendar small\"><span>Datepicker</span></button>");
+        if ($element.find("button").length === 0) {
+          $element.append(HTML_BUTTON);
         }
-        if ($('body').find("#popguid" + this.guid + ".popover").length === 0) {
-          $('body').append('<div class="datepicker popover arrow-top" style="display:none" id ="popguid' + this.guid + '"><div class="inner"></div></div>');
-          var $popover = $('body').find("#popguid" + this.guid + ".popover");
+        var id = "popguid" + this.guid;
+        var idQuery = "#" + id + ".popover";
+        this.$popover = $('body').find(idQuery);
+        if (this.$popover.length === 0) {
+          $('body').append(HTML_POPOVER.replace("%ID%", id));
+          this.$popover = $('body').find(idQuery);
           if (this.options.isDateEnabled) {
-            $popover.find(".inner").append('<div class="calendar"><div class="calendar-header"></div><div class="calendar-body"></div></div>');
+            this.$popover.find(".inner").append(HTML_CALENDAR);
           }
         }
       } else {
         // Show native control
+        this.$popover = [];
       }
 
       // Always include hidden field
-      if (element.find("input[type=hidden]").length === 0) {
-        element.append("<input type=\"hidden\">");
+      if ($element.find("input[type=hidden]").length === 0) {
+        $element.append("<input type=\"hidden\">");
       }
 
-      if (!element.find("input[type=hidden]").attr("name")) {
-        var name = element.find("input").not("[type=hidden]").attr("name");
-        element.find("input[type=hidden]").attr("name", name);
-        element.find("input").not("[type=hidden]").removeAttr("name");
+      if (!$element.find("input[type=hidden]").attr("name")) {
+        var name = $element.find("input").not("[type=hidden]").attr("name");
+        $element.find("input[type=hidden]").attr("name", name);
+        $element.find("input").not("[type=hidden]").removeAttr("name");
       }
 
       // Force button to be a button, not a submit thing
-      var $button = element.find('>button');
+      var $button = $element.find('>button');
       if ($button.attr('type') === undefined) {
         $button[0].setAttribute('type', 'button');
       }
@@ -254,15 +258,18 @@
       this.$input = this.$element.find('input').not("[type=hidden]");
       this.$hiddenInput = this.$element.find('input[type=hidden]');
       this.$openButton = this.$element.find('button');
-      this.$popover = $('body').find("#popguid" + this.guid + ".popover");
     },
 
     _constructPopover: function () {
-      this.popover = new Popover({
-        $element: this.$popover,
-        options: this.options,
-        setDateTimeCallback: this._popoverSetDateTimeCallback.bind(this)
-      });
+      if (this.$popover.length) {
+        this.popover = new Popover({
+          $element: this.$popover,
+          $trigger: this.$openButton,
+          options: this.options,
+          setDateTimeCallback: this._popoverSetDateTimeCallback.bind(this),
+          hideCallback: this._popoverHideCallback.bind(this)
+        });
+      }
     },
 
     _initialize: function () {
@@ -321,6 +328,10 @@
       }
     },
 
+    _popoverHideCallback: function () {
+      this.pickerShown = false;
+    },
+
     _switchInputTypeToText: function ($input) {
       var convertedInput = $input.detach().attr('type', 'text');
       this.$element.prepend(convertedInput);
@@ -334,13 +345,10 @@
       if (this.pickerShown) {
         this._hidePicker();
       } else {
-        this._openPicker();
-      }
-    },
-
-    _bodyClickHandler: function (event) {
-      if (!($(event.target).is(this.$openButton))) {
-        this._hidePicker();
+        var self = this;
+        setTimeout(function() {
+          self._openPicker();
+        }, 100);
       }
     },
 
@@ -365,11 +373,11 @@
     },
 
     _openPicker: function () {
-      if (!this.options.useNativeControls) {
+      if (this.options.useNativeControls) {
+        this._openNativeInput();
+      } else {
         this._readInputVal();
         this._showPicker();
-      } else {
-        this._openNativeInput();
       }
     },
 
@@ -377,23 +385,7 @@
       if (!this.pickerShown) {
 
         this.$element.addClass("focus");
-
-        this.boundBodyClickHandler = this._bodyClickHandler.bind(this);
-        $('body').on('click', this.boundBodyClickHandler);
-
-        if (this.options.isDateEnabled) {
-          this.popover.renderCalendar();
-        }
-
-        var left = this.$openButton.offset().left + this.$openButton.outerWidth() / 2 - (this.$popover.outerWidth() / 2);
-        var top = this.$openButton.offset().top + this.$openButton.outerHeight() + 16;
-
-        this.$popover.css({
-            "position": "absolute",
-            "left": left + "px",
-            "top": top + "px"}
-        ).show();
-
+        this.popover.show(this.displayDateTime);
         this.pickerShown = true;
       }
     },
@@ -403,10 +395,7 @@
 
         this.$element.removeClass("focus");
 
-        $('body').off('click', this.boundBodyClickHandler);
-        this.boundBodyClickHandler = null;
-
-        this.$popover.hide();
+        this.popover.hide();
         this.pickerShown = false;
       }
     },
@@ -427,14 +416,6 @@
       this.$hiddenInput.val(storage);
 
       this._updateState();
-
-      if (this.options.isDateEnabled) {
-        this.popover.renderCalendar();
-      }
-
-      if (this.options.isTimeEnabled) {
-        this.popover.renderTime();
-      }
 
       // Trigger a change even on the input
       if (!silent) {
@@ -478,6 +459,14 @@
       this.$element = options.$element;
       this.options = options.options;
       this.setDateTimeCallback = options.setDateTimeCallback;
+      this.hideCallback = options.hideCallback;
+
+      this.$element.popover();
+      this.popover = this.$element.data("popover");
+      this.popover.set({
+        pointAt: options.$trigger,
+        pointFrom: "bottom"
+      });
 
       this._setupListeners();
     },
@@ -486,20 +475,18 @@
      * @private
      *
      * Public to CUI.Datepicker. Allows the main component to request the calendar
-     * to re-render.
+     * pop-up to be shown.
      */
-    renderCalendar: function () {
+    show: function (displayDateTime) {
+      this.displayDateTime = displayDateTime;
       this._renderCalendar();
+      if (this.options.isTimeEnabled) {
+        this._renderTime();
+      }
+      this.popover.show();
     },
-
-    /**
-     * @private
-     *
-     * Public to CUI.Datepicker. Allows the main component to request the time display
-     * to re-render.
-     */
-    renderTime: function () {
-      this._renderTime();
+    hide: function () {
+      this.popover.hide();
     },
 
     /**
@@ -509,11 +496,13 @@
      */
     _setupListeners: function () {
 
-      // Move around
+      // Pop show-hide:
+      this.popover.on("hide", this._popupHideHandler.bind(this));
+
+      // Calendar navigation
       this.$element.find(".calendar").on("swipe", this._swipeHandler.bind(this));
       this.$element.on("mousedown", ".next-month", this._mouseDownNextHandler.bind(this));
       this.$element.on("mousedown", ".prev-month", this._mouseDownPrevHandler.bind(this));
-      this.$element.on("click", this._popOverClickHandler.bind(this));
 
       if (this.options.isTimeEnabled) {
         // for Desktop
@@ -521,6 +510,10 @@
         // for Mobile
         this.$element.on("change", ".hour,.minute", this._dropdownChangedHandler.bind(this));
       }
+    },
+
+    _popupHideHandler: function(event) {
+      this.hideCallback();
     },
 
     _swipeHandler: function (event) {
@@ -553,12 +546,6 @@
       }
     },
 
-    _popOverClickHandler: function (event) {
-      // Make sure that clicks stay contained to the pop-up (for when a click
-      // reaches the body tag, the pop-up may get closed.
-      event.stopImmediatePropagation();
-    },
-
     _dropdownChangedHandler: function () {
       var hours = this._getHoursFromDropdown();
       var minutes = this._getMinutesFromDropdown();
@@ -571,13 +558,14 @@
 
     _tableMouseDownHandler: function (event) {
       event.preventDefault();
-      var date = moment($(event.target).data("date"), INTERN_FORMAT);
+      var date = moment($(event.target).data("date"), OFFICIAL_DATETIME_FORMAT);
       if (this.options.isTimeEnabled) {
         var h = this._getHoursFromDropdown();
         var m = this._getMinutesFromDropdown();
         date.hours(h).minutes(m);
       }
       this.setDateTimeCallback(date);
+      this._renderCalendar();
     },
 
     _renderCalendar: function (slide) {
@@ -654,7 +642,7 @@
           }
 
           if (isCurrentMonth && isDateInRange(displayDateTime, this.options.minDate, this.options.maxDate)) {
-            html += "<td class=\"" + cssClass + "\"><a href=\"#\" data-date=\"" + displayDateTime.lang(this.options.language).format(INTERN_FORMAT) + "\">" + displayDateTime.date() + "</a></td>";
+            html += "<td class=\"" + cssClass + "\"><a href=\"#\" data-date=\"" + displayDateTime.lang(this.options.language).format(OFFICIAL_DATETIME_FORMAT) + "\">" + displayDateTime.date() + "</a></td>";
           } else {
             html += "<td class=\"" + cssClass + "\"><span>" + displayDateTime.date() + "</span></td>";
           }
@@ -708,7 +696,7 @@
     _renderTime: function () {
 
       var selectedTime = this.options.selectedDateTime;
-      var html = $("<div class='time'><i class='icon-clock small'></i></div>");
+      var html = $(HTML_CLOCK_ICON);
 
       // Hours
       var hourSelect = $('<select></select>');
@@ -719,7 +707,7 @@
         }
         hourSelect.append(hourOption);
       }
-      var hourDropdown = $('<div class="select hour"><button></button></div>').append(hourSelect);
+      var hourDropdown = $(HTML_HOUR_DROPDOWN).append(hourSelect);
 
       // Minutes
       var minuteSelect = $('<select></select>');
@@ -730,7 +718,7 @@
         }
         minuteSelect.append(minuteOption);
       }
-      var minuteDropdown = $('<div class="select minute"><button>Single Select</button></div>').append(minuteSelect);
+      var minuteDropdown = $(HTML_MINUTE_DROPDOWN).append(minuteSelect);
 
       $(hourDropdown).css(STYLE_POSITION_RELATIVE);
       $(hourDropdown).find('select').css(STYLE_DROPDOWN_SELECT);
@@ -816,10 +804,28 @@
   var
     IS_MOBILE_DEVICE = navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iPhone|iPad|iPod/i),
     OFFICIAL_DATE_FORMAT = 'YYYY-MM-DD',
-    INTERN_FORMAT = 'YYYY-MM-DD[T]HH:mmZ',
     OFFICIAL_TIME_FORMAT = 'HH:mm',
-    OFFICIAL_DATETIME_FORMAT = INTERN_FORMAT,
+    OFFICIAL_DATETIME_FORMAT = 'YYYY-MM-DD[T]HH:mmZ',
+    DISPLAY_FORMAT = 'YYYY-MM-DD HH:mm',
     LANGUAGE_NAME_PREFIX = 'coralui_',
+
+    HTML_INPUT = "<input type=\"text\">",
+    HTML_BUTTON = "<button class=\"icon-calendar small\"><span>Datepicker</span></button>",
+    HTML_CALENDAR = [
+      '<div class="calendar">',
+        '<div class="calendar-header"></div>',
+        '<div class="calendar-body"></div>',
+      '</div>'
+    ].join(''),
+    HTML_POPOVER = [
+      '<div class="datepicker popover" style="display:none" id="%ID%">',
+        '<div class="inner"></div>',
+      '</div>'
+    ].join(''),
+
+    HTML_CLOCK_ICON = "<div class='time'><i class='icon-clock small'></i></div>",
+    HTML_HOUR_DROPDOWN = '<div class="select hour"><button></button></div>',
+    HTML_MINUTE_DROPDOWN = '<div class="select minute"><button>Single Select</button></div>',
 
     STYLE_POSITION_RELATIVE = {
       'position': 'relative'
