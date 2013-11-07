@@ -231,9 +231,17 @@
             // if the element is not there, create it
             if (this._selectList.length === 0) {
                 this._selectList = $('<ul/>', {
+                    'id': CUI.util.uuid(),
                     'class': 'selectlist'
                 }).appendTo(this.$element);
+            } else if (!this._selectList.attr('id')) {
+                this._selectList.attr('id', CUI.util.uuid());
             }
+
+            this._button.attr({
+                'data-toggle': 'selectlist',
+                'data-target': '#' + this._selectList.attr('id')
+            });
 
             // read values from markup
             if (this._select.length > 0) {
@@ -249,17 +257,11 @@
 
             this._selectListWidget = this._selectList.data('selectList');
 
-            // handler to open usggestion box
-            this._button.fipo('tap', 'click', function (event) {
-                event.preventDefault();
-                self._toggleList();
-            }).finger('click', false);
-
             this._selectList
                 // receive the value from the list
                 .on('selected.select', this._handleSelected.bind(this))
                 // handle open/hide for the button
-                .on('show.dropdown hide.select', function (event) {
+                .on('show.select hide.select', function (event) {
                     self._button.toggleClass('active', event.type === 'show');
                 });
         },
@@ -323,14 +325,6 @@
             this.$element.trigger($.Event('selected', {
                 selected: selected
             }));
-        },
-
-        /**
-         * toggles the visibility of a SelectList widget
-         * @private
-         */
-        _toggleList: function () {
-            this._selectListWidget.toggleVisibility();
         }
     });
 

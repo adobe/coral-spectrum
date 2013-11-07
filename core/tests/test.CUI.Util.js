@@ -19,7 +19,23 @@ describe('CUI.Util', function() {
       expect(CUI.util.decapitalize("testString")).to.equal("testString");
     });
   });
-  
+
+  describe('uuid()', function() {
+    it("should create a string 36 characters long", function() {
+      expect(CUI.util.uuid().length).to.equal(36);
+    });
+
+    it("should create unique ids", function() {
+      var uuids = [];
+
+      for (var i = 0; i < 100; i++) {
+        var uuid = CUI.util.uuid();
+        expect(uuids.indexOf(uuid)).to.equal(-1);
+        uuids.push(uuid);
+      }
+    });
+  });
+
   // TODO: test $.fn.loadWithSpinner
   // TODO: test CUI.util.plugClass
 });

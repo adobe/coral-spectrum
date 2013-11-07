@@ -928,228 +928,221 @@
 
                 <section id="Autocomplete">
                     <h2 class="line">Autocomplete (WIP)</h2>
-                    <p>Autocomplete is a comprehensive component which offers multiple features. 
-                        It includes Filter, Tags and Combobox in one.</p>
-                    <p>To achieve this, it uses the SelectList and TagList widget.</p>
+                    <p>Autocomplete is an input component which allows users to search a list of items by typing into the input or, optionally, clicking a toggle button. The list of items can be provided directly or loaded dynamically from a remote endpoint.</p>
+                    <p>Depending on enabled options, users can also create tags based on the text they have entered or an item they have selected.</p>
                     <div class="componentSample">
                         <div class="example">
-                            <div class="filterSample">
-                                <div class="sampleTitle left">Icon</div>
-                                <div id="autocomplete-sample2">
-                                    <!-- Icon -->
-                                    <span class="autocomplete icon-search" data-init="autocomplete">
-                                        <input type="text" name="name1" placeholder="Search">
-                                        <button class="autocomplete-suggestion-toggle"></button>
-                                    </span>
-                                </div>
+                            <div class="alert info">
+                                <strong>Demo Tip:</strong>Try typing any of the available options: Afghanistan, Albania, Bahams, Bahrain, Cambodia, Cameroon, Denmark, Djibouti, Ecuador, Egypt.
                             </div>
-                            <div class="filterSample">
-                                <div class="sampleTitle left">Multiple</div>
-                                <div id="autocomplete-sample3">
-                                      <!-- Tags -->
-                                      <span class="autocomplete icon-tag" data-init="autocomplete" data-multiple="true">
-                                          <input type="text" name="name1" placeholder="Search">
-                                          <button class="autocomplete-suggestion-toggle"></button>
-                                          <ol class="taglist autocomplete-tags">
-                                              <li>
-                                                  <button class="icon-close"></button>
-                                                  Carrot
-                                                  <input type="hidden" value="Carrot"/>
-                                              </li>
-                                              <li>
-                                                  <button class="icon-close"></button>
-                                                  Banana
-                                                  <input type="hidden" value="Banana"/>
-                                              </li>
-                                              <li>
-                                                  <button class="icon-close"></button>
-                                                  Apple
-                                                  <input type="hidden" value="Apple"/>
-                                              </li>
-                                          </ol>
-                                      </span>
-                                </div>
-                            </div>
-                            <div class="filterSample">
-                                <div class="sampleTitle left">Suggestions</div>
-                                <div id="autocomplete-sample4">
-                                    <!-- Suggestions -->
-                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
-                                      <input type="text" name="name1" placeholder="Search">
-                                      <button class="autocomplete-suggestion-toggle"></button>
-                                      <ul class="autocomplete-suggestions selectlist">
-                                          <li data-value="expr1">Expression 1</li>
-                                          <li data-value="expr2">Expression 2</li>
-                                          <li data-value="expr3">Expression 3</li>
-                                          <li>Expression 4</li>
-                                          <li data-value="expr5">Expression 5</li>
-                                          <li data-value="expr6">Expression 6</li>
-                                      </ul>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="filterSample">
-                                <div class="sampleTitle left">with Tags</div>
-                                <div id="autocomplete-sample5">
-                                    <!-- with Tags -->
-                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true" data-multiple="true">
-                                          <input type="text" name="name1" placeholder="Search">
-                                          <button class="autocomplete-suggestion-toggle"></button>
-                                          <ul class="autocomplete-suggestions selectlist">
-                                                <li data-value="expr1">Expression 1</li>
-                                                <li data-value="expr2">Expression 2</li>
-                                                <li data-value="expr3">Expression 3</li>
-                                                <li>Expression 4</li>
-                                                <li data-value="expr5">Expression 5</li>
-                                                <li data-value="expr6">Expression 6</li>
-                                          </ul>
-                                    </span>
-                                </div>
-                            </div>
+
                             <div class="filterSample">
                                 <div class="sampleTitle left">Starts with</div>
-                                <div id="autocomplete-sample6">
-                                    <!-- with Tags -->
-                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
-                                          <input type="text" name="name1" placeholder="Search">
-                                          <button class="autocomplete-suggestion-toggle"></button>
-                                          <ul class="autocomplete-suggestions selectlist">
-                                                <li>Switzerland</li>
-                                                <li>United States</li>
-                                                <li>Austria</li>
-                                                <li>Germany</li>
-                                                <li>France</li>
-                                                <li>Olympus</li>
-                                          </ul>
+                                <div id="autocomplete-sample-starts">
+                                    <!-- Starts with -->
+                                    <span class="autocomplete icon-search" data-init="autocomplete">
+                                        <input type="text" placeholder="Search">
+                                        <ul class="autocomplete-suggestions selectlist">
+                                            <li data-value="af">Afghanistan</li>
+                                            <li data-value="al">Albania</li>
+                                            <li data-value="bs">Bahamas</li>
+                                            <li data-value="bh">Bahrain</li>
+                                            <li data-value="kh">Cambodia</li>
+                                            <li data-value="cm">Cameroon</li>
+                                            <li data-value="dk">Denmark</li>
+                                            <li data-value="dj">Djibouti</li>
+                                            <li data-value="ec">Ecuador</li>
+                                            <li data-value="eg">Egypt</li>
+                                        </ul>
                                     </span>
                                 </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">Contains</div>
-                                <div id="autocomplete-sample6">
-                                    <!-- with Tags -->
-                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true" data-mode="contains">
-                                          <input type="text" name="name1" placeholder="Search">
-                                          <button class="autocomplete-suggestion-toggle"></button>
-                                          <ul class="autocomplete-suggestions selectlist">
-                                                <li>Switzerland</li>
-                                                <li>United States</li>
-                                                <li>Austria</li>
-                                                <li>Germany</li>
-                                                <li>France</li>
-                                                <li>Olympus</li>
-                                          </ul>
+                                <div id="autocomplete-sample-contains">
+                                    <!-- Contains -->
+                                    <span class="autocomplete icon-search" data-init="autocomplete" data-mode="contains">
+                                        <input type="text" placeholder="Search">
+                                        <ul class="autocomplete-suggestions selectlist">
+                                            <li data-value="af">Afghanistan</li>
+                                            <li data-value="al">Albania</li>
+                                            <li data-value="bs">Bahamas</li>
+                                            <li data-value="bh">Bahrain</li>
+                                            <li data-value="kh">Cambodia</li>
+                                            <li data-value="cm">Cameroon</li>
+                                            <li data-value="dk">Denmark</li>
+                                            <li data-value="dj">Djibouti</li>
+                                            <li data-value="ec">Ecuador</li>
+                                            <li data-value="eg">Egypt</li>
+                                        </ul>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Toggle</div>
+                                <div id="autocomplete-sample-toggle">
+                                    <!-- Toggle -->
+                                    <span class="autocomplete icon-search" data-init="autocomplete">
+                                        <input type="text" placeholder="Search">
+                                        <button class="autocomplete-suggestion-toggle"></button>
+                                        <ul class="autocomplete-suggestions selectlist">
+                                            <li data-value="af">Afghanistan</li>
+                                            <li data-value="al">Albania</li>
+                                            <li data-value="bs">Bahamas</li>
+                                            <li data-value="bh">Bahrain</li>
+                                            <li data-value="kh">Cambodia</li>
+                                            <li data-value="cm">Cameroon</li>
+                                            <li data-value="dk">Denmark</li>
+                                            <li data-value="dj">Djibouti</li>
+                                            <li data-value="ec">Ecuador</li>
+                                            <li data-value="eg">Egypt</li>
+                                        </ul>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Tags</div>
+                                <div id="autocomplete-sample-tags">
+                                    <!-- Tags -->
+                                    <span class="autocomplete icon-search" data-init="autocomplete" data-multiple="true">
+                                        <input type="text" placeholder="Search">
+                                        <ol class="taglist autocomplete-tags" role="list">
+                                            <li role="listitem">
+                                                <button class="icon-close"></button>
+                                                Bahamas
+                                                <input type="hidden" value="bs">
+                                            </li>
+                                            <li role="listitem">
+                                                <button class="icon-close"></button>
+                                                Ecuador
+                                                <input type="hidden" value="ec">
+                                            </li>
+                                        </ol>
+                                        <ul class="autocomplete-suggestions selectlist">
+                                            <li data-value="af">Afghanistan</li>
+                                            <li data-value="al">Albania</li>
+                                            <li data-value="bs">Bahamas</li>
+                                            <li data-value="bh">Bahrain</li>
+                                            <li data-value="kh">Cambodia</li>
+                                            <li data-value="cm">Cameroon</li>
+                                            <li data-value="dk">Denmark</li>
+                                            <li data-value="dj">Djibouti</li>
+                                            <li data-value="ec">Ecuador</li>
+                                            <li data-value="eg">Egypt</li>
+                                        </ul>
                                     </span>
                                 </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">Remote</div>
-                                <div id="autocomplete-sample8">
-                                    <!-- remote -->
-                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
-                                          <input type="text" name="name1" placeholder="Search">
-                                          <button class="autocomplete-suggestion-toggle"></button>
-                                          <ul class="autocomplete-suggestions selectlist" data-type="dynamic" data-dataurl="examples/autocomplete/remotehtml.html">
-                                          </ul>
+                                <div id="autocomplete-sample-remote">
+                                    <!-- Remote data -->
+                                    <span class="autocomplete icon-search" data-init="autocomplete">
+                                        <input type="text" placeholder="Search">
+                                        <ul class="autocomplete-suggestions selectlist" data-type="dynamic"
+                                                data-dataurl="examples/autocomplete/remotehtml.html"></ul>
                                     </span>
                                 </div>
+                                <span>(demo endpoint returns all options)</span>
                             </div>
                             <div class="filterSample">
-                                <div class="sampleTitle left">Typeahead</div>
-                                <div id="autocomplete-sample9">
-                                    <!-- Typeahead -->
-                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showtypeahead="true">
-                                          <input type="text" name="name1" placeholder="Search">
-                                          <button class="autocomplete-suggestion-toggle"></button>
-                                          <ul class="autocomplete-typeahead selectlist" data-type="dynamic" data-dataurl="examples/autocomplete/remotehtml.html">
-                                          </ul>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="filterSample">
-                                <div class="sampleTitle left">Disabled</div>
-                                <div id="autocomplete-sample10">
-                                    <!-- Disabled -->
-                                    <span class="autocomplete icon-search disabled" data-init="autocomplete" data-showsuggestions="true">
-                                          <input type="text" name="name1" placeholder="Search" disabled="true">
-                                          <ul class="autocomplete-suggestions selectlist">
-                                          </ul>
-                                          <button class="autocomplete-suggestion-toggle" disabled="true"></button>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="filterSample">
-                                <div class="sampleTitle left">Error</div>
-                                <div id="autocomplete-sample11">
-                                    <!-- Error -->
-                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
-                                          <input type="text" name="name1" placeholder="Search" class="error">
-                                          <ul class="autocomplete-suggestions selectlist">
-                                            <li data-value="expr1"><span>Expression 1</span></li>
-                                            <li data-value="expr2"><span>Expression 2</span></li>
-                                            <li data-value="expr3"><span>Expression 3</span></li>
-                                          </ul>
-                                          <button class="autocomplete-suggestion-toggle"></button>
+                                <div class="sampleTitle left">Icons</div>
+                                <div id="autocomplete-sample-icons">
+                                    <!-- Icons -->
+                                    <span class="autocomplete icon-tag" data-init="autocomplete">
+                                        <input type="text" placeholder="Search">
+                                        <ul class="autocomplete-suggestions selectlist">
+                                            <li data-value="af" class="icon-bell">Afghanistan</li>
+                                            <li data-value="al" class="icon-book">Albania</li>
+                                            <li data-value="bs" class="icon-building">Bahamas</li>
+                                            <li data-value="bh" class="icon-brush">Bahrain</li>
+                                            <li data-value="kh" class="icon-browse">Cambodia</li>
+                                            <li data-value="cm" class="icon-calendar">Cameroon</li>
+                                            <li data-value="dk" class="icon-campaign">Denmark</li>
+                                            <li data-value="dj" class="icon-check">Djibouti</li>
+                                            <li data-value="ec" class="icon-clock">Ecuador</li>
+                                            <li data-value="eg" class="icon-code">Egypt</li>
+                                        </ul>
                                     </span>
                                 </div>
                             </div>
                             <div class="filterSample">
                                 <div class="sampleTitle left">Groups</div>
-                                <div id="autocomplete-sample12">
+                                <div id="autocomplete-sample-groups">
                                     <!-- Groups -->
-                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
-                                          <input type="text" name="name1" placeholder="Search">
-                                          <button class="autocomplete-suggestion-toggle"></button>
-                                          <ul class="autocomplete-suggestions selectlist" data-multiple="true">
-                                              <li class="optgroup">
-                                                  <span>Group 1</span>
-                                                  <ul>
-                                                      <li><span data-value="expr1">Expression 1</span></li>
-                                                      <li><span data-value="expr2">Expression 2</span></li>
-                                                      <li><span data-value="expr3">Expression 3</span></li>
-                                                  </ul>
-                                              </li>
-                                              <li class="optgroup">
-                                                  <span>Group 2</span>
-                                                  <ul>
-                                                      <li><span data-value="expr4">Expression 4</span></li>
-                                                      <li data-value="expr5"><span>Expression 5</span></li>
-                                                  </ul>
-                                              </li>
-                                          </ul>
+                                    <span class="autocomplete icon-search" data-init="autocomplete">
+                                        <input type="text" placeholder="Search">
+                                        <ul class="autocomplete-suggestions selectlist">
+                                            <li class="optgroup">
+                                                <span>Group 1</span>
+                                                <ul>
+                                                    <li data-value="af">Afghanistan</li>
+                                                    <li data-value="bs">Bahamas</li>
+                                                    <li data-value="kh">Cambodia</li>
+                                                    <li data-value="dk">Denmark</li>
+                                                    <li data-value="ec">Ecuador</li>
+                                                </ul>
+                                            </li>
+                                            <li class="optgroup">
+                                                <span>Group 2</span>
+                                                <ul>
+                                                    <li data-value="al">Albania</li>
+                                                    <li data-value="bh">Bahrain</li>
+                                                    <li data-value="cm">Cameroon</li>
+                                                    <li data-value="dj">Djibouti</li>
+                                                    <li data-value="eg">Egypt</li>
+                                                </ul>
+                                            </li>
+                                        </ul>
                                     </span>
                                 </div>
                             </div>
                             <div class="filterSample">
-                                <div class="sampleTitle left">Icons</div>
-                                <div id="autocomplete-sample13">
-                                    <!-- Icons -->
-                                    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
-                                          <input type="text" name="name1" placeholder="Search">
-                                          <button class="autocomplete-suggestion-toggle"></button>
-                                          <ul class="autocomplete-suggestions selectlist" data-multiple="true">
-                                              <li class="optgroup">
-                                                  <span>Group 1</span>
-                                                  <ul>
-                                                      <li data-value="expr1" class="icon-adobeanalytics"><span >Expression 1</span></li>
-                                                      <li data-value="expr2" class="icon-adobeexperiencemanager"><span>Expression 2</span></li>
-                                                      <li data-value="expr3" class="icon-adobetarget"><span>Expression 3</span></li>
-                                                  </ul>
-                                              </li>
-                                              <li class="optgroup">
-                                                  <span>Group 2</span>
-                                                  <ul>
-                                                      <li data-value="expr4" class="icon-brush"><span>Expression 4</span></li>
-                                                      <li data-value="expr5" class="icon-browse"><span>Expression 5</span></li>
-                                                  </ul>
-                                              </li>
-                                          </ul>
+                                <div class="sampleTitle left">Error</div>
+                                <div id="autocomplete-sample-error">
+                                    <!-- Error -->
+                                    <span class="autocomplete icon-search" data-init="autocomplete">
+                                        <input type="text" placeholder="Search" class="error">
+                                        <ul class="autocomplete-suggestions selectlist">
+                                            <li data-value="af">Afghanistan</li>
+                                            <li data-value="al">Albania</li>
+                                            <li data-value="bs">Bahamas</li>
+                                            <li data-value="bh">Bahrain</li>
+                                            <li data-value="kh">Cambodia</li>
+                                            <li data-value="cm">Cameroon</li>
+                                            <li data-value="dk">Denmark</li>
+                                            <li data-value="dj">Djibouti</li>
+                                            <li data-value="ec">Ecuador</li>
+                                            <li data-value="eg">Egypt</li>
+                                        </ul>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="filterSample">
+                                <div class="sampleTitle left">Disabled</div>
+                                <div id="autocomplete-sample-disabled">
+                                    <!-- Disabled -->
+                                    <span class="autocomplete icon-search" data-init="autocomplete">
+                                        <input type="text" placeholder="Search" disabled="true">
+                                        <button class="autocomplete-suggestion-toggle" disabled="true"></button>
+                                        <ul class="autocomplete-suggestions selectlist">
+                                            <li data-value="af">Afghanistan</li>
+                                            <li data-value="al">Albania</li>
+                                            <li data-value="bs">Bahamas</li>
+                                            <li data-value="bh">Bahrain</li>
+                                            <li data-value="kh">Cambodia</li>
+                                            <li data-value="cm">Cameroon</li>
+                                            <li data-value="dk">Denmark</li>
+                                            <li data-value="dj">Djibouti</li>
+                                            <li data-value="ec">Ecuador</li>
+                                            <li data-value="eg">Egypt</li>
+                                        </ul>
                                     </span>
                                 </div>
                             </div>
                         </div><!-- /example -->
                         <pre class="prettyprint linenums"
-                             data-src-id="autocomplete-sample2,autocomplete-sample3,autocomplete-sample4,autocomplete-sample5,autocomplete-sample6,autocomplete-sample8,autocomplete-sample9,autocomplete-sample10,autocomplete-sample11,autocomplete-sample12,autocomplete-sample13"></pre>
+                             data-src-id="autocomplete-sample-starts,autocomplete-sample-contains,autocomplete-sample-toggle,autocomplete-sample-tags,autocomplete-sample-remote,autocomplete-sample-icons,autocomplete-sample-groups,autocomplete-sample-error,autocomplete-sample-disabled"></pre>
                     </div><!-- /componentSample -->
                     <div>
                         Open <a href="examples/autocomplete/index.html">Sample</a>
@@ -2374,7 +2367,7 @@
                             </div>
 
                         </div>
-                        <pre class="prettyprint linenums" data-src-id="popover-sample"</pre>
+                        <pre class="prettyprint linenums" data-src-id="popover-sample"></pre>
                     </div> <!-- componentSample -->
                 </section>
                 <!-- /Popover -->
