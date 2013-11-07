@@ -6,43 +6,47 @@
 // Checkbox
 @checkbox-dark-check-color: rgba(255, 255, 255, .80);
 @checkbox-dark-border-color: rgba(30, 30, 30, .65);
-@checkbox-dark-background-color: rgb(75, 75, 75);
 @checkbox-dark-background-gradient-start-color: rgb(75, 75, 75);
 @checkbox-dark-background-gradient-end-color: rgb(85, 85, 85);
 @checkbox-dark-disabled-background-color: rgb(80, 80, 80);
 @checkbox-dark-disabled-check-color: rgba(255, 255, 255, .15);
 @checkbox-dark-disabled-border-color: rgb(65, 65, 65);
 
-.theme-dark {
+@checkbox-dark-disabled-text-color: rgb(110, 110, 110);
 
+.theme-dark {
   input[type=checkbox], 
   input[role=checkbox], 
   input[type=radio] {
-
-
     & + span:before,
     & + label:before {
       border: @px solid @checkbox-dark-border-color;
-      
       .gradient(@checkbox-dark-background-gradient-start-color, @checkbox-dark-background-gradient-end-color);
-
       color: @checkbox-dark-check-color;
     }
     
     &:disabled {
-        
-        & + label:before,
-        & + span:before {
+      cursor: default;
+      pointer-events: none;
+
+      & + label,
+      & + span {
+        cursor: default;
+        pointer-events: none;
+
+        color: @checkbox-dark-disabled-text-color;
+
+        &:before {
           border-color: @checkbox-dark-disabled-border-color;
           background-color: @checkbox-dark-disabled-background-color;
           color: @checkbox-dark-disabled-check-color;
         }
+      }
     }
   }
 
   input[type=checkbox],
   input[role=checkbox] {
-    
     &:checked + label:before,
     &:checked + span:before,
     &[aria-checked=true] + label:before,
@@ -52,7 +56,6 @@
   }
 
   input[type=radio] {
-
     &:checked + span:before,
     &:checked + label:before {
       background-image: url('@{component-resource-folder}/checkbox/radio_dot_dark.png');
@@ -65,5 +68,4 @@
       }
     }
   }
-
 }
