@@ -596,8 +596,8 @@ module.exports = function (grunt) {
                     },
                     {
                         expand: true,
-                        cwd:'res/package-metadata',
-                        src:['README.md'],
+                        cwd: 'res/package-metadata',
+                        src: ['README.md'],
                         dest: 'coral-ui-<%= meta.version %>/'
                     }
                 ]
@@ -630,8 +630,8 @@ module.exports = function (grunt) {
                     },
                     {
                         expand: true,
-                        cwd:'res/package-metadata',
-                        src:['README.md'],
+                        cwd: 'res/package-metadata',
+                        src: ['README.md'],
                         dest: 'coral-ui-<%= meta.version %>/'
                     }
                 ]
@@ -652,6 +652,7 @@ module.exports = function (grunt) {
                             'images/**',
                             'js/**',
                             'less/**',
+                            'release/**',
                             'res/**',
                             'tests/**',
                             '*.html'
