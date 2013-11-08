@@ -345,6 +345,8 @@
       if (this.pickerShown) {
         this._hidePicker();
       } else {
+        // The time-out is a work-around for CUI.Popover issue #1307. Must
+        // be taken out once that is fixed:
         var self = this;
         setTimeout(function() {
           self._openPicker();
@@ -392,9 +394,7 @@
 
     _hidePicker: function () {
       if (this.pickerShown) {
-
         this.$element.removeClass("focus");
-
         this.popover.hide();
         this.pickerShown = false;
       }
@@ -446,10 +446,10 @@
   }
 
   /**
-   * @private
-   *
    * Governs the generation and the interaction of the calendar and
    * time selects.
+   *
+   * @private
    */
   var Popover = new Class({
     toString: 'Popover',
@@ -472,10 +472,10 @@
     },
 
     /**
-     * @private
-     *
      * Public to CUI.Datepicker. Allows the main component to request the calendar
      * pop-up to be shown.
+     *
+     * @private
      */
     show: function (displayDateTime) {
       this.displayDateTime = displayDateTime;
@@ -490,9 +490,9 @@
     },
 
     /**
-     * @private
-     *
      * Register event handlers.
+     *
+     * @private
      */
     _setupListeners: function () {
 
