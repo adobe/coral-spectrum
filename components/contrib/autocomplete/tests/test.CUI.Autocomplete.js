@@ -88,7 +88,7 @@ describe('CUI.Autocomplete', function() {
 
     it('shows when text is entered with matching options', function() {
       var clock = sinon.useFakeTimers();
-      $input.val('Bah').trigger('keyup');
+      $input.val('Bah').trigger('input');
       clock.tick(100000); // Skip the debounce wait.
       expect($selectList).to.have.class('visible');
       clock.restore();
@@ -96,8 +96,9 @@ describe('CUI.Autocomplete', function() {
 
     it('hides when removing text that had matching options', function() {
       var clock = sinon.useFakeTimers();
-      $input.val('Bah').trigger('keyup');
-      $input.val('').trigger('keyup');
+      $input.val('Bah').trigger('input');
+      clock.tick(100000); // Skip the debounce wait.
+      $input.val('').trigger('input');
       clock.tick(100000); // Skip the debounce wait.
       expect($selectList).not.to.have.class('visible');
       clock.restore();
@@ -135,14 +136,14 @@ describe('CUI.Autocomplete', function() {
       var $firstItem = $selectList.find('li').eq(0);
 
       var keyDownEvent = $.Event('keydown');
-      keyDownEvent.which = 13;
+      keyDownEvent.which = 13; // enter
       $firstItem.focus().trigger(keyDownEvent);
 
       var keyUpEvent = $.Event('keyup');
-      keyUpEvent.which = 13;
+      keyUpEvent.which = 13; // enter
       $(document.activeElement).trigger(keyUpEvent);
 
-      // Fast forward past any debounce from the keyup.
+      // Fast forward past any potential debounce.
       // We want to make sure it doesn't show up again.
 
       clock.tick(100000);
@@ -151,13 +152,13 @@ describe('CUI.Autocomplete', function() {
     });
 
     it('with multiple=true hides after creating a tag by hitting enter', function() {
-      // Fast forward past any debounce from the keyup.
+      // Fast forward past any potential debounce.
       // We want to make sure it doesn't show up again.
       var clock = sinon.useFakeTimers();
 
       $autocomplete.autocomplete('set', 'multiple', true);
 
-      $input.val('Bah').trigger('keyup');
+      $input.val('Bah').trigger('input');
       clock.tick(100000); // Skip the debounce wait.
       expect($selectList).to.have.class('visible');
 
@@ -170,11 +171,11 @@ describe('CUI.Autocomplete', function() {
     });
 
     it('shows when pasting matching text into input', function() {
-      // Fast forward past any debounce from the keyup.
+      // Fast forward past any potential debounce.
       // We want to make sure it doesn't show up again.
       var clock = sinon.useFakeTimers();
 
-      $input.val('Bah').trigger('paste');
+      $input.val('Bah').trigger('input').trigger('paste');
       clock.tick(100000); // Skip the debounce wait.
 
       expect($selectList).to.have.class('visible');
@@ -182,15 +183,15 @@ describe('CUI.Autocomplete', function() {
     });
 
     it('hides when cutting matching text from input', function() {
-      // Fast forward past any debounce from the keyup.
+      // Fast forward past any potential debounce.
       // We want to make sure it doesn't show up again.
       var clock = sinon.useFakeTimers();
 
-      $input.val('Bah').trigger('keyup');
+      $input.val('Bah').trigger('input');
       clock.tick(100000); // Skip the debounce wait.
       expect($selectList).to.have.class('visible');
 
-      $input.val('').trigger('cut');
+      $input.val('').trigger('input').trigger('cut');
 
       clock.tick(100000); // Skip the debounce wait.
       expect($selectList).not.to.have.class('visible');
@@ -214,7 +215,7 @@ describe('CUI.Autocomplete', function() {
 
     it('matches using contains mode', function() {
       $autocomplete.autocomplete('set', 'mode', 'contains');
-      $input.val('ma').trigger('keyup');
+      $input.val('ma').trigger('input');
       clock.tick(100000); // Skip the debounce wait.
       var $visibleItems = $selectList.find('li:visible');
       expect($visibleItems.length).to.equal(2);
@@ -224,7 +225,7 @@ describe('CUI.Autocomplete', function() {
 
     it('matches using starts mode', function() {
       $autocomplete.autocomplete('set', 'mode', 'starts');
-      $input.val('Cam').trigger('keyup');
+      $input.val('Cam').trigger('input');
       clock.tick(100000); // Skip the debounce wait.
       var $visibleItems = $selectList.find('li:visible');
       expect($visibleItems.length).to.equal(2);
@@ -235,7 +236,7 @@ describe('CUI.Autocomplete', function() {
     it('respects case-sensitivity when ignorecase=false', function() {
       $autocomplete.autocomplete('set', 'mode', 'starts');
       $autocomplete.autocomplete('set', 'ignorecase', false);
-      $input.val('cam').trigger('keyup');
+      $input.val('cam').trigger('input');
       clock.tick(100000); // Skip the debounce wait.
       var $visibleItems = $selectList.find('li:visible');
       expect($visibleItems.length).to.equal(0);
@@ -269,7 +270,7 @@ describe('CUI.Autocomplete', function() {
       var setSpy = sinon.spy(selectListWidget, 'set');
       var triggerLoadDataSpy = sinon.spy(selectListWidget, 'triggerLoadData');
 
-      $input.val('foo').trigger('keyup');
+      $input.val('foo').trigger('input');
       clock.tick(100000); // Skip the debounce wait.
 
       var queryMatch = sinon.match({query: 'foo'});
@@ -285,12 +286,12 @@ describe('CUI.Autocomplete', function() {
 
       $autocomplete.autocomplete('set', 'delay', 3000);
       $autocomplete.on('query', spy);
-      $input.val('B').trigger('keyup');
-      $input.val('Ba').trigger('keyup');
+      $input.val('B').trigger('input');
+      $input.val('Ba').trigger('input');
 
       clock.tick(1000);
       expect(spy.called).to.be.false;
-      $input.val('Bah').trigger('keyup');
+      $input.val('Bah').trigger('input');
       clock.tick(2990);
       expect(spy.called).to.be.false;
       clock.tick(20);
@@ -303,7 +304,7 @@ describe('CUI.Autocomplete', function() {
     it('creates tags when multiple=true using text input', function() {
       $autocomplete.autocomplete('set', 'multiple', true);
       var keyEvent = $.Event('keyup');
-      keyEvent.which = 13;
+      keyEvent.which = 13; // enter
 
       var addItemSpy = sinon.spy($tagList.data('tagList'), 'addItem');
 
@@ -332,9 +333,11 @@ describe('CUI.Autocomplete', function() {
     it('sets input value when multiple=false', function() {
       $autocomplete.autocomplete('set', 'multiple', false);
       var keyEvent = $.Event('keyup');
-      keyEvent.which = 13;
+      keyEvent.which = 13; // enter
+
       $input.val('foo').trigger(keyEvent);
       $input.val('bar').trigger(keyEvent);
+
       // The tag list should have been removed when we set multiple=false
       expect($autocomplete.find('.taglist').length).to.equal(0);
       expect($input).to.have.value('bar');

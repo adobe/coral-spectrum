@@ -143,13 +143,6 @@
         },
 
         /**
-         * The current query. Used as a basis for determining when the text
-         * input value changes.
-         * @private
-         */
-        _query: null,
-
-        /**
          * Sets up listeners for option changes.
          * @private
          */
@@ -227,33 +220,31 @@
             var self = this,
                 timeout;
 
-            this._query = this._input.val();
-
-            var timeoutLoadFunc = function(event) {
-                var value = self._input.val();
-
-                // This check prevents a query from occurring due to
-                // events that haven't changed the input value.
-                // A blacklist of keycodes is an option
-                // but is susceptible to fringe cases.
-                if (value !== self._query) {
-                    self._query = value;
-                    self.showSuggestions(
-                        self._input.val(),
-                        false,
-                        self._selectListWidget);
-                }
+            var debounceComplete = function(event) {
+                self.showSuggestions(
+                    self._input.val(),
+                    false,
+                    self._selectListWidget);
             };
 
-            this._input.on('keyup.autocomplete cut.autocomplete ' +
-                'paste.autocomplete', function(event) {
-
-                // debounce
+            var debounce = function() {
                 if (timeout) {
-                  clearTimeout(timeout);
+                    clearTimeout(timeout);
                 }
+                timeout = setTimeout(debounceComplete, self.options.delay);
+            };
 
-                timeout = setTimeout(timeoutLoadFunc, self.options.delay);
+            this._input.on('input.autocomplete', debounce);
+
+            // IE9 doesn't fire input events for backspace, delete, or cut so
+            // we're making up the difference.
+            this._input.on('cut.autocomplete', debounce);
+            this._input.on('keyup.autocomplete', function(event) {
+               switch(event.which) {
+                   case 8: // backspace
+                   case 46: // delete
+                       debounce();
+               }
             });
         },
 
@@ -349,7 +340,6 @@
                 this.clear();
             } else {
                 this._input.val(event.displayedValue);
-                this._query = event.displayedValue;
             }
 
             this._input.trigger('focus');
@@ -448,7 +438,6 @@
          */
         clear: function () {
           this._input.val('');
-          this._query = '';
         },
 
         /**
