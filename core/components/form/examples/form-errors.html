@@ -9,88 +9,258 @@
   <script src="../../js/libs/handlebars.js"></script>
   <script src="../../js/libs/moment.js"></script>
   <script src="../../js/libs/jquery.js"></script>
-  <script src="../../js/libs/jquery-fingerpointer.js"></script>
   <script src="../../js/libs/jquery-message.js"></script>
   <script src="../../js/libs/jquery-validator.js"></script>
   <script src="../../js/libs/toe.js"></script>
   <script src="../../js/CUI.js"></script>
+
+  <style type="text/css">
+
+    .form-error
+
+    .col {
+      width: 40%;
+    }
+
+    textarea, input {
+      margin-bottom: 10px !important;
+    }
+
+    h4, span.filters {
+      margin-top: 10px;
+    }
+
+    section {
+      margin-bottom: 10px;
+      border-bottom: 1px solid #CCC;
+      padding: 8px 0px;
+    }
+  </style>
+
+  <script type="text/javascript">
+
+  </script>
 </head>
 <body>
-  <section>
-    <h2>Form Errors</h2>
-    <div id="form-basic-error">
-      <input type="text" name="test" class="error"><span class="form-error">Please provide some input</span><br>
-      <textarea name="test" maxlength="10" rows="5" cols="20" class="error"></textarea><span class="form-error">Please provide some input</span>
+  <section class='col'>
+    <h1>Form Errors</h2>
+    
+    <div>
+      <h4>TextField - No Tool Tip</h4>
+      <input type="text" class="error" value="">
+      <span class="form-error">Please correct your input!</span>
+    </div> 
+
+    <div>
+      <h4>TextArea - No Tool Tip</h4>
+      <textarea name="test" maxlength="10" rows="5" cols="20" class="error"></textarea>
+      <span class="form-error">Please provide some input</span>
+    </div>
+
+    <div>
+      <h4>TextField - Tool Tip Below</h4>
+      <input type="text" class="error" value="Tooltip below">
+      <span class="form-error" data-init="quicktip" data-quicktip-arrow="top" data-quicktip-type="error">Please correct your input!</span>
     </div>
     <div>
-      <h3>Limited Characters</h3>
-      <input type="text" name="test" maxlength="10" data-init="character-count"><br>
-      <textarea name="test" maxlength="10" rows="5" cols="20" data-init="character-count"></textarea><br>
-      <label>Build-in browser check</label><br>
-      <input type="text" name="test" maxlength="10"><br>
-      <textarea name="test" maxlength="10" rows="5" cols="20" ></textarea>
+      <h4>TextField - Tool Tip Right</h4>
+      <input type="text" class="error" value="Tooltip right">
+      <span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error">Please correct your input!</span>
+    </div>
+
+    <div>
+      <h4>TextArea - Tool Tip Below - Small</h4>
+      <textarea class="field error" placeholder="tootip below"></textarea>
+      <span class="form-error small" data-init="quicktip" data-quicktip-arrow="top" data-quicktip-type="error">Please correct your input!</span>
     </div>
     <div>
-      <div id="form-datepicker-error" class="datepicker error" data-init="datepicker">
-        <input type="date" value="29 November 2012" name="test"><button class="icon-calendar small">Datepicker</button>
-      </div><span class="form-error">Please provide some input</span>
+      <h4>TextArea - Tool Tip Right - Small</h4>
+      <textarea class="error" placeholder="tootip right"></textarea>
+      <span class="form-error small" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error">Please correct your input!</span>
     </div>
+
     <div>
-      <div id="form-slider-error" class="slider ticked filled tooltips error" data-init="slider">
+      <h4>Date Picker - Tool Tip Right</h4>
+      <div class="datepicker error" data-init="datepicker">
+        <input type="date" value="29 November 2012" name="test">
+        <button class="icon-calendar small">Datepicker</button>
+      </div>
+      <span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error">Please correct your input!</span>
+    </div>
+
+    <div>
+      <h4>Slider - Tool Tip Right</h4>
+      <div class="slider ticked filled tooltips error" data-init="slider">
         <input type="range" value="14" min="10" max="20" step="2">
-      </div><span class="form-error tooltip-right">Please provide some input</span>
+      </div>
+      <span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error">Please correct your input!</span>
     </div>
+
     <div>
-      <div id="form-search-error" class="search">
+      <div class="search">
         <input type="text" placeholder="Search" class="error">
         <button>Search</button>
-      </div><span class="form-error tooltip-right">Please provide some input</span>
+      </div>
+      <span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error">Please correct your input!</span>
     </div>
+
     <div>
-      <div id="form-filter-error" class="filters error" data-init="filters">
-        <input type="text" placeholder="Single Term Filter">
+      <span class="filters error" data-init="filters">
+        <input type="text">
         <select>
           <option selected>Apple</option>
           <option>Pear</option>
           <option>Banana</option>
         </select>
-      </div><span class="form-error tooltip-right">Please provide some input</span>
+      </span>
+      <span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error">Please correct your input!</span>
     </div>
+    
     <div>
-      <div id="form-dropdown-error" class="dropdown error" data-init="dropdown">
-        <button>Single Select</button>
-        <select name="dropdown">
-          <option>Single One</option>
-          <option selected>Single Two</option>
-          <option>Single Three</option>
+     <span class="select" data-init="select">
+        <button type="button" class="error">One</button>
+        <select>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+          <option value="4">One Two Three Four Five Six Seven Eight Nine Ten</option>
         </select>
-      </div>
-      <span class="form-error tooltip-right">Please provide some input</span>
+      </span>
+      <span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error">Please correct your input!</span>      
     </div>
-    <div>
-      <div id="form-dropdown-editable-error" class="dropdown error" data-editable="true" data-init="dropdown">
-        <button>Single Select</button>
-        <select name="dropdown">
-          <option>Single One</option>
-          <option selected>Single Two</option>
-          <option>Single Three</option>
-        </select>
-      </div><span class="form-error tooltip-right">Please provide some input</span>
-    </div>          
+  
   </section>
 
   <section>
-    <h2>Form Validations</h2>
+    
+    <p>Checking compatibility with fieldset</p>
+    
+    <form class="vertical" style="width: 500px;">
+      <section class="fieldset">
+        <h3 class="legend">Vertical Layout</h3>
+
+        <div class="fieldwrapper">
+          <label class="fieldlabel">Text</label>
+          <input class="field error" type="text" placeholder="Required" aria-required="true">
+          <span class="fielderror form-error" data-init="quicktip" data-quicktip-arrow="right" data-quicktip-type="error">Please correct your input!</span>
+        </div>
+
+        <div class="fieldwrapper">
+          <label class="fieldlabel">Textarea</label>
+          <textarea class="field error" rows="4">Not required, no placeholder</textarea>
+          <!-- TODO: both info and error won't layout right in vertical layout -->
+          <!-- span class="fieldinfo icon-info-circle small" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="top">Field Description</span -->
+          <span class="fielderror form-error" data-init="quicktip" data-quicktip-arrow="right" data-quicktip-type="error">Please correct your input!</span>
+        </div>
+
+        <div class="fieldwrapper">
+          <label class="fieldlabel">Textarea</label>
+          <textarea class="field error" placeholder="Required" rows="4" aria-required="true"></textarea>
+          <span class="fielderror form-error" data-init="quicktip" data-quicktip-arrow="right" data-quicktip-type="error">Please correct your input!</span>
+        </div>
+
+        <div class="fieldwrapper">
+          <label class="fieldlabel">Textarea</label>
+          <!-- TODO: In IE10 only, validation js will remove error class from below -->
+          <!-- this only happens if a 'placeholder' is added to the text area -->
+          <!-- note 'required' validation will compensate and add error border -->
+          <!-- See https://issues.adobe.com/browse/CUI-1268 -->
+          <textarea class="field error" placeholder="Just Placeholder" rows="4"></textarea>
+          <span class="fielderror form-error" data-init="quicktip" data-quicktip-arrow="right" data-quicktip-type="error">Please correct your input!</span>
+        </div>
+
+        <div class="fieldwrapper">
+          <label class="fieldlabel">Number Input</label>
+          <div class="field numberinput error" data-init="numberinput">
+            <button type="button" class="decrement">decrement</button>
+            <input type="text">
+            <button type="button" class="increment">increment</button>
+          </div>
+          <span class="fielderror form-error" data-init="quicktip" data-quicktip-arrow="right" data-quicktip-type="error">Please correct your input!</span>
+        </div>
+      </section>
+    </form>
+    <form class="aligned" style="width: 500px;">
+      <section class="fieldset">
+        <h3 class="legend">This is Aligned Layout</h3>
+
+        <div class="fieldwrapper">
+          <label class="fieldlabel">Text</label>
+          <input class="field error" type="text" placeholder="Placeholder">
+          <span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error">Please correct your input!</span>      
+        </div>
+
+        <div class="fieldwrapper">
+          <label class="fieldlabel">Text</label>
+          <input class="field error" type="text" placeholder="Required" aria-required="true">
+          <span class="fieldinfo icon-info-circle small" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="top">Field Description</span>
+          <span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error">Please correct your input!</span>      
+        </div>
+
+        <div class="fieldwrapper">
+          <label class="fieldlabel">Text</label>
+          <input class="field error" type="text">
+          <span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error">Please correct your input!</span>      
+        </div>
+
+        <div class="fieldwrapper">
+          <label class="fieldlabel">Textarea</label>
+          <!-- TODO: In IE10 only, validation js will remove error class from below -->
+          <!-- this only happens if a 'placeholder' is added to the text area -->
+          <!-- note 'required' validation will compensate and add error border -->
+          <!-- See https://issues.adobe.com/browse/CUI-1268 -->
+          <textarea class="error" placeholder="Placeholder" rows="4"></textarea>
+          <span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error">Please correct your input!</span>
+        </div>
+
+        <div class="fieldwrapper">
+          <label class="fieldlabel">Number Input</label>
+          <div class="field numberinput error" data-init="numberinput">
+            <button type="button" class="decrement">decrement</button>
+            <input type="text">
+            <button type="button" class="increment">increment</button>
+          </div>
+          <span class="form-error" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="error">Please correct your input!</span>      
+        </div>
+      </section>
+    </form>
+  </section>
+
+  <section>
+    <h2>Form Validations - required</h2>
+    <p>Checking that <em>required</em> creates error state. Note that browsers will check <em>required</em> on page load, and mark the input as invalid, causing the error css to be applied to the input when loading.</p>
     <form action="test">
       <div>
-        <input type="text" name="test" required><br>
-        <input type="text" name="test" aria-required="true"><br>
-
-        <textarea name="test" maxlength="10" rows="5" cols="20" required></textarea><br>
+        <input type="text" name="test" value="" required>
+      </div>
+      <div>
+        <textarea name="test" maxlength="10" rows="5" cols="20" required></textarea>
+      </div>
+      <input class="button" type="submit" value="Test 'required'"/>
+    </form> 
+  </section>
+  <section> 
+    <h2>Form Validations - aria-required</h2>
+    <p>Checking that <em>aria-required</em> creates error state. jQuery validation will only check <em>aria-required</em> when the form is submitted.</p> 
+    <form action="test" value="required test">
+      <div>
+        <input type="text" name="test" aria-required="true">
+      </div>
+      <div>
         <textarea name="test" maxlength="10" rows="5" cols="20" aria-required="true"></textarea>
       </div>
-      <input class="button" type="submit" />
+      <input class="button" type="submit" value="Test 'aria-required'"/>
     </form>
+  </section>
+
+  <section>
+    <h2>Limited Characters</h2>
+    <input type="text" name="test" maxlength="10" data-init="character-count"><br>
+    <textarea name="test" maxlength="10" rows="5" cols="20" data-init="character-count"></textarea><br>
+    
+    <label>Build-in browser check</label><br>
+    <input type="text" name="test" maxlength="10"><br>
+    <textarea name="test" maxlength="10" rows="5" cols="20" ></textarea>
   </section>
 </body>
 </html>

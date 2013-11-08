@@ -31,6 +31,10 @@
          * </section>
          * <section>
          * <h3>White</h3>
+         * <p>
+         *   Note: the white tabs variant is deprecated, and will be removed in a future release
+         *   See issues.adobe.com/browse/CUI-1156 and issues.adobe.com/browse/CUI-1154
+         * </p>
          * <div class="tabs white" data-init="tabs">
          *     <nav>
          *         <a href="#" data-toggle="tab" class="active">Tab 1</a>
@@ -118,6 +122,10 @@
          *
          * @example
          * <caption>Variants</caption>
+         * <p>
+         *   Note: the white tabs variant is deprecated, and will be removed in a future release
+         *   See issues.adobe.com/browse/CUI-1156 and issues.adobe.com/browse/CUI-1154
+         * </p>
          * <description>The possible variants, <code class="prettify">white</code>, <code class="prettify">stacked</code>, 
          * and <code class="prettify">nav</code>, are specified either via the <code>type</code> argument to the 
          * constructor, or via manually specifying the class alongside <code>tabs</code>.</description>
@@ -157,6 +165,8 @@
 
         defaults: {},
 
+        // Note: the white tabs variant is deprecated, and will be removed in a future release 
+        // See https://issues.adobe.com/browse/CUI-1156 and https://issues.adobe.com/browse/CUI-1154
         DEFAULT_VARIANT_KEY: 'default',
         WHITE_VARIANT_CLASS: 'white',
         STACKED_VARIANT_CLASS: 'stacked',
@@ -228,8 +238,10 @@
             this._activateTab(activeTab, true);
         },
 
-         // sets the type of the tabs
-         // @param  {String} type of the tabs: 'default', 'white', 'nav', 'stacked'
+        // sets the type of the tabs
+        // @param  {String} type of the tabs: 'default', 'white', 'nav', 'stacked'
+        // Note: the white tabs variant is deprecated, and will be removed in a future release 
+        // See https://issues.adobe.com/browse/CUI-1156 and https://issues.adobe.com/browse/CUI-1154
         /** @ignore */
         _setType: function (type) {
             var classValue = $.type(type) === 'string' ? type : this.options.type;

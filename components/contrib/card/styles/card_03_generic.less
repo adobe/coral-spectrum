@@ -3,6 +3,9 @@
   Element: Card View
   Displays assets in result set as a card
 */
+
+@card-checkbox-background-color: rgb(255, 255, 255);
+
 [class^="card-"],
 [class*=" card-"] {
     .iosTapHoldPreventDefault;
@@ -150,7 +153,7 @@
             left: 15*@px;
 
             border: @px solid @checkbox-border-color;
-            background: @checkbox-background-color;
+            background: @card-checkbox-background-color;
             .box-shadow(inset @px @px 0 rgba(0, 0, 0, 0.05));
         }
 

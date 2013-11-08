@@ -14,6 +14,8 @@
 @tab-dark-hover-font-color: rgb(255, 255, 255);
 @tab-dark-disabled-font-color: rgb(100, 100, 100);
 
+// Note: the white tabs variant is deprecated, and will be removed in a future release 
+// See https://issues.adobe.com/browse/CUI-1156 and https://issues.adobe.com/browse/CUI-1154
 @tab-white-background-gradient-start-color: rgb(255, 255, 255);
 @tab-white-background-gradient-end-color: rgb(245, 245, 245);
 
@@ -52,6 +54,8 @@
       border: @px solid @tab-dark-outline-color;
     }
 
+    /* Note: the white tabs variant is deprecated, and will be removed in a future release */
+    /* See https://issues.adobe.com/browse/CUI-1156 and https://issues.adobe.com/browse/CUI-1154 */  
     &.white {
       > nav > a.active {
         .gradient(@tab-white-background-gradient-start-color, @tab-white-background-gradient-end-color);

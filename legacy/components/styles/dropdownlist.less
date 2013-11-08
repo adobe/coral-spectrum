@@ -2,6 +2,9 @@
 * Also used by auto completers, see filters.less
 */
 
+@dropdown-checkbox-background-color: rgb(255, 255, 255);
+
+
 // FIXME .dropdown-container MUST be reviewed. See CUI-770
 .dropdown-container {
     display: inline-block;
@@ -123,7 +126,7 @@ form.aligned {
       width: 1rem;
       height: 1rem;
       border: @px solid @checkbox-border-color;
-      background: @checkbox-background-color;
+      background: @dropdown-checkbox-background-color;
       .background-size(contain);
       margin-right: .5rem;
       vertical-align: text-bottom;

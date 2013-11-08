@@ -122,17 +122,10 @@
             var self = this;
 
             if (this.options.nativewidget || force) {
-                this._select.css({
-                    display: 'block',
-                    width: this._button.outerWidth(),
-                    height: this._button.outerHeight(),
-                    opacity: 0.01
-                });
+                this.$element.addClass('native');
 
-                this._select.position({
-                    my: 'left top',
-                    at: 'left top',
-                    of: this._button
+                this._select.css({
+                    height: this._button.outerHeight()
                 });
 
                 if (this.options.multiple) {
@@ -144,6 +137,7 @@
                 this._select.on('change.select', this._handleNativeSelect.bind(this));
 
             } else {
+                this.$element.removeClass('native');
                 this._select.off('change.select');
             }
         },

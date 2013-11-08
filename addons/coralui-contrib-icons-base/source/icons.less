@@ -63,6 +63,7 @@
   text-decoration: none; // Don't let icons underline
   text-rendering: geometricPrecision;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   line-height: 1.172; //line-height: 1.385; // The truth, the way. Don't question it.
 
   color: @icon-color;
@@ -248,6 +249,18 @@ button,
       opacity: @icon-white-inbutton-opacity;
     }
   }
+}
+
+/**
+ Mixin: .no-glow
+ Make an element glow
+ TODO: add partial glow mixin for mixed top/bottom/left/right only
+*/
+.no-glow() {
+    border: none;
+    outline: none;
+    .box-shadow(0 0 0 transparent);
+    text-shadow: none;
 }
 
 // Clickable icons

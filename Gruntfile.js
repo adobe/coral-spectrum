@@ -572,7 +572,8 @@ module.exports = function (grunt) {
                 src: ['<%= dirs.temp %>/js/**.js', '<%= dirs.temp %>/js/components/**.js'],
                 options: {
                     destination: '<%= dirs.build %>/doc',
-                    template: 'res/docTemplate/'
+                    template: 'res/docTemplate/',
+                    private: false
                 }
             }
         }, // jsdoc
