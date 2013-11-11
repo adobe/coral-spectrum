@@ -579,64 +579,6 @@ module.exports = function (grunt) {
         }, // jsdoc
 
         compress: {
-            release: {
-                options: {
-                    archive: '<%= dirs.build %>/release/cui-<%= meta.version %>.zip'
-                },
-                files: [
-                    {
-                        expand: true,
-                        cwd: '<%= dirs.build %>',
-                        src: [
-                            'css/cui.min.css',
-                            'js/CUI.min.js',
-                            'res/components/**',
-                            'res/icons/**'
-                        ],
-                        dest: 'coral-ui-<%= meta.version %>/'
-                    },
-                    {
-                        expand: true,
-                        cwd: 'res/package-metadata',
-                        src: ['README.md'],
-                        dest: 'coral-ui-<%= meta.version %>/'
-                    }
-                ]
-            },
-            full: {
-                options: {
-                    archive: '<%= dirs.build %>/release/cui-<%= meta.version %>-full.zip'
-                },
-                files: [
-                    {
-                        expand: true,
-                        cwd: '<%= dirs.build %>',
-                        src: [
-                            'css/cui*.css',
-                            'js/CUI*.js',
-                            'js/libs/**',
-                            'js/source/**',
-                            'less/components/**',
-                            'less/shared/**',
-                            'less/externals/**',
-                            'less/cui*.less',
-                            'less/base.less',
-                            'less/components.less',
-                            'less/elements.less',
-                            'res/components/**',
-                            'res/icons/**',
-                            'tests/**'
-                        ], 
-                        dest: 'coral-ui-<%= meta.version %>/'
-                    },
-                    {
-                        expand: true,
-                        cwd: 'res/package-metadata',
-                        src: ['README.md'],
-                        dest: 'coral-ui-<%= meta.version %>/'
-                    }
-                ]
-            },
             publish: {
                 options: {
                     mode: 'tgz',
@@ -653,7 +595,6 @@ module.exports = function (grunt) {
                             'images/**',
                             'js/**',
                             'less/**',
-                            'release/**',
                             'res/**',
                             'tests/**',
                             '*.html'
@@ -722,9 +663,6 @@ module.exports = function (grunt) {
         'retro',
         'handlebars:components',
         'uglify:template_components',
-        'compress:release',
-        'compress:full',
-        'copy:release_archive',
         'mocha',
         'jsdoc'
     ]);
