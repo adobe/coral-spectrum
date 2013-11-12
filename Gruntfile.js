@@ -621,6 +621,13 @@ module.exports = function (grunt) {
                     stderr: true
                 }
             },
+            "local-guide": {
+                "command": "sh coralui-local-guide <%= meta.appName %> <%= dirs.build %>/release/<%= meta.appName %>-<%= meta.version %>.tgz",
+                "options": {
+                    stdout: true,
+                    stderr: true
+                }
+            },
             "publish": {
                 "command": "npm publish <%= dirs.build %>/release/<%= meta.appName %>-<%= meta.version %>.tgz",
                 "options": {
@@ -714,6 +721,11 @@ module.exports = function (grunt) {
     grunt.task.registerTask('local-publish', [ // publish NPM package locally
         'publish-build',
         'shell:local-publish'
+    ]);
+
+    grunt.task.registerTask('local-guide', [ // publish to local guide
+        'publish-build',
+        'shell:local-guide'
     ]);
 
     grunt.task.registerTask('dev', [ // task for developers to work
