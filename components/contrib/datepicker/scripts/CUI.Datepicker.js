@@ -519,7 +519,7 @@
     _swipeHandler: function (event) {
       var d = event.direction,
         year = this.displayDateTime.year(),
-        month = this.this.displayDateTime.month();
+        month = this.displayDateTime.month();
 
       if (d === "left") {
         this.displayDateTime = normalizeDate(moment([year, month + 1, 1]));
