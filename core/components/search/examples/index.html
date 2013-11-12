@@ -14,8 +14,9 @@
     <script src="../../js/CUI.js"></script>
   <script>
     $(document).ready(function(){
-      $('#searchContainer').append('<div class="search"><input type="text" placeholder="Search"><button type="submit">Search</button><button type="reset">Clear</button></div>')
-      $('#searchContainer2').append('<div class="search"><input type="text" placeholder="Search"><button type="submit">Search</button><button type="reset">Clear</button></div>')
+      $('.searchContainer').append('<div class="search"><input type="text" placeholder="Search"><button type="submit">Search</button><button type="reset">Clear</button></div>');
+
+      $('.searchContainerDark').append('<div class="search"><input type="text" placeholder="Search"><button type="submit">Search</button><button type="reset">Clear</button></div>');
     });
   </script>
 
@@ -45,20 +46,20 @@
         <button>Search</button>
       </div> -->
       <h2>Basic</h2>
-      <div class="search" id="search-basic">
+      <div class="search" id="vtest-search-basic">
         <input type="text" placeholder="Search">
         <button type="submit">Search</button>
         <button type="reset">Clear</button>
       </div>
       <h2>No type="submit" button</h2>
-      <div class="search" id="search-basic-no-submit">
+      <div class="search" id="vtest-search-basic-no-submit">
         <input type="text" placeholder="Search">
         <button>Search</button>
       </div>
       <h2>JQuery injected</h2>
-        <div id="searchContainer"></div>
+        <div id='vtest-search-injected-dom' class="searchContainer"></div>
       <h2>Error</h2>
-      <div class="search error" id="search-error">
+      <div class="search error" id="vtest-search-error">
         <input type="text" placeholder="Search" value="uh oh...">
         <button type="submit">Search</button>
         <button type="reset">Clear</button>
@@ -70,7 +71,7 @@
         <button type="reset">Clear</button>
       </div -->
       <h2>Disabled</h2>
-      <div class="search" id="search-disabled">
+      <div class="search" id="vtest-search-disabled">
         <input type="text" placeholder="Search" value="y u no worky!" disabled>
         <button type="submit" disabled>Search</button>
         <button type="reset" disabled>Clear</button>
@@ -86,20 +87,20 @@
         <button>Search</button>
       </div> -->
       <h2>Basic</h2>
-      <div class="search" id="search-basic-dark">
+      <div class="search" id="vtest-search-basic-dark">
         <input type="text" placeholder="Search">
         <button type="submit">Search</button>
         <button type="reset">Clear</button>
       </div>
       <h2>No type="submit" button</h2>
-      <div class="search" id="search-basic-no-submit-dark">
+      <div class="search" id="vtest-search-basic-no-submit-dark">
         <input type="text" placeholder="Search">
         <button>Search</button>
       </div>
       <h2>JQuery injected</h2>
-      <div id="searchContainer2"></div>
+      <div id='vtest-search-injected-dom-dark' class="searchContainerDark"></div>
       <h2>Error</h2>
-      <div class="search error" id="search-error-dark">
+      <div class="search error" id="vtest-search-error-dark">
         <input type="text" placeholder="Search" value="uh oh...">
         <button type="submit">Search</button>
         <button type="reset">Clear</button>
@@ -111,7 +112,7 @@
         <button type="reset">Clear</button>
       </div -->
       <h2>Disabled</h2>
-      <div class="search" id="search-disabled-dark">
+      <div class="search" id="vtest-search-disabled-dark">
         <input type="text" placeholder="Search" value="y u no worky!" disabled>
         <button type="submit" disabled>Search</button>
         <button type="reset" disabled>Clear</button>
