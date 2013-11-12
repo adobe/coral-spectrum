@@ -57,13 +57,11 @@ input[type=radio] {
   }
   
   &:disabled {
-    cursor: default;
-    pointer-events: none;
+    cursor: auto;
 
     & + label,
     & + span {
-      cursor: default;
-      pointer-events: none;
+    cursor: auto;
 
       color: @checkbox-disabled-text-color;
 
@@ -108,8 +106,11 @@ input[type=radio] {
   }
 
   &:disabled {
+    cursor: auto;
+
     &:checked + span:before,
     &:checked + label:before {
+      cursor: auto;
       background-image: url('@{component-resource-folder}/checkbox/radio_dot_disabled.png');
     }
   }
