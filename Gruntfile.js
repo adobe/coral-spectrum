@@ -749,12 +749,6 @@ module.exports = function (grunt) {
         'watch'
     ]);
 
-    grunt.task.registerTask('validate', [ // code validation tasks
-        'cssmetrics:dev'
-    ]);
-
-
-
     // Default task
     grunt.task.registerTask('default', [
         'retro'
