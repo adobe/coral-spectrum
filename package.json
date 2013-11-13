@@ -28,6 +28,6 @@
     "chai-jquery": "1.1.1",
     "sinon": "1.7.3",
     "mocha": "1.8.1",
-    "grunt-css-metrics": "git+http://git@github.com/kaelig/grunt-css-metrics.git#d752d003f58baacbbc4040a15decfac0d8e4af8d"
+    "grunt-css-metrics": "git+http://github.com/kaelig/grunt-css-metrics.git#d752d003f58baacbbc4040a15decfac0d8e4af8d"
   }
 }
