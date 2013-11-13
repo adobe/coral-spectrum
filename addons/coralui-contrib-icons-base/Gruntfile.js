@@ -102,7 +102,7 @@ module.exports = function(grunt) {
           },
           {
             expand: true,
-            cwd: '<%= dirs.temp %>/fontgen/html/',
+            cwd: '<%= dirs.temp %>/fontgen/less/',
             src: ['AdobeIcons.html'],
             dest: '<%= dirs.build %>/examples',
             rename: function (dest, src) {
