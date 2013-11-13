@@ -4,7 +4,9 @@ CoralUI is an HTML, CSS, and JavaScript library that implements the [CloudUI][0]
 See the [CoralUI Wiki][3] for more information.
 
 # Who maintains CoralUI?
-CoralUI is an internal open source effort with backing from designers and product development teams across Adobe.   
+CoralUI is an internal open source effort with backing from designers and product development teams across Adobe. 
+
+See the [resource map][4] for an overview of the teams and resources available.
 
 # How do I get started?
 First, contact the [mailing list][2] and introduce yourself.  Becoming part of the community is only way let us know how you want to be involved.  The list is also the best way to discover what current priorities are. 
@@ -21,3 +23,4 @@ Just "Read The Fine Manual", a.k.a the [CoralUI Wiki][3].
 [1]: https://git.corp.adobe.com/pages/Coral/CoralUI/
 [2]: mailto:CoralUI@adobe.com
 [3]: https://git.corp.adobe.com/Coral/CoralUI/wiki/Home
+[4]: https://wiki.corp.adobe.com/display/CloudUI/CloudUI+and+CoralUI+Maps
