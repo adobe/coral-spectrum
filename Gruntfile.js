@@ -11,6 +11,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-css-metrics');
     grunt.loadNpmTasks('grunt-mocha');
     grunt.loadNpmTasks('grunt-jsdoc');
     grunt.loadNpmTasks('grunt-shell');
@@ -635,6 +636,7 @@ module.exports = function (grunt) {
                 }
             }
         },
+        // gh-pages
         connect: {
             server: {
                 options: {
@@ -643,6 +645,18 @@ module.exports = function (grunt) {
                     hostname: '*'
                 }
             }
+        }, 
+        // connect
+        cssmetrics: {
+          coralui: {
+            src: [
+              '<%= dirs.build %>/css/cui.css'
+            ],
+            options: {
+              maxSelectors: 4096
+            }
+          }
+        // css metrics
         }
 
     }); // end init config
@@ -671,6 +685,7 @@ module.exports = function (grunt) {
         'handlebars:components',
         'uglify:template_components',
         'mocha',
+        'cssmetrics',
         'jsdoc'
     ]);
 
@@ -694,7 +709,8 @@ module.exports = function (grunt) {
         'generate-imports',
         'less:cui',
         'less:cui-wrapped',
-        'cssmin:cui'
+        'cssmetrics',
+        'cssmin:cui',
     ]);
 
     grunt.task.registerTask('quickbuild', [
@@ -732,8 +748,6 @@ module.exports = function (grunt) {
         'connect',
         'watch'
     ]);
-
-
 
     // Default task
     grunt.task.registerTask('default', [
