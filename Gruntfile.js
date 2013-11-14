@@ -650,7 +650,8 @@ module.exports = function (grunt) {
         cssmetrics: {
           coralui: {
             src: [
-              '<%= dirs.build %>/css/cui.css'
+              '<%= dirs.build %>/css/cui.css',
+              '<%= dirs.build %>/css/cui.min.css'
             ],
             options: {
               maxSelectors: 4096

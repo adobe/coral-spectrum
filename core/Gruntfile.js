@@ -19,6 +19,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-css-metrics');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
@@ -339,6 +340,19 @@ module.exports = function(grunt) {
       }
     }, // less
 
+    cssmetrics: {
+      core: {
+        src: [
+          '<%= dirs.build %>/css/cui-core.css',
+          '<%= dirs.build %>/css/cui-core.min.css'
+        ],
+        options: {
+          maxSelectors: 4096
+        }
+      }
+    // css metrics
+    },
+
     concat: {
       cui: {
         src: getIncludes("cui"),
@@ -460,6 +474,7 @@ module.exports = function(grunt) {
     'generate-imports',
     'less',
     'cssmin',
+    'cssmetrics',
     'mocha'
   ]);
 
@@ -478,7 +493,7 @@ module.exports = function(grunt) {
   ]);
 
   grunt.task.registerTask('quickless', [
-    'copy:less_cui', 'less','cssmin'
+    'copy:less_cui', 'less', 'cssmin', 'cssmetrics'
   ]);
 
   grunt.task.registerTask('quickhtml', [
