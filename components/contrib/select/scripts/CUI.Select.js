@@ -231,11 +231,11 @@
             // if the element is not there, create it
             if (this._selectList.length === 0) {
                 this._selectList = $('<ul/>', {
-                    'id': CUI.util.uuid(),
+                    'id': CUI.util.getNextId(),
                     'class': 'selectlist'
                 }).appendTo(this.$element);
             } else if (!this._selectList.attr('id')) {
-                this._selectList.attr('id', CUI.util.uuid());
+                this._selectList.attr('id', CUI.util.getNextId());
             }
 
             this._button.attr({

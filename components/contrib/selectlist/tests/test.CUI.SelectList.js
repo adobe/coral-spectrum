@@ -12,7 +12,7 @@ describe('CUI.SelectList', function() {
     var $trigger, $selectList;
 
     beforeEach(function() {
-      var id = CUI.util.uuid();
+      var id = CUI.util.getNextId();
 
       $trigger = $('<button data-toggle="selectlist" ' +
           'data-target="#' + id + '">Show List</button>')
