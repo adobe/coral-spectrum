@@ -437,7 +437,8 @@ module.exports = function (grunt) {
             },
             core_html: {
                 files: [
-                    dirs.core.components + '/**/examples/**.html'
+                    dirs.core.components + '/**/examples/**.html',
+                    dirs.core.shared + '/examples/**/*.html'
                 ],
                 tasks: ['subgrunt:core_quickhtml', 'copy:retro'],
                 options: {
