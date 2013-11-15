@@ -4,35 +4,41 @@
 */
 
 // Alert
-@alert-header-height: 32*@px;
+@alert-header-height: 36*@px;
 @alert-font-color: rgb(50, 50, 50);
 
 @alert-error-background-color: rgb(250, 90, 80);
 @alert-error-background-light-color: rgb(250, 120, 110);
 @alert-error-border-color: rgba(120, 10, 10, .6);
+@alert-error-divider-color: rgb(225, 65, 50);
 
 @alert-notice-background-color: rgb(245, 200, 65);
 @alert-notice-background-light-color: rgb(250, 210, 105);
 @alert-notice-border-color: rgba(65, 45, 0, .4);
+@alert-notice-divider-color: rgb(225, 180, 60);
 
 @alert-success-background-color: rgb(140, 195, 80);
 @alert-success-background-light-color: rgb(165, 205, 115, 100);
 @alert-success-border-color: rgba(5, 65, 0, .5);
+@alert-success-divider-color: rgb(125, 175, 75);
 
 @alert-info-background-color: rgb(90, 155, 220);
 @alert-info-background-light-color: rgb(125, 175, 230);
 @alert-info-border-color: rgba(0, 30, 70, .5);
+@alert-info-divider-color: rgb(50, 135, 210);
 
 .alert,
 .alert.large > strong { 
-  background-position: 0.5rem 0.5rem;
+  background-position: 15*@px 9*@px;
   background-repeat: no-repeat;
-  .background-size(1rem 1rem);
+  .background-size(16*@px 16*@px);
 }
 
 .alert {
-  margin: 0.5rem 0;
-  padding: 0.5rem;
+  margin: 8*@px 0;
+  padding: 8*@px;
+  min-height: 20*@px; // + padding, etc. to get 38px total height
+  padding-left: 26*@px;
 
   // Default is blue
   border: @px solid @alert-info-border-color;
@@ -49,8 +55,15 @@
   // Heading text
   > strong {
     display: inline-block;
-    margin-right: 0.25rem;
+    margin-right: 4*@px;
     text-transform: uppercase;
+  }
+
+  // links in alert should use same font color and be underlined
+  a
+  {
+    color: @alert-font-color;
+    text-decoration: underline;
   }
 
   // Feels weird, but we want to use a div here in case
@@ -65,7 +78,7 @@
   &.success,
   &.help,
   &.info {
-    padding-left: 2rem;
+    padding-left: 40*@px;
   }
 
   &.error,
@@ -74,17 +87,17 @@
   }
 
   &.error {
-    background-color: @alert-error-background-color;
+    background-color: @alert-error-background-light-color;
     border-color: @alert-error-border-color;
   }
 
   &.notice {
-    background-color: @alert-notice-background-color;
+    background-color: @alert-notice-background-light-color;
     border-color: @alert-notice-border-color;
   }
 
   &.success {
-    background-color: @alert-success-background-color;
+    background-color: @alert-success-background-light-color;
     border-color: @alert-success-border-color;
 
     background-image: url('@{component-resource-folder}/alert/check.png');
@@ -92,7 +105,7 @@
 
   &.help,
   &.info {
-    background-color: @alert-info-background-color;
+    background-color: @alert-info-background-light-color;
     border-color: @alert-info-border-color;
   }
 
@@ -112,10 +125,16 @@
 
     background-image: none;
 
+    a
+    {
+      color: @alert-font-color;
+      text-decoration: underline;
+    }
+
     > .close {
       position: absolute;
-      top: 0.5rem;
-      right: 0.5rem;
+      top: 8*@px;
+      right: 8*@px;
     }
 
     > strong {
@@ -131,7 +150,7 @@
 
     > div { 
       display: block;
-      padding: 0.5rem;
+      padding: 8*@px 8*@px 8*@px 15*@px;
     }
 
     &.error,
@@ -140,7 +159,7 @@
     &.help,
     &.info {
       > strong {
-        padding-left: 2rem;
+        padding-left: 40*@px;
       }
     }
 
@@ -156,7 +175,7 @@
 
       > strong {
         background-color: @alert-error-background-color;
-        border-color: @alert-error-border-color;
+        border-color: @alert-error-divider-color;
       }
     }
 
@@ -165,7 +184,7 @@
 
       > strong {
         background-color: @alert-notice-background-color;
-        border-color: @alert-notice-border-color;
+        border-color: @alert-notice-divider-color;
       }
     }
 
@@ -174,7 +193,7 @@
 
       > strong {
         background-color: @alert-success-background-color;
-        border-color: @alert-success-border-color;
+        border-color: @alert-success-divider-color;
 
         background-image: url('@{component-resource-folder}/alert/check.png');
       }
@@ -186,7 +205,7 @@
 
       > strong {
         background-color: @alert-info-background-color;
-        border-color: @alert-info-border-color;
+        border-color: @alert-info-divider-color;
       }
     }
 
