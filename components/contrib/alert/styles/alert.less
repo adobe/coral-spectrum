@@ -6,6 +6,8 @@
 // Alert
 @alert-header-height: 36*@px;
 @alert-font-color: rgb(50, 50, 50);
+@alert-icon-color: rgba(0, 0, 0, .65);
+@alert-icon-font-size: 16*@px; 
 
 @alert-error-background-color: rgb(250, 90, 80);
 @alert-error-background-light-color: rgb(250, 120, 110);
@@ -38,7 +40,6 @@
   margin: 8*@px 0;
   padding: 8*@px;
   min-height: 20*@px; // + padding, etc. to get 38px total height
-  padding-left: 26*@px;
 
   // Default is blue
   border: @px solid @alert-info-border-color;
@@ -73,17 +74,15 @@
     display: inline;
   }
 
+  // Text-indent allows for a second line of text to align 
+  // with the first line of text instead of the icon.
   &.error,
   &.notice,
   &.success,
   &.help,
-  &.info {
+  &.info{
     padding-left: 40*@px;
-  }
-
-  &.error,
-  &.notice {
-    background-image: url('@{component-resource-folder}/alert/exclaimation.png');
+    text-indent: -25px;
   }
 
   &.error {
@@ -99,8 +98,6 @@
   &.success {
     background-color: @alert-success-background-light-color;
     border-color: @alert-success-border-color;
-
-    background-image: url('@{component-resource-folder}/alert/check.png');
   }
 
   &.help,
@@ -109,12 +106,33 @@
     border-color: @alert-info-border-color;
   }
 
-  &.help{
-    background-image: url('@{component-resource-folder}/alert/question.png');
+  &.error:before,
+  &.notice:before,
+  &.success:before,
+  &.help:before,
+  &.info:before {
+    padding-right: 30px;
+    font-family: AdobeIcons;
+    color: @alert-icon-color;
+    font-size: @alert-icon-font-size;
+    font-weight: normal;
   }
 
-  &.info {
-    background-image: url('@{component-resource-folder}/alert/i.png');
+  &.error:before,
+  &.notice:before {
+    content: "\f10d"; 
+  }
+
+  &.success:before {
+    content: "\f143";
+  }
+
+  &.help:before {
+    content: "\f1df";
+  }
+
+  &.info:before {
+    content: "\f1ea";  
   }
 
   // Large alerts
@@ -123,7 +141,13 @@
 
     padding: 0;
 
-    background-image: none;
+    &.error:before,
+    &.notice:before,
+    &.success:before,
+    &.help:before,
+    &.info:before {
+      content: none;
+    }
 
     a
     {
@@ -151,6 +175,7 @@
     > div { 
       display: block;
       padding: 8*@px 8*@px 8*@px 15*@px;
+      text-indent: 0px;
     }
 
     &.error,
@@ -158,17 +183,21 @@
     &.success,
     &.help,
     &.info {
+
       > strong {
         padding-left: 40*@px;
+        text-indent: -25px;
+      }
+
+      > strong:before {
+        padding-right: 8px;
+        font-family: AdobeIcons;
+        color: @alert-icon-color;
+        font-size: @alert-icon-font-size;
+        font-weight: normal;
       }
     }
 
-    &.error,
-    &.notice {
-      > strong {
-        background-image: url('@{component-resource-folder}/alert/exclaimation.png');
-      }
-    }
 
     &.error {
       background-color: @alert-error-background-light-color;
@@ -177,6 +206,11 @@
         background-color: @alert-error-background-color;
         border-color: @alert-error-divider-color;
       }
+
+      > strong:before {
+        content: "\f10d";    
+      }
+
     }
 
     &.notice {
@@ -186,6 +220,11 @@
         background-color: @alert-notice-background-color;
         border-color: @alert-notice-divider-color;
       }
+
+      > strong:before {
+        content: "\f10d";    
+      }
+
     }
 
     &.success {
@@ -194,9 +233,12 @@
       > strong {
         background-color: @alert-success-background-color;
         border-color: @alert-success-divider-color;
-
-        background-image: url('@{component-resource-folder}/alert/check.png');
       }
+
+      > strong:before {
+        content: "\f143";
+      }
+
     }
 
     &.help,
@@ -210,15 +252,19 @@
     }
 
     &.help {
-      > strong {
-        background-image: url('@{component-resource-folder}/alert/question.png');
+
+      > strong:before {
+        content: "\f1df";
       }
+
     }
 
     &.info {
-      > strong {
-        background-image: url('@{component-resource-folder}/alert/i.png');
+
+      > strong:before {
+        content: "\f1ea";  
       }
+
     }
   }
 }
