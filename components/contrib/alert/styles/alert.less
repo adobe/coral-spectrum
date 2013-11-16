@@ -4,35 +4,42 @@
 */
 
 // Alert
-@alert-header-height: 32*@px;
+@alert-header-height: 36*@px;
 @alert-font-color: rgb(50, 50, 50);
+@alert-icon-color: rgba(0, 0, 0, .65);
+@alert-icon-font-size: 16*@px; 
 
 @alert-error-background-color: rgb(250, 90, 80);
 @alert-error-background-light-color: rgb(250, 120, 110);
 @alert-error-border-color: rgba(120, 10, 10, .6);
+@alert-error-divider-color: rgb(225, 65, 50);
 
 @alert-notice-background-color: rgb(245, 200, 65);
 @alert-notice-background-light-color: rgb(250, 210, 105);
 @alert-notice-border-color: rgba(65, 45, 0, .4);
+@alert-notice-divider-color: rgb(225, 180, 60);
 
 @alert-success-background-color: rgb(140, 195, 80);
 @alert-success-background-light-color: rgb(165, 205, 115, 100);
 @alert-success-border-color: rgba(5, 65, 0, .5);
+@alert-success-divider-color: rgb(125, 175, 75);
 
 @alert-info-background-color: rgb(90, 155, 220);
 @alert-info-background-light-color: rgb(125, 175, 230);
 @alert-info-border-color: rgba(0, 30, 70, .5);
+@alert-info-divider-color: rgb(50, 135, 210);
 
 .alert,
 .alert.large > strong { 
-  background-position: 0.5rem 0.5rem;
+  background-position: 15*@px 9*@px;
   background-repeat: no-repeat;
-  .background-size(1rem 1rem);
+  .background-size(16*@px 16*@px);
 }
 
 .alert {
-  margin: 0.5rem 0;
-  padding: 0.5rem;
+  margin: 8*@px 0;
+  padding: 8*@px;
+  min-height: 20*@px; // + padding, etc. to get 38px total height
 
   // Default is blue
   border: @px solid @alert-info-border-color;
@@ -49,8 +56,15 @@
   // Heading text
   > strong {
     display: inline-block;
-    margin-right: 0.25rem;
+    margin-right: 4*@px;
     text-transform: uppercase;
+  }
+
+  // links in alert should use same font color and be underlined
+  a
+  {
+    color: @alert-font-color;
+    text-decoration: underline;
   }
 
   // Feels weird, but we want to use a div here in case
@@ -60,48 +74,65 @@
     display: inline;
   }
 
+  // Text-indent allows for a second line of text to align 
+  // with the first line of text instead of the icon.
   &.error,
   &.notice,
   &.success,
   &.help,
-  &.info {
-    padding-left: 2rem;
-  }
-
-  &.error,
-  &.notice {
-    background-image: url('@{component-resource-folder}/alert/exclaimation.png');
+  &.info{
+    padding-left: 40*@px;
+    text-indent: -25*@px;
   }
 
   &.error {
-    background-color: @alert-error-background-color;
+    background-color: @alert-error-background-light-color;
     border-color: @alert-error-border-color;
   }
 
   &.notice {
-    background-color: @alert-notice-background-color;
+    background-color: @alert-notice-background-light-color;
     border-color: @alert-notice-border-color;
   }
 
   &.success {
-    background-color: @alert-success-background-color;
+    background-color: @alert-success-background-light-color;
     border-color: @alert-success-border-color;
-
-    background-image: url('@{component-resource-folder}/alert/check.png');
   }
 
   &.help,
   &.info {
-    background-color: @alert-info-background-color;
+    background-color: @alert-info-background-light-color;
     border-color: @alert-info-border-color;
   }
 
-  &.help{
-    background-image: url('@{component-resource-folder}/alert/question.png');
+  &.error:before,
+  &.notice:before,
+  &.success:before,
+  &.help:before,
+  &.info:before {
+    padding-right: 30*@px;
+    font-family: AdobeIcons;
+    color: @alert-icon-color;
+    font-size: @alert-icon-font-size;
+    font-weight: normal;
   }
 
-  &.info {
-    background-image: url('@{component-resource-folder}/alert/i.png');
+  &.error:before,
+  &.notice:before {
+    content: "\f10d"; 
+  }
+
+  &.success:before {
+    content: "\f143";
+  }
+
+  &.help:before {
+    content: "\f1df";
+  }
+
+  &.info:before {
+    content: "\f1ea";  
   }
 
   // Large alerts
@@ -110,12 +141,24 @@
 
     padding: 0;
 
-    background-image: none;
+    &.error:before,
+    &.notice:before,
+    &.success:before,
+    &.help:before,
+    &.info:before {
+      content: none;
+    }
+
+    a
+    {
+      color: @alert-font-color;
+      text-decoration: underline;
+    }
 
     > .close {
       position: absolute;
-      top: 0.5rem;
-      right: 0.5rem;
+      top: 8*@px;
+      right: 8*@px;
     }
 
     > strong {
@@ -131,7 +174,8 @@
 
     > div { 
       display: block;
-      padding: 0.5rem;
+      padding: 8*@px 8*@px 8*@px 15*@px;
+      text-indent: 0px;
     }
 
     &.error,
@@ -139,25 +183,34 @@
     &.success,
     &.help,
     &.info {
+
       > strong {
-        padding-left: 2rem;
+        padding-left: 40*@px;
+        text-indent: -25*@px;
+      }
+
+      > strong:before {
+        padding-right: 8*@px;
+        font-family: AdobeIcons;
+        color: @alert-icon-color;
+        font-size: @alert-icon-font-size;
+        font-weight: normal;
       }
     }
 
-    &.error,
-    &.notice {
-      > strong {
-        background-image: url('@{component-resource-folder}/alert/exclaimation.png');
-      }
-    }
 
     &.error {
       background-color: @alert-error-background-light-color;
 
       > strong {
         background-color: @alert-error-background-color;
-        border-color: @alert-error-border-color;
+        border-color: @alert-error-divider-color;
       }
+
+      > strong:before {
+        content: "\f10d";    
+      }
+
     }
 
     &.notice {
@@ -165,8 +218,13 @@
 
       > strong {
         background-color: @alert-notice-background-color;
-        border-color: @alert-notice-border-color;
+        border-color: @alert-notice-divider-color;
       }
+
+      > strong:before {
+        content: "\f10d";    
+      }
+
     }
 
     &.success {
@@ -174,10 +232,13 @@
 
       > strong {
         background-color: @alert-success-background-color;
-        border-color: @alert-success-border-color;
-
-        background-image: url('@{component-resource-folder}/alert/check.png');
+        border-color: @alert-success-divider-color;
       }
+
+      > strong:before {
+        content: "\f143";
+      }
+
     }
 
     &.help,
@@ -186,20 +247,24 @@
 
       > strong {
         background-color: @alert-info-background-color;
-        border-color: @alert-info-border-color;
+        border-color: @alert-info-divider-color;
       }
     }
 
     &.help {
-      > strong {
-        background-image: url('@{component-resource-folder}/alert/question.png');
+
+      > strong:before {
+        content: "\f1df";
       }
+
     }
 
     &.info {
-      > strong {
-        background-image: url('@{component-resource-folder}/alert/i.png');
+
+      > strong:before {
+        content: "\f1ea";  
       }
+
     }
   }
 }
