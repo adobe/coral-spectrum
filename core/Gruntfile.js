@@ -242,22 +242,6 @@ module.exports = function(grunt) {
           }
         ]
       },
-      shared: {
-        files: [
-          {
-            expand: true,
-            cwd: '<%= dirs.shared %>/examples/',
-            src: ['**/*.html'],
-            dest: '<%= dirs.build %>/examples',
-            rename: function (dest, src) {
-              var srcPath = src.split('/'),
-                  component = srcPath[srcPath.length - 2],
-                  filename = srcPath[srcPath.length - 1];
-              return dest  + '/' + component + '/' + filename; 
-            }
-          }
-        ]
-      },
       js_jqueryui: {
         files: [
           {
@@ -425,8 +409,7 @@ module.exports = function(grunt) {
         }, // styles
         html: {
           files: [
-            dirs.components + '/**/examples/**.html',
-            dirs.shared + '/examples/**/*.html'
+            dirs.components + '/**/examples/**.html'
           ],
           tasks: ['quickhtml'],
           options: {
@@ -508,7 +491,7 @@ module.exports = function(grunt) {
   ]);
 
   grunt.task.registerTask('quickhtml', [
-    'copy:res_components', 'copy:shared'
+    'copy:res_components'
   ]);
 
 
