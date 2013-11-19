@@ -45,6 +45,7 @@
     &,
     &:hover,
     &:active,
+    &:focus,
     &:disabled {
       border: none;
       border-left: @px solid @textfield-border-color;
@@ -293,8 +294,12 @@
       margin: 0 8*@px;
     }
 
-    .dropdown {
+    .select {
       margin: 0;
+      width: 56*@px;
+      height: @component-single-line-height;
+      min-width: 0;
+
       button {
         width: 56*@px;
         min-width: 0;
@@ -309,6 +314,6 @@ form.vertical {
   }
 }
 
-.dropdown-list {
+.selectlist {
     z-index: 10050!important;
 }

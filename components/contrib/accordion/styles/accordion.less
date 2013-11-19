@@ -72,17 +72,25 @@
       font-style: normal;
       font-weight: bold;
       color: @accordion-primary-font-color;
+      padding-right: 13*@px;
     }
     
     &:hover,
     &:focus {
-      background: @accordion-background-hover-color;
       outline: none;
 
       [class^="icon-"]:before,
       [class*=" icon-"]:before {
           opacity: @icon-hover-opacity;
       }
+    }
+
+    &:hover{
+      background: @accordion-background-hover-color;      
+    }
+
+    &:focus{
+      .gradient(@accordion-background-gradient-start-color, @accordion-background-gradient-end-color);
     }
   }
   
@@ -142,14 +150,21 @@
 
       &:hover,
       &:focus {
-          background: @accordion-dark-background-gradient-end-color;
-
           [class^="icon-"]:before,
           [class*=" icon-"]:before {
               color: @icon-white-hover-color;
               opacity: @icon-white-hover-opacity;
           }
       }
+
+      &:hover{
+        background: @accordion-dark-background-gradient-end-color;      
+      }
+
+      &:focus{
+        .gradient(@accordion-dark-background-gradient-start-color, @accordion-dark-background-gradient-end-color);
+      }
+
     }
 
     &.active {

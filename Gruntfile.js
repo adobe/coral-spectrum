@@ -11,7 +11,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-gh-pages');
+    grunt.loadNpmTasks('grunt-css-metrics');
     grunt.loadNpmTasks('grunt-mocha');
     grunt.loadNpmTasks('grunt-jsdoc');
     grunt.loadNpmTasks('grunt-shell');
@@ -97,7 +97,6 @@ module.exports = function (grunt) {
             contrib: 'components/contrib'
         },
         legacy: 'legacy',
-        guide: 'addons/coralui-contrib-guide',
         temp: 'temp',
         modules: 'node_modules',
         externals: 'externals',
@@ -357,32 +356,8 @@ module.exports = function (grunt) {
                     }
                 ] // /retro files
             }, 
-            guide: {
+            externals: {
                 files: [
-                    { // guide html
-                        expand: true,
-                        cwd: '<%= dirs.guide %>/templates/',
-                        src: ['**'],
-                        dest: '<%= dirs.build %>/'
-                    },
-                    { // guide less
-                        expand: true,
-                        cwd: '<%= dirs.guide %>/styles/',
-                        src: ['**'],
-                        dest: '<%= dirs.build %>/less'
-                    },
-                    { // guide scripts
-                        expand: true,
-                        cwd: '<%= dirs.guide %>/scripts/',
-                        src: ['**'],
-                        dest: '<%= dirs.build %>/js/'
-                    },
-                    { // guide resources
-                        expand: true,
-                        cwd: '<%= dirs.guide %>/res/',
-                        src: ['**'],
-                        dest: '<%= dirs.build %>/res/guide'
-                    },
                     { // get external dependencies
                         expand: true,
                         flatten: true,
@@ -390,7 +365,7 @@ module.exports = function (grunt) {
                         src: ['*/*.js'],
                         dest: '<%= dirs.build %>/js/libs'
                     }
-                ] // guide files
+                ]
             },
             js_source: {
                 files: [
@@ -495,8 +470,7 @@ module.exports = function (grunt) {
             legacy_scripts: {
                 files: [
                     dirs.legacy + '/components/scripts/*.js',
-                    dirs.legacy + '/components/tests/test.*.js',
-                    dirs.legacy + '/guide/js/guide.js'
+                    dirs.legacy + '/components/tests/test.*.js'
                 ],
                 tasks: ['quicktest']
             },
@@ -505,15 +479,6 @@ module.exports = function (grunt) {
                     dirs.legacy + '/components/styles/*.less'
                 ],
                 tasks: ['quickless']
-            },
-            // watch: guide content
-            guide: {
-                files: [
-                    dirs.guide + '/scripts/*.js',
-                    dirs.guide + '/styles/*.less',
-                    dirs.guide + '/templates/*.html'
-                ],
-                tasks: ['guide']
             }
 
         },
@@ -538,17 +503,6 @@ module.exports = function (grunt) {
                 },
                 files: {
                     '<%= dirs.build %>/css/cui.css': '<%= dirs.build %>/less/cui.less'
-                }
-            },
-            guide: {
-                options: {
-                    paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
-                        dirs.build+'/less/'
-                    ]
-                },
-                files: {
-                    '<%= dirs.build %>/css/guide.css': '<%= dirs.build %>/less/guide.less',
-                    '<%= dirs.build %>/css/prettify.css': '<%= dirs.build %>/less/prettify.css'
                 }
             }
         }, // less
@@ -626,64 +580,6 @@ module.exports = function (grunt) {
         }, // jsdoc
 
         compress: {
-            release: {
-                options: {
-                    archive: '<%= dirs.build %>/release/cui-<%= meta.version %>.zip'
-                },
-                files: [
-                    {
-                        expand: true,
-                        cwd: '<%= dirs.build %>',
-                        src: [
-                            'css/cui.min.css',
-                            'js/CUI.min.js',
-                            'res/components/**',
-                            'res/icons/**'
-                        ],
-                        dest: 'coral-ui-<%= meta.version %>/'
-                    },
-                    {
-                        expand: true,
-                        cwd:'res/package-metadata',
-                        src:['README.md'],
-                        dest: 'coral-ui-<%= meta.version %>/'
-                    }
-                ]
-            },
-            full: {
-                options: {
-                    archive: '<%= dirs.build %>/release/cui-<%= meta.version %>-full.zip'
-                },
-                files: [
-                    {
-                        expand: true,
-                        cwd: '<%= dirs.build %>',
-                        src: [
-                            'css/cui*.css',
-                            'js/CUI*.js',
-                            'js/libs/**',
-                            'js/source/**',
-                            'less/components/**',
-                            'less/shared/**',
-                            'less/externals/**',
-                            'less/cui*.less',
-                            'less/base.less',
-                            'less/components.less',
-                            'less/elements.less',
-                            'res/components/**',
-                            'res/icons/**',
-                            'tests/**'
-                        ], 
-                        dest: 'coral-ui-<%= meta.version %>/'
-                    },
-                    {
-                        expand: true,
-                        cwd:'res/package-metadata',
-                        src:['README.md'],
-                        dest: 'coral-ui-<%= meta.version %>/'
-                    }
-                ]
-            },
             publish: {
                 options: {
                     mode: 'tgz',
@@ -718,31 +614,16 @@ module.exports = function (grunt) {
             }
         }, // compress
 
-        'gh-pages': {
-            options: {
-                base: '<%= dirs.build %>',
-                repo: 'git@git.corp.adobe.com:Coral/CoralUI.git',
-                clone: '<%= dirs.temp %>/gh-pages',
-                branch: 'gh-pages',
-                message: '@releng github pages to <%= meta.version %>'
-            },
-            release: {
-                src: [
-                    'index.html',
-                    'bug_template.html',
-                    'css/**',
-                    'js/**',
-                    'doc/**',
-                    'res/**',
-                    'images/**',
-                    'examples/**',
-                    'release/**'
-                ]
-            }
-        },
         "shell": {
             "local-publish": {
                 "command": "sh coralui-local-publish <%= meta.appName %> <%= dirs.build %>/release/<%= meta.appName %>-<%= meta.version %>.tgz",
+                "options": {
+                    stdout: true,
+                    stderr: true
+                }
+            },
+            "local-guide": {
+                "command": "sh coralui-local-guide <%= meta.appName %> <%= dirs.build %>/release/<%= meta.appName %>-<%= meta.version %>.tgz",
                 "options": {
                     stdout: true,
                     stderr: true
@@ -755,6 +636,7 @@ module.exports = function (grunt) {
                 }
             }
         },
+        // gh-pages
         connect: {
             server: {
                 options: {
@@ -763,15 +645,22 @@ module.exports = function (grunt) {
                     hostname: '*'
                 }
             }
+        }, 
+        // connect
+        cssmetrics: {
+          coralui: {
+            src: [
+              '<%= dirs.build %>/css/cui.css',
+              '<%= dirs.build %>/css/cui.min.css'
+            ],
+            options: {
+              maxSelectors: 4096
+            }
+          }
+        // css metrics
         }
 
     }); // end init config
-
-    grunt.task.registerTask('guide', [
-        'copy:guide',
-        'less:guide'
-    ]);
-
 
     grunt.task.registerTask('retro', [
         'clean',
@@ -785,7 +674,7 @@ module.exports = function (grunt) {
         'concat:retro',
         'uglify:retro',
         'copy:js_source',
-        'guide'
+        'copy:externals'
     ]);
 
       /*
@@ -796,10 +685,8 @@ module.exports = function (grunt) {
         'retro',
         'handlebars:components',
         'uglify:template_components',
-        'compress:release',
-        'compress:full',
-        'copy:release_archive',
         'mocha',
+        'cssmetrics',
         'jsdoc'
     ]);
 
@@ -815,7 +702,7 @@ module.exports = function (grunt) {
         'mocha',
         'uglify:retro',
         'copy:js_source',
-        'guide'
+        'copy:externals'
     ]);
 
     grunt.task.registerTask('quickless', [
@@ -823,23 +710,19 @@ module.exports = function (grunt) {
         'generate-imports',
         'less:cui',
         'less:cui-wrapped',
-        'cssmin:cui'
+        'cssmetrics',
+        'cssmin:cui',
     ]);
 
     grunt.task.registerTask('quickbuild', [
         'quickless',
-        'guide'
+        'copy:externals'
     ]);
 
     grunt.task.registerTask('watch-start', [
         'quickbuild',
         'quicktest',
         'watch'
-    ]);
-
-    grunt.task.registerTask('release', [ // releases coral to github page
-        'check',
-        'gh-pages:release'
     ]);
 
     grunt.task.registerTask('publish-build', [
@@ -857,12 +740,15 @@ module.exports = function (grunt) {
         'shell:local-publish'
     ]);
 
+    grunt.task.registerTask('local-guide', [ // publish to local guide
+        'publish-build',
+        'shell:local-guide'
+    ]);
+
     grunt.task.registerTask('dev', [ // task for developers to work
         'connect',
         'watch'
     ]);
-
-
 
     // Default task
     grunt.task.registerTask('default', [

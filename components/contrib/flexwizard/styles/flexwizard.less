@@ -15,7 +15,6 @@
   }
 
   > ol {
-    padding: 5*@px 0 0 0;
     font-size: 0; // To remove html whitespace between inline elements
     counter-reset: item;
 
@@ -23,7 +22,7 @@
       position: relative;
       display: inline-block;
       margin: 0;
-      padding: 0 40*@px 5*@px 0;
+      padding: 5*@px 40*@px 5*@px 0;
       border-bottom: 2*@px solid @font-captions-help-color;
       font-size: 12*@px;
       line-height: 20*@px;
@@ -80,6 +79,20 @@
 
         &:after {
           background: rgb(130, 130, 130);
+        }
+      }
+
+      // For one step wizard, display the title just like a dialog
+      &:only-child {
+        border-bottom: none;
+        padding: 0;
+        color: @font-base-dark-color;
+        font-size: 1.125rem;
+        line-height: 2.375rem;
+
+        &:before,
+        &:after {
+          display: none;
         }
       }
     }
