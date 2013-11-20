@@ -1,15 +1,15 @@
-/**
- Mixin: .gradient
- A simpler syntax for gradients
-*/
+//
+// Mixin: .gradient
+// A simpler syntax for gradients
+//
 .gradient(@start: white, @end: black) {
 	#gradient > .vertical(@start, @end);
 }
 
-/**
- Mixin: .pinstripe
- Print a pinstripe gradient
-*/
+//
+// Mixin: .pinstripe
+// Print a pinstripe gradient
+//
 .pinstripe(@background-color, @stripe-color, @angle: -45deg, @stripe-offset: 2%) {
     background-color: @background-color;
     background-image: -webkit-linear-gradient(-45deg, transparent, transparent 50%-@stripe-offset, @stripe-color 50%-@stripe-offset, @stripe-color 50%+@stripe-offset, transparent 50%+@stripe-offset, transparent);
@@ -19,18 +19,18 @@
     background-image: linear-gradient(-45deg, transparent, transparent 50%-@stripe-offset, @stripe-color 50%-@stripe-offset, @stripe-color 50%+@stripe-offset, transparent 50%+@stripe-offset, transparent);
 }
 
-/**
- Mixin: .shadow
- A simpler syntax for shadow with defaults
-*/
+//
+// Mixin: .shadow
+// A simpler syntax for shadow with defaults
+//
 .shadow(@distance: 0.1rem, @spread: 0.1rem, @weight: 0.25) {
     .box-shadow(@distance @distance @spread rgba(0, 0, 0, @weight));
 }
 
-/**
- Mixin: .ellipsis
- Truncate overflowed text using ellipsis: ...
-*/
+//
+// Mixin: .ellipsis
+// Truncate overflowed text using ellipsis: ...
+//
 .ellipsis() {
     // display: inline-block; // Works without in Chrome
     overflow: hidden;
@@ -38,12 +38,12 @@
     text-overflow: ellipsis;
 }
 
-/**
- Mixin: .scrollable
- Make an area scrollable when the contents overflow
-
- Note: Does not work for flexbox children in Chrome
-*/
+//
+// Mixin: .scrollable
+// Make an area scrollable when the contents overflow
+//
+// Note: Does not work for flexbox children in Chrome
+//
 .scrollable() {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch; // Enable iOS-style scrolling
@@ -51,10 +51,10 @@
 }
 
 
-/**
- Mixin: .spin
- Rotate an element forever
-*/
+//
+// Mixin: .spin
+// Rotate an element forever
+//
 .spin(@time: 1s) {
     -webkit-transition-property: -webkit-transform;
     -webkit-transition-duration: @time;
@@ -95,10 +95,10 @@
   -webkit-transform: translate3d(0, 0, 0);
 }
 
-/**
- Mixin: .background-size
- Set the scaling of the background image or gradient
-*/
+//
+// Mixin: .background-size
+// Set the scaling of the background image or gradient
+//
 .background-size(@width, @height) { 
     -webkit-background-size: @width @height;
     -moz-background-size: @width @height;
@@ -108,31 +108,31 @@
     .background-size(@size, @size);
 }
 
-/**
- Mixin: .glow
- Make an element glow
- TODO: add partial glow mixin for mixed top/bottom/left/right only
-*/
+//
+// Mixin: .glow
+// Make an element glow
+// TODO: add partial glow mixin for mixed top/bottom/left/right only
+//
 .glow(@radius: @focus-glow-radius, @glowColor: @focus-glow-color, @borderColor: @focus-border-color, @borderWidth: @px) {
     outline: none;
     .box-shadow(0 0 @radius @glowColor);
     border: @borderWidth solid @borderColor;
 }
 
-/**
- Mixin: .glow-text
- Make text or a font icon glow
-*/
+//
+// Mixin: .glow-text
+// Make text or a font icon glow
+//
 .glow-text(@radius: 0.357rem, @glowColor: @focus-glow-color, @textColor: @focus-border-color) {
     color: darken(@textColor, 35%);
     text-shadow: 0 0 @radius @glowColor;
 }
 
-/**
- Mixin: .no-glow
- Make an element glow
- TODO: add partial glow mixin for mixed top/bottom/left/right only
-*/
+//
+// Mixin: .no-glow
+// Make an element glow
+// TODO: add partial glow mixin for mixed top/bottom/left/right only
+//
 .no-glow() {
     border: none;
     outline: none;
@@ -140,19 +140,19 @@
     text-shadow: none;
 }
 
-/**
- Mixin: .no-select
- Stop text selection for an element and its children
-*/
+//
+// Mixin: .no-select
+// Stop text selection for an element and its children
+//
 .no-select() {
     -webkit-touch-callout: none;
     .user-select(none);
 }
 
-/**
- Mixin: .placeholder
- Input field placeholder font color
-*/
+//
+// Mixin: .placeholder
+// Input field placeholder font color
+//
 .placeholder(@color) {
     &::-webkit-input-placeholder { color: @color; }
     &:-moz-placeholder { color: @color; } // Firefox 18-
@@ -160,18 +160,18 @@
     &:-ms-input-placeholder { color: @color; }
 }
 
-/**
- Mixin: .box-sizing
- Set an element as a border box
-*/
+//
+// Mixin: .box-sizing
+// Set an element as a border box
+//
 .border-box {
   .box-sizing(border-box);
 }
 
-/**
- Mixin: .calc-width
- Sets the width with a calc() expression
-*/
+//
+// Mixin: .calc-width
+// Sets the width with a calc() expression
+//
 .calc-width(@expression) {
     width: -webkit-calc(@expression);
     width: -moz-calc(@expression);
@@ -185,11 +185,10 @@
 
 
 
-/*
-  Mixin: .component-single-line
-  Common styles used for single line components.
-
-*/
+//
+//  Mixin: .component-single-line
+//  Common styles used for single line components.
+//
 .component-single-line() {
 
   .border-box;
@@ -205,10 +204,10 @@
 }
 
 
-/*
-  Mixin: .button-square
-  Turn any button into a square button. For use with the .icon-* mixins or classes.
-*/
+//
+//  Mixin: .button-square
+//  Turn any button into a square button. For use with the .icon-* mixins or classes.
+//
 .button-square(@button-size: 2rem) {
   min-width: 0; // Reset min-width on buttons
   
@@ -216,27 +215,11 @@
   height: @button-size;
   margin: 0;
   padding: 0;
-  
-  // .gradient(@button-square-gradient-start-color, @button-square-gradient-end-color);
-  
-  // border: @px solid @button-square-border-color;
     
   line-height: @button-size; // Align icons vertically
   text-shadow: none;
-  
-  &:hover {
-    // border: @px solid @button-square-border-color; // Override icon class border resets
-    
-    // .gradient(@button-square-gradient-start-color, @button-square-gradient-start-color);
-  }
 
   &:active {
-    // border: @px solid @button-square-border-color; // Override icon class border resets
-
-    // .gradient(@button-square-gradient-end-color, @button-square-gradient-end-color);
-    
-    // .box-shadow(inset 0 0 0.5rem rgba(0, 0, 0, 0.25));
-    
     // Don't change colors when clicked if using a CSS class for an icon
     &:before {
       color: @icon-color;
@@ -255,10 +238,10 @@
 }
 
 
-/*
-  Mixin: .button-square-transparent
-  Overrides background and border, otherwise the same as .button-square
-*/
+//
+//  Mixin: .button-square-transparent
+//  Overrides background and border, otherwise the same as .button-square
+//
 .button-square-transparent(@button-size: 2rem) {
   
   .button-square(@button-size);
