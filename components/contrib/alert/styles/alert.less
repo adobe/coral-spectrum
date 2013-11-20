@@ -48,9 +48,14 @@
   color: @alert-font-color;
 
   > .close {
+    .icon-close;
+    .icon-xsmall;
     float: right;
     font-weight: bold;
     padding: 0.125em;
+    // we need to hide the X if used in the alert definition
+    color: transparent;
+
   }
 
   // Heading text
@@ -118,10 +123,13 @@
     font-weight: normal;
   }
 
+
+
   &.error:before,
   &.notice:before {
     content: "\f10d"; 
   }
+
 
   &.success:before {
     content: "\f143";
@@ -159,6 +167,11 @@
       position: absolute;
       top: 8*@px;
       right: 8*@px;
+      .icon-close;
+      .icon-xsmall;
+
+      // we need to hide the X if used in the alert definition
+      color: transparent;
     }
 
     > strong {
