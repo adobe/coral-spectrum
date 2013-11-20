@@ -16,102 +16,28 @@
   <script src="../../js/libs/toe.js"></script>
   <script src="../../js/CUI.js"></script>
 </head>
+
 <body>
   <h1>Autocomplete</h1>
-
-  <div>
-    <h2>Add Tags</h2>
-
-    <span class="autocomplete" data-init="autocomplete" data-showtags="true" data-showclearbutton="true">
-      <input type="text" name="name1">
-      <ol class="taglist autocomplete-tags">
-        <li>
-          <button class="icon-close"></button>
-          Carrot
-          <input type="hidden" value="Carrot"/>
-        </li>
-        <li>
-          <button class="icon-close"></button>
-          Banana
-          <input type="hidden" value="Banana"/>
-        </li>
-        <li>
-          <button class="icon-close"></button>
-          Apple
-          <input type="hidden" value="Apple"/>
-        </li>
-      </ol>
-    </span>
-  </div>
-  
-  <div>
-    <h2>With Icon</h2>
-
-    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="false" data-showtags="true">
-      <input type="text">
-      <ol class="taglist autocomplete-tags">
-        <li>
-          <button class="icon-close"></button>
-          Apple AAAAAAA asjdkasjdkas ajdksaj
-          <input type="hidden" value="Apple AAAAAAA asjdkasjdkas ajdksaj"/>
-        </li>
-        <li>
-          <button class="icon-close"></button>
-          Bananaajkdsjkjdsakadkadkjaskdjkasjdka
-          <input type="hidden" value="Bananaajkdsjkjdsakadkadkjaskdjkasjdka"/>
-        </li>
-        <li>
-          <button class="icon-close"></button>
-          Carrot
-          <input type="hidden" value="Carrot"/>
-        </li>
-        <li>
-          <button class="icon-close"></button>
-          Banana
-          <input type="hidden" value="Banana"/>
-        </li>
-        <li>
-          <button class="icon-close"></button>
-          Apple
-          <input type="hidden" value="Apple"/>
-        </li>
-      </ol>
-    </span>
-  </div>
-  
-  <div>
-    <h2>Static Suggestions</h2>
-    <span class="autocomplete icon-search" data-init="autocomplete" data-showtags="true" data-showsuggestions="true">
-      <input type="text">
-      <ul class="autocomplete-suggestions selectlist">
-        <li data-value="expr1"><span>Expression 1</span></li>
-        <li data-value="expr2"><span>Expression 2</span></li>
-        <li data-value="expr3"><span>Expression 3</span></li>
-        <li><span>Expression 4</span></li>
-        <li data-value="expr5"><span>Expression 5</span></li>
-        <li data-value="expr6"><span>Expression 6</span></li>
-      </ul>
-    </span>
-    <span class="autocomplete icon-search" data-init="autocomplete" data-showtags="false" data-showsuggestions="true">
-      <input type="text">
-      <ul class="autocomplete-suggestions selectlist">
-        <li data-value="expr1"><span>Expression 1</span></li>
-        <li data-value="expr2"><span>Expression 2</span></li>
-        <li data-value="expr3"><span>Expression 3</span></li>
-        <li><span>Expression 4</span></li>
-        <li data-value="expr5"><span>Expression 5</span></li>
-        <li data-value="expr6"><span>Expression 6</span></li>
-      </ul>
-    </span>
-  </div>
-  
-  <div>
-    <h2>Remote loading</h2>
-    <span class="autocomplete icon-search" data-init="autocomplete" data-showsuggestions="true">
-      <input type="text">
-      <ul class="autocomplete-suggestions selectlist" data-type="dynamic" data-dataurl="remotehtml.html">
-      </ul>
-    </span>
+  <div class="filterSample">
+      <div id="autocomplete-sample">
+          <span class="autocomplete icon-search" data-init="autocomplete" data-multiple="true">
+              <input type="text" name="name1" placeholder="Search">
+              <button class="autocomplete-suggestion-toggle"></button>
+              <ul class="autocomplete-suggestions selectlist">
+                  <li data-value="af">Afghanistan</li>
+                  <li data-value="al">Albania</li>
+                  <li data-value="bs">Bahamas</li>
+                  <li data-value="bh">Bahrain</li>
+                  <li data-value="kh">Cambodia</li>
+                  <li data-value="cm">Cameroon</li>
+                  <li data-value="dk">Denmark</li>
+                  <li data-value="dj">Djibouti</li>
+                  <li data-value="ec">Ecuador</li>
+                  <li data-value="eg">Egypt</li>
+              </ul>
+          </span>
+      </div>
   </div>
 
 </body>

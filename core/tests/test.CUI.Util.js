@@ -19,7 +19,7 @@ describe('CUI.Util', function() {
       expect(CUI.util.decapitalize("testString")).to.equal("testString");
     });
   });
-  
+
   // TODO: test $.fn.loadWithSpinner
   // TODO: test CUI.util.plugClass
 });

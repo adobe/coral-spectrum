@@ -96,7 +96,8 @@
          * @param  {Boolean} [options.multiple=false] multiple selection or not
          * @param  {Object} options.relatedElement DOM element to position at
          * @param  {Boolean} [options.autofocus=true] automatically sets the focus on the list
-         * @param  {Boolean} [options.autohide=true] automatically closes the list when it loses its focus
+         * @param  {Boolean} [options.autohide=true] automatically closes the
+         * list when clicking the toggle button or clicking outside of the list
          * @param  {String} [options.dataurl] URL to receive values dynamically
          * @param  {String} [options.dataurlformat=html] format of the dynamic data load
          * @param  {Object} [options.dataadditional] additonal data to be sent with a remote loading request
@@ -109,7 +110,6 @@
 
             this.$element
                 .on('change:type', this._setType.bind(this))
-                .on('change:autohide', this._setAutohide.bind(this))
                 .on('click', '[role="option"]', this._triggerSelected.bind(this))
                 .on('mouseenter', '[role="option"]', this._handleMouseEnter.bind(this));
 
@@ -122,7 +122,7 @@
             multiple: false,
             relatedElement: null,
             autofocus: true, // autofocus on show
-            autohide: true, // automatically hides the box if it loses focus
+            autohide: true,
             dataurl: null,
             dataurlformat: 'html',
             datapaging: true,
@@ -134,32 +134,6 @@
 
         applyOptions: function () {
             this._setType();
-        },
-
-        /**
-         * @private
-         */
-        _setAutohide: function () {
-            var self = this,
-                receivedFocus = false;
-
-            if (this.options.autohide) {
-                this.$element
-                    .on('focusout.selectlist-autohide', function (event) {
-                        clearTimeout(self._autohideTimer);
-                        self._autohideTimer = setTimeout(function () {
-                            if (!receivedFocus) {
-                                self.hide();
-                            }
-                            receivedFocus = false;
-                        }, 500);
-                    })
-                    .on('focusin.selectlist-autohide', function (event) {
-                        receivedFocus = true;
-                    });
-            } else {
-                this.$element.off('focusout.selectlist-autohide focusin.selectlist-autohide');
-            }
         },
 
         /**
@@ -205,10 +179,12 @@
          * @private
          */
         _makeAccessible: function () {
+            var self = this;
+
             this.$element.attr({
                 'role': 'listbox',
                 'tabindex': -1, // the list itself is not focusable
-                'aria-controls': this.options.relatedElement.attr('id') || '',
+                'aria-controls': $(this.options.relatedElement).attr('id') || '',
                 'aria-hidden': true,
                 'aria-multiselectable': this.options.multiple
             });
@@ -226,7 +202,7 @@
 
                 var elem = $(event.currentTarget),
                     entries = $(event.delegateTarget)
-                        .find('[role="option"]')
+                        .find('[role="option"]:visible')
                         .not('[aria-disabled="true"]'), // ignore disabled
                     focusElem = elem,
                     keymatch = true,
@@ -241,7 +217,7 @@
                         keymatch = false;
                         break;
                     case 27: //esc
-                        elem.trigger('blur');
+                        self.hide();
                         keymatch = false;
                         break;
                     case 33: //page up
@@ -306,6 +282,13 @@
             });
         },
 
+        show: function() {
+            if (!this.options.visible) {
+              hideLists(); // Must come before the parent show method.
+              this.inherited(arguments);
+            }
+        },
+
         /**
          * @private
          */
@@ -330,10 +313,7 @@
             if (this.options.type === 'dynamic') {
                 this._handleLoadData().done(function () {
                     self.$element.find('li[role="option"]:first').trigger('focus');
-                    self._setAutohide();
                 });
-            } else { // otherwise set autohide immediately
-                this._setAutohide();
             }
         },
 
@@ -341,9 +321,6 @@
          * @private
          */
         _hide: function () {
-            if (this._autohideTimer) {
-                clearTimeout(this._autohideTimer);
-            }
             this.$element
                 .removeClass('visible')
                 .attr('aria-hidden', true);
@@ -467,7 +444,7 @@
 
             promise.always(function () {
                 wait.remove();
-                this._loadingIsActive = false;
+                self._loadingIsActive = false;
             });
 
             return promise;
@@ -506,6 +483,51 @@
             $('[data-init~=selectlist]', event.target).selectList();
         });
     }
+
+    var selectListSelector = '.selectlist',
+            toggleSelector = '[data-toggle~=selectlist]';
+
+    /**
+     * Hides all select lists that have autohide enabled.
+     * @ignore
+     */
+    var hideLists = function() {
+        $('.selectlist').each(function() {
+            var selectList = $(this).data('selectList');
+            if (selectList.get('autohide')) {
+                selectList.hide();
+            }
+        });
+    };
+
+    /**
+     * From a toggle element, toggles the visibility of its target select list.
+     * @ignore
+     */
+    var toggleList = function() {
+        var $selectList = CUI.util.getDataTarget($(this));
+        if ($selectList.length) {
+            $selectList.data('selectList').toggleVisibility();
+        }
+        return false;
+    };
+
+    $(document)
+        // If a click reaches the document, hide all open lists.
+        .fipo('tap.selectlist', 'click.selectlist', hideLists)
+        .pointer('click.selectlist', false)
+
+        // If the click is from a select list, don't let it reach the document
+        // to keep the listener above from hiding the list.
+        .fipo('tap.selectlist', 'click.selectlist', selectListSelector, function(event) {
+            event.stopPropagation();
+        })
+        .pointer('click.selectlist', selectListSelector, false)
+
+        // If a click is from a trigger button, toggle its menu.
+        .fipo('tap.selectlist', 'click.selectlist', toggleSelector, toggleList)
+        .pointer('click.selectlist', toggleSelector, false);
+
 
     /**
      * Triggered when option was selected
