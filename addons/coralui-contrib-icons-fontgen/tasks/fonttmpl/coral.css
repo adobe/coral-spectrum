@@ -14,5 +14,4 @@
 	&:before { content: @icon-<%= glyphs[glyphIdx].toLowerCase() %>-content; }
 }
 .icon-<%= glyphs[glyphIdx].toLowerCase() %>:before { content: @icon-<%= glyphs[glyphIdx].toLowerCase() %>-content; }
-.icon-<%= glyphs[glyphIdx].toLowerCase() %>-after:after { content: @icon-<%= glyphs[glyphIdx].toLowerCase() %>-content; }
 <% } %><% } %>
