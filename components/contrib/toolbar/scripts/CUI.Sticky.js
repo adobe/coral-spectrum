@@ -81,12 +81,24 @@
     wrapper: null
   });
 
+  /**
+   * Utility method that 3rd parties can invoke to have the JavaScript part of this
+   * widget initialize.
+   *
+   * @param $element Existing jQuery element that represents the uninitialized widget.
+   */
+  CUI.Sticky.init = function($element) {
+    if (CUI.util.getWidgetFromElement(CUI.Sticky, $element) === undefined) {
+      $element.sticky();
+    }
+  };
+
   CUI.util.plugClass(CUI.Sticky);
 
   // Data API
   if (CUI.options.dataAPI) {
     $(document).on("cui-contentloaded.data-api", function(e) {
-      $(".sticky,[data-init=sticky]", e.target).sticky();
+      CUI.Sticky.init($(".sticky,[data-init=sticky]", e.target));
     });
   }
 }(window.jQuery));

@@ -1020,14 +1020,24 @@
     }*/
   });
 
-
+  /**
+   * Utility method that 3rd parties can invoke to have the JavaScript part of this
+   * widget initialize.
+   *
+   * @param $element Existing jQuery element that represents the uninitialized widget.
+   */
+  CUI.Slider.init = function($element) {
+    if (CUI.util.getWidgetFromElement(CUI.Slider, $element) === undefined) {
+      $element.slider();
+    }
+  };
 
   CUI.util.plugClass(CUI.Slider);
 
   // Data API
   if (CUI.options.dataAPI) {
     $(document).on("cui-contentloaded.data-api", function(e) {
-        $(".slider[data-init~='slider']", e.target).slider();
+        CUI.Slider.init($(".slider[data-init~='slider']", e.target));
     });
   }
 }(jQuery, this));

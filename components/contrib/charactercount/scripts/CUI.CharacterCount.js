@@ -82,11 +82,23 @@ $('#myTextField').characterCount({maxlength: 50});
     }
   });
 
+  /**
+   * Utility method that 3rd parties can invoke to have the JavaScript part of this
+   * widget initialize.
+   *
+   * @param $element Existing jQuery element that represents the uninitialized widget.
+   */
+  CUI.CharacterCount.init = function($element) {
+    if (CUI.util.getWidgetFromElement(CUI.CharacterCount, $element) === undefined) {
+      $element.characterCount();
+    }
+  };
+
   CUI.util.plugClass(CUI.CharacterCount);
   
   // Data API
   $(document).on("cui-contentloaded.data-api", function(e) {
-    $("[data-init~=character-count]", e.target).characterCount();
+    CUI.CharacterCount.init($("[data-init~=character-count]", e.target));
   });
 }(window.jQuery));
 

@@ -396,12 +396,24 @@
 
     });
 
+    /**
+     * Utility method that 3rd parties can invoke to have the JavaScript part of this
+     * widget initialize.
+     *
+     * @param $element Existing jQuery element that represents the uninitialized widget.
+     */
+    CUI.Tabs.init = function($element) {
+      if (CUI.util.getWidgetFromElement(CUI.Tabs, $element) === undefined) {
+        $element.tabs();
+      }
+    };
+
     CUI.util.plugClass(CUI.Tabs);
 
     // Data API
     if (CUI.options.dataAPI) {
         $(document).on('cui-contentloaded.data-api', function (event) {
-            $('[data-init~=tabs]', event.target).tabs();
+            CUI.Tabs.init($('[data-init~=tabs]', event.target));
         });
     }
 

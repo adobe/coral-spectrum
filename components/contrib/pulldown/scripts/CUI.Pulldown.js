@@ -148,12 +148,24 @@
 
   });
 
+  /**
+   * Utility method that 3rd parties can invoke to have the JavaScript part of this
+   * widget initialize.
+   *
+   * @param $element Existing jQuery element that represents the uninitialized widget.
+   */
+  CUI.Pulldown.init = function($element) {
+    if (CUI.util.getWidgetFromElement(CUI.Pulldown, $element) === undefined) {
+      $element.pulldown();
+    }
+  };
+
   CUI.util.plugClass(CUI.Pulldown);
 
   // Data API
   if (CUI.options.dataAPI) {
     $(document).on("cui-contentloaded.data-api", function(e) {
-        $("[data-init~=pulldown]", e.target).pulldown();
+        CUI.Pulldown.init($("[data-init~=pulldown]", e.target));
     });
   }
 

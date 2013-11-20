@@ -848,12 +848,24 @@
 
     });
 
+    /**
+     * Utility method that 3rd parties can invoke to have the JavaScript part of this
+     * widget initialize.
+     *
+     * @param $element Existing jQuery element that represents the uninitialized widget.
+     */
+    CUI.FileUpload.init = function($element) {
+      if (CUI.util.getWidgetFromElement(CUI.FileUpload, $element) === undefined) {
+        $element.fileUpload();
+      }
+    };
+
     CUI.util.plugClass(CUI.FileUpload);
 
     // Data API
     if (CUI.options.dataAPI) {
         $(document).on("cui-contentloaded.data-api", function(e) {
-            $("[data-init~='fileupload']", e.target).fileUpload();
+            CUI.FileUpload.init($("[data-init~='fileupload']", e.target));
         });
     }
 

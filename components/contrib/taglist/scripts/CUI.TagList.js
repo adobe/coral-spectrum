@@ -258,12 +258,24 @@
         }
     });
 
+    /**
+     * Utility method that 3rd parties can invoke to have the JavaScript part of this
+     * widget initialize.
+     *
+     * @param $element Existing jQuery element that represents the uninitialized widget.
+     */
+    CUI.TagList.init = function($element) {
+      if (CUI.util.getWidgetFromElement(CUI.TagList, $element) === undefined) {
+        $element.tagList();
+      }
+    };
+
     CUI.util.plugClass(CUI.TagList);
 
     // Data API
     if (CUI.options.dataAPI) {
         $(document).on('cui-contentloaded.data-api', function (event) {
-            $('[data-init~=taglist]', event.target).tagList();
+            CUI.TagList.init($('[data-init~=taglist]', event.target));
         });
     }
 

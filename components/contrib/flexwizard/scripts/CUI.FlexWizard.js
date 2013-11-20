@@ -216,11 +216,23 @@ $("#flexwizard").flexWizard();
         }
     });
 
+    /**
+     * Utility method that 3rd parties can invoke to have the JavaScript part of this
+     * widget initialize.
+     *
+     * @param $element Existing jQuery element that represents the uninitialized widget.
+     */
+    CUI.FlexWizard.init = function($element) {
+      if (CUI.util.getWidgetFromElement(CUI.FlexWizard, $element) === undefined) {
+        $element.flexWizard();
+      }
+    };
+
     CUI.util.plugClass(CUI.FlexWizard);
 
     if (CUI.options.dataAPI) {
         $(document).on("cui-contentloaded.data-api", function(e) {
-            $("[data-init~=flexwizard]", e.target).flexWizard();
+            CUI.FlexWizard.init($("[data-init~=flexwizard]", e.target));
         });
     }
 }(window.jQuery));

@@ -460,11 +460,23 @@
     }
   });
 
+  /**
+   * Utility method that 3rd parties can invoke to have the JavaScript part of this
+   * widget initialize.
+   *
+   * @param $element Existing jQuery element that represents the uninitialized widget.
+   */
+  CUI.Accordion.init = function($element) {
+    if (CUI.util.getWidgetFromElement(CUI.Accordion, $element) === undefined) {
+      $element.accordion();
+    }
+  };
+
   CUI.util.plugClass(CUI.Accordion);
   
   // Data API
   $(document).on("cui-contentloaded.data-api", function(e) {
-    $("[data-init~=accordion],[data-init~=collapsible]").accordion();
+    CUI.Accordion.init($("[data-init~=accordion],[data-init~=collapsible]"));
   });
 }(window.jQuery));
 

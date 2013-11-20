@@ -328,12 +328,24 @@
         }
     });
 
+    /**
+     * Utility method that 3rd parties can invoke to have the JavaScript part of this
+     * widget initialize.
+     *
+     * @param $element Existing jQuery element that represents the uninitialized widget.
+     */
+    CUI.Select.init = function($element) {
+      if (CUI.util.getWidgetFromElement(CUI.Select, $element) === undefined) {
+        $element.select();
+      }
+    };
+
     CUI.util.plugClass(CUI.Select);
 
     // Data API
     if (CUI.options.dataAPI) {
         $(document).on('cui-contentloaded.data-api', function (e) {
-            $('[data-init~=select]', e.target).select();
+            CUI.Select.init($('[data-init~=select]', e.target));
         });
     }
 

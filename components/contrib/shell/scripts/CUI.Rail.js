@@ -286,12 +286,24 @@
         } // _makeAccessible
     });
 
+    /**
+     * Utility method that 3rd parties can invoke to have the JavaScript part of this
+     * widget initialize.
+     *
+     * @param $element Existing jQuery element that represents the uninitialized widget.
+     */
+    CUI.Rail.init = function($element) {
+      if (CUI.util.getWidgetFromElement(CUI.Rail, $element) === undefined) {
+        $element.rail();
+      }
+    };
+
     CUI.util.plugClass(CUI.Rail);
 
     // Data API
     if (CUI.options.dataAPI) {
         $(function () {
-            $("[data-init~=rail]").rail();
+            CUI.Rail.init($("[data-init~=rail]"));
         });
     }
 
