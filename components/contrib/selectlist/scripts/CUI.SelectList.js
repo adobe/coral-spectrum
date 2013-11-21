@@ -514,19 +514,16 @@
 
     $(document)
         // If a click reaches the document, hide all open lists.
-        .fipo('tap.selectlist', 'click.selectlist', hideLists)
-        .pointer('click.selectlist', false)
+        .on('click.selectlist', hideLists)
 
         // If the click is from a select list, don't let it reach the document
         // to keep the listener above from hiding the list.
-        .fipo('tap.selectlist', 'click.selectlist', selectListSelector, function(event) {
+        .on('click.selectlist', selectListSelector, function(event) {
             event.stopPropagation();
         })
-        .pointer('click.selectlist', selectListSelector, false)
 
         // If a click is from a trigger button, toggle its menu.
-        .fipo('tap.selectlist', 'click.selectlist', toggleSelector, toggleList)
-        .pointer('click.selectlist', toggleSelector, false);
+        .on('click.selectlist', toggleSelector, toggleList);
 
 
     /**

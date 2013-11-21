@@ -1,13 +1,5 @@
 describe('CUI.Autocomplete', function() {
 
-  var click = function(target) {
-    if ('ontouchstart' in document.documentElement) {
-      $(target).trigger('tap');
-    } else {
-      $(target).trigger('click');
-    }
-  };
-
   var $autocomplete, $input, $toggle, $selectList, $tagList;
 
   beforeEach(function() {
@@ -51,31 +43,31 @@ describe('CUI.Autocomplete', function() {
 
   describe('selectlist visibility', function() {
     it('shows when trigger is clicked', function() {
-      click($toggle);
+      $toggle.trigger('click');
       expect($selectList).to.have.class('visible');
     });
 
     it('hides when trigger is clicked', function() {
       $selectList.selectList('show');
-      click($toggle);
+      $toggle.trigger('click');
       expect($selectList).not.to.have.class('visible');
     });
 
     it('hides on click outside', function() {
       $selectList.selectList('show');
-      click(document.body);
+      $(document.body).trigger('click');
       expect($selectList).not.to.have.class('visible');
     });
 
     it('does not hide when clicking inside list', function() {
       $selectList.selectList('show');
-      click($selectList);
+      $selectList.trigger('click');
       expect($selectList).to.have.class('visible');
     });
 
     it('hides when clicking text input with no value', function() {
       $selectList.selectList('show');
-      click($input);
+      $input.trigger('click');
       expect($selectList).not.to.have.class('visible');
     });
 

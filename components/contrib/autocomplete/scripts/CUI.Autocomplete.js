@@ -264,8 +264,7 @@
                 this._suggestionsBtn.attr('type', 'button');
 
                 // handler to open suggestion box
-                this._suggestionsBtn.fipo('tap.autocomplete',
-                        'click.autocomplete', function (event) {
+                this._suggestionsBtn.on('click.autocomplete', function (event) {
                     if (!self._selectListWidget.get('visible')) {
                         self.showSuggestions(
                             self._input.val(),
@@ -276,7 +275,7 @@
                         // select list would be hidden.
                         event.stopPropagation();
                     }
-                }).finger('click.autocomplete', false);
+                });
 
                 // add class to input to to increase padding right for the button
                 this._input.addClass('autocomplete-has-suggestion-btn');
