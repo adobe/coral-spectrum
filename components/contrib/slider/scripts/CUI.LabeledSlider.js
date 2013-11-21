@@ -126,19 +126,7 @@
     
   });
 
-  /**
-   * Utility method that 3rd parties can invoke to have the JavaScript part of this
-   * widget initialize.
-   *
-   * @param $element Existing jQuery element that represents the uninitialized widget.
-   */
-  CUI.LabeledSlider.init = function($element) {
-    if (CUI.util.getWidgetFromElement(CUI.LabeledSlider, $element) === undefined) {
-      $element.labeledSlider();
-    }
-  };
-
-  CUI.util.plugClass(CUI.LabeledSlider);
+  CUI.Widget.registry.register("labeled-slider", CUI.LabeledSlider);
 
   // Data API
   if (CUI.options.dataAPI) {

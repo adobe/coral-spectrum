@@ -436,19 +436,7 @@
 
   CUI.Datepicker.dayNames = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
-  /**
-   * Utility method that 3rd parties can invoke to have the JavaScript part of this
-   * widget initialize.
-   *
-   * @param $element Existing jQuery element that represents the uninitialized widget.
-   */
-  CUI.Datepicker.init = function($element) {
-    if (CUI.util.getWidgetFromElement(CUI.Datepicker, $element) === undefined) {
-      $element.datepicker();
-    }
-  };
-
-  CUI.util.plugClass(CUI.Datepicker);
+  CUI.Widget.registry.register("datepicker", CUI.Datepicker);
 
   // Data API
   if (CUI.options.dataAPI) {

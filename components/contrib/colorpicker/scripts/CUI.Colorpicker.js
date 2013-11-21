@@ -712,19 +712,7 @@
                 
             });
 
-    /**
-     * Utility method that 3rd parties can invoke to have the JavaScript part of this
-     * widget initialize.
-     *
-     * @param $element Existing jQuery element that represents the uninitialized widget.
-     */
-    CUI.Colorpicker.init = function($element) {
-      if (CUI.util.getWidgetFromElement(CUI.Colorpicker, $element) === undefined) {
-        $element.colorpicker();
-      }
-    };
-
-    CUI.util.plugClass(CUI.Colorpicker);
+    CUI.Widget.registry.register("colorpicker", CUI.Colorpicker);
 
     // Data API
     if (CUI.options.dataAPI) {

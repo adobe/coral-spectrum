@@ -332,19 +332,7 @@
 
   });
 
-  /**
-   * Utility method that 3rd parties can invoke to have the JavaScript part of this
-   * widget initialize.
-   *
-   * @param $element Existing jQuery element that represents the uninitialized widget.
-   */
-  CUI.NumberInput.init = function($element) {
-    if (CUI.util.getWidgetFromElement(CUI.NumberInput, $element) === undefined) {
-      $element.numberInput();
-    }
-  };
-
-  CUI.util.plugClass(CUI.NumberInput);
+  CUI.Widget.registry.register("numberinput", CUI.NumberInput);
   
   // Data API
   $(document).on("cui-contentloaded.data-api", function(e) {

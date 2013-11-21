@@ -1020,19 +1020,7 @@
     }*/
   });
 
-  /**
-   * Utility method that 3rd parties can invoke to have the JavaScript part of this
-   * widget initialize.
-   *
-   * @param $element Existing jQuery element that represents the uninitialized widget.
-   */
-  CUI.Slider.init = function($element) {
-    if (CUI.util.getWidgetFromElement(CUI.Slider, $element) === undefined) {
-      $element.slider();
-    }
-  };
-
-  CUI.util.plugClass(CUI.Slider);
+  CUI.Widget.registry.register("slider", CUI.Slider);
 
   // Data API
   if (CUI.options.dataAPI) {

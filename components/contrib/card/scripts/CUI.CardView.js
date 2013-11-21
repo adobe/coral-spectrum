@@ -2894,7 +2894,7 @@ $cardView.find("article").removeClass("selected");
         return cardView;
     };
 
-    CUI.util.plugClass(CUI.CardView);
+    CUI.Widget.registry.register("cardview", CUI.CardView);
 
     // Data API
     if (CUI.options.dataAPI) {
@@ -2903,7 +2903,7 @@ $cardView.find("article").removeClass("selected");
             for (var gl = 0; gl < cardViews.length; gl++) {
                 var $cardView = $(cardViews[gl]);
                 if (!$cardView.data("cardview")) {
-                    $cardView.cardView();
+                    CUI.CardView.init($cardView);
                 }
             }
         });

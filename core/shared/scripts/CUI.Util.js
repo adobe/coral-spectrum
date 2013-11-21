@@ -171,54 +171,6 @@
      */
     isTrue: function(str) {
         return str === 'true';
-    },
-
-    /**
-     * Utility function to get the widget class instance that's attached to the provided element.
-     *
-     * @param WidgetClass The type of widget instance to obtain.
-     * @param $element The target element to obtain the instance from.
-     * @returns The obtained Widget instance, if the target element has an instance attached.
-     */
-    getWidgetFromElement: function (WidgetClass, $element) {
-      return $element.data(CUI.util.decapitalize(WidgetClass.toString()));
-    },
-
-    /**
-     * Utility function to convert the name of a CUI widget selector into a
-     * CUI widget class name.
-     *
-     * @param selector
-     * @returns The name of the matching
-     */
-    getClassNameFromSelector: function (selector) {
-      var result = "";
-
-      // The widgets below are inconsistently named: their classes
-      // are camelCased, however, their selectors are without
-      // dashes:
-      if (selector === "cyclebuttons") {
-        selector = "cycle-buttons";
-      } else if (selector === "fileupload") {
-        selector = "file-upload";
-      } else if (selector === "flexwizard") {
-        selector = "flex-wizard";
-      } else if (selector === "numberinput") {
-        selector = "number-input";
-      } else if (selector === "selectlist") {
-        selector = "select-list";
-      } else if (selector === "taglist") {
-        selector = "tag-list";
-      }
-
-      if (selector) {
-        // Remove dashes, and put capitals in:
-        result = selector.replace(/\-(.)/g, function (m, l) {
-          return l.toUpperCase();
-        });
-      }
-
-      return CUI.util.capitalize(result);
     }
 
   };

@@ -444,15 +444,18 @@
             if (this.inputElement.data("fileNameParameter")) {
                 this.options.fileNameParameter = this.inputElement.data("fileNameParameter");
             }
-            $.each(this.inputElement.get(0).attributes, function(i, attribute) {
-                var match = /^data-event-(.*)$/.exec(attribute.name);
-                if (match && match.length > 1) {
-                    var eventHandler = CUI.util.buildFunction(attribute.value, ["event"]);
-                    if (eventHandler) {
-                        self.options.events[match[1]] = eventHandler.bind(self);
+            var inputElementHTML = this.inputElement.length ? this.inputElement.get(0) : undefined;
+            if (inputElementHTML) {
+                $.each(inputElementHTML.attributes, function(i, attribute) {
+                    var match = /^data-event-(.*)$/.exec(attribute.name);
+                    if (match && match.length > 1) {
+                        var eventHandler = CUI.util.buildFunction(attribute.value, ["event"]);
+                        if (eventHandler) {
+                            self.options.events[match[1]] = eventHandler.bind(self);
+                        }
                     }
-                }
-            });
+                });
+            }
         },
 
         /** @ignore */
@@ -848,19 +851,7 @@
 
     });
 
-    /**
-     * Utility method that 3rd parties can invoke to have the JavaScript part of this
-     * widget initialize.
-     *
-     * @param $element Existing jQuery element that represents the uninitialized widget.
-     */
-    CUI.FileUpload.init = function($element) {
-      if (CUI.util.getWidgetFromElement(CUI.FileUpload, $element) === undefined) {
-        $element.fileUpload();
-      }
-    };
-
-    CUI.util.plugClass(CUI.FileUpload);
+    CUI.Widget.registry.register("fileupload", CUI.FileUpload);
 
     // Data API
     if (CUI.options.dataAPI) {

@@ -35,19 +35,7 @@
     }
   });
 
-  /**
-   * Utility method that 3rd parties can invoke to have the JavaScript part of this
-   * widget initialize.
-   *
-   * @param $element Existing jQuery element that represents the uninitialized widget.
-   */
-  CUI.Toolbar.init = function($element) {
-    if (CUI.util.getWidgetFromElement(CUI.Toolbar, $element) === undefined) {
-      $element.toolbar();
-    }
-  };
-
-  CUI.util.plugClass(CUI.Toolbar);
+  CUI.Widget.registry.register("toolbar", CUI.Toolbar);
 
   // Data API
   if (CUI.options.dataAPI) {

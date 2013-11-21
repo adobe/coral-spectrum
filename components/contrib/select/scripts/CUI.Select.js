@@ -165,7 +165,8 @@
                 });
 
                 selected = self._tagListWidget.getValues();
-            } else {
+            } else if (self._select[0]) {
+
                 selectedElem = self._select[0][self._select[0].selectedIndex];
 
                 self._button.text(selectedElem.text);
@@ -328,19 +329,7 @@
         }
     });
 
-    /**
-     * Utility method that 3rd parties can invoke to have the JavaScript part of this
-     * widget initialize.
-     *
-     * @param $element Existing jQuery element that represents the uninitialized widget.
-     */
-    CUI.Select.init = function($element) {
-      if (CUI.util.getWidgetFromElement(CUI.Select, $element) === undefined) {
-        $element.select();
-      }
-    };
-
-    CUI.util.plugClass(CUI.Select);
+    CUI.Widget.registry.register("select", CUI.Select);
 
     // Data API
     if (CUI.options.dataAPI) {

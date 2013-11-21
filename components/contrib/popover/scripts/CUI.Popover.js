@@ -380,7 +380,7 @@
     }
   });
 
-  CUI.util.plugClass(CUI.Popover);
+  CUI.Widget.registry.register("popover", CUI.Popover);
 
   $(function() {
     $('body').fipo('tap.popover.data-api', 'click.popover.data-api', '[data-toggle="popover"]', function (e) {

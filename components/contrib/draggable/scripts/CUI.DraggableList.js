@@ -257,20 +257,7 @@
     }
   });
 
-  /**
-   * Utility method that 3rd parties can invoke to have the JavaScript part of this
-   * widget initialize.
-   *
-   * @param $element Existing jQuery element that represents the uninitialized widget.
-   */
-  CUI.DraggableList.init = function($element) {
-    if (CUI.util.getWidgetFromElement(CUI.DraggableList, $element) === undefined) {
-      $element.draggableList();
-    }
-  };
-
-  // jQuery plugin
-  CUI.util.plugClass(CUI.DraggableList);
+  CUI.Widget.registry.register("draggable-list", CUI.DraggableList);
 
   if (CUI.options.dataAPI) {
       $(document).on('cui-contentloaded.data-api', function() {

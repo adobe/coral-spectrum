@@ -66,19 +66,7 @@
     }
   });
 
-  /**
-   * Utility method that 3rd parties can invoke to have the JavaScript part of this
-   * widget initialize.
-   *
-   * @param $element Existing jQuery element that represents the uninitialized widget.
-   */
-  CUI.CycleButtons.init = function($element) {
-    if (CUI.util.getWidgetFromElement(CUI.CycleButtons, $element) === undefined) {
-      $element.cycleButtons();
-    }
-  };
-
-  CUI.util.plugClass(CUI.CycleButtons);
+  CUI.Widget.registry.register("cyclebuttons", CUI.CycleButtons);
 
   // Data API
   $(document).on("cui-contentloaded.data-api", function(e) {

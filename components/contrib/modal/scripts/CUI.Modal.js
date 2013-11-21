@@ -582,19 +582,7 @@
         }
     });
 
-    /**
-     * Utility method that 3rd parties can invoke to have the JavaScript part of this
-     * widget initialize.
-     *
-     * @param $element Existing jQuery element that represents the uninitialized widget.
-     */
-    CUI.Modal.init = function($element) {
-      if (CUI.util.getWidgetFromElement(CUI.Modal, $element) === undefined) {
-        $element.modal();
-      }
-    };
-
-    CUI.util.plugClass(CUI.Modal);
+    CUI.Widget.registry.register("modal", CUI.Modal);
 
     // Data API
     if (CUI.options.dataAPI) {

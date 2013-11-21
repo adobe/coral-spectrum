@@ -81,19 +81,7 @@
     wrapper: null
   });
 
-  /**
-   * Utility method that 3rd parties can invoke to have the JavaScript part of this
-   * widget initialize.
-   *
-   * @param $element Existing jQuery element that represents the uninitialized widget.
-   */
-  CUI.Sticky.init = function($element) {
-    if (CUI.util.getWidgetFromElement(CUI.Sticky, $element) === undefined) {
-      $element.sticky();
-    }
-  };
-
-  CUI.util.plugClass(CUI.Sticky);
+  CUI.Widget.registry.register("sticky", CUI.Sticky);
 
   // Data API
   if (CUI.options.dataAPI) {

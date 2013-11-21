@@ -8,7 +8,7 @@
      *
      * @desc Creates a new widget
      * @constructs
-     * 
+     *
      * @param {Object} options Widget options
      * @param {Boolean} [options.visible=false] If True, show the widget immediately
      */
@@ -38,10 +38,10 @@
      * @name set
      * @memberOf CUI.Widget#
      * @function
-     * 
+     *
      * @param {String|Object} option The option to set as a string, or an object of key/value pairs to set
      * @param {String} value The value to set the option to (is ignored when first argument is an object)
-     * 
+     *
      * @return {CUI.Widget} this, chainable
      */
     set: function (optionOrObj, value) {
@@ -142,7 +142,7 @@
 
       return this;
     },
-    
+
     /**
      * @ignore
      */
@@ -152,7 +152,7 @@
 
     /**
      * Hide the widget
-     * 
+     *
      * @return {CUI.Widget} this, chainable
      */
     hide: function (evt) {
@@ -193,7 +193,7 @@
 
     /**
      * Set a custom name for this widget.
-     * 
+     *
      * @param {String} customName Component name
      * @return {CUI.Widget} this, chainable
      */
@@ -244,5 +244,105 @@
       @param {Mixed} evt.value     The new value
       */
   });
+
+  /**
+   * Utility function to get the widget class instance that's attached to
+   * the provided element.
+   *
+   * @param WidgetClass The type of widget instance to obtain.
+   * @param $element The target element to obtain the instance from.
+   * @returns The obtained Widget instance, if the target element has an
+   * instance attached.
+   */
+  CUI.Widget.fromElement = function (WidgetClass, $element) {
+    return $element.data(CUI.util.decapitalize(WidgetClass.toString()));
+  };
+
+  /**
+   * The registry object maps data-init selector values to Widget
+   * types.
+   */
+  CUI.Widget.registry = {
+
+    /**
+     * Registers the given Widget type as the type that belongs
+     * to the provided selector.
+     *
+     * @param selector String representing the data-init value
+     * mapping to Widget.
+     * @param Widget Widget subclass that maps to the given
+     * selector.
+     */
+    register: function (selector, Widget) {
+
+      // Register as a jQuery plug-in:
+      CUI.util.plugClass(Widget);
+
+      this._widgets[selector] = Widget;
+
+      // Extend the Widget with a static 'init' method:
+      Widget.init = function($element) {
+        this._init(Widget, $element);
+      }.bind(this);
+
+    },
+
+    /**
+     * Look-up the Widget subclass that is mapped to the provided
+     * selector String value.
+     *
+     * @param selector String value to look-up the registered
+     * Widget subclass for.
+     * @returns a Widget subclass, or undefined if the selector
+     * could not be resolved.
+     */
+    resolve: function (selector) {
+      return this._widgets[selector];
+    },
+
+    /**
+     * Initialize the given jQuery element(s) as Widgets of the
+     * type as indicated by the selector argument.
+     *
+     * @param selector String that indicates what Widget subclass
+     * must be used to initialize the element.
+     * @param $element The jQuery element(s) that the instances
+     * must be bound to.
+     */
+    init: function(selector, $element) {
+      this._init(this.resolve(selector), $element);
+    },
+
+    getSelectors: function() {
+      var selectors = [];
+      for (var selector in this._widgets) {
+        selectors.push(selector);
+      }
+      return selectors;
+    },
+
+    /**
+     * Maps selector values to Widget types
+     * @private
+     */
+    _widgets: {},
+
+    /**
+     * Implementation of the public init method, as well as the
+     * init method that gets added to registering Widget classes
+     *
+     * @param Widget The Widget subclass to instantiate.
+     * @param $element The jQuery element(s) that the instances
+     * must be bound to.
+     * @private
+     */
+    _init: function(Widget, $element) {
+      if (Widget !== undefined) {
+        if (CUI.Widget.fromElement(Widget, $element) === undefined) {
+          $element[CUI.util.decapitalize(Widget.toString())]();
+        }
+      }
+    }
+  };
 
 }(jQuery, this));

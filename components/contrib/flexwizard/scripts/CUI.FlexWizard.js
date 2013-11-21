@@ -216,17 +216,7 @@ $("#flexwizard").flexWizard();
         }
     });
 
-    /**
-     * Utility method that 3rd parties can invoke to have the JavaScript part of this
-     * widget initialize.
-     *
-     * @param $element Existing jQuery element that represents the uninitialized widget.
-     */
-    CUI.FlexWizard.init = function($element) {
-      if (CUI.util.getWidgetFromElement(CUI.FlexWizard, $element) === undefined) {
-        $element.flexWizard();
-      }
-    };
+    CUI.Widget.registry.register("flexwizard", CUI.FlexWizard);
 
     CUI.util.plugClass(CUI.FlexWizard);
 
