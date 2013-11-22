@@ -281,13 +281,13 @@ The quicktip data options are applied to the target element of the tooltip (see 
         }
     });
 
-    CUI.util.plugClass(CUI.Tooltip);
+    CUI.Widget.registry.register("tooltip", CUI.Tooltip);
 
     // Data API
     if (CUI.options.dataAPI) {
         $(document).on("cui-contentloaded.data-api", function(e) {
             // Only initialize non-interactive tooltips this way!
-            $("[data-init~=tooltip]", e.target).tooltip();
+            CUI.Tooltip.init($("[data-init~=tooltip]", e.target));
         });
 
         $(document).fipo("touchstart", "mouseover", "[data-init~=quicktip]", function(e) {

@@ -436,12 +436,12 @@
 
   CUI.Datepicker.dayNames = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
-  CUI.util.plugClass(CUI.Datepicker);
+  CUI.Widget.registry.register("datepicker", CUI.Datepicker);
 
   // Data API
   if (CUI.options.dataAPI) {
     $(document).on("cui-contentloaded.data-api", function (e) {
-      $("[data-init~=datepicker]", e.target).datepicker();
+      CUI.Datepicker.init($("[data-init~=datepicker]", e.target));
     });
   }
 

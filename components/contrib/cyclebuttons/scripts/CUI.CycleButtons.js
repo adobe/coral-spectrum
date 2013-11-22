@@ -66,10 +66,10 @@
     }
   });
 
-  CUI.util.plugClass(CUI.CycleButtons);
+  CUI.Widget.registry.register("cyclebuttons", CUI.CycleButtons);
 
   // Data API
   $(document).on("cui-contentloaded.data-api", function(e) {
-    $("[data-init~='cyclebuttons']", e.target).cycleButtons();
+    CUI.CycleButtons.init($("[data-init~='cyclebuttons']", e.target));
   });
 }(window.jQuery));

@@ -216,11 +216,13 @@ $("#flexwizard").flexWizard();
         }
     });
 
+    CUI.Widget.registry.register("flexwizard", CUI.FlexWizard);
+
     CUI.util.plugClass(CUI.FlexWizard);
 
     if (CUI.options.dataAPI) {
         $(document).on("cui-contentloaded.data-api", function(e) {
-            $("[data-init~=flexwizard]", e.target).flexWizard();
+            CUI.FlexWizard.init($("[data-init~=flexwizard]", e.target));
         });
     }
 }(window.jQuery));

@@ -475,12 +475,12 @@
         }
     });
 
-    CUI.util.plugClass(CUI.SelectList);
+    CUI.Widget.registry.register("selectlist", CUI.SelectList);
 
     // Data API
     if (CUI.options.dataAPI) {
         $(document).on('cui-contentloaded.data-api', function (event) {
-            $('[data-init~=selectlist]', event.target).selectList();
+            CUI.SelectList.init($('[data-init~=selectlist]', event.target));
         });
     }
 

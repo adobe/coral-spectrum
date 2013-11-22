@@ -81,12 +81,12 @@
     wrapper: null
   });
 
-  CUI.util.plugClass(CUI.Sticky);
+  CUI.Widget.registry.register("sticky", CUI.Sticky);
 
   // Data API
   if (CUI.options.dataAPI) {
     $(document).on("cui-contentloaded.data-api", function(e) {
-      $(".sticky,[data-init=sticky]", e.target).sticky();
+      CUI.Sticky.init($(".sticky,[data-init=sticky]", e.target));
     });
   }
 }(window.jQuery));

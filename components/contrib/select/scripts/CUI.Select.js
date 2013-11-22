@@ -165,7 +165,8 @@
                 });
 
                 selected = self._tagListWidget.getValues();
-            } else {
+            } else if (self._select[0]) {
+
                 selectedElem = self._select[0][self._select[0].selectedIndex];
 
                 self._button.text(selectedElem.text);
@@ -328,12 +329,12 @@
         }
     });
 
-    CUI.util.plugClass(CUI.Select);
+    CUI.Widget.registry.register("select", CUI.Select);
 
     // Data API
     if (CUI.options.dataAPI) {
         $(document).on('cui-contentloaded.data-api', function (e) {
-            $('[data-init~=select]', e.target).select();
+            CUI.Select.init($('[data-init~=select]', e.target));
         });
     }
 

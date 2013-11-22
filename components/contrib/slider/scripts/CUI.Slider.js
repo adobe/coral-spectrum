@@ -1020,14 +1020,12 @@
     }*/
   });
 
-
-
-  CUI.util.plugClass(CUI.Slider);
+  CUI.Widget.registry.register("slider", CUI.Slider);
 
   // Data API
   if (CUI.options.dataAPI) {
     $(document).on("cui-contentloaded.data-api", function(e) {
-        $(".slider[data-init~='slider']", e.target).slider();
+        CUI.Slider.init($(".slider[data-init~='slider']", e.target));
     });
   }
 }(jQuery, this));

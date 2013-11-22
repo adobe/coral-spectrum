@@ -184,11 +184,11 @@
         }
     });
 
-    CUI.util.plugClass(CUI.Multifield);
+    CUI.Widget.registry.register("multifield", CUI.Multifield);
 
     if (CUI.options.dataAPI) {
         $(document).on("cui-contentloaded.data-api", function(e) {
-            $("[data-init~=multifield]", e.target).multifield();
+          CUI.Multifield.init($("[data-init~=multifield]", e.target));
         });
     }
 })(jQuery, window.console);

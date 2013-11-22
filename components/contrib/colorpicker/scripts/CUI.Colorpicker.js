@@ -712,13 +712,12 @@
                 
             });
 
-    CUI.util.plugClass(CUI.Colorpicker);
+    CUI.Widget.registry.register("colorpicker", CUI.Colorpicker);
 
     // Data API
     if (CUI.options.dataAPI) {
         $(document).on("cui-contentloaded.data-api", function(e) {
-          $("[data-init~=colorpicker]", e.target).colorpicker();
-           
+          CUI.Colorpicker.init($("[data-init~=colorpicker]", e.target));
         });
     }
 }(window.jQuery));

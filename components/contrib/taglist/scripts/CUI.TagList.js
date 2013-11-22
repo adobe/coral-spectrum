@@ -258,12 +258,12 @@
         }
     });
 
-    CUI.util.plugClass(CUI.TagList);
+    CUI.Widget.registry.register("taglist", CUI.TagList);
 
     // Data API
     if (CUI.options.dataAPI) {
         $(document).on('cui-contentloaded.data-api', function (event) {
-            $('[data-init~=taglist]', event.target).tagList();
+            CUI.TagList.init($('[data-init~=taglist]', event.target));
         });
     }
 

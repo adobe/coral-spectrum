@@ -148,12 +148,12 @@
 
   });
 
-  CUI.util.plugClass(CUI.Pulldown);
+  CUI.Widget.registry.register("pulldown", CUI.Pulldown);
 
   // Data API
   if (CUI.options.dataAPI) {
     $(document).on("cui-contentloaded.data-api", function(e) {
-        $("[data-init~=pulldown]", e.target).pulldown();
+        CUI.Pulldown.init($("[data-init~=pulldown]", e.target));
     });
   }
 

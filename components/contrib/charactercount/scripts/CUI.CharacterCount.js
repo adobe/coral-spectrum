@@ -82,11 +82,11 @@ $('#myTextField').characterCount({maxlength: 50});
     }
   });
 
-  CUI.util.plugClass(CUI.CharacterCount);
+  CUI.Widget.registry.register("character-count", CUI.CharacterCount);
   
   // Data API
   $(document).on("cui-contentloaded.data-api", function(e) {
-    $("[data-init~=character-count]", e.target).characterCount();
+    CUI.CharacterCount.init($("[data-init~=character-count]", e.target));
   });
 }(window.jQuery));
 

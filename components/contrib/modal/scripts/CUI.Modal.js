@@ -582,15 +582,13 @@
         }
     });
 
-    CUI.util.plugClass(CUI.Modal);
+    CUI.Widget.registry.register("modal", CUI.Modal);
 
     // Data API
     if (CUI.options.dataAPI) {
         $(document).on('cui-contentloaded.data-api', function (event) {
-            // initialize the modal dialogs
-            $('[data-init~=modal]', event.target).modal();
+            CUI.Modal.init($('[data-init~=modal]', event.target));
         });
-
 
         // @deprecated
         // this differs from other components

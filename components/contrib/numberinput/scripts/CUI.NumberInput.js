@@ -332,11 +332,11 @@
 
   });
 
-  CUI.util.plugClass(CUI.NumberInput);
+  CUI.Widget.registry.register("numberinput", CUI.NumberInput);
   
   // Data API
   $(document).on("cui-contentloaded.data-api", function(e) {
-    $("[data-init~=numberinput]", e.target).numberInput();
+    CUI.NumberInput.init($("[data-init~=numberinput]", e.target));
   });
 
 }(window.jQuery));

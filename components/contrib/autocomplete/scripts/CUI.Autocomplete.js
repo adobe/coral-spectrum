@@ -460,12 +460,12 @@
         }
     });
 
-    CUI.util.plugClass(CUI.Autocomplete);
+    CUI.Widget.registry.register("autocomplete", CUI.Autocomplete);
 
     // Data API
     if (CUI.options.dataAPI) {
         $(document).on('cui-contentloaded.data-api', function (e) {
-            $('[data-init~=autocomplete]', e.target).autocomplete();
+            CUI.Autocomplete.init($('[data-init~=autocomplete]', e.target));
         });
     }
 

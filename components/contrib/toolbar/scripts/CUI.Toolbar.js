@@ -35,12 +35,12 @@
     }
   });
 
-  CUI.util.plugClass(CUI.Toolbar);
+  CUI.Widget.registry.register("toolbar", CUI.Toolbar);
 
   // Data API
   if (CUI.options.dataAPI) {
     $(document).on("cui-contentloaded.data-api", function(e) {
-      $("[data-init~=toolbar]", e.target).toolbar();
+      CUI.Toolbar.init($("[data-init~=toolbar]", e.target));
     });
   }
 }(window.jQuery));

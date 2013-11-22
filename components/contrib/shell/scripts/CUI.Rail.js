@@ -286,12 +286,12 @@
         } // _makeAccessible
     });
 
-    CUI.util.plugClass(CUI.Rail);
+    CUI.Widget.registry.register("rail", CUI.Rail);
 
     // Data API
     if (CUI.options.dataAPI) {
         $(function () {
-            $("[data-init~=rail]").rail();
+            CUI.Rail.init($("[data-init~=rail]"));
         });
     }
 

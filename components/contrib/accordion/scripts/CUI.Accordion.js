@@ -460,11 +460,11 @@
     }
   });
 
-  CUI.util.plugClass(CUI.Accordion);
-  
+  CUI.Widget.registry.register("accordion", CUI.Accordion);
+
   // Data API
   $(document).on("cui-contentloaded.data-api", function(e) {
-    $("[data-init~=accordion],[data-init~=collapsible]").accordion();
+    CUI.Accordion.init($("[data-init~=accordion],[data-init~=collapsible]"));
   });
 }(window.jQuery));
 

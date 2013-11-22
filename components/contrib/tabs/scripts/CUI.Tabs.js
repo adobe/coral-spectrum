@@ -396,12 +396,12 @@
 
     });
 
-    CUI.util.plugClass(CUI.Tabs);
+    CUI.Widget.registry.register("tabs", CUI.Tabs);
 
     // Data API
     if (CUI.options.dataAPI) {
         $(document).on('cui-contentloaded.data-api', function (event) {
-            $('[data-init~=tabs]', event.target).tabs();
+            CUI.Tabs.init($('[data-init~=tabs]', event.target));
         });
     }
 

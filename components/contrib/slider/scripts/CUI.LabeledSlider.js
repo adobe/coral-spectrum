@@ -107,7 +107,7 @@
             var tick = $("<div></div>").addClass('tick').css((that.isVertical ? 'bottom' : 'left'), position + "px");
             $ticks.append(tick);
             var className = "tick-label-" + i;
-            var ticklabel = $("<div></div").addClass('tick-label ' + className);
+            var ticklabel = $("<div></div>").addClass('tick-label ' + className);
             if (!that.isVertical) position -= maxSize / 2;
             ticklabel.css((that.isVertical ? 'bottom' : 'left'), position + "px");
             if (!that.isVertical) ticklabel.css('width', maxSize + "px");
@@ -126,14 +126,12 @@
     
   });
 
-
-
-  CUI.util.plugClass(CUI.LabeledSlider);
+  CUI.Widget.registry.register("labeled-slider", CUI.LabeledSlider);
 
   // Data API
   if (CUI.options.dataAPI) {
     $(document).on("cui-contentloaded.data-api", function(e) {
-        $(".slider[data-init~='labeled-slider']", e.target).labeledSlider();
+        CUI.LabeledSlider.init($(".slider[data-init~='labeled-slider']", e.target));
     });
   }
 }(window.jQuery));
