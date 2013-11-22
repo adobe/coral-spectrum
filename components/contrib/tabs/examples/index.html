@@ -25,12 +25,28 @@
       var activeExampleTab = 0;
       var typeIndex = 0;
 
+      $('#addTab').on('click', function() {
+        var $tab = $('<a href="#" data-toggle="tab" class="active">New tab</a>');
+        var $panel = $('<section>New tab content. ' +
+            '<a href="#">Remove my tab.</a></section>');
+
+        $panel.on('click', 'a', function(event) {
+          event.preventDefault();
+          cuiTabs.removeItem($tab);
+        });
+
+        cuiTabs.addItem($tab, $panel);
+      });
+
       $('#cycleActive').on("click", function(){
-        activeExampleTab < 3 ? ++activeExampleTab : activeExampleTab = 0;
-        if (activeExampleTab == 3) {
+        var $tabs = $('#cuiTabsDiv').find('[data-toggle="tab"]');
+        activeExampleTab + 1 < $tabs.length ? ++activeExampleTab : activeExampleTab = 0;
+
+        cuiTabs.set('active', activeExampleTab);
+
+        if ($tabs.eq(activeExampleTab).hasClass('disabled')) {
           alert("setting tab index to disabled tab is ignored");
         }
-        cuiTabs.set('active', activeExampleTab);
       });
 
       $('#cycleType').on("click", function(){
@@ -66,7 +82,7 @@
     .col {
       float: left;
       margin-right: 12px;
-      width: 500px;
+      width: 650px;
     }
 
     span.deprecated {
@@ -124,6 +140,7 @@
       <div class="magicButtons"> 
         <button type="button" id="cycleActive">Cycle Active</button>
         <button type="button" id="cycleType">Cycle Type</button>
+        <button type="button" id="addTab">Add Tab</button>
       </div>
     </section>
     <section>

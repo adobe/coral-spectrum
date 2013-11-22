@@ -371,6 +371,88 @@ describe('CUI.Tabs', function() {
 
 
   }); // passing options
+    
+  describe('adding/removing tabs', function() {
+    var $el, widget;
+
+    beforeEach(function() {
+      $el = $(jQueryMarkup).appendTo('body');
+      widget = new CUI.Tabs({element:$el});
+    });
+
+    afterEach(function() {
+      $el.remove();
+      $el = widget = null;
+    });
+
+    it('will add a new tab by jQuery object', function() {
+      var $tab = $('<a href="#added-tab" data-toggle="tab">Added tab</a>');
+      var $section = $('<section>Added content.</section>');
+      widget.addItem($tab, $section);
+      expect($el.find('a[role="tab"]').eq(5).is($tab)).to.be.true;
+      expect($el.find('section').eq(5).is($section)).to.be.true;
+    });
+
+    it('will add a new tab by HTML node', function() {
+      var $tab = $('<a href="#added-tab" data-toggle="tab">Added tab</a>');
+      var $section = $('<section>Added content.</section>');
+      widget.addItem($tab[0], $section[0]);
+      expect($el.find('a[role="tab"]').eq(5).is($tab)).to.be.true;
+      expect($el.find('section').eq(5).is($section)).to.be.true;
+    });
+
+    it('will add a new tab by HTML string', function() {
+      var tabHTML = '<a href="#added-tab" data-toggle="tab">Added tab</a>';
+      var sectionHTML = '<section>Added content.</section>';
+      widget.addItem(tabHTML, sectionHTML);
+      expect($el.find('a[role="tab"]').eq(5).attr('href')).to.equal('#added-tab');
+      expect($el.find('section').eq(5).html()).to.be.equal('Added content.');
+    });
+
+    it('will add a new tab at index 0', function() {
+      var $tab = $('<a href="#added-tab" data-toggle="tab">Added tab</a>');
+      var $section = $('<section>Added content.</section>');
+      widget.addItem($tab, $section, 0);
+      expect($el.find('a[role="tab"]').eq(0).is($tab)).to.be.true;
+      expect($el.find('section').eq(0).is($section)).to.be.true;
+    });
+
+    it('will add a new tab when no other tabs exist', function() {
+      for (var i = 0; i < 6; i++) {
+        widget.removeItem(0);
+      }
+
+      var $tab = $('<a href="#added-tab" data-toggle="tab">Added tab</a>');
+      var $section = $('<section>Added content.</section>');
+      widget.addItem($tab, $section);
+      expect($el.find('a[role="tab"]').eq(0).is($tab)).to.be.true;
+      expect($el.find('section').eq(0).is($section)).to.be.true;
+    });
+
+    it('will remove a tab by jQuery object', function() {
+      var $tab = $el.find('a[role="tab"]').eq(1);
+      var $section = $el.find('section').eq(1);
+      widget.removeItem($tab);
+      expect($el.find($tab).length).to.equal(0);
+      expect($el.find($section).length).to.equal(0);
+    });
+
+    it('will remove a tab by HTML node', function() {
+      var $tab = $el.find('a[role="tab"]').eq(1);
+      var $section = $el.find('section').eq(1);
+      widget.removeItem($tab[0]);
+      expect($el.find($tab).length).to.equal(0);
+      expect($el.find($section).length).to.equal(0);
+    });
+
+    it('will remove a tab by index', function() {
+      var $tab = $el.find('a[role="tab"]').eq(1);
+      var $section = $el.find('section').eq(1);
+      widget.removeItem(1);
+      expect($el.find($tab).length).to.equal(0);
+      expect($el.find($section).length).to.equal(0);
+    });
+  });
 
 
 }); // end test

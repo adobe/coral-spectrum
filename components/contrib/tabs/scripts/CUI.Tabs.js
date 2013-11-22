@@ -153,8 +153,6 @@
         construct: function(options) {
             // find elements for tab widget
             this.tablist = this.$element.find('> nav');
-            this.tabs = this.tablist.find('> a[data-toggle~="tab"]');
-            this.panels = this.$element.find('> section');
 
             this._applyOptions();
 
@@ -202,10 +200,62 @@
             return this.setDisabled(tab, true);
         },
 
+        /**
+         * Adds a tab and associated panel. The tab will be activated 
+         * immediately.
+         *
+         * @param {HTMLElement|jQuery|String} tab The tab to add.
+         * @param {HTMLElement|jQuery|String} panel The panel to add.
+         * @param {Number} [index] The index at which the tab should be added.
+         * If not defined, the tab will be added as the last.
+         */
+        addItem: function(tab, panel, index) {
+            var $tab = $(tab),
+                $panel = $(panel),
+                tabs = this._getTabs();
+
+            if (index === undefined) {
+                index = tabs.length;
+            }
+
+            if (index === 0) {
+                this.tablist.prepend($tab);
+                this.tablist.after($panel);
+            } else {
+                tabs.eq(index - 1).after($tab);
+                this._getPanels().eq(index - 1).after($panel);
+            }
+
+            this._makeTabsAccessible($tab);
+            this._activateTab($tab, true);
+        },
+
+        /**
+         * Removes a tab and associated panel.
+         * @param {jQuery|HTMLElement|Number} tab The tab or index of the tab
+         * to remove.
+         */
+        removeItem: function(tab) {
+            var $tab = $.isNumeric(tab) ? this._getTabs().eq(tab) : $(tab);
+            var enabledTabSelector = 'a[data-toggle~="tab"]:not(.disabled)';
+            var $tabToActivate = $tab.nextAll(enabledTabSelector).first();
+
+            if ($tabToActivate.length === 0) {
+                $tabToActivate = $tab.prevAll(enabledTabSelector).first();
+            }
+
+            this._getPanels().eq($tab.index()).remove();
+            $tab.remove();
+
+            if ($tabToActivate.length === 1) {
+                this._activateTab($tabToActivate, true);
+            }
+        },
+
         // sets all options
         /** @ignore */
         _applyOptions: function () {
-            var activeTab = this.tabs.filter('.active');
+            var activeTab = this._getTabs().filter('.active');
 
             // ensure the type is set correctly
             if (this.options.type) {
@@ -228,12 +278,30 @@
             }
         },
 
+        /**
+         * @return {jQuery} All tabs.
+         * @private
+         * @ignore
+         */
+        _getTabs: function() {
+            return this.tablist.find('> a[data-toggle~="tab"]');
+        },
+
+        /**
+         * @return {jQuery} All panels.
+         * @private
+         * @ignore
+         */
+        _getPanels: function() {
+            return this.$element.find('> section');
+        },
+
         // Set a certain tab (by index) as active
         // * @param  {Number} index of the tab to make active
         /** @ignore */ 
         _setActive: function (idx) {
             idx = $.isNumeric(idx) ? idx : this.options.active;
-            var activeTab = this.tabs.eq(idx);
+            var activeTab = this._getTabs().eq(idx);
             // Activate the tab, but don't focus
             this._activateTab(activeTab, true);
         },
@@ -262,6 +330,8 @@
         _activateTab: function (tab, noFocus) {
             var href = tab.attr('href'),
                 activeClass = 'active',
+                tabs = this._getTabs(),
+                panels = this._getPanels(),
                 panel;
 
             // do not allow to enable disabled tabs
@@ -271,18 +341,18 @@
             }
 
             // get panel based on aria control attribute
-            panel = this.panels.filter('#' + tab.attr('aria-controls'));
+            panel = panels.filter('#' + tab.attr('aria-controls'));
 
             // supposed to be remote url
             if (href && href.charAt(0) !== '#') {
                 panel.loadWithSpinner(href);
             }
 
-            this.tabs.removeClass(activeClass).attr({
+            tabs.removeClass(activeClass).attr({
                 'aria-selected': false,
                 'tabindex': -1 // just the active one is able to tabbed
             });
-            this.panels.removeClass(activeClass).attr({
+            panels.removeClass(activeClass).attr({
                 'aria-hidden': true
             });
 
@@ -319,37 +389,53 @@
         // http://www.w3.org/WAI/PF/aria-practices/#tabpanel
         /** @ignore */
         _makeAccessible: function () {
-            // init the key handling for tabs
-            var self = this,
-                idPrefix = 'tabs-panel-' + new Date().getTime() + '-',
-                tabSelector = '> [role="tab"]';
-
-            // the nav around the tabs has a tablist role
-            this.tablist.attr('role', 'tablist');
+            this._makeTabsAccessible();
+            this._makeTablistAccessible();
+        }, // _makeAccessible
+        
+        /**
+         * Adds accessibility attributes and features for the tabs.
+         * @private
+         * @ignore
+         */
+        _makeTabsAccessible: function($tabs) {
+            var $panels = this._getPanels();
+            $tabs = $tabs || this._getTabs();
 
             // set tab props
-            this.tabs.each(function (i, e) {
-                var tab = $(e);
-
-                tab.attr({
+            $tabs.each(function (i, e) {
+                var $tab = $(e),
+                    $panel = $panels.eq($tab.index()),
+                    id = $panel.attr('id') || CUI.util.getNextId();
+                
+                $tab.attr({
                     'role': 'tab',
                     'tabindex': -1,
                     'aria-selected': false,
-                    'aria-controls': idPrefix + i,
-                    'aria-disabled': tab.hasClass('disabled')
+                    'aria-controls': id,
+                    'aria-disabled': $tab.hasClass('disabled')
                 });
-            });
 
-            // set panel props
-            this.panels.each(function (i, e) {
-                var panel = $(e);
-
-                panel.attr({
-                    'id': idPrefix + i,
+                $panel.attr({
+                    'id': id,
                     'role': 'tabpanel',
                     'aria-hidden': true
                 });
             });
+        },
+
+        /**
+         * Adds accessibility attributes and features for the tab list.
+         * @private
+         * @ignore
+         */
+        _makeTablistAccessible: function() {
+            // init the key handling for tabs
+            var self = this,
+                tabSelector = '> [role="tab"]';
+
+            // the nav around the tabs has a tablist role
+            this.tablist.attr('role', 'tablist');
 
             // keyboard handling
             this.tablist.on('keydown', tabSelector, function (event) {
@@ -387,13 +473,10 @@
 
                 if (keymatch) { // if a key matched then we set the currently focused element
                     event.preventDefault();
-                     // set focus class here to avoid having the focus glow with mouse click
-                    focusElem = $(focusElem);
-                    self._activateTab(focusElem);
+                    self._activateTab($(focusElem));
                 }
             });
-        } // _makeAccessible
-
+        }
     });
 
     CUI.Widget.registry.register("tabs", CUI.Tabs);
