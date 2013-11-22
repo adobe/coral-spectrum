@@ -1,13 +1,5 @@
 describe('CUI.SelectList', function() {
 
-  var click = function(target) {
-    if ('ontouchstart' in document.documentElement) {
-      $(target).trigger('tap');
-    } else {
-      $(target).trigger('click');
-    }
-  };
-
   describe('visibility', function() {
     var $trigger, $selectList;
 
@@ -38,25 +30,25 @@ describe('CUI.SelectList', function() {
 
     describe('visibility through interaction', function() {
       it('shows when trigger is clicked', function() {
-        click($trigger);
+        $trigger.trigger('click');
         expect($selectList).to.have.class('visible');
       });
 
       it('hides when trigger is clicked', function() {
         $selectList.selectList('show');
-        click($trigger);
+        $trigger.trigger('click');
         expect($selectList).not.to.have.class('visible');
       });
 
       it('hides on click outside', function() {
         $selectList.selectList('show');
-        click(document.body);
+        $(document.body).trigger('click');
         expect($selectList).not.to.have.class('visible');
       });
 
       it('does not hide when clicking inside list', function() {
         $selectList.selectList('show');
-        click($selectList);
+        $selectList.trigger('click');
         expect($selectList).to.have.class('visible');
       });
     });
