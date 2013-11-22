@@ -137,6 +137,7 @@
         },
 
         applyOptions: function () {
+            this._setInput();
             this._setTags();
             this._setSelectlist();
             this._setSuggestions();
@@ -147,7 +148,32 @@
          * @private
          */
         _setOptionListeners: function() {
-            this.on('change:multiple', this._setTags.bind(this));
+            this.on('change:multiple', function() {
+                this._setInput();
+                this._setTags();
+            }.bind(this));
+        },
+
+        /**
+         * Initializes the text input
+         * @private
+         */
+        _setInput: function() {
+            if (this.options.multiple) {
+                this._input.on('keypress.autocomplete-preventsubmit', function(event) {
+                    if (event.which === 13) { // enter
+                        // Prevent it from submitting a parent form.
+                        event.preventDefault();
+                        return false;
+                    }
+                });    
+            } else {
+                this._input.off('keypress.autocomplete-preventsubmit');
+            }
+            
+            // Prevents native autocompletion from being enabled when inside
+            // a form.
+            this._input.attr('autocomplete', 'off');
         },
 
         /**
@@ -175,8 +201,7 @@
 
             this._selectlist
                 // receive the value from the list
-                .on('selected.autocomplete', this._handleSelected.bind(this))
-                .on('hide.autocomplete', this._handleSelectListHide.bind(this));
+                .on('selected.autocomplete', this._handleSelected.bind(this));
         },
 
         /**
@@ -194,21 +219,13 @@
 
                 this._tags.tagList(this.options.tagConfig || {});
                 this._tagList = this._tags.data('tagList');
-
-                this._input.on('keydown.autocomplete-preventsubmit', function(event) {
-                    if (event.which === 13) { // enter
-                        // Prevent it from submitting a parent form.
-                        event.preventDefault();
-                        return false;
-                    }
-                }).on('keyup.autocomplete-addtag', this._addTag.bind(this));
+                this._input.on('keyup.autocomplete-addtag', this._addTag.bind(this));
 
             } else if (!this.options.multiple && this._tagList) {
                 this._tags.remove();
                 this._tags = null;
                 this._tagList = null;
-                this._input.off('keydown.autocomplete-preventsubmit ' +
-                        'keyup.autocomplete-addtag');
+                this._input.off('keyup.autocomplete-addtag');
             }
         },
 
@@ -299,12 +316,18 @@
             this._input.add(this._suggestionsBtn).on('keydown', function(event) {
                 switch (event.which) {
                     case 40: // down arrow
-                        this._selectListWidget.show();
-                        this._selectlist
-                            .find('[role="option"]:visible')
-                            .first()
-                            .focus();
-                        event.preventDefault();
+                        if (!this._selectListWidget.get('visible')) {
+                            this._selectListWidget.show().resetCaret();
+                            this._selectlist
+                                .find('[role="option"]:visible')
+                                .first()
+                                .focus();
+                            event.preventDefault();
+                            // If the event continued propagation then the
+                            // SelectList would set its cursor to the next 
+                            // item in the list.
+                            event.stopPropagation();
+                        }
                         break;
                 }
             }.bind(this));
@@ -345,20 +368,8 @@
         },
 
         /**
-         * Prevents the select list from hiding then the text input has gained
-         * focus and contains a value.
-         * @private
-         */
-        _handleSelectListHide: function(event) {
-            if (this._input.is(document.activeElement) &&
-                    this._input.val().length) {
-                event.preventDefault();
-            }
-        },
-
-        /**
          * this function is triggered when a typeahead request needs to be done
-         * override this function to acheive a custom handling on the client
+         * override this function to achieve a custom handling on the client
          * 
          * @fires Autocomplete#query
          * @param {String} val null if all values need to be shown
@@ -380,7 +391,7 @@
                     this._handleDynamicFilter(val);
                 }
 
-                this._selectListWidget.show();
+                this._selectListWidget.show().resetCaret();
             } else { // No input text and the user didn't click the toggle.
                 this._selectListWidget.hide();
             }

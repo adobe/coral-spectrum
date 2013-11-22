@@ -95,7 +95,8 @@
          * @param  {String} [options.type=static] static or dynamic list
          * @param  {Boolean} [options.multiple=false] multiple selection or not
          * @param  {Object} options.relatedElement DOM element to position at
-         * @param  {Boolean} [options.autofocus=true] automatically sets the focus on the list
+         * @param  {Boolean} [options.autofocus=true] automatically sets the
+         * caret to the first item in the list
          * @param  {Boolean} [options.autohide=true] automatically closes the
          * list when clicking the toggle button or clicking outside of the list
          * @param  {String} [options.dataurl] URL to receive values dynamically
@@ -110,8 +111,8 @@
 
             this.$element
                 .on('change:type', this._setType.bind(this))
-                .on('click', '[role="option"]', this._triggerSelected.bind(this))
-                .on('mouseenter', '[role="option"]', this._handleMouseEnter.bind(this));
+                .on('click', this._SELECTABLE_SELECTOR, this._triggerSelected.bind(this))
+                .on('mouseenter', this._SELECTABLE_SELECTOR, this._handleMouseEnter.bind(this));
 
             // accessibility
             this._makeAccessible();
@@ -131,6 +132,12 @@
             loadData: $.noop, // function to receive more data
             position: 'center bottom-1'  // -1 to override the border
         },
+
+        /**
+         * Selector used to find selectable items.
+         * @private
+         */
+        _SELECTABLE_SELECTOR: '[role="option"]:visible:not([aria-disabled="true"])',
 
         applyOptions: function () {
             this._setType();
@@ -190,62 +197,76 @@
             });
 
             this._makeAccessibleListOption(this.$element.children());
+        },
 
-            // setting tabindex
-            this.$element.on('focusin focusout', 'li[role="option"]', function (event) {
-                $(event.currentTarget).attr('tabindex', event.type === 'focusin' ? -1 : 0);
-            });
+        /**
+         * Handles key down events for accessibility purposes.
+         * @param event The keydown event.
+         * @private
+         */
+        _handleKeyDown: function(event) {
+            // enables keyboard support
+            var entries = this.$element.find(this._SELECTABLE_SELECTOR),
+                    currentFocusEntry = entries.filter('.focus'),
+                    currentFocusIndex = entries.index(currentFocusEntry),
+                    newFocusEntry;
 
-            // keyboard handling
-            this.$element.on('keydown', 'li[role="option"]', function (event) {
-                // enables keyboard support
+            if (!entries.length) {
+                return;
+            }
 
-                var elem = $(event.currentTarget),
-                    entries = $(event.delegateTarget)
-                        .find('[role="option"]:visible')
-                        .not('[aria-disabled="true"]'), // ignore disabled
-                    focusElem = elem,
-                    keymatch = true,
-                    idx = entries.index(elem);
-
-                switch (event.which) {
-                    case 13: // enter
-                    case 32: // space
-                        // choose element
-                        elem.trigger('click');
+            switch (event.which) {
+                case 13: // enter
+                case 32: // space
+                    // If the toggle button for the select list has focus and 
+                    // the user hits enter or space when a list item is 
+                    // highlighted, they would expect the item
+                    // to be selected. If no item is highlighted, they 
+                    // would expect the toggle to hide the list.
+                    // This is why we only preventDefault() when an entry
+                    // is highlighted.
+                    if (currentFocusEntry.length) {
+                        currentFocusEntry.trigger('click');
                         event.preventDefault();
-                        keymatch = false;
-                        break;
-                    case 27: //esc
-                        self.hide();
-                        keymatch = false;
-                        break;
-                    case 33: //page up
-                    case 37: //left arrow
-                    case 38: //up arrow
-                        focusElem = idx-1 > -1 ? entries[idx-1] : entries[entries.length-1];
-                        break;
-                    case 34: //page down
-                    case 39: //right arrow 
-                    case 40: //down arrow
-                        focusElem = idx+1 < entries.length ? entries[idx+1] : entries[0];
-                        break;
-                    case 36: //home
-                        focusElem = entries[0];
-                        break;
-                    case 35: //end
-                        focusElem = entries[entries.length-1];
-                        break;
-                    default:
-                        keymatch = false;
-                        break;
-                }
-
-                if (keymatch) { // if a key matched then we set the currently focused element
+                    }
+                    break;
+                case 27: //esc
+                    this.hide();
                     event.preventDefault();
-                    $(focusElem).trigger('focus');
-                }
-            });
+                    break;
+                case 33: //page up
+                case 37: //left arrow
+                case 38: //up arrow
+                    // According to spec, don't loop to the bottom of the list.
+                    if (currentFocusIndex > 0) {
+                        newFocusEntry = entries[currentFocusIndex-1];
+                    } else if (currentFocusIndex == -1) {
+                        newFocusEntry = entries[entries.length-1];
+                    }
+                    event.preventDefault();
+                    break;
+                case 34: //page down
+                case 39: //right arrow 
+                case 40: //down arrow
+                    // According to spec, don't loop to the top of the list.
+                    if (currentFocusIndex + 1 < entries.length) {
+                        newFocusEntry = entries[currentFocusIndex+1];
+                    }
+                    event.preventDefault();
+                    break;
+                case 36: //home
+                    newFocusEntry = entries[0];
+                    event.preventDefault();
+                    break;
+                case 35: //end
+                    newFocusEntry = entries[entries.length-1];
+                    event.preventDefault();
+                    break;
+            }
+
+            if (newFocusEntry !== undefined) {
+                this.setCaretToItem($(newFocusEntry), true);
+            }
         },
 
         /**
@@ -260,32 +281,72 @@
                 // group header
                 if (entry.hasClass('optgroup')) {
                     entry.attr({
-                        'role': 'presentation',
-                        'tabindex': -1
+                        'role': 'presentation'
                     }).children('ul').attr({
                         'role': 'group'
                     }).children('li').attr({
-                        'role': 'option',
-                        'tabindex': 0
+                        'role': 'option'
                     });
-
-                    entry.children('span').attr({
-                        'tabindex': -1
-                    });
-
                 } else {
                     entry.attr({
-                        'role': 'option',
-                        'tabindex': 0
+                        'role': 'option'
                     });
                 }
             });
         },
+      
+        /**
+         * Visually focuses the provided list item and ensures it is within 
+         * view.
+         * @param {jQuery} $item The list item to focus.
+         * @param {boolean} scrollToItem Whether to scroll to ensure the item 
+         * is fully within view.
+         */
+        setCaretToItem: function($item, scrollToItem) {
+            this.$element.find('[role="option"]').removeClass('focus');
+            $item.addClass('focus');
+            
+            if (scrollToItem) {
+                this.scrollToItem($item);    
+            }
+        },
+
+        /**
+         * Removes visual focus from list items and scrolls to the top.
+         */
+        resetCaret: function() {
+            this.$element.find('[role="option"]').removeClass('focus');
+            this.$element.scrollTop(0);
+        },
+
+        /**
+         * Scrolls as necessary to ensure the list item is within view.
+         * @param {jQuery} $item The list item
+         */
+        scrollToItem: function($item) {
+            if (!$item.length) {
+                return;
+            }
+            
+            var itemTop = $item.position().top,
+                itemHeight = $item.outerHeight(false),
+                scrollNode = this.$element[0];
+            
+            var bottomOverflow = itemTop + itemHeight - scrollNode.clientHeight;
+            
+            if (bottomOverflow > 0) {
+                scrollNode.scrollTop += bottomOverflow;
+            } else if (itemTop < 0) {
+                scrollNode.scrollTop += itemTop;
+            }
+        },
 
         show: function() {
-            if (!this.options.visible) {
+            if (this.options.visible) {
+              return this;
+            } else {
               hideLists(); // Must come before the parent show method.
-              this.inherited(arguments);
+              return this.inherited(arguments);
             }
         },
 
@@ -306,15 +367,23 @@
             });
 
             if (this.options.autofocus) {
-                this.$element.find('li[role="option"]:first').trigger('focus');
+                this.setCaretToItem(
+                    this.$element.find(this._SELECTABLE_SELECTOR).first(),
+                    true);
             }
 
             // if dynamic start loading
             if (this.options.type === 'dynamic') {
-                this._handleLoadData().done(function () {
-                    self.$element.find('li[role="option"]:first').trigger('focus');
+                this._handleLoadData().done(function() {
+                    if (self.options.autofocus) {
+                        self.setCaretToItem(
+                            self.$element.find(self._SELECTABLE_SELECTOR).first(),
+                            true);    
+                    }
                 });
             }
+
+            $(document).on('keydown.selectlist', this._handleKeyDown.bind(this));
         },
 
         /**
@@ -327,6 +396,8 @@
 
             
             this.reset();
+
+            $(document).off('keydown.selectlist');
         },
 
         /**
@@ -351,7 +422,7 @@
          * @param  {jQuery.Event} event
          */
         _handleMouseEnter: function (event) {
-            $(event.currentTarget).trigger('focus');
+            this.setCaretToItem($(event.currentTarget), false);
         },
 
         /**

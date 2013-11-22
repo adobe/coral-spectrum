@@ -42,12 +42,12 @@ describe('CUI.Autocomplete', function() {
   });
 
   describe('selectlist visibility', function() {
-    it('shows when trigger is clicked', function() {
+    it('shows when toggle is clicked', function() {
       $toggle.trigger('click');
       expect($selectList).to.have.class('visible');
     });
 
-    it('hides when trigger is clicked', function() {
+    it('hides when toggle is clicked', function() {
       $selectList.selectList('show');
       $toggle.trigger('click');
       expect($selectList).not.to.have.class('visible');
@@ -125,7 +125,7 @@ describe('CUI.Autocomplete', function() {
 
       $autocomplete.autocomplete('set', 'multiple', false);
       $selectList.selectList('show');
-      var $firstItem = $selectList.find('li').eq(0);
+      var $firstItem = $selectList.find('li').eq(0).addClass('focus');
 
       var keyDownEvent = $.Event('keydown');
       keyDownEvent.which = 13; // enter
@@ -362,7 +362,7 @@ describe('CUI.Autocomplete', function() {
     it('it does not submit a parent form when hitting enter on the input when multiple=true', function() {
       $autocomplete.autocomplete('set', 'multiple', true);
 
-      var keyEvent = $.Event('keydown');
+      var keyEvent = $.Event('keypress');
       keyEvent.which = 13; // enter
 
       var spy = sinon.spy(keyEvent, 'preventDefault');
