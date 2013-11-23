@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
   var uuid = 0;
 
   CUI.Popover = new Class(/** @lends CUI.Popover# */{
@@ -13,33 +13,33 @@
 
      @param {Object} options                               Component options
      @param {Object} options.pointAt                       The element or coordinate to which the popover should point.
-                                                           A coordinate should be provided as an array where the first
-                                                           item is the X coordinate and the second item is a Y
-                                                           coordinate. The coordinate should be in the document
-                                                           coordinate space.
+     A coordinate should be provided as an array where the first
+     item is the X coordinate and the second item is a Y
+     coordinate. The coordinate should be in the document
+     coordinate space.
      @param {String} [options.content]                     Content of the popover (HTML).
      @param {String} [options.pointFrom=bottom]            The side of the target element or coordinate the popover
-                                                           should be pointing from. Possible values include
-                                                           <code>top</code>, <code>right</code>, <code>bottom</code>,
-                                                           or <code>left</code>.
+     should be pointing from. Possible values include
+     <code>top</code>, <code>right</code>, <code>bottom</code>,
+     or <code>left</code>.
      @param {boolean} [options.preventAutoHide=false]      When set to <code>false</code>, the popover will close when
-                                                           the user clicks/taps outside the popover. When set to
-                                                           <code>true</code>, the popover will only close when the
-                                                           target element is clicked/tapped or <code>hide()</code> is
-                                                           manually called.
+     the user clicks/taps outside the popover. When set to
+     <code>true</code>, the popover will only close when the
+     target element is clicked/tapped or <code>hide()</code> is
+     manually called.
      @param {String} [options.alignFrom=left]              When set to left, the popover will be anchored to the left
-                                                           side of its offset parent (in other words, it will use the
-                                                           <code>left</code> CSS property). When set to right, the
-                                                           popover will be anchored to the right side of its offset
-                                                           parent (in other words, it will use the <code>right</code>
-                                                           CSS property). When the element the popover is pointing at
-                                                           is right-aligned, it can be useful to set the value to
-                                                           <code>right</code> so the popover will appear to stay
-                                                           attached to the element when the user resizes the window
-                                                           horizontally.
+     side of its offset parent (in other words, it will use the
+     <code>left</code> CSS property). When set to right, the
+     popover will be anchored to the right side of its offset
+     parent (in other words, it will use the <code>right</code>
+     CSS property). When the element the popover is pointing at
+     is right-aligned, it can be useful to set the value to
+     <code>right</code> so the popover will appear to stay
+     attached to the element when the user resizes the window
+     horizontally.
 
      */
-    construct: function(options) {
+    construct: function (options) {
       // Add CSS class to give styling
       this.$element.addClass('popover');
 
@@ -77,7 +77,7 @@
      * Creates the popover tail (i.e., tip, arrow, triangle) and adds it as a child.
      * @private
      */
-    _createTail: function() {
+    _createTail: function () {
       this._$tail = $('<div class="popover-arrow arrow-left"/>').appendTo(this.$element);
 
       this._cachedTailDimensions = {};
@@ -105,7 +105,7 @@
      *
      * @private
      */
-    _position: function() {
+    _position: function () {
       // Let's not use the cycles to position if the popover is not visible. When show() is called, the element will
       // run through positioning again.
       if (!this.options.visible || !this.options.pointAt) {
@@ -113,10 +113,10 @@
       }
 
       var $popover = this.$element,
-          target = this.options.pointAt,
-          pointFrom = this.options.pointFrom,
-          tailDimensions = this._cachedTailDimensions,
-          instructions;
+        target = this.options.pointAt,
+        pointFrom = this.options.pointFrom,
+        tailDimensions = this._cachedTailDimensions,
+        instructions;
 
       if ($.isArray(target)) {
         if (target.length !== 2) {
@@ -134,9 +134,9 @@
       // place and, if so, we re-run the positioning algorithm while forcing the position to the bottom or right
       // directions.
       // Fixes https://issues.adobe.com/browse/CUI-794
-      var validateFinalPosition = function(position, feedback) {
+      var validateFinalPosition = function (position, feedback) {
         var offsetParentOffset = $popover.offsetParent().offset(),
-            forcePointFrom;
+          forcePointFrom;
 
         if ((pointFrom == 'top' || pointFrom == 'bottom') && offsetParentOffset.top + position.top < 0) {
           forcePointFrom = 'bottom';
@@ -173,7 +173,7 @@
      * @returns {Object} A jquery event object with the pageX and pageY properties set.
      * @private
      */
-    _convertCoordsToEvent: function(pointAt) {
+    _convertCoordsToEvent: function (pointAt) {
       // If target is an array, it should contain x and y coords for absolute positioning.
       // Transform coords for jQueryUI Position which requires an event object with pageX and pageY.
       var event = $.Event();
@@ -188,7 +188,7 @@
      * @param feedback Additional information useful for positioning the tail.
      * @private
      */
-    _applyFinalPosition: function(position, feedback) {
+    _applyFinalPosition: function (position, feedback) {
       var css = {
         top: position.top
       };
@@ -228,7 +228,7 @@
      * @private
      */
     _instructionFactory: {
-      top: function(options) {
+      top: function (options) {
         return {
           my: 'center bottom-' + options.tailDimensions.topBottom.height,
           at: 'center top',
@@ -237,7 +237,7 @@
           using: options.callback
         };
       },
-      right: function(options) {
+      right: function (options) {
         return {
           my: 'left+' + options.tailDimensions.leftRight.width + ' center',
           at: 'right center',
@@ -246,7 +246,7 @@
           using: options.callback
         };
       },
-      bottom: function(options) {
+      bottom: function (options) {
         return {
           my: 'center top+' + options.tailDimensions.topBottom.height,
           at: 'center bottom',
@@ -255,7 +255,7 @@
           using: options.callback
         };
       },
-      left: function(options) {
+      left: function (options) {
         return {
           my: 'right-' + options.tailDimensions.leftRight.width + ' center',
           at: 'left center',
@@ -272,11 +272,11 @@
      * information regarding how the popover bubble was positioned.
      * @private
      */
-    _positionTail: function(positionFeedback) {
+    _positionTail: function (positionFeedback) {
       // For more information about the feedback object, see:
       // http://jqueryui.com/upgrade-guide/1.9/#added-positioning-feedback-to-the-using-callback
       var targetRect,
-          offset = this.$element.offset();
+        offset = this.$element.offset();
 
       if ($.isArray(this.options.pointAt)) {
         targetRect = {
@@ -317,7 +317,7 @@
         case 'right': // Consumer wanted popover to the right of the target
           tailWidth = this._cachedTailDimensions.leftRight.width;
           tailTop = targetRect.top + targetRect.height / 2 -
-              this._cachedTailDimensions.leftRight.height / 2;
+            this._cachedTailDimensions.leftRight.height / 2;
           if (positionFeedback.horizontal == 'left') { // Popover ended up on the right side of the target
             tailClass = 'arrow-left';
             tailLeft = targetRect.left + targetRect.width;
@@ -334,30 +334,30 @@
     },
 
     /** @ignore */
-    _show: function() {
+    _show: function () {
       this.$element.show().prop('aria-hidden', false);
       this._position();
 
       if (!this.options.preventAutoHide) {
-        $('body').fipo('tap.popover-hide-'+this.uuid, 'click.popover-hide-'+this.uuid, function(e) {
+        $('body').fipo('tap.popover-hide-' + this.uuid, 'click.popover-hide-' + this.uuid, function (e) {
           var el = this.$element.get(0);
 
           if (e.target !== el && !$.contains(el, e.target)) {
             this.hide();
-            $('body').off('.popover-hide-'+this.uuid);
+            $('body').off('.popover-hide-' + this.uuid);
           }
         }.bind(this));
       }
     },
 
     /** @ignore */
-    _hide: function() {
+    _hide: function () {
       this.$element.hide().prop('aria-hidden', true);
-      $('body').off('.popover-hide-'+this.uuid);
+      $('body').off('.popover-hide-' + this.uuid);
     },
 
     /** @ignore */
-    _setContent: function() {
+    _setContent: function () {
       if (typeof this.options.content !== 'string') return;
 
       this.$element.html(this.options.content);
@@ -375,17 +375,17 @@
      * @param position
      * @deprecated Please use set('pointAt', [x, y]) instead.
      */
-    setPosition: function(position) {
+    setPosition: function (position) {
       this.set('pointAt', position);
     }
   });
 
   CUI.Widget.registry.register("popover", CUI.Popover);
 
-  $(function() {
-    $('body').fipo('tap.popover.data-api', 'click.popover.data-api', '[data-toggle="popover"]', function (e) {
+  $(function () {
+    $('body').fipo('tap.popover.data-api', 'click.popover.data-api', '[data-toggle="popover"]',function (e) {
       var $trigger = $(this),
-          $target = CUI.util.getDataTarget($trigger);
+        $target = CUI.util.getDataTarget($trigger);
 
       // if data target is not defined try to find the popover as a sibling
       $target = $target && $target.length > 0 ? $target : $trigger.next('.popover');

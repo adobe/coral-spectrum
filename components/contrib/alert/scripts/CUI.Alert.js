@@ -1,83 +1,83 @@
-(function($) {
+(function ($) {
   CUI.Alert = new Class(/** @lends CUI.Alert# */{
     toString: 'Alert',
     extend: CUI.Widget,
 
     /**
-      @extends CUI.Widget
-      @classdesc An optionally closable alert message.
-      <style> div.alert {
+     @extends CUI.Widget
+     @classdesc An optionally closable alert message.
+     <style> div.alert {
           width: 400px;
       }
-      </style>
+     </style>
 
-      <div class="alert error">
-        <button class="close" data-dismiss="alert">&times;</button>
-        <strong>ERROR</strong><div>Uh oh, something went wrong with the whozit!</div>
-      </div>
+     <div class="alert error">
+     <button class="close" data-dismiss="alert">&times;</button>
+     <strong>ERROR</strong><div>Uh oh, something went wrong with the whozit!</div>
+     </div>
 
-      @example
+     @example
 
-      <caption>The constructors below act on the expected HTML markup:</caption>
+     <caption>The constructors below act on the expected HTML markup:</caption>
 
-      &lt;div id=&quot;myAlert&quot;&gt;
-        &lt;button class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;&amp;times;&lt;/button&gt;
-        &lt;strong&gt;ERROR&lt;/strong&gt;&lt;div&gt;Uh oh, something went wrong with the whozit!&lt;/div&gt;
-      &lt;/div&gt;
-       
-      @example
-      <caption>Instantiate with Class</caption>
-      var alert = new CUI.Alert({
+     &lt;div id=&quot;myAlert&quot;&gt;
+     &lt;button class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;&amp;times;&lt;/button&gt;
+     &lt;strong&gt;ERROR&lt;/strong&gt;&lt;div&gt;Uh oh, something went wrong with the whozit!&lt;/div&gt;
+     &lt;/div&gt;
+
+     @example
+     <caption>Instantiate with Class</caption>
+     var alert = new CUI.Alert({
         element: '#myAlert',
         heading: 'ERROR',
         content: 'An error has occurred.',
         closable: true
       });
 
-      // Hide the alert, change the content, then show it again
-      alert.hide().set({ content: 'Another error has occurred.'}).show();
+     // Hide the alert, change the content, then show it again
+     alert.hide().set({ content: 'Another error has occurred.'}).show();
 
-      // jQuery style works as well
-      $('#myAlert').alert('hide');
+     // jQuery style works as well
+     $('#myAlert').alert('hide');
 
-      @example
-      <caption>Instantiate with jQuery</caption>
-      $('#myAlert').alert({
+     @example
+     <caption>Instantiate with jQuery</caption>
+     $('#myAlert').alert({
         heading: 'ERROR',
         content: 'An error has occurred.',
         closable: true
       });
 
-      // Hide the alert, change the content, then show it again
-      $('#myAlert').alert('hide').alert({ heading: 'Another error has occurred.'}).alert('show');
+     // Hide the alert, change the content, then show it again
+     $('#myAlert').alert('hide').alert({ heading: 'Another error has occurred.'}).alert('show');
 
-      // A reference to the element's alert instance is stored as data-alert
-      var alert = $('#myAlert').data('alert');
-      alert.hide();
+     // A reference to the element's alert instance is stored as data-alert
+     var alert = $('#myAlert').data('alert');
+     alert.hide();
 
-      @example
-      <caption>Data API: Hide alert</caption>
-      <description>When an element within the alert has <code><span class="atn">data-dismiss</span>=<span class="atv">"alert"</span></code>, it will hide the alert.</description>
-      &lt;a data-dismiss=&quot;alert&quot;&gt;Dismiss&lt;/a&gt;
+     @example
+     <caption>Data API: Hide alert</caption>
+     <description>When an element within the alert has <code><span class="atn">data-dismiss</span>=<span class="atv">"alert"</span></code>, it will hide the alert.</description>
+     &lt;a data-dismiss=&quot;alert&quot;&gt;Dismiss&lt;/a&gt;
 
-      @example
-      <caption>Markup</caption>
-      &lt;div class=&quot;alert error&quot;&gt;
-        &lt;button class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;&amp;times;&lt;/button&gt;
-        &lt;strong&gt;ERROR&lt;/strong&gt;&lt;div&gt;Uh oh, something went wrong with the whozit!&lt;/div&gt;
-      &lt;/div&gt;
+     @example
+     <caption>Markup</caption>
+     &lt;div class=&quot;alert error&quot;&gt;
+     &lt;button class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;&amp;times;&lt;/button&gt;
+     &lt;strong&gt;ERROR&lt;/strong&gt;&lt;div&gt;Uh oh, something went wrong with the whozit!&lt;/div&gt;
+     &lt;/div&gt;
 
-      @desc Creates a new alert
-      @constructs
+     @desc Creates a new alert
+     @constructs
 
-      @param {Object} options                               Component options
-      @param {String} [options.heading=Type, capitalized]   Title of the alert
-      @param {String} options.content                       Content of the alert
-      @param {Boolean} options.closable                     Array of button descriptors
-      @param {String} [options.size=small]                  Size of the alert. Either large or small. 
-      @param {String} [options.type=error]                  Type of alert to display. One of error, notice, success, help, or info
-    */
-    construct: function(options) {
+     @param {Object} options                               Component options
+     @param {String} [options.heading=Type, capitalized]   Title of the alert
+     @param {String} options.content                       Content of the alert
+     @param {Boolean} options.closable                     Array of button descriptors
+     @param {String} [options.size=small]                  Size of the alert. Either large or small.
+     @param {String} [options.type=error]                  Type of alert to display. One of error, notice, success, help, or info
+     */
+    construct: function (options) {
       // Catch clicks to dismiss alert
       this.$element.delegate('[data-dismiss="alert"]', 'click.dismiss.alert', this.hide);
 
@@ -92,14 +92,14 @@
       this.$element.on('change:size', this._setSize.bind(this));
 
       // Read in options "set" by markup so we don't override the values they set
-      $.each(this._types, function(index, type) {
+      $.each(this._types, function (index, type) {
         if (this.$element.hasClass(type)) {
           this.options.type = type;
           return false;
         }
       }.bind(this));
 
-      $.each(this._sizes, function(index, size) {
+      $.each(this._sizes, function (index, size) {
         if (this.$element.hasClass(size)) {
           this.options.size = size;
           return false;
@@ -131,10 +131,10 @@
         this._setType();
         this._setSize();
       }
-      
+
       this._setHeading();
       this._setContent();
-      
+
     },
 
     defaults: {
@@ -160,30 +160,30 @@
 
 
     /** @ignore */
-    _setContent: function() {
+    _setContent: function () {
       if (typeof this.options.content !== 'string') {
         this.$element.find('div').html(this.options.content);
       }
     },
 
     /** @ignore */
-    _setHeading: function() {
-      if (typeof this.options.content == 'string'){
+    _setHeading: function () {
+      if (typeof this.options.content == 'string') {
         this.$element.find('strong').html(this.options.heading);
       }
     },
 
     /** @ignore */
-    _setType: function() {
+    _setType: function () {
       if (this._isValidType(this.options.type)) {
         this.$element.removeClass(this._types.join(' '));
         this.$element.addClass(this.options.type);
-        }
+      }
 
     },
 
     /** @ignore */
-    _setSize: function() {
+    _setSize: function () {
       if (this._isValidSize(this.options.size)) {
         if (this.options.size === 'small') {
           this.$element.removeClass('large');
@@ -195,7 +195,7 @@
     },
 
     /** @ignore */
-    _setClosable: function() {
+    _setClosable: function () {
       var el = this.$element.find('.close');
       if (!el.length) {
         // Add the close element if it's not present
@@ -207,22 +207,22 @@
     },
 
     /** @ignore */
-    _isValidType: function(value) {
+    _isValidType: function (value) {
       return typeof value == 'string' && this._types.indexOf(value) > -1;
     },
 
     /** @ignore */
-    _isValidSize: function(value) {
+    _isValidSize: function (value) {
       return typeof value == 'string' && this._sizes.indexOf(value) > -1;
     },
 
     /** @ignore */
-    _fixType: function(value) {
+    _fixType: function (value) {
       return this._isValidType(value) ? value : this.defaults.type;
     },
 
     /** @ignore */
-    _fixHeading: function(value) {
+    _fixHeading: function (value) {
       return value === undefined ? this._fixType(this.options.type).toUpperCase() : value;
     }
 
@@ -232,8 +232,8 @@
 
   // Data API
   if (CUI.options.dataAPI) {
-    $(function() {
-      $('body').fipo('tap.alert.data-api', 'click.alert.data-api', '[data-dismiss="alert"]', function(evt) {
+    $(function () {
+      $('body').fipo('tap.alert.data-api', 'click.alert.data-api', '[data-dismiss="alert"]', function (evt) {
         $(evt.target).parent().hide();
         evt.preventDefault();
       });

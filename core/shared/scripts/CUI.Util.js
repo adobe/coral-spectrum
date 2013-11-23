@@ -24,7 +24,7 @@
 
     /**
      * Get the target element of a data API action using the data attributes of an element.
-     * 
+     *
      * @param {jQuery} $element The jQuery object representing the element to get the target from
      * @return {jQuery} The jQuery object representing the target element
      */
@@ -36,22 +36,22 @@
 
     /**
      * Decapitalize a string by converting the first letter to lowercase.
-     * 
+     *
      * @param {String} str The string to de-capitalize
      * @return {String} The de-capitalized string
      */
     decapitalize: function (str) {
-      return str.slice(0,1).toLowerCase()+str.slice(1);
+      return str.slice(0, 1).toLowerCase() + str.slice(1);
     },
 
     /**
      * Capitalize a string by converting the first letter to uppercase.
-     * 
+     *
      * @param {String} str The string to capitalize
      * @return {String} The capitalized string
      */
     capitalize: function (str) {
-      return str.slice(0,1).toUpperCase()+str.slice(1);
+      return str.slice(0, 1).toUpperCase() + str.slice(1);
     },
 
     /**
@@ -63,9 +63,9 @@
     plugClass: function (PluginClass, pluginName, callback) {
       pluginName = pluginName || CUI.util.decapitalize(PluginClass.toString());
 
-      $.fn[pluginName] = function(optionsIn) {
+      $.fn[pluginName] = function (optionsIn) {
         var pluginArgs = arguments;
-        return this.each(function() {
+        return this.each(function () {
           var $element = $(this);
 
           // Combine defaults, data, options, and element config
@@ -89,7 +89,7 @@
 
     /**
      * Register a callback from a string
-     * 
+     *
      * @param {String} callbackAsString The string containing the callback function to register
      * @param {Object} [params] Parameters to provide when executing callback
      * @return {Function} The callback function generated from the provided string
@@ -124,7 +124,7 @@
         end = end || value.length;
         var domEl = $(field)[0];
         if (domEl.setSelectionRange) {
-        // Mostly all browsers
+          // Mostly all browsers
           domEl.blur();
           domEl.setSelectionRange(start, end);
           domEl.focus();
@@ -141,12 +141,12 @@
 
     /**
      * Utility function to get the value of a nested key within an object
-     * 
+     *
      * @param {Object} object The object to retrieve the value from
      * @param {String} nestedKey The nested key. For instance "foo.bar.baz"
      * @return {Object} The object value for the nested key
      */
-    getNested: function(object, nestedKey) {
+    getNested: function (object, nestedKey) {
       if (!nestedKey) {
         return object;
       }
@@ -162,15 +162,15 @@
 
       return result;
     },
-    
+
     /**
      * Utility function to transform a string representation of a boolean value into that boolean value
-     * 
+     *
      * @param {String} string representation
      * @return {Boolean} The boolean value of the string
      */
-    isTrue: function(str) {
-        return str === 'true';
+    isTrue: function (str) {
+      return str === 'true';
     }
 
   };
