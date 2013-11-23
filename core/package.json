@@ -27,6 +27,6 @@
     "mocha": "1.8.1",
     "bootstrap": "git+https://github.com/twbs/bootstrap#v2.3.2",
     "jquery-ui": "git+https://github.com/jquery/jquery-ui.git#1.10.3",
-    "grunt-css-metrics": "git+https://github.com/phamann/grunt-css-metrics.git"
+    "grunt-css-metrics": "~0.1.0"
   }
 }
