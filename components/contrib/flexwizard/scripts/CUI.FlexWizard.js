@@ -17,17 +17,17 @@
 (function ($) {
   function cloneLeft(buttons) {
     return buttons.filter("[data-action=prev], [data-action=cancel]").first().addClass("hidden")
-      .clone().addClass("left").each(processButton);
+      .clone(true).addClass("left").each(processButton);
   }
 
   function cloneRight(buttons) {
     return buttons.filter("[data-action=next]").first().addClass("hidden")
-      .clone().addClass("primary right").each(processButton);
+      .clone(true).addClass("primary right").each(processButton);
   }
 
   function cloneCancel(buttons) {
     return buttons.filter("[data-action=cancel]").first()
-      .clone().addClass("quiet right").each(processButton);
+      .clone(true).addClass("quiet right").each(processButton);
   }
 
   function processButton(i, el) {
@@ -173,7 +173,21 @@
     },
 
     /**
-     Add the given step to the wizard.
+     Goes to the previous step. If there is no previous step, this method does nothing.
+     */
+    prevStep: function() {
+      controlWizard(this.$element, "prev");
+    },
+
+    /**
+     Goes to the next step. If there is no next step, this method does nothing.
+     */
+    nextStep: function() {
+      controlWizard(this.$element, "next");
+    },
+
+    /**
+     Adds the given step to the wizard.
 
      @param {HTMLElement|jQuery|String} step The step to be added
      @param {Number} [index] The index the step is added. If not passed, the step is added as the last one
@@ -195,7 +209,7 @@
     },
 
     /**
-     Add the given step after the given reference step.
+     Adds the given step after the given reference step.
 
      @param {HTMLElement|jQuery|String} step The step to be added
      @param {HTMLElement|jQuery} refStep The reference step
@@ -213,6 +227,25 @@
 
       step.toggleClass("step", true);
       insertAfter(wizard, step, refStep);
+    },
+
+    /**
+     Removes the given step from the wizard.
+     If the current step is removed, the resulting behaviour is undefined.
+
+     @param {HTMLElement|jQuery} step The step to be removed
+     */
+    remove: function(step) {
+      var wizard = this.$element;
+
+      if (!step.jquery) {
+          step = $(step);
+      }
+
+      var index = wizard.children(".step").index(step);
+      wizard.find("> .toolbar > ol > li").eq(index).remove();
+
+      step.remove();
     }
   });
 
