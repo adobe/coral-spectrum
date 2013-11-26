@@ -13,9 +13,9 @@
 
     .component-single-line;
 
-    width: 13rem; /* Width must be specified */
+    width: 208*@px; /* Width must be specified */
 
-    @input-height: 2rem;
+    @input-height: 38*@px;
     @suggestion-btn-size: 36*@px;
 
     > input {
@@ -39,7 +39,7 @@
 
         &:before {
             position: absolute;
-            line-height: 38*@px;
+            top: (@input-height - 12*@px)/2;   // CUI-1090 line-height + :before + IE is no good.
             left: 10*@px;
         }
 
