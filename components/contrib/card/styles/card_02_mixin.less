@@ -250,6 +250,11 @@
 }
 
 .card-alert-banner(@triangle-size: @card-banner-offset, @shadow-density: 0.5) {
+    &.large {
+        /* Large alert style not supported within cards */
+        display : none;
+    }
+
     display: block;
     z-index: 10;
     position: relative;
@@ -261,64 +266,12 @@
 
     .box-shadow(0 8*@px 8*@px -5*@px rgba(0, 0, 0, @shadow-density));
 
-    &:before,
-    &:after {
-        content: " ";
-        position: absolute;
-        bottom: -2*@px - @triangle-size;
-        width: 0;
-        height: 0;
-        border-width: (@triangle-size + @px)/2;
-        border-style: solid;
-        border-color: @alert-info-border-color;
-        border-bottom-color: transparent !important;
-    }
-
-    &.error {
-        &:before,
-        &:after {
-            border-color: @alert-error-border-color;
-        }
-    }
-
-    &.notice {
-      &:before,
-      &:after {
-          border-color: @alert-notice-border-color;
-      }
-    }
-
-    &.success {
-      &:before,
-      &:after {
-          border-color: @alert-success-border-color;
-      }
-    }
-
-    &.info,
-    &.help {
-      &:before,
-      &:after {
-          border-color: @alert-info-border-color;
-      }
-    }
-
     &:before {
-        left: -@px;
-        border-left-color: transparent !important;
-    }
-
-    &:after {
-        right: -@px;
-        border-right-color: transparent !important;
-    }
-
-    div {
-        display: inline;
+        float: left;
+        padding-right: 0;
     }
 
     strong {
-        display: inline-block;
         margin-right: 0.25rem;
         text-transform: uppercase;
     }
@@ -328,5 +281,36 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
+
+        text-indent: 0;
+
+        div {
+            display: inline;
+        }
+
+        border-color: inherit;
+
+        &:before,
+        &:after {
+            content: " ";
+            position: absolute;
+            bottom: -2*@px - @triangle-size;
+            width: 0;
+            height: 0;
+            border-width: (@triangle-size + @px)/2;
+            border-style: solid;
+            border-color: inherit;
+            border-bottom-color: transparent;
+        }
+
+        &:before {
+            left: -@px;
+            border-left-color: transparent;
+        }
+
+        &:after {
+            right: -@px;
+            border-right-color: transparent;
+        }
     }
 }
