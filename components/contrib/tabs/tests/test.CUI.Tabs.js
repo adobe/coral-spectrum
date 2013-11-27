@@ -373,7 +373,18 @@ describe('CUI.Tabs', function() {
   }); // passing options
     
   describe('adding/removing tabs', function() {
-    var $el, widget;
+    var $el, 
+      widget,
+      tabContent = 'Test tab',
+      panelContent = 'Test panel';
+    
+    var getTabs = function() {
+      return $el.find('[role="tab"]');
+    };
+    
+    var getPanels = function() {
+      return $el.find('section');
+    };
 
     beforeEach(function() {
       $el = $(jQueryMarkup).appendTo('body');
@@ -384,77 +395,169 @@ describe('CUI.Tabs', function() {
       $el.remove();
       $el = widget = null;
     });
+    
+    describe('adding tabs', function() {
+      it('will use provided content', function() {
+        widget.addItem({
+          tabContent: tabContent,
+          panelContent: panelContent
+        });
 
-    it('will add a new tab by jQuery object', function() {
-      var $tab = $('<a href="#added-tab" data-toggle="tab">Added tab</a>');
-      var $section = $('<section>Added content.</section>');
-      widget.addItem($tab, $section);
-      expect($el.find('a[role="tab"]').eq(5).is($tab)).to.be.true;
-      expect($el.find('section').eq(5).is($section)).to.be.true;
+        var $tabs = getTabs();
+        var $panels = getPanels();
+
+        expect($tabs.length).to.equal(6);
+        expect($panels.length).to.equal(6);
+        expect($tabs.eq(5)).to.have.text(tabContent);
+        expect($panels.eq(5)).to.have.text(panelContent);
+      });
+
+      it('will use a provided id', function() {
+        var testID = 'testID';
+        
+        widget.addItem({
+          id: testID
+        });
+
+        expect(getTabs().eq(5)).to.have.attr('id', testID);
+      });
+
+      it('will link the tab to the panel', function() {
+        widget.addItem();
+
+        expect(getTabs().eq(5)).to.have.attr('href', 
+          '#' + getPanels().eq(5).attr('id'));
+      });
+      
+      it('will use a panel URL', function() {
+        widget.addItem({
+          panelURL: 'test.html'
+        });
+        
+        expect(getTabs().eq(5)).to.have.attr('href', 'test.html');
+        expect(getTabs().eq(5)).to.have.attr('data-target', 
+          '#' + getPanels().eq(5).attr('id'));
+      });
+      
+      it('will add a tab at index 0', function() {
+        widget.addItem({
+          tabContent: tabContent,
+          panelContent: panelContent,
+          index: 0
+        });
+        
+        expect(getTabs().eq(0)).to.have.text(tabContent);
+        expect(getPanels().eq(0)).to.have.text(panelContent);
+      });
+      
+      it('will correct a negative index', function() {
+        widget.addItem({
+          tabContent: tabContent,
+          panelContent: panelContent,
+          index: -100
+        });
+
+        expect(getTabs().eq(0)).to.have.text(tabContent);
+        expect(getPanels().eq(0)).to.have.text(panelContent);
+      });
+
+      it('will correct an index that is too high', function() {
+        widget.addItem({
+          tabContent: tabContent,
+          panelContent: panelContent,
+          index: 100
+        });
+
+        expect(getTabs().eq(5)).to.have.text(tabContent);
+        expect(getPanels().eq(5)).to.have.text(panelContent);
+      });
+
+      it('will add a tab when no other tabs exist', function() {
+        $el.find('a,section').remove(); // shortcut
+        
+        widget.addItem({
+          tabContent: tabContent,
+          panelContent: panelContent
+        });
+
+        expect(getTabs().eq(0)).to.have.text(tabContent);
+        expect(getPanels().eq(0)).to.have.text(panelContent);
+      });
+
+      it('will activate the tab when active=true', function() {
+        widget.addItem({
+          active: true
+        });
+
+        expect(getTabs().eq(5)).to.have.class('active');
+        expect(getPanels().eq(5)).to.have.class('active');
+      });
+
+      it('will not activate the tab when active=false', function() {
+        widget.addItem({
+          active: false
+        });
+
+        expect(getTabs().eq(5)).not.to.have.class('active');
+        expect(getPanels().eq(5)).not.to.have.class('active');
+      });
+
+      it('will not activate the tab when active=true and enabled=false', function() {
+        widget.addItem({
+          active: true,
+          enabled: false
+        });
+
+        expect(getTabs().eq(5)).not.to.have.class('active');
+        expect(getPanels().eq(5)).not.to.have.class('active');
+      });
+
+      it('will disable the tab when enabled=false', function() {
+        widget.addItem({
+          enabled: false
+        });
+
+        expect(getTabs().eq(5)).to.have.class('disabled');
+      });
     });
+    
+    describe('removing tabs', function() {
+      it('will remove a tab by index', function() {
+        var $tab = getTabs().eq(1);
+        var $panel = getPanels().eq(1);
+          
+        widget.removeItem(1);
+        
+        expect($tab.parent().length).to.equal(0);
+        expect($panel.parent().length).to.equal(0);
+      });
 
-    it('will add a new tab by HTML node', function() {
-      var $tab = $('<a href="#added-tab" data-toggle="tab">Added tab</a>');
-      var $section = $('<section>Added content.</section>');
-      widget.addItem($tab[0], $section[0]);
-      expect($el.find('a[role="tab"]').eq(5).is($tab)).to.be.true;
-      expect($el.find('section').eq(5).is($section)).to.be.true;
-    });
+      it('will activate nearest eligible following tab if tab being removed is active', function() {
+        widget.set('active', 1);
+        var $nearestTab = getTabs().eq(2);
+        var $nearestPanel = getTabs().eq(2);
+        widget.removeItem(1);
+        expect($nearestTab).to.have.class('active');
+        expect($nearestPanel).to.have.class('active');
+      });
 
-    it('will add a new tab by HTML string', function() {
-      var tabHTML = '<a href="#added-tab" data-toggle="tab">Added tab</a>';
-      var sectionHTML = '<section>Added content.</section>';
-      widget.addItem(tabHTML, sectionHTML);
-      expect($el.find('a[role="tab"]').eq(5).attr('href')).to.equal('#added-tab');
-      expect($el.find('section').eq(5).html()).to.be.equal('Added content.');
-    });
+      it('will activate nearest eligible previous tab if tab being removed is active and no eligible tabs follow', function() {
+        widget.set('active', 4);
+        var $nearestTab = getTabs().eq(2); // tab at index 3 is disabled.
+        var $nearestPanel = getTabs().eq(2); // tab at index 3 is disabled.
+        widget.removeItem(4);
+        expect($nearestTab).to.have.class('active');
+        expect($nearestPanel).to.have.class('active');
+      });
 
-    it('will add a new tab at index 0', function() {
-      var $tab = $('<a href="#added-tab" data-toggle="tab">Added tab</a>');
-      var $section = $('<section>Added content.</section>');
-      widget.addItem($tab, $section, 0);
-      expect($el.find('a[role="tab"]').eq(0).is($tab)).to.be.true;
-      expect($el.find('section').eq(0).is($section)).to.be.true;
-    });
-
-    it('will add a new tab when no other tabs exist', function() {
-      for (var i = 0; i < 6; i++) {
-        widget.removeItem(0);
-      }
-
-      var $tab = $('<a href="#added-tab" data-toggle="tab">Added tab</a>');
-      var $section = $('<section>Added content.</section>');
-      widget.addItem($tab, $section);
-      expect($el.find('a[role="tab"]').eq(0).is($tab)).to.be.true;
-      expect($el.find('section').eq(0).is($section)).to.be.true;
-    });
-
-    it('will remove a tab by jQuery object', function() {
-      var $tab = $el.find('a[role="tab"]').eq(1);
-      var $section = $el.find('section').eq(1);
-      widget.removeItem($tab);
-      expect($el.find($tab).length).to.equal(0);
-      expect($el.find($section).length).to.equal(0);
-    });
-
-    it('will remove a tab by HTML node', function() {
-      var $tab = $el.find('a[role="tab"]').eq(1);
-      var $section = $el.find('section').eq(1);
-      widget.removeItem($tab[0]);
-      expect($el.find($tab).length).to.equal(0);
-      expect($el.find($section).length).to.equal(0);
-    });
-
-    it('will remove a tab by index', function() {
-      var $tab = $el.find('a[role="tab"]').eq(1);
-      var $section = $el.find('section').eq(1);
-      widget.removeItem(1);
-      expect($el.find($tab).length).to.equal(0);
-      expect($el.find($section).length).to.equal(0);
+      it('will not activate a different tab if tab being removed is not active', function() {
+        widget.set('active', 4);
+        var $activeTab = getTabs().eq(4);
+        widget.removeItem(1);
+        expect($activeTab).to.have.class('active');
+      });
     });
   });
-
-
 }); // end test
 
 

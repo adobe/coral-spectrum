@@ -79,7 +79,7 @@
          * });
          *
          * // Hide the tabs, set the active tab, and show it again
-         * tabs.hide().set({active: 'second-tab'}).show();
+         * tabs.hide().set({active: 3}).show();
          *
          * @example
          * <caption>Instantiate with jQuery</caption>
@@ -201,22 +201,67 @@
         },
 
         /**
-         * Adds a tab and associated panel. The tab will be activated 
-         * immediately.
+         * Adds a tab and associated panel.
          *
-         * @param {HTMLElement|jQuery|String} tab The tab to add.
-         * @param {HTMLElement|jQuery|String} panel The panel to add.
-         * @param {Number} [index] The index at which the tab should be added.
-         * If not defined, the tab will be added as the last.
+         * @param {Object} [options] Tab options.
+         * @param {String} [options.tabContent] An HTML string used to
+         * generate the tab's content.
+         * @param {String} [options.panelContent] An HTML string used to
+         * generate the panel's content.
+         * @param {String} [options.panelURL] A URL from which to load the 
+         * panel's content. The use of this option negates the panelContent 
+         * option.
+         * @param {String} [options.id] An id to assign to the tab. This will
+         * only be assigned to the tab itself while the panel will receive an
+         * auto-generated id.
+         * @param {Number} [options.index] The index at which the tab should be
+         * added. If no index is provided, the tab will be added as the last
+         * tab.
+         * @param {Boolean} [options.enabled=true] Whether the tab should be 
+         * enabled (disabled tabs cannot be selected).
+         * @param {Boolean} [options.active=true] Whether the tab should be
+         * immediately activated/selected. In other words, its panel will be 
+         * immediately visible and panels for other tabs will be hidden.
          */
-        addItem: function(tab, panel, index) {
-            var $tab = $(tab),
-                $panel = $(panel),
-                tabs = this._getTabs();
+        addItem: function(options) {
+            var tabs = this._getTabs();
+            
+            options = $.extend({
+                tabContent: '',
+                panelContent: '',
+                panelURL: undefined,
+                id: undefined,
+                index: tabs.length,
+                enabled: true,
+                active: true
+            }, options);
+            
+            var panelId = CUI.util.getNextId();
+            var $panel = $('<section>' + options.panelContent + '</section>', {
+                'id': panelId
+            });
 
-            if (index === undefined) {
-                index = tabs.length;
+            var $tab = $('<a>' + options.tabContent + '</a>');
+            
+            var tabAttrs = {
+                'data-toggle': 'tab'
+            };
+          
+            if (options.id !== undefined) {
+                tabAttrs.id = options.id;
             }
+            
+            if (options.panelURL === undefined) {
+                tabAttrs.href = '#' + panelId;
+            } else {
+                tabAttrs.href = options.panelURL;
+                tabAttrs['data-target'] = '#' + panelId;
+            }
+            
+            $tab.attr(tabAttrs);
+            
+            // Confine the index to valid values.
+            var index = Math.min(Math.max(options.index, 0), tabs.length);
 
             if (index === 0) {
                 this.tablist.prepend($tab);
@@ -225,31 +270,47 @@
                 tabs.eq(index - 1).after($tab);
                 this._getPanels().eq(index - 1).after($panel);
             }
+            
+            if (!options.enabled) {
+                $tab.addClass('disabled');
+            }
 
             this._makeTabsAccessible($tab);
-            this._activateTab($tab, true);
+            
+            if (options.active && options.enabled) {
+                this._activateTab($tab, true);
+            }
         },
 
         /**
-         * Removes a tab and associated panel.
-         * @param {jQuery|HTMLElement|Number} tab The tab or index of the tab
-         * to remove.
+         * Removes a tab and associated panel. If the tab being removed is
+         * the active tab, the nearest enabled tab will be activated.
+         * @param {Number} index The index of the tab to remove.
          */
-        removeItem: function(tab) {
-            var $tab = $.isNumeric(tab) ? this._getTabs().eq(tab) : $(tab);
-            var enabledTabSelector = 'a[data-toggle~="tab"]:not(.disabled)';
-            var $tabToActivate = $tab.nextAll(enabledTabSelector).first();
-
-            if ($tabToActivate.length === 0) {
-                $tabToActivate = $tab.prevAll(enabledTabSelector).first();
+        removeItem: function(index) {
+            var $tab = this._getTabs().eq(index),
+                $panel = this._getPanels().eq(index);
+            
+            if (!$tab.length || !$panel.length) {
+                return false;
             }
 
-            this._getPanels().eq($tab.index()).remove();
+            if ($tab.hasClass('active')) {
+                var ENABLED_TAB_SELECTOR = 'a[data-toggle~="tab"]:not(.disabled)';
+                
+                var $tabToActivate = $tab.nextAll(ENABLED_TAB_SELECTOR).first();
+  
+                if ($tabToActivate.length === 0) {
+                    $tabToActivate = $tab.prevAll(ENABLED_TAB_SELECTOR).first();
+                }
+  
+                if ($tabToActivate.length === 1) {
+                    this._activateTab($tabToActivate, true);
+                }
+            }
+
+            $panel.remove();
             $tab.remove();
-
-            if ($tabToActivate.length === 1) {
-                this._activateTab($tabToActivate, true);
-            }
         },
 
         // sets all options

@@ -26,16 +26,16 @@
       var typeIndex = 0;
 
       $('#addTab').on('click', function() {
-        var $tab = $('<a href="#" data-toggle="tab" class="active">New tab</a>');
-        var $panel = $('<section>New tab content. ' +
-            '<a href="#">Remove my tab.</a></section>');
-
-        $panel.on('click', 'a', function(event) {
-          event.preventDefault();
-          cuiTabs.removeItem($tab);
+        cuiTabs.addItem({
+          tabContent: 'New tab',
+          panelContent: 'New tab content. <a data-remove-tab>Remove my tab.</a>'
         });
-
-        cuiTabs.addItem($tab, $panel);
+      });
+      
+      cuiTabs.$element.on('click', 'a[data-remove-tab]', function() {
+        var $sections = $(this).closest('.tabs').find('section');
+        var $section = $(this).closest('section');
+        cuiTabs.removeItem($sections.index($section));
       });
 
       $('#cycleActive').on("click", function(){
