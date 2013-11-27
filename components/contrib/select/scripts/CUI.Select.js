@@ -303,11 +303,11 @@
       this._selectListWidget.hide();
 
       // set select value
-	  if (event.selectedValue === true) {
-	    // work-around a bug in jQuery's val() function which is a NOP when the parameter is "true"
+      if (event.selectedValue === true) {
+        // work-around a bug in jQuery's val() function which is a NOP when the parameter is "true"
         this._select.find('option[value=true]').prop('selected', 'selected');
-	  } else {
-	    this._select.val(event.selectedValue);
+      } else {
+        this._select.val(event.selectedValue);
       }
 
       if (this.options.multiple) {
