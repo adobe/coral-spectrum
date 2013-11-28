@@ -24,7 +24,7 @@ describe('CUI.Alert', function() {
       html = 
       '<div class="alert error">' +
       '<button class="close" data-dismiss="alert">&times;</button>' +
-      '<strong>ERROR</strong><div>Uh oh, something went wrong with the whozit!</div>' +
+      '<i></i><strong>ERROR</strong><div>Uh oh, something went wrong with the whozit!</div>' +
       '</div>';
 
       el = $(html).appendTo('body');
