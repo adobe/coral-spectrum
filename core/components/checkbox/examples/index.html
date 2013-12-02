@@ -24,10 +24,10 @@
 
   <script>
 	$(function () {
-      
+
 	  /**
 	   Inspired by http://css-tricks.com/indeterminate-checkboxes/
-	   with added support for the WAI-ARIA aria-checked property 
+	   with added support for the WAI-ARIA aria-checked property
 	   which properly communicates the state to assistive technology.
 	  */
 	  $(':checkbox, input[role="checkbox"]')
@@ -35,7 +35,7 @@
 			var $checkbox = $(this),
 			  checked = this.checked = $checkbox.is('[checked]'), // explicitly set "checked" property for elements with checked attribute
 			  $ariaCheckbox, attributes;
-			
+
 			// Add aria-checked and checked attribute
 			$checkbox.attr({
 			  'role': 'checkbox',
@@ -43,7 +43,7 @@
 			  'checked': checked
 			});
 		});
-      
+
 	  /**
 	   * Respond to change event and update state of parent or child checkboxes accordingly.
 	   */
@@ -82,7 +82,7 @@
               'aria-checked': checked,
               'checked': checked
             }).prop({
-				indeterminate: (parent.find(':checkbox:checked, input[role="checkbox"]:checked').length > 0), 
+				indeterminate: (parent.find(':checkbox:checked, input[role="checkbox"]:checked').length > 0),
 				checked: checked
 			 });
             checkSiblings(parent);
@@ -102,7 +102,7 @@
 	  /**
 	   * Makes a checkbox cycle through the different states.
 	   */
-	  $('#cycle-checkbox').off('change').click(function (e) {
+	  $('#vtest-cycle-checkbox').off('change').click(function (e) {
 	    var ariaChecked = $(this).attr('aria-checked');
 	    if (ariaChecked === 'mixed') {
 	      this.indeterminate = this.checked = false;
@@ -158,12 +158,12 @@ $('#cycle-checkbox').off('change').click(function (e) {
     </div>
 
     <h2> Nested Checkboxes</h2>
-    <p> With additional javascript it is possible to next the checkboxes. </p>
+    <p> With additional javascript it is possible to nest the checkboxes. </p>
     <div class="componentSample">
       <div class="example clearfix" id="vtest-checkbox-nested-group">
         <ul>
           <li>
-            <input type="checkbox" name="tall" 
+            <input type="checkbox" name="tall"
             <label for="tall">Tall Things</label>
 
             <ul>
@@ -222,7 +222,7 @@ $(':checkbox, input[role="checkbox"]')
     var $checkbox = $(this),
       checked = this.checked = $checkbox.is('[checked]'), // explicitly set "checked" property for elements with checked attribute
       $ariaCheckbox, attributes;
-    
+
     // Add aria-checked and checked attribute
     $checkbox.attr({
       'role': 'checkbox',
@@ -266,14 +266,14 @@ $(':checkbox, input[role="checkbox"]').change(function () {
         'aria-checked': checked,
         'checked': checked
       }).prop({
-         indeterminate: (parent.find(':checkbox:checked, input[role="checkbox"]:checked').length > 0), 
+         indeterminate: (parent.find(':checkbox:checked, input[role="checkbox"]:checked').length > 0),
          checked: checked
       });
       checkSiblings(parent);
     } else {
       el.parents("li").children(':checkbox, input[role="checkbox"]').prop({
         indeterminate: true,
-        checked: false 
+        checked: false
       }).attr({
         'aria-checked': 'mixed',
         'checked': false

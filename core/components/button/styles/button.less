@@ -84,11 +84,15 @@ button,
   &.square {
 
     // special width for icon only buttons.
-    min-width: 52*@px;
+    width: 50*@px;
+    // allows the icon to be centered.
+    padding: 0;
+    // resets the min-width
+    min-width: 0;
 
     i[class^="icon-"],
     i[class*=" icon-"] {
-        margin-right: 0; // Margin does not display well in buttons without text
+      margin-right: 0; // Margin does not display well in buttons without text
     }
   }
 

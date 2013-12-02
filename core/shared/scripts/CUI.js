@@ -34,8 +34,8 @@
   // Register partials for all templates
   // Note: this requires the templates to be included BEFORE CUI.js
   /*for (var template in CUI.Templates) {
-    Handlebars.registerPartial(template, CUI.Templates[template]);
-  }*/
+   Handlebars.registerPartial(template, CUI.Templates[template]);
+   }*/
 
   /**
    * <p><code>cui-contentloaded</code> event is an event that is triggered when a new content is injected to the DOM,

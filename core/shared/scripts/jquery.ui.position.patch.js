@@ -3,9 +3,9 @@
 // Bug logged against jQueryUI: http://bugs.jqueryui.com/ticket/8710
 // Pull request logged against jQueryUI: https://github.com/jquery/jquery-ui/pull/1071
 // Bug logged against CoralUI for removal of this patch: https://issues.adobe.com/browse/CUI-1046
-(function($) {
+(function ($) {
   var abs = Math.abs;
-  $.ui.position.flip.top = function( position, data ) {
+  $.ui.position.flip.top = function (position, data) {
     var within = data.within,
       withinOffset = within.offset.top + within.scrollTop,
       outerHeight = within.height,
@@ -27,17 +27,17 @@
       offset = -2 * data.offset[ 1 ],
       newOverTop,
       newOverBottom;
-    if ( overTop < 0 ) {
+    if (overTop < 0) {
       newOverBottom = position.top + myOffset + atOffset + offset + data.collisionHeight - outerHeight - withinOffset;
       // Patched code:
-      if ( newOverBottom < 0 || newOverBottom < abs( overTop ) ) {
+      if (newOverBottom < 0 || newOverBottom < abs(overTop)) {
         position.top += myOffset + atOffset + offset;
       }
     }
-    else if ( overBottom > 0 ) {
-      newOverTop = position.top -  data.collisionPosition.marginTop + myOffset + atOffset + offset - offsetTop;
+    else if (overBottom > 0) {
+      newOverTop = position.top - data.collisionPosition.marginTop + myOffset + atOffset + offset - offsetTop;
       // Patched code:
-      if ( newOverTop > 0 || abs( newOverTop ) < overBottom ) {
+      if (newOverTop > 0 || abs(newOverTop) < overBottom) {
         position.top += myOffset + atOffset + offset;
       }
     }

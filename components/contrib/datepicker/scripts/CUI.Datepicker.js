@@ -348,7 +348,7 @@
         // The time-out is a work-around for CUI.Popover issue #1307. Must
         // be taken out once that is fixed:
         var self = this;
-        setTimeout(function() {
+        setTimeout(function () {
           self._openPicker();
         }, 100);
       }
@@ -512,7 +512,7 @@
       }
     },
 
-    _popupHideHandler: function(event) {
+    _popupHideHandler: function (event) {
       this.hideCallback();
     },
 
@@ -813,13 +813,13 @@
     HTML_BUTTON = "<button class=\"icon-calendar small\"><span>Datepicker</span></button>",
     HTML_CALENDAR = [
       '<div class="calendar">',
-        '<div class="calendar-header"></div>',
-        '<div class="calendar-body"></div>',
+      '<div class="calendar-header"></div>',
+      '<div class="calendar-body"></div>',
       '</div>'
     ].join(''),
     HTML_POPOVER = [
       '<div class="datepicker popover" style="display:none" id="%ID%">',
-        '<div class="inner"></div>',
+      '<div class="inner"></div>',
       '</div>'
     ].join(''),
 
