@@ -42,7 +42,7 @@
                             applyClassNames();
                             scheduledReflowCheck = setTimeout(function reflowCheck() {
                                 scheduledReflowCheck = false;
-                                if (!didApplyClassNames) {
+                                if (!didApplyClassNames && elem.is(":visible")) {
                                     applyClassNames();
                                 }
                             }, settings.threshold);
