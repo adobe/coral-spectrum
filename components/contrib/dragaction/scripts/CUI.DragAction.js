@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
   "use strict";
 
   var ns = ".cui-dragaction";
@@ -10,7 +10,7 @@
   function getViewContainer(element) {
     while (true) {
       var p = element.parent();
-      
+
       if (p.length === 0) return p;
       if (p.is("body")) return p;
 
@@ -24,18 +24,18 @@
   function pagePosition(event) {
     var touch = {};
     if (event.originalEvent) {
-        var o = event.originalEvent;
-        if (o.changedTouches && o.changedTouches.length > 0) {
-            touch = o.changedTouches[0];
-        }
-        if (o.touches && o.touches.length > 0) {
-            touch = o.touches[0];
-        }
+      var o = event.originalEvent;
+      if (o.changedTouches && o.changedTouches.length > 0) {
+        touch = o.changedTouches[0];
+      }
+      if (o.touches && o.touches.length > 0) {
+        touch = o.touches[0];
+      }
     }
 
     return {
-        x: touch.pageX || event.pageX,
-        y: touch.pageY || event.pageY
+      x: touch.pageX || event.pageX,
+      y: touch.pageY || event.pageY
     };
   }
 
@@ -48,15 +48,15 @@
 
   CUI.DragAction = new Class(/** @lends CUI.DragAction# */{
     /**
-      Constructs a new Drag Action. After the initialization the drag is performed immediatly.
-      
-      @param {Event} event The event that triggered the drag
-      @param {jQuery} source The element that is the source of this drag
-      @param {jQuery} dragElement The element that will be dragged
-      @param {Array} dropZones An Array of elements that can be destinations for this drag
-      @param {String} [restrictAxis] Restricts the drag movement to a particular axis. Value: ("horizontal" | "vertical")
-    */
-    construct: function(event, source, dragElement, dropZones, restrictAxis) {
+     Constructs a new Drag Action. After the initialization the drag is performed immediatly.
+
+     @param {Event} event The event that triggered the drag
+     @param {jQuery} source The element that is the source of this drag
+     @param {jQuery} dragElement The element that will be dragged
+     @param {Array} dropZones An Array of elements that can be destinations for this drag
+     @param {String} [restrictAxis] Restricts the drag movement to a particular axis. Value: ("horizontal" | "vertical")
+     */
+    construct: function (event, source, dragElement, dropZones, restrictAxis) {
       this.sourceElement = source;
       this.dragElement = dragElement;
       this.container = getViewContainer(dragElement);
@@ -70,16 +70,16 @@
 
     currentDragOver: null,
 
-    dragStart: function(event) {
+    dragStart: function (event) {
       event.preventDefault();
 
       var p = this.dragElement.position();
       var pp = pagePosition(event);
 
       this.dragElement.css({
-          "left": p.left,
-          "top": p.top,
-          "width": this.dragElement.width() + "px"
+        "left": p.left,
+        "top": p.top,
+        "width": this.dragElement.width() + "px"
       }).addClass("dragging");
 
       this.dragStart = {x: pp.x - p.left, y: pp.y - p.top};
@@ -92,7 +92,7 @@
       this.drag(event);
     },
 
-    drag: function(event) {
+    drag: function (event) {
       event.preventDefault();
 
       var pos = pagePosition(event);
@@ -137,7 +137,7 @@
       this.triggerDrag(event);
     },
 
-    dragEnd: function(event) {
+    dragEnd: function (event) {
       event.preventDefault();
 
       this.dragElement.removeClass("dragging");
@@ -154,7 +154,7 @@
       this.sourceElement.trigger(this._createEvent("dragend", event));
     },
 
-    triggerDrag: function(event) {
+    triggerDrag: function (event) {
       var dropElement = this._getCurrentDropZone(event);
 
       if (dropElement === this.currentDragOver) {
@@ -175,7 +175,7 @@
       }
     },
 
-    triggerDrop: function(event) {
+    triggerDrop: function (event) {
       var dropElement = this._getCurrentDropZone(event);
 
       if (!dropElement) return;
@@ -183,12 +183,12 @@
       dropElement.trigger(this._createEvent("drop", event));
     },
 
-    _getCurrentDropZone: function(event) {
+    _getCurrentDropZone: function (event) {
       var pos = pagePosition(event);
 
       var dropElement = null;
 
-      $.each(this.dropZones, function(index, value) {
+      $.each(this.dropZones, function (index, value) {
         if (within(pos.x, pos.y, value)) {
           dropElement = value;
           return false;
@@ -198,7 +198,7 @@
       return dropElement;
     },
 
-    _createEvent: function(name, fromEvent) {
+    _createEvent: function (name, fromEvent) {
       var pos = pagePosition(fromEvent);
 
       var event = jQuery.Event(name);

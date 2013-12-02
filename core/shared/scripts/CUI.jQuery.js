@@ -11,17 +11,17 @@
 
     // load remote link, if necessary
     if (remote && (force || $target.data('loaded-remote') !== remote)) {
-    // only show the spinner if the request takes an appreciable amount of time, otherwise
-    // the flash of the spinner is a little ugly
-      var timer = setTimeout(function() {
+      // only show the spinner if the request takes an appreciable amount of time, otherwise
+      // the flash of the spinner is a little ugly
+      var timer = setTimeout(function () {
         $target.html('<div class="spinner large"></div>');
       }, 50);
 
-      $target.load(remote, function(response, status, xhr) {
+      $target.load(remote, function (response, status, xhr) {
         clearTimeout(timer); // no need for the spinner anymore!
 
         if (status === 'error') {
-          $target.html('<div class="alert error"><strong>ERROR</strong> Failed to load content: '+xhr.statusText+' ('+xhr.status+')</div>');
+          $target.html('<div class="alert error"><strong>ERROR</strong> Failed to load content: ' + xhr.statusText + ' (' + xhr.status + ')</div>');
           $target.data('loaded-remote', '');
         }
 
@@ -73,40 +73,39 @@
   };
 
   /**
-   * :focusable and :tabbable selectors 
+   * :focusable and :tabbable selectors
    * https://raw.github.com/jquery/jquery-ui/master/ui/jquery.ui.core.js
    * @ignore
    */
-  function focusable (element, isTabIndexNotNaN) {
+  function focusable(element, isTabIndexNotNaN) {
     var map, mapName, img,
-    nodeName = element.nodeName.toLowerCase();
-    if ( "area" === nodeName ) {
+      nodeName = element.nodeName.toLowerCase();
+    if ("area" === nodeName) {
       map = element.parentNode;
       mapName = map.name;
-      if ( !element.href || !mapName || map.nodeName.toLowerCase() !== "map" ) {
+      if (!element.href || !mapName || map.nodeName.toLowerCase() !== "map") {
         return false;
       }
-      img = $( "img[usemap=#" + mapName + "]" )[0];
-      return !!img && visible( img );
+      img = $("img[usemap=#" + mapName + "]")[0];
+      return !!img && visible(img);
     }
-    return ( /input|select|textarea|button|object/.test( nodeName ) ?
+    return ( /input|select|textarea|button|object/.test(nodeName) ?
       !element.disabled :
       "a" === nodeName ?
-      element.href || isTabIndexNotNaN :
-      isTabIndexNotNaN) &&
-    // the element and all of its ancestors must be visible
-    visible( element );
+        element.href || isTabIndexNotNaN :
+        isTabIndexNotNaN) &&
+      // the element and all of its ancestors must be visible
+      visible(element);
   }
 
   /**
-   * :focusable and :tabbable selectors 
+   * :focusable and :tabbable selectors
    * https://raw.github.com/jquery/jquery-ui/master/ui/jquery.ui.core.js
    * @ignore
    */
-  function visible (element) {
-    return $.expr.filters.visible( element ) &&
-    !$( element ).parents().addBack().filter(function() {
-      return $.css( this, "visibility" ) === "hidden";
+  function visible(element) {
+    return $.expr.filters.visible(element) && !$(element).parents().addBack().filter(function () {
+      return $.css(this, "visibility") === "hidden";
     }).length;
   }
 
@@ -115,10 +114,10 @@
    * https://raw.github.com/jquery/jquery-ui/master/ui/jquery.ui.core.js
    * support: jQuery >= 1.8
    */
-  $.extend( $.expr[ ":" ], {
-    data: $.expr.createPseudo(function( dataName ) {
-      return function( elem ) {
-        return !!$.data( elem, dataName );
+  $.extend($.expr[ ":" ], {
+    data: $.expr.createPseudo(function (dataName) {
+      return function (elem) {
+        return !!$.data(elem, dataName);
       };
     }),
 
@@ -126,16 +125,16 @@
      * pseudo selector :focusable
      */
     focusable: function (element) {
-      return focusable( element, !isNaN( $.attr( element, "tabindex" ) ) );
+      return focusable(element, !isNaN($.attr(element, "tabindex")));
     },
 
     /**
      * pseudo selector :tabbable
      */
     tabbable: function (element) {
-      var tabIndex = $.attr( element, "tabindex" ),
-      isTabIndexNaN = isNaN( tabIndex );
-      return ( isTabIndexNaN || tabIndex >= 0 ) && focusable( element, !isTabIndexNaN );
+      var tabIndex = $.attr(element, "tabindex"),
+        isTabIndexNaN = isNaN(tabIndex);
+      return ( isTabIndexNaN || tabIndex >= 0 ) && focusable(element, !isTabIndexNaN);
     }
   });
 

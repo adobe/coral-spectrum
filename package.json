@@ -1,6 +1,6 @@
 {
   "name": "coralui",
-  "version": "1.16.0-SNAPSHOT",
+  "version": "1.17.0-SNAPSHOT",
   "repository": {
     "type": "git",
     "url": "https://git.corp.adobe.com/Coral/CoralUI"
@@ -28,6 +28,6 @@
     "chai-jquery": "1.1.1",
     "sinon": "1.7.3",
     "mocha": "1.8.1",
-    "grunt-css-metrics": "git+https://github.com/phamann/grunt-css-metrics.git"
+    "grunt-css-metrics": "~0.1.0"
   }
 }

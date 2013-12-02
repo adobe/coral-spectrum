@@ -1,46 +1,46 @@
 /**
-  Crockford's new_constructor pattern, modified to allow walking the prototype chain, automatic constructor/destructor chaining, easy toString methods, and syntactic sugar for calling superclass methods
+ Crockford's new_constructor pattern, modified to allow walking the prototype chain, automatic constructor/destructor chaining, easy toString methods, and syntactic sugar for calling superclass methods
 
-  @see Base
+ @see Base
 
-  @function
+ @function
 
-  @param {Object} descriptor                        Descriptor object
-  @param {String|Function} descriptor.toString   A string or method to use for the toString of this class and instances of this class
-  @param {Object} descriptor.extend                 The class to extend
-  @param {Function} descriptor.construct            The constructor (setup) method for the new class
-  @param {Function} descriptor.destruct             The destructor (teardown) method for the new class
-  @param {Mixed} descriptor.*                       Other methods and properties for the new class
+ @param {Object} descriptor                        Descriptor object
+ @param {String|Function} descriptor.toString   A string or method to use for the toString of this class and instances of this class
+ @param {Object} descriptor.extend                 The class to extend
+ @param {Function} descriptor.construct            The constructor (setup) method for the new class
+ @param {Function} descriptor.destruct             The destructor (teardown) method for the new class
+ @param {Mixed} descriptor.*                       Other methods and properties for the new class
 
-  @returns {Base} The created class.
-*/
+ @returns {Base} The created class.
+ */
 var Class;
 var Exception;
 
-(function() {
+(function () {
   /**
-    @name Base
+   @name Base
 
-    @classdesc The abstract class which contains methods that all classes will inherit.
-    Base cannot be extended or instantiated and does not exist in the global namespace.
-    If you create a class using <code class="prettyprint">new Class()</code> or <code class="prettyprint">MyClass.extend()</code>, it will come with Base' methods.
+   @classdesc The abstract class which contains methods that all classes will inherit.
+   Base cannot be extended or instantiated and does not exist in the global namespace.
+   If you create a class using <code class="prettyprint">new Class()</code> or <code class="prettyprint">MyClass.extend()</code>, it will come with Base' methods.
 
-    @desc Base is an abstract class and cannot be instantiated directly. Constructors are chained automatically, so you never need to call the constructor of an inherited class directly
-    @constructs
+   @desc Base is an abstract class and cannot be instantiated directly. Constructors are chained automatically, so you never need to call the constructor of an inherited class directly
+   @constructs
 
-    @param {Object} options  Instance options. Guaranteed to be defined as at least an empty Object
+   @param {Object} options  Instance options. Guaranteed to be defined as at least an empty Object
    */
 
   /**
-    Binds a method of this instance to the execution scope of this instance.
+   Binds a method of this instance to the execution scope of this instance.
 
-    @name bind
-    @memberOf Base.prototype
-    @function
+   @name bind
+   @memberOf Base.prototype
+   @function
 
-    @param {Function} func The this.method you want to bind
+   @param {Function} func The this.method you want to bind
    */
-  var bindFunc = function(func) {
+  var bindFunc = function (func) {
     // Bind the function to always execute in scope
     var boundFunc = func.bind(this);
 
@@ -55,28 +55,28 @@ var Exception;
   };
 
   /**
-    Extends this class using the passed descriptor. 
-    Called on the Class itself (not an instance), this is an alternative to using <code class="prettyprint">new Class()</code>.
-    Any class created using Class will have this static method on the class itself.
+   Extends this class using the passed descriptor.
+   Called on the Class itself (not an instance), this is an alternative to using <code class="prettyprint">new Class()</code>.
+   Any class created using Class will have this static method on the class itself.
 
-    @name extend
-    @memberOf Base
-    @function
-    @static
+   @name extend
+   @memberOf Base
+   @function
+   @static
 
-    @param {Object} descriptor                        Descriptor object
-    @param {String|Function} descriptor.toString   A string or method to use for the toString of this class and instances of this class
-    @param {Object} descriptor.extend                 The class to extend
-    @param {Function} descriptor.construct            The constructor (setup) method for the new class
-    @param {Function} descriptor.destruct             The destructor (teardown) method for the new class
-    @param {Anything} descriptor.*                    Other methods and properties for the new class
+   @param {Object} descriptor                        Descriptor object
+   @param {String|Function} descriptor.toString   A string or method to use for the toString of this class and instances of this class
+   @param {Object} descriptor.extend                 The class to extend
+   @param {Function} descriptor.construct            The constructor (setup) method for the new class
+   @param {Function} descriptor.destruct             The destructor (teardown) method for the new class
+   @param {Anything} descriptor.*                    Other methods and properties for the new class
    */
-  var extendClass = function(descriptor) {
+  var extendClass = function (descriptor) {
     descriptor.extend = this;
     return new Class(descriptor);
   };
 
-  Class = function(descriptor) {
+  Class = function (descriptor) {
     descriptor = descriptor || {};
 
     if (descriptor.hasOwnProperty('extend') && !descriptor.extend) {
@@ -100,7 +100,7 @@ var Exception;
     if (descriptor.hasOwnProperty('toString') && typeof descriptor.toString !== 'function') {
       // Return the string provided
       var classString = descriptor.toString;
-      descriptor.toString = function() {
+      descriptor.toString = function () {
         return classString.toString();
       };
     }
@@ -119,7 +119,7 @@ var Exception;
     prototype.superClass = extend.prototype;
 
     // Copy new methods into prototype
-    if (methodsAndProps) {  
+    if (methodsAndProps) {
       for (var key in methodsAndProps) {
         if (methodsAndProps.hasOwnProperty(key)) {
           prototype[key] = methodsAndProps[key];
@@ -134,15 +134,15 @@ var Exception;
     }
 
     /**
-      Call the superclass method with the same name as the currently executing method
+     Call the superclass method with the same name as the currently executing method
 
-      @name inherited
-      @memberOf Base.prototype
-      @function
+     @name inherited
+     @memberOf Base.prototype
+     @function
 
-      @param {Arguments} args  Unadulterated arguments array from calling function
+     @param {Arguments} args  Unadulterated arguments array from calling function
      */
-    prototype.inherited = function(args) {
+    prototype.inherited = function (args) {
       // Get the function that call us from the passed arguments objected
       var caller = args.callee;
 
@@ -190,13 +190,13 @@ var Exception;
     prototype.bind = bindFunc;
 
     /**
-      Destroys this instance and frees associated memory. Destructors are chained automatically, so the <code class="prettyprint">destruct()</code> method of all inherited classes will be called for you
+     Destroys this instance and frees associated memory. Destructors are chained automatically, so the <code class="prettyprint">destruct()</code> method of all inherited classes will be called for you
 
-      @name destruct
-      @memberOf Base.prototype
-      @function
+     @name destruct
+     @memberOf Base.prototype
+     @function
      */
-    prototype.destruct = function() {
+    prototype.destruct = function () {
       // Call our destruct method first
       if (typeof destruct === 'function') {
         destruct.apply(this);
@@ -204,12 +204,12 @@ var Exception;
 
       // Call superclass destruct method after this class' method
       if (extend && extend.prototype && typeof extend.prototype.destruct === 'function') {
-        extend.prototype.destruct.apply(this);      
+        extend.prototype.destruct.apply(this);
       }
     };
 
     // Create a chained construct function which calls the superclass' construct function
-    prototype.construct = function() {
+    prototype.construct = function () {
       // Add a blank object as the first arg to the constructor, if none provided
       var args = arguments; // get around JSHint complaining about modifying arguments
       if (args[0] === undefined) {
@@ -219,7 +219,7 @@ var Exception;
 
       // call superclass constructor
       if (extend && extend.prototype && typeof extend.prototype.construct === 'function') {
-        extend.prototype.construct.apply(this, arguments);      
+        extend.prototype.construct.apply(this, arguments);
       }
 
       // call constructor
@@ -230,7 +230,7 @@ var Exception;
 
     // Create a function that generates instances of our class and calls our construct functions
     /** @ignore */
-    var instanceGenerator = function() {
+    var instanceGenerator = function () {
       // Create a new object with the prototype we built
       var instance = Object.create(prototype);
 
@@ -256,17 +256,19 @@ var Exception;
 
   if (!Object.create) {
     /**
-      Polyfill for Object.create. Creates a new object with the specified prototype.
+     Polyfill for Object.create. Creates a new object with the specified prototype.
 
-      @author <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/create/">Mozilla MDN</a>
+     @author <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/create/">Mozilla MDN</a>
 
-      @param {Object} prototype  The prototype to create a new object with
+     @param {Object} prototype  The prototype to create a new object with
      */
     Object.create = function (prototype) {
       if (arguments.length > 1) {
         throw new Error('Object.create implementation only accepts the first parameter.');
       }
-      function Func() {}
+      function Func() {
+      }
+
       Func.prototype = prototype;
       return new Func();
     };
@@ -274,11 +276,11 @@ var Exception;
 
   if (!Function.prototype.bind) {
     /**
-      Polyfill for Function.bind. Binds a function to always execute in a specific scope.
+     Polyfill for Function.bind. Binds a function to always execute in a specific scope.
 
-      @author <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/bind">Mozilla MDN</a>
+     @author <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/bind">Mozilla MDN</a>
 
-      @param {Object} scope  The scope to bind the function to
+     @param {Object} scope  The scope to bind the function to
      */
     Function.prototype.bind = function (scope) {
       if (typeof this !== "function") {
@@ -289,9 +291,10 @@ var Exception;
       var aArgs = Array.prototype.slice.call(arguments, 1);
       var fToBind = this;
       /** @ignore */
-      var NoOp = function() {};
+      var NoOp = function () {
+      };
       /** @ignore */
-      var fBound = function() {
+      var fBound = function () {
         return fToBind.apply(this instanceof NoOp ? this : scope, aArgs.concat(Array.prototype.slice.call(arguments)));
       };
 
@@ -301,39 +304,39 @@ var Exception;
       return fBound;
     };
   }
-  
+
   Exception = new Class({
     extend: Error,
-    construct: function() {
+    construct: function () {
       this.name = 'Error';
       this.message = 'General exception';
     },
 
-    toString: function() {
-      return this.name+': '+this.message;
+    toString: function () {
+      return this.name + ': ' + this.message;
     }
   });
-  
+
   var ClassException = Exception.extend({
     name: 'Class Exception'
   });
-  
+
   // Exceptions
   Class.NonTruthyExtendError = ClassException.extend({
-    construct: function(className) {
-      this.message = className+' attempted to extend a non-truthy object';
+    construct: function (className) {
+      this.message = className + ' attempted to extend a non-truthy object';
     }
   });
-  
+
   Class.InheritedMethodNotFoundError = ClassException.extend({
-    construct: function(className, methodName) {
-      this.message = className+" can't call method '"+methodName+"', no method defined in parent classes";
+    construct: function (className, methodName) {
+      this.message = className + " can't call method '" + methodName + "', no method defined in parent classes";
     }
   });
-  
+
   Class.MissingCalleeError = ClassException.extend({
-    construct: function(className) {
-      this.message = className+" can't call inherited method: calling method did not have _methodName";
+    construct: function (className) {
+      this.message = className + " can't call inherited method: calling method did not have _methodName";
     }
   });
 }());

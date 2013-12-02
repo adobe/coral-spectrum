@@ -64,7 +64,7 @@
      */
     _set: function (option, value) {
       // Trigger a change event
-      var e = $.Event('beforeChange:'+option, {
+      var e = $.Event('beforeChange:' + option, {
         widget: this, // We want to know who fired this event (used by CUI.Filters, CUI.DropdownList)
         option: option,
         currentValue: this.options[option],
@@ -78,7 +78,7 @@
       // Set value
       this.options[option] = value;
 
-      e = $.Event('change:'+option, {
+      e = $.Event('change:' + option, {
         widget: this,
         option: option,
         value: value
@@ -95,23 +95,23 @@
       return this.options[option];
     },
 
-   /**
-    * Add an event listener
-    * @param {String} evtName The event name to listen for
-    * @param {Function} func The function that will be called when the event is triggered
-    * @return {CUI.Widget} this, chainable
-    */
+    /**
+     * Add an event listener
+     * @param {String} evtName The event name to listen for
+     * @param {Function} func The function that will be called when the event is triggered
+     * @return {CUI.Widget} this, chainable
+     */
     on: function (evtName, func) {
       this.$element.on.apply(this.$element, arguments);
       return this;
     },
 
-   /**
-    * Remove an event listener
-    * @param {String} evtName The event name to stop listening for
-    * @param {Function} func     The function that was passed to on()
-    * @return {CUI.Widget} this, chainable
-    */
+    /**
+     * Remove an event listener
+     * @param {String} evtName The event name to stop listening for
+     * @param {Function} func     The function that was passed to on()
+     * @return {CUI.Widget} this, chainable
+     */
     off: function (evtName, func) {
       this.$element.off.apply(this.$element, arguments);
       return this;
@@ -183,10 +183,10 @@
       this.$element.hide();
     },
 
-   /**
-    * Toggle the visibility of the widget
-    * @return {CUI.Widget} this, chainable
-    */
+    /**
+     * Toggle the visibility of the widget
+     * @return {CUI.Widget} this, chainable
+     */
     toggleVisibility: function () {
       return this[!this.options.visible ? 'show' : 'hide']();
     },
@@ -207,42 +207,42 @@
     }
 
     /**
-      Triggered when the widget is shown
+     Triggered when the widget is shown
 
-      @name CUI.Widget#show
-      @event
-      */
-
-    /**
-      Triggered when the widget is hidden
-
-      @name CUI.Widget#hide
-      @event
-      */
+     @name CUI.Widget#show
+     @event
+     */
 
     /**
-      Triggered when before an option is changed
+     Triggered when the widget is hidden
 
-      @name CUI.Widget#beforeChange:*
-      @event
-
-      @param {Object} evt                    Event object
-      @param {Mixed} evt.option              The option that changed
-      @param {Mixed} evt.currentValue        The current value
-      @param {Mixed} evt.value               The value this option will be changed to
-      @param {Function} evt.preventDefault   Call to prevent the option from changing
-      */
+     @name CUI.Widget#hide
+     @event
+     */
 
     /**
-      Triggered when an option is changed
+     Triggered when before an option is changed
 
-      @name CUI.Widget#change:*
-      @event
+     @name CUI.Widget#beforeChange:*
+     @event
 
-      @param {Object} evt          Event object
-      @param {Mixed} evt.option    The option that changed
-      @param {Mixed} evt.value     The new value
-      */
+     @param {Object} evt                    Event object
+     @param {Mixed} evt.option              The option that changed
+     @param {Mixed} evt.currentValue        The current value
+     @param {Mixed} evt.value               The value this option will be changed to
+     @param {Function} evt.preventDefault   Call to prevent the option from changing
+     */
+
+    /**
+     Triggered when an option is changed
+
+     @name CUI.Widget#change:*
+     @event
+
+     @param {Object} evt          Event object
+     @param {Mixed} evt.option    The option that changed
+     @param {Mixed} evt.value     The new value
+     */
   });
 
   /**
@@ -281,7 +281,7 @@
       this._widgets[selector] = Widget;
 
       // Extend the Widget with a static 'init' method:
-      Widget.init = function($element) {
+      Widget.init = function ($element) {
         this._init(Widget, $element);
       }.bind(this);
 
@@ -309,11 +309,11 @@
      * @param $element The jQuery element(s) that the instances
      * must be bound to.
      */
-    init: function(selector, $element) {
+    init: function (selector, $element) {
       this._init(this.resolve(selector), $element);
     },
 
-    getSelectors: function() {
+    getSelectors: function () {
       var selectors = [];
       for (var selector in this._widgets) {
         selectors.push(selector);
@@ -336,7 +336,7 @@
      * must be bound to.
      * @private
      */
-    _init: function(Widget, $element) {
+    _init: function (Widget, $element) {
       if (Widget !== undefined) {
         if (CUI.Widget.fromElement(Widget, $element) === undefined) {
           $element[CUI.util.decapitalize(Widget.toString())]();

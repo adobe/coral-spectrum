@@ -1,4 +1,4 @@
-;(function($) {
+(function ($) {
   "use strict";
 
   function getNext(from) {
@@ -17,28 +17,28 @@
     extend: CUI.Widget,
 
     /**
-      @extends CUI.Widget
-      @classdesc
-      A component that show the current active item. Only one item can be active at the same time.
-      When clicked, the next item of the active is shown and the click is triggered at that next item instead.
-      If the last item is clicked, then the first item is shown and triggered accordingly.
+     @extends CUI.Widget
+     @classdesc
+     A component that show the current active item. Only one item can be active at the same time.
+     When clicked, the next item of the active is shown and the click is triggered at that next item instead.
+     If the last item is clicked, then the first item is shown and triggered accordingly.
 
-      @example
-&lt;span class="cyclebuttons" data-init="cyclebuttons">
-  &lt;button class="cyclebuttons-active icon-viewcard" type="button">Card&lt;/button>
-  &lt;button class="icon-viewlist" type="button">List&lt;/button>
-&lt;/span>
+     @example
+     &lt;span class="cyclebuttons" data-init="cyclebuttons">
+     &lt;button class="cyclebuttons-active icon-viewcard" type="button">Card&lt;/button>
+     &lt;button class="icon-viewlist" type="button">List&lt;/button>
+     &lt;/span>
 
-      @desc Creates a new instance
-      @constructs
+     @desc Creates a new instance
+     @constructs
 
-      @param {Object} options Widget options
+     @param {Object} options Widget options
      */
-    construct: function() {
+    construct: function () {
       // Currently doesn't support form submission
       // When you need it please raise the issue in the mailing first, as the feature should not be necessarily implemented in this component
 
-      this.$element.on("click tap", function(e) {
+      this.$element.on("click tap", function (e) {
         if (e._cycleButtons) {
           return;
         }
@@ -69,7 +69,7 @@
   CUI.Widget.registry.register("cyclebuttons", CUI.CycleButtons);
 
   // Data API
-  $(document).on("cui-contentloaded.data-api", function(e) {
+  $(document).on("cui-contentloaded.data-api", function (e) {
     CUI.CycleButtons.init($("[data-init~='cyclebuttons']", e.target));
   });
 }(window.jQuery));

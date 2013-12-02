@@ -52,7 +52,7 @@ jQuery(function($) {
                 "<i class=\"select\"></i>" +
                 "<i class=\"move\"></i>" +
                 "<a href=\"#\">" +
-                    "<span class=\"image\"><img src=\"images/previews/preview1.png\" alt=\"\"></span>" +
+                    "<span class=\"image\"><img src=\"../../res/guide/previews/preview1.png\" alt=\"\"></span>" +
                     "<div class=\"label\">" +
                         "<h4 class=\"main\">New Card #" + (++newCard) + "</h4>" +
                         "<div class=\"info\">" +
