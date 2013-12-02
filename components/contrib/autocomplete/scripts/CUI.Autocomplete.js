@@ -35,33 +35,33 @@
      * @example
      * <caption>Instantiate with Class</caption>
      * var selectlist = new CUI.Autocomplete({
-         *   element: '#myAutocomplete'
-         *   mode: 'contains',
-         *   ignorecase: false,
-         *   delay: 400,
-         *   multiple: true,
-         *   selectlistConfig: {
-         *     ...
-         *   },
-         *   tagConfig: {
-         *     ...
-         *   }
-         * });
+     *   element: '#myAutocomplete'
+     *   mode: 'contains',
+     *   ignorecase: false,
+     *   delay: 400,
+     *   multiple: true,
+     *   selectlistConfig: {
+     *     ...
+     *   },
+     *   tagConfig: {
+     *     ...
+     *   }
+     * });
      *
      * @example
      * <caption>Instantiate with jQuery</caption>
      * $('#myAutocomplete').autocomplete({
-         *   mode: 'contains',
-         *   ignorecase: false,
-         *   delay: 400,
-         *   multiple: true,
-         *   selectlistConfig: {
-         *     ...
-         *   },
-         *   tagConfig: {
-         *     ...
-         *   }
-         * });
+     *   mode: 'contains',
+     *   ignorecase: false,
+     *   delay: 400,
+     *   multiple: true,
+     *   selectlistConfig: {
+     *     ...
+     *   },
+     *   tagConfig: {
+     *     ...
+     *   }
+     * });
      *
      * @example
      * <caption>Data API: Instantiate, set options</caption>
