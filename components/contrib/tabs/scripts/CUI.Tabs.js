@@ -18,10 +18,10 @@
          * <h3>Default</h3>
          * <div class="tabs" data-init="tabs">
          *     <nav>
-         *         <a href="#" data-toggle="tab" class="active">Tab 1</a>
-         *         <a href="#" data-toggle="tab">Tab 2</a>
-         *         <a href="../examples/remote.html" data-target="#" data-toggle="tab">Tab 3</a>
-         *         <a href="#" data-toggle="tab" class="disabled">Disabled Tab</a>
+         *         <a data-toggle="tab" class="active">Tab 1</a>
+         *         <a data-toggle="tab">Tab 2</a>
+         *         <a href="../examples/remote.html" data-toggle="tab">Tab 3</a>
+         *         <a data-toggle="tab" class="disabled">Disabled Tab</a>
          *     </nav>
          *     <section class="active">Lorizzle ipsizzle fo shizzle mah nizzle fo rizzle.</section>
          *     <section>Nulla gangsta. Brizzle shizzlin dizzle pharetra.</section>
@@ -37,9 +37,9 @@
          * </p>
          * <div class="tabs white" data-init="tabs">
          *     <nav>
-         *         <a href="#" data-toggle="tab" class="active">Tab 1</a>
-         *         <a href="#" data-toggle="tab">Tab 2</a>
-         *         <a href="#" data-toggle="tab" class="disabled">Disabled Tab</a>
+         *         <a data-toggle="tab" class="active">Tab 1</a>
+         *         <a data-toggle="tab">Tab 2</a>
+         *         <a data-toggle="tab" class="disabled">Disabled Tab</a>
          *     </nav>
          *     <section class="active">Lorizzle ipsizzle fo shizzle mah nizzle fo rizzle.</section>
          *     <section>Nulla gangsta. Brizzle shizzlin dizzle pharetra.</section>
@@ -50,9 +50,9 @@
          * <h3>Stacked</h3>
          * <div class="tabs stacked" data-init="tabs">
          *     <nav>
-         *         <a href="#" data-toggle="tab" class="active">Tab 1</a>
-         *         <a href="#" data-toggle="tab">Tab 2</a>
-         *         <a href="#" data-toggle="tab" class="disabled">Disabled Tab</a>
+         *         <a data-toggle="tab" class="active">Tab 1</a>
+         *         <a data-toggle="tab">Tab 2</a>
+         *         <a data-toggle="tab" class="disabled">Disabled Tab</a>
          *     </nav>
          *     <section class="active">Lorizzle ipsizzle fo shizzle mah nizzle fo rizzle.</section>
          *     <section>Nulla gangsta. Brizzle shizzlin dizzle pharetra.</section>
@@ -63,9 +63,9 @@
          * <h3>Nav</h3>
          * <div class="tabs nav" data-init="tabs">
          *     <nav>
-         *         <a href="#" data-toggle="tab" class="active">Tab 1</a>
-         *         <a href="#" data-toggle="tab">Tab 2</a>
-         *         <a href="#" data-toggle="tab" class="disabled">Disabled Tab</a>
+         *         <a data-toggle="tab" class="active">Tab 1</a>
+         *         <a data-toggle="tab">Tab 2</a>
+         *         <a data-toggle="tab" class="disabled">Disabled Tab</a>
          *     </nav>
          *     <section class="active">Lorizzle ipsizzle fo shizzle mah nizzle fo rizzle.</section>
          *     <section>Nulla gangsta. Brizzle shizzlin dizzle pharetra.</section>
@@ -104,15 +104,15 @@
          * <code class="prettify">div class=&quot;tabs&quot</code>. The tabs themselves are specified within the 
          * <code>nav</code> block as simple <code class="prettify">a</code> elements. The 
          * <code class="prettify">data-toggle=&quot;tab&quot;</code> attribute on <code>a</code> nav links is 
-         * essential for the data API; do not omit. The <code>href</code> can either be an id of a 
-         * following <code>section</code>, a simple anchor: <code>#</code>, or a remote link 
-         * (see next example).</description>
+         * essential for the data API; do not omit. The <code>href</code> can be a remote link 
+         * (see next example). When the tab is activated, content from the remote link will
+         * be loaded into the respective panel.</description>
          * &lt;div class=&quot;tabs&quot; data-init=&quot;tabs&quot;&gt;
          *     &lt;nav&gt;
-         *         &lt;a href=&quot;#&quot; data-toggle=&quot;tab&quot; class=&quot;active&quot;&gt;Tab 1&lt;/a&gt;
-         *         &lt;a href=&quot;#&quot; data-toggle=&quot;tab&quot;&gt;Tab 2&lt;/a&gt;
-         *         &lt;a href=&quot;../examples/remote.html&quot; data-target=&quot;#&quot; data-toggle=&quot;tab&quot;&gt;Tab 3&lt;/a&gt;
-         *         &lt;a href=&quot;#&quot; data-toggle=&quot;tab&quot; class=&quot;disabled&quot;&gt;Disabled Tab&lt;/a&gt;
+         *         &lt;a data-toggle=&quot;tab&quot; class=&quot;active&quot;&gt;Tab 1&lt;/a&gt;
+         *         &lt;a data-toggle=&quot;tab&quot;&gt;Tab 2&lt;/a&gt;
+         *         &lt;a href=&quot;../examples/remote.html&quot; data-toggle=&quot;tab&quot;&gt;Tab 3&lt;/a&gt;
+         *         &lt;a data-toggle=&quot;tab&quot; class=&quot;disabled&quot;&gt;Disabled Tab&lt;/a&gt;
          *     &lt;/nav&gt;
          *     &lt;section class=&quot;active&quot;&gt;Lorizzle ipsizzle fo shizzle mah nizzle fo rizzle.&lt;/section&gt;
          *     &lt;section&gt;Nulla gangsta. Brizzle shizzlin dizzle pharetra.&lt;/section&gt;
@@ -131,9 +131,9 @@
          * constructor, or via manually specifying the class alongside <code>tabs</code>.</description>
          * &lt;div class=&quot;tabs nav&quot; data-init=&quot;tabs&quot;&gt;
          *     &lt;nav&gt;
-         *         &lt;a href=&quot;#&quot; data-toggle=&quot;tab&quot; class=&quot;active&quot;&gt;Tab 1&lt;/a&gt;
-         *         &lt;a href=&quot;#&quot; data-toggle=&quot;tab&quot;&gt;Tab 2&lt;/a&gt;
-         *         &lt;a href=&quot;#&quot; data-toggle=&quot;tab&quot; class=&quot;disabled&quot;&gt;Disabled Tab&lt;/a&gt;
+         *         &lt;a data-toggle=&quot;tab&quot; class=&quot;active&quot;&gt;Tab 1&lt;/a&gt;
+         *         &lt;a data-toggle=&quot;tab&quot;&gt;Tab 2&lt;/a&gt;
+         *         &lt;a data-toggle=&quot;tab&quot; class=&quot;disabled&quot;&gt;Disabled Tab&lt;/a&gt;
          *     &lt;/nav&gt;
          *     &lt;section class=&quot;active&quot;&gt;Lorizzle ipsizzle fo shizzle mah nizzle fo rizzle.&lt;/section&gt;
          *     &lt;section&gt;Nulla gangsta. Brizzle shizzlin dizzle pharetra.&lt;/section&gt;
@@ -206,14 +206,12 @@
          * @param {Object} [options] Tab options.
          * @param {String} [options.tabContent] An HTML string used to
          * generate the tab's content.
+         * @param {Object} [options.tabAttrs] Attributes to apply to the created
+         * tab.
          * @param {String} [options.panelContent] An HTML string used to
          * generate the panel's content.
-         * @param {String} [options.panelURL] A URL from which to load the 
-         * panel's content. The use of this option negates the panelContent 
-         * option.
-         * @param {String} [options.id] An id to assign to the tab. This will
-         * only be assigned to the tab itself while the panel will receive an
-         * auto-generated id.
+         * @param {Object} [options.panelAttrs] Attributes to apply to the
+         * created panel.
          * @param {Number} [options.index] The index at which the tab should be
          * added. If no index is provided, the tab will be added as the last
          * tab.
@@ -228,37 +226,22 @@
             
             options = $.extend({
                 tabContent: '',
+                tabAttrs: undefined,
                 panelContent: '',
-                panelURL: undefined,
-                id: undefined,
+                panelAttrs: undefined,
                 index: tabs.length,
                 enabled: true,
                 active: true
             }, options);
             
-            var panelId = CUI.util.getNextId();
-            var $panel = $('<section>' + options.panelContent + '</section>', {
-                'id': panelId
-            });
+            var $panel = $('<section>' + options.panelContent + '</section>',
+                options.panelAttrs);
 
             var $tab = $('<a>' + options.tabContent + '</a>');
             
-            var tabAttrs = {
+            $tab.attr($.extend(options.tabAttrs, {
                 'data-toggle': 'tab'
-            };
-          
-            if (options.id !== undefined) {
-                tabAttrs.id = options.id;
-            }
-            
-            if (options.panelURL === undefined) {
-                tabAttrs.href = '#' + panelId;
-            } else {
-                tabAttrs.href = options.panelURL;
-                tabAttrs['data-target'] = '#' + panelId;
-            }
-            
-            $tab.attr(tabAttrs);
+            }));
             
             // Confine the index to valid values.
             var index = Math.min(Math.max(options.index, 0), tabs.length);
@@ -280,6 +263,8 @@
             if (options.active && options.enabled) {
                 this._activateTab($tab, true);
             }
+            
+            return this;
         },
 
         /**
@@ -292,11 +277,11 @@
                 $panel = this._getPanels().eq(index);
             
             if (!$tab.length || !$panel.length) {
-                return false;
+                return this;
             }
 
             if ($tab.hasClass('active')) {
-                var ENABLED_TAB_SELECTOR = 'a[data-toggle~="tab"]:not(.disabled)';
+                var ENABLED_TAB_SELECTOR = 'a[data-toggle="tab"]:not(.disabled)';
                 
                 var $tabToActivate = $tab.nextAll(ENABLED_TAB_SELECTOR).first();
   
@@ -311,6 +296,8 @@
 
             $panel.remove();
             $tab.remove();
+            
+            return this;
         },
 
         // sets all options
@@ -345,7 +332,7 @@
          * @ignore
          */
         _getTabs: function() {
-            return this.tablist.find('> a[data-toggle~="tab"]');
+            return this.tablist.find('> a[data-toggle="tab"]');
         },
 
         /**
@@ -469,13 +456,21 @@
                     $panel = $panels.eq($tab.index()),
                     id = $panel.attr('id') || CUI.util.getNextId();
                 
-                $tab.attr({
+                var tabAttrs = {
                     'role': 'tab',
                     'tabindex': -1,
                     'aria-selected': false,
                     'aria-controls': id,
                     'aria-disabled': $tab.hasClass('disabled')
-                });
+                };
+                
+                if (!$tab.attr('href')) {
+                    // Mainly so the cursor turns the mouse into a hand
+                    // on hover.
+                    tabAttrs.href = '#';
+                }
+                
+                $tab.attr(tabAttrs);
 
                 $panel.attr({
                     'id': id,

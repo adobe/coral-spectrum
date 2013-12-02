@@ -412,31 +412,45 @@ describe('CUI.Tabs', function() {
         expect($panels.eq(5)).to.have.text(panelContent);
       });
 
-      it('will use a provided id', function() {
+      it('will apply tab attributes', function() {
         var testID = 'testID';
         
         widget.addItem({
-          id: testID
+          tabAttrs: {
+            id: testID
+          }
         });
 
         expect(getTabs().eq(5)).to.have.attr('id', testID);
       });
 
+      it('will apply panel attributes', function() {
+        var testID = 'testID';
+
+        widget.addItem({
+          panelAttrs: {
+            id: testID
+          }
+        });
+
+        expect(getPanels().eq(5)).to.have.attr('id', testID);
+      });
+
       it('will link the tab to the panel', function() {
         widget.addItem();
 
-        expect(getTabs().eq(5)).to.have.attr('href', 
-          '#' + getPanels().eq(5).attr('id'));
+        expect(getTabs().eq(5)).to.have.attr('aria-controls', 
+            getPanels().eq(5).attr('id'));
       });
       
-      it('will use a panel URL', function() {
+      it('will apply remote URL', function() {
         widget.addItem({
-          panelURL: 'test.html'
+          tabAttrs: {
+              href: 'test.html'
+          }
         });
         
         expect(getTabs().eq(5)).to.have.attr('href', 'test.html');
-        expect(getTabs().eq(5)).to.have.attr('data-target', 
-          '#' + getPanels().eq(5).attr('id'));
       });
       
       it('will add a tab at index 0', function() {
