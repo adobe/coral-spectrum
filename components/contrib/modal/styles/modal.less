@@ -4,9 +4,9 @@
 */
 
 // Modal
-@modal-header-height: 50*@px;
-@modal-header-background-color: rgb(230, 230, 230);
-@modal-header-border-color: rgb(196, 196, 196);
+@modal-header-height: 46*@px;
+@modal-header-background-color: rgb(225, 225, 225);
+@modal-header-border-color: rgba(0, 0, 0, .15);
 @modal-body-background-color: rgb(240, 240, 240);
 @modal-underlay-background-color: rgba(0, 0, 0, 0.40);
 @modal-border-color: rgba(90, 90, 90, 0.80);
@@ -40,12 +40,12 @@
   z-index: @zindexModal;
 
   display: none;
-  min-width: 20rem;
+  min-width: 320*@px;
   max-width: 90%;
 
   outline: none; // Firefox shows focus outline
 
-  border: 0.625rem solid @modal-border-color;
+  border: 10*@px solid @modal-border-color;
 
   background-color: @modal-body-background-color;
   .background-clip(padding-box); // don't let the border overlap the background
@@ -72,11 +72,11 @@
 
       .border-box;
       width: 100%;
-      height: 3.25rem;
+      height: 52*@px;
       margin: 0;
-      padding: 0 2rem 0 1rem;
+      padding: 0 32*@px 0 16*@px;
 
-      line-height: 3.25rem;
+      line-height: 52*@px;
 
       .ellipsis();
     }
@@ -86,10 +86,10 @@
       right: 0;
       top: 0;
 
-      padding: 0.5rem;
-      margin: 0.6875rem;
+      padding: .125em;
+      margin: 11*@px; 
 
-      font-size: 1.65rem;
+      font-size: 20*@px;
     }
   }
 
@@ -117,8 +117,8 @@
 
     button,
     .button {
-      margin: 0.5rem;
-      min-width: 6.25rem; // 100px
+      margin: 8*@px;
+      min-width: 100*@px;
     }
 
     .button:first-child,
@@ -130,7 +130,7 @@
     .button + .button,
     button + .button,
     button + button {
-      margin-left: 0rem;
+      margin-left: 0;
     }
   }
 
@@ -171,14 +171,14 @@
       background-position: 1rem center;
 
       h2 {
-        padding-left: 3rem;
+        padding-left: 48*@px;
       }
     }
   }
 
   &.error {
     .modal-header {
-      background-color: @alert-error-background-color;
+      background-color: @alert-error-background-light-color;
 
       .box-shadow(inset 0 -1*@px 0 @alert-error-border-color);
 
@@ -188,7 +188,7 @@
 
   &.notice {
     .modal-header {
-      background-color: @alert-notice-background-color;
+      background-color: @alert-notice-background-light-color;
 
       .box-shadow(inset 0 -1*@px 0 @alert-notice-border-color);
 
@@ -198,7 +198,7 @@
 
   &.success {
     .modal-header {
-      background-color: @alert-success-background-color;
+      background-color: @alert-success-background-light-color;
 
       .box-shadow(inset 0 -1*@px 0 @alert-success-border-color);
 
@@ -208,7 +208,7 @@
 
   &.help {
     .modal-header {
-      background-color: @alert-info-background-color;
+      background-color: @alert-info-background-light-color;
 
       .box-shadow(inset 0 -1*@px 0 @alert-info-border-color);
 
@@ -218,7 +218,7 @@
 
   &.info {
     .modal-header {
-      background-color: @alert-info-background-color;
+      background-color: @alert-info-background-light-color;
 
       .box-shadow(inset 0 -1*@px 0 @alert-info-border-color);
 
