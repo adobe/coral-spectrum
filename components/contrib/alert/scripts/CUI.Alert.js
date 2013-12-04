@@ -3,6 +3,7 @@
     toString: 'Alert',
     extend: CUI.Widget,
 
+
     /**
      @extends CUI.Widget
      @classdesc An optionally closable alert message.
@@ -161,14 +162,14 @@
 
     /** @ignore */
     _setContent: function () {
-      if (typeof this.options.content !== 'string') {
+      if (typeof this.options.content === 'string') {
         this.$element.find('div').html(this.options.content);
       }
     },
 
     /** @ignore */
     _setHeading: function () {
-      if (typeof this.options.content == 'string') {
+      if (typeof this.options.content === 'string') {
         this.$element.find('strong').html(this.options.heading);
       }
     },
