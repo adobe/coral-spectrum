@@ -3,8 +3,9 @@
  */
 
 // Filters & Tags
-@filters-background-color: rgb(115, 115, 115);
-@filters-text-color: rgb(255, 255, 255);
+@filters-background-color: rgba(180, 180, 180, .80);
+@filters-text-color: rgb(60, 60, 60);
+@filters-close-button-color: rgba(0, 0, 0, .40);
 
 .filters {
     display: inline-block;
@@ -13,7 +14,7 @@
     vertical-align: top; // used to align them correctly in forms.
     margin: 2*@px 0;  // resets default margin
     
-    width: 13rem; // width is required to contain the tags
+    width: 208*@px; // width is required to contain the tags
     
 
     &[data-multiple=multiple], &[data-stacking=true] {
@@ -37,19 +38,21 @@
         li {
             display: inline-block;
             margin: 0 3*@px 3*@px 0;
-            padding: 0 10*@px 0 8*@px;
-            line-height: 28*@px;
+            padding: 0 14*@px 0 8*@px;
+            line-height: 26*@px;
             color: @filters-text-color;
             background-color: @filters-background-color;
         }
 
         button {
-            margin: 0 6*@px 0 0;
+            margin: 0 6*@px 0 2*@px;
             border: 0;
             padding: 0;
             min-width: 0;
+            height: 32*@px;
             vertical-align: baseline;
             background: none;
+            color: @filters-close-button-color;
             filter: none;
         }
     }
@@ -62,25 +65,25 @@
     &.error input:focus,
     &.error.focus input {
         color: @textfield-error-font-color;
-        .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+        .glow(5*@px, @textfield-error-border-color, @textfield-error-border-color);
     }
 }
 
 .filters.stacking {
-    padding: 0.25rem 0.5rem;
+    padding: 4*@px;
     border: @px solid @textfield-border-color;
     background-image: url('@{component-resource-folder}/filters/magnifier.png');
     background-repeat: no-repeat;
     background-color: @textfield-background-color;
-    background-position: 0.5rem 0.25rem;
-    background-size: 28*@px;
+    background-position: 8*@px 8*@px;
+    background-size: 18*@px;
 
     .tags {
         display: inline;
     }
 
     ul li:first-child {
-        margin-left: 36*@px;
+        margin-left: 30*@px;
     }
 
     input[type=text] {
@@ -91,7 +94,7 @@
         background: transparent;
 
         &:first-child {
-            margin-left: 36*@px;
+            margin-left: 30*@px;
         }
 
         &:focus {
@@ -110,7 +113,7 @@
     
     &.error {
         color: @textfield-error-font-color;
-        .glow(0.357rem, @textfield-error-border-color, @textfield-error-border-color);
+        .glow(5*@px, @textfield-error-border-color, @textfield-error-border-color);
     }
 
     &.error input {
