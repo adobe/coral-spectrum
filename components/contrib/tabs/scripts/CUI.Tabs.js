@@ -204,14 +204,22 @@
      * Adds a tab and associated panel.
      *
      * @param {Object} [options] Tab options.
-     * @param {String} [options.tabContent] An HTML string used to
-     * generate the tab's content.
-     * @param {Object} [options.tabAttrs] Attributes to apply to the created
-     * tab.
-     * @param {String} [options.panelContent] An HTML string used to
-     * generate the panel's content.
-     * @param {Object} [options.panelAttrs] Attributes to apply to the
-     * created panel.
+     * @param {String|HTMLElement|jQuery} [options.tabContent] Content to be
+     * used inside the tab. This can be an HTML string, a DOM node, 
+     * or a jQuery object. This content will be wrapped by an 
+     * internally-created element that will serve as the tab.
+     * @param {String|HTMLElement|jQuery} [options.panelContent] Content to be
+     * used inside the panel. This can be an HTML string, a DOM node,
+     * or a jQuery object. This content will be wrapped by an internally-created 
+     * element that will serve as the panel. This is not intended to be
+     * used when options.panelURL is defined.
+     * @param {String} [options.panelURL] A URL from which to asynchronously
+     * load the panel content when the tab is activated. This is not intended
+     * to be used when options.panelContent is defined.
+     * @param {String} [options.panelID] An ID to be applied to the
+     * internally-created panel. If one is not provided, a unique ID will be
+     * generated for the panel.
+     * 
      * @param {Number} [options.index] The index at which the tab should be
      * added. If no index is provided, the tab will be added as the last
      * tab.
@@ -220,28 +228,35 @@
      * @param {Boolean} [options.active=true] Whether the tab should be
      * immediately activated/selected. In other words, its panel will be 
      * immediately visible and panels for other tabs will be hidden.
+     * 
+     * @return {String} The ID of the panel. If options.panelID was defined,
+     * this will be the same value. If options.panelID was not defined,
+     * this will be an internally-generated, unique ID.
      */
     addItem: function(options) {
       var tabs = this._getTabs();
       
       options = $.extend({
         tabContent: '',
-        tabAttrs: undefined,
         panelContent: '',
-        panelAttrs: undefined,
+        panelID: undefined,
+        panelURL: undefined,
         index: tabs.length,
         enabled: true,
         active: true
       }, options);
       
-      var $panel = $('<section>' + options.panelContent + '</section>',
-          options.panelAttrs);
-
-      var $tab = $('<a>' + options.tabContent + '</a>');
+      var $panel = $('<section/>').append(options.panelContent);
       
-      $tab.attr($.extend(options.tabAttrs, {
-        'data-toggle': 'tab'
-      }));
+      if (options.panelID !== undefined) {
+        $panel.attr('id', options.panelID);
+      }
+      
+      var $tab = $('<a data-toggle="tab"/>').append(options.tabContent);
+      
+      if (options.panelURL !== undefined) {
+        $tab.attr('href', options.panelURL);
+      }
       
       // Confine the index to valid values.
       var index = Math.min(Math.max(options.index, 0), tabs.length);
@@ -264,7 +279,7 @@
         this._activateTab($tab, true);
       }
       
-      return this;
+      return $panel.attr('id');
     },
 
     /**
@@ -272,12 +287,21 @@
      * the active tab, the nearest enabled tab will be activated.
      * @param {Number} index The index of the tab to remove.
      */
-    removeItem: function(index) {
-      var $tab = this._getTabs().eq(index),
-        $panel = this._getPanels().eq(index);
+    removeItem: function(indexOrID) {
+      var $tabs = this._getTabs(),
+        $panels = this._getPanels(),
+        $tab, $panel;
+      
+      if (typeof indexOrID === 'number') {
+        $tab = $tabs.eq(indexOrID);
+        $panel = $panels.eq(indexOrID);  
+      } else if (typeof indexOrID === 'string') {
+        $tab = $tabs.filter('[aria-controls="' + indexOrID + '"]');
+        $panel = $panels.filter('#' + indexOrID);
+      }
     
-      if (!$tab.length || !$panel.length) {
-        return this;
+      if (!$tab || !$panel) {
+        return;
       }
 
       if ($tab.hasClass('active')) {
@@ -296,8 +320,6 @@
 
       $panel.remove();
       $tab.remove();
-    
-      return this;
     },
 
     // sets all options

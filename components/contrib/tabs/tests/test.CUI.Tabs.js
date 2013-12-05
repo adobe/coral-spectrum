@@ -397,7 +397,7 @@ describe('CUI.Tabs', function() {
     });
     
     describe('adding tabs', function() {
-      it('will use provided content', function() {
+      it('will use provided content as a string', function() {
         widget.addItem({
           tabContent: tabContent,
           panelContent: panelContent
@@ -408,49 +408,78 @@ describe('CUI.Tabs', function() {
 
         expect($tabs.length).to.equal(6);
         expect($panels.length).to.equal(6);
-        expect($tabs.eq(5)).to.have.text(tabContent);
-        expect($panels.eq(5)).to.have.text(panelContent);
+        expect($tabs.last()).to.have.text(tabContent);
+        expect($panels.last()).to.have.text(panelContent);
       });
 
-      it('will apply tab attributes', function() {
-        var testID = 'testID';
+      it('will use provided content as a DOM element', function() {
+        var tabHTML = '<div>my tab</div>';
+        var panelHTML = '<div>my panel</div>';
         
         widget.addItem({
-          tabAttrs: {
-            id: testID
-          }
+          tabContent: $(tabHTML)[0],
+          panelContent: $(panelHTML)[0]
         });
 
-        expect(getTabs().eq(5)).to.have.attr('id', testID);
+        var $tabs = getTabs();
+        var $panels = getPanels();
+
+        expect($tabs.length).to.equal(6);
+        expect($panels.length).to.equal(6);
+        expect($tabs.last()).to.have.html(tabHTML);
+        expect($panels.last()).to.have.html(panelHTML);
       });
 
-      it('will apply panel attributes', function() {
-        var testID = 'testID';
+      it('will use provided content as a jQuery-wrapped element(s)', function() {
+        var tabHTML = '<div>my tab</div>';
+        var panelHTML = '<div>content</div><div>and more content</div>';
 
         widget.addItem({
-          panelAttrs: {
-            id: testID
-          }
+          tabContent: $(tabHTML),
+          panelContent: $(panelHTML)
         });
 
-        expect(getPanels().eq(5)).to.have.attr('id', testID);
+        var $tabs = getTabs();
+        var $panels = getPanels();
+
+        expect($tabs.length).to.equal(6);
+        expect($panels.length).to.equal(6);
+        expect($tabs.last()).to.have.html(tabHTML);
+        expect($panels.last()).to.have.html(panelHTML);
+      });
+
+      it('will apply a consumer-provided ID to the panel and return it', function() {
+        var testID = 'testID';
+        
+        var returnID = widget.addItem({
+          panelID: 'testID'
+        });
+
+        expect(getPanels().last()).to.have.attr('id', testID);
+        expect(returnID).to.equal(returnID);
+      });
+      
+      it('will create and return a panel ID if one is not provided', function() {
+        var returnID = widget.addItem();
+        
+        expect(returnID).to.be.a('string');
+        expect(returnID).to.have.length.above(0);
+        expect(getPanels().last().attr('id')).to.equal(returnID);
       });
 
       it('will link the tab to the panel', function() {
         widget.addItem();
 
-        expect(getTabs().eq(5)).to.have.attr('aria-controls', 
-            getPanels().eq(5).attr('id'));
+        expect(getTabs().last()).to.have.attr('aria-controls', 
+            getPanels().last().attr('id'));
       });
       
       it('will apply remote URL', function() {
         widget.addItem({
-          tabAttrs: {
-              href: 'test.html'
-          }
+          panelURL: 'test.html'
         });
         
-        expect(getTabs().eq(5)).to.have.attr('href', 'test.html');
+        expect(getTabs().last()).to.have.attr('href', 'test.html');
       });
       
       it('will add a tab at index 0', function() {
@@ -460,8 +489,8 @@ describe('CUI.Tabs', function() {
           index: 0
         });
         
-        expect(getTabs().eq(0)).to.have.text(tabContent);
-        expect(getPanels().eq(0)).to.have.text(panelContent);
+        expect(getTabs().first()).to.have.text(tabContent);
+        expect(getPanels().first()).to.have.text(panelContent);
       });
       
       it('will correct a negative index', function() {
@@ -471,8 +500,8 @@ describe('CUI.Tabs', function() {
           index: -100
         });
 
-        expect(getTabs().eq(0)).to.have.text(tabContent);
-        expect(getPanels().eq(0)).to.have.text(panelContent);
+        expect(getTabs().first()).to.have.text(tabContent);
+        expect(getPanels().first()).to.have.text(panelContent);
       });
 
       it('will correct an index that is too high', function() {
@@ -482,8 +511,8 @@ describe('CUI.Tabs', function() {
           index: 100
         });
 
-        expect(getTabs().eq(5)).to.have.text(tabContent);
-        expect(getPanels().eq(5)).to.have.text(panelContent);
+        expect(getTabs().last()).to.have.text(tabContent);
+        expect(getPanels().last()).to.have.text(panelContent);
       });
 
       it('will add a tab when no other tabs exist', function() {
@@ -494,8 +523,8 @@ describe('CUI.Tabs', function() {
           panelContent: panelContent
         });
 
-        expect(getTabs().eq(0)).to.have.text(tabContent);
-        expect(getPanels().eq(0)).to.have.text(panelContent);
+        expect(getTabs().first()).to.have.text(tabContent);
+        expect(getPanels().first()).to.have.text(panelContent);
       });
 
       it('will activate the tab when active=true', function() {
@@ -503,8 +532,8 @@ describe('CUI.Tabs', function() {
           active: true
         });
 
-        expect(getTabs().eq(5)).to.have.class('active');
-        expect(getPanels().eq(5)).to.have.class('active');
+        expect(getTabs().last()).to.have.class('active');
+        expect(getPanels().last()).to.have.class('active');
       });
 
       it('will not activate the tab when active=false', function() {
@@ -512,8 +541,8 @@ describe('CUI.Tabs', function() {
           active: false
         });
 
-        expect(getTabs().eq(5)).not.to.have.class('active');
-        expect(getPanels().eq(5)).not.to.have.class('active');
+        expect(getTabs().last()).not.to.have.class('active');
+        expect(getPanels().last()).not.to.have.class('active');
       });
 
       it('will not activate the tab when active=true and enabled=false', function() {
@@ -522,8 +551,8 @@ describe('CUI.Tabs', function() {
           enabled: false
         });
 
-        expect(getTabs().eq(5)).not.to.have.class('active');
-        expect(getPanels().eq(5)).not.to.have.class('active');
+        expect(getTabs().last()).not.to.have.class('active');
+        expect(getPanels().last()).not.to.have.class('active');
       });
 
       it('will disable the tab when enabled=false', function() {
@@ -531,7 +560,7 @@ describe('CUI.Tabs', function() {
           enabled: false
         });
 
-        expect(getTabs().eq(5)).to.have.class('disabled');
+        expect(getTabs().last()).to.have.class('disabled');
       });
     });
     
@@ -541,6 +570,16 @@ describe('CUI.Tabs', function() {
         var $panel = getPanels().eq(1);
           
         widget.removeItem(1);
+        
+        expect($tab.parent().length).to.equal(0);
+        expect($panel.parent().length).to.equal(0);
+      });
+      
+      it('will remove a tab by panel ID', function() {
+        var $tab = getTabs().eq(1);
+        var $panel = getPanels().eq(1);
+        
+        widget.removeItem($panel.attr('id'));
         
         expect($tab.parent().length).to.equal(0);
         expect($panel.parent().length).to.equal(0);
