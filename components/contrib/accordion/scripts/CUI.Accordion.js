@@ -464,7 +464,7 @@
 
   // Data API
   $(document).on("cui-contentloaded.data-api", function (e) {
-    CUI.Accordion.init($("[data-init~=accordion],[data-init~=collapsible]"));
+    CUI.Accordion.init($("[data-init~=accordion],[data-init~=collapsible]", e.target));
   });
 }(window.jQuery));
 
