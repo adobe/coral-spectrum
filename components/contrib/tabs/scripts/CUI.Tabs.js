@@ -219,7 +219,6 @@
      * @param {String} [options.panelID] An ID to be applied to the
      * internally-created panel. If one is not provided, a unique ID will be
      * generated for the panel.
-     * 
      * @param {Number} [options.index] The index at which the tab should be
      * added. If no index is provided, the tab will be added as the last
      * tab.
