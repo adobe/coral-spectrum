@@ -3,11 +3,12 @@
   Used for alert messages
 */
 
+@import-once "../shared/icons.less";
+@import-once "../shared/icons_mono.less";
+
 // Alert
 @alert-header-height: 36*@px;
 @alert-font-color: rgb(50, 50, 50);
-@alert-icon-color: rgba(0, 0, 0, .65);
-@alert-icon-font-size: 16*@px; 
 
 @alert-error-background-color: rgb(250, 90, 80);
 @alert-error-background-light-color: rgb(250, 120, 110);
@@ -39,7 +40,8 @@
 .alert {
   margin: 8*@px 0;
   padding: 8*@px;
-  min-height: 20*@px; // + padding, etc. to get 38px total height
+  padding-left: 14*@px;
+  min-height: 20*@px; // Add padding, etc. to get 38px total height
 
   // Default is blue
   border: @px solid @alert-info-border-color;
@@ -52,20 +54,18 @@
     .icon-xsmall;
     float: right;
     font-weight: bold;
-    padding: 0.125em;
-    // we need to hide the X if used in the alert definition
+    // We need to hide the X if used in the alert definition
     color: transparent;
-
   }
 
   // Heading text
   > strong {
     display: inline-block;
-    margin-right: 4*@px;
+    margin-right: 4*@px; //two text spaces between titles
     text-transform: uppercase;
   }
 
-  // links in alert should use same font color and be underlined
+  // Links in alert should use same font color and be underlined
   a
   {
     color: @alert-font-color;
@@ -77,9 +77,10 @@
   // We'll make it inline so it renders right
   > div {
     display: inline;
+    padding-right: 29*@px; // keep distance to floating "x"
   }
 
-  // Text-indent allows for a second line of text to align 
+  // Text-indent allows for a second line of text to align
   // with the first line of text instead of the icon.
   &.error,
   &.notice,
@@ -87,9 +88,10 @@
   &.help,
   &.info{
     padding-left: 40*@px;
-    text-indent: -25*@px;
-  }
+    text-indent: -10*@px;
+  }   
 
+  // Background colors
   &.error {
     background-color: @alert-error-background-light-color;
     border-color: @alert-error-border-color;
@@ -111,36 +113,38 @@
     border-color: @alert-info-border-color;
   }
 
-  &.error:before,
-  &.notice:before,
-  &.success:before,
-  &.help:before,
-  &.info:before {
-    padding-right: 30*@px;
-    font-family: AdobeIcons;
-    color: @alert-icon-color;
-    font-size: @alert-icon-font-size;
-    font-weight: normal;
+  // Alert icons
+  // Use strong:before so selector is applying to large alerts, too
+  &.error,
+  &.notice {
+    > strong:before {
+      .icon-content;
+      .icon-small;
+      content: @icon-alert-content;   
+    } 
   }
 
-
-
-  &.error:before,
-  &.notice:before {
-    content: "\f10d"; 
+  &.success {
+    > strong:before {
+      .icon-content;
+      .icon-small;
+      content: @icon-check-circle-content; 
+    }   
+  }
+  &.help {
+    > strong:before {
+      .icon-content;
+      .icon-small;
+      content: @icon-help-circle-content; 
+    } 
   }
 
-
-  &.success:before {
-    content: "\f143";
-  }
-
-  &.help:before {
-    content: "\f1df";
-  }
-
-  &.info:before {
-    content: "\f1ea";  
+  &.info {
+    > strong:before {
+      .icon-content;
+      .icon-small;
+      content: @icon-help-circle-content; 
+    } 
   }
 
   // Large alerts
@@ -148,14 +152,6 @@
     position: relative;
 
     padding: 0;
-
-    &.error:before,
-    &.notice:before,
-    &.success:before,
-    &.help:before,
-    &.info:before {
-      content: none;
-    }
 
     a
     {
@@ -165,17 +161,19 @@
 
     > .close {
       position: absolute;
-      top: 8*@px;
-      right: 8*@px;
+      top: 11*@px; 
+      right: 10*@px;
       .icon-close;
       .icon-xsmall;
+      font-weight: bold;
 
-      // we need to hide the X if used in the alert definition
+      // We need to hide the X if used in the alert definition
       color: transparent;
     }
 
     > strong {
       display: block;
+      padding-left: 29*@px;
       height: @alert-header-height;
       margin: 0;
 
@@ -187,30 +185,9 @@
 
     > div { 
       display: block;
-      padding: 8*@px 8*@px 8*@px 15*@px;
+      padding: 15*@px;
       text-indent: 0px;
     }
-
-    &.error,
-    &.notice,
-    &.success,
-    &.help,
-    &.info {
-
-      > strong {
-        padding-left: 40*@px;
-        text-indent: -25*@px;
-      }
-
-      > strong:before {
-        padding-right: 8*@px;
-        font-family: AdobeIcons;
-        color: @alert-icon-color;
-        font-size: @alert-icon-font-size;
-        font-weight: normal;
-      }
-    }
-
 
     &.error {
       background-color: @alert-error-background-light-color;
@@ -219,11 +196,6 @@
         background-color: @alert-error-background-color;
         border-color: @alert-error-divider-color;
       }
-
-      > strong:before {
-        content: "\f10d";    
-      }
-
     }
 
     &.notice {
@@ -233,11 +205,6 @@
         background-color: @alert-notice-background-color;
         border-color: @alert-notice-divider-color;
       }
-
-      > strong:before {
-        content: "\f10d";    
-      }
-
     }
 
     &.success {
@@ -247,11 +214,6 @@
         background-color: @alert-success-background-color;
         border-color: @alert-success-divider-color;
       }
-
-      > strong:before {
-        content: "\f143";
-      }
-
     }
 
     &.help,
@@ -262,22 +224,6 @@
         background-color: @alert-info-background-color;
         border-color: @alert-info-divider-color;
       }
-    }
-
-    &.help {
-
-      > strong:before {
-        content: "\f1df";
-      }
-
-    }
-
-    &.info {
-
-      > strong:before {
-        content: "\f1ea";  
-      }
-
     }
   }
 }
