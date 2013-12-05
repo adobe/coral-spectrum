@@ -81,12 +81,12 @@
 
   <!-- Do test run -->
   <script>
-      // Prevent tests from running twice when running through grunt.
-      // https://github.com/yeoman/generator-webapp/issues/65
-      // Can alternatively do a check on window.PHANTOMJS
-      if (navigator.userAgent.indexOf('PhantomJS') < 0) {
-          mocha.run();
-      }
+    // Prevent tests from running twice when running through grunt.
+    // https://github.com/yeoman/generator-webapp/issues/65
+    // Can alternatively do a check on window.PHANTOMJS
+    if (navigator.userAgent.indexOf('PhantomJS') < 0) {
+      $(mocha.run);
+    }
   </script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 describe('CUI.Alert', function() {
   
   var clickClose = function(target) {
-    if (window._phantom) {
+    if (CUI.util.isTouch) {
       target.trigger('tap');
     } else {
       target.trigger('click');
@@ -37,12 +37,11 @@ describe('CUI.Alert', function() {
     });
 
     it('should not submit a form when dismissed', function() {
-      var form = $('<form />'), spy = sinon.spy();
-      el.wrap(form);
-      form.on('submit', spy);
-      expect(spy.called).to.be(false);
+      var spy = sinon.spy(function() { return false });
+      $('<form />').appendTo('body').on('submit', spy).append(el.detach());
+      expect(spy.called).to.be.false;
       clickClose(el.find('button'));
-      expect(spy.called).to.be(false);
+      expect(spy.called).to.be.false;
     });
 
   }); // /from markup   
@@ -194,6 +193,15 @@ describe('CUI.Alert', function() {
       el.addClass('large');
       el.alert({size:0});
       expect(el.hasClass('large')).to.equal(true);
+    });
+
+    it('should not submit a form when dismissed', function() {
+      var spy = sinon.spy(function() { return false; });
+      el.alert({closable: true});
+      $('<form />').appendTo('body').on('submit', spy).append(el.detach());
+      expect(spy.called).to.be.false;
+      clickClose(el.find('button'));
+      expect(spy.called).to.be.false;
     });
 
   }); // /from template

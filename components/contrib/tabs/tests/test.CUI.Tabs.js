@@ -4,7 +4,7 @@ describe('CUI.Tabs', function() {
 
 
   var activate = function(target) {
-    if (window._phantom) {
+    if (CUI.util.isTouch) {
       target.trigger('tap');
     } else {
       target.trigger('click');
