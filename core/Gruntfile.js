@@ -326,16 +326,6 @@ module.exports = function(grunt) {
         files: {
           '<%= dirs.build %>/css/<%= outputFileName %>.css': '<%= dirs.build %>/less/cui.less'
         }
-      },
-
-      test: {
-        options: {
-          paths: [dirs.build + '/less' ],
-          compress: true
-        },
-        files: {
-          '<%= dirs.build %>/css/shared/base.css': '<%= dirs.build %>/less/commons.less'
-        }
       }
     }, // less
 
