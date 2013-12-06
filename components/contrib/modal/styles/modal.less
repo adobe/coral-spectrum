@@ -3,6 +3,9 @@
   Provides a dialog with an backdrop
 */
 
+@import-once "../shared/icons.less";
+@import-once "../shared/icons_mono.less";
+
 // Modal
 @modal-header-height: 46*@px;
 @modal-header-background-color: rgb(225, 225, 225);
@@ -65,6 +68,9 @@
     // Bottom border, easiest with a box shadow
     .box-shadow(inset 0 -1*@px 0 @modal-header-border-color);
 
+    outline: none; // Hide focus outline around header
+
+
     h2 {
       position: absolute;
       left: 0;
@@ -72,24 +78,25 @@
 
       .border-box;
       width: 100%;
-      height: 52*@px;
+      height: @modal-header-height; 
       margin: 0;
       padding: 0 32*@px 0 16*@px;
 
-      line-height: 52*@px;
+      line-height: @modal-header-height; 
+
+        outline: none; // Hide focus outline
 
       .ellipsis();
     }
 
     .close {
-      position: absolute;
-      right: 0;
-      top: 0;
-
-      padding: .125em;
-      margin: 11*@px; 
-
-      font-size: 20*@px;
+      .icon-close;
+      .icon-xsmall;
+      float: right;
+      margin-right: 10*@px;
+      margin-top: 14*@px;
+      // For backward compatibility we need to hide the X if used in the alert definition.
+      color: transparent;
     }
   }
 
@@ -104,6 +111,9 @@
     border: @px solid @modal-outline-color;
     border-top: 0;
     border-bottom: 0;
+
+    outline: none; // Hide focus outline
+
   }
 
   // Footer (for actions)
@@ -114,6 +124,8 @@
     .clearfix(); // clear so buttons can be floated left/right
 
     text-align: right; // right align buttons
+
+    outline: none; // Hide focus outline
 
     button,
     .button {
@@ -167,11 +179,12 @@
   &.help,
   &.info {
     .modal-header {
-      background-repeat: no-repeat;
-      background-position: 1rem center;
+
+      .box-shadow(inset 0 -1*@px 0 @modal-header-border-color);
 
       h2 {
-        padding-left: 48*@px;
+        padding-left: 15*@px;
+        line-height: @modal-header-height;
       }
     }
   }
@@ -180,9 +193,12 @@
     .modal-header {
       background-color: @alert-error-background-light-color;
 
-      .box-shadow(inset 0 -1*@px 0 @alert-error-border-color);
-
-      background-image: url('@{component-resource-folder}/alert/exclaimation.png');
+      > h2:before {
+        .icon-content;
+        .icon-small;
+        content: @icon-alert-content; 
+        padding-right: 6*@px;
+      }
     }
   }
 
@@ -190,9 +206,13 @@
     .modal-header {
       background-color: @alert-notice-background-light-color;
 
-      .box-shadow(inset 0 -1*@px 0 @alert-notice-border-color);
+      > h2:before {
+        .icon-content;
+        .icon-small;
+        content: @icon-alert-content; 
+        padding-right: 6*@px;
+      }
 
-      background-image: url('@{component-resource-folder}/alert/exclaimation.png');
     }
   }
 
@@ -200,9 +220,12 @@
     .modal-header {
       background-color: @alert-success-background-light-color;
 
-      .box-shadow(inset 0 -1*@px 0 @alert-success-border-color);
-
-      background-image: url('@{component-resource-folder}/alert/check.png');
+      > h2:before {
+        .icon-content;
+        .icon-small;
+        content: @icon-check-circle-content; 
+        padding-right: 6*@px;
+      }
     }
   }
 
@@ -210,9 +233,12 @@
     .modal-header {
       background-color: @alert-info-background-light-color;
 
-      .box-shadow(inset 0 -1*@px 0 @alert-info-border-color);
-
-      background-image: url('@{component-resource-folder}/alert/question.png');
+      > h2:before {
+        .icon-content;
+        .icon-small;
+        content: @icon-help-circle-content; 
+        padding-right: 6*@px;
+      }
     }
   }
 
@@ -220,9 +246,12 @@
     .modal-header {
       background-color: @alert-info-background-light-color;
 
-      .box-shadow(inset 0 -1*@px 0 @alert-info-border-color);
-
-      background-image: url('@{component-resource-folder}/alert/i.png');
+      > h2:before {
+        .icon-content;
+        .icon-small;
+        content: @icon-help-circle-content; 
+        padding-right: 6*@px;
+      }
     }
   }
 }
