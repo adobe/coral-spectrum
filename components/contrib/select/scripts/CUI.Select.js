@@ -113,6 +113,22 @@
     },
 
     /**
+     * 
+     * @return {Array|String} current value
+     */
+    getValue: function () {
+      if (this.options.multiple) { // multiple returns array
+        return this._tagListWidget.getValues();
+      } else if (this.options.type === 'static') { // static
+        return this._select[0][this._select[0].selectedIndex].value;
+      } else if (this.options.type === 'dynamic') {
+        return this._valueInput.val();
+      }
+
+      return null;
+    },
+
+    /**
      * this option is mainly supposed to be used on mobile
      * and will just work with static lists
      * @private
