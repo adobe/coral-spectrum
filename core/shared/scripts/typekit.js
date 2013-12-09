@@ -2,7 +2,7 @@
 /* jshint -W033,-W116 */
 (function (window, undefined) {
   var config = {
-    kitId: 'jwv7ouu',
+    kitId: window.kitId || 'jwv7ouu',
     scriptTimeout: 3000
   };
 
