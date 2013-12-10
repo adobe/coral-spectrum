@@ -133,17 +133,6 @@ module.exports = function(grunt) {
     }, // clean
 
     copy: {
-      less_bootstrap: { // bootstrap dependencies
-        files: [
-          {
-            expand: true,
-            filter: 'isFile',
-            cwd: '<%= dirs.modules %>/bootstrap/less/',
-            src: ['mixins.less', 'variables.less', 'reset.less'],
-            dest: '<%= dirs.build %>/less/externals/bootstrap/'
-          }
-        ]
-      },
       less_icons_base: {
         files: [
           { // less
@@ -175,6 +164,12 @@ module.exports = function(grunt) {
             cwd: '<%= dirs.shared %>/',
             src: ['styles/base/**.less'],
             dest: '<%= dirs.build %>/less'
+          },
+          {
+            expand: true,
+            cwd: '<%= dirs.shared %>/styles/externals',
+            src: ['**/*.less'],
+            dest: '<%= dirs.build %>/less/externals/'
           },
           {
             expand: true,
@@ -237,7 +232,7 @@ module.exports = function(grunt) {
                   component = srcPath[srcPath.length - 3],
                   filename = srcPath[srcPath.length - 1];
 
-              return dest + '/' + component + '/' + filename; 
+              return dest + '/' + component + '/' + filename;
             }
           }
         ]
@@ -314,9 +309,9 @@ module.exports = function(grunt) {
     less: {
       "cui-wrapped": {
         options: {
-          paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
-            dirs.build+'/less/'
-          ]
+          // grunt-contrib-less doesn't support template tags, use dirs instead
+          paths: [dirs.build + '/less/'],
+          compress: true
         },
         files: {
           '<%= dirs.build %>/css/<%= outputFileName %>-wrapped.css': '<%= dirs.build %>/less/cui-wrapped.less'
@@ -324,9 +319,9 @@ module.exports = function(grunt) {
       },
       "cui": {
         options: {
-          paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
-            dirs.build+'/less/'
-          ]
+          // grunt-contrib-less doesn't support template tags, use dirs instead
+          paths: [dirs.build + '/less/'],
+          compress: true
         },
         files: {
           '<%= dirs.build %>/css/<%= outputFileName %>.css': '<%= dirs.build %>/less/cui.less'

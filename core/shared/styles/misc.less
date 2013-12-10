@@ -15,10 +15,10 @@ form {
 /**
   disable tab highlight for *all* elements
   the rational for disabling the style for all *a* element rather then selectively
-  is that as each 'widget' provides its own highlight state, 
+  is that as each 'widget' provides its own highlight state,
   tap-highlight seems to be rather redundant.
 
-  Althought it would be cleaner to add the style for each widget, this proved to be rather laborious process and 
+  Althought it would be cleaner to add the style for each widget, this proved to be rather laborious process and
   would have to be done for all non-CoralUI widget (e.g. the CQ components).
 
   NOTE: disabling for 'a' elements works BUT is not perfect.
@@ -97,7 +97,7 @@ img {
   @see https://developer.mozilla.org/en-US/docs/Web/CSS/resize
 */
 .resizable {
-    resize: both;
+  resize: both;
 }
 
 /**
@@ -107,7 +107,7 @@ img {
   @see https://developer.mozilla.org/en-US/docs/Web/CSS/resize
 */
 .resizable-x {
-    resize: horizontal;
+  resize: horizontal;
 }
 
 /**
@@ -117,7 +117,7 @@ img {
   @see https://developer.mozilla.org/en-US/docs/Web/CSS/resize
 */
 .resizable-y {
-    resize: vertical;
+  resize: vertical;
 }
 
 /**
@@ -127,7 +127,7 @@ img {
   @see https://developer.mozilla.org/en-US/docs/Web/CSS/resize
 */
 .resizable-none {
-    resize: none;
+  resize: none;
 }
 
 
@@ -169,3 +169,22 @@ button.close {
   }
 }
 
+// class version of the Bootstrap mixin
+.clearfix {
+  .clearfix();
+}
+
+// class version of the Bootstrap mixin
+.input-block-level {
+  .input-block-level();
+}
+
+// class version of the Bootstrap mixin
+.hide-text {
+  .hide-text();
+}
+
+// class version of the mixin
+.border-box {
+  .border-box();
+}

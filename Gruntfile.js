@@ -21,12 +21,12 @@ module.exports = function (grunt) {
     /*
         *** DEPRECATION WARNING ***
         Use of Handlebars.js is deprecated.
-        See https://issues.adobe.com/browse/CUI-1025 for details 
+        See https://issues.adobe.com/browse/CUI-1025 for details
         TODO: remove use of handlebars templates
-        see https://issues.adobe.com/browse/CUI-1098 
+        see https://issues.adobe.com/browse/CUI-1098
     */
     grunt.loadNpmTasks('grunt-contrib-handlebars');
-    
+
     /**
     JavaScript file include order
     Add new components to this array _after_ the components they inherit from
@@ -355,7 +355,7 @@ module.exports = function (grunt) {
                         dest: '<%= dirs.build %>/js'
                     }
                 ] // /retro files
-            }, 
+            },
             externals: {
                 files: [
                     { // get external dependencies
@@ -376,7 +376,7 @@ module.exports = function (grunt) {
                         dest: '<%= dirs.build %>/js/source'
                     }
                 ] // js source files
-            }, 
+            },
             release_archive: { // copy the archive to have a "latest" zip from the current build
                 files: [
                     { // get build from the core
@@ -487,9 +487,9 @@ module.exports = function (grunt) {
         less: {
             "cui-wrapped": {
                 options: {
-                    paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
-                        dirs.build+'/less/'
-                    ]
+                    // grunt-contrib-less doesn't support template tags, use dirs instead
+                    paths: [ dirs.build + '/less/'],
+                    compress: true
                 },
                 files: {
                     '<%= dirs.build %>/css/cui-wrapped.css': '<%= dirs.build %>/less/cui-wrapped.less'
@@ -497,9 +497,9 @@ module.exports = function (grunt) {
             },
             "cui": {
                 options: {
-                    paths: [  // grunt-contrib-less doesn't support template tags, use dirs instead
-                        dirs.build+'/less/'
-                    ]
+                    // grunt-contrib-less doesn't support template tags, use dirs instead
+                    paths: [dirs.build + '/less/'],
+                    compress: true
                 },
                 files: {
                     '<%= dirs.build %>/css/cui.css': '<%= dirs.build %>/less/cui.less'
@@ -537,7 +537,7 @@ module.exports = function (grunt) {
         }, // uglify
       /*
         TODO: remove use of handlebars templates
-        see https://issues.adobe.com/browse/CUI-1098 
+        see https://issues.adobe.com/browse/CUI-1098
       */
         handlebars: {
             components: {
@@ -645,7 +645,7 @@ module.exports = function (grunt) {
                     hostname: '*'
                 }
             }
-        }, 
+        },
         // connect
         cssmetrics: {
           coralui: {
@@ -679,7 +679,7 @@ module.exports = function (grunt) {
 
       /*
         TODO: remove use of handlebars templates
-        see https://issues.adobe.com/browse/CUI-1098 
+        see https://issues.adobe.com/browse/CUI-1098
       */
     grunt.task.registerTask('full', [ // for a standalone upload e.g. pages
         'retro',
