@@ -371,8 +371,246 @@ describe('CUI.Tabs', function() {
 
 
   }); // passing options
+    
+  describe('adding/removing tabs', function() {
+    var $el, 
+      widget,
+      tabContent = 'Test tab',
+      panelContent = 'Test panel';
+    
+    var getTabs = function() {
+      return $el.find('[role="tab"]');
+    };
+    
+    var getPanels = function() {
+      return $el.find('section');
+    };
 
+    beforeEach(function() {
+      $el = $(jQueryMarkup).appendTo('body');
+      widget = new CUI.Tabs({element:$el});
+    });
 
+    afterEach(function() {
+      $el.remove();
+      $el = widget = null;
+    });
+    
+    describe('adding tabs', function() {
+      it('will use provided content as a string', function() {
+        widget.addItem({
+          tabContent: tabContent,
+          panelContent: panelContent
+        });
+
+        var $tabs = getTabs();
+        var $panels = getPanels();
+
+        expect($tabs.length).to.equal(6);
+        expect($panels.length).to.equal(6);
+        expect($tabs.last()).to.have.text(tabContent);
+        expect($panels.last()).to.have.text(panelContent);
+      });
+
+      it('will use provided content as a DOM element', function() {
+        var tabHTML = '<div>my tab</div>';
+        var panelHTML = '<div>my panel</div>';
+        
+        widget.addItem({
+          tabContent: $(tabHTML)[0],
+          panelContent: $(panelHTML)[0]
+        });
+
+        var $tabs = getTabs();
+        var $panels = getPanels();
+
+        expect($tabs.length).to.equal(6);
+        expect($panels.length).to.equal(6);
+        expect($tabs.last()).to.have.html(tabHTML);
+        expect($panels.last()).to.have.html(panelHTML);
+      });
+
+      it('will use provided content as a jQuery-wrapped element(s)', function() {
+        var tabHTML = '<div>my tab</div>';
+        var panelHTML = '<div>content</div><div>and more content</div>';
+
+        widget.addItem({
+          tabContent: $(tabHTML),
+          panelContent: $(panelHTML)
+        });
+
+        var $tabs = getTabs();
+        var $panels = getPanels();
+
+        expect($tabs.length).to.equal(6);
+        expect($panels.length).to.equal(6);
+        expect($tabs.last()).to.have.html(tabHTML);
+        expect($panels.last()).to.have.html(panelHTML);
+      });
+
+      it('will apply a consumer-provided ID to the panel and return it', function() {
+        var testID = 'testID';
+        
+        var returnID = widget.addItem({
+          panelID: 'testID'
+        });
+
+        expect(getPanels().last()).to.have.attr('id', testID);
+        expect(returnID).to.equal(returnID);
+      });
+      
+      it('will create and return a panel ID if one is not provided', function() {
+        var returnID = widget.addItem();
+        
+        expect(returnID).to.be.a('string');
+        expect(returnID).to.have.length.above(0);
+        expect(getPanels().last().attr('id')).to.equal(returnID);
+      });
+
+      it('will link the tab to the panel', function() {
+        widget.addItem();
+
+        expect(getTabs().last()).to.have.attr('aria-controls', 
+            getPanels().last().attr('id'));
+      });
+      
+      it('will apply remote URL', function() {
+        widget.addItem({
+          panelURL: 'test.html'
+        });
+        
+        expect(getTabs().last()).to.have.attr('href', 'test.html');
+      });
+      
+      it('will add a tab at index 0', function() {
+        widget.addItem({
+          tabContent: tabContent,
+          panelContent: panelContent,
+          index: 0
+        });
+        
+        expect(getTabs().first()).to.have.text(tabContent);
+        expect(getPanels().first()).to.have.text(panelContent);
+      });
+      
+      it('will correct a negative index', function() {
+        widget.addItem({
+          tabContent: tabContent,
+          panelContent: panelContent,
+          index: -100
+        });
+
+        expect(getTabs().first()).to.have.text(tabContent);
+        expect(getPanels().first()).to.have.text(panelContent);
+      });
+
+      it('will correct an index that is too high', function() {
+        widget.addItem({
+          tabContent: tabContent,
+          panelContent: panelContent,
+          index: 100
+        });
+
+        expect(getTabs().last()).to.have.text(tabContent);
+        expect(getPanels().last()).to.have.text(panelContent);
+      });
+
+      it('will add a tab when no other tabs exist', function() {
+        $el.find('a,section').remove(); // shortcut
+        
+        widget.addItem({
+          tabContent: tabContent,
+          panelContent: panelContent
+        });
+
+        expect(getTabs().first()).to.have.text(tabContent);
+        expect(getPanels().first()).to.have.text(panelContent);
+      });
+
+      it('will activate the tab when active=true', function() {
+        widget.addItem({
+          active: true
+        });
+
+        expect(getTabs().last()).to.have.class('active');
+        expect(getPanels().last()).to.have.class('active');
+      });
+
+      it('will not activate the tab when active=false', function() {
+        widget.addItem({
+          active: false
+        });
+
+        expect(getTabs().last()).not.to.have.class('active');
+        expect(getPanels().last()).not.to.have.class('active');
+      });
+
+      it('will not activate the tab when active=true and enabled=false', function() {
+        widget.addItem({
+          active: true,
+          enabled: false
+        });
+
+        expect(getTabs().last()).not.to.have.class('active');
+        expect(getPanels().last()).not.to.have.class('active');
+      });
+
+      it('will disable the tab when enabled=false', function() {
+        widget.addItem({
+          enabled: false
+        });
+
+        expect(getTabs().last()).to.have.class('disabled');
+      });
+    });
+    
+    describe('removing tabs', function() {
+      it('will remove a tab by index', function() {
+        var $tab = getTabs().eq(1);
+        var $panel = getPanels().eq(1);
+          
+        widget.removeItem(1);
+        
+        expect($tab.parent().length).to.equal(0);
+        expect($panel.parent().length).to.equal(0);
+      });
+      
+      it('will remove a tab by panel ID', function() {
+        var $tab = getTabs().eq(1);
+        var $panel = getPanels().eq(1);
+        
+        widget.removeItem($panel.attr('id'));
+        
+        expect($tab.parent().length).to.equal(0);
+        expect($panel.parent().length).to.equal(0);
+      });
+
+      it('will activate nearest eligible following tab if tab being removed is active', function() {
+        widget.set('active', 1);
+        var $nearestTab = getTabs().eq(2);
+        var $nearestPanel = getTabs().eq(2);
+        widget.removeItem(1);
+        expect($nearestTab).to.have.class('active');
+        expect($nearestPanel).to.have.class('active');
+      });
+
+      it('will activate nearest eligible previous tab if tab being removed is active and no eligible tabs follow', function() {
+        widget.set('active', 4);
+        var $nearestTab = getTabs().eq(2); // tab at index 3 is disabled.
+        var $nearestPanel = getTabs().eq(2); // tab at index 3 is disabled.
+        widget.removeItem(4);
+        expect($nearestTab).to.have.class('active');
+        expect($nearestPanel).to.have.class('active');
+      });
+
+      it('will not activate a different tab if tab being removed is not active', function() {
+        widget.set('active', 4);
+        var $activeTab = getTabs().eq(4);
+        widget.removeItem(1);
+        expect($activeTab).to.have.class('active');
+      });
+    });
+  });
 }); // end test
 
 
