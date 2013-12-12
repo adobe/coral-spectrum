@@ -1,8 +1,16 @@
 /* global Typekit */
 /* jshint -W033,-W116 */
 (function (window, undefined) {
+
+  var typeKitId = 'jwv7ouu';
+  
+  if ( window.CUI && window.CUI.options && window.CUI.options.typeKitId ) 
+  {  
+     typeKitId = window.CUI.options.typeKitId;
+  }
+
   var config = {
-    kitId: 'jwv7ouu',
+    kitId: typeKitId,
     scriptTimeout: 3000
   };
 
