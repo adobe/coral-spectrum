@@ -2,15 +2,15 @@
 /* jshint -W033,-W116 */
 (function (window, undefined) {
 
-  var tkKitId = 'jwv7ouu';
+  var typeKitId = 'jwv7ouu';
   
-  if ( window.CUI && window.CUI.options && window.CUI.options.kitId ) 
+  if ( window.CUI && window.CUI.options && window.CUI.options.typeKitId ) 
   {  
-     tkKitId = window.CUI.options.kitId;
+     typeKitId = window.CUI.options.typeKitId;
   }
 
   var config = {
-    kitId: tkKitId,
+    kitId: typeKitId,
     scriptTimeout: 3000
   };
 
