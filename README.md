@@ -3,6 +3,12 @@ CoralUI is an HTML, CSS, and JavaScript library that implements the [CloudUI][0]
 
 See the [CoralUI Wiki][3] for more information.
 
+# Branch Update
+
+**NOTE:** The current release branch of CoralUI is **release/1.x**. Please submit all pull requests to that branch.
+
+We are currently preparing to transition the master branch to our CoralUI 2.0 modularized project structure. 
+
 # Who maintains CoralUI?
 CoralUI is an internal open source effort with backing from designers and product development teams across Adobe. 
 
