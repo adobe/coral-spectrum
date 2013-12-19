@@ -52,7 +52,7 @@
   border: @px solid @accordion-border-color;
   font-size: 13*@px;
   z-index: inherit;
-  position: relative;        
+  position: relative;
   h3 {
     margin: -0.4375rem -1rem 0.4375rem -1rem;
     padding: 0.4375rem 15*@px;
@@ -67,14 +67,14 @@
     i {
       margin-right: 8*@px;
     }
-    
+
     em {
       font-style: normal;
       font-weight: bold;
       color: @accordion-primary-font-color;
       padding-right: 13*@px;
     }
-    
+
     &:hover,
     &:focus {
       outline: none;
@@ -86,14 +86,16 @@
     }
 
     &:hover{
-      background: @accordion-background-hover-color;      
+      background: @accordion-background-hover-color;
     }
 
     &:focus{
       .gradient(@accordion-background-gradient-start-color, @accordion-background-gradient-end-color);
+      color: @accordion-primary-font-color;
+      text-decoration: underline;
     }
   }
-  
+
   &.active {
     background: @accordion-background-active-color;
   }
@@ -158,11 +160,13 @@
       }
 
       &:hover{
-        background: @accordion-dark-background-gradient-end-color;      
+        background: @accordion-dark-background-gradient-end-color;
       }
 
       &:focus{
         .gradient(@accordion-dark-background-gradient-start-color, @accordion-dark-background-gradient-end-color);
+        color: @accordion-dark-primary-font-color;
+        text-decoration: underline;
       }
 
     }
