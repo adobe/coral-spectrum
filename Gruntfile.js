@@ -42,15 +42,11 @@ module.exports = function (grunt) {
             // HTTP
             'CUI.Util.HTTP.js',
 
-            // color
-            'CUI.Util.color.js',
-
             // Components
             'components/CUI.Rail.js',
             'components/CUI.Modal.js',
             'components/CUI.Tabs.js',
             'components/CUI.Alert.js',
-            'components/CUI.Popover.js',
             'components/CUI.DropdownList.js',
             'components/CUI.Dropdown.js',
             'components/CUI.Filters.js',
@@ -73,7 +69,6 @@ module.exports = function (grunt) {
             'components/CUI.Accordion.js',
             'components/CUI.Tour.js',
             'components/CUI.NumberInput.js',
-            'components/CUI.Colorpicker.js',
             'components/CUI.CycleButtons.js',
             'components/CUI.SelectList.js',
             'components/CUI.TagList.js',
