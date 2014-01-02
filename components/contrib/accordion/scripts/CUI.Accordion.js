@@ -105,13 +105,8 @@
     isAccordion: false,
 
     _setListeners: function () {
-      if (this.isAccordion) {
-        this.$element.children().each(function (index, element) {
-          $(element).find("> h3").on("click", this._toggle.bind(this));
-        }.bind(this));
-      } else {
-        this.$element.find("> h3").on("click", this._toggle.bind(this));
-      }
+      var selector = this.isAccordion ? '> .collapsible > h3' : '> h3';
+      this.$element.on('click', selector, this._toggle.bind(this));
 
       this.$element.on("change:active", this._changeActive.bind(this));
 
@@ -433,6 +428,7 @@
       var el = $(event.currentTarget).closest(".collapsible"),
         head = el.find('> h3:first'),
         isHead = $(event.currentTarget).is(head);
+      if (this.options.disabled) return;
       if (isHead) {
         if (this.isAccordion) {
           this.$element.find("> .collapsible > h3[role=tab]").attr('tabindex', -1);
