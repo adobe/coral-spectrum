@@ -336,6 +336,15 @@
             event.stopPropagation();
         }.bind(this));
 
+        list.on("focusin", "", function(event) {
+            this.preventHiding = true;
+        }.bind(this));
+
+        list.on("focusout", "", function(event) {
+            this.preventHiding = false;
+            this.$element.trigger('blur');
+        }.bind(this));
+
         this.options.visible = true;
     },
 
