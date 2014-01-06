@@ -105,7 +105,8 @@
     isAccordion: false,
 
     _setListeners: function () {
-      this.$element.on("click", "h3", this._toggle.bind(this));
+      var selector = this.isAccordion ? '> .collapsible > h3' : '> h3';
+      this.$element.on('click', selector, this._toggle.bind(this));
 
       this.$element.on("change:active", this._changeActive.bind(this));
 
@@ -124,9 +125,14 @@
      * @ignore */
     _updateDOMForDisabled: function () {
       if (this.options.disabled) {
-        this.$element.addClass('disabled').attr('aria-disabled', true);
+        this.$element.addClass('disabled').attr('aria-disabled', true)
+            .find('[role=tab], > [role=button]').removeAttr('tabindex').attr('aria-disabled', true);
       } else {
-        this.$element.removeClass('disabled').attr('aria-disabled', false);
+        this.$element.removeClass('disabled').attr('aria-disabled', false)
+            .find('[role=tab], > [role=button]').each(function (index, element) {
+                var elem = $(element);
+                elem.removeAttr('aria-disabled').attr('tabindex', elem.is('[aria-selected=true][aria-controls], [aria-expanded][aria-controls]') ? 0 : -1);
+            });
       }
     },
 
@@ -161,14 +167,14 @@
     },
     _initElement: function (element, collapse) {
       // Add correct header
-      if ($(element).find("h3").length === 0) $(element).prepend("<h3>&nbsp;</h3>");
-      if ($(element).find("h3 i").length === 0) $(element).find("h3").prepend("<i></i>");
+      if ($(element).find("> h3").length === 0) $(element).prepend("<h3>&nbsp;</h3>");
+      if ($(element).find("> h3 > i").length === 0) $(element).find("> h3").prepend("<i></i>");
 
       $(element).addClass("collapsible");
 
-      var head = $(element).find("h3"),
+      var head = $(element).find("> h3"),
         fold = $("<div></div>").toggle(!collapse),
-        icon = head.find("i");
+        icon = head.find("> i");
 
       // wrap the collapsible content in a div so that we can identify
       // the relationship between the heading and the content it controls
@@ -189,14 +195,14 @@
       }
     },
     _collapse: function (el) {
-      el.find("h3 i").removeClass("icon-chevrondown").addClass("icon-chevronup");
-      el.animate({height: el.find("h3").height()}, "fast", function () {
+      el.find("> h3 > i").removeClass("icon-chevrondown").addClass("icon-chevronup");
+      el.animate({height: el.find("> h3").height()}, "fast", function () {
         el.removeClass("active"); // remove the active class after animation so that background color doesn't change during animation
-        el.find("div[aria-expanded]").hide(); // After animation we want to hide the collapsed content so that it cannot be focused
+        el.find("> div[aria-expanded]").hide(); // After animation we want to hide the collapsed content so that it cannot be focused
       });
 
       // update WAI-ARIA accessibility properties
-      var head = el.find("h3"),
+      var head = el.find("> h3"),
         fold = head.next("div[aria-expanded]");
       if (this.isAccordion) {
         head.attr({
@@ -215,7 +221,7 @@
     },
     _expand: function (el) {
       el.addClass("active");
-      el.find("h3 i").removeClass("icon-chevronup").addClass("icon-chevrondown");
+      el.find("> h3 > i").removeClass("icon-chevronup").addClass("icon-chevrondown");
       var h = this._calcHeight(el);
 
       el.animate({height: h}, "fast", function () {
@@ -223,7 +229,7 @@
       });
 
       // update WAI-ARIA accessibility properties
-      var head = el.find("h3"),
+      var head = el.find("> h3"),
         fold = head.next("div[aria-expanded]");
       if (this.isAccordion) {
         head.attr({
@@ -244,9 +250,9 @@
     _calcHeight: function (el) {
       // Dimension calculation of invisible elements is not trivial.
       // "Best practice": Clone it, put it somwhere on the page, but not in the viewport,
-      // and make it visible. 
+      // and make it visible.
       var el2 = $(el).clone(),
-        fold2 = el2.find('div[aria-expanded]');
+        fold2 = el2.find('> div[aria-expanded]');
       fold2.show();
       el2.css({display: "block",
         position: "absolute",
@@ -275,7 +281,7 @@
 
         this.$element.children(".collapsible").each(function (i, e) {
           var section = $(e),
-            head = section.find("h3:first"),
+            head = section.find("> h3:first"),
             isActive = section.hasClass("active"),
             panelId = idPrefix + 'panel-' + i,
             fold = head.next("div");
@@ -304,7 +310,7 @@
       } else {
         idPrefix = 'collapsible-' + new Date().getTime() + '-';
         section = this.$element;
-        head = section.find("h3:first");
+        head = section.find("> h3:first");
         isActive = section.hasClass("active");
         panelId = idPrefix + 'panel';
         fold = head.next("div");
@@ -343,7 +349,7 @@
      */
     _onKeyDown: function (event) {
       var el = $(event.currentTarget).closest(".collapsible"),
-        head = el.find('h3:first'),
+        head = el.find('> h3:first'),
         isHead = $(event.currentTarget).is(head),
         keymatch = true;
 
@@ -356,14 +362,14 @@
             keymatch = false;
           }
           break;
-        case 33: //page up
+        case 33:  //page up
         case 37: //left arrow
         case 38: //up arrow
           if ((isHead && this.isAccordion) || (event.which === 33 && (event.metaKey || event.ctrlKey))) {
             // If the event.target is an accordion heading, or the key command is CTRL + PAGE_UP,
             // focus the previous accordion heading, or if none exists, focus the last accordion heading.
-            if (el.prev().find("h3:first").focus().length === 0) {
-              this.$element.find(".collapsible:last h3:first").focus();
+            if (el.prev().find("> h3:first").focus().length === 0) {
+              this.$element.find("> .collapsible:last > h3:first").focus();
             }
           } else if (!isHead && (event.metaKey || event.ctrlKey)) {
             // If the event.target is not a collapsible heading,
@@ -374,13 +380,13 @@
           }
           break;
         case 34: //page down
-        case 39: //right arrow
+        case 39:  //right arrow
         case 40: //down arrow
           if (isHead && this.isAccordion) {
             // If the event.target is an accordion heading,
             // focus the next accordion heading, or if none exists, focus the first accordion heading.
-            if (el.next().find("h3:first").focus().length === 0) {
-              this.$element.find(".collapsible:first h3:first").focus();
+            if (el.next().find("> h3:first").focus().length === 0) {
+               this.$element.find("> .collapsible:first > h3:first").focus();
             }
           } else if (!isHead && event.which === 34 && (event.metaKey || event.ctrlKey)) {
             // If the event.target is not a collapsible heading,
@@ -392,14 +398,14 @@
           break;
         case 36: //home
           if (isHead && this.isAccordion) {
-            this.$element.find(".collapsible:first h3:first").focus();
+            this.$element.find("> .collapsible:first > h3:first").focus();
           } else {
             keymatch = false;
           }
           break;
         case 35: //end
           if (isHead && this.isAccordion) {
-            this.$element.find(".collapsible:last h3:first").focus();
+            this.$element.find("> .collapsible:last > h3:first").focus();
           } else {
             keymatch = false;
           }
@@ -420,11 +426,12 @@
      */
     _onFocusIn: function (event) {
       var el = $(event.currentTarget).closest(".collapsible"),
-        head = el.find('h3:first'),
+        head = el.find('> h3:first'),
         isHead = $(event.currentTarget).is(head);
+      if (this.options.disabled) return;
       if (isHead) {
         if (this.isAccordion) {
-          this.$element.find(".collapsible h3[role=tab]").attr('tabindex', -1);
+          this.$element.find("> .collapsible > h3[role=tab]").attr('tabindex', -1);
         }
         if (!head.data('collapsible-mousedown')) {
           el.addClass('focus');
@@ -440,7 +447,7 @@
      */
     _onFocusOut: function (event) {
       var el = $(event.currentTarget).closest(".collapsible"),
-        head = el.find('h3:first'),
+        head = el.find('> h3:first'),
         isHead = $(event.currentTarget).is(head);
       if (isHead) {
         el.removeClass('focus').removeData('collapsible-mousedown');
@@ -452,7 +459,7 @@
      */
     _onMouseDown: function (event) {
       var el = $(event.currentTarget).closest(".collapsible"),
-        head = el.find('h3:first'),
+        head = el.find('> h3:first'),
         isHead = $(event.currentTarget).is(head);
       if (isHead) {
         head.data('collapsible-mousedown', true);

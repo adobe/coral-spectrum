@@ -26,6 +26,8 @@ describe('CUI.Accordion', function() {
       expect(el.is("[role=tablist]")).to.be.true;
       expect(el.find("li h3[role=tab]").length).equal(3);
       expect(el.find("li div[role=tabpanel]").length).equal(3);
+      expect(el.find("li h3[role=tab]").attr('aria-controls')).equal(el.find("li div[role=tabpanel]").attr('id'));
+      expect(el.find("li div[role=tabpanel]").attr('aria-labelledby')).equal(el.find("li h3[role=tab]").attr('id'));
     });
 
     it('should be a collapsible', function() {
@@ -44,6 +46,7 @@ describe('CUI.Accordion', function() {
 
       expect(el.attr('aria-disabled')).to.equal('true');
       expect(el).to.have.class("disabled");
+      expect(el.find(".collapsible > h3[role=tab]")).attr('aria-disabled')).to.equal('true');
     });
 
     it('should disable collapsible', function() {
@@ -53,6 +56,7 @@ describe('CUI.Accordion', function() {
 
       expect(el.attr('aria-disabled')).to.equal('true');
       expect(el).to.have.class("disabled");
+      expect(el.find("> [role=button]")).attr('aria-disabled')).to.equal('true');
     });
 
     it('should activate collapsible', function() {
@@ -70,10 +74,13 @@ describe('CUI.Accordion', function() {
       var html =
           '<ul><li></li><li class="active"></li><li></li></ul>';
       var el = $(html).accordion();
-      var secondContent = el.find('li div').eq(1);
+      var secondCollapsible = el.find('li').eq(1);
+      var secondCollapsibleHeader = secondCollapsible.find('h3');
+      var secondContent = secondCollapsible.find('div');
       expect(secondContent.attr('aria-expanded')).to.equal('true');
       expect(secondContent.attr('aria-hidden')).to.equal('false');
       expect(secondContent.css('display')).to.equal('block');
+      expect(secondCollapsibleHeader.attr('aria-selected')).to.equal('true');
     });
   });
 
