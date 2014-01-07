@@ -1,32 +1,10 @@
-# What is CoralUI? 
-CoralUI is an HTML, CSS, and JavaScript library that implements the [CloudUI][0] visual style and philosophy. CoralUI provides everything your product needs to build out a web based UI.  Check out our interactive [Style Guide][1] to see CoralUI in action.  
 
-See the [CoralUI Wiki][3] for more information.
+#### README
 
-# Branch Update
+CoralUI master branch is currently being transitioned to a modularized structure (multiple repositories).   
 
-**NOTE:** The current release branch of CoralUI is **release/1.x**. Please submit all pull requests to that branch.
+For the latest 1.X stable code, please use the [release/1.x branch](https://git.corp.adobe.com/Coral/CoralUI/tree/release/1.x). Bug fixes to 1.X components should be committed here.
 
-We are currently preparing to transition the master branch to our CoralUI 2.0 modularized project structure. 
 
-# Who maintains CoralUI?
-CoralUI is an internal open source effort with backing from designers and product development teams across Adobe. 
-
-See the [resource map][4] for an overview of the teams and resources available.
-
-# How do I get started?
-First, contact the [mailing list][2] and introduce yourself.  Becoming part of the community is only way let us know how you want to be involved.  The list is also the best way to discover what current priorities are. 
-
-Next, dive into the [CoralUI Wiki][3].  It contains everything you need to know about using CoralUI and contributing back to the project.
-
-# How do I find out more?
-Just "Read The Fine Manual", a.k.a the [CoralUI Wiki][3].  
-
-### CoralUI Build Status   
-[![Build Status](http://xdbuild.corp.adobe.com:8080/buildStatus/icon?job=Projects-Master)](http://xdbuild.corp.adobe.com:8080/job/Projects-Master/)
-
-[0]: http://blogs.corp.adobe.com/xdcloudui
-[1]: https://git.corp.adobe.com/pages/Coral/CoralUI/
-[2]: mailto:CoralUI@adobe.com
-[3]: https://git.corp.adobe.com/Coral/CoralUI/wiki/Home
-[4]: https://wiki.corp.adobe.com/display/CloudUI/CloudUI+and+CoralUI+Maps
+#### Questions?
+More information on the 2.0 effort can be found in the [CoralUI 2.0 Scope Document](https://git.corp.adobe.com/Coral/CoralUI/wiki/CoralUI-2.0-Scope-and-Initial-Timeline). Please contact the [mailing list](mailto:CoralUI@adobe.com) for additional questions.  
