@@ -1,7 +1,0 @@
-#!/bin/sh
-#
-# calls "grunt check" before committing
-COMMAND="grunt check"
-
-exec $COMMAND
-

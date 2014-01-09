@@ -1,1 +1,0 @@
-This is folder contains all resources necessary for the build environment. For instance the jsdoc template
