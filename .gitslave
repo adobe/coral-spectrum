@@ -1,5 +1,6 @@
 "../coralui-core" "packages/core"
 "../coralui-commons" "packages/commons"
+"../coralui-component-alert" "packages/components/alert"
 "../coralui-component-select" "packages/components/select"
 "../coralui-component-selectlist" "packages/components/selectlist"
 "../coralui-component-datepicker" "packages/components/datepicker"
