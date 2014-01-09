@@ -8,6 +8,7 @@
 "../coralui-component-tabs" "packages/components/tabs"
 "../coralui-component-wizard" "packages/components/wizard"
 "../coralui-component-modal" "packages/components/modal"
+"../coralui-addon-icons" "packages/addons/icons"
 "../coralui-poc-grunt-componentbuilder" "packages/grunt/componentbuilder"
 "../coralui-poc-grunt-dependenciesbuilder" "packages/grunt/dependenciesbuilder"
 "../coralui-poc-grunt-releasepackage" "packages/grunt/releasepackage"
