@@ -1,752 +1,137 @@
 /*global module:false*/
-module.exports = function (grunt) {
+module.exports = function(grunt) {
+  /**
+    Build directories
+    Any directories used by the build should be defined here
+  */
+  var dirs = {
+    build: 'build',
+    modules: 'node_modules',
+    shared: 'shared',
+    styles: 'styles',
+    components: 'components',
+    tests: 'tests'
+  };
 
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-compress');
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-less');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-css-metrics');
-    grunt.loadNpmTasks('grunt-mocha');
-    grunt.loadNpmTasks('grunt-jsdoc');
-    grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-subgrunt');
 
-    grunt.loadTasks('tasks');
+  // Read in package.json
+  var pkg = grunt.file.readJSON('package.json');
 
-    /*
-        *** DEPRECATION WARNING ***
-        Use of Handlebars.js is deprecated.
-        See https://issues.adobe.com/browse/CUI-1025 for details
-        TODO: remove use of handlebars templates
-        see https://issues.adobe.com/browse/CUI-1098
-    */
-    grunt.loadNpmTasks('grunt-contrib-handlebars');
+  var coralComponents = pkg.coral.imports;
 
-    /**
-    JavaScript file include order
-    Add new components to this array _after_ the components they inherit from
-    */
-    var includeOrder = {
-        "cui": [
-            // Coral core
-            'cui-core.js',
+  // Meta and build configuration
+  var meta = {
+    version: pkg.version,
+    appName: pkg.name,
+    appWebSite: pkg.repository.url
+  };
 
-            // Persistence
-            'CUI.Util.state.js',
+  function getSubgruntTasks(imports) {
 
-            // HTTP
-            'CUI.Util.HTTP.js',
+    var subrunttasks = {};
 
-            // Components
-            'components/CUI.Rail.js',
-            'components/CUI.Modal.js',
-            'components/CUI.Tabs.js',
-            'components/CUI.Alert.js',
-            'components/CUI.DropdownList.js',
-            'components/CUI.Dropdown.js',
-            'components/CUI.Filters.js',
-            'components/CUI.Slider.js',
-            'components/CUI.LabeledSlider.js',
-            'components/CUI.Pulldown.js',
-            'components/CUI.Sticky.js',
-            'components/CUI.CardView.js',
-            'components/CUI.PathBrowser.js',
-            'components/CUI.Wizard.js',
-            'components/CUI.FlexWizard.js',
-            'components/CUI.FileUpload.js',
-            'components/CUI.FileUpload.MimeTypes.js',
-            'components/CUI.Toolbar.js',
-            'components/CUI.Tooltip.js',
-            'components/CUI.DragAction.js',
-            'components/CUI.DraggableList.js',
-            'components/CUI.CharacterCount.js',
-            'components/CUI.Accordion.js',
-            'components/CUI.Tour.js',
-            'components/CUI.NumberInput.js',
-            'components/CUI.CycleButtons.js',
-            'components/CUI.SelectList.js',
-            'components/CUI.TagList.js',
-            'components/CUI.Select.js',
-            'components/CUI.Autocomplete.js',
-            'components/CUI.Multifield.js',
+    for(var k in imports) {
+      var key = imports[k];
 
-            // Validations
-            'validations.js'
-        ]
-    };
-
-    /**
-     * Build directories
-     * Any directories used by the build should be defined here
-     */
-    var dirs = {
-        build: 'build',
-        components: {
-            root: 'components/',
-            contrib: 'components/contrib'
-        },
-        legacy: 'legacy',
-        temp: 'temp',
-        modules: 'node_modules',
-        externals: 'externals',
-        core: {
-            root: 'core/',
-            build: 'core/build',
-            shared: 'core/shared',
-            components: 'core/components',
-            tests: 'core/tests'
-        }
-    };
-
-    var packages = {
-        "cui": ["cui"]
-    };
-
-
-    /**
-    Get array of CUI includes in the correct order
-
-    @param pkg      The package to build
-    @param jsPath   Base path to prepend to each include
-    */
-    function getIncludes(pkg, jsPath) {
-        var includes = [ ];
-        var def = packages[pkg];
-        def.forEach(function(_set) {
-            includeOrder[_set].forEach(function(_file) {
-                var pref = "{build}";
-                var prefLen = pref.length;
-                if ((_file.length >= prefLen) && (_file.substring(0, prefLen) === pref)) {
-                    includes.push(dirs.build + "/js/" + _file.substring(prefLen + 1));
-                }
-                includes.push(jsPath + _file);
-            });
-        });
-        return includes;
+      subrunttasks[key] = {};
+      subrunttasks[key][dirs.modules + '/' + key] = 'full';
     }
 
-    var pkg = grunt.file.readJSON('package.json');
+    return subrunttasks;
+  }
 
-    // Meta and build configuration
-    var meta = {
-        version: pkg.version,
-        appName: pkg.name,
-        appWebSite: pkg.repository.url
-    };
+  grunt.initConfig({
 
+    dirs: dirs,
+    meta: meta,
 
-    grunt.initConfig({
+    // Task definitions
+    clean: {
+      build: '<%= dirs.build %>'
+    }, // clean
 
-        dirs: dirs,
-        meta: meta,
-        outputFileName: "CUI",
+    copy: {
+      res_components: {
+        files: [
+          {
+            // copies the LESS files
+            expand: true,
+            // goes into the modules folder.
+            cwd: '<%= dirs.modules %>/',
+            // copies the less files
+            src: ['*/build/less/**.less'],
+            dest: '<%= dirs.build %>/less',
+            // rename to remove the "resources" folder from source
+            rename: function (dest, src) {
+              var srcPath = src.split('/'),
+                  component = srcPath[srcPath.length - 4],
+                  filename = srcPath[srcPath.length - 1];
 
-        clean: {
-            build: '<%= dirs.build %>',
-            temp: '<%= dirs.temp %>'
-        }, // clean
-
-        // Configuration
-        jshint: {
-            options: {
-                eqeqeq: false,
-                immed: true,
-                latedef: true,
-                newcap: true,
-                noarg: true,
-                sub: true,
-                undef: true,
-                boss: true,
-                eqnull: true,
-                browser: true,
-                smarttabs: true,
-                globals: {
-                    'jQuery': true,       // jQuery
-                    'CUI': true,          // CoralUI
-                    'Class': true,        // Class
-                    'moment': true        // Moment.js
-                }
-            },
-            retro: [
-                'Gruntfile.js',
-                '<%= dirs.temp %>/js/**.js',
-                '<%= dirs.temp %>/js/components/**.js'
-            ]
-        },
-
-        subgrunt: {
-            core: { // this will build core, which gets merged to top level build
-                subdir: dirs.core.root,
-                args: ['retro']
-            },
-            core_quicktest: {
-                subdir: dirs.core.root,
-                args: ['quicktest']
-            },
-            core_quickless: {
-                subdir: dirs.core.root,
-                args: ['quickless']
-            },
-            core_quickhtml: {
-                subdir: dirs.core.root,
-                args: ['quickhtml']
+              return dest + '/' + component + '/' + filename;
             }
-        },
-
-        copy: {
-            retro: {
-                files: [
-                    { // get build from the core
-                        expand: true,
-                        cwd: '<%= dirs.core.build %>/',
-                        src: ['examples/**', 'less/**', 'res/**', 'tests/**'],
-                        dest: '<%= dirs.build %>/'
-                    },
-                    { // get build from the core js and copy into temp
-                        expand: true,
-                        cwd: '<%= dirs.core.build %>/',
-                        src: ['js/cui-core.js'],
-                        dest: '<%= dirs.temp %>/'
-                    },
-                    { // get build from the core js source (components) and copy into temp
-                        expand: true,
-                        flatten: true,
-                        cwd: '<%= dirs.core.build %>/',
-                        src: ['js/source/components/**/*.js'],
-                        dest: '<%= dirs.temp %>/js/components/'
-                    },
-                    { // get external dependencies from the core js and copy into temp
-                        expand: true,
-                        flatten: true,
-                        cwd: '<%= dirs.core.build %>/',
-                        src: ['js/source/externals/**/*.js'],
-                        dest: '<%= dirs.build %>/js/libs'
-                    },
-                    { // get build from the core js source (shared) and copy into temp
-                        expand: true,
-                        flatten: true,
-                        cwd: '<%= dirs.core.build %>/',
-                        src: ['js/source/*.js'],
-                        dest: '<%= dirs.temp %>/js/'
-                    },
-                    { // get less from the modularized components
-                        expand: true,
-                        flatten: true,
-                        cwd: '<%= dirs.components.root %>/',
-                        src: ['**/**/styles/**.less'],
-                        dest: '<%= dirs.build %>/less/components'
-                    },
-                    { // get resources from the modularized components
-                        expand: true,
-                        cwd: '<%= dirs.components.root %>/',
-                        src: ['**/**/res/**'],
-                        dest: '<%= dirs.build %>/res/components',
-                        filter: 'isFile',
-                        rename: function(dest, src) {
-                            var match = src.match(/contrib\/(.*)\/res\/(.*)/);
-                            if (match) {
-                                var component = match[1];
-                                var filePath = match[2];
-                                return dest + '/' + component + '/' + filePath;
-                            }
-                            return dest;
-                        }
-                    },
-                    { // get js from the modularized components
-                        expand: true,
-                        flatten: true,
-                        cwd: '<%= dirs.components.root %>/',
-                        src: ['**/**/scripts/**.js'],
-                        dest: '<%= dirs.temp %>/js/components'
-                    },
-                    { // get examples from the modularized components
-                        expand: true,
-                        cwd: '<%= dirs.components.root %>/',
-                        src: ['**/**/examples/**'],
-                        dest: '<%= dirs.build %>/examples',
-                        filter: 'isFile',
-                        rename: function(dest, src) {
-                            var match = src.match(/contrib\/(.*)\/examples\/(.*)/);
-                            if (match) {
-                                var component = match[1];
-                                var filePath = match[2];
-                                return dest + '/' + component + '/' + filePath;
-                            }
-                            return dest;
-                        }
-                    },
-                    { // get tests from the modularized components
-                        expand: true,
-                        flatten: true,
-                        cwd: '<%= dirs.components.root %>/',
-                        src: ['**/**/tests/**.js'],
-                        dest: '<%= dirs.build %>/tests'
-                    },
-
-                    { // get legacy components' less
-                        expand: true,
-                        cwd: '<%= dirs.legacy %>/components/styles',
-                        src: ['**'],
-                        dest: '<%= dirs.build %>/less/components'
-                    },
-
-                    { // get legacy components' tests -> will override the test runner html
-                        expand: true,
-                        cwd: '<%= dirs.legacy %>/components/tests',
-                        src: ['**'],
-                        dest: '<%= dirs.build %>/tests'
-                    },
-                    { // get legacy components' js
-                        expand: true,
-                        cwd: '<%= dirs.legacy %>/components/scripts',
-                        src: ['**'],
-                        dest: '<%= dirs.temp %>/js/components'
-                    },
-                    { // legacy js
-                        expand: true,
-                        filter: 'isFile',
-                        cwd: '<%= dirs.legacy %>/scripts',
-                        src: ['*.js'],
-                        dest: '<%= dirs.temp %>/js'
-                    },
-                    { // legacy resources
-                        expand: true,
-                        cwd: '<%= dirs.legacy %>/components/resources',
-                        src: ['**'],
-                        dest: '<%= dirs.build %>/res/components'
-                    },
-                    { // legacy examples
-                      // note: this will clobber an examples in core or modular components
-                        expand: true,
-                        cwd: '<%= dirs.legacy %>/components/examples',
-                        src: ['**'],
-                        dest: '<%= dirs.build %>/examples'
-                    },
-                    { // testrunner + dependencies
-                        expand: true,
-                        cwd: '<%= dirs.modules %>/',
-                        src: [
-                            'chai/chai.js',
-                            'chai-jquery/chai-jquery.js',
-                            'mocha/mocha.js',
-                            'mocha/mocha.css',
-                            'sinon/pkg/sinon.js'
-                        ],
-                        dest: '<%= dirs.build %>/tests/libs'
-                    },
-                    {   // add on: jquery-raf-animation
-                        // this has to be removed through a proper build system
-                        expand: true,
-                        cwd: 'addons/coralui-contrib-jquery-raf-animation/scripts',
-                        src: [
-                            '**'
-                        ],
-                        dest: '<%= dirs.build %>/js'
-                    }
-                ] // /retro files
-            },
-            externals: {
-                files: [
-                    { // get external dependencies
-                        expand: true,
-                        flatten: true,
-                        cwd: '<%= dirs.externals %>/',
-                        src: ['*/*.js'],
-                        dest: '<%= dirs.build %>/js/libs'
-                    }
-                ]
-            },
-            js_source: {
-                files: [
-                    { // copy all js temp files into build folder
-                        expand: true,
-                        cwd: '<%= dirs.temp %>/js',
-                        src: ['**'],
-                        dest: '<%= dirs.build %>/js/source'
-                    }
-                ] // js source files
-            },
-            release_archive: { // copy the archive to have a "latest" zip from the current build
-                files: [
-                    { // get build from the core
-                        expand: true,
-                        cwd: '<%= dirs.build %>/release/',
-                        src: ['cui-<%= meta.version %>.zip'],
-                        dest: '<%= dirs.build %>/release/',
-                        rename: function (dest, src) {
-                            return dest + '/cui-latest.zip';
-                        }
-                    },
-                    { // get external dependencies
-                        expand: true,
-                        cwd: '<%= dirs.build %>/release/',
-                        src: ['cui-<%= meta.version %>-full.zip'],
-                        dest: '<%= dirs.build %>/release/',
-                        rename: function (dest, src) {
-                            return dest + '/cui-latest-full.zip';
-                        }
-                    }
-                ] // release archive files
-            }
-        }, // copy
-
-        generate_imports: {
-          output: '@import-once \'components/{filename}\';\n',
-          dest: '<%= dirs.build %>/less/components.less',
-          legacy: {
-            src: '<%= dirs.legacy %>/components/styles/*.less'
           },
-          core: {
-            src: '<%= dirs.core.root %>/components/**/styles/*.less'
+          // copies the css files. All files are copied in the same level.
+          {
+            expand: true,
+            // goes into the modules folder.
+            cwd: '<%= dirs.modules %>/',
+            src: ['*/build/styles/**.css'],
+            dest: '<%= dirs.build %>/styles',
+            flatten: true
           },
-          components: {
-            src: '<%= dirs.components.root %>/**/**/styles/*.less'
-          }
-        },
+          // copies all the examples. They are copied preserving the hierarchy.
+          {
+            expand: true,
+            cwd: '<%= dirs.modules %>/',
+            src: ['*/build/examples/**.*'],
+            dest: '<%= dirs.build %>/examples',
+            // rename to remove the "examples" folder from source
+            rename: function (dest, src) {
+              var srcPath = src.split('/'),
+                  component = srcPath[srcPath.length - 4],
+                  filename = srcPath[srcPath.length - 1];
 
-        watch: {
-            options: {
-                livereload: true
-            },
-            core_scripts: {
-                files: [
-                    dirs.core.shared + '/scripts/**.js',
-                    dirs.core.tests + '/**/test.*.js',
-                    dirs.core.components + '/**/scripts/**.js',
-                    dirs.core.components + '/**/tests/**.js'
-                ],
-                tasks: ['subgrunt:core_quicktest', 'quicktest']
-            },
-            core_styles: {
-                files: [
-                    dirs.core.components + '/**/styles/**.less',
-                    dirs.core.shared + '/styles/**/**.less'
-                ],
-                tasks: ['subgrunt:core_quickless', 'quickless']
-            },
-            core_html: {
-                files: [
-                    dirs.core.components + '/**/examples/**.html'
-                ],
-                tasks: ['subgrunt:core_quickhtml', 'copy:retro'],
-                options: {
-                  nospawn: true
-                }
-            },
-            // watch: contrib content
-            contrib_scripts: {
-                files: [
-                    dirs.components.contrib + '/**/scripts/*.js',
-                    dirs.components.contrib + '/**/tests/*.js'
-                ],
-                tasks: ['quicktest']
-            },
-            contrib_less: {
-                files: [ dirs.components.contrib + '/**/styles/*.less'],
-                tasks: ['quickless']
-            },
-            contrib_html: {
-                files: [ dirs.components.contrib + '/**/examples/*.html'],
-                tasks: ['copy:retro']
-            },
-            // watch: legacy content
-            legacy_html: {
-                files: [
-                    dirs.legacy + '/components/examples/**/*.html'
-                ],
-                tasks: ['copy:retro']
-            },
-            legacy_scripts: {
-                files: [
-                    dirs.legacy + '/components/scripts/*.js',
-                    dirs.legacy + '/components/tests/test.*.js'
-                ],
-                tasks: ['quicktest']
-            },
-            legacy_styles: {
-                files: [
-                    dirs.legacy + '/components/styles/*.less'
-                ],
-                tasks: ['quickless']
+              return dest + '/' + component + '/' + filename;
             }
+          },
+          // copies the files from shared/scripts into build/js
+          {
+            expand: true,
+            cwd: '<%= dirs.modules %>/',
+            src: ['*/build/scripts/**.*'],
+            dest: '<%= dirs.build %>/scripts',
+            // rename to remove the "scripts" folder from source
+            rename: function (dest, src) {
+              var srcPath = src.split('/'),
+                  filename = srcPath[srcPath.length - 1];
 
-        },
-        // watch options
-
-        less: {
-            "cui-wrapped": {
-                options: {
-                    // grunt-contrib-less doesn't support template tags, use dirs instead
-                    paths: [ dirs.build + '/less/'],
-                    compress: true
-                },
-                files: {
-                    '<%= dirs.build %>/css/cui-wrapped.css': '<%= dirs.build %>/less/cui-wrapped.less'
-                }
-            },
-            "cui": {
-                options: {
-                    // grunt-contrib-less doesn't support template tags, use dirs instead
-                    paths: [dirs.build + '/less/'],
-                    compress: true
-                },
-                files: {
-                    '<%= dirs.build %>/css/cui.css': '<%= dirs.build %>/less/cui.less'
-                }
-            }
-        }, // less
-
-        cssmin: {
-            cui: {
-                files: {
-                    '<%= dirs.build %>/css/cui.min.css': '<%= dirs.build %>/css/cui.css',
-                    '<%= dirs.build %>/css/cui-wrapped.min.css': '<%= dirs.build %>/css/cui-wrapped.css'
-                }
-            }
-        }, // cssmin
-
-        concat: {
-            retro: {
-                src: getIncludes("cui", dirs.temp+'/js/'),
-                dest: '<%= dirs.build %>/js/<%= outputFileName %>.js'
-            }
-        }, // concat
-
-        uglify: {
-            retro: {
-                files: {
-                    '<%= dirs.build %>/js/CUI.min.js': ['<%= dirs.build %>/js/<%= outputFileName %>.js']
-                }
-            },
-            template_components: {
-                files: {
-                    '<%= dirs.build %>/js/CUI.Templates.min.js': ['<%= dirs.build %>/js/CUI.Templates.js']
-                }
-            }
-        }, // uglify
-      /*
-        TODO: remove use of handlebars templates
-        see https://issues.adobe.com/browse/CUI-1098
-      */
-        handlebars: {
-            components: {
-                options: {
-                    wrapped: true,
-                    namespace: 'CUI.Templates',
-                    processName: function (path) {
-                        // Pull the filename out as the template name
-                        return path.split('/').pop().split('.').shift();
-                    }
-                },
-                files: {
-                    '<%= dirs.build %>/js/CUI.Templates.js': [
-                    '<%= dirs.legacy %>/components/templates/*.hbs'
-                    ]
-                }
-            }
-        }, // handlebars
-
-        mocha: {
-            retro: {
-                src: ['<%= dirs.build %>/tests/index.html'],
-                options: {
-                    bail: true,
-                    log: true,
-                    run: true
-                }
-            }
-        }, // mocha
-
-        jsdoc : {
-            cui : {
-                src: ['<%= dirs.temp %>/js/**.js', '<%= dirs.temp %>/js/components/**.js'],
-                options: {
-                    destination: '<%= dirs.build %>/doc',
-                    template: 'res/docTemplate/',
-                    private: false
-                }
-            }
-        }, // jsdoc
-
-        compress: {
-            publish: {
-                options: {
-                    mode: 'tgz',
-                    archive: '<%= dirs.build %>/release/<%= meta.appName %>-<%= meta.version %>.tgz'
-                },
-                files: [
-                    {
-                        expand: true,
-                        cwd: '<%= dirs.build %>',
-                        src: [
-                            'css/**',
-                            'doc/**',
-                            'examples/**',
-                            'images/**',
-                            'js/**',
-                            'less/**',
-                            'res/**',
-                            'tests/**',
-                            '*.html'
-                        ],
-                        dest: 'package/'
-                    }, {
-                        expand: true,
-                        src: [
-                            'package.json',
-                            'README.md'
-                        ],
-                        dest: 'package/'
-
-                    }
-                ]
-            }
-        }, // compress
-
-        "shell": {
-            "local-publish": {
-                "command": "sh coralui-local-publish <%= meta.appName %> <%= dirs.build %>/release/<%= meta.appName %>-<%= meta.version %>.tgz",
-                "options": {
-                    stdout: true,
-                    stderr: true
-                }
-            },
-            "local-guide": {
-                "command": "sh coralui-local-guide <%= meta.appName %> <%= dirs.build %>/release/<%= meta.appName %>-<%= meta.version %>.tgz",
-                "options": {
-                    stdout: true,
-                    stderr: true
-                }
-            },
-            "publish": {
-                "command": "npm publish <%= dirs.build %>/release/<%= meta.appName %>-<%= meta.version %>.tgz",
-                "options": {
-                    stderr: true
-                }
-            }
-        },
-        // gh-pages
-        connect: {
-            server: {
-                options: {
-                    port: 9001,
-                    base: 'build',
-                    hostname: '*'
-                }
-            }
-        },
-        // connect
-        cssmetrics: {
-          coralui: {
-            src: [
-              '<%= dirs.build %>/css/cui.css',
-              '<%= dirs.build %>/css/cui.min.css'
-            ],
-            options: {
-              maxSelectors: 4096
+              return dest + '/' + filename;
             }
           }
-        // css metrics
-        }
+        ]
+      }
+    },
 
-    }); // end init config
+    // subgrunt is used to build the dependencies.
+    subgrunt: getSubgruntTasks(pkg.coral.imports),
 
-    grunt.task.registerTask('retro', [
-        'clean',
-        'subgrunt:core',
-        'copy:retro',
-        'generate-imports',
-        'less:cui',
-        'less:cui-wrapped',
-        'cssmin:cui',
-        'jshint:retro', // hint js in temp folder
-        'concat:retro',
-        'uglify:retro',
-        'copy:js_source',
-        'copy:externals'
-    ]);
+  });
+  // end init config
 
-      /*
-        TODO: remove use of handlebars templates
-        see https://issues.adobe.com/browse/CUI-1098
-      */
-    grunt.task.registerTask('full', [ // for a standalone upload e.g. pages
-        'retro',
-        'handlebars:components',
-        'uglify:template_components',
-        'mocha',
-        'cssmetrics',
-        'jsdoc'
-    ]);
+  grunt.task.registerTask('dev', [ // task for developers to work
+    'connect',
+    'watch'
+  ]);
 
-    grunt.task.registerTask('check', [ // supposed to be execute prior to any commit!
-        'full'
-    ]);
+  // performs the subgrunt task to compile every component dependance
+  grunt.task.registerTask('full', ['subgrunt', 'default']);
 
-    grunt.task.registerTask('quicktest', [
-        'clean:temp',
-        'copy:retro',
-        'jshint:retro',
-        'concat:retro',
-        'mocha',
-        'uglify:retro',
-        'copy:js_source',
-        'copy:externals'
-    ]);
-
-    grunt.task.registerTask('quickless', [
-        'copy:retro',
-        'generate-imports',
-        'less:cui',
-        'less:cui-wrapped',
-        'cssmetrics',
-        'cssmin:cui',
-    ]);
-
-    grunt.task.registerTask('quickbuild', [
-        'quickless',
-        'copy:externals'
-    ]);
-
-    grunt.task.registerTask('watch-start', [
-        'quickbuild',
-        'quicktest',
-        'watch'
-    ]);
-
-    grunt.task.registerTask('publish-build', [
-        'full',
-        'compress:publish'
-    ]);
-
-    grunt.task.registerTask('publish', [ // publish NPM package
-        'publish-build',
-        'shell:publish'
-    ]);
-
-    grunt.task.registerTask('local-publish', [ // publish NPM package locally
-        'publish-build',
-        'shell:local-publish'
-    ]);
-
-    grunt.task.registerTask('local-guide', [ // publish to local guide
-        'publish-build',
-        'shell:local-guide'
-    ]);
-
-    grunt.task.registerTask('dev', [ // task for developers to work
-        'connect',
-        'watch'
-    ]);
-
-    // Default task
-    grunt.task.registerTask('default', [
-        'retro'
-    ]);
-
+  // Default task
+  grunt.task.registerTask('default', ['clean', 'copy']);
 };
