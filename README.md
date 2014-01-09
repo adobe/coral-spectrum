@@ -1,15 +1,42 @@
-# Coral2
+coralui2
+===============
 
 The master branch currently represents the modularized build of coral. If you wish to use an older version, check the [release/1.x branch](https://git.corp.adobe.com/Coral/CoralUI/tree/release/1.x) branch.
 
-### Checking out the repository
-`gits clone git@git.corp.adobe.com:Coral/CoralUI.git`
+## Using gits
+1. Checking out the repository
+```
+gits clone git@git.corp.adobe.com:Coral/CoralUI.git
+```
 
-### Downloading the slave repositories
-`gits populate` - clones the repositories mentioned in the gitslave file.
+1. Downloading the slave repositories
+```
+gits populate
+```
 
-### Updating the sources
-`gits pull` - calls git pull on every repository.
+1. Updating the sources
+```
+gits pull
+```
+
+## Building
+
+2. Install Node Dependencies.
+```
+npm install
+```
+
+2. Build the package
+```
+grunt full
+```
+
+#### Grunt options
+
+* `grunt` - builds CoralUI without building each dependency.
+* `grunt clean` - cleans the build
+* `grunt full` - full build of the module. Every dependency is also build.
+
 
 ### Questions?
 More information on the 2.0 effort can be found in the [CoralUI 2.0 Scope Document](https://git.corp.adobe.com/Coral/CoralUI/wiki/CoralUI-2.0-Scope-and-Initial-Timeline). Please contact the [mailing list](mailto:CoralUI@adobe.com) for additional questions.  
