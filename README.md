@@ -7,6 +7,7 @@ The master branch currently represents the modularized build of coral. If you wi
 1. Checking out the repository
 ```
 git clone git@git.corp.adobe.com:Coral/CoralUI.git
+git checkout master
 ```
 
 1. Downloading the slave repositories
