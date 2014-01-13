@@ -23,25 +23,16 @@ module.exports = function(grunt) {
   // Read in package.json
   var pkg = grunt.file.readJSON('package.json');
 
-  var coralComponents = pkg.coral.imports;
-
-  // Meta and build configuration
-  var meta = {
-    version: pkg.version,
-    appName: pkg.name,
-    appWebSite: pkg.repository.url
-  };
-
+  // build configuration object for subgrunt
   function getSubgruntTasks(imports) {
 
-    var subrunttasks = {};
-
-    for(var k in imports) {
-      var key = imports[k];
-
-      subrunttasks[key] = {};
-      subrunttasks[key][dirs.modules + '/' + key] = 'full';
-    }
+    var subrunttasks = { };
+      //options: {npmInstall: false}
+    // };
+    imports.forEach( function (importModule) {
+      subrunttasks[importModule] = {};
+      subrunttasks[importModule][dirs.modules + '/' + importModule] = 'full';
+    });
 
     return subrunttasks;
   }
@@ -49,7 +40,6 @@ module.exports = function(grunt) {
   grunt.initConfig({
 
     dirs: dirs,
-    meta: meta,
 
     // Task definitions
     clean: {
@@ -60,13 +50,12 @@ module.exports = function(grunt) {
       res_components: {
         files: [
           {
-            // copies the LESS files
             expand: true,
             // goes into the modules folder.
             cwd: '<%= dirs.modules %>/',
             // copies the less files
-            src: ['*/build/less/**.less'],
-            dest: '<%= dirs.build %>/less',
+            src: ['*/build/styles/**.styl'],
+            dest: '<%= dirs.build %>/stylus',
             // rename to remove the "resources" folder from source
             rename: function (dest, src) {
               var srcPath = src.split('/'),
@@ -81,8 +70,8 @@ module.exports = function(grunt) {
             expand: true,
             // goes into the modules folder.
             cwd: '<%= dirs.modules %>/',
-            src: ['*/build/styles/**.css'],
-            dest: '<%= dirs.build %>/styles',
+            src: ['*/build/css/**.css'],
+            dest: '<%= dirs.build %>/css',
             flatten: true
           },
           // copies all the examples. They are copied preserving the hierarchy.
