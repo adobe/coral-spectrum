@@ -11,18 +11,33 @@
     "grunt-contrib-less": "~0.5.2",
     "grunt-contrib-connect":"~0.5.0",
     "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-concat": "~0.3.0n",
+    "grunt-contrib-uglify": "~0.2.0",
     "grunt-contrib-watch": "~0.4.4",
-    "grunt-subgrunt": "~0.2.3"
+    "grunt-contrib-cssmin" : "~0.7.0",
+    "grunt-subgrunt": "~0.2.3",
+    "coralui-grunt-testrunner": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-testrunner.git#a0fa482371d7a3878d150844ad7cd02f1a4ad0c9",
+    "grunt-shell": "~0.6.1",
+    "load-grunt-config": "~0.7.0"
   },
+
   "dependencies": {
-    "coralui-commons": "git+ssh://git@git.corp.adobe.com:Coral/coralui-commons.git",
-    "coralui-core": "git+ssh://git@git.corp.adobe.com:Coral/coralui-core.git",
-    "coralui-component-popover": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-popover.git"
+    "coralui-commons": "git+ssh://git@git.corp.adobe.com:Coral/coralui-commons.git#cb5a6de975bd8bb95a3f23cb73cde7aba76cbbf0",
+    "coralui-core": "git+ssh://git@git.corp.adobe.com:Coral/coralui-core.git#8bb7e67d83f1053b7cdb584140895ede14d3e331",
+    "coralui-component-alert": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-alert.git#c613b114a162e7fe344b3219e74cfbf30cdf6fa5"
   },
+
   "coral": {
-    "imports": [
-      "coralui-commons",
-      "coralui-core"
-    ]
+    "jsNamespace": "CUI",
+    "order": {
+      "scripts": [
+        "CUI.Alert.js",
+        "CUI.NumberInput.js"
+      ],
+      "component-css" : [
+        "coralui-component-alert"
+      ]
+    }
   }
+
 }
