@@ -18,38 +18,15 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-subgrunt');
+  grunt.loadNpmTasks('coralui-grunt-dependenciesbuilder');
+  grunt.loadNpmTasks('coralui-grunt-releasepackage');
 
   // Read in package.json
   var pkg = grunt.file.readJSON('package.json');
 
-  var coralComponents = pkg.coral.imports;
-
-  // Meta and build configuration
-  var meta = {
-    version: pkg.version,
-    appName: pkg.name,
-    appWebSite: pkg.repository.url
-  };
-
-  function getSubgruntTasks(imports) {
-
-    var subrunttasks = {};
-
-    for(var k in imports) {
-      var key = imports[k];
-
-      subrunttasks[key] = {};
-      subrunttasks[key][dirs.modules + '/' + key] = 'full';
-    }
-
-    return subrunttasks;
-  }
-
   grunt.initConfig({
 
     dirs: dirs,
-    meta: meta,
 
     // Task definitions
     clean: {
@@ -118,8 +95,17 @@ module.exports = function(grunt) {
       }
     },
 
-    // subgrunt is used to build the dependencies.
-    subgrunt: getSubgruntTasks(pkg.coral.imports),
+    // builds any required coral dependency
+    coraluidependenciesbuilder: {
+      options: pkg,
+      default: {}
+    },
+
+    // releases the module
+    coraluireleasepackage: {
+      options: pkg,
+      default: {}
+    },
 
   });
   // end init config
@@ -129,8 +115,8 @@ module.exports = function(grunt) {
     'watch'
   ]);
 
-  // performs the subgrunt task to compile every component dependance
-  grunt.task.registerTask('full', ['subgrunt', 'default']);
+  // builds all the dependencies and performs the build
+  grunt.task.registerTask('full', ['coraluidependenciesbuilder', 'default']);
 
   // Default task
   grunt.task.registerTask('default', ['clean', 'copy']);

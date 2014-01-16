@@ -1,6 +1,8 @@
 {
   "name": "coralui",
+  "description":"CoralUI package builder",
   "version": "2.0.0",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://git.corp.adobe.com/Coral/CoralUI"
@@ -12,7 +14,8 @@
     "grunt-contrib-connect":"~0.5.0",
     "grunt-contrib-copy": "~0.4.1",
     "grunt-contrib-watch": "~0.4.4",
-    "grunt-subgrunt": "~0.2.3"
+    "coralui-grunt-dependenciesbuilder": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-dependenciesbuilder.git",
+    "coralui-grunt-releasepackage": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-releasepackage.git"
   },
   "dependencies": {
     "coralui-commons": "git+ssh://git@git.corp.adobe.com:Coral/coralui-commons.git",
