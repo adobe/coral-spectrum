@@ -4,6 +4,7 @@
 "../coralui-component-select" "packages/components/select"
 "../coralui-component-selectlist" "packages/components/selectlist"
 "../coralui-component-datepicker" "packages/components/datepicker"
+"../coralui-component-fileupload" "packages/components/fileupload"
 "../coralui-component-popover" "packages/components/popover"
 "../coralui-component-tooltip" "packages/components/tooltip"
 "../coralui-component-tabs" "packages/components/tabs"
