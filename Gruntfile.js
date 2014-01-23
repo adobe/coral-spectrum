@@ -26,15 +26,18 @@ module.exports = function(grunt) {
   // expose package.json for expansion as <%= package.foo %>
   require('load-grunt-config')(grunt, configOptions);
 
+  // load coraui tasks not picked up by load config matching
   grunt.loadNpmTasks('coralui-grunt-testrunner');
 
   // load local tasks
   grunt.loadTasks('grunt_tasks');
 
+
   grunt.task.registerTask('dev', [ // task for developers to work
     'connect',
     'watch'
   ]);
+
 
   // performs the subgrunt task to compile every component dependance
   grunt.task.registerTask('full', ['build-dependencies', 'default']);
