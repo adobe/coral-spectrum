@@ -1,6 +1,6 @@
 module.exports = {
 
   coralui: {
-    files: { 'build/css/coral.min.css': 'build/css/coral.css' }
+    files: { '<%= dirs.build %>/<%= dirs.css %>/coral.min.css': '<%= dirs.build %>/<%= dirs.css %>/coral.css' }
   }
 }

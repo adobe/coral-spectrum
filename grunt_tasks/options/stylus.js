@@ -8,7 +8,7 @@ module.exports = {
       ]
     },
     files: {
-      'build/css/coral.css': './temp/index.styl'
+      '<%= dirs.build %>/<%= dirs.css %>/coral.css': './<%= dirs.temp %>/index.styl'
     }
   }
 
