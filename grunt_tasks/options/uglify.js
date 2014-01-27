@@ -2,8 +2,8 @@
 module.exports = {
   coralui: {
     files: {
-      '<%= dirs.build%>/<%= dirs.js %>/<%= package.coral.jsNamespace %>.min.js':
-      ['<%= dirs.build%>/<%= dirs.js %>/<%= package.coral.jsNamespace %>.js']
+      '<%= dirs.build %>/<%= dirs.js %>/coral.min.js':
+      ['<%= dirs.build %>/<%= dirs.js %>/coral.js']
     }
   }
 }

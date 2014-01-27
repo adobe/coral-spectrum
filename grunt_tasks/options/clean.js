@@ -1,4 +1,5 @@
 // Clean Grunt Task Configuration
 module.exports = {
-  build: '<%= dirs.build %>'
+  build: '<%= dirs.build %>',
+  temp: '<%= dirs.temp %>'
 }

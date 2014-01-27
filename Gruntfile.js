@@ -1,4 +1,4 @@
-/*global module:false*/
+  /*global module:false*/
 module.exports = function(grunt) {
 
   var configOptions = {
@@ -13,10 +13,14 @@ module.exports = function(grunt) {
         shared: 'shared',
         css: 'css',
         styles: 'styles',
+        styl: 'styl',
         scripts: 'scripts',
         js: 'js',
+        resources: 'resources',
         components: 'components',
-        tests: 'tests'
+        examples: 'examples',
+        tests: 'tests',
+        temp: 'temp',
       }
     }
   }
