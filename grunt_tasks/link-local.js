@@ -2,35 +2,78 @@ module.exports = function(grunt) {
 
   grunt.registerTask('link-local', "Runs 'npm link' for developing coralui packages locally", function() {
 
+    var targets = grunt.option('link-targets') || 'all';
+
     var dirs = grunt.config('dirs');
-    var coralPackages = grunt.file.expand( { cwd: dirs.packages },'coralui-co*')
-    grunt.log.ok("Found " + coralPackages.length + " packages to link");
+    var commonsPath = dirs.packages + '/'+ dirs.commons;
+    var corePath = dirs.packages + '/'+ dirs.core;
+    var componentsPath = dirs.packages + '/'+ dirs.components;
+    var coralComponents;
 
-    coralPackages.forEach( function (pkgName) {
-      grunt.verbose.writeln('link-local setting command:', 'npm link ' + dirs.packages + "/" + pkgName);
+    grunt.verbose.writeln("Targets:", targets);
 
-      var cmdString = 'npm link ' + dirs.packages + "/" + pkgName;
+    if (targets.toLowerCase() === 'all') {
 
-      // extra linking for components and core
-      if ( pkgName.indexOf('commons') == -1 ) {
-        cmdString += ' && cd ';
-        cmdString += dirs.packages + "/" + pkgName;
-        cmdString += ' && npm link ../coralui-commons';
+      grunt.log.ok('No argument given, assuming \'all\' ...');
+      grunt.log.writeln('  Pass arguments using --link-targets=\'targets\'');
+      grunt.log.writeln('  Targets can be \'componentName\' or a comma separated list of component names');
+      coralComponents = grunt.file.expand( { cwd: componentsPath},'*');
 
-        // just components link to core
-        if ( pkgName.indexOf('core') == -1 ) {
-          cmdString += ' && npm link ../coralui-core'
-        }
-      }
+    } else {
 
-      grunt.config.set('shell.npmLink-' + pkgName, {
-        command: cmdString,
-        options: { stdout:true}
-      });
+      coralComponents = grokTargets(targets);
 
-      grunt.log.ok("Linking: " + pkgName);
-      grunt.task.run('shell:npmLink-' + pkgName);
+    }
+
+    grunt.log.writeln("Found " + coralComponents.length + " components to link");
+
+    // link commons a core to top level
+    npmLink(dirs.packages, 'commons');
+    npmLink(dirs.packages, 'core');
+
+    coralComponents.forEach( function (pkgName) {
+      var path = dirs.packages + "/" + dirs.components ;
+      // set extra shell instructions
+      // to link component core and commons
+      var extraCommands = ' && cd ';
+      extraCommands += path + "/" + pkgName;
+      extraCommands += ' && npm link ../../commons';
+      extraCommands += ' && npm link ../../core';
+
+      npmLink(path, pkgName, extraCommands);
     });
 
   }); // end link-local
+
+
+  function npmLink(path, pkg, extras) {
+
+    grunt.log.ok('Linking:', pkg);
+    var cmdString = 'npm link ' + path + '/' + pkg;
+
+    if (extras) {
+      cmdString += extras;
+    }
+
+    grunt.config.set('shell.npmLink-' + pkg, {
+      command: cmdString,
+      options: { stdout:true}
+    });
+
+    grunt.task.run('shell:npmLink-' + pkg);
+  }
+
+
+  // create array from CSV, or just push if not CSV
+  function grokTargets(targets) {
+    var result = [];
+    if (targets.indexOf(',') > 0) {
+      result = result.concat(targets.split(','));
+    } else {
+      result.push(targets);
+    }
+    return result;
+  }
+
+
 }
