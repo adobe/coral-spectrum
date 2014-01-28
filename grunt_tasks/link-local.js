@@ -2,30 +2,30 @@ module.exports = function(grunt) {
 
   grunt.registerTask('link-local', "Runs 'npm link' for developing coralui packages locally", function() {
 
-    var targets = grunt.option('link-targets') || 'all';
+    var targets = grunt.option('link-targets');
 
     var dirs = grunt.config('dirs');
     var commonsPath = dirs.packages + '/'+ dirs.commons;
     var corePath = dirs.packages + '/'+ dirs.core;
     var componentsPath = dirs.packages + '/'+ dirs.components;
-    var coralComponents;
+    var coralComponents = [];
 
     grunt.verbose.writeln("Targets:", targets);
 
-    if (targets.toLowerCase() === 'all') {
-
-      grunt.log.ok('No argument given, assuming \'all\' ...');
-      grunt.log.writeln('  Pass arguments using --link-targets=\'targets\'');
-      grunt.log.writeln('  Targets can be \'componentName\' or a comma separated list of component names');
-      coralComponents = grunt.file.expand( { cwd: componentsPath},'*');
-
+    if (!targets) {
+      grunt.log.ok('No argument given, cannot link compnents ...');
+      grunt.log.writeln('  Pass arguments using --link-targets=');
+      grunt.log.writeln('  Targets can be a component name or a comma separated list of component names');
+      grunt.log.writeln('  Use --link-targets=all to link all components');
     } else {
 
-      coralComponents = grokTargets(targets);
-
+      if (targets.toLowerCase() === 'all') {
+        coralComponents = grunt.file.expand( { cwd: componentsPath},'*');
+      } else {
+        coralComponents = grokTargets(targets);
+      }
+      grunt.log.writeln("Found " + coralComponents.length + " components to link");
     }
-
-    grunt.log.writeln("Found " + coralComponents.length + " components to link");
 
     // link commons a core to top level
     npmLink(dirs.packages, 'commons');
