@@ -24,23 +24,33 @@ module.exports = {
     ]
   },
 
-  examples: {
+  core_examples: {
     files: [
-      // copies all the examples. They are copied preserving the hierarchy - build/examples/component/*.html
+      // copies core examples preserving hierarchy build/examples/component/*.html
+      {
+        expand: true,
+        cwd: '<%= dirs.modules %>/coralui-core/<%= dirs.build %>',
+        src: ['examples/**/*.*'],
+        dest: '<%= dirs.build %>'
+      }
+    ]
+  },
+
+  component_examples: {
+    files: [
+      // copies component examples preserving hierarchy build/examples/component/*.html
       {
         expand: true,
         cwd: '<%= dirs.modules %>',
-        src: ['coralui-*/<%= dirs.build %>/<%= dirs.examples %>/**/*.*'],
-        dest: '<%= dirs.build %>',
+        src: ['coralui-component-*/<%= dirs.build %>/examples/**/*.*'],
+        dest: '<%= dirs.build %>/examples',
         rename: function (dest, src) {
-          // rename to replicate component build path
           var srcPath = src.split('/'),
-            path = srcPath[srcPath.length - 3],
-            component = srcPath[srcPath.length - 2],
-            filename = srcPath[srcPath.length - 1];
+            componentName = srcPath[srcPath.length - 2],
+            fileName = srcPath[srcPath.length - 1]
+            return dest + '/' + componentName + '/' + fileName;
 
-          return dest + '/' + path +'/' + component + '/' + filename;
-        } // /rename
+        }
       }
     ]
   },
