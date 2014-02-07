@@ -23,6 +23,7 @@
 "../coralui-component-selector" "packages/components/selector"
 "../coralui-component-shell" "packages/components/shell"
 "../coralui-component-slider" "packages/components/slider"
+"../coralui-component-switch" "packages/components/switch"
 "../coralui-component-table" "packages/components/table"
 "../coralui-component-tabs" "packages/components/tabs"
 "../coralui-component-taglist" "packages/components/taglist"
