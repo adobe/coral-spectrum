@@ -25,16 +25,31 @@
   },
 
   "dependencies": {
-    "coralui-commons": "git+ssh://git@git.corp.adobe.com:Coral/coralui-commons.git",
-    "coralui-core": "git+ssh://git@git.corp.adobe.com:Coral/coralui-core.git",
-    "coralui-component-numberinput": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-numberinput.git"
+    "coralui-commons": "git+ssh://git@git.corp.adobe.com:Coral/coralui-commons.git#2.0.0-pre",
+    "coralui-core": "git+ssh://git@git.corp.adobe.com:Coral/coralui-core.git#2.0.2",
+    "coralui-component-alert": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-alert.git#2.0.0-pre",
+    "coralui-component-fileupload": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-fileupload.git#2.0.0-pre",
+    "coralui-component-modal": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-modal.git#2.0.0-pre",
+    "coralui-component-numberinput": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-numberinput.git#2.0.0-pre",
+    "coralui-component-slider": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-slider.git#2.0.0-pre",
+    "coralui-component-taglist": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-taglist.git#2.0.0-pre",
+    "coralui-component-tooltip": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-tooltip.git#2.0.0-pre"
   },
 
   "coral": {
     "order": {
       "scripts": [
         "coralui-core/build/js/coral.js",
-        "coralui-component-numberinput/build/js/CUI.NumberInput.js"
+        "coralui-component-alert/build/js/CUI.Alert.js",
+        "coralui-component-fileupload/build/js/CUI.Util.HTTP.js",
+        "coralui-component-fileupload/build/js/CUI.FileUpload.js",
+        "coralui-component-fileupload/build/js/CUI.FileUpload.MimeTypes.js",
+        "coralui-component-modal/build/js/CUI.Modal.js",
+        "coralui-component-numberinput/build/js/CUI.NumberInput.js",
+        "coralui-component-taglist/build/js/CUI.TagList.js",
+        "coralui-component-tooltip/build/js/CUI.Tooltip.js",
+        "coralui-component-slider/build/js/CUI.Slider.js",
+        "coralui-component-slider/build/js/CUI.LabeledSlider.js"
       ]
 
     }
