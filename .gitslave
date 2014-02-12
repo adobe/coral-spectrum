@@ -25,7 +25,7 @@
 "../coralui-component-slider" "packages/components/slider"
 "../coralui-component-switch" "packages/components/switch"
 "../coralui-component-table" "packages/components/table"
-"../coralui-component-tabs" "packages/components/tabs"
+"../coralui-component-tabpanel" "packages/components/tabpanel"
 "../coralui-component-taglist" "packages/components/taglist"
 "../coralui-component-tooltip" "packages/components/tooltip"
 "../coralui-component-wizard" "packages/components/wizard"
