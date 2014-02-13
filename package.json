@@ -44,15 +44,15 @@
       "scripts": [
         "coralui-core/build/js/coral.js",
         "coralui-component-alert/build/js/CUI.Alert.js",
-        "coralui-component-alert/build/js/CUI.Popover.js",
+        "coralui-component-popover/build/js/CUI.Popover.js",
         "coralui-component-fileupload/build/js/CUI.Util.HTTP.js",
         "coralui-component-fileupload/build/js/CUI.FileUpload.js",
         "coralui-component-fileupload/build/js/CUI.FileUpload.MimeTypes.js",
         "coralui-component-modal/build/js/CUI.Modal.js",
         "coralui-component-numberinput/build/js/CUI.NumberInput.js",
-        "coralui-component-taglist/build/js/CUI.SelectList.js",
+        "coralui-component-selectlist/build/js/CUI.SelectList.js",
         "coralui-component-taglist/build/js/CUI.TagList.js",
-        "coralui-component-taglist/build/js/CUI.Autocomplete.js",
+        "coralui-component-autocomplete/build/js/CUI.Autocomplete.js",
         "coralui-component-tooltip/build/js/CUI.Tooltip.js",
         "coralui-component-slider/build/js/CUI.Slider.js",
         "coralui-component-slider/build/js/CUI.LabeledSlider.js"
