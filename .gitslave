@@ -9,7 +9,6 @@
 #"../coralui-component-columnview" "packages/components/columnview"
 "../coralui-component-cyclebutton" "packages/components/cyclebutton"
 "../coralui-component-datepicker" "packages/components/datepicker"
-"../coralui-component-dialog" "packages/components/dialog"
 "../coralui-component-dragaction" "packages/components/dragaction"
 "../coralui-component-draggable" "packages/components/draggable"
 "../coralui-component-fileupload" "packages/components/fileupload"
