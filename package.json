@@ -1,7 +1,7 @@
 {
   "name": "coralui",
-  "description":"CoralUI package builder",
-  "version": "2.0.0",
+  "description": "CoralUI package builder",
+  "version": "2.0.0-pre1",
   "private": true,
   "repository": {
     "type": "git",
@@ -10,12 +10,12 @@
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-clean": "~0.4.1",
-    "grunt-contrib-connect":"~0.5.0",
+    "grunt-contrib-connect": "~0.5.0",
     "grunt-contrib-copy": "~0.4.1",
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-uglify": "~0.2.0",
     "grunt-contrib-watch": "~0.4.4",
-    "grunt-contrib-cssmin" : "~0.7.0",
+    "grunt-contrib-cssmin": "~0.7.0",
     "grunt-contrib-stylus": "~0.12.0",
     "grunt-subgrunt": "~0.2.3",
     "grunt-shell": "~0.6.1",
@@ -23,7 +23,6 @@
     "coralui-grunt-releasepackage": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-releasepackage.git",
     "load-grunt-config": "~0.7.0"
   },
-
   "dependencies": {
     "coralui-commons": "git+ssh://git@git.corp.adobe.com:Coral/coralui-commons.git#2.0.0-pre",
     "coralui-core": "git+ssh://git@git.corp.adobe.com:Coral/coralui-core.git#2.0.7",
@@ -46,7 +45,6 @@
     "coralui-component-tooltip": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-tooltip.git#2.0.0-pre",
     "coralui-component-wizard": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-wizard.git#2.0.0-pre"
   },
-
   "coral": {
     "order": {
       "scripts": [
@@ -71,8 +69,6 @@
         "coralui-component-autocomplete/build/js/CUI.Autocomplete.js",
         "coralui-component-charactercount/build/js/CUI.CharacterCount.js"
       ]
-
     }
   }
-
 }
