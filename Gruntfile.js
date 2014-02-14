@@ -30,7 +30,10 @@ module.exports = function(grunt) {
   // expose package.json for expansion as <%= package.foo %>
   require('load-grunt-config')(grunt, configOptions);
 
+  grunt.config('coralui-releasepackage', grunt.file.readJSON('package.json'));
+
   // load coraui tasks not picked up by load config matching
+  grunt.loadNpmTasks('coralui-grunt-releasepackage');
   grunt.loadNpmTasks('coralui-grunt-testrunner');
 
   // load local tasks
@@ -52,5 +55,10 @@ module.exports = function(grunt) {
   // run tests if desired
   grunt.task.registerTask('run-tests', ['coralui-testrunner']);
 
+  // Releases the current package
+  grunt.task.registerTask('release', [
+    'default',
+    'coralui-releasepackage'
+  ]);
 
 };
