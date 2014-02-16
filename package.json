@@ -46,7 +46,7 @@
     "coralui-component-tabpanel": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-tabpanel.git#2.0.0",
     "coralui-component-taglist": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-taglist.git#2.0.1",
     "coralui-component-tooltip": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-tooltip.git#2.0.0-pre",
-    "coralui-component-wizard": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-wizard.git#2.0.0-pre"
+    "coralui-component-wizard": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-wizard.git#2.0.0"
   },
   "coral": {
     "order": {
