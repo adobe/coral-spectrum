@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Radio-group</title>
+
+    <link rel="stylesheet" href="../../css/coral.css">
+    <!-- typekit is needed for proper fonts -->
+    <script src="../../js/typekit.js"></script>
+
+    <style>
+        h1, h2 {
+            margin-bottom: 1rem; /* no margin for heading, seriously!? */
+        }
+    </style>
+</head>
+<body class="coral-Text">
+<div style="padding: 2rem;">
+    <h1>Radio-group</h1>
+
+    <h2>Horizontal</h2>
+    <pre>/**
+ * Indicates that the radio-group is using horizontal layout, where the radios are positioned side by side.
+ */
+.coral-RadioGroup.coral-RadioGroup--horizontal</pre>
+    <div class="coral-RadioGroup coral-RadioGroup--horizontal" id="vtest-radio-group-horizontal">
+        <label class="coral-Label coral-Radio"><input type="radio" class="coral-Radio-input"/><span class="coral-Radio-description">Digital Marketer</span></label>
+        <label class="coral-Label coral-Radio"><input type="radio" class="coral-Radio-input"/><span class="coral-Radio-description">Creative</span></label>
+        <label class="coral-Label coral-Radio"><input type="radio" class="coral-Radio-input"/><span class="coral-Radio-description">Marketing Executive / CMO</span></label>
+    </div>
+
+    <h2>Vertical</h2>
+    <pre>/**
+ * Indicates that the radio-group is using vertical layout, where the radios are positioned one above the other.
+ */
+.coral-RadioGroup.coral-RadioGroup--vertical</pre>
+    <div class="coral-RadioGroup coral-RadioGroup--vertical" id="vtest-radio-group-vertical">
+        <label class="coral-Label coral-Radio"><input type="radio" class="coral-Radio-input"/><span class="coral-Radio-description">Digital Marketer</span></label>
+        <label class="coral-Label coral-Radio"><input type="radio" class="coral-Radio-input"/><span class="coral-Radio-description">Creative</span></label>
+        <label class="coral-Label coral-Radio"><input type="radio" class="coral-Radio-input"/><span class="coral-Radio-description">Marketing Executive / CMO</span></label>
+    </div>
+
+    <h2>Horizontal with vertical radios</h2>
+    <pre>/**
+ * Indicates that the radio is using a layout where its label is positioned below its input.
+ */
+.coral-RadioGroup.coral-RadioGroup--labelsBelow</pre>
+    <div class="coral-RadioGroup coral-RadioGroup--labelsBelow" id="vtest-radio-group-horizontal-vertical">
+        <label class="coral-Radio"><input type="radio" class="coral-Radio-input"/><span class="coral-Radio-description">0</span></label>
+        <label class="coral-Radio"><input type="radio" class="coral-Radio-input"/><span class="coral-Radio-description">1</span></label>
+        <label class="coral-Radio"><input type="radio" class="coral-Radio-input"/><span class="coral-Radio-description">2</span></label>
+    </div>
+
+</div>
+</body>
+</html>

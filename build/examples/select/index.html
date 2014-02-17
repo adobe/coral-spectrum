@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Select</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/coral.js"></script>
+
+  <style>
+    body {
+      padding: 15px;
+    }
+
+    section {
+      border-top: 1px solid #C8C8C8;
+    }
+
+    .col {
+      float: left;
+      margin-right: 12px;
+      width: 400px;
+    }
+  </style>
+</head>
+<body class="coral-Text coral-Background">
+  <h1>Select</h1>
+
+  <div class="col">
+    <section>
+      <h2>Static</h2>
+      <span class="coral-Select" data-init="select">
+        <button type="button" class="coral-Select-button coral-MinimalButton">
+          <span class="coral-Select-button-text">One</span>
+        </button>
+        <select class="coral-Select-select">
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+          <option value="4">One Two Three Four Five Six Seven Eight Nine Ten</option>
+        </select>
+      </span>
+
+      <h2>Multiple</h2>
+      <span class="coral-Select" data-init="select">
+        <button type="button" class="coral-Select-button coral-MinimalButton">
+          <span class="coral-Select-button-text">Select</span>
+        </button>
+        <select class="coral-Select-select" multiple="true">
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </span>
+
+      <h2>Group</h2>
+      <span class="coral-Select" data-init="select">
+        <button type="button" class="coral-Select-button coral-MinimalButton">
+          <span class="coral-Select-button-text">One</span>
+        </button>
+        <select class="coral-Select-select">
+          <optgroup label="Group 1">
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </optgroup>
+          <optgroup label="Group 2">
+            <option value="4">Fourth</option>
+            <option value="5">Fifth</option>
+          </optgroup>
+        </select>
+      </span>
+
+      <h2>Icon</h2>
+      <span class="coral-Select" data-init="select">
+        <button type="button" class="coral-Select-button coral-MinimalButton">
+          <i class="coral-Icon coral-Icon--globe coral-Select-icon"></i>
+          <span class="coral-Select-button-text">Austria</span>
+        </button>
+        <select class="coral-Select-select">
+          <option value="at">Austria</option>
+          <option value="ch">Switzerland</option>
+          <option value="us">United States</option>
+        </select>
+      </span>
+
+      <h2>Disabled</h2>
+      <span class="coral-Select" data-init="select">
+        <button type="button" class="coral-Select-button coral-MinimalButton is-disabled">
+          <span class="coral-Select-button-text">One</span>
+        </button>
+        <select class="coral-Select-select">
+          <option value="1">One</option>
+          <option value="2" selected="selected">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </span>
+
+      <h2>Error</h2>
+      <span class="coral-Select" data-init="select">
+        <button type="button" class="coral-Select-button coral-MinimalButton is-invalid">
+          <span class="coral-Select-button-text">One</span>
+        </button>
+        <select class="coral-Select-select">
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </span>
+
+      <h2>Native</h2>
+      <span class="coral-Select" data-init="select" data-nativewidget="true">
+        <button type="button" class="coral-Select-button coral-MinimalButton">
+          <span class="coral-Select-button-text">One</span>
+        </button>
+        <select class="coral-Select-select coral-Select-select--native">
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </span>
+
+      <h2>with Multi</h2>
+      <span class="coral-Select" data-init="select" data-nativewidget="true">
+        <button type="button" class="coral-Select-button coral-MinimalButton">
+          <span class="coral-Select-button-text">One</span>
+        </button>
+        <select class="coral-Select-select coral-Select-select--native" multiple="true">
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </span>
+
+      <h2>with Group</h2>
+      <span class="coral-Select" data-init="select" data-nativewidget="true">
+        <button type="button" class="coral-Select-button coral-MinimalButton">
+          <span class="coral-Select-button-text">One</span>
+        </button>
+        <select class="coral-Select-select coral-Select-select--native">
+          <optgroup label="Group 1">
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </optgroup>
+          <optgroup label="Group 2">
+            <option value="4">Fourth</option>
+            <option value="5">Fifth</option>
+          </optgroup>
+        </select>
+      </span>
+
+      <h2>Widget</h2>
+      <span class="coral-Select" data-init="select" data-nativewidgetonmobile="false">
+        <button type="button" class="coral-Select-button coral-MinimalButton">
+          <span class="coral-Select-button-text">One</span>
+        </button>
+        <select class="coral-Select-select">
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </span>
+    </section>
+  </div>
+
+  <div class="col coral—dark">
+    <section>
+      <h2>Static</h2>
+      <span class="coral-Select" data-init="select">
+        <button type="button" class="coral-Select-button coral-MinimalButton">
+          <span class="coral-Select-button-text">One</span>
+        </button>
+        <select class="coral-Select-select">
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+          <option value="4">One Two Three Four Five Six Seven Eight Nine Ten</option>
+        </select>
+      </span>
+
+      <h2>Multiple</h2>
+      <span class="coral-Select" data-init="select">
+        <button type="button" class="coral-Select-button coral-MinimalButton">
+          <span class="coral-Select-button-text">Select</span>
+        </button>
+        <select class="coral-Select-select" multiple="true">
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </span>
+
+      <h2>Group</h2>
+      <span class="coral-Select" data-init="select">
+        <button type="button" class="coral-Select-button coral-MinimalButton">
+          <span class="coral-Select-button-text">One</span>
+        </button>
+        <select class="coral-Select-select">
+          <optgroup label="Group 1">
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </optgroup>
+          <optgroup label="Group 2">
+            <option value="4">Fourth</option>
+            <option value="5">Fifth</option>
+          </optgroup>
+        </select>
+      </span>
+
+      <h2>Icon</h2>
+      <span class="coral-Select" data-init="select">
+        <button type="button" class="coral-Select-button coral-MinimalButton">
+          <i class="coral-Icon coral-Icon--globe coral-Select-icon"></i>
+          <span class="coral-Select-button-text">Austria</span>
+        </button>
+        <select class="coral-Select-select">
+          <option value="at">Austria</option>
+          <option value="ch">Switzerland</option>
+          <option value="us">United States</option>
+        </select>
+      </span>
+
+      <h2>Disabled</h2>
+      <span class="coral-Select" data-init="select">
+        <button type="button" class="coral-Select-button coral-MinimalButton is-disabled">
+          <span class="coral-Select-button-text">One</span>
+        </button>
+        <select class="coral-Select-select">
+          <option value="1">One</option>
+          <option value="2" selected="selected">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </span>
+
+      <h2>Error</h2>
+      <span class="coral-Select" data-init="select">
+        <button type="button" class="coral-Select-button coral-MinimalButton is-invalid">
+          <span class="coral-Select-button-text">One</span>
+        </button>
+        <select class="coral-Select-select">
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </span>
+
+      <h2>Native</h2>
+      <span class="coral-Select" data-init="select" data-nativewidget="true">
+        <button type="button" class="coral-Select-button coral-MinimalButton">
+          <span class="coral-Select-button-text">One</span>
+        </button>
+        <select class="coral-Select-select coral-Select-select--native">
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </span>
+
+      <h2>with Multi</h2>
+      <span class="coral-Select" data-init="select" data-nativewidget="true">
+        <button type="button" class="coral-Select-button coral-MinimalButton">
+          <span class="coral-Select-button-text">One</span>
+        </button>
+        <select class="coral-Select-select coral-Select-select--native" multiple="true">
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </span>
+
+      <h2>with Group</h2>
+      <span class="coral-Select" data-init="select" data-nativewidget="true">
+        <button type="button" class="coral-Select-button coral-MinimalButton">
+          <span class="coral-Select-button-text">One</span>
+        </button>
+        <select class="coral-Select-select coral-Select-select--native">
+          <optgroup label="Group 1">
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </optgroup>
+          <optgroup label="Group 2">
+            <option value="4">Fourth</option>
+            <option value="5">Fifth</option>
+          </optgroup>
+        </select>
+      </span>
+
+      <h2>Widget</h2>
+      <span class="coral-Select" data-init="select" data-nativewidgetonmobile="false">
+        <button type="button" class="coral-Select-button coral-MinimalButton">
+          <span class="coral-Select-button-text">One</span>
+        </button>
+        <select class="coral-Select-select">
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </span>
+    </section>
+  </div>
+
+  <script type="text/javascript">
+    $(".select-editable-autocomplete").select({
+      autocompleteCallback: function(handler, searchFor) {
+        var items = ["Apple", "Pear", "Banana", "Orange"];
+        var result = [];
+        for(var i = 0; i < items.length; i++) {
+          if (items[i].indexOf(searchFor) >= 0) result.push(items[i]);
+        }
+        handler(result, searchFor);
+      }
+    });
+  </script>
+</body>
+</html>
