@@ -26,6 +26,7 @@
   "dependencies": {
     "coralui-commons": "git+ssh://git@git.corp.adobe.com:Coral/coralui-commons.git#2.0.0-pre",
     "coralui-core": "git+ssh://git@git.corp.adobe.com:Coral/coralui-core.git#2.0.7",
+    "coralui-component-accordion": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-accordion.git#2.0.0",
     "coralui-component-alert": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-alert.git#2.0.0-pre",
     "coralui-component-autocomplete": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-autocomplete.git#2.0.1",
     "coralui-component-charactercount": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-charactercount.git#2.0.0",
@@ -43,6 +44,7 @@
     "coralui-component-selectlist": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-selectlist.git#2.0.3",
     "coralui-component-selector": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-select.git#2.0.0",
     "coralui-component-slider": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-slider.git#2.0.0-pre",
+    "coralui-component-switch": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-switch.git#2.0.0",
     "coralui-component-tabpanel": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-tabpanel.git#2.0.0",
     "coralui-component-taglist": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-taglist.git#2.0.1",
     "coralui-component-tooltip": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-tooltip.git#2.0.0-pre",
@@ -71,6 +73,7 @@
         "coralui-component-cyclebutton/build/js/CUI.CycleButton.js",
         "coralui-component-autocomplete/build/js/CUI.Autocomplete.js",
         "coralui-component-charactercount/build/js/CUI.CharacterCount.js",
+        "coralui-component-accordion/build/js/CUI.Accordion.js",
         "coralui-component-colorpicker/build/js/CUI.Util.Colorpicker.js",
         "coralui-component-colorpicker/build/js/CUI.Colorpicker.js",
         "coralui-component-dragaction/build/js/CUI.DragAction.js",
