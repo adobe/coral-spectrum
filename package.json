@@ -25,8 +25,8 @@
     "load-grunt-config": "~0.7.0"
   },
   "dependencies": {
-    "coralui-commons": "git+ssh://git@git.corp.adobe.com:Coral/coralui-commons.git#2.0.0-pre",
-    "coralui-core": "git+ssh://git@git.corp.adobe.com:Coral/coralui-core.git#2.0.8",
+    "coralui-commons": "git+ssh://git@git.corp.adobe.com:Coral/coralui-commons.git#2.0.0",
+    "coralui-core": "git+ssh://git@git.corp.adobe.com:Coral/coralui-core.git#2.0.9",
     "coralui-component-accordion": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-accordion.git#2.0.0",
     "coralui-component-alert": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-alert.git#2.0.0-pre",
     "coralui-component-autocomplete": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-autocomplete.git#2.0.2",
@@ -43,7 +43,7 @@
     "coralui-component-popover": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-popover.git#2.0.1",
     "coralui-component-select": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-select.git#2.0.3",
     "coralui-component-selectlist": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-selectlist.git#2.0.3",
-    "coralui-component-selector": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-select.git#2.0.0",
+    "coralui-component-selector": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-selector.git#2.0.0",
     "coralui-component-slider": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-slider.git#2.0.0-pre",
     "coralui-component-switch": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-switch.git#2.0.0",
     "coralui-component-tabpanel": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-tabpanel.git#2.0.0",
@@ -78,7 +78,9 @@
         "coralui-component-colorpicker/build/js/CUI.Util.Colorpicker.js",
         "coralui-component-colorpicker/build/js/CUI.Colorpicker.js",
         "coralui-component-dragaction/build/js/CUI.DragAction.js",
-        "coralui-component-multifield/build/js/CUI.Multifield.js"
+        "coralui-component-multifield/build/js/CUI.Multifield.js",
+        "coralui-component-multifield/build/js/CUI.ColumnView.js",
+        "coralui-component-multifield/build/js/shell.js"
       ]
     }
   }
