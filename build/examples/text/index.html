@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>coral-Text</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+  <!-- typekit is needed for proper fonts -->
+  <script src="../../js/typekit.js"></script>
+
+  <style>
+    body {
+      padding: 15px;
+    }
+
+    section {
+      padding: 15px;
+    }
+  </style>
+</head>
+<body class="u-clearFix">
+
+<h1>coral-Text applied to ancestor</h1>
+
+<section class="coral-Text">
+  <p>Here is a paragraph with an <a href="#">example link</a>.</p>
+</section>
+
+<h1>coral-Text on higher ancestor than dark theme</h1>
+
+<section class="coral-Text">
+  <p class="coral--dark coral-Background">Here is a paragraph with an <a href="#">example link</a>.</p>
+</section>
+
+<h1>Dark theme on higher ancestor than coral-Text</h1>
+
+<section class="coral--dark">
+  <p class="coral-Text coral-Background">Here is a paragraph with an <a href="#">example link</a>.</p>
+</section>
+
+<h1>Without coral-Text</h1>
+
+<section>
+  <p>Here is a paragraph with an <a href="#">example link</a>.</p>
+</section>
+
+</body>
+</html>
