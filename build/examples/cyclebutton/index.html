@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Cycle Button</title>
+
+
+  <link rel="stylesheet" href="../../css/coral.css">
+
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/coral.js"></script>
+
+  <style>
+    body {
+      padding: 15px;
+    }
+
+    section {
+      margin: 20px;
+    }
+
+    .col {
+      float: left;
+      padding: 5px 20px;
+    }
+
+    h1 {
+      padding-top: 10px;
+    }
+  </style>
+</head>
+<body class="coral-Text coral-Background">
+  <section>
+    <h1>Cycle Button</h1>
+
+    <p>A component that show the current active item. Only one item can be active at the same time.
+      When clicked, the next item of the active is shown and the click is triggered at that next item instead.
+      If the last item is clicked, then the first item is shown and triggered accordingly.</p>
+
+    <div class="col">
+      <span class="coral-CycleButton" data-init="cyclebutton">
+        <button class="coral-CycleButton-button coral-Button coral-Button--quiet is-active" type="button" title="Card"><i class="coral-Icon coral-Icon--viewCard coral-Icon--sizeL"></i></button>
+        <button class="coral-CycleButton-button coral-Button coral-Button--quiet" type="button" title="List"><i class="coral-Icon coral-Icon--viewList coral-Icon--sizeL"></i></button>
+        <button class="coral-CycleButton-button coral-Button coral-Button--quiet" type="button" title="Column"><i class="coral-Icon coral-Icon--viewColumn coral-Icon--sizeL"></i></button>
+      </span>
+    </div>
+
+    <div class="col coral--dark coral-Background">
+      <span class="coral-CycleButton" data-init="cyclebutton">
+        <button class="coral-CycleButton-button coral-Button coral-Button--quiet is-active" type="button" title="Card"><i class="coral-Icon coral-Icon--viewCard coral-Icon--sizeL"></i></button>
+        <button class="coral-CycleButton-button coral-Button coral-Button--quiet" type="button" title="List"><i class="coral-Icon coral-Icon--viewList coral-Icon--sizeL"></i></button>
+        <button class="coral-CycleButton-button coral-Button coral-Button--quiet" type="button" title="Column"><i class="coral-Icon coral-Icon--viewColumn coral-Icon--sizeL"></i></button>
+      </span>
+    </div>
+  </section>
+</body>
+</html>
