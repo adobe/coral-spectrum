@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Multifield</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/coral.js"></script>
+
+  <script>
+    jQuery(function($) {
+      // to test class api intialisation
+      var multifield = new CUI.Multifield({
+        element: '#apiMultifield'
+      });
+
+      // to test initialisation through jquery
+      $('#jQueryMultifield').multifield();
+    });
+  </script>
+
+  <style>
+    body {
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body class="coral-Background coral-Text">
+  <h1>Multifield Examples</h1>
+
+  <section>
+    <h2>Multifield initialised through Data API</h2>
+    <p>Widget template consists of a numberfield.</p>
+
+    <div class="coral-Multifield" data-init="multifield">
+      <ol class="coral-Multifield-list js-coral-Multifield-list">
+        <li class="coral-Multifield-input js-coral-Multifield-input">
+          <input type="text" class="coral-Textfield" value="10000">
+        </li>
+        <li class="coral-Multifield-input js-coral-Multifield-input">
+          <input type="text" class="coral-Textfield" value="20000">
+        </li>
+        <li class="coral-Multifield-input js-coral-Multifield-input">
+          <input type="text" class="coral-Textfield" value="30000">
+        </li>
+      </ol>
+      <script type="text/html" class="js-coral-Multifield-input-template">
+        <input type="text" class="coral-Textfield">
+      </script>
+    </div>
+  </section>
+
+  <section>
+    <h2>Multifield initialised through Data API</h2>
+    <p>Starts empty, only the plus icon is shown. Widget template consists of two text input fields.</p>
+
+    <div class="coral-Multifield" data-init="multifield">
+      <script type="text/html" class="js-coral-Multifield-input-template">
+        <div>
+          <input type="text" placeholder="Placeholder I" class="coral-Textfield">
+          <input type="text" placeholder="Placeholder II" class="coral-Textfield">
+        </div>
+      </script>
+    </div>
+  </section>
+
+  <section>
+    <h2>Multifield initialised through Data API- starting with one element</h2>
+    <p>Starting with one element, no move icon is shown. Widget template consists of a text area.</p>
+
+    <div class="coral-Multifield" data-init="multifield">
+      <ol class="coral-Multifield-list js-coral-Multifield-list">
+        <li class="coral-Multifield-input js-coral-Multifield-input">
+          <textarea class="coral-Textfield coral-Textfield--multiline">Some value</textarea>
+        </li>
+      </ol>
+      <script type="text/html" class="js-coral-Multifield-input-template">
+        <textarea class="coral-Textfield coral-Textfield--multiline"></textarea>
+      </script>
+    </div>
+  </section>
+
+  <section>
+    <h2>Multifield initialised through API Class</h2>
+    <p>Widget template consists of an input.</p>
+
+    <div id="apiMultifield" class="coral-Multifield">
+      <ol class="coral-Multifield-list js-coral-Multifield-list">
+        <li class="coral-Multifield-input js-coral-Multifield-input">
+          <input type="text" class="coral-Textfield">
+        </li>
+        <li class="coral-Multifield-input js-coral-Multifield-input">
+          <input type="text" class="coral-Textfield">
+        </li>
+      </ol>
+      <script type="text/html" class="js-coral-Multifield-input-template">
+        <input type="text" class="coral-Textfield">
+      </script>
+    </div>
+  </section>
+
+  <section>
+    <h2>Multifield initialised through JQuery</h2>
+    <p>Widget template consists of text input.</p>
+
+    <div id="jQueryMultifield" class="coral-Multifield">
+      <ol class="coral-Multifield-list js-coral-Multifield-list">
+        <li class="coral-Multifield-input js-coral-Multifield-input">
+          <input type="text" class="coral-Textfield" value="some value">
+        </li>
+        <li class="coral-Multifield-input js-coral-Multifield-input">
+          <input type="text" class="coral-Textfield" value="some other value">
+        </li>
+      </ol>
+      <script type="text/html" class="js-coral-Multifield-input-template">
+        <input type="text" class="coral-Textfield" value="any value">
+      </script>
+    </div>
+  </section>
+</body>
+</html>
