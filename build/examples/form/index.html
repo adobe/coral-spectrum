@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>coral-Form Examples</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+  <!-- typekit is needed for proper fonts -->
+  <script src="../../js/typekit.js"></script>
+
+
+  <style>
+    h1, h2 {
+      margin-bottom: 1rem; /* no margin for heading, seriously!? */
+    }
+
+    span.deprecated {
+      font-size: 0.75rem;
+      border: 1px solid #ff9c00;
+      border-radius: 5px;
+      background: #fff600;
+      margin: 0 5px;
+      padding: 1px;
+      color: #0a0a0a;
+    }
+  </style>
+</head>
+<body class="coral-Text coral-Background">
+  <div style="padding: 2rem;">
+    <h1>coral-Forms</h1>
+
+    <h2>Vertical Layout</h2>
+    <pre>/**
+ * Indicates that the form is using vertical layout, where the label is placed above the field.
+ */
+.coral-Form.coral-Form--vertical
+
+/**
+ * Indicates the fieldset.
+ * .fieldset is used instead of &lt;fieldset> as &lt;legend> cannot be styled as per requirement.
+ */
+.coral-Form--vertical .coral-Form-fieldset
+
+/**
+ * Indicates the legend of fieldset.
+ */
+.coral-Form--vertical .coral-Form-fieldset > .coral-Form-fieldset-legend
+
+/**
+ * Indicates the label of the field.
+ * .fieldlabel is used so that the styling is only applied to this label, not any &lt;label> inside the form.
+ */
+.coral-Form--vertical .coral-Form-fieldlabel
+
+/**
+ * Indicates the field.
+ */
+.coral-Form--vertical .coral-Form-field
+
+/**
+ * Indicates the field wrapper. A field wrapper MUST be used for field info and field error.
+ */
+.coral-Form--vertical .coral-Form-fieldwrapper
+
+/**
+ * Align a fieldwrapper right
+ */
+.coral-Form--vertical .coral-Form-fieldwrapper.coral-Form-fieldwrapper--alignRight
+
+/**
+ * Indicates the field info.
+ */
+.coral-Form--vertical .coral-Form-fieldwrapper .coral-Form-fieldinfo
+
+/**
+ * Indicates the field error.
+ */
+.coral-Form--vertical .coral-Form-fieldwrapper .coral-Form-fielderror</pre>
+
+    <form class="coral-Form coral-Form--vertical" style="width: 500px;">
+
+      <section id="vtest-form-fieldset" class="coral-Form-fieldset">
+        <h3 class="coral-Form-fieldset-legend">Section Title</h3>
+
+        <label class="coral-Form-fieldlabel is-disabled">Disabled Text</label>
+        <input class="coral-Form-field coral-Textfield" disabled="disabled" type="text" placeholder="Placeholder">
+
+        <label class="coral-Form-fieldlabel">Text</label>
+        <input class="coral-Form-field coral-Textfield" type="text" placeholder="Placeholder">
+
+        <label class="coral-Form-fieldlabel">Text</label>
+        <span class="coral-Form-field">Read only text</span>
+
+        <div class="coral-Form-fieldwrapper">
+          <label class="coral-Form-fieldlabel">Text</label>
+          <input class="coral-Form-field coral-Textfield" type="text" placeholder="Required" aria-required="true">
+          <span class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right"></span>
+        </div>
+
+        <div class="coral-Form-fieldwrapper">
+          <label class="coral-Form-fieldlabel">Text</label>
+          <span class="coral-Form-field">Read only text</span>
+          <span class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right"></span>
+        </div>
+      </section>
+      <section class="coral-Form-fieldset">
+        <h3 class="coral-Form-fieldset-legend">Section Title</h3>
+
+        <div class="coral-Form-fieldwrapper">
+          <label class="coral-Form-fieldlabel">Text</label>
+          <input class="coral-Form-field coral-Textfield" type="text" placeholder="Required" aria-required="true">
+        </div>
+
+        <label class="coral-Form-fieldlabel">Textarea</label>
+        <textarea class="coral-Form-field coral-Textfield coral-Textfield--multiline" placeholder="Placeholder" rows="4"></textarea>
+
+        <div class="coral-Form-fieldwrapper">
+          <label class="coral-Form-fieldlabel">Textarea</label>
+          <textarea class="coral-Form-field coral-Textfield coral-Textfield--multiline" placeholder="Required" rows="4" aria-required="true"></textarea>
+          <span class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right"></span>
+        </div>
+
+        <div class="coral-Form-fieldwrapper">
+          <label class="coral-Form-fieldlabel">Textarea</label>
+          <textarea class="coral-Form-field coral-Textfield coral-Textfield--multiline" placeholder="Required" rows="4" aria-required="true"></textarea>
+        </div>
+
+        <span class="coral-Form-field">Aligning buttons right</span>
+
+        <div class="coral-Form-fieldwrapper coral-Form-fieldwrapper--alignRight">
+          <button class="coral-Form-field coral-Button" type="button">Press me</button>
+
+          <button class="coral-Form-field coral-Button coral-Button--primary">Submit</button>
+        </div>
+      </section>
+
+      <section class="coral-Form-fieldset">
+        <h3 class="coral-Form-fieldset-legend">Section Title</h3>
+
+        <div class="coral-Form-fieldwrapper coral-Form-fieldwrapper--singleline">
+          <label class="coral-Form-field coral-Checkbox"><input class="coral-Checkbox-input" type="checkbox" name="check" checked><span class="coral-Checkbox-description">Checkbox</span></label>
+          <span class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right"></span>
+        </div>
+        <div class="coral-Form-fieldwrapper coral-Form-fieldwrapper--singleline">
+          <label class="coral-Form-field coral-Checkbox"><input class="coral-Checkbox-input" type="checkbox" name="check" checked><span class="coral-Checkbox-description">Checkbox</span></label>
+        </div>
+        <div class="coral-Form-fieldwrapper coral-Form-fieldwrapper--singleline">
+          <label class="coral-Form-field coral-Checkbox"><input class="coral-Checkbox-input" type="checkbox" name="check" checked><span class="coral-Checkbox-description">Checkbox</span></label>
+        </div>
+
+        <div class="coral-Form-fieldwrapper coral-Form-fieldwrapper--singleline">
+          <label class="coral-Form-field coral-Radio">
+            <input type="radio" class="coral-Radio-input" />
+            <span class="coral-Radio-description">Radio</span>
+          </label>
+          <span class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right"></span>
+        </div>
+        <div class="coral-Form-fieldwrapper coral-Form-fieldwrapper--singleline">
+          <label class="coral-Form-field coral-Radio">
+            <input type="radio" class="coral-Radio-input" />
+            <span class="coral-Radio-description">Radio</span>
+          </label>
+        </div>
+        <div class="coral-Form-fieldwrapper coral-Form-fieldwrapper--singleline">
+          <label class="coral-Form-field coral-Radio">
+            <input type="radio" class="coral-Radio-input" />
+            <span class="coral-Radio-description">Radio</span>
+          </label>
+        </div>
+        <label class="coral-Form-fieldlabel">Radio-group with horizontal layout </label>
+        <div class="coral-Form-field coral-RadioGroup--labelsBelow">
+            <label class="coral-Form-field coral-Radio">
+              <input type="radio" class="coral-Radio-input" />
+              <span class="coral-Radio-description">1</span>
+            </label>
+            <label class="coral-Form-field coral-Radio">
+              <input type="radio" class="coral-Radio-input" />
+              <span class="coral-Radio-description">2</span>
+            </label>
+            <label class="coral-Form-field coral-Radio">
+              <input type="radio" class="coral-Radio-input" />
+              <span class="coral-Radio-description">3</span>
+            </label>
+        </div>
+      </section>
+      <section class="coral-Form-fieldset">
+        <h3 class="coral-Form-fieldset-legend">Section Title</h3>
+
+        <div class="coral-Form-fieldwrapper">
+          <label class="coral-Form-fieldlabel">Text</label>
+          <input class="coral-Form-field coral-Textfield" type="text" placeholder="Required" aria-required="true">
+        </div>
+
+        <label class="coral-Form-fieldlabel">Textarea</label>
+        <textarea class="coral-Form-field coral-Textfield coral-Textfield--multiline" placeholder="Placeholder" rows="4"></textarea>
+
+        <div class="coral-Form-fieldwrapper">
+          <label class="coral-Form-fieldlabel">Textarea</label>
+          <textarea class="coral-Form-field coral-Textfield coral-Textfield--multiline" placeholder="Required" rows="4" aria-required="true"></textarea>
+          <span class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right"></span>
+        </div>
+      </section>
+    </form>
+    <!-- Dark Form example -->
+    <form class="coral-Form coral-Form--vertical coral-Background coral--dark" style="width: 500px; padding:5px;">
+      <section class="coral-Form-fieldset">
+        <h3 class="coral-Form-fieldset-legend">Section Title</h3>
+
+        <label class="coral-Form-fieldlabel">Text</label>
+        <input class="coral-Form-field coral-Textfield" type="text" placeholder="Placeholder">
+
+        <label class="coral-Form-fieldlabel">Text</label>
+        <span class="coral-Form-field">Read only text</span>
+      </section>
+      <section class="coral-Form-fieldset">
+        <h3 class="coral-Form-fieldset-legend">Section Title</h3>
+
+        <div class="coral-Form-fieldwrapper">
+          <label class="coral-Form-fieldlabel">Text</label>
+          <input class="coral-Form-field coral-Textfield" type="text" placeholder="Required" aria-required="true">
+        </div>
+      </section>
+    </form>
+
+    <h2>Aligned Layout</h2>
+    <pre>/**
+ * Indicates that the form is using aligned layout, where the label and the field are placed on the same line.
+ */
+.coral-Form.coral-Form--aligned
+
+/**
+ * Indicates the fieldset.
+ * .fieldset is used instead of &lt;fieldset> as &lt;legend> cannot be styled as per requirement.
+ */
+.coral-Form--aligned .coral-Form-fieldset
+
+/**
+ * Indicates the legend of fieldset.
+ */
+.coral-Form--aligned .coral-Form-fieldset > .coral-Form-fieldset-legend
+
+/**
+ * Indicates the label of the field.
+ * .fieldlabel is used so that the styling is only applied to this label, not any &lt;label> inside the form.
+ */
+.coral-Form--aligned .coral-Form-fieldlabel
+
+/**
+ * Indicates the field.
+ */
+.coral-Form--aligned .coral-Form-field
+
+/**
+ * Indicates the field wrapper. A field wrapper MUST be used for field info and field error.
+ */
+.coral-Form--aligned .coral-Form-fieldwrapper
+
+/**
+ * Indicates the field info.
+ */
+.coral-Form--aligned .coral-Form-fieldwrapper .coral-Form-fieldinfo
+
+/**
+ * Indicates the field error.
+ */
+.coral-Form--aligned .coral-Form-fieldwrapper .coral-Form-fielderror</pre>
+
+    <form class="coral-Form coral-Form--aligned" style="width: 500px;">
+      <section class="coral-Form-fieldset">
+        <h3 class="coral-Form-fieldset-legend">Section Title</h3>
+
+        <label class="coral-Form-fieldlabel">Text</label>
+        <input class="coral-Form-field coral-Textfield" type="text" placeholder="Placeholder">
+
+        <div class="coral-Form-fieldwrapper">
+          <label class="coral-Form-fieldlabel">Text</label>
+          <input class="coral-Form-field coral-Textfield" type="text" placeholder="Required" aria-required="true">
+          <span class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right"></span>
+        </div>
+
+        <div class="coral-Form-fieldwrapper">
+          <label class="coral-Form-fieldlabel">Text</label>
+          <input class="coral-Form-field coral-Textfield" type="text" placeholder="Required" aria-required="true">
+        </div>
+
+        <label class="coral-Form-fieldlabel">Textarea</label>
+        <textarea class="coral-Form-field coral-Textfield coral-Textfield--multiline" placeholder="Placeholder" rows="4"></textarea>
+
+        <div class="coral-Form-fieldwrapper">
+          <label class="coral-Form-fieldlabel">Textarea</label>
+          <textarea class="coral-Form-field coral-Textfield coral-Textfield--multiline" placeholder="Placeholder" rows="4" aria-required="true"></textarea>
+          <span class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right"></span>
+        </div>
+
+        <div class="coral-Form-fieldwrapper">
+          <label class="coral-Form-fieldlabel">Textarea</label>
+          <textarea class="coral-Form-field coral-Textfield coral-Textfield--multiline" placeholder="Required" rows="4" aria-required="true"></textarea>
+        </div>
+
+      </section>
+
+      <section class="coral-Form-fieldset">
+        <h3 class="coral-Form-fieldset-legend">Section Title</h3>
+
+        <div class="coral-Form-fieldwrapper">
+          <label class="coral-Form-fieldlabel">Checkbox</label>
+          <label class="coral-Form-field coral-Checkbox">
+            <input type="checkbox" name="check" class="coral-Checkbox-input"/>
+            <span class="coral-Checkbox-description">Checkbox</span></label>
+          <span class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right"></span>
+        </div>
+
+        <div class="coral-Form-fieldwrapper">
+          <label class="coral-Form-fieldlabel">Radio</label>
+          <label class="coral-Form-field coral-Radio"><input type="radio" name="radio"  class="coral-Radio-input">
+            <span class="coral-Radio-description">Radio</span></label>
+          <span class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right"></span>
+        </div>
+
+      </section>
+
+    <form>
+      <h2>No Layout (To Test "vertical-align")</h2>
+
+      <label>Text</label>
+      <input type="text" class="coral-Textfield">
+
+      <label>Textarea</label>
+      <textarea rows="4" class="coral-Textfield coral-Textfield--multiline"></textarea>
+
+      <label>Text with Error</label>
+      <input class="is-invalid" type="text" class="coral-Textfield">
+
+      <label>Textarea with Error</label>
+      <textarea class="is-invalid coral-Textfield coral-Textfield--multiline" rows="4"></textarea>
+
+      <label>Checkbox</label>
+      <label class="coral-Checkbox"><input class="coral-Checkbox-input" type="checkbox" checked><span class="coral-Checkbox-description">Checkbox</span></label>
+
+      <label>Radio</label>
+      <label class="coral-Checkbox coral-Checkbox--radio" class="radiofield"><input class="coral-Checkbox-input" type="radio" checked><span class="coral-Checkbox-description">Radio</span></label>
+
+    </form>
+  </div>
+</body>
+</html>
