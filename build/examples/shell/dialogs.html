@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CoralUI Shell 2.0 Endor - User Profile Component</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/libs/moment.js"></script>
+  <script src="../../js/coral.js"></script>
+
+  <script src="scripts/examples.js"></script>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <style type="text/css">
+
+    body {
+      padding: 15px;
+      width: auto;
+      height: auto;
+    }
+
+    pre {
+      font-size: 12px;
+    }
+
+    pre.prettyprint {
+      position: relative;
+      display: inline-block;
+      padding: 35px 15px 15px;
+      border: 1px solid #999;
+      background-color: white;
+      font-size: 12px;
+    }
+
+    pre.prettyprint:after {
+      content: "markup";
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      padding: 3px 7px;
+      font-size: 12px;
+      background-color: #f5f5f5;
+      border: 1px solid #999;
+    }
+
+  </style>
+</head>
+<body class="coral-Text coral-Background">
+  <h1>Dialogs</h1>
+  <h2>Notifications</h2>
+  <p>
+    Dialog used to show the notifications. All the included classes are required. <strong>.is-unread</strong>
+    is used to indicate when a notification entry has not been opened by the user.
+    The popover markup should be added outside of the BlackBar so that the overflow does not interfere with it.
+  </p>
+  <div id="endor-dialog-notifications">
+    <a class="endor-Badge" href="#notification-popup" data-toggle="popover" data-point-from="bottom" data-align-from="right">6</a>
+    <div id="notification-popup" class="coral-Popover">
+      <div class="endor-List">
+      <div class="endor-List-item endor-List-item--interactive endor-Notification is-unread">
+        Mark mentioned you in
+        <a href="#">Volkswagen 2013 Winter Campaign</a>
+      </div>
+      <div class="endor-List-item endor-List-item--interactive endor-Notification is-unread">
+        Evangline shared a new segment,
+        <a href="#">Instagram Spenders</a>
+        with you
+      </div>
+      <div class="endor-List-item endor-List-item--interactive endor-Notification">
+        Archana assigned you to review the latest version of
+        <a href="#">0435_Bikerman</a>
+      </div>
+      <div class="endor-List-item endor-List-item--interactive endor-Notification">
+        <a href="#">View all Notifications</a>
+      </div>
+    </div>
+    </div>
+  </div>
+  <pre class="prettyprint" data-src-id="endor-dialog-notifications"></pre>
+
+  <h2>Multi-tenant UserProfile</h2>
+  <p>
+    To ensure that the popover is pointing at the avatar, you will need to add an id to the avatar and use the <strong>data-point-at</strong>
+    option of the popover.
+  </p>
+  <div id="endor-dialog-multitenant">
+    <a class="endor-UserProfile" href="#user-account-multiple" data-point-at="#user-profile-avatar" data-toggle="popover" data-point-from="bottom" data-align-from="right">
+      <div class="endor-UserProfile-tenant">Volkswagen</div>
+      <div class="endor-UserProfile-avatar" id="user-profile-avatar">
+        <img  src="images/user/avatar.png" alt="avatar" />
+      </div>
+    </a>
+    <div id="user-account-multiple" class="coral-Popover">
+      <div class="endor-List">
+        <div class="endor-List-item endor-List-item--highlight endor-Account">
+          <a class="endor-Account-avatar" href="#edit" title="Edit">
+            <img src="images/user/avatar.png" alt="avatar"/>
+          </a>
+          <!-- endor-Account-configLink should be BEFORE the endor-Account-data -->
+          <a href="#user-preferences" class="endor-Account-configLink coral-Icon coral-Icon--gear coral-Icon--sizeM" title="User Preferences">
+          </a>
+          <div class="endor-Account-data">
+            <span class="endor-Account-name">Sally Springheart</span>
+            <span class="endor-Account-caption">Social Marketing Manager</span>
+          </div>
+        </div>
+        <a href="#" class="endor-List-item endor-List-item--interactive">Volkswagen</a>
+        <a href="#" class="endor-List-item endor-List-item--interactive">Nike Basketball - Europe West</a>
+        <a href="#" class="endor-List-item endor-List-item--interactive">Nike Basketball - Europe East</a>
+        <div class="endor-List-item endor-List-item--highlight">
+          <button class="coral-Button coral-Button--primary coral-Button--block">Sign out</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <pre class="prettyprint" data-src-id="user-account-multiple"></pre>
+
+  <h2>Single tenant UserProfile</h2>
+  <div id="endor-dialog-singletenant">
+    <a class="endor-UserProfile" href="#user-account-single" data-toggle="popover" data-point-from="bottom" data-align-from="right">
+      <div class="endor-UserProfile-avatar">
+        <img  src="images/user/avatar.png" alt="avatar" />
+      </div>
+    </a>
+    <div id="user-account-single" class="coral-Popover">
+      <div class="endor-List">
+        <div class="endor-List-item endor-List-item--highlight endor-Account">
+          <a class="endor-Account-avatar" href="#edit" title="Edit">
+            <img src="images/user/avatar.png" alt="avatar"/>
+          </a>
+          <!-- endor-Account-configLink should be BEFORE the endor-Account-data -->
+          <a href="#user-preferences" class="endor-Account-configLink coral-Icon coral-Icon--gear coral-Icon--sizeM" title="User Preferences">
+          </a>
+          <div class="endor-Account-data">
+            <span class="endor-Account-name">Sally Springheart</span>
+            <span class="endor-Account-caption">Social Marketing Manager</span>
+            <span class="endor-Account-caption">Volkswagen</span>
+          </div>
+        </div>
+        <div class="endor-List-item endor-List-item--highlight">
+          <button class="coral-Button coral-Button--primary coral-Button--block">Sign out</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <pre class="prettyprint" data-src-id="endor-dialog-singletenant"></pre>
+
+  <h2>Default avatar</h2>
+  <p>
+    To ensure that the popover is pointing at the avatar, you will need to add an id to the avatar and use the
+    <strong>data-point-at</strong>
+    option of the popover.
+  </p>
+  <div id="endor-dialog-multitenant-default">
+    <a class="endor-UserProfile" href="#user-account-multiple-default" title="User" data-toggle="popover" data-point-from="bottom" data-align-from="right">
+      <div class="endor-UserProfile-tenant">Volkswagen</div>
+      <div class="endor-UserProfile-avatar endor-UserProfile-avatar--default"></div>
+    </a>
+    <div id="user-account-multiple-default" class="coral-Popover">
+      <div class="endor-List">
+        <div class="endor-List-item endor-List-item--highlight endor-Account">
+          <a class="endor-Account-avatar endor-Account-avatar--default" href="#edit" title="Edit"></a>
+          <!-- endor-Account-configLink should be BEFORE the endor-Account-data -->
+          <a href="#user-preferences" class="endor-Account-configLink coral-Icon coral-Icon--gear coral-Icon--sizeM" title="User Preferences">
+          </a>
+          <div class="endor-Account-data">
+            <span class="endor-Account-name">Sally Springheart</span>
+            <span class="endor-Account-caption">Social Marketing Manager</span>
+          </div>
+        </div>
+        <a href="#" class="endor-List-item endor-List-item--interactive">Volkswagen</a>
+        <a href="#" class="endor-List-item endor-List-item--interactive">Nike Basketball - Europe West</a>
+        <a href="#" class="endor-List-item endor-List-item--interactive">Nike Basketball - Europe East</a>
+        <div class="endor-List-item endor-List-item--highlight">
+          <button class="coral-Button coral-Button--primary coral-Button--block">Sign out</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <pre class="prettyprint" data-src-id="endor-dialog-multitenant-default"></pre>
+
+  <h2>Help menu</h2>
+  <p>
+    When added to the BlackBar it requires the class
+    <strong>endor-Blackbar-item</strong>
+    .
+  </p>
+  <div id="endor-dialog-help" class="coral--dark coral-Background u-coral-clearFix">
+    <a class="endor-BlackBar-item endor-BlackBar-item--text" href="#help-popup" data-toggle="popover" data-point-from="bottom" data-align-from="right">Help</a>
+    <div id="help-popup" class="coral-Popover">
+      <div class="endor-List">
+        <div class="endor-List-item">
+          <div class="searchfield">
+            <div class="search">
+              <input placeholder="Search" type="text">
+              <button type="submit">Search</button>
+              <button type="reset">Clear</button>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="endor-List-item endor-List-item--interactive">What's New</a>
+        <a href="#" class="endor-List-item endor-List-item--interactive">Help Home</a>
+        <a href="#" class="endor-List-item endor-List-item--interactive">Community</a>
+        <a href="#" class="endor-List-item endor-List-item--interactive">Customer Care</a>
+      </div>
+    </div>
+  </div>
+  <pre class="prettyprint" data-src-id="endor-dialog-help"></pre>
+
+</body>
+</html>
