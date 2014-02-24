@@ -11,6 +11,7 @@
 "../coralui-component-datepicker" "packages/components/datepicker"
 "../coralui-component-dragaction" "packages/components/dragaction"
 "../coralui-component-draggable" "packages/components/draggable"
+"../coralui-component-drawer" "packages/components/drawer"
 "../coralui-component-fileupload" "packages/components/fileupload"
 "../coralui-component-fixedcolumn" "packages/components/fixedcolumn"
 "../coralui-component-modal" "packages/components/modal"
