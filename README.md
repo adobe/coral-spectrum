@@ -1,5 +1,5 @@
-coralui2
-===============
+CoralUI 2
+=========
 
 The master branch currently represents the modularized build of coral. If you wish to use an older version, check the [release/1.x branch](https://git.corp.adobe.com/Coral/CoralUI/tree/release/1.x) branch.
 
@@ -29,14 +29,14 @@ npm install
 
 2. Build the package
 ```
-grunt full
+grunt
 ```
 
 #### Grunt options
 
 * `grunt` - builds CoralUI without building each dependency.
 * `grunt clean` - cleans the build
-* `grunt full` - full build of the module. Every dependency is also build.
+* `grunt full` - full build of the module. Every dependency is also build (should not be required when ).
 
 
 ### Questions?
