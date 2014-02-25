@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Date Pickers</title>
+
+        <link rel="stylesheet" href="../../css/coral.css">
+        <script src="../../js/libs/moment.js"></script>
+        <script src="../../js/libs/jquery.js"></script>
+        <script src="../../js/libs/toe.js"></script>
+  
+        <script src="../../js/coral.js"></script>
+
+        <script>
+            $(document).ready(function(){
+                if ($('#myDatepicker').length > 0) {
+                    var datepicker = new CUI.Datepicker({
+                      element: '#myDatepicker',
+                      displayedFormat: 'DD MMMM  YYYY'
+                    });
+                }
+                if ($('#myDatepickerForce').length > 0) {
+                    var datepicker = new CUI.Datepicker({
+                      element: '#myDatepickerForce',
+                      displayedFormat: 'DD MMMM  YYYY'
+                    });
+                }
+            });
+        </script>
+
+        <style>
+            body {
+                padding: 15px;
+            }
+
+
+            section {
+                margin: 20px;
+            }
+            .col {
+                float: left;
+                width: 400px;
+            }
+
+            h1 {
+                padding-top: 10px;
+            }
+        </style>
+    </head>
+    <body class="coral-Text coral-Background">
+  
+    <div class="col">
+
+      <section>
+          <h1>Date Picker</h1>
+          <!-- active -->
+          <div id="myDatepicker" class="coral-TextfieldButton coral-DatePicker">
+              <input type="date" class="coral-DatePicker-input coral-TextfieldButton-input coral-Textfield">
+              <button type="button" class="coral-TextfieldButton-button coral-MinimalButton" title="Date Picker">
+                  <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+              </button>
+          </div>
+          <p/>
+          <!-- disabled -->
+          <div class="coral-TextfieldButton coral-DatePicker" data-init="datepicker" data-disabled="true">
+              <input type="date" value="2012-10-20" data-displayed-format="YYYY-MM-DD" class="coral-DatePicker-input coral-TextfieldButton-input coral-Textfield">
+              <button type="button" class="coral-TextfieldButton-button coral-MinimalButton" title="Date Picker">
+                  <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+              </button>
+          </div>
+        </section>
+
+        <section>
+            <h1>Datetime Picker</h1>
+            <!-- active -->
+            <div class="coral-TextfieldButton coral-DatePicker" data-init="datepicker">
+                <input type="datetime" value="2012-10-20T20:35Z" data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" class="coral-DatePicker-input coral-TextfieldButton-input coral-Textfield">
+                <button type="button" class="coral-TextfieldButton-button coral-MinimalButton" title="Date and Time Picker">
+                    <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+                </button>
+            </div>
+            <p/>
+            <!-- disabled -->
+            <div class="coral-TextfieldButton coral-DatePicker" data-init="datepicker" data-disabled="true">
+                <input type="datetime" value="2012-10-20T20:35Z" data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" class="coral-DatePicker-input coral-TextfieldButton-input coral-Textfield">
+                <button type="button" class="coral-TextfieldButton-button coral-MinimalButton" title="Date and Time Picker">
+                    <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+                </button>
+            </div>
+        </section>
+
+        <section>
+            <h1>Time picker</h1>
+            <!-- active -->
+            <div class="coral-TextfieldButton coral-DatePicker" data-init="datepicker">
+                <input type="time" value="20:35" data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" class="coral-DatePicker-input coral-TextfieldButton-input coral-Textfield">
+                <button type="button" class="coral-TextfieldButton-button coral-MinimalButton" title="Time Picker">
+                    <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeS coral-Icon--clock"></i>
+                </button>
+            </div>
+            <p/>
+            <!-- disabled -->
+            <div class="coral-TextfieldButton coral-DatePicker" data-init="datepicker" data-disabled="true">
+                <input type="time" value="20:35" data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" class="coral-DatePicker-input coral-TextfieldButton-input coral-Textfield">
+                <button type="button" class="coral-TextfieldButton-button coral-MinimalButton" title="Time Picker">
+                    <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeS coral-Icon--clock"></i>
+                </button>
+            </div>
+        </section>
+        
+        <section>
+            <h1>Datetime Picker, required values</h1>
+            <!-- active -->
+            <div class="coral-TextfieldButton coral-DatePicker" data-init="datepicker">
+                <input type="datetime" value="2012-10-20T20:35Z" data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" class="coral-DatePicker-input coral-TextfieldButton-input coral-Textfield" required>
+                <button type="button" class="coral-TextfieldButton-button coral-MinimalButton" title="Date and Time Picker">
+                    <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+                </button>
+            </div>
+            <p/>
+            <!-- disabled -->
+            <div class="coral-TextfieldButton coral-DatePicker" data-init="datepicker" data-disabled="true">
+                <input type="datetime" value="2012-10-20T20:35Z" data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" class="coral-DatePicker-input coral-TextfieldButton-input coral-Textfield" required>
+                <button type="button" class="coral-TextfieldButton-button coral-MinimalButton" title="Date and Time Picker">
+                    <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+                </button>
+            </div>
+        </section>
+           
+        <section>
+            <h1>Datetime Picker, restricted selection range starting today</h1>
+            <div class="coral-TextfieldButton coral-DatePicker" data-init="datepicker" data-min-date="today">
+                <input type="datetime" value="2012-10-20T20:35Z" data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" class="coral-DatePicker-input coral-TextfieldButton-input coral-Textfield">
+                <button type="button" class="coral-TextfieldButton-button coral-MinimalButton" title="Date and Time Picker">
+                    <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+                </button>
+            </div>
+        </section>
+        
+        <section>
+            <h1>Datetime Picker, restricted selection range from 2013-07-09 to 2013-07-15</h1>
+            <div class="coral-TextfieldButton coral-DatePicker" data-init="datepicker" data-min-date="2013-07-09" data-max-date="2013-07-15">
+                <input type="datetime" value="2013-07-14T20:35Z" data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" class="coral-DatePicker-input coral-TextfieldButton-input coral-Textfield">
+                <button type="button" class="coral-TextfieldButton-button coral-MinimalButton" title="Date and Time Picker">
+                    <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+                </button>
+            </div>
+        </section>
+
+        <section>
+            <h1>Date Picker (force HTML Mode)</h1>
+            <div id="myDatepickerForce" class="coral-TextfieldButton coral-DatePicker" data-force-html-mode="true">
+                <input type="date" value="29 November 2012" class="coral-DatePicker-input coral-TextfieldButton-input coral-Textfield">
+                <button type="button" class="coral-TextfieldButton-button coral-MinimalButton" title="Date Picker">
+                    <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+                </button>
+            </div>
+        </section>
+
+        <section>
+            <h1>Datetime Picker (force HTML Mode)</h1>
+            <div class="coral-TextfieldButton coral-DatePicker" data-init="datepicker"  data-force-html-mode="true">
+                <input type="datetime" value="2013-07-14T20:35Z" data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" class="coral-DatePicker-input coral-TextfieldButton-input coral-Textfield">
+                <button type="button" class="coral-TextfieldButton-button coral-MinimalButton" title="Date and Time Picker">
+                    <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+                </button>
+            </div>
+        </section>
+        
+        <section>
+            <h1>Time picker (force HTML Mode)</h1>
+            <div class="coral-TextfieldButton coral-DatePicker" data-init="datepicker"  data-force-html-mode="true">
+                <input type="datetime" value="20:35" data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" class="coral-DatePicker-input coral-TextfieldButton-input coral-Textfield">
+                <button type="button" class="coral-TextfieldButton-button coral-MinimalButton" title="Time Picker">
+                    <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeS coral-Icon--clock"></i>
+                </button>
+            </div>
+        </section>
+        
+        <section>
+            <h1>with errors</h1>
+            <div class="coral-TextfieldButton coral-DatePicker is-invalid" data-init="datepicker">
+                <input type="date" value="2012-10-32" data-displayed-format="YYYY-MM-DD" class="coral-DatePicker-input coral-TextfieldButton-input coral-Textfield">
+                <button type="button" class="coral-TextfieldButton-button coral-MinimalButton">
+                    <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- start theme dark -->
+    <div class="col coral--dark coral-Background">
+        <section>
+            <h1>Dark Date Picker</h1>
+            <!-- active -->
+            <div class="coral-TextfieldButton coral-DatePicker" data-init="datepicker">
+                <input type="date" value="2012-10-20" data-displayed-format="YYYY-MM-DD" class="coral-DatePicker-input coral-TextfieldButton-input coral-Textfield">
+                <button type="button" class="coral-TextfieldButton-button coral-MinimalButton" title="Date Picker">
+                    <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+                </button>
+            </div>
+            <p/>
+            <!-- disabled -->
+            <div class="coral-TextfieldButton coral-DatePicker" data-init="datepicker" data-disabled="true">
+                <input type="date" value="2012-10-20" data-displayed-format="YYYY-MM-DD" class="coral-DatePicker-input coral-TextfieldButton-input coral-Textfield">
+                <button type="button" class="coral-TextfieldButton-button coral-MinimalButton" title="Date Picker">
+                    <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+                </button>
+            </div>
+        </section>
+
+        <section>
+            <h1>Dark Datetime Picker</h1>
+            <!-- active -->
+            <div class="coral-TextfieldButton coral-DatePicker" data-init="datepicker">
+                <input type="datetime" value="2012-10-20T20:35Z" data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" class="coral-DatePicker-input coral-TextfieldButton-input coral-Textfield">
+                <button type="button" class="coral-TextfieldButton-button coral-MinimalButton" title="Date and Time Picker">
+                    <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+                </button>
+            </div>
+            <p/>
+            <!-- disabled -->
+            <div class="coral-TextfieldButton coral-DatePicker" data-init="datepicker" data-disabled="true">
+                <input type="datetime" value="2012-10-20T20:35Z" data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" class="coral-DatePicker-input coral-TextfieldButton-input coral-Textfield">
+                <button type="button" class="coral-TextfieldButton-button coral-MinimalButton" title="Date and Time Picker">
+                    <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+                </button>
+            </div>
+        </section>
+
+        <section>
+            <h1>Dark Time picker</h1>
+            <!-- active -->
+            <div class="coral-TextfieldButton coral-DatePicker" data-init="datepicker">
+                <input type="time" value="20:35" data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" class="coral-DatePicker-input coral-TextfieldButton-input coral-Textfield">
+                <button type="button" class="coral-TextfieldButton-button coral-MinimalButton" title="Time Picker">
+                    <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeS coral-Icon--clock"></i>
+                </button>
+            </div>
+            <p/>
+            <!-- disabled -->
+            <div class="coral-TextfieldButton coral-DatePicker" data-init="datepicker" data-disabled="true">
+                <input type="time" value="20:35" data-displayed-format="YYYY-MM-DD[T]HH:mm[Z]" class="coral-DatePicker-input coral-TextfieldButton-input coral-Textfield">
+                <button type="button" class="coral-TextfieldButton-button coral-MinimalButton" title="Time Picker">
+                    <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeS coral-Icon--clock"></i>
+                </button>
+            </div>
+        </section>
+    </div>
+    </body>
+</html>
