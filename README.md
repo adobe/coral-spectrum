@@ -36,7 +36,7 @@ grunt
 
 * `grunt` - builds CoralUI without building each dependency.
 * `grunt clean` - cleans the build
-* `grunt full` - full build of the module. Every dependency is also build (should not be required when ).
+* `grunt full` - full build of the module. Every dependency is also build (should not be required when using released dependencies).
 
 
 ### Questions?
