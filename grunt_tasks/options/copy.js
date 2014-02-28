@@ -55,6 +55,32 @@ module.exports = {
     ]
   },
 
+  /**
+   * Copy the embedded resources.
+   *
+   * Note that we need to continue to copy up embed resources from dependent projects,
+   * as we recompile the Stylus again.
+   *
+   * Also note that svg-stylus does not accept relative paths, so that we copy the files
+   * from the coralui-/build/embed directory up to the current top-level.
+   */
+  component_embed: {
+    files: [
+      {
+        expand: true,
+        flatten: false,
+        cwd: '',
+        src: ['node_modules/coralui-*/build/embed/**/*'],
+        dest: 'build/embed/',
+
+        rename: function(dest, matchedSrcPath, options) {
+          return dest + matchedSrcPath.substring( matchedSrcPath.lastIndexOf('embed/') + 6);
+        }
+      }
+    ]
+  },
+
+
   tests: {
     files: [
       {
