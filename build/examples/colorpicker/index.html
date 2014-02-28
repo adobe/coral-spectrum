@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Colorpickers</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/coral.js"></script>
+
+  <script>
+  var defaultColors = {
+    "White" : "#FFFFFF",
+    "Blue" : "#0000FF",
+    "Red" : "#FF0000",
+    "Black" : "#000000",
+    "Green" : "#00FF00",
+    "Magenta" : "#FF00FF",
+    "Yellow" : "#FFFF00",
+    "Purple" : "#7F007F",
+    "Cyan" : "#00FFFF",
+    "Orange" : "#FF7F00",
+    "Brown" : "#996633"
+  };
+  $(document).ready(function() {
+    if ($('#colorpickerClassic1').length > 0) {
+      var colorpicker = new CUI.Colorpicker({
+        element : '#colorpickerClassic1',
+
+        config : {
+          colors : defaultColors,
+          displayModes : {
+            "classicPalette" : true,
+            "freestylePalette" : false,
+            "edit" : true
+          }
+        },
+        name : "./picker1",
+        title : "Colors"
+
+      });
+    }
+
+
+    if ($('#colorpickerClassic').length > 0) {
+      var colorpicker = new CUI.Colorpicker({
+        element : '#colorpickerClassic',
+
+        config : {
+          colors : defaultColors,
+          displayModes : {
+            "classicPalette" : true,
+            "freestylePalette" : false,
+            "edit" : true
+          }
+        },
+        name : "./picker1",
+        title : "Colors"
+
+      });
+    }
+    if ($('#colorpickerFreestyle').length > 0) {
+      var colorpicker = new CUI.Colorpicker({
+        element : '#colorpickerFreestyle',
+
+        config : {
+          colors : defaultColors,
+          displayModes : {
+            "classicPalette" : false,
+            "freestylePalette" : true,
+            "edit" : true
+          }
+        },
+        name : "./picker2",
+        title : "Colors"
+
+      });
+    }
+    if ($('#colorpickerNoEdit').length > 0) {
+      var colorpicker = new CUI.Colorpicker({
+        element : '#colorpickerNoEdit',
+
+        config : {
+          colors : defaultColors,
+          displayModes : {
+            "classicPalette" : false,
+            "freestylePalette" : true,
+            "edit" : false
+          }
+        },
+        name : "./picker4",
+        title : "Colors"
+
+      });
+    }
+
+  });
+</script>
+
+</head>
+<body>
+
+  <div class="col coral-Text coral-Background">
+    <section>
+
+      <div id="colorpickerClassic" class="coral-ColorPicker">
+        <span>Classic colorpicker script config</span>
+        <button type="button" class="coral-MinimalButton coral-ColorPicker-button"></button>
+      </div>
+
+    </section>
+
+    <section>
+
+      <div id="colorpickerFreestyle" class="coral-ColorPicker">
+        <span>Freestyle colorpicker script config</span>
+        <button type="button" class="coral-MinimalButton coral-ColorPicker-button"></button>
+      </div>
+
+    </section>
+
+    <section>
+
+      <div id="disabledColorpicker" class="coral-ColorPicker" data-init="colorpicker" data-disabled="true" data-name="./picker3">
+        <span>Disabled colorpicker</span>
+        <button type="button" class="coral-MinimalButton coral-ColorPicker-button"></button>
+      </div>
+
+    </section>
+
+    <section>
+
+      <div id="colorpickerNoEdit" class="coral-ColorPicker">
+        <span>Colorpicker no edit mode</span>
+        <button type="button" class="coral-MinimalButton coral-ColorPicker-button"></button>
+      </div>
+
+    </section>
+
+  </div>
+
+
+</body>
+</html>
+
+
