@@ -3,6 +3,7 @@ module.exports = {
   compile: {
     options: {
       urlfunc: 'embedurl',
+      use: [require('svg-stylus')],
       paths: [
         './<%= dirs.modules %>/'
       ],
