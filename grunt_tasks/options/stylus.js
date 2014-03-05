@@ -8,9 +8,10 @@ module.exports = {
         './<%= dirs.modules %>/'
       ],
       import: ['nib'],
+      'include css': true
     },
     files: {
-      '<%= dirs.build %>/<%= dirs.css %>/coral.css': './<%= dirs.temp %>/index.styl'
+      '<%= dirs.build %>/<%= dirs.css %>/coral.css': '<%= dirs.temp %>/index.styl'
     }
   }
 

@@ -20,7 +20,7 @@ module.exports = function(grunt) {
         components: 'components',
         examples: 'examples',
         tests: 'tests',
-        temp: 'temp',
+        temp: 'temp'
       }
     }
   }
