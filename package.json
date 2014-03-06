@@ -34,11 +34,9 @@
     "coralui-component-charactercount": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-charactercount.git#2.0.0",
     "coralui-component-cyclebutton": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-cyclebutton.git#2.0.3",
     "coralui-component-datepicker": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-datepicker.git#2.1.0",
-    "coralui-component-dragaction": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-dragaction.git#2.0.1",
     "coralui-component-fileupload": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-fileupload.git#2.0.2",
     "coralui-component-fixedcolumn": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-fixedcolumn.git#2.0.3",
     "coralui-component-modal": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-modal.git#2.0.0",
-    "coralui-component-multifield": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-multifield.git#2.0.2",
     "coralui-component-numberinput": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-numberinput.git#2.1.0",
     "coralui-component-popover": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-popover.git#2.0.4",
     "coralui-component-select": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-select.git#2.0.5",
@@ -74,9 +72,7 @@
         "coralui-component-cyclebutton/build/js/CUI.CycleButton.js",
         "coralui-component-autocomplete/build/js/CUI.Autocomplete.js",
         "coralui-component-charactercount/build/js/CUI.CharacterCount.js",
-        "coralui-component-accordion/build/js/CUI.Accordion.js",
-        "coralui-component-dragaction/build/js/CUI.DragAction.js",
-        "coralui-component-multifield/build/js/CUI.Multifield.js"
+        "coralui-component-accordion/build/js/CUI.Accordion.js"
       ]
     }
   }
