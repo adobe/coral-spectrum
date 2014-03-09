@@ -34,5 +34,6 @@
 "../coralui-grunt-docsbuilder" "packages/grunt/docsbuilder"
 "../coralui-grunt-releasepackage" "packages/grunt/releasepackage"
 "../coralui-grunt-testrunner" "packages/grunt/testrunner"
+"../coralui-guide-resources" "packages/grunt/guide-resources"
 # "../coralui-angular" "packages/extensions/angular"
 # "../coralui-legacy" "packages/legacy"
