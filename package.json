@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "coralui-commons": "git+ssh://git@git.corp.adobe.com:Coral/coralui-commons.git#2.0.0",
-    "coralui-core": "git+ssh://git@git.corp.adobe.com:Coral/coralui-core.git#2.2.7",
+    "coralui-core": "git+ssh://git@git.corp.adobe.com:Coral/coralui-core.git#2.2.8",
     "coralui-component-accordion": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-accordion.git#2.1.1",
     "coralui-component-alert": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-alert.git#2.1.1",
     "coralui-component-autocomplete": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-autocomplete.git#2.2.3",
