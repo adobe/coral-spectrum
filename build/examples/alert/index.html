@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Alert Examples</title>
+
+
+  <link rel="stylesheet" href="../../css/coral.css">
+
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/coral.js"></script>
+
+  <script>
+    $(document).ready(function(){
+
+      var defaultAlert = new CUI.Alert({element:'#defaultAlert'});
+
+      var alertTypes = ['error',  'notice', 'success', 'help','info',];
+      var currentTypeIdx = 0;
+
+      $('#cycleType').on("click", function() {
+        var newValue = alertTypes[++currentTypeIdx];
+        defaultAlert.set('type', newValue);
+        defaultAlert.set('heading', newValue.charAt(0).toUpperCase() + newValue.slice(1));
+        if (currentTypeIdx === alertTypes.length-1) {
+          console.log('resetting', currentTypeIdx);
+          currentTypeIdx = -1;
+        }
+      });
+
+      $('#isLarge').on('change', function(event){
+        defaultAlert.set('size', event.currentTarget.checked ? "large" : "small");
+      });
+
+      $('#isCloseable').on('change', function(event){
+        defaultAlert.set('closeable', event.currentTarget.checked);
+      });
+
+
+    });
+  </script>
+  <style>
+    body {
+      padding-left: 30px;
+    }
+
+    h3 {
+      margin-bottom: 20px;
+    }
+
+    section {
+      border-top: 1px solid #C8C8C8;
+      margin-bottom: 40px;
+    }
+
+    .col {
+      float: left;
+      margin-right: 12px;
+      width: 400px;
+    }
+
+    label {
+      margin-right: 1rem;
+    }
+  </style>
+
+</head>
+<body class="coral--light u-coral-clearFix">
+  <h1 class="coral-Heading coral-Heading--1">Alert Examples</h1>
+  <div class="col">
+    <section>
+      <h3 class="coral-Heading coral-Heading--3">All the Alerts</h3>
+      <div class="coral-Alert coral-Alert--error">
+        <button type="button" class="coral-MinimalButton coral-Alert-closeButton" title="Close" data-dismiss="alert">
+          <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close coral-MinimalButton-icon"></i>
+        </button>
+        <i class="coral-Alert-typeIcon coral-Icon coral-Icon--sizeS coral-Icon--alert"></i>
+        <strong class='coral-Alert-title'>Error</strong>
+        <div class='coral-Alert-message'>There is something borked with the whozit!</div>
+      </div>
+
+      <div class="coral-Alert coral-Alert--notice">
+        <button type="button" class="coral-MinimalButton coral-Alert-closeButton" title="Close" data-dismiss="alert">
+          <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close coral-MinimalButton-icon"></i>
+        </button>
+        <i class="coral-Alert-typeIcon coral-Icon coral-Icon--sizeS coral-Icon--alert"></i>
+        <strong class='coral-Alert-title'>Notice</strong>
+        <div class='coral-Alert-message'>Something is about to go wrong with the whozit!</div>
+      </div>
+
+      <div class="coral-Alert coral-Alert--success">
+        <button type="button" class="coral-MinimalButton coral-Alert-closeButton" title="Close" data-dismiss="alert">
+        <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close coral-MinimalButton-icon"></i>
+        </button>
+        <i class="coral-Alert-typeIcon coral-Icon coral-Icon--sizeS coral-Icon--checkCircle"></i>
+        <strong class='coral-Alert-title'>Success</strong>
+        <div class='coral-Alert-message'>Everything went better than expected with the whozit.</div>
+      </div>
+
+      <div class="coral-Alert coral-Alert--help">
+        <button type="button" class="coral-MinimalButton coral-Alert-closeButton" title="Close" data-dismiss="alert">
+          <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close coral-MinimalButton-icon"></i>
+        </button>
+        <i class="coral-Alert-typeIcon coral-Icon coral-Icon--sizeS coral-Icon--helpCircle"></i>
+        <strong class='coral-Alert-title'>Help</strong>
+        <div class='coral-Alert-message'>If you are struggling with the whozit, read <a class="coral-Link coral-Link--subtle" href="#">the manual</a>.
+        </div>
+      </div>
+
+      <div class="coral-Alert coral-Alert--info">
+        <button type="button" class="coral-MinimalButton coral-Alert-closeButton" title="Close" data-dismiss="alert">
+          <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close coral-MinimalButton-icon"></i>
+        </button>
+        <i class="coral-Alert-typeIcon coral-Icon coral-Icon--sizeS coral-Icon--infoCircle"></i>
+        <strong class='coral-Alert-title'>Info</strong>
+        <div class='coral-Alert-message'>For great success, configure the whozit.</div>
+      </div>
+    </section>
+
+    <section>
+    <h3 class="coral-Heading coral-Heading--3">JavaScript Zone</h3>
+     <div id="defaultAlert" class="coral-Alert coral-Alert--error">
+        <button type="button" class="coral-MinimalButton coral-Alert-closeButton" title="Close" data-dismiss="alert">
+          <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close coral-MinimalButton-icon"></i>
+        </button>
+        <i class="coral-Alert-typeIcon coral-Icon coral-Icon--sizeS coral-Icon--alert"></i>
+        <strong class='coral-Alert-title'>Error</strong>
+        <div class='coral-Alert-message'>Boy this sure is amazing!</div>
+      </div>
+      <div>
+        <button id="cycleType" class="coral-Button coral-Button--primary">Change Type</button>
+      </div>
+      <div>
+        <label class="coral-Checkbox">
+          <input class="coral-Checkbox-input" id="isLarge" type="checkbox">
+          <span class="coral-Checkbox-description">Large</span>
+        </label>
+      </div>
+      <div>
+        <label class="coral-Checkbox">
+          <input class="coral-Checkbox-input" id="isCloseable" type="checkbox" checked>
+          <span class="coral-Checkbox-description">Closeable</span>
+        </label>
+      </div>
+  </section>
+  </div>
+
+   <div class="col">
+    <section>
+      <h3 class="coral-Heading coral-Heading--3">Large Alerts</h3>
+      <div class="coral-Alert coral-Alert--large coral-Alert--error">
+        <button type="button" class="coral-MinimalButton coral-Alert-closeButton"
+          title="Close" data-dismiss="alert">
+          <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close coral-MinimalButton-icon"></i>
+        </button>
+        <i class="coral-Alert-typeIcon coral-Icon coral-Icon--sizeS coral-Icon--alert"></i>
+        <strong class='coral-Alert-title'>Error</strong>
+        <div class='coral-Alert-message'>There is something borked with the whozit!</div>
+      </div>
+
+
+      <div class="coral-Alert coral-Alert--large coral-Alert--notice">
+        <button type="button" class="coral-MinimalButton coral-Alert-closeButton" title="Close" data-dismiss="alert">
+          <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close coral-MinimalButton-icon"></i>
+        </button>
+        <i class="coral-Alert-typeIcon coral-Icon coral-Icon--sizeS coral-Icon--alert"></i>
+        <strong class='coral-Alert-title'>Notice</strong>
+        <div class='coral-Alert-message'>Something is about to go wrong with the whozit!</div>
+      </div>
+
+      <div class="coral-Alert coral-Alert--large coral-Alert--success">
+        <button type="button" class="coral-MinimalButton coral-Alert-closeButton" title="Close" data-dismiss="alert">
+          <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close coral-MinimalButton-icon"></i>
+        </button>
+        <i class="coral-Alert-typeIcon coral-Icon coral-Icon--sizeS coral-Icon--checkCircle"></i>
+        <strong class='coral-Alert-title'>Notice</strong>
+        <div class='coral-Alert-message'>Everything went better than expected with the whozit.</div>
+      </div>
+
+      <div class="coral-Alert coral-Alert--large coral-Alert--help">
+        <button type="button" class="coral-MinimalButton coral-Alert-closeButton" title="Close" data-dismiss="alert">
+          <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close coral-MinimalButton-icon"></i>
+        </button>
+        <i class="coral-Alert-typeIcon coral-Icon coral-Icon--sizeS coral-Icon--helpCircle"></i>
+        <strong class='coral-Alert-title'>Notice</strong>
+        <div class='coral-Alert-message'>If you are struggling with the whozit, read <a class="coral-Link coral-Link--subtle" href="#">the manual</a>.
+        </div>
+      </div>
+
+      <div class="coral-Alert coral-Alert--large coral-Alert--info">
+        <button type="button" class="coral-MinimalButton coral-Alert-closeButton" title="Close" data-dismiss="alert">
+          <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close coral-MinimalButton-icon"></i>
+        </button>
+        <i class="coral-Alert-typeIcon coral-Icon coral-Icon--sizeS coral-Icon--infoCircle"></i>
+        <strong class='coral-Alert-title'>Info</strong>
+        <div class='coral-Alert-message'>For great success, configure the whozit.</div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

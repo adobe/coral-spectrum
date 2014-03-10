@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>TagList</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/coral.js"></script>
+
+  <script>
+    $( document ).ready(function() {
+
+      var newItems = [ 'Chile', 'Argentina', 'Paraguay', 'Galapagos', 'Wisconsin'];
+
+      $('#addButton').click( function() {
+        var taglistWidget = $('.coral-TagList').first().data('tagList');
+        console.log('widget', taglistWidget);
+
+        if ( newItems.length ) {
+          taglistWidget.addItem( newItems.shift() );
+        }
+      })
+
+    });
+  </script>
+
+  <style>
+    body {
+      padding: 15px;
+    }
+
+    section {
+      box-sizing: border-box;
+      padding: 12px;
+    }
+  </style>
+</head>
+<body class="coral--light">
+<h1 class="coral-Heading coral-Heading--1">TagList Examples</h1>
+
+<section>
+  <ol class="coral-TagList" data-init="taglist" role="list">
+    <li role="listitem" class="coral-TagList-tag" title="Ecuador">
+      <button class="coral-MinimalButton coral-TagList-tag-removeButton" type="button" title="Remove">
+        <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+      </button>
+      <span class="coral-TagList-tag-label">Ecuador</span>
+      <input type="hidden" value="ec">
+    </li>
+    <li role="listitem" class="coral-TagList-tag" title="Bahamas">
+      <button class="coral-MinimalButton coral-TagList-tag-removeButton" type="button" title="Remove">
+        <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+      </button>
+      <span class="coral-TagList-tag-label">Bahamas</span>
+      <input type="hidden" value="bs">
+    </li>
+  </ol>
+</section>
+<section class="coral--dark">
+  <ol class="coral-TagList" data-init="taglist" role="list">
+    <li role="listitem" class="coral-TagList-tag" title="Ecuador">
+      <button class="coral-MinimalButton coral-TagList-tag-removeButton" type="button" title="Remove">
+        <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+      </button>
+      <span class="coral-TagList-tag-label">Ecuador</span>
+      <input type="hidden" value="ec">
+    </li>
+    <li role="listitem" class="coral-TagList-tag" title="Bahamas">
+      <button class="coral-MinimalButton coral-TagList-tag-removeButton" type="button" title="Remove">
+        <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+      </button>
+      <span class="coral-TagList-tag-label">Bahamas</span>
+      <input type="hidden" value="bs">
+    </li>
+  </ol>
+</section>
+<section style="width: 200px; border: 1px solid black; padding: 10px;">
+  LIMITED SPACE
+  <ol class="coral-TagList" data-init="taglist" role="list">
+    <li role="listitem" class="coral-TagList-tag coral-TagList-tag--multiline">
+      <button class="coral-MinimalButton coral-TagList-tag-removeButton" type="button" title="Remove">
+        <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+      </button>
+      <span class="coral-TagList-tag-label">Ecuador SUPER SUPER SUPER LONG</span>
+      <input type="hidden" value="ec">
+    </li>
+    <li role="listitem" class="coral-TagList-tag coral-TagList-tag--multiline">
+      <button class="coral-MinimalButton coral-TagList-tag-removeButton" type="button" title="Remove">
+        <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+      </button>
+      <span class="coral-TagList-tag-label">This is an amazing long tag which should never ever be there but ... sometimes ...</span>
+      <input type="hidden" value="ec">
+    </li>
+    <li role="listitem" class="coral-TagList-tag coral-TagList-tag--multiline">
+      <button class="coral-MinimalButton coral-TagList-tag-removeButton" type="button" title="Remove">
+        <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+      </button>
+      <span class="coral-TagList-tag-label">Bahamas</span>
+      <input type="hidden" value="bs">
+    </li>
+  </ol>
+</section>
+<section>
+  <button class="coral-Button" id="addButton">Add Item</button>
+</section>
+</body>
+</html>

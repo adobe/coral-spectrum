@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>coral-Checkbox examples</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+  <script src="../../js/libs/jquery.js"></script>
+  <!-- typekit is needed for proper fonts -->
+  <script src="../../js/typekit.js"></script>
+
+  <style type="text/css">
+    ul {
+      list-style: none;
+      -webkit-padding-start: 20px;
+    }
+
+    body {
+      padding: 15px;
+    }
+
+    .col {
+      float: left;
+      margin-right: 12px;
+      width: 500px;
+    }
+
+    .col > section {
+      padding: 10px;
+    }
+    
+    .coral-Checkbox { 
+      display: block;
+    }
+  </style>
+
+  <script>
+    $(function () {
+  
+      /**
+       Inspired by http://css-tricks.com/indeterminate-checkboxes/
+       with added support for the WAI-ARIA aria-checked property
+       which properly communicates the state to assistive technology.
+       */
+      $('#vtest-cycle-checkbox, #vtest-checkbox-nested-group').find(':checkbox, input[role="checkbox"]')
+        .each(function () {
+          var $checkbox = $(this),
+            checked = this.checked = $checkbox.is('[checked]'); // explicitly set "checked" property for elements with checked attribute
+  
+          // Add aria-checked and checked attribute
+          $checkbox.attr({
+            'role': 'checkbox',
+            'aria-checked': $checkbox.attr('aria-checked') || checked,
+            'checked': checked
+          });
+        });
+  
+      /**
+       * Respond to change event and update state of parent or child checkboxes accordingly.
+       */
+      $('#vtest-checkbox-nested-group').find(':checkbox, input[role="checkbox"]').change(function () {
+        var checked = this.checked,
+          container = $(this).closest('li'),
+          siblings = container.siblings();
+  
+        container.find(':checkbox, input[role="checkbox"]').prop({
+          indeterminate: false,
+          checked: checked
+        }).attr({
+          'aria-checked': checked,
+          'checked': checked
+        });
+  
+        function checkSiblings(el) {
+          var parent = el.parent().closest('li'),
+            all = true;
+          
+          if (!parent.length) {
+            return;
+          }
+  
+          el.siblings().each(function () {
+            return all = ($(this).find(':checkbox, input[role="checkbox"]').prop("checked") === checked);
+          });
+  
+          if (all && checked) {
+            parent.find(':checkbox, input[role="checkbox"]').prop({
+              indeterminate: false,
+              checked: checked
+            }).attr({
+              'aria-checked': checked,
+              'checked': checked
+            });
+            checkSiblings(parent);
+          } else if (all && !checked) {
+            parent.find(':checkbox, input[role="checkbox"]').attr({
+              'aria-checked': checked,
+              'checked': checked
+            }).prop({
+              indeterminate: (parent.find(':checkbox:checked, input[role="checkbox"]:checked').length > 0),
+              checked: checked
+            });
+            checkSiblings(parent);
+          } else {
+            el.parents("li").find('> label > input').prop({
+              indeterminate: true,
+              checked: false
+            }).attr({
+              'aria-checked': 'mixed',
+              'checked': false
+            });
+          }
+        }
+        checkSiblings(container);
+      });
+  
+      /**
+       * Makes a checkbox cycle through the different states.
+       */
+      $('#cycle-checkbox input').off('change').click(function (e) {
+        var ariaChecked = $(this).attr('aria-checked');
+        if (ariaChecked === 'mixed') {
+          this.indeterminate = this.checked = false;
+        } else {
+          this.indeterminate = (ariaChecked === 'true');
+          this.checked = !this.indeterminate;
+        }
+        $(this).attr({
+          'aria-checked': this.indeterminate ? 'mixed' : this.checked,
+          'checked': this.checked
+        });
+        if (!('ontouchstart' in window)) $(this).focus();
+      });
+    });
+  </script>
+</head>
+<body class="coral--light">
+  <h1 class="coral-Heading coral-Heading--1">coral-Checkbox</h1>
+  <div class="col">
+    <section>
+      <form>
+        <h2 class="coral-Heading coral-Heading--2">Checked, unchecked and mixed state checkboxes</h2>
+
+        <div id="vtest-checkbox-group">
+          <label class="coral-Checkbox">
+            <input class="coral-Checkbox-input" type="checkbox" name="c1" value="1" checked>
+            <span class="coral-Checkbox-checkmark"></span>
+            <span class="coral-Checkbox-description">Checked</span>
+          </label>
+          <label class="coral-Checkbox">
+            <input class="coral-Checkbox-input" type="checkbox" name="c2" value="2">
+            <span class="coral-Checkbox-checkmark"></span>
+            <span class="coral-Checkbox-description">Unchecked</span>
+          </label>
+          <label class="coral-Checkbox">
+            <input class="coral-Checkbox-input" type="checkbox"  name="c3" value="3" aria-checked="mixed">
+            <span class="coral-Checkbox-checkmark"></span>
+            <span class="coral-Checkbox-description">Partially checked</span>
+          </label>
+          <label id="cycle-checkbox" class="coral-Checkbox">
+            <input class="coral-Checkbox-input" type="checkbox" name="c4" value="4">
+            <span class="coral-Checkbox-checkmark"></span>
+            <span class="coral-Checkbox-description">Cycling state checkbox</span>
+          </label>
+          <label class="coral-Checkbox">
+            <input id="checked-checkbox-disabled" class="coral-Checkbox-input" type="checkbox" name="c5" value="5" disabled="disabled" checked>
+            <span class="coral-Checkbox-checkmark"></span>
+            <span class="coral-Checkbox-description">Disabled Checked</span>
+          </label>
+          <label class="coral-Checkbox">
+            <input id="unchecked-checkbox-disabled" class="coral-Checkbox-input" type="checkbox" name="c6" value="6" disabled="disabled">
+            <span class="coral-Checkbox-checkmark"></span>
+            <span class="coral-Checkbox-description">Disabled Unchecked</span>
+          </label>
+          <label class="coral-Checkbox">
+            <input type="checkbox" class="coral-Checkbox-input" name="c7" value="7" disabled="disabled" aria-checked="mixed">
+            <span class="coral-Checkbox-checkmark"></span>
+            <span class="coral-Checkbox-description">Disabled Partially Checked</span>
+          </label>
+        </div>
+    
+        <h2 class="coral-Heading coral-Heading--2"> Nested coral-Checkboxes</h2>
+        <p> With additional javascript it is possible to nest the checkboxes. </p>
+        <div id="vtest-checkbox-nested-group">
+          <ul>
+            <li>
+              <label class="coral-Checkbox">
+                <input type="checkbox" name="tall" class="coral-Checkbox-input">
+                <span class="coral-Checkbox-checkmark"></span>
+                <span class="coral-Checkbox-description">Tall Things</span>
+              </label>
+    
+              <ul>
+                <li>
+                  <label class="coral-Checkbox">
+                    <input type="checkbox" name="tall-1" class="coral-Checkbox-input">
+                    <span class="coral-Checkbox-checkmark"></span>
+                    <span class="coral-Checkbox-description">Buildings</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="coral-Checkbox">
+                    <input type="checkbox" name="tall-2" class="coral-Checkbox-input">
+                    <span class="coral-Checkbox-checkmark"></span>
+                    <span class="coral-Checkbox-description">Giants</span>
+                  </label>
+                  <ul>
+                   <li>
+                     <label class="coral-Checkbox">
+                       <input type="checkbox" name="tall-2-1" class="coral-Checkbox-input">
+                       <span class="coral-Checkbox-checkmark"></span>
+                       <span class="coral-Checkbox-description">Andre</span>
+                     </label>
+                   </li>
+                   <li>
+                     <label class="coral-Checkbox">
+                       <input type="checkbox" name="tall-2-2" class="coral-Checkbox-input">
+                       <span class="coral-Checkbox-checkmark"></span>
+                       <span class="coral-Checkbox-description">Paul Bunyan</span>
+                     </label>
+                   </li>
+                  </ul>
+                </li>
+                <li>
+                  <label class="coral-Checkbox">
+                    <input type="checkbox" name="tall-3" class="coral-Checkbox-input">
+                    <span class="coral-Checkbox-checkmark"></span>
+                    <span class="coral-Checkbox-description">Two sandwiches</span>
+                  </label>
+                </li>
+              </ul>
+            </li>
+            <li id="vtest-checks-2">
+              <label class="coral-Checkbox">
+                <input type="checkbox" name="short" class="coral-Checkbox-input">
+                <span class="coral-Checkbox-checkmark"></span>
+                <span class="coral-Checkbox-description">Short Things</span>
+              </label>
+              <ul>
+                <li>
+                  <label class="coral-Checkbox">
+                    <input type="checkbox" name="short-1" class="coral-Checkbox-input">
+                    <span class="coral-Checkbox-checkmark"></span>
+                    <span class="coral-Checkbox-description">Smurfs</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="coral-Checkbox">
+                    <input type="checkbox" name="short-2" class="coral-Checkbox-input">
+                    <span class="coral-Checkbox-checkmark"></span>
+                    <span class="coral-Checkbox-description">Mushrooms</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="coral-Checkbox">
+                    <input type="checkbox" name="short-3" class="coral-Checkbox-input">
+                    <span class="coral-Checkbox-checkmark"></span>
+                    <span class="coral-Checkbox-description">One Sandwich</span>
+                  </label>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <button type="submit" class="coral-Button">Submit</button>
+        </div>
+      </form>
+    </section>
+  </div>
+  
+  <div class="col">
+    <section id="vtest-checkbox-dark-group" class="coral--dark coral-Background">
+      <h2 class="coral-Heading coral-Heading--2">Dark theme - Checked and unchecked checkboxes</h2>
+      <form>
+        <label class="coral-Checkbox">
+          <input class="coral-Checkbox-input" type="checkbox" name="c1" checked>
+          <span class="coral-Checkbox-checkmark"></span>
+          <span class="coral-Checkbox-description">Checked</span>
+        </label>
+        <label class="coral-Checkbox">
+          <input class="coral-Checkbox-input" type="checkbox" name="c2" >
+          <span class="coral-Checkbox-checkmark"></span>
+          <span class="coral-Checkbox-description">Unchecked</span>
+        </label>
+        <label class="coral-Checkbox">
+          <input class="coral-Checkbox-input" type="checkbox"  name="c3" value="3" aria-checked="mixed">
+          <span class="coral-Checkbox-checkmark"></span>
+          <span class="coral-Checkbox-description">Partially checked</span>
+        </label>
+        <label class="coral-Checkbox">
+          <input class="coral-Checkbox-input" type="checkbox" name="c1" checked disabled="">
+          <span class="coral-Checkbox-checkmark"></span>
+          <span class="coral-Checkbox-description">Disabled Checked</span>
+        </label>
+        <label class="coral-Checkbox">
+          <input class="coral-Checkbox-input" type="checkbox" name="c3" disabled="" >
+          <span class="coral-Checkbox-checkmark"></span>
+          <span class="coral-Checkbox-description">Disabled Unchecked</span>
+        </label>
+        <label class="coral-Checkbox">
+          <input type="checkbox" class="coral-Checkbox-input" name="c7" value="7" disabled="disabled" aria-checked="mixed">
+          <span class="coral-Checkbox-checkmark"></span>
+          <span class="coral-Checkbox-description">Disabled Partially Checked</span>
+        </label>
+      </form>
+    </section>
+  </div>
+
+<script type="text/javascript">
+  $('[aria-checked="mixed"]').prop('indeterminate', true);
+</script>
+</body>
+</html>

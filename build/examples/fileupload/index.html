@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Fileupload examples</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/coral.js"></script>
+
+  <style type="text/css">
+
+  .example {
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #C8C8C9;
+  }
+
+  .example h2 {
+    margin-bottom: 10px;
+  }
+
+  </style>
+</head>
+<body>
+
+  <section>
+    <h1 class="coral-Heading coral-Heading--1">Fileupload</h1>
+
+    <div class="example">
+      <h2 class="coral-Heading coral-Heading--2">Standard</h2>
+      <span class="coral-FileUpload" data-init="fileupload">
+        <i class="coral-FileUpload-trigger coral-Icon coral-Icon--upload">
+          <input class="coral-FileUpload-input" 
+          type="file" 
+          name="./file"
+          data-upload-url="dummy"
+          data-file-name-parameter="./fileName">
+        </i>
+      </span>
+    </div>
+
+    <div class="example">
+      <h2 class="coral-Heading coral-Heading--2">Using a .coral-Button</h2>
+      <span class="coral-FileUpload" data-init="fileupload">
+        <span type="button" class="coral-FileUpload-trigger coral-Button">
+        <input class="coral-FileUpload-input" 
+          type="file" 
+          title="Upload Image" 
+          name="./image/file.sftmp" 
+          data-usehtml5="true" 
+          data-upload-url="will_be_replaced" 
+          data-size-limit="100000000"
+          data-mime-types='["image"]'>
+        </span>
+      </span>
+    </div>
+
+    <div class="example">
+      <h2 class="coral-Heading coral-Heading--2">Disabled</h2>
+      <span class="coral-FileUpload coral-FileUpload--dropSupport" data-init="fileupload" data-disabled="true">
+        <button class="coral-FileUpload-trigger coral-Button" type="button">
+        <input class="coral-FileUpload-input" 
+          id="uploadme"
+          type="file" 
+          title="Upload Image" 
+          name="./image/file.sftmp" 
+          data-usehtml5="true" 
+          data-upload-url="will_be_replaced" 
+          data-size-limit="100000000"
+          data-mime-types='["image"]'>
+        </button>
+      </span>
+    </div>
+
+  </section>
+
+  <script>
+  $(document)
+  .on("filerejected", function (event) {
+    console.error("File has been rejected: " + event.message);
+  })
+  .on("fileselected", function (event) {
+    console.log("File has been selected to be uploaded");
+  });
+  </script>
+
+</body>
+</html>

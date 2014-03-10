@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Tabs Example</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/coral.js"></script>
+
+  <script>
+    $(document).ready(function(){
+
+      var jqueryTabs = $('#jsTabsDiv').tabs();
+      var jqueryTabsDark = $('#jsTabsDivDark').tabs();
+
+      var cuiTabs = new CUI.Tabs({ element: '#cuiTabsDiv'});
+      var cuiTabsDark = new CUI.Tabs({ element: '#cuiTabsDivDark'});
+
+      var activeExampleTab = 0;
+      var typeIndex = 0;
+
+      $('#addTab').on('click', function() {
+        cuiTabs.addItem({
+          tabContent: 'New tab',
+          panelContent: 'New tab content. <a data-remove-tab>Remove my tab.</a>'
+        });
+      });
+
+      cuiTabs.$element.on('click', 'a[data-remove-tab]', function() {
+        var $sections = $(this).closest('.coral-TabPanel').find('.coral-TabPanel-pane');
+        var $section = $(this).closest('.coral-TabPanel-pane');
+        cuiTabs.removeItem($sections.index($section));
+      });
+
+      $('#cycleActive').on("click", function() {
+        var $tabs = $('#cuiTabsDiv').find('[data-toggle="tab"]');
+        activeExampleTab + 1 < $tabs.length ? ++activeExampleTab : activeExampleTab = 0;
+
+        cuiTabs.set('active', activeExampleTab);
+
+        if ($tabs.eq(activeExampleTab).hasClass('is-disabled')) {
+          alert("setting tab index to disabled tab is ignored");
+        }
+      });
+
+      $('#cycleType').on("click", function() {
+        typeIndex < 2 ? ++typeIndex : typeIndex = 0;
+        cuiTabs.set('type', cuiTabs.VARIANT_TYPES[typeIndex]);
+        $('#typeLabel').html('Type:' + cuiTabs.VARIANT_TYPES[typeIndex]);
+      });
+    });
+  </script>
+
+  <style>
+    body {
+      padding: 15px;
+    }
+
+    .col {
+      float: left;
+      margin-right: 12px;
+      width: 650px;
+    }
+
+    .col > section {
+      padding: 10px;
+    }
+
+  </style>
+
+</head>
+<body class="coral--light">
+  <h1 class="coral-Heading coral-Heading--1">coral-TabPanel</h1>
+  <div class="col">
+    <section>
+      <h2 class="coral-Heading coral-Heading--2">Data-Init Constructor Example</h2>
+      <div class="coral-TabPanel" data-init="tabs">
+        <nav class="coral-TabPanel-navigation">
+          <a data-toggle="tab" class="coral-TabPanel-tab is-active">Menu Item With Super Long Title</a>
+          <a data-toggle="tab" class="coral-TabPanel-tab">Medium Title</a>
+          <a href="remote.html" data-toggle="tab" class="coral-TabPanel-tab">Tab 3</a>
+        </nav>
+        <div class="coral-TabPanel-content">
+          <section class="coral-TabPanel-pane is-active">Lorem ipsum dolor sit amet.</section>
+          <section class="coral-TabPanel-pane">Aenean faucibus ornare laoreet. Cras luctus purus.</section>
+          <section class="coral-TabPanel-pane">This will be replaced by content from remote.html.</section>
+        </div>
+      </div>
+    </section>
+    <section>
+      <h2 class="coral-Heading coral-Heading--2">CUI Constructor Example</h2>
+      <h4 id='typeLabel'>Type:default</h4>
+      <div class="coral-ButtonGroup">
+        <button class="coral-ButtonGroup-item coral-Button coral-Button--secondary" id="cycleActive">Cycle Active</button>
+        <button class="coral-ButtonGroup-item coral-Button coral-Button--secondary" id="cycleType">Cycle Type</button>
+        <button class="coral-ButtonGroup-item coral-Button coral-Button--secondary" id="addTab">Add Tab</button>
+      </div>
+      <div class="coral-TabPanel" id="cuiTabsDiv">
+        <nav class="coral-TabPanel-navigation">
+          <a class="coral-TabPanel-tab" data-toggle="tab">CUI Tab 1</a>
+          <a class="coral-TabPanel-tab" data-toggle="tab">CUI Tab 2</a>
+          <a class="coral-TabPanel-tab" href="remote.html" data-toggle="tab">Tab 3</a>
+          <a class="coral-TabPanel-tab is-disabled" data-toggle="tab">Disabled Tab</a>
+        </nav>
+        <div class="coral-TabPanel-content">
+          <section class="coral-TabPanel-pane is-active">Lorem ipsum dolor sit amet.</section>
+          <section class="coral-TabPanel-pane">Aenean faucibus ornare laoreet. Cras luctus purus.</section>
+          <section class="coral-TabPanel-pane">This will be replaced by content from remote.html.</section>
+          <section class="coral-TabPanel-pane">This will not be shown as the corresponding tab is disabled.</section>
+        </div>
+      </div>
+    </section>
+    <section>
+      <h2 class="coral-Heading coral-Heading--2">jQuery Constructor Example</h2>
+      <div class="coral-TabPanel coral-TabPanel--large" id="jsTabsDiv">
+        <nav class="coral-TabPanel-navigation">
+          <a data-toggle="tab" class="coral-TabPanel-tab is-active">Tab 1</a>
+          <a data-toggle="tab" class="coral-TabPanel-tab">Tab 2</a>
+          <a href="remote.html" data-toggle="tab" class="coral-TabPanel-tab">Tab 3</a>
+          <a data-toggle="tab" class="coral-TabPanel-tab is-disabled">Disabled Tab</a>
+        </nav>
+        <div class="coral-TabPanel-content">
+          <section class="coral-TabPanel-pane is-active">Lorem ipsum dolor sit amet.</section>
+          <section class="coral-TabPanel-pane">Aenean faucibus ornare laoreet. Cras luctus purus.</section>
+          <section class="coral-TabPanel-pane">This will be replaced by content from remote.html.</section>
+          <section class="coral-TabPanel-pane">This will not be shown as the corresponding tab is disabled.</section>
+        </div>
+      </div>
+    </section>
+    <section>
+      <h2 class="coral-Heading coral-Heading--2">Stacked Example</h2>
+      <div class="coral-TabPanel coral-TabPanel--stacked" data-init="tabs">
+        <nav class="coral-TabPanel-navigation">
+          <a data-toggle="tab" class="coral-TabPanel-tab is-active">Tab 1</a>
+          <a data-toggle="tab" class="coral-TabPanel-tab">Tab 2</a>
+          <a href="remote.html" data-toggle="tab" class="coral-TabPanel-tab">Tab 3</a>
+          <a class="coral-TabPanel-tab is-disabled" data-toggle="tab">Disabled Tab</a>
+        </nav>
+        <div class="coral-TabPanel-content">
+          <section class="coral-TabPanel-pane is-active">Lorem ipsum dolor sit amet.</section>
+          <section class="coral-TabPanel-pane">Aenean faucibus ornare laoreet. Cras luctus purus.</section>
+          <section class="coral-TabPanel-pane">This will be replaced by content from remote.html.</section>
+          <section class="coral-TabPanel-pane">This will not be shown as the corresponding tab is disabled.</section>
+        </div>
+      </div>
+    </section>
+    <section>
+      <h2 class="coral-Heading coral-Heading--2">Icon Example</h2>
+      <div class="coral-TabPanel coral-TabPanel" data-init="tabs">
+        <nav class="coral-TabPanel-navigation">
+          <a data-toggle="tab" class="coral-TabPanel-tab coral-TabPanel-tab--icon is-active"><i class="coral-Icon coral-Icon--viewList coral-Icon--sizeS"></i></a>
+          <a data-toggle="tab" class="coral-TabPanel-tab coral-TabPanel-tab--icon"><i class="coral-Icon coral-Icon--assetCheck coral-Icon--sizeS"></i></a>
+          <a href="remote.html" data-toggle="tab" class="coral-TabPanel-tab coral-TabPanel-tab--icon"><i class="coral-Icon coral-Icon--alert coral-Icon--sizeS"></i></a>
+          <a class="coral-TabPanel-tab coral-TabPanel-tab--icon is-disabled" data-toggle="tab"><i class="coral-Icon coral-Icon--gear coral-Icon--sizeS"></i></a>
+        </nav>
+        <div class="coral-TabPanel-content">
+          <section class="coral-TabPanel-pane is-active">Lorem ipsum dolor sit amet.</section>
+          <section class="coral-TabPanel-pane">Aenean faucibus ornare laoreet. Cras luctus purus.</section>
+          <section class="coral-TabPanel-pane">This will be replaced by content from remote.html.</section>
+          <section class="coral-TabPanel-pane">This will not be shown as the corresponding tab is disabled.</section>
+        </div>
+      </div>
+      <div class="coral-TabPanel coral-TabPanel--large" data-init="tabs">
+        <nav class="coral-TabPanel-navigation">
+          <a data-toggle="tab" class="coral-TabPanel-tab coral-TabPanel-tab--icon is-active"><i class="coral-Icon coral-Icon--viewList coral-Icon--sizeS"></i></a>
+          <a data-toggle="tab" class="coral-TabPanel-tab coral-TabPanel-tab--icon"><i class="coral-Icon coral-Icon--assetCheck coral-Icon--sizeS"></i></a>
+          <a href="remote.html" data-toggle="tab" class="coral-TabPanel-tab coral-TabPanel-tab--icon"><i class="coral-Icon coral-Icon--alert coral-Icon--sizeS"></i></a>
+          <a class="coral-TabPanel-tab coral-TabPanel-tab--icon is-disabled" data-toggle="tab"><i class="coral-Icon coral-Icon--gear coral-Icon--sizeS"></i></a>
+        </nav>
+        <div class="coral-TabPanel-content">
+          <section class="coral-TabPanel-pane is-active">Lorem ipsum dolor sit amet.</section>
+          <section class="coral-TabPanel-pane">Aenean faucibus ornare laoreet. Cras luctus purus.</section>
+          <section class="coral-TabPanel-pane">This will be replaced by content from remote.html.</section>
+          <section class="coral-TabPanel-pane">This will not be shown as the corresponding tab is disabled.</section>
+        </div>
+      </div>
+      <div class="coral-TabPanel coral-TabPanel--stacked" data-init="tabs">
+        <nav class="coral-TabPanel-navigation">
+          <a data-toggle="tab" class="coral-TabPanel-tab coral-TabPanel-tab--icon is-active"><i class="coral-Icon coral-Icon--viewList coral-Icon--sizeS"></i></a>
+          <a data-toggle="tab" class="coral-TabPanel-tab coral-TabPanel-tab--icon"><i class="coral-Icon coral-Icon--assetCheck coral-Icon--sizeS"></i></a>
+          <a href="remote.html" data-toggle="tab" class="coral-TabPanel-tab coral-TabPanel-tab--icon"><i class="coral-Icon coral-Icon--alert coral-Icon--sizeS"></i></a>
+          <a class="coral-TabPanel-tab coral-TabPanel-tab--icon is-disabled" data-toggle="tab"><i class="coral-Icon coral-Icon--gear coral-Icon--sizeS"></i></a>
+        </nav>
+        <div class="coral-TabPanel-content">
+          <section class="coral-TabPanel-pane is-active">Lorem ipsum dolor sit amet.</section>
+          <section class="coral-TabPanel-pane">Aenean faucibus ornare laoreet. Cras luctus purus.</section>
+          <section class="coral-TabPanel-pane">This will be replaced by content from remote.html.</section>
+          <section class="coral-TabPanel-pane">This will not be shown as the corresponding tab is disabled.</section>
+        </div>
+      </div>
+
+    </section>
+  </div>
+  <!-- /col -->
+
+  <div class="col coral--dark">
+    <section>
+      <h2 class="coral-Heading coral-Heading--2">Data-Init Constructor Example</h2>
+      <div class="coral-TabPanel" data-init="tabs">
+        <nav class="coral-TabPanel-navigation">
+          <a data-toggle="tab" class="coral-TabPanel-tab is-active">Menu Item With Super Long Title</a>
+          <a data-toggle="tab" class="coral-TabPanel-tab">Medium Title</a>
+          <a href="remote.html" data-toggle="tab" class="coral-TabPanel-tab">Tab 3</a>
+        </nav>
+        <div class="coral-TabPanel-content">
+          <section class="coral-TabPanel-pane is-active">Lorem ipsum dolor sit amet.</section>
+          <section class="coral-TabPanel-pane">Aenean faucibus ornare laoreet. Cras luctus purus.</section>
+          <section class="coral-TabPanel-pane">This will be replaced by content from remote.html.</section>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="coral-Heading coral-Heading--2">Dark CUI Constructor Example</h2>
+      <div class="coral-TabPanel" id="cuiTabsDivDark">
+        <nav class="coral-TabPanel-navigation">
+          <a class="coral-TabPanel-tab" data-toggle="tab">CUI Tab 1</a>
+          <a class="coral-TabPanel-tab" data-toggle="tab">CUI Tab 2</a>
+          <a class="coral-TabPanel-tab" href="remote.html" data-toggle="tab">Tab 3</a>
+          <a class="coral-TabPanel-tab is-disabled" data-toggle="tab">Disabled Tab</a>
+        </nav>
+        <div class="coral-TabPanel-content">
+          <section class="coral-TabPanel-pane is-active">Lorem ipsum dolor sit amet.</section>
+          <section class="coral-TabPanel-pane">Aenean faucibus ornare laoreet. Cras luctus purus.</section>
+          <section class="coral-TabPanel-pane">This will be replaced by content from remote.html.</section>
+          <section class="coral-TabPanel-pane">This will not be shown as the corresponding tab is disabled.</section>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="coral-Heading coral-Heading--2">jQuery Constructor Example</h2>
+      <div class="coral-TabPanel coral-TabPanel--large" id="jsTabsDivDark">
+        <nav class="coral-TabPanel-navigation">
+          <a data-toggle="tab" class="coral-TabPanel-tab is-active">Tab 1</a>
+          <a data-toggle="tab" class="coral-TabPanel-tab">Tab 2</a>
+          <a href="remote.html" data-toggle="tab" class="coral-TabPanel-tab">Tab 3</a>
+          <a data-toggle="tab" class="coral-TabPanel-tab is-disabled">Disabled Tab</a>
+        </nav>
+        <div class="coral-TabPanel-content">
+          <section class="coral-TabPanel-pane is-active">Lorem ipsum dolor sit amet.</section>
+          <section class="coral-TabPanel-pane">Aenean faucibus ornare laoreet. Cras luctus purus.</section>
+          <section class="coral-TabPanel-pane">This will be replaced by content from remote.html.</section>
+          <section class="coral-TabPanel-pane">This will not be shown as the corresponding tab is disabled.</section>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="coral-Heading coral-Heading--2">Stacked Example</h2>
+      <div class="coral-TabPanel coral-TabPanel--stacked" data-init="tabs">
+        <nav class="coral-TabPanel-navigation">
+          <a data-toggle="tab" class="coral-TabPanel-tab is-active">Tab 1</a>
+          <a data-toggle="tab" class="coral-TabPanel-tab">Tab 2</a>
+          <a href="remote.html" data-toggle="tab" class="coral-TabPanel-tab">Tab 3</a>
+          <a class="coral-TabPanel-tab is-disabled" data-toggle="tab">Disabled Tab</a>
+        </nav>
+        <div class="coral-TabPanel-content">
+          <section class="coral-TabPanel-pane is-active">Lorem ipsum dolor sit amet.</section>
+          <section class="coral-TabPanel-pane">Aenean faucibus ornare laoreet. Cras luctus purus.</section>
+          <section class="coral-TabPanel-pane">This will be replaced by content from remote.html.</section>
+          <section class="coral-TabPanel-pane">This will not be shown as the corresponding tab is disabled.</section>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="coral-Heading coral-Heading--2">Icon Example</h2>
+      <div class="coral-TabPanel coral-TabPanel" data-init="tabs">
+        <nav class="coral-TabPanel-navigation">
+          <a data-toggle="tab" class="coral-TabPanel-tab coral-TabPanel-tab--icon is-active"><i class="coral-Icon coral-Icon--viewList coral-Icon--sizeS"></i></a>
+          <a data-toggle="tab" class="coral-TabPanel-tab coral-TabPanel-tab--icon"><i class="coral-Icon coral-Icon--assetCheck coral-Icon--sizeS"></i></a>
+          <a href="remote.html" data-toggle="tab" class="coral-TabPanel-tab coral-TabPanel-tab--icon"><i class="coral-Icon coral-Icon--alert coral-Icon--sizeS"></i></a>
+          <a class="coral-TabPanel-tab coral-TabPanel-tab--icon is-disabled" data-toggle="tab"><i class="coral-Icon coral-Icon--gear coral-Icon--sizeS"></i></a>
+        </nav>
+        <div class="coral-TabPanel-content">
+          <section class="coral-TabPanel-pane is-active">Lorem ipsum dolor sit amet.</section>
+          <section class="coral-TabPanel-pane">Aenean faucibus ornare laoreet. Cras luctus purus.</section>
+          <section class="coral-TabPanel-pane">This will be replaced by content from remote.html.</section>
+          <section class="coral-TabPanel-pane">This will not be shown as the corresponding tab is disabled.</section>
+        </div>
+      </div>
+      <div class="coral-TabPanel coral-TabPanel--large" data-init="tabs">
+        <nav class="coral-TabPanel-navigation">
+          <a data-toggle="tab" class="coral-TabPanel-tab coral-TabPanel-tab--icon is-active"><i class="coral-Icon coral-Icon--viewList coral-Icon--sizeS"></i></a>
+          <a data-toggle="tab" class="coral-TabPanel-tab coral-TabPanel-tab--icon"><i class="coral-Icon coral-Icon--assetCheck coral-Icon--sizeS"></i></a>
+          <a href="remote.html" data-toggle="tab" class="coral-TabPanel-tab coral-TabPanel-tab--icon"><i class="coral-Icon coral-Icon--alert coral-Icon--sizeS"></i></a>
+          <a class="coral-TabPanel-tab coral-TabPanel-tab--icon is-disabled" data-toggle="tab"><i class="coral-Icon coral-Icon--gear coral-Icon--sizeS"></i></a>
+        </nav>
+        <div class="coral-TabPanel-content">
+          <section class="coral-TabPanel-pane is-active">Lorem ipsum dolor sit amet.</section>
+          <section class="coral-TabPanel-pane">Aenean faucibus ornare laoreet. Cras luctus purus.</section>
+          <section class="coral-TabPanel-pane">This will be replaced by content from remote.html.</section>
+          <section class="coral-TabPanel-pane">This will not be shown as the corresponding tab is disabled.</section>
+        </div>
+      </div>
+      <div class="coral-TabPanel coral-TabPanel--stacked" data-init="tabs">
+        <nav class="coral-TabPanel-navigation">
+          <a data-toggle="tab" class="coral-TabPanel-tab coral-TabPanel-tab--icon is-active"><i class="coral-Icon coral-Icon--viewList coral-Icon--sizeS"></i></a>
+          <a data-toggle="tab" class="coral-TabPanel-tab coral-TabPanel-tab--icon"><i class="coral-Icon coral-Icon--assetCheck coral-Icon--sizeS"></i></a>
+          <a href="remote.html" data-toggle="tab" class="coral-TabPanel-tab coral-TabPanel-tab--icon"><i class="coral-Icon coral-Icon--alert coral-Icon--sizeS"></i></a>
+          <a class="coral-TabPanel-tab coral-TabPanel-tab--icon is-disabled" data-toggle="tab"><i class="coral-Icon coral-Icon--gear coral-Icon--sizeS"></i></a>
+        </nav>
+        <div class="coral-TabPanel-content">
+          <section class="coral-TabPanel-pane is-active">Lorem ipsum dolor sit amet.</section>
+          <section class="coral-TabPanel-pane">Aenean faucibus ornare laoreet. Cras luctus purus.</section>
+          <section class="coral-TabPanel-pane">This will be replaced by content from remote.html.</section>
+          <section class="coral-TabPanel-pane">This will not be shown as the corresponding tab is disabled.</section>
+        </div>
+      </div>
+</body>
+</html>
