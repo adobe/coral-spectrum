@@ -19,6 +19,7 @@
     "grunt-contrib-stylus": "~0.12.0",
     "grunt-subgrunt": "~0.2.3",
     "grunt-shell": "~0.6.1",
+    "grunt-css-metrics": "~0.1.2",
     "coralui-grunt-dependenciesbuilder": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-dependenciesbuilder.git#1.0.0",
     "coralui-grunt-releasepackage": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-releasepackage.git#1.1.0",
     "coralui-grunt-testrunner": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-testrunner.git#1.0.0",

@@ -50,7 +50,7 @@ module.exports = function(grunt) {
   grunt.task.registerTask('full', ['build-dependencies', 'default']);
 
   // Default task
-  grunt.task.registerTask('default', ['clean', 'copy', 'compile-css', 'concat-scripts', 'uglify']);
+  grunt.task.registerTask('default', ['clean', 'copy', 'compile-css', 'concat-scripts', 'uglify', 'cssmetrics']);
 
   // run tests if desired
   grunt.task.registerTask('run-tests', ['coralui-testrunner']);
