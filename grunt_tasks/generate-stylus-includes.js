@@ -1,36 +1,24 @@
 module.exports = function(grunt) {
-  // Exclude core, we'll manually put it first
-  var excludedRE = /(coralui-core|coralui-commons)/;
-
-  function makeRequireStatement(filePath) {
-    return '@require "'+filePath+'"';
+  function makeRequireStatement(component) {
+    return '@require "'+component+'/build/styl"';
   }
 
-  grunt.registerTask('generate-stylus-includes', 'Generate Stylus Index file.', function() {
-    // List node_modules
-    var files = grunt.file.expand(
-      {
-        cwd: './node_modules/'
-      },
-      'coralui-*/build/styl'  // TODO: Make this go off package.json dependencies, in case extras are in node-modules
-    );
+  grunt.registerTask('generate-stylus-includes', 'Generate Stylus index file.', function() {
+    var pkg = require('../package.json');
 
     // Include core first
     var indexStyl = [
-      makeRequireStatement('coralui-commons/build/styl'),
-      makeRequireStatement('coralui-core/build/styl')
+      makeRequireStatement('coralui-commons'),
+      makeRequireStatement('coralui-core')
     ];
 
-    // Run through all folders
-    files.forEach(function(filePath) {
-      // Ignore excluded paths
-      // These are either not required or put first
-      if (filePath.match(excludedRE)) {
-        return;
+    // Process each dependency
+    for (var component in pkg.dependencies) {
+      // Include only CoralUI components
+      if (component.slice(0,17) === 'coralui-component') {
+        indexStyl.push(makeRequireStatement(component));
       }
-
-      indexStyl.push(makeRequireStatement(filePath));
-    });
+    }
 
     // Put includes for index.styl
     grunt.file.write('temp/index.styl', indexStyl.join('\n'));
