@@ -1,0 +1,125 @@
+.class-description {
+  margin-left: 1rem;
+}
+
+.class-description h2 {
+  margin-left: -1rem;
+}
+
+.variation {
+    display: none;
+}
+
+.optional:after {
+  content: "opt";
+  font-size: 60%;
+  color: #aaa;
+  font-style: italic;
+  font-weight: normal;
+}
+
+.ancestors { color: #999; }
+.ancestors a
+{
+    /*
+    color: #999 !important;
+    text-decoration: none;
+    */
+}
+
+.important
+{
+  font-weight: bold;
+  color: #950B02;
+}
+
+.yes-def {
+    text-indent: -1000px;
+}
+
+.type-signature {
+    color: #aaa;
+}
+
+.name, .signature {
+  font-family: Consolas, "Lucida Console", Monaco, monospace;
+  font-size: 1.25em;
+  font-weight: bold;
+}
+
+.details { margin: 0; }
+.details dt { margin: 0.5em 0 0 0; font-weight: bold; }
+.details dd { margin: 0; }
+.details ul { margin: 0; }
+.details ul { list-style-type: none; margin: 0; padding: 0; }
+.details li { margin: 0; padding: 0; }
+
+.description {
+  margin: 1rem 0 1rem 1rem;
+}
+
+.params, .props
+{
+  border-spacing: 0;
+  border: 0;
+  border-collapse: collapse;
+}
+
+.params .name, .props .name, .name code {
+  color: #A35A00;
+  font-family: Consolas, 'Lucida Console', Monaco, monospace;
+  font-size: 100%;
+}
+
+.disabled {
+    color: #454545;
+}
+
+span.mono {
+  font-family: monospace;
+}
+
+table td {
+  vertical-align: top;
+}
+
+dl {
+  margin-left: 1rem;
+}
+
+dd {
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  margin-bottom: 0;
+}
+
+h3 + pre.prettyprint {
+  margin-top: 0.357em;
+}
+
+h4 {
+  margin-top: 0.5rem;
+}
+
+table.data table.data {
+  margin-top: 0.357em;
+  font-size: 0.85rem;
+}
+
+table.data table.data th,
+table.data table.data td {
+  padding: 0.357em 0.457em;
+}
+
+
+table.data .name,
+table.data .signature {
+  font-size: 1em;
+}
+
+.page .rail {
+/*  width: 10em;*/
+}

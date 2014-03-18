@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Wizard</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light">
+    <div class="guide-Component">
+      <article class="guide-Component-detail">
+        <heading>
+          <h1 class="coral-Heading--1 u-line">Wizard</h1>
+        </heading>
+        <section class="guide-Component-metadata">
+          <section class="guide-componentDetails guide-Example-section u-line">
+            <p>Current Version: 2.0.6-pre</p>
+            <p>Related Components: </p>
+          </section>
+        </section>
+        <section class="guide-Component-documentation">
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Markup Examples</h2>
+                <style>
+                  .u-columnCustom {
+                      width: 80%;
+                  }
+                  
+                  .coral-Wizard-step {
+                      border: 1px solid grey;
+                      padding: 0px 10px 0px 10px;
+                  }
+                  
+                </style>
+                <p>Below is an example of configuring the Wizard component using the markup API:</p>
+                <h3 class="coral-Heading--3">Single Step</h3>
+                    <div id="guide-8eed4056-3f18-4545-b290-2ede71f0a930" class="u-columnCustom">
+                      <form action="test" method="post" class="coral-Wizard" data-init="flexwizard">
+                        <nav class="js-coral-Wizard-nav coral-Wizard-nav coral--dark">
+                          <ol class="coral-Wizard-steplist">
+                            <li class="js-coral-Wizard-steplist-item coral-Wizard-steplist-item">Single Step</li>
+                          </ol>
+                        </nav>
+                        <div class="js-coral-Wizard-step coral-Wizard-step">
+                          <a class="js-coral-Wizard-step-control coral-Button" href="cancel.html" data-action="cancel">Back</a>
+                          <button class="js-coral-Wizard-step-control coral-Button" type="button" data-action="next">Create</button>
+                            <h2 class="coral-Heading coral-Heading--2">Simple Step</h2>
+                            <p>Content.</p>
+                        </div>
+                      </form>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-8eed4056-3f18-4545-b290-2ede71f0a930" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <p class="u-line u-coral-padding"></p>
+                <h3 class="coral-Heading--3">Multi Step</h3>
+                    <div id="guide-79311a8c-4f30-40b3-929b-2dd25a8be7df" class="u-columnCustom"><form action="test" method="post" class="coral-Wizard" data-init="flexwizard">
+  <nav class="js-coral-Wizard-nav coral-Wizard-nav coral--dark">
+    <ol class="coral-Wizard-steplist">
+      <li class="js-coral-Wizard-steplist-item coral-Wizard-steplist-item">Step 1</li>
+      <li class="js-coral-Wizard-steplist-item coral-Wizard-steplist-item">Step 2</li>
+      <li class="js-coral-Wizard-steplist-item coral-Wizard-steplist-item">Step 3</li>
+    </ol>
+  </nav>
+  <div class="js-coral-Wizard-step coral-Wizard-step">
+    <a class="js-coral-Wizard-step-control coral-Button" href="cancel.html" data-action="cancel">Cancel</a>
+    <button class="js-coral-Wizard-step-control coral-Button" type="button" data-action="next">Continue</button>
+    <h2 class="coral-Heading coral-Heading--2">Step 1</h2>
+    <p>Step 1 Content.</p>
+  </div>
+  <div class="js-coral-Wizard-step coral-Wizard-step">
+    <button class="js-coral-Wizard-step-control coral-Button" type="button" data-action="prev">Back</button>
+    <button class="js-coral-Wizard-step-control coral-Button" type="button" data-action="next">Next</button>
+    <h2 class="coral-Heading coral-Heading--2">Step 2</h2>
+    <p>Step 2 Content.</p>
+  </div>
+  <div class="js-coral-Wizard-step coral-Wizard-step">
+    <button class="js-coral-Wizard-step-control coral-Button" type="button" data-action="prev">Back</button>
+    <button class="js-coral-Wizard-step-control coral-Button" type="button" data-action="next">Next</button>
+    <h2 class="coral-Heading coral-Heading--2">Step 3</h2>
+    <p>Step 3 Content.</p>
+  </div>
+</form>
+
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-79311a8c-4f30-40b3-929b-2dd25a8be7df" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+              </section>
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Javascript Examples</h2>
+                <p>The following examples demonstrate usage of the Javascript API's for Wizard.</p>
+                <h3 class="coral-Heading--3">Class Initialization</h3>
+                <p>The following is an example of the HTML without a <code class="atv">data-init</code> initializer.</p>
+                    <div id="guide-8568ba31-1002-4468-8efc-6a572280fcb2" class="u-columnCustom">
+                      <form id="myWizard" action="test" method="post" class="coral-Wizard" >
+                        <nav class="js-coral-Wizard-nav coral-Wizard-nav coral--dark">
+                          <ol class="coral-Wizard-steplist">
+                            <li class="js-coral-Wizard-steplist-item coral-Wizard-steplist-item">Step 1</li>
+                            <li class="js-coral-Wizard-steplist-item coral-Wizard-steplist-item">Step 2</li>
+                            <li class="js-coral-Wizard-steplist-item coral-Wizard-steplist-item">Step 3</li>
+                          </ol>
+                        </nav>
+                        <div class="js-coral-Wizard-step coral-Wizard-step">
+                          <a class="js-coral-Wizard-step-control coral-Button" href="cancel.html" data-action="cancel">Cancel</a>
+                          <button class="js-coral-Wizard-step-control coral-Button" type="button" data-action="next">Continue</button>
+                          <h2 class="coral-Heading coral-Heading--2">Step 1</h2>
+                          <p>Step 1 Content.</p>
+                        </div>
+                        <div class="js-coral-Wizard-step coral-Wizard-step">
+                          <button class="js-coral-Wizard-step-control coral-Button" type="button" data-action="prev">Back</button>
+                          <button class="js-coral-Wizard-step-control coral-Button" type="button" data-action="next">Next</button>
+                          <h2 class="coral-Heading coral-Heading--2">Step 2</h2>
+                          <p>Step 2 Content.</p>
+                        </div>
+                        <div class="js-coral-Wizard-step coral-Wizard-step">
+                          <button class="js-coral-Wizard-step-control coral-Button" type="button" data-action="prev">Back</button>
+                          <button class="js-coral-Wizard-step-control coral-Button" type="button" data-action="next">Next</button>
+                          <h2 class="coral-Heading coral-Heading--2">Step 3</h2>
+                          <p>Step 3 Content.</p>
+                        </div>
+                      </form>
+                      
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-8568ba31-1002-4468-8efc-6a572280fcb2" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <div id="constructorExample">
+                  <script>
+                    $(document).ready(function() {
+                      var wizard = new CUI.FlexWizard({ element:'#myWizard' });
+                    })
+                  </script>
+                  
+                </div>
+                <p>The following Javascript manually initializes the component on page initialization.</p>
+                    <pre id="constructorExample" data-src-id="constructorExample" class="prettyprint linenums guide-Example-snippet">
+                      <p>No example content provided!</p></pre>
+                <h3 class="coral-Heading--3">Changing steps</h3>
+                <p>The following demonstrates step navigation via the JS API</p>
+                <div id="nextStepExample">
+                  <script>
+                  function prevStep() {
+                     var wizard = $('#myWizard').data('flexWizard');
+                     wizard.prevStep();
+                  }
+                  function nextStep() {
+                     var wizard = $('#myWizard').data('flexWizard');
+                     wizard.nextStep();
+                  }
+                  </script>
+                </div>
+                    <pre id="nextStepExample" data-src-id="nextStepExample" class="prettyprint linenums guide-Example-snippet">
+                      <p>No example content provided!</p></pre>
+                <div>
+                  <button class="coral-Button" onclick="prevStep()">prev</button>
+                  <button class="coral-Button" onclick="nextStep()">Next</button>
+                  
+                  
+                </div>
+                <h3 class="coral-Heading--3">Add a step</h3>
+                <p>The following demonstrates programmatically adding a step using a Handlebars template.</p>
+                <div id="addStepExample">
+                  <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0/handlebars.min.js"></script>
+                  <script id="step-template" type="text/x-handlebars-template">
+                      <div class="js-coral-Wizard-step coral-Wizard-step coral-Wizard-step--maximized" data-step-title="{{title}}">
+                          <button class="js-coral-Wizard-step-control coral-Button" type="button" data-action="prev">Back</button>
+                          <button class="js-coral-Wizard-step-control coral-Button" type="button" data-action="next">Next</button>
+                          <h2 class="coral-Heading coral-Heading--2">{{title}}</h2>
+                          <p>Content.</p>
+                      </div>
+                  </script>
+                  <script>
+                    var stepTemplate = Handlebars.compile($("#step-template").html());
+                    function addStep()
+                    {
+                      var wizard = $('#myWizard').data('flexWizard');
+                      var stepHTML = stepTemplate({ title: "Next Step" });
+                      wizard.add(stepHTML);
+                    }
+                  </script>
+                </div>
+                    <pre id="addStepExample" data-src-id="addStepExample" class="prettyprint linenums guide-Example-snippet">
+                      <p>No example content provided!</p></pre>
+                <div><button class="coral-Button" onclick="addStep()">Add Step</button></div>
+              </section>
+              <section class="guide-Example-section">
+                <section class="guide-jsDocFragement">
+    <div class="content">
+        <!--<h1 class="line">Class: FlexWizard</h1>-->
+        
+          
+
+
+
+<section>
+
+<h1 class="coral-Heading--1 u-line">FlexWizard
+ JSDoc</h1>
+
+    <div class="class-description">Class Description: Wizard component</div>
+
+
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        <h2 class="line">Extends</h2>
+
+        <ul>
+            <li>CUI.Widget</li>
+        </ul>
+    
+
+    
+        
+<dt>
+    <h2 class="line">Constructor</h2>
+
+    
+</dt>
+
+
+<div class="description">
+    Creates a new wizard
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.FlexWizard.js, line 154</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+    
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h2 class="line">Methods</h2>
+
+        <dl>
+            
+<dt>
+    <h3 class="name" id="add"><span class="type-signature"></span>add</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Adds the given step to the wizard.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+		<th>Optional</th>
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">step</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">HTMLElement</span>|<span class="param-type">jQuery</span>|<span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                  No<br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The step to be added</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">index</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Number</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The index the step is added. If not passed, the step is added as the last one</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.FlexWizard.js, line 188</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="addAfter"><span class="type-signature"></span>addAfter</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Adds the given step after the given reference step.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">step</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">HTMLElement</span>|<span class="param-type">jQuery</span>|<span class="param-type">String</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The step to be added</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">refStep</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">HTMLElement</span>|<span class="param-type">jQuery</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The reference step</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.FlexWizard.js, line 210</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="nextStep"><span class="type-signature"></span>nextStep</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Goes to the next step. If there is no next step, this method does nothing.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.FlexWizard.js, line 178</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="prevStep"><span class="type-signature"></span>prevStep</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Goes to the previous step. If there is no previous step, this method does nothing.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.FlexWizard.js, line 171</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="remove"><span class="type-signature"></span>remove</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Removes the given step from the wizard.
+     If the current step is removed, the resulting behaviour is undefined.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">step</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">HTMLElement</span>|<span class="param-type">jQuery</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The step to be removed</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.FlexWizard.js, line 231</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+        
+    </div>
+   
+                </section>
+              </section>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>

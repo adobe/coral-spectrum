@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - DatePicker</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light">
+    <div class="guide-Component">
+      <article class="guide-Component-detail">
+        <heading>
+          <h1 class="coral-Heading--1 u-line">DatePicker</h1>
+        </heading>
+        <section class="guide-Component-metadata">
+          <section class="guide-componentDetails guide-Example-section u-line">
+            <p>Current Version: 2.1.3-pre</p>
+            <p>Related Components: </p>
+          </section>
+        </section>
+        <section class="guide-Component-documentation">
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Overview</h2>
+                <p>The Datepicker component provides desktop and touch friendly for both date and time selection. The component leverages <a href="http://momentjs.com">moment.js</a> for parsing, manipulating, and formatting dates.</p>
+              </section>
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">States</h2>
+                <p>Below are examples of configuring the basic datepicker states using the data API:</p>
+                <h3 class="coral-Heading--3">Default</h3>
+                <p>The default state of the component, set to March 17th, 2014.</p>
+                    <div id="guide-5bd93112-c73b-4e5e-bba0-a1e074bad920" class="u-columnMedium">
+                                <div class="coral-Datepicker coral-InputGroup"  data-init='datepicker' >
+                                  <input class="coral-InputGroup-input coral-Textfield" value='2014-03-17' type="date">
+                                  <span class="coral-InputGroup-button">
+                                    <button class="coral-Button coral-Button--secondary coral-Button--square" type="button" title="Datetime Picker">
+                                       <i class="coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+                                    </button>
+                                  </span>
+                                </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-5bd93112-c73b-4e5e-bba0-a1e074bad920" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading--3">Error</h3>
+                <p>Displays the component, initially, in an error state. Specified via <code>data-has-error="true"</code>.</p>
+                    <div id="guide-0416f87c-c229-4c3a-b72e-ffeb4730f81e" class="u-columnMedium">
+                                <div class="coral-Datepicker coral-InputGroup"  data-init='datepicker' data-has-error='true' >
+                                  <input class="coral-InputGroup-input coral-Textfield" value='2014-03-17' type="date">
+                                  <span class="coral-InputGroup-button">
+                                    <button class="coral-Button coral-Button--secondary coral-Button--square" type="button" title="Datetime Picker">
+                                       <i class="coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+                                    </button>
+                                  </span>
+                                </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-0416f87c-c229-4c3a-b72e-ffeb4730f81e" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading--3">Disabled</h3>
+                <p>Specified via <code>data-disabled="true"</code>.</p>
+                    <div id="guide-f8fb4f85-9beb-4915-9fbd-6a45d138f495" class="u-columnMedium">
+                                <div class="coral-Datepicker coral-InputGroup"  data-init='datepicker' data-disabled='true' >
+                                  <input class="coral-InputGroup-input coral-Textfield" value='2014-03-17' type="date">
+                                  <span class="coral-InputGroup-button">
+                                    <button class="coral-Button coral-Button--secondary coral-Button--square" type="button" title="Datetime Picker">
+                                       <i class="coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+                                    </button>
+                                  </span>
+                                </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-f8fb4f85-9beb-4915-9fbd-6a45d138f495" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+              </section>
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Types</h2>
+                <p>Below are examples of configuring the different datepicker types. This is achieved by setting the type directly on the input field. Note that the component will, by default, show custom pickers on desktop and native HTML controls on touch devices, where supported.</p>
+                <h3 class="coral-Heading--3">Date</h3>
+                <p>A Date selector configuration. Specified via <code>type="date"</code> on the input control.</p>
+                    <div id="guide-a3226476-34d3-4be7-af87-5148e4d80587" class="u-columnMedium">
+                                <div class="coral-Datepicker coral-InputGroup"  data-init='datepicker' >
+                                  <input class="coral-InputGroup-input coral-Textfield" value='2014-03-17' type="date">
+                                  <span class="coral-InputGroup-button">
+                                    <button class="coral-Button coral-Button--secondary coral-Button--square" type="button" title="Datetime Picker">
+                                       <i class="coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+                                    </button>
+                                  </span>
+                                </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-a3226476-34d3-4be7-af87-5148e4d80587" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading--3">Date/Time</h3>
+                <p>A date and time configuration. Specified via <code>type="datetime"</code> on the input control.</p>
+                    <div id="guide-128d55e5-eb8b-4119-b743-d8bc14646bbf" class="u-columnMedium">
+                                <div class="coral-Datepicker coral-InputGroup"  data-init='datepicker' >
+                                  <input class="coral-InputGroup-input coral-Textfield" value='2014-03-17T20:35Z' type="datetime">
+                                  <span class="coral-InputGroup-button">
+                                    <button class="coral-Button coral-Button--secondary coral-Button--square" type="button" title="Datetime Picker">
+                                       <i class="coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+                                    </button>
+                                  </span>
+                                </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-128d55e5-eb8b-4119-b743-d8bc14646bbf" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading--3">Time</h3>
+                <p>A time-only configuration example. Specified via <code>type="time"</code> on the input control. Note also the use of the <code>coral-Icon--clock</code> icon in the markup.</p>
+                    <div id="guide-32c7861d-3951-4b05-87b7-9d6d4ed66393" class="u-columnMedium">
+                                <div class="coral-Datepicker coral-InputGroup"  data-init='datepicker' >
+                                  <input class="coral-InputGroup-input coral-Textfield" value='20:35' type="time">
+                                  <span class="coral-InputGroup-button">
+                                    <button class="coral-Button coral-Button--secondary coral-Button--square" type="button" title="Datetime Picker">
+                                       <i class="coral-Icon coral-Icon--sizeS coral-Icon--clock"></i>
+                                    </button>
+                                  </span>
+                                </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-32c7861d-3951-4b05-87b7-9d6d4ed66393" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+              </section>
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Date Formats</h2>
+                <p>Below are examples of usig different display formats for the datepicker. See moment.js's <a href="http://momentjs.com/docs/#/displaying/format/">formatting documentation</a> for available formats.</p>
+                <h3 class="coral-Heading--3">Date Example</h3>
+                <p>A date-only picker configured wih an appropriate format. Set via <code class="atv">data-display-format="LL"</code>.</p>
+                    <div id="guide-a3daaa85-a89c-47fd-807d-c44aace9f588" class="u-columnMedium">
+                                <div class="coral-Datepicker coral-InputGroup"  data-init='datepicker' data-displayed-format='LL' >
+                                  <input class="coral-InputGroup-input coral-Textfield" value='2014-03-17' type="date">
+                                  <span class="coral-InputGroup-button">
+                                    <button class="coral-Button coral-Button--secondary coral-Button--square" type="button" title="Datetime Picker">
+                                       <i class="coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+                                    </button>
+                                  </span>
+                                </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-a3daaa85-a89c-47fd-807d-c44aace9f588" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading--3">Date and Time Example</h3>
+                <p>A date-time picker configured wih an appropriate format. Set via <code class="atv">data-display-format="lll"</code>.</p>
+                    <div id="guide-4f9bc000-654a-45b4-bd5b-09a38472efb6" class="u-columnMedium">
+                                <div class="coral-Datepicker coral-InputGroup"  data-init='datepicker' data-displayed-format='lll' >
+                                  <input class="coral-InputGroup-input coral-Textfield" value='2014-03-17T20:35Z' type="datetime">
+                                  <span class="coral-InputGroup-button">
+                                    <button class="coral-Button coral-Button--secondary coral-Button--square" type="button" title="Datetime Picker">
+                                       <i class="coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+                                    </button>
+                                  </span>
+                                </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-4f9bc000-654a-45b4-bd5b-09a38472efb6" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading--3">Time Example</h3>
+                <p>A time-only picker configured wih an appropriate format. Set via <code >data-display-format="LT"</code>.</p>
+                    <div id="guide-4fee7a38-8fc5-42c6-8c7f-1ec6e3bc3232" class="u-columnMedium">
+                                <div class="coral-Datepicker coral-InputGroup"  data-init='datepicker' data-displayed-format='LT' >
+                                  <input class="coral-InputGroup-input coral-Textfield" value='20:35' type="time">
+                                  <span class="coral-InputGroup-button">
+                                    <button class="coral-Button coral-Button--secondary coral-Button--square" type="button" title="Datetime Picker">
+                                       <i class="coral-Icon coral-Icon--sizeS coral-Icon--clock"></i>
+                                    </button>
+                                  </span>
+                                </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-4fee7a38-8fc5-42c6-8c7f-1ec6e3bc3232" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+              </section>
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Additional APIs</h2>
+                <p>Below are examples of usig different display formats for the datepicker. See moment.js's <a href="http://momentjs.com/docs/#/displaying/format/">formatting documentation</a> for available formats.</p>
+                <h3 class="coral-Heading--3">Required Values</h3>
+                <p>A date-only picker that requires a value. Set via <code>data-required="true"</code>.</p>
+                    <div id="guide-4cac8fea-0c10-41cb-9ad4-1d60c0bd2fda" class="u-columnMedium">
+                                <div class="coral-Datepicker coral-InputGroup"  data-init='datepicker' data-displayed-format='LL' data-required='true' >
+                                  <input class="coral-InputGroup-input coral-Textfield"  type="date">
+                                  <span class="coral-InputGroup-button">
+                                    <button class="coral-Button coral-Button--secondary coral-Button--square" type="button" title="Datetime Picker">
+                                       <i class="coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+                                    </button>
+                                  </span>
+                                </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-4cac8fea-0c10-41cb-9ad4-1d60c0bd2fda" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading--3">Date, Restricted Range</h3>
+                <p>A date-configuration with a restricted range. Set via <code>data-min-date="2014-03-09"</code> and <code>data-max-date="2014-03-19"</code>.</p>
+                    <div id="guide-b82a327e-4cbc-4779-8123-f5bd7999fa4e" class="u-columnMedium">
+                                <div class="coral-Datepicker coral-InputGroup"  data-init='datepicker' data-displayed-format='lll' data-min-date='2014-03-09' data-max-date='2014-03-19' >
+                                  <input class="coral-InputGroup-input coral-Textfield" value='2014-03-17' type="date">
+                                  <span class="coral-InputGroup-button">
+                                    <button class="coral-Button coral-Button--secondary coral-Button--square" type="button" title="Datetime Picker">
+                                       <i class="coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+                                    </button>
+                                  </span>
+                                </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-b82a327e-4cbc-4779-8123-f5bd7999fa4e" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading--3">Date, Restricted Range</h3>
+                <p>A date-configuration with a restricted range. Set via <code>data-min-date="2014-03-09"</code> and <code>data-max-date="2014-03-19"</code>.</p>
+                    <div id="guide-710edf98-f45a-4942-b27e-25ccfb67c5ae" class="u-columnMedium">
+                                <div class="coral-Datepicker coral-InputGroup"  data-init='datepicker' data-displayed-format='lll' data-min-date='2014-03-09' data-max-date='2014-03-19' >
+                                  <input class="coral-InputGroup-input coral-Textfield" value='2014-03-17' type="date">
+                                  <span class="coral-InputGroup-button">
+                                    <button class="coral-Button coral-Button--secondary coral-Button--square" type="button" title="Datetime Picker">
+                                       <i class="coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+                                    </button>
+                                  </span>
+                                </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-710edf98-f45a-4942-b27e-25ccfb67c5ae" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+              </section>
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Native HTML Controls</h2>
+                <p>The Datepicker can also be configured to force usage of native HTML controls on desktop. The following examples show that via <code>data-force-html-mode="true"</code>.</p>
+                <h3 class="coral-Heading--3">Date</h3>
+                <p>A Date selector configuration using a native control. Note that the date format </p>
+                    <div id="guide-a631944a-0831-4a92-88f4-b6e9fcdfd9db" class="u-columnMedium">
+                                <div class="coral-Datepicker coral-InputGroup"  data-init='datepicker' data-force-html-mode='true' >
+                                  <input class="coral-InputGroup-input coral-Textfield" value='2014-03-17' type="date">
+                                  <span class="coral-InputGroup-button">
+                                    <button class="coral-Button coral-Button--secondary coral-Button--square" type="button" title="Datetime Picker">
+                                       <i class="coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+                                    </button>
+                                  </span>
+                                </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-a631944a-0831-4a92-88f4-b6e9fcdfd9db" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading--3">Date/Time</h3>
+                <p>A date and time configuration using a native control.</p>
+                    <div id="guide-21f87e01-a47b-4ddb-902e-dcbb28256cd5" class="u-columnMedium">
+                                <div class="coral-Datepicker coral-InputGroup"  data-init='datepicker' data-force-html-mode='true' >
+                                  <input class="coral-InputGroup-input coral-Textfield" value='2014-03-17T20:35Z' type="datetime">
+                                  <span class="coral-InputGroup-button">
+                                    <button class="coral-Button coral-Button--secondary coral-Button--square" type="button" title="Datetime Picker">
+                                       <i class="coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+                                    </button>
+                                  </span>
+                                </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-21f87e01-a47b-4ddb-902e-dcbb28256cd5" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading--3">Time</h3>
+                <p>A time-only configuration using a native control.</p>
+                    <div id="guide-69dacb50-534e-45ee-ad41-45a6b4269389" class="u-columnMedium">
+                                <div class="coral-Datepicker coral-InputGroup"  data-init='datepicker' data-force-html-mode='true' >
+                                  <input class="coral-InputGroup-input coral-Textfield" value='20:35' type="time">
+                                  <span class="coral-InputGroup-button">
+                                    <button class="coral-Button coral-Button--secondary coral-Button--square" type="button" title="Datetime Picker">
+                                       <i class="coral-Icon coral-Icon--sizeS coral-Icon--clock"></i>
+                                    </button>
+                                  </span>
+                                </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-69dacb50-534e-45ee-ad41-45a6b4269389" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+              </section>
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Javascript Examples</h2>
+                <p>The following examples demonstrate usage of the Javascript API's for DatePicker.</p>
+                <h3 class="coral-Heading--3">JS Initialization</h3>
+                <p>The following is an example of the HTML without a <code class="atv">data-init</code> initializer.</p>
+                    <div id="guide-6a5520e0-f673-4fe5-910a-c9efed6173d8" class="u-columnMedium">
+                                <div class="coral-Datepicker coral-InputGroup" id='myDatepicker'  >
+                                  <input class="coral-InputGroup-input coral-Textfield"  type="date">
+                                  <span class="coral-InputGroup-button">
+                                    <button class="coral-Button coral-Button--secondary coral-Button--square" type="button" title="Datetime Picker">
+                                       <i class="coral-Icon coral-Icon--sizeS coral-Icon--calendar"></i>
+                                    </button>
+                                  </span>
+                                </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-6a5520e0-f673-4fe5-910a-c9efed6173d8" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <div id="constructorExample">
+                  <script>
+                   $(document).ready(function() {
+                     var numberInput = new CUI.Datepicker({ element:'#myDatepicker', selectedDateTime:moment('2014-03-17T20:35Z') });
+                   })
+                  </script>
+                </div>
+                <p>The following manually initializes the component on page load.</p>
+                    <pre id="constructorExample" data-src-id="constructorExample" class="prettyprint linenums guide-Example-snippet">
+                      <p>No example content provided!</p></pre>
+                <h3 class="coral-Heading--3">Getting the Current Value</h3>
+                <p>The following code will display the current value for the DatePicker in an Alert.</p>
+                <div id="getValueExample">
+                  <script>
+                    function displayValue() {
+                      var datePicker = $('#myDatepicker').data('datepicker')
+                      var value = datePicker.get('selectedDateTime');
+                      alert('The selected time is ' + Date(value) + '.');
+                    }
+                  </script>
+                </div>
+                    <pre id="getValueExample" data-src-id="getValueExample" class="prettyprint linenums guide-Example-snippet">
+                      <p>No example content provided!</p></pre>
+                <div><button id="getValueButton" class="coral-Button" onclick="displayValue()">Get Value</button></div>
+                <!--h3.coral-Heading--3 Showing a Datepicker set to today.-->
+                <!--p The following will set the above #{component.displayName}'s to today's date.-->
+                <!--#setValueExample-->
+                <!--    | <script>-->
+                <!--    |   function setValue() {-->
+                <!--    |     var datePicker = $('#myDatepicker').data('datepicker');-->
+                <!--    |     datePicker.set('selectedDateTime', moment(new Date()));-->
+                <!--    |   }-->
+                <!--    | </script>-->
+                <!--+example-pre-only("setValueExample")-->
+                <!--div-->
+                <!--    | <button id="getValueButton" class="coral-Button" onclick="setValue()">Set Date</button>-->
+              </section>
+              <section class="guide-Example-section">
+                <section class="guide-jsDocFragement">
+    <div class="content">
+        <!--<h1 class="line">Class: Datepicker</h1>-->
+        
+          
+
+
+
+<section>
+
+<h1 class="coral-Heading--1 u-line">Datepicker
+ JSDoc</h1>
+
+    <div class="class-description">Class Description: A datepicker widget
+
+     <pre>
+     Currently there are the following data options:
+     data-init="datepicker"         Inits the datepicker widget after page load
+     data-disabled                  Sets field to "disabled" if given (with any non-empty value)
+     data-required                  Sets field to "required" if given (with any non-empty value)
+     data-stored-format             Sets the format of the date for transferring it to the server
+     data-displayed-format          Sets the format of the date for displaying it to the user
+     data-force-html-mode           Force to HTML mode and never use a native Date widget, if given (with any non-empty value)
+     data-day-names                 JSON-array-data with the short names of all week days, starting with Sunday
+     data-month-names               JSON-array-data with the names of all months, starting with January
+     data-head-format               Defines headline format, default is "MMMM YYYY".
+     data-start-day                 Defines the start day of the week, 0 = Sunday, 1 = Monday, etc.
+
+     Additionally the type (date, time, datetime) and value are read from the &lt;input&gt; field.
+     </pre></div>
+
+
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        <h2 class="line">Extends</h2>
+
+        <ul>
+            <li>CUI.Widget</li>
+        </ul>
+    
+
+    
+        
+<dt>
+    <h2 class="line">Constructor</h2>
+
+    
+</dt>
+
+
+<div class="description">
+    Creates a datepicker from a div element
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">options</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Component options
+                
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+		<th>Optional</th>
+		
+
+		
+		<th>Default</th>
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">monthNames</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Array</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    english names
+                
+                </td>
+            
+
+            <td class="description last">Array of strings with the name for each month with January at index 0 and December at index 11</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">dayNames</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Array</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    english names
+                
+                </td>
+            
+
+            <td class="description last">Array of strings with the name for each weekday with Sun at index 0 and Sat at index 6</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">type</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "date"
+                
+                </td>
+            
+
+            <td class="description last">Type of picker, supports date, datetime, datetime-local and time</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">startDay</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">integer</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+
+            <td class="description last">Defines the start day for the week, 0 = Sunday, 1 = Monday etc.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">disabled</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">boolean</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">Is this widget disabled?</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">displayedFormat</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "YYYY-MM-DD[T]HH:mm[Z]"
+                
+                </td>
+            
+
+            <td class="description last">Displayed date (userfriendly), default is 2012-10-20 20:35</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">storedFormat</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "YYYY-MM-DD[T]HH:mmZ"
+                
+                </td>
+            
+
+            <td class="description last">Storage Date format, is never shown to the user, but transferred to the server</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">required</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">Is a value required?</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">hasError</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">True to display widget as erroneous, regardless if the value is required or not.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">minDate</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Defines the start date of selection range. Dates earlier than minDate are not selectable.
+     It must be expressed in officialDateFormat (YYYY-MM-DD) or as "today".</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">maxDate</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Defines the end date of selection range. Dates later than maxDate are not selectable.
+     It must be expressed in officialDateFormat (YYYY-MM-DD) or as "today".</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">headFormat</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "MMMM YYYY"
+                
+                </td>
+            
+
+            <td class="description last">Defines calendar headline format, default is "MMMM YYYY"</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">forceHTMLMode</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">boolean</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">Force to HTML mode and never use a native Date widget, if given (with any non-empty value)</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">selectedDateTime</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Defines what date/time will be selected when the calendar is rendered. If nothing is specified it will be
+     considerend today or current time.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+            </td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Datepicker.js, line 53</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+    
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h2 class="line">Methods</h2>
+
+        <dl>
+            
+<dt>
+    <h3 class="name" id="_setDateTime"><span class="type-signature"></span>_setDateTime</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Sets a new datetime object for this picker
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Datepicker.js, line 378</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+        
+    </div>
+   
+                </section>
+              </section>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>
