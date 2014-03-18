@@ -36,6 +36,18 @@ module.exports = {
     ]
   },
 
+  core_documentation: {
+    files: [
+      // copies core documentation
+      {
+        expand: true,
+        cwd: '<%= dirs.modules %>/coralui-core/<%= dirs.build %>/<%= dirs.documentation %>',
+        src: ['*.html'],
+        dest: '<%= dirs.build %>/<%= dirs.documentation %>'
+      }
+    ]
+  },
+
   component_examples: {
     files: [
       // copies component examples preserving hierarchy build/examples/component/*.html
@@ -51,6 +63,29 @@ module.exports = {
             return dest + '/' + componentName + '/' + fileName;
 
         }
+      }
+    ]
+  },
+  component_documentation: {
+    files: [
+      // copies component documentation
+      {
+        expand: true,
+        flatten: true,
+        cwd: '<%= dirs.modules %>',
+        src: ['coralui-component-*/<%= dirs.build %>/<%= dirs.documentation %>/*.html'],
+        dest: '<%= dirs.build %>/<%= dirs.documentation %>'
+      }
+    ]
+  },
+
+  documentation_resources: {
+    files: [
+      {
+        expand:true,
+        cwd:'<%= dirs.modules %>/<%= dirs.documentationResources %>',
+        src:['js/*','css/*'],
+        dest: '<%= dirs.build %>/<%= dirs.documentation %>'
       }
     ]
   },
