@@ -19,6 +19,8 @@ module.exports = function(grunt) {
         resources: 'resources',
         components: 'components',
         examples: 'examples',
+        documentation: 'documentation',
+        documentationResources: 'coralui-guide-resources',
         tests: 'tests',
         temp: 'temp'
       }
@@ -45,12 +47,14 @@ module.exports = function(grunt) {
     'watch'
   ]);
 
+  grunt.task.registerTask('docs-mapping', 'generate-docs-mapping');
+
 
   // performs the subgrunt task to compile every component dependance
   grunt.task.registerTask('full', ['build-dependencies', 'default']);
 
   // Default task
-  grunt.task.registerTask('default', ['clean', 'copy', 'compile-css', 'concat-scripts', 'uglify', 'cssmetrics']);
+  grunt.task.registerTask('default', ['clean', 'copy', 'compile-css', 'concat-scripts', 'uglify', 'cssmetrics', 'docs-mapping']);
 
   // run tests if desired
   grunt.task.registerTask('run-tests', ['coralui-testrunner']);
