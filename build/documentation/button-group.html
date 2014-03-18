@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Button Group</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light">
+    <div class="guide-Component">
+      <article class="guide-Component-detail">
+        <heading>
+          <h1 class="coral-Heading--1 u-line">Button Group</h1>
+        </heading>
+        <section class="guide-Component-metadata">
+          <section class="guide-componentDetails guide-Example-section u-line">
+            <p>Current Version: 2.2.13-pre</p>
+            <p>Related Components: Button</p>
+          </section>
+        </section>
+        <section class="guide-Component-documentation">
+              <section class="guide-Example-section">
+                <p>
+                  You can group buttons into horizontal lines by adding <code>coral-ButtonGroup</code>
+                  container around a set of buttons.  Each button in the container should have the
+                  <code>coral-ButtonGroup-item</code> class as well.
+                </p>
+              </section>
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Button Group Examples</h2>
+                <div class="guide-Example-markupVariants">
+                  <div class="guide-Example-markupVariantItem">
+                    <p>Button group, icon buttons:</p>
+                        <div id="guide-78534a42-09da-4853-9a9b-69c7c9422256" class="u-columnMedium">
+                          <div class="coral-ButtonGroup">
+                           <button class="coral-ButtonGroup-item coral-Button coral-Button--secondary">
+                             <i class="coral-Icon coral-Icon--add"></i>
+                           </button>
+                           <button class="coral-ButtonGroup-item coral-Button coral-Button--secondary">
+                             <i class="coral-Icon coral-Icon--camera"></i>
+                           </button>
+                           <button class="coral-ButtonGroup-item coral-Button coral-Button--secondary">
+                             <i class="coral-Icon coral-Icon--undo"></i>
+                           </button>
+                          </div>
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-78534a42-09da-4853-9a9b-69c7c9422256" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                  <div class="guide-Example-markupVariantItem">
+                    <p>Button group, <code>quiet</code> icon buttons:</p>
+                        <div id="guide-444c132d-d1a9-4055-8646-a1e236ecd666" class="u-columnMedium">
+                          <div class="coral-ButtonGroup">
+                           <button class="coral-ButtonGroup-item coral-Button coral-Button--secondary coral-Button--quiet">
+                             <i class="coral-Icon coral-Icon--add"></i>
+                           </button>
+                           <button class="coral-ButtonGroup-item coral-Button coral-Button--secondary coral-Button--quiet">
+                             <i class="coral-Icon coral-Icon--camera"></i>
+                           </button>
+                           <button class="coral-ButtonGroup-item coral-Button coral-Button--secondary coral-Button--quiet">
+                             <i class="coral-Icon coral-Icon--undo"></i>
+                           </button>
+                          </div>
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-444c132d-d1a9-4055-8646-a1e236ecd666" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                  <div class="guide-Example-markupVariantItem">
+                    <p>Button group with default buttons using anchors:</p>
+                        <div id="guide-91562ad8-79bc-4d67-b023-42df7ae5fa8d" class="u-columnMedium">
+                          <div class="coral-ButtonGroup">
+                           <a class="coral-ButtonGroup-item coral-Button" href="#">Dashboard</a>
+                           <a class="coral-ButtonGroup-item coral-Button" href="#">Settings</a>
+                           <a class="coral-ButtonGroup-item coral-Button" href="#">Account</a>
+                          </div>
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-91562ad8-79bc-4d67-b023-42df7ae5fa8d" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                  <div class="guide-Example-markupVariantItem">
+                    <p>Button group with seconary buttons, text-only buttons:</p>
+                        <div id="guide-f761d540-24a8-4ca3-9620-0b5cdbdd771f" class="u-columnMedium">
+                          <div class="coral-ButtonGroup">
+                           <button class="coral-ButtonGroup-item coral-Button coral-Button--secondary">Add</button>
+                           <button class="coral-ButtonGroup-item coral-Button coral-Button--secondary">Snapshot</button>
+                           <button class="coral-ButtonGroup-item coral-Button coral-Button--secondary">Undo</button>
+                          </div>
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-f761d540-24a8-4ca3-9620-0b5cdbdd771f" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                  <div class="guide-Example-markupVariantItem">
+                    <p>Button group with icons and text:</p>
+                        <div id="guide-6db6b4fd-9a6d-4d82-a05b-30253cf23279" class="u-columnMedium">
+                          <div class="coral-ButtonGroup">
+                           <button class="coral-ButtonGroup-item coral-Button coral-Button--secondary">
+                             <i class="coral-Icon coral-Icon--add"></i>
+                             Add
+                           </button>
+                           <button class="coral-ButtonGroup-item coral-Button coral-Button--secondary">
+                             <i class="coral-Icon coral-Icon--camera"></i>
+                             Snapshot
+                           </button>
+                           <button class="coral-ButtonGroup-item coral-Button coral-Button--secondary">
+                             <i class="coral-Icon coral-Icon--undo"></i>
+                             Undo
+                           </button>
+                          </div>
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-6db6b4fd-9a6d-4d82-a05b-30253cf23279" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                  <div class="guide-Example-markupVariantItem">
+                    <p>Button group with icons and text, quiet buttons:</p>
+                        <div id="guide-b306201e-19f1-4dba-9d02-f7b1bba5c6f0" class="u-columnMedium">
+                          <div class="coral-ButtonGroup">
+                           <button class="coral-ButtonGroup-item coral-Button coral-Button--quiet">
+                             <i class="coral-Icon coral-Icon--add"></i>
+                             Add
+                           </button>
+                           <button class="coral-ButtonGroup-item coral-Button coral-Button--quiet">
+                             <i class="coral-Icon coral-Icon--camera"></i>
+                             Snapshot
+                           </button>
+                           <button class="coral-ButtonGroup-item coral-Button coral-Button--quiet">
+                             <i class="coral-Icon coral-Icon--undo"></i>
+                             Undo
+                           </button>
+                          </div>
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-b306201e-19f1-4dba-9d02-f7b1bba5c6f0" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                </div>
+              </section>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>

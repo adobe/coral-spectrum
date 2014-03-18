@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - CycleButton</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light">
+    <div class="guide-Component">
+      <article class="guide-Component-detail">
+        <heading>
+          <h1 class="coral-Heading--1 u-line">CycleButton</h1>
+        </heading>
+        <section class="guide-Component-metadata">
+          <section class="guide-componentDetails guide-Example-section u-line">
+            <p>Current Version: 2.0.8-pre</p>
+            <p>Related Components: </p>
+          </section>
+        </section>
+        <section class="guide-Component-documentation">
+          <!-- mixins for the markup-->
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Markup Examples</h2>
+                <p>A CycleButton is a simple multi-state toggle button. Below are examples of configuring the cyclebutton component using  markup:</p>
+                <h3 class="coral-Heading--3">Buttons with Icons</h3>
+                    <div id="guide-f77cfd19-2c91-4eb3-a00d-6ed1676542d8" class="u-columnMedium">
+                                <span class="coral-CycleButton" data-init="cyclebutton">
+                                  <button class="coral-CycleButton-button coral-MinimalButton is-active" type="button" title="Card">
+                                    <i class="coral-MinimalButton-icon coral-Icon coral-Icon--viewCard coral-Icon--sizeL"></i>
+                                  </button>
+                                  <button class="coral-CycleButton-button coral-MinimalButton" type="button" title="List">
+                                    <i class="coral-MinimalButton-icon coral-Icon coral-Icon--viewList coral-Icon--sizeL"></i>
+                                  </button>
+                                  <button class="coral-CycleButton-button coral-MinimalButton" type="button" title="Column">
+                                    <i class="coral-MinimalButton-icon coral-Icon coral-Icon--viewColumn coral-Icon--sizeL"></i>
+                                  </button>
+                                </span>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-f77cfd19-2c91-4eb3-a00d-6ed1676542d8" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading--3">Normal Buttons</h3>
+                    <div id="guide-de381fd1-5b34-4d2f-804b-f7ae34d366ee" class="u-columnMedium">
+                                <span class="coral-CycleButton" data-init="cyclebutton">
+                                  <button class="coral-CycleButton-button coral-Button coral-Button--primary is-active" type="button" title="Card">
+                                     <i class="coral-Icon coral-Icon--add"></i>
+                                     Add
+                                  </button>
+                                  <button class="coral-CycleButton-button coral-Button coral-Button--warning" type="button" title="Card">
+                                     <i class="coral-Icon coral-Icon--delete"></i>
+                                     Remove
+                                  </button>
+                                 </span>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-de381fd1-5b34-4d2f-804b-f7ae34d366ee" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+              </section>
+          <!--include javascript-documentation-->
+              <section class="guide-Example-section">
+                <section class="guide-jsDocFragement">
+    <div class="content">
+        <!--<h1 class="line">Class: CycleButton</h1>-->
+        
+          
+
+
+
+<section>
+
+<h1 class="coral-Heading--1 u-line">CycleButton
+ JSDoc</h1>
+
+    <div class="class-description">Class Description: A component that show the current active item. Only one item can be active at the same time.
+     When clicked, the next item of the active is shown and the click is triggered at that next item instead.
+     If the last item is clicked, then the first item is shown and triggered accordingly.</div>
+
+
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        <h2 class="line">Extends</h2>
+
+        <ul>
+            <li>CUI.Widget</li>
+        </ul>
+    
+
+    
+        
+<dt>
+    <h2 class="line">Constructor</h2>
+
+    
+</dt>
+
+
+<div class="description">
+    Creates a new instance
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">options</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Widget options</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.CycleButton.js, line 31</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+    
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+        
+    </div>
+   
+                </section>
+              </section>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>

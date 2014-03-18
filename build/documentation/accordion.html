@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Accordion</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light">
+    <div class="guide-Component">
+      <article class="guide-Component-detail">
+        <heading>
+          <h1 class="coral-Heading--1 u-line">Accordion</h1>
+        </heading>
+        <section class="guide-Component-metadata">
+          <section class="guide-componentDetails guide-Example-section u-line">
+            <p>Current Version: 2.1.4-pre</p>
+            <p>Related Components: </p>
+          </section>
+        </section>
+        <section class="guide-Component-documentation">
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Accordion</h2>
+                <p>
+                  An accordion consists of multiple collapsibles. When one collapsible in the accordion is expanded, the others are
+                  collapsed.
+                  
+                </p>
+                <h3 class="coral-Heading coral-Heading--3">Normal</h3>
+                <p>The normal state of the component.</p>
+                    <div id="guide-51acf8ac-fa69-4e4d-9b78-efb2da0d0333" class="u-columnMedium">
+                                 <ul class="coral-Accordion" data-init="accordion" >
+                                   <li class="coral-Accordion-item">
+                                     <h3 class="coral-Accordion-header">
+                                       <span class="coral-Accordion-title">Accordion Item 1</span>
+                                       <span class="coral-Accordion-subtitle">Subtitle 1</span>
+                                     </h3>
+                                     <div class="coral-Accordion-content">
+                                       Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit.
+                                     </div>
+                                   </li>
+                                   <li class="coral-Accordion-item">
+                                     <div class="coral-Accordion-header">
+                                       <span class="coral-Accordion-title">Accordion Item 2</span>
+                                       <span class="coral-Accordion-subtitle">Subtitle 2</span>
+                                     </div>
+                                     <div class="coral-Accordion-content">
+                                       Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit.
+                                     </div>
+                                   </li>
+                                   <li class="coral-Accordion-item is-active">
+                                     <div class="coral-Accordion-header">
+                                       <span class="coral-Accordion-title">Accordion Item 3</span>
+                                       <span class="coral-Accordion-subtitle">Subtitle 3</span>
+                                     </div>
+                                     <div class="coral-Accordion-content">
+                                       Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit.
+                                     </div>
+                                   </li>
+                                 </ul>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-51acf8ac-fa69-4e4d-9b78-efb2da0d0333" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading coral-Heading--3">Disabled</h3>
+                <p>Specified via <code class="atv">data-disabled="true"</code>.</p>
+                    <div id="guide-bc127857-2cec-4737-8aae-440a6989cf34" class="u-columnMedium">
+                                 <ul class="coral-Accordion" data-init="accordion" data-disabled='true' >
+                                   <li class="coral-Accordion-item">
+                                     <h3 class="coral-Accordion-header">
+                                       <span class="coral-Accordion-title">Accordion Item 1</span>
+                                       <span class="coral-Accordion-subtitle">Subtitle 1</span>
+                                     </h3>
+                                     <div class="coral-Accordion-content">
+                                       Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit.
+                                     </div>
+                                   </li>
+                                   <li class="coral-Accordion-item">
+                                     <div class="coral-Accordion-header">
+                                       <span class="coral-Accordion-title">Accordion Item 2</span>
+                                       <span class="coral-Accordion-subtitle">Subtitle 2</span>
+                                     </div>
+                                     <div class="coral-Accordion-content">
+                                       Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit.
+                                     </div>
+                                   </li>
+                                   <li class="coral-Accordion-item is-active">
+                                     <div class="coral-Accordion-header">
+                                       <span class="coral-Accordion-title">Accordion Item 3</span>
+                                       <span class="coral-Accordion-subtitle">Subtitle 3</span>
+                                     </div>
+                                     <div class="coral-Accordion-content">
+                                       Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit.
+                                     </div>
+                                   </li>
+                                 </ul>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-bc127857-2cec-4737-8aae-440a6989cf34" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+              </section>
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Collapsible</h2>
+                <h3 class="coral-Heading coral-Heading--3">Normal</h3>
+                <p>The normal state of the component.</p>
+                    <div id="guide-82990edc-d977-4394-ac49-084f1ed97e59" class="u-columnMedium">
+                                 <div class="coral-Collapsible" data-init="collapsible" >
+                                   <h3 class="coral-Collapsible-header">
+                                     <span class="coral-Collapsible-title">Collapsible</span>
+                                     <span class="coral-Collapsible-subtitle"></span>
+                                   </h3>
+                                   <div class="coral-Collapsible-content">
+                                     Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit.
+                                   </div>
+                                 </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-82990edc-d977-4394-ac49-084f1ed97e59" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading coral-Heading--3">Disabled</h3>
+                <p>Specified via <code class="atv">data-disabled="true"</code>.</p>
+                    <div id="guide-de8de137-eb09-4f7e-9614-42097fce2edd" class="u-columnMedium">
+                                 <div class="coral-Collapsible" data-init="collapsible" data-disabled='true' >
+                                   <h3 class="coral-Collapsible-header">
+                                     <span class="coral-Collapsible-title">Collapsible</span>
+                                     <span class="coral-Collapsible-subtitle"></span>
+                                   </h3>
+                                   <div class="coral-Collapsible-content">
+                                     Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit.
+                                   </div>
+                                 </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-de8de137-eb09-4f7e-9614-42097fce2edd" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading coral-Heading--3">Block</h3>
+                <p>Specified via <code class="atv">coral-Collapsible--block</code>.</p>
+                    <div id="guide-84a434bb-99c7-42f7-8d59-bf739975f1f9" class="u-columnMedium">
+                                 <div class="coral-Collapsible coral-Collapsible--block" data-init="collapsible" >
+                                   <h3 class="coral-Collapsible-header">
+                                     <span class="coral-Collapsible-title">Collapsible</span>
+                                     <span class="coral-Collapsible-subtitle"></span>
+                                   </h3>
+                                   <div class="coral-Collapsible-content">
+                                     Chocolate cake jelly cupcake dessert. Chocolate bar lemon drops croissant candy canes caramels jelly beans lemon drops pie wypas. Faworki donut macaroon jujubes brownie cupcake topping macaroon gummies. Halvah gummi bears brownie chupa chups. Fruitcake lemon drops gingerbread cake apple pie. Pastry carrot cake pie. Brownie oat cake gummies. Bonbon soufflé jujubes soufflé biscuit.
+                                   </div>
+                                 </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-84a434bb-99c7-42f7-8d59-bf739975f1f9" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+              </section>
+              <section class="guide-Example-section">
+                <section class="guide-jsDocFragement">
+    <div class="content">
+        <!--<h1 class="line">Class: Accordion</h1>-->
+        
+          
+
+
+
+<section>
+
+<h1 class="coral-Heading--1 u-line">Accordion
+ JSDoc</h1>
+
+    <div class="class-description">Class Description: A widget for both accordions and collapsibles</div>
+
+
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        <h2 class="line">Extends</h2>
+
+        <ul>
+            <li>CUI.Widget</li>
+        </ul>
+    
+
+    
+        
+<dt>
+    <h2 class="line">Constructor</h2>
+
+    
+</dt>
+
+
+<div class="description">
+    Creates a new accordion or collapsible
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">options</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Widget options.
+                
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+		<th>Optional</th>
+		
+
+		
+		<th>Default</th>
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">active</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Mixed</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">Index of the initial active tab of the accordion or one of true/false for collapsibles</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">disabled</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">boolean</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">Set the disabled state of the widget.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">iconClassCollapsed</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "coral-Icon--chevronRight"
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">iconClassDisabled</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "coral-Icon--chevronDown"
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+            </td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Accordion.js, line 20</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+    
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h2 class="line">Methods</h2>
+
+        <dl>
+            
+<dt>
+    <h3 class="name" id="_makeAccessible"><span class="type-signature">&lt;private> </span>_makeAccessible</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    adds accessibility attributes and features
+per the WAI-ARIA Accordion widget design pattern:
+http://www.w3.org/WAI/PF/aria-practices/#accordion
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Accordion.js, line 293</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="_onFocusIn"><span class="type-signature">&lt;private> </span>_onFocusIn</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    focusin event handler, used to update tabindex properties on accordion headers
+and to display focus style on headers.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Accordion.js, line 447</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="_onFocusOut"><span class="type-signature">&lt;private> </span>_onFocusOut</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    focusout event handler, used to clear the focus style on headers.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Accordion.js, line 469</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="_onKeyDown"><span class="type-signature">&lt;private> </span>_onKeyDown</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    keydown event handler, which defines the keyboard behavior of the accordion control
+per the WAI-ARIA Accordion widget design pattern:
+http://www.w3.org/WAI/PF/aria-practices/#accordion
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Accordion.js, line 370</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="_onMouseDown"><span class="type-signature">&lt;private> </span>_onMouseDown</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    mousedown event handler, used flag
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Accordion.js, line 482</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+        <h2 class="line">Events</h2>
+
+        <dl>
+            
+<dt>
+    <h3 class="name" id="event:activate">activate</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered when the accordion is activated
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">evt</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Event object</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Accordion.js, line 491</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="event:collapse">collapse</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered while the accordion is collapsing after each step of the animation
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">evt</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Event object</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">options</td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">animation</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Promise</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The animation promise</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">progress</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Number</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The progress</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">remainingMs</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Number</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The remaining time of the animation in milliseconds</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+            </td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Accordion.js, line 497</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="event:deactivate">deactivate</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered when the accordion is deactivated
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">evt</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Event object</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Accordion.js, line 493</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="event:expand">expand</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered while the accordion is expanding after each step of the animation
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">evt</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Event object</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">options</td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">animation</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Promise</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The animation promise</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">progress</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Number</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The progress</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">remainingMs</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Number</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The remaining time of the animation in milliseconds</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+            </td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Accordion.js, line 495</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        </dl>
+    
+</article>
+
+</section>
+
+
+
+
+        
+    </div>
+   
+                </section>
+              </section>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>
