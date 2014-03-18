@@ -19,6 +19,7 @@ module.exports = function(grunt) {
         resources: 'resources',
         components: 'components',
         examples: 'examples',
+        documentation: 'documentation',
         tests: 'tests',
         temp: 'temp'
       }
