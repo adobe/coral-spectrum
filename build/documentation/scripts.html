@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Components</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="../js/coral.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light">
+    <section class="guide-Component guide-Shared-documentation">
+          <section class="guide-Example-section">
+            <h2 class="coral-Heading--2 u-line">Components</h2>
+            <p>CoralUI provides several components intended as building blocks for your application. Some components are only composed of HTML and CSS while others also require JavaScript. Let's take a deeper look at the mechanics of components that require JavaScript.</p>
+            <h1 class="coral-Heading coral-Heading--1">Instantiating a Component</h1>
+            <p>Each component that relies on JavaScript has a "class" that manages the logic, DOM, and model for the component. For example, the Accordion component has a class that acts as a blueprint for all instances of Accordion. For each DOM element that represents a component, a single JavaScript instance must be created in order for the component as a whole to function properly. There are multiple ways these instances can be created as described below.</p>
+            <h2 class="coral-Heading coral-Heading--2">Instantiating through the DOM API</h2>
+            <p>When your application's document is first loaded, CoralUI will automatically scan the document for elements with <code>data-init</code> attributes and create JavaScript component instances based on the attribute's value. For example, CoralUI will look for any element with the attribute of <code>data-init="numberinput"</code> and, for each element it finds, will automatically create an instance of the NumberInput component class. The JavaScript instance will then manage the DOM element that held the <code>data-init</code> attribute.</p>
+                <label class="coral-Label guide-Example-caption">Instantiating NumberInput using the DOM API:</label>
+                <div class="u-columnLarge">
+                      <pre id="guide-5dacb09f-16b7-44e0-8ba5-3969810b7434" data-src-id="guide-5dacb09f-16b7-44e0-8ba5-3969810b7434" class="prettyprint linenums guide-Example-snippet">
+                        <div class="coral-InputGroup" data-init="numberinput">
+                          ...
+                        </div>
+                        </pre>
+                </div>
+            <p><i class="coral-Icon coral-Icon--alert"></i>&nbsp;&nbsp;If you add an element after the document as loaded, this process of scanning the document and instantiating objects will not happen again automatically. Instead, you will need to manually restart the process by triggering a <code>cui-contentloaded</code> event on an ancestor of the element:</p>
+                <label class="coral-Label guide-Example-caption">Manually triggering DOM scanning:</label>
+                <div class="u-columnLarge">
+                      <pre id="guide-6a82ca65-7dd5-4723-a8d4-216f5dcac6d9" data-src-id="guide-6a82ca65-7dd5-4723-a8d4-216f5dcac6d9" class="prettyprint linenums guide-Example-snippet">
+                        $(document).trigger('cui-contentloaded');
+                        </pre>
+                </div>
+            <p>Note that the <code>data-init</code> attribute is only useful when automatically instantiating components using the DOM API; it provides no other purpose.</p>
+            <p>To pass options to the JavaScript constructor, you can set other <code>data-*</code> attributes in the markup. The specific attribute names and possible values are dependent upon the component being created. For example, you may set the max value of a NumberInput to 200 using the <code>data-max</code> attribute:</p>
+                <label class="coral-Label guide-Example-caption">Passing a max value to the NumberInput constructor using the DOM API:</label>
+                <div class="u-columnLarge">
+                      <pre id="guide-ab8e9264-64fe-4a4c-bca3-51ff957db367" data-src-id="guide-ab8e9264-64fe-4a4c-bca3-51ff957db367" class="prettyprint linenums guide-Example-snippet">
+                        <div class="coral-InputGroup" data-init="numberinput" data-max="200">
+                          ...
+                        </div>
+                        </pre>
+                </div>
+            <h2 class="coral-Heading coral-Heading--2">Instantiating using a JavaScript constructor</h2>
+            <p>You can also instantiate the component directly through JavaScript by using the component's class constructor.</p>
+                <label class="coral-Label guide-Example-caption">Instantiating NumberInput using the JavaScript constructor:</label>
+                <div class="u-columnLarge">
+                      <pre id="guide-b07e5b3d-546f-482d-9da2-875d5c334872" data-src-id="guide-b07e5b3d-546f-482d-9da2-875d5c334872" class="prettyprint linenums guide-Example-snippet">
+                        var numberInput = new CUI.NumberInput({ element:'#myNumberInput' });
+                        </pre>
+                </div>
+            <p>Notice the JavaScript instance must be made aware of the DOM element that it should manage. It will accept a selector (as shown in the example), a DOM element, or a jQuery object.</p>
+            <p>To pass other options to the constructor, add them to the object being passed as an argument.</p>
+                <label class="coral-Label guide-Example-caption">Passing a max value to the NumberInput constructor:</label>
+                <div class="u-columnLarge">
+                      <pre id="guide-b0a44cb9-9786-4859-be01-4219a5de88b2" data-src-id="guide-b0a44cb9-9786-4859-be01-4219a5de88b2" class="prettyprint linenums guide-Example-snippet">
+                        var numberInput = new CUI.NumberInput({ element:'#myNumberInput', max: 200 });
+                        </pre>
+                </div>
+            <h2 class="coral-Heading coral-Heading--2">Instantiating using jQuery</h2>
+            <p>Since CoralUI leverages jQuery, helper methods have been provided that can be called on <a href="https://learn.jquery.com/using-jquery-core/jquery-object/" target="_blank">jQuery objects</a>. For example, if an element that represents a NumberInput resides on the document and we wish to instantiate the component, we would first select the element using jQuery then call the respective helper method on the jQuery object.</p>
+                <label class="coral-Label guide-Example-caption">Instantiating NumberInput using jQuery:</label>
+                <div class="u-columnLarge">
+                      <pre id="guide-efd11212-83e8-427c-b2fd-12ea6ea8794e" data-src-id="guide-efd11212-83e8-427c-b2fd-12ea6ea8794e" class="prettyprint linenums guide-Example-snippet">
+                        $('#my-number-input').numberInput();
+                        </pre>
+                </div>
+            <p>The helper method name is the decapitalized class name. In this case, the class name is <code>NumberInput</code>. By lowercasing the first letter, we arrive at <code>numberInput</code>.</p>
+            <p>Options can be passed to the contructor by way of passing an object as an argument.</p>
+                <label class="coral-Label guide-Example-caption">Passing a max value to the NumberInput constructor using jQuery:</label>
+                <div class="u-columnLarge">
+                      <pre id="guide-f63f2f56-ba38-41e6-8fe7-d187120925b9" data-src-id="guide-f63f2f56-ba38-41e6-8fe7-d187120925b9" class="prettyprint linenums guide-Example-snippet">
+                        $('#my-number-input').numberInput({ max: 200 });
+                        </pre>
+                </div>
+            <h1 class="coral-Heading coral-Heading--1">Retrieving a component's JavaScript instance</h1>
+            <p>When a component is instantiated, the JavaScript instance is placed in a data store for its associated element using <code><a href="https://api.jquery.com/jQuery.data/" target="_blank">jQuery.data</a></code>. Likewise, at any time you can retrieve this instance from the element's data store by using <code>jQuery.data</code>.</p>
+                <label class="coral-Label guide-Example-caption">Retrieving the JavaScript instance of a component:</label>
+                <div class="u-columnLarge">
+                      <pre id="guide-e68300c6-f2ab-4e00-bbf2-6a537c57e234" data-src-id="guide-e68300c6-f2ab-4e00-bbf2-6a537c57e234" class="prettyprint linenums guide-Example-snippet">
+                        var numberInput = $('#my-number-input').data('numberInput');
+                        </pre>
+                </div>
+            <p>The string passed to the method is the decapitalized class name. In this case, the class name is <code>NumberInput</code>. By lowercasing the first letter, we arrive at <code>numberInput</code>.</p>
+            <h1 class="coral-Heading coral-Heading--1">Programatically interacting with a component</h1>
+            <p>Once a component is instantiated, you may wish to programatically interact with the component by calling methods on its JavaScript instance. For example, you may want to programatically add a new tab to a TabPanel. To do this, retrieve the JavaScript instance then call the appropriate method as documented.</p>
+                <label class="coral-Label guide-Example-caption">Programatically adding a tab:</label>
+                <div class="u-columnLarge">
+                      <pre id="guide-4bc18281-4b4f-4763-afc0-53b7cfccf169" data-src-id="guide-4bc18281-4b4f-4763-afc0-53b7cfccf169" class="prettyprint linenums guide-Example-snippet">
+                        var tabPanel = $('#my-tab-panel').data('tabs');
+                        tabPanel.addItem({
+                          tabContent: 'Fruits',
+                          panelContent: 'Apples, Bananas, Oranges'
+                        });
+                        </pre>
+                </div>
+            <p>If what you are changing is an option that can also be passed through the constructor, you will need to instead use the <code>set()</code> method. For example, after a TabPanel has been instantiated, the third tab can be activated by calling the <code>set()</code> method passing <code>active</code> for the name of the option and <code>2</code> for the 0-based index of the tab to be activated.</p>
+                <label class="coral-Label guide-Example-caption">Programatically activating the third tab:</label>
+                <div class="u-columnLarge">
+                      <pre id="guide-fb993ae0-3944-4f23-b2e5-e6c1b28ff290" data-src-id="guide-fb993ae0-3944-4f23-b2e5-e6c1b28ff290" class="prettyprint linenums guide-Example-snippet">
+                        var tabPanel = $('#my-tab-panel').data('tabs');
+                        tabPanel.set('active', 2);
+                        </pre>
+                </div>
+            <p>The nuance between when <code>set()</code> must be called instead of other methods like <code>addItem()</code> can be frustrating to consumers. We understand and will be simplifying this in a future release. Please see the examples in the component documentation for specifics on which methods to use in the meantime.</p>
+            <h1 class="coral-Heading coral-Heading--1">Responding to user interaction</h1>
+            <p>When a user interacts with a component, the component will often trigger useful events from its DOM element. For example, you may want to react to a selection on the Select component. This is done by adding an event listener to the component's element.</p>
+                <label class="coral-Label guide-Example-caption">Responding to a selection on the Select component:</label>
+                <div class="u-columnLarge">
+                      <pre id="guide-febf44c9-1a01-4257-a39c-4812ab826463" data-src-id="guide-febf44c9-1a01-4257-a39c-4812ab826463" class="prettyprint linenums guide-Example-snippet">
+                        $('#my-select').on('selected', function(event) {
+                          console.log(event.selected);
+                        }
+                        </pre>
+                </div>
+            <p>Please see the component documentation for which events each component triggers.</p>
+          </section>
+    </section>
+  </body>
+</html>

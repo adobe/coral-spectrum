@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Slider</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light">
+    <div class="guide-Component">
+      <article class="guide-Component-detail">
+        <heading>
+          <h1 class="coral-Heading--1 u-line">Slider</h1>
+        </heading>
+        <section class="guide-Component-metadata">
+          <section class="guide-componentDetails guide-Example-section u-line">
+            <p>Current Version: 2.0.7</p>
+            <p>Related Components: </p>
+          </section>
+        </section>
+        <section class="guide-Component-documentation">
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Markup Examples</h2>
+                <p>The folllowing are markup examples for the Slider.</p>
+                <h3 class="coral-Heading--3">Basic</h3>
+                <p>The following is an example of a slider with a <code>min="10"</code>, <code>max="20"</code>, and <code>step="2"</code>.</p>
+                    <div id="guide-dcfef4f3-fac7-4b9d-8916-8ae60ab0c00a" class="u-columnMedium">
+                      <div class="coral-Slider" data-init="slider">
+                          <label>
+                            Basic Horizontal Slider<br>
+                            <input type="range" value="14" min="10" max="20" step="2">
+                          </label>
+                      </div>
+                      
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-dcfef4f3-fac7-4b9d-8916-8ae60ab0c00a" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading--3">Tooltips</h3>
+                <p>The following is an example of a configuration with tooltips, specified via <code>data-tooltips="true"</code>.</p>
+                    <div id="guide-3ff47a99-4db9-45ab-8fc4-6b9427301955" class="u-columnMedium">
+                      <div class="coral-Slider" data-init="slider" data-tooltips="true">
+                          <label>
+                            Tooltips Slider<br>
+                            <input type="range" value="14" min="10" max="20" step="2">
+                          </label>
+                      </div>
+                      
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-3ff47a99-4db9-45ab-8fc4-6b9427301955" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading--3">Tick marks</h3>
+                <p>The following is an example of a configuration with tick marks, specified via <code>data-ticks="true"</code> and <code>data-filled="true"</code>.</p>
+                    <div id="guide-db8239ac-5800-4abe-bc01-3abfdc6931be" class="u-columnMedium">
+                      <div class="coral-Slider" data-init="slider" data-ticks="true" data-filled="true">
+                          <label>
+                            Tick marks slider<br>
+                            <input type="range" value="14" min="10" max="20" step="2">
+                          </label>
+                      </div>
+                      
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-db8239ac-5800-4abe-bc01-3abfdc6931be" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading--3">Animation</h3>
+                <p>The following is an example of a configuration with a sliding animation, specified via <code>data-slide="true"</code>.</p>
+                    <div id="guide-50bf1d80-7730-4be9-90a1-c37d2bb7848b" class="u-columnMedium">
+                      <div class="coral-Slider" data-init="slider" data-slide="true" data-ticks="true" data-filled="true">
+                          <label>
+                            Tick marks slider<br>
+                            <input type="range" value="14" min="10" max="20" step="2">
+                          </label>
+                      </div>
+                      
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-50bf1d80-7730-4be9-90a1-c37d2bb7848b" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading--3">Disabled</h3>
+                <p>The following is an example of a disabled Slider, specified via <code>is-disabled</code> class on the element and <code>disabled</code> class on the input element.</p>
+                    <div id="guide-71ff6c57-03a0-447b-b425-801fb079b4d9" class="u-columnMedium">
+                      <div class="coral-Slider is-disabled" data-init="slider" data-ticks="true" data-filled="true">
+                          <label>
+                            Basic Horizontal Slider<br>
+                            <input type="range" value="14" min="10" max="20" step="2" disabled>
+                          </label>
+                      </div>
+                      
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-71ff6c57-03a0-447b-b425-801fb079b4d9" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading--3">Vertical</h3>
+                <p>The following are vertical examples of the above Sliders, specified via <code>data-orientation="vertical"</code>.</p>
+                    <div id="guide-15c515ad-f86e-4f60-bb45-19176eca7d22" class="u-columnMedium">
+                      <div display="inline-block">
+                        <div class="coral-Slider" data-init="slider" data-orientation="vertical">
+                            <label>
+                              Basic Horizontal Slider<br>
+                              <input type="range" value="14" min="10" max="20" step="2">
+                            </label>
+                        </div>
+                        <div class="coral-Slider" data-init="slider" data-orientation="vertical" data-tooltips="true">
+                            <label>
+                              Tooltips Slider<br>
+                              <input type="range" value="14" min="10" max="20" step="2">
+                            </label>
+                        </div>
+                        <div class="coral-Slider" data-init="slider" data-orientation="vertical" data-ticks="true" data-filled="true">
+                             <label>
+                               Tick marks slider<br>
+                               <input type="range" value="14" min="10" max="20" step="2">
+                             </label>
+                        </div>
+                        <div class="coral-Slider is-disabled" data-init="slider" data-orientation="vertical" data-ticks="true" data-filled="true">
+                          <label>
+                            Basic Horizontal Slider<br>
+                            <input type="range" value="14" min="10" max="20" step="2" disabled>
+                          </label>
+                        </div>
+                      </div>
+                      
+                      
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-15c515ad-f86e-4f60-bb45-19176eca7d22" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+              </section>
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Range Sliders</h2>
+                <p>Range Sliders allow users to specify a range via two different input controls. Note the markup is considerably different.</p>
+                <h3 class="coral-Heading--3">Default</h3>
+                <p>The following is an example of a range Slider with ticks.</p>
+                    <div id="guide-9aa8841f-5406-47e7-9628-bc617a0e810b" class="u-columnMedium">
+                      <div class="coral-Slider" data-init="slider" data-ticks="true" data-filled="true">
+                        <fieldset>
+                          <!-- Note if you remove the legend, rendering errors occur. It can be empty, apparently. -->
+                          <legend></legend>
+                          <label>Minimum <input type="range" value="14" min="10" max="20" step="2"></label>
+                          <label>Maximum <input type="range" value="16" min="10" max="20" step="2"></label>
+                        </fieldset>
+                      </div>
+                      
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-9aa8841f-5406-47e7-9628-bc617a0e810b" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading--3">Bound ranges</h3>
+                <p>The following is an example of a 'bound' slider, where you cannot slide the minimum past the maximum, and vice versa. Specified via <code>data-bound="true"</code>.</p>
+                    <div id="guide-ef9831aa-98c2-47b4-9b23-79538355a6dc" class="u-columnMedium">
+                      <div class="coral-Slider" data-init="slider" data-bound="true" data-ticks="true" data-filled="true">
+                        <fieldset>
+                          <!-- Note if you remove the legend, rendering errors occur. It can be empty, apparently. -->
+                          <legend></legend>
+                          <label>Minimum <input type="range" value="14" min="10" max="20" step="2"></label>
+                          <label>Maximum <input type="range" value="16" min="10" max="20" step="2"></label>
+                        </fieldset>
+                      </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-ef9831aa-98c2-47b4-9b23-79538355a6dc" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+              </section>
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Labeled Sliders</h2>
+                <p>The labeled slider uses the same options/markup as the slider, but allows you to specify a list of labels for the slider's ticks.  Note that it is implemented in a subclass, specified via the <code>labeled-slider</code> data initializer. Labeled sliders are not currently supported in a vertical orientation.</p>
+                <h3 class="coral-Heading--3">Basic</h3>
+                <p>The following example uses basic (non-alternating) label markers.</p>
+                    <div id="guide-0752a20b-68ba-41db-9277-2fa48668c37d" class="u-columnMedium">
+                      <div class="coral-Slider coral-Slider--ticked coral-Slider--filled" data-init="labeled-slider" data-tooltips="true">
+                        <label>
+                          Slider with Labeled Ticks and Tooltips<br>
+                          <input type="range" value="14" min="10" max="20" step="2">
+                        </label>
+                        <ul class="coral-Slider-tickLabels">
+                          <li>First label</li>
+                          <li>Second label</li>
+                          <li>Third label</li>
+                          <li>Fourth label</li>
+                          <li>Fifth label</li>
+                        </ul>
+                      </div>
+                      
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-0752a20b-68ba-41db-9277-2fa48668c37d" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading--3">Alternating</h3>
+                <p>The following example specifies alternating label markers via the <code>coral-Slider--alternatingLabels</code> class.</p>
+                    <div id="guide-65ecbd5e-cebb-43b6-9929-3a0fdd052c68" class="u-columnMedium">
+                      <div class="coral-Slider coral-Slider--ticked coral-Slider--filled coral-Slider--alternatingLabels" data-init="labeled-slider" data-tooltips="true">
+                        <label>
+                          Slider with Labeled Ticks and Tooltips<br>
+                          <input type="range" value="14" min="10" max="20" step="2">
+                        </label>
+                        <ul class="coral-Slider-tickLabels">
+                          <li>First label</li>
+                          <li>Second label</li>
+                          <li>Third label</li>
+                          <li>Fourth label</li>
+                          <li>Fifth label</li>
+                        </ul>
+                      </div>
+                      
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-65ecbd5e-cebb-43b6-9929-3a0fdd052c68" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading--3">Range</h3>
+                <p>The following is an example of a range Slider with labeled tick-marks.</p>
+                    <div id="guide-9b498e1f-f87f-44a1-8643-aa4fdbfbd332" class="u-columnMedium">
+                      <div class="coral-Slider coral-Slider--ticked coral-Slider--filled coral-Slider--alternatingLabels" data-init="labeled-slider">
+                          <fieldset>
+                              <legend></legend>
+                              <label>Minimum <input type="range" value="14" min="10" max="20" step="2"></label>
+                              <label>Maximum <input type="range" value="16" min="10" max="20" step="2"></label>
+                          </fieldset>
+                          <ul class="coral-Slider-tickLabels">
+                            <li>First label</li>
+                            <li>Second label</li>
+                            <li>Third label</li>
+                            <li>Fourth label</li>
+                            <li>Fifth label</li>
+                          </ul>
+                      </div>
+                      
+                      
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-9b498e1f-f87f-44a1-8643-aa4fdbfbd332" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+              </section>
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Javascript Examples</h2>
+                <p>The following examples demonstrate usage of the Javascript API's for a Slider.</p>
+                <h3 class="coral-Heading--3">Class Initialization</h3>
+                <p>The Slider can construct itself with minimal markup. The following is an example of this.</p>
+                    <div id="guide-41356cee-aaae-4d7b-9cf7-2ab1dec4e0f2" class="u-columnLarge">
+                      <div id="mySlider1"></div>
+                      
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-41356cee-aaae-4d7b-9cf7-2ab1dec4e0f2" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <div id="constructorExample1">
+                  <script>
+                   $(document).ready(function() {
+                     var slider = new CUI.Slider({ element:'#mySlider1', ticks:true, filled:true, min:1, max:50, value:10, step:2, slide:true, tooltips:true });
+                   })
+                  </script>
+                  
+                </div>
+                <p>The following Javascript manually initializes the component on page initialization.</p>
+                    <pre id="constructorExample1" data-src-id="constructorExample1" class="prettyprint linenums guide-Example-snippet">
+                      <p>No example content provided!</p></pre>
+                <h3 class="coral-Heading--3">Class Initialization - Range Slider</h3>
+                <p>The following is an example of creating a range Slider. Note this is accomplished via setting value to a two-item array: <code>value:[10,20]</code></p>
+                    <div id="guide-32ac3508-fff0-4b46-b58b-871ec60f8537" class="u-columnLarge">
+                      <div id="mySlider2"></div>
+                      
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-32ac3508-fff0-4b46-b58b-871ec60f8537" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <div id="constructorExample2">
+                  <script>
+                   $(document).ready(function() {
+                     var slider = new CUI.Slider({ element:'#mySlider2', ticks:true, filled:true, min:1, max:50, value:[10,20], step:2, slide:true, tooltips:true });
+                   })
+                  </script>
+                </div>
+                <p>The following Javascript manually initializes the component on page initialization.</p>
+                    <pre id="constructorExample2" data-src-id="constructorExample2" class="prettyprint linenums guide-Example-snippet">
+                      <p>No example content provided!</p></pre>
+                <h3 class="coral-Heading--3">Class Initialization - Labeled Slider</h3>
+                <p>The following is an example of creating a labeled tooltip. Note that labels must be passed in via DOM elements, and usage of the <code>LabeledSlider</code> subclass.</p>
+                    <div id="guide-395e0c5a-6293-405a-838a-3b661f975643" class="u-columnLarge">
+                      <div id="mySlider3">
+                        <ul class="coral-Slider-tickLabels">
+                           <li>First</li>
+                           <li>Second</li>
+                           <li>Third</li>
+                        </ul>
+                      </div>
+                      
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-395e0c5a-6293-405a-838a-3b661f975643" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <div id="constructorExample3">
+                  <script>
+                   $(document).ready(function() {
+                     var slider = new CUI.LabeledSlider({ element:'#mySlider3', ticks:true, filled:true, min:0, max:4, value:3, step:1, tooltips:true });
+                   })
+                  </script>
+                </div>
+                <p>The following Javascript manually initializes the component on page initialization.</p>
+                    <pre id="constructorExample3" data-src-id="constructorExample3" class="prettyprint linenums guide-Example-snippet">
+                      <p>No example content provided!</p></pre>
+                <h3 class="coral-Heading-3">Responding to User Interaction</h3>
+                <p>The following demonstrates how to respond to value change events for the components above.</p>
+                <div id="panelInteractionExample">
+                  <script>
+                    $(document).ready(function () {
+                      var eventLog = $('#sliderLog');
+                      $("#mySlider1, #mySlider2, #mySlider3").on('change', function(event) {
+                        var $input = $(event.target);
+                        eventLog.log('Value changed ' + $input.attr('id') + " : " + $input.val());
+                      });
+                    });
+                  </script>
+                </div>
+                    <pre id="panelInteractionExample" data-src-id="panelInteractionExample" class="prettyprint linenums guide-Example-snippet">
+                      <p>No example content provided!</p></pre>
+                    <label class="coral-Label guide-Example-caption">Log:</label>
+                    <textarea id="sliderLog" readonly="true" data-init="eventlog" class="coral-Textfield coral-Textfield--multiline guide-Example-log"></textarea>
+              </section>
+              <section class="guide-Example-section">
+                <section class="guide-jsDocFragement">
+    <div class="content">
+        <!--<h1 class="line">Class: Slider</h1>-->
+        
+          
+
+
+
+<section>
+
+<h1 class="coral-Heading--1 u-line">Slider
+ JSDoc</h1>
+
+
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        <h2 class="line">Extends</h2>
+
+        <ul>
+            <li>CUI.Widget</li>
+        </ul>
+    
+
+    
+        
+<dt>
+    <h2 class="line">Constructor</h2>
+
+    
+</dt>
+
+
+<div class="description">
+    Creates a slider.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">options</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Component options
+                
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+		<th>Optional</th>
+		
+
+		
+		<th>Default</th>
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">step</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">number</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    1
+                
+                </td>
+            
+
+            <td class="description last">The steps to snap in</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">min</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">number</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    1
+                
+                </td>
+            
+
+            <td class="description last">Minimum value</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">max</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">number</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    100
+                
+                </td>
+            
+
+            <td class="description last">Maximum value</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">value</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">number</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    1
+                
+                </td>
+            
+
+            <td class="description last">Starting value</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">tooltips</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">number</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">Show tooltips?</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">orientation</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    horizontal
+                
+                </td>
+            
+
+            <td class="description last">Either 'horizontal' or 'vertical'</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">slide</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">boolean</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">True for smooth sliding animations. Can make the slider unresponsive on some systems.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">disabled</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">boolean</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">True for a disabled element</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">bound</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">boolean</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">For multi-input sliders, indicates that the min value is bounded by the max value and the max value is bounded by the min</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+            </td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Slider.js, line 24</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+    
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h2 class="line">Methods</h2>
+
+        <dl>
+            
+<dt>
+    <h3 class="name" id="setValue"><span class="type-signature"></span>setValue</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Set the current value of the slider
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">value</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">int</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The new value for the slider</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">handleNumber</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">int</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">If the slider has 2 handles, you can specify which one to change, either 0 or 1</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Slider.js, line 329</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+        
+    </div>
+   
+                </section>
+              </section>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>

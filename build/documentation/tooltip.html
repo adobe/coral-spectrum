@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Tooltip</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light">
+    <div class="guide-Component">
+      <article class="guide-Component-detail">
+        <heading>
+          <h1 class="coral-Heading--1 u-line">Tooltip</h1>
+        </heading>
+        <section class="guide-Component-metadata">
+          <section class="guide-componentDetails guide-Example-section u-line">
+            <p>Current Version: 2.1.1</p>
+            <p>Related Components: </p>
+          </section>
+        </section>
+        <section class="guide-Component-documentation">
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Variants</h2>
+                <h3 class="coral-Heading coral-Heading--3">Info</h3>
+                <p>Conveys helpful information. Achieved using the <code class="atv">coral-Tooltip--info</code> class.</p>
+                    <div id="guide-d2eb37cd-2b8f-4321-b444-c7ab7d7b0a6d" class="u-columnMedium"><span class="coral-Tooltip coral-Tooltip--info"  data-init='tooltip'>Tooltip content</span>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-d2eb37cd-2b8f-4321-b444-c7ab7d7b0a6d" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading coral-Heading--3">Error</h3>
+                <p>Draws attention to critical problems. Achieved using the <code class="atv">coral-Tooltip--error</code> class.</p>
+                    <div id="guide-0f652adf-03e0-47ef-9350-625ca8621289" class="u-columnMedium"><span class="coral-Tooltip coral-Tooltip--error"  data-init='tooltip'>Tooltip content</span>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-0f652adf-03e0-47ef-9350-625ca8621289" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading coral-Heading--3">Notice</h3>
+                <p>Draws attention to potential problems. Achieved using the <code class="atv">coral-Tooltip--notice</code> class.</p>
+                    <div id="guide-d84f1931-da7a-4c8b-b91d-92e424c26cc6" class="u-columnMedium"><span class="coral-Tooltip coral-Tooltip--notice"  data-init='tooltip'>Tooltip content</span>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-d84f1931-da7a-4c8b-b91d-92e424c26cc6" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading coral-Heading--3">Success</h3>
+                <p>Draws attention to a success state. Achieved using the <code class="atv">coral-Tooltip--success</code> class.</p>
+                    <div id="guide-f85764db-d7ba-45b3-89e5-ef5104e6b9a9" class="u-columnMedium"><span class="coral-Tooltip coral-Tooltip--success"  data-init='tooltip'>Tooltip content</span>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-f85764db-d7ba-45b3-89e5-ef5104e6b9a9" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading coral-Heading--3">Inspect</h3>
+                <p>Provides additional information for data points on a chart. Achieved using the <code class="atv">coral-Tooltip--inspect</code> class.</p>
+                    <div id="guide-47af7d95-d6e0-4def-b584-f849be29a804" class="u-columnMedium"><span class="coral-Tooltip coral-Tooltip--inspect"  data-init='tooltip'>Tooltip content</span>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-47af7d95-d6e0-4def-b584-f849be29a804" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+              </section>
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Positions</h2>
+                <h3 class="coral-Heading coral-Heading--3">Above</h3>
+                <p>Positions the tooltip above a target element. Achieved using the <code class="atv">coral-Tooltip--positionAbove</code> class.</p>
+                    <div id="guide-386091c0-2a6c-47c5-a1c8-c8cf12b42dd4" class="u-columnMedium"><span class="coral-Tooltip coral-Tooltip--positionAbove"  data-init='tooltip'>Tooltip content</span>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-386091c0-2a6c-47c5-a1c8-c8cf12b42dd4" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading coral-Heading--3">Below</h3>
+                <p>Positions the tooltip below a target element. Achieved using the <code class="atv">coral-Tooltip--positionBelow</code> class.</p>
+                    <div id="guide-f624ef80-632b-4c3b-a526-3e6aab7a97c2" class="u-columnMedium"><span class="coral-Tooltip coral-Tooltip--positionBelow"  data-init='tooltip'>Tooltip content</span>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-f624ef80-632b-4c3b-a526-3e6aab7a97c2" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading coral-Heading--3">Left</h3>
+                <p>Positions the tooltip to the left of a target element. Achieved using the <code class="atv">coral-Tooltip--positionLeft</code> class.</p>
+                    <div id="guide-ab4808ef-d1f3-4b16-92f2-ed973bfd3031" class="u-columnMedium"><span class="coral-Tooltip coral-Tooltip--positionLeft"  data-init='tooltip'>Tooltip content</span>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-ab4808ef-d1f3-4b16-92f2-ed973bfd3031" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading coral-Heading--3">Right</h3>
+                <p>Positions the tooltip to the right of a target element. Achieved using the <code class="atv">coral-Tooltip--positionRight</code> class.</p>
+                    <div id="guide-105daa41-cb8e-4024-a042-01ee24bcbd15" class="u-columnMedium"><span class="coral-Tooltip coral-Tooltip--positionRight"  data-init='tooltip'>Tooltip content</span>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-105daa41-cb8e-4024-a042-01ee24bcbd15" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+              </section>
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Element Targeting</h2>
+                <p>
+                  A Tooltip can be attached to any element by using the <code class="atv">data-target</code>
+                  attribute.
+                  
+                </p>
+                    <div id="guide-1326391e-ab41-44b1-9998-9860bf5d4b8e" class="u-columnMedium">
+                                <button id="my-button" class="coral-Button">My Button</button>
+                                <span class="coral-Tooltip coral-Tooltip--positionRight" data-init="tooltip" data-target="#my-button">Tooltip content</span>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-1326391e-ab41-44b1-9998-9860bf5d4b8e" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+              </section>
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Quicktip</h2>
+                <p>
+                  Quicktip is a special mode of Tooltip that provides a quick way to define a
+                  Tooltip on any element. The Tooltip will automatically be created and shown when
+                  the user mouses over the element. Quicktip mode also works for elements that have been dynamically inserted into the
+                  document.
+                  
+                </p>
+                    <div id="guide-a277e0c6-0a23-4e34-b846-99ed5c011c6c" class="u-columnMedium"><i class="coral-Icon coral-Icon--infoCircle" data-init="quicktip" data-quicktip-arrow="left" data-quicktip-type="success" data-quicktip-content="Success!"></i>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-a277e0c6-0a23-4e34-b846-99ed5c011c6c" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+              </section>
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Javascript Examples</h2>
+                <p>The following examples demonstrate usage of the Javascript API's for a Tooltip.</p>
+                <h3 class="coral-Heading--3">Class Initialization</h3>
+                <p>The following is an example of the HTML without a <code>data-init</code> initializer.</p>
+                    <div id="guide-f624ab1b-8bfd-4d05-9462-2a55c4af6e41" class="u-columnLarge"><span class="coral-Tooltip" id='myTooltip' >Tooltip content</span>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-f624ab1b-8bfd-4d05-9462-2a55c4af6e41" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <div id="constructorExample">
+                  <script>
+                   $(document).ready(function() {
+                     var tooltip = new CUI.Tooltip({ element:'#myTooltip' });
+                   })
+                  </script>
+                </div>
+                <p>The following Javascript manually initializes the component on page initialization.</p>
+                    <pre id="constructorExample" data-src-id="constructorExample" class="prettyprint linenums guide-Example-snippet">
+                      <p>No example content provided!</p></pre>
+                <h3 class="coral-Heading--3">Change the type</h3>
+                <p>The following example will change the type of the above Tooltip.</p>
+                <div id="changeTypeExample">
+                  <script>
+                    function changeType(type) {
+                      var tooltip = $('#myTooltip').data('tooltip');
+                      tooltip.set('type', type);
+                    }
+                  </script>
+                </div>
+                    <pre id="changeTypeExample" data-src-id="changeTypeExample" class="prettyprint linenums guide-Example-snippet">
+                      <p>No example content provided!</p></pre>
+                <div>
+                  <button class="coral-Button" onclick="changeType('success')">success</button>
+                  <button class="coral-Button" onclick="changeType('error')">error</button>
+                </div>
+                <h3 class="coral-Heading--3">Change the arrow direction</h3>
+                <p>The following example will change the arrow direction of the above Tooltip.</p>
+                <div id="changeArrowExample">
+                  <script>
+                    function changeArrow(direction) {
+                      var tooltip = $('#myTooltip').data('tooltip');
+                      tooltip.set('arrow', direction);
+                    }
+                  </script>
+                </div>
+                    <pre id="changeArrowExample" data-src-id="changeArrowExample" class="prettyprint linenums guide-Example-snippet">
+                      <p>No example content provided!</p></pre>
+                <div>
+                  <button class="coral-Button" onclick="changeArrow('left')">left</button>
+                  <button class="coral-Button" onclick="changeArrow('right')">right</button>
+                  <button class="coral-Button" onclick="changeArrow('top')">top</button>
+                  <button class="coral-Button" onclick="changeArrow('bottom')">bottom</button>
+                </div>
+              </section>
+              <section class="guide-Example-section">
+                <section class="guide-jsDocFragement">
+    <div class="content">
+        <!--<h1 class="line">Class: Tooltip</h1>-->
+        
+          
+
+
+
+<section>
+
+<h1 class="coral-Heading--1 u-line">Tooltip
+ JSDoc</h1>
+
+    <div class="class-description">Class Description: A tooltip that can be attached to any other element and may be displayed immediately, on mouse over or only on API call.</div>
+
+
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        <h2 class="line">Extends</h2>
+
+        <ul>
+            <li>CUI.Widget</li>
+        </ul>
+    
+
+    
+        
+<dt>
+    <h2 class="line">Constructor</h2>
+
+    
+</dt>
+
+
+<div class="description">
+    Creates a new tooltip.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">options</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Component options
+                
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+		<th>Optional</th>
+		
+
+		
+		<th>Default</th>
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">element</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Mixed</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">jQuery selector or DOM element to use for tooltip.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">target</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Mixed</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                  No<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">jQuery selector or DOM element the tooltip is attached to</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">content</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Content of the tooltip (HTML)</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">type</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    info
+                
+                </td>
+            
+
+            <td class="description last">Type of dialog to display. One of info, error, notice, success, or inspect</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">arrow</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    left
+                
+                </td>
+            
+
+            <td class="description last">Where to place the arrow? One of left, right, top or bottom.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">delay</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Integer</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    500
+                
+                </td>
+            
+
+            <td class="description last">Delay before an interactive tooltip is shown.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">distance</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Integer</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    5
+                
+                </td>
+            
+
+            <td class="description last">Additional distance of tooltip from element.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">visible</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Boolean</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last">True to display immediately, False to defer display until show() called</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">interactive</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Boolean</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">True to display tooltip on mouse over, False to only show/hide it when show()/hide() is called manually</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">autoDestroy</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Boolean</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">Automatically destroy tooltip on hide?</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+            </td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Tooltip.js, line 25</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+    
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h2 class="line">Methods</h2>
+
+        <dl>
+            
+<dt>
+    <h3 class="name" id="reposition"><span class="type-signature"></span>reposition</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Place tooltip on page
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    this, chainable
+    
+    {<span class="param-type"><a href="CUI.Tooltip.html">CUI.Tooltip</a></span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Tooltip.js, line 217</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+        
+    </div>
+   
+                </section>
+              </section>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>

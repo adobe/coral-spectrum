@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - NumberInput</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light">
+    <div class="guide-Component">
+      <article class="guide-Component-detail">
+        <heading>
+          <h1 class="coral-Heading--1 u-line">NumberInput</h1>
+        </heading>
+        <section class="guide-Component-metadata">
+          <section class="guide-componentDetails guide-Example-section u-line">
+            <p>Current Version: 2.1.4</p>
+            <p>Related Components: </p>
+          </section>
+        </section>
+        <section class="guide-Component-documentation">
+          <!-- mixins for the markup-->
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Markup Examples</h2>
+                <p>Below is an example of configuring the numberinput component using the markup data API:</p>
+                <h3 class="coral-Heading--3">Normal</h3>
+                <p>The normal state of the component.</p>
+                    <div id="guide-bfa4ea2a-e2e2-4338-98fd-db3ef74b043e" class="u-columnMedium">
+                                 <div class="coral-InputGroup"  data-init='numberinput' >
+                                   <span class="coral-InputGroup-button">
+                                     <button type="button" class="js-coral-NumberInput-decrementButton coral-Button coral-Button--secondary coral-Button--square" title="Decrement" >
+                                         <i class="coral-Icon coral-Icon--sizeS coral-Icon--minus"></i>
+                                     </button>
+                                   </span>
+                                   <input type="text" class="js-coral-NumberInput-input coral-InputGroup-input coral-Textfield" >
+                                   <span class="coral-InputGroup-button">
+                                     <button type="button" class="js-coral-NumberInput-incrementButton coral-Button coral-Button--secondary coral-Button--square" title="Increment">
+                                         <i class="coral-Icon coral-Icon--sizeS coral-Icon--add" ></i>
+                                     </button>
+                                   </span>
+                                 </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-bfa4ea2a-e2e2-4338-98fd-db3ef74b043e" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading--3">Error</h3>
+                <p>Specified via <code class="atv">data-error="true"</code>.</p>
+                    <div id="guide-9cbc298f-ba61-4e24-935b-e1473f554be2" class="u-columnMedium">
+                                 <div class="coral-InputGroup"  data-init='numberinput' data-error='true' >
+                                   <span class="coral-InputGroup-button">
+                                     <button type="button" class="js-coral-NumberInput-decrementButton coral-Button coral-Button--secondary coral-Button--square" title="Decrement" >
+                                         <i class="coral-Icon coral-Icon--sizeS coral-Icon--minus"></i>
+                                     </button>
+                                   </span>
+                                   <input type="text" class="js-coral-NumberInput-input coral-InputGroup-input coral-Textfield" >
+                                   <span class="coral-InputGroup-button">
+                                     <button type="button" class="js-coral-NumberInput-incrementButton coral-Button coral-Button--secondary coral-Button--square" title="Increment">
+                                         <i class="coral-Icon coral-Icon--sizeS coral-Icon--add" ></i>
+                                     </button>
+                                   </span>
+                                 </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-9cbc298f-ba61-4e24-935b-e1473f554be2" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading--3">Disabled</h3>
+                <p>Specified via <code class="atv">data-disabled="true"</code>.</p>
+                    <div id="guide-42967729-9e47-4fda-a255-701abc22ddf8" class="u-columnMedium">
+                                 <div class="coral-InputGroup"  data-init='numberinput' data-disabled='true' >
+                                   <span class="coral-InputGroup-button">
+                                     <button type="button" class="js-coral-NumberInput-decrementButton coral-Button coral-Button--secondary coral-Button--square" title="Decrement" >
+                                         <i class="coral-Icon coral-Icon--sizeS coral-Icon--minus"></i>
+                                     </button>
+                                   </span>
+                                   <input type="text" class="js-coral-NumberInput-input coral-InputGroup-input coral-Textfield" >
+                                   <span class="coral-InputGroup-button">
+                                     <button type="button" class="js-coral-NumberInput-incrementButton coral-Button coral-Button--secondary coral-Button--square" title="Increment">
+                                         <i class="coral-Icon coral-Icon--sizeS coral-Icon--add" ></i>
+                                     </button>
+                                   </span>
+                                 </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-42967729-9e47-4fda-a255-701abc22ddf8" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading--3">Set step value to "3"</h3>
+                <p>Specified via <code class="atv">data-step="3"</code>.</p>
+                    <div id="guide-0eaf276b-48f1-4be7-a2b4-c1e39868772f" class="u-columnMedium">
+                                 <div class="coral-InputGroup"  data-init='numberinput' data-step='3' >
+                                   <span class="coral-InputGroup-button">
+                                     <button type="button" class="js-coral-NumberInput-decrementButton coral-Button coral-Button--secondary coral-Button--square" title="Decrement" >
+                                         <i class="coral-Icon coral-Icon--sizeS coral-Icon--minus"></i>
+                                     </button>
+                                   </span>
+                                   <input type="text" class="js-coral-NumberInput-input coral-InputGroup-input coral-Textfield" >
+                                   <span class="coral-InputGroup-button">
+                                     <button type="button" class="js-coral-NumberInput-incrementButton coral-Button coral-Button--secondary coral-Button--square" title="Increment">
+                                         <i class="coral-Icon coral-Icon--sizeS coral-Icon--add" ></i>
+                                     </button>
+                                   </span>
+                                 </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-0eaf276b-48f1-4be7-a2b4-c1e39868772f" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading--3">Set max/min so range is 0-5</h3>
+                <p>Specified via <code class="atv">data-min="0" data-max="5"</code>.</p>
+                    <div id="guide-3e68d324-1bb9-421f-9e5d-e5e4e604d54a" class="u-columnMedium">
+                                 <div class="coral-InputGroup"  data-init='numberinput' data-min='0' data-max='5' >
+                                   <span class="coral-InputGroup-button">
+                                     <button type="button" class="js-coral-NumberInput-decrementButton coral-Button coral-Button--secondary coral-Button--square" title="Decrement" >
+                                         <i class="coral-Icon coral-Icon--sizeS coral-Icon--minus"></i>
+                                     </button>
+                                   </span>
+                                   <input type="text" class="js-coral-NumberInput-input coral-InputGroup-input coral-Textfield" >
+                                   <span class="coral-InputGroup-button">
+                                     <button type="button" class="js-coral-NumberInput-incrementButton coral-Button coral-Button--secondary coral-Button--square" title="Increment">
+                                         <i class="coral-Icon coral-Icon--sizeS coral-Icon--add" ></i>
+                                     </button>
+                                   </span>
+                                 </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-3e68d324-1bb9-421f-9e5d-e5e4e604d54a" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+              </section>
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Javascript Examples</h2>
+                <p>The following examples demonstrate usage of the Javascript API's for NumberInput.</p>
+                <h3 class="coral-Heading--3">JS Class Initialization</h3>
+                <p>The following is an example of the HTML without a <code class="atv">data-init</code> initializer.</p>
+                    <div id="guide-db7655fb-59d1-4b23-b946-f0ea7345ecc0" class="u-columnMedium">
+                                 <div class="coral-InputGroup" id='myNumberInput'  >
+                                   <span class="coral-InputGroup-button">
+                                     <button type="button" class="js-coral-NumberInput-decrementButton coral-Button coral-Button--secondary coral-Button--square" title="Decrement" >
+                                         <i class="coral-Icon coral-Icon--sizeS coral-Icon--minus"></i>
+                                     </button>
+                                   </span>
+                                   <input type="text" class="js-coral-NumberInput-input coral-InputGroup-input coral-Textfield" >
+                                   <span class="coral-InputGroup-button">
+                                     <button type="button" class="js-coral-NumberInput-incrementButton coral-Button coral-Button--secondary coral-Button--square" title="Increment">
+                                         <i class="coral-Icon coral-Icon--sizeS coral-Icon--add" ></i>
+                                     </button>
+                                   </span>
+                                 </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-db7655fb-59d1-4b23-b946-f0ea7345ecc0" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <div id="constructorExample">
+                  <script>
+                   $(document).ready(function() {
+                     var numberInput = new CUI.NumberInput({ element:'#myNumberInput', min:0, max:5 });
+                   })
+                  </script>
+                </div>
+                <p>The following Javascript manually initializes the component on page initialization.</p>
+                    <pre id="constructorExample" data-src-id="constructorExample" class="prettyprint linenums guide-Example-snippet">
+                      <p>No example content provided!</p></pre>
+                <h3 class="coral-Heading--3">Getting the value</h3>
+                <p>The following will display the above NumberInput's value in an alert.</p>
+                <div id="getValueExample">
+                  <script>
+                    function displayValue() {
+                      var numberInput = $('#myNumberInput').data('numberInput')
+                      var value = numberInput.getValue();
+                      alert('The value is ' + value + '.');
+                    }
+                  </script>
+                </div>
+                    <pre id="getValueExample" data-src-id="getValueExample" class="prettyprint linenums guide-Example-snippet">
+                      <p>No example content provided!</p></pre>
+                <div><button id="getValueButton" class="coral-Button" onclick="displayValue()">Get Value</button></div>
+                <h3 class="coral-Heading--3">Setting the value</h3>
+                <p>The following will set the above NumberInput's value to 5.</p>
+                <div id="setValueExample">
+                  <script>
+                    function setValue() {
+                      var numberInput = $('#myNumberInput').data('numberInput');
+                      numberInput.setValue(5);
+                    }
+                  </script>
+                </div>
+                    <pre id="setValueExample" data-src-id="setValueExample" class="prettyprint linenums guide-Example-snippet">
+                      <p>No example content provided!</p></pre>
+                <div><button id="getValueButton" class="coral-Button" onclick="setValue()">Set Value</button></div>
+              </section>
+              <section class="guide-Example-section">
+                <section class="guide-jsDocFragement">
+    <div class="content">
+        <!--<h1 class="line">Class: NumberInput</h1>-->
+        
+          
+
+
+
+<section>
+
+<h1 class="coral-Heading--1 u-line">NumberInput
+ JSDoc</h1>
+
+    <div class="class-description">Class Description: A number input widget with increment and decrement buttons.</div>
+
+
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        <h2 class="line">Extends</h2>
+
+        <ul>
+            <li>CUI.Widget</li>
+        </ul>
+    
+
+    
+        
+<dt>
+    <h2 class="line">Constructor</h2>
+
+    
+</dt>
+
+
+<div class="description">
+    Creates a Number Input object
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">options</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Component options
+                
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+		<th>Optional</th>
+		
+
+		
+		<th>Default</th>
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">min</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">numberic</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    NaN
+                
+                </td>
+            
+
+            <td class="description last">(Optional) Minimum value allowed for input.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">max</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">numberic</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    NaN
+                
+                </td>
+            
+
+            <td class="description last">(Optional) Maximum value allowed for input.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">step</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">numberic</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    1
+                
+                </td>
+            
+
+            <td class="description last">Amount increment/decrement for input.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">hasError</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">boolean</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">Set the error state of the widget.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">disabled</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">boolean</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">Set the disabled state of the widget.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+            </td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.NumberInput.js, line 21</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+    
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h2 class="line">Methods</h2>
+
+        <dl>
+            
+<dt>
+    <h3 class="name" id="decrement"><span class="type-signature"></span>decrement</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Decrements value by step amount
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.NumberInput.js, line 52</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="getMax"><span class="type-signature"></span>getMax</h3>
+
+    
+</dt>
+
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    The maximum input value allowed.
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.NumberInput.js, line 121</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="getMin"><span class="type-signature"></span>getMin</h3>
+
+    
+</dt>
+
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    The minimum input value allowed.
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.NumberInput.js, line 114</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="getStep"><span class="type-signature"></span>getStep</h3>
+
+    
+</dt>
+
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    The current increment/decrement step amount .
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.NumberInput.js, line 128</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="getValue"><span class="type-signature"></span>getValue</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Attempts to return parseFloat for value.
+     Does not attempt to parse null, undefined, or empty string.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    The current input value.
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.NumberInput.js, line 99</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="increment"><span class="type-signature"></span>increment</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Increments value by step amount
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.NumberInput.js, line 40</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="setMax"><span class="type-signature"></span>setMax</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Sets the maximum value allowed.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">value</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">numberic</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The max value to set.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.NumberInput.js, line 81</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="setMin"><span class="type-signature"></span>setMin</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Sets the minimum value allowed.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">value</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">numberic</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The min value to set.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.NumberInput.js, line 73</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="setStep"><span class="type-signature"></span>setStep</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Sets the step value for increment and decrement.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">value</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">numberic</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The step value to set.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.NumberInput.js, line 90</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="setValue"><span class="type-signature"></span>setValue</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Sets the value, which triggers the change event.  Note that value will be
+     limited to the range defined by the min and max properties.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">value</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">numberic</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The input value to set.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.NumberInput.js, line 64</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+        
+    </div>
+   
+                </section>
+              </section>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>
