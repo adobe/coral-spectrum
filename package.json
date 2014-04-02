@@ -36,7 +36,7 @@
     "coralui-component-autocomplete": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-autocomplete.git#2.3.3",
     "coralui-component-charactercount": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-charactercount.git#2.0.4",
     "coralui-component-cyclebutton": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-cyclebutton.git#2.0.9",
-    "coralui-component-datepicker": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-datepicker.git#2.1.5",
+    "coralui-component-datepicker": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-datepicker.git#2.1.6",
     "coralui-component-fileupload": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-fileupload.git#2.0.9",
     "coralui-component-modal": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-modal.git#2.0.8",
     "coralui-component-numberinput": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-numberinput.git#2.1.4",
