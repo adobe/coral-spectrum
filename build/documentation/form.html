@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Form Layout</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light">
+    <div class="guide-Component">
+      <article class="guide-Component-detail">
+        <heading>
+          <h1 class="coral-Heading--1 u-line">Form Layout</h1>
+        </heading>
+        <section class="guide-Component-metadata">
+          <section class="guide-componentDetails guide-Example-section u-line">
+            <p>Current Version: 2.3.3-pre</p>
+            <p>Related Components: Textfield,Textarea,Input Group,Radio,Checkbox,Button</p>
+          </section>
+        </section>
+        <section class="guide-Component-documentation">
+              <section class="guide-Example-section">
+                <p>
+                  The base selector to specify a form is <code>.coral-Form</code>.  In addition,
+                  CoralUI provides support for sevaral form layouts; aligned, vertical and horizontal.
+                  
+                </p>
+                <p>The selectors are:</p>
+                <pre class="prettyprint u-columnSmall">.coral-Form--aligned
+.coral-Form--vertical
+.coral-Form--horizontal
+</pre>
+                <p>Examples using each type of layout are provided below.</p>
+                <h2 class="coral-Heading coral-Heading--2">Additional Selectors</h2>
+                <p>
+                  Addiional selectors are available to assist with laying out more specific elements.
+                  
+                </p>
+                <h3 class="coral-Heading coral-Heading--3">Fieldset and Fieldset Ledgend</h3>
+                <pre class="prettyprint u-columnSmall">.coral-Form-fieldset
+.coral-Form-fieldset-legend</pre>
+                <p>
+                  <code>.fieldset</code>. is used instead of <code>&lt;fieldset&gt;</code> to allow
+                  <code>&lt;legend&gt;</code> the required styling.
+                  
+                </p>
+                <h3 class="coral-Heading coral-Heading--3">Field Labels and Fields</h3>
+                <pre class="prettyprint u-columnSmall">.coral-Form-fieldlabel
+.coral-Form-field</pre>
+                <p>
+                  A field label and its related field should be designated with <code>.coral-Form-fieldlabel</code>
+                  and <code>.coral-Form-field</code>
+                  
+                </p>
+                <h3 class="coral-Heading coral-Heading--3">Field Info and Field Error</h3>
+                <pre class="prettyprint u-columnSmall">.coral-Form-fieldwrapper
+.coral-Form-fieldinfo
+.coral-Form-fielderror
+.coral-Form-fieldwrapper--alignRight</pre>
+                <p>
+                  Additional info or a special error message can be indicated using 
+                  <code>.coral-Form-fieldinfo</code> or <code>.coral-Form-fielderror</code>. A field 
+                  wrapper MUST be used to contain and poistion content when using the field info 
+                  and field error classes. Alignment within the wrapper can be forced right using the
+                  <code>.coral-Form-fieldwrapper--alignRight</code> selector.
+                  
+                </p>
+                <p>
+                  In conext examples for the addition selectors are provided as part of the alignment
+                  examples below.
+                </p>
+              </section>
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Vertical Layout</h2>
+                <p>
+                  Form labels are placed above the field.
+                  
+                </p>
+                <section class="guide-Example-markupVariants">
+                  <div class="guide-Example-markupVariantItem">
+                        <div id="guide-53231758-96d3-4e23-8a67-7a7e9ed22cc3" class="u-columnMedium"><form class="coral-Form coral-Form--vertical" style="width: 500px;">
+  <section id="vtest-form-fieldset" class="coral-Form-fieldset">
+    <h3 class="coral-Form-fieldset-legend">Textfield</h3>
+
+    <label class="coral-Form-fieldlabel">Text</label>
+    <input class="coral-Form-field coral-Textfield" type="text" placeholder="Placeholder">
+
+    <div class="coral-Form-fieldwrapper">
+      <label class="coral-Form-fieldlabel">Text  (with coral-Form-fieldinfo)</label>
+      <input class="coral-Form-field coral-Textfield" type="text" placeholder="Required" aria-required="true">
+      <span class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right"></span>
+    </div>
+
+    <label class="coral-Form-fieldlabel is-disabled">Disabled Text</label>
+    <input class="coral-Form-field coral-Textfield" disabled="disabled" type="text" placeholder="Placeholder">
+  </section>
+</form>
+
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-53231758-96d3-4e23-8a67-7a7e9ed22cc3" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                </section>
+                <section class="guide-Example-markupVariants">
+                  <div class="guide-Example-markupVariantItem">
+                        <div id="guide-c12bdb30-87bb-4995-a531-335be7b77f7a" class="u-columnMedium"><form class="coral-Form coral-Form--vertical" style="width: 500px;">
+  <section class="coral-Form-fieldset">
+    <h3 class="coral-Form-fieldset-legend">Textarea</h3>
+
+    <label class="coral-Form-fieldlabel">Textarea</label>
+    <textarea class="coral-Form-field coral-Textfield coral-Textfield--multiline" placeholder="Placeholder" rows="4"></textarea>
+
+    <div class="coral-Form-fieldwrapper">
+      <label class="coral-Form-fieldlabel">Textarea  (with coral-Form-fieldinfo)</label>
+      <textarea class="coral-Form-field coral-Textfield coral-Textfield--multiline" placeholder="Required" rows="4" aria-required="true"></textarea>
+      <span class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right"></span>
+    </div>
+  </section>
+</form>
+
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-c12bdb30-87bb-4995-a531-335be7b77f7a" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                </section>
+                <section class="guide-Example-markupVariants">
+                  <div class="guide-Example-markupVariantItem">
+                        <div id="guide-16b7b1d1-31d1-4894-afdf-d02240a00ff5" class="u-columnMedium"><form class="coral-Form coral-Form--vertical" style="width: 500px;">
+
+  <section class="coral-Form-fieldset">
+    <h3 class="coral-Form-fieldset-legend">DecoratedTextfield</h3>
+
+    <label class="coral-Form-fieldlabel">DecoratedTextfield</label>
+    <div class="coral-Form-field coral-DecoratedTextfield">
+      <i class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search"></i>
+      <input type="text" class="coral-DecoratedTextfield-input coral-Textfield">
+      <button type="button" class="coral-DecoratedTextfield-button coral-MinimalButton">
+        <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+      </button>
+    </div>
+
+    <div class="coral-Form-fieldwrapper">
+      <label class="coral-Form-fieldlabel">DecoratedTextfield</label>
+      <span class="coral-Form-field coral-DecoratedTextfield">
+        <i class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search"></i>
+        <input type="text" class="coral-DecoratedTextfield-input coral-Textfield">
+        <button type="button" class="coral-DecoratedTextfield-button coral-MinimalButton">
+          <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+        </button>
+      </span>
+      <span class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right"></span>
+    </div>
+  </section>
+
+</form>
+
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-16b7b1d1-31d1-4894-afdf-d02240a00ff5" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                </section>
+                <section class="guide-Example-markupVariants">
+                  <div class="guide-Example-markupVariantItem">
+                        <div id="guide-ccf87bcd-19cf-40ae-966f-a02fcfdb97cb" class="u-columnMedium"><form class="coral-Form coral-Form--vertical" style="width: 500px;">
+
+  <section class="coral-Form-fieldset">
+    <h3 class="coral-Form-fieldset-legend">InputGroup</h3>
+
+    <label class="coral-Form-fieldlabel">InputGroup</label>
+    <div class="coral-Form-field coral-InputGroup">
+      <span class="coral-InputGroup-input coral-DecoratedTextfield">
+        <i class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search"></i>
+        <input type="text" class="coral-DecoratedTextfield-input coral-Textfield">
+        <button type="button" class="coral-DecoratedTextfield-button coral-MinimalButton">
+          <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+        </button>
+      </span>
+      <span class="coral-InputGroup-button">
+        <button class="coral-Button coral-Button--secondary" type="button">Go!</button>
+      </span>
+    </div>
+
+    <div class="coral-Form-fieldwrapper">
+      <label class="coral-Form-fieldlabel">InputGroup</label>
+      <div class="coral-Form-field coral-InputGroup">
+        <span class="coral-InputGroup-input coral-DecoratedTextfield">
+          <i class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search"></i>
+          <input type="text" class="coral-DecoratedTextfield-input coral-Textfield">
+          <button type="button" class="coral-DecoratedTextfield-button coral-MinimalButton">
+            <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+          </button>
+        </span>
+        <span class="coral-InputGroup-button">
+          <button class="coral-Button coral-Button--secondary" type="button">Go!</button>
+        </span>
+      </div>
+      <span class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right"></span>
+    </div>
+  </section>
+</form>
+
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-ccf87bcd-19cf-40ae-966f-a02fcfdb97cb" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                </section>
+                <section class="guide-Example-markupVariants">
+                  <div class="guide-Example-markupVariantItem">
+                        <div id="guide-051818ee-80d0-4ec2-ab0f-173d62c4b4a5" class="u-columnMedium"><form class="coral-Form coral-Form--vertical" style="width: 500px;">
+
+  <section class="coral-Form-fieldset">
+    <h3 class="coral-Form-fieldset-legend">Checkbox &amp; Radio</h3>
+
+    <div class="coral-Form-fieldwrapper coral-Form-fieldwrapper--singleline">
+      <label class="coral-Form-field coral-Checkbox">
+        <input class="coral-Checkbox-input" type="checkbox" name="check" checked>
+        <span class="coral-Checkbox-checkmark"></span>
+        <span class="coral-Checkbox-description">Checkbox</span>
+      </label>
+    </div>
+
+    <div class="coral-Form-fieldwrapper coral-Form-fieldwrapper--singleline">
+      <label class="coral-Form-field coral-Checkbox">
+        <input class="coral-Checkbox-input" type="checkbox" name="check" checked>
+        <span class="coral-Checkbox-checkmark"></span>
+        <span class="coral-Checkbox-description">Checkbox</span>
+      </label>
+      <span class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right"></span>
+    </div>
+
+    <div class="coral-Form-fieldwrapper coral-Form-fieldwrapper--singleline">
+      <label class="coral-Form-field coral-Radio">
+        <input class="coral-Radio-input" type="radio" name="r1">
+        <span class="coral-Radio-checkmark"></span>
+        <span class="coral-Radio-description">Radio</span>
+      </label>
+    </div>
+
+    <div class="coral-Form-fieldwrapper coral-Form-fieldwrapper--singleline">
+      <label class="coral-Form-field coral-Radio">
+        <input class="coral-Radio-input" type="radio" name="r1">
+        <span class="coral-Radio-checkmark"></span>
+        <span class="coral-Radio-description">Radio</span>
+      </label>
+      <span class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right"></span>
+    </div>
+
+    <label class="coral-Form-fieldlabel">Horizontal Radio Group</label>
+    <div class="coral-Form-field coral-RadioGroup coral-RadioGroup--labelsBelow">
+      <label class="coral-Radio">
+        <input type="radio" name="r2" class="coral-Radio-input"/>
+        <span class="coral-Radio-checkmark"></span>
+        <span class="coral-Radio-description">1</span>
+      </label>
+      <label class="coral-Radio">
+        <input type="radio" name="r2" class="coral-Radio-input"/>
+        <span class="coral-Radio-checkmark"></span>
+        <span class="coral-Radio-description">2</span>
+      </label>
+      <label class="coral-Radio">
+        <input type="radio" name="r2" class="coral-Radio-input"/>
+        <span class="coral-Radio-checkmark"></span>
+        <span class="coral-Radio-description">3</span>
+      </label>
+    </div>
+
+    <label class="coral-Form-fieldlabel">Vertical Radio Group</label>
+    <div class="coral-Form-field coral-RadioGroup coral-RadioGroup--vertical">
+      <label class="coral-Radio">
+        <input type="radio" name="r2" class="coral-Radio-input"/>
+        <span class="coral-Radio-checkmark"></span>
+        <span class="coral-Radio-description">1</span>
+      </label>
+      <label class="coral-Radio">
+        <input type="radio" name="r2" class="coral-Radio-input"/>
+        <span class="coral-Radio-checkmark"></span>
+        <span class="coral-Radio-description">2</span>
+      </label>
+      <label class="coral-Radio">
+        <input type="radio" name="r2" class="coral-Radio-input"/>
+        <span class="coral-Radio-checkmark"></span>
+        <span class="coral-Radio-description">3</span>
+      </label>
+    </div>
+  </section>
+
+</form>
+
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-051818ee-80d0-4ec2-ab0f-173d62c4b4a5" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                </section>
+                <section class="guide-Example-markupVariants">
+                  <div class="guide-Example-markupVariantItem">
+                        <div id="guide-dfba3fd1-67de-4987-aa0c-efa2a77bab7b" class="u-columnMedium"><form class="coral-Form coral-Form--vertical" style="width: 500px;">
+  <section class="coral-Form-fieldset">
+    <h3 class="coral-Form-fieldset-legend">Misc</h3>
+
+    <label class="coral-Form-fieldlabel">Text</label>
+    <span class="coral-Form-field">Read only text</span>
+
+    <div class="coral-Form-fieldwrapper">
+      <label class="coral-Form-fieldlabel">Text (with coral-Form-fieldinfo)</label>
+      <span class="coral-Form-field">Read only text</span>
+      <span class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right"></span>
+    </div>
+
+    <label class="coral-Form-fieldlabel">Aligning buttons right</label>
+    <div class="coral-Form-fieldwrapper coral-Form-fieldwrapper--alignRight">
+      <button class="coral-Form-field coral-Button" type="button">Cancel</button>
+      <button class="coral-Form-field coral-Button coral-Button--primary">Submit</button>
+    </div>
+  </section>
+</form>
+
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-dfba3fd1-67de-4987-aa0c-efa2a77bab7b" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                </section>
+              </section>
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Aligned Layout</h2><code>coral-Form-aligned</code> indicates that the form is using aligned layout, where
+                <where>the label and the field are placed on the same line.</where>
+              </section>
+          <section class="guide-Example-markupVariants">
+            <div class="guide-Example-markupVariantItem">
+                  <div id="guide-c1291621-1804-48f5-aa48-42bfe68c9830" class="u-columnMedium"><form class="coral-Form coral-Form--aligned" style="width: 500px;">
+  <section class="coral-Form-fieldset">
+    <h3 class="coral-Form-fieldset-legend">Textfield</h3>
+
+    <label class="coral-Form-fieldlabel">Text</label>
+    <input class="coral-Form-field coral-Textfield" type="text" placeholder="Placeholder">
+
+    <div class="coral-Form-fieldwrapper">
+      <label class="coral-Form-fieldlabel">Text</label>
+      <input class="coral-Form-field coral-Textfield" type="text" placeholder="Required" aria-required="true">
+      <span class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right"></span>
+    </div>
+
+    <label class="coral-Form-fieldlabel is-disabled">Disabled Text</label>
+    <input class="coral-Form-field coral-Textfield" disabled="disabled" type="text" placeholder="Placeholder">
+  </section>
+</form>
+
+                  </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                      <pre data-src-id="guide-c1291621-1804-48f5-aa48-42bfe68c9830" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+            </div>
+          </section>
+          <section class="guide-Example-markupVariants">
+            <div class="guide-Example-markupVariantItem">
+                  <div id="guide-a8a0aff9-2891-47aa-8f98-c8f5a2622564" class="u-columnMedium"><form class="coral-Form coral-Form--aligned" style="width: 500px;">
+  <section class="coral-Form-fieldset">
+    <h3 class="coral-Form-fieldset-legend">Textarea</h3>
+
+    <label class="coral-Form-fieldlabel">Textarea</label>
+    <textarea class="coral-Form-field coral-Textfield coral-Textfield--multiline" placeholder="Placeholder" rows="4"></textarea>
+
+    <div class="coral-Form-fieldwrapper">
+      <label class="coral-Form-fieldlabel">Textarea</label>
+      <textarea class="coral-Form-field coral-Textfield coral-Textfield--multiline" placeholder="Required" rows="4" aria-required="true"></textarea>
+      <span class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right"></span>
+    </div>
+  </section>
+</form>
+
+                  </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                      <pre data-src-id="guide-a8a0aff9-2891-47aa-8f98-c8f5a2622564" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+            </div>
+          </section>
+          <section class="guide-Example-markupVariants">
+            <div class="guide-Example-markupVariantItem">
+                  <div id="guide-513ae763-5560-4c45-9f31-b1b3899b3cd0" class="u-columnMedium"><form class="coral-Form coral-Form--aligned" style="width: 500px;">
+  <section class="coral-Form-fieldset">
+    <h3 class="coral-Form-fieldset-legend">DecoratedTextfield</h3>
+
+    <label class="coral-Form-fieldlabel">DecoratedTextfield</label>
+    <span class="coral-Form-field coral-DecoratedTextfield">
+      <i class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search"></i>
+      <input type="text" class="coral-DecoratedTextfield-input coral-Textfield">
+      <button type="button" class="coral-DecoratedTextfield-button coral-MinimalButton">
+        <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+      </button>
+    </span>
+
+    <div class="coral-Form-fieldwrapper">
+      <label class="coral-Form-fieldlabel">DecoratedTextfield</label>
+      <span class="coral-Form-field coral-DecoratedTextfield">
+        <i class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search"></i>
+        <input type="text" class="coral-DecoratedTextfield-input coral-Textfield">
+        <button type="button" class="coral-DecoratedTextfield-button coral-MinimalButton">
+          <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+        </button>
+      </span>
+      <span class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right"></span>
+    </div>
+  </section>
+</form>
+
+                  </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                      <pre data-src-id="guide-513ae763-5560-4c45-9f31-b1b3899b3cd0" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+            </div>
+          </section>
+          <section class="guide-Example-markupVariants">
+            <div class="guide-Example-markupVariantItem">
+                  <div id="guide-6f3189d5-a932-4ff6-8c94-43ab464c3928" class="u-columnMedium"><form class="coral-Form coral-Form--aligned" style="width: 500px;">
+
+  <section class="coral-Form-fieldset">
+    <h3 class="coral-Form-fieldset-legend">InputGroup</h3>
+
+    <label class="coral-Form-fieldlabel">InputGroup</label>
+    <div class="coral-Form-field coral-InputGroup">
+      <span class="coral-InputGroup-input coral-DecoratedTextfield">
+        <i class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search"></i>
+        <input type="text" class="coral-DecoratedTextfield-input coral-Textfield">
+        <button type="button" class="coral-DecoratedTextfield-button coral-MinimalButton">
+          <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+        </button>
+      </span>
+      <span class="coral-InputGroup-button">
+        <button class="coral-Button coral-Button--secondary" type="button">Go!</button>
+      </span>
+    </div>
+
+    <div class="coral-Form-fieldwrapper">
+      <label class="coral-Form-fieldlabel">InputGroup</label>
+      <div class="coral-Form-field coral-InputGroup">
+        <span class="coral-InputGroup-input coral-DecoratedTextfield">
+          <i class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search"></i>
+          <input type="text" class="coral-DecoratedTextfield-input coral-Textfield">
+          <button type="button" class="coral-DecoratedTextfield-button coral-MinimalButton">
+            <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+          </button>
+        </span>
+        <span class="coral-InputGroup-button">
+          <button class="coral-Button coral-Button--secondary" type="button">Go!</button>
+        </span>
+      </div>
+      <span class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right"></span>
+    </div>
+  </section>
+
+</form>
+
+                  </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                      <pre data-src-id="guide-6f3189d5-a932-4ff6-8c94-43ab464c3928" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+            </div>
+          </section>
+          <section class="guide-Example-markupVariants">
+            <div class="guide-Example-markupVariantItem">
+                  <div id="guide-05302132-1be1-48fe-b168-c976f90f6651" class="u-columnMedium"><form class="coral-Form coral-Form--aligned" style="width: 500px;">
+  <section class="coral-Form-fieldset">
+    <h3 class="coral-Form-fieldset-legend">Checkbox &amp; Radio</h3>
+
+    <div class="coral-Form-fieldwrapper coral-Form-fieldwrapper--singleline">
+      <label class="coral-Form-field coral-Checkbox">
+        <input class="coral-Checkbox-input" type="checkbox" name="check" checked>
+        <span class="coral-Checkbox-checkmark"></span>
+        <span class="coral-Checkbox-description">Checkbox</span>
+      </label>
+    </div>
+
+    <div class="coral-Form-fieldwrapper coral-Form-fieldwrapper--singleline">
+      <label class="coral-Form-field coral-Checkbox">
+        <input class="coral-Checkbox-input" type="checkbox" name="check" checked>
+        <span class="coral-Checkbox-checkmark"></span>
+        <span class="coral-Checkbox-description">Checkbox</span>
+      </label>
+      <span class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right"></span>
+    </div>
+
+    <div class="coral-Form-fieldwrapper coral-Form-fieldwrapper--singleline">
+      <label class="coral-Form-field coral-Radio">
+        <input class="coral-Radio-input" type="radio" name="r1">
+        <span class="coral-Radio-checkmark"></span>
+        <span class="coral-Radio-description">Radio</span>
+      </label>
+    </div>
+
+    <div class="coral-Form-fieldwrapper coral-Form-fieldwrapper--singleline">
+      <label class="coral-Form-field coral-Radio">
+        <input class="coral-Radio-input" type="radio" name="r1">
+        <span class="coral-Radio-checkmark"></span>
+        <span class="coral-Radio-description">Radio</span>
+      </label>
+      <span class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right"></span>
+    </div>
+
+    <label class="coral-Form-fieldlabel">Horizontal Radio Group</label>
+    <div class="coral-Form-field coral-RadioGroup coral-RadioGroup--labelsBelow">
+      <label class="coral-Radio">
+        <input type="radio" name="r2" class="coral-Radio-input"/>
+        <span class="coral-Radio-checkmark"></span>
+        <span class="coral-Radio-description">1</span>
+      </label>
+      <label class="coral-Radio">
+        <input type="radio" name="r2" class="coral-Radio-input"/>
+        <span class="coral-Radio-checkmark"></span>
+        <span class="coral-Radio-description">2</span>
+      </label>
+      <label class="coral-Radio">
+        <input type="radio" name="r2" class="coral-Radio-input"/>
+        <span class="coral-Radio-checkmark"></span>
+        <span class="coral-Radio-description">3</span>
+      </label>
+    </div>
+
+    <label class="coral-Form-fieldlabel">Vertical Radio Group</label>
+    <div class="coral-Form-field coral-RadioGroup coral-RadioGroup--vertical">
+      <label class="coral-Radio">
+        <input type="radio" name="r2" class="coral-Radio-input"/>
+        <span class="coral-Radio-checkmark"></span>
+        <span class="coral-Radio-description">1</span>
+      </label>
+      <label class="coral-Radio">
+        <input type="radio" name="r2" class="coral-Radio-input"/>
+        <span class="coral-Radio-checkmark"></span>
+        <span class="coral-Radio-description">2</span>
+      </label>
+      <label class="coral-Radio">
+        <input type="radio" name="r2" class="coral-Radio-input"/>
+        <span class="coral-Radio-checkmark"></span>
+        <span class="coral-Radio-description">3</span>
+      </label>
+    </div>
+  </section>
+</form>
+
+                  </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                      <pre data-src-id="guide-05302132-1be1-48fe-b168-c976f90f6651" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+            </div>
+          </section>
+          <section class="guide-Example-markupVariants">
+            <div class="guide-Example-markupVariantItem">
+                  <div id="guide-c119b2b5-2ba6-4132-9928-71a12f2188fd" class="u-columnMedium"><form class="coral-Form coral-Form--aligned" style="width: 500px;">
+  <section class="coral-Form-fieldset">
+    <h3 class="coral-Form-fieldset-legend">Misc</h3>
+
+    <label class="coral-Form-fieldlabel">Text</label>
+    <span class="coral-Form-field">Read only text</span>
+
+    <div class="coral-Form-fieldwrapper">
+      <label class="coral-Form-fieldlabel">Text</label>
+      <span class="coral-Form-field">Read only text</span>
+      <span class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right"></span>
+    </div>
+  </section>
+</form>
+
+                  </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                      <pre data-src-id="guide-c119b2b5-2ba6-4132-9928-71a12f2188fd" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+            </div>
+          </section>
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Horizontal Form Layout</h2>
+                <p>
+                  This shows how form fields line up horizontally.
+                  
+                </p>
+                <section class="guide-Example-markupVariants">
+                  <div class="guide-Example-markupVariantItem">
+                        <div id="guide-bfaaff71-cf00-4e21-8490-9061737a16cd" class="u-columnMedium"><form class="coral-Form coral-Form--horizontal" style="width: 1000px;">
+  <section id="vtest-form-fieldset" class="coral-Form-fieldset">
+    <h3 class="coral-Form-fieldset-legend">Textfield and Textarea</h3>
+
+    <label class="coral-Form-fieldlabel">Text</label>
+    <input class="coral-Form-field coral-Textfield" type="text" placeholder="Placeholder">
+
+    <label class="coral-Form-fieldlabel">Texarea</label>
+    <textarea class="coral-Form-field coral-Textfield coral-Textfield--multiline" placeholder="Placeholder" rows="4"></textarea><label class="coral-Form-fieldlabel">Texarea</label>
+
+    <button id="vtest-button-normal-light" class="coral-Button">Normal button</button>
+  </section>
+</form>
+
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-bfaaff71-cf00-4e21-8490-9061737a16cd" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                </section>
+              </section>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>

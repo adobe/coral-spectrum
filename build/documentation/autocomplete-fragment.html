@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Autocomplete</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="../js/coral.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light">
+    <section class="guide-Component">
+      <p>This is the stand-alone file for testing the 'overview-fragment' published by each component.</p>
+          <section class="guide-Example-section guide-Example-simpleExample u-line">
+                <h2 class="guide-Example-simpleHeading coral-Heading--2"><a href="autocomplete.html">Autocomplete</a></h2>
+            <p class="guide-Example-simpleDescription"></p>
+            <div class="guide-Example-simpleExampleMarkup u-columnSmall">
+              <div class="coral-Autocomplete" data-init="autocomplete">
+                <span class="coral-DecoratedTextfield js-coral-Autocomplete-field">
+                  <i class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search"></i>
+                  <input id="vtest-autocomplete-basic-input"
+                    class="coral-DecoratedTextfield-input coral-Textfield js-coral-Autocomplete-textfield" type="text"
+                    name="name1" placeholder="Search">
+                </span>
+                <ul class="coral-SelectList js-coral-Autocomplete-selectList">
+                  <li class="coral-SelectList-item coral-SelectList-item--option" data-value="af">Afghanistan</li>
+                  <li class="coral-SelectList-item coral-SelectList-item--option" data-value="al">Albania</li>
+                  <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bs">Bahamas</li>
+                  <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bh">Bahrain</li>
+                  <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bi">Burundi</li>
+                  <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bj">Benin</li>
+                  <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bm">Bermuda</li>
+                  <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bn">Brunei Darussalam</li>
+                  <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bo">Bolivia</li>
+                  <li class="coral-SelectList-item coral-SelectList-item--option" data-value="kh">Cambodia</li>
+                  <li class="coral-SelectList-item coral-SelectList-item--option" data-value="cm">Cameroon</li>
+                  <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dk">Denmark</li>
+                  <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dj">Djibouti</li>
+                  <li class="coral-SelectList-item coral-SelectList-item--option" data-value="ec">Ecuador</li>
+                  <li class="coral-SelectList-item coral-SelectList-item--option" data-value="eg">Egypt</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+    </section>
+  </body>
+</html>

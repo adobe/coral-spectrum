@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - TabPanel</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light">
+    <div class="guide-Component">
+      <article class="guide-Component-detail">
+        <heading>
+          <h1 class="coral-Heading--1 u-line">TabPanel</h1>
+        </heading>
+        <section class="guide-Component-metadata">
+          <section class="guide-componentDetails guide-Example-section u-line">
+            <p>Current Version: 2.0.11-pre</p>
+            <p>Related Components: </p>
+          </section>
+        </section>
+        <section class="guide-Component-documentation">
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Types of TabPanel</h2>
+                <h3 class="coral-Heading coral-Heading--3">Default</h3>
+                <p>This type of TabPanel is intended to divide pieces of content within a page.</p>
+                    <div id="guide-f116f6cd-f04e-4218-a69d-da3aacbb59a0" class="u-columnMedium"><div class="coral-TabPanel" data-init="tabs">
+                                  <nav class="coral-TabPanel-navigation">
+                                    <a class="coral-TabPanel-tab is-active" data-toggle="tab">Tab 1</a>
+                                    <a class="coral-TabPanel-tab" data-toggle="tab">Tab 2</a>
+                                    <a class="coral-TabPanel-tab is-disabled" data-toggle="tab">Disabled Tab</a>
+                                  </nav>
+                                  <div class="coral-TabPanel-content">
+                                    <section class="coral-TabPanel-pane is-active">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida.</section>
+                                    <section class="coral-TabPanel-pane">Aenean faucibus ornare laoreet. Cras luctus purus at ipsum rhoncus et gravida diam malesuada. In ut ante sapien. Nulla fringilla hendrerit laoreet. Proin dolor dolor, suscipit vitae ultrices in, dapibus eget nulla.</section>
+                                    <section class="coral-TabPanel-pane">This will not be shown as the corresponding tab is disabled.</section>
+                                  </div>
+                                </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-f116f6cd-f04e-4218-a69d-da3aacbb59a0" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading coral-Heading--3">Stacked</h3>
+                <p>This type of TabPanel is intended to divide pieces of content within a page. It is particularly useful with tabs that have long titles and is achieved by using the <code class="atv">coral-TabPanel--stacked</code> modifier class.</p>
+                    <div id="guide-dc0213fb-714c-48e6-b6dd-aa9aa6cc63ab" class="u-columnMedium"><div class="coral-TabPanel coral-TabPanel--stacked" data-init="tabs">
+                                  <nav class="coral-TabPanel-navigation">
+                                    <a class="coral-TabPanel-tab is-active" data-toggle="tab">Tab 1</a>
+                                    <a class="coral-TabPanel-tab" data-toggle="tab">Tab 2</a>
+                                    <a class="coral-TabPanel-tab is-disabled" data-toggle="tab">Disabled Tab</a>
+                                  </nav>
+                                  <div class="coral-TabPanel-content">
+                                    <section class="coral-TabPanel-pane is-active">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida.</section>
+                                    <section class="coral-TabPanel-pane">Aenean faucibus ornare laoreet. Cras luctus purus at ipsum rhoncus et gravida diam malesuada. In ut ante sapien. Nulla fringilla hendrerit laoreet. Proin dolor dolor, suscipit vitae ultrices in, dapibus eget nulla.</section>
+                                    <section class="coral-TabPanel-pane">This will not be shown as the corresponding tab is disabled.</section>
+                                  </div>
+                                </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-dc0213fb-714c-48e6-b6dd-aa9aa6cc63ab" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                <h3 class="coral-Heading coral-Heading--3">Large</h3>
+                <p>This type of TabPanel is intended to divide pages. It is achieved by using the <code class="atv">coral-TabPanel--large</code> modifier class.</p>
+                    <div id="guide-6afbacfe-9628-43d5-9f13-7d3b9301d058" class="u-columnMedium"><div class="coral-TabPanel coral-TabPanel--large" data-init="tabs">
+                                  <nav class="coral-TabPanel-navigation">
+                                    <a class="coral-TabPanel-tab is-active" data-toggle="tab">Tab 1</a>
+                                    <a class="coral-TabPanel-tab" data-toggle="tab">Tab 2</a>
+                                    <a class="coral-TabPanel-tab is-disabled" data-toggle="tab">Disabled Tab</a>
+                                  </nav>
+                                  <div class="coral-TabPanel-content">
+                                    <section class="coral-TabPanel-pane is-active">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida.</section>
+                                    <section class="coral-TabPanel-pane">Aenean faucibus ornare laoreet. Cras luctus purus at ipsum rhoncus et gravida diam malesuada. In ut ante sapien. Nulla fringilla hendrerit laoreet. Proin dolor dolor, suscipit vitae ultrices in, dapibus eget nulla.</section>
+                                    <section class="coral-TabPanel-pane">This will not be shown as the corresponding tab is disabled.</section>
+                                  </div>
+                                </div>
+                    </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                        <pre data-src-id="guide-6afbacfe-9628-43d5-9f13-7d3b9301d058" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+              </section>
+              <section class="guide-Example-section">
+                <section class="guide-jsDocFragement">
+    <div class="content">
+        <!--<h1 class="line">Class: Tabs</h1>-->
+        
+          
+
+
+
+<section>
+
+<h1 class="coral-Heading--1 u-line">Tabs
+ JSDoc</h1>
+
+    <div class="class-description">Class Description: A group of tabs.</div>
+
+
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        <h2 class="line">Extends</h2>
+
+        <ul>
+            <li>CUI.Widget</li>
+        </ul>
+    
+
+    
+        
+<dt>
+    <h2 class="line">Constructor</h2>
+
+    
+</dt>
+
+
+<div class="description">
+    Creates a new tab panel
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">options</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Component options
+                
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+		<th>Optional</th>
+		
+
+		
+		<th>Default</th>
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">element</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Mixed</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                  No<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">jQuery selector or DOM element to use for panel</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">type</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    ""
+                
+                </td>
+            
+
+            <td class="description last">Style type of the tabs. Can be 
+"stacked", "nav", or left blank (infers the default type).</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">active</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Number</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+
+            <td class="description last">index of active tab</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+            </td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Tabs.js, line 20</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+    
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h2 class="line">Methods</h2>
+
+        <dl>
+            
+<dt>
+    <h3 class="name" id="addItem"><span class="type-signature"></span>addItem</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Adds a tab and associated panel.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+		<th>Optional</th>
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">options</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Tab options.
+                
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+		<th>Optional</th>
+		
+
+		
+		<th>Default</th>
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">tabContent</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">String</span>|<span class="param-type">HTMLElement</span>|<span class="param-type">jQuery</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Content to be
+used inside the tab. This can be an HTML string, a DOM node,
+or a jQuery object. This content will be wrapped by an
+internally-created element that will serve as the tab.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">panelContent</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">String</span>|<span class="param-type">HTMLElement</span>|<span class="param-type">jQuery</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Content to be
+used inside the panel. This can be an HTML string, a DOM node,
+or a jQuery object. This content will be wrapped by an internally-created
+element that will serve as the panel. This is not intended to be
+used when options.panelURL is defined.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">panelURL</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">A URL from which to asynchronously
+load the panel content when the tab is activated. This is not intended
+to be used when options.panelContent is defined.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">panelID</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">An ID to be applied to the
+internally-created panel. If one is not provided, a unique ID will be
+generated for the panel.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">index</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Number</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">The index at which the tab should be
+added. If no index is provided, the tab will be added as the last
+tab.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">enabled</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Boolean</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last">Whether the tab should be
+enabled (disabled tabs cannot be selected).</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name">active</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Boolean</span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last">Whether the tab should be
+immediately activated/selected. In other words, its panel will be
+immediately visible and panels for other tabs will be hidden.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+            </td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    The ID of the panel. If options.panelID was defined,
+this will be the same value. If options.panelID was not defined,
+this will be an internally-generated, unique ID.
+    
+    {<span class="param-type">String</span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Tabs.js, line 103</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="removeItem"><span class="type-signature"></span>removeItem</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Removes a tab and associated panel. If the tab being removed is
+the active tab, the nearest enabled tab will be activated.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">index</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">Number</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The index of the tab to remove.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Tabs.js, line 157</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="setDisabled"><span class="type-signature"></span>setDisabled</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Disables a tab
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">tab</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">jQuery</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    this, chainable
+    
+    {<span class="param-type">jQuery</span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Tabs.js, line 54</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="setEnabled"><span class="type-signature"></span>setEnabled</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Enables a tab
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="data noHover">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name">tab</td>
+            
+
+            <td class="type">
+            
+                <span class="param-type">jQuery</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    this, chainable
+    
+    {<span class="param-type">jQuery</span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Tabs.js, line 67</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+        
+    </div>
+   
+                </section>
+              </section>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>

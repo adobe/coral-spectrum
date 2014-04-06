@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Decorated Textfield</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light">
+    <div class="guide-Component">
+      <article class="guide-Component-detail">
+        <heading>
+          <h1 class="coral-Heading--1 u-line">Decorated Textfield</h1>
+        </heading>
+        <section class="guide-Component-metadata">
+          <section class="guide-componentDetails guide-Example-section u-line">
+            <p>Current Version: 2.3.3-pre</p>
+            <p>Related Components: Textfield,Icons,MinimalButton</p>
+          </section>
+        </section>
+        <section class="guide-Component-documentation">
+              <section class="guide-Example-section">
+                <p>
+                  A Decorated-Textfield allows an embedded button, icon, or both.  It requires a wrapping 
+                  containter and the specific markup shown in the examples below.
+                </p>
+              </section>
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Icon Only</h2>
+                <section class="guide-Example-markupVariants">
+                  <div class="guide-Example-markupVariantItem">
+                    <p>Variant: <code>coral-DecoratedTextfield</code> with <code>coral-DecoratedTextfield-icon</code></p>
+                        <div id="guide-86342a1d-b7b8-46dc-8052-39e27fb74f07" class="u-columnMedium">
+                          <span class="coral-DecoratedTextfield">
+                           <i class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search"></i>
+                           <input type="text" class="coral-DecoratedTextfield-input coral-Textfield">
+                          </span>
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-86342a1d-b7b8-46dc-8052-39e27fb74f07" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                </section>
+              </section>
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Button Only</h2>
+                <section class="guide-Example-markupVariants">
+                  <div class="guide-Example-markupVariantItem"> 
+                    <p>Variant: <code>coral-DecoratedTextfield</code> with <code>coral-DecoratedTextfield-button</code></p>
+                    <p>Note that <code>coral-MinimalButton</code> is also required.</p>
+                        <div id="guide-08176738-ff7d-4e25-9e2c-08658ea4f8fc" class="u-columnMedium">
+                          <span class="coral-DecoratedTextfield">
+                           <input type="text" class="coral-DecoratedTextfield-input coral-Textfield">
+                           <button type="button" class="coral-DecoratedTextfield-button coral-MinimalButton">
+                             <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+                           </button>
+                          </span>
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-08176738-ff7d-4e25-9e2c-08658ea4f8fc" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                </section>
+              </section>
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Icon and Button</h2>
+                <section class="guide-Example-markupVariants">
+                  <div class="guide-Example-markupVariantItem">
+                    <p>
+                      Variant: <code>coral-DecoratedTextfield</code> with both
+                      <code>coral-DecoratedTextfield-icon</code> and 
+                      <code>coral-DecoratedTextfield-button</code>
+                    </p>
+                        <div id="guide-b5dde3bb-5f96-4e79-8ade-e0ed55a4475b" class="u-columnMedium">
+                          <span class="coral-DecoratedTextfield">
+                           <i class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search"></i>
+                           <input type="text" class="coral-DecoratedTextfield-input coral-Textfield">
+                           <button type="button" class="coral-DecoratedTextfield-button coral-MinimalButton">
+                             <i class="coral-MinimalButton-icon coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+                           </button>
+                          </span>
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-b5dde3bb-5f96-4e79-8ade-e0ed55a4475b" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                </section>
+              </section>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>

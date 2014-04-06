@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Checkbox</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light">
+    <div class="guide-Component">
+      <article class="guide-Component-detail">
+        <heading>
+          <h1 class="coral-Heading--1 u-line">Checkbox</h1>
+        </heading>
+        <section class="guide-Component-metadata">
+          <section class="guide-componentDetails guide-Example-section u-line">
+            <p>Current Version: 2.3.3-pre</p>
+            <p>Related Components: </p>
+          </section>
+        </section>
+        <section class="guide-Component-documentation">
+              <section class="guide-Example-section">
+                <p>
+                  Checkboxes are styled using <code>coral-Checkbox</code> on the input element,
+                  with enclosed span tags styled as <code>coral-Checkbox-checkmark</code> and
+                  <code>coral-Checkbox-description</code>.
+                  
+                </p>
+                <p>
+                  Checkbox include checked and unchecked states with pure CSS. They can support
+                  an indeterminate state using javascript.
+                  
+                </p>
+                <p>Examples of the required markup are shown below.</p>
+              </section>
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Checkbox Examples</h2>
+                <p>Regular <code>coral-Checkbox</code> examples:</p>
+                <div class="guide-Example-markupVariants">
+                  <div class="guide-Example-markupVariantItem">
+                    <p>Unchecked:</p>
+                        <div id="guide-5b411ea9-648d-4ba2-b9bd-8aa0591b34cf" class="u-columnMedium">
+                          <label class="coral-Checkbox">
+                           <input class="coral-Checkbox-input" type="checkbox" name="c2" value="2">
+                           <span class="coral-Checkbox-checkmark"></span>
+                           <span class="coral-Checkbox-description">Unchecked</span>
+                          </label>
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-5b411ea9-648d-4ba2-b9bd-8aa0591b34cf" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                  <div class="guide-Example-markupVariantItem">
+                    <p>Checked</p>
+                        <div id="guide-cabe5aa2-d66e-4c4f-80da-b57279d63de1" class="u-columnMedium">
+                          <label class="coral-Checkbox">
+                           <input class="coral-Checkbox-input" type="checkbox" name="c1" value="1" checked>
+                           <span class="coral-Checkbox-checkmark"></span>
+                           <span class="coral-Checkbox-description">Checked</span>
+                          </label>
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-cabe5aa2-d66e-4c4f-80da-b57279d63de1" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                  <div class="guide-Example-markupVariantItem">
+                    <p>Partial state via <code>aria-checked="mixed"</code> and JavaScript:</p>
+                        <div id="guide-c2cefac7-2b76-4b23-af6f-03825a2b7895" class="u-columnMedium">
+                          <label class="coral-Checkbox">
+                           <input class="coral-Checkbox-input" type="checkbox"  name="c3" value="3" aria-checked="mixed">
+                           <span class="coral-Checkbox-checkmark"></span>
+                           <span class="coral-Checkbox-description">Partially checked</span>
+                          </label>
+                          <script type="text/javascript">
+                           $('[aria-checked="mixed"]').prop('indeterminate', true);
+                          </script>
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-c2cefac7-2b76-4b23-af6f-03825a2b7895" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                  <div class="guide-Example-markupVariantItem">
+                    <p>Disabled Unchecked:</p>
+                        <div id="guide-abc4331e-4c80-416b-b026-57509fac1725" class="u-columnMedium">
+                          <label class="coral-Checkbox">
+                           <input class="coral-Checkbox-input" type="checkbox" name="c4" value="4" disabled="disabled">
+                           <span class="coral-Checkbox-checkmark"></span>
+                           <span class="coral-Checkbox-description">Unchecked</span>
+                          </label>
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-abc4331e-4c80-416b-b026-57509fac1725" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                  <div class="guide-Example-markupVariantItem">
+                    <p>Disabled Checked</p>
+                        <div id="guide-467f911e-5c8b-4bad-a536-b1996d75ce5d" class="u-columnMedium">
+                          <label class="coral-Checkbox">
+                           <input class="coral-Checkbox-input" type="checkbox" name="c5" value="5" disabled="disabled" checked>
+                           <span class="coral-Checkbox-checkmark"></span>
+                           <span class="coral-Checkbox-description">Checked</span>
+                          </label>
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-467f911e-5c8b-4bad-a536-b1996d75ce5d" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                  <div class="guide-Example-markupVariantItem">
+                    <p>Disabled Partial:</p>
+                        <div id="guide-1b61b548-6249-4f39-93ba-2c89cdec83ce" class="u-columnMedium">
+                          <label class="coral-Checkbox">
+                           <input class="coral-Checkbox-input" type="checkbox"  name="c6" value="6" disabled="disabled" aria-checked="mixed">
+                           <span class="coral-Checkbox-checkmark"></span>
+                           <span class="coral-Checkbox-description">Partially checked</span>
+                          </label>
+                          <script type="text/javascript">
+                           $('[aria-checked="mixed"]').prop('indeterminate', true);
+                          </script>
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-1b61b548-6249-4f39-93ba-2c89cdec83ce" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                </div>
+              </section>
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Cycling State</h2>
+                <p>Cycling a checkbox's state requires a little JavaScript.</p>
+                <div class="guide-Example-markupVariants">
+                  <div class="guide-Example-markupVariantItem">
+                    <p>Cycling Checkbox:</p>
+                        <div id="guide-2af7e69d-4d1f-43dd-8eb6-e5f6fd504d2e" class="u-columnMedium">
+                          <label id="cycle-checkbox" class="coral-Checkbox">
+                           <input class="coral-Checkbox-input" type="checkbox" name="c4" value="4">
+                           <span class="coral-Checkbox-checkmark"></span>
+                           <span class="coral-Checkbox-description">Click To Change State</span>
+                          </label>
+                          <script type="text/javascript">
+                           /**
+                           * Makes a checkbox cycle through the different states.
+                           */
+                           $('#cycle-checkbox input').off('change').click(function (e) {
+                             var ariaChecked = $(this).attr('aria-checked');
+                             if (ariaChecked === 'mixed') {
+                               this.indeterminate = this.checked = false;
+                             } else {
+                               this.indeterminate = (ariaChecked === 'true');
+                               this.checked = !this.indeterminate;
+                             }
+                             $(this).attr({
+                               'aria-checked': this.indeterminate ? 'mixed' : this.checked,
+                               'checked': this.checked
+                             });
+                             if (!('ontouchstart' in window)) $(this).focus();
+                           });
+                          </script>
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-2af7e69d-4d1f-43dd-8eb6-e5f6fd504d2e" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                </div>
+              </section>
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Nested Checkboxes</h2>
+                <p>This nested example requires complex JavaScript to manipulate the Checkbox state.</p>
+                <div class="guide-Example-markupVariants">
+                  <div class="guide-Example-markupVariantItem">
+                    <p>Nested Checkboxes:</p>
+                        <div id="guide-68a58d39-ce76-438b-b159-ebdc542f839e" class="u-columnMedium"><style type="text/css">
+  ul {
+    list-style: none;
+    -webkit-padding-start: 20px;
+  }
+</style>
+<form>
+  <div id="vtest-checkbox-nested-group">
+    <ul>
+      <li>
+        <label class="coral-Checkbox">
+          <input type="checkbox" name="tall" class="coral-Checkbox-input">
+          <span class="coral-Checkbox-checkmark"></span>
+          <span class="coral-Checkbox-description">Tall Things</span>
+        </label>
+
+        <ul>
+          <li>
+            <label class="coral-Checkbox">
+              <input type="checkbox" name="tall-1" class="coral-Checkbox-input">
+              <span class="coral-Checkbox-checkmark"></span>
+              <span class="coral-Checkbox-description">Buildings</span>
+            </label>
+          </li>
+          <li>
+            <label class="coral-Checkbox">
+              <input type="checkbox" name="tall-2" class="coral-Checkbox-input">
+              <span class="coral-Checkbox-checkmark"></span>
+              <span class="coral-Checkbox-description">Giants</span>
+            </label>
+            <ul>
+             <li>
+               <label class="coral-Checkbox">
+                 <input type="checkbox" name="tall-2-1" class="coral-Checkbox-input">
+                 <span class="coral-Checkbox-checkmark"></span>
+                 <span class="coral-Checkbox-description">Andre</span>
+               </label>
+             </li>
+             <li>
+               <label class="coral-Checkbox">
+                 <input type="checkbox" name="tall-2-2" class="coral-Checkbox-input">
+                 <span class="coral-Checkbox-checkmark"></span>
+                 <span class="coral-Checkbox-description">Paul Bunyan</span>
+               </label>
+             </li>
+            </ul>
+          </li>
+          <li>
+            <label class="coral-Checkbox">
+              <input type="checkbox" name="tall-3" class="coral-Checkbox-input">
+              <span class="coral-Checkbox-checkmark"></span>
+              <span class="coral-Checkbox-description">Two sandwiches</span>
+            </label>
+          </li>
+        </ul>
+      </li>
+      <li id="vtest-checks-2">
+        <label class="coral-Checkbox">
+          <input type="checkbox" name="short" class="coral-Checkbox-input">
+          <span class="coral-Checkbox-checkmark"></span>
+          <span class="coral-Checkbox-description">Short Things</span>
+        </label>
+        <ul>
+          <li>
+            <label class="coral-Checkbox">
+              <input type="checkbox" name="short-1" class="coral-Checkbox-input">
+              <span class="coral-Checkbox-checkmark"></span>
+              <span class="coral-Checkbox-description">Smurfs</span>
+            </label>
+          </li>
+          <li>
+            <label class="coral-Checkbox">
+              <input type="checkbox" name="short-2" class="coral-Checkbox-input">
+              <span class="coral-Checkbox-checkmark"></span>
+              <span class="coral-Checkbox-description">Mushrooms</span>
+            </label>
+          </li>
+          <li>
+            <label class="coral-Checkbox">
+              <input type="checkbox" name="short-3" class="coral-Checkbox-input">
+              <span class="coral-Checkbox-checkmark"></span>
+              <span class="coral-Checkbox-description">One Sandwich</span>
+            </label>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</form>
+<script type="text/javascript">
+$(function () {
+  /**
+   * Respond to change event and update state of parent or child checkboxes accordingly.
+   */
+  $('#vtest-checkbox-nested-group').find(':checkbox, input[role="checkbox"]').change(function () {
+    var checked = this.checked,
+      container = $(this).closest('li'),
+      siblings = container.siblings();
+
+    container.find(':checkbox, input[role="checkbox"]').prop({
+      indeterminate: false,
+      checked: checked
+    }).attr({
+      'aria-checked': checked,
+      'checked': checked
+    });
+
+    function checkSiblings(el) {
+      var parent = el.parent().closest('li'),
+        all = true;
+
+      if (!parent.length) {
+        return;
+      }
+
+      el.siblings().each(function () {
+        return all = ($(this).find(':checkbox, input[role="checkbox"]').prop("checked") === checked);
+      });
+
+      if (all && checked) {
+        parent.find(':checkbox, input[role="checkbox"]').prop({
+          indeterminate: false,
+          checked: checked
+        }).attr({
+          'aria-checked': checked,
+          'checked': checked
+        });
+        checkSiblings(parent);
+      } else if (all && !checked) {
+        parent.find(':checkbox, input[role="checkbox"]').attr({
+          'aria-checked': checked,
+          'checked': checked
+        }).prop({
+          indeterminate: (parent.find(':checkbox:checked, input[role="checkbox"]:checked').length > 0),
+          checked: checked
+        });
+        checkSiblings(parent);
+      } else {
+        el.parents("li").find('> label > input').prop({
+          indeterminate: true,
+          checked: false
+        }).attr({
+          'aria-checked': 'mixed',
+          'checked': false
+        });
+      }
+    }
+    checkSiblings(container);
+  });
+});
+</script>
+
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-68a58d39-ce76-438b-b159-ebdc542f839e" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                </div>
+              </section>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>

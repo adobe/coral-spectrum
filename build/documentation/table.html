@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Table</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light">
+    <div class="guide-Component">
+      <article class="guide-Component-detail">
+        <heading>
+          <h1 class="coral-Heading--1 u-line">Table</h1>
+        </heading>
+        <section class="guide-Component-metadata">
+          <section class="guide-componentDetails guide-Example-section u-line">
+            <p>Current Version: 2.3.3-pre</p>
+            <p>Related Components: </p>
+          </section>
+        </section>
+        <section class="guide-Component-documentation">
+              <section class="guide-Example-section">
+                <p>
+                  Tables require the main class of <code>coral-Table</code>.
+                  
+                </p>
+                <p>In addition, the following subtypes are provided for rows, headings, and cells.</p>
+                <pre class="prettyprint u-columnSmall">.coral-Table-row
+.coral-Table-headerCell
+.coral-Table-cell
+</pre>
+                <p>Two decorative styles are provided as well:</p>
+                <pre class="prettyprint u-columnSmall">.coral-Table--bordered
+.coral Table--hover</pre>
+              </section>
+              <section class="guide-Example-section">
+                <h2 class="coral-Heading--2 u-line">Table Examples</h2>
+                <div class="guide-Example-markupVariants">
+                  <div class="guide-Example-markupVariantItem">
+                    <p>A basic table with headings:</p>
+                        <div id="guide-652f6492-c241-4bb9-8350-19c2a311c511" class="u-columnMedium"><table class="coral-Table">
+  <thead>
+    <tr class="coral-Table-row">
+      <th class="coral-Table-headerCell">Pet Name</th>
+      <th class="coral-Table-headerCell">Type</th>
+      <th class="coral-Table-headerCell">Good/Bad</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Squeak</td>
+      <td class="coral-Table-cell">Mouse</td>
+      <td class="coral-Table-cell">Bad</td>
+    </tr>
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Spot</td>
+      <td class="coral-Table-cell">Dog</td>
+      <td class="coral-Table-cell">Bad</td>
+    </tr>
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Fluffy</td>
+      <td class="coral-Table-cell">Velociraptor</td>
+      <td class="coral-Table-cell">Good</td>
+    </tr>
+  </tbody>
+</table>
+</table>
+
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-652f6492-c241-4bb9-8350-19c2a311c511" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                  <div class="guide-Example-markupVariantItem">
+                    <p>Table that uses <code>.coral-Table--hover</code>:</p>
+                        <div id="guide-7d815ebb-268f-4353-b21f-938c031585b9" class="u-columnMedium"><table class="coral-Table coral-Table--hover">
+  <thead>
+    <tr class="coral-Table-row">
+      <th class="coral-Table-headerCell">Pet Name</th>
+      <th class="coral-Table-headerCell">Type</th>
+      <th class="coral-Table-headerCell">Good/Bad</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Mongo</td>
+      <td class="coral-Table-cell">Chihuahua</td>
+      <td class="coral-Table-cell">Bad</td>
+    </tr>
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Tiny</td>
+      <td class="coral-Table-cell">Great Dane</td>
+      <td class="coral-Table-cell">Bad</td>
+    </tr>
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Jaws</td>
+      <td class="coral-Table-cell">Pit Bull</td>
+      <td class="coral-Table-cell">Good</td>
+    </tr>
+  </tbody>
+</table>
+
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-7d815ebb-268f-4353-b21f-938c031585b9" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                  <div class="guide-Example-markupVariantItem">
+                    <p>Table that uses <code>.coral-Table--bordered</code>:</p>
+                        <div id="guide-c894f908-1def-4167-af92-b2f2147c6d26" class="u-columnMedium"><table class="coral-Table coral-Table--bordered">
+  <thead>
+    <tr class="coral-Table-row">
+      <th class="coral-Table-headerCell">Pet Name</th>
+      <th class="coral-Table-headerCell">Type</th>
+      <th class="coral-Table-headerCell">Good/Bad</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Hopper</td>
+      <td class="coral-Table-cell">Frog</td>
+      <td class="coral-Table-cell">Good</td>
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Pokey</td>
+      <td class="coral-Table-cell">Porcupine</td>
+      <td class="coral-Table-cell">Good</td>
+    </tr>
+    </tr>
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Mr. Snuggles</td>
+      <td class="coral-Table-cell">Snake</td>
+      <td class="coral-Table-cell">Bad</td>
+    </tr>
+  </tbody>
+</table>
+
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-c894f908-1def-4167-af92-b2f2147c6d26" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                  <div class="guide-Example-markupVariantItem">
+                    <p>
+                      Table that uses <code>.coral-Table--border</code> 
+                      and <code>.coral-Table--hover</code>:
+                    </p>
+                        <div id="guide-93a8fa47-79d4-4400-ade8-bf0bd365f39f" class="u-columnMedium"><table class="coral-Table coral-Table--hover coral-Table--bordered">
+  <thead>
+    <tr class="coral-Table-row">
+      <th class="coral-Table-headerCell">Pet Name</th>
+      <th class="coral-Table-headerCell">Type</th>
+      <th class="coral-Table-headerCell">Good/Bad</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Micky</td>
+      <td class="coral-Table-cell">Mouse</td>
+      <td class="coral-Table-cell">Good</td>
+    </tr>
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Pluto</td>
+      <td class="coral-Table-cell">Dog</td>
+      <td class="coral-Table-cell">Good</td>
+    </tr>
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Goofy</td>
+      <td class="coral-Table-cell">Dog...?</td>
+      <td class="coral-Table-cell">Not sure</td>
+    </tr>
+  </tbody>
+</table>
+
+                        </div><a href="#" class="guide-Example-showMarkup">show markup</a>
+                            <pre data-src-id="guide-93a8fa47-79d4-4400-ade8-bf0bd365f39f" class="guide-Example-toggleMarkup prettyprint linenums"></pre>
+                  </div>
+                </div>
+              </section>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>
