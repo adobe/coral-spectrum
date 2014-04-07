@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Selector</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light docs-Background u-coral-clearFix">
+    <article class="docs-Component">
+      <section class="docs-Component-metadata">
+        <div class="docs-Component-header">
+          <!-- name of the component-->
+          <h1 class="coral-Heading coral-Heading--1 docs-Component-name">Selector</h1><span class="docs-Component-version">Current Version: <strong>2.0.6</strong></span>
+        </div>
+        <div class="coral-Component-github"> Github: <a href="https://git.corp.adobe.com/Coral/coralui-component-selector" class="coral-Link">coralui-component-selector</a>
+        </div>
+        <!-- description is loaded from the template-->
+      </section>
+      <section class="docs-Component-documentation">
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">Markup Examples</h3><span class="u-coral-pullRight docs-ThemeSwitcher"><i class="coral-Icon coral-Icon--infoCircle docs-ThemeSwitcher-icon"></i>
+                  <button class="coral-MinimalButton docs-ThemeSwitcher-button is-selected">Light</button>|
+                  <button data-theme="coral--dark" class="coral-MinimalButton docs-ThemeSwitcher-button">Dark</button></span>
+              </div>
+              <p>Selector provides for selection from a set of options and behaves similar to a set of Radio or Checkbox instances.</p>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Mutually Exclusive</h3>
+                      <div id="guide-369168ee-2183-4893-8ab0-8e17fac36334" class="docs-Example-markup u-columnMedium">
+                        <div class="coral-Selector">
+                           <label class="coral-Selector-option">
+                             <input class="coral-Selector-input" type="radio" name="s1">
+                             <span class="coral-Selector-description" title="Card View">
+                               <i class="coral-Icon coral-Icon--viewCard coral-Selector-icon"></i>
+                             </span>
+                           </label>
+                           <label class="coral-Selector-option">
+                             <input class="coral-Selector-input" type="radio" name="s1">
+                             <span class="coral-Selector-description" title="List View">
+                               <i class="coral-Icon coral-Icon--viewList coral-Selector-icon"></i>
+                             </span>
+                           </label>
+                           <label class="coral-Selector-option">
+                             <input class="coral-Selector-input" type="radio" name="s1">
+                             <span class="coral-Selector-description" title="Column View">
+                               <i class="coral-Icon coral-Icon--viewColumn coral-Selector-icon"></i>
+                             </span>
+                           </label>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-369168ee-2183-4893-8ab0-8e17fac36334" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Mutually Exclusive with Icons and Text</h3>
+                      <div id="guide-65882ec2-c905-4467-81ac-811fe6c8894b" class="docs-Example-markup u-columnMedium">
+                        <div class="coral-Selector">
+                          <label class="coral-Selector-option">
+                            <input class="coral-Selector-input" type="radio" name="s2">
+                            <span class="coral-Selector-description">
+                              <i class="coral-Icon coral-Icon--sentimentPositive coral-Selector-icon"></i>
+                              Yes
+                            </span>
+                          </label>
+                          <label class="coral-Selector-option">
+                            <input class="coral-Selector-input" type="radio" name="s2">
+                            <span class="coral-Selector-description">
+                              <i class="coral-Icon coral-Icon--sentimentNegative coral-Selector-icon"></i>
+                              No
+                            </span>
+                          </label>
+                          <label class="coral-Selector-option">
+                            <input class="coral-Selector-input" type="radio" name="s2">
+                            <span class="coral-Selector-description">
+                              <i class="coral-Icon coral-Icon--sentimentNeutral coral-Selector-icon"></i>
+                              Maybe
+                            </span>
+                          </label>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-65882ec2-c905-4467-81ac-811fe6c8894b" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Multiple Selection</h3>
+                      <div id="guide-aa121c15-4ffe-46c9-a697-8b1848b896bc" class="docs-Example-markup u-columnMedium">
+                        <div class="coral-Selector">
+                          <label class="coral-Selector-option">
+                            <input class="coral-Selector-input" type="checkbox" name="s3">
+                            <span class="coral-Selector-description">Chicken</span>
+                          </label>
+                          <label class="coral-Selector-option">
+                            <input class="coral-Selector-input" type="checkbox" name="s3">
+                            <span class="coral-Selector-description">Beef</span>
+                          </label>
+                          <label class="coral-Selector-option">
+                            <input class="coral-Selector-input" type="checkbox" name="s3" checked disabled>
+                            <span class="coral-Selector-description">Pork</span>
+                          </label>
+                          <label class="coral-Selector-option">
+                            <input class="coral-Selector-input" type="checkbox" name="s3" disabled>
+                            <span class="coral-Selector-description">Tofu</span>
+                          </label>
+                        </div>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-aa121c15-4ffe-46c9-a697-8b1848b896bc" class="docs-Example-toggleMarkup prettyprint"></pre>
+            </section>
+      </section>
+    </article>
+  </body>
+</html>
