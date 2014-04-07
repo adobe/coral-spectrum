@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - MinimalButton</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light docs-Background u-coral-clearFix">
+    <article class="docs-Component">
+      <section class="docs-Component-metadata">
+        <div class="docs-Component-header">
+          <!-- name of the component-->
+          <h1 class="coral-Heading coral-Heading--1 docs-Component-name">MinimalButton</h1><span class="docs-Component-version">Current Version: <strong>2.3.9-pre</strong></span>
+        </div>
+        <div class="coral-Component-related">Related Components: <a href="button.html" class="coral-Link">Button</a>, <a href="icon.html" class="coral-Link">Icon</a>
+        </div>
+        <div class="coral-Component-github"> Github: <a href="https://git.corp.adobe.com/Coral/coralui-core" class="coral-Link">coralui-core</a>
+        </div>
+        <!-- description is loaded from the template-->
+      </section>
+      <section class="docs-Component-documentation">
+        <p>
+          MinimalButton a button element without any styling. It's typically intended to wrap an icon which
+          has the <code>coral-MinimalButton-icon</code> class. This creates an icon-only button without any additional size,
+          position, or styles. Note that MinimalButton will scale if a size is added via CSS. See examples below.
+          
+        </p>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">MinimalButton Examples</h3><span class="u-coral-pullRight docs-ThemeSwitcher"><i class="coral-Icon coral-Icon--infoCircle docs-ThemeSwitcher-icon"></i>
+                  <button class="coral-MinimalButton docs-ThemeSwitcher-button is-selected">Light</button>|
+                  <button data-theme="coral--dark" class="coral-MinimalButton docs-ThemeSwitcher-button">Dark</button></span>
+              </div>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Basic</h3>
+                      <div id="guide-af480290-f29f-43a4-a9e5-3c735047385b" class="docs-Example-markup u-columnMedium">
+                        <button class="coral-MinimalButton">
+                          <i class="coral-Icon coral-Icon--delete coral-MinimalButton-icon"></i>
+                        </button>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-af480290-f29f-43a4-a9e5-3c735047385b" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Larger Icon</h3>A MinimalButton with <code>coral-Icon--sizeL</code> on the icon.
+                      <div id="guide-af6f9119-939b-4bd9-8e23-5c2dee627a20" class="docs-Example-markup u-columnMedium">
+                        <button class="coral-MinimalButton">
+                          <i class="coral-Icon coral-Icon--delete coral-Icon--sizeL coral-MinimalButton-icon"></i>
+                        </button>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-af6f9119-939b-4bd9-8e23-5c2dee627a20" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Larger Button</h3>A MinimalButton with a style making the button larger than its content.
+                      <div id="guide-471e02f6-8a0e-4f16-ad41-cc8cd01dfdc3" class="docs-Example-markup u-columnMedium">
+                        <style>
+                          .bigger-button {
+                            width: 4rem;
+                            height: 4rem;
+                          }
+                        </style>
+                        <button class="coral-MinimalButton bigger-button">
+                          <i class="coral-Icon coral-Icon--delete coral-Icon--sizeL coral-MinimalButton-icon"></i>
+                        </button>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-471e02f6-8a0e-4f16-ad41-cc8cd01dfdc3" class="docs-Example-toggleMarkup prettyprint"></pre>
+            </section>
+      </section>
+    </article>
+  </body>
+</html>
