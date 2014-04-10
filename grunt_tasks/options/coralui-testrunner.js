@@ -1,6 +1,6 @@
 var pkg = require('../../package.json');
 var path = require('path');
-var dependencyUtils = require('coralui-grunt-componentbuilder/tasks/dependency-utils');
+var dependencyUtils = require('coralui-grunt-componentbuilder/utils/dependency-utils');
 
 // Build a list of files for Karma
 // We use a custom list of files here to include source files/tests for all Coral components
