@@ -79,7 +79,7 @@ module.exports = function(grunt) {
   grunt.task.registerTask('full', ['build-dependencies', 'default']);
 
   // Default task
-  grunt.task.registerTask('default', ['coralui-componentbuilder', 'copy', 'cssmin', 'cssmetrics', 'docs-mapping', 'run-tests' ]);
+  grunt.task.registerTask('default', ['coralui-componentbuilder', 'copy', 'cssmin', 'cssmetrics', 'docs-mapping' ]);
 
   // run tests if desired
   grunt.task.registerTask('run-tests', ['coralui-testrunner']);
