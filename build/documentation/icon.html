@@ -1,0 +1,2825 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Icon</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light docs-Background u-coral-clearFix">
+    <article class="docs-Component">
+      <section class="docs-Component-metadata">
+        <div class="docs-Component-header">
+          <!-- name of the component-->
+          <h1 class="coral-Heading coral-Heading--1 docs-Component-name">Icon</h1><span class="docs-Component-version">Current Version: <strong>2.3.11-pre</strong></span>
+        </div>
+        <div class="coral-Component-github"> Github: <a href="https://git.corp.adobe.com/Coral/coralui-core" class="coral-Link">coralui-core</a>
+        </div>
+        <!-- description is loaded from the template-->
+      </section>
+      <section class="docs-Component-documentation">
+        <p>
+          CoralUI ships with a set of monochrome icons that are delivered via convenience classes.
+          
+        </p>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">Icon Examples</h3><span class="u-coral-pullRight docs-ThemeSwitcher"><i class="coral-Icon coral-Icon--infoCircle docs-ThemeSwitcher-icon"></i>
+                  <button class="coral-MinimalButton docs-ThemeSwitcher-button is-selected">Light</button>|
+                  <button data-theme="coral--dark" class="coral-MinimalButton docs-ThemeSwitcher-button">Dark</button></span>
+              </div>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Standalone</h3>Icons can be added by using both <code>i</code> and <code>span</code> elements.
+                      <div id="guide-7845ef22-c057-4257-906b-dbb87f923a61" class="docs-Example-markup u-columnMedium">
+                        <i class="coral-Icon coral-Icon--add coral-Icon--sizeS"></i>
+                        <i class="coral-Icon coral-Icon--bell coral-Icon--sizeS"></i>
+                        <span class="coral-Icon coral-Icon--heart coral-Icon--sizeS"></span>
+                        <span class="coral-Icon coral-Icon--star coral-Icon--sizeS"></span>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-7845ef22-c057-4257-906b-dbb87f923a61" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Sizes</h3>We provide 4 different icon sizes, indicating a size modifier that follows the shirt sizing system, from XS to L: <code>coral-Icon--sizeXS</code>, <code>coral-Icon--sizeS</code>, <code>coral-Icon--sizeM</code>, <code>coral-Icon--sizeL</code>
+                      <div id="guide-8640a932-01fc-48b1-9ce4-e4aa1dc35f39" class="docs-Example-markup u-columnMedium">
+                        <i class="coral-Icon coral-Icon--heart coral-Icon--sizeXS"></i>
+                        <i class="coral-Icon coral-Icon--heart coral-Icon--sizeS"></i>
+                        <i class="coral-Icon coral-Icon--heart coral-Icon--sizeM"></i>
+                        <i class="coral-Icon coral-Icon--heart coral-Icon--sizeL"></i>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-8640a932-01fc-48b1-9ce4-e4aa1dc35f39" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Inline with Text</h3>
+                      <div id="guide-476a742f-b6a0-41c6-b2e3-8d1b6f911eec" class="docs-Example-markup u-columnLarge">
+                        <div>
+                          This is a paragraph that contains an
+                          <i class="coral-Icon coral-Icon--android"></i>
+                          inline icon. It can be what ever size you want. Lets end with a big cloud
+                          <i class="coral-Icon coral-Icon--cloud coral-Icon--sizeL"></i>.
+                        </div>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-476a742f-b6a0-41c6-b2e3-8d1b6f911eec" class="docs-Example-toggleMarkup prettyprint"></pre>
+            </section>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">Icon Variants</h3>
+              </div>
+              <p>CoralUI ships with a large set of monochrome icons. If you do not see the icon you need, please speak to your designer or email <a class="coral-Link" href="mailto:CloudUI@adobe.com?subject=Icon%20Request&b">DL-CloudUI</a>.</p><table class="coral-Table">
+  <thead>
+    <tr class="coral-Table-row">
+      <th class="coral-Table-headerCell">Icon</th>
+      <th class="coral-Table-headerCell">Name</th>
+      <th class="coral-Table-headerCell">CSS selector</th>
+    </tr>
+  </thead>
+  <tbody>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--accordionDown coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">accordionDown</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--accordionDown</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--accordionLeft coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">accordionLeft</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--accordionLeft</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--accordionRight coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">accordionRight</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--accordionRight</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--accordionUp coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">accordionUp</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--accordionUp</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--actions coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">actions</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--actions</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--addCircle coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">addCircle</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--addCircle</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--add coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">add</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--add</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--adjust coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">adjust</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--adjust</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--adobeAnalytics coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">adobeAnalytics</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--adobeAnalytics</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--adobeExperienceManager coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">adobeExperienceManager</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--adobeExperienceManager</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--adobeMarketingCloud coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">adobeMarketingCloud</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--adobeMarketingCloud</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--adobeMediaOptimizer coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">adobeMediaOptimizer</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--adobeMediaOptimizer</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--adobeSocial coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">adobeSocial</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--adobeSocial</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--adobeTarget coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">adobeTarget</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--adobeTarget</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--alert coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">alert</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--alert</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--alertAdd coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">alertAdd</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--alertAdd</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--alias coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">alias</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--alias</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--anchor coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">anchor</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--anchor</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--android coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">android</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--android</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--annotate coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">annotate</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--annotate</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--answer coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">answer</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--answer</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--answerFavorite coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">answerFavorite</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--answerFavorite</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--app coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">app</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--app</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--apple coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">apple</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--apple</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--apps coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">apps</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--apps</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--archive coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">archive</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--archive</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--arrowDown coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">arrowDown</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--arrowDown</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--arrowLeft coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">arrowLeft</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--arrowLeft</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--arrowRight coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">arrowRight</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--arrowRight</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--arrowUp coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">arrowUp</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--arrowUp</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--asset coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">asset</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--asset</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--assetCheck coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">assetCheck</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--assetCheck</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--attach coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">attach</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--attach</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--attachmentExclude coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">attachmentExclude</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--attachmentExclude</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--automate coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">automate</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--automate</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--back coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">back</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--back</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--back30Seconds coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">back30Seconds</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--back30Seconds</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--bell coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">bell</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--bell</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--bidRule coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">bidRule</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--bidRule</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--bidRuleAdd coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">bidRuleAdd</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--bidRuleAdd</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--blackberry coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">blackberry</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--blackberry</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--blog coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">blog</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--blog</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--blur coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">blur</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--blur</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--book coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">book</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--book</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--bookmark coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">bookmark</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--bookmark</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--box coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">box</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--box</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--breadcrumb coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">breadcrumb</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--breadcrumb</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--breakdown coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">breakdown</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--breakdown</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--breakdownAdd coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">breakdownAdd</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--breakdownAdd</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--briefcase coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">briefcase</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--briefcase</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--browse coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">browse</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--browse</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--brush coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">brush</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--brush</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--bug coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">bug</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--bug</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--building coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">building</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--building</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--button coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">button</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--button</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--calculator coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">calculator</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--calculator</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--calendar coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">calendar</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--calendar</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--calendarAdd coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">calendarAdd</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--calendarAdd</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--calendarLocked coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">calendarLocked</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--calendarLocked</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--calendarUnlocked coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">calendarUnlocked</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--calendarUnlocked</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--camera coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">camera</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--camera</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--campaign coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">campaign</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--campaign</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--campaignAdd coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">campaignAdd</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--campaignAdd</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--campaignClose coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">campaignClose</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--campaignClose</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--campaignDelete coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">campaignDelete</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--campaignDelete</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--campaignEdit coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">campaignEdit</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--campaignEdit</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--campaignRemove coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">campaignRemove</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--campaignRemove</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--captcha coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">captcha</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--captcha</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--card coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">card</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--card</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--checkCircle coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">checkCircle</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--checkCircle</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--check coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">check</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--check</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--chevronDown coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">chevronDown</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--chevronDown</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--chevronLeft coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">chevronLeft</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--chevronLeft</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--chevronRight coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">chevronRight</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--chevronRight</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--chevronUp coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">chevronUp</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--chevronUp</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--circle coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">circle</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--circle</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--clock coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">clock</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--clock</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--clockCheck coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">clockCheck</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--clockCheck</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--closeCircle coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">closeCircle</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--closeCircle</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--close coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">close</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--close</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--closedCaptions coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">closedCaptions</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--closedCaptions</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--cloud coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">cloud</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--cloud</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--code coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">code</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--code</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--collection coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">collection</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--collection</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--collectionAdd coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">collectionAdd</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--collectionAdd</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--collectionAddTo coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">collectionAddTo</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--collectionAddTo</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--colorPalette coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">colorPalette</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--colorPalette</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--columnSettings coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">columnSettings</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--columnSettings</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--columnTwoA coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">columnTwoA</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--columnTwoA</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--columnTwoB coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">columnTwoB</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--columnTwoB</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--columnTwoC coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">columnTwoC</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--columnTwoC</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--comment coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">comment</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--comment</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--commentAdd coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">commentAdd</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--commentAdd</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--compare coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">compare</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--compare</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--compass coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">compass</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--compass</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--confidenceFour coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">confidenceFour</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--confidenceFour</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--confidenceOne coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">confidenceOne</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--confidenceOne</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--confidenceThree coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">confidenceThree</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--confidenceThree</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--confidenceTwo coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">confidenceTwo</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--confidenceTwo</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--conversionFunnel coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">conversionFunnel</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--conversionFunnel</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--copy coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">copy</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--copy</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--creativeCloud coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">creativeCloud</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--creativeCloud</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--creditCard coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">creditCard</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--creditCard</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--crop coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">crop</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--crop</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--cursorArrow coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">cursorArrow</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--cursorArrow</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--cut coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">cut</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--cut</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--dashboard coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">dashboard</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--dashboard</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--data coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">data</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--data</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--dataAdd coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">dataAdd</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--dataAdd</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--dataAdobe coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">dataAdobe</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--dataAdobe</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--dataCheck coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">dataCheck</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--dataCheck</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--dataCorrelated coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">dataCorrelated</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--dataCorrelated</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--dataEdit coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">dataEdit</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--dataEdit</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--dataUnavailable coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">dataUnavailable</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--dataUnavailable</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--delegate coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">delegate</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--delegate</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--delete coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">delete</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--delete</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--demographic coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">demographic</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--demographic</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--deviceDesktop coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">deviceDesktop</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--deviceDesktop</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--deviceLaptop coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">deviceLaptop</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--deviceLaptop</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--deviceMobile coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">deviceMobile</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--deviceMobile</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--deviceTablet coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">deviceTablet</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--deviceTablet</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--deviceTV coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">deviceTV</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--deviceTV</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--dimension coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">dimension</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--dimension</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--disqus coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">disqus</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--disqus</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--download coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">download</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--download</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--dPS coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">dPS</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--dPS</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--draft coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">draft</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--draft</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--draw coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">draw</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--draw</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--dropdown coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">dropdown</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--dropdown</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--duplicate coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">duplicate</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--duplicate</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--editCircle coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">editCircle</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--editCircle</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--edit coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">edit</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--edit</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--education coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">education</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--education</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--effects coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">effects</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--effects</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--efficient coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">efficient</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--efficient</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--email coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">email</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--email</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--emailCancel coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">emailCancel</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--emailCancel</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--emailSchedule coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">emailSchedule</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--emailSchedule</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--engagement coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">engagement</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--engagement</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--event coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">event</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--event</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--eventExclude coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">eventExclude</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--eventExclude</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--eventShare coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">eventShare</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--eventShare</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--exclude coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">exclude</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--exclude</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--experience coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">experience</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--experience</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--experienceAdd coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">experienceAdd</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--experienceAdd</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--experienceAddTo coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">experienceAddTo</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--experienceAddTo</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--eyedropper coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">eyedropper</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--eyedropper</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--facebook coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">facebook</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--facebook</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--facebookCoverImage coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">facebookCoverImage</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--facebookCoverImage</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--fast coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">fast</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--fast</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--fastForwardCircle coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">fastForwardCircle</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--fastForwardCircle</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--feed coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">feed</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--feed</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--feedAdd coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">feedAdd</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--feedAdd</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--feedManagement coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">feedManagement</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--feedManagement</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--file coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">file</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--file</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--fileChart coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">fileChart</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--fileChart</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--fileCode coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">fileCode</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--fileCode</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--fileCSV coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">fileCSV</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--fileCSV</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--fileExcel coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">fileExcel</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--fileExcel</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--fileHTML coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">fileHTML</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--fileHTML</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--fileMobile coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">fileMobile</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--fileMobile</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--filePDF coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">filePDF</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--filePDF</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--fileSingleWebPage coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">fileSingleWebPage</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--fileSingleWebPage</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--fileTxt coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">fileTxt</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--fileTxt</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--fileWord coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">fileWord</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--fileWord</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--fileXML coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">fileXML</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--fileXML</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--filingCabinet coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">filingCabinet</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--filingCabinet</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--film coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">film</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--film</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--filter coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">filter</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--filter</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--filterAdd coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">filterAdd</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--filterAdd</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--filterCheck coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">filterCheck</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--filterCheck</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--filterDelete coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">filterDelete</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--filterDelete</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--filterEdit coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">filterEdit</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--filterEdit</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--filterHeart coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">filterHeart</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--filterHeart</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--filterRemove coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">filterRemove</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--filterRemove</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--filterStar coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">filterStar</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--filterStar</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--findAndReplace coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">findAndReplace</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--findAndReplace</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--flag coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">flag</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--flag</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--flash coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">flash</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--flash</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--flashlight coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">flashlight</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--flashlight</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--flickr coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">flickr</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--flickr</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--folder coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">folder</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--folder</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--folderAdd coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">folderAdd</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--folderAdd</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--folderAddTo coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">folderAddTo</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--folderAddTo</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--folderAdobe coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">folderAdobe</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--folderAdobe</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--folderDefault coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">folderDefault</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--folderDefault</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--folderDelete coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">folderDelete</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--folderDelete</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--folderLocked coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">folderLocked</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--folderLocked</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--folderLockedAdobe coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">folderLockedAdobe</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--folderLockedAdobe</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--folderLockedDefault coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">folderLockedDefault</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--folderLockedDefault</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--folderSearch coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">folderSearch</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--folderSearch</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--follow coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">follow</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--follow</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--followOff coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">followOff</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--followOff</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--forecast coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">forecast</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--forecast</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--form coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">form</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--form</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--forPlacementOnly coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">forPlacementOnly</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--forPlacementOnly</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--forward coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">forward</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--forward</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--fullScreen coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">fullScreen</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--fullScreen</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--fullScreenExit coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">fullScreenExit</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--fullScreenExit</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--game coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">game</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--game</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--gear coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">gear</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--gear</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--genderFemale coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">genderFemale</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--genderFemale</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--genderMale coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">genderMale</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--genderMale</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--gift coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">gift</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--gift</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--globe coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">globe</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--globe</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--globeCheck coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">globeCheck</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--globeCheck</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--globeEnter coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">globeEnter</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--globeEnter</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--globeExit coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">globeExit</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--globeExit</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--globeRemove coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">globeRemove</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--globeRemove</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--globeSearch coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">globeSearch</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--globeSearch</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--googlePlus coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">googlePlus</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--googlePlus</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--googlePlus1 coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">googlePlus1</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--googlePlus1</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--graphArea coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">graphArea</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--graphArea</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--graphAreaStacked coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">graphAreaStacked</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--graphAreaStacked</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--graphBarHorizontal coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">graphBarHorizontal</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--graphBarHorizontal</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--graphBarHorizontalAdd coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">graphBarHorizontalAdd</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--graphBarHorizontalAdd</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--graphBarHorizontalStacked coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">graphBarHorizontalStacked</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--graphBarHorizontalStacked</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--graphBarStackedHorizontal coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">graphBarStackedHorizontal</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--graphBarStackedHorizontal</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--graphBarStackedVertical coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">graphBarStackedVertical</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--graphBarStackedVertical</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--graphBarVertical coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">graphBarVertical</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--graphBarVertical</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--graphBarVerticalAdd coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">graphBarVerticalAdd</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--graphBarVerticalAdd</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--graphBarVerticalStacked coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">graphBarVerticalStacked</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--graphBarVerticalStacked</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--graphBubble coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">graphBubble</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--graphBubble</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--graphConfidenceBands coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">graphConfidenceBands</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--graphConfidenceBands</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--graphDonut coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">graphDonut</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--graphDonut</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--graphDonutAdd coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">graphDonutAdd</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--graphDonutAdd</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--graphGantt coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">graphGantt</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--graphGantt</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--graphHistogram coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">graphHistogram</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--graphHistogram</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--graphPie coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">graphPie</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--graphPie</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--graphScatter coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">graphScatter</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--graphScatter</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--graphStream coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">graphStream</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--graphStream</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--graphStreamRanked coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">graphStreamRanked</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--graphStreamRanked</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--graphStreamRankedAdd coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">graphStreamRankedAdd</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--graphStreamRankedAdd</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--graphTree coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">graphTree</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--graphTree</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--graphTrend coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">graphTrend</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--graphTrend</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--graphTrendAdd coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">graphTrendAdd</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--graphTrendAdd</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--graphTrendRounded coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">graphTrendRounded</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--graphTrendRounded</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--group coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">group</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--group</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--hammer coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">hammer</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--hammer</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--hand coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">hand</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--hand</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--heart coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">heart</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--heart</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--helpCircle coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">helpCircle</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--helpCircle</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--history coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">history</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--history</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--home coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">home</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--home</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--image coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">image</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--image</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--imageAlbum coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">imageAlbum</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--imageAlbum</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--imageCarousel coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">imageCarousel</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--imageCarousel</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--imageMap coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">imageMap</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--imageMap</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--imageMapCircle coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">imageMapCircle</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--imageMapCircle</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--imageMapPolygon coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">imageMapPolygon</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--imageMapPolygon</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--imageMapRectangle coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">imageMapRectangle</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--imageMapRectangle</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--imageProfile coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">imageProfile</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--imageProfile</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--imageText coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">imageText</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--imageText</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--infoCircle coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">infoCircle</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--infoCircle</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--jumpToTop coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">jumpToTop</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--jumpToTop</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--key coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">key</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--key</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--keyboard coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">keyboard</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--keyboard</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--launch coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">launch</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--launch</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--layers coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">layers</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--layers</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--layersBackward coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">layersBackward</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--layersBackward</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--layersBringToFront coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">layersBringToFront</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--layersBringToFront</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--layersForward coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">layersForward</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--layersForward</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--layersSendToBack coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">layersSendToBack</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--layersSendToBack</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--lightbulb coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">lightbulb</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--lightbulb</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--link coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">link</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--link</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--linkCheck coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">linkCheck</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--linkCheck</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--linkedIn coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">linkedIn</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--linkedIn</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--linkOff coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">linkOff</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--linkOff</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--linux coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">linux</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--linux</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--location coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">location</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--location</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--lockOff coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">lockOff</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--lockOff</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--lockOn coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">lockOn</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--lockOn</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--login coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">login</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--login</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--mBox coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">mBox</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--mBox</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--menu coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">menu</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--menu</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--merge coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">merge</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--merge</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--minusCircle coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">minusCircle</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--minusCircle</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--minus coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">minus</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--minus</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--money coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">money</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--money</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--more coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">more</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--more</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--moreVertical coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">moreVertical</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--moreVertical</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--move coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">move</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--move</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--navigation coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">navigation</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--navigation</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--news coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">news</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--news</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--newsgator coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">newsgator</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--newsgator</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--note coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">note</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--note</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--noteAdd coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">noteAdd</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--noteAdd</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--open coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">open</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--open</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--openRecent coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">openRecent</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--openRecent</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--organize coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">organize</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--organize</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--oS coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">oS</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--oS</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--page coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">page</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--page</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--pageExclude coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">pageExclude</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--pageExclude</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--pages coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">pages</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--pages</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--pagesExclude coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">pagesExclude</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--pagesExclude</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--pageShare coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">pageShare</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--pageShare</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--paintBucket coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">paintBucket</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--paintBucket</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--paste coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">paste</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--paste</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--pasteHTML coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">pasteHTML</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--pasteHTML</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--pasteText coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">pasteText</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--pasteText</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--pauseCircle coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">pauseCircle</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--pauseCircle</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--pending coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">pending</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--pending</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--phoneGap coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">phoneGap</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--phoneGap</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--pinOff coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">pinOff</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--pinOff</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--pinOn coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">pinOn</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--pinOn</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--pinterest coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">pinterest</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--pinterest</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--pivot coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">pivot</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--pivot</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--playCircle coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">playCircle</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--playCircle</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--plug coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">plug</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--plug</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--preview coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">preview</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--preview</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--print coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">print</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--print</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--printPreview coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">printPreview</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--printPreview</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--project coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">project</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--project</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--projectAdd coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">projectAdd</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--projectAdd</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--promote coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">promote</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--promote</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--properties coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">properties</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--properties</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--public coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">public</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--public</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--publish coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">publish</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--publish</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--publishCheck coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">publishCheck</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--publishCheck</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--publishPending coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">publishPending</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--publishPending</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--publishReject coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">publishReject</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--publishReject</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--publishSchedule coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">publishSchedule</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--publishSchedule</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--question coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">question</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--question</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--rail coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">rail</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--rail</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--railRightClose coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">railRightClose</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--railRightClose</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--railRightOpen coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">railRightOpen</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--railRightOpen</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--redo coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">redo</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--redo</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--reflectHorizontal coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">reflectHorizontal</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--reflectHorizontal</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--reflectVertical coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">reflectVertical</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--reflectVertical</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--refresh coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">refresh</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--refresh</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--reorder coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">reorder</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--reorder</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--replies coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">replies</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--replies</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--reply coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">reply</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--reply</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--report coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">report</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--report</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--reportAdd coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">reportAdd</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--reportAdd</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--retweet coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">retweet</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--retweet</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--revenue coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">revenue</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--revenue</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--revert coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">revert</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--revert</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--rewindCircle coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">rewindCircle</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--rewindCircle</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--ribbon coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">ribbon</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--ribbon</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--rotateLeft coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">rotateLeft</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--rotateLeft</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--rotateRight coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">rotateRight</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--rotateRight</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--rss coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">rss</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--rss</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--save coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">save</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--save</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--saveAs coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">saveAs</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--saveAs</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--search coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">search</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--search</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--select coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">select</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--select</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--selectContainer coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">selectContainer</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--selectContainer</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--sentimentNegative coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">sentimentNegative</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--sentimentNegative</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--sentimentNeutral coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">sentimentNeutral</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--sentimentNeutral</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--sentimentPositive coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">sentimentPositive</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--sentimentPositive</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--servers coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">servers</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--servers</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--share coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">share</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--share</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--shareCheck coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">shareCheck</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--shareCheck</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--sharpen coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">sharpen</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--sharpen</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--shoppingCart coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">shoppingCart</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--shoppingCart</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--sinaWeibo coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">sinaWeibo</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--sinaWeibo</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--slow coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">slow</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--slow</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--spam coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">spam</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--spam</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--spellcheck coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">spellcheck</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--spellcheck</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--star coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">star</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--star</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--starFill coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">starFill</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--starFill</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--starStroke coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">starStroke</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--starStroke</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--stopCircle coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">stopCircle</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--stopCircle</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--stop coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">stop</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--stop</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--stopwatch coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">stopwatch</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--stopwatch</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--subscribe coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">subscribe</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--subscribe</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--successMetric coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">successMetric</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--successMetric</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--switch coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">switch</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--switch</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--sync coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">sync</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--sync</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--table coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">table</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--table</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--tableAndChart coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">tableAndChart</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--tableAndChart</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--tableEdit coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">tableEdit</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--tableEdit</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--tableHistogram coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">tableHistogram</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--tableHistogram</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--tag coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">tag</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--tag</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--tagExclude coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">tagExclude</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--tagExclude</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--target coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">target</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--target</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--targeted coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">targeted</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--targeted</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--text coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">text</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--text</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--textBold coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">textBold</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--textBold</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--textBulleted coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">textBulleted</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--textBulleted</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--textCenter coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">textCenter</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--textCenter</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--textColor coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">textColor</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--textColor</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--textIndentDecrease coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">textIndentDecrease</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--textIndentDecrease</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--textIndentIncrease coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">textIndentIncrease</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--textIndentIncrease</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--textItalic coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">textItalic</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--textItalic</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--textJustified coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">textJustified</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--textJustified</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--textLeft coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">textLeft</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--textLeft</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--textNumbered coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">textNumbered</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--textNumbered</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--textParagraph coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">textParagraph</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--textParagraph</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--textRight coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">textRight</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--textRight</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--textStyle coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">textStyle</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--textStyle</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--textSubscript coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">textSubscript</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--textSubscript</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--textSuperscript coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">textSuperscript</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--textSuperscript</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--textUnderline coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">textUnderline</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--textUnderline</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--thumbDown coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">thumbDown</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--thumbDown</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--thumbUp coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">thumbUp</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--thumbUp</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--transparency coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">transparency</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--transparency</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--treeCollapse coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">treeCollapse</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--treeCollapse</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--treeCollapseAll coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">treeCollapseAll</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--treeCollapseAll</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--treeExpand coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">treeExpand</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--treeExpand</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--treeExpandAll coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">treeExpandAll</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--treeExpandAll</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--trendInspect coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">trendInspect</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--trendInspect</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--triangleDown coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">triangleDown</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--triangleDown</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--triangleRight coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">triangleRight</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--triangleRight</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--trophy coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">trophy</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--trophy</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--tumblr coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">tumblr</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--tumblr</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--twitter coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">twitter</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--twitter</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--type coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">type</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--type</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--undo coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">undo</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--undo</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--unflag coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">unflag</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--unflag</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--ungroup coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">ungroup</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--ungroup</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--unmerge coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">unmerge</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--unmerge</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--unpublish coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">unpublish</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--unpublish</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--upload coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">upload</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--upload</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--usa coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">usa</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--usa</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--user coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">user</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--user</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--userArrow coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">userArrow</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--userArrow</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--userExclude coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">userExclude</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--userExclude</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--userLock coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">userLock</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--userLock</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--users coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">users</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--users</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--usersExclude coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">usersExclude</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--usersExclude</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--userShare coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">userShare</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--userShare</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--usersLock coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">usersLock</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--usersLock</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--usersShare coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">usersShare</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--usersShare</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--viewAllTags coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">viewAllTags</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--viewAllTags</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--viewCard coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">viewCard</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--viewCard</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--viewColumn coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">viewColumn</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--viewColumn</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--viewDay coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">viewDay</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--viewDay</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--viewDetail coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">viewDetail</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--viewDetail</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--viewedMarkAs coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">viewedMarkAs</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--viewedMarkAs</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--viewGrid coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">viewGrid</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--viewGrid</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--viewList coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">viewList</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--viewList</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--viewOff coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">viewOff</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--viewOff</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">viewOn</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--viewOn</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--viewRow coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">viewRow</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--viewRow</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--viewSingle coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">viewSingle</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--viewSingle</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--viewWeek coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">viewWeek</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--viewWeek</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--visit coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">visit</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--visit</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--visitShare coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">visitShare</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--visitShare</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--vK coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">vK</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--vK</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--volumeMute coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">volumeMute</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--volumeMute</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--volumeOne coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">volumeOne</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--volumeOne</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--volumeThree coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">volumeThree</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--volumeThree</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--volumeTwo coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">volumeTwo</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--volumeTwo</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--windows7 coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">windows7</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--windows7</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--windows8 coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">windows8</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--windows8</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--wordpress coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">wordpress</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--wordpress</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--workflow coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">workflow</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--workflow</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--workflowAdd coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">workflowAdd</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--workflowAdd</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--wrench coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">wrench</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--wrench</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--write coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">write</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--write</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--youTube coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">youTube</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--youTube</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--zoomIn coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">zoomIn</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--zoomIn</td>
+      </tr>
+
+      <tr class="coral-Table-row">
+        <td class="coral-Table-cell"><i class="coral-Icon coral-Icon--zoomOut coral-Icon--sizeL"></i></td>
+        <td class="coral-Table-cell">zoomOut</td>
+        <td class="coral-Table-cell">.coral-Icon .coral-Icon--zoomOut</td>
+      </tr>
+
+  </tbody>
+</table>
+
+            </section>
+      </section>
+    </article>
+  </body>
+</html>
