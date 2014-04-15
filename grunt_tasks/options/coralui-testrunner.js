@@ -4,7 +4,7 @@ var dependencyUtils = require('coralui-grunt-componentbuilder/utils/dependency-u
 
 // Build a list of files for Karma
 // We use a custom list of files here to include source files/tests for all Coral components
-var includeOrder = dependencyUtils.getJavascriptPaths(pkg);
+var includeOrder = dependencyUtils.getJavascriptPaths('.');
 
 // Start with the basic external dependencies
 var karmaFiles = [

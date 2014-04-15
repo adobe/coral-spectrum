@@ -22,7 +22,7 @@
     "grunt-css-metrics": "~0.1.2",
     "coralui-grunt-dependenciesbuilder": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-dependenciesbuilder.git#1.0.0",
     "coralui-grunt-releasepackage": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-releasepackage.git#1.1.1",
-    "coralui-grunt-testrunner": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-testrunner.git#1.0.0",
+    "coralui-grunt-testrunner": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-testrunner.git#2.0.0",
     "coralui-guide-resources": "git+ssh://git@git.corp.adobe.com:Coral/coralui-guide-resources.git#3.0.2",
     "load-grunt-config": "~0.7.0",
     "svg-stylus": "git+https://github.com/Aaronius/svg-stylus.git",
