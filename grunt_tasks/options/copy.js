@@ -75,6 +75,18 @@ module.exports = {
         cwd: '<%= dirs.modules %>',
         src: ['coralui-component-*/<%= dirs.build %>/<%= dirs.documentation %>/*.html'],
         dest: '<%= dirs.build %>/<%= dirs.documentation %>'
+      },
+      {
+        expand: true,
+        flatten: false,
+        cwd: '<%= dirs.modules %>',
+        src: [
+          'coralui-component-*/<%= dirs.build %>/<%= dirs.documentation %>/resources/**.*'
+        ],
+        dest: '<%= dirs.build %>/<%= dirs.documentation %>/resources',
+        rename: function (dest, src) {
+          return dest + src.substring(src.lastIndexOf('resources') + 'resources'.length);
+        }
       }
     ]
   },
