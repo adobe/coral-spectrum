@@ -58,6 +58,7 @@
       "coralui-component-modal",
       "coralui-component-tabpanel",
       "coralui-component-alert",
+      "coralui-component-tooltip",
       "coralui-component-popover",
       "coralui-component-taglist",
       "coralui-component-selectlist",
@@ -66,12 +67,13 @@
       "coralui-component-datepicker",
       "coralui-component-wizard",
       "coralui-component-fileupload",
-      "coralui-component-tooltip",
       "coralui-component-numberinput",
       "coralui-component-cyclebutton",
       "coralui-component-autocomplete",
       "coralui-component-charactercount",
-      "coralui-component-accordion"
+      "coralui-component-accordion",
+      "coralui-component-switch",
+      "coralui-component-selector"
     ]
   }
 }
