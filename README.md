@@ -34,10 +34,9 @@ grunt
 
 #### Grunt options
 
-* `grunt` - builds CoralUI without building each dependency.
+* `grunt` - builds a CoralUI build based on its component dependencies. 
 * `grunt clean` - cleans the build
-* `grunt full` - full build of the module. Every dependency is also build (should not be required when using released dependencies).
 
 
 ### Questions?
-More information on the 2.0 effort can be found in the [CoralUI 2.0 Scope Document](https://git.corp.adobe.com/Coral/CoralUI/wiki/CoralUI-2.0-Scope-and-Initial-Timeline). Please contact the [mailing list](mailto:CoralUI@adobe.com) for additional questions.  
+Please contact the [mailing list](mailto:CoralUI@adobe.com) for additional questions.  
