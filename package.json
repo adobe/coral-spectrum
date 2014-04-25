@@ -55,7 +55,6 @@
   },
   "coral": {
     "imports": [
-      "coralui-commons",
       "coralui-core",
       "coralui-component-modal",
       "coralui-component-tabpanel",
