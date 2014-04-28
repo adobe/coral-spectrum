@@ -1,4 +1,4 @@
-var dependencyUtils = require('coralui-dependency-utils');
+var dependencyUtils = require('coralui-util-dependencies');
 
 // Build a list of files for Karma
 // We use a custom list of files here to include source files/tests for all Coral components
