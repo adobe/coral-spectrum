@@ -1,13 +1,10 @@
-var pkg = require('../../package.json');
-var path = require('path');
+var dependencyUtils = require('coralui-util-dependencies');
 
 // Build a list of files for Karma
 // We use a custom list of files here to include source files/tests for all Coral components
-var includeOrder = pkg.coral.order.scripts.map(function(script) {
-  return path.join('node_modules', script);
-});
+var includeOrder = dependencyUtils.getJavascriptPaths('.');
 
-// Start with the basic dependencies
+// Start with the basic external dependencies
 var karmaFiles = [
   'build/js/libs/jquery-message.js',
   'build/js/libs/jquery-validator.js',
@@ -26,7 +23,8 @@ module.exports = {
     files: karmaFiles,
     preprocessors: {
       // Instrument the source files we'll be running tests against
-      'node_modules/coral*/**/*.js': ['coverage']
+      'node_modules/coralui-core/**/*.js': ['coverage'],
+      'node_modules/coralui-component-*/**/*.js': ['coverage']
     }
   }
 };

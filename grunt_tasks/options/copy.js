@@ -128,7 +128,7 @@ module.exports = {
   },
 
 
-  tests: {
+  component_tests: {
     files: [
       {
         expand: true,

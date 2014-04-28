@@ -21,8 +21,10 @@
     "grunt-shell": "~0.6.1",
     "grunt-css-metrics": "~0.1.2",
     "coralui-grunt-dependenciesbuilder": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-dependenciesbuilder.git#1.0.0",
+    "coralui-grunt-componentbuilder": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-componentbuilder.git#1.2.1",
     "coralui-grunt-releasepackage": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-releasepackage.git#1.1.1",
-    "coralui-grunt-testrunner": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-testrunner.git#1.0.0",
+    "coralui-grunt-testrunner": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-testrunner.git#2.1.1",
+    "coralui-util-dependencies": "git+ssh://git@git.corp.adobe.com:Coral/coralui-util-dependencies.git#0.0.2",
     "coralui-guide-resources": "git+ssh://git@git.corp.adobe.com:Coral/coralui-guide-resources.git#3.0.2",
     "load-grunt-config": "~0.7.0",
     "svg-stylus": "git+https://github.com/Aaronius/svg-stylus.git",
@@ -52,30 +54,27 @@
     "coralui-component-wizard": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-wizard.git#2.0.11"
   },
   "coral": {
-    "order": {
-      "scripts": [
-        "coralui-core/build/js/coral.js",
-        "coralui-component-modal/build/js/CUI.Modal.js",
-        "coralui-component-tabpanel/build/js/CUI.Tabs.js",
-        "coralui-component-alert/build/js/CUI.Alert.js",
-        "coralui-component-popover/build/js/CUI.Popover.js",
-        "coralui-component-taglist/build/js/CUI.TagList.js",
-        "coralui-component-selectlist/build/js/CUI.SelectList.js",
-        "coralui-component-select/build/js/CUI.Select.js",
-        "coralui-component-slider/build/js/CUI.Slider.js",
-        "coralui-component-slider/build/js/CUI.LabeledSlider.js",
-        "coralui-component-datepicker/build/js/CUI.Datepicker.js",
-        "coralui-component-wizard/build/js/CUI.FlexWizard.js",
-        "coralui-component-fileupload/build/js/CUI.Util.HTTP.js",
-        "coralui-component-fileupload/build/js/CUI.FileUpload.js",
-        "coralui-component-fileupload/build/js/CUI.FileUpload.MimeTypes.js",
-        "coralui-component-tooltip/build/js/CUI.Tooltip.js",
-        "coralui-component-numberinput/build/js/CUI.NumberInput.js",
-        "coralui-component-cyclebutton/build/js/CUI.CycleButton.js",
-        "coralui-component-autocomplete/build/js/CUI.Autocomplete.js",
-        "coralui-component-charactercount/build/js/CUI.CharacterCount.js",
-        "coralui-component-accordion/build/js/CUI.Accordion.js"
-      ]
-    }
+    "imports": [
+      "coralui-core",
+      "coralui-component-modal",
+      "coralui-component-tabpanel",
+      "coralui-component-alert",
+      "coralui-component-tooltip",
+      "coralui-component-popover",
+      "coralui-component-taglist",
+      "coralui-component-selectlist",
+      "coralui-component-select",
+      "coralui-component-slider",
+      "coralui-component-datepicker",
+      "coralui-component-wizard",
+      "coralui-component-fileupload",
+      "coralui-component-numberinput",
+      "coralui-component-cyclebutton",
+      "coralui-component-autocomplete",
+      "coralui-component-charactercount",
+      "coralui-component-accordion",
+      "coralui-component-switch",
+      "coralui-component-selector"
+    ]
   }
 }
