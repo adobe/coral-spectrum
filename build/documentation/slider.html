@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Slider</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light docs-Background u-coral-clearFix">
+    <article class="docs-Component">
+      <section class="docs-Component-metadata">
+        <div class="docs-Component-header">
+          <!-- name of the component-->
+          <h1 class="coral-Heading coral-Heading--1 docs-Component-name">Slider</h1><span class="docs-Component-version">Current Version: <strong>2.0.10</strong></span>
+        </div>
+        <div class="coral-Component-related">Related Components: <a href="tooltip.html" class="coral-Link">tooltip</a>
+        </div>
+        <div class="coral-Component-github"> Github: <a href="https://git.corp.adobe.com/Coral/coralui-component-slider" class="coral-Link">coralui-component-slider</a>
+        </div>
+        <!-- description is loaded from the template-->
+      </section>
+      <section class="docs-Component-documentation">
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">Markup Examples</h3><span class="u-coral-pullRight docs-ThemeSwitcher"><i class="coral-Icon coral-Icon--infoCircle docs-ThemeSwitcher-icon"></i>
+                  <button class="coral-MinimalButton docs-ThemeSwitcher-button is-selected">Light</button>|
+                  <button data-theme="coral--dark" class="coral-MinimalButton docs-ThemeSwitcher-button">Dark</button></span>
+              </div>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Basic</h3>The following is an example of a slider with a <code>min="10"</code>, <code>max="20"</code>, and <code>step="2"</code>.
+                      <div id="guide-71c9b885-6e07-4d6c-ad2a-dce29342b845" class="docs-Example-markup u-columnMedium">
+                        <div class="coral-Slider" data-init="slider">
+                            <label>
+                              Basic Horizontal Slider<br>
+                              <input type="range" value="14" min="10" max="20" step="2">
+                            </label>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-71c9b885-6e07-4d6c-ad2a-dce29342b845" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Tooltips</h3>The following is an example of a configuration with tooltips, specified via <code>data-tooltips="true"</code>.
+                      <div id="guide-f66fd4ec-4c8b-47d2-adcd-5319c1683a43" class="docs-Example-markup u-columnMedium">
+                        <div class="coral-Slider" data-init="slider" data-tooltips="true">
+                            <label>
+                              Tooltips Slider<br>
+                              <input type="range" value="14" min="10" max="20" step="2">
+                            </label>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-f66fd4ec-4c8b-47d2-adcd-5319c1683a43" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Tick Marks</h3>The following is an example of a configuration with tick marks, specified via <code>data-ticks="true"</code> and <code>data-filled="true"</code>.
+                      <div id="guide-9e6fa19a-0273-403b-8275-736028baadc3" class="docs-Example-markup u-columnMedium">
+                        <div class="coral-Slider" data-init="slider" data-ticks="true" data-filled="true">
+                            <label>
+                              Tick marks slider<br>
+                              <input type="range" value="14" min="10" max="20" step="2">
+                            </label>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-9e6fa19a-0273-403b-8275-736028baadc3" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Animation</h3>The following is an example of a configuration with a sliding animation, specified via <code>data-slide="true"</code>.
+                      <div id="guide-44d893fb-64e9-42d0-b123-2f9f1b51f8c9" class="docs-Example-markup u-columnMedium">
+                        <div class="coral-Slider" data-init="slider" data-slide="true" data-ticks="true" data-filled="true">
+                            <label>
+                              Tick marks slider<br>
+                              <input type="range" value="14" min="10" max="20" step="2">
+                            </label>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-44d893fb-64e9-42d0-b123-2f9f1b51f8c9" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Disabled</h3>The following is an example of a disabled Slider, specified via <code>is-disabled</code> class on the element and <code>disabled</code> class on the input element.
+                      <div id="guide-5003576b-79e7-42eb-9717-e6827627c8df" class="docs-Example-markup u-columnMedium">
+                        <div class="coral-Slider is-disabled" data-init="slider" data-ticks="true" data-filled="true">
+                            <label>
+                              Basic Horizontal Slider<br>
+                              <input type="range" value="14" min="10" max="20" step="2" disabled>
+                            </label>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-5003576b-79e7-42eb-9717-e6827627c8df" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Vertical</h3>The following are vertical examples of the above Sliders, specified via <code>data-orientation="vertical"</code>.
+                      <div id="guide-301b79e6-90b1-4bc3-a441-d82b5609f9fd" class="docs-Example-markup u-columnMedium">
+                        <div display="inline-block">
+                          <div class="coral-Slider" data-init="slider" data-orientation="vertical">
+                              <label>
+                                Basic Horizontal Slider<br>
+                                <input type="range" value="14" min="10" max="20" step="2">
+                              </label>
+                          </div>
+                          <div class="coral-Slider" data-init="slider" data-orientation="vertical" data-tooltips="true">
+                              <label>
+                                Tooltips Slider<br>
+                                <input type="range" value="14" min="10" max="20" step="2">
+                              </label>
+                          </div>
+                          <div class="coral-Slider" data-init="slider" data-orientation="vertical" data-ticks="true" data-filled="true">
+                               <label>
+                                 Tick marks slider<br>
+                                 <input type="range" value="14" min="10" max="20" step="2">
+                               </label>
+                          </div>
+                          <div class="coral-Slider is-disabled" data-init="slider" data-orientation="vertical" data-ticks="true" data-filled="true">
+                            <label>
+                              Basic Horizontal Slider<br>
+                              <input type="range" value="14" min="10" max="20" step="2" disabled>
+                            </label>
+                          </div>
+                        </div>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-301b79e6-90b1-4bc3-a441-d82b5609f9fd" class="docs-Example-toggleMarkup prettyprint"></pre>
+            </section>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">Range Sliders</h3>
+              </div>
+              <p>Range Sliders allow users to specify a range via two different input controls. Note the markup is considerably different.</p>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Default</h3>The following is an example of a range Slider with ticks.
+                      <div id="guide-6cbc591b-1a02-42af-ab41-dd2f62a34990" class="docs-Example-markup u-columnMedium">
+                        <div class="coral-Slider" data-init="slider" data-ticks="true" data-filled="true">
+                          <fieldset>
+                            <!-- Note if you remove the legend, rendering errors occur. It can be empty, apparently. -->
+                            <legend></legend>
+                            <label>Minimum <input type="range" value="14" min="10" max="20" step="2"></label>
+                            <label>Maximum <input type="range" value="16" min="10" max="20" step="2"></label>
+                          </fieldset>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-6cbc591b-1a02-42af-ab41-dd2f62a34990" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Bound Ranges</h3>The following is an example of a bound Slider, where you cannot slide the minimum past the maximum, and vice versa. Specified via <code>data-bound="true"</code>.
+                      <div id="guide-d9248c36-02e9-4c23-8a04-4132d9021a41" class="docs-Example-markup u-columnMedium">
+                        <div class="coral-Slider" data-init="slider" data-bound="true" data-ticks="true" data-filled="true">
+                          <fieldset>
+                            <!-- Note if you remove the legend, rendering errors occur. It can be empty, apparently. -->
+                            <legend></legend>
+                            <label>Minimum <input type="range" value="14" min="10" max="20" step="2"></label>
+                            <label>Maximum <input type="range" value="16" min="10" max="20" step="2"></label>
+                          </fieldset>
+                        </div>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-d9248c36-02e9-4c23-8a04-4132d9021a41" class="docs-Example-toggleMarkup prettyprint"></pre>
+            </section>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">Labeled Sliders</h3>
+              </div>
+              <p>The labeled slider uses the same options/markup as the slider, but allows you to specify a list of labels for the slider's ticks.  Note that it is implemented in a subclass, specified via the <code>labeled-slider</code> data initializer. Labeled sliders are not currently supported in a vertical orientation.</p>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Basic</h3>The following example uses basic (non-alternating) label markers.
+                      <div id="guide-5e3cec56-b1cf-4040-be89-521fc8756bde" class="docs-Example-markup u-columnMedium">
+                        <div class="coral-Slider coral-Slider--ticked coral-Slider--filled" data-init="labeled-slider" data-tooltips="true">
+                          <label>
+                            Slider with Labeled Ticks and Tooltips<br>
+                            <input type="range" value="14" min="10" max="20" step="2">
+                          </label>
+                          <ul class="coral-Slider-tickLabels">
+                            <li>First label</li>
+                            <li>Second label</li>
+                            <li>Third label</li>
+                            <li>Fourth label</li>
+                            <li>Fifth label</li>
+                          </ul>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-5e3cec56-b1cf-4040-be89-521fc8756bde" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Alternating</h3>The following example specifies alternating label markers via the <code>coral-Slider--alternatingLabels</code> class.
+                      <div id="guide-8f82ffde-0ea1-440d-bb2c-d2810a6ef4f4" class="docs-Example-markup u-columnMedium">
+                        <div class="coral-Slider coral-Slider--ticked coral-Slider--filled coral-Slider--alternatingLabels" data-init="labeled-slider" data-tooltips="true">
+                          <label>
+                            Slider with Labeled Ticks and Tooltips<br>
+                            <input type="range" value="14" min="10" max="20" step="2">
+                          </label>
+                          <ul class="coral-Slider-tickLabels">
+                            <li>First label</li>
+                            <li>Second label</li>
+                            <li>Third label</li>
+                            <li>Fourth label</li>
+                            <li>Fifth label</li>
+                          </ul>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-8f82ffde-0ea1-440d-bb2c-d2810a6ef4f4" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Range</h3>The following is an example of a range Slider with labeled tick-marks.
+                      <div id="guide-d4a0838b-9abf-4c2a-87e9-3cb0a0e1536b" class="docs-Example-markup u-columnMedium">
+                        <div class="coral-Slider coral-Slider--ticked coral-Slider--filled coral-Slider--alternatingLabels" data-init="labeled-slider">
+                            <fieldset>
+                                <legend></legend>
+                                <label>Minimum <input type="range" value="14" min="10" max="20" step="2"></label>
+                                <label>Maximum <input type="range" value="16" min="10" max="20" step="2"></label>
+                            </fieldset>
+                            <ul class="coral-Slider-tickLabels">
+                              <li>First label</li>
+                              <li>Second label</li>
+                              <li>Third label</li>
+                              <li>Fourth label</li>
+                              <li>Fifth label</li>
+                            </ul>
+                        </div>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-d4a0838b-9abf-4c2a-87e9-3cb0a0e1536b" class="docs-Example-toggleMarkup prettyprint"></pre>
+            </section>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">JavaScript Examples</h3>
+              </div>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">JS Class Initialization</h3>The following is an example of the component HTML without a <code>data-init</code> initializer.
+                      <div id="guide-5ff721c6-37d5-4314-bfab-6f6847a4cace" class="docs-Example-markup u-columnLarge">
+                        <div id="mySlider1"></div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-5ff721c6-37d5-4314-bfab-6f6847a4cace" class="docs-Example-toggleMarkup prettyprint"></pre>
+                  <div id="constructorExample1">
+                    <script>
+                     $(document).ready(function() {
+                       var slider = new CUI.Slider({ element:'#mySlider1', ticks:true, filled:true, min:1, max:50, value:10, step:2, slide:true, tooltips:true });
+                     })
+                    </script>
+                    
+                  </div>
+                  <p>The following JavaScript manually initializes the component on page initialization.</p>
+                      <pre id="constructorExample1" data-src-id="constructorExample1" class="prettyprint docs-Example-snippet">
+                        <p>No example content provided!</p></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">JS Class Initialization - Range Slider</h3>The following is an example of creating a range Slider. Note this is accomplished via setting value to a two-item array: <code>value:[10,20]</code>
+                      <div id="guide-e3ccb5c4-b033-4735-ba47-8a5b48a44480" class="docs-Example-markup u-columnLarge">
+                        <div id="mySlider2"></div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-e3ccb5c4-b033-4735-ba47-8a5b48a44480" class="docs-Example-toggleMarkup prettyprint"></pre>
+                  <div id="constructorExample2">
+                    <script>
+                     $(document).ready(function() {
+                       var slider = new CUI.Slider({ element:'#mySlider2', ticks:true, filled:true, min:1, max:50, value:[10,20], step:2, slide:true, tooltips:true });
+                     })
+                    </script>
+                  </div>
+                  <p>The following JavaScript manually initializes the component on page initialization.</p>
+                      <pre id="constructorExample2" data-src-id="constructorExample2" class="prettyprint docs-Example-snippet">
+                        <p>No example content provided!</p></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">JS Class Initialization - Labeled Slider</h3>The following is an example of creating a labeled tooltip. Note that labels must be passed in via DOM elements, and usage of the <code>LabeledSlider</code> subclass.
+                      <div id="guide-c60a9229-8c6c-479d-8e68-ba18628ab171" class="docs-Example-markup u-columnLarge">
+                        <div id="mySlider3">
+                          <ul class="coral-Slider-tickLabels">
+                             <li>First</li>
+                             <li>Second</li>
+                             <li>Third</li>
+                          </ul>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-c60a9229-8c6c-479d-8e68-ba18628ab171" class="docs-Example-toggleMarkup prettyprint"></pre>
+                  <div id="constructorExample3">
+                    <script>
+                     $(document).ready(function() {
+                       var slider = new CUI.LabeledSlider({ element:'#mySlider3', ticks:true, filled:true, min:0, max:4, value:3, step:1, tooltips:true });
+                     })
+                    </script>
+                  </div>
+                  <p>The following JavaScript manually initializes the component on page initialization.</p>
+                      <pre id="constructorExample3" data-src-id="constructorExample3" class="prettyprint docs-Example-snippet">
+                        <p>No example content provided!</p></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Responding to User Interaction</h3>The following demonstrates how to respond to value change events for the components above.
+                  <div id="panelInteractionExample">
+                    <script>
+                      $(document).ready(function () {
+                        var eventLog = $('#sliderLog');
+                        $("#mySlider1, #mySlider2, #mySlider3").on('change', function(event) {
+                          var $input = $(event.target);
+                          eventLog.log('Value changed ' + $input.attr('id') + " : " + $input.val());
+                        });
+                      });
+                    </script>
+                  </div>
+                      <pre id="panelInteractionExample" data-src-id="panelInteractionExample" class="prettyprint docs-Example-snippet">
+                        <p>No example content provided!</p></pre>
+                          <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Log</h3>
+                      <textarea id="sliderLog" readonly="true" class="coral-Textfield coral-Textfield--multiline docs-Example-log"></textarea>
+            </section>
+        <section class="guide-jsDocFragement">
+    <div class="content">
+        <!--<h1 class="line">Class: Slider</h1>-->
+        
+          
+
+
+
+<section>
+
+<h1 class="coral-Heading coral-Heading--1 u-line">Slider
+ JSDoc</h1>
+
+
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Extends</h3>
+
+        <ul>
+            <li>CUI.Widget</li>
+        </ul>
+    
+
+    
+        
+<dt>
+    <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Constructor</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Creates a slider.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">options</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last">Component options
+                
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+		<th class="coral-Table-headerCell">Optional</th>
+		
+
+		
+		<th class="coral-Table-headerCell">Default</th>
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">step</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">number</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    1
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">The steps to snap in</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">min</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">number</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    1
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">Minimum value</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">max</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">number</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    100
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">Maximum value</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">value</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">number</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    1
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">Starting value</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">tooltips</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">number</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">Show tooltips?</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">orientation</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    horizontal
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">Either 'horizontal' or 'vertical'</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">slide</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">boolean</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">True for smooth sliding animations. Can make the slider unresponsive on some systems.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">disabled</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">boolean</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">True for a disabled element</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">bound</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">boolean</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">For multi-input sliders, indicates that the min value is bounded by the max value and the max value is bounded by the min</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+            </td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Slider.js, line 24</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+    
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+       <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Methods</h3>
+
+        <dl>
+            
+<dt>
+    <h3 class="name" id="setValue"><span class="type-signature"></span>setValue</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Set the current value of the slider
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">value</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">int</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last">The new value for the slider</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">handleNumber</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">int</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last">If the slider has 2 handles, you can specify which one to change, either 0 or 1</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Slider.js, line 329</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+        
+    </div>
+   
+        </section>
+      </section>
+    </article>
+  </body>
+</html>
