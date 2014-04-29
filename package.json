@@ -56,25 +56,25 @@
   "coral": {
     "imports": [
       "coralui-core",
-      "coralui-component-modal",
-      "coralui-component-tabpanel",
+      "coralui-component-accordion",
       "coralui-component-alert",
-      "coralui-component-tooltip",
-      "coralui-component-popover",
-      "coralui-component-taglist",
-      "coralui-component-selectlist",
-      "coralui-component-select",
-      "coralui-component-slider",
-      "coralui-component-datepicker",
-      "coralui-component-wizard",
+      "coralui-component-charactercount",
+      "coralui-component-cyclebutton",
       "coralui-component-fileupload",
       "coralui-component-numberinput",
-      "coralui-component-cyclebutton",
-      "coralui-component-autocomplete",
-      "coralui-component-charactercount",
-      "coralui-component-accordion",
+      "coralui-component-popover",
+      "coralui-component-selectlist",
+      "coralui-component-selector",
       "coralui-component-switch",
-      "coralui-component-selector"
+      "coralui-component-tabpanel",
+      "coralui-component-taglist",
+      "coralui-component-tooltip",
+      "coralui-component-wizard",
+      "coralui-component-modal",
+      "coralui-component-slider",
+      "coralui-component-autocomplete",
+      "coralui-component-select",
+      "coralui-component-datepicker"
     ]
   }
 }
