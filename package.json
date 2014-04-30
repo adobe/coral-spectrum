@@ -23,7 +23,7 @@
     "coralui-grunt-dependenciesbuilder": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-dependenciesbuilder.git#1.0.0",
     "coralui-grunt-componentbuilder": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-componentbuilder.git#1.2.1",
     "coralui-grunt-releasepackage": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-releasepackage.git#1.1.1",
-    "coralui-grunt-testrunner": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-testrunner.git#2.1.1",
+    "coralui-grunt-testrunner": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-testrunner.git#2.1.2",
     "coralui-util-dependencies": "git+ssh://git@git.corp.adobe.com:Coral/coralui-util-dependencies.git#0.0.2",
     "coralui-guide-resources": "git+ssh://git@git.corp.adobe.com:Coral/coralui-guide-resources.git#3.0.2",
     "load-grunt-config": "~0.7.0",
