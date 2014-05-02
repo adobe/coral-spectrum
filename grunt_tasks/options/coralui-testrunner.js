@@ -23,8 +23,9 @@ module.exports = {
     files: karmaFiles,
     preprocessors: {
       // Instrument the source files we'll be running tests against
-      'node_modules/coralui-core/**/*.js': ['coverage'],
-      'node_modules/coralui-component-*/**/*.js': ['coverage']
+      // Only include files in the build output
+      'node_modules/coralui-core/build/js/*.js': ['coverage'],
+      'node_modules/coralui-component-*/build/js/*.js': ['coverage']
     }
   }
 };
