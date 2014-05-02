@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" class="coral-App">
+<head>
+  <meta charset="utf-8">
+  <title>CoralUI Shell 2.0 Endor</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/coral.js"></script>
+
+  <script>
+    var menuData = {
+      name: 'main',
+      children: [
+        { name: 'Section 1' },
+        { name: 'Section 2' },
+        { name: 'Section 3',
+          children: [
+            { name: 'Section A' },
+            { name: 'Section B' },
+            { name: 'Section C' }
+          ]
+        }
+      ]
+    };
+  </script>
+
+</head>
+
+<!-- CUI.Shell -->
+<!-- This tag is where the CUI.Shell widget gets attached, as a result of the 'data-init="shell"' attribute being set. The child nodes reference several other shell widgets (as denoted by the comment tags) -->
+<body class="coral--light"
+      data-init="shell"
+      data-brand-title="CUI.Shell Sample"
+      data-brand-icon="coral-Icon coral-Icon--hammer coral-Icon--sizeM"
+      data-brand-href="#">
+  <!-- CUI.BreadcrumbBar -->
+  <div data-init="breadcrumb-bar" data-is-closed="true">
+    <!-- CUI.Crumbs -->
+    <nav data-init="crumbs">
+      <a>Page Title</a>
+    </nav>
+  </div>
+  <!-- CUI.Page -->
+  <div data-init="page">
+    <!-- CUI.OuterRail -->
+    <div data-init="outer-rail">
+      <a data-init="brand"></a>
+      <div data-init="navigation-view"
+           data-json-data="menuData">
+      </div>
+    </div>
+    <div class="endor-Page-content endor-Panel">
+      <!-- CUI.BlackBar -->
+      <nav data-init="black-bar">
+        <div role="heading" aria-level="1" class="endor-BlackBar-title">Page Title</div>
+      </nav>
+      <div class="endor-Panel-content endor-Panel-content--blackBarHeight" role="main">
+        <!-- CUI.InnerRail -->
+        <div data-init="inner-rail">
+          <a class="coral-ColumnView-item coral-MultiPanel is-active" id="innerRail1">Sub 1</a>
+          <a class="coral-ColumnView-item coral-MultiPanel" id="innerRail2">Sub 2</a>
+        </div>
+        <div class="endor-Page-content endor-Panel">
+          <!-- CUI.ActionBar -->
+          <nav data-init="action-bar">
+            <div class="endor-ActionBar-left">
+              <div class="endor-ActionBar-item coral-ButtonGroup">
+                <button type="button"
+                        class="coral-ButtonGroup-item coral-Button coral-Button--secondary coral-Button--quiet"
+                        title="Select"
+                        data-init="inner-rail-toggle"
+                        data-target="#innerRail1">
+                  <i class="endor-ActionButton-icon coral-Icon coral-Icon--blur"></i>
+                  <span class="endor-ActionButton-label">Sub 1</span>
+                </button>
+                <button type="button"
+                        data-label="Sub 2"
+                        data-init="inner-rail-toggle"
+                        data-target="#innerRail2"
+                        class="coral-ButtonGroup-item coral-Button coral-Button--secondary coral-Button--quiet"
+                        title="Select">
+                  <i class="endor-ActionButton-icon coral-Icon coral-Icon--book"></i>
+                  <span class="endor-ActionButton-label"></span>
+                </button>
+              </div>
+            </div>
+            <div class="endor-ActionBar-right"></div>
+          </nav>
+          <!-- This is where a page's main content is supposed to go: -->
+          <div class="js-endor-content endor-Panel-content">
+            <div class="endor-Panel-contentMain" >
+              <div class="u-coral-padding">
+                <div>Page Content</div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              </div>
+              <!-- CUI.Footer -->
+              <footer data-init="footer"></footer>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
