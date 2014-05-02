@@ -1,0 +1,1948 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for coralui-component-accordion/build/js/CUI.Accordion.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../../prettify.css">
+
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Helvetica Neue, Helvetica,Arial;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 10em;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Consolas, Menlo, Monaco, monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 14px;
+            font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { text-decoration: none; color: #000; }
+        div.coverage-summary a:visited { text-decoration: none; color: #333; }
+        div.coverage-summary a:hover { text-decoration: underline; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: url("http://yui.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header medium">
+    <h1>Code coverage report for <span class="entity">coralui-component-accordion/build/js/CUI.Accordion.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">72.78% <small>(131 / 180)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">49.63% <small>(67 / 135)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">85.71% <small>(30 / 35)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">72.73% <small>(128 / 176)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">coralui-component-accordion/build/js/</a> &#187; CUI.Accordion.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">29</span>
+<span class="cline-any cline-yes">29</span>
+<span class="cline-any cline-yes">29</span>
+<span class="cline-any cline-yes">29</span>
+<span class="cline-any cline-yes">29</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">29</span>
+<span class="cline-any cline-yes">29</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">29</span>
+<span class="cline-any cline-yes">29</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">29</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">29</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">29</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18</span>
+<span class="cline-any cline-yes">18</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18</span>
+<span class="cline-any cline-yes">37</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">29</span>
+<span class="cline-any cline-yes">29</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">29</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">29</span>
+<span class="cline-any cline-yes">29</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">29</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">30</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">24</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-yes">40</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">23</span>
+<span class="cline-any cline-yes">17</span>
+<span class="cline-any cline-yes">17</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">21</span>
+<span class="cline-any cline-yes">18</span>
+<span class="cline-any cline-yes">18</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-yes">39</span>
+<span class="cline-any cline-yes">39</span>
+<span class="cline-any cline-yes">39</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">39</span>
+<span class="cline-any cline-yes">39</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">26</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-yes">17</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17</span>
+<span class="cline-any cline-yes">17</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">27</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">180</span>
+<span class="cline-any cline-yes">180</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">132</span>
+<span class="cline-any cline-yes">132</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">48</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">132</span>
+<span class="cline-any cline-yes">132</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">29</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">29</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18</span>
+<span class="cline-any cline-yes">37</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">37</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">37</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">37</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">29</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">29</span>
+<span class="cline-any cline-yes">29</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">29</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">20</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">(function ($) {
+&nbsp;
+  var CLASS_ACTIVE = "is-active";
+&nbsp;
+  CUI.Accordion = new Class(/** @lends CUI.Accordion# */{
+    toString: 'Accordion',
+    extend: CUI.Widget,
+&nbsp;
+    /**
+     @extends CUI.Widget
+     @classdesc A widget for both accordions and collapsibles
+&nbsp;
+     @desc Creates a new accordion or collapsible
+     @constructs
+&nbsp;
+     @param {Object} options                               Widget options.
+     @param {Mixed}  [options.active=false]                Index of the initial active tab of the accordion or one of true/false for collapsibles
+     @param {boolean} [options.disabled=false]             Set the disabled state of the widget.
+     @param {String} [options.iconClassCollapsed="coral-Icon--chevronRight"]
+     @param {String} [options.iconClassDisabled="coral-Icon--chevronDown"]
+     */
+    construct: function (options) {
+      this._parseAttributes();
+      this._setAccordion();
+      this._setListeners();
+      this._makeAccessible();
+      this._updateDOMForDisabled();
+    },
+&nbsp;
+    defaults: {
+      active: false,
+      disabled: false,
+      iconClassCollapsed: 'coral-Icon--chevronRight',
+      iconClassExpanded: 'coral-Icon--chevronDown'
+    },
+&nbsp;
+    isAccordion: false,
+&nbsp;
+    _parseAttributes: function () {
+      var iconClassCollapsed = this.$element.attr('data-icon-class-collapsed');
+      if (iconClassCollapsed) {
+        this.options.iconClassCollapsed = iconClassCollapsed;
+      }
+      var iconClassExpanded = this.$element.attr('data-icon-class-expanded');
+      if (iconClassExpanded) {
+        this.options.iconClassExpanded = iconClassExpanded;
+      }
+    },
+&nbsp;
+    _setAccordion: function () {
+      var $element = this.$element;
+      // determines the type of component that it is building
+      this.isAccordion = (!$element.hasClass("coral-Collapsible")) &amp;&amp; ($element.data("init") !== "collapsible");
+&nbsp;
+      if (this.isAccordion) {
+        // adds the required class
+        $element.addClass("coral-Accordion");
+&nbsp;
+        var activeIndex = $element.children("." + CLASS_ACTIVE).index();
+        if (this.options.active !== false) {
+          activeIndex = this.options.active;
+        } else {
+          // saves the element with the active class as the active element
+          this.options.active = activeIndex;
+        }
+        $element.children().each(function (index, element) {
+          this._initElement(element, index != activeIndex);
+        }.bind(this));
+      } else {
+&nbsp;
+        // checks if the element has the active class.
+        this.options.active = $element.hasClass(CLASS_ACTIVE);
+        this._initElement($element, !this.options.active);
+      }
+    },
+&nbsp;
+    _setListeners: function () {
+      // header selector
+      var selector = this.isAccordion ? '&gt; .coral-Accordion-item &gt; .coral-Accordion-header' : '&gt; .coral-Collapsible-header';
+      this.$element.on('click', selector, this._toggle.bind(this));
+&nbsp;
+      this.$element.on("change:active", this._changeActive.bind(this));
+&nbsp;
+      // Prevent text selection on header
+      var selectstartSelector = this.isAccordion ? '.coral-Accordion-header' : '.coral-Collapsible-header';
+      this.$element.on("selectstart", selectstartSelector, <span class="fstat-no" title="function not covered" >function (event) {</span>
+<span class="cstat-no" title="statement not covered" >        event.preventDefault();</span>
+      });
+&nbsp;
+      this.on('change:disabled', function (event) {
+        this._updateDOMForDisabled();
+      }.bind(this));
+    },
+&nbsp;
+    /**
+     * Updates styles and attributes to match the current disabled option value.
+     * @ignore */
+    _updateDOMForDisabled: function () {
+      if (this.options.disabled) {
+        this.$element.addClass('is-disabled').attr('aria-disabled', true)
+          .find('[role=tab], &gt; [role=button]').removeAttr('tabindex').attr('aria-disabled', true);
+      } else {
+        this.$element.removeClass('is-disabled').attr('aria-disabled', false)
+          .find('[role=tab], &gt; [role=button]').each(function (index, element) {
+            var elem = $(element);
+            elem.removeAttr('aria-disabled').attr('tabindex', elem.is('[aria-selected=true][aria-controls], [aria-expanded][aria-controls]') ? 0 : -1);
+          });
+      }
+    },
+&nbsp;
+    _toggle: function (event) {
+      if (this.options.disabled) {
+        return;
+      }
+      var el = $(event.target).closest(this._getCollapsibleSelector()),
+        isCurrentlyActive = el.hasClass(CLASS_ACTIVE),
+        active = (isCurrentlyActive) ? false : ((this.isAccordion) ? el.index() : true);
+      this.setActive(active);
+    },
+    _changeActive: function () {
+      if (this.isAccordion) {
+        this._collapse(this.$element.children("." + CLASS_ACTIVE));
+        if (this.options.active !== false) {
+          var activeElement = this.$element.children().eq(this.options.active);
+          this._expand(activeElement);
+        }
+      } else {
+        if (this.options.active) {
+          this._expand(this.$element);
+        } else {
+          this._collapse(this.$element);
+        }
+      }
+    },
+    setActive: function (active) {
+      if (active !== this.options.active) {
+        this.options.active = active;
+        this._changeActive();
+      }
+    },
+    _initElement: function (element, collapse) {
+      element = $(element);
+&nbsp;
+      // Add correct header
+      if (this._getHeaderElement(element).length === 0) this._prependHeaderElement(element);
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (this._getHeaderIconElement(element).length === 0) this._prependHeaderIconElement(element);
+&nbsp;
+      // adds the content class
+      if (this._getContentElement(element).length === 0) this._prependContentElement(element);
+&nbsp;
+      // adds the corresponding container class
+      element.addClass(this.isAccordion ? 'coral-Accordion-item' : 'coral-Collapsible');
+&nbsp;
+      var header = this._getHeaderElement(element),
+        content = this._getContentElement(element),
+        icon = this._getHeaderIconElement(element);
+&nbsp;
+      // move the heading before the collapsible content
+      header.prependTo(element);
+&nbsp;
+      // Set correct initial state
+      if (collapse) {
+        element.removeClass(CLASS_ACTIVE);
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (!icon.hasClass("coral-Icon")) {
+          icon.addClass("coral-Icon coral-Icon--sizeXS");
+        }
+        icon.removeClass(this.options.iconClassExpanded).addClass(this.options.iconClassCollapsed);
+        content.hide();
+      } else {
+        element.addClass(CLASS_ACTIVE);
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (!icon.hasClass("coral-Icon")) {
+          icon.addClass("coral-Icon coral-Icon--sizeXS");
+        }
+        icon.removeClass(this.options.iconClassCollapsed).addClass(this.options.iconClassExpanded);
+        content.show();
+      }
+    },
+    _collapse: function (el) {
+      var header = this._getHeaderElement(el),
+        content = this._getContentElement(el),
+        icon = this._getHeaderIconElement(el);
+&nbsp;
+      icon.removeClass(this.options.iconClassExpanded).addClass(this.options.iconClassCollapsed);
+&nbsp;
+      content.slideUp({
+        duration: "fast",
+        complete: function () {
+          el.removeClass(CLASS_ACTIVE); // remove the active class after animation so that background color doesn't change during animation
+          el.trigger("deactivate");
+        },
+        progress: function (animation, progress, remainingMs) {
+          el.trigger("collapse", {animation: animation, progress: progress, remainingMs: remainingMs});
+        }
+      });
+&nbsp;
+      // update WAI-ARIA accessibility properties
+      if (this.isAccordion) {
+        header.attr({
+          "tabindex": header.is(document.activeElement) ? <span class="branch-0 cbranch-no" title="branch not covered" >0 </span>: -1,
+          "aria-selected": false
+        });
+      } else {
+        header.attr({
+          "aria-expanded": false
+        });
+      }
+      content.attr({
+        "aria-hidden": true,
+        "aria-expanded": false
+      });
+    },
+    _expand: function (el) {
+      var header = this._getHeaderElement(el),
+        content = this._getContentElement(el),
+        icon = this._getHeaderIconElement(el);
+&nbsp;
+      el.addClass(CLASS_ACTIVE);
+      icon.removeClass(this.options.iconClassCollapsed).addClass(this.options.iconClassExpanded);
+&nbsp;
+      content.slideDown({
+        duration: "fast",
+        complete: function () {
+          el.trigger("activate");
+        },
+        progress: function (animation, progress, remainingMs) {
+          el.trigger("expand", {animation: animation, progress: progress, remainingMs: remainingMs});
+        }
+      });
+&nbsp;
+      // update WAI-ARIA accessibility properties
+      if (this.isAccordion) {
+        header.attr({
+          "tabindex": 0,
+          "aria-selected": true
+        });
+      } else {
+        header.attr({
+          "aria-expanded": true
+        });
+      }
+      content.attr({
+        "aria-hidden": false,
+        "aria-expanded": true
+      }).show();
+    },
+    /** @ignore */
+    _getCollapsibleSelector: function () {
+      return this.isAccordion ? '.coral-Accordion-item' : '.coral-Collapsible';
+    },
+    /** @ignore */
+    _getHeaderElement: function (el) {
+      var selector = this.isAccordion ? '&gt; .coral-Accordion-header' : '&gt; .coral-Collapsible-header';
+      return el.find(selector);
+    },
+    /** @ignore */
+    _getHeaderFirstElement: function (el) {
+      var selector = this.isAccordion ? <span class="branch-0 cbranch-no" title="branch not covered" >'&gt; .coral-Accordion-header:first' </span>: '&gt; .coral-Collapsible-header:first';
+      return el.find(selector);
+    },
+    /** @ignore */
+    _prependHeaderElement: function (el) {
+      var className = this.isAccordion ? 'coral-Accordion-header' : <span class="branch-1 cbranch-no" title="branch not covered" >'coral-Collapsible-header';</span>
+      el.prepend("&lt;h3 class=\"" + className + "\"&gt;&amp;nbsp;&lt;/h3&gt;");
+    },
+    /** @ignore */
+    _getHeaderIconElement: function (el) {
+      var selector = this.isAccordion ? '&gt; .coral-Accordion-header &gt; i' : '&gt; .coral-Collapsible-header &gt; i';
+      return el.find(selector);
+    },
+    /** @ignore */
+    _prependHeaderIconElement: function (el) {
+      this._getHeaderElement(el).prepend("&lt;i&gt;&lt;/i&gt;");
+    },
+    /** @ignore */
+    _getContentElement: function (el) {
+      var selector = this.isAccordion ? '&gt; .coral-Accordion-content' : '&gt; .coral-Collapsible-content';
+      return el.find(selector);
+    },
+    /** @ignore */
+    _prependContentElement: function (el) {
+      var className = this.isAccordion ? 'coral-Accordion-content' : <span class="branch-1 cbranch-no" title="branch not covered" >'coral-Collapsible-content';</span>
+      el.prepend("&lt;div class=\"" + className + "\"&gt;&lt;/div&gt;");
+    },
+    /**
+     * adds accessibility attributes and features
+     * per the WAI-ARIA Accordion widget design pattern:
+     * http://www.w3.org/WAI/PF/aria-practices/#accordion
+     * @private
+     */
+    _makeAccessible: function () {
+      var idPrefix = 'accordion-' + new Date().getTime() + '-',
+        section, header, content, isActive, panelId;
+      if (this.isAccordion) {
+&nbsp;
+        this.$element.attr({
+          "role": "tablist" // accordion container has the role="tablist"
+        });
+&nbsp;
+        this.$element.children(".coral-Accordion-item").each(function (i, e) {
+          var section = $(e),
+            header = section.find("&gt; .coral-Accordion-header:first"),
+            isActive = section.hasClass(CLASS_ACTIVE),
+            panelId = idPrefix + 'panel-' + i,
+            content = header.next("div");
+&nbsp;
+          section.attr({
+            "role": "presentation" // collapsible containers have the role="presentation"
+          });
+&nbsp;
+          header.attr({
+            "role": "tab", // accordion headers should have the role="tab"
+            "id": header.attr("id") || idPrefix + "tab-" + i, // each tab needs an id
+            "aria-controls": panelId, // the id for the content wrapper this header controls
+            "aria-selected": isActive, // an indication of the current state
+            "tabindex": (isActive ? 0 : -1)
+          });
+&nbsp;
+          content.attr({
+            "role": "tabpanel", // the content wrapper should have the role="tabpanel"
+            "id": panelId, // each content wrapper needs a unique id
+            "aria-labelledby": header.attr("id"), // the content wrapper is labelled by its header
+            "aria-expanded": isActive, // an indication of the current state
+            "aria-hidden": !isActive // hide/show content to assistive technology
+          });
+        });
+&nbsp;
+      } else {
+        idPrefix = 'collapsible-' + new Date().getTime() + '-';
+        section = this.$element;
+        header = this._getHeaderFirstElement(section);
+        isActive = section.hasClass(CLASS_ACTIVE);
+        panelId = idPrefix + 'panel';
+        content = header.next("div");
+&nbsp;
+        header.attr({
+          "role": "button", // the header should have the role="button"
+          "id": header.attr("id") || idPrefix + "heading", // each header needs an id
+          "aria-controls": panelId, // the id for the content wrapper this header controls
+          "aria-expanded": isActive, // an indication of the current state
+          "tabindex": 0
+        });
+&nbsp;
+        content.attr({
+          "id": panelId, // each content wrapper needs a unique id
+          "aria-labelledby": header.attr("id"), // the content wrapper is labelled by its header
+          "aria-expanded": isActive, // an indication of the current state
+          "aria-hidden": !isActive // hide/show content to assistive technology
+        });
+      }
+&nbsp;
+      // handle keydown events from focusable descendants
+      this.$element.on('keydown', ':focusable', this._onKeyDown.bind(this));
+&nbsp;
+      // handle focusin/focusout events from focusable descendants
+      this.$element.on('focusin.accordion', ':focusable', this._onFocusIn.bind(this));
+      this.$element.on('focusout.accordion', '.coral-Accordion-header:focusable', this._onFocusOut.bind(this));
+&nbsp;
+      this.$element.on('touchstart.accordion, mousedown.accordion', '.coral-Accordion-header:focusable', this._onMouseDown.bind(this));
+    },
+&nbsp;
+    /**
+     * keydown event handler, which defines the keyboard behavior of the accordion control
+     * per the WAI-ARIA Accordion widget design pattern:
+     * http://www.w3.org/WAI/PF/aria-practices/#accordion
+     * @private
+     */
+    _onKeyDown: <span class="fstat-no" title="function not covered" >function (event) {</span>
+<span class="cstat-no" title="statement not covered" >      var el = $(event.currentTarget).closest(this._getCollapsibleSelector()),</span>
+        header = this._getHeaderFirstElement(el),
+        isHead = $(event.currentTarget).is(header),
+        keymatch = true;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      switch (event.which) {</span>
+        case 13: //enter
+        case 32: //space
+<span class="cstat-no" title="statement not covered" >          if (isHead) {</span>
+<span class="cstat-no" title="statement not covered" >            header.trigger('click');</span>
+          } else {
+<span class="cstat-no" title="statement not covered" >            keymatch = false;</span>
+          }
+<span class="cstat-no" title="statement not covered" >          break;</span>
+        case 33: //page up
+        case 37: //left arrow
+        case 38: //up arrow
+<span class="cstat-no" title="statement not covered" >          if ((isHead &amp;&amp; this.isAccordion) || (event.which === 33 &amp;&amp; (event.metaKey || event.ctrlKey))) {</span>
+            // If the event.target is an accordion heading, or the key command is CTRL + PAGE_UP,
+            // focus the previous accordion heading, or if none exists, focus the last accordion heading.
+<span class="cstat-no" title="statement not covered" >            if (this._getHeaderFirstElement(el.prev()).focus().length === 0) {</span>
+<span class="cstat-no" title="statement not covered" >              this.$element.find("&gt; .coral-Accordion-item:last &gt; .coral-Accordion-header:first").focus();</span>
+            }
+          } else <span class="cstat-no" title="statement not covered" >if (!isHead &amp;&amp; (event.metaKey || event.ctrlKey)) {</span>
+            // If the event.target is not a collapsible heading,
+            // and the key command is CTRL + UP or CTRL + LEFT, focus the collapsible heading.
+<span class="cstat-no" title="statement not covered" >            header.focus();</span>
+          } else {
+<span class="cstat-no" title="statement not covered" >            keymatch = false;</span>
+          }
+<span class="cstat-no" title="statement not covered" >          break;</span>
+        case 34: //page down
+        case 39: //right arrow
+        case 40: //down arrow
+<span class="cstat-no" title="statement not covered" >          if (isHead &amp;&amp; this.isAccordion) {</span>
+            // If the event.target is an accordion heading,
+            // focus the next accordion heading, or if none exists, focus the first accordion heading.
+<span class="cstat-no" title="statement not covered" >            if (this._getHeaderFirstElement(el.next()).focus().length === 0) {</span>
+<span class="cstat-no" title="statement not covered" >              this.$element.find("&gt; .coral-Accordion-item:first &gt; .coral-Accordion-header:first").focus();</span>
+            }
+          } else <span class="cstat-no" title="statement not covered" >if (!isHead &amp;&amp; event.which === 34 &amp;&amp; (event.metaKey || event.ctrlKey)) {</span>
+            // If the event.target is not a collapsible heading,
+            // and the key command is CTRL + PAGE_DOWN, focus the collapsible heading.
+<span class="cstat-no" title="statement not covered" >            header.focus();</span>
+          } else {
+<span class="cstat-no" title="statement not covered" >            keymatch = false;</span>
+          }
+<span class="cstat-no" title="statement not covered" >          break;</span>
+        case 36: //home
+<span class="cstat-no" title="statement not covered" >          if (isHead &amp;&amp; this.isAccordion) {</span>
+<span class="cstat-no" title="statement not covered" >            this.$element.find("&gt; .coral-Accordion-item:first &gt; .coral-Accordion-header:first").focus();</span>
+          } else {
+<span class="cstat-no" title="statement not covered" >            keymatch = false;</span>
+          }
+<span class="cstat-no" title="statement not covered" >          break;</span>
+        case 35: //end
+<span class="cstat-no" title="statement not covered" >          if (isHead &amp;&amp; this.isAccordion) {</span>
+<span class="cstat-no" title="statement not covered" >            this.$element.find("&gt; .coral-Accordion-item:last &gt; .coral-Accordion-header:first").focus();</span>
+          } else {
+<span class="cstat-no" title="statement not covered" >            keymatch = false;</span>
+          }
+<span class="cstat-no" title="statement not covered" >          break;</span>
+        default:
+<span class="cstat-no" title="statement not covered" >          keymatch = false;</span>
+<span class="cstat-no" title="statement not covered" >          break;</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (keymatch === true) {</span>
+<span class="cstat-no" title="statement not covered" >        event.preventDefault();</span>
+      }
+    },
+    /**
+     * focusin event handler, used to update tabindex properties on accordion headers
+     * and to display focus style on headers.
+     * @private
+     */
+    _onFocusIn: <span class="fstat-no" title="function not covered" >function (event) {</span>
+<span class="cstat-no" title="statement not covered" >      var el = $(event.currentTarget).closest(this._getCollapsibleSelector()),</span>
+        header = this._getHeaderFirstElement(el),
+        isHead = $(event.currentTarget).is(header);
+<span class="cstat-no" title="statement not covered" >      if (this.options.disabled) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >      if (isHead) {</span>
+<span class="cstat-no" title="statement not covered" >        if (this.isAccordion) {</span>
+<span class="cstat-no" title="statement not covered" >          this.$element.find("&gt; .coral-Accordion-item &gt; .coral-Accordion-header[role=tab]").attr('tabindex', -1);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (!header.data('collapsible-mousedown')) {</span>
+          // el.addClass(':focus');
+<span class="cstat-no" title="statement not covered" >          el.focus();</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          header.removeData('collapsible-mousedown');</span>
+        }
+      }
+<span class="cstat-no" title="statement not covered" >      header.attr('tabindex', 0);</span>
+    },
+    /**
+     * focusout event handler, used to clear the focus style on headers.
+     * @private
+     */
+    _onFocusOut: <span class="fstat-no" title="function not covered" >function (event) {</span>
+<span class="cstat-no" title="statement not covered" >      var el = $(event.currentTarget).closest(this._getCollapsibleSelector()),</span>
+        header = this._getHeaderFirstElement(el),
+        isHead = $(event.currentTarget).is(header);
+<span class="cstat-no" title="statement not covered" >      if (isHead) {</span>
+<span class="cstat-no" title="statement not covered" >        el.blur().removeData('collapsible-mousedown');</span>
+        // el.removeClass(':focus').removeData('collapsible-mousedown');
+      }
+    },
+    /**
+     * mousedown event handler, used flag
+     * @private
+     */
+    _onMouseDown: <span class="fstat-no" title="function not covered" >function (event) {</span>
+<span class="cstat-no" title="statement not covered" >      var el = $(event.currentTarget).closest(this._getCollapsibleSelector()),</span>
+        header = this._getHeaderFirstElement(el),
+        isHead = $(event.currentTarget).is(header);
+<span class="cstat-no" title="statement not covered" >      if (isHead) {</span>
+<span class="cstat-no" title="statement not covered" >        header.data('collapsible-mousedown', true);</span>
+      }
+    }
+&nbsp;
+    /**
+     Triggered when the accordion is activated
+&nbsp;
+     @name CUI.Accordion#activate
+     @event
+&nbsp;
+     @param {Object} evt                    Event object
+     */
+&nbsp;
+    /**
+     Triggered when the accordion is deactivated
+&nbsp;
+     @name CUI.Accordion#deactivate
+     @event
+&nbsp;
+     @param {Object} evt                    Event object
+     */
+&nbsp;
+    /**
+     Triggered while the accordion is expanding after each step of the animation
+&nbsp;
+     @name CUI.Accordion#expand
+     @event
+&nbsp;
+     @param {Object} evt                    Event object
+&nbsp;
+     @param options
+     @param {Promise} options.animation     The animation promise
+     @param {Number} options.progress       The progress
+     @param {Number} options.remainingMs    The remaining time of the animation in milliseconds
+     */
+&nbsp;
+    /**
+     Triggered while the accordion is collapsing after each step of the animation
+&nbsp;
+     @name CUI.Accordion#collapse
+     @event
+&nbsp;
+     @param {Object} evt                    Event object
+&nbsp;
+     @param options
+     @param {Promise} options.animation     The animation promise
+     @param {Number} options.progress       The progress
+     @param {Number} options.remainingMs    The remaining time of the animation in milliseconds
+     */
+&nbsp;
+  });
+&nbsp;
+  CUI.Widget.registry.register("accordion", CUI.Accordion);
+&nbsp;
+// Data API
+  $(document).on("cui-contentloaded.data-api", function (e) {
+    CUI.Accordion.init($("[data-init~=accordion],[data-init~=collapsible]", e.target));
+  });
+}(window.jQuery));
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri May 02 2014 16:00:08 GMT-0600 (MDT)</div>
+</div>
+
+<script src="../../../prettify.js"></script>
+
+<script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<script>
+
+    YUI().use('datatable', function (Y) {
+
+        var formatters = {
+          pct: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              try {
+                  return o.value.toFixed(2) + '%';
+              } catch (ex) { return o.value + '%'; }
+          },
+          html: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.record.get(o.column.key + '_html');
+          }
+        },
+          defaultFormatter = function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.value;
+          };
+
+        function getColumns(theadNode) {
+            var colNodes = theadNode.all('tr th'),
+                cols = [],
+                col;
+            colNodes.each(function (colNode) {
+                col = {
+                    key: colNode.getAttribute('data-col'),
+                    label: colNode.get('innerHTML') || ' ',
+                    sortable: !colNode.getAttribute('data-nosort'),
+                    className: colNode.getAttribute('class'),
+                    type: colNode.getAttribute('data-type'),
+                    allowHTML: colNode.getAttribute('data-html') === 'true' || colNode.getAttribute('data-fmt') === 'html'
+                };
+                col.formatter = formatters[colNode.getAttribute('data-fmt')] || defaultFormatter;
+                cols.push(col);
+            });
+            return cols;
+        }
+
+        function getRowData(trNode, cols) {
+            var tdNodes = trNode.all('td'),
+                    i,
+                    row = { classes: {} },
+                    node,
+                    name;
+            for (i = 0; i < cols.length; i += 1) {
+                name = cols[i].key;
+                node = tdNodes.item(i);
+                row[name] = node.getAttribute('data-value') || node.get('innerHTML');
+                row[name + '_html'] = node.get('innerHTML');
+                row.classes[name] = node.getAttribute('class');
+                //Y.log('Name: ' + name + '; Value: ' + row[name]);
+                if (cols[i].type === 'number') { row[name] = row[name] * 1; }
+            }
+            //Y.log(row);
+            return row;
+        }
+
+        function getData(tbodyNode, cols) {
+            var data = [];
+            tbodyNode.all('tr').each(function (trNode) {
+                data.push(getRowData(trNode, cols));
+            });
+            return data;
+        }
+
+        function replaceTable(node) {
+            if (!node) { return; }
+            var cols = getColumns(node.one('thead')),
+                data = getData(node.one('tbody'), cols),
+                table,
+                parent = node.get('parentNode');
+
+            table = new Y.DataTable({
+                columns: cols,
+                data: data,
+                sortBy: 'file'
+            });
+            parent.set('innerHTML', '');
+            table.render(parent);
+        }
+
+        Y.on('domready', function () {
+            replaceTable(Y.one('div.coverage-summary table'));
+            if (typeof prettyPrint === 'function') {
+                prettyPrint();
+            }
+        });
+    });
+</script>
+</body>
+</html>

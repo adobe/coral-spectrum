@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" class="coral-App">
+<head>
+  <meta charset="utf-8">
+  <title>CoralUI Shell 2.0 Endor</title>
+
+  <link rel="stylesheet" href="../../../css/coral.css">
+
+  <script src="../../../js/libs/jquery.js"></script>
+  <script src="../../../js/libs/moment.js"></script>
+  <script src="../../../js/coral.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/0.6.11/fastclick.min.js"></script>
+  <script>
+    (function ($) {
+      $(document).on('load', function () {
+        FastClick.attach(document.body);
+      })
+    })(jQuery);
+  </script>
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+</head>
+<!-- Top Most Page Layout -->
+<body class="endor-Panel coral--light">
+
+<!-- Breadcrumb bar -->
+<div class="endor-Panel-header is-closed"></div>
+
+<!-- Page Content -->
+<div data-init="page" class="js-endor-page endor-Panel-content endor-Panel-content--breadcrumbBarHeight endor-Page">
+
+  <div data-init="outer-rail">
+
+    <!-- Brand -->
+    <a data-init="brand"
+       data-icon="coral-Icon coral-Icon--adobeMarketingCloud coral-Icon--sizeM"
+       data-title="Adobe Marketing Cloud"
+       data-href="">
+    </a>
+
+    <!-- Navigation View with Async data -->
+    <div data-init="navigation-view">
+      <div class="coral-ColumnView coral-ColumnView--navigation coral-NavigationView-content">
+        <div class="coral-ColumnView-column coral-NavigationView-column is-active" data-coral-columnview-id="main">
+          <a class="coral-ColumnView-item" href="#">Boards</a>
+          <a class="coral-ColumnView-item is-active" href="#">Feed</a>
+          <a class="coral-ColumnView-item" href="#">Assets</a>
+          <a class="coral-ColumnView-item coral-ColumnView-item--hasChildren" href="data/analytics.json"
+             data-coral-columnview-target="analytics">
+            <i class="coral-ColumnView-icon coral-Icon coral-Icon--adobeAnalytics"></i>
+            Analytics
+          </a>
+          <!-- In order to load remote column, you can specify href attribute, where it returns the markup of the column(s). -->
+          <a class="coral-ColumnView-item coral-ColumnView-item--hasChildren" href="data/aem.html"
+             data-coral-columnview-target="aem">
+            <i class="coral-ColumnView-icon coral-Icon coral-Icon--adobeExperienceManager"></i>
+            Experience Manager
+          </a>
+          <a class="coral-ColumnView-item" href="#">
+            <i class="coral-ColumnView-icon coral-Icon coral-Icon--adobeMediaOptimizer"></i>
+            Media Optimizer
+          </a>
+          <a class="coral-ColumnView-item coral-ColumnView-item--hasChildren" href="data/social.json"
+             data-coral-columnview-target="social">
+            <i class="coral-ColumnView-icon coral-Icon coral-Icon--adobeSocial"></i>
+            Social
+          </a>
+          <a class="coral-ColumnView-item coral-ColumnView-item--hasChildren" href="data/target.html"
+             data-coral-columnview-target="target">
+            <i class="coral-ColumnView-icon coral-Icon coral-Icon--adobeTarget"></i>
+            Target
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Most Page Content -->
+  <div class="endor-Page-content endor-Panel">
+
+  </div>
+</div>
+</body>
+</html>
