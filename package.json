@@ -67,6 +67,15 @@
       "coralui-component-datepicker",
       "coralui-component-shell",
       "coralui-component-shell-mac"
-    ]
+    ],
+    "order": {
+      "scripts": {
+        "default": [
+          "scripts/CUI.ReportSuiteSelector.js",
+          "scripts/CUI.LanguageSelector.js",
+          "scripts/platform-shell.js"
+        ]
+      }
+    }
   }
 }
