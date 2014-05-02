@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" class="coral-App">
+<head>
+  <meta charset="utf-8">
+  <title>CoralUI Shell 2.0 Endor</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/coral.js"></script>
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      var shell = new CUI.Shell({
+        element: $('body'),
+        brandTitle: "CUI.Shell Sample",
+        brandIcon: "coral-Icon coral-Icon--hammer coral-Icon--sizeM",
+        brandHref: "#",
+        generateBreadcrumbBar: true,
+        generatePage: true
+      });
+
+      with (CUI.Endor.registry) {
+        resolve(CUI.BlackBar, onBlackBarResolved);
+        resolve(CUI.Crumbs, onCrumbsResolved);
+        resolve(CUI.OuterRail, onOuterRailResolved);
+        resolve(CUI.InnerRail, onInnerRailResolved);
+        resolve(CUI.ActionBar, onActionBarResolved);
+        resolve(CUI.Page, onPageResolved);
+      }
+
+      function onBlackBarResolved(blackBar) {
+        blackBar.setTitle('Page Title');
+      }
+
+      function onCrumbsResolved(crumbs) {
+        crumbs.addItem('Page Title');
+      }
+
+      function onOuterRailResolved(outerRail) {
+        new CUI.NavigationView({
+          element: $('<div></div>').appendTo(outerRail.$element),
+          jsonData: {
+            name: 'main',
+            children: [
+              { name: 'Section 1' },
+              { name: 'Section 2' },
+              { name: 'Section 3',
+                children: [
+                  { name: 'Section A' },
+                  { name: 'Section B' },
+                  { name: 'Section C' }
+                ]
+              }
+            ]
+          }
+        });
+      }
+
+      function onInnerRailResolved(innerRail) {
+        var panels = innerRail.addPanel(
+                [ '<a id="innerRail1" class="coral-ColumnView-item coral-MultiPanel">Sub 1</a>',
+                  '<a id="innerRail2" class="coral-ColumnView-item coral-MultiPanel">Sub 2</a>',
+                  '<a id="innerRail3" class="coral-ColumnView-item coral-MultiPanel">Sub 3</a>'
+                ]);
+
+        innerRail.setActivePanel(panels[0]);
+      }
+
+      function onActionBarResolved(actionBar) {
+        var rail1ToggleElement = $('' +
+          '<button ' +
+          '    type="button"' +
+          '    class="coral-ButtonGroup-item coral-Button coral-Button--secondary coral-Button--quiet' +
+          '    title="Select">' +
+          '  <i class="endor-ActionButton-icon coral-Icon coral-Icon--blur"></i>' +
+          '  <span class="endor-ActionButton-label">Sub 1</span>' +
+          '</button>');
+
+        var rail2ToggleElement = $('' +
+          '<button ' +
+          '    type="button"' +
+          '    class="coral-ButtonGroup-item coral-Button coral-Button--secondary coral-Button--quiet' +
+          '    title="Select">' +
+          '  <i class="endor-ActionButton-icon coral-Icon coral-Icon--blur"></i>' +
+          '  <span class="endor-ActionButton-label">Sub 2</span>' +
+          '</button>');
+
+        actionBar.addItem(rail1ToggleElement);
+        actionBar.addItem(rail2ToggleElement);
+
+        var rail1Toggle = new CUI.InnerRailToggle({
+          element: rail1ToggleElement,
+          target: '#innerRail1'
+        });
+
+        var rail2Toggle = new CUI.InnerRailToggle({
+          element: rail2ToggleElement,
+          target: '#innerRail2'
+        });
+      }
+
+      function onPageResolved(page) {
+        var html = '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>';
+        page.getContent().prepend($('<div>').html(html));
+      }
+
+    });
+  </script>
+</head>
+
+<body class="coral--light">
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CoralUI Crumbs</title>
+
+  <link rel="stylesheet" href="../../../css/coral.css">
+
+  <script src="../../../js/libs/jquery.js"></script>
+  <script src="../../../js/coral.js"></script>
+
+  <script src="../scripts/examples.js"></script>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <style type="text/css">
+
+    body {
+      padding: 15px;
+      width: auto;
+      height: auto;
+    }
+
+    pre {
+      font-size: 12px;
+    }
+
+    pre.prettyprint {
+      position: relative;
+      /* display: inline-block;*/
+      width: 650px;
+      padding: 35px 15px 15px;
+      border: 1px solid #999;
+      background-color: white;
+      font-size: 12px;
+    }
+
+    pre.prettyprint:after {
+      content: "markup";
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      padding: 3px 7px;
+      font-size: 12px;
+      background-color: #f5f5f5;
+      border: 1px solid #999;
+    }
+
+    div.crumbContainer {
+      background: rgb(35, 35, 35);
+      height: 44px;
+      padding-left: 8px;
+      margin: 40px 0 20px 0;
+    }
+
+    div.demoButtons {
+      text-align: center;
+      padding: 20px;
+    }
+
+  </style>
+</head>
+
+<body data-init="shell" class="coral--light">
+<h1>CoralUI 2.0 - Crumbs</h1>
+
+<h2>Component API</h2>
+
+<div id="crumb-markup" class="crumbContainer">
+  <nav id="endor-crumbs" data-init="crumbs"></nav>
+</div>
+
+<div class="demoButtons">
+  <button id="btnAdd" class="coral-Button">Add New Crumb</button>
+  <button id="btnRemove" class="coral-Button">Remove Crumb</button>
+  <button id="btnRemoveAll" class="coral-Button">Remove All Crumbs</button>
+</div>
+
+
+<pre class="prettyprint" data-src-id="crumb-markup"></pre>
+<pre class="prettyprint lang-js" data-src-id="crumb-script"></pre>
+
+<script id="crumb-script">
+
+  $(function () {
+
+    var widget = $('#endor-crumbs').data('crumbs');
+
+    // Dynamically set the brand crumb. Internally this gets followed by a
+    // ellipsis item that will be used when the crumbs need to truncate.
+    widget.setFirstItem( {
+      title: 'My Brand',
+      href: 'http://www.adobe.com',
+      icon: 'coral-Icon--adobeExperienceManager'
+    });
+
+    // dynamically add new crumbs after initialization
+    // pass as strings
+    widget.addItem('Home', 'http://www.adobe.com');
+    // pass an object
+    widget.addItem({ icon: 'coral-Icon--adobeExperienceManager', title: 'My Breadcrumb', href: 'http://www.adobe.com' });
+    // pass an object, and make unavailable
+    widget.addItem({ title: 'Not Available', href: '#', isAvailable: false });
+    // pass an object, and make it unnavigable
+    widget.addItem({ title: 'Not Navigable', href: '#', isNavigable: false });
+    // create a formatted html object
+    var $anchor = $('<a>').
+            attr('href', 'http://www.adobe.com').
+            text('Another Item').
+            addClass('endor-Crumbs-item');
+
+    widget.addItem($anchor);
+
+    $('#btnAdd').click(function () {
+      var addWidget = widget.addItem({ title: 'My Breadcrumb', href: 'http://www.adobe.com' });
+    });
+
+    $('#btnRemove').click(function () {
+      var removeWidget = widget.removeItem();
+    });
+
+    $('#btnRemoveAll').click(function () {
+      widget.removeAllItems();
+    });
+  });
+
+</script>
+</body>
+</html>
