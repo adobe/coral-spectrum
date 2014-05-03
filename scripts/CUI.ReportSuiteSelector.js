@@ -141,7 +141,7 @@
 			var $link = $('<a>')
 				.addClass('coral-ButtonGroup-item coral-Button coral-Button--secondary coral-Button--quiet coral-Button--rsidSelector')
 				.attr('data-toggle', 'popover')
-				.attr('href', '#reportSuiteSelector:' + CUI.ReportSuiteSelector.count)
+				.attr('data-target', '#reportSuiteSelector:' + CUI.ReportSuiteSelector.count)
 				.appendTo(this.$element);
 
 			// Helper function for updating the link text so it always includes the icon.
@@ -209,7 +209,6 @@
 			// Create a "show all" link that only shows if the search box is empty.
 			var $showAllLink = $('<a>')
 				.addClass('endor-List-item show-all-link')
-				.attr('href', '#')
 				.text('Show All')
 				.appendTo($container);
 
