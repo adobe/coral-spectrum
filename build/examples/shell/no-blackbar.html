@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" class="coral-App">
+<head>
+  <meta charset="utf-8">
+  <title>CoralUI Shell 2.0 Endor</title>
+
+  <link rel="stylesheet" href="../../../css/coral.css">
+
+  <script src="../../../js/libs/jquery.js"></script>
+  <script src="../../../js/coral.js"></script>
+
+</head>
+
+<!-- CUI.Shell -->
+<body data-init="shell"
+      data-brand-title="No BlackBar Shell Sample"
+      data-brand-icon="coral-Icon coral-Icon--hammer coral-Icon--sizeM"
+      data-brand-href="#">
+
+<!-- CUI.BreadcrumbBar -->
+<div data-init="breadcrumb-bar" data-is-closed="false" data-hide-close-indicator>
+
+  <!-- CUI.Crumbs -->
+  <nav data-init="crumbs">
+    <a>Page Title</a>
+  </nav>
+
+</div>
+
+<!-- CUI.Page -->
+<div data-init="page">
+
+  <!-- CUI.OuterRail -->
+  <div data-init="outer-rail">
+  </div>
+
+  <div class="endor-Page-content endor-Panel">
+
+    <div class="endor-Panel-content" role="main">
+
+      <div class="endor-Page-content endor-Panel">
+
+        <!-- CUI.ActionBar -->
+        <nav data-init="action-bar">
+          <div class="endor-ActionBar-left">
+            <div class="endor-ActionBar-item coral-ButtonGroup">
+              <button data-init="outer-rail-toggle"></button>
+            </div>
+          </div>
+        </nav>
+
+        <!-- This is where a page's main content is supposed to go: -->
+        <div class="js-endor-content endor-Panel-content">
+          <div class="endor-Panel-contentMain" >
+            <div class="u-coral-padding">
+              <div>Page Content</div>
+            </div>
+            <!-- CUI.Footer -->
+            <footer data-init="footer"></footer>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>

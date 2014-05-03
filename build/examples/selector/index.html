@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Selector</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+  <script type="text/javascript" src="../../js/libs/jquery.js"></script>
+  <script type="text/javascript" src="../../js/coral.js"></script>
+
+  <style>
+    body,
+    section {
+      padding: 15px;
+    }
+
+    .example-styling {
+      display: table;
+      table-layout: fixed;
+      width: 90%;
+      margin: auto;
+    }
+
+    .example-styling-box {
+      display: table-cell;
+      padding: 1rem 2rem;
+    }
+
+    .example-layout {
+      margin: 0 5%;
+      width: 20rem;
+      padding: 1rem 2rem;
+    }
+  </style>
+</head>
+<body class="coral--light">
+  <h1 class="coral-Heading coral-Heading--1">CoralUI Selector Component Examples</h1>
+
+  <section>
+    <h2 class="coral-Heading coral-Heading--2">Selector with light theme</h2>
+
+    <div class="example-styling"></div>
+  </section>
+
+  <section class="coral--dark">
+    <h2 class="coral-Heading coral-Heading--2">Selector with dark theme</h2>
+
+    <div class="example-styling"></div>
+  </section>
+
+  <section>
+    <h2 class="coral-Heading coral-Heading--2">Vertical Form</h2>
+
+    <form class="coral-Form coral-Form--vertical example-layout"></form>
+  </section>
+
+  <section>
+    <h2 class="coral-Heading coral-Heading--2">Aligned Form</h2>
+
+    <form class="coral-Form coral-Form--aligned example-layout"></form>
+  </section>
+
+  <script type="text/html" id="example-styling-content">
+    <form class="example-styling-box">
+      <p>Mutually exclusive</p>
+      <div class="coral-Selector">
+        <label class="coral-Selector-option">
+          <input class="coral-Selector-input" type="radio" name="s1">
+          <span class="coral-Selector-description" title="Card View">
+            <i class="coral-Icon coral-Icon--viewCard coral-Selector-icon"></i>
+          </span>
+        </label>
+        <label class="coral-Selector-option">
+          <input class="coral-Selector-input" type="radio" name="s1">
+          <span class="coral-Selector-description" title="List View">
+            <i class="coral-Icon coral-Icon--viewList coral-Selector-icon"></i>
+          </span>
+        </label>
+        <label class="coral-Selector-option">
+          <input class="coral-Selector-input" type="radio" name="s1">
+          <span class="coral-Selector-description" title="Column View">
+            <i class="coral-Icon coral-Icon--viewColumn coral-Selector-icon"></i>
+          </span>
+        </label>
+      </div>
+    </form>
+
+    <form class="example-styling-box">
+      <p>&nbsp;</p>
+      <div class="coral-Selector">
+        <label class="coral-Selector-option">
+          <input class="coral-Selector-input" type="radio" name="s2">
+          <span class="coral-Selector-description">
+            <i class="coral-Icon coral-Icon--sentimentPositive coral-Selector-icon"></i>
+            Yes
+          </span>
+        </label>
+        <label class="coral-Selector-option">
+          <input class="coral-Selector-input" type="radio" name="s2">
+          <span class="coral-Selector-description">
+            <i class="coral-Icon coral-Icon--sentimentNegative coral-Selector-icon"></i>
+            No
+          </span>
+        </label>
+        <label class="coral-Selector-option">
+          <input class="coral-Selector-input" type="radio" name="s2">
+          <span class="coral-Selector-description">
+            <i class="coral-Icon coral-Icon--sentimentNeutral coral-Selector-icon"></i>
+            Maybe
+          </span>
+        </label>
+      </div>
+    </form>
+
+    <form class="example-styling-box">
+      <p>Not mutually exclusive</p>
+      <div class="coral-Selector">
+        <label class="coral-Selector-option">
+          <input class="coral-Selector-input" type="checkbox" name="s3">
+          <span class="coral-Selector-description">Chicken</span>
+        </label>
+        <label class="coral-Selector-option">
+          <input class="coral-Selector-input" type="checkbox" name="s3">
+          <span class="coral-Selector-description">Beef</span>
+        </label>
+        <label class="coral-Selector-option">
+          <input class="coral-Selector-input" type="checkbox" name="s3" checked disabled>
+          <span class="coral-Selector-description">Pork</span>
+        </label>
+        <label class="coral-Selector-option">
+          <input class="coral-Selector-input" type="checkbox" name="s3" disabled>
+          <span class="coral-Selector-description">Tofu</span>
+        </label>
+      </div>
+    </form>
+  </script>
+
+  <script type="text/html" id="example-layout-content">
+    <section class="coral-Form-fieldset">
+      <label class="coral-Form-fieldlabel">
+        Name
+      </label>
+      <input class="coral-Form-field coral-Textfield" placeholder="(e.g. Jon Doe)">
+
+      <label class="coral-Form-fieldlabel">
+        Lights
+      </label>
+      <div class="coral-Form-field coral-Selector">
+        <label class="coral-Selector-option">
+          <input class="coral-Selector-input" type="radio" name="f1" checked>
+          <span class="coral-Selector-description">ON</span>
+        </label>
+        <label class="coral-Selector-option">
+          <input class="coral-Selector-input" type="radio" name="f1">
+          <span class="coral-Selector-description">OFF</span>
+        </label>
+      </div>
+    </section>
+  </script>
+
+  <script>
+    $(".example-styling").html($("#example-styling-content").html());
+    $(".example-layout").html($("#example-layout-content").html());
+  </script>
+</body>
+</html>
