@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CoralUI Shell 2.0 Endor - ColumnView Component: Miller Columns</title>
+
+  <link rel="stylesheet" href="../../../css/coral.css">
+
+  <script src="../../../js/libs/jquery.js"></script>
+  <script src="../../../js/libs/moment.js"></script>
+  <script src="../../../js/coral.js"></script>
+
+  <script src="../scripts/examples.js"></script>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <style type="text/css">
+
+    body {
+      padding: 15px;
+      width: auto;
+      height: auto;
+    }
+
+    pre {
+      font-size: 12px;
+    }
+
+    pre.prettyprint {
+      position: relative;
+      display: inline-block;
+      /* width: 550px; */
+      padding: 35px 15px 15px;
+      border: 1px solid #999;
+      background-color: white;
+      font-size: 12px;
+    }
+
+    pre.prettyprint:after {
+      content: "markup";
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      padding: 3px 7px;
+      font-size: 12px;
+      background-color: #f5f5f5;
+      border: 1px solid #999;
+    }
+
+    .coral-ColumnView {
+      height:350px;
+      border:solid 1px black;
+    }
+
+  </style>
+</head>
+<body class="coral--light">
+  <h1 class="coral-Heading coral-Heading--1">ColumnView Component: Miller Column</h1>
+  <!--<h2 class="coral-Heading coral-Heading--2">Component API</h2>-->
+
+  <div class="coral-Collapsible" data-init="collapsible">
+      <h3 class="coral-Collapsible-header">
+          <span class="coral-Collapsible-title">Component API</span>
+          <span class="coral-Collapsible-subtitle"></span>
+      </h3>
+      <div class="coral-Collapsible-content">
+          <pre>
+// parent class
+.coral-ColumnView
+
+// modifier for single column navigation (as seen in the rail).
+.coral-ColumnView--navigation
+
+// modifier for Miller columns.
+.coral-ColumnView--miller
+
+// each of the columns that are displayed.
+.coral-ColumnView-column
+
+// active column.
+.coral-ColumnView-column.is-active
+
+// each item inside the column.
+.coral-ColumnView-item
+
+// modifier for items with doublespaced labels (Miller columns).
+// is applied dynamically if the normal label is overflowing.
+// word wrapping can be avoided by data-wrapLabels="false".
+.coral-ColumnView-item--doublespaced
+
+// active item (navigation).
+.coral-ColumnView-item.is-active
+
+// selected item (Miller columns).
+.coral-ColumnView-item.is-selected
+
+// checked item (Miller columns).
+.coral-ColumnView-item.is-selected.is-checked
+
+// adds the > to the item to indicate it can be navigated.
+.coral-ColumnView-item--hasChildren
+
+// header item, used to separate the items.
+.coral-ColumnView-item--header
+
+// item that has back navigation.
+.coral-ColumnView-item--back
+
+// the icon (navigation).
+// wrapper of the icon or the thumbnail (Miller columns).
+.coral-ColumnView-icon
+
+// the thumbnail (Miller columns).
+.coral-ColumnView-thumbnail
+
+// the preview column (Miller columns).
+.coral-ColumnView-column.coral-ColumnView-preview
+
+// wrapper of the icon or the thumbnail in a preview.
+.coral-ColumnView-preview-icon
+
+// the thumbnail in a preview.
+.coral-ColumnView-preview-thumbnail
+
+// a label in a preview.
+.coral-ColumnView-preview-label
+
+// a value (assigned to a label) in a preview.
+.coral-ColumnView-preview-value
+        </pre>
+      </div>
+  </div>
+  <h2 class="coral-Heading coral-Heading--2">coral-ColumnView--miller</h2>
+  <div id="endor-userprofile-multitenant">
+
+      <!-- Setting data-path would request and load the initial column when initializing the column view. This
+           is an alternative to provide the markup of the initial column. -->
+      <!--<div class="coral-ColumnView coral-ColumnView--miller" data-init="columnview" data-path="content" data-url="{+path}.html"></div>-->
+
+      <div class="coral-ColumnView coral-ColumnView--miller" data-init="columnview" data-url="{+path}.html">
+          <div class="coral-ColumnView-column">
+              <a class="coral-ColumnView-item coral-ColumnView-item--hasChildren" href="#" data-path="content/en">
+                  <div class="coral-ColumnView-icon">
+                      <i title="" class="coral-Icon coral-Icon--folder coral-Icon--sizeM"></i>
+                  </div>
+                  <div class="coral-ColumnView-label">
+                      English
+                  </div>
+              </a>
+              <a class="coral-ColumnView-item coral-ColumnView-item--hasChildren" href="#" data-path="content/fr">
+                  <div class="coral-ColumnView-icon">
+                      <i title="" class="coral-Icon coral-Icon--folder coral-Icon--sizeM"></i>
+                  </div>
+                  <div class="coral-ColumnView-label">
+                      Fran&ccedil;ais
+                  </div>
+              </a>
+              <a class="coral-ColumnView-item coral-ColumnView-item--hasChildren" href="#" data-path="content/levels">
+                  <div class="coral-ColumnView-icon">
+                      <i title="" class="coral-Icon coral-Icon--folder coral-Icon--sizeM"></i>
+                  </div>
+                  <div class="coral-ColumnView-label">
+                      Infinite Levels To Test Scrolling
+                  </div>
+              </a>
+              <a class="coral-ColumnView-item" href="#" data-path="document.txt" data-url="preview.icon.html#{+path}">
+                  <!-- this item overwrites the default data-url provided by the column view -->
+                  <div class="coral-ColumnView-icon">
+                      <i title="" class="coral-Icon coral-Icon--file coral-Icon--sizeM"></i>
+                  </div>
+                  <div class="coral-ColumnView-label">
+                      Document
+                  </div>
+              </a>
+              <a class="coral-ColumnView-item coral-ColumnView-item" href="#" data-path="document.txt" data-url="preview.html#{+path}">
+                  <div class="coral-ColumnView-icon">
+                      <img class="coral-ColumnView-thumbnail" src="../images/previews/preview-small.png" title="">
+                  </div>
+                  <div class="coral-ColumnView-label">
+                      Document With Thumbnail
+                  </div>
+              </a>
+              <a class="coral-ColumnView-item coral-ColumnView-item--hasChildren" href="#" data-path="content/en">
+                  <div class="coral-ColumnView-icon">
+                      <i title="" class="coral-Icon coral-Icon--folder coral-Icon--sizeM"></i>
+                  </div>
+                  <div class="coral-ColumnView-label">
+                      Wrapping Long Folder Name
+                  </div>
+              </a>
+              <a class="coral-ColumnView-item" href="#" data-path="document.txt" data-url="preview.html#{+path}">
+                  <div class="coral-ColumnView-icon">
+                      <i title="" class="coral-Icon coral-Icon--file coral-Icon--sizeM"></i>
+                  </div>
+                  <div class="coral-ColumnView-label">
+                      Wrapping And Overflowing Very Very Very Long Document Name
+                  </div>
+              </a>
+              <a class="coral-ColumnView-item" href="#" data-path="document.txt" data-url="preview.html#{+path}">
+                  <div class="coral-ColumnView-icon">
+                      <i title="" class="coral-Icon coral-Icon--file coral-Icon--sizeM"></i>
+                  </div>
+                  <div class="coral-ColumnView-label">
+                      OverflowingLongDocumentNameWithoutSpaces
+                  </div>
+              </a>
+          </div>
+      </div>
+  </div>
+  <pre class="prettyprint" data-src-id="endor-userprofile-multitenant"></pre>
+</body>
+</html>

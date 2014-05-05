@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Endor.registry</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light docs-Background u-coral-clearFix">
+    <article class="docs-Component">
+      <section class="docs-Component-metadata">
+        <div class="docs-Component-header">
+          <!-- name of the component-->
+          <h1 class="coral-Heading coral-Heading--1 docs-Component-name">Endor.registry</h1><span class="docs-Component-version">Current Version: <strong>3.0.5-pre</strong></span>
+        </div>
+        <div class="coral-Component-related">Related Components: <a href="shellwidget.html" class="coral-Link">ShellWidget</a>
+        </div>
+        <div class="coral-Component-github"> Github: <a href="https://git.corp.adobe.com/Coral/coralui-component-shell" class="coral-Link">coralui-component-shell</a>
+        </div>
+        <!-- description is loaded from the template-->
+      </section>
+      <section class="docs-Component-documentation">
+        <p>CUI.Endor.registry is not a component. It is a static JavaScript utility object that is used to store and retrieve instances of shell components and is typically only used by shell components internally. It can also be used by consumers to configure components once they have been generated. It is an efficient way to look up widget instances, for it doesn't involve any DOM searching (the registry keeps a hash table), nor any periodic checks (for ShellWidget based widgets register/unregister from their construct/destruct methods)</p>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">.get Example</h3>
+              </div>
+              <p>The following bit of JavaScript shows how to obtain a reference to a shell widget instance:</p>
+                  <pre id="guide-490eca03-012a-4c72-84c3-10a433b562b4" data-src-id="guide-490eca03-012a-4c72-84c3-10a433b562b4" class="prettyprint docs-Example-snippet">
+                    <script>
+                      var actionBar = CUI.Endor.registry.get(CUI.ActionBar);
+                    </script></pre>
+              <p>The <code>get</code> method returns the found instance directly, or <code>undefined</code> when no CUI.ActionBar instance is present.</p>
+            </section>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">.resolve Example</h3>
+              </div>
+              <p>The following bit of JavaScript shows how to keep track of a the presence of a CUI.BlackBar on a page:</p>
+                  <pre id="guide-2a59522b-b633-4f0d-8b10-3846de24ae13" data-src-id="guide-2a59522b-b633-4f0d-8b10-3846de24ae13" class="prettyprint docs-Example-snippet">
+                    <script>
+                      function instanceResolvedCallback = function (blackBar) {
+                        if (blackBar) {
+                          // When the black bar is already present on the page, or gets added to the page,
+                          // then the callback is invoked with blackBar pointing to the detected instance.
+                          blackBar.setTitle('Page Title');
+                        } else {
+                          // If the black bar is removed from the page, then the callback will
+                          // be invoked with blackBar set to undefined.
+                        }
+                      }
+                      
+                      CUI.Endor.registry.resolve(CUI.BlackBar, instanceResolvedCallback });
+                    </script></pre>
+              <p>If the BlackBar is generated before the above script is executed, the callback will be executed immediately. Otherwise, the callback will be executed immediately after the BlackBar is generated. All shell components support this look-up mechanism.</p>
+            </section>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">Non-Singleton Example</h3>
+              </div>
+              <p>Most shell widgets expect only a single instance to present on a page at any given time. However, widgets that have their internal <code>_isSingleton</code> field set to <code>false</code> build up a list of instances within the registry. The example below illustrates how the <code>get</code> and <code>resolve</code> methods work in that case:</p>
+                  <pre id="guide-c340fd7c-ce30-406e-93b1-daab33d6780b" data-src-id="guide-c340fd7c-ce30-406e-93b1-daab33d6780b" class="prettyprint docs-Example-snippet">
+                    <script>
+                      function instanceResolvedCallback = function (innerRailToggle) {
+                       if (innerRailToggle) {
+                         // An InnerRailToggle got added; innerRailToggle references the added instance.
+                       } else {
+                         // An InnerRailToggle got removed.
+                       }
+                       
+                       // Get the full set of InnerRailToggle instances. Since CUI.InnerRailToggle has
+                       // _isSingleton set to false, this will always return an Array
+                       var allInnerRailToggles = CUI.Endor.registry.get(CUI.InnerRailToggle);
+                      }
+                      
+                      CUI.Endor.registry.resolve(CUI.InnerRailToggle, instanceResolvedCallback });
+                    </script>
+                    </pre>
+            </section>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+              </div>
+              <section class="guide-jsDocFragement">
+    <div class="content">
+        <!--<h1 class="line">Namespace: registry</h1>-->
+        
+          
+
+
+
+<section>
+
+<h1 class="coral-Heading coral-Heading--1 u-line">registry
+ JSDoc</h1>
+
+
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+
+    
+        
+            <div class="description">CUI.Endor.registry is used to store and retrieve instances of shell components and is typically only used
+by shell internals.</div>
+        
+
+        
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Endor.registry.js, line 9</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+
+        
+    
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+       <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Methods</h3>
+
+        <dl>
+            
+<dt>
+    <h3 class="name" id="get"><span class="type-signature">&lt;static> </span>get</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Get the instance(s) registered under the given key.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">key</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">string</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last">The key to get the instance(s) for.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    Array with matched instances when the last
+registered object is not a singleton, otherwise the matched
+instance, or undefined if no matches were found.
+    
+    {<span class="param-type">Array</span>|<span class="param-type">undefined</span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Endor.registry.js, line 117</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="has"><span class="type-signature">&lt;static> </span>has</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Check if there are instances registered under the given key.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">key</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">string</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last"></td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Endor.registry.js, line 105</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="register"><span class="type-signature">&lt;static> </span>register</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Add an object to the register.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+		<th class="coral-Table-headerCell">Optional</th>
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">instance</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                  No<br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="coral-Table-cell description last">The object instance to register.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">key</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">string</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="coral-Table-cell description last">The key to register the instance under. If not
+specified, 'instance.getRegistryKey()' is tried. If not available,
+a native 'instance.toString()' will be used, and if that's not
+available, then a unique ID will be generated.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    The key under which the instance got stored.
+    
+    {<span class="param-type">string</span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Endor.registry.js, line 24</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="reset"><span class="type-signature">&lt;static> </span>reset</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Unregister all instances, and cancel all resolve requests. Used for
+unit testing.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Endor.registry.js, line 167</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="resolve"><span class="type-signature">&lt;static> </span>resolve</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Request a callback to be invoked when a given key is or was
+used to register an instance.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">key</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">string</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last">The key to have callback(s) invoked for.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">callback</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">function</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last">The callback to invoke.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">options</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last">
+                
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+		<th class="coral-Table-headerCell">Optional</th>
+		
+
+		
+		<th class="coral-Table-headerCell">Default</th>
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">scope</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">*</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                  No<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">Scope to use on invoked the callback.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">once</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">boolean</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">Set to true to have the
+callback invoked just once.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+            </td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    A method that can be invoked to cancel the
+resolve request.
+    
+    {<span class="param-type">function</span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Endor.registry.js, line 134</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="unregister"><span class="type-signature">&lt;static> </span>unregister</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Unregister an instance.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+		<th class="coral-Table-headerCell">Optional</th>
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">instance</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                  No<br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="coral-Table-cell description last">The instance to unregister.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">key</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">string</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="coral-Table-cell description last">The key with which the instance was registered. This is required when instance.toString was
+not used to register the instance.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    The key that was used to unregister the instance.
+    
+    {<span class="param-type">string</span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Endor.registry.js, line 69</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+        
+    </div>
+   
+              </section>
+            </section>
+      </section>
+    </article>
+  </body>
+</html>

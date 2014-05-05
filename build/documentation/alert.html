@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Alert</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light docs-Background u-coral-clearFix">
+    <article class="docs-Component">
+      <section class="docs-Component-metadata">
+        <div class="docs-Component-header">
+          <!-- name of the component-->
+          <h1 class="coral-Heading coral-Heading--1 docs-Component-name">Alert</h1><span class="docs-Component-version">Current Version: <strong>2.1.7</strong></span>
+        </div>
+        <div class="coral-Component-related">Related Components: <a href="modal.html" class="coral-Link">modal</a>, <a href="popover.html" class="coral-Link">popover</a>
+        </div>
+        <div class="coral-Component-github"> Github: <a href="https://git.corp.adobe.com/Coral/coralui-component-alert" class="coral-Link">coralui-component-alert</a>
+        </div>
+        <!-- description is loaded from the template-->
+      </section>
+      <section class="docs-Component-documentation">
+        <p>
+          An alert is a styling component with a heading, message, icon and optional close button.
+          
+        </p>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">Types</h3><span class="u-coral-pullRight docs-ThemeSwitcher"><i class="coral-Icon coral-Icon--infoCircle docs-ThemeSwitcher-icon"></i>
+                  <button class="coral-MinimalButton docs-ThemeSwitcher-button is-selected">Light</button>|
+                  <button data-theme="coral--dark" class="coral-MinimalButton docs-ThemeSwitcher-button">Dark</button></span>
+              </div>
+              <p>Below are examples of configuring the component using markup:</p>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Error</h3>Specified via <code>coral-Alert--error</code>.
+                      <div id="guide-dee3e0b2-02da-4769-ab0d-77a747321806" class="docs-Example-markup u-columnMedium">
+                                <div class="coral-Alert coral-Alert--error">
+                                   <button type="button" class="coral-MinimalButton coral-Alert-closeButton" title="Close" data-dismiss="alert">
+                                     <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close coral-MinimalButton-icon"></i>
+                                   </button>
+                                   <i class="coral-Alert-typeIcon coral-Icon coral-Icon--sizeS coral-Icon--alert"></i>
+                                   <strong class='coral-Alert-title'>Error</strong>
+                                   <div class='coral-Alert-message'>Watch out!  There is an error in your stuff!</div>
+                                </div>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-dee3e0b2-02da-4769-ab0d-77a747321806" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Notice</h3>Specified via <code>coral-Alert--notice</code>.
+                      <div id="guide-ee49993e-5310-4df4-9998-3f0696d83c90" class="docs-Example-markup u-columnMedium">
+                                <div class="coral-Alert coral-Alert--notice">
+                                   <button type="button" class="coral-MinimalButton coral-Alert-closeButton" title="Close" data-dismiss="alert">
+                                     <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close coral-MinimalButton-icon"></i>
+                                   </button>
+                                   <i class="coral-Alert-typeIcon coral-Icon coral-Icon--sizeS coral-Icon--alert"></i>
+                                   <strong class='coral-Alert-title'>Notice</strong>
+                                   <div class='coral-Alert-message'>Something is about to happen.</div>
+                                </div>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-ee49993e-5310-4df4-9998-3f0696d83c90" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Success</h3>Specified via <code>coral-Alert--success</code>.
+                      <div id="guide-41e89779-c2fa-4457-b9a6-e74553f8062e" class="docs-Example-markup u-columnMedium">
+                                <div class="coral-Alert coral-Alert--success">
+                                   <button type="button" class="coral-MinimalButton coral-Alert-closeButton" title="Close" data-dismiss="alert">
+                                     <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close coral-MinimalButton-icon"></i>
+                                   </button>
+                                   <i class="coral-Alert-typeIcon coral-Icon coral-Icon--sizeS coral-Icon--checkCircle"></i>
+                                   <strong class='coral-Alert-title'>Success</strong>
+                                   <div class='coral-Alert-message'>Successful attempt at whatever!</div>
+                                </div>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-41e89779-c2fa-4457-b9a6-e74553f8062e" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Help</h3>Specified via <code>coral-Alert--help</code>.
+                      <div id="guide-4da639e9-41d6-4d0b-90bc-4cdfbc0436b1" class="docs-Example-markup u-columnMedium">
+                                <div class="coral-Alert coral-Alert--help">
+                                   <button type="button" class="coral-MinimalButton coral-Alert-closeButton" title="Close" data-dismiss="alert">
+                                     <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close coral-MinimalButton-icon"></i>
+                                   </button>
+                                   <i class="coral-Alert-typeIcon coral-Icon coral-Icon--sizeS coral-Icon--helpCircle"></i>
+                                   <strong class='coral-Alert-title'>Help</strong>
+                                   <div class='coral-Alert-message'>You may need help.</div>
+                                </div>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-4da639e9-41d6-4d0b-90bc-4cdfbc0436b1" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Info</h3>Specified via <code>coral-Alert--info</code>.
+                      <div id="guide-f9921b6c-ec9e-4662-b586-25b591bb270d" class="docs-Example-markup u-columnMedium">
+                                <div class="coral-Alert coral-Alert--info">
+                                   <button type="button" class="coral-MinimalButton coral-Alert-closeButton" title="Close" data-dismiss="alert">
+                                     <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close coral-MinimalButton-icon"></i>
+                                   </button>
+                                   <i class="coral-Alert-typeIcon coral-Icon coral-Icon--sizeS coral-Icon--infoCircle"></i>
+                                   <strong class='coral-Alert-title'>Info</strong>
+                                   <div class='coral-Alert-message'>Everything is fine.  Carry on!</div>
+                                </div>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-f9921b6c-ec9e-4662-b586-25b591bb270d" class="docs-Example-toggleMarkup prettyprint"></pre>
+            </section>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">Sizes</h3><span class="u-coral-pullRight docs-ThemeSwitcher"><i class="coral-Icon coral-Icon--infoCircle docs-ThemeSwitcher-icon"></i>
+                  <button class="coral-MinimalButton docs-ThemeSwitcher-button is-selected">Light</button>|
+                  <button data-theme="coral--dark" class="coral-MinimalButton docs-ThemeSwitcher-button">Dark</button></span>
+              </div>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Large alert</h3>
+              <p>
+                A large version of Alert is also available. This only
+                requires adding the large modifier class to the existing Alert markup.
+                
+              </p>
+              <p>Variant: <code>coral-Alert--large</code></p>
+                  <div id="guide-54ef39a9-02ad-443d-a587-8ff5bc5d3b18" class="docs-Example-markup u-columnMedium">
+                            <div class="coral-Alert coral-Alert--success coral-Alert--large">
+                               <button type="button" class="coral-MinimalButton coral-Alert-closeButton" title="Close" data-dismiss="alert">
+                                 <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close coral-MinimalButton-icon"></i>
+                               </button>
+                               <i class="coral-Alert-typeIcon coral-Icon coral-Icon--sizeS coral-Icon--checkCircle"></i>
+                               <strong class='coral-Alert-title'>Success is yours!</strong>
+                               <div class='coral-Alert-message'>This Alert is large. It has a custom title.</div>
+                            </div>
+                  </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                      <pre data-src-id="guide-54ef39a9-02ad-443d-a587-8ff5bc5d3b18" class="docs-Example-toggleMarkup prettyprint"></pre>
+            </section>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">JavaScript API</h3>
+              </div>
+              <p>
+                Alerts can be constructed using the Class constructor directly.
+                The constructor expects a configuration object, which should include a reference
+                to an element with the expected Alert markup (as in examples above).
+                
+              </p>
+                  <label class="coral-Label guide-Example-caption">Construction using Class:</label>
+                  <div class="u-columnLarge">
+                        <pre id="guide-9a293e05-226e-4cce-98f7-e2a122b3b2e8" data-src-id="guide-9a293e05-226e-4cce-98f7-e2a122b3b2e8" class="prettyprint docs-Example-snippet">
+                          <script>
+                            var alert = new CUI.Alert({
+                              element: '#myAlert',
+                              heading: 'ERROR',
+                              content: 'An error has occurred.',
+                              closeable: true
+                            });
+                          </script>
+                          </pre>
+                  </div>
+              <p>
+                A reference to the element's alert instance is stored as <code>data-alert</code>
+                
+              </p>
+                  <label class="coral-Label guide-Example-caption">Accessing via data property:</label>
+                  <div class="u-columnLarge">
+                        <pre id="guide-bde1fced-c119-4d96-afc6-59be5795f2c6" data-src-id="guide-bde1fced-c119-4d96-afc6-59be5795f2c6" class="prettyprint docs-Example-snippet">
+                          var alert = $('#myAlert').data('alert');
+                          // now you can call public functions
+                          alert.hide();
+                          </pre>
+                  </div>
+              <p>Hide the Alert, change the content, then show it again...</p>
+                  <label class="coral-Label guide-Example-caption">Using method chaining:</label>
+                  <div class="u-columnLarge">
+                        <pre id="guide-c4df6868-4128-467c-9067-034138a9690f" data-src-id="guide-c4df6868-4128-467c-9067-034138a9690f" class="prettyprint docs-Example-snippet">
+                          alert.hide().set({ content: 'Another error has occurred.'}).show();
+                          </pre>
+                  </div>
+              <p>
+                jQuery construction works as well. The constructor will initalized the element on
+                which the the constructor is called.
+              </p>
+                  <label class="coral-Label guide-Example-caption">jQuery construction on element with valid markup:</label>
+                  <div class="u-columnLarge">
+                        <pre id="guide-afe048a9-9dfe-4717-a327-ebbec2e32bc9" data-src-id="guide-afe048a9-9dfe-4717-a327-ebbec2e32bc9" class="prettyprint docs-Example-snippet">
+                          $('#myAlert').alert({
+                            heading: 'ERROR',
+                            content: 'An error has occurred.',
+                            closeable: true
+                          });
+                          </pre>
+                  </div>
+              <p>The markup will still obey jQuery functions as well.</p>
+                  <label class="coral-Label guide-Example-caption">Using jQuery to hide an Alert:</label>
+                  <div class="u-columnLarge">
+                        <pre id="guide-fdc2b47e-e106-4bf4-941e-b643685ed1d3" data-src-id="guide-fdc2b47e-e106-4bf4-941e-b643685ed1d3" class="prettyprint docs-Example-snippet">$('#myAlert').alert();</pre>
+                  </div>
+            </section>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">JavaScript Example</h3>
+              </div>
+              <p>An Alert can be constructed and manipulated with JavaScript</p>
+              <div id="alert-js-example">
+                <script>
+                  $(document).ready(function() {
+                    var defaultAlert = new CUI.Alert({element:'#defaultAlert'});
+                    var alertTypes = ['error',  'notice', 'success', 'help','info',];
+                    var currentTypeIdx = 0;
+                    $('#cycleType').on("click", function() {
+                      var newValue = alertTypes[++currentTypeIdx];
+                      defaultAlert.set('type', newValue);
+                      defaultAlert.set('heading', newValue.charAt(0).toUpperCase() + newValue.slice(1));
+                      if (currentTypeIdx === alertTypes.length-1) {
+                        console.log('resetting', currentTypeIdx);
+                        currentTypeIdx = -1;
+                      }
+                    });
+                    
+                    $('#isLarge').on('change', function(event){
+                      defaultAlert.set('size', event.currentTarget.checked ? "large" : "small");
+                    });
+                    
+                    $('#isCloseable').on('change', function(event){
+                      defaultAlert.set('closeable', event.currentTarget.checked);
+                    });
+                  });
+                  
+                </script>
+              </div>
+                  <div id="guide-5d962da5-5f99-471d-9854-d699403f5c78" class="docs-Example-markup u-columnMedium">
+                    <div id="defaultAlert" class="coral-Alert coral-Alert--error">
+                      <button type="button" class="coral-MinimalButton coral-Alert-closeButton" title="Close" data-dismiss="alert">
+                        <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close coral-MinimalButton-icon"></i>
+                      </button>
+                      <i class="coral-Alert-typeIcon coral-Icon coral-Icon--sizeS coral-Icon--alert"></i>
+                      <strong class='coral-Alert-title'>Error</strong>
+                      <div class='coral-Alert-message'>Boy this sure is amazing!</div>
+                    </div>
+                    <div>
+                      <button id="cycleType" class="coral-Button coral-Button--primary">Change Type</button>
+                    </div>
+                    <br/>
+                    <div>
+                      <label class="coral-Checkbox">
+                        <input class="coral-Checkbox-input" id="isLarge" type="checkbox">
+                        <span class="coral-Checkbox-checkmark"></span>
+                        <span class="coral-Checkbox-description">Large</span>
+                      </label>
+                      <label class="coral-Checkbox">
+                        <input class="coral-Checkbox-input" id="isCloseable" type="checkbox" checked>
+                        <span class="coral-Checkbox-checkmark"></span>
+                        <span class="coral-Checkbox-description">Closeable</span>
+                      </label>
+                    </div>
+                    
+                  </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                      <pre data-src-id="guide-5d962da5-5f99-471d-9854-d699403f5c78" class="docs-Example-toggleMarkup prettyprint"></pre>
+              <div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show JavaScript</span></a>
+                    <pre data-src-id="alert-js-example" class="docs-Example-toggleMarkup prettyprint"></pre>
+              </div>
+            </section>
+        <section class="guide-jsDocFragement">
+    <div class="content">
+        <!--<h1 class="line">Class: Alert</h1>-->
+        
+          
+
+
+
+<section>
+
+<h1 class="coral-Heading coral-Heading--1 u-line">Alert
+ JSDoc</h1>
+
+    <div class="class-description">Class Description: An optionally closeable alert message.</div>
+
+
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Extends</h3>
+
+        <ul>
+            <li>CUI.Widget</li>
+        </ul>
+    
+
+    
+        
+<dt>
+    <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Constructor</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Creates a new alert
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">options</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last">Component options
+                
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+		<th class="coral-Table-headerCell">Optional</th>
+		
+
+		
+		<th class="coral-Table-headerCell">Default</th>
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">heading</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    Type, capitalized
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">Title of the alert</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">content</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                  No<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">Content of the alert</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">closeable</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Boolean</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                  No<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">Array of button descriptors</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">size</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    small
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">Size of the alert. Either large or small.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">type</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    error
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">Type of alert to display. One of error, notice, success, help, or info</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+            </td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Alert.js, line 20</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+    
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+        
+    </div>
+   
+        </section>
+      </section>
+    </article>
+  </body>
+</html>

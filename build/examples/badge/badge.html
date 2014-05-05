@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CoralUI Shell 2.0 Endor - User Profile Component</title>
+
+  <link rel="stylesheet" href="../../../css/coral.css">
+
+  <script src="../../../js/libs/jquery.js"></script>
+  <script src="../../../js/libs/moment.js"></script>
+  <script src="../../../js/coral.js"></script>
+
+  <script src="../scripts/examples.js"></script>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <style type="text/css">
+
+    body {
+      padding: 15px;
+      width: auto;
+      height: auto;
+    }
+
+    pre {
+      font-size: 12px;
+    }
+
+    pre.prettyprint {
+      position: relative;
+      display: inline-block;
+      width: 550px;
+      padding: 35px 15px 15px;
+      border: 1px solid #999;
+      background-color: white;
+      font-size: 12px;
+    }
+
+    pre.prettyprint:after {
+      content: "markup";
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      padding: 3px 7px;
+      font-size: 12px;
+      background-color: #f5f5f5;
+      border: 1px solid #999;
+    }
+
+  </style>
+</head>
+<body class="coral--light">
+  <h1 class="coral-Heading coral-Heading--1">Badge Component</h1>
+  <h2 class="coral-Heading coral-Heading--2">Component API</h2>
+  <pre>
+// Container of the component
+.endor-Badge
+
+// Style used to indicate its empty.
+.endor-Badge.is-empty
+  </pre>
+  <h2 class="coral-Heading coral-Heading--2">One or more notifications</h2>
+  <div id="endor-badge">
+    <a class="endor-Badge" href="#">6</a>
+  </div>
+  <pre class="prettyprint" data-src-id="endor-badge"></pre>
+  <h2 class="coral-Heading coral-Heading--2">Empty</h2>
+  <p>
+    Add the class <strong>.is-empty</strong> to denote that no new notifications are available.
+  </p>
+  <div id="endor-badge-empty">
+    <a class="endor-Badge is-empty" href="#">0</a>
+  </div>
+  <pre class="prettyprint" data-src-id="endor-badge-empty"></pre>
+</body>
+</html>
