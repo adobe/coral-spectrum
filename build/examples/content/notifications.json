@@ -1,0 +1,28 @@
+{
+  "title":"Notifications",
+  "viewAll":{
+    "url":"#",
+    "text":"View all (0 new)"
+  },
+  "newNotifications":[
+    {
+      "html":"Mark mentioned you in <a href=\"#\">Volkswagen 2013 Winter Campaign</a>"
+    },
+    {
+      "html":"Archana assigned you to review the latest version of <a href=\"#\">0435_Bikerman</a>"
+    },
+    {
+      "html":"There where <a href=\"#\">8 anomalies</a> detected today."
+    },
+    {
+      "html":"Evangline shared a new segment, <a href=\"#\">Instagram Spenders</a> with you"
+    },
+    {
+      "html":"<a href=\"#\">0512_RainyDay</a> was approved by Arun."
+    },
+    {
+      "html":"Evangline shared a new segment, <a href=\"#\">Instagram Spenders</a> with you"
+    }
+  ],
+  "success":true
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" class="coral-App">
+<head>
+  <meta charset="utf-8">
+  <title>CoralUI Shell 2.0 Endor</title>
+
+  <link rel="stylesheet" href="../../../css/coral.css">
+
+  <script src="../../../js/libs/jquery.js"></script>
+  <script src="../../../js/libs/moment.js"></script>
+  <script src="../../../js/coral.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/0.6.11/fastclick.min.js"></script>
+  <script>
+    (function ($) {
+      $(document).on('load', function () {
+        FastClick.attach(document.body);
+      })
+    })(jQuery);
+  </script>
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+</head>
+<!-- Top Most Page Layout -->
+<body data-init="shell">
+
+<!-- Breadcrumb bar -->
+<div class="endor-Panel-header is-closed"></div>
+
+<!-- Page Content -->
+<div data-init="page"
+     data-generate-black-bar>
+
+  <div data-init="outer-rail" >
+    <!-- Brand -->
+    <a data-init="brand"
+       data-icon="coral-Icon coral-Icon--adobeMarketingCloud coral-Icon--sizeM"
+       data-title="Adobe Marketing Cloud"
+       data-href="">
+    </a>
+
+    <!-- Build the Navigation View completely from JavaScript using json data. -->
+    <!-- NOTE: nav-menu-full.json could just as easily point to a restful url -->
+    <div data-init="navigation-view" 
+         data-json-url="data/nav-menu-full.json">
+    </div>
+  </div>
+
+  <!-- Top Most Page Content -->
+  <div class="endor-Page-content endor-Panel">
+
+  </div>
+</div>
+
+</body>
+</html>
