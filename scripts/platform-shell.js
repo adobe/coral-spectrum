@@ -3,14 +3,18 @@
 /* global adobe */
 /* jshint devel:true */
 (function($){
+	window.adobe = window.adobe || {};
+
+	//Run jQuery in noConflict mode so that it will work in traditional SiteCatalyst. 
 	if (window.OM && OM.Config){
 		$.noConflict();
 	}
 
+	//Set the boundary where two rails can be open at the same time. 
 	CUI.Shell.COMPACT_WINDOW_WIDTH_BOUNDARY = 1300;
 
-	$(document).on('click', '.coral-Button--betaFeedback', function(){
-		console.log('inside on beta feedback click');
+	//Add a click event listener for the beta feedback button. 
+	$(document).on('click', '.js-beta-feedback-btn', function(){
 		if ($("#beta_feedback_iframe").length === 0) {
 			var betaFeedbackConfig = (window.OM && OM.Config) ? OM.Config.betaFeedbackConfig : adobe.analytics.betaFeedbackConfig;
 			var p = "?",
@@ -65,7 +69,6 @@
 		$('#more-popup').data('popover').hide();
 	});
 
-	window.adobe = window.adobe || {};
 	adobe.manuallyBootstrapShell = function(){
 		/**
 		 * Initialize Shell directly and don't wait for the cui-contentloaded.data event.
@@ -95,4 +98,22 @@
 		CUI.InnerRailToggle.init($('[data-manual-init~=inner-rail-toggle]'));
 		CUI.ReportSuiteSelector.init($('[data-manual-init~=report-suite-selector]'));
 	};
+
+	adobe.linkImsAccounts = function(){
+		var imsLinkingURL = (window.OM && OM.Config) ? OM.Config.imsLinkingURL : adobe.analytics.imsLinkingURL;
+
+		$.ajax ({ url: imsLinkingURL,
+        success: function(response) {
+            var jsonres = JSON.parse(response);
+            if (jsonres.ims_userid && jsonres.ims_userid !== ""){
+                $("#link-wizard-button").remove();
+            }
+        }
+    });
+	};
+
+	//Add a click event listener for the link accounts button. 
+	$(document).on('click', '.js-link-accounts-btn', function(){
+		window.startWizard();
+	});
 }(jQuery));
