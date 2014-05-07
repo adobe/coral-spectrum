@@ -55,10 +55,11 @@
 	});
 
 	//Dispatch the jQuery event as a prototype event.
-	$(document).on('report-suite-changed', function(e, rsid){
+	$(document).on('report-suite-changed', function(e, data){
 		if ( window.Prototype ) {
-			Event.fire(window.document, 'jq:report-suite-changed', {
-				rsid: rsid,
+			Event.fire(window.document, 'jq:' + CUI.ReportSuiteSelector.EVENT_REPORT_SUITE_CHANGED, {
+				rsid: data.rsid,
+				changeSuiteAndReload: data.changeSuiteAndReload,
 				initialSuite: e.initialSuite
 			});
 		}

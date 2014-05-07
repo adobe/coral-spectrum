@@ -76,7 +76,7 @@
 				}
 				thisWidget.selectedSuite = rsid;
 				ui.$triggerLink.setText(reportSuiteData.name);
-				if (confirmAndPost !== false && CUI.ReportSuiteSelector.reloadPage !== false) {
+				var changeSuiteAndReload = function (rsid) {
 					// Construct a form to be posted.
 					var $form = $('<form>')
 						.attr('method', 'POST')
@@ -86,7 +86,7 @@
 						.attr('type', 'hidden')
 						.attr('name', 'd_url')
 						.attr('id', 'switch_destination_url')
-						.val(window.btoa(location.href + window.location.hash))
+						.val(window.btoa(location.href))
 						.appendTo($form);
 					$('<input>')
 						.attr('type', 'hidden')
@@ -97,12 +97,18 @@
 					// Submit the form, thus making a POST request to the server
 					// and refreshing the page.
 					$form.submit();
+				};
+				if (confirmAndPost !== false && CUI.ReportSuiteSelector.reloadPage !== false) {
+					changeSuiteAndReload(rsid);
 				} else {
 					// Trigger a report-suite-changed event if we're not going to
 					// reload the page.
 					var suiteChangedEvent = $.Event(CUI.ReportSuiteSelector.EVENT_REPORT_SUITE_CHANGED);
 					suiteChangedEvent.initialSuite = initialSuite;
-					$(document).trigger(suiteChangedEvent, rsid);
+					$(document).trigger(suiteChangedEvent, {
+						rsid: rsid,
+						changeSuiteAndReload: changeSuiteAndReload
+					});
 				}
 			};
 
@@ -112,7 +118,7 @@
 				// Find the report suite that was selected to confirm it exists.
 				if (reportSuiteData.value === rsid) {
 					// If options.confirm is true then show a modal.
-					if (thisWidget.options.confirm && confirmAndPost) {
+					if (thisWidget.options.confirm && !initialSuite) {
 						// Get reference to the modal API.
 						var modal = ui.$modal.data('modal');
 						// If there is no modal API then no modal has been created yet.
@@ -133,7 +139,6 @@
 			// supplied RSID. Throw an error.
 			throw new Error("Report suite \"" + rsid + "\" was specified but none were found with that RSID.");
 		},
-
 		// PRIVATE: Builds all HTML elements required. (called from construct)
 		_buildElements: function () {
 
