@@ -1,0 +1,42 @@
+{
+  "info": {
+    "displayName": "Sally Springheart",
+    "title": "Social Marketing Manager",
+    "avatar": "/examples/shell-mac/images/user/avatar.png"
+  },
+  "actions": [
+    {
+      "id": "logout",
+      "url": "#",
+      "text": "Sign out"
+    },
+    {
+      "id": "settings",
+      "url": "#",
+      "text": "Account Settings"
+    }
+  ],
+  "organizations": [
+    {
+      "orgId": "",
+      "tenantId": "",
+      "active": true,
+      "name": "Volkswagen",
+      "avatar": ""
+    },
+    {
+      "orgId": "",
+      "tenantId": "",
+      "active": false,
+      "name": "Nike Basketball - Europe West",
+      "avatar": ""
+    },
+    {
+      "orgId": "",
+      "tenantId": "",
+      "active": true,
+      "name": "Nike Basketball - Europe East",
+      "avatar": ""
+    }
+  ]
+}

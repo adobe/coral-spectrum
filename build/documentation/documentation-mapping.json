@@ -1,0 +1,400 @@
+{
+  "documentation": {
+    "components": {
+      "base": {
+        "displayName": "Base Styles",
+        "related": []
+      },
+      "button": {
+        "displayName": "Button",
+        "related": [
+          "minimal-button",
+          "cycle-button"
+        ]
+      },
+      "button-group": {
+        "displayName": "ButtonGroup",
+        "related": [
+          "button"
+        ]
+      },
+      "checkbox": {
+        "displayName": "Checkbox",
+        "related": []
+      },
+      "decorated-textfield": {
+        "displayName": "DecoratedTextfield",
+        "related": [
+          "textfield",
+          "icon",
+          "minimal-button"
+        ]
+      },
+      "form": {
+        "displayName": "Form Layout",
+        "related": [
+          "textfield",
+          "input-group",
+          "radio",
+          "checkbox",
+          "button"
+        ]
+      },
+      "heading": {
+        "displayName": "Heading",
+        "related": []
+      },
+      "icon": {
+        "displayName": "Icon",
+        "related": []
+      },
+      "input-group": {
+        "displayName": "InputGroup",
+        "related": [
+          "textfield",
+          "decorated-textfield",
+          "button",
+          "datepicker",
+          "number-input"
+        ]
+      },
+      "link": {
+        "displayName": "Link",
+        "related": []
+      },
+      "list": {
+        "displayName": "List",
+        "related": []
+      },
+      "minimal-button": {
+        "displayName": "MinimalButton",
+        "related": [
+          "button",
+          "icon"
+        ]
+      },
+      "progress": {
+        "displayName": "Progress",
+        "related": []
+      },
+      "radio": {
+        "displayName": "Radio",
+        "related": [
+          "radio-group"
+        ]
+      },
+      "radio-group": {
+        "displayName": "RadioGroup",
+        "related": [
+          "radio"
+        ]
+      },
+      "table": {
+        "displayName": "Table",
+        "related": []
+      },
+      "textfield": {
+        "displayName": "Textfield",
+        "related": [
+          "decorated-textfield"
+        ]
+      },
+      "wait": {
+        "displayName": "Wait",
+        "related": [
+          "progress"
+        ]
+      },
+      "well": {
+        "displayName": "Well",
+        "related": []
+      },
+      "accordion": {
+        "displayName": "Accordion",
+        "jsDocSrc": "scripts/CUI.Accordion.js",
+        "related": [],
+        "dependencies": []
+      },
+      "alert": {
+        "displayName": "Alert",
+        "jsDocSrc": "scripts/CUI.Alert.js",
+        "related": [
+          "modal",
+          "popover"
+        ]
+      },
+      "autocomplete": {
+        "displayName": "Autocomplete",
+        "jsDocSrc": "scripts/CUI.Autocomplete.js",
+        "related": [
+          "select",
+          "select-list",
+          "tag-list"
+        ]
+      },
+      "datepicker": {
+        "displayName": "Datepicker",
+        "jsDocSrc": "scripts/CUI.Datepicker.js",
+        "related": [
+          "input-group",
+          "select",
+          "select-list",
+          "tag-list",
+          "popover"
+        ],
+        "dependencies": [
+          {
+            "moment.js": "http://momentjs.com"
+          }
+        ]
+      },
+      "modal": {
+        "displayName": "Modal",
+        "jsDocSrc": "scripts/CUI.Modal.js",
+        "related": [
+          "alert"
+        ]
+      },
+      "number-input": {
+        "displayName": "NumberInput",
+        "jsDocSrc": "scripts/CUI.NumberInput.js",
+        "related": []
+      },
+      "popover": {
+        "displayName": "Popover",
+        "jsDocSrc": "scripts/CUI.Popover.js",
+        "related": []
+      },
+      "select": {
+        "displayName": "Select",
+        "jsDocSrc": "scripts/CUI.Select.js",
+        "related": [
+          "select-list",
+          "tag-list"
+        ]
+      },
+      "selector": {
+        "displayName": "Selector",
+        "related": []
+      },
+      "switch": {
+        "displayName": "Switch",
+        "related": [
+          "checkbox"
+        ]
+      },
+      "tag-list": {
+        "displayName": "TagList",
+        "jsDocSrc": "scripts/CUI.TagList.js",
+        "related": []
+      },
+      "tooltip": {
+        "displayName": "Tooltip",
+        "jsDocSrc": "scripts/CUI.Tooltip.js"
+      },
+      "endor-registry": {
+        "displayName": "Endor.registry",
+        "jsDocSrc": "scripts/CUI.Endor.registry.js",
+        "related": [
+          "ShellWidget"
+        ]
+      },
+      "endor-store": {
+        "displayName": "Endor.store",
+        "jsDocSrc": "scripts/CUI.Endor.store.js",
+        "related": [
+          "ShellWidget"
+        ]
+      },
+      "shell-widget": {
+        "displayName": "Shell Widget",
+        "jsDocSrc": "scripts/shared/CUI.ShellWidget.js",
+        "related": [
+          "Endor.registry",
+          "Endor.store"
+        ]
+      },
+      "closable": {
+        "displayName": "Closable",
+        "jsDocSrc": "scripts/shared/CUI.Closable.js",
+        "related": [
+          "ShellWidget"
+        ]
+      },
+      "shell": {
+        "displayName": "Shell",
+        "jsDocSrc": "scripts/components/CUI.Shell.js",
+        "related": [
+          "ShellWidget"
+        ]
+      },
+      "page": {
+        "displayName": "Page",
+        "jsDocSrc": "scripts/components/CUI.Page.js",
+        "related": [
+          "ShellWidget",
+          "Shell"
+        ]
+      },
+      "action-bar": {
+        "displayName": "ActionBar",
+        "jsDocSrc": "scripts/components/CUI.ActionBar.js",
+        "related": [
+          "ShellWidget",
+          "Page"
+        ]
+      },
+      "black-bar": {
+        "displayName": "BlackBar",
+        "jsDocSrc": "scripts/components/CUI.BlackBar.js",
+        "related": [
+          "ShellWidget",
+          "Page"
+        ]
+      },
+      "brand": {
+        "displayName": "Brand",
+        "jsDocSrc": "scripts/components/CUI.Brand.js",
+        "related": [
+          "ShellWidget",
+          "Closable",
+          "Page",
+          "OuterRail",
+          "BreadcrumbBar"
+        ]
+      },
+      "breadcrumb-bar": {
+        "displayName": "BreadcrumbBar",
+        "jsDocSrc": "scripts/components/CUI.BreadcrumbBar.js",
+        "related": [
+          "ShellWidget",
+          "Closable",
+          "Shell",
+          "OuterRail",
+          "Brand"
+        ]
+      },
+      "column-view": {
+        "displayName": "ColumnView",
+        "jsDocSrc": "scripts/components/CUI.ColumnView.js",
+        "related": []
+      },
+      "crumbs": {
+        "displayName": "Crumbs",
+        "jsDocSrc": "scripts/components/CUI.Crumbs.js",
+        "related": [
+          "ShellWidget",
+          "Shell",
+          "Breadcrumb Bar"
+        ]
+      },
+      "footer": {
+        "displayName": "Footer",
+        "jsDocSrc": "scripts/components/CUI.Footer.js",
+        "related": [
+          "ShellWidget",
+          "Page"
+        ]
+      },
+      "inner-rail": {
+        "displayName": "InnerRail",
+        "jsDocSrc": "scripts/components/CUI.InnerRail.js",
+        "related": [
+          "ShellWidget",
+          "Page",
+          "BreadcrumbBar"
+        ]
+      },
+      "inner-rail-toggle": {
+        "displayName": "InnerRailToggle",
+        "jsDocSrc": "scripts/components/CUI.InnerRailToggle.js",
+        "related": [
+          "ShellWidget",
+          "Page",
+          "InnerRail"
+        ]
+      },
+      "navigation-view": {
+        "displayName": "NavigationView",
+        "jsDocSrc": "scripts/components/CUI.NavigationView.js",
+        "related": [
+          "ShellWidget"
+        ]
+      },
+      "outer-rail": {
+        "displayName": "OuterRail",
+        "jsDocSrc": "scripts/components/CUI.OuterRail.js",
+        "related": [
+          "ShellWidget",
+          "Closable",
+          "Page"
+        ]
+      },
+      "outer-rail-toggle": {
+        "displayName": "OuterRailToggle",
+        "jsDocSrc": "scripts/components/CUI.OuterRailToggle.js",
+        "related": [
+          "ShellWidget",
+          "OuterRail",
+          "Page"
+        ]
+      },
+      "shell-mac": {
+        "displayName": "Shell Mac",
+        "jsDocSrc": "scripts/CUI.ShellMac.js",
+        "related": []
+      },
+      "help-popover": {
+        "displayName": "Help Popover",
+        "jsDocSrc": "scripts/components/CUI.HelpPopover.js",
+        "related": []
+      },
+      "user-profile": {
+        "displayName": "User Profile Button",
+        "jsDocSrc": "scripts/components/CUI.UserProfile.js",
+        "related": [
+          "User-Account-Popover"
+        ]
+      },
+      "user-account-popover": {
+        "displayName": "User Account Popover",
+        "jsDocSrc": "scripts/components/CUI.UserAccountPopover.js",
+        "related": [
+          "User-Profile"
+        ]
+      },
+      "badge": {
+        "displayName": "Notifications Badge",
+        "jsDocSrc": "scripts/components/CUI.Badge.js",
+        "related": [
+          "Notifications-Popover"
+        ]
+      },
+      "notifications-popover": {
+        "displayName": "Notifications Popover",
+        "jsDocSrc": "scripts/components/CUI.NotificationsPopover.js",
+        "related": [
+          "Notifications-Badge"
+        ]
+      },
+      "mac-api-service": {
+        "displayName": "Mac Api Service",
+        "jsDocSrc": "scripts/shared/CUI.MacApiService.js",
+        "related": []
+      },
+      "mac-api-service-util": {
+        "displayName": "Mac Api Service Util",
+        "jsDocSrc": "scripts/shared/CUI.MacApiService.util.js",
+        "related": []
+      }
+    },
+    "shared": {
+      "styles": {
+        "displayName": "Styles"
+      },
+      "scripts": {
+        "displayName": "Components"
+      }
+    }
+  }
+}
