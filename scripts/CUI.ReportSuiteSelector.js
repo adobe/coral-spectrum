@@ -16,7 +16,13 @@
 			// If true, will show a confirmation dialog asking the user to confirm report suite change.
 			confirm: false,
 			// The report suite that should be selected when this component is initialized.
-			rsid: null
+			rsid: null, 
+			// The l10n show all label.
+			showAllLabel: "Show All",
+			// The l10n search placeholder label.
+			searchPlaceholderLabel: "Search Report Suites",
+			// The l10n label to represent no report suites.
+			noReportSuitesLabel: "No report suites."
 		},
 		construct: function(options) {
 
@@ -195,7 +201,7 @@
 			var $searchBox = $('<input>')
 				.addClass('coral-DecoratedTextfield-input coral-Textfield')
 				.attr('type', 'text')
-				.attr('placeholder', 'Search Report Suites')
+				.attr('placeholder', this.options.searchPlaceholderLabel)
 				.appendTo($searchBoxContainer);
 
 			// Add a filter input clear button.
@@ -214,7 +220,7 @@
 			// Create a "show all" link that only shows if the search box is empty.
 			var $showAllLink = $('<a>')
 				.addClass('endor-List-item show-all-link')
-				.text('Show All')
+				.text(this.options.showAllLabel)
 				.appendTo($container);
 
 			/*** MODAL MARKUP ***/
@@ -540,7 +546,7 @@
 			if (data.length === 0) {
 				$('<li>')
 					.addClass('endor-List-item')
-					.text('No report suites.')
+					.text(this.options.noReportSuitesLabel)
 					.appendTo(ui.$suiteList);
 			}
 
