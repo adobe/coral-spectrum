@@ -1,7 +1,7 @@
 CoralUI 2
 =========
 
-The master branch currently represents the modularized build of coral. If you wish to use an older version, check the [release/1.x branch](https://git.corp.adobe.com/Coral/CoralUI/tree/release/1.x) branch.
+The master branch currently represents the modularized build of coral. If you wish to use an older version, check the [release/1.x branch](https://git.corp.adobe.com/Coral/coralui-1.x) repository.
 
 ## Using gits
 1. Checking out the repository
