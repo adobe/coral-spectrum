@@ -5,7 +5,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://git.corp.adobe.com/Coral/CoralUI"
+    "url": "https://git.corp.adobe.com/Coral/coralui"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
