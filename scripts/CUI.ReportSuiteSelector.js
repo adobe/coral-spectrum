@@ -16,7 +16,7 @@
 			// If true, will show a confirmation dialog asking the user to confirm report suite change.
 			confirm: false,
 			// The report suite that should be selected when this component is initialized.
-			rsid: null, 
+			rsid: null,
 			// The l10n show all label.
 			showAllLabel: "Show All",
 			// The l10n search placeholder label.
@@ -152,7 +152,7 @@
 			var $link = $('<a>')
 				.addClass('coral-ButtonGroup-item coral-Button coral-Button--secondary coral-Button--quiet coral-Button--rsidSelector')
 				.attr('data-toggle', 'popover')
-				.attr('data-target', '#reportSuiteSelector:' + CUI.ReportSuiteSelector.count)
+				.attr('data-target', '#reportSuiteSelector-' + CUI.ReportSuiteSelector.count)
 				.appendTo(this.$element);
 
 			// Helper function for updating the link text so it always includes the icon.
@@ -169,7 +169,7 @@
 			var $container = $('<div>')
 				.attr('data-align-from', this.options.alignFrom)
 				.attr('data-point-from', this.options.pointFrom)
-				.attr('id', 'reportSuiteSelector:' + CUI.ReportSuiteSelector.count)
+				.attr('id', 'reportSuiteSelector-' + CUI.ReportSuiteSelector.count)
 				.addClass('coral-Popover report-suite-selector')
 				.appendTo(this.$element);
 
@@ -222,6 +222,7 @@
 				.addClass('endor-List-item show-all-link')
 				.text(this.options.showAllLabel)
 				.appendTo($container);
+			$showAllLink.hidden = false;
 
 			/*** MODAL MARKUP ***/
 
@@ -406,6 +407,7 @@
 				thisWidget._loadData(true, function () {
 					thisWidget._populateList();
 					ui.$showAllLink.hide();
+					ui.$showAllLink.hidden = true;
 
 					// Select the top report suite.
 					ui.$selectedSuite = ui.$suiteList
@@ -462,12 +464,15 @@
 			var data = this._cachedReportSuiteData,
 				thisWidget = this,
 				ui = thisWidget.uiElements,
-				searchText = ui.$searchBox.val();
+				searchText = ui.$searchBox.val(),
+				placeholderText = ui.$searchBox.attr('placeholder'),
+				isZeroOrPlaceholder = searchText.length === 0 || searchText === placeholderText;
 
 			// If there is search text then load full data set if it hasn't been loaded already.
 			// We pass in _populateList as a callback so this method will re-run after the full list is loaded.
-			if (searchText.length > 0 && ui.$showAllLink.is(':visible')) {
+			if (!isZeroOrPlaceholder && !ui.$showAllLink.hidden) {
 				ui.$showAllLink.hide();
+				ui.$showAllLink.hidden = true;
 				thisWidget._loadData(true, function () {
 					thisWidget._populateList();
 					// Select the top report suite.
@@ -488,7 +493,7 @@
 			}
 
 			// Only load the item into the list if there is no search text or the item matches the search text.
-			if (searchText.length > 0) {
+			if (!isZeroOrPlaceholder) {
 				data = this._cachedReportSuiteData.filter(function (item) {
 					var itemName = item.name.toLowerCase(),
 						score = 0,
@@ -538,10 +543,10 @@
 					.attr('data-rsid', reportSuiteData.value)
 					.text(reportSuiteData.name)
 					.appendTo(ui.$suiteList);
-				
+
 				$reportSuiteListItem.on('click', reportSuiteClick);
 			}
-			
+
 			// If there are no cached report suite items then display "no report suites".
 			if (data.length === 0) {
 				$('<li>')
@@ -556,7 +561,7 @@
 
 	// Static event constants.
 	CUI.ReportSuiteSelector.EVENT_REPORT_SUITE_CHANGED = 'report-suite-changed';
-	
+
 	/*
 	 * Coral jazz...
 	 */
