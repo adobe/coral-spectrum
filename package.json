@@ -47,8 +47,8 @@
     "coralui-component-taglist": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-taglist.git#2.2.7",
     "coralui-component-tooltip": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-tooltip.git#2.1.5",
     "coralui-component-shell-config": "git+ssh://git@git.corp.adobe.com:AdobeAnalyticsWeb/coralui-component-shell-config.git#0.0.2",
-    "coralui-component-shell": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-shell.git#3.0.5",
-    "coralui-component-shell-mac": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-shell-mac.git#0.0.14"
+    "coralui-component-shell": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-shell.git#3.0.6",
+    "coralui-component-shell-mac": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-shell-mac.git#0.0.15"
   },
   "coral": {
     "imports": [
