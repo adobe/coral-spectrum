@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - InnerRail</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light docs-Background u-coral-clearFix">
+    <article class="docs-Component">
+      <section class="docs-Component-metadata">
+        <div class="docs-Component-header">
+          <!-- name of the component-->
+          <h1 class="coral-Heading coral-Heading--1 docs-Component-name">InnerRail</h1><span class="docs-Component-version">Current Version: <strong>3.0.6-pre</strong></span>
+        </div>
+        <div class="coral-Component-related">Related Components: <a href="shellwidget.html" class="coral-Link">ShellWidget</a>, <a href="page.html" class="coral-Link">Page</a>, <a href="breadcrumbbar.html" class="coral-Link">BreadcrumbBar</a>
+        </div>
+        <div class="coral-Component-github"> Github: <a href="https://git.corp.adobe.com/Coral/coralui-component-shell" class="coral-Link">coralui-component-shell</a>
+        </div>
+        <!-- description is loaded from the template-->
+      </section>
+      <section class="docs-Component-documentation">
+        <p>The inner rail shows on the left-hand side of the main page, and on the right hand side of the outer-rail. When horizontal space is limited, the inner and outer rail may not be shown simultaniously.</p>
+        <p>The inner rail doesn't show correctly outside the context of CUI.Page and is hence not displayed on this page. This is how the inner rail would appear inside the context of CUI.Page:</p>
+        <p><img src="resources/inner-rail.gif"></p>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">Markup Example</h3>
+              </div>
+                  <pre id="guide-ba0b8c53-f4ff-42ed-8bf0-fe8a23f49486" data-src-id="guide-ba0b8c53-f4ff-42ed-8bf0-fe8a23f49486" class="prettyprint docs-Example-snippet">
+                    <div data-init="inner-rail">
+                      <a class="coral-ColumnView-item coral-MultiPanel is-active" id="innerRail1">Sub 1</a>
+                      <a class="coral-ColumnView-item coral-MultiPanel" id="innerRail2">Sub 2</a>
+                    </div>
+                    </pre>
+            </section>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">JavaScript Example</h3>
+              </div>
+              <p>The following is an example of the HTML without a <code>data-init</code> initializer.</p>
+                  <pre id="guide-54c9b304-06c6-4131-8fb1-42e780cb06ec" data-src-id="guide-54c9b304-06c6-4131-8fb1-42e780cb06ec" class="prettyprint docs-Example-snippet">
+                    <div id="myInnerRail">
+                      <a class="coral-ColumnView-item coral-MultiPanel is-active" id="innerRail1">Sub 1</a>
+                      <a class="coral-ColumnView-item coral-MultiPanel" id="innerRail2">Sub 2</a>
+                    </div>
+                    </pre>
+              <p>The following JavaScript manually initializes the component on page initialization.</p>
+                  <pre id="guide-a6be5a5c-31e1-485f-863d-8e09afd3a4ef" data-src-id="guide-a6be5a5c-31e1-485f-863d-8e09afd3a4ef" class="prettyprint docs-Example-snippet">
+                    <script>
+                      $(document).ready(function() {
+                        var innerRail = new CUI.InnerRail({
+                          element: '#myInnerRail'
+                        });
+                      });
+                    </script>
+                    </pre>
+            </section>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+              </div>
+              <section class="guide-jsDocFragement">
+    <div class="content">
+        <!--<h1 class="line">Class: InnerRail</h1>-->
+        
+          
+
+
+
+<section>
+
+<h1 class="coral-Heading coral-Heading--1 u-line">InnerRail
+ JSDoc</h1>
+
+    <div class="class-description">Class Description: Widget that holds a number of panels, one or none of which may appear at the left hand side
+of the page's main content area.</div>
+
+
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Extends</h3>
+
+        <ul>
+            <li>CUI.ShellWidget</li>
+        </ul>
+    
+
+    
+        
+<dt>
+    <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Constructor</h3>
+
+    
+</dt>
+
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">options</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last">
+                
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+		<th class="coral-Table-headerCell">Optional</th>
+		
+
+		
+		<th class="coral-Table-headerCell">Default</th>
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">activePanelId</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">string</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    ""
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">The value of the id attribute of the panel that should be set active. Post initialization, update this option using the <code>setActivePanel</code> or <code>setActivePanelId</code> method.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+            </td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.InnerRail.js, line 30</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+    
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+       <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Methods</h3>
+
+        <dl>
+            
+<dt>
+    <h3 class="name" id="addPanel"><span class="type-signature"></span>addPanel</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Add a panel.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">panel</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">jQuery</span>|<span class="param-type">string</span>|<span class="param-type">Array</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last">The panel(s) to add.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    The panel as added.
+    
+    {<span class="param-type">jQuery</span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.InnerRail.js, line 80</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="getActivePanel"><span class="type-signature"></span>getActivePanel</h3>
+
+    
+</dt>
+
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    The $element that is currently active.
+    
+    {<span class="param-type">jQuery</span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.InnerRail.js, line 36</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="getActivePanelId"><span class="type-signature"></span>getActivePanelId</h3>
+
+    
+</dt>
+
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    The value of the id attribute of the panel that is currently active.
+    
+    {<span class="param-type">string</span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.InnerRail.js, line 43</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="removePanel"><span class="type-signature"></span>removePanel</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Remove a panel. If the panel that is removed is the active panel,
+then the active panel becomes undefined.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">The</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">jQuery</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last">panel to remove</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.InnerRail.js, line 97</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="setActivePanel"><span class="type-signature"></span>setActivePanel</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Set what panel should be active. Setting an invalid element or null
+causes the inner rail to close.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">panel</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">jQuery</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last">The panel to activate.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.InnerRail.js, line 54</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="setActivePanelId"><span class="type-signature"></span>setActivePanelId</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Set what panel should be active, by passing its id. Setting an
+id that does not resolve to a panel results in the inner rail
+closing.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">id</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last"></td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.InnerRail.js, line 66</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+        
+    </div>
+   
+              </section>
+            </section>
+      </section>
+    </article>
+  </body>
+</html>

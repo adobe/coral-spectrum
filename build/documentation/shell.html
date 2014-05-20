@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Shell</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light docs-Background u-coral-clearFix">
+    <article class="docs-Component">
+      <section class="docs-Component-metadata">
+        <div class="docs-Component-header">
+          <!-- name of the component-->
+          <h1 class="coral-Heading coral-Heading--1 docs-Component-name">Shell</h1><span class="docs-Component-version">Current Version: <strong>3.0.6-pre</strong></span>
+        </div>
+        <div class="coral-Component-related">Related Components: <a href="shellwidget.html" class="coral-Link">ShellWidget</a>
+        </div>
+        <div class="coral-Component-github"> Github: <a href="https://git.corp.adobe.com/Coral/coralui-component-shell" class="coral-Link">coralui-component-shell</a>
+        </div>
+        <!-- description is loaded from the template-->
+      </section>
+      <section class="docs-Component-documentation">
+        <style>
+          .frame {
+            width: 100%;
+            height: 500px;
+            border: 0;
+          }
+          
+        </style>
+        <p>The shell widget orchestrates the shell application's breadcrumb bar and the remainder of the page. It may also propagate brand settings to both the breadcrumb bar, and the outer rail's brand section.</p>
+        <p>The shell widget is expected to be attached to the body tag. Because of this, iframes have been used in the examples below.</p>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">Markup Example</h3>
+              </div>
+              <p>The following is an example of a shell built from markup. Please view the source of <a class="coral-Link" href="resources/shell-declarative.html" target="_blank">this page</a> to see how this was created.</p>
+              <iframe src="resources/shell-declarative.html" class="frame"></iframe>
+            </section>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">JavaScript Example</h3>
+              </div>
+              <p>The following is an example of a shell built primarily from JavaScript. Please view the source of <a class="coral-Link" href="resources/shell-imperative.html" target="_blank">this page</a> to see how this was created.</p>
+              <iframe src="resources/shell-imperative.html" class="frame"></iframe>
+            </section>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+              </div>
+              <section class="guide-jsDocFragement">
+    <div class="content">
+        <!--<h1 class="line">Class: Shell</h1>-->
+        
+          
+
+
+
+<section>
+
+<h1 class="coral-Heading coral-Heading--1 u-line">Shell
+ JSDoc</h1>
+
+    <div class="class-description">Class Description: CUI.Shell manages inter shell widget communication and state keeping.</div>
+
+
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Extends</h3>
+
+        <ul>
+            <li>CUI.ShellWidget</li>
+        </ul>
+    
+
+    
+        
+<dt>
+    <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Constructor</h3>
+
+    
+</dt>
+
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">options</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last">
+                
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+		<th class="coral-Table-headerCell">Optional</th>
+		
+
+		
+		<th class="coral-Table-headerCell">Default</th>
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">element</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">jQuery</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                  No<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">The widget's target element. Expected to be the document's body tag.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">brandIcon</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">string</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    null
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">A string that holds the classes that select the icon that should be shown as the application brand.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">brandTitle</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">string</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    null
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">A string that holds the title of the application, as should be shown in the brand areas.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">brandHref</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">string</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    null
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">A string that holds the URL that the browser should load on the brand icon or title being clicked.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">generateBreadcrumbBar</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">boolean</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">When this option is set to true, the widget will generate a breadcrumb bar and insert it on the DOM.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">breadcrumbBarOptions</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    {isClosed: true}
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">The options that the widget will forward to CUI.BreadcrumbBar on constructing the bar in response to the generateBreadcrumbBar flag being raised.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">generatePage</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">boolean</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">When this option is set to true, then the widget will generate a shell page and insert it on the DOM.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">pageOptions</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    {generateOuterRail: true, generateInnerRail: true, generateBlackBar: true, generateFooter: true}
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">The options that the widget will forward to CUI.Page on constructing the page in response to the generatePage flag being raised.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+            </td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Shell.js, line 56</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+    
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+        
+    </div>
+   
+              </section>
+            </section>
+      </section>
+    </article>
+  </body>
+</html>

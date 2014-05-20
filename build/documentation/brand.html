@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Brand</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light docs-Background u-coral-clearFix">
+    <article class="docs-Component">
+      <section class="docs-Component-metadata">
+        <div class="docs-Component-header">
+          <!-- name of the component-->
+          <h1 class="coral-Heading coral-Heading--1 docs-Component-name">Brand</h1><span class="docs-Component-version">Current Version: <strong>3.0.6-pre</strong></span>
+        </div>
+        <div class="coral-Component-related">Related Components: <a href="shellwidget.html" class="coral-Link">ShellWidget</a>, <a href="closable.html" class="coral-Link">Closable</a>, <a href="page.html" class="coral-Link">Page</a>, <a href="outerrail.html" class="coral-Link">OuterRail</a>, <a href="breadcrumbbar.html" class="coral-Link">BreadcrumbBar</a>
+        </div>
+        <div class="coral-Component-github"> Github: <a href="https://git.corp.adobe.com/Coral/coralui-component-shell" class="coral-Link">coralui-component-shell</a>
+        </div>
+        <!-- description is loaded from the template-->
+      </section>
+      <section class="docs-Component-documentation">
+        <p>Brand is a component that displays a shell application's brand usually consisting of an icon followed by a label. Brand expects its target element to be an anchor.</p>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">Markup Example</h3>
+              </div>
+                  <div id="guide-c28fdbb5-4208-446c-91bf-752b72970dc4" class="docs-Example-markup u-columnLarge">
+                    <a data-init="brand" data-title="Hello World" data-href="http://example.com" data-icon="coral-Icon coral-Icon--heart coral-Icon--sizeM">
+                    </a>
+                    
+                  </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                      <pre data-src-id="guide-c28fdbb5-4208-446c-91bf-752b72970dc4" class="docs-Example-toggleMarkup prettyprint"></pre>
+            </section>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">JavaScript Example</h3>
+              </div>
+              <p>The following is an example of the HTML without a <code>data-init</code> initializer.</p>
+                  <div id="guide-94eb96fb-9ccf-4c30-a0cd-286d68c8e19a" class="docs-Example-markup u-columnLarge">
+                    <a id="myBrand"></a>
+                    
+                  </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                      <pre data-src-id="guide-94eb96fb-9ccf-4c30-a0cd-286d68c8e19a" class="docs-Example-toggleMarkup prettyprint"></pre>
+              <p>The following JavaScript manually initializes the component on page initialization.</p>
+                  <pre id="guide-ad9c61b9-acbe-4bf8-9b79-8b24027b5737" data-src-id="guide-ad9c61b9-acbe-4bf8-9b79-8b24027b5737" class="prettyprint docs-Example-snippet">
+                    <script>
+                      $(document).ready(function() {
+                        var brand = new CUI.Brand({
+                          element: '#myBrand',
+                          title: 'Hello World',
+                          href: 'http://example.com',
+                          icon: 'coral-Icon coral-Icon--heart coral-Icon--sizeM'
+                        });
+                      });
+                    </script>
+                    </pre>
+            </section>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+              </div>
+              <section class="guide-jsDocFragement">
+    <div class="content">
+        <!--<h1 class="line">Class: Brand</h1>-->
+        
+          
+
+
+
+<section>
+
+<h1 class="coral-Heading coral-Heading--1 u-line">Brand
+ JSDoc</h1>
+
+    <div class="class-description">Class Description: Defines the appearance of the application bar that's usually placed in the outer rail.</div>
+
+
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Extends</h3>
+
+        <ul>
+            <li>CUI.Closable</li>
+        </ul>
+    
+
+    
+        
+<dt>
+    <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Constructor</h3>
+
+    
+</dt>
+
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">options</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last">
+                
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+		<th class="coral-Table-headerCell">Optional</th>
+		
+
+		
+		<th class="coral-Table-headerCell">Default</th>
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">icon</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">string</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    "coral-Icon coral-Icon--hammer coral-Icon--sizeM"
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">One or more (space delimited) class names that will be set on the internal icon tag in order to depict the desired icon. Use the setIcon method to update this option from JavaScript.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">title</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">string</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    "CoralUI"
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">The title of the brand. Use the setTitle method to update this option from JavaScript.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">href</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">string</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    "http://coralui.corp.adobe.com"
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">The URL to open when the brand icon or text is clicked. Use the setHref method to update this option from JavaScript.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+            </td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Brand.js, line 31</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+    
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Members</h3>
+
+        <dl>
+            
+<dt>
+    <h3 class="name" id="EVENT_CLICK"><span class="type-signature">&lt;static> </span>EVENT_CLICK<span class="type-signature"> :string</span></h3>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        The type of the event that is triggered when the brand icon or text is clicked (and href is falsy)
+    </div>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Brand.js, line 191</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        </dl>
+    
+
+    
+       <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Methods</h3>
+
+        <dl>
+            
+<dt>
+    <h3 class="name" id="setHref"><span class="type-signature"></span>setHref</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Update the brand's link. The newly set value is store on the widget's options object.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">value</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last">The URL to open when the brand icon or text is clicked.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Brand.js, line 50</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="setIcon"><span class="type-signature"></span>setIcon</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Update the classes that are to be set on the brand's internal icon element.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">value</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">string</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last">One or more (space delimited) class names that will be set on the internal icon tag in order to depict the desired icon.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Brand.js, line 62</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="setTitle"><span class="type-signature"></span>setTitle</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Update the brand's title text. The newly set value is store on the widget's options object.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">value</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">string</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last">The title text.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Brand.js, line 38</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+        <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Events</h3>
+
+        <dl>
+            
+<dt>
+    <h3 class="name" id="event:cui-brand-click.">cui-brand-click.</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Event dispatched when the brand gets clicked ONLY when the href option resolves to 'false'. It is recommended to use CUI.Brand.EVENT_CLICK instead of this literal.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Brand.js, line 175</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        </dl>
+    
+</article>
+
+</section>
+
+
+
+
+        
+    </div>
+   
+              </section>
+            </section>
+      </section>
+    </article>
+  </body>
+</html>

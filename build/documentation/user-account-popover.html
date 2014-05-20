@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - User Account Popover</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light docs-Background u-coral-clearFix">
+    <article class="docs-Component">
+      <section class="docs-Component-metadata">
+        <div class="docs-Component-header">
+          <!-- name of the component-->
+          <h1 class="coral-Heading coral-Heading--1 docs-Component-name">User Account Popover</h1><span class="docs-Component-version">Current Version: <strong>0.0.15</strong></span>
+        </div>
+        <div class="coral-Component-related">Related Components: <a href="user-profile.html" class="coral-Link">User-Profile</a>
+        </div>
+        <div class="coral-Component-github"> Github: <a href="https://git.corp.adobe.com/Coral/coralui-component-shell-mac" class="coral-Link">coralui-component-shell-mac</a>
+        </div>
+        <!-- description is loaded from the template-->
+      </section>
+      <section class="docs-Component-documentation">
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">UserAccountPopover JavaScript</h3>
+              </div>
+              <p>
+                The UserAccountPopover is one of many components that are specific to Digital Marketing.
+                It can be instantiated using a data-init flag or by invoking JavaScript directly.
+                
+              </p>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Default Example - No User</h3>
+                  <p>
+                    NOTE: If no user object is set the popover will just display a spinner unless markup is provided by the server.
+                    This is on purpose because it is assuming that updateUser will be called when a valid user object exists. This is
+                    particularly useful if you have your own custom way of loading in a user. If you want to create a popover without
+                    providing a user please provide all of your own markup.
+                    
+                  </p>
+                      <div id="guide-c5391c0e-4d3a-4a5c-af4d-81293d1aa432" class="docs-Example-markup u-columnLarge">
+                        <div class="endor-Panel-header endor-BlackBar">
+                          <div class="endor-BlackBar-right">
+                            <a data-init="user-profile" href="#popover1"></a>
+                          </div>
+                        </div>
+                        <div data-init="user-account-popover" id="popover1"></div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-c5391c0e-4d3a-4a5c-af4d-81293d1aa432" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Single Tenant User</h3>
+                      <div id="guide-f0c86c07-6012-43c5-a95e-c8518084ea70" class="docs-Example-markup u-columnLarge">
+                        <div class="endor-Panel-header endor-BlackBar">
+                          <div class="endor-BlackBar-right">
+                            <a data-init="user-profile" href="#popover2" data-user-url="/examples/shell-mac/content/user-single-tenant.json"></a>
+                          </div>
+                        </div>
+                        <div data-init="user-account-popover" id="popover2" data-user-url="/examples/shell-mac/content/user-single-tenant.json"></div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-f0c86c07-6012-43c5-a95e-c8518084ea70" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Multi Tenant User</h3>
+                      <div id="guide-aae069c7-6f29-4105-81b4-c75aefcd56a1" class="docs-Example-markup u-columnLarge">
+                        <div class="endor-Panel-header endor-BlackBar">
+                          <div class="endor-BlackBar-right">
+                            <a data-init="user-profile" href="#popover3" data-user-url="/examples/shell-mac/content/user-multi-tenant.json"></a>
+                          </div>
+                        </div>
+                        <div data-init="user-account-popover" id="popover3" data-user-url="/examples/shell-mac/content/user-multi-tenant.json"></div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-aae069c7-6f29-4105-81b4-c75aefcd56a1" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Instantiate using JavaScript</h3>The following Javascript manually initializes the component on page initialization.
+                      <pre id="guide-9f70709e-6eb5-4f71-9759-d910737f0ce9" data-src-id="guide-9f70709e-6eb5-4f71-9759-d910737f0ce9" class="prettyprint docs-Example-snippet">
+                        <script>
+                          $(document).ready(function(){
+                            var helpPopover = new CUI.UserProfile({
+                              element: '#user-btn',
+                              user: {
+                                "info": {
+                                  "displayName": "Test User",
+                                  "title": "Awesome",
+                                  "avatar": "/examples/shell-mac/images/user/avatar.png"
+                                },
+                                "actions": [],
+                                "organizations": []
+                              }
+                            });
+                          });
+                        </script>
+                        </pre>
+            </section>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+              </div>
+              <section class="guide-jsDocFragement">
+    <div class="content">
+        <!--<h1 class="line">Class: UserAccountPopover</h1>-->
+        
+          
+
+
+
+<section>
+
+<h1 class="coral-Heading coral-Heading--1 u-line">UserAccountPopover
+ JSDoc</h1>
+
+    <div class="class-description">Class Description: This widget controls the UserAccountPopover component
+
+This class will most likely be used in conjunction with the BlackBar component but can be initialized
+elsewhere if desired. The data that is passed into this class matches the format defined by the marketing cloud
+unified header. Specifically the API to get the user /content/mac/default/header/user.jsonp. If you have set the
+active org id (data-active-org-id="customid@AdobeOrg") and set hasImsSession (data-has-ims-session="true")
+on the shell component then all data will be loaded from the marketing cloud api's.</div>
+
+
+
+    <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Code</h3>
+    <dd>
+    <h3>Example User Object</h3>
+  
+<pre class="prettyprint jsDocExample">{
+   "info": {
+     "displayName": "Sally Social",
+     "title": "Marketer",
+     "avatar": "../images/user/avatar.png",
+   },
+   "actions": [
+     {
+       "id": "logout",
+       "url": "",
+       "text": "Sign out"
+     },
+     {
+       "id": "settings",
+       "url": "",
+       "text": "Account Settings"
+     }
+   ],
+   "organizations": [
+     {
+       "orgId": "",
+       "tenantId": "",
+       "active": false,
+       "name": "Obu Eng SC",
+       "avatar": ""
+     },
+     {
+       "orgId": "",
+       "tenantId": "",
+       "active": true,
+       "name": "Tartan Dev",
+       "avatar": ""
+     }
+   ]
+}
+
+For a reference to the marketing cloud header API's please refer to https://wiki.corp.adobe.com/display/marketingcloud/Unified+Header</pre>
+<h3>Instantiate with JavaScript</h3>
+  
+<pre class="prettyprint jsDocExample">new CUI.UserAccountPopover({
+     element: '#myElement'
+     config: ConfigObject
+});</pre>
+
+    </dd>
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Extends</h3>
+
+        <ul>
+            <li>CUI.Popover</li>
+        </ul>
+    
+
+    
+        
+<dt>
+    <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Constructor</h3>
+
+    
+</dt>
+
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">options</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last"></td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.UserAccountPopover.js, line 68</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+    
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Members</h3>
+
+        <dl>
+            
+<dt>
+    <h3 class="name" id="defaults"><span class="type-signature"></span>defaults<span class="type-signature"></span></h3>
+
+    
+</dt>
+<dd>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.UserAccountPopover.js, line 81</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+
+    
+        <h4>Example</h4>
+        <h3>Default Parameters</h3>
+  
+<pre class="prettyprint jsDocExample">{
+   user: null,
+   userUrl: null,
+   customLogout: false
+}</pre>
+
+    
+</dd>
+
+        </dl>
+    
+
+    
+       <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Methods</h3>
+
+        <dl>
+            
+<dt>
+    <h3 class="name" id="updateUser"><span class="type-signature"></span>updateUser</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Public method for updating the UI for the user by injecting a new user object.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">user</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last"></td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.UserAccountPopover.js, line 91</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+        
+    </div>
+   
+              </section>
+            </section>
+      </section>
+    </article>
+  </body>
+</html>

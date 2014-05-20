@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Footer</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light docs-Background u-coral-clearFix">
+    <article class="docs-Component">
+      <section class="docs-Component-metadata">
+        <div class="docs-Component-header">
+          <!-- name of the component-->
+          <h1 class="coral-Heading coral-Heading--1 docs-Component-name">Footer</h1><span class="docs-Component-version">Current Version: <strong>3.0.6-pre</strong></span>
+        </div>
+        <div class="coral-Component-related">Related Components: <a href="shellwidget.html" class="coral-Link">ShellWidget</a>, <a href="page.html" class="coral-Link">Page</a>
+        </div>
+        <div class="coral-Component-github"> Github: <a href="https://git.corp.adobe.com/Coral/coralui-component-shell" class="coral-Link">coralui-component-shell</a>
+        </div>
+        <!-- description is loaded from the template-->
+      </section>
+      <section class="docs-Component-documentation">
+        <p>The footer gets displayed at the bottom of a shell's main page area. Its styling is such that it will stick to the bottom of the window when the page content fits within the available vertical space, but will trail the page content when it doesn't fit.</p>
+        <p>The widget shows a default copyright text (that can be reset) and allows for adding a number of footer links. Links can be preset via the DOM (see example) and be added and removed via JavaScript (see <code>addItem()</code> and <code>removeItem()</code>).</p>
+        <p>When Footer is used outside the context of CUI.Page, it will not display correctly, hence the examples below are set to not show at all. This is how the footer would appear inside the context of CUI.Page:</p>
+        <p><img src="resources/footer.gif"></p>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">Markup Examples</h3>
+              </div>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Configuring Copyright via Data Attribute</h3>
+                      <pre id="guide-6d15b976-b15f-47c6-a56d-4b105339d25c" data-src-id="guide-6d15b976-b15f-47c6-a56d-4b105339d25c" class="prettyprint docs-Example-snippet">
+                        <footer data-init="footer" data-copyright="Custom Copyright Text">
+                        </footer>
+                        </pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Configuring Copyright via Direct Markup</h3>
+                      <pre id="guide-4867861f-8331-4ad9-871b-40e752156a8e" data-src-id="guide-4867861f-8331-4ad9-871b-40e752156a8e" class="prettyprint docs-Example-snippet">
+                        <footer data-init="footer">
+                          <span class="endor-Footer-copyright">&copy; 2014 Adobe Systems Incorporated. All Rights Reserved.</span>
+                          <div class="endor-Footer-links">
+                            <a class="endor-Footer-item" href="#" target="_blank">Help</a>
+                            <a class="endor-Footer-item" href="#" target="_blank">Terms of Use</a>
+                          </div>
+                        </footer>
+                        </pre>
+            </section>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">JavaScript Example</h3>
+              </div>
+              <p>The following is an example of the HTML without a <code>data-init</code> initializer.</p>
+                  <pre id="guide-4b0d502f-f816-41fa-b246-14f23a537117" data-src-id="guide-4b0d502f-f816-41fa-b246-14f23a537117" class="prettyprint docs-Example-snippet">
+                    <footer id="myFooter" data-copyright="Custom Copyright Text">
+                    </footer>
+                    </pre>
+              <p>The following JavaScript manually initializes the component on page initialization.</p>
+                  <pre id="guide-25e2e1f5-a3a8-4bb7-b1d0-4bd65698f38c" data-src-id="guide-25e2e1f5-a3a8-4bb7-b1d0-4bd65698f38c" class="prettyprint docs-Example-snippet">
+                    <script>
+                      $(document).ready(function() {
+                        var footer = new CUI.Footer({
+                          element: '#myFooter'
+                        });
+                      });
+                    </script>
+                    </pre>
+            </section>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+              </div>
+              <section class="guide-jsDocFragement">
+    <div class="content">
+        <!--<h1 class="line">Class: Footer</h1>-->
+        
+          
+
+
+
+<section>
+
+<h1 class="coral-Heading coral-Heading--1 u-line">Footer
+ JSDoc</h1>
+
+    <div class="class-description">Class Description: Defines a shell footer.</div>
+
+
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Extends</h3>
+
+        <ul>
+            <li>CUI.ShellWidget</li>
+        </ul>
+    
+
+    
+        
+<dt>
+    <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Constructor</h3>
+
+    
+</dt>
+
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">options</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last">
+                
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+		<th class="coral-Table-headerCell">Optional</th>
+		
+
+		
+		<th class="coral-Table-headerCell">Default</th>
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">copyright</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">string</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    "© 2014 Adobe Systems Incorporated. All Rights Reserved."
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">Copyright text.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+            </td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Footer.js, line 30</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+    
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+       <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Methods</h3>
+
+        <dl>
+            
+<dt>
+    <h3 class="name" id="addItem"><span class="type-signature"></span>addItem</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Add a footer item(s).
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">item</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Array</span>|<span class="param-type">jQuery</span>|<span class="param-type">string</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last"></td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    The item(s) as added.
+    
+    {<span class="param-type">Array</span>|<span class="param-type">jQuery</span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Footer.js, line 52</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="removeItem"><span class="type-signature"></span>removeItem</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Remove a footer item.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">item</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last"></td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    The removed item.
+    
+    {<span class="param-type">jQuery</span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Footer.js, line 68</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="setCopyright"><span class="type-signature"></span>setCopyright</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Set the copyright text.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">value</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">string</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last">Copyright text.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Footer.js, line 38</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+        
+    </div>
+   
+              </section>
+            </section>
+      </section>
+    </article>
+  </body>
+</html>
