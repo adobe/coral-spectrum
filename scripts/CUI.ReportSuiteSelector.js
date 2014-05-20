@@ -24,7 +24,11 @@
 			// The l10n label to represent no report suites.
 			noReportSuitesLabel: "No report suites.",
 			// The l10n label to represent a warning that changing a report suite will cause data to be lost. 
-			changeReportSuiteWarningLabel: 'Changing report suites may cause any unsaved data on the page to be lost.'
+			changeReportSuiteWarningLabel: 'Changing report suites may cause any unsaved data on the page to be lost.',
+			// The l10n confirm label
+			confirmLabel: 'Yes',
+			// Cancel label
+			cancelLabel: 'Cancel'
 		},
 		construct: function(options) {
 
@@ -272,14 +276,14 @@
 				.attr('type', 'button')
 				.attr('data-dismiss', 'modal')
 				.addClass('coral-Button')
-				.text('Cancel')
+				.text(this.options.cancelLabel)
 				.appendTo($modalFooter);
 
 			var $modalConfirmButton = $('<button>')
 				.attr('type', 'button')
 				.attr('data-dismiss', 'modal')
 				.addClass('coral-Button coral-Button--primary')
-				.text('Yes')
+				.text(this.options.confirmLabel)
 				.appendTo($modalFooter);
 
 			/********************/
