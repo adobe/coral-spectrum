@@ -22,7 +22,9 @@
 			// The l10n search placeholder label.
 			searchPlaceholderLabel: "Search Report Suites",
 			// The l10n label to represent no report suites.
-			noReportSuitesLabel: "No report suites."
+			noReportSuitesLabel: "No report suites.",
+			// The l10n label to represent a warning that changing a report suite will cause data to be lost. 
+			changeReportSuiteWarningLabel: 'Changing report suites may cause any unsaved data on the page to be lost.'
 		},
 		construct: function(options) {
 
@@ -259,7 +261,7 @@
 				.appendTo($modal);
 
 			var $modalText = $('<p>')
-				.text('Changing report suites may cause any unsaved data on the page to be lost.')
+				.text(this.options.changeReportSuiteWarningLabel)
 				.appendTo($modalBody);
 
 			var $modalFooter = $('<div>')
