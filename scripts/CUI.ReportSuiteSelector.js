@@ -455,7 +455,8 @@
 
 			$.ajax({
 				url: thisWidget.options.reportSuiteListUrl,
-				data: { limit: loadAll ? 0 : 10 }
+				data: { limit: loadAll ? 0 : 10 },
+				xhrFields: { withCredentials: true }
 			}).done(function (data) {
 				thisWidget._cachedReportSuiteData = data;
 				thisWidget._populateList();
