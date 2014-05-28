@@ -50,18 +50,14 @@ module.exports = {
 
   component_examples: {
     files: [
-      // copies component examples preserving hierarchy build/examples/component/*.html
+      // copies component examples preserving hierarchy build/examples/component/**
       {
         expand: true,
         cwd: '<%= dirs.modules %>',
-        src: ['coralui-component-*/<%= dirs.build %>/examples/**/*.*'],
-        dest: '<%= dirs.build %>/examples',
+        src: ['coralui-component-*/<%= dirs.build %>/examples/**'],
+        dest: '<%= dirs.build %>/examples/',
         rename: function (dest, src) {
-          var srcPath = src.split('/'),
-            componentName = srcPath[srcPath.length - 2],
-            fileName = srcPath[srcPath.length - 1]
-            return dest + '/' + componentName + '/' + fileName;
-
+          return dest + src.substring(src.lastIndexOf('examples/') + 9);
         }
       }
     ]
