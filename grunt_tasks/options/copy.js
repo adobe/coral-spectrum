@@ -128,6 +128,23 @@ module.exports = {
   },
 
 
+  resources: {
+    files: [
+      {
+        expand: true,
+        flatten: false,
+        cwd: '',
+        src: ['node_modules/coralui-*/build/resources/**/*'],
+        dest: 'build/resources/',
+
+        rename: function(dest, matchedSrcPath, options) {
+          return dest + matchedSrcPath.substring( matchedSrcPath.lastIndexOf('resources/') + 10);
+        }
+      }
+    ]
+  },
+
+
   component_tests: {
     files: [
       {
