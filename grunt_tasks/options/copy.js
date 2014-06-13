@@ -149,6 +149,18 @@ module.exports = {
         cwd: '<%= dirs.modules %>/',
         src: ['coralui-*/<%= dirs.build %>/tests/test.*.js'],
         dest: '<%= dirs.build %>/tests'
+      },
+      {
+        expand: true,
+        flatten: false,
+        cwd: '<%= dirs.modules %>/',
+        src: ['coralui-*/<%= dirs.build %>/tests/fixtures/**'],
+        filter: 'isFile',
+        dest: '<%= dirs.build %>/tests/fixtures/',
+
+        rename: function(dest, matchedSrcPath, options) {
+          return dest + matchedSrcPath.substring(matchedSrcPath.indexOf('fixtures/') + 9);
+        }
       }
     ]
   }

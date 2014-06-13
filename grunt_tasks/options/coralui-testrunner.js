@@ -9,14 +9,17 @@ var karmaFiles = [
   'build/js/libs/jquery-message.js',
   'build/js/libs/jquery-validator.js',
   'build/js/libs/moment.js',
-  'build/js/libs/toe.js',
+  'build/js/libs/toe.js'
 ];
 
 // Add in the include order from package.json
 karmaFiles = karmaFiles.concat(includeOrder);
 
 // Add in the actual tests
-karmaFiles.push('build/tests/*.js');
+karmaFiles = karmaFiles.concat([
+  'build/tests/*.js',
+  { pattern: 'build/tests/fixtures/**', watched: true, served: true, included: false }
+]);
 
 module.exports = {
   options: {
