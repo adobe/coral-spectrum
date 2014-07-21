@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Select</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light docs-Background u-coral-clearFix">
+    <article class="docs-Component">
+      <section class="docs-Component-metadata">
+        <div class="docs-Component-header">
+          <!-- name of the component-->
+          <h1 class="coral-Heading coral-Heading--1 docs-Component-name">Select</h1><span class="docs-Component-version">Current Version: <strong>2.0.15</strong></span>
+        </div>
+        <div class="coral-Component-related">Related Components: <a href="select-list.html" class="coral-Link">select-list</a>, <a href="tag-list.html" class="coral-Link">tag-list</a>
+        </div>
+        <div class="coral-Component-github"> Github: <a href="https://git.corp.adobe.com/Coral/coralui-component-select" class="coral-Link">coralui-component-select</a>
+        </div>
+        <!-- description is loaded from the template-->
+      </section>
+      <section class="docs-Component-documentation">
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">Markup Examples</h3><span class="u-coral-pullRight docs-ThemeSwitcher"><i class="coral-Icon coral-Icon--infoCircle docs-ThemeSwitcher-icon"></i>
+                  <button class="coral-MinimalButton docs-ThemeSwitcher-button is-selected">Light</button>|
+                  <button data-theme="coral--dark" class="coral-MinimalButton docs-ThemeSwitcher-button">Dark</button></span>
+              </div>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Single Selection</h3>
+                      <div id="guide-bdf3df1a-82a0-4dcd-90d0-62ee318999e7" class="docs-Example-markup u-columnMedium">
+                        <span class="coral-Select" data-init="select">
+                          <button type="button" class="coral-Select-button coral-MinimalButton">
+                           <span class="coral-Select-button-text">One</span>
+                          </button>
+                          <select class="coral-Select-select">
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                            <option value="4">One Two Three Four Five Six Seven Eight Nine Ten</option>
+                          </select>
+                        </span>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-bdf3df1a-82a0-4dcd-90d0-62ee318999e7" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Multiple Selection</h3>
+                      <div id="guide-75db1db0-ddf8-4057-8341-d5cfd157e94c" class="docs-Example-markup u-columnMedium">
+                        <span class="coral-Select" data-init="select">
+                         <button type="button" class="coral-Select-button coral-MinimalButton">
+                           <span class="coral-Select-button-text">Select</span>
+                         </button>
+                         <select class="coral-Select-select" multiple="true">
+                           <option value="1">One</option>
+                           <option value="2">Two</option>
+                           <option value="3">Three</option>
+                         </select>
+                        </span>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-75db1db0-ddf8-4057-8341-d5cfd157e94c" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Multiple Selection with Preselected Items</h3>
+                      <div id="guide-841c4d1e-6020-49d3-92fc-3c91f6ff58d4" class="docs-Example-markup u-columnMedium">
+                        <span class="coral-Select" data-init="select">
+                         <button type="button" class="coral-Select-button coral-MinimalButton">
+                           <span class="coral-Select-button-text">Select</span>
+                         </button>
+                         <select class="coral-Select-select" multiple="true">
+                           <option value="1" selected>One</option>
+                           <option value="2">Two</option>
+                           <option value="3" selected>Three</option>
+                         </select>
+                        </span>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-841c4d1e-6020-49d3-92fc-3c91f6ff58d4" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Grouped Options</h3>
+                      <div id="guide-8929d60e-a29b-4f2d-aded-c84dd6d0a4d1" class="docs-Example-markup u-columnMedium">
+                        <span class="coral-Select" data-init="select">
+                         <button type="button" class="coral-Select-button coral-MinimalButton">
+                           <span class="coral-Select-button-text">One</span>
+                         </button>
+                         <select class="coral-Select-select">
+                           <optgroup label="Group 1">
+                             <option value="1">One</option>
+                           <option value="2">Two</option>
+                             <option value="3">Three</option>
+                           </optgroup>
+                           <optgroup label="Group 2">
+                             <option value="4">Fourth</option>
+                             <option value="5">Fifth</option>
+                           </optgroup>
+                         </select>
+                        </span>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-8929d60e-a29b-4f2d-aded-c84dd6d0a4d1" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Icon</h3>
+                      <div id="guide-0c987e43-5e25-4a2d-814d-99f6142d91e5" class="docs-Example-markup u-columnMedium">
+                        <span class="coral-Select" data-init="select">
+                         <button type="button" class="coral-Select-button coral-MinimalButton">
+                           <i class="coral-Icon coral-Icon--globe coral-Select-icon"></i>
+                           <span class="coral-Select-button-text">Austria</span>
+                         </button>
+                         <select class="coral-Select-select">
+                           <option value="at">Austria</option>
+                           <option value="ch">Switzerland</option>
+                           <option value="us">United States</option>
+                         </select>
+                        </span>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-0c987e43-5e25-4a2d-814d-99f6142d91e5" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Disabled Options</h3>
+                      <div id="guide-5d3017a1-67cc-4759-a5df-6faefa0c8567" class="docs-Example-markup u-columnMedium">
+                        <span class="coral-Select" data-init="select">
+                          <button type="button" class="coral-Select-button coral-MinimalButton is-disabled">
+                            <span class="coral-Select-button-text">One</span>
+                          </button>
+                          <select class="coral-Select-select">
+                            <option value="1">One</option>
+                            <option value="2" selected="selected">Two</option>
+                            <option value="3">Three</option>
+                          </select>
+                        </span>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-5d3017a1-67cc-4759-a5df-6faefa0c8567" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Invalid Selection</h3>
+                      <div id="guide-d10b23a9-c8bd-45f4-af82-31996f797843" class="docs-Example-markup u-columnMedium">
+                        <span class="coral-Select" data-init="select">
+                           <button type="button" class="coral-Select-button coral-MinimalButton is-invalid">
+                              <span class="coral-Select-button-text">One</span>
+                           </button>
+                           <select class="coral-Select-select">
+                             <option value="1">One</option>
+                             <option value="2" selected="selected">Two</option>
+                             <option value="3">Three</option>
+                           </select>
+                        </span>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-d10b23a9-c8bd-45f4-af82-31996f797843" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Native List</h3>
+                      <div id="guide-43ae1a0d-3317-4ac4-9df1-8147e78a8ae2" class="docs-Example-markup u-columnMedium">
+                        <span class="coral-Select" data-init="select" data-nativewidget="true">
+                          <button type="button" class="coral-Select-button coral-MinimalButton">
+                            <span class="coral-Select-button-text">One</span>
+                          </button>
+                          <select class="coral-Select-select coral-Select-select--native">
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
+                        </span>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-43ae1a0d-3317-4ac4-9df1-8147e78a8ae2" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Native List with Multiple Selection</h3>
+                      <div id="guide-a9240086-378f-4bff-a6ba-5c7e22072d68" class="docs-Example-markup u-columnMedium">
+                        <span class="coral-Select" data-init="select" data-nativewidget="true">
+                          <button type="button" class="coral-Select-button coral-MinimalButton">
+                            <span class="coral-Select-button-text">One</span>
+                          </button>
+                          <select class="coral-Select-select coral-Select-select--native" multiple="true">
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
+                        </span>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-a9240086-378f-4bff-a6ba-5c7e22072d68" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Native List with Grouped Options</h3>
+                      <div id="guide-7f8b3338-a4b8-466b-b352-d156e2fa9cf8" class="docs-Example-markup u-columnMedium">
+                        <span class="coral-Select" data-init="select" data-nativewidget="true">
+                          <button type="button" class="coral-Select-button coral-MinimalButton">
+                            <span class="coral-Select-button-text">One</span>
+                          </button>
+                          <select class="coral-Select-select coral-Select-select--native">
+                            <optgroup label="Group 1">
+                              <option value="1">One</option>
+                              <option value="2">Two</option>
+                              <option value="3">Three</option>
+                            </optgroup>
+                            <optgroup label="Group 2">
+                              <option value="4">Fourth</option>
+                              <option value="5">Fifth</option>
+                            </optgroup>
+                          </select>
+                        </span>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-7f8b3338-a4b8-466b-b352-d156e2fa9cf8" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Non-native List on Mobile</h3>
+                      <div id="guide-abad2b2b-2563-4c71-8e96-2716bc743450" class="docs-Example-markup u-columnMedium">
+                        <span class="coral-Select" data-init="select" data-nativewidgetonmobile="false">
+                          <button type="button" class="coral-Select-button coral-MinimalButton">
+                            <span class="coral-Select-button-text">One</span>
+                          </button>
+                          <select class="coral-Select-select">
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
+                        </span>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-abad2b2b-2563-4c71-8e96-2716bc743450" class="docs-Example-toggleMarkup prettyprint"></pre>
+            </section>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">JavaScript Examples</h3>
+              </div>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">JS Class Initialization</h3>The following is an example of the HTML without a <code>data-init</code> initializer.
+                      <div id="guide-648a430c-d662-476a-b545-63af92d4a495" class="docs-Example-markup u-columnMedium">
+                        <span id="mySelect" class="coral-Select">
+                          <button type="button" class="coral-Select-button coral-MinimalButton">
+                            <span class="coral-Select-button-text">One</span>
+                          </button>
+                          <select class="coral-Select-select">
+                            <option value="bm">Bermuda</option>
+                            <option value="cm">Cameroon</option>
+                            <option value="dk">Denmark</option>
+                            <option value="ec">Ecuador</option>
+                            </select>
+                          </span>
+                          
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-648a430c-d662-476a-b545-63af92d4a495" class="docs-Example-toggleMarkup prettyprint"></pre>
+                  <p>The following JavaScript manually initializes the component on page initialization.</p>
+                      <pre id="guide-7113de33-955c-4153-88c5-aec725c9a067" data-src-id="guide-7113de33-955c-4153-88c5-aec725c9a067" class="prettyprint docs-Example-snippet">
+                        <script>
+                          $(document).ready(function() {
+                            var tagList = new CUI.Select({ element:'#mySelect' });
+                          })
+                        </script>
+                        </pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Responding to User Interaction</h3>The following shows how to respond to user interaction when an item is selected in the Select component above.
+                      <pre id="guide-86b4d7c3-532e-4863-8261-47ce35a145b4" data-src-id="guide-86b4d7c3-532e-4863-8261-47ce35a145b4" class="prettyprint docs-Example-snippet">
+                        <script>
+                          $(document).ready(function () {
+                            var eventLog = $('#selectLog');
+                            $('#mySelect').on('selected', function(event) {
+                              eventLog.log('Value ' + event.selected + ' selected.');
+                            });
+                          });
+                        </script>
+                        </pre>
+                          <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Log</h3>
+                      <textarea id="selectLog" readonly="true" class="coral-Textfield coral-Textfield--multiline docs-Example-log"></textarea>
+            </section>
+        <section class="guide-jsDocFragement">
+    <div class="content">
+        <!--<h1 class="line">Class: Select</h1>-->
+        
+          
+
+
+
+<section>
+
+<h1 class="coral-Heading coral-Heading--1 u-line">Select
+ JSDoc</h1>
+
+    <div class="class-description">Class Description: a widget which is similar to the native &lt;select&gt;</div>
+
+
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Extends</h3>
+
+        <ul>
+            <li>CUI.Widget</li>
+        </ul>
+    
+
+    
+        
+<dt>
+    <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Constructor</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Creates a new select
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+		<th class="coral-Table-headerCell">Optional</th>
+		
+
+		
+		<th class="coral-Table-headerCell">Default</th>
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">options</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    null
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">Component options
+                
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+		<th class="coral-Table-headerCell">Optional</th>
+		
+
+		
+		<th class="coral-Table-headerCell">Default</th>
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">element</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Mixed</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    null
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">jQuery selector or DOM element to use for panel</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">type</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    static
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">static or dynamic list</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">nativewidget</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Boolean</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">shows a native select; instead of a SelectList widget</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">nativewidgetonmobile</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Boolean</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">forces a native select on a mobile device if possible</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">multiple</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Boolean</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">multiple selection, will automatically be detected form a given &lt;select&gt; source</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+            </td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Select.js, line 21</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+    
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+       <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Methods</h3>
+
+        <dl>
+            
+<dt>
+    <h3 class="name" id="getValue"><span class="type-signature"></span>getValue</h3>
+
+    
+</dt>
+
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    current value
+    
+    {<span class="param-type">Array</span>|<span class="param-type">String</span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Select.js, line 76</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+        <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Events</h3>
+
+        <dl>
+            
+<dt>
+    <h3 class="name" id="event:selected">selected</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered when option was selected
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">event</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last">Event object
+                
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">selected</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">String</span>|<span class="param-type">Array</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last">value which was selected</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+            </td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Select.js, line 334</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        </dl>
+    
+</article>
+
+</section>
+
+
+
+
+        
+    </div>
+   
+        </section>
+      </section>
+    </article>
+  </body>
+</html>
