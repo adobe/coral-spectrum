@@ -77,7 +77,7 @@ module.exports = {
         flatten: false,
         cwd: '<%= dirs.modules %>',
         src: [
-          'coralui-component-*/<%= dirs.build %>/<%= dirs.documentation %>/resources/{,*/}*.*'
+          'coralui-component-*/<%= dirs.build %>/<%= dirs.documentation %>/resources/**'
         ],
         dest: '<%= dirs.build %>/<%= dirs.documentation %>/resources',
         rename: function (dest, src) {
