@@ -1,0 +1,264 @@
+{
+  "documentation": {
+    "components": {
+      "base": {
+        "displayName": "Base Styles",
+        "related": []
+      },
+      "button": {
+        "displayName": "Button",
+        "related": [
+          "minimal-button",
+          "cycle-button"
+        ]
+      },
+      "button-group": {
+        "displayName": "ButtonGroup",
+        "related": [
+          "button"
+        ]
+      },
+      "checkbox": {
+        "displayName": "Checkbox",
+        "related": []
+      },
+      "decorated-textfield": {
+        "displayName": "DecoratedTextfield",
+        "related": [
+          "textfield",
+          "icon",
+          "minimal-button"
+        ]
+      },
+      "form": {
+        "displayName": "Form Layout",
+        "related": [
+          "textfield",
+          "input-group",
+          "radio",
+          "checkbox",
+          "button"
+        ]
+      },
+      "heading": {
+        "displayName": "Heading",
+        "related": []
+      },
+      "icon": {
+        "displayName": "Icon",
+        "related": []
+      },
+      "input-group": {
+        "displayName": "InputGroup",
+        "related": [
+          "textfield",
+          "decorated-textfield",
+          "button",
+          "datepicker",
+          "number-input"
+        ]
+      },
+      "link": {
+        "displayName": "Link",
+        "related": []
+      },
+      "list": {
+        "displayName": "List",
+        "related": []
+      },
+      "minimal-button": {
+        "displayName": "MinimalButton",
+        "related": [
+          "button",
+          "icon"
+        ]
+      },
+      "progress": {
+        "displayName": "Progress",
+        "related": [
+          "wait"
+        ]
+      },
+      "radio": {
+        "displayName": "Radio",
+        "related": [
+          "radio-group"
+        ]
+      },
+      "radio-group": {
+        "displayName": "RadioGroup",
+        "related": [
+          "radio"
+        ]
+      },
+      "table": {
+        "displayName": "Table",
+        "related": []
+      },
+      "textfield": {
+        "displayName": "Textfield",
+        "related": [
+          "decorated-textfield"
+        ]
+      },
+      "wait": {
+        "displayName": "Wait",
+        "related": [
+          "progress"
+        ]
+      },
+      "well": {
+        "displayName": "Well",
+        "related": []
+      },
+      "accordion": {
+        "displayName": "Accordion",
+        "jsDocSrc": "scripts/CUI.Accordion.js",
+        "related": [],
+        "dependencies": []
+      },
+      "alert": {
+        "displayName": "Alert",
+        "jsDocSrc": "scripts/CUI.Alert.js",
+        "related": [
+          "modal",
+          "popover"
+        ]
+      },
+      "autocomplete": {
+        "displayName": "Autocomplete",
+        "jsDocSrc": "scripts/CUI.Autocomplete.js",
+        "related": [
+          "select",
+          "select-list",
+          "tag-list"
+        ]
+      },
+      "character-count": {
+        "displayName": "CharacterCount",
+        "jsDocSrc": "scripts/CUI.CharacterCount.js",
+        "related": []
+      },
+      "cycle-button": {
+        "displayName": "CycleButton",
+        "jsDocSrc": "scripts/CUI.CycleButton.js",
+        "related": []
+      },
+      "datepicker": {
+        "displayName": "Datepicker",
+        "jsDocSrc": "scripts/CUI.Datepicker.js",
+        "related": [
+          "input-group",
+          "select",
+          "select-list",
+          "tag-list",
+          "popover"
+        ],
+        "dependencies": [
+          {
+            "moment.js": "http://momentjs.com"
+          }
+        ]
+      },
+      "file-upload": {
+        "displayName": "FileUpload",
+        "jsDocSrc": "scripts/CUI.FileUpload.js"
+      },
+      "modal": {
+        "displayName": "Modal",
+        "jsDocSrc": "scripts/CUI.Modal.js",
+        "related": [
+          "alert"
+        ]
+      },
+      "number-input": {
+        "displayName": "NumberInput",
+        "jsDocSrc": "scripts/CUI.NumberInput.js",
+        "related": []
+      },
+      "popover": {
+        "displayName": "Popover",
+        "jsDocSrc": "scripts/CUI.Popover.js",
+        "related": []
+      },
+      "select": {
+        "displayName": "Select",
+        "jsDocSrc": "scripts/CUI.Select.js",
+        "related": [
+          "select-list",
+          "tag-list"
+        ],
+        "specifications": [
+          {
+            "name": "Dropdowns",
+            "url": "https://wiki.corp.adobe.com/display/CloudUI/Dropdowns"
+          }
+        ]
+      },
+      "select-list": {
+        "displayName": "SelectList",
+        "jsDocSrc": [
+          "scripts/CUI.SelectList.js"
+        ],
+        "related": [
+          "autocomplete",
+          "select"
+        ],
+        "specifications": [
+          {
+            "name": "Dropdowns",
+            "url": "https://wiki.corp.adobe.com/display/CloudUI/Dropdowns"
+          },
+          {
+            "name": "Confined Filter",
+            "url": "https://wiki.corp.adobe.com/display/CloudUI/Confined+Filter"
+          }
+        ]
+      },
+      "selector": {
+        "displayName": "Selector",
+        "related": []
+      },
+      "slider": {
+        "displayName": "Slider",
+        "jsDocSrc": "scripts/CUI.Slider.js",
+        "related": [
+          "tooltip"
+        ]
+      },
+      "switch": {
+        "displayName": "Switch",
+        "related": [
+          "checkbox"
+        ]
+      },
+      "tab-panel": {
+        "displayName": "TabPanel",
+        "jsDocSrc": "scripts/CUI.Tabs.js",
+        "related": []
+      },
+      "tag-list": {
+        "displayName": "TagList",
+        "jsDocSrc": "scripts/CUI.TagList.js",
+        "related": []
+      },
+      "tooltip": {
+        "displayName": "Tooltip",
+        "jsDocSrc": "scripts/CUI.Tooltip.js"
+      },
+      "wizard": {
+        "displayName": "Wizard",
+        "jsDocSrc": "scripts/CUI.FlexWizard.js",
+        "related": []
+      }
+    },
+    "shared": {
+      "styles": {
+        "displayName": "Styles"
+      },
+      "scripts": {
+        "displayName": "Components"
+      }
+    }
+  }
+}

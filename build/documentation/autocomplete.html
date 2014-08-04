@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Autocomplete</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light docs-Background u-coral-clearFix">
+    <article class="docs-Component">
+      <section class="docs-Component-metadata">
+        <div class="docs-Component-header">
+          <!-- name of the component-->
+          <h1 class="coral-Heading coral-Heading--1 docs-Component-name">Autocomplete</h1><span class="docs-Component-version">Current Version: <strong>2.4.1</strong></span>
+        </div>
+        <div class="coral-Component-related">Related Components: <a href="select.html" class="coral-Link">select</a>, <a href="select-list.html" class="coral-Link">select-list</a>, <a href="tag-list.html" class="coral-Link">tag-list</a>
+        </div>
+        <div class="coral-Component-github"> Github: <a href="https://git.corp.adobe.com/Coral/coralui-component-autocomplete" class="coral-Link">coralui-component-autocomplete</a>
+        </div>
+        <!-- description is loaded from the template-->
+      </section>
+      <section class="docs-Component-documentation">
+        <p>
+          Autocomplete is an input component which allows users to search a list of items by typing into the input or,
+          optionally, clicking a toggle button. The list of items can be provided directly or loaded dynamically from a
+          remote endpoint. Depending on enabled options, users can also create tags based on the text they have entered or
+          an item they have selected.
+          
+        </p>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">Markup Examples</h3><span class="u-coral-pullRight docs-ThemeSwitcher"><i class="coral-Icon coral-Icon--infoCircle docs-ThemeSwitcher-icon"></i>
+                  <button class="coral-MinimalButton docs-ThemeSwitcher-button is-selected">Light</button>|
+                  <button data-theme="coral--dark" class="coral-MinimalButton docs-ThemeSwitcher-button">Dark</button></span>
+              </div>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Starts with</h3>
+                      <div id="guide-94cb5214-d577-42c7-9736-39ea956a0f3e" class="docs-Example-markup u-columnMedium">
+                        <div class="coral-Autocomplete" data-init="autocomplete">
+                          <label class="coral-DecoratedTextfield js-coral-Autocomplete-field">
+                            <span class="u-coral-screenReaderOnly">Search</span>
+                            <span class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search" aria-hidden="true"></span>
+                            <input class="coral-DecoratedTextfield-input coral-Textfield js-coral-Autocomplete-textfield" type="text"
+                                   name="name1" placeholder="Search">
+                          </label>
+                          <ul class="coral-SelectList js-coral-Autocomplete-selectList">
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="af">Afghanistan</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="al">Albania</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bs">Bahamas</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bh">Bahrain</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bi">Burundi</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bj">Benin</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bm">Bermuda</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bn">Brunei Darussalam</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bo">Bolivia</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="kh">Cambodia</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="cm">Cameroon</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dk">Denmark</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dj">Djibouti</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="ec">Ecuador</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="eg">Egypt</li>
+                          </ul>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-94cb5214-d577-42c7-9736-39ea956a0f3e" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Contains</h3>
+                      <div id="guide-413462aa-0adc-4d1b-b77e-8d53e7804b82" class="docs-Example-markup u-columnMedium">
+                        <div class="coral-Autocomplete" data-init="autocomplete" data-mode="contains">
+                          <label class="coral-DecoratedTextfield js-coral-Autocomplete-field">
+                            <span class="u-coral-screenReaderOnly">Search</span>
+                            <span class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search" aria-hidden="true"></span>
+                            <input class="coral-DecoratedTextfield-input coral-Textfield js-coral-Autocomplete-textfield" type="text"
+                                   name="name1" placeholder="Search">
+                          </label>
+                          <ul class="coral-SelectList js-coral-Autocomplete-selectList">
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="af">Afghanistan</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="al">Albania</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bs">Bahamas</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bh">Bahrain</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bi">Burundi</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bj">Benin</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bm">Bermuda</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bn">Brunei Darussalam</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bo">Bolivia</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="kh">Cambodia</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="cm">Cameroon</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dk">Denmark</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dj">Djibouti</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="ec">Ecuador</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="eg">Egypt</li>
+                          </ul>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-413462aa-0adc-4d1b-b77e-8d53e7804b82" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Toggle Button</h3>
+                      <div id="guide-ce3f90ea-91e1-48ed-ae50-846121cde698" class="docs-Example-markup u-columnMedium">
+                        <div class="coral-Autocomplete" data-init="autocomplete">
+                          <div class="coral-InputGroup coral-InputGroup--block js-coral-Autocomplete-field">
+                            <label class="coral-DecoratedTextfield coral-InputGroup-input">
+                              <span class="u-coral-screenReaderOnly">Search</span>
+                              <span class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search" aria-hidden="true"></span>
+                              <input class="coral-DecoratedTextfield-input coral-Textfield js-coral-Autocomplete-textfield" type="text"
+                                     name="name1" placeholder="Search" value="Bahamas" >
+                            </label>
+                            <span class="coral-InputGroup-button">
+                              <button class="coral-Button coral-Button--secondary coral-Button--square js-coral-Autocomplete-toggleButton" type="button">
+                                <i class="coral-Icon coral-Icon--sizeXS coral-Icon--triangleDown"></i>
+                              </button>
+                            </span>
+                          </div>
+                          <ul class="coral-SelectList js-coral-Autocomplete-selectList">
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="af">Afghanistan</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="al">Albania</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bs">Bahamas</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bh">Bahrain</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bi">Burundi</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bj">Benin</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bm">Bermuda</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bn">Brunei Darussalam</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bo">Bolivia</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="kh">Cambodia</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="cm">Cameroon</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dk">Denmark</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dj">Djibouti</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="ec">Ecuador</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="eg">Egypt</li>
+                          </ul>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-ce3f90ea-91e1-48ed-ae50-846121cde698" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Force Selection</h3>
+                      <div id="guide-d7dc6800-9e5f-4cd8-a9b3-e1256533a4c7" class="docs-Example-markup u-columnMedium">
+                        <div class="coral-Autocomplete" data-init="autocomplete" data-forceselection="true">
+                          <label class="coral-DecoratedTextfield js-coral-Autocomplete-field">
+                            <span class="u-coral-screenReaderOnly">Search</span>
+                            <span class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search" aria-hidden="true"></span>
+                            <input class="coral-DecoratedTextfield-input coral-Textfield js-coral-Autocomplete-textfield" type="text"
+                                   name="name1" placeholder="Search" value="Bahamas" >
+                          </label>
+                          <ul class="coral-SelectList js-coral-Autocomplete-selectList">
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="af">Afghanistan</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="al">Albania</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bs">Bahamas</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bh">Bahrain</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bi">Burundi</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bj">Benin</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bm">Bermuda</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bn">Brunei Darussalam</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bo">Bolivia</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="kh">Cambodia</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="cm">Cameroon</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dk">Denmark</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dj">Djibouti</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="ec">Ecuador</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="eg">Egypt</li>
+                          </ul>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-d7dc6800-9e5f-4cd8-a9b3-e1256533a4c7" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Tags</h3>
+                      <div id="guide-730cc2e0-6df0-4e7f-a3b2-242110146a6b" class="docs-Example-markup u-columnMedium">
+                        <div class="coral-Autocomplete" data-init="autocomplete" data-multiple="true">
+                          <label class="coral-DecoratedTextfield js-coral-Autocomplete-field">
+                            <span class="u-coral-screenReaderOnly">Search</span>
+                            <span class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search" aria-hidden="true"></span>
+                            <input class="coral-DecoratedTextfield-input coral-Textfield js-coral-Autocomplete-textfield" type="text"
+                                   name="name1" placeholder="Search">
+                          </label>
+                          <ul class="coral-SelectList js-coral-Autocomplete-selectList">
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="af">Afghanistan</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="al">Albania</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bs">Bahamas</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bh">Bahrain</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bi">Burundi</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bj">Benin</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bm">Bermuda</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bn">Brunei Darussalam</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bo">Bolivia</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="kh">Cambodia</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="cm">Cameroon</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dk">Denmark</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dj">Djibouti</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="ec">Ecuador</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="eg">Egypt</li>
+                          </ul>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-730cc2e0-6df0-4e7f-a3b2-242110146a6b" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Remote</h3>The demo endpoint returns pre-canned results that may not match your input. In your application, the endpoint should instead filter results based on the user's input.
+                      <div id="guide-d29e9a25-7a4f-4b8b-bde3-5f0a17657768" class="docs-Example-markup u-columnMedium">
+                        <div class="coral-Autocomplete" data-init="autocomplete">
+                          <label class="coral-DecoratedTextfield js-coral-Autocomplete-field">
+                            <span class="u-coral-screenReaderOnly">Search</span>
+                            <span class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search" aria-hidden="true"></span>
+                            <input class="coral-DecoratedTextfield-input coral-Textfield js-coral-Autocomplete-textfield" type="text"
+                              name="name1" placeholder="Search">
+                          </label>
+                          <ul class="coral-SelectList js-coral-Autocomplete-selectList"
+                            data-type="dynamic" data-dataurl="resources/autocomplete/remotehtml.html"></ul>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-d29e9a25-7a4f-4b8b-bde3-5f0a17657768" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Group</h3>
+                      <div id="guide-8fc7d305-c8e3-4405-8438-0ec8e73199d0" class="docs-Example-markup u-columnMedium">
+                        <div class="coral-Autocomplete" data-init="autocomplete" data-mode="contains">
+                          <label class="coral-DecoratedTextfield js-coral-Autocomplete-field">
+                            <span class="u-coral-screenReaderOnly">Search</span>
+                            <span class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search" aria-hidden="true"></span>
+                            <input class="coral-DecoratedTextfield-input coral-Textfield js-coral-Autocomplete-textfield" type="text"
+                              name="name1" placeholder="Search">
+                          </label>
+                          <ul class="coral-SelectList js-coral-Autocomplete-selectList">
+                            <li class="coral-SelectList-item coral-SelectList-item--optgroup">
+                              <span class="coral-SelectList-groupHeader">Group 1</span>
+                              <ul class="coral-SelectList-sublist">
+                                <li class="coral-SelectList-item coral-SelectList-item--option" data-value="af">Afghanistan</li>
+                                <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bs">Bahamas</li>
+                                <li class="coral-SelectList-item coral-SelectList-item--option" data-value="kh">Cambodia</li>
+                                <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dk">Denmark</li>
+                                <li class="coral-SelectList-item coral-SelectList-item--option" data-value="ec">Ecuador</li>
+                              </ul>
+                            </li>
+                            <li class="coral-SelectList-item coral-SelectList-item--optgroup">
+                              <span class="coral-SelectList-groupHeader">Group 2</span>
+                              <ul class="coral-SelectList-sublist">
+                                <li class="coral-SelectList-item coral-SelectList-item--option" data-value="al">Albania</li>
+                                <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bh">Bahrain</li>
+                                <li class="coral-SelectList-item coral-SelectList-item--option" data-value="cm">Cameroon</li>
+                                <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dj">Djibouti</li>
+                                <li class="coral-SelectList-item coral-SelectList-item--option" data-value="eg">Egypt</li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-8fc7d305-c8e3-4405-8438-0ec8e73199d0" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Invalid</h3>
+                      <div id="guide-eee37afa-bdfa-4098-86fd-449ad171dc68" class="docs-Example-markup u-columnMedium">
+                        <div class="coral-Autocomplete" data-init="autocomplete">
+                          <label class="coral-DecoratedTextfield js-coral-Autocomplete-field">
+                            <span class="u-coral-screenReaderOnly">Search</span>
+                            <span class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search" aria-hidden="true"></span>
+                            <input class="coral-DecoratedTextfield-input coral-Textfield js-coral-Autocomplete-textfield is-invalid"
+                              type="text" name="name1" placeholder="Search">
+                          </label>
+                          <ul class="coral-SelectList js-coral-Autocomplete-selectList">
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="af">Afghanistan</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="al">Albania</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bs">Bahamas</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bh">Bahrain</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bi">Burundi</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bj">Benin</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bm">Bermuda</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bn">Brunei Darussalam</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bo">Bolivia</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="kh">Cambodia</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="cm">Cameroon</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dk">Denmark</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dj">Djibouti</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="ec">Ecuador</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="eg">Egypt</li>
+                          </ul>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-eee37afa-bdfa-4098-86fd-449ad171dc68" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Disabled</h3>
+                      <div id="guide-b986980c-5919-45cd-94f7-9cab97157339" class="docs-Example-markup u-columnMedium">
+                        <div class="coral-Autocomplete" data-init="autocomplete">
+                          <label class="coral-DecoratedTextfield js-coral-Autocomplete-field">
+                            <span class="u-coral-screenReaderOnly">Search</span>
+                            <span class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search" aria-hidden="true"></span>
+                            <input class="coral-DecoratedTextfield-input coral-Textfield js-coral-Autocomplete-textfield" type="text"
+                              name="name1" placeholder="Search" disabled>
+                          </label>
+                          <ul class="coral-SelectList js-coral-Autocomplete-selectList">
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="af">Afghanistan</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="al">Albania</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bs">Bahamas</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bh">Bahrain</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bi">Burundi</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bj">Benin</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bm">Bermuda</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bn">Brunei Darussalam</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bo">Bolivia</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="kh">Cambodia</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="cm">Cameroon</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dk">Denmark</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dj">Djibouti</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="ec">Ecuador</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="eg">Egypt</li>
+                          </ul>
+                        </div>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-b986980c-5919-45cd-94f7-9cab97157339" class="docs-Example-toggleMarkup prettyprint"></pre>
+            </section>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">JavaScript Examples</h3>
+              </div>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">JS Class Initialization</h3>The following is an example of the HTML without a <code>data-init</code> initializer.
+                      <div id="guide-ebce026e-b444-4836-9766-cdc5a2a1f456" class="docs-Example-markup u-columnMedium">
+                        <div id="myAutocomplete" class="coral-Autocomplete">
+                          <label class="coral-DecoratedTextfield js-coral-Autocomplete-field">
+                            <span class="u-coral-screenReaderOnly">Search</span>
+                            <span class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search" aria-hidden="true"></span>
+                            <input class="coral-DecoratedTextfield-input coral-Textfield js-coral-Autocomplete-textfield" type="text"
+                                   name="name1" placeholder="Search">
+                          </label>
+                          <ul class="coral-SelectList js-coral-Autocomplete-selectList">
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="af">Afghanistan</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="al">Albania</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bs">Bahamas</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bh">Bahrain</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bi">Burundi</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bj">Benin</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bm">Bermuda</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bn">Brunei Darussalam</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bo">Bolivia</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="kh">Cambodia</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="cm">Cameroon</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dk">Denmark</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dj">Djibouti</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="ec">Ecuador</li>
+                            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="eg">Egypt</li>
+                          </ul>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-ebce026e-b444-4836-9766-cdc5a2a1f456" class="docs-Example-toggleMarkup prettyprint"></pre>
+                  <p>The following JavaScript manually initializes the component on page initialization.</p>
+                      <pre id="guide-9674a094-a6cc-4486-ae3a-f8aee5c3b138" data-src-id="guide-9674a094-a6cc-4486-ae3a-f8aee5c3b138" class="prettyprint docs-Example-snippet">
+                        <script>
+                          $(document).ready(function() {
+                            var autocomplete = new CUI.Autocomplete({ element:'#myAutocomplete' });
+                          });
+                        </script>
+                        </pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Responding to User Interaction</h3>The following shows how to respond to user interaction when an item is selected in the Autocomplete component above. If multiple selection is enabled, <code>payload.value</code> will be an array of selected values.
+                      <pre id="guide-b515b93d-3b18-4128-a599-2cf8d00fd575" data-src-id="guide-b515b93d-3b18-4128-a599-2cf8d00fd575" class="prettyprint docs-Example-snippet">
+                        <script>
+                          $(document).ready(function () {
+                            var eventLog = $('#autocompleteLog');
+                            $('#myAutocomplete').on('change:value', function(event, payload) {
+                              eventLog.log('Value ' + payload.value + ' selected.');
+                            });
+                          });
+                        </script>
+                        </pre>
+                          <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Log</h3>
+                      <textarea id="autocompleteLog" readonly="true" class="coral-Textfield coral-Textfield--multiline docs-Example-log"></textarea>
+            </section>
+        <section class="guide-jsDocFragement">
+    <div class="content">
+        <!--<h1 class="line">Class: Autocomplete</h1>-->
+        
+          
+
+
+
+<section>
+
+<h1 class="coral-Heading coral-Heading--1 u-line">Autocomplete
+ JSDoc</h1>
+
+    <div class="class-description">Class Description: Autocomplete is an input component which allows users
+to search a list of items by typing into the input or, optionally,
+clicking a toggle button. The list of items can be provided directly
+or loaded dynamically from a remote endpoint. Depending on enabled
+options, users can also create tags based on the text they have
+entered or an item they have selected.</div>
+
+
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Extends</h3>
+
+        <ul>
+            <li>CUI.Widget</li>
+        </ul>
+    
+
+    
+        
+<dt>
+    <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Constructor</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Creates a new select
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">options</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last">Component options
+                
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+		<th class="coral-Table-headerCell">Optional</th>
+		
+
+		
+		<th class="coral-Table-headerCell">Default</th>
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">element</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Mixed</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                  No<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">jQuery selector or DOM element to use
+for the autocomplete element.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">mode</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    starts
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">Search mode for
+filtering on the client. Possible values are "starts" or "contains".
+This has no effect if filtering is occurring remotely.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">ignorecase</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Boolean</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">Whether filtering on the
+client should be case insensitive. This has no effect if filtering
+is occurring remotely.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">delay</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Number</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    500
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">Amount of time, in milliseconds,
+to wait after typing a character before a filter operation is
+triggered.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">multiple</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Boolean</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">Allows multiple items
+to be selected. Each item selection generates a tag.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">forceselection</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Boolean</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last"><code>true</code> to
+restrict the selected value to one of the given options of select list.
+Otherwise the user is allow to enter arbitrary text.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">selectlistConfig</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">A configuration object
+that is passed through to the select list. See CUI.SelectList
+for more information.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">tagConfig</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">A configuration object
+that is passed through to the tag list. See CUI.TagList
+for more information.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+            </td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Autocomplete.js, line 43</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+    
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+       <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Methods</h3>
+
+        <dl>
+            
+<dt>
+    <h3 class="name" id="clear"><span class="type-signature"></span>clear</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    clears the autocomplete input field
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Autocomplete.js, line 583</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="disable"><span class="type-signature"></span>disable</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    disables the autocomplete
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Autocomplete.js, line 593</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="enable"><span class="type-signature"></span>enable</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    enables the autocomplete
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Autocomplete.js, line 603</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="getValue"><span class="type-signature"></span>getValue</h3>
+
+    
+</dt>
+
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    current value
+    
+    {<span class="param-type">Array</span>|<span class="param-type">String</span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Autocomplete.js, line 96</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="showSuggestions"><span class="type-signature"></span>showSuggestions</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    this function is triggered when a typeahead request needs to be done
+override this function to achieve a custom handling on the client
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">val</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last">null if all values need to be shown</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">fromToggle</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Boolean</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last">Whether the request was triggered
+by the user clicking the suggestion toggle button.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">selectlist</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">CUI.SelectList</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last">instance to control the popup</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+    <h4>Fires:</h4>
+    <ul>
+        <li>
+    Autocomplete#event:query
+</li>
+    </ul>
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Autocomplete.js, line 495</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+        
+    </div>
+   
+        </section>
+      </section>
+    </article>
+  </body>
+</html>
