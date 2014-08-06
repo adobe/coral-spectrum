@@ -123,7 +123,6 @@ module.exports = {
     ]
   },
 
-
   resources: {
     files: [
       {
@@ -139,7 +138,6 @@ module.exports = {
       }
     ]
   },
-
 
   component_tests: {
     files: [
@@ -164,9 +162,5 @@ module.exports = {
       }
     ]
   }
-
-
-
-
 }
 // end copy
