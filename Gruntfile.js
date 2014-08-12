@@ -67,16 +67,7 @@ module.exports = function(grunt) {
   // load local tasks
   grunt.loadTasks('grunt_tasks');
 
-  grunt.task.registerTask('dev', [ // task for developers to work
-    'connect',
-    'watch'
-  ]);
-
   grunt.task.registerTask('docs-mapping', 'generate-docs-mapping');
-
-
-  // performs the subgrunt task to compile every component dependency
-  grunt.task.registerTask('full', ['build-dependencies', 'default']);
 
   // Default task
   grunt.task.registerTask('default', ['coralui-componentbuilder', 'copy', 'cssmin', 'cssmetrics', 'docs-mapping', 'run-tests' ]);
