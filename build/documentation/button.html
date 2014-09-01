@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Button</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light docs-Background u-coral-clearFix">
+    <article class="docs-Component">
+      <section class="docs-Component-metadata">
+        <div class="docs-Component-header">
+          <!-- name of the component-->
+          <h1 class="coral-Heading coral-Heading--1 docs-Component-name">Button</h1><span class="docs-Component-version">Current Version: <strong>2.3.13-pre</strong></span>
+        </div>
+        <div class="coral-Component-related">Related Components: <a href="minimal-button.html" class="coral-Link">minimal-button</a>, <a href="cycle-button.html" class="coral-Link">cycle-button</a>
+        </div>
+        <div class="coral-Component-github"> Github: <a href="https://git.corp.adobe.com/Coral/coralui-core" class="coral-Link">coralui-core</a>
+        </div>
+        <!-- description is loaded from the template-->
+      </section>
+      <section class="docs-Component-documentation">
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">Button Examples</h3><span class="u-coral-pullRight docs-ThemeSwitcher"><i class="coral-Icon coral-Icon--infoCircle docs-ThemeSwitcher-icon"></i>
+                  <button class="coral-MinimalButton docs-ThemeSwitcher-button is-selected">Light</button>|
+                  <button data-theme="coral--dark" class="coral-MinimalButton docs-ThemeSwitcher-button">Dark</button></span>
+              </div>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Default</h3>
+                      <div id="guide-b8f2d271-d1eb-4802-9974-6fcecb45dec9" class="docs-Example-markup u-columnMedium"><button class="coral-Button">Normal Button</button>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-b8f2d271-d1eb-4802-9974-6fcecb45dec9" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Primary</h3>
+                      <div id="guide-c5ea9cf9-425c-4e3e-9f41-929e5355ac2b" class="docs-Example-markup u-columnMedium"><button class="coral-Button coral-Button--primary">Primary</button>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-c5ea9cf9-425c-4e3e-9f41-929e5355ac2b" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Warning</h3>
+                      <div id="guide-6e6797a3-f9d9-46ff-8f71-cca1b27f8378" class="docs-Example-markup u-columnMedium"><button class="coral-Button coral-Button--warning">Warning</button>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-6e6797a3-f9d9-46ff-8f71-cca1b27f8378" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Secondary</h3>
+                      <div id="guide-21ea3dae-8e0d-41dd-965e-cab90f44e9bd" class="docs-Example-markup u-columnMedium"><button class="coral-Button coral-Button--secondary">Secondary</button>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-21ea3dae-8e0d-41dd-965e-cab90f44e9bd" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Quiet</h3>
+                      <div id="guide-580d4ddb-5f4c-4337-967d-023b4d71059d" class="docs-Example-markup u-columnMedium"><button class="coral-Button coral-Button--quiet">Quiet</button>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-580d4ddb-5f4c-4337-967d-023b4d71059d" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Disabled</h3>
+                      <div id="guide-12a61ff6-3755-42c3-a5c1-681fb2f57edb" class="docs-Example-markup u-columnMedium"><button class="coral-Button" disabled>Disabled</button>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-12a61ff6-3755-42c3-a5c1-681fb2f57edb" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Square Icon Buttons</h3>
+                      <div id="guide-852940a3-c2da-4d8d-8f1f-2b0e20487528" class="docs-Example-markup u-columnMedium">
+                                        <button class="coral-Button coral-Button--square coral-Button--warning">
+                                         <i class="coral-Icon coral-Icon--delete"></i>
+                                        </button>
+                                        <button class="coral-Button coral-Button--square">
+                                         <i class="coral-Icon coral-Icon--add"></i>
+                                        </button>
+                                        <button class="coral-Button coral-Button--square coral-Button--secondary">
+                                         <i class="coral-Icon coral-Icon--alert"></i>
+                                        </button>
+                                        <button class="coral-Button coral-Button--square coral-Button--primary">
+                                         <i class="coral-Icon coral-Icon--checkCircle"></i>
+                                        </button>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-852940a3-c2da-4d8d-8f1f-2b0e20487528" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Square Quiet Icon Buttons</h3>
+                      <div id="guide-425073f3-41eb-4267-a52a-0da0cd8b4cc6" class="docs-Example-markup u-columnMedium">
+                                        <button class="coral-Button coral-Button--square coral-Button--quiet">
+                                         <i class="coral-Icon coral-Icon--delete"></i>
+                                        </button>
+                                        <button class="coral-Button coral-Button--square coral-Button--quiet">
+                                         <i class="coral-Icon coral-Icon--add"></i>
+                                        </button>
+                                        <button class="coral-Button coral-Button--square coral-Button--quiet">
+                                         <i class="coral-Icon coral-Icon--alert"></i>
+                                        </button>
+                                        <button class="coral-Button coral-Button--square coral-Button--quiet">
+                                         <i class="coral-Icon coral-Icon--checkCircle"></i>
+                                        </button>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-425073f3-41eb-4267-a52a-0da0cd8b4cc6" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Call to Action</h3>
+                      <div id="guide-a859d952-9df3-47f9-9ce7-b5f848f1bffe" class="docs-Example-markup u-columnMedium"><button class="coral-Button coral-Button--large coral-Button--primary">Call to Action - Primary</button>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-a859d952-9df3-47f9-9ce7-b5f848f1bffe" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Block</h3>
+                      <div id="guide-1a41ea83-d6c0-424d-ade3-84efecc39a4e" class="docs-Example-markup u-columnMedium"><button class="coral-Button coral-Button--block coral-Button--primary">Block Button - Primary</button>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-1a41ea83-d6c0-424d-ade3-84efecc39a4e" class="docs-Example-toggleMarkup prettyprint"></pre>
+            </section>
+      </section>
+    </article>
+  </body>
+</html>

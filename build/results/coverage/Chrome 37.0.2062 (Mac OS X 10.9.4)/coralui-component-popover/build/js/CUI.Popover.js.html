@@ -1,0 +1,1609 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for coralui-component-popover/build/js/CUI.Popover.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../../prettify.css">
+
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Helvetica Neue, Helvetica,Arial;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 10em;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Consolas, Menlo, Monaco, monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 14px;
+            font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { text-decoration: none; color: #000; }
+        div.coverage-summary a:visited { text-decoration: none; color: #333; }
+        div.coverage-summary a:hover { text-decoration: underline; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: url("https://yui-s.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header high">
+    <h1>Code coverage report for <span class="entity">coralui-component-popover/build/js/CUI.Popover.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">92.98% <small>(106 / 114)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">83.87% <small>(52 / 62)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">90.91% <small>(20 / 22)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">92.92% <small>(105 / 113)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">coralui-component-popover/build/js/</a> &#187; CUI.Popover.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-yes">10</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">30</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">50</span>
+<span class="cline-any cline-yes">17</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">33</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">33</span>
+<span class="cline-any cline-yes">27</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">27</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">33</span>
+<span class="cline-any cline-yes">33</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">33</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">30</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">33</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">33</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">33</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">27</span>
+<span class="cline-any cline-yes">27</span>
+<span class="cline-any cline-yes">27</span>
+<span class="cline-any cline-yes">27</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">33</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">33</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32</span>
+<span class="cline-any cline-yes">32</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">33</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">33</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">21</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">33</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">33</span>
+<span class="cline-any cline-yes">27</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">33</span>
+<span class="cline-any cline-yes">33</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">33</span>
+<span class="cline-any cline-yes">33</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22</span>
+<span class="cline-any cline-yes">22</span>
+<span class="cline-any cline-yes">22</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18</span>
+<span class="cline-any cline-yes">18</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">33</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">(function ($) {
+  var uuid = 0;
+&nbsp;
+  CUI.Popover = new Class(/** @lends CUI.Popover# */{
+    toString: 'Popover',
+    extend: CUI.Widget,
+    /**
+     @extends CUI.Widget
+     @classdesc A box which points at an element or point.
+&nbsp;
+     @desc Creates a new popover
+     @constructs
+&nbsp;
+     @param {Object} options                               Component options
+     @param {Object} options.pointAt                       The element or coordinate to which the popover should point.
+     A coordinate should be provided as an array where the first
+     item is the X coordinate and the second item is a Y
+     coordinate. The coordinate should be in the document
+     coordinate space.
+     @param {String} [options.content]                     Content of the popover (HTML).
+     @param {String} [options.pointFrom=bottom]            The side of the target element or coordinate the popover
+     @param {Object} [options.within=window]               Popover collision detection container
+     should be pointing from. Possible values include
+     &lt;code&gt;top&lt;/code&gt;, &lt;code&gt;right&lt;/code&gt;, &lt;code&gt;bottom&lt;/code&gt;,
+     or &lt;code&gt;left&lt;/code&gt;.
+     @param {boolean} [options.preventAutoHide=false]      When set to &lt;code&gt;false&lt;/code&gt;, the popover will close when
+     the user clicks outside the popover. When set to
+     &lt;code&gt;true&lt;/code&gt;, the popover will only close when the
+     target element is clicked or &lt;code&gt;hide()&lt;/code&gt; is
+     manually called.
+     @param {String} [options.alignFrom=left]              When set to left, the popover will be anchored to the left
+     side of its offset parent (in other words, it will use the
+     &lt;code&gt;left&lt;/code&gt; CSS property). When set to right, the
+     popover will be anchored to the right side of its offset
+     parent (in other words, it will use the &lt;code&gt;right&lt;/code&gt;
+     CSS property). When the element the popover is pointing at
+     is right-aligned, it can be useful to set the value to
+     &lt;code&gt;right&lt;/code&gt; so the popover will appear to stay
+     attached to the element when the user resizes the window
+     horizontally.
+&nbsp;
+     */
+    construct: function (options) {
+&nbsp;
+      // listens to configuration changes
+      this.$element.on('change:content', this._setContent.bind(this));
+      this.$element.on('change:pointAt', this._position.bind(this));
+      this.$element.on('change:pointFrom', this._position.bind(this));
+      this.$element.on('change:alignFrom', this._position.bind(this));
+&nbsp;
+      // main class of the component
+      this.$element.addClass('coral-Popover');
+&nbsp;
+      // checks if the content element exists
+      if (this._getContentElement(this.$element).length === 0) {
+        this._wrapContent(this.$element);
+      }
+&nbsp;
+      // gets the content element
+      this._$content = this._getContentElement(this.$element);
+&nbsp;
+      // adds the content if the current is blank.
+      if(this._$content.html() === '') {
+        this._setContent();
+      }
+&nbsp;
+      this._createTail();
+&nbsp;
+      this.uuid = (uuid += 1);
+    },
+&nbsp;
+    defaults: {
+      pointFrom: 'bottom',
+      preventAutoHide: false,
+      alignFrom: 'left',
+      visible: false
+    },
+&nbsp;
+    _directions: [
+      'top',
+      'bottom',
+      'right',
+      'left'
+    ],
+&nbsp;
+    /**
+     * Creates the popover tail (i.e., tip, arrow, triangle) and adds it as a child.
+     * @private
+     */
+    _createTail: function () {
+      this._$tail = $('&lt;div class="coral-Popover-arrow coral-Popover-arrow--left"/&gt;').appendTo(this.$element);
+&nbsp;
+      this._cachedTailDimensions = {};
+&nbsp;
+      // Cache the tail dimensions when the popover is on the left or right of the target.
+      this._cachedTailDimensions.leftRight = {
+        width: this._$tail.outerWidth(),
+        height: this._$tail.outerHeight()
+      };
+&nbsp;
+      // While it's possible that the dimensions are different depending on whether it's left/right vs top/bottom,
+      // it likely (and is currently) just a rotated version of the arrow. To reduce the cost of measuring, we'll
+      // just invert the dimensions until more complex tails are introduced.
+      this._cachedTailDimensions.topBottom = {
+        width: this._cachedTailDimensions.leftRight.height,
+        height: this._cachedTailDimensions.leftRight.width
+      };
+&nbsp;
+      // The correct arrow class will be applied when the popover is positioned.
+      this._$tail.removeClass('coral-Popover-arrow--left');
+    },
+&nbsp;
+    /**
+     * Wrapps the content of the popover inside a
+     * coral-Popover-content class.
+     *
+     * @ignore
+     */
+    _wrapContent: function (el) {
+      el.wrapInner('&lt;div class="coral-Popover-content"/&gt;');
+    },
+    /** @ignore */
+    _getContentElement: function (el) {
+      return el.find('&gt; .coral-Popover-content');
+    },
+&nbsp;
+    /**
+     * Positions the popover (if visible). Leverages [jQueryUI's Position utility]{@link http://jqueryui.com/position}.
+     *
+     * @private
+     */
+    _position: function () {
+      // Let's not use the cycles to position if the popover is not visible. When show() is called, the element will
+      // run through positioning again.
+      if (!this.options.visible || !this.options.pointAt) {
+        return;
+      }
+&nbsp;
+      var $popover = this.$element,
+        target = this.options.pointAt,
+        pointFrom = this.options.pointFrom,
+        tailDimensions = this._cachedTailDimensions,
+        instructions;
+&nbsp;
+      if ($.isArray(target)) {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (target.length !== 2) {
+<span class="cstat-no" title="statement not covered" >          return;</span>
+        }
+        target = this._convertCoordsToEvent(target);
+      }
+&nbsp;
+      // Using the 'flip' collision option, jQueryUI's positioning logic will flip the position of the popover to
+      // whichever side will expose most of the popover within the window viewport. However, this can sometimes place
+      // the popover so that it is cropped by the top or left of the document. While it's great that the user would
+      // be able to initially see more of the popover than if it had been placed in the opposite position, the user
+      // would not be able to even scroll to see the cropped portion. We would rather show less of the popover and
+      // still allow the user to scroll to see the rest of the popover. Here we detect if such cropping is taking
+      // place and, if so, we re-run the positioning algorithm while forcing the position to the bottom or right
+      // directions.
+      // Fixes https://issues.adobe.com/browse/CUI-794
+      var validateFinalPosition = function (position, feedback) {
+        var offsetParentOffset = $popover.offsetParent().offset(),
+          forcePointFrom;
+&nbsp;
+        if ((pointFrom == 'top' || pointFrom == 'bottom') &amp;&amp; offsetParentOffset.top + position.top &lt; 0) {
+          forcePointFrom = 'bottom';
+        } else if ((pointFrom == 'left' || pointFrom == 'right') &amp;&amp; offsetParentOffset.left + position.left &lt; 0) {
+          forcePointFrom = 'right';
+        }
+&nbsp;
+        if (forcePointFrom) {
+          instructions = this._instructionFactory[forcePointFrom]({
+            target: target,
+            tailDimensions: tailDimensions,
+            allowFlip: false,
+            callback: this._applyFinalPosition.bind(this),
+            within: this.options.within || window
+          });
+          $popover.position(instructions);
+        } else {
+          this._applyFinalPosition(position, feedback);
+        }
+      }.bind(this);
+&nbsp;
+      instructions = this._instructionFactory[pointFrom]({
+        target: target,
+        tailDimensions: tailDimensions,
+        allowFlip: true,
+        callback: validateFinalPosition,
+        within: this.options.within || window
+      });
+&nbsp;
+      $popover.position(instructions);
+    },
+&nbsp;
+    /**
+     * Converts an array containing a coordinate into an event (needed for jQueryUI's Position utility)..
+     * @param {Array} pointAt An array where the first item is the x coordinate and the second item is the y coordinate.
+     * @returns {Object} A jquery event object with the pageX and pageY properties set.
+     * @private
+     */
+    _convertCoordsToEvent: function (pointAt) {
+      // If target is an array, it should contain x and y coords for absolute positioning.
+      // Transform coords for jQueryUI Position which requires an event object with pageX and pageY.
+      var event = $.Event();
+      event.pageX = pointAt[0];
+      event.pageY = pointAt[1];
+      return event;
+    },
+&nbsp;
+    /**
+     * Applies the final position to the popover (both bubble and tail).
+     * @param position The position to be applied to the bubble.
+     * @param feedback Additional information useful for positioning the tail.
+     * @private
+     */
+    _applyFinalPosition: function (position, feedback) {
+      var css = {
+        top: position.top
+      };
+&nbsp;
+      if (this.options.alignFrom === 'right') {
+        // Convert the "left" position to a "right" position.
+&nbsp;
+        var offsetParent = this.$element.offsetParent();
+        var offsetParentWidth;
+&nbsp;
+        // If the offset parent is the root HTML element, we need to do some finagling. We really need to get the width
+        // of the viewpane minus the scrollbar width since the "right" position will be relative to the left of the
+        // scrollbar. We do this by getting the outerWidth(true) of body (so it includes any margin, border, and padding).
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (offsetParent.prop('tagName').toLowerCase() == 'html') {
+          offsetParent = $('body');
+          offsetParentWidth = offsetParent.outerWidth(true);
+        } else {
+<span class="cstat-no" title="statement not covered" >          offsetParentWidth = offsetParent.innerWidth();</span>
+        }
+&nbsp;
+        css.left = 'auto';
+        css.right = offsetParentWidth - position.left - this.$element.outerWidth(true);
+      } else {
+        css.left = position.left;
+        css.right = 'auto';
+      }
+&nbsp;
+      this.$element.css(css);
+&nbsp;
+      // For more information about the feedback object, see:
+      // http://jqueryui.com/upgrade-guide/1.9/#added-positioning-feedback-to-the-using-callback
+      this._positionTail(feedback);
+    },
+&nbsp;
+    /**
+     * Factory for creating instruction objects to be used by jQuery's Position utility.
+     * @private
+     */
+    _instructionFactory: {
+      top: function (options) {
+        return {
+          my: 'center bottom-' + options.tailDimensions.topBottom.height,
+          at: 'center top',
+          of: options.target,
+          collision: 'fit ' + (options.allowFlip ? 'flip' : <span class="branch-1 cbranch-no" title="branch not covered" >'none')</span>,
+          using: options.callback,
+          within: options.within
+        };
+      },
+      right: function (options) {
+        return {
+          my: 'left+' + options.tailDimensions.leftRight.width + ' center',
+          at: 'right center',
+          of: options.target,
+          collision: (options.allowFlip ? 'flip' : 'none') + ' fit',
+          using: options.callback,
+          within: options.within
+        };
+      },
+      bottom: function (options) {
+        return {
+          my: 'center top+' + options.tailDimensions.topBottom.height,
+          at: 'center bottom',
+          of: options.target,
+          collision: 'fit ' + (options.allowFlip ? 'flip' : 'none'),
+          using: options.callback,
+          within: options.within
+        };
+      },
+      left: function (options) {
+        return {
+          my: 'right-' + options.tailDimensions.leftRight.width + ' center',
+          at: 'left center',
+          of: options.target,
+          collision: (options.allowFlip ? 'flip' : <span class="branch-1 cbranch-no" title="branch not covered" >'none')</span> + ' fit',
+          using: options.callback,
+          within: options.within
+        };
+      }
+    },
+&nbsp;
+    /**
+     * Positions the tail of the popover.
+     * @param positionFeedback Positioning feedback object returned from jQuery's Position utility. This contains
+     * information regarding how the popover bubble was positioned.
+     * @private
+     */
+    _positionTail: function (positionFeedback) {
+      // For more information about the feedback object, see:
+      // http://jqueryui.com/upgrade-guide/1.9/#added-positioning-feedback-to-the-using-callback
+      var targetRect,
+        offset = this.$element.offset();
+&nbsp;
+      if ($.isArray(this.options.pointAt)) {
+        targetRect = {
+          top: this.options.pointAt[1],
+          left: this.options.pointAt[0],
+          width: 0,
+          height: 0
+        };
+      } else {
+        var targetOffset = $(positionFeedback.target.element).offset();
+        targetRect = {
+          top: targetOffset.top,
+          left: targetOffset.left,
+          width: positionFeedback.target.width,
+          height: positionFeedback.target.height
+        };
+      }
+&nbsp;
+      // Convert from doc coordinate space to this.$element coordinate space.
+      targetRect.top -= (offset.top + parseFloat(this.$element.css('borderTopWidth')));
+      targetRect.left -= (offset.left + parseFloat(this.$element.css('borderLeftWidth')));
+&nbsp;
+      var tailClass, tailLeft, tailTop, tailWidth;
+      switch (this.options.pointFrom) {
+        case 'top': // Consumer wanted popover above target
+        case 'bottom': // Consumer wanted popover below target
+          tailWidth = this._cachedTailDimensions.topBottom.width;
+          tailLeft = targetRect.left + targetRect.width / 2 - tailWidth / 2;
+          if (positionFeedback.vertical == 'bottom') { // Popover ended up above the target
+            tailClass = 'coral-Popover-arrow--down';
+            tailTop = targetRect.top - this._cachedTailDimensions.topBottom.height;
+          } else { // Popover ended up below the target
+            tailClass = 'coral-Popover-arrow--up';
+            tailTop = targetRect.top + targetRect.height;
+          }
+          break;
+        case 'left': // Consumer wanted popover to the left of the target
+        case 'right': // Consumer wanted popover to the right of the target
+          tailWidth = this._cachedTailDimensions.leftRight.width;
+          tailTop = targetRect.top + targetRect.height / 2 -
+            this._cachedTailDimensions.leftRight.height / 2;
+          if (positionFeedback.horizontal == 'left') { // Popover ended up on the right side of the target
+            tailClass = 'coral-Popover-arrow--left';
+            tailLeft = targetRect.left + targetRect.width;
+          } else { // Popover ended up on the left side of the target
+            tailClass = 'coral-Popover-arrow--right';
+            tailLeft = targetRect.left - tailWidth;
+          }
+          break;
+      }
+&nbsp;
+      this._$tail.css({ top: tailTop, left: tailLeft })
+        .removeClass('coral-Popover-arrow--up coral-Popover-arrow--down coral-Popover-arrow--left coral-Popover-arrow--right')
+        .addClass(tailClass);
+    },
+&nbsp;
+    /** @ignore */
+    _show: function () {
+      this.$element.show().prop('aria-hidden', false);
+      this._position();
+&nbsp;
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (!this.options.preventAutoHide) {
+        clearTimeout(this.autoHideInitTimeout);
+        this.autoHideInitTimeout = setTimeout(function() {
+          // Must watch touchstart because click events don't bubble as expected on iOS Safari.
+          $(document).on('touchstart.popover-hide-' + this.uuid + ' click.popover-hide-' + this.uuid, function (e) {
+            var el = this.$element.get(0);
+&nbsp;
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (e.target !== el &amp;&amp; !$.contains(el, e.target)) {
+              this.hide();
+            }
+          }.bind(this));
+        }.bind(this), 0);
+      }
+    },
+&nbsp;
+    /** @ignore */
+    _hide: function () {
+      clearTimeout(this.autoHideInitTimeout);
+      this.$element.hide().prop('aria-hidden', true);
+      $(document).off('.popover-hide-' + this.uuid);
+    },
+&nbsp;
+    /** @ignore */
+    _setContent: function () {
+      if (typeof this.options.content !== 'string') return;
+&nbsp;
+      // adds the content
+      this._$content.html(this.options.content);
+&nbsp;
+      this._position();
+    },
+&nbsp;
+    /**
+     * Deprecated.
+     * @param position
+     * @deprecated Please use set('pointAt', [x, y]) instead.
+     */
+    setPosition: <span class="fstat-no" title="function not covered" >function (position) {</span>
+<span class="cstat-no" title="statement not covered" >      this.set('pointAt', position);</span>
+    }
+  });
+&nbsp;
+  CUI.Widget.registry.register("popover", CUI.Popover);
+&nbsp;
+  $(function () {
+    // Must watch touchstart because click events don't bubble as expected on iOS Safari.
+    $(document).on('touchstart.popover.data-api click.popover.data-api', '[data-toggle="popover"]',<span class="fstat-no" title="function not covered" >function (event) {</span>
+<span class="cstat-no" title="statement not covered" >      var $trigger = $(this),</span>
+        $target = CUI.util.getDataTarget($trigger);
+&nbsp;
+      // if data target is not defined try to find the popover as a sibling
+<span class="cstat-no" title="statement not covered" >      $target = $target &amp;&amp; $target.length &gt; 0 ? $target : $trigger.next('.coral-Popover');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var popover = $target.popover($.extend({pointAt: $trigger}, $target.data(), $trigger.data())).data('popover');</span>
+<span class="cstat-no" title="statement not covered" >      popover.toggleVisibility();</span>
+<span class="cstat-no" title="statement not covered" >      event.preventDefault();</span>
+    });
+  });
+}(window.jQuery));
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Sep 01 2014 21:02:21 GMT+0200 (CEST)</div>
+</div>
+
+<script src="../../../prettify.js"></script>
+
+<script src="https://yui-s.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<script>
+
+    YUI().use('datatable', function (Y) {
+
+        var formatters = {
+          pct: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              try {
+                  return o.value.toFixed(2) + '%';
+              } catch (ex) { return o.value + '%'; }
+          },
+          html: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.record.get(o.column.key + '_html');
+          }
+        },
+          defaultFormatter = function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.value;
+          };
+
+        function getColumns(theadNode) {
+            var colNodes = theadNode.all('tr th'),
+                cols = [],
+                col;
+            colNodes.each(function (colNode) {
+                col = {
+                    key: colNode.getAttribute('data-col'),
+                    label: colNode.get('innerHTML') || ' ',
+                    sortable: !colNode.getAttribute('data-nosort'),
+                    className: colNode.getAttribute('class'),
+                    type: colNode.getAttribute('data-type'),
+                    allowHTML: colNode.getAttribute('data-html') === 'true' || colNode.getAttribute('data-fmt') === 'html'
+                };
+                col.formatter = formatters[colNode.getAttribute('data-fmt')] || defaultFormatter;
+                cols.push(col);
+            });
+            return cols;
+        }
+
+        function getRowData(trNode, cols) {
+            var tdNodes = trNode.all('td'),
+                    i,
+                    row = { classes: {} },
+                    node,
+                    name;
+            for (i = 0; i < cols.length; i += 1) {
+                name = cols[i].key;
+                node = tdNodes.item(i);
+                row[name] = node.getAttribute('data-value') || node.get('innerHTML');
+                row[name + '_html'] = node.get('innerHTML');
+                row.classes[name] = node.getAttribute('class');
+                //Y.log('Name: ' + name + '; Value: ' + row[name]);
+                if (cols[i].type === 'number') { row[name] = row[name] * 1; }
+            }
+            //Y.log(row);
+            return row;
+        }
+
+        function getData(tbodyNode, cols) {
+            var data = [];
+            tbodyNode.all('tr').each(function (trNode) {
+                data.push(getRowData(trNode, cols));
+            });
+            return data;
+        }
+
+        function replaceTable(node) {
+            if (!node) { return; }
+            var cols = getColumns(node.one('thead')),
+                data = getData(node.one('tbody'), cols),
+                table,
+                parent = node.get('parentNode');
+
+            table = new Y.DataTable({
+                columns: cols,
+                data: data,
+                sortBy: 'file'
+            });
+            parent.set('innerHTML', '');
+            table.render(parent);
+        }
+
+        Y.on('domready', function () {
+            replaceTable(Y.one('div.coverage-summary table'));
+            if (typeof prettyPrint === 'function') {
+                prettyPrint();
+            }
+        });
+    });
+</script>
+</body>
+</html>

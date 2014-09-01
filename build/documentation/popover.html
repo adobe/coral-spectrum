@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Popover</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light docs-Background u-coral-clearFix">
+    <article class="docs-Component">
+      <section class="docs-Component-metadata">
+        <div class="docs-Component-header">
+          <!-- name of the component-->
+          <h1 class="coral-Heading coral-Heading--1 docs-Component-name">Popover</h1><span class="docs-Component-version">Current Version: <strong>2.0.15</strong></span>
+        </div>
+        <div class="coral-Component-github"> Github: <a href="https://git.corp.adobe.com/Coral/coralui-component-popover" class="coral-Link">coralui-component-popover</a>
+        </div>
+        <!-- description is loaded from the template-->
+      </section>
+      <section class="docs-Component-documentation">
+        <p>The Popover component provides a non-modal overlay of additional information related to a target element. Typically this occurs when the user clicks the target element.</p>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">Markup Examples</h3><span class="u-coral-pullRight docs-ThemeSwitcher"><i class="coral-Icon coral-Icon--infoCircle docs-ThemeSwitcher-icon"></i>
+                  <button class="coral-MinimalButton docs-ThemeSwitcher-button is-selected">Light</button>|
+                  <button data-theme="coral--dark" class="coral-MinimalButton docs-ThemeSwitcher-button">Dark</button></span>
+              </div>
+              <p>By default the popover does not include padding so you can customize what goes inside. Use <code>.u-coral-padding</code> to add the desired padding in the content.</p>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Default Positioning</h3>Popovers will be positioned so they remain visible. The default location is below the target element.
+                      <div id="guide-ff68da0f-df14-4cf2-b9f2-6988aaada684" class="docs-Example-markup u-columnLarge">
+                        <button class="coral-Button" data-target="#defaultPopover" data-toggle="popover">Open</button>
+                        <div id="defaultPopover" class="coral-Popover">
+                          <div class="coral-Popover-content u-coral-padding">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.
+                          </div>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-ff68da0f-df14-4cf2-b9f2-6988aaada684" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Explicit Positioning</h3>Specified via <code>data-point-from</code> and <code>data-align-from</code> properties.
+                      <div id="guide-c72c43e6-7fe1-4303-8a52-8b32e5efba67" class="docs-Example-markup u-columnLarge">
+                        <button class="coral-Button" data-target="#topPopover" data-toggle="popover" data-point-from="top">Top</button>
+                        <div id="topPopover" class="coral-Popover">
+                          <div class="coral-Popover-content u-coral-padding">
+                            Lorem ipsum dolor sit amet.
+                          </div>
+                        </div>
+                        
+                        <button class="coral-Button" data-target="#rightPopover" data-toggle="popover" data-point-from="right">Right</button>
+                        <div id="rightPopover" class="coral-Popover">
+                          <div class="coral-Popover-content u-coral-padding">
+                            Lorem ipsum dolor sit amet.
+                          </div>
+                        </div>
+                        
+                        <button class="coral-Button" data-target="#bottomPopover" data-toggle="popover" data-point-from="bottom">Bottom</button>
+                        <div id="bottomPopover" class="coral-Popover">
+                          <div class="coral-Popover-content u-coral-padding">
+                            Lorem ipsum dolor sit amet.
+                          </div>
+                        </div>
+                        
+                        <button class="coral-Button" data-target="#leftPopover" data-toggle="popover" data-point-from="left">Left</button>
+                        <div id="leftPopover" class="coral-Popover">
+                          <div class="coral-Popover-content u-coral-padding">
+                            Lorem ipsum dolor sit amet.
+                          </div>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-c72c43e6-7fe1-4303-8a52-8b32e5efba67" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Content Separators</h3>By placing multiple <code>.coral-Popover-content</code> blocks inside the popover, you get a separator between them.
+                      <div id="guide-cfaaac8f-c006-46e1-8877-53da1149d25d" class="docs-Example-markup u-columnLarge">
+                        <button class="coral-Button" data-target="#sepPopover" data-toggle="popover" data-point-from="top" data-align-from="left">Separators</button>
+                        <div id="sepPopover" class="coral-Popover">
+                          <div class="coral-Popover-content u-coral-padding">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida.
+                          </div>
+                          
+                          <div class="coral-Popover-content u-coral-padding">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida.
+                          </div>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-cfaaac8f-c006-46e1-8877-53da1149d25d" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Link Example</h3>Popovers can be used from link or any clickable item by specifying <code>data-toggle="popover"</code> and <code>data-target="myTarget"</code>.
+                      <div id="guide-7f50f91b-4f9b-4849-b672-a30c7854fa15" class="docs-Example-markup u-columnLarge">
+                        <p>This <a class="coral-Link" href="#" data-toggle="popover" data-target="#anchorPopover">link</a> will launch a popover.</p>
+                        <div id="anchorPopover" class="coral-Popover">
+                          <div class="coral-Popover-content u-coral-padding">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida.
+                          </div>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-7f50f91b-4f9b-4849-b672-a30c7854fa15" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Content from Options</h3>Popovers content can be overriden by the invoking component using the <code>data-content</code> attribute.
+                      <div id="guide-4d789473-11f5-4867-b45a-d53318815945" class="docs-Example-markup u-columnLarge">
+                        <button class="coral-Button" data-target="#from_data_options" data-toggle="popover"
+                          data-content="<div class='u-coral-padding'>This was overriden from the data-content.</div>">Content from options</button>
+                        <div id="from_data_options" class="coral-Popover">
+                          <div class="u-coral-padding">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida.
+                          </div>
+                        </div>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-4d789473-11f5-4867-b45a-d53318815945" class="docs-Example-toggleMarkup prettyprint"></pre>
+            </section>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                <h3 class="coral-Heading coral-Heading--3">JavaScript Examples</h3>
+              </div>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">JS Class Initialization</h3>The following is an example of a button that invokes a Popover via the JS API.
+                      <div id="guide-1b06e1be-ed93-429b-9ca2-a0cf3b736adb" class="docs-Example-markup u-columnMedium">
+                        <button id="myButton" class="coral-Button">Show Popover</button>
+                        <div id="myPopover"></div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-1b06e1be-ed93-429b-9ca2-a0cf3b736adb" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <pre id="guide-0eb35c2f-7d34-4fb6-a50f-31855d6e7817" data-src-id="guide-0eb35c2f-7d34-4fb6-a50f-31855d6e7817" class="prettyprint docs-Example-snippet">
+                        <script>
+                          $(document).ready(function() {
+                            $('#myButton').click(function() {
+                              var popover = $('#myPopover').data('popover');
+                              if (!popover) {
+                                popover = new CUI.Popover({
+                                  element:"#myPopover",
+                                  pointAt:"#myButton",
+                                  content:"<div class='u-coral-padding'>Lorem ipsum hipstorum.</div>"
+                                });
+                              }
+                              popover.toggleVisibility();
+                            });
+                          });
+                        </script>
+                        </pre>
+                      <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Responding to User Interaction</h3>The following demonstrates how to respond to user interaction when the Popover is shown or hidden. Show and hide the Popover using the "Show Popover" example above to see logged events.
+                      <pre id="guide-405cadbc-9a8f-4c20-b608-fa3e655392fe" data-src-id="guide-405cadbc-9a8f-4c20-b608-fa3e655392fe" class="prettyprint docs-Example-snippet">
+                        <script>
+                          $(document).ready(function () {
+                            var eventLog = $('#eventLog');
+                            $('#myPopover').on('show', function(event) {
+                              eventLog.log('Popover shown.');
+                            }).on('hide', function(event) {
+                              eventLog.log('Popover hidden.');
+                            });
+                          });
+                        </script>
+                        </pre>
+                          <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Log</h3>
+                      <textarea id="eventLog" readonly="true" class="coral-Textfield coral-Textfield--multiline docs-Example-log"></textarea>
+                  <p>To prevent a popover from being hidden (for example, until its content passes validation), call <code>event.preventDefault()</code> on the hide event.</p>
+            </section>
+        <section class="guide-jsDocFragement">
+    <div class="content">
+        <!--<h1 class="line">Class: Popover</h1>-->
+        
+          
+
+
+
+<section>
+
+<h1 class="coral-Heading coral-Heading--1 u-line">Popover
+ JSDoc</h1>
+
+    <div class="class-description">Class Description: A box which points at an element or point.</div>
+
+
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Extends</h3>
+
+        <ul>
+            <li>CUI.Widget</li>
+        </ul>
+    
+
+    
+        
+<dt>
+    <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Constructor</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Creates a new popover
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">options</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last">Component options
+                
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+		<th class="coral-Table-headerCell">Optional</th>
+		
+
+		
+		<th class="coral-Table-headerCell">Default</th>
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">pointAt</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                  No<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">The element or coordinate to which the popover should point.
+     A coordinate should be provided as an array where the first
+     item is the X coordinate and the second item is a Y
+     coordinate. The coordinate should be in the document
+     coordinate space.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">content</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">Content of the popover (HTML).</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">pointFrom</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    bottom
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">The side of the target element or coordinate the popover</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">within</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">Object</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    window
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">Popover collision detection container
+     should be pointing from. Possible values include
+     <code>top</code>, <code>right</code>, <code>bottom</code>,
+     or <code>left</code>.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">preventAutoHide</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">boolean</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">When set to <code>false</code>, the popover will close when
+     the user clicks outside the popover. When set to
+     <code>true</code>, the popover will only close when the
+     target element is clicked or <code>hide()</code> is
+     manually called.</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">alignFrom</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">String</span>
+
+            
+            </td>
+
+            
+                <td class="coral-Table-cell attributes">
+                
+                    Yes<br>
+                
+
+                
+                </td>
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    left
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">When set to left, the popover will be anchored to the left
+     side of its offset parent (in other words, it will use the
+     <code>left</code> CSS property). When set to right, the
+     popover will be anchored to the right side of its offset
+     parent (in other words, it will use the <code>right</code>
+     CSS property). When the element the popover is pointing at
+     is right-aligned, it can be useful to set the value to
+     <code>right</code> so the popover will appear to stay
+     attached to the element when the user resizes the window
+     horizontally.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+            </td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Popover.js, line 43</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+    
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+       <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Methods</h3>
+
+        <dl>
+            
+<dt>
+    <h3 class="name" id="setPosition"><span class="type-signature"></span>setPosition</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Deprecated.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover">
+    <thead>
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="coral-Table-cell name">position</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="coral-Table-cell description last"></td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+        <dt class="important tag-deprecated">Deprecated:</dt><dd><ul class="dummy"><li>Please use set('pointAt', [x, y]) instead.</li><ul></dd>
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Popover.js, line 408</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+        
+    </div>
+   
+        </section>
+      </section>
+    </article>
+  </body>
+</html>
