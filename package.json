@@ -13,7 +13,7 @@
     "grunt-contrib-cssmin": "~0.7.0",
     "grunt-css-metrics": "~0.1.2",
     "coralui-grunt-componentbuilder": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-componentbuilder.git#1.4.0",
-    "coralui-grunt-releasepackage": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-releasepackage.git#1.1.1",
+    "coralui-grunt-releasepackage": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-releasepackage.git#1.X",
     "coralui-grunt-testrunner": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-testrunner.git#2.2.0",
     "coralui-util-dependencies": "git+ssh://git@git.corp.adobe.com:Coral/coralui-util-dependencies.git#0.0.2",
     "coralui-guide-resources": "git+ssh://git@git.corp.adobe.com:Coral/coralui-guide-resources.git#3.0.2",
