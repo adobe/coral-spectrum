@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>TagList</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/coral.js"></script>
+
+  <script>
+    $( document ).ready(function() {
+
+      var newItems = [ 'Chile', 'Argentina', 'Paraguay', 'Galapagos', 'Wisconsin'];
+
+      $('#addButton').click( function() {
+        var taglistWidget = $('.coral-TagList').first().data('tagList');
+        console.log('widget', taglistWidget);
+
+        if ( newItems.length ) {
+          taglistWidget.addItem( newItems.shift() );
+        }
+      });
+      
+      var $customRendererLists = $('.js-custom-renderer-list');
+
+      $customRendererLists.tagList({
+        renderer: function(value, display) {
+          return '' +
+            '<div class="custom-tag">' +
+            display +
+            '  <button type="button" data-remove="tag">remove</button>' +
+            '  <input type="hidden" value="' + value + '"/>' +
+            '</div>';
+        }
+      });
+
+      $customRendererLists.tagList('addItem', [
+        {
+          display: 'Ecuador',
+          value: 'ec'
+        },
+        {
+          display: 'Bahamas',
+          value: 'bs'
+        }
+      ]);
+    });
+  </script>
+
+  <style>
+    body {
+      padding: 15px;
+    }
+
+    section {
+      box-sizing: border-box;
+      padding: 12px;
+    }
+
+    .custom-tag {
+      background-color: #a90000;
+      padding: 8px;
+      color: white;
+      vertical-align: middle;
+    }
+
+    .custom-tag button {
+      border: 1px solid white;
+      padding: 2px;
+      margin: 0 0 0 3px;
+      min-width: 0px;
+      height: auto;
+      font-weight: normal;
+    }
+  </style>
+</head>
+<body class="coral--light">
+<h1 class="coral-Heading coral-Heading--1">TagList Examples</h1>
+
+<section>
+  <h2 class="coral-Heading coral-Heading--2">Default</h2>
+  <ol class="coral-TagList" data-init="taglist" role="list">
+    <li role="listitem" class="coral-TagList-tag" title="Ecuador">
+      <button class="coral-MinimalButton coral-TagList-tag-removeButton" type="button" title="Remove">
+        <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+      </button>
+      <span class="coral-TagList-tag-label">Ecuador</span>
+      <input type="hidden" value="ec">
+    </li>
+    <li role="listitem" class="coral-TagList-tag" title="Bahamas">
+      <button class="coral-MinimalButton coral-TagList-tag-removeButton" type="button" title="Remove">
+        <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+      </button>
+      <span class="coral-TagList-tag-label">Bahamas</span>
+      <input type="hidden" value="bs">
+    </li>
+  </ol>
+
+  <h2 class="coral-Heading coral-Heading--2">Custom Renderer</h2>
+  <ol class="coral-TagList js-custom-renderer-list" role="list"></ol>
+</section>
+<section class="coral--dark">
+  <h2 class="coral-Heading coral-Heading--2">Default</h2>
+  <ol class="coral-TagList" data-init="taglist" role="list">
+    <li role="listitem" class="coral-TagList-tag" title="Ecuador">
+      <button class="coral-MinimalButton coral-TagList-tag-removeButton" type="button" title="Remove">
+        <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+      </button>
+      <span class="coral-TagList-tag-label">Ecuador</span>
+      <input type="hidden" value="ec">
+    </li>
+    <li role="listitem" class="coral-TagList-tag" title="Bahamas">
+      <button class="coral-MinimalButton coral-TagList-tag-removeButton" type="button" title="Remove">
+        <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+      </button>
+      <span class="coral-TagList-tag-label">Bahamas</span>
+      <input type="hidden" value="bs">
+    </li>
+  </ol>
+
+  <h2 class="coral-Heading coral-Heading--2">Custom Renderer</h2>
+  <ol class="coral-TagList js-custom-renderer-list" role="list"></ol>
+</section>
+<section style="width: 200px; border: 1px solid black; padding: 10px;">
+  LIMITED SPACE
+  <ol class="coral-TagList" data-init="taglist" role="list">
+    <li role="listitem" class="coral-TagList-tag coral-TagList-tag--multiline">
+      <button class="coral-MinimalButton coral-TagList-tag-removeButton" type="button" title="Remove">
+        <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+      </button>
+      <span class="coral-TagList-tag-label">Ecuador SUPER SUPER SUPER LONG</span>
+      <input type="hidden" value="ec">
+    </li>
+    <li role="listitem" class="coral-TagList-tag coral-TagList-tag--multiline">
+      <button class="coral-MinimalButton coral-TagList-tag-removeButton" type="button" title="Remove">
+        <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+      </button>
+      <span class="coral-TagList-tag-label">This is an amazing long tag which should never ever be there but ... sometimes ...</span>
+      <input type="hidden" value="ec">
+    </li>
+    <li role="listitem" class="coral-TagList-tag coral-TagList-tag--multiline">
+      <button class="coral-MinimalButton coral-TagList-tag-removeButton" type="button" title="Remove">
+        <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+      </button>
+      <span class="coral-TagList-tag-label">Bahamas</span>
+      <input type="hidden" value="bs">
+    </li>
+  </ol>
+</section>
+<section>
+  <button class="coral-Button" id="addButton">Add Item</button>
+</section>
+</body>
+</html>
