@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Autocomplete</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/coral.js"></script>
+
+  <script type="text/javascript">
+    function bindReport(autocomplete, reporter) {
+      var api = autocomplete.data('autocomplete');
+
+      var handler = function (event, data) {
+        reporter.text(api.getValue());
+      };
+
+      autocomplete.on('change:value', handler);
+      handler();
+    }
+
+    $(function () {
+      bindReport($('#vtest-autocomplete-basic'), $('#selection-basic'));
+      bindReport($('#vtest-autocomplete-remote'), $('#selection-remote'));
+      bindReport($('#vtest-autocomplete-remote-single'), $('#selection-remote-single'));
+      bindReport($('#vtest-autocomplete-single'), $('#selection-single'));
+    });
+  </script>
+
+  <style>
+    body,
+    .filterSample {
+      padding: 20px;
+    }
+  </style>
+</head>
+
+<body class="coral--light">
+<h1 class="coral-Heading coral-Heading--1">Autocomplete</h1>
+
+<div class="filterSample">
+
+  <form onsubmit="alert('Form submitted: ' + $(this).serialize()); return false;">
+    <h2 class="coral-Heading coral-Heading--2"><label for="vtest-autocomplete-basic-input">Multiple, Force Selection</label></h2>
+    <div id="vtest-autocomplete-basic" class="coral-Autocomplete" data-init="autocomplete" data-multiple="true" data-forceselection="true">
+      <div class="coral-InputGroup coral-InputGroup--block js-coral-Autocomplete-inputGroup">
+        <label class="coral-DecoratedTextfield coral-InputGroup-input">
+          <span class="u-coral-screenReaderOnly">Search</span>
+          <i class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search" aria-hidden="true"></i>
+          <input id="vtest-autocomplete-basic-input"
+                 class="coral-DecoratedTextfield-input coral-Textfield js-coral-Autocomplete-textfield" type="text"
+                 placeholder="Search"
+                 name="vtest-autocomplete-basic-input">
+        </label>
+        <span class="coral-InputGroup-button">
+          <button class="coral-Button coral-Button--secondary coral-Button--square js-coral-Autocomplete-toggleButton" type="button">
+            <i class="coral-Icon coral-Icon--sizeXS coral-Icon--triangleDown"></i>
+          </button>
+        </span>
+      </div>
+      <ul class="coral-TagList js-coral-Autocomplete-tagList" data-fieldname="basic"></ul>
+      <ul id="vtest-autocomplete-basic-ul" class="coral-SelectList js-coral-Autocomplete-selectList">
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="af">Afghanistan</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="al">Albania</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bs">Bahamas</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bh">Bahrain</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bi">Burundi</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bj">Benin</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bm">Bermuda</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bn">Brunei Darussalam</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bo">Bolivia</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="kh">Cambodia</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="cm">Cameroon</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dk">Denmark</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dj">Djibouti</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="ec">Ecuador</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="eg">Egypt</li>
+      </ul>
+    </div>
+
+    <h4 class="coral-Heading coral-Heading--4">Selected:</h4>
+    <output id="selection-basic" for="vtest-autocomplete-basic-input">?</output>
+
+    <h2 class="coral-Heading coral-Heading--2"><label for="vtest-autocomplete-groups-input">Groups, Multiple</label></h2>
+    <div id="vtest-autocomplete-groups" class="coral-Autocomplete" data-init="autocomplete" data-multiple="true">
+      <div class="coral-InputGroup coral-InputGroup--block js-coral-Autocomplete-inputGroup">
+        <label class="coral-DecoratedTextfield coral-InputGroup-input">
+          <span class="u-coral-screenReaderOnly">Search</span>
+          <i class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search" aria-hidden="true"></i>
+          <input id="vtest-autocomplete-groups-input"
+                 class="coral-DecoratedTextfield-input coral-Textfield js-coral-Autocomplete-textfield" type="text"
+                 placeholder="Search"
+                 name="vtest-autocomplete-groups-input">
+        </label>
+        <span class="coral-InputGroup-button">
+          <button class="coral-Button coral-Button--secondary coral-Button--square js-coral-Autocomplete-toggleButton" type="button">
+            <i class="coral-Icon coral-Icon--sizeXS coral-Icon--triangleDown"></i>
+          </button>
+        </span>
+      </div>
+      <ul class="coral-TagList js-coral-Autocomplete-tagList" data-fieldname="groups"></ul>
+      <ul id="vtest-autocomplete-groups-ul" class="coral-SelectList js-coral-Autocomplete-selectList">
+        <li class="coral-SelectList-item coral-SelectList-item--optgroup">
+          <span class="coral-SelectList-groupHeader">Group 1</span>
+          <ul class="coral-SelectList-sublist">
+            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="af">Afghanistan</li>
+            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bs">Bahamas</li>
+            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="kh">Cambodia</li>
+            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dk">Denmark</li>
+            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="ec">Ecuador</li>
+          </ul>
+        </li>
+        <li class="coral-SelectList-item coral-SelectList-item--optgroup">
+          <span class="coral-SelectList-groupHeader">Group 2</span>
+          <ul class="coral-SelectList-sublist">
+            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="al">Albania</li>
+            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bh">Bahrain</li>
+            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="cm">Cameroon</li>
+            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dj">Djibouti</li>
+            <li class="coral-SelectList-item coral-SelectList-item--option" data-value="eg">Egypt</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <h2 class="coral-Heading coral-Heading--2"><label for="vtest-autocomplete-remote-input">Remote, Multiple</label></h2>
+    <!-- Remote data -->
+    <div id="vtest-autocomplete-remote" class="coral-Autocomplete" data-init="autocomplete"
+          data-multiple="true">
+      <div class="coral-InputGroup coral-InputGroup--block js-coral-Autocomplete-inputGroup">
+        <label class="coral-DecoratedTextfield coral-InputGroup-input">
+          <span class="u-coral-screenReaderOnly">Search</span>
+          <i class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search" aria-hidden="true"></i>
+          <input id="vtest-autocomplete-remote-input"
+                 class="coral-DecoratedTextfield-input coral-Textfield js-coral-Autocomplete-textfield" type="text"
+                 placeholder="Search"
+                 name="remote">
+        </label>
+        <span class="coral-InputGroup-button">
+          <button class="coral-Button coral-Button--secondary coral-Button--square js-coral-Autocomplete-toggleButton" type="button">
+            <i class="coral-Icon coral-Icon--sizeXS coral-Icon--triangleDown"></i>
+          </button>
+        </span>
+      </div>
+      <ul class="coral-SelectList js-coral-Autocomplete-selectList" data-type="dynamic"
+          data-dataurl="remotehtml.html"></ul>
+      <ul class="coral-TagList js-coral-Autocomplete-tagList" data-fieldname="remote"></ul>
+    </div>
+
+    <h4 class="coral-Heading coral-Heading--4">Selected:</h4>
+    <output id="selection-remote" for="vtest-autocomplete-remote-input"></output>
+
+    <h2 class="coral-Heading coral-Heading--2"><label for="vtest-autocomplete-remote-single-input">Remote</label></h2>
+    <!-- Remote data -->
+    <div id="vtest-autocomplete-remote-single" class="coral-Autocomplete" data-init="autocomplete" data-multiple="false">
+      <div class="coral-InputGroup coral-InputGroup--block js-coral-Autocomplete-inputGroup">
+        <label class="coral-DecoratedTextfield coral-InputGroup-input">
+          <span class="u-coral-screenReaderOnly">Search</span>
+          <i class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search" aria-hidden="true"></i>
+          <input id="vtest-autocomplete-remote-single-input"
+                 class="coral-DecoratedTextfield-input coral-Textfield js-coral-Autocomplete-textfield" type="text"
+                 placeholder="Search"
+                 name="coralui-autocomplete-input-4">
+        </label>
+        <span class="coral-InputGroup-button">
+          <button class="coral-Button coral-Button--secondary coral-Button--square js-coral-Autocomplete-toggleButton" type="button">
+            <i class="coral-Icon coral-Icon--sizeXS coral-Icon--triangleDown"></i>
+          </button>
+        </span>
+      </div>
+      <ul class="coral-SelectList js-coral-Autocomplete-selectList" data-type="dynamic"
+          data-dataurl="remotehtml.html"></ul>
+    </div>
+
+    <h4 class="coral-Heading coral-Heading--4">Selected:</h4>
+    <output id="selection-remote-single" for="vtest-autocomplete-remote-single-input"></output>
+
+
+    <h2 class="coral-Heading coral-Heading--2"><label for="vtest-autocomplete-single-input">Force Selection</label></h2>
+    <div id="vtest-autocomplete-single" class="coral-Autocomplete" data-init="autocomplete" data-forceselection="true">
+      <div class="coral-InputGroup coral-InputGroup--block js-coral-Autocomplete-inputGroup">
+        <label class="coral-DecoratedTextfield coral-InputGroup-input">
+          <span class="u-coral-screenReaderOnly">Search</span>
+          <i class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search" aria-hidden="true"></i>
+          <input id="vtest-autocomplete-single-input"
+                 class="coral-DecoratedTextfield-input coral-Textfield js-coral-Autocomplete-textfield" type="text"
+                 placeholder="Search"
+                 name="vtest-autocomplete-single-input">
+        </label>
+        <span class="coral-InputGroup-button">
+          <button class="coral-Button coral-Button--secondary coral-Button--square js-coral-Autocomplete-toggleButton" type="button">
+            <i class="coral-Icon coral-Icon--sizeXS coral-Icon--triangleDown"></i>
+          </button>
+        </span>
+      </div>
+      <ul class="coral-SelectList js-coral-Autocomplete-selectList">
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="af">Afghanistan</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="al">Albania</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bs">Bahamas</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bh">Bahrain</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bi">Burundi</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bj">Benin</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bm">Bermuda</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bn">Brunei Darussalam</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bo">Bolivia</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="kh">Cambodia</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="cm">Cameroon</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dk">Denmark</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dj">Djibouti</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="ec">Ecuador</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="eg">Egypt</li>
+      </ul>
+    </div>
+
+    <h4 class="coral-Heading coral-Heading--4">Selected:</h4>
+    <output id="selection-single" for="vtest-autocomplete-single-input"></output>
+
+    <h2 class="coral-Heading coral-Heading--2"><label for="vtest-autocomplete-single-hidden-input">Force Selection with hidden input</label></h2>
+    <p>
+      If the hidden field already has a name, this one is kept, otherwise the name from
+      the text input is assigned to the hidden input.
+    <p>
+    <div id="vtest-autocomplete-single-hidden" class="coral-Autocomplete" data-init="autocomplete" data-forceselection="true">
+      <div class="coral-InputGroup coral-InputGroup--block js-coral-Autocomplete-inputGroup">
+        <label class="coral-DecoratedTextfield coral-InputGroup-input">
+          <span class="u-coral-screenReaderOnly">Search</span>
+          <i class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search" aria-hidden="true"></i>
+          <input id="vtest-autocomplete-single-hidden-input"
+                 class="coral-DecoratedTextfield-input coral-Textfield js-coral-Autocomplete-textfield" type="text"
+                 placeholder="Search" value="Bahamas"
+                 name="vtest-autocomplete-single-hidden-input">
+          <input type="hidden" value="bs" name="hidden_name" class="js-coral-Autocomplete-hidden">
+        </label>
+        <span class="coral-InputGroup-button">
+          <button class="coral-Button coral-Button--secondary coral-Button--square js-coral-Autocomplete-toggleButton" type="button">
+            <i class="coral-Icon coral-Icon--sizeXS coral-Icon--triangleDown"></i>
+          </button>
+        </span>
+      </div>
+      <ul class="coral-SelectList js-coral-Autocomplete-selectList">
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="af">Afghanistan</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="al">Albania</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bs">Bahamas</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bh">Bahrain</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bi">Burundi</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bj">Benin</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bm">Bermuda</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bn">Brunei Darussalam</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bo">Bolivia</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="kh">Cambodia</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="cm">Cameroon</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dk">Denmark</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dj">Djibouti</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="ec">Ecuador</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="eg">Egypt</li>
+      </ul>
+    </div>
+
+  </form>
+</div>
+
+<div class="coral--dark filterSample">
+  <form onsubmit="alert('Form submitted!'); return false;">
+    <h2 class="coral-Heading coral-Heading--2"><label for="vtest-autocomplete-basic-input-dark">Multiple, Force Selection</label></h2>
+    <div id="vtest-autocomplete-basic-dark" class="coral-Autocomplete" data-init="autocomplete"
+              data-multiple="true">
+      <div class="coral-InputGroup coral-InputGroup--block js-coral-Autocomplete-inputGroup">
+        <label class="coral-DecoratedTextfield coral-InputGroup-input">
+          <span class="u-coral-screenReaderOnly">Search</span>
+          <i class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search" aria-hidden="true"></i>
+          <input id="vtest-autocomplete-basic-input-dark"
+                 class="coral-DecoratedTextfield-input coral-Textfield js-coral-Autocomplete-textfield" type="text"
+                 placeholder="Search"
+                 name="vtest-autocomplete-basic-input-dark">
+        </label>
+        <span class="coral-InputGroup-button">
+          <button class="coral-Button coral-Button--secondary coral-Button--square js-coral-Autocomplete-toggleButton" type="button">
+            <i class="coral-Icon coral-Icon--sizeXS coral-Icon--triangleDown"></i>
+          </button>
+        </span>
+      </div>
+      <ul id="vtest-autocomplete-basic-ul-dark" class="coral-SelectList js-coral-Autocomplete-selectList">
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="af">Afghanistan</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="al">Albania</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bs">Bahamas</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bh">Bahrain</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bi">Burundi</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bj">Benin</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bm">Bermuda</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bn">Brunei Darussalam</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bo">Bolivia</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="kh">Cambodia</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="cm">Cameroon</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dk">Denmark</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dj">Djibouti</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="ec">Ecuador</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="eg">Egypt</li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="coral-Heading coral-Heading--2"><label for="vtest-autocomplete-groups-input-dark">Groups</label></h2>
+      <div id="vtest-autocomplete-groups-dark" class="coral-Autocomplete"
+            data-init="autocomplete" data-multiple="true">
+        <div class="coral-InputGroup coral-InputGroup--block js-coral-Autocomplete-inputGroup">
+          <label class="coral-DecoratedTextfield coral-InputGroup-input">
+            <span class="u-coral-screenReaderOnly">Search</span>
+            <i class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search" aria-hidden="true"></i>
+            <input id="vtest-autocomplete-groups-input-dark"
+                   class="coral-DecoratedTextfield-input coral-Textfield js-coral-Autocomplete-textfield" type="text"
+                   placeholder="Search"
+                   name="vtest-autocomplete-groups-input-dark">
+          </label>
+          <span class="coral-InputGroup-button">
+            <button class="coral-Button coral-Button--secondary coral-Button--square js-coral-Autocomplete-toggleButton" type="button">
+              <i class="coral-Icon coral-Icon--sizeXS coral-Icon--triangleDown"></i>
+            </button>
+          </span>
+        </div>
+        <ul id="vtest-autocomplete-groups-ul-dark" class="coral-SelectList js-coral-Autocomplete-selectList">
+          <li class="coral-SelectList-item coral-SelectList-item--optgroup">
+            <span class="coral-SelectList-groupHeader">Group 1</span>
+            <ul class="coral-SelectList-sublist">
+              <li class="coral-SelectList-item coral-SelectList-item--option" data-value="af">Afghanistan</li>
+              <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bs">Bahamas</li>
+              <li class="coral-SelectList-item coral-SelectList-item--option" data-value="kh">Cambodia</li>
+              <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dk">Denmark</li>
+              <li class="coral-SelectList-item coral-SelectList-item--option" data-value="ec">Ecuador</li>
+            </ul>
+          </li>
+          <li class="coral-SelectList-item coral-SelectList-item--optgroup">
+            <span class="coral-SelectList-groupHeader">Group 2</span>
+            <ul class="coral-SelectList-sublist">
+              <li class="coral-SelectList-item coral-SelectList-item--option" data-value="al">Albania</li>
+              <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bh">Bahrain</li>
+              <li class="coral-SelectList-item coral-SelectList-item--option" data-value="cm">Cameroon</li>
+              <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dj">Djibouti</li>
+              <li class="coral-SelectList-item coral-SelectList-item--option" data-value="eg">Egypt</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="coral-Form coral-Form--vertical" style="width: 500px;">
+  <h2 class="coral-Heading coral-Heading--2">Vertical Form</h2>
+
+  <label class="coral-Form-fieldlabel" for="coralui-autocomplete-input-9">Autocomplete</label>
+  <div class="coral-Form-field coral-Autocomplete" data-init="autocomplete" data-multiple="true">
+    <div class="coral-InputGroup coral-InputGroup--block js-coral-Autocomplete-inputGroup">
+      <label class="coral-DecoratedTextfield coral-InputGroup-input">
+          <span class="u-coral-screenReaderOnly">Search</span>
+          <i class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search" aria-hidden="true"></i>
+        <input class="coral-DecoratedTextfield-input coral-Textfield js-coral-Autocomplete-textfield" type="text"
+               placeholder="Search"
+               name="coralui-autocomplete-input-9"
+               id="coralui-autocomplete-input-9">
+      </label>
+      <span class="coral-InputGroup-button">
+        <button class="coral-Button coral-Button--secondary coral-Button--square js-coral-Autocomplete-toggleButton" type="button">
+          <i class="coral-Icon coral-Icon--sizeXS coral-Icon--triangleDown"></i>
+        </button>
+      </span>
+    </div>
+    <ul class="coral-SelectList js-coral-Autocomplete-selectList">
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="af">Afghanistan</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="al">Albania</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bs">Bahamas</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bh">Bahrain</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bi">Burundi</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bj">Benin</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bm">Bermuda</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bn">Brunei Darussalam</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bo">Bolivia</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="kh">Cambodia</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="cm">Cameroon</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dk">Denmark</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dj">Djibouti</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="ec">Ecuador</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="eg">Egypt</li>
+    </ul>
+  </div>
+
+  <div class="coral-Form-fieldwrapper">
+    <label class="coral-Form-fieldlabel" for="coralui-autocomplete-input-10">Autocomplete</label>
+    <div class="coral-Form-field coral-Autocomplete" data-init="autocomplete" data-multiple="true">
+      <div class="coral-InputGroup coral-InputGroup--block js-coral-Autocomplete-inputGroup">
+        <label class="coral-DecoratedTextfield coral-InputGroup-input">
+          <span class="u-coral-screenReaderOnly">Search</span>
+          <i class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search" aria-hidden="true"></i>
+          <input class="coral-DecoratedTextfield-input coral-Textfield js-coral-Autocomplete-textfield" type="text"
+                 placeholder="Search"
+                 name="coralui-autocomplete-input-10"
+                 id="coralui-autocomplete-input-10">
+        </label>
+        <span class="coral-InputGroup-button">
+          <button class="coral-Button coral-Button--secondary coral-Button--square js-coral-Autocomplete-toggleButton" type="button">
+            <i class="coral-Icon coral-Icon--sizeXS coral-Icon--triangleDown"></i>
+          </button>
+        </span>
+      </div>
+      <ul class="coral-SelectList js-coral-Autocomplete-selectList">
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="af">Afghanistan</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="al">Albania</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bs">Bahamas</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bh">Bahrain</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bi">Burundi</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bj">Benin</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bm">Bermuda</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bn">Brunei Darussalam</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bo">Bolivia</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="kh">Cambodia</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="cm">Cameroon</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dk">Denmark</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dj">Djibouti</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="ec">Ecuador</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="eg">Egypt</li>
+      </ul>
+    </div>
+    <span class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right"></span>
+  </div>
+</div>
+
+<div class="coral-Form coral-Form--aligned" style="width: 500px;">
+  <h2 class="coral-Heading coral-Heading--2">Aligned Form</h2>
+  <label class="coral-Form-fieldlabel" for="coralui-autocomplete-input-11">Autocomplete</label>
+  <div class="coral-Form-field coral-Autocomplete" data-init="autocomplete" data-multiple="true">
+    <div class="coral-InputGroup coral-InputGroup--block js-coral-Autocomplete-inputGroup">
+      <label class="coral-DecoratedTextfield coral-InputGroup-input">
+        <span class="u-coral-screenReaderOnly">Search</span>
+        <i class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search" aria-hidden="true"></i>
+        <input class="coral-DecoratedTextfield-input coral-Textfield js-coral-Autocomplete-textfield" type="text"
+               placeholder="Search"
+               name="coralui-autocomplete-input-11"
+               id="coralui-autocomplete-input-11">
+      </label>
+      <span class="coral-InputGroup-button">
+        <button class="coral-Button coral-Button--secondary coral-Button--square js-coral-Autocomplete-toggleButton" type="button">
+          <i class="coral-Icon coral-Icon--sizeXS coral-Icon--triangleDown"></i>
+        </button>
+      </span>
+    </div>
+    <ul class="coral-SelectList js-coral-Autocomplete-selectList">
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="af">Afghanistan</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="al">Albania</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bs">Bahamas</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bh">Bahrain</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bi">Burundi</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bj">Benin</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bm">Bermuda</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bn">Brunei Darussalam</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bo">Bolivia</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="kh">Cambodia</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="cm">Cameroon</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dk">Denmark</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dj">Djibouti</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="ec">Ecuador</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="eg">Egypt</li>
+    </ul>
+  </div>
+
+  <div class="coral-Form-fieldwrapper">
+    <label class="coral-Form-fieldlabel" for="coralui-autocomplete-input-12">Autocomplete</label>
+    <div class="coral-Form-field coral-Autocomplete" data-init="autocomplete" data-multiple="true">
+      <div class="coral-InputGroup coral-InputGroup--block js-coral-Autocomplete-inputGroup">
+        <label class="coral-DecoratedTextfield coral-InputGroup-input">
+          <span class="u-coral-screenReaderOnly">Search</span>
+          <i class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search" aria-hidden="true"></i>
+          <input class="coral-DecoratedTextfield-input coral-Textfield js-coral-Autocomplete-textfield" type="text"
+                 placeholder="Search"
+                 name="coralui-autocomplete-input-12"
+                 id="coralui-autocomplete-input-12">
+        </label>
+        <span class="coral-InputGroup-button">
+          <button class="coral-Button coral-Button--secondary coral-Button--square js-coral-Autocomplete-toggleButton" type="button">
+            <i class="coral-Icon coral-Icon--sizeXS coral-Icon--triangleDown"></i>
+          </button>
+        </span>
+      </div>
+      <ul class="coral-SelectList js-coral-Autocomplete-selectList">
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="af">Afghanistan</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="al">Albania</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bs">Bahamas</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bh">Bahrain</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bi">Burundi</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bj">Benin</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bm">Bermuda</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bn">Brunei Darussalam</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bo">Bolivia</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="kh">Cambodia</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="cm">Cameroon</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dk">Denmark</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dj">Djibouti</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="ec">Ecuador</li>
+        <li class="coral-SelectList-item coral-SelectList-item--option" data-value="eg">Egypt</li>
+      </ul>
+    </div>
+    <span class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" data-init="quicktip" data-quicktip-type="info" data-quicktip-arrow="right"></span>
+  </div>
+</div>
+
+<div>
+  <h2 class="coral-Heading coral-Heading--2">Vertical Alignment</h2>
+
+  <label class="coral-Form-fieldlabel" for="coral-textfield-1">Text</label>
+  <input type="text" class="coral-Textfield" id="coral-textfield-1">
+
+  <label class="coral-Form-fieldlabel" for="coral-textarea-1">Textarea</label>
+  <textarea rows="4" class="coral-Textfield coral-Textfield--multiline" id="coral-textarea-1"></textarea>
+
+  <label class="coral-Form-fieldlabel" for="coralui-autocomplete-input-13">Autocomplete</label>
+  <div class="coral-Autocomplete" data-init="autocomplete" data-multiple="true">
+    <div class="coral-InputGroup coral-InputGroup--block js-coral-Autocomplete-inputGroup">
+      <label class="coral-DecoratedTextfield coral-InputGroup-input">
+        <span class="u-coral-screenReaderOnly">Search</span>
+        <i class="coral-DecoratedTextfield-icon coral-Icon coral-Icon--sizeXS coral-Icon--search" aria-hidden="true"></i>
+        <input class="coral-DecoratedTextfield-input coral-Textfield js-coral-Autocomplete-textfield" type="text"
+               placeholder="Search"
+               name="coralui-autocomplete-input-13"
+               id="coralui-autocomplete-input-13">
+      </label>
+      <span class="coral-InputGroup-button">
+        <button class="coral-Button coral-Button--secondary coral-Button--square js-coral-Autocomplete-toggleButton" type="button">
+          <i class="coral-Icon coral-Icon--sizeXS coral-Icon--triangleDown"></i>
+        </button>
+      </span>
+    </div>
+    <ul class="coral-SelectList js-coral-Autocomplete-selectList">
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="af">Afghanistan</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="al">Albania</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bs">Bahamas</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bh">Bahrain</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bi">Burundi</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bj">Benin</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bm">Bermuda</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bn">Brunei Darussalam</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="bo">Bolivia</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="kh">Cambodia</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="cm">Cameroon</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dk">Denmark</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="dj">Djibouti</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="ec">Ecuador</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="eg">Egypt</li>
+    </ul>
+  </div>
+</div>
+
+
+</body>
+</html>
