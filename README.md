@@ -1,42 +1,25 @@
-CoralUI 2
-=========
+# What is Adobe CoralUI?
+This repository packages the modular components that make up [Adobe CoralUI][1], a touch-first, front-end framework 
+for Adobe Cloud experiences.  CoralUI is an implementation of 
+the [CloudUI][2] design specifications.
 
-The master branch currently represents the modularized build of coral. If you wish to use an older version, check the [release/1.x](https://git.corp.adobe.com/Coral/coralui-1.x) repository.
+See the [Adobe CoralUI][1] website for more details.  If you have questions or 
+need help [getting started][5], contact the community via the [CoralUI mailing list][3].
 
-## Using gits
-1. Checking out the repository
-```
-git clone git@git.corp.adobe.com:Coral/coralui.git
-git checkout master
-```
+## Contribute to CoralUI!
 
-1. Downloading the slave repositories
-```
-gits populate
-```
+Adobe CoralUI follows an open development model that enables everyone inside 
+Adobe to contribute. 
 
-1. Updating the sources
-```
-gits pull
-```
+Find out more by reading the CoralUI [contributor documentation][4], or contact the
+community via the [CoralUI mailing list][3].
 
-## Building
+[1]: http://coralui.corp.adobe.com
+[2]: https://wiki.corp.adobe.com/display/CloudUI/Component+Library
+[3]: mailto:coralui@adobe.com
+[4]: https://wiki.corp.adobe.com/display/CUI/CoralUI+Home
+[5]: http://coralui.corp.adobe.com/getting-started/
 
-2. Install Node Dependencies.
-```
-npm install
-```
+# NOTE:
+The master branch or this repository currently represents the 2.x version of coral. If you wish to use an older version, see the [release/1.x](https://git.corp.adobe.com/Coral/coralui-1.x) repository.
 
-2. Build the package
-```
-grunt
-```
-
-#### Grunt options
-
-* `grunt` - builds a CoralUI build based on its component dependencies. 
-* `grunt clean` - cleans the build
-
-
-### Questions?
-Please contact the [mailing list](mailto:CoralUI@adobe.com) for additional questions.  
