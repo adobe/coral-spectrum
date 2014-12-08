@@ -27,7 +27,7 @@
     "coralui-component-alert": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-alert.git#2.1.11",
     "coralui-component-autocomplete": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-autocomplete.git#2.4.2",
     "coralui-component-charactercount": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-charactercount.git#2.0.11",
-    "coralui-component-coloricon": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-coloricon.git#1.0.3",
+    "coralui-component-coloricon": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-coloricon.git#1.1.0",
     "coralui-component-cyclebutton": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-cyclebutton.git#2.0.19",
     "coralui-component-datepicker": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-datepicker.git#2.1.11",
     "coralui-component-fileupload": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-fileupload.git#2.0.21",
