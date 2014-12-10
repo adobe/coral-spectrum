@@ -1,7 +1,7 @@
 {
   "name": "coralui",
   "description": "CoralUI package builder",
-  "version": "2.12.1-pre",
+  "version": "2.13.1-pre",
   "private": true,
   "repository": {
     "type": "git",
@@ -14,7 +14,7 @@
     "grunt-css-metrics": "~0.1.2",
     "coralui-grunt-componentbuilder": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-componentbuilder.git#1.x",
     "coralui-grunt-releasepackage": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-releasepackage.git#1.x",
-    "coralui-grunt-testrunner": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-testrunner.git#2.3.0",
+    "coralui-grunt-testrunner": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-testrunner.git#2.2.x",
     "coralui-util-dependencies": "git+ssh://git@git.corp.adobe.com:Coral/coralui-util-dependencies.git#0.0.5",
     "coralui-guide-resources": "git+ssh://git@git.corp.adobe.com:Coral/coralui-guide-resources.git#3.1.5",
     "load-grunt-config": "~0.7.0",
@@ -23,11 +23,12 @@
   "dependencies": {
     "coralui-commons": "git+ssh://git@git.corp.adobe.com:Coral/coralui-commons.git#pre",
     "coralui-core": "git+ssh://git@git.corp.adobe.com:Coral/coralui-core.git#pre-cloudui8",
+
     "coralui-component-accordion": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-accordion.git#pre-cloudui8",
     "coralui-component-alert": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-alert.git#2.1.11",
     "coralui-component-autocomplete": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-autocomplete.git#2.4.2",
     "coralui-component-charactercount": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-charactercount.git#pre-cloudui8",
-    "coralui-component-coloricon": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-coloricon.git#1.0.3",
+    "coralui-component-coloricon": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-coloricon.git#1.1.0",
     "coralui-component-cyclebutton": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-cyclebutton.git#pre-cloudui8",
     "coralui-component-datepicker": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-datepicker.git#pre-cloudui8",
     "coralui-component-fileupload": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-fileupload.git#pre-cloudui8",
