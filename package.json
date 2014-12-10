@@ -25,7 +25,7 @@
     "coralui-core": "git+ssh://git@git.corp.adobe.com:Coral/coralui-core.git#pre-cloudui8",
 
     "coralui-component-accordion": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-accordion.git#pre-cloudui8",
-    "coralui-component-alert": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-alert.git#2.1.11",
+    "coralui-component-alert": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-alert.git#pre-cloudui8",
     "coralui-component-autocomplete": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-autocomplete.git#2.4.2",
     "coralui-component-charactercount": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-charactercount.git#pre-cloudui8",
     "coralui-component-coloricon": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-coloricon.git#1.1.0",
