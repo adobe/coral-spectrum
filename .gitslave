@@ -6,7 +6,7 @@
 "../coralui-component-card" "packages/components/card"
 "../coralui-component-charactercount" "packages/components/charactercount"
 "../coralui-component-colorpicker" "packages/components/colorpicker"
-#"../coralui-component-columnview" "packages/components/columnview"
+"../coralui-component-columnview" "packages/components/columnview"
 "../coralui-component-cyclebutton" "packages/components/cyclebutton"
 "../coralui-component-datepicker" "packages/components/datepicker"
 "../coralui-component-dragaction" "packages/components/dragaction"
