@@ -30,7 +30,6 @@
 "../coralui-component-wizard" "packages/components/wizard"
 "../coralui-addon-icons" "packages/addons/icons"
 "../coralui-grunt-componentbuilder" "packages/grunt/componentbuilder"
-"../coralui-grunt-dependenciesbuilder" "packages/grunt/dependenciesbuilder"
 "../coralui-grunt-docsbuilder" "packages/grunt/docsbuilder"
 "../coralui-grunt-releasepackage" "packages/grunt/releasepackage"
 "../coralui-grunt-testrunner" "packages/grunt/testrunner"
