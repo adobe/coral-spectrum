@@ -6,6 +6,15 @@ the [CloudUI][2] design specifications.
 See the [Adobe CoralUI][1] website for more details.  If you have questions or 
 need help [getting started][5], contact the community via the [CoralUI mailing list][3].
 
+## CoralUI version
+This branch contains the **CoralUI 2 with Cloud UI 8** version of the CoralUI builder.
+
+Please check other branches to find the right version:
+
+* ```master``` is the CoralUI 3 version of the CoralUI builder
+* **```release/coral2``` is the maintenance branch for CoralUI 2 with Cloud UI 8**
+* ```release/coral2+cloudui7``` is the maintenance branch for CoralUI 2 with Cloud UI 7
+
 ## Contribute to CoralUI!
 
 Adobe CoralUI follows an open development model that enables everyone inside 
