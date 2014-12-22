@@ -28,7 +28,3 @@ community via the [CoralUI mailing list][3].
 [3]: mailto:coralui@adobe.com
 [4]: https://wiki.corp.adobe.com/display/CUI/CoralUI+Home
 [5]: http://coralui.corp.adobe.com/getting-started/
-
-# NOTE:
-The master branch or this repository currently represents the 2.x version of coral. If you wish to use an older version, see the [release/1.x](https://git.corp.adobe.com/Coral/coralui-1.x) repository.
-
