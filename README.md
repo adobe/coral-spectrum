@@ -1,4 +1,6 @@
-# What is Adobe CoralUI?
+# CoralUI Builder (2.x with CloudUI 8) [![Build Status](http://jenkins.bsl.eur.adobe.com/view/All_Products/view/CoralUI/job/Build_Coral_coralui2/badge/icon)](http://jenkins.bsl.eur.adobe.com/view/All_Products/view/CoralUI/job/Build_Coral_coralui2/)
+
+## What is Adobe CoralUI?
 This repository packages the modular components that make up [Adobe CoralUI][1], a touch-first, front-end framework 
 for Adobe Cloud experiences.  CoralUI is an implementation of 
 the [CloudUI][2] design specifications.
@@ -17,8 +19,8 @@ Please check other branches to find the right version:
 
 ## Contribute to CoralUI!
 
-Adobe CoralUI follows an open development model that enables everyone inside 
-Adobe to contribute. 
+Adobe CoralUI follows an open development model that enables everyone inside
+Adobe to contribute.
 
 Find out more by reading the CoralUI [contributor documentation][4], or contact the
 community via the [CoralUI mailing list][3].
