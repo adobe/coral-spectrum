@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>coral-Textfield</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+  <!-- typekit is needed for proper fonts -->
+  <script src="../../js/typekit.js"></script>
+
+  <style>
+    html {
+      width: 100%;
+      height: 100%;
+    }
+    body {
+      display: table;
+      width: 100%;
+      height: 100%;
+      padding-left: 15px;
+    }
+    .col {
+      display: table-cell;
+      padding: 8px;
+    }
+  </style>
+
+  <script>
+    function copyContent(source, dest, childSelector, cb) {
+      dest = document.querySelector(dest);
+      source = document.querySelector(source);
+      dest.innerHTML = source.innerHTML;
+
+      if (childSelector && cb) {
+        Array.prototype.forEach.call(dest.querySelectorAll(childSelector), cb);
+      }
+
+      return dest;
+    }
+  </script>
+</head>
+<body class="coral--light">
+  <section class="col">
+    <h1 class="coral-Heading coral-Heading--1">coral-Textfield</h1>
+  </section>
+  <section class="col" id="example_light">
+
+    <h2 class="coral-Heading coral-Heading--2">Default</h2>
+    <input type="text" class="coral-Textfield">
+
+    <h2 class="coral-Heading coral-Heading--2">Placeholder</h2>
+    <input type="text" class="coral-Textfield" placeholder="Placeholder">
+
+    <h2 class="coral-Heading coral-Heading--2">Disabled</h2>
+    <input type="text" class="coral-Textfield" disabled>
+
+    <h2 class="coral-Heading coral-Heading--2">Disabled + Placeholder</h2>
+    <input type="text" class="coral-Textfield" disabled placeholder="Placeholder">
+
+    <h2 class="coral-Heading coral-Heading--2">Invalid</h2>
+    <input type="text" class="coral-Textfield is-invalid">
+    <h2 class="coral-Heading coral-Heading--2">Name</h2>
+    <input type="text" class="coral-Textfield" name="name">
+
+    <h2 class="coral-Heading coral-Heading--2">ReadOnly</h2>
+    <input type="text" class="coral-Textfield" readonly value="Readonly field">
+
+    <h2 class="coral-Heading coral-Heading--2">Required</h2>
+    <input type="text" class="coral-Textfield" required>
+
+    <h2 class="coral-Heading coral-Heading--2">Value</h2>
+    <input type="text" class="coral-Textfield" value="Initial value">
+  </section>
+  <section class="coral--dark col" id="example_dark"></section>
+
+  <script>copyContent('#example_light', '#example_dark');</script>
+</body>
+</html>
