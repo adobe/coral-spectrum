@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>coral-InputGroup</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+  <!-- typekit is needed for proper fonts -->
+  <script src="../../js/typekit.js"></script>
+
+  <style>
+    html {
+      width: 100%;
+      height: 100%;
+    }
+    body {
+      display: table;
+      width: 100%;
+      height: 100%;
+    }
+    .col {
+      display: table-cell;
+      padding: 8px;
+    }
+  </style>
+
+  <script>
+    function copyContent(source, dest, childSelector, cb) {
+      dest = document.querySelector(dest);
+      source = document.querySelector(source);
+      dest.innerHTML = source.innerHTML;
+
+      if (childSelector && cb) {
+        Array.prototype.forEach.call(dest.querySelectorAll(childSelector), cb);
+      }
+
+      return dest;
+    }
+  </script>
+</head>
+<body class="coral--light">
+  <section class="col" id="example_light">
+    <h1 class="coral-Heading coral-Heading--1">coral-InputGroup</h1>
+
+    <h2 class="coral-Heading coral-Heading--2">Button Before</h2>
+    <div class="coral-InputGroup">
+      <span class="coral-InputGroup-button">
+        <button class="coral-Button coral-Button--square" type="button">Go!</button>
+      </span>
+      <input type="text" class="coral-InputGroup-input coral-Textfield" placeholder="Search"></div>
+
+    <h2 class="coral-Heading coral-Heading--2">Double Button Before</h2>
+    <div class="coral-InputGroup">
+      <span class="coral-InputGroup-button">
+        <button class="coral-Button coral-Button--square" type="button">Go!</button>
+      </span>
+      <span class="coral-InputGroup-button">
+        <button class="coral-Button coral-Button--square" type="button">Go!</button>
+      </span>
+      <input type="text" class="coral-InputGroup-input coral-Textfield" placeholder="Search"></div>
+
+    <h2 class="coral-Heading coral-Heading--2">Button After</h2>
+
+    <div class="coral-InputGroup">
+      <input type="text" class="coral-InputGroup-input coral-Textfield">
+      <span class="coral-InputGroup-button">
+        <button class="coral-Button coral-Button--square" type="button">Go!</button>
+      </span>
+    </div>
+
+    <h2 class="coral-Heading coral-Heading--2">Double Button After</h2>
+
+    <div class="coral-InputGroup">
+      <input type="text" class="coral-InputGroup-input coral-Textfield">
+      <span class="coral-InputGroup-button">
+        <button class="coral-Button coral-Button--square" type="button">Go!</button>
+      </span>
+      <span class="coral-InputGroup-button">
+        <button class="coral-Button coral-Button--square" type="button">Go!</button>
+      </span>
+    </div>
+
+    <h2 class="coral-Heading coral-Heading--2">Icon Button both sides</h2>
+    <div class="coral-InputGroup">
+      <span class="coral-InputGroup-button">
+        <button class="coral-Button coral-Button--square" type="button">
+          <i class="coral-Icon coral-Icon--sizeS coral-Icon--minus"></i>
+        </button>
+      </span>
+      <input type="text" class="coral-InputGroup-input coral-Textfield">
+      <span class="coral-InputGroup-button">
+        <button class="coral-Button coral-Button--square" type="button">
+          <i class="coral-Icon coral-Icon--sizeS coral-Icon--add"></i>
+        </button>
+      </span>
+    </div>
+
+    <h2 class="coral-Heading coral-Heading--2">Text Button both sides</h2>
+    <div class="coral-InputGroup">
+      <span class="coral-InputGroup-button">
+        <button class="coral-Button coral-Button--square" type="button">Go!</button>
+      </span>
+      <input type="text" class="coral-InputGroup-input coral-Textfield">
+      <span class="coral-InputGroup-button">
+        <button class="coral-Button coral-Button--square" type="button">Go!</button>
+      </span>
+    </div>
+
+    <h2 class="coral-Heading coral-Heading--2">Block with Button before</h2>
+    <div class="coral-InputGroup coral-InputGroup--block">
+      <span class="coral-InputGroup-button">
+        <button class="coral-Button coral-Button--square" type="button">Go!</button>
+      </span>
+      <input type="text" class="coral-InputGroup-input coral-Textfield" placeholder="Search"></div>
+
+    <h2 class="coral-Heading coral-Heading--2">Block with Button After</h2>
+    <div class="coral-InputGroup coral-InputGroup--block">
+      <input type="text" class="coral-InputGroup-input coral-Textfield" placeholder="Search">
+      <span class="coral-InputGroup-button">
+        <button class="coral-Button coral-Button--square" type="button">Go!</button>
+      </span>
+    </div>
+
+    <h2 class="coral-Heading coral-Heading--2">Block with Text Buttons on Both Sides</h2>
+    <div class="coral-InputGroup coral-InputGroup--block">
+      <span class="coral-InputGroup-button">
+        <button class="coral-Button coral-Button--square" type="button">Go!</button>
+      </span>
+      <input type="text" class="coral-InputGroup-input coral-Textfield">
+      <span class="coral-InputGroup-button">
+        <button class="coral-Button coral-Button--square" type="button">Go!</button>
+      </span>
+    </div>
+
+    <h2 class="coral-Heading coral-Heading--2">Block with Icon Buttons on Both Sides</h2>
+    <div class="coral-InputGroup coral-InputGroup--block">
+      <span class="coral-InputGroup-button">
+        <button class="coral-Button coral-Button--square" type="button">
+          <i class="coral-Icon coral-Icon--sizeS coral-Icon--minus"></i>
+        </button>
+      </span>
+      <input type="text" class="coral-InputGroup-input coral-Textfield">
+      <span class="coral-InputGroup-button">
+        <button class="coral-Button coral-Button--square" type="button">
+          <i class="coral-Icon coral-Icon--sizeS coral-Icon--add"></i>
+        </button>
+      </span>
+    </div>
+  </section>
+  <section class="coral--dark col" id="example_dark"></section>
+
+  <script>copyContent('#example_light', '#example_dark');</script>
+</body>
+</html>
