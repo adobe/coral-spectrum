@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>CoralUI Flex Wizard</title>
+
+        <link rel="stylesheet" href="../../css/coral.css">
+
+        <script src="../../js/libs/jquery.js"></script>
+        <script src="../../js/coral.js"></script>
+
+        <style>
+          html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+          }
+
+          .box {
+            width: 80%;
+            margin: auto;
+          }
+        </style>
+    </head>
+    <body class="coral--light">
+        <form action="test" method="post" class="coral-Wizard coral-Wizard--maximized" data-init="flexwizard">
+                <nav class="js-coral-Wizard-nav coral-Wizard-nav coral--dark">
+                    <ol class="coral-Wizard-steplist">
+                        <li class="js-coral-Wizard-steplist-item coral-Wizard-steplist-item">Single Step</li>
+                    </ol>
+                </nav>
+
+                <div class="js-coral-Wizard-step coral-Wizard-step coral-Wizard-step--maximized">
+                    <a class="js-coral-Wizard-step-control coral-Button" href="cancel.html" data-action="cancel">Back</a>
+                    <button class="js-coral-Wizard-step-control coral-Button" type="button" data-action="next">Create</button>
+
+                    <h2 class="coral-Heading coral-Heading--2">Simple Step</h2>
+                    <p>Content.</p>
+                </div>
+        </form>
+    </body>
+</html>

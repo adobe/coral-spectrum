@@ -1,0 +1,1983 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - CharacterCount</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light docs-Background u-coral-clearFix">
+    <article class="docs-Component">
+      <section class="docs-Component-metadata">
+        <div class="docs-Component-header">
+          <h1 class="coral-Heading coral-Heading--1 docs-Component-name">CharacterCount</h1><span class="docs-Component-version">Current Version: <strong>2.1.1</strong></span>
+        </div>
+        <div class="docs-Component-specifications">Relevant Specifications: <a href="https://wiki.corp.adobe.com/pages/viewpage.action?pageId=823266875" class="coral-Link">Text Fields &amp; Character Count</a>
+        </div>
+        <div class="docs-Component-github"> Github: <a href="https://git.corp.adobe.com/Coral/coralui-component-charactercount" class="coral-Link">coralui-component-charactercount</a>
+        </div>
+        <!-- description is loaded from the template-->
+      </section>
+      <section class="docs-Component-documentation">
+        <p>
+          A simple component that indicates to users the remaining characters in a textfield or textarea.
+          
+        </p>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                    <h3 id="markupExamples" class="coral-Heading coral-Heading--3"><a href="#markupExamples" class="coral-Link">Markup Examples</a></h3><span class="u-coral-pullRight docs-ThemeSwitcher"><i data-init="quicktip" data-quicktip-arrow="right" data-quicktip-type="inspect" data-quicktip-content="Please read more about themes in the 'Styles' section of this guide" class="coral-Icon coral-Icon--infoCircle docs-ThemeSwitcher-icon"></i>
+                  <button class="coral-MinimalButton docs-ThemeSwitcher-button is-selected">Light</button>|
+                  <button data-theme="coral--dark" class="coral-MinimalButton docs-ThemeSwitcher-button">Dark</button></span>
+              </div>
+                          <h3 id="textfieldWithMaxlength=10" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#textfieldWithMaxlength=10" class="coral-Link">Textfield with maxlength=10</a></h3>
+                      <script type="text/template" id="guide-50237c16-d3d4-4406-b2c7-45a805e51c3e">
+                        <input id="cc-example1" class="coral-Textfield" type="text" maxlength="10"/>
+                        <span class="coral-CharacterCount" data-related="#cc-example1" data-init="character-count">10</span>
+                        
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium">
+                        <input id="cc-example1" class="coral-Textfield" type="text" maxlength="10"/>
+                        <span class="coral-CharacterCount" data-related="#cc-example1" data-init="character-count">10</span>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-50237c16-d3d4-4406-b2c7-45a805e51c3e" class="docs-Example-toggleMarkup prettyprint"></pre>
+                          <h3 id="textAreaWithMaxlength=20" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#textAreaWithMaxlength=20" class="coral-Link">TextArea with maxlength=20</a></h3>
+                      <script type="text/template" id="guide-698bdaf1-a238-4364-8efe-3485eaa497f6">
+                        <textarea id="cc-example2" class="coral-Textfield coral-Textfield--multiline" maxlength="20"></textarea>
+                        <span class="coral-CharacterCount" data-related="#cc-example2" data-init="character-count">20</span>
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium">
+                        <textarea id="cc-example2" class="coral-Textfield coral-Textfield--multiline" maxlength="20"></textarea>
+                        <span class="coral-CharacterCount" data-related="#cc-example2" data-init="character-count">20</span>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-698bdaf1-a238-4364-8efe-3485eaa497f6" class="docs-Example-toggleMarkup prettyprint"></pre>
+            </section>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                    <h3 id="javaScriptExamples" class="coral-Heading coral-Heading--3"><a href="#javaScriptExamples" class="coral-Link">JavaScript Examples</a></h3>
+              </div>
+                          <h3 id="jSClassInitialization" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#jSClassInitialization" class="coral-Link">JS Class Initialization</a></h3>The following is an example of the HTML without a <code>data-init</code> initializer.
+                      <script type="text/template" id="guide-7687b23e-d352-4ad9-a2b8-212b875d5a82">
+                        <input id="myTextfield" class="coral-Textfield" type="text" maxlength="10"/>
+                        <span id="myCharacterCount" class="coral-CharacterCount">10</span>
+                        
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium">
+                        <input id="myTextfield" class="coral-Textfield" type="text" maxlength="10"/>
+                        <span id="myCharacterCount" class="coral-CharacterCount">10</span>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-7687b23e-d352-4ad9-a2b8-212b875d5a82" class="docs-Example-toggleMarkup prettyprint"></pre>
+                  <div id="constructorExample">
+                    <script>
+                      $(document).ready(function() {
+                         var characterCount = new CUI.CharacterCount({ element:'#myCharacterCount', related:'#myTextfield', maxlength:10 });
+                      })
+                    </script>
+                    
+                  </div>
+                  <p>The following JavaScript manually initializes the component on page initialization.</p>
+                      <pre id="constructorExample" data-src-id="constructorExample" class="prettyprint docs-Example-snippet">
+                        <p>No example content provided!</p></pre>
+            </section>
+        <section class="guide-jsDocFragement">
+    <div class="content">
+        <!--<h1 class="line">Class: CharacterCount</h1>-->
+        
+          
+
+
+
+<section>
+
+<h1 class="coral-Heading coral-Heading--1 u-line docs-Example-header" id="jsdoc"><a href="#jsdoc" class="coral-Link">CharacterCount
+ JSDoc</a></h1>
+
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Extends</h3>
+
+        <ul>
+            <li><a href="widget.html" class="coral-Link">CUI.Widget</a></li>
+        </ul>
+    
+
+    
+        
+<dt>
+    <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3" id="jsdocConstructor"><a href="#jsdocConstructor" class="coral-Link">Constructor</a></h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Create a character count for a textfield or textarea.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">options</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+                <h4 class="coral-Heading coral-Heading--4 params-description-heading">Component options</h4>
+                
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+            <th class="coral-Table-headerCell">data-* attribute</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+            <th class="coral-Table-headerCell">Optional</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">related</td>
+        
+
+        
+            <td class="coral-Table-cell attributes">
+                data-related
+            </td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The related Textfield or TextArea for this component.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">maxlength</td>
+        
+
+        
+            <td class="coral-Table-cell attributes">
+                data-maxlength
+            </td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Maximum length for the Textfield/Textarea (will be read from markup if given)
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.CharacterCount.js, line 22</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+    
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+       <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3" id="jsdocMethods"><a href="#jsdocMethods" class="coral-Link">Methods</a></h3>
+
+        <dl>
+            
+<dt>
+    <h3 class="name" id="get"><span class="type-signature"></span>get</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Get the value of an option
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">option</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The name of the option to fetch the value of
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    Option value
+    
+    {<span class="param-type">Mixed</span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="widget.html#get" class="coral-Link">CUI.Widget#get</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Widget.js, line 114</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="hide"><span class="type-signature"></span>hide</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Hide the widget
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    this, chainable
+    
+    {<span class="param-type"><a href="widget.html" class="coral-Link">CUI.Widget</a></span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="widget.html#hide" class="coral-Link">CUI.Widget#hide</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Widget.js, line 178</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="off"><span class="type-signature"></span>off</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Remove an event listener
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">evtName</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The event name to stop listening for
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">func</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">function</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The function that was passed to on()
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    this, chainable
+    
+    {<span class="param-type"><a href="widget.html" class="coral-Link">CUI.Widget</a></span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="widget.html#off" class="coral-Link">CUI.Widget#off</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Widget.js, line 135</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="on"><span class="type-signature"></span>on</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Add an event listener
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">evtName</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The event name to listen for
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">func</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">function</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The function that will be called when the event is triggered
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    this, chainable
+    
+    {<span class="param-type"><a href="widget.html" class="coral-Link">CUI.Widget</a></span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="widget.html#on" class="coral-Link">CUI.Widget#on</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Widget.js, line 124</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="set"><span class="type-signature"></span>set</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Set a number of options using an object or a string
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">option</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>|<span class="param-type">Object</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The option to set as a string, or an object of key/value pairs to set
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">value</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The value to set the option to (is ignored when first argument is an object)
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    this, chainable
+    
+    {<span class="param-type"><a href="widget.html" class="coral-Link">CUI.Widget</a></span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="widget.html#set" class="coral-Link">CUI.Widget#set</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Widget.js, line 56</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="setName"><span class="type-signature"></span>setName</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Set a custom name for this widget.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">customName</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Component name
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    this, chainable
+    
+    {<span class="param-type"><a href="widget.html" class="coral-Link">CUI.Widget</a></span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="widget.html#setName" class="coral-Link">CUI.Widget#setName</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Widget.js, line 220</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="show"><span class="type-signature"></span>show</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Show the widget
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    this, chainable
+    
+    {<span class="param-type"><a href="widget.html" class="coral-Link">CUI.Widget</a></span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="widget.html#show" class="coral-Link">CUI.Widget#show</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Widget.js, line 144</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="toggleVisibility"><span class="type-signature"></span>toggleVisibility</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Toggle the visibility of the widget
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    this, chainable
+    
+    {<span class="param-type"><a href="widget.html" class="coral-Link">CUI.Widget</a></span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="widget.html#toggleVisibility" class="coral-Link">CUI.Widget#toggleVisibility</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Widget.js, line 210</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+        <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3" id="jsdocEvents"><a href="#jsdocEvents" class="coral-Link">Events</a></h3>
+
+        <dl>
+            
+<dt>
+    <h3 class="name" id="event:beforeChange:*">beforeChange:*</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered when before an option is changed
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">evt</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+                <h4 class="coral-Heading coral-Heading--4 params-description-heading">Event object</h4>
+                
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">option</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Mixed</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The option that changed
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">currentValue</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Mixed</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The current value
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">value</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Mixed</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The value this option will be changed to
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">preventDefault</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">function</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Call to prevent the option from changing
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="widget.html#event:beforeChange:*" class="coral-Link">CUI.Widget#beforeChange:*</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Widget.js, line 233</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="event:change:*">change:*</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered when an option is changed
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">evt</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+                <h4 class="coral-Heading coral-Heading--4 params-description-heading">Event object</h4>
+                
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">option</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Mixed</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The option that changed
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">value</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Mixed</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The new value
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="widget.html#event:change:*" class="coral-Link">CUI.Widget#change:*</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Widget.js, line 235</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="event:hide">hide</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered when the widget is hidden
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="widget.html#event:hide" class="coral-Link">CUI.Widget#event:hide</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Widget.js, line 231</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="event:show">show</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered when the widget is shown
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="widget.html#event:show" class="coral-Link">CUI.Widget#event:show</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Widget.js, line 229</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        </dl>
+    
+</article>
+
+</section>
+
+
+
+
+        
+    </div>
+   
+        </section>
+      </section>
+    </article>
+  </body>
+</html>
