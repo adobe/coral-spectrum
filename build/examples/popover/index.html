@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Popovers</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/coral.js"></script>
+
+  <style>
+    body {
+      padding: 15px;
+    }
+
+    .col {
+      float: left;
+      margin-right: 12px;
+    }
+  </style>
+</head>
+<body class="coral--dark u-coral-clearFix">
+  <h1 class="coral-Heading coral-Heading--1">coral-Popover</h1>
+  <p>
+    By default the popover does not include a padding so you can customize that goes inside. Use
+    <code>.u-coral-padding</code>
+    to add the desired padding in the content.
+  </p>
+  <div class="col">
+    <section>
+      <h2 class="coral-Heading coral-Heading--2">Positions</h2>
+      <button class="coral-Button" data-target="#third_popover" data-toggle="popover" data-point-from="top" data-align-from="left">Top Popover</button>
+
+      <div id="third_popover" class="coral-Popover">
+        <div class="coral-Popover-content u-coral-padding">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida.
+          <a class="coral-Link" href="#">Link!</a>
+        </div>
+      </div>
+
+      <button class="coral-Button" data-target="#second_popover" data-toggle="popover" data-point-from="right" data-align-from="right">Right Popover</button>
+      <div id="second_popover" class="coral-Popover">
+        <div class="u-coral-padding">Short popover content.</div>
+      </div>
+
+      <button class="coral-Button" data-target="#third_popover" data-toggle="popover" data-point-from="bottom" data-align-from="right">Bottom Popover</button>
+      <div id="fourth_popover" class="coral-Popover">
+        <div class="coral-Popover-content u-coral-padding">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida.
+          <a class="coral-Link" href="#">Link!</a>
+        </div>
+      </div>
+
+      <button class="coral-Button" data-target="#first_popover" data-toggle="popover" data-point-from="left" data-align-from="left">Left Popover</button>
+      <div id="first_popover" class="coral-Popover">
+        <div class="u-coral-padding">Popover to the left.</div>
+      </div>
+
+      <h2 class="coral-Heading coral-Heading--2">Using an anchor</h2>
+      <a class="coral-Link" href="#fift_popover" data-toggle="popover" data-point-from="bottom" data-align-from="right">Click me!</a>
+
+      <div id="fift_popover" class="coral-Popover">
+        <div class="coral-Popover-content u-coral-padding">
+          I am triggered using an anchor!
+          <a class="coral-Link" href="#">Link!</a>
+        </div>
+      </div>
+
+      <h2 class="coral-Heading coral-Heading--2">Content from options</h2>
+
+      <button class="coral-Button" data-target="#from_data_options" data-toggle="popover" data-point-from="left" data-align-from="left" data-content="<div class='u-coral-padding'>Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</div>
+      ">Content from options
+    </button>
+
+    <div id="from_data_options" class="coral-Popover">
+      <div class="u-coral-padding">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida.
+      </div>
+    </div>
+
+    <h2 class="coral-Heading coral-Heading--2">Multiple .coral-Popover-content elements</h2>
+    <p>
+      By placing multiple
+      <code>.coral-Popover-content</code>
+      inside the popover, you get a separation between them
+    </p>
+
+    <button class="coral-Button" data-target="#separators" data-toggle="popover" data-point-from="left" data-align-from="left">Separators</button>
+
+    <div id="separators" class="coral-Popover">
+      <div class="coral-Popover-content u-coral-padding">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida.
+      </div>
+
+      <div class="coral-Popover-content u-coral-padding">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis. Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida.
+      </div>
+    </div>
+
+    <h2 class="coral-Heading coral-Heading--2">JS construction</h2>
+    <p>
+      The following Popover prevents autohide, which means you need to click on the button again to close it.
+    </p>
+    <button id="myButton" class="coral-Button">Show Popover</button>
+    <div id="myPopover"></div>
+  </section>
+
+</div>
+<script>
+  $(document).ready(function() {
+    $('#myButton').on('click', function() {
+      var popover = $('#myPopover').data('popover');
+      if (!popover) {
+        popover = new CUI.Popover({
+          element:'#myPopover',
+          pointAt:'#myButton',
+          preventAutoHide: true,
+          content: '<div class="u-coral-padding">Lorem ipsum hipstorum.</div>'
+        });
+      }
+      popover.toggleVisibility();
+    });
+  });
+</script>
+</body>
+</html>
