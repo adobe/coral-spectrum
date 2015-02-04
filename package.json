@@ -1,7 +1,7 @@
 {
   "name": "coralui",
   "description": "CoralUI package builder",
-  "version": "2.15.2-pre",
+  "version": "2.15.1-pre",
   "private": true,
   "repository": {
     "type": "git",
@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "coralui-commons": "git+ssh://git@git.corp.adobe.com:Coral/coralui-commons.git#3.0.2",
-    "coralui-core": "git+ssh://git@git.corp.adobe.com:Coral/coralui-core.git#2.4.5",
+    "coralui-core": "git+ssh://git@git.corp.adobe.com:Coral/coralui-core.git#2.4.6",
     "coralui-component-accordion": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-accordion.git#2.2.1",
     "coralui-component-alert": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-alert.git#2.2.2",
     "coralui-component-autocomplete": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-autocomplete.git#2.5.2",
