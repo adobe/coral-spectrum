@@ -21,7 +21,7 @@
     "underscore": "~1.6.0"
   },
   "dependencies": {
-    "coralui-commons": "git+ssh://git@git.corp.adobe.com:Coral/coralui-commons.git#3.1.1",
+    "coralui-commons": "git+ssh://git@git.corp.adobe.com:Coral/coralui-commons.git#3.1.2",
     "coralui-core": "git+ssh://git@git.corp.adobe.com:Coral/coralui-core.git#2.4.17",
     "coralui-component-accordion": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-accordion.git#2.2.4",
     "coralui-component-alert": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-alert.git#2.2.2",
