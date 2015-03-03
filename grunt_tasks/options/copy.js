@@ -125,13 +125,30 @@ module.exports = {
 
   resources: {
     files: [
+      // copies core resources
+      {
+        expand: true,
+        cwd: '<%= dirs.modules %>/coralui-core/<%= dirs.build %>/<%= dirs.resources %>',
+        src: ['*.html'],
+        dest: '<%= dirs.build %>/<%= dirs.documentation %>',
+        rename: function(dest, matchedSrcPath, options) {
+          return dest + matchedSrcPath.substring( matchedSrcPath.lastIndexOf('resources/') + 10);
+        }
+      },
+      // copies any other resources, except the core resources (icon, wait, progress & cursor)
       {
         expand: true,
         flatten: false,
         cwd: '',
         src: ['node_modules/coralui-*/build/resources/**/*'],
         dest: 'build/resources/',
-
+        filter: function(srcPath) {
+          var foundIcon = (srcPath.indexOf('components/icon/') > -1);
+          var foundWait = (srcPath.indexOf('components/wait/') > -1);
+          var foundProgress = (srcPath.indexOf('components/progress/') > -1);
+          var foundCursors = (srcPath.indexOf('shared/cursors/') > -1);
+          return !foundIcon && !foundWait && !foundProgress && !foundCursors;
+        },
         rename: function(dest, matchedSrcPath, options) {
           return dest + matchedSrcPath.substring( matchedSrcPath.lastIndexOf('resources/') + 10);
         }
