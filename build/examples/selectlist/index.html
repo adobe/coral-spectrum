@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SelectList</title>
+
+  <link rel="stylesheet" href="../../css/coral.css">
+
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/coral.js"></script>
+
+  <style>
+    body {
+      padding: 15px;
+    }
+
+    section {
+      border-top: 1px solid #C8C8C8;
+      padding: 12px;
+    }
+
+    .col {
+      width: 30%;
+      margin-right: 3%;
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    .coral-SelectList {
+      width: 13rem;
+    }
+
+    /**
+     * Overriding the -100% top margin for inline selectlist examples
+     */
+    .coral-SelectList.is-inline {
+      position: static;
+    }
+  </style>
+</head>
+<body class="coral--light">
+<h1 class="coral-Heading coral-Heading--1">Select List</h1>
+
+<section>
+  <div class="col">
+    <h2 class="coral-Heading coral-Heading--2">Standalone</h2>
+    <ul class="coral-SelectList is-visible is-inline" data-init="selectlist">
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="actions">
+        <i class="coral-SelectList-item-icon coral-Icon coral-Icon--actions"></i>Actions</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="add">
+        <i class="coral-SelectList-item-icon coral-Icon coral-Icon--add"></i>Add</li>
+      </li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="add-circle">
+        <i class="coral-SelectList-item-icon coral-Icon coral-Icon--addCircle"></i>Add-Circle</li>
+      </li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="adjust">
+        <i class="coral-SelectList-item-icon coral-Icon coral-Icon--adjust"></i>Adjust</li>
+      </li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="alert">
+        <i class="coral-SelectList-item-icon coral-Icon coral-Icon--alert"></i>Alert</li>
+      </li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="alert-add">
+        <i class="coral-SelectList-item-icon coral-Icon coral-Icon--alertAdd"></i>Alert-Add</li>
+      </li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="alias">
+        <i class="coral-SelectList-item-icon coral-Icon coral-Icon--alias"></i>Alias</li>
+      </li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="anchor">
+        <i class="coral-SelectList-item-icon coral-Icon coral-Icon--anchor"></i>Anchor</li>
+      </li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="annotate">
+        <i class="coral-SelectList-item-icon coral-Icon coral-Icon--annotate"></i>Annotate</li>
+      </li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="answer">
+        <i class="coral-SelectList-item-icon coral-Icon coral-Icon--answer"></i>Answer</li>
+      </li>
+    </ul>
+  </div>
+  <div class="col">
+    <h2 class="coral-Heading coral-Heading--2">Standalone with groups</h2>
+    <ul class="coral-SelectList is-visible is-inline" data-init="selectlist">
+       <li class="coral-SelectList-item coral-SelectList-item--optgroup">
+         <span class="coral-SelectList-groupHeader">Group 1</span>
+         <ul class="coral-SelectList-sublist">
+           <li class="coral-SelectList-item coral-SelectList-item--option" data-value="expr1">Expression 1</li>
+           <li class="coral-SelectList-item coral-SelectList-item--option" data-value="expr2">Expression 2</li>
+           <li class="coral-SelectList-item coral-SelectList-item--option" data-value="expr3">Expression 3</li>
+         </ul>
+       </li>
+       <li class="coral-SelectList-item coral-SelectList-item--optgroup">
+         <span class="coral-SelectList-groupHeader">Group 2</span>
+         <ul class="coral-SelectList-sublist">
+           <li class="coral-SelectList-item coral-SelectList-item--option" data-value="expr4">Expression 4</li>
+           <li class="coral-SelectList-item coral-SelectList-item--option" data-value="expr5">Expression 5</li>
+         </ul>
+       </li>
+    </ul>
+  </div>
+</section>
+
+<section class="coral--dark">
+  <div class="col">
+    <h2 class="coral-Heading coral-Heading--2">Standalone</h2>
+    <ul class="coral-SelectList is-visible is-inline" data-init="selectlist">
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="actions">
+        <i class="coral-SelectList-item-icon coral-Icon coral-Icon--actions"></i>Actions</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="add">
+        <i class="coral-SelectList-item-icon coral-Icon coral-Icon--add"></i>Add</li>
+      </li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="add-circle">
+        <i class="coral-SelectList-item-icon coral-Icon coral-Icon--addCircle"></i>Add-Circle</li>
+      </li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="adjust">
+        <i class="coral-SelectList-item-icon coral-Icon coral-Icon--adjust"></i>Adjust</li>
+      </li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="alert">
+        <i class="coral-SelectList-item-icon coral-Icon coral-Icon--alert"></i>Alert</li>
+      </li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="alert-add">
+        <i class="coral-SelectList-item-icon coral-Icon coral-Icon--alertAdd"></i>Alert-Add</li>
+      </li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="alias">
+        <i class="coral-SelectList-item-icon coral-Icon coral-Icon--alias"></i>Alias</li>
+      </li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="anchor">
+        <i class="coral-SelectList-item-icon coral-Icon coral-Icon--anchor"></i>Anchor</li>
+      </li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="annotate">
+        <i class="coral-SelectList-item-icon coral-Icon coral-Icon--annotate"></i>Annotate</li>
+      </li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="answer">
+        <i class="coral-SelectList-item-icon coral-Icon coral-Icon--answer"></i>Answer</li>
+      </li>
+    </ul>
+  </div>
+  <div class="col">
+    <h2 class="coral-Heading coral-Heading--2">Standalone with groups</h2>
+    <ul class="coral-SelectList is-visible is-inline" data-init="selectlist">
+       <li class="coral-SelectList-item coral-SelectList-item--optgroup">
+         <span class="coral-SelectList-groupHeader">Group 1</span>
+         <ul class="coral-SelectList-sublist">
+           <li class="coral-SelectList-item coral-SelectList-item--option" data-value="expr1">Expression 1</li>
+           <li class="coral-SelectList-item coral-SelectList-item--option" data-value="expr2">Expression 2</li>
+           <li class="coral-SelectList-item coral-SelectList-item--option" data-value="expr3">Expression 3</li>
+         </ul>
+       </li>
+       <li class="coral-SelectList-item coral-SelectList-item--optgroup">
+         <span class="coral-SelectList-groupHeader">Group 2</span>
+         <ul class="coral-SelectList-sublist">
+           <li class="coral-SelectList-item coral-SelectList-item--option" data-value="expr4">Expression 4</li>
+           <li class="coral-SelectList-item coral-SelectList-item--option" data-value="expr5">Expression 5</li>
+         </ul>
+       </li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="col">
+    <h2 class="coral-Heading coral-Heading--2">Toggle</h2>
+    <button class="coral-Button" data-toggle="selectlist" data-target="#selectlist1">Toggle</button>
+
+    <!-- The .coral-SelectList width is set to 13rem on this page, so the horizontal position must be left+104 in order to align the selectlist with the left edge of the toggle button. -->
+    <ul id="selectlist1" class="coral-SelectList"
+        data-init="selectlist"
+        data-position="left+104 bottom-1">
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="expr1">Expression 1</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="expr2">Expression 2</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="expr3">Expression 3</li>
+    </ul>
+  </div>
+  <div class="col">
+    <h2 class="coral-Heading coral-Heading--2">Toggle with autohide=false</h2>
+    <button class="coral-Button"  data-toggle="selectlist" data-target="#selectlist3">Toggle</button>
+
+    <!-- The .coral-SelectList width is set to 13rem on this page, so the horizontal position must be left+104 in order to align the selectlist with the left edge of the toggle button. -->
+    <ul id="selectlist3" class="coral-SelectList"
+        data-init="selectlist"
+        data-autohide="false"
+        data-position="left+104 bottom-1">
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="expr1">Expression 1</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="expr2">Expression 2</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="expr3">Expression 3</li>
+    </ul>
+  </div>
+  <div class="col">
+    <h2 class="coral-Heading coral-Heading--2">Toggle with autofocus=false</h2>
+    <button class="coral-Button" data-toggle="selectlist" data-target="#selectlist4">Toggle</button>
+
+    <!-- The .coral-SelectList width is set to 13rem on this page, so the horizontal position must be left+104 in order to align the selectlist with the left edge of the toggle button. -->
+    <ul id="selectlist4" class="coral-SelectList"
+        data-init="selectlist"
+        data-autofocus="false"
+        data-position="left+104 bottom-1">
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="expr1">Expression 1</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="expr2">Expression 2</li>
+      <li class="coral-SelectList-item coral-SelectList-item--option" data-value="expr3">Expression 3</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2 class="coral-Heading coral-Heading--2">Dynamic Select Lists</h2>
+
+  <div class="col">
+    <button class="coral-Button" data-toggle="selectlist"
+      data-target="#selectlist-dynamic-1">Fetch options from URL</button>
+
+    <!-- The .coral-SelectList width is set to 13rem on this page, so the horizontal position must be left+104 in order to align the selectlist with the left edge of the toggle button. -->
+    <ul id="selectlist-dynamic-1" class="coral-SelectList"
+      data-init="selectlist"
+      data-type="dynamic"
+      data-dataurl="resources/dynamic-select.html"
+      data-position="left+104 bottom-1">
+    </ul>
+  </div>
+
+  <div class="col">
+    <button id="selectlist-dynamic-2-toggle" class="coral-Button">Compute options via JS</button>
+    <ul id="selectlist-dynamic-2" class="coral-SelectList"></ul>
+  </div>
+
+  <script>
+    jQuery(function ($) {
+      var selectList = new CUI.SelectList({
+        element : "#selectlist-dynamic-2",
+        relatedElement : "#selectlist-dynamic-2-toggle",
+        type: "dynamic",
+
+        // The .coral-SelectList width is set to 13rem on this page,
+        // so the horizontal position must be left+104 in order to
+        // align the selectlist with the left edge of the toggle button.
+        position: "left+104 bottom-1",
+        loadData : function (pageStart, pageEnd) {
+          var deferred = $.Deferred();
+
+          setTimeout(function () {
+            var i;
+
+            for (i = pageStart + 1; i <= pageEnd; i++) {
+              selectList.addOption({display: "Expression " + i, value: "expr" + i});
+            }
+
+            if (i >= 50) {
+              // All items fetched. Loading is complete
+              deferred.resolve(true);
+            }
+            else {
+              // There will be more. Not all items fitted into page size.
+              deferred.resolve(false);
+            }
+
+          }, 1000);
+
+          return deferred.promise();
+        }
+      });
+
+      $("#selectlist-dynamic-2-toggle").on("click", function (e) {
+        e.stopPropagation();
+        selectList.toggleVisibility();
+      });
+    });
+  </script>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Progress</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light docs-Background u-coral-clearFix">
+    <article class="docs-Component">
+      <section class="docs-Component-metadata">
+        <div class="docs-Component-header">
+          <h1 class="coral-Heading coral-Heading--1 docs-Component-name">Progress</h1><span class="docs-Component-version">Current Version: <strong>2.4.21</strong></span>
+        </div>
+        <div class="docs-Component-related">Related Components: <a href="wait.html" class="coral-Link">wait</a>
+        </div>
+        <div class="docs-Component-github"> Github: <a href="https://git.corp.adobe.com/Coral/coralui-core" class="coral-Link">coralui-core</a>
+        </div>
+        <!-- description is loaded from the template-->
+      </section>
+      <section class="docs-Component-documentation">
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                    <h3 id="progressExamples" class="coral-Heading coral-Heading--3"><a href="#progressExamples" class="coral-Link">Progress Examples</a></h3><span class="u-coral-pullRight docs-ThemeSwitcher"><i data-init="quicktip" data-quicktip-arrow="right" data-quicktip-type="inspect" data-quicktip-content="Please read more about themes in the 'Styles' section of this guide" class="coral-Icon coral-Icon--infoCircle docs-ThemeSwitcher-icon"></i>
+                  <button class="coral-MinimalButton docs-ThemeSwitcher-button is-selected">Light</button>|
+                  <button data-theme="coral--dark" class="coral-MinimalButton docs-ThemeSwitcher-button">Dark</button></span>
+              </div>
+                          <h3 id="progressAt40%" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#progressAt40%" class="coral-Link">Progress at 40%</a></h3>
+                      <script type="text/template" id="guide-909d86c2-5edd-4f43-80b8-8ad677252c96">
+                        <div class="coral-Progress">
+                          <div class="coral-Progress-bar">
+                            <div class="coral-Progress-status" style="width: 40%;"></div>
+                          </div>
+                          <label class="coral-Progress-label">40%</label>
+                        </div>
+                        
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium">
+                        <div class="coral-Progress">
+                          <div class="coral-Progress-bar">
+                            <div class="coral-Progress-status" style="width: 40%;"></div>
+                          </div>
+                          <label class="coral-Progress-label">40%</label>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-909d86c2-5edd-4f43-80b8-8ad677252c96" class="docs-Example-toggleMarkup prettyprint"></pre>
+                          <h3 id="small" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#small" class="coral-Link">Small</a></h3>A smaller progress is available by using the <code>coral-Progress--small</code> modifier.
+                      <script type="text/template" id="guide-99d6f7b3-19e5-4b2e-afec-c3c9a752cc5c">
+                        <div class="coral-Progress coral-Progress--small">
+                          <div class="coral-Progress-bar">
+                            <div class="coral-Progress-status" style="width: 40%;"></div>
+                          </div>
+                          <label class="coral-Progress-label">40%</label>
+                        </div>
+                        
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium">
+                        <div class="coral-Progress coral-Progress--small">
+                          <div class="coral-Progress-bar">
+                            <div class="coral-Progress-status" style="width: 40%;"></div>
+                          </div>
+                          <label class="coral-Progress-label">40%</label>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-99d6f7b3-19e5-4b2e-afec-c3c9a752cc5c" class="docs-Example-toggleMarkup prettyprint"></pre>
+                          <h3 id="large" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#large" class="coral-Link">Large</a></h3>A bigger progress is available by using the <code>coral-Progress--large</code> modifier.
+                      <script type="text/template" id="guide-8725f069-58c0-464e-b695-398768588fbc">
+                        <div class="coral-Progress coral-Progress--large">
+                          <div class="coral-Progress-bar">
+                            <div class="coral-Progress-status" style="width: 40%;"></div>
+                          </div>
+                          <label class="coral-Progress-label">40%</label>
+                        </div>
+                        
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium">
+                        <div class="coral-Progress coral-Progress--large">
+                          <div class="coral-Progress-bar">
+                            <div class="coral-Progress-status" style="width: 40%;"></div>
+                          </div>
+                          <label class="coral-Progress-label">40%</label>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-8725f069-58c0-464e-b695-398768588fbc" class="docs-Example-toggleMarkup prettyprint"></pre>
+                          <h3 id="indeterminate" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#indeterminate" class="coral-Link">Indeterminate</a></h3>An indeterminate progress is available by using the <code>coral-Progress--indeterminate</code> modifier.
+                      <script type="text/template" id="guide-05792568-1340-4fe8-a4f1-e904c0d09dc8">
+                        <div class="coral-Progress coral-Progress--indeterminate">
+                          <div class="coral-Progress-bar">
+                            <div class="coral-Progress-status" style="width: 40%;"></div>
+                          </div>
+                          <label class="coral-Progress-label">40%</label>
+                        </div>
+                        
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium">
+                        <div class="coral-Progress coral-Progress--indeterminate">
+                          <div class="coral-Progress-bar">
+                            <div class="coral-Progress-status" style="width: 40%;"></div>
+                          </div>
+                          <label class="coral-Progress-label">40%</label>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-05792568-1340-4fe8-a4f1-e904c0d09dc8" class="docs-Example-toggleMarkup prettyprint"></pre>
+                          <h3 id="done!" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#done!" class="coral-Link">Done!</a></h3>
+                      <script type="text/template" id="guide-a95fe180-aa28-4ff8-8274-b1cd1d26d117">
+                        <div class="coral-Progress">
+                          <div class="coral-Progress-bar">
+                            <div class="coral-Progress-status" style="width: 100%;"></div>
+                          </div>
+                          <label class="coral-Progress-label">100%</label>
+                        </div>
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium">
+                        <div class="coral-Progress">
+                          <div class="coral-Progress-bar">
+                            <div class="coral-Progress-status" style="width: 100%;"></div>
+                          </div>
+                          <label class="coral-Progress-label">100%</label>
+                        </div>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-a95fe180-aa28-4ff8-8274-b1cd1d26d117" class="docs-Example-toggleMarkup prettyprint"></pre>
+            </section>
+      </section>
+    </article>
+  </body>
+</html>
