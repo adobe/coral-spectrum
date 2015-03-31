@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - ButtonGroup</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light docs-Background u-coral-clearFix">
+    <article class="docs-Component">
+      <section class="docs-Component-metadata">
+        <div class="docs-Component-header">
+          <h1 class="coral-Heading coral-Heading--1 docs-Component-name">ButtonGroup</h1><span class="docs-Component-version">Current Version: <strong>2.4.23</strong></span>
+        </div>
+        <div class="docs-Component-related">Related Components: <a href="button.html" class="coral-Link">button</a>
+        </div>
+        <div class="docs-Component-github"> Github: <a href="https://git.corp.adobe.com/Coral/coralui-core" class="coral-Link">coralui-core</a>
+        </div>
+        <!-- description is loaded from the template-->
+      </section>
+      <section class="docs-Component-documentation">
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                    <h3 id="buttonGroupExamples" class="coral-Heading coral-Heading--3"><a href="#buttonGroupExamples" class="coral-Link">ButtonGroup Examples</a></h3><span class="u-coral-pullRight docs-ThemeSwitcher"><i data-init="quicktip" data-quicktip-arrow="right" data-quicktip-type="inspect" data-quicktip-content="Please read more about themes in the 'Styles' section of this guide" class="coral-Icon coral-Icon--infoCircle docs-ThemeSwitcher-icon"></i>
+                  <button class="coral-MinimalButton docs-ThemeSwitcher-button is-selected">Light</button>|
+                  <button data-theme="coral--dark" class="coral-MinimalButton docs-ThemeSwitcher-button">Dark</button></span>
+              </div>
+                          <h3 id="iconButtons" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#iconButtons" class="coral-Link">Icon Buttons</a></h3>
+                  If no text is present, the <code>.coral-Button--square</code> class is required on each button to center the
+                  icon correctly.
+                  
+                  +markup-example().
+                    <div class="coral-ButtonGroup">
+                      <button class="coral-ButtonGroup-item coral-Button coral-Button--square">
+                        <i class="coral-Icon coral-Icon--add"></i>
+                      </button>
+                      <button class="coral-ButtonGroup-item coral-Button coral-Button--square">
+                        <i class="coral-Icon coral-Icon--camera"></i>
+                      </button>
+                      <button class="coral-ButtonGroup-item coral-Button coral-Button--square">
+                        <i class="coral-Icon coral-Icon--undo"></i>
+                      </button>
+                    </div>
+                    
+                          <h3 id="textButtons" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#textButtons" class="coral-Link">Text Buttons</a></h3>
+                      <script type="text/template" id="guide-0c6b0b89-1952-47a5-b867-baeb7617ff18">
+                        <div class="coral-ButtonGroup">
+                          <button class="coral-ButtonGroup-item coral-Button">Add</button>
+                          <button class="coral-ButtonGroup-item coral-Button">Snapshot</button>
+                          <button class="coral-ButtonGroup-item coral-Button">Undo</button>
+                        </div>
+                        
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium">
+                        <div class="coral-ButtonGroup">
+                          <button class="coral-ButtonGroup-item coral-Button">Add</button>
+                          <button class="coral-ButtonGroup-item coral-Button">Snapshot</button>
+                          <button class="coral-ButtonGroup-item coral-Button">Undo</button>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-0c6b0b89-1952-47a5-b867-baeb7617ff18" class="docs-Example-toggleMarkup prettyprint"></pre>
+                          <h3 id="icon+TextButtons" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#icon+TextButtons" class="coral-Link">Icon + Text Buttons</a></h3>
+                      <script type="text/template" id="guide-8c6032ef-ca20-4434-948a-227cfae77542">
+                        <div class="coral-ButtonGroup">
+                          <button class="coral-ButtonGroup-item coral-Button">
+                            <i class="coral-Icon coral-Icon--add"></i>
+                            Add
+                          </button>
+                          <button class="coral-ButtonGroup-item coral-Button">
+                            <i class="coral-Icon coral-Icon--camera"></i>
+                            Snapshot
+                          </button>
+                          <button class="coral-ButtonGroup-item coral-Button">
+                            <i class="coral-Icon coral-Icon--undo"></i>
+                            Undo
+                          </button>
+                        </div>
+                        
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium">
+                        <div class="coral-ButtonGroup">
+                          <button class="coral-ButtonGroup-item coral-Button">
+                            <i class="coral-Icon coral-Icon--add"></i>
+                            Add
+                          </button>
+                          <button class="coral-ButtonGroup-item coral-Button">
+                            <i class="coral-Icon coral-Icon--camera"></i>
+                            Snapshot
+                          </button>
+                          <button class="coral-ButtonGroup-item coral-Button">
+                            <i class="coral-Icon coral-Icon--undo"></i>
+                            Undo
+                          </button>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-8c6032ef-ca20-4434-948a-227cfae77542" class="docs-Example-toggleMarkup prettyprint"></pre>
+                          <h3 id="iconQuietButtons" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#iconQuietButtons" class="coral-Link">Icon Quiet Buttons</a></h3>
+                      <script type="text/template" id="guide-d85c970e-bdc7-4747-9fbf-d7194c8604d3">
+                        <div class="coral-ButtonGroup">
+                          <button class="coral-ButtonGroup-item coral-Button coral-Button--quiet coral-Button--square">
+                            <i class="coral-Icon coral-Icon--add"></i>
+                          </button>
+                          <button class="coral-ButtonGroup-item coral-Button coral-Button--quiet coral-Button--square">
+                            <i class="coral-Icon coral-Icon--camera"></i>
+                          </button>
+                          <button class="coral-ButtonGroup-item coral-Button coral-Button--quiet coral-Button--square">
+                            <i class="coral-Icon coral-Icon--undo"></i>
+                          </button>
+                        </div>
+                        
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium">
+                        <div class="coral-ButtonGroup">
+                          <button class="coral-ButtonGroup-item coral-Button coral-Button--quiet coral-Button--square">
+                            <i class="coral-Icon coral-Icon--add"></i>
+                          </button>
+                          <button class="coral-ButtonGroup-item coral-Button coral-Button--quiet coral-Button--square">
+                            <i class="coral-Icon coral-Icon--camera"></i>
+                          </button>
+                          <button class="coral-ButtonGroup-item coral-Button coral-Button--quiet coral-Button--square">
+                            <i class="coral-Icon coral-Icon--undo"></i>
+                          </button>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-d85c970e-bdc7-4747-9fbf-d7194c8604d3" class="docs-Example-toggleMarkup prettyprint"></pre>
+                          <h3 id="icon+TextQuietButtons" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#icon+TextQuietButtons" class="coral-Link">Icon + Text Quiet Buttons</a></h3>
+                      <script type="text/template" id="guide-48f13917-23cb-4623-a4f2-794c327ea5c1">
+                        <div class="coral-ButtonGroup">
+                          <button class="coral-ButtonGroup-item coral-Button coral-Button--quiet">
+                            <i class="coral-Icon coral-Icon--add"></i>
+                            Add
+                          </button>
+                          <button class="coral-ButtonGroup-item coral-Button coral-Button--quiet">
+                            <i class="coral-Icon coral-Icon--camera"></i>
+                            Snapshot
+                          </button>
+                          <button class="coral-ButtonGroup-item coral-Button coral-Button--quiet">
+                            <i class="coral-Icon coral-Icon--undo"></i>
+                            Undo
+                          </button>
+                        </div>
+                        
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium">
+                        <div class="coral-ButtonGroup">
+                          <button class="coral-ButtonGroup-item coral-Button coral-Button--quiet">
+                            <i class="coral-Icon coral-Icon--add"></i>
+                            Add
+                          </button>
+                          <button class="coral-ButtonGroup-item coral-Button coral-Button--quiet">
+                            <i class="coral-Icon coral-Icon--camera"></i>
+                            Snapshot
+                          </button>
+                          <button class="coral-ButtonGroup-item coral-Button coral-Button--quiet">
+                            <i class="coral-Icon coral-Icon--undo"></i>
+                            Undo
+                          </button>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-48f13917-23cb-4623-a4f2-794c327ea5c1" class="docs-Example-toggleMarkup prettyprint"></pre>
+                          <h3 id="anchorButtons" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#anchorButtons" class="coral-Link">Anchor Buttons</a></h3>Used for navigational purposes.
+                      <script type="text/template" id="guide-15ffdadf-b014-45a8-b3ea-e39bfacacb0f">
+                        <div class="coral-ButtonGroup">
+                          <a class="coral-ButtonGroup-item coral-Button" href="#">Dashboard</a>
+                          <a class="coral-ButtonGroup-item coral-Button" href="#">Settings</a>
+                          <a class="coral-ButtonGroup-item coral-Button" href="#">Account</a>
+                        </div>
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium">
+                        <div class="coral-ButtonGroup">
+                          <a class="coral-ButtonGroup-item coral-Button" href="#">Dashboard</a>
+                          <a class="coral-ButtonGroup-item coral-Button" href="#">Settings</a>
+                          <a class="coral-ButtonGroup-item coral-Button" href="#">Account</a>
+                        </div>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-15ffdadf-b014-45a8-b3ea-e39bfacacb0f" class="docs-Example-toggleMarkup prettyprint"></pre>
+            </section>
+      </section>
+    </article>
+  </body>
+</html>
