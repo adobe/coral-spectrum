@@ -35,7 +35,7 @@
     "coralui-component-numberinput": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-numberinput.git#2.3.2",
     "coralui-component-popover": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-popover.git#2.1.10",
     "coralui-component-select": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-select.git#2.3.6",
-    "coralui-component-selectlist": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-selectlist.git#2.6.3",
+    "coralui-component-selectlist": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-selectlist.git#2.6.4",
     "coralui-component-selector": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-selector.git#2.1.1",
     "coralui-component-slider": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-slider.git#2.2.1",
     "coralui-component-switch": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-switch.git#2.2.1",
