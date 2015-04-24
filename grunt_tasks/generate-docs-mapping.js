@@ -23,12 +23,9 @@ module.exports = function(grunt) {
       } else {
         grunt.log.writeln("Skipping", coralModule, "--", "No docs found.".yellow);
       }
-      // grunt.log.writeln('documentation ', dependencyDocsData);
     }
     grunt.file.write(options.outputFile, JSON.stringify(outputJson, null, "  "));
-
   });
-
 
   function grabDocsData(pathBase, coralModule) {
     var jsonPath = pathBase.replace("{{coralModule}}", coralModule);
@@ -39,6 +36,4 @@ module.exports = function(grunt) {
     }
     return result;
   }
-
-
 }

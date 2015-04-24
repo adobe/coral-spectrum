@@ -1,6 +1,4 @@
-// Copy Grunt Task Configuration
 module.exports = {
-
   core_resources: {
     files: [
       {
@@ -24,18 +22,6 @@ module.exports = {
     ]
   },
 
-  core_examples: {
-    files: [
-      // copies core examples preserving hierarchy build/examples/component/*.html
-      {
-        expand: true,
-        cwd: '<%= dirs.modules %>/coralui-core/<%= dirs.build %>',
-        src: ['examples/**/*.*'],
-        dest: '<%= dirs.build %>'
-      }
-    ]
-  },
-
   core_documentation: {
     files: [
       // copies core documentation
@@ -48,20 +34,19 @@ module.exports = {
     ]
   },
 
-  component_examples: {
+  mixin_documentation: {
     files: [
-      // copies component examples preserving hierarchy build/examples/component/**
+      // copies mixin documentation
       {
         expand: true,
+        flatten: true,
         cwd: '<%= dirs.modules %>',
-        src: ['coralui-component-*/<%= dirs.build %>/examples/**'],
-        dest: '<%= dirs.build %>/examples/',
-        rename: function (dest, src) {
-          return dest + src.substring(src.lastIndexOf('examples/') + 9);
-        }
+        src: ['coralui-mixin*/<%= dirs.build %>/<%= dirs.documentation %>/*.html'],
+        dest: '<%= dirs.build %>/<%= dirs.documentation %>'
       }
     ]
   },
+
   component_documentation: {
     files: [
       // copies component documentation
@@ -69,7 +54,7 @@ module.exports = {
         expand: true,
         flatten: true,
         cwd: '<%= dirs.modules %>',
-        src: ['coralui-component-*/<%= dirs.build %>/<%= dirs.documentation %>/*.html'],
+        src: ['coralui-component*/<%= dirs.build %>/<%= dirs.documentation %>/*.html'],
         dest: '<%= dirs.build %>/<%= dirs.documentation %>'
       },
       {
@@ -77,7 +62,7 @@ module.exports = {
         flatten: false,
         cwd: '<%= dirs.modules %>',
         src: [
-          'coralui-component-*/<%= dirs.build %>/<%= dirs.documentation %>/resources/**'
+          'coralui-component*/<%= dirs.build %>/<%= dirs.documentation %>/resources/**'
         ],
         dest: '<%= dirs.build %>/<%= dirs.documentation %>/resources',
         rename: function (dest, src) {
@@ -162,7 +147,10 @@ module.exports = {
         expand: true,
         flatten: true,
         cwd: '<%= dirs.modules %>/',
-        src: ['coralui-*/<%= dirs.build %>/tests/test.*.js'],
+        src: [
+          'coralui-component*/<%= dirs.build %>/tests/test.*.js',
+          'coralui-mixin-*/<%= dirs.build %>/tests/test.*.js'
+        ],
         dest: '<%= dirs.build %>/tests'
       },
       {
@@ -176,8 +164,19 @@ module.exports = {
         rename: function(dest, matchedSrcPath, options) {
           return dest + matchedSrcPath.substring(matchedSrcPath.indexOf('fixtures/') + 9);
         }
+      },
+      {
+        expand: true,
+        flatten: false,
+        cwd: '<%= dirs.modules %>/',
+        src: ['coralui-*/<%= dirs.build %>/tests/snippets/**'],
+        filter: 'isFile',
+        dest: '<%= dirs.build %>/tests/snippets/',
+
+        rename: function(dest, matchedSrcPath, options) {
+          return dest + matchedSrcPath.substring(matchedSrcPath.indexOf('snippets/') + 9);
+        }
       }
     ]
   }
-}
-// end copy
+};

@@ -16,12 +16,12 @@
  */
 /*global module:false*/
 /*global require:false*/
-/*global process:false*/
+/*global __dirname:false*/
 module.exports = function(grunt) {
   'use strict';
 
   var configOptions = {
-    configPath: process.cwd() + '/grunt_tasks/options/',
+    configPath: __dirname + '/grunt_tasks/options/',
     // additional data for configuations
     config: {
       // build system directory constants
@@ -54,10 +54,8 @@ module.exports = function(grunt) {
   // expose package.json for expansion as <%= package.foo %>
   require('load-grunt-config')(grunt, configOptions);
 
-
   grunt.config('coralui-componentbuilder', { options: pkg, default: {} } );
   grunt.config('coralui-releasepackage', pkg);
-
 
   // load coraui tasks not picked up by load config matching
   grunt.loadNpmTasks('coralui-grunt-releasepackage');
@@ -69,16 +67,38 @@ module.exports = function(grunt) {
 
   grunt.task.registerTask('docs-mapping', 'generate-docs-mapping');
 
+  grunt.task.registerTask('build', [
+    'coralui-componentbuilder',
+    'copy',
+    'cssmin'
+  ]);
+
   // Default task
-  grunt.task.registerTask('default', ['coralui-componentbuilder', 'copy', 'cssmin', 'cssmetrics', 'docs-mapping', 'run-tests' ]);
+  grunt.task.registerTask('default', [
+    'build',
+    'cssmetrics',
+    'docs-mapping',
+    'run-tests'
+  ]);
+
+  grunt.task.registerTask('run-remote-tests', function () {
+    grunt.option('launch', ['osx_chrome_latest']);
+    grunt.task.run('coralui-toplevel-test-remote');
+  });
+
+  grunt.task.registerTask('ci', [
+    'build',
+    'run-remote-tests'
+  ]);
 
   // run tests if desired
-  grunt.task.registerTask('run-tests', ['coralui-testrunner']);
+  grunt.task.registerTask('run-tests', ['coralui-toplevel-testrunner']);
 
   // Releases the current package
   grunt.task.registerTask('release', [
     'default',
+    'run-remote-tests',
+    'clean:finalbuild',
     'coralui-releasepackage'
   ]);
-
 };

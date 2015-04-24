@@ -1,5 +1,5 @@
 module.exports = {
-  coralModules: '<%= package.dependencies %>',
+  coralModules: '<%= package.devDependencies %>',
   moduleDataPath: '<%= dirs.modules %>/{{coralModule}}/package.json',
   outputFile: '<%= dirs.build %>/<%= dirs.documentation %>/documentation-mapping.json'
-}
+};

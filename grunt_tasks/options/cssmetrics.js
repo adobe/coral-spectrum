@@ -1,4 +1,3 @@
-// Grunt Configuration: CSSMetrics
 module.exports = {
   coralui: {
     src: [
@@ -9,4 +8,4 @@ module.exports = {
       maxSelectors: 4096
     }
   }
-}
+};

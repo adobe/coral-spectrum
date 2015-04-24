@@ -42,9 +42,7 @@ module.exports = function(grunt) {
 
       npmLink(path, pkgName, extraCommands);
     });
-
   }); // end link-local
-
 
   function npmLink(path, pkg, extras) {
 
@@ -63,7 +61,6 @@ module.exports = function(grunt) {
     grunt.task.run('shell:npmLink-' + pkg);
   }
 
-
   // create array from CSV, or just push if not CSV
   function grokTargets(targets) {
     var result = [];
@@ -74,6 +71,4 @@ module.exports = function(grunt) {
     }
     return result;
   }
-
-
 }
