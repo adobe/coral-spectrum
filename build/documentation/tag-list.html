@@ -1,0 +1,2993 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - TagList</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light docs-Background u-coral-clearFix">
+    <article class="docs-Component">
+      <section class="docs-Component-metadata">
+        <div class="docs-Component-header">
+          <h1 class="coral-Heading coral-Heading--1 docs-Component-name">TagList</h1><span class="docs-Component-version">Current Version: <strong>2.3.3</strong></span>
+        </div>
+        <div class="docs-Component-github"> Github: <a href="https://git.corp.adobe.com/Coral/coralui-component-taglist" class="coral-Link">coralui-component-taglist</a>
+        </div>
+        <!-- description is loaded from the template-->
+      </section>
+      <section class="docs-Component-documentation">
+        <!-- mixins for the markup-->
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                    <h3 id="markupExamples" class="coral-Heading coral-Heading--3"><a href="#markupExamples" class="coral-Link">Markup Examples</a></h3><span class="u-coral-pullRight docs-ThemeSwitcher"><i data-init="quicktip" data-quicktip-arrow="right" data-quicktip-type="inspect" data-quicktip-content="Please read more about themes in the 'Styles' section of this guide" class="coral-Icon coral-Icon--infoCircle docs-ThemeSwitcher-icon"></i>
+                  <button class="coral-MinimalButton docs-ThemeSwitcher-button is-selected">Light</button>|
+                  <button data-theme="coral--dark" class="coral-MinimalButton docs-ThemeSwitcher-button">Dark</button></span>
+              </div>
+              <style>
+                .u-columnCustom {
+                  width: 180px;
+                  border: 1px solid #444444;
+                  padding: 10px;
+                }
+                
+              </style>
+                          <h3 id="normal" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#normal" class="coral-Link">Normal</a></h3>A typical example of TagList.
+                      <script type="text/template" id="guide-e7621b72-d7cb-4287-960d-204206840cdc"><ol class="coral-TagList" role="list"  data-init='taglist' >
+                                        <li role="listitem" class="coral-TagList-tag " title="Ecuador">
+                                          <button class="coral-MinimalButton coral-TagList-tag-removeButton" type="button" title="Remove">
+                                            <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+                                          </button>
+                                          <span class="coral-TagList-tag-label">San Francisco</span>
+                                          <input type="hidden" value="SF">
+                                        </li>
+                                        <li role="listitem" class="coral-TagList-tag " title="Ecuador">
+                                          <button class="coral-MinimalButton coral-TagList-tag-removeButton" type="button" title="Remove">
+                                            <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+                                          </button>
+                                          <span class="coral-TagList-tag-label">Lehi</span>
+                                          <input type="hidden" value="LH">
+                                        </li>
+                                        <li role="listitem" class="coral-TagList-tag " title="Ecuador">
+                                          <button class="coral-MinimalButton coral-TagList-tag-removeButton" type="button" title="Remove">
+                                            <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+                                          </button>
+                                          <span class="coral-TagList-tag-label">Basel</span>
+                                          <input type="hidden" value="BSL">
+                                        </li></ol>
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium"><ol class="coral-TagList" role="list"  data-init='taglist' >
+                                        <li role="listitem" class="coral-TagList-tag " title="Ecuador">
+                                          <button class="coral-MinimalButton coral-TagList-tag-removeButton" type="button" title="Remove">
+                                            <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+                                          </button>
+                                          <span class="coral-TagList-tag-label">San Francisco</span>
+                                          <input type="hidden" value="SF">
+                                        </li>
+                                        <li role="listitem" class="coral-TagList-tag " title="Ecuador">
+                                          <button class="coral-MinimalButton coral-TagList-tag-removeButton" type="button" title="Remove">
+                                            <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+                                          </button>
+                                          <span class="coral-TagList-tag-label">Lehi</span>
+                                          <input type="hidden" value="LH">
+                                        </li>
+                                        <li role="listitem" class="coral-TagList-tag " title="Ecuador">
+                                          <button class="coral-MinimalButton coral-TagList-tag-removeButton" type="button" title="Remove">
+                                            <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+                                          </button>
+                                          <span class="coral-TagList-tag-label">Basel</span>
+                                          <input type="hidden" value="BSL">
+                                        </li></ol>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-e7621b72-d7cb-4287-960d-204206840cdc" class="docs-Example-toggleMarkup prettyprint"></pre>
+                          <h3 id="multiline" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#multiline" class="coral-Link">Multiline</a></h3>Tags can also be block-level layout with multiline text by specifying a modifier class <code>coral-TagList-tag--multiline</code>.
+                      <script type="text/template" id="guide-eae21816-2d8b-4b43-9463-5f0932d50843"><ol class="coral-TagList" role="list"  data-init='taglist' >
+                                        <li role="listitem" class="coral-TagList-tag coral-TagList-tag--multiline" title="Ecuador">
+                                          <button class="coral-MinimalButton coral-TagList-tag-removeButton" type="button" title="Remove">
+                                            <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+                                          </button>
+                                          <span class="coral-TagList-tag-label">The Moon and Antarctica</span>
+                                          <input type="hidden" value="MM-2000">
+                                        </li>
+                                        <li role="listitem" class="coral-TagList-tag coral-TagList-tag--multiline" title="Ecuador">
+                                          <button class="coral-MinimalButton coral-TagList-tag-removeButton" type="button" title="Remove">
+                                            <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+                                          </button>
+                                          <span class="coral-TagList-tag-label">Good News for People who Love Bad News</span>
+                                          <input type="hidden" value="MM-2004">
+                                        </li></ol>
+                      </script>
+                      <div class="docs-Example-markup u-columnCustom"><ol class="coral-TagList" role="list"  data-init='taglist' >
+                                        <li role="listitem" class="coral-TagList-tag coral-TagList-tag--multiline" title="Ecuador">
+                                          <button class="coral-MinimalButton coral-TagList-tag-removeButton" type="button" title="Remove">
+                                            <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+                                          </button>
+                                          <span class="coral-TagList-tag-label">The Moon and Antarctica</span>
+                                          <input type="hidden" value="MM-2000">
+                                        </li>
+                                        <li role="listitem" class="coral-TagList-tag coral-TagList-tag--multiline" title="Ecuador">
+                                          <button class="coral-MinimalButton coral-TagList-tag-removeButton" type="button" title="Remove">
+                                            <i class="coral-Icon coral-Icon--sizeXS coral-Icon--close"></i>
+                                          </button>
+                                          <span class="coral-TagList-tag-label">Good News for People who Love Bad News</span>
+                                          <input type="hidden" value="MM-2004">
+                                        </li></ol>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-eae21816-2d8b-4b43-9463-5f0932d50843" class="docs-Example-toggleMarkup prettyprint"></pre>
+            </section>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                    <h3 id="javaScriptExamples" class="coral-Heading coral-Heading--3"><a href="#javaScriptExamples" class="coral-Link">JavaScript Examples</a></h3>
+              </div>
+                          <h3 id="jSClassInitialization" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#jSClassInitialization" class="coral-Link">JS Class Initialization</a></h3>The following is an example of the HTML without a <code>data-init</code> initializer.
+                      <script type="text/template" id="guide-df68fdc2-ec9c-44cc-8689-96c5c1485eb5"><ol class="coral-TagList" role="list" id='myTagList'  ></ol>
+                      </script>
+                      <div class="docs-Example-markup myTagListWrapper"><ol class="coral-TagList" role="list" id='myTagList'  ></ol>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-df68fdc2-ec9c-44cc-8689-96c5c1485eb5" class="docs-Example-toggleMarkup prettyprint"></pre>
+                  <div id="constructorExample">
+                    <script>
+                      $(document).ready(function() {
+                        var tagList = new CUI.TagList({ element:'#myTagList', values:[ { display:'Venezuela', value:'ve'}, { display:'Peru', value:'pe' } ] });
+                      })
+                    </script>
+                    
+                  </div>
+                  <p>The following JavaScript manually initializes the component on page initialization.</p>
+                      <pre id="constructorExample" data-src-id="constructorExample" class="prettyprint docs-Example-snippet">
+                        <p>No example content provided!</p></pre>
+                          <h3 id="addingATag" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#addingATag" class="coral-Link">Adding a Tag</a></h3>The following will add a tag to the TagList.
+                  <div id="addItemExample">
+                    <script>
+                      var newItems = [ { display: 'Chile', value:'cl' }, { display:'Argentina', value:'ar' }, { display:'Paraguay', value:'py' } ];
+                      function addTag() {
+                        var tagList = $('#myTagList').data('tagList');
+                        if ( newItems.length > 0 ) tagList.addItem( newItems.shift() );
+                      }
+                    </script>
+                  </div>
+                      <pre id="addItemExample" data-src-id="addItemExample" class="prettyprint docs-Example-snippet">
+                        <p>No example content provided!</p></pre>
+                  <div>
+                    <button class="coral-Button" onclick="addTag()">Add Tag</button>
+                    
+                  </div>
+                          <h3 id="respondingToEvents" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#respondingToEvents" class="coral-Link">Responding to events</a></h3>Listening to <code>itemadded</code> and <code>itemremoved</code> help identify the actions performed in the TagList.
+                  <div id="listenerExample">
+                    <script>
+                      $(document).ready(function () {
+                        var eventLog = $('#taglistLog');
+                        $('#myTagList').on('itemremoved', function(event, item) {
+                          eventLog.log('Item removed:  ' + item.value);
+                        }).on('itemadded', function(event, item) {
+                          eventLog.log('Item added:  ' + item.value);
+                        });
+                      });
+                    </script>
+                  </div>
+                      <pre id="listenerExample" data-src-id="listenerExample" class="prettyprint docs-Example-snippet">
+                        <p>No example content provided!</p></pre>
+                              <h3 id="log" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#log" class="coral-Link">Log</a></h3>
+                      <textarea id="taglistLog" readonly="true" class="coral-Textfield coral-Textfield--multiline docs-Example-log"></textarea>
+                          <h3 id="customRenderer" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#customRenderer" class="coral-Link">Custom Renderer</a></h3>The following will configure a custom tag renderer using the <code>renderer</code> option. There is currently no markup API for configuring a custom renderer; it must be configured through JavaScript.
+                  <style>
+                    .myRenderer {
+                      padding: 4px;
+                      border: 1px solid blue;
+                    }
+                  </style>
+                      <script type="text/template" id="guide-2121539f-4693-4f81-af2f-93c0d82b816c"><ol class="coral-TagList" role="list" id='rendererTagList'  ></ol>
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium"><ol class="coral-TagList" role="list" id='rendererTagList'  ></ol>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-2121539f-4693-4f81-af2f-93c0d82b816c" class="docs-Example-toggleMarkup prettyprint"></pre>
+                  <div id="rendererExample">
+                    <script>
+                      $(document).ready(function() {
+                        var tagList = new CUI.TagList({
+                          element:'#rendererTagList',
+                          renderer: function(value, display) {
+                            return '' +
+                              '<div class="myRenderer">' +
+                              display +
+                              '  <button type="button" data-remove="tag">remove</button>' +
+                              '  <input type="hidden" value="' + value + '"/>' +
+                              '</div>';
+                          },
+                          values: [
+                            {
+                              display:'Venezuela',
+                              value:'VW'
+                            },
+                            {
+                              display:'Peru',
+                              value:'pe'
+                            }
+                          ]
+                        });
+                      });
+                    </script>
+                  </div>
+                      <pre id="rendererExample" data-src-id="rendererExample" class="prettyprint docs-Example-snippet">
+                        <p>No example content provided!</p></pre>
+            </section>
+        <section class="guide-jsDocFragement">
+    <div class="content">
+        <!--<h1 class="line">Class: TagList</h1>-->
+        
+          
+
+
+
+<section>
+
+<h1 class="coral-Heading coral-Heading--1 u-line docs-Example-header" id="jsdoc"><a href="#jsdoc" class="coral-Link">TagList
+ JSDoc</a></h1>
+
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">Extends</h3>
+
+        <ul>
+            <li><a href="widget.html" class="coral-Link">CUI.Widget</a></li>
+        </ul>
+    
+
+    
+        
+<dt>
+    <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3" id="jsdocConstructor"><a href="#jsdocConstructor" class="coral-Link">Constructor</a></h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Creates a new tag list
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">options</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+                <h4 class="coral-Heading coral-Heading--4 params-description-heading">Component options</h4>
+                
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+            <th class="coral-Table-headerCell">data-* attribute</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+            <th class="coral-Table-headerCell">Optional</th>
+        
+
+        
+            <th class="coral-Table-headerCell">Default</th>
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">element</td>
+        
+
+        
+            <td class="coral-Table-cell attributes">
+                data-element
+            </td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Mixed</span>
+
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+              No<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              jQuery selector or DOM element to use for taglist container
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">fieldname</td>
+        
+
+        
+            <td class="coral-Table-cell attributes">
+                data-fieldname
+            </td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+              No<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              fieldname for the input fields
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">values</td>
+        
+
+        
+            <td class="coral-Table-cell attributes">
+                data-values
+            </td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Array</span>
+
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+              No<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              to set the taglist
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">multiline</td>
+        
+
+        
+            <td class="coral-Table-cell attributes">
+                data-multiline
+            </td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Boolean</span>
+
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+                false
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              defines if newly created tags are multiline elements
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">renderer</td>
+        
+
+        
+            <td class="coral-Table-cell attributes">
+                data-renderer
+            </td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type"><a href="CUI.TagList.html#rendererCallback" class="coral-Link">CUI.TagList~rendererCallback</a></span>
+
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              a custom
+     + renderer to use for rendering tags.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+    
+
+    
+    <h4>Fires:</h4>
+    <ul>
+        <li>
+    TagList#event:itemadded
+</li>
+    
+        <li>
+    TagList#event:itemremoved
+</li>
+    </ul>
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.TagList.js, line 25</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+    
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+       <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3" id="jsdocMethods"><a href="#jsdocMethods" class="coral-Link">Methods</a></h3>
+
+        <dl>
+            
+<dt>
+    <h3 class="name" id="addItem"><span class="type-signature"></span>addItem</h3>
+
+    
+</dt>
+
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">item</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>|<span class="param-type">Object</span>|<span class="param-type">Array</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+                <h4 class="coral-Heading coral-Heading--4 params-description-heading"></h4>
+                
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">display</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">value</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.TagList.js, line 269</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="get"><span class="type-signature"></span>get</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Get the value of an option
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">option</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The name of the option to fetch the value of
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    Option value
+    
+    {<span class="param-type">Mixed</span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="widget.html#get" class="coral-Link">CUI.Widget#get</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Widget.js, line 114</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="hide"><span class="type-signature"></span>hide</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Hide the widget
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    this, chainable
+    
+    {<span class="param-type"><a href="widget.html" class="coral-Link">CUI.Widget</a></span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="widget.html#hide" class="coral-Link">CUI.Widget#hide</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Widget.js, line 178</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="off"><span class="type-signature"></span>off</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Remove an event listener
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">evtName</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The event name to stop listening for
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">func</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">function</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The function that was passed to on()
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    this, chainable
+    
+    {<span class="param-type"><a href="widget.html" class="coral-Link">CUI.Widget</a></span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="widget.html#off" class="coral-Link">CUI.Widget#off</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Widget.js, line 135</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="on"><span class="type-signature"></span>on</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Add an event listener
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">evtName</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The event name to listen for
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">func</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">function</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The function that will be called when the event is triggered
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    this, chainable
+    
+    {<span class="param-type"><a href="widget.html" class="coral-Link">CUI.Widget</a></span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="widget.html#on" class="coral-Link">CUI.Widget#on</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Widget.js, line 124</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="removeItem"><span class="type-signature"></span>removeItem</h3>
+
+    
+</dt>
+
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">item</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              value to be deleted
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.TagList.js, line 255</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="set"><span class="type-signature"></span>set</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Set a number of options using an object or a string
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">option</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>|<span class="param-type">Object</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The option to set as a string, or an object of key/value pairs to set
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">value</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The value to set the option to (is ignored when first argument is an object)
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    this, chainable
+    
+    {<span class="param-type"><a href="widget.html" class="coral-Link">CUI.Widget</a></span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="widget.html#set" class="coral-Link">CUI.Widget#set</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Widget.js, line 56</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="setName"><span class="type-signature"></span>setName</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Set a custom name for this widget.
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">customName</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Component name
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    this, chainable
+    
+    {<span class="param-type"><a href="widget.html" class="coral-Link">CUI.Widget</a></span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="widget.html#setName" class="coral-Link">CUI.Widget#setName</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Widget.js, line 220</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="show"><span class="type-signature"></span>show</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Show the widget
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    this, chainable
+    
+    {<span class="param-type"><a href="widget.html" class="coral-Link">CUI.Widget</a></span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="widget.html#show" class="coral-Link">CUI.Widget#show</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Widget.js, line 144</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="toggleVisibility"><span class="type-signature"></span>toggleVisibility</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Toggle the visibility of the widget
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h4>Returns:</h4>
+    
+            
+<div class="param-desc">
+    this, chainable
+    
+    {<span class="param-type"><a href="widget.html" class="coral-Link">CUI.Widget</a></span>
+}
+    
+</div>
+
+
+        
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="widget.html#toggleVisibility" class="coral-Link">CUI.Widget#toggleVisibility</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Widget.js, line 210</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        </dl>
+    
+
+    
+        <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3">TypeDefs</h3>
+
+        <dl>
+            
+<dt>
+    <h3 class="name" id="rendererCallback">rendererCallback</h3>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        Callback used to render a tag. If a child of the returned tag is a button,
+it will be used to remove the tag. The returned tag element should also
+contain a hidden input with a value that matches the <code>value</code>
+argument.
+    </div>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.TagList.js, line 296</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        </dl>
+    
+
+    
+        <h3 class="docs-Example-subtitle coral-Heading coral-Heading--3" id="jsdocEvents"><a href="#jsdocEvents" class="coral-Link">Events</a></h3>
+
+        <dl>
+            
+<dt>
+    <h3 class="name" id="event:beforeChange:*">beforeChange:*</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered when before an option is changed
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">evt</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+                <h4 class="coral-Heading coral-Heading--4 params-description-heading">Event object</h4>
+                
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">option</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Mixed</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The option that changed
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">currentValue</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Mixed</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The current value
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">value</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Mixed</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The value this option will be changed to
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">preventDefault</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">function</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Call to prevent the option from changing
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="widget.html#event:beforeChange:*" class="coral-Link">CUI.Widget#beforeChange:*</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Widget.js, line 233</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="event:change:*">change:*</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered when an option is changed
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">evt</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+                <h4 class="coral-Heading coral-Heading--4 params-description-heading">Event object</h4>
+                
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">option</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Mixed</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The option that changed
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">value</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Mixed</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The new value
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="widget.html#event:change:*" class="coral-Link">CUI.Widget#change:*</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Widget.js, line 235</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="event:hide">hide</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered when the widget is hidden
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="widget.html#event:hide" class="coral-Link">CUI.Widget#event:hide</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Widget.js, line 231</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="event:itemadded">itemadded</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered when an item was added
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+                <h4 class="coral-Heading coral-Heading--4 params-description-heading">Event object</h4>
+                
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">value</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              value which was added
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">display</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              displayed text of the element
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.TagList.js, line 292</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="event:itemremoved">itemremoved</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered when an item was removed
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+        <h4>Parameters:</h4>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+                <h4 class="coral-Heading coral-Heading--4 params-description-heading">Event object</h4>
+                
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">value</td>
+        
+
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              value which was removed
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.TagList.js, line 294</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    <h3 class="name" id="event:show">show</h3>
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered when the widget is shown
+</div>
+
+
+<dd>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="widget.html#event:show" class="coral-Link">CUI.Widget#event:show</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>CUI.Widget.js, line 229</li></ul></dd>
+	
+
+    
+
+	
+
+	
+</dl>
+
+</dd>
+
+        </dl>
+    
+</article>
+
+</section>
+
+
+
+
+        
+    </div>
+   
+        </section>
+      </section>
+    </article>
+  </body>
+</html>

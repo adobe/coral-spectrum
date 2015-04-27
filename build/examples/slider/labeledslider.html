@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Labeled Slider examples</title>
+  <link rel="stylesheet" href="../../css/coral.css">
+
+  <script src="../../js/libs/jquery.js"></script>
+  <script src="../../js/libs/toe.js"></script>
+
+  <script src="../../js/coral.js"></script>
+</head>
+
+<body class="coral--light u-coral-padding">
+
+  <section>
+    <h1 class="coral-Heading coral-Heading--1">Labeled Sliders</h1>
+
+    <div class="left">
+      <div class="coral-Slider" data-init="labeled-slider">
+        <label>
+          Basic Horizontal Slider
+          <br>
+          <input type="range" value="14" min="10" max="20" step="2">
+        </label>
+      </div>
+    </div>
+    <div class="left">
+      <div class="coral-Slider coral-Slider--ticked coral-Slider--filled coral-Slider--tooltips" data-init="labeled-slider">
+        <label>
+          Slider with Labeled Ticks and Tooltips
+          <br>
+          <input type="range" value="14" min="10" max="20" step="2">
+        </label>
+        <ul class="coral-Slider-tickLabels">
+          <li>First label</li>
+          <li>Second label</li>
+          <li>Third label</li>
+          <li>Fourth label</li>
+          <li>Fifth label</li>
+          <li>Sixth label</li>
+        </ul>
+      </div>
+    </div>
+    <div class="left">
+      <div class="coral-Slider coral-Slider--ticked coral-Slider--filled coral-Slider--alternatingLabels" data-init="labeled-slider">
+        <fieldset>
+          <legend>Slider with alternating labels</legend>
+          <label>Minimum
+            <input type="range" value="14" min="10" max="20" step="2">
+          </label>
+          <label>Maximum
+            <input type="range" value="16" min="10" max="20" step="2">
+          </label>
+        </fieldset>
+        <ul class="coral-Slider-tickLabels">
+          <li>First label</li>
+          <li>Second label</li>
+          <li>Third label</li>
+          <li>Fourth label</li>
+          <li>Fifth label</li>
+          <li>Sixth label</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="left">
+      <div class="coral-Slider coral-Slider--ticked coral-Slider--filled coral-Slider--vertical" data-init="labeled-slider">
+        <fieldset>
+          <legend>Vertical slider with Labeled Ticks</legend>
+          <label>Minimum
+            <input type="range" value="14" min="10" max="20" step="2">
+          </label>
+          <label>Maximum
+            <input type="range" value="16" min="10" max="20" step="2">
+          </label>
+        </fieldset>
+        <ul class="coral-Slider-tickLabels">
+          <li>First label</li>
+          <li>Second label</li>
+          <li>Third label</li>
+          <li>Fourth label</li>
+          <li>Fifth label</li>
+          <li>Sixth label</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>
+
