@@ -27,7 +27,7 @@
 
     "coralui-component-collection": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-collection.git#pre",
 
-    "coralui-mixin-fieldcomponent": "git+ssh://git@git.corp.adobe.com:Coral/coralui-mixin-fieldcomponent.git#pre",
+    "coralui-mixin-formfield": "git+ssh://git@git.corp.adobe.com:Coral/coralui-mixin-formfield.git#pre",
     "coralui-mixin-overlay": "git+ssh://git@git.corp.adobe.com:Coral/coralui-mixin-overlay.git#pre",
     "coralui-mixin-selection": "git+ssh://git@git.corp.adobe.com:Coral/coralui-mixin-selection.git#pre",
 
@@ -44,6 +44,7 @@
 
     "coralui-component-accordion": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-accordion.git#pre",
     "coralui-component-alert": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-alert.git#pre",
+    "coralui-component-autocomplete": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-autocomplete.git#pre",
     "coralui-component-charactercount": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-charactercount.git#pre",
     "coralui-component-datepicker": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-datepicker.git#pre",
     "coralui-component-dialog": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-dialog.git#pre",
@@ -69,7 +70,7 @@
 
       "coralui-mixin-overlay",
       "coralui-mixin-selection",
-      "coralui-mixin-fieldcomponent",
+      "coralui-mixin-formfield",
 
       "coralui-component-anchorbutton",
       "coralui-component-button",
@@ -84,6 +85,7 @@
 
       "coralui-component-accordion",
       "coralui-component-alert",
+      "coralui-component-autocomplete",
       "coralui-component-charactercount",
       "coralui-component-datepicker",
       "coralui-component-dialog",
