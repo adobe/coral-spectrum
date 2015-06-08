@@ -19,18 +19,13 @@
     "coralui-guide-resources": "git+ssh://git@git.corp.adobe.com:Coral/coralui-guide-resources.git#4.4.7",
     "load-grunt-config": "~0.7.0",
     "underscore": "~1.6.0",
-
     "coralui-commons": "git+ssh://git@git.corp.adobe.com:Coral/coralui-commons.git#3.3.0",
     "coralui-core": "git+ssh://git@git.corp.adobe.com:Coral/coralui-core.git#3.0.1",
-
     "coralui-component": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component.git#1.0.0",
-
     "coralui-component-collection": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-collection.git#1.0.0",
-
     "coralui-mixin-formfield": "git+ssh://git@git.corp.adobe.com:Coral/coralui-mixin-formfield.git#1.0.0",
     "coralui-mixin-overlay": "git+ssh://git@git.corp.adobe.com:Coral/coralui-mixin-overlay.git#1.0.0",
     "coralui-mixin-selection": "git+ssh://git@git.corp.adobe.com:Coral/coralui-mixin-selection.git#1.0.0",
-
     "coralui-component-anchorbutton": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-anchorbutton.git#1.0.0",
     "coralui-component-button": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-button.git#1.0.0",
     "coralui-component-buttongroup": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-buttongroup.git#1.0.0",
@@ -41,7 +36,6 @@
     "coralui-component-textarea": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-textarea.git#1.0.0",
     "coralui-component-textfield": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-textfield.git#1.0.0",
     "coralui-component-wait": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-wait.git#1.0.0",
-
     "coralui-component-accordion": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-accordion.git#3.0.0",
     "coralui-component-alert": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-alert.git#3.0.0",
     "coralui-component-autocomplete": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-autocomplete.git#3.0.0",
@@ -61,14 +55,11 @@
     "imports": [
       "coralui-commons",
       "coralui-core",
-
       "coralui-component",
       "coralui-component-collection",
-
       "coralui-mixin-overlay",
       "coralui-mixin-selection",
       "coralui-mixin-formfield",
-
       "coralui-component-anchorbutton",
       "coralui-component-button",
       "coralui-component-buttongroup",
@@ -79,7 +70,6 @@
       "coralui-component-textarea",
       "coralui-component-textfield",
       "coralui-component-wait",
-
       "coralui-component-accordion",
       "coralui-component-alert",
       "coralui-component-autocomplete",

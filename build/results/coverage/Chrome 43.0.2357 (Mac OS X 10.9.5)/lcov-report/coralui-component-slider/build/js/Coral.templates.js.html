@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for coralui-component-slider/build/js/Coral.templates.js</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../prettify.css">
+    <link rel="stylesheet" href="../../../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header high">
+    <h1>Code coverage report for <span class="entity">coralui-component-slider/build/js/Coral.templates.js</span></h1>
+    <h2>
+        Statements: <span class="metric">100% <small>(140 / 140)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">60% <small>(6 / 10)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">100% <small>(2 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">100% <small>(140 / 140)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">coralui-component-slider/build/js/</a> &#187; Coral.templates.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-yes">114</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">this["Coral"] = this["Coral"] || <span class="branch-1 cbranch-no" title="branch not covered" >{};</span>
+this["Coral"]["templates"] = this["Coral"]["templates"] || <span class="branch-1 cbranch-no" title="branch not covered" >{};</span>
+this["Coral"]["templates"]["Slider"] = this["Coral"]["templates"]["Slider"] || {};
+this["Coral"]["templates"]["Slider"]["base"] = (function anonymous(data_0) {
+  var frag = document.createDocumentFragment();
+  var data = data_0 = typeof data_0 === "undefined" ? {} : <span class="branch-1 cbranch-no" title="branch not covered" >data_0;</span>
+  data.uid = Coral.commons.getUID();
+  data_0 = data;
+  var el1 = document.createTextNode("\n\n");
+  frag.appendChild(el1);
+  var el2 = document.createElement("div");
+  el2.className += " coral-Slider-bar";
+  var el3 = document.createTextNode("\n  ");
+  el2.appendChild(el3);
+  var el4 = this["fillHandle"] = document.createElement("div");
+  el4.setAttribute("handle", "fillHandle");
+  el4.className += " coral-Slider-fill is-hidden";
+  el4.setAttribute("role", "presentation");
+  el2.appendChild(el4);
+  var el5 = document.createTextNode("\n");
+  el2.appendChild(el5);
+  frag.appendChild(el2);
+  var el6 = document.createTextNode("\n");
+  frag.appendChild(el6);
+  var el7 = this["leftHandle"] = document.createElement("div");
+  el7.setAttribute("handle", "leftHandle");
+  el7.className += " coral-Slider-handle";
+  var el8 = document.createTextNode("\n  ");
+  el7.appendChild(el8);
+  var el9 = this["leftInput"] = document.createElement("input");
+  el9.setAttribute("handle", "leftInput");
+  el9.setAttribute("type", "range");
+  el9.id = data_0["uid"];
+  el9.className += " coral-Slider-input";
+  el7.appendChild(el9);
+  var el10 = document.createTextNode("\n  ");
+  el7.appendChild(el10);
+  var el11 = document.createElement("coral-tooltip");
+  el11.setAttribute("variant", "inspect");
+  el11.id = data_0["uid"]+"-tooltip";
+  el11.setAttribute("for", data_0["uid"]);
+  el11.setAttribute("interaction", "off");
+  el7.appendChild(el11);
+  var el12 = document.createTextNode("\n");
+  el7.appendChild(el12);
+  frag.appendChild(el7);
+  var el13 = document.createTextNode("\n");
+  frag.appendChild(el13);
+  return frag;
+});
+&nbsp;
+this["Coral"]["templates"]["Slider"]["range"] = (function anonymous(data_0) {
+  var frag = document.createDocumentFragment();
+  var data = data_0 = typeof data_0 === "undefined" ? {} : <span class="branch-1 cbranch-no" title="branch not covered" >data_0;</span>
+  
+  data.uidMin = Coral.commons.getUID();
+  data.uidMax = Coral.commons.getUID();
+&nbsp;
+  data_0 = data;
+  var el1 = document.createTextNode("\n");
+  frag.appendChild(el1);
+  var el2 = document.createElement("div");
+  el2.className += " coral-Slider-bar";
+  var el3 = document.createTextNode("\n  ");
+  el2.appendChild(el3);
+  var el4 = this["fillHandle"] = document.createElement("div");
+  el4.setAttribute("handle", "fillHandle");
+  el4.className += " coral-Slider-fill is-hidden";
+  el4.setAttribute("role", "presentation");
+  el2.appendChild(el4);
+  var el5 = document.createTextNode("\n");
+  el2.appendChild(el5);
+  frag.appendChild(el2);
+  var el6 = document.createTextNode("\n");
+  frag.appendChild(el6);
+  var el7 = this["leftHandle"] = document.createElement("div");
+  el7.setAttribute("handle", "leftHandle");
+  el7.className += " coral-Slider-handle";
+  var el8 = document.createTextNode("\n  ");
+  el7.appendChild(el8);
+  var el9 = this["rightLabel"] = document.createElement("label");
+  el9.setAttribute("handle", "rightLabel");
+  el9.className += " u-coral-screenReaderOnly";
+  el9.id = data_0["uidMin"]+"-label";
+  el9.setAttribute("for", data_0["uidMin"]);
+  el9.setAttribute("aria-hidden", "true");
+  el9.textContent = "Minimum";
+  el7.appendChild(el9);
+  var el10 = document.createTextNode("\n  ");
+  el7.appendChild(el10);
+  var el11 = this["leftInput"] = document.createElement("input");
+  el11.setAttribute("handle", "leftInput");
+  el11.setAttribute("type", "range");
+  el11.id = data_0["uidMin"];
+  el11.className += " coral-Slider-input";
+  el7.appendChild(el11);
+  var el12 = document.createTextNode("\n  ");
+  el7.appendChild(el12);
+  var el13 = document.createElement("coral-tooltip");
+  el13.setAttribute("variant", "inspect");
+  el13.id = data_0["uidMin"]+"-tooltip";
+  el13.setAttribute("for", data_0["uidMin"]);
+  el13.setAttribute("interaction", "off");
+  el7.appendChild(el13);
+  var el14 = document.createTextNode("\n");
+  el7.appendChild(el14);
+  frag.appendChild(el7);
+  var el15 = document.createTextNode("\n");
+  frag.appendChild(el15);
+  var el16 = this["rightHandle"] = document.createElement("div");
+  el16.setAttribute("handle", "rightHandle");
+  el16.className += " coral-Slider-handle";
+  var el17 = document.createTextNode("\n  ");
+  el16.appendChild(el17);
+  var el18 = this["rightLabel"] = document.createElement("label");
+  el18.setAttribute("handle", "rightLabel");
+  el18.className += " u-coral-screenReaderOnly";
+  el18.id = data_0["uidMax"]+"-label";
+  el18.setAttribute("for", data_0["uidMax"]);
+  el18.setAttribute("aria-hidden", "true");
+  el18.textContent = "Maximum";
+  el16.appendChild(el18);
+  var el19 = document.createTextNode("\n  ");
+  el16.appendChild(el19);
+  var el20 = this["rightInput"] = document.createElement("input");
+  el20.setAttribute("handle", "rightInput");
+  el20.setAttribute("type", "range");
+  el20.id = data_0["uidMax"];
+  el20.className += " coral-Slider-input";
+  el16.appendChild(el20);
+  var el21 = document.createTextNode("\n  ");
+  el16.appendChild(el21);
+  var el22 = document.createElement("coral-tooltip");
+  el22.setAttribute("variant", "inspect");
+  el22.id = data_0["uidMax"]+"-tooltip";
+  el22.setAttribute("for", data_0["uidMax"]);
+  el22.setAttribute("interaction", "off");
+  el16.appendChild(el22);
+  var el23 = document.createTextNode("\n");
+  el16.appendChild(el23);
+  frag.appendChild(el16);
+  var el24 = document.createTextNode("\n");
+  frag.appendChild(el24);
+  return frag;
+});</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Jun 08 2015 16:28:54 GMT-0700 (PDT)</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>
