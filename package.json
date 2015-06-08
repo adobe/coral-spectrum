@@ -29,36 +29,33 @@
 
     "coralui-mixin-formfield": "git+ssh://git@git.corp.adobe.com:Coral/coralui-mixin-formfield.git#1.0.0",
     "coralui-mixin-overlay": "git+ssh://git@git.corp.adobe.com:Coral/coralui-mixin-overlay.git#1.0.0",
-    "coralui-mixin-selection": "git+ssh://git@git.corp.adobe.com:Coral/coralui-mixin-selection.git#pre",
+    "coralui-mixin-selection": "git+ssh://git@git.corp.adobe.com:Coral/coralui-mixin-selection.git#1.0.0",
 
     "coralui-component-anchorbutton": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-anchorbutton.git#1.0.0",
     "coralui-component-button": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-button.git#1.0.0",
-    "coralui-component-buttongroup": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-buttongroup.git#pre",
+    "coralui-component-buttongroup": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-buttongroup.git#1.0.0",
     "coralui-component-checkbox": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-checkbox.git#1.0.0",
     "coralui-component-icon": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-icon.git#1.0.0",
-    "coralui-component-progress": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-progress.git#pre",
+    "coralui-component-progress": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-progress.git#1.0.0",
     "coralui-component-radio": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-radio.git#1.0.0",
     "coralui-component-textarea": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-textarea.git#1.0.0",
     "coralui-component-textfield": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-textfield.git#1.0.0",
     "coralui-component-wait": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-wait.git#1.0.0",
 
-    "coralui-component-accordion": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-accordion.git#pre",
-    "coralui-component-alert": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-alert.git#pre",
-    "coralui-component-autocomplete": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-autocomplete.git#pre",
-    "coralui-component-charactercount": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-charactercount.git#pre",
-    "coralui-component-datepicker": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-datepicker.git#pre",
-    "coralui-component-dialog": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-dialog.git#pre",
-    "coralui-component-fileupload": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-fileupload.git#pre",
+    "coralui-component-accordion": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-accordion.git#3.0.0",
+    "coralui-component-alert": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-alert.git#3.0.0",
+    "coralui-component-autocomplete": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-autocomplete.git#3.0.0",
+    "coralui-component-charactercount": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-charactercount.git#3.0.0",
+    "coralui-component-datepicker": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-datepicker.git#3.0.0",
+    "coralui-component-dialog": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-dialog.git#1.0.0",
     "coralui-component-numberinput": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-numberinput.git#3.0.0",
     "coralui-component-overlay": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-overlay.git#1.0.0",
-    "coralui-component-popover": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-popover.git#pre",
-    "coralui-component-select": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-select.git#pre",
-    "coralui-component-selectlist": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-selectlist.git#pre",
-    "coralui-component-slider": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-slider.git#pre",
-    "coralui-component-tabpanel": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-tabpanel.git#pre",
-    "coralui-component-taglist": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-taglist.git#pre",
-    "coralui-component-tooltip": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-tooltip.git#pre",
-    "coralui-component-wizard": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-wizard.git#pre"
+    "coralui-component-popover": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-popover.git#3.0.0",
+    "coralui-component-select": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-select.git#3.0.0",
+    "coralui-component-selectlist": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-selectlist.git#3.0.0",
+    "coralui-component-slider": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-slider.git#3.0.0",
+    "coralui-component-taglist": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-taglist.git#3.0.0",
+    "coralui-component-tooltip": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-tooltip.git#3.0.0"
   },
   "coral": {
     "imports": [
@@ -89,17 +86,14 @@
       "coralui-component-charactercount",
       "coralui-component-datepicker",
       "coralui-component-dialog",
-      "coralui-component-fileupload",
       "coralui-component-numberinput",
       "coralui-component-overlay",
       "coralui-component-popover",
       "coralui-component-select",
       "coralui-component-selectlist",
       "coralui-component-slider",
-      "coralui-component-tabpanel",
       "coralui-component-taglist",
-      "coralui-component-tooltip",
-      "coralui-component-wizard"
+      "coralui-component-tooltip"
     ]
   }
 }
