@@ -5,9 +5,9 @@ module.exports = function(grunt) {
     var targets = grunt.option('link-targets');
 
     var dirs = grunt.config('dirs');
-    var commonsPath = dirs.packages + '/'+ dirs.commons;
-    var corePath = dirs.packages + '/'+ dirs.core;
-    var componentsPath = dirs.packages + '/'+ dirs.components;
+    var commonsPath = dirs.packages + '/' + dirs.commons;
+    var corePath = dirs.packages + '/' + dirs.core;
+    var componentsPath = dirs.packages + '/' + dirs.components;
     var coralComponents = [];
 
     grunt.verbose.writeln("Targets:", targets);
@@ -17,11 +17,15 @@ module.exports = function(grunt) {
       grunt.log.writeln('  Pass arguments using --link-targets=');
       grunt.log.writeln('  Targets can be a component name or a comma separated list of component names');
       grunt.log.writeln('  Use --link-targets=all to link all components');
-    } else {
+    }
+    else {
 
       if (targets.toLowerCase() === 'all') {
-        coralComponents = grunt.file.expand( { cwd: componentsPath},'*');
-      } else {
+        coralComponents = grunt.file.expand({
+          cwd: componentsPath
+        }, '*');
+      }
+      else {
         coralComponents = grokTargets(targets);
       }
       grunt.log.writeln("Found " + coralComponents.length + " components to link");
@@ -31,8 +35,8 @@ module.exports = function(grunt) {
     npmLink(dirs.packages, 'commons');
     npmLink(dirs.packages, 'core');
 
-    coralComponents.forEach( function (pkgName) {
-      var path = dirs.packages + "/" + dirs.components ;
+    coralComponents.forEach(function(pkgName) {
+      var path = dirs.packages + "/" + dirs.components;
       // set extra shell instructions
       // to link component core and commons
       var extraCommands = ' && cd ';
@@ -55,7 +59,9 @@ module.exports = function(grunt) {
 
     grunt.config.set('shell.npmLink-' + pkg, {
       command: cmdString,
-      options: { stdout:true}
+      options: {
+        stdout: true
+      }
     });
 
     grunt.task.run('shell:npmLink-' + pkg);
@@ -66,7 +72,8 @@ module.exports = function(grunt) {
     var result = [];
     if (targets.indexOf(',') > 0) {
       result = result.concat(targets.split(','));
-    } else {
+    }
+    else {
       result.push(targets);
     }
     return result;

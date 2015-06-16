@@ -20,7 +20,8 @@ module.exports = function(grunt) {
           grunt.log.ok("Merging", coralModule, ":", docsItem);
           outputJson.documentation[docsItem] = nodeData;
         }
-      } else {
+      }
+      else {
         grunt.log.writeln("Skipping", coralModule, "--", "No docs found.".yellow);
       }
     }

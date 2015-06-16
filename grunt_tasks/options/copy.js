@@ -16,7 +16,7 @@ module.exports = {
         // copies all of the external libs, as well as the typekit file, as the core examples rely on that.
         expand: true,
         cwd: '<%= dirs.modules %>/coralui-core/<%= dirs.build %>/',
-        src: [ '<%= dirs.js %>/libs/**', '<%= dirs.js %>/typekit.js' ],
+        src: ['<%= dirs.js %>/libs/**', '<%= dirs.js %>/typekit.js'],
         dest: '<%= dirs.build %>/'
       }
     ]
@@ -65,7 +65,7 @@ module.exports = {
           'coralui-component*/<%= dirs.build %>/<%= dirs.documentation %>/resources/**'
         ],
         dest: '<%= dirs.build %>/<%= dirs.documentation %>/resources',
-        rename: function (dest, src) {
+        rename: function(dest, src) {
           return dest + src.substring(src.lastIndexOf('resources') + 'resources'.length);
         }
       }
@@ -75,9 +75,9 @@ module.exports = {
   documentation_resources: {
     files: [
       {
-        expand:true,
-        cwd:'<%= dirs.modules %>/<%= dirs.documentationResources %>',
-        src:['js/*','css/*'],
+        expand: true,
+        cwd: '<%= dirs.modules %>/<%= dirs.documentationResources %>',
+        src: ['js/*', 'css/*'],
         dest: '<%= dirs.build %>/<%= dirs.documentation %>'
       }
     ]
@@ -102,7 +102,7 @@ module.exports = {
         dest: 'build/embed/',
 
         rename: function(dest, matchedSrcPath, options) {
-          return dest + matchedSrcPath.substring( matchedSrcPath.lastIndexOf('embed/') + 6);
+          return dest + matchedSrcPath.substring(matchedSrcPath.lastIndexOf('embed/') + 6);
         }
       }
     ]
@@ -117,7 +117,7 @@ module.exports = {
         src: ['*.html'],
         dest: '<%= dirs.build %>/<%= dirs.documentation %>',
         rename: function(dest, matchedSrcPath, options) {
-          return dest + matchedSrcPath.substring( matchedSrcPath.lastIndexOf('resources/') + 10);
+          return dest + matchedSrcPath.substring(matchedSrcPath.lastIndexOf('resources/') + 10);
         }
       },
       // copies any other resources, except the core resources (icon, wait, progress & cursor)
@@ -135,7 +135,7 @@ module.exports = {
           return !foundIcon && !foundWait && !foundProgress && !foundCursors;
         },
         rename: function(dest, matchedSrcPath, options) {
-          return dest + matchedSrcPath.substring( matchedSrcPath.lastIndexOf('resources/') + 10);
+          return dest + matchedSrcPath.substring(matchedSrcPath.lastIndexOf('resources/') + 10);
         }
       }
     ]
