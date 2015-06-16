@@ -19,7 +19,7 @@
     "coralui-guide-resources": "git+ssh://git@git.corp.adobe.com:Coral/coralui-guide-resources.git#4.4.7",
     "load-grunt-config": "~0.7.0",
     "underscore": "~1.6.0",
-    "coralui-commons": "git+ssh://git@git.corp.adobe.com:Coral/coralui-commons.git#3.3.0",
+    "coralui-commons": "git+ssh://git@git.corp.adobe.com:Coral/coralui-commons.git#3.4.0",
     "coralui-core": "git+ssh://git@git.corp.adobe.com:Coral/coralui-core.git#3.0.1",
     "coralui-component": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component.git#1.0.1",
     "coralui-component-collection": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-collection.git#1.0.0",
