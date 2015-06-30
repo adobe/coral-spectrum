@@ -65,9 +65,9 @@ module.exports = {
       // Pre-process HTML snippets
       'build/tests/snippets/**/*.html': ['html2js'],
 
-      // Instrument the source files we'll be running tests against
-      // Only include component files in the build output
-      'node_modules/coralui-component*/build/{js,js/!(libs)/**}/*.js': ['coverage']
+      // coverage is taken from scripts after change introduced by CUI-3045 in coralui-util-dependencies. there's no
+      // need to exclude anything else
+      'node_modules/coralui-*/scripts/**/*.js': ['coverage']
     }
   }
 };
