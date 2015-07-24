@@ -1,7 +1,7 @@
 {
   "name": "coralui",
   "description": "CoralUI package builder",
-  "version": "3.2.1-pre",
+  "version": "3.3.0-pre",
   "private": true,
   "repository": {
     "type": "git",
@@ -40,7 +40,7 @@
     "coralui-component-alert": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-alert.git#3.0.3",
     "coralui-component-autocomplete": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-autocomplete.git#3.0.2",
     "coralui-component-charactercount": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-charactercount.git#3.0.0",
-    "coralui-component-datepicker": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-datepicker.git#3.0.1",
+    "coralui-component-datepicker": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-datepicker.git#3.1.0",
     "coralui-component-dialog": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-dialog.git#1.0.2",
     "coralui-component-numberinput": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-numberinput.git#3.0.0",
     "coralui-component-overlay": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-overlay.git#1.0.2",
