@@ -97,7 +97,6 @@ module.exports = function(grunt) {
   // Releases the current package
   grunt.task.registerTask('release', [
     'default',
-    'run-remote-tests',
     'clean:finalbuild',
     'coralui-releasepackage'
   ]);
