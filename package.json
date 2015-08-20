@@ -1,7 +1,7 @@
 {
   "name": "coralui",
   "description": "CoralUI package builder",
-  "version": "3.4.1-pre",
+  "version": "3.5.0-pre",
   "private": true,
   "repository": {
     "type": "git",
@@ -49,6 +49,7 @@
     "coralui-component-select": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-select.git#3.0.2",
     "coralui-component-selectlist": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-selectlist.git#3.0.1",
     "coralui-component-slider": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-slider.git#3.0.2",
+    "coralui-component-switch": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-switch.git#3.0.0",
     "coralui-component-tablist": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-tablist.git#1.0.3",
     "coralui-component-tabview": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-tabview.git#1.0.0",
     "coralui-component-taglist": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-taglist.git#3.0.1",
@@ -86,6 +87,7 @@
       "coralui-component-select",
       "coralui-component-selectlist",
       "coralui-component-slider",
+      "coralui-component-switch",
       "coralui-component-tablist",
       "coralui-component-tabview",
       "coralui-component-taglist",
