@@ -27,7 +27,7 @@
     "coralui-mixin-overlay": "git+ssh://git@git.corp.adobe.com:Coral/coralui-mixin-overlay.git#1.0.2",
     "coralui-mixin-selection": "git+ssh://git@git.corp.adobe.com:Coral/coralui-mixin-selection.git#1.0.1",
     "coralui-component-anchorbutton": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-anchorbutton.git#1.0.0",
-    "coralui-component-button": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-button.git#1.1.1",
+    "coralui-component-button": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-button.git#1.2.0",
     "coralui-component-buttongroup": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-buttongroup.git#1.0.0",
     "coralui-component-checkbox": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-checkbox.git#1.0.1",
     "coralui-component-icon": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-icon.git#1.0.0",
