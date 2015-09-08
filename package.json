@@ -52,7 +52,7 @@
     "coralui-component-switch": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-switch.git#3.0.0",
     "coralui-component-tablist": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-tablist.git#1.0.4",
     "coralui-component-tabview": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-tabview.git#1.0.0",
-    "coralui-component-taglist": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-taglist.git#3.0.2",
+    "coralui-component-taglist": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-taglist.git#3.0.3",
     "coralui-component-tooltip": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-tooltip.git#3.0.3"
   },
   "coral": {
