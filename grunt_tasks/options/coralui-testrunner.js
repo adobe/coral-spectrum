@@ -58,7 +58,7 @@ module.exports = {
       'mocha',
       'chai-jquery',
       'jquery-2.1.0', // This will need to be updated when jQuery's version is incremented
-      'sinon-chai'
+      'chai-sinon'
     ],
     // top level also needs to tweak pre-processor paths
     preprocessors: {
