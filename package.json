@@ -1,7 +1,7 @@
 {
   "name": "coralui",
   "description": "CoralUI package builder",
-  "version": "3.9.1-pre",
+  "version": "3.9.2-pre",
   "private": true,
   "repository": {
     "type": "git",
@@ -16,7 +16,7 @@
     "coralui-grunt-releasepackage": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-releasepackage.git#1.x",
     "coralui-grunt-testrunner": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-testrunner.git#2.x",
     "coralui-util-dependencies": "git+ssh://git@git.corp.adobe.com:Coral/coralui-util-dependencies.git#1.0.0",
-    "coralui-guide-resources": "git+ssh://git@git.corp.adobe.com:Coral/coralui-guide-resources.git#4.4.11",
+    "coralui-guide-resources": "git+ssh://git@git.corp.adobe.com:Coral/coralui-guide-resources.git#4.x",
     "load-grunt-config": "~0.7.0",
     "underscore": "~1.6.0",
     "coralui-commons": "git+ssh://git@git.corp.adobe.com:Coral/coralui-commons.git#3.6.0",
@@ -40,7 +40,7 @@
     "coralui-component-wait": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-wait.git#1.0.2",
     "coralui-component-accordion": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-accordion.git#3.0.4",
     "coralui-component-alert": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-alert.git#3.0.5",
-    "coralui-component-autocomplete": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-autocomplete.git#3.0.8",
+    "coralui-component-autocomplete": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-autocomplete.git#3.0.9",
     "coralui-component-charactercount": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-charactercount.git#3.0.1",
     "coralui-component-datepicker": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-datepicker.git#3.1.8",
     "coralui-component-dialog": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-dialog.git#1.1.4",
