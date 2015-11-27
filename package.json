@@ -51,7 +51,7 @@
     "coralui-mixin-formfield": "git+ssh://git@git.corp.adobe.com:Coral/coralui-mixin-formfield.git#1.0.1",
     "coralui-mixin-overlay": "git+ssh://git@git.corp.adobe.com:Coral/coralui-mixin-overlay.git#1.0.4",
     "coralui-mixin-selection": "git+ssh://git@git.corp.adobe.com:Coral/coralui-mixin-selection.git#1.1.0",
-    "coralui-util-dependencies": "git+ssh://git@git.corp.adobe.com:Coral/coralui-util-dependencies.git#1.0.0",
+    "coralui-util-dependencies": "git+ssh://git@git.corp.adobe.com:Coral/coralui-util-dependencies.git#1.x",
     "grunt": "~0.4.5",
     "grunt-contrib-copy": "~0.8.2",
     "grunt-contrib-cssmin": "~0.7.0",
