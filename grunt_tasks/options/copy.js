@@ -149,18 +149,6 @@ module.exports = {
         rename: function(dest, matchedSrcPath, options) {
           return dest + matchedSrcPath.substring(matchedSrcPath.indexOf('snippets/') + 9);
         }
-      },
-      {
-        expand: true,
-        flatten: false,
-        cwd: '<%= dirs.modules %>/',
-        src: ['coralui-*/<%= dirs.build %>/tests/helpers/**'],
-        filter: 'isFile',
-        dest: '<%= dirs.build %>/tests/helpers/',
-
-        rename: function(dest, matchedSrcPath, options) {
-          return dest + matchedSrcPath.substring(matchedSrcPath.indexOf('helpers/') + 8);
-        }
       }
     ]
   }
