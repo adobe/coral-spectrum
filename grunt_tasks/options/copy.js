@@ -1,5 +1,18 @@
 module.exports = {
+  core_jslibs: {
+    files: [
+      {
+        // copies all of the external libs from core
+        expand: true,
+        cwd: '<%= dirs.modules %>/coralui-core/<%= dirs.build %>/',
+        src: ['<%= dirs.js %>/libs/**'],
+        dest: '<%= dirs.build %>/'
+      }
+    ]
+  },
+
   core_resources: {
+    // copies any other resources, except the core resources (icon, wait, progress & cursor)
     files: [
       {
         expand: true,
@@ -10,14 +23,25 @@ module.exports = {
     ]
   },
 
-  core_jslibs: {
+  component_resources: {
     files: [
+      // copies all resources, except the core resources (icon, wait, progress & cursor)
       {
-        // copies all of the external libs, as well as the typekit file, as the core examples rely on that.
         expand: true,
-        cwd: '<%= dirs.modules %>/coralui-core/<%= dirs.build %>/',
-        src: ['<%= dirs.js %>/libs/**', '<%= dirs.js %>/typekit.js'],
-        dest: '<%= dirs.build %>/'
+        flatten: false,
+        cwd: '<%= dirs.modules %>/',
+        src: ['coralui-*/<%= dirs.build %>/<%= dirs.resources %>/**/*'],
+        dest: '<%= dirs.build %>/<%= dirs.resources %>/',
+        filter: function(srcPath) {
+          var foundIcon = (srcPath.indexOf('components/icon/') > -1);
+          var foundWait = (srcPath.indexOf('components/wait/') > -1);
+          var foundProgress = (srcPath.indexOf('components/progress/') > -1);
+          var foundCursors = (srcPath.indexOf('shared/cursors/') > -1);
+          return !foundIcon && !foundWait && !foundProgress && !foundCursors;
+        },
+        rename: function(dest, matchedSrcPath, options) {
+          return dest + matchedSrcPath.substring(matchedSrcPath.lastIndexOf('resources/') + 10);
+        }
       }
     ]
   },
@@ -49,7 +73,7 @@ module.exports = {
 
   component_documentation: {
     files: [
-      // copies component documentation
+      // copies html documentation from components
       {
         expand: true,
         flatten: true,
@@ -57,14 +81,15 @@ module.exports = {
         src: ['coralui-component*/<%= dirs.build %>/<%= dirs.documentation %>/*.html'],
         dest: '<%= dirs.build %>/<%= dirs.documentation %>'
       },
+      // copies from optional  documentation resources of components
       {
         expand: true,
         flatten: false,
         cwd: '<%= dirs.modules %>',
         src: [
-          'coralui-component*/<%= dirs.build %>/<%= dirs.documentation %>/resources/**'
+          'coralui-component*/<%= dirs.build %>/<%= dirs.documentation %>/<%= dirs.resources %>/**'
         ],
-        dest: '<%= dirs.build %>/<%= dirs.documentation %>/resources',
+        dest: '<%= dirs.build %>/<%= dirs.documentation %>/<%= dirs.resources %>',
         rename: function(dest, src) {
           return dest + src.substring(src.lastIndexOf('resources') + 'resources'.length);
         }
@@ -72,11 +97,14 @@ module.exports = {
     ]
   },
 
+  /**
+   * Copy JS and CSS directly from coralui-guide-resources for documentation
+   */
   documentation_resources: {
     files: [
       {
         expand: true,
-        cwd: '<%= dirs.modules %>/<%= dirs.documentationResources %>',
+        cwd: '<%= dirs.modules %>/<%= dirs.guideResources %>',
         src: ['js/*', 'css/*'],
         dest: '<%= dirs.build %>/<%= dirs.documentation %>'
       }
@@ -84,63 +112,8 @@ module.exports = {
   },
 
   /**
-   * Copy the embedded resources.
-   *
-   * Note that we need to continue to copy up embed resources from dependent projects,
-   * as we recompile the Stylus again.
-   *
-   * Also note that svg-stylus does not accept relative paths, so that we copy the files
-   * from the coralui-/build/embed directory up to the current top-level.
+   * Copy tests
    */
-  component_embed: {
-    files: [
-      {
-        expand: true,
-        flatten: false,
-        cwd: '',
-        src: ['node_modules/coralui-*/build/embed/**/*'],
-        dest: 'build/embed/',
-
-        rename: function(dest, matchedSrcPath, options) {
-          return dest + matchedSrcPath.substring(matchedSrcPath.lastIndexOf('embed/') + 6);
-        }
-      }
-    ]
-  },
-
-  resources: {
-    files: [
-      // copies core resources
-      {
-        expand: true,
-        cwd: '<%= dirs.modules %>/coralui-core/<%= dirs.build %>/<%= dirs.resources %>',
-        src: ['*.html'],
-        dest: '<%= dirs.build %>/<%= dirs.documentation %>',
-        rename: function(dest, matchedSrcPath, options) {
-          return dest + matchedSrcPath.substring(matchedSrcPath.lastIndexOf('resources/') + 10);
-        }
-      },
-      // copies any other resources, except the core resources (icon, wait, progress & cursor)
-      {
-        expand: true,
-        flatten: false,
-        cwd: '',
-        src: ['node_modules/coralui-*/build/resources/**/*'],
-        dest: 'build/resources/',
-        filter: function(srcPath) {
-          var foundIcon = (srcPath.indexOf('components/icon/') > -1);
-          var foundWait = (srcPath.indexOf('components/wait/') > -1);
-          var foundProgress = (srcPath.indexOf('components/progress/') > -1);
-          var foundCursors = (srcPath.indexOf('shared/cursors/') > -1);
-          return !foundIcon && !foundWait && !foundProgress && !foundCursors;
-        },
-        rename: function(dest, matchedSrcPath, options) {
-          return dest + matchedSrcPath.substring(matchedSrcPath.lastIndexOf('resources/') + 10);
-        }
-      }
-    ]
-  },
-
   component_tests: {
     files: [
       {

@@ -39,7 +39,7 @@ module.exports = function(grunt) {
         components: 'components',
         examples: 'examples',
         documentation: 'documentation',
-        documentationResources: 'coralui-guide-resources',
+        guideResources: 'coralui-guide-resources',
         tests: 'tests',
         temp: 'temp'
       }
