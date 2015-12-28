@@ -47,6 +47,7 @@
     "coralui-component-textfield": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-textfield.git#1.1.0",
     "coralui-component-tooltip": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-tooltip.git#3.0.7",
     "coralui-component-wait": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-wait.git#1.0.2",
+    "coralui-component-wizardview": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-wizardview.git#1.0.0",
     "coralui-core": "git+ssh://git@git.corp.adobe.com:Coral/coralui-core.git#3.4.1",
     "coralui-grunt-componentbuilder": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-componentbuilder.git#2.x",
     "coralui-grunt-releasepackage": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-releasepackage.git#1.x",
@@ -107,7 +108,8 @@
       "coralui-component-tablist",
       "coralui-component-tabview",
       "coralui-component-taglist",
-      "coralui-component-tooltip"
+      "coralui-component-tooltip",
+      "coralui-component-wizardview"
     ]
   }
 }
