@@ -1,0 +1,4307 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Coral.PanelStack</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light docs-Background u-coral-clearFix">
+    <article class="docs-Component">
+      <section class="docs-Component-metadata">
+        <div class="docs-Component-header">
+          <h1 id="coral.PanelStack" guide-toc-title="Overview" class="coral-Heading coral-Heading--1 docs-Component-name js-guide-heading-toc js-guide-heading-toc--header">Coral.PanelStack</h1><span class="docs-Component-version">Current Version: <strong>1.0.3</strong></span>
+        </div>
+        <div class="docs-Component-github"> Github: <a href="https://git.corp.adobe.com/Coral/coralui-component-panelstack" class="coral-Link">coralui-component-panelstack</a>
+        </div>
+        <!-- description is loaded from the template-->
+      </section>
+      <section class="docs-Component-documentation">
+        <p>
+          This component holds a collection of panels and shows the selected panel. This component uses the
+          <a class="coral-Link" href="Coral.mixin.selectionList.html">Coral.mixin.selectionList</a> specification.
+          
+        </p>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                    <h2 id="markupExamples" class="coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection"><a href="#markupExamples" class="coral-Link">Markup Examples</a></h2><span class="u-coral-pullRight docs-ThemeSwitcher"><i data-init="quicktip" data-quicktip-arrow="right" data-quicktip-type="inspect" data-quicktip-content="Please read more about themes in the 'Styles' section of this guide" class="coral-Icon coral-Icon--infoCircle docs-ThemeSwitcher-icon"></i>
+                  <button data-theme="coral--light" class="coral-MinimalButton docs-ThemeSwitcher-button is-selected">Light</button>|
+                  <button data-theme="coral--dark" class="coral-MinimalButton docs-ThemeSwitcher-button">Dark</button></span>
+              </div>
+                      <h3 id="preselectedItem" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#preselectedItem" class="coral-Link">Preselected Item</a></h3>
+                      <script type="text/template" id="guide-f6dbc4d9-74c8-4f62-98bf-981947ded14b">
+                        <coral-panelstack id="panelListPreselectedItem">
+                          <coral-panel>Panel 0: This is the content of Panel 1</coral-panel>
+                          <coral-panel selected>Panel 1: This is the content of Panel 1. There are more Panels defined in the PanelStack !</coral-panel>
+                          <coral-panel>Panel 2: This is the content of Panel 2</coral-panel>
+                          <coral-panel>Panel 3: This is the content of Panel 3. You need JavaScript to interact with this component</coral-panel>
+                          <coral-panel>Panel 4: This is the content of Panel 4</coral-panel>
+                        </coral-panelstack>
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium">
+                        <coral-panelstack id="panelListPreselectedItem">
+                          <coral-panel>Panel 0: This is the content of Panel 1</coral-panel>
+                          <coral-panel selected>Panel 1: This is the content of Panel 1. There are more Panels defined in the PanelStack !</coral-panel>
+                          <coral-panel>Panel 2: This is the content of Panel 2</coral-panel>
+                          <coral-panel>Panel 3: This is the content of Panel 3. You need JavaScript to interact with this component</coral-panel>
+                          <coral-panel>Panel 4: This is the content of Panel 4</coral-panel>
+                        </coral-panelstack>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-f6dbc4d9-74c8-4f62-98bf-981947ded14b" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 id="noneSelected" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#noneSelected" class="coral-Link">None selected</a></h3>
+                  <p>Nothing is shown, if nothing is selected</p>
+                      <script type="text/template" id="guide-8d9d0cd0-b500-4748-a3ed-b81449f66cf4">
+                        <coral-panelstack id="panelListNoneSelected">
+                          <coral-panel>Panel 0: This is the content of Panel 1</coral-panel>
+                          <coral-panel>Panel 1: This is the content of Panel 1. There are more Panels defined in the PanelStack !</coral-panel>
+                          <coral-panel>Panel 2: This is the content of Panel 2</coral-panel>
+                          <coral-panel>Panel 3: This is the content of Panel 3. You need JavaScript to interact with this component</coral-panel>
+                          <coral-panel>Panel 4: This is the content of Panel 4</coral-panel>
+                        </coral-panelstack>
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium">
+                        <coral-panelstack id="panelListNoneSelected">
+                          <coral-panel>Panel 0: This is the content of Panel 1</coral-panel>
+                          <coral-panel>Panel 1: This is the content of Panel 1. There are more Panels defined in the PanelStack !</coral-panel>
+                          <coral-panel>Panel 2: This is the content of Panel 2</coral-panel>
+                          <coral-panel>Panel 3: This is the content of Panel 3. You need JavaScript to interact with this component</coral-panel>
+                          <coral-panel>Panel 4: This is the content of Panel 4</coral-panel>
+                        </coral-panelstack>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-8d9d0cd0-b500-4748-a3ed-b81449f66cf4" class="docs-Example-toggleMarkup prettyprint"></pre>
+            </section>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header u-line">
+                    <h2 id="javaScriptExamples" class="coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection"><a href="#javaScriptExamples" class="coral-Link">JavaScript Examples</a></h2>
+              </div>
+                      <h3 id="programmaticallyInteraction" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#programmaticallyInteraction" class="coral-Link">Programmatically Interaction</a></h3>The following shows how to interaction with the selecteditem in the PanelStack component.
+                  <p>This is a PanelStack, that applies the coral-Well style to its items. Neat, isn't it.</p>
+                      <script type="text/template" id="guide-4ddd1ceb-064e-4fbb-9bac-99ea729fc4b3">
+                        <coral-panelstack id="select_rotation_example">
+                          <coral-panel selected class="coral-Well">Panel 0: I am Panel 0.</coral-panel>
+                          <coral-panel class="coral-Well">Panel 1: Haha, Panel 1 here.</coral-panel>
+                          <coral-panel class="coral-Well"> Panel 2: Wait for it ! Panel 3 comes next.</coral-panel>
+                          <coral-panel class="coral-Well">
+                            | Panel 3: I will not go away, only if you click on "Cycle"
+                          </coral-panel>
+                          <coral-panel class="coral-Well">Panel 4: Last, but not least.</coral-panel>
+                        </coral-panelstack>
+                        <h4 id='selectedIndexLabel'>Selected Index: 0</h4>
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium">
+                        <coral-panelstack id="select_rotation_example">
+                          <coral-panel selected class="coral-Well">Panel 0: I am Panel 0.</coral-panel>
+                          <coral-panel class="coral-Well">Panel 1: Haha, Panel 1 here.</coral-panel>
+                          <coral-panel class="coral-Well"> Panel 2: Wait for it ! Panel 3 comes next.</coral-panel>
+                          <coral-panel class="coral-Well">
+                            | Panel 3: I will not go away, only if you click on "Cycle"
+                          </coral-panel>
+                          <coral-panel class="coral-Well">Panel 4: Last, but not least.</coral-panel>
+                        </coral-panelstack>
+                        <h4 id='selectedIndexLabel'>Selected Index: 0</h4>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-4ddd1ceb-064e-4fbb-9bac-99ea729fc4b3" class="docs-Example-toggleMarkup prettyprint"></pre>
+                  <p>Click this cycle button to interact with the PanelStack</p>
+                  <button id="cycleActive" class="coral-ButtonGroup-item coral-Button coral-Button--secondary">Cycle Selected</button>
+                  <p>The following JavaScript shows how to set the selected attribute</p>
+                      <pre id="guide-8a5a44bd-1cd5-45d9-bed2-ddd93085a6d9" data-src-id="guide-8a5a44bd-1cd5-45d9-bed2-ddd93085a6d9" class="prettyprint docs-Example-snippet">
+                        <script>
+                        $(document).ready(function()
+                        {
+                          var panelList = document.querySelector('#select_rotation_example');
+                          
+                          $('#cycleActive').on('click', function()
+                          {
+                            var next = $(panelList.selectedItem).nextAll('coral-panel').first();
+                            
+                            if (!next.length)
+                            {
+                              next = $(panelList).children('coral-panel').first();
+                            }
+                            
+                            next.attr('selected', '');
+                            
+                            $('#selectedIndexLabel').text('Selected Index: ' + panelList.items.getAll().indexOf(next[0]));
+                          });
+                        });
+                        </script>
+                        </pre>
+            </section>
+        <!--<h1 class="line">Class: PanelStack</h1>-->
+        
+          
+
+
+
+<section class="guide-jsDocFragement">
+
+<a name="api"></a>
+<h1 class="coral-Heading coral-Heading--1 u-line docs-Example-header js-guide-heading-toc js-guide-heading-toc--section" id="Coral.PanelStack:api"><span class="ancestors"><a href="Coral.html" class="coral-Link coral-Link">Coral</a>.</span><a href="#Coral.PanelStack:api" class="coral-Link">PanelStack
+ API</a></h1>
+
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        
+<dt>
+    
+    <a name="constructor"></a>
+    <h2 class="docs-Example-subtitle coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection" id="Coral.PanelStack:constructor"><a href="#Coral.PanelStack:constructor" class="coral-Link">Constructor</a></h2>
+    
+
+    
+</dt>
+
+
+
+<dd>
+
+    <dl >
+    
+        <dt><h4>JavaScript:</h4></dt>
+        <dd>
+            <code class="prettyprint">new Coral.PanelStack()</code> or <code class="prettyprint">document.createElement('coral-panelstack')</code>
+        </dd>
+        
+        <dt><h4>HTML Tag:</h4></dt>
+        <dd>
+            
+                <code class="prettyprint">&lt;coral-panelstack&gt;</code>
+            
+        </dd>
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+
+    
+
+    
+        <a name="extends"></a>
+        <h2 class="docs-Example-subtitle coral-Heading coral-Heading--2" id="Coral.PanelStack:extends" ><a href="#Coral.PanelStack:extends" class="coral-Link">Extends</a></h2>
+
+        <ul>
+            <li><a href="Coral.Component.html"class="coral-Link">Coral.Component</a></li>
+        </ul>
+    
+
+    </div>
+    
+        <a name="mixesin"></a>
+        <h2 class="docs-Example-subtitle coral-Heading coral-Heading--2" id="Coral.PanelStack:mixesin" ><a href="#Coral.PanelStack:mixesin" class="coral-Link">Mixes In</a></h2>
+
+        <ul>
+            <li><a href="Coral.mixin.selectionList.html"class="coral-Link">Coral.mixin.selectionList</a></li>
+        </ul>
+    
+
+    
+
+    
+
+    
+
+    
+        <a name="instanceProperties"></a>
+        <h2 id="Coral.PanelStack:instanceProperties" class="docs-Example-subtitle coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection"><a href="#Coral.PanelStack:instanceProperties" class="coral-Link">Instance Properties</a></h2>
+
+        <dl>
+            
+<dt>
+
+    <h3 class="name docs-Member-caption" id="Coral.PanelStack:items"><a href="#Coral.PanelStack:items" class="coral-Link"><span class="type-signature">instance.</span>items</a><span class="type-signature"> {<a href="Coral.Collection.html" class="coral-Link coral-Link">Coral.Collection</a>}</span>
+    </h3>
+    
+
+    
+    <coral-tag class="docs-Member-tag" readonly="true" size="S" color="green">Readonly</coral-tag>
+    
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        The Collection Interface that allows interacting with the items that the component contains. See
+        <a href="Coral.Collection.html"class="coral-Link">Coral.Collection</a> for more details.
+    </div>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<dt>
+
+    <h3 class="name docs-Member-caption" id="Coral.PanelStack:selectedItem"><a href="#Coral.PanelStack:selectedItem" class="coral-Link"><span class="type-signature">instance.</span>selectedItem</a><span class="type-signature"> {HTMLElement}</span>
+    </h3>
+    
+
+    
+    <coral-tag class="docs-Member-tag" readonly="true" size="S" color="green">Readonly</coral-tag>
+    
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        The selected item of the PanelStack.
+    </div>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        </dl>
+
+        
+
+    
+        <a name="methods"></a>
+        <h2 class="docs-Example-subtitle coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection" id="Coral.PanelStack:methods"><a href="#Coral.PanelStack:methods" class="coral-Link">Methods</a></h2>
+
+        <dl>
+            
+<dt>
+    
+    <h3 class="name" id="Coral.PanelStack:get"><a href="#Coral.PanelStack:get" class="coral-Link"><span class="type-signature">instance.</span>get</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Get the value of a property.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">property</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The name of the property to fetch the value of.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    Property value.
+    
+    {<span class="param-type">*</span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:get"class="coral-Link">Coral.Component#get</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    
+    <h3 class="name" id="Coral.PanelStack:hide"><a href="#Coral.PanelStack:hide" class="coral-Link"><span class="type-signature">instance.</span>hide</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Hide this component.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    this, chainable
+    
+    {<span class="param-type"><a href="Coral.Component.html"class="coral-Link">Coral.Component</a></span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:hide"class="coral-Link">Coral.Component#hide</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    
+    <h3 class="name" id="Coral.PanelStack:off"><a href="#Coral.PanelStack:off" class="coral-Link"><span class="type-signature">instance.</span>off</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Remove an event listener.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+            <th class="coral-Table-headerCell">Optional</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">eventName</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+              No<br>
+            
+
+            
+            </td>
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The event name to stop listening for.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">selector</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The selector that was used for event delegation.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">func</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">function</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+              No<br>
+            
+
+            
+            </td>
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The function that was passed to <code>on()</code>.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">useCapture</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Boolean</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Only remove listeners with <code>useCapture</code> set to the value passed in.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    this, chainable.
+    
+    {<span class="param-type"><a href="Coral.Component.html"class="coral-Link">Coral.Component</a></span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:off"class="coral-Link">Coral.Component#off</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    
+    <h3 class="name" id="Coral.PanelStack:on"><a href="#Coral.PanelStack:on" class="coral-Link"><span class="type-signature">instance.</span>on</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Add an event listener.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+            <th class="coral-Table-headerCell">Optional</th>
+        
+
+        
+            <th class="coral-Table-headerCell">Default</th>
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">eventName</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+              No<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The event name to listen for.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">selector</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The selector to use for event delegation.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">func</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">function</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+              No<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The function that will be called when the event is triggered.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">useCapture</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Boolean</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+                false
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Whether or not to listen during the capturing or bubbling phase.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    this, chainable.
+    
+    {<span class="param-type"><a href="Coral.Component.html"class="coral-Link">Coral.Component</a></span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:on"class="coral-Link">Coral.Component#on</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    
+    <h3 class="name" id="Coral.PanelStack:remove"><a href="#Coral.PanelStack:remove" class="coral-Link"><span class="type-signature">instance.</span>remove</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Non-destructively remove this element. It can be re-added by simply appending it to the document again.
+    It will be garbage collected if there are no more references to it.
+    This is different from using jQuery's remove(), which is destructive in that it removes data and listeners.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:remove"class="coral-Link">Coral.Component#remove</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    
+    <h3 class="name" id="Coral.PanelStack:show"><a href="#Coral.PanelStack:show" class="coral-Link"><span class="type-signature">instance.</span>show</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Show this component.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    this, chainable
+    
+    {<span class="param-type"><a href="Coral.Component.html"class="coral-Link">Coral.Component</a></span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:show"class="coral-Link">Coral.Component#show</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    
+    <h3 class="name" id="Coral.PanelStack:trigger"><a href="#Coral.PanelStack:trigger" class="coral-Link"><span class="type-signature">instance.</span>trigger</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Trigger an event.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+            <th class="coral-Table-headerCell">Optional</th>
+        
+
+        
+            <th class="coral-Table-headerCell">Default</th>
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">eventName</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+              No<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The event name to trigger.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">props</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Additional properties to make available to handlers as <code>event.detail</code>.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">bubbles</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Boolean</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+                true
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Set to <code>false</code> to prevent the event from bubbling.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">cancelable</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Boolean</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+                true
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Set to <code>false</code> to prevent the event from being cancelable.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    CustomEvent object
+    
+    {<span class="param-type">CustomEvent</span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:trigger"class="coral-Link">Coral.Component#trigger</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+        <a name="events"></a>
+        <h2 class="docs-Example-subtitle coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection" id="Coral.PanelStack:events"><a href="#Coral.PanelStack:events" class="coral-Link">Events</a></h2>
+
+        <dl>
+            
+<dt>
+    
+    <h3 class="name" id="Coral.PanelStack:coral-collection:add"><a href="#Coral.PanelStack:coral-collection:add" class="coral-Link">coral-collection:add</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered when an item is added to the Collection.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Callback Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+                <h4 class="coral-Heading coral-Heading--4 params-description-heading">Event object.</h4>
+                
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event.detail.item</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">HTMLElement</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The item that was added.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Collection.html#Coral.Collection:coral-collection:add"class="coral-Link">Coral.Collection#coral-collection:add</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    
+    <h3 class="name" id="Coral.PanelStack:coral-collection:remove"><a href="#Coral.PanelStack:coral-collection:remove" class="coral-Link">coral-collection:remove</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered when an item is removed from a Collection.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Callback Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+                <h4 class="coral-Heading coral-Heading--4 params-description-heading">Event object.</h4>
+                
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event.detail.item</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">HTMLElement</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The item that was removed.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Collection.html#Coral.Collection:coral-collection:remove"class="coral-Link">Coral.Collection#coral-collection:remove</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    
+    <h3 class="name" id="Coral.PanelStack:coral-component:attached"><a href="#Coral.PanelStack:coral-component:attached" class="coral-Link">coral-component:attached</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered when the component is attached to the DOM.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Callback Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Event object.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:coral-component:attached"class="coral-Link">Coral.Component#coral-component:attached</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    
+    <h3 class="name" id="Coral.PanelStack:coral-component:detached"><a href="#Coral.PanelStack:coral-component:detached" class="coral-Link">coral-component:detached</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered when the component is detached to the DOM.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Callback Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Event object.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:coral-component:detached"class="coral-Link">Coral.Component#coral-component:detached</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    
+    <h3 class="name" id="Coral.PanelStack:coral-component:hide"><a href="#Coral.PanelStack:coral-component:hide" class="coral-Link">coral-component:hide</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Triggerred after the component is hidden with <a href="Coral.Component.html#Coral.Component:hide"class="coral-Link">Coral.Component#hide</a>.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Callback Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Event object.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:coral-component:hide"class="coral-Link">Coral.Component#coral-component:hide</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    
+    <h3 class="name" id="Coral.PanelStack:coral-panelstack:change"><a href="#Coral.PanelStack:coral-panelstack:change" class="coral-Link">coral-panelstack:change</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered when the selected panel has changed.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Callback Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+                <h4 class="coral-Heading coral-Heading--4 params-description-heading">Event object.</h4>
+                
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event.detail.selection</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">HTMLElement</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The new selected panel.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event.detail.oldSelection</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">HTMLElement</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The prior selected panel.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+
+        </dl>
+    
+</article>
+
+</section>
+
+
+
+        
+       
+        <!--<h1 class="line">Class: Panel</h1>-->
+        
+          
+
+
+
+<section class="guide-jsDocFragement">
+
+<a name="api"></a>
+<h1 class="coral-Heading coral-Heading--1 u-line docs-Example-header js-guide-heading-toc js-guide-heading-toc--section" id="Coral.Panel:api"><span class="ancestors"><a href="Coral.html" class="coral-Link coral-Link">Coral</a>.</span><a href="#Coral.Panel:api" class="coral-Link">Panel
+ API</a></h1>
+
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        
+<dt>
+    
+    <a name="constructor"></a>
+    <h2 class="docs-Example-subtitle coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection" id="Coral.Panel:constructor"><a href="#Coral.Panel:constructor" class="coral-Link">Constructor</a></h2>
+    
+
+    
+</dt>
+
+
+
+<dd>
+
+    <dl >
+    
+        <dt><h4>JavaScript:</h4></dt>
+        <dd>
+            <code class="prettyprint">new Coral.Panel()</code> or <code class="prettyprint">document.createElement('coral-panel')</code>
+        </dd>
+        
+        <dt><h4>HTML Tag:</h4></dt>
+        <dd>
+            
+                <code class="prettyprint">&lt;coral-panel&gt;</code>
+            
+        </dd>
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+
+    
+
+    
+        <a name="extends"></a>
+        <h2 class="docs-Example-subtitle coral-Heading coral-Heading--2" id="Coral.Panel:extends" ><a href="#Coral.Panel:extends" class="coral-Link">Extends</a></h2>
+
+        <ul>
+            <li><a href="Coral.Component.html"class="coral-Link">Coral.Component</a></li>
+        </ul>
+    
+
+    </div>
+    
+        <a name="mixesin"></a>
+        <h2 class="docs-Example-subtitle coral-Heading coral-Heading--2" id="Coral.Panel:mixesin" ><a href="#Coral.Panel:mixesin" class="coral-Link">Mixes In</a></h2>
+
+        <ul>
+            <li><a href="Coral.mixin.selectionList.Item.html"class="coral-Link">Coral.mixin.selectionList.Item</a></li>
+        </ul>
+    
+
+    
+
+    
+        <a name="subcomponents"></a>
+        <h2 class="docs-Example-subtitle coral-Heading coral-Heading--2" id="Coral.Panel:subcomponents"><a href="#Coral.Panel:subcomponents" class="coral-Link">Sub-components</a></h2>
+
+        <ul>
+            <li><a href="Coral.Panel.html#Coral.Panel.Content:api"class="coral-Link">Coral.Panel.Content</a></li>
+        </ul>
+    
+
+    
+
+    
+        <a name="instanceProperties"></a>
+        <h2 id="Coral.Panel:instanceProperties" class="docs-Example-subtitle coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection"><a href="#Coral.Panel:instanceProperties" class="coral-Link">Instance Properties</a></h2>
+
+        <dl>
+            
+<dt>
+
+    <h3 class="name docs-Member-caption" id="Coral.Panel:content"><a href="#Coral.Panel:content" class="coral-Link"><span class="type-signature">instance.</span>content</a><span class="type-signature"> {HTMLElement}</span>
+    </h3>
+    
+
+    
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        The panelstack items's content element.
+    </div>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<dt>
+
+    <h3 class="name docs-Member-caption" id="Coral.Panel:selected"><a href="#Coral.Panel:selected" class="coral-Link"><span class="type-signature">instance.</span>selected</a><span class="type-signature"> {Boolean}</span>
+    </h3>
+    
+
+    
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        Whether the item is selected. When true, the item will appear as the active element in the PanelStack. The item
+        must be a child of a PanelStack before this property is set to true. This property cannot be programmatically set
+        to false.
+    </div>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+  <dt class="tag-default">Default Value:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>false</li></ul></dd>
+  
+
+  
+  <dt class="tag-default">HTML Attribute:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>selected</li></ul></dd>
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        </dl>
+
+        
+
+    
+        <a name="methods"></a>
+        <h2 class="docs-Example-subtitle coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection" id="Coral.Panel:methods"><a href="#Coral.Panel:methods" class="coral-Link">Methods</a></h2>
+
+        <dl>
+            
+<dt>
+    
+    <h3 class="name" id="Coral.Panel:get"><a href="#Coral.Panel:get" class="coral-Link"><span class="type-signature">instance.</span>get</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Get the value of a property.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">property</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The name of the property to fetch the value of.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    Property value.
+    
+    {<span class="param-type">*</span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:get"class="coral-Link">Coral.Component#get</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    
+    <h3 class="name" id="Coral.Panel:hide"><a href="#Coral.Panel:hide" class="coral-Link"><span class="type-signature">instance.</span>hide</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Hide this component.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    this, chainable
+    
+    {<span class="param-type"><a href="Coral.Component.html"class="coral-Link">Coral.Component</a></span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:hide"class="coral-Link">Coral.Component#hide</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    
+    <h3 class="name" id="Coral.Panel:off"><a href="#Coral.Panel:off" class="coral-Link"><span class="type-signature">instance.</span>off</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Remove an event listener.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+            <th class="coral-Table-headerCell">Optional</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">eventName</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+              No<br>
+            
+
+            
+            </td>
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The event name to stop listening for.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">selector</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The selector that was used for event delegation.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">func</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">function</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+              No<br>
+            
+
+            
+            </td>
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The function that was passed to <code>on()</code>.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">useCapture</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Boolean</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Only remove listeners with <code>useCapture</code> set to the value passed in.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    this, chainable.
+    
+    {<span class="param-type"><a href="Coral.Component.html"class="coral-Link">Coral.Component</a></span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:off"class="coral-Link">Coral.Component#off</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    
+    <h3 class="name" id="Coral.Panel:on"><a href="#Coral.Panel:on" class="coral-Link"><span class="type-signature">instance.</span>on</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Add an event listener.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+            <th class="coral-Table-headerCell">Optional</th>
+        
+
+        
+            <th class="coral-Table-headerCell">Default</th>
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">eventName</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+              No<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The event name to listen for.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">selector</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The selector to use for event delegation.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">func</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">function</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+              No<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The function that will be called when the event is triggered.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">useCapture</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Boolean</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+                false
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Whether or not to listen during the capturing or bubbling phase.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    this, chainable.
+    
+    {<span class="param-type"><a href="Coral.Component.html"class="coral-Link">Coral.Component</a></span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:on"class="coral-Link">Coral.Component#on</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    
+    <h3 class="name" id="Coral.Panel:remove"><a href="#Coral.Panel:remove" class="coral-Link"><span class="type-signature">instance.</span>remove</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Non-destructively remove this element. It can be re-added by simply appending it to the document again.
+    It will be garbage collected if there are no more references to it.
+    This is different from using jQuery's remove(), which is destructive in that it removes data and listeners.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:remove"class="coral-Link">Coral.Component#remove</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    
+    <h3 class="name" id="Coral.Panel:show"><a href="#Coral.Panel:show" class="coral-Link"><span class="type-signature">instance.</span>show</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Show this component.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    this, chainable
+    
+    {<span class="param-type"><a href="Coral.Component.html"class="coral-Link">Coral.Component</a></span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:show"class="coral-Link">Coral.Component#show</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    
+    <h3 class="name" id="Coral.Panel:trigger"><a href="#Coral.Panel:trigger" class="coral-Link"><span class="type-signature">instance.</span>trigger</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Trigger an event.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+            <th class="coral-Table-headerCell">Optional</th>
+        
+
+        
+            <th class="coral-Table-headerCell">Default</th>
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">eventName</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+              No<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The event name to trigger.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">props</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Additional properties to make available to handlers as <code>event.detail</code>.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">bubbles</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Boolean</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+                true
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Set to <code>false</code> to prevent the event from bubbling.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">cancelable</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Boolean</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+                true
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Set to <code>false</code> to prevent the event from being cancelable.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    CustomEvent object
+    
+    {<span class="param-type">CustomEvent</span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:trigger"class="coral-Link">Coral.Component#trigger</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+        <a name="events"></a>
+        <h2 class="docs-Example-subtitle coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection" id="Coral.Panel:events"><a href="#Coral.Panel:events" class="coral-Link">Events</a></h2>
+
+        <dl>
+            
+<dt>
+    
+    <h3 class="name" id="Coral.Panel:coral-component:attached"><a href="#Coral.Panel:coral-component:attached" class="coral-Link">coral-component:attached</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered when the component is attached to the DOM.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Callback Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Event object.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:coral-component:attached"class="coral-Link">Coral.Component#coral-component:attached</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    
+    <h3 class="name" id="Coral.Panel:coral-component:detached"><a href="#Coral.Panel:coral-component:detached" class="coral-Link">coral-component:detached</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered when the component is detached to the DOM.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Callback Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Event object.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:coral-component:detached"class="coral-Link">Coral.Component#coral-component:detached</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+
+        
+            
+<dt>
+    
+    <h3 class="name" id="Coral.Panel:coral-component:hide"><a href="#Coral.Panel:coral-component:hide" class="coral-Link">coral-component:hide</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Triggerred after the component is hidden with <a href="Coral.Component.html#Coral.Component:hide"class="coral-Link">Coral.Component#hide</a>.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Callback Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data noHover params">
+    <thead>
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Event object.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:coral-component:hide"class="coral-Link">Coral.Component#coral-component:hide</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+
+        </dl>
+    
+</article>
+
+</section>
+
+
+
+        
+       
+      </section>
+    </article>
+  </body>
+</html>
