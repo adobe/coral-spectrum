@@ -57,7 +57,7 @@
     "coralui-grunt-testrunner": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-testrunner.git#2.x",
     "coralui-guide-resources": "git+ssh://git@git.corp.adobe.com:Coral/coralui-guide-resources.git#4.x",
     "coralui-mixin-formfield": "git+ssh://git@git.corp.adobe.com:Coral/coralui-mixin-formfield.git#1.1.0",
-    "coralui-mixin-overlay": "git+ssh://git@git.corp.adobe.com:Coral/coralui-mixin-overlay.git#1.0.5",
+    "coralui-mixin-overlay": "git+ssh://git@git.corp.adobe.com:Coral/coralui-mixin-overlay.git#1.0.6",
     "coralui-mixin-selection": "git+ssh://git@git.corp.adobe.com:Coral/coralui-mixin-selection.git#1.1.0",
     "coralui-util-dependencies": "git+ssh://git@git.corp.adobe.com:Coral/coralui-util-dependencies.git#1.x",
     "grunt": "~0.4.5",
