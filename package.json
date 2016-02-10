@@ -36,7 +36,7 @@
     "coralui-component-panelstack": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-panelstack.git#1.0.3",
     "coralui-component-popover": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-popover.git#3.1.9",
     "coralui-component-progress": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-progress.git#1.0.0",
-    "coralui-component-quickactions": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-quickactions.git#1.0.4",
+    "coralui-component-quickactions": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-quickactions.git#1.0.5",
     "coralui-component-radio": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-radio.git#1.0.3",
     "coralui-component-select": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-select.git#3.1.1",
     "coralui-component-selectlist": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-selectlist.git#3.0.3",
