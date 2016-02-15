@@ -19,7 +19,7 @@
     "coralui-component-buttongroup": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-buttongroup.git#1.2.0",
     "coralui-component-calendar": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-calendar.git#1.0.6",
     "coralui-component-charactercount": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-charactercount.git#3.0.1",
-    "coralui-component-checkbox": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-checkbox.git#1.0.1",
+    "coralui-component-checkbox": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-checkbox.git#1.0.2",
     "coralui-component-clock": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-clock.git#1.1.2",
     "coralui-component-collection": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-collection.git#1.1.1",
     "coralui-component-cyclebutton": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-cyclebutton.git#3.1.2",
