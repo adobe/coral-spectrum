@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Coral.transform</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light docs-Background u-coral-clearFix">
+    <article class="docs-Component">
+      <section class="docs-Component-metadata">
+        <div class="docs-Component-header">
+          <h1 id="coral.transform" guide-toc-title="Overview" class="coral-Heading coral-Heading--1 docs-Component-name js-guide-heading-toc js-guide-heading-toc--header">Coral.transform</h1><span class="docs-Component-version">Current Version: <strong>1.4.6</strong></span>
+        </div>
+        <div class="docs-Component-github"> Github: <a href="https://git.corp.adobe.com/Coral/coralui-component" class="coral-Link">coralui-component</a>
+        </div>
+        <!-- description is loaded from the template-->
+      </section>
+      <section class="docs-Component-documentation">
+        <p>
+          <code>Coral.transform</code> is a set of property value transformation functions for use in Coral components.
+          
+        </p>
+        <!--<h1 class="line">Namespace: transform</h1>-->
+        
+          
+
+
+
+<section class="docs-jsDoc-container">
+
+<a name="api"></a>
+<h1 class="coral-Heading coral-Heading--1 docs-Example-header docs-jsDoc-heading--1 js-guide-heading-toc js-guide-heading-toc--section" id="Coral.transform:api"><span class="ancestors"><a href="Coral.html" class="coral-Link coral-Link">Coral</a>.</span><a href="#Coral.transform:api" class="coral-Link">transform
+ API</a></h1>
+
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        
+            <div class="description">Property value transform functions.</div>
+        
+
+        
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+    
+
+    
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <a name="methods"></a>
+        <h2 class="docs-Example-subtitle coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection" id="Coral.transform:methods"><a href="#Coral.transform:methods" class="coral-Link">Methods</a></h2>
+
+        <dl>
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.transform:.boolean"><a href="#Coral.transform:.boolean" class="coral-Link"><span class="type-signature">Coral.transform.</span>boolean</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Transform the provided value into a boolean. Follows the behavior of JavaScript thruty/falsy.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">value</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">*</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The value to convert to Boolean.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    The corresponding boolean value.
+    
+    {<span class="param-type">Boolean</span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.transform:.booleanAttr"><a href="#Coral.transform:.booleanAttr" class="coral-Link"><span class="type-signature">Coral.transform.</span>booleanAttr</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Transform the provided value into a boolean. Follows the behavior of the HTML specification, in which the existence of
+  the attribute indicates <code>true</code> regardless of the attribute's value.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">value</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">*</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The value to convert to Boolean.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    The corresponding boolean value.
+    
+    {<span class="param-type">Boolean</span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.transform:.float"><a href="#Coral.transform:.float" class="coral-Link"><span class="type-signature">Coral.transform.</span>float</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Transforms the provided value into a floating number. The conversion is strict in the sense that if non numeric values
+  are detected, <code>null</code> is returned instead.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">value</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">*</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The value to be converted to a Number.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.transform:.number"><a href="#Coral.transform:.number" class="coral-Link"><span class="type-signature">Coral.transform.</span>number</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Transforms the provided value into a floating point number.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">value</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">*</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The value to convert to a Number.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    The corresponding number or <code>null</code> if the passed value cannot be converted to a number.
+    
+    {<span class="param-type">Number</span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.transform:.string"><a href="#Coral.transform:.string" class="coral-Link"><span class="type-signature">Coral.transform.</span>string</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Transform the provided value into a string. When given <code>null</code> or <code>undefined</code> it will be
+  converted to an empty string("").
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">value</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">*</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The value to convert to String.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    The corresponding string value.
+    
+    {<span class="param-type">String</span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        </dl>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+        
+       
+      </section>
+    </article>
+  </body>
+</html>

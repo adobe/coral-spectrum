@@ -1,0 +1,2754 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Coral.Textfield</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light docs-Background u-coral-clearFix">
+    <article class="docs-Component">
+      <section class="docs-Component-metadata">
+        <div class="docs-Component-header">
+          <h1 id="coral.Textfield" guide-toc-title="Overview" class="coral-Heading coral-Heading--1 docs-Component-name js-guide-heading-toc js-guide-heading-toc--header">Coral.Textfield</h1><span class="docs-Component-version">Current Version: <strong>1.1.1</strong></span>
+        </div>
+        <div class="docs-Component-related">Related Components: <a href="Coral.Textarea.html" class="coral-Link">Coral.Textarea</a>
+        </div>
+        <div class="docs-Component-github"> Github: <a href="https://git.corp.adobe.com/Coral/coralui-component-textfield" class="coral-Link">coralui-component-textfield</a>
+        </div>
+        <!-- description is loaded from the template-->
+      </section>
+      <section class="docs-Component-documentation">
+        <p>
+          Textfield is the default input component
+          
+        </p>
+        <script>
+          if (typeof Coral.Configurator === 'function') {
+            var configurator = new Coral.Configurator().set({
+              component: Coral.Textfield,
+              fields: [
+                {
+                  label: 'Placeholder',
+                  prop: 'placeholder',
+                  type: 'text',
+                  value: 'Enter your name'
+                },
+                {
+                  label: 'Name',
+                  prop: 'name',
+                  type: 'text',
+                  value: 'field'
+                },
+                {
+                  label: 'Value',
+                  prop: 'value',
+                  type: 'text',
+                  value: ''
+                },
+                {
+                  label: 'Variant',
+                  prop: 'variant',
+                  type: 'select',
+                  value: 'default',
+                  options: {
+                  'DEFAULT': 'default',
+                  'QUIET': 'quiet'
+                  }
+                },
+                {
+                  label: 'is disabled',
+                  prop: 'disabled',
+                  type: 'checkbox',
+                  value: false
+                },
+                {
+                  label: 'is invalid',
+                  prop: 'invalid',
+                  type: 'checkbox',
+                  value: false
+                },
+                {
+                  label: 'is read-only',
+                  prop: 'readOnly',
+                  type: 'checkbox',
+                  value: false
+                },
+                {
+                  label: 'is required',
+                  prop: 'required',
+                  type: 'checkbox',
+                  value: false
+                }
+              ],
+              componentEvents: [
+                'change'
+              ]
+            }).insertAfterLastScript();
+          }
+        </script>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header">
+                    <h2 id="forms" class="coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection"><a href="#forms" class="coral-Link">Forms</a></h2>
+              </div>
+                      <h3 id="verticalLayout" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#verticalLayout" class="coral-Link">Vertical Layout</a></h3>
+                      <script type="text/template" id="guide-7e9bc5fb-1602-4316-9894-cda62a72d027">
+                        <form class="coral-Form coral-Form--vertical">
+                          <section class="coral-Form-fieldset">
+                        
+                            <div class="coral-Form-fieldwrapper">
+                              <label class="coral-Form-fieldlabel" id="label-vertical-textfield-0">Label</label>
+                              <input is="coral-textfield" class="coral-Form-field" placeholder="Enter your text" name="name" labelledby="label-vertical-textfield-0">
+                            </div>
+                        
+                            <div class="coral-Form-fieldwrapper">
+                              <label class="coral-Form-fieldlabel" id="label-vertical-textfield-1">Required</label>
+                              <input is="coral-textfield" class="coral-Form-field" placeholder="Enter your text" name="name" labelledby="label-vertical-textfield-1">
+                              <coral-icon class="coral-Form-fieldinfo" icon="infoCircle" size="S" id="coral-form-vertical-textfield-fieldinfo"></coral-icon>
+                              <coral-tooltip variant="info" placement="right" target="#coral-form-vertical-textfield-fieldinfo">Required Information</coral-tooltip>
+                            </div>
+                        
+                            <div class="coral-Form-fieldwrapper">
+                              <label class="coral-Form-fieldlabel" id="label-vertical-textfield-2">Invalid</label>
+                              <input is="coral-textfield" class="coral-Form-field" placeholder="Enter your text" name="name" labelledby="label-vertical-textfield-2" invalid>
+                              <coral-icon class="coral-Form-fielderror" icon="infoCircle" size="S" id="coral-form-vertical-textfield-fielderror"></coral-icon>
+                              <coral-tooltip variant="error" placement="right" target="#coral-form-vertical-textfield-fielderror">Error Message</coral-tooltip>
+                            </div>
+                        
+                          </section>
+                        </form>
+                        
+                        
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium">
+                        <form class="coral-Form coral-Form--vertical">
+                          <section class="coral-Form-fieldset">
+                        
+                            <div class="coral-Form-fieldwrapper">
+                              <label class="coral-Form-fieldlabel" id="label-vertical-textfield-0">Label</label>
+                              <input is="coral-textfield" class="coral-Form-field" placeholder="Enter your text" name="name" labelledby="label-vertical-textfield-0">
+                            </div>
+                        
+                            <div class="coral-Form-fieldwrapper">
+                              <label class="coral-Form-fieldlabel" id="label-vertical-textfield-1">Required</label>
+                              <input is="coral-textfield" class="coral-Form-field" placeholder="Enter your text" name="name" labelledby="label-vertical-textfield-1">
+                              <coral-icon class="coral-Form-fieldinfo" icon="infoCircle" size="S" id="coral-form-vertical-textfield-fieldinfo"></coral-icon>
+                              <coral-tooltip variant="info" placement="right" target="#coral-form-vertical-textfield-fieldinfo">Required Information</coral-tooltip>
+                            </div>
+                        
+                            <div class="coral-Form-fieldwrapper">
+                              <label class="coral-Form-fieldlabel" id="label-vertical-textfield-2">Invalid</label>
+                              <input is="coral-textfield" class="coral-Form-field" placeholder="Enter your text" name="name" labelledby="label-vertical-textfield-2" invalid>
+                              <coral-icon class="coral-Form-fielderror" icon="infoCircle" size="S" id="coral-form-vertical-textfield-fielderror"></coral-icon>
+                              <coral-tooltip variant="error" placement="right" target="#coral-form-vertical-textfield-fielderror">Error Message</coral-tooltip>
+                            </div>
+                        
+                          </section>
+                        </form>
+                        
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-7e9bc5fb-1602-4316-9894-cda62a72d027" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 id="alignedLayout" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#alignedLayout" class="coral-Link">Aligned Layout</a></h3>
+                      <script type="text/template" id="guide-facd73cf-39c3-47ee-acf8-2edd6586c1d4">
+                        <form class="coral-Form coral-Form--aligned u-columnLarge">
+                          <section class="coral-Form-fieldset">
+                        
+                            <div class="coral-Form-fieldwrapper">
+                              <label class="coral-Form-fieldlabel" id="label-aligned-textfield-0">Label</label>
+                              <input is="coral-textfield" class="coral-Form-field" placeholder="Enter your text" name="name" labelledby="label-aligned-textfield-0">
+                            </div>
+                        
+                            <div class="coral-Form-fieldwrapper">
+                              <label class="coral-Form-fieldlabel" id="label-aligned-textfield-1">Required</label>
+                              <input is="coral-textfield" class="coral-Form-field" placeholder="Enter your text" name="name" labelledby="label-aligned-textfield-1">
+                              <coral-icon class="coral-Form-fieldinfo" icon="infoCircle" size="S" id="coral-form-aligned-textfield-fieldinfo"></coral-icon>
+                              <coral-tooltip variant="info" placement="right" target="#coral-form-aligned-textfield-fieldinfo">Required Information</coral-tooltip>
+                            </div>
+                        
+                            <div class="coral-Form-fieldwrapper">
+                              <label class="coral-Form-fieldlabel" id="label-aligned-textfield-2">Invalid</label>
+                              <input is="coral-textfield" class="coral-Form-field" placeholder="Enter your text" name="name" labelledby="label-aligned-textfield-2" invalid>
+                              <coral-icon class="coral-Form-fielderror" icon="infoCircle" size="S" id="coral-form-aligned-textfield-fielderror"></coral-icon>
+                              <coral-tooltip variant="error" placement="right" target="#coral-form-aligned-textfield-fielderror">Error Message</coral-tooltip>
+                            </div>
+                        
+                          </section>
+                        </form>
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium">
+                        <form class="coral-Form coral-Form--aligned u-columnLarge">
+                          <section class="coral-Form-fieldset">
+                        
+                            <div class="coral-Form-fieldwrapper">
+                              <label class="coral-Form-fieldlabel" id="label-aligned-textfield-0">Label</label>
+                              <input is="coral-textfield" class="coral-Form-field" placeholder="Enter your text" name="name" labelledby="label-aligned-textfield-0">
+                            </div>
+                        
+                            <div class="coral-Form-fieldwrapper">
+                              <label class="coral-Form-fieldlabel" id="label-aligned-textfield-1">Required</label>
+                              <input is="coral-textfield" class="coral-Form-field" placeholder="Enter your text" name="name" labelledby="label-aligned-textfield-1">
+                              <coral-icon class="coral-Form-fieldinfo" icon="infoCircle" size="S" id="coral-form-aligned-textfield-fieldinfo"></coral-icon>
+                              <coral-tooltip variant="info" placement="right" target="#coral-form-aligned-textfield-fieldinfo">Required Information</coral-tooltip>
+                            </div>
+                        
+                            <div class="coral-Form-fieldwrapper">
+                              <label class="coral-Form-fieldlabel" id="label-aligned-textfield-2">Invalid</label>
+                              <input is="coral-textfield" class="coral-Form-field" placeholder="Enter your text" name="name" labelledby="label-aligned-textfield-2" invalid>
+                              <coral-icon class="coral-Form-fielderror" icon="infoCircle" size="S" id="coral-form-aligned-textfield-fielderror"></coral-icon>
+                              <coral-tooltip variant="error" placement="right" target="#coral-form-aligned-textfield-fielderror">Error Message</coral-tooltip>
+                            </div>
+                        
+                          </section>
+                        </form>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-facd73cf-39c3-47ee-acf8-2edd6586c1d4" class="docs-Example-toggleMarkup prettyprint"></pre>
+            </section>
+        <!--<h1 class="line">Class: Textfield</h1>-->
+        
+          
+
+
+
+<section class="docs-jsDoc-container">
+
+<a name="api"></a>
+<h1 class="coral-Heading coral-Heading--1 docs-Example-header docs-jsDoc-heading--1 js-guide-heading-toc js-guide-heading-toc--section" id="Coral.Textfield:api"><span class="ancestors"><a href="Coral.html" class="coral-Link coral-Link">Coral</a>.</span><a href="#Coral.Textfield:api" class="coral-Link">Textfield
+ API</a></h1>
+
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <a name="constructor"></a>
+    <h2 class="docs-Example-subtitle coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection" id="Coral.Textfield:constructor"><a href="#Coral.Textfield:constructor" class="coral-Link">Constructor</a></h2>
+    
+
+    
+</dt>
+
+
+
+<dd>
+
+    <dl >
+    
+        <dt><h4>JavaScript:</h4></dt>
+        <dd>
+            <code class="prettyprint">new Coral.Textfield()</code> or <code class="prettyprint">document.createElement('input', 'coral-textfield')</code>
+        </dd>
+        
+        <dt><h4>HTML Tag:</h4></dt>
+        <dd>
+            
+                <code class="prettyprint">&lt;input is="coral-textfield"&gt;</code>
+            
+        </dd>
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+    
+
+    
+        <a name="extends"></a>
+        <h2 class="docs-Example-subtitle coral-Heading coral-Heading--2" id="Coral.Textfield:extends" ><a href="#Coral.Textfield:extends" class="coral-Link">Extends</a></h2>
+
+        <ul>
+            <li><a href="Coral.Component.html"class="coral-Link">Coral.Component</a></li>
+        
+            <li><a href="Coral.mixin.formField.html"class="coral-Link">Coral.mixin.formField</a></li>
+        </ul>
+    
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+        <a name="staticProperties"></a>
+        <h2 id="Coral.Textfield:staticProperties" class="docs-Example-subtitle coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection" ><a href="#Coral.Textfield:staticProperties" class="coral-Link">Static Properties</a></h2>
+
+        <dl>
+            <!-- jsdoc members tmpl -->
+<dt class='docs-Member-item'>
+
+    <h3 class="name docs-Member-caption" id="Coral.Textfield:.variant"><a href="#Coral.Textfield:.variant" class="coral-Link"><span class="type-signature">Coral.Textfield.</span>variant</a><span class="type-signature"> {String}</span>
+    </h3>
+    
+
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Enum for textfield variant values.
+</div>
+
+
+<dd>
+    
+<dl class="details">
+    
+
+        <h4 class="line">Properties:</h4>
+
+        <dl>
+<!-- jsdoc properties tmpl -->
+<table class="coral-Table data coral--light">
+    <thead class="coral-Table-head">
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+		<th class="coral-Table-headerCell">Value</th>
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody class="coral-Table-body">
+	
+
+        <tr class="coral-Table-row" id="variant#DEFAULT">
+            
+                <td class="coral-Table-cell name">DEFAULT</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">String</span>
+            
+            </td>
+
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    default
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">A default textfield</td>
+        </tr>
+
+	
+
+        <tr class="coral-Table-row" id="variant#QUIET">
+            
+                <td class="coral-Table-cell name">QUIET</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">String</span>
+            
+            </td>
+
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    quiet
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">A textfield with no border or background.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+<!-- end jsdoc properties tmpl -->
+</dl>
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+<!-- end jsdoc members tmpl -->
+
+        </dl>
+        
+        <a name="instanceProperties"></a>
+        <h2 id="Coral.Textfield:instanceProperties" class="docs-Example-subtitle coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection"><a href="#Coral.Textfield:instanceProperties" class="coral-Link">Instance Properties</a></h2>
+
+        <dl>
+            <!-- jsdoc members tmpl -->
+<dt class='docs-Member-item'>
+
+    <h3 class="name docs-Member-caption" id="Coral.Textfield:disabled"><a href="#Coral.Textfield:disabled" class="coral-Link"><span class="type-signature">instance.</span>disabled</a><span class="type-signature"> {Boolean}</span>
+    </h3>
+    
+    <coral-tag class="docs-Member-tag" readonly="true" size="S" color="periwinkle">Reflected</coral-tag>
+    
+
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Whether this field is disabled or not.
+</div>
+
+
+<dd>
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.mixin.formField.html#Coral.mixin.formField:disabled"class="coral-Link">Coral.mixin.formField#disabled</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+  <dt class="tag-default">Default Value:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>false</li></ul></dd>
+  
+
+  
+  <dt class="tag-default">HTML Attribute:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>disabled</li></ul></dd>
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+<!-- end jsdoc members tmpl -->
+
+        
+            <!-- jsdoc members tmpl -->
+<dt class='docs-Member-item'>
+
+    <h3 class="name docs-Member-caption" id="Coral.Textfield:invalid"><a href="#Coral.Textfield:invalid" class="coral-Link"><span class="type-signature">instance.</span>invalid</a><span class="type-signature"> {Boolean}</span>
+    </h3>
+    
+    <coral-tag class="docs-Member-tag" readonly="true" size="S" color="periwinkle">Reflected</coral-tag>
+    
+
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Whether the current value of this field is invalid or not.
+</div>
+
+
+<dd>
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.mixin.formField.html#Coral.mixin.formField:invalid"class="coral-Link">Coral.mixin.formField#invalid</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+  <dt class="tag-default">Default Value:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>false</li></ul></dd>
+  
+
+  
+  <dt class="tag-default">HTML Attribute:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>invalid</li></ul></dd>
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+<!-- end jsdoc members tmpl -->
+
+        
+            <!-- jsdoc members tmpl -->
+<dt class='docs-Member-item'>
+
+    <h3 class="name docs-Member-caption" id="Coral.Textfield:labelledBy"><a href="#Coral.Textfield:labelledBy" class="coral-Link"><span class="type-signature">instance.</span>labelledBy</a><span class="type-signature"> {String}</span>
+    </h3>
+    
+
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Reference to a space delimited set of ids for the HTML elements that provide a label for the formField.
+      Implementers should override this method to ensure that the appropriate descendant elements are labelled using the
+      <code>aria-labelledby</code> attribute. This will ensure that the component is properly identified for
+      accessibility purposes. It reflects the <code>aria-labelledby</code> attribute to the DOM.
+</div>
+
+
+<dd>
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.mixin.formField.html#Coral.mixin.formField:labelledBy"class="coral-Link">Coral.mixin.formField#labelledBy</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+  <dt class="tag-default">Default Value:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>null</li></ul></dd>
+  
+
+  
+  <dt class="tag-default">HTML Attribute:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>labelledby</li></ul></dd>
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+<!-- end jsdoc members tmpl -->
+
+        
+            <!-- jsdoc members tmpl -->
+<dt class='docs-Member-item'>
+
+    <h3 class="name docs-Member-caption" id="Coral.Textfield:name"><a href="#Coral.Textfield:name" class="coral-Link"><span class="type-signature">instance.</span>name</a><span class="type-signature"> {String}</span>
+    </h3>
+    
+    <coral-tag class="docs-Member-tag" readonly="true" size="S" color="periwinkle">Reflected</coral-tag>
+    
+
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Name used to submit the data in a form.
+</div>
+
+
+<dd>
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.mixin.formField.html#Coral.mixin.formField:name"class="coral-Link">Coral.mixin.formField#name</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+  <dt class="tag-default">Default Value:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>""</li></ul></dd>
+  
+
+  
+  <dt class="tag-default">HTML Attribute:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>name</li></ul></dd>
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+<!-- end jsdoc members tmpl -->
+
+        
+            <!-- jsdoc members tmpl -->
+<dt class='docs-Member-item'>
+
+    <h3 class="name docs-Member-caption" id="Coral.Textfield:readOnly"><a href="#Coral.Textfield:readOnly" class="coral-Link"><span class="type-signature">instance.</span>readOnly</a><span class="type-signature"> {Boolean}</span>
+    </h3>
+    
+    <coral-tag class="docs-Member-tag" readonly="true" size="S" color="periwinkle">Reflected</coral-tag>
+    
+
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
+      This is ignored for checkbox, radio or fileupload.
+</div>
+
+
+<dd>
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.mixin.formField.html#Coral.mixin.formField:readOnly"class="coral-Link">Coral.mixin.formField#readOnly</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+  <dt class="tag-default">Default Value:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>false</li></ul></dd>
+  
+
+  
+  <dt class="tag-default">HTML Attribute:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>readonly</li></ul></dd>
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+<!-- end jsdoc members tmpl -->
+
+        
+            <!-- jsdoc members tmpl -->
+<dt class='docs-Member-item'>
+
+    <h3 class="name docs-Member-caption" id="Coral.Textfield:required"><a href="#Coral.Textfield:required" class="coral-Link"><span class="type-signature">instance.</span>required</a><span class="type-signature"> {Boolean}</span>
+    </h3>
+    
+    <coral-tag class="docs-Member-tag" readonly="true" size="S" color="periwinkle">Reflected</coral-tag>
+    
+
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Whether this field is required or not.
+</div>
+
+
+<dd>
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.mixin.formField.html#Coral.mixin.formField:required"class="coral-Link">Coral.mixin.formField#required</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+  <dt class="tag-default">Default Value:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>false</li></ul></dd>
+  
+
+  
+  <dt class="tag-default">HTML Attribute:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>required</li></ul></dd>
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+<!-- end jsdoc members tmpl -->
+
+        
+            <!-- jsdoc members tmpl -->
+<dt class='docs-Member-item'>
+
+    <h3 class="name docs-Member-caption" id="Coral.Textfield:value"><a href="#Coral.Textfield:value" class="coral-Link"><span class="type-signature">instance.</span>value</a><span class="type-signature"> {String}</span>
+    </h3>
+    
+
+    
+
+    
+</dt>
+
+
+<div class="description">
+    This field's current value.
+</div>
+
+
+<dd>
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.mixin.formField.html#Coral.mixin.formField:value"class="coral-Link">Coral.mixin.formField#value</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+  <dt class="tag-default">Default Value:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>""</li></ul></dd>
+  
+
+  
+  <dt class="tag-default">HTML Attribute:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>value</li></ul></dd>
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+<!-- end jsdoc members tmpl -->
+
+        
+            <!-- jsdoc members tmpl -->
+<dt class='docs-Member-item'>
+
+    <h3 class="name docs-Member-caption" id="Coral.Textfield:variant"><a href="#Coral.Textfield:variant" class="coral-Link"><span class="type-signature">instance.</span>variant</a><span class="type-signature"> {<a href="Coral.Textfield.html#Coral.Textfield:.variant" class="coral-Link coral-Link">Coral.Textfield.variant</a>}</span>
+    </h3>
+    
+
+    
+
+    
+</dt>
+
+
+<div class="description">
+    The textfield's variant.
+</div>
+
+
+<dd>
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+  <dt class="tag-default">Default Value:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>Coral.Textfield.variant.DEFAULT</li></ul></dd>
+  
+
+  
+  <dt class="tag-default">HTML Attribute:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>variant</li></ul></dd>
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+<!-- end jsdoc members tmpl -->
+
+        </dl>
+
+        
+
+    
+        <a name="methods"></a>
+        <h2 class="docs-Example-subtitle coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection" id="Coral.Textfield:methods"><a href="#Coral.Textfield:methods" class="coral-Link">Methods</a></h2>
+
+        <dl>
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.Textfield:get"><a href="#Coral.Textfield:get" class="coral-Link"><span class="type-signature">instance.</span>get</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Get the value of a property.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">property</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The name of the property to fetch the value of.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    Property value.
+    
+    {<span class="param-type">*</span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:get"class="coral-Link">Coral.Component#get</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.Textfield:hide"><a href="#Coral.Textfield:hide" class="coral-Link"><span class="type-signature">instance.</span>hide</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Hide this component.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    this, chainable
+    
+    {<span class="param-type"><a href="Coral.Component.html"class="coral-Link">Coral.Component</a></span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:hide"class="coral-Link">Coral.Component#hide</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.Textfield:off"><a href="#Coral.Textfield:off" class="coral-Link"><span class="type-signature">instance.</span>off</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Remove an event listener.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+            <th class="coral-Table-headerCell">Optional</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">eventName</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+              No<br>
+            
+
+            
+            </td>
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The event name to stop listening for.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">selector</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The selector that was used for event delegation.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">func</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">function</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+              No<br>
+            
+
+            
+            </td>
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The function that was passed to <code>on()</code>.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">useCapture</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Boolean</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Only remove listeners with <code>useCapture</code> set to the value passed in.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    this, chainable.
+    
+    {<span class="param-type"><a href="Coral.Component.html"class="coral-Link">Coral.Component</a></span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:off"class="coral-Link">Coral.Component#off</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.Textfield:on"><a href="#Coral.Textfield:on" class="coral-Link"><span class="type-signature">instance.</span>on</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Add an event listener.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+            <th class="coral-Table-headerCell">Optional</th>
+        
+
+        
+            <th class="coral-Table-headerCell">Default</th>
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">eventName</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+              No<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The event name to listen for.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">selector</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The selector to use for event delegation.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">func</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">function</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+              No<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The function that will be called when the event is triggered.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">useCapture</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Boolean</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+                false
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Whether or not to listen during the capturing or bubbling phase.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    this, chainable.
+    
+    {<span class="param-type"><a href="Coral.Component.html"class="coral-Link">Coral.Component</a></span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:on"class="coral-Link">Coral.Component#on</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.Textfield:remove"><a href="#Coral.Textfield:remove" class="coral-Link"><span class="type-signature">instance.</span>remove</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Non-destructively remove this element. It can be re-added by simply appending it to the document again.
+    It will be garbage collected if there are no more references to it.
+    This is different from using jQuery's remove(), which is destructive in that it removes data and listeners.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:remove"class="coral-Link">Coral.Component#remove</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.Textfield:show"><a href="#Coral.Textfield:show" class="coral-Link"><span class="type-signature">instance.</span>show</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Show this component.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    this, chainable
+    
+    {<span class="param-type"><a href="Coral.Component.html"class="coral-Link">Coral.Component</a></span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:show"class="coral-Link">Coral.Component#show</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.Textfield:trigger"><a href="#Coral.Textfield:trigger" class="coral-Link"><span class="type-signature">instance.</span>trigger</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Trigger an event.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+            <th class="coral-Table-headerCell">Optional</th>
+        
+
+        
+            <th class="coral-Table-headerCell">Default</th>
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">eventName</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+              No<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The event name to trigger.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">props</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Additional properties to make available to handlers as <code>event.detail</code>.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">bubbles</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Boolean</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+                true
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Set to <code>false</code> to prevent the event from bubbling.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">cancelable</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Boolean</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+                true
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Set to <code>false</code> to prevent the event from being cancelable.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    CustomEvent object
+    
+    {<span class="param-type">CustomEvent</span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:trigger"class="coral-Link">Coral.Component#trigger</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        </dl>
+    
+
+    
+
+    
+        <a name="events"></a>
+        <h2 class="docs-Example-subtitle coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection" id="Coral.Textfield:events"><a href="#Coral.Textfield:events" class="coral-Link">Events</a></h2>
+
+        <dl>
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.Textfield:change"><a href="#Coral.Textfield:change" class="coral-Link">change</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered when the value has changed. This event is only triggered by user interaction.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Callback Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Event object.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.mixin.formField.html#Coral.mixin.formField:change"class="coral-Link">Coral.mixin.formField#change</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.Textfield:coral-component:attached"><a href="#Coral.Textfield:coral-component:attached" class="coral-Link">coral-component:attached</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered when the component is attached to the DOM.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Callback Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Event object.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:coral-component:attached"class="coral-Link">Coral.Component#coral-component:attached</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.Textfield:coral-component:detached"><a href="#Coral.Textfield:coral-component:detached" class="coral-Link">coral-component:detached</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered when the component is detached to the DOM.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Callback Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Event object.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:coral-component:detached"class="coral-Link">Coral.Component#coral-component:detached</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.Textfield:coral-component:ready"><a href="#Coral.Textfield:coral-component:ready" class="coral-Link">coral-component:ready</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Triggerred when the component has been upgraded and is ready for use.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Callback Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Event object.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:coral-component:ready"class="coral-Link">Coral.Component#coral-component:ready</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        </dl>
+    
+</article>
+
+</section>
+
+
+
+
+        
+       
+      </section>
+    </article>
+  </body>
+</html>

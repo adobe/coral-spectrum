@@ -1,0 +1,3566 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Coral.Popover</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light docs-Background u-coral-clearFix">
+    <article class="docs-Component">
+      <section class="docs-Component-metadata">
+        <div class="docs-Component-header">
+          <h1 id="coral.Popover" guide-toc-title="Overview" class="coral-Heading coral-Heading--1 docs-Component-name js-guide-heading-toc js-guide-heading-toc--header">Coral.Popover</h1><span class="docs-Component-version">Current Version: <strong>3.1.11</strong></span>
+        </div>
+        <div class="docs-Component-github"> Github: <a href="https://git.corp.adobe.com/Coral/coralui-component-popover" class="coral-Link">coralui-component-popover</a>
+        </div>
+        <!-- description is loaded from the template-->
+      </section>
+      <section class="docs-Component-documentation">
+            <coral-alert variant="warning">
+              Notice: When using the Coral.Popover in a scrollable content, make sure the set 'position:
+              relative' on the container to enable the repositioning of Coral.Popover.
+              
+            </coral-alert>
+        <script>
+          if (typeof Coral.Configurator === 'function') {
+            var configurator = new Coral.Configurator().set({
+              before: '<button is="coral-button" id="demoButton">Target</button>',
+              component: Coral.Popover,
+              useInnerElements: true,
+              innerElements: [
+                {
+                  tagName: 'coral-popover-content',
+                  properties: {
+                    'content.innerHTML': 'innerHTML'
+                  }
+                },
+                {
+                  tagName: 'coral-popover-header',
+                  properties: {
+                    'header.innerHTML': 'innerHTML'
+                  }
+                }
+              ],
+              fields: [
+                {
+                  label: 'Placement',
+                  prop: 'placement',
+                  type: 'select',
+                  value: 'right',
+                  options: {
+                    'Top': 'top',
+                    'Bottom': 'bottom',
+                    'Left': 'left',
+                    'Right': 'right'
+                  }
+                },
+                {
+                  label: 'Header',
+                  prop: 'header.innerHTML',
+                  type: 'text',
+                  value: 'Popover Header'
+                },
+                {
+                  label: 'Content',
+                  prop: 'content.innerHTML',
+                  type: 'text',
+                  value: '<p class="u-coral-margin">This is a popover.</p>'
+                },
+                {
+                  label: 'Variant',
+                  prop: 'variant',
+                  type: 'select',
+                  value: 'default',
+                  options: {
+                    DEFAULT: 'default',
+                    ERROR: 'error',
+                    WARNING: 'warning',
+                    SUCCESS: 'success',
+                    HELP: 'help',
+                    INFO: 'info'
+                  }
+                },
+                {
+                  label: 'Target',
+                  prop: 'target',
+                  type: 'text',
+                  value: '#demoButton'
+                },
+                {
+                  label: 'Closable',
+                  prop: 'closable',
+                  type: 'select',
+                  value: 'off',
+                  options: {
+                    OFF: 'off',
+                    ON: 'on'
+                  }
+                },
+                {
+                  label: 'Open',
+                  prop: 'open',
+                  value: true,
+                  type: 'checkbox'
+                },
+                {
+                  label: 'Interaction',
+                  prop: 'interaction',
+                  type: 'select',
+                  value: 'on',
+                  options: {
+                    OFF: 'off',
+                    ON: 'on'
+                  }
+                }
+              ]
+            }).insertAfterLastScript();
+          }
+        </script>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header">
+                    <h2 id="markupExamples" class="coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection"><a href="#markupExamples" class="coral-Link">Markup Examples</a></h2>
+              </div>
+                      <h3 id="contentPadding" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#contentPadding" class="coral-Link">Content Padding</a></h3>
+              <p>Use the <code class="atv">u-coral-margin</code> class to give margin to content zones.</p>
+              <p>
+                This is especially useful when adding multiple paragraphs to a Popover.
+                
+              </p>
+              <div class="docs-Example-markup u-columnLarge">
+                    <script type="text/template" id="guide-9bab7fc2-c506-4754-8abd-8bc0889b9237">
+                      <button is="coral-button" id="marginPopover_target">Content Margin</button>
+                      <coral-popover target="#marginPopover_target">
+                        <coral-popover-content>
+                          <p class="u-coral-margin">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
+                          <p class="u-coral-margin">Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida.</p>
+                        </coral-popover-content>
+                      </coral-popover>
+                    </script>
+                    <div class="docs-Example-markup u-columnMedium">
+                      <button is="coral-button" id="marginPopover_target">Content Margin</button>
+                      <coral-popover target="#marginPopover_target">
+                        <coral-popover-content>
+                          <p class="u-coral-margin">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
+                          <p class="u-coral-margin">Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida.</p>
+                        </coral-popover-content>
+                      </coral-popover>
+                    </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                        <pre data-src-id="guide-9bab7fc2-c506-4754-8abd-8bc0889b9237" class="docs-Example-toggleMarkup prettyprint"></pre>
+              </div>
+              <p>You can also use  <code class="atv">u-coral-padding</code> class to give padding to the entire content container.</p>
+              <p>
+                Note that this won't pay well with inner elements that use <code class="atv">u-coral-margin</code>, as you'll get double the spacing you intended.
+                
+              </p>
+              <div class="docs-Example-markup u-columnLarge">
+                    <script type="text/template" id="guide-0e42eb0e-f22d-417f-b262-27f550afe65e">
+                      <button is="coral-button" id="paddingPopover_target">Content Padding</button>
+                      <coral-popover target="#paddingPopover_target">
+                        <coral-popover-content class="u-coral-padding">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</coral-popover-content>
+                      </coral-popover>
+                    </script>
+                    <div class="docs-Example-markup u-columnMedium">
+                      <button is="coral-button" id="paddingPopover_target">Content Padding</button>
+                      <coral-popover target="#paddingPopover_target">
+                        <coral-popover-content class="u-coral-padding">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</coral-popover-content>
+                      </coral-popover>
+                    </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                        <pre data-src-id="guide-0e42eb0e-f22d-417f-b262-27f550afe65e" class="docs-Example-toggleMarkup prettyprint"></pre>
+              </div>
+                      <h3 id="contentSeparators" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#contentSeparators" class="coral-Link">Content Separators</a></h3>
+              <p>
+                Use the <code class="atv">coral-popover-separator</code> component to create content separators.
+                
+              </p>
+              <div class="docs-Example-markup u-columnLarge">
+                    <script type="text/template" id="guide-93e68f0b-9f28-47c4-83e2-a0ff6e6879f2">
+                      <button is="coral-button" id="separatorsPopover_target">Separators</button>
+                      <coral-popover target="#separatorsPopover_target">
+                        <coral-popover-content>
+                          <p class="u-coral-margin">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
+                          <p class="u-coral-margin">Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida.</p>
+                          <coral-popover-separator></coral-popover-separator>
+                          <p class="u-coral-margin">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
+                          <p class="u-coral-margin">Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida.</p>
+                        </coral-popover-content>
+                      </coral-popover>
+                    </script>
+                    <div class="docs-Example-markup u-columnMedium">
+                      <button is="coral-button" id="separatorsPopover_target">Separators</button>
+                      <coral-popover target="#separatorsPopover_target">
+                        <coral-popover-content>
+                          <p class="u-coral-margin">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
+                          <p class="u-coral-margin">Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida.</p>
+                          <coral-popover-separator></coral-popover-separator>
+                          <p class="u-coral-margin">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet interdum convallis.</p>
+                          <p class="u-coral-margin">Vestibulum convallis lectus ut nulla commodo gravida. Suspendisse porta arcu sit amet purus sollicitudin id gravida mi gravida.</p>
+                        </coral-popover-content>
+                      </coral-popover>
+                    </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                        <pre data-src-id="guide-93e68f0b-9f28-47c4-83e2-a0ff6e6879f2" class="docs-Example-toggleMarkup prettyprint"></pre>
+              </div>
+            </section>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header">
+                    <h2 id="behavior" class="coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection"><a href="#behavior" class="coral-Link">Behavior</a></h2>
+              </div>
+              <h3 class="coral-Heading coral-Heading--3">Keyboard Controls</h3>
+              <p>When the popover is visible, pressing the escape key will dismiss the top most popover.</p>
+              <h3 class="coral-Heading coral-Heading--3">Focus Behavior</h3>
+              <p>When shown, the popover will focus on itself, showing no border. Pressing tab will move to the first focusable element, usually the close button.</p>
+              <p>When hidden, the popover will return focus to the element that was previously focused on the page.</p>
+            </section>
+        <!--<h1 class="line">Class: Popover</h1>-->
+        
+          
+
+
+
+<section class="docs-jsDoc-container">
+
+<a name="api"></a>
+<h1 class="coral-Heading coral-Heading--1 docs-Example-header docs-jsDoc-heading--1 js-guide-heading-toc js-guide-heading-toc--section" id="Coral.Popover:api"><span class="ancestors"><a href="Coral.html" class="coral-Link coral-Link">Coral</a>.</span><a href="#Coral.Popover:api" class="coral-Link">Popover
+ API</a></h1>
+
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <a name="constructor"></a>
+    <h2 class="docs-Example-subtitle coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection" id="Coral.Popover:constructor"><a href="#Coral.Popover:constructor" class="coral-Link">Constructor</a></h2>
+    
+
+    
+</dt>
+
+
+
+<dd>
+
+    <dl >
+    
+        <dt><h4>JavaScript:</h4></dt>
+        <dd>
+            <code class="prettyprint">new Coral.Popover()</code> or <code class="prettyprint">document.createElement('coral-popover')</code>
+        </dd>
+        
+        <dt><h4>HTML Tag:</h4></dt>
+        <dd>
+            
+                <code class="prettyprint">&lt;coral-popover&gt;</code>
+            
+        </dd>
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+    
+
+    
+        <a name="extends"></a>
+        <h2 class="docs-Example-subtitle coral-Heading coral-Heading--2" id="Coral.Popover:extends" ><a href="#Coral.Popover:extends" class="coral-Link">Extends</a></h2>
+
+        <ul>
+            <li><a href="Coral.Component.html"class="coral-Link">Coral.Component</a></li>
+        
+            <li><a href="Coral.Overlay.html"class="coral-Link">Coral.Overlay</a></li>
+        </ul>
+    
+
+    </div>
+    
+
+    
+
+    
+        <a name="subcomponents"></a>
+        <h2 class="docs-Example-subtitle coral-Heading coral-Heading--2" id="Coral.Popover:subcomponents"><a href="#Coral.Popover:subcomponents" class="coral-Link">Sub-components</a></h2>
+
+        <ul>
+            <li><a href="Coral.Popover.html#Coral.Popover.Content:api"class="coral-Link">Coral.Popover.Content</a></li>
+        
+            <li><a href="Coral.Popover.html#Coral.Popover.Header:api"class="coral-Link">Coral.Popover.Header</a></li>
+        
+            <li><a href="Coral.Popover.html#Coral.Popover.Separator:api"class="coral-Link">Coral.Popover.Separator</a></li>
+        </ul>
+    
+
+    
+
+    
+        <a name="staticProperties"></a>
+        <h2 id="Coral.Popover:staticProperties" class="docs-Example-subtitle coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection" ><a href="#Coral.Popover:staticProperties" class="coral-Link">Static Properties</a></h2>
+
+        <dl>
+            <!-- jsdoc members tmpl -->
+<dt class='docs-Member-item'>
+
+    <h3 class="name docs-Member-caption" id="Coral.Popover:.closable"><a href="#Coral.Popover:.closable" class="coral-Link"><span class="type-signature">Coral.Popover.</span>closable</a><span class="type-signature"> {String}</span>
+    </h3>
+    
+
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Boolean enumeration for popover closable state.
+</div>
+
+
+<dd>
+    
+<dl class="details">
+    
+
+        <h4 class="line">Properties:</h4>
+
+        <dl>
+<!-- jsdoc properties tmpl -->
+<table class="coral-Table data coral--light">
+    <thead class="coral-Table-head">
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+		<th class="coral-Table-headerCell">Value</th>
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody class="coral-Table-body">
+	
+
+        <tr class="coral-Table-row" id="closable#ON">
+            
+                <td class="coral-Table-cell name">ON</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">String</span>
+            
+            </td>
+
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    on
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">Show a close button on the popover and close the popover when clicked.</td>
+        </tr>
+
+	
+
+        <tr class="coral-Table-row" id="closable#OFF">
+            
+                <td class="coral-Table-cell name">OFF</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">String</span>
+            
+            </td>
+
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    off
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">Do not show a close button. Elements with the <code>coral-close</code> attributes will still close the
+      popover.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+<!-- end jsdoc properties tmpl -->
+</dl>
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+<!-- end jsdoc members tmpl -->
+
+        
+            <!-- jsdoc members tmpl -->
+<dt class='docs-Member-item'>
+
+    <h3 class="name docs-Member-caption" id="Coral.Popover:.interaction"><a href="#Coral.Popover:.interaction" class="coral-Link"><span class="type-signature">Coral.Popover.</span>interaction</a><span class="type-signature"> {String}</span>
+    </h3>
+    
+
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Popover interaction values.
+</div>
+
+
+<dd>
+    
+<dl class="details">
+    
+
+        <h4 class="line">Properties:</h4>
+
+        <dl>
+<!-- jsdoc properties tmpl -->
+<table class="coral-Table data coral--light">
+    <thead class="coral-Table-head">
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+		<th class="coral-Table-headerCell">Value</th>
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody class="coral-Table-body">
+	
+
+        <tr class="coral-Table-row" id="interaction#ON">
+            
+                <td class="coral-Table-cell name">ON</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">String</span>
+            
+            </td>
+
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    on
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">Show when the target is clicked and hide when clicked outside of the target and popover.</td>
+        </tr>
+
+	
+
+        <tr class="coral-Table-row" id="interaction#OFF">
+            
+                <td class="coral-Table-cell name">OFF</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">String</span>
+            
+            </td>
+
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    off
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">Do not show or hide automatically.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+<!-- end jsdoc properties tmpl -->
+</dl>
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+<!-- end jsdoc members tmpl -->
+
+        
+            <!-- jsdoc members tmpl -->
+<dt class='docs-Member-item'>
+
+    <h3 class="name docs-Member-caption" id="Coral.Popover:.variant"><a href="#Coral.Popover:.variant" class="coral-Link"><span class="type-signature">Coral.Popover.</span>variant</a><span class="type-signature"> {String}</span>
+    </h3>
+    
+
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Popover variants.
+</div>
+
+
+<dd>
+    
+<dl class="details">
+    
+
+        <h4 class="line">Properties:</h4>
+
+        <dl>
+<!-- jsdoc properties tmpl -->
+<table class="coral-Table data coral--light">
+    <thead class="coral-Table-head">
+	<tr class="coral-Table-row">
+		
+		<th class="coral-Table-headerCell">Name</th>
+		
+
+		<th class="coral-Table-headerCell">Type</th>
+
+		
+
+		
+		<th class="coral-Table-headerCell">Value</th>
+		
+
+		<th class="coral-Table-headerCell last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody class="coral-Table-body">
+	
+
+        <tr class="coral-Table-row" id="variant#DEFAULT">
+            
+                <td class="coral-Table-cell name">DEFAULT</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">String</span>
+            
+            </td>
+
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    default
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">A popover with the default, gray header and no icon.</td>
+        </tr>
+
+	
+
+        <tr class="coral-Table-row" id="variant#ERROR">
+            
+                <td class="coral-Table-cell name">ERROR</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">String</span>
+            
+            </td>
+
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    error
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">A popover with a red header and warning icon, indicating that an error has occurred.</td>
+        </tr>
+
+	
+
+        <tr class="coral-Table-row" id="variant#WARNING">
+            
+                <td class="coral-Table-cell name">WARNING</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">String</span>
+            
+            </td>
+
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    warning
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">A popover with an orange header and warning icon, notifying the user of something important.</td>
+        </tr>
+
+	
+
+        <tr class="coral-Table-row" id="variant#SUCCESS">
+            
+                <td class="coral-Table-cell name">SUCCESS</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">String</span>
+            
+            </td>
+
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    success
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">A popover with a green header and checkmark icon, indicates to the user that an operation was successful.</td>
+        </tr>
+
+	
+
+        <tr class="coral-Table-row" id="variant#HELP">
+            
+                <td class="coral-Table-cell name">HELP</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">String</span>
+            
+            </td>
+
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    help
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">A popover with a blue header and question mark icon, provides the user with help.</td>
+        </tr>
+
+	
+
+        <tr class="coral-Table-row" id="variant#INFO">
+            
+                <td class="coral-Table-cell name">INFO</td>
+            
+
+            <td class="coral-Table-cell type">
+            
+                <span class="param-type">String</span>
+            
+            </td>
+
+            
+
+            
+                <td class="coral-Table-cell default">
+                
+                    info
+                
+                </td>
+            
+
+            <td class="coral-Table-cell description last">A popover with a blue header and info icon, informs the user of non-critical information.</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+<!-- end jsdoc properties tmpl -->
+</dl>
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+<!-- end jsdoc members tmpl -->
+
+        </dl>
+        
+        <a name="instanceProperties"></a>
+        <h2 id="Coral.Popover:instanceProperties" class="docs-Example-subtitle coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection"><a href="#Coral.Popover:instanceProperties" class="coral-Link">Instance Properties</a></h2>
+
+        <dl>
+            <!-- jsdoc members tmpl -->
+<dt class='docs-Member-item'>
+
+    <h3 class="name docs-Member-caption" id="Coral.Popover:alignAt"><a href="#Coral.Popover:alignAt" class="coral-Link"><span class="type-signature">instance.</span>alignAt</a><span class="type-signature"> {<a href="Coral.Overlay.html#Coral.Overlay:.align" class="coral-Link coral-Link">Coral.Overlay.align</a>}</span>
+    </h3>
+    
+
+    
+
+    
+</dt>
+
+
+<div class="description">
+    The point on the target we should anchor to when positioning.
+</div>
+
+
+<dd>
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Overlay.html#Coral.Overlay:alignAt"class="coral-Link">Coral.Overlay#alignAt</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+  <dt class="tag-default">Default Value:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>Coral.Overlay.align.RIGHT_CENTER</li></ul></dd>
+  
+
+  
+  <dt class="tag-default">HTML Attribute:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>alignat</li></ul></dd>
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+<!-- end jsdoc members tmpl -->
+
+        
+            <!-- jsdoc members tmpl -->
+<dt class='docs-Member-item'>
+
+    <h3 class="name docs-Member-caption" id="Coral.Popover:alignMy"><a href="#Coral.Popover:alignMy" class="coral-Link"><span class="type-signature">instance.</span>alignMy</a><span class="type-signature"> {<a href="Coral.Overlay.html#Coral.Overlay:.align" class="coral-Link coral-Link">Coral.Overlay.align</a>}</span>
+    </h3>
+    
+
+    
+
+    
+</dt>
+
+
+<div class="description">
+    The point on the overlay we should anchor from when positioning.
+</div>
+
+
+<dd>
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+  <dt class="tag-default">Default Value:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>Coral.Overlay.align.LEFT_CENTER</li></ul></dd>
+  
+
+  
+  <dt class="tag-default">HTML Attribute:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>alignmy</li></ul></dd>
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+<!-- end jsdoc members tmpl -->
+
+        
+            <!-- jsdoc members tmpl -->
+<dt class='docs-Member-item'>
+
+    <h3 class="name docs-Member-caption" id="Coral.Popover:closable"><a href="#Coral.Popover:closable" class="coral-Link"><span class="type-signature">instance.</span>closable</a><span class="type-signature"> {<a href="Coral.Popover.html#Coral.Popover:.closable" class="coral-Link coral-Link">Coral.Popover.closable</a>}</span>
+    </h3>
+    
+    <coral-tag class="docs-Member-tag" readonly="true" size="S" color="periwinkle">Reflected</coral-tag>
+    
+
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Whether the popover should have a close button.
+</div>
+
+
+<dd>
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+  <dt class="tag-default">Default Value:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>Coral.Popover.closable.OFF</li></ul></dd>
+  
+
+  
+  <dt class="tag-default">HTML Attribute:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>closable</li></ul></dd>
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+<!-- end jsdoc members tmpl -->
+
+        
+            <!-- jsdoc members tmpl -->
+<dt class='docs-Member-item'>
+
+    <h3 class="name docs-Member-caption" id="Coral.Popover:collision"><a href="#Coral.Popover:collision" class="coral-Link"><span class="type-signature">instance.</span>collision</a><span class="type-signature"> {<a href="Coral.Overlay.html#Coral.Overlay:.collision" class="coral-Link coral-Link">Coral.Overlay.collision</a>}</span>
+    </h3>
+    
+
+    
+
+    
+</dt>
+
+
+<div class="description">
+    The collision handling strategy when positioning the overlay relative to a target.
+</div>
+
+
+<dd>
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Overlay.html#Coral.Overlay:collision"class="coral-Link">Coral.Overlay#collision</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+  <dt class="tag-default">Default Value:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>Coral.Overlay.collision.FLIP_FIT</li></ul></dd>
+  
+
+  
+  <dt class="tag-default">HTML Attribute:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>collision</li></ul></dd>
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+<!-- end jsdoc members tmpl -->
+
+        
+            <!-- jsdoc members tmpl -->
+<dt class='docs-Member-item'>
+
+    <h3 class="name docs-Member-caption" id="Coral.Popover:content"><a href="#Coral.Popover:content" class="coral-Link"><span class="type-signature">instance.</span>content</a><span class="type-signature"> {HTMLElement}</span>
+    </h3>
+    
+
+    
+
+    
+</dt>
+
+
+<div class="description">
+    The popover's content element.
+</div>
+
+
+<dd>
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+<!-- end jsdoc members tmpl -->
+
+        
+            <!-- jsdoc members tmpl -->
+<dt class='docs-Member-item'>
+
+    <h3 class="name docs-Member-caption" id="Coral.Popover:header"><a href="#Coral.Popover:header" class="coral-Link"><span class="type-signature">instance.</span>header</a><span class="type-signature"> {HTMLElement}</span>
+    </h3>
+    
+
+    
+
+    
+</dt>
+
+
+<div class="description">
+    The popover's header element.
+</div>
+
+
+<dd>
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+<!-- end jsdoc members tmpl -->
+
+        
+            <!-- jsdoc members tmpl -->
+<dt class='docs-Member-item'>
+
+    <h3 class="name docs-Member-caption" id="Coral.Popover:icon"><a href="#Coral.Popover:icon" class="coral-Link"><span class="type-signature">instance.</span>icon</a><span class="type-signature"> {String}</span>
+    </h3>
+    
+
+    
+
+    
+</dt>
+
+
+<div class="description">
+    The popover's icon.
+</div>
+
+
+<dd>
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+  <dt class="tag-default">Default Value:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>""</li></ul></dd>
+  
+
+  
+  <dt class="tag-default">HTML Attribute:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>icon</li></ul></dd>
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+<!-- end jsdoc members tmpl -->
+
+        
+            <!-- jsdoc members tmpl -->
+<dt class='docs-Member-item'>
+
+    <h3 class="name docs-Member-caption" id="Coral.Popover:interaction"><a href="#Coral.Popover:interaction" class="coral-Link"><span class="type-signature">instance.</span>interaction</a><span class="type-signature"> {<a href="Coral.Popover.html#Coral.Popover:.interaction" class="coral-Link coral-Link">Coral.Popover.interaction</a>}</span>
+    </h3>
+    
+
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Whether the popover should show itself when the target is interacted with.
+</div>
+
+
+<dd>
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+  <dt class="tag-default">Default Value:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>Coral.Popover.interaction.ON</li></ul></dd>
+  
+
+  
+  <dt class="tag-default">HTML Attribute:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>interaction</li></ul></dd>
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+<!-- end jsdoc members tmpl -->
+
+        
+            <!-- jsdoc members tmpl -->
+<dt class='docs-Member-item'>
+
+    <h3 class="name docs-Member-caption" id="Coral.Popover:offset"><a href="#Coral.Popover:offset" class="coral-Link"><span class="type-signature">instance.</span>offset</a><span class="type-signature"> {Number}</span>
+    </h3>
+    
+
+    
+
+    
+</dt>
+
+
+<div class="description">
+    The distance the overlay should be from its target.
+</div>
+
+
+<dd>
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+  <dt class="tag-default">Default Value:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>5</li></ul></dd>
+  
+
+  
+  <dt class="tag-default">HTML Attribute:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>offset</li></ul></dd>
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+<!-- end jsdoc members tmpl -->
+
+        
+            <!-- jsdoc members tmpl -->
+<dt class='docs-Member-item'>
+
+    <h3 class="name docs-Member-caption" id="Coral.Popover:placement"><a href="#Coral.Popover:placement" class="coral-Link"><span class="type-signature">instance.</span>placement</a><span class="type-signature"> {<a href="Coral.Overlay.html#Coral.Overlay:.placement" class="coral-Link coral-Link">Coral.Overlay.placement</a>}</span>
+    </h3>
+    
+
+    
+
+    
+</dt>
+
+
+<div class="description">
+    The placement of the overlay. This property sets <a href="Coral.Overlay.html#Coral.Overlay:alignMy"class="coral-Link">Coral.Overlay#alignMy</a> and <a href="Coral.Overlay.html#Coral.Overlay:alignAt"class="coral-Link">Coral.Overlay#alignAt</a>.
+</div>
+
+
+<dd>
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+  <dt class="tag-default">Default Value:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>Coral.Overlay.placement.RIGHT</li></ul></dd>
+  
+
+  
+  <dt class="tag-default">HTML Attribute:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>placement</li></ul></dd>
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+<!-- end jsdoc members tmpl -->
+
+        
+            <!-- jsdoc members tmpl -->
+<dt class='docs-Member-item'>
+
+    <h3 class="name docs-Member-caption" id="Coral.Popover:returnFocus"><a href="#Coral.Popover:returnFocus" class="coral-Link"><span class="type-signature">instance.</span>returnFocus</a><span class="type-signature"> {<a href="Coral.mixin.overlay.html#Coral.mixin.overlay:.returnFocus" class="coral-Link coral-Link">Coral.mixin.overlay.returnFocus</a>}</span>
+    </h3>
+    
+
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Whether to return focus to the previously focused element when closed.
+</div>
+
+
+<dd>
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+  <dt class="tag-default">Default Value:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>Coral.mixin.overlay.returnFocus.ON</li></ul></dd>
+  
+
+  
+  <dt class="tag-default">HTML Attribute:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>returnfocus</li></ul></dd>
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+<!-- end jsdoc members tmpl -->
+
+        
+            <!-- jsdoc members tmpl -->
+<dt class='docs-Member-item'>
+
+    <h3 class="name docs-Member-caption" id="Coral.Popover:target"><a href="#Coral.Popover:target" class="coral-Link"><span class="type-signature">instance.</span>target</a><span class="type-signature"> {<a href="Coral.Overlay.html#Coral.Overlay:.target" class="coral-Link coral-Link">Coral.Overlay.target</a> | HTMLElement | String}</span>
+    </h3>
+    
+
+    
+
+    
+</dt>
+
+
+<div class="description">
+    The element the overlay should position relative to. It accepts values from <a href="Coral.Overlay.html#Coral.Overlay:.target"class="coral-Link">Coral.Overlay.target</a>, as
+        well as a DOM element or a CSS selector. If a CSS selector is provided, the first matching element will be used.
+        If a target is not specified, the overlay will not respect <a href="Coral.Overlay.html#Coral.Overlay:alignMy"class="coral-Link">Coral.Overlay#alignMy</a>,
+        <a href="Coral.Overlay.html#Coral.Overlay:alignAt"class="coral-Link">Coral.Overlay#alignAt</a>, or <a href="Coral.Overlay.html#Coral.Overlay:collision"class="coral-Link">Coral.Overlay#collision</a>.
+</div>
+
+
+<dd>
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Overlay.html#Coral.Overlay:target"class="coral-Link">Coral.Overlay#target</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+  <dt class="tag-default">Default Value:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>null</li></ul></dd>
+  
+
+  
+  <dt class="tag-default">HTML Attribute:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>target</li></ul></dd>
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+<!-- end jsdoc members tmpl -->
+
+        
+            <!-- jsdoc members tmpl -->
+<dt class='docs-Member-item'>
+
+    <h3 class="name docs-Member-caption" id="Coral.Popover:trapFocus"><a href="#Coral.Popover:trapFocus" class="coral-Link"><span class="type-signature">instance.</span>trapFocus</a><span class="type-signature"> {<a href="Coral.mixin.overlay.html#Coral.mixin.overlay:.trapFocus" class="coral-Link coral-Link">Coral.mixin.overlay.trapFocus</a>}</span>
+    </h3>
+    
+
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Whether to trap tabs and keep them within the overlay.
+</div>
+
+
+<dd>
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+  <dt class="tag-default">Default Value:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>Coral.mixin.overlay.trapFocus.ON</li></ul></dd>
+  
+
+  
+  <dt class="tag-default">HTML Attribute:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>trapfocus</li></ul></dd>
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+<!-- end jsdoc members tmpl -->
+
+        
+            <!-- jsdoc members tmpl -->
+<dt class='docs-Member-item'>
+
+    <h3 class="name docs-Member-caption" id="Coral.Popover:variant"><a href="#Coral.Popover:variant" class="coral-Link"><span class="type-signature">instance.</span>variant</a><span class="type-signature"> {<a href="Coral.Dialog.html#Coral.Dialog:.variant" class="coral-Link coral-Link">Coral.Dialog.variant</a>}</span>
+    </h3>
+    
+
+    
+
+    
+</dt>
+
+
+<div class="description">
+    The popover's variant.
+</div>
+
+
+<dd>
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+  <dt class="tag-default">Default Value:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>Coral.Dialog.variant.DEFAULT</li></ul></dd>
+  
+
+  
+  <dt class="tag-default">HTML Attribute:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>variant</li></ul></dd>
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+<!-- end jsdoc members tmpl -->
+
+        
+            <!-- jsdoc members tmpl -->
+<dt class='docs-Member-item'>
+
+    <h3 class="name docs-Member-caption" id="Coral.Popover:within"><a href="#Coral.Popover:within" class="coral-Link"><span class="type-signature">instance.</span>within</a><span class="type-signature"> {HTMLElement | String}</span>
+    </h3>
+    
+
+    
+
+    
+</dt>
+
+
+<div class="description">
+    The bounding element for the overlay. The overlay will be sized and positioned such that it is contained within
+        this element. It accepts both a DOM Element or a CSS selector. If a CSS selector is provided, the first matching
+        element will be used.
+</div>
+
+
+<dd>
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Overlay.html#Coral.Overlay:within"class="coral-Link">Coral.Overlay#within</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+  <dt class="tag-default">Default Value:</dt>
+  <dd class="tag-default"><ul class="dummy"><li>window</li></ul></dd>
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+<!-- end jsdoc members tmpl -->
+
+        </dl>
+
+        
+
+    
+        <a name="methods"></a>
+        <h2 class="docs-Example-subtitle coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection" id="Coral.Popover:methods"><a href="#Coral.Popover:methods" class="coral-Link">Methods</a></h2>
+
+        <dl>
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.Popover:get"><a href="#Coral.Popover:get" class="coral-Link"><span class="type-signature">instance.</span>get</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Get the value of a property.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">property</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The name of the property to fetch the value of.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    Property value.
+    
+    {<span class="param-type">*</span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:get"class="coral-Link">Coral.Component#get</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.Popover:off"><a href="#Coral.Popover:off" class="coral-Link"><span class="type-signature">instance.</span>off</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Remove an event listener.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+            <th class="coral-Table-headerCell">Optional</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">eventName</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+              No<br>
+            
+
+            
+            </td>
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The event name to stop listening for.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">selector</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The selector that was used for event delegation.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">func</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">function</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+              No<br>
+            
+
+            
+            </td>
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The function that was passed to <code>on()</code>.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">useCapture</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Boolean</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Only remove listeners with <code>useCapture</code> set to the value passed in.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    this, chainable.
+    
+    {<span class="param-type"><a href="Coral.Component.html"class="coral-Link">Coral.Component</a></span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:off"class="coral-Link">Coral.Component#off</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.Popover:on"><a href="#Coral.Popover:on" class="coral-Link"><span class="type-signature">instance.</span>on</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Add an event listener.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+            <th class="coral-Table-headerCell">Optional</th>
+        
+
+        
+            <th class="coral-Table-headerCell">Default</th>
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">eventName</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+              No<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The event name to listen for.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">selector</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The selector to use for event delegation.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">func</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">function</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+              No<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The function that will be called when the event is triggered.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">useCapture</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Boolean</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+                false
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Whether or not to listen during the capturing or bubbling phase.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    this, chainable.
+    
+    {<span class="param-type"><a href="Coral.Component.html"class="coral-Link">Coral.Component</a></span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:on"class="coral-Link">Coral.Component#on</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.Popover:remove"><a href="#Coral.Popover:remove" class="coral-Link"><span class="type-signature">instance.</span>remove</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Non-destructively remove this element. It can be re-added by simply appending it to the document again.
+    It will be garbage collected if there are no more references to it.
+    This is different from using jQuery's remove(), which is destructive in that it removes data and listeners.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:remove"class="coral-Link">Coral.Component#remove</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.Popover:reposition"><a href="#Coral.Popover:reposition" class="coral-Link"><span class="type-signature">instance.</span>reposition</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Re-position the overlay if it's currently open.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Overlay.html#Coral.Overlay:reposition"class="coral-Link">Coral.Overlay#reposition</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.Popover:trigger"><a href="#Coral.Popover:trigger" class="coral-Link"><span class="type-signature">instance.</span>trigger</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Trigger an event.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+            <th class="coral-Table-headerCell">Optional</th>
+        
+
+        
+            <th class="coral-Table-headerCell">Default</th>
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">eventName</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+              No<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The event name to trigger.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">props</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Additional properties to make available to handlers as <code>event.detail</code>.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">bubbles</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Boolean</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+                true
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Set to <code>false</code> to prevent the event from bubbling.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">cancelable</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Boolean</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+                true
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Set to <code>false</code> to prevent the event from being cancelable.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    CustomEvent object
+    
+    {<span class="param-type">CustomEvent</span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:trigger"class="coral-Link">Coral.Component#trigger</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        </dl>
+    
+
+    
+
+    
+        <a name="events"></a>
+        <h2 class="docs-Example-subtitle coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection" id="Coral.Popover:events"><a href="#Coral.Popover:events" class="coral-Link">Events</a></h2>
+
+        <dl>
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.Popover:coral-component:attached"><a href="#Coral.Popover:coral-component:attached" class="coral-Link">coral-component:attached</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered when the component is attached to the DOM.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Callback Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Event object.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:coral-component:attached"class="coral-Link">Coral.Component#coral-component:attached</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.Popover:coral-component:detached"><a href="#Coral.Popover:coral-component:detached" class="coral-Link">coral-component:detached</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered when the component is detached to the DOM.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Callback Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Event object.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:coral-component:detached"class="coral-Link">Coral.Component#coral-component:detached</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.Popover:coral-component:ready"><a href="#Coral.Popover:coral-component:ready" class="coral-Link">coral-component:ready</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Triggerred when the component has been upgraded and is ready for use.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Callback Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Event object.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Component.html#Coral.Component:coral-component:ready"class="coral-Link">Coral.Component#coral-component:ready</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.Popover:coral-overlay:positioned"><a href="#Coral.Popover:coral-overlay:positioned" class="coral-Link">coral-overlay:positioned</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Triggered after the overlay is positioned.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Callback Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+                <h4 class="coral-Heading coral-Heading--4 params-description-heading">Event object.</h4>
+                
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event.detail.vertical</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The vertical position of the target relative to the overlay.
+        <code>top</code> when the overlay is at the bottom, <code>bottom</code> when it is at the top.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event.detail.horizontal</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The horizontal position of the target relative to the overlay.
+        <code>left</code> when the overlay is to the right, <code>right</code> when it is to the left.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event.detail.target</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The target's position.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event.detail.element</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The overlay's position.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from">Inherited From:</dt>
+	<dd class="inherited-from"><ul class="dummy"><li>
+		<a href="Coral.Overlay.html#Coral.Overlay:coral-overlay:positioned"class="coral-Link">Coral.Overlay#coral-overlay:positioned</a>
+	</li></dd>
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        </dl>
+    
+</article>
+
+</section>
+
+
+
+
+        
+       
+      </section>
+    </article>
+  </body>
+</html>

@@ -1,0 +1,2421 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Coral.commons</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light docs-Background u-coral-clearFix">
+    <article class="docs-Component">
+      <section class="docs-Component-metadata">
+        <div class="docs-Component-header">
+          <h1 id="coral.commons" guide-toc-title="Overview" class="coral-Heading coral-Heading--1 docs-Component-name js-guide-heading-toc js-guide-heading-toc--header">Coral.commons</h1><span class="docs-Component-version">Current Version: <strong>1.4.6</strong></span>
+        </div>
+        <div class="docs-Component-github"> Github: <a href="https://git.corp.adobe.com/Coral/coralui-component" class="coral-Link">coralui-component</a>
+        </div>
+        <!-- description is loaded from the template-->
+      </section>
+      <section class="docs-Component-documentation">
+        <p>
+          <code>Coral.commons</code> is Coral's utility belt. It contains shared
+          functions that are used throughout Coral.
+          
+        </p>
+        <!--<h1 class="line">Namespace: commons</h1>-->
+        
+          
+
+
+
+<section class="docs-jsDoc-container">
+
+<a name="api"></a>
+<h1 class="coral-Heading coral-Heading--1 docs-Example-header docs-jsDoc-heading--1 js-guide-heading-toc js-guide-heading-toc--section" id="Coral.commons:api"><span class="ancestors"><a href="Coral.html" class="coral-Link coral-Link">Coral</a>.</span><a href="#Coral.commons:api" class="coral-Link">commons
+ API</a></h1>
+
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        
+            <div class="description">The Coral utility belt.</div>
+        
+
+        
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+    
+
+    
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <a name="methods"></a>
+        <h2 class="docs-Example-subtitle coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection" id="Coral.commons:methods"><a href="#Coral.commons:methods" class="coral-Link">Methods</a></h2>
+
+        <dl>
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.commons:.augment"><a href="#Coral.commons:.augment" class="coral-Link"><span class="type-signature">Coral.commons.</span>augment</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Copy the properties from the source object to the destination object, but calls the callback if the property is
+  already present on the destination object.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+            <th class="coral-Table-headerCell">Optional</th>
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">dest</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+              No<br>
+            
+
+            
+            </td>
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The object to copy properties to
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">source</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+              No<br>
+            
+
+            
+            </td>
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              An object to copy properties from. Additional objects can be passed as subsequent arguments.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">handleCollision</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type"><a href="Coral.commons.html#Coral.commons:~handleCollision"class="coral-Link">Coral.commons~handleCollision</a></span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Called if the property being copied is already present on the destination.
+    The return value will be used as the property value.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    The destination object, <code>dest</code>
+    
+    {<span class="param-type">Object</span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.commons:.callAll"><a href="#Coral.commons:.callAll" class="coral-Link"><span class="type-signature">Coral.commons.</span>callAll</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Call all of the provided functions, in order, returning the return value of the specified function.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+            <th class="coral-Table-headerCell">Optional</th>
+        
+
+        
+            <th class="coral-Table-headerCell">Default</th>
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">func</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">function</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+              No<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              A function to call
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">nth</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Number</span>
+        
+        </td>
+
+        
+            <td class="coral-Table-cell attributes">
+            
+                Yes<br>
+            
+
+            
+            </td>
+        
+
+        
+            <td class="coral-Table-cell default">
+            
+                0
+            
+            </td>
+        
+
+        <td class="coral-Table-cell description last">
+            
+              A zero-based index indicating the noth argument to return the value of.
+      If the nth argument is not a function, <code>null</code> will be returned.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    The aggregate function.
+    
+    {<span class="param-type">function</span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.commons:.extend"><a href="#Coral.commons:.extend" class="coral-Link"><span class="type-signature">Coral.commons.</span>extend</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Copy the properties from all provided objects into the first object.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">dest</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The object to copy properties to
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">source</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              An object to copy properties from. Additional objects can be passed as subsequent arguments.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    The destination object, <code>dest</code>
+    
+    {<span class="param-type">Object</span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.commons:.getSubProperty"><a href="#Coral.commons:.getSubProperty" class="coral-Link"><span class="type-signature">Coral.commons.</span>getSubProperty</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Get the value of the property at the given nested path.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">root</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The root object on which the path should be traversed.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">path</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The path of the sub-property to return.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+        <dt>Throws:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    Will throw an error if the path is not present on the object.
+</div>
+
+
+
+        
+        </dd>
+        
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    The value of the provided property.
+    
+    {<span class="param-type">*</span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.commons:.getUID"><a href="#Coral.commons:.getUID" class="coral-Link"><span class="type-signature">Coral.commons.</span>getUID</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Get a unique ID.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    unique identifier.
+    
+    {<span class="param-type">String</span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.commons:.mixin"><a href="#Coral.commons:.mixin" class="coral-Link"><span class="type-signature">Coral.commons.</span>mixin</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Mix a set of mixins to a target object.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">target</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The target prototype or instance on which to apply mixins.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">mixins</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>|<span class="param-type"><a href="Coral.html#Coral:~mixin"class="coral-Link">Coral~mixin</a></span>|<span class="param-type">Array.&lt;(Object|<a href="Coral.html#Coral:~mixin">Coral~mixin</a>)></span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              A mixin or set of mixins to apply.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">options</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              An object that will be passed to functional mixins as the second argument (options).
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.commons:.nextFrame"><a href="#Coral.commons:.nextFrame" class="coral-Link"><span class="type-signature">Coral.commons.</span>nextFrame</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Execute the provided callback on the next animation frame.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">callback</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">function</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The callback to execute.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.commons:.ready"><a href="#Coral.commons:.ready" class="coral-Link"><span class="type-signature">Coral.commons.</span>ready</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Checks, if a Coral components and all nested components are ready, which means their
+    <code>_initialize</code> and <code>_render</code> methods have been called. If so, the provided callback function is executed
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">element</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">HTMLElement</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The element that should be watched for ready events.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">callback</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type"><a href="Coral.commons.html#Coral.commons:~readyCallback"class="coral-Link">Coral.commons~readyCallback</a></span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The callback to call when all components are ready.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.commons:.setSubProperty"><a href="#Coral.commons:.setSubProperty" class="coral-Link"><span class="type-signature">Coral.commons.</span>setSubProperty</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Assign an object given a nested path
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">root</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The root object on which the path should be traversed.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">path</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The path at which the object should be assignment.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">obj</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">String</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The object to assign at path.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+        <dt>Throws:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    Will throw an error if the path is not present on the object.
+</div>
+
+
+
+        
+        </dd>
+        
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.commons:.swapKeysAndValues"><a href="#Coral.commons:.swapKeysAndValues" class="coral-Link"><span class="type-signature">Coral.commons.</span>swapKeysAndValues</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Return a new object with the swapped keys and values of the provided object.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">obj</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Object</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The object to copy.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    An object with its keys as the values and values as the keys of the source object.
+    
+    {<span class="param-type">Object</span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        
+            
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.commons:.transitionEnd"><a href="#Coral.commons:.transitionEnd" class="coral-Link"><span class="type-signature">Coral.commons.</span>transitionEnd</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Execute the provided callback once a CSS transition has ended. This method listens for the next transitionEnd event on
+  the given DOM element. It cannot be used to listen continuously on transitionEnd events. If browser does not support
+  CSS transitions (e.g. IE 9) the callback is immediately called.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">element</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">HTMLElement</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The DOM element that is affected by the CSS transition.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">callback</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type"><a href="Coral.commons.html#Coral.commons:~transitionEndCallback"class="coral-Link">Coral.commons~transitionEndCallback</a></span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The callback to execute.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+        </dl>
+    
+
+    
+        <a name="typedefs"></a>
+        <h2 class="docs-Example-subtitle coral-Heading coral-Heading--2" id="Coral.commons:typedefs"><a href="#Coral.commons:typedefs" class="coral-Link">Type Definitions</a></h2>
+
+        <dl>
+                
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.commons:~handleCollision"><a href="#Coral.commons:~handleCollision" class="coral-Link"><span class="type-signature">instance.</span>handleCollision</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Called when a property already exists on the destination object.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">oldValue</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">*</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The value currently present on the destination object.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">newValue</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">*</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The value on the destination object.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">prop</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">*</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The property that collided.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">dest</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">*</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The destination object.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">source</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">*</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The source object.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+        <dt>Returns:</dt>
+        <dd>
+    
+            
+<div class="param-desc">
+    The value to use. If <code>undefined</code>, the old value will be used.
+    
+    {<span class="param-type">*</span>}
+    
+</div>
+
+
+        
+        </dd>
+        
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+            
+                
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.commons:~readyCallback"><a href="#Coral.commons:~readyCallback" class="coral-Link"><span class="type-signature">instance.</span>readyCallback</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Execute the callback once a component and sub-components are <a href="Coral.commons.html#Coral.commons:.ready"class="coral-Link">ready</a>.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">element</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">HTMLElement</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The element that is ready.
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+            
+                
+<!-- jsdoc method tmpl -->
+<dt class="docs-Method-item">
+    
+    <h3 class="name" id="Coral.commons:~transitionEndCallback"><a href="#Coral.commons:~transitionEndCallback" class="coral-Link"><span class="type-signature">instance.</span>transitionEndCallback</a></h3>
+    
+
+    
+</dt>
+
+
+<div class="description">
+    Execute the callback once a CSS transition has ended.
+</div>
+
+
+<dd>
+
+    <dl  class="details">
+    
+
+    
+
+    
+
+    
+        <dt>Parameters:</dt>
+        <dd>
+        
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+                <h4 class="coral-Heading coral-Heading--4 params-description-heading">The event passed to the callback.</h4>
+                
+
+<table class="coral-Table data params coral--light">
+    <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+        
+        <th class="coral-Table-headerCell">Name</th>
+        
+
+        <th class="coral-Table-headerCell">Type</th>
+
+        
+
+        
+
+        <th class="coral-Table-headerCell last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody class="coral-Table-body">
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event.target</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">HTMLElement</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              The DOM element that was affected by the CSS transition.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event.cssTransitionSupported</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Boolean</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Whether CSS transitions are supported by the browser.
+            
+        </td>
+    </tr>
+    
+
+    <tr class="coral-Table-row">
+        
+            <td class="coral-Table-cell name">event.transitionStoppedByTimeout</td>
+        
+
+        <td class="coral-Table-cell type">
+        
+            <span class="param-type">Boolean</span>
+        
+        </td>
+
+        
+
+        
+
+        <td class="coral-Table-cell description last">
+            
+              Whether the CSS transition has been ended by a timeout (should only happen as a fallback).
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+            
+        </td>
+    </tr>
+    
+    </tbody>
+</table>
+
+        </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    </dl>
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+  
+
+  
+
+	
+
+  
+
+	
+
+	
+</dl>
+
+</dd>
+<!-- end jsdoc method tmpl -->
+
+            </dl>
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+        
+       
+      </section>
+    </article>
+  </body>
+</html>
