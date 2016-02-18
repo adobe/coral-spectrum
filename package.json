@@ -41,7 +41,7 @@
     "coralui-component-search": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-search.git#1.1.1",
     "coralui-component-select": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-select.git#3.1.2",
     "coralui-component-selectlist": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-selectlist.git#3.0.3",
-    "coralui-component-slider": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-slider.git#3.0.5",
+    "coralui-component-slider": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-slider.git#3.0.6",
     "coralui-component-steplist": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-steplist.git#1.0.2",
     "coralui-component-switch": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-switch.git#3.0.2",
     "coralui-component-tablist": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-tablist.git#1.0.4",
