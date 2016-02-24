@@ -40,7 +40,7 @@
     "coralui-component-quickactions": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-quickactions.git#1.1.0",
     "coralui-component-radio": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-radio.git#1.0.4",
     "coralui-component-search": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-search.git#1.1.1",
-    "coralui-component-select": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-select.git#3.1.3",
+    "coralui-component-select": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-select.git#3.1.4",
     "coralui-component-selectlist": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-selectlist.git#3.0.3",
     "coralui-component-slider": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-slider.git#3.0.6",
     "coralui-component-steplist": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-steplist.git#1.0.2",
