@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Coral.Table</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light docs-Background u-coral-clearFix">
+    <article class="docs-Component">
+      <section class="docs-Component-metadata">
+        <div class="docs-Component-header">
+          <h1 id="coral.Table" guide-toc-title="Coral.Table" class="coral-Heading coral-Heading--1 docs-Component-name js-guide-heading-toc js-guide-heading-toc--header">Coral.Table</h1><span class="docs-Component-version">Current Version: <strong>3.6.3</strong></span>
+        </div>
+        <div class="docs-Component-github"> Github: <a href="https://git.corp.adobe.com/Coral/coralui-core" class="coral-Link">coralui-core</a>
+        </div>
+        <!-- description is loaded from the template-->
+      </section>
+      <section class="docs-Component-documentation">
+            <section class="docs-Example-section">
+              <div class="docs-Example-header">
+                    <h2 id="tableExamples" class="coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection"><a href="#tableExamples" class="coral-Link">Table Examples</a></h2>
+              </div>
+                      <h3 id="basic" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#basic" class="coral-Link">Basic</a></h3>
+                      <script type="text/template" id="guide-b5162fc0-6c15-4f2c-9f38-9ac9bfbef7cc"><table class="coral-Table">
+  <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+      <th class="coral-Table-headerCell">Pet Name</th>
+      <th class="coral-Table-headerCell">Type</th>
+      <th class="coral-Table-headerCell">Good/Bad</th>
+    </tr>
+  </thead>
+  <tbody class="coral-Table-body">
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Squeak</td>
+      <td class="coral-Table-cell">Mouse</td>
+      <td class="coral-Table-cell">Bad</td>
+    </tr>
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Spot</td>
+      <td class="coral-Table-cell">Dog</td>
+      <td class="coral-Table-cell">Bad</td>
+    </tr>
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Fluffy</td>
+      <td class="coral-Table-cell">Velociraptor</td>
+      <td class="coral-Table-cell">Good</td>
+    </tr>
+  </tbody>
+</table>
+
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium"><table class="coral-Table">
+  <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+      <th class="coral-Table-headerCell">Pet Name</th>
+      <th class="coral-Table-headerCell">Type</th>
+      <th class="coral-Table-headerCell">Good/Bad</th>
+    </tr>
+  </thead>
+  <tbody class="coral-Table-body">
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Squeak</td>
+      <td class="coral-Table-cell">Mouse</td>
+      <td class="coral-Table-cell">Bad</td>
+    </tr>
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Spot</td>
+      <td class="coral-Table-cell">Dog</td>
+      <td class="coral-Table-cell">Bad</td>
+    </tr>
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Fluffy</td>
+      <td class="coral-Table-cell">Velociraptor</td>
+      <td class="coral-Table-cell">Good</td>
+    </tr>
+  </tbody>
+</table>
+
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-b5162fc0-6c15-4f2c-9f38-9ac9bfbef7cc" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 id="rowHover" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#rowHover" class="coral-Link">Row Hover</a></h3>Add the <code>coral-Table--hover</code> class name to enable row hover states.
+                      <script type="text/template" id="guide-8d9b0a14-b239-4885-adf0-2e03dbe57739"><table class="coral-Table coral-Table--hover">
+  <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+      <th class="coral-Table-headerCell">Pet Name</th>
+      <th class="coral-Table-headerCell">Type</th>
+      <th class="coral-Table-headerCell">Good/Bad</th>
+    </tr>
+  </thead>
+  <tbody class="coral-Table-body">
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Mongo</td>
+      <td class="coral-Table-cell">Chihuahua</td>
+      <td class="coral-Table-cell">Bad</td>
+    </tr>
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Tiny</td>
+      <td class="coral-Table-cell">Great Dane</td>
+      <td class="coral-Table-cell">Bad</td>
+    </tr>
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Jaws</td>
+      <td class="coral-Table-cell">Pit Bull</td>
+      <td class="coral-Table-cell">Good</td>
+    </tr>
+  </tbody>
+</table>
+
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium"><table class="coral-Table coral-Table--hover">
+  <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+      <th class="coral-Table-headerCell">Pet Name</th>
+      <th class="coral-Table-headerCell">Type</th>
+      <th class="coral-Table-headerCell">Good/Bad</th>
+    </tr>
+  </thead>
+  <tbody class="coral-Table-body">
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Mongo</td>
+      <td class="coral-Table-cell">Chihuahua</td>
+      <td class="coral-Table-cell">Bad</td>
+    </tr>
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Tiny</td>
+      <td class="coral-Table-cell">Great Dane</td>
+      <td class="coral-Table-cell">Bad</td>
+    </tr>
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Jaws</td>
+      <td class="coral-Table-cell">Pit Bull</td>
+      <td class="coral-Table-cell">Good</td>
+    </tr>
+  </tbody>
+</table>
+
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-8d9b0a14-b239-4885-adf0-2e03dbe57739" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 id="bordered" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#bordered" class="coral-Link">Bordered</a></h3>Add the <code>coral-Table--bordered</code> class name to add a border.
+                      <script type="text/template" id="guide-4b01efe5-a555-4f44-bb4a-d629a08075f2"><table class="coral-Table coral-Table--bordered">
+  <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+      <th class="coral-Table-headerCell">Pet Name</th>
+      <th class="coral-Table-headerCell">Type</th>
+      <th class="coral-Table-headerCell">Good/Bad</th>
+    </tr>
+  </thead>
+  <tbody class="coral-Table-body">
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Hopper</td>
+      <td class="coral-Table-cell">Frog</td>
+      <td class="coral-Table-cell">Good</td>
+    </tr>
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Pokey</td>
+      <td class="coral-Table-cell">Porcupine</td>
+      <td class="coral-Table-cell">Good</td>
+    </tr>
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Mr. Snuggles</td>
+      <td class="coral-Table-cell">Snake</td>
+      <td class="coral-Table-cell">Bad</td>
+    </tr>
+  </tbody>
+</table>
+
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium"><table class="coral-Table coral-Table--bordered">
+  <thead class="coral-Table-head">
+    <tr class="coral-Table-row">
+      <th class="coral-Table-headerCell">Pet Name</th>
+      <th class="coral-Table-headerCell">Type</th>
+      <th class="coral-Table-headerCell">Good/Bad</th>
+    </tr>
+  </thead>
+  <tbody class="coral-Table-body">
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Hopper</td>
+      <td class="coral-Table-cell">Frog</td>
+      <td class="coral-Table-cell">Good</td>
+    </tr>
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Pokey</td>
+      <td class="coral-Table-cell">Porcupine</td>
+      <td class="coral-Table-cell">Good</td>
+    </tr>
+
+    <tr class="coral-Table-row">
+      <td class="coral-Table-cell">Mr. Snuggles</td>
+      <td class="coral-Table-cell">Snake</td>
+      <td class="coral-Table-cell">Bad</td>
+    </tr>
+  </tbody>
+</table>
+
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-4b01efe5-a555-4f44-bb4a-d629a08075f2" class="docs-Example-toggleMarkup prettyprint"></pre>
+            </section>
+      </section>
+    </article>
+  </body>
+</html>

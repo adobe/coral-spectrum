@@ -1,0 +1,1724 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for coralui-component-numberinput/scripts/Coral.NumberInput.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">coralui-component-numberinput/scripts/</a> Coral.NumberInput.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">95.28% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>101/106</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">94.2% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>65/69</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">94.74% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>36/38</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">95.28% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>101/106</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">165×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">602×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">72×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">59×</span>
+<span class="cline-any cline-yes">59×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">59×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">87×</span>
+<span class="cline-any cline-yes">71×</span>
+<span class="cline-any cline-yes">71×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">87×</span>
+<span class="cline-any cline-yes">69×</span>
+<span class="cline-any cline-yes">69×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">94×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">85×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">91×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">102×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">102×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">102×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">99×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">99×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">85×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">85×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">85×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">187×</span>
+<span class="cline-any cline-yes">187×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">23×</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">85×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">85×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">85×</span>
+<span class="cline-any cline-yes">85×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">85×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">85×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2014 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+(function() {
+  'use strict';
+&nbsp;
+  Coral.register( /** @lends Coral.NumberInput# */ {
+    /**
+      @class Coral.NumberInput
+      @classdesc A NumberInput component
+      @extends Coral.Component
+      @extends Coral.mixin.formField
+      @htmltag coral-numberinput
+    */
+    name: 'NumberInput',
+    tagName: 'coral-numberinput',
+    className: 'coral-InputGroup',
+&nbsp;
+    mixins: [
+      Coral.mixin.formField
+    ],
+&nbsp;
+    events: {
+      'key:up': '_onKeyUp',
+      'key:pageup': '_onKeyUp',
+      'key:down': '_onKeyDown',
+      'key:pagedown': '_onKeyDown',
+      'key:home': '_onKeyHome',
+      'key:end': '_onKeyEnd',
+&nbsp;
+      'click [handle=stepUp]': '_onStepUpButtonClick',
+      'click [handle=stepDown]': '_onStepDownButtonClick',
+&nbsp;
+      'mousewheel [handle="$input"]': '_onInputMouseWheel',
+      'DOMMouseScroll [handle="$input"]': '_onInputMouseWheel',
+&nbsp;
+      'focusin': '_onFocus',
+      'focusout': '_onBlur'
+    },
+&nbsp;
+    properties: {
+      // JSDoc inherited
+      'value': {
+        transform: function(value) {
+          return isNaN(value) ? '' : String(value);
+        },
+        get: function() {
+          return this._elements.input.value;
+        },
+        set: function(value) {
+          // sets the value immediately so it is picked up in form submits
+          this._elements.input.value = value;
+        },
+        alsoSync: ['invalid', 'disabled'],
+        sync: function() {
+          // @a11y: aria-valuetext is used so that VoiceOver does not announce a percentage
+          this._elements.input.setAttribute('aria-valuenow', this.value);
+          this._elements.input.setAttribute('aria-valuetext', this.value);
+        }
+      },
+&nbsp;
+      /**
+        The value returned as a Number. Value is &lt;code&gt;NaN&lt;/code&gt; if conversion to Number is not possible.
+&nbsp;
+        @type {Number}
+        @default NaN
+        @memberof Coral.NumberInput#
+      */
+      'valueAsNumber': {
+        attribute: null,
+        transform: Coral.transform.float,
+        get: function() {
+          return parseFloat(this.value);
+        },
+        set: function(value) {
+          // sets the value immediately so it is picked up in form submits
+          this._elements.input.value = value;
+&nbsp;
+          this._queueSync('value', 'invalid', 'disabled');
+        }
+      },
+&nbsp;
+      /**
+        The minimum value for the NumberInput. If a value below the minimum is set, the NumberInput will be marked as
+        invalid but the value will be preserved. Stepping down the NumberInput via {@link Coral.NumberInput#stepDown}
+        or the decrement button respects the minimum value. It reflects the &lt;code&gt;min&lt;/code&gt; attribute to the DOM.
+&nbsp;
+        @type {?Number}
+        @default null
+        @htmlattribute min
+        @htmlattributereflected
+        @memberof Coral.NumberInput#
+      */
+      'min': {
+        default: null,
+        reflectAttribute: true,
+        transform: Coral.transform.number,
+        alsoSync: ['invalid', 'disabled'],
+        sync: function() {
+          if (this.min === null) {
+            this._elements.input.removeAttribute('aria-valuemin');
+            this._elements.input.removeAttribute('min');
+          }
+          else {
+            // sets the min in the input so that keyboard handles this component
+            this._elements.input.setAttribute('aria-valuemin', this.min);
+            this._elements.input.min = this.min;
+          }
+        }
+      },
+&nbsp;
+      /**
+        The maximum value for the NumberInput. If a value above the maximum is set, the NumberInput will be marked as
+        invalid but the value will be preserved. Stepping up the NumberInput via {@link Coral.NumberInput#stepUp} or
+        the increment button respects the maximum value. It reflects the &lt;code&gt;max&lt;/code&gt; attribute to the DOM.
+&nbsp;
+        @type {?Number}
+        @default null
+        @htmlattribute max
+        @htmlattributereflected
+        @memberof Coral.NumberInput#
+      */
+      'max': {
+        default: null,
+        reflectAttribute: true,
+        transform: Coral.transform.number,
+        alsoSync: ['invalid', 'disabled'],
+        sync: function() {
+          if (this.max === null) {
+            this._elements.input.removeAttribute('aria-valuemax');
+            this._elements.input.removeAttribute('max');
+          }
+          else {
+            // sets the max in the input so that keyboard handles this component
+            this._elements.input.setAttribute('aria-valuemax', this.max);
+            this._elements.input.max = this.max;
+          }
+        }
+      },
+&nbsp;
+      /**
+        The amount to increment by when stepping up or down. It only accepts positive values.
+&nbsp;
+        @type {Number}
+        @default 1
+        @htmlattribute step
+        @htmlattributereflected
+        @memberof Coral.NumberInput#
+      */
+      'step': {
+        default: 1,
+        transform: Coral.transform.number,
+        validate: [
+          Coral.validate.valueMustChange,
+          function(newValue, oldValue) {
+            // step value has to be a positive number
+            return newValue !== null &amp;&amp; newValue &gt; 0;
+          }
+        ],
+        sync: function() {
+          this._elements.input.step = this.step;
+        }
+      },
+&nbsp;
+      // JSDoc inherited
+      'name': {
+        get: function() {
+          return this._elements.input.name;
+        },
+        set: function(value) {
+          this._elements.input.name = value;
+        }
+      },
+&nbsp;
+      // JSDoc inherited
+      'disabled': {
+        sync: function() {
+          this.$.toggleClass('is-disabled', this.disabled);
+&nbsp;
+          this._elements.input.disabled = this.disabled;
+&nbsp;
+          this._setButtonState();
+        }
+      },
+&nbsp;
+      // JSDoc inherited
+      'invalid': {
+        sync: function() {
+          this.$.toggleClass('is-invalid', this.invalid);
+&nbsp;
+          this._elements.input.invalid = this.invalid;
+        }
+      },
+&nbsp;
+      // JSDoc inherited
+      'readOnly': {
+        sync: function() {
+          this._elements.input.readOnly = this.readOnly;
+&nbsp;
+          this._setButtonState();
+        }
+      },
+&nbsp;
+      // JSDoc inherited
+      'required': {
+        sync: function() {
+          this._elements.input.required = this.required;
+        }
+      },
+&nbsp;
+      // JSDoc inherited
+      'labelledBy': {
+        sync: function() {
+          // in case the user focuses the buttons, he will still get a notion of the usage of the component
+          this[this.labelledBy ? 'setAttribute' : 'removeAttribute']('aria-labelledby', this.labelledBy);
+        }
+      },
+&nbsp;
+      /**
+        Short hint that describes the expected value of the NumberInput. It is displayed when the NumberInput is empty.
+&nbsp;
+        @type {String}
+        @default ""
+        @htmlattribute placeholder
+        @htmlattributereflected
+        @memberof Coral.NumberInput#
+      */
+      'placeholder': {
+        reflectAttribute: true,
+        transform: Coral.transform.string,
+        get: function() {
+          return this._elements.input.placeholder;
+        },
+        set: function(value) {
+          this._elements.input.placeholder = value;
+        }
+      }
+    },
+&nbsp;
+    /**
+      Increments the value by &lt;code&gt;step&lt;/code&gt;. If the current value is &lt;code&gt;null&lt;/code&gt; or &lt;code&gt;''&lt;/code&gt;, it is
+      considered as 0. The new value will always respect the &lt;code&gt;min&lt;/code&gt; and &lt;code&gt;max&lt;/code&gt; values if available.
+    */
+    stepUp: function() {
+      // uses the Number representation since it simplifies the calculations
+      var value = this.valueAsNumber;
+&nbsp;
+      if (isNaN(value)) {
+        this.value = this.max !== null ? Math.min(this.step, this.max) : this.step;
+      }
+      else {
+        this.value = this.max !== null ? Math.min(value + this.step, this.max) : value + this.step;
+      }
+    },
+&nbsp;
+    /**
+      Decrements the value by &lt;code&gt;step&lt;/code&gt;. If the current value is &lt;code&gt;null&lt;/code&gt; or &lt;code&gt;''&lt;/code&gt;, it is
+      considered as 0. The new value will always respect the &lt;code&gt;min&lt;/code&gt; and &lt;code&gt;max&lt;/code&gt; values if available.
+    */
+    stepDown: function() {
+      // uses the Number representation since it simplifies the calculations
+      var value = this.valueAsNumber;
+&nbsp;
+      if (isNaN(value)) {
+        this.value = this.min !== null ? Math.max(-this.step, this.min) : -this.step;
+      }
+      else {
+        this.value = this.min !== null ? Math.max(value - this.step, this.min) : value - this.step;
+      }
+    },
+&nbsp;
+    /**
+      Checks if the current NumberInput is valid or not. This is done by checking that the current value is between the
+      provided &lt;code&gt;min&lt;/code&gt; and &lt;code&gt;max&lt;/code&gt; values. This check is only performed on user interaction.
+&nbsp;
+      @ignore
+    */
+    _validateInputValue: function() {
+      this.invalid = this.value !== '' &amp;&amp; (window.isNaN(Number(this.value)) ||
+        (this.max !== null &amp;&amp; this.value &gt; this.max || this.min !== null &amp;&amp; this.value &lt; this.min));
+    },
+&nbsp;
+    /**
+      Sets the correct state of the buttons based on &lt;code&gt;disabled&lt;/code&gt;, &lt;code&gt;min&lt;/code&gt;, &lt;code&gt;max&lt;/code&gt; and
+      &lt;code&gt;readOnly&lt;/code&gt; properties.
+&nbsp;
+      @ignore
+    */
+    _setButtonState: function() {
+      this._elements.stepUp.disabled = this.disabled || (this.max !== null &amp;&amp; this.value &gt;= this.max) || this.readOnly;
+      this._elements.stepDown.disabled = this.disabled || (this.min !== null &amp;&amp; this.value &lt;= this.min) || this.readOnly;
+    },
+&nbsp;
+    /**
+      Triggers a change event. This is only done if the provided values are different.
+&nbsp;
+      @param {String} newValue
+        The new value of the component.
+      @param {String} oldValue
+        The old value of the component.
+&nbsp;
+      @private
+    */
+    _triggerChange: function(newValue, oldValue) {
+      // if the underlaying value stayed the same, there no need to trigger an event
+      if (newValue !== oldValue) {
+        this.trigger('change');
+      }
+    },
+&nbsp;
+    /**
+      Handles the click on the step up button. It causes the NumberInput to step up its value and returns the focus back
+      to the input. This way the clicked button does not get focus.
+&nbsp;
+      @fires Coral.mixin.formField#change
+      @ignore
+    */
+    _onStepUpButtonClick: function(event) {
+      event.preventDefault();
+&nbsp;
+      // stores the old value before stepup
+      var oldValue = this.value;
+&nbsp;
+      this.stepUp();
+&nbsp;
+      // we only do this on user interaction
+      this._validateInputValue();
+&nbsp;
+      // checks if we need to trigger a change event
+      this._triggerChange(this.value, oldValue);
+    },
+&nbsp;
+    /**
+      Handles the click on the step down button. It causes the NumberInput to step down its value and returns the focus
+      back to the input. This way the clicked button does not get focus.
+&nbsp;
+      @fires Coral.mixin.formField#change
+      @ignore
+    */
+    _onStepDownButtonClick: function(event) {
+      event.preventDefault();
+&nbsp;
+      // stores the old value before stepdown
+      var oldValue = this.value;
+&nbsp;
+      this.stepDown();
+&nbsp;
+      // we only do this on user interaction
+      this._validateInputValue();
+&nbsp;
+      // checks if we need to trigger a change event
+      this._triggerChange(this.value, oldValue);
+    },
+&nbsp;
+    /**
+      Handles the home key press. If a max has been set, the value will be modified to match it, otherwise the key is
+      ignored.
+&nbsp;
+      @ignore
+    */
+    _onKeyHome: function(event) {
+      event.preventDefault();
+&nbsp;
+      // stops interaction if the numberinput is disabled or readonly
+      if (this.disabled || this.readOnly) {
+        return;
+      }
+&nbsp;
+      // sets the max value only if it exists
+      if (this.max !== null) {
+        // stores the old value before setting the max
+        var oldValue = this.value;
+&nbsp;
+        this.value = this.max;
+&nbsp;
+        // checks if we need to trigger a change event
+        this._triggerChange(this.value, oldValue);
+      }
+    },
+&nbsp;
+    /**
+      Handles the end key press. If a min has been set, the value will be modified to match it, otherwise the key is
+      ignored.
+&nbsp;
+      @ignore
+    */
+    _onKeyEnd: function(event) {
+      event.preventDefault();
+&nbsp;
+      // stops interaction if the numberinput is disabled or readonly
+      if (this.disabled || this.readOnly) {
+        return;
+      }
+&nbsp;
+      // sets the min value only if it exists
+      if (this.min !== null) {
+        // stores the old value before setting the min
+        var oldValue = this.value;
+&nbsp;
+        this.value = this.min;
+&nbsp;
+        // checks if we need to trigger a change event
+        this._triggerChange(this.value, oldValue);
+      }
+    },
+&nbsp;
+    /**
+      Handles the up action by steping up the NumberInput. It prevents the default action.
+&nbsp;
+      @ignore
+    */
+    _onKeyUp: function(event) {
+      event.preventDefault();
+&nbsp;
+      // stops interaction if the numberinput is disabled or readonly
+      if (this.disabled || this.readOnly) {
+        return;
+      }
+&nbsp;
+      this._onStepUpButtonClick(event);
+    },
+&nbsp;
+    /**
+      Handles the down action by steping down the NumberInput. It prevents the default action.
+&nbsp;
+      @ignore
+    */
+    _onKeyDown: function(event) {
+      event.preventDefault();
+&nbsp;
+      // stops interaction if the numberinput is disabled or readonly
+      if (this.disabled || this.readOnly) {
+        return;
+      }
+&nbsp;
+      this._onStepDownButtonClick(event);
+    },
+&nbsp;
+    /**
+      Handles the Mousewheel to increment/decrement values.
+&nbsp;
+      @ignore
+    */
+    _onInputMouseWheel: function(event) {
+      event.preventDefault();
+&nbsp;
+      // stops interaction if the numberinput is disabled or readonly
+      if (this.disabled || this.readOnly) {
+        return;
+      }
+&nbsp;
+      // stores the old value to calculate the change
+      var oldValue = this.value;
+&nbsp;
+      var delta = Math.max(-1, Math.min(1, (event.wheelDelta || <span class="branch-1 cbranch-no" title="branch not covered" >-event.detail </span>|| <span class="branch-2 cbranch-no" title="branch not covered" >event.deltaY)</span>));
+      if (delta &lt; 0) {
+        this.stepDown();
+      }
+      else {
+        this.stepUp();
+      }
+&nbsp;
+      // checks if we need to trigger a change event
+      this._triggerChange(this.value, oldValue);
+    },
+&nbsp;
+    /**
+      Overrides the method from formField to be able to add validation after the user has changed the value.
+&nbsp;
+      @private
+    */
+    _onInputChange: function(event) {
+      // stops the current event
+      event.stopPropagation();
+&nbsp;
+      // we only do this on user interaction
+      this._validateInputValue();
+&nbsp;
+      // we force the sync of the value,invalid and disabled properties
+      this._queueSync('value', 'invalid', 'disabled');
+&nbsp;
+      // we always trigger a change since it came from user interaction
+      this.trigger('change');
+    },
+&nbsp;
+    /**
+      Handles focus event.
+&nbsp;
+      @ignore
+    */
+    _onFocus: <span class="fstat-no" title="function not covered" >function(event) {</span>
+<span class="cstat-no" title="statement not covered" >      this.$.addClass('is-focused');</span>
+<span class="cstat-no" title="statement not covered" >      this._elements.$input.addClass('is-focused');</span>
+    },
+&nbsp;
+    /**
+      Handles blur event.
+&nbsp;
+      @ignore
+    */
+    _onBlur: <span class="fstat-no" title="function not covered" >function(event) {</span>
+      // if the active element is not inside we remove the class
+<span class="cstat-no" title="statement not covered" >      if (!this.contains(document.activeElement)) {</span>
+<span class="cstat-no" title="statement not covered" >        this.$.removeClass('is-focused');</span>
+<span class="cstat-no" title="statement not covered" >        this._elements.$input.removeClass('is-focused');</span>
+      }
+    },
+&nbsp;
+    /**
+      Modified to target the input instead of the button. This is used by the Coral.mixin.formField to be able to
+      properly label the component.
+&nbsp;
+      @private
+    */
+    _getLabellableElement: function() {
+      return this._elements.input;
+    },
+&nbsp;
+    /** @ignore */
+    _initialize: function() {
+      this.setAttribute('role', 'group');
+&nbsp;
+      this._elements.input.setAttribute('role', 'spinbutton');
+&nbsp;
+      // sets the very initial aria values, in case the 'value' property is never set
+      this._elements.input.setAttribute('aria-valuenow', '');
+      this._elements.input.setAttribute('aria-valuetext', '');
+    },
+&nbsp;
+    /** @ignore */
+    _render: function() {
+      // clean up
+      while (this.firstChild) {
+        this.removeChild(this.firstChild);
+      }
+&nbsp;
+      this.appendChild(Coral.templates.NumberInput.base.call(this._elements));
+    }
+  });
+}());
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Feb 29 2016 21:23:37 GMT-0800 (PST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

@@ -1,0 +1,1295 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for coralui-mixin-formfield/scripts/Coral.mixin.formField.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">coralui-mixin-formfield/scripts/</a> Coral.mixin.formField.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">92.65% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>63/68</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">87.23% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>41/47</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">82.35% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>14/17</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">92.65% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>63/68</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1100×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1433×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1075×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1035×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">66×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">62×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">62×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-yes">146×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">142×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">196×</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">176×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">24×</span>
+<span class="cline-any cline-yes">46×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">46×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">24×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2014 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+(function() {
+  'use strict';
+&nbsp;
+  // https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories
+  var LABELLABLE_ELEMENTS_SELECTOR = 'button,input:not([type=hidden]),keygen,meter,output,progress,select,textarea';
+&nbsp;
+  var properties = {
+    /**
+      Whether this field is disabled or not.
+&nbsp;
+      @type {Boolean}
+      @default false
+      @htmlattribute disabled
+      @htmlattributereflected
+      @memberof Coral.mixin.formField#
+    */
+    'disabled': {
+      default: false,
+      reflectAttribute: true,
+      transform: Coral.transform.boolean,
+      attributeTransform: Coral.transform.booleanAttr,
+      sync: function() {
+        this.setAttribute('aria-disabled', this.disabled);
+      }
+    },
+&nbsp;
+    /**
+      Whether the current value of this field is invalid or not.
+&nbsp;
+      @type {Boolean}
+      @default false
+      @htmlattribute invalid
+      @htmlattributereflected
+      @memberof Coral.mixin.formField#
+    */
+    'invalid': {
+      default: false,
+      reflectAttribute: true,
+      transform: Coral.transform.boolean,
+      attributeTransform: Coral.transform.booleanAttr,
+      sync: function() {
+        this.setAttribute('aria-invalid', this.invalid);
+      }
+    },
+&nbsp;
+    /**
+      Name used to submit the data in a form.
+&nbsp;
+      @type {String}
+      @default ""
+      @htmlattribute name
+      @htmlattributereflected
+      @memberof Coral.mixin.formField#
+    */
+    'name': {
+      default: '',
+      reflectAttribute: true,
+      transform: Coral.transform.string
+    },
+&nbsp;
+    /**
+      Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
+      This is ignored for checkbox, radio or fileupload.
+&nbsp;
+      @type {Boolean}
+      @default false
+      @htmlattribute readonly
+      @htmlattributereflected
+      @memberof Coral.mixin.formField#
+    */
+    'readOnly': {
+      default: false,
+      reflectAttribute: true,
+      attribute: 'readonly',
+      transform: Coral.transform.boolean,
+      attributeTransform: Coral.transform.booleanAttr,
+      sync: function() {
+        this.setAttribute('aria-readonly', this.readOnly);
+      }
+    },
+&nbsp;
+    /**
+      Whether this field is required or not.
+&nbsp;
+      @type {Boolean}
+      @default false
+      @htmlattribute required
+      @htmlattributereflected
+      @memberof Coral.mixin.formField#
+    */
+    'required': {
+      default: false,
+      reflectAttribute: true,
+      transform: Coral.transform.boolean,
+      attributeTransform: Coral.transform.booleanAttr,
+      sync: function() {
+        this.setAttribute('aria-required', this.required);
+      }
+    },
+&nbsp;
+    /**
+      This field's current value.
+&nbsp;
+      @type {String}
+      @default ""
+      @htmlattribute value
+      @memberof Coral.mixin.formField#
+&nbsp;
+      @fires Coral.mixin.formField#change
+    */
+    'value': {
+      default: '',
+      transform: Coral.transform.string
+    },
+&nbsp;
+    /**
+      Reference to a space delimited set of ids for the HTML elements that provide a label for the formField.
+      Implementers should override this method to ensure that the appropriate descendant elements are labelled using the
+      &lt;code&gt;aria-labelledby&lt;/code&gt; attribute. This will ensure that the component is properly identified for
+      accessibility purposes. It reflects the &lt;code&gt;aria-labelledby&lt;/code&gt; attribute to the DOM.
+&nbsp;
+      @type {?String}
+      @default null
+      @htmlattribute labelledby
+      @memberof Coral.mixin.formField#
+    */
+    'labelledBy': {
+      attribute: 'labelledby',
+      transform: Coral.transform.string,
+      get: function() {
+        return this._getLabellableElement().getAttribute('aria-labelledby');
+      },
+      set: function(value) {
+        // gets the element that will get the label assigned. the _getLabellableElement method should be overriden to
+        // allow other bevaviors.
+        var element = this._getLabellableElement();
+        // we get and assign the it that will be passed around
+        var elementId = element.id = element.id || Coral.commons.getUID();
+&nbsp;
+        var currentLabelledBy = element.getAttribute('aria-labelledby');
+&nbsp;
+        // we clear the old label asignments
+        if (currentLabelledBy &amp;&amp; currentLabelledBy !== value) {
+          this._updateForAttributes(currentLabelledBy, elementId, true);
+        }
+&nbsp;
+        if (value) {
+          element.setAttribute('aria-labelledby', value);
+          <span class="missing-if-branch" title="else path not taken" >E</span>if ($(element).is(LABELLABLE_ELEMENTS_SELECTOR)) {
+            this._updateForAttributes(value, elementId);
+          }
+        }
+        else {
+          // since no labelledby value was set, we remove everything
+          element.removeAttribute('aria-labelledby');
+        }
+      }
+    }
+  };
+&nbsp;
+  // Methods to add
+  var methods = {
+    /**
+      Gets the element that should get the label. In case none of the valid labelelable items are found, the component
+      will be labelled instead.
+&nbsp;
+      @protected
+      @memberof Coral.mixin.formField#
+&nbsp;
+      @returns {HTMLElement} the labellable element.
+    */
+    _getLabellableElement: function() {
+      var element = this.querySelector(LABELLABLE_ELEMENTS_SELECTOR);
+&nbsp;
+      // Use the found element or the container
+      return element || <span class="branch-1 cbranch-no" title="branch not covered" >this;</span>
+    },
+&nbsp;
+    /**
+      @protected
+      @memberof Coral.mixin.formField#
+    */
+    _onInputChange: function(event) {
+      // stops the current event
+      event.stopPropagation();
+&nbsp;
+      this[this._componentTargetProperty] = event.target[this._eventTargetProperty];
+&nbsp;
+      // Explicitly re-emit the change event after the property has been set
+      if (this._triggerChangeEvent) {
+        this.trigger('change');
+      }
+    },
+&nbsp;
+    /**
+      Resets the formField when a reset is triggered on the parent form.
+&nbsp;
+      @protected
+      @memberof Coral.mixin.formField#
+    */
+    _onFormReset: <span class="fstat-no" title="function not covered" >function(event) {</span>
+<span class="cstat-no" title="statement not covered" >      if (event.target.contains(this)) {</span>
+<span class="cstat-no" title="statement not covered" >        this.reset();</span>
+      }
+    },
+&nbsp;
+    /**
+      A utility method for adding the appropriate &lt;code&gt;for&lt;/code&gt; attribute to any &lt;code&gt;label&lt;/code&gt; elements
+      referenced by the &lt;code&gt;labelledBy&lt;/code&gt; property value.
+&nbsp;
+      @param {String} labelledBy
+        The value of the &lt;code&gt;labelledBy&lt;code&gt; property providing a space-delimited list of the &lt;code&gt;id&lt;/code&gt;
+        attributes for elements that label the formField.
+      @param {String} elementId
+        The &lt;code&gt;id&lt;/code&gt; of the formField or one of its descendants that should be labelled by
+        &lt;code&gt;label&lt;/code&gt; elements referenced by the &lt;code&gt;labelledBy&lt;/code&gt; property value.
+      @param {Boolean} remove
+        Whether the existing &lt;code&gt;for&lt;/code&gt; attributes should be removed.
+&nbsp;
+      @protected
+      @memberof Coral.mixin.formField#
+    */
+    _updateForAttributes: function(labelledBy, elementId, remove) {
+      // labelledby contains whitespace sparated items, so we need to separate each individual id
+      var labelIds = labelledBy.split(/\s+/);
+      // we update the 'for' attribute for every id.
+      labelIds.forEach(function(currentValue) {
+        var labelElement = document.getElementById(currentValue);
+        if (labelElement &amp;&amp; labelElement.tagName === 'LABEL') {
+          var forAttribute = labelElement.getAttribute('for');
+&nbsp;
+          if (remove) {
+            // we just remove it when it is our target
+            if (forAttribute === elementId) {
+              labelElement.removeAttribute('for');
+            }
+          }
+          else {
+            // if we do not have to remove, it does not matter the current value of the label, we can set it in every
+            // case
+            labelElement.setAttribute('for', elementId);
+          }
+        }
+      });
+    },
+&nbsp;
+    /**
+      Clears the &lt;code&gt;value&lt;/code&gt; of formField to the default value.
+    */
+    clear: <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >      this.value = '';</span>
+    },
+&nbsp;
+    /**
+      Resets the &lt;code&gt;value&lt;/code&gt; to the initial value.
+    */
+    reset: <span class="fstat-no" title="function not covered" >function() {</span>
+&nbsp;
+    }
+  };
+&nbsp;
+  // Events to add
+  var events = {
+    'capture:change input': '_onInputChange',
+    'global:reset': '_onFormReset'
+  };
+&nbsp;
+  // The properties whose set/get methods must be implemented by the component we're mixed into
+  var requiredPropertySet = [
+    'name',
+    'value'
+  ];
+&nbsp;
+  // Props we should not add if we inhert from HTMLInputElement
+  var defaultProps = [
+    'disabled',
+    'name',
+    'required',
+    'readOnly',
+    'value'
+  ];
+&nbsp;
+  // Basic properties to add to the prototype
+  var basicProperties = {
+    /**
+      Target property inside the component that will be updated when a change event is triggered.
+&nbsp;
+      @type {String}
+      @default "value"
+      @protected
+      @memberof Coral.mixin.formField#
+    */
+    _componentTargetProperty: 'value',
+&nbsp;
+    /**
+      Target property that will be taken from &lt;code&gt;event.target&lt;/code&gt; and set into
+      {@link Coral.mixin.formField#_componentTargetProperty} when a change event is triggered.
+&nbsp;
+      @type {String}
+      @default "value"
+      @protected
+      @memberof Coral.mixin.formField#
+    */
+    _eventTargetProperty: 'value',
+&nbsp;
+&nbsp;
+    /**
+      Whether the change event needs to be triggered when {@link Coral.mixin.formField#_onInputChange} is called.
+&nbsp;
+      @type {Boolean}
+      @default true
+      @protected
+      @memberof Coral.mixin.formField#
+    */
+    _triggerChangeEvent: true
+  };
+&nbsp;
+  /**
+    Configure a component to have the basic properties that are expected inside a form.
+&nbsp;
+    @class
+  */
+  Coral.mixin.formField = function(prototype, options) {
+    // Add methods
+    Coral.commons.augment(prototype, methods, function(objectMethod, mixinMethod, propName) {
+      // Use the provided methods if overridden
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (propName === 'reset' || propName === 'clear' || propName === '_onInputChange' || propName === '_getLabellableElement') {
+        return objectMethod;
+      }
+<span class="cstat-no" title="statement not covered" >      return Coral.commons.callAll(mixinMethod, objectMethod);</span>
+    });
+&nbsp;
+    // Define events, letting the object override the mixin
+    prototype._events = Coral.commons.augment({}, prototype._events, events);
+&nbsp;
+    // Define basic properties, letting the object override the mixin
+    Coral.commons.augment(prototype, basicProperties);
+&nbsp;
+    // Only try to include properties that are not defined in this or any parent prototype
+    var targetProperties = {};
+    var prop;
+&nbsp;
+    // Check if the prototype inherits from HTMLInputElement
+    var skipDefaultProps = false;
+    var curProto = prototype;
+    while (curProto) {
+      if (curProto === HTMLInputElement.prototype || curProto === HTMLTextAreaElement.prototype) {
+        skipDefaultProps = true;
+        break;
+      }
+      curProto = Object.getPrototypeOf(curProto);
+    }
+&nbsp;
+    for (prop in properties) {
+      // Skip properties implemented by HTMLInputElement if necessary
+      if (skipDefaultProps &amp;&amp; defaultProps.indexOf(prop) !== -1) {
+        continue;
+      }
+      targetProperties[prop] = properties[prop];
+    }
+&nbsp;
+    // Property sync is not reinforced if they were not added
+    if (!skipDefaultProps) {
+      // Throw if required set methods are not implemented
+      requiredPropertySet.forEach(function(propName) {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!targetProperties[propName]) {
+          // Do not complain if it is already implemented
+<span class="cstat-no" title="statement not covered" >          return;</span>
+        }
+&nbsp;
+        if (
+          !options.properties[propName] ||
+          typeof options.properties[propName].set !== 'function' ||
+          typeof options.properties[propName].get !== 'function'
+        ) {
+          throw new Error('Coral.mixin.formField: You must implement properties.' + propName +
+            '.set() and properties.' + propName + '.get()');
+        }
+      });
+    }
+&nbsp;
+    // Augment property descriptors
+    Coral.register.augmentProperties(options.properties, targetProperties);
+  };
+&nbsp;
+  /**
+    Triggered when the value has changed. This event is only triggered by user interaction.
+&nbsp;
+    @event Coral.mixin.formField#change
+&nbsp;
+    @param {Object} event
+      Event object.
+  */
+}());
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Feb 29 2016 21:23:37 GMT-0800 (PST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Styles</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="../js/coral.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light">
+    <section class="docs-Component guide-Shared-documentation">
+      <div class="docs-Component-header">
+        <h1 class="coral-Heading coral-Heading--1 docs-Component-name">Styles</h1>
+      </div>
+          <section class="docs-Example-section">
+            <div class="docs-Example-header">
+                  <h2 id="conventions" class="coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection"><a href="#conventions" class="coral-Link">Conventions</a></h2>
+            </div>
+            <p>CoralUI follows SUIT conventions for CSS class. SUIT defines a way to differentiate between components, sub-components (descendents), and modifiers. Additionally, all classes are prefixed with 'coral' to elimininate conflicts with other CSS.
+                  <label class="coral-Label guide-Example-caption">The generalized SUIT convention:</label>
+                  <div class="u-columnLarge">
+                        <pre id="guide-9d91606c-4ecb-42b5-a217-6edf945358c9" data-src-id="guide-9d91606c-4ecb-42b5-a217-6edf945358c9" class="prettyprint docs-Example-snippet">
+                          class="coral-ComponentName-descendentName--modifierName"
+                          </pre>
+                  </div>
+                  <label class="coral-Label guide-Example-caption">A large modifier of the Alert component:</label>
+                  <div class="u-columnLarge">
+                        <pre id="guide-34b2cb1a-18b3-4222-aa63-aa28a586e5ee" data-src-id="guide-34b2cb1a-18b3-4222-aa63-aa28a586e5ee" class="prettyprint docs-Example-snippet">
+                          class="coral-Alert--large"
+                          </pre>
+                  </div>
+                  <label class="coral-Label guide-Example-caption">The title descendant of the Alert component:</label>
+                  <div class="u-columnLarge">
+                        <pre id="guide-c571bc59-ae73-4735-9db9-c8c155d3f987" data-src-id="guide-c571bc59-ae73-4735-9db9-c8c155d3f987" class="prettyprint docs-Example-snippet">
+                          class="coral-Alert-title"
+                          </pre>
+                  </div>
+              <p>Please see the <a href="https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md" target="_blank">SUIT documentation</a> for more information.</p>
+            </p>
+          </section>
+          <section class="docs-Example-section">
+            <div class="docs-Example-header">
+                  <h2 id="opt-inStyling" class="coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection"><a href="#opt-inStyling" class="coral-Link">Opt-in Styling</a></h2>
+            </div>
+            <p>Compatibility with consumer code is a primary goal for CoralUI and is attained using an opt-in approach for styling. As such, elements will typically not receive CoralUI styles until a CoralUI-specific class name (e.g. <code>coral-*</code> has been added to the element, or an ancestor element in cases where the styles cascade.</p>
+            <p>Themes (which include backgrounds, typography, and colors), links, headings, and lists are areas where some consumers may incorrectly assume that styles will automatically be applied. Please review the respective documentation to see how styles are correctly applied in such cases.</p>
+          </section>
+          <section class="docs-Example-section">
+            <div class="docs-Example-header">
+                  <h2 id="browserConsistency" class="coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection"><a href="#browserConsistency" class="coral-Link">Browser consistency</a></h2>
+            </div>
+            <p>Another primary goal for CoralUI is to provide a consistent experience across browsers. CoralUI comes bundled with <a href="http://necolas.github.io/normalize.css/" target="_blank">normalize.css</a> which makes browsers render all elements more consistently and only targets styles that need normalizing.  While CoralUI goes to great lengths to avoid conflicts with consumer code, normalize.css does automatically adjust some elements. Its effects are minimal, but please poke around your application after introducing CoralUI to ensure everything still renders as expected.</p>
+          </section>
+          <section class="docs-Example-section">
+            <div class="docs-Example-header">
+                  <h2 id="fontsAndWeights" class="coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection"><a href="#fontsAndWeights" class="coral-Link">Fonts and Weights</a></h2>
+            </div>
+            <p>
+              The following table demonstrates the different font familes available in
+              CoralUI by default.  They are shown in different styles and weights.
+              
+            </p>
+            <table class="coral-Table">
+              <thead>
+                <tr class="coral-Table-row">
+                  <th class="coral-Table-headerCell">font-family</th>
+                  <th class="coral-Table-headerCell">font-weight</th>
+                  <th class="coral-Table-headerCell">font-style</th>
+                  <th class="coral-Table-headerCell">sample</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="coral-Table-cell">adobe-clean</td>
+                  <td class="coral-Table-cell">normal</td>
+                  <td class="coral-Table-cell">normal</td>
+                  <td class="coral-Table-cell">The quick brown fox jumped over the lazy sleeping dog.</td>
+                </tr>
+                <tr>
+                  <td class="coral-Table-cell">adobe-clean</td>
+                  <td class="coral-Table-cell u-bold">bold</td>
+                  <td class="coral-Table-cell">normal</td>
+                  <td class="coral-Table-cell u-bold">The quick brown fox jumped over the lazy sleeping dog.</td>
+                </tr>
+                <tr>
+                  <td class="coral-Table-cell">adobe-clean</td>
+                  <td class="coral-Table-cell">normal</td>
+                  <td class="coral-Table-cell u-italic">italic</td>
+                  <td class="coral-Table-cell u-italic">The quick brown fox jumped over the lazy sleeping dog.</td>
+                </tr>
+                <tr>
+                  <td class="coral-Table-cell">adobe-clean</td>
+                  <td class="coral-Table-cell u-bold">bold</td>
+                  <td class="coral-Table-cell u-italic">italic</td>
+                  <td class="coral-Table-cell u-bold u-italic">The quick brown fox jumped over the lazy sleeping dog.</td>
+                </tr>
+                <tr>
+                  <td class="coral-Table-cell">adobe-clean</td>
+                  <td class="coral-Table-cell u-weight--300">300</td>
+                  <td class="coral-Table-cell">normal</td>
+                  <td class="coral-Table-cell u-weight--300">The quick brown fox jumped over the lazy sleeping dog.</td>
+                </tr>
+                <tr>
+                  <td class="coral-Table-cell">adobe-clean</td>
+                  <td class="coral-Table-cell u-weight--300">300</td>
+                  <td class="coral-Table-cell u-italic">italic</td>
+                  <td class="coral-Table-cell u-weight--300 u-italic">The quick brown fox jumped over the lazy sleeping dog.</td>
+                </tr>
+                <tr>
+                  <td class="coral-Table-cell"></td>
+                  <td class="coral-Table-cell"></td>
+                  <td class="coral-Table-cell"></td>
+                  <td class="coral-Table-cell u-condensed">The quick brown fox jumped over the lazy sleeping dog.</td>
+                </tr>
+                <tr>
+                  <td class="coral-Table-cell">adobe-clean-condensed</td>
+                  <td class="coral-Table-cell u-bold">bold</td>
+                  <td class="coral-Table-cell">none</td>
+                  <td class="coral-Table-cell u-condensed u-bold">The quick brown fox jumped over the lazy sleeping dog.</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="docs-Example-section">
+            <div class="docs-Example-header">
+                  <h2 id="paragraphs" class="coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection"><a href="#paragraphs" class="coral-Link">Paragraphs</a></h2>
+            </div>
+            <p>Here is an example of two paragraph styles.</p>
+                    <h3 id="normal" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#normal" class="coral-Link">Normal</a></h3>
+                <p>
+                  This is un-styled paragraph text. Lorem ipsum dolor sit amet, consectetur
+                  adipisicing checksum get some. I, for one, welcome our ui framework
+                  overloards. elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                  reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                  deserunt mollit anim id est laborum.
+                  
+                </p>
+                    <h3 id="condensed" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#condensed" class="coral-Link">Condensed</a></h3>
+                <p class="u-condensed">
+                  This is condensed paragraph text. Lorem ipsum dolor sit amet, consectetur
+                  adipisicing checksum get some. I, for one, welcome our ui framework
+                  overloards. elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                  reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                  deserunt mollit anim id est laborum.
+                </p>
+          </section>
+    </section>
+  </body>
+</html>

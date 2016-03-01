@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for coralui-component-collection/scripts/Coral.Collection.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">coralui-component-collection/scripts/</a> Coral.Collection.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>53/53</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>38/38</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>10/10</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>53/53</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">85×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">241×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">241×</span>
+<span class="cline-any cline-yes">241×</span>
+<span class="cline-any cline-yes">241×</span>
+<span class="cline-any cline-yes">241×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">241×</span>
+<span class="cline-any cline-yes">241×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">241×</span>
+<span class="cline-any cline-yes">241×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">107×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">207×</span>
+<span class="cline-any cline-yes">206×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">92×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">80×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">206×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">206×</span>
+<span class="cline-any cline-yes">178×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">206×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">96×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">96×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">96×</span>
+<span class="cline-any cline-yes">73×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">96×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1008×</span>
+<span class="cline-any cline-yes">1005×</span>
+<span class="cline-any cline-yes">1005×</span>
+<span class="cline-any cline-yes">342×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1005×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">98×</span>
+<span class="cline-any cline-yes">95×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">95×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">98×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">177×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2015 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+(function() {
+  'use strict';
+&nbsp;
+  /** @private */
+  function getTagSelector(tag, nativeTag) {
+    return nativeTag ? (nativeTag + '[is="' + tag + '"]') : tag;
+  }
+&nbsp;
+  /**
+    The Collection API as used as an interface to manipulate item collections within the components.
+&nbsp;
+    @param {HTMLElement} options.host
+      The element that hosts the collection.
+    @param {String} options.itemTagName
+      The tag name of the elements that constitute a collection item.
+    @param {String} options.itemBaseTag
+      The optional base tag name of the elements that constitute a collection item. This is required for elements that
+      extend native elements, like Button.
+    @param {String} [options.itemSelector]
+      Optional, derived from itemTagName and itemBaseTag by default. Used to query the host element for its collection
+      items.
+    @param {HTMLElement} [options.container]
+      Optional element that wraps the collection. Defines where the new items will be added when &lt;code&gt;add&lt;/code&gt; method
+      is called. Is the same as options.host by default.
+    @param {Function} [options.filter]
+      Optional function used to filter the results.
+    @param {Function} [options.onItemAdded]
+      Method called once an item is added to the DOM.
+    @param {Function} [options.onItemRemoved]
+      Method called once an item is removed from the DOM.
+&nbsp;
+    @interface
+  */
+  Coral.Collection = function(options) {
+    options = options || {};
+&nbsp;
+    this._host = options.host;
+    this._itemTagName = options.itemTagName;
+    this._itemBaseTagName = options.itemBaseTagName;
+    this._itemSelector = options.itemSelector || getTagSelector(this._itemTagName, this._itemBaseTagName);
+&nbsp;
+    // the container where the new items are added
+    this._container = options.container || this._host;
+    this._filter = options.filter;
+&nbsp;
+    this._onItemAdded = options.onItemAdded;
+    this._onItemRemoved = options.onItemRemoved;
+  };
+&nbsp;
+  var properties = {
+    /**
+      Number of items inside the Collection.
+&nbsp;
+      @type {Number}
+      @default 0
+      @memberof Coral.Collection#
+    */
+    'length': {
+      get: function() {
+        return this.getAll().length;
+      }
+    }
+  };
+&nbsp;
+  Coral.Collection.prototype = Object.create(Object.prototype, properties);
+&nbsp;
+  Coral.Collection.prototype._properties = properties;
+&nbsp;
+  /**
+    Adds an item to the Collection. The item can be either a &lt;code&gt;HTMLElement&lt;/code&gt; or an Object with the item
+    properties. If the index is not provided the element appended to the end. If &lt;code&gt;options.onItemAdded&lt;/code&gt; was
+    provided, it will be called after the element is added from the DOM.
+&nbsp;
+    @param {HTMLElement|Object} item
+      The item to add to the Collection.
+    @param {Number} [insertBefore]
+      Existing item used as a reference to insert the new item before. If the value is &lt;code&gt;null&lt;/code&gt;, then the new
+      item will be added at the end.
+&nbsp;
+    @fires Coral.Collection#coral-collection:add
+&nbsp;
+    @returns {HTMLElement} the item added.
+   */
+  Coral.Collection.prototype.add = function(item, insertBefore) {
+    // container and itemtagname are the minimum options that need to be provided to automatically handle this function
+    if (this._container &amp;&amp; this._itemTagName) {
+      if (!(item instanceof HTMLElement)) {
+        // creates an instance of an item from the object
+        if (this._itemBaseTagName) {
+          item = document.createElement(this._itemBaseTagName, this._itemTagName).set(item, true);
+        }
+        else {
+          item = document.createElement(this._itemTagName).set(item, true);
+        }
+      }
+&nbsp;
+      // inserts the element in the specified container
+      this._container.insertBefore(item, insertBefore || null);
+&nbsp;
+      if (typeof this._onItemAdded === 'function' &amp;&amp; this._host) {
+        this._onItemAdded.call(this._host, item);
+      }
+&nbsp;
+      return item;
+    }
+&nbsp;
+    throw new Error('Please provide host and itemTagName or override add() to provide your own implementation.');
+  };
+&nbsp;
+  /**
+    Removes all the items from the Collection.
+&nbsp;
+    @returns {Array.&lt;HTMLElement&gt;} an Array with all the removed items.
+   */
+  Coral.Collection.prototype.clear = function() {
+    var items = this.getAll();
+&nbsp;
+    var removed = [];
+&nbsp;
+    for (var i = items.length - 1; i &gt; -1; i--) {
+      removed.push(this.remove(items[i]));
+    }
+&nbsp;
+    return removed;
+  };
+&nbsp;
+  /**
+    Returns an array with all the items inside the Collection. Each element is of type &lt;code&gt;HTMLElement&lt;/code&gt;.
+&nbsp;
+    @returns {Array.&lt;HTMLElement&gt;} an Array with all the items inside the collection.
+   */
+  Coral.Collection.prototype.getAll = function() {
+    // in order to perform the automatic getAll query, the _host and _itemSelector must be provided
+    if (this._host &amp;&amp; this._itemSelector) {
+      var items = Array.prototype.slice.call(this._host.querySelectorAll(this._itemSelector));
+      if (this._filter) {
+        items = items.filter(this._filter);
+      }
+&nbsp;
+      return items;
+    }
+&nbsp;
+    throw new Error('Please provide host and itemTagName or override getAll() to provide your own implementation.');
+  };
+&nbsp;
+  /**
+    Removes the given item from the Collection. If &lt;code&gt;options.onItemRemoved&lt;/code&gt; was provided, it will be called
+    after the element is removed from the DOM.
+&nbsp;
+    @param {HTMLElement} item
+      The item to add to the Collection.
+&nbsp;
+    @fires Coral.Collection#coral-collection:remove
+&nbsp;
+    @returns {HTMLElement} the item removed.
+   */
+  Coral.Collection.prototype.remove = function(item) {
+    if (item.parentNode) {
+      item.parentNode.removeChild(item);
+&nbsp;
+      // we only call the callback if the item was really removed
+      if (typeof this._onItemRemoved === 'function' &amp;&amp; this._host) {
+        this._onItemRemoved.call(this._host, item);
+      }
+    }
+&nbsp;
+    return item;
+  };
+&nbsp;
+  /**
+    Returns the first item of the collection.
+&nbsp;
+    @returns {?HTMLElement} the first item of the collection.
+  */
+  Coral.Collection.prototype.first = function() {
+    // Use getAll() so filter() is applied
+    return this.getAll()[0] || null;
+  };
+&nbsp;
+  /**
+    Returns the last item of the collection.
+&nbsp;
+    @returns {?HTMLElement} the last item of the collection.
+  */
+  Coral.Collection.prototype.last = function() {
+    var all = this.getAll();
+    var count = all.length;
+    return all[count - 1] || null;
+  };
+&nbsp;
+  /**
+    Triggered when an item is added to the Collection.
+&nbsp;
+    @event Coral.Collection#coral-collection:add
+&nbsp;
+    @param {Object} event
+      Event object.
+    @param {HTMLElement} event.detail.item
+      The item that was added.
+  */
+&nbsp;
+  /**
+    Triggered when an item is removed from a Collection.
+&nbsp;
+    @event Coral.Collection#coral-collection:remove
+&nbsp;
+    @param {Object} event
+      Event object.
+    @param {HTMLElement} event.detail.item
+      The item that was removed.
+  */
+}());
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Feb 29 2016 21:23:37 GMT-0800 (PST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

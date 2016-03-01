@@ -1,0 +1,2912 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for coralui-mixin-overlay/scripts/Coral.mixin.overlay.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">coralui-mixin-overlay/scripts/</a> Coral.mixin.overlay.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">92.53% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>260/281</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">83.77% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>129/154</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">91.84% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>45/49</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">92.53% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>260/281</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807
+808
+809
+810
+811
+812
+813
+814
+815
+816
+817
+818
+819
+820
+821
+822
+823
+824
+825
+826
+827
+828
+829
+830
+831
+832
+833
+834
+835
+836
+837
+838
+839
+840
+841
+842
+843
+844
+845
+846
+847
+848
+849
+850
+851
+852
+853
+854
+855
+856
+857
+858
+859
+860
+861
+862
+863
+864
+865
+866
+867
+868
+869
+870
+871
+872
+873
+874
+875
+876
+877
+878
+879
+880
+881
+882
+883
+884
+885
+886
+887
+888
+889
+890
+891
+892
+893
+894
+895
+896
+897
+898
+899
+900
+901
+902
+903
+904
+905
+906
+907
+908
+909
+910
+911
+912
+913
+914
+915
+916
+917
+918
+919
+920
+921
+922
+923
+924
+925
+926
+927
+928
+929
+930
+931
+932
+933
+934
+935
+936
+937
+938
+939
+940
+941
+942
+943
+944
+945
+946
+947
+948
+949
+950</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">371×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">371×</span>
+<span class="cline-any cline-yes">183×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">188×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">188×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">188×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">193×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">193×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">193×</span>
+<span class="cline-any cline-yes">193×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">193×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">193×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">193×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">414×</span>
+<span class="cline-any cline-yes">975×</span>
+<span class="cline-any cline-yes">230×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">184×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">43×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">43×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">347×</span>
+<span class="cline-any cline-yes">347×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">193×</span>
+<span class="cline-any cline-yes">193×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">141×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">178×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">37×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">141×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">222×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">141×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">133×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">141×</span>
+<span class="cline-any cline-yes">141×</span>
+<span class="cline-any cline-yes">134×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">175×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">133×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">133×</span>
+<span class="cline-any cline-yes">133×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">133×</span>
+<span class="cline-any cline-yes">133×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">133×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">133×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">42×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">42×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">42×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">42×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">42×</span>
+<span class="cline-any cline-yes">42×</span>
+<span class="cline-any cline-yes">42×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">42×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">42×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">50×</span>
+<span class="cline-any cline-yes">50×</span>
+<span class="cline-any cline-yes">16355×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16355×</span>
+<span class="cline-any cline-yes">16305×</span>
+<span class="cline-any cline-yes">16305×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15972×</span>
+<span class="cline-any cline-yes">15972×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6844×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">333×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9461×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">50×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">133×</span>
+<span class="cline-any cline-yes">133×</span>
+<span class="cline-any cline-yes">43497×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">43497×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">50×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">49×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">49×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">27×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">50×</span>
+<span class="cline-any cline-yes">50×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">134×</span>
+<span class="cline-any cline-yes">134×</span>
+<span class="cline-any cline-yes">134×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1125×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">760×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1125×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">233×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1210×</span>
+<span class="cline-any cline-yes">1210×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1210×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">152×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1058×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1210×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">266×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">148×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">148×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">93×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">118×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">118×</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1121×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1121×</span>
+<span class="cline-any cline-yes">128×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">87×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">128×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">128×</span>
+<span class="cline-any cline-yes">128×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">128×</span>
+<span class="cline-any cline-yes">128×</span>
+<span class="cline-any cline-yes">76×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">128×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">72×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">56×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">128×</span>
+<span class="cline-any cline-yes">52×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">993×</span>
+<span class="cline-any cline-yes">993×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">993×</span>
+<span class="cline-any cline-yes">993×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">932×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">932×</span>
+<span class="cline-any cline-yes">92×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">993×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">728×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">265×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">713×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">60×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">60×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">566×</span>
+<span class="cline-any cline-yes">44×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">44×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">91×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">91×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">56×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">56×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">146×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">146×</span>
+<span class="cline-any cline-yes">94×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">146×</span>
+<span class="cline-any cline-yes">146×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">193×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">178×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">178×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">43×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">43×</span>
+<span class="cline-any cline-yes">42×</span>
+<span class="cline-any cline-yes">42×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">43×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">43×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">43×</span>
+<span class="cline-any cline-yes">43×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2014 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+(function() {
+  /* jshint validthis: true */
+  'use strict';
+&nbsp;
+  // The tab capture element that lives at the top of the body
+  var topTabCaptureEl;
+  var $topTabCaptureEl;
+  var bottomTabCaptureEl;
+  var $bottomTabCaptureEl;
+&nbsp;
+  // A reference to the backdrop element
+  var backdropEl;
+  var $backdropEl;
+&nbsp;
+  // The starting zIndex for overlays
+  var startZIndex = 10000;
+&nbsp;
+  // Tab keycode
+  var TAB_KEY = 9;
+&nbsp;
+  /**
+    Focus trap options.
+    @memberof Coral.mixin.overlay
+    @enum {String}
+  */
+  var trapFocus = {
+    /** Focus is trapped such that the use cannot focus outside of the overlay. */
+    ON: 'on',
+    /** The user can focus outside the overlay as normal. */
+    OFF: 'off'
+  };
+&nbsp;
+  /**
+    Return focus options.
+&nbsp;
+    @memberof Coral.mixin.overlay
+    @enum {String}
+  */
+  var returnFocus = {
+    /** When the overlay is closed, the element that was focused before the it was shown will be focused again. */
+    ON: 'on',
+    /** Nothing will be focused when the overlay is closed. */
+    OFF: 'off'
+  };
+&nbsp;
+  /**
+    Focus behavior options.
+&nbsp;
+    @memberof Coral.mixin.overlay
+    @enum {String}
+  */
+  var focusOnShow = {
+    /** When the overlay is opened, it will be focused. */
+    ON: 'on',
+    /** The overlay will not focus itself when opened. */
+    OFF: 'off'
+  };
+&nbsp;
+  // A stack interface for overlays
+  var _overlays = [];
+  var overlays = {
+    pop: function(instance) {
+      // Get overlay index
+      var index = this.indexOf(instance);
+&nbsp;
+      if (index === -1) {
+        return null;
+      }
+&nbsp;
+      // Get the overlay
+      var overlay = _overlays[index];
+&nbsp;
+      // Remove from the stack
+      _overlays.splice(index, 1);
+&nbsp;
+      // Return the passed overlay or the found overlay
+      return overlay;
+    },
+&nbsp;
+    push: function(instance) {
+      // Pop overlay
+      var overlay = this.pop(instance) || {
+          instance: instance
+        };
+&nbsp;
+      // Get the new highest zIndex
+      var zIndex = this.getHighestZIndex() + 10;
+&nbsp;
+      // Store the zIndex
+      overlay.zIndex = zIndex;
+      instance.style.zIndex = zIndex;
+&nbsp;
+      // Push it
+      _overlays.push(overlay);
+&nbsp;
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (overlay.backdrop) {
+        // If the backdrop is shown, we'll need to reposition it
+        // Generally, a component will not call _pushOverlay unnecessarily
+        // However, attachedCallback is asynchronous in polyfilld environments,
+        // so _pushOverlay will be called when shown and when attached
+<span class="cstat-no" title="statement not covered" >        doRepositionBackdrop();</span>
+      }
+&nbsp;
+      return overlay;
+    },
+&nbsp;
+    indexOf: function(instance) {
+      // Loop over stack
+      // Find overlay
+      // Return index
+      for (var i = 0; i &lt; _overlays.length; i++) {
+        if (_overlays[i].instance === instance) {
+          return i;
+        }
+      }
+      return -1;
+    },
+&nbsp;
+    get: function(instance) {
+      // Get overlay index
+      var index = this.indexOf(instance);
+&nbsp;
+      // Return overlay
+      return index === -1 ? null : _overlays[index];
+    },
+&nbsp;
+    top: function() {
+      var length = _overlays.length;
+      return length === 0 ? null : _overlays[length - 1];
+    },
+&nbsp;
+    getHighestZIndex: function() {
+      var overlay = this.top();
+      return overlay ? overlay.zIndex : startZIndex;
+    },
+&nbsp;
+    some: function() {
+      return _overlays.some.apply(_overlays, arguments);
+    },
+&nbsp;
+    forEach: function() {
+      return _overlays.forEach.apply(_overlays, arguments);
+    }
+  };
+&nbsp;
+  /**
+    Hide the backdrop if no overlays are using it.
+  */
+  function hideOrRepositionBackdrop() {
+    if (!backdropEl) {
+      // Do nothing if we've never shown the backdrop
+      return;
+    }
+&nbsp;
+    // Loop over all overlays
+    var keepBackdrop = overlays.some(function(overlay) {
+      // Check for backdrop usage
+      if (overlay.backdrop) {
+        return true;
+      }
+    });
+&nbsp;
+    if (!keepBackdrop) {
+      // Hide the backdrop
+      doBackdropHide();
+    }
+    else {
+      // Reposition the backdrop
+      doRepositionBackdrop();
+    }
+&nbsp;
+    // Hide/create the document-level tab capture element as necessary
+    // This only applies to modal overlays (those that have backdrops)
+    var top = overlays.top();
+    if (!top || !(top.instance.trapFocus === trapFocus.ON &amp;&amp; top.instance._requestedBackdrop)) {
+      hideDocumentTabCaptureEls();
+    }
+    else <span class="missing-if-branch" title="else path not taken" >E</span>if (top &amp;&amp; top.instance.trapFocus === trapFocus.ON &amp;&amp; top.instance._requestedBackdrop) {
+      createDocumentTabCaptureEls();
+    }
+  }
+&nbsp;
+  /**
+    Actually reposition the backdrop to be under the topmost overlay.
+  */
+  function doRepositionBackdrop() {
+    // Position under the topmost overlay
+    var top = overlays.top();
+&nbsp;
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (top) {
+&nbsp;
+      // The backdrop, if shown, should be positioned under the topmost overlay that does have a backdrop
+      for (var i = _overlays.length - 1; i &gt; -1; i--) {
+        if (_overlays[i].backdrop) {
+          backdropEl.style.zIndex = _overlays[i].zIndex - 1;
+          break;
+        }
+      }
+&nbsp;
+      // ARIA: Set hidden properly
+      hideEverythingBut(top.instance);
+&nbsp;
+    }
+  }
+&nbsp;
+  /**
+    Cancel the backdrop hide mid-animation.
+  */
+  var fadeTimeout;
+  function cancelBackdropHide() {
+    clearTimeout(fadeTimeout);
+  }
+&nbsp;
+  /**
+    Actually hide the backdrop.
+  */
+  function doBackdropHide() {
+    $(document.body).removeClass('u-coral-noscroll');
+&nbsp;
+    // Start animation
+    Coral.commons.nextFrame(function() {
+      $backdropEl.removeClass('is-open');
+&nbsp;
+      cancelBackdropHide();
+      fadeTimeout = setTimeout(function() {
+        backdropEl.style.display = 'none';
+      }, Coral.mixin.overlay.FADETIME);
+    });
+&nbsp;
+    // Set flag for testing
+    backdropEl._isOpen = false;
+&nbsp;
+    // Wait for animation to complete
+    showEverything();
+  }
+&nbsp;
+  /**
+    Actually show the backdrop.
+  */
+  function doBackdropShow(zIndex, instance) {
+    $(document.body).addClass('u-coral-noscroll');
+&nbsp;
+    if (!backdropEl) {
+      backdropEl = document.createElement('div');
+      backdropEl.className = 'coral-Backdrop';
+      document.body.appendChild(backdropEl);
+&nbsp;
+      $backdropEl = $(backdropEl);
+      $backdropEl.on('click', handleBackdropClick);
+    }
+&nbsp;
+    // Show just under the provided zIndex
+    // Since we always increment by 10, this will never collide
+    backdropEl.style.zIndex = zIndex - 1;
+&nbsp;
+    // Set flag for testing
+    backdropEl._isOpen = true;
+&nbsp;
+    // Start animation
+    cancelBackdropHide();
+    backdropEl.style.display = '';
+    Coral.commons.nextFrame(function() {
+      // Add the class on the next animation frame so backdrop has time to exist
+      // Otherwise, the animation for opacity will not work.
+      $backdropEl.addClass('is-open');
+    });
+&nbsp;
+    hideEverythingBut(instance);
+  }
+&nbsp;
+  /**
+    Handles clicks to the backdrop, calling backdropClickedCallback for every overlay
+  */
+  function handleBackdropClick(event) {
+    overlays.forEach(function(overlay) {
+      if (typeof overlay.instance.backdropClickedCallback === 'function') {
+        overlay.instance.backdropClickedCallback(event);
+      }
+    });
+  }
+&nbsp;
+  /**
+    Set aria-hidden on every immediate child except the one passed, which should not be hidden.
+  */
+  function hideEverythingBut(instance) {
+    // ARIA: Hide all the things
+    var children = document.body.children;
+    for (var i = 0; i &lt; children.length; i++) {
+      var child = children[i];
+&nbsp;
+      // If it's not a parent of or not the instance itself, it needs to be hidden
+      if (child !== instance &amp;&amp; !child.contains(instance)) {
+        var currentAriaHidden = child.getAttribute('aria-hidden');
+        if (currentAriaHidden) {
+          // Store the previous value of aria-hidden if present
+          // Don't blow away the previously stored value
+          child._previousAriaHidden = child._previousAriaHidden || <span class="branch-1 cbranch-no" title="branch not covered" >currentAriaHidden;</span>
+          if (currentAriaHidden === 'true') {
+            // It's already true, don't bother setting
+            continue;
+          }
+        }
+        else {
+          // Nothing is hidden by default, store that
+          child._previousAriaHidden = 'false';
+        }
+&nbsp;
+        // Hide it
+        child.setAttribute('aria-hidden', 'true');
+      }
+    }
+&nbsp;
+    // Always show ourselves
+    instance.setAttribute('aria-hidden', 'false');
+  }
+&nbsp;
+  /**
+    Show or restore the aria-hidden state of every child of body.
+  */
+  function showEverything() {
+    // ARIA: Show all the things
+    var children = document.body.children;
+    for (var i = 0; i &lt; children.length; i++) {
+      var child = children[i];
+      // Restore the previous aria-hidden value
+      child.setAttribute('aria-hidden', child._previousAriaHidden || 'false');
+    }
+  }
+&nbsp;
+  /**
+    Create the global tab capture element.
+  */
+  function createDocumentTabCaptureEls() {
+    if (!topTabCaptureEl) {
+      topTabCaptureEl = document.createElement('div');
+      topTabCaptureEl.setAttribute('coral-tabcapture', '');
+      topTabCaptureEl.tabIndex = 0;
+      $topTabCaptureEl = $(topTabCaptureEl);
+      $topTabCaptureEl.prependTo(document.body);
+      $topTabCaptureEl.on('focus', <span class="fstat-no" title="function not covered" >function(event) {</span>
+<span class="cstat-no" title="statement not covered" >        var top = overlays.top();</span>
+<span class="cstat-no" title="statement not covered" >        if (top &amp;&amp; top.instance.trapFocus === trapFocus.ON) {</span>
+          // Focus on the first tabbable element of the top overlay
+<span class="cstat-no" title="statement not covered" >          top.instance.$.find(':tabbable').not('[coral-tabcapture]').first().focus();</span>
+        }
+      });
+&nbsp;
+      bottomTabCaptureEl = document.createElement('div');
+      bottomTabCaptureEl.setAttribute('coral-tabcapture', '');
+      bottomTabCaptureEl.tabIndex = 0;
+      $bottomTabCaptureEl = $(bottomTabCaptureEl);
+      $bottomTabCaptureEl.appendTo(document.body);
+      $bottomTabCaptureEl.on('focus', <span class="fstat-no" title="function not covered" >function(event) {</span>
+<span class="cstat-no" title="statement not covered" >        var top = overlays.top();</span>
+<span class="cstat-no" title="statement not covered" >        if (top &amp;&amp; top.instance.trapFocus === trapFocus.ON) {</span>
+          // Focus on the last tabbable element of the top overlay
+<span class="cstat-no" title="statement not covered" >          top.instance.$.find(':tabbable').not('[coral-tabcapture]').last().focus();</span>
+        }
+      });
+    }
+    else {
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (document.body.firstElementChild !== topTabCaptureEl) {
+        // Make sure we stay at the very top
+<span class="cstat-no" title="statement not covered" >        $topTabCaptureEl.prependTo(document.body);</span>
+      }
+&nbsp;
+      if (document.body.lastElementChild !== bottomTabCaptureEl) {
+        // Make sure we stay at the very bottom
+        $bottomTabCaptureEl.appendTo(document.body);
+      }
+    }
+&nbsp;
+    // Make sure the tab capture elemenst are shown
+    topTabCaptureEl.style.display = 'inline';
+    bottomTabCaptureEl.style.display = 'inline';
+  }
+&nbsp;
+  /**
+    Called after all overlays are hidden and we shouldn't capture the first tab into the page.
+  */
+  function hideDocumentTabCaptureEls() {
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (topTabCaptureEl) {
+      topTabCaptureEl.style.display = 'none';
+      bottomTabCaptureEl.style.display = 'none';
+    }
+  }
+&nbsp;
+  // Properties to add to the object
+  var properties = {
+    /**
+      Whether to trap tabs and keep them within the overlay.
+&nbsp;
+      @type {Coral.mixin.overlay.trapFocus}
+      @default Coral.mixin.overlay.trapFocus.OFF
+      @htmlattribute trapfocus
+      @memberof Coral.mixin.overlay#
+    */
+    'trapFocus': {
+      attribute: 'trapfocus',
+      default: trapFocus.OFF,
+      validate: Coral.validate.enumeration(trapFocus),
+      set: function(value) {
+        if (value === trapFocus.ON) {
+          // Give ourselves tabIndex if we're not focusable
+          <span class="missing-if-branch" title="else path not taken" >E</span>if (!this.$.is(':focusable')) {
+            this.tabIndex = 0;
+          }
+&nbsp;
+          // Create elements
+          this._elements.topTabCapture = document.createElement('div');
+          this._elements.topTabCapture.setAttribute('coral-tabcapture', 'top');
+          this._elements.topTabCapture.tabIndex = 0;
+          this.insertBefore(this._elements.topTabCapture, this.firstElementChild);
+          this._elements.intermediateTabCapture = document.createElement('div');
+          this._elements.intermediateTabCapture.setAttribute('coral-tabcapture', 'intermediate');
+          this._elements.intermediateTabCapture.tabIndex = 0;
+          this.appendChild(this._elements.intermediateTabCapture);
+          this._elements.bottomTabCapture = document.createElement('div');
+          this._elements.bottomTabCapture.setAttribute('coral-tabcapture', 'bottom');
+          this._elements.bottomTabCapture.tabIndex = 0;
+          this.appendChild(this._elements.bottomTabCapture);
+&nbsp;
+          // Add listeners
+          this._handleTabCaptureFocus = this._handleTabCaptureFocus.bind(this);
+          this._handleRootKeypress = this._handleRootKeypress.bind(this);
+          this._vent.on('keydown', this._handleRootKeypress);
+          this._vent.on('focus', '[coral-tabcapture]', this._handleTabCaptureFocus);
+        }
+        else {
+          // Don't just put this in an else, check if we currently have it disabled
+          // so we only attempt to remove elements if we were previously capturing tabs
+          if (this.trapFocus === trapFocus.ON) {
+            // Remove elements
+            this.removeChild(this._elements.topTabCapture);
+            this.removeChild(this._elements.intermediateTabCapture);
+            this.removeChild(this._elements.bottomTabCapture);
+            this._elements.topTabCapture = null;
+            this._elements.intermediateTabCapture = null;
+            this._elements.bottomTabCaptureEl = null;
+&nbsp;
+            // Remove listeners
+            this._vent.off('keydown', this._handleRootKeypress);
+            this._vent.off('focus', '[coral-tabcapture]', this._handleTabCaptureFocus);
+          }
+        }
+&nbsp;
+        this._trapFocus = value;
+      }
+    },
+&nbsp;
+    /**
+      Whether to return focus to the previously focused element when closed.
+&nbsp;
+      @type {Coral.mixin.overlay.returnFocus}
+      @default Coral.mixin.overlay.returnFocus.OFF
+      @htmlattribute returnfocus
+      @memberof Coral.mixin.overlay#
+    */
+    'returnFocus': {
+      attribute: 'returnfocus',
+      default: returnFocus.OFF,
+      validate: Coral.validate.enumeration(returnFocus),
+    },
+&nbsp;
+    /**
+      Whether to focus when opened.
+&nbsp;
+      @type {Coral.mixin.overlay.focusOnShow}
+      @default Coral.mixin.overlay.focusOnShow.OFF
+      @htmlattribute focusonshow
+      @memberof Coral.mixin.overlay#
+    */
+    'focusOnShow': {
+      attribute: 'focusonshow',
+      default: focusOnShow.OFF,
+      validate: Coral.validate.enumeration(focusOnShow)
+    },
+&nbsp;
+    /**
+      Whether this overlay is open or not.
+&nbsp;
+      @type {Boolean}
+      @default false
+      @htmlattribute open
+      @htmlattributereflected
+      @memberof Coral.mixin.overlay#
+      @fires Coral.mixin.overlay#coral-overlay:open
+      @fires Coral.mixin.overlay#coral-overlay:close
+      @fires Coral.mixin.overlay#coral-overlay:beforeopen
+      @fires Coral.mixin.overlay#coral-overlay:beforeclose
+    */
+    'open': {
+      default: false,
+      reflectAttribute: true,
+      transform: Coral.transform.boolean,
+      attributeTransform: Coral.transform.booleanAttr,
+      triggerBefore: function(newValue, oldValue) {
+        // We have to manually implement triggerBefore since we can trigger multiple events
+        return this.trigger(newValue ? 'coral-overlay:beforeopen' : 'coral-overlay:beforeclose');
+      },
+      set: function(value, silent) {
+        // We need to store the value here as we're not using the default setter
+        this._open = value;
+        this._openSilently = !!silent;
+&nbsp;
+        // Set synchronously as it does not affect rendering
+        if (this.open) {
+          // Set aria-hidden false before we show
+          // Otherwise, screen readers will not announce
+          this.setAttribute('aria-hidden', 'false');
+        }
+        else {
+          // Doesn't matter when we set aria-hidden true (nothing being announced)
+          this.setAttribute('aria-hidden', 'true');
+        }
+&nbsp;
+        // Synchronous operations
+        if (this.parentNode) {
+          // Don't do anything if we're not in the DOM yet
+          // This prevents errors related to allocating a zIndex we don't need
+          if (this.open) {
+            // Do this check afterwards as we may have been appended inside of _show()
+&nbsp;
+            // Set z-index
+            this._pushOverlay();
+&nbsp;
+            if (this.returnFocus === returnFocus.ON) {
+              // Store the element that currently has focus, or the element that was passed to returnFocusTo()
+              this._elementToFocusWhenHidden = this._elementToFocusWhenHidden || (document.activeElement === document.body ? null : document.activeElement);
+            }
+          }
+          else {
+            // Release zIndex
+            this._popOverlay();
+&nbsp;
+            if (this.returnFocus === returnFocus.ON &amp;&amp; this._elementToFocusWhenHidden) {
+              if (document.activeElement &amp;&amp; !this.contains(document.activeElement)) {
+                // Don't return focus if the user focused outside of the overlay
+                return;
+              }
+&nbsp;
+              // IE will throw if you try to focus on a non-focusable or hidden element
+              // Catch these errors so we recover gracefully
+              try {
+                // Return focus, ignoring tab capture if it's an overlay
+                this._elementToFocusWhenHidden._ignoreTabCapture = true;
+                this._elementToFocusWhenHidden.focus();
+                this._elementToFocusWhenHidden._ignoreTabCapture = false;
+              } catch (error) {}
+&nbsp;
+              // Drop the reference to avoid memory leaks
+              this._elementToFocusWhenHidden = null;
+            }
+          }
+        }
+      },
+      sync: function() {
+        var self = this;
+&nbsp;
+        if (this.open) {
+          if (this.trapFocus === trapFocus.ON) {
+            // Make sure tab capture elements are positioned correctly
+            if (
+              // Tab capture elements are no longer at the bottom
+              this._elements.topTabCapture !== this.firstElementChild ||
+              this._elements.bottomTabCapture !== this.lastElementChild ||
+              // Tab capture elements have been separated
+              this._elements.bottomTabCapture.previousElementSibling !== this._elements.intermediateTabCapture
+            ) {
+              this.insertBefore(this._elements.intermediateTabCapture, this.firstElementChild);
+              this.appendChild(this._elements.intermediateTabCapture);
+              this.appendChild(this._elements.bottomTabCapture);
+            }
+          }
+&nbsp;
+          // The default style should be display: none for overlays
+          // Show ourselves first for centering calculations etc
+          this.style.display = 'block';
+&nbsp;
+          Coral.commons.nextFrame(function() {
+            self.$.addClass('is-open');
+&nbsp;
+            var openComplete = function() {
+              if (self.open &amp;&amp; !self._openSilently) {
+                self.trigger('coral-overlay:open');
+              }
+            };
+&nbsp;
+            if (self._overlayAnimationTime) {
+              // Wait for animation to complete
+              Coral.commons.transitionEnd(self, openComplete);
+            }
+            else {
+              // Execute immediately
+              openComplete();
+            }
+&nbsp;
+          });
+&nbsp;
+          // Focus on the overlay itself, announcing it
+          // Pressing the tab key will then focus on the next focusable element inside of it
+          if (this.focusOnShow === focusOnShow.ON) {
+            this.focus();
+          }
+        }
+        else {
+          // Fade out
+          Coral.commons.nextFrame(function() {
+            self.$.removeClass('is-open');
+&nbsp;
+            var closeComplete = function() {
+              if (!self.open) {
+                // Hide self
+                self.style.display = 'none';
+&nbsp;
+                if (!self._openSilently) {
+                  self.trigger('coral-overlay:close');
+                }
+&nbsp;
+              }
+            };
+&nbsp;
+            if (self._overlayAnimationTime) {
+              // Wait for animation to complete
+              Coral.commons.transitionEnd(self, closeComplete);
+            }
+            else {
+              // Execute immediately
+              closeComplete();
+            }
+          });
+        }
+      }
+    }
+&nbsp;
+    /**
+      The time it takes for the overlay to animate opening/closing.
+      This value should match the CSS animation time for the overlay in question.
+&nbsp;
+      @name _overlayAnimationTime
+      @type {Number}
+      @default 0
+      @protected
+      @memberof Coral.mixin.overlay#
+    */
+  };
+&nbsp;
+  var methods = {
+    detachedCallback: function() {
+      if (this.open) {
+        // Release zIndex as we're not in the DOM any longer
+        // When we're re-added, we'll get a new zIndex
+        this._popOverlay();
+&nbsp;
+        if (this._requestedBackdrop) {
+          // Mark that we'll need to show the backdrop when attached
+          this._showBackdropOnAttached = true;
+        }
+      }
+    },
+&nbsp;
+    attachedCallback: function() {
+      if (this.open) {
+        this._pushOverlay();
+&nbsp;
+        if (this._showBackdropOnAttached) {
+          // Show the backdrop again
+          this._showBackdrop();
+        }
+      }
+    },
+&nbsp;
+    /**
+      Open the overlay and set the z-index accordingly.
+&nbsp;
+      @returns {Coral.Component} this, chainable
+      @memberof Coral.mixin.overlay#
+    */
+    show: function() {
+      this.open = true;
+&nbsp;
+      return this;
+    },
+&nbsp;
+    /**
+      Close the overlay.
+&nbsp;
+      @returns {Coral.Component} this, chainable
+      @memberof Coral.mixin.overlay#
+    */
+    hide: function() {
+      this.open = false;
+&nbsp;
+      return this;
+    },
+&nbsp;
+    /**
+      Set the element that focus should be returned to when the overlay is hidden.
+&nbsp;
+      @param {HTMLElement} element
+        The element to return focus to. This must be a DOM element, not a jQuery object or selector.
+&nbsp;
+      @returns {Coral.Component} this, chainable
+      @memberof Coral.mixin.overlay#
+    */
+    returnFocusTo: function(element) {
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (this.returnFocus === returnFocus.OFF) {
+        // Switch on returning focus if it's off
+<span class="cstat-no" title="statement not covered" >        this.returnFocus = returnFocus.ON;</span>
+      }
+&nbsp;
+      // Give tabindex if the element is not focusable
+      if (!$(element).is(':focusable')) {
+        element.tabIndex = 0;
+      }
+&nbsp;
+      this._elementToFocusWhenHidden = element;
+      return this;
+    },
+&nbsp;
+    /**
+      Check if this overlay is the topmost.
+&nbsp;
+      @protected
+      @memberof Coral.mixin.overlay#
+    */
+    _isTopOverlay: function() {
+      var top = overlays.top();
+      return top &amp;&amp; top.instance === this;
+    },
+&nbsp;
+    /**
+      Push the overlay to the top of the stack.
+&nbsp;
+      @protected
+      @memberof Coral.mixin.overlay#
+    */
+    _pushOverlay: function() {
+      overlays.push(this);
+    },
+&nbsp;
+    /**
+      Remove the overlay from the stack.
+&nbsp;
+      @protected
+      @memberof Coral.mixin.overlay#
+    */
+    _popOverlay: function() {
+      overlays.pop(this);
+&nbsp;
+      // Automatically hide the backdrop if required
+      hideOrRepositionBackdrop();
+    },
+&nbsp;
+    /**
+      Show the backdrop.
+&nbsp;
+      @protected
+      @memberof Coral.mixin.overlay#
+    */
+    _showBackdrop: function() {
+      var overlay = overlays.get(this);
+&nbsp;
+      // Overlay is not tracked unless the component is in the DOM
+      // Hence, we need to check
+      if (overlay) {
+        overlay.backdrop = true;
+        doBackdropShow(overlay.zIndex, this);
+      }
+&nbsp;
+      // Mark on the instance that the backdrop has been requested for this overlay
+      this._requestedBackdrop = true;
+&nbsp;
+      // Mark that the backdrop was requested when not attached to the DOM
+      // This allows us to know whether to push the overlay when the component is attached
+      if (!this.parentNode) {
+        this._showBackdropOnAttached = true;
+      }
+&nbsp;
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (this.trapFocus === trapFocus.ON) {
+        createDocumentTabCaptureEls();
+      }
+    },
+&nbsp;
+    /**
+      Show the backdrop.
+&nbsp;
+      @protected
+      @memberof Coral.mixin.overlay#
+    */
+    _hideBackdrop: <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >      var overlay = overlays.get(this);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (overlay) {</span>
+<span class="cstat-no" title="statement not covered" >        overlay.backdrop = false;</span>
+&nbsp;
+        // If that was the last overlay using the backdrop, hide it
+<span class="cstat-no" title="statement not covered" >        hideOrRepositionBackdrop();</span>
+      }
+&nbsp;
+      // Mark on the instance that the backdrop is no longer needed
+<span class="cstat-no" title="statement not covered" >      this._requestedBackdrop = false;</span>
+    },
+&nbsp;
+    /**
+      Handles keypresses on the root of the overlay and marshalls focus accordingly.
+&nbsp;
+      @protected
+    */
+    _handleRootKeypress: function(event) {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (event.target === this &amp;&amp; event.keyCode === TAB_KEY) {
+        // Skip the top tabcapture and focus on the first focusable element
+        this._focusOn('first');
+&nbsp;
+        // Stop the normal tab behavior
+        event.preventDefault();
+      }
+    },
+&nbsp;
+    /**
+      Handles focus events on tab capture elements.
+&nbsp;
+      @protected
+      @memberof Coral.mixin.overlay#
+    */
+    _handleTabCaptureFocus: <span class="fstat-no" title="function not covered" >function(event) {</span>
+      // Avoid moving around if we're trying to focus on coral-tabcapture
+<span class="cstat-no" title="statement not covered" >      if (this._ignoreTabCapture) {</span>
+<span class="cstat-no" title="statement not covered" >        this._ignoreTabCapture = false;</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+      }
+&nbsp;
+      // Focus on the correct tabbable element
+<span class="cstat-no" title="statement not covered" >      var target = event.target;</span>
+<span class="cstat-no" title="statement not covered" >      var which = (target === this._elements.intermediateTabCapture ? 'first' : 'last');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this._focusOn(which);</span>
+    },
+&nbsp;
+    /**
+      Focus on the first or last element
+&nbsp;
+      @param {String} which   one of "first" or "last"
+      @protected
+    */
+    _focusOn: function(which) {
+      var tabTarget = this.$.find(':tabbable').not('[coral-tabcapture]')[which]();
+&nbsp;
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (tabTarget.length) {
+        tabTarget.focus();
+      }
+      else {
+<span class="cstat-no" title="statement not covered" >        this.focus();</span>
+      }
+    }
+  };
+&nbsp;
+  /**
+    Make an object an overlay (prototype or instance).
+    @mixin
+  */
+  Coral.mixin.overlay = function(object, options) {
+    // Augment property descriptors
+    Coral.register.augmentProperties(options.properties, properties);
+&nbsp;
+    // Add methods
+    Coral.commons.augment(object, methods, function(objectMethod, mixinMethod, prop) {
+      if (prop === 'hide' || prop === 'show') {
+        return mixinMethod;
+      }
+      return Coral.commons.callAll(mixinMethod, objectMethod);
+    });
+  };
+&nbsp;
+  // Expose methods on prototype so they may be called by implementing components
+  Coral.mixin.overlay.prototype = methods;
+&nbsp;
+  // The time it should take for overlays to fade in milliseconds
+  // Important: This should be greater than or equal to the CSS transition time
+  Coral.mixin.overlay.FADETIME = 350;
+&nbsp;
+  /**
+    Called when the overlay is clicked.
+&nbsp;
+    @function backdropClickedCallback
+    @memberof Coral.mixin.overlay#
+    @protected
+  */
+&nbsp;
+  /**
+    Triggerred before the component is opened with &lt;code&gt;show()&lt;/code&gt; or &lt;code&gt;instance.open = true&lt;/code&gt;.
+&nbsp;
+    @event Coral.mixin.overlay#coral-overlay:beforeopen
+&nbsp;
+    @param {Object} event
+      Event object.
+    @param {Function} event.preventDefault
+      Call to stop the overlay from opening.
+  */
+&nbsp;
+  /**
+    Triggerred after the overlay is opened with &lt;code&gt;show()&lt;/code&gt; or &lt;code&gt;instance.open = true&lt;/code&gt;
+&nbsp;
+    @event Coral.mixin.overlay#coral-overlay:open
+&nbsp;
+    @param {Object} event
+      Event object.
+  */
+&nbsp;
+  /**
+    Triggerred before the component is closed with &lt;code&gt;hide()&lt;/code&gt; or &lt;code&gt;instance.open = false&lt;/code&gt;.
+&nbsp;
+    @event Coral.mixin.overlay#coral-overlay:beforeclose
+&nbsp;
+    @param {Object} event
+      Event object.
+    @param {Function} event.preventDefault
+      Call to stop the overlay from closing.
+  */
+&nbsp;
+  /**
+    Triggerred after the component is closed with &lt;code&gt;hide()&lt;/code&gt; or &lt;code&gt;instance.open = false&lt;/code&gt;
+&nbsp;
+    @event Coral.mixin.overlay#coral-overlay:close
+&nbsp;
+    @param {Object} event
+      Event object.
+  */
+&nbsp;
+  Coral.mixin.overlay.trapFocus = trapFocus;
+  Coral.mixin.overlay.returnFocus = returnFocus;
+  Coral.mixin.overlay.focusOnShow = focusOnShow;
+}());
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Feb 29 2016 21:23:37 GMT-0800 (PST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

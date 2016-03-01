@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Coral.InputGroup</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light docs-Background u-coral-clearFix">
+    <article class="docs-Component">
+      <section class="docs-Component-metadata">
+        <div class="docs-Component-header">
+          <h1 id="coral.InputGroup" guide-toc-title="Coral.InputGroup" class="coral-Heading coral-Heading--1 docs-Component-name js-guide-heading-toc js-guide-heading-toc--header">Coral.InputGroup</h1><span class="docs-Component-version">Current Version: <strong>3.6.3</strong></span>
+        </div>
+        <div class="docs-Component-related">Related Components: <a href="Coral.Textfield.html" class="coral-Link">Coral.Textfield</a>, <a href="Coral.DecoratedTextfield.html" class="coral-Link">Coral.DecoratedTextfield</a>, <a href="Coral.Button.html" class="coral-Link">Coral.Button</a>, <a href="Coral.Datepicker.html" class="coral-Link">Coral.Datepicker</a>, <a href="Coral.NumberInput.html" class="coral-Link">Coral.NumberInput</a>
+        </div>
+        <div class="docs-Component-github"> Github: <a href="https://git.corp.adobe.com/Coral/coralui-core" class="coral-Link">coralui-core</a>
+        </div>
+        <!-- description is loaded from the template-->
+      </section>
+      <section class="docs-Component-documentation">
+        <p>
+          A CoralUI Coral.InputGroup is a composite CSS pattern for Buttons and Textfields that share a border.
+          It is the base style of several more complex components due to its versatility.
+          
+        </p>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header">
+                    <h2 id="inputGroupExamples" class="coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection"><a href="#inputGroupExamples" class="coral-Link">InputGroup Examples</a></h2><span class="u-coral-pullRight docs-ThemeSwitcher"><i data-init="quicktip" data-quicktip-arrow="right" data-quicktip-type="inspect" data-quicktip-content="Please read more about themes in the 'Styles' section of this guide" class="coral-Icon coral-Icon--infoCircle docs-ThemeSwitcher-icon"></i>
+                  <button data-theme="coral--light" class="coral-MinimalButton docs-ThemeSwitcher-button is-selected">Light</button>|
+                  <button data-theme="coral--dark" class="coral-MinimalButton docs-ThemeSwitcher-button">Dark</button></span>
+              </div>
+                      <h3 id="buttonBefore" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#buttonBefore" class="coral-Link">Button Before</a></h3>
+                      <script type="text/template" id="guide-25ba4215-d2f9-4159-ab4a-aaeb15d6427d">
+                        <div class="coral-InputGroup">
+                            <span class="coral-InputGroup-button">
+                              <button class="coral-Button coral-Button--square" type="button">Go!</button>
+                            </span>
+                            <input type="text" class="coral-InputGroup-input coral-Textfield" placeholder="Search">
+                        </div>
+                        
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium">
+                        <div class="coral-InputGroup">
+                            <span class="coral-InputGroup-button">
+                              <button class="coral-Button coral-Button--square" type="button">Go!</button>
+                            </span>
+                            <input type="text" class="coral-InputGroup-input coral-Textfield" placeholder="Search">
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-25ba4215-d2f9-4159-ab4a-aaeb15d6427d" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 id="buttonAfter" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#buttonAfter" class="coral-Link">Button After</a></h3>
+                      <script type="text/template" id="guide-4baaf275-e294-4ab3-8e4c-8a018401f2c1">
+                        <div class="coral-InputGroup">
+                          <input type="text" class="coral-InputGroup-input coral-Textfield">
+                          <span class="coral-InputGroup-button">
+                            <button class="coral-Button coral-Button--square" type="button">Go!</button>
+                          </span>
+                        </div>
+                        
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium">
+                        <div class="coral-InputGroup">
+                          <input type="text" class="coral-InputGroup-input coral-Textfield">
+                          <span class="coral-InputGroup-button">
+                            <button class="coral-Button coral-Button--square" type="button">Go!</button>
+                          </span>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-4baaf275-e294-4ab3-8e4c-8a018401f2c1" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 id="iconButtonsOnBothSides" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#iconButtonsOnBothSides" class="coral-Link">Icon Buttons on Both Sides</a></h3>
+                      <script type="text/template" id="guide-94d7388d-eca1-4f12-af4a-8cff97c721e7">
+                        <div class="coral-InputGroup">
+                          <span class="coral-InputGroup-button">
+                            <button class="coral-Button coral-Button--square" type="button">
+                              <i class="coral-Icon coral-Icon--sizeS coral-Icon--minus"></i>
+                            </button>
+                          </span>
+                          <input type="text" class="coral-InputGroup-input coral-Textfield">
+                          <span class="coral-InputGroup-button">
+                            <button class="coral-Button coral-Button--square" type="button">
+                              <i class="coral-Icon coral-Icon--sizeS coral-Icon--add"></i>
+                            </button>
+                          </span>
+                        </div>
+                        
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium">
+                        <div class="coral-InputGroup">
+                          <span class="coral-InputGroup-button">
+                            <button class="coral-Button coral-Button--square" type="button">
+                              <i class="coral-Icon coral-Icon--sizeS coral-Icon--minus"></i>
+                            </button>
+                          </span>
+                          <input type="text" class="coral-InputGroup-input coral-Textfield">
+                          <span class="coral-InputGroup-button">
+                            <button class="coral-Button coral-Button--square" type="button">
+                              <i class="coral-Icon coral-Icon--sizeS coral-Icon--add"></i>
+                            </button>
+                          </span>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-94d7388d-eca1-4f12-af4a-8cff97c721e7" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 id="textButtonsOnBothSides" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#textButtonsOnBothSides" class="coral-Link">Text Buttons on Both Sides</a></h3>
+                      <script type="text/template" id="guide-619ef702-433b-4e0e-a95a-3e897f89cb4e">
+                        <div class="coral-InputGroup">
+                          <span class="coral-InputGroup-button">
+                            <button class="coral-Button coral-Button--square" type="button">Go!</button>
+                          </span>
+                          <input type="text" class="coral-InputGroup-input coral-Textfield">
+                          <span class="coral-InputGroup-button">
+                            <button class="coral-Button coral-Button--square" type="button">Go!</button>
+                          </span>
+                        </div>
+                        
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium">
+                        <div class="coral-InputGroup">
+                          <span class="coral-InputGroup-button">
+                            <button class="coral-Button coral-Button--square" type="button">Go!</button>
+                          </span>
+                          <input type="text" class="coral-InputGroup-input coral-Textfield">
+                          <span class="coral-InputGroup-button">
+                            <button class="coral-Button coral-Button--square" type="button">Go!</button>
+                          </span>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-619ef702-433b-4e0e-a95a-3e897f89cb4e" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 id="blockWithButtonBefore" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#blockWithButtonBefore" class="coral-Link">Block with Button Before</a></h3>
+                      <script type="text/template" id="guide-e74c81a3-19e5-4aac-a3a2-47a335120654">
+                        <div class="coral-InputGroup coral-InputGroup--block">
+                          <span class="coral-InputGroup-button">
+                            <button class="coral-Button coral-Button--square" type="button">Go!</button>
+                          </span>
+                          <input type="text" class="coral-InputGroup-input coral-Textfield" placeholder="Search">
+                        </div>
+                        
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium">
+                        <div class="coral-InputGroup coral-InputGroup--block">
+                          <span class="coral-InputGroup-button">
+                            <button class="coral-Button coral-Button--square" type="button">Go!</button>
+                          </span>
+                          <input type="text" class="coral-InputGroup-input coral-Textfield" placeholder="Search">
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-e74c81a3-19e5-4aac-a3a2-47a335120654" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 id="blockWithButtonAfter" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#blockWithButtonAfter" class="coral-Link">Block with Button After</a></h3>
+                      <script type="text/template" id="guide-df43c80d-6300-4b7b-bcd9-9017782e8726">
+                        <div class="coral-InputGroup coral-InputGroup--block">
+                          <input type="text" class="coral-InputGroup-input coral-Textfield">
+                          <span class="coral-InputGroup-button">
+                            <button class="coral-Button coral-Button--square" type="button">Go!</button>
+                          </span>
+                        </div>
+                        
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium">
+                        <div class="coral-InputGroup coral-InputGroup--block">
+                          <input type="text" class="coral-InputGroup-input coral-Textfield">
+                          <span class="coral-InputGroup-button">
+                            <button class="coral-Button coral-Button--square" type="button">Go!</button>
+                          </span>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-df43c80d-6300-4b7b-bcd9-9017782e8726" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 id="blockWithTextButtonsOnBothSides" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#blockWithTextButtonsOnBothSides" class="coral-Link">Block with Text Buttons on Both Sides</a></h3>
+                      <script type="text/template" id="guide-250e5a8f-86d6-4656-8596-1aca5d56ac64">
+                        <div class="coral-InputGroup coral-InputGroup--block">
+                          <span class="coral-InputGroup-button">
+                            <button class="coral-Button coral-Button--square" type="button">Go!</button>
+                          </span>
+                          <input type="text" class="coral-InputGroup-input coral-Textfield">
+                          <span class="coral-InputGroup-button">
+                            <button class="coral-Button coral-Button--square" type="button">Go!</button>
+                          </span>
+                        </div>
+                        
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium">
+                        <div class="coral-InputGroup coral-InputGroup--block">
+                          <span class="coral-InputGroup-button">
+                            <button class="coral-Button coral-Button--square" type="button">Go!</button>
+                          </span>
+                          <input type="text" class="coral-InputGroup-input coral-Textfield">
+                          <span class="coral-InputGroup-button">
+                            <button class="coral-Button coral-Button--square" type="button">Go!</button>
+                          </span>
+                        </div>
+                        
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-250e5a8f-86d6-4656-8596-1aca5d56ac64" class="docs-Example-toggleMarkup prettyprint"></pre>
+                      <h3 id="blockWithIconButtonsOnBothSides" class="coral-Heading coral-Heading--3 docs-Example-subtitle"><a href="#blockWithIconButtonsOnBothSides" class="coral-Link">Block with Icon Buttons on Both Sides</a></h3>
+                      <script type="text/template" id="guide-7b39f3c2-e643-4c68-ba62-92e0f5ed1663">
+                        <div class="coral-InputGroup coral-InputGroup--block">
+                          <span class="coral-InputGroup-button">
+                            <button class="coral-Button coral-Button--square" type="button">
+                              <i class="coral-Icon coral-Icon--sizeS coral-Icon--minus"></i>
+                            </button>
+                          </span>
+                          <input type="text" class="coral-InputGroup-input coral-Textfield">
+                          <span class="coral-InputGroup-button">
+                            <button class="coral-Button coral-Button--square" type="button">
+                              <i class="coral-Icon coral-Icon--sizeS coral-Icon--add"></i>
+                            </button>
+                          </span>
+                        </div>
+                      </script>
+                      <div class="docs-Example-markup u-columnMedium">
+                        <div class="coral-InputGroup coral-InputGroup--block">
+                          <span class="coral-InputGroup-button">
+                            <button class="coral-Button coral-Button--square" type="button">
+                              <i class="coral-Icon coral-Icon--sizeS coral-Icon--minus"></i>
+                            </button>
+                          </span>
+                          <input type="text" class="coral-InputGroup-input coral-Textfield">
+                          <span class="coral-InputGroup-button">
+                            <button class="coral-Button coral-Button--square" type="button">
+                              <i class="coral-Icon coral-Icon--sizeS coral-Icon--add"></i>
+                            </button>
+                          </span>
+                        </div>
+                      </div><a href="#" class="coral-Link docs-Example-showMarkup"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre data-src-id="guide-7b39f3c2-e643-4c68-ba62-92e0f5ed1663" class="docs-Example-toggleMarkup prettyprint"></pre>
+            </section>
+      </section>
+    </article>
+  </body>
+</html>
