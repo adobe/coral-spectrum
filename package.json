@@ -14,7 +14,7 @@
     "coralui-component-actionbar": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-actionbar.git#1.0.2",
     "coralui-component-alert": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-alert.git#3.0.5",
     "coralui-component-anchorbutton": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-anchorbutton.git#1.0.2",
-    "coralui-component-autocomplete": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-autocomplete.git#3.2.2",
+    "coralui-component-autocomplete": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-autocomplete.git#3.2.3",
     "coralui-component-button": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-button.git#1.3.6",
     "coralui-component-buttongroup": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-buttongroup.git#1.2.0",
     "coralui-component-calendar": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-calendar.git#1.0.7",
