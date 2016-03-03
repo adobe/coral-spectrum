@@ -28,7 +28,7 @@
     "coralui-component-dialog": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-dialog.git#1.2.2",
     "coralui-component-dragaction": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-dragaction.git#2.0.0",
     "coralui-component-drawer": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-drawer.git#2.0.2",
-    "coralui-component-fileupload": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-fileupload.git#3.0.3",
+    "coralui-component-fileupload": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-fileupload.git#3.0.4",
     "coralui-component-icon": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-icon.git#1.4.2",
     "coralui-component-list": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-list.git#1.1.0",
     "coralui-component-multifield": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-multifield.git#2.0.0",
