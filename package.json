@@ -1,7 +1,7 @@
 {
   "name": "coralui",
   "description": "CoralUI package builder",
-  "version": "3.14.1",
+  "version": "3.14.2-pre",
   "private": true,
   "repository": {
     "type": "git",
