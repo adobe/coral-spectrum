@@ -1,0 +1,104 @@
+.class-description {
+  margin-left: 1rem;
+}
+
+.class-description h2 {
+  margin-left: -1rem;
+}
+
+.variation {
+  display: none;
+}
+
+.optional:after {
+  content: "opt";
+  font-size: 60%;
+  color: #aaa;
+  font-style: italic;
+  font-weight: normal;
+}
+
+.ancestors { color: #999; }
+.ancestors a {
+    /*
+    color: #999 !important;
+    text-decoration: none;
+    */
+}
+
+.important {
+  font-weight: bold;
+  color: #950B02;
+}
+
+.yes-def {
+  text-indent: -1000px;
+}
+
+.type-signature {
+  color: #aaa;
+}
+
+.name,
+.signature {
+  font-weight: bold;
+}
+
+.details { margin: 0; }
+.details dt { margin: 0 0.25em 0.5em 0; font-weight: bold; float: left; clear: left; }
+.details dd { margin: 0 0 0.5em 0; }
+.details ul { margin: 0; }
+.details ul { list-style-type: none; margin: 0; padding: 0; }
+.details li { margin: 0; padding: 0; }
+
+.description {
+  margin: 1rem 0 1rem 1rem;
+}
+
+.params .name, .props .name, .name code {
+  font-size: 100%;
+}
+
+.disabled {
+  color: #454545;
+}
+
+span.mono {
+  /*font-family: monospace;*/
+}
+
+table .params {
+  margin-bottom: 0;
+}
+
+table td {
+  vertical-align: top;
+}
+
+td .params-description-heading {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-left: 0.5rem;
+}
+
+dl {
+  margin-left: 1rem;
+}
+
+dd {
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  margin-bottom: 0;
+}
+
+h3 + pre.prettyprint {
+  margin-top: 0.357em;
+}
+
+h4 {
+  margin-top: 0.5rem;
+}
+
