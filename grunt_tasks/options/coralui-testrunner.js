@@ -8,7 +8,8 @@ var includeOrder = dependencyUtils.getJavascriptPaths('.');
 // Start with the basic external dependencies
 var karmaFiles = [
   'build/js/libs/moment.js',
-  'build/css/coral.css' // Include CSS so tests based on styles work
+  'build/css/coral.css', // Include CSS so tests based on styles work
+  'build/js/Coral.strings.js' // Include localized strings
 ];
 
 // Add in the include order from package.json
