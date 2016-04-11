@@ -25,7 +25,7 @@
     "coralui-component-collection": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-collection.git#1.1.2",
     "coralui-component-colorinput": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-colorinput.git#1.1.1",
     "coralui-component-columnview": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-columnview.git#2.0.0",
-    "coralui-component-cyclebutton": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-cyclebutton.git#3.1.6",
+    "coralui-component-cyclebutton": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-cyclebutton.git#3.1.7",
     "coralui-component-datepicker": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-datepicker.git#3.3.0",
     "coralui-component-dialog": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-dialog.git#1.2.2",
     "coralui-component-dragaction": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-dragaction.git#2.0.0",
