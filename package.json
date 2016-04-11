@@ -10,7 +10,7 @@
   "devDependencies": {
     "coralui-commons": "git+ssh://git@git.corp.adobe.com:Coral/coralui-commons.git#3.6.2",
     "coralui-component": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component.git#1.6.0",
-    "coralui-component-accordion": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-accordion.git#3.0.8",
+    "coralui-component-accordion": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-accordion.git#3.0.9",
     "coralui-component-actionbar": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-actionbar.git#1.0.5",
     "coralui-component-alert": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-alert.git#3.0.7",
     "coralui-component-anchorbutton": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-anchorbutton.git#1.0.3",
