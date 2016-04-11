@@ -1,7 +1,7 @@
 {
   "name": "coralui",
   "description": "CoralUI package builder",
-  "version": "3.15.1",
+  "version": "3.15.1-pre",
   "private": true,
   "repository": {
     "type": "git",
@@ -105,8 +105,8 @@
       "coralui-component-datepicker",
       "coralui-component-dialog",
       "coralui-component-dragaction",
-      "coralui-component-drawer",
-      "coralui-component-fileupload",
+      "coralui-component-drawer",      
+      "coralui-component-fileupload",      
       "coralui-component-list",
       "coralui-component-masonry",
       "coralui-component-multifield",
