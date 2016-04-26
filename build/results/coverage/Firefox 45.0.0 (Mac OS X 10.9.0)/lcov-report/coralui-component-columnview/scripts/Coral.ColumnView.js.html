@@ -1,0 +1,3077 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for coralui-component-columnview/scripts/Coral.ColumnView.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">coralui-component-columnview/scripts/</a> Coral.ColumnView.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">50.4% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>127/252</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">35.33% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>53/150</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">61.22% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>30/49</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">50.4% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>127/252</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807
+808
+809
+810
+811
+812
+813
+814
+815
+816
+817
+818
+819
+820
+821
+822
+823
+824
+825
+826
+827
+828
+829
+830
+831
+832
+833
+834
+835
+836
+837
+838
+839
+840
+841
+842
+843
+844
+845
+846
+847
+848
+849
+850
+851
+852
+853
+854
+855
+856
+857
+858
+859
+860
+861
+862
+863
+864
+865
+866
+867
+868
+869
+870
+871
+872
+873
+874
+875
+876
+877
+878
+879
+880
+881
+882
+883
+884
+885
+886
+887
+888
+889
+890
+891
+892
+893
+894
+895
+896
+897
+898
+899
+900
+901
+902
+903
+904
+905
+906
+907
+908
+909
+910
+911
+912
+913
+914
+915
+916
+917
+918
+919
+920
+921
+922
+923
+924
+925
+926
+927
+928
+929
+930
+931
+932
+933
+934
+935
+936
+937
+938
+939
+940
+941
+942
+943
+944
+945
+946
+947
+948
+949
+950
+951
+952
+953
+954
+955
+956
+957
+958
+959
+960
+961
+962
+963
+964
+965
+966
+967
+968
+969
+970
+971
+972
+973
+974
+975
+976
+977
+978
+979
+980
+981
+982
+983
+984
+985
+986
+987
+988
+989
+990
+991
+992
+993
+994
+995
+996
+997
+998
+999
+1000
+1001
+1002
+1003
+1004
+1005</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">50×</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">50×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">212×</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">212×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-yes">45×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">87×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">119×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">60×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">60×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">50×</span>
+<span class="cline-any cline-yes">50×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">50×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">55×</span>
+<span class="cline-any cline-yes">55×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">35×</span>
+<span class="cline-any cline-yes">35×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">35×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">35×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32×</span>
+<span class="cline-any cline-yes">32×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32×</span>
+<span class="cline-any cline-yes">32×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32×</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2015 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+(function() {
+  'use strict';
+&nbsp;
+  /**
+    Enumeration representing the ColumnView selection modes.
+&nbsp;
+    @memberof Coral.ColumnView
+    @enum {String}
+   */
+  var selectionMode = {
+    /** None is default, selection of items does not happen based on click */
+    NONE: 'none',
+    /** Single selection mode, only one item per column can be selected. */
+    SINGLE: 'single',
+    /** Multiple selection mode, multiple items per column can be selected. */
+    MULTIPLE: 'multiple'
+  };
+&nbsp;
+  // the column views's base classname
+  var CLASSNAME = 'coral3-ColumnView';
+&nbsp;
+  Coral.register( /** @lends Coral.ColumnView# */ {
+    /**
+      @class Coral.ColumnView
+      @classdesc A ColumnView component
+      @htmltag coral-columnview
+      @extends Coral.Component
+    */
+    name: 'ColumnView',
+    tagName: 'coral-columnview',
+    className: CLASSNAME,
+&nbsp;
+    events: {
+      // Prevents text selection while selecting multiple items
+      'global:keyup': '_onGlobalKeyUp',
+      'global:keydown': '_onGlobalKeyDown',
+&nbsp;
+      'key:up': '_onKeyUp',
+      'key:down': '_onKeyDown',
+      'key:right': '_onKeyRight',
+      'key:left': '_onKeyLeft',
+      'key:shift+up': '_onKeyShiftAndUp',
+      'key:shift+down': '_onKeyShiftAndDown',
+      'key:space': '_onKeySpace',
+&nbsp;
+      // column events
+      'coral-columnview-column:_loaditems': '_onColumnLoadItems',
+      'coral-columnview-column:_activeitemchanged': '_onColumnActiveItemChanged',
+      'coral-columnview-column:_selecteditemchanged': '_onColumnSelectedItemChanged'
+    },
+&nbsp;
+    properties: {
+      /**
+        Collection that holds all the columns inside the ColumnView. See {@link Coral.Collection} for more details.
+&nbsp;
+        @type {Coral.Collection}
+        @readonly
+        @memberof Coral.ColumnView#
+      */
+      'columns': {
+        get: function() {
+          // constructs the collection on first request
+          if (!this._columns) {
+            this._columns = new Coral.ColumnView.Collection({
+              host: this,
+              itemTagName: 'coral-columnview-column'
+            });
+          }
+&nbsp;
+          return this._columns;
+        },
+        set: <span class="fstat-no" title="function not covered" >function() {</span>
+          // Read-only
+        }
+      },
+&nbsp;
+      /**
+        Collection used to represent the coral-columnview-item across all columns. See {@link Coral.Collection} for more
+        details.
+&nbsp;
+        @type {Coral.Collection}
+        @readonly
+        @memberof Coral.ColumnView#
+&nbsp;
+        @private
+      */
+      'items': {
+        get: function() {
+          // constructs the collection on first request
+          if (!this._items) {
+            this._items = new Coral.ColumnView.Collection({
+              host: this,
+              itemTagName: 'coral-columnview-item'
+            });
+          }
+&nbsp;
+          return this._items;
+        },
+        set: <span class="fstat-no" title="function not covered" >function() {</span>
+          // Read-only
+        }
+      },
+&nbsp;
+      /**
+        Selection mode of the ColumnView.
+&nbsp;
+        @type {Coral.ColumnView.selectionMode}
+        @default Coral.ColumnView.selectionMode.NONE
+        @htmlattribute selectionmode
+        @memberof Coral.ColumnView#
+      */
+      'selectionMode': {
+        default: selectionMode.NONE,
+        attribute: 'selectionmode',
+        validate: [
+          Coral.validate.valueMustChange,
+          Coral.validate.enumeration(selectionMode)
+        ],
+        set: function(value) {
+          this._selectionMode = value;
+&nbsp;
+          // propagates the selection mode to the columns
+          this.columns.getAll().forEach(function(item) {
+            item.setAttribute('_selectionmode', value);
+          });
+        },
+        sync: function() {
+          this.$.removeClass(this._className + '--selection');
+&nbsp;
+          if (this.selectionMode !== Coral.ColumnView.selectionMode.NONE) {
+            this.$.addClass(this._className + '--selection');
+          }
+&nbsp;
+          // @a11y
+          this.setAttribute('aria-multiselectable', this.selectionMode === Coral.ColumnView.selectionMode.MULTIPLE);
+        }
+      },
+&nbsp;
+      /**
+        First selected item of the ColumnView.
+&nbsp;
+        @type {HTMLElement}
+        @readonly
+        @memberof Coral.ColumnView#
+      */
+      'selectedItem': {
+        get: <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >          return this.selectionMode !== selectionMode.NONE ? this.items.getFirstSelected() : null;</span>
+        },
+        set: <span class="fstat-no" title="function not covered" >function() {</span>
+          // Read-only
+        }
+      },
+&nbsp;
+      /**
+        Array containing the set selected items. The items will match only one column since selection across columns is
+        not allowed.
+&nbsp;
+        @type {Array.&lt;HTMLElement&gt;}
+        @readonly
+        @memberof Coral.ColumnView#
+      */
+      'selectedItems': {
+        get: function() {
+          return this.selectionMode !== selectionMode.NONE ? this.items.getSelected() : [];
+        },
+        set: <span class="fstat-no" title="function not covered" >function() {</span>
+          // Read-only
+        }
+      },
+&nbsp;
+      /**
+        Active Item that corresponds to the last item in the path.
+&nbsp;
+&nbsp;
+        @type {HTMLElement}
+        @readonly
+        @memberof Coral.ColumnView#
+      */
+      'activeItem': {
+        get: function() {
+          return this.items.getLastActive();
+        },
+        set: <span class="fstat-no" title="function not covered" >function() {</span>
+          // Read-only
+        }
+      }
+    },
+&nbsp;
+    /** @private */
+    _onColumnActiveItemChanged: function(event) {
+      // this is a private event and should not leave the column view
+      event.stopImmediatePropagation();
+&nbsp;
+      // ignores event handling due to bulk select operation
+      if (this._bulkSelectionChange) {
+        return;
+      }
+&nbsp;
+      var column = event.target;
+&nbsp;
+      // clears the internal selection cursor
+      this._handleKeyboardMultiselect(null);
+&nbsp;
+      this._bulkSelectionChange = true;
+&nbsp;
+      if (!event.detail.activeItem) {
+        // all items to the right must be removed. we do this at the end to be able to extract the values before
+        // removing everything
+        this._afterItemSelectedInColumn(column);
+      }
+      else {
+        // when there is an active item, selection must not exist
+        this.items.deselectAll();
+&nbsp;
+        // we need to deactivate every item to the right of the new active item to keep a correct DOM representation
+        var $columnsToTheRight = $(column).nextAll();
+        $columnsToTheRight.find('coral-columnview-item[active]').each(function() {
+          this.removeAttribute('active');
+        });
+      }
+&nbsp;
+      this._bulkSelectionChange = false;
+&nbsp;
+      // we trigger the appropiate events
+      this._validateColumnViewChange();
+    },
+&nbsp;
+    /**
+      Requests external data to be loaded.
+&nbsp;
+      @fires Coral.ColumnView#coral-columnview:loaditems
+&nbsp;
+      @param {HTMLElement} column
+        The column that is requesting more data to be loaded.
+      @param {Number} start
+        The amount of items inside the column.
+      @param {HTMLElement} [item]
+        Item that activated the load.
+&nbsp;
+      @private
+    */
+    _onColumnLoadItems: function(event) {
+      // this is a private event and should not leave the column view
+      event.stopImmediatePropagation();
+&nbsp;
+      // triggers an event to indicate more data could be loaded
+      this.trigger('coral-columnview:loaditems', {
+        column: event.target,
+        start: event.detail.start,
+        item: event.detail.item
+      });
+    },
+&nbsp;
+    /** @private */
+    _onColumnSelectedItemChanged: function(event) {
+      // this is a private event and should not leave the column view
+      event.stopImmediatePropagation();
+&nbsp;
+      // ignores event handling due to bulk select operation
+      if (this._bulkSelectionChange || this.selectionMode === selectionMode.NONE) {
+        return;
+      }
+&nbsp;
+      this._bulkSelectionChange = true;
+      // we need to deselect any other selection that is not part of the same column
+      var diff = $(this._oldSelection).not(event.detail.selection);
+&nbsp;
+      diff.each(function() {
+        this.removeAttribute('selected');
+      });
+      this._bulkSelectionChange = false;
+&nbsp;
+      // we trigger the appropiate events
+      this._validateColumnViewChange();
+    },
+&nbsp;
+    /** @private */
+    _onGlobalKeyUp: <span class="fstat-no" title="function not covered" >function(event) {</span>
+      // removes the class to stop selection
+<span class="cstat-no" title="statement not covered" >      if (event.keyCode === 16) {</span>
+<span class="cstat-no" title="statement not covered" >        this.$.removeClass('is-unselectable');</span>
+      }
+    },
+&nbsp;
+    /** @private */
+    _onGlobalKeyDown: <span class="fstat-no" title="function not covered" >function(event) {</span>
+      // adds a class that prevents the text selection, otherwise shift + click would select the text
+<span class="cstat-no" title="statement not covered" >      if (event.keyCode === 16) {</span>
+<span class="cstat-no" title="statement not covered" >        this.$.addClass('is-unselectable');</span>
+      }
+    },
+&nbsp;
+    /** @private */
+    _onKeyShiftAndUp: <span class="fstat-no" title="function not covered" >function(event) {</span>
+<span class="cstat-no" title="statement not covered" >      event.preventDefault();</span>
+&nbsp;
+      // using _oldSelection since it should be equivalent to this.items._getSelectedItems() but faster
+<span class="cstat-no" title="statement not covered" >      var selectedItems = this._oldSelection;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this._isKeyBoardMultiselect = true;</span>
+&nbsp;
+      // first make sure to select the active item as we want to multiselect
+<span class="cstat-no" title="statement not covered" >      if (selectedItems.length === 0) {</span>
+<span class="cstat-no" title="statement not covered" >        var activeItem = this.activeItem;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (activeItem) {</span>
+<span class="cstat-no" title="statement not covered" >          activeItem.setAttribute('selected', '');</span>
+        }
+      }
+&nbsp;
+      // gets all the selected items of the active column. calling _getSelectedItems() will include the active item
+      // if it was selected
+<span class="cstat-no" title="statement not covered" >      var $selectedItems = $(this._items._getSelectedItems());</span>
+      // reference of the last selected item to know the direction of the selection while using the multiselection
+<span class="cstat-no" title="statement not covered" >      var lastSelected = this.$.data('lastSelected');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var $selectedItem = $(); </span>//create an empty jquery obj
+      // when no previous selection is stored we need to initialize it with the current information
+<span class="cstat-no" title="statement not covered" >      if (!lastSelected) {</span>
+<span class="cstat-no" title="statement not covered" >        $selectedItem = $selectedItems.first().prev();</span>
+        // selects the item
+<span class="cstat-no" title="statement not covered" >        $selectedItem.attr('selected', 'true');</span>
+      }
+      else <span class="cstat-no" title="statement not covered" >if (lastSelected.item) {</span>
+<span class="cstat-no" title="statement not covered" >        $selectedItem = $(lastSelected.item);</span>
+&nbsp;
+        // we have reached the upper selection limit
+<span class="cstat-no" title="statement not covered" >        if ($selectedItem.is(':first-child')) {</span>
+<span class="cstat-no" title="statement not covered" >          this._isKeyBoardMultiselect = false;</span>
+<span class="cstat-no" title="statement not covered" >          return;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (!lastSelected.direction || lastSelected.direction === 'up') {</span>
+<span class="cstat-no" title="statement not covered" >          $selectedItem = $selectedItem.prev();</span>
+<span class="cstat-no" title="statement not covered" >          $selectedItem.attr('selected', 'true');</span>
+        }
+        else {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          if ($selectedItem[0] !== lastSelected.firstSelectedItem) {</span>
+<span class="cstat-no" title="statement not covered" >            $selectedItem.removeAttr('selected');</span>
+          }
+          else {
+            // switches the direction if this was the last item selected
+<span class="cstat-no" title="statement not covered" >            lastSelected.direction = 'up';</span>
+          }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          $selectedItem = $selectedItem.prev();</span>
+<span class="cstat-no" title="statement not covered" >          $selectedItem.attr('selected', 'true');</span>
+        }
+      }
+&nbsp;
+      // stores the reference and direction to be able to perform the multiple selection correctly
+<span class="cstat-no" title="statement not covered" >      this.$.data('lastSelected', {</span>
+        item: $selectedItem[0],
+        direction: (lastSelected &amp;&amp; lastSelected.direction) ? lastSelected.direction : 'up',
+        firstSelectedItem: (lastSelected &amp;&amp; lastSelected.firstSelectedItem) ?
+          lastSelected.firstSelectedItem :
+          $selectedItem.next()[0]
+      });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this._isKeyBoardMultiselect = false;</span>
+    },
+&nbsp;
+    /** @private */
+    _onKeyShiftAndDown: <span class="fstat-no" title="function not covered" >function(event) {</span>
+<span class="cstat-no" title="statement not covered" >      event.preventDefault();</span>
+&nbsp;
+      // using _oldSelection since it should be equivalent to this.items._getSelectedItems() but faster
+<span class="cstat-no" title="statement not covered" >      var selectedItems = this._oldSelection;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this._isKeyBoardMultiselect = true;</span>
+&nbsp;
+      // first make sure to select the active item as we want to multiselect
+<span class="cstat-no" title="statement not covered" >      if (selectedItems.length === 0) {</span>
+<span class="cstat-no" title="statement not covered" >        var activeItem = this.activeItem;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (activeItem) {</span>
+<span class="cstat-no" title="statement not covered" >          activeItem.setAttribute('selected', '');</span>
+        }
+      }
+&nbsp;
+      // gets all the selected items of the active column. calling _getSelectedItems() will include the active item
+      // if it was selected
+<span class="cstat-no" title="statement not covered" >      var $selectedItems = $(this._items._getSelectedItems());</span>
+&nbsp;
+      // reference of the last selected item to know the direction of the selection while using the multiselection
+<span class="cstat-no" title="statement not covered" >      var lastSelected = this.$.data('lastSelected');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var $selectedItem = $(); </span>//create an empty jquery obj
+      // when no previous selection is stored we need to initialize it with the current information
+<span class="cstat-no" title="statement not covered" >      if (!lastSelected) {</span>
+<span class="cstat-no" title="statement not covered" >        $selectedItem = $selectedItems.last().next();</span>
+        // selects the item
+<span class="cstat-no" title="statement not covered" >        $selectedItem.attr('selected', 'true');</span>
+      }
+      else <span class="cstat-no" title="statement not covered" >if (lastSelected.item) {</span>
+<span class="cstat-no" title="statement not covered" >        $selectedItem = $(lastSelected.item);</span>
+&nbsp;
+        // we have reached the lower selection limit
+<span class="cstat-no" title="statement not covered" >        if ($selectedItem.is(':last-child')) {</span>
+<span class="cstat-no" title="statement not covered" >          this._isKeyBoardMultiselect = false;</span>
+<span class="cstat-no" title="statement not covered" >          return;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (!lastSelected.direction || lastSelected.direction === 'down') {</span>
+<span class="cstat-no" title="statement not covered" >          $selectedItem = $selectedItem.next();</span>
+<span class="cstat-no" title="statement not covered" >          $selectedItem.attr('selected', 'true');</span>
+        }
+        else {
+<span class="cstat-no" title="statement not covered" >          if ($selectedItem[0] !== lastSelected.firstSelectedItem) {</span>
+<span class="cstat-no" title="statement not covered" >            $selectedItem.removeAttr('selected');</span>
+          }
+          else {
+            // switches the direction if this was the last item selected
+<span class="cstat-no" title="statement not covered" >            lastSelected.direction = 'down';</span>
+          }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          $selectedItem = $selectedItem.next();</span>
+<span class="cstat-no" title="statement not covered" >          $selectedItem.attr('selected', 'true');</span>
+        }
+      }
+&nbsp;
+      // stores the reference and direction to be able to perform the multiple selection correctly
+<span class="cstat-no" title="statement not covered" >      this.$.data('lastSelected', {</span>
+        item: $selectedItem[0],
+        direction: (lastSelected &amp;&amp; lastSelected.direction) ? lastSelected.direction : 'down',
+        firstSelectedItem: (lastSelected &amp;&amp; lastSelected.firstSelectedItem) ?
+          lastSelected.firstSelectedItem :
+          $selectedItem.prev()[0]
+      });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this._isKeyBoardMultiselect = false;</span>
+    },
+&nbsp;
+    /** @private */
+    _onKeyUp: <span class="fstat-no" title="function not covered" >function(event) {</span>
+<span class="cstat-no" title="statement not covered" >      event.preventDefault();</span>
+&nbsp;
+      // selection will win over active buttons, because they are the right most item. using _oldSelection since it
+      // should be equivalent to this.items._getSelectedItems() but faster
+<span class="cstat-no" title="statement not covered" >      var selectedItems = this._oldSelection;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var $item;</span>
+<span class="cstat-no" title="statement not covered" >      if (selectedItems.length !== 0) {</span>
+<span class="cstat-no" title="statement not covered" >        var $selectedItem = $(selectedItems[0]);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        $item = $selectedItem.prev();</span>
+<span class="cstat-no" title="statement not covered" >        if ($item.length === 0) {</span>
+<span class="cstat-no" title="statement not covered" >          $item = $selectedItem;</span>
+        }
+      }
+      else {
+        // when there is no active item to select, we get the last item of the column. this way users can interact with
+        // the column view when there is nothing selected or activated
+<span class="cstat-no" title="statement not covered" >        if (this._oldActiveItem === null) {</span>
+<span class="cstat-no" title="statement not covered" >          $item = this.items._getSelectableItems().last();</span>
+        }
+        else {
+<span class="cstat-no" title="statement not covered" >          $item = $(this._oldActiveItem).prev();</span>
+        }
+      }
+&nbsp;
+      // we use click instead of selected to force the deselection of the other items
+<span class="cstat-no" title="statement not covered" >      $item.click();</span>
+    },
+&nbsp;
+    /** @private */
+    _onKeyDown: <span class="fstat-no" title="function not covered" >function(event) {</span>
+<span class="cstat-no" title="statement not covered" >      event.preventDefault();</span>
+&nbsp;
+      // selection will win over active buttons, because they are the right most item. using _oldSelection since it
+      // should be equivalent to this.items._getSelectedItems() but faster
+<span class="cstat-no" title="statement not covered" >      var selectedItems = this._oldSelection;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var $item;</span>
+<span class="cstat-no" title="statement not covered" >      if (selectedItems.length !== 0) {</span>
+<span class="cstat-no" title="statement not covered" >        var $selectedItem = $(selectedItems[selectedItems.length - 1]);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        $item = $selectedItem.next();</span>
+&nbsp;
+        // when
+<span class="cstat-no" title="statement not covered" >        if ($item.length === 0) {</span>
+<span class="cstat-no" title="statement not covered" >          $item = $selectedItem;</span>
+        }
+      }
+      else {
+        // when there is no active item to select, we get the first item of the column. this way users can interact with
+        // the column view when there is nothing selected or activated
+<span class="cstat-no" title="statement not covered" >        if (this._oldActiveItem === null) {</span>
+<span class="cstat-no" title="statement not covered" >          $item = this.items._getSelectableItems().first();</span>
+        }
+        else {
+<span class="cstat-no" title="statement not covered" >          $item = $(this._oldActiveItem).next();</span>
+        }
+      }
+&nbsp;
+      // we use click instead of selected to force the deselection of the other items
+<span class="cstat-no" title="statement not covered" >      $item.click();</span>
+    },
+&nbsp;
+    /** @private */
+    _onKeyRight: <span class="fstat-no" title="function not covered" >function(event) {</span>
+<span class="cstat-no" title="statement not covered" >      event.preventDefault();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var nextColumn = $(this.activeItem).closest('coral-columnview-column').next('coral-columnview-column').get(0);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (nextColumn) {</span>
+        // we need to make sure the column is initialized
+<span class="cstat-no" title="statement not covered" >        Coral.commons.ready(nextColumn, <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >          nextColumn.items._getSelectableItems().first().click();</span>
+        });
+      }
+    },
+&nbsp;
+    /** @private */
+    _onKeyLeft: <span class="fstat-no" title="function not covered" >function(event) {</span>
+<span class="cstat-no" title="statement not covered" >      event.preventDefault();</span>
+&nbsp;
+      // we can only navigate left when there is a column on the left side to navigate to
+<span class="cstat-no" title="statement not covered" >      var previousColumn;</span>
+      // using _oldSelection since it should be equivalent to this.items._getSelectedItems() but faster
+<span class="cstat-no" title="statement not covered" >      var selectedItems = this._oldSelection;</span>
+&nbsp;
+      // when there is selection, we use the previous column as a reference
+<span class="cstat-no" title="statement not covered" >      if (selectedItems.length !== 0) {</span>
+<span class="cstat-no" title="statement not covered" >        previousColumn = $(selectedItems).closest('coral-columnview-column').prev('coral-columnview-column').get(0);</span>
+      }
+      // otherwise we use the activeItems as a reference
+      else {
+<span class="cstat-no" title="statement not covered" >        previousColumn = $(this.activeItem).closest('coral-columnview-column').prev('coral-columnview-column').get(0);</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (previousColumn) {</span>
+        // we need to make sure the column is initialized
+<span class="cstat-no" title="statement not covered" >        Coral.commons.ready(previousColumn, <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >          if (previousColumn.activeItem) {</span>
+            // if there is an active item simply click it again
+<span class="cstat-no" title="statement not covered" >            previousColumn.activeItem.click();</span>
+          }
+          else {
+            // we need to find a candicate for activation
+<span class="cstat-no" title="statement not covered" >            selectedItems = previousColumn.items._getSelectedItems().first();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (selectedItems.length !== 0) {</span>
+<span class="cstat-no" title="statement not covered" >              selectedItems.click();</span>
+            }
+            else {
+<span class="cstat-no" title="statement not covered" >              previousColumn.items._getSelectableItems().first().click();</span>
+            }
+          }
+        });
+      }
+    },
+&nbsp;
+    /** @private */
+    _onKeySpace: <span class="fstat-no" title="function not covered" >function(event) {</span>
+<span class="cstat-no" title="statement not covered" >      event.preventDefault();</span>
+&nbsp;
+      // using _oldSelection since it should be equivalent to this.items._getSelectedItems() but faster
+<span class="cstat-no" title="statement not covered" >      var selectedItems = this._oldSelection;</span>
+&nbsp;
+      // when there is a selection, we need to activate the first item of the selection
+<span class="cstat-no" title="statement not covered" >      if (selectedItems.length !== 0) {</span>
+<span class="cstat-no" title="statement not covered" >        selectedItems[0].setAttribute('active', '');</span>
+      }
+      else {
+<span class="cstat-no" title="statement not covered" >        var activeItem = this.activeItem;</span>
+        // toggles the selection between active and selected
+<span class="cstat-no" title="statement not covered" >        if (activeItem) {</span>
+          // select the item
+<span class="cstat-no" title="statement not covered" >          activeItem.setAttribute('selected', '');</span>
+        }
+      }
+    },
+&nbsp;
+    /** @private */
+    _arraysAreDifferent: function(selection, oldSelection) {
+      // since we guarantee that they are arrays, we can start by comparing their size
+      return oldSelection.length !== selection.length || $(oldSelection).not(selection).length !== 0;
+    },
+&nbsp;
+    /** @private */
+    _handleKeyboardMultiselect: function(newSelectedItem) {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (!this._isKeyBoardMultiselect) {
+        this.$.removeData('lastSelected');
+&nbsp;
+        // if there is a new selected item save this (but without direction info)
+        if (newSelectedItem) {
+          this.$.data('lastSelected', {
+            item: newSelectedItem,
+            direction: null,
+            firstSelectedItem: newSelectedItem
+          });
+        }
+      }
+    },
+&nbsp;
+    /**
+      Scrolls the given {@link Coral.ColumnView.Column} into view.
+&nbsp;
+      @param {HTMLElement} column
+        The column that needs to be scrolled into view.
+      @param {Boolean} clearEmptyColumns
+        Remove empty columns once animation is done.
+&nbsp;
+      @private
+    */
+    // @todo: improve animation effect when key is kept press
+    _scrollColumnIntoView: function(column, clearEmptyColumns, triggerEvent) {
+      var left = 0;
+      var duration;
+&nbsp;
+      // we return if the column is not inside the current column view
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (!this.contains(column)) {
+<span class="cstat-no" title="statement not covered" >        return;</span>
+      }
+&nbsp;
+      var $column = $(column);
+&nbsp;
+      // make sure to clear columns next to this column if animation is done
+      var self = this;
+      var completeCallback = <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >        if (clearEmptyColumns) {</span>
+<span class="cstat-no" title="statement not covered" >          self._removeEmptyColumnsWithSmoothTransition(triggerEvent);</span>
+        }
+      };
+&nbsp;
+      // scroll right to the given column
+      <span class="missing-if-branch" title="if path not taken" >I</span>if ($column.position().left + column.offsetWidth &gt;= this.offsetWidth) {
+<span class="cstat-no" title="statement not covered" >        $column.nextAll().remove();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.$.stop(true, false);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        left = this.$[0].scrollWidth - this.offsetWidth;</span>
+<span class="cstat-no" title="statement not covered" >        duration = (left - this.$.scrollLeft()) * 1.5;</span>
+<span class="cstat-no" title="statement not covered" >        this.$.animate({</span>
+          scrollLeft: left
+        }, {
+          duration: duration,
+          complete: completeCallback
+        });
+      }
+      else <span class="missing-if-branch" title="else path not taken" >E</span>if (clearEmptyColumns) {
+        this._removeEmptyColumnsWithSmoothTransition(triggerEvent);
+      }
+    },
+&nbsp;
+    /**
+      Handling of the column view after selecting an item.
+&nbsp;
+      @param {HTMLElement} column
+&nbsp;
+      @private
+    */
+    _afterItemSelectedInColumn: function(column) {
+      // @todo: emptying the columns allows them to be queried
+      this._emptyColumnsNextToColumn(column);
+      this._scrollColumnIntoView(column, true, true);
+    },
+&nbsp;
+    /**
+      Empties all the columns to the right of the provided column.
+&nbsp;
+      @param {HTMLElement} column
+&nbsp;
+      @private
+    */
+    _emptyColumnsNextToColumn: function(column) {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (column !== null) {
+        $(column).nextAll().empty();
+      }
+    },
+&nbsp;
+    /**
+      Remove all empty columns with a smooth transition. Optionally the navigate event is triggered when all the extra
+      columns are removed from the DOM.
+&nbsp;
+      @param {Boolean} triggerEvent
+        Whether the navigate event must be triggered.
+&nbsp;
+      @private
+    */
+    _removeEmptyColumnsWithSmoothTransition: function(triggerEvent) {
+      // fade width of empty items to 0 before removing the columns (for better usability while navigating)
+      var $emptyColumns = this.$.find('coral-columnview-column:empty, coral-columnview-preview:empty');
+&nbsp;
+      var self = this;
+&nbsp;
+      $emptyColumns.css('visibility', 'hidden');
+      $emptyColumns.animate({
+        width: 0
+      }, {
+        duration: 200,
+        queue: false,
+        complete: function() {
+          $(this).remove();
+        }
+      }).promise().done(function() {
+        // event is triggered when all the animations are done
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (triggerEvent) {
+          self._validateNavigation(self.columns.last());
+        }
+      });
+    },
+&nbsp;
+    /** @private */
+    _triggerCollectionEvents: function(addedNodes, removedNodes) {
+      var item;
+      var addedNodesCount = addedNodes.length;
+      for (var i = 0; i &lt; addedNodesCount; i++) {
+        item = addedNodes[i];
+        if (item.tagName === 'CORAL-COLUMNVIEW-COLUMN') {
+          // we use the property since the item may not be ready
+          item.setAttribute('_selectionmode', this.selectionMode);
+          this.trigger('coral-collection:add', {
+            item: item
+          });
+        }
+      }
+&nbsp;
+      // @todo: check if special handling is needed when selected column is removed
+      var removedNodesCount = removedNodes.length;
+      for (var j = 0; j &lt; removedNodesCount; j++) {
+        item = removedNodes[j];
+        // @todo: should I handle it specially if it was selected? should a selection and active event be triggered?
+        if (item.tagName === 'CORAL-COLUMNVIEW-COLUMN') {
+          this.trigger('coral-collection:remove', {
+            item: item
+          });
+        }
+      }
+    },
+&nbsp;
+    /** @private */
+    _setStateFromDOM: function() {
+      // @todo: should I trigger change events?
+      // initial state of the columnview
+      this._oldActiveItem = this.activeItem;
+      this._oldSelection = this.selectedItems;
+    },
+&nbsp;
+    /** @private */
+    _handleMutation: function(mutations) {
+      var mutationsCount = mutations.length;
+      for (var i = 0; i &lt; mutationsCount; i++) {
+        var mutation = mutations[i];
+&nbsp;
+        // we handle the collection events
+        this._triggerCollectionEvents(mutation.addedNodes, mutation.removedNodes);
+      }
+&nbsp;
+      // sets the internal state based on the existing columns
+      this._setStateFromDOM();
+    },
+&nbsp;
+    /**
+      Determines if something of the internal state of the component has changed. Active item event is always triggered
+      first and then the selection event.
+&nbsp;
+      @private
+    */
+    _validateColumnViewChange: function() {
+      // we evaluate first the active event since we always need to trigger active first and then selection
+      var activeItem = this.activeItem;
+      var oldActiveItem = this._oldActiveItem || null;
+&nbsp;
+      // same column events are only triggered if the active item changed, otherwise they are ignored
+      if (activeItem !== oldActiveItem) {
+        this.trigger('coral-columnview:activeitemchange', {
+          activeItem: activeItem,
+          oldActiveItem: oldActiveItem
+        });
+&nbsp;
+        // we cache the old active item to be able to report correct change events
+        this._oldActiveItem = activeItem;
+      }
+&nbsp;
+      // when there is no selection we avoid triggering any change event but we do not stop items from having the
+      // selected attribute
+      if (this.selectionMode === selectionMode.NONE) {
+        return;
+      }
+&nbsp;
+      var newSelection = this.selectedItems;
+      var oldSelection = this._oldSelection || <span class="branch-1 cbranch-no" title="branch not covered" >[];</span>
+&nbsp;
+      // use first newly selected item for new selection
+      var newSelectedItems = $(newSelection).not(oldSelection);
+      this._handleKeyboardMultiselect(newSelectedItems.length &gt; 0 ? newSelectedItems[0] : null);
+&nbsp;
+      if (this._arraysAreDifferent(newSelection, oldSelection)) {
+        this.trigger('coral-columnview:change', {
+          selection: newSelection,
+          oldSelection: oldSelection
+        });
+&nbsp;
+        // changes the old selection array since we selected something new
+        this._oldSelection = newSelection;
+      }
+    },
+&nbsp;
+    /** @ignore */
+    _initialize: function() {
+      // @a11y
+      this.setAttribute('role', 'tree');
+      // @a11y: the columnview needs to be focusable to handle a11y properly
+      this.setAttribute('tabindex', '0');
+&nbsp;
+      // default value of inner flag to process events
+      this._bulkSelectionChange = false;
+&nbsp;
+      // initializes the mutation observer that used to detect when new items are added or removed
+      this._observer = new MutationObserver(this._handleMutation.bind(this));
+      this._observer.observe(this, {
+        // only watch the childList, items will tell us if selected/value/content changes
+        childList: true
+      });
+&nbsp;
+      // no need to wait for the mutation observers
+      this._setStateFromDOM();
+    },
+&nbsp;
+    /** @private */
+    attachedCallback: function() {
+      Coral.Component.prototype.attachedCallback.call(this);
+      // sets the state from the DOM
+      // @polyfill ie9 since mutation observers are not called if not in the DOM
+      this._setStateFromDOM();
+    },
+&nbsp;
+    /** @ignore */
+    focus: <span class="fstat-no" title="function not covered" >function() {</span>
+      // selected items go first because there is no active item in a column with selection
+<span class="cstat-no" title="statement not covered" >      var item = this.selectedItems[0] || this.activeItem;</span>
+<span class="cstat-no" title="statement not covered" >      if (item) {</span>
+<span class="cstat-no" title="statement not covered" >        item.focus();</span>
+      }
+    },
+&nbsp;
+    /**
+      Sets the next column given a reference column. This will handle cleaning the DOM and removing any columns as
+      required.
+&nbsp;
+      @param {HTMLElement} newColumn
+        The new column to add to the column view. It will be placed next to the &lt;code&gt;referenceColumn&lt;/code&gt; if
+        provided.
+      @param {HTMLElement} referenceColumn
+        The column that will be used as a reference to place the new column. This column needs to be already inside the
+        DOM.
+      @param {Boolean} [scrollToColumn = true]
+        Whether the columnview show scroll to have the &lt;code&gt;newColumn&lt;/code&gt; visible.
+&nbsp;
+      @fires Coral.ColumnView#coral-columnview:navigate
+    */
+    setNextColumn: function(newColumn, referenceColumn, scrollToColumn) {
+      // we convert the column data into DOM
+      var $newColumn = $(newColumn);
+&nbsp;
+      scrollToColumn = typeof scrollToColumn === 'undefined' || scrollToColumn;
+&nbsp;
+      var column = referenceColumn || <span class="branch-1 cbranch-no" title="branch not covered" >null;</span>
+&nbsp;
+      // handles the case where the first column needs to be added
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (column === null || !this.contains(column)) {
+<span class="cstat-no" title="statement not covered" >        this.appendChild(newColumn);</span>
+      }
+      else {
+        var $column = $(column);
+        var $nextColumn = $column.next();
+&nbsp;
+        if ($nextColumn.length &gt; 0) {
+          this._emptyColumnsNextToColumn(column);
+          $nextColumn.replaceWith($newColumn);
+        }
+        else {
+          this.appendChild(newColumn);
+        }
+      }
+&nbsp;
+      var self = this;
+      // if we want to scroll to it, we need for it to be ready due to measurements
+      Coral.commons.ready(newColumn, function() {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (scrollToColumn) {
+          // event is not triggered because it is handled separately
+<span class="cstat-no" title="statement not covered" >          self._scrollColumnIntoView(newColumn, true, false);</span>
+        }
+&nbsp;
+        // we notify that the columnview navigated and it is ready to be used
+        self._validateNavigation(newColumn);
+      });
+    },
+&nbsp;
+    /**
+      Triggers the navigation event. Navigation would happen when a) a new column is added, and it is ready to be
+      used or b) columns are removed and the active changed. In case the column is actually a preview column, the event
+      will only be triggered when there is no selection (meanning a real navigation was performed).
+&nbsp;
+      @param {HTMLElement} column
+        Last column of the ColumnView.
+&nbsp;
+      @fires Coral.ColumnView#coral-columnview:navigate
+&nbsp;
+      @private
+    */
+    _validateNavigation: function(column) {
+      // we use _oldSelection because it is faster
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (column.tagName === 'CORAL-COLUMNVIEW-PREVIEW' &amp;&amp; this._oldSelection.length !== 0) {
+<span class="cstat-no" title="statement not covered" >        return;</span>
+      }
+&nbsp;
+      this.trigger('coral-columnview:navigate', {
+        activeItem: this.activeItem,
+        column: column
+      });
+    }
+&nbsp;
+    /**
+      Triggered when additional items can be loaded into the ColumnView. This will happen when the current column can
+      still hold more items, when the user scrolls down the current column or when a new column needs to be loaded. If
+      &lt;code&gt;preventDefault()&lt;/code&gt; is called, then a loading indicator will be shown.
+      {@link Coral.ColumnView.Column#loading} should be set to false to indicate that the data has been successfully
+      loaded.
+&nbsp;
+      @event Coral.ColumnView#coral-columnview:loaditems
+&nbsp;
+      @param {Object} event
+        Event object.
+      @param {HTMLElement} event.detail.column
+        The column that is requesting more items. While doing pagination, it will become the target of the loaded items.
+      @param {Number} event.detail.start
+        Indicates the current amount of items in the &lt;code&gt;column&lt;/code&gt; to do pagination. If &lt;code&gt;item&lt;/code&gt; is
+        available, start will be 0 to denote that the column should be loaded from the start.
+      @param {HTMLElement} event.detail.item
+        The item that ininitialized the load. If item is provided, it means that a new column needs to be added after
+        the load is performed. In this scenario, &lt;code&gt;column&lt;/code&gt; will be refer to the column that holds the item.
+    */
+&nbsp;
+    /**
+      Triggered when the selection inside the column change. In case both the selection and the active item change,
+      the &lt;code&gt;coral-columnview:activeitemchange&lt;/code&gt; will be triggered first.
+&nbsp;
+      @event Coral.ColumnView#coral-columnview:change
+&nbsp;
+      @param {Object} event
+        Event object.
+      @param {HTMLElement} event.detail.column
+        The column whose selection changed.
+      @param {HTMLElement|Array.&lt;HTMLElement&gt;} event.detail.selection
+        The new selection of the Column.
+      @param {HTMLElement|Array.&lt;HTMLElement&gt;} event.detail.oldSelection
+        The old selection of the Column.
+    */
+&nbsp;
+    /**
+      Triggered when the active item of the column changes.
+&nbsp;
+      @event Coral.ColumnView#coral-columnview:activeitemchange
+&nbsp;
+      @param {Object} event
+        Event object.
+      @param {HTMLElement} event.detail.column
+        The column whose active item has changed.
+      @param {HTMLElement} event.detail.activeItem
+        The currently active item of the column.
+      @param {HTMLElement} event.detail.oldActiveItem
+        The item of the column that was active before.
+    */
+&nbsp;
+    /**
+      Triggered when the navigation is complete and the new columns are ready.
+&nbsp;
+      @event Coral.ColumnView#coral-columnview:navigate
+&nbsp;
+      @param {Object} event
+        Event object.
+      @param {HTMLElement} event.detail.column
+        The last Column of the ColumnView that is used to determine the path. If the navigate was triggered because a
+        new &lt;code&gt;Coral.ColumnView.Column&lt;/code&gt; was added, then it will match that column. In case the path was
+        reduced, the column will match the last column.
+      @param {HTMLElement} event.detail.activeItem
+        The currently active item of the ColumnView.
+    */
+  });
+&nbsp;
+  // exports the enumerations
+  Coral.ColumnView.selectionMode = selectionMode;
+}());
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Apr 26 2016 16:34:46 GMT+0200 (CEST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

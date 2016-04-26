@@ -1,0 +1,2174 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for coralui-component-masonry/scripts/Coral.Masonry.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">coralui-component-masonry/scripts/</a> Coral.Masonry.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">95.41% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>187/196</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">81.9% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>86/105</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">84% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>42/50</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">95.41% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>187/196</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5173×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">266×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">851×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1106×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">212×</span>
+<span class="cline-any cline-yes">212×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">210×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">124×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">210×</span>
+<span class="cline-any cline-yes">148×</span>
+<span class="cline-any cline-yes">146×</span>
+<span class="cline-any cline-yes">146×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">148×</span>
+<span class="cline-any cline-yes">148×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">115×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">116×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1159×</span>
+<span class="cline-any cline-yes">555×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">555×</span>
+<span class="cline-any cline-yes">444×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">555×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">77×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">77×</span>
+<span class="cline-any cline-yes">77×</span>
+<span class="cline-any cline-yes">72×</span>
+<span class="cline-any cline-yes">72×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">105×</span>
+<span class="cline-any cline-yes">105×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">77×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">507×</span>
+<span class="cline-any cline-yes">507×</span>
+<span class="cline-any cline-yes">507×</span>
+<span class="cline-any cline-yes">142×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-yes">90×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">275×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-yes">410×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-yes">409×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-yes">110×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">365×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">112×</span>
+<span class="cline-any cline-yes">112×</span>
+<span class="cline-any cline-yes">112×</span>
+<span class="cline-any cline-yes">112×</span>
+<span class="cline-any cline-yes">112×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">112×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">112×</span>
+<span class="cline-any cline-yes">112×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">112×</span>
+<span class="cline-any cline-yes">112×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">91×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">91×</span>
+<span class="cline-any cline-yes">91×</span>
+<span class="cline-any cline-yes">91×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">91×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">91×</span>
+<span class="cline-any cline-yes">91×</span>
+<span class="cline-any cline-yes">91×</span>
+<span class="cline-any cline-yes">91×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">91×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">91×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">409×</span>
+<span class="cline-any cline-yes">409×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">409×</span>
+<span class="cline-any cline-yes">35×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">409×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">114×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">114×</span>
+<span class="cline-any cline-yes">92×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">114×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">116×</span>
+<span class="cline-any cline-yes">116×</span>
+<span class="cline-any cline-yes">462×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">161×</span>
+<span class="cline-any cline-yes">161×</span>
+<span class="cline-any cline-yes">161×</span>
+<span class="cline-any cline-yes">161×</span>
+<span class="cline-any cline-yes">161×</span>
+<span class="cline-any cline-yes">161×</span>
+<span class="cline-any cline-yes">161×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">161×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">88×</span>
+<span class="cline-any cline-yes">88×</span>
+<span class="cline-any cline-yes">88×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">161×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">158×</span>
+<span class="cline-any cline-yes">158×</span>
+<span class="cline-any cline-yes">158×</span>
+<span class="cline-any cline-yes">158×</span>
+<span class="cline-any cline-yes">158×</span>
+<span class="cline-any cline-yes">158×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">158×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">316×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">100×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2015 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+(function() {
+  'use strict';
+&nbsp;
+  // IE does not set the complete property to true if an image cannot be loaded. This code must be outside of the
+  // masonry to make sure that the listener catches images which fail loading before the masonry is initalized.
+  // @polyfill ie11
+  document.addEventListener('error', <span class="fstat-no" title="function not covered" >function(event) {</span>
+<span class="cstat-no" title="statement not covered" >    var target = event.target;</span>
+<span class="cstat-no" title="statement not covered" >    if (target &amp;&amp; target.tagName === 'IMG') {</span>
+<span class="cstat-no" title="statement not covered" >      target._loadError = true;</span>
+    }
+  }, true);
+&nbsp;
+  function itemFilter(element) {
+    // Ignore children which are being removed
+    return element &amp;&amp; element.tagName === 'CORAL-MASONRY-ITEM' &amp;&amp; !element._removing;
+  }
+&nbsp;
+  function isRemovingOrRemoved(item) {
+    return item._removing || !item.parentNode;
+  }
+&nbsp;
+  Coral.register( /** @lends Coral.Masonry# */ {
+    /**
+      @class Coral.Masonry
+      @classdesc A masonry component
+      @extends Coral.Component
+      @htmltag coral-masonry
+     */
+    name: 'Masonry',
+    tagName: 'coral-masonry',
+    className: 'coral-Masonry',
+&nbsp;
+    events: {
+      'resize': '_onResize',
+      'global:resize': '_onWindowResize',
+&nbsp;
+      // Loaded
+      'global:load': '_updateLoaded',
+      'capture:load img': '_updateLoaded',
+      'capture:error img': '_updateLoaded',
+&nbsp;
+      // Drag and drop
+      'coral-dragaction:dragstart coral-masonry-item': '_onItemDragStart',
+      'coral-dragaction:dragover coral-masonry-item': '_onItemDragMove',
+      'coral-dragaction:dragend coral-masonry-item': '_onItemDragEnd',
+&nbsp;
+      // Keyboard
+      'capture:focus coral-masonry-item': '_onItemFocus'
+    },
+&nbsp;
+    properties: {
+&nbsp;
+      /**
+        {@link Coral.Collection} which allows to interact with the masonry items.
+&nbsp;
+        @type {Coral.Collection}
+        @readonly
+        @memberof Coral.Masonry#
+       */
+      'items': {
+        get: function() {
+          return this._items;
+        },
+        set: function() {
+          // Read-only
+        }
+      },
+&nbsp;
+      /**
+        The layout name for this masonry. Must be one of {@link Coral.Masonry.layouts}. The following layout types are
+        available by default:
+        &lt;ul&gt;
+          &lt;li&gt;fixed-centered: Layout with fixed width centered items&lt;/li&gt;
+          &lt;li&gt;fixed-spread: Layout with fixed width and evenly spread items&lt;/li&gt;
+          &lt;li&gt;variable: Layout with variable width items&lt;/li&gt;
+          &lt;li&gt;dashboard: Layout with variable width items which are expanded in their height to fill gaps&lt;/li&gt;
+        &lt;/ul&gt;
+&nbsp;
+        @type {String}
+        @htmlattribute layout
+        @htmlattributereflected
+        @memberof Coral.Masonry#
+       */
+      'layout': {
+        default: '',
+        reflectAttribute: true,
+        get: function() {
+          return this._layoutName;
+        },
+        set: function(layoutName) {
+          var layouts = Coral.Masonry &amp;&amp; Coral.Masonry._layouts;
+          if (!layouts) {
+            // Browsers which support custom elements natively will upgrade the masonries in the html document
+            // immediately when registerElement is called. The problem is that this is before the elements are
+            // registered. Therefore, we repeat the set layout call here:
+            window.setTimeout(function() {
+              this.layout = layoutName;
+            }.bind(this), 0);
+            return;
+          }
+          if (layoutName === '') {
+            // Resolve default layout
+            layoutName = Object.keys(layouts)[0];
+          }
+          if (layoutName !== this._layoutName) {
+            if (layouts[layoutName]) {
+              this._layoutName = layoutName;
+              this._scheduleLayout('new layout');
+            }
+            else <span class="missing-if-branch" title="else path not taken" >E</span>if (window.console) {
+              console.error('Coral.Masonry: Unknown layout:', layoutName);
+            }
+          }
+        }
+      },
+&nbsp;
+      /**
+        The first selected item or &lt;code&gt;null&lt;/code&gt; if no item is selected.
+&nbsp;
+        @type {Coral.Masonry.Item}
+        @readonly
+        @memberof Coral.Masonry#
+       */
+      'selectedItem': {
+        get: function() {
+          var items = this.items.getAll();
+          for (var i = 0; i &lt; items.length; i++) {
+            var item = items[i];
+            if (item.selected) {
+              return item;
+            }
+          }
+          return null;
+        },
+        set: function() {
+          // Read-only
+        }
+      },
+&nbsp;
+      /**
+        An array of all selected items.
+&nbsp;
+        @type {Array.&lt;Coral.Masonry.Item&gt;}
+        @readonly
+        @memberof Coral.Masonry#
+       */
+      'selectedItems': {
+        get: function() {
+          var selectedItems = [];
+          var items = this.items.getAll();
+          for (var i = 0; i &lt; items.length; i++) {
+            var item = items[i];
+            if (item.selected) {
+              selectedItems.push(item);
+            }
+          }
+          return selectedItems;
+        },
+        set: function() {
+          // Read-only
+        }
+      },
+&nbsp;
+      // TODO this is layout specific. move to layout?
+      /**
+        The spacing between the items and the masonry container in pixel. If this property is not set, then it falls
+        back to the CSS padding of the masonry and margin of the items.
+&nbsp;
+        @type {?Number}
+        @default null
+        @htmlattribute spacing
+        @memberof Coral.Masonry#
+       */
+      'spacing': {
+        default: null,
+        transform: function(value) {
+          var number = Coral.transform.number(value);
+          return (number !== null) ? Math.max(0, number) : null;
+        },
+        sync: function() {
+          this._scheduleLayout('spacing');
+        }
+      },
+&nbsp;
+      /**
+        Whether or not it is possible to order items with drag &amp; drop.
+&nbsp;
+        @type {Boolean}
+        @default false
+        @htmlattribute orderable
+        @memberof Coral.Masonry.Item#
+       */
+      'orderable': {
+        default: false,
+        transform: Coral.transform.boolean,
+        attributeTransform: Coral.transform.booleanAttr,
+        sync: function() {
+          this._updateDragActions();
+        }
+      }
+&nbsp;
+    },
+&nbsp;
+    /**
+      Selects all items.
+&nbsp;
+      @see {@link #deselectAll}
+     */
+    selectAll: function() {
+      this._setAllSelected(true);
+    },
+&nbsp;
+    /**
+      Deselects all items.
+&nbsp;
+      @see {@link #selectAll}
+     */
+    deselectAll: function() {
+      this._setAllSelected(false);
+    },
+&nbsp;
+    /** @private */
+    _setAllSelected: function(selected) {
+      var items = this.items.getAll();
+      for (var i = 0; i &lt; items.length; i++) {
+        var item = items[i];
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (item.selected !== selected) {
+          item.selected = selected;
+        }
+      }
+    },
+&nbsp;
+    /**
+      Schedules a layout for the next animation frame. Even if called many times, the layout happens still just once.
+&nbsp;
+      @param reason just for debugging purposes
+      @private
+     */
+    _scheduleLayout: function(reason) {
+      if (!this._forceDebounce &amp;&amp; !this._layoutScheduled) {
+        Coral.commons.nextFrame(function() {
+          // Skip layout if a layout was forced in between
+          if (this._layoutScheduled) {
+            this._doLayout(reason);
+          }
+        }.bind(this));
+        this._layoutScheduled = true;
+      }
+    },
+&nbsp;
+    /** @private */
+    _scheduleDebouncedLayout: function(reason, force) {
+      // Do not force debounce if the masonry isn't layouted yet. Safari sometimes triggers resize events while loading.
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (force &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >this._layouted)</span> {
+<span class="cstat-no" title="statement not covered" >        this._forceDebounce = true;</span>
+      }
+      window.clearTimeout(this._debounceId);
+      this._debounceId = window.setTimeout(function() {
+        this._forceDebounce = false;
+        this._scheduleLayout('window resize');
+      }.bind(this), 500);
+    },
+&nbsp;
+    /**
+      Callback which has to be called when the dimensions have changed or the masonry turned visible.
+&nbsp;
+      @private
+     */
+    _onResize: function() {
+      // Ignore resize event which is triggered when listener is added
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (this._componentReady) {
+        if (!this._layouted) {
+          // The masonry was first invisible, render it now immediately
+          this._doLayout('became visible');
+        }
+        else {
+          this._scheduleDebouncedLayout('resize', false);
+        }
+      }
+    },
+&nbsp;
+    /** @private */
+    _onWindowResize: <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >      this._scheduleDebouncedLayout('window resize', true);</span>
+    },
+&nbsp;
+    /**
+      Performs a layout. Should only be called by {@link #_scheduleLayout} if possible.
+&nbsp;
+      @private
+     */
+    _doLayout: function(reason) {
+      var visible = !!this.offsetParent;
+      var LayoutClass = Coral.Masonry._layouts[this.layout];
+      if (this._forceDebounce || !LayoutClass || !visible) {
+        return;
+      }
+&nbsp;
+      if (!this._layout) {
+        this._layout = new LayoutClass(this);
+      }
+      // Check if the layout has changed
+      else if (this._layout.name !== this.layout) {
+        this._layout.destroy();
+        this._layout = new LayoutClass(this);
+      }
+&nbsp;
+      // Animate insertion. In the attachedCallback of the item, the is-beforeInserting class was already added. This
+      // class is now removed again which allows to transition between the is-beforeInserting and is-inserting class.
+      // By separating the code and batching the changes, the overhead is reduced significantly.
+      var i;
+      var newItems = this._newItems;
+      for (i = 0; i &lt; newItems.length; i++) {
+        newItems[i]._insert();
+      }
+&nbsp;
+      // Position the items
+      this._layout.layout();
+      this._layouted = true;
+&nbsp;
+      // Mark newly added items as managed. Before this class is added, the items are invisible. The reason why this is
+      // done here after positioning the items is that it seems to be the only way to ensure that the items are never
+      // shown at the wrong position. There used to be two cases when this happened:
+      // - When the masonry is first invisible and later shown because the resize event is triggered too late.
+      // - In some browsers (e.g. Safari) always when items are added dynamically
+      for (i = 0; i &lt; newItems.length; i++) {
+        newItems[i].$.addClass('is-managed');
+      }
+      newItems.length = 0; // clear
+&nbsp;
+      // Update loaded class. Cannot be done in _updateLoaded because it has to happen after the positioning.
+      this.$.toggleClass('is-loaded', this._loaded);
+&nbsp;
+      // Ensure that the tabbable item is set &amp; still valid
+      var tabbableItem = this._tabbableItem;
+      if (!tabbableItem || isRemovingOrRemoved(tabbableItem)) {
+        this._setTabbableItem(this.items.first());
+      }
+&nbsp;
+      // Focus the next item if the previously focused item has been removed
+      var focusedItem = this._focusedItem;
+      if (focusedItem) {
+        if (isRemovingOrRemoved(focusedItem) &amp;&amp; this._focusedItemNext) {
+          this._focusedItemNext.focus();
+        }
+        else if (focusedItem !== document.activeElement) {
+          this._focusedItem = null;
+          this._focusedItemNext = null;
+        }
+      }
+&nbsp;
+      // Prevent endless observation loop (skip mutations which have been caused by the layout)
+      this._observer.takeRecords();
+&nbsp;
+      // Cancel potentially scheduled layout if the current layout was enforced by calling doLayout directly
+      this._layoutScheduled = false;
+    },
+&nbsp;
+    /** @ignore */
+    _initialize: function() {
+      this._loaded = false;
+      this._layouted = false;
+      this._layoutScheduled = false;
+      this._forceDebounce = false;
+      this._debounceId = null;
+&nbsp;
+      this._items = new Coral.Collection({
+        host: this,
+        itemTagName: 'CORAL-MASONRY-ITEM',
+        filter: itemFilter
+      });
+      this._newItems = [];
+      this._tabbableItem = null;
+&nbsp;
+      // Relayout when child elements change or are added/removed
+      // Should this mutation observer become a bottleneck, it could be replaced with a resize listener
+      this._observer = new MutationObserver(this._scheduleLayout.bind(this, 'mutation'));
+      this._observer.observe(this, {
+        childList: true,
+        subtree: true,
+        characterData: true,
+        attributes: true
+      });
+    },
+&nbsp;
+    /** @private */
+    attachedCallback: function() {
+      Coral.Component.prototype.attachedCallback.call(this);
+&nbsp;
+      // This indicates that the initial items are being attached
+      this._attaching = true;
+      Coral.commons.nextFrame(function() {
+        this._attaching = false;
+        // Update loaded after all items have been attached
+        this._updateLoaded();
+      }.bind(this));
+    },
+&nbsp;
+    /** @ignore */
+    _updateLoaded: function() {
+      // Wait until complete because fonts might be loaded after interactive
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (!this._loaded &amp;&amp; document.readyState === 'complete') {
+        var loaded = true;
+        var images = this.querySelectorAll('img');
+        for (var i = 0; i &lt; images.length; i++) {
+<span class="cstat-no" title="statement not covered" >          var image = images[i];</span>
+          // _loadError is set in a listener at the top of this file
+<span class="cstat-no" title="statement not covered" >          if (image.src &amp;&amp; !image.complete &amp;&amp; !image._loadError) {</span>
+<span class="cstat-no" title="statement not covered" >            loaded = false;</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+          }
+        }
+        this._loaded = loaded;
+      }
+      this._scheduleLayout(); // A loaded image might have made an item bigger
+    },
+&nbsp;
+    /** @private */
+    _onItemAdded: function(item) {
+      item._updateDragAction(this.orderable);
+      this._newItems.push(item);
+&nbsp;
+      // Hack to prevent flickering in some browsers which don't support custom elements natively (e.g. Safari)
+      if (this._attaching &amp;&amp; item.nextElementSibling === null) {
+        this._doLayout('last item attached');
+      }
+&nbsp;
+      // Collection event
+      this.trigger('coral-collection:add', {
+        item: item
+      });
+    },
+&nbsp;
+    /** @private */
+    _onItemRemoved: function(item) {
+      item._updateDragAction(false);
+      item.$.removeClass('is-managed');
+&nbsp;
+      // Collection event
+      this.trigger('coral-collection:remove', {
+        item: item
+      });
+    },
+&nbsp;
+    /** @private */
+    _onItemFocus: function(e) {
+      var item = e.target;
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (item === e.matchedTarget) {
+        this._setTabbableItem(item);
+&nbsp;
+        // Remember the focused item and a sibling for the case when the currently focused item is removed and another
+        // item has to be selected in _doLayout
+        this._focusedItem = item;
+        this._focusedItemNext = [item.nextElementSibling, item.previousElementSibling].filter(itemFilter)[0];
+      }
+    },
+&nbsp;
+    /** @private */
+    _setTabbableItem: function(item) {
+      if (this._tabbableItem) {
+        this._tabbableItem._setTabbable(false);
+      }
+      if (item) {
+        item._setTabbable(true);
+      }
+      this._tabbableItem = item;
+    },
+&nbsp;
+    /** @private */
+    _updateDragActions: function() {
+      var items = this.items.getAll();
+      for (var i = 0; i &lt; items.length; i++) {
+        items[i]._updateDragAction(this.orderable);
+      }
+    },
+&nbsp;
+    /** @private */
+    _onItemDragStart: function(e) {
+      var item = e.target;
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (item === e.matchedTarget) {
+        this._layout.detach(item);
+        item._oldBefore = getPreviousItem(item);
+&nbsp;
+        // Insert placeholder before dragged item. The content is cloned in order to ensure that it has the same
+        // dimension.
+        var placeholder = item._dropPlaceholder = item.cloneNode(true);
+        placeholder.$.addClass('coral-Masonry-item--placeholder');
+        this.insertBefore(placeholder, item);
+      }
+    },
+&nbsp;
+    /** @private */
+    _onItemDragMove: function(e) {
+      var item = e.target;
+      var placeholder = item._dropPlaceholder;
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (item === e.matchedTarget &amp;&amp; placeholder) {
+        var prevDetail = item._prevDragDetail;
+        var detail = e.detail;
+        var x = detail.pageX;
+        var y = detail.pageY;
+&nbsp;
+        // If the current move is approaching the previous placeholder target, then it must not move the placeholder
+        // again. Otherwise it can happen with multi-column items that the items jump around hectically while dragging
+        // an item.
+        if (!prevDetail || !this._isApproachingPlaceholder(detail, prevDetail, placeholder)) {
+&nbsp;
+          // Find item below cursor
+          var offset = this.$.offset();
+          var itemBelow = this._layout.itemAt(x - offset.left, y - offset.top);
+          if (itemBelow &amp;&amp; itemBelow !== placeholder) {
+&nbsp;
+            // If the item below (the dragged item) is preceding the placeholder, then it has to insert the placeholder
+            // before the item below (the dragged item)
+            if (placeholder.compareDocumentPosition(itemBelow) &amp; document.DOCUMENT_POSITION_PRECEDING) {
+              placeholder.$.insertBefore(itemBelow);
+            }
+            else {
+              placeholder.$.insertAfter(itemBelow);
+            }
+          }
+        }
+        item._prevDragDetail = detail;
+      }
+    },
+&nbsp;
+    /**
+      @return {Boolean} true if the new position isn't further away from the center of the placeholder than the
+      previous position.
+&nbsp;
+      @private
+     */
+    _isApproachingPlaceholder: function(detail, prevDetail, placeholder) {
+      var position = this._layout.getPosition(placeholder);
+      var offset = this.$.offset();
+      var placeholderWidth = placeholder.$.outerWidth();
+      var placeholderHeight = placeholder.$.outerHeight();
+      var placeholderX = offset.left + position.left + placeholderWidth / 2;
+      var placeholderY = offset.top + position.top + placeholderHeight / 2;
+      // A weighted distance is used to improve the user experience with rather long/high cards
+      return weightedDistance(placeholderX, placeholderY, detail.pageX, detail.pageY, placeholderWidth, placeholderHeight) &lt;=
+        weightedDistance(placeholderX, placeholderY, prevDetail.pageX, prevDetail.pageY, placeholderWidth, placeholderHeight);
+    },
+&nbsp;
+    /** @private */
+    _onItemDragEnd: function(e) {
+      var item = e.target;
+      var placeholder = item._dropPlaceholder;
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (item === e.matchedTarget &amp;&amp; placeholder) {
+        // Replace the drop placeholder with this item
+        this.replaceChild(item, placeholder);
+&nbsp;
+        // Trigger order event
+        item.trigger('coral-masonry:order', {
+          item: item,
+          oldBefore: item._oldBefore,
+          before: getPreviousItem(item)
+        }, true, false);
+&nbsp;
+        // Drop transition
+        this._layout.reattach(item);
+        item.$.addClass('is-dropping');
+        Coral.commons.transitionEnd(item, function() {
+          item.$.removeClass('is-dropping');
+        });
+      }
+      item._oldBefore = null;
+      item._dropPlaceholder = null;
+      item._prevDragDetail = null;
+    }
+&nbsp;
+    /**
+      Triggered when an item is reordered.
+&nbsp;
+      @event Coral.Masonry#coral-masonry:order
+&nbsp;
+      @param {Object} event
+        Event object
+      @param {Coral.Masonry.Item} event.detail.item
+        The reordered item
+      @param {?Coral.Masonry.Item} event.detail.oldBefore
+        The previous item before the reordering.
+      @param {?Coral.Masonry.Item} event.detail.before
+        The previous item after the reordering.
+     */
+&nbsp;
+  });
+&nbsp;
+  function weightedDistance(x1, y1, x2, y2, unitWidth, unitHeight) {
+    return Math.sqrt(Math.pow((x2 - x1) / unitWidth, 2) + Math.pow((y2 - y1) / unitHeight, 2));
+  }
+&nbsp;
+  function getPreviousItem(item) {
+    var previousItem = item.previousElementSibling;
+    return itemFilter(previousItem) ? previousItem : null;
+  }
+&nbsp;
+  /**
+    Base class for masonry layouts.
+&nbsp;
+    Whenever a change is detected, the {@link Coral.Masonry.Layout#layout} method is called. This method must then
+    ensure that all the items are positioned correctly.
+&nbsp;
+    Layout-specific keyboard support must be handled by adding event listeners to the masonry in the constructor. Such
+    event listeners must be removed in the {@link Coral.Masonry.Layout#destroy} method.
+&nbsp;
+    @param masonry
+    @class Coral.Masonry.Layout
+   */
+  function Layout(masonry) {
+    this._masonry = masonry;
+  }
+  Layout.prototype = {
+    /**
+      Lays out the masonry items according to the implementation.
+     */
+    layout: <span class="fstat-no" title="function not covered" >function() {</span>},
+&nbsp;
+    /**
+      Removes all layout-specific attributes, style, data and event listeners from the masonry and its items.
+     */
+    destroy: <span class="fstat-no" title="function not covered" >function() {</span>},
+&nbsp;
+    /**
+      Removes the item from the control of the layout. This can be used to position the item differently,
+      for example for drag&amp;drop.
+&nbsp;
+      @param {Coral.Masonry.Item} item
+      @see #reattach
+     */
+    detach: <span class="fstat-no" title="function not covered" >function(item) {</span>},
+&nbsp;
+    /**
+      Adds the item to the control of the layout again. The layout has to ensure that the item will be transitioned to
+      its normal position flawlessly.
+&nbsp;
+      @param {Coral.Masonry.Item} item
+      @see #detach
+     */
+    reattach: <span class="fstat-no" title="function not covered" >function(item) {</span>},
+&nbsp;
+    /**
+      Returns the position of the item relatively to the masonry.
+&nbsp;
+      If the item is transitioned when this method is called, then it must return its final instead of the current
+      position.
+&nbsp;
+      @param {Coral.Masonry.Item} item
+      @return {?{left: number, top: number}}
+     */
+    getPosition: <span class="fstat-no" title="function not covered" >function(item) {</span>},
+&nbsp;
+    /**
+      Returns the item at the given position. The position coordinates are relative to the masonry.
+&nbsp;
+      If an item is being transitioned when this method is called, then it must choose the item based on the final
+      instead of the current position.
+&nbsp;
+      @param {number} x
+      @param {number} y
+      @return {?Coral.Masonry.Item}
+     */
+    itemAt: <span class="fstat-no" title="function not covered" >function(x, y) {</span>}
+&nbsp;
+  };
+  Coral.Masonry.Layout = Layout;
+&nbsp;
+  /**
+    Registry for masonry layouts.
+&nbsp;
+    @type {Object.&lt;string,Layout&gt;}
+    @private
+   */
+  Coral.Masonry._layouts = {};
+&nbsp;
+  /**
+    Registers a layout with the given name.
+    The name can then be set at {@link Coral.Masonry.layout} to render a masonry with the this registered layout.
+&nbsp;
+    @param {String} name the lower case name of the layout
+    @param {Layout} Layout class which extends {@link Layout}
+   */
+  Coral.Masonry.registerLayout = function(name, Layout) {
+    Layout.prototype.name = name;
+    Coral.Masonry._layouts[name] = Layout;
+  };
+}());
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Apr 26 2016 16:34:46 GMT+0200 (CEST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>
