@@ -8,7 +8,7 @@
     "url": "https://git.corp.adobe.com/Coral/coralui"
   },
   "devDependencies": {
-    "coralui-core": "git+ssh://git@git.corp.adobe.com:Coral/coralui-core.git#4.0.4",
+    "coralui-core": "git+ssh://git@git.corp.adobe.com:Coral/coralui-core.git#4.0.5",
     "coralui-component": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component.git#1.7.1",
     "coralui-component-accordion": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-accordion.git#3.0.9",
     "coralui-component-actionbar": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-actionbar.git#1.1.0",
