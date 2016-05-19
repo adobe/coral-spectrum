@@ -16,6 +16,7 @@ Please check other branches to find the right version:
 * **```master``` is the CoralUI 3 version of the builder**
 * ```release/coral2``` is the maintenance branch for CoralUI 2 with Cloud UI 8
 * ```release/coral2+cloudui7``` is the maintenance branch for CoralUI 2 with Cloud UI 7
+* ```release/coral3+spectrum``` is the maintenance branch for CoralUI 3 with Spectrum
 
 ## Contribute to CoralUI!
 
