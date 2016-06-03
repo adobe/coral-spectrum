@@ -1,0 +1,195 @@
+.docs-Background {
+  background: #ffffff;
+}
+
+.docs-Component {
+  padding: 15px 0 0 15px;
+}
+
+.docs-Component-header {
+  position: relative;
+}
+
+.docs-Component-version {
+  font-weight: 300;
+  position: absolute;
+  right: 0;
+  bottom: 8px;
+}
+
+.docs-Component-name {
+}
+
+.docs-Component-metadata {
+  margin-right: 15px;
+}
+
+.docs-Example-section {
+  padding: 15px;
+  margin-left: -15px;
+}
+
+.docs-Example-section .coral-Table .coral-Icon {
+  vertical-align: middle;
+}
+
+.docs-Example-header {
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.docs-Example-subtitle {
+  margin-top: 20px;
+}
+
+/* overwrite blue link color for self-links */
+.docs-Example-header .coral-Link,
+.docs-Example-subtitle .coral-Link {
+  color: #4b4b4b;
+}
+
+/* overwrite blue link color for self-links on dark theme */
+.coral--dark .docs-Example-header .coral-Link,
+.coral--dark .docs-Example-subtitle .coral-Link {
+  color: #dcdcdc;
+}
+
+.docs-Example-showMarkup {
+  text-transform: uppercase;
+  color: #969696;
+  font-size: 12px;
+}
+
+.docs-Example-showMarkup .coral-Icon {
+  color: #3287d2;
+  margin-right: 5px;
+}
+
+.docs-Example-showMarkup-label {
+  vertical-align: text-bottom;
+}
+
+.docs-Example-showMarkup:hover {
+  color: #4b4b4b;
+  text-decoration: none;
+}
+
+.coral--dark .docs-Example-showMarkup:hover {
+  color: #dcdcdc;
+}
+
+.docs-Example-markup {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.docs-ThemeSwitcher {
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+}
+
+.docs-ThemeSwitcher-icon,
+.docs-ThemeSwitcher-button {
+  vertical-align: middle;
+}
+
+.docs-ThemeSwitcher-icon {
+  margin-right: 5px;
+}
+
+.docs-ThemeSwitcher-button {
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #969696;
+}
+
+.docs-ThemeSwitcher-button:last-child {
+  margin-right: 0;
+}
+
+.docs-ThemeSwitcher-button:hover,
+.docs-ThemeSwitcher-button.is-selected {
+  color: #4b4b4b;
+}
+
+/** Handles the dark theme of the ThemeSwitcher */
+.coral--dark .docs-ThemeSwitcher-button:hover,
+.coral--dark .docs-ThemeSwitcher-button.is-selected {
+  color: white;
+}
+
+.docs-Example-toggleMarkup {
+  display: none;
+}
+
+.docs-Example-snippet {
+  margin-bottom: 10px;
+}
+
+.guide-Example-caption {
+  margin-bottom: 4px;
+  line-height: 1rem;
+  font-weight: bold;
+}
+
+.docs-Example-simpleExample {
+  padding-bottom: 30px;
+}
+
+.docs-Example-log {
+  display: block;
+  width: 100%;
+  height: 80px;
+}
+
+.docs-jsDoc-container {
+  margin-top: 2rem;
+  padding-top: 0.7rem;
+}
+
+.docs-jsDoc-heading--1 {
+  font-weight: 400;
+}
+
+.docs-Member-item,
+.docs-Method-item {
+  border-top: 1px solid rgb(228, 228, 228);
+}
+
+.docs-Member-caption {
+  display: inline-block;
+  margin-bottom: 0.175rem;
+}
+
+.docs-Member-tag {
+  vertical-align: bottom;
+}
+
+pre.prettyprint,
+code.prettyprint,
+code {
+  background-color: #f4f5f5;
+  border: 1px solid #eeeeee;
+  color: #4b4b4b;
+}
+
+.coral--dark code {
+  background-color: #5b5b5b;
+  border: 1px solid #404040;
+  color: #dcdcdc;
+}
+
+code {
+  padding: 3px;
+  line-height: 2;
+}
+
+pre.prettyprint,
+code.prettyprint {
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 12px;
+}
