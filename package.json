@@ -8,7 +8,6 @@
     "url": "https://git.corp.adobe.com/Coral/coralui"
   },
   "devDependencies": {
-    "coralui-core": "git+ssh://git@git.corp.adobe.com:Coral/coralui-core.git#4.0.6",
     "coralui-component": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component.git#1.8.2",
     "coralui-component-accordion": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-accordion.git#3.0.10",
     "coralui-component-actionbar": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-actionbar.git#1.1.1",
@@ -59,7 +58,7 @@
     "coralui-component-tooltip": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-tooltip.git#3.0.10",
     "coralui-component-wait": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-wait.git#1.0.3",
     "coralui-component-wizardview": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-wizardview.git#1.0.1",
-    "coralui-theme-cloudui": "git+ssh://git@git.corp.adobe.com:Coral/coralui-theme-cloudui.git#8.1.4",
+    "coralui-core": "git+ssh://git@git.corp.adobe.com:Coral/coralui-core.git#4.0.6",
     "coralui-grunt-componentbuilder": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-componentbuilder.git#2.x",
     "coralui-grunt-releasepackage": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-releasepackage.git#1.x",
     "coralui-grunt-testrunner": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-testrunner.git#2.x",
@@ -67,13 +66,14 @@
     "coralui-mixin-formfield": "git+ssh://git@git.corp.adobe.com:Coral/coralui-mixin-formfield.git#1.2.8",
     "coralui-mixin-overlay": "git+ssh://git@git.corp.adobe.com:Coral/coralui-mixin-overlay.git#1.0.10",
     "coralui-mixin-selection": "git+ssh://git@git.corp.adobe.com:Coral/coralui-mixin-selection.git#1.1.0",
+    "coralui-theme-cloudui": "git+ssh://git@git.corp.adobe.com:Coral/coralui-theme-cloudui.git#8.1.4",
     "coralui-util-dependencies": "git+ssh://git@git.corp.adobe.com:Coral/coralui-util-dependencies.git#1.x",
     "grunt": "~0.4.5",
     "grunt-contrib-copy": "~0.8.2",
     "grunt-contrib-cssmin": "~0.7.0",
     "grunt-css-metrics": "~0.1.2",
-    "load-grunt-config": "~0.7.0",
-    "underscore": "~1.6.0"
+    "load-grunt-config": "^0.19.2",
+    "underscore": "^1.8.3"
   },
   "coral": {
     "imports": [
