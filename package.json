@@ -40,7 +40,7 @@
     "coralui-component-numberinput": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-numberinput.git#3.1.3",
     "coralui-component-overlay": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-overlay.git#1.1.4",
     "coralui-component-panelstack": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-panelstack.git#1.0.7",
-    "coralui-component-popover": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-popover.git#3.1.15",
+    "coralui-component-popover": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-popover.git#3.1.16",
     "coralui-component-progress": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-progress.git#1.0.3",
     "coralui-component-quickactions": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-quickactions.git#1.2.1",
     "coralui-component-radio": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-radio.git#1.0.8",
