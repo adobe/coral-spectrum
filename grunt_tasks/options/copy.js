@@ -1,8 +1,8 @@
 module.exports = {
   core_jslibs: {
     files: [
+      // copies all of the external libs from core
       {
-        // copies all of the external libs from core
         expand: true,
         cwd: '<%= dirs.modules %>/coralui-core/<%= dirs.build %>/',
         src: ['<%= dirs.js %>/libs/**'],
@@ -11,37 +11,27 @@ module.exports = {
     ]
   },
 
-  core_resources: {
-    // copies any other resources, except the core resources (icon, wait, progress & cursor)
+  theme_resources: {
     files: [
+      // copies all resources from theme first, core might have newer resources
       {
         expand: true,
-        cwd: '<%= dirs.modules %>/coralui-core/<%= dirs.build %>/',
+        flatten: false,
+        cwd: '<%= dirs.modules %>/coralui-theme-*/<%= dirs.build %>/',
         src: '<%= dirs.resources %>/**',
         dest: '<%= dirs.build %>/'
       }
     ]
   },
 
-  component_resources: {
+  core_resources: {
+    // copies all resources from core next
     files: [
-      // copies all resources, except the core resources (icon, wait, progress & cursor)
       {
         expand: true,
-        flatten: false,
-        cwd: '<%= dirs.modules %>/',
-        src: ['coralui-*/<%= dirs.build %>/<%= dirs.resources %>/**/*'],
-        dest: '<%= dirs.build %>/<%= dirs.resources %>/',
-        filter: function(srcPath) {
-          var foundIcon = (srcPath.indexOf('components/icon/') > -1);
-          var foundWait = (srcPath.indexOf('components/wait/') > -1);
-          var foundProgress = (srcPath.indexOf('components/progress/') > -1);
-          var foundCursors = (srcPath.indexOf('shared/cursors/') > -1);
-          return !foundIcon && !foundWait && !foundProgress && !foundCursors;
-        },
-        rename: function(dest, matchedSrcPath, options) {
-          return dest + matchedSrcPath.substring(matchedSrcPath.lastIndexOf('resources/') + 10);
-        }
+        cwd: '<%= dirs.modules %>/coralui-core/<%= dirs.build %>/',
+        src: '<%= dirs.resources %>/**',
+        dest: '<%= dirs.build %>/'
       }
     ]
   },
