@@ -1,0 +1,11 @@
+<div>
+  <!--should be valid on initialization-->
+  <coral-datepicker id="validDatepicker1" min="today" class="coral-Form-field" type="datetime" displayformat="YYYY-MM-DD HH:mm" valueformat="YYYY-MM-DD[T]HH:mm:ss.000Z" headerformat="MMMM YYYY" value=""></coral-datepicker>
+
+  <!--should be valid on initialization -->
+  <coral-datepicker id="validDatepicker2" value="2014-12-31" max="2014-12-30" displayformat="MM/DD/YYYY"></coral-datepicker>
+
+  <!--should be !!invalid!! on initialization (as server told us so) -->
+  <coral-datepicker id="invalidDatepicker" invalid value="2014-12-31" type="datetime" displayformat="YYYY-MM-DD HH:mm" valueformat="YYYY-MM-DD[T]HH:mm:ss.000Z" headerformat="MMMM YYYY"></coral-datepicker>
+</div>
+

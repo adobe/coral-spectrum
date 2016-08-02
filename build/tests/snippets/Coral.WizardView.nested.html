@@ -1,0 +1,40 @@
+<coral-wizardview id="outer">
+  <coral-steplist id="outerStepList" coral-wizardview-steplist>
+    <coral-step>Outer step 1</coral-step>
+    <coral-step selected>Outer step 2</coral-step>
+    <coral-step>Outer step 3</coral-step>
+  </coral-steplist>
+  <coral-panelstack id="outerNavPanelStack" coral-wizardview-panelstack>
+    <coral-panel>
+      <button is="coral-button" variant="quiet">Cancel</button>
+      <button is="coral-button" variant="primary" coral-wizardview-next>Next</button>
+    </coral-panel>
+    <coral-panel>
+      <button is="coral-button" variant="quiet" coral-wizardview-previous>Back</button>
+      <button is="coral-button" variant="primary" coral-wizardview-next>Next</button>
+    </coral-panel>
+    <coral-panel>
+      <button is="coral-button" variant="quiet" coral-wizardview-previous>Back</button>
+      <button is="coral-button" variant="primary">Done</button>
+    </coral-panel>
+  </coral-panelstack>
+  <coral-panelstack id="outerContentPanelStack" coral-wizardview-panelstack>
+    <coral-panel>Outer panel 1</coral-panel>
+    <coral-panel>
+      Outer panel 2
+      <coral-wizardview id="inner">
+        <coral-steplist id="innerStepList" coral-wizardview-steplist>
+          <coral-step>Nested step 1</coral-step>
+          <coral-step>Nested step 2</coral-step>
+          <coral-step selected>Nested step 3</coral-step>
+        </coral-steplist>
+        <coral-panelstack id="innerContentPanelStack" coral-wizardview-panelstack>
+          <coral-panel>Nested panel 1</coral-panel>
+          <coral-panel>Nested panel 2</coral-panel>
+          <coral-panel>Nested panel 3</coral-panel>
+        </coral-panelstack>
+      </coral-wizardview>
+    </coral-panel>
+    <coral-panel>Outer panel 3</coral-panel>
+  </coral-panelstack>
+</coral-wizardview>
