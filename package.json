@@ -32,7 +32,7 @@
     "coralui-component-drawer": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-drawer.git#2.0.5",
     "coralui-component-fileupload": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-fileupload.git#3.0.8",
     "coralui-component-form": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-form.git#1.0.3",
-    "coralui-component-icon": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-icon.git#1.4.4",
+    "coralui-component-icon": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-icon.git#1.4.5",
     "coralui-component-inputgroup": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-inputgroup.git#1.0.5",
     "coralui-component-list": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-list.git#1.1.6",
     "coralui-component-masonry": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-masonry.git#1.0.5",
