@@ -58,7 +58,7 @@
     "coralui-component-tooltip": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-tooltip.git#3.0.10",
     "coralui-component-wait": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-wait.git#1.1.0",
     "coralui-component-wizardview": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-wizardview.git#1.0.1",
-    "coralui-core": "git+ssh://git@git.corp.adobe.com:Coral/coralui-core.git#4.0.7",
+    "coralui-core": "git+ssh://git@git.corp.adobe.com:Coral/coralui-core.git#4.1.0",
     "coralui-grunt-componentbuilder": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-componentbuilder.git#2.x",
     "coralui-grunt-releasepackage": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-releasepackage.git#1.x",
     "coralui-grunt-testrunner": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-testrunner.git#2.x",
