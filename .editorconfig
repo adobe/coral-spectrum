@@ -9,8 +9,12 @@ end_of_line = lf
 charset = utf-8
 
 # Indentation style
-[*.{html,js,css,less,styl,json}]
+[*.{html,js,css,styl,json,jade,pug}]
 insert_final_newline = true
 indent_style = space
 indent_size = 2
 trim_trailing_whitespace = true
+
+# Indentation override for all html templates
+[{templates/**.html,package.json}]
+insert_final_newline = false
