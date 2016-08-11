@@ -30,6 +30,7 @@ module.exports = function(grunt) {
         modules: 'node_modules',
         packages: 'packages',
         shared: 'shared',
+        scope: '@coralui',
         css: 'css',
         styles: 'styles',
         styl: 'styl',
@@ -58,9 +59,9 @@ module.exports = function(grunt) {
   grunt.config('coralui-releasepackage', pkg);
 
   // load coraui tasks not picked up by load config matching
-  grunt.loadNpmTasks('coralui-grunt-releasepackage');
-  grunt.loadNpmTasks('coralui-grunt-testrunner');
-  grunt.loadNpmTasks('coralui-grunt-componentbuilder');
+  grunt.loadNpmTasks('@coralui/coralui-grunt-releasepackage');
+  grunt.loadNpmTasks('@coralui/coralui-grunt-testrunner');
+  grunt.loadNpmTasks('@coralui/coralui-grunt-componentbuilder');
 
   // load local tasks
   grunt.loadTasks('grunt_tasks');

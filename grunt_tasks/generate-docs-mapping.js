@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
 
   var _utils = require("underscore");
-  var dependencyUtils = require('coralui-util-dependencies');
+  var dependencyUtils = require('@coralui/coralui-util-dependencies');
 
   grunt.registerTask('generate-docs-mapping', "Builds json mapping file used by guide website.", function() {
     var options = grunt.config('generate-docs-mapping');

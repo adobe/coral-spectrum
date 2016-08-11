@@ -1,4 +1,4 @@
-var dependencyUtils = require('coralui-util-dependencies');
+var dependencyUtils = require('@coralui/coralui-util-dependencies');
 
 // Build a list of files for Karma
 // We have to rebuild the default file set here
@@ -47,7 +47,7 @@ karmaFiles = karmaFiles.concat([
   },
 
   // Remove the paths from snippet names under __html__
-  'node_modules/coralui-grunt-testrunner/lib/stripPathFromSnippets.js',
+  '<%= dirs.modules %>/<%= dirs.scope %>/coralui-grunt-testrunner/lib/stripPathFromSnippets.js',
 
   'build/tests/*.js',
 ]);
@@ -68,7 +68,7 @@ module.exports = {
 
       // coverage is taken from scripts after change introduced by CUI-3045 in coralui-util-dependencies. there's no
       // need to exclude anything else
-      'node_modules/coralui-*/scripts/**/*.js': ['coverage']
+      '<%= dirs.modules %>/<%= dirs.scope %>/coralui-*/scripts/**/*.js': ['coverage']
     }
   }
 };
