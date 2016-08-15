@@ -21,7 +21,6 @@
     "@coralui/coralui-component-checkbox": "^1.1.0-rc2",
     "@coralui/coralui-component-clock": "^1.4.0-rc1",
     "@coralui/coralui-component-collection": "^1.2.0-rc1",
-    "@coralui/coralui-component-colorinput": "^1.3.0-rc1",
     "@coralui/coralui-component-columnview": "^2.1.0-rc1",
     "@coralui/coralui-component-cyclebutton": "^3.2.0-rc1",
     "@coralui/coralui-component-datepicker": "^3.5.0-rc1",
