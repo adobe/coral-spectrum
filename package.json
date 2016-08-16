@@ -56,7 +56,7 @@
     "coralui-component-textarea": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-textarea.git#1.1.3",
     "coralui-component-textfield": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-textfield.git#1.2.4",
     "coralui-component-tooltip": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-tooltip.git#3.0.10",
-    "coralui-component-wait": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-wait.git#1.1.0",
+    "coralui-component-wait": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-wait.git#1.1.1",
     "coralui-component-wizardview": "git+ssh://git@git.corp.adobe.com:Coral/coralui-component-wizardview.git#1.0.1",
     "coralui-core": "git+ssh://git@git.corp.adobe.com:Coral/coralui-core.git#4.1.0",
     "coralui-grunt-componentbuilder": "git+ssh://git@git.corp.adobe.com:Coral/coralui-grunt-componentbuilder.git#2.x",
