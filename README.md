@@ -1,4 +1,4 @@
-# CoralUI Builder (3.x) [![Build Status](https://jenkins-coral.bsl.eur.adobe.com/job/Build_Coral_coralui3/badge/icon)](https://jenkins-coral.bsl.eur.adobe.com/job/Build_Coral_coralui3/)
+# CoralUI Builder (3.x) [![Build Status](https://jenkins-coral.bsl.eur.adobe.com/job/Build_Coral_coralui3-artifactory+default/badge/icon)](https://jenkins-coral.bsl.eur.adobe.com/job/Build_Coral_coralui3-artifactory+default/)
 
 ## What is Adobe CoralUI?
 This repository packages the modular components that make up [Adobe CoralUI][1], a touch-first, front-end framework
