@@ -7,6 +7,7 @@
     "url": "https://git.corp.adobe.com/Coral/coralui"
   },
   "devDependencies": {
+<<<<<<< HEAD
     "@coralui/coralui-component": "^1.10.0-rc1",
     "@coralui/coralui-component-accordion": "^3.1.0-rc1",
     "@coralui/coralui-component-actionbar": "^1.2.0-rc1",

@@ -59,7 +59,6 @@ module.exports = {
         timeout: 5000 // default 2000ms
       }
     },
-
     files: karmaFiles,
     frameworks: [
       'mocha',
