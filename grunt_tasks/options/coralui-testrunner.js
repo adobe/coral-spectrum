@@ -54,6 +54,11 @@ karmaFiles = karmaFiles.concat([
 
 module.exports = {
   options: {
+    client: {
+      mocha: {
+        timeout: 5000 // default 2000ms
+      }
+    },
     files: karmaFiles,
     frameworks: [
       'mocha',
