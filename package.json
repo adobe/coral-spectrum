@@ -57,7 +57,7 @@
     "@coralui/coralui-component-tooltip": "^3.1.0",
     "@coralui/coralui-component-wait": "^1.2.0",
     "@coralui/coralui-component-wizardview": "^1.1.0",
-    "@coralui/coralui-core": "^4.2.0-beta",
+    "@coralui/coralui-core": "^4.2.0",
     "@coralui/coralui-grunt-componentbuilder": "^3.0.0",
     "@coralui/coralui-grunt-releasepackage": "^2.0.1",
     "@coralui/coralui-grunt-testrunner": "^3.0.0",
