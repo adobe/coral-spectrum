@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>CoralUI - Coral.Form</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0">
+    <script src="../js/libs/jquery.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="js/prettify.js"></script>
+    <script src="js/coral-docs.js"></script>
+    <script src="../js/coral.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/coral.css">
+    <link rel="stylesheet" type="text/css" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="css/jsdoc-default.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-examples.css">
+    <link rel="stylesheet" type="text/css" href="css/coral-docs-main.css">
+    <!--if lt IE 9
+    script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+    
+    -->
+  </head>
+  <body class="coral--light docs-Background u-coral-clearFix">
+    <article class="docs-Component">
+      <section class="docs-Component-metadata">
+        <div class="docs-Component-header">
+          <h1 class="coral-Heading coral-Heading--1 docs-Component-name js-guide-heading-toc js-guide-heading-toc--header" id="#{linkId}" guide-toc-title="#{guideTocTitle}">Coral.Form</h1><span class="docs-Component-version">Current Version: <strong>1.1.0</strong></span>
+        </div>
+        <div class="docs-Component-github"> Github: <a class="coral-Link" href="#{component.repository}">@coralui/coralui-component-form</a>
+        </div>
+        <!-- description is loaded from the template-->
+      </section>
+      <section class="docs-Component-documentation">
+        <p>
+          Coral.Form styles examples shows a basic scenario, how the form styles can be used. Please look at the related
+          components, to see more examples.
+          
+        </p>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header">
+                    <h2 class="coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection" id="#{linkId}"><a class="coral-Link" href="#verticalLayout">Vertical Layout</a></h2><span class="u-coral-pullRight docs-ThemeSwitcher"><i class="coral-Icon coral-Icon--infoCircle docs-ThemeSwitcher-icon" data-init="quicktip" data-quicktip-arrow="right" data-quicktip-type="inspect" data-quicktip-content="Please read more about themes in the 'Styles' section of this guide"></i>
+                  <button class="docs-ThemeSwitcher-button" data-theme="coral--light" is="coral-button" variant="minimal">Light</button>|
+                  <button class="docs-ThemeSwitcher-button" data-theme="coral--dark" is="coral-button" variant="minimal">Dark</button></span>
+              </div>
+              <p>
+                Add the <code>coral-Form--vertical</code> class to render all labels and fields on the same vertical line.
+                
+              </p>
+                      <script type="text/template" id="guide-276b3a21-3766-4175-913a-9bf0b124e1de"><form class="coral-Form coral-Form--vertical">
+  <section class="coral-Form-fieldset">
+
+    <label class="coral-Form-fieldlabel">Text</label>
+    <span class="coral-Form-field">Read only text</span>
+
+    <div class="coral-Form-fieldwrapper">
+      <label class="coral-Form-fieldlabel">Text (with coral-Form-fieldinfo)</label>
+      <span class="coral-Form-field">Read only text</span>
+      <span id="coral-Form-Vertical-Text-required" class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS"></span>
+      <coral-tooltip variant="info" placement="right" target="#coral-Form-Vertical-Text-required">Tooltip Information</coral-tooltip>
+    </div>
+
+    <label class="coral-Form-fieldlabel">Aligning buttons left</label>
+    <div class="coral-Form-fieldwrapper coral-Form-fieldwrapper--alignLeft">
+      <button class="coral-Form-field coral-Button" type="button">Cancel</button>
+      <button class="coral-Form-field coral-Button coral-Button--primary">Submit</button>
+    </div>
+  </section>
+</form>
+
+                      </script>
+                      <div class="docs-Example-markup #{containerClass}"><form class="coral-Form coral-Form--vertical">
+  <section class="coral-Form-fieldset">
+
+    <label class="coral-Form-fieldlabel">Text</label>
+    <span class="coral-Form-field">Read only text</span>
+
+    <div class="coral-Form-fieldwrapper">
+      <label class="coral-Form-fieldlabel">Text (with coral-Form-fieldinfo)</label>
+      <span class="coral-Form-field">Read only text</span>
+      <span id="coral-Form-Vertical-Text-required" class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS"></span>
+      <coral-tooltip variant="info" placement="right" target="#coral-Form-Vertical-Text-required">Tooltip Information</coral-tooltip>
+    </div>
+
+    <label class="coral-Form-fieldlabel">Aligning buttons left</label>
+    <div class="coral-Form-fieldwrapper coral-Form-fieldwrapper--alignLeft">
+      <button class="coral-Form-field coral-Button" type="button">Cancel</button>
+      <button class="coral-Form-field coral-Button coral-Button--primary">Submit</button>
+    </div>
+  </section>
+</form>
+
+                      </div><a class="coral-Link docs-Example-showMarkup" href="#"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre class="docs-Example-toggleMarkup prettyprint" data-src-id="#{exampleId}"></pre>
+            </section>
+            <section class="docs-Example-section">
+              <div class="docs-Example-header">
+                    <h2 class="coral-Heading coral-Heading--2 js-guide-heading-toc js-guide-heading-toc--subsection" id="#{linkId}"><a class="coral-Link" href="#alignedLayout">Aligned Layout</a></h2><span class="u-coral-pullRight docs-ThemeSwitcher"><i class="coral-Icon coral-Icon--infoCircle docs-ThemeSwitcher-icon" data-init="quicktip" data-quicktip-arrow="right" data-quicktip-type="inspect" data-quicktip-content="Please read more about themes in the 'Styles' section of this guide"></i>
+                  <button class="docs-ThemeSwitcher-button" data-theme="coral--light" is="coral-button" variant="minimal">Light</button>|
+                  <button class="docs-ThemeSwitcher-button" data-theme="coral--dark" is="coral-button" variant="minimal">Dark</button></span>
+              </div>
+              <p>
+                Add the <code>coral-Form--aligned</code> class to render each label and field pair on the same horizontal line.
+                
+              </p>
+                      <script type="text/template" id="guide-256c540a-fe67-4ff8-833c-5f3b96f3440f"><form class="coral-Form coral-Form--aligned">
+  <section class="coral-Form-fieldset">
+
+    <label class="coral-Form-fieldlabel">Text</label>
+    <span class="coral-Form-field">Read only text</span>
+
+    <div class="coral-Form-fieldwrapper">
+      <label class="coral-Form-fieldlabel">Text</label>
+      <span class="coral-Form-field">Read only text</span>
+      <span id="coral-Form-Aligned-Text-required" class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS"></span>
+      <coral-tooltip variant="info" placement="right" target="#coral-Form-Aligned-Text-required">Tooltip Information</coral-tooltip>
+    </div>
+  </section>
+</form>
+
+                      </script>
+                      <div class="docs-Example-markup #{containerClass}"><form class="coral-Form coral-Form--aligned">
+  <section class="coral-Form-fieldset">
+
+    <label class="coral-Form-fieldlabel">Text</label>
+    <span class="coral-Form-field">Read only text</span>
+
+    <div class="coral-Form-fieldwrapper">
+      <label class="coral-Form-fieldlabel">Text</label>
+      <span class="coral-Form-field">Read only text</span>
+      <span id="coral-Form-Aligned-Text-required" class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS"></span>
+      <coral-tooltip variant="info" placement="right" target="#coral-Form-Aligned-Text-required">Tooltip Information</coral-tooltip>
+    </div>
+  </section>
+</form>
+
+                      </div><a class="coral-Link docs-Example-showMarkup" href="#"><i class="coral-Icon coral-Icon--viewOn coral-Icon--sizeXS"></i><span class="docs-Example-showMarkup-label">Show Markup</span></a>
+                          <pre class="docs-Example-toggleMarkup prettyprint" data-src-id="#{exampleId}"></pre>
+            </section>
+      </section>
+    </article>
+  </body>
+</html>

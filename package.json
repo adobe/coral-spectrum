@@ -1,7 +1,7 @@
 {
   "name": "@coralui/coralui",
   "description": "CoralUI package builder",
-  "version": "3.17.4-pre",
+  "version": "3.18.0-beta.0",
   "repository": {
     "type": "git",
     "url": "https://git.corp.adobe.com/Coral/coralui"
