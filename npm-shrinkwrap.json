@@ -258,9 +258,9 @@
       "resolved": "https://artifactory.corp.adobe.com:443/artifactory/api/npm/npm-coralui-local/@coralui/coralui-core/-/@coralui/coralui-core-4.2.0.tgz"
     },
     "@coralui/coralui-grunt-componentbuilder": {
-      "version": "3.0.5",
+      "version": "3.0.6",
       "from": "@coralui/coralui-grunt-componentbuilder@>=3.0.0 <4.0.0",
-      "resolved": "https://artifactory.corp.adobe.com:443/artifactory/api/npm/npm-coralui-local/@coralui/coralui-grunt-componentbuilder/-/@coralui/coralui-grunt-componentbuilder-3.0.5.tgz"
+      "resolved": "https://artifactory.corp.adobe.com:443/artifactory/api/npm/npm-coralui-local/@coralui/coralui-grunt-componentbuilder/-/@coralui/coralui-grunt-componentbuilder-3.0.6.tgz"
     },
     "@coralui/coralui-grunt-i18n": {
       "version": "2.0.1",
