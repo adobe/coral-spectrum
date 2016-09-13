@@ -1,0 +1,1346 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for coralui-component-clock/scripts/Coral.Clock.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">coralui-component-clock/scripts/</a> Coral.Clock.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">99.12% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>113/114</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>56/56</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>31/31</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">99.12% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>113/114</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">193×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">185×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">188×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">188×</span>
+<span class="cline-any cline-yes">188×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">202×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">182×</span>
+<span class="cline-any cline-yes">182×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">182×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">184×</span>
+<span class="cline-any cline-yes">184×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">179×</span>
+<span class="cline-any cline-yes">179×</span>
+<span class="cline-any cline-yes">179×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">179×</span>
+<span class="cline-any cline-yes">179×</span>
+<span class="cline-any cline-yes">179×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">428×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1019×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">390×</span>
+<span class="cline-any cline-yes">390×</span>
+<span class="cline-any cline-yes">390×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">229×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">159×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">170×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">158×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">180×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">180×</span>
+<span class="cline-any cline-yes">180×</span>
+<span class="cline-any cline-yes">180×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">179×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">179×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1209×</span>
+<span class="cline-any cline-yes">1209×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">414×</span>
+<span class="cline-any cline-yes">414×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">414×</span>
+<span class="cline-any cline-yes">414×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">414×</span>
+<span class="cline-any cline-yes">414×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">414×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">414×</span>
+<span class="cline-any cline-yes">414×</span>
+<span class="cline-any cline-yes">414×</span>
+<span class="cline-any cline-yes">414×</span>
+<span class="cline-any cline-yes">414×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">414×</span>
+<span class="cline-any cline-yes">248×</span>
+<span class="cline-any cline-yes">215×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">33×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">414×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">413×</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">392×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">414×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1847×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">179×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">179×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2015 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
+(function() {
+  'use strict';
+&nbsp;
+  // Default for display and value format
+  var DEFAULT_HOUR_FORMAT = 'HH';
+  var DEFAULT_MINUTE_FORMAT = 'mm';
+  var DEFAULT_TIME_FORMAT = DEFAULT_HOUR_FORMAT + ':' + DEFAULT_MINUTE_FORMAT;
+&nbsp;
+  // Used to extract the time format from a date format
+  var AUTHORIZED_TOKENS = '(A|a|H{1,2}|h{1,2}|k{1,2}|m{1,2})';
+  var TIME_REG_EXP = new RegExp(AUTHORIZED_TOKENS + '.*' + AUTHORIZED_TOKENS + '|' + AUTHORIZED_TOKENS);
+  var HOUR_REG_EXP = new RegExp('h{1,2}|H{1,2}|k{1,2}');
+  var MIN_REG_EXP = new RegExp('m{1,2}');
+&nbsp;
+  /**
+    Enum for Clock variant values.
+&nbsp;
+    @enum {String}
+    @memberof Coral.Clock
+  */
+  var variant = {
+    /** A default, gray Clock. */
+    DEFAULT: 'default',
+    /** A Clock with no border or background. */
+    QUIET: 'quiet'
+  };
+&nbsp;
+  var CLASSNAME = 'coral-Clock';
+&nbsp;
+  // builds a string containing all possible variant classnames. This will be used to remove
+  // classnames when the variant changes.
+  var ALL_VARIANT_CLASSES = '';
+  for (var variantKey in variant) {
+    ALL_VARIANT_CLASSES += CLASSNAME + '--' + variant[variantKey] + ' ';
+  }
+&nbsp;
+  Coral.register( /** @lends Coral.Clock# */ {
+    /**
+      @class Coral.Clock
+      @classdesc A component that allows for selecting a time.
+      @extends Coral.Component
+      @extends Coral.mixin.formField
+      @htmltag coral-clock
+    */
+    name: 'Clock',
+    tagName: 'coral-clock',
+    className: CLASSNAME,
+&nbsp;
+    mixins: [
+      Coral.mixin.formField
+    ],
+&nbsp;
+    events: {
+      'change input[is=coral-textfield]': '_onInputChange',
+      'change [handle="period"]': '_onPeriodChange'
+    },
+&nbsp;
+    properties: {
+      /**
+        The format used to display the selected time to the user. If the user manually types a time, this format
+        will be used to parse the value. See http://momentjs.com/docs/#/displaying/ for valid format string
+        options.
+&nbsp;
+        @type {String}
+        @default "HH:mm"
+        @htmlattribute displayformat
+        @memberof Coral.Clock#
+      */
+      'displayFormat': {
+        default: DEFAULT_TIME_FORMAT,
+        attribute: 'displayformat',
+        transform: function(value) {
+          return this._extractTimeFormat(Coral.transform.string(value).trim(), TIME_REG_EXP, DEFAULT_TIME_FORMAT);
+        },
+        sync: function() {
+          this._syncDisplay();
+        }
+      },
+&nbsp;
+      /**
+        The format to use on expressing the time as a string on the &lt;code&gt;value&lt;/code&gt; attribute. The value
+        will be sent to the server using this format. If an empty string is provided, then the default value per type
+        will be used. See http://momentjs.com/docs/#/displaying/ for valid format string options.
+&nbsp;
+        @type {String}
+        @default "HH:mm"
+        @htmlattribute valueformat
+        @memberof Coral.Clock#
+      */
+      'valueFormat': {
+        default: DEFAULT_TIME_FORMAT,
+        attribute: 'valueformat',
+        transform: function(value) {
+          return this._extractTimeFormat(Coral.transform.string(value).trim(), TIME_REG_EXP, DEFAULT_TIME_FORMAT);
+        },
+        set: function(value) {
+          this._valueFormat = value;
+          this._elements.input.value = this.value;
+        }
+      },
+&nbsp;
+      // JSDoc inherited
+      'name': {
+        get: function() {
+          return this._elements.input.name;
+        },
+        set: function(value) {
+          this._elements.input.name = value;
+        }
+      },
+&nbsp;
+      // JSDoc inherited
+      'disabled': {
+        sync: function() {
+          this._elements.hours.disabled = this.disabled;
+          this._elements.minutes.disabled = this.disabled;
+          // stops the form submission
+          this._elements.input.disabled = this.disabled;
+        }
+      },
+&nbsp;
+      // JSDoc inherited
+      'invalid': {
+        sync: function() {
+          this._elements.hours.invalid = this.invalid;
+          this._elements.minutes.invalid = this.invalid;
+        }
+      },
+&nbsp;
+      // JSDoc inherited
+      'readOnly': {
+        sync: function() {
+          this._elements.hours.readOnly = this.readOnly;
+          this._elements.minutes.readOnly = this.readOnly;
+          this._elements.input.readOnly = this.readOnly;
+        }
+      },
+&nbsp;
+      // JSDoc inherited
+      'required': {
+        sync: function() {
+          this._elements.hours.required = this.required;
+          this._elements.minutes.required = this.required;
+          this._elements.input.required = this.required;
+        }
+      },
+&nbsp;
+      // JSDoc inherited
+      'value': {
+        validate: function(newValue, oldValue) {
+          return typeof newValue === 'string';
+        },
+        get: function() {
+          return this._getValueAsString(this._value, this.valueFormat);
+        },
+        set: function(value) {
+          // we do strict conversion of the values
+          var time = moment(value, this.valueFormat, true);
+          this._value = time.isValid() ? time : '';
+          this._elements.input.value = this.value;
+        },
+        sync: function() {
+          this._syncDisplay();
+        }
+      },
+&nbsp;
+      /**
+        The current value as a Date. If the value is "" or an invalid date, &lt;code&gt;null&lt;/code&gt; will be returned.
+&nbsp;
+        @type {Date}
+        @default null
+        @memberof Coral.Clock#
+      */
+      'valueAsDate': {
+        attribute: null,
+        transform: function(value) {
+          return (value instanceof Date) ? moment(value).format(this.valueFormat) : '';
+        },
+        get: function() {
+          return this._value ? new Date(this._value.toDate().getTime()) : null;
+        },
+        set: function(value) {
+          this.value = value;
+        }
+      },
+      /**
+        The clock's variant.
+&nbsp;
+        @type {Coral.Clock.variant}
+        @default Coral.Clock.variant.DEFAULT
+        @htmlattribute variant
+        @memberof Coral.Clock#
+      */
+      'variant': {
+        default: variant.DEFAULT,
+        validate: [
+          Coral.validate.valueMustChange,
+          Coral.validate.enumeration(variant)
+        ],
+        set: function(value) {
+          this._variant = value;
+&nbsp;
+          // passes down the variant to the underlying components
+          this._elements.hours.variant = value;
+          this._elements.minutes.variant = value;
+          this._elements.period.variant = value;
+        },
+        sync: function() {
+          // removes every existing variant
+          this.$.removeClass(ALL_VARIANT_CLASSES);
+&nbsp;
+          if (this.variant !== Coral.Clock.variant.DEFAULT) {
+            this.$.addClass(this._className + '--' + this.variant);
+          }
+        }
+      }
+    },
+&nbsp;
+    /**
+      sets focus to appropriate descendant
+    */
+    focus: function() {
+      if (!this.contains(document.activeElement)) {
+        this._elements.hours.focus();
+      }
+    },
+&nbsp;
+    /**
+      Ignore the date part and use the time part only
+&nbsp;
+      @private
+    */
+    _extractTimeFormat: function(format, regExp, defaultFormat) {
+      var match = regExp.exec(format);
+      return match &amp;&amp; match.length &amp;&amp; match[0] !== '' ? match[0] : defaultFormat;
+    },
+&nbsp;
+    /**
+      Sync time display based on the format
+&nbsp;
+      @private
+    */
+    _syncDisplay: function() {
+      var hourFormat = this._extractTimeFormat(this.displayFormat, HOUR_REG_EXP, DEFAULT_HOUR_FORMAT);
+      var minuteFormat = this._extractTimeFormat(this.displayFormat, MIN_REG_EXP, DEFAULT_MINUTE_FORMAT);
+&nbsp;
+      this._elements.hours.placeholder = hourFormat;
+      this._elements.minutes.placeholder = minuteFormat;
+&nbsp;
+      this._elements.hours.value = this._getValueAsString(this._value, hourFormat);
+      this._elements.minutes.value = this._getValueAsString(this._value, minuteFormat);
+&nbsp;
+      this._syncPeriod();
+    },
+&nbsp;
+    /**
+      Sync period selector based on the format
+&nbsp;
+      @private
+    */
+    _syncPeriod: function() {
+      Coral.commons.ready(this._elements.period, function(period) {
+        var time = this._value;
+        var am = Coral.i18n.get('am');
+        var pm = Coral.i18n.get('pm');
+        var items = period.items.getAll();
+&nbsp;
+        if (time &amp;&amp; time.isValid()) {
+          if (time.hours() &lt; 12) {
+            period.value = 'am';
+          }
+          else {
+            period.value = 'pm';
+          }
+        }
+&nbsp;
+        // Check for am/pm
+        if (this.displayFormat.indexOf('a') !== -1) {
+          items[0].textContent = am;
+          items[1].textContent = pm;
+          this._togglePeriod(true);
+        }
+        else if (this.displayFormat.indexOf('A') !== -1) {
+          items[0].textContent = am.toUpperCase();
+          items[1].textContent = pm.toUpperCase();
+          this._togglePeriod(true);
+        }
+        else {
+          this._togglePeriod(false);
+        }
+      }.bind(this));
+    },
+&nbsp;
+    /** @private */
+    _togglePeriod: function(show) {
+      this._elements.period.hidden = !show;
+    },
+&nbsp;
+    /** @private */
+    _onPeriodChange: function(event) {
+      // stops the event from leaving the component
+      event.stopImmediatePropagation();
+&nbsp;
+      var time = this._value;
+      var period = this._elements.period;
+&nbsp;
+      // we check if a change event needs to be triggered since it was produced via user interaction
+      if (time &amp;&amp; time.isValid()) {
+        if (this.displayFormat.indexOf('h') !== -1) {
+          if (period.value === 'am') {
+            time.subtract(12, 'h');
+          }
+          else {
+            time.add(12, 'h');
+          }
+        }
+&nbsp;
+        this.value = time.format(this.valueFormat);
+        this.trigger('change');
+      }
+    },
+&nbsp;
+    /**
+      Kills the internal _onInputChange from formMixin because it does not check the target.
+&nbsp;
+      @private
+    */
+    _onInputChange: function(event) {
+      // stops the event from leaving the component
+      event.stopImmediatePropagation();
+&nbsp;
+      var newTime = moment();
+      var oldTime = this._value;
+&nbsp;
+      var hours = parseInt(this._elements.hours.value, 10);
+      var minutes = parseInt(this._elements.minutes.value, 10);
+&nbsp;
+      if (window.isNaN(hours) || window.isNaN(minutes)) {
+        newTime = '';
+      }
+      else {
+        if (!this._elements.period.hidden &amp;&amp; this.displayFormat.indexOf('h') !== -1 &amp;&amp; this._elements.period.value === 'pm') {
+          hours += 12;
+        }
+        newTime.hours(hours);
+        newTime.minutes(minutes);
+      }
+&nbsp;
+      // we check if a change event needs to be triggered since it was produced via user interaction
+      if (newTime &amp;&amp; newTime.isValid()) {
+        // @polyfill ie
+        this.invalid = false;
+&nbsp;
+        if (!newTime.isSame(oldTime, 'hour') || !newTime.isSame(oldTime, 'minute')) {
+          this.value = newTime.format(this.valueFormat);
+          this.trigger('change');
+        }
+      }
+      else {
+        // @polyfill ie
+        this.invalid = true;
+        // does not sync the inputs so allow the user to continue typing the date
+        this._value = '';
+&nbsp;
+        if (newTime !== oldTime) {
+          this.trigger('change');
+        }
+      }
+    },
+&nbsp;
+    /**
+      Modified the label target to be the clock itself and not the first input. This is used by the
+      &lt;code&gt;Coral.mixin.formField&lt;/code&gt; to be able to properly label the component.
+&nbsp;
+      @private
+    */
+    _getLabellableElement: function() {
+      return this;
+    },
+&nbsp;
+    /**
+      Helper class that converts the internal moment value into a String using the provided date format. If the value is
+      invalid, empty string will be returned.
+&nbsp;
+      @param {?Moment} value
+        The value representing the date. It has to be a moment object or &lt;code&gt;null&lt;/code&gt;
+      @param {String} format
+        The Date format to be used.
+&nbsp;
+      @returns {String} a String representing the value in the given format.
+&nbsp;
+      @ignore
+    */
+    _getValueAsString: function(value, format) {
+      return value &amp;&amp; value.isValid() ? value.format(format) : '';
+    },
+&nbsp;
+    /** @ignore */
+    _render: function() {
+      // clean up to be able to clone it
+      while (this.firstChild) {
+<span class="cstat-no" title="statement not covered" >        this.removeChild(this.firstChild);</span>
+      }
+&nbsp;
+      this.appendChild(Coral.templates.Clock.base.call(this._elements));
+    }
+  });
+&nbsp;
+  // exports the variant enumeration
+  Coral.Clock.variant = variant;
+}());
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Sep 13 2016 16:52:57 GMT+0200 (CEST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>
