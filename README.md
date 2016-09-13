@@ -1,4 +1,4 @@
-# CoralUI Builder (3.x) [![Build Status](https://jenkins-coral.bsl.eur.adobe.com/job/Build_Coral_coralui3-artifactory+default/badge/icon)](https://jenkins-coral.bsl.eur.adobe.com/job/Build_Coral_coralui3-artifactory+default/)
+# CoralUI Builder (3.x) [![Build Status](https://jenkins-coral.bsl.eur.adobe.com/job/Build_Coral_coralui3/badge/icon)](https://jenkins-coral.bsl.eur.adobe.com/job/Build_Coral_coralui3/)
 
 ## What is Adobe CoralUI?
 This repository packages the modular components that make up [Adobe CoralUI][1], a touch-first, front-end framework
@@ -16,6 +16,7 @@ Please check other branches to find the right version:
 * **```master``` is the CoralUI 3 version of the builder**
 * ```release/coral3+cloudui8``` is the branch to release CoralUI 3 with CloudUI 8
 * ```release/coral3+spectrum``` is the branch to release CoralUI 3 with Spectrum
+* ```release/3.17.x``` is the branch before CoralUI 3.18.0 (e.g. before artifactory and webpack)
 * ```release/coral2``` is the maintenance branch for CoralUI 2 with Cloud UI 8
 * ```release/coral2+cloudui7``` is the maintenance branch for CoralUI 2 with Cloud UI 7
 
