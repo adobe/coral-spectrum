@@ -73,7 +73,8 @@ module.exports = {
 
       // coverage is taken from scripts after change introduced by CUI-3045 in coralui-util-dependencies. there's no
       // need to exclude anything else
-      '<%= dirs.modules %>/<%= dirs.scope %>/coralui-*/scripts/**/*.js': ['coverage']
+      '<%= dirs.modules %>/<%= dirs.scope %>/coralui-*/scripts/**/*.js': ['coverage'],
+      '<%= dirs.modules %>/coralui-*/scripts/**/*.js': ['coverage']
     }
   }
 };
