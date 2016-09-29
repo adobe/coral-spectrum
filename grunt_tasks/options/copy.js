@@ -17,7 +17,7 @@ module.exports = {
       {
         expand: true,
         flatten: false,
-        cwd: '<%= dirs.modules %>/<%= dirs.scope %>/coralui-theme-*/<%= dirs.build %>/',
+        cwd: '<%= dirs.modules %>/<%= dirs.scope %>/coralui-theme-cloudui/<%= dirs.build %>/',
         src: '<%= dirs.resources %>/**',
         dest: '<%= dirs.build %>/'
       }
