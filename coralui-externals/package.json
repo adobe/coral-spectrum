@@ -1,0 +1,12 @@
+{
+  "name": "coralui-externals",
+  "version": "1.0.0",
+  "description": "Externals",
+  "dependencies": {
+    "@webcomponents/custom-elements": "^1.0.0"
+  },
+  "devDependencies": {
+    "coralui-gulp": "file:../coralui-gulp",
+    "gulp": "^3.9.1"
+  }
+}

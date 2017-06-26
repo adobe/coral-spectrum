@@ -1,0 +1,12 @@
+{
+  "name": "coralui-mixin-component",
+  "version": "1.0.0",
+  "description": "Component mixin",
+  "dependencies": {
+    "@coralui/vent": "^1.0.0"
+  },
+  "devDependencies": {
+    "coralui-gulp": "file:../coralui-gulp",
+    "gulp": "^3.9.1"
+  }
+}
