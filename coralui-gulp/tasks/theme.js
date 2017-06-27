@@ -15,26 +15,19 @@
  * from Adobe Systems Incorporated.
  */
 module.exports = function(gulp) {
-  const path = require('path');
   const plumber = require('gulp-plumber');
-  const sourceMaps = require('gulp-sourcemaps');
-  const rollup = require('gulp-better-rollup');
-  const rollupConfig = require('../configs/rollup.conf.js');
   const rename = require('gulp-rename');
+  const header = require('gulp-header');
   const themeHelper = require('../helpers/theme');
   
-  gulp.task('scripts', function() {
-    return gulp.src(`index-${themeHelper.getTheme()}.js`)
+  gulp.task('theme', function() {
+    return gulp.src('index.js')
       .pipe(plumber())
-      .pipe(sourceMaps.init())
-      .pipe(rollup({
-        plugins: rollupConfig.plugins
-      }, 'iife'))
-      .pipe(sourceMaps.write())
+      .pipe(header(themeHelper.addTheme()))
       .pipe(rename({
-        dirname: 'js',
-        basename: 'coral'
+        basename: `index-${themeHelper.getTheme()}`
       }))
-      .pipe(gulp.dest('./build'));
+      .pipe(gulp.dest('.'));
   });
+  
 };

@@ -7,7 +7,9 @@
     "url": "https://git.corp.adobe.com/Coral/coralui"
   },
   "devDependencies": {
+    "coralui-component-icon": "file:coralui-component-icon",
     "coralui-component-wait": "file:coralui-component-wait",
+    "@coralui/coralui-theme-cloudui": "^9.3.0",
     "coralui-gulp": "file:coralui-gulp",
     "gulp": "^3.9.1"
   },

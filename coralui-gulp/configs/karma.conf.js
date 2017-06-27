@@ -26,7 +26,7 @@ module.exports = function(config) {
   const preprocessors = {};
   
   // Rollup pre-process
-  preprocessors[`${CWD}/tests/test.*.js`] = ['rollup'];
+  preprocessors[`${CWD}/tests/index.js`] = ['rollup'];
   
   // Pre-process HTML snippets
   preprocessors[`${CWD}/tests/snippets/**/*.html`] = ['html2js'];
@@ -105,7 +105,7 @@ module.exports = function(config) {
       
       {
         // Tests that will be included as executable JS
-        pattern: `${CWD}/tests/test.*.js`,
+        pattern: `${CWD}/tests/index.js`,
         watched: true,
         served: true,
         included: true // Include testing helpers

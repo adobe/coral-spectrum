@@ -1,0 +1,32 @@
+script.
+  if (typeof Coral.Configurator === 'function') {
+    var configurator = new Coral.Configurator().set({
+      component: Coral.Icon,
+      fields: [
+        {
+          label: 'Icon',
+          prop: 'icon',
+          type: 'select',
+          value: 'add',
+          options: {
+            'add': 'add',
+            'bell': 'bell',
+            'heart': 'heart',
+            'star': 'star'
+          }
+        },
+        {
+          label: 'Size',
+          prop: 'size',
+          type: 'select',
+          value: 'M',
+          options: {
+            'EXTRA_SMALL': 'XS',
+            'SMALL': 'S',
+            'MEDIUM': 'M',
+            'LARGE': 'L'
+          }
+        }
+      ]
+    }).insertAfterLastScript();
+  }

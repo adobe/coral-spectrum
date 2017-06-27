@@ -3,11 +3,11 @@ var helpers = helpers || {};
 /**
   Helpers used to test a cloned component.
 
-  @param {String} markup - The markup used to initialize the component.
+  @param {Element|String} element - The HTMLElement or markup used to initialize the component.
   @param {Object} [options] - Object that contains configuration values to test.
   @param {Boolean} [options.deepClone=true] - deepClone the component. True, if not provided.
 */
-helpers.cloneComponent = function(markup, options) {
+helpers.cloneComponent = function(element, options) {
 
   'use strict';
 
@@ -15,43 +15,45 @@ helpers.cloneComponent = function(markup, options) {
   options = options || {};
   options.deepClone = options.deepClone || true;
 
-  /* Clone Helper */
-  function getCloneComponent(element, deepClone) {
-    if (!element || typeof element.cloneNode !== 'function') {
-      return null;
-    }
-    return (element.cloneNode(deepClone));
-  }
-
   describe('testComponentClone', function() {
 
     var el;
     var elClone;
 
-    beforeEach(function(done) {
-
-      helpers.build(markup, function(_el) {
-        el = _el;
-
-        // Do the clone
-        elClone = getCloneComponent(el, options.deepClone);
-
-        if (!elClone) {
-          console.warn('Something wrong with the clone of ', el);
-        }
-
-        helpers.target.appendChild(elClone);
-
-        // Wait until the clone is ready
-        Coral.commons.ready(elClone, function() {
-          // The sync methods won't be called until the frame after that
-          // Wait until sync methods have been called
-          helpers.next(function() {
-            // Pass the instance along
-            done();
-          });
-        });
-      });
+    beforeEach(function() {
+      
+      if (typeof element === 'string') {
+        el = helpers.build(element);
+      }
+      else if (element instanceof HTMLElement) {
+        el = helpers.target.appendChild(element);
+      }
+      
+      // Do the clone
+      elClone = helpers.target.appendChild(el.cloneNode(options.deepClone));
+      
+      // helpers.build(markup, function(_el) {
+      //   el = _el;
+      //
+      //   // Do the clone
+      //   elClone = getCloneComponent(el, options.deepClone);
+      //
+      //   if (!elClone) {
+      //     console.warn('Something wrong with the clone of ', el);
+      //   }
+      //
+      //   helpers.target.appendChild(elClone);
+      //
+      //   // Wait until the clone is ready
+      //   Coral.commons.ready(elClone, function() {
+      //     // The sync methods won't be called until the frame after that
+      //     // Wait until sync methods have been called
+      //     helpers.next(function() {
+      //       // Pass the instance along
+      //       done();
+      //     });
+      //   });
+      // });
     });
 
     afterEach(function() {

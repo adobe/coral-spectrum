@@ -17,24 +17,15 @@
 module.exports = function(gulp) {
   const path = require('path');
   const plumber = require('gulp-plumber');
-  const sourceMaps = require('gulp-sourcemaps');
-  const rollup = require('gulp-better-rollup');
-  const rollupConfig = require('../configs/rollup.conf.js');
   const rename = require('gulp-rename');
   const themeHelper = require('../helpers/theme');
   
-  gulp.task('scripts', function() {
-    return gulp.src(`index-${themeHelper.getTheme()}.js`)
+  gulp.task('resources', function() {
+    return gulp.src(`node_modules/@coralui/coralui-theme-${themeHelper.getTheme()}/build/resources/**/*`)
       .pipe(plumber())
-      .pipe(sourceMaps.init())
-      .pipe(rollup({
-        plugins: rollupConfig.plugins
-      }, 'iife'))
-      .pipe(sourceMaps.write())
-      .pipe(rename({
-        dirname: 'js',
-        basename: 'coral'
+      .pipe(rename(function (file) {
+        file.dirname = path.join('resources', file.dirname);
       }))
-      .pipe(gulp.dest('./build'));
+      .pipe(gulp.dest('build'));
   });
 };

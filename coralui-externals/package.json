@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Externals",
   "dependencies": {
+    "@coralui/vent": "^1.0.0",
     "@webcomponents/custom-elements": "^1.0.0"
   },
   "devDependencies": {

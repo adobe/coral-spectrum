@@ -99,4 +99,27 @@ transform.string = function(value) {
   return typeof value === 'string' ? value : String(value);
 };
 
+/**
+  Transform the provided value into an HTML attribute on the provided HTMLElement.
+ 
+  @param {HTMLElement} element
+    The HTMLElement that will receive the HTML attribute.
+  @param {String} attributeName
+    The attribute name.
+  @param {*} value
+    The value to reflect as HTML attribute.
+*/
+transform.reflect = function(element, attributeName, value) {
+  if (typeof value === 'boolean') {
+    if (!element.hasAttribute(attributeName)) {
+      element.setAttribute(attributeName, '');
+    }
+  }
+  else {
+    if (element.getAttribute(attributeName) !== value) {
+      element.setAttribute(attributeName, value);
+    }
+  }
+};
+
 export default transform;

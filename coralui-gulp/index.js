@@ -10,19 +10,21 @@ module.exports = function(gulp) {
   require('./tasks/docs.js')(gulp);
   require('./tasks/templates.js')(gulp);
   require('./tasks/styles.js')(gulp);
+  require('./tasks/theme.js')(gulp);
+  require('./tasks/resources.js')(gulp);
   require('./tasks/scripts.js')(gulp);
   require('./tasks/tests.js')(gulp);
   require('./tasks/watch.js')(gulp);
   
   gulp.task('build', function() {
-    runSequence('clean', 'lint', 'docs', 'styles', 'templates', 'scripts');
+    runSequence('clean', 'lint', 'docs', 'styles', 'theme', 'resources', 'templates', 'scripts');
   });
   
   gulp.task('dev', function() {
-    runSequence('clean', 'lint', 'docs', 'styles', 'templates', 'scripts', 'tests-watch', 'watch');
+    runSequence('clean', 'lint', 'docs', 'styles', 'theme', 'resources', 'templates', 'scripts', 'tests-watch', 'watch');
   });
   
   gulp.task('default', function() {
-    runSequence('clean', 'lint', 'docs', 'styles', 'templates', 'scripts', 'tests');
+    runSequence('clean', 'lint', 'docs', 'styles', 'theme', 'resources', 'templates', 'scripts', 'tests');
   });
 };

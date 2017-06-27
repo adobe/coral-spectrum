@@ -1,7 +1,7 @@
 {
-  "name": "coralui-component-wait",
-  "version": "3.0.0",
-  "description": "Wait component",
+  "name": "coralui-component-icon",
+  "version": "2.0.0",
+  "description": "Icon component",
   "dependencies": {
     "@coralui/coralui-theme-cloudui": "^9.3.0",
     "coralui-mixin-component": "file:../coralui-mixin-component",

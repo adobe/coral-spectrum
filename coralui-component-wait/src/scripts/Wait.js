@@ -1,4 +1,19 @@
-import 'coralui-externals';
+/*
+ * ADOBE CONFIDENTIAL
+ *
+ * Copyright 2017 Adobe Systems Incorporated
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Adobe Systems Incorporated and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ */
 
 import Component from 'coralui-mixin-component';
 import {transform, validate} from 'coralui-util';
@@ -62,6 +77,8 @@ class Wait extends HTMLElement {
     return this._size || size.SMALL;
   }
   set size(value) {
+    value = transform.string(value).toUpperCase();
+    
     if (validate.enumeration(size)(value)) {
       this._size = value;
   
@@ -90,9 +107,7 @@ class Wait extends HTMLElement {
     this.classList.toggle(CLASSNAME + '--centered', this.centered);
     
     if (this._centered) {
-      if (!this.hasAttribute('centered')) {
-        this.setAttribute('centered', '');
-      }
+      transform.reflect(this, 'centered', this._centered);
     }
     else {
       this.removeAttribute('centered');
@@ -110,6 +125,8 @@ class Wait extends HTMLElement {
     return this._variant || variant.DEFAULT;
   }
   set variant(value) {
+    value = transform.string(value).toLowerCase();
+    
     if (validate.enumeration(variant)(value)) {
       this._variant = value;
   

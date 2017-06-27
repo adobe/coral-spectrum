@@ -1,5 +1,3 @@
-import './../index.js';
-
 describe('Coral.Wait', function() {
   'use strict';
   

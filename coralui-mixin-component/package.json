@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Component mixin",
   "dependencies": {
-    "@coralui/vent": "^1.0.0"
+    "coralui-externals": "file:../coralui-externals"
   },
   "devDependencies": {
     "coralui-gulp": "file:../coralui-gulp",
