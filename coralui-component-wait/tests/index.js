@@ -1,3 +1,3 @@
 import './../index';
 
-import './test.Wait';
+import './test.Coral.Wait';

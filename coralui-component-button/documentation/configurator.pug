@@ -1,0 +1,86 @@
+script.
+  if (typeof Coral.Configurator === 'function') {
+    var configurator = new Coral.Configurator().set({
+      component: Coral.Button,useInnerElements: true,
+      innerElements: [
+        {
+          tagName: 'coral-button-label',
+          properties: {
+            'label.innerHTML': 'innerHTML'
+          }
+        },
+      ],
+      mainContentZone: 'coral-button-label',
+      skipProperty: function(prop) {
+        return prop === 'icon' && configurator.instance.icon === '';
+      },
+      fields: [
+        {
+          label: 'Label Text',
+          prop: 'label.innerHTML',
+          type: 'text',
+          value: 'CoralUI Rocks'
+        },
+        {
+          label: 'Variant',
+          prop: 'variant',
+          type: 'select',
+          value: 'default',
+          options: {
+            'CTA': 'cta',
+            'Secondary': 'secondary',
+            'Primary': 'primary',
+            'Quiet': 'quiet',
+            'Warning': 'warning',
+            'Minimal': 'minimal'
+          }
+        },
+        {
+          label: 'Icon',
+          prop: 'icon',
+          type: 'text',
+          value: 'checkCircle'
+        },
+        {
+          label: 'Icon Size',
+          prop: 'iconSize',
+          type: 'select',
+          value: 'S',
+          options: {
+            'Extra Small': 'XS',
+            'Small': 'S',
+            'Medium': 'M',
+            'Large': 'L'
+          }
+        },
+        {
+          label: 'Button Size',
+          prop: 'size',
+          type: 'select',
+          value: 'M',
+          options: {
+            'Medium (default)': 'M',
+            'Large': 'L'
+          }
+        },
+        {
+          label: 'is selected',
+          prop: 'selected',
+          type: 'checkbox',
+          value: false
+        },
+        {
+          label: 'is block',
+          prop: 'block',
+          type: 'checkbox',
+          value: false
+        },
+        {
+          label: 'is disabled',
+          prop: 'disabled',
+          type: 'checkbox',
+          value: false
+        },
+      ]
+    }).insertAfterLastScript();
+  }

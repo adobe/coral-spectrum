@@ -15,9 +15,6 @@ beforeEach(function() {
   // Create a target element
   helpers.target = document.createElement('div');
   
-  // Expose a DOM parser
-  helpers.DOMParser = new DOMParser();
-
   // Add it to the body
   document.body.appendChild(helpers.target);
 });
@@ -41,40 +38,29 @@ helpers.next = (window.requestAnimationFrame || window.webkitRequestAnimationFra
   function(cb) {'use strict'; return window.setTimeout(cb, 100); }).bind(window);
 
 /**
-  Build and return an instance based on the provided markup
+  Build and return an instance ready to be used
 
-  @param {String} markup
-    The markup to build the instance from. This should only every contain a single root tag.
+  @param {String|HTMLElement} element
+    The markup or HTML element to prepare. The markup only contain a single root tag.
 */
-helpers.build = function(markup) {
+helpers.build = function(element) {
   'use strict';
   
-  var instance = helpers.DOMParser.parseFromString(markup, 'text/html').body.firstChild;
-  helpers.target.appendChild(instance);
-  return instance;
-
-  // // Create a container element and populate it with the markup
-  // var div = document.createElement('div');
-  // div.innerHTML = markup;
-  //
-  // // Get the element from the container element
-  // var instance = div.children[0];
-  //
-  // // Add the element to the DOM
-  // helpers.target.appendChild(instance);
-  //
-  // if (typeof callback === 'function') {
-  //   // Components are upgraded asynchronously in polyfilled environments
-  //   // Wait until components are ready
-  //   Coral.commons.ready(helpers.target, function() {
-  //     // The sync methods won't be called until the frame after that
-  //     // Wait until sync methods have been called
-  //     helpers.next(function() {
-  //       // Pass the instance along
-  //       callback(instance);
-  //     });
-  //   });
-  // }
-  //
-  // return instance;
+  if (element instanceof HTMLElement) {
+    // Add the element to the DOM
+    return helpers.target.appendChild(element);
+  }
+  else if (typeof element === 'string') {
+    // Create a container element and populate it with the markup
+    const div = document.createElement('div');
+    div.innerHTML = element;
+  
+    // Get the element from the container element
+    const instance = div.children[0];
+  
+    // Add the element to the DOM
+    return helpers.target.appendChild(instance);
+  }
+  
+  throw Error('helpers.build requires a string markup or an HTMLElement.');
 };

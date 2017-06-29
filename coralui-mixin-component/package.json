@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Component mixin",
   "dependencies": {
-    "coralui-externals": "file:../coralui-externals"
+    "coralui-externals": "file:../coralui-externals",
+    "coralui-util": "file:../coralui-util"
   },
   "devDependencies": {
     "coralui-gulp": "file:../coralui-gulp",

@@ -60,7 +60,7 @@ for (let variantValue in variant) {
  @classdesc A Wait component
  @htmltag coral-wait
  */
-class Wait extends HTMLElement {
+class Wait extends Component(HTMLElement) {
   constructor() {
     super();
   }
@@ -155,8 +155,5 @@ class Wait extends HTMLElement {
     this.classList.add(CLASSNAME);
   }
 }
-
-// Add component common properties and methods
-Component.mixin(Wait);
 
 export default Wait;

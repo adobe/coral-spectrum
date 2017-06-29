@@ -4,7 +4,8 @@
   "description": "Externals",
   "dependencies": {
     "@coralui/vent": "^1.0.0",
-    "@webcomponents/custom-elements": "^1.0.0"
+    "popper.js": "^1.10.6",
+    "promise-polyfill": "^6.0.2"
   },
   "devDependencies": {
     "coralui-gulp": "file:../coralui-gulp",

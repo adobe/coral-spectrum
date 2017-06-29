@@ -1,3 +1,3 @@
 import './../index';
 
-import './test.Icon';
+import './test.Coral.Icon';

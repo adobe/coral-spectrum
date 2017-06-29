@@ -295,6 +295,8 @@ commons.transitionEnd = function(element, callback) {
    The callback to call when all components are ready.
    */
   commons.ready = function(element, callback) {
+    console.warn('Coral.commons.ready has been deprecated. Please use window.customElements.whenDefined(tagName) instead.');
+    
     if (typeof element === 'function') {
       callback = element;
       element = window;

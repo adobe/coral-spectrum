@@ -21,7 +21,7 @@ describe('Coral.Icon', function() {
   
   describe('instantiation', function() {
     it('should be possible using new', function() {
-      var icon = helpers.target.appendChild(new Coral.Icon());
+      var icon = helpers.build(new Coral.Icon());
       expect(icon.classList.contains('coral-Icon')).to.be.true;
       expect(icon.classList.contains('coral-Icon--sizeS')).to.be.true;
       expect(icon.classList.contains('coral-Icon--null')).to.be.false;
@@ -29,7 +29,7 @@ describe('Coral.Icon', function() {
     });
 
     it('should be possible using createElement', function() {
-      var icon = helpers.target.appendChild(document.createElement('coral-icon'));
+      var icon = helpers.build(document.createElement('coral-icon'));
       expect(icon.classList.contains('coral-Icon')).to.be.true;
       expect(icon.classList.contains('coral-Icon--sizeS')).to.be.true;
       expect(icon.classList.contains('coral-Icon--null')).to.be.false;
@@ -168,7 +168,7 @@ describe('Coral.Icon', function() {
 
     describe('#icon', function() {
       it('should default to null', function() {
-        var icon = helpers.target.appendChild(new Coral.Icon());
+        var icon = helpers.build(new Coral.Icon());
         expect(icon.icon).to.equal('');
         expect(icon.classList.contains('coral-Icon')).to.be.true;
         expect(icon.classList.contains('coral-Icon--sizeS')).to.be.true;
@@ -179,7 +179,7 @@ describe('Coral.Icon', function() {
       });
 
       it('should set the new icon', function() {
-        var icon = helpers.target.appendChild(new Coral.Icon());
+        var icon = helpers.build(new Coral.Icon());
 
         icon.icon = 'add';
 
@@ -189,7 +189,7 @@ describe('Coral.Icon', function() {
       });
 
       it('should trim the value', function() {
-        var icon = helpers.target.appendChild(new Coral.Icon());
+        var icon = helpers.build(new Coral.Icon());
 
         icon.icon = ' add ';
 
@@ -199,7 +199,7 @@ describe('Coral.Icon', function() {
       });
 
       it('should convert everything to a string', function() {
-        var icon = helpers.target.appendChild(new Coral.Icon());
+        var icon = helpers.build(new Coral.Icon());
         icon.icon = 5;
         expect(icon.icon).to.equal('5');
         icon.icon = false;
@@ -213,7 +213,7 @@ describe('Coral.Icon', function() {
       });
 
       it('should set with an attribute', function() {
-        var icon = helpers.target.appendChild(new Coral.Icon());
+        var icon = helpers.build(new Coral.Icon());
 
         icon.setAttribute('icon', 'add');
 
@@ -223,7 +223,7 @@ describe('Coral.Icon', function() {
       });
 
       it('should not leave class traces', function() {
-        var icon = helpers.target.appendChild(new Coral.Icon());
+        var icon = helpers.build(new Coral.Icon());
         icon.classList.add('coral-Icon--test');
         expect(icon.classList.contains('coral-Icon--test')).to.be.true;
 
@@ -235,7 +235,7 @@ describe('Coral.Icon', function() {
       });
 
       it('should remove the icon with null', function() {
-        var icon = helpers.target.appendChild(new Coral.Icon());
+        var icon = helpers.build(new Coral.Icon());
         icon.icon = 'add';
 
         expect(icon.classList.contains('coral-Icon--add')).to.be.true;
@@ -251,7 +251,7 @@ describe('Coral.Icon', function() {
       });
 
       it('should remove the icon with undefined', function() {
-        var icon = helpers.target.appendChild(new Coral.Icon());
+        var icon = helpers.build(new Coral.Icon());
         icon.icon = 'add';
 
         expect(icon.classList.contains('coral-Icon--add')).to.be.true;
@@ -266,7 +266,7 @@ describe('Coral.Icon', function() {
       });
 
       it('should remove the icon with empty string', function() {
-        var icon = helpers.target.appendChild(new Coral.Icon());
+        var icon = helpers.build(new Coral.Icon());
         icon.icon = 'add';
 
         expect(icon.classList.contains('coral-Icon--add')).to.be.true;
@@ -282,7 +282,7 @@ describe('Coral.Icon', function() {
       });
 
       it('should remove the icon when the attribute is removed', function() {
-        var icon = helpers.target.appendChild(new Coral.Icon());
+        var icon = helpers.build(new Coral.Icon());
         icon.setAttribute('icon', 'add');
 
         expect(icon.getAttribute('icon')).to.equal('add');
@@ -299,7 +299,7 @@ describe('Coral.Icon', function() {
     describe('#size', function() {
 
       it('should default to Coral.Icon.size.SMALL', function() {
-        var icon = helpers.target.appendChild(new Coral.Icon());
+        var icon = helpers.build(new Coral.Icon());
         expect(icon.size).to.equal(Coral.Icon.size.SMALL);
         expect(icon.classList.contains('coral-Icon')).to.be.true;
         expect(icon.classList.contains('coral-Icon--sizeS')).to.be.true;
@@ -307,7 +307,7 @@ describe('Coral.Icon', function() {
       });
 
       it('should set the new size', function() {
-        var icon = helpers.target.appendChild(new Coral.Icon());
+        var icon = helpers.build(new Coral.Icon());
 
         icon.size = Coral.Icon.size.LARGE;
         expect(icon.size).to.equal(Coral.Icon.size.LARGE);
@@ -317,7 +317,7 @@ describe('Coral.Icon', function() {
       });
 
       it('should accept lowercase values', function() {
-        var icon = helpers.target.appendChild(new Coral.Icon());
+        var icon = helpers.build(new Coral.Icon());
 
         icon.size = Coral.Icon.size.LARGE.toLowerCase();
         expect(icon.size).to.equal(Coral.Icon.size.LARGE);
@@ -327,7 +327,7 @@ describe('Coral.Icon', function() {
       });
       
       it('should be set with an attribute', function() {
-        var icon = helpers.target.appendChild(new Coral.Icon());
+        var icon = helpers.build(new Coral.Icon());
 
         icon.setAttribute('size', Coral.Icon.size.LARGE);
         expect(icon.size).to.equal(Coral.Icon.size.LARGE);
@@ -338,7 +338,7 @@ describe('Coral.Icon', function() {
       });
 
       it('should discard values not part of the enum', function() {
-        var icon = helpers.target.appendChild(new Coral.Icon());
+        var icon = helpers.build(new Coral.Icon());
 
         // this value will be accepted
         icon.size = 'XS';
@@ -353,7 +353,7 @@ describe('Coral.Icon', function() {
       });
 
       it('should discard unknonwn attribute', function() {
-        var icon = helpers.target.appendChild(new Coral.Icon());
+        var icon = helpers.build(new Coral.Icon());
 
         icon.setAttribute('size', 'megalarge');
         expect(icon.size).to.equal(Coral.Icon.size.SMALL);
@@ -364,7 +364,7 @@ describe('Coral.Icon', function() {
       });
 
       it('should not remove unknonwn size classes', function() {
-        var icon = helpers.target.appendChild(new Coral.Icon());
+        var icon = helpers.build(new Coral.Icon());
         icon.classList.add('coral-Icon--sizeME');
 
         icon.size = 'XS';
@@ -375,99 +375,96 @@ describe('Coral.Icon', function() {
         expect(helpers.classCount(icon)).to.equal(3);
       });
     });
-
-    describe('#alt', function() {
-      it('should be empty string initially', function() {
-        var icon = helpers.build('<coral-icon></coral-icon>');
-        expect(icon.alt).to.equal('');
-      });
-
+  });
+  
+  describe('Implementation details', function() {
+    describe('alt', function() {
       it('should add an aria-label equal to the value of the alt property', function() {
-        var icon = helpers.target.appendChild(new Coral.Icon());
-
+        var icon = helpers.build(new Coral.Icon());
+    
         icon.icon = 'add';
         icon.alt = 'Add Item';
-
+    
         expect(icon.alt).to.equal('Add Item');
         expect(icon.getAttribute('aria-label')).to.equal('Add Item');
       });
-
+  
       it('should add an aria-label equal to the value of the icon property when not set and when no title attribute is present', function() {
-        var icon = helpers.target.appendChild(new Coral.Icon());
-
+        var icon = helpers.build(new Coral.Icon());
+    
         icon.icon = 'add';
-
+    
         expect(icon.getAttribute('aria-label')).to.equal('add');
       });
-
+  
       it('should add an aria-label equal to the value of the title attribute property when not set and when a title attribute is present', function() {
-        var icon = helpers.target.appendChild(new Coral.Icon());
-
+        var icon = helpers.build(new Coral.Icon());
+    
         icon.icon = 'add';
-        icon.setAttribute('title', 'Add Item');
-
+        icon.title = 'Add Item';
+    
         expect(icon.getAttribute('aria-label')).to.equal('Add Item');
       });
-
+  
       it('should have no aria-label attribute when explicitly set to an empty string', function() {
-        var icon = helpers.target.appendChild(new Coral.Icon());
-
+        var icon = helpers.build(new Coral.Icon());
+    
         icon.icon = 'add';
-        icon.setAttribute('title', 'Add Item');
-        icon.setAttribute('alt', '');
-
+        icon.title = 'Add Item';
+        icon.alt = '';
+    
         expect(icon.hasAttribute('aria-label')).to.be.false;
       });
-
+  
       it('should have role="img" when icon property is not a URL', function() {
-        var icon = helpers.target.appendChild(new Coral.Icon());
-
+        var icon = helpers.build(new Coral.Icon());
+    
         icon.icon = 'add';
         icon.alt = 'Add Item';
-
+    
         expect(icon.getAttribute('role')).to.equal('img');
       });
-
+  
       it('should have role="presentation" when icon property is a URL', function() {
-        var icon = helpers.target.appendChild(new Coral.Icon());
-
+        var icon = helpers.build(new Coral.Icon());
+    
         icon.icon = 'image.png';
-
+    
         expect(icon.getAttribute('role')).to.equal('presentation');
         expect(icon._elements.image.getAttribute('alt')).to.equal('');
       });
-
+  
       it('should update alt text on child image when icon property is a URL', function() {
-        var icon = helpers.target.appendChild(new Coral.Icon());
-
+        var icon = helpers.build(new Coral.Icon());
+    
         icon.icon = 'image.png';
         icon.alt = 'Add Item';
-
+    
         expect(icon.getAttribute('role')).to.equal('presentation');
         expect(icon._elements.image.getAttribute('alt')).to.equal('Add Item');
       });
-
+  
       it('should set alt text on child image to value of title attribute empty string when icon property is a URL and alt is null', function() {
-        var icon = helpers.target.appendChild(new Coral.Icon());
-
+        var icon = helpers.build(new Coral.Icon());
+    
         icon.icon = 'image.png';
         icon.title = 'Add Item';
-
+    
         expect(icon.getAttribute('role')).to.equal('presentation');
         expect(icon._elements.image.getAttribute('alt')).to.equal(icon.title);
       });
-
+  
       it('should set alt text on child image to an empty string when icon property is a URL and alt is an empty string', function() {
-        var icon = helpers.target.appendChild(new Coral.Icon());
-
+        var icon = helpers.build(new Coral.Icon());
+    
         icon.icon = 'image.png';
         icon.title = 'Add Item';
-
+    
         expect(icon.getAttribute('role')).to.equal('presentation');
         expect(icon._elements.image.getAttribute('alt')).to.equal(icon.title);
-  
+    
         // By setting alt = '' explicitly, we override the default behavior and instead use an empty string for alt text.
-        icon.setAttribute('alt', '');
+        icon.alt = '';
         expect(icon._elements.image.getAttribute('alt')).to.equal('');
       });
     });

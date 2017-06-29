@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Coral.Button</title>
+
+  <link rel="stylesheet" href="../build/css/coral.css">
+  <script src="../build/js/coral.js"></script>
+
+  <style type="text/css">
+    body {
+      padding: 15px;
+    }
+  </style>
+</head>
+<body class="coral--light">
+  <section>
+    <h1 class='coral-Heading coral-Heading--1'>Examples with explicit use of label content zone</h1>
+    <h2 class="coral-Heading coral-Heading--2">Primary</h2>
+    <button is="coral-button" variant="primary">
+      <coral-button-label>Primary</coral-button-label>
+    </button>
+    <h2 class="coral-Heading coral-Heading--2">Warning</h2>
+    <button is="coral-button" variant="warning">
+      <coral-button-label>Warning</coral-button-label>
+    </button>
+
+    <h2 class="coral-Heading coral-Heading--2">Quiet button</h2>
+    <button is="coral-button" variant="quiet">
+      <coral-button-label>Quiet</coral-button-label>
+    </button>
+  </section>
+  <section>
+    <h1 class='coral-Heading coral-Heading--1'>Examples that omit label content zone in original markup</h1>
+    <h2 class="coral-Heading coral-Heading--2">Default</h2>
+    <button is="coral-button">Default</button>
+
+    <h2 class="coral-Heading coral-Heading--2">Primary</h2>
+    <button is="coral-button" variant="primary">Primary</button>
+
+    <h2 class="coral-Heading coral-Heading--2">Warning</h2>
+    <button is="coral-button" variant="warning">Warning</button>
+
+    <h2 class="coral-Heading coral-Heading--2">Quiet button</h2>
+    <button is="coral-button" variant="quiet">Quiet</button>
+
+    <h2 class="coral-Heading coral-Heading--2">Minimal button</h2>
+    <button is="coral-button" variant="minimal" icon="delete" title="Delete"></button>
+    <button is="coral-button" variant="minimal" icon="close" title="Close"></button>
+    <button is="coral-button" variant="minimal" icon="close" disabled title="Close"></button>
+
+    <h2 class="coral-Heading coral-Heading--2">Disabled button</h2>
+    <button is="coral-button" disabled="true">Disabled</button>
+
+    <h2 class="coral-Heading coral-Heading--2">Icon only</h2>
+    <button is="coral-button" icon="home" title="Home"></button>
+
+    <h2 class="coral-Heading coral-Heading--2">With icon</h2>
+    <button is="coral-button" variant="primary" icon="home">With Icon</button>
+
+    <h2 class="coral-Heading coral-Heading--2">With iconposition right</h2>
+    <button is="coral-button" variant="primary" icon="home" iconposition="right">With Icon right</button>
+    <button is="coral-button" variant="quiet" icon="home" iconposition="right"></button>
+
+    <h2 class="coral-Heading coral-Heading--2">Square Icon Buttons</h2>
+    <button is="coral-button" icon="add" title="Add"></button>
+    <button is="coral-button" variant="warning" icon="delete" title="Delete"></button>
+    <button is="coral-button" variant="primary" icon="checkCircle" title="Check"></button>
+
+    <h2 class="coral-Heading coral-Heading--2">Square Quiet Buttons</h2>
+    <button is="coral-button" variant="quiet" icon="add" title="Add"></button>
+    <button is="coral-button" variant="quiet" icon="delete" title="Delete"></button>
+    <button is="coral-button" variant="quiet" icon="checkCircle" title="Check"></button>
+
+    <h2 class="coral-Heading coral-Heading--2">Icon size</h2>
+    <button is="coral-button" variant="warning" icon="delete" iconsize="M" title="Delete"></button>
+    <button is="coral-button" variant="primary" icon="home" iconsize="XS">With Icon</button>
+    <button is="coral-button" variant="quiet" icon="checkCircle" iconsize="M" title="Check"></button>
+
+    <h2 class="coral-Heading coral-Heading--2">Call to Action (large size)</h2>
+    <button is="coral-button" variant="primary" size="L">Call to Action - Primary</button>
+
+    <h2 class="coral-Heading coral-Heading--2">Block</h2>
+    <button is="coral-button" variant="primary" block>Block Button - Primary</button>
+  </section>
+  <h2 id="createdWithJSConstructor">Created with JavaScript Constructor</h2>
+  <script>
+    var buttonFromConstructor = new Coral.Button();
+    buttonFromConstructor.set({
+      icon: 'share',
+      label: {innerHTML: 'From JavaScript'},
+      variant: 'warning',
+      iconSize: Coral.Icon.size.MEDIUM,
+      iconPosition: Coral.Button.iconPosition.RIGHT
+    });
+    document.body.appendChild(buttonFromConstructor);
+  </script>
+</body>
+</html>

@@ -16,45 +16,114 @@
  */
 
 import {Vent} from 'coralui-externals';
+import {commons} from 'coralui-util';
 
 
-//todo Subclass Factory Mixins http://justinfagnani.com/2015/12/21/real-mixins-with-javascript-classes/
-// let Component = (superclass) => class extends superclass {
-//   foo() {
-//     console.log('foo from MyMixin');
-//   }
-// };
-//
-// export default function mixin(target, source) {
-//   target = target.prototype;
-//   source = source.prototype;
-//
-//   Object.getOwnPropertyNames(source).forEach(function (name) {
-//     if (name !== "constructor") {
-//       Object.defineProperty(target, name, Object.getOwnPropertyDescriptor(source, name));
-//     }
-//   });
-// }
-
-/**
- @class Coral.Component
- @classdesc The base element for all Coral components
- @extends HTMLElement
- */
-class Component {
-  constructor() {
-    throw new Error('Coral.Component is not meant to be invoked directly. Inherit from its prototype instead.');
+const getConstructorName = function(constructor) {
+  if (constructor.name) {
+    return constructor.name;
   }
   
-  static mixin(target) {
-    target = target.prototype;
-    const source = this.prototype;
+  // @polyfill IE11. Caution: minifiers risk to rename the function
+  let name = constructor.toString();
+  name = name.substr('function '.length);
+  name = name.substr(0, name.indexOf('('));
+  return name;
+};
+
+/**
+ @mixin Component
+ @classdesc The base element for all Coral components
+ */
+const Component = (superClass) => class extends superClass {
+  constructor() {
+    super();
+  }
+  
+  // @legacy
+  get _componentName() {return getConstructorName(this.constructor);}
+  
+  // @legacy
+  get _properties() {return {};}
+  
+  // @legacy
+  toString() {
+    return `Coral.${this._componentName}`;
+  }
+  
+  // @legacy
+  // Returns the content zone if the component is connected and contains the content zone else null
+  // Ideally content zones will be replaced by shadow dom and <slot> elements
+  _getContentZone(contentZone) {
+    if (this.parentNode) {
+      return (this.contains(contentZone) && contentZone) || null;
+    }
+    // Return the content zone by default
+    return contentZone;
+  }
+  
+  // @legacy
+  // Sets the value as content zone for the property given the specified options
+  // Ideally content zones will be replaced by shadow dom and <slot> elements
+  _setContentZone(property, value, options) {
+    let handle = options.handle;
+    let expectedTagName = options.tagName;
+    let additionalSetter = options.set;
+    let insert = options.insert;
     
-    Object.getOwnPropertyNames(source).forEach(function (name) {
-      if (name !== 'constructor') {
-        Object.defineProperty(target, name, Object.getOwnPropertyDescriptor(source, name));
+    let oldNode;
+    
+    if (!!value) {
+      if (!(value instanceof HTMLElement)) {
+        throw new Error('DOMException: Failed to set the "' + property + '" property on "' + this.toString() +
+          '": The provided value is not of type "HTMLElement".');
       }
-    });
+      
+      if (expectedTagName && value.tagName.toLowerCase() !== expectedTagName) {
+        throw new Error('DOMException: Failed to set the "' + property + '" property on "' + this.toString() +
+          '": The new ' + property + ' element is of type "' + value.tagName + '". It must be a "' +
+          expectedTagName.toUpperCase() + '" element.');
+      }
+      
+      oldNode = this._elements[handle];
+      
+      // Replace the existing element
+      if (insert) {
+        // Remove old node
+        if (oldNode && oldNode.parentNode) {
+          oldNode.parentNode.removeChild(oldNode);
+        }
+        // Insert new node
+        insert.call(this, value);
+      }
+      else {
+        if (oldNode && oldNode.parentNode) {
+          console.warn(this._componentName + ' does not define an insert method for content zone ' + handle + ', falling back to replace.');
+          // Old way -- assume we have an old node
+          this._elements[handle].parentNode.replaceChild(value, this._elements[handle]);
+        }
+        else {
+          console.error(this._componentName + ' does not define an insert method for content zone ' + handle + ', falling back to append.');
+          // Just append, which may introduce bugs, but at least doesn't crazy
+          this.appendChild(value);
+        }
+      }
+    }
+    else {
+      // we need to remove the content zone if it exists
+      oldNode = this._elements[handle];
+      if (oldNode && oldNode.parentNode) {
+        oldNode.parentNode.removeChild(oldNode);
+      }
+    }
+    
+    // Re-assign the handle to the new element
+    this._elements[handle] = value;
+    
+    // Invoke the setter
+    if (typeof additionalSetter === 'function') {
+      additionalSetter.call(this, value);
+    }
   }
   
   /**
@@ -152,38 +221,46 @@ class Component {
     return event;
   }
   
-  /**
-   Non-destructively remove this element. It can be re-added by simply appending it to the document again.
-   It will be garbage collected if there are no more references to it.
-   */
-  remove() {
-    if (this.parentNode) {
-      // Just remove the element from its parent. This will automatically invoke detachedCallback
-      this.parentNode.removeChild(this);
-    }
-  }
-  
-  /**
-   Set multiple properties.
-   @name Coral.Component#set
-   @function
-   @param {Object.<String, *>} properties
-   An object of property/value pairs to set.
-   @param {Boolean} silent
-   If true, events should not be triggered as a result of this set.
-   @returns {Coral.Component} this, chainable.
-   */
+  // @deprecated
   set(propertyOrProperties, valueOrSilent, silent) {
-    var property;
-    var properties;
-    var value;
+    console.warn('Component.set has been deprecated. Please use property setters instead.');
+    
+    let property;
+    let properties;
+    let value;
+    
+    const isContentZone = function(property) {
+      return this._contentZones && commons.swapKeysAndValues(this._contentZones)[property];
+    }.bind(this);
+    
+    const updateContentZone = function(property, value) {
+      // If content zone exists and we only want to update properties on the content zone
+      if (this[property] instanceof HTMLElement && !(value instanceof HTMLElement)) {
+        for (let contentZoneProperty in value) {
+          this[property][contentZoneProperty] = value[contentZoneProperty];
+        }
+      }
+      // Else assign the new value to the content zone
+      else {
+        this[property] = value;
+      }
+    }.bind(this);
+    
+    const setProperty = function(property, value) {
+      if (isContentZone(property)) {
+        updateContentZone(property, value);
+      }
+      else {
+        this[silent ? `_${property}` : property] = value;
+      }
+    }.bind(this);
     
     if (typeof propertyOrProperties === 'string') {
       // Set a single property
       property = propertyOrProperties;
       value = valueOrSilent;
       
-      this[silent ? `_${property}` : property] = value;
+      setProperty(property, value);
     }
     else {
       properties = propertyOrProperties;
@@ -191,28 +268,26 @@ class Component {
       
       // Set a map of properties
       for (property in properties) {
-        this[silent ? `_${property}` : property] = properties[property];
+        value = properties[property];
+        
+        setProperty(property, value);
       }
     }
     
     return this;
   }
   
-  /**
-   Get the value of a property.
-   @param {String} property
-   The name of the property to fetch the value of.
-   @returns {*} Property value.
-   */
+  // @deprecated
   get(property) {
+    console.warn('Coral.Component.get has been deprecated. Please use the property accessor instead.');
+    
     return this[property];
   }
   
-  /**
-   Show this component.
-   @returns {Coral.Component} this, chainable
-   */
+  // @deprecated
   show() {
+    console.warn('Coral.Component.show has been deprecated. Please use the hidden attribute instead.');
+    
     if (!this.hidden) {
       return this;
     }
@@ -221,11 +296,10 @@ class Component {
     return this;
   }
   
-  /**
-   Hide this component.
-   @returns {Coral.Component} this, chainable
-   */
+  // @deprecated
   hide() {
+    console.warn('Coral.Component.hide has been deprecated. Please use the hidden attribute instead.');
+    
     if (this.hidden) {
       return this;
     }
@@ -233,6 +307,6 @@ class Component {
     this.hidden = true;
     return this;
   }
-}
+};
 
 export default Component;

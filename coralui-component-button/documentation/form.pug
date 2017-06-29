@@ -1,0 +1,35 @@
++document-section('Forms')
+  +document-subsection('Vertical Layout')
+    +markup-example().
+      <form class="coral-Form coral-Form--vertical">
+        <section class="coral-Form-fieldset">
+          <div class="coral-Form-fieldwrapper">
+            <label class="coral-Form-fieldlabel" id="label-vertical-textfield-0">Label</label>
+            <input is="coral-textfield" class="coral-Form-field" placeholder="Enter your text" name="name" labelledby="label-vertical-textfield-0">
+          </div>
+          <div class="coral-Form-fieldwrapper">
+            <button is="coral-button" class="coral-Form-field" variant="primary">Engage</button>
+            <button is="coral-button" class="coral-Form-field" variant="quiet">Cancel</button>
+          </div>
+        </section>
+      </form>
+
+
+  +document-subsection('Aligned Layout')
+    +markup-example().
+
+      <form class="coral-Form coral-Form--aligned">
+        <section class="coral-Form-fieldset">
+
+          <div class="coral-Form-fieldwrapper">
+            <label class="coral-Form-fieldlabel" id="label-aligned-textfield-0">Label</label>
+            <input is="coral-textfield" class="coral-Form-field" placeholder="Enter your text" name="name" labelledby="label-aligned-textfield-0">
+          </div>
+
+          <div class="coral-Form-fieldwrapper">
+            <label class="coral-Form-fieldlabel" id="label-aligned-textfield-empty"></label>
+            <button is="coral-button" class="coral-Form-field" variant="primary">Engage</button>
+            <button is="coral-button" class="coral-Form-field" variant="quiet">Cancel</button>
+          </div>
+        </section>
+      </form>

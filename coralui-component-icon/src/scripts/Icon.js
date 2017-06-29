@@ -78,7 +78,7 @@ for (let sizeValue in size) {
  @extends Coral.Component
  @htmltag coral-icon
  */
-class Icon extends HTMLElement {
+class Icon extends Component(HTMLElement) {
   constructor() {
     super();
     
@@ -158,39 +158,11 @@ class Icon extends HTMLElement {
     }
   }
   
-  /**
-   Alternative text to identify the icon for accessibility.
-   When no <code>alt</code> attribute is provided, the icon will fallback to using either the <code>title</code>
-   attribute or icon name as alternative text for accessibility. However, by explicitly setting the <code>alt</code>
-   attribute to an empty string in markup or by using the <code>setAttribute</code> method, one can override the default
-   behavior to avoid redundancy or to indicate that the icon is purely decorative in elements like labelled icon buttons.
-   
-   @type {String}
-   @htmlattribute alt
-   @htmlattributereflected
-   @memberof Coral.Icon#
-   */
-  get alt() {
-    return this._alt || '';
-  }
-  set alt(value) {
-    this._alt = transform.string(value);
-    transform.reflect(this, 'alt', this._alt);
-  
-    // By setting alt = '' explicitly, we override the default behavior and instead use an empty string for alt text.
-    this._updateAltText(this._alt === '');
-  }
-  
-  // @ignore
-  get title() {
-    return this._title || '';
-  }
-  set title(value) {
-    this._title = transform.string(value);
-    transform.reflect(this, 'title', this._title);
-    
-    this._updateAltText();
-  }
+  // private
+  get title() {return this.getAttribute('title');}
+  set title(value) {this.setAttribute('title', value);}
+  get alt() {return this.getAttribute('alt');}
+  set alt(value) {this.setAttribute('alt', value);}
   
   /**
    Updates the aria-label or img alt attribute depending on value of alt, title or icon.
@@ -201,42 +173,32 @@ class Icon extends HTMLElement {
    thus restoring the default behavior, we make sure to update the alt text.
    @private
    */
-  _updateAltText(emptyAltText) {
+  _updateAltText(value) {
     const isImage = this.classList.contains('is-image');
+    
+    const altText = typeof value === 'string' ? value : (isImage ? '' : this.icon.replace(SPLIT_CAMELCASE_REGEX, '$1 $2').toLowerCase());
   
-    // If alt has explicitly been set to empty string, remove all attributes
-    if (emptyAltText) {
+    // If no other role has been set, provide the appropriate
+    // role depending on whether or not the icon is an arbitrary image URL.
+    const role = this.getAttribute('role');
+    const roleOverride = (role && (role !== 'presentation' && role !== 'img'));
+    if (!roleOverride) {
+      this.setAttribute('role', isImage ? 'presentation' : 'img');
+    }
+    
+    // Set accessibility attributes accordingly
+    if (isImage) {
       this.removeAttribute('aria-label');
-      if (isImage) {
-        this._elements.image.setAttribute('alt', '');
+      this._elements.image.setAttribute('alt', altText);
+    }
+    else if (altText === '') {
+      this.removeAttribute('aria-label');
+      if (!roleOverride) {
+        this.removeAttribute('role');
       }
     }
     else {
-      // Fall back to the title attribute, then the icon name
-      const altText = this.alt ? this.alt : this.title || (isImage ? '' : this.icon.replace(SPLIT_CAMELCASE_REGEX, '$1 $2').toLowerCase());
-  
-      // If no other role has been set, provide the appropriate
-      // role depending on whether or not the icon is an arbitrary image URL.
-      const role = this.getAttribute('role');
-      const roleOverride = (role && (role !== 'presentation' && role !== 'img'));
-      if (!roleOverride) {
-        this.setAttribute('role', isImage ? 'presentation' : 'img');
-      }
-  
-      // Set accessibility attributes accordingly
-      if (isImage) {
-        this.removeAttribute('aria-label');
-        this._elements.image.setAttribute('alt', altText);
-      }
-      else if (altText === '') {
-        this.removeAttribute('aria-label');
-        if (!roleOverride) {
-          this.removeAttribute('role');
-        }
-      }
-      else {
-        this.setAttribute('aria-label', altText);
-      }
+      this.setAttribute('aria-label', altText);
     }
   }
   
@@ -248,7 +210,12 @@ class Icon extends HTMLElement {
   }
   
   attributeChangedCallback(name, oldValue, value) {
-    this[name] = value;
+    if (name === 'alt' || name === 'title') {
+      this._updateAltText(value);
+    }
+    else {
+      this[name] = value;
+    }
   }
   
   connectedCallback() {
@@ -260,8 +227,5 @@ class Icon extends HTMLElement {
     }
   }
 }
-
-// Add component common properties and methods
-Component.mixin(Icon);
 
 export default Icon;

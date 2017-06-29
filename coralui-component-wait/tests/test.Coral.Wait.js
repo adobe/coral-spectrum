@@ -20,7 +20,7 @@ describe('Coral.Wait', function() {
   
   describe('instantiation', function() {
     it('should be possible using new', function() {
-      var wait = helpers.target.appendChild(new Coral.Wait());
+      var wait = helpers.build(new Coral.Wait());
       
       expect(wait.classList.contains('coral3-Wait')).to.be.true;
       expect(wait.hasAttribute('centered')).to.be.false;
@@ -142,7 +142,7 @@ describe('Coral.Wait', function() {
   describe('API', function() {
     describe('#centered', function() {
       it('should default to false', function() {
-        var wait = helpers.target.appendChild(new Coral.Wait());
+        var wait = helpers.build(new Coral.Wait());
         
         expect(wait.centered).to.be.false;
         expect(wait.className).to.equal('coral3-Wait');
@@ -151,7 +151,7 @@ describe('Coral.Wait', function() {
       });
       
       it('should be centered', function() {
-        var wait = helpers.target.appendChild(new Coral.Wait());
+        var wait = helpers.build(new Coral.Wait());
         wait.centered = true;
         
         expect(wait.classList.contains('coral3-Wait--centered')).to.be.true;
@@ -161,7 +161,7 @@ describe('Coral.Wait', function() {
     
     describe('#size', function() {
       it('should default to small', function() {
-        var wait = helpers.target.appendChild(new Coral.Wait());
+        var wait = helpers.build(new Coral.Wait());
         
         expect(wait.size).to.equal(Coral.Wait.size.SMALL);
         expect(wait.className).to.equal('coral3-Wait');
@@ -171,7 +171,7 @@ describe('Coral.Wait', function() {
       });
       
       it('can be set to large', function() {
-        var wait = helpers.target.appendChild(new Coral.Wait());
+        var wait = helpers.build(new Coral.Wait());
         wait.size = Coral.Wait.size.LARGE;
         
         expect(wait.classList.contains('coral3-Wait--large')).to.be.true;
@@ -180,7 +180,7 @@ describe('Coral.Wait', function() {
       });
       
       it('can be set to large', function() {
-        var wait = helpers.target.appendChild(new Coral.Wait());
+        var wait = helpers.build(new Coral.Wait());
         wait.size = Coral.Wait.size.MEDIUM;
         
         expect(wait.classList.contains('coral3-Wait--large')).to.be.false;
@@ -191,7 +191,7 @@ describe('Coral.Wait', function() {
     
     describe('#hidden', function() {
       it('should default to false', function() {
-        var wait = helpers.target.appendChild(new Coral.Wait());
+        var wait = helpers.build(new Coral.Wait());
         
         expect(wait.hidden).to.be.false;
         expect(wait.hasAttribute('hidden')).to.be.false;
@@ -208,7 +208,7 @@ describe('Coral.Wait', function() {
     });
     
     it('should be able to set large and centered at the same time', function() {
-      var wait = helpers.target.appendChild(new Coral.Wait());
+      var wait = helpers.build(new Coral.Wait());
       wait.size = Coral.Wait.size.LARGE;
       wait.centered = true;
       
@@ -220,7 +220,7 @@ describe('Coral.Wait', function() {
     });
     
     it('should be able to set medium and centered at the same time', function() {
-      var wait = helpers.target.appendChild(new Coral.Wait());
+      var wait = helpers.build(new Coral.Wait());
       wait.size = Coral.Wait.size.MEDIUM;
       wait.centered = true;
       
