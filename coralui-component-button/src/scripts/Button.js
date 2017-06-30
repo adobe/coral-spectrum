@@ -81,6 +81,7 @@ const iconPosition = {
  @htmltag coral-button
  @htmlbasetag button
  @extends HTMLButtonElement
+ @extends Coral.mixin.component
  */
 class Button extends Component(HTMLButtonElement) {
   constructor() {

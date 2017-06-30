@@ -75,8 +75,9 @@ for (let sizeValue in size) {
 /**
  @class Coral.Icon
  @classdesc An Icon component
- @extends Coral.Component
  @htmltag coral-icon
+ @extends HTMLElement
+ @extends Coral.mixin.component
  */
 class Icon extends Component(HTMLElement) {
   constructor() {

@@ -152,7 +152,6 @@ module.exports = function(config) {
       processPath: function(filePath) {
         let parts = path.dirname(path.normalize(filePath)).split(path.sep);
         const lastFolder = parts.pop();
-        console.log(lastFolder);
 
         if (lastFolder === 'snippets') {
           // Drop the file path completely for snippets

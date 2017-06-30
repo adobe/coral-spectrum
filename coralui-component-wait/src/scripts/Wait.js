@@ -59,6 +59,8 @@ for (let variantValue in variant) {
  @class Coral.Wait
  @classdesc A Wait component
  @htmltag coral-wait
+ @extends HTMLElement
+ @extends Coral.mixin.component
  */
 class Wait extends Component(HTMLElement) {
   constructor() {
