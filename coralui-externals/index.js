@@ -17,6 +17,8 @@ import './polyfills/forcePolyfill.js';
 // Using custom polyfill built from https://github.com/joeldenning/custom-elements/tree/builtin instead.
 // customElements.enableCustomizedBuiltins is set to true by default here.
 import './polyfills/custom-elements.min.js';
+// Patch document.createElement for custom elements v0 usage
+import './polyfills/document.createElement-patch.js';
 
 // Expose on the window
 window.Promise = window.Promise || Promise;

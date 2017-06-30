@@ -1,0 +1,61 @@
++document-section('Forms')
+  +document-subsection('Vertical Layout')
+    +markup-example().
+      <form class="coral-Form coral-Form--vertical">
+        <section class="coral-Form-fieldset">
+
+          <div class="coral-Form-fieldwrapper">
+            <label class="coral-Form-fieldlabel" id="label-vertical-textarea-0">Label</label>
+            <textarea is="coral-textarea" class="coral-Form-field" placeholder="Enter your text" name="name" labelledby="label-vertical-textarea-0">
+          	</textarea>
+          </div>
+
+          <div class="coral-Form-fieldwrapper">
+            <label class="coral-Form-fieldlabel" id="label-vertical-textarea-1">Required</label>
+            <textarea is="coral-textarea" class="coral-Form-field" placeholder="Enter your text" name="name" labelledby="label-vertical-textarea-1">
+            </textarea>
+            <coral-icon class="coral-Form-fieldinfo" icon="infoCircle" size="S" id="coral-form-vertical-textarea-fieldinfo"></coral-icon>
+            <coral-tooltip variant="info" placement="right" target="#coral-form-vertical-textarea-fieldinfo">Required Information</coral-tooltip>
+          </div>
+
+          <div class="coral-Form-fieldwrapper">
+            <label class="coral-Form-fieldlabel" id="label-vertical-textarea-2">Invalid</label>
+            <textarea is="coral-textarea" class="coral-Form-field" placeholder="Enter your text" name="name" labelledby="label-vertical-textarea-2" invalid>
+            </textarea>
+            <coral-icon class="coral-Form-fielderror" icon="infoCircle" size="S" id="coral-form-vertical-textarea-fielderror"></coral-icon>
+            <coral-tooltip variant="error" placement="right" target="#coral-form-vertical-textarea-fielderror">Error Message</coral-tooltip>
+          </div>
+
+        </section>
+      </form>
+
+
+  +document-subsection('Aligned Layout')
+    +markup-example().
+      <form class="coral-Form coral-Form--aligned u-columnLarge">
+        <section class="coral-Form-fieldset">
+
+          <div class="coral-Form-fieldwrapper">
+            <label class="coral-Form-fieldlabel" id="label-aligned-textarea-0">Label</label>
+            <textarea is="coral-textarea" class="coral-Form-field" placeholder="Enter your text" name="name" labelledby="label-aligned-textarea-0">
+          	</textarea>
+          </div>
+
+          <div class="coral-Form-fieldwrapper">
+            <label class="coral-Form-fieldlabel" id="label-aligned-textarea-1">Required</label>
+            <textarea is="coral-textarea" class="coral-Form-field" placeholder="Enter your text" name="name" labelledby="label-aligned-textarea-1">
+            </textarea>
+            <coral-icon class="coral-Form-fieldinfo" icon="infoCircle" size="S" id="coral-form-aligned-textarea-fieldinfo"></coral-icon>
+            <coral-tooltip variant="info" placement="right" target="#coral-form-aligned-textarea-fieldinfo">Required Information</coral-tooltip>
+          </div>
+
+          <div class="coral-Form-fieldwrapper">
+            <label class="coral-Form-fieldlabel" id="label-aligned-textarea-2">Invalid</label>
+            <textarea is="coral-textarea" class="coral-Form-field" placeholder="Enter your text" name="name" labelledby="label-aligned-textarea-2" invalid>
+            </textarea>
+            <coral-icon class="coral-Form-fielderror" icon="infoCircle" size="S" id="coral-form-aligned-textarea-fielderror"></coral-icon>
+            <coral-tooltip variant="error" placement="right" target="#coral-form-aligned-textarea-fielderror">Error Message</coral-tooltip>
+          </div>
+
+        </section>
+      </form>
