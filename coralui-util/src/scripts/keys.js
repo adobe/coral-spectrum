@@ -771,7 +771,7 @@ let Keys = function() {};
     };
   }
   
-  const Keys = makeComboHandler;
+  Keys = makeComboHandler;
   
   Keys.filterInputs = filterInputs;
   
@@ -796,7 +796,6 @@ let Keys = function() {};
     stopPropagation: true,
     preventDefault: true
   });
-  
 }());
 
-export default keys;
+export {keys, Keys};

@@ -1,0 +1,80 @@
+script.
+  if (typeof Coral.Configurator === 'function') {
+    var configurator = new Coral.Configurator().set({
+      component: Coral.AnchorButton,
+      useInnerElements: true,
+      innerElements: [
+        {
+          tagName: 'coral-anchorbutton-label',
+          properties: {
+            'label.innerHTML': 'innerHTML'
+          }
+        },
+      ],
+      mainContentZone: 'coral-anchorbutton-label',
+      skipProperty: function(prop) {
+        return prop === 'icon' && configurator.instance.icon === '';
+      },
+      fields: [
+        {
+          label: 'Label Text',
+          prop: 'label.innerHTML',
+          type: 'text',
+          value: 'Yay Kittens!'
+        },
+        {
+          label: 'Variant',
+          prop: 'variant',
+          type: 'select',
+          value: 'default',
+          options: {
+            'Default': 'default',
+            'Primary': 'primary',
+            'Quiet': 'quiet',
+            'Warning': 'warning',
+            'Minimal': 'minimal'
+          }
+        },
+        {
+          label: 'Icon',
+          prop: 'icon',
+          type: 'text',
+          value: 'heart'
+        },
+        {
+          label: 'Icon Size',
+          prop: 'iconSize',
+          type: 'select',
+          value: 'S',
+          options: {
+            'Extra Small': 'XS',
+            'Small': 'S',
+            'Medium': 'M',
+            'Large': 'L'
+          }
+        },
+        {
+          label: 'AnchorButton Size',
+          prop: 'size',
+          type: 'select',
+          value: 'M',
+          options: {
+            'Medium (default)': 'M',
+            'Large': 'L'
+          }
+        },
+        {
+          label: 'is block',
+          prop: 'block',
+          type: 'checkbox',
+          value: false
+        },
+        {
+          label: 'is disabled',
+          prop: 'disabled',
+          type: 'checkbox',
+          value: false
+        },
+      ]
+    }).insertAfterLastScript();
+  }

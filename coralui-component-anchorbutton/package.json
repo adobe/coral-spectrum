@@ -1,0 +1,16 @@
+{
+  "name": "coralui-component-anchorbutton",
+  "version": "2.0.0",
+  "description": "Anchor Button component",
+  "dependencies": {
+    "@coralui/coralui-theme-cloudui": "^9.3.0",
+    "coralui-mixin-component": "file:../coralui-mixin-component",
+    "coralui-externals": "file:../coralui-externals",
+    "coralui-util": "file:../coralui-util",
+    "coralui-component-button": "file:../coralui-component-button"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "coralui-gulp": "file:../coralui-gulp"
+  }
+}

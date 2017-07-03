@@ -1,7 +1,7 @@
 import commons from './src/scripts/commons';
 import events from './src/scripts/events';
 import i18n from './src/scripts/i18n';
-import keys from './src/scripts/keys';
+import {keys, Keys} from './src/scripts/keys';
 import mixin from './src/scripts/mixin';
 import strings from './src/scripts/strings';
 import transform from './src/scripts/transform';
@@ -13,6 +13,7 @@ window.Coral.commons = commons;
 window.Coral.events = events;
 window.Coral.i18n = i18n;
 window.Coral.keys = keys;
+window.Coral.Keys = Keys;
 window.Coral.mixin = mixin;
 window.Coral.strings = strings;
 window.Coral.transform = transform;
@@ -23,6 +24,7 @@ export {
   events,
   i18n,
   keys,
+  Keys,
   mixin,
   strings,
   transform,
