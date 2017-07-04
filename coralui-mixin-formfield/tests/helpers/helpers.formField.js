@@ -221,10 +221,6 @@ helpers.testFormField = function(markup, options) {
           expect(el.disabled).to.be.true;
           expect(el.hasAttribute('disabled')).to.be.true;
           
-          el.disabled = ''; // falsy
-          expect(el.disabled).to.be.false;
-          expect(el.hasAttribute('disabled')).to.be.false;
-          
           el.disabled = false;
           expect(el.disabled).to.be.false;
           expect(el.hasAttribute('disabled')).to.be.false;

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>Coral3 | Coral.ButtonGroup</title>
+    <link rel="stylesheet" href="../build/css/coral.css">
+    <script src="../build/js/coral.js"></script>
+    <style>
+    section {
+      border-top: 1px solid #C8C8C8;
+      padding: 12px;
+    }
+
+    .col {
+      margin-right: 3%;
+      display: inline-block;
+      vertical-align: top;
+      padding-bottom: 2rem;
+    }
+    </style>
+  </head>
+
+  <body class="coral--light u-coral-padding">
+    <h1 class="coral-Heading coral-Heading--1">coral-ButtonGroup</h1>
+    <div class="col">
+      <section>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-0">No select</label></h2>
+        <coral-buttongroup labelledby="label-0">
+          <button is="coral-button" icon="add" title="Add"></button>
+          <button is="coral-button" icon="camera" title="Camera"></button>
+          <button is="coral-button" icon="undo" title="Undo"></button>
+        </coral-buttongroup>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-1">Single select</label></h2>
+        <coral-buttongroup selectionmode="single" labelledby="label-1">
+          <button is="coral-button" icon="add" value="add" title="Add"></button>
+          <button is="coral-button" icon="camera" selected value="camera" title="Camera"></button>
+          <button is="coral-button" icon="undo" value="undo" title="Undo"></button>
+        </coral-buttongroup>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-2">Multi select</label></h2>
+        <coral-buttongroup selectionmode="multiple" labelledby="label-2">
+          <button is="coral-button" icon="add" selected value="add" title="Add"></button>
+          <button is="coral-button" icon="camera" value="camera" title="Camera"></button>
+          <button is="coral-button" icon="undo" selected value="undo" title="Undo"></button>
+        </coral-buttongroup>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-3">Button group, icon with text</label></h2>
+        <coral-buttongroup labelledby="label-3">
+          <button is="coral-button" icon="add">Add</button>
+          <button is="coral-button" icon="camera">Camera</button>
+          <button is="coral-button" icon="undo">Undo</button>
+        </coral-buttongroup>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-4">Button group, text only</label></h2>
+        <coral-buttongroup labelledby="label-4">
+          <button is="coral-button">Add</button>
+          <button is="coral-button">Snapshot</button>
+          <button is="coral-button">Undo</button>
+        </coral-buttongroup>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-5">Button group, mixed</label></h2>
+        <coral-buttongroup labelledby="label-5">
+          <button is="coral-button">Add</button>
+          <button is="coral-button" icon="undo">Undo</button>
+        </coral-buttongroup>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-6">From JavaScript</label></h2>
+        <div id="jsexample"></div>
+        <script>
+        var buttonGroupFromJS = new Coral.ButtonGroup();
+        buttonGroupFromJS.labelledBy = 'label-6';
+        buttonGroupFromJS.selectionMode = 'single';
+
+        var button1 = new Coral.Button();
+        button1.set({
+          icon: 'add',
+          variant: 'secondary',
+          title: 'Add'
+        });
+        buttonGroupFromJS.appendChild(button1);
+
+        var button2 = new Coral.Button();
+        button2.set({
+          icon: 'delete',
+          variant: 'secondary',
+          title: 'Delete'
+        });
+        buttonGroupFromJS.appendChild(button2);
+
+        document.getElementById('jsexample').appendChild(buttonGroupFromJS);
+        </script>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-7">Created with createElement</label></h2>
+        <div id="jsexample2"></div>
+        <script>
+        var buttonGroupFromCreateElement = document.createElement('coral-buttongroup');
+        buttonGroupFromCreateElement.labelledBy = 'label-7';
+
+        var button1 = new Coral.Button();
+        button1.set({
+          icon: 'add',
+          variant: 'secondary',
+          title: 'Add'
+        });
+        buttonGroupFromCreateElement.appendChild(button1);
+
+        var button2 = new Coral.Button();
+        button2.set({
+          icon: 'delete',
+          variant: 'secondary',
+          title: 'Delete'
+        });
+        buttonGroupFromCreateElement.appendChild(button2);
+
+        document.getElementById('jsexample2').appendChild(buttonGroupFromCreateElement);
+        </script>
+      </section>
+    </div>
+    <h1 class="coral-Heading coral-Heading--1">coral-Selector - Form Test</h1>
+    <div class="col">
+      <section>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-8">Form Test - multiple</label></h2>
+        <form id="checkbox-form">
+          <coral-buttongroup selectionmode="multiple" name="form-checkbox" labelledby="label-8">
+            <button is="coral-button" value="add">Add</button>
+            <button is="coral-button" value="snapshot">Snapshot</button>
+            <button is="coral-button" value="undo">Undo</button>
+          </coral-buttongroup>
+          <div>
+            <button type="submit" class="coral-Button coral-Button--primary">Submit</button>
+          </div>
+        </form>
+        <div>Form multiple submit Result:
+          <output id="form-mul-sub">...</output>
+        </div>
+        <br/>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-9">Form Test - Single</label></h2>
+        <form id="radio-form">
+          <coral-buttongroup selectionmode="single" name="form-radio" required labelledby="label-9">
+            <button is="coral-button" value="lion">Lion</button>
+            <button is="coral-button" value="tiger">Tiger</button>
+            <button is="coral-button" value="leopard">Leopard</button>
+          </coral-buttongroup>
+          <div>
+            <button type="submit" class="coral-Button coral-Button--primary">Submit</button>
+          </div>
+        </form>
+        <div>Form Single submit Result:
+          <output id="form-sing-sub">...</output>
+        </div>
+      </section>
+    </div>
+    <h1 class="coral-Heading coral-Heading--1">coral-ButtonGroup - readOnly</h1>
+    <div class="col">
+      <section>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-10">No select - readOnly</label></h2>
+        <coral-buttongroup labelledby="label-10" readonly>
+          <button is="coral-button" icon="add" title="Add"></button>
+          <button is="coral-button" icon="camera" title="Camera"></button>
+          <button is="coral-button" icon="undo" title="Undo"></button>
+        </coral-buttongroup>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-11">Single select - readOnly</label></h2>
+        <coral-buttongroup labelledby="label-11" readonly selectionmode="single">
+          <button is="coral-button" icon="add" title="Add"></button>
+          <button is="coral-button" icon="camera" selected title="Camera"></button>
+          <button is="coral-button" icon="undo" title="Undo"></button>
+        </coral-buttongroup>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-12">Multi select - readOnly</label></h2>
+        <coral-buttongroup labelledby="label-12" readonly selectionmode="multiple">
+          <button is="coral-button" icon="add" selected title="Add"></button>
+          <button is="coral-button" icon="camera" title="Camera"></button>
+          <button is="coral-button" icon="undo" selected title="Undo"></button>
+        </coral-buttongroup>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-13">Created with createElement - readOnly</label></h2>
+        <div id="jsexample4"></div>
+        <script>
+          var buttonGroupFromCreateElement = document.createElement('coral-buttongroup');
+          buttonGroupFromCreateElement.labelledBy = 'label-13';
+          buttonGroupFromCreateElement.selectionMode = Coral.ButtonGroup.selectionMode.MULTIPLE;
+          buttonGroupFromCreateElement.readOnly = true;
+
+          var button1 = new Coral.Button();
+          button1.set({
+            icon: 'add',
+            variant: 'secondary',
+            title: 'Add',
+            selected: true
+          });
+          buttonGroupFromCreateElement.appendChild(button1);
+
+          var button2 = new Coral.Button();
+          button2.set({
+            icon: 'camera',
+            variant: 'secondary',
+            title: 'Snapshot'
+          });
+          buttonGroupFromCreateElement.appendChild(button2);
+
+          var button3 = new Coral.Button();
+          button3.set({
+            icon: 'undo',
+            variant: 'secondary',
+            title: 'Undo',
+            selected: true
+          });
+          buttonGroupFromCreateElement.appendChild(button3);
+
+          document.getElementById('jsexample4').appendChild(buttonGroupFromCreateElement);
+        </script>
+      </section>
+    </div>
+    <h1 class="coral-Heading coral-Heading--1">coral-ButtonGroup - disabled</h1>
+    <div class="col">
+      <section>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-14">No select - disabled</label></h2>
+        <coral-buttongroup labelledby="label-14" disabled>
+          <button is="coral-button" icon="add" title="Add"></button>
+          <button is="coral-button" icon="camera" title="Camera"></button>
+          <button is="coral-button" icon="undo" title="Undo"></button>
+        </coral-buttongroup>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-15">Single select - disabled</label></h2>
+        <coral-buttongroup labelledby="label-15" disabled selectionmode="single">
+          <button is="coral-button" icon="add" title="Add"></button>
+          <button is="coral-button" icon="camera" selected title="Camera"></button>
+          <button is="coral-button" icon="undo" title="Undo"></button>
+        </coral-buttongroup>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-16">Multi select - disabled</label></h2>
+        <coral-buttongroup labelledby="label-16" disabled selectionmode="multiple">
+          <button is="coral-button" icon="add" selected title="Add"></button>
+          <button is="coral-button" icon="camera" title="Camera"></button>
+          <button is="coral-button" icon="undo" selected title="Undo"></button>
+        </coral-buttongroup>
+        <h2 class="coral-Heading coral-Heading--2"><label id="label-17">Created with createElement - disabled</label></h2>
+        <div id="jsexample5"></div>
+        <script>
+          var buttonGroupFromCreateElement = document.createElement('coral-buttongroup');
+          buttonGroupFromCreateElement.labelledBy = 'label-17';
+          buttonGroupFromCreateElement.selectionMode = Coral.ButtonGroup.selectionMode.MULTIPLE;
+          buttonGroupFromCreateElement.disabled = true;
+
+          var button1 = new Coral.Button();
+          button1.set({
+            icon: 'add',
+            variant: 'secondary',
+            title: 'Add',
+            selected: true
+          });
+          buttonGroupFromCreateElement.appendChild(button1);
+
+          var button2 = new Coral.Button();
+          button2.set({
+            icon: 'camera',
+            variant: 'secondary',
+            title: 'Snapshot'
+          });
+          buttonGroupFromCreateElement.appendChild(button2);
+
+          var button3 = new Coral.Button();
+          button3.set({
+            icon: 'undo',
+            variant: 'secondary',
+            title: 'Undo',
+            selected: true
+          });
+          buttonGroupFromCreateElement.appendChild(button3);
+          document.getElementById('jsexample5').appendChild(buttonGroupFromCreateElement);
+        </script>
+      </section>
+    </div>
+  </body>
+
+</html>

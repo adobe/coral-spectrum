@@ -35,7 +35,8 @@ transform.boolean = function(value) {
 
 /**
  Transform the provided value into a boolean. Follows the behavior of the HTML specification, in which the existence of
- the attribute indicates <code>true</code> regardless of the attribute's value.
+ the attribute indicates <code>true</code> regardless of the attribute's value. If the value is a boolean, it ignores
+ the transformation.
  
  @param {*} value
  The value to convert to Boolean.
@@ -44,7 +45,7 @@ transform.boolean = function(value) {
  */
 transform.booleanAttr = function(value) {
   'use strict';
-  return !(value === null || typeof value === 'undefined');
+  return typeof value === 'boolean' ? value : !(value === null || typeof value === 'undefined');
 };
 
 /**
@@ -111,8 +112,11 @@ transform.string = function(value) {
 */
 transform.reflect = function(element, attributeName, value) {
   if (typeof value === 'boolean') {
-    if (!element.hasAttribute(attributeName)) {
+    if (value && !element.hasAttribute(attributeName)) {
       element.setAttribute(attributeName, '');
+    }
+    else if (!value && element.hasAttributes(attributeName)) {
+      element.removeAttribute(attributeName);
     }
   }
   else {

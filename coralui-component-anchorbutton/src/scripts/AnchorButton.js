@@ -45,9 +45,11 @@ class AnchorButton extends Component(HTMLAnchorElement) {
       label: document.createElement('coral-anchorbutton-label')
     };
   
-    this.on('mousedown', this._onMouseDown);
-    this.on('keydown', this._onKeyDown);
-    this.on('keyup', this._onKeyUp);
+    this.on({
+      'mousedown': '_onMouseDown',
+      'keydown': '_onKeyDown',
+      'keyup': '_onKeyUp'
+    });
     
     // cannot use the events hash because events on disabled items are not reported
     this.addEventListener('click', this._onClick.bind(this));

@@ -24,7 +24,7 @@ module.exports = function(gulp) {
   const themeHelper = require('../helpers/theme');
   
   gulp.task('scripts', function() {
-    return gulp.src(`index-${themeHelper.getTheme()}.js`)
+    return gulp.src(`${themeHelper.getIndex()}.js`)
       .pipe(plumber())
       .pipe(sourceMaps.init())
       .pipe(rollup({

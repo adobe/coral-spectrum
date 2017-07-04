@@ -17,9 +17,15 @@
 
 const path = require('path');
 const packageJSON = require(path.join(process.cwd(), 'package.json'));
-// Fallbacks to cloudui by default
-const theme = (packageJSON['dependencies'] && packageJSON['dependencies']['@coralui/coralui-theme-spectrum']) ||
-(packageJSON['devDependencies'] && packageJSON['devDependencies']['@coralui/coralui-theme-spectrum']) ? 'spectrum' : 'cloudui';
+
+const themeCloudUI = ((packageJSON['dependencies'] && packageJSON['dependencies']['@coralui/coralui-theme-spectrum']) ||
+(packageJSON['devDependencies'] && packageJSON['devDependencies']['@coralui/coralui-theme-spectrum'])) && 'spectrum';
+
+const themeSpectrum = ((packageJSON['dependencies'] && packageJSON['dependencies']['@coralui/coralui-theme-cloudui']) ||
+(packageJSON['devDependencies'] && packageJSON['devDependencies']['@coralui/coralui-theme-cloudui'])) && 'cloudui';
+
+// If both themes, spectrum wins
+const theme = themeSpectrum || themeCloudUI;
 
 module.exports = {
   getTheme: function() {
@@ -27,5 +33,8 @@ module.exports = {
   },
   addTheme: function() {
     return `import '@coralui/coralui-theme-${theme}/build/css/coral.css';\n`;
+  },
+  getIndex: function() {
+    return theme ? `index-${theme}` : 'index';
   }
 };

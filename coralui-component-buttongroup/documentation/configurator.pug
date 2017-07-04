@@ -1,0 +1,70 @@
+script.
+  if (typeof Coral.Configurator === 'function') {
+    var configurator = new Coral.Configurator().set({
+      component: Coral.ButtonGroup,
+      fields: [
+        {
+          label: 'Selection Mode',
+          prop: 'selectionMode',
+          type: 'select',
+          value: 'none',
+          options: {
+            'None': 'none',
+            'Single': 'single',
+            'Multiple': 'multiple'
+          }
+        },
+        {
+          label: 'Name',
+          prop: 'name',
+          type: 'text',
+          value: 'button-group'
+        },
+        {
+          label: 'is disabled',
+          prop: 'disabled',
+          value: false,
+          type: 'checkbox'
+        },
+        {
+          label: 'is invalid',
+          prop: 'invalid',
+          value: false,
+          type: 'checkbox'
+        },
+        {
+          label: 'is read-only',
+          prop: 'readOnly',
+          value: false,
+          type: 'checkbox'
+        },
+        {
+          label: 'is required',
+          prop: 'required',
+          type: 'checkbox',
+          value: false
+        },
+      ],
+      items: [
+        {
+          label: {
+            innerHTML: 'Add'
+          }
+        },
+        {
+          label: {
+            innerHTML: 'Snapshot'
+          }
+        },
+        {
+          label: {
+            innerHTML: 'Undo'
+          }
+        }
+      ],
+      itemsMainContentZone: 'coral-button-label',
+      componentEvents: [
+        'change'
+      ]
+    }).insertAfterLastScript();
+  }

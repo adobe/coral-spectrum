@@ -32,7 +32,7 @@ module.exports = function(config) {
   preprocessors[`${CWD}/tests/snippets/**/*.html`] = ['html2js'];
   
   // Pre-process snippets of dependencies
-  preprocessors[`${CWD}/node_modules/@coralui/coralui-*/tests/snippets/**/*.html`] = ['html2js'];
+  preprocessors[`${CWD}/node_modules/coralui-*/tests/snippets/**/*.html`] = ['html2js'];
   
   // The package.json of the tested module (usually a component)
   const modulePackageJson = require(`${CWD}/package.json`);

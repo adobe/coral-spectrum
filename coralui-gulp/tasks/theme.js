@@ -21,13 +21,19 @@ module.exports = function(gulp) {
   const themeHelper = require('../helpers/theme');
   
   gulp.task('theme', function() {
-    return gulp.src('index.js')
-      .pipe(plumber())
-      .pipe(header(themeHelper.addTheme()))
-      .pipe(rename({
-        basename: `index-${themeHelper.getTheme()}`
-      }))
-      .pipe(gulp.dest('.'));
+    const theme = themeHelper.getTheme();
+    if (theme) {
+      return gulp.src('index.js')
+        .pipe(plumber())
+        .pipe(header(themeHelper.addTheme()))
+        .pipe(rename({
+          basename: themeHelper.getIndex()
+        }))
+        .pipe(gulp.dest('.'));
+    }
+    else {
+      return gulp.src('index.js')
+    }
   });
   
 };

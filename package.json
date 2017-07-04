@@ -9,6 +9,7 @@
   "devDependencies": {
     "coralui-component-anchorbutton": "file:coralui-component-anchorbutton",
     "coralui-component-button": "file:coralui-component-button",
+    "coralui-component-buttongroup": "file:coralui-component-buttongroup",
     "coralui-component-icon": "file:coralui-component-icon",
     "coralui-component-wait": "file:coralui-component-wait",
     "coralui-component-textfield": "file:coralui-component-textfield",

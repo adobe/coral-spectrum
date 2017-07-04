@@ -91,7 +91,9 @@ class Button extends Component(HTMLButtonElement) {
       label: document.createElement('coral-button-label')
     };
     
-    this.on('mousedown', this._onMouseDown);
+    this.on({
+      'mousedown': '_onMouseDown'
+    });
   }
   
   /**
@@ -204,11 +206,33 @@ class Button extends Component(HTMLButtonElement) {
     return this._selected || false;
   }
   set selected(value) {
+    const oldValue = this._selected;
+    
     this._selected = transform.booleanAttr(value);
   
-    transform.reflect(this, 'selected', value);
+    transform.reflect(this, 'selected', this._selected);
     
-    this.classList.toggle('is-selected', this.selected);
+    this.classList.toggle('is-selected', this._selected);
+    
+    this.trigger('coral-button:_selectedchanged', {
+      oldValue: oldValue,
+      value: this._selected
+    });
+  }
+  
+  // We just reflect it but we also trigger an event to be used by button group
+  get value() {
+    return this.getAttribute('value');
+  }
+  set value(value) {
+    const oldValue = this.value;
+    
+    transform.reflect(this, 'value', value);
+  
+    this.trigger('coral-button:_valuechanged', {
+      oldValue: oldValue,
+      value: value
+    });
   }
   
   /**
@@ -225,9 +249,9 @@ class Button extends Component(HTMLButtonElement) {
   set block(value) {
     this._block = transform.booleanAttr(value);
   
-    transform.reflect(this, 'block', value);
+    transform.reflect(this, 'block', this._block);
   
-    this.classList.toggle(`${CLASSNAME}--block`, this.block);
+    this.classList.toggle(`${CLASSNAME}--block`, this._block);
   }
   
   /**
@@ -247,12 +271,12 @@ class Button extends Component(HTMLButtonElement) {
     if (validate.enumeration(variant)(value)) {
       this._variant = value;
   
-      transform.reflect(this, 'variant', value);
+      transform.reflect(this, 'variant', this._variant);
       
       // removes every existing variant
       this.classList.remove.apply(this.classList, ALL_VARIANT_CLASSES);
   
-      this.classList.add(`${CLASSNAME}--${this.variant}`);
+      this.classList.add(`${CLASSNAME}--${this._variant}`);
     }
   }
   
@@ -329,7 +353,17 @@ class Button extends Component(HTMLButtonElement) {
   static get iconPosition() {return iconPosition;}
   
   static get observedAttributes() {
-    return ['iconposition', 'iconPosition', 'iconsize', 'iconSize', 'icon', 'size', 'selected', 'block', 'variant'];
+    return [
+      'iconposition',
+      'iconPosition',
+      'iconsize',
+      'iconSize',
+      'icon',
+      'size',
+      'selected',
+      'block',
+      'variant',
+      'value'];
   }
   
   attributeChangedCallback(name, oldValue, value) {
@@ -399,6 +433,20 @@ class Button extends Component(HTMLButtonElement) {
       subtree: true // Monitor any child node
     });
   }
+  
+  /**
+   Triggered when {@link Coral.Button#selected} changed.
+   @event Coral.Button#coral-button:_selectedchanged
+   @param {Object} event Event object
+   @private
+   */
+  
+  /**
+   Triggered when {@link Coral.Button#value} changed.
+   @event Coral.Button#coral-button:_valuechanged
+   @param {Object} event Event object
+   @private
+   */
 }
 
 export default Button;

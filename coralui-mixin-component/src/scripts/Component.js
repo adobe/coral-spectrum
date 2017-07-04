@@ -16,9 +16,202 @@
  */
 
 import {Vent} from 'coralui-externals';
-import {commons} from 'coralui-util';
+import {commons, Keys, keys, events} from 'coralui-util';
 
 
+// Used to split events by type/target
+const delegateEventSplitter = /^(\S+)\s*(.*)$/;
+
+/**
+ Return the method corresponding to the method name or the function, if passed.
+ @ignore
+ */
+const getListenerFromMethodNameOrFunction = function(obj, eventName, methodNameOrFunction) {
+  // Try to get the method
+  if (typeof methodNameOrFunction === 'function') {
+    return methodNameOrFunction;
+  }
+  else if (typeof methodNameOrFunction === 'string') {
+    if (!obj[methodNameOrFunction]) {
+      throw new Error('Coral.Component: Unable to add ' + eventName + ' listener for ' + obj.toString() +
+        ', method ' + methodNameOrFunction + ' not found');
+    }
+    
+    const listener = obj[methodNameOrFunction];
+    
+    if (typeof listener !== 'function') {
+      throw new Error('Coral.Component: Unable to add ' + eventName + ' listener for ' + obj.toString() +
+        ', listener is a ' + (typeof listener) + ' but should be a function');
+    }
+    
+    return listener;
+  }
+  else if (methodNameOrFunction) {
+    // If we're passed something that's truthy (like an object), but it's not a valid method name or a function, get
+    // angry
+    throw new Error('Coral.Component: Unable to add ' + eventName + ' listener for ' + obj.toString() + ', ' +
+      methodNameOrFunction + ' is neither a method name or a function');
+  }
+  
+  return null;
+};
+
+/**
+ Add local event and key combo listeners for this component, store global event/key combo listeners for later.
+ @ignore
+ */
+const delegateEvents = function() {
+  /*
+   Add listeners to new event
+   - Include in hash
+   Add listeners to existing event
+   - Override method and use super
+   Remove existing event
+   - Pass null
+   */
+  var match;
+  var eventName;
+  var eventInfo;
+  var listener;
+  var selector;
+  var elements;
+  var isGlobal;
+  var isKey;
+  var isResize;
+  var isCapture;
+  
+  for (eventInfo in this._events) {
+    listener = this._events[eventInfo];
+    
+    // Extract the event name and the selector
+    match = eventInfo.match(delegateEventSplitter);
+    eventName = match[1] + '.CoralComponent';
+    selector = match[2];
+    
+    if (selector === '') {
+      // instead of null because the key module checks for undefined
+      selector = undefined;
+    }
+    
+    // Try to get the method corresponding to the value in the map
+    listener = getListenerFromMethodNameOrFunction(this, eventName, listener);
+    
+    if (listener) {
+      // Always execute in the context of the object
+      // @todo is this necessary? this should be correct anyway
+      listener = listener.bind(this);
+      
+      // Check if the listener is on the window
+      isGlobal = eventName.indexOf('global:') === 0;
+      if (isGlobal) {
+        eventName = eventName.substr(7);
+      }
+      
+      // Check if the listener is a capture listener
+      isCapture = eventName.indexOf('capture:') === 0;
+      if (isCapture) {
+        // @todo Limitation: It should be possible to do capture:global:, but it isn't
+        eventName = eventName.substr(8);
+      }
+      
+      // Check if the listener is a key listener
+      isKey = eventName.indexOf('key:') === 0;
+      if (isKey) {
+        if (isCapture) {
+          throw new Error('Coral.Keys does not currently support listening to key events with capture');
+        }
+        eventName = eventName.substr(4);
+      }
+      
+      // Check if the listener is a resize listener
+      isResize = eventName.indexOf('resize') === 0;
+      if (isResize) {
+        if (isCapture) {
+          throw new Error('Coral.commons.addResizeListener does not currently support listening to resize event with capture');
+        }
+      }
+      
+      if (isGlobal) {
+        // Store for adding/removal
+        if (isKey) {
+          this._globalKeys = this._globalKeys || [];
+          this._globalKeys.push({
+            keyCombo: eventName,
+            selector: selector,
+            listener: listener
+          });
+        }
+        else {
+          this._globalEvents = this._globalEvents || [];
+          this._globalEvents.push({
+            eventName: eventName,
+            selector: selector,
+            listener: listener,
+            isCapture: isCapture
+          });
+          
+          // Listen to global events
+          events.on(eventName, selector, listener, isCapture);
+        }
+      }
+      else {
+        // Events on the element itself
+        if (isKey) {
+          // Create the keys instance only if its needed
+          this._keys = this._keys || new Keys(this, {
+              // Execute key listeners in the context of the element
+              context: this
+            });
+          
+          // Add listener locally
+          this._keys.on(eventName, selector, listener);
+        }
+        else if (isResize) {
+          if (selector) {
+            elements = document.querySelectorAll(selector);
+            for (var i = 0; i < elements.length; ++i) {
+              commons.addResizeListener(elements[i], listener);
+            }
+          }
+          else {
+            commons.addResizeListener(this, listener);
+          }
+        }
+        else {
+          this._vent.on(eventName, selector, listener, isCapture);
+        }
+      }
+    }
+  }
+};
+
+/**
+ Remove global event listeners for this component.
+ @ignore
+ */
+const undelegateGlobalEvents = function() {
+  var i;
+  if (this._globalEvents) {
+    // Remove global event listeners
+    for (i = 0; i < this._globalEvents.length; i++) {
+      var event = this._globalEvents[i];
+      events.off(event.eventName, event.selector, event.listener, event.isCapture);
+    }
+  }
+  
+  if (this._globalKeys) {
+    // Remove global key listeners
+    for (i = 0; i < this._globalKeys.length; i++) {
+      var key = this._globalKeys[i];
+      keys.off(key.keyCombo, key.selector, key.listener);
+    }
+  }
+};
+
+/**
+ Returns the constructor name and if not available tries to read it (IE11 polyfill)
+ @ignore
+ */
 const getConstructorName = function(constructor) {
   if (constructor.name) {
     return constructor.name;
@@ -38,6 +231,10 @@ const getConstructorName = function(constructor) {
 const Component = (superClass) => class extends superClass {
   constructor() {
     super();
+    
+    // Attach Vent
+    this._vent = this._vent || new Vent(this);
+    this._events = this._events || {};
   }
   
   // @legacy
@@ -128,8 +325,8 @@ const Component = (superClass) => class extends superClass {
   
   /**
    Add an event listener.
-   @param {String} eventName
-   The event name to listen for.
+   @param {String|Object} eventNameOrEvents
+   The event name or events to listen for.
    @param {String} [selector]
    The selector to use for event delegation.
    @param {Function} func
@@ -138,9 +335,15 @@ const Component = (superClass) => class extends superClass {
    Whether or not to listen during the capturing or bubbling phase.
    @returns {Coral.Component} this, chainable.
    */
-  on(eventName, selector, func, useCapture) {
-    this._vent = this._vent || new Vent(this);
-    this._vent.on(eventName, selector, func, useCapture);
+  on(eventNameOrEvents, selector, func, useCapture) {
+    if (typeof eventNameOrEvents === 'string') {
+      this._vent.on(eventNameOrEvents, selector, func, useCapture);
+    }
+    else {
+      this._events = commons.extend(this._events, eventNameOrEvents);
+      delegateEvents.call(this);
+    }
+    
     return this;
   }
   
@@ -157,7 +360,6 @@ const Component = (superClass) => class extends superClass {
    @returns {Coral.Component} this, chainable.
    */
   off(eventName, selector, func, useCapture) {
-    this._vent = this._vent || new Vent(this);
     this._vent.off(eventName, selector, func, useCapture);
     return this;
   }
@@ -221,10 +423,20 @@ const Component = (superClass) => class extends superClass {
     return event;
   }
   
-  // @deprecated
+  /**
+   Set multiple properties.
+   
+   @name Coral.Component#set
+   @function
+   
+   @param {Object.<String, *>} properties
+   An object of property/value pairs to set.
+   @param {Boolean} silent
+   If true, events should not be triggered as a result of this set.
+   
+   @returns {Coral.Component} this, chainable.
+   */
   set(propertyOrProperties, valueOrSilent, silent) {
-    console.warn('Component.set has been deprecated. Please use property setters instead.');
-    
     let property;
     let properties;
     let value;
@@ -306,6 +518,11 @@ const Component = (superClass) => class extends superClass {
     
     this.hidden = true;
     return this;
+  }
+  
+  disconnectedCallback() {
+    // A component that isn't in the DOM should not be responding to global events
+    undelegateGlobalEvents.call(this);
   }
 };
 

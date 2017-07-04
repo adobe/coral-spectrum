@@ -29,7 +29,58 @@ const TARGET_INPUT_SELECTOR = 'input:not([type=hidden])';
 const FormField = (superClass) => class extends superClass {
   constructor() {
     super();
+    
+    this._events = commons.extend(this._events || {}, {
+      'capture:change input': '_onTargetInputChange',
+      'global:reset': '_onFormReset'
+    });
   }
+  
+  /**
+   Name used to submit the data in a form.
+   @type {String}
+   @default ""
+   @htmlattribute name
+   @htmlattributereflected
+   @memberof Coral.mixin.formField#
+   */
+  
+  /**
+   This field's current value.
+   @type {String}
+   @default ""
+   @htmlattribute value
+   @memberof Coral.mixin.formField#
+   @fires Coral.mixin.formField#change
+   */
+  
+  /**
+   Whether this field is disabled or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute disabled
+   @htmlattributereflected
+   @memberof Coral.mixin.formField#
+   */
+  
+  /**
+   Whether this field is required or not.
+   @type {Boolean}
+   @default false
+   @htmlattribute required
+   @htmlattributereflected
+   @memberof Coral.mixin.formField#
+   */
+  
+  /**
+   Whether this field is readOnly or not. Indicating that the user cannot modify the value of the control.
+   This is ignored for checkbox, radio or fileupload.
+   @type {Boolean}
+   @default false
+   @htmlattribute readonly
+   @htmlattributereflected
+   @memberof Coral.mixin.formField#
+   */
   
   /**
    Whether the current value of this field is invalid or not.
